@@ -182,6 +182,7 @@ Item {
                 Layout.fillHeight: true
                 Layout.maximumWidth: Layout.fillWidth ? -1 : textMetrics.width
                 Layout.minimumWidth: Layout.maximumWidth
+                visible: root.showRemainingTime
 
                 TextMetrics {
                     id: textMetrics

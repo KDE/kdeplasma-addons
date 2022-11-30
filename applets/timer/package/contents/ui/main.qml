@@ -24,6 +24,9 @@ Item {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
 
+    // Display remaining time (hours and minutes) (default: enabled)
+    readonly property bool showRemainingTime: Plasmoid.configuration.showRemainingTime
+
     // Display seconds in addition to hours and minutes (default: enabled)
     readonly property bool showSeconds: Plasmoid.configuration.showSeconds
     property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds);

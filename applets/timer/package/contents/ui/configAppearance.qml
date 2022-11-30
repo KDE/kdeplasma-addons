@@ -16,6 +16,7 @@ Kirigami.FormLayout {
     property alias cfg_showTitle: showTitle.checked
     property alias cfg_title: title.text
 
+    property alias cfg_showRemainingTime: showRemainingTime.checked
     property alias cfg_showSeconds: showSeconds.checked
     property alias cfg_showTimerToggle: showTimerToggle.checked
 
@@ -47,7 +48,13 @@ Kirigami.FormLayout {
     }
 
     QQC2.CheckBox {
+        id: showRemainingTime
+        text: i18nc("@option:check", "Show remaining time");
+    }
+
+    QQC2.CheckBox {
         id: showSeconds
+        enabled: showRemainingTime.checked
         text: i18nc("@option:check", "Show seconds");
     }
 

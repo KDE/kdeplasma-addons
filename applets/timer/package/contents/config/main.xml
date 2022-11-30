@@ -26,6 +26,10 @@
       <default>Timer</default>
     </entry>
 
+    <entry name="showRemainingTime" type="Bool">
+      <default>true</default>
+    </entry>
+
     <entry name="showSeconds" type="Bool">
       <default>true</default>
     </entry>

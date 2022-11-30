@@ -64,6 +64,7 @@ MouseArea {
             id: timerDigits
 
             Layout.fillWidth: true
+            visible: root.showRemainingTime
 
             value: root.seconds
             editable: !root.running
