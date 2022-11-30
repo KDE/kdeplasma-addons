@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-14 00:47+0000\n"
+"POT-Creation-Date: 2022-11-30 00:49+0000\n"
 "PO-Revision-Date: 2022-10-09 07:21+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -71,25 +71,33 @@ msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Избиране на цвят"
 
-#: package/contents/ui/main.qml:198
+#: package/contents/ui/main.qml:130
+#, kde-kuit-format
+msgctxt "@info:usagetip"
+msgid ""
+"Drag a color code here to save it<nl/>Drag an image file here to get its "
+"average color"
+msgstr ""
+
+#: package/contents/ui/main.qml:199
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Няма цветове"
 
-#: package/contents/ui/main.qml:202
+#: package/contents/ui/main.qml:203
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Избиране на цвят"
 
-#: package/contents/ui/main.qml:368
+#: package/contents/ui/main.qml:369
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Копиран!"
 
-#: package/contents/ui/main.qml:378
+#: package/contents/ui/main.qml:379
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

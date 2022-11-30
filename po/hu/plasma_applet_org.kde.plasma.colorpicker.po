@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-14 00:47+0000\n"
+"POT-Creation-Date: 2022-11-30 00:49+0000\n"
 "PO-Revision-Date: 2019-11-18 23:50+0100\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -73,7 +73,15 @@ msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Színválasztás"
 
-#: package/contents/ui/main.qml:198
+#: package/contents/ui/main.qml:130
+#, kde-kuit-format
+msgctxt "@info:usagetip"
+msgid ""
+"Drag a color code here to save it<nl/>Drag an image file here to get its "
+"average color"
+msgstr ""
+
+#: package/contents/ui/main.qml:199
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Pick color"
@@ -81,19 +89,19 @@ msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Színválasztás"
 
-#: package/contents/ui/main.qml:202
+#: package/contents/ui/main.qml:203
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Színválasztás"
 
-#: package/contents/ui/main.qml:368
+#: package/contents/ui/main.qml:369
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:378
+#: package/contents/ui/main.qml:379
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
