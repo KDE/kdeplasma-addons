@@ -46,8 +46,9 @@ CalendarEvents::CalendarEventsPlugin::SubLabel ChineseCalendarProviderPrivate::s
 
     sublabel.yearLabel = yearDisplayName();
     sublabel.monthLabel = monthDisplayName();
-    sublabel.dayLabel = day() == 1 ? monthDisplayName() : dayDisplayName();
-    sublabel.label = QStringLiteral("%1%2%3").arg(sublabel.yearLabel, sublabel.monthLabel, sublabel.dayLabel);
+    const QString dayName = dayDisplayName();
+    sublabel.dayLabel = day() == 1 ? monthDisplayName() : dayName;
+    sublabel.label = QStringLiteral("%1%2%3").arg(sublabel.yearLabel, sublabel.monthLabel, dayName);
     sublabel.priority = CalendarEvents::CalendarEventsPlugin::SubLabelPriority::Low;
 
     return sublabel;
