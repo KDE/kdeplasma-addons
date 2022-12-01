@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-08-05 10:53+0200\n"
+"PO-Revision-Date: 2022-11-25 17:13+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -151,34 +151,28 @@ msgid "Compact Mode"
 msgstr "Modalità compatta"
 
 #: package/contents/ui/config/ConfigAppearance.qml:44
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "Mostra temperatura"
+msgstr "Mostra la temperatura:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:47
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Mostra accanto all'icona del widget:"
+msgstr "Sopra l'icona dell'oggetto"
 
 #: package/contents/ui/config/ConfigAppearance.qml:55
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "Mostra accanto all'icona del widget:"
+msgstr "Accanto all'icona dell'oggetto:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Non mostrare"
 
 #: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
@@ -257,21 +251,19 @@ msgstr "Località:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Nessuna selezionata"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Fornitore:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Digita la località"
+msgstr "Imposta una nuova località"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
@@ -289,13 +281,13 @@ msgstr "Nessuna stazione meteo trovata per «%1»"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Cerca una stazione meteorologica per cambiare la tua località"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Cerca una stazione meteo per impostare la tua località"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -400,19 +392,16 @@ msgid "Wind Gust:"
 msgstr "Raffiche di vento:"
 
 #: package/contents/ui/main.qml:239
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 giorno"
+msgstr "Giorno"
 
 #: package/contents/ui/main.qml:240
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Notte"
 
 #: package/contents/ui/main.qml:278
 #, kde-format

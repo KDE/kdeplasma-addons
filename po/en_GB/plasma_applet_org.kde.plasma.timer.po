@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"POT-Creation-Date: 2022-12-01 00:48+0000\n"
 "PO-Revision-Date: 2022-08-07 11:04+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -35,20 +35,20 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Advanced"
 
-#: package/contents/ui/CompactRepresentation.qml:133
+#: package/contents/ui/CompactRepresentation.qml:134
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Pause Timer"
 
-#: package/contents/ui/CompactRepresentation.qml:133
+#: package/contents/ui/CompactRepresentation.qml:134
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Start Timer"
 
-#: package/contents/ui/CompactRepresentation.qml:189
-#: package/contents/ui/CompactRepresentation.qml:206
+#: package/contents/ui/CompactRepresentation.qml:191
+#: package/contents/ui/CompactRepresentation.qml:208
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
@@ -68,31 +68,51 @@ msgctxt "@option:check"
 msgid "Execute command:"
 msgstr "Execute command:"
 
-#: package/contents/ui/configAppearance.qml:27
+#: package/contents/ui/configAppearance.qml:30
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Display:"
 
-#: package/contents/ui/configAppearance.qml:33
+#: package/contents/ui/configAppearance.qml:36
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Show title:"
 
-#: package/contents/ui/configAppearance.qml:50
+#: package/contents/ui/configAppearance.qml:53
+#, kde-format
+msgctxt "@option:check"
+msgid "Show remaining time"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:59
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Show seconds"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:64
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show title:"
+msgctxt "@option:check"
+msgid "Show timer toggle"
+msgstr "Show title:"
+
+#: package/contents/ui/configAppearance.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Show progress bar"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:81
 #, kde-format
 msgctxt "@title:label"
 msgid "Notifications:"
 msgstr "Notifications:"
 
-#: package/contents/ui/configAppearance.qml:66
+#: package/contents/ui/configAppearance.qml:85
 #, kde-format
 msgctxt "@option:check"
 msgid "Show notification text:"
@@ -135,24 +155,24 @@ msgstr "Edit"
 msgid "Delete"
 msgstr "Delete"
 
-#: package/contents/ui/main.qml:56
+#: package/contents/ui/main.qml:65
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 is running"
 
-#: package/contents/ui/main.qml:58
+#: package/contents/ui/main.qml:67
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 not running"
 
-#: package/contents/ui/main.qml:62
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Remaining time left: %1 second"
 msgstr[1] "Remaining time left: %1 seconds"
 
-#: package/contents/ui/main.qml:62
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -161,29 +181,29 @@ msgstr ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
 
-#: package/contents/ui/main.qml:119
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgid "Timer"
 msgstr "Timer"
 
-#: package/contents/ui/main.qml:121
+#: package/contents/ui/main.qml:130
 #, kde-format
 msgid "Timer finished"
 msgstr "Timer finished"
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:146
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Start"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "S&top"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

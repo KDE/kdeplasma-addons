@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"POT-Creation-Date: 2022-12-01 00:48+0000\n"
 "PO-Revision-Date: 2021-05-12 06:02+0200\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -33,22 +33,22 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Erweitert"
 
-#: package/contents/ui/CompactRepresentation.qml:133
+#: package/contents/ui/CompactRepresentation.qml:134
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Eieruhr"
 
-#: package/contents/ui/CompactRepresentation.qml:133
+#: package/contents/ui/CompactRepresentation.qml:134
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Eieruhr"
 
-#: package/contents/ui/CompactRepresentation.qml:189
-#: package/contents/ui/CompactRepresentation.qml:206
+#: package/contents/ui/CompactRepresentation.qml:191
+#: package/contents/ui/CompactRepresentation.qml:208
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
@@ -68,31 +68,51 @@ msgctxt "@option:check"
 msgid "Execute command:"
 msgstr "Befehl ausführen:"
 
-#: package/contents/ui/configAppearance.qml:27
+#: package/contents/ui/configAppearance.qml:30
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Anzeige:"
 
-#: package/contents/ui/configAppearance.qml:33
+#: package/contents/ui/configAppearance.qml:36
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Titel anzeigen:"
 
-#: package/contents/ui/configAppearance.qml:50
+#: package/contents/ui/configAppearance.qml:53
+#, kde-format
+msgctxt "@option:check"
+msgid "Show remaining time"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:59
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Sekunden anzeigen"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:64
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show title:"
+msgctxt "@option:check"
+msgid "Show timer toggle"
+msgstr "Titel anzeigen:"
+
+#: package/contents/ui/configAppearance.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Show progress bar"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:81
 #, kde-format
 msgctxt "@title:label"
 msgid "Notifications:"
 msgstr "Benachrichtigungen:"
 
-#: package/contents/ui/configAppearance.qml:66
+#: package/contents/ui/configAppearance.qml:85
 #, kde-format
 msgctxt "@option:check"
 msgid "Show notification text:"
@@ -136,24 +156,24 @@ msgstr "Bearbeiten"
 msgid "Delete"
 msgstr "Löschen"
 
-#: package/contents/ui/main.qml:56
+#: package/contents/ui/main.qml:65
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 läuft"
 
-#: package/contents/ui/main.qml:58
+#: package/contents/ui/main.qml:67
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 läuft nicht"
 
-#: package/contents/ui/main.qml:62
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Verbleibende Zeit: %1 Sekunde"
 msgstr[1] "Verbleibende Zeit: %1 Sekunden"
 
-#: package/contents/ui/main.qml:62
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -162,29 +182,29 @@ msgstr ""
 "Sie können mit dem Mausrad die Ziffern ändern oder vordefinierte Zeiten aus "
 "dem Kontextmenü wählen"
 
-#: package/contents/ui/main.qml:119
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgid "Timer"
 msgstr "Eieruhr"
 
-#: package/contents/ui/main.qml:121
+#: package/contents/ui/main.qml:130
 #, kde-format
 msgid "Timer finished"
 msgstr "Zeit abgelaufen"
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:146
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Starten"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "An&halten"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

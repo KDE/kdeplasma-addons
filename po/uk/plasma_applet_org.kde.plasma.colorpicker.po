@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-30 00:49+0000\n"
-"PO-Revision-Date: 2022-10-09 08:36+0300\n"
+"PO-Revision-Date: 2022-11-30 06:56+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -81,6 +81,8 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Перетягніть сюди код кольору, щоб програма зберегла його.<nl/>Перетягніть "
+"сюди файл зображення, щоб отримати його середній колір."
 
 #: package/contents/ui/main.qml:199
 #, kde-format

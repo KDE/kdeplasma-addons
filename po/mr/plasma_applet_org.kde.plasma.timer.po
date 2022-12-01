@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-01 00:49+0000\n"
+"POT-Creation-Date: 2022-12-01 00:48+0000\n"
 "PO-Revision-Date: 2014-10-28 10:19+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -37,22 +37,22 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr ""
 
-#: package/contents/ui/CompactRepresentation.qml:133
+#: package/contents/ui/CompactRepresentation.qml:134
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "टाइमर"
 
-#: package/contents/ui/CompactRepresentation.qml:133
+#: package/contents/ui/CompactRepresentation.qml:134
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "टाइमर"
 
-#: package/contents/ui/CompactRepresentation.qml:189
-#: package/contents/ui/CompactRepresentation.qml:206
+#: package/contents/ui/CompactRepresentation.qml:191
+#: package/contents/ui/CompactRepresentation.qml:208
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
@@ -73,33 +73,52 @@ msgctxt "@option:check"
 msgid "Execute command:"
 msgstr "आदेश चालवा :"
 
-#: package/contents/ui/configAppearance.qml:27
+#: package/contents/ui/configAppearance.qml:30
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:33
+#: package/contents/ui/configAppearance.qml:36
 #, fuzzy, kde-format
 #| msgid "Show title:"
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "शिर्षक दर्शवा :"
 
-#: package/contents/ui/configAppearance.qml:50
+#: package/contents/ui/configAppearance.qml:53
+#, kde-format
+msgctxt "@option:check"
+msgid "Show remaining time"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:59
 #, fuzzy, kde-format
 #| msgid "Hide seconds"
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "सेकंद लपवा"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:64
+#, fuzzy, kde-format
+#| msgid "Show title:"
+msgctxt "@option:check"
+msgid "Show timer toggle"
+msgstr "शिर्षक दर्शवा :"
+
+#: package/contents/ui/configAppearance.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Show progress bar"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:81
 #, kde-format
 msgctxt "@title:label"
 msgid "Notifications:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:66
+#: package/contents/ui/configAppearance.qml:85
 #, kde-format
 msgctxt "@option:check"
 msgid "Show notification text:"
@@ -141,55 +160,55 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: package/contents/ui/main.qml:56
+#: package/contents/ui/main.qml:65
 #, kde-format
 msgid "%1 is running"
 msgstr ""
 
-#: package/contents/ui/main.qml:58
+#: package/contents/ui/main.qml:67
 #, kde-format
 msgid "%1 not running"
 msgstr ""
 
-#: package/contents/ui/main.qml:62
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: package/contents/ui/main.qml:62
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
 msgstr ""
 
-#: package/contents/ui/main.qml:119
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgid "Timer"
 msgstr "टाइमर"
 
-#: package/contents/ui/main.qml:121
+#: package/contents/ui/main.qml:130
 #, kde-format
 msgid "Timer finished"
 msgstr ""
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:146
 #, fuzzy, kde-format
 #| msgid "&Start"
 msgctxt "@action"
 msgid "&Start"
 msgstr "सुरु करा (&S)"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:147
 #, fuzzy, kde-format
 #| msgid "S&top"
 msgctxt "@action"
 msgid "S&top"
 msgstr "बंद करा (&T)"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:148
 #, fuzzy, kde-format
 #| msgid "&Reset"
 msgctxt "@action"
