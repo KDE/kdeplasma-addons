@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-30 00:49+0000\n"
-"PO-Revision-Date: 2022-10-09 07:21+0200\n"
+"PO-Revision-Date: 2022-12-02 00:10+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -78,6 +78,8 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Плъзнете цветови код тук, за да го запазите<nl/>Плъзнете файл с изображение "
+"тук, за да получите неговия усреднен цвят"
 
 #: package/contents/ui/main.qml:199
 #, kde-format

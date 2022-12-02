@@ -2,19 +2,19 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
+#
 # Mihael Simonic <smihael@gmail.com>, 2007.
 # Jure Repinc <jlp@holodeck1.com>, 2010.
 # Andrej Mernik <andrejm@ubuntu.si>, 2015, 2017.
 # Matjaž Jeran <matjaz.jeran@amis.net>, 2020, 2022.
 # Martin Srebotnjak <miles@filmsi.net>, 2022.
-#
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-30 00:49+0000\n"
-"PO-Revision-Date: 2022-10-10 08:48+0200\n"
-"Last-Translator: Martin Srebotnjak <miles@filmsi.net>\n"
+"PO-Revision-Date: 2022-12-01 08:42+0100\n"
+"Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
@@ -23,7 +23,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -86,6 +86,8 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Povlecite kodo barve sem, da jo shranite<nl/>Povlecite datoteko sem, da "
+"dobite njeno povprečno barvo"
 
 #: package/contents/ui/main.qml:199
 #, kde-format

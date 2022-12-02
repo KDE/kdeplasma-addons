@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-30 00:49+0000\n"
-"PO-Revision-Date: 2022-11-17 06:29+0100\n"
+"PO-Revision-Date: 2022-12-01 06:56+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -79,6 +79,8 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"ფერის შესანახად მისი კოდი აქ გადმოათრიეთ <nl/> სურათის საშუალო ფერის "
+"მისაღებად გადმოათრიეთ ის აქ"
 
 #: package/contents/ui/main.qml:199
 #, kde-format

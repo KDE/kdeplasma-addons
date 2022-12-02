@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-11-23 23:26+0100\n"
+"PO-Revision-Date: 2022-12-02 00:08+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -250,21 +250,19 @@ msgstr "Местоположение:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Няма избрано"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Доставчик:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Въведете местоположение"
+msgstr "Въведете  ново местоположение"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
@@ -282,13 +280,13 @@ msgstr "Не са намерени метеорологични станции �
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Търсене на метеорологична станция за промяна на местоположението"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Търсене на метеорологична станция за задаване на местоположението"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-11-22 21:43+0530\n"
+"PO-Revision-Date: 2022-12-01 21:55+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -250,21 +250,19 @@ msgstr "இருப்பிடம்:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "எதுவும் தேர்ந்தெடுக்கப்படவில்லை"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "வழங்கி:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "இருப்பிடத்தை உள்ளிடுங்கள்"
+msgstr "புதிய இருப்பிடத்தை உள்ளிடுங்கள்"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
@@ -282,13 +280,13 @@ msgstr "'%1' என்பதற்கான எந்த வானிலை ந�
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "உங்கள் இருப்பிடத்தை மாற்ற, ஏதாவதொரு வானிலை மையத்தைத் தேடுங்கள்"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "உங்கள் இருப்பிடத்தை அமைக்க, ஏதாவதொரு வானிலை மையத்தைத் தேடுங்கள்"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2022-08-07 11:42+0530\n"
+"PO-Revision-Date: 2022-12-01 21:56+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.07.90\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -84,7 +84,7 @@ msgstr "தலைப்பை காட்டு:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "மீதமுள்ள நேரத்தைக் காட்டு"
 
 #: package/contents/ui/configAppearance.qml:59
 #, kde-format
@@ -93,18 +93,16 @@ msgid "Show seconds"
 msgstr "நொடிகளை காட்டு"
 
 #: package/contents/ui/configAppearance.qml:64
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "தலைப்பை காட்டு:"
+msgstr "டைமருக்கான நிலைமாற்றியைக் காட்டு"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "முன்னேற்றப் பட்டையைக் காட்டு"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format
