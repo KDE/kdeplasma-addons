@@ -12,7 +12,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.workspace.components 2.0 as WorkspaceComponents
 
-ColumnLayout {
+Loader {
     id: compactRoot
 
     property var generalModel
@@ -22,24 +22,20 @@ ColumnLayout {
     readonly property bool showTemperature: Plasmoid.configuration.showTemperatureInCompactMode
     readonly property bool useBadge: Plasmoid.configuration.showTemperatureInBadge || Plasmoid.nativeInterface.needsToBeSquare
 
-    Loader {
-        id: loader
+    sourceComponent: (showTemperature && !useBadge) ? iconAndTextComponent : iconComponent
+    Layout.fillWidth: compactRoot.vertical
+    Layout.fillHeight: !compactRoot.vertical
+    Layout.minimumWidth: item.Layout.minimumWidth
+    Layout.minimumHeight: item.Layout.minimumHeight
 
-        sourceComponent: (showTemperature && !useBadge) ? iconAndTextComponent : iconComponent
-        Layout.fillWidth: compactRoot.vertical
-        Layout.fillHeight: !compactRoot.vertical
-        Layout.minimumWidth: item.Layout.minimumWidth
-        Layout.minimumHeight: item.Layout.minimumHeight
+    MouseArea {
+        id: compactMouseArea
+        anchors.fill: parent
 
-        MouseArea {
-            id: compactMouseArea
-            anchors.fill: parent
+        hoverEnabled: true
 
-            hoverEnabled: true
-
-            onClicked: {
-                Plasmoid.expanded = !Plasmoid.expanded;
-            }
+        onClicked: {
+            Plasmoid.expanded = !Plasmoid.expanded;
         }
     }
 
