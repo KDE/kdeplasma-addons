@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2022-12-01 08:52+0100\n"
+"PO-Revision-Date: 2022-12-02 06:36+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -85,13 +85,13 @@ msgstr "Prikaži:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
-msgstr "Pokaži naslov:"
+msgstr "Prikazuj naslov:"
 
 #: package/contents/ui/configAppearance.qml:53
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "Prikazuj preostali čas"
 
 #: package/contents/ui/configAppearance.qml:59
 #, kde-format
@@ -100,18 +100,16 @@ msgid "Show seconds"
 msgstr "Pokaži sekunde"
 
 #: package/contents/ui/configAppearance.qml:64
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "Pokaži naslov:"
+msgstr "Prikazuj preklop časomera"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "Prikazuj diagram napredka"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format

@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2022-08-06 20:57+0200\n"
+"PO-Revision-Date: 2022-12-01 13:31+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -88,7 +88,7 @@ msgstr "Mostra el títol:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "Mostra el temps restant"
 
 #: package/contents/ui/configAppearance.qml:59
 #, kde-format
@@ -97,18 +97,16 @@ msgid "Show seconds"
 msgstr "Mostra els segons"
 
 #: package/contents/ui/configAppearance.qml:64
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "Mostra el títol:"
+msgstr "Mostra un commutador del temporitzador"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "Mostra la barra de progrés"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format
