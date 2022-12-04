@@ -13,10 +13,9 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
  * Visible when an image is being processed by \Kirigami.ImageColors
  */
 PlasmaComponents3.BusyIndicator {
-    id: indicator
+    id: loadingIndicator
     anchors.fill: parent
 
-    required property DropArea dropArea
     property int jobRemaining: 0
 
     signal jobDone
@@ -35,7 +34,7 @@ PlasmaComponents3.BusyIndicator {
         easing.type: Easing.InQuad
         from: 1
         to: 0
-        target: indicator
+        target: loadingIndicator
         duration: PlasmaCore.Units.longDuration
 
         onStopped: selfDestructionTimer.triggered();
@@ -47,8 +46,8 @@ PlasmaComponents3.BusyIndicator {
         running: true
 
         onTriggered: {
-            dropArea.indicator = null;
-            indicator.destroy();
+            loadingIndicator.parent.loadingIndicator = null;
+            loadingIndicator.destroy();
         }
     }
 }

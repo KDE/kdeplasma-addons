@@ -11,13 +11,13 @@ import org.kde.kirigami 2.20 as Kirigami
 Kirigami.ImageColors {
     id: imageColors
 
-    required property Item indicator
+    required property Item loadingIndicator
 
     onPaletteChanged: {
         if (imageColors.palette.length > 0) {
             root.addColorToHistory(imageColors.average);
         }
-        indicator.jobDone();
+        loadingIndicator.jobDone();
         imageColors.destroy();
     }
 }
