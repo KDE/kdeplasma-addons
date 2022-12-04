@@ -191,10 +191,13 @@ Item {
             anchors.centerIn: parent
             visible: active
 
-            active: fullRoot.count === 0
+            active: fullRoot.count === 0 && Plasmoid.expanded
             asynchronous: true
 
             sourceComponent: PlasmaExtras.PlaceholderMessage {
+                id: emptyHint
+
+                opacity: 0
                 iconName: "edit-none"
                 text: i18nc("@info:usagetip", "No colors")
 
@@ -202,6 +205,15 @@ Item {
                     icon.name: "color-picker"
                     text: i18nc("@action:button", "Pick Color")
                     onTriggered: root.pickColor()
+                }
+
+                NumberAnimation {
+                    duration: PlasmaCore.Units.longDuration
+                    easing.type: Easing.OutCubic
+                    property: "opacity"
+                    running: true
+                    target: emptyHint
+                    to: 1
                 }
             }
         }
