@@ -254,6 +254,7 @@ PlasmoidItem {
                 period: "",
                 icon: "",
                 condition: "",
+                probability: "",
                 tempHigh: "",
                 tempLow: "",
             }
@@ -277,14 +278,11 @@ PlasmoidItem {
             const weatherIconName = forecastDayTokens[1];
             if (weatherIconName && weatherIconName !== "N/U") {
                 forecastInfo["icon"] = Util.existingWeatherIconName(weatherIconName);
+                forecastInfo["condition"] = forecastDayTokens[2];
 
-                const condition = forecastDayTokens[2];
                 const probability = forecastDayTokens[5];
-
-                forecastInfo["condition"] = condition;
-                if (probability !== "N/U" && probability !== "N/A" && probability) {
-                    forecastInfo["condition"] = i18nc("certain weather condition (probability percentage)",
-                                                      "%1 (%2 %)", condition, probability);
+                if (probability !== "N/U" && probability !== "N/A" && probability > 7.5) {
+                    forecastInfo["probability"] = Math.round(probability / 5 ) * 5;
                 }
             }
 
