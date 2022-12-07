@@ -20,7 +20,7 @@ import org.kde.plasma.private.profiles 1.0
 PlasmaComponents.ListItem {
     id: menuItem
 
-    signal itemSelected(string uuid)
+    signal itemSelected(string profileIdentifier)
     
     property bool showInput: false
 
