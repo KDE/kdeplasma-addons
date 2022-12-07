@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-30 00:49+0000\n"
+"POT-Creation-Date: 2022-12-07 00:48+0000\n"
 "PO-Revision-Date: 2022-11-30 10:32+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -81,25 +81,25 @@ msgstr ""
 "Sleep hier een kleurcode heen om het op te slaan<nl/>Sleep een "
 "afbeeldingsbestand hier heen om zijn gemiddelde kleur te verkrijgen"
 
-#: package/contents/ui/main.qml:199
+#: package/contents/ui/main.qml:202
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Geen kleuren"
 
-#: package/contents/ui/main.qml:203
+#: package/contents/ui/main.qml:206
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Kies een kleur"
 
-#: package/contents/ui/main.qml:369
+#: package/contents/ui/main.qml:381
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Gekopieerd!"
 
-#: package/contents/ui/main.qml:379
+#: package/contents/ui/main.qml:391
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
