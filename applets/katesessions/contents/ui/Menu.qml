@@ -34,7 +34,9 @@ PlasmaExtras.ScrollArea {
         delegate: KateSessionsItemDelegate {
             width: menuListView.width
 
-            onItemSelected: menu.itemSelected(profileIdentifier)
+            onItemSelected: function(profileIdentifier) {
+                menu.itemSelected(profileIdentifier)
+            }
         }
     }
 }
