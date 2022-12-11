@@ -11,15 +11,9 @@
 
 #include <KRunner/AbstractRunner>
 #include <KRunner/QueryMatch>
+#include <QDateTime>
 
 using namespace Plasma;
-
-/**
- * This class looks for matches in the set of .desktop files installed by
- * applications. This way the user can type exactly what they see in the
- * applications menu and have it start the appropriate app. Essentially anything
- * that KService knows about, this runner can launch
- */
 
 class DateTimeRunner : public AbstractRunner
 {
@@ -34,11 +28,11 @@ public:
 
 private:
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QHash<QString, QDateTime> datetime(const QStringRef &tz);
+    QHash<QString, QDateTime> datetimeAt(const QStringRef &zoneTerm, const QDateTime referenceTime = QDateTime::currentDateTime());
 #else
-    QHash<QString, QDateTime> datetime(const QStringView &tz);
+    QHash<QString, QDateTime> datetimeAt(const QStringView &zoneTerm, const QDateTime referenceTime = QDateTime::currentDateTime());
 #endif
-    void addMatch(const QString &text, const QString &clipboardText, RunnerContext &context, const QString &iconName);
+    void addMatch(const QString &text, const QString &clipboardText, const qreal &relevance, const QString &iconName, RunnerContext &context);
 };
 
 #endif
