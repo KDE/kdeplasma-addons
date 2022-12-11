@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-08-06 09:37+0200\n"
+"PO-Revision-Date: 2022-12-10 11:23+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.08.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -151,34 +151,28 @@ msgid "Compact Mode"
 msgstr "Tryb kompaktowy"
 
 #: package/contents/ui/config/ConfigAppearance.qml:44
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "Pokaż temperaturę"
+msgstr "Pokaż temperaturę:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:47
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Pokaż obok ikony elementu interfejsu:"
+msgstr "Nad ikoną elementu interfejsu"
 
 #: package/contents/ui/config/ConfigAppearance.qml:55
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "Pokaż obok ikony elementu interfejsu:"
+msgstr "Obok ikony elementu interfejsu"
 
 #: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Nie pokazuj"
 
 #: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
@@ -258,27 +252,25 @@ msgstr "Położenie:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Nie wybrano żadnego"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Dostawca:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Podaj położenie"
+msgstr "Wpisz nowe położenie"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
-msgstr "Podaj położenie"
+msgstr "Wpisz położenie"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:188
 #, kde-format
@@ -290,13 +282,13 @@ msgstr "Nie odnaleziono stacji pogodowej dla '%1'"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Poszukaj stacji pogodowej, aby zmienić twoje położenie"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Poszukaj stacji pogodowej, aby ustawić twoje położenie"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -308,7 +300,7 @@ msgstr "-"
 #: package/contents/ui/FullRepresentation.qml:36
 #, kde-format
 msgid "Please set your location"
-msgstr "Podaj swoje położenie"
+msgstr "Wpisz swoje położenie"
 
 #: package/contents/ui/FullRepresentation.qml:39
 #, kde-format
@@ -402,19 +394,16 @@ msgid "Wind Gust:"
 msgstr "Porywy wiatru:"
 
 #: package/contents/ui/main.qml:239
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 dzień"
+msgstr "Dzień"
 
 #: package/contents/ui/main.qml:240
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Noc"
 
 #: package/contents/ui/main.qml:278
 #, kde-format
