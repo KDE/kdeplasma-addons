@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2022-08-06 17:52+0100\n"
+"PO-Revision-Date: 2022-12-12 18:57+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -84,7 +84,7 @@ msgstr "Mostrar o título:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "Mostrar o tempo restante"
 
 #: package/contents/ui/configAppearance.qml:59
 #, kde-format
@@ -93,18 +93,16 @@ msgid "Show seconds"
 msgstr "Mostrar os segundos"
 
 #: package/contents/ui/configAppearance.qml:64
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "Mostrar o título:"
+msgstr "Mostrar o comutador do temporizador"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "Mostrar a barra de progresso"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format
