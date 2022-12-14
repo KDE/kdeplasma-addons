@@ -107,11 +107,3 @@ msgstr ""
 msgctxt "@action:button"
 msgid "Delete"
 msgstr ""
-
-#~ msgctxt "@title:menu"
-#~ msgid "Copy to Clipboard"
-#~ msgstr "クリップボードにコピー"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Color options"
-#~ msgstr "色オプション"

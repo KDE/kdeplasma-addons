@@ -525,23 +525,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgctxt "@action:button"
-#~ msgid "Choose…"
-#~ msgstr "選択…"
-
-#~ msgctxt "@title:window"
-#~ msgid "Select Weather Station"
-#~ msgstr "測候所を選択"
-
-#~ msgctxt "@action:button"
-#~ msgid "Select"
-#~ msgstr "選択"
-
-#~ msgctxt "@action:button"
-#~ msgid "Cancel"
-#~ msgstr "キャンセル"
-
-#~ msgctxt "@option:check Show on widget icon: temperature"
-#~ msgid "Temperature"
-#~ msgstr "気温"
