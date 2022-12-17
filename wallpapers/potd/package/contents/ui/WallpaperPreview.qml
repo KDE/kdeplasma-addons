@@ -47,19 +47,19 @@ Column {
                 icon.name: "document-save"
                 enabled: backend.localUrl.length > 0
                 visible: enabled
-                tooltip: i18nc("@action:inmenu wallpaper preview menu", "Save Image as…")
+                tooltip: i18ndc("plasma_wallpaper_org.kde.potd", "@action:inmenu wallpaper preview menu", "Save Image as…")
                 onTriggered: backend.saveImage()
 
-                Accessible.description: i18nc("@info:whatsthis for a button and a menu item", "Save today's picture to local disk")
+                Accessible.description: i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis for a button and a menu item", "Save today's picture to local disk")
             },
             Kirigami.Action {
                 icon.name: "internet-services"
                 enabled: backend.infoUrl.toString().length > 0
                 visible: false
-                tooltip: i18nc("@action:inmenu wallpaper preview menu, will open the website of the wallpaper", "Open Link in Browser…")
+                tooltip: i18ndc("plasma_wallpaper_org.kde.potd", "@action:inmenu wallpaper preview menu, will open the website of the wallpaper", "Open Link in Browser…")
                 onTriggered: Qt.openUrlExternally(backend.infoUrl)
 
-                Accessible.description: i18nc("@info:whatsthis for a menu item", "Open the website of today's picture in the default browser")
+                Accessible.description: i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis for a menu item", "Open the website of today's picture in the default browser")
             }
         ]
     }

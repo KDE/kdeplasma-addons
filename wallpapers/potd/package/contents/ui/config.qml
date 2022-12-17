@@ -63,7 +63,7 @@ Kirigami.FormLayout {
 
         checked: root.cfg_UpdateOverMeteredConnection === 1
         visible: backend.networkManagerQtAvailable
-        text: i18nc("@option:check", "Update when using metered network connection")
+        text: i18ndc("plasma_wallpaper_org.kde.potd", "@option:check", "Update when using metered network connection")
 
         onToggled: {
             root.cfg_UpdateOverMeteredConnection = checked ? 1 : 0;
@@ -263,7 +263,7 @@ Kirigami.FormLayout {
 
     WallpaperPreview {
         id: wallpaperPreview
-        Kirigami.FormData.label: i18nc("@label", "Today's picture:")
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label", "Today's picture:")
         backgroundColor: root.cfg_Color
         visible: !!wallpaper.configuration.Provider
     }
@@ -280,7 +280,7 @@ Kirigami.FormLayout {
     Row {
         // HACK: If Kirigami.FormData.label is put inside a TextArea,
         // the label will not align with text in the TextArea.
-        Kirigami.FormData.label: i18nc("@label", "Title:")
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label", "Title:")
 
         Layout.fillWidth: true
         Layout.maximumWidth: wallpaperPreview.implicitWidth * 1.5
@@ -300,7 +300,7 @@ Kirigami.FormLayout {
     }
 
     Row {
-        Kirigami.FormData.label: i18nc("@label", "Author:")
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label", "Author:")
 
         Layout.fillWidth: true
         Layout.maximumWidth: wallpaperPreview.implicitWidth * 1.5
@@ -326,11 +326,11 @@ Kirigami.FormLayout {
         actions: [
             Kirigami.Action {
                 icon.name: "document-open-folder"
-                text: i18nc("@action:button", "Open Containing Folder")
+                text: i18ndc("plasma_wallpaper_org.kde.potd", "@action:button", "Open Containing Folder")
                 visible: backend.saveStatus === Global.Successful
                 onTriggered: Qt.openUrlExternally(backend.savedFolder)
 
-                Accessible.description: i18nc("@info:whatsthis for a button", "Open the destination folder where the wallpaper image was saved.")
+                Accessible.description: i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis for a button", "Open the destination folder where the wallpaper image was saved.")
             }
         ]
 
