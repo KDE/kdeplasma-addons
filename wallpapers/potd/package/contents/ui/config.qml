@@ -63,7 +63,7 @@ Kirigami.FormLayout {
 
         checked: root.cfg_UpdateOverMeteredConnection === 1
         visible: backend.networkManagerQtAvailable
-        text: i18nc("@option:check", "Update when using metered network connection")
+        text: i18ndc("plasma_wallpaper_org.kde.potd", "@option:check", "Update when using metered network connection")
 
         onToggled: {
             root.cfg_UpdateOverMeteredConnection = checked ? 1 : 0;
@@ -263,7 +263,7 @@ Kirigami.FormLayout {
 
     WallpaperPreview {
         id: wallpaperPreview
-        Kirigami.FormData.label: i18nc("@label", "Today's picture:")
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label", "Today's picture:")
         backgroundColor: root.cfg_Color
         visible: !!wallpaper.configuration.Provider
     }
@@ -279,7 +279,7 @@ Kirigami.FormLayout {
 
     Kirigami.SelectableLabel {
         id: titleLabel
-        Kirigami.FormData.label: i18nc("@label", "Title:")
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label", "Title:")
         Layout.fillWidth: true
         Layout.maximumWidth: wallpaperPreview.implicitWidth * 1.5
         visible: wallpaperPreview.visible && backend.title.length > 0
@@ -294,7 +294,7 @@ Kirigami.FormLayout {
 
     Kirigami.SelectableLabel {
         id: authorLabel
-        Kirigami.FormData.label: i18nc("@label", "Author:")
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label", "Author:")
         Layout.fillWidth: true
         Layout.maximumWidth: wallpaperPreview.implicitWidth * 1.5
         visible: wallpaperPreview.visible && backend.author.length > 0
@@ -314,11 +314,11 @@ Kirigami.FormLayout {
         actions: [
             Kirigami.Action {
                 icon.name: "document-open-folder"
-                text: i18nc("@action:button", "Open Containing Folder")
+                text: i18ndc("plasma_wallpaper_org.kde.potd", "@action:button", "Open Containing Folder")
                 visible: backend.saveStatus === Global.Successful
                 onTriggered: Qt.openUrlExternally(backend.savedFolder)
 
-                Accessible.description: i18nc("@info:whatsthis for a button", "Open the destination folder where the wallpaper image was saved.")
+                Accessible.description: i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis for a button", "Open the destination folder where the wallpaper image was saved.")
             }
         ]
 

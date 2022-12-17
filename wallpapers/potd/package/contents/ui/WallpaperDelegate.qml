@@ -139,12 +139,12 @@ FocusScope {
             color: !delegate.thumbnailAvailable || delegate.thumbnailLoading ? Kirigami.Theme.backgroundColor : delegate.backgroundColor
 
             activeFocusOnTab: true
-            Accessible.name: delegate.thumbnailAvailable ? i18nc("@info:whatsthis", "Today's picture")
-                           : delegate.thumbnailLoading ? i18nc("@info:whatsthis", "Loading")
-                                                       : i18nc("@info:whatsthis", "Unavailable")
-            Accessible.description: delegate.thumbnailAvailable ? i18nc("@info:whatsthis for an image %1 title %2 author", "%1 Author: %2. Right-click on the image to see more actions.", delegate.title, delegate.author)
-                                  : delegate.thumbnailLoading ? i18nc("@info:whatsthis", "The wallpaper is being fetched from the Internet.")
-                                                              : i18nc("@info:whatsthis", "Failed to fetch the wallpaper from the Internet.")
+            Accessible.name: delegate.thumbnailAvailable ? i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis", "Today's picture")
+                           : delegate.thumbnailLoading ? i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis", "Loading")
+                                                       : i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis", "Unavailable")
+            Accessible.description: delegate.thumbnailAvailable ? i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis for an image %1 title %2 author", "%1 Author: %2. Right-click on the image to see more actions.", delegate.title, delegate.author)
+                                  : delegate.thumbnailLoading ? i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis", "The wallpaper is being fetched from the Internet.")
+                                                              : i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis", "Failed to fetch the wallpaper from the Internet.")
 
             Image {
                 id: wallpaperImage
