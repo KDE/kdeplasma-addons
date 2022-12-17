@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.0
-import QtQuick.Controls 2.5 as QtControls
+import QtQuick.Controls 2.5 as QQC2
 import org.kde.kirigami 2.5 as Kirigami
 
 import "logic.js" as Logic
@@ -19,7 +19,7 @@ Kirigami.FormLayout {
     property string cfg_defaultFormat
     property bool cfg_pickOnActivate
 
-    QtControls.ComboBox {
+    QQC2.ComboBox {
         id: defaultFormatCombo
         Kirigami.FormData.label: i18nc("@label:listbox", "Default color format:")
         model: Logic.formats
@@ -27,7 +27,7 @@ Kirigami.FormLayout {
         onActivated: cfg_defaultFormat = model[index]
     }
 
-    QtControls.CheckBox {
+    QQC2.CheckBox {
         id: autoClipboardCheckBox
         text: i18nc("@option:check", "Automatically copy color to clipboard")
     }
@@ -36,14 +36,14 @@ Kirigami.FormLayout {
         Kirigami.FormData.isSection: true
     }
 
-    QtControls.RadioButton {
+    QQC2.RadioButton {
         Kirigami.FormData.label: i18nc("@label", "When pressing the keyboard shortcut:")
         text: i18nc("@option:radio", "Pick a color")
         checked: cfg_pickOnActivate
         onCheckedChanged: cfg_pickOnActivate = checked
     }
 
-    QtControls.RadioButton {
+    QQC2.RadioButton {
         text: i18nc("@option:radio", "Show history")
         checked: !cfg_pickOnActivate
     }
