@@ -18,6 +18,9 @@
     <entry name="pickOnActivate" type="Bool">
       <default>true</default>
     </entry>
+    <entry name="compactPreviewCount" type="Int">
+      <default>1</default>
+    </entry>
   </group>
 
 </kcfg>

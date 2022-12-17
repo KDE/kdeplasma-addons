@@ -16,6 +16,7 @@ Kirigami.FormLayout {
     anchors.right: parent.right
 
     property alias cfg_autoClipboard: autoClipboardCheckBox.checked
+    property alias cfg_compactPreviewCount: compactPreviewCountSpinBox.value
     property string cfg_defaultFormat
     property bool cfg_pickOnActivate
 
@@ -46,5 +47,16 @@ Kirigami.FormLayout {
     QQC2.RadioButton {
         text: i18nc("@option:radio", "Show history")
         checked: !cfg_pickOnActivate
+    }
+
+    Item {
+        Kirigami.FormData.isSection: true
+    }
+
+    QQC2.SpinBox {
+        id: compactPreviewCountSpinBox
+        Kirigami.FormData.label: i18nc("@label", "Preview count:")
+        from: 0
+        to: 9 /* root.maxColorCount */
     }
 }

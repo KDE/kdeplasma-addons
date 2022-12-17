@@ -20,7 +20,7 @@ PlasmaComponents3.ToolButton {
     property Item loadingIndicator: null
 
     // indicate viable drag...
-    checked: dropArea.containsAcceptableDrag || colorButton.pressed || dragHandler.active
+    checked: (dropArea.containsAcceptableDrag && index === 0) || colorButton.pressed || dragHandler.active
     checkable: checked
     display: PlasmaComponents3.AbstractButton.IconOnly
     text: Logic.formatColor(colorCircle.color, root.defaultFormat)
@@ -33,18 +33,6 @@ PlasmaComponents3.ToolButton {
     }
 
     onClicked: Plasmoid.expanded = !Plasmoid.expanded
-
-    function showLoadingIndicator(urls) {
-        const component = Qt.createComponent(Qt.resolvedUrl("LoadingIndicator.qml"));
-        if (colorButton.loadingIndicator === null) {
-            colorButton.loadingIndicator = component.createObject(colorButton, {
-                "jobRemaining": urls.length,
-            });
-        } else {
-            colorButton.loadingIndicator.jobRemaining += urls.length;
-        }
-        component.destroy();
-    }
 
     PlasmaCore.ToolTipArea {
         anchors.fill: parent

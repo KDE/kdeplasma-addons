@@ -86,3 +86,15 @@ function createContextMenu(visualParent, currentColor, picker, colorLabel, copyI
     component.destroy();
     return menu;
 }
+
+function showLoadingIndicator(parent, urls) {
+    if (parent.loadingIndicator === null) {
+        const component = Qt.createComponent(Qt.resolvedUrl("LoadingIndicator.qml"));
+        parent.loadingIndicator = component.createObject(parent, {
+            "jobRemaining": urls.length,
+        });
+        component.destroy();
+    } else {
+        parent.loadingIndicator.jobRemaining += urls.length;
+    }
+}

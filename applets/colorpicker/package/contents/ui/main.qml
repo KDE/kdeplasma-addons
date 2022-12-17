@@ -25,6 +25,7 @@ Item {
 
     readonly property color recentColor: historyModel.count > 0 ? historyModel.get(0).color : "#00000000" // transparent as fallback
     readonly property string defaultFormat: plasmoid.configuration.defaultFormat
+    readonly property int maxColorCount: 9
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
@@ -33,8 +34,8 @@ Item {
         // replacing *all* items in the list by the new items and other nonsense
         historyModel.insert(0, {"color": color.toString()});
         // limit to 9 entries
-        if (historyModel.count > 9) {
-            historyModel.remove(9);
+        if (historyModel.count > maxColorCount) {
+            historyModel.remove(maxColorCount);
         }
         historyModel.save();
     }
