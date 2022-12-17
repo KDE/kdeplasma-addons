@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-07 00:48+0000\n"
+"POT-Creation-Date: 2022-12-17 11:10+0000\n"
 "PO-Revision-Date: 2018-04-22 09:12+0100\n"
 "Last-Translator: Adrian Chaves <adrian@chaves.io>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
@@ -25,6 +25,20 @@ msgstr ""
 msgctxt "@title"
 msgid "General"
 msgstr "Xeral"
+
+#: package/contents/ui/CompactRepresentation.qml:59
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Pick color"
+msgstr "Escoller unha cor"
+
+#: package/contents/ui/CompactRepresentation.qml:66
+#, kde-kuit-format
+msgctxt "@info:usagetip"
+msgid ""
+"Drag a color code here to save it<nl/>Drag an image file here to get its "
+"average color"
+msgstr ""
 
 #: package/contents/ui/configGeneral.qml:24
 #, kde-format
@@ -68,21 +82,7 @@ msgctxt "@action"
 msgid "Clear History"
 msgstr "Borrar o historial"
 
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Pick color"
-msgstr "Escoller unha cor"
-
-#: package/contents/ui/main.qml:130
-#, kde-kuit-format
-msgctxt "@info:usagetip"
-msgid ""
-"Drag a color code here to save it<nl/>Drag an image file here to get its "
-"average color"
-msgstr ""
-
-#: package/contents/ui/main.qml:202
+#: package/contents/ui/main.qml:143
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Pick color"
@@ -90,19 +90,19 @@ msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Escoller unha cor"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Escoller unha cor"
 
-#: package/contents/ui/main.qml:381
+#: package/contents/ui/main.qml:322
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:391
+#: package/contents/ui/main.qml:332
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

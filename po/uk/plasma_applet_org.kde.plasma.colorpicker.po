@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-07 00:48+0000\n"
+"POT-Creation-Date: 2022-12-17 11:10+0000\n"
 "PO-Revision-Date: 2022-11-30 06:56+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -25,6 +25,22 @@ msgstr ""
 msgctxt "@title"
 msgid "General"
 msgstr "Загальне"
+
+#: package/contents/ui/CompactRepresentation.qml:59
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Pick color"
+msgstr "Взяти колір"
+
+#: package/contents/ui/CompactRepresentation.qml:66
+#, kde-kuit-format
+msgctxt "@info:usagetip"
+msgid ""
+"Drag a color code here to save it<nl/>Drag an image file here to get its "
+"average color"
+msgstr ""
+"Перетягніть сюди код кольору, щоб програма зберегла його.<nl/>Перетягніть "
+"сюди файл зображення, щоб отримати його середній колір."
 
 #: package/contents/ui/configGeneral.qml:24
 #, kde-format
@@ -68,41 +84,25 @@ msgctxt "@action"
 msgid "Clear History"
 msgstr "Спорожнити журнал"
 
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Pick color"
-msgstr "Взяти колір"
-
-#: package/contents/ui/main.qml:130
-#, kde-kuit-format
-msgctxt "@info:usagetip"
-msgid ""
-"Drag a color code here to save it<nl/>Drag an image file here to get its "
-"average color"
-msgstr ""
-"Перетягніть сюди код кольору, щоб програма зберегла його.<nl/>Перетягніть "
-"сюди файл зображення, щоб отримати його середній колір."
-
-#: package/contents/ui/main.qml:202
+#: package/contents/ui/main.qml:143
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Немає кольорів"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Взяти колір"
 
-#: package/contents/ui/main.qml:381
+#: package/contents/ui/main.qml:322
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Скопійовано!"
 
-#: package/contents/ui/main.qml:391
+#: package/contents/ui/main.qml:332
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-07 00:48+0000\n"
+"POT-Creation-Date: 2022-12-17 11:10+0000\n"
 "PO-Revision-Date: 2022-10-17 09:42+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -29,6 +29,20 @@ msgstr ""
 msgctxt "@title"
 msgid "General"
 msgstr "Основное"
+
+#: package/contents/ui/CompactRepresentation.qml:59
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Pick color"
+msgstr "Начать выбор цвета"
+
+#: package/contents/ui/CompactRepresentation.qml:66
+#, kde-kuit-format
+msgctxt "@info:usagetip"
+msgid ""
+"Drag a color code here to save it<nl/>Drag an image file here to get its "
+"average color"
+msgstr ""
 
 #: package/contents/ui/configGeneral.qml:24
 #, kde-format
@@ -72,39 +86,25 @@ msgctxt "@action"
 msgid "Clear History"
 msgstr "Очистить журнал"
 
-#: package/contents/ui/main.qml:123
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Pick color"
-msgstr "Начать выбор цвета"
-
-#: package/contents/ui/main.qml:130
-#, kde-kuit-format
-msgctxt "@info:usagetip"
-msgid ""
-"Drag a color code here to save it<nl/>Drag an image file here to get its "
-"average color"
-msgstr ""
-
-#: package/contents/ui/main.qml:202
+#: package/contents/ui/main.qml:143
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Цветов нет"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Выбрать цвет"
 
-#: package/contents/ui/main.qml:381
+#: package/contents/ui/main.qml:322
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Скопирован!"
 
-#: package/contents/ui/main.qml:391
+#: package/contents/ui/main.qml:332
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-07 00:48+0000\n"
+"POT-Creation-Date: 2022-12-17 11:10+0000\n"
 "PO-Revision-Date: 2017-05-22 05:28-0400\n"
 "Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -25,6 +25,21 @@ msgstr ""
 msgctxt "@title"
 msgid "General"
 msgstr "כללי"
+
+#: package/contents/ui/CompactRepresentation.qml:59
+#, fuzzy, kde-format
+#| msgid "Pick a color"
+msgctxt "@info:tooltip"
+msgid "Pick color"
+msgstr "בחר צבע"
+
+#: package/contents/ui/CompactRepresentation.qml:66
+#, kde-kuit-format
+msgctxt "@info:usagetip"
+msgid ""
+"Drag a color code here to save it<nl/>Drag an image file here to get its "
+"average color"
+msgstr ""
 
 #: package/contents/ui/configGeneral.qml:24
 #, fuzzy, kde-format
@@ -75,42 +90,27 @@ msgctxt "@action"
 msgid "Clear History"
 msgstr "מחיקת היסטוריה"
 
-#: package/contents/ui/main.qml:123
-#, fuzzy, kde-format
-#| msgid "Pick a color"
-msgctxt "@info:tooltip"
-msgid "Pick color"
-msgstr "בחר צבע"
-
-#: package/contents/ui/main.qml:130
-#, kde-kuit-format
-msgctxt "@info:usagetip"
-msgid ""
-"Drag a color code here to save it<nl/>Drag an image file here to get its "
-"average color"
-msgstr ""
-
-#: package/contents/ui/main.qml:202
+#: package/contents/ui/main.qml:143
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "בחר צבע"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:147
 #, fuzzy, kde-format
 #| msgid "Pick Color"
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "בחר צבע"
 
-#: package/contents/ui/main.qml:381
+#: package/contents/ui/main.qml:322
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:391
+#: package/contents/ui/main.qml:332
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
