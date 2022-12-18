@@ -14,8 +14,6 @@
 #include <KIO/CopyJob> // For "Save Image"
 #include <KLocalizedString>
 
-#include "potdengine.h"
-
 namespace
 {
 static PotdEngine *s_engine = nullptr;
