@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-17 11:10+0000\n"
+"POT-Creation-Date: 2022-12-19 00:47+0000\n"
 "PO-Revision-Date: 2022-12-14 16:06+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -81,33 +81,35 @@ msgctxt "@action"
 msgid "Clear History"
 msgstr "Netta historia"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:107
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr "Copia in area de transferentia"
+
+#: package/contents/ui/main.qml:144
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Nulle colores "
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Selige color"
 
-#: package/contents/ui/main.qml:322
+#: package/contents/ui/main.qml:323
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Copiate!"
 
-#: package/contents/ui/main.qml:332
+#: package/contents/ui/main.qml:333
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Dele"
-
-#~ msgctxt "@title:menu"
-#~ msgid "Copy to Clipboard"
-#~ msgstr "Copia in area de transferentia"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

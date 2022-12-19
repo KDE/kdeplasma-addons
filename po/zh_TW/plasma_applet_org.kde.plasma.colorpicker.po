@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-17 11:10+0000\n"
+"POT-Creation-Date: 2022-12-19 00:47+0000\n"
 "PO-Revision-Date: 2018-04-23 00:53+0800\n"
 "Last-Translator: pan93412 <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -83,7 +83,13 @@ msgctxt "@action"
 msgid "Clear History"
 msgstr "清除歷史"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:107
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr "複製到剪貼簿"
+
+#: package/contents/ui/main.qml:144
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Pick color"
@@ -91,27 +97,23 @@ msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "挑選顏色"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "挑選顏色"
 
-#: package/contents/ui/main.qml:322
+#: package/contents/ui/main.qml:323
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:332
+#: package/contents/ui/main.qml:333
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr ""
-
-#~ msgctxt "@title:menu"
-#~ msgid "Copy to Clipboard"
-#~ msgstr "複製到剪貼簿"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

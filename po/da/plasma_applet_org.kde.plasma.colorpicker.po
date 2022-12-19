@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-17 11:10+0000\n"
+"POT-Creation-Date: 2022-12-19 00:47+0000\n"
 "PO-Revision-Date: 2018-07-12 11:08+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -79,7 +79,13 @@ msgctxt "@action"
 msgid "Clear History"
 msgstr "Ryd historik"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:107
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr "Kopiér til udklipsholderen"
+
+#: package/contents/ui/main.qml:144
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Pick color"
@@ -87,27 +93,23 @@ msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Vælg en farve"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Vælg en farve"
 
-#: package/contents/ui/main.qml:322
+#: package/contents/ui/main.qml:323
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:332
+#: package/contents/ui/main.qml:333
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr ""
-
-#~ msgctxt "@title:menu"
-#~ msgid "Copy to Clipboard"
-#~ msgstr "Kopiér til udklipsholderen"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

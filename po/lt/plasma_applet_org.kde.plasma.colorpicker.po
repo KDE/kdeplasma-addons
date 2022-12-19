@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-17 11:10+0000\n"
+"POT-Creation-Date: 2022-12-19 00:47+0000\n"
 "PO-Revision-Date: 2022-11-17 23:31+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -81,33 +81,35 @@ msgctxt "@action"
 msgid "Clear History"
 msgstr "Išvalyti istoriją"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:107
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr "Kuopijuoti į iškarpinę"
+
+#: package/contents/ui/main.qml:144
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Nėra spalvų"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Pasirinkti spalvą"
 
-#: package/contents/ui/main.qml:322
+#: package/contents/ui/main.qml:323
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Nukopijuota!"
 
-#: package/contents/ui/main.qml:332
+#: package/contents/ui/main.qml:333
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Ištrinti"
-
-#~ msgctxt "@title:menu"
-#~ msgid "Copy to Clipboard"
-#~ msgstr "Kuopijuoti į iškarpinę"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

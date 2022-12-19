@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-16 00:48+0000\n"
+"POT-Creation-Date: 2022-12-19 00:47+0000\n"
 "PO-Revision-Date: 2022-08-13 15:28+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -338,25 +338,25 @@ msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
 msgstr "Открыть сайт с изображением дня в браузере по умолчанию"
 
-#: plugins/potdbackend.cpp:221
+#: plugins/potdbackend.cpp:219
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Today's Picture"
 msgstr "Сохранить изображение дня"
 
-#: plugins/potdbackend.cpp:223
+#: plugins/potdbackend.cpp:221
 #, kde-format
 msgctxt "@label:listbox Template for file dialog"
 msgid "JPEG image (*.jpeg *.jpg *.jpe)"
 msgstr "Изображение JPEG (*jpg *.jpeg *.jpe)"
 
-#: plugins/potdbackend.cpp:240
+#: plugins/potdbackend.cpp:238
 #, kde-format
 msgctxt "@info:status after a save action"
 msgid "The image was not saved."
 msgstr "Не удалось сохранить изображение."
 
-#: plugins/potdbackend.cpp:246
+#: plugins/potdbackend.cpp:244
 #, kde-format
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
