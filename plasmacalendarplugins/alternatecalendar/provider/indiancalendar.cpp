@@ -6,6 +6,8 @@
 
 #include "indiancalendar.h"
 
+#include <array>
+
 class IndianCalendarProviderPrivate : public ICUCalendarPrivate
 {
 public:
