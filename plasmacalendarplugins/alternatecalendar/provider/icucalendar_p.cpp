@@ -53,9 +53,9 @@ int32_t ICUCalendarPrivate::day() const
     return day;
 }
 
-QDate ICUCalendarPrivate::date() const
+QCalendar::YearMonthDay ICUCalendarPrivate::date() const
 {
-    return QDate(year(), month(), day());
+    return QCalendar::YearMonthDay(year(), month(), day());
 }
 
 bool ICUCalendarPrivate::setDate(const QDate &date)

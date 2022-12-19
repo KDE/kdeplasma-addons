@@ -10,7 +10,8 @@
 #include <unicode/calendar.h>
 #include <unicode/smpdtfmt.h>
 
-class QDate;
+#include <QCalendar>
+
 class QString;
 
 class ICUCalendarPrivate
@@ -34,7 +35,7 @@ public:
      *
      * @return the date from the alternate calendar
      */
-    QDate date() const;
+    QCalendar::YearMonthDay date() const;
 
     /**
      * Sets the date in the Gregorian Calendar, and convert the date to

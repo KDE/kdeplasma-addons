@@ -28,7 +28,7 @@ public:
      * @param date Gregorian date
      * @return Alternate calendar date
      */
-    virtual QDate fromGregorian(const QDate &date) const;
+    virtual QCalendar::YearMonthDay fromGregorian(const QDate &date) const;
 
     /**
      * Gets the sub-labels for the specific Gregorian date
