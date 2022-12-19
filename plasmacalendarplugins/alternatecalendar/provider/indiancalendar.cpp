@@ -42,8 +42,28 @@ CalendarEvents::CalendarEventsPlugin::SubLabel IndianCalendarProviderPrivate::su
         return sublabel;
     }
 
+    static const std::array<QString, 12> monthNames{
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Chaitra"),
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Vaisākha"),
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Jyēshtha"),
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Āshādha"),
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Shrāvana"),
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Bhādra"),
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Āshwin"),
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Kārtika"),
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Mārgaśīrṣa"),
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Pausha"),
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Māgha"),
+        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Phālguna"),
+    };
+
     sublabel.dayLabel = QString::number(day());
-    sublabel.label = QLocale(QLocale::English, QLocale::India).toString(QDate(year(), month(), day()));
+    sublabel.label = i18ndc("plasma_calendar_alternatecalendar",
+                            "@label %1 day %2 month name in India National Calendar %3 year",
+                            "%1 %2, %3",
+                            sublabel.dayLabel,
+                            monthNames[month() - 1],
+                            QString::number(year()));
     sublabel.priority = CalendarEvents::CalendarEventsPlugin::SubLabelPriority::Low;
 
     return sublabel;
