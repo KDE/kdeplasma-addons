@@ -22,7 +22,7 @@ public:
     explicit IndianCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem);
     ~IndianCalendarProvider() override;
 
-    QDate fromGregorian(const QDate &date) const override;
+    QCalendar::YearMonthDay fromGregorian(const QDate &date) const override;
     CalendarEvents::CalendarEventsPlugin::SubLabel subLabels(const QDate &date) const override;
 
 private:

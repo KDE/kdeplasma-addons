@@ -119,9 +119,10 @@ void AlternateCalendarPluginPrivate::loadEventsForDateRange(const QDate &startDa
 
     for (QDate date = startDate; date <= endDate && date.isValid(); date = date.addDays(1)) {
         const QDate offsetDate = date.addDays(m_dateOffset);
+        const QCalendar::YearMonthDay alt = m_calendarProvider->fromGregorian(offsetDate);
 
-        if (const QDate alt = m_calendarProvider->fromGregorian(offsetDate); alt != date) {
-            alternateDatesData.insert(date, alt);
+        if (alt.day != date.day() || alt.month != date.month() || alt.year != date.year()) {
+            alternateDatesData.insert(date, QDate(alt.year, alt.month, alt.day));
         }
 
         if (m_subLabelsCache.contains(date)) {

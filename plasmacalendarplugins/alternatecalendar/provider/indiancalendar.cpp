@@ -11,7 +11,7 @@ class IndianCalendarProviderPrivate : public ICUCalendarPrivate
 public:
     explicit IndianCalendarProviderPrivate();
 
-    QDate fromGregorian(const QDate &_date);
+    QCalendar::YearMonthDay fromGregorian(const QDate &_date);
     CalendarEvents::CalendarEventsPlugin::SubLabel subLabels(const QDate &date);
 };
 
@@ -25,10 +25,10 @@ IndianCalendarProviderPrivate::IndianCalendarProviderPrivate()
     m_calendar.reset(icu::Calendar::createInstance("en_US@calendar=indian", m_errorCode));
 }
 
-QDate IndianCalendarProviderPrivate::fromGregorian(const QDate &_date)
+QCalendar::YearMonthDay IndianCalendarProviderPrivate::fromGregorian(const QDate &_date)
 {
     if (U_FAILURE(m_errorCode) || !_date.isValid() || !setDate(_date)) {
-        return QDate();
+        return {};
     }
 
     return date();
@@ -80,7 +80,7 @@ IndianCalendarProvider::~IndianCalendarProvider()
 {
 }
 
-QDate IndianCalendarProvider::fromGregorian(const QDate &date) const
+QCalendar::YearMonthDay IndianCalendarProvider::fromGregorian(const QDate &date) const
 {
     return d->fromGregorian(date);
 }

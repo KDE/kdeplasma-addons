@@ -12,7 +12,7 @@ public:
     explicit QtCalendarProviderPrivate(QCalendar::System system);
     ~QtCalendarProviderPrivate();
 
-    QDate fromGregorian(const QDate &date) const;
+    QCalendar::YearMonthDay fromGregorian(const QDate &date) const;
     CalendarEvents::CalendarEventsPlugin::SubLabel subLabels(const QDate &date) const;
 
 private:
@@ -28,14 +28,13 @@ QtCalendarProviderPrivate::~QtCalendarProviderPrivate()
 {
 }
 
-QDate QtCalendarProviderPrivate::fromGregorian(const QDate &date) const
+QCalendar::YearMonthDay QtCalendarProviderPrivate::fromGregorian(const QDate &date) const
 {
     if (!date.isValid()) {
-        return QDate();
+        return {};
     }
 
-    const QCalendar::YearMonthDay ymd = m_calendar.partsFromDate(date);
-    return QDate(ymd.year, ymd.month, ymd.day);
+    return m_calendar.partsFromDate(date);
 }
 
 CalendarEvents::CalendarEventsPlugin::SubLabel QtCalendarProviderPrivate::subLabels(const QDate &date) const
@@ -46,8 +45,13 @@ CalendarEvents::CalendarEventsPlugin::SubLabel QtCalendarProviderPrivate::subLab
         return sublabel;
     }
 
-    const QDate altDate = fromGregorian(date);
-    sublabel.label = QLocale::system().toString(altDate);
+    const QCalendar::YearMonthDay altDate = fromGregorian(date);
+    sublabel.label = i18ndc("plasma_calendar_alternatecalendar",
+                            "@label %1 day %2 month name %3 year",
+                            "%1 %2, %3",
+                            QString::number(altDate.day),
+                            m_calendar.standaloneMonthName(QLocale::system(), altDate.month, altDate.year),
+                            QString::number(altDate.year));
 
     return sublabel;
 }
@@ -63,7 +67,7 @@ QtCalendarProvider::~QtCalendarProvider()
 {
 }
 
-QDate QtCalendarProvider::fromGregorian(const QDate &date) const
+QCalendar::YearMonthDay QtCalendarProvider::fromGregorian(const QDate &date) const
 {
     return d->fromGregorian(date);
 }

@@ -16,13 +16,13 @@ AbstractCalendarProvider::~AbstractCalendarProvider()
 {
 }
 
-QDate AbstractCalendarProvider::fromGregorian(const QDate &date) const
+QCalendar::YearMonthDay AbstractCalendarProvider::fromGregorian(const QDate &date) const
 {
     if (!date.isValid()) {
-        return QDate();
+        return {};
     }
 
-    return date;
+    return QCalendar::YearMonthDay(date.year(), date.month(), date.day());
 }
 
 CalendarEvents::CalendarEventsPlugin::SubLabel AbstractCalendarProvider::subLabels([[maybe_unused]] const QDate &date) const
