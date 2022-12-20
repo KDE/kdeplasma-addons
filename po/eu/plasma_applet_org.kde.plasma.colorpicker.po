@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-17 11:10+0000\n"
+"POT-Creation-Date: 2022-12-19 00:47+0000\n"
 "PO-Revision-Date: 2022-12-01 22:54+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -84,33 +84,35 @@ msgctxt "@action"
 msgid "Clear History"
 msgstr "Garbitu historia"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:107
+#, kde-format
+msgctxt "@title:menu"
+msgid "Copy to Clipboard"
+msgstr "Kopiatu arbelera"
+
+#: package/contents/ui/main.qml:144
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Kolorerik ez"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Hautatu kolore bat"
 
-#: package/contents/ui/main.qml:322
+#: package/contents/ui/main.qml:323
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopiatuta!"
 
-#: package/contents/ui/main.qml:332
+#: package/contents/ui/main.qml:333
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Ezabatu"
-
-#~ msgctxt "@title:menu"
-#~ msgid "Copy to Clipboard"
-#~ msgstr "Kopiatu arbelera"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

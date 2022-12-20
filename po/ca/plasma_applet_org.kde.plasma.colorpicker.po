@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-19 00:47+0000\n"
-"PO-Revision-Date: 2022-11-30 09:40+0100\n"
+"PO-Revision-Date: 2022-12-19 09:21+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -89,7 +89,7 @@ msgstr "Neteja l'historial"
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Copia al porta-retalls"
 
 #: package/contents/ui/main.qml:144
 #, kde-format
