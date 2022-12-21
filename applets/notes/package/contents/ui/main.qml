@@ -108,7 +108,11 @@ PlasmaCore.SvgItem {
         MouseArea {
             anchors.fill: parent
             hoverEnabled: true
-            onClicked: Plasmoid.expanded = !Plasmoid.expanded
+
+            property bool wasExpanded
+
+            onPressed: wasExpanded = Plasmoid.expanded
+            onClicked: Plasmoid.expanded = !wasExpanded
 
             PlasmaCore.IconItem {
                 anchors.fill: parent
