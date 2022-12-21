@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_calendar_alternatecalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-20 00:47+0000\n"
-"PO-Revision-Date: 2022-05-20 12:10+0200\n"
+"PO-Revision-Date: 2022-12-21 00:22+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: calendarsystem.h:53
 #, kde-format
@@ -78,82 +78,82 @@ msgstr[1] "%1 días"
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Chaitra"
-msgstr ""
+msgstr "Chaitra"
 
 #: provider/indiancalendar.cpp:49
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Vaisākha"
-msgstr ""
+msgstr "Vaisākha"
 
 #: provider/indiancalendar.cpp:50
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Jyēshtha"
-msgstr ""
+msgstr "Jyēshtha"
 
 #: provider/indiancalendar.cpp:51
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Āshādha"
-msgstr ""
+msgstr "Āshādha"
 
 #: provider/indiancalendar.cpp:52
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Shrāvana"
-msgstr ""
+msgstr "Shrāvana"
 
 #: provider/indiancalendar.cpp:53
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Bhādra"
-msgstr ""
+msgstr "Bhādra"
 
 #: provider/indiancalendar.cpp:54
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Āshwin"
-msgstr ""
+msgstr "Āshwin"
 
 #: provider/indiancalendar.cpp:55
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Kārtika"
-msgstr ""
+msgstr "Kārtika"
 
 #: provider/indiancalendar.cpp:56
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Mārgaśīrṣa"
-msgstr ""
+msgstr "Mārgaśīrṣa"
 
 #: provider/indiancalendar.cpp:57
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Pausha"
-msgstr ""
+msgstr "Pausha"
 
 #: provider/indiancalendar.cpp:58
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Māgha"
-msgstr ""
+msgstr "Māgha"
 
 #: provider/indiancalendar.cpp:59
 #, kde-format
 msgctxt "Month name in Indian National Calendar"
 msgid "Phālguna"
-msgstr ""
+msgstr "Phālguna"
 
 #: provider/indiancalendar.cpp:65
 #, kde-format
 msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 msgid "%1 %2, %3"
-msgstr ""
+msgstr "%1 %2, %3"
 
 #: provider/qtcalendar.cpp:51
 #, kde-format
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
-msgstr ""
+msgstr "%1 %2, %3"

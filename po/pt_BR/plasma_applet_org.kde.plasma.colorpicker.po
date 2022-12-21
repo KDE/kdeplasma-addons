@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-19 00:47+0000\n"
-"PO-Revision-Date: 2022-10-19 15:10-0300\n"
+"PO-Revision-Date: 2022-12-20 11:18-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -37,6 +37,8 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Arraste um código de cor aqui para salvá-lo<nl/>Arraste um arquivo de imagem "
+"aqui para obter sua cor média"
 
 #: package/contents/ui/configGeneral.qml:24
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-19 00:47+0000\n"
-"PO-Revision-Date: 2022-12-02 00:10+0100\n"
+"PO-Revision-Date: 2022-12-20 20:40+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -85,7 +85,7 @@ msgstr "Изчистване на историята"
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Копиране в клипборда"
 
 #: package/contents/ui/main.qml:144
 #, kde-format
