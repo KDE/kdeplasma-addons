@@ -231,8 +231,8 @@ PotdEngine::PotdEngine(QObject *parent)
 
     connect(&m_checkDatesTimer, &QTimer::timeout, this, &PotdEngine::forceUpdateSource);
 
-    int interval = QDateTime::currentDateTime().msecsTo(QDate::currentDate().addDays(1).startOfDay()) + 1000;
-    m_checkDatesTimer.setInterval(std::max(interval, 60 * 1000));
+    int interval = QDateTime::currentDateTime().msecsTo(QDate::currentDate().addDays(1).startOfDay()) + 60000;
+    m_checkDatesTimer.setInterval(interval);
     m_checkDatesTimer.start();
     qCDebug(WALLPAPERPOTD) << "Time to next update (h):" << m_checkDatesTimer.interval() / 1000.0 / 60.0 / 60.0;
 
@@ -349,9 +349,9 @@ void PotdEngine::slotDone(PotdClient *client, bool success)
     }
 
     if (!--m_updateCount) {
-        // Do not update until next day, and delay 1s to make sure last modified condition is satisfied.
+        // Do not update until next day, and delay 1minute to make sure last modified condition is satisfied.
         if (m_lastUpdateSuccess) {
-            m_checkDatesTimer.setInterval(std::max<int>(QDateTime::currentDateTime().msecsTo(QDate::currentDate().startOfDay().addDays(1)) + 1000, 60000));
+            m_checkDatesTimer.setInterval(QDateTime::currentDateTime().msecsTo(QDate::currentDate().startOfDay().addDays(1)) + 60000);
         } else {
             m_checkDatesTimer.setInterval(10min);
         }
