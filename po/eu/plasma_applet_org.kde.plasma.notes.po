@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-30 00:46+0000\n"
+"POT-Creation-Date: 2022-12-23 00:48+0000\n"
 "PO-Revision-Date: 2022-11-13 08:20+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -92,140 +92,140 @@ msgstr "Ohar itsaskor zeharrargitsu bat"
 msgid "A translucent sticky note with light text"
 msgstr "Ohar itsaskor zeharrargitsu bat testu argiarekin"
 
-#: package/contents/ui/main.qml:246
+#: package/contents/ui/main.qml:250
 #, kde-format
 msgid "Undo"
 msgstr "Desegin"
 
-#: package/contents/ui/main.qml:254
+#: package/contents/ui/main.qml:258
 #, kde-format
 msgid "Redo"
 msgstr "Berregin"
 
-#: package/contents/ui/main.qml:264
+#: package/contents/ui/main.qml:268
 #, kde-format
 msgid "Cut"
 msgstr "Ebaki"
 
-#: package/contents/ui/main.qml:272
+#: package/contents/ui/main.qml:276
 #, kde-format
 msgid "Copy"
 msgstr "Kopiatu"
 
-#: package/contents/ui/main.qml:280
+#: package/contents/ui/main.qml:284
 #, kde-format
 msgid "Paste Without Formatting"
 msgstr "Itsatsi formaturik gabe"
 
-#: package/contents/ui/main.qml:286
+#: package/contents/ui/main.qml:290
 #, kde-format
 msgid "Paste"
 msgstr "Itsatsi"
 
-#: package/contents/ui/main.qml:295
+#: package/contents/ui/main.qml:299
 #, kde-format
 msgid "Delete"
 msgstr "Ezabatu"
 
-#: package/contents/ui/main.qml:302
+#: package/contents/ui/main.qml:306
 #, kde-format
 msgid "Clear"
 msgstr "Garbitu"
 
-#: package/contents/ui/main.qml:312
+#: package/contents/ui/main.qml:316
 #, kde-format
 msgid "Select All"
 msgstr "Hautatu dena"
 
-#: package/contents/ui/main.qml:440
+#: package/contents/ui/main.qml:444
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Lodia"
 
-#: package/contents/ui/main.qml:452
+#: package/contents/ui/main.qml:456
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Etzana"
 
-#: package/contents/ui/main.qml:464
+#: package/contents/ui/main.qml:468
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Azpimarra"
 
-#: package/contents/ui/main.qml:476
+#: package/contents/ui/main.qml:480
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Marratua"
 
-#: package/contents/ui/main.qml:550
+#: package/contents/ui/main.qml:554
 #, kde-format
 msgid "Discard this note?"
 msgstr "Ohar hau bota?"
 
-#: package/contents/ui/main.qml:551
+#: package/contents/ui/main.qml:555
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Ziur zaude ohar hau bota nahi duzula?"
 
-#: package/contents/ui/main.qml:564
+#: package/contents/ui/main.qml:568
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Zuria"
 
-#: package/contents/ui/main.qml:565
+#: package/contents/ui/main.qml:569
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Beltza"
 
-#: package/contents/ui/main.qml:566
+#: package/contents/ui/main.qml:570
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Gorria"
 
-#: package/contents/ui/main.qml:567
+#: package/contents/ui/main.qml:571
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Laranja"
 
-#: package/contents/ui/main.qml:568
+#: package/contents/ui/main.qml:572
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Horia"
 
-#: package/contents/ui/main.qml:569
+#: package/contents/ui/main.qml:573
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Berdea"
 
-#: package/contents/ui/main.qml:570
+#: package/contents/ui/main.qml:574
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Urdina"
 
-#: package/contents/ui/main.qml:571
+#: package/contents/ui/main.qml:575
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Arrosa"
 
-#: package/contents/ui/main.qml:572
+#: package/contents/ui/main.qml:576
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "Zeharrargitsua"
 
-#: package/contents/ui/main.qml:573
+#: package/contents/ui/main.qml:577
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"

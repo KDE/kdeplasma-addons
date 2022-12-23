@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-19 00:47+0000\n"
-"PO-Revision-Date: 2022-10-09 21:26+0400\n"
+"PO-Revision-Date: 2022-12-22 10:59+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -37,7 +37,7 @@ msgctxt "@info:usagetip"
 msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
-msgstr ""
+msgstr "اسحب رمز اللون لتحفظه<nl/> اسحب ملف الصورة هنا لتحصل على اللون المتوسط"
 
 #: package/contents/ui/configGeneral.qml:24
 #, kde-format
