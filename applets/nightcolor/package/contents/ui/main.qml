@@ -31,14 +31,14 @@ Item {
 
     Plasmoid.toolTipMainText: i18n("Night Color Control")
     Plasmoid.toolTipSubText: {
-        if (inhibitor.state === Inhibitor.Inhibited) {
+        if (inhibitor.state === Inhibitor.Inhibited && monitor.enabled) {
             return i18n("Night Color is inhibited");
         }
         if (!monitor.available) {
             return i18n("Night Color is unavailable");
         }
         if (!monitor.enabled) {
-            return i18n("Night Color is disabled");
+            return i18n("Night Color is disabled. Click to configure");
         }
         if (!monitor.running) {
             return i18n("Night Color is not running");
@@ -57,7 +57,7 @@ Item {
             anchors.fill: parent
             hoverEnabled: true
             acceptedButtons: Qt.LeftButton | Qt.MiddleButton
-            onClicked: toggleInhibition()
+            onClicked: monitor.enabled ? toggleInhibition() : action_configure()
         }
     }
 
