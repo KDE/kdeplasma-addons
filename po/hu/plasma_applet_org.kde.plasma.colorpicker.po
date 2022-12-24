@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-19 00:47+0000\n"
+"POT-Creation-Date: 2022-12-24 00:51+0000\n"
 "PO-Revision-Date: 2019-11-18 23:50+0100\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -25,13 +25,13 @@ msgctxt "@title"
 msgid "General"
 msgstr "Általános"
 
-#: package/contents/ui/CompactRepresentation.qml:59
+#: package/contents/ui/CompactRepresentation.qml:71
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Színválasztás"
 
-#: package/contents/ui/CompactRepresentation.qml:66
+#: package/contents/ui/CompactRepresentation.qml:78
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -39,55 +39,69 @@ msgid ""
 "average color"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:24
+#: package/contents/ui/configGeneral.qml:25
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Alapértelmezett színformátum:"
 
-#: package/contents/ui/configGeneral.qml:32
+#: package/contents/ui/configGeneral.qml:33
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Szín másolása a vágólapra automatikusan"
 
-#: package/contents/ui/configGeneral.qml:40
+#: package/contents/ui/configGeneral.qml:41
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "Gyorsbillentyű lenyomásakor:"
 
-#: package/contents/ui/configGeneral.qml:41
+#: package/contents/ui/configGeneral.qml:42
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Színválasztás"
 
-#: package/contents/ui/configGeneral.qml:47
+#: package/contents/ui/configGeneral.qml:48
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Előzmények megjelenítése"
 
-#: package/contents/ui/main.qml:104
+#: package/contents/ui/configGeneral.qml:58
+#, kde-format
+msgctxt "@label"
+msgid "Preview count:"
+msgstr ""
+
+#: package/contents/ui/main.qml:109
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Színek párbeszédablak megnyitása"
 
-#: package/contents/ui/main.qml:105
+#: package/contents/ui/main.qml:110
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Az előzmények törlése"
 
-#: package/contents/ui/main.qml:107
+#: package/contents/ui/main.qml:111
+#, fuzzy, kde-format
+#| msgctxt "@action"
+#| msgid "Clear History"
+msgctxt "@action"
+msgid "View History"
+msgstr "Az előzmények törlése"
+
+#: package/contents/ui/main.qml:113
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Másolás a vágólapra"
 
-#: package/contents/ui/main.qml:144
+#: package/contents/ui/main.qml:150
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Pick color"
@@ -95,19 +109,19 @@ msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Színválasztás"
 
-#: package/contents/ui/main.qml:148
+#: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Színválasztás"
 
-#: package/contents/ui/main.qml:323
+#: package/contents/ui/main.qml:329
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:333
+#: package/contents/ui/main.qml:339
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

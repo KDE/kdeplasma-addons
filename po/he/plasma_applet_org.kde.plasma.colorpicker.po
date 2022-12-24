@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-19 00:47+0000\n"
+"POT-Creation-Date: 2022-12-24 00:51+0000\n"
 "PO-Revision-Date: 2017-05-22 05:28-0400\n"
 "Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -26,14 +26,14 @@ msgctxt "@title"
 msgid "General"
 msgstr "כללי"
 
-#: package/contents/ui/CompactRepresentation.qml:59
+#: package/contents/ui/CompactRepresentation.qml:71
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "בחר צבע"
 
-#: package/contents/ui/CompactRepresentation.qml:66
+#: package/contents/ui/CompactRepresentation.qml:78
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -41,83 +41,96 @@ msgid ""
 "average color"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:24
+#: package/contents/ui/configGeneral.qml:25
 #, fuzzy, kde-format
 #| msgid "Default color format:"
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "פורמט הצבע הברירת מחדל:"
 
-#: package/contents/ui/configGeneral.qml:32
+#: package/contents/ui/configGeneral.qml:33
 #, fuzzy, kde-format
 #| msgid "Automatically copy color to clipboard"
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "העתק אוטומטית ללוח הגזירה"
 
-#: package/contents/ui/configGeneral.qml:40
+#: package/contents/ui/configGeneral.qml:41
 #, fuzzy, kde-format
 #| msgid "When pressing the keyboard shortcut:"
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "שלוחצים על קיצור הדרך:"
 
-#: package/contents/ui/configGeneral.qml:41
+#: package/contents/ui/configGeneral.qml:42
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "בחר צבע"
 
-#: package/contents/ui/configGeneral.qml:47
+#: package/contents/ui/configGeneral.qml:48
 #, fuzzy, kde-format
 #| msgid "Show history"
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "הראה היסטוריה"
 
-#: package/contents/ui/main.qml:104
+#: package/contents/ui/configGeneral.qml:58
+#, kde-format
+msgctxt "@label"
+msgid "Preview count:"
+msgstr ""
+
+#: package/contents/ui/main.qml:109
 #, fuzzy, kde-format
 #| msgid "Open Color Dialog"
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "פתח את תיבת הדו-שיח 'צבע'"
 
-#: package/contents/ui/main.qml:105
+#: package/contents/ui/main.qml:110
 #, fuzzy, kde-format
 #| msgid "Clear History"
 msgctxt "@action"
 msgid "Clear History"
 msgstr "מחיקת היסטוריה"
 
-#: package/contents/ui/main.qml:107
+#: package/contents/ui/main.qml:111
+#, fuzzy, kde-format
+#| msgid "Clear History"
+msgctxt "@action"
+msgid "View History"
+msgstr "מחיקת היסטוריה"
+
+#: package/contents/ui/main.qml:113
 #, fuzzy, kde-format
 #| msgid "Copy to Clipboard"
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "העתק ללוח הגזירה"
 
-#: package/contents/ui/main.qml:144
+#: package/contents/ui/main.qml:150
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "בחר צבע"
 
-#: package/contents/ui/main.qml:148
+#: package/contents/ui/main.qml:154
 #, fuzzy, kde-format
 #| msgid "Pick Color"
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "בחר צבע"
 
-#: package/contents/ui/main.qml:323
+#: package/contents/ui/main.qml:329
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:333
+#: package/contents/ui/main.qml:339
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
