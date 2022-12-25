@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2022-11-30 06:56+0200\n"
+"PO-Revision-Date: 2022-12-24 08:46+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -76,7 +76,7 @@ msgstr "Показати журнал"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Кількість переглядів:"
 
 #: package/contents/ui/main.qml:109
 #, kde-format
@@ -91,12 +91,10 @@ msgid "Clear History"
 msgstr "Спорожнити журнал"
 
 #: package/contents/ui/main.qml:111
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "Спорожнити журнал"
+msgstr "Переглянути журнал"
 
 #: package/contents/ui/main.qml:113
 #, kde-format

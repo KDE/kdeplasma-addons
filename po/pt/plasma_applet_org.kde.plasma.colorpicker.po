@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2022-11-30 09:34+0000\n"
+"PO-Revision-Date: 2022-12-24 07:24+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
 "Language: pt\n"
@@ -68,7 +68,7 @@ msgstr "Mostrar o histórico"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Número de antevisões:"
 
 #: package/contents/ui/main.qml:109
 #, kde-format
@@ -83,18 +83,16 @@ msgid "Clear History"
 msgstr "Limpar o Histórico"
 
 #: package/contents/ui/main.qml:111
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "Limpar o Histórico"
+msgstr "Ver o Histórico"
 
 #: package/contents/ui/main.qml:113
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Copiar para a Área de Transferência"
 
 #: package/contents/ui/main.qml:150
 #, kde-format
