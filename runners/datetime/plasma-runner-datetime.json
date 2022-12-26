@@ -80,7 +80,6 @@
         "Description[zh_TW]": "任何時區下的目前時間與日期",
         "EnabledByDefault": true,
         "Icon": "clock",
-        "Id": "org.kde.datetime",
         "License": "LGPL",
         "Name": "Date and Time",
         "Name[ar]": "التاريخ والوقت",

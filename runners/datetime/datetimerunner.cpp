@@ -134,6 +134,7 @@ QHash<QString, QDateTime> DateTimeRunner::datetimeAt(const QStringView &zoneTerm
         QTimeZone timeZone(zoneId);
         QDateTime datetime = referenceTime.toTimeZone(QTimeZone(zoneId));
 
+        // eg "Sweden"
         const QString country = QLocale::countryToString(timeZone.country());
         const QString comment = timeZone.comment();
         if (country.contains(zoneTerm, Qt::CaseInsensitive) || comment.contains(zoneTerm, Qt::CaseInsensitive)) {
@@ -142,6 +143,7 @@ QHash<QString, QDateTime> DateTimeRunner::datetimeAt(const QStringView &zoneTerm
             continue;
         }
 
+        // eg "CET"
         // FIXME: This only includes the current abbreviation and not old abbreviation or other possible names.
         // Eg - depending on the current date, only CET or CEST will work
         const QString abbr = timeZone.abbreviation(datetime);
@@ -154,24 +156,28 @@ QHash<QString, QDateTime> DateTimeRunner::datetimeAt(const QStringView &zoneTerm
             continue;
         }
 
+        // eg "Europe/Stockholm"
         const QString zoneName = QString::fromUtf8(zoneId).replace("_", " ");
         if (zoneName.contains(zoneTerm, Qt::CaseInsensitive)) {
             ret[zoneName] = datetime;
             continue;
         }
 
+        // eg "Central European Standard Time"
         const QString longName = timeZone.displayName(datetime, QTimeZone::LongName);
         if (longName.contains(zoneTerm, Qt::CaseInsensitive)) {
             ret[longName] = datetime;
             continue;
         }
 
+        // eg "GMT+1"
         const QString shortName = timeZone.displayName(datetime, QTimeZone::ShortName);
         if (shortName.contains(zoneTerm, Qt::CaseInsensitive)) {
             ret[shortName] = datetime;
             continue;
         }
 
+        // eg "UTC+01:00"
         const QString offsetName = timeZone.displayName(datetime, QTimeZone::OffsetName);
         if (offsetName.contains(zoneTerm, Qt::CaseInsensitive)) {
             ret[offsetName] = datetime;
