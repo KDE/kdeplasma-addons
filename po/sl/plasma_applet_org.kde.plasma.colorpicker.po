@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2022-12-01 08:42+0100\n"
+"PO-Revision-Date: 2022-12-25 08:54+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -81,7 +81,7 @@ msgstr "Pokaži zgodovino"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Število predogledov:"
 
 #: package/contents/ui/main.qml:109
 #, kde-format
@@ -96,12 +96,10 @@ msgid "Clear History"
 msgstr "Počisti zgodovino"
 
 #: package/contents/ui/main.qml:111
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "Počisti zgodovino"
+msgstr "Pogled zgodovine"
 
 #: package/contents/ui/main.qml:113
 #, kde-format

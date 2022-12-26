@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2022-12-01 06:56+0100\n"
+"PO-Revision-Date: 2022-12-25 07:20+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -74,7 +74,7 @@ msgstr "ისტორიის ჩვენება"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "მინიატურების რაოდენობა:"
 
 #: package/contents/ui/main.qml:109
 #, kde-format
@@ -89,9 +89,7 @@ msgid "Clear History"
 msgstr "ისტორიის გაწმენდა"
 
 #: package/contents/ui/main.qml:111
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "ისტორიის გაწმენდა"
