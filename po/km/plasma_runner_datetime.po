@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_datetime\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-31 00:47+0000\n"
+"POT-Creation-Date: 2022-12-28 00:50+0000\n"
 "PO-Revision-Date: 2010-05-25 09:18+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -18,70 +18,104 @@ msgstr ""
 "X-Generator: KBabel 1.11.4\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: datetimerunner.cpp:20
+#: datetimerunner.cpp:21
 #, kde-format
 msgctxt "Note this is a KRunner keyword"
 msgid "date"
 msgstr "កាលបរិច្ឆេទ​"
 
-#: datetimerunner.cpp:21
+#: datetimerunner.cpp:22
 #, kde-format
 msgctxt "Note this is a KRunner keyword"
 msgid "time"
 msgstr "ពេលវេលា"
 
-#: datetimerunner.cpp:28
+#: datetimerunner.cpp:29
 #, kde-format
 msgid "Displays the current date"
 msgstr "បង្ហាញ​កាលបរិច្ឆេទ​បច្ចុប្បន្ន"
 
-#: datetimerunner.cpp:29
+#: datetimerunner.cpp:30
 #, kde-format
 msgid "Displays the current time"
 msgstr "បង្ហាញ​ពេលវេលា​បច្ចុប្បន្ន"
 
-#: datetimerunner.cpp:30 datetimerunner.cpp:32
+#: datetimerunner.cpp:31 datetimerunner.cpp:33
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid " <timezone>"
 msgstr ""
 
-#: datetimerunner.cpp:31
-#, kde-format
-msgid "Displays the current date in a given timezone"
+#: datetimerunner.cpp:32
+#, fuzzy, kde-format
+#| msgid "Displays the current date in a given timezone"
+msgid ""
+"Displays the current date and difference to system date in a given timezone"
 msgstr "បង្ហាញ​កាលបរិច្ឆេទ​បច្ចុប្បន្ន​នៅ​ក្នុង​តំបន់​ពេលវេលា​ដែលបានផ្ដល់"
 
-#: datetimerunner.cpp:33
-#, kde-format
-msgid "Displays the current time in a given timezone"
+#: datetimerunner.cpp:34
+#, fuzzy, kde-format
+#| msgid "Displays the current time in a given timezone"
+msgid ""
+"Displays the current time and difference to system time in a given timezone"
 msgstr "បង្ហាញ​ពេលវេលា​បច្ចុប្បន្ន​នៅ​ក្នុង​តំបន់​ពេលវេលា​ដែលបាន​ផ្ដល់"
 
-#: datetimerunner.cpp:46
+#: datetimerunner.cpp:48
 #, kde-format
 msgid "Today's date is %1"
 msgstr "កាលបរិច្ឆេទ​ថ្ងៃ​នេះ​គឺ %1"
 
-#: datetimerunner.cpp:60
+#: datetimerunner.cpp:63
+#, kde-format
+msgctxt ""
+"date difference between time zones, e.g. in Stockholm it's 1 calendar day "
+"later than in Brasilia"
+msgid "%1 later"
+msgstr ""
+
+#: datetimerunner.cpp:67
+#, kde-format
+msgctxt ""
+"date difference between time zones, e.g. in Brasilia it's 1 calendar day "
+"earlier than in Stockholm"
+msgid "%1 earlier"
+msgstr ""
+
+#: datetimerunner.cpp:69
+#, kde-format
+msgctxt ""
+"no date difference between time zones, e.g. in Stockholm it's the same "
+"calendar day as in Berlin"
+msgid "no date difference"
+msgstr ""
+
+#: datetimerunner.cpp:81
 #, fuzzy, kde-format
 #| msgid "The current time is %1"
 msgid "Current time is %1"
 msgstr "ពេលវេលា​បច្ចុប្បន្ន​គឺ %1"
 
-#: datetimerunner.cpp:77
+#: datetimerunner.cpp:102
 #, kde-format
-msgctxt "time zone difference"
-msgid "later"
+msgctxt ""
+"time difference between time zones, e.g. in Stockholm it's 4 hours later "
+"than in Brasilia"
+msgid "%1 later"
 msgstr ""
 
-#: datetimerunner.cpp:78
+#: datetimerunner.cpp:105
 #, kde-format
-msgctxt "time zone difference"
-msgid "earlier"
+msgctxt ""
+"time difference between time zones, e.g. in Brasilia it's 4 hours ealier "
+"than in Stockholm"
+msgid "%1 earlier"
 msgstr ""
 
-#: datetimerunner.cpp:79
+#: datetimerunner.cpp:107
 #, kde-format
-msgctxt "no time zone difference"
+msgctxt ""
+"no time difference between time zones, e.g. in Stockholm it's the same time "
+"as in Berlin"
 msgid "no time difference"
 msgstr ""
 
