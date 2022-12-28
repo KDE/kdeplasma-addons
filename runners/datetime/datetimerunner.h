@@ -12,6 +12,7 @@
 #include <KRunner/AbstractRunner>
 #include <KRunner/QueryMatch>
 #include <QDateTime>
+#include <QTimeZone>
 
 using namespace Plasma;
 
@@ -28,9 +29,9 @@ public:
 
 private:
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QHash<QString, QDateTime> datetimeAt(const QStringRef &zoneTerm, const QDateTime referenceTime = QDateTime::currentDateTime());
+    QHash<QString, QTimeZone> matchingTimeZones(const QStringRef &zoneTerm = QStringRef(), const QDateTime referenceDatetime = QDateTime::currentDateTime());
 #else
-    QHash<QString, QDateTime> datetimeAt(const QStringView &zoneTerm, const QDateTime referenceTime = QDateTime::currentDateTime());
+    QHash<QString, QTimeZone> matchingTimeZones(const QStringView &zoneTerm = QStringView(), const QDateTime referenceDatetime = QDateTime::currentDateTime());
 #endif
     void addMatch(const QString &text, const QString &clipboardText, const qreal &relevance, const QString &iconName, RunnerContext &context);
 };
