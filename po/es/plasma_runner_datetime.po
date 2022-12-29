@@ -9,14 +9,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-28 00:50+0000\n"
-"PO-Revision-Date: 2022-10-31 20:58+0100\n"
+"PO-Revision-Date: 2022-12-28 11:21+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: datetimerunner.cpp:21
@@ -48,18 +48,20 @@ msgid " <timezone>"
 msgstr " <zonahoraria>"
 
 #: datetimerunner.cpp:32
-#, fuzzy, kde-format
-#| msgid "Displays the current date in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current date and difference to system date in a given timezone"
-msgstr "Muestra la fecha actual en la zona horaria indicada"
+msgstr ""
+"Muestra la fecha actual y la diferencia con la fecha del sistema en la zona "
+"horaria indicada"
 
 #: datetimerunner.cpp:34
-#, fuzzy, kde-format
-#| msgid "Displays the current time in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current time and difference to system time in a given timezone"
-msgstr "Muestra la hora actual en la zona horaria indicada"
+msgstr ""
+"Muestra la hora actual y la diferencia con la hora del sistema en la zona "
+"horaria indicada"
 
 #: datetimerunner.cpp:48
 #, kde-format
@@ -67,34 +69,28 @@ msgid "Today's date is %1"
 msgstr "La fecha de hoy es %1"
 
 #: datetimerunner.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "time zone difference"
-#| msgid "later"
+#, kde-format
 msgctxt ""
 "date difference between time zones, e.g. in Stockholm it's 1 calendar day "
 "later than in Brasilia"
 msgid "%1 later"
-msgstr "más tarde"
+msgstr "%1 después"
 
 #: datetimerunner.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "time zone difference"
-#| msgid "earlier"
+#, kde-format
 msgctxt ""
 "date difference between time zones, e.g. in Brasilia it's 1 calendar day "
 "earlier than in Stockholm"
 msgid "%1 earlier"
-msgstr "más temprano"
+msgstr "%1 antes"
 
 #: datetimerunner.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "no time zone difference"
-#| msgid "no time difference"
+#, kde-format
 msgctxt ""
 "no date difference between time zones, e.g. in Stockholm it's the same "
 "calendar day as in Berlin"
 msgid "no date difference"
-msgstr "no hay diferencia horaria"
+msgstr "no hay diferencia de fechas"
 
 #: datetimerunner.cpp:81
 #, kde-format
@@ -102,29 +98,23 @@ msgid "Current time is %1"
 msgstr "La hora actual es %1"
 
 #: datetimerunner.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "time zone difference"
-#| msgid "later"
+#, kde-format
 msgctxt ""
 "time difference between time zones, e.g. in Stockholm it's 4 hours later "
 "than in Brasilia"
 msgid "%1 later"
-msgstr "más tarde"
+msgstr "%1 más tarde"
 
 #: datetimerunner.cpp:105
-#, fuzzy, kde-format
-#| msgctxt "time zone difference"
-#| msgid "earlier"
+#, kde-format
 msgctxt ""
 "time difference between time zones, e.g. in Brasilia it's 4 hours ealier "
 "than in Stockholm"
 msgid "%1 earlier"
-msgstr "más temprano"
+msgstr "%1 más temprano"
 
 #: datetimerunner.cpp:107
-#, fuzzy, kde-format
-#| msgctxt "no time zone difference"
-#| msgid "no time difference"
+#, kde-format
 msgctxt ""
 "no time difference between time zones, e.g. in Stockholm it's the same time "
 "as in Berlin"
