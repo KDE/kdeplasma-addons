@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-24 00:47+0000\n"
+"POT-Creation-Date: 2022-12-30 08:46+0000\n"
 "PO-Revision-Date: 2022-11-28 18:34+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -28,8 +28,9 @@ msgid "Night Color is unavailable"
 msgstr "A Cor Nocturna está indisponível"
 
 #: package/contents/ui/main.qml:41
-#, kde-format
-msgid "Night Color is disabled"
+#, fuzzy, kde-format
+#| msgid "Night Color is disabled"
+msgid "Night Color is disabled. Click to configure"
 msgstr "A Cor Nocturna está desactivada"
 
 #: package/contents/ui/main.qml:44

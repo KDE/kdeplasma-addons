@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-24 00:47+0000\n"
+"POT-Creation-Date: 2022-12-30 08:46+0000\n"
 "PO-Revision-Date: 2022-11-23 19:15+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -33,8 +33,9 @@ msgid "Night Color is unavailable"
 msgstr "Gece Rengi kullanılamıyor"
 
 #: package/contents/ui/main.qml:41
-#, kde-format
-msgid "Night Color is disabled"
+#, fuzzy, kde-format
+#| msgid "Night Color is disabled"
+msgid "Night Color is disabled. Click to configure"
 msgstr "Gece Rengi devre dışı"
 
 #: package/contents/ui/main.qml:44
