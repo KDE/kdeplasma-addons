@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.nightcolorcontrol\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 08:46+0000\n"
-"PO-Revision-Date: 2022-11-23 07:15+0200\n"
+"PO-Revision-Date: 2022-12-30 12:04+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -36,10 +36,9 @@ msgid "Night Color is unavailable"
 msgstr "Нічні кольори недоступні"
 
 #: package/contents/ui/main.qml:41
-#, fuzzy, kde-format
-#| msgid "Night Color is disabled"
+#, kde-format
 msgid "Night Color is disabled. Click to configure"
-msgstr "Нічні кольори вимкнено"
+msgstr "Нічні кольори вимкнено. Натисніть, щоб налаштувати"
 
 #: package/contents/ui/main.qml:44
 #, kde-format
