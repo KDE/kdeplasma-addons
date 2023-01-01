@@ -231,6 +231,11 @@ PlasmaCore.SvgItem {
                         contextMenu.popup();
                         mainTextArea.forceActiveFocus();
                     }
+                    if (event.button === Qt.LeftButton && contextMenu.visible === true) {
+                       event.accepted = true;
+                       contextMenu.dismiss();
+                       mainTextArea.forceActiveFocus();
+                    }
                 }
 
                 Component.onCompleted: {
