@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 08:46+0000\n"
-"PO-Revision-Date: 2022-11-24 09:52+0400\n"
+"PO-Revision-Date: 2022-12-31 18:14+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -34,10 +34,9 @@ msgid "Night Color is unavailable"
 msgstr "اللون الليلي غير متوفر"
 
 #: package/contents/ui/main.qml:41
-#, fuzzy, kde-format
-#| msgid "Night Color is disabled"
+#, kde-format
 msgid "Night Color is disabled. Click to configure"
-msgstr "اللون الليلي معطل"
+msgstr "اللون الليلي معطل. انقر لتضبطه"
 
 #: package/contents/ui/main.qml:44
 #, kde-format
