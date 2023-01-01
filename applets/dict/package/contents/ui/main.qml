@@ -13,7 +13,7 @@ import org.kde.plasma.plasmoid 2.0
 import QtWebEngine
 import QtQuick.Controls
 
-import org.kde.kirigami 2.19 as Kirigami
+import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.private.dict 1.0
 
@@ -58,9 +58,17 @@ PlasmoidItem {
                 }
             }
             PlasmaComponents3.Button {
+                id: configureButton
+
                 display: PlasmaComponents3.AbstractButton.IconOnly
+                hoverEnabled: true
                 icon.name: "configure"
                 text: Plasmoid.action("configure").text
+
+                PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents3.ToolTip.text: configureButton.text
+                PlasmaComponents3.ToolTip.visible: configureButton.hovered
+
                 onClicked: plasmoid.action("configure").trigger();
             }
         }
