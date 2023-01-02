@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 08:46+0000\n"
-"PO-Revision-Date: 2022-11-23 12:03+0100\n"
+"PO-Revision-Date: 2022-12-31 06:30+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -37,10 +37,9 @@ msgid "Night Color is unavailable"
 msgstr "El color de nit no està disponible"
 
 #: package/contents/ui/main.qml:41
-#, fuzzy, kde-format
-#| msgid "Night Color is disabled"
+#, kde-format
 msgid "Night Color is disabled. Click to configure"
-msgstr "El color de nit està desactivat"
+msgstr "El color de nit està desactivat. Feu clic per a configurar-lo"
 
 #: package/contents/ui/main.qml:44
 #, kde-format

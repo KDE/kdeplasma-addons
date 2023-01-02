@@ -49,7 +49,7 @@ msgstr "Aparença:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
-msgstr "Mostra els noms dels llançadors"
+msgstr "Mostra els noms dels iniciadors"
 
 #: package/contents/ui/ConfigGeneral.qml:51
 #, kde-format
@@ -108,7 +108,7 @@ msgstr "Quicklaunch"
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr ""
-"Afegiu els llançadors arrossegant i deixant anar o utilitzant el menú "
+"Afegiu els iniciadors arrossegant i deixant anar o utilitzant el menú "
 "contextual."
 
 #: package/contents/ui/main.qml:171

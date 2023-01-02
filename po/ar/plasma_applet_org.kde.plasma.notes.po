@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-23 00:48+0000\n"
+"POT-Creation-Date: 2023-01-02 01:05+0000\n"
 "PO-Revision-Date: 2022-01-22 22:12+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -90,140 +90,140 @@ msgstr "ملاحظة شفّافة لاصقة"
 msgid "A translucent sticky note with light text"
 msgstr "ملاحظة شفّافة لاصقة مع نص فاتح"
 
-#: package/contents/ui/main.qml:250
+#: package/contents/ui/main.qml:255
 #, kde-format
 msgid "Undo"
 msgstr "تراجع"
 
-#: package/contents/ui/main.qml:258
+#: package/contents/ui/main.qml:263
 #, kde-format
 msgid "Redo"
 msgstr "كرّر"
 
-#: package/contents/ui/main.qml:268
+#: package/contents/ui/main.qml:273
 #, kde-format
 msgid "Cut"
 msgstr "قصّ"
 
-#: package/contents/ui/main.qml:276
+#: package/contents/ui/main.qml:281
 #, kde-format
 msgid "Copy"
 msgstr "انسخ"
 
-#: package/contents/ui/main.qml:284
+#: package/contents/ui/main.qml:289
 #, kde-format
 msgid "Paste Without Formatting"
 msgstr "ألصِق دون تنسيق"
 
-#: package/contents/ui/main.qml:290
+#: package/contents/ui/main.qml:295
 #, kde-format
 msgid "Paste"
 msgstr "ألصق"
 
-#: package/contents/ui/main.qml:299
+#: package/contents/ui/main.qml:304
 #, kde-format
 msgid "Delete"
 msgstr "احذف"
 
-#: package/contents/ui/main.qml:306
+#: package/contents/ui/main.qml:311
 #, kde-format
 msgid "Clear"
 msgstr "امسح"
 
-#: package/contents/ui/main.qml:316
+#: package/contents/ui/main.qml:321
 #, kde-format
 msgid "Select All"
 msgstr "حدّد الكلّ"
 
-#: package/contents/ui/main.qml:444
+#: package/contents/ui/main.qml:449
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "ثخين"
 
-#: package/contents/ui/main.qml:456
+#: package/contents/ui/main.qml:461
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "مائل"
 
-#: package/contents/ui/main.qml:468
+#: package/contents/ui/main.qml:473
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "تسطير"
 
-#: package/contents/ui/main.qml:480
+#: package/contents/ui/main.qml:485
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "مشطوب"
 
-#: package/contents/ui/main.qml:554
+#: package/contents/ui/main.qml:559
 #, kde-format
 msgid "Discard this note?"
 msgstr "أأهمل هذه الملاحظة؟"
 
-#: package/contents/ui/main.qml:555
+#: package/contents/ui/main.qml:560
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "هل أنت متأكد أنك تريد إهمال هذه الملاحظة؟ "
 
-#: package/contents/ui/main.qml:568
+#: package/contents/ui/main.qml:573
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "الأبيض"
 
-#: package/contents/ui/main.qml:569
+#: package/contents/ui/main.qml:574
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "الأسود"
 
-#: package/contents/ui/main.qml:570
+#: package/contents/ui/main.qml:575
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "الأحمر"
 
-#: package/contents/ui/main.qml:571
+#: package/contents/ui/main.qml:576
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "البرتقالي"
 
-#: package/contents/ui/main.qml:572
+#: package/contents/ui/main.qml:577
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "الأصفر"
 
-#: package/contents/ui/main.qml:573
+#: package/contents/ui/main.qml:578
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "الأخضر"
 
-#: package/contents/ui/main.qml:574
+#: package/contents/ui/main.qml:579
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "الأزرق"
 
-#: package/contents/ui/main.qml:575
+#: package/contents/ui/main.qml:580
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "الوردي"
 
-#: package/contents/ui/main.qml:576
+#: package/contents/ui/main.qml:581
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "شفّاف"
 
-#: package/contents/ui/main.qml:577
+#: package/contents/ui/main.qml:582
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"

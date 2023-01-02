@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Alexander Yavorsky <kekcuha@gmail.com>, 2020, 2021.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2020, 2021, 2022.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 08:46+0000\n"
-"PO-Revision-Date: 2021-12-28 15:17+0300\n"
+"PO-Revision-Date: 2022-12-30 22:05+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 21.08.3\n"
 
 #: package/contents/ui/main.qml:32
 #, kde-format
@@ -34,10 +34,9 @@ msgid "Night Color is unavailable"
 msgstr "Ночная цветовая схема недоступна"
 
 #: package/contents/ui/main.qml:41
-#, fuzzy, kde-format
-#| msgid "Night Color is disabled"
+#, kde-format
 msgid "Night Color is disabled. Click to configure"
-msgstr "Ночная цветовая схема отключена"
+msgstr "Ночная цветовая схема отключена. Нажмите чтобы настроить."
 
 #: package/contents/ui/main.qml:44
 #, kde-format
@@ -50,7 +49,6 @@ msgid "Night Color is active (%1K)"
 msgstr "Ночная цветовая схема активна (%1 K)"
 
 #: package/contents/ui/main.qml:97
-#, fuzzy, kde-format
-#| msgid "Configure Night Color…"
+#, kde-format
 msgid "&Configure Night Color…"
-msgstr "Настроить ночную цветовую схему…"
+msgstr "&Настроить ночную цветовую схему…"
