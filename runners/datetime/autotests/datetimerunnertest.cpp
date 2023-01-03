@@ -11,6 +11,7 @@
 #include <math.h>
 
 #include <qtestcase.h>
+#include <qtimezone.h>
 
 class DateTimeRunnerTest : public AbstractRunnerTest
 {
@@ -30,7 +31,9 @@ void DateTimeRunnerTest::initTestCase()
 
 void DateTimeRunnerTest::testLocalTimeInfo()
 {
+    const QString zoneStr = QString::fromUtf8(QTimeZone::systemTimeZone().id());
     const QString timeStr = QLocale().toString(QDateTime::currentDateTime().time());
+    qDebug() << zoneStr << timeStr;
 
     launchQuery("time");
 
