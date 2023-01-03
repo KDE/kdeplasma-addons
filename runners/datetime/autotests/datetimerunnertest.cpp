@@ -8,7 +8,6 @@
 
 #include <QDateTime>
 #include <QTimeZone>
-#include <math.h>
 
 #include <qtestcase.h>
 
@@ -21,6 +20,8 @@ private Q_SLOTS:
     void testRemoteTimeInfo();
     void testFindTimezones_data();
     void testFindTimezones();
+    void testConversion_data();
+    void testConversion();
 };
 
 #ifndef Q_OS_WIN
@@ -93,6 +94,62 @@ void DateTimeRunnerTest::testFindTimezones_data()
     QTest::newRow("Should find time zones by offset name") << "UTC+02:00" << 1 << "UTC+02:00";
     QTest::newRow("Should find time zones by abbreviation, and show all time zones with that abbreviation") << "PST" << 2 << "(PST)";
     QTest::newRow("Should find time zones by country name, and show all time zones in that country") << "Brazil" << 2 << "Brazil - ";
+    QTest::newRow("Should find time zones with the 'in' keyword") << "in Harare" << 1 << "Harare";
+}
+
+void DateTimeRunnerTest::testConversion()
+{
+    QFETCH(QString, query);
+    QFETCH(QString, expectedSourceTimezone);
+    QFETCH(QString, expectedSourceTime);
+    QFETCH(QString, expectedTargetTimezone);
+    QFETCH(QString, expectedTargetTime);
+    QFETCH(QString, expectedTimeDiff);
+
+    launchQuery(query);
+    auto matches = manager->matches();
+    std::sort(matches.begin(), matches.end(), [](const Plasma::QueryMatch &a, const Plasma::QueryMatch &b) {
+        return a.relevance() > b.relevance();
+    });
+
+    QVERIFY(!matches.isEmpty());
+    QVERIFY(matches.first().text().contains(QString("%1: %2").arg(expectedTargetTimezone, expectedTargetTime)));
+    QVERIFY(matches.first().text().contains(QString("%1: %2").arg(expectedSourceTimezone, expectedSourceTime)));
+    QVERIFY(matches.first().text().contains(expectedTimeDiff));
+}
+
+void DateTimeRunnerTest::testConversion_data()
+{
+    const QTimeZone systemTimeZone = QTimeZone::systemTimeZone().isValid() ? QTimeZone::systemTimeZone() : QTimeZone::utc(); // needed for FreeBSD CI
+    const QString systemTimeZoneName = systemTimeZone.abbreviation(QDateTime::currentDateTime());
+
+    QTest::addColumn<QString>("query");
+    QTest::addColumn<QString>("expectedSourceTimezone");
+    QTest::addColumn<QString>("expectedSourceTime");
+    QTest::addColumn<QString>("expectedTargetTimezone");
+    QTest::addColumn<QString>("expectedTargetTime");
+    QTest::addColumn<QString>("expectedTimeDiff");
+
+    QTest::newRow("Should convert from first to second time zone") << "gmt-2 12:00 PM greenwich"
+                                                                   << "GMT-2"
+                                                                   << "12:00 PM"
+                                                                   << "Greenwich Mean Time"
+                                                                   << "2:00 PM"
+                                                                   << "2 hours later";
+    QTest::newRow("Should convert from first to second time zone with date") << "gmt-2 1/5/23 12:00 PM greenwich"
+                                                                             << "GMT-2"
+                                                                             << "12:00 PM"
+                                                                             << "Greenwich Mean Time"
+                                                                             << "2:00 PM"
+                                                                             << "2 hours later";
+    QTest::newRow("Should convert from system time zone to second time zone") << "12:00 PM gmt+2" << systemTimeZoneName << "12:00 PM"
+                                                                              << "GMT+2"
+                                                                              << "2:00 PM"
+                                                                              << "2 hours later";
+    QTest::newRow("Should convert from first time zone to system time zone") << "gmt+2 12:00 PM"
+                                                                             << "GMT+2"
+                                                                             << "12:00 PM" << systemTimeZoneName << "10:00 AM"
+                                                                             << "2 hours earlier";
 }
 
 QTEST_MAIN(DateTimeRunnerTest)

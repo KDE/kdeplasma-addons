@@ -277,10 +277,11 @@ QHash<QString, QTimeZone> DateTimeRunner::matchingTimeZones(const QStringView &z
     QHash<QString, QTimeZone> ret;
 
     if (zoneTerm.isEmpty()) {
+        const QTimeZone systemTimeZone = QTimeZone::systemTimeZone().isValid() ? QTimeZone::systemTimeZone() : QTimeZone::utc(); // needed for FreeBSD CI
         const QDate atDate = referenceDatetime.date().isValid() ? referenceDatetime.date() : QDateTime::currentDateTime().date();
         const QTime atTime = referenceDatetime.time().isValid() ? referenceDatetime.time() : QDateTime::currentDateTime().time();
-        const QDateTime atDatetime(atDate, atTime);
-        ret[QTimeZone::systemTimeZone().abbreviation(atDatetime)] = QTimeZone::systemTimeZone();
+        const QDateTime atDatetime(atDate, atTime, systemTimeZone);
+        ret[systemTimeZone.abbreviation(atDatetime)] = systemTimeZone;
         return ret;
     }
 
@@ -289,7 +290,7 @@ QHash<QString, QTimeZone> DateTimeRunner::matchingTimeZones(const QStringView &z
         QTimeZone timeZone(zoneId);
         const QDate atDate = referenceDatetime.date().isValid() ? referenceDatetime.date() : QDateTime::currentDateTime().toTimeZone(timeZone).date();
         const QTime atTime = referenceDatetime.time().isValid() ? referenceDatetime.time() : QDateTime::currentDateTime().toTimeZone(timeZone).time();
-        const QDateTime atDatetime(atDate, atTime);
+        const QDateTime atDatetime(atDate, atTime, timeZone);
 
         const QString zoneName = QString::fromUtf8(zoneId);
         if (zoneName.startsWith(QStringLiteral("UTC+")) || zoneName.startsWith(QStringLiteral("UTC-"))) {
