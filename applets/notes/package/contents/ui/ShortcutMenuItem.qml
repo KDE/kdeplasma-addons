@@ -21,6 +21,6 @@ MenuItem {
 
     action: Action {
         id: actionElement
-        shortcut: shortcutElement.nativeText
+        shortcut: shortcutElement.sequence
     }
 }
