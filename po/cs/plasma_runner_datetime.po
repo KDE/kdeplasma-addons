@@ -1,7 +1,7 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Vít Pelčák <vit@pelcak.org>, 2010, 2015.
-# Vit Pelcak <vpelcak@suse.cz>, 2022.
+# Vit Pelcak <vit@pelcak.org>, 2022.
 #
 msgid ""
 msgstr ""
@@ -47,18 +47,16 @@ msgid " <timezone>"
 msgstr " <časové pásmo>"
 
 #: datetimerunner.cpp:32
-#, fuzzy, kde-format
-#| msgid "Displays the current date in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current date and difference to system date in a given timezone"
-msgstr "Zobrazí aktuální datum v daném časovém pásmu"
+msgstr ""
 
 #: datetimerunner.cpp:34
-#, fuzzy, kde-format
-#| msgid "Displays the current time in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current time and difference to system time in a given timezone"
-msgstr "Zobrazí aktuální čas v daném časovém pásmu"
+msgstr ""
 
 #: datetimerunner.cpp:48
 #, kde-format

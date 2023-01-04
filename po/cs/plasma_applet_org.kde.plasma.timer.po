@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Lukáš Tinkl <lukas@kde.org>, 2012.
 # Vít Pelčák <vit@pelcak.org>, 2014, 2017.
-# Vit Pelcak <vpelcak@suse.cz>, 2015, 2018, 2019, 2021.
+# Vit Pelcak <vit@pelcak.org>, 2015, 2018, 2019, 2021.
 #
 msgid ""
 msgstr ""
@@ -96,12 +96,10 @@ msgid "Show seconds"
 msgstr "Zobrazit sekundy"
 
 #: package/contents/ui/configAppearance.qml:64
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "Zobrazit název:"
+msgstr ""
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format

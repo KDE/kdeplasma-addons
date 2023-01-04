@@ -33,10 +33,9 @@ msgid "Night Color is unavailable"
 msgstr "Noční barva je nedostupná"
 
 #: package/contents/ui/main.qml:41
-#, fuzzy, kde-format
-#| msgid "Night Color is disabled"
+#, kde-format
 msgid "Night Color is disabled. Click to configure"
-msgstr "Noční barva je zakázána"
+msgstr ""
 
 #: package/contents/ui/main.qml:44
 #, kde-format
@@ -49,7 +48,6 @@ msgid "Night Color is active (%1K)"
 msgstr "Noční barva je aktivní (%1K)"
 
 #: package/contents/ui/main.qml:97
-#, fuzzy, kde-format
-#| msgid "Configure Night Color…"
+#, kde-format
 msgid "&Configure Night Color…"
-msgstr "Nastavit noční barvu…"
+msgstr ""

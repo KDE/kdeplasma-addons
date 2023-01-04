@@ -1,7 +1,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Vít Pelčák <vit@pelcak.org>, 2010, 2014.
-# Vit Pelcak <vpelcak@suse.cz>, 2021.
+# Vit Pelcak <vit@pelcak.org>, 2021.
 #
 msgid ""
 msgstr ""
@@ -42,12 +42,3 @@ msgstr "Sezení Kate"
 #, kde-format
 msgid "Search…"
 msgstr "Hledat…"
-
-#~ msgid "Delete session"
-#~ msgstr "Smazat sezení"
-
-#~ msgid "Start Kate (no arguments)"
-#~ msgstr "Spustit Kate (bez argumentů)"
-
-#~ msgid "New Kate Session"
-#~ msgstr "Nové sezení Kate"

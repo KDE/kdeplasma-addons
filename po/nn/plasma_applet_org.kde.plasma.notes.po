@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-30 00:46+0000\n"
+"POT-Creation-Date: 2023-01-02 01:05+0000\n"
 "PO-Revision-Date: 2021-09-19 13:17+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -92,140 +92,140 @@ msgstr "Ein gjennomsiktig notatlapp"
 msgid "A translucent sticky note with light text"
 msgstr "Ein gjennomsiktig notatlapp med lys tekst"
 
-#: package/contents/ui/main.qml:246
+#: package/contents/ui/main.qml:255
 #, kde-format
 msgid "Undo"
 msgstr "Angra"
 
-#: package/contents/ui/main.qml:254
+#: package/contents/ui/main.qml:263
 #, kde-format
 msgid "Redo"
 msgstr "Gjer om"
 
-#: package/contents/ui/main.qml:264
+#: package/contents/ui/main.qml:273
 #, kde-format
 msgid "Cut"
 msgstr "Klipp ut"
 
-#: package/contents/ui/main.qml:272
+#: package/contents/ui/main.qml:281
 #, kde-format
 msgid "Copy"
 msgstr "Kopier"
 
-#: package/contents/ui/main.qml:280
+#: package/contents/ui/main.qml:289
 #, kde-format
 msgid "Paste Without Formatting"
 msgstr "Lim inn utan formatering"
 
-#: package/contents/ui/main.qml:286
+#: package/contents/ui/main.qml:295
 #, kde-format
 msgid "Paste"
 msgstr "Lim inn"
 
-#: package/contents/ui/main.qml:295
+#: package/contents/ui/main.qml:304
 #, kde-format
 msgid "Delete"
 msgstr "Slett"
 
-#: package/contents/ui/main.qml:302
+#: package/contents/ui/main.qml:311
 #, kde-format
 msgid "Clear"
 msgstr "Tøm"
 
-#: package/contents/ui/main.qml:312
+#: package/contents/ui/main.qml:321
 #, kde-format
 msgid "Select All"
 msgstr "Merk alt"
 
-#: package/contents/ui/main.qml:440
+#: package/contents/ui/main.qml:449
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Halvfeit"
 
-#: package/contents/ui/main.qml:452
+#: package/contents/ui/main.qml:461
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Kursiv"
 
-#: package/contents/ui/main.qml:464
+#: package/contents/ui/main.qml:473
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Understreking"
 
-#: package/contents/ui/main.qml:476
+#: package/contents/ui/main.qml:485
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Gjennomstreking"
 
-#: package/contents/ui/main.qml:550
+#: package/contents/ui/main.qml:559
 #, kde-format
 msgid "Discard this note?"
 msgstr "Vil du fjerna dette notatet?"
 
-#: package/contents/ui/main.qml:551
+#: package/contents/ui/main.qml:560
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Er du sikker på at du vil fjerna dette notatet?"
 
-#: package/contents/ui/main.qml:564
+#: package/contents/ui/main.qml:573
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Kvit"
 
-#: package/contents/ui/main.qml:565
+#: package/contents/ui/main.qml:574
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Svart"
 
-#: package/contents/ui/main.qml:566
+#: package/contents/ui/main.qml:575
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Raud"
 
-#: package/contents/ui/main.qml:567
+#: package/contents/ui/main.qml:576
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Oransje"
 
-#: package/contents/ui/main.qml:568
+#: package/contents/ui/main.qml:577
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Gul"
 
-#: package/contents/ui/main.qml:569
+#: package/contents/ui/main.qml:578
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Grøn"
 
-#: package/contents/ui/main.qml:570
+#: package/contents/ui/main.qml:579
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Blå"
 
-#: package/contents/ui/main.qml:571
+#: package/contents/ui/main.qml:580
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Rosa"
 
-#: package/contents/ui/main.qml:572
+#: package/contents/ui/main.qml:581
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "Gjennomsiktig"
 
-#: package/contents/ui/main.qml:573
+#: package/contents/ui/main.qml:582
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"

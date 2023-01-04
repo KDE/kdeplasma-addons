@@ -1,7 +1,7 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Vít Pelčák <vit@pelcak.org>, 2011, 2014, 2016, 2017, 2018, 2019, 2020.
-# Vit Pelcak <vpelcak@suse.cz>, 2021.
+# Vit Pelcak <vit@pelcak.org>, 2021.
 #
 msgid ""
 msgstr ""
@@ -151,28 +151,22 @@ msgid "Compact Mode"
 msgstr "Kompaktní režim"
 
 #: package/contents/ui/config/ConfigAppearance.qml:44
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Temperature:"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "Teplota:"
+msgstr ""
 
 #: package/contents/ui/config/ConfigAppearance.qml:47
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Zobrazit vedle widgetu ikon:"
+msgstr ""
 
 #: package/contents/ui/config/ConfigAppearance.qml:55
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "Zobrazit vedle widgetu ikon:"
+msgstr ""
 
 #: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
@@ -267,12 +261,10 @@ msgid "Provider:"
 msgstr ""
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Zadejte umístění"
+msgstr ""
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
@@ -402,13 +394,10 @@ msgid "Wind Gust:"
 msgstr "Poryv větru:"
 
 #: package/contents/ui/main.qml:239
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 den"
+msgstr ""
 
 #: package/contents/ui/main.qml:240
 #, kde-format
@@ -526,23 +515,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr " %1 (%2)"
-
-#~ msgctxt "@action:button"
-#~ msgid "Choose…"
-#~ msgstr "Vybrat…"
-
-#~ msgctxt "@title:window"
-#~ msgid "Select Weather Station"
-#~ msgstr "Vyberte meteostanici"
-
-#~ msgctxt "@action:button"
-#~ msgid "Select"
-#~ msgstr "Vybrat"
-
-#~ msgctxt "@action:button"
-#~ msgid "Cancel"
-#~ msgstr "Zrušit"
-
-#~ msgctxt "@option:check Show on widget icon: temperature"
-#~ msgid "Temperature"
-#~ msgstr "Teplota"

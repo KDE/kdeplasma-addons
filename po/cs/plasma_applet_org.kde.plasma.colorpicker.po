@@ -87,12 +87,10 @@ msgid "Clear History"
 msgstr "Vyprázdnit historii"
 
 #: package/contents/ui/main.qml:111
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "Vyprázdnit historii"
+msgstr ""
 
 #: package/contents/ui/main.qml:113
 #, kde-format
@@ -123,7 +121,3 @@ msgstr ""
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Smazat"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Color options"
-#~ msgstr "Možnosti barev"
