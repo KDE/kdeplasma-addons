@@ -21,6 +21,8 @@
 #include <QTextDocument>
 #include <QTextDocumentFragment>
 
+#include <KTextToHTML>
+
 DocumentHandler::DocumentHandler()
     : m_target(nullptr)
     , m_doc(nullptr)
@@ -78,8 +80,13 @@ void DocumentHandler::pasteWithoutFormatting()
         return;
     }
 
-    QString content = mimeData->text();
-    cursor.insertText(content, QTextCharFormat());
+    QString content = KTextToHTML::convertToHtml(mimeData->text(), KTextToHTML::Options(KTextToHTML::PreserveSpaces));
+
+    if (content.endsWith("</a>", Qt::CaseInsensitive)) {
+        content += " ";
+    }
+
+    cursor.insertHtml(content);
 }
 
 void DocumentHandler::setText(const QString &arg)

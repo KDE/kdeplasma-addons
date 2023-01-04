@@ -286,13 +286,13 @@ PlasmaCore.SvgItem {
                         _sequence: StandardKey.Paste
                         _enabled: mainTextArea.canPaste
                         _iconName: "edit-paste"
-                        _text: i18n("Paste Without Formatting")
+                        _text: i18n("Paste")
                         onTriggered: contextMenu.retFocus(() => documentHandler.pasteWithoutFormatting())
                     }
 
                     ShortcutMenuItem {
                         _enabled: mainTextArea.canPaste
-                        _text: i18n("Paste")
+                        _text: i18n("Paste with Full Formatting")
                         _iconName: "edit-paste"
                         onTriggered: contextMenu.retFocus(() => mainTextArea.paste())
                     }
