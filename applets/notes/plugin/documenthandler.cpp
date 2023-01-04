@@ -346,6 +346,11 @@ QStringList DocumentHandler::defaultFontSizes() const
     return sizes;
 }
 
+QString DocumentHandler::strip(const QString text)
+{
+    return QTextDocumentFragment::fromHtml(text).toPlainText();
+}
+
 QString DocumentHandler::stripAndSimplify(const QString text)
 {
     QString myText = text;

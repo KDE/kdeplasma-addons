@@ -298,6 +298,19 @@ PlasmaCore.SvgItem {
                     }
 
                     ShortcutMenuItem {
+                        _enabled: mainTextArea.selectedText.length > 0
+                        _text: i18nc("@action:inmenu", "Remove Formatting")
+                        _iconName: "edit-clear-all"
+                        onTriggered: {
+                            var richText = mainTextArea.getFormattedText(mainTextArea.selectionStart, mainTextArea.selectionEnd)
+                            var unformattedText = documentHandler.strip(richText)
+                            unformattedText = unformattedText.replace(/\n/g, "<br>")
+                            mainTextArea.remove(mainTextArea.selectionStart, mainTextArea.selectionEnd)
+                            contextMenu.retFocus(() => mainTextArea.insert(mainTextArea.selectionStart, unformattedText))
+                        }
+                    }
+
+                    ShortcutMenuItem {
                         _sequence: StandardKey.Delete
                         _enabled: mainTextArea.selectedText.length > 0
                         _iconName: "edit-delete"

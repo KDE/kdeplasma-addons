@@ -89,6 +89,7 @@ public:
 
     QString documentTitle() const;
 
+    Q_INVOKABLE QString strip(const QString text);
     Q_INVOKABLE QString stripAndSimplify(const QString text);
     Q_INVOKABLE QString strippedClipboardText();
 
