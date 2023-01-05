@@ -23,6 +23,15 @@ private Q_SLOTS:
     void testFindTimezones();
 };
 
+#ifndef Q_OS_WIN
+void initEnv()
+{
+    setenv("LC_ALL", "en_US.UTF-8", 1);
+    setenv("TZ", "GMT", 1);
+}
+Q_CONSTRUCTOR_FUNCTION(initEnv)
+#endif
+
 void DateTimeRunnerTest::initTestCase()
 {
     initProperties();
@@ -30,7 +39,8 @@ void DateTimeRunnerTest::initTestCase()
 
 void DateTimeRunnerTest::testLocalTimeInfo()
 {
-    const QString timeStr = QLocale().toString(QDateTime::currentDateTime().time());
+    const QTime localTime = QDateTime::currentDateTime().time();
+    const QString timeStr = QLocale().toString(localTime);
 
     launchQuery("time");
 
@@ -40,19 +50,19 @@ void DateTimeRunnerTest::testLocalTimeInfo()
 
 void DateTimeRunnerTest::testRemoteTimeInfo()
 {
-    const QString timeStr = QLocale().toString(QDateTime::currentDateTimeUtc().time(), QLocale::ShortFormat);
-    const int timeDiff = QTimeZone::systemTimeZone().offsetFromUtc(QDateTime::currentDateTime());
-    const QString timeDiffWord = timeDiff > 0 ? "earlier" : timeDiff < 0 ? "later" : "no time difference";
+    const QTime remoteTime = QDateTime::currentDateTime().toTimeZone(QTimeZone("UTC-02:00")).time();
+    const QString timeStr = QLocale().toString(remoteTime, QLocale::ShortFormat);
+    const QString timeDiffStr = QString("2 hours earlier");
 
-    launchQuery("time gmt");
+    launchQuery("time gmt-2");
     auto matches = manager->matches();
     std::sort(matches.begin(), matches.end(), [](const Plasma::QueryMatch &a, const Plasma::QueryMatch &b) {
         return a.relevance() > b.relevance();
     });
 
-    QVERIFY(!matches.isEmpty());
-    QVERIFY(matches.first().text().contains(timeStr));
-    QVERIFY(matches.first().text().contains(timeDiffWord));
+    QCOMPARE(manager->matches().count(), 1);
+    QVERIFY(manager->matches().first().text().contains(timeStr));
+    QVERIFY(manager->matches().first().text().contains(timeDiffStr));
 }
 
 void DateTimeRunnerTest::testFindTimezones()
