@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-02 01:05+0000\n"
+"POT-Creation-Date: 2023-01-05 00:49+0000\n"
 "PO-Revision-Date: 2009-06-03 20:40+0300\n"
 "Last-Translator: Viesturs Zariņš <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -115,131 +115,138 @@ msgstr ""
 
 #: package/contents/ui/main.qml:289
 #, kde-format
-msgid "Paste Without Formatting"
+msgid "Paste"
 msgstr ""
 
 #: package/contents/ui/main.qml:295
 #, kde-format
-msgid "Paste"
+msgid "Paste with Full Formatting"
 msgstr ""
 
-#: package/contents/ui/main.qml:304
+#: package/contents/ui/main.qml:302
+#, fuzzy, kde-format
+#| msgid "Formatting"
+msgctxt "@action:inmenu"
+msgid "Remove Formatting"
+msgstr "Formāts"
+
+#: package/contents/ui/main.qml:317
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: package/contents/ui/main.qml:311
+#: package/contents/ui/main.qml:324
 #, kde-format
 msgid "Clear"
 msgstr ""
 
-#: package/contents/ui/main.qml:321
+#: package/contents/ui/main.qml:334
 #, kde-format
 msgid "Select All"
 msgstr ""
 
-#: package/contents/ui/main.qml:449
+#: package/contents/ui/main.qml:462
 #, fuzzy, kde-format
 #| msgid "Bold"
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Trekns"
 
-#: package/contents/ui/main.qml:461
+#: package/contents/ui/main.qml:474
 #, fuzzy, kde-format
 #| msgid "Italic"
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Slīpraksts"
 
-#: package/contents/ui/main.qml:473
+#: package/contents/ui/main.qml:486
 #, fuzzy, kde-format
 #| msgid "Underline"
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Pasvītrots"
 
-#: package/contents/ui/main.qml:485
+#: package/contents/ui/main.qml:498
 #, fuzzy, kde-format
 #| msgid "StrikeOut"
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Pārsvīrtrots"
 
-#: package/contents/ui/main.qml:559
+#: package/contents/ui/main.qml:572
 #, kde-format
 msgid "Discard this note?"
 msgstr ""
 
-#: package/contents/ui/main.qml:560
+#: package/contents/ui/main.qml:573
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr ""
 
-#: package/contents/ui/main.qml:573
+#: package/contents/ui/main.qml:586
 #, fuzzy, kde-format
 #| msgid "White"
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Balts"
 
-#: package/contents/ui/main.qml:574
+#: package/contents/ui/main.qml:587
 #, fuzzy, kde-format
 #| msgid "Black"
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Melns"
 
-#: package/contents/ui/main.qml:575
+#: package/contents/ui/main.qml:588
 #, fuzzy, kde-format
 #| msgid "Red"
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Sarkans"
 
-#: package/contents/ui/main.qml:576
+#: package/contents/ui/main.qml:589
 #, fuzzy, kde-format
 #| msgid "Orange"
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Oranžs"
 
-#: package/contents/ui/main.qml:577
+#: package/contents/ui/main.qml:590
 #, fuzzy, kde-format
 #| msgid "Yellow"
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Dzeltens"
 
-#: package/contents/ui/main.qml:578
+#: package/contents/ui/main.qml:591
 #, fuzzy, kde-format
 #| msgid "Green"
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Zaļš"
 
-#: package/contents/ui/main.qml:579
+#: package/contents/ui/main.qml:592
 #, fuzzy, kde-format
 #| msgid "Blue"
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Zils"
 
-#: package/contents/ui/main.qml:580
+#: package/contents/ui/main.qml:593
 #, fuzzy, kde-format
 #| msgid "Pink"
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Rozā"
 
-#: package/contents/ui/main.qml:581
+#: package/contents/ui/main.qml:594
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr " Caurspīdīga"
 
-#: package/contents/ui/main.qml:582
+#: package/contents/ui/main.qml:595
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
@@ -309,9 +316,6 @@ msgstr " Caurspīdīga"
 
 #~ msgid "General"
 #~ msgstr "Pamata"
-
-#~ msgid "Formatting"
-#~ msgstr "Formāts"
 
 #~ msgid "Unable to open file"
 #~ msgstr "Neizdevās atvērt failu"

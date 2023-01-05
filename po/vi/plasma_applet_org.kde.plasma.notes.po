@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-02 01:05+0000\n"
+"POT-Creation-Date: 2023-01-05 00:49+0000\n"
 "PO-Revision-Date: 2022-05-12 12:12+0200\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -111,118 +111,126 @@ msgstr "Chép"
 
 #: package/contents/ui/main.qml:289
 #, kde-format
-msgid "Paste Without Formatting"
-msgstr "Dán không kèm định dạng"
-
-#: package/contents/ui/main.qml:295
-#, kde-format
 msgid "Paste"
 msgstr "Dán"
 
-#: package/contents/ui/main.qml:304
+#: package/contents/ui/main.qml:295
+#, fuzzy, kde-format
+#| msgid "Paste Without Formatting"
+msgid "Paste with Full Formatting"
+msgstr "Dán không kèm định dạng"
+
+#: package/contents/ui/main.qml:302
+#, fuzzy, kde-format
+#| msgid "Paste Without Formatting"
+msgctxt "@action:inmenu"
+msgid "Remove Formatting"
+msgstr "Dán không kèm định dạng"
+
+#: package/contents/ui/main.qml:317
 #, kde-format
 msgid "Delete"
 msgstr "Xoá"
 
-#: package/contents/ui/main.qml:311
+#: package/contents/ui/main.qml:324
 #, kde-format
 msgid "Clear"
 msgstr "Làm trống"
 
-#: package/contents/ui/main.qml:321
+#: package/contents/ui/main.qml:334
 #, kde-format
 msgid "Select All"
 msgstr "Chọn tất cả"
 
-#: package/contents/ui/main.qml:449
+#: package/contents/ui/main.qml:462
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Đậm"
 
-#: package/contents/ui/main.qml:461
+#: package/contents/ui/main.qml:474
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Nghiêng"
 
-#: package/contents/ui/main.qml:473
+#: package/contents/ui/main.qml:486
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Gạch chân"
 
-#: package/contents/ui/main.qml:485
+#: package/contents/ui/main.qml:498
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Gạch xuyên"
 
-#: package/contents/ui/main.qml:559
+#: package/contents/ui/main.qml:572
 #, kde-format
 msgid "Discard this note?"
 msgstr "Vứt giấy nhớ?"
 
-#: package/contents/ui/main.qml:560
+#: package/contents/ui/main.qml:573
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Bạn có chắc chắn muốn vứt mảnh giấy nhớ này?"
 
-#: package/contents/ui/main.qml:573
+#: package/contents/ui/main.qml:586
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Trắng"
 
-#: package/contents/ui/main.qml:574
+#: package/contents/ui/main.qml:587
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Đen"
 
-#: package/contents/ui/main.qml:575
+#: package/contents/ui/main.qml:588
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Đỏ"
 
-#: package/contents/ui/main.qml:576
+#: package/contents/ui/main.qml:589
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Cam"
 
-#: package/contents/ui/main.qml:577
+#: package/contents/ui/main.qml:590
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Vàng"
 
-#: package/contents/ui/main.qml:578
+#: package/contents/ui/main.qml:591
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Lục"
 
-#: package/contents/ui/main.qml:579
+#: package/contents/ui/main.qml:592
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Lam"
 
-#: package/contents/ui/main.qml:580
+#: package/contents/ui/main.qml:593
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Hồng"
 
-#: package/contents/ui/main.qml:581
+#: package/contents/ui/main.qml:594
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "Trong mờ"
 
-#: package/contents/ui/main.qml:582
+#: package/contents/ui/main.qml:595
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"
