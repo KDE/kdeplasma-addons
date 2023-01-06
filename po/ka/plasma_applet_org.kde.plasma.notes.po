@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2022-07-21 21:16+0200\n"
+"PO-Revision-Date: 2023-01-05 04:30+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -115,17 +115,15 @@ msgid "Paste"
 msgstr "ჩასმა"
 
 #: package/contents/ui/main.qml:295
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "ფორმატირების გარეშე ჩასმა"
+msgstr "სრული ფორმატირებით ჩასმა"
 
 #: package/contents/ui/main.qml:302
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "ფორმატირების გარეშე ჩასმა"
+msgstr "ფორმატირების მოცილება"
 
 #: package/contents/ui/main.qml:317
 #, kde-format

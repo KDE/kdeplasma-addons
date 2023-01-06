@@ -1,8 +1,8 @@
 # Translation of plasma_applet_org.kde.plasma.notes.po to Catalan
-# Copyright (C) 2008-2021 This_file_is_part_of_KDE
+# Copyright (C) 2008-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2015, 2018, 2021.
+# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2015, 2018, 2021, 2023.
 # Joan Maspons <joanmaspons@gmail.com>, 2009.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2019, 2021.
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2021-11-06 20:37+0100\n"
+"PO-Revision-Date: 2023-01-05 05:12+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -118,17 +118,15 @@ msgid "Paste"
 msgstr "Enganxa"
 
 #: package/contents/ui/main.qml:295
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "Enganxa sense format"
+msgstr "Enganxa amb el format complet"
 
 #: package/contents/ui/main.qml:302
-#, fuzzy, kde-format
-#| msgid "Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Format"
+msgstr "Elimina el format"
 
 #: package/contents/ui/main.qml:317
 #, kde-format
@@ -238,81 +236,3 @@ msgstr "Translúcid"
 msgctxt "@item:inmenu"
 msgid "Translucent Light"
 msgstr "Translúcid clar"
-
-#~ msgid "Toggle text format options"
-#~ msgstr "Commuta les opcions de format del text"
-
-#~ msgid "Notes Settings..."
-#~ msgstr "Configuració de les notes..."
-
-#~ msgid "Align left"
-#~ msgstr "Alineació a l'esquerra"
-
-#~ msgid "Align center"
-#~ msgstr "Alineació al centre"
-
-#~ msgid "Align right"
-#~ msgstr "Alineació a la dreta"
-
-#~ msgid "Justified"
-#~ msgstr "Justificat"
-
-#~ msgid "Font"
-#~ msgstr "Tipus de lletra"
-
-#~ msgid "Style:"
-#~ msgstr "Estil:"
-
-#~ msgid "&Bold"
-#~ msgstr "&Negreta"
-
-#~ msgid "&Italic"
-#~ msgstr "&Cursiva"
-
-#~ msgid "Size:"
-#~ msgstr "Mida:"
-
-#~ msgid "Scale font size by:"
-#~ msgstr "Escala la mida del tipus de lletra a:"
-
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgid "Color:"
-#~ msgstr "Color:"
-
-#~ msgid "Use theme color"
-#~ msgstr "Usa un tema de color"
-
-#~ msgid "Use custom color:"
-#~ msgstr "Usa un color personalitzat:"
-
-#~ msgid "Active line highlight color:"
-#~ msgstr "Color de ressaltat de la línia activa:"
-
-#~ msgid "Use no color"
-#~ msgstr "No usis cap color"
-
-#~ msgid "Theme"
-#~ msgstr "Tema"
-
-#~ msgid "Notes color:"
-#~ msgstr "Color de les notes:"
-
-#~ msgid "Spell Check"
-#~ msgstr "Verificació ortogràfica"
-
-#~ msgid "Enable spell check:"
-#~ msgstr "Habilita la verificació ortogràfica:"
-
-#~ msgid "Notes Color"
-#~ msgstr "Color de les notes"
-
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgid "Unable to open file"
-#~ msgstr "No s'ha pogut obrir el fitxer"
-
-#~ msgid "Text Color"
-#~ msgstr "Color del text"

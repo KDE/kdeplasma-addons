@@ -1,17 +1,16 @@
-# Translation of plasma_applet_org.kde.plasma.notes.po to Euskara/Basque (eu).
-# Copyright (C) 2017, Free Software Foundation.
-# Copyright (C) 2018-2019, This file is copyright:
+# Translation for plasma_applet_org.kde.plasma.notes.po to Euskara/Basque (eu).
+# Copyright (C) 2017-2023 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# KDE Euskaratzeko proiektuaren arduraduna <xalba@euskalnet.net>.
+# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@euskalnet.net>, 2017, 2018, 2019, 2021, 2022.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2017, 2018, 2019, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2022-11-13 08:20+0100\n"
+"PO-Revision-Date: 2023-01-05 21:36+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -19,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -118,17 +117,15 @@ msgid "Paste"
 msgstr "Itsatsi"
 
 #: package/contents/ui/main.qml:295
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "Itsatsi formaturik gabe"
+msgstr "Itsatsi formatu osoarekin"
 
 #: package/contents/ui/main.qml:302
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Itsatsi formaturik gabe"
+msgstr "Kendu formatua"
 
 #: package/contents/ui/main.qml:317
 #, kde-format

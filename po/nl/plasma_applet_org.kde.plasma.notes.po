@@ -7,20 +7,20 @@
 # Bram Schoenmakers <bramschoenmakers@kde.nl>, 2009.
 # Freek de Kruijf <f.de.kruijf@hetnet.nl>, 2009.
 # Freek de Kruijf <freek@opensuse.org>, 2009.
-# Freek de Kruijf <freekdekruijf@kde.nl>, 2011, 2015, 2018, 2019, 2021.
+# Freek de Kruijf <freekdekruijf@kde.nl>, 2011, 2015, 2018, 2019, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2021-04-10 15:00+0200\n"
+"PO-Revision-Date: 2023-01-05 22:26+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: package/contents/config/config.qml:13
@@ -120,17 +120,15 @@ msgid "Paste"
 msgstr "Plakken"
 
 #: package/contents/ui/main.qml:295
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "Plakken zonder opmaak"
+msgstr "Plakken met volledige opmaak"
 
 #: package/contents/ui/main.qml:302
-#, fuzzy, kde-format
-#| msgid "Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Opmaak"
+msgstr "Opmaak verwijderen"
 
 #: package/contents/ui/main.qml:317
 #, kde-format
