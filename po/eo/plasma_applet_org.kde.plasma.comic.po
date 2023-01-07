@@ -1,13 +1,16 @@
-# Translation of plasma_applet_comic into esperanto.
+# Translation of plasma_applet_org.kde.plasma.comic into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-27 00:48+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-01-07 01:00+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -83,15 +86,13 @@ msgid "# %1"
 msgstr "# %1"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Ĝeneralo"
 
 #: package/contents/config/config.qml:18
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Aspekto"
@@ -244,23 +245,3 @@ msgstr ""
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr ""
-
-#, fuzzy
-#~| msgid "Information"
-#~ msgctxt "@title:group"
-#~ msgid "Information"
-#~ msgstr "Informo"
-
-#, fuzzy
-#~| msgid "Appearance"
-#~ msgctxt "@title:group"
-#~ msgid "Appearance"
-#~ msgstr "Aspekto"
-
-#, fuzzy
-#~| msgid "Tabs"
-#~ msgid "Tabbar"
-#~ msgstr "Langetoj"
-
-#~ msgid "Tabs"
-#~ msgstr "Langetoj"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-02 01:05+0000\n"
+"POT-Creation-Date: 2023-01-05 00:49+0000\n"
 "PO-Revision-Date: 2021-09-19 13:17+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -114,118 +114,124 @@ msgstr "Kopier"
 
 #: package/contents/ui/main.qml:289
 #, kde-format
-msgid "Paste Without Formatting"
-msgstr "Lim inn utan formatering"
-
-#: package/contents/ui/main.qml:295
-#, kde-format
 msgid "Paste"
 msgstr "Lim inn"
 
-#: package/contents/ui/main.qml:304
+#: package/contents/ui/main.qml:295
+#, kde-format
+msgid "Paste with Full Formatting"
+msgstr ""
+
+#: package/contents/ui/main.qml:302
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Remove Formatting"
+msgstr ""
+
+#: package/contents/ui/main.qml:317
 #, kde-format
 msgid "Delete"
 msgstr "Slett"
 
-#: package/contents/ui/main.qml:311
+#: package/contents/ui/main.qml:324
 #, kde-format
 msgid "Clear"
 msgstr "Tøm"
 
-#: package/contents/ui/main.qml:321
+#: package/contents/ui/main.qml:334
 #, kde-format
 msgid "Select All"
 msgstr "Merk alt"
 
-#: package/contents/ui/main.qml:449
+#: package/contents/ui/main.qml:462
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Halvfeit"
 
-#: package/contents/ui/main.qml:461
+#: package/contents/ui/main.qml:474
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Kursiv"
 
-#: package/contents/ui/main.qml:473
+#: package/contents/ui/main.qml:486
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Understreking"
 
-#: package/contents/ui/main.qml:485
+#: package/contents/ui/main.qml:498
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Gjennomstreking"
 
-#: package/contents/ui/main.qml:559
+#: package/contents/ui/main.qml:572
 #, kde-format
 msgid "Discard this note?"
 msgstr "Vil du fjerna dette notatet?"
 
-#: package/contents/ui/main.qml:560
+#: package/contents/ui/main.qml:573
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Er du sikker på at du vil fjerna dette notatet?"
 
-#: package/contents/ui/main.qml:573
+#: package/contents/ui/main.qml:586
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Kvit"
 
-#: package/contents/ui/main.qml:574
+#: package/contents/ui/main.qml:587
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Svart"
 
-#: package/contents/ui/main.qml:575
+#: package/contents/ui/main.qml:588
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Raud"
 
-#: package/contents/ui/main.qml:576
+#: package/contents/ui/main.qml:589
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Oransje"
 
-#: package/contents/ui/main.qml:577
+#: package/contents/ui/main.qml:590
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Gul"
 
-#: package/contents/ui/main.qml:578
+#: package/contents/ui/main.qml:591
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Grøn"
 
-#: package/contents/ui/main.qml:579
+#: package/contents/ui/main.qml:592
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Blå"
 
-#: package/contents/ui/main.qml:580
+#: package/contents/ui/main.qml:593
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Rosa"
 
-#: package/contents/ui/main.qml:581
+#: package/contents/ui/main.qml:594
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "Gjennomsiktig"
 
-#: package/contents/ui/main.qml:582
+#: package/contents/ui/main.qml:595
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"

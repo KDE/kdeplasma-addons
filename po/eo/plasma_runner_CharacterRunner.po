@@ -1,13 +1,16 @@
 # Translation of plasma_runner_CharacterRunner into esperanto.
+# mesaĝoj por "kdeplasma-addons"
+# Copyright (C) 2010 Free Software Foundation, Inc.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2010.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_CharacterRunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-23 00:46+0000\n"
-"PO-Revision-Date: 2010-06-20 20:01+0200\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-06-01 10:00+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +23,7 @@ msgstr ""
 #, kde-format
 msgid ""
 "Creates Characters from :q: if it is a hexadecimal code or defined alias."
-msgstr ""
+msgstr "Kreas Signojn de :q: se estas deksesuma kodo aŭ difinita alinomo."
 
 #: charrunner_config.cpp:60
 #, kde-format
@@ -34,7 +37,7 @@ msgstr ""
 #: charrunner_config.ui:18
 #, kde-format
 msgid "Character Runner Config"
-msgstr ""
+msgstr "Signoruligila Agordo"
 
 #. i18n: ectx: property (text), widget (QLabel, label_trigger)
 #: charrunner_config.ui:26
@@ -56,25 +59,24 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QTreeWidget, list)
 #: charrunner_config.ui:89
-#, fuzzy, kde-format
-#| msgid "Alias:"
+#, kde-format
 msgid "Alias"
-msgstr "Aliaso:"
+msgstr "Alinomo"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, list)
 #: charrunner_config.ui:94
 #, kde-format
 msgid "Code"
-msgstr ""
+msgstr "Kodo"
 
 #. i18n: ectx: property (text), widget (QPushButton, addItem)
 #: charrunner_config.ui:104
 #, kde-format
 msgid "Add Item"
-msgstr ""
+msgstr "Aldoni Eron"
 
 #. i18n: ectx: property (text), widget (QPushButton, deleteItem)
 #: charrunner_config.ui:114
 #, kde-format
 msgid "Delete Item"
-msgstr "Forigu eron"
+msgstr "Forigi eron"

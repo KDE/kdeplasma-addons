@@ -1,12 +1,15 @@
-# Translation of plasma_applet_fifteenPuzzle into esperanto.
+# Translation of plasma_applet_org.kde.plasma.fifteenpuzzle to esperanto.
+# mesaĝoj por "kdeplasma-addons"
+# Copyright (C) 2009 Free Software Foundation, Inc.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-07 00:48+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
+"PO-Revision-Date: 2023-06-01 10:00+0100\n"
 "Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -17,8 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Aspekto"
@@ -27,12 +29,12 @@ msgstr "Aspekto"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
-msgstr ""
+msgstr "Krada grando:"
 
 #: package/contents/ui/configAppearance.qml:50
 #, kde-format
 msgid "Background:"
-msgstr ""
+msgstr "Fono:"
 
 #: package/contents/ui/configAppearance.qml:56
 #, kde-format
@@ -42,83 +44,65 @@ msgstr ""
 #: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "Image:"
-msgstr ""
+msgstr "Bildo:"
 
 #: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
-msgstr ""
+msgstr "Vojo al propra bildo…"
 
 #: package/contents/ui/configAppearance.qml:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
-msgstr ""
+msgstr "Elekti bildon…"
 
 #: package/contents/ui/configAppearance.qml:106
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
-msgstr ""
+msgstr "Elekti Bildon"
 
 #: package/contents/ui/configAppearance.qml:111
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
-msgstr ""
+msgstr "Bilddosieroj (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
 #: package/contents/ui/configAppearance.qml:125
 #, kde-format
 msgid "Tiles:"
-msgstr ""
+msgstr "Kaheloj:"
 
 #: package/contents/ui/configAppearance.qml:129
 #, kde-format
 msgid "Colored numbers:"
-msgstr ""
+msgstr "Koloritaj nombroj:"
 
 #: package/contents/ui/FifteenPuzzle.qml:258
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
-msgstr ""
+msgstr "Tempo: %1"
 
 #: package/contents/ui/FifteenPuzzle.qml:301
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
-msgstr ""
+msgstr "Miksi"
 
 #: package/contents/ui/FifteenPuzzle.qml:338
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
-msgstr ""
+msgstr "Solvata! Provu ankoraŭ."
 
 #: package/contents/ui/main.qml:25
 #, kde-format
 msgid "Fifteen Puzzle"
-msgstr ""
+msgstr "Dekkvinpuzelo"
 
 #: package/contents/ui/main.qml:26
 #, kde-format
 msgid "Solve by arranging in order"
-msgstr ""
-
-#, fuzzy
-#~| msgid "Size:"
-#~ msgctxt "@label:spinbox"
-#~ msgid "Size:"
-#~ msgstr "Grandeco:"
-
-#, fuzzy
-#~| msgid "Appearance"
-#~ msgctxt "@title:group"
-#~ msgid "Appearance"
-#~ msgstr "Aspekto"
-
-#~ msgid "General"
-#~ msgstr "Ĝeneralo"
-
-#~ msgid "Actions"
-#~ msgstr "Agoj"
+msgstr "Solvu per aranĝado en ordo"
