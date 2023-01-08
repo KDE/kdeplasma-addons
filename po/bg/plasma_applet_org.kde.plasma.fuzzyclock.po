@@ -8,873 +8,874 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-01 00:45+0000\n"
-"PO-Revision-Date: 2020-09-25 02:25+0200\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2022-11-17 16:05+0200\n"
+"Last-Translator: Светослав Стефанов <svetlisashkov@yahoo.com>\n"
 "Language-Team: none\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Poedit 3.1.1\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "Външен вид"
 
 #: package/contents/ui/configAppearance.qml:24
 #, kde-format
 msgctxt "@title:group"
 msgid "Font:"
-msgstr ""
+msgstr "Шрифт:"
 
 #: package/contents/ui/configAppearance.qml:25
 #, kde-format
 msgctxt "@option:check"
 msgid "Bold text"
-msgstr ""
+msgstr "Удебелен текст"
 
 #: package/contents/ui/configAppearance.qml:30
 #, kde-format
 msgctxt "@option:check"
 msgid "Italic text"
-msgstr ""
+msgstr "Текст в курсив"
 
 #: package/contents/ui/configAppearance.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Fuzzyness:"
-msgstr ""
+msgstr "Неяснота:"
 
 #: package/contents/ui/configAppearance.qml:49
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Accurate"
-msgstr ""
+msgstr "Точно"
 
 #: package/contents/ui/configAppearance.qml:57
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"
-msgstr ""
+msgstr "Приблизително"
 
 #: package/contents/ui/FuzzyClock.qml:34
 #, kde-format
 msgid "One o’clock"
-msgstr ""
+msgstr "Един часа"
 
 #: package/contents/ui/FuzzyClock.qml:35
 #, kde-format
 msgid "Five past one"
-msgstr ""
+msgstr "Един и пет"
 
 #: package/contents/ui/FuzzyClock.qml:36
 #, kde-format
 msgid "Ten past one"
-msgstr ""
+msgstr "Един и десет"
 
 #: package/contents/ui/FuzzyClock.qml:37
 #, kde-format
 msgid "Quarter past one"
-msgstr ""
+msgstr "Един и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:38
 #, kde-format
 msgid "Twenty past one"
-msgstr ""
+msgstr "Един и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:39
 #, kde-format
 msgid "Twenty-five past one"
-msgstr ""
+msgstr "Един и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:40
 #, kde-format
 msgid "Half past one"
-msgstr ""
+msgstr "Един и половина"
 
 #: package/contents/ui/FuzzyClock.qml:41
 #, kde-format
 msgid "Twenty-five to two"
-msgstr ""
+msgstr "Два без двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:42
 #, kde-format
 msgid "Twenty to two"
-msgstr ""
+msgstr "Два без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:43
 #, kde-format
 msgid "Quarter to two"
-msgstr ""
+msgstr "Два без петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:44
 #, kde-format
 msgid "Ten to two"
-msgstr ""
+msgstr "Два без десет"
 
 #: package/contents/ui/FuzzyClock.qml:45
 #, kde-format
 msgid "Five to two"
-msgstr ""
+msgstr "Два без пет"
 
 #: package/contents/ui/FuzzyClock.qml:46
 #, kde-format
 msgid "Two o’clock"
-msgstr ""
+msgstr "Два часа"
 
 #: package/contents/ui/FuzzyClock.qml:47
 #, kde-format
 msgid "Five past two"
-msgstr ""
+msgstr "Два и пет"
 
 #: package/contents/ui/FuzzyClock.qml:48
 #, kde-format
 msgid "Ten past two"
-msgstr ""
+msgstr "Два и десет"
 
 #: package/contents/ui/FuzzyClock.qml:49
 #, kde-format
 msgid "Quarter past two"
-msgstr ""
+msgstr "Два и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:50
 #, kde-format
 msgid "Twenty past two"
-msgstr ""
+msgstr "Два и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:51
 #, kde-format
 msgid "Twenty-five past two"
-msgstr ""
+msgstr "Два и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:52
 #, kde-format
 msgid "Half past two"
-msgstr ""
+msgstr "Два и половина"
 
 #: package/contents/ui/FuzzyClock.qml:53
 #, kde-format
 msgid "Twenty-five to three"
-msgstr ""
+msgstr "Три без двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:54
 #, kde-format
 msgid "Twenty to three"
-msgstr ""
+msgstr "Три без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:55
 #, kde-format
 msgid "Quarter to three"
-msgstr ""
+msgstr "Три без пенайсет"
 
 #: package/contents/ui/FuzzyClock.qml:56
 #, kde-format
 msgid "Ten to three"
-msgstr ""
+msgstr "Три без десет"
 
 #: package/contents/ui/FuzzyClock.qml:57
 #, kde-format
 msgid "Five to three"
-msgstr ""
+msgstr "Три без пет"
 
 #: package/contents/ui/FuzzyClock.qml:58
 #, kde-format
 msgid "Three o’clock"
-msgstr ""
+msgstr "Три часа"
 
 #: package/contents/ui/FuzzyClock.qml:59
 #, kde-format
 msgid "Five past three"
-msgstr ""
+msgstr "Три и пет"
 
 #: package/contents/ui/FuzzyClock.qml:60
 #, kde-format
 msgid "Ten past three"
-msgstr ""
+msgstr "Три и десет"
 
 #: package/contents/ui/FuzzyClock.qml:61
 #, kde-format
 msgid "Quarter past three"
-msgstr ""
+msgstr "Три и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:62
 #, kde-format
 msgid "Twenty past three"
-msgstr ""
+msgstr "Три и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:63
 #, kde-format
 msgid "Twenty-five past three"
-msgstr ""
+msgstr "Три и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:64
 #, kde-format
 msgid "Half past three"
-msgstr ""
+msgstr "Три и половина"
 
 #: package/contents/ui/FuzzyClock.qml:65
 #, kde-format
 msgid "Twenty-five to four"
-msgstr ""
+msgstr "Четири без двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:66
 #, kde-format
 msgid "Twenty to four"
-msgstr ""
+msgstr "Четири без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:67
 #, kde-format
 msgid "Quarter to four"
-msgstr ""
+msgstr "Четири без петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:68
 #, kde-format
 msgid "Ten to four"
-msgstr ""
+msgstr "Четири без десет"
 
 #: package/contents/ui/FuzzyClock.qml:69
 #, kde-format
 msgid "Five to four"
-msgstr ""
+msgstr "Четири без пет"
 
 #: package/contents/ui/FuzzyClock.qml:70
 #, kde-format
 msgid "Four o’clock"
-msgstr ""
+msgstr "Четири часа"
 
 #: package/contents/ui/FuzzyClock.qml:71
 #, kde-format
 msgid "Five past four"
-msgstr ""
+msgstr "Четири и пет"
 
 #: package/contents/ui/FuzzyClock.qml:72
 #, kde-format
 msgid "Ten past four"
-msgstr ""
+msgstr "Четири и десет"
 
 #: package/contents/ui/FuzzyClock.qml:73
 #, kde-format
 msgid "Quarter past four"
-msgstr ""
+msgstr "Четири и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:74
 #, kde-format
 msgid "Twenty past four"
-msgstr ""
+msgstr "Четири и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:75
 #, kde-format
 msgid "Twenty-five past four"
-msgstr ""
+msgstr "Четири и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:76
 #, kde-format
 msgid "Half past four"
-msgstr ""
+msgstr "Четири и половина"
 
 #: package/contents/ui/FuzzyClock.qml:77
 #, kde-format
 msgid "Twenty-five to five"
-msgstr ""
+msgstr "Пет без двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:78
 #, kde-format
 msgid "Twenty to five"
-msgstr ""
+msgstr "Пет без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:79
 #, kde-format
 msgid "Quarter to five"
-msgstr ""
+msgstr "Пет без петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:80
 #, kde-format
 msgid "Ten to five"
-msgstr ""
+msgstr "Пет без десет"
 
 #: package/contents/ui/FuzzyClock.qml:81
 #, kde-format
 msgid "Five to five"
-msgstr ""
+msgstr "Пет без пет"
 
 #: package/contents/ui/FuzzyClock.qml:82
 #, kde-format
 msgid "Five o’clock"
-msgstr ""
+msgstr "Пет часа"
 
 #: package/contents/ui/FuzzyClock.qml:83
 #, kde-format
 msgid "Five past five"
-msgstr ""
+msgstr "Пет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:84
 #, kde-format
 msgid "Ten past five"
-msgstr ""
+msgstr "Пет и десет"
 
 #: package/contents/ui/FuzzyClock.qml:85
 #, kde-format
 msgid "Quarter past five"
-msgstr ""
+msgstr "Пет и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:86
 #, kde-format
 msgid "Twenty past five"
-msgstr ""
+msgstr "Пет и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:87
 #, kde-format
 msgid "Twenty-five past five"
-msgstr ""
+msgstr "Пет и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:88
 #, kde-format
 msgid "Half past five"
-msgstr ""
+msgstr "Пет и половина"
 
 #: package/contents/ui/FuzzyClock.qml:89
 #, kde-format
 msgid "Twenty-five to six"
-msgstr ""
+msgstr "Шест без двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:90
 #, kde-format
 msgid "Twenty to six"
-msgstr ""
+msgstr "Шест без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:91
 #, kde-format
 msgid "Quarter to six"
-msgstr ""
+msgstr "Шест без петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:92
 #, kde-format
 msgid "Ten to six"
-msgstr ""
+msgstr "Шест без десет"
 
 #: package/contents/ui/FuzzyClock.qml:93
 #, kde-format
 msgid "Five to six"
-msgstr ""
+msgstr "Шест без пет"
 
 #: package/contents/ui/FuzzyClock.qml:94
 #, kde-format
 msgid "Six o’clock"
-msgstr ""
+msgstr "Шест часа"
 
 #: package/contents/ui/FuzzyClock.qml:95
 #, kde-format
 msgid "Five past six"
-msgstr ""
+msgstr "Шест и пет"
 
 #: package/contents/ui/FuzzyClock.qml:96
 #, kde-format
 msgid "Ten past six"
-msgstr ""
+msgstr "Шест и десет"
 
 #: package/contents/ui/FuzzyClock.qml:97
 #, kde-format
 msgid "Quarter past six"
-msgstr ""
+msgstr "Шест и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:98
 #, kde-format
 msgid "Twenty past six"
-msgstr ""
+msgstr "Шест и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:99
 #, kde-format
 msgid "Twenty-five past six"
-msgstr ""
+msgstr "Шест и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:100
 #, kde-format
 msgid "Half past six"
-msgstr ""
+msgstr "Шест и половина"
 
 #: package/contents/ui/FuzzyClock.qml:101
 #, kde-format
 msgid "Twenty-five to seven"
-msgstr ""
+msgstr "Седем без двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:102
 #, kde-format
 msgid "Twenty to seven"
-msgstr ""
+msgstr "Седем без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:103
 #, kde-format
 msgid "Quarter to seven"
-msgstr ""
+msgstr "Седем без петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:104
 #, kde-format
 msgid "Ten to seven"
-msgstr ""
+msgstr "Седем без десет"
 
 #: package/contents/ui/FuzzyClock.qml:105
 #, kde-format
 msgid "Five to seven"
-msgstr ""
+msgstr "Седем без пет"
 
 #: package/contents/ui/FuzzyClock.qml:106
 #, kde-format
 msgid "Seven o’clock"
-msgstr ""
+msgstr "Седем часа"
 
 #: package/contents/ui/FuzzyClock.qml:107
 #, kde-format
 msgid "Five past seven"
-msgstr ""
+msgstr "Седем и пет"
 
 #: package/contents/ui/FuzzyClock.qml:108
 #, kde-format
 msgid "Ten past seven"
-msgstr ""
+msgstr "Седем и десет"
 
 #: package/contents/ui/FuzzyClock.qml:109
 #, kde-format
 msgid "Quarter past seven"
-msgstr ""
+msgstr "Седем и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:110
 #, kde-format
 msgid "Twenty past seven"
-msgstr ""
+msgstr "Седем и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:111
 #, kde-format
 msgid "Twenty-five past seven"
-msgstr ""
+msgstr "Седем и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:112
 #, kde-format
 msgid "Half past seven"
-msgstr ""
+msgstr "Седем и половина"
 
 #: package/contents/ui/FuzzyClock.qml:113
 #, kde-format
 msgid "Twenty-five to eight"
-msgstr ""
+msgstr "Осем без  двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:114
 #, kde-format
 msgid "Twenty to eight"
-msgstr ""
+msgstr "Осем без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:115
 #, kde-format
 msgid "Quarter to eight"
-msgstr ""
+msgstr "Осем без петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:116
 #, kde-format
 msgid "Ten to eight"
-msgstr ""
+msgstr "Осем без десет"
 
 #: package/contents/ui/FuzzyClock.qml:117
 #, kde-format
 msgid "Five to eight"
-msgstr ""
+msgstr "Осем без пет"
 
 #: package/contents/ui/FuzzyClock.qml:118
 #, kde-format
 msgid "Eight o’clock"
-msgstr ""
+msgstr "Осем часа"
 
 #: package/contents/ui/FuzzyClock.qml:119
 #, kde-format
 msgid "Five past eight"
-msgstr ""
+msgstr "Осем и пет"
 
 #: package/contents/ui/FuzzyClock.qml:120
 #, kde-format
 msgid "Ten past eight"
-msgstr ""
+msgstr "Осем и десет"
 
 #: package/contents/ui/FuzzyClock.qml:121
 #, kde-format
 msgid "Quarter past eight"
-msgstr ""
+msgstr "Осем и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:122
 #, kde-format
 msgid "Twenty past eight"
-msgstr ""
+msgstr "Осем и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:123
 #, kde-format
 msgid "Twenty-five past eight"
-msgstr ""
+msgstr "Осем и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:124
 #, kde-format
 msgid "Half past eight"
-msgstr ""
+msgstr "Осем и половина"
 
 #: package/contents/ui/FuzzyClock.qml:125
 #, kde-format
 msgid "Twenty-five to nine"
-msgstr ""
+msgstr "Девет без двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:126
 #, kde-format
 msgid "Twenty to nine"
-msgstr ""
+msgstr "Девет без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:127
 #, kde-format
 msgid "Quarter to nine"
-msgstr ""
+msgstr "Девет без петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:128
 #, kde-format
 msgid "Ten to nine"
-msgstr ""
+msgstr "Девет без десет"
 
 #: package/contents/ui/FuzzyClock.qml:129
 #, kde-format
 msgid "Five to nine"
-msgstr ""
+msgstr "Девет без пет"
 
 #: package/contents/ui/FuzzyClock.qml:130
 #, kde-format
 msgid "Nine o’clock"
-msgstr ""
+msgstr "Девет часа"
 
 #: package/contents/ui/FuzzyClock.qml:131
 #, kde-format
 msgid "Five past nine"
-msgstr ""
+msgstr "Девет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:132
 #, kde-format
 msgid "Ten past nine"
-msgstr ""
+msgstr "Девет и десет"
 
 #: package/contents/ui/FuzzyClock.qml:133
 #, kde-format
 msgid "Quarter past nine"
-msgstr ""
+msgstr "Девет и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:134
 #, kde-format
 msgid "Twenty past nine"
-msgstr ""
+msgstr "Девет и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:135
 #, kde-format
 msgid "Twenty-five past nine"
-msgstr ""
+msgstr "Девет и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:136
 #, kde-format
 msgid "Half past nine"
-msgstr ""
+msgstr "Девет и половина"
 
 #: package/contents/ui/FuzzyClock.qml:137
 #, kde-format
 msgid "Twenty-five to ten"
-msgstr ""
+msgstr "Десет без двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:138
 #, kde-format
 msgid "Twenty to ten"
-msgstr ""
+msgstr "Десет без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:139
 #, kde-format
 msgid "Quarter to ten"
-msgstr ""
+msgstr "Десет без петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:140
 #, kde-format
 msgid "Ten to ten"
-msgstr ""
+msgstr "Десет без десет"
 
 #: package/contents/ui/FuzzyClock.qml:141
 #, kde-format
 msgid "Five to ten"
-msgstr ""
+msgstr "Десет без пет"
 
 #: package/contents/ui/FuzzyClock.qml:142
 #, kde-format
 msgid "Ten o’clock"
-msgstr ""
+msgstr "Десет часа"
 
 #: package/contents/ui/FuzzyClock.qml:143
 #, kde-format
 msgid "Five past ten"
-msgstr ""
+msgstr "Десет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:144
 #, kde-format
 msgid "Ten past ten"
-msgstr ""
+msgstr "Десет и десет"
 
 #: package/contents/ui/FuzzyClock.qml:145
 #, kde-format
 msgid "Quarter past ten"
-msgstr ""
+msgstr "Десет и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:146
 #, kde-format
 msgid "Twenty past ten"
-msgstr ""
+msgstr "Десет и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:147
 #, kde-format
 msgid "Twenty-five past ten"
-msgstr ""
+msgstr "Десет и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:148
 #, kde-format
 msgid "Half past ten"
-msgstr ""
+msgstr "Десет и половина"
 
 #: package/contents/ui/FuzzyClock.qml:149
 #, kde-format
 msgid "Twenty-five to eleven"
-msgstr ""
+msgstr "Единайсет без двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:150
 #, kde-format
 msgid "Twenty to eleven"
-msgstr ""
+msgstr "Единайсет без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:151
 #, kde-format
 msgid "Quarter to eleven"
-msgstr ""
+msgstr "Единайсет без петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:152
 #, kde-format
 msgid "Ten to eleven"
-msgstr ""
+msgstr "Единайсет без десет"
 
 #: package/contents/ui/FuzzyClock.qml:153
 #, kde-format
 msgid "Five to eleven"
-msgstr ""
+msgstr "Единайсет без пет"
 
 #: package/contents/ui/FuzzyClock.qml:154
 #, kde-format
 msgid "Eleven o’clock"
-msgstr ""
+msgstr "Единайсет часа"
 
 #: package/contents/ui/FuzzyClock.qml:155
 #, kde-format
 msgid "Five past eleven"
-msgstr ""
+msgstr "Единайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:156
 #, kde-format
 msgid "Ten past eleven"
-msgstr ""
+msgstr "Единайсет и десет"
 
 #: package/contents/ui/FuzzyClock.qml:157
 #, kde-format
 msgid "Quarter past eleven"
-msgstr ""
+msgstr "Единайсет и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:158
 #, kde-format
 msgid "Twenty past eleven"
-msgstr ""
+msgstr "Единайсет и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:159
 #, kde-format
 msgid "Twenty-five past eleven"
-msgstr ""
+msgstr "Единайсет и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:160
 #, kde-format
 msgid "Half past eleven"
-msgstr ""
+msgstr "Единайсет и половина"
 
 #: package/contents/ui/FuzzyClock.qml:161
 #, kde-format
 msgid "Twenty-five to twelve"
-msgstr ""
+msgstr "Дванайсет без двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:162
 #, kde-format
 msgid "Twenty to twelve"
-msgstr ""
+msgstr "Дванайсет без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:163
 #, kde-format
 msgid "Quarter to twelve"
-msgstr ""
+msgstr "Дванайсет без петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:164
 #, kde-format
 msgid "Ten to twelve"
-msgstr ""
+msgstr "Дванайсет без десет"
 
 #: package/contents/ui/FuzzyClock.qml:165
 #, kde-format
 msgid "Five to twelve"
-msgstr ""
+msgstr "Дванайсет без пет"
 
 #: package/contents/ui/FuzzyClock.qml:166
 #, kde-format
 msgid "Twelve o’clock"
-msgstr ""
+msgstr "Дванайсет часа"
 
 #: package/contents/ui/FuzzyClock.qml:167
 #, kde-format
 msgid "Five past twelve"
-msgstr ""
+msgstr "Дванайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:168
 #, kde-format
 msgid "Ten past twelve"
-msgstr ""
+msgstr "Дванайсет и десет"
 
 #: package/contents/ui/FuzzyClock.qml:169
 #, kde-format
 msgid "Quarter past twelve"
-msgstr ""
+msgstr "Дванайсет и петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:170
 #, kde-format
 msgid "Twenty past twelve"
-msgstr ""
+msgstr "Дванайсет и двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:171
 #, kde-format
 msgid "Twenty-five past twelve"
-msgstr ""
+msgstr "Дванайсет и двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:172
 #, kde-format
 msgid "Half past twelve"
-msgstr ""
+msgstr "Дванайсет и половина"
 
 #: package/contents/ui/FuzzyClock.qml:173
 #, kde-format
 msgid "Twenty-five to one"
-msgstr ""
+msgstr "Един без двайсет и пет"
 
 #: package/contents/ui/FuzzyClock.qml:174
 #, kde-format
 msgid "Twenty to one"
-msgstr ""
+msgstr "Един без двайсет"
 
 #: package/contents/ui/FuzzyClock.qml:175
 #, kde-format
 msgid "Quarter to one"
-msgstr ""
+msgstr "Един без петнайсет"
 
 #: package/contents/ui/FuzzyClock.qml:176
 #, kde-format
 msgid "Ten to one"
-msgstr ""
+msgstr "Един без десет"
 
 #: package/contents/ui/FuzzyClock.qml:177
 #, kde-format
 msgid "Five to one"
-msgstr ""
+msgstr "Един без пет"
 
 #: package/contents/ui/FuzzyClock.qml:181
 #, kde-format
 msgid "Sleep"
-msgstr ""
+msgstr "Сън"
 
 #: package/contents/ui/FuzzyClock.qml:181
 #, kde-format
 msgid "Breakfast"
-msgstr ""
+msgstr "Закуска"
 
 #: package/contents/ui/FuzzyClock.qml:181
 #, kde-format
 msgid "Second Breakfast"
-msgstr ""
+msgstr "Втора закуска"
 
 #: package/contents/ui/FuzzyClock.qml:181
 #, kde-format
 msgid "Elevenses"
-msgstr ""
+msgstr "Късна закуска"
 
 #: package/contents/ui/FuzzyClock.qml:182
 #, kde-format
 msgid "Lunch"
-msgstr ""
+msgstr "Обяд"
 
 #: package/contents/ui/FuzzyClock.qml:182
 #, kde-format
 msgid "Afternoon tea"
-msgstr ""
+msgstr "Следобеден чай"
 
 #: package/contents/ui/FuzzyClock.qml:182
 #, kde-format
 msgid "Dinner"
-msgstr ""
+msgstr "Вечеря"
 
 #: package/contents/ui/FuzzyClock.qml:182
 #, kde-format
 msgid "Supper"
-msgstr ""
+msgstr "Вечеря"
 
 #: package/contents/ui/FuzzyClock.qml:186
 #, kde-format
 msgid "Night"
-msgstr ""
+msgstr "Нощ"
 
 #: package/contents/ui/FuzzyClock.qml:186
 #, kde-format
 msgid "Early morning"
-msgstr ""
+msgstr "Ранно утро"
 
 #: package/contents/ui/FuzzyClock.qml:186
 #, kde-format
 msgid "Morning"
-msgstr ""
+msgstr "Утро"
 
 #: package/contents/ui/FuzzyClock.qml:186
 #, kde-format
 msgid "Almost noon"
-msgstr ""
+msgstr "Около обяд"
 
 #: package/contents/ui/FuzzyClock.qml:187
 #, kde-format
 msgid "Noon"
-msgstr ""
+msgstr "Обяд"
 
 #: package/contents/ui/FuzzyClock.qml:187
 #, kde-format
 msgid "Afternoon"
-msgstr ""
+msgstr "Следобед"
 
 #: package/contents/ui/FuzzyClock.qml:187
 #, kde-format
 msgid "Evening"
-msgstr ""
+msgstr "Вечер"
 
 #: package/contents/ui/FuzzyClock.qml:187
 #, kde-format
 msgid "Late evening"
-msgstr ""
+msgstr "Късна вечер"
 
 #: package/contents/ui/FuzzyClock.qml:191
 #, kde-format
 msgid "Start of week"
-msgstr ""
+msgstr "Началото на седмицата"
 
 #: package/contents/ui/FuzzyClock.qml:191
 #, kde-format
 msgid "Middle of week"
-msgstr ""
+msgstr "Средата на седмицата"
 
 #: package/contents/ui/FuzzyClock.qml:191
 #, kde-format
 msgid "End of week"
-msgstr ""
+msgstr "Краят на седмицата"
 
 #: package/contents/ui/FuzzyClock.qml:191
 #, kde-format
 msgid "Weekend!"
-msgstr ""
+msgstr "Почивни дни!"
