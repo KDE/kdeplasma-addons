@@ -1,8 +1,8 @@
 # Translation of plasma_applet_org.kde.plasma.notes.po to Catalan (Valencian)
-# Copyright (C) 2008-2021 This_file_is_part_of_KDE
+# Copyright (C) 2008-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2015, 2018, 2021.
+# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2015, 2018, 2021, 2023.
 # Joan Maspons <joanmaspons@gmail.com>, 2009.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2019, 2021.
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2021-11-06 20:37+0100\n"
+"PO-Revision-Date: 2023-01-05 05:12+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -118,17 +118,15 @@ msgid "Paste"
 msgstr "Apega"
 
 #: package/contents/ui/main.qml:295
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "Apega sense format"
+msgstr "Apega amb el format complet"
 
 #: package/contents/ui/main.qml:302
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Apega sense format"
+msgstr "Elimina el format"
 
 #: package/contents/ui/main.qml:317
 #, kde-format

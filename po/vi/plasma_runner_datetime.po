@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Phu Hung Nguyen <phu.nguyen@kdemail.net>, 2020, 2022.
+# Phu Hung Nguyen <phu.nguyen@kdemail.net>, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-28 00:50+0000\n"
-"PO-Revision-Date: 2022-11-14 14:46+0100\n"
+"PO-Revision-Date: 2023-01-08 18:36+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
 "Language: vi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: datetimerunner.cpp:21
 #, kde-format
@@ -46,18 +46,18 @@ msgid " <timezone>"
 msgstr " <múi giờ>"
 
 #: datetimerunner.cpp:32
-#, fuzzy, kde-format
-#| msgid "Displays the current date in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current date and difference to system date in a given timezone"
-msgstr "Hiển thị ngày hiện tại ở một múi giờ chỉ định"
+msgstr ""
+"Hiển thị ngày hiện tại và khác biệt với ngày hệ thống ở một múi giờ chỉ định"
 
 #: datetimerunner.cpp:34
-#, fuzzy, kde-format
-#| msgid "Displays the current time in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current time and difference to system time in a given timezone"
-msgstr "Hiển thị giờ hiện tại ở một múi giờ chỉ định"
+msgstr ""
+"Hiển thị giờ hiện tại và khác biệt với giờ hệ thống ở một múi giờ chỉ định"
 
 #: datetimerunner.cpp:48
 #, kde-format
@@ -65,34 +65,28 @@ msgid "Today's date is %1"
 msgstr "Ngày hôm nay là %1"
 
 #: datetimerunner.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "time zone difference"
-#| msgid "later"
+#, kde-format
 msgctxt ""
 "date difference between time zones, e.g. in Stockholm it's 1 calendar day "
 "later than in Brasilia"
 msgid "%1 later"
-msgstr "sau"
+msgstr "%1 sau"
 
 #: datetimerunner.cpp:67
-#, fuzzy, kde-format
-#| msgctxt "time zone difference"
-#| msgid "earlier"
+#, kde-format
 msgctxt ""
 "date difference between time zones, e.g. in Brasilia it's 1 calendar day "
 "earlier than in Stockholm"
 msgid "%1 earlier"
-msgstr "trước"
+msgstr "%1 trước"
 
 #: datetimerunner.cpp:69
-#, fuzzy, kde-format
-#| msgctxt "no time zone difference"
-#| msgid "no time difference"
+#, kde-format
 msgctxt ""
 "no date difference between time zones, e.g. in Stockholm it's the same "
 "calendar day as in Berlin"
 msgid "no date difference"
-msgstr "không khác biệt"
+msgstr "ngày không khác biệt"
 
 #: datetimerunner.cpp:81
 #, kde-format
@@ -100,31 +94,25 @@ msgid "Current time is %1"
 msgstr "Giờ hiện tại là %1"
 
 #: datetimerunner.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "time zone difference"
-#| msgid "later"
+#, kde-format
 msgctxt ""
 "time difference between time zones, e.g. in Stockholm it's 4 hours later "
 "than in Brasilia"
 msgid "%1 later"
-msgstr "sau"
+msgstr "%1 sau"
 
 #: datetimerunner.cpp:105
-#, fuzzy, kde-format
-#| msgctxt "time zone difference"
-#| msgid "earlier"
+#, kde-format
 msgctxt ""
 "time difference between time zones, e.g. in Brasilia it's 4 hours ealier "
 "than in Stockholm"
 msgid "%1 earlier"
-msgstr "trước"
+msgstr "%1 trước"
 
 #: datetimerunner.cpp:107
-#, fuzzy, kde-format
-#| msgctxt "no time zone difference"
-#| msgid "no time difference"
+#, kde-format
 msgctxt ""
 "no time difference between time zones, e.g. in Stockholm it's the same time "
 "as in Berlin"
 msgid "no time difference"
-msgstr "không khác biệt"
+msgstr "giờ không khác biệt"

@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Phu Hung Nguyen <phu.nguyen@kdemail.net>, 2020, 2021.
+# Phu Hung Nguyen <phu.nguyen@kdemail.net>, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 08:46+0000\n"
-"PO-Revision-Date: 2021-12-14 09:52+0100\n"
+"PO-Revision-Date: 2023-01-08 18:19+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
 "Language: vi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 20.12.2\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: package/contents/ui/main.qml:32
 #, kde-format
@@ -33,10 +33,9 @@ msgid "Night Color is unavailable"
 msgstr "Màu buổi tối hiện không có"
 
 #: package/contents/ui/main.qml:41
-#, fuzzy, kde-format
-#| msgid "Night Color is disabled"
+#, kde-format
 msgid "Night Color is disabled. Click to configure"
-msgstr "Màu buổi tối đang bị tắt"
+msgstr "Màu buổi tối đang bị tắt. Bấm để cấu hình"
 
 #: package/contents/ui/main.qml:44
 #, kde-format
@@ -49,7 +48,6 @@ msgid "Night Color is active (%1K)"
 msgstr "Màu buổi tối đang hoạt động (%1K)"
 
 #: package/contents/ui/main.qml:97
-#, fuzzy, kde-format
-#| msgid "Configure Night Color…"
+#, kde-format
 msgid "&Configure Night Color…"
-msgstr "Cấu hình \"Màu buổi tối\"…"
+msgstr "&Cấu hình \"Màu buổi tối\"…"

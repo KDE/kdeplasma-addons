@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Lê Hoàng Phương <herophuong93@gmail.com>, 2012.
-# Phu Hung Nguyen <phu.nguyen@kdemail.net>, 2020, 2021, 2022.
+# Phu Hung Nguyen <phu.nguyen@kdemail.net>, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-08-09 21:46+0200\n"
+"PO-Revision-Date: 2023-01-08 18:17+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
 "Language: vi\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -151,34 +151,28 @@ msgid "Compact Mode"
 msgstr "Chế độ gọn"
 
 #: package/contents/ui/config/ConfigAppearance.qml:44
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Temperature:"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "Nhiệt độ:"
+msgstr "Hiện nhiệt độ:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:47
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Hiện cạnh biểu tượng phụ kiện:"
+msgstr "Trên biểu tượng phụ kiện"
 
 #: package/contents/ui/config/ConfigAppearance.qml:55
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "Hiện cạnh biểu tượng phụ kiện:"
+msgstr "Cạnh biểu tượng phụ kiện"
 
 #: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Không hiện"
 
 #: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
@@ -256,21 +250,19 @@ msgstr "Địa điểm:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Chưa chọn gì"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Nhà cung cấp:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Nhập địa điểm"
+msgstr "Nhập địa điểm mới"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
@@ -288,13 +280,13 @@ msgstr "Không tìm thấy trạm thời tiết nào cho '%1'"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Tìm một trạm thời tiết để đổi địa điểm của bạn"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Tìm một trạm thời tiết để đặt địa điểm của bạn"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -398,19 +390,16 @@ msgid "Wind Gust:"
 msgstr "Gió giật:"
 
 #: package/contents/ui/main.qml:239
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "%1 ngày"
+msgstr "Ngày"
 
 #: package/contents/ui/main.qml:240
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Đêm"
 
 #: package/contents/ui/main.qml:278
 #, kde-format
