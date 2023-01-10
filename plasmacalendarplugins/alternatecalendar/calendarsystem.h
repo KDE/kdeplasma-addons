@@ -35,6 +35,7 @@ public:
 #endif
         Chinese = static_cast<int>(QCalendar::System::Last) + 1, // QTBUG-89824: QCalendar doesn't support Chinese calendar system
         Indian, // QCalendar doesn't support India calendar system
+        Hebrew,
     };
     Q_ENUM(System)
 };
@@ -71,6 +72,10 @@ static const std::map<QString /* id */, CalendarSystemItem> s_calendarMap{
     {
         QStringLiteral("Indian"),
         {CalendarSystem::Indian, QStringLiteral("Indian"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Indian National Calendar")}
+    },
+    {
+        QStringLiteral("Hebrew"),
+        {CalendarSystem::Hebrew, QStringLiteral("Hebrew"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Hebrew Calendar")}
     },
 };
 // clang-format on
