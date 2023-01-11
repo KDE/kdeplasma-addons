@@ -22,10 +22,17 @@ public:
 
     QCalendar::YearMonthDay fromGregorian(const QDate &_date);
     CalendarEvents::CalendarEventsPlugin::SubLabel subLabels(const QDate &date);
+
+private:
+    // See https://unicode-org.github.io/icu/userguide/locale/#keywords for available keywords
+    icu::Locale m_hebrewLocale;
+    icu::Locale m_nativeLocale;
 };
 
 HebrewCalendarProviderPrivate::HebrewCalendarProviderPrivate()
     : ICUCalendarPrivate()
+    , m_hebrewLocale(icu::Locale("he_IL", 0, 0, "calendar=hebrew;numbers=hebr"))
+    , m_nativeLocale(icu::Locale(QLocale::system().name().toLatin1(), 0, 0, "calendar=hebrew;numbers=hebr"))
 {
     if (U_FAILURE(m_errorCode)) {
         return; // Failed to create m_GregorianCalendar
@@ -36,11 +43,9 @@ HebrewCalendarProviderPrivate::HebrewCalendarProviderPrivate()
 
 QString HebrewCalendarProviderPrivate::formattedDateString(const icu::UnicodeString &str) const
 {
-    // See https://unicode-org.github.io/icu/userguide/locale/#keywords for available keywords
-    static const icu::Locale locale("he_IL", 0, 0, "calendar=hebrew;numbers=hebr");
     UErrorCode errorCode = U_ZERO_ERROR;
     icu::UnicodeString dateString;
-    icu::SimpleDateFormat formatter(str, locale, errorCode);
+    icu::SimpleDateFormat formatter(str, m_hebrewLocale, errorCode);
     formatter.setCalendar(*m_calendar);
     formatter.format(m_calendar->getTime(errorCode), dateString);
 
@@ -52,10 +57,9 @@ QString HebrewCalendarProviderPrivate::formattedDateString(const icu::UnicodeStr
 
 QString HebrewCalendarProviderPrivate::formattedDateStringInNativeLanguage(const icu::UnicodeString &str) const
 {
-    static const icu::Locale locale(QLocale::system().name().toLatin1(), 0, 0, "calendar=hebrew;numbers=hebr");
     UErrorCode errorCode = U_ZERO_ERROR;
     icu::UnicodeString dateString;
-    icu::SimpleDateFormat formatter(str, locale, errorCode);
+    icu::SimpleDateFormat formatter(str, m_nativeLocale, errorCode);
     formatter.setCalendar(*m_calendar);
     formatter.format(m_calendar->getTime(errorCode), dateString);
 
