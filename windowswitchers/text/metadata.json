@@ -48,6 +48,7 @@
         "Description[bg]": "Оформление на програмата за превключване на прозорци, показващо само заглавието на прозорците",
         "Description[ca@valencia]": "Una disposició del commutador de finestres que només mostra els títols de les finestres",
         "Description[ca]": "Una disposició del commutador de finestres que només mostra els títols de les finestres",
+        "Description[cs]": "Rozvržení přepínače oken zobrazující pouze titulek okna",
         "Description[de]": "Ein Fensterwechsler-Layout, das nur die Titel der Fenster anzeigt",
         "Description[en_GB]": "A window switcher layout only showing window captions",
         "Description[es]": "Un esquema de selección de ventanas que solo muestra los títulos de las ventanas",
