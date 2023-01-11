@@ -19,6 +19,7 @@
 #include "provider/chinesecalendar.h"
 #include "provider/hebrewcalendar.h"
 #include "provider/indiancalendar.h"
+#include "provider/islamiccalendar.h"
 #endif
 
 using SubLabel = CalendarEvents::CalendarEventsPlugin::SubLabel;
@@ -91,19 +92,19 @@ void AlternateCalendarPluginPrivate::init()
     case CalendarSystem::Hebrew:
         m_calendarProvider.reset(new HebrewCalendarProvider(q, m_calendarSystem));
         break;
+    case CalendarSystem::Jalali:
+    case CalendarSystem::Islamic:
+    case CalendarSystem::IslamicCivil:
+    case CalendarSystem::IslamicUmalqura:
+        m_calendarProvider.reset(new IslamicCalendarProvider(q, m_calendarSystem));
+        break;
 #endif
 #ifndef QT_BOOTSTRAPPED
     case CalendarSystem::Julian:
     case CalendarSystem::Milankovic:
-#endif
-#if QT_CONFIG(jalalicalendar)
-    case CalendarSystem::Jalali:
-#endif
-#if QT_CONFIG(islamiccivilcalendar)
-    case CalendarSystem::IslamicCivil:
-#endif
         m_calendarProvider.reset(new QtCalendarProvider(q, m_calendarSystem));
         break;
+#endif
     default:
         m_calendarProvider.reset(new AbstractCalendarProvider(q, m_calendarSystem));
     }

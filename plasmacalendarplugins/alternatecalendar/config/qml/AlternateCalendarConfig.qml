@@ -8,6 +8,7 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 
+import org.kde.kcm 1.6 as KCM
 import org.kde.kirigami 2.19 as Kirigami
 
 import org.kde.plasmacalendar.alternatecalendarconfig 1.0
@@ -33,19 +34,28 @@ Kirigami.FormLayout {
         id: configStorage
     }
 
-    QQC2.ComboBox {
-        id: calendarSystemComboBox
+    Row {
         Kirigami.FormData.label: i18ndc("plasma_calendar_alternatecalendar", "@label:listbox", "Calendar system:")
-        model: configStorage.calendarSystemModel
-        textRole: "display"
-        valueRole: "id"
-        currentIndex: configStorage.currentIndex
-        onActivated: configPage.configurationChanged();
+
+        QQC2.ComboBox {
+            id: calendarSystemComboBox
+            model: configStorage.calendarSystemModel
+            textRole: "display"
+            valueRole: "id"
+            currentIndex: configStorage.currentIndex
+            onActivated: configPage.configurationChanged();
+        }
+
+        KCM.ContextualHelpButton {
+            anchors.verticalCenter: calendarSystemComboBox.verticalCenter
+            visible: calendarSystemComboBox.currentValue === "Islamic"
+            toolTipText: i18ndc("plasma_calendar_alternatecalendar", "@info:tooltip", "This calendar is based on pure astronomical calculation. It doesn't consider any crescent visibility criteria.")
+        }
     }
 
     Loader {
         id: dateOffsetSpinBoxLoader
-        active: calendarSystemComboBox.currentValue === "IslamicCivil"
+        active: calendarSystemComboBox.currentValue.startsWith("Islamic")
         visible: active
         Kirigami.FormData.label: i18ndc("plasma_calendar_alternatecalendar", "@label:spinbox", "Date offset:")
 

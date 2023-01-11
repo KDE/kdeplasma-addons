@@ -22,6 +22,7 @@ if(${HAVE_ICU})
         provider/chinesecalendar.cpp
         provider/hebrewcalendar.cpp
         provider/indiancalendar.cpp
+        provider/islamiccalendar.cpp
     )
     set(alternatecalendar_LINK_LIBRARIES
         ${alternatecalendar_LINK_LIBRARIES}

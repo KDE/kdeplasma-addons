@@ -27,15 +27,13 @@ public:
         Julian = static_cast<int>(QCalendar::System::Julian),
         Milankovic = static_cast<int>(QCalendar::System::Milankovic),
 #endif
-#if QT_CONFIG(jalalicalendar)
-        Jalali = static_cast<int>(QCalendar::System::Jalali),
-#endif
-#if QT_CONFIG(islamiccivilcalendar)
-        IslamicCivil = static_cast<int>(QCalendar::System::IslamicCivil),
-#endif
         Chinese = static_cast<int>(QCalendar::System::Last) + 1, // QTBUG-89824: QCalendar doesn't support Chinese calendar system
         Indian, // QCalendar doesn't support India calendar system
         Hebrew,
+        Jalali, // Persian
+        Islamic, // Astronomical
+        IslamicCivil,
+        IslamicUmalqura,
     };
     Q_ENUM(System)
 };
@@ -62,8 +60,16 @@ static const std::map<QString /* id */, CalendarSystemItem> s_calendarMap{
         {CalendarSystem::Jalali, QStringLiteral("Jalali"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "The Solar Hijri Calendar (Persian)")}
     },
     {
+        QStringLiteral("Islamic"),
+        {CalendarSystem::Islamic, QStringLiteral("Islamic"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist See https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types for more details", "Islamic Calendar (Astronomical)")}
+    },
+    {
         QStringLiteral("IslamicCivil"),
-        {CalendarSystem::IslamicCivil, QStringLiteral("IslamicCivil"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "The Islamic Civil Calendar")}
+        {CalendarSystem::IslamicCivil, QStringLiteral("IslamicCivil"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist See https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types for more details", "The Islamic Civil Calendar (Tabular)")}
+    },
+    {
+        QStringLiteral("IslamicUmalqura"),
+        {CalendarSystem::IslamicUmalqura, QStringLiteral("IslamicUmalqura"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist See https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types for more details", "Islamic Calendar (Umm al-Qura)")}
     },
     {
         QStringLiteral("Chinese"),
