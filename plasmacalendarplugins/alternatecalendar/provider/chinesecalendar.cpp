@@ -24,10 +24,15 @@ private:
     QString yearDisplayName() const;
     QString monthDisplayName() const;
     QString dayDisplayName() const;
+
+    icu::Locale m_locale;
+    icu::Locale m_hanidaysLocale;
 };
 
 ChineseCalendarProviderPrivate::ChineseCalendarProviderPrivate()
     : ICUCalendarPrivate()
+    , m_locale(icu::Locale("zh", 0, 0, "calendar=chinese"))
+    , m_hanidaysLocale(icu::Locale("zh", 0, 0, "calendar=chinese;numbers=hanidays"))
 {
     if (U_FAILURE(m_errorCode)) {
         return; // Failed to create m_GregorianCalendar
@@ -56,10 +61,9 @@ CalendarEvents::CalendarEventsPlugin::SubLabel ChineseCalendarProviderPrivate::s
 
 QString ChineseCalendarProviderPrivate::formattedDateString(const icu::UnicodeString &str, bool hanidays) const
 {
-    const icu::Locale locale("zh", 0, 0, hanidays ? "calendar=chinese;numbers=hanidays" : "calendar=chinese");
     UErrorCode errorCode = U_ZERO_ERROR;
     icu::UnicodeString dateString;
-    icu::SimpleDateFormat formatter(str, locale, errorCode);
+    icu::SimpleDateFormat formatter(str, hanidays ? m_hanidaysLocale : m_locale, errorCode);
     formatter.setCalendar(*m_calendar);
     formatter.format(m_calendar->getTime(errorCode), dateString);
 
