@@ -6,25 +6,48 @@
 
 #include "indiancalendar.h"
 
-#include <array>
-
 class IndianCalendarProviderPrivate : public ICUCalendarPrivate
 {
 public:
     explicit IndianCalendarProviderPrivate();
 
+    /**
+     * For formatting, see the documentation of SimpleDateFormat:
+     * https://unicode-org.github.io/icu-docs/apidoc/released/icu4c/classicu_1_1SimpleDateFormat.html#details
+     */
+    QString formattedDateStringInNativeLanguage(const icu::UnicodeString &str) const;
+
     QCalendar::YearMonthDay fromGregorian(const QDate &_date);
     CalendarEvents::CalendarEventsPlugin::SubLabel subLabels(const QDate &date);
+
+private:
+    // Translated month names are available in https://github.com/unicode-org/icu/tree/main/icu4c/source/data/locales
+    icu::Locale m_nativeLocale;
 };
 
 IndianCalendarProviderPrivate::IndianCalendarProviderPrivate()
     : ICUCalendarPrivate()
+    , m_nativeLocale(icu::Locale(QLocale::system().name().toLatin1(), 0, 0, "calendar=indian;"))
 {
     if (U_FAILURE(m_errorCode)) {
         return; // Failed to create m_GregorianCalendar
     }
 
     m_calendar.reset(icu::Calendar::createInstance("en_US@calendar=indian", m_errorCode));
+}
+
+QString IndianCalendarProviderPrivate::formattedDateStringInNativeLanguage(const icu::UnicodeString &str) const
+{
+    UErrorCode errorCode = U_ZERO_ERROR;
+    icu::UnicodeString dateString;
+    icu::SimpleDateFormat formatter(str, m_nativeLocale, errorCode);
+    formatter.setCalendar(*m_calendar);
+    formatter.format(m_calendar->getTime(errorCode), dateString);
+
+    std::string utf8Str;
+    dateString.toUTF8String<std::string>(utf8Str);
+
+    return QString::fromStdString(utf8Str);
 }
 
 QCalendar::YearMonthDay IndianCalendarProviderPrivate::fromGregorian(const QDate &_date)
@@ -44,27 +67,12 @@ CalendarEvents::CalendarEventsPlugin::SubLabel IndianCalendarProviderPrivate::su
         return sublabel;
     }
 
-    static const std::array<QString, 12> monthNames{
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Chaitra"),
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Vaisākha"),
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Jyēshtha"),
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Āshādha"),
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Shrāvana"),
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Bhādra"),
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Āshwin"),
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Kārtika"),
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Mārgaśīrṣa"),
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Pausha"),
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Māgha"),
-        i18ndc("plasma_calendar_alternatecalendar", "Month name in Indian National Calendar", "Phālguna"),
-    };
-
     sublabel.dayLabel = QString::number(day());
     sublabel.label = i18ndc("plasma_calendar_alternatecalendar",
                             "@label %1 day %2 month name in India National Calendar %3 year",
                             "%1 %2, %3",
                             sublabel.dayLabel,
-                            monthNames[month() - 1],
+                            formattedDateStringInNativeLanguage("MMMM"),
                             QString::number(year()));
     sublabel.priority = CalendarEvents::CalendarEventsPlugin::SubLabelPriority::Low;
 
