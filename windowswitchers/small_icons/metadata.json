@@ -47,6 +47,7 @@
         "Description[bg]": "Оформление на програмата за превключване на прозорци с използване на малки икони за представяне на прозорците",
         "Description[ca@valencia]": "Una disposició del commutador de finestres que utilitza icones xicotetes per a representar la finestra",
         "Description[ca]": "Una disposició del commutador de finestres que usa icones petites per a representar la finestra",
+        "Description[cs]": "Rozvržení přepínače oken používající malé ikony",
         "Description[de]": "Ein Fensterwechsler-Layout, das kleine Symbole zur Darstellung der Fenster verwendet",
         "Description[en_GB]": "A window switcher layout using small icons to represent the window",
         "Description[es]": "Un esquema de selección de ventanas que usa iconos pequeños para representar las ventanas",
