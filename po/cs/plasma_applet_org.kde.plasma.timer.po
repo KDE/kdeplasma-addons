@@ -2,22 +2,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Lukáš Tinkl <lukas@kde.org>, 2012.
 # Vít Pelčák <vit@pelcak.org>, 2014, 2017.
-# Vit Pelcak <vit@pelcak.org>, 2015, 2018, 2019, 2021.
+# Vit Pelcak <vit@pelcak.org>, 2015, 2018, 2019, 2021, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2021-03-24 11:47+0100\n"
-"Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
+"PO-Revision-Date: 2023-01-06 11:06+0100\n"
+"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -41,13 +41,13 @@ msgstr "Pokročilé"
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
-msgstr ""
+msgstr "Pozastavit časovač"
 
 #: package/contents/ui/CompactRepresentation.qml:134
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
-msgstr ""
+msgstr "Spustit časovač"
 
 #: package/contents/ui/CompactRepresentation.qml:191
 #: package/contents/ui/CompactRepresentation.qml:208
@@ -55,9 +55,9 @@ msgstr ""
 msgctxt "remaining time"
 msgid "%1s"
 msgid_plural "%1s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "%1 s"
+msgstr[1] "%1 s"
+msgstr[2] "%1 s"
 
 #: package/contents/ui/configAdvanced.qml:22
 #, kde-format
@@ -87,7 +87,7 @@ msgstr "Zobrazit název:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "Zobrazit zbývající čas"
 
 #: package/contents/ui/configAppearance.qml:59
 #, kde-format
@@ -99,13 +99,13 @@ msgstr "Zobrazit sekundy"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr ""
+msgstr "Zobrazit přepínač času"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "Zobrazit ukazatel průběhu"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format

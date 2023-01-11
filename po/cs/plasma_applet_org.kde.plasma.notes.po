@@ -115,17 +115,15 @@ msgid "Paste"
 msgstr "Vložit"
 
 #: package/contents/ui/main.qml:295
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "Vložit bez formátování"
+msgstr ""
 
 #: package/contents/ui/main.qml:302
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Vložit bez formátování"
+msgstr ""
 
 #: package/contents/ui/main.qml:317
 #, kde-format

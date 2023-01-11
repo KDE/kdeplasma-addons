@@ -1,14 +1,14 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the PACKAGE package.
 # Lukáš Tinkl <ltinkl@redhat.com>, 2010.
-# Vít Pelčák <vit@pelcak.org>, 2011, 2015, 2017, 2018.
+# Vít Pelčák <vit@pelcak.org>, 2011, 2015, 2017, 2018, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2018-05-23 09:48+0100\n"
+"PO-Revision-Date: 2023-01-06 11:07+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -72,7 +72,7 @@ msgstr "Zobrazit historii"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Počet náhledů:"
 
 #: package/contents/ui/main.qml:109
 #, kde-format
@@ -90,7 +90,7 @@ msgstr "Vyprázdnit historii"
 #, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr ""
+msgstr "Zobrazit historii"
 
 #: package/contents/ui/main.qml:113
 #, kde-format
@@ -102,7 +102,7 @@ msgstr "Zkopírovat do schránky"
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr ""
+msgstr "Žádná barva"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
@@ -114,7 +114,7 @@ msgstr "Vyberte barvu"
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "Zkopírováno."
 
 #: package/contents/ui/main.qml:339
 #, kde-format

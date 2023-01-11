@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-20 00:47+0000\n"
+"POT-Creation-Date: 2023-01-11 00:59+0000\n"
 "PO-Revision-Date: 2022-12-20 21:00+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -19,41 +19,47 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.12.0\n"
 
-#: calendarsystem.h:53
+#: calendarsystem.h:54
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Julian"
 msgstr "Юлиански"
 
-#: calendarsystem.h:57
+#: calendarsystem.h:58
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Milankovic"
 msgstr "Миланкович"
 
-#: calendarsystem.h:61
+#: calendarsystem.h:62
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Solar Hijri Calendar (Persian)"
 msgstr "Слънчев Хиджра календар (Персийски)"
 
-#: calendarsystem.h:65
+#: calendarsystem.h:66
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Islamic Civil Calendar"
 msgstr "Ислямски граждански календар"
 
-#: calendarsystem.h:69
+#: calendarsystem.h:70
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Chinese Lunar Calendar"
 msgstr "Китайски лунен календар"
 
-#: calendarsystem.h:73
+#: calendarsystem.h:74
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Indian National Calendar"
 msgstr "Индийски национален календар"
+
+#: calendarsystem.h:78
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Hebrew Calendar"
+msgstr ""
 
 #: config/qml/AlternateCalendarConfig.qml:38
 #, kde-format
@@ -73,6 +79,16 @@ msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 ден"
 msgstr[1] "%1 дни"
+
+#: provider/hebrewcalendar.cpp:93
+#, fuzzy, kde-format
+#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
+#| msgid "%1 %2, %3"
+msgctxt ""
+"%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
+"number %4 Full date in Hebrew"
+msgid "%1 %2, %3 (%4)"
+msgstr "%1 %2, %3"
 
 #: provider/indiancalendar.cpp:48
 #, kde-format
