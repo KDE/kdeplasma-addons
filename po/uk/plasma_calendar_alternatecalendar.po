@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-11 00:59+0000\n"
-"PO-Revision-Date: 2022-12-20 11:16+0200\n"
-"Last-Translator: Fracture dept <yurchor@ukr.net>\n"
+"POT-Creation-Date: 2023-01-12 00:56+0000\n"
+"PO-Revision-Date: 2023-01-11 08:50+0200\n"
+"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -58,7 +58,7 @@ msgstr "Індійський національний календар"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
-msgstr ""
+msgstr "Єврейський календар"
 
 #: config/qml/AlternateCalendarConfig.qml:38
 #, kde-format
@@ -81,89 +81,15 @@ msgstr[1] "%1 дні"
 msgstr[2] "%1 днів"
 msgstr[3] "%1 день"
 
-#: provider/hebrewcalendar.cpp:93
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#: provider/hebrewcalendar.cpp:97
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
 "number %4 Full date in Hebrew"
 msgid "%1 %2, %3 (%4)"
-msgstr "%1 %2, %3"
+msgstr "%1 %2, %3 (%4)"
 
-#: provider/indiancalendar.cpp:48
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Chaitra"
-msgstr "Чайтра"
-
-#: provider/indiancalendar.cpp:49
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Vaisākha"
-msgstr "Вайсакха"
-
-#: provider/indiancalendar.cpp:50
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Jyēshtha"
-msgstr "Джештха"
-
-#: provider/indiancalendar.cpp:51
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Āshādha"
-msgstr "Асадха"
-
-#: provider/indiancalendar.cpp:52
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Shrāvana"
-msgstr "Сравана"
-
-#: provider/indiancalendar.cpp:53
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Bhādra"
-msgstr "Бхадра"
-
-#: provider/indiancalendar.cpp:54
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Āshwin"
-msgstr "Азвіна"
-
-#: provider/indiancalendar.cpp:55
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Kārtika"
-msgstr "Картіка"
-
-#: provider/indiancalendar.cpp:56
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Mārgaśīrṣa"
-msgstr "Маргаширша"
-
-#: provider/indiancalendar.cpp:57
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Pausha"
-msgstr "Пауша"
-
-#: provider/indiancalendar.cpp:58
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Māgha"
-msgstr "Магха"
-
-#: provider/indiancalendar.cpp:59
-#, kde-format
-msgctxt "Month name in Indian National Calendar"
-msgid "Phālguna"
-msgstr "Фалгуна"
-
-#: provider/indiancalendar.cpp:65
+#: provider/indiancalendar.cpp:73
 #, kde-format
 msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 msgid "%1 %2, %3"
@@ -174,3 +100,51 @@ msgstr "%1 %2, %3"
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
 msgstr "%1 %2, %3"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Chaitra"
+#~ msgstr "Чайтра"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Vaisākha"
+#~ msgstr "Вайсакха"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Jyēshtha"
+#~ msgstr "Джештха"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Āshādha"
+#~ msgstr "Асадха"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Shrāvana"
+#~ msgstr "Сравана"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Bhādra"
+#~ msgstr "Бхадра"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Āshwin"
+#~ msgstr "Азвіна"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Kārtika"
+#~ msgstr "Картіка"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Mārgaśīrṣa"
+#~ msgstr "Маргаширша"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Pausha"
+#~ msgstr "Пауша"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Māgha"
+#~ msgstr "Магха"
+
+#~ msgctxt "Month name in Indian National Calendar"
+#~ msgid "Phālguna"
+#~ msgstr "Фалгуна"
