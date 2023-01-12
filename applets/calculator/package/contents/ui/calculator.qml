@@ -168,6 +168,10 @@ QQC2.Control {
             result *= operand;
             break;
         case "/":
+            if (operand === 0) {
+                divisionByZero();
+                return;
+            }
             result /= operand;
             break;
         default:
@@ -278,6 +282,12 @@ QQC2.Control {
         while (display.contentWidth > display.width && decimalsToShow > 0) {
             display.text = number.toLocaleString(Qt.locale(), "g", decimalsToShow--);
         }
+    }
+
+    function divisionByZero() {
+        showingInput = false;
+        showingResult = true;
+        display.text = i18nc("Abbreviation for result (undefined) of division by zero, max. six to nine characters.", "undef");
     }
 
     Connections {
