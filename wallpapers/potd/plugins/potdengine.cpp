@@ -10,6 +10,7 @@
 
 #include <QDBusConnection>
 #include <QThreadPool>
+#include <QTimeZone>
 
 #include <KPluginFactory>
 
@@ -56,6 +57,52 @@ bool isNetworkConnected()
     }
 #endif
     return true;
+}
+
+int msecsToNextUpdate()
+{
+    const QDateTime currentDateTime = QDateTime::currentDateTime();
+    const QTimeZone currentTimeZone = currentDateTime.timeZone();
+#if QT_VERSION >= QT_VERSION_CHECK(6, 2, 0)
+    const QLocale::Country currentTimeZoneCountry = currentTimeZone.territory();
+#elif QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
+    const QLocale::Country currentTimeZoneCountry = currentTimeZone.country();
+#else
+    const QLocale::Country currentTimeZoneCountry = QLocale::AnyCountry;
+#endif
+    // BUG 463345: Bing PotD is updated at 12:00 a.m. Pacific Time in the United States
+    const int currentHour = currentDateTime.time().hour();
+    int maximumUpdateIntervalSecs = 24 * 60 * 60 + 60;
+    switch (currentTimeZoneCountry) {
+    // TODO Verify UTC-2.5 (Newfoundland) - UTC-5 (Ottawa) = 2.5h
+    case QLocale::Canada: {
+        if (currentDateTime.offsetFromUtc() > -5 * 60 * 60 && currentHour >= 0 && currentHour <= 2) {
+            maximumUpdateIntervalSecs = 60 * 60;
+            break;
+        }
+        [[fallthrough]];
+    }
+    // UTC-5 (ET) - UTC-8 (PT) = 3h
+    case QLocale::UnitedStates: {
+        if (currentDateTime.offsetFromUtc() > -8 * 60 * 60 && currentHour >= 0 && currentHour <= 2) {
+            maximumUpdateIntervalSecs = 60 * 60;
+            break;
+        }
+        [[fallthrough]];
+    }
+    // TODO Verify UTC+12 - UTC+3 (Moscow) = 9
+    case QLocale::Russia: {
+        if (currentDateTime.offsetFromUtc() > 3 * 60 * 60 && currentHour >= 0 && currentHour <= 8) {
+            maximumUpdateIntervalSecs = 60 * 60;
+            break;
+        }
+        [[fallthrough]];
+    }
+    default:
+        break;
+    }
+
+    return std::min<int>(currentDateTime.msecsTo(QDate::currentDate().addDays(1).startOfDay()) + 60000, maximumUpdateIntervalSecs * 1000);
 }
 }
 
@@ -231,8 +278,7 @@ PotdEngine::PotdEngine(QObject *parent)
 
     connect(&m_checkDatesTimer, &QTimer::timeout, this, &PotdEngine::forceUpdateSource);
 
-    int interval = QDateTime::currentDateTime().msecsTo(QDate::currentDate().addDays(1).startOfDay()) + 60000;
-    m_checkDatesTimer.setInterval(interval);
+    m_checkDatesTimer.setInterval(msecsToNextUpdate());
     m_checkDatesTimer.start();
     qCDebug(WALLPAPERPOTD) << "Time to next update (h):" << m_checkDatesTimer.interval() / 1000.0 / 60.0 / 60.0;
 
@@ -351,7 +397,7 @@ void PotdEngine::slotDone(PotdClient *client, bool success)
     if (!--m_updateCount) {
         // Do not update until next day, and delay 1minute to make sure last modified condition is satisfied.
         if (m_lastUpdateSuccess) {
-            m_checkDatesTimer.setInterval(QDateTime::currentDateTime().msecsTo(QDate::currentDate().startOfDay().addDays(1)) + 60000);
+            m_checkDatesTimer.setInterval(msecsToNextUpdate());
         } else {
             m_checkDatesTimer.setInterval(10min);
         }
