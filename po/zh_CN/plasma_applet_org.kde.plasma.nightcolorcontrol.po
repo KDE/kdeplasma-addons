@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 08:46+0000\n"
-"PO-Revision-Date: 2023-01-02 07:11\n"
+"PO-Revision-Date: 2023-01-12 10:30\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -36,7 +36,7 @@ msgstr "夜间颜色不可用"
 #: package/contents/ui/main.qml:41
 #, kde-format
 msgid "Night Color is disabled. Click to configure"
-msgstr ""
+msgstr "夜间颜色已禁用。点击进行配置"
 
 #: package/contents/ui/main.qml:44
 #, kde-format
@@ -51,4 +51,4 @@ msgstr "夜间颜色已激活 (%1K)"
 #: package/contents/ui/main.qml:97
 #, kde-format
 msgid "&Configure Night Color…"
-msgstr ""
+msgstr "配置夜间颜色(&C)…"

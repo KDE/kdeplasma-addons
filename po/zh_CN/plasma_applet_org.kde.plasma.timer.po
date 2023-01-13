@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2023-01-02 07:11\n"
+"PO-Revision-Date: 2023-01-12 10:30\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -84,7 +84,7 @@ msgstr "显示标题："
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "显示剩余时间"
 
 #: package/contents/ui/configAppearance.qml:59
 #, kde-format
@@ -96,13 +96,13 @@ msgstr "显示秒"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr ""
+msgstr "显示计时器开关"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "显示进度条"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format

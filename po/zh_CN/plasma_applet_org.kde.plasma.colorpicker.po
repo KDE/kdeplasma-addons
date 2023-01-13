@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2023-01-02 07:11\n"
+"PO-Revision-Date: 2023-01-12 10:30\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -36,7 +36,7 @@ msgctxt "@info:usagetip"
 msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
-msgstr ""
+msgstr "拖动颜色代码到此处保存<nl/>拖动图像文件到此处以获取平均颜色"
 
 #: package/contents/ui/configGeneral.qml:25
 #, kde-format
@@ -72,7 +72,7 @@ msgstr "显示历史"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "预览数量："
 
 #: package/contents/ui/main.qml:109
 #, kde-format
@@ -90,7 +90,7 @@ msgstr "清除历史"
 #, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr ""
+msgstr "查看历史"
 
 #: package/contents/ui/main.qml:113
 #, kde-format
@@ -120,4 +120,4 @@ msgstr "已复制！"
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr "移除"
+msgstr "删除"

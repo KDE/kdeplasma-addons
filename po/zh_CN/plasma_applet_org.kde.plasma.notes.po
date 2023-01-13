@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2023-01-02 07:11\n"
+"PO-Revision-Date: 2023-01-12 10:30\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -115,17 +115,15 @@ msgid "Paste"
 msgstr "粘贴"
 
 #: package/contents/ui/main.qml:295
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "无格式粘贴"
+msgstr "粘贴 (包含完整格式)"
 
 #: package/contents/ui/main.qml:302
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "无格式粘贴"
+msgstr "移除格式"
 
 #: package/contents/ui/main.qml:317
 #, kde-format

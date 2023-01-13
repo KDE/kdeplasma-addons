@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2022.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-12 00:56+0000\n"
-"PO-Revision-Date: 2022-12-21 08:11+0100\n"
+"PO-Revision-Date: 2023-01-12 08:29+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: calendarsystem.h:54
 #, kde-format
@@ -58,7 +58,7 @@ msgstr "Indijski nacionalni koledar"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
-msgstr ""
+msgstr "Hebrejski koledar"
 
 #: config/qml/AlternateCalendarConfig.qml:38
 #, kde-format
@@ -82,14 +82,12 @@ msgstr[2] "%1 dni"
 msgstr[3] "%1 dni"
 
 #: provider/hebrewcalendar.cpp:97
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
 "number %4 Full date in Hebrew"
 msgid "%1 %2, %3 (%4)"
-msgstr "%1 %2, %3"
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/indiancalendar.cpp:73
 #, kde-format

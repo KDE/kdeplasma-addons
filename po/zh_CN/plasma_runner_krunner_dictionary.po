@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-28 00:47+0000\n"
-"PO-Revision-Date: 2023-01-02 07:11\n"
+"PO-Revision-Date: 2023-01-12 10:30\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -39,7 +39,7 @@ msgstr "查找 :q: 的含义。"
 #: dictionaryrunner.cpp:120
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
-msgstr ""
+msgstr "“%1”的定义已复制到剪贴板"
 
 #: dictionaryrunner_config.cpp:22
 #, kde-format
