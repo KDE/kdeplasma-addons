@@ -43,5 +43,6 @@
         "Name[zh_CN]": "维基共享资源",
         "Name[zh_TW]": "Wikimedia Commons"
     },
-    "X-KDE-PlasmaPoTDProvider-Identifier": "wcpotd"
+    "X-KDE-PlasmaPoTDProvider-Identifier": "wcpotd",
+    "X-KDE-PlasmaPoTDProvider-NotSafeForWork": true
 }

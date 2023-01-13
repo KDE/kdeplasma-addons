@@ -21,6 +21,7 @@ class PotdProviderModel : public QAbstractListModel
 public:
     enum Roles {
         Id = Qt::UserRole + 1,
+        NotSafeForWork, /**< Whether the provider may contain NSFW images **/
     };
 
     explicit PotdProviderModel(QObject *parent = nullptr);
@@ -30,6 +31,7 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
     Q_INVOKABLE int indexOf(const QString &identifier);
+    Q_INVOKABLE bool isNSFW(int row);
 
     void loadPluginMetaData();
 

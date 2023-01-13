@@ -37,6 +37,9 @@ QVariant PotdProviderModel::data(const QModelIndex &index, int role) const
         return item.iconName();
     case Roles::Id:
         return item.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier"));
+    case Roles::NotSafeForWork: {
+        return item.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-NotSafeForWork"), false);
+    }
     default:
         return QVariant();
     }
@@ -48,6 +51,7 @@ QHash<int, QByteArray> PotdProviderModel::roleNames() const
         {Qt::DisplayRole, "display"},
         {Qt::DecorationRole, "decoration"},
         {Roles::Id, "id"},
+        {Roles::NotSafeForWork, "notSafeForWork"},
     };
 }
 
@@ -62,6 +66,11 @@ int PotdProviderModel::indexOf(const QString &identifier)
     }
 
     return std::distance(m_providers.cbegin(), it);
+}
+
+bool PotdProviderModel::isNSFW(int row)
+{
+    return index(row, 0).data(Roles::NotSafeForWork).toBool();
 }
 
 void PotdProviderModel::loadPluginMetaData()
