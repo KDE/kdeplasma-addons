@@ -116,8 +116,8 @@ QQC2.Control {
         } else {
             operand = operand * 10 + digit;
         }
-        displayNumber(operand);
         showingInput = true;
+        displayNumber(operand);
         ++inputSize;
     }
 
@@ -128,6 +128,7 @@ QQC2.Control {
 
         commaPressed = true;
         showingInput = true;
+        displayNumber(operand);
     }
 
     function doOperation() {
@@ -148,8 +149,8 @@ QQC2.Control {
             return;
         }
 
-        displayNumber(result);
         showingInput = false;
+        displayNumber(result);
     }
 
     function clearOperand() {
@@ -236,7 +237,16 @@ QQC2.Control {
     }
 
     function displayNumber(number) {
-        display.text = number.toLocaleString(Qt.locale(), "g", 14);
+        var text = number.toLocaleString(Qt.locale(), "g", 14);
+
+        // Show all decimals including zeroes and show decimalPoint
+        if (showingInput && commaPressed) {
+            text = number.toLocaleString(Qt.locale(), "f", decimals);
+            if (decimals === 0) {
+                text += Qt.locale().decimalPoint;
+            }
+        }
+        display.text = text;
 
         var decimalsToShow = 9;
         // Decrease precision until the text fits to the display.
