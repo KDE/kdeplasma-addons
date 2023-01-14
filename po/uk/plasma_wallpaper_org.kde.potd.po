@@ -33,9 +33,9 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
-"Цей надавач фонових зображень не фільтрує зображення, які можуть бути"
-" образливими або такими, що містять об'єктивацію. Будьте обережні із показом"
-" цих зображень на публіці."
+"Цей надавач фонових зображень не фільтрує зображення, які можуть бути "
+"образливими або такими, що містять об'єктивацію. Будьте обережні із показом "
+"цих зображень на публіці."
 
 #: package/contents/ui/config.qml:76
 #, kde-format
