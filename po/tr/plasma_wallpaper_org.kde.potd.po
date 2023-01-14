@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-19 00:47+0000\n"
+"POT-Creation-Date: 2023-01-14 00:57+0000\n"
 "PO-Revision-Date: 2022-08-10 20:58+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -23,253 +23,261 @@ msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Sağlayıcı"
 
-#: package/contents/ui/config.qml:66
+#: package/contents/ui/config.qml:67
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"This wallpaper provider does not filter out images that may be sensitive or "
+"objectionable. Use caution if these images will be displayed in public."
+msgstr ""
+
+#: package/contents/ui/config.qml:76
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Ölçülen ağ bağlantıları kullanırken güncelle"
 
-#: package/contents/ui/config.qml:76
+#: package/contents/ui/config.qml:86
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Category:"
 msgstr "Kategori"
 
-#: package/contents/ui/config.qml:80
+#: package/contents/ui/config.qml:90
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "All"
 msgstr "Tümü"
 
-#: package/contents/ui/config.qml:84
+#: package/contents/ui/config.qml:94
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "1080p"
 msgstr "1080p"
 
-#: package/contents/ui/config.qml:88
+#: package/contents/ui/config.qml:98
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "4K"
 msgstr "4K"
 
-#: package/contents/ui/config.qml:92
+#: package/contents/ui/config.qml:102
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Ultra Wide"
 msgstr "Çok Geniş"
 
-#: package/contents/ui/config.qml:96
+#: package/contents/ui/config.qml:106
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Background"
 msgstr "Arka Plan"
 
-#: package/contents/ui/config.qml:100
+#: package/contents/ui/config.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Lock Screen"
 msgstr "Kilit Ekranı"
 
-#: package/contents/ui/config.qml:104
+#: package/contents/ui/config.qml:114
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Nature"
 msgstr "Doğa"
 
-#: package/contents/ui/config.qml:108
+#: package/contents/ui/config.qml:118
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tumblr"
 msgstr "Tumblr"
 
-#: package/contents/ui/config.qml:112
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Black"
 msgstr "Siyah"
 
-#: package/contents/ui/config.qml:116
+#: package/contents/ui/config.qml:126
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flower"
 msgstr "Çiçek"
 
-#: package/contents/ui/config.qml:120
+#: package/contents/ui/config.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Funny"
 msgstr "Eğlenceli"
 
-#: package/contents/ui/config.qml:124
+#: package/contents/ui/config.qml:134
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Cute"
 msgstr "Şirin"
 
-#: package/contents/ui/config.qml:128
+#: package/contents/ui/config.qml:138
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Cool"
 msgstr "Serin"
 
-#: package/contents/ui/config.qml:132
+#: package/contents/ui/config.qml:142
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Fall"
 msgstr "Güz"
 
-#: package/contents/ui/config.qml:136
+#: package/contents/ui/config.qml:146
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Love"
 msgstr "Aşk"
 
-#: package/contents/ui/config.qml:140
+#: package/contents/ui/config.qml:150
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Design"
 msgstr "Tasarım"
 
-#: package/contents/ui/config.qml:144
+#: package/contents/ui/config.qml:154
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Christmas"
 msgstr "Noel"
 
-#: package/contents/ui/config.qml:148
+#: package/contents/ui/config.qml:158
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Travel"
 msgstr "Yolculuk"
 
-#: package/contents/ui/config.qml:152
+#: package/contents/ui/config.qml:162
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Beach"
 msgstr "Kumsal"
 
-#: package/contents/ui/config.qml:156
+#: package/contents/ui/config.qml:166
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Car"
 msgstr "Araba"
 
-#: package/contents/ui/config.qml:160
+#: package/contents/ui/config.qml:170
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Sports"
 msgstr "Spor"
 
-#: package/contents/ui/config.qml:164
+#: package/contents/ui/config.qml:174
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Animal"
 msgstr "Hayvan"
 
-#: package/contents/ui/config.qml:168
+#: package/contents/ui/config.qml:178
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "People"
 msgstr "Kişi"
 
-#: package/contents/ui/config.qml:172
+#: package/contents/ui/config.qml:182
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Music"
 msgstr "Müzik"
 
-#: package/contents/ui/config.qml:176
+#: package/contents/ui/config.qml:186
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Summer"
 msgstr "Yaz"
 
-#: package/contents/ui/config.qml:180
+#: package/contents/ui/config.qml:190
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Galaxy"
 msgstr "Galaksi"
 
-#: package/contents/ui/config.qml:184
+#: package/contents/ui/config.qml:194
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tabliss"
 msgstr "Tabliss"
 
-#: package/contents/ui/config.qml:214
+#: package/contents/ui/config.qml:224
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Konumlandırma:"
 
-#: package/contents/ui/config.qml:217
+#: package/contents/ui/config.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Ölçeklendirilmiş ve Kırpılmış"
 
-#: package/contents/ui/config.qml:221
+#: package/contents/ui/config.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Ölçeklendirilmiş"
 
-#: package/contents/ui/config.qml:225
+#: package/contents/ui/config.qml:235
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Ölçeklendirilmiş, Oranları Koru"
 
-#: package/contents/ui/config.qml:229
+#: package/contents/ui/config.qml:239
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Merkezde"
 
-#: package/contents/ui/config.qml:233
+#: package/contents/ui/config.qml:243
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Döşeli"
 
-#: package/contents/ui/config.qml:254
+#: package/contents/ui/config.qml:264
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Arka plan rengi:"
 
-#: package/contents/ui/config.qml:255
+#: package/contents/ui/config.qml:265
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Arka Plan Rengi Seç"
 
-#: package/contents/ui/config.qml:266
+#: package/contents/ui/config.qml:276
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Günün resmi:"
 
-#: package/contents/ui/config.qml:282
+#: package/contents/ui/config.qml:292
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Başlık:"
 
-#: package/contents/ui/config.qml:297
+#: package/contents/ui/config.qml:307
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Yazar:"
 
-#: package/contents/ui/config.qml:317
+#: package/contents/ui/config.qml:327
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "İçeren Klasörü Aç"
 
-#: package/contents/ui/config.qml:321
+#: package/contents/ui/config.qml:331
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
