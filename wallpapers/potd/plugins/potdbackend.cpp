@@ -216,9 +216,9 @@ void PotdBackend::saveImage()
     m_savedUrl = QUrl::fromLocalFile( //
         QFileDialog::getSaveFileName( //
             nullptr, //
-            i18nc("@title:window", "Save Today's Picture"), //
+            i18ndc("plasma_wallpaper_org.kde.potd", "@title:window", "Save Today's Picture"), //
             path + "/" + sanitizeFileName(defaultFileName) + ".jpg", //
-            i18nc("@label:listbox Template for file dialog", "JPEG image (*.jpeg *.jpg *.jpe)"), //
+            i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox Template for file dialog", "JPEG image (*.jpeg *.jpg *.jpe)"), //
             nullptr, //
             QFileDialog::DontConfirmOverwrite // KIO::CopyJob will show the confirmation dialog.
             ) //
@@ -235,15 +235,16 @@ void PotdBackend::saveImage()
         if (job->error()) {
             m_saveStatusMessage = job->errorText();
             if (m_saveStatusMessage.isEmpty()) {
-                m_saveStatusMessage = i18nc("@info:status after a save action", "The image was not saved.");
+                m_saveStatusMessage = i18ndc("plasma_wallpaper_org.kde.potd", "@info:status after a save action", "The image was not saved.");
             }
             m_saveStatus = FileOperationStatus::Failed;
             Q_EMIT saveStatusChanged();
         } else {
-            m_saveStatusMessage = i18nc("@info:status after a save action %1 file path %2 basename",
-                                        "The image was saved as <a href=\"%1\">%2</a>",
-                                        m_savedUrl.toString(),
-                                        m_savedUrl.fileName());
+            m_saveStatusMessage = i18ndc("plasma_wallpaper_org.kde.potd",
+                                         "@info:status after a save action %1 file path %2 basename",
+                                         "The image was saved as <a href=\"%1\">%2</a>",
+                                         m_savedUrl.toString(),
+                                         m_savedUrl.fileName());
             m_saveStatus = FileOperationStatus::Successful;
             Q_EMIT saveStatusChanged();
         }
