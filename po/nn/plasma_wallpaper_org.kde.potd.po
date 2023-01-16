@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-19 00:47+0000\n"
+"POT-Creation-Date: 2023-01-14 00:57+0000\n"
 "PO-Revision-Date: 2022-08-20 11:05+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -26,253 +26,261 @@ msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Leverandør:"
 
-#: package/contents/ui/config.qml:66
+#: package/contents/ui/config.qml:67
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"This wallpaper provider does not filter out images that may be sensitive or "
+"objectionable. Use caution if these images will be displayed in public."
+msgstr ""
+
+#: package/contents/ui/config.qml:76
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Oppdater òg ved bruk på forbruksmålt nettverkstillkopling"
 
-#: package/contents/ui/config.qml:76
+#: package/contents/ui/config.qml:86
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Category:"
 msgstr "Kategori:"
 
-#: package/contents/ui/config.qml:80
+#: package/contents/ui/config.qml:90
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "All"
 msgstr "Alle"
 
-#: package/contents/ui/config.qml:84
+#: package/contents/ui/config.qml:94
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "1080p"
 msgstr "1080p"
 
-#: package/contents/ui/config.qml:88
+#: package/contents/ui/config.qml:98
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "4K"
 msgstr "4K"
 
-#: package/contents/ui/config.qml:92
+#: package/contents/ui/config.qml:102
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Ultra Wide"
 msgstr "Ultrabrei"
 
-#: package/contents/ui/config.qml:96
+#: package/contents/ui/config.qml:106
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Background"
 msgstr "Bakgrunnar"
 
-#: package/contents/ui/config.qml:100
+#: package/contents/ui/config.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Lock Screen"
 msgstr "Låseskjermar"
 
-#: package/contents/ui/config.qml:104
+#: package/contents/ui/config.qml:114
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Nature"
 msgstr "Natur"
 
-#: package/contents/ui/config.qml:108
+#: package/contents/ui/config.qml:118
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tumblr"
 msgstr "Tumblr"
 
-#: package/contents/ui/config.qml:112
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Black"
 msgstr "Svart"
 
-#: package/contents/ui/config.qml:116
+#: package/contents/ui/config.qml:126
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Flower"
 msgstr "Blomar"
 
-#: package/contents/ui/config.qml:120
+#: package/contents/ui/config.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Funny"
 msgstr "Humor"
 
-#: package/contents/ui/config.qml:124
+#: package/contents/ui/config.qml:134
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Cute"
 msgstr "Søtt"
 
-#: package/contents/ui/config.qml:128
+#: package/contents/ui/config.qml:138
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Cool"
 msgstr "Kult"
 
-#: package/contents/ui/config.qml:132
+#: package/contents/ui/config.qml:142
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Fall"
 msgstr "Haust"
 
-#: package/contents/ui/config.qml:136
+#: package/contents/ui/config.qml:146
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Love"
 msgstr "Kjærleik"
 
-#: package/contents/ui/config.qml:140
+#: package/contents/ui/config.qml:150
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Design"
 msgstr "Design"
 
-#: package/contents/ui/config.qml:144
+#: package/contents/ui/config.qml:154
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Christmas"
 msgstr "Jul"
 
-#: package/contents/ui/config.qml:148
+#: package/contents/ui/config.qml:158
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Travel"
 msgstr "Reise"
 
-#: package/contents/ui/config.qml:152
+#: package/contents/ui/config.qml:162
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Beach"
 msgstr "Strand"
 
-#: package/contents/ui/config.qml:156
+#: package/contents/ui/config.qml:166
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Car"
 msgstr "Bilar"
 
-#: package/contents/ui/config.qml:160
+#: package/contents/ui/config.qml:170
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Sports"
 msgstr "Sport"
 
-#: package/contents/ui/config.qml:164
+#: package/contents/ui/config.qml:174
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Animal"
 msgstr "Dyr"
 
-#: package/contents/ui/config.qml:168
+#: package/contents/ui/config.qml:178
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "People"
 msgstr "Menneske"
 
-#: package/contents/ui/config.qml:172
+#: package/contents/ui/config.qml:182
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Music"
 msgstr "Musikk"
 
-#: package/contents/ui/config.qml:176
+#: package/contents/ui/config.qml:186
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Summer"
 msgstr "Sommar"
 
-#: package/contents/ui/config.qml:180
+#: package/contents/ui/config.qml:190
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Galaxy"
 msgstr "Verdsrommet"
 
-#: package/contents/ui/config.qml:184
+#: package/contents/ui/config.qml:194
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tabliss"
 msgstr "Tabliss"
 
-#: package/contents/ui/config.qml:214
+#: package/contents/ui/config.qml:224
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Plassering:"
 
-#: package/contents/ui/config.qml:217
+#: package/contents/ui/config.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Skalert og avskore"
 
-#: package/contents/ui/config.qml:221
+#: package/contents/ui/config.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Skalert"
 
-#: package/contents/ui/config.qml:225
+#: package/contents/ui/config.qml:235
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Skalert, behald storleiksforhold"
 
-#: package/contents/ui/config.qml:229
+#: package/contents/ui/config.qml:239
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Sentrert"
 
-#: package/contents/ui/config.qml:233
+#: package/contents/ui/config.qml:243
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Jamsides"
 
-#: package/contents/ui/config.qml:254
+#: package/contents/ui/config.qml:264
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Bakgrunnsfarge:"
 
-#: package/contents/ui/config.qml:255
+#: package/contents/ui/config.qml:265
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Vel bakgrunnsfarge"
 
-#: package/contents/ui/config.qml:266
+#: package/contents/ui/config.qml:276
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Dagens bilete:"
 
-#: package/contents/ui/config.qml:282
+#: package/contents/ui/config.qml:292
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Tittel:"
 
-#: package/contents/ui/config.qml:297
+#: package/contents/ui/config.qml:307
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Opphavsperson:"
 
-#: package/contents/ui/config.qml:317
+#: package/contents/ui/config.qml:327
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Opna foreldermappa"
 
-#: package/contents/ui/config.qml:321
+#: package/contents/ui/config.qml:331
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-14 00:57+0000\n"
-"PO-Revision-Date: 2022-11-17 06:30+0100\n"
+"PO-Revision-Date: 2023-01-15 04:09+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: package/contents/ui/config.qml:48
 #, kde-format
@@ -31,6 +31,9 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"ფონის სურათების ეს მომწოდებელი არ ფილტრავს გამოსახულებებს, რომელიც შეიძლება "
+"შემაწუხებელი ან საკამათო იყოს სხვებისთვის. გამოიჩინეთ სიფრთხილე, თუ ეს "
+"გამოსახულებები საზოგადოებაში გამოჩნდება."
 
 #: package/contents/ui/config.qml:76
 #, kde-format
