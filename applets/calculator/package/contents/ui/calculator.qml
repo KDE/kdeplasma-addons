@@ -87,7 +87,6 @@ QQC2.Control {
         case Qt.Key_Return:
         case Qt.Key_Enter:
             equalsClicked();
-            display.forceActiveFocus(Qt.TabFocusReason);
             break;
         case Qt.Key_Backspace:
             deleteDigit();
