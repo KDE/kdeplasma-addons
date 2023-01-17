@@ -2,7 +2,12 @@
 # SPDX-License-Identifier: CC0-1.0
 
 include:
+  - https://invent.kde.org/fusionfuture/translation-domain-ci-scripts/-/raw/master/translation-domain-check.yml
   - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/linux.yml
   - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/linux-qt6.yml
   - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/freebsd.yml
   - https://invent.kde.org/sysadmin/ci-utilities/raw/master/gitlab-templates/freebsd-qt6.yml
+
+forcetranslationdomaincheck:
+  variables:
+    CHECK_FOLDER_PATHS: "./wallpapers"
