@@ -89,6 +89,10 @@ QQC2.Control {
             equalsClicked();
             display.forceActiveFocus(Qt.TabFocusReason);
             break;
+        case Qt.Key_Backspace:
+            deleteDigit();
+            display.forceActiveFocus(Qt.TabFocusReason);
+            break;
         default:
             if (event.matches(StandardKey.Copy)) {
                 copyToClipboard();
@@ -119,6 +123,28 @@ QQC2.Control {
         showingInput = true;
         displayNumber(operand);
         ++inputSize;
+    }
+
+    function deleteDigit() {
+        if (showingResult) {
+            allClearClicked();
+        }
+
+        if (showingInput) {
+            if (commaPressed) {
+                if (decimals === 0) {
+                    commaPressed = false;
+                } else if (decimals > 0) {
+                    operand -= operand % Math.pow(10, 1 - decimals);
+                    --decimals;
+                    --inputSize;
+                }
+            } else if (inputSize > 0) {
+                operand = (operand - (operand % 10)) / 10;
+                --inputSize;
+            }
+        }
+        displayNumber(operand);
     }
 
     function decimalClicked() {
