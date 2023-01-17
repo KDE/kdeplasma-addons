@@ -134,32 +134,29 @@ QHash<QString, QDateTime> DateTimeRunner::datetimeAt(const QStringView &zoneTerm
         QTimeZone timeZone(zoneId);
         QDateTime datetime = referenceTime.toTimeZone(QTimeZone(zoneId));
 
+        const QString zoneName = QString::fromUtf8(zoneId);
+        if (zoneName.startsWith(QStringLiteral("UTC+")) || zoneName.startsWith(QStringLiteral("UTC-"))) {
+            // Qt time zones are either of the form
+            // (where {zone name} {long name} {abbreviation} {short name} {offset name} {country})
+            // - "Europe/Stockholm" "Central European Standard Time" "CET" "GMT+1" "UTC+01:00" "Sweden"
+            // - "UTC+01:00" "UTC+01:00" "UTC+01:00" "UTC+01:00" "UTC+01:00" "Default"
+            // The latter are already covered by the offset name of the former, which we want to match exactly, so skip these
+            continue;
+        }
+
         // eg "Sweden"
         const QString country = QLocale::countryToString(timeZone.country());
         const QString comment = timeZone.comment();
         if (country.contains(zoneTerm, Qt::CaseInsensitive) || comment.contains(zoneTerm, Qt::CaseInsensitive)) {
-            const QString regionName = comment.isEmpty() ? country : QString("%1/%2").arg(country, comment);
+            const QString regionName = comment.isEmpty() ? country : QLatin1String("%1 - %2").arg(country, comment);
             ret[regionName] = datetime;
             continue;
         }
 
-        // eg "CET"
-        // FIXME: This only includes the current abbreviation and not old abbreviation or other possible names.
-        // Eg - depending on the current date, only CET or CEST will work
-        const QString abbr = timeZone.abbreviation(datetime);
-        if (abbr.contains(zoneTerm, Qt::CaseInsensitive)) {
-            // Combine abbreviation with display name to disambiguate
-            // Eg - Pacific Standard Time (PST) and Philippine Standard Time (PST)
-            const QString display = timeZone.displayName(datetime);
-            const QString abbrName = QString("%1 (%2)").arg(display, abbr);
-            ret[abbrName] = datetime;
-            continue;
-        }
-
-        // eg "Europe/Stockholm"
-        const QString zoneName = QString::fromUtf8(zoneId).replace("_", " ");
-        if (zoneName.contains(zoneTerm, Qt::CaseInsensitive)) {
-            ret[zoneName] = datetime;
+        // eg "Stockholm"
+        const QString city = zoneName.mid(zoneName.indexOf(QStringLiteral("/")) + 1).replace("_", " ");
+        if (city.contains(zoneTerm, Qt::CaseInsensitive)) {
+            ret[city] = datetime;
             continue;
         }
 
@@ -170,16 +167,28 @@ QHash<QString, QDateTime> DateTimeRunner::datetimeAt(const QStringView &zoneTerm
             continue;
         }
 
+        // eg "CET"
+        // FIXME: This only includes the current abbreviation and not old abbreviation or other possible names.
+        // Eg - depending on the current date, only CET or CEST will work
+        const QString abbr = timeZone.abbreviation(datetime);
+        if (abbr.contains(zoneTerm, Qt::CaseInsensitive)) {
+            // Combine abbreviation with display name to disambiguate
+            // Eg - Pacific Standard Time (PST) and Philippine Standard Time (PST)
+            const QString abbrName = QLatin1String("%1 (%2)").arg(longName, abbr);
+            ret[abbrName] = datetime;
+            continue;
+        }
+
         // eg "GMT+1"
         const QString shortName = timeZone.displayName(datetime, QTimeZone::ShortName);
-        if (shortName.contains(zoneTerm, Qt::CaseInsensitive)) {
+        if (shortName.compare(zoneTerm, Qt::CaseInsensitive) == 0) {
             ret[shortName] = datetime;
             continue;
         }
 
         // eg "UTC+01:00"
         const QString offsetName = timeZone.displayName(datetime, QTimeZone::OffsetName);
-        if (offsetName.contains(zoneTerm, Qt::CaseInsensitive)) {
+        if (offsetName.compare(zoneTerm, Qt::CaseInsensitive) == 0) {
             ret[offsetName] = datetime;
             continue;
         }
