@@ -58,7 +58,7 @@ msgstr "No s'ha trobat cap diccionari, instal·leu el «hspell»"
 #: spellcheck_config.ui:17
 #, kde-format
 msgid "Spell Check Settings"
-msgstr "Configuració de la verificació ortogràfica"
+msgstr "Configureu la verificació ortogràfica"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_requireTriggerWord)
 #: spellcheck_config.ui:23

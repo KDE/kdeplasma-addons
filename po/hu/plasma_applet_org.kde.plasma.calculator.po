@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 00:57+0000\n"
+"POT-Creation-Date: 2023-01-18 00:58+0000\n"
 "PO-Revision-Date: 2019-11-16 21:15+0100\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -19,49 +19,49 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 20.03.70\n"
 
-#: package/contents/ui/calculator.qml:295
+#: package/contents/ui/calculator.qml:320
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:318
+#: package/contents/ui/calculator.qml:343
 #, kde-format
 msgctxt "Text of the clear button"
 msgid "C"
 msgstr "C"
 
-#: package/contents/ui/calculator.qml:331
+#: package/contents/ui/calculator.qml:356
 #, kde-format
 msgctxt "Text of the division button"
 msgid "÷"
 msgstr "÷"
 
-#: package/contents/ui/calculator.qml:344
+#: package/contents/ui/calculator.qml:369
 #, kde-format
 msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr "×"
 
-#: package/contents/ui/calculator.qml:356
+#: package/contents/ui/calculator.qml:381
 #, kde-format
 msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr "CE"
 
-#: package/contents/ui/calculator.qml:408
+#: package/contents/ui/calculator.qml:433
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/calculator.qml:460
+#: package/contents/ui/calculator.qml:485
 #, kde-format
 msgctxt "Text of the plus button"
 msgid "+"
 msgstr "+"
 
-#: package/contents/ui/calculator.qml:511
+#: package/contents/ui/calculator.qml:536
 #, kde-format
 msgctxt "Text of the equals button"
 msgid "="

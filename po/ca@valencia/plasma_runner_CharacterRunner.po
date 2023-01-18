@@ -41,7 +41,7 @@ msgstr ""
 #: charrunner_config.ui:18
 #, kde-format
 msgid "Character Runner Config"
-msgstr "Configuració de l'executor de caràcters"
+msgstr "Configureu l'executor de caràcters"
 
 #. i18n: ectx: property (text), widget (QLabel, label_trigger)
 #: charrunner_config.ui:26

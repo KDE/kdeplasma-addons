@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-14 00:57+0000\n"
+"POT-Creation-Date: 2023-01-18 00:58+0000\n"
 "PO-Revision-Date: 2010-01-24 17:16+0100\n"
 "Last-Translator: Andrej Dundovic <adundovi@gmail.com>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/ui/calculator.qml:295
+#: package/contents/ui/calculator.qml:320
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:318
+#: package/contents/ui/calculator.qml:343
 #, fuzzy, kde-format
 #| msgctxt "The C button of the calculator"
 #| msgid "C"
@@ -34,13 +34,13 @@ msgctxt "Text of the clear button"
 msgid "C"
 msgstr "C"
 
-#: package/contents/ui/calculator.qml:331
+#: package/contents/ui/calculator.qml:356
 #, kde-format
 msgctxt "Text of the division button"
 msgid "÷"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:344
+#: package/contents/ui/calculator.qml:369
 #, fuzzy, kde-format
 #| msgctxt "The × button of the calculator"
 #| msgid "×"
@@ -48,7 +48,7 @@ msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr "×"
 
-#: package/contents/ui/calculator.qml:356
+#: package/contents/ui/calculator.qml:381
 #, fuzzy, kde-format
 #| msgctxt "The AC button of the calculator"
 #| msgid "AC"
@@ -56,13 +56,13 @@ msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr "AC"
 
-#: package/contents/ui/calculator.qml:408
+#: package/contents/ui/calculator.qml:433
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:460
+#: package/contents/ui/calculator.qml:485
 #, fuzzy, kde-format
 #| msgctxt "The + button of the calculator"
 #| msgid "+"
@@ -70,7 +70,7 @@ msgctxt "Text of the plus button"
 msgid "+"
 msgstr "+"
 
-#: package/contents/ui/calculator.qml:511
+#: package/contents/ui/calculator.qml:536
 #, fuzzy, kde-format
 #| msgctxt "The = button of the calculator"
 #| msgid "="
