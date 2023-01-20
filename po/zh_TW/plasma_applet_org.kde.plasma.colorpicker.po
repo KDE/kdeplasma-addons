@@ -6,19 +6,20 @@
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2010.
 # Jeff Huang <s8321414@gmail.com>, 2016, 2017.
 # pan93412 <pan93412@gmail.com>, 2018.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2018-04-23 00:53+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2023-01-19 21:05+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: package/contents/config/config.qml:11
@@ -39,7 +40,7 @@ msgctxt "@info:usagetip"
 msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
-msgstr ""
+msgstr "將顏色碼拖到這裡來儲存它<nl/>將影像檔拖到這裡來取得它的平均顏色"
 
 #: package/contents/ui/configGeneral.qml:25
 #, kde-format
@@ -75,7 +76,7 @@ msgstr "顯示歷史紀錄"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "預覽數量："
 
 #: package/contents/ui/main.qml:109
 #, kde-format
@@ -90,12 +91,10 @@ msgid "Clear History"
 msgstr "清除歷史"
 
 #: package/contents/ui/main.qml:111
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "清除歷史"
+msgstr "檢視歷史"
 
 #: package/contents/ui/main.qml:113
 #, kde-format
@@ -104,12 +103,10 @@ msgid "Copy to Clipboard"
 msgstr "複製到剪貼簿"
 
 #: package/contents/ui/main.qml:150
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Pick color"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr "挑選顏色"
+msgstr "沒有顏色"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
@@ -121,13 +118,13 @@ msgstr "挑選顏色"
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "已複製！"
 
 #: package/contents/ui/main.qml:339
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

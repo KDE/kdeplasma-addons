@@ -3,19 +3,20 @@
 #
 # Jeff Huang <s8321414@gmail.com>, 2016.
 # pan93412 <pan93412@gmail.com>, 2018, 2019.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-03 00:49+0000\n"
-"PO-Revision-Date: 2019-05-20 01:16+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2023-01-19 23:55+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
 "Language: Traditional Chinese\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.04.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: package/contents/config/config.qml:13
@@ -183,28 +184,22 @@ msgid "Remove path"
 msgstr "移除路徑"
 
 #: package/contents/ui/ConfigPaths.qml:137
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add Folder..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
-msgstr "新增資料夾..."
+msgstr "新增資料夾…"
 
 #: package/contents/ui/ConfigPaths.qml:143
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add Files..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
-msgstr "新增檔案..."
+msgstr "新增檔案…"
 
 #: package/contents/ui/main.qml:438
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Configure..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure…"
-msgstr "設定..."
+msgstr "設定…"
 
 #~ msgctxt "@option:check"
 #~ msgid "Show background frame"

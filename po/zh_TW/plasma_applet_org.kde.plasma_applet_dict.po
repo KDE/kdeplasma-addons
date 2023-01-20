@@ -2,20 +2,21 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # pan93412 <pan93412@gmail.com>, 2019.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-31 00:48+0000\n"
-"PO-Revision-Date: 2019-01-04 21:32+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2023-01-19 20:59+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 18.12.0\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -24,57 +25,47 @@ msgid "Dictionaries"
 msgstr "字典"
 
 #: package/contents/ui/AvailableDictSheet.qml:35
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Dictionaries"
+#, kde-format
 msgid "Add More Dictionaries"
-msgstr "字典"
+msgstr "新增更多字典"
 
 #: package/contents/ui/ConfigDictionaries.qml:89
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Available dictionaries:"
+#, kde-format
 msgid "Unable to load dictionary list"
-msgstr "可用的字典："
+msgstr "無法載入字典列表"
 
 #: package/contents/ui/ConfigDictionaries.qml:90
 #: package/contents/ui/main.qml:121
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
-msgstr ""
+msgstr "錯誤代碼：%1（%2）"
 
 #: package/contents/ui/ConfigDictionaries.qml:101
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Dictionaries"
+#, kde-format
 msgid "No dictionaries"
-msgstr "字典"
+msgstr "沒有字典"
 
 #: package/contents/ui/ConfigDictionaries.qml:112
 #, kde-format
 msgid "Add More…"
-msgstr ""
+msgstr "新增更多…"
 
 #: package/contents/ui/DictItemDelegate.qml:51
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 #: package/contents/ui/main.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter word to define here"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
-msgstr "在此輸入要定義的單字"
+msgstr "在此輸入要定義的單字…"
 
 #: package/contents/ui/main.qml:120
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Available dictionaries:"
+#, kde-format
 msgid "Unable to load definition"
-msgstr "可用的字典："
+msgstr "無法載入定義"
 
 #, fuzzy
 #~| msgid "Looking up definition..."
