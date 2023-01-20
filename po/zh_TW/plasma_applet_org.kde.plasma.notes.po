@@ -7,20 +7,21 @@
 # Goodhorse <franklin@goodhorse.idv.tw>, 2008, 2015.
 # Jeff Huang <s8321414@gmail.com>, 2016.
 # pan93412 <pan93412@gmail.com>, 2018, 2019.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2019-09-22 18:58+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2023-01-19 23:54+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "dot tw>\n"
-"X-Generator: Lokalize 19.08.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: package/contents/config/config.qml:13
@@ -32,17 +33,17 @@ msgstr "外觀"
 #: package/contents/ui/configAppearance.qml:30
 #, kde-format
 msgid "%1pt"
-msgstr ""
+msgstr "%1pt"
 
 #: package/contents/ui/configAppearance.qml:36
 #, kde-format
 msgid "Text font size:"
-msgstr ""
+msgstr "文字資訊大小："
 
 #: package/contents/ui/configAppearance.qml:41
 #, kde-format
 msgid "Background color"
-msgstr ""
+msgstr "背景顔色"
 
 #: package/contents/ui/configAppearance.qml:77
 #, kde-format
@@ -120,17 +121,15 @@ msgid "Paste"
 msgstr "貼上"
 
 #: package/contents/ui/main.qml:295
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "複製（不格式化）"
+msgstr "貼上（包含格式）"
 
 #: package/contents/ui/main.qml:302
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "複製（不格式化）"
+msgstr "移除格式設定"
 
 #: package/contents/ui/main.qml:317
 #, kde-format
@@ -174,12 +173,12 @@ msgstr "刪除線"
 #: package/contents/ui/main.qml:572
 #, kde-format
 msgid "Discard this note?"
-msgstr ""
+msgstr "丟棄這個便條？"
 
 #: package/contents/ui/main.qml:573
 #, kde-format
 msgid "Are you sure you want to discard this note?"
-msgstr ""
+msgstr "您確定要丟棄這個便條嗎？"
 
 #: package/contents/ui/main.qml:586
 #, kde-format

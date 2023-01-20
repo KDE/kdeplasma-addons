@@ -3,19 +3,20 @@
 #
 # Franklin Weng <franklin@mail.everfocus.com.tw>, 2010, 2012.
 # pan93412 <pan93412@gmail.com>, 2018.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-28 00:47+0000\n"
-"PO-Revision-Date: 2018-04-23 00:59+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2023-01-19 23:17+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: dictionaryrunner.cpp:36 dictionaryrunner_config.cpp:34
@@ -39,7 +40,7 @@ msgstr "尋找 :q: 的定義。"
 #: dictionaryrunner.cpp:120
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
-msgstr ""
+msgstr "\"%1\" 的定義已複製到剪貼簿"
 
 #: dictionaryrunner_config.cpp:22
 #, kde-format

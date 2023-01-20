@@ -5,19 +5,20 @@
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009.
 # Franklin Weng <franklin@goodhorse.idv.tw>, 2012, 2014, 2015.
 # pan93412 <pan93412@gmail.com>, 2018, 2019.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2019-05-14 22:58+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2023-01-19 23:52+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.04.1\n"
+"X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: package/contents/config/config.qml:13
@@ -30,7 +31,7 @@ msgstr "外觀"
 #, kde-format
 msgctxt "@title"
 msgid "Predefined Timers"
-msgstr ""
+msgstr "預先設定的計時器"
 
 #: package/contents/config/config.qml:24
 #, kde-format
@@ -39,18 +40,16 @@ msgid "Advanced"
 msgstr "進階"
 
 #: package/contents/ui/CompactRepresentation.qml:134
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
-msgstr "計時器"
+msgstr "暫停計時器"
 
 #: package/contents/ui/CompactRepresentation.qml:134
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
-msgstr "計時器"
+msgstr "開始計時器"
 
 #: package/contents/ui/CompactRepresentation.qml:191
 #: package/contents/ui/CompactRepresentation.qml:208
@@ -58,7 +57,7 @@ msgstr "計時器"
 msgctxt "remaining time"
 msgid "%1s"
 msgid_plural "%1s"
-msgstr[0] ""
+msgstr[0] "%1 秒"
 
 #: package/contents/ui/configAdvanced.qml:22
 #, kde-format
@@ -70,7 +69,7 @@ msgstr "計時結束後："
 #, kde-format
 msgctxt "@option:check"
 msgid "Execute command:"
-msgstr "執行指令："
+msgstr "執行命令："
 
 #: package/contents/ui/configAppearance.qml:30
 #, kde-format
@@ -88,7 +87,7 @@ msgstr "顯示標題："
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "顯示剩餘時間"
 
 #: package/contents/ui/configAppearance.qml:59
 #, kde-format
@@ -97,18 +96,16 @@ msgid "Show seconds"
 msgstr "顯示秒數"
 
 #: package/contents/ui/configAppearance.qml:64
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "顯示標題："
+msgstr "顯示計時器開關"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "顯示進度條"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format
@@ -126,47 +123,47 @@ msgstr "顯示通知文字："
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
-msgstr ""
+msgstr "如果您在此新增預先設定的計時器，它們會出現在小程式的內文選單裡。"
 
 #: package/contents/ui/configTimes.qml:83
 #, kde-format
 msgid "Add"
-msgstr ""
+msgstr "新增"
 
 #: package/contents/ui/configTimes.qml:120
 #, kde-format
 msgid "Scroll over digits to change time"
-msgstr ""
+msgstr "在數字上捲動以修改時間"
 
 #: package/contents/ui/configTimes.qml:126
 #, kde-format
 msgid "Apply"
-msgstr ""
+msgstr "套用"
 
 #: package/contents/ui/configTimes.qml:134
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "取消"
 
 #: package/contents/ui/configTimes.qml:143
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "編輯"
 
 #: package/contents/ui/configTimes.qml:152
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "刪除"
 
 #: package/contents/ui/main.qml:65
 #, kde-format
 msgid "%1 is running"
-msgstr "正在執行 %1"
+msgstr "%1 執行中"
 
 #: package/contents/ui/main.qml:67
 #, kde-format
 msgid "%1 not running"
-msgstr "%1 尚未執行"
+msgstr "%1 未在執行"
 
 #: package/contents/ui/main.qml:71
 #, kde-format

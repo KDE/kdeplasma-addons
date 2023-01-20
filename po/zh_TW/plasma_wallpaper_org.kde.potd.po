@@ -2,20 +2,21 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # pan93412 <pan93412@gmail.com>, 2019.
+# Kisaragi Hiu <mail@kisaragi-hiu.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-17 00:59+0000\n"
-"PO-Revision-Date: 2019-07-31 16:55+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2023-01-19 23:25+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 19.07.80\n"
+"X-Generator: Lokalize 22.12.0\n"
 
 #: package/contents/ui/config.qml:48
 #, kde-format
@@ -30,12 +31,14 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"本桌布提供者並不會過濾可能令人反感或冒犯人的影像。如果影像會在公共區域展示的"
+"話請小心。"
 
 #: package/contents/ui/config.qml:76
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
-msgstr ""
+msgstr "使用計量網路連線時仍然更新"
 
 #: package/contents/ui/config.qml:86
 #, kde-format
@@ -203,7 +206,7 @@ msgstr "銀河"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tabliss"
-msgstr ""
+msgstr "Tabliss"
 
 #: package/contents/ui/config.qml:224
 #, kde-format
@@ -257,113 +260,113 @@ msgstr "選擇背景顏色"
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
-msgstr ""
+msgstr "今日圖片："
 
 #: package/contents/ui/config.qml:292
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
-msgstr ""
+msgstr "標題："
 
 #: package/contents/ui/config.qml:307
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
-msgstr ""
+msgstr "作者："
 
 #: package/contents/ui/config.qml:327
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "開啟所在資料夾"
 
 #: package/contents/ui/config.qml:331
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
-msgstr ""
+msgstr "開啟桌布影像儲存的目的資料夾。"
 
 #: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
-msgstr ""
+msgstr "今日圖片"
 
 #: package/contents/ui/WallpaperDelegate.qml:143
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
-msgstr ""
+msgstr "載入中"
 
 #: package/contents/ui/WallpaperDelegate.qml:144
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
-msgstr ""
+msgstr "無法使用"
 
 #: package/contents/ui/WallpaperDelegate.qml:145
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
-msgstr ""
+msgstr "%1 作者：%2。在影像上按右鍵來看更多動作。"
 
 #: package/contents/ui/WallpaperDelegate.qml:146
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
-msgstr ""
+msgstr "正在從網路上取得桌布。"
 
 #: package/contents/ui/WallpaperDelegate.qml:147
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
-msgstr ""
+msgstr "無法從網路上取得桌布。"
 
 #: package/contents/ui/WallpaperPreview.qml:50
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
-msgstr ""
+msgstr "儲存影像為…"
 
 #: package/contents/ui/WallpaperPreview.qml:53
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
-msgstr ""
+msgstr "儲存今日圖片到本機磁碟"
 
 #: package/contents/ui/WallpaperPreview.qml:59
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
-msgstr ""
+msgstr "在瀏覽器開啟連結…"
 
 #: package/contents/ui/WallpaperPreview.qml:62
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
-msgstr ""
+msgstr "在預設瀏覽器中開啟今日圖片的網站"
 
 #: plugins/potdbackend.cpp:219
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Today's Picture"
-msgstr ""
+msgstr "儲存今日圖片"
 
 #: plugins/potdbackend.cpp:221
 #, kde-format
 msgctxt "@label:listbox Template for file dialog"
 msgid "JPEG image (*.jpeg *.jpg *.jpe)"
-msgstr ""
+msgstr "JPEG 影像 (*.jpeg *.jpg *.jpe)"
 
 #: plugins/potdbackend.cpp:238
 #, kde-format
 msgctxt "@info:status after a save action"
 msgid "The image was not saved."
-msgstr ""
+msgstr "影像未被儲存。"
 
 #: plugins/potdbackend.cpp:245
 #, kde-format
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
-msgstr ""
+msgstr "影像已儲存為 <a href=\"%1\">%2</a>"
