@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-20 00:59+0000\n"
-"PO-Revision-Date: 2023-01-11 09:15+0100\n"
+"PO-Revision-Date: 2023-01-20 18:13+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -43,17 +43,15 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Astronomical)"
-msgstr ""
+msgstr "Calendari islàmic (astronòmic)"
 
 #: calendarsystem.h:68
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "The Islamic Civil Calendar"
+#, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "The Islamic Civil Calendar (Tabular)"
-msgstr "El calendari islàmic civil"
+msgstr "El calendari islàmic civil (tabular)"
 
 #: calendarsystem.h:72
 #, kde-format
@@ -61,7 +59,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Umm al-Qura)"
-msgstr ""
+msgstr "Calendari islàmic (Umm al-Qura)"
 
 #: calendarsystem.h:76
 #, kde-format
@@ -94,6 +92,8 @@ msgid ""
 "This calendar is based on pure astronomical calculation. It doesn't consider "
 "any crescent visibility criteria."
 msgstr ""
+"Aquest calendari es basa en un càlcul astronòmic pur. No considera cap "
+"criteri de visibilitat de la lluna creixent."
 
 #: config/qml/AlternateCalendarConfig.qml:60
 #, kde-format
@@ -123,11 +123,7 @@ msgid "%1 %2, %3"
 msgstr "%1 de %2 de %3"
 
 #: provider/islamiccalendar.cpp:124
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
-#| "number %4 Full date in Hebrew"
-#| msgid "%1 %2, %3 (%4)"
+#, kde-format
 msgctxt ""
 "@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 "
 "Islamic calendar date in Arabic"

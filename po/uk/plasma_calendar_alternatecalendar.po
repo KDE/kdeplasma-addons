@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-20 00:59+0000\n"
-"PO-Revision-Date: 2023-01-11 08:50+0200\n"
+"PO-Revision-Date: 2023-01-20 08:30+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -42,17 +42,15 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Astronomical)"
-msgstr ""
+msgstr "Ісламський календар (астрономічний)"
 
 #: calendarsystem.h:68
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "The Islamic Civil Calendar"
+#, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "The Islamic Civil Calendar (Tabular)"
-msgstr "Мусульманський світський календар"
+msgstr "Мусульманський світський календар (табличний)"
 
 #: calendarsystem.h:72
 #, kde-format
@@ -60,7 +58,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Umm al-Qura)"
-msgstr ""
+msgstr "Ісламський календар (Умм аль-Кура)"
 
 #: calendarsystem.h:76
 #, kde-format
@@ -93,6 +91,8 @@ msgid ""
 "This calendar is based on pure astronomical calculation. It doesn't consider "
 "any crescent visibility criteria."
 msgstr ""
+"Цей календар засновано на суто астрономічних обчисленнях. У ньому знехтувано "
+"усі критерії видимості місяця."
 
 #: config/qml/AlternateCalendarConfig.qml:60
 #, kde-format
@@ -124,11 +124,7 @@ msgid "%1 %2, %3"
 msgstr "%1 %2, %3"
 
 #: provider/islamiccalendar.cpp:124
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
-#| "number %4 Full date in Hebrew"
-#| msgid "%1 %2, %3 (%4)"
+#, kde-format
 msgctxt ""
 "@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 "
 "Islamic calendar date in Arabic"
