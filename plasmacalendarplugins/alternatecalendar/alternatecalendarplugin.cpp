@@ -119,7 +119,7 @@ void AlternateCalendarPluginPrivate::loadEventsForDateRange(const QDate &startDa
         return;
     }
 
-    QHash<QDate, QDate> alternateDatesData;
+    QHash<QDate, QCalendar::YearMonthDay> alternateDatesData;
     QHash<QDate, CalendarEvents::CalendarEventsPlugin::SubLabel> subLabelsData;
 
     for (QDate date = startDate; date <= endDate && date.isValid(); date = date.addDays(1)) {
@@ -127,7 +127,7 @@ void AlternateCalendarPluginPrivate::loadEventsForDateRange(const QDate &startDa
         const QCalendar::YearMonthDay alt = m_calendarProvider->fromGregorian(offsetDate);
 
         if (alt.day != date.day() || alt.month != date.month() || alt.year != date.year()) {
-            alternateDatesData.insert(date, QDate(alt.year, alt.month, alt.day));
+            alternateDatesData.insert(date, QCalendar::YearMonthDay(alt.year, alt.month, alt.day));
         }
 
         if (m_subLabelsCache.contains(date)) {
@@ -139,7 +139,7 @@ void AlternateCalendarPluginPrivate::loadEventsForDateRange(const QDate &startDa
     }
 
     if (alternateDatesData.size() > 0) {
-        Q_EMIT q->alternateDateReady(alternateDatesData);
+        Q_EMIT q->alternateCalendarDateReady(alternateDatesData);
     }
     Q_EMIT q->subLabelReady(subLabelsData);
 }
