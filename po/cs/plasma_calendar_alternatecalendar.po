@@ -120,14 +120,12 @@ msgid "%1 %2, %3"
 msgstr "%1 %2, %3"
 
 #: provider/islamiccalendar.cpp:124
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#, kde-format
 msgctxt ""
 "@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 "
 "Islamic calendar date in Arabic"
 msgid "%1 %2, %3 (%4)"
-msgstr "%1 %2, %3"
+msgstr ""
 
 #: provider/qtcalendar.cpp:51
 #, kde-format
