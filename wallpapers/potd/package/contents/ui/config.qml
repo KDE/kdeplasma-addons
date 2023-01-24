@@ -194,6 +194,10 @@ Kirigami.FormLayout {
                 'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Tabliss"),
                 'value': '1053828'
             },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Cyber"),
+                'value': '64108099'
+            },
         ]
         model: listModel
         textRole: "label"
