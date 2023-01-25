@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-17 00:59+0000\n"
+"POT-Creation-Date: 2023-01-25 00:59+0000\n"
 "PO-Revision-Date: 2019-08-19 21:13+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -205,79 +205,85 @@ msgctxt "@item:inlistbox"
 msgid "Tabliss"
 msgstr ""
 
-#: package/contents/ui/config.qml:224
+#: package/contents/ui/config.qml:198
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cyber-World"
+msgstr ""
+
+#: package/contents/ui/config.qml:229
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Posicionamento:"
 
-#: package/contents/ui/config.qml:227
+#: package/contents/ui/config.qml:232
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Cambiado de escala e recortado"
 
-#: package/contents/ui/config.qml:231
+#: package/contents/ui/config.qml:236
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Cambiado de escala"
 
-#: package/contents/ui/config.qml:235
+#: package/contents/ui/config.qml:240
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Cambiado de escala, mantendo as proporcións"
 
-#: package/contents/ui/config.qml:239
+#: package/contents/ui/config.qml:244
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Centrado"
 
-#: package/contents/ui/config.qml:243
+#: package/contents/ui/config.qml:248
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "En mosaico"
 
-#: package/contents/ui/config.qml:264
+#: package/contents/ui/config.qml:269
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Cor de fondo:"
 
-#: package/contents/ui/config.qml:265
+#: package/contents/ui/config.qml:270
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Escoller a cor do fondo"
 
-#: package/contents/ui/config.qml:276
+#: package/contents/ui/config.qml:281
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr ""
 
-#: package/contents/ui/config.qml:292
+#: package/contents/ui/config.qml:297
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr ""
 
-#: package/contents/ui/config.qml:307
+#: package/contents/ui/config.qml:312
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr ""
 
-#: package/contents/ui/config.qml:327
+#: package/contents/ui/config.qml:332
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr ""
 
-#: package/contents/ui/config.qml:331
+#: package/contents/ui/config.qml:336
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
