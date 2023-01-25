@@ -62,6 +62,8 @@ Item {
 
     property bool wasExpanded: false
 
+    readonly property alias mouseArea: mouseArea
+
     MouseArea {
         id: mouseArea
         anchors.fill: parent

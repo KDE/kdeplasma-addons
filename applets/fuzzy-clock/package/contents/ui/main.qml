@@ -23,8 +23,9 @@ Item {
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
-    Plasmoid.toolTipMainText: Qt.formatTime(currentDateTime)
-    Plasmoid.toolTipSubText: Qt.formatDate(currentDateTime, Qt.locale().dateFormat(Locale.LongFormat))
+    // keep this consistent with toolTipMainText and toolTipSubText in analog-clock
+    Plasmoid.toolTipMainText: Qt.formatDate(currentDateTime, "dddd")
+    Plasmoid.toolTipSubText: Qt.formatTime(currentDateTime,  Qt.locale().timeFormat(Locale.LongFormat)) + "\n" + Qt.formatDate(currentDateTime, Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
 
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
 
@@ -32,8 +33,8 @@ Item {
         id: dataSource
         engine: "time"
         connectedSources: ["Local"]
-        interval: 60000
-        intervalAlignment: PlasmaCore.Types.AlignToMinute
+        interval: Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? 1000 : 60000
+        intervalAlignment: Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? PlasmaCore.Types.NoAlignment : PlasmaCore.Types.AlignToMinute
     }
 
     Plasmoid.compactRepresentation: FuzzyClock { }

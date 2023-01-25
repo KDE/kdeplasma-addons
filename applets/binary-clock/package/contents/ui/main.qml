@@ -30,15 +30,16 @@ Item {
 
     Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
 
+    // keep this consistent with toolTipMainText and toolTipSubText in analog-clock
     Plasmoid.toolTipMainText: Qt.formatDate(dataSource.data["Local"]["DateTime"], "dddd")
-    Plasmoid.toolTipSubText: Qt.formatDate(dataSource.data["Local"]["DateTime"], Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
+    Plasmoid.toolTipSubText: Qt.formatTime(dataSource.data["Local"]["DateTime"],  Qt.locale().timeFormat(Locale.LongFormat)) + "\n" + Qt.formatDate(dataSource.data["Local"]["DateTime"], Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
 
     PlasmaCore.DataSource {
         id: dataSource
         engine: "time"
         connectedSources: ["Local"]
-        intervalAlignment: plasmoid.configuration.showSeconds ? PlasmaCore.Types.NoAlignment : PlasmaCore.Types.AlignToMinute
-        interval: showSeconds ? 1000 : 60000
+        intervalAlignment: plasmoid.configuration.showSeconds || Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? PlasmaCore.Types.NoAlignment : PlasmaCore.Types.AlignToMinute
+        interval: showSeconds || Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? 1000 : 60000
         onDataChanged: {
             var date = new Date(data["Local"]["DateTime"]);
             hours = date.getHours();
