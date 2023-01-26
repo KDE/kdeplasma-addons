@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 00:59+0000\n"
-"PO-Revision-Date: 2023-01-14 09:18+0200\n"
+"PO-Revision-Date: 2023-01-25 09:11+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -215,7 +215,7 @@ msgstr "Таблісс"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Cyber-World"
-msgstr ""
+msgstr "Кіберсвіт"
 
 #: package/contents/ui/config.qml:229
 #, kde-format

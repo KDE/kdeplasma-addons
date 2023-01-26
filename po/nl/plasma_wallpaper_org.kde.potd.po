@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 00:59+0000\n"
-"PO-Revision-Date: 2023-01-14 16:26+0100\n"
+"PO-Revision-Date: 2023-01-25 11:29+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -212,7 +212,7 @@ msgstr "Tabliss"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Cyber-World"
-msgstr ""
+msgstr "Cyberwereld"
 
 #: package/contents/ui/config.qml:229
 #, kde-format
