@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 00:59+0000\n"
-"PO-Revision-Date: 2023-01-14 19:25+0100\n"
+"PO-Revision-Date: 2023-01-25 22:53+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -215,7 +215,7 @@ msgstr "Tabliss"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Cyber-World"
-msgstr ""
+msgstr "Monde Cyber"
 
 #: package/contents/ui/config.qml:229
 #, kde-format
