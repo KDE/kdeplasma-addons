@@ -10,9 +10,9 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.kwin 2.0 as KWin
+import org.kde.kwin 3.0 as KWin
 
-KWin.Switcher {
+KWin.TabBoxSwitcher {
     id: tabBox
     currentIndex: thumbnailListView.currentIndex
 
@@ -67,7 +67,7 @@ KWin.Switcher {
                             topMargin: hoverItem.margins.top
                             bottomMargin: dialogMainItem.standardMargin
                         }
-                        KWin.ThumbnailItem {
+                        KWin.WindowThumbnailItem {
                             wId: windowId
                             anchors.fill: parent
                         }

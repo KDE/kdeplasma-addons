@@ -11,11 +11,11 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.kwin 2.0 as KWin
+import org.kde.kwin 3.0 as KWin
 
 // https://techbase.kde.org/Development/Tutorials/KWin/WindowSwitcher
 // https://github.com/KDE/kwin/blob/master/tabbox/switcheritem.h
-KWin.Switcher {
+KWin.TabBoxSwitcher {
     id: tabBox
     currentIndex: thumbnailGridView.currentIndex
 
@@ -165,14 +165,14 @@ KWin.Switcher {
                             }
                         }
 
-                        // KWin.ThumbnailItem needs a container
+                        // KWin.WindowThumbnailItem needs a container
                         // otherwise it will be drawn the same size as the parent ColumnLayout
                         Item {
                             Layout.fillWidth: true
                             Layout.fillHeight: true
 
                             // Cannot draw anything (like an icon) on top of thumbnail
-                            KWin.ThumbnailItem {
+                            KWin.WindowThumbnailItem {
                                 id: thumbnailItem
                                 anchors.fill: parent
                                 wId: windowId
