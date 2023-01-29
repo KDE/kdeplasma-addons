@@ -8,13 +8,13 @@
 # Artem Sereda <overmind88@gmail.com>, 2010.
 # Julia Dronova <juliette.tux@gmail.com>, 2012.
 # Alexander Potashev <aspotashev@gmail.com>, 2015, 2018, 2019.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2021, 2022.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2022-12-30 22:06+0300\n"
+"PO-Revision-Date: 2023-01-28 14:27+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -106,12 +106,10 @@ msgid "Show seconds"
 msgstr "Показывать секунды"
 
 #: package/contents/ui/configAppearance.qml:64
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "Показывать заголовок виджета:"
+msgstr "Показывать элемент управления таймером"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format

@@ -5,13 +5,13 @@
 # Artem Sereda <overmind88@gmail.com>, 2010.
 # Alexander Potashev <aspotashev@gmail.com>, 2016, 2017, 2018.
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2022.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-24 00:51+0000\n"
-"PO-Revision-Date: 2022-12-30 22:05+0300\n"
+"PO-Revision-Date: 2023-01-28 14:34+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -44,6 +44,8 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Для сохранения кода цвета, перетащите его сюда.<nl/> Для получения среднего "
+"цвета изображения, перетащите его сюда"
 
 #: package/contents/ui/configGeneral.qml:25
 #, kde-format
@@ -79,7 +81,7 @@ msgstr "Показать журнал"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Счётчик предварительных просмотров:"
 
 #: package/contents/ui/main.qml:109
 #, kde-format
