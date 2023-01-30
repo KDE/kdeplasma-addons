@@ -4,13 +4,13 @@
 # Nick Shaforostoff <shaforostoff@kde.ru>, 2009.
 # Artem Sereda <overmind88@gmail.com>, 2009.
 # Alexander Potashev <aspotashev@gmail.com>, 2010, 2016, 2018, 2019.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2019, 2020, 2021, 2022.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-12-30 22:20+0300\n"
+"PO-Revision-Date: 2023-01-29 13:52+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -283,19 +283,19 @@ msgstr "Введите местоположение"
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
-msgstr "Не найдены станции для «%1»"
+msgstr "Не удалось найти ни одной станции для местоположения «%1»"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:190
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Чтобы задать местоположение выполните поиск погодной станции"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Чтобы задать местоположение выполните поиск погодной станции"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
