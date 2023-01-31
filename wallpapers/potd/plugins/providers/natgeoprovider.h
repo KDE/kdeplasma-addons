@@ -23,7 +23,7 @@ class NatGeoProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    NatGeoProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
+    explicit NatGeoProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
 private:
     void pageRequestFinished(KJob *job);

@@ -22,7 +22,7 @@ class NOAAProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    NOAAProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
+    explicit NOAAProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
 private:
     void listPageRequestFinished(KJob *job);

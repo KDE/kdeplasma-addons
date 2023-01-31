@@ -112,7 +112,7 @@ QString PotdBackend::localUrl() const
         return {};
     }
 
-    return m_client->m_data.wallpaperLocalUrl;
+    return m_client->m_localPath;
 }
 
 QUrl PotdBackend::infoUrl() const
@@ -121,7 +121,7 @@ QUrl PotdBackend::infoUrl() const
         return {};
     }
 
-    return m_client->m_data.wallpaperInfoUrl;
+    return m_client->m_infoUrl;
 }
 
 QUrl PotdBackend::remoteUrl() const
@@ -130,7 +130,7 @@ QUrl PotdBackend::remoteUrl() const
         return {};
     }
 
-    return m_client->m_data.wallpaperRemoteUrl;
+    return m_client->m_remoteUrl;
 }
 
 QString PotdBackend::title() const
@@ -139,7 +139,7 @@ QString PotdBackend::title() const
         return {};
     }
 
-    return m_client->m_data.wallpaperTitle;
+    return m_client->m_title;
 }
 
 QString PotdBackend::author() const
@@ -148,7 +148,7 @@ QString PotdBackend::author() const
         return {};
     }
 
-    return m_client->m_data.wallpaperAuthor;
+    return m_client->m_author;
 }
 
 int PotdBackend::doesUpdateOverMeteredConnection() const
@@ -176,7 +176,7 @@ void PotdBackend::setUpdateOverMeteredConnection(int value)
 
 void PotdBackend::saveImage()
 {
-    if (m_client->m_data.wallpaperLocalUrl.isEmpty()) {
+    if (m_client->m_localPath.isEmpty()) {
         return;
     }
 
@@ -200,10 +200,10 @@ void PotdBackend::saveImage()
 
     QString defaultFileName = m_client->m_metadata.name().trimmed();
 
-    if (!m_client->m_data.wallpaperTitle.isEmpty()) {
-        defaultFileName += QLatin1Char('-') + m_client->m_data.wallpaperTitle.trimmed();
-        if (!m_client->m_data.wallpaperAuthor.isEmpty()) {
-            defaultFileName += QLatin1Char('-') + m_client->m_data.wallpaperAuthor.trimmed();
+    if (!m_client->m_title.isEmpty()) {
+        defaultFileName += QLatin1Char('-') + m_client->m_title.trimmed();
+        if (!m_client->m_author.isEmpty()) {
+            defaultFileName += QLatin1Char('-') + m_client->m_author.trimmed();
         }
     } else {
         // Use current date
@@ -230,7 +230,7 @@ void PotdBackend::saveImage()
 
     m_savedFolder = QUrl::fromLocalFile(QFileInfo(m_savedUrl.toLocalFile()).absolutePath());
 
-    KIO::CopyJob *copyJob = KIO::copy(QUrl::fromLocalFile(m_client->m_data.wallpaperLocalUrl), m_savedUrl, KIO::HideProgressInfo);
+    KIO::CopyJob *copyJob = KIO::copy(QUrl::fromLocalFile(m_client->m_localPath), m_savedUrl, KIO::HideProgressInfo);
     connect(copyJob, &KJob::finished, this, [this](KJob *job) {
         if (job->error()) {
             m_saveStatusMessage = job->errorText();
@@ -265,7 +265,6 @@ void PotdBackend::registerClient()
         return;
     }
 
-    connect(m_client, &PotdClient::imageChanged, this, &PotdBackend::imageChanged);
     connect(m_client, &PotdClient::loadingChanged, this, &PotdBackend::loadingChanged);
     connect(m_client, &PotdClient::localUrlChanged, this, &PotdBackend::localUrlChanged);
     connect(m_client, &PotdClient::infoUrlChanged, this, &PotdBackend::infoUrlChanged);
@@ -283,4 +282,5 @@ void PotdBackend::registerClient()
 
     // For updateSource()
     setUpdateOverMeteredConnection(m_doesUpdateOverMeteredConnection);
+    qCritical() << "registered client";
 }

@@ -19,7 +19,7 @@ class BingProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    BingProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
+    explicit BingProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
 private:
     void pageRequestFinished(KJob *job);

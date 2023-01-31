@@ -60,7 +60,7 @@ void BingProvider::pageRequestFinished(KJob *_job)
         } else {
             urlString += QStringLiteral("_1920x1080.jpg");
         }
-        potdProviderData()->wallpaperRemoteUrl = QUrl(urlString);
+        m_remoteUrl = QUrl(urlString);
 
         // Parse the title and the copyright text from the json data
         // Example copyright text: "草丛中的母狮和它的幼崽，南非 (© Andrew Coleman/Getty Images)"
@@ -68,21 +68,21 @@ void BingProvider::pageRequestFinished(KJob *_job)
         const QRegularExpression copyrightRegEx(QStringLiteral("(.+?)[\\(（](.+?)[\\)）]"));
         if (const QRegularExpressionMatch match = copyrightRegEx.match(copyright); match.hasMatch()) {
             // In some regions "title" is empty, so extract the title from the copyright text.
-            potdProviderData()->wallpaperTitle = match.captured(1).trimmed();
-            potdProviderData()->wallpaperAuthor = match.captured(2).remove(QStringLiteral("©")).trimmed();
+            m_title = match.captured(1).trimmed();
+            m_author = match.captured(2).remove(QStringLiteral("©")).trimmed();
         }
 
         const QString title = imageObject.value(QStringLiteral("title")).toString();
         if (!title.isEmpty()) {
-            potdProviderData()->wallpaperTitle = title;
+            m_title = title;
         }
 
         const QString infoUrl = imageObject.value(QStringLiteral("copyrightlink")).toString();
         if (!infoUrl.isEmpty()) {
-            potdProviderData()->wallpaperInfoUrl = QUrl(infoUrl);
+            m_infoUrl = QUrl(infoUrl);
         }
 
-        KIO::StoredTransferJob *imageJob = KIO::storedGet(potdProviderData()->wallpaperRemoteUrl, KIO::NoReload, KIO::HideProgressInfo);
+        KIO::StoredTransferJob *imageJob = KIO::storedGet(m_remoteUrl, KIO::NoReload, KIO::HideProgressInfo);
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &BingProvider::imageRequestFinished);
         return;
     } while (0);
@@ -99,8 +99,7 @@ void BingProvider::imageRequestFinished(KJob *_job)
         return;
     }
     QByteArray data = job->data();
-    potdProviderData()->wallpaperImage = QImage::fromData(data);
-    Q_EMIT finished(this);
+    Q_EMIT finished(this, QImage::fromData(data));
 }
 
 K_PLUGIN_CLASS_WITH_JSON(BingProvider, "bingprovider.json")

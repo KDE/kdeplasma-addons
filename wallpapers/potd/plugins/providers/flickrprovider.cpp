@@ -9,11 +9,15 @@
 
 #include <random>
 
+#include <QFileInfo>
 #include <QRegularExpression>
 #include <QTextDocumentFragment>
 #include <QUrlQuery>
 
+#include <KConfigGroup>
+#include <KIO/StoredTransferJob>
 #include <KPluginFactory>
+#include <KSharedConfig>
 
 static QUrl buildUrl(const QDate &date, const QString &apiKey)
 {
@@ -32,9 +36,67 @@ static QUrl buildUrl(const QDate &date, const QString &apiKey)
 FlickrProvider::FlickrProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : PotdProvider(parent, data, args)
 {
-    connect(this, &PotdProvider::configLoaded, this, &FlickrProvider::sendXmlRequest);
+    connect(this, &FlickrProvider::configLoaded, this, &FlickrProvider::sendXmlRequest);
 
     loadConfig();
+}
+
+void FlickrProvider::configRequestFinished(KJob *_job)
+{
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
+    if (job->error()) {
+        qWarning() << QStringLiteral("configRequestFinished error: failed to fetch data");
+        Q_EMIT error(this);
+        return;
+    }
+
+    KIO::StoredTransferJob *putJob = KIO::storedPut(job->data(), m_configLocalUrl, -1);
+    connect(putJob, &KIO::StoredTransferJob::finished, this, &FlickrProvider::configWriteFinished);
+}
+
+void FlickrProvider::configWriteFinished(KJob *_job)
+{
+    KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
+    if (job->error()) {
+        qWarning() << QStringLiteral("configWriteFinished error: failed to write data. %1").arg(job->errorText());
+        Q_EMIT error(this);
+    } else {
+        loadConfig();
+    }
+}
+
+void FlickrProvider::loadConfig()
+{
+    // TODO move to flickr provider
+    const QString configFileName = QStringLiteral("%1provider.conf").arg(identifier());
+    m_configRemoteUrl = QUrl(QStringLiteral("https://autoconfig.kde.org/potd/") + configFileName);
+    m_configLocalPath = QStandardPaths::writableLocation(QStandardPaths::GenericCacheLocation) + QStringLiteral("/plasma_engine_potd/") + configFileName;
+    m_configLocalUrl = QUrl::fromLocalFile(m_configLocalPath);
+
+    auto config = KSharedConfig::openConfig(m_configLocalPath, KConfig::NoGlobals);
+    KConfigGroup apiGroup = config->group("API");
+    QString apiKey = apiGroup.readEntry("API_KEY");
+    QString apiSecret = apiGroup.readEntry("API_SECRET");
+
+    Q_EMIT configLoaded(apiKey, apiSecret);
+}
+
+void FlickrProvider::refreshConfig()
+{
+    // You can only refresh it once in a provider's life cycle
+    if (m_refreshed) {
+        return;
+    }
+    // You can only refresh it once in a day
+    QFileInfo configFileInfo = QFileInfo(m_configLocalPath);
+    if (configFileInfo.exists() && configFileInfo.lastModified().addDays(1) > QDateTime::currentDateTime()) {
+        return;
+    }
+
+    KIO::StoredTransferJob *job = KIO::storedGet(m_configRemoteUrl, KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, &KIO::StoredTransferJob::finished, this, &FlickrProvider::configRequestFinished);
+
+    m_refreshed = true;
 }
 
 void FlickrProvider::sendXmlRequest(const QString &apiKey)
@@ -45,7 +107,7 @@ void FlickrProvider::sendXmlRequest(const QString &apiKey)
     }
 
     mApiKey = apiKey;
-    mActualDate = date().addDays(-2);
+    mActualDate = QDate::currentDate().addDays(-2);
 
     const QUrl xmlUrl = buildUrl(mActualDate, apiKey);
 
@@ -57,8 +119,8 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
+        qWarning() << QStringLiteral("XML request error: %1").arg(job->errorText());
         Q_EMIT error(this);
-        refreshConfig();
         return;
     }
 
@@ -79,8 +141,8 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
             if (xml.name() == QLatin1String("rsp")) {
                 /* no pictures available for the specified parameters */
                 if (attributes.value(QLatin1String("stat")).toString() != QLatin1String("ok")) {
+                    qWarning() << QStringLiteral("xmlRequestFinished error: no photos for the query");
                     Q_EMIT error(this);
-                    qDebug() << "xmlRequestFinished error: no photos for the query";
                     return;
                 }
             } else if (xml.name() == QLatin1String("photo")) {
@@ -128,7 +190,7 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
     }
 
     if (xml.error() && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError) {
-        qWarning() << "XML ERROR:" << xml.lineNumber() << ": " << xml.errorString();
+        qWarning() << QStringLiteral("XML ERROR at line %1: %2").arg(xml.lineNumber(), xml.error());
     }
 
     if (m_photoList.begin() != m_photoList.end()) {
@@ -137,8 +199,8 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
         std::uniform_int_distribution<int> distrib(0, m_photoList.size() - 1);
 
         const PhotoEntry &randomPhotoEntry = m_photoList.at(distrib(randomEngine));
-        potdProviderData()->wallpaperRemoteUrl = QUrl(randomPhotoEntry.urlString);
-        potdProviderData()->wallpaperTitle = randomPhotoEntry.title;
+        m_remoteUrl = QUrl(randomPhotoEntry.urlString);
+        m_title = randomPhotoEntry.title;
 
         /**
          * Visit the photo page to get the author
@@ -146,14 +208,14 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
          * https://www.flickr.com/photos/{user-id}/{photo-id}
          */
         if (!(randomPhotoEntry.userId.isEmpty() || randomPhotoEntry.photoId.isEmpty())) {
-            potdProviderData()->wallpaperInfoUrl =
-                QUrl(QStringLiteral("https://www.flickr.com/photos/%1/%2").arg(randomPhotoEntry.userId, randomPhotoEntry.photoId));
+            m_infoUrl = QUrl(QStringLiteral("https://www.flickr.com/photos/%1/%2").arg(randomPhotoEntry.userId, randomPhotoEntry.photoId));
         }
 
-        KIO::StoredTransferJob *imageJob = KIO::storedGet(potdProviderData()->wallpaperRemoteUrl, KIO::NoReload, KIO::HideProgressInfo);
+        KIO::StoredTransferJob *imageJob = KIO::storedGet(m_remoteUrl, KIO::NoReload, KIO::HideProgressInfo);
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &FlickrProvider::imageRequestFinished);
     } else {
-        qDebug() << "empty list";
+        qWarning() << QStringLiteral("List is empty in XML file");
+        Q_EMIT error(this);
     }
 }
 
@@ -161,24 +223,29 @@ void FlickrProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
+        qWarning() << QStringLiteral("Image request error: %1").arg(job->errorText());
         Q_EMIT error(this);
         return;
     }
 
-    // Visit the photo page to get the author
-    if (!potdProviderData()->wallpaperInfoUrl.isEmpty()) {
-        KIO::StoredTransferJob *pageJob = KIO::storedGet(potdProviderData()->wallpaperInfoUrl, KIO::NoReload, KIO::HideProgressInfo);
-        connect(pageJob, &KIO::StoredTransferJob::finished, this, &FlickrProvider::pageRequestFinished);
-    }
+    m_image = QImage::fromData(job->data());
 
-    potdProviderData()->wallpaperImage = QImage::fromData(job->data());
+    // Visit the photo page to get the author
+    if (!m_infoUrl.isEmpty()) {
+        KIO::StoredTransferJob *pageJob = KIO::storedGet(m_infoUrl, KIO::NoReload, KIO::HideProgressInfo);
+        connect(pageJob, &KIO::StoredTransferJob::finished, this, &FlickrProvider::pageRequestFinished);
+    } else {
+        // No information is fine
+        Q_EMIT finished(this, m_image);
+    }
 }
 
 void FlickrProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        Q_EMIT finished(this); // No author is fine
+        qWarning() << QStringLiteral("No author available");
+        Q_EMIT finished(this, m_image);
         return;
     }
 
@@ -190,10 +257,10 @@ void FlickrProvider::pageRequestFinished(KJob *_job)
     QRegularExpressionMatch match = authorRegEx.match(data);
 
     if (match.hasMatch()) {
-        potdProviderData()->wallpaperAuthor = QTextDocumentFragment::fromHtml(match.captured(1).trimmed()).toPlainText();
+        m_author = QTextDocumentFragment::fromHtml(match.captured(1).trimmed()).toPlainText();
     }
 
-    Q_EMIT finished(this);
+    Q_EMIT finished(this, m_image);
 }
 
 K_PLUGIN_CLASS_WITH_JSON(FlickrProvider, "flickrprovider.json")

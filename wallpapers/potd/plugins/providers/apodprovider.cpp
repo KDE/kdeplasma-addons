@@ -16,9 +16,9 @@
 ApodProvider::ApodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : PotdProvider(parent, data, args)
 {
-    potdProviderData()->wallpaperInfoUrl = QUrl(QStringLiteral("http://antwrp.gsfc.nasa.gov/apod/"));
+    m_infoUrl = QUrl(QStringLiteral("http://antwrp.gsfc.nasa.gov/apod/"));
 
-    KIO::StoredTransferJob *job = KIO::storedGet(potdProviderData()->wallpaperInfoUrl, KIO::NoReload, KIO::HideProgressInfo);
+    KIO::StoredTransferJob *job = KIO::storedGet(m_infoUrl, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, &KIO::StoredTransferJob::finished, this, &ApodProvider::pageRequestFinished);
 }
 
@@ -38,7 +38,7 @@ void ApodProvider::pageRequestFinished(KJob *_job)
 
     if (expMatch.hasMatch()) {
         const QString sub = expMatch.captured(1);
-        potdProviderData()->wallpaperRemoteUrl = QUrl(QStringLiteral("http://antwrp.gsfc.nasa.gov/apod/") + sub);
+        m_remoteUrl = QUrl(QStringLiteral("http://antwrp.gsfc.nasa.gov/apod/") + sub);
 
         /**
          * Match title and author
@@ -54,11 +54,11 @@ void ApodProvider::pageRequestFinished(KJob *_job)
         const QRegularExpressionMatch match = infoRegEx.match(data);
 
         if (match.hasMatch()) {
-            potdProviderData()->wallpaperTitle = QTextDocumentFragment::fromHtml(match.captured(1).trimmed()).toPlainText();
-            potdProviderData()->wallpaperAuthor = QTextDocumentFragment::fromHtml(match.captured(2).trimmed()).toPlainText();
+            m_title = QTextDocumentFragment::fromHtml(match.captured(1).trimmed()).toPlainText();
+            m_author = QTextDocumentFragment::fromHtml(match.captured(2).trimmed()).toPlainText();
         }
 
-        KIO::StoredTransferJob *imageJob = KIO::storedGet(potdProviderData()->wallpaperRemoteUrl, KIO::NoReload, KIO::HideProgressInfo);
+        KIO::StoredTransferJob *imageJob = KIO::storedGet(m_remoteUrl, KIO::NoReload, KIO::HideProgressInfo);
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &ApodProvider::imageRequestFinished);
     } else {
         Q_EMIT error(this);
@@ -73,8 +73,7 @@ void ApodProvider::imageRequestFinished(KJob *_job)
         return;
     }
 
-    potdProviderData()->wallpaperImage = QImage::fromData(job->data());
-    Q_EMIT finished(this);
+    Q_EMIT finished(this, QImage::fromData(job->data()));
 }
 
 K_PLUGIN_CLASS_WITH_JSON(ApodProvider, "apodprovider.json")

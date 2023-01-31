@@ -21,7 +21,7 @@ class SimonStalenhagProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    SimonStalenhagProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
+    explicit SimonStalenhagProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
 private:
     void entrypointRequestFinished(KJob *job);

@@ -5,29 +5,16 @@
 #pragma once
 
 #include <QImage>
-#include <QObject>
 #include <QUrl>
 #include <QVariantList>
 
-#include <KIO/Job>
 #include <KPluginMetaData>
 
 #include "plasma_potd_export.h"
 
 class QDate;
 
-/**
- * This class is used to store wallpaper data.
- */
-struct PotdProviderData {
-    QImage wallpaperImage;
-    QString wallpaperLocalUrl;
-    QUrl wallpaperRemoteUrl;
-    QUrl wallpaperInfoUrl;
-    QString wallpaperTitle;
-    QString wallpaperAuthor;
-};
-Q_DECLARE_METATYPE(PotdProviderData)
+class PotdProviderPrivate;
 
 /**
  * This class is an interface for PoTD providers.
@@ -43,26 +30,22 @@ public:
      * @param parent The parent object.
      * @param data The metadata of the plugin
      * @param args The arguments.
+     * @since 5.25
      */
     explicit PotdProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
     /**
-     * @deprecated Since 5.25. The constructor will be removed in Plasma 6.
-     */
-    PLASMA_POTD_DEPRECATED explicit PotdProvider(QObject *parent, const QVariantList &args);
-
-    /**
      * Destroys the PoTD provider.
      */
-    ~PotdProvider() override;
+    virtual ~PotdProvider() override;
 
     /**
-     * Returns the requested image.
+     * Returns the local path of the requested image.
      *
-     * Note: This method returns only a valid image after the
+     * Note: This method returns only a valid path after the
      *       finished() signal has been emitted.
      */
-    virtual QImage image() const;
+    virtual QString localPath() const;
 
     /**
      * Returns the identifier of the PoTD request (name + date).
@@ -107,27 +90,15 @@ public:
      */
     QString name() const;
 
-    /**
-     * @return the date to load for this item, if any
-     */
-    QDate date() const;
-
-    /**
-     * @return if the date is fixed, or if it should always be "today"
-     */
-    bool isFixedDate() const;
-
-    void refreshConfig();
-    void loadConfig();
-
 Q_SIGNALS:
     /**
      * This signal is emitted whenever a request has been finished
      * successfully.
      *
      * @param provider The provider which emitted the signal.
+     * @param image The image from the provider.
      */
-    void finished(PotdProvider *provider);
+    void finished(PotdProvider *provider, const QImage &image);
 
     /**
      * This signal is emitted whenever an error has occurred.
@@ -136,19 +107,12 @@ Q_SIGNALS:
      */
     void error(PotdProvider *provider);
 
-    void configLoaded(QString apiKey, QString apiSecret);
-
 protected:
-    PotdProviderData *potdProviderData() const;
+    QUrl m_remoteUrl;
+    QUrl m_infoUrl;
+    QString m_title;
+    QString m_author;
 
 private:
-    void configRequestFinished(KJob *job);
-    void configWriteFinished(KJob *job);
-
-    const QScopedPointer<class PotdProviderPrivate> d;
-
-    QUrl configRemoteUrl;
-    QUrl configLocalUrl;
-    QString configLocalPath;
-    bool refreshed = false;
+    std::unique_ptr<PotdProviderPrivate> d;
 };

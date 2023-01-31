@@ -41,15 +41,15 @@ void NOAAProvider::listPageRequestFinished(KJob *_job)
     const QRegularExpression re("<div class=\"item-list\">.*?<li>.*?<a href=\"(.+?)\".*?>");
     auto result = re.match(data);
     if (result.hasMatch()) {
-        potdProviderData()->wallpaperInfoUrl = QUrl(QStringLiteral("https://www.nesdis.noaa.gov") + result.captured(1));
+        m_infoUrl = QUrl(QStringLiteral("https://www.nesdis.noaa.gov") + result.captured(1));
     }
-    if (!potdProviderData()->wallpaperInfoUrl.isValid()) {
+    if (!m_infoUrl.isValid()) {
         qWarning() << "Failed to get the latest article from NOAAProvider!";
         Q_EMIT error(this);
         return;
     }
 
-    KIO::StoredTransferJob *pageJob = KIO::storedGet(potdProviderData()->wallpaperInfoUrl, KIO::NoReload, KIO::HideProgressInfo);
+    KIO::StoredTransferJob *pageJob = KIO::storedGet(m_infoUrl, KIO::NoReload, KIO::HideProgressInfo);
     connect(pageJob, &KIO::StoredTransferJob::finished, this, &NOAAProvider::pageRequestFinished);
 }
 
@@ -72,9 +72,9 @@ void NOAAProvider::pageRequestFinished(KJob *_job)
     const QRegularExpression re("<a class=\"call-to-action.*?\" href=\"(.+?)\">.*?Download.*?</a>");
     const QRegularExpressionMatch result = re.match(data);
     if (result.hasMatch()) {
-        potdProviderData()->wallpaperRemoteUrl = QUrl(QStringLiteral("https://www.nesdis.noaa.gov") + result.captured(1));
+        m_remoteUrl = QUrl(QStringLiteral("https://www.nesdis.noaa.gov") + result.captured(1));
     }
-    if (!potdProviderData()->wallpaperRemoteUrl.isValid()) {
+    if (!m_remoteUrl.isValid()) {
         qWarning() << "Failed to match the latest image URL from NOAAProvider!";
         Q_EMIT error(this);
         return;
@@ -88,10 +88,10 @@ void NOAAProvider::pageRequestFinished(KJob *_job)
     const QRegularExpression titleRegEx(QStringLiteral("<meta property=\"og:title\" content=\"(.+?)\""));
     const QRegularExpressionMatch titleMatch = titleRegEx.match(data);
     if (titleMatch.hasMatch()) {
-        potdProviderData()->wallpaperTitle = QTextDocumentFragment::fromHtml(titleMatch.captured(1).trimmed()).toPlainText();
+        m_title = QTextDocumentFragment::fromHtml(titleMatch.captured(1).trimmed()).toPlainText();
     }
 
-    KIO::StoredTransferJob *imageJob = KIO::storedGet(potdProviderData()->wallpaperRemoteUrl, KIO::NoReload, KIO::HideProgressInfo);
+    KIO::StoredTransferJob *imageJob = KIO::storedGet(m_remoteUrl, KIO::NoReload, KIO::HideProgressInfo);
     connect(imageJob, &KIO::StoredTransferJob::finished, this, &NOAAProvider::imageRequestFinished);
 }
 
@@ -104,8 +104,7 @@ void NOAAProvider::imageRequestFinished(KJob *_job)
         return;
     }
 
-    potdProviderData()->wallpaperImage = QImage::fromData(job->data());
-    Q_EMIT finished(this);
+    Q_EMIT finished(this, QImage::fromData(job->data()));
 }
 
 K_PLUGIN_CLASS_WITH_JSON(NOAAProvider, "noaaprovider.json")

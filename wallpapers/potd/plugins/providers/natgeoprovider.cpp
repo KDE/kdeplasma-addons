@@ -40,11 +40,11 @@ void NatGeoProvider::pageRequestFinished(KJob *_job)
     for (int i = 0; i < lines.size(); i++) {
         QRegularExpressionMatch match = re.match(lines.at(i));
         if (match.hasMatch()) {
-            potdProviderData()->wallpaperRemoteUrl = QUrl(match.captured(1));
+            m_remoteUrl = QUrl(match.captured(1));
         }
     }
 
-    if (potdProviderData()->wallpaperRemoteUrl.isEmpty()) {
+    if (m_remoteUrl.isEmpty()) {
         Q_EMIT error(this);
         return;
     }
@@ -60,7 +60,7 @@ void NatGeoProvider::pageRequestFinished(KJob *_job)
     const QRegularExpression linkRegEx(QStringLiteral("<meta.*?property=\"og:url\" content=\"(.+?)\".*?>"));
     const QRegularExpressionMatch linkMatch = linkRegEx.match(simplifiedData);
     if (linkMatch.hasMatch()) {
-        potdProviderData()->wallpaperInfoUrl = QUrl(linkMatch.captured(1).trimmed());
+        m_infoUrl = QUrl(linkMatch.captured(1).trimmed());
     }
 
     /**
@@ -71,7 +71,7 @@ void NatGeoProvider::pageRequestFinished(KJob *_job)
     const QRegularExpression titleRegEx(QStringLiteral("<p class=\"Caption__Title\".*?>(.+?)</p>"));
     const QRegularExpressionMatch titleMatch = titleRegEx.match(simplifiedData);
     if (titleMatch.hasMatch()) {
-        potdProviderData()->wallpaperTitle = QTextDocumentFragment::fromHtml(titleMatch.captured(1).trimmed()).toPlainText();
+        m_title = QTextDocumentFragment::fromHtml(titleMatch.captured(1).trimmed()).toPlainText();
     }
 
     /**
@@ -83,11 +83,10 @@ void NatGeoProvider::pageRequestFinished(KJob *_job)
     const QRegularExpression authorRegEx(QStringLiteral("<span.*?class=\".*?Caption__Credit.*?\".*?>(.+?)</span>"));
     const QRegularExpressionMatch authorMatch = authorRegEx.match(simplifiedData);
     if (authorMatch.hasMatch()) {
-        potdProviderData()->wallpaperAuthor =
-            QTextDocumentFragment::fromHtml(authorMatch.captured(1).remove(QStringLiteral("Photograph by")).trimmed()).toPlainText();
+        m_author = QTextDocumentFragment::fromHtml(authorMatch.captured(1).remove(QLatin1String("Photograph by")).trimmed()).toPlainText();
     }
 
-    KIO::StoredTransferJob *imageJob = KIO::storedGet(potdProviderData()->wallpaperRemoteUrl, KIO::NoReload, KIO::HideProgressInfo);
+    KIO::StoredTransferJob *imageJob = KIO::storedGet(m_remoteUrl, KIO::NoReload, KIO::HideProgressInfo);
     connect(imageJob, &KIO::StoredTransferJob::finished, this, &NatGeoProvider::imageRequestFinished);
 }
 
@@ -99,8 +98,7 @@ void NatGeoProvider::imageRequestFinished(KJob *_job)
         return;
     }
 
-    potdProviderData()->wallpaperImage = QImage::fromData(job->data());
-    Q_EMIT finished(this);
+    Q_EMIT finished(this, QImage::fromData(job->data()));
 }
 
 K_PLUGIN_CLASS_WITH_JSON(NatGeoProvider, "natgeoprovider.json")

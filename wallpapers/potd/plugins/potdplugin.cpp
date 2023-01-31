@@ -22,8 +22,6 @@ public:
     {
         Q_ASSERT(uri == QByteArrayLiteral("org.kde.plasma.wallpapers.potd"));
 
-        qRegisterMetaType<PotdProviderData>();
-
         qmlRegisterType<PotdBackend>(uri, 1, 0, "PotdBackend");
         qmlRegisterType<PotdProviderModel>(uri, 1, 0, "PotdProviderModel");
 

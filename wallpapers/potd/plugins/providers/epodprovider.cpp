@@ -47,8 +47,8 @@ void EpodProvider::pageRequestFinished(KJob *_job)
         const QRegularExpression titleRegEx(QStringLiteral("<h3 class=\"entry-header\">.*?<a href=\"(.+?)\">(.+?)</a>.*?</h3>"));
         const QRegularExpressionMatch titleMatch = titleRegEx.match(data);
         if (titleMatch.hasMatch()) {
-            potdProviderData()->wallpaperInfoUrl = QUrl(titleMatch.captured(1).trimmed());
-            potdProviderData()->wallpaperTitle = QTextDocumentFragment::fromHtml(titleMatch.captured(2).trimmed()).toPlainText();
+            m_infoUrl = QUrl(titleMatch.captured(1).trimmed());
+            m_title = QTextDocumentFragment::fromHtml(titleMatch.captured(2).trimmed()).toPlainText();
         }
 
         /**
@@ -59,7 +59,7 @@ void EpodProvider::pageRequestFinished(KJob *_job)
         const QRegularExpression authorRegEx(QStringLiteral("<strong>Photographer.*?</strong>.*?<a.+?>(.+?)</a>"));
         const QRegularExpressionMatch authorMatch = authorRegEx.match(data);
         if (authorMatch.hasMatch()) {
-            potdProviderData()->wallpaperAuthor = QTextDocumentFragment::fromHtml(authorMatch.captured(1).trimmed()).toPlainText();
+            m_author = QTextDocumentFragment::fromHtml(authorMatch.captured(1).trimmed()).toPlainText();
         }
     } else {
         Q_EMIT error(this);
@@ -68,9 +68,9 @@ void EpodProvider::pageRequestFinished(KJob *_job)
 
     int pos = expMatch.capturedStart() + pattern.length();
     const QString sub = data.mid(pos - 4, pattern.length() + 10);
-    potdProviderData()->wallpaperRemoteUrl = QUrl(QStringLiteral("https://epod.usra.edu/.a/%1-pi").arg(sub));
+    m_remoteUrl = QUrl(QStringLiteral("https://epod.usra.edu/.a/%1-pi").arg(sub));
 
-    KIO::StoredTransferJob *imageJob = KIO::storedGet(potdProviderData()->wallpaperRemoteUrl, KIO::NoReload, KIO::HideProgressInfo);
+    KIO::StoredTransferJob *imageJob = KIO::storedGet(m_remoteUrl, KIO::NoReload, KIO::HideProgressInfo);
     connect(imageJob, &KIO::StoredTransferJob::finished, this, &EpodProvider::imageRequestFinished);
 }
 
@@ -83,8 +83,7 @@ void EpodProvider::imageRequestFinished(KJob *_job)
     }
 
     // FIXME: this really should be done in a thread as this can block
-    potdProviderData()->wallpaperImage = QImage::fromData(job->data());
-    Q_EMIT finished(this);
+    Q_EMIT finished(this, QImage::fromData(job->data()));
 }
 
 K_PLUGIN_CLASS_WITH_JSON(EpodProvider, "epodprovider.json")

@@ -32,8 +32,8 @@ install(TARGETS plasma_wallpaper_potdplugin DESTINATION ${KDE_INSTALL_QMLDIR}/or
 install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)
 
 ########### plugin core library ############
-set(POTDPROVIDER_VERSION 1.0.0)
-set(POTDPROVIDER_VERSION_MAJOR 1)
+set(POTDPROVIDER_VERSION 2.0.0)
+set(POTDPROVIDER_VERSION_MAJOR 2)
 
 set(potd_provider_core_SRCS
 	potdprovider.cpp
@@ -52,7 +52,12 @@ target_include_directories(plasmapotdprovidercore
     PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
     INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}>"
 )
-generate_export_header(plasmapotdprovidercore BASE_NAME PLASMA_POTD EXPORT_FILE_NAME plasma_potd_export.h)
+ecm_generate_export_header(plasmapotdprovidercore
+    BASE_NAME PLASMA_POTD
+    EXPORT_FILE_NAME plasma_potd_export.h
+    VERSION ${POTDPROVIDER_VERSION}
+    DEPRECATED_BASE_VERSION 0
+)
 
 install(TARGETS plasmapotdprovidercore EXPORT plasmapotdproviderTargets ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(FILES

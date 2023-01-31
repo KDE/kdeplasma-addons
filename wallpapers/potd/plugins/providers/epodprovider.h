@@ -21,7 +21,7 @@ class EpodProvider : public PotdProvider
     Q_OBJECT
 
 public:
-    EpodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
+    explicit EpodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
 private:
     void pageRequestFinished(KJob *job);

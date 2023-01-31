@@ -20,11 +20,6 @@ FocusScope {
     readonly property bool isNull: wallpaperImage.status !== Image.Ready
 
     /**
-     * The wallpaper image
-     */
-    required property string source
-
-    /**
      * The background color of the preview area when the image is loaded
      */
     property color backgroundColor
@@ -78,12 +73,12 @@ FocusScope {
 
     onThumbnailLoadingChanged: {
         if (!thumbnailLoading) {
-            if (wallpaperImage.source === Qt.resolvedUrl(delegate.source)) {
+            if (wallpaperImage.source === Qt.resolvedUrl(delegate.localUrl)) {
                 wallpaperImage.source = "";
             }
-            wallpaperImage.source = delegate.source;
+            wallpaperImage.source = delegate.localUrl;
         } else {
-            wallpaperImage.source = delegate.source;
+            wallpaperImage.source = delegate.localUrl;
         }
     }
 
