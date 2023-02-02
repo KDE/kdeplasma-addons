@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Giovanni Sora <g.sora@tiscali.it>, 2019, 2020, 2022.
+# Giovanni Sora <g.sora@tiscali.it>, 2019, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 00:59+0000\n"
-"PO-Revision-Date: 2022-12-14 16:18+0100\n"
+"PO-Revision-Date: 2023-02-01 17:54+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -30,6 +30,9 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"Iste fornitor de tapete de papiro non exclude imagines que pote  esser "
+"sensibile o detestabile. Usa prudentia si iste imagines essera monstrate in "
+"publico."
 
 #: package/contents/ui/config.qml:76
 #, kde-format
@@ -209,7 +212,7 @@ msgstr "Tabliss"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Cyber-World"
-msgstr ""
+msgstr "Cyber-World"
 
 #: package/contents/ui/config.qml:229
 #, kde-format

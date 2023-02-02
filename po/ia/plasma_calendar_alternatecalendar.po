@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-20 00:59+0000\n"
-"PO-Revision-Date: 2023-01-14 22:55+0100\n"
+"PO-Revision-Date: 2023-02-01 17:53+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: calendarsystem.h:52
 #, kde-format
@@ -44,14 +44,12 @@ msgid "Islamic Calendar (Astronomical)"
 msgstr ""
 
 #: calendarsystem.h:68
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "The Islamic Civil Calendar"
+#, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "The Islamic Civil Calendar (Tabular)"
-msgstr "Le Calendario Civil Islamic"
+msgstr "Le Calendario Civil Islamic(Tabular)"
 
 #: calendarsystem.h:72
 #, kde-format
