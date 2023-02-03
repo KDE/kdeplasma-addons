@@ -202,7 +202,3 @@ msgstr "Afegeix fitxers…"
 msgctxt "@action:button"
 msgid "Configure…"
 msgstr "Configura…"
-
-#~ msgctxt "@option:check"
-#~ msgid "Show background frame"
-#~ msgstr "Mostra el marc del fons"

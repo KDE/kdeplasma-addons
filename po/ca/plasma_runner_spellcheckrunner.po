@@ -77,14 +77,3 @@ msgstr "Paraula d'ac&tivació:"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr "Configura els diccionaris…"
-
-#~ msgctxt "@action"
-#~ msgid "Copy to Clipboard"
-#~ msgstr "Copia al porta-retalls"
-
-#~ msgid "Could not find a dictionary."
-#~ msgstr "No s'ha pogut trobar cap diccionari."
-
-#~ msgctxt "separator for a list of words"
-#~ msgid ", "
-#~ msgstr ", "
