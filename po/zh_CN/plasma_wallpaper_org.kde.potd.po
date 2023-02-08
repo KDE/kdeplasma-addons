@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-25 00:59+0000\n"
-"PO-Revision-Date: 2023-01-12 10:30\n"
+"PO-Revision-Date: 2023-02-07 11:01\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -31,6 +31,8 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"此壁纸提供者不会过滤敏感的或令人反感的图像。如果这些图像将在公共场所展示，请"
+"小心使用。"
 
 #: package/contents/ui/config.qml:76
 #, kde-format
@@ -210,7 +212,7 @@ msgstr "Tabliss"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Cyber-World"
-msgstr ""
+msgstr "电子世界"
 
 #: package/contents/ui/config.qml:229
 #, kde-format
