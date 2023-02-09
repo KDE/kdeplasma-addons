@@ -1,7 +1,7 @@
 # German translations for kdeplasma-addons package.
 # Copyright (C) 2022 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# Frederik Schwarzer <schwarzer@kde.org>, 2022.
+# Frederik Schwarzer <schwarzer@kde.org>, 2022, 2023.
 #
 # Automatically generated, 2022.
 msgid ""
@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-12 00:56+0000\n"
-"PO-Revision-Date: 2022-06-08 01:36+0200\n"
+"PO-Revision-Date: 2023-02-09 01:28+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.12.1\n"
 
 #: calendarsystem.h:54
 #, kde-format
@@ -65,13 +65,13 @@ msgstr ""
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
-msgstr ""
+msgstr "Kalendersystem:"
 
 #: config/qml/AlternateCalendarConfig.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
-msgstr ""
+msgstr "Datumsversatz:"
 
 #: config/qml/AlternateCalendarConfig.qml:59
 #, kde-format
@@ -86,16 +86,16 @@ msgctxt ""
 "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
 "number %4 Full date in Hebrew"
 msgid "%1 %2, %3 (%4)"
-msgstr ""
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/indiancalendar.cpp:73
 #, kde-format
 msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 msgid "%1 %2, %3"
-msgstr ""
+msgstr "%1 %2, %3"
 
 #: provider/qtcalendar.cpp:51
 #, kde-format
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
-msgstr ""
+msgstr "%1 %2, %3"
