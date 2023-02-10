@@ -13,6 +13,8 @@
 #include <KIO/Job>
 #include <KPluginFactory>
 
+#include "debug.h"
+
 NOAAProvider::NOAAProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : PotdProvider(parent, data, args)
 {
@@ -44,7 +46,7 @@ void NOAAProvider::listPageRequestFinished(KJob *_job)
         m_infoUrl = QUrl(QStringLiteral("https://www.nesdis.noaa.gov") + result.captured(1));
     }
     if (!m_infoUrl.isValid()) {
-        qWarning() << "Failed to get the latest article from NOAAProvider!";
+        qCWarning(WALLPAPERPOTD) << "Failed to get the latest article from NOAAProvider!";
         Q_EMIT error(this);
         return;
     }
@@ -99,7 +101,7 @@ void NOAAProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        qWarning() << "Failed to get the latest image from NOAAProvider!";
+        qCWarning(WALLPAPERPOTD) << "Failed to get the latest image from NOAAProvider. Please report the issue on bugs.kde.org";
         Q_EMIT error(this);
         return;
     }

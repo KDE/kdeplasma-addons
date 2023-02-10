@@ -19,6 +19,8 @@
 #include <KPluginFactory>
 #include <KSharedConfig>
 
+#include "debug.h"
+
 static QUrl buildUrl(const QDate &date, const QString &apiKey)
 {
     QUrl url(QLatin1String("https://api.flickr.com/services/rest/"));
@@ -45,7 +47,7 @@ void FlickrProvider::configRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        qWarning() << QStringLiteral("configRequestFinished error: failed to fetch data");
+        qCWarning(WALLPAPERPOTD) << "configRequestFinished error: failed to fetch data";
         Q_EMIT error(this);
         return;
     }
@@ -58,7 +60,7 @@ void FlickrProvider::configWriteFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        qWarning() << QStringLiteral("configWriteFinished error: failed to write data. %1").arg(job->errorText());
+        qCWarning(WALLPAPERPOTD) << "configWriteFinished error: failed to write data." << job->errorText();
         Q_EMIT error(this);
     } else {
         loadConfig();
@@ -119,7 +121,7 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        qWarning() << QStringLiteral("XML request error: %1").arg(job->errorText());
+        qCWarning(WALLPAPERPOTD) << "XML request error:" << job->errorText();
         Q_EMIT error(this);
         return;
     }
@@ -141,7 +143,7 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
             if (xml.name() == QLatin1String("rsp")) {
                 /* no pictures available for the specified parameters */
                 if (attributes.value(QLatin1String("stat")).toString() != QLatin1String("ok")) {
-                    qWarning() << QStringLiteral("xmlRequestFinished error: no photos for the query");
+                    qCWarning(WALLPAPERPOTD) << "xmlRequestFinished error: no photos for the query";
                     Q_EMIT error(this);
                     return;
                 }
@@ -190,7 +192,7 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
     }
 
     if (xml.error() && xml.error() != QXmlStreamReader::PrematureEndOfDocumentError) {
-        qWarning() << QStringLiteral("XML ERROR at line %1: %2").arg(xml.lineNumber(), xml.error());
+        qCWarning(WALLPAPERPOTD) << "XML ERROR at line" << xml.lineNumber() << xml.error();
     }
 
     if (m_photoList.begin() != m_photoList.end()) {
@@ -214,7 +216,7 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
         KIO::StoredTransferJob *imageJob = KIO::storedGet(m_remoteUrl, KIO::NoReload, KIO::HideProgressInfo);
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &FlickrProvider::imageRequestFinished);
     } else {
-        qWarning() << QStringLiteral("List is empty in XML file");
+        qCWarning(WALLPAPERPOTD) << "List is empty in XML file";
         Q_EMIT error(this);
     }
 }
@@ -223,7 +225,7 @@ void FlickrProvider::imageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        qWarning() << QStringLiteral("Image request error: %1").arg(job->errorText());
+        qCWarning(WALLPAPERPOTD) << "Image request error:" << job->errorText();
         Q_EMIT error(this);
         return;
     }
@@ -244,7 +246,7 @@ void FlickrProvider::pageRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
-        qWarning() << QStringLiteral("No author available");
+        qCWarning(WALLPAPERPOTD) << "No author available";
         Q_EMIT finished(this, m_image);
         return;
     }

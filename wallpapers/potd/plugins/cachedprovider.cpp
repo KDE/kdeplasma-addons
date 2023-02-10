@@ -77,7 +77,7 @@ void SaveImageThread::run()
         infoFile.write(QJsonDocument(jsonObject).toJson(QJsonDocument::Compact));
         infoFile.close();
     } else {
-        qWarning() << "Failed to save the wallpaper information!";
+        qCWarning(WALLPAPERPOTD) << "Failed to save the wallpaper information!";
     }
 
     Q_EMIT done(localPath);

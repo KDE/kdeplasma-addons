@@ -282,5 +282,4 @@ void PotdBackend::registerClient()
 
     // For updateSource()
     setUpdateOverMeteredConnection(m_doesUpdateOverMeteredConnection);
-    qCritical() << "registered client";
 }

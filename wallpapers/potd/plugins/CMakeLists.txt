@@ -1,5 +1,16 @@
 configure_file(config-NetworkManagerQt.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-NetworkManagerQt.h)
 
+add_library(plasma_wallpaper_potdplugin_debug STATIC)
+set_property(TARGET plasma_wallpaper_potdplugin_debug PROPERTY POSITION_INDEPENDENT_CODE ON)
+target_link_libraries(plasma_wallpaper_potdplugin_debug
+    Qt::Core
+)
+ecm_qt_declare_logging_category(plasma_wallpaper_potdplugin_debug
+                                HEADER debug.h
+                                IDENTIFIER WALLPAPERPOTD
+                                CATEGORY_NAME kde.wallpapers.potd
+                                DEFAULT_SEVERITY Info)
+
 set(potd_engine_SRCS
 	cachedprovider.cpp
 	potdbackend.cpp
@@ -8,12 +19,6 @@ set(potd_engine_SRCS
 	potdplugin.cpp
 )
 
-ecm_qt_declare_logging_category(potd_engine_SRCS
-                                HEADER debug.h
-                                IDENTIFIER WALLPAPERPOTD
-                                CATEGORY_NAME kde.wallpapers.potd
-                                DEFAULT_SEVERITY Info)
-
 add_library(plasma_wallpaper_potdplugin SHARED ${potd_engine_SRCS})
 target_link_libraries(plasma_wallpaper_potdplugin plasmapotdprovidercore
     KF5::I18n
@@ -21,6 +26,7 @@ target_link_libraries(plasma_wallpaper_potdplugin plasmapotdprovidercore
     Qt::DBus
     Qt::Qml
     Qt::Widgets # QFileDialog
+    plasma_wallpaper_potdplugin_debug
 )
 if (HAVE_NetworkManagerQt)
     target_link_libraries(plasma_wallpaper_potdplugin KF5::NetworkManagerQt)
