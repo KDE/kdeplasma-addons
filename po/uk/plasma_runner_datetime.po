@@ -3,14 +3,14 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2010, 2015, 2021, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2010, 2015, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_datetime\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-09 01:03+0000\n"
-"PO-Revision-Date: 2022-12-28 08:17+0200\n"
-"Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
+"PO-Revision-Date: 2023-02-09 08:47+0200\n"
+"Last-Translator: Fracture dept <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
@@ -39,7 +39,7 @@ msgctxt ""
 "e.g. 'current time in Berlin' or '18:00 UTC to CET', separated by '|' (will "
 "be used as a regex)"
 msgid "to|in|as|at"
-msgstr ""
+msgstr "у|в|як|о"
 
 #: datetimerunner.cpp:36
 #, kde-format
@@ -76,7 +76,7 @@ msgstr ""
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid "<time> <timezone> in <timezone>"
-msgstr ""
+msgstr "<час> <часовий пояс> у <часовий пояс>"
 
 #: datetimerunner.cpp:43
 #, kde-format
@@ -85,6 +85,9 @@ msgid ""
 "one time zone is given, the other will be the system time zone. If no date "
 "or time is given, it will be the current date and time."
 msgstr ""
+"Перетворює час у першому часовому поясі у час у другому часовому поясі. Якщо "
+"вказано лише один часовий пояс, іншим буде часовий пояс системи. Якщо не "
+"буде вказано дати або часу, буде використано поточну дату і час."
 
 #: datetimerunner.cpp:60
 #, kde-format
@@ -92,11 +95,7 @@ msgid "Today's date is %1"
 msgstr "Сьогодні %1"
 
 #: datetimerunner.cpp:80
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "date difference between time zones, e.g. in Stockholm it's 1 calendar day "
-#| "later than in Brasilia"
-#| msgid "%1 later"
+#, kde-format
 msgctxt ""
 "time difference between time zones, e.g. in Stockholm it's 1 calendar day "
 "later than in Brasilia"
@@ -131,7 +130,7 @@ msgctxt ""
 "Brasilia time in Stockholm = 02:00 + 1 day, where %1 is the time and %2 is "
 "the days later"
 msgid "%1 + %2"
-msgstr ""
+msgstr "%1 + %2"
 
 #: datetimerunner.cpp:129 datetimerunner.cpp:231
 #, kde-format
@@ -140,7 +139,7 @@ msgctxt ""
 "Stockholm time in Brasilia = 22:00 - 1 day, where %1 is the time and %2 is "
 "the days earlier"
 msgid "%1 - %2"
-msgstr ""
+msgstr "%1 - %2"
 
 #: datetimerunner.cpp:138 datetimerunner.cpp:241
 #, kde-format
@@ -151,11 +150,7 @@ msgid "%1 later"
 msgstr "%1 пізніше"
 
 #: datetimerunner.cpp:140 datetimerunner.cpp:243
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "date difference between time zones, e.g. in Brasilia it's 1 calendar day "
-#| "earlier than in Stockholm"
-#| msgid "%1 earlier"
+#, kde-format
 msgctxt ""
 "time difference between time zones, e.g. in Brasilia it's 4 hours earlier "
 "than in Stockholm"

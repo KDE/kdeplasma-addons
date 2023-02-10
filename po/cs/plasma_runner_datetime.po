@@ -89,16 +89,12 @@ msgid "Today's date is %1"
 msgstr "Dnešní datum je %1"
 
 #: datetimerunner.cpp:80
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "date difference between time zones, e.g. in Stockholm it's 1 calendar day "
-#| "later than in Brasilia"
-#| msgid "%1 later"
+#, kde-format
 msgctxt ""
 "time difference between time zones, e.g. in Stockholm it's 1 calendar day "
 "later than in Brasilia"
 msgid "%1 later"
-msgstr "%1 později"
+msgstr ""
 
 #: datetimerunner.cpp:82
 #, kde-format
@@ -148,16 +144,12 @@ msgid "%1 later"
 msgstr "%1 později"
 
 #: datetimerunner.cpp:140 datetimerunner.cpp:243
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "date difference between time zones, e.g. in Brasilia it's 1 calendar day "
-#| "earlier than in Stockholm"
-#| msgid "%1 earlier"
+#, kde-format
 msgctxt ""
 "time difference between time zones, e.g. in Brasilia it's 4 hours earlier "
 "than in Stockholm"
 msgid "%1 earlier"
-msgstr "%1 dříve"
+msgstr ""
 
 #: datetimerunner.cpp:142 datetimerunner.cpp:245
 #, kde-format
@@ -166,9 +158,3 @@ msgctxt ""
 "as in Berlin"
 msgid "no time difference"
 msgstr "žádný rozdíl času"
-
-#~ msgctxt ""
-#~ "time difference between time zones, e.g. in Brasilia it's 4 hours ealier "
-#~ "than in Stockholm"
-#~ msgid "%1 earlier"
-#~ msgstr "%1 dříve"
