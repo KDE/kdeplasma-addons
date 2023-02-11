@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-09 01:03+0000\n"
-"PO-Revision-Date: 2023-01-06 11:04+0100\n"
+"PO-Revision-Date: 2023-02-10 10:59+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 22.12.2\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: datetimerunner.cpp:23
@@ -73,7 +73,7 @@ msgstr ""
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid "<time> <timezone> in <timezone>"
-msgstr ""
+msgstr "<time> <timezone> v <timezone>"
 
 #: datetimerunner.cpp:43
 #, kde-format
@@ -94,7 +94,7 @@ msgctxt ""
 "time difference between time zones, e.g. in Stockholm it's 1 calendar day "
 "later than in Brasilia"
 msgid "%1 later"
-msgstr ""
+msgstr "%1 později"
 
 #: datetimerunner.cpp:82
 #, kde-format
@@ -124,7 +124,7 @@ msgctxt ""
 "Brasilia time in Stockholm = 02:00 + 1 day, where %1 is the time and %2 is "
 "the days later"
 msgid "%1 + %2"
-msgstr ""
+msgstr "%1 + %2"
 
 #: datetimerunner.cpp:129 datetimerunner.cpp:231
 #, kde-format
@@ -133,7 +133,7 @@ msgctxt ""
 "Stockholm time in Brasilia = 22:00 - 1 day, where %1 is the time and %2 is "
 "the days earlier"
 msgid "%1 - %2"
-msgstr ""
+msgstr "%1 - %2"
 
 #: datetimerunner.cpp:138 datetimerunner.cpp:241
 #, kde-format
@@ -149,7 +149,7 @@ msgctxt ""
 "time difference between time zones, e.g. in Brasilia it's 4 hours earlier "
 "than in Stockholm"
 msgid "%1 earlier"
-msgstr ""
+msgstr "%1 dříve"
 
 #: datetimerunner.cpp:142 datetimerunner.cpp:245
 #, kde-format

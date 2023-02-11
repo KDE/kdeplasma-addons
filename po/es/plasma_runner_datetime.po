@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-09 01:03+0000\n"
-"PO-Revision-Date: 2023-02-09 03:31+0100\n"
+"PO-Revision-Date: 2023-02-10 16:12+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -76,7 +76,7 @@ msgstr ""
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid "<time> <timezone> in <timezone>"
-msgstr "<time> <timezone> en <timezone>"
+msgstr "<hora> <zonahoraria> en <zonahoraria>"
 
 #: datetimerunner.cpp:43
 #, kde-format
