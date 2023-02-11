@@ -1,16 +1,16 @@
 # Translation of plasma_runner_datetime.po to Catalan (Valencian)
-# Copyright (C) 2010-2022 This_file_is_part_of_KDE
+# Copyright (C) 2010-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2010, 2015, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2010, 2015, 2022, 2023.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-28 00:50+0000\n"
-"PO-Revision-Date: 2022-12-28 05:55+0100\n"
+"PO-Revision-Date: 2023-02-09 13:18+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -47,7 +47,7 @@ msgstr "Mostra l'hora actual"
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid " <timezone>"
-msgstr "<Zona horària>"
+msgstr "<zona horària>"
 
 #: datetimerunner.cpp:32
 #, kde-format
