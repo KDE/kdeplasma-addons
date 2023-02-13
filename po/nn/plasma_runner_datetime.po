@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-28 00:50+0000\n"
-"PO-Revision-Date: 2023-01-23 21:49+0100\n"
+"PO-Revision-Date: 2023-02-12 12:23+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #: datetimerunner.cpp:21
 #, kde-format
@@ -34,12 +34,12 @@ msgstr "klokka"
 #: datetimerunner.cpp:29
 #, kde-format
 msgid "Displays the current date"
-msgstr "Vis dagens dato"
+msgstr "Viser dagens dato"
 
 #: datetimerunner.cpp:30
 #, kde-format
 msgid "Displays the current time"
-msgstr "Vis gjeldande klokkeslett"
+msgstr "Viser gjeldande klokkeslett"
 
 #: datetimerunner.cpp:31 datetimerunner.cpp:33
 #, kde-format
@@ -72,7 +72,7 @@ msgctxt ""
 "date difference between time zones, e.g. in Stockholm it's 1 calendar day "
 "later than in Brasilia"
 msgid "%1 later"
-msgstr "%1 seinare"
+msgstr "%1 etter"
 
 #: datetimerunner.cpp:67
 #, kde-format
@@ -80,7 +80,7 @@ msgctxt ""
 "date difference between time zones, e.g. in Brasilia it's 1 calendar day "
 "earlier than in Stockholm"
 msgid "%1 earlier"
-msgstr "%1 tidlegare"
+msgstr "%1 før"
 
 #: datetimerunner.cpp:69
 #, kde-format
@@ -101,7 +101,7 @@ msgctxt ""
 "time difference between time zones, e.g. in Stockholm it's 4 hours later "
 "than in Brasilia"
 msgid "%1 later"
-msgstr "%1 seinare"
+msgstr "%1 etter"
 
 #: datetimerunner.cpp:105
 #, kde-format
@@ -109,7 +109,7 @@ msgctxt ""
 "time difference between time zones, e.g. in Brasilia it's 4 hours ealier "
 "than in Stockholm"
 msgid "%1 earlier"
-msgstr "%1 tidlegare"
+msgstr "%1 før"
 
 #: datetimerunner.cpp:107
 #, kde-format
