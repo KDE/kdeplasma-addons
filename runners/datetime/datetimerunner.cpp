@@ -26,7 +26,7 @@ static const QString conversionWords = i18nc(
     "words to specify a time in a time zone or to convert a time to a time zone, e.g. 'current time in Berlin' or '18:00 UTC to CET', separated by '|' (will "
     "be used as a regex)",
     "to|in|as|at");
-static const QRegularExpression conversionWordsRegex = QRegularExpression(QString("\\s(%1)\\s").arg(conversionWords));
+static const QRegularExpression conversionWordsRegex = QRegularExpression(QString("\\s(%1|>|->)\\s").arg(conversionWords));
 
 DateTimeRunner::DateTimeRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : AbstractRunner(parent, metaData, args)
