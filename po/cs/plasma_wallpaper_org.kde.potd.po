@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-17 00:59+0000\n"
-"PO-Revision-Date: 2023-01-31 15:46+0100\n"
+"PO-Revision-Date: 2023-02-13 13:00+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #: package/contents/ui/config.qml:48
 #, kde-format
@@ -308,6 +308,7 @@ msgstr "Nedostupný"
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
 msgstr ""
+"%1 Autor: %2. Klikněte pravým tlačítkem myši pro zobrazení dalších činností."
 
 #: package/contents/ui/WallpaperDelegate.qml:146
 #, kde-format
@@ -344,7 +345,7 @@ msgstr "Otevřít odkaz v prohlížeči..."
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
-msgstr ""
+msgstr "Otevřít stránku obrázku dne ve výchozím prohlížeči"
 
 #: plugins/potdbackend.cpp:219
 #, kde-format
