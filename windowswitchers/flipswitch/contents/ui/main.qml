@@ -39,7 +39,7 @@ KWin.TabBoxSwitcher {
 
         color: "transparent"
 
-        KWin.DesktopBackgroundItem {
+        KWin.DesktopBackground {
             activity: KWin.Workspace.currentActivity
             desktop: KWin.Workspace.currentVirtualDesktop
             outputName: window.screen.name
@@ -131,7 +131,7 @@ KWin.TabBoxSwitcher {
                 // Reduce opacity on the end so items dissapear more naturally
                 opacity: Math.min(1, (1 - PathView.progress) / thumbnailView.preferredHighlightBegin);
 
-                KWin.WindowThumbnailItem {
+                KWin.WindowThumbnail {
                     id: thumbnail
                     readonly property double ratio: implicitWidth / implicitHeight
 

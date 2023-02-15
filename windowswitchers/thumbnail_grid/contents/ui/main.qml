@@ -165,14 +165,14 @@ KWin.TabBoxSwitcher {
                             }
                         }
 
-                        // KWin.WindowThumbnailItem needs a container
+                        // KWin.WindowThumbnail needs a container
                         // otherwise it will be drawn the same size as the parent ColumnLayout
                         Item {
                             Layout.fillWidth: true
                             Layout.fillHeight: true
 
                             // Cannot draw anything (like an icon) on top of thumbnail
-                            KWin.WindowThumbnailItem {
+                            KWin.WindowThumbnail {
                                 id: thumbnailItem
                                 anchors.fill: parent
                                 wId: windowId

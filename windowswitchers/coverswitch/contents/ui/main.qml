@@ -39,7 +39,7 @@ KWin.TabBoxSwitcher {
 
         color: "transparent"
 
-        KWin.DesktopBackgroundItem {
+        KWin.DesktopBackground {
             activity: KWin.Workspace.currentActivity
             desktop: KWin.Workspace.currentVirtualDesktop
             outputName: window.screen.name
@@ -153,7 +153,7 @@ KWin.TabBoxSwitcher {
                 scale: PathView.onPath ? PathView.scale : 0
                 z: PathView.onPath ? Math.floor(PathView.progress * thumbnailView.visibleCount) : -1
 
-                KWin.WindowThumbnailItem {
+                KWin.WindowThumbnail {
                     id: thumbnail
                     readonly property double ratio: implicitWidth / implicitHeight
 

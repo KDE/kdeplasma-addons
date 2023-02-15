@@ -25,7 +25,7 @@ Item {
                 model: KWinComponents.WindowModel {}
             }
 
-            KWinComponents.WindowThumbnailItem {
+            KWinComponents.WindowThumbnail {
                 client: model.window
                 x: model.window.x
                 y: model.window.y

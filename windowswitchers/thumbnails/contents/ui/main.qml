@@ -74,7 +74,7 @@ KWin.TabBoxSwitcher {
                             topMargin: hoverItem.margins.top
                             bottomMargin: hoverItem.margins.bottom
                         }
-                        KWin.WindowThumbnailItem {
+                        KWin.WindowThumbnail {
                             wId: windowId
                             anchors.fill: parent
                         }
