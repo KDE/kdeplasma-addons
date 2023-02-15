@@ -20,17 +20,17 @@ Item {
         scale: Math.min(parent.width / container.width, parent.height / container.height)
 
         Repeater {
-            model: KWinComponents.ClientFilterModel {
+            model: KWinComponents.WindowFilterModel {
                 activity: KWinComponents.Workspace.currentActivity
-                model: KWinComponents.ClientModel {}
+                model: KWinComponents.WindowModel {}
             }
 
             KWinComponents.WindowThumbnailItem {
-                client: model.client
-                x: model.client.x
-                y: model.client.y
-                z: model.client.stackingOrder
-                visible: (model.client.desktop === -1 || model.client.desktop === root.desktop) && !model.client.minimized
+                client: model.window
+                x: model.window.x
+                y: model.window.y
+                z: model.window.stackingOrder
+                visible: (model.window.desktop === -1 || model.window.desktop === root.desktop) && !model.window.minimized
             }
         }
     }
