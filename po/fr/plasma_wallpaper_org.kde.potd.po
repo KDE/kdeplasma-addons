@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-25 00:59+0000\n"
+"POT-Creation-Date: 2023-02-16 01:00+0000\n"
 "PO-Revision-Date: 2023-01-25 22:53+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -298,25 +298,25 @@ msgstr ""
 "Ouvrir le dossier de destination où l'image du fond d'écran a été "
 "enregistrée."
 
-#: package/contents/ui/WallpaperDelegate.qml:142
+#: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
 msgstr "Image du jour"
 
-#: package/contents/ui/WallpaperDelegate.qml:143
+#: package/contents/ui/WallpaperDelegate.qml:138
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
 msgstr "Chargement en cours"
 
-#: package/contents/ui/WallpaperDelegate.qml:144
+#: package/contents/ui/WallpaperDelegate.qml:139
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
 msgstr "Indisponible"
 
-#: package/contents/ui/WallpaperDelegate.qml:145
+#: package/contents/ui/WallpaperDelegate.qml:140
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
@@ -324,38 +324,38 @@ msgstr ""
 "Auteur %1 : %2. Faites un clic droit sur l'image pour afficher plus "
 "d'actions."
 
-#: package/contents/ui/WallpaperDelegate.qml:146
+#: package/contents/ui/WallpaperDelegate.qml:141
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
 msgstr "Le fonds d'écran a été trouvé à partir d'Internet."
 
-#: package/contents/ui/WallpaperDelegate.qml:147
+#: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
 msgstr "Impossible de trouver le fonds d'écran à partir d'Internet."
 
-#: package/contents/ui/WallpaperPreview.qml:50
+#: package/contents/ui/WallpaperPreview.qml:49
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
 msgstr "Enregistrer l'image comme..."
 
-#: package/contents/ui/WallpaperPreview.qml:53
+#: package/contents/ui/WallpaperPreview.qml:52
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
 msgstr "Enregistrer l'image du jour sur un disque local"
 
-#: package/contents/ui/WallpaperPreview.qml:59
+#: package/contents/ui/WallpaperPreview.qml:58
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
 msgstr "Ouvrir un lien dans le navigateur..."
 
-#: package/contents/ui/WallpaperPreview.qml:62
+#: package/contents/ui/WallpaperPreview.qml:61
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"

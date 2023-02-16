@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-25 00:59+0000\n"
+"POT-Creation-Date: 2023-02-16 01:00+0000\n"
 "PO-Revision-Date: 2023-01-27 19:10+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -294,25 +294,25 @@ msgstr ""
 "Отворете папката за местоназначение, в която е записано изображението на "
 "тапета."
 
-#: package/contents/ui/WallpaperDelegate.qml:142
+#: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
 msgstr "Снимка на деня"
 
-#: package/contents/ui/WallpaperDelegate.qml:143
+#: package/contents/ui/WallpaperDelegate.qml:138
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
 msgstr "Зареждане"
 
-#: package/contents/ui/WallpaperDelegate.qml:144
+#: package/contents/ui/WallpaperDelegate.qml:139
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
 msgstr "Не е наличен"
 
-#: package/contents/ui/WallpaperDelegate.qml:145
+#: package/contents/ui/WallpaperDelegate.qml:140
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
@@ -320,38 +320,38 @@ msgstr ""
 "%1 Автор: %2. Кликнете с десния бутон на мишката върху изображението, за да "
 "видите повече действия."
 
-#: package/contents/ui/WallpaperDelegate.qml:146
+#: package/contents/ui/WallpaperDelegate.qml:141
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
 msgstr "Тапетът е свален от интернет."
 
-#: package/contents/ui/WallpaperDelegate.qml:147
+#: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
 msgstr "Неуспешно сваляне на тапета от интернет."
 
-#: package/contents/ui/WallpaperPreview.qml:50
+#: package/contents/ui/WallpaperPreview.qml:49
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
 msgstr "Запазване на изображението като…"
 
-#: package/contents/ui/WallpaperPreview.qml:53
+#: package/contents/ui/WallpaperPreview.qml:52
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
 msgstr "Запазване на Снимка на деня на локалния диск"
 
-#: package/contents/ui/WallpaperPreview.qml:59
+#: package/contents/ui/WallpaperPreview.qml:58
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
 msgstr "Отваряне на препраткта в браузър…"
 
-#: package/contents/ui/WallpaperPreview.qml:62
+#: package/contents/ui/WallpaperPreview.qml:61
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
