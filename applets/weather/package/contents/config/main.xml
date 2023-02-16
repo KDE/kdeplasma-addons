@@ -30,13 +30,13 @@ SPDX-License-Identifier: GPL-2.0-or-later
       <default>true</default>
     </entry>
     <entry name="showWindInTooltip" type="bool">
-      <default>false</default>
+      <default>true</default>
     </entry>
     <entry name="showPressureInTooltip" type="bool">
       <default>false</default>
     </entry>
     <entry name="showHumidityInTooltip" type="bool">
-      <default>false</default>
+      <default>true</default>
     </entry>
   </group>
 
