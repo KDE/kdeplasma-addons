@@ -25,9 +25,6 @@ DropArea {
     Layout.minimumWidth: PlasmaCore.Units.iconSizes.small
     Layout.minimumHeight: Layout.minimumWidth
 
-    Layout.maximumWidth: inPanel ? PlasmaCore.Units.iconSizeHints.panel : -1
-    Layout.maximumHeight: inPanel ? PlasmaCore.Units.iconSizeHints.panel : -1
-
     property string url: ""
     property string errorMessage: ""
     property var pasteUrls: []
