@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-03 00:45+0000\n"
+"POT-Creation-Date: 2023-02-18 01:00+0000\n"
 "PO-Revision-Date: 2023-01-19 23:52+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -25,53 +25,53 @@ msgctxt "@title"
 msgid "General"
 msgstr "一般"
 
-#: contents/ui/main.qml:225
+#: contents/ui/main.qml:222
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "貼上"
 
-#: contents/ui/main.qml:253 contents/ui/main.qml:293
+#: contents/ui/main.qml:250 contents/ui/main.qml:290
 #, kde-format
 msgid "Share"
 msgstr "分享"
 
-#: contents/ui/main.qml:254 contents/ui/main.qml:294
+#: contents/ui/main.qml:251 contents/ui/main.qml:291
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr "將文字或影像拖曳到這裡以便上傳到線上服務。"
 
-#: contents/ui/main.qml:294
+#: contents/ui/main.qml:291
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "上傳 %1 到線上服務"
 
-#: contents/ui/main.qml:307
+#: contents/ui/main.qml:304
 #, kde-format
 msgid "Sending…"
 msgstr "傳送中…"
 
-#: contents/ui/main.qml:308
+#: contents/ui/main.qml:305
 #, kde-format
 msgid "Please wait"
 msgstr "請稍候"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:312
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "已成功上傳"
 
-#: contents/ui/main.qml:316
+#: contents/ui/main.qml:313
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:323
+#: contents/ui/main.qml:320
 #, kde-format
 msgid "Error during upload."
 msgstr "上傳時發生錯誤。"
 
-#: contents/ui/main.qml:324
+#: contents/ui/main.qml:321
 #, kde-format
 msgid "Please, try again."
 msgstr "請再試一次。"

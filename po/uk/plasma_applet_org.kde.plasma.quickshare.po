@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quickshare\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-03 00:45+0000\n"
+"POT-Creation-Date: 2023-02-18 01:00+0000\n"
 "PO-Revision-Date: 2021-12-13 08:40+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -26,55 +26,55 @@ msgctxt "@title"
 msgid "General"
 msgstr "Загальне"
 
-#: contents/ui/main.qml:225
+#: contents/ui/main.qml:222
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "Вставити"
 
-#: contents/ui/main.qml:253 contents/ui/main.qml:293
+#: contents/ui/main.qml:250 contents/ui/main.qml:290
 #, kde-format
 msgid "Share"
 msgstr "Оприлюднити"
 
-#: contents/ui/main.qml:254 contents/ui/main.qml:294
+#: contents/ui/main.qml:251 contents/ui/main.qml:291
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr ""
 "Перетягніть сюди текст або зображення, щоб їх було вивантажено на сервер "
 "інтернет-служби."
 
-#: contents/ui/main.qml:294
+#: contents/ui/main.qml:291
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "Вивантажити %1 до служби інтернет-зберігання"
 
-#: contents/ui/main.qml:307
+#: contents/ui/main.qml:304
 #, kde-format
 msgid "Sending…"
 msgstr "Надсилання…"
 
-#: contents/ui/main.qml:308
+#: contents/ui/main.qml:305
 #, kde-format
 msgid "Please wait"
 msgstr "Будь ласка, зачекайте"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:312
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "Вивантажено успішно"
 
-#: contents/ui/main.qml:316
+#: contents/ui/main.qml:313
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:323
+#: contents/ui/main.qml:320
 #, kde-format
 msgid "Error during upload."
 msgstr "Помилка під час вивантаження"
 
-#: contents/ui/main.qml:324
+#: contents/ui/main.qml:321
 #, kde-format
 msgid "Please, try again."
 msgstr "Будь ласка, спробуйте ще раз."

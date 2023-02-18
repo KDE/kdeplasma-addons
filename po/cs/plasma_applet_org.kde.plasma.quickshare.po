@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-03 00:45+0000\n"
+"POT-Creation-Date: 2023-02-18 01:00+0000\n"
 "PO-Revision-Date: 2021-12-22 18:05+0100\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -24,53 +24,53 @@ msgctxt "@title"
 msgid "General"
 msgstr "Obecné"
 
-#: contents/ui/main.qml:225
+#: contents/ui/main.qml:222
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "Vložit"
 
-#: contents/ui/main.qml:253 contents/ui/main.qml:293
+#: contents/ui/main.qml:250 contents/ui/main.qml:290
 #, kde-format
 msgid "Share"
 msgstr "Sdílet"
 
-#: contents/ui/main.qml:254 contents/ui/main.qml:294
+#: contents/ui/main.qml:251 contents/ui/main.qml:291
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr "Upusťte na mě text nebo obrázky pro odeslání na webovou službu."
 
-#: contents/ui/main.qml:294
+#: contents/ui/main.qml:291
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "Odeslat %1 do služby online"
 
-#: contents/ui/main.qml:307
+#: contents/ui/main.qml:304
 #, kde-format
 msgid "Sending…"
 msgstr "Odesílám…"
 
-#: contents/ui/main.qml:308
+#: contents/ui/main.qml:305
 #, kde-format
 msgid "Please wait"
 msgstr "Čekejte prosím"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:312
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "Úspěšně odesláno"
 
-#: contents/ui/main.qml:316
+#: contents/ui/main.qml:313
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:323
+#: contents/ui/main.qml:320
 #, kde-format
 msgid "Error during upload."
 msgstr "Nastala chyba při odesílání."
 
-#: contents/ui/main.qml:324
+#: contents/ui/main.qml:321
 #, kde-format
 msgid "Please, try again."
 msgstr "Prosím, zkuste znovu."

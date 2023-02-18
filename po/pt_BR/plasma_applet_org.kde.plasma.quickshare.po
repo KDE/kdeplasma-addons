@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quickshare\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-03 00:45+0000\n"
+"POT-Creation-Date: 2023-02-18 01:00+0000\n"
 "PO-Revision-Date: 2021-12-21 09:26-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -25,53 +25,53 @@ msgctxt "@title"
 msgid "General"
 msgstr "Geral"
 
-#: contents/ui/main.qml:225
+#: contents/ui/main.qml:222
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "Colar"
 
-#: contents/ui/main.qml:253 contents/ui/main.qml:293
+#: contents/ui/main.qml:250 contents/ui/main.qml:290
 #, kde-format
 msgid "Share"
 msgstr "Compartilhar"
 
-#: contents/ui/main.qml:254 contents/ui/main.qml:294
+#: contents/ui/main.qml:251 contents/ui/main.qml:291
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr "Solte um texto ou imagem para ser enviado a um serviço online."
 
-#: contents/ui/main.qml:294
+#: contents/ui/main.qml:291
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "Enviar %1 para um serviço online"
 
-#: contents/ui/main.qml:307
+#: contents/ui/main.qml:304
 #, kde-format
 msgid "Sending…"
 msgstr "Enviando..."
 
-#: contents/ui/main.qml:308
+#: contents/ui/main.qml:305
 #, kde-format
 msgid "Please wait"
 msgstr "Por favor, aguarde"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:312
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "Enviado com sucesso"
 
-#: contents/ui/main.qml:316
+#: contents/ui/main.qml:313
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:323
+#: contents/ui/main.qml:320
 #, kde-format
 msgid "Error during upload."
 msgstr "Ocorreu um erro durante o envio."
 
-#: contents/ui/main.qml:324
+#: contents/ui/main.qml:321
 #, kde-format
 msgid "Please, try again."
 msgstr "Tente novamente."

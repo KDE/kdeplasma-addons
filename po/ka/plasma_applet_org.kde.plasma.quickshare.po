@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-02-03 00:45+0000\n"
+"POT-Creation-Date: 2023-02-18 01:00+0000\n"
 "PO-Revision-Date: 2022-07-21 21:22+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -24,55 +24,55 @@ msgctxt "@title"
 msgid "General"
 msgstr "მთავარი"
 
-#: contents/ui/main.qml:225
+#: contents/ui/main.qml:222
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "ჩასმა"
 
-#: contents/ui/main.qml:253 contents/ui/main.qml:293
+#: contents/ui/main.qml:250 contents/ui/main.qml:290
 #, kde-format
 msgid "Share"
 msgstr "გაზიარება"
 
-#: contents/ui/main.qml:254 contents/ui/main.qml:294
+#: contents/ui/main.qml:251 contents/ui/main.qml:291
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr ""
 "ონლაინ სერვისზე ასატვირთად შესაბამისი ფაილის ან ტექსტის ჩემზე დაგდებაა "
 "საჭირო."
 
-#: contents/ui/main.qml:294
+#: contents/ui/main.qml:291
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "%1-ის ონლაინ სერვისზე ატვირთვა"
 
-#: contents/ui/main.qml:307
+#: contents/ui/main.qml:304
 #, kde-format
 msgid "Sending…"
 msgstr "გაგზავნა…"
 
-#: contents/ui/main.qml:308
+#: contents/ui/main.qml:305
 #, kde-format
 msgid "Please wait"
 msgstr "გთხოვთ, მოითმინოთ"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:312
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "წარმატებით აიტვირთა"
 
-#: contents/ui/main.qml:316
+#: contents/ui/main.qml:313
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:323
+#: contents/ui/main.qml:320
 #, kde-format
 msgid "Error during upload."
 msgstr "შეცდომა ატვირთვისას."
 
-#: contents/ui/main.qml:324
+#: contents/ui/main.qml:321
 #, kde-format
 msgid "Please, try again."
 msgstr "კიდევ სცადეთ."
