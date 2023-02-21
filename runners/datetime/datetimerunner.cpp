@@ -303,6 +303,13 @@ QHash<QString, QTimeZone> DateTimeRunner::matchingTimeZones(const QStringView &z
             continue;
         }
 
+        // eg "Stockholm"
+        const QString city = zoneName.mid(zoneName.indexOf(QLatin1Char('/')) + 1).replace(QLatin1Char('_'), QLatin1Char(' '));
+        if (city.contains(zoneTerm, Qt::CaseInsensitive)) {
+            ret[city] = timeZone;
+            continue;
+        }
+
         // eg "Sweden"
         const QString country = QLocale::countryToString(timeZone.country());
         const QString comment = timeZone.comment();
@@ -311,14 +318,6 @@ QHash<QString, QTimeZone> DateTimeRunner::matchingTimeZones(const QStringView &z
             ret[regionName] = timeZone;
             continue;
         }
-
-        // eg "Stockholm"
-        const QString city = zoneName.mid(zoneName.indexOf(QStringLiteral("/")) + 1).replace("_", " ");
-        if (city.contains(zoneTerm, Qt::CaseInsensitive)) {
-            ret[city] = timeZone;
-            continue;
-        }
-
         // eg "Central European Standard Time"
         const QString longName = timeZone.displayName(atDatetime, QTimeZone::LongName);
         if (longName.contains(zoneTerm, Qt::CaseInsensitive)) {
