@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-18 00:58+0000\n"
+"POT-Creation-Date: 2023-02-24 01:00+0000\n"
 "PO-Revision-Date: 2009-05-01 03:23+0000\n"
 "Last-Translator: Vilson Gjeci <vilsongjeci@gmail.com>\n"
 "Language-Team: Albanian <sq@li.org>\n"
@@ -19,13 +19,21 @@ msgstr ""
 "X-Generator: Launchpad (build 12883)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: package/contents/ui/calculator.qml:320
+#: package/contents/ui/calculator.qml:290
+#, kde-format
+msgctxt ""
+"Abbreviation for result (undefined) of division by zero, max. six to nine "
+"characters."
+msgid "undef"
+msgstr ""
+
+#: package/contents/ui/calculator.qml:330
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:343
+#: package/contents/ui/calculator.qml:353
 #, fuzzy, kde-format
 #| msgctxt "The C button of the calculator"
 #| msgid "C"
@@ -33,13 +41,13 @@ msgctxt "Text of the clear button"
 msgid "C"
 msgstr "C"
 
-#: package/contents/ui/calculator.qml:356
+#: package/contents/ui/calculator.qml:366
 #, kde-format
 msgctxt "Text of the division button"
 msgid "÷"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:369
+#: package/contents/ui/calculator.qml:379
 #, fuzzy, kde-format
 #| msgctxt "The × button of the calculator"
 #| msgid "×"
@@ -47,7 +55,7 @@ msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr "×"
 
-#: package/contents/ui/calculator.qml:381
+#: package/contents/ui/calculator.qml:391
 #, fuzzy, kde-format
 #| msgctxt "The AC button of the calculator"
 #| msgid "AC"
@@ -55,13 +63,13 @@ msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr "AC"
 
-#: package/contents/ui/calculator.qml:433
+#: package/contents/ui/calculator.qml:443
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:485
+#: package/contents/ui/calculator.qml:495
 #, fuzzy, kde-format
 #| msgctxt "The + button of the calculator"
 #| msgid "+"
@@ -69,7 +77,7 @@ msgctxt "Text of the plus button"
 msgid "+"
 msgstr "+"
 
-#: package/contents/ui/calculator.qml:536
+#: package/contents/ui/calculator.qml:546
 #, fuzzy, kde-format
 #| msgctxt "The = button of the calculator"
 #| msgid "="

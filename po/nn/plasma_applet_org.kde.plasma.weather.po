@@ -1,14 +1,14 @@
 # Translation of plasma_applet_org.kde.plasma.weather to Norwegian Nynorsk
 #
 # Eirik U. Birkeland <eirbir@gmail.com>, 2009, 2010.
-# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2019, 2020, 2022.
+# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2019, 2020, 2022, 2023.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2018, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-08-07 12:08+0200\n"
+"PO-Revision-Date: 2023-02-23 18:05+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 22.12.2\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -157,25 +157,25 @@ msgstr "Kompakt vising"
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr ""
+msgstr "Vis temperatur:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:47
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr ""
+msgstr "Over ikonet"
 
 #: package/contents/ui/config/ConfigAppearance.qml:55
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr ""
+msgstr "Ved sida av ikonet"
 
 #: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Ikkje vis"
 
 #: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
@@ -254,19 +254,19 @@ msgstr "Stad:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Ingen valde"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Leverandør:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr ""
+msgstr "Skriv inn ny stad"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
@@ -284,13 +284,13 @@ msgstr "Fann ingen vêrstasjonar for «%1»"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Søk etter vêrstasjon for å byta stad"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Søk etter vêrstasjon for å velja stad"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -302,12 +302,12 @@ msgstr "–"
 #: package/contents/ui/FullRepresentation.qml:36
 #, kde-format
 msgid "Please set your location"
-msgstr "Vel plasseringa di"
+msgstr "Vel staden din"
 
 #: package/contents/ui/FullRepresentation.qml:39
 #, kde-format
 msgid "Set location…"
-msgstr "Vel plassering …"
+msgstr "Vel stad …"
 
 #: package/contents/ui/FullRepresentation.qml:54
 #, kde-format
@@ -398,13 +398,13 @@ msgstr "Vindkast:"
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr ""
+msgstr "Dag"
 
 #: package/contents/ui/main.qml:240
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Natt"
 
 #: package/contents/ui/main.qml:278
 #, kde-format
