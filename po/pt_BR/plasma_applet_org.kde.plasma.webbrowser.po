@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2022.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-17 00:48+0000\n"
-"PO-Revision-Date: 2022-10-19 16:12-0300\n"
+"PO-Revision-Date: 2023-02-24 15:58-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -27,19 +27,19 @@ msgstr "Geral"
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
-msgstr ""
+msgstr "Escala de conteúdo:"
 
 #: package/contents/ui/ConfigGeneral.qml:23
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
-msgstr ""
+msgstr "Escala fixa:"
 
 #: package/contents/ui/ConfigGeneral.qml:57
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
-msgstr ""
+msgstr "Escala automática se a largura for menor que"
 
 #: package/contents/ui/main.qml:25
 #, kde-format
@@ -87,7 +87,7 @@ msgstr "Copiar endereço do link"
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
-msgstr ""
+msgstr "Popup bloqueado"
 
 #: package/contents/ui/main.qml:206
 #, kde-format
@@ -95,3 +95,5 @@ msgid ""
 "Click here to open the following blocked popup:\n"
 "%1"
 msgstr ""
+"Clique aqui para abrir o seguinte popup bloqueado:\n"
+"%1"
