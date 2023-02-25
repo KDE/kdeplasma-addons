@@ -78,7 +78,7 @@
         "Description[uk]": "Стільничні липкі нотатки",
         "Description[vi]": "GIấy nhớ trên bàn làm việc",
         "Description[x-test]": "xxDesktop sticky notexx",
-        "Description[zh_CN]": "桌面便利贴",
+        "Description[zh_CN]": "桌面记事贴",
         "Description[zh_TW]": "桌面便條貼",
         "EnabledByDefault": true,
         "Icon": "knotes",
@@ -119,7 +119,7 @@
         "Name[uk]": "Липка нотатка",
         "Name[vi]": "Giấy nhớ",
         "Name[x-test]": "xxSticky Notexx",
-        "Name[zh_CN]": "便利贴",
+        "Name[zh_CN]": "记事贴",
         "Name[zh_TW]": "便條貼",
         "ServiceTypes": [
             "Plasma/Applet"
