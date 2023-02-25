@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2014, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2014, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-24 01:00+0000\n"
-"PO-Revision-Date: 2022-10-20 16:16+0300\n"
+"PO-Revision-Date: 2023-02-24 08:54+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -26,7 +26,7 @@ msgctxt ""
 "Abbreviation for result (undefined) of division by zero, max. six to nine "
 "characters."
 msgid "undef"
-msgstr ""
+msgstr "не визначено"
 
 #: package/contents/ui/calculator.qml:330
 #, kde-format

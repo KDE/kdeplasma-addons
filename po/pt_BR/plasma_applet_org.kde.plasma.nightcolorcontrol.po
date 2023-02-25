@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2020.
-# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2021, 2022.
+# Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 08:46+0000\n"
-"PO-Revision-Date: 2022-12-20 11:16-0300\n"
+"PO-Revision-Date: 2023-02-24 15:52-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -35,10 +35,9 @@ msgid "Night Color is unavailable"
 msgstr "A cor noturna está indisponível"
 
 #: package/contents/ui/main.qml:41
-#, fuzzy, kde-format
-#| msgid "Night Color is disabled"
+#, kde-format
 msgid "Night Color is disabled. Click to configure"
-msgstr "A cor noturna está desativada"
+msgstr "A cor noturna está desativada. Clique para configurar"
 
 #: package/contents/ui/main.qml:44
 #, kde-format

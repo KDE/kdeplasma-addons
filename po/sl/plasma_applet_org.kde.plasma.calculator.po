@@ -10,16 +10,16 @@ msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-24 01:00+0000\n"
-"PO-Revision-Date: 2022-10-21 08:19+0200\n"
+"PO-Revision-Date: 2023-02-24 09:02+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.1\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: package/contents/ui/calculator.qml:290
 #, kde-format
@@ -27,7 +27,7 @@ msgctxt ""
 "Abbreviation for result (undefined) of division by zero, max. six to nine "
 "characters."
 msgid "undef"
-msgstr ""
+msgstr "nedef"
 
 #: package/contents/ui/calculator.qml:330
 #, kde-format

@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2023-02-15 11:04\n"
+"PO-Revision-Date: 2023-02-24 12:43\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -42,52 +42,52 @@ msgstr "背景颜色"
 #: package/contents/ui/configAppearance.qml:77
 #, kde-format
 msgid "A white sticky note"
-msgstr "白色便利贴"
+msgstr "白色记事贴"
 
 #: package/contents/ui/configAppearance.qml:78
 #, kde-format
 msgid "A black sticky note"
-msgstr "黑色便利贴"
+msgstr "黑色记事贴"
 
 #: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgid "A red sticky note"
-msgstr "红色便利贴"
+msgstr "红色记事贴"
 
 #: package/contents/ui/configAppearance.qml:80
 #, kde-format
 msgid "An orange sticky note"
-msgstr "橙色便利贴"
+msgstr "橙色记事贴"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format
 msgid "A yellow sticky note"
-msgstr "黄色便利贴"
+msgstr "黄色记事贴"
 
 #: package/contents/ui/configAppearance.qml:82
 #, kde-format
 msgid "A green sticky note"
-msgstr "绿色便利贴"
+msgstr "绿色记事贴"
 
 #: package/contents/ui/configAppearance.qml:83
 #, kde-format
 msgid "A blue sticky note"
-msgstr "蓝色便利贴"
+msgstr "蓝色记事贴"
 
 #: package/contents/ui/configAppearance.qml:84
 #, kde-format
 msgid "A pink sticky note"
-msgstr "粉色便利贴"
+msgstr "粉色记事贴"
 
 #: package/contents/ui/configAppearance.qml:85
 #, kde-format
 msgid "A translucent sticky note"
-msgstr "半透明便利贴"
+msgstr "半透明记事贴"
 
 #: package/contents/ui/configAppearance.qml:86
 #, kde-format
 msgid "A translucent sticky note with light text"
-msgstr "半透明便利贴 + 浅色文字"
+msgstr "半透明记事贴 + 浅色文字"
 
 #: package/contents/ui/main.qml:255
 #, kde-format
@@ -167,12 +167,12 @@ msgstr "删除线"
 #: package/contents/ui/main.qml:572
 #, kde-format
 msgid "Discard this note?"
-msgstr "丢弃此便利贴？"
+msgstr "丢弃此记事贴？"
 
 #: package/contents/ui/main.qml:573
 #, kde-format
 msgid "Are you sure you want to discard this note?"
-msgstr "您确定要丢弃此便利贴吗？"
+msgstr "您确定要丢弃此记事贴吗？"
 
 #: package/contents/ui/main.qml:586
 #, kde-format
