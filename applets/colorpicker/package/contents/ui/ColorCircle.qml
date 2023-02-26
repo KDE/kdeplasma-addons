@@ -36,8 +36,8 @@ PlasmaComponents3.ToolButton {
 
     PlasmaCore.ToolTipArea {
         anchors.fill: parent
-        mainText: Plasmoid.title
-        subText: colorButton.text
+        mainText: colorButton.text
+        subText: i18nc("@info:usagetip", "Middle-click to copy the color code")
     }
 
     Rectangle {
@@ -92,7 +92,13 @@ PlasmaComponents3.ToolButton {
         }
 
         TapHandler {
+            acceptedButtons: Qt.LeftButton
             onTapped: colorButton.clicked();
+        }
+
+        TapHandler {
+            acceptedButtons: Qt.MiddleButton
+            onTapped: picker.copyToClipboard(colorButton.text)
         }
     }
 }
