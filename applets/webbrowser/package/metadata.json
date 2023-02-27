@@ -119,14 +119,12 @@
         "Name[x-test]": "xxWeb browserxx",
         "Name[zh_CN]": "网页浏览器",
         "Name[zh_TW]": "網頁瀏覽器",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "0.2.0",
         "Website": "https://kde.org/plasma-desktop"
     },
     "X-KDE-ParentApp": "",
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
-    "X-Plasma-StandAloneApp": true
+    "X-Plasma-StandAloneApp": true,
+    "KPackageStructure": "Plasma/Applet"
 }

@@ -124,12 +124,10 @@
         "Name[x-test]": "xxQuicklaunchxx",
         "Name[zh_CN]": "快速启动",
         "Name[zh_TW]": "快速啟動",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "1.0.0",
         "Website": "https://kde.org/plasma-desktop/"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "Plasma/Applet"
 }

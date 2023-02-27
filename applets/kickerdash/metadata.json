@@ -123,9 +123,6 @@
         "Name[x-test]": "xxApplication Dashboardxx",
         "Name[zh_CN]": "应用程序面板",
         "Name[zh_TW]": "應用程式儀表板",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
@@ -133,5 +130,6 @@
     "X-Plasma-Provides": [
         "org.kde.plasma.launchermenu"
     ],
-    "X-Plasma-RootPath": "org.kde.plasma.kicker"
+    "X-Plasma-RootPath": "org.kde.plasma.kicker",
+    "KPackageStructure": "Plasma/Applet"
 }

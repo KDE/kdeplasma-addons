@@ -115,11 +115,9 @@
         "Name[vi]": "Chuyển kiểu lật",
         "Name[x-test]": "xxFlip Switchxx",
         "Name[zh_CN]": "3D 翻牌切换",
-        "ServiceTypes": [
-            "KWin/WindowSwitcher"
-        ],
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "KWin/WindowSwitcher"
 }

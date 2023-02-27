@@ -120,13 +120,11 @@
         "Name[x-test]": "xxWeather Reportxx",
         "Name[zh_CN]": "天气报告",
         "Name[zh_TW]": "天氣預報",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop/"
     },
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
-    "X-Plasma-NotificationArea": "true"
+    "X-Plasma-NotificationArea": "true",
+    "KPackageStructure": "Plasma/Applet"
 }

@@ -120,12 +120,10 @@
         "Name[x-test]": "xxGrouping Plasmoidxx",
         "Name[zh_CN]": "Plasma 小程序分组",
         "Name[zh_TW]": "群組元件",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop/"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "Plasma/Applet"
 }

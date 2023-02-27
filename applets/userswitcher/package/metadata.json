@@ -119,12 +119,10 @@
         "Name[x-test]": "xxUser Switcherxx",
         "Name[zh_CN]": "用户切换器",
         "Name[zh_TW]": "使用者切換",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "Plasma/Applet"
 }

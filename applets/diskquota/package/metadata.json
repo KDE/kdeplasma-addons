@@ -120,9 +120,6 @@
         "Name[x-test]": "xxDisk Quotaxx",
         "Name[zh_CN]": "磁盘配额",
         "Name[zh_TW]": "磁碟配額",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "2.0",
         "Website": "https://kde.org/plasma-desktop/"
     },
@@ -130,5 +127,6 @@
     "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-NotificationArea": "true",
     "X-Plasma-NotificationAreaCategory": "SystemServices",
-    "X-Plasma-StandAloneApp": true
+    "X-Plasma-StandAloneApp": true,
+    "KPackageStructure": "Plasma/Applet"
 }

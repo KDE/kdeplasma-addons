@@ -121,9 +121,6 @@
         "Name[x-test]": "xxMedia Framexx",
         "Name[zh_CN]": "媒体相框",
         "Name[zh_TW]": "媒體框架",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop/"
     },
@@ -137,5 +134,6 @@
         "image/bmp"
     ],
     "X-Plasma-MainScript": "ui/main.qml",
-    "X-Plasma-StandAloneApp": true
+    "X-Plasma-StandAloneApp": true,
+    "KPackageStructure": "Plasma/Applet"
 }

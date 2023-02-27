@@ -117,11 +117,9 @@
         "Name[x-test]": "xxInformativexx",
         "Name[zh_CN]": "详细信息",
         "Name[zh_TW]": "資訊提供",
-        "ServiceTypes": [
-            "KWin/WindowSwitcher"
-        ],
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "KWin/WindowSwitcher"
 }

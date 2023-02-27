@@ -118,11 +118,9 @@
         "Name[x-test]": "xxThumbnailsxx",
         "Name[zh_CN]": "缩略图",
         "Name[zh_TW]": "縮圖",
-        "ServiceTypes": [
-            "KWin/WindowSwitcher"
-        ],
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "KWin/WindowSwitcher"
 }

@@ -118,11 +118,9 @@
         "Name[x-test]": "xxText Onlyxx",
         "Name[zh_CN]": "仅文字",
         "Name[zh_TW]": "只有文字",
-        "ServiceTypes": [
-            "KWin/WindowSwitcher"
-        ],
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "KWin/WindowSwitcher"
 }

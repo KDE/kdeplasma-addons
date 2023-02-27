@@ -116,11 +116,9 @@
         "Name[x-test]": "xxPreviewsxx",
         "Name[zh_CN]": "预览",
         "Name[zh_TW]": "預覽",
-        "ServiceTypes": [
-            "KWin/DesktopSwitcher"
-        ],
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "KWin/DesktopSwitcher"
 }

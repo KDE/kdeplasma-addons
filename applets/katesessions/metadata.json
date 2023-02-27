@@ -120,11 +120,9 @@
         "Name[x-test]": "xxKate Sessionsxx",
         "Name[zh_CN]": "Kate 会话",
         "Name[zh_TW]": "Kate 工作階段",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-NotificationArea": "true"
+    "X-Plasma-NotificationArea": "true",
+    "KPackageStructure": "Plasma/Applet"
 }

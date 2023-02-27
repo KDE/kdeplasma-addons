@@ -118,11 +118,9 @@
         "Name[x-test]": "xxGridxx",
         "Name[zh_CN]": "网格",
         "Name[zh_TW]": "格線",
-        "ServiceTypes": [
-            "KWin/WindowSwitcher"
-        ],
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "KWin/WindowSwitcher"
 }

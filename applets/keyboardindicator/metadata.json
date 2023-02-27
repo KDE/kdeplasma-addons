@@ -120,9 +120,6 @@
         "Name[x-test]": "xxLock Keys Statusxx",
         "Name[zh_CN]": "锁定键状态",
         "Name[zh_TW]": "鎖定鍵狀態",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop/"
     },
@@ -131,5 +128,6 @@
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-NotificationArea": "true",
-    "X-Plasma-NotificationAreaCategory": "Hardware"
+    "X-Plasma-NotificationAreaCategory": "Hardware",
+    "KPackageStructure": "Plasma/Applet"
 }

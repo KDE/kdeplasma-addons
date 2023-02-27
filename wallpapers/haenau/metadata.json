@@ -117,10 +117,8 @@
         "Name[x-test]": "xxHaenauxx",
         "Name[zh_CN]": "色彩层次",
         "Name[zh_TW]": "Haenau",
-        "ServiceTypes": [
-            "Plasma/Wallpaper"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org/"
-    }
+    },
+    "KPackageStructure": "Plasma/Wallpaper"
 }

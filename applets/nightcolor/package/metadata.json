@@ -120,9 +120,6 @@
         "Name[x-test]": "xxNight Color Controlxx",
         "Name[zh_CN]": "夜间颜色控制",
         "Name[zh_TW]": "夜色控制",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop"
     },
@@ -131,5 +128,6 @@
     "X-Plasma-DBusActivationService": "org.kde.NightColor",
     "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-NotificationArea": "true",
-    "X-Plasma-NotificationAreaCategory": "SystemServices"
+    "X-Plasma-NotificationAreaCategory": "SystemServices",
+    "KPackageStructure": "Plasma/Applet"
 }

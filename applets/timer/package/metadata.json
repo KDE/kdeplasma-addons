@@ -121,13 +121,11 @@
         "Name[x-test]": "xxTimerxx",
         "Name[zh_CN]": "计时器",
         "Name[zh_TW]": "計時器",
-        "ServiceTypes": [
-            "Plasma/Applet"
-        ],
         "Version": "2.0",
         "Website": "https://kde.org/plasma-desktop/"
     },
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
-    "X-Plasma-StandAloneApp": true
+    "X-Plasma-StandAloneApp": true,
+    "KPackageStructure": "Plasma/Applet"
 }

@@ -117,11 +117,9 @@
         "Name[x-test]": "xxCompactxx",
         "Name[zh_CN]": "紧凑",
         "Name[zh_TW]": "簡潔",
-        "ServiceTypes": [
-            "KWin/WindowSwitcher"
-        ],
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "KWin/WindowSwitcher"
 }

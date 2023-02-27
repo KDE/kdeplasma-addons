@@ -116,11 +116,9 @@
         "Name[vi]": "Chuyển kiểu trang bìa",
         "Name[x-test]": "xxCover Switchxx",
         "Name[zh_CN]": "3D 封面切换",
-        "ServiceTypes": [
-            "KWin/WindowSwitcher"
-        ],
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "KWin/WindowSwitcher"
 }

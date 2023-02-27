@@ -118,11 +118,9 @@
         "Name[x-test]": "xxLarge Iconsxx",
         "Name[zh_CN]": "大图标",
         "Name[zh_TW]": "大圖示",
-        "ServiceTypes": [
-            "KWin/WindowSwitcher"
-        ],
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml"
+    "X-Plasma-MainScript": "ui/main.qml",
+    "KPackageStructure": "KWin/WindowSwitcher"
 }
