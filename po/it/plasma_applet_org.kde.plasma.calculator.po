@@ -3,14 +3,14 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Federico Zenith <zenith@chemeng.ntnu.no>, 2008.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2009.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2010, 2012, 2022.
+# Vincenzo Reale <smart2128vr@gmail.com>, 2010, 2012, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-24 01:00+0000\n"
-"PO-Revision-Date: 2022-10-22 15:27+0200\n"
+"PO-Revision-Date: 2023-02-25 00:11+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.2\n"
 
 #: package/contents/ui/calculator.qml:290
 #, kde-format
@@ -26,7 +26,7 @@ msgctxt ""
 "Abbreviation for result (undefined) of division by zero, max. six to nine "
 "characters."
 msgid "undef"
-msgstr ""
+msgstr "non def"
 
 #: package/contents/ui/calculator.qml:330
 #, kde-format
