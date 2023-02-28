@@ -1,21 +1,21 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Steve Allewell <steve.allewell@gmail.com>, 2018, 2019, 2022.
+# Steve Allewell <steve.allewell@gmail.com>, 2018, 2019, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-02-16 01:00+0000\n"
-"PO-Revision-Date: 2022-08-22 17:05+0100\n"
+"PO-Revision-Date: 2023-02-27 20:24+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
-"Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
+"Language-Team: English <kde-l10n-en_gb@kde.org>\n"
 "Language: en_GB\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.0\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: package/contents/ui/config.qml:48
 #, kde-format
@@ -30,6 +30,8 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"This wallpaper provider does not filter out images that may be sensitive or "
+"objectionable. Use caution if these images will be displayed in public."
 
 #: package/contents/ui/config.qml:76
 #, kde-format
@@ -209,7 +211,7 @@ msgstr "Tabliss"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Cyber-World"
-msgstr ""
+msgstr "Cyber-World"
 
 #: package/contents/ui/config.qml:229
 #, kde-format
