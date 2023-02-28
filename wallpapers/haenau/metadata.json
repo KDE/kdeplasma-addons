@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "Plasma/Wallpaper",
     "KPlugin": {
         "Authors": [
             {
@@ -119,6 +120,5 @@
         "Name[zh_TW]": "Haenau",
         "Version": "1.0",
         "Website": "https://kde.org/"
-    },
-    "KPackageStructure": "Plasma/Wallpaper"
+    }
 }

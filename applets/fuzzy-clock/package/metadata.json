@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -129,6 +130,5 @@
     "X-Plasma-Provides": [
         "org.kde.plasma.time",
         "org.kde.plasma.date"
-    ],
-    "KPackageStructure": "Plasma/Applet"
+    ]
 }

@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -130,6 +131,5 @@
     "X-Plasma-Provides": [
         "org.kde.plasma.launchermenu"
     ],
-    "X-Plasma-RootPath": "org.kde.plasma.kicker",
-    "KPackageStructure": "Plasma/Applet"
+    "X-Plasma-RootPath": "org.kde.plasma.kicker"
 }

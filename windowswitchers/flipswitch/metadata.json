@@ -1,4 +1,5 @@
 {
+    "KPackageStructure": "KWin/WindowSwitcher",
     "KPlugin": {
         "Authors": [
             {
@@ -118,6 +119,5 @@
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
-    "X-Plasma-MainScript": "ui/main.qml",
-    "KPackageStructure": "KWin/WindowSwitcher"
+    "X-Plasma-MainScript": "ui/main.qml"
 }
