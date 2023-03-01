@@ -9,8 +9,8 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
    message(FATAL_ERROR "plasma requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma [options]' there.")
 endif()
 
-set(QT_MIN_VERSION 5.15.0)
-set(KF6_MIN_VERSION 5.90.0)
+set(QT_MIN_VERSION 6.4.0)
+set(KF6_MIN_VERSION 5.240.0)
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
 set(CMAKE_CXX_STANDARD 17)
