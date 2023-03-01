@@ -9,7 +9,7 @@
 #include "../../dict/dictengine.h"
 #include <KRunner/AbstractRunner>
 
-using namespace Plasma;
+using namespace KRunner;
 
 class DictionaryRunner : public AbstractRunner
 {

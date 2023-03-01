@@ -12,7 +12,7 @@
 #include "profilesmodel.h"
 #include <KRunner/AbstractRunner>
 
-using namespace Plasma;
+using namespace KRunner;
 
 class KateSessions : public AbstractRunner
 {

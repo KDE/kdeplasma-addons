@@ -11,7 +11,7 @@
 #include <QTest>
 
 using namespace KUnitConversion;
-using namespace Plasma;
+using namespace KRunner;
 
 class ConverterRunnerTest : public AbstractRunnerTest
 {

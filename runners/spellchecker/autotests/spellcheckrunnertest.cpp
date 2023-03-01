@@ -49,7 +49,7 @@ void SpellCheckRunnerTest::testDefaultDictionary()
     SpellCheckRunner runner(this, KPluginMetaData(), QVariantList());
     runner.loadData();
 
-    Plasma::RunnerContext context;
+    KRunner::RunnerContext context;
     context.setQuery(QStringLiteral("hello"));
     runner.match(context);
     const auto matches = context.matches();
@@ -67,7 +67,7 @@ void SpellCheckRunnerTest::testSpecifiedDictionary()
     SpellCheckRunner runner(this, KPluginMetaData(), QVariantList());
     runner.loadData();
 
-    Plasma::RunnerContext context;
+    KRunner::RunnerContext context;
 
     // Test exact match
     context.setQuery(QStringLiteral("en_US hello"));
@@ -116,7 +116,7 @@ void SpellCheckRunnerTest::testAutomaticDictionary()
     SpellCheckRunner runner(this, KPluginMetaData(), QVariantList());
     runner.loadData();
 
-    Plasma::RunnerContext context;
+    KRunner::RunnerContext context;
 
     context.setQuery(QStringLiteral("мама"));
     runner.match(context);
@@ -141,12 +141,12 @@ void SpellCheckRunnerTest::testSuggestions()
     SpellCheckRunner runner(this, KPluginMetaData(), QVariantList());
     runner.loadData();
 
-    Plasma::RunnerContext context;
+    KRunner::RunnerContext context;
     context.setQuery(QStringLiteral("hallo"));
 
     runner.match(context);
     const auto matches = context.matches();
-    QVERIFY(std::any_of(matches.cbegin(), matches.cend(), [](const Plasma::QueryMatch &match) {
+    QVERIFY(std::any_of(matches.cbegin(), matches.cend(), [](const KRunner::QueryMatch &match) {
         return match.text() == QStringLiteral("hello") && match.iconName() == QStringLiteral("edit-rename");
     }));
 }

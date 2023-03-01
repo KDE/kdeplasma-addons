@@ -9,7 +9,7 @@
 
 #include <KRunner/AbstractRunner>
 
-using namespace Plasma;
+using namespace KRunner;
 
 class CharacterRunner : public AbstractRunner
 {

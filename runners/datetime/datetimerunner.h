@@ -14,7 +14,7 @@
 #include <QDateTime>
 #include <QTimeZone>
 
-using namespace Plasma;
+using namespace KRunner;
 
 class DateTimeRunner : public AbstractRunner
 {

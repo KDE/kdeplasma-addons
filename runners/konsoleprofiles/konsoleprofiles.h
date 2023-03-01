@@ -11,7 +11,7 @@
 #include "profilesmodel.h"
 #include <KRunner/AbstractRunner>
 
-using namespace Plasma;
+using namespace KRunner;
 
 class KonsoleProfiles : public AbstractRunner
 {

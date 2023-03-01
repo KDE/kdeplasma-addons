@@ -57,7 +57,7 @@ void DateTimeRunnerTest::testRemoteTimeInfo()
 
     launchQuery("time gmt-2");
     auto matches = manager->matches();
-    std::sort(matches.begin(), matches.end(), [](const Plasma::QueryMatch &a, const Plasma::QueryMatch &b) {
+    std::sort(matches.begin(), matches.end(), [](const KRunner::QueryMatch &a, const KRunner::QueryMatch &b) {
         return a.relevance() > b.relevance();
     });
 
@@ -74,7 +74,7 @@ void DateTimeRunnerTest::testFindTimezones()
 
     launchQuery("time " + searchTerm);
     auto matches = manager->matches();
-    std::sort(matches.begin(), matches.end(), [](const Plasma::QueryMatch &a, const Plasma::QueryMatch &b) {
+    std::sort(matches.begin(), matches.end(), [](const KRunner::QueryMatch &a, const KRunner::QueryMatch &b) {
         return a.relevance() > b.relevance();
     });
 
@@ -108,7 +108,7 @@ void DateTimeRunnerTest::testConversion()
 
     launchQuery(query);
     auto matches = manager->matches();
-    std::sort(matches.begin(), matches.end(), [](const Plasma::QueryMatch &a, const Plasma::QueryMatch &b) {
+    std::sort(matches.begin(), matches.end(), [](const KRunner::QueryMatch &a, const KRunner::QueryMatch &b) {
         return a.relevance() > b.relevance();
     });
 

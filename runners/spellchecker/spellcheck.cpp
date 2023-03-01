@@ -115,7 +115,7 @@ void SpellCheckRunner::reloadConfiguration()
         setMatchRegex(QRegularExpression());
     }
 
-    setSyntaxes({s});
+    setSyntaxes({RunnerSyntax(s)});
 }
 
 /* Take the input query, split into a list, and see if it contains a language to spell in.
