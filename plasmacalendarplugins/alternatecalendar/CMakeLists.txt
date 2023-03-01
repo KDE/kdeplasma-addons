@@ -10,9 +10,9 @@ set(alternatecalendar_LIB_SRCS
 )
 
 set(alternatecalendar_LINK_LIBRARIES
-    KF5::ConfigCore
-    KF5::CalendarEvents
-    KF5::I18n
+    KF6::ConfigCore
+    KF6::CalendarEvents
+    KF6::I18n
 )
 
 if(${HAVE_ICU})

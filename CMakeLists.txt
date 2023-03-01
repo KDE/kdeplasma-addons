@@ -10,7 +10,7 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
 endif()
 
 set(QT_MIN_VERSION 5.15.0)
-set(KF5_MIN_VERSION 5.90.0)
+set(KF6_MIN_VERSION 5.90.0)
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
 
 set(CMAKE_CXX_STANDARD 17)
@@ -18,7 +18,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 include(FeatureSummary)
 
-find_package(ECM ${KF5_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -42,9 +42,10 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
     Qml
     Widgets
     Test
+    Core5Compat
 )
 
-find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
+find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Config
     CoreAddons
     Declarative
@@ -63,19 +64,19 @@ find_package(KF5 ${KF5_MIN_VERSION} REQUIRED COMPONENTS
 )
 
 if(${QT_MAJOR_VERSION} LESS 6)
-    find_package(KF5NetworkManagerQt CONFIG QUIET)
-    set_package_properties(KF5NetworkManagerQt PROPERTIES
+    find_package(KF6NetworkManagerQt CONFIG QUIET)
+    set_package_properties(KF6NetworkManagerQt PROPERTIES
         DESCRIPTION "Qt wrapper for NetworkManager API"
         PURPOSE "Disable wallpaper update when using metered connections"
         TYPE OPTIONAL
     )
-    if(KF5NetworkManagerQt_FOUND)
+    if(KF6NetworkManagerQt_FOUND)
         set(HAVE_NetworkManagerQt TRUE)
     endif()
 endif()
 
-find_package(KF5Purpose CONFIG QUIET)
-set_package_properties(KF5Purpose PROPERTIES
+find_package(KF6Purpose CONFIG QUIET)
+set_package_properties(KF6Purpose PROPERTIES
     DESCRIPTION "Framework for cross-application services and actions"
     PURPOSE "Needed for QuickShare applet"
     URL "https://commits.kde.org/purpose"

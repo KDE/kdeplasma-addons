@@ -14,8 +14,8 @@ target_link_libraries(org.kde.plasma.private.grouping
                       Qt::Quick
                       Qt::DBus
                       Qt::Widgets
-                      KF5::Plasma
-                      KF5::XmlGui
-                      KF5::I18n)
+                      KF6::Plasma
+                      KF6::XmlGui
+                      KF6::I18n)
 
 add_subdirectory(container)

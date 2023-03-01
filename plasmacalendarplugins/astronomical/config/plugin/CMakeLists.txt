@@ -3,7 +3,7 @@ add_library(plasmacalendarastronomicaleventsconfig SHARED configplugin.cpp confi
 target_link_libraries(plasmacalendarastronomicaleventsconfig
     Qt::Qml
     Qt::Core
-    KF5::ConfigCore
+    KF6::ConfigCore
 )
 
 install(TARGETS plasmacalendarastronomicaleventsconfig DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasmacalendar/astronomicaleventsconfig)

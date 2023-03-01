@@ -27,10 +27,10 @@ target_sources(plasma_engine_comic PRIVATE
 )
 target_link_libraries(plasma_engine_comic
     Qt::Qml
-    KF5::WidgetsAddons
-    KF5::Package
-    KF5::I18n
-    KF5::KIOCore
+    KF6::WidgetsAddons
+    KF6::Package
+    KF6::I18n
+    KF6::KIOCore
 )
 if (QT_MAJOR_VERSION EQUAL "6")
     target_link_libraries(plasma_engine_comic Qt::Core5Compat) # for QTextCodec
@@ -38,8 +38,8 @@ endif()
 
 kcoreaddons_add_plugin(plasma_packagestructure_comic SOURCES comic_package.cpp INSTALL_NAMESPACE "kpackage/packagestructure")
 target_link_libraries(plasma_packagestructure_comic
-    KF5::Package
-    KF5::I18n
+    KF6::Package
+    KF6::I18n
 )
 set_target_properties(plasma_packagestructure_comic PROPERTIES OUTPUT_NAME plasma_comic)
 install(FILES plasma-comic.desktop DESTINATION ${KDE_INSTALL_KSERVICETYPESDIR})

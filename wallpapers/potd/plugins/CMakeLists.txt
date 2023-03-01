@@ -21,15 +21,15 @@ set(potd_engine_SRCS
 
 add_library(plasma_wallpaper_potdplugin SHARED ${potd_engine_SRCS})
 target_link_libraries(plasma_wallpaper_potdplugin plasmapotdprovidercore
-    KF5::I18n
-    KF5::KIOCore
+    KF6::I18n
+    KF6::KIOCore
     Qt::DBus
     Qt::Qml
     Qt::Widgets # QFileDialog
     plasma_wallpaper_potdplugin_debug
 )
 if (HAVE_NetworkManagerQt)
-    target_link_libraries(plasma_wallpaper_potdplugin KF5::NetworkManagerQt)
+    target_link_libraries(plasma_wallpaper_potdplugin KF6::NetworkManagerQt)
 elseif(${QT_MAJOR_VERSION} GREATER_EQUAL 6)
     target_link_libraries(plasma_wallpaper_potdplugin Qt::Network)
 endif()
@@ -53,7 +53,7 @@ set_target_properties(plasmapotdprovidercore PROPERTIES
     SOVERSION ${POTDPROVIDER_VERSION_MAJOR}
     EXPORT_NAME PotdProvider
 )
-target_link_libraries( plasmapotdprovidercore Qt::Gui KF5::CoreAddons KF5::ConfigCore KF5::KIOCore)
+target_link_libraries( plasmapotdprovidercore Qt::Gui KF6::CoreAddons KF6::ConfigCore KF6::KIOCore)
 target_include_directories(plasmapotdprovidercore
     PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
     INTERFACE "$<INSTALL_INTERFACE:${KDE_INSTALL_INCLUDEDIR}>"

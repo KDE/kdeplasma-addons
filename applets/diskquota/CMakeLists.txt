@@ -19,8 +19,8 @@ add_library(diskquotaplugin SHARED ${diskquota_SRCS})
 
 target_link_libraries(diskquotaplugin
                       Qt::Quick
-                      KF5::CoreAddons
-                      KF5::I18n)
+                      KF6::CoreAddons
+                      KF6::I18n)
 
 install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/diskquota)
 install(TARGETS diskquotaplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/diskquota)

@@ -33,7 +33,7 @@ set(dict_SRCS
 
 add_library(dictplugin SHARED ${dict_SRCS})
 target_link_libraries(dictplugin
-    KF5::I18n
+    KF6::I18n
     Qt::Quick
     Qt::WebEngine
     engine_dict_static

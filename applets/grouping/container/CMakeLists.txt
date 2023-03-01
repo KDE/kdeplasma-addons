@@ -13,6 +13,6 @@ kcoreaddons_add_plugin(org.kde.plasma.grouping SOURCES ${groupedappletscontainer
 target_link_libraries(org.kde.plasma.grouping
                       Qt::Gui
                       Qt::Quick
-                      KF5::Plasma
-                      KF5::XmlGui
-                      KF5::I18n)
+                      KF6::Plasma
+                      KF6::XmlGui
+                      KF6::I18n)

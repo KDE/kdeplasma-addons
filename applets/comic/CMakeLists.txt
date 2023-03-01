@@ -19,13 +19,13 @@ kcoreaddons_add_plugin(org.kde.plasma.comic SOURCES ${comic_SRCS} INSTALL_NAMESP
 target_link_libraries(org.kde.plasma.comic
                       Qt::Gui
                       Qt::Widgets
-                      KF5::Plasma
-                      KF5::I18n
-                      KF5::KIOCore
-                      KF5::KIOWidgets
-                      KF5::NewStuffCore
-                      KF5::Notifications
-                      KF5::XmlGui
+                      KF6::Plasma
+                      KF6::I18n
+                      KF6::KIOCore
+                      KF6::KIOWidgets
+                      KF6::NewStuffCore
+                      KF6::Notifications
+                      KF6::XmlGui
                       plasma_engine_comic)
 
 install(FILES comic.knsrc DESTINATION ${KDE_INSTALL_KNSRCDIR})

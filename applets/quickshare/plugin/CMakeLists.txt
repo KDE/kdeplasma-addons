@@ -11,7 +11,7 @@ add_library(purposeplugin SHARED ${purposeplugin_SRCS})
 target_link_libraries(purposeplugin
                         Qt::Quick
                         Qt::DBus
-                        KF5::CoreAddons)
+                        KF6::CoreAddons)
 
 install(TARGETS purposeplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/purpose)
 install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/purpose)

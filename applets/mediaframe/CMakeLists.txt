@@ -11,8 +11,8 @@ target_link_libraries(mediaframeplugin
                       Qt::Core
                       Qt::Qml
                       Qt::Quick
-                      KF5::I18n
-                      KF5::KIOCore
+                      KF6::I18n
+                      KF6::KIOCore
 )
 
 install(TARGETS mediaframeplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/mediaframe)

@@ -21,7 +21,7 @@ add_library(notesplugin SHARED ${notes_SRCS})
 
 target_link_libraries(notesplugin
                         Qt::Quick
-                        KF5::CoreAddons)
+                        KF6::CoreAddons)
 
 install(TARGETS notesplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/notes)
 install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/notes)

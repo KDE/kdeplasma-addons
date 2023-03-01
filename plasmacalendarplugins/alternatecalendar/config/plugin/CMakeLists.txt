@@ -7,8 +7,8 @@ add_library(plasmacalendaralternatecalendarconfig SHARED configplugin.cpp config
 target_link_libraries(plasmacalendaralternatecalendarconfig
     Qt::Qml
     Qt::Core
-    KF5::ConfigCore
-    KF5::I18n
+    KF6::ConfigCore
+    KF6::I18n
 )
 
 install(TARGETS plasmacalendaralternatecalendarconfig DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasmacalendar/alternatecalendarconfig)
