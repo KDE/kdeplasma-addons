@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-05-20 03:24+0200\n"
+"POT-Creation-Date: 2022-10-03 00:49+0000\n"
 "PO-Revision-Date: 2017-12-03 22:53+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,42 +18,42 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: package/contents/config/config.qml:25
+#: package/contents/config/config.qml:13
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@title"
 msgid "General"
 msgstr "Опште"
 
-#: package/contents/config/config.qml:30
+#: package/contents/config/config.qml:18
 #, fuzzy, kde-format
 #| msgid "Paths"
 msgctxt "@title"
 msgid "Paths"
 msgstr "Путање"
 
-#: package/contents/ui/ConfigGeneral.qml:61
+#: package/contents/ui/ConfigGeneral.qml:48
 #, fuzzy, kde-format
 #| msgid "Change picture every"
 msgid "Change picture every:"
 msgstr "Мењај слику сваких"
 
-#: package/contents/ui/ConfigGeneral.qml:78
+#: package/contents/ui/ConfigGeneral.qml:65
 #, kde-format
 msgid "Hours"
 msgstr ""
 
-#: package/contents/ui/ConfigGeneral.qml:92
+#: package/contents/ui/ConfigGeneral.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr ""
 
-#: package/contents/ui/ConfigGeneral.qml:106
+#: package/contents/ui/ConfigGeneral.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr ""
 
-#: package/contents/ui/ConfigGeneral.qml:116
+#: package/contents/ui/ConfigGeneral.qml:103
 #, fuzzy, kde-format
 #| msgid "Fill mode:"
 msgctxt "@label:listbox"
@@ -61,7 +61,7 @@ msgid "Image fill mode:"
 msgstr "Режим попуне:"
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigGeneral.qml:123
+#: package/contents/ui/ConfigGeneral.qml:110
 #, fuzzy, kde-format
 #| msgid "Stretch"
 msgctxt "@item:inlistbox"
@@ -69,7 +69,7 @@ msgid "Stretch"
 msgstr "развучено"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigGeneral.qml:124
+#: package/contents/ui/ConfigGeneral.qml:111
 #, fuzzy, kde-format
 #| msgid "The image is scaled to fit"
 msgctxt "@info"
@@ -77,7 +77,7 @@ msgid "The image is scaled to fit the frame"
 msgstr "Слика се скалира да стане."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigGeneral.qml:128
+#: package/contents/ui/ConfigGeneral.qml:115
 #, fuzzy, kde-format
 #| msgid "Preserve aspect fit"
 msgctxt "@item:inlistbox"
@@ -85,7 +85,7 @@ msgid "Preserve aspect fit"
 msgstr "уклапање по размери"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigGeneral.qml:129
+#: package/contents/ui/ConfigGeneral.qml:116
 #, fuzzy, kde-format
 #| msgid "The image is scaled uniformly to fit without cropping"
 msgctxt "@info"
@@ -93,7 +93,7 @@ msgid "The image is scaled uniformly to fit without cropping"
 msgstr "Слика се скалира равномерно да стане без опсецања."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigGeneral.qml:133
+#: package/contents/ui/ConfigGeneral.qml:120
 #, fuzzy, kde-format
 #| msgid "Preserve aspect crop"
 msgctxt "@item:inlistbox"
@@ -101,7 +101,7 @@ msgid "Preserve aspect crop"
 msgstr "опсецање по размери"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigGeneral.qml:134
+#: package/contents/ui/ConfigGeneral.qml:121
 #, fuzzy, kde-format
 #| msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgctxt "@info"
@@ -109,7 +109,7 @@ msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr "Слика се скалира равномерно да попуни све, ако треба уз опсецање."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigGeneral.qml:138
+#: package/contents/ui/ConfigGeneral.qml:125
 #, fuzzy, kde-format
 #| msgid "Tile"
 msgctxt "@item:inlistbox"
@@ -117,7 +117,7 @@ msgid "Tile"
 msgstr "поплочано"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigGeneral.qml:139
+#: package/contents/ui/ConfigGeneral.qml:126
 #, fuzzy, kde-format
 #| msgid "The image is duplicated horizontally and vertically"
 msgctxt "@info"
@@ -125,7 +125,7 @@ msgid "The image is duplicated horizontally and vertically"
 msgstr "Слика се умножава водоравно и усправно."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigGeneral.qml:143
+#: package/contents/ui/ConfigGeneral.qml:130
 #, fuzzy, kde-format
 #| msgid "Tile vertically"
 msgctxt "@item:inlistbox"
@@ -133,7 +133,7 @@ msgid "Tile vertically"
 msgstr "поплочано усправно"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigGeneral.qml:144
+#: package/contents/ui/ConfigGeneral.qml:131
 #, fuzzy, kde-format
 #| msgid "The image is stretched horizontally and tiled vertically"
 msgctxt "@info"
@@ -141,7 +141,7 @@ msgid "The image is stretched horizontally and tiled vertically"
 msgstr "Слика се развлачи водоравно а поплочава усправно."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigGeneral.qml:148
+#: package/contents/ui/ConfigGeneral.qml:135
 #, fuzzy, kde-format
 #| msgid "Tile horizontally"
 msgctxt "@item:inlistbox"
@@ -149,7 +149,7 @@ msgid "Tile horizontally"
 msgstr "поплочано водоравно"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigGeneral.qml:149
+#: package/contents/ui/ConfigGeneral.qml:136
 #, fuzzy, kde-format
 #| msgid "The image is stretched vertically and tiled horizontally"
 msgctxt "@info"
@@ -157,7 +157,7 @@ msgid "The image is stretched vertically and tiled horizontally"
 msgstr "Слика се развлачи усправно а поплочава водоравно."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigGeneral.qml:153
+#: package/contents/ui/ConfigGeneral.qml:140
 #, fuzzy, kde-format
 #| msgid "Pad"
 msgctxt "@item:inlistbox"
@@ -165,41 +165,34 @@ msgid "Pad"
 msgstr "попуњене ивице"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigGeneral.qml:154
+#: package/contents/ui/ConfigGeneral.qml:141
 #, fuzzy, kde-format
 #| msgid "The image is not transformed"
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Слика се никако не мења."
 
-#: package/contents/ui/ConfigGeneral.qml:199
+#: package/contents/ui/ConfigGeneral.qml:186
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Опште"
 
-#: package/contents/ui/ConfigGeneral.qml:200
+#: package/contents/ui/ConfigGeneral.qml:187
 #, fuzzy, kde-format
 #| msgid "Randomize items"
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Насумичне ставке"
 
-#: package/contents/ui/ConfigGeneral.qml:205
+#: package/contents/ui/ConfigGeneral.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr ""
 
-#: package/contents/ui/ConfigGeneral.qml:210
-#, fuzzy, kde-format
-#| msgid "Background frame"
-msgctxt "@option:check"
-msgid "Show background frame"
-msgstr "Позадински оквир"
-
-#: package/contents/ui/ConfigGeneral.qml:215
+#: package/contents/ui/ConfigGeneral.qml:197
 #, fuzzy, kde-format
 #| msgid "Left click image opens in external viewer"
 msgctxt "@option:check"
@@ -207,7 +200,7 @@ msgid "Click on image to open in external application"
 msgstr "Леви клик отвара слику у спољашњем приказивачу"
 
 # >> @title:window
-#: package/contents/ui/ConfigPaths.qml:61
+#: package/contents/ui/ConfigPaths.qml:49
 #, fuzzy, kde-format
 #| msgid "Choose files"
 msgctxt "@title:window"
@@ -215,35 +208,41 @@ msgid "Choose Files"
 msgstr "Избор фајлова"
 
 # >> @title:window
-#: package/contents/ui/ConfigPaths.qml:87
+#: package/contents/ui/ConfigPaths.qml:75
 #, fuzzy, kde-format
 #| msgid "Choose a folder"
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Избор фасцикле"
 
-#: package/contents/ui/ConfigPaths.qml:135
+#: package/contents/ui/ConfigPaths.qml:123
 #, kde-format
 msgid "Remove path"
 msgstr ""
 
-#: package/contents/ui/ConfigPaths.qml:149
+#: package/contents/ui/ConfigPaths.qml:137
 #, fuzzy, kde-format
 #| msgid "Add folder..."
 msgctxt "@action:button"
-msgid "Add Folder..."
+msgid "Add Folder…"
 msgstr "Додај фасциклу..."
 
-#: package/contents/ui/ConfigPaths.qml:155
+#: package/contents/ui/ConfigPaths.qml:143
 #, fuzzy, kde-format
 #| msgid "Add files..."
 msgctxt "@action:button"
-msgid "Add Files..."
+msgid "Add Files…"
 msgstr "Додај фајлове..."
 
-#: package/contents/ui/main.qml:447
+#: package/contents/ui/main.qml:438
 #, fuzzy, kde-format
 #| msgid "Configure plasmoid..."
 msgctxt "@action:button"
-msgid "Configure..."
+msgid "Configure…"
 msgstr "Подеси плазмоид..."
+
+#, fuzzy
+#~| msgid "Background frame"
+#~ msgctxt "@option:check"
+#~ msgid "Show background frame"
+#~ msgstr "Позадински оквир"

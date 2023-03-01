@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-11-30 03:36+0100\n"
+"POT-Creation-Date: 2022-12-01 00:48+0000\n"
 "PO-Revision-Date: 2015-04-24 13:57+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -19,84 +19,165 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: package/contents/config/config.qml:25
+#: package/contents/config/config.qml:13
 #, fuzzy, kde-format
 #| msgid "Appearance"
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Izgled"
 
-#: package/contents/config/config.qml:31
+#: package/contents/config/config.qml:19
+#, kde-format
+msgctxt "@title"
+msgid "Predefined Timers"
+msgstr ""
+
+#: package/contents/config/config.qml:24
 #, fuzzy, kde-format
 #| msgid "Advanced"
 msgctxt "@title"
 msgid "Advanced"
 msgstr "Napredno"
 
-#: package/contents/ui/configAdvanced.qml:34
+#: package/contents/ui/CompactRepresentation.qml:134
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Pause Timer"
+msgstr "Odbrojavač"
+
+#: package/contents/ui/CompactRepresentation.qml:134
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@action:button"
+msgid "Start Timer"
+msgstr "Odbrojavač"
+
+#: package/contents/ui/CompactRepresentation.qml:191
+#: package/contents/ui/CompactRepresentation.qml:208
+#, kde-format
+msgctxt "remaining time"
+msgid "%1s"
+msgid_plural "%1s"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: package/contents/ui/configAdvanced.qml:22
 #, kde-format
 msgctxt "@title:label"
 msgid "After timer completes:"
 msgstr ""
 
-#: package/contents/ui/configAdvanced.qml:38
+#: package/contents/ui/configAdvanced.qml:26
 #, fuzzy, kde-format
 #| msgid "Execute command"
 msgctxt "@option:check"
 msgid "Execute command:"
 msgstr "Izvrši naredbu"
 
-#: package/contents/ui/configAppearance.qml:39
+#: package/contents/ui/configAppearance.qml:30
 #, fuzzy, kde-format
 #| msgid "Display"
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Prikaz"
 
-#: package/contents/ui/configAppearance.qml:45
+#: package/contents/ui/configAppearance.qml:36
 #, fuzzy, kde-format
 #| msgid "Show title"
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Prikaži naslov"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:53
+#, kde-format
+msgctxt "@option:check"
+msgid "Show remaining time"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:59
 #, fuzzy, kde-format
 #| msgid "Show seconds"
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Prikaži sekunde"
 
-#: package/contents/ui/configAppearance.qml:74
+#: package/contents/ui/configAppearance.qml:64
+#, fuzzy, kde-format
+#| msgid "Show title"
+msgctxt "@option:check"
+msgid "Show timer toggle"
+msgstr "Prikaži naslov"
+
+#: package/contents/ui/configAppearance.qml:69
+#, kde-format
+msgctxt "@option:check"
+msgid "Show progress bar"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:81
 #, fuzzy, kde-format
 #| msgid "Notifications"
 msgctxt "@title:label"
 msgid "Notifications:"
 msgstr "Obaveštenja"
 
-#: package/contents/ui/configAppearance.qml:78
+#: package/contents/ui/configAppearance.qml:85
 #, fuzzy, kde-format
 #| msgid "Show notification"
 msgctxt "@option:check"
 msgid "Show notification text:"
 msgstr "Prikaži obaveštenje"
 
-#: package/contents/ui/main.qml:54 package/contents/ui/main.qml:115
+#: package/contents/ui/configTimes.qml:76
 #, kde-format
-msgid "Timer"
-msgstr "Odbrojavač"
+msgid ""
+"If you add predefined timers here, they will appear in plasmoid context menu."
+msgstr ""
 
-#: package/contents/ui/main.qml:59
+#: package/contents/ui/configTimes.qml:83
+#, kde-format
+msgid "Add"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:120
+#, kde-format
+msgid "Scroll over digits to change time"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:126
+#, kde-format
+msgid "Apply"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:134
+#, kde-format
+msgid "Cancel"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:143
+#, kde-format
+msgid "Edit"
+msgstr ""
+
+#: package/contents/ui/configTimes.qml:152
+#, kde-format
+msgid "Delete"
+msgstr ""
+
+#: package/contents/ui/main.qml:65
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 u pogonu"
 
-#: package/contents/ui/main.qml:61
+#: package/contents/ui/main.qml:67
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 nije u pogonu"
 
-#: package/contents/ui/main.qml:65
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
@@ -105,39 +186,7 @@ msgstr[1] "Preostalo vreme: %1 sekunde"
 msgstr[2] "Preostalo vreme: %1 sekundi"
 msgstr[3] "Preostalo vreme: %1 sekunda"
 
-# rewrite-msgid: /Timer/Countdown/
-#: package/contents/ui/main.qml:117
-#, kde-format
-msgid "Timer finished"
-msgstr "Odbrojavanje završeno"
-
-#: package/contents/ui/main.qml:125
-#, fuzzy, kde-format
-#| msgid "&Start"
-msgctxt "@action"
-msgid "&Start"
-msgstr "&Pokreni"
-
-#: package/contents/ui/main.qml:126
-#, fuzzy, kde-format
-#| msgid "S&top"
-msgctxt "@action"
-msgid "S&top"
-msgstr "&Zaustavi"
-
-#: package/contents/ui/main.qml:127
-#, fuzzy, kde-format
-#| msgid "&Reset"
-msgctxt "@action"
-msgid "&Reset"
-msgstr "&Resetuj"
-
-#: package/contents/ui/TimerView.qml:139
-#, kde-format
-msgid "Timer is running"
-msgstr "Odbrojavač u pogonu"
-
-#: package/contents/ui/TimerView.qml:139
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -145,3 +194,38 @@ msgid ""
 msgstr ""
 "Menjajte cifre točkićem miša, ili izaberite neki od predefinisanih "
 "odbrojavača iz kontekstnog menija."
+
+#: package/contents/ui/main.qml:128
+#, kde-format
+msgid "Timer"
+msgstr "Odbrojavač"
+
+# rewrite-msgid: /Timer/Countdown/
+#: package/contents/ui/main.qml:130
+#, kde-format
+msgid "Timer finished"
+msgstr "Odbrojavanje završeno"
+
+#: package/contents/ui/main.qml:146
+#, fuzzy, kde-format
+#| msgid "&Start"
+msgctxt "@action"
+msgid "&Start"
+msgstr "&Pokreni"
+
+#: package/contents/ui/main.qml:147
+#, fuzzy, kde-format
+#| msgid "S&top"
+msgctxt "@action"
+msgid "S&top"
+msgstr "&Zaustavi"
+
+#: package/contents/ui/main.qml:148
+#, fuzzy, kde-format
+#| msgid "&Reset"
+msgctxt "@action"
+msgid "&Reset"
+msgstr "&Resetuj"
+
+#~ msgid "Timer is running"
+#~ msgstr "Odbrojavač u pogonu"

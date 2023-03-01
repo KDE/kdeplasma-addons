@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-04-10 03:51+0200\n"
+"POT-Creation-Date: 2022-06-16 00:49+0000\n"
 "PO-Revision-Date: 2009-06-28 21:30+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -19,18 +19,18 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: katesessions.cpp:44
+#: katesessions.cpp:30
 #, kde-format
 msgid "Finds Kate sessions matching :q:."
 msgstr "Налази Кејтине сесије које поклапа :q:."
 
 # rewrite-msgid: /Kate editor/Kate/
-#: katesessions.cpp:47
+#: katesessions.cpp:31
 #, kde-format
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Набраја све Кејтине сесије под вашим налогом."
 
-#: katesessions.cpp:109
+#: katesessions.cpp:67 katesessions.cpp:78
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Отвори Кејтину сесију"

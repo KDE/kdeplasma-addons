@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_katesession\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-09-17 02:29+0200\n"
+"POT-Creation-Date: 2022-10-17 00:48+0000\n"
 "PO-Revision-Date: 2014-09-14 11:44+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,47 +18,40 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: applet/contents/ui/katesessions.qml:38
-#, kde-format
-msgid "Kate Sessions"
-msgstr "Кејтине сесије"
-
-#: applet/contents/ui/katesessions.qml:143
-#, kde-format
-msgid "Search"
-msgstr "Тражи"
-
-#: applet/contents/ui/KateSessionsItemDelegate.qml:110
+#: contents/ui/KateSessionsItemDelegate.qml:91
 #, kde-format
 msgid "Session name"
 msgstr "Име сесије"
 
-#: applet/contents/ui/KateSessionsItemDelegate.qml:117
+#: contents/ui/KateSessionsItemDelegate.qml:102
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "Направи нову сесију и покрени Кејт"
 
-#: applet/contents/ui/KateSessionsItemDelegate.qml:123
+#: contents/ui/KateSessionsItemDelegate.qml:111
 #, kde-format
 msgid "Cancel session creation"
 msgstr "Одустани од стварања сесије"
 
-#: applet/contents/ui/KateSessionsItemDelegate.qml:137
+#: contents/ui/main.qml:29
 #, kde-format
-msgid "Delete session"
-msgstr "Обриши сесију"
+msgid "Kate Sessions"
+msgstr "Кејтине сесије"
 
-#: katesessionsmodel.cpp:72
-#, kde-format
-msgid "Start Kate (no arguments)"
-msgstr "Покрени Кејт (без аргумената)"
+#: contents/ui/main.qml:38
+#, fuzzy, kde-format
+#| msgid "Search"
+msgid "Search…"
+msgstr "Тражи"
 
-#: katesessionsmodel.cpp:80
-#, kde-format
-msgid "New Kate Session"
-msgstr "Нова сесија Кејт"
+#~ msgid "Delete session"
+#~ msgstr "Обриши сесију"
 
-#: katesessionsmodel.cpp:89
-#, kde-format
-msgid "New Anonymous Session"
-msgstr "Нова анонимна сесија"
+#~ msgid "Start Kate (no arguments)"
+#~ msgstr "Покрени Кејт (без аргумената)"
+
+#~ msgid "New Kate Session"
+#~ msgstr "Нова сесија Кејт"
+
+#~ msgid "New Anonymous Session"
+#~ msgstr "Нова анонимна сесија"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-05-20 03:24+0200\n"
+"POT-Creation-Date: 2022-06-16 00:49+0000\n"
 "PO-Revision-Date: 2012-06-13 23:09+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,14 +18,14 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: package/contents/ui/konsoleprofiles.qml:79
+#: package/contents/ui/konsoleprofiles.qml:61
 #, fuzzy, kde-format
 #| msgid "Konsole Profiles"
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Konsolini profili"
 
-#: package/contents/ui/konsoleprofiles.qml:99
+#: package/contents/ui/konsoleprofiles.qml:81
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "Proizvoljna niska koja govori nešto"

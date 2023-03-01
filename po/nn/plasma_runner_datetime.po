@@ -88,8 +88,8 @@ msgid ""
 "or time is given, it will be the current date and time."
 msgstr ""
 "Gjer om dato og/eller klokkeslett frå første til andre tidssone. Viss du "
-"berre oppgjev éi tidssone, vert system­tidssona brukt for den andre "
-"tidssona. Viss du verken oppgjev dato eller klokkeslett, vert dagens dato og "
+"berre oppgjev éi tidssone, vert system­tidssona brukt for den andre tidssona. "
+"Viss du verken oppgjev dato eller klokkeslett, vert dagens dato og "
 "klokkeslett brukt."
 
 #: datetimerunner.cpp:60

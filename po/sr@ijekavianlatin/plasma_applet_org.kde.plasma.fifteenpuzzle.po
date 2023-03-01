@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-05-20 03:24+0200\n"
+"POT-Creation-Date: 2022-08-07 00:48+0000\n"
 "PO-Revision-Date: 2017-01-14 19:23+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -19,51 +19,51 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: package/contents/config/config.qml:27
+#: package/contents/config/config.qml:13
 #, fuzzy, kde-format
 #| msgid "Appearance"
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Izgled"
 
-#: package/contents/ui/configAppearance.qml:54
+#: package/contents/ui/configAppearance.qml:41
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:63
+#: package/contents/ui/configAppearance.qml:50
 #, kde-format
 msgid "Background:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:69
+#: package/contents/ui/configAppearance.qml:56
 #, kde-format
 msgid "Color:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:84
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "Image:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:92
+#: package/contents/ui/configAppearance.qml:79
 #, fuzzy, kde-format
 #| msgid "Path to custom image"
 msgctxt "@info:placeholder"
-msgid "Path to custom image..."
+msgid "Path to custom image…"
 msgstr "Putanja do posebne slike"
 
 # >> @title:window
-#: package/contents/ui/configAppearance.qml:110
+#: package/contents/ui/configAppearance.qml:98
 #, fuzzy, kde-format
 #| msgid "Choose an image"
 msgctxt "@info:tooltip"
-msgid "Choose image..."
+msgid "Choose image…"
 msgstr "Izbor slike"
 
 # >> @title:window
-#: package/contents/ui/configAppearance.qml:117
+#: package/contents/ui/configAppearance.qml:106
 #, fuzzy, kde-format
 #| msgid "Choose an image"
 msgctxt "@title:window"
@@ -71,47 +71,47 @@ msgid "Choose an Image"
 msgstr "Izbor slike"
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:122
+#: package/contents/ui/configAppearance.qml:111
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "fajlovi slika (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:136
+#: package/contents/ui/configAppearance.qml:125
 #, kde-format
 msgid "Tiles:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:140
+#: package/contents/ui/configAppearance.qml:129
 #, kde-format
 msgid "Colored numbers:"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:167
+#: package/contents/ui/FifteenPuzzle.qml:258
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Vrijeme: %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:193
+#: package/contents/ui/FifteenPuzzle.qml:301
 #, fuzzy, kde-format
 #| msgid "Shuffle"
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Promiješaj"
 
-#: package/contents/ui/FifteenPuzzle.qml:230
+#: package/contents/ui/FifteenPuzzle.qml:338
 #, fuzzy, kde-format
 #| msgid "Solved! Try again."
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Rešeno! Probajte opet."
 
-#: package/contents/ui/main.qml:41
+#: package/contents/ui/main.qml:25
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Petnaestica"
 
-#: package/contents/ui/main.qml:42
+#: package/contents/ui/main.qml:26
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Reši raspoređivanjem po redosledu"

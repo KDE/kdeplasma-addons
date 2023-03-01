@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-05-20 03:24+0200\n"
+"POT-Creation-Date: 2020-09-25 02:25+0200\n"
 "PO-Revision-Date: 2017-05-07 22:20+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -19,7 +19,7 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: package/contents/config/config.qml:29
+#: package/contents/config/config.qml:17
 #, fuzzy, kde-format
 #| msgid "Appearance"
 msgctxt "@title"
@@ -27,46 +27,46 @@ msgid "Appearance"
 msgstr "Изглед"
 
 # >> @option:check
-#: package/contents/ui/configGeneral.qml:47
+#: package/contents/ui/configGeneral.qml:35
 #, fuzzy, kde-format
 #| msgid "Display seconds"
 msgid "Display:"
 msgstr "Са секундама"
 
-#: package/contents/ui/configGeneral.qml:48
-#: package/contents/ui/configGeneral.qml:102
+#: package/contents/ui/configGeneral.qml:36
+#: package/contents/ui/configGeneral.qml:90
 #, kde-format
 msgctxt "@option:check"
 msgid "Grid"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:53
-#: package/contents/ui/configGeneral.qml:89
+#: package/contents/ui/configGeneral.qml:41
+#: package/contents/ui/configGeneral.qml:77
 #, fuzzy, kde-format
 #| msgid "Show inactive LEDs:"
 msgctxt "@option:check"
 msgid "Inactive LEDs"
 msgstr "Прикажи неактивне лампице:"
 
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:46
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:63
+#: package/contents/ui/configGeneral.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "In BCD format (decimal)"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:60
 #, fuzzy, kde-format
 #| msgid "Use custom color for grid"
 msgid "Use custom color for:"
 msgstr "Посебна боја за мрежу"
 
-#: package/contents/ui/configGeneral.qml:76
+#: package/contents/ui/configGeneral.qml:64
 #, fuzzy, kde-format
 #| msgid "Show inactive LEDs:"
 msgctxt "@option:check"

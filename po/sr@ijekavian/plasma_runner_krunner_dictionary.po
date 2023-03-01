@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_krunner_dictionary\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-05-20 03:24+0200\n"
+"POT-Creation-Date: 2022-10-28 00:47+0000\n"
 "PO-Revision-Date: 2012-09-08 19:40+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,25 +18,30 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: dictionaryrunner.cpp:33 dictionaryrunner_config.cpp:33
-#: dictionaryrunner_config.cpp:50
+#: dictionaryrunner.cpp:36 dictionaryrunner_config.cpp:34
+#: dictionaryrunner_config.cpp:52
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"
 msgstr "дефиниши"
 
-#: dictionaryrunner.cpp:36
+#: dictionaryrunner.cpp:43
 #, kde-format
 msgctxt "Dictionary keyword"
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: dictionaryrunner.cpp:36
+#: dictionaryrunner.cpp:43
 #, kde-format
 msgid "Finds the definition of :q:."
 msgstr "Налази дефиницију :q:."
 
-#: dictionaryrunner_config.cpp:21
+#: dictionaryrunner.cpp:120
+#, kde-format
+msgid "Definition for \"%1\" has been copied to clipboard"
+msgstr ""
+
+#: dictionaryrunner_config.cpp:22
 #, fuzzy, kde-format
 #| msgid "Trigger Word"
 msgctxt "@label:textbox"

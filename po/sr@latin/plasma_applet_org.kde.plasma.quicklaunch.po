@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-05-09 03:57+0200\n"
+"POT-Creation-Date: 2022-09-15 00:46+0000\n"
 "PO-Revision-Date: 2016-03-20 15:25+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,21 +18,21 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: package/contents/config/config.qml:26
+#: package/contents/config/config.qml:12
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@title"
 msgid "General"
 msgstr "Opšte"
 
-#: package/contents/ui/ConfigGeneral.qml:44
+#: package/contents/ui/ConfigGeneral.qml:30
 #, fuzzy, kde-format
 #| msgid "Maximum columns:"
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Najviše kolona:"
 
-#: package/contents/ui/ConfigGeneral.qml:44
+#: package/contents/ui/ConfigGeneral.qml:30
 #, fuzzy, kde-format
 #| msgid "Maximum rows:"
 msgctxt "@label:spinbox"
@@ -40,7 +40,7 @@ msgid "Maximum rows:"
 msgstr "Najviše vrsta:"
 
 # >> @title:window
-#: package/contents/ui/ConfigGeneral.qml:58
+#: package/contents/ui/ConfigGeneral.qml:44
 #, fuzzy, kde-format
 #| msgid "Appearance"
 msgctxt "@title:group"
@@ -48,7 +48,7 @@ msgid "Appearance:"
 msgstr "Izgled"
 
 # >> @option:check
-#: package/contents/ui/ConfigGeneral.qml:60
+#: package/contents/ui/ConfigGeneral.qml:46
 #, fuzzy, kde-format
 #| msgid "Show launcher names"
 msgctxt "@option:check"
@@ -56,79 +56,84 @@ msgid "Show launcher names"
 msgstr "Prikaži imena pokretača"
 
 # >> @option:check
-#: package/contents/ui/ConfigGeneral.qml:65
+#: package/contents/ui/ConfigGeneral.qml:51
 #, fuzzy, kde-format
 #| msgid "Enable popup"
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Uključi iskakač"
 
-#: package/contents/ui/ConfigGeneral.qml:75
+#: package/contents/ui/ConfigGeneral.qml:61
 #, fuzzy, kde-format
 #| msgid "Title"
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Naslov"
 
-#: package/contents/ui/ConfigGeneral.qml:83
+#: package/contents/ui/ConfigGeneral.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr ""
 
-#: package/contents/ui/ConfigGeneral.qml:99
+#: package/contents/ui/ConfigGeneral.qml:85
 #, fuzzy, kde-format
 #| msgid "Show title"
 msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "Prikaži naslov"
 
-#: package/contents/ui/IconItem.qml:142
+#: package/contents/ui/IconItem.qml:175
+#, kde-format
+msgid "Launch %1"
+msgstr ""
+
+#: package/contents/ui/IconItem.qml:259
 #, fuzzy, kde-format
 #| msgid "Add Launcher..."
 msgctxt "@action:inmenu"
-msgid "Add Launcher..."
+msgid "Add Launcher…"
 msgstr "Dodaj pokretač..."
 
-#: package/contents/ui/IconItem.qml:148
+#: package/contents/ui/IconItem.qml:265
 #, fuzzy, kde-format
 #| msgid "Edit Launcher..."
 msgctxt "@action:inmenu"
-msgid "Edit Launcher..."
+msgid "Edit Launcher…"
 msgstr "Uredi pokretač..."
 
-#: package/contents/ui/IconItem.qml:154
+#: package/contents/ui/IconItem.qml:271
 #, fuzzy, kde-format
 #| msgid "Remove Launcher"
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Ukloni pokretač"
 
-#: package/contents/ui/main.qml:145
+#: package/contents/ui/main.qml:142
 #, kde-format
 msgid "Quicklaunch"
 msgstr "brzokret"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:143
 #, fuzzy, kde-format
 #| msgid "Add launchers by Drag and Drop or by using the context menu."
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Dodajte pokretače prevlačenjem ili kroz kontekstni meni."
 
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:171
 #, kde-format
 msgid "Hide icons"
 msgstr "Sakrij ikonice"
 
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:171
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Prikaži skrivene ikonice"
 
-#: package/contents/ui/main.qml:271
+#: package/contents/ui/main.qml:285
 #, fuzzy, kde-format
 #| msgid "Add Launcher..."
 msgctxt "@action"
-msgid "Add Launcher..."
+msgid "Add Launcher…"
 msgstr "Dodaj pokretač..."

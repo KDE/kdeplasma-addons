@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_packagestructure_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2019-05-20 03:24+0200\n"
+"POT-Creation-Date: 2021-08-25 00:19+0000\n"
 "PO-Revision-Date: 2009-06-28 21:30+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,17 +18,17 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: comic_package.cpp:33
+#: comic_package.cpp:20
 #, kde-format
 msgid "Images"
 msgstr "слике"
 
-#: comic_package.cpp:38
+#: comic_package.cpp:25
 #, kde-format
 msgid "Executable Scripts"
 msgstr "извршне скрипте"
 
-#: comic_package.cpp:42
+#: comic_package.cpp:29
 #, kde-format
 msgid "Main Script File"
 msgstr "главни скриптни фајл"

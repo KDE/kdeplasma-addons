@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.diskquota\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-03-05 03:46+0100\n"
+"POT-Creation-Date: 2022-07-31 00:48+0000\n"
 "PO-Revision-Date: 2016-11-28 01:33+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,60 +18,77 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: package/contents/ui/main.qml:78 plugin/DiskQuota.cpp:290
-#, kde-format
-msgid "No quota restrictions found."
+#: package/contents/ui/main.qml:77
+#, fuzzy, kde-format
+#| msgid "No quota restrictions found."
+msgctxt "@info:status"
+msgid "No quota restrictions found"
 msgstr "Ограничења квоте нису нађена."
 
 # rewrite-msgid: /install/install command/
-#: package/contents/ui/main.qml:78
-#, kde-format
-msgid ""
-"Quota tool not found.\n"
-"\n"
-"Please install 'quota'."
+#: package/contents/ui/main.qml:77
+#, fuzzy, kde-format
+#| msgid ""
+#| "Quota tool not found.\n"
+#| "\n"
+#| "Please install 'quota'."
+msgctxt "@info:status"
+msgid "Quota tool not found"
 msgstr ""
 "Алатка за квоту није нађена.\n"
 "\n"
 "Инсталирајте наредбу ‘quota’."
 
-#: plugin/DiskQuota.cpp:58 plugin/DiskQuota.cpp:191 plugin/DiskQuota.cpp:289
+# rewrite-msgid: /install/install command/
+#: package/contents/ui/main.qml:78
+#, fuzzy, kde-format
+#| msgid "Please install 'quota'"
+msgctxt "@info:usagetip"
+msgid "Please install 'quota'"
+msgstr "Инсталирајте наредбу ‘quota’."
+
+#: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:177 plugin/DiskQuota.cpp:264
 #, kde-format
 msgid "Disk Quota"
 msgstr "Квота диска"
 
 # rewrite-msgid: /install/install command/
-#: plugin/DiskQuota.cpp:59
+#: plugin/DiskQuota.cpp:45
 #, kde-format
 msgid "Please install 'quota'"
 msgstr "Инсталирајте наредбу ‘quota’."
 
 # rewrite-msgid: /Running/Running command/
-#: plugin/DiskQuota.cpp:192
+#: plugin/DiskQuota.cpp:178
 #, kde-format
 msgid "Running quota failed"
 msgstr "Извршавање наредбе ‘quota’ пропало"
 
-#: plugin/DiskQuota.cpp:261
+#: plugin/DiskQuota.cpp:239
 #, kde-format
 msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
 msgid "%1: %2% used"
 msgstr "%1: %2% заузето"
 
-#: plugin/DiskQuota.cpp:262
+#: plugin/DiskQuota.cpp:240
 #, kde-format
 msgctxt "e.g.: 12 GiB of 20 GiB"
 msgid "%1 of %2"
 msgstr "%1 од %2"
 
-#: plugin/DiskQuota.cpp:263
+#: plugin/DiskQuota.cpp:241
 #, kde-format
 msgctxt "e.g.: 8 GiB free"
 msgid "%1 free"
 msgstr "%1 слободно"
 
-#: plugin/DiskQuota.cpp:286
+#: plugin/DiskQuota.cpp:261
 #, kde-format
 msgctxt "example: Quota: 83% used"
 msgid "Quota: %1% used"
 msgstr "Квота: %1% заузето"
+
+#: plugin/DiskQuota.cpp:265
+#, kde-format
+msgid "No quota restrictions found."
+msgstr "Ограничења квоте нису нађена."

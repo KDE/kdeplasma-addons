@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-03-24 03:50+0100\n"
+"POT-Creation-Date: 2022-08-09 00:47+0000\n"
 "PO-Revision-Date: 2009-12-23 11:15+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: converterrunner.cpp:37
+#: converterrunner.cpp:33
 #, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
@@ -29,8 +29,13 @@ msgstr ""
 "јединица“. Списак свих познатих јединица можете потражити у аплету "
 "претварача јединица."
 
-#: converterrunner.cpp:47
+#: converterrunner.cpp:42
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
 msgstr "у"
+
+#: converterrunner.cpp:50
+#, kde-format
+msgid "Copy unit and number"
+msgstr ""
