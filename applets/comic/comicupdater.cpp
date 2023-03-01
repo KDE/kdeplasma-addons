@@ -79,7 +79,7 @@ void ComicUpdater::checkForUpdate()
     }
 }
 
-void ComicUpdater::slotUpdatesFound(const KNSCore::EntryInternal::List &entries)
+void ComicUpdater::slotUpdatesFound(const KNSCore::Entry::List &entries)
 {
     for (int i = 0; i < entries.count(); ++i) {
         engine()->install(entries[i]);

@@ -12,7 +12,7 @@
 #include <QWidget>
 
 #include <KConfigGroup>
-#include <KNSCore/EntryInternal>
+#include <KNSCore/Entry>
 
 namespace KNSCore
 {
@@ -40,7 +40,7 @@ private Q_SLOTS:
      * for updates and do them automatically
      */
     void checkForUpdate();
-    void slotUpdatesFound(const KNSCore::EntryInternal::List &entries);
+    void slotUpdatesFound(const KNSCore::Entry::List &entries);
 
 private:
     KNSCore::Engine *engine();
