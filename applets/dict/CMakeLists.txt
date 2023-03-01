@@ -1,12 +1,12 @@
-find_package(Qt${QT_MAJOR_VERSION}WebEngine ${QT_MIN_VERSION} CONFIG)
+find_package(Qt6WebEngineQuick ${QT_MIN_VERSION} CONFIG)
 
-set_package_properties(Qt5WebEngine PROPERTIES
+set_package_properties(Qt6WebEngine PROPERTIES
     PURPOSE "Needed by the dict applet"
     URL "https://doc.qt.io/qt-5/qtwebengine-index.html"
     TYPE OPTIONAL
 )
 
-if (Qt${QT_MAJOR_VERSION}WebEngine_FOUND)
+if (Qt6WebEngineQuick_FOUND)
 
 #######################################################################################
 # Package (metadata.desktop and QML)
@@ -35,7 +35,7 @@ add_library(dictplugin SHARED ${dict_SRCS})
 target_link_libraries(dictplugin
     KF6::I18n
     Qt::Quick
-    Qt::WebEngine
+    Qt::WebEngineQuick
     engine_dict_static
 )
 

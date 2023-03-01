@@ -8,8 +8,7 @@
 
 #include "../../dict/dictengine.h"
 #include <QObject>
-
-class QQuickWebEngineProfile;
+#include <QQuickWebEngineProfile>
 
 class DictObject : public QObject
 {
