@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# Shinjo Park <kde@peremen.name>, 2020, 2022.
+# Shinjo Park <kde@peremen.name>, 2020, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 08:46+0000\n"
-"PO-Revision-Date: 2022-02-20 22:16+0100\n"
+"PO-Revision-Date: 2023-03-01 01:28+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: package/contents/ui/main.qml:32
 #, kde-format
@@ -33,10 +33,9 @@ msgid "Night Color is unavailable"
 msgstr "야간 색상을 사용할 수 없음"
 
 #: package/contents/ui/main.qml:41
-#, fuzzy, kde-format
-#| msgid "Night Color is disabled"
+#, kde-format
 msgid "Night Color is disabled. Click to configure"
-msgstr "야간 색상 비활성화됨"
+msgstr "야간 색상 비활성화됨. 설정하려면 클릭하십시오"
 
 #: package/contents/ui/main.qml:44
 #, kde-format
@@ -49,7 +48,6 @@ msgid "Night Color is active (%1K)"
 msgstr "야간 색상 활성화됨(%1K)"
 
 #: package/contents/ui/main.qml:97
-#, fuzzy, kde-format
-#| msgid "Configure Night Color…"
+#, kde-format
 msgid "&Configure Night Color…"
-msgstr "야간 색상 설정…"
+msgstr "야간 색상 설정(&C)…"

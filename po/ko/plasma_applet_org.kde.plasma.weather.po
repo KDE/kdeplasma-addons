@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2015, 2016, 2018, 2019, 2020, 2021, 2022.
+# Shinjo Park <kde@peremen.name>, 2015, 2016, 2018, 2019, 2020, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-02-20 22:17+0100\n"
+"PO-Revision-Date: 2023-03-01 01:27+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -150,34 +150,28 @@ msgid "Compact Mode"
 msgstr "축소 모드"
 
 #: package/contents/ui/config/ConfigAppearance.qml:44
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "온도 표시"
+msgstr "온도 표시:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:47
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "위젯 아이콘 옆에 표시"
+msgstr "위젯 아이콘 위에"
 
 #: package/contents/ui/config/ConfigAppearance.qml:55
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "위젯 아이콘 옆에 표시"
+msgstr "위젯 아이콘 옆에"
 
 #: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "표시하지 않기"
 
 #: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
@@ -255,21 +249,19 @@ msgstr "위치:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "선택 없음"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "공급자:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "위치 입력"
+msgstr "새 위치 입력"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
@@ -287,13 +279,13 @@ msgstr "'%1'의 기상대를 찾을 수 없습니다"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "현재 위치를 변경하기 위하여 기상대 검색"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "현재 위치를 설정하기 위하여 기상대 검색"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -397,19 +389,16 @@ msgid "Wind Gust:"
 msgstr "돌풍:"
 
 #: package/contents/ui/main.qml:239
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "%1일"
+msgstr "주간"
 
 #: package/contents/ui/main.qml:240
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "야간"
 
 #: package/contents/ui/main.qml:278
 #, kde-format
@@ -421,7 +410,7 @@ msgstr "%1 (%2%)"
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
-msgstr ""
+msgstr "%1을(를) 설정하려면 클릭하십시오"
 
 #: package/contents/ui/main.qml:381
 #, kde-format

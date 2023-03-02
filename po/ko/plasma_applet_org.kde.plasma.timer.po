@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2015, 2018, 2019, 2020, 2021.
+# Shinjo Park <kde@peremen.name>, 2015, 2018, 2019, 2020, 2021, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2021-05-16 21:26+0200\n"
+"PO-Revision-Date: 2023-03-01 01:28+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -36,18 +36,16 @@ msgid "Advanced"
 msgstr "고급"
 
 #: package/contents/ui/CompactRepresentation.qml:134
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
-msgstr "타이머"
+msgstr "타이머 일시 정지"
 
 #: package/contents/ui/CompactRepresentation.qml:134
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
-msgstr "타이머"
+msgstr "타이머 시작"
 
 #: package/contents/ui/CompactRepresentation.qml:191
 #: package/contents/ui/CompactRepresentation.qml:208
@@ -55,7 +53,7 @@ msgstr "타이머"
 msgctxt "remaining time"
 msgid "%1s"
 msgid_plural "%1s"
-msgstr[0] ""
+msgstr[0] "%1초"
 
 #: package/contents/ui/configAdvanced.qml:22
 #, kde-format
@@ -85,7 +83,7 @@ msgstr "제목 표시:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "남은 시간 표시"
 
 #: package/contents/ui/configAppearance.qml:59
 #, kde-format
@@ -94,18 +92,16 @@ msgid "Show seconds"
 msgstr "초 표시"
 
 #: package/contents/ui/configAppearance.qml:64
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "제목 표시:"
+msgstr "타이머 전환 표시"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "진행 표시기 표시"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format

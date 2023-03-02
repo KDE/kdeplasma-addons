@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2018, 2019, 2022.
+# Shinjo Park <kde@peremen.name>, 2018, 2019, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-17 00:59+0000\n"
-"PO-Revision-Date: 2022-07-13 13:26+0200\n"
+"PO-Revision-Date: 2023-03-01 01:26+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -30,12 +30,14 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"이 공급자는 민감한 그림을 필터하지 않습니다. 공개 장소에서 사용해야 할 때 주"
+"의하십시오."
 
 #: package/contents/ui/config.qml:76
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
-msgstr ""
+msgstr "종량제 연결을 사용할 때 업데이트"
 
 #: package/contents/ui/config.qml:86
 #, kde-format
@@ -342,7 +344,7 @@ msgstr "브라우저에서 링크 열기…"
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
-msgstr "오늘의 그림 웹 사이트를 기본 브라우저에서 열기"
+msgstr "오늘의 그림 웹사이트를 기본 브라우저에서 열기"
 
 #: plugins/potdbackend.cpp:219
 #, kde-format

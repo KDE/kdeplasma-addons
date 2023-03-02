@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2015, 2018, 2019, 2021.
+# Shinjo Park <kde@peremen.name>, 2015, 2018, 2019, 2021, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2021-05-16 21:26+0200\n"
+"PO-Revision-Date: 2023-03-01 01:28+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 20.12.3\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -114,17 +114,15 @@ msgid "Paste"
 msgstr "붙여넣기"
 
 #: package/contents/ui/main.qml:295
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "서식 없이 붙여넣기"
+msgstr "서식을 포함하여 붙여넣기"
 
 #: package/contents/ui/main.qml:302
-#, fuzzy, kde-format
-#| msgid "Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "서식"
+msgstr "서식 제거"
 
 #: package/contents/ui/main.qml:317
 #, kde-format
