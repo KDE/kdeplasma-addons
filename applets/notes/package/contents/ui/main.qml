@@ -5,14 +5,11 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15 as QQC2
-import QtQuick.Layouts 1.15
-import QtQuick.Window 2.15
-// Dialogs are stuck at 1.3 for some reason. Don't bump.
-import QtQuick.Dialogs 1.3
-// Deliberately imported after QtQuick to avoid missing restoreMode property in Binding. Fix in Qt 6.
-import QtQml 2.15
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
+import QtQuick.Window
+import QtQuick.Dialogs
 
 import org.kde.draganddrop 2.0 as DragDrop
 
