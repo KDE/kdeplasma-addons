@@ -180,9 +180,9 @@ ColumnLayout {
             }
 
             onLoadingChanged: {
-                if (loadRequest.status === WebEngineLoadRequest.LoadStartedStatus) {
+                if (loadingInfo.status === WebEngineLoadingInfo.LoadStartedStatus) {
                     infoButton.dismiss();
-                } else if (loadRequest.status === WebEngineLoadRequest.LoadSucceededStatus && useMinViewWidth) {
+                } else if (loadingInfo.status === WebEngineLoadingInfo.LoadSucceededStatus && useMinViewWidth) {
                     updateZoomTimer.start();
                 }
             }
@@ -190,12 +190,12 @@ ColumnLayout {
             onContextMenuRequested: {
                 if (request.mediaType === ContextMenuRequest.MediaTypeNone && request.linkUrl.toString() !== "") {
                     linkContextMenu.link = request.linkUrl;
-                    linkContextMenu.open(request.x, request.y);
+                    linkContextMenu.open(request.position.x, request.position.y);
                     request.accepted = true;
                 }
             }
 
-            onNewViewRequested: {
+            onNavigationRequested: {
                 var url = request.requestedUrl;
 
                 if (request.userInitiated) {
