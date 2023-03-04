@@ -5,6 +5,7 @@
 
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
+import QtQuick.Controls
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -81,7 +82,7 @@ FocusScope {
         text: i18n("Arbitrary String Which Says Something")
     }
 
-    PlasmaExtras.ScrollArea {
+    ScrollView {
         anchors { left: parent.left; right: parent.right; bottom: parent.bottom; top: separator.bottom; topMargin: PlasmaCore.Units.smallSpacing}
 
         ListView {
