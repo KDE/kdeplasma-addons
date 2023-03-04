@@ -520,7 +520,7 @@ PlasmaCore.SvgItem {
                 onClicked: {
                     // No need to ask for confirmation in the cases when...
                     // ...the note is blank
-                    if (mainTextArea.length == 0 ||
+                    if (mainTextArea.length === 0 ||
                         // ...the note's content is equal to the clipboard text
 
                         // Note that we are intentionally not using
@@ -531,7 +531,7 @@ PlasmaCore.SvgItem {
                         // depending on an implementation detail. So we instead
                         // roll our own version to ensure that the conversion
                         // is done in the same way every time.
-                        documentHandler.stripAndSimplify(mainTextArea.text) == documentHandler.strippedClipboardText()
+                        documentHandler.stripAndSimplify(mainTextArea.text) === documentHandler.strippedClipboardText()
                     ) {
                         Plasmoid.action("remove").trigger();
                     } else {
