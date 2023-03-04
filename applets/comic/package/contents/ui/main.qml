@@ -107,7 +107,7 @@ Item {
                 property bool highlighted: model.highlight
 
                 text: model.title
-                iconSource: model.icon
+                icon.source: model.icon
             }
         }
     }
