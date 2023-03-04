@@ -5,6 +5,7 @@
  */
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
+import QtQuick.Controls
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
@@ -79,7 +80,7 @@ Item {
             }
         }
 
-        PlasmaExtras.ScrollArea {
+        ScrollView {
             anchors.fill: parent
             ListView {
                 id: listView
