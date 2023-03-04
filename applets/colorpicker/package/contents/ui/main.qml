@@ -63,8 +63,9 @@ Item {
     QtDialogs.ColorDialog {
         id: colorDialog
         title: plasmoid.title
-        color: recentColor
-        onColorChanged: colorPicked(color)
+        selectedColor: recentColor
+
+        onAccepted: colorPicked(selectedColor)
     }
 
     // prevents the popup from actually opening, needs to be queued
