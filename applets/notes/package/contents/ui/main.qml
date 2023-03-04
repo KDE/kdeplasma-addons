@@ -18,9 +18,6 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
 
-// so we can override the textColor...
-import QtQuick.Controls.Styles.Plasma 2.0 as PlasmaStyle
-
 import org.kde.plasma.private.notes 0.1
 
 PlasmaCore.SvgItem {
