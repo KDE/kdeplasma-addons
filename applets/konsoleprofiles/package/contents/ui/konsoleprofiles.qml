@@ -96,10 +96,7 @@ FocusScope {
             delegate: PlasmaComponents3.ItemDelegate {
                 id: listdelegate
 
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                }
+                width: ListView.view.width
                 height: textMetric.paintedHeight * 2
 
                 hoverEnabled: true
