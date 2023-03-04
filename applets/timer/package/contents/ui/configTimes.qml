@@ -8,7 +8,6 @@ import QtQuick 2.5
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.plasmoid 2.0
 import org.kde.kirigami 2.12 as Kirigami
 import org.kde.kcm 1.2 as KCM
