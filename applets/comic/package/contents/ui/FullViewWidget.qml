@@ -5,8 +5,8 @@
  */
 
 import QtQuick 2.1
+import QtQuick.Controls
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 import QtQuick.Layouts 1.1
 
@@ -32,7 +32,7 @@ PlasmaCore.Dialog {
         root.visible = false;
     }
 
-    mainItem: PlasmaExtras.ScrollArea {
+    mainItem: ScrollView {
         id: mainScrollArea
 
         anchors.fill: parent
