@@ -9,7 +9,6 @@
 */
 import QtQuick 2.0
 import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.components 2.0 as PlasmaComponents // for Highlight
 
 PlasmaExtras.ScrollArea {
     id: menu
@@ -23,7 +22,7 @@ PlasmaExtras.ScrollArea {
 
         boundsBehavior: Flickable.StopAtBounds
         interactive: contentHeight > height
-        highlight: PlasmaComponents.Highlight {
+        highlight: PlasmaExtras.Highlight {
             anchors.bottomMargin: -listMargins.bottom
             y: 1
         }
