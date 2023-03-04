@@ -4,6 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+import QtCore
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Dialogs
@@ -45,20 +46,19 @@ ColumnLayout {
     FileDialog {
         id: fileDialog
 
-        visible: false
         title: i18nc("@title:window", "Choose Files")
-        folder: shortcuts.pictures
-        selectMultiple: true
+        currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+        fileMode: FileDialog.OpenFiles
 
         // TODO get valid filter list from native code?
         //nameFilters: [ "Image files (*.png *.jpg)", "All files (*)" ]
         //selectedNameFilter: "All files (*)"
 
         onAccepted: {
-            console.log("Accepted: " + fileUrls)
+            console.log("Accepted: " + selectedFiles)
 
-            for (var i = 0; i < fileUrls.length; ++i) {
-                var item = { 'path':fileUrls[i], 'type':'file' }
+            for (var i = 0; i < selectedFiles.length; ++i) {
+                var item = { 'path':selectedFiles[i], 'type':'file' }
                 addPath(item)
             }
         }
@@ -68,21 +68,18 @@ ColumnLayout {
         }
     }
 
-    FileDialog {
+    FolderDialog {
         id: folderDialog
 
         visible: false
         title: i18nc("@title:window", "Choose a Folder")
-        folder: shortcuts.pictures
-        selectFolder: true
+        currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
 
         onAccepted: {
-            console.log("Accepted: " + fileUrls)
+            console.log("Accepted: " + selectedFolder)
 
-            for (var i = 0; i < fileUrls.length; ++i) {
-                var item = { 'path':fileUrls[i], 'type':'folder' }
-                addPath(item)
-            }
+            var item = { 'path':selectedFolder, 'type':'folder' }
+            addPath(item)
         }
 
         onRejected: {
@@ -110,11 +107,10 @@ ColumnLayout {
                 id: folderDelegate
 
                 width: pathsList.width
-                height: paintedHeight;
 
                 QQC2.Label {
                     Layout.fillWidth: true
-                    text: model.path.replace("file://", "")
+                    text: String(model.path).replace("file://", "")
                 }
 
                 actions: [
