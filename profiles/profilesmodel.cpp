@@ -27,9 +27,13 @@ ProfilesModel::ProfilesModel(QObject *parent)
 void ProfilesModel::init()
 {
     m_dirWatch = new KDirWatch(this);
-    const QStringList konsoleDataBaseDirs = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
-    for (const QString &konsoleDataBaseDir : konsoleDataBaseDirs) {
-        m_dirWatch->addDir(konsoleDataBaseDir + QLatin1Char('/') + m_appName);
+    const QStringList dataLocations = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
+    for (const QString &dataDir : dataLocations) {
+        if (m_appName == QLatin1String("konsole")) {
+            m_dirWatch->addDir(dataDir + QLatin1Char('/') + m_appName);
+        } else {
+            m_dirWatch->addDir(dataDir + QLatin1Char('/') + m_appName + QLatin1String("/sessions"));
+        }
     }
     connect(m_dirWatch, &KDirWatch::dirty, this, &ProfilesModel::loadProfiles);
 
