@@ -11,9 +11,7 @@
 #include <QDebug>
 #include <QFileInfo>
 #include <QImage>
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QNetworkInformation>
-#endif
 #include <QSettings>
 #include <QStandardPaths>
 
@@ -29,9 +27,7 @@ ComicEngine::ComicEngine(QObject *parent)
     : QObject(parent)
     , mEmptySuffix(false)
 {
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
     QNetworkInformation::instance()->load(QNetworkInformation::Feature::Reachability);
-#endif
     loadProviders();
 }
 
@@ -248,9 +244,5 @@ QString ComicEngine::lastCachedIdentifier(const QString &identifier) const
 
 bool ComicEngine::isOnline() const
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    return m_networkConfigurationManager.isOnline();
-#else
     return QNetworkInformation::instance()->reachability() == QNetworkInformation::Reachability::Online;
-#endif
 }
