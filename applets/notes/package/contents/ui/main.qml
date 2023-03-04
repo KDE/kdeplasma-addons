@@ -565,11 +565,10 @@ PlasmaCore.SvgItem {
             visible: false
             title: i18n("Discard this note?")
             text: i18n("Are you sure you want to discard this note?")
-            icon: StandardIcon.Warning
 
-            standardButtons: StandardButton.Discard | StandardButton.Cancel
+            buttons: MessageDialog.Discard | MessageDialog.Cancel
 
-            onDiscard: {
+            onRejected: {
                 Plasmoid.action("remove").trigger()
                 visible = false;
             }
