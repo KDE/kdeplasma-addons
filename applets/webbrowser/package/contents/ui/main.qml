@@ -9,7 +9,6 @@
 import QtQuick 2.0
 import QtWebEngine 1.5
 import QtQuick.Layouts 1.1
-import org.kde.plasma.components 2.0 as PlasmaComponents // for Menu+MenuItem
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -127,19 +126,19 @@ ColumnLayout {
         // This reimplements WebEngineView context menu for links to add a "open externally" entry
         // since you cannot add custom items there yet
         // there's a FIXME comment about that in QQuickWebEngineViewPrivate::contextMenuRequested
-        PlasmaComponents.Menu {
+        PlasmaExtras.Menu {
             id: linkContextMenu
             visualParent: webview
 
             property string link
 
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18nc("@action:inmenu", "Open Link in Browser")
                 icon:  "internet-web-browser"
                 onClicked: Qt.openUrlExternally(linkContextMenu.link)
             }
 
-            PlasmaComponents.MenuItem {
+            PlasmaExtras.MenuItem {
                 text: i18nc("@action:inmenu", "Copy Link Address")
                 icon: "edit-copy"
                 onClicked: webview.triggerWebAction(WebEngineView.CopyLinkToClipboard)
