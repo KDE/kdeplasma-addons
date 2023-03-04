@@ -48,7 +48,7 @@ PlasmaCore.Dialog
             delegate: PlasmaExtras.ListItem {
                 enabled: true
 
-                onClicked: view.createJob(index)
+                onClicked: view.createJob(model.index)
                 Keys.onReturnPressed: clicked(null)
                 Keys.onEnterPressed: clicked(null)
                 Keys.onSpacePressed: clicked(null)
@@ -59,13 +59,13 @@ PlasmaCore.Dialog
                     anchors.right: parent.right
                     PlasmaComponents3.Label {
                         Layout.fillWidth: true
-                        text: display
+                        text: model.display
                     }
                     PlasmaComponents3.Button {
                         id: button
                         Layout.alignment: Qt.AlignVCenter
                         icon.name: "arrow-right"
-                        onClicked: view.createJob(index)
+                        onClicked: view.createJob(odel.index)
                     }
                 }
             }
