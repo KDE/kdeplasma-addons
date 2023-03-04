@@ -5,9 +5,9 @@
  */
 
 import QtQuick 2.2
-import org.kde.plasma.components 2.0 as PlasmaComponents // for MenuItem
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-PlasmaComponents.MenuItem
+PlasmaExtras.MenuItem
 {
     onClicked: {
         Qt.openUrlExternally(text);
