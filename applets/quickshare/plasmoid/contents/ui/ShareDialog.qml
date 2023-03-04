@@ -54,7 +54,10 @@ PlasmaCore.Dialog
                 Keys.onSpacePressed: clicked(null)
                 Keys.onEscapePressed: window.hide()
 
+                implicitHeight: contentLayout.implicitHeight + PlasmaCore.Units.smallSpacing * 2
+
                 RowLayout {
+                    id: contentLayout
                     anchors.left: parent.left
                     anchors.right: parent.right
                     PlasmaComponents3.Label {
