@@ -9,7 +9,6 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents // PC3 TabBar+TabButton need work first
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 
@@ -89,7 +88,7 @@ Item {
         imagePath: "widgets/arrows"
     }
 
-    PlasmaComponents.TabBar{
+    PlasmaComponents3.TabBar {
         id: comicTabbar
 
         anchors {
@@ -99,14 +98,9 @@ Item {
 
         visible: plasmoid.nativeInterface.tabIdentifiers.length > 1
 
-        onCurrentTabChanged: {
-            console.log("onCurrentTabChanged:" + comicTabbar.currentTab.key);
-            plasmoid.nativeInterface.tabChanged(comicTabbar.currentTab.key);
-        }
-
         Repeater {
             model: plasmoid.nativeInterface.comicsModel
-            delegate:  PlasmaComponents.TabButton {
+            delegate:  PlasmaComponents3.TabButton {
                 id: tabButton
 
                 readonly property string key: model.key
