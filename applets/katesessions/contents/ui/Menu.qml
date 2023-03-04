@@ -8,9 +8,10 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 import QtQuick 2.0
+import QtQuick.Controls
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
-PlasmaExtras.ScrollArea {
+ScrollView {
     id: menu
     property alias view: menuListView
     property alias model: menuListView.model
