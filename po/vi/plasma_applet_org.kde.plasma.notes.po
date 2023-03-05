@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-05 00:49+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2023-01-08 18:14+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -89,146 +89,146 @@ msgstr "Mảnh giấy nhớ trong mờ"
 msgid "A translucent sticky note with light text"
 msgstr "Mảnh giấy nhớ trong mờ với chữ sáng màu"
 
-#: package/contents/ui/main.qml:255
+#: package/contents/ui/main.qml:249
 #, kde-format
 msgid "Undo"
 msgstr "Đảo ngược"
 
-#: package/contents/ui/main.qml:263
+#: package/contents/ui/main.qml:257
 #, kde-format
 msgid "Redo"
 msgstr "Làm lại"
 
-#: package/contents/ui/main.qml:273
+#: package/contents/ui/main.qml:267
 #, kde-format
 msgid "Cut"
 msgstr "Cắt"
 
-#: package/contents/ui/main.qml:281
+#: package/contents/ui/main.qml:275
 #, kde-format
 msgid "Copy"
 msgstr "Chép"
 
-#: package/contents/ui/main.qml:289
+#: package/contents/ui/main.qml:283
 #, kde-format
 msgid "Paste"
 msgstr "Dán"
 
-#: package/contents/ui/main.qml:295
+#: package/contents/ui/main.qml:289
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "Dán với đầy đủ định dạng"
 
-#: package/contents/ui/main.qml:302
+#: package/contents/ui/main.qml:296
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "Xoá định dạng"
 
-#: package/contents/ui/main.qml:317
+#: package/contents/ui/main.qml:311
 #, kde-format
 msgid "Delete"
 msgstr "Xoá"
 
-#: package/contents/ui/main.qml:324
+#: package/contents/ui/main.qml:318
 #, kde-format
 msgid "Clear"
 msgstr "Làm trống"
 
-#: package/contents/ui/main.qml:334
+#: package/contents/ui/main.qml:328
 #, kde-format
 msgid "Select All"
 msgstr "Chọn tất cả"
 
-#: package/contents/ui/main.qml:462
+#: package/contents/ui/main.qml:456
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Đậm"
 
-#: package/contents/ui/main.qml:474
+#: package/contents/ui/main.qml:468
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Nghiêng"
 
-#: package/contents/ui/main.qml:486
+#: package/contents/ui/main.qml:480
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Gạch chân"
 
-#: package/contents/ui/main.qml:498
+#: package/contents/ui/main.qml:492
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Gạch xuyên"
 
-#: package/contents/ui/main.qml:572
+#: package/contents/ui/main.qml:566
 #, kde-format
 msgid "Discard this note?"
 msgstr "Vứt giấy nhớ?"
 
-#: package/contents/ui/main.qml:573
+#: package/contents/ui/main.qml:567
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Bạn có chắc chắn muốn vứt mảnh giấy nhớ này?"
 
-#: package/contents/ui/main.qml:586
+#: package/contents/ui/main.qml:579
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Trắng"
 
-#: package/contents/ui/main.qml:587
+#: package/contents/ui/main.qml:580
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Đen"
 
-#: package/contents/ui/main.qml:588
+#: package/contents/ui/main.qml:581
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Đỏ"
 
-#: package/contents/ui/main.qml:589
+#: package/contents/ui/main.qml:582
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Cam"
 
-#: package/contents/ui/main.qml:590
+#: package/contents/ui/main.qml:583
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Vàng"
 
-#: package/contents/ui/main.qml:591
+#: package/contents/ui/main.qml:584
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Lục"
 
-#: package/contents/ui/main.qml:592
+#: package/contents/ui/main.qml:585
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Lam"
 
-#: package/contents/ui/main.qml:593
+#: package/contents/ui/main.qml:586
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Hồng"
 
-#: package/contents/ui/main.qml:594
+#: package/contents/ui/main.qml:587
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "Trong mờ"
 
-#: package/contents/ui/main.qml:595
+#: package/contents/ui/main.qml:588
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"

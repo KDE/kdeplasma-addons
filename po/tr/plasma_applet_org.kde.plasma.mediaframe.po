@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-03 00:49+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2021-11-26 16:29+0100\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -176,18 +176,18 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Bir Klasör Seç"
 
-#: package/contents/ui/ConfigPaths.qml:123
+#: package/contents/ui/ConfigPaths.qml:119
 #, kde-format
 msgid "Remove path"
 msgstr "Yolu kaldır"
 
-#: package/contents/ui/ConfigPaths.qml:137
+#: package/contents/ui/ConfigPaths.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Klasör ekle…"
 
-#: package/contents/ui/ConfigPaths.qml:143
+#: package/contents/ui/ConfigPaths.qml:139
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-24 00:51+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2023-02-24 15:56-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -76,49 +76,49 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr ""
 
-#: package/contents/ui/main.qml:109
+#: package/contents/ui/main.qml:110
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Abrir janela de cores"
 
-#: package/contents/ui/main.qml:110
+#: package/contents/ui/main.qml:111
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Limpar histórico"
 
-#: package/contents/ui/main.qml:111
+#: package/contents/ui/main.qml:112
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Exibir histórico"
 
-#: package/contents/ui/main.qml:113
+#: package/contents/ui/main.qml:114
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Copiar para a área de transferência"
 
-#: package/contents/ui/main.qml:150
+#: package/contents/ui/main.qml:151
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Nenhuma cor"
 
-#: package/contents/ui/main.qml:154
+#: package/contents/ui/main.qml:155
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Selecionar cor"
 
-#: package/contents/ui/main.qml:329
+#: package/contents/ui/main.qml:330
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Copiado!"
 
-#: package/contents/ui/main.qml:339
+#: package/contents/ui/main.qml:340
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

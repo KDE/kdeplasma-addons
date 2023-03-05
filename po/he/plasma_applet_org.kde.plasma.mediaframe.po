@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-03 00:49+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2017-05-16 06:55-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -190,19 +190,19 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "בחירת תיקייה"
 
-#: package/contents/ui/ConfigPaths.qml:123
+#: package/contents/ui/ConfigPaths.qml:119
 #, kde-format
 msgid "Remove path"
 msgstr ""
 
-#: package/contents/ui/ConfigPaths.qml:137
+#: package/contents/ui/ConfigPaths.qml:133
 #, fuzzy, kde-format
 #| msgid "Add folder..."
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "הוסף תיקיה..."
 
-#: package/contents/ui/ConfigPaths.qml:143
+#: package/contents/ui/ConfigPaths.qml:139
 #, fuzzy, kde-format
 #| msgid "Add files..."
 msgctxt "@action:button"

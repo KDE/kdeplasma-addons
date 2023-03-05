@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2018-09-15 11:21+0100\n"
 "Last-Translator: Mthw <jari_45@hotmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "X-Generator: Lokalize 2.0\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: package/contents/ui/konsoleprofiles.qml:61
+#: package/contents/ui/konsoleprofiles.qml:62
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Konsole profily"
 
-#: package/contents/ui/konsoleprofiles.qml:81
+#: package/contents/ui/konsoleprofiles.qml:82
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "Povinný reťazec, ktorý niečo hovorí"

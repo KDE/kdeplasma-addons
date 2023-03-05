@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2022-10-17 09:47+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -42,55 +42,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Масштабировать автоматически, если ширина меньше"
 
-#: package/contents/ui/main.qml:25
+#: package/contents/ui/main.qml:24
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Назад"
 
-#: package/contents/ui/main.qml:32
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Вперёд"
 
-#: package/contents/ui/main.qml:51
+#: package/contents/ui/main.qml:50
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Введите URL-адрес"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:86
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Остановить загрузку этой страницы"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:86
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Перезагрузить эту страницу"
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:136
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Открыть ссылку в браузере"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Скопировать адрес ссылки"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:204
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Заблокировано всплывающее окно"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

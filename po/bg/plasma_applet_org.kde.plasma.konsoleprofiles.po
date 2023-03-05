@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2022-01-02 14:17+0100\n"
 "Last-Translator: mkkDr2010 <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: package/contents/ui/konsoleprofiles.qml:61
+#: package/contents/ui/konsoleprofiles.qml:62
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Профили на Konsole"
 
-#: package/contents/ui/konsoleprofiles.qml:81
+#: package/contents/ui/konsoleprofiles.qml:82
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "Произволен низ информация"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2022-10-17 17:44+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -43,55 +43,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Escalar automáticamente si el ancho es inferior"
 
-#: package/contents/ui/main.qml:25
+#: package/contents/ui/main.qml:24
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Retroceder"
 
-#: package/contents/ui/main.qml:32
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Avanzar"
 
-#: package/contents/ui/main.qml:51
+#: package/contents/ui/main.qml:50
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Escriba una URL"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:86
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Detener la carga de esta página"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:86
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Volver a cargar esta paǵina"
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:136
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Abrir enlace en el navegador"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copiar dirección del enlace"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:204
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Ventana emergente bloqueada"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

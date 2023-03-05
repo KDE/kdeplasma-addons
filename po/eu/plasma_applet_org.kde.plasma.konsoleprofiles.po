@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2018-07-21 15:05+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-doc@kde.org>\n"
@@ -20,13 +20,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: package/contents/ui/konsoleprofiles.qml:61
+#: package/contents/ui/konsoleprofiles.qml:62
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Konsole-ren profilak"
 
-#: package/contents/ui/konsoleprofiles.qml:81
+#: package/contents/ui/konsoleprofiles.qml:82
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "Hautazko katea, zerbait esaten duena"

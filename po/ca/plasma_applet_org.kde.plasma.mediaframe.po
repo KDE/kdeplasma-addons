@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-03 00:49+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2022-04-22 18:55+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -180,18 +180,18 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Selecciona una carpeta"
 
-#: package/contents/ui/ConfigPaths.qml:123
+#: package/contents/ui/ConfigPaths.qml:119
 #, kde-format
 msgid "Remove path"
 msgstr "Elimina el camí"
 
-#: package/contents/ui/ConfigPaths.qml:137
+#: package/contents/ui/ConfigPaths.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Afegeix una carpeta…"
 
-#: package/contents/ui/ConfigPaths.qml:143
+#: package/contents/ui/ConfigPaths.qml:139
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

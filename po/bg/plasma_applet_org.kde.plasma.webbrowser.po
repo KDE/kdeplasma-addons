@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2022-11-11 21:58+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -41,55 +41,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Автоматично мащабиране, ако ширината е под"
 
-#: package/contents/ui/main.qml:25
+#: package/contents/ui/main.qml:24
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Назад"
 
-#: package/contents/ui/main.qml:32
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Напред"
 
-#: package/contents/ui/main.qml:51
+#: package/contents/ui/main.qml:50
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Въвеждане на URL"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:86
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Спиране на зареждането на страницата"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:86
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Обновяване на страница"
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:136
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Отваряне на препраткта в браузър"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Копиране адреса на препратката"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:204
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Блокиран е изскачащ прозорец"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

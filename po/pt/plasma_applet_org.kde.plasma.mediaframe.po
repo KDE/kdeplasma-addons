@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-03 00:49+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2022-03-25 09:50+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -178,18 +178,18 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Escolher uma Pasta"
 
-#: package/contents/ui/ConfigPaths.qml:123
+#: package/contents/ui/ConfigPaths.qml:119
 #, kde-format
 msgid "Remove path"
 msgstr "Remover a localização"
 
-#: package/contents/ui/ConfigPaths.qml:137
+#: package/contents/ui/ConfigPaths.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Adicionar uma Pasta…"
 
-#: package/contents/ui/ConfigPaths.qml:143
+#: package/contents/ui/ConfigPaths.qml:139
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-18 01:00+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2022-06-28 21:22+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -86,7 +86,7 @@ msgctxt "@option:check"
 msgid "Copy automatically:"
 msgstr "தானாக நகலெடு:"
 
-#: contents/ui/ShareDialog.qml:31
+#: contents/ui/ShareDialog.qml:30
 #, kde-format
 msgid "Shares for '%1'"
 msgstr "'%1' என்பதற்கான பகிர்வுகள்"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2022-10-28 22:52+0300\n"
 "Last-Translator: Lasse Liehu <lasse.liehu@iki.fi>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -41,55 +41,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Automaattinen skaalaus, kun leveys on alle"
 
-#: package/contents/ui/main.qml:25
+#: package/contents/ui/main.qml:24
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Siirry takaisin"
 
-#: package/contents/ui/main.qml:32
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Siirry eteenpäin"
 
-#: package/contents/ui/main.qml:51
+#: package/contents/ui/main.qml:50
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Kirjoita verkko-osoite"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:86
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Keskeytä sivun lataus"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:86
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Päivitä sivu"
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:136
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Avaa linkki selaimeen"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopioi linkin osoite"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:204
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Uusi ikkuna estetty"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

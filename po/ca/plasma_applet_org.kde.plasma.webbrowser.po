@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2022-10-17 08:37+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -43,55 +43,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Canvia l'escala automàticament si l'amplada és inferior a"
 
-#: package/contents/ui/main.qml:25
+#: package/contents/ui/main.qml:24
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Retrocedeix"
 
-#: package/contents/ui/main.qml:32
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Avança"
 
-#: package/contents/ui/main.qml:51
+#: package/contents/ui/main.qml:50
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Teclegeu un URL"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:86
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Atura la càrrega d'aquesta pàgina"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:86
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Torna a carregar aquesta pàgina"
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:136
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Obre l'enllaç en un navegador"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copia l'adreça de l'enllaç"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:204
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "S'ha blocat la finestra emergent"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

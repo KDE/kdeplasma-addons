@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-03 00:49+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2021-12-22 18:25+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -177,18 +177,18 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "اختر مجلّدًا"
 
-#: package/contents/ui/ConfigPaths.qml:123
+#: package/contents/ui/ConfigPaths.qml:119
 #, kde-format
 msgid "Remove path"
 msgstr "أزل مسار"
 
-#: package/contents/ui/ConfigPaths.qml:137
+#: package/contents/ui/ConfigPaths.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "أضف مجلدًا..."
 
-#: package/contents/ui/ConfigPaths.qml:143
+#: package/contents/ui/ConfigPaths.qml:139
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-18 01:00+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2022-02-05 20:22+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -89,7 +89,7 @@ msgctxt "@option:check"
 msgid "Copy automatically:"
 msgstr "Copiază automat:"
 
-#: contents/ui/ShareDialog.qml:31
+#: contents/ui/ShareDialog.qml:30
 #, kde-format
 msgid "Shares for '%1'"
 msgstr "Partajări pentru „%1”"

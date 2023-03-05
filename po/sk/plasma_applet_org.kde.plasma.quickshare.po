@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quickshare\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-18 01:00+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2022-01-31 17:02+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -86,7 +86,7 @@ msgctxt "@option:check"
 msgid "Copy automatically:"
 msgstr "Kopírovať automaticky:"
 
-#: contents/ui/ShareDialog.qml:31
+#: contents/ui/ShareDialog.qml:30
 #, kde-format
 msgid "Shares for '%1'"
 msgstr "Zdieľania pre '%1'"

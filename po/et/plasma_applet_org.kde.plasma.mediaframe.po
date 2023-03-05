@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-03 00:49+0000\n"
+"POT-Creation-Date: 2023-03-05 03:09+0000\n"
 "PO-Revision-Date: 2019-11-01 22:48+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -175,12 +175,12 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Kataloogi valimine"
 
-#: package/contents/ui/ConfigPaths.qml:123
+#: package/contents/ui/ConfigPaths.qml:119
 #, kde-format
 msgid "Remove path"
 msgstr "Eemalda asukoht"
 
-#: package/contents/ui/ConfigPaths.qml:137
+#: package/contents/ui/ConfigPaths.qml:133
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Add Folder..."
@@ -188,7 +188,7 @@ msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Lisa kataloog ..."
 
-#: package/contents/ui/ConfigPaths.qml:143
+#: package/contents/ui/ConfigPaths.qml:139
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Add Files..."
