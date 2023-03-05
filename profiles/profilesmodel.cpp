@@ -45,7 +45,9 @@ void ProfilesModel::loadProfiles()
     if (m_appName == QLatin1String("kate")) {
         const QDir sessionsDir(QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QStringLiteral("/kate/sessions"));
         profilesPaths = sessionsDir.entryList({QStringLiteral("*.katesession")}, QDir::Files, QDir::Name);
-        m_data << ProfileData{i18n("Start Kate (no arguments)"), QString(), m_appName};
+        // Use "--" as a placeholder that doesn't do anything in a shell, checked further below when the process is started
+        // Having an extra property for this is overkill
+        m_data << ProfileData{i18n("Start Kate (no arguments)"), QStringLiteral("--"), m_appName};
         m_data << ProfileData{i18n("New Kate Session"), QString(), QStringLiteral("document-new")};
     } else {
         const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, m_appName, QStandardPaths::LocateDirectory);
@@ -103,7 +105,7 @@ void ProfilesModel::openProfile(const QString profileIdentifier)
         job->setDesktopName(QStringLiteral("org.kde.konsole"));
     } else if (m_appName == QLatin1String("kate")) {
         QStringList args;
-        if (!profileIdentifier.isEmpty()) {
+        if (!profileIdentifier.isEmpty() && profileIdentifier != QLatin1String("--")) {
             args << QStringLiteral("--start") << profileIdentifier;
         }
         args << QStringLiteral("-n");
