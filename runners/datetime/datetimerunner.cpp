@@ -206,8 +206,8 @@ void DateTimeRunner::match(RunnerContext &context)
 #endif
         const QHash<QString, QTimeZone> toZones = matchingTimeZones(toZoneTerm, QDateTime(date, time));
 
-        if (fromZoneTerm.isEmpty() && toZoneTerm.isEmpty()) {
-            // no time zone to convert between: there's nothing to do for us
+        if (fromZoneTerm.isEmpty() && toZoneTerm.isEmpty() && dtLocale.timeFormat(QLocale::ShortFormat) == QLocale().timeFormat(QLocale::ShortFormat)) {
+            // no time zone or time format to convert between: there's nothing to do for us
             return;
         }
 
@@ -264,11 +264,11 @@ void DateTimeRunner::match(RunnerContext &context)
                     / fromZoneStr.length();
                 const qreal relevance = toZoneRelevance / 2 + fromZoneRelevance / 2;
 
-                addMatch(QStringLiteral("%1: %2 (%3)<br>%4: %5").arg(toZoneStr, toTimeDayStr, timeDiffStr, fromZoneStr, fromTimeStr),
-                         toTimeStr,
-                         relevance,
-                         QStringLiteral("clock"),
-                         context);
+                const QString result = fromZoneTerm.isEmpty() && toZoneTerm.isEmpty()
+                    ? toTimeStr // only time format conversion
+                    : QStringLiteral("%1: %2 (%3)<br>%4: %5").arg(toZoneStr, toTimeDayStr, timeDiffStr, fromZoneStr, fromTimeStr); // time zone conversion
+
+                addMatch(result, toTimeStr, relevance, QStringLiteral("clock"), context);
             }
         }
     }
