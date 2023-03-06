@@ -155,19 +155,29 @@ void DateTimeRunner::match(RunnerContext &context)
         QDate date;
         QTime time;
         QString dtTerm;
-        // shortest possible string: only time without leading zeros
-        const int minLen = QLocale().timeFormat(QLocale::ShortFormat).length();
-        // longest possible string: date and time with more characters for two-digit numbers in each of the components and different AP format
-        const int maxLen = QLocale().dateTimeFormat(QLocale::ShortFormat).length() + 8;
-        // check all long and short enough initial substrings
-        for (int n = minLen; n <= maxLen && n <= term.length() && time.isNull(); ++n) {
+        QLocale dtLocale;
+        // check all substrings starting at beginning of query and ending at end of query or whitespace
+        // and long and short enough to contain a time spec, from longest to shortest
+        for (int n = 15; n >= 3 && time.isNull(); --n) {
+            if (!(n == term.length() || term.at(n).isSpace())) {
+                continue;
+            }
             dtTerm = term.mid(0, n);
-            // try to parse query substring as datetime or time
-            if (QDateTime dateTimeParse = QLocale().toDateTime(dtTerm, QLocale::ShortFormat); dateTimeParse.isValid()) {
-                date = dateTimeParse.date();
-                time = dateTimeParse.time();
-            } else if (QTime timeParse = QLocale().toTime(dtTerm, QLocale::ShortFormat); timeParse.isValid()) {
-                time = timeParse;
+            // iterate all locales (so we can match eg both 12 and 24 hour formats), try the system locale first
+            QList<QLocale> locales({QLocale()});
+            locales << QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
+            for (const auto &locale : locales) {
+                // try to parse query substring as datetime or time
+                if (QDateTime dateTimeParse = locale.toDateTime(dtTerm, QLocale::ShortFormat); dateTimeParse.isValid()) {
+                    date = dateTimeParse.date();
+                    time = dateTimeParse.time();
+                    dtLocale = locale;
+                    break;
+                } else if (QTime timeParse = locale.toTime(dtTerm, QLocale::ShortFormat); timeParse.isValid()) {
+                    time = timeParse;
+                    dtLocale = locale;
+                    break;
+                }
             }
         }
         // unspecified date and/or time will later be initialized to current date/time in from time zone
@@ -197,6 +207,7 @@ void DateTimeRunner::match(RunnerContext &context)
         const QHash<QString, QTimeZone> toZones = matchingTimeZones(toZoneTerm, QDateTime(date, time));
 
         if (fromZoneTerm.isEmpty() && toZoneTerm.isEmpty()) {
+            // no time zone to convert between: there's nothing to do for us
             return;
         }
 
