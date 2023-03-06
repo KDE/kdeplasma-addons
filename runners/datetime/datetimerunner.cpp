@@ -117,16 +117,16 @@ void DateTimeRunner::match(RunnerContext &context)
             const QString dayDiffNumStr = KFormat().formatSpelloutDuration(abs(dateDiff));
             const QString timeDayLaterStr = i18nc(
                 "time difference with calendar date difference between time zones, e.g. 22:00 Brasilia time in Stockholm = "
-                "02:00 + 1 day, where %1 is the time and %2 is "
+                "02:00 1 day after, where %1 is the time and %2 is "
                 "the days later",
-                "%1 + %2",
+                "%1, %2 after",
                 timeStr,
                 dayDiffNumStr);
             const QString timeDayEarlierStr = i18nc(
                 "time difference with calendar date difference between time zones, e.g. 02:00 Stockholm time in Brasilia "
-                "= 22:00 - 1 day, where %1 is the time and %2 is "
+                "= 22:00 1 day before, where %1 is the time and %2 is "
                 "the days earlier",
-                "%1 - %2",
+                "%1, %2 before",
                 timeStr,
                 dayDiffNumStr);
             const QString timeDayStr = dateDiff > 0 ? timeDayLaterStr : dateDiff < 0 ? timeDayEarlierStr : timeStr;
@@ -219,16 +219,16 @@ void DateTimeRunner::match(RunnerContext &context)
                 const QString dayDiffNumStr = KFormat().formatSpelloutDuration(abs(dateDiff));
                 const QString toTimeDayLaterStr = i18nc(
                     "time difference with calendar date difference between time zones, e.g. 22:00 Brasilia time in Stockholm = "
-                    "02:00 + 1 day, where %1 is the time and %2 is "
+                    "02:00 1 day after, where %1 is the time and %2 is "
                     "the days later",
-                    "%1 + %2",
+                    "%1, %2 after",
                     toTimeStr,
                     dayDiffNumStr);
                 const QString toTimeDayEarlierStr = i18nc(
                     "time difference with calendar date difference between time zones, e.g. 02:00 Stockholm time in Brasilia "
-                    "= 22:00 - 1 day, where %1 is the time and %2 is "
+                    "= 22:00 1 day before, where %1 is the time and %2 is "
                     "the days earlier",
-                    "%1 - %2",
+                    "%1, %2 before",
                     toTimeStr,
                     dayDiffNumStr);
                 const QString toTimeDayStr = dateDiff > 0 ? toTimeDayLaterStr : dateDiff < 0 ? toTimeDayEarlierStr : toTimeStr;
