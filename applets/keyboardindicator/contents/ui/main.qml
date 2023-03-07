@@ -10,13 +10,14 @@ import QtQuick.Layouts 1.15
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.1 as PlasmaCore
+import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 Item {
     id: root
 
-    readonly property QtObject source: PlasmaCore.DataSource {
+    readonly property QtObject source: P5Support.DataSource {
         id: keystateSource
         engine: "keystate"
         connectedSources: Plasmoid.configuration.key

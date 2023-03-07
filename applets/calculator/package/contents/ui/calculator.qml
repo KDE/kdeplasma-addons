@@ -14,6 +14,7 @@ import QtQuick 2.5
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5 as QQC2
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 import org.kde.plasma.plasmoid 2.0
@@ -227,7 +228,7 @@ QQC2.Control {
     }
 
     // use the clipboard datasource for being able to inspect the clipboard content before pasting it
-    PlasmaCore.DataSource {
+    P5Support.DataSource {
         id: clipboardSource
         property bool editing: false;
         engine: "org.kde.plasma.clipboard"
