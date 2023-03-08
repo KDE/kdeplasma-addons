@@ -29,6 +29,7 @@ Dependencies:
     'frameworks/sonnet': '@latest-kf6'
     'frameworks/kunitconversion': '@latest-kf6'
     'plasma/plasma-workspace': '@same'
+    'plasma/plasma5support': '@same'
 - 'on': ['Linux']
   'require':
     'sdk/selenium-webdriver-at-spi': '@latest-kf6'

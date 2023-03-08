@@ -7,13 +7,13 @@
 
 #include "locationlistmodel.h"
 
-#include <Plasma/DataContainer>
+#include <Plasma5Support/DataContainer>
 
 #include <KLocalizedString>
 
 #include <QDebug>
 
-WeatherValidator::WeatherValidator(Plasma::DataEngine *weatherDataengine, const QString &ionName, QObject *parent)
+WeatherValidator::WeatherValidator(Plasma5Support::DataEngine *weatherDataengine, const QString &ionName, QObject *parent)
     : QObject(parent)
     , m_weatherDataEngine(weatherDataengine)
     , m_ionName(ionName)
@@ -29,7 +29,7 @@ void WeatherValidator::validate(const QString &location)
     m_weatherDataEngine->connectSource(validationSource, this);
 }
 
-void WeatherValidator::dataUpdated(const QString &source, const Plasma::DataEngine::Data &data)
+void WeatherValidator::dataUpdated(const QString &source, const Plasma5Support::DataEngine::Data &data)
 {
     QMap<QString, QString> locationSources;
 
@@ -155,7 +155,7 @@ void LocationListModel::searchLocations(const QString &searchString, const QStri
         return;
     }
 
-    Plasma::DataEngine *dataengine = dataEngine(QStringLiteral("weather"));
+    Plasma5Support::DataEngine *dataengine = dataEngine(QStringLiteral("weather"));
 
     const QVariantList plugins = dataengine->containerForSource(QStringLiteral("ions"))->data().values();
     for (const QVariant &plugin : plugins) {

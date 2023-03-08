@@ -21,7 +21,7 @@
 #include <QStandardItemModel>
 
 #include <Plasma/PluginLoader>
-#include <Plasma/ServiceJob>
+#include <Plasma5Support/ServiceJob>
 
 #include <KActionCollection>
 #include <KLocalizedString>

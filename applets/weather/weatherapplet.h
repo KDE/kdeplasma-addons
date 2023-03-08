@@ -10,14 +10,14 @@
 #ifndef WEATHERAPPLET_H
 #define WEATHERAPPLET_H
 
-#include <Plasma/DataEngineConsumer>
+#include <Plasma5Support/DataEngineConsumer>
 
 #include <KUnitConversion/Converter>
 #include <KUnitConversion/Unit>
 
 #include <Plasma/Applet>
 
-class WeatherApplet : public Plasma::Applet, public Plasma::DataEngineConsumer
+class WeatherApplet : public Plasma::Applet, public Plasma5Support::DataEngineConsumer
 {
     Q_OBJECT
     // used for making this information available to the config pages

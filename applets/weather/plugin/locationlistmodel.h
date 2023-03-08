@@ -7,8 +7,8 @@
 #ifndef LOCATIONLISTMODEL_H
 #define LOCATIONLISTMODEL_H
 
-#include <Plasma/DataEngine>
-#include <Plasma/DataEngineConsumer>
+#include <Plasma5Support/DataEngine>
+#include <Plasma5Support/DataEngineConsumer>
 
 #include <QAbstractListModel>
 #include <QMap>
@@ -18,7 +18,7 @@ class WeatherValidator : public QObject
 {
     Q_OBJECT
 public:
-    WeatherValidator(Plasma::DataEngine *weatherDataengine, const QString &ionName, QObject *parent = nullptr);
+    WeatherValidator(Plasma5Support::DataEngine *weatherDataengine, const QString &ionName, QObject *parent = nullptr);
     ~WeatherValidator() override;
 
     /**
@@ -39,10 +39,10 @@ Q_SIGNALS:
     void finished(const QMap<QString, QString> &sources);
 
 public Q_SLOTS: // callback for the weather dataengine
-    void dataUpdated(const QString &source, const Plasma::DataEngine::Data &data);
+    void dataUpdated(const QString &source, const Plasma5Support::DataEngine::Data &data);
 
 private:
-    Plasma::DataEngine *m_weatherDataEngine;
+    Plasma5Support::DataEngine *m_weatherDataEngine;
     QString m_ionName;
 };
 
@@ -67,7 +67,7 @@ public:
 Q_DECLARE_METATYPE(LocationItem)
 Q_DECLARE_TYPEINFO(LocationItem, Q_MOVABLE_TYPE);
 
-class LocationListModel : public QAbstractListModel, public Plasma::DataEngineConsumer
+class LocationListModel : public QAbstractListModel, public Plasma5Support::DataEngineConsumer
 {
     Q_OBJECT
     Q_PROPERTY(bool validatingInput READ isValidatingInput NOTIFY validatingInputChanged)

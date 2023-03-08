@@ -10,8 +10,8 @@
 
 #include "weatherapplet.h"
 
-#include <Plasma/DataContainer>
-#include <Plasma/DataEngine>
+#include <Plasma5Support/DataContainer>
+#include <Plasma5Support/DataEngine>
 
 // KF
 #include <KConfigGroup>
@@ -23,7 +23,7 @@ using namespace KUnitConversion;
 WeatherApplet::WeatherApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
 {
-    Plasma::DataEngine *dataengine = dataEngine(QStringLiteral("weather"));
+    Plasma5Support::DataEngine *dataengine = dataEngine(QStringLiteral("weather"));
     const QVariantList plugins = dataengine->containerForSource(QLatin1String("ions"))->data().values();
     for (const QVariant &plugin : plugins) {
         const QStringList pluginInfo = plugin.toString().split(QLatin1Char('|'));
