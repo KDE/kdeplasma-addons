@@ -1,20 +1,22 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Wantoyo <wantoyek@gmail.com>, 2018, 2019.
+# Linerly <linerly@protonmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-05 03:09+0000\n"
-"PO-Revision-Date: 2019-06-16 07:52+0700\n"
-"Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
+"PO-Revision-Date: 2023-03-03 17:37+0700\n"
+"Last-Translator: Linerly <linerly@protonmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
 "Language: id\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -26,7 +28,7 @@ msgstr "Umum"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
-msgstr "Nukil warna"
+msgstr "Pilih warna"
 
 #: package/contents/ui/CompactRepresentation.qml:78
 #, kde-kuit-format
@@ -35,18 +37,20 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Seret kode warna ke sini untuk menyimpannya<nl/> Seret berkas gambar ke sini "
+"untuk mendapatkan warna rata-rata"
 
 #: package/contents/ui/configGeneral.qml:25
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
-msgstr "Format warna baku:"
+msgstr "Format warna bawaan:"
 
 #: package/contents/ui/configGeneral.qml:33
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
-msgstr "Warna disalin secara otomatis ke papan-klip"
+msgstr "Salin warna secara otomatis ke papan klip"
 
 #: package/contents/ui/configGeneral.qml:41
 #, kde-format
@@ -58,7 +62,7 @@ msgstr "Ketika menekan tombol pintasan keyboard:"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
-msgstr "Nukil sebuah warna"
+msgstr "Pilih sebuah warna"
 
 #: package/contents/ui/configGeneral.qml:48
 #, kde-format
@@ -70,7 +74,7 @@ msgstr "Tampilkan histori"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Jumlah pratinjau:"
 
 #: package/contents/ui/main.qml:110
 #, kde-format
@@ -85,44 +89,40 @@ msgid "Clear History"
 msgstr "Bersihkan Histori"
 
 #: package/contents/ui/main.qml:112
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "Bersihkan Histori"
+msgstr "Tampilkan Histori"
 
 #: package/contents/ui/main.qml:114
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
-msgstr "Salin ke Papan-klip"
+msgstr "Salin ke Papan Klip"
 
 #: package/contents/ui/main.qml:151
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Pick color"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr "Nukil warna"
+msgstr "Tidak ada warna"
 
 #: package/contents/ui/main.qml:155
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
-msgstr "Nukil Warna"
+msgstr "Pilih Warna"
 
 #: package/contents/ui/main.qml:330
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "Disalin!"
 
 #: package/contents/ui/main.qml:340
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr ""
+msgstr "Hapus"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

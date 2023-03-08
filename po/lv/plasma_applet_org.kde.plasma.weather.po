@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-26 00:47+0000\n"
+"POT-Creation-Date: 2023-03-08 02:24+0000\n"
 "PO-Revision-Date: 2010-01-30 20:04+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -335,31 +335,31 @@ msgstr "Laikapstākļu sīklietotnes konfigurēšana"
 msgid "Weather information retrieval for %1 timed out."
 msgstr ""
 
-#: package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:87
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Rising"
 msgstr ""
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:88
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Falling"
 msgstr ""
 
-#: package/contents/ui/main.qml:88
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Steady"
 msgstr ""
 
-#: package/contents/ui/main.qml:110
+#: package/contents/ui/main.qml:111
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "Mierīgs"
 
-#: package/contents/ui/main.qml:148
+#: package/contents/ui/main.qml:149
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
@@ -368,7 +368,7 @@ msgstr[0] "%1 diena"
 msgstr[1] "%1 dienas"
 msgstr[2] "%1 dienas"
 
-#: package/contents/ui/main.qml:170
+#: package/contents/ui/main.qml:171
 #, fuzzy, kde-format
 #| msgctxt "windchill, unit"
 #| msgid "Windchill: %1"
@@ -376,7 +376,7 @@ msgctxt "@label"
 msgid "Windchill:"
 msgstr "Vēja auksums: %1"
 
-#: package/contents/ui/main.qml:177
+#: package/contents/ui/main.qml:178
 #, fuzzy, kde-format
 #| msgctxt "humidex, unit"
 #| msgid "Humidex: %1"
@@ -384,7 +384,7 @@ msgctxt "@label"
 msgid "Humidex:"
 msgstr "Mitrumaind: %1"
 
-#: package/contents/ui/main.qml:184
+#: package/contents/ui/main.qml:185
 #, fuzzy, kde-format
 #| msgctxt "ground temperature, unit"
 #| msgid "Dewpoint: %1"
@@ -392,7 +392,7 @@ msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "Rasas punkts: %1"
 
-#: package/contents/ui/main.qml:191
+#: package/contents/ui/main.qml:192
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -400,7 +400,7 @@ msgctxt "@label"
 msgid "Pressure:"
 msgstr "Spiediens: %1 %2"
 
-#: package/contents/ui/main.qml:198
+#: package/contents/ui/main.qml:199
 #, fuzzy, kde-format
 #| msgctxt "pressure tendency, rising/falling/steady"
 #| msgid "Pressure Tendency: %1"
@@ -408,7 +408,7 @@ msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "Spiediena tendence: %1"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:206
 #, fuzzy, kde-format
 #| msgctxt "visibility from distance"
 #| msgid "Visibility: %1"
@@ -416,7 +416,7 @@ msgctxt "@label"
 msgid "Visibility:"
 msgstr "Redzamība: %1"
 
-#: package/contents/ui/main.qml:212
+#: package/contents/ui/main.qml:213
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"
@@ -424,7 +424,7 @@ msgctxt "@label"
 msgid "Humidity:"
 msgstr "Mitrums: %1%2"
 
-#: package/contents/ui/main.qml:219
+#: package/contents/ui/main.qml:220
 #, fuzzy, kde-format
 #| msgctxt "winds exceeding wind speed briefly"
 #| msgid "Wind Gust: %1 %2"
@@ -432,7 +432,7 @@ msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "Vējš brāzmās: %1 %2"
 
-#: package/contents/ui/main.qml:239
+#: package/contents/ui/main.qml:240
 #, fuzzy, kde-format
 #| msgctxt "Forecast period timeframe"
 #| msgid "1 Day"
@@ -441,13 +441,13 @@ msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
 msgstr "%1 diena"
 
-#: package/contents/ui/main.qml:240
+#: package/contents/ui/main.qml:241
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
 msgstr ""
 
-#: package/contents/ui/main.qml:278
+#: package/contents/ui/main.qml:279
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition, probability percentage"
 #| msgid "%1 (%2%)"
@@ -455,13 +455,13 @@ msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2 %)"
 msgstr "%1 (%2%)"
 
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:371
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr ""
 
-#: package/contents/ui/main.qml:381
+#: package/contents/ui/main.qml:382
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the weather condition, %2 is the temperature, both come from the "
@@ -471,7 +471,7 @@ msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:388
+#: package/contents/ui/main.qml:389
 #, fuzzy, kde-format
 #| msgctxt "wind direction, speed"
 #| msgid "%1 %2 %3"
@@ -479,7 +479,7 @@ msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 %3"
 
-#: package/contents/ui/main.qml:391
+#: package/contents/ui/main.qml:392
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the weather condition, %2 is the temperature, both come from the "
@@ -489,7 +489,7 @@ msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:400
+#: package/contents/ui/main.qml:401
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition, probability percentage"
 #| msgid "%1 (%2%)"
@@ -497,7 +497,7 @@ msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2%)"
 
-#: package/contents/ui/main.qml:407
+#: package/contents/ui/main.qml:408
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"

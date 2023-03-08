@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-19 00:47+0000\n"
+"POT-Creation-Date: 2023-03-08 02:24+0000\n"
 "PO-Revision-Date: 2023-01-19 23:56+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -43,17 +43,17 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "數字鍵 (Num Lock)"
 
-#: contents/ui/main.qml:30
+#: contents/ui/main.qml:31
 #, kde-format
 msgid "Caps Lock activated\n"
 msgstr "大寫鎖定鍵已啟用\n"
 
-#: contents/ui/main.qml:31
+#: contents/ui/main.qml:32
 #, kde-format
 msgid "Num Lock activated\n"
 msgstr "數字鍵已啟用\n"
 
-#: contents/ui/main.qml:111
+#: contents/ui/main.qml:112
 #, kde-format
 msgid "No lock keys activated"
 msgstr "未啟用任何鎖定鍵"

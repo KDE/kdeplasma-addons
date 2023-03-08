@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-11-26 00:47+0000\n"
+"POT-Creation-Date: 2023-03-08 02:24+0000\n"
 "PO-Revision-Date: 2023-01-29 13:52+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -319,31 +319,31 @@ msgstr "Задать местоположение…"
 msgid "Weather information retrieval for %1 timed out."
 msgstr "Истекло время ожидания информации о погоде для %1."
 
-#: package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:87
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Rising"
 msgstr "повышается"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:88
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Falling"
 msgstr "понижается"
 
-#: package/contents/ui/main.qml:88
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Steady"
 msgstr "не меняется"
 
-#: package/contents/ui/main.qml:110
+#: package/contents/ui/main.qml:111
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "Безветренно"
 
-#: package/contents/ui/main.qml:148
+#: package/contents/ui/main.qml:149
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
@@ -353,103 +353,103 @@ msgstr[1] "%1 дня"
 msgstr[2] "%1 дней"
 msgstr[3] "%1 день"
 
-#: package/contents/ui/main.qml:170
+#: package/contents/ui/main.qml:171
 #, kde-format
 msgctxt "@label"
 msgid "Windchill:"
 msgstr "Резкость:"
 
-#: package/contents/ui/main.qml:177
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@label"
 msgid "Humidex:"
 msgstr "Humidex (ощущаемая температура):"
 
-#: package/contents/ui/main.qml:184
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "Точка росы:"
 
-#: package/contents/ui/main.qml:191
+#: package/contents/ui/main.qml:192
 #, kde-format
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "Давление:"
 
-#: package/contents/ui/main.qml:198
+#: package/contents/ui/main.qml:199
 #, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "Изменение давления:"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:206
 #, kde-format
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "Видимость:"
 
-#: package/contents/ui/main.qml:212
+#: package/contents/ui/main.qml:213
 #, kde-format
 msgctxt "@label"
 msgid "Humidity:"
 msgstr "Влажность:"
 
-#: package/contents/ui/main.qml:219
+#: package/contents/ui/main.qml:220
 #, kde-format
 msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "Порывы ветра:"
 
-#: package/contents/ui/main.qml:239
+#: package/contents/ui/main.qml:240
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
 msgstr "День"
 
-#: package/contents/ui/main.qml:240
+#: package/contents/ui/main.qml:241
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
 msgstr "Ночь"
 
-#: package/contents/ui/main.qml:278
+#: package/contents/ui/main.qml:279
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2 %)"
 msgstr "%1 (%2 %)"
 
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:371
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr "Нажмите для настройки %1"
 
-#: package/contents/ui/main.qml:381
+#: package/contents/ui/main.qml:382
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1, %2"
 
-#: package/contents/ui/main.qml:388
+#: package/contents/ui/main.qml:389
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1, %2 (%3)"
 
-#: package/contents/ui/main.qml:391
+#: package/contents/ui/main.qml:392
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1, %2"
 
-#: package/contents/ui/main.qml:400
+#: package/contents/ui/main.qml:401
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:407
+#: package/contents/ui/main.qml:408
 #, kde-format
 msgid "Humidity: %1"
 msgstr "Влажность: %1"

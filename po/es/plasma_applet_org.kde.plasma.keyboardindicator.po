@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-19 00:47+0000\n"
+"POT-Creation-Date: 2023-03-08 02:24+0000\n"
 "PO-Revision-Date: 2022-05-07 22:00+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -44,17 +44,17 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Bloqueo numérico"
 
-#: contents/ui/main.qml:30
+#: contents/ui/main.qml:31
 #, kde-format
 msgid "Caps Lock activated\n"
 msgstr "Bloqueo de mayúsculas activado\n"
 
-#: contents/ui/main.qml:31
+#: contents/ui/main.qml:32
 #, kde-format
 msgid "Num Lock activated\n"
 msgstr "Bloqueo numérico activado\n"
 
-#: contents/ui/main.qml:111
+#: contents/ui/main.qml:112
 #, kde-format
 msgid "No lock keys activated"
 msgstr "Ninguna tecla de bloqueo activada"

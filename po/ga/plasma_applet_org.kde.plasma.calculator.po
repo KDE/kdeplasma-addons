@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_calculator.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-24 01:00+0000\n"
+"POT-Creation-Date: 2023-03-08 02:24+0000\n"
 "PO-Revision-Date: 2007-11-16 11:40-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
 "3 : 4\n"
 
-#: package/contents/ui/calculator.qml:290
+#: package/contents/ui/calculator.qml:291
 #, kde-format
 msgctxt ""
 "Abbreviation for result (undefined) of division by zero, max. six to nine "
@@ -25,49 +25,49 @@ msgctxt ""
 msgid "undef"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:330
+#: package/contents/ui/calculator.qml:331
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:353
+#: package/contents/ui/calculator.qml:354
 #, kde-format
 msgctxt "Text of the clear button"
 msgid "C"
 msgstr "G"
 
-#: package/contents/ui/calculator.qml:366
+#: package/contents/ui/calculator.qml:367
 #, kde-format
 msgctxt "Text of the division button"
 msgid "÷"
 msgstr "÷"
 
-#: package/contents/ui/calculator.qml:379
+#: package/contents/ui/calculator.qml:380
 #, kde-format
 msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr "×"
 
-#: package/contents/ui/calculator.qml:391
+#: package/contents/ui/calculator.qml:392
 #, kde-format
 msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr "GU"
 
-#: package/contents/ui/calculator.qml:443
+#: package/contents/ui/calculator.qml:444
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/calculator.qml:495
+#: package/contents/ui/calculator.qml:496
 #, kde-format
 msgctxt "Text of the plus button"
 msgid "+"
 msgstr "+"
 
-#: package/contents/ui/calculator.qml:546
+#: package/contents/ui/calculator.qml:547
 #, kde-format
 msgctxt "Text of the equals button"
 msgid "="
