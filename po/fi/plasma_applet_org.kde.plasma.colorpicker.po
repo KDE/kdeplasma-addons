@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Mikko Piippo <piippo@cc.helsinki.fi>, 2008.
 # Lasse Liehu <lliehu@kolumbus.fi>, 2011, 2015, 2017, 2022.
-# Tommi Nieminen <translator@legisign.org>, 2018.
+# Tommi Nieminen <translator@legisign.org>, 2018, 2023.
 #
 # KDE Finnish translation sprint participants:
 msgid ""
@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-05 03:09+0000\n"
-"PO-Revision-Date: 2022-10-28 22:41+0300\n"
-"Last-Translator: Lasse Liehu <lasse.liehu@iki.fi>\n"
+"PO-Revision-Date: 2023-03-05 17:39+0200\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:25:24+0000\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -41,6 +41,8 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Tallenna värikoodi vetämällä se tähän<nl/>Käytä kuvan keskimääräistä väriä "
+"vetämällä kuvatiedosto tähän"
 
 #: package/contents/ui/configGeneral.qml:25
 #, kde-format
@@ -76,7 +78,7 @@ msgstr "Näytä historia"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Esikatselumäärä:"
 
 #: package/contents/ui/main.qml:110
 #, kde-format
@@ -91,12 +93,10 @@ msgid "Clear History"
 msgstr "Tyhjennä historia"
 
 #: package/contents/ui/main.qml:112
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "Tyhjennä historia"
+msgstr "Näytä historia"
 
 #: package/contents/ui/main.qml:114
 #, kde-format

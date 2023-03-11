@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Tommi Nieminen <translator@legisign.org>, 2010, 2018, 2019, 2020, 2022.
+# Tommi Nieminen <translator@legisign.org>, 2010, 2018, 2019, 2020, 2022, 2023.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2014, 2015.
 #
 # KDE Finnish translation sprint participants:
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-08 02:24+0000\n"
-"PO-Revision-Date: 2022-08-22 21:53+0300\n"
+"PO-Revision-Date: 2023-03-05 17:40+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:25:26+0000\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -88,7 +88,7 @@ msgstr "Näytä otsikko:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "Näytä jäljellä oleva aika"
 
 #: package/contents/ui/configAppearance.qml:59
 #, kde-format
@@ -97,18 +97,16 @@ msgid "Show seconds"
 msgstr "Näytä sekunnit"
 
 #: package/contents/ui/configAppearance.qml:64
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "Näytä otsikko:"
+msgstr "Näytä ajastuskytkin"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "Näytä edistymispalkki"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format

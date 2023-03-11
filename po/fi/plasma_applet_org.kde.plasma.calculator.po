@@ -1,6 +1,6 @@
 # Copyright © 2012, 2011, 2012 This_file_is_part_of_KDE
 # This file is distributed under the same license as the kdeplasma-addons package.
-# Tommi Nieminen <translator@legisign.org>, 2010.
+# Tommi Nieminen <translator@legisign.org>, 2010, 2023.
 # Lasse Liehu <lliehu@kolumbus.fi>, 2011, 2012, 2022.
 #
 # KDE Finnish translation sprint participants:
@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-08 02:24+0000\n"
-"PO-Revision-Date: 2022-10-28 22:41+0300\n"
-"Last-Translator: Lasse Liehu <lasse.liehu@iki.fi>\n"
+"PO-Revision-Date: 2023-03-05 17:38+0200\n"
+"Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:25:23+0000\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/calculator.qml:291
 #, kde-format
@@ -26,7 +26,7 @@ msgctxt ""
 "Abbreviation for result (undefined) of division by zero, max. six to nine "
 "characters."
 msgid "undef"
-msgstr ""
+msgstr "ei määr."
 
 #: package/contents/ui/calculator.qml:331
 #, kde-format

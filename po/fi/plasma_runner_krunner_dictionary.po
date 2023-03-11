@@ -1,13 +1,13 @@
 # KDE Finnish translation sprint participants:
 # Author: Lliehu
 # Lasse Liehu <lasse.liehu@gmail.com>, 2012.
-# Tommi Nieminen <translator@legisign.org>, 2018.
+# Tommi Nieminen <translator@legisign.org>, 2018, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_krunner_dictionary\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-28 00:47+0000\n"
-"PO-Revision-Date: 2018-07-10 20:53+0200\n"
+"PO-Revision-Date: 2023-01-18 12:40+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-POT-Import-Date: 2012-12-01 22:25:27+0000\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 20.12.0\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: dictionaryrunner.cpp:36 dictionaryrunner_config.cpp:34
@@ -39,7 +39,7 @@ msgstr "Etsii :q::n määritelmän."
 #: dictionaryrunner.cpp:120
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
-msgstr ""
+msgstr "Sanan ”%1” määritelmä kopioitiin leikepöydälle"
 
 #: dictionaryrunner_config.cpp:22
 #, kde-format
