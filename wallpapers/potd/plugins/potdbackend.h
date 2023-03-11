@@ -62,9 +62,9 @@ class PotdBackend : public QObject, public QQmlParserStatus
     Q_PROPERTY(QUrl savedUrl MEMBER m_savedUrl CONSTANT)
 
     /**
-     * @return NetworkMangerQt is available on the system
+     * @return Any backend for \QNetworkInformation is available on the system
      */
-    Q_PROPERTY(bool networkManagerQtAvailable MEMBER m_networkManagerQtAvailable CONSTANT)
+    Q_PROPERTY(bool networkInformationAvailable MEMBER m_networkInfomationAvailable CONSTANT)
 
     /**
      * @return Whether to update wallpapers over metered connection
@@ -127,7 +127,7 @@ private:
     void registerClient();
 
     bool m_ready = false;
-    bool m_networkManagerQtAvailable = false;
+    bool m_networkInfomationAvailable = false;
 
     QString m_identifier;
     QVariantList m_args;

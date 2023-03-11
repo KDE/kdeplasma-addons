@@ -1,5 +1,3 @@
-configure_file(config-NetworkManagerQt.h.cmake ${CMAKE_CURRENT_BINARY_DIR}/config-NetworkManagerQt.h)
-
 add_library(plasma_wallpaper_potdplugin_debug STATIC)
 set_property(TARGET plasma_wallpaper_potdplugin_debug PROPERTY POSITION_INDEPENDENT_CODE ON)
 target_link_libraries(plasma_wallpaper_potdplugin_debug
@@ -24,15 +22,11 @@ target_link_libraries(plasma_wallpaper_potdplugin plasmapotdprovidercore
     KF6::I18n
     KF6::KIOCore
     Qt::DBus
+    Qt::Network
     Qt::Qml
     Qt::Widgets # QFileDialog
     plasma_wallpaper_potdplugin_debug
 )
-if (HAVE_NetworkManagerQt)
-    target_link_libraries(plasma_wallpaper_potdplugin KF6::NetworkManagerQt)
-elseif(${QT_MAJOR_VERSION} GREATER_EQUAL 6)
-    target_link_libraries(plasma_wallpaper_potdplugin Qt::Network)
-endif()
 
 install(TARGETS plasma_wallpaper_potdplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)
 install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)

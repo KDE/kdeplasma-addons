@@ -38,6 +38,7 @@ find_package(Qt${QT_MAJOR_VERSION} ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Gui
     DBus
+    Network
     Quick
     Qml
     Widgets
@@ -63,18 +64,6 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     XmlGui
     NewStuff
 )
-
-if(${QT_MAJOR_VERSION} LESS 6)
-    find_package(KF6NetworkManagerQt CONFIG QUIET)
-    set_package_properties(KF6NetworkManagerQt PROPERTIES
-        DESCRIPTION "Qt wrapper for NetworkManager API"
-        PURPOSE "Disable wallpaper update when using metered connections"
-        TYPE OPTIONAL
-    )
-    if(KF6NetworkManagerQt_FOUND)
-        set(HAVE_NetworkManagerQt TRUE)
-    endif()
-endif()
 
 find_package(KF6Purpose CONFIG QUIET)
 set_package_properties(KF6Purpose PROPERTIES

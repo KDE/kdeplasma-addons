@@ -6,18 +6,13 @@
 
 #pragma once
 
-#include "config-NetworkManagerQt.h"
-
 #include <unordered_map>
 
 #include <QDate>
+#include <QNetworkInformation>
 #include <QObject>
 #include <QTimer>
-#if QT_VERSION >= QT_VERSION_CHECK(6, 3, 0)
-#include <QNetworkInformation>
-#elif HAVE_NetworkManagerQt
-#include <NetworkManagerQt/Manager>
-#endif
+
 #include <KPluginMetaData>
 
 #include "potdprovider.h"
@@ -33,9 +28,7 @@ public:
     PotdClient(const KPluginMetaData &metadata, const QVariantList &args, QObject *parent = nullptr);
 
     void updateSource(bool refresh = false);
-#if SUPPORT_METERED_DETECTION
     void setUpdateOverMeteredConnection(int value);
-#endif
 
     KPluginMetaData m_metadata;
     bool m_loading = false;
@@ -73,9 +66,7 @@ private:
 
     QString m_identifier;
     QVariantList m_args;
-#if SUPPORT_METERED_DETECTION
     int m_doesUpdateOverMeteredConnection = 0;
-#endif
 
     friend class PotdEngine;
 };
@@ -107,14 +98,11 @@ private Q_SLOTS:
     void forceUpdateSource();
     void slotDone(PotdClient *client, bool success);
     void slotPrepareForSleep(bool sleep);
-#if QT_VERSION >= QT_VERSION_CHECK(6, 3, 0)
     void slotReachabilityChanged(QNetworkInformation::Reachability newReachability);
     void slotIsMeteredChanged(bool isMetered);
-#elif HAVE_NetworkManagerQt
-    void slotConnectivityChanged(NetworkManager::Connectivity connectivity);
-#endif
 
 private:
+    void loadNetworkInformation();
     void loadPluginMetaData();
 
     struct ClientPair {

@@ -5,10 +5,10 @@
 */
 
 #include "potdbackend.h"
-#include "config-NetworkManagerQt.h"
 
 #include <QDBusConnection>
 #include <QFileDialog>
+#include <QNetworkInformation>
 #include <QStandardPaths> // For "Pictures" folder
 
 #include <KIO/CopyJob> // For "Save Image"
@@ -22,9 +22,7 @@ static int s_instanceCount = 0;
 
 PotdBackend::PotdBackend(QObject *parent)
     : QObject(parent)
-#if SUPPORT_METERED_DETECTION
-    , m_networkManagerQtAvailable(true)
-#endif
+    , m_networkInfomationAvailable(!QNetworkInformation::availableBackends().empty())
 {
     if (!s_engine) {
         Q_ASSERT(s_instanceCount == 0);
@@ -166,11 +164,7 @@ void PotdBackend::setUpdateOverMeteredConnection(int value)
     }
 
     if (m_ready && m_client) {
-#if SUPPORT_METERED_DETECTION
         m_client->setUpdateOverMeteredConnection(m_doesUpdateOverMeteredConnection);
-#else
-        m_client->updateSource();
-#endif
     }
 }
 

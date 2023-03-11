@@ -72,7 +72,7 @@ Kirigami.FormLayout {
         id: updateOverMeteredConnectionCheckBox
 
         checked: root.cfg_UpdateOverMeteredConnection === 1
-        visible: backend.networkManagerQtAvailable
+        visible: backend.networkInfomationAvailable
         text: i18ndc("plasma_wallpaper_org.kde.potd", "@option:check", "Update when using metered network connection")
 
         onToggled: {
@@ -198,7 +198,7 @@ Kirigami.FormLayout {
                 'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Cyber-World"),
                 'value': '64108099'
             },
-            
+
         ]
         model: listModel
         textRole: "label"
