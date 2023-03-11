@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2010.
 # Lasse Liehu <lliehu@kolumbus.fi>, 2011, 2016.
-# Tommi Nieminen <translator@legisign.org>, 2016, 2018, 2019, 2020, 2021, 2022.
+# Tommi Nieminen <translator@legisign.org>, 2016, 2018, 2019, 2020, 2021, 2022, 2023.
 #
 # KDE Finnish translation sprint participants:
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-08-22 21:54+0300\n"
+"PO-Revision-Date: 2023-03-05 17:41+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:25:26+0000\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -154,34 +154,28 @@ msgid "Compact Mode"
 msgstr "Tiivis tila"
 
 #: package/contents/ui/config/ConfigAppearance.qml:44
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "Näytä lämpötila"
+msgstr "Näytä lämpötila:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:47
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Näytä sovelman kuvakkeen vieressä:"
+msgstr "Sovelmakuvakkeen yllä"
 
 #: package/contents/ui/config/ConfigAppearance.qml:55
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "Näytä sovelman kuvakkeen vieressä:"
+msgstr "Sovelmakuvakkeen vieressä"
 
 #: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Älä näytä"
 
 #: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
@@ -260,21 +254,19 @@ msgstr "Sijainti:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Mitään ei ole valittu"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Tarjoaja:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Anna sijainti"
+msgstr "Anna uusi sijainti"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
@@ -292,13 +284,13 @@ msgstr "Kohteelle ”%1” ei löytynyt sääasemia"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Vaihda sijaintia etsimällä sääasemaa"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Aseta sijainti etsimällä sääasemaa"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -403,19 +395,16 @@ msgid "Wind Gust:"
 msgstr "Puuska:"
 
 #: package/contents/ui/main.qml:239
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 päivän"
+msgstr "Päivä"
 
 #: package/contents/ui/main.qml:240
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Yö"
 
 #: package/contents/ui/main.qml:278
 #, kde-format
