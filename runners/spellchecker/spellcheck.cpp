@@ -260,7 +260,7 @@ void SpellCheckRunner::match(RunnerContext &context)
         QueryMatch match(this);
         match.setType(QueryMatch::ExactMatch);
         match.setIconName(QStringLiteral("data-error"));
-        match.setText(i18n("No dictionary found, please install hspell"));
+        match.setText(xi18nc("@info", "No dictionary found. Please install <resource>hspell</resource> package using your package manager"));
         context.addMatch(match);
     }
 }
