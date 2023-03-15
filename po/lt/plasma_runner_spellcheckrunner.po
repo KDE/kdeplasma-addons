@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2021-12-18 00:55+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -49,9 +49,12 @@ msgid "Suggested term"
 msgstr "Siūlomi žodžiai"
 
 #: spellcheck.cpp:263
-#, kde-format
-msgid "No dictionary found, please install hspell"
-msgstr "Nerasta jokio žodyno, įsidiekite hspell"
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"No dictionary found. Please install <resource>hunspell</resource> package "
+"using your package manager"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
@@ -76,6 +79,9 @@ msgstr "&Žodis-paleidiklis:"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr "Konfigūruoti žodynus…"
+
+#~ msgid "No dictionary found, please install hspell"
+#~ msgstr "Nerasta jokio žodyno, įsidiekite hspell"
 
 #~ msgctxt "@action"
 #~ msgid "Copy to Clipboard"

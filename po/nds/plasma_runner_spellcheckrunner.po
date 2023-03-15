@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2010-12-30 09:05+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -49,8 +49,11 @@ msgid "Suggested term"
 msgstr "Vörslaan Wöör: %1"
 
 #: spellcheck.cpp:263
-#, kde-format
-msgid "No dictionary found, please install hspell"
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"No dictionary found. Please install <resource>hunspell</resource> package "
+"using your package manager"
 msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)

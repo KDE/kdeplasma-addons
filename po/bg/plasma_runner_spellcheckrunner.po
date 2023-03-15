@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2022-02-12 16:30+0100\n"
 "Last-Translator: mkkDr2010 <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -47,9 +47,12 @@ msgid "Suggested term"
 msgstr "Предложение"
 
 #: spellcheck.cpp:263
-#, kde-format
-msgid "No dictionary found, please install hspell"
-msgstr "Не е намерен речник, моля инсталирайте hspell"
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"No dictionary found. Please install <resource>hunspell</resource> package "
+"using your package manager"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
@@ -74,3 +77,6 @@ msgstr "&Задействаща дума:"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr "Конфигуриране на речници…"
+
+#~ msgid "No dictionary found, please install hspell"
+#~ msgstr "Не е намерен речник, моля инсталирайте hspell"

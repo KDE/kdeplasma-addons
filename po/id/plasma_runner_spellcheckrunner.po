@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2022-06-07 15:00+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -47,9 +47,12 @@ msgid "Suggested term"
 msgstr "Istilah yang disarankan"
 
 #: spellcheck.cpp:263
-#, kde-format
-msgid "No dictionary found, please install hspell"
-msgstr "Tidak ada kamus yang ditemukan, harap instal hspell"
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"No dictionary found. Please install <resource>hunspell</resource> package "
+"using your package manager"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
@@ -74,6 +77,9 @@ msgstr "&Kata pemicu:"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr "Konfigurasikan Kamus…"
+
+#~ msgid "No dictionary found, please install hspell"
+#~ msgstr "Tidak ada kamus yang ditemukan, harap instal hspell"
 
 #~ msgctxt "@action"
 #~ msgid "Copy to Clipboard"

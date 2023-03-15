@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2022-02-20 22:17+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -46,9 +46,12 @@ msgid "Suggested term"
 msgstr "추천 단어"
 
 #: spellcheck.cpp:263
-#, kde-format
-msgid "No dictionary found, please install hspell"
-msgstr "사전을 찾을 수 없습니다. hspell을 설치하십시오"
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"No dictionary found. Please install <resource>hunspell</resource> package "
+"using your package manager"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
@@ -73,6 +76,9 @@ msgstr "시작 단어(&T):"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr "사전 설정…"
+
+#~ msgid "No dictionary found, please install hspell"
+#~ msgstr "사전을 찾을 수 없습니다. hspell을 설치하십시오"
 
 #~ msgctxt "@action"
 #~ msgid "Copy to Clipboard"

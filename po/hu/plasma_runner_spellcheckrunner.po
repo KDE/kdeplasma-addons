@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2021-01-02 14:41+0100\n"
 "Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -48,9 +48,12 @@ msgid "Suggested term"
 msgstr "Javaslatok"
 
 #: spellcheck.cpp:263
-#, kde-format
-msgid "No dictionary found, please install hspell"
-msgstr "Nem található szótár, telepítse a hspell-t"
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"No dictionary found. Please install <resource>hunspell</resource> package "
+"using your package manager"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
@@ -76,6 +79,9 @@ msgstr "&Kulcsszó:"
 #| msgid "Configure Dictionaries..."
 msgid "Configure Dictionaries…"
 msgstr "Szótárak beállítása…"
+
+#~ msgid "No dictionary found, please install hspell"
+#~ msgstr "Nem található szótár, telepítse a hspell-t"
 
 #~ msgctxt "@action"
 #~ msgid "Copy to Clipboard"

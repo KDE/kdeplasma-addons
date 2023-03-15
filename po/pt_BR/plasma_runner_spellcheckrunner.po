@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2023-03-15 02:12+0000\n"
 "PO-Revision-Date: 2021-12-21 09:26-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -49,9 +49,12 @@ msgid "Suggested term"
 msgstr "Termo sugerido"
 
 #: spellcheck.cpp:263
-#, kde-format
-msgid "No dictionary found, please install hspell"
-msgstr "Nenhum dicionário encontrado, instale o hspell"
+#, kde-kuit-format
+msgctxt "@info"
+msgid ""
+"No dictionary found. Please install <resource>hunspell</resource> package "
+"using your package manager"
+msgstr ""
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
@@ -76,6 +79,9 @@ msgstr "Palavra de a&tivação:"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr "Configurar dicionários..."
+
+#~ msgid "No dictionary found, please install hspell"
+#~ msgstr "Nenhum dicionário encontrado, instale o hspell"
 
 #~ msgctxt "@action"
 #~ msgid "Copy to Clipboard"
