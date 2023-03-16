@@ -1,8 +1,8 @@
 # Translation of plasma_runner_spellcheckrunner.po to Catalan (Valencian)
-# Copyright (C) 2008-2021 This_file_is_part_of_KDE
+# Copyright (C) 2008-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2010, 2016, 2018, 2020.
+# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2010, 2016, 2018, 2020, 2023.
 # Joan Maspons <joanmaspons@gmail.com>, 2009.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2015, 2020, 2021.
 msgid ""
@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2021-12-13 18:29+0100\n"
-"Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
+"PO-Revision-Date: 2023-03-15 13:43+0100\n"
+"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 20.12.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -56,6 +56,8 @@ msgid ""
 "No dictionary found. Please install <resource>hunspell</resource> package "
 "using your package manager"
 msgstr ""
+"No s'ha trobat cap diccionari. Instal·leu el paquet <resource>hunspell</"
+"resource> fent servir el gestor de paquets"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
@@ -80,6 +82,3 @@ msgstr "Paraula d'ac&tivació:"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr "Configura els diccionaris…"
-
-#~ msgid "No dictionary found, please install hspell"
-#~ msgstr "No s'ha trobat cap diccionari, instal·leu el «hspell»"
