@@ -20,12 +20,12 @@ CharacterRunnerConfigForm::CharacterRunnerConfigForm(QWidget *parent)
     setupUi(this);
 }
 
-CharacterRunnerConfig::CharacterRunnerConfig(QWidget *parent, const QVariantList &args)
-    : KCModule(parent, args)
+CharacterRunnerConfig::CharacterRunnerConfig(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    : KCModule(parent, metaData, args)
 {
-    m_ui = new CharacterRunnerConfigForm(this);
+    m_ui = new CharacterRunnerConfigForm(widget());
 
-    QGridLayout *layout = new QGridLayout(this);
+    QGridLayout *layout = new QGridLayout(widget());
     layout->addWidget(m_ui, 0, 0);
 
     connect(m_ui->edit_trigger, &QLineEdit::textChanged, this, &CharacterRunnerConfig::markAsChanged);
@@ -58,7 +58,7 @@ void CharacterRunnerConfig::load()
     } else {
         const auto msg = new KMessageWidget(i18nc("Message that config is corrupted", //
                                                   "Config entries for alias list and code list have different sizes, ignoring all."),
-                                            this);
+                                            widget());
         m_ui->verticalLayout->insertWidget(0, msg);
     }
 }

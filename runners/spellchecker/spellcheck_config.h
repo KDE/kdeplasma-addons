@@ -22,7 +22,7 @@ class SpellCheckConfig : public KCModule
 {
     Q_OBJECT
 public:
-    explicit SpellCheckConfig(QWidget *parent = nullptr, const QVariantList &args = QVariantList());
+    explicit SpellCheckConfig(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
     ~SpellCheckConfig() override;
 
 public Q_SLOTS:

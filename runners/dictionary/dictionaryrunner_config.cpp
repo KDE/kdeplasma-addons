@@ -14,13 +14,13 @@
 
 K_PLUGIN_FACTORY(DictionaryRunnerConfigFactory, registerPlugin<DictionaryRunnerConfig>();)
 
-DictionaryRunnerConfig::DictionaryRunnerConfig(QWidget *parent, const QVariantList &args)
-    : KCModule(parent, args)
+DictionaryRunnerConfig::DictionaryRunnerConfig(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    : KCModule(parent, metaData, args)
 {
     QFormLayout *layout = new QFormLayout;
     m_triggerWord = new QLineEdit;
     layout->addRow(i18nc("@label:textbox", "Trigger word:"), m_triggerWord);
-    setLayout(layout);
+    widget()->setLayout(layout);
     connect(m_triggerWord, &QLineEdit::textChanged, this, &DictionaryRunnerConfig::markAsChanged);
     load();
 }
@@ -32,7 +32,7 @@ void DictionaryRunnerConfig::load()
     KConfigGroup grp = cfg->group("Runners");
     grp = KConfigGroup(&grp, "Dictionary");
     m_triggerWord->setText(grp.readEntry(CONFIG_TRIGGERWORD, i18nc("Trigger word before word to define", "define")));
-    Q_EMIT changed(false);
+    setNeedsSave(false);
 }
 
 void DictionaryRunnerConfig::save()
@@ -43,14 +43,14 @@ void DictionaryRunnerConfig::save()
     grp = KConfigGroup(&grp, "Dictionary");
     grp.writeEntry(CONFIG_TRIGGERWORD, m_triggerWord->text());
     grp.sync();
-    Q_EMIT changed(false);
+    setNeedsSave(false);
 }
 
 void DictionaryRunnerConfig::defaults()
 {
     KCModule::defaults();
     m_triggerWord->setText(i18nc("Trigger word before word to define", "define"));
-    Q_EMIT changed(true);
+    setNeedsSave(true);
 }
 
 #include "dictionaryrunner_config.moc"

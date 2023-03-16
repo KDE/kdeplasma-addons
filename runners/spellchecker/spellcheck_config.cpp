@@ -22,12 +22,12 @@ SpellCheckConfigForm::SpellCheckConfigForm(QWidget *parent)
     setupUi(this);
 }
 
-SpellCheckConfig::SpellCheckConfig(QWidget *parent, const QVariantList &args)
-    : KCModule(parent, args)
+SpellCheckConfig::SpellCheckConfig(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    : KCModule(parent, metaData, args)
 {
-    m_ui = new SpellCheckConfigForm(this);
+    m_ui = new SpellCheckConfigForm(widget());
 
-    QGridLayout *layout = new QGridLayout(this);
+    QGridLayout *layout = new QGridLayout(widget());
 
     layout->addWidget(m_ui, 0, 0);
 
@@ -71,7 +71,7 @@ void SpellCheckConfig::load()
     m_ui->m_requireTriggerWord->setCheckState((requireTrigger) ? Qt::Checked : Qt::Unchecked);
     m_ui->m_triggerWord->setText(trigger);
 
-    Q_EMIT changed(false);
+    setNeedsSave(false);
 }
 
 void SpellCheckConfig::save()
@@ -87,14 +87,14 @@ void SpellCheckConfig::save()
     grp.writeEntry("requireTriggerWord", requireTrigger);
     grp.sync();
 
-    Q_EMIT changed(false);
+    setNeedsSave(false);
 }
 
 void SpellCheckConfig::defaults()
 {
     m_ui->m_requireTriggerWord->setCheckState(Qt::Checked);
     m_ui->m_triggerWord->setText(i18n("spell"));
-    Q_EMIT changed(true);
+    setNeedsSave(true);
 }
 
 K_PLUGIN_FACTORY(SpellCheckConfigFactory, registerPlugin<SpellCheckConfig>();)
