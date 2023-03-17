@@ -4,13 +4,13 @@
 # Andrej Vernekar <andrej.vernekar@moj.net>, 2008.
 # Jure Repinc <jlp@holodeck1.com>, 2009, 2011.
 # Andrej Mernik <andrejm@ubuntu.si>, 2013, 2016.
-# Matjaž Jeran <matjaz.jeran@amis.net>, 2020, 2021.
+# Matjaž Jeran <matjaz.jeran@amis.net>, 2020, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: krunner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-15 02:12+0000\n"
-"PO-Revision-Date: 2022-05-08 09:08+0200\n"
+"PO-Revision-Date: 2023-03-16 10:33+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: spellcheck.cpp:98 spellcheck_config.cpp:65 spellcheck_config.cpp:96
 #, kde-format
@@ -57,6 +57,8 @@ msgid ""
 "No dictionary found. Please install <resource>hunspell</resource> package "
 "using your package manager"
 msgstr ""
+"Ni najdenega slovarja. Namestite paket <resource>hunspell</resource> z vašim "
+"upravljalnikom paketov"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
