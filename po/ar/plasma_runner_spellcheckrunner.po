@@ -21,7 +21,7 @@ msgstr ""
 #: spellcheck.cpp:98 spellcheck_config.cpp:65 spellcheck_config.cpp:96
 #, kde-format
 msgid "spell"
-msgstr "تهجئ"
+msgstr "تهجأ"
 
 #: spellcheck.cpp:103
 #, kde-format
