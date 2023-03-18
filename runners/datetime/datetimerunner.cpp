@@ -294,7 +294,7 @@ QHash<QString, QTimeZone> DateTimeRunner::matchingTimeZones(const QStringView &z
         const QDateTime atDatetime(atDate, atTime, timeZone);
 
         const QString zoneName = QString::fromUtf8(zoneId);
-        if (zoneName.startsWith(QStringLiteral("UTC+")) || zoneName.startsWith(QStringLiteral("UTC-"))) {
+        if (zoneName.startsWith(QLatin1String("UTC+")) || zoneName.startsWith(QLatin1String("UTC-"))) {
             // Qt time zones are either of the form
             // (where {zone name} {long name} {abbreviation} {short name} {offset name} {country})
             // - "Europe/Stockholm" "Central European Standard Time" "CET" "GMT+1" "UTC+01:00" "Sweden"
