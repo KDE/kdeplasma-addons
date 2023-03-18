@@ -80,6 +80,3 @@ msgstr "&Utløysarord:"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr "Set opp ordlister …"
-
-#~ msgid "No dictionary found, please install hspell"
-#~ msgstr "Fann ikkje ordliste. Installer hspell."
