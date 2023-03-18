@@ -78,8 +78,13 @@ void DateTimeRunnerTest::testFindTimezones()
         return a.relevance() > b.relevance();
     });
 
-    QVERIFY(matches.count() >= minMatchCount);
-    QVERIFY(matches.first().text().contains(expectedTimezone));
+    QVERIFY2(matches.size() >= minMatchCount,
+             QLatin1String("searchTerm: %1, matches.size(): %2, minMatchCount: %3")
+                 .arg(searchTerm, QString::number(matches.size()), QString::number(minMatchCount))
+                 .toLatin1()
+                 .constData());
+    QVERIFY2(matches.first().text().contains(expectedTimezone),
+             QLatin1String("first match: %1, expectedTimezone: %2").arg(matches.first().text(), expectedTimezone).toLatin1().constData());
 }
 
 void DateTimeRunnerTest::testFindTimezones_data()
