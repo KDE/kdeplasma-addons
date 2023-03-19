@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_wallpaper_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-02-16 01:00+0000\n"
+"POT-Creation-Date: 2023-03-19 02:06+0000\n"
 "PO-Revision-Date: 2023-01-26 00:50+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -359,25 +359,25 @@ msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
 msgstr "Abrir el sitio web de la imagen del día en el navegador predeterminado"
 
-#: plugins/potdbackend.cpp:219
+#: plugins/potdbackend.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Today's Picture"
 msgstr "Guardar la imagen del día"
 
-#: plugins/potdbackend.cpp:221
+#: plugins/potdbackend.cpp:215
 #, kde-format
 msgctxt "@label:listbox Template for file dialog"
 msgid "JPEG image (*.jpeg *.jpg *.jpe)"
 msgstr "Imagen JPEG (*.jpeg *.jpg *.jpe)"
 
-#: plugins/potdbackend.cpp:238
+#: plugins/potdbackend.cpp:232
 #, kde-format
 msgctxt "@info:status after a save action"
 msgid "The image was not saved."
 msgstr "La imagen no se ha guardado."
 
-#: plugins/potdbackend.cpp:245
+#: plugins/potdbackend.cpp:239
 #, kde-format
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
