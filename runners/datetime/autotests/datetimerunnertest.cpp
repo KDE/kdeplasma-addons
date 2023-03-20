@@ -78,6 +78,7 @@ void DateTimeRunnerTest::testFindTimezones()
         return a.relevance() > b.relevance();
     });
 
+    QEXPECT_FAIL("Should find time zones by abbreviation, and show all time zones with that abbreviation", "FIXME Qt6 BUG 462836", Continue);
     QVERIFY2(matches.size() >= minMatchCount,
              QLatin1String("searchTerm: %1, matches.size(): %2, minMatchCount: %3")
                  .arg(searchTerm, QString::number(matches.size()), QString::number(minMatchCount))
@@ -97,7 +98,7 @@ void DateTimeRunnerTest::testFindTimezones_data()
     QTest::newRow("Should find time zones by long name") << "Central Africa Time" << 1 << "Central Africa Time";
     QTest::newRow("Should find time zones by short name") << "GMT+2" << 1 << "GMT+2";
     QTest::newRow("Should find time zones by offset name") << "UTC+02:00" << 1 << "UTC+02:00";
-    QTest::newRow("Should find time zones by abbreviation, and show all time zones with that abbreviation") << "PST" << 1 << "(PST)";
+    QTest::newRow("Should find time zones by abbreviation, and show all time zones with that abbreviation") << "PST" << 2 << "(PST)";
     QTest::newRow("Should find time zones by country name, and show all time zones in that country") << "Brazil" << 2 << "Brazil - ";
     QTest::newRow("Should find time zones with the 'in' keyword") << "in Harare" << 1 << "Harare";
 }
