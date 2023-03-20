@@ -42,6 +42,3 @@ msgstr "en;a;com a;"
 #, kde-format
 msgid "Copy unit and number"
 msgstr "Copia la unitat i el nombre"
-
-#~ msgid "Copy number"
-#~ msgstr "Copia el nombre"

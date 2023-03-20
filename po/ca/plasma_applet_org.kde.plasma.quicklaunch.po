@@ -125,11 +125,3 @@ msgstr "Mostra les icones ocultes"
 msgctxt "@action"
 msgid "Add Launcher…"
 msgstr "Afegeix un llançador…"
-
-#~ msgctxt "@title:group"
-#~ msgid "Arrangement"
-#~ msgstr "Organització"
-
-#~ msgctxt "@info:placeholder"
-#~ msgid "Enter title"
-#~ msgstr "Introduïu el títol"
