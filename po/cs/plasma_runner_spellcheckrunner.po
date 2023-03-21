@@ -77,6 +77,3 @@ msgstr "Spouš&těcí slovo:"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr "Nastavit slovníky…"
-
-#~ msgid "No dictionary found, please install hspell"
-#~ msgstr "Slovník nebyl nalezen. Prosím nainstalujte hspell."
