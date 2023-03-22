@@ -2,6 +2,7 @@
 # Copyright (C) 2022 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Frederik Schwarzer <schwarzer@kde.org>, 2022, 2023.
+# Jannick Kuhr <opensource@kuhr.org>, 2023.
 #
 # Automatically generated, 2022.
 msgid ""
@@ -9,15 +10,15 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-20 00:59+0000\n"
-"PO-Revision-Date: 2023-02-09 01:28+0100\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2023-03-16 22:08+0100\n"
+"Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: calendarsystem.h:52
 #, kde-format
@@ -35,7 +36,7 @@ msgstr "Milankovic"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Solar Hijri Calendar (Persian)"
-msgstr ""
+msgstr "Hijri-Sonnenkalender (persisch)"
 
 #: calendarsystem.h:64
 #, kde-format
@@ -43,7 +44,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Astronomical)"
-msgstr ""
+msgstr "Islamischer Kalender (astronomisch)"
 
 #: calendarsystem.h:68
 #, kde-format
@@ -51,7 +52,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "The Islamic Civil Calendar (Tabular)"
-msgstr ""
+msgstr "Islamischer bürgerlicher Kalender (tabellarisch)"
 
 #: calendarsystem.h:72
 #, kde-format
@@ -59,25 +60,25 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Umm al-Qura)"
-msgstr ""
+msgstr "Islamischer Kalender (Umm al-Qura)"
 
 #: calendarsystem.h:76
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Chinese Lunar Calendar"
-msgstr ""
+msgstr "Chinesischer Mondkalender"
 
 #: calendarsystem.h:80
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Indian National Calendar"
-msgstr ""
+msgstr "Indischer Nationalkalender"
 
 #: calendarsystem.h:84
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
-msgstr ""
+msgstr "Hebräischer Kalender"
 
 #: config/qml/AlternateCalendarConfig.qml:38
 #, kde-format
@@ -92,6 +93,8 @@ msgid ""
 "This calendar is based on pure astronomical calculation. It doesn't consider "
 "any crescent visibility criteria."
 msgstr ""
+"Dieser Kalender basiert auf reiner astronomischer Berechnung. Die "
+"Sichtbarkeit der Mondsichel wird nicht berücksichtigt."
 
 #: config/qml/AlternateCalendarConfig.qml:60
 #, kde-format
