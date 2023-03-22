@@ -3,6 +3,7 @@
 # Panagiotis Papadopoulos <pano_90@gmx.net>, 2009, 2010.
 # Johannes Obermayr <johannesobermayr@gmx.de>, 2010.
 # Burkhard Lück <lueck@hube-lueck.de>, 2012.
+# Jannick Kuhr <opensource@kuhr.org>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/calculator.qml:320
 #, kde-format

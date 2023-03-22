@@ -3,21 +3,22 @@
 # Frederik Schwarzer <schwarzer@kde.org>, 2016, 2018, 2023.
 # Burkhard Lück <lueck@hube-lueck.de>, 2016, 2018, 2019, 2020.
 # Alois Spitzbart <spitz234@hotmail.com>, 2022.
+# Jannick Kuhr <opensource@kuhr.org>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2023-02-09 01:26+0100\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2023-03-16 21:40+0100\n"
+"Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -282,13 +283,13 @@ msgstr "Für „%1“ wurde keine Wetterstation gefunden"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Nach einer Wetterstation suchen, um den Standort zu ändern"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Nach einer Wetterstation suchen, um den Standort festzulegen"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
