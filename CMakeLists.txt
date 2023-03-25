@@ -100,7 +100,6 @@ add_subdirectory(runners)
 add_subdirectory(wallpapers)
 
 add_subdirectory(windowswitchers)
-add_subdirectory(desktopswitchers)
 
 add_subdirectory(plasmacalendarplugins)
 
