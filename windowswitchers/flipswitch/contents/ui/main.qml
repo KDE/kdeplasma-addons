@@ -218,6 +218,7 @@ KWin.TabBoxSwitcher {
                 font.bold: true
                 font.pointSize: Math.round(PlasmaCore.Theme.defaultFont.pointSize * 1.6)
                 text: thumbnailView.currentItem ? thumbnailView.currentItem.caption : ""
+                textFormat: Text.PlainText
                 maximumLineCount: 1
                 elide: Text.ElideMiddle
                 Layout.maximumWidth: tabBox.screenGeometry.width * 0.8

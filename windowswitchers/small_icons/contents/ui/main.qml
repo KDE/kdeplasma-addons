@@ -40,6 +40,7 @@ KWin.TabBoxSwitcher {
 
             PlasmaComponents3.Label {
                 text: icons.currentItem ? icons.currentItem.caption : ""
+                textFormat: Text.PlainText
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 elide: Text.ElideMiddle

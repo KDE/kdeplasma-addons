@@ -68,6 +68,7 @@ KWin.TabBoxSwitcher {
                         id: captionItem
                         horizontalAlignment: Text.AlignHCenter
                         text: listView.itemCaption(caption, minimized)
+                        textFormat: Text.PlainText
                         font.weight: Font.Bold
                         font.italic: minimized
                         elide: Text.ElideMiddle
@@ -124,6 +125,7 @@ KWin.TabBoxSwitcher {
                         'import QtQuick 2.0;'
                         + 'Text {\n'
                         + '     text: "' + listView.itemCaption(tabBox.model.longestCaption(), true) + '"\n'
+                        + '     textFormat: Text.PlainText\n'
                         + '     font.bold: true\n'
                         + '     visible: false\n'
                         + '}',
@@ -141,6 +143,7 @@ KWin.TabBoxSwitcher {
                         'import QtQuick 2.0;'
                         + 'Text {\n'
                         + '     text: "Some Text"\n'
+                        + '     textFormat: Text.PlainText\n'
                         + '     font.bold: true\n'
                         + '     visible: false\n'
                         + '}',

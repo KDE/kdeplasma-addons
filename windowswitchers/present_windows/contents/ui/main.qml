@@ -95,6 +95,7 @@ KWin.TabBoxSwitcher {
                         }
                         PlasmaComponents3.Label {
                             text: caption
+                            textFormat: Text.PlainText
                             font.italic: minimized
                             font.weight: index === thumbnailListView.currentIndex ? Font.Bold : Font.Normal
                             elide: Text.ElideMiddle

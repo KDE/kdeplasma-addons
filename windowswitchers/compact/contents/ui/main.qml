@@ -102,6 +102,7 @@ KWin.TabBoxSwitcher {
                         horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignBottom
                         text: itemCaption(caption, minimized)
+                        textFormat: Text.PlainText
                         font.weight: index === compactListView.currentIndex ? Font.Bold : Font.Normal
                         elide: Text.ElideMiddle
                         Layout.fillWidth: true

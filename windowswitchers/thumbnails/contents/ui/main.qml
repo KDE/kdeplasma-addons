@@ -125,6 +125,7 @@ KWin.TabBoxSwitcher {
                     id: textItem
 
                     text: thumbnailListView.currentItem ? thumbnailListView.currentItem.caption : ""
+                    textFormat: Text.PlainText
                     elide: Text.ElideMiddle
                     font.weight: Font.Bold
 

@@ -55,6 +55,7 @@ KWin.TabBoxSwitcher {
                         id: captionItem
                         horizontalAlignment: Text.AlignHCenter
                         text: caption
+                        textFormat: Text.PlainText
                         elide: Text.ElideMiddle
                         anchors {
                             left: parent.left
@@ -82,6 +83,7 @@ KWin.TabBoxSwitcher {
                         'import QtQuick 2.0;'
                         + 'Text {\n'
                         + '     text: "' + tabBox.model.longestCaption() + '"\n'
+                        + '     textFormat: Text.PlainText\n'
                         + '     visible: false\n'
                         + '}',
                         textListView, "calculateMaxRowWidth");

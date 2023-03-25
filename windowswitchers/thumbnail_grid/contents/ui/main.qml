@@ -152,6 +152,7 @@ KWin.TabBoxSwitcher {
                                 id: label
                                 Layout.fillWidth: true
                                 text: model.caption
+                                textFormat: Text.PlainText
                                 elide: Text.ElideRight
                             }
 
