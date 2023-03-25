@@ -81,7 +81,6 @@
         "Description[zh_TW]": "比對 Konsole 設定檔",
         "EnabledByDefault": true,
         "Icon": "utilities-terminal",
-        "Id": "konsoleprofiles",
         "License": "LGPL",
         "Name": "Konsole Profiles",
         "Name[ar]": "تشكيلات كونسول",

@@ -81,7 +81,6 @@
         "Description[zh_TW]": "將數值轉換成不同單位",
         "EnabledByDefault": true,
         "Icon": "accessories-calculator",
-        "Id": "unitconverter",
         "License": "GPL",
         "Name": "Unit Converter",
         "Name[ar]": "محول الوحدات",

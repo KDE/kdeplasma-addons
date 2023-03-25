@@ -80,7 +80,6 @@
         "Description[zh_TW]": "用十六進位代碼建立特殊字元",
         "EnabledByDefault": true,
         "Icon": "accessories-character-map",
-        "Id": "CharacterRunner",
         "License": "GPL",
         "Name": "Special Characters",
         "Name[ar]": "محارف خاصة",

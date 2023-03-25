@@ -81,7 +81,6 @@
         "Description[zh_TW]": "查詢詞彙定義",
         "EnabledByDefault": true,
         "Icon": "accessories-dictionary",
-        "Id": "Dictionary",
         "License": "LGPL",
         "Name": "Dictionary",
         "Name[ar]": "قاموس",
