@@ -7,7 +7,7 @@
 
 #include <KConfigGroup>
 #include <KLocalizedString>
-#include <KNotifications/KNotification>
+#include <KNotification>
 #include <QClipboard>
 #include <QEventLoop>
 #include <QGuiApplication>
