@@ -91,6 +91,7 @@ PlasmaComponents.ListItem {
                     placeholderText: i18n("Session name")
                     clearButtonShown: true
                     Layout.fillWidth: true
+                    Keys.onReturnPressed: {menuItem.itemSelected(sessionname.text.replace(/^\s+|\s+$/g, '')); showInput=false;}
                 }
 
                 PlasmaComponents3.ToolButton {
