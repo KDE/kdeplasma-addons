@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-27 00:48+0000\n"
-"PO-Revision-Date: 2023-01-07 01:00+0100\n"
+"PO-Revision-Date: 2023-03-26 18:35+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -23,61 +23,61 @@ msgstr ""
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
-msgstr ""
+msgstr "&Sekva Langeto kun Nova Strio"
 
 #: comic.cpp:93
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
-msgstr ""
+msgstr "Salti al &Unua Strio"
 
 #: comic.cpp:97
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
-msgstr ""
+msgstr "Salti al A&ktuala Strio"
 
 #: comic.cpp:101
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
-msgstr ""
+msgstr "Salti al Strio..."
 
 #: comic.cpp:105
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
-msgstr ""
+msgstr "Viziti la Retejon"
 
 #: comic.cpp:109
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
-msgstr ""
+msgstr "Rigardi en %1"
 
 #: comic.cpp:117
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
-msgstr ""
+msgstr "Viziti la Butik-&Retejon"
 
 #: comic.cpp:122
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr ""
+msgstr "Kon&servi bildstrion kiel…"
 
 #: comic.cpp:127
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
-msgstr ""
+msgstr "Efektiv&a Grandeco"
 
 #: comic.cpp:135
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
-msgstr ""
+msgstr "Konservi Aktualan &Pozicion"
 
 #: comicdata.cpp:86
 #, kde-format
@@ -101,147 +101,147 @@ msgstr "Aspekto"
 #, kde-format
 msgctxt "@title"
 msgid "Advanced"
-msgstr ""
+msgstr "Altnivela"
 
 #: package/contents/ui/ComicBottomInfo.qml:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
-msgstr ""
+msgstr "Salti al bildstrio…"
 
 #: package/contents/ui/ComicBottomInfo.qml:100
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
-msgstr ""
+msgstr "Viziti la bildstrian retejon"
 
 #: package/contents/ui/configAdvanced.qml:36
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
-msgstr ""
+msgstr "Bildstria kaŝmemoro:"
 
 #: package/contents/ui/configAdvanced.qml:45
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
 msgid_plural "strips per comic"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "strio po bildserio"
+msgstr[1] "strioj po bildserio"
 
 #: package/contents/ui/configAdvanced.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
-msgstr ""
+msgstr "Montra eraro dum elŝutado de komikso malsukcesas"
 
 #: package/contents/ui/configAppearance.qml:43
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
-msgstr ""
+msgstr "Montri:"
 
 #: package/contents/ui/configAppearance.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
-msgstr ""
+msgstr "Komika titolo"
 
 #: package/contents/ui/configAppearance.qml:50
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
-msgstr ""
+msgstr "Komika identigilo"
 
 #: package/contents/ui/configAppearance.qml:56
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
-msgstr ""
+msgstr "Komika aŭtoro"
 
 #: package/contents/ui/configAppearance.qml:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
-msgstr ""
+msgstr "Komika URL"
 
 #: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgid "Show navigation buttons:"
-msgstr ""
+msgstr "Montri navigajn butonojn:"
 
 #: package/contents/ui/configAppearance.qml:73
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
-msgstr ""
+msgstr "Ĉiam"
 
 #: package/contents/ui/configAppearance.qml:80
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
-msgstr ""
+msgstr "Nur ŝvebate"
 
 #: package/contents/ui/configGeneral.qml:52
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
-msgstr ""
+msgstr "Bildstrioj:"
 
 #: package/contents/ui/configGeneral.qml:72
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
-msgstr ""
+msgstr "Akiri Novajn Bildstriojn…"
 
 #: package/contents/ui/configGeneral.qml:83
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
-msgstr ""
+msgstr "Mez-klaku sur bildstrio por montri laŭ origina grandeco"
 
 #: package/contents/ui/configGeneral.qml:92
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
-msgstr ""
+msgstr "Kontroli pri novaj kromaĵoj ĉiujn:"
 
 #: package/contents/ui/configGeneral.qml:101
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "tagon"
+msgstr[1] "tagojn"
 
 #: package/contents/ui/configGeneral.qml:106
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
-msgstr ""
+msgstr "Kontroli pri novaj bildstrioj ĉiujn:"
 
 #: package/contents/ui/configGeneral.qml:115
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "minuton"
+msgstr[1] "minutojn"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Go to Strip"
-msgstr ""
+msgstr "Iri al Strio"
 
 #: stripselector.cpp:39
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "&Strip number:"
-msgstr ""
+msgstr "&Strionumero:"
 
 #: stripselector.cpp:102
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
-msgstr ""
+msgstr "Strioidentigilo:"

@@ -1,4 +1,6 @@
 # Translation of plasma_packagestructure_comic into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
 #
 msgid ""

@@ -1,13 +1,16 @@
-# Translation of plasma_applet_notes into esperanto.
+# Translation of plasma_applet_org.kde.plasma.notes.po into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-05 03:09+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-03-26 18:35+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -20,143 +23,138 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "Aspekto"
 
 #: package/contents/ui/configAppearance.qml:30
 #, kde-format
 msgid "%1pt"
-msgstr ""
+msgstr "%1pt"
 
 #: package/contents/ui/configAppearance.qml:36
-#, fuzzy, kde-format
-#| msgid "Custom color"
+#, kde-format
 msgid "Text font size:"
-msgstr "Propra koloro"
+msgstr "Grando de la teksta tiparo:"
 
 #: package/contents/ui/configAppearance.qml:41
 #, kde-format
 msgid "Background color"
-msgstr ""
+msgstr "Fona koloro"
 
 #: package/contents/ui/configAppearance.qml:77
 #, kde-format
 msgid "A white sticky note"
-msgstr ""
+msgstr "Blanka gluiĝema noto"
 
 #: package/contents/ui/configAppearance.qml:78
 #, kde-format
 msgid "A black sticky note"
-msgstr ""
+msgstr "Nigra gluiĝema noto"
 
 #: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgid "A red sticky note"
-msgstr ""
+msgstr "Ruĝa gluiĝema noto"
 
 #: package/contents/ui/configAppearance.qml:80
 #, kde-format
 msgid "An orange sticky note"
-msgstr ""
+msgstr "Oranĝa glueca noto"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format
 msgid "A yellow sticky note"
-msgstr ""
+msgstr "Flava gluiĝema noto"
 
 #: package/contents/ui/configAppearance.qml:82
 #, kde-format
 msgid "A green sticky note"
-msgstr ""
+msgstr "Verda gluiĝema noto"
 
 #: package/contents/ui/configAppearance.qml:83
 #, kde-format
 msgid "A blue sticky note"
-msgstr ""
+msgstr "Blua gluiĝema noto"
 
 #: package/contents/ui/configAppearance.qml:84
 #, kde-format
 msgid "A pink sticky note"
-msgstr ""
+msgstr "Rozkolora gluiĝema noto"
 
 #: package/contents/ui/configAppearance.qml:85
 #, kde-format
 msgid "A translucent sticky note"
-msgstr ""
+msgstr "Travidebla glueca noto"
 
 #: package/contents/ui/configAppearance.qml:86
 #, kde-format
 msgid "A translucent sticky note with light text"
-msgstr ""
+msgstr "Travidebla gluiĝema noto kun malpeza teksto"
 
 #: package/contents/ui/main.qml:249
 #, kde-format
 msgid "Undo"
-msgstr ""
+msgstr "Malfari"
 
 #: package/contents/ui/main.qml:257
 #, kde-format
 msgid "Redo"
-msgstr ""
+msgstr "Refari"
 
 #: package/contents/ui/main.qml:267
 #, kde-format
 msgid "Cut"
-msgstr ""
+msgstr "Tondi"
 
 #: package/contents/ui/main.qml:275
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "Kopii"
 
 #: package/contents/ui/main.qml:283
 #, kde-format
 msgid "Paste"
-msgstr ""
+msgstr "Alglui"
 
 #: package/contents/ui/main.qml:289
 #, kde-format
 msgid "Paste with Full Formatting"
-msgstr ""
+msgstr "Alglui kun Plena Formatado"
 
 #: package/contents/ui/main.qml:296
-#, fuzzy, kde-format
-#| msgid "Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Formatado"
+msgstr "Forigi Formatadon"
 
 #: package/contents/ui/main.qml:311
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Forigi"
 
 #: package/contents/ui/main.qml:318
 #, kde-format
 msgid "Clear"
-msgstr ""
+msgstr "Forviŝi"
 
 #: package/contents/ui/main.qml:328
 #, kde-format
 msgid "Select All"
-msgstr ""
+msgstr "Elekti ĉiujn"
 
 #: package/contents/ui/main.qml:456
-#, fuzzy, kde-format
-#| msgid "Bold"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Grasa"
 
 #: package/contents/ui/main.qml:468
-#, fuzzy, kde-format
-#| msgid "Italic"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Kursiva"
 
 #: package/contents/ui/main.qml:480
-#, fuzzy, kde-format
-#| msgid "Underline"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Substrekita"
@@ -165,127 +163,74 @@ msgstr "Substrekita"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
-msgstr ""
+msgstr "Trastrekita"
 
 #: package/contents/ui/main.qml:566
 #, kde-format
 msgid "Discard this note?"
-msgstr ""
+msgstr "Ĉu forĵeti ĉi tiun noton?"
 
 #: package/contents/ui/main.qml:567
 #, kde-format
 msgid "Are you sure you want to discard this note?"
-msgstr ""
+msgstr "Ĉu vi certas, ke vi volas forĵeti ĉi tiun noton?"
 
 #: package/contents/ui/main.qml:579
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
-msgstr ""
+msgstr "Blanka"
 
 #: package/contents/ui/main.qml:580
-#, fuzzy, kde-format
-#| msgid "Black"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
-msgstr "Negra"
+msgstr "Nigra"
 
 #: package/contents/ui/main.qml:581
-#, fuzzy, kde-format
-#| msgid "Red"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
-msgstr "Ruĝo"
+msgstr "Ruĝa"
 
 #: package/contents/ui/main.qml:582
-#, fuzzy, kde-format
-#| msgid "Orange"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Oranĝkolora"
 
 #: package/contents/ui/main.qml:583
-#, fuzzy, kde-format
-#| msgid "Yellow"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Flava"
 
 #: package/contents/ui/main.qml:584
-#, fuzzy, kde-format
-#| msgid "Green"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
-msgstr "Verdo"
+msgstr "Verda"
 
 #: package/contents/ui/main.qml:585
-#, fuzzy, kde-format
-#| msgid "Blue"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
-msgstr "Bluo"
+msgstr "Blua"
 
 #: package/contents/ui/main.qml:586
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
-msgstr "Punktoj:"
+msgstr "Rozkolora"
 
 #: package/contents/ui/main.qml:587
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
-msgstr "Travidebla "
+msgstr "Travidebla"
 
 #: package/contents/ui/main.qml:588
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"
-msgstr "Travidebla "
-
-#~ msgid "Font"
-#~ msgstr "Tiparo"
-
-#~ msgid "Style:"
-#~ msgstr "Stilo:"
-
-#~ msgid "&Bold"
-#~ msgstr "&Grasa"
-
-#~ msgid "&Italic"
-#~ msgstr "&Kursiva"
-
-#~ msgid "Size:"
-#~ msgstr "Grandeco:"
-
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgid "Color:"
-#~ msgstr "Koloro:"
-
-#, fuzzy
-#~| msgid "Custom color"
-#~ msgid "Use theme color"
-#~ msgstr "Propra koloro"
-
-#, fuzzy
-#~| msgid "Custom color"
-#~ msgid "Use custom color:"
-#~ msgstr "Propra koloro"
-
-#, fuzzy
-#~| msgid "Custom color"
-#~ msgid "Use no color"
-#~ msgstr "Propra koloro"
-
-#~ msgid "Theme"
-#~ msgstr "Temo"
-
-#, fuzzy
-#~| msgid "Custom color"
-#~ msgid "Notes color:"
-#~ msgstr "Propra koloro"
-
-#~ msgid "General"
-#~ msgstr "Ĝeneralo"
+msgstr "Travidebla Lumo"

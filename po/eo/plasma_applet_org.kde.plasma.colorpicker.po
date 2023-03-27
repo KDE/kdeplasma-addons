@@ -1,13 +1,16 @@
-# Translation of plasma_applet_kolourpicker into esperanto.
-#
+# Translation of plasma_applet_org.kde.plasma.colorpicker.pot into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-05 03:09+0000\n"
-"PO-Revision-Date: 2009-12-19 23:35+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-03-26 18:35+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-doc@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -20,13 +23,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "Generalo"
 
 #: package/contents/ui/CompactRepresentation.qml:71
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
-msgstr ""
+msgstr "Elekti koloron"
 
 #: package/contents/ui/CompactRepresentation.qml:78
 #, kde-kuit-format
@@ -35,91 +38,89 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Trenu kolorkodon ĉi tien por konservi ĝin<nl/>Trenu bilddosieron ĉi tien por "
+"akiri ĝian mezan koloron"
 
 #: package/contents/ui/configGeneral.qml:25
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
-msgstr ""
+msgstr "Defaŭlta kolorformato:"
 
 #: package/contents/ui/configGeneral.qml:33
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
-msgstr ""
+msgstr "Aŭtomate kopii koloron al tondujo"
 
 #: package/contents/ui/configGeneral.qml:41
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
-msgstr ""
+msgstr "Kiam vi premas la klavaran ŝparvojon:"
 
 #: package/contents/ui/configGeneral.qml:42
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
-msgstr ""
+msgstr "Elekti koloron"
 
 #: package/contents/ui/configGeneral.qml:48
-#, fuzzy, kde-format
-#| msgid "History"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
-msgstr "Historio"
+msgstr "Montri historion"
 
 #: package/contents/ui/configGeneral.qml:58
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Antaŭrigarda nombro:"
 
 #: package/contents/ui/main.qml:110
-#, fuzzy, kde-format
-#| msgid "Copy Color Value"
+#, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
-msgstr "Kopii valoron de la koloro"
+msgstr "Malfermi Koloran Dialogon"
 
 #: package/contents/ui/main.qml:111
-#, fuzzy, kde-format
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Forviŝi la historion"
 
 #: package/contents/ui/main.qml:112
-#, fuzzy, kde-format
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "Forviŝi la historion"
+msgstr "Rigardo Historion"
 
 #: package/contents/ui/main.qml:114
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "Kopii al tondujo"
 
 #: package/contents/ui/main.qml:151
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr ""
+msgstr "Neniuj koloroj"
 
 #: package/contents/ui/main.qml:155
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
-msgstr ""
+msgstr "Elekti Koloron"
 
 #: package/contents/ui/main.qml:330
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "Kopiita!"
 
 #: package/contents/ui/main.qml:340
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr ""
+msgstr "Forigi"
