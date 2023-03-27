@@ -107,7 +107,10 @@ PlasmaComponents.ListItem {
 
                 PlasmaComponents3.ToolButton {
                     icon.name: "dialog-cancel"
-                    onClicked: showInput=false
+                    onClicked: {
+                        showInput=false;
+                        sessionname.text='';
+                    }
 
                     PlasmaComponents3.ToolTip {
                         text: i18n("Cancel session creation")
