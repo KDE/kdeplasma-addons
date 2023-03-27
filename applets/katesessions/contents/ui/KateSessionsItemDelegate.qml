@@ -34,7 +34,8 @@ PlasmaComponents.ListItem {
             if (profileIdentifier !== "")
                 menuItem.itemSelected(profileIdentifier);
             else {
-                showInput=true; 
+                showInput=true;
+                sessionname.forceActiveFocus();
             }
         }
         onEntered: menuListView.currentIndex = index
