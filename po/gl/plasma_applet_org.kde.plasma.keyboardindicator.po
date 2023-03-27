@@ -1,20 +1,21 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
+# Adrian Chaves <adrian@chaves.io>, 2018, 2023.
 #
-# Adrian Chaves <adrian@chaves.io>, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-19 00:47+0000\n"
-"PO-Revision-Date: 2018-04-22 09:32+0100\n"
-"Last-Translator: Adrian Chaves <adrian@chaves.io>\n"
-"Language-Team: Galician <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-03-26 19:05+0200\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -27,35 +28,34 @@ msgstr "Teclas"
 msgctxt ""
 "@label show keyboard indicator when Caps Lock or Num Lock is activated"
 msgid "Show when activated:"
-msgstr ""
+msgstr "Mostrar cando se active:"
 
 #: contents/ui/configAppearance.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
-msgstr "Bloq maiús"
+msgstr "Bloq Maiús"
 
 #: contents/ui/configAppearance.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"
-msgstr "Bloqu num"
+msgstr "Bloq Num"
 
 #: contents/ui/main.qml:30
-#, fuzzy, kde-format
-#| msgid "Caps Lock"
+#, kde-format
 msgid "Caps Lock activated\n"
-msgstr "Bloq maiús"
+msgstr "Activouse o bloqueo das maiúsculas\n"
 
 #: contents/ui/main.qml:31
 #, kde-format
 msgid "Num Lock activated\n"
-msgstr ""
+msgstr "Activouse o bloqueo numérico\n"
 
 #: contents/ui/main.qml:111
 #, kde-format
 msgid "No lock keys activated"
-msgstr ""
+msgstr "Non hai bloqueos de teclas activados"
 
 #~ msgid "Num Lock"
 #~ msgstr "Bloqu num"
