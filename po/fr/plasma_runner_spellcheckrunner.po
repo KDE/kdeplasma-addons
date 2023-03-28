@@ -65,7 +65,7 @@ msgid ""
 "No dictionary found. Please install <resource>hunspell</resource> package "
 "using your package manager"
 msgstr ""
-"Aucun dictionnaire trouvé. Veuillez installer le paquet  <resource>hunspell</"
+"Aucun dictionnaire trouvé. Veuillez installer le paquet <resource>hunspell</"
 "resource> en utilisant votre gestionnaire de paquets."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
