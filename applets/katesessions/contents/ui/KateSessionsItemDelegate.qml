@@ -35,7 +35,7 @@ PlasmaComponents.ListItem {
                 menuItem.itemSelected(profileIdentifier);
             else {
                 showInput=true;
-                sessionname.forceActiveFocus();
+                sessionname.forceActiveFocus(Qt.MouseFocusReason);
             }
         }
         onEntered: menuListView.currentIndex = index
