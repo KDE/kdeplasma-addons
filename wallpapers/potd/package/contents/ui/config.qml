@@ -321,8 +321,7 @@ Kirigami.FormLayout {
         id: saveMessage
 
         Kirigami.FormData.isSection: true
-        anchors.left: previewSeparator.left
-        anchors.right: previewSeparator.right
+        Layout.fillWidth: true
 
         showCloseButton: true
 
