@@ -36,7 +36,7 @@ if (QT_MAJOR_VERSION EQUAL "6")
     target_link_libraries(plasma_engine_comic Qt::Core5Compat) # for QTextCodec
 endif()
 
-kcoreaddons_add_plugin(plasma_packagestructure_comic SOURCES comic_package.cpp INSTALL_NAMESPACE "kpackage/packagestructure")
+kcoreaddons_add_plugin(plasma_packagestructure_comic SOURCES comic_package.cpp INSTALL_NAMESPACE "kf6/packagestructure")
 target_link_libraries(plasma_packagestructure_comic
     KF6::Package
     KF6::I18n
