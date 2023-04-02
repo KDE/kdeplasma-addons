@@ -6,7 +6,6 @@
  */
 
 #include "comicproviderkross.h"
-#include "comic_package.h"
 
 ComicProviderKross::ComicProviderKross(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier)
     : ComicProvider(parent, data, type, identifier)
