@@ -16,15 +16,11 @@ ComicPackage::ComicPackage(QObject *parent, const QVariantList &args)
 
 void ComicPackage::initPackage(KPackage::Package *package)
 {
-    QStringList mimetypes;
     package->addDirectoryDefinition("images", QLatin1String("images"));
-    mimetypes << QLatin1String("image/svg+xml") << QLatin1String("image/png") << QLatin1String("image/jpeg");
-    package->setMimeTypes("images", mimetypes);
+    package->setMimeTypes("images", QStringList{QLatin1String("image/svg+xml"), QLatin1String("image/png"), QLatin1String("image/jpeg")});
 
-    mimetypes.clear();
     package->addDirectoryDefinition("scripts", QLatin1String("code"));
-    mimetypes << QLatin1String("text/*");
-    package->setMimeTypes("scripts", mimetypes);
+    package->setMimeTypes("scripts", QStringList{QLatin1String("text/*")});
 
     package->addFileDefinition("mainscript", QLatin1String("code/main"));
     // package->setRequired("mainscript", true); Package::isValid() fails with this because of Kross and different file extensions
