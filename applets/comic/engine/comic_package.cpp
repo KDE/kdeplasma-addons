@@ -16,13 +16,13 @@ ComicPackage::ComicPackage(QObject *parent, const QVariantList &args)
 
 void ComicPackage::initPackage(KPackage::Package *package)
 {
-    package->addDirectoryDefinition("images", QLatin1String("images"));
-    package->setMimeTypes("images", QStringList{QLatin1String("image/svg+xml"), QLatin1String("image/png"), QLatin1String("image/jpeg")});
+    package->addDirectoryDefinition("images", QStringLiteral("images"));
+    package->setMimeTypes("images", QStringList{QStringLiteral("image/svg+xml"), QStringLiteral("image/png"), QStringLiteral("image/jpeg")});
 
-    package->addDirectoryDefinition("scripts", QLatin1String("code"));
-    package->setMimeTypes("scripts", QStringList{QLatin1String("text/*")});
+    package->addDirectoryDefinition("scripts", QStringLiteral("code"));
+    package->setMimeTypes("scripts", QStringList{QStringLiteral("text/*")});
 
-    package->addFileDefinition("mainscript", QLatin1String("code/main"));
+    package->addFileDefinition("mainscript", QStringLiteral("code/main"));
     // package->setRequired("mainscript", true); Package::isValid() fails with this because of Kross and different file extensions
     package->setDefaultPackageRoot(QStringLiteral("plasma/comics/"));
 }
