@@ -1,7 +1,7 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2016.
-# Tommi Nieminen <translator@legisign.org>, 2018, 2020, 2022.
+# Tommi Nieminen <translator@legisign.org>, 2018, 2020, 2022, 2023.
 #
 # KDE Finnish translation sprint participants:
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:25:27+0000\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: spellcheck.cpp:98 spellcheck_config.cpp:65 spellcheck_config.cpp:96
 #, kde-format
