@@ -29,7 +29,6 @@ target_link_libraries(plasma_engine_comic
     Qt::Qml
     KF6::WidgetsAddons
     KF6::Package
-    KF6::I18n
     KF6::KIOCore
 )
 if (QT_MAJOR_VERSION EQUAL "6")
@@ -37,7 +36,4 @@ if (QT_MAJOR_VERSION EQUAL "6")
 endif()
 
 kcoreaddons_add_plugin(plasma_comic SOURCES comic_package.cpp INSTALL_NAMESPACE "kf6/packagestructure")
-target_link_libraries(plasma_comic
-    KF6::Package
-    KF6::I18n
-)
+target_link_libraries(plasma_comic KF6::Package)
