@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kate\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"POT-Creation-Date: 2023-04-06 02:04+0000\n"
 "PO-Revision-Date: 2021-07-02 16:29+0200\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 20.12.2\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: contents/ui/KateSessionsItemDelegate.qml:92
 #, kde-format
 msgid "Session name"
 msgstr "Tên phiên"
 
-#: contents/ui/KateSessionsItemDelegate.qml:102
+#: contents/ui/KateSessionsItemDelegate.qml:104
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "Tạo phiên mới và chạy Kate"
 
-#: contents/ui/KateSessionsItemDelegate.qml:111
+#: contents/ui/KateSessionsItemDelegate.qml:116
 #, kde-format
 msgid "Cancel session creation"
 msgstr "Huỷ tạo phiên"

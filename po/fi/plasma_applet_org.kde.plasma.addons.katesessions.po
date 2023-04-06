@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_katesession\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-17 00:48+0000\n"
+"POT-Creation-Date: 2023-04-06 02:04+0000\n"
 "PO-Revision-Date: 2021-08-02 17:19+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -20,17 +20,17 @@ msgstr ""
 "X-POT-Import-Date: 2012-12-01 22:22:05+0000\n"
 "X-Generator: Lokalize 20.04.2\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: contents/ui/KateSessionsItemDelegate.qml:92
 #, kde-format
 msgid "Session name"
 msgstr "Istunnon nimi"
 
-#: contents/ui/KateSessionsItemDelegate.qml:102
+#: contents/ui/KateSessionsItemDelegate.qml:104
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "Luo uusi istunto ja käynnistä Kate"
 
-#: contents/ui/KateSessionsItemDelegate.qml:111
+#: contents/ui/KateSessionsItemDelegate.qml:116
 #, kde-format
 msgid "Cancel session creation"
 msgstr "Peru istunnon luonti"
