@@ -78,6 +78,3 @@ msgstr "&Задействаща дума:"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr "Конфигуриране на речници…"
-
-#~ msgid "No dictionary found, please install hspell"
-#~ msgstr "Не е намерен речник, моля инсталирайте hspell"
