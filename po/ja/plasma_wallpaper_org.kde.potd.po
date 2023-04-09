@@ -1,11 +1,12 @@
-# Ryuichi Yamada <ryuichi_ya220@outlook.jp>, 2022.
+# Ryuichi Yamada <ryuichi_ya220@outlook.jp>, 2022, 2023.
+# Fumiaki Okushi <fumiaki.okushi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-30 02:44+0000\n"
-"PO-Revision-Date: 2022-08-18 11:19+0900\n"
-"Last-Translator: Ryuichi Yamada <ryuichi_ya220@outlook.jp>\n"
+"PO-Revision-Date: 2023-04-07 23:44-0700\n"
+"Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -14,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 22.04.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/config.qml:48
 #, kde-format
@@ -29,6 +30,8 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"この壁紙プロバイダは、不快に思われる可能性のある画像を除外しません。壁紙が公"
+"共の場で表示される可能性がある場合は、注意して使用してください。"
 
 #: package/contents/ui/config.qml:76
 #, kde-format
@@ -208,37 +211,37 @@ msgstr "Tabliss"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
-msgstr "ポジショニング:"
+msgstr "配置:"
 
 #: package/contents/ui/config.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
-msgstr "サイズ調整してトリミング"
+msgstr "拡大/縮小と切り取り"
 
 #: package/contents/ui/config.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
-msgstr "サイズ調整"
+msgstr "拡大/縮小"
 
 #: package/contents/ui/config.qml:235
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
-msgstr "比率を維持してサイズ調整"
+msgstr "拡大/縮小 (アスペクト比を保つ)"
 
 #: package/contents/ui/config.qml:239
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
-msgstr "中央"
+msgstr "中央に表示"
 
 #: package/contents/ui/config.qml:243
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
-msgstr "タイル"
+msgstr "タイル状に表示"
 
 #: package/contents/ui/config.qml:264
 #, kde-format
@@ -256,7 +259,7 @@ msgstr "背景色を選択"
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
-msgstr "今日の写真:"
+msgstr "今日の画像:"
 
 #: package/contents/ui/config.qml:292
 #, kde-format
@@ -280,13 +283,13 @@ msgstr "保存されているフォルダを開く"
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
-msgstr "壁紙のイメージが保存されているフォルダを開く"
+msgstr "壁紙の画像が保存されているフォルダを開く"
 
 #: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
-msgstr "今日の写真"
+msgstr "今日の画像"
 
 #: package/contents/ui/WallpaperDelegate.qml:143
 #, kde-format
@@ -305,14 +308,13 @@ msgstr "利用できません"
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
 msgstr ""
-"%1 作者: %2。さらなるアクションを表示するにはイメージを右クリックしてくださ"
-"い。"
+"%1 作者: %2。さらなるアクションを表示するには画像を右クリックしてください。"
 
 #: package/contents/ui/WallpaperDelegate.qml:146
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
-msgstr "この壁紙はインターネットから取得されています。"
+msgstr "壁紙がインターネットから取得されています。"
 
 #: package/contents/ui/WallpaperDelegate.qml:147
 #, kde-format
@@ -330,7 +332,7 @@ msgstr "名前を付けて保存..."
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
-msgstr "今日の写真をローカルのディスクに保存する"
+msgstr "今日の画像をローカルのディスクに保存する"
 
 #: package/contents/ui/WallpaperPreview.qml:59
 #, kde-format
@@ -343,7 +345,7 @@ msgstr "リンクをブラウザで開く..."
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
-msgstr "今日の写真のウェブサイトをデフォルトのブラウザで開く"
+msgstr "今日の画像のウェブサイトをデフォルトのブラウザで開く"
 
 #: plugins/potdbackend.cpp:219
 #, kde-format
@@ -355,16 +357,16 @@ msgstr "今日の画像を保存"
 #, kde-format
 msgctxt "@label:listbox Template for file dialog"
 msgid "JPEG image (*.jpeg *.jpg *.jpe)"
-msgstr "JPEG イメージ (*.jpeg *.jpg *.jpe)"
+msgstr "JPEG 画像 (*.jpeg *.jpg *.jpe)"
 
 #: plugins/potdbackend.cpp:238
 #, kde-format
 msgctxt "@info:status after a save action"
 msgid "The image was not saved."
-msgstr "イメージは保存されませんでした。"
+msgstr "画像は保存されませんでした。"
 
 #: plugins/potdbackend.cpp:245
 #, kde-format
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
-msgstr "イメージは <a href=\"%1\">%2</a> として保存されました。"
+msgstr "画像は <a href=\"%1\">%2</a> として保存されました。"

@@ -1,11 +1,13 @@
 # R.Suga <21r.suga@gmail.com>, 2022.
+# Ryuichi Yamada <ryuichi_ya220@outlook.jp>, 2023.
+# Fumiaki Okushi <fumiaki.okushi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 08:46+0000\n"
-"PO-Revision-Date: 2022-03-06 11:55+0900\n"
-"Last-Translator: R.Suga <21r.suga@gmail.com>\n"
+"PO-Revision-Date: 2023-04-07 23:42-0700\n"
+"Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -14,7 +16,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/main.qml:32
 #, kde-format
@@ -32,10 +34,9 @@ msgid "Night Color is unavailable"
 msgstr "Night Color は利用できません"
 
 #: package/contents/ui/main.qml:41
-#, fuzzy, kde-format
-#| msgid "Night Color is disabled"
+#, kde-format
 msgid "Night Color is disabled. Click to configure"
-msgstr "Night Color は無効化されています"
+msgstr "Night Color は無効化されています。クリックして設定"
 
 #: package/contents/ui/main.qml:44
 #, kde-format
@@ -48,7 +49,6 @@ msgid "Night Color is active (%1K)"
 msgstr "Night Color は有効です (%1K)"
 
 #: package/contents/ui/main.qml:97
-#, fuzzy, kde-format
-#| msgid "Configure Night Color…"
+#, kde-format
 msgid "&Configure Night Color…"
-msgstr "Night Color を設定…"
+msgstr "Night Color を設定(&C)…"
