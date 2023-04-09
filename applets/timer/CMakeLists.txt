@@ -8,3 +8,4 @@ ecm_finalize_qml_module(timerplugin DESTINATION ${KDE_INSTALL_QMLDIR})
 install(FILES timer.svgz
 	DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
 
+install(FILES plasma_applet_timer.notifyrc  DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR})
