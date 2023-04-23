@@ -253,13 +253,21 @@ Item {
 
             onClicked: mouse => {
                 if (mouse.button === Qt.LeftButton) {
-                    picker.copyToClipboard(Logic.formatColor(delegateMouse.currentColor, root.defaultFormat))
-                    colorLabel.visible = false;
-                    copyIndicatorLabel.visible = true;
-                    colorLabelRestoreTimer.start()
-                } else {
-                    Logic.createContextMenu(delegateMouse, delegateMouse.currentColor, picker, colorLabel, copyIndicatorLabel, colorLabelRestoreTimer).open(0, rect.height);
+                    copy();
+                } else if (mouse.button === Qt.RightButton) {
+                    openMenu();
                 }
+            }
+
+            function copy() {
+                picker.copyToClipboard(Logic.formatColor(currentColor, root.defaultFormat))
+                colorLabel.visible = false;
+                copyIndicatorLabel.visible = true;
+                colorLabelRestoreTimer.start()
+            }
+
+            function openMenu() {
+                Logic.createContextMenu(this, currentColor, picker, colorLabel, copyIndicatorLabel, colorLabelRestoreTimer).open(0, rect.height);
             }
 
             function remove() {
