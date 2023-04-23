@@ -178,7 +178,7 @@ Item {
         Keys.onPressed: event => {
             if (event.key === Qt.Key_Return || event.key === Qt.Key_Menu) {
                 if (fullRoot.currentItem) {
-                    fullRoot.currentItem.clicked(null);
+                    fullRoot.currentItem.copy();
                 }
             } else if (event.key === Qt.Key_Escape) {
                 Plasmoid.expanded = false;
@@ -224,7 +224,7 @@ Item {
                 case Qt.Key_Enter:
                 case Qt.Key_Return:
                 case Qt.Key_Select:
-                    delegateMouse.clicked(null);
+                    copy();
                     break;
                 }
             }
