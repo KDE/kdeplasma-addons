@@ -177,12 +177,9 @@ Item {
         }
 
         Keys.onPressed: event => {
-            if (event.key === Qt.Key_Return || event.key === Qt.Key_Menu) {
-                if (fullRoot.currentItem) {
-                    fullRoot.currentItem.copy();
-                }
-            } else if (event.key === Qt.Key_Escape) {
+            if (event.key === Qt.Key_Escape) {
                 Plasmoid.expanded = false;
+                event.accepted = true;
             }
         }
 
@@ -226,6 +223,9 @@ Item {
                 case Qt.Key_Return:
                 case Qt.Key_Select:
                     copy();
+                    break;
+                case Qt.Key_Menu:
+                    openMenu();
                     break;
                 }
             }
