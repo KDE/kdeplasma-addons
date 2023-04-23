@@ -236,7 +236,7 @@ Item {
             onContainsMouseChanged: {
                 if (containsMouse) {
                     fullRoot.currentIndex = index;
-                } else {
+                } else if (fullRoot.currentIndex === index) {
                     fullRoot.currentIndex = -1;
                 }
             }
