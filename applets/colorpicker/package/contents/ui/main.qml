@@ -266,7 +266,8 @@ Item {
             }
 
             function openMenu() {
-                Logic.createContextMenu(this, currentColor, picker, colorLabel, copyIndicatorLabel, colorLabelRestoreTimer).open(0, rect.height);
+                const menu = Logic.createContextMenu(this, currentColor, picker, colorLabel, copyIndicatorLabel, colorLabelRestoreTimer);
+                menu.openRelative();
             }
 
             function remove() {

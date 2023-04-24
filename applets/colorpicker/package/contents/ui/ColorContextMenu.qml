@@ -5,7 +5,7 @@
 */
 
 import QtQuick 2.15
-
+import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 2.0 as PlasmaComponents // for ModelContextMenu
 
 /**
@@ -18,6 +18,8 @@ PlasmaComponents.ModelContextMenu {
     required property Item colorLabel
     required property Item copyIndicatorLabel
     required property Timer colorLabelRestoreTimer
+
+    placement: PlasmaCore.Types.BottomPosedLeftAlignedPopup
 
     onClicked: {
         picker.copyToClipboard(model.text)
