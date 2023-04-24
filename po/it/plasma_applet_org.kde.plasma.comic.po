@@ -2,7 +2,7 @@
 #
 # Dario Panico <Dareus_Persarumrex@fastwebnet.it>, 2008.
 # Vincenzo Reale <smart2128vr@gmail.com>, 2009, 2010, 2011, 2015, 2021, 2022.
-# Paolo Zamponi <zapaolo@email.it>, 2018, 2019.
+# Paolo Zamponi <feus73@gmail.com>, 2018, 2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
