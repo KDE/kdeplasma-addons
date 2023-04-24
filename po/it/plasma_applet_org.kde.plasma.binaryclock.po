@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Federico Zenith <zenith@chemeng.ntnu.no>, 2008.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2008.
-# Paolo Zamponi <zapaolo@email.it>, 2017, 2018, 2019.
+# Paolo Zamponi <feus73@gmail.com>, 2017, 2018, 2019.
 #
 msgid ""
 msgstr ""

@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Gianmatteo Fabbri <gianmatteo.fabbri@alice.it>, 2008.
 # Vincenzo Reale <smart2128vr@gmail.com>, 2009, 2014, 2015.
-# Paolo Zamponi <zapaolo@email.it>, 2017, 2018, 2019.
+# Paolo Zamponi <feus73@gmail.com>, 2017, 2018, 2019.
 #
 msgid ""
 msgstr ""
