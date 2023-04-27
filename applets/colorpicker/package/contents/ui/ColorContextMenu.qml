@@ -6,12 +6,12 @@
 
 import QtQuick 2.15
 
-import org.kde.plasma.components 2.0 as PlasmaComponents // for ModelContextMenu
+import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 /**
  * Context menu to copy colors in different formats.
  */
-PlasmaComponents.ModelContextMenu {
+PlasmaExtras.ModelContextMenu {
     id: formattingMenu
 
     required property QtObject picker
@@ -27,7 +27,7 @@ PlasmaComponents.ModelContextMenu {
     }
 
     onStatusChanged: {
-        if (status == PlasmaComponents.DialogStatus.Closed) {
+        if (status == PlasmaExtras.DialogStatus.Closed) {
             formattingMenu.destroy();
         }
     }
