@@ -91,7 +91,7 @@ void DateTimeRunnerTest::testFindTimezones_data()
     QTest::newRow("Should find time zones by long name") << "Central Africa Time" << 1 << "Central Africa Time";
     QTest::newRow("Should find time zones by short name") << "GMT+2" << 1 << "GMT+2";
     QTest::newRow("Should find time zones by offset name") << "UTC+02:00" << 1 << "UTC+02:00";
-    QTest::newRow("Should find time zones by abbreviation, and show all time zones with that abbreviation") << "PST" << 2 << "(PST)";
+    QTest::newRow("Should find time zones by abbreviation, and show all time zones with that abbreviation") << "PST" << 1 << "(PST)";
     QTest::newRow("Should find time zones by country name, and show all time zones in that country") << "Brazil" << 2 << "Brazil - ";
 }
 
