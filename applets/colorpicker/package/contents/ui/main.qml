@@ -14,6 +14,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kwindowsystem 1.0
 
 import org.kde.plasma.private.colorpicker 2.0 as ColorPicker
 import "logic.js" as Logic
@@ -58,6 +59,10 @@ Item {
     ColorPicker.GrabWidget {
         id: picker
         onCurrentColorChanged: colorPicked(currentColor)
+    }
+
+    KWindowSystem {
+        id: kwindowsystem
     }
 
     QtDialogs.ColorDialog {
@@ -150,6 +155,7 @@ Item {
                 text: i18nc("@info:usagetip", "No colors")
 
                 helpfulAction: QQC2.Action {
+                    enabled: kwindowsystem.compositingActive
                     icon.name: "color-picker"
                     text: i18nc("@action:button", "Pick Color")
                     onTriggered: root.pickColor()

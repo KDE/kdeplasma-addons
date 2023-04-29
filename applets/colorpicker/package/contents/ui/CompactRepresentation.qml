@@ -68,6 +68,7 @@ DropArea {
             property Item loadingIndicator: null
 
             display: PlasmaComponents3.AbstractButton.IconOnly
+            enabled: kwindowsystem.compositingActive
             text: i18nc("@info:tooltip", "Pick color")
 
             onClicked: root.pickColor()
