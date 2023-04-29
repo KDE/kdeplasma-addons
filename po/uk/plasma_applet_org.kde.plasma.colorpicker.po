@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 03:09+0000\n"
+"POT-Creation-Date: 2023-04-29 02:19+0000\n"
 "PO-Revision-Date: 2022-12-24 08:46+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -114,13 +114,13 @@ msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Взяти колір"
 
-#: package/contents/ui/main.qml:330
+#: package/contents/ui/main.qml:340
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Скопійовано!"
 
-#: package/contents/ui/main.qml:340
+#: package/contents/ui/main.qml:350
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-19 02:06+0000\n"
+"POT-Creation-Date: 2023-04-29 02:19+0000\n"
 "PO-Revision-Date: 2023-01-25 09:11+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -283,13 +283,13 @@ msgctxt "@label"
 msgid "Author:"
 msgstr "Автор:"
 
-#: package/contents/ui/config.qml:332
+#: package/contents/ui/config.qml:331
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Відкрити теку з даними"
 
-#: package/contents/ui/config.qml:336
+#: package/contents/ui/config.qml:335
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
