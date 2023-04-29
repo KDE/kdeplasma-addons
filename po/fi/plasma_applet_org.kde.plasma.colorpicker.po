@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-24 00:51+0000\n"
+"POT-Creation-Date: 2023-04-29 02:54+0000\n"
 "PO-Revision-Date: 2023-03-05 17:39+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -116,13 +116,13 @@ msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Valitse väri"
 
-#: package/contents/ui/main.qml:329
+#: package/contents/ui/main.qml:339
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopioitu!"
 
-#: package/contents/ui/main.qml:339
+#: package/contents/ui/main.qml:349
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
