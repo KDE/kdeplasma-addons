@@ -100,12 +100,11 @@ void SpellCheckRunner::reloadConfiguration()
     m_requireTriggerWord = cfg.readEntry("requireTriggerWord", true) && !m_triggerWord.isEmpty();
     m_triggerWord += QLatin1Char(' ');
 
-    RunnerSyntax s(i18nc("Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\".", "%1:q:", m_triggerWord),
-                   i18n("Checks the spelling of :q:."));
-
+    QStringList exampleQueries{i18nc("Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\".", "%1:q:", m_triggerWord)};
     if (!m_requireTriggerWord) {
-        s.addExampleQuery(QStringLiteral(":q:"));
+        exampleQueries.append(QStringLiteral(":q:"));
     }
+    RunnerSyntax s(exampleQueries, i18n("Checks the spelling of :q:."));
 
     if (m_requireTriggerWord) {
         setTriggerWords({m_triggerWord});

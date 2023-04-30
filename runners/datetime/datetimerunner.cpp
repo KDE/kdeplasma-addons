@@ -33,15 +33,15 @@ DateTimeRunner::DateTimeRunner(QObject *parent, const KPluginMetaData &metaData,
 {
     setObjectName(QLatin1String("DateTimeRunner"));
 
-    addSyntax(RunnerSyntax(dateWord, i18n("Displays the current date")));
-    addSyntax(RunnerSyntax(timeWord, i18n("Displays the current time")));
-    addSyntax(RunnerSyntax(dateWord + i18nc("The <> and space are part of the example query", " <timezone>"), //
-                           i18n("Displays the current date and difference to system date in a given timezone")));
-    addSyntax(RunnerSyntax(timeWord + i18nc("The <> and space are part of the example query", " <timezone>"), //
-                           i18n("Displays the current time and difference to system time in a given timezone")));
-    addSyntax(RunnerSyntax(i18nc("The <> and space are part of the example query", "<time> <timezone> in <timezone>"), //
-                           i18n("Converts the time from the first timezone to the second timezone. If only one time zone is given, the other will be the "
-                                "system time zone. If no date or time is given, it will be the current date and time.")));
+    addSyntax(dateWord, i18n("Displays the current date"));
+    addSyntax(timeWord, i18n("Displays the current time"));
+    addSyntax(dateWord + i18nc("The <> and space are part of the example query", " <timezone>"),
+              i18n("Displays the current date and difference to system date in a given timezone"));
+    addSyntax(timeWord + i18nc("The <> and space are part of the example query", " <timezone>"),
+              i18n("Displays the current time and difference to system time in a given timezone"));
+    addSyntax(i18nc("The <> and space are part of the example query", "<time> <timezone> in <timezone>"),
+              i18n("Converts the time from the first timezone to the second timezone. If only one time zone is given, the other will be the "
+                   "system time zone. If no date or time is given, it will be the current date and time."));
 }
 
 DateTimeRunner::~DateTimeRunner()

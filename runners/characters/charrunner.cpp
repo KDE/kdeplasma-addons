@@ -38,7 +38,7 @@ void CharacterRunner::reloadConfiguration()
         qWarning() << "Config entries for alias list and code list have different sizes, ignoring all.";
     }
 
-    addSyntax(RunnerSyntax(m_triggerWord + QStringLiteral(":q:"), i18n("Creates Characters from :q: if it is a hexadecimal code or defined alias.")));
+    addSyntax(m_triggerWord + QStringLiteral(":q:"), i18n("Creates Characters from :q: if it is a hexadecimal code or defined alias."));
     setTriggerWords({m_triggerWord});
     setMinLetterCount(minLetterCount() + 1);
 }

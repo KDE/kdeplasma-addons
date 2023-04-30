@@ -21,11 +21,8 @@ KonsoleProfiles::KonsoleProfiles(QObject *parent, const KPluginMetaData &metaDat
     : AbstractRunner(parent, metaData, args)
 {
     setObjectName(QStringLiteral("Konsole Profiles"));
-
-    RunnerSyntax s(QStringLiteral(":q:"), i18n("Finds Konsole profiles matching :q:."));
-    s.addExampleQuery(QStringLiteral("konsole :q:"));
-    addSyntax(s);
-    addSyntax(RunnerSyntax(QStringLiteral("konsole"), i18n("Lists all the Konsole profiles in your account.")));
+    addSyntax({QStringLiteral(":q:"), QStringLiteral("konsole :q:")}, i18n("Finds Konsole profiles matching :q:."));
+    addSyntax(QStringLiteral("konsole"), i18n("Lists all the Konsole profiles in your account."));
     setMinLetterCount(3);
 
     m_model.setAppName(m_triggerWord);

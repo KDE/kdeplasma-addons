@@ -29,11 +29,9 @@ ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaDat
 {
     setObjectName(QStringLiteral("Converter"));
 
-    const QString description = i18n(
-        "Converts the value of :q: when :q: is made up of "
-        "\"value unit [>, to, as, in] unit\". You can use the "
-        "Unit converter applet to find all available units.");
-    addSyntax(RunnerSyntax(QStringLiteral(":q:"), description));
+    addSyntax(QStringLiteral(":q:"),
+              i18n("Converts the value of :q: when :q: is made up of value unit [>, to, as, in] unit."
+                   "You can use the Unit converter applet to find all available units."));
 }
 
 void ConverterRunner::init()

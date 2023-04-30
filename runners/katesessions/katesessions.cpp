@@ -27,8 +27,8 @@ KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData, con
 {
     setObjectName(QStringLiteral("Kate Sessions"));
 
-    addSyntax(RunnerSyntax(QStringLiteral("kate :q:"), i18n("Finds Kate sessions matching :q:.")));
-    addSyntax(RunnerSyntax(QStringLiteral("kate"), i18n("Lists all the Kate editor sessions in your account.")));
+    addSyntax(QStringLiteral("kate :q:"), i18n("Finds Kate sessions matching :q:."));
+    addSyntax(QStringLiteral("kate"), i18n("Lists all the Kate editor sessions in your account."));
 
     // Initialize watchers and sessions
     setTriggerWords({m_triggerWord});
