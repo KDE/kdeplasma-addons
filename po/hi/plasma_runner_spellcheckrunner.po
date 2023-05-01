@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-05-01 02:33+0000\n"
 "PO-Revision-Date: 2020-08-12 19:02+0530\n"
 "Last-Translator: rawkoder <rawkoder@fastmail.in>\n"
 "Language-Team: Hindi <kde-l10n-hi@kde.org>\n"
@@ -29,23 +29,23 @@ msgctxt ""
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: spellcheck.cpp:104
+#: spellcheck.cpp:107
 #, kde-format
 msgid "Checks the spelling of :q:."
 msgstr ":q: की वर्तनी जाँचें ।"
 
-#: spellcheck.cpp:224
+#: spellcheck.cpp:223
 #, kde-format
 msgctxt "Term is spelled correctly"
 msgid "Correct"
 msgstr "सही"
 
-#: spellcheck.cpp:233
+#: spellcheck.cpp:232
 #, kde-format
 msgid "Suggested term"
 msgstr "सुझाया गया शब्द"
 
-#: spellcheck.cpp:263
+#: spellcheck.cpp:262
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""

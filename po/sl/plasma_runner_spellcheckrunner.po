@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-05-01 02:33+0000\n"
 "PO-Revision-Date: 2023-03-16 10:33+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -34,23 +34,23 @@ msgctxt ""
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: spellcheck.cpp:104
+#: spellcheck.cpp:107
 #, kde-format
 msgid "Checks the spelling of :q:."
 msgstr "Preveri črkovanje besedila :q:."
 
-#: spellcheck.cpp:224
+#: spellcheck.cpp:223
 #, kde-format
 msgctxt "Term is spelled correctly"
 msgid "Correct"
 msgstr "Popravi"
 
-#: spellcheck.cpp:233
+#: spellcheck.cpp:232
 #, kde-format
 msgid "Suggested term"
 msgstr "Predlagana beseda"
 
-#: spellcheck.cpp:263
+#: spellcheck.cpp:262
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""

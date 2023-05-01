@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-05-01 02:33+0000\n"
 "PO-Revision-Date: 2019-12-01 18:44+0100\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 20.03.70\n"
 
-#: konsoleprofiles.cpp:25
+#: konsoleprofiles.cpp:24
 #, kde-format
 msgid "Finds Konsole profiles matching :q:."
 msgstr "A(z) :q: kifejezésre illeszkedő profilok keresése."
 
-#: konsoleprofiles.cpp:28
+#: konsoleprofiles.cpp:25
 #, kde-format
 msgid "Lists all the Konsole profiles in your account."
 msgstr "A felhasználói fiókhoz tartozó összes Konsole profil listázása."

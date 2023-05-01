@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-05-01 02:33+0000\n"
 "PO-Revision-Date: 2023-03-15 08:03+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -32,23 +32,23 @@ msgctxt ""
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: spellcheck.cpp:104
+#: spellcheck.cpp:107
 #, kde-format
 msgid "Checks the spelling of :q:."
 msgstr "Перевіряє правопис :q:."
 
-#: spellcheck.cpp:224
+#: spellcheck.cpp:223
 #, kde-format
 msgctxt "Term is spelled correctly"
 msgid "Correct"
 msgstr "Правильно"
 
-#: spellcheck.cpp:233
+#: spellcheck.cpp:232
 #, kde-format
 msgid "Suggested term"
 msgstr "Запропонований термін"
 
-#: spellcheck.cpp:263
+#: spellcheck.cpp:262
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""

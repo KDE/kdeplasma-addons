@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-05-01 02:33+0000\n"
 "PO-Revision-Date: 2023-02-24 12:43\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -30,23 +30,23 @@ msgctxt ""
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: spellcheck.cpp:104
+#: spellcheck.cpp:107
 #, kde-format
 msgid "Checks the spelling of :q:."
 msgstr "检查 :q: 的拼写。"
 
-#: spellcheck.cpp:224
+#: spellcheck.cpp:223
 #, kde-format
 msgctxt "Term is spelled correctly"
 msgid "Correct"
 msgstr "改正"
 
-#: spellcheck.cpp:233
+#: spellcheck.cpp:232
 #, kde-format
 msgid "Suggested term"
 msgstr "建议的词语"
 
-#: spellcheck.cpp:263
+#: spellcheck.cpp:262
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""

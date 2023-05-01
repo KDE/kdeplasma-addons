@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-09 00:47+0000\n"
+"POT-Creation-Date: 2023-05-01 02:33+0000\n"
 "PO-Revision-Date: 2021-05-16 21:25+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -18,22 +18,25 @@ msgstr ""
 "X-Generator: Lokalize 20.12.3\n"
 
 #: converterrunner.cpp:33
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
+#| "in] unit\". You can use the Unit converter applet to find all available "
+#| "units."
 msgid ""
-"Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
-"in] unit\". You can use the Unit converter applet to find all available "
-"units."
+"Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
+"unit.You can use the Unit converter applet to find all available units."
 msgstr ""
 ":q:가 \"값 단위 [>, to, as, in, 변환]\"일 때 :q:의 값을 변환합니다. 단위 변환"
 "기 애플릿을 통하여 모든 단위를 찾아볼 수 있습니다."
 
-#: converterrunner.cpp:42
+#: converterrunner.cpp:40
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
 msgstr "in;to;as;변환"
 
-#: converterrunner.cpp:50
+#: converterrunner.cpp:48
 #, kde-format
 msgid "Copy unit and number"
 msgstr "단위와 숫자 복사"

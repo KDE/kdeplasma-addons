@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-05-01 02:33+0000\n"
 "PO-Revision-Date: 2010-01-20 08:30+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -30,25 +30,25 @@ msgctxt ""
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: spellcheck.cpp:104
+#: spellcheck.cpp:107
 #, kde-format
 msgid "Checks the spelling of :q:."
 msgstr "ពិនិត្យ​អក្ខរាវិរុទ្ធ​របស់ :q:."
 
-#: spellcheck.cpp:224
+#: spellcheck.cpp:223
 #, fuzzy, kde-format
 #| msgid "Correct"
 msgctxt "Term is spelled correctly"
 msgid "Correct"
 msgstr "ត្រឹមត្រូវ"
 
-#: spellcheck.cpp:233
+#: spellcheck.cpp:232
 #, fuzzy, kde-format
 #| msgid "Suggested words: %1"
 msgid "Suggested term"
 msgstr "ពាក្យ​ដែល​បាន​ស្នើ ៖ %1"
 
-#: spellcheck.cpp:263
+#: spellcheck.cpp:262
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""

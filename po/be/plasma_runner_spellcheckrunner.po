@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-05-01 02:33+0000\n"
 "PO-Revision-Date: 2008-01-14 21:12+0200\n"
 "Last-Translator: Darafei Praliaskouski <komzpa@gmail.com>\n"
 "Language-Team: Belarusian <i18n@mova.org>\n"
@@ -31,25 +31,25 @@ msgctxt ""
 msgid "%1:q:"
 msgstr ""
 
-#: spellcheck.cpp:104
+#: spellcheck.cpp:107
 #, kde-format
 msgid "Checks the spelling of :q:."
 msgstr ""
 
-#: spellcheck.cpp:224
+#: spellcheck.cpp:223
 #, fuzzy, kde-format
 #| msgid "Correct"
 msgctxt "Term is spelled correctly"
 msgid "Correct"
 msgstr "Выправіць "
 
-#: spellcheck.cpp:233
+#: spellcheck.cpp:232
 #, fuzzy, kde-format
 #| msgid "Suggested words: "
 msgid "Suggested term"
 msgstr "Прапанаваныя словы: "
 
-#: spellcheck.cpp:263
+#: spellcheck.cpp:262
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-15 02:12+0000\n"
+"POT-Creation-Date: 2023-05-01 02:33+0000\n"
 "PO-Revision-Date: 2010-02-01 08:07+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: ਪੰਜਾਬੀ <punjabi-users@lists.sf.net>\n"
@@ -30,25 +30,25 @@ msgctxt ""
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: spellcheck.cpp:104
+#: spellcheck.cpp:107
 #, kde-format
 msgid "Checks the spelling of :q:."
 msgstr " :q: ਦੇ ਸਪੈਲਿੰਗ ਚੈੱਕ ਕਰੋ"
 
-#: spellcheck.cpp:224
+#: spellcheck.cpp:223
 #, fuzzy, kde-format
 #| msgid "Correct"
 msgctxt "Term is spelled correctly"
 msgid "Correct"
 msgstr "ਠੀਕ"
 
-#: spellcheck.cpp:233
+#: spellcheck.cpp:232
 #, fuzzy, kde-format
 #| msgid "Suggested words: %1"
 msgid "Suggested term"
 msgstr "ਸੁਝਾਏ ਅੱਖਰ: %1"
 
-#: spellcheck.cpp:263
+#: spellcheck.cpp:262
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""

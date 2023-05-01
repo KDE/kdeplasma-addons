@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-05-01 02:33+0000\n"
 "PO-Revision-Date: 2018-08-14 16:16+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: konsoleprofiles.cpp:25
+#: konsoleprofiles.cpp:24
 #, kde-format
 msgid "Finds Konsole profiles matching :q:."
 msgstr ":q:와(과) 일치하는 Konsole 프로필을 찾습니다."
 
-#: konsoleprofiles.cpp:28
+#: konsoleprofiles.cpp:25
 #, kde-format
 msgid "Lists all the Konsole profiles in your account."
 msgstr "계정에 설정한 모든 Konsole 프로필을 표시합니다."

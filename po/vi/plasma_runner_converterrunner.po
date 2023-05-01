@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-09 00:47+0000\n"
+"POT-Creation-Date: 2023-05-01 02:33+0000\n"
 "PO-Revision-Date: 2020-12-04 11:34+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -18,23 +18,26 @@ msgstr ""
 "X-Generator: Lokalize 20.08.1\n"
 
 #: converterrunner.cpp:33
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
+#| "in] unit\". You can use the Unit converter applet to find all available "
+#| "units."
 msgid ""
-"Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
-"in] unit\". You can use the Unit converter applet to find all available "
-"units."
+"Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
+"unit.You can use the Unit converter applet to find all available units."
 msgstr ""
 "Đổi giá trị :q: khi :q: được tạo bởi \"giá_trị đơn_vị [sang, thanh, =, >] "
 "đơn_vị\". Bạn có thể dùng tiểu ứng dụng Đổi đơn vị để xem tất cả các đơn vị "
 "hiện có"
 
-#: converterrunner.cpp:42
+#: converterrunner.cpp:40
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
 msgstr "sang;thanh;=;>"
 
-#: converterrunner.cpp:50
+#: converterrunner.cpp:48
 #, kde-format
 msgid "Copy unit and number"
 msgstr "Chép đơn vị và số"
