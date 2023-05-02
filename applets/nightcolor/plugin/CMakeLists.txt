@@ -7,7 +7,6 @@ target_sources(nightcolorcontrolplugin PRIVATE
 target_link_libraries(nightcolorcontrolplugin
     Qt::Core
     Qt::DBus
-    Qt::Gui
     Qt::Qml
 )
 ecm_finalize_qml_module(nightcolorcontrolplugin DESTINATION ${KDE_INSTALL_QMLDIR})
