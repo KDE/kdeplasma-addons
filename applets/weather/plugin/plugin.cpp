@@ -28,12 +28,14 @@ static QObject *pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, Q
 {
     Q_UNUSED(scriptEngine)
 
-    QVector<UnitItem> items{UnitItem(KUnitConversion::Hectopascal),
-                            UnitItem(KUnitConversion::Kilopascal),
-                            UnitItem(KUnitConversion::Pascal),
-                            UnitItem(KUnitConversion::Millibar),
-                            UnitItem(KUnitConversion::InchesOfMercury),
-                            UnitItem(KUnitConversion::MillimetersOfMercury)};
+    const QVector<UnitItem> items{
+        UnitItem(KUnitConversion::Hectopascal),
+        UnitItem(KUnitConversion::Kilopascal),
+        UnitItem(KUnitConversion::Pascal),
+        UnitItem(KUnitConversion::Millibar),
+        UnitItem(KUnitConversion::InchesOfMercury),
+        UnitItem(KUnitConversion::MillimetersOfMercury),
+    };
 
     return new AbstractUnitListModel(items, engine);
 }
@@ -42,11 +44,13 @@ static QObject *windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, 
 {
     Q_UNUSED(scriptEngine)
 
-    QVector<UnitItem> items{UnitItem(KUnitConversion::MeterPerSecond),
-                            UnitItem(KUnitConversion::KilometerPerHour),
-                            UnitItem(KUnitConversion::MilePerHour),
-                            UnitItem(KUnitConversion::Knot),
-                            UnitItem(KUnitConversion::Beaufort)};
+    const QVector<UnitItem> items{
+        UnitItem(KUnitConversion::MeterPerSecond),
+        UnitItem(KUnitConversion::KilometerPerHour),
+        UnitItem(KUnitConversion::MilePerHour),
+        UnitItem(KUnitConversion::Knot),
+        UnitItem(KUnitConversion::Beaufort),
+    };
 
     return new AbstractUnitListModel(items, engine);
 }
