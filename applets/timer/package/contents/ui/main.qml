@@ -48,7 +48,7 @@ Item {
     readonly property bool showTitle: plasmoid.configuration.showTitle;
     readonly property string title: plasmoid.configuration.title;
     readonly property bool alertMode: root.running && root.seconds < 60
-    property bool running: (plasmoid.configuration.running > 0) ? true : false;
+    property bool running: plasmoid.configuration.running > 0
     property bool suspended: false;
 
     readonly property string notificationText: plasmoid.configuration.notificationText;
@@ -61,13 +61,11 @@ Item {
             timerName = Plasmoid.title;
         }
 
-        var toolTipText = "";
         if (running) {
-            toolTipText = i18n("%1 is running", timerName);
+            return i18n("%1 is running", timerName);
         } else {
-            toolTipText = i18n("%1 not running", timerName);
+            return i18n("%1 not running", timerName);
         }
-        return toolTipText;
     }
     Plasmoid.toolTipSubText: running ? i18np("Remaining time left: %1 second", "Remaining time left: %1 seconds", seconds) : i18n("Use mouse wheel to change digits or choose from predefined timers in the context menu");
 
