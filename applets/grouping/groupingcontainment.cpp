@@ -32,7 +32,6 @@ GroupingContainment::GroupingContainment(QObject *parent, const KPluginMetaData 
     : Plasma::Containment(parent, data, args)
 {
     setHasConfigurationInterface(true);
-    setContainmentType(Plasma::Types::CustomEmbeddedContainment);
 }
 
 GroupingContainment::~GroupingContainment()
