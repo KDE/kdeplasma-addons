@@ -4,23 +4,47 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "timerplugin.h"
-#include "timer.h"
-
-// Qt
+#include <QProcess>
 #include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
-static QObject *timer_singletontype_provider(QQmlEngine *engine, QJSEngine *scriptEngine)
+class Timer : public QObject
 {
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
+    Q_OBJECT
 
-    return new Timer();
-}
+public:
+    Q_INVOKABLE void runCommand(const QString &command)
+    {
+        if (!command.isEmpty()) {
+            QStringList split = QProcess::splitCommand(command);
+            const QString program = split.takeFirst();
+            QProcess::startDetached(program, split);
+        }
+    }
+    /*!
+     * Represent \a seconds as s string representing time duration with
+     * given format based on QTime.
+     */
+    Q_INVOKABLE QString secondsToString(int seconds, const QString &format)
+    {
+        return QTime::fromMSecsSinceStartOfDay(seconds * 1000).toString(format);
+    }
+};
 
-void TimerPlugin::registerTypes(const char *uri)
+class TimerPlugin : public QQmlExtensionPlugin
 {
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.timer"));
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
-    qmlRegisterSingletonType<Timer>(uri, 0, 1, "Timer", timer_singletontype_provider);
-}
+public:
+    void registerTypes(const char *uri) override
+    {
+        Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.timer"));
+
+        qmlRegisterSingletonType<Timer>(uri, 0, 1, "Timer", [](QQmlEngine *, QJSEngine *) {
+            return new Timer();
+        });
+    }
+};
+
+#include "timerplugin.moc"
