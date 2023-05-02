@@ -4,15 +4,23 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#include "plugin.h"
 #include "inhibitor.h"
 #include "monitor.h"
 
 #include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
-void NightColorControlPlugin::registerTypes(const char *uri)
+class NightColorControlPlugin : public QQmlExtensionPlugin
 {
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.nightcolorcontrol"));
-    qmlRegisterType<Inhibitor>(uri, 1, 0, "Inhibitor");
-    qmlRegisterType<Monitor>(uri, 1, 0, "Monitor");
-}
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+
+public:
+    void registerTypes(const char *uri)
+    {
+        qmlRegisterType<Inhibitor>(uri, 1, 0, "Inhibitor");
+        qmlRegisterType<Monitor>(uri, 1, 0, "Monitor");
+    }
+};
+
+#include "plugin.moc"

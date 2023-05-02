@@ -1,16 +1,13 @@
-set(nightcolorcontrolplugin_SOURCES
+ecm_add_qml_module(nightcolorcontrolplugin URI org.kde.plasma.private.nightcolorcontrol)
+target_sources(nightcolorcontrolplugin PRIVATE
     inhibitor.cpp
     monitor.cpp
     plugin.cpp
 )
-
-add_library(nightcolorcontrolplugin SHARED ${nightcolorcontrolplugin_SOURCES})
 target_link_libraries(nightcolorcontrolplugin
     Qt::Core
     Qt::DBus
     Qt::Gui
     Qt::Qml
 )
-
-install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/nightcolorcontrol)
-install(TARGETS nightcolorcontrolplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/nightcolorcontrol)
+ecm_finalize_qml_module(nightcolorcontrolplugin DESTINATION ${KDE_INSTALL_QMLDIR})
