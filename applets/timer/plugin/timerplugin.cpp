@@ -39,8 +39,6 @@ class TimerPlugin : public QQmlExtensionPlugin
 public:
     void registerTypes(const char *uri) override
     {
-        Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.timer"));
-
         qmlRegisterSingletonType<Timer>(uri, 0, 1, "Timer", [](QQmlEngine *, QJSEngine *) {
             return new Timer();
         });

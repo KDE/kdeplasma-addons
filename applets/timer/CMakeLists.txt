@@ -1,20 +1,9 @@
 plasma_install_package(package org.kde.plasma.timer)
 
-add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.timer")
-
-set(timer_SRCS
-    plugin/timerplugin.cpp
-)
-
-add_library(timerplugin SHARED ${timer_SRCS})
-
-target_link_libraries(timerplugin
-    Qt::Core
-    Qt::Qml
-)
-
-install(TARGETS timerplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/timer)
-install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/timer)
+ecm_add_qml_module(timerplugin URI org.kde.plasma.private.timer)
+target_sources(timerplugin PRIVATE plugin/timerplugin.cpp)
+target_link_libraries(timerplugin Qt::Core Qt::Qml)
+ecm_finalize_qml_module(timerplugin DESTINATION ${KDE_INSTALL_QMLDIR})
 
 install(FILES timer.svgz
 	DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
