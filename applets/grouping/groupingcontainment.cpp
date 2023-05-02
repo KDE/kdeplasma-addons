@@ -9,24 +9,13 @@
 #include "debug.h"
 
 #include <QDebug>
-#include <QProcess>
-
-#include <QDBusConnection>
-#include <QDBusConnectionInterface>
-#include <QDBusPendingCallWatcher>
 #include <QMenu>
 #include <QQuickItem>
 #include <QQuickWindow>
 #include <QScreen>
 #include <QStandardItemModel>
 
-#include <Plasma/PluginLoader>
-#include <Plasma5Support/ServiceJob>
-
-#include <KActionCollection>
-#include <KLocalizedString>
-
-#include <plasma_version.h>
+#include <KActionCollection> // Applet::actions
 
 GroupingContainment::GroupingContainment(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Containment(parent, data, args)
@@ -34,18 +23,9 @@ GroupingContainment::GroupingContainment(QObject *parent, const KPluginMetaData 
     setHasConfigurationInterface(true);
 }
 
-GroupingContainment::~GroupingContainment()
-{
-}
-
-void GroupingContainment::init()
-{
-    Containment::init();
-}
-
 void GroupingContainment::newTask(const QString &task)
 {
-    createApplet(task, QVariantList() << QStringLiteral("org.kde.plasma:force-create"));
+    createApplet(task, QVariantList{QStringLiteral("org.kde.plasma:force-create")});
 }
 
 void GroupingContainment::cleanupTask(const QString &task)
