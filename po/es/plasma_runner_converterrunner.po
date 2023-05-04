@@ -8,35 +8,31 @@
 # Jaime Robles <jaime@kde.org>, 2008.
 # Santi <santi@kde-es.org>, 2008.
 # Enrique Matias Sanchez (Quique) <cronopios@gmail.com>, 2009.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2020.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2020, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-01 02:33+0000\n"
-"PO-Revision-Date: 2020-10-26 12:39+0100\n"
+"PO-Revision-Date: 2023-05-02 00:23+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.08.2\n"
+"X-Generator: Lokalize 23.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: converterrunner.cpp:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
-#| "in] unit\". You can use the Unit converter applet to find all available "
-#| "units."
+#, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
 "unit.You can use the Unit converter applet to find all available units."
 msgstr ""
-"Convierte el valor de :q: cuando :q: se compone de «valor unidad [>, a, "
-"como, en] unidad». Puede usar la miniaplicación de conversión de unidades "
-"para encontrar todas las unidades disponibles."
+"Convierte el valor de :q: cuando :q: se compone de valor unidad [>, a, como, "
+"en] unidad. Puede usar la miniaplicación de conversión de unidades para "
+"encontrar todas las unidades disponibles."
 
 #: converterrunner.cpp:40
 #, kde-format
