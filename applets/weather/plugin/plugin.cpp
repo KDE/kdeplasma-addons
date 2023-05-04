@@ -4,30 +4,21 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#include "plugin.h"
-
 #include "abstractunitlistmodel.h"
 #include "locationlistmodel.h"
 #include "util.h"
 
-// KF
-#include <KLocalizedString>
-// Qt
 #include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
-static QObject *temperatureUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+static QObject *temperatureUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
 {
-    Q_UNUSED(scriptEngine)
-
     QVector<UnitItem> items{UnitItem(KUnitConversion::Celsius), UnitItem(KUnitConversion::Fahrenheit), UnitItem(KUnitConversion::Kelvin)};
-
     return new AbstractUnitListModel(items, engine);
 }
 
-static QObject *pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+static QObject *pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
 {
-    Q_UNUSED(scriptEngine)
-
     const QVector<UnitItem> items{
         UnitItem(KUnitConversion::Hectopascal),
         UnitItem(KUnitConversion::Kilopascal),
@@ -40,10 +31,8 @@ static QObject *pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, Q
     return new AbstractUnitListModel(items, engine);
 }
 
-static QObject *windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+static QObject *windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
 {
-    Q_UNUSED(scriptEngine)
-
     const QVector<UnitItem> items{
         UnitItem(KUnitConversion::MeterPerSecond),
         UnitItem(KUnitConversion::KilometerPerHour),
@@ -55,31 +44,35 @@ static QObject *windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, 
     return new AbstractUnitListModel(items, engine);
 }
 
-static QObject *visibilityUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+static QObject *visibilityUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
 {
-    Q_UNUSED(scriptEngine)
-
     QVector<UnitItem> items{UnitItem(KUnitConversion::Kilometer), UnitItem(KUnitConversion::Mile)};
 
     return new AbstractUnitListModel(items, engine);
 }
 
-static QObject *utilSingletonTypeProvider(QQmlEngine *engine, QJSEngine *scriptEngine)
+static QObject *utilSingletonTypeProvider(QQmlEngine * /*engine*/, QJSEngine * /*scriptEngine*/)
 {
-    Q_UNUSED(engine)
-    Q_UNUSED(scriptEngine)
-
     return new Util();
 }
 
-void WeatherPlugin::registerTypes(const char *uri)
+class WeatherPlugin : public QQmlExtensionPlugin
 {
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.weather"));
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
-    qmlRegisterSingletonType<AbstractUnitListModel>(uri, 1, 0, "TemperatureUnitListModel", temperatureUnitListModelSingletonTypeProvider);
-    qmlRegisterSingletonType<AbstractUnitListModel>(uri, 1, 0, "PressureUnitListModel", pressureUnitListModelSingletonTypeProvider);
-    qmlRegisterSingletonType<AbstractUnitListModel>(uri, 1, 0, "WindSpeedUnitListModel", windSpeedUnitListModelSingletonTypeProvider);
-    qmlRegisterSingletonType<AbstractUnitListModel>(uri, 1, 0, "VisibilityUnitListModel", visibilityUnitListModelSingletonTypeProvider);
-    qmlRegisterSingletonType<Util>(uri, 1, 0, "Util", utilSingletonTypeProvider);
-    qmlRegisterType<LocationListModel>(uri, 1, 0, "LocationListModel");
-}
+public:
+    void registerTypes(const char *uri) override
+    {
+        Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.weather"));
+
+        qmlRegisterSingletonType<AbstractUnitListModel>(uri, 1, 0, "TemperatureUnitListModel", temperatureUnitListModelSingletonTypeProvider);
+        qmlRegisterSingletonType<AbstractUnitListModel>(uri, 1, 0, "PressureUnitListModel", pressureUnitListModelSingletonTypeProvider);
+        qmlRegisterSingletonType<AbstractUnitListModel>(uri, 1, 0, "WindSpeedUnitListModel", windSpeedUnitListModelSingletonTypeProvider);
+        qmlRegisterSingletonType<AbstractUnitListModel>(uri, 1, 0, "VisibilityUnitListModel", visibilityUnitListModelSingletonTypeProvider);
+        qmlRegisterSingletonType<Util>(uri, 1, 0, "Util", utilSingletonTypeProvider);
+        qmlRegisterType<LocationListModel>(uri, 1, 0, "LocationListModel");
+    }
+};
+
+#include "plugin.moc"
