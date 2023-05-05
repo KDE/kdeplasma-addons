@@ -30,12 +30,56 @@ KWin.TabBoxSwitcher {
 
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.3, icons.implicitWidth), tabBox.screenGeometry.width * 0.9)
 
-            IconTabBox {
+            ListView {
                 id: icons
-                model: tabBox.model
-                iconSize: PlasmaCore.Units.iconSizes.enormous
+
+                readonly property int iconSize: PlasmaCore.Units.iconSizes.enormous
+                readonly property int delegateWidth: iconSize + (highlightItem ? highlightItem.margins.left + highlightItem.margins.right : 0)
+                readonly property int delegateHeight: iconSize + (highlightItem ? highlightItem.margins.top + highlightItem.margins.bottom : 0)
+
                 Layout.alignment: Qt.AlignHCenter
                 Layout.maximumWidth: tabBox.screenGeometry.width * 0.9
+
+                implicitWidth: contentWidth
+                implicitHeight: delegateWidth
+
+                focus: true
+                orientation: ListView.Horizontal
+
+                model: tabBox.model
+                delegate: PlasmaCore.IconItem {
+                    property string caption: model.caption
+
+                    width: icons.delegateHeight
+                    height: icons.delegateWidth
+
+                    source: model.icon
+                    active: index == icons.currentIndex
+                    usesPlasmaTheme: false
+
+                    TapHandler {
+                        onSingleTapped: {
+                            if (index === icons.currentIndex) {
+                                icons.model.activate(index);
+                                return;
+                            }
+                            icons.currentIndex = index;
+                        }
+                        onDoubleTapped: icons.model.activate(index)
+                    }
+                }
+
+                highlight: PlasmaCore.FrameSvgItem {
+                    id: highlightItem
+                    imagePath: "widgets/viewitem"
+                    prefix: "hover"
+                    width: icons.iconSize + margins.left + margins.right
+                    height: icons.iconSize + margins.top + margins.bottom
+                }
+
+                highlightMoveDuration: 0
+                highlightResizeDuration: 0
+                boundsBehavior: Flickable.StopAtBounds
             }
 
             PlasmaComponents3.Label {
@@ -62,7 +106,7 @@ KWin.TabBoxSwitcher {
             * @li we have to emit the change signal
             * @li on multiple invocation it does not work on the list view. Focus seems to be lost.
             **/
-            Keys.onPressed: {
+            Keys.onPressed: event => {
                 if (event.key == Qt.Key_Left) {
                     icons.decrementCurrentIndex();
                 } else if (event.key == Qt.Key_Right) {
