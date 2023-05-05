@@ -160,13 +160,19 @@ void DateTimeRunner::match(RunnerContext &context)
         // longest possible string: date and time with more characters for two-digit numbers in each of the components and different AP format
         const int maxLen = QLocale().dateTimeFormat(QLocale::ShortFormat).length() + 8;
         // check all long and short enough initial substrings
+        // CLDR 42: https://phabricator.services.mozilla.com/D160188
+        const QString dateTimeShortFormat = QLocale::system().dateTimeFormat(QLocale::ShortFormat).replace(QStringLiteral(" "), QLatin1String(" "));
+        const QString timeShortFormat = QLocale::system().timeFormat(QLocale::ShortFormat).replace(QStringLiteral(" "), QLatin1String(" "));
         for (int n = minLen; n <= maxLen && n <= term.length() && time.isNull(); ++n) {
             dtTerm = term.mid(0, n);
             // try to parse query substring as datetime or time
-            if (QDateTime dateTimeParse = QLocale().toDateTime(dtTerm, QLocale::ShortFormat); dateTimeParse.isValid()) {
+            if (QDateTime dateTimeParse = QLocale::system().toDateTime(dtTerm, dateTimeShortFormat); dateTimeParse.isValid()) {
                 date = dateTimeParse.date();
                 time = dateTimeParse.time();
-            } else if (QTime timeParse = QLocale().toTime(dtTerm, QLocale::ShortFormat); timeParse.isValid()) {
+            } else if (QTime timeParse = QLocale::system().toTime(dtTerm, timeShortFormat); timeParse.isValid()) {
+                time = timeParse;
+            }
+
                 time = timeParse;
             }
         }
