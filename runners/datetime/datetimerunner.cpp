@@ -51,28 +51,31 @@ DateTimeRunner::~DateTimeRunner()
 void DateTimeRunner::match(RunnerContext &context)
 {
     QString term = context.query();
+    const QLocale systemLocale = QLocale::system();
 
-    if (term.compare(dateWord, Qt::CaseInsensitive) == 0) {
+    if (term.compare(dateWord, Qt::CaseInsensitive) == 0 || term.compare(QLatin1String("date"), Qt::CaseInsensitive) == 0) {
         // current date in local time zone
 
         const QDate date = QDate::currentDate();
-        const QString dateStr = QLocale().toString(date);
+        const QString dateStr = systemLocale.toString(date);
         addMatch(i18n("Today's date is %1", dateStr), dateStr, 1.0, QStringLiteral("view-calendar-day"), context);
-    } else if (term.startsWith(dateWord + QLatin1Char(' '), Qt::CaseInsensitive)) {
+    } else if (term.startsWith(dateWord + QLatin1Char(' '), Qt::CaseInsensitive) || term.startsWith(QLatin1String("date "), Qt::CaseInsensitive)) {
         // current date in remote time zone
 
         term = term.replace(conversionWordsRegex, QStringLiteral(" ")); // strip away conversion words
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        const auto zoneTerm = term.rightRef(term.length() - dateWord.length() - 1);
-#else
-        const auto zoneTerm = QStringView(term).right(term.length() - dateWord.length() - 1);
-#endif
+        QStringView zoneTerm;
+        if (term.compare(dateWord, Qt::CaseInsensitive) == 0) {
+            zoneTerm = QStringView(term).right(term.length() - dateWord.length() - 1);
+        } else {
+            zoneTerm = QStringView(term).right(term.length() - 4 - 1);
+        }
+
         const auto zones = matchingTimeZones(zoneTerm);
         for (auto it = zones.constBegin(), itEnd = zones.constEnd(); it != itEnd; ++it) {
             const QTimeZone zone = it.value();
             const QString zoneStr = it.key();
             const QDateTime datetime = QDateTime::currentDateTime().toTimeZone(zone);
-            const QString dateStr = QLocale().toString(datetime.date());
+            const QString dateStr = systemLocale.toString(datetime.date());
 
             const qint64 dateDiff = QDateTime::currentDateTime().daysTo(QDateTime(datetime.date(), datetime.time())) * (24 * 60 * 60 * 1000); // full days in ms
             const QString dateDiffNumStr = KFormat().formatSpelloutDuration(abs(dateDiff));
@@ -91,27 +94,28 @@ void DateTimeRunner::match(RunnerContext &context)
                      QStringLiteral("view-calendar-day"),
                      context);
         }
-    } else if (term.compare(timeWord, Qt::CaseInsensitive) == 0) {
+    } else if (term.compare(timeWord, Qt::CaseInsensitive) == 0 || term.compare(QLatin1String("time"), Qt::CaseInsensitive) == 0) {
         // current time in local time zone
 
         const QTime time = QTime::currentTime();
-        const QString timeStr = QLocale().toString(time);
+        const QString timeStr = systemLocale.toString(time);
         addMatch(i18n("Current time is %1", timeStr), timeStr, 1.0, QStringLiteral("clock"), context);
-    } else if (term.startsWith(timeWord + QLatin1Char(' '), Qt::CaseInsensitive)) {
+    } else if (term.startsWith(timeWord + QLatin1Char(' '), Qt::CaseInsensitive) || term.startsWith(QLatin1String("time "), Qt::CaseInsensitive)) {
         // current time in remote time zone
 
         term = term.replace(conversionWordsRegex, QStringLiteral(" ")); // strip away conversion words
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        const auto zoneTerm = term.rightRef(term.length() - timeWord.length() - 1);
-#else
-        const auto zoneTerm = QStringView(term).right(term.length() - timeWord.length() - 1);
-#endif
+        QStringView zoneTerm;
+        if (term.startsWith(timeWord + QLatin1Char(' '), Qt::CaseInsensitive)) {
+            zoneTerm = QStringView(term).right(term.length() - timeWord.length() - 1);
+        } else {
+            zoneTerm = QStringView(term).right(term.length() - 4 - 1);
+        }
         const auto zones = matchingTimeZones(zoneTerm);
         for (auto it = zones.constBegin(), itEnd = zones.constEnd(); it != itEnd; ++it) {
             const QTimeZone zone = it.value();
             const QString zoneStr = it.key();
             const QDateTime datetime = QDateTime::currentDateTime().toTimeZone(zone);
-            const QString timeStr = QLocale().toString(datetime.time(), QLocale::ShortFormat);
+            const QString timeStr = systemLocale.toString(datetime.time(), QLocale::ShortFormat);
 
             const qint64 dateDiff = QDateTime::currentDateTime().daysTo(QDateTime(datetime.date(), datetime.time())) * (24 * 60 * 60 * 1000); // full days in ms
             const QString dayDiffNumStr = KFormat().formatSpelloutDuration(abs(dateDiff));
@@ -156,23 +160,33 @@ void DateTimeRunner::match(RunnerContext &context)
         QTime time;
         QString dtTerm;
         // shortest possible string: only time without leading zeros
-        const int minLen = QLocale().timeFormat(QLocale::ShortFormat).length();
+        const QLocale englishLocale = QLocale(QLocale::English);
+        const int minLen = std::min(systemLocale.timeFormat(QLocale::ShortFormat).length(), englishLocale.timeFormat(QLocale::ShortFormat).length());
         // longest possible string: date and time with more characters for two-digit numbers in each of the components and different AP format
-        const int maxLen = QLocale().dateTimeFormat(QLocale::ShortFormat).length() + 8;
+        const int maxLen =
+            std::max(systemLocale.dateTimeFormat(QLocale::ShortFormat).length(), englishLocale.dateTimeFormat(QLocale::ShortFormat).length()) + 8;
         // check all long and short enough initial substrings
         // CLDR 42: https://phabricator.services.mozilla.com/D160188
-        const QString dateTimeShortFormat = QLocale::system().dateTimeFormat(QLocale::ShortFormat).replace(QStringLiteral(" "), QLatin1String(" "));
-        const QString timeShortFormat = QLocale::system().timeFormat(QLocale::ShortFormat).replace(QStringLiteral(" "), QLatin1String(" "));
+        const QString dateTimeShortFormat = systemLocale.dateTimeFormat(QLocale::ShortFormat).replace(QStringLiteral(" "), QLatin1String(" "));
+        const QString timeShortFormat = systemLocale.timeFormat(QLocale::ShortFormat).replace(QStringLiteral(" "), QLatin1String(" "));
         for (int n = minLen; n <= maxLen && n <= term.length() && time.isNull(); ++n) {
             dtTerm = term.mid(0, n);
             // try to parse query substring as datetime or time
-            if (QDateTime dateTimeParse = QLocale::system().toDateTime(dtTerm, dateTimeShortFormat); dateTimeParse.isValid()) {
+            if (QDateTime dateTimeParse = systemLocale.toDateTime(dtTerm, dateTimeShortFormat); dateTimeParse.isValid()) {
                 date = dateTimeParse.date();
                 time = dateTimeParse.time();
             } else if (QTime timeParse = QLocale::system().toTime(dtTerm, timeShortFormat); timeParse.isValid()) {
                 time = timeParse;
             }
 
+            if (systemLocale == QLocale::English) {
+                continue;
+            }
+
+            if (QDateTime dateTimeParse = englishLocale.toDateTime(dtTerm, QStringLiteral("M/d/yy h:mm AP")); dateTimeParse.isValid()) {
+                date = dateTimeParse.date();
+                time = dateTimeParse.time();
+            } else if (QTime timeParse = englishLocale.toTime(dtTerm, QStringLiteral("h:mm AP")); timeParse.isValid()) {
                 time = timeParse;
             }
         }
@@ -187,24 +201,15 @@ void DateTimeRunner::match(RunnerContext &context)
         const int end = convTermMatch.hasMatch() ? convTermMatch.capturedEnd() : zonesTerm.length() + 1;
 
         // time zone to convert from: left of conversion word, if empty default to system time zone
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        const QStringRef fromZoneTerm = zonesTerm.midRef(0, start).trimmed();
-#else
         const QStringView fromZoneTerm = QStringView(zonesTerm).mid(0, start).trimmed();
-#endif
-        const QHash<QString, QTimeZone> fromZones = matchingTimeZones(fromZoneTerm, QDateTime(date, time));
-
         // time zone to convert to: right of conversion word, if empty default to system time zone
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        const QStringRef toZoneTerm = zonesTerm.midRef(end).trimmed();
-#else
         const QStringView toZoneTerm = QStringView(zonesTerm).mid(end).trimmed();
-#endif
-        const QHash<QString, QTimeZone> toZones = matchingTimeZones(toZoneTerm, QDateTime(date, time));
-
         if (fromZoneTerm.isEmpty() && toZoneTerm.isEmpty()) {
             return;
         }
+
+        const QHash<QString, QTimeZone> fromZones = matchingTimeZones(fromZoneTerm, QDateTime(date, time));
+        const QHash<QString, QTimeZone> toZones = matchingTimeZones(toZoneTerm, QDateTime(date, time));
 
         for (auto it = fromZones.constBegin(), itEnd = fromZones.constEnd(); it != itEnd; ++it) {
             const QTimeZone fromZone = it.value();

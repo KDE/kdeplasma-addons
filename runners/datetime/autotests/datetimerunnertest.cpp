@@ -63,7 +63,9 @@ void DateTimeRunnerTest::testRemoteTimeInfo()
 
     QCOMPARE(manager->matches().count(), 1);
     QVERIFY(manager->matches().first().text().contains(timeStr));
-    QVERIFY(manager->matches().first().text().contains(timeDiffStr));
+    if (QLocale::system() == QLocale::English) {
+        QVERIFY(manager->matches().first().text().contains(timeDiffStr));
+    }
 }
 
 void DateTimeRunnerTest::testFindTimezones()
@@ -94,7 +96,9 @@ void DateTimeRunnerTest::testFindTimezones_data()
     QTest::addColumn<QString>("expectedTimezone");
 
     QTest::newRow("Should find time zones by city name") << "Harare" << 1 << "Harare";
-    QTest::newRow("Should find time zones by long name") << "Central Africa Time" << 1 << "Central Africa Time";
+    if (QLocale::system() == QLocale::English) {
+        QTest::newRow("Should find time zones by long name") << "Central Africa Time" << 1 << "Central Africa Time";
+    }
     QTest::newRow("Should find time zones by short name") << "GMT+2" << 1 << "GMT+2";
     QTest::newRow("Should find time zones by offset name") << "UTC+02:00" << 1 << "UTC+02:00";
     QTest::newRow("Should find time zones by abbreviation, and show all time zones with that abbreviation") << "PST" << 1 << "(PST)";
