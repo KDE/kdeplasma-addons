@@ -1,14 +1,14 @@
 # translation of krunner_converterrunner.po to Arabic
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# zayed <zayed.alsaidi@gmail.com>, 2008, 2021.
+# zayed <zayed.alsaidi@gmail.com>, 2008, 2021, 2023.
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2015.
 msgid ""
 msgstr ""
 "Project-Id-Version: krunner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-01 02:33+0000\n"
-"PO-Revision-Date: 2021-07-04 22:02+0400\n"
+"PO-Revision-Date: 2023-05-04 10:43+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -17,20 +17,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Lokalize 21.07.70\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: converterrunner.cpp:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
-#| "in] unit\". You can use the Unit converter applet to find all available "
-#| "units."
+#, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
 "unit.You can use the Unit converter applet to find all available units."
 msgstr ""
-"يحوّل قيمة :q: عندما تكون قيمة :q: هي \"القيمة الوحدة [>، إلى] الوحدة\". "
-"يمكنك استخدام بريمج محوّل الوحدات للعثور على كلّ الوحدات المتوفّرة."
+"يحوّل قيمة :q: عندما تكون قيمة :q: هي القيمة الوحدة [>، إلى] الوحدة. يمكنك "
+"استخدام بريمج محوّل الوحدات للعثور على كلّ الوحدات المتوفّرة."
 
 #: converterrunner.cpp:40
 #, kde-format

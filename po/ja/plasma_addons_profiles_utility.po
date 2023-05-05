@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-28 02:57+0000\n"
+"POT-Creation-Date: 2023-05-05 02:14+0000\n"
 "PO-Revision-Date: 2022-10-21 20:50-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -14,12 +14,12 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: profilesmodel.cpp:50
+#: profilesmodel.cpp:54
 #, kde-format
 msgid "Start Kate (no arguments)"
 msgstr ""
 
-#: profilesmodel.cpp:51
+#: profilesmodel.cpp:55
 #, kde-format
 msgid "New Kate Session"
 msgstr ""

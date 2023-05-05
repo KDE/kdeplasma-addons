@@ -1,19 +1,20 @@
 # translation of plasma_calendar_alternatecalendar.po to Slovak
 # Roman Paholik <wizzardsk@gmail.com>, 2022.
 # Matej Mrenica <matejm98mthw@gmail.com>, 2022.
+# Ferdinand Galko <galko.ferdinand@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_calendar_alternatecalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-20 00:59+0000\n"
-"PO-Revision-Date: 2022-10-04 17:51+0200\n"
-"Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
-"Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2023-05-04 19:14+0200\n"
+"Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
+"Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
 "Language: sk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: calendarsystem.h:52
@@ -40,17 +41,15 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Astronomical)"
-msgstr ""
+msgstr "Islamský kalendár (astronomický)"
 
 #: calendarsystem.h:68
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "The Islamic Civil Calendar"
+#, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "The Islamic Civil Calendar (Tabular)"
-msgstr "Islamský občiansky kalendár"
+msgstr "Islamský občiansky kalendár (Tabuľkový)"
 
 #: calendarsystem.h:72
 #, kde-format
@@ -58,7 +57,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Umm al-Qura)"
-msgstr ""
+msgstr "Islamský kalendár (Umm al-Qura)"
 
 #: calendarsystem.h:76
 #, kde-format
@@ -76,7 +75,7 @@ msgstr "Indický národný kalendár"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
-msgstr ""
+msgstr "Hebrejský kalendár"
 
 #: config/qml/AlternateCalendarConfig.qml:38
 #, kde-format
@@ -91,6 +90,8 @@ msgid ""
 "This calendar is based on pure astronomical calculation. It doesn't consider "
 "any crescent visibility criteria."
 msgstr ""
+"Tento kalendár je založený na čisto astronomických výpočtoch. Nezohľadňuje "
+"žiadne kritériá viditeľnosti polmesiaca."
 
 #: config/qml/AlternateCalendarConfig.qml:60
 #, kde-format
@@ -112,13 +113,13 @@ msgctxt ""
 "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
 "number %4 Full date in Hebrew"
 msgid "%1 %2, %3 (%4)"
-msgstr ""
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/indiancalendar.cpp:73
 #, kde-format
 msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 msgid "%1 %2, %3"
-msgstr ""
+msgstr "%1 %2, %3"
 
 #: provider/islamiccalendar.cpp:124
 #, kde-format
@@ -126,10 +127,10 @@ msgctxt ""
 "@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 "
 "Islamic calendar date in Arabic"
 msgid "%1 %2, %3 (%4)"
-msgstr ""
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/qtcalendar.cpp:51
 #, kde-format
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
-msgstr ""
+msgstr "%1 %2, %3"
