@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-28 03:33+0000\n"
+"POT-Creation-Date: 2023-05-05 03:12+0000\n"
 "PO-Revision-Date: 2023-04-29 08:36\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,12 +18,12 @@ msgstr ""
 "plasma_addons_profiles_utility.pot\n"
 "X-Crowdin-File-ID: 41020\n"
 
-#: profilesmodel.cpp:50
+#: profilesmodel.cpp:54
 #, kde-format
 msgid "Start Kate (no arguments)"
 msgstr "启动 Kate (无参数)"
 
-#: profilesmodel.cpp:51
+#: profilesmodel.cpp:55
 #, kde-format
 msgid "New Kate Session"
 msgstr "新建 Kate 会话"
