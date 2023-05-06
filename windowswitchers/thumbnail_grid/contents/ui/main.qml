@@ -12,6 +12,7 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kwin 3.0 as KWin
+import org.kde.kirigami 2.20 as Kirigami
 
 // https://techbase.kde.org/Development/Tutorials/KWin/WindowSwitcher
 // https://github.com/KDE/kwin/blob/master/tabbox/switcheritem.h
@@ -99,7 +100,7 @@ KWin.TabBoxSwitcher {
 
                 model: tabBox.model
 
-                property int iconSize: PlasmaCore.Units.iconSizes.smallMedium
+                property int iconSize: PlasmaCore.Units.iconSizes.huge
                 property int captionRowHeight: 30 * PlasmaCore.Units.devicePixelRatio // The close button is 30x30 in Breeze
                 property int thumbnailWidth: 300 * PlasmaCore.Units.devicePixelRatio
                 property int thumbnailHeight: thumbnailWidth * (1.0/dialogMainItem.screenFactor)
@@ -113,9 +114,12 @@ KWin.TabBoxSwitcher {
                     id: thumbnailGridItem
                     width: thumbnailGridView.cellWidth
                     height: thumbnailGridView.cellHeight
+                    readonly property bool isCurrentItem: GridView.isCurrentItem
 
                     MouseArea {
+                        id: mouseArea
                         anchors.fill: parent
+                        hoverEnabled: true
                         onClicked: {
                             thumbnailGridItem.select();
                         }
@@ -126,45 +130,15 @@ KWin.TabBoxSwitcher {
                     }
 
                     ColumnLayout {
+                        id: columnLayout
                         z: 0
-                        spacing: 0
+                        spacing: PlasmaCore.Units.largeSpacing
                         anchors.fill: parent
                         anchors.leftMargin: hoverItem.margins.left
                         anchors.topMargin: hoverItem.margins.top
                         anchors.rightMargin: hoverItem.margins.right
                         anchors.bottomMargin: hoverItem.margins.bottom
 
-                        RowLayout {
-                            id: captionRow
-                            spacing: PlasmaCore.Units.smallSpacing
-
-                            PlasmaCore.IconItem {
-                                id: iconItem
-                                Layout.minimumHeight: thumbnailGridView.iconSize
-                                Layout.minimumWidth: thumbnailGridView.iconSize
-                                Layout.maximumHeight: Layout.minimumHeight
-                                Layout.maximumWidth: Layout.minimumWidth
-                                source: model.icon
-                                usesPlasmaTheme: false
-                            }
-
-                            PlasmaComponents3.Label {
-                                id: label
-                                Layout.fillWidth: true
-                                text: model.caption
-                                textFormat: Text.PlainText
-                                elide: Text.ElideRight
-                            }
-
-                            PlasmaComponents3.ToolButton {
-                                id: closeButton
-                                visible: model.closeable && typeof tabBox.model.close !== 'undefined' || false
-                                icon.name: 'window-close-symbolic'
-                                onClicked: {
-                                    tabBox.model.close(index);
-                                }
-                            }
-                        }
 
                         // KWin.WindowThumbnail needs a container
                         // otherwise it will be drawn the same size as the parent ColumnLayout
@@ -172,12 +146,49 @@ KWin.TabBoxSwitcher {
                             Layout.fillWidth: true
                             Layout.fillHeight: true
 
-                            // Cannot draw anything (like an icon) on top of thumbnail
                             KWin.WindowThumbnail {
-                                id: thumbnailItem
                                 anchors.fill: parent
                                 wId: windowId
                             }
+
+                            PlasmaCore.IconItem {
+                                anchors.horizontalCenter: parent.horizontalCenter
+                                anchors.verticalCenter: parent.bottom
+                                anchors.verticalCenterOffset: Math.round(-columnLayout.spacing/2)
+                                width: thumbnailGridView.iconSize
+                                height: thumbnailGridView.iconSize
+
+                                source: model.icon
+                                usesPlasmaTheme: false
+                            }
+
+                            PlasmaComponents3.Button {
+                                id: closeButton
+                                anchors {
+                                    right: parent.right
+                                    top: parent.top
+                                    margins: PlasmaCore.Units.smallSpacing
+                                }
+                                visible: model.closeable && typeof tabBox.model.close !== 'undefined' &&
+                                        (mouseArea.containsMouse
+                                         || closeButton.hovered
+                                         || thumbnailGridItem.isCurrentItem
+                                         || Kirigami.Settings.tabletMode
+                                         || Kirigami.Settings.hasTransientTouchInput
+                                        )
+                                icon.name: 'window-close-symbolic'
+                                onClicked: {
+                                    tabBox.model.close(index);
+                                }
+                            }
+                        }
+
+                        PlasmaComponents3.Label {
+                            Layout.fillWidth: true
+                            text: model.caption
+                            horizontalAlignment: Text.AlignHCenter
+                            textFormat: Text.PlainText
+                            elide: Text.ElideRight
                         }
                     }
                 } // GridView.delegate
