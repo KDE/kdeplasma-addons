@@ -85,7 +85,7 @@ void GroupedAppletsContainer::ensureSystrayExists()
     m_internalContainmentItem = m_innerContainment->property("_plasma_graphicObject").value<QQuickItem *>();
     Q_EMIT internalContainmentItemChanged();
 
-    actions()->addAction(QStringLiteral("configure"), m_innerContainment->actions()->action(QStringLiteral("configure")));
+    addAction(QStringLiteral("configure"), m_innerContainment->action(QStringLiteral("configure")));
     connect(m_innerContainment.data(), &Plasma::Containment::configureRequested, this, [this](Plasma::Applet *applet) {
         Q_EMIT containment()->configureRequested(applet);
     });
@@ -96,7 +96,7 @@ void GroupedAppletsContainer::ensureSystrayExists()
     }
 
     // replace internal remove action with ours
-    m_innerContainment->actions()->addAction(QStringLiteral("remove"), actions()->action(QStringLiteral("remove")));
+    m_innerContainment->addAction(QStringLiteral("remove"), action(QStringLiteral("remove")));
 }
 
 void GroupedAppletsContainer::constraintsEvent(Plasma::Types::Constraints constraints)

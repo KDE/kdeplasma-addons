@@ -87,7 +87,7 @@ void GroupingContainment::showPlasmoidMenu(QQuickItem *appletInterface, int x, i
     }
 
     // add run associated action/ remove / alternatives
-    desktopMenu->addActions(applet->actions()->actions());
+    // desktopMenu->addActions(applet->actions()->actions());
 
     if (desktopMenu->isEmpty()) {
         delete desktopMenu;
