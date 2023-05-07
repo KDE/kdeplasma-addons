@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-29 02:54+0000\n"
+"POT-Creation-Date: 2023-05-07 02:49+0000\n"
 "PO-Revision-Date: 2007-10-20 17:18+1000\n"
 "Last-Translator: Sahachart Anukulkitch <drrider@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -24,13 +24,13 @@ msgctxt "@title"
 msgid "General"
 msgstr ""
 
-#: package/contents/ui/CompactRepresentation.qml:71
+#: package/contents/ui/CompactRepresentation.qml:72
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr ""
 
-#: package/contents/ui/CompactRepresentation.qml:78
+#: package/contents/ui/CompactRepresentation.qml:79
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -75,52 +75,52 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr ""
 
-#: package/contents/ui/main.qml:109
+#: package/contents/ui/main.qml:114
 #, fuzzy, kde-format
 #| msgid "Copy Color Value"
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "คัดลอกค่าสี"
 
-#: package/contents/ui/main.qml:110
+#: package/contents/ui/main.qml:115
 #, fuzzy, kde-format
 #| msgid "Clear History"
 msgctxt "@action"
 msgid "Clear History"
 msgstr "ล้างประวัติ"
 
-#: package/contents/ui/main.qml:111
+#: package/contents/ui/main.qml:116
 #, fuzzy, kde-format
 #| msgid "Clear History"
 msgctxt "@action"
 msgid "View History"
 msgstr "ล้างประวัติ"
 
-#: package/contents/ui/main.qml:113
+#: package/contents/ui/main.qml:118
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr ""
 
-#: package/contents/ui/main.qml:150
+#: package/contents/ui/main.qml:155
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr ""
 
-#: package/contents/ui/main.qml:154
+#: package/contents/ui/main.qml:160
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr ""
 
-#: package/contents/ui/main.qml:339
+#: package/contents/ui/main.qml:345
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:349
+#: package/contents/ui/main.qml:355
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
