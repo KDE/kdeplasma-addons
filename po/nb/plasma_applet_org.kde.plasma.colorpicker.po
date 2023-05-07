@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-29 02:19+0000\n"
+"POT-Creation-Date: 2023-05-07 02:16+0000\n"
 "PO-Revision-Date: 2010-06-10 15:26+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -23,6 +23,12 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "General"
+msgstr ""
+
+#: package/contents/ui/ColorCircle.qml:40
+#, kde-format
+msgctxt "@info:usagetip"
+msgid "Middle-click to copy the color code"
 msgstr ""
 
 #: package/contents/ui/CompactRepresentation.qml:71

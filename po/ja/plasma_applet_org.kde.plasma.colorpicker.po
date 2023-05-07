@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-04-29 02:19+0000\n"
+"POT-Creation-Date: 2023-05-07 02:16+0000\n"
 "PO-Revision-Date: 2021-10-17 14:03-0700\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -25,6 +25,12 @@ msgstr ""
 msgctxt "@title"
 msgid "General"
 msgstr "全般"
+
+#: package/contents/ui/ColorCircle.qml:40
+#, kde-format
+msgctxt "@info:usagetip"
+msgid "Middle-click to copy the color code"
+msgstr ""
 
 #: package/contents/ui/CompactRepresentation.qml:71
 #, kde-format
