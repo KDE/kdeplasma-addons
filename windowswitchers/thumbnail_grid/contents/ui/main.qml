@@ -3,6 +3,7 @@
  This file is part of the KDE project.
 
  SPDX-FileCopyrightText: 2020 Chris Holland <zrenfire@gmail.com>
+ SPDX-FileCopyrightText: 2023 Nate Graham <nate@kde.org>
 
  SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -21,7 +22,6 @@ KWin.TabBoxSwitcher {
     currentIndex: thumbnailGridView.currentIndex
 
     PlasmaCore.Dialog {
-        id: dialog
         location: PlasmaCore.Types.Floating
         visible: tabBox.visible
         flags: Qt.X11BypassWindowManagerHint
@@ -100,10 +100,11 @@ KWin.TabBoxSwitcher {
 
                 model: tabBox.model
 
-                property int iconSize: PlasmaCore.Units.iconSizes.huge
-                property int captionRowHeight: 30 * PlasmaCore.Units.devicePixelRatio // The close button is 30x30 in Breeze
-                property int thumbnailWidth: 300 * PlasmaCore.Units.devicePixelRatio
-                property int thumbnailHeight: thumbnailWidth * (1.0/dialogMainItem.screenFactor)
+                readonly property int iconSize: PlasmaCore.Units.iconSizes.huge
+                readonly property int captionRowHeight: PlasmaCore.Units.gridUnit * 2
+                readonly property int columnSpacing: PlasmaCore.Units.largeSpacing
+                readonly property int thumbnailWidth: PlasmaCore.Units.gridUnit * 16
+                readonly property int thumbnailHeight: thumbnailWidth * (1.0/dialogMainItem.screenFactor)
                 cellWidth: hoverItem.margins.left + thumbnailWidth + hoverItem.margins.right
                 cellHeight: hoverItem.margins.top + captionRowHeight + thumbnailHeight + hoverItem.margins.bottom
 
@@ -132,7 +133,7 @@ KWin.TabBoxSwitcher {
                     ColumnLayout {
                         id: columnLayout
                         z: 0
-                        spacing: PlasmaCore.Units.largeSpacing
+                        spacing: thumbnailGridView.columnSpacing
                         anchors.fill: parent
                         anchors.leftMargin: hoverItem.margins.left
                         anchors.topMargin: hoverItem.margins.top
@@ -187,6 +188,7 @@ KWin.TabBoxSwitcher {
                             Layout.fillWidth: true
                             text: model.caption
                             horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
                             textFormat: Text.PlainText
                             elide: Text.ElideRight
                         }
@@ -194,7 +196,6 @@ KWin.TabBoxSwitcher {
                 } // GridView.delegate
 
                 highlight: PlasmaCore.FrameSvgItem {
-                    id: highlightItem
                     imagePath: "widgets/viewitem"
                     prefix: "hover"
                 }
