@@ -135,10 +135,10 @@ KWin.TabBoxSwitcher {
                         z: 0
                         spacing: thumbnailGridView.columnSpacing
                         anchors.fill: parent
-                        anchors.leftMargin: hoverItem.margins.left
-                        anchors.topMargin: hoverItem.margins.top
-                        anchors.rightMargin: hoverItem.margins.right
-                        anchors.bottomMargin: hoverItem.margins.bottom
+                        anchors.leftMargin: hoverItem.margins.left * 2
+                        anchors.topMargin: hoverItem.margins.top * 2
+                        anchors.rightMargin: hoverItem.margins.right * 2
+                        anchors.bottomMargin: hoverItem.margins.bottom * 2
 
 
                         // KWin.WindowThumbnail needs a container
@@ -168,7 +168,6 @@ KWin.TabBoxSwitcher {
                                 anchors {
                                     right: parent.right
                                     top: parent.top
-                                    margins: PlasmaCore.Units.smallSpacing
                                 }
                                 visible: model.closeable && typeof tabBox.model.close !== 'undefined' &&
                                         (mouseArea.containsMouse
