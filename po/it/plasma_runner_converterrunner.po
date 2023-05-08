@@ -3,36 +3,32 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Federico Zenith <zenith@chemeng.ntnu.no>, 2008.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2008.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2020.
+# Vincenzo Reale <smart2128vr@gmail.com>, 2020, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-01 02:33+0000\n"
-"PO-Revision-Date: 2020-10-26 01:20+0100\n"
-"Last-Translator: Vincenzo Reale <smart2128@baslug.org>\n"
+"PO-Revision-Date: 2023-05-02 09:22+0200\n"
+"Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.08.2\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: converterrunner.cpp:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
-#| "in] unit\". You can use the Unit converter applet to find all available "
-#| "units."
+#, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
 "unit.You can use the Unit converter applet to find all available units."
 msgstr ""
-"Converte il valore di :q: quando :q: è composto da \"unità di valore [>, a, "
-"come, in] valore\". Puoi utilizzare l'applet di conversione Unità per "
-"trovare tutte le unità disponibili."
+"Converte il valore di :q: quando :q: è composto da unità di valore [>, a, "
+"come, in] unità. Puoi utilizzare l'applet di conversione Unità per trovare "
+"tutte le unità disponibili."
 
 #: converterrunner.cpp:40
 #, kde-format

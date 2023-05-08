@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2015, 2016, 2018, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2015, 2016, 2018, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-07 02:16+0000\n"
-"PO-Revision-Date: 2022-12-24 08:46+0200\n"
+"PO-Revision-Date: 2023-05-07 23:37+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -30,7 +30,7 @@ msgstr "Загальне"
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
-msgstr ""
+msgstr "Клацніть середньою кнопкою, щоб скопіювати код кольору"
 
 #: package/contents/ui/CompactRepresentation.qml:71
 #, kde-format
