@@ -5,7 +5,7 @@
             {
                 "Email": "jowenn@kde.org",
                 "Name": "Joseph Wenninger",
-                "Name[ar]": "Joseph Wenninger",
+                "Name[ar]": "جوزيف وينينجر",
                 "Name[az]": "Joseph Wenninger",
                 "Name[bg]": "Joseph Wenninger",
                 "Name[ca@valencia]": "Joseph Wenninger",
@@ -173,6 +173,7 @@
         "License": "GPL-2.0+",
         "Name": "Binary Clock",
         "Name[ar]": "ساعة ثنائية",
+        "Name[ast]": "Reló binariu",
         "Name[az]": "Binar saat",
         "Name[bg]": "Двоичен часовник",
         "Name[ca@valencia]": "Rellotge binari",
