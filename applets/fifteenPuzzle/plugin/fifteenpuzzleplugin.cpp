@@ -4,22 +4,28 @@
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
-#include "fifteenpuzzleplugin.h"
 #include "fifteenimageprovider.h"
 
-// Qt
 #include <QDebug>
+#include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
-void FifteenPuzzlePlugin::registerTypes(const char *uri)
+class FifteenPuzzlePlugin : public QQmlExtensionPlugin
 {
-    Q_UNUSED(uri);
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.fifteenpuzzle"));
-    // Do some dummy registration, otherwise the plugin will be ignored at runtime
-    qmlRegisterTypeNotAvailable(uri, 0, 1, "FifteenPuzzle", QStringLiteral("fifteenpuzzle"));
-}
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
-void FifteenPuzzlePlugin::initializeEngine(QQmlEngine *engine, const char *uri)
-{
-    qDebug() << "initializeEngine called, uri is " << uri;
-    engine->addImageProvider(QStringLiteral("fifteenpuzzle"), new FifteenImageProvider());
-}
+public:
+    void registerTypes(const char *uri) override
+    {
+        // Do some dummy registration, otherwise the plugin will be ignored at runtime
+        qmlRegisterTypeNotAvailable(uri, 0, 1, "FifteenPuzzle", QStringLiteral("fifteenpuzzle"));
+    }
+    void initializeEngine(QQmlEngine *engine, const char *uri) override
+    {
+        qDebug() << "initializeEngine called, uri is " << uri;
+        engine->addImageProvider(QStringLiteral("fifteenpuzzle"), new FifteenImageProvider());
+    }
+};
+
+#include "fifteenpuzzleplugin.moc"

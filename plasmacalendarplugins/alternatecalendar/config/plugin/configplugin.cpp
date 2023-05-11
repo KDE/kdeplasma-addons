@@ -5,17 +5,24 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "configplugin.h"
-
 #include <QQmlEngine>
 
 #include "../../calendarsystem.h"
 #include "configstorage.h"
 
-void AlternateCalendarConfigPlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(uri == QByteArray("org.kde.plasmacalendar.alternatecalendarconfig"));
+#include <QQmlExtensionPlugin>
 
-    qmlRegisterType<ConfigStorage>(uri, 1, 0, "ConfigStorage");
-    qmlRegisterUncreatableType<CalendarSystem>(uri, 1, 0, "CalendarSystem", QStringLiteral("Error: only enums"));
-}
+class AlternateCalendarConfigPlugin : public QQmlExtensionPlugin
+{
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+
+public:
+    void registerTypes(const char *uri) override
+    {
+        qmlRegisterType<ConfigStorage>(uri, 1, 0, "ConfigStorage");
+        qmlRegisterUncreatableType<CalendarSystem>(uri, 1, 0, "CalendarSystem", QStringLiteral("Error: only enums"));
+    }
+};
+
+#include "configplugin.moc"

@@ -4,14 +4,21 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#include "mediaframeplugin.h"
 #include "mediaframe.h"
 
-// Qt
+#include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
-void MediaFramePlugin::registerTypes(const char *uri)
+class MediaFramePlugin : public QQmlExtensionPlugin
 {
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.mediaframe"));
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
-    qmlRegisterType<MediaFrame>(uri, 2, 0, "MediaFrame");
-}
+public:
+    void registerTypes(const char *uri) override
+    {
+        qmlRegisterType<MediaFrame>(uri, 2, 0, "MediaFrame");
+    }
+};
+
+#include "mediaframeplugin.moc"

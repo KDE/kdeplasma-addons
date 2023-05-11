@@ -4,14 +4,21 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "configplugin.h"
-
 #include "configstorage.h"
 
-// Qt
 #include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
-void AstronomicalConfigPlugin::registerTypes(const char *uri)
+class AstronomicalConfigPlugin : public QQmlExtensionPlugin
 {
-    qmlRegisterType<ConfigStorage>(uri, 1, 0, "ConfigStorage");
-}
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+
+public:
+    void registerTypes(const char *uri) override
+    {
+        qmlRegisterType<ConfigStorage>(uri, 1, 0, "ConfigStorage");
+    }
+};
+
+#include "configplugin.moc"

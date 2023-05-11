@@ -5,13 +5,13 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "notesplugin.h"
 #include "documenthandler.h"
 #include "note.h"
 #include "notemanager.h"
 
-// Qt
 #include <QFile>
+#include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
 class NotesHelper : public QObject
 {
@@ -41,18 +41,22 @@ public:
     }
 };
 
-static QObject *notesHelper_provider(QQmlEngine *, QJSEngine *)
+class NotesPlugin : public QQmlExtensionPlugin
 {
-    return new NotesHelper();
-}
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
+public:
+    void registerTypes(const char *uri) override
 
-void NotesPlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.notes"));
-    qmlRegisterType<DocumentHandler>(uri, 0, 1, "DocumentHandler");
-    qmlRegisterType<NoteManager>(uri, 0, 1, "NoteManager");
-    qmlRegisterUncreatableType<Note>(uri, 0, 1, "Note", QStringLiteral("Create through NoteManager"));
-    qmlRegisterSingletonType<NotesHelper>(uri, 0, 1, "NotesHelper", notesHelper_provider);
-}
+    {
+        Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.notes"));
+        qmlRegisterType<DocumentHandler>(uri, 0, 1, "DocumentHandler");
+        qmlRegisterType<NoteManager>(uri, 0, 1, "NoteManager");
+        qmlRegisterUncreatableType<Note>(uri, 0, 1, "Note", QStringLiteral("Create through NoteManager"));
+        qmlRegisterSingletonType<NotesHelper>(uri, 0, 1, "NotesHelper", [](QQmlEngine *, QJSEngine *) {
+            return new NotesHelper();
+        });
+    }
+};
 
 #include "notesplugin.moc"

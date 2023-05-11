@@ -4,15 +4,21 @@
  *  SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
-#include "quicklaunchplugin.h"
 #include "quicklaunch_p.h"
 
-// Qt
 #include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
-void QuicklaunchPlugin::registerTypes(const char *uri)
+class QuicklaunchPlugin : public QQmlExtensionPlugin
 {
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.quicklaunch"));
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
-    qmlRegisterType<QuicklaunchPrivate>(uri, 1, 0, "Logic");
-}
+public:
+    void registerTypes(const char *uri) override
+    {
+        qmlRegisterType<QuicklaunchPrivate>(uri, 1, 0, "Logic");
+    }
+};
+
+#include "quicklaunchplugin.moc"

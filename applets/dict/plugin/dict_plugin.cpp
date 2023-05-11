@@ -4,7 +4,6 @@
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
-#include "dict_plugin.h"
 #include "dict_object.h"
 #include "dictionariesmodel.h"
 
@@ -12,16 +11,26 @@
 #include <QAbstractSocket>
 #include <QWebEngineUrlScheme>
 
-void DictPlugin::registerTypes(const char *uri)
+#include <QQmlEngine>
+#include <QQmlExtensionPlugin>
+
+class DictPlugin : public QQmlExtensionPlugin
 {
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.dict"));
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
-    qRegisterMetaType<QAbstractSocket::SocketError>();
+public:
+    void registerTypes(const char *uri) override
+    {
+        qRegisterMetaType<QAbstractSocket::SocketError>();
 
-    qmlRegisterAnonymousType<QAbstractListModel>("", 1);
+        qmlRegisterAnonymousType<QAbstractListModel>("", 1);
 
-    qmlRegisterType<DictObject>(uri, 1, 0, "DictObject");
-    qmlRegisterType<DictionariesModel>(uri, 1, 0, "DictionariesModel");
+        qmlRegisterType<DictObject>(uri, 1, 0, "DictObject");
+        qmlRegisterType<DictionariesModel>(uri, 1, 0, "DictionariesModel");
 
-    QWebEngineUrlScheme::registerScheme(QWebEngineUrlScheme(QByteArrayLiteral("dict")));
-}
+        QWebEngineUrlScheme::registerScheme(QWebEngineUrlScheme(QByteArrayLiteral("dict")));
+    }
+};
+
+#include "dict_plugin.moc"

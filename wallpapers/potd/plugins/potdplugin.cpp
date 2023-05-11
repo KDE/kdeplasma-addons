@@ -20,8 +20,6 @@ class PotdPlugin : public QQmlExtensionPlugin
 public:
     void registerTypes(const char *uri) override
     {
-        Q_ASSERT(uri == QByteArrayLiteral("org.kde.plasma.wallpapers.potd"));
-
         qmlRegisterType<PotdBackend>(uri, 1, 0, "PotdBackend");
         qmlRegisterType<PotdProviderModel>(uri, 1, 0, "PotdProviderModel");
 

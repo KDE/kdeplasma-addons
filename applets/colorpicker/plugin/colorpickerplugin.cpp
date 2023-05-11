@@ -4,10 +4,9 @@
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
-#include "colorpickerplugin.h"
-
-// Qt
 #include <QColor>
+#include <QQmlEngine>
+#include <QQmlExtensionPlugin>
 
 #include "grabwidget.h"
 
@@ -22,16 +21,19 @@ public:
     }
 };
 
-static QObject *utils_singletontype_provider(QQmlEngine *, QJSEngine *)
+class ColorPickerPlugin : public QQmlExtensionPlugin
 {
-    return new Utils();
-}
+    Q_OBJECT
+    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
 
-void ColorPickerPlugin::registerTypes(const char *uri)
-{
-    Q_ASSERT(QLatin1String(uri) == QLatin1String("org.kde.plasma.private.colorpicker"));
-    qmlRegisterType<GrabWidget>(uri, 2, 0, "GrabWidget");
-    qmlRegisterSingletonType<Utils>(uri, 2, 0, "Utils", utils_singletontype_provider);
-}
+public:
+    void registerTypes(const char *uri) override
+    {
+        qmlRegisterType<GrabWidget>(uri, 2, 0, "GrabWidget");
+        qmlRegisterSingletonType<Utils>(uri, 2, 0, "Utils", [](QQmlEngine *, QJSEngine *) {
+            return new Utils();
+        });
+    }
+};
 
 #include "colorpickerplugin.moc"
