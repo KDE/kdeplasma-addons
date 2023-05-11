@@ -2,7 +2,8 @@
 
 # SPDX-License-Identifier: GPL-2.0-or-later
 
-add_library(plasmacalendaralternatecalendarconfig SHARED configplugin.cpp configstorage.cpp ../../calendarsystem.h)
+ecm_add_qml_module(plasmacalendaralternatecalendarconfig URI org.kde.plasmacalendar.alternatecalendarconfig)
+target_sources(plasmacalendaralternatecalendarconfig PRIVATE configplugin.cpp configstorage.cpp ../../calendarsystem.h)
 
 target_link_libraries(plasmacalendaralternatecalendarconfig
     Qt::Qml
@@ -10,6 +11,4 @@ target_link_libraries(plasmacalendaralternatecalendarconfig
     KF6::ConfigCore
     KF6::I18n
 )
-
-install(TARGETS plasmacalendaralternatecalendarconfig DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasmacalendar/alternatecalendarconfig)
-install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasmacalendar/alternatecalendarconfig)
+ecm_finalize_qml_module(plasmacalendaralternatecalendarconfig)

@@ -1,17 +1,11 @@
-set(purposeplugin_SRCS
-    purposeplugin.cpp
-    contenttracker.cpp
-)
-
 set(activitymanagerslc_xml org.kde.ActivityManager.SLC.xml)
 qt_add_dbus_interface(purposeplugin_SRCS ${activitymanagerslc_xml} activitymanagerslc_interface)
 
-add_library(purposeplugin SHARED ${purposeplugin_SRCS})
-
+ecm_add_qml_module(purposeplugin URI org.kde.plasma.private.purpose)
+target_sources(purposeplugin PRIVATE purposeplugin.cpp contenttracker.cpp ${purposeplugin_SRCS})
 target_link_libraries(purposeplugin
-                        Qt::Quick
-                        Qt::DBus
-                        KF6::CoreAddons)
-
-install(TARGETS purposeplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/purpose)
-install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/purpose)
+    Qt::Quick
+    Qt::DBus
+    KF6::CoreAddons
+)
+ecm_finalize_qml_module(purposeplugin)

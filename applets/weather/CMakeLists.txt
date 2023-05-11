@@ -10,19 +10,16 @@ target_link_libraries(org.kde.plasma.weather
 )
 
 install(FILES wind-arrows.svgz DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/weather/)
-
 plasma_install_package(package org.kde.plasma.weather)
 
+ecm_add_qml_module(weatherplugin URI org.kde.plasma.private.weather)
 
-set(weather_SRCS
+target_sources(weatherplugin PRIVATE
     plugin/plugin.cpp
     plugin/util.cpp
     plugin/abstractunitlistmodel.cpp
     plugin/locationlistmodel.cpp
 )
-
-add_library(weatherplugin SHARED ${weather_SRCS})
-
 target_link_libraries(weatherplugin
     KF6::Plasma
     KF6::Plasma5Support
@@ -30,6 +27,4 @@ target_link_libraries(weatherplugin
     KF6::I18n
     Qt::Qml
 )
-
-install(TARGETS weatherplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/weather)
-install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/weather)
+ecm_finalize_qml_module(weatherplugin)

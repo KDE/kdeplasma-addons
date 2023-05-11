@@ -1,14 +1,13 @@
-set(quicklaunchplugin_SRCS
+ecm_add_qml_module(quicklaunchplugin URI org.kde.plasma.private.quicklaunch)
+target_sources(quicklaunchplugin PRIVATE
     quicklaunch_p.cpp
-    quicklaunchplugin.cpp)
-
-add_library(quicklaunchplugin SHARED ${quicklaunchplugin_SRCS})
+    quicklaunchplugin.cpp
+)
 target_link_libraries(quicklaunchplugin
     Qt::Core
     Qt::Qml
     KF6::KIOCore
     KF6::KIOWidgets
-    KF6::Notifications)
-
-install(TARGETS quicklaunchplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/quicklaunch)
-install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/quicklaunch)
+    KF6::Notifications
+)
+ecm_finalize_qml_module(quicklaunchplugin)

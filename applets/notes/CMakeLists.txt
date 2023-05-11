@@ -1,14 +1,9 @@
-
-#######################################################################################
-# Package
-plasma_install_package(package org.kde.plasma.notes)
-
-
-#######################################################################################
-# Notes Library
 add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.notes")
 
-set(notes_SRCS
+plasma_install_package(package org.kde.plasma.notes)
+
+ecm_add_qml_module(notesplugin URI org.kde.plasma.private.notes)
+target_sources(notesplugin PRIVATE
     plugin/abstractnoteloader.cpp
     plugin/documenthandler.cpp
     plugin/filesystemnoteloader.cpp
@@ -16,12 +11,8 @@ set(notes_SRCS
     plugin/notemanager.cpp
     plugin/notesplugin.cpp
 )
-
-add_library(notesplugin SHARED ${notes_SRCS})
-
 target_link_libraries(notesplugin
-                        Qt::Quick
-                        KF6::CoreAddons)
-
-install(TARGETS notesplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/notes)
-install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/notes)
+    Qt::Quick
+    KF6::CoreAddons
+)
+ecm_finalize_qml_module(notesplugin)

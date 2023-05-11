@@ -1,12 +1,10 @@
 plasma_install_package(package org.kde.plasma.colorpicker)
 
-set(colorpickerplugin_SRCS
+ecm_add_qml_module(colorpickerplugin URI org.kde.plasma.private.colorpicker)
+
+target_sources(colorpickerplugin PRIVATE
     plugin/grabwidget.cpp
     plugin/colorpickerplugin.cpp
 )
-
-install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/colorpicker)
-add_library(colorpickerplugin SHARED ${colorpickerplugin_SRCS})
-
 target_link_libraries(colorpickerplugin Qt::DBus Qt::Gui Qt::Qml Qt::Widgets)
-install(TARGETS colorpickerplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/colorpicker)
+ecm_finalize_qml_module(colorpickerplugin)

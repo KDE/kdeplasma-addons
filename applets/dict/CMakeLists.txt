@@ -6,40 +6,31 @@ set_package_properties(Qt6WebEngine PROPERTIES
     TYPE OPTIONAL
 )
 
-if (Qt6WebEngineQuick_FOUND)
+if (NOT Qt6WebEngineQuick_FOUND)
+    return()
+endif()
 
-#######################################################################################
-# Package (metadata.desktop and QML)
 plasma_install_package(package org.kde.plasma_applet_dict)
 # TODO: fix pluginid "org.kde.plasma_applet_dict" into properly namespaced id "org.kde.plasma.dict"
 
-#######################################################################################
-# Icon for the package
 ecm_install_icons(
     ICONS sc-apps-accessories-dictionary.svgz
     DESTINATION ${KDE_INSTALL_ICONDIR}
 )
 
 #######################################################################################
-# C++ Plugin
-
 add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma_applet_dict")
 
-set(dict_SRCS
+ecm_add_qml_module(dictplugin URI org.kde.plasma.private.dict)
+target_sources(dictplugin PRIVATE
   plugin/dict_plugin.cpp
   plugin/dict_object.cpp
   plugin/dictionariesmodel.cpp
 )
-
-add_library(dictplugin SHARED ${dict_SRCS})
 target_link_libraries(dictplugin
     KF6::I18n
     Qt::Quick
     Qt::WebEngineQuick
     engine_dict_static
 )
-
-install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/dict)
-install(TARGETS dictplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/dict)
-
-endif()
+ecm_finalize_qml_module(dictplugin)

@@ -5,13 +5,10 @@ ecm_install_icons(
 
 plasma_install_package(package org.kde.plasma.fifteenpuzzle)
 
-set(fifteenpuzzleplugin_SRCS
+ecm_add_qml_module(fifteenpuzzleplugin URI org.kde.plasma.private.fifteenpuzzle)
+target_sources(fifteenpuzzleplugin PRIVATE
     plugin/fifteenimageprovider.cpp
     plugin/fifteenpuzzleplugin.cpp
 )
-
-add_library(fifteenpuzzleplugin SHARED ${fifteenpuzzleplugin_SRCS})
-
 target_link_libraries(fifteenpuzzleplugin Qt::Quick Qt::Qml)
-install(TARGETS fifteenpuzzleplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/fifteenpuzzle)
-install(FILES plugin/qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/private/fifteenpuzzle)
+ecm_finalize_qml_module(fifteenpuzzleplugin)

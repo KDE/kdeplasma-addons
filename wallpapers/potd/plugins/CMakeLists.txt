@@ -9,15 +9,14 @@ ecm_qt_declare_logging_category(plasma_wallpaper_potdplugin_debug
                                 CATEGORY_NAME kde.wallpapers.potd
                                 DEFAULT_SEVERITY Info)
 
-set(potd_engine_SRCS
+ecm_add_qml_module(plasma_wallpaper_potdplugin URI org.kde.plasma.wallpapers.potd)
+target_sources(plasma_wallpaper_potdplugin PRIVATE
 	cachedprovider.cpp
 	potdbackend.cpp
 	potdengine.cpp
 	potdprovidermodel.cpp
 	potdplugin.cpp
 )
-
-add_library(plasma_wallpaper_potdplugin SHARED ${potd_engine_SRCS})
 target_link_libraries(plasma_wallpaper_potdplugin plasmapotdprovidercore
     KF6::I18n
     KF6::KIOCore
@@ -27,9 +26,7 @@ target_link_libraries(plasma_wallpaper_potdplugin plasmapotdprovidercore
     Qt::Widgets # QFileDialog
     plasma_wallpaper_potdplugin_debug
 )
-
-install(TARGETS plasma_wallpaper_potdplugin DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)
-install(FILES qmldir DESTINATION ${KDE_INSTALL_QMLDIR}/org/kde/plasma/wallpapers/potd)
+ecm_finalize_qml_module(plasma_wallpaper_potdplugin)
 
 ########### plugin core library ############
 set(POTDPROVIDER_VERSION 2.0.0)
