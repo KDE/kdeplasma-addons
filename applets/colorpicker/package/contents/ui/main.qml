@@ -14,6 +14,8 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kquickcontrolsaddons 2.1 // KCMShell
+import org.kde.kwindowsystem 1.0
 
 import org.kde.plasma.private.colorpicker 2.0 as ColorPicker
 import "logic.js" as Logic
@@ -148,12 +150,24 @@ Item {
 
                 opacity: 0
                 iconName: "edit-none"
-                text: i18nc("@info:usagetip", "No colors")
+                text: KX11Extras.compositingActive ? i18nc("@info:usagetip", "No colors") : i18nc("@info:status when color picking is unavailable", "Color picking unavailable when compositing is disabled")
+                explanation: KX11Extras.compositingActive ? "" : i18nc("@info:status when color pick is unavailable", "Compositing has been manually disabled or blocked by a running application")
 
-                helpfulAction: QQC2.Action {
+                helpfulAction: KX11Extras.compositingActive ? pickColorAction : enableCompositingAction
+
+                QQC2.Action {
+                    id: pickColorAction
                     icon.name: "color-picker"
                     text: i18nc("@action:button", "Pick Color")
                     onTriggered: root.pickColor()
+                }
+
+                QQC2.Action {
+                    id: enableCompositingAction
+                    enabled: KCMShell.authorize("kwincompositing.desktop").length > 0
+                    icon.name: "settings-configure"
+                    text: i18nc("@action:button open kwincompositing KCM", "Configure Compositing")
+                    onTriggered: KCMShell.openSystemSettings("kwincompositing")
                 }
 
                 NumberAnimation {

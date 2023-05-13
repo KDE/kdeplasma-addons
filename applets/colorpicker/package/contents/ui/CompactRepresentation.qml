@@ -7,6 +7,7 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
+import org.kde.kwindowsystem 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.plasmoid 2.0
@@ -68,6 +69,7 @@ DropArea {
             property Item loadingIndicator: null
 
             display: PlasmaComponents3.AbstractButton.IconOnly
+            enabled: KX11Extras.compositingActive
             text: i18nc("@info:tooltip", "Pick color")
 
             onClicked: root.pickColor()
