@@ -56,13 +56,13 @@ msgstr "الكلّ"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "1080p"
-msgstr "١٠٨٠بكسل"
+msgstr "1080بكسل"
 
 #: package/contents/ui/config.qml:98
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "4K"
-msgstr "٤ك"
+msgstr "4ك"
 
 #: package/contents/ui/config.qml:102
 #, kde-format

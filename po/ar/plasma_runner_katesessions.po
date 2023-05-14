@@ -2,13 +2,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # zayed <zayed.alsaidi@gmail.com>, 2008.
-# Safa Alfulaij <safa1996alfulaij@gmail.com>, ٢٠١٦.
+# Safa Alfulaij <safa1996alfulaij@gmail.com>, 2016.
 msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-06-16 00:49+0000\n"
-"PO-Revision-Date: ٢٠١٦-٠٩-٠٢ ٢٣:٥٨+0300\n"
+"PO-Revision-Date: 2016-09-02 23:58+0300\n"
 "Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
 "Language: ar\n"
