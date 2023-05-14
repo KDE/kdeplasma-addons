@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-07 02:16+0000\n"
+"POT-Creation-Date: 2023-05-14 02:27+0000\n"
 "PO-Revision-Date: 2023-05-07 15:10+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -29,13 +29,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Midden-klik om de kleurcode te kopiëren"
 
-#: package/contents/ui/CompactRepresentation.qml:71
+#: package/contents/ui/CompactRepresentation.qml:73
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Kies een kleur"
 
-#: package/contents/ui/CompactRepresentation.qml:78
+#: package/contents/ui/CompactRepresentation.qml:80
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -81,49 +81,68 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Aantal voorbeelden:"
 
-#: package/contents/ui/main.qml:110
+#: package/contents/ui/main.qml:112
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Kleurendialoog openen"
 
-#: package/contents/ui/main.qml:111
+#: package/contents/ui/main.qml:113
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Geschiedenis wissen"
 
-#: package/contents/ui/main.qml:112
+#: package/contents/ui/main.qml:114
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Geschiedenis bekijken"
 
-#: package/contents/ui/main.qml:114
+#: package/contents/ui/main.qml:116
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Naar klembord kopiëren"
 
-#: package/contents/ui/main.qml:151
+#: package/contents/ui/main.qml:153
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Geen kleuren"
 
-#: package/contents/ui/main.qml:155
+#: package/contents/ui/main.qml:153
+#, kde-format
+msgctxt "@info:status when color picking is unavailable"
+msgid "Color picking unavailable when compositing is disabled"
+msgstr ""
+
+#: package/contents/ui/main.qml:154
+#, kde-format
+msgctxt "@info:status when color pick is unavailable"
+msgid ""
+"Compositing has been manually disabled or blocked by a running application"
+msgstr ""
+
+#: package/contents/ui/main.qml:161
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Kies een kleur"
 
-#: package/contents/ui/main.qml:340
+#: package/contents/ui/main.qml:169
+#, kde-format
+msgctxt "@action:button open kwincompositing KCM"
+msgid "Configure Compositing"
+msgstr ""
+
+#: package/contents/ui/main.qml:354
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Gekopieerd!"
 
-#: package/contents/ui/main.qml:350
+#: package/contents/ui/main.qml:364
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
