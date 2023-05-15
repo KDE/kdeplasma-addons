@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-14 02:27+0000\n"
-"PO-Revision-Date: 2023-05-07 19:03+0200\n"
+"PO-Revision-Date: 2023-05-14 21:43+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -115,7 +115,7 @@ msgstr "Nulle colores "
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
+msgstr "Collectin de color non disponibile quando composition es dishabilitate"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
@@ -123,6 +123,8 @@ msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
+"Composition ha essite dishabilitate manualmente o blocate per un application "
+"executante"
 
 #: package/contents/ui/main.qml:161
 #, kde-format
@@ -134,7 +136,7 @@ msgstr "Selige color"
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "Configura composition"
 
 #: package/contents/ui/main.qml:354
 #, kde-format

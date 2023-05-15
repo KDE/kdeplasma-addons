@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-14 02:27+0000\n"
-"PO-Revision-Date: 2023-05-07 15:10+0200\n"
+"PO-Revision-Date: 2023-05-14 12:05+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -115,7 +115,7 @@ msgstr "Geen kleuren"
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
+msgstr "Kleur kiezen is niet beschikbaar wanneer compositing is uitgeschakeld"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
@@ -123,6 +123,8 @@ msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
+"Compositing is handmatig uitgeschakeld of geblokkeerd door een actieve "
+"toepassing"
 
 #: package/contents/ui/main.qml:161
 #, kde-format
@@ -134,7 +136,7 @@ msgstr "Kies een kleur"
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "Compositing configureren"
 
 #: package/contents/ui/main.qml:354
 #, kde-format

@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-14 02:27+0000\n"
-"PO-Revision-Date: 2023-05-07 08:15+0200\n"
+"PO-Revision-Date: 2023-05-14 09:37+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -123,7 +123,7 @@ msgstr "Ni barv"
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
+msgstr "Pobiranje barv ni možno, kadar je sestavljanje barv onemogočeno"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
@@ -131,6 +131,7 @@ msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
+"Sestavljanje barv je bilo ročno onemogočeno ali blokirano z aplikacijo v teku"
 
 #: package/contents/ui/main.qml:161
 #, kde-format
@@ -142,7 +143,7 @@ msgstr "Izberite barvo"
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "Konfiguriraj sestavljanje barv"
 
 #: package/contents/ui/main.qml:354
 #, kde-format

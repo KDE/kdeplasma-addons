@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-14 02:27+0000\n"
-"PO-Revision-Date: 2023-05-07 22:00+0200\n"
+"PO-Revision-Date: 2023-05-14 10:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -120,6 +120,7 @@ msgstr "Sense color"
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr ""
+"La selecció de colors no està disponible si s'ha desactivat la composició"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
@@ -127,6 +128,8 @@ msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
+"La composició s'ha desactivat manualment o l'ha bloquejat una aplicació en "
+"execució"
 
 #: package/contents/ui/main.qml:161
 #, kde-format
@@ -138,7 +141,7 @@ msgstr "Selecciona un color"
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "Configura la composició"
 
 #: package/contents/ui/main.qml:354
 #, kde-format
