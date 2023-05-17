@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-14 02:27+0000\n"
-"PO-Revision-Date: 2023-05-09 13:14+0200\n"
+"PO-Revision-Date: 2023-05-15 12:52+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -125,6 +125,7 @@ msgstr "Aucune couleur"
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr ""
+"Sélection de couleurs indisponible lorsque le compositeur est désactivé."
 
 #: package/contents/ui/main.qml:154
 #, kde-format
@@ -132,6 +133,8 @@ msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
+"Le compositeur a été désactivé manuellement ou est bloqué par une "
+"application en cours d'exécution."
 
 #: package/contents/ui/main.qml:161
 #, kde-format
@@ -143,7 +146,7 @@ msgstr "Sélectionner une couleur"
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "Configurer le compositeur"
 
 #: package/contents/ui/main.qml:354
 #, kde-format

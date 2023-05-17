@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-14 02:27+0000\n"
-"PO-Revision-Date: 2023-05-08 05:03+0200\n"
+"PO-Revision-Date: 2023-05-16 05:21+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2.2\n"
+"X-Generator: Poedit 3.3\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -116,14 +116,14 @@ msgstr "ფერების გარეშე"
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
+msgstr "ფერის აღება მაშინ, როცა კომპოზიტორი გამორთულია, შეუძლებელია"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
-msgstr ""
+msgstr "კომპოზიტორი ხელითაა გამორთული ან დაბლოკილია გაშვებული აპლიკაციის მიერ"
 
 #: package/contents/ui/main.qml:161
 #, kde-format
@@ -135,7 +135,7 @@ msgstr "აირჩიეთ ფერი"
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "კომპოზიტორის მორგება"
 
 #: package/contents/ui/main.qml:354
 #, kde-format
