@@ -77,7 +77,7 @@ Row {
                 enabled: editable
                 propagateComposedEvents: true
 
-                onWheel: {
+                onWheel: wheel => {
                     wheel.accepted = true
                     if (wheel.angleDelta.y > mouseWheelAngleThreshold) {
                         if (value + meaning < 24*60*60) {

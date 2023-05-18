@@ -137,7 +137,9 @@ Item {
 
     Connections {
         target: plasmoid.configuration
-        onPredefinedTimersChanged: rebuildMenu()
+        function onPredefinedTimersChanged() {
+            rebuildMenu()
+        }
     }
 
     function rebuildMenu() {
