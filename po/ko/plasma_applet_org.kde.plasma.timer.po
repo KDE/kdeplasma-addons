@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-09 02:11+0000\n"
+"POT-Creation-Date: 2023-05-19 02:02+0000\n"
 "PO-Revision-Date: 2023-03-01 01:28+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -151,23 +151,23 @@ msgstr "편집"
 msgid "Delete"
 msgstr "삭제"
 
-#: package/contents/ui/main.qml:65
+#: package/contents/ui/main.qml:66
 #, kde-format
 msgid "%1 is running"
 msgstr "%1이(가) 실행 중"
 
-#: package/contents/ui/main.qml:67
+#: package/contents/ui/main.qml:68
 #, kde-format
 msgid "%1 not running"
 msgstr "%1이(가) 실행 중이 아님"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "남은 시간: %1초"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -176,29 +176,29 @@ msgstr ""
 "마우스 휠로 숫자를 변경하거나 콘텍스트 메뉴에서 미리 설정된 숫자를 선택하십시"
 "오"
 
-#: package/contents/ui/main.qml:127
+#: package/contents/ui/main.qml:88
 #, kde-format
 msgid "Timer"
 msgstr "타이머"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Timer finished"
 msgstr "타이머 완료됨"
 
-#: package/contents/ui/main.qml:145
+#: package/contents/ui/main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "시작(&S)"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "정지(&T)"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:139
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-01-20 00:59+0000\n"
+"POT-Creation-Date: 2023-05-19 02:02+0000\n"
 "PO-Revision-Date: 2023-01-22 22:59+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -102,12 +102,20 @@ msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "Deslocamento da data:"
 
-#: config/qml/AlternateCalendarConfig.qml:69
+#: config/qml/AlternateCalendarConfig.qml:71
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 dia"
 msgstr[1] "%1 dias"
+
+#: config/qml/AlternateCalendarConfig.qml:74
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"A positive offset signifies a later date, while a negative offset signifies "
+"an earlier date."
+msgstr ""
 
 #: provider/hebrewcalendar.cpp:97
 #, kde-format

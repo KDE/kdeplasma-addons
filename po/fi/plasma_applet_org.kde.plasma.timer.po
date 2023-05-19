@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-09 02:11+0000\n"
+"POT-Creation-Date: 2023-05-19 02:02+0000\n"
 "PO-Revision-Date: 2023-03-05 17:40+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -158,24 +158,24 @@ msgstr "Muokkaa"
 msgid "Delete"
 msgstr "Poista"
 
-#: package/contents/ui/main.qml:65
+#: package/contents/ui/main.qml:66
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 on käynnissä"
 
-#: package/contents/ui/main.qml:67
+#: package/contents/ui/main.qml:68
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 ei ole käynnissä"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Aikaa jäljellä: %1 sekunti"
 msgstr[1] "Aikaa jäljellä: %1 sekuntia"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -184,29 +184,29 @@ msgstr ""
 "Muuta numeroita käyttämällä hiiren rullaa tai valitse valmis vaihtoehto "
 "kontekstivalikosta"
 
-#: package/contents/ui/main.qml:127
+#: package/contents/ui/main.qml:88
 #, kde-format
 msgid "Timer"
 msgstr "Ajastin"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Timer finished"
 msgstr "Aika loppui"
 
-#: package/contents/ui/main.qml:145
+#: package/contents/ui/main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Käynnistä"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "&Pysäytä"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:139
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-09 02:11+0000\n"
+"POT-Creation-Date: 2023-05-19 02:02+0000\n"
 "PO-Revision-Date: 2022-12-01 06:54+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -155,24 +155,24 @@ msgstr "ჩასწორება"
 msgid "Delete"
 msgstr "წაშლა"
 
-#: package/contents/ui/main.qml:65
+#: package/contents/ui/main.qml:66
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 გაშვებულია"
 
-#: package/contents/ui/main.qml:67
+#: package/contents/ui/main.qml:68
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 გაშვებული არაა"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "დარჩენილი დრო: %1 წამი"
 msgstr[1] "დარჩენილი დრო: %1 წამი"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -181,29 +181,29 @@ msgstr ""
 "რიცხვების შესაცვლელად გამოიყენეთ თაგუნას რგოლი. ან აირჩიეთ წინასწარ "
 "განსაზღვრულები, კონტექსტური მენიუდან"
 
-#: package/contents/ui/main.qml:127
+#: package/contents/ui/main.qml:88
 #, kde-format
 msgid "Timer"
 msgstr "წამმზომი"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Timer finished"
 msgstr "წამმზომი დასრულდა"
 
-#: package/contents/ui/main.qml:145
+#: package/contents/ui/main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&გაშვება"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "&გაჩერება"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:139
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

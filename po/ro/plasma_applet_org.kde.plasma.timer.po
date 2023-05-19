@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-09 02:11+0000\n"
+"POT-Creation-Date: 2023-05-19 02:02+0000\n"
 "PO-Revision-Date: 2022-08-14 16:48+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -158,17 +158,17 @@ msgstr "Modifică"
 msgid "Delete"
 msgstr "Șterge"
 
-#: package/contents/ui/main.qml:65
+#: package/contents/ui/main.qml:66
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 rulează"
 
-#: package/contents/ui/main.qml:67
+#: package/contents/ui/main.qml:68
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 nu rulează"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
@@ -176,7 +176,7 @@ msgstr[0] "Timp rămas: %1 secundă"
 msgstr[1] "Timp rămas: %1 secunde"
 msgstr[2] "Timp rămas: %1 de secunde"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -185,29 +185,29 @@ msgstr ""
 "Folosiți rotița mausului pentru a schimba cifrele sau alegeți din "
 "temporizatoarele predefinite din meniul contextual"
 
-#: package/contents/ui/main.qml:127
+#: package/contents/ui/main.qml:88
 #, kde-format
 msgid "Timer"
 msgstr "Temporizator"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Timer finished"
 msgstr "Temporizatorul a expirat"
 
-#: package/contents/ui/main.qml:145
+#: package/contents/ui/main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Pornește"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Opreș&te"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:139
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

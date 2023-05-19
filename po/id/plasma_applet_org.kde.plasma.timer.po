@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-09 02:11+0000\n"
+"POT-Creation-Date: 2023-05-19 02:02+0000\n"
 "PO-Revision-Date: 2022-06-07 14:58+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -159,24 +159,24 @@ msgstr "Edit"
 msgid "Delete"
 msgstr "Hapus"
 
-#: package/contents/ui/main.qml:65
+#: package/contents/ui/main.qml:66
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 telah berjalan"
 
-#: package/contents/ui/main.qml:67
+#: package/contents/ui/main.qml:68
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 tidak berjalan"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Sisa waktu tinggal: %1 detik"
 msgstr[1] "Sisa waktu tinggal: %1 detik"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -185,29 +185,29 @@ msgstr ""
 "Gunakan roda mouse untuk mengubah digit atau memilih dari prasetel timer di "
 "dalam menu konteks"
 
-#: package/contents/ui/main.qml:127
+#: package/contents/ui/main.qml:88
 #, kde-format
 msgid "Timer"
 msgstr "Timer"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Timer finished"
 msgstr "Timer selesai"
 
-#: package/contents/ui/main.qml:145
+#: package/contents/ui/main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Mulai"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Hen&tikan"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:139
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"
