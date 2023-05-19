@@ -9,7 +9,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 
 import org.kde.kcm 1.6 as KCM
-import org.kde.kirigami 2.19 as Kirigami
+import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasmacalendar.alternatecalendarconfig 1.0
 
@@ -60,6 +60,8 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18ndc("plasma_calendar_alternatecalendar", "@label:spinbox", "Date offset:")
 
         sourceComponent: QQC2.SpinBox {
+            hoverEnabled: true
+
             stepSize: 1
             from: -10
             to: 10
@@ -68,6 +70,10 @@ Kirigami.FormLayout {
 
             textFromValue: (value, locale) => i18ndp("plasma_calendar_alternatecalendar","%1 day", "%1 days", value)
             valueFromText: (text, locale) => parseInt(text)
-        }
+
+            QQC2.ToolTip.text: i18ndc("plasma_calendar_alternatecalendar", "@info:tooltip", "A positive offset signifies a later date, while a negative offset signifies an earlier date.")
+            QQC2.ToolTip.visible: hovered
+            QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+       }
     }
 }
