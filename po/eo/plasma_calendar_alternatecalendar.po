@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-19 02:02+0000\n"
-"PO-Revision-Date: 2023-03-26 18:35+0100\n"
+"PO-Revision-Date: 2023-05-19 12:27+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -114,6 +114,8 @@ msgid ""
 "A positive offset signifies a later date, while a negative offset signifies "
 "an earlier date."
 msgstr ""
+"Pozitiva deŝovo indikas pli postan daton, dum negativa deŝovo indikas pli "
+"fruan daton."
 
 #: provider/hebrewcalendar.cpp:97
 #, kde-format
