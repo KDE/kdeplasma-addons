@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-19 02:02+0000\n"
-"PO-Revision-Date: 2023-02-04 08:26+0100\n"
+"PO-Revision-Date: 2023-05-20 08:19+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: calendarsystem.h:52
 #, kde-format
@@ -114,7 +114,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "A positive offset signifies a later date, while a negative offset signifies "
 "an earlier date."
-msgstr ""
+msgstr "Dodatnie przesunięcie oznacza późniejszą datę, a ujemne wcześniejszą."
 
 #: provider/hebrewcalendar.cpp:97
 #, kde-format
