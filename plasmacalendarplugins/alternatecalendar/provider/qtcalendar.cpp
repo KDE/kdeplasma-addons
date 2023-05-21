@@ -46,12 +46,14 @@ CalendarEvents::CalendarEventsPlugin::SubLabel QtCalendarProviderPrivate::subLab
     }
 
     const QCalendar::YearMonthDay altDate = fromGregorian(date);
+    const QString dayString = QString::number(altDate.day);
     sublabel.label = i18ndc("plasma_calendar_alternatecalendar",
                             "@label %1 day %2 month name %3 year",
                             "%1 %2, %3",
-                            QString::number(altDate.day),
+                            dayString,
                             m_calendar.standaloneMonthName(QLocale::system(), altDate.month, altDate.year),
                             QString::number(altDate.year));
+    sublabel.dayLabel = dayString;
 
     return sublabel;
 }
