@@ -40,48 +40,56 @@ public:
 Q_DECLARE_METATYPE(CalendarSystem)
 
 struct CalendarSystemItem {
-    CalendarSystem::System system;
-    QString id;
-    QString text;
+    CalendarSystemItem(CalendarSystem::System _system, const QString &_id, const QString &_text) = delete;
+    constexpr CalendarSystemItem(CalendarSystem::System _system, const QStringView &_id, const QStringView &_text)
+        : system(_system)
+        , id(_id)
+        , text(_text)
+    {
+    }
+
+    const CalendarSystem::System system;
+    const QStringView id;
+    const QStringView text;
 };
 
 // clang-format off
 static const std::map<QString /* id */, CalendarSystemItem> s_calendarMap{
     {
         QStringLiteral("Julian"),
-        {CalendarSystem::Julian, QStringLiteral("Julian"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Julian")}
+        {CalendarSystem::Julian, QStringView(QStringLiteral("Julian")), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Julian")}
     },
     {
         QStringLiteral("Milankovic"),
-        {CalendarSystem::Milankovic, QStringLiteral("Milankovic"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Milankovic")}
+        {CalendarSystem::Milankovic, QStringView(QStringLiteral("Milankovic")), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Milankovic")}
     },
     {
         QStringLiteral("Jalali"),
-        {CalendarSystem::Jalali, QStringLiteral("Jalali"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "The Solar Hijri Calendar (Persian)")}
+        {CalendarSystem::Jalali, QStringView(QStringLiteral("Jalali")), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "The Solar Hijri Calendar (Persian)")}
     },
     {
         QStringLiteral("Islamic"),
-        {CalendarSystem::Islamic, QStringLiteral("Islamic"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist See https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types for more details", "Islamic Calendar (Astronomical)")}
+        {CalendarSystem::Islamic, QStringView(QStringLiteral("Islamic")), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist See https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types for more details", "Islamic Calendar (Astronomical)")}
     },
     {
         QStringLiteral("IslamicCivil"),
-        {CalendarSystem::IslamicCivil, QStringLiteral("IslamicCivil"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist See https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types for more details", "The Islamic Civil Calendar (Tabular)")}
+        {CalendarSystem::IslamicCivil, QStringView(QStringLiteral("IslamicCivil")), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist See https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types for more details", "The Islamic Civil Calendar (Tabular)")}
     },
     {
         QStringLiteral("IslamicUmalqura"),
-        {CalendarSystem::IslamicUmalqura, QStringLiteral("IslamicUmalqura"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist See https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types for more details", "Islamic Calendar (Umm al-Qura)")}
+        {CalendarSystem::IslamicUmalqura, QStringView(QStringLiteral("IslamicUmalqura")), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist See https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types for more details", "Islamic Calendar (Umm al-Qura)")}
     },
     {
         QStringLiteral("Chinese"),
-        {CalendarSystem::Chinese, QStringLiteral("Chinese"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Chinese Lunar Calendar")}
+        {CalendarSystem::Chinese, QStringView(QStringLiteral("Chinese")), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Chinese Lunar Calendar")}
     },
     {
         QStringLiteral("Indian"),
-        {CalendarSystem::Indian, QStringLiteral("Indian"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Indian National Calendar")}
+        {CalendarSystem::Indian, QStringView(QStringLiteral("Indian")), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Indian National Calendar")}
     },
     {
         QStringLiteral("Hebrew"),
-        {CalendarSystem::Hebrew, QStringLiteral("Hebrew"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Hebrew Calendar")}
+        {CalendarSystem::Hebrew, QStringView(QStringLiteral("Hebrew")), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Hebrew Calendar")}
     },
 };
 // clang-format on

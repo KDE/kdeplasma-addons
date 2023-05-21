@@ -45,9 +45,9 @@ QVariant CalendarSystemModel::data(const QModelIndex &index, int role) const
 
     switch (role) {
     case Qt::DisplayRole:
-        return item.text;
+        return item.text.toString();
     case IdRole:
-        return item.id;
+        return item.id.toString();
     default:
         return QVariant();
     }
