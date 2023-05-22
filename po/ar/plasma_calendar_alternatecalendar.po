@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-19 02:02+0000\n"
-"PO-Revision-Date: 2023-01-23 20:01+0400\n"
+"PO-Revision-Date: 2023-05-21 09:53+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: calendarsystem.h:52
 #, kde-format
@@ -104,7 +104,7 @@ msgstr "إزاحة التاريخ:"
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
-msgstr[0] "يوم"
+msgstr[0] "لا شيء"
 msgstr[1] "يوم واحد"
 msgstr[2] "يومين"
 msgstr[3] "%1 أيام"
@@ -118,6 +118,8 @@ msgid ""
 "A positive offset signifies a later date, while a negative offset signifies "
 "an earlier date."
 msgstr ""
+"تشير الإزاحة الإيجابية إلى تأخير التاريخ، بينما تشير الإزاحة السلبية إلى "
+"تقديم التاريخ."
 
 #: provider/hebrewcalendar.cpp:97
 #, kde-format
