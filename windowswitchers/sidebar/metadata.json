@@ -23,7 +23,8 @@
                 "Name[sl]": "Skupina vizualnega designa KDE",
                 "Name[tr]": "KDE Görsel Tasarım Grubu",
                 "Name[uk]": "Група з візуального дизайну KDE",
-                "Name[x-test]": "xxKDE Visual Design Groupxx"
+                "Name[x-test]": "xxKDE Visual Design Groupxx",
+                "Name[zh_CN]": "KDE 视觉设计团队"
             }
         ],
         "Description": "Window switcher layout using a vertical sidebar",
@@ -46,6 +47,7 @@
         "Description[tr]": "Dikey bir kenar çubuğu kullanan pencere değiştirici yerleşimi",
         "Description[uk]": "Компонування перемикача вікон за допомогою вертикальної бічної панелі",
         "Description[x-test]": "xxWindow switcher layout using a vertical sidebarxx",
+        "Description[zh_CN]": "使用垂直侧边栏的窗口切换器布局",
         "Id": "sidebar",
         "License": "GPLv2+",
         "Name": "Sidebar",
@@ -68,6 +70,7 @@
         "Name[tr]": "Kenar Çubuğu",
         "Name[uk]": "Бічна панель",
         "Name[x-test]": "xxSidebarxx",
+        "Name[zh_CN]": "侧边栏",
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
