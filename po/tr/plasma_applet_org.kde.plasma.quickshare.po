@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-05 03:09+0000\n"
-"PO-Revision-Date: 2023-03-07 19:07+0300\n"
+"PO-Revision-Date: 2023-05-24 01:26+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.07.70\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -44,7 +44,7 @@ msgstr ""
 #: contents/ui/main.qml:291
 #, kde-format
 msgid "Upload %1 to an online service"
-msgstr "%1 bir çevrimiçi servise yüklensin"
+msgstr "%1 bir çevrimiçi hizmete yüklensin"
 
 #: contents/ui/main.qml:304
 #, kde-format
