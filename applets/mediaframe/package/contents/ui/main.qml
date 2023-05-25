@@ -214,12 +214,16 @@ Item {
                 sourceSize.width: width
                 sourceSize.height: height
 
-                MouseArea {
-                    anchors.fill: parent
-                    onClicked: Qt.openUrlExternally(activeSource)
-                    enabled: plasmoid.configuration.leftClickOpenImage
+                HoverHandler {
+                    enabled: Plasmoid.configuration.leftClickOpenImage
+                    cursorShape: Qt.PointingHandCursor
                 }
 
+                TapHandler {
+                    acceptedButtons: Qt.LeftButton
+                    enabled: Plasmoid.configuration.leftClickOpenImage
+                    onTapped: Qt.openUrlExternally(activeSource)
+                }
             }
         }
 
