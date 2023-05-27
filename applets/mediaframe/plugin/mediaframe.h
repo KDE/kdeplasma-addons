@@ -24,14 +24,9 @@ class MediaFrame : public QObject
     Q_PROPERTY(int historyLength READ historyLength NOTIFY historyLengthChanged)
     Q_PROPERTY(int futureLength READ futureLength NOTIFY futureLengthChanged)
     Q_PROPERTY(bool random READ random WRITE setRandom NOTIFY randomChanged)
+    Q_PROPERTY(QStringList paths READ paths WRITE setPaths NOTIFY pathsChanged)
 
 public:
-    enum AddOption {
-        NON_RECURSIVE,
-        RECURSIVE,
-    };
-    Q_ENUM(AddOption)
-
     explicit MediaFrame(QObject *parent = nullptr);
     ~MediaFrame() override;
 
@@ -43,17 +38,19 @@ public:
     bool random() const;
     void setRandom(bool random);
 
+    QStringList paths() const;
+    void setPaths(const QStringList &paths);
+
     Q_INVOKABLE bool isDir(const QString &path);
     Q_INVOKABLE bool isDirEmpty(const QString &path);
     Q_INVOKABLE bool isFile(const QString &path);
 
-    Q_INVOKABLE void add(const QString &path);
-    Q_INVOKABLE void add(const QString &path, AddOption option);
+    Q_INVOKABLE QStringList add(const QVariant &data) const;
     Q_INVOKABLE void clear();
 
     Q_INVOKABLE void watch(const QString &path);
 
-    Q_INVOKABLE bool isAdded(const QString &path);
+    bool isAdded(const QString &path) const;
 
     Q_INVOKABLE void get(QJSValue callback);
     Q_INVOKABLE void get(QJSValue callback, QJSValue error_callback);
@@ -69,6 +66,7 @@ Q_SIGNALS:
     void historyLengthChanged();
     void futureLengthChanged();
     void randomChanged();
+    void pathsChanged();
     void itemChanged(const QString &path);
 
 private Q_SLOTS:
@@ -81,6 +79,7 @@ private:
     QString hash(const QString &str);
 
     QStringList m_filters;
+    QStringList m_paths;
     QHash<QString, QStringList> m_pathMap;
     QStringList m_allFiles;
     QString m_watchFile;

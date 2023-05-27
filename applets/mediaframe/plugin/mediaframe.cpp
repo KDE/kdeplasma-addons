@@ -15,6 +15,7 @@
 #include <QMimeDatabase>
 #include <QRandomGenerator>
 #include <QRegularExpression>
+#include <QTemporaryFile>
 #include <QTime>
 #include <QUrl>
 
@@ -57,6 +58,56 @@ void MediaFrame::setRandom(bool random)
     }
 }
 
+QStringList MediaFrame::paths() const
+{
+    return m_paths;
+}
+
+void MediaFrame::setPaths(const QStringList &paths)
+{
+    if (paths == m_paths) {
+        return;
+    }
+
+    m_paths = paths;
+
+    clear();
+    for (const QString &path : paths) {
+        const QString localPath = QUrl(path).toLocalFile();
+        if (QFileInfo(localPath).isDir()) {
+            if (!isDirEmpty(localPath)) {
+                QDirIterator dirIterator(path, m_filters, QDir::Files, (QDirIterator::Subdirectories | QDirIterator::FollowSymlinks));
+                QStringList localPaths;
+                while (dirIterator.hasNext()) {
+                    dirIterator.next();
+
+                    const QString filePath = QStringLiteral("file://") + dirIterator.filePath();
+                    m_allFiles.append(filePath);
+                    localPaths << filePath;
+                }
+                if (localPaths.size() > 0) {
+                    m_pathMap.insert(path, localPaths);
+                } else {
+                    qWarning() << "No images found in directory" << path;
+                }
+            } else {
+                qWarning() << "Not adding empty directory" << path;
+            }
+
+            // the pictures have to be sorted before adding them to the list,
+            // because the QDirIterator sorts them in a different way than QDir::entryList
+            // paths.sort();
+
+        } else {
+            m_pathMap.insert(path, {path});
+            m_allFiles.append(path);
+        }
+    }
+
+    Q_EMIT countChanged();
+    Q_EMIT pathsChanged();
+}
+
 int MediaFrame::random(int min, int max)
 {
     if (min > max) {
@@ -95,73 +146,47 @@ bool MediaFrame::isFile(const QString &path)
     return (QFileInfo::exists(path) && QFileInfo(path).isFile());
 }
 
-void MediaFrame::add(const QString &path)
+QStringList MediaFrame::add(const QVariant &data) const
 {
-    add(path, AddOption::NON_RECURSIVE);
-}
+    QString path;
 
-void MediaFrame::add(const QString &path, AddOption option)
-{
-    if (isAdded(path)) {
-        qWarning() << "Path" << path << "already added";
-        return;
-    }
-
-    QUrl url = QUrl(path);
-    QString localPath = url.toString(QUrl::PreferLocalFile);
-    // qDebug() << "Local path" << localPath << "Path" << path;
-
-    QStringList paths;
-    QString filePath;
-
-    if (isDir(localPath)) {
-        if (!isDirEmpty(localPath)) {
-            QDirIterator dirIterator(
-                localPath,
-                m_filters,
-                QDir::Files,
-                (option == AddOption::RECURSIVE ? QDirIterator::Subdirectories | QDirIterator::FollowSymlinks : QDirIterator::NoIteratorFlags));
-
-            while (dirIterator.hasNext()) {
-                dirIterator.next();
-
-                filePath = "file://" + dirIterator.filePath();
-                paths.append(filePath);
-                m_allFiles.append(filePath);
-                // qDebug() << "Appended" << filePath;
-                Q_EMIT countChanged();
-            }
-            if (paths.count() > 0) {
-                m_pathMap.insert(path, paths);
-                qDebug() << "Added" << paths.count() << "files from" << path;
-            } else {
-                qWarning() << "No images found in directory" << path;
-            }
-        } else {
-            qWarning() << "Not adding empty directory" << path;
-        }
-
-        // the pictures have to be sorted before adding them to the list,
-        // because the QDirIterator sorts them in a different way than QDir::entryList
-        // paths.sort();
-
-    } else if (isFile(localPath)) {
-        paths.append(path);
-        m_pathMap.insert(path, paths);
-        m_allFiles.append(path);
-        qDebug() << "Added" << paths.count() << "files from" << path;
-        Q_EMIT countChanged();
-    } else {
-        if (url.isValid() && !url.isLocalFile()) {
-            qDebug() << "Adding" << url.toString() << "as remote file";
-            paths.append(path);
-            m_pathMap.insert(path, paths);
-            m_allFiles.append(path);
-            Q_EMIT countChanged();
-        } else {
+    if (data.typeId() == QMetaType::QUrl) {
+        const QUrl url = data.toUrl();
+        path = url.toString();
+        if (!url.isLocalFile() || !url.isValid()) {
             qWarning() << "Path" << path << "is not a valid file url or directory";
+            return {};
         }
+
+        if (isAdded(path)) {
+            qWarning() << "Path" << path << "already added";
+            return {};
+        }
+    } else if (data.canConvert<QList<QUrl>>()) {
+        const auto urls = data.value<QList<QUrl>>();
+        Q_ASSERT(!urls.empty());
+        QStringList paths;
+        for (const QUrl &url : urls) {
+            const QStringList _paths = add(url);
+            if (!_paths.empty()) {
+                paths << _paths;
+            }
+        }
+        return paths;
+    } else if (data.typeId() == QMetaType::QByteArray) {
+        QTemporaryFile tempFile;
+        if (!tempFile.open()) {
+            return {};
+        }
+        if (QImage::fromData(data.toByteArray()).save(&tempFile, "png")) {
+            tempFile.setAutoRemove(false);
+            path = QUrl::fromLocalFile(tempFile.fileName()).toString();
+        }
+    } else {
+        return {};
     }
+
+    return {path};
 }
 
 void MediaFrame::clear()
@@ -191,7 +216,7 @@ void MediaFrame::watch(const QString &path)
     }
 }
 
-bool MediaFrame::isAdded(const QString &path)
+bool MediaFrame::isAdded(const QString &path) const
 {
     return (m_pathMap.contains(path));
 }

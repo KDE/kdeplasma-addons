@@ -22,7 +22,7 @@ ColumnLayout {
 
     function addPath(object) {
         pathModel.append( object )
-        cfg_pathList.push( JSON.stringify(object) )
+        cfg_pathList.push(object.path)
         configurationChanged();
     }
 
@@ -38,8 +38,8 @@ ColumnLayout {
         // Load the list back in
         var list = plasmoid.configuration.pathList
         cfg_pathList = []
-        for(var i in list) {
-            addPath( JSON.parse(list[i]) )
+        for(let i of list) {
+            addPath( {"path": i} )
         }
     }
 
@@ -58,7 +58,7 @@ ColumnLayout {
             console.log("Accepted: " + selectedFiles)
 
             for (var i = 0; i < selectedFiles.length; ++i) {
-                var item = { 'path':selectedFiles[i], 'type':'file' }
+                var item = { 'path':selectedFiles[i] }
                 addPath(item)
             }
         }
@@ -78,7 +78,7 @@ ColumnLayout {
         onAccepted: {
             console.log("Accepted: " + selectedFolder)
 
-            var item = { 'path':selectedFolder, 'type':'folder' }
+            var item = { 'path':selectedFolder }
             addPath(item)
         }
 
@@ -115,7 +115,7 @@ ColumnLayout {
 
                 actions: [
                     Kirigami.Action {
-                        iconName: "list-remove"
+                        icon.name: "list-remove"
                         tooltip: i18nd("plasma_wallpaper_org.kde.image", "Remove path")
                         onTriggered: removePath(model.index)
                     }
