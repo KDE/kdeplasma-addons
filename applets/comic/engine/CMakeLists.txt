@@ -31,9 +31,7 @@ target_link_libraries(plasma_engine_comic
     KF6::Package
     KF6::KIOCore
 )
-if (QT_MAJOR_VERSION EQUAL "6")
-    target_link_libraries(plasma_engine_comic Qt::Core5Compat) # for QTextCodec
-endif()
+target_link_libraries(plasma_engine_comic Qt::Core5Compat) # for QTextCodec
 
 kcoreaddons_add_plugin(plasma_comic SOURCES comic_package.cpp INSTALL_NAMESPACE "kf6/packagestructure")
 target_link_libraries(plasma_comic KF6::Package)
