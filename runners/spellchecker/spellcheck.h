@@ -30,15 +30,11 @@ public:
     void run(const RunnerContext &context, const QueryMatch &action) override;
 
     void reloadConfiguration() override;
-
-protected Q_SLOTS:
-    void init() override;
     QMimeData *mimeDataForMatch(const QueryMatch &match) override;
 
+private:
     void loadData();
     void destroydata();
-
-private:
     QString findLang(const QStringList &terms);
 
     QString m_triggerWord;

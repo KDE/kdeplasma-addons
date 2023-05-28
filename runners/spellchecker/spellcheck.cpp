@@ -20,19 +20,11 @@
 SpellCheckRunner::SpellCheckRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
     : AbstractRunner(parent, metaData, args)
 {
-    setObjectName(QStringLiteral("Spell Checker"));
+    connect(this, &SpellCheckRunner::prepare, this, &SpellCheckRunner::loadData);
+    connect(this, &SpellCheckRunner::teardown, this, &SpellCheckRunner::destroydata);
 }
 
 SpellCheckRunner::~SpellCheckRunner() = default;
-
-void SpellCheckRunner::init()
-{
-    // Connect prepare and teardown signals
-    connect(this, &SpellCheckRunner::prepare, this, &SpellCheckRunner::loadData);
-    connect(this, &SpellCheckRunner::teardown, this, &SpellCheckRunner::destroydata);
-
-    reloadConfiguration();
-}
 
 // Load a default dictionary and some locale names
 void SpellCheckRunner::loadData()
