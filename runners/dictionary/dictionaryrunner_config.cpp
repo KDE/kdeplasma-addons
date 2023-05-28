@@ -12,7 +12,7 @@
 #include <QFormLayout>
 #include <QLineEdit>
 
-K_PLUGIN_FACTORY(DictionaryRunnerConfigFactory, registerPlugin<DictionaryRunnerConfig>();)
+K_PLUGIN_CLASS(DictionaryRunnerConfig)
 
 DictionaryRunnerConfig::DictionaryRunnerConfig(QObject *parent, const KPluginMetaData &metaData)
     : KCModule(parent, metaData)

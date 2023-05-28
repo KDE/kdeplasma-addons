@@ -97,6 +97,6 @@ void SpellCheckConfig::defaults()
     setNeedsSave(true);
 }
 
-K_PLUGIN_FACTORY(SpellCheckConfigFactory, registerPlugin<SpellCheckConfig>();)
+K_PLUGIN_CLASS(SpellCheckConfig)
 
 #include "spellcheck_config.moc"
