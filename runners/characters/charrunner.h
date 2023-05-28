@@ -16,7 +16,7 @@ class CharacterRunner : public AbstractRunner
     Q_OBJECT
 
 public:
-    CharacterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    CharacterRunner(QObject *parent, const KPluginMetaData &metaData);
     ~CharacterRunner() override;
 
     void reloadConfiguration() override;

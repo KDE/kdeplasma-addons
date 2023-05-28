@@ -22,8 +22,8 @@
 
 K_PLUGIN_CLASS_WITH_JSON(KateSessions, "plasma-runner-katesessions.json")
 
-KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : AbstractRunner(parent, metaData, args)
+KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData)
+    : AbstractRunner(parent, metaData)
 {
     setObjectName(QStringLiteral("Kate Sessions"));
 

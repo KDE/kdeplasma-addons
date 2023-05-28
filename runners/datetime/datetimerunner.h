@@ -21,7 +21,7 @@ class DateTimeRunner : public AbstractRunner
     Q_OBJECT
 
 public:
-    DateTimeRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    DateTimeRunner(QObject *parent, const KPluginMetaData &metaData);
     ~DateTimeRunner() override;
 
     void match(RunnerContext &context) override;

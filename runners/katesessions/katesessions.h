@@ -19,7 +19,7 @@ class KateSessions : public AbstractRunner
     Q_OBJECT
 
 public:
-    explicit KateSessions(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    explicit KateSessions(QObject *parent, const KPluginMetaData &metaData);
 
     void match(RunnerContext &context) override;
     void run(const RunnerContext &context, const QueryMatch &match) override;

@@ -23,7 +23,7 @@ class SpellCheckRunner : public AbstractRunner
     Q_OBJECT
 
 public:
-    SpellCheckRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    SpellCheckRunner(QObject *parent, const KPluginMetaData &metaData);
     ~SpellCheckRunner() override;
 
     void match(RunnerContext &context) override;

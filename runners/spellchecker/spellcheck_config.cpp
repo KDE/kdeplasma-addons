@@ -22,8 +22,8 @@ SpellCheckConfigForm::SpellCheckConfigForm(QWidget *parent)
     setupUi(this);
 }
 
-SpellCheckConfig::SpellCheckConfig(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : KCModule(parent, metaData, args)
+SpellCheckConfig::SpellCheckConfig(QObject *parent, const KPluginMetaData &metaData)
+    : KCModule(parent, metaData)
 {
     m_ui = new SpellCheckConfigForm(widget());
 

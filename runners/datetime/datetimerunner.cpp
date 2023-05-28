@@ -28,8 +28,8 @@ static const QString conversionWords = i18nc(
     "to|in|as|at");
 static const QRegularExpression conversionWordsRegex = QRegularExpression(QString("\\s(%1|>|->)\\s").arg(conversionWords));
 
-DateTimeRunner::DateTimeRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : AbstractRunner(parent, metaData, args)
+DateTimeRunner::DateTimeRunner(QObject *parent, const KPluginMetaData &metaData)
+    : AbstractRunner(parent, metaData)
 {
     setObjectName(QLatin1String("DateTimeRunner"));
 

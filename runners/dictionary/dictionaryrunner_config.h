@@ -16,7 +16,7 @@ class DictionaryRunnerConfig : public KCModule
     Q_OBJECT
 
 public:
-    explicit DictionaryRunnerConfig(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    explicit DictionaryRunnerConfig(QObject *parent, const KPluginMetaData &metaData);
 
 public Q_SLOTS:
     void save() override;

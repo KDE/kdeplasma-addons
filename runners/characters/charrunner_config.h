@@ -25,7 +25,7 @@ class CharacterRunnerConfig : public KCModule
     Q_OBJECT
 
 public:
-    explicit CharacterRunnerConfig(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    explicit CharacterRunnerConfig(QObject *parent, const KPluginMetaData &metaData);
 
 public Q_SLOTS:
     void save() override;

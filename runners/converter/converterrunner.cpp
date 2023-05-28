@@ -24,8 +24,8 @@ K_PLUGIN_CLASS_WITH_JSON(ConverterRunner, "plasma-runner-converter.json")
 
 Q_DECLARE_METATYPE(KUnitConversion::Value)
 
-ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : AbstractRunner(parent, metaData, args)
+ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaData)
+    : AbstractRunner(parent, metaData)
 {
     setObjectName(QStringLiteral("Converter"));
 

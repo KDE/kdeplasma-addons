@@ -14,8 +14,8 @@
 
 K_PLUGIN_FACTORY(DictionaryRunnerConfigFactory, registerPlugin<DictionaryRunnerConfig>();)
 
-DictionaryRunnerConfig::DictionaryRunnerConfig(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : KCModule(parent, metaData, args)
+DictionaryRunnerConfig::DictionaryRunnerConfig(QObject *parent, const KPluginMetaData &metaData)
+    : KCModule(parent, metaData)
 {
     QFormLayout *layout = new QFormLayout;
     m_triggerWord = new QLineEdit;

@@ -17,8 +17,8 @@
 #include <QFileInfo>
 #include <QStandardPaths>
 
-KonsoleProfiles::KonsoleProfiles(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : AbstractRunner(parent, metaData, args)
+KonsoleProfiles::KonsoleProfiles(QObject *parent, const KPluginMetaData &metaData)
+    : AbstractRunner(parent, metaData)
 {
     setObjectName(QStringLiteral("Konsole Profiles"));
     addSyntax({QStringLiteral(":q:"), QStringLiteral("konsole :q:")}, i18n("Finds Konsole profiles matching :q:."));

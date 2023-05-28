@@ -23,8 +23,8 @@ const char CONFIG_TRIGGERWORD[] = "triggerWord";
 QMutex s_initMutex;
 }
 
-DictionaryRunner::DictionaryRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : AbstractRunner(parent, metaData, args)
+DictionaryRunner::DictionaryRunner(QObject *parent, const KPluginMetaData &metaData)
+    : AbstractRunner(parent, metaData)
 {
     setObjectName(QLatin1String("Dictionary"));
 }

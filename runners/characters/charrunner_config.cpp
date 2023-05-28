@@ -20,8 +20,8 @@ CharacterRunnerConfigForm::CharacterRunnerConfigForm(QWidget *parent)
     setupUi(this);
 }
 
-CharacterRunnerConfig::CharacterRunnerConfig(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : KCModule(parent, metaData, args)
+CharacterRunnerConfig::CharacterRunnerConfig(QObject *parent, const KPluginMetaData &metaData)
+    : KCModule(parent, metaData)
 {
     m_ui = new CharacterRunnerConfigForm(widget());
 

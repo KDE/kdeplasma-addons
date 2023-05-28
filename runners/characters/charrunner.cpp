@@ -16,8 +16,8 @@
 #include <QDebug>
 #include <QGuiApplication>
 
-CharacterRunner::CharacterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : AbstractRunner(parent, metaData, args)
+CharacterRunner::CharacterRunner(QObject *parent, const KPluginMetaData &metaData)
+    : AbstractRunner(parent, metaData)
 {
     setObjectName(QStringLiteral("CharacterRunner"));
 }

@@ -46,7 +46,7 @@ void SpellCheckRunnerTest::testDefaultDictionary()
         QSKIP("The default dictionary is not en_US.");
     }
 
-    SpellCheckRunner runner(this, KPluginMetaData(), QVariantList());
+    SpellCheckRunner runner(this, KPluginMetaData());
     runner.loadData();
 
     KRunner::RunnerContext context;
@@ -64,7 +64,7 @@ void SpellCheckRunnerTest::testSpecifiedDictionary()
         QSKIP("en_US dictionary is not available.");
     }
 
-    SpellCheckRunner runner(this, KPluginMetaData(), QVariantList());
+    SpellCheckRunner runner(this, KPluginMetaData());
     runner.loadData();
 
     KRunner::RunnerContext context;
@@ -113,7 +113,7 @@ void SpellCheckRunnerTest::testAutomaticDictionary()
         QSKIP("ru_RU dictionary is not available.");
     }
 
-    SpellCheckRunner runner(this, KPluginMetaData(), QVariantList());
+    SpellCheckRunner runner(this, KPluginMetaData());
     runner.loadData();
 
     KRunner::RunnerContext context;
@@ -138,7 +138,7 @@ void SpellCheckRunnerTest::testSuggestions()
         QSKIP("en_US dictionary is not available.");
     }
 
-    SpellCheckRunner runner(this, KPluginMetaData(), QVariantList());
+    SpellCheckRunner runner(this, KPluginMetaData());
     runner.loadData();
 
     KRunner::RunnerContext context;

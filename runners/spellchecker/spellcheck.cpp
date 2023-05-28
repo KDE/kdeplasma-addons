@@ -17,8 +17,8 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 
-SpellCheckRunner::SpellCheckRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
-    : AbstractRunner(parent, metaData, args)
+SpellCheckRunner::SpellCheckRunner(QObject *parent, const KPluginMetaData &metaData)
+    : AbstractRunner(parent, metaData)
 {
     connect(this, &SpellCheckRunner::prepare, this, &SpellCheckRunner::loadData);
     connect(this, &SpellCheckRunner::teardown, this, &SpellCheckRunner::destroydata);

@@ -25,7 +25,7 @@ class ConverterRunner : public AbstractRunner
     Q_OBJECT
 
 public:
-    ConverterRunner(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args);
+    ConverterRunner(QObject *parent, const KPluginMetaData &metaData);
     void init() override;
     void insertCompatibleUnits();
     ~ConverterRunner() override;
