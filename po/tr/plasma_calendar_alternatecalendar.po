@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-19 02:02+0000\n"
-"PO-Revision-Date: 2023-05-19 06:31+0300\n"
+"PO-Revision-Date: 2023-05-28 11:39+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: calendarsystem.h:52
 #, kde-format
@@ -41,7 +41,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Astronomical)"
-msgstr "İslami Takvim (Astronomik)"
+msgstr "İslami Takvim (Gökbilimsel)"
 
 #: calendarsystem.h:68
 #, kde-format
@@ -90,7 +90,7 @@ msgid ""
 "This calendar is based on pure astronomical calculation. It doesn't consider "
 "any crescent visibility criteria."
 msgstr ""
-"Bu takvim, tümüyle astronomik hesaplamalar üzerine ayarlıdır. Hilal "
+"Bu takvim, tümüyle gökbilimsel hesaplamalar üzerine ayarlıdır. Hilal "
 "görünürlüğünü hesaba katmaz."
 
 #: config/qml/AlternateCalendarConfig.qml:60
