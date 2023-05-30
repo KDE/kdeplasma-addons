@@ -6,7 +6,7 @@
 # Thomas Vergnaud <thomas.vergnaud@gmx.fr>, 2015.
 # Simon Depiets <sdepiets@gmail.com>, 2018, 2019.
 # Nathan Murat <nathanmurat28@outlook.com>, 2019.
-# Xavier BESNARD <xavier.besnard]neuf.fr>, 2023.
+# Xavier BESNARD <xavier.besnard@neuf.fr>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
