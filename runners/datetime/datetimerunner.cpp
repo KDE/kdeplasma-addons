@@ -62,11 +62,7 @@ void DateTimeRunner::match(RunnerContext &context)
         // current date in remote time zone
 
         term = term.replace(conversionWordsRegex, QStringLiteral(" ")); // strip away conversion words
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        const auto zoneTerm = term.rightRef(term.length() - dateWord.length() - 1);
-#else
         const auto zoneTerm = QStringView(term).right(term.length() - dateWord.length() - 1);
-#endif
         const auto zones = matchingTimeZones(zoneTerm);
         for (auto it = zones.constBegin(), itEnd = zones.constEnd(); it != itEnd; ++it) {
             const QTimeZone zone = it.value();
@@ -101,11 +97,7 @@ void DateTimeRunner::match(RunnerContext &context)
         // current time in remote time zone
 
         term = term.replace(conversionWordsRegex, QStringLiteral(" ")); // strip away conversion words
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        const auto zoneTerm = term.rightRef(term.length() - timeWord.length() - 1);
-#else
         const auto zoneTerm = QStringView(term).right(term.length() - timeWord.length() - 1);
-#endif
         const auto zones = matchingTimeZones(zoneTerm);
         for (auto it = zones.constBegin(), itEnd = zones.constEnd(); it != itEnd; ++it) {
             const QTimeZone zone = it.value();
@@ -181,19 +173,11 @@ void DateTimeRunner::match(RunnerContext &context)
         const int end = convTermMatch.hasMatch() ? convTermMatch.capturedEnd() : zonesTerm.length() + 1;
 
         // time zone to convert from: left of conversion word, if empty default to system time zone
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        const QStringRef fromZoneTerm = zonesTerm.midRef(0, start).trimmed();
-#else
         const QStringView fromZoneTerm = QStringView(zonesTerm).mid(0, start).trimmed();
-#endif
         const QHash<QString, QTimeZone> fromZones = matchingTimeZones(fromZoneTerm, QDateTime(date, time));
 
         // time zone to convert to: right of conversion word, if empty default to system time zone
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-        const QStringRef toZoneTerm = zonesTerm.midRef(end).trimmed();
-#else
         const QStringView toZoneTerm = QStringView(zonesTerm).mid(end).trimmed();
-#endif
         const QHash<QString, QTimeZone> toZones = matchingTimeZones(toZoneTerm, QDateTime(date, time));
 
         if (fromZoneTerm.isEmpty() && toZoneTerm.isEmpty()) {
@@ -269,11 +253,7 @@ void DateTimeRunner::run(const RunnerContext &context, const QueryMatch &match)
     context.requestQueryStringUpdate(clipboardText, clipboardText.length());
 }
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-QHash<QString, QTimeZone> DateTimeRunner::matchingTimeZones(const QStringRef &zoneTerm, const QDateTime referenceDatetime)
-#else
 QHash<QString, QTimeZone> DateTimeRunner::matchingTimeZones(const QStringView &zoneTerm, const QDateTime referenceDatetime)
-#endif
 {
     QHash<QString, QTimeZone> ret;
 

@@ -17,9 +17,7 @@
 
 #include <QAction>
 #include <QDebug>
-#if QT_VERSION >= QT_VERSION_CHECK(6, 0, 0)
 #include <QNetworkInformation>
-#endif
 #include <QScreen>
 #include <QSortFilterProxyModel>
 #include <QTimer>
@@ -144,18 +142,6 @@ void ComicApplet::init()
     updateUsedComics();
     changeComic(true);
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_DEPRECATED
-    connect(&m_networkConfigurationManager, &QNetworkConfigurationManager::onlineStateChanged, this, [this](bool isOnline) {
-        if (!isOnline) {
-            return;
-        }
-        qCDebug(PLASMA_COMIC) << "Online status changed to true, requesting comic" << mPreviousFailedIdentifier;
-        mEngine->requestSource(mPreviousFailedIdentifier);
-    });
-    QT_WARNING_POP
-#else
     QNetworkInformation::instance()->load(QNetworkInformation::Feature::Reachability);
     connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged, this, [this](auto reachability) {
         if (reachability != QNetworkInformation::Reachability::Online) {
@@ -164,7 +150,6 @@ void ComicApplet::init()
         qCDebug(PLASMA_COMIC) << "Online status changed to true, requesting comic" << mPreviousFailedIdentifier;
         mEngine->requestSource(mPreviousFailedIdentifier);
     });
-#endif
 }
 
 ComicApplet::~ComicApplet()

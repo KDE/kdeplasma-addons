@@ -104,9 +104,6 @@ void DateTimeRunnerTest::testFindTimezones_data()
 
 void DateTimeRunnerTest::testConversion()
 {
-#if QT_VERSION < QT_VERSION_CHECK(6, 6, 0)
-    QSKIP("CLDR 42 replaced plain ASCII space U+0020 with U+202F when formatting dates. It's fixed in Qt 6.6.");
-#endif
     QFETCH(QString, query);
     QFETCH(QString, expectedSourceTimezone);
     QFETCH(QString, expectedSourceTime);
