@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-27 00:48+0000\n"
+"POT-Creation-Date: 2023-06-01 02:11+0000\n"
 "PO-Revision-Date: 2022-07-21 09:15+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -20,61 +20,61 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: comic.cpp:87
+#: comic.cpp:85
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Наступна вкладка з новою стрічкою"
 
-#: comic.cpp:93
+#: comic.cpp:91
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Перейти до пер&шої стрічки"
 
-#: comic.cpp:97
+#: comic.cpp:95
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Перейти до п&оточної стрічки"
 
-#: comic.cpp:101
+#: comic.cpp:99
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Перейти до стрічки…"
 
-#: comic.cpp:105
+#: comic.cpp:103
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Відвідати сайт"
 
-#: comic.cpp:109
+#: comic.cpp:107
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr "Переглянути у %1"
 
-#: comic.cpp:117
+#: comic.cpp:115
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Відвідати ве&бсайт магазина"
 
-#: comic.cpp:122
+#: comic.cpp:120
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Зберегти комікс як…"
 
-#: comic.cpp:127
+#: comic.cpp:125
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Фактичний розмір"
 
-#: comic.cpp:135
+#: comic.cpp:133
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"

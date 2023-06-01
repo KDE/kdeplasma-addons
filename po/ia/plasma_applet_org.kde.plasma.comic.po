@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-27 00:48+0000\n"
+"POT-Creation-Date: 2023-06-01 02:11+0000\n"
 "PO-Revision-Date: 2022-11-28 16:09+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -17,61 +17,61 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: comic.cpp:87
+#: comic.cpp:85
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "Proxime &Scheda con un Nove Banda"
 
-#: comic.cpp:93
+#: comic.cpp:91
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Salta a &Prime Banda"
 
-#: comic.cpp:97
+#: comic.cpp:95
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Salta a Banda &Currente"
 
-#: comic.cpp:101
+#: comic.cpp:99
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Salta a Banda..."
 
-#: comic.cpp:105
+#: comic.cpp:103
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Visita le sito Web"
 
-#: comic.cpp:109
+#: comic.cpp:107
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr "Vide in %1"
 
-#: comic.cpp:117
+#: comic.cpp:115
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Visita le sito &Web de boteca"
 
-#: comic.cpp:122
+#: comic.cpp:120
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Salveguarda Comic como ..."
 
-#: comic.cpp:127
+#: comic.cpp:125
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Dimension &actual"
 
-#: comic.cpp:135
+#: comic.cpp:133
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"

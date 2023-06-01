@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-27 00:48+0000\n"
+"POT-Creation-Date: 2023-06-01 02:11+0000\n"
 "PO-Revision-Date: 2022-07-30 23:37+0200\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -21,61 +21,61 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
-#: comic.cpp:87
+#: comic.cpp:85
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "Pestanya següe&nt amb una tira nova"
 
-#: comic.cpp:93
+#: comic.cpp:91
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Salta a la &primera tira"
 
-#: comic.cpp:97
+#: comic.cpp:95
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Salta a la tira a&ctual"
 
-#: comic.cpp:101
+#: comic.cpp:99
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Salta a la tira…"
 
-#: comic.cpp:105
+#: comic.cpp:103
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Visiteu el lloc web"
 
-#: comic.cpp:109
+#: comic.cpp:107
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr "Visualitzeu amb el %1"
 
-#: comic.cpp:117
+#: comic.cpp:115
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Visita la &web de la botiga"
 
-#: comic.cpp:122
+#: comic.cpp:120
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "De&sa el còmic com a…"
 
-#: comic.cpp:127
+#: comic.cpp:125
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Mida re&al"
 
-#: comic.cpp:135
+#: comic.cpp:133
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"

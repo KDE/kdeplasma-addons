@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-27 00:48+0000\n"
+"POT-Creation-Date: 2023-06-01 02:11+0000\n"
 "PO-Revision-Date: 2022-07-31 09:39+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -23,61 +23,61 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: comic.cpp:87
+#: comic.cpp:85
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Następna karta z nowym paskiem"
 
-#: comic.cpp:93
+#: comic.cpp:91
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Przejdź do &pierwszego paska"
 
-#: comic.cpp:97
+#: comic.cpp:95
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Przejdź do bieżą&cego paska"
 
-#: comic.cpp:101
+#: comic.cpp:99
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Przejdź do paska..."
 
-#: comic.cpp:105
+#: comic.cpp:103
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Odwiedź stronę sieciową"
 
-#: comic.cpp:109
+#: comic.cpp:107
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr "Obejrzyj w %1"
 
-#: comic.cpp:117
+#: comic.cpp:115
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Odwiedź &witrynę sklepu"
 
-#: comic.cpp:122
+#: comic.cpp:120
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "Zapi&sz komiks jako..."
 
-#: comic.cpp:127
+#: comic.cpp:125
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Rzeczywisty rozmi&ar"
 
-#: comic.cpp:135
+#: comic.cpp:133
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-27 00:48+0000\n"
+"POT-Creation-Date: 2023-06-01 02:11+0000\n"
 "PO-Revision-Date: 2023-02-25 08:57+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -24,61 +24,61 @@ msgstr ""
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "X-Generator: Poedit 3.2.2\n"
 
-#: comic.cpp:87
+#: comic.cpp:85
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Naslednji zavihek z novo sliko"
 
-#: comic.cpp:93
+#: comic.cpp:91
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Skoči na prvo sliko"
 
-#: comic.cpp:97
+#: comic.cpp:95
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Skoči na trenutno sliko"
 
-#: comic.cpp:101
+#: comic.cpp:99
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Skoči na sliko…"
 
-#: comic.cpp:105
+#: comic.cpp:103
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Obišči spletišče"
 
-#: comic.cpp:109
+#: comic.cpp:107
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr "Pogled v %1"
 
-#: comic.cpp:117
+#: comic.cpp:115
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Obišči spletišče trgovine"
 
-#: comic.cpp:122
+#: comic.cpp:120
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Shrani strip kot…"
 
-#: comic.cpp:127
+#: comic.cpp:125
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Dejanska velikost"
 
-#: comic.cpp:135
+#: comic.cpp:133
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"

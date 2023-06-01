@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-27 00:48+0000\n"
+"POT-Creation-Date: 2023-06-01 02:11+0000\n"
 "PO-Revision-Date: 2015-03-14 17:59+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: comic.cpp:87
+#: comic.cpp:85
 #, fuzzy, kde-format
 #| msgctxt "here strip means comic strip"
 #| msgid "&Next Tab with a new Strip"
@@ -28,61 +28,61 @@ msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Нови језичак за нови стрип"
 
-#: comic.cpp:93
+#: comic.cpp:91
 #, fuzzy, kde-format
 #| msgid "Jump to &first Strip"
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Скочи на &први стрип"
 
-#: comic.cpp:97
+#: comic.cpp:95
 #, fuzzy, kde-format
 #| msgid "Jump to &current Strip"
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Скочи на &текући стрип"
 
-#: comic.cpp:101
+#: comic.cpp:99
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Скочи на стрип..."
 
-#: comic.cpp:105
+#: comic.cpp:103
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Посјети &веб сајт продавнице"
 
-#: comic.cpp:109
+#: comic.cpp:107
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr ""
 
-#: comic.cpp:117
+#: comic.cpp:115
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Посјети &веб сајт продавнице"
 
-#: comic.cpp:122
+#: comic.cpp:120
 #, fuzzy, kde-format
 #| msgid "&Save Comic As..."
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Сачувај стрип као..."
 
-#: comic.cpp:127
+#: comic.cpp:125
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Стварна величина"
 
-#: comic.cpp:135
+#: comic.cpp:133
 #, fuzzy, kde-format
 #| msgctxt "@option:check Context menu of comic image"
 #| msgid "Store current &Position"

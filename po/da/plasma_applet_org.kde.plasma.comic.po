@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-27 00:48+0000\n"
+"POT-Creation-Date: 2023-06-01 02:11+0000\n"
 "PO-Revision-Date: 2020-01-30 20:18+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -19,25 +19,25 @@ msgstr ""
 "X-Generator: Lokalize 18.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: comic.cpp:87
+#: comic.cpp:85
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Næste faneblad med en ny stribe"
 
-#: comic.cpp:93
+#: comic.cpp:91
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Gå til &første stribe"
 
-#: comic.cpp:97
+#: comic.cpp:95
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Gå til &nuværende stribe"
 
-#: comic.cpp:101
+#: comic.cpp:99
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "Jump to Strip..."
@@ -45,7 +45,7 @@ msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Gå til stribe..."
 
-#: comic.cpp:105
+#: comic.cpp:103
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "Visit the Shop &Website"
@@ -53,19 +53,19 @@ msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Besøg &butikens hjemmeside"
 
-#: comic.cpp:109
+#: comic.cpp:107
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr ""
 
-#: comic.cpp:117
+#: comic.cpp:115
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Besøg &butikens hjemmeside"
 
-#: comic.cpp:122
+#: comic.cpp:120
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "&Save Comic As..."
@@ -73,13 +73,13 @@ msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Gem tegneserie som..."
 
-#: comic.cpp:127
+#: comic.cpp:125
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Faktisk størrelse"
 
-#: comic.cpp:135
+#: comic.cpp:133
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
