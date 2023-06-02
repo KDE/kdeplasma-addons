@@ -43,7 +43,7 @@ void CharacterRunnerConfig::load()
     KCModule::load();
 
     KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
-    KConfigGroup grp = cfg->group("Runners").group("CharacterRunner");
+    KConfigGroup grp = cfg->group("Runners").group(KRUNNER_PLUGIN_NAME);
 
     m_ui->edit_trigger->setText(grp.readEntry(CONFIG_TRIGGERWORD, DEFAULT_TRIGGERWORD.toString()));
     const auto aliasList = grp.readEntry(CONFIG_ALIASES, QStringList());
@@ -68,7 +68,7 @@ void CharacterRunnerConfig::save()
     KCModule::save();
 
     KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
-    KConfigGroup grp = cfg->group("Runners").group("CharacterRunner");
+    KConfigGroup grp = cfg->group("Runners").group(KRUNNER_PLUGIN_NAME);
 
     grp.writeEntry(CONFIG_TRIGGERWORD, m_ui->edit_trigger->text().isEmpty() ? DEFAULT_TRIGGERWORD.toString() : m_ui->edit_trigger->text());
 

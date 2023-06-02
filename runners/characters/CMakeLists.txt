@@ -9,6 +9,7 @@ target_link_libraries(krunner_charrunner
 )
 
 kcoreaddons_add_plugin(kcm_krunner_charrunner INSTALL_NAMESPACE "kf${QT_MAJOR_VERSION}/krunner/kcms")
+target_compile_definitions(kcm_krunner_charrunner PRIVATE -DKRUNNER_PLUGIN_NAME="krunner_charrunner")
 target_sources(kcm_krunner_charrunner PRIVATE charrunner_config.cpp)
 ki18n_wrap_ui(kcm_krunner_charrunner charrunner_config.ui)
 target_link_libraries(kcm_krunner_charrunner
