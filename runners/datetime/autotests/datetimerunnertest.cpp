@@ -11,6 +11,8 @@
 
 #include <qtestcase.h>
 
+using namespace KRunner;
+
 class DateTimeRunnerTest : public AbstractRunnerTest
 {
     Q_OBJECT
