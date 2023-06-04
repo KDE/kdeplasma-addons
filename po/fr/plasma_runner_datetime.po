@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: plasma_runner_datetime\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-28 00:50+0000\n"
-"PO-Revision-Date: 2023-01-11 07:30+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"PO-Revision-Date: 2023-02-14 21:30+0100\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -71,7 +71,7 @@ msgstr ""
 #: datetimerunner.cpp:48
 #, kde-format
 msgid "Today's date is %1"
-msgstr "La date d'aujourd’hui est %1"
+msgstr "La date d'aujourd'hui est %1"
 
 #: datetimerunner.cpp:63
 #, kde-format
