@@ -12,7 +12,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-01 02:11+0000\n"
 "PO-Revision-Date: 2023-02-14 21:30+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -90,15 +90,15 @@ msgid ""
 "one time zone is given, the other will be the system time zone. If no date "
 "or time is given, it will be the current date and time."
 msgstr ""
-"Convertit l’heure du premier fuseau horaire vers celle du deuxième fuseau "
-"horaire. Si un seul fuseau horaire est fourni, l’autre sera le fuseau "
-"horaire du système. Si aucune date ou heure n’est indiquée, ce sera la date "
-"et l’heure actuelles."
+"Convertit l'heure du premier fuseau horaire vers celle du deuxième fuseau "
+"horaire. Si un seul fuseau horaire est fourni, l'autre sera le fuseau "
+"horaire du système. Si aucune date ou heure n'est indiquée, ce sera la date "
+"et l'heure actuelles."
 
 #: datetimerunner.cpp:60
 #, kde-format
 msgid "Today's date is %1"
-msgstr "La date d'aujourd’hui est %1"
+msgstr "La date d'aujourd'hui est %1"
 
 #: datetimerunner.cpp:76
 #, kde-format
