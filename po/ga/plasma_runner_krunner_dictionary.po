@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_krunner_dictionary\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-28 00:47+0000\n"
+"POT-Creation-Date: 2023-06-05 01:59+0000\n"
 "PO-Revision-Date: 2011-12-28 12:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
 "3 : 4\n"
 
-#: dictionaryrunner.cpp:36 dictionaryrunner_config.cpp:34
+#: dictionaryrunner.cpp:35 dictionaryrunner_config.cpp:34
 #: dictionaryrunner_config.cpp:52
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"
 msgstr "sainmhínigh"
 
-#: dictionaryrunner.cpp:43
+#: dictionaryrunner.cpp:42
 #, kde-format
 msgctxt "Dictionary keyword"
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: dictionaryrunner.cpp:43
+#: dictionaryrunner.cpp:42
 #, kde-format
 msgid "Finds the definition of :q:."
 msgstr "Aimsíonn sé seo sainmhíniú ar :q:."
 
-#: dictionaryrunner.cpp:120
+#: dictionaryrunner.cpp:119
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
 msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-10-28 00:47+0000\n"
+"POT-Creation-Date: 2023-06-05 01:59+0000\n"
 "PO-Revision-Date: 2018-04-29 11:46+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: dictionaryrunner.cpp:36 dictionaryrunner_config.cpp:34
+#: dictionaryrunner.cpp:35 dictionaryrunner_config.cpp:34
 #: dictionaryrunner_config.cpp:52
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"
 msgstr "definiera"
 
-#: dictionaryrunner.cpp:43
+#: dictionaryrunner.cpp:42
 #, kde-format
 msgctxt "Dictionary keyword"
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: dictionaryrunner.cpp:43
+#: dictionaryrunner.cpp:42
 #, kde-format
 msgid "Finds the definition of :q:."
 msgstr "Hittar definitionen av :q:."
 
-#: dictionaryrunner.cpp:120
+#: dictionaryrunner.cpp:119
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
 msgstr ""

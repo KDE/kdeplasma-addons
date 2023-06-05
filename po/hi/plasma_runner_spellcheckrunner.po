@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-01 02:33+0000\n"
+"POT-Creation-Date: 2023-06-05 01:59+0000\n"
 "PO-Revision-Date: 2020-08-12 19:02+0530\n"
 "Last-Translator: rawkoder <rawkoder@fastmail.in>\n"
 "Language-Team: Hindi <kde-l10n-hi@kde.org>\n"
@@ -17,35 +17,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Lokalize 20.04.3\n"
 
-#: spellcheck.cpp:98 spellcheck_config.cpp:65 spellcheck_config.cpp:96
+#: spellcheck.cpp:90 spellcheck_config.cpp:65 spellcheck_config.cpp:96
 #, kde-format
 msgid "spell"
 msgstr "वर्तनी"
 
-#: spellcheck.cpp:103
+#: spellcheck.cpp:95
 #, kde-format
 msgctxt ""
 "Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\"."
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: spellcheck.cpp:107
+#: spellcheck.cpp:99
 #, kde-format
 msgid "Checks the spelling of :q:."
 msgstr ":q: की वर्तनी जाँचें ।"
 
-#: spellcheck.cpp:223
+#: spellcheck.cpp:215
 #, kde-format
 msgctxt "Term is spelled correctly"
 msgid "Correct"
 msgstr "सही"
 
-#: spellcheck.cpp:232
+#: spellcheck.cpp:224
 #, kde-format
 msgid "Suggested term"
 msgstr "सुझाया गया शब्द"
 
-#: spellcheck.cpp:262
+#: spellcheck.cpp:254
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""

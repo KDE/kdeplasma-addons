@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-01 02:33+0000\n"
+"POT-Creation-Date: 2023-06-05 01:59+0000\n"
 "PO-Revision-Date: 2010-03-27 21:46+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -17,37 +17,37 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: spellcheck.cpp:98 spellcheck_config.cpp:65 spellcheck_config.cpp:96
+#: spellcheck.cpp:90 spellcheck_config.cpp:65 spellcheck_config.cpp:96
 #, kde-format
 msgid "spell"
 msgstr "สะกด"
 
-#: spellcheck.cpp:103
+#: spellcheck.cpp:95
 #, kde-format
 msgctxt ""
 "Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\"."
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: spellcheck.cpp:107
+#: spellcheck.cpp:99
 #, kde-format
 msgid "Checks the spelling of :q:."
 msgstr "ตรวจคำสะกดของ :q:"
 
-#: spellcheck.cpp:223
+#: spellcheck.cpp:215
 #, fuzzy, kde-format
 #| msgid "Correct"
 msgctxt "Term is spelled correctly"
 msgid "Correct"
 msgstr "ถูกต้อง"
 
-#: spellcheck.cpp:232
+#: spellcheck.cpp:224
 #, fuzzy, kde-format
 #| msgid "Suggested words: %1"
 msgid "Suggested term"
 msgstr "คำที่ได้รับการเสนอแนะ: %1"
 
-#: spellcheck.cpp:262
+#: spellcheck.cpp:254
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""

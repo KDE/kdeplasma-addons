@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-01 02:33+0000\n"
+"POT-Creation-Date: 2023-06-05 01:59+0000\n"
 "PO-Revision-Date: 2023-03-26 14:23+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -19,35 +19,35 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.03.70\n"
 
-#: spellcheck.cpp:98 spellcheck_config.cpp:65 spellcheck_config.cpp:96
+#: spellcheck.cpp:90 spellcheck_config.cpp:65 spellcheck_config.cpp:96
 #, kde-format
 msgid "spell"
 msgstr "spell"
 
-#: spellcheck.cpp:103
+#: spellcheck.cpp:95
 #, kde-format
 msgctxt ""
 "Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\"."
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: spellcheck.cpp:107
+#: spellcheck.cpp:99
 #, kde-format
 msgid "Checks the spelling of :q:."
 msgstr "Checks the spelling of :q:."
 
-#: spellcheck.cpp:223
+#: spellcheck.cpp:215
 #, kde-format
 msgctxt "Term is spelled correctly"
 msgid "Correct"
 msgstr "Correct"
 
-#: spellcheck.cpp:232
+#: spellcheck.cpp:224
 #, kde-format
 msgid "Suggested term"
 msgstr "Suggested term"
 
-#: spellcheck.cpp:262
+#: spellcheck.cpp:254
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
