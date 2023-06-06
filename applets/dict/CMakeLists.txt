@@ -2,7 +2,7 @@ find_package(Qt6WebEngineQuick ${QT_MIN_VERSION} CONFIG)
 
 set_package_properties(Qt6WebEngine PROPERTIES
     PURPOSE "Needed by the dict applet"
-    URL "https://doc.qt.io/qt-5/qtwebengine-index.html"
+    URL "https://doc.qt.io/qt-6/qtwebengine-index.html"
     TYPE OPTIONAL
 )
 
