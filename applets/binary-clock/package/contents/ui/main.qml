@@ -40,7 +40,7 @@ Item {
         id: dataSource
         engine: "time"
         connectedSources: ["Local"]
-        intervalAlignment: plasmoid.configuration.showSeconds || Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? PlasmaCore.Types.NoAlignment : PlasmaCore.Types.AlignToMinute
+        intervalAlignment: plasmoid.configuration.showSeconds || Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? P5Support.Types.NoAlignment : P5Support.Types.AlignToMinute 
         interval: showSeconds || Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? 1000 : 60000
         onDataChanged: {
             var date = new Date(data["Local"]["DateTime"]);

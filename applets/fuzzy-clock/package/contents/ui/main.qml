@@ -36,7 +36,7 @@ Item {
         engine: "time"
         connectedSources: ["Local"]
         interval: Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? 1000 : 60000
-        intervalAlignment: Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? PlasmaCore.Types.NoAlignment : PlasmaCore.Types.AlignToMinute
+        intervalAlignment: Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? P5Support.Types.NoAlignment : P5Support.Types.AlignToMinute
     }
 
     Plasmoid.compactRepresentation: FuzzyClock { }
