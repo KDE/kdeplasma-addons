@@ -10,7 +10,8 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
-import QtWebEngine 1.1
+import QtWebEngine
+import QtQuick.Controls
 
 import org.kde.kirigami 2.19 as Kirigami
 
@@ -71,6 +72,26 @@ ColumnLayout {
 
             zoomFactor: PlasmaCore.Units.devicePixelRatio
             profile: dict.webProfile
+            property Menu contextMenu: Menu {
+                Repeater {
+                    model: [
+                        WebEngineView.Back,
+                        WebEngineView.Forward,
+                        WebEngineView.Copy,
+                    ]
+                    MenuItem {
+                        text: web.action(modelData).text
+                        enabled: web.action(modelData).enabled
+                        onClicked: web.action(modelData).trigger()
+                        icon.name: web.action(modelData).iconName
+                        display: MenuItem.TextBesideIcon
+                    }
+                }
+            }
+            onContextMenuRequested: request => {
+                request.accepted = true;
+                contextMenu.popup();
+            }
         }
 
         Item {
