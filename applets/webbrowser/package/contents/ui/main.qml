@@ -196,7 +196,7 @@ ColumnLayout {
             }
 
             onNavigationRequested: {
-                var url = request.requestedUrl;
+                var url = request.url;
 
                 if (request.userInitiated) {
                     Qt.openUrlExternally(url);
