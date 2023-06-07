@@ -30,7 +30,7 @@ PlasmoidItem {
             selectedDictionary: plasmoid.configuration.dictionary
             // Activate the busy indicator, and deactivate it when page is loaded.
             onSearchInProgress: placeholder.opacity = 1;
-            onDefinitionFound: {
+            onDefinitionFound: html => {
                 web.loadHtml(html);
                 placeholder.opacity = 0;
             }
