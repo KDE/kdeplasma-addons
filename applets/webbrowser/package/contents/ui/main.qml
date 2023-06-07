@@ -165,7 +165,7 @@ ColumnLayout {
                 function onUseConstantZoomChanged() {updateZoomTimer.start()}
             }
 
-            onLinkHovered: {
+            onLinkHovered: hoveredUrl => {
                 if (hoveredUrl.toString() !== "") {
                     mouseArea.cursorShape = Qt.PointingHandCursor;
                 } else {
@@ -179,7 +179,7 @@ ColumnLayout {
                 }
             }
 
-            onLoadingChanged: {
+            onLoadingChanged: loadingInfo => {
                 if (loadingInfo.status === WebEngineLoadingInfo.LoadStartedStatus) {
                     infoButton.dismiss();
                 } else if (loadingInfo.status === WebEngineLoadingInfo.LoadSucceededStatus && useMinViewWidth) {
@@ -187,7 +187,7 @@ ColumnLayout {
                 }
             }
 
-            onContextMenuRequested: {
+            onContextMenuRequested: request => {
                 if (request.mediaType === ContextMenuRequest.MediaTypeNone && request.linkUrl.toString() !== "") {
                     linkContextMenu.link = request.linkUrl;
                     linkContextMenu.open(request.position.x, request.position.y);
@@ -195,7 +195,7 @@ ColumnLayout {
                 }
             }
 
-            onNavigationRequested: {
+            onNavigationRequested: request => {
                 var url = request.url;
 
                 if (request.userInitiated) {
@@ -214,7 +214,7 @@ ColumnLayout {
             id: mouseArea
             anchors.fill: parent
             acceptedButtons: Qt.BackButton | Qt.ForwardButton
-            onPressed: {
+            onPressed: mouse => {
                 if (mouse.button === Qt.BackButton) {
                     webview.goBack();
                 } else if (mouse.button === Qt.ForwardButton) {
