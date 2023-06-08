@@ -13,7 +13,7 @@ class ComicPackage : public KPackage::PackageStructure
     Q_OBJECT
 public:
     using KPackage::PackageStructure::PackageStructure;
-    void initPackage(KPackage::Package *package)
+    void initPackage(KPackage::Package *package) override
     {
         package->addDirectoryDefinition("images", QStringLiteral("images"));
         package->setMimeTypes("images", QStringList{QStringLiteral("image/svg+xml"), QStringLiteral("image/png"), QStringLiteral("image/jpeg")});
