@@ -68,8 +68,8 @@ Item {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        onPressed: wasExpanded = plasmoid.expanded
-        onClicked: plasmoid.expanded = !wasExpanded
+        onPressed: wasExpanded = root.expanded
+        onClicked: root.expanded = !wasExpanded
     }
 
     /* hours */

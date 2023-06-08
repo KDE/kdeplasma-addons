@@ -17,7 +17,7 @@ import org.kde.plasma.plasmoid 2.0
 
 import org.kde.plasma.private.sessions 2.0 as Sessions
 
-Item {
+PlasmoidItem {
     id: root
 
     readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
@@ -32,11 +32,11 @@ Item {
     // TTY number and X display
     readonly property bool showTechnicalInfo: Plasmoid.configuration.showTechnicalInfo
 
-    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 10
-    Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 12
+    switchWidth: PlasmaCore.Units.gridUnit * 10
+    switchHeight: PlasmaCore.Units.gridUnit * 12
 
-    Plasmoid.toolTipTextFormat: Text.StyledText
-    Plasmoid.toolTipSubText: i18n("You are logged in as <b>%1</b>", displayedName)
+    toolTipTextFormat: Text.StyledText
+    toolTipSubText: i18n("You are logged in as <b>%1</b>", displayedName)
 
     // revert to the Plasmoid icon if no face given
     Plasmoid.icon: kuser.faceIconUrl.toString() || "preferences-desktop-user"
@@ -45,7 +45,7 @@ Item {
         id: kuser
     }
 
-    Plasmoid.compactRepresentation: MouseArea {
+    compactRepresentation: MouseArea {
         id: compactRoot
 
         // Taken from DigitalClock to ensure uniform sizing when next to each other
@@ -60,8 +60,8 @@ Item {
         Layout.preferredHeight: isVertical ? Layout.minimumHeight : PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2
 
         property bool wasExpanded
-        onPressed: wasExpanded = Plasmoid.expanded
-        onClicked: Plasmoid.expanded = !wasExpanded
+        onPressed: wasExpanded = root.expanded
+        onClicked: root.expanded = !wasExpanded
 
         Row {
             id: compactRow
@@ -101,7 +101,7 @@ Item {
         }
     }
 
-    Plasmoid.fullRepresentation: Item {
+    fullRepresentation: Item {
         id: fullRoot
 
         implicitHeight: column.implicitHeight
@@ -232,9 +232,9 @@ Item {
         }
 
         Connections {
-            target: Plasmoid.self
+            target: root
             function onExpandedChanged() {
-                if (Plasmoid.expanded) {
+                if (root.expanded) {
                     sessionsModel.reload();
                 }
             }

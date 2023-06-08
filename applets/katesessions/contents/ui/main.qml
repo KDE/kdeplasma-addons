@@ -18,15 +18,15 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import org.kde.plasma.private.profiles 1.0
 
-Item {
+PlasmoidItem {
     id: main
     width: (Plasmoid.formFactor==PlasmaCore.Types.Planar)? PlasmaCore.Units.gridUnit * 14 : undefined
     height: (Plasmoid.formFactor==PlasmaCore.Types.Planar)? PlasmaCore.Units.gridUnit * 16: undefined
-    
-    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 11
-    Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 11
+
+    switchWidth: PlasmaCore.Units.gridUnit * 11
+    switchHeight: PlasmaCore.Units.gridUnit * 11
     Plasmoid.status: PlasmaCore.Types.ActiveStatus
-    Plasmoid.toolTipMainText: i18n("Kate Sessions")
+    toolTipMainText: i18n("Kate Sessions")
 
     Component.onCompleted: {
         plasmoid.removeAction("configure");
@@ -41,7 +41,7 @@ Item {
         }
     }
 
-    Plasmoid.fullRepresentation: PlasmaComponents3.Page {
+    fullRepresentation: PlasmaComponents3.Page {
 
         id: dialogItem
         Layout.minimumWidth: PlasmaCore.Units.gridUnit * 12
@@ -86,7 +86,7 @@ Item {
                 }
                 case Qt.Key_Escape: {
                     if (filter.text == "") {
-                        plasmoid.expanded = false;
+                        main.expanded = false;
                     } else {
                         filter.text = "";
                     }
@@ -129,7 +129,7 @@ Item {
                 Layout.topMargin: PlasmaCore.Units.smallSpacing
                 onItemSelected: function (profileIdentifier) {
                     model.openProfile(profileIdentifier)
-                    plasmoid.expanded = false;
+                    main.expanded = false;
                 }
             }
         }

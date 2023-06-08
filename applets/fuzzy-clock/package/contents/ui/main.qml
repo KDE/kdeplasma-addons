@@ -15,7 +15,7 @@ import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.workspace.calendar 2.0 as PlasmaCalendar
 
-Item {
+PlasmoidItem {
     id: root
 
     readonly property date currentDateTime: dataSource.data.Local ? dataSource.data.Local.DateTime : new Date()
@@ -23,11 +23,11 @@ Item {
     width: PlasmaCore.Units.gridUnit * 10
     height: PlasmaCore.Units.gridUnit * 4
 
-    Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+    preferredRepresentation: compactRepresentation
 
     // keep this consistent with toolTipMainText and toolTipSubText in analog-clock
-    Plasmoid.toolTipMainText: Qt.formatDate(currentDateTime, "dddd")
-    Plasmoid.toolTipSubText: Qt.formatTime(currentDateTime,  Qt.locale().timeFormat(Locale.LongFormat)) + "\n" + Qt.formatDate(currentDateTime, Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
+    toolTipMainText: Qt.formatDate(currentDateTime, "dddd")
+    toolTipSubText: Qt.formatTime(currentDateTime,  Qt.locale().timeFormat(Locale.LongFormat)) + "\n" + Qt.formatDate(currentDateTime, Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
 
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
 
@@ -35,13 +35,13 @@ Item {
         id: dataSource
         engine: "time"
         connectedSources: ["Local"]
-        interval: Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? 1000 : 60000
-        intervalAlignment: Plasmoid.compactRepresentationItem.mouseArea.containsMouse ? P5Support.Types.NoAlignment : P5Support.Types.AlignToMinute
+        interval: root.compactRepresentationItem.mouseArea.containsMouse ? 1000 : 60000
+        intervalAlignment: root.compactRepresentationItem.mouseArea.containsMouse ? P5Support.Types.NoAlignment : P5Support.Types.AlignToMinute
     }
 
-    Plasmoid.compactRepresentation: FuzzyClock { }
+    compactRepresentation: FuzzyClock { }
 
-    Plasmoid.fullRepresentation: PlasmaCalendar.MonthView {
+    fullRepresentation: PlasmaCalendar.MonthView {
         Layout.minimumWidth: PlasmaCore.Units.gridUnit * 20
         Layout.minimumHeight: PlasmaCore.Units.gridUnit * 20
 

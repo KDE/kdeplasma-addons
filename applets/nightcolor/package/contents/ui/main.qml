@@ -13,7 +13,7 @@ import org.kde.plasma.plasmoid 2.0
 
 import org.kde.plasma.private.nightcolorcontrol 1.0
 
-Item {
+PlasmoidItem {
     id: root
 
     Plasmoid.icon: monitor.running ? "redshift-status-on" : "redshift-status-off"
@@ -29,8 +29,8 @@ Item {
         return PlasmaCore.Types.PassiveStatus;
     }
 
-    Plasmoid.toolTipMainText: i18n("Night Color Control")
-    Plasmoid.toolTipSubText: {
+    toolTipMainText: i18n("Night Color Control")
+    toolTipSubText: {
         if (inhibitor.state === Inhibitor.Inhibited && monitor.enabled) {
             return i18n("Night Color is inhibited");
         }
@@ -46,9 +46,9 @@ Item {
         return i18n("Night Color is active (%1K)", monitor.currentTemperature);
     }
 
-    Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+    preferredRepresentation: fullRepresentation
 
-    Plasmoid.compactRepresentation: PlasmaCore.IconItem {
+    fullRepresentation: PlasmaCore.IconItem {
         active: compactMouseArea.containsMouse
         source: Plasmoid.icon
 

@@ -12,6 +12,7 @@
 
 #include <KActionCollection>
 #include <Plasma/Corona>
+#include <PlasmaQuick/AppletQuickItem>
 #include <QAction>
 
 GroupedAppletsContainer::GroupedAppletsContainer(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
@@ -82,7 +83,7 @@ void GroupedAppletsContainer::ensureSystrayExists()
     m_innerContainment->setFormFactor(formFactor());
     m_innerContainment->setLocation(location());
 
-    m_internalContainmentItem = m_innerContainment->property("_plasma_graphicObject").value<QQuickItem *>();
+    m_internalContainmentItem = PlasmaQuick::AppletQuickItem::itemForApplet(m_innerContainment);
     Q_EMIT internalContainmentItemChanged();
 
     actions()->addAction(QStringLiteral("configure"), m_innerContainment->actions()->action(QStringLiteral("configure")));

@@ -12,10 +12,10 @@ import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 import QtQuick.Layouts 1.1
 import org.kde.plasma.private.purpose 1.0
 
-DropArea {
+PlasmoidItem {
     id: root
 
-    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    preferredRepresentation: fullRepresentation
 
     readonly property bool inPanel: (plasmoid.location === PlasmaCore.Types.TopEdge
         || plasmoid.location === PlasmaCore.Types.RightEdge
@@ -65,39 +65,6 @@ DropArea {
         return array;
     }
 
-    onEntered: {
-        root.state = "idle";
-        var mimetype;
-        if (drag.hasUrls) {
-            mimetype = urlsMimetype(objectToArray(drag.urls));
-        } else {
-            mimetype = firstMimeType(drag.formats);
-        }
-        icon.source = mimetype.iconName;
-        drag.accepted = true
-    }
-    onExited: {
-        icon.source = "edit-paste"
-    }
-
-    QtExtra.Clipboard {
-        id: clipboard
-    }
-
-    QtExtra.MimeDatabase {
-        id: mimeDb
-    }
-
-    function resetActions() {
-        for(var v in root.pasteUrls) {
-            plasmoid.setAction(v, root.pasteUrls[v], "");
-        }
-    }
-
-    ContentTracker {
-        id: contentTracker
-    }
-
     function activate() {
         if (root.state == "configuration") {
             root.state = "idle";
@@ -112,82 +79,9 @@ DropArea {
         }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        activeFocusOnTab: true
-        Keys.onPressed: {
-            switch (event.key) {
-            case Qt.Key_Space:
-            case Qt.Key_Enter:
-            case Qt.Key_Return:
-            case Qt.Key_Select:
-                activate();
-                break;
-            }
-        }
-        Accessible.name: tooltipArea.mainText
-        Accessible.description: tooltipArea.subText
-        Accessible.role: Accessible.Button
-        onClicked: {
-            activate();
-        }
-    }
-    Plasmoid.onActivated: {
-        activate();
-    }
-
-    ShowUrlDialog {
-        id: showUrl
-        location: plasmoid.location
-        visualParent: parent
-        onCopyUrl: {
-            clipboard.content = showUrl.url;
-        }
-    }
-
-    function copyUrl(url) {
-        if (plasmoid.configuration.copyAutomatically)
-            clipboard.content = url;
-        else {
-            showUrl.url = url
-            showUrl.visible = true
-        }
-    }
-
-    ShareDialog {
-        id: shareDialog
-        location: plasmoid.location
-        inputData: { urls: [] }
-        visualParent: parent
-        onRunningChanged: {
-            if (running) {
-                root.state = "sending"
-            }
-        }
-        onFinished: {
-            if (error==0 && output.url !== "") {
-                console.assert(output.url !== undefined);
-                var resultUrl = output.url;
-                console.log("Received url", resultUrl)
-                if (resultUrl) {
-                    root.url = resultUrl;
-                    copyUrl(resultUrl)
-
-                    root.pasteUrls.push(resultUrl);
-                    while (plasmoid.configuration.historySize <= root.pasteUrls.length && root.pasteUrls.length !== 0) {
-                        root.pasteUrls.shift();
-                    }
-                }
-
-                resetActions();
-            }
-            shareDialog.visible = false;
-            root.state = error===0 ? "success" : "failure";
-            root.errorMessage = message;
-        }
-        onWindowDeactivated: {
-            if (!running)
-                root.state = "idle";
+    function resetActions() {
+        for(var v in root.pasteUrls) {
+            plasmoid.setAction(v, root.pasteUrls[v], "");
         }
     }
 
@@ -203,24 +97,6 @@ DropArea {
             "mimeType": mimetype
         }
         root.state = "configuration"
-    }
-
-    onDropped: {
-        if (drop.hasUrls) {
-            var urls = objectToArray(drop.urls);
-
-            sendData(urls, urlsMimetype(urls).name);
-        } else {
-            var mimetype = firstMimeType(drop.formats).name;
-            var data = drop.getDataAsArrayBuffer(mimetype);
-            sendBase64Data(PurposeHelper.variantToBase64(data), mimetype);
-        }
-        drop.accepted = true;
-    }
-
-    Component.onCompleted: {
-        plasmoid.setAction("paste", i18nc("@action", "Paste"), "edit-paste");
-        plasmoid.setActionSeparator("pastes");
     }
 
     function actionTriggered(actionName) {
@@ -242,46 +118,173 @@ DropArea {
         }
     }
 
-    PlasmaCore.ToolTipArea {
-        id: tooltipArea
-        anchors.fill: parent
-        location: plasmoid.location
-        active: true
-        mainText: i18n("Share")
-        subText: i18n("Drop text or an image onto me to upload it to an online service.")
-    }
-
-    PlasmaCore.IconItem {
-        id: icon
-        anchors.fill: parent
-    }
-
-    PlasmaComponents3.BusyIndicator {
-        id: busy
-        anchors.centerIn: parent
-        visible: false
-    }
-
-    Rectangle {
-        border {
-            color: PlasmaCore.Theme.textColor
-            width: root.containsDrag ? 5 : 1
+    function copyUrl(url) {
+        if (plasmoid.configuration.copyAutomatically)
+            clipboard.content = url;
+        else {
+            showUrl.url = url
+            showUrl.visible = true
         }
-        color: PlasmaCore.Theme.backgroundColor
-        radius: Math.max(parent.width, parent.height)/10
+    }
+
+    DropArea {
         anchors.fill: parent
-        opacity: root.containsDrag || tooltipArea.containsMouse ? .3 : 0
+        onEntered: {
+            root.state = "idle";
+            var mimetype;
+            if (drag.hasUrls) {
+                mimetype = urlsMimetype(objectToArray(drag.urls));
+            } else {
+                mimetype = firstMimeType(drag.formats);
+            }
+            icon.source = mimetype.iconName;
+            drag.accepted = true
+        }
+        onExited: {
+            icon.source = "edit-paste"
+        }
 
-        Behavior on opacity { NumberAnimation { duration: PlasmaCore.Units.shortDuration } }
+        QtExtra.Clipboard {
+            id: clipboard
+        }
+
+        QtExtra.MimeDatabase {
+            id: mimeDb
+        }
+
+        ContentTracker {
+            id: contentTracker
+        }
+
+        MouseArea {
+            anchors.fill: parent
+            activeFocusOnTab: true
+            Keys.onPressed: {
+                switch (event.key) {
+                case Qt.Key_Space:
+                case Qt.Key_Enter:
+                case Qt.Key_Return:
+                case Qt.Key_Select:
+                    activate();
+                    break;
+                }
+            }
+            Accessible.name: tooltipArea.mainText
+            Accessible.description: tooltipArea.subText
+            Accessible.role: Accessible.Button
+            onClicked: {
+                activate();
+            }
+        }
+        Plasmoid.onActivated: {
+            activate();
+        }
+
+        ShowUrlDialog {
+            id: showUrl
+            location: plasmoid.location
+            visualParent: parent
+            onCopyUrl: {
+                clipboard.content = showUrl.url;
+            }
+        }
+
+        ShareDialog {
+            id: shareDialog
+            location: plasmoid.location
+            inputData: { urls: [] }
+            visualParent: parent
+            onRunningChanged: {
+                if (running) {
+                    root.state = "sending"
+                }
+            }
+            onFinished: {
+                if (error==0 && output.url !== "") {
+                    console.assert(output.url !== undefined);
+                    var resultUrl = output.url;
+                    console.log("Received url", resultUrl)
+                    if (resultUrl) {
+                        root.url = resultUrl;
+                        copyUrl(resultUrl)
+
+                        root.pasteUrls.push(resultUrl);
+                        while (plasmoid.configuration.historySize <= root.pasteUrls.length && root.pasteUrls.length !== 0) {
+                            root.pasteUrls.shift();
+                        }
+                    }
+
+                    resetActions();
+                }
+                shareDialog.visible = false;
+                root.state = error===0 ? "success" : "failure";
+                root.errorMessage = message;
+            }
+            onWindowDeactivated: {
+                if (!running)
+                    root.state = "idle";
+            }
+        }
+
+        onDropped: {
+            if (drop.hasUrls) {
+                var urls = objectToArray(drop.urls);
+
+                sendData(urls, urlsMimetype(urls).name);
+            } else {
+                var mimetype = firstMimeType(drop.formats).name;
+                var data = drop.getDataAsArrayBuffer(mimetype);
+                sendBase64Data(PurposeHelper.variantToBase64(data), mimetype);
+            }
+            drop.accepted = true;
+        }
+
+        Component.onCompleted: {
+            plasmoid.setAction("paste", i18nc("@action", "Paste"), "edit-paste");
+            plasmoid.setActionSeparator("pastes");
+        }
+
+        PlasmaCore.ToolTipArea {
+            id: tooltipArea
+            anchors.fill: parent
+            location: plasmoid.location
+            active: true
+            mainText: i18n("Share")
+            subText: i18n("Drop text or an image onto me to upload it to an online service.")
+        }
+
+        PlasmaCore.IconItem {
+            id: icon
+            anchors.fill: parent
+        }
+
+        PlasmaComponents3.BusyIndicator {
+            id: busy
+            anchors.centerIn: parent
+            visible: false
+        }
+
+        Rectangle {
+            border {
+                color: PlasmaCore.Theme.textColor
+                width: root.containsDrag ? 5 : 1
+            }
+            color: PlasmaCore.Theme.backgroundColor
+            radius: Math.max(parent.width, parent.height)/10
+            anchors.fill: parent
+            opacity: root.containsDrag || tooltipArea.containsMouse ? .3 : 0
+
+            Behavior on opacity { NumberAnimation { duration: PlasmaCore.Units.shortDuration } }
+        }
+
+        Timer {
+            id: idleTimer
+            running: false
+            interval: 5000
+            onTriggered: root.state = "idle"
+        }
+
     }
-
-    Timer {
-        id: idleTimer
-        running: false
-        interval: 5000
-        onTriggered: root.state = "idle"
-    }
-
     state: "idle"
     states: [
         State {

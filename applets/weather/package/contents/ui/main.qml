@@ -12,7 +12,7 @@ import org.kde.plasma.plasma5support 2.0 as P5Support
 
 import org.kde.plasma.private.weather 1.0
 
-Item {
+PlasmoidItem {
     id: root
 
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
@@ -367,11 +367,11 @@ Item {
     Plasmoid.busy: status === Util.Connecting
     Plasmoid.configurationRequired: status === Util.NeedsConfiguration
 
-    Plasmoid.toolTipMainText: (status === Util.NeedsConfiguration) ?
+    toolTipMainText: (status === Util.NeedsConfiguration) ?
         i18nc("@info:tooltip %1 is the translated plasmoid name", "Click to configure %1", Plasmoid.title) :
         generalModel.location
 
-    Plasmoid.toolTipSubText: {
+    toolTipSubText: {
         if (!generalModel.location) {
             return "";
         }
@@ -411,12 +411,12 @@ Item {
         return tooltips.join("\n");
     }
 
-    Plasmoid.compactRepresentation: CompactRepresentation {
+    compactRepresentation: CompactRepresentation {
         generalModel: root.generalModel
         observationModel: root.observationModel
     }
 
-    Plasmoid.fullRepresentation: FullRepresentation {
+    fullRepresentation: FullRepresentation {
         generalModel: root.generalModel
         observationModel: root.observationModel
     }

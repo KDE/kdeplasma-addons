@@ -14,16 +14,16 @@ import org.kde.plasma.plasmoid 2.0
 // nothing used, but done to trigger imageprovider addition in plugin init
 import org.kde.plasma.private.fifteenpuzzle 0.1 as Private
 
-Item {
+PlasmoidItem {
     id: root
 
-    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 16 - 20
-    Plasmoid.switchHeight: Plasmoid.switchWidth
+    switchWidth: PlasmaCore.Units.gridUnit * 16 - 20
+    switchHeight: switchWidth
 
-    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    preferredRepresentation: fullRepresentation
 
-    Plasmoid.toolTipMainText: i18n("Fifteen Puzzle");
-    Plasmoid.toolTipSubText: i18n("Solve by arranging in order");
+    toolTipMainText: i18n("Fifteen Puzzle");
+    toolTipSubText: i18n("Solve by arranging in order");
 
-    Plasmoid.fullRepresentation: FifteenPuzzle { }
+    fullRepresentation: FifteenPuzzle { }
 }

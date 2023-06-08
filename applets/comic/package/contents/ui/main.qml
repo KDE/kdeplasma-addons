@@ -9,24 +9,23 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
-import org.kde.plasma.components 2.0 as PlasmaComponents // PC3 TabBar+TabButton need work first
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 
-Item {
+PlasmoidItem {
     id: mainWindow
 
     readonly property int implicitWidth: PlasmaCore.Units.gridUnit * 40
     readonly property int implicitHeight: PlasmaCore.Units.gridUnit * 15
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
-    Plasmoid.switchWidth: {
+    switchWidth: {
         if (centerLayout.comicData.image) {
             return Math.max(minimumWidth, Math.min(centerLayout.comicData.image.nativeWidth * 0.6, implicitWidth));
         } else {
             return PlasmaCore.Units.gridUnit * 8;
         }
     }
-    Plasmoid.switchHeight: {
+    switchHeight: {
         if (centerLayout.comicData.image) {
             return Math.max(minimumHeight, Math.min(centerLayout.comicData.image.nativeHeight * 0.6, implicitHeight));
         } else {
@@ -40,13 +39,13 @@ Item {
 
     readonly property int minimumWidth: PlasmaCore.Units.gridUnit * 8
     readonly property int minimumHeight: PlasmaCore.Units.gridUnit * 8
-    readonly property bool showComicAuthor: plasmoid.nativeInterface.showComicAuthor
-    readonly property bool showComicTitle: plasmoid.nativeInterface.showComicTitle
-    readonly property bool showErrorPicture: plasmoid.nativeInterface.showErrorPicture
-    readonly property bool middleClick: plasmoid.nativeInterface.middleClick
+    readonly property bool showComicAuthor: plasmoid.showComicAuthor
+    readonly property bool showComicTitle: plasmoid.showComicTitle
+    readonly property bool showErrorPicture: plasmoid.showErrorPicture
+    readonly property bool middleClick: plasmoid.middleClick
 
     Connections {
-        target: plasmoid.nativeInterface
+        target: plasmoid
 
         function onComicsModelChanged() {
             comicTabbar.currentTab = comicTabbar.layout.children[1];
@@ -89,92 +88,95 @@ Item {
         imagePath: "widgets/arrows"
     }
 
-    PlasmaComponents.TabBar{
-        id: comicTabbar
+    Item {
+        anchors.fill: parent
+        PlasmaComponents3.TabBar {
+            id: comicTabbar
 
-        anchors {
-            left: parent.left
-            right: parent.right
-        }
-
-        visible: plasmoid.nativeInterface.tabIdentifiers.length > 1
-
-        onCurrentTabChanged: {
-            console.log("onCurrentTabChanged:" + comicTabbar.currentTab.key);
-            plasmoid.nativeInterface.tabChanged(comicTabbar.currentTab.key);
-        }
-
-        Repeater {
-            model: plasmoid.nativeInterface.comicsModel
-            delegate:  PlasmaComponents.TabButton {
-                id: tabButton
-
-                readonly property string key: model.key
-                property bool highlighted: model.highlight
-
-                text: model.title
-                iconSource: model.icon
-            }
-        }
-    }
-
-    PlasmaComponents3.Label {
-        id: topInfo
-
-        anchors {
-            top: comicTabbar.visible ? comicTabbar.bottom : mainWindow.top
-            left: mainWindow.left
-            right: mainWindow.right
-        }
-
-        visible: (topInfo.text.length > 0)
-        horizontalAlignment: Text.AlignHCenter
-        text: (showComicAuthor || showComicTitle) ? getTopInfo() : ""
-
-        function getTopInfo() {
-            var tempTop = "";
-
-            if ( showComicTitle ) {
-                tempTop = plasmoid.nativeInterface.comicData.title;
-                tempTop += ( ( (plasmoid.nativeInterface.comicData.stripTitle.length > 0) && (plasmoid.nativeInterface.comicData.title.length > 0) ) ? " - " : "" ) + plasmoid.nativeInterface.comicData.stripTitle;
+            anchors {
+                left: parent.left
+                right: parent.right
             }
 
-            if ( showComicAuthor &&
-                (plasmoid.nativeInterface.comicData.author != undefined || plasmoid.nativeInterface.comicData.author.length > 0) ) {
-                tempTop = ( tempTop.length > 0 ? plasmoid.nativeInterface.comicData.author + ": " + tempTop : plasmoid.nativeInterface.comicData.author );
+            visible: plasmoid.tabIdentifiers.length > 1
+
+            onCurrentIndexChanged: {
+                console.log("onCurrentTabChanged:" + comicTabbar.currentItem.key);
+                plasmoid.tabChanged(comicTabbar.currentItem.key);
             }
 
-            return tempTop;
-        }
-    }
+            Repeater {
+                model: plasmoid.comicsModel
+                delegate:  PlasmaComponents3.TabButton {
+                    id: tabButton
 
-    ComicCentralView {
-        id: centerLayout
+                    readonly property string key: model.key
+                    property bool highlighted: model.highlight
 
-        anchors {
-            left: mainWindow.left
-            right: mainWindow.right
-            bottom: (bottomInfo.visible) ? bottomInfo.top : mainWindow.bottom
-            top: (topInfo.visible) ? topInfo.bottom : (comicTabbar.visible ? comicTabbar.bottom : mainWindow.top)
-            topMargin: (comicTabbar.visible) ? 3 : 0
-        }
-
-        visible: plasmoid.nativeInterface.tabIdentifiers.length > 0
-        comicData: plasmoid.nativeInterface.comicData
-    }
-
-    ComicBottomInfo {
-        id:bottomInfo
-
-        anchors {
-            left: mainWindow.left
-            right: mainWindow.right
-            bottom: mainWindow.bottom
+                    text: model.title
+                    icon.source: model.icon
+                }
+            }
         }
 
-        comicData: plasmoid.nativeInterface.comicData
-        showUrl: plasmoid.nativeInterface.showComicUrl
-        showIdentifier: plasmoid.nativeInterface.showComicIdentifier
+        PlasmaComponents3.Label {
+            id: topInfo
+
+            anchors {
+                top: comicTabbar.visible ? comicTabbar.bottom : mainWindow.top
+                left: mainWindow.left
+                right: mainWindow.right
+            }
+
+            visible: (topInfo.text.length > 0)
+            horizontalAlignment: Text.AlignHCenter
+            text: (showComicAuthor || showComicTitle) ? getTopInfo() : ""
+
+            function getTopInfo() {
+                var tempTop = "";
+
+                if ( showComicTitle ) {
+                    tempTop = plasmoid.comicData.title;
+                    tempTop += ( ( (plasmoid.comicData.stripTitle.length > 0) && (plasmoid.comicData.title.length > 0) ) ? " - " : "" ) + plasmoid.comicData.stripTitle;
+                }
+
+                if ( showComicAuthor &&
+                    (plasmoid.comicData.author != undefined || plasmoid.comicData.author.length > 0) ) {
+                    tempTop = ( tempTop.length > 0 ? plasmoid.comicData.author + ": " + tempTop : plasmoid.comicData.author );
+                }
+
+                return tempTop;
+            }
+        }
+
+        ComicCentralView {
+            id: centerLayout
+
+            anchors {
+                left: mainWindow.left
+                right: mainWindow.right
+                bottom: (bottomInfo.visible) ? bottomInfo.top : mainWindow.bottom
+                top: (topInfo.visible) ? topInfo.bottom : (comicTabbar.visible ? comicTabbar.bottom : mainWindow.top)
+                topMargin: (comicTabbar.visible) ? 3 : 0
+            }
+
+            visible: plasmoid.tabIdentifiers.length > 0
+            comicData: plasmoid.comicData
+        }
+
+        ComicBottomInfo {
+            id:bottomInfo
+
+            anchors {
+                left: mainWindow.left
+                right: mainWindow.right
+                bottom: mainWindow.bottom
+            }
+
+            comicData: plasmoid.comicData
+            showUrl: plasmoid.showComicUrl
+            showIdentifier: plasmoid.showComicIdentifier
+        }
     }
 
     states: [

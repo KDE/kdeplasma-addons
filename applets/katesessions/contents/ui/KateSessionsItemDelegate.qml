@@ -10,18 +10,17 @@
 */
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
-import org.kde.plasma.components 2.0 as PlasmaComponents
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddons
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 import org.kde.plasma.private.profiles 1.0
 
-PlasmaComponents.ListItem {
+PlasmaComponents3.ItemDelegate {
     id: menuItem
 
     signal itemSelected(string profileIdentifier)
-    
+
     property bool showInput: false
 
     height: Math.max(label.height, sessionnameditlayout.implicitHeight) + PlasmaCore.Units.smallSpacing

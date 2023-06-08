@@ -14,7 +14,7 @@ import org.kde.plasma.private.quicklaunch 1.0
 
 import "layout.js" as LayoutManager
 
-Item {
+PlasmoidItem {
     id: root
 
     readonly property int maxSectionCount: plasmoid.configuration.maxSectionCount
@@ -30,200 +30,206 @@ Item {
     Layout.preferredWidth: LayoutManager.preferredWidth()
     Layout.preferredHeight: LayoutManager.preferredHeight()
 
-    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    preferredRepresentation: fullRepresentation
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
 
-    DragAndDrop.DropArea {
-        anchors.fill: parent
-        preventStealing: true
-        enabled: !plasmoid.immutable
-
-        onDragEnter: {
-            if (event.mimeData.hasUrls) {
-                dragging = true;
-            } else {
-                event.ignore();
-            }
-        }
-
-        onDragMove: {
-            var index = grid.indexAt(event.x, event.y);
-
-            if (isInternalDrop(event)) {
-                launcherModel.moveUrl(event.mimeData.source.itemIndex, index);
-            } else {
-                launcherModel.showDropMarker(index);
-            }
-
-            popup.visible = root.childAt(event.x, event.y) == popupArrow;
-        }
-
-        onDragLeave: {
-            dragging = false;
-            launcherModel.clearDropMarker();
-        }
-
-        onDrop: {
-            dragging = false;
-            launcherModel.clearDropMarker();
-
-            if (isInternalDrop(event)) {
-                event.accept(Qt.IgnoreAction);
-                saveConfiguration();
-            } else {
-                var index = grid.indexAt(event.x, event.y);
-                launcherModel.insertUrls(index == -1 ? launcherModel.count : index, event.mimeData.urls);
-                event.accept(event.proposedAction);
-            }
-        }
-    }
-
-    PlasmaComponents3.Label {
-        id: titleLabel
-
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-
-        height: PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignTop
-        elide: Text.ElideMiddle
-        text: title
-    }
-
     Item {
-        id: launcher
+        anchors.fill: parent
 
-        anchors {
-            top: title.length ? titleLabel.bottom : parent.top
-            left: parent.left
-            right: !vertical && popupArrow.visible ? popupArrow.left : parent.right
-            bottom: vertical && popupArrow.visible ? popupArrow.top : parent.bottom
-        }
-
-        GridView {
-            id: grid
+        DragAndDrop.DropArea {
             anchors.fill: parent
-            interactive: false
-            flow: horizontal ? GridView.FlowTopToBottom : GridView.FlowLeftToRight
-            cellWidth: LayoutManager.preferredCellWidth()
-            cellHeight: LayoutManager.preferredCellHeight()
-            visible: count
+            preventStealing: true
+            enabled: !plasmoid.immutable
 
-            model: UrlModel {
-                id: launcherModel
+            onDragEnter: {
+                if (event.mimeData.hasUrls) {
+                    dragging = true;
+                } else {
+                    event.ignore();
+                }
             }
 
-            delegate: IconItem { }
+            onDragMove: {
+                var index = grid.indexAt(event.x, event.y);
 
-            function moveItemToPopup(iconItem, url) {
-                if (!popupArrow.visible) {
-                    return;
+                if (isInternalDrop(event)) {
+                    launcherModel.moveUrl(event.mimeData.source.itemIndex, index);
+                } else {
+                    launcherModel.showDropMarker(index);
                 }
 
-                popup.visible = true;
-                popup.mainItem.popupModel.insertUrl(popup.mainItem.popupModel.count, url);
-                popup.mainItem.listView.currentIndex = popup.mainItem.popupModel.count - 1;
-                iconItem.removeLauncher();
+                popup.visible = root.childAt(event.x, event.y) == popupArrow;
+            }
+
+            onDragLeave: {
+                dragging = false;
+                launcherModel.clearDropMarker();
+            }
+
+            onDrop: {
+                dragging = false;
+                launcherModel.clearDropMarker();
+
+                if (isInternalDrop(event)) {
+                    event.accept(Qt.IgnoreAction);
+                    saveConfiguration();
+                } else {
+                    var index = grid.indexAt(event.x, event.y);
+                    launcherModel.insertUrls(index == -1 ? launcherModel.count : index, event.mimeData.urls);
+                    event.accept(event.proposedAction);
+                }
             }
         }
 
-        PlasmaCore.IconItem {
-            id: defaultIcon
-            anchors.fill: parent
-            source: "fork"
-            visible: !grid.visible
+        PlasmaComponents3.Label {
+            id: titleLabel
 
-            PlasmaCore.ToolTipArea {
+            anchors {
+                top: parent.top
+                left: parent.left
+                right: parent.right
+            }
+
+            height: PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignTop
+            elide: Text.ElideMiddle
+            text: title
+        }
+
+        Item {
+            id: launcher
+
+            anchors {
+                top: title.length ? titleLabel.bottom : parent.top
+                left: parent.left
+                right: !vertical && popupArrow.visible ? popupArrow.left : parent.right
+                bottom: vertical && popupArrow.visible ? popupArrow.top : parent.bottom
+            }
+
+            GridView {
+                id: grid
                 anchors.fill: parent
-                mainText: i18n("Quicklaunch")
-                subText: i18nc("@info", "Add launchers by Drag and Drop or by using the context menu.")
-            }
-        }
-    }
+                interactive: false
+                flow: horizontal ? GridView.FlowTopToBottom : GridView.FlowLeftToRight
+                cellWidth: LayoutManager.preferredCellWidth()
+                cellHeight: LayoutManager.preferredCellHeight()
+                visible: count
 
-    PlasmaCore.Dialog {
-        id: popup
-        type: PlasmaCore.Dialog.PopupMenu
-        flags: Qt.WindowStaysOnTopHint
-        hideOnWindowDeactivate: true
-        location: plasmoid.location
-        visualParent: vertical ? popupArrow : root
+                model: UrlModel {
+                    id: launcherModel
+                }
 
-        mainItem: Popup {
-            Keys.onEscapePressed: popup.visible = false
-        }
-    }
+                delegate: IconItem { }
 
-    PlasmaCore.ToolTipArea {
-        id: popupArrow
-        visible: enablePopup
+                function moveItemToPopup(iconItem, url) {
+                    if (!popupArrow.visible) {
+                        return;
+                    }
 
-        anchors {
-            top: vertical ? undefined : parent.top
-            right: parent.right
-            bottom: parent.bottom
-        }
-
-        subText: popup.visible ? i18n("Hide icons") : i18n("Show hidden icons")
-
-        MouseArea {
-            id: arrowMouseArea
-            anchors.fill: parent
-
-            activeFocusOnTab: parent.visible
-
-            Keys.onPressed: {
-                switch (event.key) {
-                case Qt.Key_Space:
-                case Qt.Key_Enter:
-                case Qt.Key_Return:
-                case Qt.Key_Select:
-                    arrowMouseArea.clicked(null);
-                    break;
+                    popup.visible = true;
+                    popup.mainItem.popupModel.insertUrl(popup.mainItem.popupModel.count, url);
+                    popup.mainItem.listView.currentIndex = popup.mainItem.popupModel.count - 1;
+                    iconItem.removeLauncher();
                 }
             }
-            Accessible.name: parent.subText
-            Accessible.role: Accessible.Button
 
-            onClicked: {
-                popup.visible = !popup.visible
+            PlasmaCore.IconItem {
+                id: defaultIcon
+                anchors.fill: parent
+                source: "fork"
+                visible: !grid.visible
+
+                PlasmaCore.ToolTipArea {
+                    anchors.fill: parent
+                    mainText: i18n("Quicklaunch")
+                    subText: i18nc("@info", "Add launchers by Drag and Drop or by using the context menu.")
+                    location: Plasmoid.location
+                }
+            }
+        }
+
+        PlasmaCore.Dialog {
+            id: popup
+            type: PlasmaCore.Dialog.PopupMenu
+            flags: Qt.WindowStaysOnTopHint
+            hideOnWindowDeactivate: true
+            location: plasmoid.location
+            visualParent: vertical ? popupArrow : root
+
+            mainItem: Popup {
+                Keys.onEscapePressed: popup.visible = false
+            }
+        }
+
+        PlasmaCore.ToolTipArea {
+            id: popupArrow
+            visible: enablePopup
+            location: Plasmoid.location
+
+            anchors {
+                top: vertical ? undefined : parent.top
+                right: parent.right
+                bottom: parent.bottom
             }
 
-            PlasmaCore.Svg {
-                id: arrowSvg
-                imagePath: "widgets/arrows"
-            }
+            subText: popup.visible ? i18n("Hide icons") : i18n("Show hidden icons")
 
-            PlasmaCore.SvgItem {
-                id: arrow
+            MouseArea {
+                id: arrowMouseArea
+                anchors.fill: parent
 
-                anchors.centerIn: parent
-                width: Math.min(parent.width, parent.height)
-                height: width
+                activeFocusOnTab: parent.visible
 
-                rotation: popup.visible ? 180 : 0
-                Behavior on rotation {
-                    RotationAnimation {
-                        duration: PlasmaCore.Units.shortDuration * 3
+                Keys.onPressed: {
+                    switch (event.key) {
+                    case Qt.Key_Space:
+                    case Qt.Key_Enter:
+                    case Qt.Key_Return:
+                    case Qt.Key_Select:
+                        arrowMouseArea.clicked(null);
+                        break;
                     }
                 }
+                Accessible.name: parent.subText
+                Accessible.role: Accessible.Button
 
-                svg: arrowSvg
-                elementId: {
-                    if (plasmoid.location == PlasmaCore.Types.TopEdge) {
-                        return "down-arrow";
-                    } else if (plasmoid.location == PlasmaCore.Types.LeftEdge) {
-                        return "right-arrow";
-                    } else if (plasmoid.location == PlasmaCore.Types.RightEdge) {
-                        return "left-arrow";
-                    } else if (vertical) {
-                        return "right-arrow";
-                    } else {
-                        return "up-arrow";
+                onClicked: {
+                    popup.visible = !popup.visible
+                }
+
+                PlasmaCore.Svg {
+                    id: arrowSvg
+                    imagePath: "widgets/arrows"
+                }
+
+                PlasmaCore.SvgItem {
+                    id: arrow
+
+                    anchors.centerIn: parent
+                    width: Math.min(parent.width, parent.height)
+                    height: width
+
+                    rotation: popup.visible ? 180 : 0
+                    Behavior on rotation {
+                        RotationAnimation {
+                            duration: PlasmaCore.Units.shortDuration * 3
+                        }
+                    }
+
+                    svg: arrowSvg
+                    elementId: {
+                        if (plasmoid.location == PlasmaCore.Types.TopEdge) {
+                            return "down-arrow";
+                        } else if (plasmoid.location == PlasmaCore.Types.LeftEdge) {
+                            return "right-arrow";
+                        } else if (plasmoid.location == PlasmaCore.Types.RightEdge) {
+                            return "left-arrow";
+                        } else if (vertical) {
+                            return "right-arrow";
+                        } else {
+                            return "up-arrow";
+                        }
                     }
                 }
             }

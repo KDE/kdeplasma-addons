@@ -12,16 +12,16 @@ AbstractItem {
     id: plasmoidContainer
 
     property Item applet
-    text: applet ? applet.title : ""
+    text: applet ? applet.plasmoid.title : ""
 
-    itemId: applet ? applet.id : ""
-    status: applet ? applet.status : PlasmaCore.Types.UnknownStatus
+    itemId: applet ? applet.plasmoid.id : ""
+    status: applet ? applet.plasmoid.status : PlasmaCore.Types.UnknownStatus
     active: root.activeApplet !== applet
 
     onClicked: {
         if (applet) {
             if (mouse.button === Qt.RightButton) {
-                plasmoid.nativeInterface.showPlasmoidMenu(applet, mouse.x, mouse.y);
+                plasmoid.showPlasmoidMenu(applet, mouse.x, mouse.y);
             }
         }
     }

@@ -15,7 +15,7 @@ import org.kde.draganddrop 2.0 as DnD
 
 import "items"
 
-Item {
+ContainmentItem {
     id: root
 
     //be at least the same size as the system tray popup
@@ -42,6 +42,8 @@ Item {
     }
 
     function addApplet(applet) {
+        const appletItem = root.itemFor(applet);
+
         if (!plasmoidItemComponent) {
             plasmoidItemComponent = Qt.createComponent("items/PlasmoidItem.qml");
         }
@@ -50,12 +52,12 @@ Item {
             console.warn("Could not create PlasmoidItem", plasmoidItemComponent.errorString());
         }
 
-        var plasmoidContainer = plasmoidItemComponent.createObject(mainStack, { applet });
+        var plasmoidContainer = plasmoidItemComponent.createObject(mainStack, { "applet": appletItem });
 
-        applet.anchors.fill = undefined;
-        applet.parent = plasmoidContainer;
-        applet.anchors.fill = plasmoidContainer;
-        applet.visible = true;
+        appletItem.anchors.fill = undefined;
+        appletItem.parent = plasmoidContainer;
+        appletItem.anchors.fill = plasmoidContainer;
+        appletItem.visible = true;
     }
 
     Component.onCompleted: {
@@ -65,43 +67,46 @@ Item {
         }
     }
 
-    PlasmaComponents.TabBar {
-        id: tabbar
-        anchors.top: parent.top
-        anchors.left: parent.left
-        anchors.right: parent.right
+    Item {
+        anchors.fill: parent
+        PlasmaComponents.TabBar {
+            id: tabbar
+            anchors.top: parent.top
+            anchors.left: parent.left
+            anchors.right: parent.right
 
-        LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
-        LayoutMirroring.childrenInherit: true
+            LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+            LayoutMirroring.childrenInherit: true
 
-        Repeater {
-            model: mainStack.children
+            Repeater {
+                model: mainStack.children
 
-            //attached properties:
-            //  model == a QQmlDMObjectData wrapper round the PlasmoidItem
-            //  modelData == the PlasmoidItem instance
-            PlasmaComponents.TabButton {
-                text: model.text
-                MouseArea {
-                    acceptedButtons: Qt.RightButton
-                    anchors.fill: parent
-                    onClicked: {
-                        modelData.clicked(mouse);
+                //attached properties:
+                //  model == a QQmlDMObjectData wrapper round the PlasmoidItem
+                //  modelData == the PlasmoidItem instance
+                PlasmaComponents.TabButton {
+                    text: model.text
+                    MouseArea {
+                        acceptedButtons: Qt.RightButton
+                        anchors.fill: parent
+                        onClicked: {
+                            modelData.clicked(mouse);
+                        }
                     }
                 }
             }
+            //hack: PlasmaComponents.TabBar is being weird with heights. Probably a bug
+            height: contentChildren[0] ? contentChildren[0].height : undefined
         }
-        //hack: PlasmaComponents.TabBar is being weird with heights. Probably a bug
-        height: contentChildren[0] ? contentChildren[0].height : undefined
-    }
 
-    StackLayout {
-        id: mainStack
-        currentIndex: tabbar.currentIndex
-        anchors.top: tabbar.bottom
-        anchors.left: parent.left
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
+        StackLayout {
+            id: mainStack
+            currentIndex: tabbar.currentIndex
+            anchors.top: tabbar.bottom
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+        }
     }
 
     DnD.DropArea {
@@ -131,7 +136,7 @@ Item {
                 event.ignore();
                 return;
             }
-            plasmoid.nativeInterface.newTask(plasmoidId);
+            plasmoid.newTask(plasmoidId);
         }
     }
 

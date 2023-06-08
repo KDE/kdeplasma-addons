@@ -135,7 +135,7 @@ Item {
 
             onClicked: {
                 if (root.seconds === 0) {
-                    Plasmoid.expanded = !Plasmoid.expanded;
+                    root.expanded = !root.expanded;
                 } else {
                     root.toggleTimer();
                 }
@@ -238,7 +238,7 @@ Item {
 
         TapHandler {
             acceptedButtons: Qt.LeftButton
-            onTapped: Plasmoid.expanded = !Plasmoid.expanded
+            onTapped: root.expanded = !root.expanded
         }
     }
 }

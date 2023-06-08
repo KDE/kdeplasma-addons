@@ -68,7 +68,7 @@ PlasmaCore.Dialog
                         id: button
                         Layout.alignment: Qt.AlignVCenter
                         icon.name: "arrow-right"
-                        onClicked: view.createJob(odel.index)
+                        onClicked: view.createJob(model.index)
                     }
                 }
             }

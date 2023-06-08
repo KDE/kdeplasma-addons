@@ -14,5 +14,6 @@ target_link_libraries(org.kde.plasma.grouping
                       Qt::Gui
                       Qt::Quick
                       KF6::Plasma
+                      KF6::PlasmaQuick
                       KF6::XmlGui
                       KF6::I18n)

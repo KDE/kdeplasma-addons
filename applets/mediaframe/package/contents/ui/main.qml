@@ -17,7 +17,7 @@ import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.mediaframe 2.0
 
-Item {
+PlasmoidItem {
     id: main
 
     MediaFrame {
@@ -25,10 +25,10 @@ Item {
         random: plasmoid.configuration.randomize
     }
 
-    Plasmoid.preferredRepresentation: plasmoid.fullRepresentation
+    preferredRepresentation: fullRepresentation
 
-    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 5
-    Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 5
+    switchWidth: PlasmaCore.Units.gridUnit * 5
+    switchHeight: PlasmaCore.Units.gridUnit * 5
 
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
 
@@ -53,6 +53,16 @@ Item {
             if(activeSource == "")
                 nextItem()
         }
+    }
+
+    onExternalData: (mimetype, data) => {
+        var type = items.isDir(data) ? "folder" : "file";
+        var item = {
+            "path": data,
+            "type": type
+        };
+
+        addItem(item);
     }
 
     function loadPathList() {
@@ -442,19 +452,6 @@ Item {
         text: i18nc("@action:button", "Configure…")
         onClicked: {
             plasmoid.action("configure").trigger();
-        }
-    }
-
-    Connections {
-        target: plasmoid
-        function onExternalData(mimetype, data) {
-            var type = items.isDir(data) ? "folder" : "file";
-            var item = {
-                "path": data,
-                "type": type
-            };
-
-            addItem(item);
         }
     }
 }

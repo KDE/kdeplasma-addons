@@ -20,7 +20,7 @@ import org.kde.kwindowsystem 1.0
 import org.kde.plasma.private.colorpicker 2.0 as ColorPicker
 import "logic.js" as Logic
 
-Item {
+PlasmoidItem {
     id: root
 
     readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
@@ -29,7 +29,7 @@ Item {
     readonly property string defaultFormat: Plasmoid.configuration.defaultFormat
     readonly property int maxColorCount: 9
 
-    Plasmoid.preferredRepresentation: Plasmoid.compactRepresentation
+    preferredRepresentation: compactRepresentation
 
     function addColorToHistory(color) {
         // this .toString() is needed otherwise Qt completely screws it up
@@ -53,7 +53,7 @@ Item {
     }
 
     function pickColor() {
-        Plasmoid.expanded = false
+        root.expanded = false
         picker.pick()
     }
 
@@ -105,7 +105,7 @@ Item {
     }
 
     function action_expand() {
-        Plasmoid.expanded = true;
+        root.expanded = true;
     }
 
     Component.onCompleted: {
@@ -116,9 +116,9 @@ Item {
         Logic.copyToClipboardText = i18ndc("plasma_applet_org.kde.plasma.colorpicker", "@title:menu", "Copy to Clipboard"); // i18n is not supported in js library
     }
 
-    Plasmoid.compactRepresentation: CompactRepresentation { }
+    compactRepresentation: CompactRepresentation { }
 
-    Plasmoid.fullRepresentation: GridView {
+    fullRepresentation: GridView {
         id: fullRoot
 
         readonly property int columns: 3
@@ -142,7 +142,7 @@ Item {
             anchors.centerIn: parent
             visible: active
 
-            active: fullRoot.count === 0 && Plasmoid.expanded
+            active: fullRoot.count === 0 && root.expanded
             asynchronous: true
 
             sourceComponent: PlasmaExtras.PlaceholderMessage {
@@ -182,9 +182,9 @@ Item {
         }
 
         Connections {
-            target: Plasmoid.self
+            target: root
             function onExpandedChanged() {
-                if (Plasmoid.expanded) {
+                if (root.expanded) {
                     fullRoot.forceActiveFocus()
                 }
             }
@@ -192,7 +192,7 @@ Item {
 
         Keys.onPressed: event => {
             if (event.key === Qt.Key_Escape) {
-                Plasmoid.expanded = false;
+                root.expanded = false;
                 event.accepted = true;
             }
         }

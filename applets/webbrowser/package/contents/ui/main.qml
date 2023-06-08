@@ -12,213 +12,221 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.plasmoid 2.0
 
-ColumnLayout {
-    RowLayout{
-        Layout.fillWidth: true
-        PlasmaComponents3.Button {
-            icon.name: "go-previous"
-            onClicked: webview.goBack()
-            enabled: webview.canGoBack
-            display: PlasmaComponents3.AbstractButton.IconOnly
-            text: i18nc("@action:button", "Go Back")
-        }
-        PlasmaComponents3.Button {
-            icon.name: "go-next"
-            onClicked: webview.goForward()
-            enabled: webview.canGoForward
-            display: PlasmaComponents3.AbstractButton.IconOnly
-            text: i18nc("@action:button", "Go Forward")
-        }
-        PlasmaComponents3.TextField {
+PlasmoidItem {
+    switchWidth: PlasmaCore.Units.gridUnit * 16
+    switchHeight: PlasmaCore.Units.gridUnit * 23
+    fullRepresentation: ColumnLayout {
+        Layout.minimumWidth: PlasmaCore.Units.gridUnit * 15
+        Layout.minimumHeight: PlasmaCore.Units.gridUnit * 22
+
+        RowLayout{
             Layout.fillWidth: true
-            onAccepted: {
-                var url = text;
-                if (url.indexOf(":/") < 0) {
-                    url = "http://" + url;
+            PlasmaComponents3.Button {
+                icon.name: "go-previous"
+                onClicked: webview.goBack()
+                enabled: webview.canGoBack
+                display: PlasmaComponents3.AbstractButton.IconOnly
+                text: i18nc("@action:button", "Go Back")
+            }
+            PlasmaComponents3.Button {
+                icon.name: "go-next"
+                onClicked: webview.goForward()
+                enabled: webview.canGoForward
+                display: PlasmaComponents3.AbstractButton.IconOnly
+                text: i18nc("@action:button", "Go Forward")
+            }
+            PlasmaComponents3.TextField {
+                Layout.fillWidth: true
+                onAccepted: {
+                    var url = text;
+                    if (url.indexOf(":/") < 0) {
+                        url = "http://" + url;
+                    }
+                    webview.url = url;
                 }
-                webview.url = url;
+                onActiveFocusChanged: {
+                    if (activeFocus) {
+                        selectAll();
+                    }
+                }
+
+                text: webview.url
+
+                Accessible.description: text.length > 0 ? text : i18nc("@info", "Type a URL")
             }
-            onActiveFocusChanged: {
-                if (activeFocus) {
-                    selectAll();
+
+            // this shows page-related information such as blocked popups
+            PlasmaComponents3.ToolButton {
+                id: infoButton
+
+                // callback invoked when button is clicked
+                property var cb
+
+                // button itself adds sufficient visual padding
+                Layout.leftMargin: -parent.spacing
+                Layout.rightMargin: -parent.spacing
+
+                onClicked: cb();
+
+                PlasmaComponents3.ToolTip {
+                    id: tooltip
+                }
+
+                function show(text, icon, tooltipText, cb) {
+                    infoButton.text = text;
+                    infoButton.icon.name = icon;
+                    tooltip.text = tooltipText;
+                    infoButton.cb = cb;
+                    infoButton.visible = true;
+                }
+
+                function dismiss() {
+                    infoButton.visible = false;
                 }
             }
 
-            text: webview.url
-
-            Accessible.description: text.length > 0 ? text : i18nc("@info", "Type a URL")
-        }
-
-        // this shows page-related information such as blocked popups
-        PlasmaComponents3.ToolButton {
-            id: infoButton
-
-            // callback invoked when button is clicked
-            property var cb
-
-            // button itself adds sufficient visual padding
-            Layout.leftMargin: -parent.spacing
-            Layout.rightMargin: -parent.spacing
-
-            onClicked: cb();
-
-            PlasmaComponents3.ToolTip {
-                id: tooltip
-            }
-
-            function show(text, icon, tooltipText, cb) {
-                infoButton.text = text;
-                infoButton.icon.name = icon;
-                tooltip.text = tooltipText;
-                infoButton.cb = cb;
-                infoButton.visible = true;
-            }
-
-            function dismiss() {
-                infoButton.visible = false;
-            }
-        }
-
-        PlasmaComponents3.Button {
-            display: PlasmaComponents3.AbstractButton.IconOnly
-            icon.name: webview.loading ? "process-stop" : "view-refresh"
-            text: webview.loading ? i18nc("@action:button", "Stop Loading This Page") : i18nc("@action:button", "Reload This Page")
-            onClicked: webview.loading ? webview.stop() : webview.reload()
-        }
-    }
-
-    Item {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-
-        // TODO use contentsSize but that crashes, now mostly for some sane initial size
-        Layout.preferredWidth: PlasmaCore.Units.gridUnit * 36
-        Layout.preferredHeight: PlasmaCore.Units.gridUnit * 18
-
-        // Binding it to e.g. width will be super slow on resizing
-        Timer {
-            id: updateZoomTimer
-            interval: 100
-
-            readonly property int minViewWidth: plasmoid.configuration.minViewWidth
-            readonly property bool useMinViewWidth: plasmoid.configuration.useMinViewWidth
-            readonly property int constantZoomFactor: plasmoid.configuration.constantZoomFactor
-
-            onTriggered: {
-                var newZoom = 1;
-                if (useMinViewWidth) {
-                    // Try to fit contents for a smaller screen
-                    newZoom = Math.min(1, webview.width / minViewWidth);
-                    // make sure value is valid
-                    newZoom = Math.max(0.25, newZoom);
-                } else {
-                    newZoom = constantZoomFactor / 100.0;
-                }
-                webview.zoomFactor = newZoom;
-                // setting the zoom factor does not always work on the first try; also, numbers get rounded
-                if (Math.round(1000 * webview.zoomFactor) != Math.round(1000 * newZoom)) {
-                    updateZoomTimer.restart();
-                }
+            PlasmaComponents3.Button {
+                display: PlasmaComponents3.AbstractButton.IconOnly
+                icon.name: webview.loading ? "process-stop" : "view-refresh"
+                text: webview.loading ? i18nc("@action:button", "Stop Loading This Page") : i18nc("@action:button", "Reload This Page")
+                onClicked: webview.loading ? webview.stop() : webview.reload()
             }
         }
 
-        // This reimplements WebEngineView context menu for links to add a "open externally" entry
-        // since you cannot add custom items there yet
-        // there's a FIXME comment about that in QQuickWebEngineViewPrivate::contextMenuRequested
-        PlasmaExtras.Menu {
-            id: linkContextMenu
-            visualParent: webview
+        Item {
+            Layout.fillWidth: true
+            Layout.fillHeight: true
 
-            property string link
+            // TODO use contentsSize but that crashes, now mostly for some sane initial size
+            Layout.preferredWidth: PlasmaCore.Units.gridUnit * 36
+            Layout.preferredHeight: PlasmaCore.Units.gridUnit * 18
 
-            PlasmaExtras.MenuItem {
-                text: i18nc("@action:inmenu", "Open Link in Browser")
-                icon:  "internet-web-browser"
-                onClicked: Qt.openUrlExternally(linkContextMenu.link)
-            }
+            // Binding it to e.g. width will be super slow on resizing
+            Timer {
+                id: updateZoomTimer
+                interval: 100
 
-            PlasmaExtras.MenuItem {
-                text: i18nc("@action:inmenu", "Copy Link Address")
-                icon: "edit-copy"
-                onClicked: webview.triggerWebAction(WebEngineView.CopyLinkToClipboard)
-            }
-        }
+                readonly property int minViewWidth: plasmoid.configuration.minViewWidth
+                readonly property bool useMinViewWidth: plasmoid.configuration.useMinViewWidth
+                readonly property int constantZoomFactor: plasmoid.configuration.constantZoomFactor
 
-        WebEngineView {
-            id: webview
-            anchors.fill: parent
-            onUrlChanged: plasmoid.configuration.url = url;
-            Component.onCompleted: url = plasmoid.configuration.url;
-
-            readonly property bool useMinViewWidth : plasmoid.configuration.useMinViewWidth
-
-            Connections {
-                target: plasmoid.configuration
-                
-                function onMinViewWidthChanged() {updateZoomTimer.start()}
-
-                function onUseMinViewWidthChanged() {updateZoomTimer.start()}
-
-                function onConstantZoomFactorChanged() {updateZoomTimer.start()}
-
-                function onUseConstantZoomChanged() {updateZoomTimer.start()}
-            }
-
-            onLinkHovered: hoveredUrl => {
-                if (hoveredUrl.toString() !== "") {
-                    mouseArea.cursorShape = Qt.PointingHandCursor;
-                } else {
-                    mouseArea.cursorShape = Qt.ArrowCursor;
+                onTriggered: {
+                    var newZoom = 1;
+                    if (useMinViewWidth) {
+                        // Try to fit contents for a smaller screen
+                        newZoom = Math.min(1, webview.width / minViewWidth);
+                        // make sure value is valid
+                        newZoom = Math.max(0.25, newZoom);
+                    } else {
+                        newZoom = constantZoomFactor / 100.0;
+                    }
+                    webview.zoomFactor = newZoom;
+                    // setting the zoom factor does not always work on the first try; also, numbers get rounded
+                    if (Math.round(1000 * webview.zoomFactor) != Math.round(1000 * newZoom)) {
+                        updateZoomTimer.restart();
+                    }
                 }
             }
 
-            onWidthChanged: {
-                if (useMinViewWidth) {
-                    updateZoomTimer.start()
+            // This reimplements WebEngineView context menu for links to add a "open externally" entry
+            // since you cannot add custom items there yet
+            // there's a FIXME comment about that in QQuickWebEngineViewPrivate::contextMenuRequested
+            PlasmaExtras.Menu {
+                id: linkContextMenu
+                visualParent: webview
+
+                property string link
+
+                PlasmaExtras.MenuItem {
+                    text: i18nc("@action:inmenu", "Open Link in Browser")
+                    icon:  "internet-web-browser"
+                    onClicked: Qt.openUrlExternally(linkContextMenu.link)
+                }
+
+                PlasmaExtras.MenuItem {
+                    text: i18nc("@action:inmenu", "Copy Link Address")
+                    icon: "edit-copy"
+                    onClicked: webview.triggerWebAction(WebEngineView.CopyLinkToClipboard)
                 }
             }
 
-            onLoadingChanged: loadingInfo => {
-                if (loadingInfo.status === WebEngineLoadingInfo.LoadStartedStatus) {
-                    infoButton.dismiss();
-                } else if (loadingInfo.status === WebEngineLoadingInfo.LoadSucceededStatus && useMinViewWidth) {
-                    updateZoomTimer.start();
+            WebEngineView {
+                id: webview
+                anchors.fill: parent
+                onUrlChanged: plasmoid.configuration.url = url;
+                Component.onCompleted: url = plasmoid.configuration.url;
+
+                readonly property bool useMinViewWidth : plasmoid.configuration.useMinViewWidth
+
+                Connections {
+                    target: plasmoid.configuration
+
+                    function onMinViewWidthChanged() {updateZoomTimer.start()}
+
+                    function onUseMinViewWidthChanged() {updateZoomTimer.start()}
+
+                    function onConstantZoomFactorChanged() {updateZoomTimer.start()}
+
+                    function onUseConstantZoomChanged() {updateZoomTimer.start()}
                 }
-            }
 
-            onContextMenuRequested: request => {
-                if (request.mediaType === ContextMenuRequest.MediaTypeNone && request.linkUrl.toString() !== "") {
-                    linkContextMenu.link = request.linkUrl;
-                    linkContextMenu.open(request.position.x, request.position.y);
-                    request.accepted = true;
+                onLinkHovered: hoveredUrl => {
+                    if (hoveredUrl.toString() !== "") {
+                        mouseArea.cursorShape = Qt.PointingHandCursor;
+                    } else {
+                        mouseArea.cursorShape = Qt.ArrowCursor;
+                    }
                 }
-            }
 
-            onNavigationRequested: request => {
-                var url = request.url;
+                onWidthChanged: {
+                    if (useMinViewWidth) {
+                        updateZoomTimer.start()
+                    }
+                }
 
-                if (request.userInitiated) {
-                    Qt.openUrlExternally(url);
-                } else {
-                    infoButton.show(i18nc("An unwanted popup was blocked", "Popup blocked"), "document-close",
-                                    i18n("Click here to open the following blocked popup:\n%1", url), function () {
-                        Qt.openUrlExternally(url);
+                onLoadingChanged: loadingInfo => {
+                    if (loadingInfo.status === WebEngineLoadingInfo.LoadStartedStatus) {
                         infoButton.dismiss();
-                    });
+                    } else if (loadingInfo.status === WebEngineLoadingInfo.LoadSucceededStatus && useMinViewWidth) {
+                        updateZoomTimer.start();
+                    }
+                }
+
+                onContextMenuRequested: request => {
+                    if (request.mediaType === ContextMenuRequest.MediaTypeNone && request.linkUrl.toString() !== "") {
+                        linkContextMenu.link = request.linkUrl;
+                        linkContextMenu.open(request.position.x, request.position.y);
+                        request.accepted = true;
+                    }
+                }
+
+                onNavigationRequested: request => {
+                    var url = request.url;
+
+                    if (request.userInitiated) {
+                        Qt.openUrlExternally(url);
+                    } else {
+                        infoButton.show(i18nc("An unwanted popup was blocked", "Popup blocked"), "document-close",
+                                        i18n("Click here to open the following blocked popup:\n%1", url), function () {
+                            Qt.openUrlExternally(url);
+                            infoButton.dismiss();
+                        });
+                    }
                 }
             }
-        }
 
-        MouseArea {
-            id: mouseArea
-            anchors.fill: parent
-            acceptedButtons: Qt.BackButton | Qt.ForwardButton
-            onPressed: mouse => {
-                if (mouse.button === Qt.BackButton) {
-                    webview.goBack();
-                } else if (mouse.button === Qt.ForwardButton) {
-                    webview.goForward();
+            MouseArea {
+                id: mouseArea
+                anchors.fill: parent
+                acceptedButtons: Qt.BackButton | Qt.ForwardButton
+                onPressed: mouse => {
+                    if (mouse.button === Qt.BackButton) {
+                        webview.goBack();
+                    } else if (mouse.button === Qt.ForwardButton) {
+                        webview.goForward();
+                    }
                 }
             }
         }

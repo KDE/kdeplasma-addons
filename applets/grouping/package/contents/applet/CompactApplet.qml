@@ -20,9 +20,10 @@ PlasmaCore.ToolTipArea {
     mainText: plasmoid.toolTipMainText
     subText: plasmoid.toolTipSubText
     location: plasmoid.location
-    active: !plasmoid.expanded
+    active: !plasmoidItem.expanded
     textFormat: plasmoid.toolTipTextFormat
     mainItem: plasmoid.toolTipItem ? plasmoid.toolTipItem : null
+    property PlasmoidItem plasmoidItem
 
     property Item fullRepresentation
     property Item compactRepresentation
@@ -85,13 +86,13 @@ PlasmaCore.ToolTipArea {
     Timer {
         id: expandedSync
         interval: 100
-        onTriggered: plasmoid.expanded = popupWindow.visible;
+        onTriggered: plasmoidItem.expanded = popupWindow.visible;
     }
 
     Connections {
         target: plasmoid.action("configure")
         function onTriggered() {
-            plasmoid.expanded = false
+            plasmoidItem.expanded = false
         }
     }
 
@@ -106,10 +107,10 @@ PlasmaCore.ToolTipArea {
         id: popupWindow
         objectName: "popupWindow"
         flags: Qt.WindowStaysOnTopHint
-        visible: plasmoid.expanded && fullRepresentation
+        visible: plasmoidItem.expanded && fullRepresentation
         visualParent: compactRepresentation ? compactRepresentation : null
         location: plasmoid.location
-        hideOnWindowDeactivate: plasmoid.hideOnWindowDeactivate
+        hideOnWindowDeactivate: root.plasmoidItem.hideOnWindowDeactivate
 
         property var oldStatus: PlasmaCore.Types.UnknownStatus
 
@@ -120,7 +121,7 @@ PlasmaCore.ToolTipArea {
             focus: true
 
             Keys.onEscapePressed: {
-                plasmoid.expanded = false;
+                plasmoidItem.expanded = false;
             }
 
             LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft

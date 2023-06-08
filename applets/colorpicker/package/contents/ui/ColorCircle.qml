@@ -32,7 +32,7 @@ PlasmaComponents3.ToolButton {
         "text/plain": colorButton.text
     }
 
-    onClicked: Plasmoid.expanded = !Plasmoid.expanded
+    onClicked: root.expanded = !root.expanded
 
     PlasmaCore.ToolTipArea {
         anchors.fill: parent

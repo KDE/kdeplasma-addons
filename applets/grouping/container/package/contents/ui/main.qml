@@ -9,20 +9,20 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 
-Item {
+PlasmoidItem {
     id: root
 
     Layout.minimumWidth: internalContainmentItem ? internalContainmentItem.Layout.minimumWidth : 0
     Layout.minimumHeight: internalContainmentItem ? internalContainmentItem.Layout.minimumHeight : 0
     Layout.preferredHeight: Layout.minimumHeight
 
-    Plasmoid.preferredRepresentation: Plasmoid.fullRepresentation
+    preferredRepresentation: fullRepresentation
     Plasmoid.status: internalContainmentItem ? internalContainmentItem.status : PlasmaCore.Types.UnknownStatus
 
     property Item internalContainmentItem
 
     Component.onCompleted: {
-        root.internalContainmentItem = plasmoid.nativeInterface.internalContainmentItem;
+        root.internalContainmentItem = plasmoid.internalContainmentItem;
 
         if (root.internalContainmentItem === null) {
             return;
@@ -33,9 +33,9 @@ Item {
     }
 
     Connections {
-        target: plasmoid.nativeInterface
+        target: plasmoid
         function onInternalContainmentItemChanged() {
-            root.internalContainmentItem = plasmoid.nativeInterface.internalContainmentItem;
+            root.internalContainmentItem = plasmoid.internalContainmentItem;
             root.internalContainmentItem.parent = root;
             root.internalContainmentItem.anchors.fill = root;
         }

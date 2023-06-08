@@ -35,7 +35,7 @@ Loader {
         hoverEnabled: true
 
         onClicked: {
-            Plasmoid.expanded = !Plasmoid.expanded;
+            root.expanded = !root.expanded;
         }
     }
 

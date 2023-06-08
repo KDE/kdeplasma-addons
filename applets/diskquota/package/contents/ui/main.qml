@@ -13,7 +13,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import org.kde.plasma.private.diskquota 1.0
 
-Item {
+PlasmoidItem {
     id: quotaApplet
 
     Layout.minimumWidth: PlasmaCore.Units.gridUnit * 10
@@ -30,12 +30,12 @@ Item {
         return PlasmaCore.Types.PassiveStatus
     }
 
-    Plasmoid.switchWidth: PlasmaCore.Units.gridUnit * 10
-    Plasmoid.switchHeight: PlasmaCore.Units.gridUnit * 10
+    switchWidth: PlasmaCore.Units.gridUnit * 10
+    switchHeight: PlasmaCore.Units.gridUnit * 10
 
     Plasmoid.icon: diskQuota.iconName
-    Plasmoid.toolTipMainText: diskQuota.toolTip
-    Plasmoid.toolTipSubText: diskQuota.subToolTip
+    toolTipMainText: diskQuota.toolTip
+    toolTipSubText: diskQuota.subToolTip
 
     Component.onCompleted: plasmoid.removeAction("configure")
 
@@ -43,7 +43,7 @@ Item {
         id: diskQuota
     }
 
-    Plasmoid.fullRepresentation: Item {
+    fullRepresentation: Item {
         id: root
 
         width: PlasmaCore.Units.gridUnit * 20
@@ -79,7 +79,7 @@ Item {
             }
         }
 
-        PlasmaExtras.ScrollArea {
+        PlasmaComponents3.ScrollView {
             anchors.fill: parent
             ListView {
                 id: listView
