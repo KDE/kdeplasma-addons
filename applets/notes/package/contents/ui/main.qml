@@ -165,7 +165,7 @@ PlasmoidItem {
 
                 PlasmaComponents3.TextArea {
                     id: mainTextArea
-                    property real cfgFontPointSize: Plasmoid.configuration.fontSize
+                    property int cfgFontPointSize: Plasmoid.configuration.fontSize
 
                     textFormat: TextEdit.RichText
                     onLinkActivated: Qt.openUrlExternally(link)
