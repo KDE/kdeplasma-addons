@@ -10,12 +10,7 @@ ecm_qt_declare_logging_category(plasma_engine_comic
     IDENTIFIER PLASMA_COMIC
     CATEGORY_NAME ork.kde.plasma.comic
     DESCRIPTION "Plasma Comic Engine"
-    EXPORT PLASMA_COMIC
-)
-ecm_qt_install_logging_categories(
-    EXPORT PLASMA_COMIC
-    FILE plasma_comic.categories
-    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+    EXPORT KDEPLASMAADDONS
 )
 
 target_sources(plasma_engine_comic PRIVATE

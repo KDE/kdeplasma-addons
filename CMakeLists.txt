@@ -114,5 +114,10 @@ kde_clang_format(${ALL_CLANG_FORMAT_SOURCE_FILES})
 kde_configure_git_pre_commit_hook(CHECKS CLANG_FORMAT)
 
 ki18n_install(po)
+ecm_qt_install_logging_categories(EXPORT KDEPLASMAADDONS
+    FILE kdeplasma-addons.categories
+    DESTINATION ${KDE_INSTALL_LOGGINGCATEGORIESDIR}
+)
+
 
 feature_summary(WHAT ALL INCLUDE_QUIET_PACKAGES FATAL_ON_MISSING_REQUIRED_PACKAGES)

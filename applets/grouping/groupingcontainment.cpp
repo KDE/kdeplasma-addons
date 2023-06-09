@@ -6,7 +6,6 @@
  */
 
 #include "groupingcontainment.h"
-#include "debug.h"
 
 #include <QDebug>
 #include <QMenu>

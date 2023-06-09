@@ -7,7 +7,10 @@ ecm_qt_declare_logging_category(plasma_wallpaper_potdplugin_debug
                                 HEADER debug.h
                                 IDENTIFIER WALLPAPERPOTD
                                 CATEGORY_NAME kde.wallpapers.potd
-                                DEFAULT_SEVERITY Info)
+                                DEFAULT_SEVERITY Info
+                                DESCRIPTION "Wallpaper plugins"
+                                EXPORT KDEPLASMAADDONS
+                            )
 
 ecm_add_qml_module(plasma_wallpaper_potdplugin URI org.kde.plasma.wallpapers.potd)
 target_sources(plasma_wallpaper_potdplugin PRIVATE
