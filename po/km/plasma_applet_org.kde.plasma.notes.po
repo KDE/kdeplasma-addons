@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 03:09+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2009-05-29 08:05+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -91,160 +91,160 @@ msgstr ""
 msgid "A translucent sticky note with light text"
 msgstr ""
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:264
 #, kde-format
 msgid "Undo"
 msgstr ""
 
-#: package/contents/ui/main.qml:257
+#: package/contents/ui/main.qml:272
 #, kde-format
 msgid "Redo"
 msgstr ""
 
-#: package/contents/ui/main.qml:267
+#: package/contents/ui/main.qml:282
 #, kde-format
 msgid "Cut"
 msgstr ""
 
-#: package/contents/ui/main.qml:275
+#: package/contents/ui/main.qml:290
 #, kde-format
 msgid "Copy"
 msgstr ""
 
-#: package/contents/ui/main.qml:283
+#: package/contents/ui/main.qml:298
 #, kde-format
 msgid "Paste"
 msgstr ""
 
-#: package/contents/ui/main.qml:289
+#: package/contents/ui/main.qml:304
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr ""
 
-#: package/contents/ui/main.qml:296
+#: package/contents/ui/main.qml:311
 #, fuzzy, kde-format
 #| msgid "Formatting"
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "ធ្វើ​​ទ្រង់ទ្រាយ"
 
-#: package/contents/ui/main.qml:311
+#: package/contents/ui/main.qml:326
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: package/contents/ui/main.qml:318
+#: package/contents/ui/main.qml:333
 #, kde-format
 msgid "Clear"
 msgstr ""
 
-#: package/contents/ui/main.qml:328
+#: package/contents/ui/main.qml:343
 #, kde-format
 msgid "Select All"
 msgstr ""
 
-#: package/contents/ui/main.qml:456
+#: package/contents/ui/main.qml:471
 #, fuzzy, kde-format
 #| msgid "Bold"
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "ដិត"
 
-#: package/contents/ui/main.qml:468
+#: package/contents/ui/main.qml:483
 #, fuzzy, kde-format
 #| msgid "Italic"
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "ទ្រេត"
 
-#: package/contents/ui/main.qml:480
+#: package/contents/ui/main.qml:495
 #, fuzzy, kde-format
 #| msgid "Underline"
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "គូស​បន្ទាត់​ពី​ក្រោម"
 
-#: package/contents/ui/main.qml:492
+#: package/contents/ui/main.qml:507
 #, fuzzy, kde-format
 #| msgid "StrikeOut"
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "ឆូត​"
 
-#: package/contents/ui/main.qml:566
+#: package/contents/ui/main.qml:581
 #, kde-format
 msgid "Discard this note?"
 msgstr ""
 
-#: package/contents/ui/main.qml:567
+#: package/contents/ui/main.qml:582
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr ""
 
-#: package/contents/ui/main.qml:579
+#: package/contents/ui/main.qml:595
 #, fuzzy, kde-format
 #| msgid "White"
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "ពណ៌ស"
 
-#: package/contents/ui/main.qml:580
+#: package/contents/ui/main.qml:596
 #, fuzzy, kde-format
 #| msgid "Black"
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "​ខ្មៅ"
 
-#: package/contents/ui/main.qml:581
+#: package/contents/ui/main.qml:597
 #, fuzzy, kde-format
 #| msgid "Red"
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "ក្រហម"
 
-#: package/contents/ui/main.qml:582
+#: package/contents/ui/main.qml:598
 #, fuzzy, kde-format
 #| msgid "Orange"
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "ទឹកក្រូច"
 
-#: package/contents/ui/main.qml:583
+#: package/contents/ui/main.qml:599
 #, fuzzy, kde-format
 #| msgid "Yellow"
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "​លឿង"
 
-#: package/contents/ui/main.qml:584
+#: package/contents/ui/main.qml:600
 #, fuzzy, kde-format
 #| msgid "Green"
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "បៃតង"
 
-#: package/contents/ui/main.qml:585
+#: package/contents/ui/main.qml:601
 #, fuzzy, kde-format
 #| msgid "Blue"
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "ខៀវ"
 
-#: package/contents/ui/main.qml:586
+#: package/contents/ui/main.qml:602
 #, fuzzy, kde-format
 #| msgid "Pink"
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "ពណ៌ផ្កាឈូក"
 
-#: package/contents/ui/main.qml:587
+#: package/contents/ui/main.qml:603
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "ល្អក់"
 
-#: package/contents/ui/main.qml:588
+#: package/contents/ui/main.qml:604
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"

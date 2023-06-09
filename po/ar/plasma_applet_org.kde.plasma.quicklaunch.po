@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-15 00:46+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2022-02-03 22:24+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -96,28 +96,28 @@ msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "أزل المطلق"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:145
 #, kde-format
 msgid "Quicklaunch"
 msgstr "الإطلاق السّريع"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:146
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "أضف مطلقات بسحبها وإفلاتها أو باستخدام قائمة السّياق."
 
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgid "Hide icons"
 msgstr "أخفِ الأيقونات"
 
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgid "Show hidden icons"
 msgstr "أظهر الأيقونات المخفيّة"
 
-#: package/contents/ui/main.qml:285
+#: package/contents/ui/main.qml:291
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

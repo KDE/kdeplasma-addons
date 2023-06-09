@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 03:09+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2023-01-14 23:19+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -41,55 +41,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Scalar automatic si largessa es in basso"
 
-#: package/contents/ui/main.qml:24
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Vade retro"
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:38
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Vade avante"
 
-#: package/contents/ui/main.qml:50
+#: package/contents/ui/main.qml:57
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Typa un URL"
 
-#: package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Stoppa cargar iste pagina"
 
-#: package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Recarga iste pagina"
 
-#: package/contents/ui/main.qml:136
+#: package/contents/ui/main.qml:143
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Aperi ligamine in Navigator..."
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:149
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copia adresse de ligamine"
 
-#: package/contents/ui/main.qml:204
+#: package/contents/ui/main.qml:211
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Popup blocate"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:212
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-15 00:46+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2022-10-04 17:51+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -94,28 +94,28 @@ msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Odstrániť spúšťač"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:145
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Rýchle spustenie"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:146
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Spúšťače pridáte pretiahnutím myšou, alebo pomocou kontextovej ponuky."
 
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgid "Hide icons"
 msgstr "Skryť ikony"
 
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Zobraziť skryté ikony"
 
-#: package/contents/ui/main.qml:285
+#: package/contents/ui/main.qml:291
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

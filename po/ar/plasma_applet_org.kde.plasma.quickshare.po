@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 03:09+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2022-01-22 22:28+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -25,53 +25,53 @@ msgctxt "@title"
 msgid "General"
 msgstr "عامّ"
 
-#: contents/ui/main.qml:222
+#: contents/ui/main.qml:243
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "ألصق"
 
-#: contents/ui/main.qml:250 contents/ui/main.qml:290
+#: contents/ui/main.qml:252 contents/ui/main.qml:293
 #, kde-format
 msgid "Share"
 msgstr "شارك"
 
-#: contents/ui/main.qml:251 contents/ui/main.qml:291
+#: contents/ui/main.qml:253 contents/ui/main.qml:294
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr "أسقط النّصّ أو الصّور عليّ لرفعها إلى خدمة إنترنتيّة."
 
-#: contents/ui/main.qml:291
+#: contents/ui/main.qml:294
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "ارفع %1 إلى خدمة إنترنتيّة"
 
-#: contents/ui/main.qml:304
+#: contents/ui/main.qml:307
 #, kde-format
 msgid "Sending…"
 msgstr "يرسل..."
 
-#: contents/ui/main.qml:305
+#: contents/ui/main.qml:308
 #, kde-format
 msgid "Please wait"
 msgstr "فضلًا انتظر"
 
-#: contents/ui/main.qml:312
+#: contents/ui/main.qml:315
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "رُفعت بنجاح"
 
-#: contents/ui/main.qml:313
+#: contents/ui/main.qml:316
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:320
+#: contents/ui/main.qml:323
 #, kde-format
 msgid "Error during upload."
 msgstr "خطأ أثناء الرّفع."
 
-#: contents/ui/main.qml:321
+#: contents/ui/main.qml:324
 #, kde-format
 msgid "Please, try again."
 msgstr "فضلًا جرّب مجدّدًا."

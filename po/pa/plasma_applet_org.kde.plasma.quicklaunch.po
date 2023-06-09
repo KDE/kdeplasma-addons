@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-15 00:46+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2019-12-29 09:26-0800\n"
 "Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -98,28 +98,28 @@ msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "ਲਾਂਚਰ ਨੂੰ ਹਟਾਓ"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:145
 #, kde-format
 msgid "Quicklaunch"
 msgstr "ਤੁਰੰਤ-ਲਾਂਚ"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:146
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "ਡਰੈਗ ਡਰਾਪ ਕਰਕੇ ਜਾਂ ਪਰਸੰਗ ਮੇਨੂ ਦੀ ਵਰਤੋਂ ਕਰਕੇ ਲਾਂਚਰ ਜੋੜੋ।"
 
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgid "Hide icons"
 msgstr "ਆਈਕਾਨ ਓਹਲੇ ਕਰੋ"
 
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgid "Show hidden icons"
 msgstr "ਲੁਕਵੇਂ ਆਈਕਾਨਾਂ ਨੂੰ ਦਿਖਾਓ"
 
-#: package/contents/ui/main.qml:285
+#: package/contents/ui/main.qml:291
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "Add Launcher..."

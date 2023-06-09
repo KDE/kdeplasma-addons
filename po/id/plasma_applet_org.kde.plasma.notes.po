@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 03:09+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2022-06-07 14:40+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -89,148 +89,148 @@ msgstr "Sebuah catatan lekat translusen"
 msgid "A translucent sticky note with light text"
 msgstr "Sebuah catatan lekat translusen dengan teks terang"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:264
 #, kde-format
 msgid "Undo"
 msgstr "Urung"
 
-#: package/contents/ui/main.qml:257
+#: package/contents/ui/main.qml:272
 #, kde-format
 msgid "Redo"
 msgstr "Ulang"
 
-#: package/contents/ui/main.qml:267
+#: package/contents/ui/main.qml:282
 #, kde-format
 msgid "Cut"
 msgstr "Potong"
 
-#: package/contents/ui/main.qml:275
+#: package/contents/ui/main.qml:290
 #, kde-format
 msgid "Copy"
 msgstr "Salin"
 
-#: package/contents/ui/main.qml:283
+#: package/contents/ui/main.qml:298
 #, kde-format
 msgid "Paste"
 msgstr "Tempel"
 
-#: package/contents/ui/main.qml:289
+#: package/contents/ui/main.qml:304
 #, fuzzy, kde-format
 #| msgid "Paste Without Formatting"
 msgid "Paste with Full Formatting"
 msgstr "Tempel Tanpa Memformat"
 
-#: package/contents/ui/main.qml:296
+#: package/contents/ui/main.qml:311
 #, fuzzy, kde-format
 #| msgid "Paste Without Formatting"
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "Tempel Tanpa Memformat"
 
-#: package/contents/ui/main.qml:311
+#: package/contents/ui/main.qml:326
 #, kde-format
 msgid "Delete"
 msgstr "Hapus"
 
-#: package/contents/ui/main.qml:318
+#: package/contents/ui/main.qml:333
 #, kde-format
 msgid "Clear"
 msgstr "Bersihkan"
 
-#: package/contents/ui/main.qml:328
+#: package/contents/ui/main.qml:343
 #, kde-format
 msgid "Select All"
 msgstr "Pilih Semua"
 
-#: package/contents/ui/main.qml:456
+#: package/contents/ui/main.qml:471
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Tebal"
 
-#: package/contents/ui/main.qml:468
+#: package/contents/ui/main.qml:483
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Miring"
 
-#: package/contents/ui/main.qml:480
+#: package/contents/ui/main.qml:495
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Garisbawahi"
 
-#: package/contents/ui/main.qml:492
+#: package/contents/ui/main.qml:507
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Coret"
 
-#: package/contents/ui/main.qml:566
+#: package/contents/ui/main.qml:581
 #, kde-format
 msgid "Discard this note?"
 msgstr "Buang catatan ini?"
 
-#: package/contents/ui/main.qml:567
+#: package/contents/ui/main.qml:582
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Apakah kamu yakin ingin membuang catatan ini?"
 
-#: package/contents/ui/main.qml:579
+#: package/contents/ui/main.qml:595
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Putih"
 
-#: package/contents/ui/main.qml:580
+#: package/contents/ui/main.qml:596
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Hitam"
 
-#: package/contents/ui/main.qml:581
+#: package/contents/ui/main.qml:597
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Merah"
 
-#: package/contents/ui/main.qml:582
+#: package/contents/ui/main.qml:598
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Jingga"
 
-#: package/contents/ui/main.qml:583
+#: package/contents/ui/main.qml:599
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Kuning"
 
-#: package/contents/ui/main.qml:584
+#: package/contents/ui/main.qml:600
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Hijau"
 
-#: package/contents/ui/main.qml:585
+#: package/contents/ui/main.qml:601
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Biru"
 
-#: package/contents/ui/main.qml:586
+#: package/contents/ui/main.qml:602
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Jambon"
 
-#: package/contents/ui/main.qml:587
+#: package/contents/ui/main.qml:603
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "Bening"
 
-#: package/contents/ui/main.qml:588
+#: package/contents/ui/main.qml:604
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"

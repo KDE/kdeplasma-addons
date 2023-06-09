@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-08 02:24+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2018-08-16 09:14+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc."
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: package/contents/ui/calculator.qml:291
+#: package/contents/ui/calculator.qml:227
 #, kde-format
 msgctxt ""
 "Abbreviation for result (undefined) of division by zero, max. six to nine "
@@ -26,49 +26,49 @@ msgctxt ""
 msgid "undef"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:331
+#: package/contents/ui/calculator.qml:338
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:354
+#: package/contents/ui/calculator.qml:361
 #, kde-format
 msgctxt "Text of the clear button"
 msgid "C"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:367
+#: package/contents/ui/calculator.qml:374
 #, kde-format
 msgctxt "Text of the division button"
 msgid "÷"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:380
+#: package/contents/ui/calculator.qml:387
 #, kde-format
 msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:392
+#: package/contents/ui/calculator.qml:399
 #, kde-format
 msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:444
+#: package/contents/ui/calculator.qml:451
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:496
+#: package/contents/ui/calculator.qml:503
 #, kde-format
 msgctxt "Text of the plus button"
 msgid "+"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:547
+#: package/contents/ui/calculator.qml:554
 #, kde-format
 msgctxt "Text of the equals button"
 msgid "="

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-15 00:46+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2023-05-22 13:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -95,28 +95,28 @@ msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "删除启动器"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:145
 #, kde-format
 msgid "Quicklaunch"
 msgstr "快速启动"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:146
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "通过拖放操作或右键菜单添加启动器。"
 
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgid "Hide icons"
 msgstr "隐藏图标"
 
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgid "Show hidden icons"
 msgstr "显示隐藏的图标"
 
-#: package/contents/ui/main.qml:285
+#: package/contents/ui/main.qml:291
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

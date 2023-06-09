@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-15 00:46+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2022-02-11 12:03+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -102,28 +102,28 @@ msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Удалить кнопку запуска"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:145
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Панель запуска"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:146
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Добавляйте кнопки запуска перетаскиванием или через контекстное меню."
 
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgid "Hide icons"
 msgstr "Скрыть значки"
 
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Показать скрытые значки"
 
-#: package/contents/ui/main.qml:285
+#: package/contents/ui/main.qml:291
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

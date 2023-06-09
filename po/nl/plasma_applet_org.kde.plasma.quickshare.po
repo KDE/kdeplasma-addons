@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 03:09+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2021-12-13 11:50+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -23,55 +23,55 @@ msgctxt "@title"
 msgid "General"
 msgstr "Algemeen"
 
-#: contents/ui/main.qml:222
+#: contents/ui/main.qml:243
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "Plakken"
 
-#: contents/ui/main.qml:250 contents/ui/main.qml:290
+#: contents/ui/main.qml:252 contents/ui/main.qml:293
 #, kde-format
 msgid "Share"
 msgstr "Delen"
 
-#: contents/ui/main.qml:251 contents/ui/main.qml:291
+#: contents/ui/main.qml:253 contents/ui/main.qml:294
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr ""
 "Sleep een stuk tekst of een afbeelding naar mij om het naar een online-"
 "service te uploaden."
 
-#: contents/ui/main.qml:291
+#: contents/ui/main.qml:294
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "%1 naar een een online service uploaden"
 
-#: contents/ui/main.qml:304
+#: contents/ui/main.qml:307
 #, kde-format
 msgid "Sending…"
 msgstr "Bezig met verzenden…"
 
-#: contents/ui/main.qml:305
+#: contents/ui/main.qml:308
 #, kde-format
 msgid "Please wait"
 msgstr "Even geduld"
 
-#: contents/ui/main.qml:312
+#: contents/ui/main.qml:315
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "Met succes geüpload"
 
-#: contents/ui/main.qml:313
+#: contents/ui/main.qml:316
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:320
+#: contents/ui/main.qml:323
 #, kde-format
 msgid "Error during upload."
 msgstr "Fout bij het uploaden."
 
-#: contents/ui/main.qml:321
+#: contents/ui/main.qml:324
 #, kde-format
 msgid "Please, try again."
 msgstr "Probeer opnieuw."

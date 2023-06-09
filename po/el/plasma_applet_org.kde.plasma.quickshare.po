@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 03:09+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2015-11-24 14:16+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -24,56 +24,56 @@ msgctxt "@title"
 msgid "General"
 msgstr "Γενικά"
 
-#: contents/ui/main.qml:222
+#: contents/ui/main.qml:243
 #, fuzzy, kde-format
 #| msgid "Paste"
 msgctxt "@action"
 msgid "Paste"
 msgstr "Επικόλληση"
 
-#: contents/ui/main.qml:250 contents/ui/main.qml:290
+#: contents/ui/main.qml:252 contents/ui/main.qml:293
 #, kde-format
 msgid "Share"
 msgstr "Κοινή χρήση"
 
-#: contents/ui/main.qml:251 contents/ui/main.qml:291
+#: contents/ui/main.qml:253 contents/ui/main.qml:294
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr ""
 "Απόθεση κειμένου ή εικόνας εδώ, για την αποστολή σε μια δικτυακή υπηρεσία."
 
-#: contents/ui/main.qml:291
+#: contents/ui/main.qml:294
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "Αποστολή του %1 σε μια δικτυακή υπηρεσία."
 
-#: contents/ui/main.qml:304
+#: contents/ui/main.qml:307
 #, fuzzy, kde-format
 #| msgid "Sending..."
 msgid "Sending…"
 msgstr "Αποστολή..."
 
-#: contents/ui/main.qml:305
+#: contents/ui/main.qml:308
 #, kde-format
 msgid "Please wait"
 msgstr "Παρακαλώ περιμένετε"
 
-#: contents/ui/main.qml:312
+#: contents/ui/main.qml:315
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "Επιτυχής αποστολή"
 
-#: contents/ui/main.qml:313
+#: contents/ui/main.qml:316
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:320
+#: contents/ui/main.qml:323
 #, kde-format
 msgid "Error during upload."
 msgstr "Σφάλμα κατά την αποστολή."
 
-#: contents/ui/main.qml:321
+#: contents/ui/main.qml:324
 #, kde-format
 msgid "Please, try again."
 msgstr "Παρακαλώ δοκιμάστε ξανά."

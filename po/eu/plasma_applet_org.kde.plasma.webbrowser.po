@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 03:09+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2022-10-17 07:01+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -44,55 +44,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Eskalatze automatikoa zabalera azpitik badago"
 
-#: package/contents/ui/main.qml:24
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Joan atzera"
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:38
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Joan aurrera"
 
-#: package/contents/ui/main.qml:50
+#: package/contents/ui/main.qml:57
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Tekleatu URL bat"
 
-#: package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Gelditu orri hau zamatzen"
 
-#: package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Birzamatu orri hau"
 
-#: package/contents/ui/main.qml:136
+#: package/contents/ui/main.qml:143
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Ireki esteka arakatzailean"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:149
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopiatu estekaren helbidea"
 
-#: package/contents/ui/main.qml:204
+#: package/contents/ui/main.qml:211
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Gainerakorra oztopatuta"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:212
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

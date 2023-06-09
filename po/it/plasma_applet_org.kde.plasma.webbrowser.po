@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-05 03:09+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2022-10-18 19:19+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -41,55 +41,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Ridimensionamento automatico se la larghezza è inferiore"
 
-#: package/contents/ui/main.qml:24
+#: package/contents/ui/main.qml:31
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Vai indietro"
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:38
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Vai avanti"
 
-#: package/contents/ui/main.qml:50
+#: package/contents/ui/main.qml:57
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Digita un URL"
 
-#: package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Ferma il caricamento di questa pagina"
 
-#: package/contents/ui/main.qml:86
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Ricarica questa pagina"
 
-#: package/contents/ui/main.qml:136
+#: package/contents/ui/main.qml:143
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Apri collegamento nel browser"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:149
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copia l'indirizzo del collegamento"
 
-#: package/contents/ui/main.qml:204
+#: package/contents/ui/main.qml:211
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Popup bloccato"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:212
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

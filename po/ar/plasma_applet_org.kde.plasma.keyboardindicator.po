@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-08 02:24+0000\n"
+"POT-Creation-Date: 2023-06-09 02:13+0000\n"
 "PO-Revision-Date: 2022-06-04 21:01+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: Arabic <kde-l10n-ar@kde.org>\n"
@@ -53,7 +53,7 @@ msgstr "قفل الحروف الكبيرة مفعل\n"
 msgid "Num Lock activated\n"
 msgstr "قفل الأرقام مفعل\n"
 
-#: contents/ui/main.qml:112
+#: contents/ui/main.qml:110
 #, kde-format
 msgid "No lock keys activated"
 msgstr "لا يوجد قفل مفتاح مفعل"

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-14 02:27+0000\n"
-"PO-Revision-Date: 2023-03-26 18:35+0100\n"
+"PO-Revision-Date: 2023-06-08 20:23+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -29,7 +29,7 @@ msgstr "Generalo"
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
-msgstr ""
+msgstr "Mezklaku por kopii la kolorkodon"
 
 #: package/contents/ui/CompactRepresentation.qml:73
 #, kde-format
@@ -117,14 +117,14 @@ msgstr "Neniuj koloroj"
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
+msgstr "Kolorelektado nedisponebla kiam kunmetado estas malŝaltita"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
-msgstr ""
+msgstr "Kunmetado estis malŝaltita permane aŭ blokita per rulanta aplikaĵo"
 
 #: package/contents/ui/main.qml:161
 #, kde-format
@@ -136,7 +136,7 @@ msgstr "Elekti Koloron"
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "Agordi Kunmetadon"
 
 #: package/contents/ui/main.qml:354
 #, kde-format
