@@ -18,5 +18,17 @@
     <entry name="constantZoomFactor" type="Int">
       <default>100</default>
     </entry>
+    <entry name="icon" type="String">
+      <label>The name of the icon used in the compact representation (e.g. on a small panel).</label>
+      <default></default>
+    </entry>
+    <entry name="favIcon" type="String">
+      <label>The url of the website's favicon that is saved in the last session.</label>
+      <default></default>
+    </entry>
+    <entry name="useFavIcon" type="Bool">
+      <label>Use the website's favicon instead of a system icon</label>
+      <default>true</default>
+    </entry>
   </group>
 </kcfg>

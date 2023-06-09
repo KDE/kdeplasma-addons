@@ -6,8 +6,8 @@
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtWebEngine 1.5
+import QtQuick
+import QtWebEngine
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -15,11 +15,43 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
 
 PlasmoidItem {
+    id: root
+
     switchWidth: PlasmaCore.Units.gridUnit * 16
     switchHeight: PlasmaCore.Units.gridUnit * 23
+
+    compactRepresentation: Loader {
+        id: favIconLoader
+        active: Plasmoid.configuration.useFavIcon
+        asynchronous: true
+        sourceComponent: Image {
+            asynchronous: true
+            cache: false
+            fillMode: Image.PreserveAspectFit
+            source: Plasmoid.configuration.favIcon
+        }
+
+        TapHandler {
+            property bool wasExpanded: false
+
+            acceptedButtons: Qt.LeftButton
+
+            onPressedChanged: if (pressed) {
+                wasExpanded = root.expanded;
+            }
+            onTapped: root.expanded = !wasExpanded
+        }
+
+        PlasmaCore.IconItem {
+            anchors.fill: parent
+            visible: favIconLoader.item?.status !== Image.Ready
+            source: Plasmoid.configuration.icon || Plasmoid.icon
+        }
+    }
+
     fullRepresentation: ColumnLayout {
-        Layout.minimumWidth: PlasmaCore.Units.gridUnit * 15
-        Layout.minimumHeight: PlasmaCore.Units.gridUnit * 22
+        Layout.minimumWidth: root.switchWidth
+        Layout.minimumHeight: root.switchHeight
 
         RowLayout{
             Layout.fillWidth: true
@@ -214,6 +246,13 @@ PlasmoidItem {
                             infoButton.dismiss();
                         });
                     }
+                }
+
+                onIconChanged: {
+                    if (loading && icon == "") {
+                        return;
+                    }
+                    Plasmoid.configuration.favIcon = icon.toString().slice(16 /* image://favicon/ */);
                 }
             }
 
