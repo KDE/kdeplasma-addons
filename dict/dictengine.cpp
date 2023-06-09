@@ -218,29 +218,8 @@ void DictEngine::requestDefinition(const QString &query)
         m_tcpSocket = nullptr;
     }
 
-    QStringList queryParts = query.split(':', Qt::SkipEmptyParts);
-    if (queryParts.isEmpty()) {
-        return;
-    }
+    m_currentWord = query;
 
-    m_currentWord = queryParts.last();
-    m_currentQuery = query;
-
-    // asked for a dictionary?
-    if (queryParts.count() > 1) {
-        setDict(queryParts[queryParts.count() - 2].toLatin1());
-        // default to wordnet
-    } else {
-        setDict(QByteArrayLiteral("wn"));
-    }
-
-    // asked for a server?
-    if (queryParts.count() > 2) {
-        setServer(queryParts[queryParts.count() - 3]);
-        // default to wordnet
-    } else {
-        setServer(QStringLiteral("dict.org"));
-    }
     m_tcpSocket = new QTcpSocket(this);
     connect(m_tcpSocket, &QTcpSocket::disconnected, this, &DictEngine::socketClosed);
     connect(m_tcpSocket, &QTcpSocket::errorOccurred, this, [this] {
@@ -249,6 +228,25 @@ void DictEngine::requestDefinition(const QString &query)
     });
     connect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDefinition);
     m_tcpSocket->connectToHost(m_serverName, 2628);
+}
+
+void DictEngine::requestDefinition(const QString &query, const QString &server)
+{
+    setServer(server);
+    requestDefinition(query);
+}
+
+void DictEngine::requestDefinition(const QString &query, const QByteArray &dictionary)
+{
+    setDict(dictionary);
+    requestDefinition(query);
+}
+
+void DictEngine::requestDefinition(const QString &query, const QString &server, const QByteArray &dictionary)
+{
+    setServer(server);
+    setDict(dictionary);
+    requestDefinition(query);
 }
 
 void DictEngine::slotDefinitionReadyRead()

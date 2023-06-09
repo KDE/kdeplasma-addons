@@ -46,6 +46,9 @@ Q_SIGNALS:
 public Q_SLOTS:
     void requestDicts();
     void requestDefinition(const QString &query);
+    void requestDefinition(const QString &query, const QString &server);
+    void requestDefinition(const QString &query, const QByteArray &dictionary);
+    void requestDefinition(const QString &query, const QString &server, const QByteArray &dictionary);
 
 private Q_SLOTS:
     /**
@@ -73,7 +76,6 @@ private:
     QHash<QString, QString> m_dictNameToDictCode;
     QTcpSocket *m_tcpSocket = nullptr;
     QString m_currentWord;
-    QString m_currentQuery;
     QByteArrayList m_dictNames;
     QString m_serverName;
     QMap<QString, QMap<QString, QString>> m_availableDictsCache;
