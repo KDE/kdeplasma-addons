@@ -34,8 +34,8 @@ Kirigami.FormLayout {
             editable: true
             enabled: useConstantZoom.checked
 
-            validator: RegExpValidator {
-                regExp: new RegExp("[0-9]?[0-9]{2}[ ]?%");
+            validator: RegularExpressionValidator {
+                regularExpression: /[0-9]?[0-9]{2}[ ]?%/
             }
 
             textFromValue: function(value) {
@@ -68,8 +68,8 @@ Kirigami.FormLayout {
             editable: true
             enabled: useMinViewWidth.checked
 
-            validator: RegExpValidator {
-                regExp: new RegExp("[0-9]?[0-9]{3}[ ]?px");
+            validator: RegularExpressionValidator {
+                regularExpression: /[0-9]?[0-9]{3}[ ]?px/
             }
 
             textFromValue: function(value) {
