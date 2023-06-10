@@ -49,7 +49,7 @@ Item {
         actions: [
             Kirigami.Action {
                 text: i18n("Delete")
-                iconName: "entry-delete"
+                icon.name: "entry-delete"
                 onTriggered: {
                     delegate.removed(index);
                 }

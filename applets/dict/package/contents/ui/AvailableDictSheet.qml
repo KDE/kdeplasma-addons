@@ -17,11 +17,9 @@ Kirigami.OverlaySheet {
 
     readonly property alias view: sheetListView
 
-    onSheetOpenChanged: {
-        if (sheetOpen) {
-            filter.text = "";
-            filter.forceActiveFocus()
-        }
+    onOpened: {
+        filter.text = "";
+        filter.forceActiveFocus()
     }
 
     // Need to manually set the parent when using this in a Plasma config dialog
