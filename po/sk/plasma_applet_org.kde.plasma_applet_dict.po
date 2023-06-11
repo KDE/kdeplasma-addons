@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.devicenotifier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-11 02:11+0000\n"
 "PO-Revision-Date: 2022-10-04 17:51+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -23,7 +23,7 @@ msgctxt "@title"
 msgid "Dictionaries"
 msgstr "Slovníky"
 
-#: package/contents/ui/AvailableDictSheet.qml:35
+#: package/contents/ui/AvailableDictSheet.qml:33
 #, kde-format
 msgid "Add More Dictionaries"
 msgstr "Pridať ďalšie slovníky"
@@ -34,7 +34,7 @@ msgid "Unable to load dictionary list"
 msgstr "Nie je možné načítať zoznam slovníkov"
 
 #: package/contents/ui/ConfigDictionaries.qml:90
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:155
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -61,7 +61,7 @@ msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Tu zadajte slovo, ktoré chcete definovať..."
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:154
 #, kde-format
 msgid "Unable to load definition"
 msgstr "Nie je možné načítať definíciu"

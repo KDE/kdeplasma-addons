@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-09 02:13+0000\n"
-"PO-Revision-Date: 2023-05-24 01:26+0300\n"
+"PO-Revision-Date: 2023-06-10 12:10+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -39,7 +39,7 @@ msgstr "Paylaş"
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr ""
-"Bir çevrimiçi hizmete yüklemek için üzerime bir resim veya metin bırakın."
+"Bir çevrimiçi hizmete yüklemek için üzerime bir görsel veya metin bırakın."
 
 #: contents/ui/main.qml:294
 #, kde-format
