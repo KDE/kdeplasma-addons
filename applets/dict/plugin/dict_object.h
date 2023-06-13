@@ -59,7 +59,6 @@ private Q_SLOTS:
     void slotDictErrorOccurred(QAbstractSocket::SocketError socketError, const QString &errorString);
 
 private:
-    QString m_source;
     QString m_dataEngineName;
     QString m_selectedDict;
 

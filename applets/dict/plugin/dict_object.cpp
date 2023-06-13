@@ -49,13 +49,10 @@ void DictObject::lookup(const QString &word)
     m_hasError = false;
     Q_EMIT hasErrorChanged();
 
-    const QString newSource = m_selectedDict + QLatin1Char(':') + word;
-
-    if (!newSource.isEmpty()) {
+    if (!word.isEmpty()) {
         // Look up new definition
         Q_EMIT searchInProgress();
-        m_source = newSource;
-        m_engine.requestDefinition(newSource);
+        m_engine.requestDefinition(word, m_selectedDict.toUtf8());
     }
 }
 
