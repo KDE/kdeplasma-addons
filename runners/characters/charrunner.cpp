@@ -59,6 +59,11 @@ void CharacterRunner::match(RunnerContext &context)
         return;
     }
 
+    // QChar asserts this.
+    if (hex > 0xffff) {
+        return;
+    }
+
     // make special character out of the hex.-code
     const QString specChar = QChar(hex);
     QueryMatch match(this);
