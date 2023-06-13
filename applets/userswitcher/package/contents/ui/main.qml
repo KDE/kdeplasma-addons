@@ -10,7 +10,8 @@ import QtQuick.Window 2.15
 
 import org.kde.coreaddons 1.0 as KCoreAddons // kuser
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kquickcontrolsaddons 2.1 // kcmshell
+import org.kde.kcmutils // KCMLauncher
+import org.kde.config as KConfig  // KAuthorized.authorizeControlModule
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
@@ -134,8 +135,8 @@ PlasmoidItem {
                 subText: i18n("Current user")
                 source: kuser.faceIconUrl.toString()
                 hoverEnabled: false
-                interactiveIcon: KCMShell.authorize("kcm_users.desktop").length > 0
-                onIconClicked: KCMShell.openSystemSettings("kcm_users")
+                interactiveIcon: KConfig.KAuthorized.authorizeControlModule("kcm_users.desktop").length > 0
+                onIconClicked: KCMLauncher.openSystemSettings("kcm_users")
             }
 
             PlasmaComponents3.ScrollView {
