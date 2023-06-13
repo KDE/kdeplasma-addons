@@ -21,13 +21,13 @@ var formats = [
 ]
 
 function formatColor(color, format) {
-    var hexR = padHex((color.r * 255).toString(16))
-    var hexG = padHex((color.g * 255).toString(16))
-    var hexB = padHex((color.b * 255).toString(16))
+    var hexR = padHex((Math.round(color.r * 255)).toString(16))
+    var hexG = padHex((Math.round(color.g * 255)).toString(16))
+    var hexB = padHex((Math.round(color.b * 255)).toString(16))
 
     switch (format) {
     case "RRR,GGG,BBB":
-        return [color.r * 255, color.g * 255, color.b * 255].join(", ")
+        return [Math.round(color.r * 255), Math.round(color.g * 255), Math.round(color.b * 255)].join(", ")
     case "#rrggbb":
         return "#" + formatColor(color, "rrggbb")
     case "rrggbb":
