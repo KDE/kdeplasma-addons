@@ -135,7 +135,7 @@ PlasmoidItem {
                 subText: i18n("Current user")
                 source: kuser.faceIconUrl.toString()
                 hoverEnabled: false
-                interactiveIcon: KConfig.KAuthorized.authorizeControlModule("kcm_users.desktop").length > 0
+                interactiveIcon: KConfig.KAuthorized.authorizeControlModule("kcm_users")
                 onIconClicked: KCMLauncher.openSystemSettings("kcm_users")
             }
 
