@@ -50,7 +50,7 @@ void SpellCheckConfig::toggleTriggerWord(int state)
 
 void SpellCheckConfig::openKcm()
 {
-    QProcess::startDetached(QStringLiteral("kcmshell5"), {QStringLiteral("spellchecking")});
+    QProcess::startDetached(QStringLiteral("kcmshell6"), {QStringLiteral("spellchecking")});
 }
 
 void SpellCheckConfig::load()
