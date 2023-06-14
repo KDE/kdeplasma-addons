@@ -94,7 +94,7 @@ PlasmoidItem {
 
     Component.onCompleted: {
         Plasmoid.removeAction("configure");
-        if (KConfig.KAuthorized.authorizeControlModule("kcm_nightcolor.desktop").length > 0) {
+        if (KConfig.KAuthorized.authorizeControlModule("kcm_nightcolor")) {
             Plasmoid.setAction("configure", i18n("&Configure Night Color…"), "configure", "alt+d, s");
         }
     }
