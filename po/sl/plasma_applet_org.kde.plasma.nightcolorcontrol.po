@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-12-30 08:46+0000\n"
+"POT-Creation-Date: 2023-06-14 02:06+0000\n"
 "PO-Revision-Date: 2023-01-03 16:31+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -18,37 +18,37 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Lokalize 22.12.0\n"
 
-#: package/contents/ui/main.qml:32
+#: package/contents/ui/main.qml:33
 #, kde-format
 msgid "Night Color Control"
 msgstr "Upravljanje nočne barve"
 
-#: package/contents/ui/main.qml:35
+#: package/contents/ui/main.qml:36
 #, kde-format
 msgid "Night Color is inhibited"
 msgstr "Nočna barva je zavrta"
 
-#: package/contents/ui/main.qml:38
+#: package/contents/ui/main.qml:39
 #, kde-format
 msgid "Night Color is unavailable"
 msgstr "Nočna barva ni na voljo"
 
-#: package/contents/ui/main.qml:41
+#: package/contents/ui/main.qml:42
 #, kde-format
 msgid "Night Color is disabled. Click to configure"
 msgstr "Nočna barva je onemogočena. Kliknite za konfiguriranje"
 
-#: package/contents/ui/main.qml:44
+#: package/contents/ui/main.qml:45
 #, kde-format
 msgid "Night Color is not running"
 msgstr "Nočna barva ne teče"
 
-#: package/contents/ui/main.qml:46
+#: package/contents/ui/main.qml:47
 #, kde-format
 msgid "Night Color is active (%1K)"
 msgstr "Nočna barva je aktivna (%1K)"
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:98
 #, kde-format
 msgid "&Configure Night Color…"
 msgstr "Konfiguriraj nočno barvo…"

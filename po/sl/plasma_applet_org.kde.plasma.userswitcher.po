@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-10 00:46+0000\n"
+"POT-Creation-Date: 2023-06-14 02:06+0000\n"
 "PO-Revision-Date: 2022-09-11 07:06+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -80,53 +80,53 @@ msgctxt "@option:check"
 msgid "Show technical session information"
 msgstr "Pokaži tehnične podatke o sejah"
 
-#: package/contents/ui/main.qml:39
+#: package/contents/ui/main.qml:40
 #, kde-format
 msgid "You are logged in as <b>%1</b>"
 msgstr "Prijavljeni ste kot <b>%1</b>"
 
-#: package/contents/ui/main.qml:134
+#: package/contents/ui/main.qml:135
 #, kde-format
 msgid "Current user"
 msgstr "Trenutni uporabnik"
 
-#: package/contents/ui/main.qml:165
+#: package/contents/ui/main.qml:166
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "Neuporabljeno"
 
-#: package/contents/ui/main.qml:181
+#: package/contents/ui/main.qml:182
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
-#: package/contents/ui/main.qml:183
+#: package/contents/ui/main.qml:184
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "v %1 (%2)"
 
-#: package/contents/ui/main.qml:191
+#: package/contents/ui/main.qml:192
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr "Preklopi na uporabnika %1"
 
-#: package/contents/ui/main.qml:200
+#: package/contents/ui/main.qml:201
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "Nova seja"
 
-#: package/contents/ui/main.qml:212
+#: package/contents/ui/main.qml:213
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Zakleni zaslon"
 
-#: package/contents/ui/main.qml:224
+#: package/contents/ui/main.qml:225
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Log Out"

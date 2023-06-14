@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-09-10 00:46+0000\n"
+"POT-Creation-Date: 2023-06-14 02:06+0000\n"
 "PO-Revision-Date: 2020-02-04 20:48-0800\n"
 "Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -77,53 +77,53 @@ msgctxt "@option:check"
 msgid "Show technical session information"
 msgstr "ਤਕਨੀਕੀ ਸ਼ੈਸ਼ਨ ਜਾਣਕਾਰੀ ਵੇਖਾਓ"
 
-#: package/contents/ui/main.qml:39
+#: package/contents/ui/main.qml:40
 #, kde-format
 msgid "You are logged in as <b>%1</b>"
 msgstr "ਤੁਸੀਂ <b>%1</b> ਵਜੋਂ ਲਾਗਇਨ ਹੋ"
 
-#: package/contents/ui/main.qml:134
+#: package/contents/ui/main.qml:135
 #, kde-format
 msgid "Current user"
 msgstr "ਮੌਜੂਦਾ ਵਰਤੋਂਕਾਰ"
 
-#: package/contents/ui/main.qml:165
+#: package/contents/ui/main.qml:166
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "ਨਾ-ਵਰਤੇ"
 
-#: package/contents/ui/main.qml:181
+#: package/contents/ui/main.qml:182
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
-#: package/contents/ui/main.qml:183
+#: package/contents/ui/main.qml:184
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "%1 (%2) ਉੱਤੇ"
 
-#: package/contents/ui/main.qml:191
+#: package/contents/ui/main.qml:192
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr ""
 
-#: package/contents/ui/main.qml:200
+#: package/contents/ui/main.qml:201
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "ਨਵਾਂ ਸ਼ੈਸ਼ਨ"
 
-#: package/contents/ui/main.qml:212
+#: package/contents/ui/main.qml:213
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "ਸਕਰੀਨ ਲਾਕ ਕਰੋ"
 
-#: package/contents/ui/main.qml:224
+#: package/contents/ui/main.qml:225
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Log Out"
