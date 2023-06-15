@@ -10,6 +10,7 @@ import QtQuick.Layouts 1.3
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.workspace.components 2.0 as WorkspaceComponents
 
 Loader {
@@ -43,15 +44,15 @@ Loader {
         id: iconComponent
 
         PlasmaCore.IconItem {
-            readonly property int minIconSize: Math.max((compactRoot.vertical ? compactRoot.width : compactRoot.height), PlasmaCore.Units.iconSizes.small)
+            readonly property int minIconSize: Math.max((compactRoot.vertical ? compactRoot.width : compactRoot.height), Kirigami.Units.iconSizes.small)
 
             source: generalModel.currentConditionIconName
             active: compactMouseArea.containsMouse
             // reset implicit size, so layout in free dimension does not stop at the default one
-            implicitWidth: PlasmaCore.Units.iconSizes.small
-            implicitHeight: PlasmaCore.Units.iconSizes.small
-            Layout.minimumWidth: compactRoot.vertical ? PlasmaCore.Units.iconSizes.small : minIconSize
-            Layout.minimumHeight: compactRoot.vertical ? minIconSize : PlasmaCore.Units.iconSizes.small
+            implicitWidth: Kirigami.Units.iconSizes.small
+            implicitHeight: Kirigami.Units.iconSizes.small
+            Layout.minimumWidth: compactRoot.vertical ? Kirigami.Units.iconSizes.small : minIconSize
+            Layout.minimumHeight: compactRoot.vertical ? minIconSize : Kirigami.Units.iconSizes.small
 
             WorkspaceComponents.BadgeOverlay {
                 anchors.bottom: parent.bottom

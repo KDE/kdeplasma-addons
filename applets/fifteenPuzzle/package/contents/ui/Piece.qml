@@ -8,6 +8,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
 import org.kde.plasma.core 2.1 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
@@ -34,7 +35,7 @@ Rectangle {
     signal activated(int position)
 
     readonly property int boardSize: Plasmoid.configuration.boardSize
-    readonly property int margin: PlasmaCore.Units.smallSpacing
+    readonly property int margin: Kirigami.Units.smallSpacing
     readonly property int pieceWidth: (parent.width - (margin * boardSize)) / boardSize
     readonly property int pieceHeight: (parent.height - (margin * boardSize)) / boardSize
     readonly property int boardColumn: (position % boardSize)
@@ -59,13 +60,13 @@ Rectangle {
 
     Behavior on x {
         NumberAnimation {
-            duration: PlasmaCore.Units.longDuration
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
     Behavior on y {
         NumberAnimation {
-            duration: PlasmaCore.Units.longDuration
+            duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }

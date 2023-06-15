@@ -9,6 +9,7 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kwin 3.0 as KWin
 
@@ -57,7 +58,7 @@ KWin.TabBoxSwitcher {
         mainItem: Item {
             id: dialogMainItem
 
-            property int optimalWidth: textMetrics.width + PlasmaCore.Units.iconSizes.small + 2 * PlasmaCore.Units.smallSpacing + hoverItem.margins.right + hoverItem.margins.left
+            property int optimalWidth: textMetrics.width + Kirigami.Units.iconSizes.small + 2 * PlasmaCore.Units.smallSpacing + hoverItem.margins.right + hoverItem.margins.left
             property int optimalHeight: compactListView.rowHeight * compactListView.count
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.2, optimalWidth), tabBox.screenGeometry.width * 0.8)
             height: Math.min(optimalHeight, tabBox.screenGeometry.height * 0.8)
@@ -75,7 +76,7 @@ KWin.TabBoxSwitcher {
                 id: compactListView
 
                 // the maximum text width + icon item width (32 + 4 margin) + margins for hover item
-                property int rowHeight: Math.max(PlasmaCore.Units.iconSizes.small, textMetrics.height + hoverItem.margins.top + hoverItem.margins.bottom)
+                property int rowHeight: Math.max(Kirigami.Units.iconSizes.small, textMetrics.height + hoverItem.margins.top + hoverItem.margins.bottom)
 
                 anchors.fill: parent
                 clip: true
@@ -87,14 +88,14 @@ KWin.TabBoxSwitcher {
                     height: compactListView.rowHeight
                     opacity: minimized ? 0.6 : 1.0
 
-                    spacing: 2 * PlasmaCore.Units.smallSpacing
+                    spacing: 2 * Kirigami.Units.smallSpacing
 
                     PlasmaCore.IconItem {
                         id: iconItem
                         source: model.icon
                         usesPlasmaTheme: false
-                        Layout.preferredWidth: PlasmaCore.Units.iconSizes.small
-                        Layout.preferredHeight: PlasmaCore.Units.iconSizes.small
+                        Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                        Layout.preferredHeight: Kirigami.Units.iconSizes.small
                         Layout.leftMargin: hoverItem.margins.left
                     }
                     PlasmaComponents3.Label {

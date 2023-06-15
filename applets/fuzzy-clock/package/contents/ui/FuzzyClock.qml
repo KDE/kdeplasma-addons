@@ -12,17 +12,18 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.plasmoid 2.0
 
 Item {
     id: main
 
-    Layout.minimumWidth: vertical ? 0 : sizehelper.paintedWidth + (PlasmaCore.Units.smallSpacing * 2)
+    Layout.minimumWidth: vertical ? 0 : sizehelper.paintedWidth + (Kirigami.Units.smallSpacing * 2)
     Layout.maximumWidth: vertical ? Infinity : Layout.minimumWidth
     Layout.preferredWidth: vertical ? undefined : Layout.minimumWidth
 
-    Layout.minimumHeight: vertical ? sizehelper.paintedHeight + (PlasmaCore.Units.smallSpacing * 2) : 0
+    Layout.minimumHeight: vertical ? sizehelper.paintedHeight + (Kirigami.Units.smallSpacing * 2) : 0
     Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
     Layout.preferredHeight: vertical ? Layout.minimumHeight : PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2
 
@@ -264,7 +265,7 @@ Item {
             pixelSize: 1024
             pointSize: 0 // we need to unset pointSize otherwise it breaks the Text.Fit size mode
         }
-        minimumPixelSize: PlasmaCore.Theme.mSize(PlasmaCore.Theme.smallestFont).height
+        minimumPixelSize: PlasmaCore.Theme.mSize(Kirigami.Theme.smallFont).height
         fontSizeMode: Text.Fit
         text: timeString()
 
@@ -275,8 +276,8 @@ Item {
         width: 0
         anchors {
             fill: parent
-            leftMargin: PlasmaCore.Units.smallSpacing
-            rightMargin: PlasmaCore.Units.smallSpacing
+            leftMargin: Kirigami.Units.smallSpacing
+            rightMargin: Kirigami.Units.smallSpacing
         }
     }
 
@@ -297,7 +298,7 @@ Item {
         font.weight: timeLabel.font.weight
         font.italic: timeLabel.font.italic
         font.pixelSize: vertical ? PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
-        minimumPixelSize: PlasmaCore.Theme.mSize(PlasmaCore.Theme.smallestFont).height
+        minimumPixelSize: PlasmaCore.Theme.mSize(Kirigami.Theme.smallFont).height
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         text: timeLabel.text
@@ -307,8 +308,8 @@ Item {
         visible: false
         anchors {
             fill: parent
-            leftMargin: PlasmaCore.Units.smallSpacing
-            rightMargin: PlasmaCore.Units.smallSpacing
+            leftMargin: Kirigami.Units.smallSpacing
+            rightMargin: Kirigami.Units.smallSpacing
         }
     }
 }

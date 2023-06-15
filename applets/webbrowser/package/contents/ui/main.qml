@@ -10,16 +10,16 @@ import QtQuick 2.0
 import QtWebEngine 1.5
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
 
 PlasmoidItem {
-    switchWidth: PlasmaCore.Units.gridUnit * 16
-    switchHeight: PlasmaCore.Units.gridUnit * 23
+    switchWidth: Kirigami.Units.gridUnit * 16
+    switchHeight: Kirigami.Units.gridUnit * 23
     fullRepresentation: ColumnLayout {
-        Layout.minimumWidth: PlasmaCore.Units.gridUnit * 15
-        Layout.minimumHeight: PlasmaCore.Units.gridUnit * 22
+        Layout.minimumWidth: Kirigami.Units.gridUnit * 15
+        Layout.minimumHeight: Kirigami.Units.gridUnit * 22
 
         RowLayout{
             Layout.fillWidth: true
@@ -100,8 +100,8 @@ PlasmoidItem {
             Layout.fillHeight: true
 
             // TODO use contentsSize but that crashes, now mostly for some sane initial size
-            Layout.preferredWidth: PlasmaCore.Units.gridUnit * 36
-            Layout.preferredHeight: PlasmaCore.Units.gridUnit * 18
+            Layout.preferredWidth: Kirigami.Units.gridUnit * 36
+            Layout.preferredHeight: Kirigami.Units.gridUnit * 18
 
             // Binding it to e.g. width will be super slow on resizing
             Timer {

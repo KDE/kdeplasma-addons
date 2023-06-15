@@ -7,7 +7,7 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
 import QtWebEngine
@@ -19,8 +19,8 @@ import org.kde.plasma.private.dict 1.0
 
 PlasmoidItem {
     id: root
-    switchWidth: PlasmaCore.Units.gridUnit * 10
-    switchHeight: PlasmaCore.Units.gridUnit * 10
+    switchWidth: Kirigami.Units.gridUnit * 10
+    switchHeight: Kirigami.Units.gridUnit * 10
 
     fullRepresentation: ColumnLayout {
         Keys.forwardTo: input
@@ -45,7 +45,7 @@ PlasmoidItem {
                 focus: root.expanded && !Kirigami.InputMethod.willShowOnActive
                 placeholderText: i18nc("@info:placeholder", "Enter word to define here…")
                 Layout.fillWidth: true
-                Layout.minimumWidth: PlasmaCore.Units.gridUnit * 12
+                Layout.minimumWidth: Kirigami.Units.gridUnit * 12
                 onAccepted: {
                     if (input.text === "") {
                         web.visible = false;
@@ -83,7 +83,7 @@ PlasmoidItem {
                 anchors.fill: parent
                 visible: false
 
-                zoomFactor: PlasmaCore.Units.devicePixelRatio
+                zoomFactor: Kirigami.Units.devicePixelRatio
                 profile: dict.webProfile
                 property Menu contextMenu: Menu {
                     Repeater {
@@ -123,7 +123,7 @@ PlasmoidItem {
                 Behavior on opacity {
                     NumberAnimation {
                         easing.type: Easing.InOutQuad
-                        duration: PlasmaCore.Units.veryLongDuration
+                        duration: Kirigami.Units.veryLongDuration
                     }
                 }
             }
@@ -148,7 +148,7 @@ PlasmoidItem {
                     anchors.fill: parent
 
                     PlasmaExtras.PlaceholderMessage {
-                        width: parent.width - PlasmaCore.Units.gridUnit * 2 // For text wrap
+                        width: parent.width - Kirigami.Units.gridUnit * 2 // For text wrap
                         anchors.centerIn: parent
                         iconName: "network-disconnect"
                         text: i18n("Unable to load definition")

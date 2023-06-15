@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.15
 
 import org.kde.coreaddons 1.0 as KCoreAddons
 import org.kde.plasma.core 2.1 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.plasmoid 2.0
 
@@ -266,7 +267,7 @@ Item {
             left: parent.left
             right: parent.right
             bottom: controlsRow.top
-            bottomMargin: PlasmaCore.Units.smallSpacing
+            bottomMargin: Kirigami.Units.smallSpacing
         }
 
         activeFocusOnTab: true
@@ -290,7 +291,7 @@ Item {
     RowLayout {
         id: controlsRow
         anchors {
-            margins: PlasmaCore.Units.smallSpacing
+            margins: Kirigami.Units.smallSpacing
             bottom: parent.bottom
             horizontalCenter: parent.horizontalCenter
         }

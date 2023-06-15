@@ -7,6 +7,7 @@
 import QtQuick 2.15
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 import QtQuick.Layouts 1.1
@@ -22,7 +23,7 @@ PlasmoidItem {
         || plasmoid.location === PlasmaCore.Types.BottomEdge
         || plasmoid.location === PlasmaCore.Types.LeftEdge)
 
-    Layout.minimumWidth: PlasmaCore.Units.iconSizes.small
+    Layout.minimumWidth: Kirigami.Units.iconSizes.small
     Layout.minimumHeight: Layout.minimumWidth
 
     property string url: ""
@@ -274,7 +275,7 @@ PlasmoidItem {
             anchors.fill: parent
             opacity: root.containsDrag || tooltipArea.containsMouse ? .3 : 0
 
-            Behavior on opacity { NumberAnimation { duration: PlasmaCore.Units.shortDuration } }
+            Behavior on opacity { NumberAnimation { duration: Kirigami.Units.shortDuration } }
         }
 
         Timer {

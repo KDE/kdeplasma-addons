@@ -6,14 +6,15 @@
 
 import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 
 Item {
     id: root
 
-    width: PlasmaCore.Units.gridUnit
-    height: PlasmaCore.Units.gridUnit
+    width: Kirigami.Units.gridUnit
+    height: Kirigami.Units.gridUnit
 
     property variant comicData
 
@@ -104,7 +105,7 @@ Item {
 
             transitions: Transition {
                 from: ""; to: "show"; reversible: true
-                NumberAnimation { properties: "opacity"; duration: PlasmaCore.Units.longDuration; easing.type: Easing.InOutQuad }
+                NumberAnimation { properties: "opacity"; duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
             }
         }
     }

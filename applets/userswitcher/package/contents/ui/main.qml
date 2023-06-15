@@ -14,6 +14,7 @@ import org.kde.kcmutils // KCMLauncher
 import org.kde.config as KConfig  // KAuthorized.authorizeControlModule
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.1 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasmoid 2.0
 
 import org.kde.plasma.private.sessions 2.0 as Sessions
@@ -33,8 +34,8 @@ PlasmoidItem {
     // TTY number and X display
     readonly property bool showTechnicalInfo: Plasmoid.configuration.showTechnicalInfo
 
-    switchWidth: PlasmaCore.Units.gridUnit * 10
-    switchHeight: PlasmaCore.Units.gridUnit * 12
+    switchWidth: Kirigami.Units.gridUnit * 10
+    switchHeight: Kirigami.Units.gridUnit * 12
 
     toolTipTextFormat: Text.StyledText
     toolTipSubText: i18n("You are logged in as <b>%1</b>", displayedName)
@@ -50,13 +51,13 @@ PlasmoidItem {
         id: compactRoot
 
         // Taken from DigitalClock to ensure uniform sizing when next to each other
-        readonly property bool tooSmall: Plasmoid.formFactor === PlasmaCore.Types.Horizontal && Math.round(2 * (compactRoot.height / 5)) <= PlasmaCore.Theme.smallestFont.pixelSize
+        readonly property bool tooSmall: Plasmoid.formFactor === PlasmaCore.Types.Horizontal && Math.round(2 * (compactRoot.height / 5)) <= Kirigami.Theme.smallFont.pixelSize
 
         Layout.minimumWidth: isVertical ? 0 : compactRow.implicitWidth
         Layout.maximumWidth: isVertical ? Infinity : Layout.minimumWidth
         Layout.preferredWidth: isVertical ? -1 : Layout.minimumWidth
 
-        Layout.minimumHeight: isVertical ? label.height : PlasmaCore.Theme.smallestFont.pixelSize
+        Layout.minimumHeight: isVertical ? label.height : Kirigami.Theme.smallFont.pixelSize
         Layout.maximumHeight: isVertical ? Layout.minimumHeight : Infinity
         Layout.preferredHeight: isVertical ? Layout.minimumHeight : PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2
 
@@ -68,17 +69,17 @@ PlasmoidItem {
             id: compactRow
 
             anchors.centerIn: parent
-            spacing: PlasmaCore.Units.smallSpacing
+            spacing: Kirigami.Units.smallSpacing
 
             Kirigami.Avatar {
                 id: icon
 
                 anchors.verticalCenter: parent.verticalCenter
-                height: compactRoot.height - Math.round(PlasmaCore.Units.smallSpacing / 2)
+                height: compactRoot.height - Math.round(Kirigami.Units.smallSpacing / 2)
                 width: height
 
                 border.color: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {alpha: 0.4*255})
-                border.width: PlasmaCore.Units.devicePixelRatio
+                border.width: Kirigami.Units.devicePixelRatio
 
                 source: visible ? (kuser.faceIconUrl.toString() || "user-identity") : ""
                 visible: root.showFace
@@ -95,8 +96,8 @@ PlasmoidItem {
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.NoWrap
                 fontSizeMode: root.isVertical ? Text.HorizontalFit : Text.VerticalFit
-                font.pixelSize: tooSmall ? PlasmaCore.Theme.defaultFont.pixelSize : PlasmaCore.Units.roundToIconSize(PlasmaCore.Units.gridUnit * 2)
-                minimumPointSize: PlasmaCore.Theme.smallestFont.pointSize
+                font.pixelSize: tooSmall ? PlasmaCore.Theme.defaultFont.pixelSize : Kirigami.Units.roundToIconSize(PlasmaCore.Units.gridUnit * 2)
+                minimumPointSize: Kirigami.Theme.smallFont.pointSize
                 visible: root.showName
             }
         }
@@ -108,7 +109,7 @@ PlasmoidItem {
         implicitHeight: column.implicitHeight
         implicitWidth: column.implicitWidth
 
-        Layout.preferredWidth: PlasmaCore.Units.gridUnit * 12
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 12
         Layout.preferredHeight: implicitHeight
         Layout.minimumWidth: Layout.preferredWidth
         Layout.minimumHeight: Layout.preferredHeight

@@ -8,7 +8,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Window 2.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.wallpapers.potd 1.0
 
@@ -95,7 +95,7 @@ QQC2.StackView {
         anchors.fill: parent
         color: wallpaper.configuration.Color
         Behavior on color {
-            ColorAnimation { duration: PlasmaCore.Units.longDuration }
+            ColorAnimation { duration: Kirigami.Units.longDuration }
         }
     }
 
@@ -105,7 +105,7 @@ QQC2.StackView {
             from: 0
             to: 1
             // As the wallpaper is updated once a day, the transition should be longer.
-            duration: Math.round(PlasmaCore.Units.veryLongDuration * 5)
+            duration: Math.round(Kirigami.Units.veryLongDuration * 5)
         }
     }
     // Keep the old image around till the new one is fully faded in

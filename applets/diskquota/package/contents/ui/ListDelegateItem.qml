@@ -7,6 +7,7 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
@@ -36,12 +37,12 @@ PlasmaComponents3.ItemDelegate {
     RowLayout {
         id: contents
         width: parent.width
-        spacing: PlasmaCore.Units.gridUnit
+        spacing: Kirigami.Units.gridUnit
 
         PlasmaCore.IconItem {
             source: iconName
             Layout.alignment: Qt.AlignTop
-            width: PlasmaCore.Units.iconSizes.medium
+            width: Kirigami.Units.iconSizes.medium
             height: width
         }
 

@@ -14,6 +14,7 @@ import QtQuick 2.5
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5 as QQC2
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
@@ -243,8 +244,8 @@ PlasmoidItem {
         Layout.minimumWidth: 150
         Layout.minimumHeight: 225
 
-        width: PlasmaCore.Units.gridSize * 3
-        height: PlasmaCore.Units.gridSize * 4
+        width: Kirigami.Units.gridSize * 3
+        height: Kirigami.Units.gridSize * 4
 
         contentItem: ColumnLayout {
             id: mainLayout

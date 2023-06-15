@@ -9,27 +9,28 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 
 PlasmoidItem {
     id: mainWindow
 
-    readonly property int implicitWidth: PlasmaCore.Units.gridUnit * 40
-    readonly property int implicitHeight: PlasmaCore.Units.gridUnit * 15
+    readonly property int implicitWidth: Kirigami.Units.gridUnit * 40
+    readonly property int implicitHeight: Kirigami.Units.gridUnit * 15
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
     switchWidth: {
         if (centerLayout.comicData.image) {
             return Math.max(minimumWidth, Math.min(centerLayout.comicData.image.nativeWidth * 0.6, implicitWidth));
         } else {
-            return PlasmaCore.Units.gridUnit * 8;
+            return Kirigami.Units.gridUnit * 8;
         }
     }
     switchHeight: {
         if (centerLayout.comicData.image) {
             return Math.max(minimumHeight, Math.min(centerLayout.comicData.image.nativeHeight * 0.6, implicitHeight));
         } else {
-            return PlasmaCore.Units.gridUnit * 8;
+            return Kirigami.Units.gridUnit * 8;
         }
     }
     Plasmoid.icon: "face-laughing"
@@ -37,8 +38,8 @@ PlasmoidItem {
     width: implicitWidth
     height: implicitHeight
 
-    readonly property int minimumWidth: PlasmaCore.Units.gridUnit * 8
-    readonly property int minimumHeight: PlasmaCore.Units.gridUnit * 8
+    readonly property int minimumWidth: Kirigami.Units.gridUnit * 8
+    readonly property int minimumHeight: Kirigami.Units.gridUnit * 8
     readonly property bool showComicAuthor: plasmoid.showComicAuthor
     readonly property bool showComicTitle: plasmoid.showComicTitle
     readonly property bool showErrorPicture: plasmoid.showErrorPicture
@@ -210,7 +211,7 @@ PlasmoidItem {
     transitions:
         Transition {
             AnchorAnimation {
-                duration: PlasmaCore.Units.veryLongDuration
+                duration: Kirigami.Units.veryLongDuration
                 easing.type: Easing.InOutQuad
             }
         }

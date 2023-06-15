@@ -9,6 +9,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
 import org.kde.plasma.core 2.1 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.plasmoid 2.0
 import org.kde.draganddrop 2.0 as DnD
@@ -19,8 +20,8 @@ ContainmentItem {
     id: root
 
     //be at least the same size as the system tray popup
-    Layout.minimumWidth: PlasmaCore.Units.gridUnit * 24
-    Layout.minimumHeight: PlasmaCore.Units.gridUnit * 21
+    Layout.minimumWidth: Kirigami.Units.gridUnit * 24
+    Layout.minimumHeight: Kirigami.Units.gridUnit * 21
     Layout.preferredWidth: Layout.minimumWidth
     Layout.preferredHeight: Layout.minimumHeight * 1.5
 

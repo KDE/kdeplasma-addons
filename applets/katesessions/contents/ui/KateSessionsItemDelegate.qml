@@ -13,6 +13,7 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddons
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.private.profiles 1.0
 
@@ -23,7 +24,7 @@ PlasmaComponents3.ItemDelegate {
 
     property bool showInput: false
 
-    height: Math.max(label.height, sessionnameditlayout.implicitHeight) + PlasmaCore.Units.smallSpacing
+    height: Math.max(label.height, sessionnameditlayout.implicitHeight) + Kirigami.Units.smallSpacing
 
     MouseArea {
         anchors.fill: parent
@@ -45,7 +46,7 @@ PlasmaComponents3.ItemDelegate {
             height: iconItem.height
             anchors {
                 left: parent.left
-                leftMargin: PlasmaCore.Units.smallSpacing
+                leftMargin: Kirigami.Units.smallSpacing
                 right: parent.right
                 verticalCenter: parent.verticalCenter
             }
@@ -54,8 +55,8 @@ PlasmaComponents3.ItemDelegate {
                 anchors {
                     left: parent.left
                     right: parent.right
-                    rightMargin: PlasmaCore.Units.gridUnit * 2
-                    leftMargin: PlasmaCore.Units.iconSizes.small + PlasmaCore.Units.smallSpacing * 2
+                    rightMargin: Kirigami.Units.gridUnit * 2
+                    leftMargin: Kirigami.Units.iconSizes.small + PlasmaCore.Units.smallSpacing * 2
                     verticalCenter: parent.verticalCenter
                 }
                 maximumLineCount: 1
@@ -67,7 +68,7 @@ PlasmaComponents3.ItemDelegate {
 
             PlasmaCore.IconItem {
                 id: iconItem
-                width: PlasmaCore.Units.iconSizes.small
+                width: Kirigami.Units.iconSizes.small
                 height: width
                 anchors.verticalCenter: parent.verticalCenter
                 source: iconName
@@ -82,7 +83,7 @@ PlasmaComponents3.ItemDelegate {
                     left: parent.left
                     right: parent.right
                     rightMargin: 0
-                    leftMargin: PlasmaCore.Units.iconSizes.small + PlasmaCore.Units.smallSpacing * 2
+                    leftMargin: Kirigami.Units.iconSizes.small + PlasmaCore.Units.smallSpacing * 2
                     verticalCenter: parent.verticalCenter
                 }
 
