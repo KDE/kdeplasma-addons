@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-16 02:03+0000\n"
 "PO-Revision-Date: 2022-10-28 22:52+0300\n"
 "Last-Translator: Lasse Liehu <lasse.liehu@iki.fi>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -22,6 +22,62 @@ msgstr ""
 msgctxt "@title"
 msgid "General"
 msgstr "Perusasetukset"
+
+#: package/contents/config/config.qml:18
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr ""
+
+#: package/contents/ui/ConfigAppearance.qml:26
+#, kde-format
+msgctxt "@title:group"
+msgid "Icon:"
+msgstr ""
+
+#: package/contents/ui/ConfigAppearance.qml:27
+#, kde-format
+msgctxt "@option:radio"
+msgid "Website's favicon"
+msgstr ""
+
+#: package/contents/ui/ConfigAppearance.qml:50
+#, kde-format
+msgctxt "@action:button"
+msgid "Change Web Browser's icon"
+msgstr ""
+
+#: package/contents/ui/ConfigAppearance.qml:51
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid ""
+"Current icon is %1. Click to open menu to change the current icon or reset "
+"to the default icon."
+msgstr ""
+
+#: package/contents/ui/ConfigAppearance.qml:55
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Icon name is \"%1\""
+msgstr ""
+
+#: package/contents/ui/ConfigAppearance.qml:90
+#, kde-format
+msgctxt "@item:inmenu Open icon chooser dialog"
+msgid "Choose…"
+msgstr ""
+
+#: package/contents/ui/ConfigAppearance.qml:92
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Choose an icon for Web Browser"
+msgstr ""
+
+#: package/contents/ui/ConfigAppearance.qml:96
+#, kde-format
+msgctxt "@item:inmenu Reset icon to default"
+msgid "Reset to default icon"
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:19
 #, kde-format
@@ -41,55 +97,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Automaattinen skaalaus, kun leveys on alle"
 
-#: package/contents/ui/main.qml:31
+#: package/contents/ui/main.qml:63
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Siirry takaisin"
 
-#: package/contents/ui/main.qml:38
+#: package/contents/ui/main.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Siirry eteenpäin"
 
-#: package/contents/ui/main.qml:57
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Kirjoita verkko-osoite"
 
-#: package/contents/ui/main.qml:93
+#: package/contents/ui/main.qml:125
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Keskeytä sivun lataus"
 
-#: package/contents/ui/main.qml:93
+#: package/contents/ui/main.qml:125
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Päivitä sivu"
 
-#: package/contents/ui/main.qml:143
+#: package/contents/ui/main.qml:175
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Avaa linkki selaimeen"
 
-#: package/contents/ui/main.qml:149
+#: package/contents/ui/main.qml:181
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopioi linkin osoite"
 
-#: package/contents/ui/main.qml:211
+#: package/contents/ui/main.qml:243
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Uusi ikkuna estetty"
 
-#: package/contents/ui/main.qml:212
+#: package/contents/ui/main.qml:244
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"
