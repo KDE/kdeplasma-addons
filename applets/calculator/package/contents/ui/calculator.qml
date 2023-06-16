@@ -328,9 +328,9 @@ PlasmoidItem {
                         margins: parent.margins.right;
                     }
                     text: "0";
-                    font.pointSize: PlasmaCore.Theme.defaultFont.pointSize * 2;
+                    font.pointSize: Kirigami.Theme.defaultFont.pointSize * 2;
                     font.weight: Font.Bold;
-                    color: PlasmaCore.Theme.viewTextColor;
+                    color: Kirigami.Theme.viewTextColor;
                     horizontalAlignment: TextEdit.AlignRight;
                     verticalAlignment: TextEdit.AlignVCenter;
                     readOnly: true;

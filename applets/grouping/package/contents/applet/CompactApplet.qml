@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kquickcontrolsaddons 2.0
 
 PlasmaCore.ToolTipArea {
@@ -57,7 +58,7 @@ PlasmaCore.ToolTipArea {
             })
         } else {
             popupWindow.mainItem.width = Qt.binding(function() {
-                return PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).width * 35
+                return Kirigami.Theme.mSize(Kirigami.Theme.defaultFont).width * 35
             })
         }
 
@@ -75,7 +76,7 @@ PlasmaCore.ToolTipArea {
             })
         } else {
             popupWindow.mainItem.height = Qt.binding(function() {
-                return PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 25
+                return Kirigami.Theme.mSize(Kirigami.Theme.defaultFont).height * 25
             })
         }
 

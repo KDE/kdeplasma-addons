@@ -25,7 +25,7 @@ Item {
 
     Layout.minimumHeight: vertical ? sizehelper.paintedHeight + (Kirigami.Units.smallSpacing * 2) : 0
     Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
-    Layout.preferredHeight: vertical ? Layout.minimumHeight : PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2
+    Layout.preferredHeight: vertical ? Layout.minimumHeight : Kirigami.Units.iconSizes.sizeForLabels * 2
 
     readonly property bool vertical: plasmoid.formFactor == PlasmaCore.Types.Vertical
 
@@ -265,7 +265,7 @@ Item {
             pixelSize: 1024
             pointSize: 0 // we need to unset pointSize otherwise it breaks the Text.Fit size mode
         }
-        minimumPixelSize: PlasmaCore.Theme.mSize(Kirigami.Theme.smallFont).height
+        minimumPixelSize: Kirigami.Units.iconSizes.sizeForLabels
         fontSizeMode: Text.Fit
         text: timeString()
 
@@ -297,8 +297,8 @@ Item {
         id: sizehelper
         font.weight: timeLabel.font.weight
         font.italic: timeLabel.font.italic
-        font.pixelSize: vertical ? PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
-        minimumPixelSize: PlasmaCore.Theme.mSize(Kirigami.Theme.smallFont).height
+        font.pixelSize: vertical ? Kirigami.Theme.mSize(Kirigami.Theme.defaultFont).height * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
+        minimumPixelSize: Kirigami.Theme.mSize(Kirigami.Theme.smallFont).height
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         text: timeLabel.text

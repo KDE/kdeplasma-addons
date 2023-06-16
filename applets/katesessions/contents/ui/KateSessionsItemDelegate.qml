@@ -56,7 +56,7 @@ PlasmaComponents3.ItemDelegate {
                     left: parent.left
                     right: parent.right
                     rightMargin: Kirigami.Units.gridUnit * 2
-                    leftMargin: Kirigami.Units.iconSizes.small + PlasmaCore.Units.smallSpacing * 2
+                    leftMargin: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing * 2
                     verticalCenter: parent.verticalCenter
                 }
                 maximumLineCount: 1
@@ -83,7 +83,7 @@ PlasmaComponents3.ItemDelegate {
                     left: parent.left
                     right: parent.right
                     rightMargin: 0
-                    leftMargin: Kirigami.Units.iconSizes.small + PlasmaCore.Units.smallSpacing * 2
+                    leftMargin: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing * 2
                     verticalCenter: parent.verticalCenter
                 }
 

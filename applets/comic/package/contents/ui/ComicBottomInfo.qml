@@ -6,6 +6,7 @@
 
 import QtQuick 2.1
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 
@@ -32,7 +33,7 @@ Item {
             leftMargin: 2
         }
 
-        color: PlasmaCore.Theme.textColor
+        color: Kirigami.Theme.textColor
         visible: (showIdentifier && comicIdentifier.text.length > 0)
         text: (showIdentifier && comicData.currentReadable != undefined) ? comicData.currentReadable : ""
 
@@ -44,11 +45,11 @@ Item {
             hoverEnabled: true
 
             onEntered: {
-                parent.color = PlasmaCore.Theme.highlightColor;
+                parent.color = Kirigami.Theme.highlightColor;
             }
 
             onExited: {
-                parent.color = PlasmaCore.Theme.textColor;
+                parent.color = Kirigami.Theme.textColor;
             }
 
             onClicked: {
@@ -72,7 +73,7 @@ Item {
             rightMargin: 2
         }
 
-        color: PlasmaCore.Theme.textColor
+        color: Kirigami.Theme.textColor
         visible: (showUrl && comicUrl.text.length > 0)
         text: (showUrl && comicData.websiteHost.length > 0) ? comicData.websiteHost : ""
 
@@ -84,11 +85,11 @@ Item {
             hoverEnabled: true
 
             onEntered: {
-                parent.color = PlasmaCore.Theme.highlightColor;
+                parent.color = Kirigami.Theme.highlightColor;
             }
 
             onExited: {
-                parent.color = PlasmaCore.Theme.textColor;
+                parent.color = Kirigami.Theme.textColor;
             }
 
             onClicked: {

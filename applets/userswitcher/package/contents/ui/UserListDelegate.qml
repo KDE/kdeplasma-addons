@@ -8,7 +8,6 @@ import QtQuick 2.15
 import QtQml 2.15
 
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 
 ListDelegate {
@@ -31,7 +30,7 @@ ListDelegate {
 
         iconSource: "user-identity"
 
-        border.color: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {alpha: 0.4*255})
+        border.color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {alpha: 0.4*255})
         border.width: Kirigami.Units.devicePixelRatio
     }
 }

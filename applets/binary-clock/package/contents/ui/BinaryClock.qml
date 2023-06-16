@@ -53,11 +53,11 @@ Item {
 
     readonly property int dots: showSeconds ? 6 : 4
 
-    readonly property color onColor: plasmoid.configuration.useCustomColorForActive ? plasmoid.configuration.customColorForActive : PlasmaCore.Theme.textColor
+    readonly property color onColor: plasmoid.configuration.useCustomColorForActive ? plasmoid.configuration.customColorForActive : Kirigami.Theme.textColor
     readonly property color offColor: plasmoid.configuration.useCustomColorForInactive ? plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.4)
     readonly property color gridColor: plasmoid.configuration.useCustomColorForGrid ? plasmoid.configuration.customColorForGrid : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.6)
 
-    readonly property int dotSize: Math.min((height-5*Kirigami.Units.smallSpacing)/4, (width-(dots+1)*PlasmaCore.Units.smallSpacing)/dots)
+    readonly property int dotSize: Math.min((height-5*Kirigami.Units.smallSpacing)/4, (width-(dots+1)*Kirigami.Units.smallSpacing)/dots)
     readonly property real displayTop: (height - 4*dotSize-3*Kirigami.Units.smallSpacing)/2
     readonly property real displayLeft: (width - dots*dotSize-(dots-1)*Kirigami.Units.smallSpacing)/2
 
@@ -115,7 +115,7 @@ Item {
     Rectangle {
         x:       displayLeft-Kirigami.Units.smallSpacing
         y:       displayTop-Kirigami.Units.smallSpacing
-        width:   dots*(dotSize+Kirigami.Units.smallSpacing)+PlasmaCore.Units.smallSpacing
+        width:   dots*(dotSize+Kirigami.Units.smallSpacing)+Kirigami.Units.smallSpacing
         height:  Kirigami.Units.smallSpacing
         visible: showGrid
         color:   gridColor

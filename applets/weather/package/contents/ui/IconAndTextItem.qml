@@ -64,9 +64,9 @@ GridLayout {
                 family: label.font.family
                 weight: label.font.weight
                 italic: label.font.italic
-                pixelSize: iconAndTextRoot.vertical ? PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
+                pixelSize: iconAndTextRoot.vertical ? Kirigami.Units.iconSizes.sizeForLabels * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
             }
-            minimumPixelSize: PlasmaCore.Theme.mSize(Kirigami.Theme.smallFont).height / 2
+            minimumPixelSize: Kirigami.Units.iconSizes.sizeForLabels / 2
             fontSizeMode: iconAndTextRoot.vertical ? Text.HorizontalFit : Text.VerticalFit
             wrapMode: Text.NoWrap
 
@@ -80,7 +80,7 @@ GridLayout {
             // text sizes here are identical with various clock text sizes
             height: {
                 const textHeightScaleFactor = (parent.height > 26) ? 0.7 : 0.9;
-                return Math.min (parent.height * textHeightScaleFactor, 3 * PlasmaCore.Theme.defaultFont.pixelSize);
+                return Math.min (parent.height * textHeightScaleFactor, 3 * Kirigami.Theme.defaultFont.pixelSize);
             }
             visible: false
 
@@ -96,7 +96,7 @@ GridLayout {
                 pixelSize: 1024
                 pointSize: 0 // we need to unset pointSize otherwise it breaks the Text.Fit size mode
             }
-            minimumPixelSize: PlasmaCore.Theme.mSize(Kirigami.Theme.smallFont).height / 2
+            minimumPixelSize: Kirigami.Units.iconSizes.sizeForLabels / 2
             fontSizeMode: Text.Fit
             wrapMode: Text.NoWrap
 

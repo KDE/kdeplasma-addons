@@ -104,7 +104,7 @@ DropArea {
                 anchors.centerIn: parent
                 width: circleRepeater.count > 0 ? Math.min(parent.width, circleRepeater.itemAt(0).colorCircle.width) : 0
                 height: circleRepeater.count > 0 ? Math.min(parent.height, circleRepeater.itemAt(0).colorCircle.height) : 0
-                color: PlasmaCore.Theme.textColor
+                color: Kirigami.Theme.textColor
                 opacity: 0.6
             }
         }

@@ -59,7 +59,7 @@ PlasmoidItem {
 
         Layout.minimumHeight: isVertical ? label.height : Kirigami.Theme.smallFont.pixelSize
         Layout.maximumHeight: isVertical ? Layout.minimumHeight : Infinity
-        Layout.preferredHeight: isVertical ? Layout.minimumHeight : PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2
+        Layout.preferredHeight: isVertical ? Layout.minimumHeight : Kirigami.Units.iconSizes.sizeForLabels * 2
 
         property bool wasExpanded
         onPressed: wasExpanded = root.expanded
@@ -78,7 +78,7 @@ PlasmoidItem {
                 height: compactRoot.height - Math.round(Kirigami.Units.smallSpacing / 2)
                 width: height
 
-                border.color: Kirigami.ColorUtils.adjustColor(PlasmaCore.Theme.textColor, {alpha: 0.4*255})
+                border.color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {alpha: 0.4*255})
                 border.width: Kirigami.Units.devicePixelRatio
 
                 source: visible ? (kuser.faceIconUrl.toString() || "user-identity") : ""
@@ -96,7 +96,7 @@ PlasmoidItem {
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.NoWrap
                 fontSizeMode: root.isVertical ? Text.HorizontalFit : Text.VerticalFit
-                font.pixelSize: tooSmall ? PlasmaCore.Theme.defaultFont.pixelSize : Kirigami.Units.roundToIconSize(PlasmaCore.Units.gridUnit * 2)
+                font.pixelSize: tooSmall ? Kirigami.Theme.defaultFont.pixelSize : Kirigami.Units.roundToIconSize(Kirigami.Units.gridUnit * 2)
                 minimumPointSize: Kirigami.Theme.smallFont.pointSize
                 visible: root.showName
             }

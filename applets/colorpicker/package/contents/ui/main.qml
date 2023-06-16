@@ -201,7 +201,7 @@ PlasmoidItem {
         Rectangle {
             id: dragImageDummy
             border {
-                color: PlasmaCore.Theme.textColor
+                color: Kirigami.Theme.textColor
                 width: Math.round(Kirigami.Units.devicePixelRatio)
             }
             radius: width
@@ -316,7 +316,7 @@ PlasmoidItem {
                 color: delegateMouse.currentColor
 
                 border {
-                    color: PlasmaCore.Theme.textColor
+                    color: Kirigami.Theme.textColor
                     width: Math.round(Kirigami.Units.devicePixelRatio)
                 }
 
@@ -328,7 +328,7 @@ PlasmoidItem {
                         margins: rect.border.width
                     }
                     height: colorLabel.contentHeight + 2 * Kirigami.Units.smallSpacing
-                    color: PlasmaCore.Theme.backgroundColor
+                    color: Kirigami.Theme.backgroundColor
                     opacity: 0.8
 
                     PlasmaComponents3.Label {

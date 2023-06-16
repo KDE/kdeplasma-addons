@@ -248,7 +248,7 @@ KWin.TabBoxSwitcher {
 
             PC3.Label {
                 font.bold: true
-                font.pointSize: Math.round(PlasmaCore.Theme.defaultFont.pointSize * 1.6)
+                font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.6)
                 text: thumbnailView.currentItem ? thumbnailView.currentItem.caption : ""
                 textFormat: Text.PlainText
                 maximumLineCount: 1

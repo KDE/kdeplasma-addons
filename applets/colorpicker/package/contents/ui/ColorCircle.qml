@@ -63,9 +63,9 @@ PlasmaComponents3.ToolButton {
         }
 
         border {
-            color: PlasmaCore.Theme.textColor
+            color: Kirigami.Theme.textColor
             width: {
-                const contrast = luminance(PlasmaCore.Theme.viewBackgroundColor) / luminance(colorCircle.color) + 0.05;
+                const contrast = luminance(Kirigami.Theme.viewBackgroundColor) / luminance(colorCircle.color) + 0.05;
 
                 // show border only if there's too little contrast to the surrounding view or color is transparent
                 if (contrast > 3 && colorCircle.color.a > 0.5) {

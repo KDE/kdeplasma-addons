@@ -58,7 +58,7 @@ KWin.TabBoxSwitcher {
         mainItem: Item {
             id: dialogMainItem
 
-            property int optimalWidth: textMetrics.width + Kirigami.Units.iconSizes.small + 2 * PlasmaCore.Units.smallSpacing + hoverItem.margins.right + hoverItem.margins.left
+            property int optimalWidth: textMetrics.width + Kirigami.Units.iconSizes.small + 2 * Kirigami.Units.smallSpacing + hoverItem.margins.right + hoverItem.margins.left
             property int optimalHeight: compactListView.rowHeight * compactListView.count
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.2, optimalWidth), tabBox.screenGeometry.width * 0.8)
             height: Math.min(optimalHeight, tabBox.screenGeometry.height * 0.8)

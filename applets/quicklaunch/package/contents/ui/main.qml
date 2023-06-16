@@ -91,7 +91,7 @@ PlasmoidItem {
                 right: parent.right
             }
 
-            height: PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height
+            height: Kirigami.Units.iconSizes.sizeForLabels
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignTop
             elide: Text.ElideMiddle

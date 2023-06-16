@@ -267,10 +267,10 @@ PlasmoidItem {
 
         Rectangle {
             border {
-                color: PlasmaCore.Theme.textColor
+                color: Kirigami.Theme.textColor
                 width: root.containsDrag ? 5 : 1
             }
-            color: PlasmaCore.Theme.backgroundColor
+            color: Kirigami.Theme.backgroundColor
             radius: Math.max(parent.width, parent.height)/10
             anchors.fill: parent
             opacity: root.containsDrag || tooltipArea.containsMouse ? .3 : 0
