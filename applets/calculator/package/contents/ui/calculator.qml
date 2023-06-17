@@ -244,9 +244,6 @@ PlasmoidItem {
         Layout.minimumWidth: 150
         Layout.minimumHeight: 225
 
-        width: Kirigami.Units.gridSize * 3
-        height: Kirigami.Units.gridSize * 4
-
         contentItem: ColumnLayout {
             id: mainLayout
             anchors.fill: parent
