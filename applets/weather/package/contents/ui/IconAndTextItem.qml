@@ -64,9 +64,9 @@ GridLayout {
                 family: label.font.family
                 weight: label.font.weight
                 italic: label.font.italic
-                pixelSize: iconAndTextRoot.vertical ? Kirigami.Units.iconSizes.sizeForLabels * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
+                pixelSize: iconAndTextRoot.vertical ? Kirigami.Units.gridUnit * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
             }
-            minimumPixelSize: Kirigami.Units.iconSizes.sizeForLabels / 2
+            minimumPixelSize: Math.round(Kirigami.Units.gridUnit / 2)
             fontSizeMode: iconAndTextRoot.vertical ? Text.HorizontalFit : Text.VerticalFit
             wrapMode: Text.NoWrap
 
@@ -96,7 +96,7 @@ GridLayout {
                 pixelSize: 1024
                 pointSize: 0 // we need to unset pointSize otherwise it breaks the Text.Fit size mode
             }
-            minimumPixelSize: Kirigami.Units.iconSizes.sizeForLabels / 2
+            minimumPixelSize: Math.round(Kirigami.Units.gridUnit / 2)
             fontSizeMode: Text.Fit
             wrapMode: Text.NoWrap
 

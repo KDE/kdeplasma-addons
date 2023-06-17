@@ -45,8 +45,8 @@ PlasmaComponents3.ToolButton {
         id: colorCircle
         anchors.centerIn: parent
         // try to match the color-picker icon in size
-        width: Kirigami.Units.roundToIconSize(pickerIcon.width) * 0.75
-        height: Kirigami.Units.roundToIconSize(pickerIcon.height) * 0.75
+        width: Kirigami.Units.roundedIconSize(pickerIcon.width) * 0.75
+        height: Kirigami.Units.roundedIconSize(pickerIcon.height) * 0.75
         radius: width / 2
 
         function luminance(color) {

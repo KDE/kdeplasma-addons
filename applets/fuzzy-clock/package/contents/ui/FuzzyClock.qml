@@ -297,8 +297,8 @@ Item {
         id: sizehelper
         font.weight: timeLabel.font.weight
         font.italic: timeLabel.font.italic
-        font.pixelSize: vertical ? Kirigami.Theme.mSize(Kirigami.Theme.defaultFont).height * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
-        minimumPixelSize: Kirigami.Theme.mSize(Kirigami.Theme.smallFont).height
+        font.pixelSize: vertical ? Kirigami.Units.gridUnit * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
+        minimumPixelSize: Math.round(Kirigami.Units.gridUnit / 2)
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         text: timeLabel.text

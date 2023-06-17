@@ -30,8 +30,8 @@ GridLayout {
 
     visible: !!generalModel.location
 
-    columnSpacing: Kirigami.Units.largeSpacing
-    rowSpacing: Kirigami.Units.smallSpacing
+    columnSpacing: Kirigami.Units.gridUnit
+    rowSpacing: Kirigami.Units.gridUnit
 
     columns: 3
 

@@ -330,7 +330,8 @@ PlasmoidItem {
                     text: "0";
                     font.pointSize: Kirigami.Theme.defaultFont.pointSize * 2;
                     font.weight: Font.Bold;
-                    color: Kirigami.Theme.viewTextColor;
+                    Kirigami.Theme.colorSet: Kirigami.Theme.View
+                    color: Kirigami.Theme.textColor
                     horizontalAlignment: TextEdit.AlignRight;
                     verticalAlignment: TextEdit.AlignVCenter;
                     readOnly: true;

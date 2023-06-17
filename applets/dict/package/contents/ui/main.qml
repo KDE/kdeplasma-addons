@@ -83,7 +83,7 @@ PlasmoidItem {
                 anchors.fill: parent
                 visible: false
 
-                zoomFactor: Kirigami.Units.devicePixelRatio
+                zoomFactor: 1
                 profile: dict.webProfile
                 property Menu contextMenu: Menu {
                     Repeater {

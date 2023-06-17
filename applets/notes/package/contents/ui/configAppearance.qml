@@ -63,7 +63,7 @@ ColumnLayout {
                 thumbnailAvailable: true
                 thumbnail: PlasmaCore.SvgItem {
                     anchors.fill: parent
-                    anchors.margins: Kirigami.Units.gridUnit / 2
+                    anchors.margins: Kirigami.Units.largeSpacing
 
                     svg: noteSvg
                     elementId: modelData + "-notes"

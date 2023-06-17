@@ -18,7 +18,7 @@ ColumnLayout {
     property alias model: categoryRepeater.model
     readonly property bool hasContent: model && model.length > 0 && (model[0].length > 0 || model[1].length > 0)
 
-    spacing: Kirigami.Units.largeSpacing
+    spacing: Kirigami.Units.gridUnit
 
     Repeater {
         id: categoryRepeater

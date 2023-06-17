@@ -31,6 +31,6 @@ ListDelegate {
         iconSource: "user-identity"
 
         border.color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {alpha: 0.4*255})
-        border.width: Kirigami.Units.devicePixelRatio
+        border.width: 1
     }
 }

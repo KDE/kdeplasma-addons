@@ -79,7 +79,7 @@ PlasmoidItem {
                 width: height
 
                 border.color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {alpha: 0.4*255})
-                border.width: Kirigami.Units.devicePixelRatio
+                border.width: 1
 
                 source: visible ? (kuser.faceIconUrl.toString() || "user-identity") : ""
                 visible: root.showFace
@@ -96,7 +96,7 @@ PlasmoidItem {
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.NoWrap
                 fontSizeMode: root.isVertical ? Text.HorizontalFit : Text.VerticalFit
-                font.pixelSize: tooSmall ? Kirigami.Theme.defaultFont.pixelSize : Kirigami.Units.roundToIconSize(Kirigami.Units.gridUnit * 2)
+                font.pixelSize: tooSmall ? Kirigami.Theme.defaultFont.pixelSize : Kirigami.Units.roundedIconSize(Kirigami.Units.gridUnit * 2)
                 minimumPointSize: Kirigami.Theme.smallFont.pointSize
                 visible: root.showName
             }

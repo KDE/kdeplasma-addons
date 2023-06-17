@@ -159,7 +159,7 @@ PlasmoidItem {
                     left: parent.left
                     right: parent.right
                     bottom: fontButtons.top
-                    bottomMargin: Math.round(Kirigami.Units.largeSpacing / 2)
+                    bottomMargin: Kirigami.Units.largeSpacing
                 }
 
                 clip: true

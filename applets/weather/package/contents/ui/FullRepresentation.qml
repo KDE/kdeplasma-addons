@@ -30,7 +30,7 @@ ColumnLayout {
 
     PlasmaExtras.PlaceholderMessage {
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        Layout.margins: Kirigami.Units.largeSpacing
+        Layout.margins: Kirigami.Units.gridUnit
         // when not in panel, a configure button is already shown for needsConfiguration
         visible: (root.status === Util.NeedsConfiguration) && (Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal)
         iconName: "mark-location"
@@ -46,7 +46,7 @@ ColumnLayout {
 
     PlasmaExtras.PlaceholderMessage {
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        Layout.margins: Kirigami.Units.largeSpacing
+        Layout.margins: Kirigami.Units.gridUnit
         Layout.maximumWidth: Kirigami.Units.gridUnit * 20
         visible: root.status === Util.Timeout
         iconName: "network-disconnect"

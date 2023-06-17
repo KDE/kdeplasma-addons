@@ -58,7 +58,7 @@ PlasmaCore.ToolTipArea {
             })
         } else {
             popupWindow.mainItem.width = Qt.binding(function() {
-                return Kirigami.Theme.mSize(Kirigami.Theme.defaultFont).width * 35
+                return Kirigami.Theme.gridUnit * 35
             })
         }
 
@@ -76,7 +76,7 @@ PlasmaCore.ToolTipArea {
             })
         } else {
             popupWindow.mainItem.height = Qt.binding(function() {
-                return Kirigami.Theme.mSize(Kirigami.Theme.defaultFont).height * 25
+                return Kirigami.Theme.gridUnit * 25
             })
         }
 

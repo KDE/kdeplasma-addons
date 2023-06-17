@@ -138,7 +138,7 @@ PlasmoidItem {
         highlightMoveDuration: 0
 
         Loader {
-            width: parent.width - Kirigami.Units.largeSpacing * 2
+            width: parent.width - Kirigami.Units.gridUnit * 2
             anchors.centerIn: parent
             visible: active
 
@@ -202,7 +202,7 @@ PlasmoidItem {
             id: dragImageDummy
             border {
                 color: Kirigami.Theme.textColor
-                width: Math.round(Kirigami.Units.devicePixelRatio)
+                width: 1
             }
             radius: width
             width: Kirigami.Units.iconSizes.large
@@ -317,7 +317,7 @@ PlasmoidItem {
 
                 border {
                     color: Kirigami.Theme.textColor
-                    width: Math.round(Kirigami.Units.devicePixelRatio)
+                    width: 1
                 }
 
                 Rectangle {
