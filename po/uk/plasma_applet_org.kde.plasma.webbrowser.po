@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-16 02:03+0000\n"
-"PO-Revision-Date: 2022-10-17 13:51+0300\n"
+"PO-Revision-Date: 2023-06-16 08:56+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -28,25 +28,25 @@ msgstr "Загальне"
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "Вигляд"
 
 #: package/contents/ui/ConfigAppearance.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
-msgstr ""
+msgstr "Піктограма:"
 
 #: package/contents/ui/ConfigAppearance.qml:27
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
-msgstr ""
+msgstr "Піктограма сайта"
 
 #: package/contents/ui/ConfigAppearance.qml:50
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
-msgstr ""
+msgstr "Змінити піктограму браузера"
 
 #: package/contents/ui/ConfigAppearance.qml:51
 #, kde-format
@@ -55,30 +55,32 @@ msgid ""
 "Current icon is %1. Click to open menu to change the current icon or reset "
 "to the default icon."
 msgstr ""
+"Поточною піктограмою є %1. Натисніть, щоб відкрити меню для зміни поточної "
+"піктограми або відновлення типової піктограми."
 
 #: package/contents/ui/ConfigAppearance.qml:55
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
-msgstr ""
+msgstr "Назвою піктограми є «%1»"
 
 #: package/contents/ui/ConfigAppearance.qml:90
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr ""
+msgstr "Вибрати…"
 
 #: package/contents/ui/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
-msgstr ""
+msgstr "Виберіть піктограму браузера"
 
 #: package/contents/ui/ConfigAppearance.qml:96
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
-msgstr ""
+msgstr "Повернутися до типової піктограми"
 
 #: package/contents/ui/ConfigGeneral.qml:19
 #, kde-format

@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # Automatically generated, 2022.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2022.
+# Eloy Cuadra <ecuadra@eloihr.net>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-16 02:03+0000\n"
-"PO-Revision-Date: 2022-10-17 17:44+0200\n"
+"PO-Revision-Date: 2023-06-17 01:22+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.2\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -29,25 +29,25 @@ msgstr "General"
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "Aspecto"
 
 #: package/contents/ui/ConfigAppearance.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
-msgstr ""
+msgstr "Icono:"
 
 #: package/contents/ui/ConfigAppearance.qml:27
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
-msgstr ""
+msgstr "Icono del sitio web"
 
 #: package/contents/ui/ConfigAppearance.qml:50
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
-msgstr ""
+msgstr "Cambiar icono del navegador web"
 
 #: package/contents/ui/ConfigAppearance.qml:51
 #, kde-format
@@ -56,30 +56,32 @@ msgid ""
 "Current icon is %1. Click to open menu to change the current icon or reset "
 "to the default icon."
 msgstr ""
+"El icono actual es %1. Pulse para abrir el menú para cambiar el icono actual "
+"o restaurar el icono predeterminado."
 
 #: package/contents/ui/ConfigAppearance.qml:55
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
-msgstr ""
+msgstr "El nombre del icono es «%1»"
 
 #: package/contents/ui/ConfigAppearance.qml:90
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr ""
+msgstr "Escoger..."
 
 #: package/contents/ui/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
-msgstr ""
+msgstr "Escoger un icono para el navegador web"
 
 #: package/contents/ui/ConfigAppearance.qml:96
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
-msgstr ""
+msgstr "Restaurar el icono predeterminado"
 
 #: package/contents/ui/ConfigGeneral.qml:19
 #, kde-format

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-16 02:03+0000\n"
-"PO-Revision-Date: 2022-10-19 08:46+0200\n"
+"PO-Revision-Date: 2023-06-16 08:33+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -28,25 +28,25 @@ msgstr "Splošno"
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "Videz"
 
 #: package/contents/ui/ConfigAppearance.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
-msgstr ""
+msgstr "Ikona:"
 
 #: package/contents/ui/ConfigAppearance.qml:27
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
-msgstr ""
+msgstr "Favicon spletišča"
 
 #: package/contents/ui/ConfigAppearance.qml:50
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
-msgstr ""
+msgstr "Spremeni ikono spletnega brskalnika"
 
 #: package/contents/ui/ConfigAppearance.qml:51
 #, kde-format
@@ -55,30 +55,32 @@ msgid ""
 "Current icon is %1. Click to open menu to change the current icon or reset "
 "to the default icon."
 msgstr ""
+"Trenutna ikona je %1. Kliknite za odprtje menija za spremembo trenutne ikone "
+"ali ponastavitev privzete ikone."
 
 #: package/contents/ui/ConfigAppearance.qml:55
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
-msgstr ""
+msgstr "Ime ikone je \"%1\""
 
 #: package/contents/ui/ConfigAppearance.qml:90
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr ""
+msgstr "Izberi…"
 
 #: package/contents/ui/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
-msgstr ""
+msgstr "Izberite ikono za spletni brskalnik"
 
 #: package/contents/ui/ConfigAppearance.qml:96
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
-msgstr ""
+msgstr "Ponastavi na privzeto ikono"
 
 #: package/contents/ui/ConfigGeneral.qml:19
 #, kde-format
