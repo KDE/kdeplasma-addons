@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-16 02:03+0000\n"
-"PO-Revision-Date: 2022-11-24 07:21+0100\n"
+"PO-Revision-Date: 2023-06-17 05:38+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.2\n"
+"X-Generator: Poedit 3.3.1\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -28,25 +28,25 @@ msgstr "საერთო"
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "გარემოს იერსახე"
 
 #: package/contents/ui/ConfigAppearance.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
-msgstr ""
+msgstr "ხატულა:"
 
 #: package/contents/ui/ConfigAppearance.qml:27
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
-msgstr ""
+msgstr "საიტის ხატულა"
 
 #: package/contents/ui/ConfigAppearance.qml:50
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
-msgstr ""
+msgstr "ვებ-ბრაუზერის ხატულის შეცვლა"
 
 #: package/contents/ui/ConfigAppearance.qml:51
 #, kde-format
@@ -55,30 +55,32 @@ msgid ""
 "Current icon is %1. Click to open menu to change the current icon or reset "
 "to the default icon."
 msgstr ""
+"მიმდინარე ხატულაა %1. მიმდინარე ხატულის შესაცვლელად ან ნაგულისხმევზე "
+"დასაბრუნებლად მენიუ გახსენით."
 
 #: package/contents/ui/ConfigAppearance.qml:55
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
-msgstr ""
+msgstr "ხატულის სახელია \"%1\""
 
 #: package/contents/ui/ConfigAppearance.qml:90
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr ""
+msgstr "არჩევა…"
 
 #: package/contents/ui/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
-msgstr ""
+msgstr "აირჩიეთ ვებ-ბრაუზერის ხატულა"
 
 #: package/contents/ui/ConfigAppearance.qml:96
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
-msgstr ""
+msgstr "ნაგულისხმებ ხატულაზე დაბრუნება"
 
 #: package/contents/ui/ConfigGeneral.qml:19
 #, kde-format
