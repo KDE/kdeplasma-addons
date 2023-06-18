@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 08:46+0000\n"
-"PO-Revision-Date: 2023-03-26 18:07+0200\n"
+"PO-Revision-Date: 2023-06-17 14:48+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: package/contents/ui/main.qml:32
 #, kde-format
@@ -25,7 +25,7 @@ msgstr "Control de cor nocturna"
 #: package/contents/ui/main.qml:35
 #, kde-format
 msgid "Night Color is inhibited"
-msgstr "A cor nocturna está desactivada"
+msgstr "A cor nocturna está inhibida."
 
 #: package/contents/ui/main.qml:38
 #, kde-format
