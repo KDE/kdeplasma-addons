@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Adrián Chaves Fernández (Gallaecio) <adriyetichaves@gmail.com>, 2016.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-09 02:13+0000\n"
-"PO-Revision-Date: 2019-10-19 21:49+0200\n"
+"PO-Revision-Date: 2023-06-18 16:15+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.11.70\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -153,19 +153,19 @@ msgstr "Xeral:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
-msgstr "Ordenar aleatoriamente"
+msgstr "Ordenar aleatoriamente."
 
 #: package/contents/ui/ConfigGeneral.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
-msgstr "Parar a presentación cando o cursor estea sobre a imaxe"
+msgstr "Parar a presentación cando o cursor estea sobre a imaxe."
 
 #: package/contents/ui/ConfigGeneral.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
-msgstr "Prema a imaxe para abrila nunha aplicación externa"
+msgstr "Prema a imaxe para abrila nunha aplicación externa."
 
 #: package/contents/ui/ConfigPaths.qml:49
 #, kde-format
@@ -185,25 +185,19 @@ msgid "Remove path"
 msgstr "Retirar a ruta"
 
 #: package/contents/ui/ConfigPaths.qml:133
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add Folder..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Engadir un cartafol…"
 
 #: package/contents/ui/ConfigPaths.qml:139
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add Files..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Engadir ficheiros…"
 
 #: package/contents/ui/main.qml:452
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Configure..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure…"
 msgstr "Configurar…"

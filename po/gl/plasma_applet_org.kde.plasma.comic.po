@@ -6,14 +6,14 @@
 # Xosé <xosecalvo@gmail.com>, 2009.
 # Marce Villarino <mvillarino@gmail.com>, 2009, 2014.
 # Adrian Chaves Fernandez <adriyetichaves@gmail.com>, 2013, 2015.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2020.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2020, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-01 02:11+0000\n"
-"PO-Revision-Date: 2020-01-11 11:30+0100\n"
+"PO-Revision-Date: 2023-06-18 19:45+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.08.3\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: comic.cpp:85
 #, kde-format
@@ -42,26 +42,22 @@ msgid "Jump to &Current Strip"
 msgstr "Ir á banda a&ctual"
 
 #: comic.cpp:99
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Jump to Strip..."
+#, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Ir á banda…"
 
 #: comic.cpp:103
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Visit the Shop &Website"
+#, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
-msgstr "Visitar o sitio &web de compras"
+msgstr "Visitar o sitio web"
 
 #: comic.cpp:107
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
-msgstr ""
+msgstr "Ver en %1"
 
 #: comic.cpp:115
 #, kde-format
@@ -70,24 +66,22 @@ msgid "Visit the Shop &Website"
 msgstr "Visitar o sitio &web de compras"
 
 #: comic.cpp:120
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "&Save Comic As..."
+#, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr "&Gardar a banda deseñada como.…"
+msgstr "&Gardar a banda deseñada como…"
 
 #: comic.cpp:125
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
-msgstr "Tamaño &real"
+msgstr "Tamaño &real."
 
 #: comic.cpp:133
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
-msgstr "Almacenar a &posición actual"
+msgstr "Almacenar a &posición actual."
 
 #: comicdata.cpp:86
 #, kde-format
@@ -114,9 +108,7 @@ msgid "Advanced"
 msgstr "Avanzado"
 
 #: package/contents/ui/ComicBottomInfo.qml:60
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Jump to strip..."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Ir á banda…"
@@ -125,7 +117,7 @@ msgstr "Ir á banda…"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
-msgstr "Visitar o sitio web da banda deseñada"
+msgstr "Visitar o sitio web da banda deseñada."
 
 #: package/contents/ui/configAdvanced.qml:36
 #, kde-format
@@ -145,54 +137,54 @@ msgstr[1] "bandas por banda deseñada"
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
-msgstr "Mostrar o erro cando descargar unha banda deseñada falle"
+msgstr "Amosar o erro cando descargar unha banda deseñada falle."
 
 #: package/contents/ui/configAppearance.qml:43
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
-msgstr "Mostrar:"
+msgstr "Amosar:"
 
 #: package/contents/ui/configAppearance.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
-msgstr "Título da banda deseñada"
+msgstr "Título da banda deseñada."
 
 #: package/contents/ui/configAppearance.qml:50
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
-msgstr "Identificador da banda deseñada"
+msgstr "Identificador da banda deseñada."
 
 #: package/contents/ui/configAppearance.qml:56
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
-msgstr "Autor da banda deseñada"
+msgstr "Autoría da banda deseñada."
 
 #: package/contents/ui/configAppearance.qml:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
-msgstr "URL da banda deseñada"
+msgstr "URL da banda deseñada."
 
 #: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgid "Show navigation buttons:"
-msgstr "Mostrar os botóns de navegación:"
+msgstr "Amosar os botóns de navegación:"
 
 #: package/contents/ui/configAppearance.qml:73
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
-msgstr "Sempre"
+msgstr "Sempre."
 
 #: package/contents/ui/configAppearance.qml:80
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
-msgstr "Só ao pasar o rato por riba"
+msgstr "Só ao pasar o rato por riba."
 
 #: package/contents/ui/configGeneral.qml:52
 #, kde-format
@@ -201,18 +193,16 @@ msgid "Comics:"
 msgstr "Bandas deseñadas:"
 
 #: package/contents/ui/configGeneral.qml:72
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
-msgstr "Obter bandas deseñadas novas…"
+msgstr "Obter novas bandas deseñadas…"
 
 #: package/contents/ui/configGeneral.qml:83
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
-msgstr "Clic central na banda deseñada para mostrala co seu tamaño orixinal"
+msgstr "Clic central na banda deseñada para amosala co seu tamaño orixinal."
 
 #: package/contents/ui/configGeneral.qml:92
 #, kde-format
