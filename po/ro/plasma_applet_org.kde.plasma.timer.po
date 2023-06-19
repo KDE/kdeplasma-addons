@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Sergiu Bivol <sergiu@cip.md>, 2009, 2014, 2020, 2021, 2022.
+# Sergiu Bivol <sergiu@cip.md>, 2009, 2014, 2020, 2021, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2022-08-14 16:48+0100\n"
+"PO-Revision-Date: 2023-06-18 19:36+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -86,7 +86,7 @@ msgstr "Arată titlul:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "Arată timpul rămas"
 
 #: package/contents/ui/configAppearance.qml:59
 #, kde-format
@@ -95,18 +95,16 @@ msgid "Show seconds"
 msgstr "Arată secundele"
 
 #: package/contents/ui/configAppearance.qml:64
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "Arată titlul:"
+msgstr "Arată comutatorul temporizatorului"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "Arată bara de progres"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format

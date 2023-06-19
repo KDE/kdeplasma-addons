@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# Sergiu Bivol <sergiu@cip.md>, 2020, 2022.
+# Sergiu Bivol <sergiu@cip.md>, 2020, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-03-30 02:44+0000\n"
-"PO-Revision-Date: 2022-08-14 16:49+0100\n"
+"PO-Revision-Date: 2023-06-18 19:24+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -31,6 +31,9 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"Acest furnizor de tapete nu filtrează imaginile ce pot fi delicate sau "
+"provocatoare. Dați dovadă de prudență dacă veți afișa aceste imagini în "
+"public."
 
 #: package/contents/ui/config.qml:76
 #, kde-format
