@@ -7,6 +7,7 @@
 import QtQuick 2.15
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg 1.0 as KSvg
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 import org.kde.plasma.private.timer 0.1 as TimerPlasmoid
 
@@ -31,7 +32,7 @@ Row {
 
     Component {
         id: digit
-        PlasmaCore.SvgItem {
+        KSvg.SvgItem {
             property int meaning
             property int num
             readonly property int mouseWheelAngleThreshold: 5
@@ -95,7 +96,7 @@ Row {
 
     Component {
         id: separator
-        PlasmaCore.SvgItem {
+        KSvg.SvgItem {
             svg: timerSvg
             width: internal.digitW / 2;
             height: internal.digitH;
@@ -103,7 +104,7 @@ Row {
         }
     }
 
-    PlasmaCore.Svg {
+    KSvg.Svg {
         id: timerSvg
         imagePath: "widgets/timer"
     }

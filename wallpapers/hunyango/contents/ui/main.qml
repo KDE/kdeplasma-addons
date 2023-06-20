@@ -6,6 +6,7 @@
 
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg 1.0 as KSvg
 
 Rectangle {
     id: root
@@ -22,10 +23,10 @@ Rectangle {
         onClicked: randomColor()
     }
 
-    PlasmaCore.SvgItem {
+    KSvg.SvgItem {
         anchors.fill: parent
         smooth: true
-        svg: PlasmaCore.Svg {
+        svg: KSvg.Svg {
             id: wallpaperSvg
             //FIXME: Svg doesn't support relative paths
             imagePath: Qt.resolvedUrl("wallpaper.svgz").substring(7)

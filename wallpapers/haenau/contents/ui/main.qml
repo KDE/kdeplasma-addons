@@ -6,12 +6,13 @@
 
 import QtQuick 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.ksvg 1.0 as KSvg
 
-PlasmaCore.SvgItem {
+KSvg.SvgItem {
     id: root
     width: 800
     height: 480
-    svg: PlasmaCore.Svg {
+    svg: KSvg.Svg {
         id: wallpaperSvg
         //FIXME: Svg doesn't support relative paths
         imagePath: Qt.resolvedUrl("wallpaper.svgz").substring(7)

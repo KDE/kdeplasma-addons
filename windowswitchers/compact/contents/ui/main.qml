@@ -10,6 +10,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kwin 3.0 as KWin
 
@@ -65,7 +66,7 @@ KWin.TabBoxSwitcher {
             focus: true
 
             // just to get the margin sizes
-            PlasmaCore.FrameSvgItem {
+            KSvg.FrameSvgItem {
                 id: hoverItem
                 imagePath: "widgets/viewitem"
                 prefix: "hover"
@@ -122,7 +123,7 @@ KWin.TabBoxSwitcher {
                         onDoubleTapped: compactListView.model.activate(index)
                     }
                 }
-                highlight: PlasmaCore.FrameSvgItem {
+                highlight: KSvg.FrameSvgItem {
                     imagePath: "widgets/viewitem"
                     prefix: "hover"
                     width: compactListView.width

@@ -15,6 +15,7 @@ import org.kde.draganddrop 2.0 as DragDrop
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
@@ -115,7 +116,7 @@ PlasmoidItem {
     }
 
     preloadFullRepresentation: true
-    fullRepresentation: PlasmaCore.SvgItem {
+    fullRepresentation: KSvg.SvgItem {
         id: backgroundItem
 
         property alias mainTextArea: mainTextArea
@@ -124,7 +125,7 @@ PlasmoidItem {
         Layout.minimumWidth: Kirigami.Units.iconSizes.medium
         Layout.minimumHeight: Kirigami.Units.iconSizes.medium
 
-        svg: PlasmaCore.Svg {
+        svg: KSvg.Svg {
             imagePath: "widgets/notes"
         }
         elementId: Plasmoid.configuration.color + "-notes"

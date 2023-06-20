@@ -11,6 +11,7 @@ import QtQuick.Layouts 1.15
 import org.kde.kcmutils as KCM
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kirigami 2.5 as Kirigami
 
@@ -49,7 +50,7 @@ ColumnLayout {
             id: appearancePage
             anchors.fill: parent
 
-            PlasmaCore.Svg {
+            KSvg.Svg {
                 id: noteSvg
                 imagePath: "widgets/notes"
             }
@@ -61,7 +62,7 @@ ColumnLayout {
             view.delegate: KCM.GridDelegate {
                 id: delegate
                 thumbnailAvailable: true
-                thumbnail: PlasmaCore.SvgItem {
+                thumbnail: KSvg.SvgItem {
                     anchors.fill: parent
                     anchors.margins: Kirigami.Units.largeSpacing
 
