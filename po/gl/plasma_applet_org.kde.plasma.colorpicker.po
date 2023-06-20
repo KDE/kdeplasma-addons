@@ -68,7 +68,7 @@ msgstr "Escoller unha cor"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
-msgstr "Mostrar o historial"
+msgstr "Amosar o historial"
 
 #: package/contents/ui/configGeneral.qml:58
 #, kde-format

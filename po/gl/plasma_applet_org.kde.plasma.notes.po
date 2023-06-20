@@ -4,14 +4,14 @@
 # mvillarino <mvillarino@users.sourceforge.net>, 2007, 2008.
 # Marce Villarino <mvillarino@gmail.com>, 2009.
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015.
-# Adrian Chaves <adrian@chaves.io>, 2018, 2019.
+# Adrian Chaves <adrian@chaves.io>, 2018, 2019, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2019-09-22 11:47+0200\n"
+"PO-Revision-Date: 2023-06-19 09:09+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.11.70\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -30,18 +30,17 @@ msgstr "Aparencia"
 #: package/contents/ui/configAppearance.qml:30
 #, kde-format
 msgid "%1pt"
-msgstr ""
+msgstr "%1 pt"
 
 #: package/contents/ui/configAppearance.qml:36
-#, fuzzy, kde-format
-#| msgid "Use custom font size:"
+#, kde-format
 msgid "Text font size:"
-msgstr "Empregar un tamaño de fonte personalizado:"
+msgstr "Tamaño da letra do texto:"
 
 #: package/contents/ui/configAppearance.qml:41
 #, kde-format
 msgid "Background color"
-msgstr ""
+msgstr "Cor de fondo"
 
 #: package/contents/ui/configAppearance.qml:77
 #, kde-format
@@ -119,17 +118,15 @@ msgid "Paste"
 msgstr "Pegar"
 
 #: package/contents/ui/main.qml:295
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "Pegar sen formato"
+msgstr "Pegar con formato completo"
 
 #: package/contents/ui/main.qml:302
-#, fuzzy, kde-format
-#| msgid "Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Formato"
+msgstr "Retirar o formatado"
 
 #: package/contents/ui/main.qml:317
 #, kde-format
@@ -150,35 +147,35 @@ msgstr "Seleccionalo todo"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
-msgstr "Grosa"
+msgstr "Grosa."
 
 #: package/contents/ui/main.qml:474
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
-msgstr "Cursiva"
+msgstr "Cursiva."
 
 #: package/contents/ui/main.qml:486
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
-msgstr "Subliñar"
+msgstr "Subliñar."
 
 #: package/contents/ui/main.qml:498
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
-msgstr "Riscar"
+msgstr "Riscar."
 
 #: package/contents/ui/main.qml:572
 #, kde-format
 msgid "Discard this note?"
-msgstr ""
+msgstr "Descartar a nota?"
 
 #: package/contents/ui/main.qml:573
 #, kde-format
 msgid "Are you sure you want to discard this note?"
-msgstr ""
+msgstr "Seguro que quere descartar a nota?"
 
 #: package/contents/ui/main.qml:586
 #, kde-format

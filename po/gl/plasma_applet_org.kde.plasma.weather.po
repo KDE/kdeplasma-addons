@@ -189,7 +189,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
-msgstr "Mostrar na mensaxe emerxente:"
+msgstr "Amosar na mensaxe emerxente:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:72
 #, kde-format
