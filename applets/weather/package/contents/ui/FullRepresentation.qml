@@ -12,6 +12,7 @@ import QtQuick.Controls 2.12 as QQC2
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.plasma.private.weather 1.0
@@ -19,17 +20,17 @@ import org.kde.plasma.private.weather 1.0
 ColumnLayout {
     id: fullRoot
 
-    Layout.margins: PlasmaCore.Units.smallSpacing
+    Layout.margins: Kirigami.Units.smallSpacing
 
     property alias generalModel: topPanel.generalModel
     property alias observationModel: topPanel.observationModel
 
-    Layout.minimumWidth: Math.max(PlasmaCore.Units.gridUnit * 10, implicitWidth)
-    Layout.minimumHeight: Math.max(PlasmaCore.Units.gridUnit * 10, implicitHeight)
+    Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * 10, implicitWidth)
+    Layout.minimumHeight: Math.max(Kirigami.Units.gridUnit * 10, implicitHeight)
 
     PlasmaExtras.PlaceholderMessage {
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        Layout.margins: PlasmaCore.Units.largeSpacing
+        Layout.margins: Kirigami.Units.gridUnit
         // when not in panel, a configure button is already shown for needsConfiguration
         visible: (root.status === Util.NeedsConfiguration) && (Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal)
         iconName: "mark-location"
@@ -45,8 +46,8 @@ ColumnLayout {
 
     PlasmaExtras.PlaceholderMessage {
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        Layout.margins: PlasmaCore.Units.largeSpacing
-        Layout.maximumWidth: PlasmaCore.Units.gridUnit * 20
+        Layout.margins: Kirigami.Units.gridUnit
+        Layout.maximumWidth: Kirigami.Units.gridUnit * 20
         visible: root.status === Util.Timeout
         iconName: "network-disconnect"
         text: {
@@ -91,7 +92,7 @@ ColumnLayout {
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignRight
         font {
-            pointSize: PlasmaCore.Theme.smallestFont.pointSize
+            pointSize: Kirigami.Theme.smallFont.pointSize
             underline: !!creditUrl
         }
         linkColor : color

@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.core 2.1 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 PlasmaComponents3.ItemDelegate {
@@ -33,13 +34,13 @@ PlasmaComponents3.ItemDelegate {
     contentItem: RowLayout {
         id: row
 
-        spacing: PlasmaCore.Units.smallSpacing
+        spacing: Kirigami.Units.smallSpacing
 
         Item {
             id: iconItem
 
-            Layout.preferredWidth: PlasmaCore.Units.iconSizes.medium
-            Layout.preferredHeight: PlasmaCore.Units.iconSizes.medium
+            Layout.preferredWidth: Kirigami.Units.iconSizes.medium
+            Layout.preferredHeight: Kirigami.Units.iconSizes.medium
             Layout.minimumWidth: Layout.preferredWidth
             Layout.maximumWidth: Layout.preferredWidth
             Layout.minimumHeight: Layout.preferredHeight
@@ -65,7 +66,7 @@ PlasmaComponents3.ItemDelegate {
                 wrapMode: Text.NoWrap
                 elide: Text.ElideRight
                 opacity: 0.6
-                font: PlasmaCore.Theme.smallestFont
+                font: Kirigami.Theme.smallFont
                 visible: text !== ""
             }
         }

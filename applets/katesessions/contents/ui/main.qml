@@ -13,6 +13,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
@@ -20,11 +21,11 @@ import org.kde.plasma.private.profiles 1.0
 
 PlasmoidItem {
     id: main
-    width: (Plasmoid.formFactor==PlasmaCore.Types.Planar)? PlasmaCore.Units.gridUnit * 14 : undefined
-    height: (Plasmoid.formFactor==PlasmaCore.Types.Planar)? PlasmaCore.Units.gridUnit * 16: undefined
+    width: (Plasmoid.formFactor==PlasmaCore.Types.Planar)? Kirigami.Units.gridUnit * 14 : undefined
+    height: (Plasmoid.formFactor==PlasmaCore.Types.Planar)? Kirigami.Units.gridUnit * 16: undefined
 
-    switchWidth: PlasmaCore.Units.gridUnit * 11
-    switchHeight: PlasmaCore.Units.gridUnit * 11
+    switchWidth: Kirigami.Units.gridUnit * 11
+    switchHeight: Kirigami.Units.gridUnit * 11
     Plasmoid.status: PlasmaCore.Types.ActiveStatus
     toolTipMainText: i18n("Kate Sessions")
 
@@ -44,10 +45,10 @@ PlasmoidItem {
     fullRepresentation: PlasmaComponents3.Page {
 
         id: dialogItem
-        Layout.minimumWidth: PlasmaCore.Units.gridUnit * 12
-        Layout.minimumHeight: PlasmaCore.Units.gridUnit * 12
-        Layout.preferredWidth: PlasmaCore.Units.gridUnit * 16
-        Layout.preferredHeight: PlasmaCore.Units.gridUnit * 24
+        Layout.minimumWidth: Kirigami.Units.gridUnit * 12
+        Layout.minimumHeight: Kirigami.Units.gridUnit * 12
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 16
+        Layout.preferredHeight: Kirigami.Units.gridUnit * 24
 
         focus: true
         header: searchHeader
@@ -126,7 +127,7 @@ PlasmoidItem {
                 }
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.topMargin: PlasmaCore.Units.smallSpacing
+                Layout.topMargin: Kirigami.Units.smallSpacing
                 onItemSelected: function (profileIdentifier) {
                     model.openProfile(profileIdentifier)
                     main.expanded = false;

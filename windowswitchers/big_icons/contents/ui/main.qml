@@ -9,6 +9,7 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kwin 3.0 as KWin
 
@@ -26,14 +27,14 @@ KWin.TabBoxSwitcher {
 
         mainItem: ColumnLayout {
             id: dialogMainItem
-            spacing: PlasmaCore.Units.smallSpacing * 2
+            spacing: Kirigami.Units.smallSpacing * 2
 
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.3, icons.implicitWidth), tabBox.screenGeometry.width * 0.9)
 
             ListView {
                 id: icons
 
-                readonly property int iconSize: PlasmaCore.Units.iconSizes.enormous
+                readonly property int iconSize: Kirigami.Units.iconSizes.enormous
                 readonly property int delegateWidth: iconSize + (highlightItem ? highlightItem.margins.left + highlightItem.margins.right : 0)
                 readonly property int delegateHeight: iconSize + (highlightItem ? highlightItem.margins.top + highlightItem.margins.bottom : 0)
 
@@ -90,8 +91,8 @@ KWin.TabBoxSwitcher {
                 elide: Text.ElideMiddle
                 font.weight: Font.Bold
                 Layout.fillWidth: true
-                Layout.topMargin: PlasmaCore.Units.smallSpacing
-                Layout.bottomMargin: PlasmaCore.Units.smallSpacing
+                Layout.topMargin: Kirigami.Units.smallSpacing
+                Layout.bottomMargin: Kirigami.Units.smallSpacing
             }
 
             Connections {

@@ -12,7 +12,7 @@
  */
 
 import QtQuick 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 
 Item {
     property int val
@@ -34,7 +34,7 @@ Item {
         x:       0
         y:       main.dotSize
         width:   main.dotSize
-        height:  PlasmaCore.Units.smallSpacing
+        height:  Kirigami.Units.smallSpacing
         color:   main.gridColor
     }
 
@@ -43,8 +43,8 @@ Item {
         visible: main.showGrid
         x:       main.dotSize
         y:       0
-        width:   PlasmaCore.Units.smallSpacing
-        height:  main.dotSize+PlasmaCore.Units.smallSpacing
+        width:   Kirigami.Units.smallSpacing
+        height:  main.dotSize+Kirigami.Units.smallSpacing
         color:   main.gridColor
     }
 }

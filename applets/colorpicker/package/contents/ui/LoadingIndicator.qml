@@ -6,7 +6,7 @@
 
 import QtQuick 2.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 
 /**
@@ -35,7 +35,7 @@ PlasmaComponents3.BusyIndicator {
         from: 1
         to: 0
         target: loadingIndicator
-        duration: PlasmaCore.Units.longDuration
+        duration: Kirigami.Units.longDuration
 
         onStopped: selfDestructionTimer.triggered();
     }

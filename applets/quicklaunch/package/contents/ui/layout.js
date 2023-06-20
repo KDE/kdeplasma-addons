@@ -5,8 +5,9 @@
  */
 
 .import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 
-function itemPadding() { return PlasmaCore.Units.smallSpacing / 2; }
+function itemPadding() { return Kirigami.Units.smallSpacing / 2; }
 
 function rows()
 {
@@ -74,12 +75,12 @@ function preferredHeight()
 
 function minimumCellWidth()
 {
-  return PlasmaCore.Units.iconSizes.small + 2 * itemPadding();
+  return Kirigami.Units.iconSizes.small + 2 * itemPadding();
 }
 
 function minimumCellHeight()
 {
-  var h = PlasmaCore.Units.iconSizes.small + 2 * itemPadding();
+  var h = Kirigami.Units.iconSizes.small + 2 * itemPadding();
   if (showLauncherNames) {
     h += PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height * 2;
   }
@@ -99,10 +100,10 @@ function preferredCellHeight()
 function popupItemWidth()
 {
   var fw = PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).width;
-  return Math.max(root.width, PlasmaCore.Units.iconSizes.medium + 20 * fw);
+  return Math.max(root.width, Kirigami.Units.iconSizes.medium + 20 * fw);
 }
 
 function popupItemHeight()
 {
-  return PlasmaCore.Units.iconSizes.medium + 2 * itemPadding();
+  return Kirigami.Units.iconSizes.medium + 2 * itemPadding();
 }

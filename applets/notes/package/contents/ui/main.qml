@@ -14,6 +14,7 @@ import QtQuick.Dialogs
 import org.kde.draganddrop 2.0 as DragDrop
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
@@ -23,8 +24,8 @@ import org.kde.plasma.private.notes 0.1
 PlasmoidItem {
     id: root
 
-    switchWidth: PlasmaCore.Units.gridUnit * 5
-    switchHeight: PlasmaCore.Units.gridUnit * 5
+    switchWidth: Kirigami.Units.gridUnit * 5
+    switchHeight: Kirigami.Units.gridUnit * 5
 
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
@@ -98,7 +99,7 @@ PlasmoidItem {
             PlasmaCore.IconItem {
                 anchors.fill: parent
                 source: "knotes"
-                colorGroup: PlasmaCore.ColorScope.colorGroup
+                colorGroup: Kirigami.Theme.colorSet
                 active: parent.containsMouse
             }
         }
@@ -118,10 +119,10 @@ PlasmoidItem {
         id: backgroundItem
 
         property alias mainTextArea: mainTextArea
-        Layout.preferredWidth: PlasmaCore.Units.gridUnit * 25
-        Layout.preferredHeight: PlasmaCore.Units.gridUnit * 25
-        Layout.minimumWidth: PlasmaCore.Units.iconSizes.medium
-        Layout.minimumHeight: PlasmaCore.Units.iconSizes.medium
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 25
+        Layout.preferredHeight: Kirigami.Units.gridUnit * 25
+        Layout.minimumWidth: Kirigami.Units.iconSizes.medium
+        Layout.minimumHeight: Kirigami.Units.iconSizes.medium
 
         svg: PlasmaCore.Svg {
             imagePath: "widgets/notes"
@@ -158,7 +159,7 @@ PlasmoidItem {
                     left: parent.left
                     right: parent.right
                     bottom: fontButtons.top
-                    bottomMargin: Math.round(PlasmaCore.Units.largeSpacing / 2)
+                    bottomMargin: Kirigami.Units.largeSpacing
                 }
 
                 clip: true
@@ -372,7 +373,7 @@ PlasmoidItem {
 
                 Timer {
                     id: throttedScrollSaver
-                    interval: PlasmaCore.Units.humanMoment
+                    interval: Kirigami.Units.humanMoment
                     repeat: false
                     running: false
                     onTriggered: scrollview.saveScroll()
@@ -438,7 +439,7 @@ PlasmoidItem {
 
             RowLayout {
                 id: fontButtons
-                spacing: PlasmaCore.Units.smallSpacing
+                spacing: Kirigami.Units.smallSpacing
                 anchors {
                     bottom: parent.bottom
                     left: parent.left
@@ -447,14 +448,14 @@ PlasmoidItem {
                 height: visible ? implicitHeight : 0
                 visible: opacity > 0
                 opacity: focusScope.activeFocus ? 1 : 0
-                Behavior on opacity { NumberAnimation { duration: PlasmaCore.Units.longDuration } }
+                Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
 
                 readonly property int requiredWidth: formatButtonsRow.width + spacing + settingsButton.width + removeButton.width
                 readonly property bool showFormatButtons: width > requiredWidth
 
                 Row {
                     id: formatButtonsRow
-                    spacing: PlasmaCore.Units.smallSpacing
+                    spacing: Kirigami.Units.smallSpacing
                     // show format buttons if TextField or any of the buttons have focus
                     enabled: opacity > 0
                     visible: fontButtons.showFormatButtons

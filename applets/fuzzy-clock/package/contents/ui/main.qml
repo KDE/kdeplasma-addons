@@ -11,6 +11,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.workspace.calendar 2.0 as PlasmaCalendar
@@ -20,8 +21,8 @@ PlasmoidItem {
 
     readonly property date currentDateTime: dataSource.data.Local ? dataSource.data.Local.DateTime : new Date()
 
-    width: PlasmaCore.Units.gridUnit * 10
-    height: PlasmaCore.Units.gridUnit * 4
+    width: Kirigami.Units.gridUnit * 10
+    height: Kirigami.Units.gridUnit * 4
 
     preferredRepresentation: compactRepresentation
 
@@ -42,11 +43,11 @@ PlasmoidItem {
     compactRepresentation: FuzzyClock { }
 
     fullRepresentation: PlasmaCalendar.MonthView {
-        Layout.minimumWidth: PlasmaCore.Units.gridUnit * 20
-        Layout.minimumHeight: PlasmaCore.Units.gridUnit * 20
+        Layout.minimumWidth: Kirigami.Units.gridUnit * 20
+        Layout.minimumHeight: Kirigami.Units.gridUnit * 20
 
-        PlasmaCore.ColorScope.inherit: false
-        PlasmaCore.ColorScope.colorGroup: PlasmaCore.Theme.NormalColorGroup
+        Kirigami.Theme.inherit: false
+        Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
         today: currentDateTime
     }

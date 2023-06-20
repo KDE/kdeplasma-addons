@@ -10,6 +10,7 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents
 
 GridLayout {
@@ -17,13 +18,13 @@ GridLayout {
 
     property alias model: repeater.model
     property bool showNightRow: false
-    readonly property int preferredIconSize: PlasmaCore.Units.iconSizes.large
+    readonly property int preferredIconSize: Kirigami.Units.iconSizes.large
     readonly property bool hasContent: model && model.length > 0
 
     Layout.minimumWidth: implicitWidth
 
-    columnSpacing: PlasmaCore.Units.smallSpacing
-    rowSpacing: PlasmaCore.Units.smallSpacing
+    columnSpacing: Kirigami.Units.smallSpacing
+    rowSpacing: Kirigami.Units.smallSpacing
 
     rows: showNightRow ? 2 : 1
     flow: showNightRow ? GridLayout.TopToBottom : GridLayout.LeftToRight
@@ -38,7 +39,7 @@ GridLayout {
             readonly property bool isFirstRow: (model.index % root.rows) === 0
 
             Layout.fillWidth: true
-            Layout.preferredWidth: Math.max(preferredIconSize + PlasmaCore.Units.smallSpacing, periodLabel.implicitWidth)
+            Layout.preferredWidth: Math.max(preferredIconSize + Kirigami.Units.smallSpacing, periodLabel.implicitWidth)
 
             PlasmaComponents.Label {
                 id: periodLabel

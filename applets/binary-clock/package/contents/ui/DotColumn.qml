@@ -12,7 +12,7 @@
  */
 
 import QtQuick 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 
 Item {
     property int val
@@ -24,19 +24,19 @@ Item {
     }
     Dot {
         x:   0
-        y:   (dotSize+PlasmaCore.Units.smallSpacing)
+        y:   (dotSize+Kirigami.Units.smallSpacing)
         val: parent.val
         bit: 4
     }
     Dot {
         x:   0
-        y:   2*(dotSize+PlasmaCore.Units.smallSpacing)
+        y:   2*(dotSize+Kirigami.Units.smallSpacing)
         val: parent.val
         bit: 2
     }
     Dot {
         x:   0
-        y:   3*(dotSize+PlasmaCore.Units.smallSpacing)
+        y:   3*(dotSize+Kirigami.Units.smallSpacing)
         val: parent.val
         bit: 1
     }

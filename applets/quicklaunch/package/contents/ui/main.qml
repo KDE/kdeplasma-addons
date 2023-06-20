@@ -8,6 +8,7 @@ import QtQuick 2.2
 import QtQuick.Layouts 1.0
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.draganddrop 2.0 as DragAndDrop
 import org.kde.plasma.private.quicklaunch 1.0
@@ -90,7 +91,7 @@ PlasmoidItem {
                 right: parent.right
             }
 
-            height: PlasmaCore.Theme.mSize(PlasmaCore.Theme.defaultFont).height
+            height: Kirigami.Units.iconSizes.sizeForLabels
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignTop
             elide: Text.ElideMiddle
@@ -213,7 +214,7 @@ PlasmoidItem {
                     rotation: popup.visible ? 180 : 0
                     Behavior on rotation {
                         RotationAnimation {
-                            duration: PlasmaCore.Units.shortDuration * 3
+                            duration: Kirigami.Units.shortDuration * 3
                         }
                     }
 
@@ -258,7 +259,7 @@ PlasmoidItem {
 
             PropertyChanges {
                 target: popupArrow
-                width: PlasmaCore.Units.iconSizes.smallMedium
+                width: Kirigami.Units.iconSizes.smallMedium
                 height: root.height
             }
         },
@@ -270,7 +271,7 @@ PlasmoidItem {
             PropertyChanges {
                 target: popupArrow
                 width: root.width
-                height: PlasmaCore.Units.iconSizes.smallMedium
+                height: Kirigami.Units.iconSizes.smallMedium
             }
         }
     ]

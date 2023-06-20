@@ -7,6 +7,7 @@
 import QtQuick 2.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.plasmoid 2.0
 
@@ -44,8 +45,8 @@ PlasmaComponents3.ToolButton {
         id: colorCircle
         anchors.centerIn: parent
         // try to match the color-picker icon in size
-        width: PlasmaCore.Units.roundToIconSize(pickerIcon.width) * 0.75
-        height: PlasmaCore.Units.roundToIconSize(pickerIcon.height) * 0.75
+        width: Kirigami.Units.iconSizes.roundedIconSize(pickerIcon.width) * 0.75
+        height: Kirigami.Units.iconSizes.roundedIconSize(pickerIcon.height) * 0.75
         radius: width / 2
 
         function luminance(color) {
@@ -62,15 +63,15 @@ PlasmaComponents3.ToolButton {
         }
 
         border {
-            color: PlasmaCore.Theme.textColor
+            color: Kirigami.Theme.textColor
             width: {
-                const contrast = luminance(PlasmaCore.Theme.viewBackgroundColor) / luminance(colorCircle.color) + 0.05;
+                const contrast = luminance(Kirigami.Theme.viewBackgroundColor) / luminance(colorCircle.color) + 0.05;
 
                 // show border only if there's too little contrast to the surrounding view or color is transparent
                 if (contrast > 3 && colorCircle.color.a > 0.5) {
                     return 0;
                 } else {
-                    return Math.round(Math.max(PlasmaCore.Units.devicePixelRatio, width / 20));
+                    return Math.round(Math.max(1, width / 20));
                 }
             }
         }

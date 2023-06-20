@@ -12,6 +12,7 @@ import QtQuick.Window 2.15
 
 import org.kde.kirigami 2.15 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PC3
 
 import org.kde.kwin 3.0 as KWin
@@ -82,7 +83,7 @@ KWin.TabBoxSwitcher {
             // without taking into account how much distance the thumbnails travel in that time.
             // To compensate the speed, we slowly reduce the duration with the number of thumbnails,
             // starting from `veryLongDuration` when there are 2 of them
-            highlightMoveDuration: PlasmaCore.Units.veryLongDuration * (2 / Math.sqrt(visibleCount + 1))
+            highlightMoveDuration: Kirigami.Units.veryLongDuration * (2 / Math.sqrt(visibleCount + 1))
 
             pathItemCount: 13
 
@@ -166,7 +167,7 @@ KWin.TabBoxSwitcher {
                     z: -1
 
                     color: "transparent"
-                    shadow.size: PlasmaCore.Units.gridUnit
+                    shadow.size: Kirigami.Units.gridUnit
                     shadow.color: "black"
                     opacity: 0.5
                 }
@@ -203,8 +204,8 @@ KWin.TabBoxSwitcher {
                 anchors.centerIn: target
                 anchors.horizontalCenterOffset: target ? Math.round(target.x) - target.x : 0
                 anchors.verticalCenterOffset: target ? Math.round(target.y) - target.y : 0
-                width: target ? Math.round(target.width/2 + 3 * PlasmaCore.Units.smallSpacing) * 2 : 0
-                height: target ? Math.round(target.height/2 + 3 * PlasmaCore.Units.smallSpacing) * 2 : 0
+                width: target ? Math.round(target.width/2 + 3 * Kirigami.Units.smallSpacing) * 2 : 0
+                height: target ? Math.round(target.height/2 + 3 * Kirigami.Units.smallSpacing) * 2 : 0
                 scale: target ? target.scale : 1
                 z: target ? target.z - 0.5 : -0.5
                 // The transform cannot be directly assigned as the transform origin is different
@@ -229,25 +230,25 @@ KWin.TabBoxSwitcher {
         RowLayout {
             id: infoBar
 
-            height: PlasmaCore.Units.iconSizes.large
-            spacing: PlasmaCore.Units.gridUnit
+            height: Kirigami.Units.iconSizes.large
+            spacing: Kirigami.Units.gridUnit
 
             anchors {
                 horizontalCenter: parent.horizontalCenter
                 bottom: parent.bottom
-                margins: PlasmaCore.Units.gridUnit
+                margins: Kirigami.Units.gridUnit
             }
 
             PlasmaCore.IconItem {
                 source: thumbnailView.currentItem ? thumbnailView.currentItem.icon : ""
-                implicitWidth: PlasmaCore.Units.iconSizes.large
-                implicitHeight: PlasmaCore.Units.iconSizes.large
+                implicitWidth: Kirigami.Units.iconSizes.large
+                implicitHeight: Kirigami.Units.iconSizes.large
                 Layout.alignment: Qt.AlignCenter
             }
 
             PC3.Label {
                 font.bold: true
-                font.pointSize: Math.round(PlasmaCore.Theme.defaultFont.pointSize * 1.6)
+                font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.6)
                 text: thumbnailView.currentItem ? thumbnailView.currentItem.caption : ""
                 textFormat: Text.PlainText
                 maximumLineCount: 1

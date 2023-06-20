@@ -9,6 +9,7 @@ import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kwin 3.0 as KWin
 
@@ -42,8 +43,8 @@ KWin.TabBoxSwitcher {
                 id: thumbnailListView
                 focus: true
                 model: tabBox.model
-                spacing: PlasmaCore.Units.smallSpacing
-                highlightMoveDuration: PlasmaCore.Units.longDuration
+                spacing: Kirigami.Units.smallSpacing
+                highlightMoveDuration: Kirigami.Units.longDuration
                 highlightResizeDuration: 0
 
                 Connections {
@@ -73,9 +74,9 @@ KWin.TabBoxSwitcher {
                         id: delegateColumn
                         anchors.horizontalCenter: parent.horizontalCenter
                         // anchors.centerIn causes layouting glitches
-                        y: PlasmaCore.Units.smallSpacing
-                        width: parent.width - 2 * PlasmaCore.Units.smallSpacing
-                        spacing: PlasmaCore.Units.smallSpacing
+                        y: Kirigami.Units.smallSpacing
+                        width: parent.width - 2 * Kirigami.Units.smallSpacing
+                        spacing: Kirigami.Units.smallSpacing
 
                         Item {
                             Layout.fillWidth: true
@@ -88,12 +89,12 @@ KWin.TabBoxSwitcher {
                         }
 
                         RowLayout {
-                            spacing: PlasmaCore.Units.smallSpacing
+                            spacing: Kirigami.Units.smallSpacing
                             Layout.fillWidth: true
 
                             PlasmaCore.IconItem {
-                                Layout.preferredHeight: PlasmaCore.Units.iconSizes.medium
-                                Layout.preferredWidth: PlasmaCore.Units.iconSizes.medium
+                                Layout.preferredHeight: Kirigami.Units.iconSizes.medium
+                                Layout.preferredWidth: Kirigami.Units.iconSizes.medium
                                 source: model.icon
                                 usesPlasmaTheme: false
                             }

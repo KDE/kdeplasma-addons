@@ -8,6 +8,7 @@ import QtQuick.Layouts 1.1
 import QtQuick.Controls
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.private.profiles 1.0 as Profiles
@@ -15,11 +16,11 @@ import org.kde.plasma.private.profiles 1.0 as Profiles
 PlasmoidItem {
    id: konsoleProfiles
 
-    switchWidth: PlasmaCore.Units.gridUnit * 11
-    switchHeight: PlasmaCore.Units.gridUnit * 9
+    switchWidth: Kirigami.Units.gridUnit * 11
+    switchHeight: Kirigami.Units.gridUnit * 9
 
-    Layout.minimumWidth: PlasmaCore.Units.gridUnit * 12
-    Layout.minimumHeight: PlasmaCore.Units.gridUnit * 10
+    Layout.minimumWidth: Kirigami.Units.gridUnit * 12
+    Layout.minimumHeight: Kirigami.Units.gridUnit * 10
 
     fullRepresentation: FocusScope {
         anchors.fill: parent
@@ -59,8 +60,8 @@ PlasmoidItem {
             PlasmaCore.IconItem {
                 id: appIcon
                 source: "utilities-terminal"
-                width: PlasmaCore.Units.iconSizes.medium
-                height: PlasmaCore.Units.iconSizes.medium
+                width: Kirigami.Units.iconSizes.medium
+                height: Kirigami.Units.iconSizes.medium
             }
 
             PlasmaComponents3.Label {
@@ -89,7 +90,7 @@ PlasmoidItem {
         }
 
         ScrollView {
-            anchors { left: parent.left; right: parent.right; bottom: parent.bottom; top: separator.bottom; topMargin: PlasmaCore.Units.smallSpacing}
+            anchors { left: parent.left; right: parent.right; bottom: parent.bottom; top: separator.bottom; topMargin: Kirigami.Units.smallSpacing}
 
             ListView {
                 id: view
@@ -131,7 +132,7 @@ PlasmoidItem {
 
                 highlight: PlasmaExtras.Highlight {}
 
-                highlightMoveDuration: PlasmaCore.Units.longDuration
+                highlightMoveDuration: Kirigami.Units.longDuration
                 highlightMoveVelocity: 1
             }
         }

@@ -7,6 +7,7 @@ import QtQuick 2.1
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
@@ -16,8 +17,8 @@ import org.kde.plasma.private.diskquota 1.0
 PlasmoidItem {
     id: quotaApplet
 
-    Layout.minimumWidth: PlasmaCore.Units.gridUnit * 10
-    Layout.minimumHeight: PlasmaCore.Units.gridUnit * 2
+    Layout.minimumWidth: Kirigami.Units.gridUnit * 10
+    Layout.minimumHeight: Kirigami.Units.gridUnit * 2
 
     Plasmoid.status: {
         switch (diskQuota.status) {
@@ -30,8 +31,8 @@ PlasmoidItem {
         return PlasmaCore.Types.PassiveStatus
     }
 
-    switchWidth: PlasmaCore.Units.gridUnit * 10
-    switchHeight: PlasmaCore.Units.gridUnit * 10
+    switchWidth: Kirigami.Units.gridUnit * 10
+    switchHeight: Kirigami.Units.gridUnit * 10
 
     Plasmoid.icon: diskQuota.iconName
     toolTipMainText: diskQuota.toolTip
@@ -46,8 +47,8 @@ PlasmoidItem {
     fullRepresentation: Item {
         id: root
 
-        width: PlasmaCore.Units.gridUnit * 20
-        height: PlasmaCore.Units.gridUnit * 14
+        width: Kirigami.Units.gridUnit * 20
+        height: Kirigami.Units.gridUnit * 14
 
         // HACK: connection to reset currentIndex to -1. Without this, when
         // uninstalling filelight, the selection highlight remains fixed (which is wrong)
@@ -64,7 +65,7 @@ PlasmoidItem {
             id: emptyHint
 
             anchors.centerIn: parent
-            width: parent.width - PlasmaCore.Units.gridUnit * 4
+            width: parent.width - Kirigami.Units.gridUnit * 4
 
             active: !diskQuota.quotaInstalled || listView.count == 0
             visible: active

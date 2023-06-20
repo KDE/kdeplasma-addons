@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.15
 
 import org.kde.kwindowsystem 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.private.colorpicker 2.0 as ColorPicker
@@ -18,8 +19,8 @@ import "logic.js" as Logic
 DropArea {
     id: dropArea
 
-    Layout.minimumWidth: root.isVertical ? PlasmaCore.Units.iconSizes.small : (grid.width + spacer.implicitWidth)
-    Layout.minimumHeight: root.isVertical ? (grid.height + spacer.implicitHeight) : PlasmaCore.Units.iconSizes.small
+    Layout.minimumWidth: root.isVertical ? Kirigami.Units.iconSizes.small : (grid.width + spacer.implicitWidth)
+    Layout.minimumHeight: root.isVertical ? (grid.height + spacer.implicitHeight) : Kirigami.Units.iconSizes.small
     Layout.preferredWidth: Layout.minimumWidth
     Layout.preferredHeight: Layout.minimumHeight
 
@@ -93,7 +94,7 @@ DropArea {
         Item { // spacer
             id: spacer
 
-            readonly property real thickness: dropArea.buttonSize / PlasmaCore.Units.iconSizes.small
+            readonly property real thickness: dropArea.buttonSize / Kirigami.Units.iconSizes.small
 
             Layout.preferredWidth: root.isVertical ? parent.width : thickness
             Layout.preferredHeight: root.isVertical ? thickness : parent.height
@@ -103,7 +104,7 @@ DropArea {
                 anchors.centerIn: parent
                 width: circleRepeater.count > 0 ? Math.min(parent.width, circleRepeater.itemAt(0).colorCircle.width) : 0
                 height: circleRepeater.count > 0 ? Math.min(parent.height, circleRepeater.itemAt(0).colorCircle.height) : 0
-                color: PlasmaCore.Theme.textColor
+                color: Kirigami.Theme.textColor
                 opacity: 0.6
             }
         }

@@ -7,6 +7,7 @@
 import QtQuick 2.2
 import QtQuick.Layouts 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.purpose 1.0 as Purpose
@@ -20,8 +21,8 @@ PlasmaCore.Dialog
 
     hideOnWindowDeactivate: true
     mainItem: ColumnLayout {
-        height: PlasmaCore.Units.gridUnit * 16
-        width: PlasmaCore.Units.gridUnit * 16
+        height: Kirigami.Units.gridUnit * 16
+        width: Kirigami.Units.gridUnit * 16
         RowLayout {
             PlasmaComponents3.TextField {
                 id: field

@@ -12,6 +12,7 @@ import org.kde.draganddrop 2.0 as DragDrop
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 
@@ -27,13 +28,13 @@ PlasmoidItem {
 
     preferredRepresentation: fullRepresentation
 
-    switchWidth: PlasmaCore.Units.gridUnit * 5
-    switchHeight: PlasmaCore.Units.gridUnit * 5
+    switchWidth: Kirigami.Units.gridUnit * 5
+    switchHeight: Kirigami.Units.gridUnit * 5
 
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
 
-    width: PlasmaCore.Units.gridUnit * 20
-    height: PlasmaCore.Units.gridUnit * 13
+    width: Kirigami.Units.gridUnit * 20
+    height: Kirigami.Units.gridUnit * 13
 
     property string activeSource: ""
     property string transitionSource: ""
@@ -267,8 +268,8 @@ PlasmoidItem {
         id: faderAnimation
 
         ParallelAnimation {
-            OpacityAnimator { target: frontImage; from: 1; to: 0; duration: PlasmaCore.Units.veryLongDuration }
-            OpacityAnimator { target: bufferImage; from: 0; to: 1; duration: PlasmaCore.Units.veryLongDuration }
+            OpacityAnimator { target: frontImage; from: 1; to: 0; duration: Kirigami.Units.veryLongDuration }
+            OpacityAnimator { target: bufferImage; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration }
         }
         ScriptAction {
             script: {
@@ -340,7 +341,7 @@ PlasmoidItem {
         Row {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
-            anchors.bottomMargin: PlasmaCore.Units.smallSpacing
+            anchors.bottomMargin: Kirigami.Units.smallSpacing
 
             /*
             PlasmaComponents3.Button {
@@ -401,7 +402,7 @@ PlasmoidItem {
 
         color: "transparent"
 
-        implicitWidth: PlasmaCore.Units.gridUnit
+        implicitWidth: Kirigami.Units.gridUnit
         implicitHeight: implicitWidth
 
         Rectangle {
@@ -438,7 +439,7 @@ PlasmoidItem {
             visible: pause
             anchors.fill: parent
             source: "media-playback-pause"
-            colorGroup: PlasmaCore.ColorScope.colorGroup
+            colorGroup: Kirigami.Theme.colorSet
         }
     }
     */

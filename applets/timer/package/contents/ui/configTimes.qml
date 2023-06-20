@@ -7,7 +7,7 @@
 import QtQuick 2.5
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasmoid 2.0
 import org.kde.kirigami 2.12 as Kirigami
 import org.kde.kcmutils as KCM
@@ -71,7 +71,7 @@ ColumnLayout {
             Kirigami.PlaceholderMessage {
                 visible: timeListView.count === 0
                 anchors.centerIn: parent
-                width: parent.width - (PlasmaCore.Units.largeSpacing * 4)
+                width: parent.width - (Kirigami.Units.gridUnit * 4)
                 text: i18n("If you add predefined timers here, they will appear in plasmoid context menu.");
             }
         }
@@ -92,7 +92,7 @@ ColumnLayout {
         Kirigami.SwipeListItem {
             id: timeEditItem
             Row {
-                spacing: PlasmaCore.Units.largeSpacing
+                spacing: Kirigami.Units.gridUnit
                 Kirigami.ListItemDragHandle {
                     anchors.verticalCenter: parent.verticalCenter
                     enabled: !editor.editable

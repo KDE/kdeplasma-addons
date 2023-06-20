@@ -123,7 +123,7 @@ PlasmoidItem {
 
         readonly property int columns: 3
 
-        Layout.minimumWidth: columns * PlasmaCore.Units.gridUnit * 6
+        Layout.minimumWidth: columns * Kirigami.Units.gridUnit * 6
         Layout.minimumHeight: Layout.minimumWidth
         Layout.maximumWidth: Layout.minimumWidth
         Layout.maximumHeight: Layout.minimumHeight
@@ -138,7 +138,7 @@ PlasmoidItem {
         highlightMoveDuration: 0
 
         Loader {
-            width: parent.width - PlasmaCore.Units.largeSpacing * 2
+            width: parent.width - Kirigami.Units.gridUnit * 2
             anchors.centerIn: parent
             visible: active
 
@@ -171,7 +171,7 @@ PlasmoidItem {
                 }
 
                 NumberAnimation {
-                    duration: PlasmaCore.Units.longDuration
+                    duration: Kirigami.Units.longDuration
                     easing.type: Easing.OutCubic
                     property: "opacity"
                     running: true
@@ -201,12 +201,12 @@ PlasmoidItem {
         Rectangle {
             id: dragImageDummy
             border {
-                color: PlasmaCore.Theme.textColor
-                width: Math.round(PlasmaCore.Units.devicePixelRatio)
+                color: Kirigami.Theme.textColor
+                width: 1
             }
             radius: width
-            width: PlasmaCore.Units.iconSizes.large
-            height: PlasmaCore.Units.iconSizes.large
+            width: Kirigami.Units.iconSizes.large
+            height: Kirigami.Units.iconSizes.large
             visible: false
         }
 
@@ -310,14 +310,14 @@ PlasmoidItem {
 
                 anchors {
                     fill: parent
-                    margins: PlasmaCore.Units.smallSpacing
+                    margins: Kirigami.Units.smallSpacing
                 }
 
                 color: delegateMouse.currentColor
 
                 border {
-                    color: PlasmaCore.Theme.textColor
-                    width: Math.round(PlasmaCore.Units.devicePixelRatio)
+                    color: Kirigami.Theme.textColor
+                    width: 1
                 }
 
                 Rectangle {
@@ -327,8 +327,8 @@ PlasmoidItem {
                         right: parent.right
                         margins: rect.border.width
                     }
-                    height: colorLabel.contentHeight + 2 * PlasmaCore.Units.smallSpacing
-                    color: PlasmaCore.Theme.backgroundColor
+                    height: colorLabel.contentHeight + 2 * Kirigami.Units.smallSpacing
+                    color: Kirigami.Theme.backgroundColor
                     opacity: 0.8
 
                     PlasmaComponents3.Label {
@@ -338,7 +338,7 @@ PlasmoidItem {
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideLeft
                         fontSizeMode: Text.HorizontalFit
-                        minimumPointSize: PlasmaCore.Theme.smallestFont.pointSize
+                        minimumPointSize: Kirigami.Theme.smallFont.pointSize
                         text: Logic.formatColor(delegateMouse.currentColor, root.defaultFormat)
                     }
 
@@ -350,7 +350,7 @@ PlasmoidItem {
                         verticalAlignment: Text.AlignVCenter
                         elide: Text.ElideLeft
                         fontSizeMode: Text.HorizontalFit
-                        minimumPointSize: PlasmaCore.Theme.smallestFont.pointSize
+                        minimumPointSize: Kirigami.Theme.smallFont.pointSize
                         text: i18nc("@info:progress just copied a color to clipboard", "Copied!")
                     }
                 }

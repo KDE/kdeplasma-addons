@@ -9,14 +9,14 @@ import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 
 MouseArea {
-    Layout.preferredWidth: Math.max(Plasmoid.compactRepresentationItem.width, PlasmaCore.Units.gridUnit * 10)
+    Layout.preferredWidth: Math.max(Plasmoid.compactRepresentationItem.width, Kirigami.Units.gridUnit * 10)
     Layout.preferredHeight: main.implicitHeight
 
     onClicked: root.toggleTimer()
@@ -25,8 +25,8 @@ MouseArea {
         id: popupHeadingComponent
 
         PlasmaExtras.PlasmoidHeading {
-            leftPadding: PlasmaCore.Units.smallSpacing * 2
-            rightPadding: PlasmaCore.Units.smallSpacing * 2
+            leftPadding: Kirigami.Units.smallSpacing * 2
+            rightPadding: Kirigami.Units.smallSpacing * 2
 
             contentItem: PlasmaExtras.Heading {
                 level: 3
@@ -74,22 +74,22 @@ MouseArea {
                 running: root.suspended;
                 loops: Animation.Infinite;
                 NumberAnimation {
-                    duration: PlasmaCore.Units.veryLongDuration * 2;
+                    duration: Kirigami.Units.veryLongDuration * 2;
                     from: 1.0;
                     to: 0.2;
                     easing.type: Easing.InOutQuad;
                 }
                 PauseAnimation {
-                    duration: PlasmaCore.Units.veryLongDuration;
+                    duration: Kirigami.Units.veryLongDuration;
                 }
                 NumberAnimation {
-                    duration: PlasmaCore.Units.veryLongDuration * 2;
+                    duration: Kirigami.Units.veryLongDuration * 2;
                     from: 0.2;
                     to: 1.0;
                     easing.type: Easing.InOutQuad;
                 }
                 PauseAnimation {
-                    duration: PlasmaCore.Units.veryLongDuration;
+                    duration: Kirigami.Units.veryLongDuration;
                 }
             }
         }
