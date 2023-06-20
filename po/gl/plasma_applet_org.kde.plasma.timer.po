@@ -77,13 +77,13 @@ msgstr "Executar a orde:"
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
-msgstr "Mostrar:"
+msgstr "Amosar:"
 
 #: package/contents/ui/configAppearance.qml:36
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
-msgstr "Mostrar o título:"
+msgstr "Amosar o título:"
 
 #: package/contents/ui/configAppearance.qml:53
 #, kde-format
@@ -95,7 +95,7 @@ msgstr ""
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
-msgstr "Mostrar os segundos"
+msgstr "Amosar os segundos"
 
 #: package/contents/ui/configAppearance.qml:64
 #, fuzzy, kde-format
@@ -121,7 +121,7 @@ msgstr "Notificacións:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show notification text:"
-msgstr "Mostrar o texto de notificación:"
+msgstr "Amosar o texto de notificación:"
 
 #: package/contents/ui/configTimes.qml:75
 #, kde-format

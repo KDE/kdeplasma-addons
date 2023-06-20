@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2018, 2019, 2023.
 #
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2018, 2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-11 02:11+0000\n"
-"PO-Revision-Date: 2019-03-28 10:17+0100\n"
+"PO-Revision-Date: 2023-06-19 08:28+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.04.1\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -24,57 +24,47 @@ msgid "Dictionaries"
 msgstr "Dicionarios"
 
 #: package/contents/ui/AvailableDictSheet.qml:33
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Dictionaries"
+#, kde-format
 msgid "Add More Dictionaries"
-msgstr "Dicionarios"
+msgstr "Engadir máis dicionarios"
 
 #: package/contents/ui/ConfigDictionaries.qml:89
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Available dictionaries:"
+#, kde-format
 msgid "Unable to load dictionary list"
-msgstr "Dicionarios dispoñíbeis:"
+msgstr "Non se pode cargar a lista de dicionarios."
 
 #: package/contents/ui/ConfigDictionaries.qml:90
 #: package/contents/ui/main.qml:155
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
-msgstr ""
+msgstr "Código de erro: %1 (%2)"
 
 #: package/contents/ui/ConfigDictionaries.qml:101
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Dictionaries"
+#, kde-format
 msgid "No dictionaries"
-msgstr "Dicionarios"
+msgstr "Non hai dicionarios."
 
 #: package/contents/ui/ConfigDictionaries.qml:112
 #, kde-format
 msgid "Add More…"
-msgstr ""
+msgstr "Engadir máis…"
 
 #: package/contents/ui/DictItemDelegate.qml:51
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Eliminar"
 
 #: package/contents/ui/main.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter word to define here"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
-msgstr "Escriba aquí a palabra para definir"
+msgstr "Escriba aquí a palabra para definir…"
 
 #: package/contents/ui/main.qml:154
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Available dictionaries:"
+#, kde-format
 msgid "Unable to load definition"
-msgstr "Dicionarios dispoñíbeis:"
+msgstr "Non se pode cargar a definición."
 
 #, fuzzy
 #~| msgid "Looking up definition..."

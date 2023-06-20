@@ -19,7 +19,7 @@ msgstr ""
 #: config/qml/AstronomicalEventsConfig.qml:39
 #, kde-format
 msgid "Show:"
-msgstr "Mostrar:"
+msgstr "Amosar:"
 
 #: config/qml/AstronomicalEventsConfig.qml:42
 #, kde-format
