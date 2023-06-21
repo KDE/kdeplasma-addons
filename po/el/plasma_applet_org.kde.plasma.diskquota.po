@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-31 00:48+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2016-12-18 19:58+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, fuzzy, kde-format
 #| msgid "No quota restrictions found."
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "Δεν εντοπίστηκαν περιορισμοί μεριδίων δίσκου"
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, fuzzy, kde-format
 #| msgid ""
 #| "Quota tool not found.\n"
@@ -37,7 +37,7 @@ msgstr ""
 "\n"
 "Εγκαταστήστε το 'quota'."
 
-#: package/contents/ui/main.qml:78
+#: package/contents/ui/main.qml:79
 #, fuzzy, kde-format
 #| msgid "Please install 'quota'"
 msgctxt "@info:usagetip"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-19 02:02+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-12-12 18:57+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -154,24 +154,24 @@ msgstr "Editar"
 msgid "Delete"
 msgstr "Apagar"
 
-#: package/contents/ui/main.qml:66
+#: package/contents/ui/main.qml:67
 #, kde-format
 msgid "%1 is running"
 msgstr "O %1 está em execução"
 
-#: package/contents/ui/main.qml:68
+#: package/contents/ui/main.qml:69
 #, kde-format
 msgid "%1 not running"
 msgstr "O %1 não está em execução"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Tempo restante: %1 segundo"
 msgstr[1] "Tempo restante: %1 segundos"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -180,29 +180,29 @@ msgstr ""
 "Use a roda do rato para mudar os dígitos ou escolha os cronómetros "
 "predefinidos no menu de contexto"
 
-#: package/contents/ui/main.qml:88
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Timer"
 msgstr "Cronómetro"
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:90
 #, kde-format
 msgid "Timer finished"
 msgstr "O cronómetro terminou"
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Iniciar"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:139
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "&Parar"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:140
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

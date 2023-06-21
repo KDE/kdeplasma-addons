@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-01 02:11+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-11-26 07:43+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -102,25 +102,25 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "დამატებითი"
 
-#: package/contents/ui/ComicBottomInfo.qml:60
+#: package/contents/ui/ComicBottomInfo.qml:61
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "ზოლზე გადახტომა…"
 
-#: package/contents/ui/ComicBottomInfo.qml:100
+#: package/contents/ui/ComicBottomInfo.qml:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "კომიქსის ვებგვერდის მონახულება"
 
-#: package/contents/ui/configAdvanced.qml:36
+#: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "კომიქსის ქეში:"
 
-#: package/contents/ui/configAdvanced.qml:45
+#: package/contents/ui/configAdvanced.qml:44
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -128,84 +128,84 @@ msgid_plural "strips per comic"
 msgstr[0] "ზოლი თითოეულ კომიქსზე"
 msgstr[1] "ზოლი თითოეულ კომიქსზე"
 
-#: package/contents/ui/configAdvanced.qml:51
+#: package/contents/ui/configAdvanced.qml:50
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
 msgstr "კომიქსის გადმოწერისას ავარიის შეცდომის ჩვენება"
 
-#: package/contents/ui/configAppearance.qml:43
+#: package/contents/ui/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "ჩვენება:"
 
-#: package/contents/ui/configAppearance.qml:44
+#: package/contents/ui/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "კომიქსის სათაური"
 
-#: package/contents/ui/configAppearance.qml:50
+#: package/contents/ui/configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "კომიქსის იდენტიფიკატორი"
 
-#: package/contents/ui/configAppearance.qml:56
+#: package/contents/ui/configAppearance.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "კომიქსის ავტორი"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "კომიქსის URL"
 
-#: package/contents/ui/configAppearance.qml:72
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "ნავიგაციის ღილაკების ჩვენება:"
 
-#: package/contents/ui/configAppearance.qml:73
+#: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "ყოველთვის"
 
-#: package/contents/ui/configAppearance.qml:80
+#: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "მხოლოდ გადატარებისას"
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:51
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "კომიქსები:"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:71
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "მიიღეთ ახალი კომიქსები…"
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:82
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "შუა წკაპი კომიქსზე მის საწყის ზომაში საჩვენებლად"
 
-#: package/contents/ui/configGeneral.qml:92
+#: package/contents/ui/configGeneral.qml:91
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
 msgstr "ახალი დამატებების შემოწმება ყოველ:"
 
-#: package/contents/ui/configGeneral.qml:101
+#: package/contents/ui/configGeneral.qml:100
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
@@ -213,13 +213,13 @@ msgid_plural "days"
 msgstr[0] "დღე"
 msgstr[1] "დღე"
 
-#: package/contents/ui/configGeneral.qml:106
+#: package/contents/ui/configGeneral.qml:105
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "ახალი კომიქსების შემოწმება ყოველ:"
 
-#: package/contents/ui/configGeneral.qml:115
+#: package/contents/ui/configGeneral.qml:114
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

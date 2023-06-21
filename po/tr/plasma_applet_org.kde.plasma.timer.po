@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-19 02:02+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2023-06-04 02:08+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -157,24 +157,24 @@ msgstr "Düzenle"
 msgid "Delete"
 msgstr "Sil"
 
-#: package/contents/ui/main.qml:66
+#: package/contents/ui/main.qml:67
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 çalışıyor"
 
-#: package/contents/ui/main.qml:68
+#: package/contents/ui/main.qml:69
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 çalışmıyor"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Kalan zaman: %1 saniye"
 msgstr[1] "Kalan zaman: %1 saniye"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -183,29 +183,29 @@ msgstr ""
 "Basamakları değiştirmek veya bağlam menüsünden önceden tanımlanmış sayaçları "
 "seçmek için fare tekerleğini kullan"
 
-#: package/contents/ui/main.qml:88
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Timer"
 msgstr "Sayaç"
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:90
 #, kde-format
 msgid "Timer finished"
 msgstr "Sayaç bitti"
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Başlat"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:139
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "&Dur"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:140
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

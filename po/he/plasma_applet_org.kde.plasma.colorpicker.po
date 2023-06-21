@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-14 02:27+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2017-05-22 05:28-0400\n"
 "Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -26,20 +26,20 @@ msgctxt "@title"
 msgid "General"
 msgstr "כללי"
 
-#: package/contents/ui/ColorCircle.qml:40
+#: package/contents/ui/ColorCircle.qml:41
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr ""
 
-#: package/contents/ui/CompactRepresentation.qml:73
+#: package/contents/ui/CompactRepresentation.qml:74
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "בחר צבע"
 
-#: package/contents/ui/CompactRepresentation.qml:80
+#: package/contents/ui/CompactRepresentation.qml:81
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-16 02:03+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-10-17 09:47+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -80,19 +80,19 @@ msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr ""
 
-#: package/contents/ui/ConfigGeneral.qml:19
+#: package/contents/ui/ConfigGeneral.qml:18
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "Масштабирование содержимого:"
 
-#: package/contents/ui/ConfigGeneral.qml:23
+#: package/contents/ui/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "Фиксированный масштаб:"
 
-#: package/contents/ui/ConfigGeneral.qml:57
+#: package/contents/ui/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"

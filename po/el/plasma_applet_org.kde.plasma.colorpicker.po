@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-14 02:27+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2016-12-16 16:43+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -27,20 +27,20 @@ msgctxt "@title"
 msgid "General"
 msgstr "Γενικά"
 
-#: package/contents/ui/ColorCircle.qml:40
+#: package/contents/ui/ColorCircle.qml:41
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr ""
 
-#: package/contents/ui/CompactRepresentation.qml:73
+#: package/contents/ui/CompactRepresentation.qml:74
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Επιλέξτε χρώμα"
 
-#: package/contents/ui/CompactRepresentation.qml:80
+#: package/contents/ui/CompactRepresentation.qml:81
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2016-02-07 11:57+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -79,38 +79,38 @@ msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "Εμφάνιση τίτλου"
 
-#: package/contents/ui/IconItem.qml:175
+#: package/contents/ui/IconItem.qml:177
 #, kde-format
 msgid "Launch %1"
 msgstr ""
 
-#: package/contents/ui/IconItem.qml:259
+#: package/contents/ui/IconItem.qml:261
 #, fuzzy, kde-format
 #| msgid "Add Launcher..."
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Προσθήκη εκτελεστή..."
 
-#: package/contents/ui/IconItem.qml:265
+#: package/contents/ui/IconItem.qml:267
 #, fuzzy, kde-format
 #| msgid "Edit Launcher..."
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Επεξεργασία εκτελεστή..."
 
-#: package/contents/ui/IconItem.qml:271
+#: package/contents/ui/IconItem.qml:273
 #, fuzzy, kde-format
 #| msgid "Remove Launcher"
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Αφαίρεση εκτελεστή"
 
-#: package/contents/ui/main.qml:145
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Γρήγορη εκτέλεση"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:148
 #, fuzzy, kde-format
 #| msgid "Add launchers by Drag and Drop or by using the context menu."
 msgctxt "@info"
@@ -119,17 +119,17 @@ msgstr ""
 "Προσθέστε εκτελεστές με σύρσιμο και απόθεση ή χρησιμοποιώντας το βοηθητικό "
 "μενού."
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Hide icons"
 msgstr "Απόκρυψη εικονιδίων"
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Εμφάνιση κρυφών εικονιδίων"
 
-#: package/contents/ui/main.qml:291
+#: package/contents/ui/main.qml:293
 #, fuzzy, kde-format
 #| msgid "Add Launcher..."
 msgctxt "@action"

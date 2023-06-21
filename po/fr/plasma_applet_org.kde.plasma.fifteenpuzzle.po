@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-07 00:48+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2021-12-13 21:41+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -85,30 +85,30 @@ msgstr "Tuiles :"
 msgid "Colored numbers:"
 msgstr "Numéros colorés :"
 
-#: package/contents/ui/FifteenPuzzle.qml:258
+#: package/contents/ui/FifteenPuzzle.qml:259
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Temps : %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:301
+#: package/contents/ui/FifteenPuzzle.qml:302
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Mélanger"
 
-#: package/contents/ui/FifteenPuzzle.qml:338
+#: package/contents/ui/FifteenPuzzle.qml:339
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Résolu ! Recommencez."
 
-#: package/contents/ui/main.qml:25
+#: package/contents/ui/main.qml:26
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Jeu de taquin"
 
-#: package/contents/ui/main.qml:26
+#: package/contents/ui/main.qml:27
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Résoudre en replaçant dans l'ordre"

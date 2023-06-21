@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-02-11 17:06+0400\n"
 "Last-Translator: Kheyyam Gojayev <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -71,51 +71,51 @@ msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "Fərdi başlıq"
 
-#: package/contents/ui/IconItem.qml:175
+#: package/contents/ui/IconItem.qml:177
 #, kde-format
 msgid "Launch %1"
 msgstr "%1 başladın"
 
-#: package/contents/ui/IconItem.qml:259
+#: package/contents/ui/IconItem.qml:261
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Başladıcı əlavə edin..."
 
-#: package/contents/ui/IconItem.qml:265
+#: package/contents/ui/IconItem.qml:267
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Başladıcıya düzəliş edin..."
 
-#: package/contents/ui/IconItem.qml:271
+#: package/contents/ui/IconItem.qml:273
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Başladıcını silmək"
 
-#: package/contents/ui/main.qml:145
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Sürətli başlatmaq"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Başladıcıları köçürməklə və ya kontekst menyudan əlavə etmək."
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Hide icons"
 msgstr "Nişanları gizlətmək"
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Gizli nişanları göstərmək"
 
-#: package/contents/ui/main.qml:291
+#: package/contents/ui/main.qml:293
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

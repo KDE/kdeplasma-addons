@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-19 02:02+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-12-02 00:11+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -154,24 +154,24 @@ msgstr "Редактиране"
 msgid "Delete"
 msgstr "Изтриване"
 
-#: package/contents/ui/main.qml:66
+#: package/contents/ui/main.qml:67
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 се изпълнява"
 
-#: package/contents/ui/main.qml:68
+#: package/contents/ui/main.qml:69
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 не се изпълнява"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Оставащо време: %1 секунда"
 msgstr[1] "Оставащо време: %1 секунди"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -180,29 +180,29 @@ msgstr ""
 "Използване на колелото на мишката, за да промените цифрите или да изберете "
 "от предварително зададени таймери в контекстното меню"
 
-#: package/contents/ui/main.qml:88
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Timer"
 msgstr "Таймер"
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:90
 #, kde-format
 msgid "Timer finished"
 msgstr "Таймерът завърши"
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Старт"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:139
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Ст&оп"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:140
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

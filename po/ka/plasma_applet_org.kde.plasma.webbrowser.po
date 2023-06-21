@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-16 02:03+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2023-06-17 05:38+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -82,19 +82,19 @@ msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "ნაგულისხმებ ხატულაზე დაბრუნება"
 
-#: package/contents/ui/ConfigGeneral.qml:19
+#: package/contents/ui/ConfigGeneral.qml:18
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "შემცველობის მასშტაბირება:"
 
-#: package/contents/ui/ConfigGeneral.qml:23
+#: package/contents/ui/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "ფიქსირებული მასშტაბი:"
 
-#: package/contents/ui/ConfigGeneral.qml:57
+#: package/contents/ui/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"

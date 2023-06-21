@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2021-12-13 11:50+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -23,55 +23,55 @@ msgctxt "@title"
 msgid "General"
 msgstr "Algemeen"
 
-#: contents/ui/main.qml:243
+#: contents/ui/main.qml:244
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "Plakken"
 
-#: contents/ui/main.qml:252 contents/ui/main.qml:293
+#: contents/ui/main.qml:253 contents/ui/main.qml:294
 #, kde-format
 msgid "Share"
 msgstr "Delen"
 
-#: contents/ui/main.qml:253 contents/ui/main.qml:294
+#: contents/ui/main.qml:254 contents/ui/main.qml:295
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr ""
 "Sleep een stuk tekst of een afbeelding naar mij om het naar een online-"
 "service te uploaden."
 
-#: contents/ui/main.qml:294
+#: contents/ui/main.qml:295
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "%1 naar een een online service uploaden"
 
-#: contents/ui/main.qml:307
+#: contents/ui/main.qml:308
 #, kde-format
 msgid "Sending…"
 msgstr "Bezig met verzenden…"
 
-#: contents/ui/main.qml:308
+#: contents/ui/main.qml:309
 #, kde-format
 msgid "Please wait"
 msgstr "Even geduld"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:316
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "Met succes geüpload"
 
-#: contents/ui/main.qml:316
+#: contents/ui/main.qml:317
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:323
+#: contents/ui/main.qml:324
 #, kde-format
 msgid "Error during upload."
 msgstr "Fout bij het uploaden."
 
-#: contents/ui/main.qml:324
+#: contents/ui/main.qml:325
 #, kde-format
 msgid "Please, try again."
 msgstr "Probeer opnieuw."
@@ -88,23 +88,23 @@ msgctxt "@option:check"
 msgid "Copy automatically:"
 msgstr "Automatisch kopiëren:"
 
-#: contents/ui/ShareDialog.qml:30
+#: contents/ui/ShareDialog.qml:31
 #, kde-format
 msgid "Shares for '%1'"
 msgstr "Shares voor '%1'"
 
-#: contents/ui/ShowUrlDialog.qml:42
+#: contents/ui/ShowUrlDialog.qml:43
 #, kde-format
 msgid "The URL was just shared"
 msgstr "De URL is gewoon gedeeld"
 
-#: contents/ui/ShowUrlDialog.qml:48
+#: contents/ui/ShowUrlDialog.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Don't show this dialog, copy automatically."
 msgstr "Deze dialoog niet tonen, automatisch kopiëren."
 
-#: contents/ui/ShowUrlDialog.qml:56
+#: contents/ui/ShowUrlDialog.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"

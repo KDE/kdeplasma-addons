@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-01 02:11+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2023-03-01 01:29+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -101,122 +101,122 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "고급"
 
-#: package/contents/ui/ComicBottomInfo.qml:60
+#: package/contents/ui/ComicBottomInfo.qml:61
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "화로 이동…"
 
-#: package/contents/ui/ComicBottomInfo.qml:100
+#: package/contents/ui/ComicBottomInfo.qml:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "만화 웹사이트 방문"
 
-#: package/contents/ui/configAdvanced.qml:36
+#: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "만화 캐시:"
 
-#: package/contents/ui/configAdvanced.qml:45
+#: package/contents/ui/configAdvanced.qml:44
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
 msgid_plural "strips per comic"
 msgstr[0] "장면당 화"
 
-#: package/contents/ui/configAdvanced.qml:51
+#: package/contents/ui/configAdvanced.qml:50
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
 msgstr "만화를 다운로드할 수 없을 때 오류 표시"
 
-#: package/contents/ui/configAppearance.qml:43
+#: package/contents/ui/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "표시:"
 
-#: package/contents/ui/configAppearance.qml:44
+#: package/contents/ui/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "만화 제목"
 
-#: package/contents/ui/configAppearance.qml:50
+#: package/contents/ui/configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "만화 식별자"
 
-#: package/contents/ui/configAppearance.qml:56
+#: package/contents/ui/configAppearance.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "만화 작성자"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "만화 URL"
 
-#: package/contents/ui/configAppearance.qml:72
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "탐색 단추 표시:"
 
-#: package/contents/ui/configAppearance.qml:73
+#: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "항상"
 
-#: package/contents/ui/configAppearance.qml:80
+#: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "지나다닐 때만"
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:51
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "만화:"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:71
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "새 만화 가져오기…"
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:82
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "가운데 단추를 클릭하면 원래 크기로 표시"
 
-#: package/contents/ui/configGeneral.qml:92
+#: package/contents/ui/configGeneral.qml:91
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
 msgstr "새 플러그인 자동 확인:"
 
-#: package/contents/ui/configGeneral.qml:101
+#: package/contents/ui/configGeneral.qml:100
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
 msgid_plural "days"
 msgstr[0] "일"
 
-#: package/contents/ui/configGeneral.qml:106
+#: package/contents/ui/configGeneral.qml:105
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "새 만화 자동 확인:"
 
-#: package/contents/ui/configGeneral.qml:115
+#: package/contents/ui/configGeneral.qml:114
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

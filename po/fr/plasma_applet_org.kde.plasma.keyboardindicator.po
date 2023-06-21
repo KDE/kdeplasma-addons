@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2023-01-11 07:28+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -44,17 +44,17 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Verr. Num."
 
-#: contents/ui/main.qml:31
+#: contents/ui/main.qml:32
 #, kde-format
 msgid "Caps Lock activated\n"
 msgstr "Le verrouillage des majuscules a été activée.\n"
 
-#: contents/ui/main.qml:32
+#: contents/ui/main.qml:33
 #, kde-format
 msgid "Num Lock activated\n"
 msgstr "Le verrouillage du pavé numérique a été activée.\n"
 
-#: contents/ui/main.qml:110
+#: contents/ui/main.qml:111
 #, kde-format
 msgid "No lock keys activated"
 msgstr "Aucune activation de touche de verrouillage"

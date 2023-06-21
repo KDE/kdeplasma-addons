@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-31 00:48+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2019-12-03 17:54+0100\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 20.03.70\n"
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, fuzzy, kde-format
 #| msgid "No quota restrictions found."
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "Nincsenek kvóta korlátozások."
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, fuzzy, kde-format
 #| msgid ""
 #| "Quota tool not found.\n"
@@ -37,7 +37,7 @@ msgstr ""
 "\n"
 "Telepítse a „quota”-t."
 
-#: package/contents/ui/main.qml:78
+#: package/contents/ui/main.qml:79
 #, fuzzy, kde-format
 #| msgid "Please install 'quota'"
 msgctxt "@info:usagetip"

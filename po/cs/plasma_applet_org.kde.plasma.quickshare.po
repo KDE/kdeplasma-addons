@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2021-12-22 18:05+0100\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -24,53 +24,53 @@ msgctxt "@title"
 msgid "General"
 msgstr "Obecné"
 
-#: contents/ui/main.qml:243
+#: contents/ui/main.qml:244
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "Vložit"
 
-#: contents/ui/main.qml:252 contents/ui/main.qml:293
+#: contents/ui/main.qml:253 contents/ui/main.qml:294
 #, kde-format
 msgid "Share"
 msgstr "Sdílet"
 
-#: contents/ui/main.qml:253 contents/ui/main.qml:294
+#: contents/ui/main.qml:254 contents/ui/main.qml:295
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr "Upusťte na mě text nebo obrázky pro odeslání na webovou službu."
 
-#: contents/ui/main.qml:294
+#: contents/ui/main.qml:295
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "Odeslat %1 do služby online"
 
-#: contents/ui/main.qml:307
+#: contents/ui/main.qml:308
 #, kde-format
 msgid "Sending…"
 msgstr "Odesílám…"
 
-#: contents/ui/main.qml:308
+#: contents/ui/main.qml:309
 #, kde-format
 msgid "Please wait"
 msgstr "Čekejte prosím"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:316
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "Úspěšně odesláno"
 
-#: contents/ui/main.qml:316
+#: contents/ui/main.qml:317
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:323
+#: contents/ui/main.qml:324
 #, kde-format
 msgid "Error during upload."
 msgstr "Nastala chyba při odesílání."
 
-#: contents/ui/main.qml:324
+#: contents/ui/main.qml:325
 #, kde-format
 msgid "Please, try again."
 msgstr "Prosím, zkuste znovu."
@@ -87,23 +87,23 @@ msgctxt "@option:check"
 msgid "Copy automatically:"
 msgstr "Kopírovat automaticky:"
 
-#: contents/ui/ShareDialog.qml:30
+#: contents/ui/ShareDialog.qml:31
 #, kde-format
 msgid "Shares for '%1'"
 msgstr "Sdílení pro '%1'"
 
-#: contents/ui/ShowUrlDialog.qml:42
+#: contents/ui/ShowUrlDialog.qml:43
 #, kde-format
 msgid "The URL was just shared"
 msgstr "URL byla právě sdílena"
 
-#: contents/ui/ShowUrlDialog.qml:48
+#: contents/ui/ShowUrlDialog.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Don't show this dialog, copy automatically."
 msgstr "Nezobrazovat dialog ale kopírovat automaticky."
 
-#: contents/ui/ShowUrlDialog.qml:56
+#: contents/ui/ShowUrlDialog.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"

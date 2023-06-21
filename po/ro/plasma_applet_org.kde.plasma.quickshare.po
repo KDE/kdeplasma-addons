@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-02-05 20:22+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -24,55 +24,55 @@ msgctxt "@title"
 msgid "General"
 msgstr "Generale"
 
-#: contents/ui/main.qml:243
+#: contents/ui/main.qml:244
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "Lipește"
 
-#: contents/ui/main.qml:252 contents/ui/main.qml:293
+#: contents/ui/main.qml:253 contents/ui/main.qml:294
 #, kde-format
 msgid "Share"
 msgstr "Partajare"
 
-#: contents/ui/main.qml:253 contents/ui/main.qml:294
+#: contents/ui/main.qml:254 contents/ui/main.qml:295
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr ""
 "Aruncați peste mine o imagine sau text pentru a le încărca într-un serviciu "
 "online."
 
-#: contents/ui/main.qml:294
+#: contents/ui/main.qml:295
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "Încarcă %1 într-un serviciu online"
 
-#: contents/ui/main.qml:307
+#: contents/ui/main.qml:308
 #, kde-format
 msgid "Sending…"
 msgstr "Expediere…"
 
-#: contents/ui/main.qml:308
+#: contents/ui/main.qml:309
 #, kde-format
 msgid "Please wait"
 msgstr "Așteptați"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:316
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "Încărcat cu succes"
 
-#: contents/ui/main.qml:316
+#: contents/ui/main.qml:317
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:323
+#: contents/ui/main.qml:324
 #, kde-format
 msgid "Error during upload."
 msgstr "Eroare la încărcare."
 
-#: contents/ui/main.qml:324
+#: contents/ui/main.qml:325
 #, kde-format
 msgid "Please, try again."
 msgstr "Reîncercați"
@@ -89,23 +89,23 @@ msgctxt "@option:check"
 msgid "Copy automatically:"
 msgstr "Copiază automat:"
 
-#: contents/ui/ShareDialog.qml:30
+#: contents/ui/ShareDialog.qml:31
 #, kde-format
 msgid "Shares for '%1'"
 msgstr "Partajări pentru „%1”"
 
-#: contents/ui/ShowUrlDialog.qml:42
+#: contents/ui/ShowUrlDialog.qml:43
 #, kde-format
 msgid "The URL was just shared"
 msgstr "URL-ul tocmai a fost partajat"
 
-#: contents/ui/ShowUrlDialog.qml:48
+#: contents/ui/ShowUrlDialog.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Don't show this dialog, copy automatically."
 msgstr "Nu arăta acest dialog, copiază automat."
 
-#: contents/ui/ShowUrlDialog.qml:56
+#: contents/ui/ShowUrlDialog.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"

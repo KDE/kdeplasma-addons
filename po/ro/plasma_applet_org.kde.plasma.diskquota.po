@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-31 00:48+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-08-14 16:47+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -18,19 +18,19 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "Nu au fost găsite restricții de cotă"
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
 msgstr "Unealta pentru cotă nu a fost găsită"
 
-#: package/contents/ui/main.qml:78
+#: package/contents/ui/main.qml:79
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"

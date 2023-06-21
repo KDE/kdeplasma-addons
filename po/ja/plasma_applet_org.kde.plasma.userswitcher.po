@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-14 02:06+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-03-06 11:56+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -77,53 +77,53 @@ msgctxt "@option:check"
 msgid "Show technical session information"
 msgstr "高度なセッション情報を表示する"
 
-#: package/contents/ui/main.qml:40
+#: package/contents/ui/main.qml:41
 #, kde-format
 msgid "You are logged in as <b>%1</b>"
 msgstr "<b>%1</b> としてログインしています"
 
-#: package/contents/ui/main.qml:135
+#: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Current user"
 msgstr "現在のユーザ"
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:167
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "未使用"
 
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:183
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
-#: package/contents/ui/main.qml:184
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "on %1 (%2)"
 
-#: package/contents/ui/main.qml:192
+#: package/contents/ui/main.qml:193
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr ""
 
-#: package/contents/ui/main.qml:201
+#: package/contents/ui/main.qml:202
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "新しいセッション"
 
-#: package/contents/ui/main.qml:213
+#: package/contents/ui/main.qml:214
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "ロックスクリーン"
 
-#: package/contents/ui/main.qml:225
+#: package/contents/ui/main.qml:226
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Log Out"

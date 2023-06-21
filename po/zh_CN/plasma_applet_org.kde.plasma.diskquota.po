@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-31 00:48+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2023-06-17 04:09\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,19 +18,19 @@ msgstr ""
 "plasma.diskquota.pot\n"
 "X-Crowdin-File-ID: 43371\n"
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "未找到配额限制"
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
 msgstr "找不到 Quota 配额工具"
 
-#: package/contents/ui/main.qml:78
+#: package/contents/ui/main.qml:79
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"

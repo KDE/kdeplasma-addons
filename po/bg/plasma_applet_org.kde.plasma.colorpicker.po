@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-14 02:27+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2023-05-16 23:15+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -23,19 +23,19 @@ msgctxt "@title"
 msgid "General"
 msgstr "Общи"
 
-#: package/contents/ui/ColorCircle.qml:40
+#: package/contents/ui/ColorCircle.qml:41
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Кликване със среден бутон на мишката за копиране на кода на цвета"
 
-#: package/contents/ui/CompactRepresentation.qml:73
+#: package/contents/ui/CompactRepresentation.qml:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Избиране на цвят"
 
-#: package/contents/ui/CompactRepresentation.qml:80
+#: package/contents/ui/CompactRepresentation.qml:81
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""

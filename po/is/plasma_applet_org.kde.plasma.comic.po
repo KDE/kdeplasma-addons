@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-01 02:11+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2011-03-24 09:47+0000\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -104,25 +104,25 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Nánar"
 
-#: package/contents/ui/ComicBottomInfo.qml:60
+#: package/contents/ui/ComicBottomInfo.qml:61
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Hoppa á söguþáttinn ..."
 
-#: package/contents/ui/ComicBottomInfo.qml:100
+#: package/contents/ui/ComicBottomInfo.qml:101
 #, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Heimsækja vefsvæði myndasögunnar"
 
-#: package/contents/ui/configAdvanced.qml:36
+#: package/contents/ui/configAdvanced.qml:35
 #, fuzzy, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "M&yndasaga:"
 
-#: package/contents/ui/configAdvanced.qml:45
+#: package/contents/ui/configAdvanced.qml:44
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -130,84 +130,84 @@ msgid_plural "strips per comic"
 msgstr[0] ""
 msgstr[1] ""
 
-#: package/contents/ui/configAdvanced.qml:51
+#: package/contents/ui/configAdvanced.qml:50
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:43
+#: package/contents/ui/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:44
+#: package/contents/ui/configAppearance.qml:43
 #, fuzzy, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "Sýna &titil myndasögu:"
 
-#: package/contents/ui/configAppearance.qml:50
+#: package/contents/ui/configAppearance.qml:49
 #, fuzzy, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "Sýna auðkenn&i myndasögu:"
 
-#: package/contents/ui/configAppearance.qml:56
+#: package/contents/ui/configAppearance.qml:55
 #, fuzzy, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "Sýn&a höfund myndasögu:"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:61
 #, fuzzy, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "Comic"
 
-#: package/contents/ui/configAppearance.qml:72
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:73
+#: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:80
+#: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:51
 #, fuzzy, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Comic"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:71
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Sækja nýjar myndasö&gur..."
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:82
 #, fuzzy, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "&Miðjusmella á mynasöguna til að sýna hana í upprunalegri stærð"
 
-#: package/contents/ui/configGeneral.qml:92
+#: package/contents/ui/configGeneral.qml:91
 #, fuzzy, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
 msgstr "Velja myndasögu"
 
-#: package/contents/ui/configGeneral.qml:101
+#: package/contents/ui/configGeneral.qml:100
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
@@ -215,13 +215,13 @@ msgid_plural "days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: package/contents/ui/configGeneral.qml:106
+#: package/contents/ui/configGeneral.qml:105
 #, fuzzy, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Velja myndasögu"
 
-#: package/contents/ui/configGeneral.qml:115
+#: package/contents/ui/configGeneral.qml:114
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

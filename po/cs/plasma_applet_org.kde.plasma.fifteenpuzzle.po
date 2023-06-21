@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-07 00:48+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2021-12-22 18:04+0100\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -78,30 +78,30 @@ msgstr "Dlaždice:"
 msgid "Colored numbers:"
 msgstr "Obarvená čísla:"
 
-#: package/contents/ui/FifteenPuzzle.qml:258
+#: package/contents/ui/FifteenPuzzle.qml:259
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Čas: %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:301
+#: package/contents/ui/FifteenPuzzle.qml:302
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Zamíchat"
 
-#: package/contents/ui/FifteenPuzzle.qml:338
+#: package/contents/ui/FifteenPuzzle.qml:339
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Vyřešeno. Zkuste to znovu."
 
-#: package/contents/ui/main.qml:25
+#: package/contents/ui/main.qml:26
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Hra Patnáct"
 
-#: package/contents/ui/main.qml:26
+#: package/contents/ui/main.qml:27
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Vyřešit seřazením"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2016-03-20 15:25+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -83,55 +83,55 @@ msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "Прикажи наслов"
 
-#: package/contents/ui/IconItem.qml:175
+#: package/contents/ui/IconItem.qml:177
 #, kde-format
 msgid "Launch %1"
 msgstr ""
 
-#: package/contents/ui/IconItem.qml:259
+#: package/contents/ui/IconItem.qml:261
 #, fuzzy, kde-format
 #| msgid "Add Launcher..."
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Додај покретач..."
 
-#: package/contents/ui/IconItem.qml:265
+#: package/contents/ui/IconItem.qml:267
 #, fuzzy, kde-format
 #| msgid "Edit Launcher..."
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Уреди покретач..."
 
-#: package/contents/ui/IconItem.qml:271
+#: package/contents/ui/IconItem.qml:273
 #, fuzzy, kde-format
 #| msgid "Remove Launcher"
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Уклони покретач"
 
-#: package/contents/ui/main.qml:145
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgid "Quicklaunch"
 msgstr "брзокрет"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:148
 #, fuzzy, kde-format
 #| msgid "Add launchers by Drag and Drop or by using the context menu."
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Додајте покретаче превлачењем или кроз контекстни мени."
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Hide icons"
 msgstr "Сакриј иконице"
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Прикажи скривене иконице"
 
-#: package/contents/ui/main.qml:291
+#: package/contents/ui/main.qml:293
 #, fuzzy, kde-format
 #| msgid "Add Launcher..."
 msgctxt "@action"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-19 02:02+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-12-01 10:29+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -154,24 +154,24 @@ msgstr "Bewerken"
 msgid "Delete"
 msgstr "Verwijderen"
 
-#: package/contents/ui/main.qml:66
+#: package/contents/ui/main.qml:67
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 is actief"
 
-#: package/contents/ui/main.qml:68
+#: package/contents/ui/main.qml:69
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 is niet actief"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Resterende tijd: %1 seconde"
 msgstr[1] "Resterende tijd: %1 seconden"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -180,29 +180,29 @@ msgstr ""
 "Muiswiel gebruiken om cijfers te wijzigen of maak een keuze uit "
 "voorgedefinieerde timers in het contextmenu"
 
-#: package/contents/ui/main.qml:88
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Timer"
 msgstr "Timer"
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:90
 #, kde-format
 msgid "Timer finished"
 msgstr "Timer is geëindigd"
 
-#: package/contents/ui/main.qml:137
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Starten"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:139
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "S&toppen"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:140
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

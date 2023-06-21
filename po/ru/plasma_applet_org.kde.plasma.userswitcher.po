@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-14 02:06+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-09-23 22:02+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -79,56 +79,56 @@ msgctxt "@option:check"
 msgid "Show technical session information"
 msgstr "Показывать техническую информацию о сеансах"
 
-#: package/contents/ui/main.qml:40
+#: package/contents/ui/main.qml:41
 #, kde-format
 msgid "You are logged in as <b>%1</b>"
 msgstr "Вход выполнен от имени <b>%1</b>"
 
-#: package/contents/ui/main.qml:135
+#: package/contents/ui/main.qml:136
 #, kde-format
 msgid "Current user"
 msgstr "Текущий пользователь"
 
 # BUGME: this string is duplicate against plasma_lookandfeel_org.kde.lookandfeel.po --aspotashev
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:167
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "Не используется"
 
 # BUGME: this string is duplicate against plasma_lookandfeel_org.kde.lookandfeel.po --aspotashev
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:183
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "Терминал %1"
 
 # BUGME: this string is duplicate against plasma_lookandfeel_org.kde.lookandfeel.po --aspotashev
-#: package/contents/ui/main.qml:184
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "на %1 (%2)"
 
-#: package/contents/ui/main.qml:192
+#: package/contents/ui/main.qml:193
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr "Переключить на пользователя %1"
 
-#: package/contents/ui/main.qml:201
+#: package/contents/ui/main.qml:202
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "Начать новый сеанс"
 
-#: package/contents/ui/main.qml:213
+#: package/contents/ui/main.qml:214
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Заблокировать экран"
 
-#: package/contents/ui/main.qml:225
+#: package/contents/ui/main.qml:226
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Log Out"

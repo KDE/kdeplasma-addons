@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2018-07-12 10:40+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -23,55 +23,55 @@ msgctxt "@title"
 msgid "General"
 msgstr "Generelt"
 
-#: contents/ui/main.qml:243
+#: contents/ui/main.qml:244
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "Indsæt"
 
-#: contents/ui/main.qml:252 contents/ui/main.qml:293
+#: contents/ui/main.qml:253 contents/ui/main.qml:294
 #, kde-format
 msgid "Share"
 msgstr "Del"
 
-#: contents/ui/main.qml:253 contents/ui/main.qml:294
+#: contents/ui/main.qml:254 contents/ui/main.qml:295
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr ""
 "Slip tekst eller et billede på mig for at uploade det til en online tjeneste."
 
-#: contents/ui/main.qml:294
+#: contents/ui/main.qml:295
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "Upload %1 til en onlinetjeneste"
 
-#: contents/ui/main.qml:307
+#: contents/ui/main.qml:308
 #, fuzzy, kde-format
 #| msgid "Sending..."
 msgid "Sending…"
 msgstr "Sender..."
 
-#: contents/ui/main.qml:308
+#: contents/ui/main.qml:309
 #, kde-format
 msgid "Please wait"
 msgstr "Vent venligst"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:316
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "Upload gennemført"
 
-#: contents/ui/main.qml:316
+#: contents/ui/main.qml:317
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:323
+#: contents/ui/main.qml:324
 #, kde-format
 msgid "Error during upload."
 msgstr "Fejl under upload."
 
-#: contents/ui/main.qml:324
+#: contents/ui/main.qml:325
 #, kde-format
 msgid "Please, try again."
 msgstr "Prøv igen."
@@ -88,23 +88,23 @@ msgctxt "@option:check"
 msgid "Copy automatically:"
 msgstr "Kopiér automatisk:"
 
-#: contents/ui/ShareDialog.qml:30
+#: contents/ui/ShareDialog.qml:31
 #, kde-format
 msgid "Shares for '%1'"
 msgstr "Delinger for \"%1\""
 
-#: contents/ui/ShowUrlDialog.qml:42
+#: contents/ui/ShowUrlDialog.qml:43
 #, kde-format
 msgid "The URL was just shared"
 msgstr "URL'en blev netop delt"
 
-#: contents/ui/ShowUrlDialog.qml:48
+#: contents/ui/ShowUrlDialog.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Don't show this dialog, copy automatically."
 msgstr "Vis ikke denne dialog, kopiér automatisk."
 
-#: contents/ui/ShowUrlDialog.qml:56
+#: contents/ui/ShowUrlDialog.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"

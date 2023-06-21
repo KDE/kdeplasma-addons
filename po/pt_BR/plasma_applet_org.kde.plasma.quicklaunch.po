@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-03-04 09:21-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -73,52 +73,52 @@ msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "Título personalizado"
 
-#: package/contents/ui/IconItem.qml:175
+#: package/contents/ui/IconItem.qml:177
 #, kde-format
 msgid "Launch %1"
 msgstr "Iniciar %1"
 
-#: package/contents/ui/IconItem.qml:259
+#: package/contents/ui/IconItem.qml:261
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Adicionar lançador..."
 
-#: package/contents/ui/IconItem.qml:265
+#: package/contents/ui/IconItem.qml:267
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Editar lançador..."
 
-#: package/contents/ui/IconItem.qml:271
+#: package/contents/ui/IconItem.qml:273
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Remover lançador"
 
-#: package/contents/ui/main.qml:145
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Lançamento rápido"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr ""
 "Adicionar lançadores com arrastar e soltar ou usando o menu de contexto."
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Hide icons"
 msgstr "Ocultar ícones"
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Mostrar ícones ocultos"
 
-#: package/contents/ui/main.qml:291
+#: package/contents/ui/main.qml:293
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

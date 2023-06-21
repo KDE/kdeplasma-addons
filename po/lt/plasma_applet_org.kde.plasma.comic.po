@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-01 02:11+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-11-17 23:34+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -104,25 +104,25 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Išplėstiniai"
 
-#: package/contents/ui/ComicBottomInfo.qml:60
+#: package/contents/ui/ComicBottomInfo.qml:61
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Pereiti į piešinių seriją…"
 
-#: package/contents/ui/ComicBottomInfo.qml:100
+#: package/contents/ui/ComicBottomInfo.qml:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Apsilankyti komiksų interneto svetainėje"
 
-#: package/contents/ui/configAdvanced.qml:36
+#: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "Komiksų krepšys:"
 
-#: package/contents/ui/configAdvanced.qml:45
+#: package/contents/ui/configAdvanced.qml:44
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -132,84 +132,84 @@ msgstr[1] "piešinių serijos vienam komiksui"
 msgstr[2] "piešinių serijų vienam komiksui"
 msgstr[3] "piešinių serija vienam komiksui"
 
-#: package/contents/ui/configAdvanced.qml:51
+#: package/contents/ui/configAdvanced.qml:50
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
 msgstr "Rodyti klaidą, kai nepavyksta atsisiųsti komiksų"
 
-#: package/contents/ui/configAppearance.qml:43
+#: package/contents/ui/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "Rodyti:"
 
-#: package/contents/ui/configAppearance.qml:44
+#: package/contents/ui/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "Komiksų pavadinimas"
 
-#: package/contents/ui/configAppearance.qml:50
+#: package/contents/ui/configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "Komiksų identifikatorius"
 
-#: package/contents/ui/configAppearance.qml:56
+#: package/contents/ui/configAppearance.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "Komiksų autorius"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "Komiksų URL"
 
-#: package/contents/ui/configAppearance.qml:72
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "Rodyti naršymo mygtukus:"
 
-#: package/contents/ui/configAppearance.qml:73
+#: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "Visada"
 
-#: package/contents/ui/configAppearance.qml:80
+#: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Tik užvedus pelę"
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:51
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Komiksai:"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:71
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Gauti naujų komiksų…"
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:82
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Spustelėjus viduriniuoju pelės mygtuku, rodyti komiksą pradiniu dydžiu"
 
-#: package/contents/ui/configGeneral.qml:92
+#: package/contents/ui/configGeneral.qml:91
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
 msgstr "Tikrinti ar yra naujų priedų kas:"
 
-#: package/contents/ui/configGeneral.qml:101
+#: package/contents/ui/configGeneral.qml:100
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
@@ -219,13 +219,13 @@ msgstr[1] " d."
 msgstr[2] " d."
 msgstr[3] " d."
 
-#: package/contents/ui/configGeneral.qml:106
+#: package/contents/ui/configGeneral.qml:105
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Tikrinti ar yra naujų komiksų kas:"
 
-#: package/contents/ui/configGeneral.qml:115
+#: package/contents/ui/configGeneral.qml:114
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

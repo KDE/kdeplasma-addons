@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2018-04-21 13:55+0300\n"
 "Last-Translator: Alexander Potashev <aspotashev@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -19,13 +19,13 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: package/contents/ui/konsoleprofiles.qml:68
+#: package/contents/ui/konsoleprofiles.qml:70
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Профили Konsole"
 
-#: package/contents/ui/konsoleprofiles.qml:88
+#: package/contents/ui/konsoleprofiles.qml:90
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "Произвольная строка, которая о чем-то сообщает"

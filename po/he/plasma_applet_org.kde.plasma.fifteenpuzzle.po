@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-08-07 00:48+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2017-05-16 06:55-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -80,31 +80,31 @@ msgstr ""
 msgid "Colored numbers:"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:258
+#: package/contents/ui/FifteenPuzzle.qml:259
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "שעה: %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:301
+#: package/contents/ui/FifteenPuzzle.qml:302
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "ערבב חלקים"
 
-#: package/contents/ui/FifteenPuzzle.qml:338
+#: package/contents/ui/FifteenPuzzle.qml:339
 #, fuzzy, kde-format
 #| msgid "Solved! Try again."
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "נפתר! נסה שוב."
 
-#: package/contents/ui/main.qml:25
+#: package/contents/ui/main.qml:26
 #, fuzzy, kde-format
 msgid "Fifteen Puzzle"
 msgstr "הגדר את הפזל"
 
-#: package/contents/ui/main.qml:26
+#: package/contents/ui/main.qml:27
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "פתור ע\"י קיבוץ על פי הסדר"

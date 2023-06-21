@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quickshare\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-03-06 11:56+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -22,55 +22,55 @@ msgctxt "@title"
 msgid "General"
 msgstr "一般"
 
-#: contents/ui/main.qml:243
+#: contents/ui/main.qml:244
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "貼り付け"
 
-#: contents/ui/main.qml:252 contents/ui/main.qml:293
+#: contents/ui/main.qml:253 contents/ui/main.qml:294
 #, kde-format
 msgid "Share"
 msgstr "共有"
 
-#: contents/ui/main.qml:253 contents/ui/main.qml:294
+#: contents/ui/main.qml:254 contents/ui/main.qml:295
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr ""
 "テキストまたは画像をここにドロップして、オンラインサービスにアップロードしま"
 "す。"
 
-#: contents/ui/main.qml:294
+#: contents/ui/main.qml:295
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "%1 をオンラインサービスにアップロード"
 
-#: contents/ui/main.qml:307
+#: contents/ui/main.qml:308
 #, kde-format
 msgid "Sending…"
 msgstr "送信中…"
 
-#: contents/ui/main.qml:308
+#: contents/ui/main.qml:309
 #, kde-format
 msgid "Please wait"
 msgstr "しばらくお待ちください"
 
-#: contents/ui/main.qml:315
+#: contents/ui/main.qml:316
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "アップロードに成功しました"
 
-#: contents/ui/main.qml:316
+#: contents/ui/main.qml:317
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:323
+#: contents/ui/main.qml:324
 #, kde-format
 msgid "Error during upload."
 msgstr "アップロード中にエラーが発生しました。"
 
-#: contents/ui/main.qml:324
+#: contents/ui/main.qml:325
 #, kde-format
 msgid "Please, try again."
 msgstr "もう一度試してください。"
@@ -87,23 +87,23 @@ msgctxt "@option:check"
 msgid "Copy automatically:"
 msgstr "自動でコピー:"
 
-#: contents/ui/ShareDialog.qml:30
+#: contents/ui/ShareDialog.qml:31
 #, kde-format
 msgid "Shares for '%1'"
 msgstr "'%1' のシェア"
 
-#: contents/ui/ShowUrlDialog.qml:42
+#: contents/ui/ShowUrlDialog.qml:43
 #, kde-format
 msgid "The URL was just shared"
 msgstr "URL が共有されました"
 
-#: contents/ui/ShowUrlDialog.qml:48
+#: contents/ui/ShowUrlDialog.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Don't show this dialog, copy automatically."
 msgstr "このダイアログを表示せずに自動でコピーする。"
 
-#: contents/ui/ShowUrlDialog.qml:56
+#: contents/ui/ShowUrlDialog.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Close"

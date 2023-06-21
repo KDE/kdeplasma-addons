@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-19 02:02+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2014-09-29 18:50+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -154,53 +154,53 @@ msgstr ""
 msgid "Delete"
 msgstr ""
 
-#: package/contents/ui/main.qml:66
+#: package/contents/ui/main.qml:67
 #, kde-format
 msgid "%1 is running"
 msgstr ""
 
-#: package/contents/ui/main.qml:68
+#: package/contents/ui/main.qml:69
 #, kde-format
 msgid "%1 not running"
 msgstr ""
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] ""
 msgstr[1] ""
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
 msgstr ""
 
-#: package/contents/ui/main.qml:88
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgid "Timer"
 msgstr "Tidsur"
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:90
 #, kde-format
 msgid "Timer finished"
-msgstr ""
-
-#: package/contents/ui/main.qml:137
-#, kde-format
-msgctxt "@action"
-msgid "&Start"
 msgstr ""
 
 #: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
-msgid "S&top"
+msgid "&Start"
 msgstr ""
 
 #: package/contents/ui/main.qml:139
+#, kde-format
+msgctxt "@action"
+msgid "S&top"
+msgstr ""
+
+#: package/contents/ui/main.qml:140
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

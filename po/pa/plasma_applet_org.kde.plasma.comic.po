@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-01 02:11+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2011-06-29 23:33+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -113,28 +113,28 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "ਤਕਨੀਕੀ"
 
-#: package/contents/ui/ComicBottomInfo.qml:60
+#: package/contents/ui/ComicBottomInfo.qml:61
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "ਪਹਿਲੀ ਪੱਟੀ ਉੱਤੇ ਜਾਓ..."
 
-#: package/contents/ui/ComicBottomInfo.qml:100
+#: package/contents/ui/ComicBottomInfo.qml:101
 #, fuzzy, kde-format
 #| msgid "Visit the comic website"
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "ਕੌਮਿਕ ਵੈੱਬਸਾਈਟ ਵੇਖੋ"
 
-#: package/contents/ui/configAdvanced.qml:36
+#: package/contents/ui/configAdvanced.qml:35
 #, fuzzy, kde-format
 #| msgid "C&omic:"
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "ਕਾਮਿਕ(&o):"
 
-#: package/contents/ui/configAdvanced.qml:45
+#: package/contents/ui/configAdvanced.qml:44
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -142,91 +142,91 @@ msgid_plural "strips per comic"
 msgstr[0] ""
 msgstr[1] ""
 
-#: package/contents/ui/configAdvanced.qml:51
+#: package/contents/ui/configAdvanced.qml:50
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:43
+#: package/contents/ui/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:44
+#: package/contents/ui/configAppearance.qml:43
 #, fuzzy, kde-format
 #| msgid "Show comic &title:"
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "ਕਾਮਿਕ ਟਾਈਟਲ ਵੇਖੋ(&t):"
 
-#: package/contents/ui/configAppearance.qml:50
+#: package/contents/ui/configAppearance.qml:49
 #, fuzzy, kde-format
 #| msgid "Show comic &identifier:"
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "ਕਾਮਿਕ ਪਛਾਣ ਵੇਖੋ(&i):"
 
-#: package/contents/ui/configAppearance.qml:56
+#: package/contents/ui/configAppearance.qml:55
 #, fuzzy, kde-format
 #| msgid "Show comic &author:"
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "ਕਾਮਿਕ ਲੇਖਕ ਵੇਖੋ(&a):"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:61
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "ਕਾਮਿਕ"
 
-#: package/contents/ui/configAppearance.qml:72
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:73
+#: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:80
+#: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:51
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "ਕਾਮਿਕ"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:71
 #, fuzzy, kde-format
 #| msgid "&Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "ਨਵੇਂ ਕਾਮਿਕ ਲਵੋ(&G)..."
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:82
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:92
+#: package/contents/ui/configGeneral.qml:91
 #, fuzzy, kde-format
 #| msgid "Choose a comic strip"
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
 msgstr "ਕੌਮਿਕ ਪੱਟੀ ਚੁਣੋ"
 
-#: package/contents/ui/configGeneral.qml:101
+#: package/contents/ui/configGeneral.qml:100
 #, fuzzy, kde-format
 #| msgid " days"
 msgctxt "@item:valuesuffix spacing to number + unit"
@@ -235,14 +235,14 @@ msgid_plural "days"
 msgstr[0] " ਦਿਨ"
 msgstr[1] " ਦਿਨ"
 
-#: package/contents/ui/configGeneral.qml:106
+#: package/contents/ui/configGeneral.qml:105
 #, fuzzy, kde-format
 #| msgid "Choose a comic strip"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "ਕੌਮਿਕ ਪੱਟੀ ਚੁਣੋ"
 
-#: package/contents/ui/configGeneral.qml:115
+#: package/contents/ui/configGeneral.qml:114
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"

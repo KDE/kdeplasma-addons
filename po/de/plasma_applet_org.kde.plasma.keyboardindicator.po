@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-09 02:13+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2022-09-24 10:40+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -44,17 +44,17 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Num-Feststelltaste"
 
-#: contents/ui/main.qml:31
+#: contents/ui/main.qml:32
 #, kde-format
 msgid "Caps Lock activated\n"
 msgstr "Hochstelltaste aktiviert\n"
 
-#: contents/ui/main.qml:32
+#: contents/ui/main.qml:33
 #, kde-format
 msgid "Num Lock activated\n"
 msgstr "Num-Feststelltaste aktiviert\n"
 
-#: contents/ui/main.qml:110
+#: contents/ui/main.qml:111
 #, kde-format
 msgid "No lock keys activated"
 msgstr "Keine Tastensperre aktiviert"

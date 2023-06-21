@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-07-31 00:48+0000\n"
+"POT-Creation-Date: 2023-06-21 02:02+0000\n"
 "PO-Revision-Date: 2016-12-15 20:34+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, fuzzy, kde-format
 #| msgid "No quota restrictions found."
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "Ingen kvotebegrænsninger fundet."
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, fuzzy, kde-format
 #| msgid ""
 #| "Quota tool not found.\n"
@@ -37,7 +37,7 @@ msgstr ""
 "\n"
 "Installér venligst \"quota\"."
 
-#: package/contents/ui/main.qml:78
+#: package/contents/ui/main.qml:79
 #, fuzzy, kde-format
 #| msgid "Please install 'quota'"
 msgctxt "@info:usagetip"
