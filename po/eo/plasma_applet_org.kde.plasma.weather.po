@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-21 02:02+0000\n"
-"PO-Revision-Date: 2023-03-26 18:35+0100\n"
+"PO-Revision-Date: 2023-06-21 19:55+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -161,7 +161,7 @@ msgstr "Montri temperaturon:"
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Super la fenestraĵikono"
+msgstr "Super la fenestraĵpiktogramo"
 
 #: package/contents/ui/config/ConfigAppearance.qml:55
 #, kde-format
@@ -341,8 +341,8 @@ msgstr "Trankvilo"
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
 msgid_plural "%1 Days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "1 Tago"
+msgstr[1] "%1 Tagoj"
 
 #: package/contents/ui/main.qml:171
 #, kde-format
