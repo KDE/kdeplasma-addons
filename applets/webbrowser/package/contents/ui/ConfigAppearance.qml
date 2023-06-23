@@ -10,6 +10,8 @@ import QtQuick.Controls as QQC2
 
 import org.kde.iconthemes as KIconThemes
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.ksvg 1.0 as KSvg
+
 import org.kde.plasma.core 2.0 as PlasmaCore
 
 Kirigami.FormLayout {
@@ -64,7 +66,7 @@ Kirigami.FormLayout {
                 }
             }
 
-            PlasmaCore.FrameSvgItem {
+            KSvg.FrameSvgItem {
                 id: previewFrame
                 anchors.centerIn: parent
                 imagePath: plasmoid.formFactor === PlasmaCore.Types.Vertical || plasmoid.formFactor === PlasmaCore.Types.Horizontal
