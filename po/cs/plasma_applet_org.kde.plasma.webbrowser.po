@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-06-23 02:17+0000\n"
 "PO-Revision-Date: 2023-01-30 22:14+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -27,57 +27,59 @@ msgstr "Obecné"
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "Vzhled"
 
-#: package/contents/ui/ConfigAppearance.qml:26
+#: package/contents/ui/ConfigAppearance.qml:28
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr ""
 
-#: package/contents/ui/ConfigAppearance.qml:27
+#: package/contents/ui/ConfigAppearance.qml:29
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr ""
 
-#: package/contents/ui/ConfigAppearance.qml:50
+#: package/contents/ui/ConfigAppearance.qml:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr ""
 
-#: package/contents/ui/ConfigAppearance.qml:51
+#: package/contents/ui/ConfigAppearance.qml:53
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "Current icon is %1. Click to open menu to change the current icon or reset "
 "to the default icon."
 msgstr ""
+"Současná ikona je %1. Klikněte pro otevření nabídky pro změnu současné ikony "
+"nebo vrácení původní ikony."
 
-#: package/contents/ui/ConfigAppearance.qml:55
+#: package/contents/ui/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
-msgstr ""
+msgstr "Název ikony je \"%1\""
 
-#: package/contents/ui/ConfigAppearance.qml:90
+#: package/contents/ui/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr ""
+msgstr "Vybrat…"
 
-#: package/contents/ui/ConfigAppearance.qml:92
+#: package/contents/ui/ConfigAppearance.qml:94
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr ""
 
-#: package/contents/ui/ConfigAppearance.qml:96
+#: package/contents/ui/ConfigAppearance.qml:98
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
-msgstr ""
+msgstr "Obnovit výchozí ikonu"
 
 #: package/contents/ui/ConfigGeneral.qml:18
 #, kde-format

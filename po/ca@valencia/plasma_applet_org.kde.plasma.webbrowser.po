@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-06-23 02:17+0000\n"
 "PO-Revision-Date: 2023-06-16 11:40+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -31,25 +31,25 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Aparença"
 
-#: package/contents/ui/ConfigAppearance.qml:26
+#: package/contents/ui/ConfigAppearance.qml:28
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "Icona:"
 
-#: package/contents/ui/ConfigAppearance.qml:27
+#: package/contents/ui/ConfigAppearance.qml:29
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "Icona de web del lloc web"
 
-#: package/contents/ui/ConfigAppearance.qml:50
+#: package/contents/ui/ConfigAppearance.qml:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "Canvia la icona del navegador web"
 
-#: package/contents/ui/ConfigAppearance.qml:51
+#: package/contents/ui/ConfigAppearance.qml:53
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -59,25 +59,25 @@ msgstr ""
 "La icona actual és %1. Feu-hi clic per a obrir un menú per a canviar la "
 "icona actual o restablir la icona predeterminada."
 
-#: package/contents/ui/ConfigAppearance.qml:55
+#: package/contents/ui/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "El nom de la icona és «%1»"
 
-#: package/contents/ui/ConfigAppearance.qml:90
+#: package/contents/ui/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "Seleccioneu…"
 
-#: package/contents/ui/ConfigAppearance.qml:92
+#: package/contents/ui/ConfigAppearance.qml:94
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "Seleccioneu una icona per al navegador web"
 
-#: package/contents/ui/ConfigAppearance.qml:96
+#: package/contents/ui/ConfigAppearance.qml:98
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"

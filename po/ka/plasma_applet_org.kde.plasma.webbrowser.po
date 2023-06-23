@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-06-23 02:17+0000\n"
 "PO-Revision-Date: 2023-06-17 05:38+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -30,25 +30,25 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "გარემოს იერსახე"
 
-#: package/contents/ui/ConfigAppearance.qml:26
+#: package/contents/ui/ConfigAppearance.qml:28
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "ხატულა:"
 
-#: package/contents/ui/ConfigAppearance.qml:27
+#: package/contents/ui/ConfigAppearance.qml:29
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "საიტის ხატულა"
 
-#: package/contents/ui/ConfigAppearance.qml:50
+#: package/contents/ui/ConfigAppearance.qml:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "ვებ-ბრაუზერის ხატულის შეცვლა"
 
-#: package/contents/ui/ConfigAppearance.qml:51
+#: package/contents/ui/ConfigAppearance.qml:53
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -58,25 +58,25 @@ msgstr ""
 "მიმდინარე ხატულაა %1. მიმდინარე ხატულის შესაცვლელად ან ნაგულისხმევზე "
 "დასაბრუნებლად მენიუ გახსენით."
 
-#: package/contents/ui/ConfigAppearance.qml:55
+#: package/contents/ui/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "ხატულის სახელია \"%1\""
 
-#: package/contents/ui/ConfigAppearance.qml:90
+#: package/contents/ui/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "არჩევა…"
 
-#: package/contents/ui/ConfigAppearance.qml:92
+#: package/contents/ui/ConfigAppearance.qml:94
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "აირჩიეთ ვებ-ბრაუზერის ხატულა"
 
-#: package/contents/ui/ConfigAppearance.qml:96
+#: package/contents/ui/ConfigAppearance.qml:98
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
