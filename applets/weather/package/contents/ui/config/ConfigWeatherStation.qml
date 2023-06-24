@@ -20,7 +20,7 @@ ColumnLayout {
     property string cfg_source
     property alias cfg_updateInterval: updateIntervalSpin.value
 
-    readonly property var providers: Plasmoid.nativeInterface.providers
+    readonly property var providers: Plasmoid.providers
 
     readonly property var sourceDetails: cfg_source ? cfg_source.split('|') : ""
     readonly property bool hasSource: sourceDetails.length > 2

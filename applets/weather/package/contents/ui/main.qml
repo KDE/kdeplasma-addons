@@ -422,7 +422,7 @@ PlasmoidItem {
     }
 
     Binding {
-        target: Plasmoid.nativeInterface
+        target: Plasmoid
         property: "needsToBeSquare"
         value: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment)
                 | (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)

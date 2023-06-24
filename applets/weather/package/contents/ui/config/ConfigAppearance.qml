@@ -16,7 +16,7 @@ import org.kde.plasma.private.weather 1.0
 Kirigami.FormLayout {
     id: displayConfigPage
 
-    readonly property bool canShowMoreInCompactMode: !Plasmoid.nativeInterface.needsToBeSquare
+    readonly property bool canShowMoreInCompactMode: !Plasmoid.needsToBeSquare
 
     property bool cfg_showTemperatureInCompactMode
     property bool cfg_showTemperatureInBadge
