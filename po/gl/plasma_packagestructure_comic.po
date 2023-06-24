@@ -31,4 +31,4 @@ msgstr "Scripts executábeis"
 #: comic_package.cpp:29
 #, kde-format
 msgid "Main Script File"
-msgstr "Ficheiro de script principal"
+msgstr "Ficheiro de guión principal"

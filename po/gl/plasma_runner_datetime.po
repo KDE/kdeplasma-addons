@@ -32,12 +32,12 @@ msgstr "hora"
 #: datetimerunner.cpp:29
 #, kde-format
 msgid "Displays the current date"
-msgstr "Mostra a data actual."
+msgstr "Amosa a data actual."
 
 #: datetimerunner.cpp:30
 #, kde-format
 msgid "Displays the current time"
-msgstr "Mostra a hora actual."
+msgstr "Amosa a hora actual."
 
 #: datetimerunner.cpp:31 datetimerunner.cpp:33
 #, kde-format
