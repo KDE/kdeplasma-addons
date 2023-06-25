@@ -1,19 +1,19 @@
 # translation of plasma_applet_weather.po to Galician
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # mvillarino <mvillarino@users.sourceforge.net>, 2009.
 # Marce Villarino <mvillarino@users.sourceforge.net>, 2009.
 # Xosé <xosecalvo@gmail.com>, 2009.
 # Marce Villarino <mvillarino@gmail.com>, 2009.
 # Adrian Chaves Fernandez <adriyetichaves@gmail.com>, 2013, 2016.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019.
+# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2017, 2018, 2019, 2023.
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-21 02:02+0000\n"
-"PO-Revision-Date: 2019-11-01 11:57+0100\n"
+"PO-Revision-Date: 2023-06-24 09:28+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 19.11.70\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -156,34 +156,28 @@ msgid "Compact Mode"
 msgstr "Modo compacto"
 
 #: package/contents/ui/config/ConfigAppearance.qml:44
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "Mostrar a temperatura"
+msgstr "Amosar a temperatura:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:47
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Mostrar canda a icona do trebello:"
+msgstr "Sobre a icona do trebello."
 
 #: package/contents/ui/config/ConfigAppearance.qml:55
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "Mostrar canda a icona do trebello:"
+msgstr "Canda a icona do trebello."
 
 #: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Non amosar."
 
 #: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
@@ -195,25 +189,25 @@ msgstr "Amosar na mensaxe emerxente:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
-msgstr "Temperatura"
+msgstr "Temperatura."
 
 #: package/contents/ui/config/ConfigAppearance.qml:77
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
-msgstr "Vento"
+msgstr "Vento."
 
 #: package/contents/ui/config/ConfigAppearance.qml:82
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
-msgstr "Presión"
+msgstr "Presión."
 
 #: package/contents/ui/config/ConfigAppearance.qml:87
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
-msgstr "Humidade"
+msgstr "Humidade."
 
 #: package/contents/ui/config/ConfigUnits.qml:33
 #, kde-format
@@ -256,27 +250,25 @@ msgstr[1] "%1 minutos"
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
-msgstr "Lugar:"
+msgstr "Localización:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:67
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Non se escolleu."
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Fornecedor:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Introduza o lugar"
+msgstr "Escriba unha nova localización."
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
@@ -294,13 +286,13 @@ msgstr "Non se atoparon estacións meteorolóxicas para «%1»."
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Busque unha estación meteorolóxica para cambiar de localización."
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Busque unha estación meteorolóxica para definir a localización."
 
 #: package/contents/ui/ForecastView.qml:74
 #: package/contents/ui/ForecastView.qml:81
@@ -312,14 +304,12 @@ msgstr "-"
 #: package/contents/ui/FullRepresentation.qml:37
 #, kde-format
 msgid "Please set your location"
-msgstr ""
+msgstr "Defina a súa localización."
 
 #: package/contents/ui/FullRepresentation.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgid "Set location…"
-msgstr "Introduza o lugar"
+msgstr "Definir a localización…"
 
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
@@ -408,19 +398,16 @@ msgid "Wind Gust:"
 msgstr "Refacho de vento:"
 
 #: package/contents/ui/main.qml:240
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 día"
+msgstr "Día"
 
 #: package/contents/ui/main.qml:241
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Noite"
 
 #: package/contents/ui/main.qml:279
 #, kde-format
@@ -432,7 +419,7 @@ msgstr "%1 (%2%)"
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
-msgstr ""
+msgstr "Prema para configurar «%1»."
 
 #: package/contents/ui/main.qml:382
 #, kde-format
@@ -467,13 +454,13 @@ msgstr "Humidade: %1"
 #, kde-format
 msgctxt "@title:column weather warnings"
 msgid "Warnings Issued"
-msgstr "Alertas emitidas:"
+msgstr "Alertas emitidas"
 
 #: package/contents/ui/NoticesView.qml:38
 #, kde-format
 msgctxt "@title:column weather watches"
 msgid "Watches Issued"
-msgstr "Avisos emitidos:"
+msgstr "Avisos emitidos"
 
 #: package/contents/ui/SwitchPanel.qml:43
 #, kde-format

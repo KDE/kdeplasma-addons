@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-21 02:02+0000\n"
-"PO-Revision-Date: 2023-03-05 17:39+0200\n"
+"PO-Revision-Date: 2023-05-28 16:42+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:25:24+0000\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -32,7 +32,7 @@ msgstr "Yleistä"
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
-msgstr ""
+msgstr "Kopioi värikoodi keskinapsautuksella"
 
 #: package/contents/ui/CompactRepresentation.qml:74
 #, kde-format
@@ -121,13 +121,14 @@ msgstr "Ei värejä"
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr ""
+"Värinpoiminta ei ole käytettävissä, kun koostaminen on poistettu käytöstä"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
-msgstr ""
+msgstr "Käyttäjä tai käynnissä oleva ohjelma on poistanut koostamisen käytöstä"
 
 #: package/contents/ui/main.qml:161
 #, kde-format
@@ -139,7 +140,7 @@ msgstr "Valitse väri"
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "Koostamisasetukset"
 
 #: package/contents/ui/main.qml:354
 #, kde-format
