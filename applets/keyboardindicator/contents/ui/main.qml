@@ -24,42 +24,44 @@ PlasmoidItem {
         connectedSources: Plasmoid.configuration.key
     }
 
+    property list<string> lockedSources: {
+        const sources = []
+        for (const source of keystateSource.connectedSources) {
+            const data = keystateSource.data[source];
+            if (data?.Locked) {
+                sources.push(source);
+            }
+        }
+        return sources;
+    }
+
     function translate(identifier) {
         switch(identifier) {
             // Not using KUIT markup for these newline characters because those
             // get translated into HTML, and this text is displayed in the applet's
             // tooltip which does not render HTML at all for security reasons
-            case "Caps Lock": return i18n("Caps Lock activated\n")
-            case "Num Lock": return i18n("Num Lock activated\n")
+            case "Caps Lock": return i18n("Caps Lock activated")
+            case "Num Lock": return i18n("Num Lock activated")
         }
         return identifier;
     }
 
     function icon(identifier) {
         switch(identifier) {
-            case "Num Lock": return "input-num-on"
             case "Caps Lock": return "input-caps-on"
+            case "Num Lock": return "input-num-on"
         }
         return null
     }
 
-    readonly property bool lockedCount: {
-        var ret = 0;
-        for (var v in keystateSource.connectedSources) {
-            var data = keystateSource.data[keystateSource.connectedSources[v]];
-            ret += data && data.Locked
-        }
-        return ret
-    }
-
     Plasmoid.icon: {
-        for (var v in keystateSource.connectedSources) {
-            var source = keystateSource.connectedSources[v]
-            var data = keystateSource.data[source];
-            if (data && data.Locked)
-                return icon(source)
+        if (lockedSources.length > 1) {
+            return "input-combo-on"
+        } else if (lockedSources.length === 1) {
+            return icon(lockedSources[0]);
+        } else {
+            return "input-caps-on"
         }
-        return "input-caps-on"
     }
 
     compactRepresentation: MouseArea {
@@ -80,7 +82,7 @@ PlasmoidItem {
             anchors.fill: parent
             source: Plasmoid.icon
             active: compactMouse.containsMouse
-            enabled: root.lockedCount > 0
+            enabled: root.lockedSources.length > 0
         }
     }
 
@@ -96,18 +98,12 @@ PlasmoidItem {
         }
     }
 
-    Plasmoid.status: root.lockedCount > 0 ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
+    Plasmoid.status: lockedSources.length > 0 ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
     toolTipSubText: {
-        var ret = "";
-        var found = false;
-        for (var v in keystateSource.connectedSources) {
-            var source = keystateSource.connectedSources[v]
-            var data = keystateSource.data[source];
-            if (data && data.Locked) {
-                found = true
-                ret += translate(source)
-            }
+        if (lockedSources.length > 0) {
+            return lockedSources.map(translate).join("\n");
+        } else {
+            return i18n("No lock keys activated");
         }
-        return found ? ret.trim() : i18n("No lock keys activated")
     }
 }
