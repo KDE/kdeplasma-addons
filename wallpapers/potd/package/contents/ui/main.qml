@@ -59,7 +59,10 @@ QQC2.StackView {
         id: backend
         identifier: wallpaper.configuration.Provider
         arguments: {
-            if (identifier === "bing") {
+            if (identifier === "unsplash") {
+                // Needs to specify category for unsplash provider
+                return [wallpaper.configuration.Category];
+            } else if (identifier === "bing") {
                 // Bing supports 1366/1920/UHD resolutions
                 const w = root.sourceSize.width > 1920 ? 3840 : 1920;
                 const h = root.sourceSize.height > 1080 ? 2160 : 1080;
