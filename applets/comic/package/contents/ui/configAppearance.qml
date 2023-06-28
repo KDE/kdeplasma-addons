@@ -19,22 +19,22 @@ Kirigami.FormLayout {
     signal configurationChanged
 
     function saveConfig() {
-        plasmoid.nativeInterface.arrowsOnHover = showArrowsOnOver.checked;
-        plasmoid.nativeInterface.showComicTitle = showComicTitle.checked;
-        plasmoid.nativeInterface.showComicIdentifier = showIdentifier.checked;
-        plasmoid.nativeInterface.showComicAuthor = showAuthor.checked;
-        plasmoid.nativeInterface.showComicUrl = showUrl.checked;
+        Plasmoid.arrowsOnHover = showArrowsOnOver.checked;
+        Plasmoid.showComicTitle = showComicTitle.checked;
+        Plasmoid.showComicIdentifier = showIdentifier.checked;
+        Plasmoid.showComicAuthor = showAuthor.checked;
+        Plasmoid.showComicUrl = showUrl.checked;
 
-        plasmoid.nativeInterface.saveConfig();
-        plasmoid.nativeInterface.configChanged();
+        Plasmoid.saveConfig();
+        Plasmoid.configChanged();
     }
 
     Component.onCompleted: {
-        showArrowsOnOver.checked = plasmoid.nativeInterface.arrowsOnHover;
-        showComicTitle.checked = plasmoid.nativeInterface.showComicTitle;
-        showIdentifier.checked = plasmoid.nativeInterface.showComicIdentifier;
-        showAuthor.checked = plasmoid.nativeInterface.showComicAuthor;
-        showUrl.checked = plasmoid.nativeInterface.showComicUrl;
+        showArrowsOnOver.checked = Plasmoid.arrowsOnHover;
+        showComicTitle.checked = Plasmoid.showComicTitle;
+        showIdentifier.checked = Plasmoid.showComicIdentifier;
+        showAuthor.checked = Plasmoid.showComicAuthor;
+        showUrl.checked = Plasmoid.showComicUrl;
     }
 
     Controls.CheckBox {

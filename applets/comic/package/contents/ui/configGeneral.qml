@@ -25,21 +25,21 @@ Kirigami.FormLayout {
                 newTabs.push(providerColumn.children[i].plugin)
             }
         }
-        plasmoid.nativeInterface.tabIdentifiers = newTabs;
+        Plasmoid.tabIdentifiers = newTabs;
 
-        plasmoid.nativeInterface.middleClick = middleClickCheckBox.checked;
+        Plasmoid.middleClick = middleClickCheckBox.checked;
 
-        plasmoid.nativeInterface.checkNewComicStripsInterval = checkNewComicStripsInterval.value;
-        plasmoid.nativeInterface.providerUpdateInterval = providerUpdateInterval.value;
+        Plasmoid.checkNewComicStripsInterval = checkNewComicStripsInterval.value;
+        Plasmoid.providerUpdateInterval = providerUpdateInterval.value;
 
-        plasmoid.nativeInterface.saveConfig();
-        plasmoid.nativeInterface.configChanged();
+        Plasmoid.saveConfig();
+        Plasmoid.configChanged();
     }
 
     Component.onCompleted: {
-        middleClickCheckBox.checked = plasmoid.nativeInterface.middleClick;
-        checkNewComicStripsInterval.value = plasmoid.nativeInterface.checkNewComicStripsInterval;
-        providerUpdateInterval.value = plasmoid.nativeInterface.providerUpdateInterval
+        middleClickCheckBox.checked = Plasmoid.middleClick;
+        checkNewComicStripsInterval.value = Plasmoid.checkNewComicStripsInterval;
+        providerUpdateInterval.value = Plasmoid.providerUpdateInterval
     }
 
     Item {
@@ -52,14 +52,14 @@ Kirigami.FormLayout {
         Kirigami.FormData.buddyFor: children[1] // 0 is the Repeater
 
         Repeater {
-            model: plasmoid.nativeInterface.availableComicsModel
+            model: Plasmoid.availableComicsModel
             delegate: Controls.CheckBox {
                 id: checkbox
                 text: model.display
                 checked: model.checked
                 property string plugin: model.plugin
                 Component.onCompleted: {
-                    checkbox.checked = plasmoid.nativeInterface.tabIdentifiers.indexOf(model.plugin) !== -1
+                    checkbox.checked = Plasmoid.tabIdentifiers.indexOf(model.plugin) !== -1
                 }
                 onCheckedChanged: root.configurationChanged();
             }
@@ -72,7 +72,7 @@ Kirigami.FormLayout {
         configFile: "comic.knsrc"
         onEntryEvent: function(entry, event) {
             if (event == 1) {
-                plasmoid.nativeInterface.loadProviders()
+                Plasmoid.loadProviders()
             }
         }
     }

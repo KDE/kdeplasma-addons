@@ -19,16 +19,16 @@ Kirigami.FormLayout {
     signal configurationChanged
 
     function saveConfig() {
-        plasmoid.nativeInterface.showErrorPicture = showErrorPicture.checked;
-        plasmoid.nativeInterface.maxComicLimit = maxComicLimit.value;
+        Plasmoid.showErrorPicture = showErrorPicture.checked;
+        Plasmoid.maxComicLimit = maxComicLimit.value;
 
-        plasmoid.nativeInterface.saveConfig();
-        plasmoid.nativeInterface.configChanged();
+        Plasmoid.saveConfig();
+        Plasmoid.configChanged();
     }
 
     Component.onCompleted: {
-        showErrorPicture.checked = plasmoid.nativeInterface.showErrorPicture;
-        maxComicLimit.value = plasmoid.nativeInterface.maxComicLimit;
+        showErrorPicture.checked = Plasmoid.showErrorPicture;
+        maxComicLimit.value = Plasmoid.maxComicLimit;
     }
 
     Layouts.RowLayout {

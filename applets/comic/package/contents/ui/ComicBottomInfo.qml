@@ -53,7 +53,7 @@ Item {
             }
 
             onClicked: {
-                plasmoid.nativeInterface.goJump();
+                Plasmoid.goJump();
             }
 
             PlasmaCore.ToolTipArea {
@@ -93,7 +93,7 @@ Item {
             }
 
             onClicked: {
-                plasmoid.nativeInterface.shop();
+                Plasmoid.shop();
             }
 
             PlasmaCore.ToolTipArea {

@@ -23,7 +23,7 @@ PlasmaCore.Dialog {
     {
         root.visible = !root.visible;
         if (root.visible) {
-            plasmoid.nativeInterface.positionFullView(root);
+            Plasmoid.positionFullView(root);
             root.activateWindow;
         }
     }

@@ -27,10 +27,10 @@ Item {
         }
 
         icon.name: "go-previous"
-        visible: (!plasmoid.nativeInterface.arrowsOnHover && (comicData.prev !== undefined))
+        visible: (!Plasmoid.arrowsOnHover && (comicData.prev !== undefined))
 
         onClicked: {
-            plasmoid.nativeInterface.updateComic(comicData.prev);
+            Plasmoid.updateComic(comicData.prev);
         }
     }
 
@@ -51,7 +51,7 @@ Item {
         acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
         onClicked: {
-            if (mouse.button == Qt.MiddleButton && plasmoid.nativeInterface.middleClick) {
+            if (mouse.button == Qt.MiddleButton && Plasmoid.middleClick) {
                 fullDialog.toggleVisibility();
             }
         }
@@ -59,7 +59,7 @@ Item {
         PlasmaCore.ToolTipArea {
             id: tooltip
             anchors.fill: comicImageArea
-            subText: plasmoid.nativeInterface.comicData.additionalText
+            subText: Plasmoid.comicData.additionalText
             active: subText
         }
 
@@ -68,10 +68,10 @@ Item {
 
             anchors.fill: parent
 
-            image: plasmoid.nativeInterface.comicData.image
-            actualSize: plasmoid.nativeInterface.showActualSize
-            isLeftToRight: plasmoid.nativeInterface.comicData.isLeftToRight
-            isTopToBottom: plasmoid.nativeInterface.comicData.isTopToBottom
+            image: Plasmoid.comicData.image
+            actualSize: Plasmoid.showActualSize
+            isLeftToRight: Plasmoid.comicData.isLeftToRight
+            isTopToBottom: Plasmoid.comicData.isTopToBottom
         }
 
         ButtonBar {
@@ -83,15 +83,15 @@ Item {
                 bottomMargin: 10
             }
 
-            visible: plasmoid.nativeInterface.arrowsOnHover && comicImageArea.containsMouse
+            visible: Plasmoid.arrowsOnHover && comicImageArea.containsMouse
             opacity: 0
 
             onPrevClicked: {
-                plasmoid.nativeInterface.updateComic(comicData.prev);
+                Plasmoid.updateComic(comicData.prev);
             }
 
             onNextClicked: {
-                plasmoid.nativeInterface.updateComic(comicData.next);
+                Plasmoid.updateComic(comicData.next);
             }
 
             onZoomClicked: {
@@ -99,7 +99,7 @@ Item {
             }
 
             states: State {
-                name: "show"; when: (plasmoid.nativeInterface.arrowsOnHover && comicImageArea.containsMouse)
+                name: "show"; when: (Plasmoid.arrowsOnHover && comicImageArea.containsMouse)
                 PropertyChanges { target: buttonBar; opacity: 1; }
             }
 
@@ -119,16 +119,16 @@ Item {
         }
 
         icon.name: "go-next"
-        visible: (!plasmoid.nativeInterface.arrowsOnHover && (comicData.next !== undefined))
+        visible: (!Plasmoid.arrowsOnHover && (comicData.next !== undefined))
 
         onClicked: {
-            plasmoid.nativeInterface.updateComic(comicData.next);
+            Plasmoid.updateComic(comicData.next);
         }
     }
 
     FullViewWidget {
         id: fullDialog
 
-        image: plasmoid.nativeInterface.comicData.image
+        image: Plasmoid.comicData.image
     }
 }
