@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-06-28 02:09+0000\n"
 "PO-Revision-Date: 2022-11-18 00:14+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
@@ -44,17 +44,19 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Skaitmeninė klaviatūra"
 
-#: contents/ui/main.qml:32
-#, kde-format
-msgid "Caps Lock activated\n"
+#: contents/ui/main.qml:43
+#, fuzzy, kde-format
+#| msgid "Caps Lock activated\n"
+msgid "Caps Lock activated"
 msgstr "Įjungtos didžiosios raidės\n"
 
-#: contents/ui/main.qml:33
-#, kde-format
-msgid "Num Lock activated\n"
+#: contents/ui/main.qml:44
+#, fuzzy, kde-format
+#| msgid "Num Lock activated\n"
+msgid "Num Lock activated"
 msgstr "Įjungta skaitmeninė klaviatūra\n"
 
-#: contents/ui/main.qml:111
+#: contents/ui/main.qml:106
 #, kde-format
 msgid "No lock keys activated"
 msgstr "Neįjungti jokie užrakto klavišai"

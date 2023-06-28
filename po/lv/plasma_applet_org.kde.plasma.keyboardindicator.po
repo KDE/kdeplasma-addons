@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-06-28 02:09+0000\n"
 "PO-Revision-Date: 2019-01-04 11:27+0200\n"
 "Last-Translator: Maris Nartiss <maris.kde@gmail.com>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -43,18 +43,19 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Ciparslēgs"
 
-#: contents/ui/main.qml:32
+#: contents/ui/main.qml:43
 #, fuzzy, kde-format
 #| msgid "Caps Lock"
-msgid "Caps Lock activated\n"
+msgid "Caps Lock activated"
 msgstr "Burtslēga taustiņš"
 
-#: contents/ui/main.qml:33
-#, kde-format
-msgid "Num Lock activated\n"
-msgstr ""
+#: contents/ui/main.qml:44
+#, fuzzy, kde-format
+#| msgid "Caps Lock"
+msgid "Num Lock activated"
+msgstr "Burtslēga taustiņš"
 
-#: contents/ui/main.qml:111
+#: contents/ui/main.qml:106
 #, kde-format
 msgid "No lock keys activated"
 msgstr ""

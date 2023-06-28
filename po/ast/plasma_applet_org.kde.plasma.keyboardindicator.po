@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-06-28 02:09+0000\n"
 "PO-Revision-Date: 2022-12-11 23:33+0100\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -42,17 +42,19 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Bloq Num"
 
-#: contents/ui/main.qml:32
-#, kde-format
-msgid "Caps Lock activated\n"
+#: contents/ui/main.qml:43
+#, fuzzy, kde-format
+#| msgid "Caps Lock activated\n"
+msgid "Caps Lock activated"
 msgstr "El bloquéu de mayúscules ta activáu\n"
 
-#: contents/ui/main.qml:33
-#, kde-format
-msgid "Num Lock activated\n"
+#: contents/ui/main.qml:44
+#, fuzzy, kde-format
+#| msgid "Num Lock activated\n"
+msgid "Num Lock activated"
 msgstr "El bloquéu númbéricu ta activáu\n"
 
-#: contents/ui/main.qml:111
+#: contents/ui/main.qml:106
 #, kde-format
 msgid "No lock keys activated"
 msgstr "Nun s'activó nenguna tecla de bloquéu"
