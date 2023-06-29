@@ -125,7 +125,7 @@ ColumnLayout {
             actions: [
                 Kirigami.Action {
                     text: i18n("Apply")
-                    iconName: "dialog-ok-apply"
+                    icon.name: "dialog-ok-apply"
                     visible: editor.editable
                     onTriggered: {
                         editor.editable = false
@@ -133,7 +133,7 @@ ColumnLayout {
                 },
                 Kirigami.Action {
                     text: i18n("Cancel")
-                    iconName: "dialog-cancel"
+                    icon.name: "dialog-cancel"
                     visible: editor.editable
                     onTriggered: {
                         editor.editable = false
@@ -142,7 +142,7 @@ ColumnLayout {
                 },
                 Kirigami.Action {
                     text: i18n("Edit")
-                    iconName: "edit-entry"
+                    icon.name: "edit-entry"
                     visible: editor.editable === false
                     onTriggered: {
                         editor.oldValue = editor.value
@@ -151,7 +151,7 @@ ColumnLayout {
                 },
                 Kirigami.Action {
                     text: i18n("Delete")
-                    iconName: "entry-delete"
+                    icon.name: "entry-delete"
                     visible: editor.editable === false
                     onTriggered: {
                         timeListModel.removeTimer(index)
