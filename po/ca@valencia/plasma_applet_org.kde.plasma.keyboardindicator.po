@@ -1,16 +1,16 @@
 # Translation of plasma_applet_org.kde.plasma.keyboardindicator.po to Catalan (Valencian)
-# Copyright (C) 2018-2022 This_file_is_part_of_KDE
+# Copyright (C) 2018-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2018, 2021, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2018, 2021, 2022, 2023.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-28 02:09+0000\n"
-"PO-Revision-Date: 2022-05-07 12:08+0200\n"
+"PO-Revision-Date: 2023-06-28 09:31+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -47,16 +47,14 @@ msgid "Num Lock"
 msgstr "Bloq Núm"
 
 #: contents/ui/main.qml:43
-#, fuzzy, kde-format
-#| msgid "Caps Lock activated\n"
+#, kde-format
 msgid "Caps Lock activated"
-msgstr "Bloq Maj activada\n"
+msgstr "Bloq Maj activada"
 
 #: contents/ui/main.qml:44
-#, fuzzy, kde-format
-#| msgid "Num Lock activated\n"
+#, kde-format
 msgid "Num Lock activated"
-msgstr "Bloq Núm activat\n"
+msgstr "Bloq Núm activat"
 
 #: contents/ui/main.qml:106
 #, kde-format

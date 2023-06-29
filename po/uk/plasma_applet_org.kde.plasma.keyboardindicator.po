@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2018, 2021, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2018, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-28 02:09+0000\n"
-"PO-Revision-Date: 2022-05-07 08:47+0300\n"
+"PO-Revision-Date: 2023-06-28 21:30+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -46,16 +46,14 @@ msgid "Num Lock"
 msgstr "Num Lock"
 
 #: contents/ui/main.qml:43
-#, fuzzy, kde-format
-#| msgid "Caps Lock activated\n"
+#, kde-format
 msgid "Caps Lock activated"
-msgstr "Увімкнено Caps Lock\n"
+msgstr "Увімкнено Caps Lock"
 
 #: contents/ui/main.qml:44
-#, fuzzy, kde-format
-#| msgid "Num Lock activated\n"
+#, kde-format
 msgid "Num Lock activated"
-msgstr "Увімкнено Num Lock\n"
+msgstr "Увімкнено Num Lock"
 
 #: contents/ui/main.qml:106
 #, kde-format
