@@ -17,6 +17,8 @@ ColumnLayout {
     property var cfg_predefinedTimers: []
     readonly property int maxListSize: 15
 
+    signal configurationChanged()
+
     Component.onCompleted: {
         for (var i of plasmoid.configuration.predefinedTimers) {
             timeListModel.append({"time": i})
@@ -28,23 +30,23 @@ ColumnLayout {
         function addTimer(value) {
             timeListModel.append({"time": value})
             cfg_predefinedTimers.splice(count, 0, value)
-            cfg_predefinedTimersChanged()
+            timesPage.configurationChanged()
         }
         function removeTimer(index) {
             remove(index)
             cfg_predefinedTimers.splice(index, 1)
-            cfg_predefinedTimersChanged()
+            timesPage.configurationChanged()
         }
         function moveTimer(oldIndex, newIndex) {
             move(oldIndex, newIndex, 1)
             cfg_predefinedTimers[oldIndex] = get(oldIndex).time
             cfg_predefinedTimers[newIndex] = get(newIndex).time
-            cfg_predefinedTimersChanged()
+            timesPage.configurationChanged()
         }
         function setTimer(index, newValue) {
             setProperty(index, "time", newValue)
             cfg_predefinedTimers[index] = newValue
-            cfg_predefinedTimersChanged()
+            timesPage.configurationChanged()
         }
     }
 
