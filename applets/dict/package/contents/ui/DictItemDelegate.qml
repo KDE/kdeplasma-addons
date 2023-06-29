@@ -30,7 +30,7 @@ Item {
             Kirigami.ListItemDragHandle {
                 listItem: dictItem
                 listView: delegate.view
-                onMoveRequested: {
+                onMoveRequested: (oldIndex, newIndex) => {
                     delegate.moveRequested(oldIndex, newIndex);
                 }
             }

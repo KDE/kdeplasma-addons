@@ -52,10 +52,10 @@ ColumnLayout {
                     width: listView.width
                     view: listView
 
-                    onMoveRequested: {
+                    onMoveRequested: (oldIndex, newIndex) => {
                         dictionariesModel.move(oldIndex, newIndex);
                     }
-                    onRemoved: {
+                    onRemoved: index => {
                         dictionariesModel.setDisabled(index);
                     }
                 }

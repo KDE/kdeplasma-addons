@@ -98,7 +98,7 @@ ColumnLayout {
                     enabled: !editor.editable
                     listItem: timeEditItem
                     listView: timeListView
-                    onMoveRequested: {
+                    onMoveRequested: (oldIndex, newIndex) => {
                         timeListModel.moveTimer(oldIndex, newIndex)
                     }
                 }
@@ -107,7 +107,9 @@ ColumnLayout {
                     alertMode: editable
                     value: time
                     property int oldValue: 0
-                    onDigitModified: set(value + valueDelta)
+                    onDigitModified: valueDelta => {
+                        set(value + valueDelta)
+                    }
                     function set(newValue) {
                         timeListModel.setTimer(index, (newValue).toString())
                     }
