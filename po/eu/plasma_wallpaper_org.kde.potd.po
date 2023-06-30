@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-30 02:44+0000\n"
+"POT-Creation-Date: 2023-06-30 02:40+0000\n"
 "PO-Revision-Date: 2023-01-15 00:36+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -20,13 +20,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.12.1\n"
 
-#: package/contents/ui/config.qml:48
+#: package/contents/ui/config.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Hornitzailea:"
 
-#: package/contents/ui/config.qml:67
+#: package/contents/ui/config.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -37,253 +37,85 @@ msgstr ""
 "litezkeen irudiak iragazten. Arretaz erabili, irudi hauek jendaurrean "
 "erakutsiko badira."
 
-#: package/contents/ui/config.qml:76
+#: package/contents/ui/config.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Eguneratu tarifatutako sare-konexioa erabiltzean"
 
-#: package/contents/ui/config.qml:86
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Category:"
-msgstr "Kategoria:"
-
-#: package/contents/ui/config.qml:90
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "All"
-msgstr "Guztiak"
-
-#: package/contents/ui/config.qml:94
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "1080p"
-msgstr "1080p"
-
-#: package/contents/ui/config.qml:98
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "4K"
-msgstr "4K"
-
-#: package/contents/ui/config.qml:102
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Ultra Wide"
-msgstr "Ultra Zabala"
-
-#: package/contents/ui/config.qml:106
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Background"
-msgstr "Atzeko planoa"
-
-#: package/contents/ui/config.qml:110
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Lock Screen"
-msgstr "Giltzatu pantaila"
-
-#: package/contents/ui/config.qml:114
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Nature"
-msgstr "Natura"
-
-#: package/contents/ui/config.qml:118
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tumblr"
-msgstr "Tumblr"
-
-#: package/contents/ui/config.qml:122
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Black"
-msgstr "Beltza"
-
-#: package/contents/ui/config.qml:126
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Flower"
-msgstr "Lorea"
-
-#: package/contents/ui/config.qml:130
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Funny"
-msgstr "Dibertigarria"
-
-#: package/contents/ui/config.qml:134
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Cute"
-msgstr "Polita"
-
-#: package/contents/ui/config.qml:138
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Cool"
-msgstr "Aparta"
-
-#: package/contents/ui/config.qml:142
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Fall"
-msgstr "Udazkena"
-
-#: package/contents/ui/config.qml:146
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Love"
-msgstr "Maitasuna"
-
-#: package/contents/ui/config.qml:150
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Design"
-msgstr "Diseinua"
-
-#: package/contents/ui/config.qml:154
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Christmas"
-msgstr "Gabonak"
-
-#: package/contents/ui/config.qml:158
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Travel"
-msgstr "Bidaia"
-
-#: package/contents/ui/config.qml:162
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Beach"
-msgstr "hondartza"
-
-#: package/contents/ui/config.qml:166
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Car"
-msgstr "Autoa"
-
-#: package/contents/ui/config.qml:170
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Sports"
-msgstr "Kirolak"
-
-#: package/contents/ui/config.qml:174
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Animal"
-msgstr "Animalia"
-
-#: package/contents/ui/config.qml:178
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "People"
-msgstr "Jendartea"
-
-#: package/contents/ui/config.qml:182
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Music"
-msgstr "Musika"
-
-#: package/contents/ui/config.qml:186
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Summer"
-msgstr "Uda"
-
-#: package/contents/ui/config.qml:190
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Galaxy"
-msgstr "Galaxia"
-
-#: package/contents/ui/config.qml:194
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tabliss"
-msgstr "Tabliss"
-
-#: package/contents/ui/config.qml:224
+#: package/contents/ui/config.qml:81
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Kokatzea:"
 
-#: package/contents/ui/config.qml:227
+#: package/contents/ui/config.qml:84
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Eskalatuta eta moztuta"
 
-#: package/contents/ui/config.qml:231
+#: package/contents/ui/config.qml:88
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Eskalatuta"
 
-#: package/contents/ui/config.qml:235
+#: package/contents/ui/config.qml:92
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Eskalatuta, mantendu proportzioak"
 
-#: package/contents/ui/config.qml:239
+#: package/contents/ui/config.qml:96
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Erdiratuta"
 
-#: package/contents/ui/config.qml:243
+#: package/contents/ui/config.qml:100
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Teilakatuta"
 
-#: package/contents/ui/config.qml:264
+#: package/contents/ui/config.qml:121
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Atzealdeko kolorea:"
 
-#: package/contents/ui/config.qml:265
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Hautatu atzealdeko kolorea"
 
-#: package/contents/ui/config.qml:276
+#: package/contents/ui/config.qml:133
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Gaurko irudia:"
 
-#: package/contents/ui/config.qml:292
+#: package/contents/ui/config.qml:149
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Titulua:"
 
-#: package/contents/ui/config.qml:307
+#: package/contents/ui/config.qml:164
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Egilea:"
 
-#: package/contents/ui/config.qml:326
+#: package/contents/ui/config.qml:183
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Ireki hau barnean duen karpeta"
 
-#: package/contents/ui/config.qml:330
+#: package/contents/ui/config.qml:187
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
@@ -373,3 +205,115 @@ msgstr "Irudia ez da gorde."
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
 msgstr "Irudia <a href=\"%1\">%2</a> gisa gorde da"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Category:"
+#~ msgstr "Kategoria:"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "All"
+#~ msgstr "Guztiak"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "1080p"
+#~ msgstr "1080p"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "4K"
+#~ msgstr "4K"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Ultra Wide"
+#~ msgstr "Ultra Zabala"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Background"
+#~ msgstr "Atzeko planoa"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Lock Screen"
+#~ msgstr "Giltzatu pantaila"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Nature"
+#~ msgstr "Natura"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Tumblr"
+#~ msgstr "Tumblr"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Black"
+#~ msgstr "Beltza"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Flower"
+#~ msgstr "Lorea"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Funny"
+#~ msgstr "Dibertigarria"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Cute"
+#~ msgstr "Polita"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Cool"
+#~ msgstr "Aparta"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Fall"
+#~ msgstr "Udazkena"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Love"
+#~ msgstr "Maitasuna"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Design"
+#~ msgstr "Diseinua"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Christmas"
+#~ msgstr "Gabonak"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Travel"
+#~ msgstr "Bidaia"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Beach"
+#~ msgstr "hondartza"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Car"
+#~ msgstr "Autoa"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Sports"
+#~ msgstr "Kirolak"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Animal"
+#~ msgstr "Animalia"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "People"
+#~ msgstr "Jendartea"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Music"
+#~ msgstr "Musika"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Summer"
+#~ msgstr "Uda"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Galaxy"
+#~ msgstr "Galaxia"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Tabliss"
+#~ msgstr "Tabliss"

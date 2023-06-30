@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-03-30 02:44+0000\n"
+"POT-Creation-Date: 2023-06-30 02:40+0000\n"
 "PO-Revision-Date: 2023-01-19 23:25+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 22.12.0\n"
 
-#: package/contents/ui/config.qml:48
+#: package/contents/ui/config.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "提供者："
 
-#: package/contents/ui/config.qml:67
+#: package/contents/ui/config.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -34,253 +34,85 @@ msgstr ""
 "本桌布提供者並不會過濾可能令人反感或冒犯人的影像。如果影像會在公共區域展示的"
 "話請小心。"
 
-#: package/contents/ui/config.qml:76
+#: package/contents/ui/config.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "使用計量網路連線時仍然更新"
 
-#: package/contents/ui/config.qml:86
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Category:"
-msgstr "分類："
-
-#: package/contents/ui/config.qml:90
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "All"
-msgstr "全部"
-
-#: package/contents/ui/config.qml:94
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "1080p"
-msgstr "1080p"
-
-#: package/contents/ui/config.qml:98
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "4K"
-msgstr "4K"
-
-#: package/contents/ui/config.qml:102
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Ultra Wide"
-msgstr "超廣角"
-
-#: package/contents/ui/config.qml:106
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Background"
-msgstr "背景"
-
-#: package/contents/ui/config.qml:110
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Lock Screen"
-msgstr "鎖定螢幕"
-
-#: package/contents/ui/config.qml:114
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Nature"
-msgstr "大自然"
-
-#: package/contents/ui/config.qml:118
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tumblr"
-msgstr "Tumblr"
-
-#: package/contents/ui/config.qml:122
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Black"
-msgstr "黑色"
-
-#: package/contents/ui/config.qml:126
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Flower"
-msgstr "花朵"
-
-#: package/contents/ui/config.qml:130
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Funny"
-msgstr "有趣"
-
-#: package/contents/ui/config.qml:134
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Cute"
-msgstr "可愛"
-
-#: package/contents/ui/config.qml:138
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Cool"
-msgstr "酷"
-
-#: package/contents/ui/config.qml:142
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Fall"
-msgstr "秋天"
-
-#: package/contents/ui/config.qml:146
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Love"
-msgstr "戀愛"
-
-#: package/contents/ui/config.qml:150
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Design"
-msgstr "設計感"
-
-#: package/contents/ui/config.qml:154
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Christmas"
-msgstr "聖誕"
-
-#: package/contents/ui/config.qml:158
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Travel"
-msgstr "旅行"
-
-#: package/contents/ui/config.qml:162
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Beach"
-msgstr "海灘"
-
-#: package/contents/ui/config.qml:166
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Car"
-msgstr "車輛"
-
-#: package/contents/ui/config.qml:170
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Sports"
-msgstr "運動"
-
-#: package/contents/ui/config.qml:174
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Animal"
-msgstr "動物"
-
-#: package/contents/ui/config.qml:178
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "People"
-msgstr "人們"
-
-#: package/contents/ui/config.qml:182
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Music"
-msgstr "音樂"
-
-#: package/contents/ui/config.qml:186
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Summer"
-msgstr "夏日"
-
-#: package/contents/ui/config.qml:190
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Galaxy"
-msgstr "銀河"
-
-#: package/contents/ui/config.qml:194
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tabliss"
-msgstr "Tabliss"
-
-#: package/contents/ui/config.qml:224
+#: package/contents/ui/config.qml:81
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "位置："
 
-#: package/contents/ui/config.qml:227
+#: package/contents/ui/config.qml:84
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "已縮放與裁剪過"
 
-#: package/contents/ui/config.qml:231
+#: package/contents/ui/config.qml:88
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "已縮放過"
 
-#: package/contents/ui/config.qml:235
+#: package/contents/ui/config.qml:92
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "已縮放過，但保持比例"
 
-#: package/contents/ui/config.qml:239
+#: package/contents/ui/config.qml:96
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "置中"
 
-#: package/contents/ui/config.qml:243
+#: package/contents/ui/config.qml:100
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "並排"
 
-#: package/contents/ui/config.qml:264
+#: package/contents/ui/config.qml:121
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "背景顏色："
 
-#: package/contents/ui/config.qml:265
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "選擇背景顏色"
 
-#: package/contents/ui/config.qml:276
+#: package/contents/ui/config.qml:133
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "今日圖片："
 
-#: package/contents/ui/config.qml:292
+#: package/contents/ui/config.qml:149
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "標題："
 
-#: package/contents/ui/config.qml:307
+#: package/contents/ui/config.qml:164
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "作者："
 
-#: package/contents/ui/config.qml:326
+#: package/contents/ui/config.qml:183
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "開啟所在資料夾"
 
-#: package/contents/ui/config.qml:330
+#: package/contents/ui/config.qml:187
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
@@ -370,3 +202,115 @@ msgstr "影像未被儲存。"
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
 msgstr "影像已儲存為 <a href=\"%1\">%2</a>"
+
+#~ msgctxt "@label:listbox"
+#~ msgid "Category:"
+#~ msgstr "分類："
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "All"
+#~ msgstr "全部"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "1080p"
+#~ msgstr "1080p"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "4K"
+#~ msgstr "4K"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Ultra Wide"
+#~ msgstr "超廣角"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Background"
+#~ msgstr "背景"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Lock Screen"
+#~ msgstr "鎖定螢幕"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Nature"
+#~ msgstr "大自然"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Tumblr"
+#~ msgstr "Tumblr"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Black"
+#~ msgstr "黑色"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Flower"
+#~ msgstr "花朵"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Funny"
+#~ msgstr "有趣"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Cute"
+#~ msgstr "可愛"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Cool"
+#~ msgstr "酷"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Fall"
+#~ msgstr "秋天"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Love"
+#~ msgstr "戀愛"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Design"
+#~ msgstr "設計感"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Christmas"
+#~ msgstr "聖誕"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Travel"
+#~ msgstr "旅行"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Beach"
+#~ msgstr "海灘"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Car"
+#~ msgstr "車輛"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Sports"
+#~ msgstr "運動"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Animal"
+#~ msgstr "動物"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "People"
+#~ msgstr "人們"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Music"
+#~ msgstr "音樂"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Summer"
+#~ msgstr "夏日"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Galaxy"
+#~ msgstr "銀河"
+
+#~ msgctxt "@item:inlistbox"
+#~ msgid "Tabliss"
+#~ msgstr "Tabliss"
