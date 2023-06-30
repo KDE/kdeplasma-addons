@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-06-30 02:09+0000\n"
 "PO-Revision-Date: 2022-12-31 16:35+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -116,39 +116,39 @@ msgctxt "@option:check"
 msgid "Show notification text:"
 msgstr "Show notification text:"
 
-#: package/contents/ui/configTimes.qml:75
+#: package/contents/ui/configTimes.qml:77
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 
-#: package/contents/ui/configTimes.qml:82
+#: package/contents/ui/configTimes.qml:84
 #, kde-format
 msgid "Add"
 msgstr "Add"
 
-#: package/contents/ui/configTimes.qml:119
+#: package/contents/ui/configTimes.qml:123
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Scroll over digits to change time"
 
-#: package/contents/ui/configTimes.qml:125
+#: package/contents/ui/configTimes.qml:129
 #, kde-format
 msgid "Apply"
 msgstr "Apply"
 
-#: package/contents/ui/configTimes.qml:133
+#: package/contents/ui/configTimes.qml:137
 #, kde-format
 msgid "Cancel"
 msgstr "Cancel"
 
-#: package/contents/ui/configTimes.qml:142
+#: package/contents/ui/configTimes.qml:146
 #, kde-format
 msgid "Edit"
 msgstr "Edit"
 
-#: package/contents/ui/configTimes.qml:151
+#: package/contents/ui/configTimes.qml:155
 #, kde-format
 msgid "Delete"
 msgstr "Delete"

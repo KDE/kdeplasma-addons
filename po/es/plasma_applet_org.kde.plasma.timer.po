@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-06-30 02:09+0000\n"
 "PO-Revision-Date: 2022-12-01 16:28+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -123,7 +123,7 @@ msgctxt "@option:check"
 msgid "Show notification text:"
 msgstr "Mostrar texto de notificación:"
 
-#: package/contents/ui/configTimes.qml:75
+#: package/contents/ui/configTimes.qml:77
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
@@ -131,32 +131,32 @@ msgstr ""
 "Si añade aquí temporizadores predefinidos, aparecerán en el menú de contexto "
 "del plasmoide."
 
-#: package/contents/ui/configTimes.qml:82
+#: package/contents/ui/configTimes.qml:84
 #, kde-format
 msgid "Add"
 msgstr "Añadir"
 
-#: package/contents/ui/configTimes.qml:119
+#: package/contents/ui/configTimes.qml:123
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Deslice los dígitos para cambiar la hora"
 
-#: package/contents/ui/configTimes.qml:125
+#: package/contents/ui/configTimes.qml:129
 #, kde-format
 msgid "Apply"
 msgstr "Aplicar"
 
-#: package/contents/ui/configTimes.qml:133
+#: package/contents/ui/configTimes.qml:137
 #, kde-format
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: package/contents/ui/configTimes.qml:142
+#: package/contents/ui/configTimes.qml:146
 #, kde-format
 msgid "Edit"
 msgstr "Editar"
 
-#: package/contents/ui/configTimes.qml:151
+#: package/contents/ui/configTimes.qml:155
 #, kde-format
 msgid "Delete"
 msgstr "Borrar"

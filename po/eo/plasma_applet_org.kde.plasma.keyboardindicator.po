@@ -44,14 +44,14 @@ msgid "Num Lock"
 msgstr "Numŝlosilo"
 
 #: contents/ui/main.qml:43
-#, kde-format
+#, fuzzy, kde-format
 msgid "Caps Lock activated"
-msgstr "Majuskloŝlosa klavo aktivigita\n"
+msgstr "Majuskloŝlosa klavo aktivigita"
 
 #: contents/ui/main.qml:44
-#, kde-format
+#, fuzzy, kde-format
 msgid "Num Lock activated"
-msgstr "Numŝlosa klavo aktivigita\n"
+msgstr "Numŝlosa klavo aktivigita"
 
 #: contents/ui/main.qml:106
 #, kde-format
