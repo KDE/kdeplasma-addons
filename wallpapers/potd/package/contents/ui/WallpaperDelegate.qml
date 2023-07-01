@@ -6,7 +6,7 @@
 */
 
 import QtQuick 2.15
-import QtGraphicalEffects 1.15  // For GaussianBlur
+import Qt5Compat.GraphicalEffects as GE
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 
@@ -173,14 +173,14 @@ FocusScope {
 
                 // CachedProvider will load the image from cache, but we would like to show the real loading status.
                 layer.enabled: delegate.thumbnailLoading
-                layer.effect: HueSaturation {
+                layer.effect: GE.HueSaturation {
                     cached: true
 
                     lightness: 0.5
                     saturation: 0.9
 
                     layer.enabled: true
-                    layer.effect: GaussianBlur {
+                    layer.effect: GE.GaussianBlur {
                         cached: true
 
                         radius: 128
