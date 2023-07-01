@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-30 02:40+0000\n"
+"POT-Creation-Date: 2023-07-01 02:37+0000\n"
 "PO-Revision-Date: 2023-06-18 19:24+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:48
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Furnizor:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -35,85 +35,253 @@ msgstr ""
 "provocatoare. Dați dovadă de prudență dacă veți afișa aceste imagini în "
 "public."
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:76
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Actualizează la folosirea unei conexiuni de rețea contorizate"
 
-#: package/contents/ui/config.qml:81
+#: package/contents/ui/config.qml:86
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Category:"
+msgstr "Categorie:"
+
+#: package/contents/ui/config.qml:90
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "All"
+msgstr "Toate"
+
+#: package/contents/ui/config.qml:94
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "1080p"
+msgstr "1080p"
+
+#: package/contents/ui/config.qml:98
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "4K"
+msgstr "4K"
+
+#: package/contents/ui/config.qml:102
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Ultra Wide"
+msgstr "Ultra-lat"
+
+#: package/contents/ui/config.qml:106
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Background"
+msgstr "Fundal"
+
+#: package/contents/ui/config.qml:110
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Lock Screen"
+msgstr "Ecran de blocare"
+
+#: package/contents/ui/config.qml:114
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Nature"
+msgstr "Natură"
+
+#: package/contents/ui/config.qml:118
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: package/contents/ui/config.qml:122
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Black"
+msgstr "Negru"
+
+#: package/contents/ui/config.qml:126
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flower"
+msgstr "Floare"
+
+#: package/contents/ui/config.qml:130
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Funny"
+msgstr "Nostim"
+
+#: package/contents/ui/config.qml:134
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cute"
+msgstr "Drăguț"
+
+#: package/contents/ui/config.qml:138
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cool"
+msgstr "Fain"
+
+#: package/contents/ui/config.qml:142
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Fall"
+msgstr "Toamna"
+
+#: package/contents/ui/config.qml:146
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Love"
+msgstr "Dragoste"
+
+#: package/contents/ui/config.qml:150
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Design"
+msgstr "Proiectare"
+
+#: package/contents/ui/config.qml:154
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Christmas"
+msgstr "Crăciun"
+
+#: package/contents/ui/config.qml:158
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Travel"
+msgstr "Călătorie"
+
+#: package/contents/ui/config.qml:162
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Beach"
+msgstr "Plajă"
+
+#: package/contents/ui/config.qml:166
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Car"
+msgstr "Mașină"
+
+#: package/contents/ui/config.qml:170
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Sports"
+msgstr "Sporturi"
+
+#: package/contents/ui/config.qml:174
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Animal"
+msgstr "Animal"
+
+#: package/contents/ui/config.qml:178
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "People"
+msgstr "Oameni"
+
+#: package/contents/ui/config.qml:182
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Music"
+msgstr "Muzică"
+
+#: package/contents/ui/config.qml:186
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Summer"
+msgstr "Vara"
+
+#: package/contents/ui/config.qml:190
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Galaxy"
+msgstr "Galaxie"
+
+#: package/contents/ui/config.qml:194
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tabliss"
+msgstr "Tabliss"
+
+#: package/contents/ui/config.qml:224
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Poziționare:"
 
-#: package/contents/ui/config.qml:84
+#: package/contents/ui/config.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Scalat și decupat"
 
-#: package/contents/ui/config.qml:88
+#: package/contents/ui/config.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Scalat"
 
-#: package/contents/ui/config.qml:92
+#: package/contents/ui/config.qml:235
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Scalat, păstrare proporții"
 
-#: package/contents/ui/config.qml:96
+#: package/contents/ui/config.qml:239
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Centrat"
 
-#: package/contents/ui/config.qml:100
+#: package/contents/ui/config.qml:243
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Dale"
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:264
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Culoarea de fundal:"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:265
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Alege culoarea de fundal"
 
-#: package/contents/ui/config.qml:133
+#: package/contents/ui/config.qml:276
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Imaginea zilei:"
 
-#: package/contents/ui/config.qml:149
+#: package/contents/ui/config.qml:292
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Titlu:"
 
-#: package/contents/ui/config.qml:164
+#: package/contents/ui/config.qml:307
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Autor:"
 
-#: package/contents/ui/config.qml:183
+#: package/contents/ui/config.qml:326
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Deschide dosarul conținător"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:330
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
@@ -204,115 +372,3 @@ msgstr "Imaginea nu a fost salvată."
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
 msgstr "Imaginea a fost salvată ca <a href=\"%1\">%2</a>"
-
-#~ msgctxt "@label:listbox"
-#~ msgid "Category:"
-#~ msgstr "Categorie:"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "All"
-#~ msgstr "Toate"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "1080p"
-#~ msgstr "1080p"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "4K"
-#~ msgstr "4K"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Ultra Wide"
-#~ msgstr "Ultra-lat"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Background"
-#~ msgstr "Fundal"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Lock Screen"
-#~ msgstr "Ecran de blocare"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Nature"
-#~ msgstr "Natură"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Tumblr"
-#~ msgstr "Tumblr"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Black"
-#~ msgstr "Negru"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Flower"
-#~ msgstr "Floare"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Funny"
-#~ msgstr "Nostim"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Cute"
-#~ msgstr "Drăguț"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Cool"
-#~ msgstr "Fain"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Fall"
-#~ msgstr "Toamna"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Love"
-#~ msgstr "Dragoste"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Design"
-#~ msgstr "Proiectare"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Christmas"
-#~ msgstr "Crăciun"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Travel"
-#~ msgstr "Călătorie"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Beach"
-#~ msgstr "Plajă"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Car"
-#~ msgstr "Mașină"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Sports"
-#~ msgstr "Sporturi"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Animal"
-#~ msgstr "Animal"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "People"
-#~ msgstr "Oameni"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Music"
-#~ msgstr "Muzică"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Summer"
-#~ msgstr "Vara"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Galaxy"
-#~ msgstr "Galaxie"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Tabliss"
-#~ msgstr "Tabliss"

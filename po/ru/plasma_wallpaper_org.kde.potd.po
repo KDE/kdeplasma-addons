@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-30 02:40+0000\n"
+"POT-Creation-Date: 2023-07-01 02:37+0000\n"
 "PO-Revision-Date: 2023-01-21 18:46+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -19,13 +19,13 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 21.08.3\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:48
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Источник:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -36,85 +36,253 @@ msgstr ""
 "деликатными или предосудительными. Будьте осторожны, если эти изображения "
 "будут демонстрироваться публично."
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:76
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Обновлять при использовании тарифицируемого соединения"
 
-#: package/contents/ui/config.qml:81
+#: package/contents/ui/config.qml:86
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Category:"
+msgstr "Категория:"
+
+#: package/contents/ui/config.qml:90
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "All"
+msgstr "Все"
+
+#: package/contents/ui/config.qml:94
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "1080p"
+msgstr "1080p"
+
+#: package/contents/ui/config.qml:98
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "4K"
+msgstr "4K"
+
+#: package/contents/ui/config.qml:102
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Ultra Wide"
+msgstr "Ультраширокие"
+
+#: package/contents/ui/config.qml:106
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Background"
+msgstr "Фоновые изображения"
+
+#: package/contents/ui/config.qml:110
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Lock Screen"
+msgstr "Экран блокировки"
+
+#: package/contents/ui/config.qml:114
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Nature"
+msgstr "Природа"
+
+#: package/contents/ui/config.qml:118
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: package/contents/ui/config.qml:122
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Black"
+msgstr "На чёрном фоне"
+
+#: package/contents/ui/config.qml:126
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flower"
+msgstr "Цветок"
+
+#: package/contents/ui/config.qml:130
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Funny"
+msgstr "Забавное"
+
+#: package/contents/ui/config.qml:134
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cute"
+msgstr "Милое"
+
+#: package/contents/ui/config.qml:138
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cool"
+msgstr "Классные"
+
+#: package/contents/ui/config.qml:142
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Fall"
+msgstr "Осень"
+
+#: package/contents/ui/config.qml:146
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Love"
+msgstr "Любовь"
+
+#: package/contents/ui/config.qml:150
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Design"
+msgstr "Дизайн"
+
+#: package/contents/ui/config.qml:154
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Christmas"
+msgstr "Рождество"
+
+#: package/contents/ui/config.qml:158
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Travel"
+msgstr "Путешествие"
+
+#: package/contents/ui/config.qml:162
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Beach"
+msgstr "Пляж"
+
+#: package/contents/ui/config.qml:166
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Car"
+msgstr "Автомобиль"
+
+#: package/contents/ui/config.qml:170
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Sports"
+msgstr "Спорт"
+
+#: package/contents/ui/config.qml:174
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Animal"
+msgstr "Животные"
+
+#: package/contents/ui/config.qml:178
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "People"
+msgstr "Люди"
+
+#: package/contents/ui/config.qml:182
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Music"
+msgstr "Музыка"
+
+#: package/contents/ui/config.qml:186
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Summer"
+msgstr "Лето"
+
+#: package/contents/ui/config.qml:190
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Galaxy"
+msgstr "Вселенная"
+
+#: package/contents/ui/config.qml:194
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tabliss"
+msgstr "Tabliss"
+
+#: package/contents/ui/config.qml:224
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Расположение:"
 
-#: package/contents/ui/config.qml:84
+#: package/contents/ui/config.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Масштабирование с кадрированием"
 
-#: package/contents/ui/config.qml:88
+#: package/contents/ui/config.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "На весь рабочий стол"
 
-#: package/contents/ui/config.qml:92
+#: package/contents/ui/config.qml:235
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "По центру пропорционально"
 
-#: package/contents/ui/config.qml:96
+#: package/contents/ui/config.qml:239
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "По центру"
 
-#: package/contents/ui/config.qml:100
+#: package/contents/ui/config.qml:243
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Черепицей"
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:264
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Цвет фона:"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:265
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Выбор цвета фона"
 
-#: package/contents/ui/config.qml:133
+#: package/contents/ui/config.qml:276
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Изображение дня:"
 
-#: package/contents/ui/config.qml:149
+#: package/contents/ui/config.qml:292
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Название:"
 
-#: package/contents/ui/config.qml:164
+#: package/contents/ui/config.qml:307
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Автор:"
 
-#: package/contents/ui/config.qml:183
+#: package/contents/ui/config.qml:326
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Открыть содержащую папку"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:330
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
@@ -204,115 +372,3 @@ msgstr "Не удалось сохранить изображение."
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
 msgstr "Изображение сохранено в файл <a href=\"%1\">%2</a>"
-
-#~ msgctxt "@label:listbox"
-#~ msgid "Category:"
-#~ msgstr "Категория:"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "All"
-#~ msgstr "Все"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "1080p"
-#~ msgstr "1080p"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "4K"
-#~ msgstr "4K"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Ultra Wide"
-#~ msgstr "Ультраширокие"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Background"
-#~ msgstr "Фоновые изображения"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Lock Screen"
-#~ msgstr "Экран блокировки"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Nature"
-#~ msgstr "Природа"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Tumblr"
-#~ msgstr "Tumblr"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Black"
-#~ msgstr "На чёрном фоне"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Flower"
-#~ msgstr "Цветок"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Funny"
-#~ msgstr "Забавное"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Cute"
-#~ msgstr "Милое"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Cool"
-#~ msgstr "Классные"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Fall"
-#~ msgstr "Осень"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Love"
-#~ msgstr "Любовь"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Design"
-#~ msgstr "Дизайн"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Christmas"
-#~ msgstr "Рождество"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Travel"
-#~ msgstr "Путешествие"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Beach"
-#~ msgstr "Пляж"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Car"
-#~ msgstr "Автомобиль"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Sports"
-#~ msgstr "Спорт"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Animal"
-#~ msgstr "Животные"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "People"
-#~ msgstr "Люди"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Music"
-#~ msgstr "Музыка"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Summer"
-#~ msgstr "Лето"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Galaxy"
-#~ msgstr "Вселенная"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Tabliss"
-#~ msgstr "Tabliss"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-30 02:40+0000\n"
+"POT-Creation-Date: 2023-07-01 02:37+0000\n"
 "PO-Revision-Date: 2023-03-21 18:57+0100\n"
 "Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -19,13 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:48
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Anbieter:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -36,85 +36,253 @@ msgstr ""
 "empfunden werden könnten, nicht heraus. Seien Sie entsprechend vorsichtig, "
 "wenn diese Bilder in der Öffentlichkeit gezeigt werden."
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:76
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Bei Verwendung einer gebührenpflichtigen Verbindung aktualisieren"
 
-#: package/contents/ui/config.qml:81
+#: package/contents/ui/config.qml:86
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Category:"
+msgstr "Kategorie:"
+
+#: package/contents/ui/config.qml:90
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "All"
+msgstr "Alle"
+
+#: package/contents/ui/config.qml:94
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "1080p"
+msgstr "1080 p"
+
+#: package/contents/ui/config.qml:98
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "4K"
+msgstr "4K"
+
+#: package/contents/ui/config.qml:102
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Ultra Wide"
+msgstr "Ultrabreit"
+
+#: package/contents/ui/config.qml:106
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Background"
+msgstr "Hintergrund"
+
+#: package/contents/ui/config.qml:110
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Lock Screen"
+msgstr "Bildschirmsperre"
+
+#: package/contents/ui/config.qml:114
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Nature"
+msgstr "Natur"
+
+#: package/contents/ui/config.qml:118
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tumblr"
+msgstr "Tumblr"
+
+#: package/contents/ui/config.qml:122
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Black"
+msgstr "Schwarz"
+
+#: package/contents/ui/config.qml:126
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Flower"
+msgstr "Blume"
+
+#: package/contents/ui/config.qml:130
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Funny"
+msgstr "Spaß"
+
+#: package/contents/ui/config.qml:134
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cute"
+msgstr "Niedlich"
+
+#: package/contents/ui/config.qml:138
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Cool"
+msgstr "Cool"
+
+#: package/contents/ui/config.qml:142
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Fall"
+msgstr "Herbst"
+
+#: package/contents/ui/config.qml:146
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Love"
+msgstr "Liebe"
+
+#: package/contents/ui/config.qml:150
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Design"
+msgstr "Design"
+
+#: package/contents/ui/config.qml:154
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Christmas"
+msgstr "Weihnachten"
+
+#: package/contents/ui/config.qml:158
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Travel"
+msgstr "Reise"
+
+#: package/contents/ui/config.qml:162
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Beach"
+msgstr "Strand"
+
+#: package/contents/ui/config.qml:166
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Car"
+msgstr "Auto"
+
+#: package/contents/ui/config.qml:170
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Sports"
+msgstr "Sport"
+
+#: package/contents/ui/config.qml:174
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Animal"
+msgstr "Tiere"
+
+#: package/contents/ui/config.qml:178
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "People"
+msgstr "Personen"
+
+#: package/contents/ui/config.qml:182
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Music"
+msgstr "Musik"
+
+#: package/contents/ui/config.qml:186
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Summer"
+msgstr "Sommer"
+
+#: package/contents/ui/config.qml:190
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Galaxy"
+msgstr "Galaxie"
+
+#: package/contents/ui/config.qml:194
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tabliss"
+msgstr "Tabliss"
+
+#: package/contents/ui/config.qml:224
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Positionierung:"
 
-#: package/contents/ui/config.qml:84
+#: package/contents/ui/config.qml:227
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Skaliert und beschnitten"
 
-#: package/contents/ui/config.qml:88
+#: package/contents/ui/config.qml:231
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Skaliert"
 
-#: package/contents/ui/config.qml:92
+#: package/contents/ui/config.qml:235
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Skaliert, Proportionen beibehalten"
 
-#: package/contents/ui/config.qml:96
+#: package/contents/ui/config.qml:239
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Zentriert"
 
-#: package/contents/ui/config.qml:100
+#: package/contents/ui/config.qml:243
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Gekachelt"
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:264
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Hintergrundfarbe:"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:265
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Hintergrundfarbe auswählen"
 
-#: package/contents/ui/config.qml:133
+#: package/contents/ui/config.qml:276
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Heutiges Bild:"
 
-#: package/contents/ui/config.qml:149
+#: package/contents/ui/config.qml:292
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Titel:"
 
-#: package/contents/ui/config.qml:164
+#: package/contents/ui/config.qml:307
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Autor:"
 
-#: package/contents/ui/config.qml:183
+#: package/contents/ui/config.qml:326
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Ordner mit diesem Inhalt öffnen"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:330
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
@@ -207,115 +375,3 @@ msgstr "Das Bild wurde nicht gespeichert."
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
 msgstr "Das Bild wurde als <a href=\"%1\">%2</a> gespeichert"
-
-#~ msgctxt "@label:listbox"
-#~ msgid "Category:"
-#~ msgstr "Kategorie:"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "All"
-#~ msgstr "Alle"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "1080p"
-#~ msgstr "1080 p"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "4K"
-#~ msgstr "4K"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Ultra Wide"
-#~ msgstr "Ultrabreit"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Background"
-#~ msgstr "Hintergrund"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Lock Screen"
-#~ msgstr "Bildschirmsperre"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Nature"
-#~ msgstr "Natur"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Tumblr"
-#~ msgstr "Tumblr"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Black"
-#~ msgstr "Schwarz"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Flower"
-#~ msgstr "Blume"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Funny"
-#~ msgstr "Spaß"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Cute"
-#~ msgstr "Niedlich"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Cool"
-#~ msgstr "Cool"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Fall"
-#~ msgstr "Herbst"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Love"
-#~ msgstr "Liebe"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Design"
-#~ msgstr "Design"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Christmas"
-#~ msgstr "Weihnachten"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Travel"
-#~ msgstr "Reise"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Beach"
-#~ msgstr "Strand"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Car"
-#~ msgstr "Auto"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Sports"
-#~ msgstr "Sport"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Animal"
-#~ msgstr "Tiere"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "People"
-#~ msgstr "Personen"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Music"
-#~ msgstr "Musik"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Summer"
-#~ msgstr "Sommer"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Galaxy"
-#~ msgstr "Galaxie"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Tabliss"
-#~ msgstr "Tabliss"
