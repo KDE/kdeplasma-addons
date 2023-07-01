@@ -20,6 +20,7 @@ Kirigami.FormLayout {
     twinFormLayouts: parentLayout
 
     property string cfg_Provider
+    property string cfg_Category
     property int cfg_FillMode
     property alias cfg_Color: colorButton.color
     property int cfg_UpdateOverMeteredConnection
@@ -29,7 +30,10 @@ Kirigami.FormLayout {
         id: backend
         identifier: cfg_Provider
         arguments: {
-            if (identifier === "bing") {
+            if (identifier === "unsplash") {
+                // Needs to specify category for unsplash provider
+                return [cfg_Category];
+            } else if (identifier === "bing") {
                 // Bing supports 1366/1920/UHD resolutions
                 const w = Screen.width * Screen.devicePixelRatio > 1920 ? 3840 : 1920;
                 const h = Screen.height * Screen.devicePixelRatio > 1080 ? 2160 : 1080;
@@ -73,6 +77,145 @@ Kirigami.FormLayout {
 
         onToggled: {
             root.cfg_UpdateOverMeteredConnection = checked ? 1 : 0;
+        }
+    }
+
+    QQC2.ComboBox {
+        id: categoryComboBox
+        visible: cfg_Provider === 'unsplash'
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Category:")
+        property var allSectionValue: '1065976'
+        property var listModel: [
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "All"),
+                'value': allSectionValue
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "1080p"),
+                'value': '1339107'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "4K"),
+                'value': '1339090'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Ultra Wide"),
+                'value': '1339089'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Background"),
+                'value': '1339276'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Lock Screen"),
+                'value': '1339070'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Nature"),
+                'value': '1065376'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Tumblr"),
+                'value': '1111644'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Black"),
+                'value': '1101680'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Flower"),
+                'value': '1100232'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Funny"),
+                'value': '1111682'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Cute"),
+                'value': '1111680'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Cool"),
+                'value': '1111678'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Fall"),
+                'value': '1100229'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Love"),
+                'value': '1066280'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Design"),
+                'value': '1066276'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Christmas"),
+                'value': '1066273'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Travel"),
+                'value': '1065428'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Beach"),
+                'value': '1065423'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Car"),
+                'value': '1065408'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Sports"),
+                'value': '1065402'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Animal"),
+                'value': '1065390'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "People"),
+                'value': '1065386'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Music"),
+                'value': '1065384'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Summer"),
+                'value': '1065380'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Galaxy"),
+                'value': '1065374'
+            },
+            {
+                'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Tabliss"),
+                'value': '1053828'
+            },
+        ]
+        model: listModel
+        textRole: "label"
+        onCurrentIndexChanged: {
+            cfg_Category = model[currentIndex]["value"]
+        }
+        Component.onCompleted: {
+            listModel = listModel.sort((a, b) => {
+                // Sort items by name but keep the 'All' entry at the top
+                if (b["value"] === allSectionValue) {
+                   return 1;
+                }
+                if (a["value"] === allSectionValue) {
+                   return -1;
+                }
+                return a["label"].localeCompare(b["label"]);
+            })
+            for (var i = 0; i < model.length; i++) {
+                if (model[i]["value"] == wallpaper.configuration.Category) {
+                    categoryComboBox.currentIndex = i;
+                }
+            }
         }
     }
 
