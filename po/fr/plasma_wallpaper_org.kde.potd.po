@@ -6,8 +6,8 @@ msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 02:37+0000\n"
-"PO-Revision-Date: 2023-01-14 19:25+0100\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
+"PO-Revision-Date: 2023-01-25 22:53+0100\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -44,169 +44,225 @@ msgstr ""
 "Mettre à jour lors de l'utilisation d'une connexion limitée à un réseau"
 
 #: package/contents/ui/config.qml:86
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox"
+#| msgid "Category:"
 msgctxt "@label:listbox"
 msgid "Category:"
 msgstr "Catégorie :"
 
 #: package/contents/ui/config.qml:90
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "All"
 msgctxt "@item:inlistbox"
 msgid "All"
 msgstr "Toutes"
 
 #: package/contents/ui/config.qml:94
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "1080p"
 msgctxt "@item:inlistbox"
 msgid "1080p"
 msgstr "1080p"
 
 #: package/contents/ui/config.qml:98
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "4K"
 msgctxt "@item:inlistbox"
 msgid "4K"
 msgstr "4K"
 
 #: package/contents/ui/config.qml:102
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Ultra Wide"
 msgctxt "@item:inlistbox"
 msgid "Ultra Wide"
 msgstr "Ultra Large"
 
 #: package/contents/ui/config.qml:106
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Background"
 msgctxt "@item:inlistbox"
 msgid "Background"
 msgstr "Arrière-plan"
 
 #: package/contents/ui/config.qml:110
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Lock Screen"
 msgctxt "@item:inlistbox"
 msgid "Lock Screen"
 msgstr "Écran de verrouillage"
 
 #: package/contents/ui/config.qml:114
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Nature"
 msgctxt "@item:inlistbox"
 msgid "Nature"
 msgstr "Nature"
 
 #: package/contents/ui/config.qml:118
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Tumblr"
 msgctxt "@item:inlistbox"
 msgid "Tumblr"
 msgstr "Tumblr"
 
 #: package/contents/ui/config.qml:122
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Black"
 msgctxt "@item:inlistbox"
 msgid "Black"
 msgstr "Noir"
 
 #: package/contents/ui/config.qml:126
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Flower"
 msgctxt "@item:inlistbox"
 msgid "Flower"
 msgstr "Fleur"
 
 #: package/contents/ui/config.qml:130
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Funny"
 msgctxt "@item:inlistbox"
 msgid "Funny"
 msgstr "Amusant"
 
 #: package/contents/ui/config.qml:134
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Cute"
 msgctxt "@item:inlistbox"
 msgid "Cute"
 msgstr "Mignon"
 
 #: package/contents/ui/config.qml:138
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Cool"
 msgctxt "@item:inlistbox"
 msgid "Cool"
 msgstr "Sympa"
 
 #: package/contents/ui/config.qml:142
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Fall"
 msgctxt "@item:inlistbox"
 msgid "Fall"
 msgstr "Automne"
 
 #: package/contents/ui/config.qml:146
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Love"
 msgctxt "@item:inlistbox"
 msgid "Love"
 msgstr "Amour"
 
 #: package/contents/ui/config.qml:150
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Design"
 msgctxt "@item:inlistbox"
 msgid "Design"
 msgstr "Design"
 
 #: package/contents/ui/config.qml:154
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Christmas"
 msgctxt "@item:inlistbox"
 msgid "Christmas"
 msgstr "Noël"
 
 #: package/contents/ui/config.qml:158
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Travel"
 msgctxt "@item:inlistbox"
 msgid "Travel"
 msgstr "Voyages"
 
 #: package/contents/ui/config.qml:162
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Beach"
 msgctxt "@item:inlistbox"
 msgid "Beach"
 msgstr "Plage"
 
 #: package/contents/ui/config.qml:166
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Car"
 msgctxt "@item:inlistbox"
 msgid "Car"
 msgstr "Voitures"
 
 #: package/contents/ui/config.qml:170
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Sports"
 msgctxt "@item:inlistbox"
 msgid "Sports"
 msgstr "Sports"
 
 #: package/contents/ui/config.qml:174
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Animal"
 msgctxt "@item:inlistbox"
 msgid "Animal"
 msgstr "Animaux"
 
 #: package/contents/ui/config.qml:178
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "People"
 msgctxt "@item:inlistbox"
 msgid "People"
 msgstr "Personnes"
 
 #: package/contents/ui/config.qml:182
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Music"
 msgctxt "@item:inlistbox"
 msgid "Music"
 msgstr "Musique"
 
 #: package/contents/ui/config.qml:186
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Summer"
 msgctxt "@item:inlistbox"
 msgid "Summer"
 msgstr "Été"
 
 #: package/contents/ui/config.qml:190
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Galaxy"
 msgctxt "@item:inlistbox"
 msgid "Galaxy"
 msgstr "Galaxie"
 
 #: package/contents/ui/config.qml:194
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Tabliss"
 msgctxt "@item:inlistbox"
 msgid "Tabliss"
 msgstr "Tabliss"
