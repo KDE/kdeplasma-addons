@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2018, 2021, 2022.
+# Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>, 2018, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-28 02:09+0000\n"
-"PO-Revision-Date: 2022-05-15 20:14+0200\n"
+"PO-Revision-Date: 2023-07-01 07:54+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 22.03.70\n"
+"X-Generator: Lokalize 23.04.2\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -44,16 +44,14 @@ msgid "Num Lock"
 msgstr "Num Lock"
 
 #: contents/ui/main.qml:43
-#, fuzzy, kde-format
-#| msgid "Caps Lock activated\n"
+#, kde-format
 msgid "Caps Lock activated"
-msgstr "Włączono Caps Lock\n"
+msgstr "Włączono Caps Lock"
 
 #: contents/ui/main.qml:44
-#, fuzzy, kde-format
-#| msgid "Num Lock activated\n"
+#, kde-format
 msgid "Num Lock activated"
-msgstr "Włączono Num Lock\n"
+msgstr "Włączono Num Lock"
 
 #: contents/ui/main.qml:106
 #, kde-format
