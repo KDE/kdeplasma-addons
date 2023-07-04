@@ -13,9 +13,6 @@
 #define COMIC_H
 
 #include <QDate>
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-#include <QNetworkConfigurationManager>
-#endif
 #include <QUrl>
 
 #include <Plasma/Applet>
@@ -170,12 +167,6 @@ private:
 
 private:
     ComicModel *mModel;
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QT_WARNING_PUSH
-    QT_WARNING_DISABLE_DEPRECATED
-    QNetworkConfigurationManager m_networkConfigurationManager;
-    QT_WARNING_POP
-#endif
     QString mPreviousFailedIdentifier;
     QSortFilterProxyModel *mProxy;
     ActiveComicModel *mActiveComicModel;
