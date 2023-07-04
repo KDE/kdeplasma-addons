@@ -99,7 +99,6 @@ QQC2.StackView {
     replaceEnter: Transition {
         OpacityAnimator {
             id: replaceEnterOpacityAnimator
-            from: 0
             to: 1
             // As the wallpaper is updated once a day, the transition should be longer.
             duration: Math.round(Kirigami.Units.veryLongDuration * 5)
