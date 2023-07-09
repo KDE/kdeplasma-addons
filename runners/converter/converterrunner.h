@@ -9,9 +9,9 @@
 #define CONVERTERRUNNER_H
 
 #include <KRunner/AbstractRunner>
+#include <KRunner/Action>
 #include <KUnitConversion/Converter>
 #include <KUnitConversion/UnitCategory>
-#include <QAction>
 #include <QLocale>
 #include <QRegularExpression>
 
@@ -42,7 +42,7 @@ private:
     /** To convert currency symbols back to ISO string and handle case sensitive units */
     QMap<QString, QString> compatibleUnits;
 
-    QList<QAction *> actionList;
+    const KRunner::Actions actionList;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
     QPair<bool, double> stringToDouble(const QStringRef &value);
 #else

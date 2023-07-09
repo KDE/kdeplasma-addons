@@ -26,6 +26,7 @@ Q_DECLARE_METATYPE(KUnitConversion::Value)
 
 ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
+    , actionList({Action(QStringLiteral("copy"), i18n("Copy unit and number"), QStringLiteral("edit-copy"))})
 {
     setObjectName(QStringLiteral("Converter"));
 
@@ -45,7 +46,6 @@ void ConverterRunner::init()
     conversionRegex.append(QStringLiteral(" ?> ?"));
     unitSeperatorRegex = QRegularExpression(conversionRegex);
 
-    actionList = {new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")), i18n("Copy unit and number"), this)};
     setMinLetterCount(2);
     setMatchRegex(valueRegex);
 }
