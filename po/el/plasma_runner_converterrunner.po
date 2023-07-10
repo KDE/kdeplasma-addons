@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-01 02:33+0000\n"
+"POT-Creation-Date: 2023-07-10 02:11+0000\n"
 "PO-Revision-Date: 2014-03-07 13:30+0200\n"
 "Last-Translator: Antonis Geralis <capoiosct@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -23,7 +23,12 @@ msgstr ""
 "X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: converterrunner.cpp:33
+#: converterrunner.cpp:29
+#, kde-format
+msgid "Copy unit and number"
+msgstr ""
+
+#: converterrunner.cpp:34
 #, fuzzy, kde-format
 #| msgid ""
 #| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
@@ -37,16 +42,11 @@ msgstr ""
 "αξίας [>, σε, ως] αξίας\". Μπορείτε να χρησιμοποιήσετε την μικροεφαρμογή "
 "μετατροπής μονάδων για να βρείτε όλες τις διαθέσιμες μονάδες."
 
-#: converterrunner.cpp:40
+#: converterrunner.cpp:41
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
 msgstr "in;σε;ως"
-
-#: converterrunner.cpp:48
-#, kde-format
-msgid "Copy unit and number"
-msgstr ""
 
 #, fuzzy
 #~| msgid "in"

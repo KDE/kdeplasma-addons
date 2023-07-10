@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-01 02:33+0000\n"
+"POT-Creation-Date: 2023-07-10 02:11+0000\n"
 "PO-Revision-Date: 2011-01-03 11:08+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux@walon.org>\n"
@@ -17,7 +17,12 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: converterrunner.cpp:33
+#: converterrunner.cpp:29
+#, kde-format
+msgid "Copy unit and number"
+msgstr ""
+
+#: converterrunner.cpp:34
 #, fuzzy, kde-format
 #| msgid ""
 #| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
@@ -31,16 +36,11 @@ msgstr ""
 "valixhance [>, a, come, e] ene unité\". Vos vs savoz siervi di l' aplikete "
 "Radapteu d' unité po trover totes les unités k' i gn a."
 
-#: converterrunner.cpp:40
+#: converterrunner.cpp:41
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
 msgstr "e;a;come"
-
-#: converterrunner.cpp:48
-#, kde-format
-msgid "Copy unit and number"
-msgstr ""
 
 #, fuzzy
 #~| msgid "in"
