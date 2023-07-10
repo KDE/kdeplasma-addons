@@ -86,7 +86,7 @@ void GroupedAppletsContainer::ensureSystrayExists()
     m_internalContainmentItem = PlasmaQuick::AppletQuickItem::itemForApplet(m_innerContainment);
     Q_EMIT internalContainmentItemChanged();
 
-    actions()->addAction(QStringLiteral("configure"), m_innerContainment->actions()->action(QStringLiteral("configure")));
+    setInternalAction(QStringLiteral("configure"), m_innerContainment->internalAction(QStringLiteral("configure")));
     connect(m_innerContainment.data(), &Plasma::Containment::configureRequested, this, [this](Plasma::Applet *applet) {
         Q_EMIT containment()->configureRequested(applet);
     });
@@ -97,7 +97,7 @@ void GroupedAppletsContainer::ensureSystrayExists()
     }
 
     // replace internal remove action with ours
-    m_innerContainment->actions()->addAction(QStringLiteral("remove"), actions()->action(QStringLiteral("remove")));
+    m_innerContainment->setInternalAction(QStringLiteral("remove"), internalAction(QStringLiteral("remove")));
 }
 
 void GroupedAppletsContainer::constraintsEvent(Plasma::Types::Constraints constraints)

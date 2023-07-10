@@ -84,7 +84,7 @@ void ComicApplet::init()
 
     mActionNextNewStripTab = new QAction(QIcon::fromTheme(QStringLiteral("go-next-view")), i18nc("@action comic strip", "&Next Tab with a New Strip"), this);
     mActionNextNewStripTab->setShortcuts(KStandardShortcut::openNew());
-    actions()->addAction(QStringLiteral("next new strip"), mActionNextNewStripTab);
+    setInternalAction(QStringLiteral("next new strip"), mActionNextNewStripTab);
     mActions.append(mActionNextNewStripTab);
     connect(mActionNextNewStripTab, &QAction::triggered, this, &ComicApplet::showNextNewStrip);
 
