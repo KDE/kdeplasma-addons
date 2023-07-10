@@ -92,10 +92,16 @@ PlasmoidItem {
         id: monitor
     }
 
+    PlasmaCore.Action {
+        id: configureAction
+        text: i18n("&Configure Night Color…")
+        icon.name: "configure"
+        visible: KConfig.KAuthorized.authorizeControlModule("kcm_nightcolor")
+        shortcut: "alt+d, s"
+        onTriggered: KCMLauncher.openSystemSettings("kcm_nightcolor")
+    }
+
     Component.onCompleted: {
-        Plasmoid.removeAction("configure");
-        if (KConfig.KAuthorized.authorizeControlModule("kcm_nightcolor")) {
-            Plasmoid.setAction("configure", i18n("&Configure Night Color…"), "configure", "alt+d, s");
-        }
+        Plasmoid.setInternalAction("configure", configureAction)
     }
 }

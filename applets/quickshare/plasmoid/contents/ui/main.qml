@@ -76,13 +76,32 @@ PlasmoidItem {
             }
             sendData([contentTracker.uri], mime);
         } else {
-            action_paste();
+            performPaste();
         }
     }
 
-    function resetActions() {
-        for(var v in root.pasteUrls) {
-            plasmoid.setAction(v, root.pasteUrls[v], "");
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: i18nc("@action", "Paste")
+            icon.name: "edit-paste"
+            onTriggered: performPaste()
+        },
+        PlasmaCore.Action {
+            isSeparator: true
+        }
+    ]
+
+    Instantiator {
+        model: root.pasteUrls
+        delegate: PlasmaCore.Action {
+            text: modelData
+            onTriggered: Qt.openUrlExternally(modelData)
+        }
+        onObjectAdded: (index, object) => {
+            Plasmoid.contextualActions.push(object)
+        }
+        onObjectRemoved: (index, object) => {
+            Plasmoid.contextualActions.splice(contextualActions.indexOf(object), 1)
         }
     }
 
@@ -100,13 +119,7 @@ PlasmoidItem {
         root.state = "configuration"
     }
 
-    function actionTriggered(actionName) {
-        var index = parseInt(actionName);
-        if (index)
-            Qt.openUrlExternally(pasteUrls[actionName]);
-    }
-
-    function action_paste() {
+    function performPaste() {
         if (clipboard.formats.length < 1) { // empty clipboard!
             return; // do nothing (there's the tooltip!)
         }
@@ -200,8 +213,8 @@ PlasmoidItem {
                     root.state = "sending"
                 }
             }
-            onFinished: {
-                if (error==0 && output.url !== "") {
+            onFinished: (output, error, message) => {
+                if (error == 0 && output.hasOwnProperty("url") && output.url !== "") {
                     console.assert(output.url !== undefined);
                     var resultUrl = output.url;
                     console.log("Received url", resultUrl)
@@ -215,7 +228,7 @@ PlasmoidItem {
                         }
                     }
 
-                    resetActions();
+                    root.pasteUrlsChanged();
                 }
                 shareDialog.visible = false;
                 root.state = error===0 ? "success" : "failure";
@@ -238,11 +251,6 @@ PlasmoidItem {
                 sendBase64Data(PurposeHelper.variantToBase64(data), mimetype);
             }
             drop.accepted = true;
-        }
-
-        Component.onCompleted: {
-            plasmoid.setAction("paste", i18nc("@action", "Paste"), "edit-paste");
-            plasmoid.setActionSeparator("pastes");
         }
 
         PlasmaCore.ToolTipArea {

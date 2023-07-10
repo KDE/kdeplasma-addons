@@ -124,27 +124,47 @@ PlasmoidItem {
         delayedSaveTimer.start();
     }
 
-    Component.onCompleted: rebuildMenu()
-
-    Connections {
-        target: plasmoid.configuration
-        function onPredefinedTimersChanged() {
-            rebuildMenu()
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            id: startAction
+            text: i18nc("@action", "&Start")
+            onTriggered: startTimer()
+        },
+        PlasmaCore.Action {
+            id: stopAction
+            text: i18nc("@action", "S&top")
+            onTriggered: stopTimer()
+        },
+        PlasmaCore.Action {
+            id: resetAction
+            text: i18nc("@action", "&Reset")
+            onTriggered: resetTimer()
+        },
+        PlasmaCore.Action {
+            id: separator1
+            isSeparator: true
+        },
+        PlasmaCore.Action {
+            id: separator2
+            isSeparator: true
         }
-    }
+    ]
 
-    function rebuildMenu() {
-        plasmoid.clearActions();
-        plasmoid.setAction("timerStart", i18nc("@action", "&Start"));
-        plasmoid.setAction("timerStop", i18nc("@action", "S&top"));
-        plasmoid.setAction("timerReset", i18nc("@action", "&Reset"));
-        plasmoid.setActionSeparator("separator0");
-
-        for (var predefinedTimer of plasmoid.configuration.predefinedTimers) {
-            plasmoid.setAction("predefined_timer_" + predefinedTimer,
-                               TimerPlasmoid.Timer.secondsToString(predefinedTimer, "hh:mm:ss"));
+    Instantiator {
+        model: plasmoid.configuration.predefinedTimers
+        delegate: PlasmaCore.Action {
+            text: TimerPlasmoid.Timer.secondsToString(modelData, "hh:mm:ss")
+            onTriggered: {
+                seconds = modelData
+                startTimer();
+            }
         }
-        plasmoid.setActionSeparator("separator1");
+        onObjectAdded: (index, object) => {
+            Plasmoid.contextualActions.splice(Plasmoid.contextualActions.indexOf(separator2), 0, object)
+        }
+        onObjectRemoved: (index, object) => {
+            Plasmoid.contextualActions.splice(Plasmoid.contextualActions.indexOf(object), 1)
+        }
     }
 
     function startTimer() {
@@ -177,13 +197,6 @@ PlasmoidItem {
         plasmoid.configuration.seconds = seconds
     }
 
-    function actionTriggered(actionName) {
-        if (actionName.indexOf("predefined_timer_") === 0) {
-            seconds = actionName.replace("predefined_timer_", "");
-            startTimer();
-        }
-    }
-
     function restoreToSeconds(cRunning, cSavedAt, cSeconds) {
         if (cRunning > 0) {
             var elapsedSeconds = cRunning - ~~(~~(((new Date()).getTime() - cSavedAt.getTime()) / 1000));
@@ -195,19 +208,6 @@ PlasmoidItem {
         } else {
             return cSeconds;
         }
-    }
-
-
-    function action_timerStart() {
-        startTimer();
-    }
-
-    function action_timerStop() {
-        stopTimer();
-    }
-
-    function action_timerReset() {
-        resetTimer();
     }
 }
 

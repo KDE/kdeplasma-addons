@@ -593,29 +593,57 @@ PlasmoidItem {
         }
     }
 
-    Component.onCompleted: {
-        Plasmoid.setAction("change_note_color_white", i18nc("@item:inmenu", "White"));
-        Plasmoid.setAction("change_note_color_black", i18nc("@item:inmenu", "Black"));
-        Plasmoid.setAction("change_note_color_red", i18nc("@item:inmenu", "Red"));
-        Plasmoid.setAction("change_note_color_orange", i18nc("@item:inmenu", "Orange"));
-        Plasmoid.setAction("change_note_color_yellow", i18nc("@item:inmenu", "Yellow"));
-        Plasmoid.setAction("change_note_color_green", i18nc("@item:inmenu", "Green"));
-        Plasmoid.setAction("change_note_color_blue", i18nc("@item:inmenu", "Blue"));
-        Plasmoid.setAction("change_note_color_pink", i18nc("@item:inmenu", "Pink"));
-        Plasmoid.setAction("change_note_color_translucent", i18nc("@item:inmenu", "Translucent"));
-        Plasmoid.setAction("change_note_color_translucent-light", i18nc("@item:inmenu", "Translucent Light"));
-        Plasmoid.setActionSeparator("separator0");
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: i18nc("@item:inmenu", "White")
+            onTriggered: Plasmoid.configuration.color = "white"
+        },
+        PlasmaCore.Action {
+            text: i18nc("@item:inmenu", "Black")
+            onTriggered: Plasmoid.configuration.color = "black"
+        },
+        PlasmaCore.Action {
+            text: i18nc("@item:inmenu", "Red")
+            onTriggered: Plasmoid.configuration.color = "red"
+        },
+        PlasmaCore.Action {
+            text: i18nc("@item:inmenu", "Orange")
+            onTriggered: Plasmoid.configuration.color = "orange"
+        },
+        PlasmaCore.Action {
+            text: i18nc("@item:inmenu", "Yellow")
+            onTriggered: Plasmoid.configuration.color = "yellow"
+        },
+        PlasmaCore.Action {
+            text: i18nc("@item:inmenu", "Green")
+            onTriggered: Plasmoid.configuration.color = "green"
+        },
+        PlasmaCore.Action {
+            text: i18nc("@item:inmenu", "Blue")
+            onTriggered: Plasmoid.configuration.color = "blue"
+        },
+        PlasmaCore.Action {
+            text: i18nc("@item:inmenu", "Pink")
+            onTriggered: Plasmoid.configuration.color = "pink"
+        },
+        PlasmaCore.Action {
+            text: i18nc("@item:inmenu", "Translucent")
+            onTriggered: Plasmoid.configuration.color = "translucent"
+        },
+        PlasmaCore.Action {
+            text: i18nc("@item:inmenu", "Translucent Light")
+            onTriggered: Plasmoid.configuration.color = "translucent-light"
+        },
+        PlasmaCore.Action {
+            isSeparator: true
+        }
+    ]
 
+    Component.onCompleted: {
         // Plasmoid configuration doesn't check before emitting change signal
         // explicit check is needed (at time of writing)
         if (note.id != Plasmoid.configuration.noteId) {
             Plasmoid.configuration.noteId = note.id;
-        }
-    }
-
-    function actionTriggered(actionName) {
-        if (actionName.indexOf("change_note_color_") == 0){
-            Plasmoid.configuration.color = actionName.replace("change_note_color_", "");
         }
     }
 }

@@ -95,23 +95,28 @@ PlasmoidItem {
         }
     }
 
-    function action_clear() {
-        historyModel.clear();
-        historyModel.save();
-    }
-
-    function action_colordialog() {
-        colorDialog.open();
-    }
-
-    function action_expand() {
-        root.expanded = true;
-    }
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: i18nc("@action", "Open Color Dialog")
+            icon.name: "color-management"
+            onTriggered: colorDialog.open()
+        },
+        PlasmaCore.Action {
+            text: i18nc("@action", "Clear History")
+            icon.name: "edit-clear-history"
+            onTriggered: {
+                historyModel.clear();
+                historyModel.save();
+            }
+        },
+        PlasmaCore.Action {
+            text: i18nc("@action", "View History")
+            icon.name: "view-history"
+            onTriggered: root.expanded = true
+        }
+    ]
 
     Component.onCompleted: {
-        Plasmoid.setAction("colordialog", i18nc("@action", "Open Color Dialog"), "color-management");
-        Plasmoid.setAction("clear", i18nc("@action", "Clear History"), "edit-clear-history");
-        Plasmoid.setAction("expand", i18nc("@action", "View History"), "color-management");
         Plasmoid.configuration.history.forEach(item => historyModel.append({ color: item }));
         Logic.copyToClipboardText = i18ndc("plasma_applet_org.kde.plasma.colorpicker", "@title:menu", "Copy to Clipboard"); // i18n is not supported in js library
     }

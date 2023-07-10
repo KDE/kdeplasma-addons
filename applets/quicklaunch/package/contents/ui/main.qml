@@ -286,16 +286,17 @@ PlasmoidItem {
         }
     }
 
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            text: i18nc("@action", "Add Launcher…")
+            icon.name: "list-add"
+            onTriggered: logic.addLauncher()
+        }
+    ]
+
     Component.onCompleted: {
         launcherModel.setUrls(plasmoid.configuration.launcherUrls);
         launcherModel.urlsChanged.connect(saveConfiguration);
-
-        plasmoid.setAction("addLauncher", i18nc("@action", "Add Launcher…"), "list-add");
-    }
-
-    function action_addLauncher()
-    {
-        logic.addLauncher();
     }
 
     function saveConfiguration()
