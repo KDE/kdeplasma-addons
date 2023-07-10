@@ -59,7 +59,7 @@ KWin.TabBoxSwitcher {
                 right: parent.right
                 bottom: parent.bottom
             }
-            color: PlasmaCore.ColorScope.backgroundColor
+            color: Kirigami.Theme.backgroundColor
             opacity: enableBlur ? 0.5 : 0.75
         }
 
