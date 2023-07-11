@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2022-02-05 18:57+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -117,7 +117,7 @@ msgstr "Dölj ikoner"
 msgid "Show hidden icons"
 msgstr "Visa dolda ikoner"
 
-#: package/contents/ui/main.qml:293
+#: package/contents/ui/main.qml:291
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

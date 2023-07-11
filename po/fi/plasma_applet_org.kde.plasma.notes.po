@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2023-03-05 17:40+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -181,61 +181,61 @@ msgstr "Hylätäänkö tämä muistiinpano?"
 msgid "Are you sure you want to discard this note?"
 msgstr "Haluatko varmasti hylätä tämän muistiinpanon?"
 
-#: package/contents/ui/main.qml:597
+#: package/contents/ui/main.qml:598
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Valkoinen"
 
-#: package/contents/ui/main.qml:598
+#: package/contents/ui/main.qml:602
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Musta"
 
-#: package/contents/ui/main.qml:599
+#: package/contents/ui/main.qml:606
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Punainen"
 
-#: package/contents/ui/main.qml:600
+#: package/contents/ui/main.qml:610
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Oranssi"
 
-#: package/contents/ui/main.qml:601
+#: package/contents/ui/main.qml:614
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Keltainen"
 
-#: package/contents/ui/main.qml:602
+#: package/contents/ui/main.qml:618
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Vihreä"
 
-#: package/contents/ui/main.qml:603
+#: package/contents/ui/main.qml:622
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Sininen"
 
-#: package/contents/ui/main.qml:604
+#: package/contents/ui/main.qml:626
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Vaaleanpunainen"
 
-#: package/contents/ui/main.qml:605
+#: package/contents/ui/main.qml:630
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "Läpikuultava"
 
-#: package/contents/ui/main.qml:606
+#: package/contents/ui/main.qml:634
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"

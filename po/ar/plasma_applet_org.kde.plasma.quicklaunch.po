@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2022-02-03 22:24+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -117,7 +117,7 @@ msgstr "أخفِ الأيقونات"
 msgid "Show hidden icons"
 msgstr "أظهر الأيقونات المخفيّة"
 
-#: package/contents/ui/main.qml:293
+#: package/contents/ui/main.qml:291
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

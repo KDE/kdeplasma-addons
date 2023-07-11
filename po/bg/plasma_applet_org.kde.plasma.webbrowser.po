@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-23 02:17+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2023-06-22 21:43+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -99,55 +99,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Автоматично мащабиране, ако ширината е под"
 
-#: package/contents/ui/main.qml:63
+#: package/contents/ui/main.qml:64
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Назад"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Напред"
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:90
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Въвеждане на URL"
 
-#: package/contents/ui/main.qml:125
+#: package/contents/ui/main.qml:126
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Спиране на зареждането на страницата"
 
-#: package/contents/ui/main.qml:125
+#: package/contents/ui/main.qml:126
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Обновяване на страница"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Отваряне на препраткта в браузър"
 
-#: package/contents/ui/main.qml:181
+#: package/contents/ui/main.qml:182
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Копиране адреса на препратката"
 
-#: package/contents/ui/main.qml:243
+#: package/contents/ui/main.qml:244
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Блокиран е изскачащ прозорец"
 
-#: package/contents/ui/main.qml:244
+#: package/contents/ui/main.qml:245
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

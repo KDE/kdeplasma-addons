@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-14 02:06+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2023-02-09 01:23+0100\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -49,7 +49,7 @@ msgstr "Das Modul Nachtfarben läuft nicht"
 msgid "Night Color is active (%1K)"
 msgstr "Nachtfarben sind aktiviert (%1 K)"
 
-#: package/contents/ui/main.qml:98
+#: package/contents/ui/main.qml:97
 #, kde-format
 msgid "&Configure Night Color…"
 msgstr "&Nachtfarben einrichten ..."

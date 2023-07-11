@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-14 02:06+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2023-02-19 17:17+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -47,7 +47,7 @@ msgstr "Gecə rəng sxemi işləmir"
 msgid "Night Color is active (%1K)"
 msgstr "Gecə rəng sxemi aktivdir (%1K)"
 
-#: package/contents/ui/main.qml:98
+#: package/contents/ui/main.qml:97
 #, kde-format
 msgid "&Configure Night Color…"
 msgstr "&Gecə rəng sxemini ayarla..."

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2021-04-16 17:19+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -180,61 +180,61 @@ msgstr "Aruncați această notă?"
 msgid "Are you sure you want to discard this note?"
 msgstr "Sigur doriți să aruncați această notă?"
 
-#: package/contents/ui/main.qml:597
+#: package/contents/ui/main.qml:598
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Alb"
 
-#: package/contents/ui/main.qml:598
+#: package/contents/ui/main.qml:602
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Negru"
 
-#: package/contents/ui/main.qml:599
+#: package/contents/ui/main.qml:606
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Roșu"
 
-#: package/contents/ui/main.qml:600
+#: package/contents/ui/main.qml:610
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Portocaliu"
 
-#: package/contents/ui/main.qml:601
+#: package/contents/ui/main.qml:614
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Galben"
 
-#: package/contents/ui/main.qml:602
+#: package/contents/ui/main.qml:618
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Verde"
 
-#: package/contents/ui/main.qml:603
+#: package/contents/ui/main.qml:622
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Albastru"
 
-#: package/contents/ui/main.qml:604
+#: package/contents/ui/main.qml:626
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Roz"
 
-#: package/contents/ui/main.qml:605
+#: package/contents/ui/main.qml:630
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "Translucid"
 
-#: package/contents/ui/main.qml:606
+#: package/contents/ui/main.qml:634
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"

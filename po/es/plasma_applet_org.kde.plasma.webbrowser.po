@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-23 02:17+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2023-06-17 01:22+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -101,55 +101,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Escalar automáticamente si el ancho es inferior"
 
-#: package/contents/ui/main.qml:63
+#: package/contents/ui/main.qml:64
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Retroceder"
 
-#: package/contents/ui/main.qml:70
+#: package/contents/ui/main.qml:71
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Avanzar"
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:90
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Escriba una URL"
 
-#: package/contents/ui/main.qml:125
+#: package/contents/ui/main.qml:126
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Detener la carga de esta página"
 
-#: package/contents/ui/main.qml:125
+#: package/contents/ui/main.qml:126
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Volver a cargar esta paǵina"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:176
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Abrir enlace en el navegador"
 
-#: package/contents/ui/main.qml:181
+#: package/contents/ui/main.qml:182
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copiar dirección del enlace"
 
-#: package/contents/ui/main.qml:243
+#: package/contents/ui/main.qml:244
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Ventana emergente bloqueada"
 
-#: package/contents/ui/main.qml:244
+#: package/contents/ui/main.qml:245
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

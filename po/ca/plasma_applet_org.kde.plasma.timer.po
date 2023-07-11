@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-30 02:09+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2022-12-01 13:31+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -194,13 +194,13 @@ msgstr "Temporitzador"
 msgid "Timer finished"
 msgstr "El temporitzador ha finalitzat"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:130
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Engega"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "S&top"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-30 02:09+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2009-07-31 00:38+0000\n"
 "Last-Translator: Vilson Gjeci <vilsongjeci@gmail.com>\n"
 "Language-Team: Albanian <sq@li.org>\n"
@@ -196,14 +196,14 @@ msgstr "Koha"
 msgid "Timer finished"
 msgstr ""
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:130
 #, fuzzy, kde-format
 #| msgid "Start"
 msgctxt "@action"
 msgid "&Start"
 msgstr "Nise"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "S&top"

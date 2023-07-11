@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2023-06-10 12:10+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -24,54 +24,54 @@ msgctxt "@title"
 msgid "General"
 msgstr "Genel"
 
-#: contents/ui/main.qml:244
+#: contents/ui/main.qml:85
 #, kde-format
 msgctxt "@action"
 msgid "Paste"
 msgstr "Yapıştır"
 
-#: contents/ui/main.qml:253 contents/ui/main.qml:294
+#: contents/ui/main.qml:261 contents/ui/main.qml:302
 #, kde-format
 msgid "Share"
 msgstr "Paylaş"
 
-#: contents/ui/main.qml:254 contents/ui/main.qml:295
+#: contents/ui/main.qml:262 contents/ui/main.qml:303
 #, kde-format
 msgid "Drop text or an image onto me to upload it to an online service."
 msgstr ""
 "Bir çevrimiçi hizmete yüklemek için üzerime bir görsel veya metin bırakın."
 
-#: contents/ui/main.qml:295
+#: contents/ui/main.qml:303
 #, kde-format
 msgid "Upload %1 to an online service"
 msgstr "%1 bir çevrimiçi hizmete yüklensin"
 
-#: contents/ui/main.qml:308
+#: contents/ui/main.qml:316
 #, kde-format
 msgid "Sending…"
 msgstr "Gönderiliyor…"
 
-#: contents/ui/main.qml:309
+#: contents/ui/main.qml:317
 #, kde-format
 msgid "Please wait"
 msgstr "Lütfen bekleyin"
 
-#: contents/ui/main.qml:316
+#: contents/ui/main.qml:324
 #, kde-format
 msgid "Successfully uploaded"
 msgstr "Başarıyla yüklendi"
 
-#: contents/ui/main.qml:317
+#: contents/ui/main.qml:325
 #, kde-format
 msgid "<a href='%1'>%1</a>"
 msgstr "<a href='%1'>%1</a>"
 
-#: contents/ui/main.qml:324
+#: contents/ui/main.qml:332
 #, kde-format
 msgid "Error during upload."
 msgstr "Yükleme sırasında hata."
 
-#: contents/ui/main.qml:325
+#: contents/ui/main.qml:333
 #, kde-format
 msgid "Please, try again."
 msgstr "Lütfen yeniden deneyin."

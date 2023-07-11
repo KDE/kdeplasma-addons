@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2019-11-21 08:31+0100\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -177,61 +177,61 @@ msgstr ""
 msgid "Are you sure you want to discard this note?"
 msgstr ""
 
-#: package/contents/ui/main.qml:597
+#: package/contents/ui/main.qml:598
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Fehér"
 
-#: package/contents/ui/main.qml:598
+#: package/contents/ui/main.qml:602
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Fekete"
 
-#: package/contents/ui/main.qml:599
+#: package/contents/ui/main.qml:606
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Piros"
 
-#: package/contents/ui/main.qml:600
+#: package/contents/ui/main.qml:610
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Narancssárga"
 
-#: package/contents/ui/main.qml:601
+#: package/contents/ui/main.qml:614
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Sárga"
 
-#: package/contents/ui/main.qml:602
+#: package/contents/ui/main.qml:618
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Zöld"
 
-#: package/contents/ui/main.qml:603
+#: package/contents/ui/main.qml:622
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Kék"
 
-#: package/contents/ui/main.qml:604
+#: package/contents/ui/main.qml:626
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Rózsaszín"
 
-#: package/contents/ui/main.qml:605
+#: package/contents/ui/main.qml:630
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "Átlátszó"
 
-#: package/contents/ui/main.qml:606
+#: package/contents/ui/main.qml:634
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"

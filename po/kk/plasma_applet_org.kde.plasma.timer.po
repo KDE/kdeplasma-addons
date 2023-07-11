@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-30 02:09+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2012-07-19 05:18+0600\n"
 "Last-Translator: Sairan Kikkarin\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -192,14 +192,14 @@ msgstr "Таймер"
 msgid "Timer finished"
 msgstr ""
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:130
 #, fuzzy, kde-format
 #| msgid "Start"
 msgctxt "@action"
 msgid "&Start"
 msgstr "Старт"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "S&top"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-30 02:09+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2022-12-01 06:54+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -191,13 +191,13 @@ msgstr "წამმზომი"
 msgid "Timer finished"
 msgstr "წამმზომი დასრულდა"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:130
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&გაშვება"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "S&top"

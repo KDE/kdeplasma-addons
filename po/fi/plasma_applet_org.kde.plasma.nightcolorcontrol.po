@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-14 02:06+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2023-03-05 17:39+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -47,7 +47,7 @@ msgstr "Yöväri ei ole käynnissä"
 msgid "Night Color is active (%1K)"
 msgstr "Yöväri on aktiivinen (%1 K)"
 
-#: package/contents/ui/main.qml:98
+#: package/contents/ui/main.qml:97
 #, kde-format
 msgid "&Configure Night Color…"
 msgstr "&Yövärin asetukset…"

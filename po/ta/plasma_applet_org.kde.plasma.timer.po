@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-30 02:09+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2022-12-01 21:56+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -188,13 +188,13 @@ msgstr "டைமர்"
 msgid "Timer finished"
 msgstr "டைமர் முடிந்தவிட்டது"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:130
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&துவங்கு"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "S&top"

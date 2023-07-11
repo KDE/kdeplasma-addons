@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2022-02-20 22:17+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -115,7 +115,7 @@ msgstr "아이콘 숨기기"
 msgid "Show hidden icons"
 msgstr "숨은 아이콘 보기"
 
-#: package/contents/ui/main.qml:293
+#: package/contents/ui/main.qml:291
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

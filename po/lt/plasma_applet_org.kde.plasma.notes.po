@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2021-08-18 01:07+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -178,61 +178,61 @@ msgstr "Atmesti šį lapelį?"
 msgid "Are you sure you want to discard this note?"
 msgstr "Ar tikrai norite atmesti šį lapelį?"
 
-#: package/contents/ui/main.qml:597
+#: package/contents/ui/main.qml:598
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Baltas"
 
-#: package/contents/ui/main.qml:598
+#: package/contents/ui/main.qml:602
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Juodas"
 
-#: package/contents/ui/main.qml:599
+#: package/contents/ui/main.qml:606
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Raudonas"
 
-#: package/contents/ui/main.qml:600
+#: package/contents/ui/main.qml:610
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Oranžinis"
 
-#: package/contents/ui/main.qml:601
+#: package/contents/ui/main.qml:614
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Geltonas"
 
-#: package/contents/ui/main.qml:602
+#: package/contents/ui/main.qml:618
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Žalias"
 
-#: package/contents/ui/main.qml:603
+#: package/contents/ui/main.qml:622
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Mėlynas"
 
-#: package/contents/ui/main.qml:604
+#: package/contents/ui/main.qml:626
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Rožinis"
 
-#: package/contents/ui/main.qml:605
+#: package/contents/ui/main.qml:630
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "Dalinai permatomas"
 
-#: package/contents/ui/main.qml:606
+#: package/contents/ui/main.qml:634
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"

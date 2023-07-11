@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-30 02:09+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2022-11-18 00:13+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -199,13 +199,13 @@ msgstr "Laikmatis"
 msgid "Timer finished"
 msgstr "Pasibaigė laikmačio laikas"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:130
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Paleisti"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "S&top"

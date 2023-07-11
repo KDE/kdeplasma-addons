@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-30 02:09+0000\n"
+"POT-Creation-Date: 2023-07-11 02:03+0000\n"
 "PO-Revision-Date: 2017-05-16 06:56-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -200,14 +200,14 @@ msgstr "טימר"
 msgid "Timer finished"
 msgstr "טיימר הסתיים"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:130
 #, fuzzy, kde-format
 #| msgid "&Start"
 msgctxt "@action"
 msgid "&Start"
 msgstr "התחל"
 
-#: package/contents/ui/main.qml:139
+#: package/contents/ui/main.qml:135
 #, fuzzy, kde-format
 #| msgid "S&top"
 msgctxt "@action"
