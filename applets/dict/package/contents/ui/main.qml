@@ -63,13 +63,13 @@ PlasmoidItem {
                 display: PlasmaComponents3.AbstractButton.IconOnly
                 hoverEnabled: true
                 icon.name: "configure"
-                text: Plasmoid.action("configure").text
+                text: Plasmoid.internalAction("configure").text
 
                 PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents3.ToolTip.text: configureButton.text
                 PlasmaComponents3.ToolTip.visible: configureButton.hovered
 
-                onClicked: plasmoid.action("configure").trigger();
+                onClicked: Plasmoid.internalAction("configure").trigger();
             }
         }
 

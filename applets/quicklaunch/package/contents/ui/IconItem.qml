@@ -280,11 +280,11 @@ Item {
                 }
 
                 PlasmaExtras.MenuItem {
-                    action: plasmoid.action("configure")
+                    action: Plasmoid.internalAction("configure")
                 }
 
                 PlasmaExtras.MenuItem {
-                    action: plasmoid.action("remove")
+                    action: Plasmoid.internalAction("remove")
                 }
 
                 function refreshActions() {

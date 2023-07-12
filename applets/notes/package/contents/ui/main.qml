@@ -521,11 +521,11 @@ PlasmoidItem {
                     focusPolicy: Qt.TabFocus
                     icon.name: "configure"
                     icon.color: textIconColor
-                    onClicked: Plasmoid.action("configure").trigger()
+                    onClicked: Plasmoid.internalAction("configure").trigger()
                     Accessible.name: settingsTooltip.text
                     QQC2.ToolTip {
                         id: settingsTooltip
-                        text: Plasmoid.action("configure").text
+                        text: Plasmoid.internalAction("configure").text
                     }
                 }
 
@@ -550,7 +550,7 @@ PlasmoidItem {
                             // is done in the same way every time.
                             documentHandler.stripAndSimplify(mainTextArea.text) === documentHandler.strippedClipboardText()
                         ) {
-                            Plasmoid.action("remove").trigger();
+                            Plasmoid.internalAction("remove").trigger();
                         } else {
                             discardConfirmationDialogLoader.open();
                         }
@@ -558,7 +558,7 @@ PlasmoidItem {
                     Accessible.name: removeTooltip.text
                     QQC2.ToolTip {
                         id: removeTooltip
-                        text: Plasmoid.action("remove").text
+                        text: Plasmoid.internalAction("remove").text
                     }
                 }
             }
@@ -586,7 +586,7 @@ PlasmoidItem {
                 buttons: MessageDialog.Discard | MessageDialog.Cancel
 
                 onRejected: {
-                    Plasmoid.action("remove").trigger()
+                    Plasmoid.internalAction("remove").trigger()
                     visible = false;
                 }
             }

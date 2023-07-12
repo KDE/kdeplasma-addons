@@ -452,7 +452,7 @@ PlasmoidItem {
         icon.name: "configure"
         text: i18nc("@action:button", "Configure…")
         onClicked: {
-            plasmoid.action("configure").trigger();
+            Plasmoid.internalAction("configure").trigger();
         }
     }
 }

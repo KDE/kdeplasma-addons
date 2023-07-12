@@ -39,7 +39,7 @@ ColumnLayout {
             icon.name: "configure"
             text: i18n("Set location…")
             onTriggered: {
-                Plasmoid.action("configure").trigger();
+                Plasmoid.internalAction("configure").trigger();
             }
         }
     }
