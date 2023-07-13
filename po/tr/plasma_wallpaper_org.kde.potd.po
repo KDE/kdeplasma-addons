@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-30 02:09+0000\n"
+"POT-Creation-Date: 2023-07-13 02:10+0000\n"
 "PO-Revision-Date: 2023-03-28 22:19+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -116,6 +116,11 @@ msgstr "İçeren Klasörü Aç"
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
 msgstr "Duvar kağıdı görselinin kaydedildiği hedef klasörü aç."
+
+#: package/contents/ui/main.qml:22
+#, kde-format
+msgid "Open Wallpaper Image"
+msgstr ""
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
