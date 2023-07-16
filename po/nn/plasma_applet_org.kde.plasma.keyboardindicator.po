@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-28 02:09+0000\n"
-"PO-Revision-Date: 2023-05-27 13:38+0200\n"
+"PO-Revision-Date: 2023-07-15 13:47+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 23.04.3\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -46,16 +46,14 @@ msgid "Num Lock"
 msgstr "Num Lock"
 
 #: contents/ui/main.qml:43
-#, fuzzy, kde-format
-#| msgid "Caps Lock activated\n"
+#, kde-format
 msgid "Caps Lock activated"
-msgstr "«Caps Lock»-tasten er slått på\n"
+msgstr "«Caps Lock»-tasten er slått på"
 
 #: contents/ui/main.qml:44
-#, fuzzy, kde-format
-#| msgid "Num Lock activated\n"
+#, kde-format
 msgid "Num Lock activated"
-msgstr "«Num Lock»-tasten er slått på\n"
+msgstr "«Num Lock»-tasten er slått på"
 
 #: contents/ui/main.qml:106
 #, kde-format
