@@ -1,16 +1,16 @@
 # Translation for plasma_applet_org.kde.plasma.webbrowser.po to Euskara/Basque (eu).
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2023 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 # KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2022.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-11 02:03+0000\n"
-"PO-Revision-Date: 2022-10-17 07:01+0200\n"
+"PO-Revision-Date: 2023-07-16 10:18+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.1\n"
+"X-Generator: Lokalize 23.04.0\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -30,25 +30,25 @@ msgstr "Orokorra"
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "Itxura"
 
 #: package/contents/ui/ConfigAppearance.qml:28
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
-msgstr ""
+msgstr "Ikonoa:"
 
 #: package/contents/ui/ConfigAppearance.qml:29
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
-msgstr ""
+msgstr "Webgunearen «favicon»"
 
 #: package/contents/ui/ConfigAppearance.qml:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
-msgstr ""
+msgstr "Aldatu web arakatzailearen ikonoa"
 
 #: package/contents/ui/ConfigAppearance.qml:53
 #, kde-format
@@ -57,30 +57,32 @@ msgid ""
 "Current icon is %1. Click to open menu to change the current icon or reset "
 "to the default icon."
 msgstr ""
+"Uneko ikonoa %1 da. Egin klik, uneko ikonoa aldatzeko edo lehenetsitako "
+"ikonora berrezartzeko menua irekitzeko."
 
 #: package/contents/ui/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
-msgstr ""
+msgstr "Ikonoaren izena \"%1\" da"
 
 #: package/contents/ui/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr ""
+msgstr "Hautatu…"
 
 #: package/contents/ui/ConfigAppearance.qml:94
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
-msgstr ""
+msgstr "Hautatu web arakatzailerako ikono bat"
 
 #: package/contents/ui/ConfigAppearance.qml:98
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
-msgstr ""
+msgstr "Berrezarri lehenetsitako ikonora"
 
 #: package/contents/ui/ConfigGeneral.qml:18
 #, kde-format
