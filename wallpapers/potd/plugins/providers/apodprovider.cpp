@@ -16,7 +16,7 @@
 ApodProvider::ApodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : PotdProvider(parent, data, args)
 {
-    m_infoUrl = QUrl(QStringLiteral("http://antwrp.gsfc.nasa.gov/apod/"));
+    m_infoUrl = QUrl(QStringLiteral("https://antwrp.gsfc.nasa.gov/apod/"));
 
     KIO::StoredTransferJob *job = KIO::storedGet(m_infoUrl, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, &KIO::StoredTransferJob::finished, this, &ApodProvider::pageRequestFinished);
@@ -38,7 +38,7 @@ void ApodProvider::pageRequestFinished(KJob *_job)
 
     if (expMatch.hasMatch()) {
         const QString sub = expMatch.captured(1);
-        m_remoteUrl = QUrl(QStringLiteral("http://antwrp.gsfc.nasa.gov/apod/") + sub);
+        m_remoteUrl = QUrl(QStringLiteral("https://antwrp.gsfc.nasa.gov/apod/") + sub);
 
         /**
          * Match title and author
