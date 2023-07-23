@@ -14,9 +14,12 @@ WallpaperItem {
 
     contextualActions: [
         PlasmaCore.Action {
-            text: i18nd("plasma_wallpaper_org.kde.hunyango", "Random Color")
+            text: i18nd("plasma_wallpaper_org.kde.hunyango", "Randomize Wallpaper Color")
             icon.name: "color-profile"
-            onTriggered: rectangle.randomColor()
+            onTriggered: {
+                updateTimer.restart()
+                rectangle.updateColor()
+            }
         }
     ]
 
@@ -24,14 +27,14 @@ WallpaperItem {
         id: rectangle
         anchors.fill: parent
 
+        color: randomColor()
+
         function randomColor() {
-            color = Qt.hsla(Math.random(), 1,0.5,1)
+            return Qt.hsla(Math.random(), 1, 0.5, 1)
         }
 
-        Component.onCompleted: randomColor()
-        MouseArea {
-            anchors.fill: parent
-            onClicked: randomColor()
+        function updateColor() {
+            color = randomColor()
         }
 
         KSvg.SvgItem {
@@ -45,13 +48,17 @@ WallpaperItem {
         }
 
         Timer {
+            id: updateTimer
+
             property int lastLayer: 0
             property variant layers: [centerLayer0, centerLayer1, leftLayer0, leftLayer1, bottomLayer0, rightLayer0, rightLayer1]
+
             running: true
             repeat: true
             interval: 30000
-            onTriggered: randomColor()
+            onTriggered: rectangle.updateColor()
         }
+
         // Intentionally not using a standard duration value as this is an animated
         // wallpaper so disabling animations doesn't make sense, and the duration
         // shouldn't be scaled with the user's preferences because this is tuned to
