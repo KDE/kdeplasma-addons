@@ -54,9 +54,6 @@ WallpaperItem {
         Timer {
             id: updateTimer
 
-            property int lastLayer: 0
-            property variant layers: [centerLayer0, centerLayer1, leftLayer0, leftLayer1, bottomLayer0, rightLayer0, rightLayer1]
-
             running: true
             repeat: true
             interval: 30000
