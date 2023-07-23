@@ -38,7 +38,11 @@ WallpaperItem {
         }
 
         KSvg.SvgItem {
-            anchors.fill: parent
+            // Enforce 16:9 aspect ratio and fill centered, rather than stretch the background
+            anchors.centerIn: parent
+            width: (parent.width / parent.height >= 16 / 9) ? parent.width : height * (16 / 9)
+            height: (parent.width / parent.height >= 16 / 9) ? width * (9 / 16) : parent.height
+
             smooth: true
             svg: KSvg.Svg {
                 id: wallpaperSvg
