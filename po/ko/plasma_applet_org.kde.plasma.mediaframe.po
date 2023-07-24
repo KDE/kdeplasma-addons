@@ -161,7 +161,7 @@ msgstr "그림 위에 커서가 있을 때 슬라이드 쇼 일시 정지"
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
-msgstr "그림을 클릭해서 외부 프로그램으로 열기"
+msgstr "그림을 클릭해서 외부 앱으로 열기"
 
 #: package/contents/ui/ConfigPaths.qml:49
 #, kde-format
