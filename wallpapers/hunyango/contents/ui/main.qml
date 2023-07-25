@@ -17,8 +17,7 @@ WallpaperItem {
             text: i18nd("plasma_wallpaper_org.kde.hunyango", "Randomize Wallpaper Color")
             icon.name: "color-profile"
             onTriggered: {
-                updateTimer.restart()
-                rectangle.updateColor()
+                ColorProvider.updateColor()
             }
         }
     ]
@@ -27,15 +26,7 @@ WallpaperItem {
         id: rectangle
         anchors.fill: parent
 
-        color: randomColor()
-
-        function randomColor() {
-            return Qt.hsla(Math.random(), 1, 0.5, 1)
-        }
-
-        function updateColor() {
-            color = randomColor()
-        }
+        color: ColorProvider.color
 
         KSvg.SvgItem {
             // Enforce 16:9 aspect ratio and fill centered, rather than stretch the background
@@ -49,15 +40,6 @@ WallpaperItem {
                 //FIXME: Svg doesn't support relative paths
                 imagePath: String(Qt.resolvedUrl("wallpaper.svgz")).substring(7)
             }
-        }
-
-        Timer {
-            id: updateTimer
-
-            running: true
-            repeat: true
-            interval: 30000
-            onTriggered: rectangle.updateColor()
         }
 
         // Intentionally not using a standard duration value as this is an animated
