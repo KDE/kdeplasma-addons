@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2012, 2018.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2012, 2018, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-28 00:47+0000\n"
-"PO-Revision-Date: 2018-04-29 11:46+0100\n"
+"PO-Revision-Date: 2023-07-25 15:45+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 20.08.1\n"
 
 #: dictionaryrunner.cpp:36 dictionaryrunner_config.cpp:34
 #: dictionaryrunner_config.cpp:52
@@ -38,7 +38,7 @@ msgstr "Hittar definitionen av :q:."
 #: dictionaryrunner.cpp:120
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
-msgstr ""
+msgstr "Definitionen av \"%1\" har kopierats till klippbordet"
 
 #: dictionaryrunner_config.cpp:22
 #, kde-format

@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2014, 2015, 2018, 2019, 2020, 2022.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2014, 2015, 2018, 2019, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2022-09-25 10:06+0200\n"
+"PO-Revision-Date: 2023-07-25 15:47+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -84,7 +84,7 @@ msgstr "Visa titel:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "Visa återstående tid"
 
 #: package/contents/ui/configAppearance.qml:59
 #, kde-format
@@ -93,18 +93,16 @@ msgid "Show seconds"
 msgstr "Visa sekunder"
 
 #: package/contents/ui/configAppearance.qml:64
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "Visa titel:"
+msgstr "Visa eller dölj tidtagare"
 
 #: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "Visa förloppsrad"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format

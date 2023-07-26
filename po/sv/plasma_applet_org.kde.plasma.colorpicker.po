@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2015, 2016, 2018, 2022.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2015, 2016, 2018, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-07 02:49+0000\n"
-"PO-Revision-Date: 2022-09-25 10:06+0200\n"
+"PO-Revision-Date: 2023-07-25 15:48+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -36,6 +36,8 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Dra en färg hit för att spara den<nl/>Dra en bildfil hit för att hämta dess "
+"medelfärg"
 
 #: package/contents/ui/configGeneral.qml:25
 #, kde-format
@@ -71,7 +73,7 @@ msgstr "Visa historik"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Förhandsgranskningsantal:"
 
 #: package/contents/ui/main.qml:114
 #, kde-format
@@ -86,12 +88,10 @@ msgid "Clear History"
 msgstr "Rensa historik"
 
 #: package/contents/ui/main.qml:116
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "Rensa historik"
+msgstr "Visa historik"
 
 #: package/contents/ui/main.qml:118
 #, kde-format
@@ -115,7 +115,7 @@ msgstr "Hämta färg"
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "Kopierad."
 
 #: package/contents/ui/main.qml:355
 #, kde-format

@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2016, 2018, 2019, 2020, 2021, 2022.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2016, 2018, 2019, 2020, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-09-25 10:07+0200\n"
+"PO-Revision-Date: 2023-07-25 15:53+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -150,34 +150,28 @@ msgid "Compact Mode"
 msgstr "Kompakt läge"
 
 #: package/contents/ui/config/ConfigAppearance.qml:44
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "Visa temperatur"
+msgstr "Visa temperatur:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:47
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Visa bredvid komponentens ikon:"
+msgstr "Över komponentens ikon"
 
 #: package/contents/ui/config/ConfigAppearance.qml:55
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "Visa bredvid komponentens ikon:"
+msgstr "Bredvid komponentens ikon"
 
 #: package/contents/ui/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Visa inte"
 
 #: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
@@ -256,21 +250,19 @@ msgstr "Plats:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Ingen vald"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Leverantör:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Ange plats"
+msgstr "Ange ny plats"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
@@ -288,13 +280,13 @@ msgstr "Inga väderstationer hittades för '%1'"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Sök efter en väderstation för att byta plats"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Sök efter en väderstation för att ange plats"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -399,19 +391,16 @@ msgid "Wind Gust:"
 msgstr "Vindbyar:"
 
 #: package/contents/ui/main.qml:239
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 dag"
+msgstr "Dag"
 
 #: package/contents/ui/main.qml:240
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Natt"
 
 #: package/contents/ui/main.qml:278
 #, kde-format

@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2018, 2019, 2022.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2018, 2019, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 02:37+0000\n"
-"PO-Revision-Date: 2022-09-25 10:07+0200\n"
+"PO-Revision-Date: 2023-07-25 15:44+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -30,6 +30,8 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"Skrivbordsunderläggsleverantören filtrerar inte bor bilder som kan upplevas "
+"som känsliga eller stötande. Använd försiktighet om bilderna ska visas öppet."
 
 #: package/contents/ui/config.qml:76
 #, kde-format

@@ -2,13 +2,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2007, 2008, 2009, 2015, 2018, 2019, 2021.
+# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2007, 2008, 2009, 2015, 2018, 2019, 2021, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2021-04-10 07:57+0200\n"
+"PO-Revision-Date: 2023-07-25 15:50+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -115,17 +115,15 @@ msgid "Paste"
 msgstr "Klistra in"
 
 #: package/contents/ui/main.qml:295
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "Klistra in utan formatering"
+msgstr "Klistra in med fullständig formatering"
 
 #: package/contents/ui/main.qml:302
-#, fuzzy, kde-format
-#| msgid "Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Formatering"
+msgstr "Ta bort formatering"
 
 #: package/contents/ui/main.qml:317
 #, kde-format
