@@ -6,12 +6,11 @@
  */
 
 import QtQuick 2.15
-
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.15
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.components 3.0 as PlasmaComponents
 
 GridLayout {
     id: root
@@ -41,7 +40,7 @@ GridLayout {
             Layout.fillWidth: true
             Layout.preferredWidth: Math.max(preferredIconSize + Kirigami.Units.smallSpacing, periodLabel.implicitWidth)
 
-            PlasmaComponents.Label {
+            QQC2.Label {
                 id: periodLabel
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 Layout.fillHeight: isPlaceHolder
@@ -68,14 +67,14 @@ GridLayout {
                 }
             }
 
-            PlasmaComponents.Label {
+            QQC2.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
                 text: !isPlaceHolder && modelData.tempHigh || i18nc("Short for no data available", "-")
                 visible: !isPlaceHolder && (modelData.tempHigh || !showNightRow)
             }
 
-            PlasmaComponents.Label {
+            QQC2.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
                 text: !isPlaceHolder && modelData.tempLow || i18nc("Short for no data available", "-")
