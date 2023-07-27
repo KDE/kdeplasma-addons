@@ -13,7 +13,6 @@ import QtQuick.Window 2.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.components 3.0 as PC3
 
 import org.kde.kwin 3.0 as KWin
 import org.kde.kwin.private.effects 1.0
@@ -246,7 +245,7 @@ KWin.TabBoxSwitcher {
                 Layout.alignment: Qt.AlignCenter
             }
 
-            PC3.Label {
+            QQC2.Label {
                 font.bold: true
                 font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.6)
                 text: thumbnailView.currentItem ? thumbnailView.currentItem.caption : ""
