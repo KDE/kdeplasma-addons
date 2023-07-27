@@ -6,6 +6,7 @@
  */
 
 import QtQuick 2.15
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.15
 
 import org.kde.plasma.plasmoid 2.0
@@ -28,7 +29,7 @@ MouseArea {
             leftPadding: Kirigami.Units.smallSpacing * 2
             rightPadding: Kirigami.Units.smallSpacing * 2
 
-            contentItem: PlasmaExtras.Heading {
+            contentItem: Kirigami.Heading {
                 level: 3
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignHCenter
@@ -40,7 +41,7 @@ MouseArea {
     Component {
         id: desktopHeadingComponent
 
-        PlasmaComponents3.Label {
+        QQC2.Label {
             elide: Text.ElideRight
             font.pixelSize: 0.3 * timerDigits.height
             text: root.title

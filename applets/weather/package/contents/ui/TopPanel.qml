@@ -5,14 +5,12 @@
  */
 
 import QtQuick 2.9
-
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.3
 
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 GridLayout {
     property var generalModel
@@ -43,7 +41,7 @@ GridLayout {
         colorGroup: parent.Kirigami.Theme.colorSet
     }
 
-    PlasmaExtras.Heading {
+    Kirigami.Heading {
         id: locationLabel
 
         Layout.row: 0
@@ -70,7 +68,7 @@ GridLayout {
         source: generalModel.currentConditionIconName
     }
 
-    PlasmaComponents.Label {
+    QQC2.Label {
         id: conditionLabel
 
         Layout.row: 2
@@ -100,7 +98,7 @@ GridLayout {
             visible: !!observationModel.windDirectionId
         }
 
-        PlasmaComponents.Label {
+        QQC2.Label {
             id: windSpeedLabel
 
             text: observationModel.windSpeed
@@ -113,7 +111,7 @@ GridLayout {
         Layout.minimumWidth: sideWidth
         Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
 
-        PlasmaExtras.Heading {
+        Kirigami.Heading {
             id: tempLabel
 
             Layout.alignment: Qt.AlignVCenter | Qt.AlignRight

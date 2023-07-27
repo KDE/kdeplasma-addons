@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.2
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
@@ -25,7 +26,7 @@ PlasmaCore.Dialog
         height: Kirigami.Units.gridUnit * 17
         width: Kirigami.Units.gridUnit * 16
 
-        PlasmaExtras.Heading {
+        Kirigami.Heading {
             id: title
             Layout.fillWidth: true
             text: window.inputData.mimeType ? i18n("Shares for '%1'", window.inputData.mimeType) : ""
@@ -61,7 +62,7 @@ PlasmaCore.Dialog
                     id: contentLayout
                     anchors.left: parent.left
                     anchors.right: parent.right
-                    PlasmaComponents3.Label {
+                    QQC2.Label {
                         Layout.fillWidth: true
                         text: model.display
                     }

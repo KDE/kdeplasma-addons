@@ -5,11 +5,11 @@
  */
 
 import QtQuick 2.15
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
 
 import org.kde.coreaddons 1.0 as KCoreAddons // kuser
-import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kcmutils // KCMLauncher
 import org.kde.config as KConfig  // KAuthorized.authorizeControlModule
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -85,7 +85,7 @@ PlasmoidItem {
                 visible: root.showFace
             }
 
-            PlasmaComponents3.Label {
+            QQC2.Label {
                 id: label
 
                 width: root.isVertical ? compactRoot.width : undefined

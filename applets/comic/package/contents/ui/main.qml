@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.1
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
@@ -121,7 +122,7 @@ PlasmoidItem {
             }
         }
 
-        PlasmaComponents3.Label {
+        QQC2.Label {
             id: topInfo
 
             anchors {

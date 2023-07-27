@@ -7,11 +7,11 @@
  SPDX-License-Identifier: GPL-2.0-or-later
  */
 import QtQuick 2.15
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.15
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kwin 3.0 as KWin
 
 KWin.TabBoxSwitcher {
@@ -84,7 +84,7 @@ KWin.TabBoxSwitcher {
                 boundsBehavior: Flickable.StopAtBounds
             }
 
-            PlasmaComponents3.Label {
+            QQC2.Label {
                 text: icons.currentItem ? icons.currentItem.caption : ""
                 textFormat: Text.PlainText
                 horizontalAlignment: Text.AlignHCenter

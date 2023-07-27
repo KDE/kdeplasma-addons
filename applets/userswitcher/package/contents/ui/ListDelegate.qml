@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.15
+import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
@@ -52,7 +53,7 @@ PlasmaComponents3.ItemDelegate {
             Layout.fillWidth: true
             spacing: 0
 
-            PlasmaComponents3.Label {
+            QQC2.Label {
                 id: label
                 Layout.fillWidth: true
                 text: item.text
@@ -60,7 +61,7 @@ PlasmaComponents3.ItemDelegate {
                 elide: Text.ElideRight
             }
 
-            PlasmaComponents3.Label {
+            QQC2.Label {
                 id: sublabel
                 Layout.fillWidth: true
                 wrapMode: Text.NoWrap
