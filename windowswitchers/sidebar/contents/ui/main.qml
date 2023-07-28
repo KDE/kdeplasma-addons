@@ -99,7 +99,7 @@ KWin.TabBoxSwitcher {
                                 usesPlasmaTheme: false
                             }
 
-                            Kirigami.Heading {
+                            PlasmaExtras.Heading {
                                 Layout.fillWidth: true
                                 height: undefined
                                 level: 4

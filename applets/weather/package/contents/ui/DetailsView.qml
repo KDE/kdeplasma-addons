@@ -5,10 +5,11 @@
  */
 
 import QtQuick 2.9
-import QtQuick.Controls as QQC2
+
 import QtQuick.Layouts 1.3
 
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.components 3.0 as PlasmaComponents
 
 ColumnLayout {
     id: root
@@ -37,7 +38,7 @@ ColumnLayout {
                 Layout.row: rowIndex
                 Layout.column: 0
 
-                sourceComponent: QQC2.Label {
+                sourceComponent: PlasmaComponents.Label {
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
 
                     text: rowData.label
@@ -62,7 +63,7 @@ ColumnLayout {
                 Layout.row: rowIndex
                 Layout.column: 1
 
-                sourceComponent: QQC2.Label {
+                sourceComponent: PlasmaComponents.Label {
                     Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
 
                     text: rowData.text

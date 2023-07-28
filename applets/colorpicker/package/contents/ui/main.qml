@@ -336,7 +336,7 @@ PlasmoidItem {
                     color: Kirigami.Theme.backgroundColor
                     opacity: 0.8
 
-                    QQC2.Label {
+                    PlasmaComponents3.Label {
                         id: colorLabel
                         anchors.fill: parent
                         horizontalAlignment: Text.AlignHCenter
@@ -347,7 +347,7 @@ PlasmoidItem {
                         text: Logic.formatColor(delegateMouse.currentColor, root.defaultFormat)
                     }
 
-                    QQC2.Label {
+                    PlasmaComponents3.Label {
                         id: copyIndicatorLabel
                         visible: false
                         anchors.fill: parent

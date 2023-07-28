@@ -65,7 +65,7 @@ PlasmoidItem {
                 height: Kirigami.Units.iconSizes.medium
             }
 
-            Label {
+            PlasmaComponents3.Label {
                 id: header
                 text: i18nc("@title", "Konsole Profiles")
                 horizontalAlignment: Text.AlignHCenter | Text.AlignVCenter

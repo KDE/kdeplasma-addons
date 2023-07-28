@@ -5,7 +5,6 @@
  */
 
 import QtQuick 2.15
-import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.15
 
 import org.kde.coreaddons 1.0 as KCoreAddons
@@ -304,7 +303,7 @@ Item {
             onClicked: main.shuffleBoard();
         }
 
-        QQC2.Label {
+        PlasmaComponents3.Label {
             id: timeLabel
             Layout.fillWidth: true
             text: main.timerText()
@@ -333,7 +332,7 @@ Item {
             }
         }
 
-        QQC2.Label {
+        PlasmaComponents3.Label {
             id: solvedLabel
             anchors.centerIn: parent
             color: Kirigami.Theme.textColor

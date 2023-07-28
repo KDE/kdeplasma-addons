@@ -5,7 +5,6 @@
  */
 
 import QtQuick 2.15
-import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
@@ -161,7 +160,7 @@ Item {
 
             spacing: parent.columnSpacing
 
-            QQC2.Label {
+            PlasmaComponents3.Label {
                 id: titleLabel
 
                 Layout.fillWidth: true
@@ -176,7 +175,7 @@ Item {
                 text: root.title
             }
 
-            QQC2.Label {
+            PlasmaComponents3.Label {
                 id: remainingTimeLabel
 
                 Layout.fillWidth: parent.Layout.fillWidth

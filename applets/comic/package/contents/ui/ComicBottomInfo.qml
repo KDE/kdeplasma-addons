@@ -5,9 +5,9 @@
  */
 
 import QtQuick 2.1
-import QtQuick.Controls as QQC2
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 
 Item {
@@ -22,7 +22,7 @@ Item {
 
     visible: (comicIdentifier.text.length > 0 || comicUrl.text.length > 0)
 
-    QQC2.Label {
+    PlasmaComponents3.Label {
         id: comicIdentifier
 
         anchors {
@@ -63,7 +63,7 @@ Item {
         }
     }
 
-    QQC2.Label {
+    PlasmaComponents3.Label {
         id:comicUrl
 
         anchors {

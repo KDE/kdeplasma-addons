@@ -5,6 +5,7 @@
  */
 
 import QtQuick 2.9
+
 import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.12 as QQC2
 
@@ -12,6 +13,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.components 3.0 as PlasmaComponents
 
 import org.kde.plasma.private.weather 1.0
 
@@ -73,7 +75,7 @@ ColumnLayout {
         noticesModel: root.noticesModel
     }
 
-    QQC2.Label {
+    PlasmaComponents.Label {
         id: sourceLabel
         visible: root.status === Util.Normal
         readonly property string creditUrl: generalModel.creditUrl

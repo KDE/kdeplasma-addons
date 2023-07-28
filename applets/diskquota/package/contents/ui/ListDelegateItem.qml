@@ -4,7 +4,6 @@
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
 import QtQuick 2.1
-import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.core 2.0 as PlasmaCore
@@ -53,11 +52,11 @@ PlasmaComponents3.ItemDelegate {
 
             RowLayout {
                 width: parent.width
-                QQC2.Label {
+                PlasmaComponents3.Label {
                     Layout.fillWidth: true
                     text: details
                 }
-                QQC2.Label {
+                PlasmaComponents3.Label {
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignRight
                     text: freeString
@@ -77,7 +76,7 @@ PlasmaComponents3.ItemDelegate {
                     }
                 }
             }
-            QQC2.Label {
+            PlasmaComponents3.Label {
                 anchors.left: parent.left
                 text: usedString
                 opacity: 0.6

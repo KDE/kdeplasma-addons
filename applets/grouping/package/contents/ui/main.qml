@@ -6,7 +6,6 @@
  */
 
 import QtQuick 2.15
-import QtQuick.Controls as QQC2
 import QtQuick.Layouts 1.15
 
 import org.kde.plasma.core 2.1 as PlasmaCore
@@ -142,7 +141,7 @@ ContainmentItem {
         }
     }
 
-    QQC2.Label {
+    PlasmaComponents.Label {
         anchors.fill: mainStack
         text: i18n("Drag applets here")
         visible: mainStack.count === 0
