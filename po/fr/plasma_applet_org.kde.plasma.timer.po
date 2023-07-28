@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-07-28 02:07+0000\n"
 "PO-Revision-Date: 2022-12-04 08:40+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -47,20 +47,20 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Avancé"
 
-#: package/contents/ui/CompactRepresentation.qml:134
+#: package/contents/ui/CompactRepresentation.qml:135
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Mettre le minuteur en pause"
 
-#: package/contents/ui/CompactRepresentation.qml:134
+#: package/contents/ui/CompactRepresentation.qml:135
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Démarrer un minuteur"
 
-#: package/contents/ui/CompactRepresentation.qml:191
-#: package/contents/ui/CompactRepresentation.qml:208
+#: package/contents/ui/CompactRepresentation.qml:192
+#: package/contents/ui/CompactRepresentation.qml:209
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"

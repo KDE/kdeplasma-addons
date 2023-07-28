@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-28 02:07+0000\n"
 "PO-Revision-Date: 2019-11-27 00:00+0100\n"
 "Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -82,19 +82,19 @@ msgstr "Elemek:"
 msgid "Colored numbers:"
 msgstr "Számok színe:"
 
-#: package/contents/ui/FifteenPuzzle.qml:259
+#: package/contents/ui/FifteenPuzzle.qml:260
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Idő: %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:302
+#: package/contents/ui/FifteenPuzzle.qml:303
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Keverés"
 
-#: package/contents/ui/FifteenPuzzle.qml:339
+#: package/contents/ui/FifteenPuzzle.qml:340
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."

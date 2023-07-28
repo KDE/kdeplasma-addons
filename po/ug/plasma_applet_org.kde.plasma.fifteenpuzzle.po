@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-28 02:07+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -77,20 +77,20 @@ msgstr ""
 msgid "Colored numbers:"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:259
+#: package/contents/ui/FifteenPuzzle.qml:260
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:302
+#: package/contents/ui/FifteenPuzzle.qml:303
 #, fuzzy, kde-format
 #| msgid "Shuffle"
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "تەرتىپسىز"
 
-#: package/contents/ui/FifteenPuzzle.qml:339
+#: package/contents/ui/FifteenPuzzle.qml:340
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."

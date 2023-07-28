@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-28 02:07+0000\n"
 "PO-Revision-Date: 2009-01-12 03:03+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <kde-i18n-doc@kde.org>\n"
@@ -305,25 +305,25 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr ""
 
-#: package/contents/ui/ForecastView.qml:74
-#: package/contents/ui/ForecastView.qml:81
+#: package/contents/ui/ForecastView.qml:73
+#: package/contents/ui/ForecastView.qml:80
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr ""
 
-#: package/contents/ui/FullRepresentation.qml:37
+#: package/contents/ui/FullRepresentation.qml:35
 #, kde-format
 msgid "Please set your location"
 msgstr ""
 
-#: package/contents/ui/FullRepresentation.qml:40
+#: package/contents/ui/FullRepresentation.qml:38
 #, fuzzy, kde-format
 #| msgid "Weather Units"
 msgid "Set location…"
 msgstr "Yeka yên Hewayê"
 
-#: package/contents/ui/FullRepresentation.qml:55
+#: package/contents/ui/FullRepresentation.qml:53
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
 msgstr ""
@@ -484,14 +484,14 @@ msgstr "%1 %2%3"
 msgid "Humidity: %1"
 msgstr "Xenam: %1"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, fuzzy, kde-format
 #| msgid "Warnings Issued:"
 msgctxt "@title:column weather warnings"
 msgid "Warnings Issued"
 msgstr "Tiştên Hişyariyê:"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, fuzzy, kde-format
 #| msgid "Watches Issued:"
 msgctxt "@title:column weather watches"

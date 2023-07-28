@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-28 02:07+0000\n"
 "PO-Revision-Date: 2022-07-21 20:47+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -78,19 +78,19 @@ msgstr "ნაწილები:"
 msgid "Colored numbers:"
 msgstr "გაფერადებული რიცხვები:"
 
-#: package/contents/ui/FifteenPuzzle.qml:259
+#: package/contents/ui/FifteenPuzzle.qml:260
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "დრო: %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:302
+#: package/contents/ui/FifteenPuzzle.qml:303
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "შემთხვევით"
 
-#: package/contents/ui/FifteenPuzzle.qml:339
+#: package/contents/ui/FifteenPuzzle.qml:340
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."

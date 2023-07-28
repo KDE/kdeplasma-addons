@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-28 02:07+0000\n"
 "PO-Revision-Date: 2023-01-06 11:02+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -290,24 +290,24 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Hledejte meteostanici pro nastavení vaší polohy"
 
-#: package/contents/ui/ForecastView.qml:74
-#: package/contents/ui/ForecastView.qml:81
+#: package/contents/ui/ForecastView.qml:73
+#: package/contents/ui/ForecastView.qml:80
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:37
+#: package/contents/ui/FullRepresentation.qml:35
 #, kde-format
 msgid "Please set your location"
 msgstr "Prosím, nastavte svoji polohu"
 
-#: package/contents/ui/FullRepresentation.qml:40
+#: package/contents/ui/FullRepresentation.qml:38
 #, kde-format
 msgid "Set location…"
 msgstr "Nastavit polohu…"
 
-#: package/contents/ui/FullRepresentation.qml:55
+#: package/contents/ui/FullRepresentation.qml:53
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
 msgstr "Vypršení požadavku na stažení informací o počasí pro %1."
@@ -446,13 +446,13 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "Vlhkost: %1"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, kde-format
 msgctxt "@title:column weather warnings"
 msgid "Warnings Issued"
 msgstr "Vydaná varování"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, kde-format
 msgctxt "@title:column weather watches"
 msgid "Watches Issued"

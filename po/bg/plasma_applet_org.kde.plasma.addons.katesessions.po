@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kate\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-28 02:07+0000\n"
 "PO-Revision-Date: 2022-01-02 14:17+0100\n"
 "Last-Translator: mkkDr2010 <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:92
+#: contents/ui/KateSessionsItemDelegate.qml:93
 #, kde-format
 msgid "Session name"
 msgstr "Име на сесия"
 
-#: contents/ui/KateSessionsItemDelegate.qml:104
+#: contents/ui/KateSessionsItemDelegate.qml:105
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "Създаване на нова сесия и стартиране на Kate"
 
-#: contents/ui/KateSessionsItemDelegate.qml:116
+#: contents/ui/KateSessionsItemDelegate.qml:117
 #, kde-format
 msgid "Cancel session creation"
 msgstr "Отменяне създаване на сесия"

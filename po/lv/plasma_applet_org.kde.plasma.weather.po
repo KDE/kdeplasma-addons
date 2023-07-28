@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-28 02:07+0000\n"
 "PO-Revision-Date: 2010-01-30 20:04+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -312,25 +312,25 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr ""
 
-#: package/contents/ui/ForecastView.qml:74
-#: package/contents/ui/ForecastView.qml:81
+#: package/contents/ui/ForecastView.qml:73
+#: package/contents/ui/ForecastView.qml:80
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:37
+#: package/contents/ui/FullRepresentation.qml:35
 #, kde-format
 msgid "Please set your location"
 msgstr ""
 
-#: package/contents/ui/FullRepresentation.qml:40
+#: package/contents/ui/FullRepresentation.qml:38
 #, fuzzy, kde-format
 #| msgid "Weather Applet Configuration"
 msgid "Set location…"
 msgstr "Laikapstākļu sīklietotnes konfigurēšana"
 
-#: package/contents/ui/FullRepresentation.qml:55
+#: package/contents/ui/FullRepresentation.qml:53
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
 msgstr ""
@@ -504,7 +504,7 @@ msgstr "%1 (%2%)"
 msgid "Humidity: %1"
 msgstr "Mitrums: %1%2"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, fuzzy, kde-format
 #| msgctxt "weather warnings"
 #| msgid "Warnings Issued:"
@@ -512,7 +512,7 @@ msgctxt "@title:column weather warnings"
 msgid "Warnings Issued"
 msgstr "Izsūtīti brīdinājumi:"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, fuzzy, kde-format
 #| msgctxt "weather watches"
 #| msgid "Watches Issued:"

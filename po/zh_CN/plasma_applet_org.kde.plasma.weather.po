@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-28 02:07+0000\n"
 "PO-Revision-Date: 2023-07-23 12:26\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -288,24 +288,24 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "搜索气象站以设置您的位置"
 
-#: package/contents/ui/ForecastView.qml:74
-#: package/contents/ui/ForecastView.qml:81
+#: package/contents/ui/ForecastView.qml:73
+#: package/contents/ui/ForecastView.qml:80
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:37
+#: package/contents/ui/FullRepresentation.qml:35
 #, kde-format
 msgid "Please set your location"
 msgstr "请设置您的位置"
 
-#: package/contents/ui/FullRepresentation.qml:40
+#: package/contents/ui/FullRepresentation.qml:38
 #, kde-format
 msgid "Set location…"
 msgstr "设置位置…"
 
-#: package/contents/ui/FullRepresentation.qml:55
+#: package/contents/ui/FullRepresentation.qml:53
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
 msgstr "获取 %1 的气象信息超时。"
@@ -442,13 +442,13 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "湿度：%1"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, kde-format
 msgctxt "@title:column weather warnings"
 msgid "Warnings Issued"
 msgstr "已发布警告"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, kde-format
 msgctxt "@title:column weather watches"
 msgid "Watches Issued"

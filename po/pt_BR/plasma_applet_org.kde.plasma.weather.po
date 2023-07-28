@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-28 02:07+0000\n"
 "PO-Revision-Date: 2022-12-20 11:16-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -290,24 +290,24 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Pesquisar uma estação meteorológica para definir sua localização"
 
-#: package/contents/ui/ForecastView.qml:74
-#: package/contents/ui/ForecastView.qml:81
+#: package/contents/ui/ForecastView.qml:73
+#: package/contents/ui/ForecastView.qml:80
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:37
+#: package/contents/ui/FullRepresentation.qml:35
 #, kde-format
 msgid "Please set your location"
 msgstr "Defina sua localização"
 
-#: package/contents/ui/FullRepresentation.qml:40
+#: package/contents/ui/FullRepresentation.qml:38
 #, kde-format
 msgid "Set location…"
 msgstr "Definir localização..."
 
-#: package/contents/ui/FullRepresentation.qml:55
+#: package/contents/ui/FullRepresentation.qml:53
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
 msgstr "A recuperação de informações meteorológicas para %1 expirou."
@@ -445,13 +445,13 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "Umidade: %1"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, kde-format
 msgctxt "@title:column weather warnings"
 msgid "Warnings Issued"
 msgstr "Avisos emitidos"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, kde-format
 msgctxt "@title:column weather watches"
 msgid "Watches Issued"

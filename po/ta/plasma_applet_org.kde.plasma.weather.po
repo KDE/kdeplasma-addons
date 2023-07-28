@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-07-28 02:07+0000\n"
 "PO-Revision-Date: 2022-12-01 21:55+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -288,24 +288,24 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "உங்கள் இருப்பிடத்தை அமைக்க, ஏதாவதொரு வானிலை மையத்தைத் தேடுங்கள்"
 
-#: package/contents/ui/ForecastView.qml:74
-#: package/contents/ui/ForecastView.qml:81
+#: package/contents/ui/ForecastView.qml:73
+#: package/contents/ui/ForecastView.qml:80
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:37
+#: package/contents/ui/FullRepresentation.qml:35
 #, kde-format
 msgid "Please set your location"
 msgstr "உங்கள் இருப்பிடத்தைத் தேர்ந்தெடுங்கள்"
 
-#: package/contents/ui/FullRepresentation.qml:40
+#: package/contents/ui/FullRepresentation.qml:38
 #, kde-format
 msgid "Set location…"
 msgstr "இருப்பிடத்தை அமை…"
 
-#: package/contents/ui/FullRepresentation.qml:55
+#: package/contents/ui/FullRepresentation.qml:53
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
 msgstr "%1 என்பதற்கான வானிலை விவரங்களைப் பெறுவது காலாவதியானது."
@@ -443,13 +443,13 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "ஈரப்பதம்: %1"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, kde-format
 msgctxt "@title:column weather warnings"
 msgid "Warnings Issued"
 msgstr "வெளியிடப்பட்டுள்ள எச்சரிக்கைகள்"
 
-#: package/contents/ui/NoticesView.qml:38
+#: package/contents/ui/NoticesView.qml:36
 #, kde-format
 msgctxt "@title:column weather watches"
 msgid "Watches Issued"
