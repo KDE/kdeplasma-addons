@@ -25,7 +25,7 @@ PlasmaCore.Dialog
         height: Kirigami.Units.gridUnit * 17
         width: Kirigami.Units.gridUnit * 16
 
-        PlasmaExtras.Heading {
+        Kirigami.Heading {
             id: title
             Layout.fillWidth: true
             text: window.inputData.mimeType ? i18n("Shares for '%1'", window.inputData.mimeType) : ""

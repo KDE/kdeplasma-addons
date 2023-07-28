@@ -10,7 +10,6 @@ import QtQuick.Layouts 1.3
 
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 ColumnLayout {
     id: root
@@ -31,7 +30,7 @@ ColumnLayout {
 
             Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
 
-            PlasmaExtras.Heading {
+            Kirigami.Heading {
                 level: 4
                 Layout.alignment: Qt.AlignHCenter
 
