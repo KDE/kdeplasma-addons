@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-28 02:07+0000\n"
+"POT-Creation-Date: 2023-07-29 01:59+0000\n"
 "PO-Revision-Date: 2023-01-08 18:17+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -288,24 +288,24 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Tìm một trạm thời tiết để đặt địa điểm của bạn"
 
-#: package/contents/ui/ForecastView.qml:73
-#: package/contents/ui/ForecastView.qml:80
+#: package/contents/ui/ForecastView.qml:74
+#: package/contents/ui/ForecastView.qml:81
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:35
+#: package/contents/ui/FullRepresentation.qml:37
 #, kde-format
 msgid "Please set your location"
 msgstr "Vui lòng đặt địa điểm của bạn"
 
-#: package/contents/ui/FullRepresentation.qml:38
+#: package/contents/ui/FullRepresentation.qml:40
 #, kde-format
 msgid "Set location…"
 msgstr "Đặt địa điểm…"
 
-#: package/contents/ui/FullRepresentation.qml:53
+#: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
 msgstr "Việc lấy thông tin thời tiết cho %1 đã hết giờ."
@@ -442,13 +442,13 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "Độ ẩm: %1"
 
-#: package/contents/ui/NoticesView.qml:36
+#: package/contents/ui/NoticesView.qml:37
 #, kde-format
 msgctxt "@title:column weather warnings"
 msgid "Warnings Issued"
 msgstr "Các cảnh báo đã đưa ra"
 
-#: package/contents/ui/NoticesView.qml:36
+#: package/contents/ui/NoticesView.qml:37
 #, kde-format
 msgctxt "@title:column weather watches"
 msgid "Watches Issued"

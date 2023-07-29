@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-28 02:07+0000\n"
+"POT-Creation-Date: 2023-07-29 01:59+0000\n"
 "PO-Revision-Date: 2021-12-14 09:52+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -77,19 +77,19 @@ msgstr "Các ô:"
 msgid "Colored numbers:"
 msgstr "Các số có màu:"
 
-#: package/contents/ui/FifteenPuzzle.qml:260
+#: package/contents/ui/FifteenPuzzle.qml:259
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Thời gian: %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:303
+#: package/contents/ui/FifteenPuzzle.qml:302
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Xáo trộn"
 
-#: package/contents/ui/FifteenPuzzle.qml:340
+#: package/contents/ui/FifteenPuzzle.qml:339
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."

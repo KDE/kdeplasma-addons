@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-28 02:07+0000\n"
+"POT-Creation-Date: 2023-07-29 01:59+0000\n"
 "PO-Revision-Date: 2022-01-22 22:28+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -88,7 +88,7 @@ msgctxt "@option:check"
 msgid "Copy automatically:"
 msgstr "انسخ آليًّا:"
 
-#: contents/ui/ShareDialog.qml:32
+#: contents/ui/ShareDialog.qml:31
 #, kde-format
 msgid "Shares for '%1'"
 msgstr "مشاركات '%1'"

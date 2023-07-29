@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-28 02:07+0000\n"
+"POT-Creation-Date: 2023-07-29 01:59+0000\n"
 "PO-Revision-Date: 2023-01-19 23:46+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -290,24 +290,24 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "搜尋氣象站來設定您的位置"
 
-#: package/contents/ui/ForecastView.qml:73
-#: package/contents/ui/ForecastView.qml:80
+#: package/contents/ui/ForecastView.qml:74
+#: package/contents/ui/ForecastView.qml:81
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:35
+#: package/contents/ui/FullRepresentation.qml:37
 #, kde-format
 msgid "Please set your location"
 msgstr "請設定您的位置"
 
-#: package/contents/ui/FullRepresentation.qml:38
+#: package/contents/ui/FullRepresentation.qml:40
 #, kde-format
 msgid "Set location…"
 msgstr "設定位置…"
 
-#: package/contents/ui/FullRepresentation.qml:53
+#: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
 msgstr "查詢 %1 的天氣資訊時超過等待時間。"
@@ -444,13 +444,13 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "濕度：%1"
 
-#: package/contents/ui/NoticesView.qml:36
+#: package/contents/ui/NoticesView.qml:37
 #, kde-format
 msgctxt "@title:column weather warnings"
 msgid "Warnings Issued"
 msgstr "已發布的警報"
 
-#: package/contents/ui/NoticesView.qml:36
+#: package/contents/ui/NoticesView.qml:37
 #, kde-format
 msgctxt "@title:column weather watches"
 msgid "Watches Issued"
