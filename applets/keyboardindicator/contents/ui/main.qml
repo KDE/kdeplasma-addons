@@ -71,7 +71,7 @@ PlasmoidItem {
         hoverEnabled: true
 
         Accessible.name: Plasmoid.title
-        Accessible.description: Plasmoid.toolTipSubText
+        Accessible.description: root.toolTipSubText
         Accessible.role: Accessible.Button
 
         property bool wasExpanded: false
