@@ -136,7 +136,7 @@ PlasmoidItem {
                 }
             }
 
-            PlasmaCore.IconItem {
+            Kirigami.Icon {
                 id: defaultIcon
                 anchors.fill: parent
                 source: "fork"

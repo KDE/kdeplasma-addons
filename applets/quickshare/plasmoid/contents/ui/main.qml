@@ -262,7 +262,7 @@ PlasmoidItem {
             subText: i18n("Drop text or an image onto me to upload it to an online service.")
         }
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             id: icon
             anchors.fill: parent
         }

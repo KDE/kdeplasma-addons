@@ -43,7 +43,7 @@ Loader {
     Component {
         id: iconComponent
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             readonly property int minIconSize: Math.max((compactRoot.vertical ? compactRoot.width : compactRoot.height), Kirigami.Units.iconSizes.small)
 
             source: generalModel.currentConditionIconName

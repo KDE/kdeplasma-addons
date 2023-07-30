@@ -58,7 +58,7 @@ PlasmoidItem {
             id: headerRow
             anchors { left: parent.left; right: parent.right }
 
-            PlasmaCore.IconItem {
+            Kirigami.Icon {
                 id: appIcon
                 source: "utilities-terminal"
                 width: Kirigami.Units.iconSizes.medium

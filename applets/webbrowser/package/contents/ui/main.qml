@@ -10,7 +10,6 @@ import QtQuick
 import QtWebEngine
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasmoid 2.0
@@ -43,7 +42,7 @@ PlasmoidItem {
             onTapped: root.expanded = !wasExpanded
         }
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             anchors.fill: parent
             visible: favIconLoader.item?.status !== Image.Ready
             source: Plasmoid.configuration.icon || Plasmoid.icon

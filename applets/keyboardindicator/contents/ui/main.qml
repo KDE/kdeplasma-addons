@@ -78,7 +78,7 @@ PlasmoidItem {
         onPressed: wasExpanded = root.expanded
         onClicked: root.expanded = !wasExpanded
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             anchors.fill: parent
             source: Plasmoid.icon
             active: compactMouse.containsMouse

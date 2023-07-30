@@ -6,14 +6,14 @@
 
 import QtQuick 2.15
 
-import org.kde.plasma.core 2.1 as PlasmaCore
+import org.kde.kirigami 2.20 as Kirigami
 
 ListDelegate {
     id: item
 
     activeFocusOnTab: true
 
-    iconItem: PlasmaCore.IconItem {
+    iconItem: Kirigami.Icon {
         anchors.fill: parent
         source: item.icon.name
     }

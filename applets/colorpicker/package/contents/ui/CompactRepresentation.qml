@@ -81,7 +81,7 @@ DropArea {
                 subText: xi18nc("@info:usagetip", "Drag a color code here to save it<nl/>Drag an image file here to get its average color");
             }
 
-            PlasmaCore.IconItem {
+            Kirigami.Icon {
                 id: pickerIcon
                 anchors.centerIn: parent
                 width: Math.round(parent.width * 0.9)

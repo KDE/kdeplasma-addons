@@ -434,12 +434,11 @@ PlasmoidItem {
             }
         }
 
-        PlasmaCore.IconItem {
+        Kirigami.Icon {
             id: pauseIcon
             visible: pause
             anchors.fill: parent
             source: "media-playback-pause"
-            colorGroup: Kirigami.Theme.colorSet
         }
     }
     */

@@ -97,10 +97,9 @@ PlasmoidItem {
             onPressed: wasExpanded = root.expanded
             onClicked: root.expanded = !wasExpanded
 
-            PlasmaCore.IconItem {
+            Kirigami.Icon {
                 anchors.fill: parent
                 source: "knotes"
-                colorGroup: Kirigami.Theme.colorSet
                 active: parent.containsMouse
             }
         }

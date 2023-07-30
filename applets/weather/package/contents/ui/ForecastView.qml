@@ -53,7 +53,7 @@ GridLayout {
                 text: isPlaceHolder ? modelData.placeholder || "" : modelData.period.replace(" nt", "")
             }
 
-            PlasmaCore.IconItem {
+            Kirigami.Icon {
                 Layout.fillWidth: true
                 Layout.preferredHeight: preferredIconSize
                 Layout.preferredWidth: preferredIconSize

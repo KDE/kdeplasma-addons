@@ -11,6 +11,7 @@ import org.kde.kcmutils // KCMLauncher
 import org.kde.config as KConfig  // KAuthorized.authorizeControlModule
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
+import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.private.nightcolorcontrol 1.0
 
@@ -49,7 +50,7 @@ PlasmoidItem {
 
     preferredRepresentation: fullRepresentation
 
-    fullRepresentation: PlasmaCore.IconItem {
+    fullRepresentation: Kirigami.Icon {
         active: compactMouseArea.containsMouse
         source: Plasmoid.icon
 

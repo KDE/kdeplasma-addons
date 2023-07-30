@@ -92,11 +92,10 @@ KWin.TabBoxSwitcher {
                             spacing: Kirigami.Units.smallSpacing
                             Layout.fillWidth: true
 
-                            PlasmaCore.IconItem {
+                            Kirigami.Icon {
                                 Layout.preferredHeight: Kirigami.Units.iconSizes.medium
                                 Layout.preferredWidth: Kirigami.Units.iconSizes.medium
                                 source: model.icon
-                                usesPlasmaTheme: false
                             }
 
                             Kirigami.Heading {

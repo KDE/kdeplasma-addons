@@ -202,7 +202,7 @@ Item {
                 }
             }
 
-            PlasmaCore.IconItem {
+            Kirigami.Icon {
                 id: icon
 
                 anchors {
@@ -212,7 +212,6 @@ Item {
 
                 width: Kirigami.Units.iconSizes.medium
                 height: width
-                usesPlasmaTheme: false
                 source: url == "quicklaunch:drop" ? "" : iconName
                 active: mouseArea.containsMouse
             }

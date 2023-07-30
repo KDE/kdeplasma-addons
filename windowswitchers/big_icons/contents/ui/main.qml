@@ -49,7 +49,7 @@ KWin.TabBoxSwitcher {
                 orientation: ListView.Horizontal
 
                 model: tabBox.model
-                delegate: PlasmaCore.IconItem {
+                delegate: Kirigami.Icon {
                     property string caption: model.caption
 
                     width: icons.delegateHeight
@@ -57,7 +57,6 @@ KWin.TabBoxSwitcher {
 
                     source: model.icon
                     active: index == icons.currentIndex
-                    usesPlasmaTheme: false
 
                     TapHandler {
                         onSingleTapped: {
