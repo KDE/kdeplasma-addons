@@ -77,6 +77,8 @@ PlasmoidItem {
         id: noteManager
     }
 
+    // Only exists because the default CompactRepresentation doesn't open on drag.
+    // TODO remove once it gains that feature (perhaps optionally?)
     compactRepresentation: DragDrop.DropArea {
         id: compactDropArea
         onDragEnter: activationTimer.restart()

@@ -64,6 +64,9 @@ PlasmoidItem {
         }
     }
 
+    // Only exists because the default CompactRepresentation doesn't expose a
+    // way to mark its icon as disabled.
+    // TODO remove once it gains that feature.
     compactRepresentation: MouseArea {
         id: compactMouse
 

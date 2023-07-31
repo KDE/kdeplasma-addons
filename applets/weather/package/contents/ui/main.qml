@@ -411,6 +411,10 @@ PlasmoidItem {
         return tooltips.join("\n");
     }
 
+    // Only exists because the default CompactRepresentation doesn't expose:
+    // - Icon overlays, or a generic way to overlay something on top of the icon
+    // - The ability to show text below or beside the icon
+    // TODO remove once it gains those features.
     compactRepresentation: CompactRepresentation {
         generalModel: root.generalModel
         observationModel: root.observationModel

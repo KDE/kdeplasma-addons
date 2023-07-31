@@ -20,6 +20,9 @@ PlasmoidItem {
     switchWidth: Kirigami.Units.gridUnit * 16
     switchHeight: Kirigami.Units.gridUnit * 23
 
+    // Only exists because the default CompactRepresentation doesn't expose
+    // a way to display arbitrary images; it can only show icons.
+    // TODO remove once it gains that feature.
     compactRepresentation: Loader {
         id: favIconLoader
         active: Plasmoid.configuration.useFavIcon
