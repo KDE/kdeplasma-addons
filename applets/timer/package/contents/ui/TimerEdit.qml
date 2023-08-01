@@ -40,7 +40,7 @@ Row {
             height: internal.digitH
 
             activeFocusOnTab: true
-            svg: timerSvg
+            imagePath: "widgets/timer"
             elementId: num + internal.digitSuffix
 
             Keys.onPressed: {
@@ -97,16 +97,11 @@ Row {
     Component {
         id: separator
         KSvg.SvgItem {
-            svg: timerSvg
             width: internal.digitW / 2;
             height: internal.digitH;
+            imagePath: "widgets/timer"
             elementId: "separator" + internal.digitSuffix
         }
-    }
-
-    KSvg.Svg {
-        id: timerSvg
-        imagePath: "widgets/timer"
     }
 
     // Following 8 loaders will prepare all elements

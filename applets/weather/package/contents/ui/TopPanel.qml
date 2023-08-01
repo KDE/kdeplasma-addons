@@ -34,13 +34,6 @@ GridLayout {
 
     columns: 3
 
-    KSvg.Svg {
-        id: windSvg
-
-        imagePath: "weather/wind-arrows"
-        colorGroup: parent.Kirigami.Theme.colorSet
-    }
-
     Kirigami.Heading {
         id: locationLabel
 
@@ -92,7 +85,7 @@ GridLayout {
             Layout.preferredHeight: naturalSize.height
             Layout.preferredWidth: naturalSize.width
 
-            svg: windSvg
+            imagePath: "weather/wind-arrows"
             elementId: observationModel.windDirectionId || ""
 
             visible: !!observationModel.windDirectionId

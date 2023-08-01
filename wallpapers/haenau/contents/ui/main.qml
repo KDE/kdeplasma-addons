@@ -12,14 +12,12 @@ import org.kde.plasma.plasmoid 2.0
 WallpaperItem {
     id: root
 
+    //FIXME: Svg doesn't support relative paths
+    readonly property string wallpaperPath: String(Qt.resolvedUrl("wallpaper.svgz")).substring(7)
+
     KSvg.SvgItem {
         anchors.fill: parent
 
-        svg: KSvg.Svg {
-            id: wallpaperSvg
-            //FIXME: Svg doesn't support relative paths
-            imagePath: String(Qt.resolvedUrl("wallpaper.svgz")).substring(7)
-        }
         elementId: "background"
 
         BackgroundElement {

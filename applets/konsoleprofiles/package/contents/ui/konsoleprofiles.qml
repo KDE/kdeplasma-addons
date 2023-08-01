@@ -49,11 +49,6 @@ PlasmoidItem {
             plasmoid.popupIcon = "utilities-terminal";
         }
 
-        KSvg.Svg {
-            id: lineSvg
-            imagePath: "widgets/line"
-        }
-
         Row {
             id: headerRow
             anchors { left: parent.left; right: parent.right }
@@ -78,7 +73,7 @@ PlasmoidItem {
             id: separator
 
             anchors { left: headerRow.left; right: headerRow.right; top: headerRow.bottom }
-            svg: lineSvg
+            imagePath: "widgets/line"
             elementId: "horizontal-line"
             height: lineSvg.elementSize("horizontal-line").height
         }

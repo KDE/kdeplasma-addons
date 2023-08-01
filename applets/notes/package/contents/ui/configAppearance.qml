@@ -50,11 +50,6 @@ ColumnLayout {
             id: appearancePage
             anchors.fill: parent
 
-            KSvg.Svg {
-                id: noteSvg
-                imagePath: "widgets/notes"
-            }
-
             view.model: ["white", "black", "red", "orange", "yellow", "green", "blue", "pink", "translucent", "translucent-light"]
             view.currentIndex: view.model.indexOf(cfg_color)
             view.onCurrentIndexChanged: cfg_color = view.model[view.currentIndex]
@@ -66,7 +61,7 @@ ColumnLayout {
                     anchors.fill: parent
                     anchors.margins: Kirigami.Units.largeSpacing
 
-                    svg: noteSvg
+                    imagePath: "widgets/notes"
                     elementId: modelData + "-notes"
 
                     QQC2.Label {

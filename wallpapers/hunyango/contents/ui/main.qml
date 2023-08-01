@@ -35,11 +35,9 @@ WallpaperItem {
             height: (parent.width / parent.height >= 16 / 9) ? width * (9 / 16) : parent.height
 
             smooth: true
-            svg: KSvg.Svg {
-                id: wallpaperSvg
-                //FIXME: Svg doesn't support relative paths
-                imagePath: String(Qt.resolvedUrl("wallpaper.svgz")).substring(7)
-            }
+
+            //FIXME: Svg doesn't support relative paths
+            imagePath: String(Qt.resolvedUrl("wallpaper.svgz")).substring(7)
         }
 
         // Intentionally not using a standard duration value as this is an animated

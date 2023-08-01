@@ -200,11 +200,6 @@ PlasmoidItem {
                     popup.visible = !popup.visible
                 }
 
-                KSvg.Svg {
-                    id: arrowSvg
-                    imagePath: "widgets/arrows"
-                }
-
                 KSvg.SvgItem {
                     id: arrow
 
@@ -219,7 +214,7 @@ PlasmoidItem {
                         }
                     }
 
-                    svg: arrowSvg
+                    imagePath: "widgets/arrows"
                     elementId: {
                         if (plasmoid.location == PlasmaCore.Types.TopEdge) {
                             return "down-arrow";

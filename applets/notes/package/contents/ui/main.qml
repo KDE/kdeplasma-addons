@@ -126,9 +126,7 @@ PlasmoidItem {
         Layout.minimumWidth: Kirigami.Units.iconSizes.medium
         Layout.minimumHeight: Kirigami.Units.iconSizes.medium
 
-        svg: KSvg.Svg {
-            imagePath: "widgets/notes"
-        }
+        imagePath: "widgets/notes"
         elementId: Plasmoid.configuration.color + "-notes"
 
         Connections {
