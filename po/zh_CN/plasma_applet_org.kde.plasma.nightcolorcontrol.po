@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2023-07-30 07:07\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,37 +18,37 @@ msgstr ""
 "plasma.nightcolorcontrol.pot\n"
 "X-Crowdin-File-ID: 43315\n"
 
-#: package/contents/ui/main.qml:33
+#: package/contents/ui/main.qml:34
 #, kde-format
 msgid "Night Color Control"
 msgstr "夜间颜色控制"
 
-#: package/contents/ui/main.qml:36
+#: package/contents/ui/main.qml:37
 #, kde-format
 msgid "Night Color is inhibited"
 msgstr "夜间颜色未生效"
 
-#: package/contents/ui/main.qml:39
+#: package/contents/ui/main.qml:40
 #, kde-format
 msgid "Night Color is unavailable"
 msgstr "夜间颜色不可用"
 
-#: package/contents/ui/main.qml:42
+#: package/contents/ui/main.qml:43
 #, kde-format
 msgid "Night Color is disabled. Click to configure"
 msgstr "夜间颜色已禁用。点击进行配置"
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:46
 #, kde-format
 msgid "Night Color is not running"
 msgstr "夜间颜色未运行"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:48
 #, kde-format
 msgid "Night Color is active (%1K)"
 msgstr "夜间颜色已激活 (%1K)"
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:98
 #, kde-format
 msgid "&Configure Night Color…"
 msgstr "配置夜间颜色(&C)…"

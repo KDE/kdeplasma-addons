@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2022-02-13 14:38+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -79,19 +79,19 @@ msgstr "Sjølvvald tittel"
 msgid "Launch %1"
 msgstr "Start %1"
 
-#: package/contents/ui/IconItem.qml:261
+#: package/contents/ui/IconItem.qml:260
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Legg til køyrar …"
 
-#: package/contents/ui/IconItem.qml:267
+#: package/contents/ui/IconItem.qml:266
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Rediger køyrar …"
 
-#: package/contents/ui/IconItem.qml:273
+#: package/contents/ui/IconItem.qml:272
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"

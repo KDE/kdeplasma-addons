@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2023-07-25 00:52+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -99,55 +99,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "너비가 다음보다 작을 때 자동 크기 조정"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:66
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "뒤로 이동"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:73
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "앞으로 이동"
 
-#: package/contents/ui/main.qml:90
+#: package/contents/ui/main.qml:92
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "URL 입력"
 
-#: package/contents/ui/main.qml:126
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "이 페이지 불러오기 중지"
 
-#: package/contents/ui/main.qml:126
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "이 페이지 새로 고침"
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "브라우저에서 링크 열기"
 
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:184
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "링크 주소 복사"
 
-#: package/contents/ui/main.qml:244
+#: package/contents/ui/main.qml:246
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "팝업 차단됨"
 
-#: package/contents/ui/main.qml:245
+#: package/contents/ui/main.qml:247
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

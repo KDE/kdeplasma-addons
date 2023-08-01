@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2023-02-22 21:24+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -19,37 +19,37 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/ui/main.qml:33
+#: package/contents/ui/main.qml:34
 #, kde-format
 msgid "Night Color Control"
 msgstr "Styring av kveldsfargar"
 
-#: package/contents/ui/main.qml:36
+#: package/contents/ui/main.qml:37
 #, kde-format
 msgid "Night Color is inhibited"
 msgstr "Kveldsfargar er blokkerte"
 
-#: package/contents/ui/main.qml:39
+#: package/contents/ui/main.qml:40
 #, kde-format
 msgid "Night Color is unavailable"
 msgstr "Kveldsfargar er ikkje tilgjengelege"
 
-#: package/contents/ui/main.qml:42
+#: package/contents/ui/main.qml:43
 #, kde-format
 msgid "Night Color is disabled. Click to configure"
 msgstr "Kveldsfargar er av. Trykk for å setja opp."
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:46
 #, kde-format
 msgid "Night Color is not running"
 msgstr "Kveldsfargar køyrer ikkje"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:48
 #, kde-format
 msgid "Night Color is active (%1K)"
 msgstr "Kveldsfargar er på (%1 K)"
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:98
 #, kde-format
 msgid "&Configure Night Color…"
 msgstr "&Set opp kveldsfargar …"

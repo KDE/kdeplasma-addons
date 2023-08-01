@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2023-06-16 09:34+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -99,55 +99,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Automatisch verschalen als breedte minder is"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:66
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Ga terug"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:73
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Ga verder"
 
-#: package/contents/ui/main.qml:90
+#: package/contents/ui/main.qml:92
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Typ een URL"
 
-#: package/contents/ui/main.qml:126
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Stop het laden van deze pagina"
 
-#: package/contents/ui/main.qml:126
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Deze pagina herladen"
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Koppeling openen in browser"
 
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:184
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Koppelingsadres kopiëren"
 
-#: package/contents/ui/main.qml:244
+#: package/contents/ui/main.qml:246
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Popup geblokkeerd"
 
-#: package/contents/ui/main.qml:245
+#: package/contents/ui/main.qml:247
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

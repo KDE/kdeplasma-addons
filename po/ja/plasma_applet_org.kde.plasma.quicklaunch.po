@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2022-03-06 11:56+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -76,19 +76,19 @@ msgstr "カスタムタイトル"
 msgid "Launch %1"
 msgstr "%1 を起動"
 
-#: package/contents/ui/IconItem.qml:261
+#: package/contents/ui/IconItem.qml:260
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "ランチャーを追加…"
 
-#: package/contents/ui/IconItem.qml:267
+#: package/contents/ui/IconItem.qml:266
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "ランチャーを編集…"
 
-#: package/contents/ui/IconItem.qml:273
+#: package/contents/ui/IconItem.qml:272
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"

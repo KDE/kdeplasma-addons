@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2022-11-14 14:18+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -77,19 +77,19 @@ msgstr "Özel başlık"
 msgid "Launch %1"
 msgstr "%1 Çalıştır"
 
-#: package/contents/ui/IconItem.qml:261
+#: package/contents/ui/IconItem.qml:260
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Başlatıcı Ekle…"
 
-#: package/contents/ui/IconItem.qml:267
+#: package/contents/ui/IconItem.qml:266
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Başlatıcıyı Düzenle…"
 
-#: package/contents/ui/IconItem.qml:273
+#: package/contents/ui/IconItem.qml:272
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"

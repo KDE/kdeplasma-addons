@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2017-05-16 06:55-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -85,21 +85,21 @@ msgstr "הראה כותרת"
 msgid "Launch %1"
 msgstr ""
 
-#: package/contents/ui/IconItem.qml:261
+#: package/contents/ui/IconItem.qml:260
 #, fuzzy, kde-format
 #| msgid "Add Launcher..."
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "הוסף משגר..."
 
-#: package/contents/ui/IconItem.qml:267
+#: package/contents/ui/IconItem.qml:266
 #, fuzzy, kde-format
 #| msgid "Edit Launcher..."
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "ערוך משגר..."
 
-#: package/contents/ui/IconItem.qml:273
+#: package/contents/ui/IconItem.qml:272
 #, fuzzy, kde-format
 #| msgid "Remove Launcher"
 msgctxt "@action:inmenu"

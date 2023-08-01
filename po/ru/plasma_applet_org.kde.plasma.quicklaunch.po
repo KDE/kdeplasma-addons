@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2022-02-11 12:03+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -84,19 +84,19 @@ msgstr "Свой заголовок"
 msgid "Launch %1"
 msgstr "Запустить %1"
 
-#: package/contents/ui/IconItem.qml:261
+#: package/contents/ui/IconItem.qml:260
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Добавить кнопку запуска…"
 
-#: package/contents/ui/IconItem.qml:267
+#: package/contents/ui/IconItem.qml:266
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Изменить кнопку запуска…"
 
-#: package/contents/ui/IconItem.qml:273
+#: package/contents/ui/IconItem.qml:272
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"

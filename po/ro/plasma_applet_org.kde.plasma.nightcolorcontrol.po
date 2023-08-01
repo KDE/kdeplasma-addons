@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2022-02-05 20:22+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -18,38 +18,38 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 21.12.2\n"
 
-#: package/contents/ui/main.qml:33
+#: package/contents/ui/main.qml:34
 #, kde-format
 msgid "Night Color Control"
 msgstr "Control culoare nocturnă"
 
-#: package/contents/ui/main.qml:36
+#: package/contents/ui/main.qml:37
 #, kde-format
 msgid "Night Color is inhibited"
 msgstr "Culoarea nocturnă e inhibată"
 
-#: package/contents/ui/main.qml:39
+#: package/contents/ui/main.qml:40
 #, kde-format
 msgid "Night Color is unavailable"
 msgstr "Culoarea nocturnă e indisponibilă"
 
-#: package/contents/ui/main.qml:42
+#: package/contents/ui/main.qml:43
 #, fuzzy, kde-format
 #| msgid "Night Color is disabled"
 msgid "Night Color is disabled. Click to configure"
 msgstr "Culoarea nocturnă e dezactivată"
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:46
 #, kde-format
 msgid "Night Color is not running"
 msgstr "Culoarea nocturnă nu rulează"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:48
 #, kde-format
 msgid "Night Color is active (%1K)"
 msgstr "Culoarea nocturnă e activă (%1 K)"
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:98
 #, fuzzy, kde-format
 #| msgid "Configure Night Color…"
 msgid "&Configure Night Color…"

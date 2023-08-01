@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.webbrowser\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2023-05-02 19:36+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -96,55 +96,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Automatická zmena mierky, ak je šírka menšia ako"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:66
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Návrat"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:73
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Dopredu"
 
-#: package/contents/ui/main.qml:90
+#: package/contents/ui/main.qml:92
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Napísať URL"
 
-#: package/contents/ui/main.qml:126
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Zastaviť načítanie tejto stránky"
 
-#: package/contents/ui/main.qml:126
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Znovu načítať túto stránku"
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Otvoriť odkaz v prehliadači"
 
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:184
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopírovať adresu odkazu"
 
-#: package/contents/ui/main.qml:244
+#: package/contents/ui/main.qml:246
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Blokovanie vyskakovacieho okna"
 
-#: package/contents/ui/main.qml:245
+#: package/contents/ui/main.qml:247
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

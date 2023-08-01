@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2023-06-17 05:38+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -100,55 +100,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "ავტომატური მასშტაბირება, თუ სიგანე ნაკლებია, ვიდრე"
 
-#: package/contents/ui/main.qml:64
+#: package/contents/ui/main.qml:66
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "უკან დაბრუნება"
 
-#: package/contents/ui/main.qml:71
+#: package/contents/ui/main.qml:73
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "წინ გადასვლა"
 
-#: package/contents/ui/main.qml:90
+#: package/contents/ui/main.qml:92
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "აკრიფეთ URL"
 
-#: package/contents/ui/main.qml:126
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "ამ გვერდის ჩატვირთვის გაჩერება"
 
-#: package/contents/ui/main.qml:126
+#: package/contents/ui/main.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "ამ გვერდის განახლება"
 
-#: package/contents/ui/main.qml:176
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "ბმულის ბრაუზერში გახსნა"
 
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:184
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "ბმულის მისამართის კოპირება"
 
-#: package/contents/ui/main.qml:244
+#: package/contents/ui/main.qml:246
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "მხტუნარა დაიბლოკა"
 
-#: package/contents/ui/main.qml:245
+#: package/contents/ui/main.qml:247
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

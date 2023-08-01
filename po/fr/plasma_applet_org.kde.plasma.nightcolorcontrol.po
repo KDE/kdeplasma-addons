@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-08-01 02:16+0000\n"
 "PO-Revision-Date: 2022-12-31 10:44+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: fr\n"
@@ -16,39 +16,39 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 22.12.0\n"
 
-#: package/contents/ui/main.qml:33
+#: package/contents/ui/main.qml:34
 #, kde-format
 msgid "Night Color Control"
 msgstr "Contrôle de la couleur de nuit"
 
-#: package/contents/ui/main.qml:36
+#: package/contents/ui/main.qml:37
 #, kde-format
 msgid "Night Color is inhibited"
 msgstr "La couleur de nuit est inhibée"
 
-#: package/contents/ui/main.qml:39
+#: package/contents/ui/main.qml:40
 #, kde-format
 msgid "Night Color is unavailable"
 msgstr "La couleur de nuit n'est pas disponible"
 
-#: package/contents/ui/main.qml:42
+#: package/contents/ui/main.qml:43
 #, kde-format
 msgid "Night Color is disabled. Click to configure"
 msgstr ""
 "La couleur de nuit est désactivée. Veuillez faire un clic pour sa "
 "configuration."
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:46
 #, kde-format
 msgid "Night Color is not running"
 msgstr "La couleur de nuit n'est pas lancée"
 
-#: package/contents/ui/main.qml:47
+#: package/contents/ui/main.qml:48
 #, kde-format
 msgid "Night Color is active (%1K)"
 msgstr "La couleur de nuit est active (%1K)"
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:98
 #, kde-format
 msgid "&Configure Night Color…"
 msgstr "&Configurer la couleur de nuit..."
