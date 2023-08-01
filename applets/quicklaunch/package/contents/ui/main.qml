@@ -9,7 +9,6 @@ import QtQuick.Layouts 1.0
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.draganddrop 2.0 as DragAndDrop
 import org.kde.plasma.private.quicklaunch 1.0
@@ -200,12 +199,8 @@ PlasmoidItem {
                     popup.visible = !popup.visible
                 }
 
-                KSvg.SvgItem {
-                    id: arrow
-
-                    anchors.centerIn: parent
-                    width: Math.min(parent.width, parent.height)
-                    height: width
+                Kirigami.Icon {
+                    anchors.fill: parent
 
                     rotation: popup.visible ? 180 : 0
                     Behavior on rotation {
@@ -214,18 +209,17 @@ PlasmoidItem {
                         }
                     }
 
-                    imagePath: "widgets/arrows"
-                    elementId: {
+                    source: {
                         if (plasmoid.location == PlasmaCore.Types.TopEdge) {
-                            return "down-arrow";
+                            return "arrow-down";
                         } else if (plasmoid.location == PlasmaCore.Types.LeftEdge) {
-                            return "right-arrow";
+                            return "arrow-right";
                         } else if (plasmoid.location == PlasmaCore.Types.RightEdge) {
-                            return "left-arrow";
+                            return "arrow-left";
                         } else if (vertical) {
-                            return "right-arrow";
+                            return "arrow-right";
                         } else {
-                            return "up-arrow";
+                            return "arrow-up";
                         }
                     }
                 }
