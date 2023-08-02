@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-08-02 02:09+0000\n"
 "PO-Revision-Date: 2018-06-27 18:32+0100\n"
 "Last-Translator: Øystein Steffensen-Alværvik <ystein@posteo.net>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/ui/konsoleprofiles.qml:70
+#: package/contents/ui/konsoleprofiles.qml:65
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Konsoll-profiler"
 
-#: package/contents/ui/konsoleprofiles.qml:90
+#: package/contents/ui/konsoleprofiles.qml:85
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "Vilkårlig tekst som sier noe"

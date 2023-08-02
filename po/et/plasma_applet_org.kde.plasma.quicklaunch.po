@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-08-02 02:09+0000\n"
 "PO-Revision-Date: 2019-10-30 21:40+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -119,7 +119,7 @@ msgstr "Peida ikoonid"
 msgid "Show hidden icons"
 msgstr "Näita peidetud ikoone"
 
-#: package/contents/ui/main.qml:291
+#: package/contents/ui/main.qml:286
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "Add Launcher..."

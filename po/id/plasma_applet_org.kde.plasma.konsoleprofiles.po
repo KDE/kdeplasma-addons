@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-08-02 02:09+0000\n"
 "PO-Revision-Date: 2018-10-06 23:44+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -16,13 +16,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: package/contents/ui/konsoleprofiles.qml:70
+#: package/contents/ui/konsoleprofiles.qml:65
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Profile Konsole"
 
-#: package/contents/ui/konsoleprofiles.qml:90
+#: package/contents/ui/konsoleprofiles.qml:85
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "String Semaunya Yang Mengatakan Sesuatu"

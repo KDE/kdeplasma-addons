@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-08-02 02:09+0000\n"
 "PO-Revision-Date: 2013-03-20 16:54+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: package/contents/ui/konsoleprofiles.qml:70
+#: package/contents/ui/konsoleprofiles.qml:65
 #, fuzzy, kde-format
 #| msgid "Konsole Profiles"
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "कंसोल रूपरेषा"
 
-#: package/contents/ui/konsoleprofiles.qml:90
+#: package/contents/ui/konsoleprofiles.qml:85
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "काहीतरी सांगणारे पाठ्य"

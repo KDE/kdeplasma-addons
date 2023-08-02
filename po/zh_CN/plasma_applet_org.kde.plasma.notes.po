@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-08-02 02:09+0000\n"
 "PO-Revision-Date: 2023-07-30 07:07\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -39,196 +39,196 @@ msgstr "字体大小："
 msgid "Background color"
 msgstr "背景颜色"
 
-#: package/contents/ui/configAppearance.qml:79
+#: package/contents/ui/configAppearance.qml:74
 #, kde-format
 msgid "A white sticky note"
 msgstr "白色记事贴"
 
-#: package/contents/ui/configAppearance.qml:80
+#: package/contents/ui/configAppearance.qml:75
 #, kde-format
 msgid "A black sticky note"
 msgstr "黑色记事贴"
 
-#: package/contents/ui/configAppearance.qml:81
+#: package/contents/ui/configAppearance.qml:76
 #, kde-format
 msgid "A red sticky note"
 msgstr "红色记事贴"
 
-#: package/contents/ui/configAppearance.qml:82
+#: package/contents/ui/configAppearance.qml:77
 #, kde-format
 msgid "An orange sticky note"
 msgstr "橙色记事贴"
 
-#: package/contents/ui/configAppearance.qml:83
+#: package/contents/ui/configAppearance.qml:78
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "黄色记事贴"
 
-#: package/contents/ui/configAppearance.qml:84
+#: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgid "A green sticky note"
 msgstr "绿色记事贴"
 
-#: package/contents/ui/configAppearance.qml:85
+#: package/contents/ui/configAppearance.qml:80
 #, kde-format
 msgid "A blue sticky note"
 msgstr "蓝色记事贴"
 
-#: package/contents/ui/configAppearance.qml:86
+#: package/contents/ui/configAppearance.qml:81
 #, kde-format
 msgid "A pink sticky note"
 msgstr "粉色记事贴"
 
-#: package/contents/ui/configAppearance.qml:87
+#: package/contents/ui/configAppearance.qml:82
 #, kde-format
 msgid "A translucent sticky note"
 msgstr "半透明记事贴"
 
-#: package/contents/ui/configAppearance.qml:88
+#: package/contents/ui/configAppearance.qml:83
 #, kde-format
 msgid "A translucent sticky note with light text"
 msgstr "半透明记事贴 + 浅色文字"
 
-#: package/contents/ui/main.qml:267
+#: package/contents/ui/main.qml:265
 #, kde-format
 msgid "Undo"
 msgstr "撤销"
 
-#: package/contents/ui/main.qml:275
+#: package/contents/ui/main.qml:273
 #, kde-format
 msgid "Redo"
 msgstr "重做"
 
-#: package/contents/ui/main.qml:285
+#: package/contents/ui/main.qml:283
 #, kde-format
 msgid "Cut"
 msgstr "剪切"
 
-#: package/contents/ui/main.qml:293
+#: package/contents/ui/main.qml:291
 #, kde-format
 msgid "Copy"
 msgstr "复制"
 
-#: package/contents/ui/main.qml:301
+#: package/contents/ui/main.qml:299
 #, kde-format
 msgid "Paste"
 msgstr "粘贴"
 
-#: package/contents/ui/main.qml:307
+#: package/contents/ui/main.qml:305
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "粘贴 (包含完整格式)"
 
-#: package/contents/ui/main.qml:314
+#: package/contents/ui/main.qml:312
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "移除格式"
 
-#: package/contents/ui/main.qml:329
+#: package/contents/ui/main.qml:327
 #, kde-format
 msgid "Delete"
 msgstr "删除"
 
-#: package/contents/ui/main.qml:336
+#: package/contents/ui/main.qml:334
 #, kde-format
 msgid "Clear"
 msgstr "清除"
 
-#: package/contents/ui/main.qml:346
+#: package/contents/ui/main.qml:344
 #, kde-format
 msgid "Select All"
 msgstr "全选"
 
-#: package/contents/ui/main.qml:474
+#: package/contents/ui/main.qml:472
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "粗体"
 
-#: package/contents/ui/main.qml:486
+#: package/contents/ui/main.qml:484
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "斜体"
 
-#: package/contents/ui/main.qml:498
+#: package/contents/ui/main.qml:496
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "下划线"
 
-#: package/contents/ui/main.qml:510
+#: package/contents/ui/main.qml:508
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "删除线"
 
-#: package/contents/ui/main.qml:584
+#: package/contents/ui/main.qml:582
 #, kde-format
 msgid "Discard this note?"
 msgstr "丢弃此记事贴？"
 
-#: package/contents/ui/main.qml:585
+#: package/contents/ui/main.qml:583
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "您确定要丢弃此记事贴吗？"
 
-#: package/contents/ui/main.qml:599
+#: package/contents/ui/main.qml:597
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "白色"
 
-#: package/contents/ui/main.qml:603
+#: package/contents/ui/main.qml:601
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "黑色"
 
-#: package/contents/ui/main.qml:607
+#: package/contents/ui/main.qml:605
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "红色"
 
-#: package/contents/ui/main.qml:611
+#: package/contents/ui/main.qml:609
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "橙色"
 
-#: package/contents/ui/main.qml:615
+#: package/contents/ui/main.qml:613
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "黄色"
 
-#: package/contents/ui/main.qml:619
+#: package/contents/ui/main.qml:617
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "绿色"
 
-#: package/contents/ui/main.qml:623
+#: package/contents/ui/main.qml:621
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "蓝色"
 
-#: package/contents/ui/main.qml:627
+#: package/contents/ui/main.qml:625
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "粉色"
 
-#: package/contents/ui/main.qml:631
+#: package/contents/ui/main.qml:629
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "半透明"
 
-#: package/contents/ui/main.qml:635
+#: package/contents/ui/main.qml:633
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"
