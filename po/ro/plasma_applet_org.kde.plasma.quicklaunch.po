@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-02 02:09+0000\n"
+"POT-Creation-Date: 2023-08-03 02:37+0000\n"
 "PO-Revision-Date: 2022-02-05 20:25+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -95,29 +95,29 @@ msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Elimină lansatorul"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:146
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Lansare rapidă"
 
-#: package/contents/ui/main.qml:148
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr ""
 "Adăugați lansatori prin tragere și lăsare sau folosind meniul contextual"
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:177
 #, kde-format
 msgid "Hide icons"
 msgstr "Ascunde pictogramele"
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:177
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Arată pictogramele ascunse"
 
-#: package/contents/ui/main.qml:286
+#: package/contents/ui/main.qml:280
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

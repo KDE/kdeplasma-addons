@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-02 02:09+0000\n"
+"POT-Creation-Date: 2023-08-03 02:37+0000\n"
 "PO-Revision-Date: 2017-05-16 06:55-0400\n"
 "Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -106,29 +106,29 @@ msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "הסר משגר"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:146
 #, kde-format
 msgid "Quicklaunch"
 msgstr "הפעלה מהירה"
 
-#: package/contents/ui/main.qml:148
+#: package/contents/ui/main.qml:147
 #, fuzzy, kde-format
 #| msgid "Add launchers by Drag and Drop or by using the context menu."
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "הוסף משגר על ידי גרירה ושחרור או על ידי שימוש בתפריט ההקשר."
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:177
 #, kde-format
 msgid "Hide icons"
 msgstr "הסתר סמלים"
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:177
 #, kde-format
 msgid "Show hidden icons"
 msgstr "הראה סמלים מוסתרים"
 
-#: package/contents/ui/main.qml:286
+#: package/contents/ui/main.qml:280
 #, fuzzy, kde-format
 #| msgid "Add Launcher..."
 msgctxt "@action"
