@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2015, 2022.
+# Shinjo Park <kde@peremen.name>, 2015, 2022, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-28 00:50+0000\n"
-"PO-Revision-Date: 2022-02-20 22:17+0100\n"
+"PO-Revision-Date: 2023-08-06 20:06+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: datetimerunner.cpp:21
 #, kde-format
@@ -46,18 +46,16 @@ msgid " <timezone>"
 msgstr " <timezone>"
 
 #: datetimerunner.cpp:32
-#, fuzzy, kde-format
-#| msgid "Displays the current date in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current date and difference to system date in a given timezone"
-msgstr "지정한 시간대의 날짜를 표시합니다"
+msgstr "지정한 시간대에서의 현재 날짜와 시스템 날짜의 차이를 표시합니다"
 
 #: datetimerunner.cpp:34
-#, fuzzy, kde-format
-#| msgid "Displays the current time in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current time and difference to system time in a given timezone"
-msgstr "지정한 시간대의 시간을 표시합니다"
+msgstr "지정한 시간대에서의 현재 시간과 시스템 시간의 차이를 표시합니다"
 
 #: datetimerunner.cpp:48
 #, kde-format
@@ -70,7 +68,7 @@ msgctxt ""
 "date difference between time zones, e.g. in Stockholm it's 1 calendar day "
 "later than in Brasilia"
 msgid "%1 later"
-msgstr ""
+msgstr "%1 빠름"
 
 #: datetimerunner.cpp:67
 #, kde-format
@@ -78,7 +76,7 @@ msgctxt ""
 "date difference between time zones, e.g. in Brasilia it's 1 calendar day "
 "earlier than in Stockholm"
 msgid "%1 earlier"
-msgstr ""
+msgstr "%1 느림"
 
 #: datetimerunner.cpp:69
 #, kde-format
@@ -86,7 +84,7 @@ msgctxt ""
 "no date difference between time zones, e.g. in Stockholm it's the same "
 "calendar day as in Berlin"
 msgid "no date difference"
-msgstr ""
+msgstr "날짜 차이 없음"
 
 #: datetimerunner.cpp:81
 #, kde-format
@@ -99,7 +97,7 @@ msgctxt ""
 "time difference between time zones, e.g. in Stockholm it's 4 hours later "
 "than in Brasilia"
 msgid "%1 later"
-msgstr ""
+msgstr "%1 빠름"
 
 #: datetimerunner.cpp:105
 #, kde-format
@@ -107,7 +105,7 @@ msgctxt ""
 "time difference between time zones, e.g. in Brasilia it's 4 hours ealier "
 "than in Stockholm"
 msgid "%1 earlier"
-msgstr ""
+msgstr "%1 느림"
 
 #: datetimerunner.cpp:107
 #, kde-format
@@ -115,7 +113,7 @@ msgctxt ""
 "no time difference between time zones, e.g. in Stockholm it's the same time "
 "as in Berlin"
 msgid "no time difference"
-msgstr ""
+msgstr "시차 없음"
 
 #~ msgid "The date in %1 is %2"
 #~ msgstr "%1의 날짜는 %2입니다"
