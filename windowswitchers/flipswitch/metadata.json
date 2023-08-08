@@ -122,6 +122,7 @@
         "Name[vi]": "Chuyển kiểu lật",
         "Name[x-test]": "xxFlip Switchxx",
         "Name[zh_CN]": "3D 翻牌切换",
+        "Name[zh_TW]": "翻轉切換",
         "Version": "1.0"
     },
     "X-Plasma-API": "declarativeappletscript",
