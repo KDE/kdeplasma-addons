@@ -115,7 +115,7 @@ ColumnLayout {
 
                 actions: [
                     Kirigami.Action {
-                        iconName: "list-remove"
+                        icon.name: "list-remove"
                         tooltip: i18nd("plasma_wallpaper_org.kde.image", "Remove path")
                         onTriggered: removePath(model.index)
                     }
