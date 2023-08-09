@@ -101,7 +101,7 @@ PlasmoidItem {
 
             Kirigami.Icon {
                 anchors.fill: parent
-                source: "knotes"
+                source: "knotes-symbolic"
                 active: parent.containsMouse
             }
         }
