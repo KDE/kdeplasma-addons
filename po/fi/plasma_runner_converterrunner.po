@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2010.
 # Lasse Liehu <lliehu@kolumbus.fi>, 2011.
-# Tommi Nieminen <translator@legisign.org>, 2020.
+# Tommi Nieminen <translator@legisign.org>, 2020, 2023.
 #
 # KDE Finnish translation sprint participants:
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_runner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-10 02:11+0000\n"
-"PO-Revision-Date: 2020-12-19 22:20+0200\n"
+"PO-Revision-Date: 2023-07-27 11:31+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:25:26+0000\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: converterrunner.cpp:29
 #, kde-format
@@ -27,18 +27,14 @@ msgid "Copy unit and number"
 msgstr "Kopioi yksikkö ja luku"
 
 #: converterrunner.cpp:34
-#, fuzzy, kde-format
-#| msgid ""
-#| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
-#| "in] unit\". You can use the Unit converter applet to find all available "
-#| "units."
+#, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
 "unit.You can use the Unit converter applet to find all available units."
 msgstr ""
 "Muuntaa :q::n arvon, missä :q: on ”arvo yksikkö [yksikköön;yksikössä;->;in;"
-"to;as] yksikkö”. Voit katsoa Yksikkömuunnin-sovelmasta, mitä kaikkia "
-"yksikköjä on käytettävissä."
+"to;as] yksikkö”. Yksikkömuunnin-sovelmasta voi katsoa käytettävissä olevat "
+"yksiköt."
 
 # Jätin englanninkieliset muodot mukaan, koska tällainen ei toimi suomeksi kovin hyvin ja jotkut voivat niitä yrittää käyttää. Voi poistaa vapaasti.
 #: converterrunner.cpp:41
