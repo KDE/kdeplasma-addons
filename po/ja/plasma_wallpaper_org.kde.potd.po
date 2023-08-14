@@ -5,8 +5,8 @@ msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-13 02:10+0000\n"
-"PO-Revision-Date: 2023-04-07 23:44-0700\n"
-"Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
+"PO-Revision-Date: 2023-08-12 01:51+0900\n"
+"Last-Translator: Ryuichi Yamada <ryuichi_ya220@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.04.3\n"
 
 #: package/contents/ui/config.qml:44
 #, kde-format
@@ -91,7 +91,7 @@ msgstr "背景色を選択"
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
-msgstr "今日の画像:"
+msgstr "今日の写真:"
 
 #: package/contents/ui/config.qml:149
 #, kde-format
@@ -120,13 +120,13 @@ msgstr "壁紙の画像が保存されているフォルダを開く"
 #: package/contents/ui/main.qml:22
 #, kde-format
 msgid "Open Wallpaper Image"
-msgstr ""
+msgstr "壁紙画像を開く"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
-msgstr "今日の画像"
+msgstr "今日の写真"
 
 #: package/contents/ui/WallpaperDelegate.qml:138
 #, kde-format
@@ -169,7 +169,7 @@ msgstr "名前を付けて保存..."
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
-msgstr "今日の画像をローカルのディスクに保存する"
+msgstr "今日の写真をローカルディスクに保存する"
 
 #: package/contents/ui/WallpaperPreview.qml:58
 #, kde-format
@@ -182,13 +182,13 @@ msgstr "リンクをブラウザで開く..."
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
-msgstr "今日の画像のウェブサイトをデフォルトのブラウザで開く"
+msgstr "今日の写真のウェブサイトをデフォルトのブラウザで開く"
 
 #: plugins/potdbackend.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Today's Picture"
-msgstr "今日の画像を保存"
+msgstr "今日の写真を保存"
 
 #: plugins/potdbackend.cpp:215
 #, kde-format
@@ -207,119 +207,3 @@ msgstr "画像は保存されませんでした。"
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
 msgstr "画像は <a href=\"%1\">%2</a> として保存されました。"
-
-#~ msgctxt "@label:listbox"
-#~ msgid "Category:"
-#~ msgstr "カテゴリ:"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "All"
-#~ msgstr "すべて"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "1080p"
-#~ msgstr "1080p"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "4K"
-#~ msgstr "4K"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Ultra Wide"
-#~ msgstr "広角"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Background"
-#~ msgstr "背景"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Lock Screen"
-#~ msgstr "ロックスクリーン"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Nature"
-#~ msgstr "自然"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Tumblr"
-#~ msgstr "タンブラー"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Black"
-#~ msgstr "黒"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Flower"
-#~ msgstr "花"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Funny"
-#~ msgstr "面白い系"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Cute"
-#~ msgstr "キュート"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Cool"
-#~ msgstr "かっこいい"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Fall"
-#~ msgstr "秋"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Love"
-#~ msgstr "愛"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Design"
-#~ msgstr "デザイン"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Christmas"
-#~ msgstr "クリスマス"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Travel"
-#~ msgstr "旅"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Beach"
-#~ msgstr "ビーチ"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Car"
-#~ msgstr "車"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Sports"
-#~ msgstr "スポーツ"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Animal"
-#~ msgstr "動物"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "People"
-#~ msgstr "人々"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Music"
-#~ msgstr "音楽"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Summer"
-#~ msgstr "夏"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Galaxy"
-#~ msgstr "宇宙"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Tabliss"
-#~ msgstr "Tabliss"
-
-#~ msgctxt "@item:inlistbox"
-#~ msgid "Cyber-World"
-#~ msgstr "サイバーワールド"
