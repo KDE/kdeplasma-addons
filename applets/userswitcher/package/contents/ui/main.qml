@@ -10,11 +10,11 @@ import QtQuick.Window 2.15
 
 import org.kde.coreaddons 1.0 as KCoreAddons // kuser
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kcmutils // KCMLauncher
 import org.kde.config as KConfig  // KAuthorized.authorizeControlModule
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.core 2.1 as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigamiaddons.components 1.0 as KirigamiComponents
 import org.kde.plasma.plasmoid 2.0
 
 import org.kde.plasma.private.sessions 2.0 as Sessions
@@ -28,6 +28,7 @@ PlasmoidItem {
 
     readonly property bool showFace: Plasmoid.configuration.showFace
     readonly property bool showName: Plasmoid.configuration.showName
+    readonly property string avatarIcon: kuser.faceIconUrl.toString()
 
     readonly property bool showFullName: Plasmoid.configuration.showFullName
 
@@ -71,17 +72,16 @@ PlasmoidItem {
             anchors.centerIn: parent
             spacing: Kirigami.Units.smallSpacing
 
-            Kirigami.Avatar {
+            KirigamiComponents.Avatar {
                 id: icon
 
                 anchors.verticalCenter: parent.verticalCenter
                 height: compactRoot.height - Math.round(Kirigami.Units.smallSpacing / 2)
                 width: height
 
-                border.color: Kirigami.ColorUtils.adjustColor(Kirigami.Theme.textColor, {alpha: 0.4*255})
-                border.width: 1
+                name: root.displayedName
 
-                source: visible ? (kuser.faceIconUrl.toString() || "user-identity") : ""
+                source: visible ? root.avatarIcon : ""
                 visible: root.showFace
             }
 
@@ -134,10 +134,8 @@ PlasmoidItem {
                 id: currentUserItem
                 text: root.displayedName
                 subText: i18n("Current user")
-                source: kuser.faceIconUrl.toString()
+                source: root.avatarIcon
                 hoverEnabled: false
-                interactiveIcon: KConfig.KAuthorized.authorizeControlModule("kcm_users")
-                onIconClicked: KCMLauncher.openSystemSettings("kcm_users")
             }
 
             PlasmaComponents3.ScrollView {

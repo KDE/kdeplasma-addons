@@ -75,6 +75,14 @@ set_package_properties(KF6Purpose PROPERTIES
     TYPE RUNTIME
 )
 
+find_package(KirigamiAddons CONFIG)
+set_package_properties(KirigamiAddons PROPERTIES
+    DESCRIPTION "Extra controls for Kirigami applications"
+    PURPOSE "Required at runtime for the User List widget"
+    TYPE RUNTIME
+)
+
+
 find_package(ICU 66.1 COMPONENTS uc i18n)
 set_package_properties(ICU
         PROPERTIES DESCRIPTION "Unicode and Globalization support for software applications"
