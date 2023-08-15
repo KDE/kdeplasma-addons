@@ -42,7 +42,7 @@ PlasmoidItem {
     toolTipSubText: i18n("You are logged in as <b>%1</b>", displayedName)
 
     // revert to the Plasmoid icon if no face given
-    Plasmoid.icon: kuser.faceIconUrl.toString() || "preferences-desktop-user"
+    Plasmoid.icon: kuser.faceIconUrl.toString() || "preferences-system-users"
 
     KCoreAddons.KUser {
         id: kuser
