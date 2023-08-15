@@ -23,6 +23,11 @@ PlasmoidItem {
     id: root
 
     readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
+    readonly property bool inPanel: (Plasmoid.location === PlasmaCore.Types.TopEdge
+        || Plasmoid.location === PlasmaCore.Types.RightEdge
+        || Plasmoid.location === PlasmaCore.Types.BottomEdge
+        || Plasmoid.location === PlasmaCore.Types.LeftEdge)
+
 
     readonly property string displayedName: showFullName ? kuser.fullName : kuser.loginName
 
@@ -42,7 +47,7 @@ PlasmoidItem {
     toolTipSubText: i18n("You are logged in as <b>%1</b>", displayedName)
 
     // revert to the Plasmoid icon if no face given
-    Plasmoid.icon: kuser.faceIconUrl.toString() || "preferences-system-users"
+    Plasmoid.icon: kuser.faceIconUrl.toString() || (inPanel ? "system-switch-user-symbolic" : "preferences-system-users" )
 
     KCoreAddons.KUser {
         id: kuser
