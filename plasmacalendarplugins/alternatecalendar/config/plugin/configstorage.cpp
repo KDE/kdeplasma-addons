@@ -5,8 +5,8 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "../../config-ICU.h"
 #include "configstorage.h"
+#include "../../config-ICU.h"
 
 #include <QMetaEnum>
 

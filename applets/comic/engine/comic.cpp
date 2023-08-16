@@ -37,7 +37,6 @@ QList<ComicProviderInfo> ComicEngine::loadProviders()
     auto comics = KPackage::PackageLoader::self()->listPackages(QStringLiteral("Plasma/Comic"));
     QList<ComicProviderInfo> providers;
     for (auto comic : comics) {
-
         qCDebug(PLASMA_COMIC) << "ComicEngine::loadProviders()  service name=" << comic.name();
         ComicProviderInfo data;
         data.pluginId = comic.pluginId();
@@ -62,79 +61,79 @@ void ComicEngine::setMaxComicLimit(int maxComicLimit)
 
 bool ComicEngine::requestSource(const QString &identifier)
 {
-        if (m_jobs.contains(identifier)) {
-            return true;
-        }
+    if (m_jobs.contains(identifier)) {
+        return true;
+    }
 
-        const QStringList parts = identifier.split(QLatin1Char(':'), Qt::KeepEmptyParts);
+    const QStringList parts = identifier.split(QLatin1Char(':'), Qt::KeepEmptyParts);
 
-        // check whether it is cached, make sure second part present
-        if (parts.count() > 1 && (CachedProvider::isCached(identifier) || !isOnline())) {
-            ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, IdentifierType::StringIdentifier, identifier);
-            m_jobs[identifier] = provider;
-            connect(provider, &ComicProvider::finished, this, &ComicEngine::finished);
-            connect(provider, &ComicProvider::error, this, &ComicEngine::error);
-            return true;
-        }
-
-        // ... start a new query otherwise
-        if (parts.count() < 2) {
-            Q_EMIT requestFinished(ComicMetaData{.error = true});
-            qWarning() << "Less than two arguments specified.";
-            return false;
-        }
-        if (!mProviders.contains(parts[0])) {
-            // User might have installed more from GHNS
-            loadProviders();
-            if (!mProviders.contains(parts[0])) {
-                Q_EMIT requestFinished(ComicMetaData{.error = true});
-                qWarning() << identifier << "comic plugin does not seem to be installed.";
-                return false;
-            }
-        }
-
-        // check if there is a connection
-        if (!isOnline()) {
-            qCDebug(PLASMA_COMIC) << "Currently offline, requested identifier was" << mIdentifierError;
-            mIdentifierError = identifier;
-            ComicMetaData data;
-            data.error = true;
-            data.errorAutomaticallyFixable = true;
-            data.identifier = identifier;
-            data.previousIdentifier = lastCachedIdentifier(identifier);
-            Q_EMIT requestFinished(data);
-            qCDebug(PLASMA_COMIC) << "No internet connection, using cached data";
-            return true;
-        }
-
-        KPackage::Package pkg = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Comic"), parts[0]);
-
-        bool isCurrentComic = parts[1].isEmpty();
-
-        ComicProvider *provider = nullptr;
-
-        QVariant data;
-        const IdentifierType identifierType = stringToIdentifierType(pkg.metadata().value(QStringLiteral("X-KDE-PlasmaComicProvider-SuffixType")));
-        if (identifierType == IdentifierType::DateIdentifier) {
-            QDate date = QDate::fromString(parts[1], Qt::ISODate);
-            if (!date.isValid()) {
-                date = QDate::currentDate();
-            }
-
-            data = date;
-        } else if (identifierType == IdentifierType::NumberIdentifier) {
-            data = parts[1].toInt();
-        } else if (identifierType == IdentifierType::StringIdentifier) {
-            data = parts[1];
-        }
-        provider = new ComicProviderKross(this, pkg.metadata(), identifierType, data);
-        provider->setIsCurrent(isCurrentComic);
-
+    // check whether it is cached, make sure second part present
+    if (parts.count() > 1 && (CachedProvider::isCached(identifier) || !isOnline())) {
+        ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, IdentifierType::StringIdentifier, identifier);
         m_jobs[identifier] = provider;
-
         connect(provider, &ComicProvider::finished, this, &ComicEngine::finished);
         connect(provider, &ComicProvider::error, this, &ComicEngine::error);
         return true;
+    }
+
+    // ... start a new query otherwise
+    if (parts.count() < 2) {
+        Q_EMIT requestFinished(ComicMetaData{.error = true});
+        qWarning() << "Less than two arguments specified.";
+        return false;
+    }
+    if (!mProviders.contains(parts[0])) {
+        // User might have installed more from GHNS
+        loadProviders();
+        if (!mProviders.contains(parts[0])) {
+            Q_EMIT requestFinished(ComicMetaData{.error = true});
+            qWarning() << identifier << "comic plugin does not seem to be installed.";
+            return false;
+        }
+    }
+
+    // check if there is a connection
+    if (!isOnline()) {
+        qCDebug(PLASMA_COMIC) << "Currently offline, requested identifier was" << mIdentifierError;
+        mIdentifierError = identifier;
+        ComicMetaData data;
+        data.error = true;
+        data.errorAutomaticallyFixable = true;
+        data.identifier = identifier;
+        data.previousIdentifier = lastCachedIdentifier(identifier);
+        Q_EMIT requestFinished(data);
+        qCDebug(PLASMA_COMIC) << "No internet connection, using cached data";
+        return true;
+    }
+
+    KPackage::Package pkg = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Comic"), parts[0]);
+
+    bool isCurrentComic = parts[1].isEmpty();
+
+    ComicProvider *provider = nullptr;
+
+    QVariant data;
+    const IdentifierType identifierType = stringToIdentifierType(pkg.metadata().value(QStringLiteral("X-KDE-PlasmaComicProvider-SuffixType")));
+    if (identifierType == IdentifierType::DateIdentifier) {
+        QDate date = QDate::fromString(parts[1], Qt::ISODate);
+        if (!date.isValid()) {
+            date = QDate::currentDate();
+        }
+
+        data = date;
+    } else if (identifierType == IdentifierType::NumberIdentifier) {
+        data = parts[1].toInt();
+    } else if (identifierType == IdentifierType::StringIdentifier) {
+        data = parts[1];
+    }
+    provider = new ComicProviderKross(this, pkg.metadata(), identifierType, data);
+    provider->setIsCurrent(isCurrentComic);
+
+    m_jobs[identifier] = provider;
+
+    connect(provider, &ComicProvider::finished, this, &ComicEngine::finished);
+    connect(provider, &ComicProvider::error, this, &ComicEngine::error);
+    return true;
 }
 
 void ComicEngine::finished(ComicProvider *provider)

@@ -8,12 +8,12 @@
 
 #pragma once
 
-#include <array>
 #include <QMap>
 #include <QObject>
 #include <QTcpSocket>
 #include <QTimer>
 #include <QVariantMap>
+#include <array>
 
 /**
  * This class evaluates the basic expressions given in the interface.

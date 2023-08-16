@@ -16,7 +16,8 @@
 // Std
 #include <cmath>
 
-template<typename T> T clampValue(T value, int decimals)
+template<typename T>
+T clampValue(T value, int decimals)
 {
     const T mul = std::pow(static_cast<T>(10), decimals);
     return int(value * mul) / mul;
