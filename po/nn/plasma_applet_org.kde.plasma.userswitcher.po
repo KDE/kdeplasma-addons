@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-08-16 01:59+0000\n"
 "PO-Revision-Date: 2022-09-11 19:41+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -80,53 +80,53 @@ msgctxt "@option:check"
 msgid "Show technical session information"
 msgstr "Vis teknisk øktinformasjon"
 
-#: package/contents/ui/main.qml:41
+#: package/contents/ui/main.qml:47
 #, kde-format
 msgid "You are logged in as <b>%1</b>"
 msgstr "Du er innlogga som <b>%1</b>"
 
-#: package/contents/ui/main.qml:136
+#: package/contents/ui/main.qml:141
 #, kde-format
 msgid "Current user"
 msgstr "Gjeldande brukar"
 
-#: package/contents/ui/main.qml:167
+#: package/contents/ui/main.qml:170
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "Ubrukt"
 
-#: package/contents/ui/main.qml:183
+#: package/contents/ui/main.qml:186
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
-#: package/contents/ui/main.qml:185
+#: package/contents/ui/main.qml:188
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "på %1 (%2)"
 
-#: package/contents/ui/main.qml:193
+#: package/contents/ui/main.qml:196
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr "Byt til brukaren %1"
 
-#: package/contents/ui/main.qml:202
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "Ny økt"
 
-#: package/contents/ui/main.qml:214
+#: package/contents/ui/main.qml:217
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Lås skjermen"
 
-#: package/contents/ui/main.qml:226
+#: package/contents/ui/main.qml:229
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Log Out"
