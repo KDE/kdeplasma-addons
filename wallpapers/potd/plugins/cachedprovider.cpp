@@ -86,7 +86,7 @@ void SaveImageThread::run()
 QString CachedProvider::identifierToPath(const QString &identifier, const QVariantList &args)
 {
     const QString argString = std::accumulate(args.cbegin(), args.cend(), QString(), [](const QString &s, const QVariant &arg) {
-        if (arg.canConvert(QMetaType::QString)) {
+        if (arg.canConvert(QMetaType(QMetaType::QString))) {
             return s + QStringLiteral(":%1").arg(arg.toString());
         }
 
