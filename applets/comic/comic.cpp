@@ -142,7 +142,7 @@ void ComicApplet::init()
     updateUsedComics();
     changeComic(true);
 
-    QNetworkInformation::instance()->load(QNetworkInformation::Feature::Reachability);
+    QNetworkInformation::instance()->loadBackendByFeatures(QNetworkInformation::Feature::Reachability);
     connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged, this, [this](auto reachability) {
         if (reachability != QNetworkInformation::Reachability::Online) {
             return;

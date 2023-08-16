@@ -27,7 +27,7 @@ ComicEngine::ComicEngine(QObject *parent)
     : QObject(parent)
     , mEmptySuffix(false)
 {
-    QNetworkInformation::instance()->load(QNetworkInformation::Feature::Reachability);
+    QNetworkInformation::instance()->loadBackendByFeatures(QNetworkInformation::Feature::Reachability);
     loadProviders();
 }
 
