@@ -329,6 +329,15 @@ PlasmoidItem {
         return model;
     }
 
+    function symbolicizeIconName(iconName) {
+        const symbolicSuffix = "-symbolic";
+        if (iconName.endsWith(symbolicSuffix)) {
+            return iconName;
+        }
+
+        return iconName + symbolicSuffix;
+    }
+
     P5Support.DataSource {
         id: weatherDataSource
 
@@ -361,9 +370,22 @@ PlasmoidItem {
         }
     }
 
-    // workaround for now to ensure "Please configure" tooltip
-    // TODO: remove when configurationRequired works
-    Plasmoid.icon: (status === Util.NeedsConfiguration) ? "configure" : generalModel.currentConditionIconName
+    Plasmoid.icon: {
+        let iconName;
+        // workaround for now to ensure "Please configure" tooltip
+        // TODO: remove when configurationRequired works
+         if (status === Util.NeedsConfiguration) {
+             iconName = "configure";
+        } else {
+            iconName = generalModel.currentConditionIconName;
+        }
+
+        if (inPanel) {
+            return symbolicizeIconName(iconName);
+        }
+
+        return iconName;
+    }
     Plasmoid.busy: status === Util.Connecting
     Plasmoid.configurationRequired: status === Util.NeedsConfiguration
 
