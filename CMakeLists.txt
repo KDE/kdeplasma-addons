@@ -6,7 +6,7 @@ set(PROJECT_VERSION_MAJOR 5)
 
 ################# Disallow in-source build #################
 if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
-   message(FATAL_ERROR "plasma requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma [options]' there.")
+    message(FATAL_ERROR "plasma requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma [options]' there.")
 endif()
 
 set(QT_MIN_VERSION 6.4.0)
@@ -99,7 +99,7 @@ add_definitions(
 )
 
 ecm_set_disabled_deprecation_versions(
-    QT 5.15.2
+    QT 6.5.0
 )
 
 add_subdirectory(dict)
