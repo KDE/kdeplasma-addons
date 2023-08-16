@@ -7,6 +7,7 @@
 #include "contenttracker.h"
 #include <QBuffer>
 #include <QImage>
+#include <QMetaType>
 #include <QPixmap>
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
@@ -19,14 +20,14 @@ class PurposeHelper : public QObject
 public:
     Q_INVOKABLE static QByteArray variantToBase64(const QVariant &content)
     {
-        switch (content.type()) {
-        case QVariant::Image:
+        switch (content.typeId()) {
+        case QMetaType::QImage:
             return imageToBase64(content.value<QImage>());
-        case QVariant::Pixmap:
+        case QMetaType::QPixmap:
             return imageToBase64(content.value<QPixmap>().toImage());
-        case QVariant::ByteArray:
+        case QMetaType::QByteArray:
             return content.toByteArray().toBase64();
-        case QVariant::String:
+        case QMetaType::QString:
         default:
             return content.toString().toLatin1().toBase64();
         }

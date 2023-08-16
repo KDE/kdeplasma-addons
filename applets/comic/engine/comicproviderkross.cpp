@@ -51,7 +51,7 @@ QString ComicProviderKross::identifierToString(const QVariant &identifier) const
 {
     QString result;
 
-    if (!identifier.isNull() && identifier.type() != QVariant::Bool) {
+    if (!identifier.isNull() && identifier.typeId() != QMetaType::Bool) {
         if (identifierType() == IdentifierType::DateIdentifier) {
             result = identifier.toDate().toString(Qt::ISODate);
         } else {

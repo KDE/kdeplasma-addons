@@ -101,9 +101,9 @@ void DateWrapper::setDate(const QDate &date)
 
 QDate DateWrapper::fromVariant(const QVariant &variant)
 {
-    if (variant.type() == QVariant::Date || variant.type() == QVariant::DateTime) {
+    if (variant.typeId() == QMetaType::QDate || variant.typeId() == QMetaType::QDateTime) {
         return variant.toDate();
-    } else if (variant.type() == QVariant::String) {
+    } else if (variant.typeId() == QMetaType::QString) {
         return QDate::fromString(variant.toString(), Qt::ISODate);
     } else {
         if (variant.canConvert<DateWrapper>()) {
@@ -370,7 +370,7 @@ QImage ComicProviderWrapper::comicImage()
 
 QJSValue ComicProviderWrapper::identifierToScript(const QVariant &identifier)
 {
-    if (identifierType() == IdentifierType::DateIdentifier && identifier.type() != QVariant::Bool) {
+    if (identifierType() == IdentifierType::DateIdentifier && identifier.typeId() != QMetaType::Bool) {
         return m_engine->toScriptValue(DateWrapper(identifier.toDate()));
     }
     return m_engine->toScriptValue(identifier);
@@ -796,7 +796,7 @@ void ComicProviderWrapper::combine(const QVariant &image, PositionType position)
     }
 
     QImage header;
-    if (image.type() == QVariant::String) {
+    if (image.typeId() == QMetaType::QString) {
         const QString path(mPackage->filePath("images", image.toString()));
         if (QFile::exists(path)) {
             header = QImage(path);
