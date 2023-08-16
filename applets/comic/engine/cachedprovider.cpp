@@ -55,7 +55,7 @@ QImage CachedProvider::image() const
 
 QString CachedProvider::identifier() const
 {
-    if (requestedString().lastIndexOf(QLatin1Char(':')) + 1 == requestedString().count()) {
+    if (requestedString().lastIndexOf(QLatin1Char(':')) + 1 == requestedString().size()) {
         return requestedString() + lastCachedStripIdentifier();
     }
     return requestedString();
