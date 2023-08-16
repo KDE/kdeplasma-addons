@@ -329,7 +329,7 @@ void DocumentHandler::setFontFamily(const QString &arg)
         return;
     }
     QTextCharFormat format;
-    format.setFontFamily(arg);
+    format.setFontFamilies({arg});
     mergeFormatOnWordOrSelection(format);
     Q_EMIT fontFamilyChanged();
 }
