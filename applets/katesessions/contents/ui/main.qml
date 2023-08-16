@@ -22,12 +22,19 @@ import org.kde.plasma.private.profiles 1.0
 
 PlasmoidItem {
     id: main
+
+    readonly property bool inPanel: (Plasmoid.location === PlasmaCore.Types.TopEdge
+        || Plasmoid.location === PlasmaCore.Types.RightEdge
+        || Plasmoid.location === PlasmaCore.Types.BottomEdge
+        || Plasmoid.location === PlasmaCore.Types.LeftEdge)
+
     width: (Plasmoid.formFactor==PlasmaCore.Types.Planar)? Kirigami.Units.gridUnit * 14 : undefined
     height: (Plasmoid.formFactor==PlasmaCore.Types.Planar)? Kirigami.Units.gridUnit * 16: undefined
 
     switchWidth: Kirigami.Units.gridUnit * 11
     switchHeight: Kirigami.Units.gridUnit * 11
     Plasmoid.status: PlasmaCore.Types.ActiveStatus
+    Plasmoid.icon: inPanel ? "kate-symbolic" : "kate"
     toolTipMainText: i18n("Kate Sessions")
 
     Component.onCompleted: {
