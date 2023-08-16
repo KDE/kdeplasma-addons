@@ -17,11 +17,18 @@ import org.kde.plasma.private.profiles 1.0 as Profiles
 PlasmoidItem {
    id: konsoleProfiles
 
+    readonly property bool inPanel: (Plasmoid.location === PlasmaCore.Types.TopEdge
+        || Plasmoid.location === PlasmaCore.Types.RightEdge
+        || Plasmoid.location === PlasmaCore.Types.BottomEdge
+        || Plasmoid.location === PlasmaCore.Types.LeftEdge)
+
     switchWidth: Kirigami.Units.gridUnit * 11
     switchHeight: Kirigami.Units.gridUnit * 9
 
     Layout.minimumWidth: Kirigami.Units.gridUnit * 12
     Layout.minimumHeight: Kirigami.Units.gridUnit * 10
+
+    Plasmoid.icon: inPanel ? "dialog-scripts-symbolic" : "utilities-terminal"
 
     fullRepresentation: FocusScope {
         anchors.fill: parent
@@ -43,10 +50,6 @@ PlasmoidItem {
                 id: profilesModel
                 appName: "konsole"
             }
-        }
-
-        Component.onCompleted: {
-            plasmoid.popupIcon = "utilities-terminal";
         }
 
         Row {
