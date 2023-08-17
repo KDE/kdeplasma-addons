@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kde5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-08-17 01:58+0000\n"
 "PO-Revision-Date: 2015-02-24 19:40+0100\n"
 "Last-Translator: Samir Ribić <megaribi@epn.ba>\n"
 "Language-Team: Bosnian\n"
@@ -34,12 +34,12 @@ msgstr ""
 msgid "Cancel session creation"
 msgstr ""
 
-#: contents/ui/main.qml:31
+#: contents/ui/main.qml:38
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate sesije"
 
-#: contents/ui/main.qml:40
+#: contents/ui/main.qml:47
 #, fuzzy, kde-format
 #| msgid "Search"
 msgid "Search…"

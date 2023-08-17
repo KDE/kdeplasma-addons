@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-08-17 01:58+0000\n"
 "PO-Revision-Date: 2014-11-06 17:39-0600\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -32,12 +32,12 @@ msgstr "ਨਵਾਂ ਸ਼ੈਸ਼ਨ ਬਣਾਉ ਅਤੇ ਕੇਟ ਸ਼ੁਰੂ 
 msgid "Cancel session creation"
 msgstr ""
 
-#: contents/ui/main.qml:31
+#: contents/ui/main.qml:38
 #, kde-format
 msgid "Kate Sessions"
 msgstr "ਕੇਟ ਸ਼ੈਸ਼ਨ"
 
-#: contents/ui/main.qml:40
+#: contents/ui/main.qml:47
 #, fuzzy, kde-format
 #| msgid "Search"
 msgid "Search…"
