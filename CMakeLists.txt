@@ -65,6 +65,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     UnitConversion
     XmlGui
     NewStuff
+    JobWidgets
 )
 
 find_package(KF6Purpose CONFIG QUIET)
