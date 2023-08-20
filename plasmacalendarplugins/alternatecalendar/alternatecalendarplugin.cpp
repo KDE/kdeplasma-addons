@@ -110,13 +110,19 @@ void AlternateCalendarPlugin::init()
     case CalendarSystem::IslamicUmalqura:
         m_calendarProvider.reset(new IslamicCalendarProvider(this, m_calendarSystem));
         break;
+#else
+    // Fall back to QtCalendar
+    case CalendarSystem::Jalali:
+        m_calendarProvider.reset(new QtCalendarProvider(this, QCalendar::System::Jalali));
+        break;
+    case CalendarSystem::IslamicCivil:
+        m_calendarProvider.reset(new QtCalendarProvider(this, QCalendar::System::IslamicCivil));
+        break;
 #endif
-#ifndef QT_BOOTSTRAPPED
     case CalendarSystem::Julian:
     case CalendarSystem::Milankovic:
         m_calendarProvider.reset(new QtCalendarProvider(this, m_calendarSystem));
         break;
-#endif
     default:
         m_calendarProvider.reset(new AbstractCalendarProvider(this, m_calendarSystem));
     }
