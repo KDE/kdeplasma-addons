@@ -9,9 +9,16 @@
 
 #include <memory>
 
+#include <QCache>
+
+#include <KConfigGroup>
+#include <KConfigWatcher>
+
 #include <CalendarEvents/CalendarEventsPlugin>
 
 #include "calendarsystem.h"
+
+class AbstractCalendarProvider;
 
 class AlternateCalendarPlugin : public CalendarEvents::CalendarEventsPlugin
 {
@@ -29,10 +36,22 @@ public Q_SLOTS:
     void updateSettings();
 
 private:
-    const std::unique_ptr<class AlternateCalendarPluginPrivate> d;
+    void init();
+
+    std::unique_ptr<AbstractCalendarProvider> m_calendarProvider;
 
     QDate m_lastStartDate;
     QDate m_lastEndDate;
+
+    // Cache lookup data
+    QCache<QDate, SubLabel> m_subLabelsCache;
+
+    // For updating config
+    KConfigGroup m_generalConfigGroup;
+    KConfigWatcher::Ptr m_configWatcher;
+
+    CalendarSystem::System m_calendarSystem = CalendarSystem::Gregorian;
+    int m_dateOffset = 0; // For the (tabular) Islamic Civil calendar
 };
 
 #endif

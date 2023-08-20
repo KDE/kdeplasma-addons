@@ -8,10 +8,6 @@
 
 #include "alternatecalendarplugin.h"
 
-#include <QCache>
-
-#include <KConfigGroup>
-#include <KConfigWatcher>
 #include <KSharedConfig>
 
 #include "provider/qtcalendar.h"
@@ -24,97 +20,28 @@
 
 using SubLabel = CalendarEvents::CalendarEventsPlugin::SubLabel;
 
-class AlternateCalendarPluginPrivate
-{
-public:
-    explicit AlternateCalendarPluginPrivate(AlternateCalendarPlugin *parent);
-    ~AlternateCalendarPluginPrivate();
-
-    void init();
-    void loadEventsForDateRange(const QDate &startDate, const QDate &endDate);
-
-private:
-    std::unique_ptr<AbstractCalendarProvider> m_calendarProvider;
-
-    // Cache lookup data
-    QCache<QDate, SubLabel> m_subLabelsCache;
-
-    // For updating config
-    KConfigGroup m_generalConfigGroup;
-    KConfigWatcher::Ptr m_configWatcher;
-
-    CalendarSystem::System m_calendarSystem;
-    int m_dateOffset; // For the (tabular) Islamic Civil calendar
-
-    AlternateCalendarPlugin *q;
-};
-
-AlternateCalendarPluginPrivate::AlternateCalendarPluginPrivate(AlternateCalendarPlugin *parent)
-    : q(parent)
+AlternateCalendarPlugin::AlternateCalendarPlugin(QObject *parent)
+    : CalendarEvents::CalendarEventsPlugin(parent)
 {
     m_subLabelsCache.setMaxCost(42 * 3 /*previous, current, next*/);
 
     auto config = KSharedConfig::openConfig(QStringLiteral("plasma_calendar_alternatecalendar"));
     m_generalConfigGroup = config->group("General");
     m_configWatcher = KConfigWatcher::create(config);
-    QObject::connect(m_configWatcher.get(), &KConfigWatcher::configChanged, q, &AlternateCalendarPlugin::updateSettings);
+    connect(m_configWatcher.get(), &KConfigWatcher::configChanged, this, &AlternateCalendarPlugin::updateSettings);
+
     init();
 }
 
-AlternateCalendarPluginPrivate::~AlternateCalendarPluginPrivate()
+AlternateCalendarPlugin::~AlternateCalendarPlugin()
 {
 }
 
-void AlternateCalendarPluginPrivate::init()
+void AlternateCalendarPlugin::loadEventsForDateRange(const QDate &startDate, const QDate &endDate)
 {
-    m_dateOffset = m_generalConfigGroup.readEntry("dateOffset", 0);
+    m_lastStartDate = startDate;
+    m_lastEndDate = endDate;
 
-    // Find the matched calendar system
-    const QString system = m_generalConfigGroup.readEntry("calendarSystem", "Julian");
-    const auto systemIt = s_calendarMap.find(system);
-
-    if (systemIt == s_calendarMap.end()) {
-        // Invalid config, fall back to Gregorian
-        m_calendarSystem = CalendarSystem::Gregorian;
-    } else {
-        m_calendarSystem = systemIt->second.system;
-    }
-
-    // Load/Reload the calendar provider
-    switch (m_calendarSystem) {
-#if HAVE_ICU
-    case CalendarSystem::Chinese:
-        m_calendarProvider.reset(new ChineseCalendarProvider(q, m_calendarSystem));
-        break;
-    case CalendarSystem::Indian:
-        m_calendarProvider.reset(new IndianCalendarProvider(q, m_calendarSystem));
-        break;
-    case CalendarSystem::Hebrew:
-        m_calendarProvider.reset(new HebrewCalendarProvider(q, m_calendarSystem));
-        break;
-    case CalendarSystem::Jalali:
-    case CalendarSystem::Islamic:
-    case CalendarSystem::IslamicCivil:
-    case CalendarSystem::IslamicUmalqura:
-        m_calendarProvider.reset(new IslamicCalendarProvider(q, m_calendarSystem));
-        break;
-#endif
-#ifndef QT_BOOTSTRAPPED
-    case CalendarSystem::Julian:
-    case CalendarSystem::Milankovic:
-        m_calendarProvider.reset(new QtCalendarProvider(q, m_calendarSystem));
-        break;
-#endif
-    default:
-        m_calendarProvider.reset(new AbstractCalendarProvider(q, m_calendarSystem));
-    }
-
-    // Clear the old cache when config is reloaded
-    m_subLabelsCache.clear();
-}
-
-void AlternateCalendarPluginPrivate::loadEventsForDateRange(const QDate &startDate, const QDate &endDate)
-{
     if (!endDate.isValid() || m_calendarSystem == CalendarSystem::Gregorian) {
         return;
     }
@@ -139,31 +66,63 @@ void AlternateCalendarPluginPrivate::loadEventsForDateRange(const QDate &startDa
     }
 
     if (alternateDatesData.size() > 0) {
-        Q_EMIT q->alternateCalendarDateReady(alternateDatesData);
+        Q_EMIT alternateCalendarDateReady(alternateDatesData);
     }
-    Q_EMIT q->subLabelReady(subLabelsData);
-}
-
-AlternateCalendarPlugin::AlternateCalendarPlugin(QObject *parent)
-    : CalendarEvents::CalendarEventsPlugin(parent)
-    , d(std::make_unique<AlternateCalendarPluginPrivate>(this))
-{
-}
-
-AlternateCalendarPlugin::~AlternateCalendarPlugin()
-{
-}
-
-void AlternateCalendarPlugin::loadEventsForDateRange(const QDate &startDate, const QDate &endDate)
-{
-    m_lastStartDate = startDate;
-    m_lastEndDate = endDate;
-
-    d->loadEventsForDateRange(startDate, endDate);
+    Q_EMIT subLabelReady(subLabelsData);
 }
 
 void AlternateCalendarPlugin::updateSettings()
 {
-    d->init();
+    init();
     loadEventsForDateRange(m_lastStartDate, m_lastEndDate);
 }
+
+void AlternateCalendarPlugin::init()
+{
+    m_dateOffset = m_generalConfigGroup.readEntry("dateOffset", 0);
+
+    // Find the matched calendar system
+    const QString system = m_generalConfigGroup.readEntry("calendarSystem", "Julian");
+    const auto systemIt = s_calendarMap.find(system);
+
+    if (systemIt == s_calendarMap.end()) {
+        // Invalid config, fall back to Gregorian
+        m_calendarSystem = CalendarSystem::Gregorian;
+    } else {
+        m_calendarSystem = systemIt->second.system;
+    }
+
+    // Load/Reload the calendar provider
+    switch (m_calendarSystem) {
+#if HAVE_ICU
+    case CalendarSystem::Chinese:
+        m_calendarProvider.reset(new ChineseCalendarProvider(this, m_calendarSystem));
+        break;
+    case CalendarSystem::Indian:
+        m_calendarProvider.reset(new IndianCalendarProvider(this, m_calendarSystem));
+        break;
+    case CalendarSystem::Hebrew:
+        m_calendarProvider.reset(new HebrewCalendarProvider(this, m_calendarSystem));
+        break;
+    case CalendarSystem::Jalali:
+    case CalendarSystem::Islamic:
+    case CalendarSystem::IslamicCivil:
+    case CalendarSystem::IslamicUmalqura:
+        m_calendarProvider.reset(new IslamicCalendarProvider(this, m_calendarSystem));
+        break;
+#endif
+#ifndef QT_BOOTSTRAPPED
+    case CalendarSystem::Julian:
+    case CalendarSystem::Milankovic:
+        m_calendarProvider.reset(new QtCalendarProvider(this, m_calendarSystem));
+        break;
+#endif
+    default:
+        m_calendarProvider.reset(new AbstractCalendarProvider(this, m_calendarSystem));
+    }
+
+    // Clear the old cache when config is reloaded
+    m_subLabelsCache.clear();
+}
+
+#include "moc_alternatecalendarplugin.cpp"
