@@ -24,7 +24,7 @@ class ChineseCalendarProviderPrivate : public ICUCalendarPrivate
 public:
     explicit ChineseCalendarProviderPrivate();
 
-    CalendarEvents::CalendarEventsPlugin::SubLabel subLabels(const QDate &date);
+    CalendarEvents::CalendarEventsPlugin::SubLabel subLabel(const QDate &date);
 
 private:
     enum SolarTerm {
@@ -113,7 +113,7 @@ auto ChineseCalendarProviderPrivate::generateSolarTermsCache(int year)
     return thisYearIt;
 }
 
-CalendarEvents::CalendarEventsPlugin::SubLabel ChineseCalendarProviderPrivate::subLabels(const QDate &date)
+CalendarEvents::CalendarEventsPlugin::SubLabel ChineseCalendarProviderPrivate::subLabel(const QDate &date)
 {
     auto sublabel = CalendarEvents::CalendarEventsPlugin::SubLabel{};
 
@@ -205,8 +205,11 @@ QDate ChineseCalendarProviderPrivate::getSolarTermDate(int year, SolarTerm order
     return QDate(resultYear, resultMonth, resultDay);
 }
 
-ChineseCalendarProvider::ChineseCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem)
-    : AbstractCalendarProvider(parent, calendarSystem)
+ChineseCalendarProvider::ChineseCalendarProvider(QObject *parent,
+                                                 CalendarSystem::System calendarSystem,
+                                                 std::vector<QDate> &&alternateDates,
+                                                 std::vector<QDate> &&sublabelDates)
+    : AbstractCalendarProvider(parent, calendarSystem, std::move(alternateDates), std::move(sublabelDates))
     , d(std::make_unique<ChineseCalendarProviderPrivate>())
 {
     Q_ASSERT(m_calendarSystem == CalendarSystem::Chinese);
@@ -216,7 +219,7 @@ ChineseCalendarProvider::~ChineseCalendarProvider()
 {
 }
 
-CalendarEvents::CalendarEventsPlugin::SubLabel ChineseCalendarProvider::subLabels(const QDate &date) const
+CalendarEvents::CalendarEventsPlugin::SubLabel ChineseCalendarProvider::subLabel(const QDate &date) const
 {
-    return d->subLabels(date);
+    return d->subLabel(date);
 }

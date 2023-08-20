@@ -20,10 +20,13 @@ class ChineseCalendarProvider : public AbstractCalendarProvider
     Q_OBJECT
 
 public:
-    explicit ChineseCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem);
+    explicit ChineseCalendarProvider(QObject *parent,
+                                     CalendarSystem::System calendarSystem,
+                                     std::vector<QDate> &&alternateDates,
+                                     std::vector<QDate> &&sublabelDates);
     ~ChineseCalendarProvider() override;
 
-    CalendarEvents::CalendarEventsPlugin::SubLabel subLabels(const QDate &date) const override;
+    CalendarEvents::CalendarEventsPlugin::SubLabel subLabel(const QDate &date) const override;
 
 private:
     const std::unique_ptr<class ChineseCalendarProviderPrivate> d;

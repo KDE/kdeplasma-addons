@@ -6,7 +6,16 @@
 
 #pragma once
 
-#include "../alternatecalendarplugin.h"
+#include <vector>
+
+#include <QDate>
+#include <QHash>
+#include <QObject>
+#include <QRunnable>
+
+#include <CalendarEvents/CalendarEventsPlugin>
+
+#include "calendarsystem.h"
 
 /**
  * @short An abstract base class for alternate calendar providers.
@@ -14,12 +23,16 @@
  * This class serves as abstract base class for alternate calendar
  * provider implementations.
  */
-class AbstractCalendarProvider : public QObject
+class AbstractCalendarProvider : public QObject, public QRunnable
 {
     Q_OBJECT
 
 public:
-    explicit AbstractCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem);
+    explicit AbstractCalendarProvider(QObject *parent,
+                                      CalendarSystem::System calendarSystem,
+                                      std::vector<QDate> &&alternateDates,
+                                      std::vector<QDate> &&sublabelDates,
+                                      int dateOffset = 0);
     ~AbstractCalendarProvider() override;
 
     /**
@@ -34,10 +47,22 @@ public:
      * Gets the sub-labels for the specific Gregorian date
      *
      * @param date Gregorian date
-     * @return Sub-labels for the specific Gregorian date
+     * @return A sublabel for the specific Gregorian date
      */
-    virtual CalendarEvents::CalendarEventsPlugin::SubLabel subLabels(const QDate &date) const;
+    virtual CalendarEvents::CalendarEventsPlugin::SubLabel subLabel(const QDate &date) const;
+
+    /**
+     * Loads calendar data in date list @p dates with given offset @p dateOffset
+     */
+    void run() override;
+
+Q_SIGNALS:
+    void dataReady(const QHash<QDate, QCalendar::YearMonthDay> &alternateDatesData,
+                   const QHash<QDate, CalendarEvents::CalendarEventsPlugin::SubLabel> &sublabelData);
 
 protected:
     const CalendarSystem::System m_calendarSystem;
+    const std::vector<QDate> m_alternateDates;
+    const std::vector<QDate> m_sublabelDates;
+    const int m_dateOffset;
 };

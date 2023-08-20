@@ -6,11 +6,30 @@
 
 #include "qtcalendar.h"
 
-QtCalendarProvider::QtCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem)
-    : AbstractCalendarProvider(parent, calendarSystem)
-    , m_calendar(QCalendar(static_cast<QCalendar::System>(calendarSystem)))
+namespace
 {
-    Q_ASSERT(m_calendarSystem <= static_cast<CalendarSystem::System>(QCalendar::System::Last));
+constexpr QCalendar::System toQCalendarSystem(CalendarSystem::System calendarSystem)
+{
+    switch (calendarSystem) {
+    case CalendarSystem::System::Jalali:
+        return QCalendar::System::Jalali;
+    case CalendarSystem::System::IslamicCivil:
+        return QCalendar::System::IslamicCivil;
+    default:
+        return static_cast<QCalendar::System>(calendarSystem);
+    }
+}
+}
+
+QtCalendarProvider::QtCalendarProvider(QObject *parent,
+                                       CalendarSystem::System calendarSystem,
+                                       std::vector<QDate> &&alternateDates,
+                                       std::vector<QDate> &&sublabelDates,
+                                       int dateOffset)
+    : AbstractCalendarProvider(parent, calendarSystem, std::move(alternateDates), std::move(sublabelDates), dateOffset)
+    , m_calendar(QCalendar(toQCalendarSystem(calendarSystem)))
+{
+    Q_ASSERT(toQCalendarSystem(calendarSystem) <= QCalendar::System::Last);
 }
 
 QtCalendarProvider::~QtCalendarProvider()
@@ -26,7 +45,7 @@ QCalendar::YearMonthDay QtCalendarProvider::fromGregorian(const QDate &date) con
     return m_calendar.partsFromDate(date);
 }
 
-CalendarEvents::CalendarEventsPlugin::SubLabel QtCalendarProvider::subLabels(const QDate &date) const
+CalendarEvents::CalendarEventsPlugin::SubLabel QtCalendarProvider::subLabel(const QDate &date) const
 {
     auto sublabel = CalendarEvents::CalendarEventsPlugin::SubLabel{};
 

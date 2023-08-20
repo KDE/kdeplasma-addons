@@ -16,11 +16,14 @@ class HebrewCalendarProvider : public AbstractCalendarProvider
     Q_OBJECT
 
 public:
-    explicit HebrewCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem);
+    explicit HebrewCalendarProvider(QObject *parent,
+                                    CalendarSystem::System calendarSystem,
+                                    std::vector<QDate> &&alternateDates,
+                                    std::vector<QDate> &&sublabelDates);
     ~HebrewCalendarProvider() override;
 
     QCalendar::YearMonthDay fromGregorian(const QDate &date) const override;
-    CalendarEvents::CalendarEventsPlugin::SubLabel subLabels(const QDate &date) const override;
+    CalendarEvents::CalendarEventsPlugin::SubLabel subLabel(const QDate &date) const override;
 
 private:
     const std::unique_ptr<class HebrewCalendarProviderPrivate> d;

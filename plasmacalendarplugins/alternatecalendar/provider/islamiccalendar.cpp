@@ -21,7 +21,7 @@ public:
     QString formattedDateStringInNativeLanguage(const icu::UnicodeString &str) const;
 
     QCalendar::YearMonthDay fromGregorian(const QDate &_date);
-    CalendarEvents::CalendarEventsPlugin::SubLabel subLabels(const QDate &date);
+    CalendarEvents::CalendarEventsPlugin::SubLabel subLabel(const QDate &date);
 
 private:
     // See https://unicode-org.github.io/icu/userguide/locale/#keywords for available keywords
@@ -103,7 +103,7 @@ QCalendar::YearMonthDay IslamicCalendarProviderPrivate::fromGregorian(const QDat
     return date();
 }
 
-CalendarEvents::CalendarEventsPlugin::SubLabel IslamicCalendarProviderPrivate::subLabels(const QDate &date)
+CalendarEvents::CalendarEventsPlugin::SubLabel IslamicCalendarProviderPrivate::subLabel(const QDate &date)
 {
     auto sublabel = CalendarEvents::CalendarEventsPlugin::SubLabel{};
 
@@ -131,8 +131,12 @@ CalendarEvents::CalendarEventsPlugin::SubLabel IslamicCalendarProviderPrivate::s
     return sublabel;
 }
 
-IslamicCalendarProvider::IslamicCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem)
-    : AbstractCalendarProvider(parent, calendarSystem)
+IslamicCalendarProvider::IslamicCalendarProvider(QObject *parent,
+                                                 CalendarSystem::System calendarSystem,
+                                                 std::vector<QDate> &&alternateDates,
+                                                 std::vector<QDate> &&sublabelDates,
+                                                 int dateOffset)
+    : AbstractCalendarProvider(parent, calendarSystem, std::move(alternateDates), std::move(sublabelDates), dateOffset)
     , d(std::make_unique<IslamicCalendarProviderPrivate>(calendarSystem))
 {
     Q_ASSERT(m_calendarSystem == CalendarSystem::Jalali || m_calendarSystem == CalendarSystem::Islamic || m_calendarSystem == CalendarSystem::IslamicCivil
@@ -148,7 +152,7 @@ QCalendar::YearMonthDay IslamicCalendarProvider::fromGregorian(const QDate &date
     return d->fromGregorian(date);
 }
 
-CalendarEvents::CalendarEventsPlugin::SubLabel IslamicCalendarProvider::subLabels(const QDate &date) const
+CalendarEvents::CalendarEventsPlugin::SubLabel IslamicCalendarProvider::subLabel(const QDate &date) const
 {
-    return d->subLabels(date);
+    return d->subLabel(date);
 }

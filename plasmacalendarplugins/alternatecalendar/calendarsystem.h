@@ -21,7 +21,7 @@ public:
     /**
      * @note When adding a new calendar system, \s_calendarMap should also be updated.
      */
-    enum System {
+    enum System : int {
         Gregorian = static_cast<int>(QCalendar::System::Gregorian),
 #ifndef QT_BOOTSTRAPPED
         Julian = static_cast<int>(QCalendar::System::Julian),
