@@ -27,5 +27,5 @@ public:
     CalendarEvents::CalendarEventsPlugin::SubLabel subLabels(const QDate &date) const override;
 
 private:
-    const std::unique_ptr<class QtCalendarProviderPrivate> d;
+    const QCalendar m_calendar;
 };
