@@ -18,10 +18,10 @@ PlasmoidItem {
 
     preferredRepresentation: fullRepresentation
 
-    readonly property bool inPanel: (plasmoid.location === PlasmaCore.Types.TopEdge
-        || plasmoid.location === PlasmaCore.Types.RightEdge
-        || plasmoid.location === PlasmaCore.Types.BottomEdge
-        || plasmoid.location === PlasmaCore.Types.LeftEdge)
+    readonly property bool inPanel: (Plasmoid.location === PlasmaCore.Types.TopEdge
+        || Plasmoid.location === PlasmaCore.Types.RightEdge
+        || Plasmoid.location === PlasmaCore.Types.BottomEdge
+        || Plasmoid.location === PlasmaCore.Types.LeftEdge)
 
     Layout.minimumWidth: Kirigami.Units.iconSizes.small
     Layout.minimumHeight: Layout.minimumWidth
@@ -133,7 +133,7 @@ PlasmoidItem {
     }
 
     function copyUrl(url) {
-        if (plasmoid.configuration.copyAutomatically)
+        if (Plasmoid.configuration.copyAutomatically)
             clipboard.content = url;
         else {
             showUrl.url = url
@@ -196,7 +196,7 @@ PlasmoidItem {
 
         ShowUrlDialog {
             id: showUrl
-            location: plasmoid.location
+            location: Plasmoid.location
             visualParent: parent
             onCopyUrl: {
                 clipboard.content = showUrl.url;
@@ -205,7 +205,7 @@ PlasmoidItem {
 
         ShareDialog {
             id: shareDialog
-            location: plasmoid.location
+            location: Plasmoid.location
             inputData: { urls: [] }
             visualParent: parent
             onRunningChanged: {
@@ -223,7 +223,7 @@ PlasmoidItem {
                         copyUrl(resultUrl)
 
                         root.pasteUrls.push(resultUrl);
-                        while (plasmoid.configuration.historySize <= root.pasteUrls.length && root.pasteUrls.length !== 0) {
+                        while (Plasmoid.configuration.historySize <= root.pasteUrls.length && root.pasteUrls.length !== 0) {
                             root.pasteUrls.shift();
                         }
                     }
@@ -256,7 +256,7 @@ PlasmoidItem {
         PlasmaCore.ToolTipArea {
             id: tooltipArea
             anchors.fill: parent
-            location: plasmoid.location
+            location: Plasmoid.location
             active: true
             mainText: i18n("Share")
             subText: i18n("Drop text or an image onto me to upload it to an online service.")

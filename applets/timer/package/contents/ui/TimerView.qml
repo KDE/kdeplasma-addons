@@ -100,7 +100,7 @@ MouseArea {
             Layout.fillHeight: true
             visible: root.showProgressBar
 
-            from: plasmoid.configuration.seconds
+            from: Plasmoid.configuration.seconds
             to: 0
             value: root.seconds
         }

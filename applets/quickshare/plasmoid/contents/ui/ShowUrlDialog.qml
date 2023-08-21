@@ -49,9 +49,9 @@ PlasmaCore.Dialog
         }
         PlasmaComponents3.CheckBox {
             text: i18nc("@option:check", "Don't show this dialog, copy automatically.")
-            checked: plasmoid.configuration.copyAutomatically
+            checked: Plasmoid.configuration.copyAutomatically
             onClicked: {
-                plasmoid.configuration.copyAutomatically = checked
+                Plasmoid.configuration.copyAutomatically = checked
             }
         }
         PlasmaComponents3.Button {

@@ -40,10 +40,10 @@ PlasmoidItem {
 
     readonly property int minimumWidth: Kirigami.Units.gridUnit * 8
     readonly property int minimumHeight: Kirigami.Units.gridUnit * 8
-    readonly property bool showComicAuthor: plasmoid.showComicAuthor
-    readonly property bool showComicTitle: plasmoid.showComicTitle
-    readonly property bool showErrorPicture: plasmoid.showErrorPicture
-    readonly property bool middleClick: plasmoid.middleClick
+    readonly property bool showComicAuthor: Plasmoid.showComicAuthor
+    readonly property bool showComicTitle: Plasmoid.showComicTitle
+    readonly property bool showErrorPicture: Plasmoid.showErrorPicture
+    readonly property bool middleClick: Plasmoid.middleClick
 
     Connections {
         target: plasmoid
@@ -94,15 +94,15 @@ PlasmoidItem {
                 right: parent.right
             }
 
-            visible: plasmoid.tabIdentifiers.length > 1
+            visible: Plasmoid.tabIdentifiers.length > 1
 
             onCurrentIndexChanged: {
                 console.log("onCurrentTabChanged:" + comicTabbar.currentItem.key);
-                plasmoid.tabChanged(comicTabbar.currentItem.key);
+                Plasmoid.tabChanged(comicTabbar.currentItem.key);
             }
 
             Repeater {
-                model: plasmoid.comicsModel
+                model: Plasmoid.comicsModel
                 delegate:  PlasmaComponents3.TabButton {
                     id: tabButton
 
@@ -132,13 +132,13 @@ PlasmoidItem {
                 var tempTop = "";
 
                 if ( showComicTitle ) {
-                    tempTop = plasmoid.comicData.title;
-                    tempTop += ( ( (plasmoid.comicData.stripTitle.length > 0) && (plasmoid.comicData.title.length > 0) ) ? " - " : "" ) + plasmoid.comicData.stripTitle;
+                    tempTop = Plasmoid.comicData.title;
+                    tempTop += ( ( (Plasmoid.comicData.stripTitle.length > 0) && (Plasmoid.comicData.title.length > 0) ) ? " - " : "" ) + Plasmoid.comicData.stripTitle;
                 }
 
                 if ( showComicAuthor &&
-                    (plasmoid.comicData.author != undefined || plasmoid.comicData.author.length > 0) ) {
-                    tempTop = ( tempTop.length > 0 ? plasmoid.comicData.author + ": " + tempTop : plasmoid.comicData.author );
+                    (Plasmoid.comicData.author != undefined || Plasmoid.comicData.author.length > 0) ) {
+                    tempTop = ( tempTop.length > 0 ? Plasmoid.comicData.author + ": " + tempTop : Plasmoid.comicData.author );
                 }
 
                 return tempTop;
@@ -156,8 +156,8 @@ PlasmoidItem {
                 topMargin: (comicTabbar.visible) ? 3 : 0
             }
 
-            visible: plasmoid.tabIdentifiers.length > 0
-            comicData: plasmoid.comicData
+            visible: Plasmoid.tabIdentifiers.length > 0
+            comicData: Plasmoid.comicData
         }
 
         ComicBottomInfo {
@@ -169,9 +169,9 @@ PlasmoidItem {
                 bottom: mainWindow.bottom
             }
 
-            comicData: plasmoid.comicData
-            showUrl: plasmoid.showComicUrl
-            showIdentifier: plasmoid.showComicIdentifier
+            comicData: Plasmoid.comicData
+            showUrl: Plasmoid.showComicUrl
+            showIdentifier: Plasmoid.showComicIdentifier
         }
     }
 

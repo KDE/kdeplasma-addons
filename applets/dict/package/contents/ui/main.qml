@@ -27,7 +27,7 @@ PlasmoidItem {
 
         DictObject {
             id: dict
-            selectedDictionary: plasmoid.configuration.dictionary
+            selectedDictionary: Plasmoid.configuration.dictionary
             // Activate the busy indicator, and deactivate it when page is loaded.
             onSearchInProgress: placeholder.opacity = 1;
             onDefinitionFound: html => {

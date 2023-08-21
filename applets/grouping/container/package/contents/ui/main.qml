@@ -22,7 +22,7 @@ PlasmoidItem {
     property Item internalContainmentItem
 
     Component.onCompleted: {
-        root.internalContainmentItem = plasmoid.internalContainmentItem;
+        root.internalContainmentItem = Plasmoid.internalContainmentItem;
 
         if (root.internalContainmentItem === null) {
             return;
@@ -35,7 +35,7 @@ PlasmoidItem {
     Connections {
         target: plasmoid
         function onInternalContainmentItemChanged() {
-            root.internalContainmentItem = plasmoid.internalContainmentItem;
+            root.internalContainmentItem = Plasmoid.internalContainmentItem;
             root.internalContainmentItem.parent = root;
             root.internalContainmentItem.anchors.fill = root;
         }

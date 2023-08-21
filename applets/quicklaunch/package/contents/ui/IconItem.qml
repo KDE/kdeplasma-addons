@@ -143,7 +143,7 @@ Item {
         id: dragArea
         width: Math.min(iconItem.width, iconItem.height)
         height: width
-        enabled: !plasmoid.immutable
+        enabled: !Plasmoid.immutable
         defaultAction: Qt.MoveAction
         supportedActions: Qt.IgnoreAction | Qt.MoveAction
         delegate: icon

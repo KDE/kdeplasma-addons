@@ -20,7 +20,7 @@ ColumnLayout {
     signal configurationChanged()
 
     Component.onCompleted: {
-        for (var i of plasmoid.configuration.predefinedTimers) {
+        for (var i of Plasmoid.configuration.predefinedTimers) {
             timeListModel.append({"time": i})
         }
     }

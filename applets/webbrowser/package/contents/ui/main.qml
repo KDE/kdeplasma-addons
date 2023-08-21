@@ -143,9 +143,9 @@ PlasmoidItem {
                 id: updateZoomTimer
                 interval: 100
 
-                readonly property int minViewWidth: plasmoid.configuration.minViewWidth
-                readonly property bool useMinViewWidth: plasmoid.configuration.useMinViewWidth
-                readonly property int constantZoomFactor: plasmoid.configuration.constantZoomFactor
+                readonly property int minViewWidth: Plasmoid.configuration.minViewWidth
+                readonly property bool useMinViewWidth: Plasmoid.configuration.useMinViewWidth
+                readonly property int constantZoomFactor: Plasmoid.configuration.constantZoomFactor
 
                 onTriggered: {
                     var newZoom = 1;
@@ -190,13 +190,13 @@ PlasmoidItem {
             WebEngineView {
                 id: webview
                 anchors.fill: parent
-                onUrlChanged: plasmoid.configuration.url = url;
-                Component.onCompleted: url = plasmoid.configuration.url;
+                onUrlChanged: Plasmoid.configuration.url = url;
+                Component.onCompleted: url = Plasmoid.configuration.url;
 
-                readonly property bool useMinViewWidth : plasmoid.configuration.useMinViewWidth
+                readonly property bool useMinViewWidth : Plasmoid.configuration.useMinViewWidth
 
                 Connections {
-                    target: plasmoid.configuration
+                    target: Plasmoid.configuration
 
                     function onMinViewWidthChanged() {updateZoomTimer.start()}
 

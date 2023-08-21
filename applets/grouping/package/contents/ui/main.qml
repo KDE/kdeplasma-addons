@@ -137,7 +137,7 @@ ContainmentItem {
                 event.ignore();
                 return;
             }
-            plasmoid.newTask(plasmoidId);
+            Plasmoid.newTask(plasmoidId);
         }
     }
 

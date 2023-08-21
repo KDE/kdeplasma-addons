@@ -17,7 +17,7 @@ import org.kde.plasma.core 2.0 as PlasmaCore
 import org.kde.plasma.plasmoid 2.0
 
 Kirigami.FormLayout {
-    property string cfg_icon: plasmoid.configuration.icon
+    property string cfg_icon: Plasmoid.configuration.icon
     property alias cfg_useFavIcon: useFavIcon.checked
 
     QQC2.ButtonGroup {
@@ -71,7 +71,7 @@ Kirigami.FormLayout {
             KSvg.FrameSvgItem {
                 id: previewFrame
                 anchors.centerIn: parent
-                imagePath: plasmoid.formFactor === PlasmaCore.Types.Vertical || plasmoid.formFactor === PlasmaCore.Types.Horizontal
+                imagePath: Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal
                         ? "widgets/panel-background" : "widgets/background"
                 width: Kirigami.Units.iconSizes.large + fixedMargins.left + fixedMargins.right
                 height: Kirigami.Units.iconSizes.large + fixedMargins.top + fixedMargins.bottom

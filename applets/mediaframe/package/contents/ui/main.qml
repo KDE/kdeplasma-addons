@@ -23,7 +23,7 @@ PlasmoidItem {
 
     MediaFrame {
         id: items
-        random: plasmoid.configuration.randomize
+        random: Plasmoid.configuration.randomize
     }
 
     preferredRepresentation: fullRepresentation
@@ -67,7 +67,7 @@ PlasmoidItem {
     }
 
     function loadPathList() {
-        var list = plasmoid.configuration.pathList
+        var list = Plasmoid.configuration.pathList
         items.clear()
         for(var i in list) {
             var item = JSON.parse(list[i])
@@ -83,7 +83,7 @@ PlasmoidItem {
     }
 
     Connections {
-        target: plasmoid.configuration
+        target: Plasmoid.configuration
         function onPathListChanged() {
             loadPathList()
         }
@@ -98,9 +98,9 @@ PlasmoidItem {
         // work-around for QTBUG-67773:
         // C++ object property of type QVariant(QStringList) is not updated on changes from QML
         // so explicitly create a deep JSValue copy, modify that and then set it back to overwrite the old
-        var updatedList = plasmoid.configuration.pathList.slice();
+        var updatedList = Plasmoid.configuration.pathList.slice();
         updatedList.push(JSON.stringify(item));
-        plasmoid.configuration.pathList = updatedList;
+        Plasmoid.configuration.pathList = updatedList;
     }
 
     function nextItem() {
@@ -150,7 +150,7 @@ PlasmoidItem {
 
     Timer {
         id: nextTimer
-        interval: (plasmoid.configuration.interval*1000)
+        interval: (Plasmoid.configuration.interval*1000)
         repeat: true
         running: hasItems && !pause
         onTriggered: nextItem()
@@ -196,7 +196,7 @@ PlasmoidItem {
 
 
                 anchors.fill: parent
-                fillMode: plasmoid.configuration.fillMode
+                fillMode: Plasmoid.configuration.fillMode
 
                 opacity: 0
 
@@ -211,7 +211,7 @@ PlasmoidItem {
                 id: frontImage
 
                 anchors.fill: parent
-                fillMode: plasmoid.configuration.fillMode
+                fillMode: Plasmoid.configuration.fillMode
 
                 cache: false
                 source: activeSource
@@ -243,7 +243,7 @@ PlasmoidItem {
         DropShadow {
             id: itemViewDropShadow
             anchors.fill: parent
-            visible: imageView.visible && !plasmoid.configuration.useBackground
+            visible: imageView.visible && !Plasmoid.configuration.useBackground
 
             radius: 8.0
             samples: 16
@@ -398,7 +398,7 @@ PlasmoidItem {
     Rectangle {
         id: progress
 
-        visible: plasmoid.configuration.showCountdown && hasItems && itemCount > 1
+        visible: Plasmoid.configuration.showCountdown && hasItems && itemCount > 1
 
         color: "transparent"
 
