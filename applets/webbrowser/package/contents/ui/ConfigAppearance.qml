@@ -13,6 +13,8 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 
 import org.kde.plasma.core 2.0 as PlasmaCore
+// CHECK: do we really need it here?
+import org.kde.plasma.plasmoid 2.0
 
 Kirigami.FormLayout {
     property string cfg_icon: plasmoid.configuration.icon
