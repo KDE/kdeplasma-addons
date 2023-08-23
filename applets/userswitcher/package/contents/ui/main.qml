@@ -86,7 +86,7 @@ Item {
             PlasmaComponents3.Label {
                 id: label
 
-                width: root.isVertical ? compactRoot.width : undefined
+                width: root.isVertical ? compactRoot.width : contentWidth
                 height: root.isVertical ? contentHeight : compactRoot.height
 
                 text: root.displayedName
