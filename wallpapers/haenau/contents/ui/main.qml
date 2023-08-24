@@ -10,7 +10,7 @@ import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.plasmoid 2.0
 
 WallpaperItem {
-    id: root
+    id: wallpaper
 
     //FIXME: Svg doesn't support relative paths
     readonly property string wallpaperPath: String(Qt.resolvedUrl("wallpaper.svgz")).substring(7)
