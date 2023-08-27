@@ -5,27 +5,26 @@
  *    SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Layouts 1.15
+import QtQuick
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.1 as PlasmaCore
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.plasma5support 2.0 as P5Support
-import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.plasma.plasmoid
+import org.kde.plasma.core as PlasmaCore
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasma5support as P5Support
+import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.extras as PlasmaExtras
 
 PlasmoidItem {
     id: root
 
-    readonly property QtObject source: P5Support.DataSource {
+    P5Support.DataSource {
         id: keystateSource
         engine: "keystate"
         connectedSources: Plasmoid.configuration.key
     }
 
-    property list<string> lockedSources: {
-        const sources = []
+    readonly property list<string> lockedSources: {
+        const sources = [];
         for (const source of keystateSource.connectedSources) {
             const data = keystateSource.data[source];
             if (data?.Locked) {
@@ -35,32 +34,32 @@ PlasmoidItem {
         return sources;
     }
 
-    function translate(identifier) {
-        switch(identifier) {
+    function translate(identifier: string): string {
+        switch (identifier) {
             // Not using KUIT markup for these newline characters because those
             // get translated into HTML, and this text is displayed in the applet's
             // tooltip which does not render HTML at all for security reasons
-            case "Caps Lock": return i18n("Caps Lock activated")
-            case "Num Lock": return i18n("Num Lock activated")
+            case "Caps Lock": return i18n("Caps Lock activated");
+            case "Num Lock": return i18n("Num Lock activated");
         }
         return identifier;
     }
 
-    function icon(identifier) {
-        switch(identifier) {
-            case "Caps Lock": return "input-caps-on"
-            case "Num Lock": return "input-num-on"
+    function icon(identifier: string): string {
+        switch (identifier) {
+            case "Caps Lock": return "input-caps-on";
+            case "Num Lock": return "input-num-on";
         }
-        return null
+        return null;
     }
 
     Plasmoid.icon: {
         if (lockedSources.length > 1) {
-            return "input-combo-on"
+            return "input-combo-on";
         } else if (lockedSources.length === 1) {
             return icon(lockedSources[0]);
         } else {
-            return "input-caps-on"
+            return "input-caps-on";
         }
     }
 
@@ -89,7 +88,7 @@ PlasmoidItem {
         }
     }
 
-    fullRepresentation: PlasmaComponents3.Page {
+    fullRepresentation: PlasmaComponents.Page {
         implicitWidth: Kirigami.Units.gridUnit * 12
         implicitHeight: Kirigami.Units.gridUnit * 12
 
@@ -101,7 +100,10 @@ PlasmoidItem {
         }
     }
 
-    Plasmoid.status: lockedSources.length > 0 ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.PassiveStatus
+    Plasmoid.status: lockedSources.length > 0
+        ? PlasmaCore.Types.ActiveStatus
+        : PlasmaCore.Types.PassiveStatus
+
     toolTipSubText: {
         if (lockedSources.length > 0) {
             return lockedSources.map(translate).join("\n");
