@@ -100,6 +100,9 @@ PlasmoidItem {
         }
     }
 
+    switchWidth: Kirigami.Units.gridUnit * 12
+    switchHeight: Kirigami.Units.gridUnit * 12
+
     Plasmoid.status: lockedSources.length > 0
         ? PlasmaCore.Types.ActiveStatus
         : PlasmaCore.Types.PassiveStatus
