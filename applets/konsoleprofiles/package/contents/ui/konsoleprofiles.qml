@@ -13,6 +13,7 @@ import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.private.profiles 1.0 as Profiles
+import org.kde.kitemmodels as KItemModels
 
 PlasmoidItem {
    id: konsoleProfiles
@@ -42,9 +43,9 @@ PlasmoidItem {
             }
         }
 
-        PlasmaCore.SortFilterModel {
+        KItemModels.KSortFilterProxyModel {
             id: sortModel
-            sortRole: "name"
+            sortRoleName: "name"
             sortOrder: "AscendingOrder"
             sourceModel: Profiles.ProfilesModel {
                 id: profilesModel

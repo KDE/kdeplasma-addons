@@ -17,6 +17,7 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.kitemmodels as KItemModels
 
 import org.kde.plasma.private.profiles 1.0
 
@@ -125,13 +126,13 @@ PlasmoidItem {
             anchors.fill: parent
             Menu {
                 id: sessionsMenu
-                model: PlasmaCore.SortFilterModel {
+                model: KItemModels.KSortFilterProxyModel {
                     sourceModel: ProfilesModel {
                         id: model
                         appName: "kate"
                     }
-                    filterRole: "name"
-                    filterRegExp: filter.text
+                    filterRoleName: "name"
+                    filterRegularExpression: RegExp(filter.text)
                 }
                 Layout.fillWidth: true
                 Layout.fillHeight: true

@@ -11,6 +11,7 @@ import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.kitemmodels as KItemModels
 
 Kirigami.OverlaySheet {
     id: sheet
@@ -52,10 +53,10 @@ Kirigami.OverlaySheet {
 
         reuseItems: true
 
-        model: PlasmaCore.SortFilterModel {
+        model: KItemModels.KSortFilterProxyModel {
             sourceModel: dictionariesModel
-            filterRole: "EditRole" // id
-            filterRegExp: filter.text
+            filterRoleName: "EditRole" // id
+            filterRegularExpression: RegExp(filter.text)
         }
 
         delegate: QQC2.CheckDelegate {
