@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-08-29 01:55+0000\n"
 "PO-Revision-Date: 2023-08-27 03:38\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -43,17 +43,17 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "小键盘数字锁定"
 
-#: contents/ui/main.qml:43
+#: contents/ui/main.qml:42
 #, kde-format
 msgid "Caps Lock activated"
 msgstr "大写锁定激活"
 
-#: contents/ui/main.qml:44
+#: contents/ui/main.qml:43
 #, kde-format
 msgid "Num Lock activated"
 msgstr "小键盘数字锁定激活"
 
-#: contents/ui/main.qml:109
+#: contents/ui/main.qml:114
 #, kde-format
 msgid "No lock keys activated"
 msgstr "无激活的锁定键"
