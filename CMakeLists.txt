@@ -83,6 +83,12 @@ set_package_properties(KirigamiAddons PROPERTIES
     TYPE RUNTIME
 )
 
+find_package(KItemModels CONFIG)
+set_package_properties(KItemModels PROPERTIES
+    DESCRIPTION "Set of item models extending the Qt model-view framework"
+    PURPOSE "Required at runtime for the Dictionary, Kate Profiles, and Konsole Profiles applets"
+    TYPE RUNTIME
+)
 
 find_package(ICU 66.1 COMPONENTS uc i18n)
 set_package_properties(ICU
