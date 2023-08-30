@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-17 01:58+0000\n"
+"POT-Creation-Date: 2023-08-30 01:57+0000\n"
 "PO-Revision-Date: 2016-07-22 17:51+0530\n"
 "Last-Translator: G Karunakar <karunakar@indlinux.org>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
@@ -32,12 +32,12 @@ msgstr "नया सत्र बना कर केट चालू करे
 msgid "Cancel session creation"
 msgstr "सत्र बनाना रद्द करें"
 
-#: contents/ui/main.qml:38
+#: contents/ui/main.qml:39
 #, kde-format
 msgid "Kate Sessions"
 msgstr "केट सत्र"
 
-#: contents/ui/main.qml:47
+#: contents/ui/main.qml:48
 #, fuzzy, kde-format
 #| msgid "Search"
 msgid "Search…"

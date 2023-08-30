@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-17 01:58+0000\n"
+"POT-Creation-Date: 2023-08-30 01:57+0000\n"
 "PO-Revision-Date: 2021-07-08 18:05+0200\n"
 "Last-Translator: Volkan Gezer <volkangezer@gmail.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -32,12 +32,12 @@ msgstr "Yeni oturum oluştur ve Kate'i başlat"
 msgid "Cancel session creation"
 msgstr "Oturum oluşturmayı iptal et"
 
-#: contents/ui/main.qml:38
+#: contents/ui/main.qml:39
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate Oturumları"
 
-#: contents/ui/main.qml:47
+#: contents/ui/main.qml:48
 #, kde-format
 msgid "Search…"
 msgstr "Ara…"

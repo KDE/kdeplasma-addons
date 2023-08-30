@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-17 01:58+0000\n"
+"POT-Creation-Date: 2023-08-30 01:57+0000\n"
 "PO-Revision-Date: 2022-06-28 21:23+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 22.04.2\n"
 
-#: package/contents/ui/konsoleprofiles.qml:68
+#: package/contents/ui/konsoleprofiles.qml:69
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "கான்சோல் பயன்முறைகள்"
 
-#: package/contents/ui/konsoleprofiles.qml:88
+#: package/contents/ui/konsoleprofiles.qml:89
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "எதையோ சொல்லும் சரம்"

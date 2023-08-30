@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-17 01:58+0000\n"
+"POT-Creation-Date: 2023-08-30 01:57+0000\n"
 "PO-Revision-Date: 2020-09-19 11:23+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -18,13 +18,13 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 19.12.3\n"
 
-#: package/contents/ui/konsoleprofiles.qml:68
+#: package/contents/ui/konsoleprofiles.qml:69
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Profiluri Konsolă"
 
-#: package/contents/ui/konsoleprofiles.qml:88
+#: package/contents/ui/konsoleprofiles.qml:89
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "Șir arbitrar care spune ceva"
