@@ -10,5 +10,5 @@ target_sources(fifteenpuzzleplugin PRIVATE
     plugin/fifteenimageprovider.cpp
     plugin/fifteenpuzzleplugin.cpp
 )
-target_link_libraries(fifteenpuzzleplugin Qt::Quick Qt::Qml)
+target_link_libraries(fifteenpuzzleplugin PRIVATE Qt::Quick Qt::Qml)
 ecm_finalize_qml_module(fifteenpuzzleplugin)

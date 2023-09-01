@@ -6,5 +6,5 @@ target_sources(colorpickerplugin PRIVATE
     plugin/grabwidget.cpp
     plugin/colorpickerplugin.cpp
 )
-target_link_libraries(colorpickerplugin Qt::DBus Qt::Gui Qt::Qml Qt::Widgets)
+target_link_libraries(colorpickerplugin PRIVATE Qt::DBus Qt::Gui Qt::Qml Qt::Widgets)
 ecm_finalize_qml_module(colorpickerplugin)

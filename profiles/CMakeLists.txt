@@ -8,7 +8,7 @@ target_include_directories(profiles_utility_static
 
 ecm_add_qml_module(profiles_qml_plugin URI org.kde.plasma.private.profiles)
 target_sources(profiles_qml_plugin PRIVATE profilesplugin.cpp)
-target_link_libraries(profiles_qml_plugin
+target_link_libraries(profiles_qml_plugin PRIVATE
     Qt::Qml
     profiles_utility_static
 )

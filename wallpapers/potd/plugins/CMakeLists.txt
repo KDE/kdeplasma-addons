@@ -20,7 +20,7 @@ target_sources(plasma_wallpaper_potdplugin PRIVATE
 	potdprovidermodel.cpp
 	potdplugin.cpp
 )
-target_link_libraries(plasma_wallpaper_potdplugin plasmapotdprovidercore
+target_link_libraries(plasma_wallpaper_potdplugin PRIVATE plasmapotdprovidercore
     KF6::I18n
     KF6::KIOCore
     Qt::DBus

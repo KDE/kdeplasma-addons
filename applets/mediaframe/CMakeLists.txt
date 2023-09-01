@@ -5,7 +5,7 @@ target_sources(mediaframeplugin PRIVATE
     plugin/mediaframe.cpp
     plugin/mediaframeplugin.cpp
 )
-target_link_libraries(mediaframeplugin
+target_link_libraries(mediaframeplugin PRIVATE
     Qt::Core
     Qt::Qml
     Qt::Quick

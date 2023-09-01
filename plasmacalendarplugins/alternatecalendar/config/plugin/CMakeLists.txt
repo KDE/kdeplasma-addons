@@ -5,7 +5,7 @@
 ecm_add_qml_module(plasmacalendaralternatecalendarconfig URI org.kde.plasmacalendar.alternatecalendarconfig)
 target_sources(plasmacalendaralternatecalendarconfig PRIVATE configplugin.cpp configstorage.cpp ../../calendarsystem.h)
 
-target_link_libraries(plasmacalendaralternatecalendarconfig
+target_link_libraries(plasmacalendaralternatecalendarconfig PRIVATE
     Qt::Qml
     Qt::Core
     KF6::ConfigCore

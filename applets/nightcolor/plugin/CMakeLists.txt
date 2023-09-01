@@ -4,7 +4,7 @@ target_sources(nightcolorcontrolplugin PRIVATE
     monitor.cpp
     plugin.cpp
 )
-target_link_libraries(nightcolorcontrolplugin
+target_link_libraries(nightcolorcontrolplugin PRIVATE
     Qt::Core
     Qt::DBus
     Qt::Qml

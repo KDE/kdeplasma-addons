@@ -15,7 +15,7 @@ target_sources(diskquotaplugin PRIVATE
     plugin/QuotaListModel.cpp
     plugin/QuotaItem.cpp
 )
-target_link_libraries(diskquotaplugin
+target_link_libraries(diskquotaplugin PRIVATE
     Qt::Quick
     KF6::CoreAddons
     KF6::I18n

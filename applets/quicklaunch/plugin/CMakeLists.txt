@@ -3,7 +3,7 @@ target_sources(quicklaunchplugin PRIVATE
     quicklaunch_p.cpp
     quicklaunchplugin.cpp
 )
-target_link_libraries(quicklaunchplugin
+target_link_libraries(quicklaunchplugin PRIVATE
     Qt::Core
     Qt::Qml
     KF6::KIOCore
