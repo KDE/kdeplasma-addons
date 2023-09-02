@@ -120,7 +120,7 @@ msgstr "Otevřít cílovou složku kde byl obrázek tapety uložen."
 #: package/contents/ui/main.qml:22
 #, kde-format
 msgid "Open Wallpaper Image"
-msgstr ""
+msgstr "Otevřít obrázek s tapetou"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
