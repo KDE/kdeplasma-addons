@@ -13,7 +13,7 @@ import QtQuick.Dialogs
 
 import org.kde.draganddrop 2.0 as DragDrop
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents3
