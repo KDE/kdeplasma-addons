@@ -242,8 +242,8 @@ PlasmoidItem {
         // This is propagated down to all child controls with text
         font.pixelSize: Math.round(width/12)
         padding: 0
-        Layout.minimumWidth: 150
-        Layout.minimumHeight: 225
+        Layout.minimumWidth: Kirigami.Units.gridUnit * 8
+        Layout.minimumHeight: Kirigami.Units.gridUnit * 12
 
         contentItem: ColumnLayout {
             id: mainLayout
