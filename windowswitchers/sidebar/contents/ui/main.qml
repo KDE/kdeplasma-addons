@@ -61,6 +61,7 @@ KWin.TabBoxSwitcher {
 
                     width: thumbnailListView.width
                     height: delegateColumn.height + 2 * delegateColumn.y
+                    focus: ListView.isCurrentItem
 
                     onClicked: {
                         if (tabBox.noModifierGrab) {
