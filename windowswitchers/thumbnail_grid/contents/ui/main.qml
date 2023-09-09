@@ -109,7 +109,7 @@ KWin.Switcher {
                 keyNavigationWraps: true
                 highlightMoveDuration: 0
 
-                delegate: Item {
+                delegate: MouseArea {
                     id: thumbnailGridItem
                     width: thumbnailGridView.cellWidth
                     height: thumbnailGridView.cellHeight
@@ -117,13 +117,9 @@ KWin.Switcher {
                     focus: GridView.isCurrentItem
                     Accessible.name: model.caption
                     Accessible.role: Accessible.ListItem
-                        onClicked: {
-                            thumbnailGridItem.select();
-                        }
-                    }
-                    function select() {
+
+                    onClicked: {
                         thumbnailGridView.currentIndex = index;
-                        thumbnailGridView.currentIndexChanged(thumbnailGridView.currentIndex);
                     }
 
                     ColumnLayout {
