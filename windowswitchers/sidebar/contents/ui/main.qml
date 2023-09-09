@@ -56,12 +56,12 @@ KWin.TabBoxSwitcher {
                 }
 
                 delegate: MouseArea {
-                    Accessible.name: model.caption
-                    Accessible.role: Accessible.Client
-
                     width: thumbnailListView.width
                     height: delegateColumn.height + 2 * delegateColumn.y
                     focus: ListView.isCurrentItem
+
+                    Accessible.name: model.caption
+                    Accessible.role: Accessible.ListItem
 
                     onClicked: {
                         if (tabBox.noModifierGrab) {
