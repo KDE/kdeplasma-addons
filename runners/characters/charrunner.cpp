@@ -73,9 +73,8 @@ void CharacterRunner::match(RunnerContext &context)
     context.addMatch(match);
 }
 
-void CharacterRunner::run(const RunnerContext &context, const QueryMatch &match)
+void CharacterRunner::run(const RunnerContext & /*context*/, const QueryMatch &match)
 {
-    Q_UNUSED(context)
     QGuiApplication::clipboard()->setText(match.data().toString());
 }
 

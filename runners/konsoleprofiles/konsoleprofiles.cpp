@@ -45,9 +45,8 @@ void KonsoleProfiles::match(RunnerContext &context)
     }
 }
 
-void KonsoleProfiles::run(const RunnerContext &context, const QueryMatch &match)
+void KonsoleProfiles::run(const RunnerContext & /*context*/, const QueryMatch &match)
 {
-    Q_UNUSED(context)
     const QString profile = match.data().toString();
     m_model->openProfile(profile);
 }

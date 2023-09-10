@@ -252,10 +252,8 @@ void SpellCheckRunner::match(RunnerContext &context)
     }
 }
 
-void SpellCheckRunner::run(const RunnerContext &context, const QueryMatch &match)
+void SpellCheckRunner::run(const RunnerContext & /*context*/, const QueryMatch &match)
 {
-    Q_UNUSED(context)
-
     QGuiApplication::clipboard()->setText(match.data().toString());
 }
 

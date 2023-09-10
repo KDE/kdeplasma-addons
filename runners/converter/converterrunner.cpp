@@ -121,10 +121,8 @@ void ConverterRunner::match(RunnerContext &context)
     context.addMatches(matches);
 }
 
-void ConverterRunner::run(const RunnerContext &context, const QueryMatch &match)
+void ConverterRunner::run(const RunnerContext & /*context*/, const QueryMatch &match)
 {
-    Q_UNUSED(context)
-
     const auto value = match.data().value<KUnitConversion::Value>();
 
     if (match.selectedAction()) {

@@ -88,10 +88,8 @@ void KateSessions::match(RunnerContext &context)
     context.addMatches(matches);
 }
 
-void KateSessions::run(const RunnerContext &context, const QueryMatch &match)
+void KateSessions::run(const RunnerContext & /*context*/, const QueryMatch &match)
 {
-    Q_UNUSED(context)
-
     m_model->openProfile(match.data().toString());
 }
 
