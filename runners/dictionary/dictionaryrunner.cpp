@@ -116,7 +116,7 @@ void DictionaryRunner::run(const RunnerContext &context, const QueryMatch &match
         query.remove(0, m_triggerWord.length());
     }
     QGuiApplication::clipboard()->setText(query + QLatin1Char(' ') + match.text());
-    KNotification::event(KNotification::Notification, name(), i18n("Definition for \"%1\" has been copied to clipboard", query), icon().name());
+    KNotification::event(KNotification::Notification, name(), i18n("Definition for \"%1\" has been copied to clipboard", query), metadata().iconName());
 }
 
 K_PLUGIN_CLASS_WITH_JSON(DictionaryRunner, "plasma-runner-dictionary.json")
