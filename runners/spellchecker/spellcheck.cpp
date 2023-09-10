@@ -20,8 +20,6 @@
 SpellCheckRunner::SpellCheckRunner(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
 {
-    connect(this, &SpellCheckRunner::prepare, this, &SpellCheckRunner::loadData);
-    connect(this, &SpellCheckRunner::teardown, this, &SpellCheckRunner::destroydata);
 }
 
 SpellCheckRunner::~SpellCheckRunner() = default;
@@ -77,13 +75,6 @@ void SpellCheckRunner::loadData()
     }
 }
 
-void SpellCheckRunner::destroydata()
-{
-    // Clear the data arrays to save memory
-    m_spellers.clear();
-    m_availableLangCodes.clear();
-}
-
 void SpellCheckRunner::reloadConfiguration()
 {
     const KConfigGroup cfg = config();
@@ -107,6 +98,9 @@ void SpellCheckRunner::reloadConfiguration()
     }
 
     setSyntaxes({RunnerSyntax(s)});
+    // Clear the data arrays to save memory
+    m_spellers.clear();
+    m_availableLangCodes.clear();
 }
 
 /* Take the input query, split into a list, and see if it contains a language to spell in.
@@ -168,6 +162,9 @@ void SpellCheckRunner::match(RunnerContext &context)
         }
         query = query.mid(len).trimmed();
     }
+    if (m_spellers.isEmpty()) {
+        loadData();
+    }
 
     // Pointer to speller object with our chosen language
     QSharedPointer<Sonnet::Speller> speller = m_spellers[QString()];
@@ -182,7 +179,6 @@ void SpellCheckRunner::match(RunnerContext &context)
             terms.removeFirst();
             // New speller object if we don't already have one
             if (!m_spellers.contains(lang)) {
-                QMutexLocker lock(&m_spellLock);
                 // Check nothing happened while we were acquiring the lock
                 if (!m_spellers.contains(lang)) {
                     m_spellers[lang] = QSharedPointer<Sonnet::Speller>(new Sonnet::Speller(lang));
