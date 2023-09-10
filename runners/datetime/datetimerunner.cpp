@@ -31,8 +31,6 @@ static const QRegularExpression conversionWordsRegex = QRegularExpression(QStrin
 DateTimeRunner::DateTimeRunner(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
 {
-    setObjectName(QLatin1String("DateTimeRunner"));
-
     addSyntax(dateWord, i18n("Displays the current date"));
     addSyntax(timeWord, i18n("Displays the current time"));
     addSyntax(dateWord + i18nc("The <> and space are part of the example query", " <timezone>"),

@@ -26,7 +26,6 @@ QMutex s_initMutex;
 DictionaryRunner::DictionaryRunner(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
 {
-    setObjectName(QLatin1String("Dictionary"));
 }
 
 void DictionaryRunner::reloadConfiguration()

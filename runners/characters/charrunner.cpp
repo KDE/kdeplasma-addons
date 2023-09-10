@@ -19,7 +19,6 @@
 CharacterRunner::CharacterRunner(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
 {
-    setObjectName(QStringLiteral("CharacterRunner"));
 }
 
 CharacterRunner::~CharacterRunner()

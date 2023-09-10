@@ -25,8 +25,6 @@ K_PLUGIN_CLASS_WITH_JSON(KateSessions, "plasma-runner-katesessions.json")
 KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
 {
-    setObjectName(QStringLiteral("Kate Sessions"));
-
     addSyntax(QStringLiteral("kate :q:"), i18n("Finds Kate sessions matching :q:."));
     addSyntax(QStringLiteral("kate"), i18n("Lists all the Kate editor sessions in your account."));
 

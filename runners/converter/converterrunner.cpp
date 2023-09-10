@@ -28,8 +28,6 @@ ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaDat
     : AbstractRunner(parent, metaData)
     , actionList({Action(QStringLiteral("copy"), i18n("Copy unit and number"), QStringLiteral("edit-copy"))})
 {
-    setObjectName(QStringLiteral("Converter"));
-
     addSyntax(QStringLiteral(":q:"),
               i18n("Converts the value of :q: when :q: is made up of value unit [>, to, as, in] unit."
                    "You can use the Unit converter applet to find all available units."));

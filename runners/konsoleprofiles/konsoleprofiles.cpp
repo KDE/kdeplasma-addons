@@ -20,7 +20,6 @@
 KonsoleProfiles::KonsoleProfiles(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
 {
-    setObjectName(QStringLiteral("Konsole Profiles"));
     addSyntax({QStringLiteral(":q:"), QStringLiteral("konsole :q:")}, i18n("Finds Konsole profiles matching :q:."));
     addSyntax(QStringLiteral("konsole"), i18n("Lists all the Konsole profiles in your account."));
     setMinLetterCount(3);
