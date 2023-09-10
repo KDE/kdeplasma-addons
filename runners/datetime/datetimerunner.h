@@ -28,11 +28,7 @@ public:
     void run(const RunnerContext &context, const QueryMatch &match) override;
 
 private:
-#if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
-    QHash<QString, QTimeZone> matchingTimeZones(const QStringRef &zoneTerm = QStringRef(), const QDateTime referenceDatetime = QDateTime::currentDateTime());
-#else
     QHash<QString, QTimeZone> matchingTimeZones(const QStringView &zoneTerm = QStringView(), const QDateTime referenceDatetime = QDateTime::currentDateTime());
-#endif
     void addMatch(const QString &text, const QString &clipboardText, const qreal &relevance, const QString &iconName, RunnerContext &context);
 };
 
