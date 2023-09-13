@@ -31,19 +31,19 @@ msgstr "Pestanya següe&nt amb una tira nova"
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
-msgstr "Salta a la &primera tira"
+msgstr "Salta fins a la &primera tira"
 
 #: comic.cpp:97
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
-msgstr "Salta a la tira a&ctual"
+msgstr "Salta fins a la tira a&ctual"
 
 #: comic.cpp:101
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
-msgstr "Salta a la tira…"
+msgstr "Salta fins a la tira…"
 
 #: comic.cpp:105
 #, kde-format
@@ -109,7 +109,7 @@ msgstr "Avançat"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
-msgstr "Salta a la tira…"
+msgstr "Salta fins a la tira…"
 
 #: package/contents/ui/ComicBottomInfo.qml:100
 #, kde-format
