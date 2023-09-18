@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-09-18 01:59+0000\n"
 "PO-Revision-Date: 2009-04-06 11:25+0800\n"
 "Last-Translator: Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv "
 "dot tw>\n"
@@ -28,7 +28,7 @@ msgstr "尋找符合 :q: 的 Kate 工作階段。"
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "列出您的帳號中的所有 Kate 編輯器工作階段。"
 
-#: katesessions.cpp:67 katesessions.cpp:78
+#: katesessions.cpp:68 katesessions.cpp:79
 #, kde-format
 msgid "Open Kate Session"
 msgstr "開啟 Kate 作業階段"
