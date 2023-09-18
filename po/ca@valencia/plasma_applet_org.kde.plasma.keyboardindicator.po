@@ -49,12 +49,12 @@ msgstr "Bloq Núm"
 #: contents/ui/main.qml:30
 #, kde-format
 msgid "Caps Lock activated\n"
-msgstr "Bloq Maj activada\n"
+msgstr "«Bloq Maj» activada\n"
 
 #: contents/ui/main.qml:31
 #, kde-format
 msgid "Num Lock activated\n"
-msgstr "Bloq Núm activat\n"
+msgstr "«Bloq Núm» activat\n"
 
 #: contents/ui/main.qml:111
 #, kde-format
