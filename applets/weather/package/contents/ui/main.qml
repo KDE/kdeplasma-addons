@@ -381,14 +381,14 @@ PlasmoidItem {
         let iconName;
         // workaround for now to ensure "Please configure" tooltip
         // TODO: remove when configurationRequired works
-         if (status === Util.NeedsConfiguration) {
-             iconName = "configure";
+        if (status === Util.NeedsConfiguration) {
+            iconName = "configure";
         } else {
             iconName = generalModel.currentConditionIconName;
         }
 
         if (inPanel) {
-            return symbolicizeIconName(iconName);
+            iconName = symbolicizeIconName(iconName);
         }
 
         return iconName;
