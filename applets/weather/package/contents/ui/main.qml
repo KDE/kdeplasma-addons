@@ -17,6 +17,13 @@ PlasmoidItem {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
 
+    readonly property bool inPanel: [
+        PlasmaCore.Types.TopEdge,
+        PlasmaCore.Types.RightEdge,
+        PlasmaCore.Types.BottomEdge,
+        PlasmaCore.Types.LeftEdge,
+    ].includes(Plasmoid.location)
+
     readonly property string weatherSource: Plasmoid.configuration.source
     readonly property int updateInterval: Plasmoid.configuration.updateInterval
     readonly property int displayTemperatureUnit: Plasmoid.configuration.temperatureUnit
