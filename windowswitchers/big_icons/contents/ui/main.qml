@@ -19,18 +19,18 @@ KWin.TabBoxSwitcher {
 
     currentIndex: icons.currentIndex
 
-    PlasmaCore.Dialog {
-        location: PlasmaCore.Types.Floating
+    PlasmaCore.PlasmaWindow {
         visible: tabBox.visible
-        flags: Qt.X11BypassWindowManagerHint
-        x: tabBox.screenGeometry.x + tabBox.screenGeometry.width * 0.5 - dialogMainItem.width * 0.5
-        y: tabBox.screenGeometry.y + tabBox.screenGeometry.height * 0.5 - dialogMainItem.height * 0.5
+        x: tabBox.screenGeometry.x + tabBox.screenGeometry.width * 0.5 - width * 0.5
+        y: tabBox.screenGeometry.y + tabBox.screenGeometry.height * 0.5 - height * 0.5
+
+        width: Math.min(Math.max(tabBox.screenGeometry.width * 0.3, icons.implicitWidth), tabBox.screenGeometry.width * 0.9)  + leftMargin + rightMargin
+        height: mainItem.implicitHeight + topMargin + bottomMargin
 
         mainItem: ColumnLayout {
             id: dialogMainItem
             spacing: Kirigami.Units.smallSpacing * 2
 
-            width: Math.min(Math.max(tabBox.screenGeometry.width * 0.3, icons.implicitWidth), tabBox.screenGeometry.width * 0.9)
 
             ListView {
                 id: icons

@@ -48,21 +48,21 @@ KWin.TabBoxSwitcher {
         textMetrics.longestCaption = tabBox.model.longestCaption();
     }
 
-    PlasmaCore.Dialog {
+    PlasmaCore.PlasmaWindow {
         id: dialog
-        location: PlasmaCore.Types.Floating
         visible: tabBox.visible
-        flags: Qt.X11BypassWindowManagerHint
-        x: tabBox.screenGeometry.x + tabBox.screenGeometry.width * 0.5 - dialogMainItem.width * 0.5
-        y: tabBox.screenGeometry.y + tabBox.screenGeometry.height * 0.5 - dialogMainItem.height * 0.5
+        x: tabBox.screenGeometry.x + tabBox.screenGeometry.width * 0.5 - (width * 0.5)
+        y: tabBox.screenGeometry.y + tabBox.screenGeometry.height * 0.5 - height * 0.5
+
+        width: Math.min(Math.max(tabBox.screenGeometry.width * 0.2, dialogMainItem.optimalWidth), tabBox.screenGeometry.width * 0.8) + leftMargin + rightMargin
+        height: Math.min(dialogMainItem.optimalHeight, tabBox.screenGeometry.height * 0.8) + topMargin + bottomMargin
 
         mainItem: Item {
             id: dialogMainItem
 
             property int optimalWidth: textMetrics.width + Kirigami.Units.iconSizes.small + 2 * Kirigami.Units.smallSpacing + hoverItem.margins.right + hoverItem.margins.left
             property int optimalHeight: compactListView.rowHeight * compactListView.count
-            width: Math.min(Math.max(tabBox.screenGeometry.width * 0.2, optimalWidth), tabBox.screenGeometry.width * 0.8)
-            height: Math.min(optimalHeight, tabBox.screenGeometry.height * 0.8)
+
             focus: true
 
             // just to get the margin sizes
