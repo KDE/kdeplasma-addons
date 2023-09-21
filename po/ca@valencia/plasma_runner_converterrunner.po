@@ -1,8 +1,8 @@
 # Translation of plasma_runner_converterrunner.po to Catalan (Valencian)
-# Copyright (C) 2008-2020 This_file_is_part_of_KDE
+# Copyright (C) 2008-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2010, 2020.
+# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2010, 2020, 2023.
 # Joan Maspons <joanmaspons@gmail.com>, 2009.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2020.
 msgid ""
@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-09 00:47+0000\n"
-"PO-Revision-Date: 2020-10-24 14:23+0100\n"
+"PO-Revision-Date: 2023-09-20 13:21+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -28,8 +28,8 @@ msgid ""
 "in] unit\". You can use the Unit converter applet to find all available "
 "units."
 msgstr ""
-"Convertix el valor de :q: quan :q: consistix en «valor unitat [>, en, a, com "
-"a] unitat». Podeu utilitzar la miniaplicació de conversió d'unitats per a "
+"Convertix el valor de :q: quan :q: consta de «valor unitat [>, en, a, com a] "
+"unitat». Podeu utilitzar la miniaplicació de conversió d'unitats per a "
 "trobar totes les unitats disponibles."
 
 #: converterrunner.cpp:42
