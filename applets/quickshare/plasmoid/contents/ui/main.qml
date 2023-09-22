@@ -162,7 +162,7 @@ PlasmoidItem {
             id: clipboard
         }
 
-        QtExtra.MimeDatabase {
+        MimeDatabase {
             id: mimeDb
         }
 
