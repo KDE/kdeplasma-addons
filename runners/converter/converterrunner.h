@@ -14,6 +14,7 @@
 #include <KUnitConversion/UnitCategory>
 #include <QLocale>
 #include <QRegularExpression>
+#include <QTimer>
 
 using namespace KRunner;
 
@@ -27,12 +28,14 @@ class ConverterRunner : public AbstractRunner
 public:
     ConverterRunner(QObject *parent, const KPluginMetaData &metaData);
     void init() override;
-    void insertCompatibleUnits();
     ~ConverterRunner() override;
 
     void match(RunnerContext &context) override;
     void run(const RunnerContext &context, const QueryMatch &match) override;
     QMimeData *mimeDataForMatch(const QueryMatch &match) override;
+
+private Q_SLOTS:
+    void updateCompatibleUnits();
 
 private:
     std::unique_ptr<KUnitConversion::Converter> converter;
@@ -41,6 +44,8 @@ private:
     QRegularExpression unitSeperatorRegex;
     /** To convert currency symbols back to ISO string and handle case sensitive units */
     QMap<QString, QString> compatibleUnits;
+
+    QTimer m_currencyUpdateTimer;
 
     const KRunner::Actions actionList;
 #if QT_VERSION < QT_VERSION_CHECK(6, 0, 0)
