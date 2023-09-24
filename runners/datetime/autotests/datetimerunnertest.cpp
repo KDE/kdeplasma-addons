@@ -64,7 +64,8 @@ void DateTimeRunnerTest::testRemoteTimeInfo()
     });
 
     QCOMPARE(manager->matches().count(), 1);
-    QVERIFY2(manager->matches().first().text().contains(timeStr), manager->matches().first().text().toUtf8().constData());
+    QVERIFY2(manager->matches().first().text().contains(timeStr),
+             QStringLiteral("first match: %1 timeStr: %2").arg(manager->matches().first().text(), timeStr).toUtf8().constData());
     QVERIFY(manager->matches().first().text().contains(timeDiffStr));
 }
 
