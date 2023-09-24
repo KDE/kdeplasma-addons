@@ -53,9 +53,19 @@ void DateTimeRunnerTest::testLocalTimeInfo()
 
 void DateTimeRunnerTest::testRemoteTimeInfo()
 {
-    const QTime remoteTime = QDateTime::currentDateTime().toTimeZone(QTimeZone("UTC-02:00")).time();
+    // See the definition of GMT in https://data.iana.org/time-zones/releases/tzdata2023c.tar.gz -> etcetera
+    //
+    // Be consistent with POSIX TZ settings in the Zone names,
+    // even though this is the opposite of what many people expect.
+    // POSIX has positive signs west of Greenwich, but many people expect
+    // positive signs east of Greenwich.For example, TZ = 'Etc/GMT+4' uses
+    // the abbreviation "-04" and corresponds to 4 hours behind UT
+    // (i.e.west of Greenwich) even though many people would expect it to
+    // mean 4 hours ahead of UT(i.e.east of Greenwich).
+
+    const QTime remoteTime = QDateTime::currentDateTime().toTimeZone(QTimeZone("GMT-2")).time();
     const QString timeStr = QLocale().toString(remoteTime, QLocale::ShortFormat);
-    const QString timeDiffStr = QString("2 hours earlier");
+    constexpr QLatin1String timeDiffStr{"2 hours later"};
 
     launchQuery("time gmt-2");
     auto matches = manager->matches();
