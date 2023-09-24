@@ -196,7 +196,7 @@ QDate ChineseCalendarProviderPrivate::getSolarTermDate(int year, SolarTerm order
     if (order % 2 == 0) {
         day = 20;
     }
-    const std::int64_t initialJulianDay = SolarUtils::toJulianDay(year, month, day);
+    const int64_t initialJulianDay = SolarUtils::toJulianDay(year, month, day);
     // Can't use QDate::toJulianDay because it doesn't support extra hours
     double julianDay = SolarUtils::NewtonIteration(angle, initialJulianDay);
     // To UTC+8 time

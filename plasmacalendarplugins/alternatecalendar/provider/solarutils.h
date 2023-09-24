@@ -8,6 +8,7 @@
 
 #include <array>
 #include <cmath>
+#include <cstdint>
 #include <numbers>
 
 namespace SolarUtils
@@ -3037,11 +3038,11 @@ void getDateFromJulianDay(double julianDay, int &yy, int &mm, int &dd)
      * at http://www.nr.com/ , under "Obsolete Versions - Older
      * book and code versions.
      */
-    constexpr std::int64_t JD_GREG_CAL = 2299161;
-    constexpr std::int64_t JB_MAX_WITHOUT_OVERFLOW = 107374182;
-    std::int64_t julian = int64_t(std::floor(julianDay + 0.5));
+    constexpr int64_t JD_GREG_CAL = 2299161;
+    constexpr int64_t JB_MAX_WITHOUT_OVERFLOW = 107374182;
+    int64_t julian = int64_t(std::floor(julianDay + 0.5));
 
-    std::int64_t ta, jalpha, tb, tc, td, te;
+    int64_t ta, jalpha, tb, tc, td, te;
 
     if (julian >= JD_GREG_CAL) {
         jalpha = (4 * (julian - 1867216) - 1) / 146097;
@@ -3056,7 +3057,7 @@ void getDateFromJulianDay(double julianDay, int &yy, int &mm, int &dd)
     if (tb <= JB_MAX_WITHOUT_OVERFLOW) {
         tc = (tb * 20 - 2442) / 7305;
     } else {
-        tc = std::int64_t((std::uint64_t(tb) * 20 - 2442) / 7305);
+        tc = int64_t((uint64_t(tb) * 20 - 2442) / 7305);
     }
 
     td = 365 * tc + tc / 4;
