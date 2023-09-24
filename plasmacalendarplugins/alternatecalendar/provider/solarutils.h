@@ -3015,8 +3015,12 @@ double getDeltaT(int year, int month)
     }
 }
 
-std::int64_t toJulianDay(int year, int month, int day)
+int64_t toJulianDay(int year, int month, int day)
 {
+#if __has_cpp_attribute(assume)
+    [[assume(year > 0 && day > 0)]];
+    [[assume(month > 0 && month <= 12)]];
+#endif
     int a = (14 - month) / 12;
     int y = year + 4800 - a;
     int m = month + 12 * a - 3;
