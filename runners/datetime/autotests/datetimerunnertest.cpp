@@ -64,7 +64,7 @@ void DateTimeRunnerTest::testRemoteTimeInfo()
     });
 
     QCOMPARE(manager->matches().count(), 1);
-    QVERIFY(manager->matches().first().text().contains(timeStr));
+    QVERIFY2(manager->matches().first().text().contains(timeStr), manager->matches().first().text().toUtf8().constData());
     QVERIFY(manager->matches().first().text().contains(timeDiffStr));
 }
 
@@ -81,12 +81,12 @@ void DateTimeRunnerTest::testFindTimezones()
     });
 
     QVERIFY2(matches.size() >= minMatchCount,
-             QLatin1String("searchTerm: %1, matches.size(): %2, minMatchCount: %3")
+             QStringLiteral("searchTerm: %1, matches.size(): %2, minMatchCount: %3")
                  .arg(searchTerm, QString::number(matches.size()), QString::number(minMatchCount))
-                 .toLatin1()
+                 .toUtf8()
                  .constData());
     QVERIFY2(matches.first().text().contains(expectedTimezone),
-             QLatin1String("first match: %1, expectedTimezone: %2").arg(matches.first().text(), expectedTimezone).toLatin1().constData());
+             QStringLiteral("first match: %1, expectedTimezone: %2").arg(matches.first().text(), expectedTimezone).toUtf8().constData());
 }
 
 void DateTimeRunnerTest::testFindTimezones_data()
