@@ -14,7 +14,8 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kquickcontrolsaddons 2.1 // KCMShell
+import org.kde.kcmutils as KCMUtils
+import org.kde.config as KConfig
 import org.kde.kwindowsystem 1.0
 
 import org.kde.plasma.private.colorpicker 2.0 as ColorPicker
@@ -169,10 +170,10 @@ PlasmoidItem {
 
                 QQC2.Action {
                     id: enableCompositingAction
-                    enabled: KCMShell.authorize("kwincompositing.desktop").length > 0
+                    enabled: KConfig.KAuthorized.authorizeControlModule("kwincompositing")
                     icon.name: "settings-configure"
                     text: i18nc("@action:button open kwincompositing KCM", "Configure Compositing")
-                    onTriggered: KCMShell.openSystemSettings("kwincompositing")
+                    onTriggered: KCMUtils.KCMLauncher.openSystemSettings("kwincompositing")
                 }
 
                 NumberAnimation {
