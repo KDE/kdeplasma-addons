@@ -584,9 +584,15 @@ PlasmoidItem {
 
                 buttons: MessageDialog.Discard | MessageDialog.Cancel
 
+                onButtonClicked: (button, role) => {
+                    if (button === MessageDialog.Discard) {
+                        Plasmoid.internalAction("remove").trigger()
+                        visible = false;
+                    }
+                }
+
                 onRejected: {
-                    Plasmoid.internalAction("remove").trigger()
-                    visible = false;
+                    visible = false
                 }
             }
         }
