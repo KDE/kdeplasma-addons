@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-10 02:11+0000\n"
+"POT-Creation-Date: 2023-09-26 01:47+0000\n"
 "PO-Revision-Date: 2023-05-09 20:26+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.0\n"
 
-#: converterrunner.cpp:29
+#: converterrunner.cpp:30
 #, kde-format
 msgid "Copy unit and number"
 msgstr "Копиране на единици и число"
 
-#: converterrunner.cpp:34
+#: converterrunner.cpp:35
 #, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
@@ -32,7 +32,7 @@ msgstr ""
 "като, в] . Можете да използвате аплета за преобразуване на мерни единици, за "
 "да намерите всички налични единици."
 
-#: converterrunner.cpp:41
+#: converterrunner.cpp:42
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
