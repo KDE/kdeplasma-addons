@@ -76,6 +76,7 @@ void ConverterRunner::match(RunnerContext &context)
     std::call_once(converterInitialized, [this] {
         converter = std::make_unique<KUnitConversion::Converter>();
         updateCompatibleUnits();
+        m_currencyUpdateTimer.start();
     });
 
     // Check if unit is valid, otherwise check for the value in the compatibleUnits map
