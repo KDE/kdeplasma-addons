@@ -100,6 +100,15 @@ if(ICU_FOUND)
     set(HAVE_ICU TRUE)
 endif()
 
+find_package(KWinEffects COMPONENTS
+    kwineffects
+    kwinglutils
+)
+if(KWinEffects_FOUND)
+find_package(epoxy REQUIRED)
+add_subdirectory(kwineffects)
+endif()
+
 add_definitions(
     -DQT_DEPRECATED_WARNINGS
     -DQT_NO_URL_CAST_FROM_STRING
