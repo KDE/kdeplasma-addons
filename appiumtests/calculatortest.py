@@ -5,23 +5,28 @@
 # SPDX-FileCopyrightText: 2021-2022 Harald Sitter <sitter@kde.org>
 
 import unittest
+from typing import Final
+
 from appium import webdriver
+from appium.options.common.base import AppiumOptions
 from appium.webdriver.common.appiumby import AppiumBy
 from selenium.webdriver.support.ui import WebDriverWait
-import time
+
+WIDGET_ID: Final = "org.kde.plasma.calculator"
 
 
 class SimpleCalculatorTests(unittest.TestCase):
 
     @classmethod
-
-    def setUpClass(self):
-        desired_caps = {}
-        desired_caps["app"] = "plasmawindowed org.kde.plasma.calculator"
-        desired_caps["timeouts"] = {'implicit': 10000}
-        self.driver = webdriver.Remote(
-            command_executor='http://127.0.0.1:4723',
-            desired_capabilities=desired_caps)
+    def setUpClass(cls):
+        options = AppiumOptions()
+        options.set_capability("app", f"plasmawindowed -p org.kde.plasma.nano {WIDGET_ID}")
+        options.set_capability("environ", {
+            "QT_FATAL_WARNINGS": "1",
+            "QT_LOGGING_RULES": "qt.accessibility.atspi.warning=false;kf.plasma.core.warning=false;kf.windowsystem.warning=false;kf.kirigami.warning=false;kf.coreaddons.warning=false",
+        })
+        options.set_capability("timeouts", {'implicit': 10000})
+        cls.driver = webdriver.Remote(command_executor='http://127.0.0.1:4723', options=options)
 
     def setUp(self):
         self.driver.find_element(by=AppiumBy.NAME, value="AC").click()
@@ -43,14 +48,14 @@ class SimpleCalculatorTests(unittest.TestCase):
     def test_initialize(self):
         self.driver.find_element(by=AppiumBy.NAME, value="AC").click()
         self.driver.find_element(by=AppiumBy.NAME, value="7").click()
-        self.assertEqual(self.getresults(),"7")
+        self.assertEqual(self.getresults(), "7")
 
     def test_addition(self):
         self.driver.find_element(by=AppiumBy.NAME, value="1").click()
         self.driver.find_element(by=AppiumBy.NAME, value="+").click()
         self.driver.find_element(by=AppiumBy.NAME, value="7").click()
         self.driver.find_element(by=AppiumBy.NAME, value="=").click()
-        self.assertEqual(self.getresults(),"8")
+        self.assertEqual(self.getresults(), "8")
 
     def test_combination(self):
         self.driver.find_element(by=AppiumBy.NAME, value="7").click()
@@ -62,7 +67,7 @@ class SimpleCalculatorTests(unittest.TestCase):
         self.driver.find_element(by=AppiumBy.NAME, value="÷").click()
         self.driver.find_element(by=AppiumBy.NAME, value="8").click()
         self.driver.find_element(by=AppiumBy.NAME, value="=").click()
-        self.assertEqual(self.getresults(),"8")
+        self.assertEqual(self.getresults(), "8")
 
     def test_division(self):
         self.driver.find_element(by=AppiumBy.NAME, value="8").click()
@@ -71,21 +76,21 @@ class SimpleCalculatorTests(unittest.TestCase):
         self.driver.find_element(by=AppiumBy.NAME, value="1").click()
         self.driver.find_element(by=AppiumBy.NAME, value="1").click()
         self.driver.find_element(by=AppiumBy.NAME, value="=").click()
-        self.assertEqual(self.getresults(),"8")
+        self.assertEqual(self.getresults(), "8")
 
     def test_multiplication(self):
         self.driver.find_element(by=AppiumBy.NAME, value="9").click()
         self.driver.find_element(by=AppiumBy.NAME, value="×").click()
         self.driver.find_element(by=AppiumBy.NAME, value="8").click()
         self.driver.find_element(by=AppiumBy.NAME, value="=").click()
-        self.assertEqual(self.getresults(),"72")
+        self.assertEqual(self.getresults(), "72")
 
     def test_subtraction(self):
         self.driver.find_element(by=AppiumBy.NAME, value="9").click()
         self.driver.find_element(by=AppiumBy.NAME, value="-").click()
         self.driver.find_element(by=AppiumBy.NAME, value="1").click()
         self.driver.find_element(by=AppiumBy.NAME, value="=").click()
-        self.assertEqual(self.getresults(),"8")
+        self.assertEqual(self.getresults(), "8")
 
 
 if __name__ == '__main__':

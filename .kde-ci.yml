@@ -34,6 +34,12 @@ Dependencies:
 - 'on': ['Linux']
   'require':
     'sdk/selenium-webdriver-at-spi': '@latest-kf6'
+
+RuntimeDependencies:
+- 'on': ['Linux']
+  'require':
+    'plasma/plasma-nano': '@same' # For appium tests
+
 Options:
   require-passing-tests-on: [ 'Linux', 'FreeBSD']
   cppcheck-ignore-files: ['templates/']
