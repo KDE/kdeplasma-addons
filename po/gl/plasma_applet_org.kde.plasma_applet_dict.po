@@ -31,7 +31,7 @@ msgstr "Engadir máis dicionarios"
 #: package/contents/ui/ConfigDictionaries.qml:89
 #, kde-format
 msgid "Unable to load dictionary list"
-msgstr "Non se pode cargar a lista de dicionarios."
+msgstr "Non é posíbel cargar a lista de dicionarios."
 
 #: package/contents/ui/ConfigDictionaries.qml:90
 #: package/contents/ui/main.qml:121
@@ -64,7 +64,7 @@ msgstr "Escriba aquí a palabra para definir…"
 #: package/contents/ui/main.qml:120
 #, kde-format
 msgid "Unable to load definition"
-msgstr "Non se pode cargar a definición."
+msgstr "Non é posíbel cargar a definición."
 
 #, fuzzy
 #~| msgid "Looking up definition..."

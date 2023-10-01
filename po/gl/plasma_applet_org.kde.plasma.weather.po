@@ -477,7 +477,7 @@ msgstr "Boletíns"
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format
 msgid "Cannot find '%1' using %2."
-msgstr "Non se pode atopar «%1» usando %2."
+msgstr "Non é posíbel atopar «%1» usando %2."
 
 #: plugin/locationlistmodel.cpp:66
 #, kde-format
