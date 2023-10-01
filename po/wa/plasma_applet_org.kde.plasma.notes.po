@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-02 02:09+0000\n"
+"POT-Creation-Date: 2023-10-01 01:55+0000\n"
 "PO-Revision-Date: 2011-01-03 11:23+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux@walon.org>\n"
@@ -180,70 +180,70 @@ msgstr ""
 msgid "Are you sure you want to discard this note?"
 msgstr ""
 
-#: package/contents/ui/main.qml:597
+#: package/contents/ui/main.qml:603
 #, fuzzy, kde-format
 #| msgid "White"
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Blanc"
 
-#: package/contents/ui/main.qml:601
+#: package/contents/ui/main.qml:607
 #, fuzzy, kde-format
 #| msgid "Black"
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Noer"
 
-#: package/contents/ui/main.qml:605
+#: package/contents/ui/main.qml:611
 #, fuzzy, kde-format
 #| msgid "Red"
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Rodje"
 
-#: package/contents/ui/main.qml:609
+#: package/contents/ui/main.qml:615
 #, fuzzy, kde-format
 #| msgid "Orange"
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Orandje"
 
-#: package/contents/ui/main.qml:613
+#: package/contents/ui/main.qml:619
 #, fuzzy, kde-format
 #| msgid "Yellow"
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Djaene"
 
-#: package/contents/ui/main.qml:617
+#: package/contents/ui/main.qml:623
 #, fuzzy, kde-format
 #| msgid "Green"
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Vert"
 
-#: package/contents/ui/main.qml:621
+#: package/contents/ui/main.qml:627
 #, fuzzy, kde-format
 #| msgid "Blue"
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Bleu"
 
-#: package/contents/ui/main.qml:625
+#: package/contents/ui/main.qml:631
 #, fuzzy, kde-format
 #| msgid "Pink"
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Rôze"
 
-#: package/contents/ui/main.qml:629
+#: package/contents/ui/main.qml:635
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
 msgid "Translucent"
 msgstr "Voeyoute"
 
-#: package/contents/ui/main.qml:633
+#: package/contents/ui/main.qml:639
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
