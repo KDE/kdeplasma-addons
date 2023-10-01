@@ -17,13 +17,13 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
-import org.kde.plasma.plasmoid 2.0
+import org.kde.plasma.plasmoid
 
 PlasmoidItem {
     id: main;
 
-    switchWidth: fullRepresentationItem.Layout.minimumWidth
-    switchHeight: fullRepresentationItem.Layout.minimumHeight
+    switchWidth: Kirigami.Units.gridUnit * 7
+    switchHeight: Math.round(Kirigami.Units.gridUnit * 10.5)
 
     // Make the buttons' text labels scale with the widget's size
     // This is propagated down to all child controls with text
@@ -32,12 +32,12 @@ PlasmoidItem {
     property bool hasResult: false;
     property bool showingInput: true;
     property bool showingResult: false;
-    property string operator: undefined;
+    property string operator
     property real operand: 0;
     property bool commaPressed: false;
     property int decimals: 0;
     property int inputSize: 0;
-    readonly property TextEdit display: fullRepresentationItem.display
+    property TextEdit display
 
     readonly property int maxInputLength: 18; // More than that and the number notation
                                               // turns scientific (i.e.: 1.32324e+12).
@@ -227,21 +227,14 @@ PlasmoidItem {
         display.text = i18nc("Abbreviation for result (undefined) of division by zero, max. six to nine characters.", "undef");
     }
 
-    Connections {
-        target: plasmoid;
-        function onPopupEvent() {
-            main.fullRepresentationItem.focus = true;
-        }
-    }
-
     fullRepresentation: QQC2.Control {
-        property alias display: display
         // Make the buttons' text labels scale with the widget's size
         // This is propagated down to all child controls with text
         font.pixelSize: Math.round(width/12)
         padding: 0
-        Layout.minimumWidth: Kirigami.Units.gridUnit * 7
-        Layout.minimumHeight: Math.round(Kirigami.Units.gridUnit * 10.5)
+        Layout.minimumWidth: main.switchWidth
+        Layout.minimumHeight: main.switchHeight
+        focus: main.expanded
 
         contentItem: ColumnLayout {
             id: mainLayout
@@ -334,6 +327,12 @@ PlasmoidItem {
 
                     Accessible.name: text
                     Accessible.description: i18nc("@label calculation result", "Result")
+
+                    Binding {
+                        target: main
+                        property: "display"
+                        value: display
+                    }
                 }
             }
 
