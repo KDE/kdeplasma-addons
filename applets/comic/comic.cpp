@@ -36,9 +36,6 @@
 #include <Plasma/Containment>
 
 #include "comicmodel.h"
-#include "comicupdater.h"
-
-Q_GLOBAL_STATIC(ComicUpdater, globalComicUpdater)
 
 ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
@@ -60,12 +57,10 @@ ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVa
     , mSavingDir(nullptr)
 {
     setHasConfigurationInterface(true);
-    connect(mEngine, &ComicEngine::requestFinished, this, &ComicApplet::dataUpdated);
 }
 
 void ComicApplet::init()
 {
-    globalComicUpdater->init(globalConfig());
     mSavingDir = new SavingDir(config());
 
     configChanged();
@@ -332,8 +327,6 @@ void ComicApplet::configChanged()
     if (oldMaxComicLimit != mMaxComicLimit) {
         mEngine->setMaxComicLimit(mMaxComicLimit);
     }
-
-    globalComicUpdater->load();
 }
 
 void ComicApplet::saveConfig()
@@ -350,8 +343,6 @@ void ComicApplet::saveConfig()
     cg.writeEntry("tabIdentifier", mTabIdentifier);
     cg.writeEntry("checkNewComicStripsIntervall", mCheckNewComicStripsInterval);
     cg.writeEntry("maxComicLimit", mMaxComicLimit);
-
-    globalComicUpdater->save();
 }
 
 void ComicApplet::slotNextDay()
@@ -691,21 +682,6 @@ void ComicApplet::setCheckNewComicStripsInterval(int interval)
 
     mCheckNewComicStripsInterval = interval;
     Q_EMIT checkNewComicStripsIntervalChanged();
-}
-
-int ComicApplet::providerUpdateInterval() const
-{
-    return globalComicUpdater->interval();
-}
-
-void ComicApplet::setProviderUpdateInterval(int interval)
-{
-    if (globalComicUpdater->interval() == interval) {
-        return;
-    }
-
-    globalComicUpdater->setInterval(interval);
-    Q_EMIT providerUpdateIntervalChanged();
 }
 
 void ComicApplet::setMaxComicLimit(int limit)

@@ -50,7 +50,6 @@ class ComicApplet : public Plasma::Applet
     Q_PROPERTY(bool showActualSize READ showActualSize WRITE setShowActualSize NOTIFY showActualSizeChanged)
     Q_PROPERTY(QStringList tabIdentifiers READ tabIdentifiers WRITE setTabIdentifiers NOTIFY tabIdentifiersChanged)
     Q_PROPERTY(int checkNewComicStripsInterval READ checkNewComicStripsInterval WRITE setCheckNewComicStripsInterval NOTIFY checkNewComicStripsIntervalChanged)
-    Q_PROPERTY(int providerUpdateInterval READ providerUpdateInterval WRITE setProviderUpdateInterval NOTIFY providerUpdateIntervalChanged)
     Q_PROPERTY(int maxComicLimit READ maxComicLimit WRITE setMaxComicLimit NOTIFY maxComicLimitChanged)
 
 public:
@@ -95,9 +94,6 @@ public:
     int checkNewComicStripsInterval() const;
     void setCheckNewComicStripsInterval(int interval);
 
-    int providerUpdateInterval() const;
-    void setProviderUpdateInterval(int interval);
-
     void setMaxComicLimit(int limit);
     int maxComicLimit() const;
     // End for QML
@@ -117,7 +113,6 @@ Q_SIGNALS:
     void showActualSizeChanged();
     void tabIdentifiersChanged();
     void checkNewComicStripsIntervalChanged();
-    void providerUpdateIntervalChanged();
     void maxComicLimitChanged();
 
 private Q_SLOTS:
