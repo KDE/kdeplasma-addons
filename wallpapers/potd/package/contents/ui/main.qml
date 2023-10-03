@@ -47,7 +47,7 @@ WallpaperItem {
                 imageView.pendingImage = null;
             }
 
-            imageView.doesSkipAnimation = imageView.empty
+            imageView.doesSkipAnimation = imageView.empty || sourceSize !== imageView.currentItem.sourceSize;
             imageView.pendingImage = imageComponent.createObject(imageView, {
                 "source": backend.localUrl,
                 "fillMode": imageView.fillMode,
