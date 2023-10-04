@@ -107,15 +107,6 @@ PlasmoidItem {
         }
     }
 
-    DocumentHandler {
-        id: documentHandler
-        target: root.fullRepresentationItem ? mainTextArea : null
-        cursorPosition: root.fullRepresentationItem ? mainTextArea.cursorPosition : 0
-        selectionStart: root.fullRepresentationItem ? mainTextArea.selectionStart : 0
-        selectionEnd: root.fullRepresentationItem ? mainTextArea.selectionEnd : 0
-        defaultFontSize: Plasmoid.configuration.fontSize
-    }
-
     preloadFullRepresentation: true
     fullRepresentation: KSvg.SvgItem {
         id: backgroundItem
@@ -128,6 +119,15 @@ PlasmoidItem {
 
         imagePath: "widgets/notes"
         elementId: Plasmoid.configuration.color + "-notes"
+
+        DocumentHandler {
+            id: documentHandler
+            target: mainTextArea
+            cursorPosition: mainTextArea.cursorPosition
+            selectionStart: mainTextArea.selectionStart
+            selectionEnd: mainTextArea.selectionEnd
+            defaultFontSize: Plasmoid.configuration.fontSize
+        }
 
         Connections {
             target: root
