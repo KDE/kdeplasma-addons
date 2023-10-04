@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-10-04 01:40+0000\n"
 "PO-Revision-Date: 2022-08-05 11:17+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -25,61 +25,61 @@ msgstr ""
 "X-POT-Import-Date: 2012-12-01 22:25:23+0000\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: comic.cpp:85
+#: comic.cpp:80
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "S&euraava välilehti, jossa on uusi sarjakuva"
 
-#: comic.cpp:91
+#: comic.cpp:86
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Siirry &ensimmäiseen sarjakuvaan"
 
-#: comic.cpp:95
+#: comic.cpp:90
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Siirry &nykyiseen sarjakuvaan"
 
-#: comic.cpp:99
+#: comic.cpp:94
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Siirry sarjakuvaan…"
 
-#: comic.cpp:103
+#: comic.cpp:98
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Käy sivustolla"
 
-#: comic.cpp:107
+#: comic.cpp:102
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr "Näytä ohjelmassa %1"
 
-#: comic.cpp:115
+#: comic.cpp:110
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Vieraile &kauppasivustossa"
 
-#: comic.cpp:120
+#: comic.cpp:115
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Tallenna sarjakuva nimellä…"
 
-#: comic.cpp:125
+#: comic.cpp:120
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Todellinen koko"
 
-#: comic.cpp:133
+#: comic.cpp:128
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"

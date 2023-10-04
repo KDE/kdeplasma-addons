@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-10-04 01:40+0000\n"
 "PO-Revision-Date: 2023-09-16 10:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,61 +18,61 @@ msgstr ""
 "plasma.comic.pot\n"
 "X-Crowdin-File-ID: 43063\n"
 
-#: comic.cpp:85
+#: comic.cpp:80
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "跳转到下一个有新漫画的标签(&N)"
 
-#: comic.cpp:91
+#: comic.cpp:86
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "跳转到第一条漫画(&F)"
 
-#: comic.cpp:95
+#: comic.cpp:90
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "跳转到当前一条漫画(&C)"
 
-#: comic.cpp:99
+#: comic.cpp:94
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "跳转到指定一条漫画…"
 
-#: comic.cpp:103
+#: comic.cpp:98
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "访问网站"
 
-#: comic.cpp:107
+#: comic.cpp:102
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr "使用 %1 查看"
 
-#: comic.cpp:115
+#: comic.cpp:110
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "访问商店网站(&W)"
 
-#: comic.cpp:120
+#: comic.cpp:115
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "另存漫画为(&S)..."
 
-#: comic.cpp:125
+#: comic.cpp:120
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "实际大小(&A)"
 
-#: comic.cpp:133
+#: comic.cpp:128
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
