@@ -199,7 +199,7 @@ PlasmoidItem {
                                 documentHandler.reset();
                                 event.accepted = true;
                             } else if (event.matches(StandardKey.Cut)) {
-                                mainTextArea.cut();
+                                cut();
                                 documentHandler.reset();
                                 event.accepted = true;
                             }
@@ -208,11 +208,12 @@ PlasmoidItem {
 
                     // Apply the font size change to existing texts
                     onCfgFontPointSizeChanged: {
-                        var [start, end] = [mainTextArea.selectionStart, mainTextArea.selectionEnd];
+                        const start = selectionStart;
+                        const end = selectionEnd;
 
-                        mainTextArea.selectAll();
+                        selectAll();
                         documentHandler.fontSize = cfgFontPointSize;
-                        mainTextArea.select(start, end);
+                        select(start, end);
                     }
 
                     // update the note if the source changes, but only if the user isn't editing it currently
@@ -232,7 +233,7 @@ PlasmoidItem {
                             Plasmoid.status = PlasmaCore.Types.AcceptingInputStatus
                         } else {
                             Plasmoid.status = PlasmaCore.Types.ActiveStatus
-                            note.save(mainTextArea.text);
+                            note.save(text);
                         }
                     }
 
@@ -240,19 +241,19 @@ PlasmoidItem {
                         if (event.button === Qt.RightButton) {
                             event.accepted = true;
                             contextMenu.popup();
-                            mainTextArea.forceActiveFocus();
+                            forceActiveFocus();
                         }
                         if (event.button === Qt.LeftButton && contextMenu.visible === true) {
                             event.accepted = true;
                             contextMenu.dismiss();
-                            mainTextArea.forceActiveFocus();
+                            forceActiveFocus();
                         }
                     }
 
                     Component.onCompleted: {
                         if (!Plasmoid.configuration.fontSize) {
                             // Set fontSize to default if it is not set
-                            Plasmoid.configuration.fontSize = mainTextArea.font.pointSize
+                            Plasmoid.configuration.fontSize = font.pointSize
                         }
                     }
 
