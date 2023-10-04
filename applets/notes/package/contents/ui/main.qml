@@ -170,7 +170,7 @@ PlasmoidItem {
 
                     textFormat: TextEdit.RichText
                     onLinkActivated: Qt.openUrlExternally(link)
-                    background: Rectangle { color: "transparent" }
+                    background: null
                     color: textIconColor
                     persistentSelection: true
                     wrapMode: TextEdit.Wrap
