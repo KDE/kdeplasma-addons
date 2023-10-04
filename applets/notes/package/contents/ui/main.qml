@@ -227,7 +227,8 @@ PlasmoidItem {
                     }
 
                     onActiveFocusChanged: {
-                        if (activeFocus && Window && (Window.window.flags & Qt.WindowDoesNotAcceptFocus)) {
+                        const window = Window.window;
+                        if (activeFocus && window && (window.flags & Qt.WindowDoesNotAcceptFocus)) {
                             Plasmoid.status = PlasmaCore.Types.AcceptingInputStatus
                         } else {
                             Plasmoid.status = PlasmaCore.Types.ActiveStatus
