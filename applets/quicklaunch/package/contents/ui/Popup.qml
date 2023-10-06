@@ -10,7 +10,6 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 import org.kde.draganddrop 2.0 as DragAndDrop
-// CHECK: do we really need it here?
 import org.kde.plasma.plasmoid 2.0
 
 import "layout.js" as LayoutManager
