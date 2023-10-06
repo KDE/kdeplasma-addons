@@ -18,6 +18,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core as PlasmaCore
@@ -36,7 +37,7 @@ Item {
     //Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
     //Layout.preferredHeight: Layout.minimumHeight
 
-    readonly property int formFactor: plasmoid.formFactor
+    readonly property int formFactor: Plasmoid.formFactor
 
     readonly property bool constrained: formFactor == PlasmaCore.Types.Vertical || formFactor == PlasmaCore.Types.Horizontal
 
@@ -46,16 +47,16 @@ Item {
     readonly property int minutes: root.minutes
     readonly property int seconds: root.seconds
 
-    readonly property bool showOffLeds: plasmoid.configuration.showOffLeds
-    readonly property bool showGrid: plasmoid.configuration.showGrid
+    readonly property bool showOffLeds: Plasmoid.configuration.showOffLeds
+    readonly property bool showGrid: Plasmoid.configuration.showGrid
 
-    readonly property int base: plasmoid.configuration.showBcdFormat ? 10 : 16
+    readonly property int base: Plasmoid.configuration.showBcdFormat ? 10 : 16
 
     readonly property int dots: showSeconds ? 6 : 4
 
-    readonly property color onColor: plasmoid.configuration.useCustomColorForActive ? plasmoid.configuration.customColorForActive : Kirigami.Theme.textColor
-    readonly property color offColor: plasmoid.configuration.useCustomColorForInactive ? plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.4)
-    readonly property color gridColor: plasmoid.configuration.useCustomColorForGrid ? plasmoid.configuration.customColorForGrid : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.6)
+    readonly property color onColor: Plasmoid.configuration.useCustomColorForActive ? Plasmoid.configuration.customColorForActive : Kirigami.Theme.textColor
+    readonly property color offColor: Plasmoid.configuration.useCustomColorForInactive ? Plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.4)
+    readonly property color gridColor: Plasmoid.configuration.useCustomColorForGrid ? Plasmoid.configuration.customColorForGrid : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.6)
 
     readonly property int dotSize: Math.min((height-5*Kirigami.Units.smallSpacing)/4, (width-(dots+1)*Kirigami.Units.smallSpacing)/dots)
     readonly property real displayTop: (height - 4*dotSize-3*Kirigami.Units.smallSpacing)/2

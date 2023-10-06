@@ -3,6 +3,7 @@
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
 
@@ -38,7 +39,7 @@ PlasmoidItem {
     toolTipMainText: diskQuota.toolTip
     toolTipSubText: diskQuota.subToolTip
 
-    Component.onCompleted: plasmoid.removeAction("configure")
+    Component.onCompleted: Plasmoid.removeAction("configure")
 
     DiskQuota {
         id: diskQuota

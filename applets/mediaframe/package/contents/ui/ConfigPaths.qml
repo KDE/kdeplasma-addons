@@ -4,6 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtCore
 import QtQuick
 import QtQuick.Controls as QQC2
@@ -36,7 +37,7 @@ ColumnLayout {
 
     Component.onCompleted: {
         // Load the list back in
-        var list = plasmoid.configuration.pathList
+        var list = Plasmoid.configuration.pathList
         cfg_pathList = []
         for(var i in list) {
             addPath( JSON.parse(list[i]) )

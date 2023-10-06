@@ -8,6 +8,7 @@
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 
@@ -39,7 +40,7 @@ PlasmoidItem {
     toolTipMainText: i18n("Kate Sessions")
 
     Component.onCompleted: {
-        plasmoid.removeAction("configure");
+        Plasmoid.removeAction("configure");
     }
 
     property var searchHeader: PlasmaExtras.PlasmoidHeading {

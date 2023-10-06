@@ -4,6 +4,7 @@
  *   SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
@@ -225,7 +226,7 @@ Item {
                 Layout.minimumWidth: Layout.maximumWidth
                 visible: root.showProgressBar
 
-                from: plasmoid.configuration.seconds
+                from: Plasmoid.configuration.seconds
                 to: 0
                 value: root.seconds
             }

@@ -4,6 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -25,7 +26,7 @@ PlasmoidItem {
 
         DictObject {
             id: dict
-            selectedDictionary: plasmoid.configuration.dictionary
+            selectedDictionary: Plasmoid.configuration.dictionary
             // Activate the busy indicator, and deactivate it when page is loaded.
             onSearchInProgress: placeholder.opacity = 1;
             onDefinitionFound: html => {

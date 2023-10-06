@@ -8,6 +8,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.15
 import QtQuick.Layouts 1.1
 
@@ -27,9 +28,9 @@ Item {
     Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
     Layout.preferredHeight: vertical ? Layout.minimumHeight : Kirigami.Units.iconSizes.sizeForLabels * 2
 
-    readonly property bool vertical: plasmoid.formFactor == PlasmaCore.Types.Vertical
+    readonly property bool vertical: Plasmoid.formFactor == PlasmaCore.Types.Vertical
 
-    readonly property int fuzzyness: plasmoid.configuration.fuzzyness
+    readonly property int fuzzyness: Plasmoid.configuration.fuzzyness
 
     readonly property var hourNames: [
         [ i18n("One o’clock"),
@@ -260,8 +261,8 @@ Item {
     PlasmaComponents3.Label  {
         id: timeLabel
         font {
-            weight: plasmoid.configuration.boldText ? Font.Bold : Font.Normal
-            italic: plasmoid.configuration.italicText
+            weight: Plasmoid.configuration.boldText ? Font.Bold : Font.Normal
+            italic: Plasmoid.configuration.italicText
             pixelSize: 1024
             pointSize: 0 // we need to unset pointSize otherwise it breaks the Text.Fit size mode
         }

@@ -4,6 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
@@ -15,7 +16,7 @@ import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.core as PlasmaCore
 
 Kirigami.FormLayout {
-    property string cfg_icon: plasmoid.configuration.icon
+    property string cfg_icon: Plasmoid.configuration.icon
     property alias cfg_useFavIcon: useFavIcon.checked
 
     QQC2.ButtonGroup {
@@ -69,7 +70,7 @@ Kirigami.FormLayout {
             KSvg.FrameSvgItem {
                 id: previewFrame
                 anchors.centerIn: parent
-                imagePath: plasmoid.formFactor === PlasmaCore.Types.Vertical || plasmoid.formFactor === PlasmaCore.Types.Horizontal
+                imagePath: Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal
                         ? "widgets/panel-background" : "widgets/background"
                 width: Kirigami.Units.iconSizes.large + fixedMargins.left + fixedMargins.right
                 height: Kirigami.Units.iconSizes.large + fixedMargins.top + fixedMargins.bottom

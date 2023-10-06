@@ -5,6 +5,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.15
 import QtQuick.Layouts 1.15
 
@@ -137,7 +138,7 @@ ContainmentItem {
                 event.ignore();
                 return;
             }
-            plasmoid.newTask(plasmoidId);
+            Plasmoid.newTask(plasmoidId);
         }
     }
 

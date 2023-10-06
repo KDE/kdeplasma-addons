@@ -4,6 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.2
 
 import org.kde.kirigami 2.20 as Kirigami
@@ -26,7 +27,7 @@ Item {
     DragAndDrop.DropArea {
         anchors.fill: parent
         preventStealing: true
-        enabled: !plasmoid.immutable
+        enabled: !Plasmoid.immutable
 
         onDragEnter: {
             dragging = true;
@@ -95,23 +96,23 @@ Item {
     }
 
     Connections {
-        target: plasmoid.configuration
+        target: Plasmoid.configuration
         function onPopupUrlsChanged() {
             popupModel.urlsChanged.disconnect(saveConfiguration);
-            popupModel.setUrls(plasmoid.configuration.popupUrls);
+            popupModel.setUrls(Plasmoid.configuration.popupUrls);
             popupModel.urlsChanged.connect(saveConfiguration);
         }
     }
 
     Component.onCompleted: {
-        popupModel.setUrls(plasmoid.configuration.popupUrls);
+        popupModel.setUrls(Plasmoid.configuration.popupUrls);
         popupModel.urlsChanged.connect(saveConfiguration);
     }
 
     function saveConfiguration()
     {
         if (!dragging) {
-            plasmoid.configuration.popupUrls = popupModel.urls();
+            Plasmoid.configuration.popupUrls = popupModel.urls();
         }
     }
 

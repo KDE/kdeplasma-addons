@@ -4,6 +4,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.0
 import QtQuick.Layouts 1.1
 import QtQuick.Window 2.0
@@ -17,13 +18,13 @@ PlasmaCore.ToolTipArea {
     objectName: "org.kde.desktop-CompactApplet"
     anchors.fill: parent
 
-    icon: plasmoid.icon
-    mainText: plasmoid.toolTipMainText
-    subText: plasmoid.toolTipSubText
-    location: plasmoid.location
+    icon: Plasmoid.icon
+    mainText: Plasmoid.toolTipMainText
+    subText: Plasmoid.toolTipSubText
+    location: Plasmoid.location
     active: !plasmoidItem.expanded
-    textFormat: plasmoid.toolTipTextFormat
-    mainItem: plasmoid.toolTipItem ? plasmoid.toolTipItem : null
+    textFormat: Plasmoid.toolTipTextFormat
+    mainItem: Plasmoid.toolTipItem ? Plasmoid.toolTipItem : null
     property PlasmoidItem plasmoidItem
 
     property Item fullRepresentation
@@ -91,7 +92,7 @@ PlasmaCore.ToolTipArea {
     }
 
     Connections {
-        target: plasmoid.internalAction("configure")
+        target: Plasmoid.internalAction("configure")
         function onTriggered() {
             plasmoidItem.expanded = false
         }
@@ -110,7 +111,7 @@ PlasmaCore.ToolTipArea {
         flags: Qt.WindowStaysOnTopHint
         visible: plasmoidItem.expanded && fullRepresentation
         visualParent: compactRepresentation ? compactRepresentation : null
-        location: plasmoid.location
+        location: Plasmoid.location
         hideOnWindowDeactivate: root.plasmoidItem.hideOnWindowDeactivate
 
         property var oldStatus: PlasmaCore.Types.UnknownStatus
@@ -143,10 +144,10 @@ PlasmaCore.ToolTipArea {
         onVisibleChanged: {
             if (!visible) {
                 expandedSync.restart();
-                plasmoid.status = oldStatus;
+                Plasmoid.status = oldStatus;
             } else {
-                oldStatus = plasmoid.status;
-                plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
+                oldStatus = Plasmoid.status;
+                Plasmoid.status = PlasmaCore.Types.RequiresAttentionStatus;
                 // This call currently fails and complains at runtime:
                 // QWindow::setWindowState: QWindow::setWindowState does not accept Qt::WindowActive
                 popupWindow.requestActivate();

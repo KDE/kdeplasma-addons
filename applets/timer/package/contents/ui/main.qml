@@ -4,6 +4,7 @@
  *   SPDX-License-Identifier: GPL-3.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.15
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core as PlasmaCore
@@ -23,7 +24,7 @@ PlasmoidItem {
         .includes(Plasmoid.location)
     readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
 
-    readonly property variant predefinedTimers: plasmoid.configuration.predefinedTimers;
+    readonly property variant predefinedTimers: Plasmoid.configuration.predefinedTimers;
 
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
 
@@ -32,7 +33,7 @@ PlasmoidItem {
 
     // Display seconds in addition to hours and minutes (default: enabled)
     readonly property bool showSeconds: Plasmoid.configuration.showSeconds
-    property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds);
+    property int seconds : restoreToSeconds(Plasmoid.configuration.running, Plasmoid.configuration.savedAt, Plasmoid.configuration.seconds);
 
     // Display timer toggle control (default: enabled)
     readonly property bool showTimerToggle: Plasmoid.configuration.showTimerToggle
@@ -41,19 +42,19 @@ PlasmoidItem {
     readonly property bool showProgressBar: Plasmoid.configuration.showProgressBar
 
     // show notification on timer completion (default: enabled)
-    property bool showNotification: plasmoid.configuration.showNotification;
+    property bool showNotification: Plasmoid.configuration.showNotification;
     // run custom command on timer completion (default: disabled)
-    property bool runCommand: plasmoid.configuration.runCommand;
-    property string command: plasmoid.configuration.command;
+    property bool runCommand: Plasmoid.configuration.runCommand;
+    property string command: Plasmoid.configuration.command;
 
     // show title (can be customized in the settings dialog, default: disabled)
-    readonly property bool showTitle: plasmoid.configuration.showTitle;
-    readonly property string title: plasmoid.configuration.title;
+    readonly property bool showTitle: Plasmoid.configuration.showTitle;
+    readonly property string title: Plasmoid.configuration.title;
     readonly property bool alertMode: root.running && root.seconds < 60
-    property bool running: plasmoid.configuration.running > 0
+    property bool running: Plasmoid.configuration.running > 0
     property bool suspended: false;
 
-    readonly property string notificationText: plasmoid.configuration.notificationText;
+    readonly property string notificationText: Plasmoid.configuration.notificationText;
 
     toolTipMainText: {
         var timerName = "";
@@ -151,7 +152,7 @@ PlasmoidItem {
     ]
 
     Instantiator {
-        model: plasmoid.configuration.predefinedTimers
+        model: Plasmoid.configuration.predefinedTimers
         delegate: PlasmaCore.Action {
             text: TimerPlasmoid.Timer.secondsToString(modelData, "hh:mm:ss")
             onTriggered: {
@@ -192,9 +193,9 @@ PlasmoidItem {
     signal digitHasChanged()
 
     function saveTimer() {
-        plasmoid.configuration.running = running ? seconds : 0;
-        plasmoid.configuration.savedAt = new Date();
-        plasmoid.configuration.seconds = seconds
+        Plasmoid.configuration.running = running ? seconds : 0;
+        Plasmoid.configuration.savedAt = new Date();
+        Plasmoid.configuration.seconds = seconds
     }
 
     function restoreToSeconds(cRunning, cSavedAt, cSeconds) {

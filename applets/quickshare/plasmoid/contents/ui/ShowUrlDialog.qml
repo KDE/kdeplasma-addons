@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.2
 import QtQuick.Layouts 1.0
 import org.kde.plasma.core as PlasmaCore
@@ -47,9 +48,9 @@ PlasmaCore.Dialog
         }
         PlasmaComponents3.CheckBox {
             text: i18nc("@option:check", "Don't show this dialog, copy automatically.")
-            checked: plasmoid.configuration.copyAutomatically
+            checked: Plasmoid.configuration.copyAutomatically
             onClicked: {
-                plasmoid.configuration.copyAutomatically = checked
+                Plasmoid.configuration.copyAutomatically = checked
             }
         }
         PlasmaComponents3.Button {

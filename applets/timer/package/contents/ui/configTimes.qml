@@ -4,6 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.5
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
@@ -20,7 +21,7 @@ ColumnLayout {
     signal configurationChanged()
 
     Component.onCompleted: {
-        for (var i of plasmoid.configuration.predefinedTimers) {
+        for (var i of Plasmoid.configuration.predefinedTimers) {
             timeListModel.append({"time": i})
         }
     }

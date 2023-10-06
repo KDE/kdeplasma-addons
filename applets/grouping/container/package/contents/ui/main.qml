@@ -4,6 +4,7 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
 import org.kde.plasma.core as PlasmaCore
@@ -22,7 +23,7 @@ PlasmoidItem {
     property Item internalContainmentItem
 
     Component.onCompleted: {
-        root.internalContainmentItem = plasmoid.internalContainmentItem;
+        root.internalContainmentItem = Plasmoid.internalContainmentItem;
 
         if (root.internalContainmentItem === null) {
             return;
@@ -35,7 +36,7 @@ PlasmoidItem {
     Connections {
         target: plasmoid
         function onInternalContainmentItemChanged() {
-            root.internalContainmentItem = plasmoid.internalContainmentItem;
+            root.internalContainmentItem = Plasmoid.internalContainmentItem;
             root.internalContainmentItem.parent = root;
             root.internalContainmentItem.anchors.fill = root;
         }

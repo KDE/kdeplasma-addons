@@ -5,6 +5,7 @@
  *  SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
+import org.kde.plasma.plasmoid 2.0
 import QtQuick 2.15
 import org.kde.plasma.core as PlasmaCore
 
@@ -21,7 +22,7 @@ AbstractItem {
     onClicked: {
         if (applet) {
             if (mouse.button === Qt.RightButton) {
-                plasmoid.showPlasmoidMenu(applet, mouse.x, mouse.y);
+                Plasmoid.showPlasmoidMenu(applet, mouse.x, mouse.y);
             }
         }
     }
