@@ -93,6 +93,9 @@ ChineseCalendarProviderPrivate::ChineseCalendarProviderPrivate()
 
 auto ChineseCalendarProviderPrivate::generateSolarTermsCache(int year)
 {
+#if __has_cpp_attribute(assume)
+    [[assume(year > 0)]];
+#endif
     auto thisYearIt = s_solarTermsMap.find(year);
     if (thisYearIt != s_solarTermsMap.end()) {
         // Already generated
@@ -182,6 +185,9 @@ QString ChineseCalendarProviderPrivate::dayDisplayName() const
 
 QDate ChineseCalendarProviderPrivate::getSolarTermDate(int year, SolarTerm order) const
 {
+#if __has_cpp_attribute(assume)
+    [[assume(year > 0)]];
+#endif
     constexpr double RADIANS_PER_TERM = std::numbers::pi / 12.0;
     double angle = double(order) * RADIANS_PER_TERM;
     int month = ((order + 1) / 2 + 2) % 12 + 1;
@@ -190,7 +196,7 @@ QDate ChineseCalendarProviderPrivate::getSolarTermDate(int year, SolarTerm order
     if (order % 2 == 0) {
         day = 20;
     }
-    const std::int64_t initialJulianDay = SolarUtils::toJulianDay(year, month, day);
+    const int64_t initialJulianDay = SolarUtils::toJulianDay(year, month, day);
     // Can't use QDate::toJulianDay because it doesn't support extra hours
     double julianDay = SolarUtils::NewtonIteration(angle, initialJulianDay);
     // To UTC+8 time

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-11 02:03+0000\n"
+"POT-Creation-Date: 2023-09-26 01:47+0000\n"
 "PO-Revision-Date: 2023-05-21 14:50+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -82,43 +82,43 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Preview count:"
 
-#: package/contents/ui/main.qml:100
+#: package/contents/ui/main.qml:101
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Open Colour Dialogue"
 
-#: package/contents/ui/main.qml:105
+#: package/contents/ui/main.qml:106
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Clear History"
 
-#: package/contents/ui/main.qml:113
+#: package/contents/ui/main.qml:114
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "View History"
 
-#: package/contents/ui/main.qml:121
+#: package/contents/ui/main.qml:122
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Copy to Clipboard"
 
-#: package/contents/ui/main.qml:158
+#: package/contents/ui/main.qml:159
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "No colours"
 
-#: package/contents/ui/main.qml:158
+#: package/contents/ui/main.qml:159
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "Colour picking unavailable when compositing is disabled"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:160
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
@@ -126,25 +126,25 @@ msgid ""
 msgstr ""
 "Compositing has been manually disabled or blocked by a running application"
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:167
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Pick Colour"
 
-#: package/contents/ui/main.qml:174
+#: package/contents/ui/main.qml:175
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "Configure Compositing"
 
-#: package/contents/ui/main.qml:359
+#: package/contents/ui/main.qml:360
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Copied!"
 
-#: package/contents/ui/main.qml:369
+#: package/contents/ui/main.qml:370
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

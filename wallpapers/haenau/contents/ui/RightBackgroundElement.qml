@@ -5,7 +5,7 @@
  */
 
 import QtQuick 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.ksvg 1.0 as KSvg
 
 KSvg.SvgItem {
@@ -13,7 +13,7 @@ KSvg.SvgItem {
     x: parent.width - width
     width: naturalSize.width * (parent.height/naturalSize.height)
     height: parent.height
-    imagePath: root.wallpaperPath
+    imagePath: wallpaper.wallpaperPath
 
     signal changeTriggered
 

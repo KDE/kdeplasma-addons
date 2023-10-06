@@ -13,8 +13,6 @@ import org.kde.plasma.plasmoid 2.0
 import QtWebEngine
 import QtQuick.Controls
 
-import org.kde.kirigami 2.20 as Kirigami
-
 import org.kde.plasma.private.dict 1.0
 
 PlasmoidItem {

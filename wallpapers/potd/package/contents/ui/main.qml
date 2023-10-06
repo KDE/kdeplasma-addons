@@ -8,7 +8,7 @@ import QtQuick 2.15
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Window 2.15
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 
 import org.kde.plasma.wallpapers.potd 1.0
@@ -47,7 +47,7 @@ WallpaperItem {
                 imageView.pendingImage = null;
             }
 
-            imageView.doesSkipAnimation = imageView.empty
+            imageView.doesSkipAnimation = imageView.empty || sourceSize !== imageView.currentItem.sourceSize;
             imageView.pendingImage = imageComponent.createObject(imageView, {
                 "source": backend.localUrl,
                 "fillMode": imageView.fillMode,

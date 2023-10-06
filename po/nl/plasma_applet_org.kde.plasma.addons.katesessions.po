@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-17 01:58+0000\n"
+"POT-Creation-Date: 2023-08-30 01:57+0000\n"
 "PO-Revision-Date: 2021-07-02 15:27+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -32,12 +32,12 @@ msgstr "Nieuwe sessie aanmaken en Kate starten"
 msgid "Cancel session creation"
 msgstr "Sessie maken annuleren"
 
-#: contents/ui/main.qml:38
+#: contents/ui/main.qml:39
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate-sessies"
 
-#: contents/ui/main.qml:47
+#: contents/ui/main.qml:48
 #, kde-format
 msgid "Search…"
 msgstr "Zoeken…"

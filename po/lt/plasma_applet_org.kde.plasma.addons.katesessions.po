@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: trunk-kf 5\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-17 01:58+0000\n"
+"POT-Creation-Date: 2023-08-30 01:57+0000\n"
 "PO-Revision-Date: 2022-11-17 23:32+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -35,12 +35,12 @@ msgstr "Sukurti naują sesija ir paleisti Kate"
 msgid "Cancel session creation"
 msgstr "Atšaukti sesijos kūrimą"
 
-#: contents/ui/main.qml:38
+#: contents/ui/main.qml:39
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate sesijos"
 
-#: contents/ui/main.qml:47
+#: contents/ui/main.qml:48
 #, kde-format
 msgid "Search…"
 msgstr "Ieškoti…"

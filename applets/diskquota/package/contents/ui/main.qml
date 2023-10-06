@@ -6,7 +6,7 @@
 import QtQuick 2.1
 import QtQuick.Layouts 1.1
 
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -73,7 +73,7 @@ PlasmoidItem {
 
             sourceComponent: PlasmaExtras.PlaceholderMessage {
                 width: parent.width
-                readonly property bool hasText: model.filterRegExp.length > 0
+                readonly property bool hasText: model.filterRegularExpression.length > 0
                 iconName: diskQuota.quotaInstalled ? "edit-none" : "disk-quota"
                 text: diskQuota.quotaInstalled ? i18nc("@info:status", "No quota restrictions found") : i18nc("@info:status", "Quota tool not found")
                 explanation: diskQuota.quotaInstalled ? "" : i18nc("@info:usagetip", "Please install 'quota'")

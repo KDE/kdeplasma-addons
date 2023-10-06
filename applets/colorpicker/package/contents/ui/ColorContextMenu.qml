@@ -5,7 +5,7 @@
 */
 
 import QtQuick 2.15
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 
 /**
@@ -29,7 +29,7 @@ PlasmaExtras.ModelContextMenu {
     }
 
     onStatusChanged: {
-        if (status == PlasmaExtras.DialogStatus.Closed) {
+        if (status == PlasmaExtras.Menu.Closed) {
             formattingMenu.destroy();
         }
     }

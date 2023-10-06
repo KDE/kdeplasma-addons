@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
-.import org.kde.plasma.core 2.0 as PlasmaCore
+.import org.kde.plasma.core as PlasmaCore
 .import org.kde.kirigami 2.20 as Kirigami
 
 function itemPadding() { return Kirigami.Units.smallSpacing / 2; }

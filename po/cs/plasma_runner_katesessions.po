@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-09-18 01:59+0000\n"
 "PO-Revision-Date: 2009-07-04 14:15+0200\n"
 "Last-Translator: Lukáš Tinkl <ltinkl@redhat.com>\n"
 "Language-Team: Czech <kde-czech-apps@lists.sf.net>\n"
@@ -27,7 +27,7 @@ msgstr "Najde sezení Kate odpovídající :q:."
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Vypíše všechny sezení editoru Kate pro tento účet."
 
-#: katesessions.cpp:67 katesessions.cpp:78
+#: katesessions.cpp:68 katesessions.cpp:79
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Otevřít sezení Kate"

@@ -73,7 +73,7 @@ void ConverterRunnerTest::testLettersAndCurrency()
     launchQuery(QStringLiteral("4us$>ca$"));
 
     QCOMPARE(manager->matches().count(), 1);
-    QVERIFY(manager->matches().constFirst().text().contains(QLatin1String("Canadian dollars (CAD)")));
+    QVERIFY2(manager->matches().constFirst().text().contains(QLatin1String("Canadian dollars (CAD)")), qUtf8Printable(manager->matches().constFirst().text()));
 }
 
 /**
@@ -138,7 +138,7 @@ void ConverterRunnerTest::testRoundingOfCurrencies()
     launchQuery(QStringLiteral("50.123$"));
     QVERIFY(!manager->matches().isEmpty());
     QRegularExpression hasTwoDecimalPrescision(QStringLiteral(R"(^\d+\.\d\d)"));
-    QVERIFY(manager->matches().constFirst().text().contains(hasTwoDecimalPrescision));
+    QVERIFY2(manager->matches().constFirst().text().contains(hasTwoDecimalPrescision), qUtf8Printable(manager->matches().constFirst().text()));
 }
 
 QTEST_MAIN(ConverterRunnerTest)

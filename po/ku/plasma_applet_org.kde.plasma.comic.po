@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-10-04 01:40+0000\n"
 "PO-Revision-Date: 2009-01-10 23:44+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <kde-i18n-doc@kde.org>\n"
@@ -19,65 +19,65 @@ msgstr ""
 "X-Poedit-Language: Kurdish\n"
 "X-Poedit-SourceCharset: utf8\n"
 
-#: comic.cpp:85
+#: comic.cpp:80
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr ""
 
-#: comic.cpp:91
+#: comic.cpp:86
 #, fuzzy, kde-format
 #| msgid "&Jump to first Strip"
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "&Biçe Beşa yekemîn"
 
-#: comic.cpp:95
+#: comic.cpp:90
 #, fuzzy, kde-format
 #| msgid "&Jump to current Strip"
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "&Biçe Beşa niha vekirî"
 
-#: comic.cpp:99
+#: comic.cpp:94
 #, fuzzy, kde-format
 #| msgid "&Jump to first Strip"
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "&Biçe Beşa yekemîn"
 
-#: comic.cpp:103
+#: comic.cpp:98
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr ""
 
-#: comic.cpp:107
+#: comic.cpp:102
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr ""
 
-#: comic.cpp:115
+#: comic.cpp:110
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr ""
 
-#: comic.cpp:120
+#: comic.cpp:115
 #, fuzzy, kde-format
 #| msgid "&Save Comic As..."
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "Pirtûka Qerfî Cuda &Tomar Bike..."
 
-#: comic.cpp:125
+#: comic.cpp:120
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Mezinahiya Rastî"
 
-#: comic.cpp:133
+#: comic.cpp:128
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"

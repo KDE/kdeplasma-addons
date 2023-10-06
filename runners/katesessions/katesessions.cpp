@@ -43,9 +43,10 @@ void KateSessions::match(RunnerContext &context)
     if (term.trimmed().compare(m_triggerWord, Qt::CaseInsensitive) == 0) {
         listAll = true;
         term.clear();
-    } else if (term.at(4) == QLatin1Char(' ')) {
-        term = term.remove(m_triggerWord, Qt::CaseInsensitive).trimmed();
-    } else {
+    } else if (term.startsWith(m_triggerWord + ' ')) {
+        term.remove(m_triggerWord, Qt::CaseInsensitive);
+        term = std::move(term).trimmed();
+    } else if (!context.singleRunnerQueryMode()) {
         // Prevent results for queries like "katee"
         return;
     }

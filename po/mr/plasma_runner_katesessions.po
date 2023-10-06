@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-09-18 01:59+0000\n"
 "PO-Revision-Date: 2013-02-26 10:51+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -27,7 +27,7 @@ msgstr ":q: याच्याशी जुळणारे सर्व के�
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "तुमच्या खात्यातील सर्व केट संपादक सत्रांची यादी करतो."
 
-#: katesessions.cpp:67 katesessions.cpp:78
+#: katesessions.cpp:68 katesessions.cpp:79
 #, kde-format
 msgid "Open Kate Session"
 msgstr "केट सत्र उघडा"

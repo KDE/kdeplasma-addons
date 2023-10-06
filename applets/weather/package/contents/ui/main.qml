@@ -7,7 +7,7 @@
 import QtQuick 2.9
 
 import org.kde.plasma.plasmoid 2.0
-import org.kde.plasma.core 2.0 as PlasmaCore
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support 2.0 as P5Support
 
 import org.kde.plasma.private.weather 1.0

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-17 01:58+0000\n"
+"POT-Creation-Date: 2023-08-30 01:57+0000\n"
 "PO-Revision-Date: 2021-07-20 17:50+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -31,12 +31,12 @@ msgstr "Vytvoriť nové sedenie a spustiť Kate"
 msgid "Cancel session creation"
 msgstr "Zrušiť vytvorenie sedenia"
 
-#: contents/ui/main.qml:38
+#: contents/ui/main.qml:39
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Sedenia Kate"
 
-#: contents/ui/main.qml:47
+#: contents/ui/main.qml:48
 #, kde-format
 msgid "Search…"
 msgstr "Hľadať..."

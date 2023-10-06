@@ -100,20 +100,20 @@ void GroupedAppletsContainer::ensureSystrayExists()
     m_innerContainment->setInternalAction(QStringLiteral("remove"), internalAction(QStringLiteral("remove")));
 }
 
-void GroupedAppletsContainer::constraintsEvent(Plasma::Types::Constraints constraints)
+void GroupedAppletsContainer::constraintsEvent(Plasma::Applet::Constraints constraints)
 {
-    if (constraints & Plasma::Types::LocationConstraint) {
+    if (constraints & Plasma::Applet::LocationConstraint) {
         if (m_innerContainment) {
             m_innerContainment->setLocation(location());
         }
     }
-    if (constraints & Plasma::Types::FormFactorConstraint) {
+    if (constraints & Plasma::Applet::FormFactorConstraint) {
         if (m_innerContainment) {
             m_innerContainment->setFormFactor(formFactor());
         }
     }
 
-    if (constraints & Plasma::Types::UiReadyConstraint) {
+    if (constraints & Plasma::Applet::UiReadyConstraint) {
         ensureSystrayExists();
     }
 }

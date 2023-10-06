@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-10-04 01:40+0000\n"
 "PO-Revision-Date: 2022-11-17 23:34+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -20,61 +20,61 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 3.2.1\n"
 
-#: comic.cpp:85
+#: comic.cpp:80
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Kita kortelė su nauja piešinių serija"
 
-#: comic.cpp:91
+#: comic.cpp:86
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Pereiti į &pirmą piešinių seriją"
 
-#: comic.cpp:95
+#: comic.cpp:90
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Pereiti į &dabartinę piešinių seriją"
 
-#: comic.cpp:99
+#: comic.cpp:94
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Pereiti į piešinių seriją…"
 
-#: comic.cpp:103
+#: comic.cpp:98
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Apsilankyti internetinėje svetainėje"
 
-#: comic.cpp:107
+#: comic.cpp:102
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr "Žiūrėti %1 naršyklėje"
 
-#: comic.cpp:115
+#: comic.cpp:110
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Apsilankyti parduotuvės &internetinėje svetainėje"
 
-#: comic.cpp:120
+#: comic.cpp:115
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "Į&rašyti komiksą kaip…"
 
-#: comic.cpp:125
+#: comic.cpp:120
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Faktinis dydis"
 
-#: comic.cpp:133
+#: comic.cpp:128
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"

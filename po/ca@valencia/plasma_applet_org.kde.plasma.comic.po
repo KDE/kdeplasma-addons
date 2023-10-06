@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2023-10-04 01:40+0000\n"
 "PO-Revision-Date: 2022-07-30 23:37+0200\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -21,61 +21,61 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
-#: comic.cpp:85
+#: comic.cpp:80
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "Pestanya següe&nt amb una tira nova"
 
-#: comic.cpp:91
+#: comic.cpp:86
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
-msgstr "Salta a la &primera tira"
+msgstr "Salta fins a la &primera tira"
 
-#: comic.cpp:95
+#: comic.cpp:90
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
-msgstr "Salta a la tira a&ctual"
+msgstr "Salta fins a la tira a&ctual"
 
-#: comic.cpp:99
+#: comic.cpp:94
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
-msgstr "Salta a la tira…"
+msgstr "Salta fins a la tira…"
 
-#: comic.cpp:103
+#: comic.cpp:98
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Visiteu el lloc web"
 
-#: comic.cpp:107
+#: comic.cpp:102
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
 msgstr "Visualitzeu amb %1"
 
-#: comic.cpp:115
+#: comic.cpp:110
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Visita la &web de la botiga"
 
-#: comic.cpp:120
+#: comic.cpp:115
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "Guar&da el còmic com a…"
 
-#: comic.cpp:125
+#: comic.cpp:120
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Mida re&al"
 
-#: comic.cpp:133
+#: comic.cpp:128
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
@@ -109,7 +109,7 @@ msgstr "Avançat"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
-msgstr "Salta a la tira…"
+msgstr "Salta fins a la tira…"
 
 #: package/contents/ui/ComicBottomInfo.qml:101
 #, kde-format

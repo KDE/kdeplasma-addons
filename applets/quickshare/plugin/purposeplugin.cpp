@@ -5,6 +5,8 @@
 */
 
 #include "contenttracker.h"
+#include "mimedatabase.h"
+
 #include <QBuffer>
 #include <QImage>
 #include <QMetaType>
@@ -58,6 +60,7 @@ public:
             return new PurposeHelper;
         });
         qmlRegisterType<ContentTracker>("org.kde.plasma.private.purpose", 1, 0, "ContentTracker");
+        qmlRegisterType<MimeDatabase>("org.kde.plasma.private.purpose", 1, 0, "MimeDatabase");
     }
 };
 

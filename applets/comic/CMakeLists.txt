@@ -5,7 +5,6 @@ add_subdirectory(engine)
 set(comic_SRCS
     comic.cpp
     comicmodel.cpp
-    comicupdater.cpp
     checknewstrips.cpp
     comicdata.cpp
     comicinfo.cpp
@@ -23,7 +22,6 @@ target_link_libraries(org.kde.plasma.comic
                       KF6::I18n
                       KF6::KIOCore
                       KF6::KIOWidgets
-                      KF6::NewStuffCore
                       KF6::Notifications
                       KF6::XmlGui
                       plasma_engine_comic)

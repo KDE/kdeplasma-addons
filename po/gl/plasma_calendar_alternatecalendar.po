@@ -1,0 +1,146 @@
+# Copyright (C) 2023 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# SPDX-FileCopyrightText: 2023 Adrián Chaves (Gallaecio)
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-08-21 01:59+0000\n"
+"PO-Revision-Date: 2023-09-24 15:28+0200\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"Language-Team: Galician <proxecto@trasno.gal>\n"
+"Language: gl\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 23.08.1\n"
+
+#: calendarsystem.h:52
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Julian"
+msgstr "Calendario xuliano"
+
+# skip-rule: trasno-check2_reverse
+#: calendarsystem.h:56
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Milankovic"
+msgstr "Calendario xuliano revisado"
+
+#: calendarsystem.h:60
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Solar Hijri Calendar (Persian)"
+msgstr "Calendario persa"
+
+#: calendarsystem.h:64
+#, kde-format
+msgctxt ""
+"@item:inlist See https://cldr.unicode.org/development/development-process/"
+"design-proposals/islamic-calendar-types for more details"
+msgid "Islamic Calendar (Astronomical)"
+msgstr "Calendario musulmán astronómico"
+
+#: calendarsystem.h:68
+#, kde-format
+msgctxt ""
+"@item:inlist See https://cldr.unicode.org/development/development-process/"
+"design-proposals/islamic-calendar-types for more details"
+msgid "The Islamic Civil Calendar (Tabular)"
+msgstr "Calendario musulmán civil tabular"
+
+#: calendarsystem.h:72
+#, kde-format
+msgctxt ""
+"@item:inlist See https://cldr.unicode.org/development/development-process/"
+"design-proposals/islamic-calendar-types for more details"
+msgid "Islamic Calendar (Umm al-Qura)"
+msgstr "Calendario musulmán Umm al-Qura"
+
+#: calendarsystem.h:76
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Chinese Lunar Calendar"
+msgstr "Calendario lunar chinés"
+
+#: calendarsystem.h:80
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Indian National Calendar"
+msgstr "Calendario nacional indio"
+
+#: calendarsystem.h:84
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Hebrew Calendar"
+msgstr "Calendario hebreo"
+
+#: config/qml/AlternateCalendarConfig.qml:38
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Calendar system:"
+msgstr "Calendario:"
+
+#: config/qml/AlternateCalendarConfig.qml:52
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"This calendar is based on pure astronomical calculation. It doesn't consider "
+"any crescent visibility criteria."
+msgstr ""
+"Este calendario está baseado en cálculos puramente astronómicos. Non ten en "
+"conta criterios de visibilidade da media lúa."
+
+#: config/qml/AlternateCalendarConfig.qml:60
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Date offset:"
+msgstr "Diferenza da data:"
+
+#: config/qml/AlternateCalendarConfig.qml:71
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "%1 día"
+msgstr[1] "%1 días"
+
+#: config/qml/AlternateCalendarConfig.qml:74
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"A positive offset signifies a later date, while a negative offset signifies "
+"an earlier date."
+msgstr ""
+"Unha diferenza positiva indica unha data posterior, e unha negativo unha "
+"anterior."
+
+#: provider/hebrewcalendar.cpp:97
+#, kde-format
+msgctxt ""
+"%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
+"number %4 Full date in Hebrew"
+msgid "%1 %2, %3 (%4)"
+msgstr "%1 de %2 de %3 (%4)"
+
+#: provider/indiancalendar.cpp:73
+#, kde-format
+msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
+msgid "%1 %2, %3"
+msgstr "%1 de %2 de %3"
+
+#: provider/islamiccalendar.cpp:124
+#, kde-format
+msgctxt ""
+"@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 "
+"Islamic calendar date in Arabic"
+msgid "%1 %2, %3 (%4)"
+msgstr "%1 de %2 de %3 (%4)"
+
+#: provider/qtcalendar.cpp:59
+#, kde-format
+msgctxt "@label %1 day %2 month name %3 year"
+msgid "%1 %2, %3"
+msgstr "%1 de %2 de %3"

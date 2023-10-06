@@ -54,5 +54,5 @@ Name[zh_TW]=漫畫
 Categories=Plasma Comic
 TargetDir=plasma/comics
 Uncompress=kpackage
-KPackageType=Plasma/Comic
+KPackageStructure=Plasma/Comic
 

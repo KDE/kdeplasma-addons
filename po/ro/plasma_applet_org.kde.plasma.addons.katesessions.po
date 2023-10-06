@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-17 01:58+0000\n"
+"POT-Creation-Date: 2023-08-30 01:57+0000\n"
 "PO-Revision-Date: 2014-10-18 00:39+0300\n"
 "Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -32,12 +32,12 @@ msgstr "Creează sesiune nouă și pornește Kate"
 msgid "Cancel session creation"
 msgstr "Anulează crearea sesiunii"
 
-#: contents/ui/main.qml:38
+#: contents/ui/main.qml:39
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Sesiuni Kate"
 
-#: contents/ui/main.qml:47
+#: contents/ui/main.qml:48
 #, fuzzy, kde-format
 #| msgid "Search"
 msgid "Search…"

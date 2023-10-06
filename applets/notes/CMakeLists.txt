@@ -11,7 +11,7 @@ target_sources(notesplugin PRIVATE
     plugin/notemanager.cpp
     plugin/notesplugin.cpp
 )
-target_link_libraries(notesplugin
+target_link_libraries(notesplugin PRIVATE
     Qt::Quick
     KF6::CoreAddons
 )

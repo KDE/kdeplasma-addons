@@ -1,16 +1,16 @@
 # Translation of plasma_applet_org.kde.plasma.weather.po to Catalan
-# Copyright (C) 2016-2022 This_file_is_part_of_KDE
+# Copyright (C) 2016-2023 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2016, 2018, 2019, 2020, 2022.
+# Josep M. Ferrer <txemaq@gmail.com>, 2016, 2018, 2019, 2020, 2022, 2023.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2018, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-21 01:59+0000\n"
-"PO-Revision-Date: 2022-11-25 13:41+0100\n"
+"PO-Revision-Date: 2023-09-20 13:11+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -284,13 +284,13 @@ msgstr "No s'ha trobat cap estació per a «%1»"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr "Cerqueu una estació meteorològica per canviar la vostra ubicació"
+msgstr "Cerqueu una estació meteorològica per a canviar la vostra ubicació"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr "Cerqueu una estació meteorològica per establir la vostra ubicació"
+msgstr "Cerqueu una estació meteorològica per a establir la ubicació"
 
 #: package/contents/ui/ForecastView.qml:74
 #: package/contents/ui/ForecastView.qml:81
@@ -417,7 +417,7 @@ msgstr "%1 (%2%)"
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
-msgstr "Feu un clic per configurar %1"
+msgstr "Feu un clic per a configurar %1"
 
 #: package/contents/ui/main.qml:404
 #, kde-format

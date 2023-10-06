@@ -25,7 +25,7 @@ public:
     QQuickItem *internalContainmentItem();
 
 protected:
-    void constraintsEvent(Plasma::Types::Constraints constraints) override;
+    void constraintsEvent(Plasma::Applet::Constraints constraints) override;
     void ensureSystrayExists();
 
 Q_SIGNALS:

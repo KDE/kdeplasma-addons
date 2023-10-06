@@ -14,11 +14,12 @@
 #include <QGuiApplication>
 #include <QLocale>
 #include <QMimeData>
-#include <QMutex>
 
+#include <chrono>
 #include <cmath>
+#include <mutex>
 
-static QMutex s_initMutex;
+using namespace std::chrono_literals;
 
 K_PLUGIN_CLASS_WITH_JSON(ConverterRunner, "plasma-runner-converter.json")
 
@@ -48,6 +49,9 @@ void ConverterRunner::init()
 
     setMinLetterCount(2);
     setMatchRegex(valueRegex);
+
+    m_currencyUpdateTimer.setInterval(24h);
+    connect(&m_currencyUpdateTimer, &QTimer::timeout, this, &ConverterRunner::updateCompatibleUnits);
 }
 
 ConverterRunner::~ConverterRunner() = default;
@@ -68,13 +72,12 @@ void ConverterRunner::match(RunnerContext &context)
     }
 
     // Initialize if not done already
-    {
-        QMutexLocker lock(&s_initMutex);
-        if (!converter) {
-            converter = std::make_unique<KUnitConversion::Converter>();
-            insertCompatibleUnits();
-        }
-    }
+    static std::once_flag converterInitialized;
+    std::call_once(converterInitialized, [this] {
+        converter = std::make_unique<KUnitConversion::Converter>();
+        updateCompatibleUnits();
+        m_currencyUpdateTimer.start();
+    });
 
     // Check if unit is valid, otherwise check for the value in the compatibleUnits map
     QString inputUnitString = unitStrings.first().simplified();
@@ -220,11 +223,20 @@ QList<KUnitConversion::Unit> ConverterRunner::createResultUnits(QString &outputU
     return units;
 }
 
-void ConverterRunner::insertCompatibleUnits()
+void ConverterRunner::updateCompatibleUnits()
 {
     // Add all currency symbols to the map, if their ISO code is supported by backend
-    const QList<QLocale> allLocales = QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
     KUnitConversion::UnitCategory currencyCategory = converter->category(QStringLiteral("Currency"));
+    if (auto updateJob = currencyCategory.syncConversionTable(); updateJob) {
+        QEventLoop waitForFinshed;
+        waitForFinshed.connect(updateJob, &KUnitConversion::UpdateJob::finished, &waitForFinshed, &QEventLoop::quit);
+        waitForFinshed.exec();
+        compatibleUnits.clear();
+    } else if (!compatibleUnits.empty()) {
+        return; // Already filled and is not expired
+    }
+
+    const QList<QLocale> allLocales = QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
     const QStringList availableISOCodes = currencyCategory.allUnits();
     const QRegularExpression hasCurrencyRegex = QRegularExpression(QStringLiteral("\\p{Sc}")); // clazy:exclude=use-static-qregularexpression
     for (const auto &currencyLocale : allLocales) {

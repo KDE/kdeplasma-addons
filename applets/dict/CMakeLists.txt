@@ -27,7 +27,7 @@ target_sources(dictplugin PRIVATE
   plugin/dict_object.cpp
   plugin/dictionariesmodel.cpp
 )
-target_link_libraries(dictplugin
+target_link_libraries(dictplugin PRIVATE
     KF6::I18n
     Qt::Quick
     Qt::WebEngineQuick

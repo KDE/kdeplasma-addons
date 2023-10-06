@@ -2,8 +2,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
-"PO-Revision-Date: 2023-08-02 12:38\n"
+"POT-Creation-Date: 2023-09-18 01:59+0000\n"
+"PO-Revision-Date: 2023-09-16 10:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -28,7 +28,7 @@ msgstr "查找匹配 :q: 的 Kate 会话。"
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "列出您账户中全部 Kate 编辑器会话。"
 
-#: katesessions.cpp:67 katesessions.cpp:78
+#: katesessions.cpp:68 katesessions.cpp:79
 #, kde-format
 msgid "Open Kate Session"
 msgstr "打开 Kate 会话"

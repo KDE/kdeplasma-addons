@@ -20,7 +20,7 @@ target_sources(weatherplugin PRIVATE
     plugin/abstractunitlistmodel.cpp
     plugin/locationlistmodel.cpp
 )
-target_link_libraries(weatherplugin
+target_link_libraries(weatherplugin PRIVATE
     KF6::Plasma
     KF6::Plasma5Support
     KF6::UnitConversion
