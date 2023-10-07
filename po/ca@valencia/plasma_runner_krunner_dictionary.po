@@ -41,7 +41,7 @@ msgstr "Busca la definició de :q:."
 #: dictionaryrunner.cpp:119
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
-msgstr "La definició de «%1» s'ha copiat al porta-retalls"
+msgstr "La definició de «%1» s'ha copiat a dins del porta-retalls"
 
 #: dictionaryrunner_config.cpp:22
 #, kde-format
