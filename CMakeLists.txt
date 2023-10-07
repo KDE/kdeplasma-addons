@@ -33,7 +33,7 @@ include(CMakePackageConfigHelpers)
 include(KDEClangFormat)
 include(KDEGitCommitHooks)
 include(ECMDeprecationSettings)
-include(ECMFindQmlModule)
+include(ECMQmlModule)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
@@ -119,7 +119,7 @@ ecm_set_disabled_deprecation_versions(
     QT 6.5.0
 )
 
-ecm_find_qmlmodule(QtQuick3D 1.15)
+# ecm_qmlmodule(QtQuick3D)
 
 add_subdirectory(dict)
 add_subdirectory(effects)

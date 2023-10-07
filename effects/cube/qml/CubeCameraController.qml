@@ -4,8 +4,8 @@
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
-import QtQuick 2.15
-import QtQuick3D 1.15
+import QtQuick
+import QtQuick3D
 
 Item {
     id: root

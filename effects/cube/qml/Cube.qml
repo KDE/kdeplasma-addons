@@ -4,14 +4,14 @@
     SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
 */
 
-import QtQuick 2.15
-import QtQuick3D 1.15
+import QtQuick
+import QtQuick3D
 import org.kde.kwin 3.0 as KWinComponents
 
 Node {
     id: cube
 
-    property real faceDisplacement: 100
+    property real faceDisplacement: 500
     required property size faceSize
     readonly property real faceDistance: 0.5 * faceSize.width / Math.tan(angleTick * Math.PI / 360) + faceDisplacement;
     readonly property real angleTick: 360 / faceRepeater.count
@@ -25,7 +25,7 @@ Node {
     }
 
     function desktopAzimuth(desktop) {
-        return cube.angleTick * (desktop.x11DesktopNumber - 1);
+        return cube.angleTick * (model.index - 1);
     }
 
     Repeater3D {

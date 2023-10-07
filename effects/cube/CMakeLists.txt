@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-add_subdirectory(kcm)
+# add_subdirectory(kcm)
 
 kcoreaddons_add_plugin(kwin4_effect_cube INSTALL_NAMESPACE "kwin/effects/plugins/")
 target_sources(kwin4_effect_cube PRIVATE
@@ -19,12 +19,12 @@ target_link_libraries(kwin4_effect_cube
     Qt::Gui
     Qt::Quick
 
-    KF5::ConfigCore
-    KF5::ConfigGui
-    KF5::CoreAddons
-    KF5::GlobalAccel
-    KF5::I18n
-    KF5::WindowSystem
+    KF6::ConfigCore
+    KF6::ConfigGui
+    KF6::CoreAddons
+    KF6::GlobalAccel
+    KF6::I18n
+    KF6::WindowSystem
 
     KWinEffects::kwineffects
 )

@@ -33,15 +33,15 @@ CubeEffect::CubeEffect()
     KGlobalAccel::self()->setDefaultShortcut(m_toggleAction, {defaultToggleShortcut});
     KGlobalAccel::self()->setShortcut(m_toggleAction, {defaultToggleShortcut});
     m_toggleShortcut = KGlobalAccel::self()->shortcut(m_toggleAction);
-    effects->registerGlobalShortcut({defaultToggleShortcut}, m_toggleAction);
+    // effects->registerGlobalShortcut({defaultToggleShortcut}, m_toggleAction);
     connect(m_toggleAction, &QAction::triggered, this, &CubeEffect::toggle);
 
-    connect(KGlobalAccel::self(), &KGlobalAccel::globalShortcutChanged, this, [this](QAction *action, const QKeySequence &seq) {
-        if (action->objectName() == QStringLiteral("Cube")) {
-            m_toggleShortcut.clear();
-            m_toggleShortcut.append(seq);
-        }
-    });
+    // connect(KGlobalAccel::self(), &KGlobalAccel::globalShortcutChanged, this, [this](QAction *action, const QKeySequence &seq) {
+    //     if (action->objectName() == QStringLiteral("Cube")) {
+    //         m_toggleShortcut.clear();
+    //         m_toggleShortcut.append(seq);
+    //     }
+    // });
 
     setSource(QUrl::fromLocalFile(QStandardPaths::locate(QStandardPaths::GenericDataLocation, QStringLiteral("kwin/effects/cube/qml/main.qml"))));
 
@@ -153,10 +153,10 @@ void CubeEffect::deactivate()
         return;
     }
 
-    const auto screenViews = views();
-    for (QuickSceneView *view : screenViews) {
-        QMetaObject::invokeMethod(view->rootItem(), "stop");
-    }
+    // const auto screenViews = views();
+    // for (QuickSceneView *view : screenViews) {
+    //     QMetaObject::invokeMethod(view->rootItem(), "stop");
+    // }
 
     m_shutdownTimer->start(animationDuration());
 }
