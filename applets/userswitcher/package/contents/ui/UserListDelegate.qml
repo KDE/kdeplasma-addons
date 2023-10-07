@@ -4,12 +4,13 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQml 2.15
+import QtQuick
+import QtQml
 
-import org.kde.kcmutils // For KCMLauncher
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kirigamiaddons.components 1.0 as KirigamiComponents
+import org.kde.config as KConfig
+import org.kde.kcmutils as KCMUtils
+import org.kde.kirigami as Kirigami
+import org.kde.kirigamiaddons.components as KirigamiComponents
 
 ListDelegate {
     id: item
@@ -26,6 +27,6 @@ ListDelegate {
         // don't block mouse hover from the underlying ListView highlight
         enabled: KConfig.KAuthorized.authorizeControlModule("kcm_users")
 
-        onClicked: KCMLauncher.openSystemSettings("kcm_users")
+        onClicked: KCMUtils.KCMLauncher.openSystemSettings("kcm_users")
     }
 }
