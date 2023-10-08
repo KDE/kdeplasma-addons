@@ -19,11 +19,11 @@
 
 K_PLUGIN_CLASS(CubeEffectConfig)
 
-CubeEffectConfig::CubeEffectConfig(QWidget *parent, const QVariantList &args)
-    : KCModule(parent, args)
+CubeEffectConfig::CubeEffectConfig(QObject *parent, const KPluginMetaData &data)
+    : KCModule(parent, data)
 {
-    ui.setupUi(this);
-    addConfig(CubeConfig::self(), this);
+    ui.setupUi(widget());
+    addConfig(CubeConfig::self(), widget());
 
     auto actionCollection = new KActionCollection(this, QStringLiteral("kwin"));
     actionCollection->setComponentDisplayName(i18n("KWin"));
@@ -41,7 +41,7 @@ CubeEffectConfig::CubeEffectConfig(QWidget *parent, const QVariantList &args)
     connect(ui.shortcutsEditor, &KShortcutsEditor::keyChange, this, &CubeEffectConfig::markAsChanged);
 
     connect(ui.button_SelectSkyBox, &QPushButton::clicked, this, [this]() {
-        auto dialog = new QFileDialog(this);
+        auto dialog = new QFileDialog(widget());
         dialog->setFileMode(QFileDialog::ExistingFile);
         connect(dialog, &QFileDialog::fileSelected, ui.kcfg_SkyBox, &QLineEdit::setText);
         dialog->open();

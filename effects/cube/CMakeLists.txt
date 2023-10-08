@@ -2,7 +2,7 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-# add_subdirectory(kcm)
+add_subdirectory(kcm)
 
 kcoreaddons_add_plugin(kwin4_effect_cube INSTALL_NAMESPACE "kwin/effects/plugins/")
 target_sources(kwin4_effect_cube PRIVATE

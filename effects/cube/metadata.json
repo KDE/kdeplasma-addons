@@ -9,7 +9,6 @@
         "Category": "Window Management",
         "Description": "Arrange desktops in a virtual cube",
         "EnabledByDefault": false,
-        "Id": "cube",
         "License": "GPL",
         "Name": "Cube"
     },
