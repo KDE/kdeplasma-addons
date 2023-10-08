@@ -17,7 +17,6 @@
 
 #include <chrono>
 #include <cmath>
-#include <mutex>
 
 using namespace std::chrono_literals;
 
@@ -50,8 +49,12 @@ void ConverterRunner::init()
     setMinLetterCount(2);
     setMatchRegex(valueRegex);
 
+    converter = std::make_unique<KUnitConversion::Converter>();
+    updateCompatibleUnits();
+
     m_currencyUpdateTimer.setInterval(24h);
     connect(&m_currencyUpdateTimer, &QTimer::timeout, this, &ConverterRunner::updateCompatibleUnits);
+    m_currencyUpdateTimer.start();
 }
 
 ConverterRunner::~ConverterRunner() = default;
@@ -70,14 +73,6 @@ void ConverterRunner::match(RunnerContext &context)
     if (unitStrings.isEmpty() || unitStrings.at(0).isEmpty()) {
         return;
     }
-
-    // Initialize if not done already
-    static std::once_flag converterInitialized;
-    std::call_once(converterInitialized, [this] {
-        converter = std::make_unique<KUnitConversion::Converter>();
-        updateCompatibleUnits();
-        m_currencyUpdateTimer.start();
-    });
 
     // Check if unit is valid, otherwise check for the value in the compatibleUnits map
     QString inputUnitString = unitStrings.first().simplified();
@@ -226,7 +221,7 @@ QList<KUnitConversion::Unit> ConverterRunner::createResultUnits(QString &outputU
 void ConverterRunner::updateCompatibleUnits()
 {
     // Add all currency symbols to the map, if their ISO code is supported by backend
-    KUnitConversion::UnitCategory currencyCategory = converter->category(QStringLiteral("Currency"));
+    KUnitConversion::UnitCategory currencyCategory = converter->category(KUnitConversion::CurrencyCategory);
     if (auto updateJob = currencyCategory.syncConversionTable(); updateJob) {
         QEventLoop waitForFinshed;
         waitForFinshed.connect(updateJob, &KUnitConversion::UpdateJob::finished, &waitForFinshed, &QEventLoop::quit);
