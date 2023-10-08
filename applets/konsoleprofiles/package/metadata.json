@@ -85,7 +85,6 @@
         "Description[x-test]": "xxList and launch Konsole profilesxx",
         "Description[zh_CN]": "列出并启动 Konsole 配置方案",
         "Description[zh_TW]": "列出並啟動 Konsole 設定檔",
-        "EnabledByDefault": true,
         "FormFactors": [
             "desktop"
         ],

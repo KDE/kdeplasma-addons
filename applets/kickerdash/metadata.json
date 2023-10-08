@@ -84,7 +84,6 @@
         "Description[x-test]": "xxA fullscreen application launcherxx",
         "Description[zh_CN]": "全屏应用程序启动器",
         "Description[zh_TW]": "一個全螢幕應用程式啟動器",
-        "EnabledByDefault": true,
         "FormFactors": [
             "desktop"
         ],

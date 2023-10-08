@@ -84,7 +84,6 @@
         "Description[x-test]": "xxGroup Plasma widgets togetherxx",
         "Description[zh_CN]": "将多个 Plasma 挂件合并为一组",
         "Description[zh_TW]": "組合數個 Plasma 元件",
-        "EnabledByDefault": true,
         "Icon": "object-group",
         "Id": "org.kde.plasma.private.grouping",
         "License": "GPL-2.0+",

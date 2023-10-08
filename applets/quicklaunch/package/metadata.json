@@ -85,7 +85,6 @@
         "Description[x-test]": "xxLaunch your favourite Applicationsxx",
         "Description[zh_CN]": "显示并启动您固定的程序",
         "Description[zh_TW]": "啟動您最愛的應用程式",
-        "EnabledByDefault": true,
         "FormFactors": [
             "desktop"
         ],

@@ -167,7 +167,6 @@
         "Description[x-test]": "xxTime displayed in binary formatxx",
         "Description[zh_CN]": "以二进制格式显示时间",
         "Description[zh_TW]": "以二進位制顯示時間",
-        "EnabledByDefault": true,
         "Icon": "clock",
         "Id": "org.kde.plasma.binaryclock",
         "License": "GPL-2.0+",

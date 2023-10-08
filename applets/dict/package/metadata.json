@@ -86,7 +86,6 @@
         "Description[x-test]": "xxLook up the meaning of words and their translation into different languagesxx",
         "Description[zh_CN]": "查找单词的含义和翻译",
         "Description[zh_TW]": "查詢詞彙的意思以及它們在不同語言的翻譯",
-        "EnabledByDefault": true,
         "Icon": "accessories-dictionary",
         "Id": "org.kde.plasma_applet_dict",
         "License": "GPL-2.0+",
