@@ -19,20 +19,20 @@ Item {
     property bool animationEnabled: false
 
     function start() {
-        cameraController.rotateTo(KWinComponents.Workspace.currentVirtualDesktop);
+        cameraController.rotateTo(KWinComponents.Workspace.currentDesktop);
         root.animationEnabled = true;
         cameraController.state = "distant";
     }
 
     function stop() {
-        cameraController.rotateTo(KWinComponents.Workspace.currentVirtualDesktop);
+        cameraController.rotateTo(KWinComponents.Workspace.currentDesktop);
         cameraController.state = "close";
     }
 
     function switchToSelected() {
         const eulerRotation = effect.quaternionToEulerAngles(cameraController.rotation);
         const desktop = cube.desktopAt(eulerRotation.y);
-        KWinComponents.Workspace.currentVirtualDesktop = desktop;
+        KWinComponents.Workspace.currentDesktop = desktop;
         effect.deactivate();
     }
 

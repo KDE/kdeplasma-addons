@@ -25,7 +25,7 @@ Node {
     }
 
     function desktopAzimuth(desktop) {
-        return cube.angleTick * (model.index - 1);
+        return cube.angleTick * (desktop.x11DesktopNumber - 1);
     }
 
     Repeater3D {
