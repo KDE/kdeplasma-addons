@@ -128,6 +128,5 @@
         "Name[zh_CN]": "十五格拼图",
         "Name[zh_TW]": "十五數字推盤遊戲",
         "Website": "https://kde.org/plasma-desktop/"
-    },
-    "X-KDE-ParentApp": ""
+    }
 }

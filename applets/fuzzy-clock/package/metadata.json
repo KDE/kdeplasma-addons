@@ -129,7 +129,6 @@
         "Name[zh_TW]": "模糊時鐘",
         "Website": "https://kde.org/plasma-desktop"
     },
-    "X-KDE-ParentApp": "",
     "X-Plasma-Provides": [
         "org.kde.plasma.time",
         "org.kde.plasma.date"
