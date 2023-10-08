@@ -127,7 +127,6 @@
         "Name[x-test]": "xxNight Color Controlxx",
         "Name[zh_CN]": "夜间颜色控制",
         "Name[zh_TW]": "夜色控制",
-        "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop"
     },
     "X-KDE-Keywords": "kwin,window,manager,night,colors,redshift,eyes,night mode,colour,dark mode,dark,dim,sleep,eye strain,red,shift,orange,yellow,warm,screen tint,temperature,blue,light",

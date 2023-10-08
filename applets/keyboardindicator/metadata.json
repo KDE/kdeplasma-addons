@@ -129,7 +129,6 @@
         "Name[x-test]": "xxLock Keys Statusxx",
         "Name[zh_CN]": "锁定键状态",
         "Name[zh_TW]": "鎖定鍵狀態",
-        "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop/"
     },
     "Keywords": "CapsLock;NumLock;",

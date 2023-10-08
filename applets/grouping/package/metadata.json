@@ -127,7 +127,6 @@
         "Name[x-test]": "xxGrouping Plasmoidxx",
         "Name[zh_CN]": "Plasma 小程序分组",
         "Name[zh_TW]": "群組元件",
-        "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop/"
     },
     "NoDisplay": true,

@@ -131,7 +131,6 @@
         "Name[x-test]": "xxQuicklaunchxx",
         "Name[zh_CN]": "快速启动",
         "Name[zh_TW]": "快速啟動",
-        "Version": "1.0.0",
         "Website": "https://kde.org/plasma-desktop/"
     }
 }

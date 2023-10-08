@@ -126,8 +126,7 @@
         "Name[vi]": "Các phiên Kate",
         "Name[x-test]": "xxKate Sessionsxx",
         "Name[zh_CN]": "Kate 会话",
-        "Name[zh_TW]": "Kate 工作階段",
-        "Version": "1.0"
+        "Name[zh_TW]": "Kate 工作階段"
     },
     "X-Plasma-NotificationArea": "true"
 }

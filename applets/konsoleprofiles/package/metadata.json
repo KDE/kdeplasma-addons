@@ -131,7 +131,6 @@
         "Name[x-test]": "xxKonsole Profilesxx",
         "Name[zh_CN]": "Konsole 配置方案",
         "Name[zh_TW]": "Konsole 設定檔",
-        "Version": "0.1",
         "Website": "https://userbase.kde.org/Plasma"
     }
 }

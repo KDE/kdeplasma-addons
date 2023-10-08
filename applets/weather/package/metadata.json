@@ -127,7 +127,6 @@
         "Name[x-test]": "xxWeather Reportxx",
         "Name[zh_CN]": "天气报告",
         "Name[zh_TW]": "天氣預報",
-        "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop/"
     },
     "X-Plasma-NotificationArea": "true"

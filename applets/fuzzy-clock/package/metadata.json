@@ -127,7 +127,6 @@
         "Name[x-test]": "xxFuzzy Clockxx",
         "Name[zh_CN]": "粗略时钟",
         "Name[zh_TW]": "模糊時鐘",
-        "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop"
     },
     "X-KDE-ParentApp": "",

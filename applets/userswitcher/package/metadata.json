@@ -126,7 +126,6 @@
         "Name[x-test]": "xxUser Switcherxx",
         "Name[zh_CN]": "用户切换器",
         "Name[zh_TW]": "使用者切換",
-        "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop"
     }
 }
