@@ -139,6 +139,5 @@
         "image/svg+xml-compressed",
         "image/bmp"
     ],
-    "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-StandAloneApp": true
 }

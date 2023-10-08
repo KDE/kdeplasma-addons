@@ -128,6 +128,5 @@
         "Name[zh_TW]": "使用者切換",
         "Version": "1.0",
         "Website": "https://kde.org/plasma-desktop"
-    },
-    "X-Plasma-MainScript": "ui/main.qml"
+    }
 }

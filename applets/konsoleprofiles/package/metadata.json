@@ -133,6 +133,5 @@
         "Name[zh_TW]": "Konsole 設定檔",
         "Version": "0.1",
         "Website": "https://userbase.kde.org/Plasma"
-    },
-    "X-Plasma-MainScript": "ui/konsoleprofiles.qml"
+    }
 }

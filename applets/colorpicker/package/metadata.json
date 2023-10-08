@@ -133,6 +133,5 @@
         "Version": "2.0",
         "Website": "https://userbase.kde.org/Plasma/ColorPicker"
     },
-    "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-StandAloneApp": true
 }

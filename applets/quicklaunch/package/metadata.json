@@ -133,6 +133,5 @@
         "Name[zh_TW]": "快速啟動",
         "Version": "1.0.0",
         "Website": "https://kde.org/plasma-desktop/"
-    },
-    "X-Plasma-MainScript": "ui/main.qml"
+    }
 }

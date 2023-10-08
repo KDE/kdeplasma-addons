@@ -134,7 +134,6 @@
     },
     "Keywords": "CapsLock;NumLock;",
     "Keywords[x-test]": "xxCapsLockxx;xxNumLockxx;",
-    "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-NotificationArea": "true",
     "X-Plasma-NotificationAreaCategory": "Hardware"
 }

@@ -126,6 +126,5 @@
         "Name[zh_CN]": "大图标",
         "Name[zh_TW]": "大圖示",
         "Version": "1.0"
-    },
-    "X-Plasma-MainScript": "ui/main.qml"
+    }
 }
