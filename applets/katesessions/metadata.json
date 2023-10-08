@@ -129,6 +129,5 @@
         "Name[zh_TW]": "Kate 工作階段",
         "Version": "1.0"
     },
-    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-NotificationArea": "true"
 }

@@ -127,6 +127,5 @@
         "Name[zh_TW]": "大圖示",
         "Version": "1.0"
     },
-    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml"
 }

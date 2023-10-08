@@ -132,7 +132,6 @@
         "Name[zh_TW]": "應用程式儀表板",
         "Version": "1.0"
     },
-    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml",
     "X-Plasma-Provides": [
         "org.kde.plasma.launchermenu"

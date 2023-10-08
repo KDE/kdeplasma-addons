@@ -126,6 +126,5 @@
         "Name[zh_TW]": "封面切換",
         "Version": "1.0"
     },
-    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml"
 }

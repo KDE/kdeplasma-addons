@@ -131,7 +131,6 @@
         "Website": "https://kde.org/plasma-desktop/"
     },
     "NoDisplay": true,
-    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-ContainmentType": "CustomEmbedded",
     "X-Plasma-MainScript": "ui/main.qml"
 }

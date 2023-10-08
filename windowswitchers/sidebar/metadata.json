@@ -93,6 +93,5 @@
         "Name[zh_TW]": "側邊欄",
         "Version": "1.0"
     },
-    "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-MainScript": "ui/main.qml"
 }
