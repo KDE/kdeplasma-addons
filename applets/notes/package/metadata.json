@@ -134,6 +134,5 @@
     "X-Plasma-DropMimeTypes": [
         "text/plain",
         "text/richtext"
-    ],
-    "X-Plasma-StandAloneApp": true
+    ]
 }

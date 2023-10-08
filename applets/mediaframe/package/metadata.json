@@ -138,6 +138,5 @@
         "image/svg+xml",
         "image/svg+xml-compressed",
         "image/bmp"
-    ],
-    "X-Plasma-StandAloneApp": true
+    ]
 }

@@ -131,6 +131,5 @@
         "Website": "https://kde.org/plasma-desktop/"
     },
     "X-Plasma-NotificationArea": "true",
-    "X-Plasma-NotificationAreaCategory": "SystemServices",
-    "X-Plasma-StandAloneApp": true
+    "X-Plasma-NotificationAreaCategory": "SystemServices"
 }

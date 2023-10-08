@@ -130,6 +130,5 @@
         "Name[zh_TW]": "計時器",
         "Version": "2.0",
         "Website": "https://kde.org/plasma-desktop/"
-    },
-    "X-Plasma-StandAloneApp": true
+    }
 }

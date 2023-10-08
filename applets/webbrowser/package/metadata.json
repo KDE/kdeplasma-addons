@@ -129,6 +129,5 @@
         "Version": "0.2.0",
         "Website": "https://kde.org/plasma-desktop"
     },
-    "X-KDE-ParentApp": "",
-    "X-Plasma-StandAloneApp": true
+    "X-KDE-ParentApp": ""
 }
