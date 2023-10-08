@@ -9,4 +9,4 @@ target_link_libraries(nightcolorcontrolplugin PRIVATE
     Qt::DBus
     Qt::Qml
 )
-ecm_finalize_qml_module(nightcolorcontrolplugin DESTINATION ${KDE_INSTALL_QMLDIR})
+ecm_finalize_qml_module(nightcolorcontrolplugin)
