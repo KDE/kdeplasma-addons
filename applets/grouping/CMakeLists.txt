@@ -1,17 +1,16 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.private.grouping\")
 
 plasma_install_package(package org.kde.plasma.private.grouping)
-
-kcoreaddons_add_plugin(org.kde.plasma.private.grouping SOURCES groupingcontainment.cpp ${groupingplasmoid_SRCS} INSTALL_NAMESPACE "plasma/applets")
-
+kcoreaddons_add_plugin(org.kde.plasma.private.grouping SOURCES groupingcontainment.cpp INSTALL_NAMESPACE "plasma/applets")
 target_link_libraries(org.kde.plasma.private.grouping
-                      Qt::Gui
-                      Qt::Quick
-                      Qt::DBus
-                      Qt::Widgets
-                      KF6::Plasma
-                      KF6::Plasma5Support
-                      KF6::XmlGui
-                      KF6::I18n)
+    Qt::Gui
+    Qt::Quick
+    Qt::DBus
+    Qt::Widgets
+    KF6::Plasma
+    KF6::Plasma5Support
+    KF6::XmlGui
+    KF6::I18n
+)
 
 add_subdirectory(container)

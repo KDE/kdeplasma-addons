@@ -13,11 +13,11 @@ ecm_qt_declare_logging_category(groupedappletscontainer_SRCS
 )
 
 kcoreaddons_add_plugin(org.kde.plasma.grouping SOURCES ${groupedappletscontainer_SRCS} INSTALL_NAMESPACE "plasma/applets")
-
 target_link_libraries(org.kde.plasma.grouping
-                      Qt::Gui
-                      Qt::Quick
-                      KF6::Plasma
-                      KF6::PlasmaQuick
-                      KF6::XmlGui
-                      KF6::I18n)
+    Qt::Gui
+    Qt::Quick
+    KF6::Plasma
+    KF6::PlasmaQuick
+    KF6::XmlGui
+    KF6::I18n
+)

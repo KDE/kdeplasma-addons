@@ -4,21 +4,21 @@ target_link_libraries(plasma_wallpaper_potdplugin_debug
     Qt::Core
 )
 ecm_qt_declare_logging_category(plasma_wallpaper_potdplugin_debug
-                                HEADER debug.h
-                                IDENTIFIER WALLPAPERPOTD
-                                CATEGORY_NAME kde.wallpapers.potd
-                                DEFAULT_SEVERITY Info
-                                DESCRIPTION "Wallpaper plugins"
-                                EXPORT KDEPLASMAADDONS
-                            )
+    HEADER debug.h
+    IDENTIFIER WALLPAPERPOTD
+    CATEGORY_NAME kde.wallpapers.potd
+    DEFAULT_SEVERITY Info
+    DESCRIPTION "Wallpaper plugins"
+    EXPORT KDEPLASMAADDONS
+)
 
 ecm_add_qml_module(plasma_wallpaper_potdplugin URI org.kde.plasma.wallpapers.potd)
 target_sources(plasma_wallpaper_potdplugin PRIVATE
-	cachedprovider.cpp
-	potdbackend.cpp
-	potdengine.cpp
-	potdprovidermodel.cpp
-	potdplugin.cpp
+    cachedprovider.cpp
+    potdbackend.cpp
+    potdengine.cpp
+    potdprovidermodel.cpp
+    potdplugin.cpp
 )
 target_link_libraries(plasma_wallpaper_potdplugin PRIVATE plasmapotdprovidercore
     KF6::I18n
@@ -35,12 +35,7 @@ ecm_finalize_qml_module(plasma_wallpaper_potdplugin)
 set(POTDPROVIDER_VERSION 2.0.0)
 set(POTDPROVIDER_VERSION_MAJOR 2)
 
-set(potd_provider_core_SRCS
-	potdprovider.cpp
-	${CMAKE_CURRENT_BINARY_DIR}/plasma_potd_export.h
-)
-
-add_library(plasmapotdprovidercore SHARED ${potd_provider_core_SRCS})
+add_library(plasmapotdprovidercore SHARED potdprovider.cpp)
 add_library(Plasma::PotdProvider ALIAS plasmapotdprovidercore)
 set_target_properties(plasmapotdprovidercore PROPERTIES
     VERSION ${POTDPROVIDER_VERSION}
