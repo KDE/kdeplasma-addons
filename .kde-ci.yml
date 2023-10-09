@@ -13,6 +13,7 @@ Dependencies:
     'frameworks/kconfig': '@latest-kf6'
     'frameworks/kconfigwidgets': '@latest-kf6'
     'frameworks/kcoreaddons': '@latest-kf6'
+    'frameworks/kglobalaccel': '@latest-kf6'
     'frameworks/kholidays': '@latest-kf6'
     'frameworks/ki18n': '@latest-kf6'
     'frameworks/kio': '@latest-kf6'

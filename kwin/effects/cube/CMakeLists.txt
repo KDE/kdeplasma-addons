@@ -2,5 +2,5 @@
 #
 # SPDX-License-Identifier: BSD-3-Clause
 
-add_subdirectory(effects)
-add_subdirectory(windowswitchers)
+add_subdirectory(kcm)
+kpackage_install_package(package cube effects kwin)
