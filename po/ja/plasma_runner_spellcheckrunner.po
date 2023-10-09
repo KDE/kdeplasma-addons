@@ -79,6 +79,3 @@ msgstr "トリガーワード(&T):"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr "辞書を設定…"
-
-#~ msgid "No dictionary found, please install hspell"
-#~ msgstr "辞書が見つかりません、hspell をインストールしてください"

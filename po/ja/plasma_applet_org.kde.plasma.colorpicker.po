@@ -106,7 +106,7 @@ msgstr "履歴をクリア"
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "クリップボードにコピー"
 
 #: package/contents/ui/main.qml:159
 #, fuzzy, kde-format

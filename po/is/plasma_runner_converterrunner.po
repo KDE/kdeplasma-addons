@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-26 01:47+0000\n"
+"POT-Creation-Date: 2023-10-09 01:46+0000\n"
 "PO-Revision-Date: 2011-03-24 09:47+0000\n"
 "Last-Translator: \n"
 "Language-Team:  <en@li.org>\n"
@@ -20,19 +20,19 @@ msgstr ""
 "\n"
 "\n"
 
-#: converterrunner.cpp:30
+#: converterrunner.cpp:29
 #, kde-format
 msgid "Copy unit and number"
 msgstr ""
 
-#: converterrunner.cpp:35
+#: converterrunner.cpp:34
 #, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
 "unit.You can use the Unit converter applet to find all available units."
 msgstr ""
 
-#: converterrunner.cpp:42
+#: converterrunner.cpp:41
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"

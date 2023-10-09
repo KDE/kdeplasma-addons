@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-26 01:47+0000\n"
+"POT-Creation-Date: 2023-10-09 01:46+0000\n"
 "PO-Revision-Date: 2009-01-11 17:03+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <kde-i18n-doc@kde.org>\n"
@@ -19,19 +19,19 @@ msgstr ""
 "X-Poedit-Language: Kurdish\n"
 "X-Poedit-SourceCharset: utf8\n"
 
-#: converterrunner.cpp:30
+#: converterrunner.cpp:29
 #, kde-format
 msgid "Copy unit and number"
 msgstr ""
 
-#: converterrunner.cpp:35
+#: converterrunner.cpp:34
 #, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
 "unit.You can use the Unit converter applet to find all available units."
 msgstr ""
 
-#: converterrunner.cpp:42
+#: converterrunner.cpp:41
 #, fuzzy, kde-format
 #| msgid "pints"
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
