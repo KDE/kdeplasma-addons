@@ -234,6 +234,9 @@ PlasmoidItem {
         padding: 0
         Layout.minimumWidth: main.switchWidth
         Layout.minimumHeight: main.switchHeight
+        Layout.preferredWidth: main.switchWidth * 2
+        Layout.preferredHeight: main.switchHeight * 2
+
         focus: main.expanded
 
         contentItem: ColumnLayout {
