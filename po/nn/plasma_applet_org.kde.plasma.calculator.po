@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:41+0000\n"
+"POT-Creation-Date: 2023-10-11 02:07+0000\n"
 "PO-Revision-Date: 2023-03-04 15:52+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -28,49 +28,49 @@ msgctxt ""
 msgid "undef"
 msgstr "udef."
 
-#: package/contents/ui/calculator.qml:329
+#: package/contents/ui/calculator.qml:332
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
 msgstr "Resultat"
 
-#: package/contents/ui/calculator.qml:358
+#: package/contents/ui/calculator.qml:361
 #, kde-format
 msgctxt "Text of the clear button"
 msgid "C"
 msgstr "C"
 
-#: package/contents/ui/calculator.qml:371
+#: package/contents/ui/calculator.qml:374
 #, kde-format
 msgctxt "Text of the division button"
 msgid "÷"
 msgstr ":"
 
-#: package/contents/ui/calculator.qml:384
+#: package/contents/ui/calculator.qml:387
 #, kde-format
 msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr "×"
 
-#: package/contents/ui/calculator.qml:396
+#: package/contents/ui/calculator.qml:399
 #, kde-format
 msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr "AC"
 
-#: package/contents/ui/calculator.qml:448
+#: package/contents/ui/calculator.qml:451
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr "–"
 
-#: package/contents/ui/calculator.qml:500
+#: package/contents/ui/calculator.qml:503
 #, kde-format
 msgctxt "Text of the plus button"
 msgid "+"
 msgstr "+"
 
-#: package/contents/ui/calculator.qml:551
+#: package/contents/ui/calculator.qml:554
 #, kde-format
 msgctxt "Text of the equals button"
 msgid "="

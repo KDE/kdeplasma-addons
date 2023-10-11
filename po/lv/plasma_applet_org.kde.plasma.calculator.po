@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-05 01:41+0000\n"
+"POT-Creation-Date: 2023-10-11 02:07+0000\n"
 "PO-Revision-Date: 2011-08-04 11:23+0300\n"
 "Last-Translator: Maris Nartiss <maris.kde@gmail.com>\n"
 "Language-Team: Latvian\n"
@@ -28,13 +28,13 @@ msgctxt ""
 msgid "undef"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:329
+#: package/contents/ui/calculator.qml:332
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:358
+#: package/contents/ui/calculator.qml:361
 #, fuzzy, kde-format
 #| msgctxt "The C button of the calculator"
 #| msgid "C"
@@ -42,7 +42,7 @@ msgctxt "Text of the clear button"
 msgid "C"
 msgstr "C"
 
-#: package/contents/ui/calculator.qml:371
+#: package/contents/ui/calculator.qml:374
 #, fuzzy, kde-format
 #| msgctxt "The ÷ button of the calculator"
 #| msgid "÷"
@@ -50,7 +50,7 @@ msgctxt "Text of the division button"
 msgid "÷"
 msgstr "÷"
 
-#: package/contents/ui/calculator.qml:384
+#: package/contents/ui/calculator.qml:387
 #, fuzzy, kde-format
 #| msgctxt "The × button of the calculator"
 #| msgid "×"
@@ -58,7 +58,7 @@ msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr "×"
 
-#: package/contents/ui/calculator.qml:396
+#: package/contents/ui/calculator.qml:399
 #, fuzzy, kde-format
 #| msgctxt "The AC button of the calculator"
 #| msgid "AC"
@@ -66,13 +66,13 @@ msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr "AC"
 
-#: package/contents/ui/calculator.qml:448
+#: package/contents/ui/calculator.qml:451
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:500
+#: package/contents/ui/calculator.qml:503
 #, fuzzy, kde-format
 #| msgctxt "The + button of the calculator"
 #| msgid "+"
@@ -80,7 +80,7 @@ msgctxt "Text of the plus button"
 msgid "+"
 msgstr "+"
 
-#: package/contents/ui/calculator.qml:551
+#: package/contents/ui/calculator.qml:554
 #, fuzzy, kde-format
 #| msgctxt "The = button of the calculator"
 #| msgid "="
