@@ -28,7 +28,7 @@ msgstr "Xeral"
 #, kde-format
 msgctxt "@title:label"
 msgid "Username style:"
-msgstr "Estilo dos nomes de usuario:"
+msgstr "Estilo dos nomes de usuaria:"
 
 #: package/contents/ui/configGeneral.qml:30
 #, kde-format
@@ -40,7 +40,7 @@ msgstr "Nome completo (se está dispoñíbel)"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Login username"
-msgstr "Nome de usuario de acceso"
+msgstr "Nome de usuaria de acceso"
 
 #: package/contents/ui/configGeneral.qml:55
 #, kde-format
