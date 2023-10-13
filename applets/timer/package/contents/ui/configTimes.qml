@@ -4,7 +4,7 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.5
+import QtQuick
 import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
 import org.kde.kirigami 2.20 as Kirigami
@@ -59,10 +59,8 @@ ColumnLayout {
             model: timeListModel
             spacing: parent.spacing
             clip: true
-            delegate: Kirigami.DelegateRecycler {
-                width: timeListView.width
-                sourceComponent: timeEditDelegate
-            }
+            reuseItems: true
+            delegate: timeEditDelegate
             add: Transition {
                 NumberAnimation { properties: "y"; duration: Kirigami.Units.longDuration }
             }
@@ -93,6 +91,7 @@ ColumnLayout {
         id: timeEditDelegate
         Kirigami.SwipeListItem {
             id: timeEditItem
+            width: timeListView.width
             Row {
                 spacing: Kirigami.Units.gridUnit
                 Kirigami.ListItemDragHandle {
