@@ -133,6 +133,5 @@
     },
     "Keywords": "CapsLock;NumLock;",
     "Keywords[x-test]": "xxCapsLockxx;xxNumLockxx;",
-    "X-Plasma-NotificationArea": "true",
     "X-Plasma-NotificationAreaCategory": "Hardware"
 }
