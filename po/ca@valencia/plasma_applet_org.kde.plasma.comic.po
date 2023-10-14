@@ -234,7 +234,7 @@ msgstr[1] "minuts"
 #, kde-format
 msgctxt "@title:window"
 msgid "Go to Strip"
-msgstr "Ves a la tira"
+msgstr "Ves fins a la tira"
 
 #: stripselector.cpp:39
 #, kde-format
