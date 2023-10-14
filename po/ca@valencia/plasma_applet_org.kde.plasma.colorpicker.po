@@ -101,7 +101,7 @@ msgstr "Veure l'historial"
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
-msgstr "Copia al porta-retalls"
+msgstr "Copia a dins del porta-retalls"
 
 #: package/contents/ui/main.qml:155
 #, kde-format
