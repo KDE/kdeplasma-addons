@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-11 02:07+0000\n"
+"POT-Creation-Date: 2023-10-15 01:40+0000\n"
 "PO-Revision-Date: 2023-01-21 18:43+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/ui/calculator.qml:227
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgctxt ""
 "Abbreviation for result (undefined) of division by zero, max. six to nine "
@@ -34,49 +34,49 @@ msgctxt ""
 msgid "undef"
 msgstr ""
 
-#: package/contents/ui/calculator.qml:332
+#: package/contents/ui/main.qml:332
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
 msgstr "Результат"
 
-#: package/contents/ui/calculator.qml:361
+#: package/contents/ui/main.qml:361
 #, kde-format
 msgctxt "Text of the clear button"
 msgid "C"
 msgstr "C"
 
-#: package/contents/ui/calculator.qml:374
+#: package/contents/ui/main.qml:374
 #, kde-format
 msgctxt "Text of the division button"
 msgid "÷"
 msgstr "÷"
 
-#: package/contents/ui/calculator.qml:387
+#: package/contents/ui/main.qml:387
 #, kde-format
 msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr "×"
 
-#: package/contents/ui/calculator.qml:399
+#: package/contents/ui/main.qml:399
 #, kde-format
 msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr "Сброс"
 
-#: package/contents/ui/calculator.qml:451
+#: package/contents/ui/main.qml:451
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/calculator.qml:503
+#: package/contents/ui/main.qml:503
 #, kde-format
 msgctxt "Text of the plus button"
 msgid "+"
 msgstr "+"
 
-#: package/contents/ui/calculator.qml:554
+#: package/contents/ui/main.qml:554
 #, kde-format
 msgctxt "Text of the equals button"
 msgid "="
