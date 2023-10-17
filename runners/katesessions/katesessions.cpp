@@ -32,8 +32,6 @@ KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData, con
 
     // Initialize watchers and sessions
     setTriggerWords({m_triggerWord});
-
-    m_model.setAppName(m_triggerWord);
 }
 
 void KateSessions::match(RunnerContext &context)
@@ -53,10 +51,10 @@ void KateSessions::match(RunnerContext &context)
     QList<QueryMatch> matches;
     int maxScore = 0;
 
-    for (int i = 0, count = m_model.rowCount(); i < count; ++i) {
+    for (int i = 0, count = m_model->rowCount(); i < count; ++i) {
         // Does the query match exactly?
         // no query = perfect match => list everything
-        QString session = m_model.index(i).data(ProfilesModel::NameRole).toString();
+        QString session = m_model->index(i).data(ProfilesModel::NameRole).toString();
         if (listAll || session.compare(term, Qt::CaseInsensitive) == 0) {
             QueryMatch match(this);
             match.setType(QueryMatch::ExactMatch);
@@ -95,7 +93,14 @@ void KateSessions::run(const RunnerContext &context, const QueryMatch &match)
 {
     Q_UNUSED(context)
 
-    m_model.openProfile(match.data().toString());
+    m_model->openProfile(match.data().toString());
+}
+
+void KateSessions::init()
+{
+    // Only create this in the correct thread. Inside we use KDirWatch which is thread sensitive.
+    m_model = new ProfilesModel(this);
+    m_model->setAppName(m_triggerWord);
 }
 
 #include "katesessions.moc"

@@ -27,16 +27,14 @@ KonsoleProfiles::KonsoleProfiles(QObject *parent, const KPluginMetaData &metaDat
     addSyntax(s);
     addSyntax(RunnerSyntax(QStringLiteral("konsole"), i18n("Lists all the Konsole profiles in your account.")));
     setMinLetterCount(3);
-
-    m_model.setAppName(m_triggerWord);
 }
 
 void KonsoleProfiles::match(RunnerContext &context)
 {
     QString term = context.query();
     term = term.remove(m_triggerWord).simplified();
-    for (int i = 0, count = m_model.rowCount(); i < count; ++i) {
-        QModelIndex idx = m_model.index(i);
+    for (int i = 0, count = m_model->rowCount(); i < count; ++i) {
+        QModelIndex idx = m_model->index(i);
         const QString name = idx.data(ProfilesModel::NameRole).toString();
         if (name.contains(term, Qt::CaseInsensitive)) {
             const QString profileIdentifier = idx.data(ProfilesModel::ProfileIdentifierRole).toString();
@@ -55,7 +53,14 @@ void KonsoleProfiles::run(const RunnerContext &context, const QueryMatch &match)
 {
     Q_UNUSED(context)
     const QString profile = match.data().toString();
-    m_model.openProfile(profile);
+    m_model->openProfile(profile);
+}
+
+void KonsoleProfiles::init()
+{
+    // Only create this in the correct thread. Inside we use KDirWatch which is thread sensitive.
+    m_model = new ProfilesModel(this);
+    m_model->setAppName(m_triggerWord);
 }
 
 K_PLUGIN_CLASS_WITH_JSON(KonsoleProfiles, "plasma-runner-konsoleprofiles.json")

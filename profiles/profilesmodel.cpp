@@ -26,6 +26,8 @@ ProfilesModel::ProfilesModel(QObject *parent)
 
 void ProfilesModel::init()
 {
+    // NOTE: KDirWatch is very thread sensitive and must be initialized on the correct thread
+    //   i.e. it cannot be movedToThread at the time of writing
     m_dirWatch = new KDirWatch(this);
     const QStringList dataLocations = QStandardPaths::standardLocations(QStandardPaths::GenericDataLocation);
     for (const QString &dataDir : dataLocations) {
