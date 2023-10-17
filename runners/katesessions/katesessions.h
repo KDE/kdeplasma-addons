@@ -21,12 +21,13 @@ class KateSessions : public AbstractRunner
 public:
     explicit KateSessions(QObject *parent, const KPluginMetaData &metaData);
 
+    void init() override;
     void match(RunnerContext &context) override;
     void run(const RunnerContext &context, const QueryMatch &match) override;
 
 private:
     const QLatin1String m_triggerWord = QLatin1String("kate");
-    ProfilesModel m_model;
+    ProfilesModel *m_model = nullptr; // WARNING: must be on the correct thread. cannot live on stack!
 };
 
 #endif

@@ -20,11 +20,12 @@ class KonsoleProfiles : public AbstractRunner
 public:
     explicit KonsoleProfiles(QObject *parent, const KPluginMetaData &metaData);
 
+    void init() override;
     void match(RunnerContext &context) override;
     void run(const RunnerContext &context, const QueryMatch &match) override;
 
 private:
-    ProfilesModel m_model;
+    ProfilesModel *m_model = nullptr; // WARNING: must be on the correct thread. cannot live on stack!
     const QLatin1String m_triggerWord = QLatin1String("konsole");
 };
 
