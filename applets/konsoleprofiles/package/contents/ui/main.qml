@@ -67,7 +67,8 @@ PlasmoidItem {
             PlasmaComponents3.Label {
                 id: header
                 text: i18nc("@title", "Konsole Profiles")
-                horizontalAlignment: Text.AlignHCenter | Text.AlignVCenter
+                horizontalAlignment: Text.AlignHCenter
+                verticalAlignment: Text.AlignVCenter
                 width: parent.width - appIcon.width * 2
                 height: parent.height
             }
@@ -79,7 +80,6 @@ PlasmoidItem {
             anchors { left: headerRow.left; right: headerRow.right; top: headerRow.bottom }
             imagePath: "widgets/line"
             elementId: "horizontal-line"
-            height: lineSvg.elementSize("horizontal-line").height
         }
 
         Text {
