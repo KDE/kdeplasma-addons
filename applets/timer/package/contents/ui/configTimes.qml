@@ -91,7 +91,7 @@ ColumnLayout {
         Kirigami.SwipeListItem {
             id: timeEditItem
             width: timeListView.width
-            Row {
+            contentItem: Row {
                 spacing: Kirigami.Units.gridUnit
                 Kirigami.ListItemDragHandle {
                     anchors.verticalCenter: parent.verticalCenter

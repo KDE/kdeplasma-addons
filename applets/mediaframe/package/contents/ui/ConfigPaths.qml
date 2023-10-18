@@ -108,7 +108,7 @@ ColumnLayout {
 
                 width: pathsList.width
 
-                QQC2.Label {
+                contentItem: QQC2.Label {
                     Layout.fillWidth: true
                     text: String(model.path).replace("file://", "")
                 }
