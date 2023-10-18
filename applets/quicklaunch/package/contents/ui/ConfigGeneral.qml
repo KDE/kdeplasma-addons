@@ -86,7 +86,7 @@ Kirigami.FormLayout {
 
             rightActions: [
                 Kirigami.Action {
-                    iconName: "edit-clear"
+                    icon.name: "edit-clear"
                     visible: title.text.length !== 0
                     onTriggered: title.text = "";
                 }
