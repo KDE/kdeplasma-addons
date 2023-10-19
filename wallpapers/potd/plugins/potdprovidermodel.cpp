@@ -75,7 +75,7 @@ bool PotdProviderModel::isNSFW(int row)
 
 void PotdProviderModel::loadPluginMetaData()
 {
-    const QVector<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("potd"));
+    const QList<KPluginMetaData> plugins = KPluginMetaData::findPlugins(QStringLiteral("potd"));
 
     beginResetModel();
 

@@ -197,7 +197,7 @@ void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStat
     // format class needed for GiB/MiB/KiB formatting
     KFormat fmt;
     int maxQuota = 0;
-    QVector<QuotaItem> items;
+    QList<QuotaItem> items;
 
     // assumption: Filesystem starts with slash
     for (const QString &line : lines) {

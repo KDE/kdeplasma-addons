@@ -11,8 +11,8 @@
 #include <Plasma5Support/DataEngineConsumer>
 
 #include <QAbstractListModel>
+#include <QList>
 #include <QMap>
-#include <QVector>
 
 class WeatherValidator : public QObject
 {
@@ -98,12 +98,12 @@ private:
     void completeSearch();
 
 private:
-    QVector<LocationItem> m_locations;
+    QList<LocationItem> m_locations;
 
     bool m_validatingInput;
     QString m_searchString;
     int m_checkedInCount;
-    QVector<WeatherValidator *> m_validators;
+    QList<WeatherValidator *> m_validators;
 
     QMap<QString, QString> m_serviceCodeToDisplayName;
 };

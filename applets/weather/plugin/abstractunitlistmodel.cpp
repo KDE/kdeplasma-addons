@@ -6,7 +6,7 @@
 
 #include "abstractunitlistmodel.h"
 
-AbstractUnitListModel::AbstractUnitListModel(const QVector<UnitItem> &items, QObject *parent)
+AbstractUnitListModel::AbstractUnitListModel(const QList<UnitItem> &items, QObject *parent)
     : QAbstractListModel(parent)
     , m_items(items)
 {

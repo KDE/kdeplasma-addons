@@ -7,7 +7,7 @@
 #define PLASMA_QUOTA_LIST_MODEL_H
 
 #include <QAbstractListModel>
-#include <QVector>
+#include <QList>
 
 #include "QuotaItem.h"
 
@@ -57,7 +57,7 @@ public: // additional helper functions
      * Merges @p items into the existing quota item list. Old items that are
      * not available in @p items anymore are deleted.
      */
-    void updateItems(const QVector<QuotaItem> &items);
+    void updateItems(const QList<QuotaItem> &items);
 
     /**
      * Clears all items in the model.
@@ -65,7 +65,7 @@ public: // additional helper functions
     void clear();
 
 private:
-    QVector<QuotaItem> m_items;
+    QList<QuotaItem> m_items;
 };
 
 #endif // PLASMA_QUOTA_LIST_MODEL_H

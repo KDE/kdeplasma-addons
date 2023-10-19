@@ -7,9 +7,9 @@
 #ifndef FIFTEENIMAGEPROVIDER_H
 #define FIFTEENIMAGEPROVIDER_H
 
+#include <QList>
 #include <QQuickImageProvider>
 #include <QString>
-#include <QVector>
 
 class FifteenImageProvider : public QQuickImageProvider
 {
@@ -28,7 +28,7 @@ private:
     int m_pieceWidth;
     int m_pieceHeight;
 
-    QVector<QPixmap> m_pixmaps;
+    QList<QPixmap> m_pixmaps;
 };
 
 #endif

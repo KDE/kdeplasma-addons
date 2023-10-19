@@ -13,13 +13,13 @@
 
 static QObject *temperatureUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
 {
-    QVector<UnitItem> items{UnitItem(KUnitConversion::Celsius), UnitItem(KUnitConversion::Fahrenheit), UnitItem(KUnitConversion::Kelvin)};
+    QList<UnitItem> items{UnitItem(KUnitConversion::Celsius), UnitItem(KUnitConversion::Fahrenheit), UnitItem(KUnitConversion::Kelvin)};
     return new AbstractUnitListModel(items, engine);
 }
 
 static QObject *pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
 {
-    const QVector<UnitItem> items{
+    const QList<UnitItem> items{
         UnitItem(KUnitConversion::Hectopascal),
         UnitItem(KUnitConversion::Kilopascal),
         UnitItem(KUnitConversion::Pascal),
@@ -33,7 +33,7 @@ static QObject *pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, Q
 
 static QObject *windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
 {
-    const QVector<UnitItem> items{
+    const QList<UnitItem> items{
         UnitItem(KUnitConversion::MeterPerSecond),
         UnitItem(KUnitConversion::KilometerPerHour),
         UnitItem(KUnitConversion::MilePerHour),
@@ -46,7 +46,7 @@ static QObject *windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, 
 
 static QObject *visibilityUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
 {
-    QVector<UnitItem> items{UnitItem(KUnitConversion::Kilometer), UnitItem(KUnitConversion::Mile)};
+    QList<UnitItem> items{UnitItem(KUnitConversion::Kilometer), UnitItem(KUnitConversion::Mile)};
 
     return new AbstractUnitListModel(items, engine);
 }

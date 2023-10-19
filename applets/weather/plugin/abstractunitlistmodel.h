@@ -12,7 +12,7 @@
 #include <KUnitConversion/Unit>
 
 #include <QAbstractListModel>
-#include <QVector>
+#include <QList>
 
 class UnitItem
 {
@@ -38,7 +38,7 @@ class AbstractUnitListModel : public QAbstractListModel
     Q_OBJECT
 
 public:
-    explicit AbstractUnitListModel(const QVector<UnitItem> &items, QObject *parent = nullptr);
+    explicit AbstractUnitListModel(const QList<UnitItem> &items, QObject *parent = nullptr);
 
 public: // QAbstractListModel API
     QVariant data(const QModelIndex &index, int role) const override;
@@ -49,7 +49,7 @@ public:
     Q_INVOKABLE int unitIdForListIndex(int listIndex) const;
 
 private:
-    const QVector<UnitItem> m_items;
+    const QList<UnitItem> m_items;
 };
 
 #endif // ABSTRACTUNITLISTMODEL_H

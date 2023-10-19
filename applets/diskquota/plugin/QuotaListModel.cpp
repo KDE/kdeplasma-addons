@@ -135,7 +135,7 @@ void QuotaListModel::clear()
 
 namespace
 {
-QStringList mountPoints(const QVector<QuotaItem> &items)
+QStringList mountPoints(const QList<QuotaItem> &items)
 {
     QStringList list;
     for (auto &item : items) {
@@ -144,7 +144,7 @@ QStringList mountPoints(const QVector<QuotaItem> &items)
     return list;
 }
 
-int indexOfMountPoint(const QString &mountPoint, const QVector<QuotaItem> &items)
+int indexOfMountPoint(const QString &mountPoint, const QList<QuotaItem> &items)
 {
     for (int i = 0; i < items.size(); ++i) {
         if (mountPoint == items[i].mountPoint()) {
@@ -155,7 +155,7 @@ int indexOfMountPoint(const QString &mountPoint, const QVector<QuotaItem> &items
 }
 }
 
-void QuotaListModel::updateItems(const QVector<QuotaItem> &items)
+void QuotaListModel::updateItems(const QList<QuotaItem> &items)
 {
     QStringList unusedMountPoints = mountPoints(m_items);
 
