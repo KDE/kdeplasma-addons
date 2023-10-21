@@ -17,7 +17,8 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Zanata 3.9.6\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
+"n % 10 == 0) ? 2 : 3));\n"
 
 #: package/contents/config/config.qml:13
 #, fuzzy, kde-format
@@ -61,6 +62,8 @@ msgid "%1s"
 msgid_plural "%1s"
 msgstr[0] ""
 msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
 
 #: package/contents/ui/configAdvanced.qml:22
 #, kde-format
@@ -176,11 +179,13 @@ msgid "%1 not running"
 msgstr "%1 לא פועל"
 
 #: package/contents/ui/main.qml:72
-#, kde-format
+#, fuzzy, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "שניה אחת נותרה"
 msgstr[1] "נותרו %1 שניות"
+msgstr[2] ""
+msgstr[3] ""
 
 #: package/contents/ui/main.qml:72
 #, kde-format
