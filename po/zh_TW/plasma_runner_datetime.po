@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-06-01 02:11+0000\n"
-"PO-Revision-Date: 2023-03-19 09:11+0900\n"
+"PO-Revision-Date: 2023-10-21 17:06+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
-"Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "dot tw>\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.11.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: datetimerunner.cpp:23
@@ -32,13 +32,13 @@ msgid "time"
 msgstr "時間"
 
 #: datetimerunner.cpp:28
-#, kde-format
+#, fuzzy, kde-format
 msgctxt ""
 "words to specify a time in a time zone or to convert a time to a time zone, "
 "e.g. 'current time in Berlin' or '18:00 UTC to CET', separated by '|' (will "
 "be used as a regex)"
 msgid "to|in|as|at"
-msgstr ""
+msgstr "to|in|as|at"
 
 #: datetimerunner.cpp:36
 #, kde-format
@@ -68,11 +68,12 @@ msgid ""
 "Displays the current time and difference to system time in a given timezone"
 msgstr "顯示指定時區下目前的時間以及與系統時間的差異"
 
+# 我不確定連 in 都翻成中文之後 KRunner 支不支援，所以還是用 "in" -- Kisaragi Hiu 2023-10-21
 #: datetimerunner.cpp:42
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid "<time> <timezone> in <timezone>"
-msgstr ""
+msgstr "<時間> <時區> in <時區>"
 
 #: datetimerunner.cpp:43
 #, kde-format
@@ -81,6 +82,8 @@ msgid ""
 "one time zone is given, the other will be the system time zone. If no date "
 "or time is given, it will be the current date and time."
 msgstr ""
+"將所提供時間從第一個時區轉換成第二個時區。如果只提供一個時區，將會轉換成系統"
+"時區。若未提供日期或時間，預設會使用目前的日期或時間。"
 
 #: datetimerunner.cpp:60
 #, kde-format
