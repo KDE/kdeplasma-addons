@@ -8,7 +8,6 @@
 #pragma once
 
 #include "abstractcalendarprovider.h"
-#include "icucalendar_p.h"
 
 /**
  * @short An alternate calendar provider for Chinese calendar system.
@@ -20,10 +19,7 @@ class ChineseCalendarProvider : public AbstractCalendarProvider
     Q_OBJECT
 
 public:
-    explicit ChineseCalendarProvider(QObject *parent,
-                                     CalendarSystem::System calendarSystem,
-                                     std::vector<QDate> &&alternateDates,
-                                     std::vector<QDate> &&sublabelDates);
+    explicit ChineseCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem, const QDate &startDate, const QDate &endDate);
     ~ChineseCalendarProvider() override;
 
     CalendarEvents::CalendarEventsPlugin::SubLabel subLabel(const QDate &date) const override;

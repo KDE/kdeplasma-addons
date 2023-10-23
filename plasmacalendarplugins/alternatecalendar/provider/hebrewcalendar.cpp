@@ -104,11 +104,8 @@ CalendarEvents::CalendarEventsPlugin::SubLabel HebrewCalendarProviderPrivate::su
     return sublabel;
 }
 
-HebrewCalendarProvider::HebrewCalendarProvider(QObject *parent,
-                                               CalendarSystem::System calendarSystem,
-                                               std::vector<QDate> &&alternateDates,
-                                               std::vector<QDate> &&sublabelDates)
-    : AbstractCalendarProvider(parent, calendarSystem, std::move(alternateDates), std::move(sublabelDates))
+HebrewCalendarProvider::HebrewCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem, const QDate &startDate, const QDate &endDate)
+    : AbstractCalendarProvider(parent, calendarSystem, startDate, endDate)
     , d(std::make_unique<HebrewCalendarProviderPrivate>())
 {
     Q_ASSERT(m_calendarSystem == CalendarSystem::Hebrew);

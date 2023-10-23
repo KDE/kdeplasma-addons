@@ -133,10 +133,10 @@ CalendarEvents::CalendarEventsPlugin::SubLabel IslamicCalendarProviderPrivate::s
 
 IslamicCalendarProvider::IslamicCalendarProvider(QObject *parent,
                                                  CalendarSystem::System calendarSystem,
-                                                 std::vector<QDate> &&alternateDates,
-                                                 std::vector<QDate> &&sublabelDates,
+                                                 const QDate &startDate,
+                                                 const QDate &endDate,
                                                  int dateOffset)
-    : AbstractCalendarProvider(parent, calendarSystem, std::move(alternateDates), std::move(sublabelDates), dateOffset)
+    : AbstractCalendarProvider(parent, calendarSystem, startDate, endDate, dateOffset)
     , d(std::make_unique<IslamicCalendarProviderPrivate>(calendarSystem))
 {
     Q_ASSERT(m_calendarSystem == CalendarSystem::Jalali || m_calendarSystem == CalendarSystem::Islamic || m_calendarSystem == CalendarSystem::IslamicCivil

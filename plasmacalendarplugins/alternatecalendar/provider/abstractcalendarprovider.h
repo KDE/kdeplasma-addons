@@ -6,8 +6,6 @@
 
 #pragma once
 
-#include <vector>
-
 #include <QDate>
 #include <QHash>
 #include <QObject>
@@ -28,11 +26,7 @@ class AbstractCalendarProvider : public QObject, public QRunnable
     Q_OBJECT
 
 public:
-    explicit AbstractCalendarProvider(QObject *parent,
-                                      CalendarSystem::System calendarSystem,
-                                      std::vector<QDate> &&alternateDates,
-                                      std::vector<QDate> &&sublabelDates,
-                                      int dateOffset = 0);
+    explicit AbstractCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem, const QDate &startDate, const QDate &endDate, int dateOffset = 0);
     ~AbstractCalendarProvider() override;
 
     /**
@@ -62,7 +56,7 @@ Q_SIGNALS:
 
 protected:
     const CalendarSystem::System m_calendarSystem;
-    const std::vector<QDate> m_alternateDates;
-    const std::vector<QDate> m_sublabelDates;
+    const QDate m_startDate;
+    const QDate m_endDate;
     const int m_dateOffset;
 };

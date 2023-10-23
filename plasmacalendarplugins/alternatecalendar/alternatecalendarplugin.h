@@ -7,7 +7,6 @@
 #ifndef ALTERNATECALENDARPLUGIN_H
 #define ALTERNATECALENDARPLUGIN_H
 
-#include <QCache>
 #include <QDate>
 
 #include <KConfigGroup>
@@ -16,6 +15,8 @@
 #include <CalendarEvents/CalendarEventsPlugin>
 
 #include "calendarsystem.h"
+
+class AbstractCalendarProvider;
 
 class AlternateCalendarPlugin : public CalendarEvents::CalendarEventsPlugin
 {
@@ -34,14 +35,15 @@ public Q_SLOTS:
 
 private:
     void init();
-    void emitDataChangedSignal(const QDate &startDate, const QDate &endDate);
+    void emitDataChangedSignal();
 
     QDate m_lastStartDate;
     QDate m_lastEndDate;
+    AbstractCalendarProvider *m_provider = nullptr;
 
     // Cache lookup data
-    QCache<QDate, QCalendar::YearMonthDay> m_alternateDateCache;
-    QCache<QDate, SubLabel> m_sublabelCache;
+    QHash<QDate, QCalendar::YearMonthDay> m_alternateDateCache;
+    QHash<QDate, SubLabel> m_sublabelCache;
 
     // For updating config
     KConfigGroup m_generalConfigGroup;

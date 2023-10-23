@@ -79,11 +79,8 @@ CalendarEvents::CalendarEventsPlugin::SubLabel IndianCalendarProviderPrivate::su
     return sublabel;
 }
 
-IndianCalendarProvider::IndianCalendarProvider(QObject *parent,
-                                               CalendarSystem::System calendarSystem,
-                                               std::vector<QDate> &&alternateDates,
-                                               std::vector<QDate> &&sublabelDates)
-    : AbstractCalendarProvider(parent, calendarSystem, std::move(alternateDates), std::move(sublabelDates))
+IndianCalendarProvider::IndianCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem, const QDate &startDate, const QDate &endDate)
+    : AbstractCalendarProvider(parent, calendarSystem, startDate, endDate)
     , d(std::make_unique<IndianCalendarProviderPrivate>())
 {
     Q_ASSERT(m_calendarSystem == CalendarSystem::Indian);

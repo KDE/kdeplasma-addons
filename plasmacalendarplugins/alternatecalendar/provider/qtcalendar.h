@@ -20,11 +20,7 @@ class QtCalendarProvider : public AbstractCalendarProvider
     Q_OBJECT
 
 public:
-    explicit QtCalendarProvider(QObject *parent,
-                                CalendarSystem::System calendarSystem,
-                                std::vector<QDate> &&alternateDates,
-                                std::vector<QDate> &&sublabelDates,
-                                int dateOffset = 0);
+    explicit QtCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem, const QDate &startDate, const QDate &endDate, int dateOffset = 0);
     ~QtCalendarProvider() override;
 
     QCalendar::YearMonthDay fromGregorian(const QDate &date) const override;

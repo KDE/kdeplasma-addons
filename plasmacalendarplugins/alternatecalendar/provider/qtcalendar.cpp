@@ -21,12 +21,8 @@ constexpr QCalendar::System toQCalendarSystem(CalendarSystem::System calendarSys
 }
 }
 
-QtCalendarProvider::QtCalendarProvider(QObject *parent,
-                                       CalendarSystem::System calendarSystem,
-                                       std::vector<QDate> &&alternateDates,
-                                       std::vector<QDate> &&sublabelDates,
-                                       int dateOffset)
-    : AbstractCalendarProvider(parent, calendarSystem, std::move(alternateDates), std::move(sublabelDates), dateOffset)
+QtCalendarProvider::QtCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem, const QDate &startDate, const QDate &endDate, int dateOffset)
+    : AbstractCalendarProvider(parent, calendarSystem, startDate, endDate, dateOffset)
     , m_calendar(QCalendar(toQCalendarSystem(calendarSystem)))
 {
     Q_ASSERT(toQCalendarSystem(calendarSystem) <= QCalendar::System::Last);

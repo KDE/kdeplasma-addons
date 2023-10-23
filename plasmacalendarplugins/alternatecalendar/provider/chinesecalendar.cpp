@@ -7,10 +7,16 @@
 
 #include "chinesecalendar.h"
 
+#include <mutex>
+#include <shared_mutex>
+
+#include "icucalendar_p.h"
 #include "solarutils.h"
 
 namespace
 {
+std::shared_mutex s_solarTermsMapMutex;
+QHash<int /*year*/, std::array<QDate, 25>> s_solarTermsMap;
 const QStringList s_solarTermNames{
     QStringLiteral("春分"), QStringLiteral("清明"), QStringLiteral("谷雨"), QStringLiteral("立夏"), QStringLiteral("小满"), QStringLiteral("芒种"),
     QStringLiteral("夏至"), QStringLiteral("小暑"), QStringLiteral("大暑"), QStringLiteral("立秋"), QStringLiteral("处暑"), QStringLiteral("白露"),
@@ -64,20 +70,16 @@ private:
     QString monthDisplayName() const;
     QString dayDisplayName() const;
 
-    auto generateSolarTermsCache(int year);
+    decltype(std::declval<decltype(s_solarTermsMap)>().begin()) generateSolarTermsCache(int year);
 
     /**
      * Calculates Julian day of a solar term based on Newton's method
      */
     QDate getSolarTermDate(int year, SolarTerm order) const;
 
-    static QHash<int /*year*/, std::array<QDate, 25>> s_solarTermsMap;
-
     icu::Locale m_locale;
     icu::Locale m_hanidaysLocale;
 };
-
-QHash<int, std::array<QDate, 25>> ChineseCalendarProviderPrivate::s_solarTermsMap = QHash<int, std::array<QDate, 25>>();
 
 ChineseCalendarProviderPrivate::ChineseCalendarProviderPrivate()
     : ICUCalendarPrivate()
@@ -91,18 +93,22 @@ ChineseCalendarProviderPrivate::ChineseCalendarProviderPrivate()
     m_calendar.reset(icu::Calendar::createInstance("en_US@calendar=chinese", m_errorCode));
 }
 
-auto ChineseCalendarProviderPrivate::generateSolarTermsCache(int year)
+decltype(std::declval<decltype(s_solarTermsMap)>().begin()) ChineseCalendarProviderPrivate::generateSolarTermsCache(int year)
 {
 #if __has_cpp_attribute(assume)
     [[assume(year > 0)]];
 #endif
-    auto thisYearIt = s_solarTermsMap.find(year);
-    if (thisYearIt != s_solarTermsMap.end()) {
-        // Already generated
-        return thisYearIt;
+    {
+        std::shared_lock lock(s_solarTermsMapMutex);
+        auto thisYearIt = s_solarTermsMap.find(year);
+        if (thisYearIt != s_solarTermsMap.end()) {
+            // Already generated
+            return thisYearIt;
+        }
     }
 
-    thisYearIt = s_solarTermsMap.insert(year, {});
+    std::unique_lock lock(s_solarTermsMapMutex);
+    auto thisYearIt = s_solarTermsMap.insert(year, {});
 
     SolarTerm solarTermIndex = DongZhi;
     for (int i = 0; i < 25; i++) {
@@ -128,10 +134,7 @@ CalendarEvents::CalendarEventsPlugin::SubLabel ChineseCalendarProviderPrivate::s
     sublabel.monthLabel = monthDisplayName();
 
     // Check solar term cache exists
-    auto it = s_solarTermsMap.find(date.year());
-    if (it == s_solarTermsMap.end()) {
-        it = generateSolarTermsCache(date.year());
-    }
+    auto it = generateSolarTermsCache(date.year());
 
     int solarTermIndex = -1;
     {
@@ -165,7 +168,7 @@ QString ChineseCalendarProviderPrivate::formattedDateString(const icu::UnicodeSt
     std::string utf8Str;
     dateString.toUTF8String<std::string>(utf8Str);
 
-    return QString::fromUtf8(utf8Str.c_str());
+    return QString::fromStdString(utf8Str);
 }
 
 QString ChineseCalendarProviderPrivate::yearDisplayName() const
@@ -211,11 +214,8 @@ QDate ChineseCalendarProviderPrivate::getSolarTermDate(int year, SolarTerm order
     return QDate(resultYear, resultMonth, resultDay);
 }
 
-ChineseCalendarProvider::ChineseCalendarProvider(QObject *parent,
-                                                 CalendarSystem::System calendarSystem,
-                                                 std::vector<QDate> &&alternateDates,
-                                                 std::vector<QDate> &&sublabelDates)
-    : AbstractCalendarProvider(parent, calendarSystem, std::move(alternateDates), std::move(sublabelDates))
+ChineseCalendarProvider::ChineseCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem, const QDate &startDate, const QDate &endDate)
+    : AbstractCalendarProvider(parent, calendarSystem, startDate, endDate)
     , d(std::make_unique<ChineseCalendarProviderPrivate>())
 {
     Q_ASSERT(m_calendarSystem == CalendarSystem::Chinese);

@@ -19,10 +19,7 @@ class IndianCalendarProvider : public AbstractCalendarProvider
     Q_OBJECT
 
 public:
-    explicit IndianCalendarProvider(QObject *parent,
-                                    CalendarSystem::System calendarSystem,
-                                    std::vector<QDate> &&alternateDates,
-                                    std::vector<QDate> &&sublabelDates);
+    explicit IndianCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem, const QDate &startDate, const QDate &endDate);
     ~IndianCalendarProvider() override;
 
     QCalendar::YearMonthDay fromGregorian(const QDate &date) const override;
