@@ -116,7 +116,7 @@ add_subdirectory(runners)
 
 add_subdirectory(wallpapers)
 
-add_subdirectory(windowswitchers)
+add_subdirectory(kwin)
 
 add_subdirectory(plasmacalendarplugins)
 
