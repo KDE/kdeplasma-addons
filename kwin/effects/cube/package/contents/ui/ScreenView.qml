@@ -5,6 +5,7 @@
 */
 
 import QtQuick
+import QtQuick.Window
 import QtQuick3D
 import org.kde.kwin as KWinComponents
 
@@ -29,15 +30,20 @@ Item {
     View3D {
         id: view
         anchors.fill: parent
-        // TODO: Uncomment renderMode: View3D.Underlay when screen views are properly marked opaque in kwin
-        // renderMode: View3D.Underlay
+        renderMode: View3D.Underlay
 
         Loader {
-            id: colorSceneEnvironment
+            id: transparentSceneEnvironment
             active: effect.configuration.Background == Constants.Background.Color
             sourceComponent: SceneEnvironment {
-                clearColor: effect.configuration.BackgroundColor
-                backgroundMode: SceneEnvironment.Color
+                backgroundMode: SceneEnvironment.Transparent
+
+                // When using View3D.Underlay, SceneEnvironment.clearColor will do nothing.
+                Binding {
+                    target: root.Window.window
+                    property: "color"
+                    value: effect.configuration.BackgroundColor
+                }
             }
         }
 
@@ -56,7 +62,7 @@ Item {
             if (skyboxSceneEnvironment.active) {
                 return skyboxSceneEnvironment.item;
             } else {
-                return colorSceneEnvironment.item;
+                return transparentSceneEnvironment.item;
             }
         }
 
