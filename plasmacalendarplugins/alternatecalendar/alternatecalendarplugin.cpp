@@ -20,12 +20,13 @@
 #include "provider/islamiccalendar.h"
 #endif
 
+using namespace Qt::StringLiterals;
 using SubLabel = CalendarEvents::CalendarEventsPlugin::SubLabel;
 
 AlternateCalendarPlugin::AlternateCalendarPlugin(QObject *parent)
     : CalendarEvents::CalendarEventsPlugin(parent)
 {
-    auto config = KSharedConfig::openConfig(QStringLiteral("plasma_calendar_alternatecalendar"));
+    auto config = KSharedConfig::openConfig("plasma_calendar_alternatecalendar"_L1, KConfig::NoGlobals);
     m_generalConfigGroup = config->group("General");
     m_configWatcher = KConfigWatcher::create(config);
     connect(m_configWatcher.get(), &KConfigWatcher::configChanged, this, &AlternateCalendarPlugin::updateSettings);
@@ -98,8 +99,11 @@ void AlternateCalendarPlugin::loadEventsForDateRange(const QDate &startDate, con
     QThreadPool::globalInstance()->start(m_provider);
 }
 
-void AlternateCalendarPlugin::updateSettings()
+void AlternateCalendarPlugin::updateSettings(const KConfigGroup &configGroup)
 {
+    if (configGroup.config()->name() != "plasma_calendar_alternatecalendar"_L1) {
+        return;
+    }
     init();
     loadEventsForDateRange(m_lastStartDate, m_lastEndDate);
 }

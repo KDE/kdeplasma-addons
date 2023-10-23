@@ -31,7 +31,7 @@ public:
     void loadEventsForDateRange(const QDate &startDate, const QDate &endDate) override;
 
 public Q_SLOTS:
-    void updateSettings();
+    void updateSettings(const KConfigGroup &configGroup);
 
 private:
     void init();
