@@ -5,7 +5,6 @@
 */
 
 import QtQuick
-import QtQuick.Window
 import QtQuick3D
 
 Item {
@@ -18,9 +17,8 @@ Item {
     property quaternion rotation: Quaternion.fromEulerAngles(0, 0, 0)
     property real radius: 2000
 
-    property real speed: 1
-    property real xSpeed: 0.1
-    property real ySpeed: 0.1
+    property real xSpeed: 10
+    property real ySpeed: 10
 
     property bool xInvert: false
     property bool yInvert: false
@@ -77,12 +75,6 @@ Item {
         status.currentPos = newPos;
     }
 
-    function processInputs() {
-        if (root.busy) {
-            status.processInput();
-        }
-    }
-
     function updateCamera() {
         const eulerRotation = root.rotation.toEulerAngles();
         const theta = (eulerRotation.x + 90) * Math.PI / 180;
@@ -94,9 +86,9 @@ Item {
         camera.rotation = root.rotation;
     }
 
-    Connections {
-        target: Window.window
-        onAfterAnimating: processInputs()
+    FrameAnimation {
+        running: root.busy
+        onTriggered: status.processInput(frameTime);
     }
 
     QtObject {
@@ -110,7 +102,7 @@ Item {
         property vector2d lastPos: Qt.vector2d(0, 0)
         property vector2d currentPos: Qt.vector2d(0, 0)
 
-        function processInput() {
+        function processInput(dt) {
             if (useMouse) {
                 const eulerRotation = root.rotation.toEulerAngles();
 
@@ -118,13 +110,13 @@ Item {
                                                lastPos.y - currentPos.y);
                 lastPos = currentPos;
 
-                let azimuthDelta = pixelDelta.x * xSpeed
+                let azimuthDelta = pixelDelta.x * xSpeed * dt
                 if (xInvert) {
                     azimuthDelta = -azimuthDelta;
                 }
                 let azimuth = (eulerRotation.y + azimuthDelta) % 360;
 
-                let elevationDelta = pixelDelta.y * ySpeed
+                let elevationDelta = pixelDelta.y * ySpeed * dt
                 if (yInvert) {
                     elevationDelta = -elevationDelta;
                 }
