@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-21 01:59+0000\n"
+"POT-Creation-Date: 2023-10-24 01:42+0000\n"
 "PO-Revision-Date: 2023-05-03 21:22+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -134,7 +134,7 @@ msgctxt ""
 msgid "%1 %2, %3 (%4)"
 msgstr ""
 
-#: provider/qtcalendar.cpp:59
+#: provider/qtcalendar.cpp:55
 #, kde-format
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
