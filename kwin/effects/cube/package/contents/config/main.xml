@@ -24,7 +24,7 @@
             <default>Color</default>
             <choices>
                 <choice name="Color" />
-                <choice name="Skybox" />
+                <choice name="SkyBox" />
             </choices>
         </entry>
         <entry name="BackgroundColor" type="Color">

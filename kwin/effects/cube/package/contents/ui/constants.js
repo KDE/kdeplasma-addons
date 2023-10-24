@@ -7,5 +7,5 @@
 // Matches the Background enum in config/main.xml
 const Background = {
     Color: 0,
-    Skybox: 1,
+    SkyBox: 1,
 };

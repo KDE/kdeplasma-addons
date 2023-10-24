@@ -43,7 +43,7 @@ Item {
 
         Loader {
             id: skyboxSceneEnvironment
-            active: effect.configuration.Background == Constants.Background.Skybox
+            active: effect.configuration.Background == Constants.Background.SkyBox
             sourceComponent: SceneEnvironment {
                 backgroundMode: SceneEnvironment.SkyBox
                 lightProbe: Texture {
