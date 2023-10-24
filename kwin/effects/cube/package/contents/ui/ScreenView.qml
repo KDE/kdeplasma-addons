@@ -47,7 +47,7 @@ Item {
             sourceComponent: SceneEnvironment {
                 backgroundMode: SceneEnvironment.SkyBox
                 lightProbe: Texture {
-                    source: effect.configuration.Skybox
+                    source: effect.configuration.SkyBox
                 }
             }
         }
