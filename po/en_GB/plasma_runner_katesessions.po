@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-18 01:59+0000\n"
+"POT-Creation-Date: 2023-10-31 01:40+0000\n"
 "PO-Revision-Date: 2009-03-30 20:49+0100\n"
 "Last-Translator: Malcolm Hunter <malcolm.hunter@gmx.co.uk>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -27,7 +27,7 @@ msgstr "Finds Kate sessions matching :q:."
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Lists all the Kate editor sessions in your account."
 
-#: katesessions.cpp:68 katesessions.cpp:79
+#: katesessions.cpp:66 katesessions.cpp:77
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Open Kate Session"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-18 01:59+0000\n"
+"POT-Creation-Date: 2023-10-31 01:40+0000\n"
 "PO-Revision-Date: 2022-07-21 21:45+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian<kde-i18n-doc@kde.org>\n"
@@ -28,7 +28,7 @@ msgstr "Kate-ის იმ სესიების ჩვენება, რ�
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "თქვენს ანგარიშში Kate-ის რედაქტორის ყველა სესიის ჩვენება."
 
-#: katesessions.cpp:68 katesessions.cpp:79
+#: katesessions.cpp:66 katesessions.cpp:77
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Kate-ის სესიის გახსნა"
