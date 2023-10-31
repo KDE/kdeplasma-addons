@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-10-31 02:25+0000\n"
 "PO-Revision-Date: 2009-03-31 21:40+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <sv@li.org>\n"
@@ -28,7 +28,7 @@ msgstr "Hittar Kate-sessioner som motsvarar :q:."
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Listar alla Kates redigeringssessioner i ditt konto."
 
-#: katesessions.cpp:67 katesessions.cpp:78
+#: katesessions.cpp:65 katesessions.cpp:76
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Öppna Kate-session"

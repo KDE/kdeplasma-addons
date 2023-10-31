@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-10-31 02:25+0000\n"
 "PO-Revision-Date: 2009-11-15 12:06+0100\n"
 "Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Lists all the Kate editor sessions in your account."
 msgstr ""
 
-#: katesessions.cpp:67 katesessions.cpp:78
+#: katesessions.cpp:65 katesessions.cpp:76
 #, kde-format
 msgid "Open Kate Session"
 msgstr ""

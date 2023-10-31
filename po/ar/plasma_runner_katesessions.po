@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-10-31 02:25+0000\n"
 "PO-Revision-Date: 2016-09-02 23:58+0300\n"
 "Last-Translator: Safa Alfulaij <safa1996alfulaij@gmail.com>\n"
 "Language-Team: Arabic <doc@arabeyes.org>\n"
@@ -29,7 +29,7 @@ msgstr "يعثر على جلسات «كيت» المطابقة ل‍:q:."
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "تسرد كلّ جلسات محرّر «كيت» في حسابك."
 
-#: katesessions.cpp:67 katesessions.cpp:78
+#: katesessions.cpp:65 katesessions.cpp:76
 #, kde-format
 msgid "Open Kate Session"
 msgstr "افتح جلسة «كيت»"

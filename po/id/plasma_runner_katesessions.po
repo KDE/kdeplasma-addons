@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-10-31 02:25+0000\n"
 "PO-Revision-Date: 2018-10-10 07:17+0700\n"
 "Last-Translator: Wantoyo <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -26,7 +26,7 @@ msgstr "Temukan sesi Kate yang cocok :q:."
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Daftar semua sesi editor Kate di dalam akunmu."
 
-#: katesessions.cpp:67 katesessions.cpp:78
+#: katesessions.cpp:65 katesessions.cpp:76
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Buka Sesi Kate"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-10-31 02:25+0000\n"
 "PO-Revision-Date: 2010-02-01 08:06+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: ਪੰਜਾਬੀ <punjabi-users@lists.sf.net>\n"
@@ -28,7 +28,7 @@ msgstr ":q: ਮਿਲਦੇ ਕੇਟ ਸ਼ੈਸ਼ਨ ਲੱਭੋ।"
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "ਆਪਣੇ ਅਕਾਊਂਟ ਵਿੱਚ ਸਭ ਕੇਟ ਐਡੀਟਰ ਸ਼ੈਸ਼ਨ ਵੇਖੋ।"
 
-#: katesessions.cpp:67 katesessions.cpp:78
+#: katesessions.cpp:65 katesessions.cpp:76
 #, kde-format
 msgid "Open Kate Session"
 msgstr "ਕੇਟ ਸ਼ੈਸ਼ਨ ਖੋਲ੍ਹੋ"

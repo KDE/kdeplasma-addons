@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-10-31 02:25+0000\n"
 "PO-Revision-Date: 2009-05-28 13:57+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -29,7 +29,7 @@ msgstr "រក​សម័យ Kate ដែល​ផ្គូផ្គង​នឹ
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "រាយ​សម័យ​កម្មវិធី​កែសម្រួល Kate ទាំង​អស់​នៅ​ក្នុង​គណនី​របស់​អ្នក ។"
 
-#: katesessions.cpp:67 katesessions.cpp:78
+#: katesessions.cpp:65 katesessions.cpp:76
 #, kde-format
 msgid "Open Kate Session"
 msgstr "បើក​សម័យ Kate"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-05 03:12+0000\n"
+"POT-Creation-Date: 2023-10-31 02:25+0000\n"
 "PO-Revision-Date: 2022-11-26 07:44+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.2\n"
 
-#: profilesmodel.cpp:54
+#: profilesmodel.cpp:56
 #, kde-format
 msgid "Start Kate (no arguments)"
 msgstr "Kate-ის გაშვება (არგუმენტების გარეშე)"
 
-#: profilesmodel.cpp:55
+#: profilesmodel.cpp:57
 #, kde-format
 msgid "New Kate Session"
 msgstr "Kate-ის ახალი სესია"

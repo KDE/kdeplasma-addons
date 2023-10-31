@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-06-16 00:49+0000\n"
+"POT-Creation-Date: 2023-10-31 02:25+0000\n"
 "PO-Revision-Date: 2009-08-26 11:11+0100\n"
 "Last-Translator: Tamas Szanto <taszanto@gmail.com>\n"
 "Language-Team: Hungarian <kde-i18n-doc@kde.org>\n"
@@ -26,7 +26,7 @@ msgstr "A következő kifejezéshez illeszkedő Kate-munkamenetek keresése: :q:
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Kilistázza az azonosítóhoz tartozó Kate-munkameneteket."
 
-#: katesessions.cpp:67 katesessions.cpp:78
+#: katesessions.cpp:65 katesessions.cpp:76
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Kate-munkamenet megnyitása"
