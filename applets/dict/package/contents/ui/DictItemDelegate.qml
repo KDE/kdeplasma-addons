@@ -10,6 +10,7 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami.delegates as KD
 
 // External item required to make Kirigami.ListItemDragHandle work
 Item {
@@ -24,7 +25,14 @@ Item {
 
     Kirigami.SwipeListItem {
         id: dictItem
+
+        // Don't need highlight, hover, or pressed effects
+        highlighted: false
         hoverEnabled: false
+        down: false
+
+        text: model.id
+        Accessible.description: model.description
 
         RowLayout {
             Kirigami.ListItemDragHandle {
@@ -35,14 +43,13 @@ Item {
                 }
             }
 
-            Kirigami.BasicListItem {
+            KD.TitleSubtitle {
                 Layout.fillWidth: true
 
-                hoverEnabled: false
-                separatorVisible: false
+                selected: dictItem.highlighted
 
-                label: model.id
-                subtitle: model.description
+                title: dictItem.text
+                subtitle: dictItem.Accessible.description
             }
         }
 
