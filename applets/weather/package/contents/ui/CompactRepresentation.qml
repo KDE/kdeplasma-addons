@@ -46,7 +46,7 @@ Loader {
         Kirigami.Icon {
             readonly property int minIconSize: Math.max((compactRoot.vertical ? compactRoot.width : compactRoot.height), Kirigami.Units.iconSizes.small)
 
-            source: generalModel.currentConditionIconName
+            source: Plasmoid.icon
             active: compactMouseArea.containsMouse
             // reset implicit size, so layout in free dimension does not stop at the default one
             implicitWidth: Kirigami.Units.iconSizes.small
@@ -71,7 +71,7 @@ Loader {
 
         IconAndTextItem {
             vertical: compactRoot.vertical
-            iconSource: generalModel.currentConditionIconName
+            iconSource: Plasmoid.icon
             active: compactMouseArea.containsMouse
             text: observationModel.temperature
         }
