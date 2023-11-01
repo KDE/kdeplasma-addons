@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-13 02:06+0000\n"
+"POT-Creation-Date: 2023-11-01 01:41+0000\n"
 "PO-Revision-Date: 2022-06-13 19:35+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -50,7 +50,7 @@ msgstr "Ei sanastoja"
 msgid "Add More…"
 msgstr "Lisää enemmän…"
 
-#: package/contents/ui/DictItemDelegate.qml:51
+#: package/contents/ui/DictItemDelegate.qml:58
 #, kde-format
 msgid "Delete"
 msgstr "Poista"

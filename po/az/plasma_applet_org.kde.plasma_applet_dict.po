@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-13 02:06+0000\n"
+"POT-Creation-Date: 2023-11-01 01:41+0000\n"
 "PO-Revision-Date: 2022-06-16 23:47+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -50,7 +50,7 @@ msgstr "Heç bir lüğət yoxdur"
 msgid "Add More…"
 msgstr "Daha çox əlavə edin..."
 
-#: package/contents/ui/DictItemDelegate.qml:51
+#: package/contents/ui/DictItemDelegate.qml:58
 #, kde-format
 msgid "Delete"
 msgstr "Silin"

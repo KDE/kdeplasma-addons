@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-13 02:06+0000\n"
+"POT-Creation-Date: 2023-11-01 01:41+0000\n"
 "PO-Revision-Date: 2022-06-07 14:31+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -51,7 +51,7 @@ msgstr "Tidak ada kamus"
 msgid "Add More…"
 msgstr "Tambahkan Lagi…"
 
-#: package/contents/ui/DictItemDelegate.qml:51
+#: package/contents/ui/DictItemDelegate.qml:58
 #, kde-format
 msgid "Delete"
 msgstr "Hapus"

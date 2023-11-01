@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-13 02:06+0000\n"
+"POT-Creation-Date: 2023-11-01 01:41+0000\n"
 "PO-Revision-Date: 2022-05-28 07:49+0200\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -50,7 +50,7 @@ msgstr "Nessun dizionario"
 msgid "Add More…"
 msgstr "Aggiungine altri..."
 
-#: package/contents/ui/DictItemDelegate.qml:51
+#: package/contents/ui/DictItemDelegate.qml:58
 #, kde-format
 msgid "Delete"
 msgstr "Elimina"

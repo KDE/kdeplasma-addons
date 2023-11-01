@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.dict\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-13 02:06+0000\n"
+"POT-Creation-Date: 2023-11-01 01:41+0000\n"
 "PO-Revision-Date: 2022-03-06 11:53+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -55,7 +55,7 @@ msgstr "辞書"
 msgid "Add More…"
 msgstr ""
 
-#: package/contents/ui/DictItemDelegate.qml:51
+#: package/contents/ui/DictItemDelegate.qml:58
 #, kde-format
 msgid "Delete"
 msgstr ""
