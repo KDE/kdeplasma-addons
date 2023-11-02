@@ -11,6 +11,7 @@
 
 #include <qtestcase.h>
 
+using namespace Qt::StringLiterals;
 using namespace KRunner;
 
 class DateTimeRunnerTest : public AbstractRunnerTest
@@ -141,9 +142,12 @@ void DateTimeRunnerTest::testConversion()
     });
 
     QVERIFY(!matches.isEmpty());
-    QVERIFY(matches.first().text().contains(QString("%1: %2").arg(expectedTargetTimezone, expectedTargetTime)));
-    QVERIFY(matches.first().text().contains(QString("%1: %2").arg(expectedSourceTimezone, expectedSourceTime)));
-    QVERIFY(matches.first().text().contains(expectedTimeDiff));
+    qDebug() << matches.first().text();
+    const QString targetText = u"%1: %2"_s.arg(expectedTargetTimezone, expectedTargetTime);
+    QVERIFY2(matches.first().text().contains(targetText), qUtf8Printable(targetText));
+    const QString sourceText = u"%1: %2"_s.arg(expectedSourceTimezone, expectedSourceTime);
+    QVERIFY2(matches.first().text().contains(sourceText), qUtf8Printable(sourceText));
+    QVERIFY2(matches.first().text().contains(expectedTimeDiff), qUtf8Printable(expectedTimeDiff));
 }
 
 void DateTimeRunnerTest::testConversion_data()
