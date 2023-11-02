@@ -40,9 +40,9 @@ public:
 Q_DECLARE_METATYPE(CalendarSystem)
 
 struct CalendarSystemItem {
-    CalendarSystem::System system;
-    QString id;
-    QString text;
+    const CalendarSystem::System system;
+    const QString id;
+    const QString text;
 };
 
 // clang-format off

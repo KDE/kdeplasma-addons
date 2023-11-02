@@ -13,15 +13,15 @@
 #include "icucalendar_p.h"
 #include "solarutils.h"
 
+using namespace Qt::StringLiterals;
+
 namespace
 {
 std::shared_mutex s_solarTermsMapMutex;
-QHash<int /*year*/, std::array<QDate, 25>> s_solarTermsMap;
-const QStringList s_solarTermNames{
-    QStringLiteral("春分"), QStringLiteral("清明"), QStringLiteral("谷雨"), QStringLiteral("立夏"), QStringLiteral("小满"), QStringLiteral("芒种"),
-    QStringLiteral("夏至"), QStringLiteral("小暑"), QStringLiteral("大暑"), QStringLiteral("立秋"), QStringLiteral("处暑"), QStringLiteral("白露"),
-    QStringLiteral("秋分"), QStringLiteral("寒露"), QStringLiteral("霜降"), QStringLiteral("立冬"), QStringLiteral("小雪"), QStringLiteral("大雪"),
-    QStringLiteral("冬至"), QStringLiteral("小寒"), QStringLiteral("大寒"), QStringLiteral("立春"), QStringLiteral("雨水"), QStringLiteral("惊蛰"),
+constinit QHash<int /*year*/, std::array<QDate, 25>> s_solarTermsMap;
+const std::array<QString, 25> s_solarTermNames{
+    u"春分"_s, u"清明"_s, u"谷雨"_s, u"立夏"_s, u"小满"_s, u"芒种"_s, u"夏至"_s, u"小暑"_s, u"大暑"_s, u"立秋"_s, u"处暑"_s, u"白露"_s,
+    u"秋分"_s, u"寒露"_s, u"霜降"_s, u"立冬"_s, u"小雪"_s, u"大雪"_s, u"冬至"_s, u"小寒"_s, u"大寒"_s, u"立春"_s, u"雨水"_s, u"惊蛰"_s,
 };
 }
 
