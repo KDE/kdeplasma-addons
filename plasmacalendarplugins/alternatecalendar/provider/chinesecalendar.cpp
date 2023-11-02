@@ -165,10 +165,7 @@ QString ChineseCalendarProviderPrivate::formattedDateString(const icu::UnicodeSt
     formatter.setCalendar(*m_calendar);
     formatter.format(m_calendar->getTime(errorCode), dateString);
 
-    std::string utf8Str;
-    dateString.toUTF8String<std::string>(utf8Str);
-
-    return QString::fromStdString(utf8Str);
+    return QString::fromUtf16(dateString.getBuffer(), dateString.length());
 }
 
 QString ChineseCalendarProviderPrivate::yearDisplayName() const
