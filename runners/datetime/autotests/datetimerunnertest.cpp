@@ -163,25 +163,14 @@ void DateTimeRunnerTest::testConversion_data()
     QTest::addColumn<QString>("expectedTimeDiff");
 
     QTest::newRow("Should convert from first to second time zone") << "12:00 PM gmt-2 in greenwich"
-                                                                   << "GMT-2"
-                                                                   << "12:00 PM"
-                                                                   << "Greenwich Mean Time"
-                                                                   << "2:00 PM"
-                                                                   << "2 hours later";
+                                                                   << "GMT-2" << u"12:00 PM"_s << "Greenwich" << u"10:00 AM"_s << "2 hours earlier";
     QTest::newRow("Should convert from first to second time zone with date") << "1/5/23 12:00 PM gmt-2 in greenwich"
-                                                                             << "GMT-2"
-                                                                             << "12:00 PM"
-                                                                             << "Greenwich Mean Time"
-                                                                             << "2:00 PM"
-                                                                             << "2 hours later";
-    QTest::newRow("Should convert from system time zone to second time zone") << "12:00 PM in gmt+2" << systemTimeZoneName << "12:00 PM"
-                                                                              << "GMT+2"
-                                                                              << "2:00 PM"
-                                                                              << "2 hours later";
-    QTest::newRow("Should convert from first time zone to system time zone") << "12:00 PM gmt+2"
-                                                                             << "GMT+2"
-                                                                             << "12:00 PM" << systemTimeZoneName << "10:00 AM"
-                                                                             << "2 hours earlier";
+                                                                             << "GMT-2" << u"12:00 PM"_s << "Greenwich" << u"10:00 AM"_s << "2 hours earlier";
+    QTest::newRow("Should convert from system time zone to second time zone")
+        << "12:00 PM in gmt+2" << systemTimeZoneName << u"12:00 PM"_s << "GMT+2" << u"2:00 PM"_s << "2 hours later";
+    QTest::newRow("Should convert from first time zone to system time zone")
+        << "12:00 PM gmt+2"
+        << "GMT+2" << u"12:00 PM"_s << systemTimeZoneName << u"10:00 AM"_s << "2 hours earlier";
 }
 
 QTEST_MAIN(DateTimeRunnerTest)
