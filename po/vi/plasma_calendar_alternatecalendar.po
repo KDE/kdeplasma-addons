@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-24 01:42+0000\n"
+"POT-Creation-Date: 2023-11-03 01:40+0000\n"
 "PO-Revision-Date: 2023-01-08 18:21+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -113,7 +113,7 @@ msgid ""
 "an earlier date."
 msgstr ""
 
-#: provider/hebrewcalendar.cpp:97
+#: provider/hebrewcalendar.cpp:91
 #, fuzzy, kde-format
 #| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 #| msgid "%1 %2, %3"
@@ -123,13 +123,13 @@ msgctxt ""
 msgid "%1 %2, %3 (%4)"
 msgstr "%1 %2, %3"
 
-#: provider/indiancalendar.cpp:73
+#: provider/indiancalendar.cpp:70
 #, kde-format
 msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 msgid "%1 %2, %3"
 msgstr "%1 %2, %3"
 
-#: provider/islamiccalendar.cpp:124
+#: provider/islamiccalendar.cpp:118
 #, fuzzy, kde-format
 #| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 #| msgid "%1 %2, %3"

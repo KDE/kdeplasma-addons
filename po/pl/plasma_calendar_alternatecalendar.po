@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-24 01:42+0000\n"
+"POT-Creation-Date: 2023-11-03 01:40+0000\n"
 "PO-Revision-Date: 2023-05-20 08:19+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -116,7 +116,7 @@ msgid ""
 "an earlier date."
 msgstr "Dodatnie przesunięcie oznacza późniejszą datę, a ujemne wcześniejszą."
 
-#: provider/hebrewcalendar.cpp:97
+#: provider/hebrewcalendar.cpp:91
 #, kde-format
 msgctxt ""
 "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
@@ -124,13 +124,13 @@ msgctxt ""
 msgid "%1 %2, %3 (%4)"
 msgstr "%1 %2, %3 (%4)"
 
-#: provider/indiancalendar.cpp:73
+#: provider/indiancalendar.cpp:70
 #, kde-format
 msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 msgid "%1 %2, %3"
 msgstr "%1 %2, %3"
 
-#: provider/islamiccalendar.cpp:124
+#: provider/islamiccalendar.cpp:118
 #, kde-format
 msgctxt ""
 "@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 "
