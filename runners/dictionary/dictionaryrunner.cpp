@@ -101,7 +101,7 @@ void DictionaryRunner::match(RunnerContext &context)
         match.setMultiLine(true);
         match.setText(lastPartOfSpeech + QLatin1String(": ") + reMatch.captured(2));
         match.setRelevance(1 - (static_cast<double>(++item) / static_cast<double>(lines.length())));
-        match.setType(QueryMatch::HelperMatch);
+        match.setCategoryRelevance(QueryMatch::CategoryRelevance::Moderate);
         match.setIconName(QStringLiteral("accessories-dictionary"));
         matches.append(match);
     }

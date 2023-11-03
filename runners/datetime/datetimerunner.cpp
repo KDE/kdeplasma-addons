@@ -338,7 +338,7 @@ void DateTimeRunner::addMatch(const QString &text, const QString &clipboardText,
     QueryMatch match(this);
     match.setText(text);
     match.setData(clipboardText);
-    match.setType(QueryMatch::HelperMatch);
+    match.setCategoryRelevance(QueryMatch::CategoryRelevance::Moderate);
     match.setRelevance(relevance);
     match.setIconName(iconName);
     match.setMultiLine(true);

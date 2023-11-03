@@ -205,7 +205,7 @@ void SpellCheckRunner::match(RunnerContext &context)
 
             if (correct) {
                 QueryMatch match(this);
-                match.setType(QueryMatch::ExactMatch);
+                match.setCategoryRelevance(QueryMatch::CategoryRelevance::Highest);
                 match.setIconName(QStringLiteral("checkbox"));
                 match.setText(query);
                 match.setSubtext(i18nc("Term is spelled correctly", "Correct"));
@@ -214,7 +214,7 @@ void SpellCheckRunner::match(RunnerContext &context)
             } else if (!suggestions.isEmpty()) {
                 for (const auto &suggestion : std::as_const(suggestions)) {
                     QueryMatch match(this);
-                    match.setType(QueryMatch::ExactMatch);
+                    match.setCategoryRelevance(QueryMatch::CategoryRelevance::Highest);
                     match.setIconName(QStringLiteral("edit-rename"));
                     match.setText(suggestion);
                     match.setSubtext(i18n("Suggested term"));
@@ -245,7 +245,7 @@ void SpellCheckRunner::match(RunnerContext &context)
         }
     } else {
         QueryMatch match(this);
-        match.setType(QueryMatch::ExactMatch);
+        match.setCategoryRelevance(QueryMatch::CategoryRelevance::Highest);
         match.setIconName(QStringLiteral("data-error"));
         match.setText(xi18nc("@info", "No dictionary found. Please install <resource>hunspell</resource> package using your package manager"));
         context.addMatch(match);

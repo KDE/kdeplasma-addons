@@ -105,7 +105,7 @@ void ConverterRunner::match(RunnerContext &context)
         }
 
         QueryMatch match(this);
-        match.setType(QueryMatch::HelperMatch);
+        match.setCategoryRelevance(QueryMatch::CategoryRelevance::Moderate);
         match.setIconName(QStringLiteral("accessories-calculator"));
         if (outputUnit.categoryId() == KUnitConversion::CurrencyCategory) {
             match.setText(QStringLiteral("%1 (%2)").arg(outputValue.toString(0, 'f', 2), outputUnit.symbol()));

@@ -66,7 +66,7 @@ void CharacterRunner::match(RunnerContext &context)
     // make special character out of the hex.-code
     const QString specChar = QChar(hex);
     QueryMatch match(this);
-    match.setType(QueryMatch::ExactMatch);
+    match.setCategoryRelevance(QueryMatch::CategoryRelevance::Highest);
     match.setIconName(QStringLiteral("accessories-character-map"));
     match.setText(specChar);
     match.setData(specChar);

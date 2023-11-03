@@ -35,7 +35,7 @@ void KonsoleProfiles::match(RunnerContext &context)
         if (name.contains(term, Qt::CaseInsensitive)) {
             const QString profileIdentifier = idx.data(ProfilesModel::ProfileIdentifierRole).toString();
             QueryMatch match(this);
-            match.setType(QueryMatch::PossibleMatch);
+            match.setCategoryRelevance(QueryMatch::CategoryRelevance::Low);
             match.setIconName(idx.data(ProfilesModel::IconNameRole).toString());
             match.setData(profileIdentifier);
             match.setText(QStringLiteral("Konsole: ") + name);

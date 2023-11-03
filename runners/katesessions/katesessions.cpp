@@ -56,7 +56,7 @@ void KateSessions::match(RunnerContext &context)
         QString session = m_model->index(i).data(ProfilesModel::NameRole).toString();
         if (listAll || session.compare(term, Qt::CaseInsensitive) == 0) {
             QueryMatch match(this);
-            match.setType(QueryMatch::ExactMatch);
+            match.setCategoryRelevance(QueryMatch::CategoryRelevance::Highest);
             match.setRelevance(session.compare(term, Qt::CaseInsensitive) == 0 ? 1 : 0.8);
             match.setIconName(m_triggerWord);
             match.setData(session);
