@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 01:46+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2023-10-08 11:04+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 msgid "Copy unit and number"
 msgstr "Afrita einingu og tölu"
 
-#: converterrunner.cpp:34
+#: converterrunner.cpp:32
 #, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
@@ -36,7 +36,7 @@ msgstr ""
 "einingu. Þú getur notað umreikningsviðbótina til að finna allar tiltækar "
 "einingar."
 
-#: converterrunner.cpp:41
+#: converterrunner.cpp:39
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"

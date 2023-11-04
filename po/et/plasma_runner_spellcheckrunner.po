@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-05 01:59+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2020-09-28 03:07+0200\n"
 "Last-Translator: Mihkel Tõnnov <mihhkel@gmail.com>\n"
 "Language-Team: Estonian <>\n"
@@ -19,35 +19,35 @@ msgstr ""
 "X-Generator: Lokalize 20.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: spellcheck.cpp:90 spellcheck_config.cpp:65 spellcheck_config.cpp:96
+#: spellcheck.cpp:81 spellcheck_config.cpp:65 spellcheck_config.cpp:96
 #, kde-format
 msgid "spell"
 msgstr "õigekiri"
 
-#: spellcheck.cpp:95
+#: spellcheck.cpp:86
 #, kde-format
 msgctxt ""
 "Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\"."
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: spellcheck.cpp:99
+#: spellcheck.cpp:90
 #, kde-format
 msgid "Checks the spelling of :q:."
 msgstr ":q: õigekirja kontrollimine."
 
-#: spellcheck.cpp:215
+#: spellcheck.cpp:211
 #, kde-format
 msgctxt "Term is spelled correctly"
 msgid "Correct"
 msgstr "Õige"
 
-#: spellcheck.cpp:224
+#: spellcheck.cpp:220
 #, kde-format
 msgid "Suggested term"
 msgstr "Pakutav sõna"
 
-#: spellcheck.cpp:254
+#: spellcheck.cpp:250
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""

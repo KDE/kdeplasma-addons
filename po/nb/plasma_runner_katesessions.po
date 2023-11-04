@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-31 01:40+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2009-05-28 10:02+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -19,17 +19,17 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: katesessions.cpp:30
+#: katesessions.cpp:28
 #, kde-format
 msgid "Finds Kate sessions matching :q:."
 msgstr "Finner Kate-økter som passer med :q:."
 
-#: katesessions.cpp:31
+#: katesessions.cpp:29
 #, kde-format
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Lister alle Kate-økter i kontoen din."
 
-#: katesessions.cpp:66 katesessions.cpp:77
+#: katesessions.cpp:64 katesessions.cpp:75
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Åpne Kate-økt"

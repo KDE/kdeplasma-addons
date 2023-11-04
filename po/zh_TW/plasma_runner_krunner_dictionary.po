@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-05 01:59+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2023-01-19 23:17+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -19,25 +19,25 @@ msgstr ""
 "X-Generator: Lokalize 22.12.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: dictionaryrunner.cpp:35 dictionaryrunner_config.cpp:34
+#: dictionaryrunner.cpp:34 dictionaryrunner_config.cpp:34
 #: dictionaryrunner_config.cpp:52
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"
 msgstr "定義"
 
-#: dictionaryrunner.cpp:42
+#: dictionaryrunner.cpp:41
 #, kde-format
 msgctxt "Dictionary keyword"
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: dictionaryrunner.cpp:42
+#: dictionaryrunner.cpp:41
 #, kde-format
 msgid "Finds the definition of :q:."
 msgstr "尋找 :q: 的定義。"
 
-#: dictionaryrunner.cpp:119
+#: dictionaryrunner.cpp:118
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
 msgstr "\"%1\" 的定義已複製到剪貼簿"

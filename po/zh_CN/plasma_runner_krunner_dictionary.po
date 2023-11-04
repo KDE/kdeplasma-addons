@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-05 01:59+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2023-10-21 13:51\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,25 +18,25 @@ msgstr ""
 "plasma_runner_krunner_dictionary.pot\n"
 "X-Crowdin-File-ID: 43449\n"
 
-#: dictionaryrunner.cpp:35 dictionaryrunner_config.cpp:34
+#: dictionaryrunner.cpp:34 dictionaryrunner_config.cpp:34
 #: dictionaryrunner_config.cpp:52
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"
 msgstr "查找含义"
 
-#: dictionaryrunner.cpp:42
+#: dictionaryrunner.cpp:41
 #, kde-format
 msgctxt "Dictionary keyword"
 msgid "%1:q:"
 msgstr "%1:q:"
 
-#: dictionaryrunner.cpp:42
+#: dictionaryrunner.cpp:41
 #, kde-format
 msgid "Finds the definition of :q:."
 msgstr "查找 :q: 的含义。"
 
-#: dictionaryrunner.cpp:119
+#: dictionaryrunner.cpp:118
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
 msgstr "“%1”的定义已复制到剪贴板"

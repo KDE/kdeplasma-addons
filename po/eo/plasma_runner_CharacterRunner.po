@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_CharacterRunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2023-03-26 18:35+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -20,7 +20,7 @@ msgstr ""
 "X-Generator: pology\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: charrunner.cpp:41
+#: charrunner.cpp:40
 #, kde-format
 msgid ""
 "Creates Characters from :q: if it is a hexadecimal code or defined alias."

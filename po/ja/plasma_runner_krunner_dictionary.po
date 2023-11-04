@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_krunner_dictionary\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-05 01:59+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2021-10-17 09:50+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -15,25 +15,25 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: dictionaryrunner.cpp:35 dictionaryrunner_config.cpp:34
+#: dictionaryrunner.cpp:34 dictionaryrunner_config.cpp:34
 #: dictionaryrunner_config.cpp:52
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"
 msgstr "define"
 
-#: dictionaryrunner.cpp:42
+#: dictionaryrunner.cpp:41
 #, kde-format
 msgctxt "Dictionary keyword"
 msgid "%1:q:"
 msgstr "%1 :q:"
 
-#: dictionaryrunner.cpp:42
+#: dictionaryrunner.cpp:41
 #, kde-format
 msgid "Finds the definition of :q:."
 msgstr ":q: の定義を探します。"
 
-#: dictionaryrunner.cpp:119
+#: dictionaryrunner.cpp:118
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
 msgstr ""

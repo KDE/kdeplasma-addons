@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-31 01:40+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2009-05-22 13:26+0200\n"
 "Last-Translator: Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -18,17 +18,17 @@ msgstr ""
 "X-Generator: Lokalize 0.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: katesessions.cpp:30
+#: katesessions.cpp:28
 #, kde-format
 msgid "Finds Kate sessions matching :q:."
 msgstr "Busca sesiones de Kate que coincidan con :q:."
 
-#: katesessions.cpp:31
+#: katesessions.cpp:29
 #, kde-format
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Lista todas las sesiones del editor Kate de su cuenta."
 
-#: katesessions.cpp:66 katesessions.cpp:77
+#: katesessions.cpp:64 katesessions.cpp:75
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Abrir sesión de Kate"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 01:46+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2010-01-17 06:03+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Copy unit and number"
 msgstr ""
 
-#: converterrunner.cpp:34
+#: converterrunner.cpp:32
 #, fuzzy, kde-format
 #| msgid ""
 #| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
@@ -38,7 +38,7 @@ msgstr ""
 "Eenheit\" (a.B.: \"1 km as m\"). Mit dat Eenheitenümreek-Lüttprogramm kannst "
 "Du all verföögbor Eenheiten finnen."
 
-#: converterrunner.cpp:41
+#: converterrunner.cpp:39
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"

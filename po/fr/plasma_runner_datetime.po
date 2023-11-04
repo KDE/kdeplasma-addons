@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_datetime\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-01 02:11+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2023-02-14 21:30+0100\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -45,23 +45,23 @@ msgctxt ""
 msgid "to|in|as|at"
 msgstr "vers|dans|comme|à"
 
-#: datetimerunner.cpp:36
+#: datetimerunner.cpp:34
 #, kde-format
 msgid "Displays the current date"
 msgstr "Affiche la date actuelle"
 
-#: datetimerunner.cpp:37
+#: datetimerunner.cpp:35
 #, kde-format
 msgid "Displays the current time"
 msgstr "Affiche l'heure actuelle"
 
-#: datetimerunner.cpp:38 datetimerunner.cpp:40
+#: datetimerunner.cpp:36 datetimerunner.cpp:38
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid " <timezone>"
 msgstr " <timezone>"
 
-#: datetimerunner.cpp:39
+#: datetimerunner.cpp:37
 #, kde-format
 msgid ""
 "Displays the current date and difference to system date in a given timezone"
@@ -69,7 +69,7 @@ msgstr ""
 "Affiche la date courante et la différence avec la date du système pour un "
 "fuseau horaire donné."
 
-#: datetimerunner.cpp:41
+#: datetimerunner.cpp:39
 #, kde-format
 msgid ""
 "Displays the current time and difference to system time in a given timezone"
@@ -77,13 +77,13 @@ msgstr ""
 "Affiche la date courante et la différence avec la date du système pour un "
 "fuseau horaire donné."
 
-#: datetimerunner.cpp:42
+#: datetimerunner.cpp:40
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid "<time> <timezone> in <timezone>"
 msgstr "<time> <timezone> dans <timezone>"
 
-#: datetimerunner.cpp:43
+#: datetimerunner.cpp:41
 #, kde-format
 msgid ""
 "Converts the time from the first timezone to the second timezone. If only "
@@ -95,12 +95,12 @@ msgstr ""
 "horaire du système. Si aucune date ou heure n'est indiquée, ce sera la date "
 "et l'heure actuelles."
 
-#: datetimerunner.cpp:60
+#: datetimerunner.cpp:58
 #, kde-format
 msgid "Today's date is %1"
 msgstr "La date d'aujourd'hui est %1"
 
-#: datetimerunner.cpp:76
+#: datetimerunner.cpp:74
 #, kde-format
 msgctxt ""
 "time difference between time zones, e.g. in Stockholm it's 1 calendar day "
@@ -108,7 +108,7 @@ msgctxt ""
 msgid "%1 later"
 msgstr "%1 plus tard"
 
-#: datetimerunner.cpp:78
+#: datetimerunner.cpp:76
 #, kde-format
 msgctxt ""
 "date difference between time zones, e.g. in Brasilia it's 1 calendar day "
@@ -116,7 +116,7 @@ msgctxt ""
 msgid "%1 earlier"
 msgstr "%1 plus tôt"
 
-#: datetimerunner.cpp:80
+#: datetimerunner.cpp:78
 #, kde-format
 msgctxt ""
 "no date difference between time zones, e.g. in Stockholm it's the same "
@@ -124,12 +124,12 @@ msgctxt ""
 msgid "no date difference"
 msgstr "Aucune différence de date"
 
-#: datetimerunner.cpp:95
+#: datetimerunner.cpp:93
 #, kde-format
 msgid "Current time is %1"
 msgstr "Il est %1"
 
-#: datetimerunner.cpp:114 datetimerunner.cpp:208
+#: datetimerunner.cpp:112 datetimerunner.cpp:206
 #, kde-format
 msgctxt ""
 "time difference with calendar date difference between time zones, e.g. 22:00 "
@@ -138,7 +138,7 @@ msgctxt ""
 msgid "%1 + %2"
 msgstr "%1 + %2"
 
-#: datetimerunner.cpp:121 datetimerunner.cpp:215
+#: datetimerunner.cpp:119 datetimerunner.cpp:213
 #, kde-format
 msgctxt ""
 "time difference with calendar date difference between time zones, e.g. 02:00 "
@@ -147,7 +147,7 @@ msgctxt ""
 msgid "%1 - %2"
 msgstr "%1 - %2"
 
-#: datetimerunner.cpp:130 datetimerunner.cpp:225
+#: datetimerunner.cpp:128 datetimerunner.cpp:223
 #, kde-format
 msgctxt ""
 "time difference between time zones, e.g. in Stockholm it's 4 hours later "
@@ -155,7 +155,7 @@ msgctxt ""
 msgid "%1 later"
 msgstr "%1 plus tard"
 
-#: datetimerunner.cpp:132 datetimerunner.cpp:227
+#: datetimerunner.cpp:130 datetimerunner.cpp:225
 #, kde-format
 msgctxt ""
 "time difference between time zones, e.g. in Brasilia it's 4 hours earlier "
@@ -163,7 +163,7 @@ msgctxt ""
 msgid "%1 earlier"
 msgstr "%1 plus tôt"
 
-#: datetimerunner.cpp:134 datetimerunner.cpp:229
+#: datetimerunner.cpp:132 datetimerunner.cpp:227
 #, kde-format
 msgctxt ""
 "no time difference between time zones, e.g. in Stockholm it's the same time "

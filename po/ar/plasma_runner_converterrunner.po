@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-09 01:46+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2023-05-04 10:43+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -24,7 +24,7 @@ msgstr ""
 msgid "Copy unit and number"
 msgstr "انسخ الوحدة والرقم"
 
-#: converterrunner.cpp:34
+#: converterrunner.cpp:32
 #, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
@@ -33,7 +33,7 @@ msgstr ""
 "يحوّل قيمة :q: عندما تكون قيمة :q: هي القيمة الوحدة [>، إلى] الوحدة. يمكنك "
 "استخدام بريمج محوّل الوحدات للعثور على كلّ الوحدات المتوفّرة."
 
-#: converterrunner.cpp:41
+#: converterrunner.cpp:39
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"

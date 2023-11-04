@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-31 01:40+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2009-07-04 14:15+0200\n"
 "Last-Translator: Lukáš Tinkl <ltinkl@redhat.com>\n"
 "Language-Team: Czech <kde-czech-apps@lists.sf.net>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
-#: katesessions.cpp:30
+#: katesessions.cpp:28
 #, kde-format
 msgid "Finds Kate sessions matching :q:."
 msgstr "Najde sezení Kate odpovídající :q:."
 
-#: katesessions.cpp:31
+#: katesessions.cpp:29
 #, kde-format
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Vypíše všechny sezení editoru Kate pro tento účet."
 
-#: katesessions.cpp:66 katesessions.cpp:77
+#: katesessions.cpp:64 katesessions.cpp:75
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Otevřít sezení Kate"

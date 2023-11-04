@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-01 02:33+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2018-06-27 18:35+0100\n"
 "Last-Translator: Øystein Steffensen-Alværvik <ystein@posteo.net>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: konsoleprofiles.cpp:24
+#: konsoleprofiles.cpp:23
 #, kde-format
 msgid "Finds Konsole profiles matching :q:."
 msgstr "Finner Konsoll-profiler med treff på «:q:»."
 
-#: konsoleprofiles.cpp:25
+#: konsoleprofiles.cpp:24
 #, kde-format
 msgid "Lists all the Konsole profiles in your account."
 msgstr "Lister opp Konsoll-profilene på kontoen din."

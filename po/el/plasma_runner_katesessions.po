@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-31 01:40+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2009-04-27 11:33+0300\n"
 "Last-Translator: Toussis Manolis <manolis@koppermind.homelinux.org>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 0.3\n"
 
-#: katesessions.cpp:30
+#: katesessions.cpp:28
 #, kde-format
 msgid "Finds Kate sessions matching :q:."
 msgstr "Εύρεση συνεδριών Kate που ταιριάζουν με το :q:."
 
-#: katesessions.cpp:31
+#: katesessions.cpp:29
 #, kde-format
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Εμφάνιση όλων των συνεδριών Kate του λογαριασμού σας."
 
-#: katesessions.cpp:66 katesessions.cpp:77
+#: katesessions.cpp:64 katesessions.cpp:75
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Άνοιγμα συνεδρίας Kate"

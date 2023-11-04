@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-31 01:40+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2017-08-13 09:18+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.net>\n"
@@ -19,17 +19,17 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: katesessions.cpp:30
+#: katesessions.cpp:28
 #, kde-format
 msgid "Finds Kate sessions matching :q:."
 msgstr "Atopa sesións de Kate que casen con :q:."
 
-#: katesessions.cpp:31
+#: katesessions.cpp:29
 #, kde-format
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Lista todas as sesións do editor Kate que haxa na súa conta."
 
-#: katesessions.cpp:66 katesessions.cpp:77
+#: katesessions.cpp:64 katesessions.cpp:75
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Abrir unha sesión de Kate"

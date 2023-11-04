@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-01 02:33+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2018-02-17 09:49+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -17,12 +17,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: konsoleprofiles.cpp:24
+#: konsoleprofiles.cpp:23
 #, kde-format
 msgid "Finds Konsole profiles matching :q:."
 msgstr "Hittar terminalprofiler som motsvarar :q:."
 
-#: konsoleprofiles.cpp:25
+#: konsoleprofiles.cpp:24
 #, kde-format
 msgid "Lists all the Konsole profiles in your account."
 msgstr "Listar alla terminalprofiler i ditt konto."

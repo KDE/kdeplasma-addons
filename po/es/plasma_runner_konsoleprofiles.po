@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-05-01 02:33+0000\n"
+"POT-Creation-Date: 2023-11-04 01:38+0000\n"
 "PO-Revision-Date: 2018-03-03 21:14+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: konsoleprofiles.cpp:24
+#: konsoleprofiles.cpp:23
 #, kde-format
 msgid "Finds Konsole profiles matching :q:."
 msgstr "Busca perfiles de Konsole que coincidan con :q:."
 
-#: konsoleprofiles.cpp:25
+#: konsoleprofiles.cpp:24
 #, kde-format
 msgid "Lists all the Konsole profiles in your account."
 msgstr "Lista todos los perfiles de Konsole existentes en su cuenta."
