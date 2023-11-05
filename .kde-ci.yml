@@ -24,10 +24,10 @@ Dependencies:
     'frameworks/kservice': '@latest'
     'frameworks/kwidgetsaddons': '@latest'
     'frameworks/kxmlgui': '@latest'
-    'frameworks/plasma-framework': '@latest'
     'frameworks/solid': '@latest'
     'frameworks/sonnet': '@latest'
     'frameworks/kunitconversion': '@latest'
+    'plasma/plasma-framework': 'kf5'
     'plasma/plasma-workspace': '@same'
 - 'on': ['Linux']
   'require':
