@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 01:49+0000\n"
+"POT-Creation-Date: 2023-11-05 14:06+0000\n"
 "PO-Revision-Date: 2023-03-26 18:35+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -37,20 +37,20 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Pluaj"
 
-#: package/contents/ui/CompactRepresentation.qml:134
+#: package/contents/ui/CompactRepresentation.qml:135
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Paŭzi Tempigilon"
 
-#: package/contents/ui/CompactRepresentation.qml:134
+#: package/contents/ui/CompactRepresentation.qml:135
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Komencigi Tempigilon"
 
-#: package/contents/ui/CompactRepresentation.qml:191
-#: package/contents/ui/CompactRepresentation.qml:208
+#: package/contents/ui/CompactRepresentation.qml:197
+#: package/contents/ui/CompactRepresentation.qml:215
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"

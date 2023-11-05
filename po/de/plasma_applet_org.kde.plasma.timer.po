@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 01:49+0000\n"
+"POT-Creation-Date: 2023-11-05 14:06+0000\n"
 "PO-Revision-Date: 2023-03-15 21:28+0100\n"
 "Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -35,20 +35,20 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Erweitert"
 
-#: package/contents/ui/CompactRepresentation.qml:134
+#: package/contents/ui/CompactRepresentation.qml:135
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Eieruhr anhalten"
 
-#: package/contents/ui/CompactRepresentation.qml:134
+#: package/contents/ui/CompactRepresentation.qml:135
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Eieruhr starten"
 
-#: package/contents/ui/CompactRepresentation.qml:191
-#: package/contents/ui/CompactRepresentation.qml:208
+#: package/contents/ui/CompactRepresentation.qml:197
+#: package/contents/ui/CompactRepresentation.qml:215
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"

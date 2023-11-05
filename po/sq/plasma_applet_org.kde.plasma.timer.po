@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 01:49+0000\n"
+"POT-Creation-Date: 2023-11-05 14:06+0000\n"
 "PO-Revision-Date: 2009-07-31 00:38+0000\n"
 "Last-Translator: Vilson Gjeci <vilsongjeci@gmail.com>\n"
 "Language-Team: Albanian <sq@li.org>\n"
@@ -39,22 +39,22 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr ""
 
-#: package/contents/ui/CompactRepresentation.qml:134
+#: package/contents/ui/CompactRepresentation.qml:135
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Koha"
 
-#: package/contents/ui/CompactRepresentation.qml:134
+#: package/contents/ui/CompactRepresentation.qml:135
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Koha"
 
-#: package/contents/ui/CompactRepresentation.qml:191
-#: package/contents/ui/CompactRepresentation.qml:208
+#: package/contents/ui/CompactRepresentation.qml:197
+#: package/contents/ui/CompactRepresentation.qml:215
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"

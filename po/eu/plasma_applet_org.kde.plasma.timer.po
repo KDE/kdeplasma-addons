@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-14 01:49+0000\n"
+"POT-Creation-Date: 2023-11-05 14:06+0000\n"
 "PO-Revision-Date: 2022-12-01 23:06+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -38,20 +38,20 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Aurreratua"
 
-#: package/contents/ui/CompactRepresentation.qml:134
+#: package/contents/ui/CompactRepresentation.qml:135
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Eten tenporizadorea"
 
-#: package/contents/ui/CompactRepresentation.qml:134
+#: package/contents/ui/CompactRepresentation.qml:135
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Abiatu tenporizadorea"
 
-#: package/contents/ui/CompactRepresentation.qml:191
-#: package/contents/ui/CompactRepresentation.qml:208
+#: package/contents/ui/CompactRepresentation.qml:197
+#: package/contents/ui/CompactRepresentation.qml:215
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
