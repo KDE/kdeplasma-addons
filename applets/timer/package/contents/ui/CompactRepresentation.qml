@@ -4,7 +4,7 @@
  *   SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import QtQuick 2.15
+import QtQuick
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
@@ -51,22 +51,23 @@ Item {
     Keys.onDownPressed: adjustSecond(-10);
 
     function adjustSecond(value) {
-        if (value > 5) {
-            if (root.seconds + 1 < 24*60*60) {
-                root.seconds += 1;
-            }
-        } else if (value < -5) {
-            if (root.seconds - 1 >= 0) {
-                root.seconds -= 1;
-            }
+        while (value >= 15 && root.seconds + 1 < 24*60*60) {
+            root.seconds += 1;
+            value -= 15;
         }
+        while (value <= -15 && root.seconds - 1 >= 0) {
+            root.seconds -= 1;
+            value += 15;
+        }
+        return value;
     }
 
     WheelHandler {
+        acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
         enabled: !root.running
         onWheel: {
             event.accepted = true;
-            compactRepresentation.adjustSecond(event.angleDelta.y);
+            rotation = compactRepresentation.adjustSecond(rotation);
         }
     }
 
