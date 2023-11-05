@@ -161,6 +161,11 @@ Item {
 
             spacing: parent.columnSpacing
 
+            TapHandler {
+                acceptedButtons: Qt.LeftButton
+                onTapped: root.expanded = !root.expanded
+            }
+
             PlasmaComponents3.Label {
                 id: titleLabel
 
@@ -203,6 +208,7 @@ Item {
                 fontSizeMode: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.VerticalFit : Text.HorizontalFit
                 horizontalAlignment: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.AlignJustify : Text.AlignHCenter
                 minimumPointSize: Kirigami.Theme.smallFont.pointSize
+                verticalAlignment: Text.AlignVCenter
 
                 text: {
                     if (root.isVertical) {
@@ -235,11 +241,6 @@ Item {
         Item {
             Layout.fillHeight: true
             visible: spacerItem.visible
-        }
-
-        TapHandler {
-            acceptedButtons: Qt.LeftButton
-            onTapped: root.expanded = !root.expanded
         }
     }
 }
