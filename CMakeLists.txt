@@ -57,9 +57,6 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     KIO
     KCMUtils
     Notifications
-    Plasma
-    PlasmaQuick
-    Plasma5Support
     Runner
     Service
     Sonnet
@@ -68,6 +65,8 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     NewStuff
     JobWidgets
 )
+
+find_package(KF6 ${PROJECT_VERSION} REQUIRED COMPONENTS Plasma PlasmaQuick Plasma5Support)
 
 find_package(KF6Purpose CONFIG QUIET)
 set_package_properties(KF6Purpose PROPERTIES
