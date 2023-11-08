@@ -34,7 +34,7 @@ Item {
         text: model.id
         Accessible.description: model.description
 
-        RowLayout {
+        contentItem: RowLayout {
             Kirigami.ListItemDragHandle {
                 listItem: dictItem
                 listView: delegate.view
