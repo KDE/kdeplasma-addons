@@ -9,20 +9,19 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-09-26 01:47+0000\n"
-"PO-Revision-Date: 2017-05-22 05:28-0400\n"
-"Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
+"PO-Revision-Date: 2023-11-07 11:18+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: package/contents/config/config.qml:11
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "כללי"
@@ -31,14 +30,13 @@ msgstr "כללי"
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
-msgstr ""
+msgstr "לחיצה אמצעית תעתיק את קוד הצבע"
 
 #: package/contents/ui/CompactRepresentation.qml:74
-#, fuzzy, kde-format
-#| msgid "Pick a color"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
-msgstr "בחר צבע"
+msgstr "בחירת צבע"
 
 #: package/contents/ui/CompactRepresentation.qml:81
 #, kde-kuit-format
@@ -47,120 +45,111 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"יש לגרור לכאן קוד צבע כדי לשמור אותו<nl/>יש לגרור לכאן תמונה כדי לקבל את "
+"הצבע הממוצע שלה"
 
 #: package/contents/ui/configGeneral.qml:25
-#, fuzzy, kde-format
-#| msgid "Default color format:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
-msgstr "פורמט הצבע הברירת מחדל:"
+msgstr "תבנית הצבע כברירת מחדל:"
 
 #: package/contents/ui/configGeneral.qml:33
-#, fuzzy, kde-format
-#| msgid "Automatically copy color to clipboard"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
-msgstr "העתק אוטומטית ללוח הגזירה"
+msgstr "להעתיק צבע אוטומטית ללוח הגזירים"
 
 #: package/contents/ui/configGeneral.qml:41
-#, fuzzy, kde-format
-#| msgid "When pressing the keyboard shortcut:"
+#, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
-msgstr "שלוחצים על קיצור הדרך:"
+msgstr "בלחיצה על כפתור הקיצור במקלדת:"
 
 #: package/contents/ui/configGeneral.qml:42
-#, fuzzy, kde-format
-#| msgid "Pick a color"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
-msgstr "בחר צבע"
+msgstr "בחירת צבע"
 
 #: package/contents/ui/configGeneral.qml:48
-#, fuzzy, kde-format
-#| msgid "Show history"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
-msgstr "הראה היסטוריה"
+msgstr "הצגת היסטוריה"
 
 #: package/contents/ui/configGeneral.qml:58
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "מניין תצוגה מקדימה:"
 
 #: package/contents/ui/main.qml:101
-#, fuzzy, kde-format
-#| msgid "Open Color Dialog"
+#, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
-msgstr "פתח את תיבת הדו-שיח 'צבע'"
+msgstr "פתיחת חלונית צבעים"
 
 #: package/contents/ui/main.qml:106
-#, fuzzy, kde-format
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "Clear History"
-msgstr "מחיקת היסטוריה"
+msgstr "פינוי ההיסטוריה"
 
 #: package/contents/ui/main.qml:114
-#, fuzzy, kde-format
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "מחיקת היסטוריה"
+msgstr "הצגת ההיסטוריה"
 
 #: package/contents/ui/main.qml:122
-#, fuzzy, kde-format
-#| msgid "Copy to Clipboard"
+#, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
-msgstr "העתק ללוח הגזירה"
+msgstr "העתקה ללוח גזירים"
 
 #: package/contents/ui/main.qml:159
-#, fuzzy, kde-format
-#| msgid "Pick a color"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr "בחר צבע"
+msgstr "אין צבעים"
 
 #: package/contents/ui/main.qml:159
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
+msgstr "בחירת צבעים לא זמינה כשהניהול החלונאי מושבת"
 
 #: package/contents/ui/main.qml:160
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
-msgstr ""
+msgstr "ניהול חלונאי הושבת או נחסם ידנית על ידי יישום פעיל"
 
 #: package/contents/ui/main.qml:167
-#, fuzzy, kde-format
-#| msgid "Pick Color"
+#, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
-msgstr "בחר צבע"
+msgstr "בחירת צבע"
 
 #: package/contents/ui/main.qml:175
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "הגדרת ניהול חלונאי"
 
 #: package/contents/ui/main.qml:360
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "הועתק!"
 
 #: package/contents/ui/main.qml:370
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr ""
+msgstr "מחיקה"
 
 #, fuzzy
 #~| msgid "Color Options"

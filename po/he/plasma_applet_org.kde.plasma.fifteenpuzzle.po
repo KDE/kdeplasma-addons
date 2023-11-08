@@ -9,20 +9,19 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-29 01:59+0000\n"
-"PO-Revision-Date: 2017-05-16 06:55-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
+"PO-Revision-Date: 2023-11-07 11:22+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "מראה"
@@ -31,84 +30,83 @@ msgstr "מראה"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
-msgstr ""
+msgstr "גודל טבלה:"
 
 #: package/contents/ui/configAppearance.qml:50
 #, kde-format
 msgid "Background:"
-msgstr ""
+msgstr "רקע:"
 
 #: package/contents/ui/configAppearance.qml:56
 #, kde-format
 msgid "Color:"
-msgstr ""
+msgstr "צבע:"
 
 #: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "Image:"
-msgstr ""
+msgstr "תמונה:"
 
 #: package/contents/ui/configAppearance.qml:79
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
-msgstr "השתמש בתמונה מותאמת אישית"
+msgstr "נתיב לתמונה משלך…"
 
 #: package/contents/ui/configAppearance.qml:98
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
-msgstr ""
+msgstr "בחירת תמונה…"
 
 #: package/contents/ui/configAppearance.qml:106
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
-msgstr ""
+msgstr "בחירת תמונה"
 
 #: package/contents/ui/configAppearance.qml:111
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
-msgstr ""
+msgstr "קובצי תמונות (‎*.png‏ ‎*.jpg‏ ‎*.jpeg‏ ‎*.bmp‏ ‎*.svg‏ ‎*.svgz)"
 
 #: package/contents/ui/configAppearance.qml:125
 #, kde-format
 msgid "Tiles:"
-msgstr ""
+msgstr "משבצות:"
 
 #: package/contents/ui/configAppearance.qml:129
 #, kde-format
 msgid "Colored numbers:"
-msgstr ""
+msgstr "מספרים צבעוניים:"
 
 #: package/contents/ui/FifteenPuzzle.qml:259
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
-msgstr "שעה: %1"
+msgstr "זמן: %1"
 
 #: package/contents/ui/FifteenPuzzle.qml:302
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
-msgstr "ערבב חלקים"
+msgstr "ערבוב"
 
 #: package/contents/ui/FifteenPuzzle.qml:339
-#, fuzzy, kde-format
-#| msgid "Solved! Try again."
+#, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
-msgstr "נפתר! נסה שוב."
+msgstr "נפתר! אפשר לנסות שוב."
 
 #: package/contents/ui/main.qml:26
-#, fuzzy, kde-format
+#, kde-format
 msgid "Fifteen Puzzle"
-msgstr "הגדר את הפזל"
+msgstr "תצרף חמש־עשרה"
 
 #: package/contents/ui/main.qml:27
 #, kde-format
 msgid "Solve by arranging in order"
-msgstr "פתור ע\"י קיבוץ על פי הסדר"
+msgstr "צריך לפתור על ידי סידור נכון"
 
 #, fuzzy
 #~| msgid "Size"

@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-16 01:59+0000\n"
-"PO-Revision-Date: 2017-05-16 06:56-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
+"PO-Revision-Date: 2023-11-07 11:19+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
@@ -17,77 +17,72 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: package/contents/config/config.qml:11
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "כללי"
 
 #: package/contents/ui/configGeneral.qml:27
-#, fuzzy, kde-format
-#| msgid "User name display"
+#, kde-format
 msgctxt "@title:label"
 msgid "Username style:"
-msgstr "הצגת שם משתמש"
+msgstr "סגנון שם משתמש:"
 
 #: package/contents/ui/configGeneral.qml:30
-#, fuzzy, kde-format
-#| msgid "Show full name (if available)"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Full name (if available)"
-msgstr "הראה שם מלא (אם זמין)"
+msgstr "שם מלא (אם יש)"
 
 #: package/contents/ui/configGeneral.qml:37
-#, fuzzy, kde-format
-#| msgid "Show login username"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Login username"
-msgstr "הראה שם משתמש"
+msgstr "שם משתמש לכניסה"
 
 #: package/contents/ui/configGeneral.qml:55
 #, kde-format
 msgctxt "@title:label"
 msgid "Show:"
-msgstr ""
+msgstr "הצגה:"
 
 #: package/contents/ui/configGeneral.qml:58
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name"
-msgstr ""
+msgstr "שם"
 
 #: package/contents/ui/configGeneral.qml:72
 #, kde-format
 msgctxt "@option:radio"
 msgid "User picture"
-msgstr ""
+msgstr "תמונת משתמש"
 
 #: package/contents/ui/configGeneral.qml:86
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name and user picture"
-msgstr ""
+msgstr "שם ותמונת משתמש"
 
 #: package/contents/ui/configGeneral.qml:105
 #, kde-format
 msgctxt "@title:label"
 msgid "Advanced:"
-msgstr ""
+msgstr "מתקדם:"
 
 #: package/contents/ui/configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgid "Show technical information about sessions"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show technical session information"
-msgstr "הראה פרטים טכנים על ההפעלה"
+msgstr "הצגת פרטי הפעלה טכניים"
 
 #: package/contents/ui/main.qml:47
 #, kde-format
 msgid "You are logged in as <b>%1</b>"
-msgstr "אתה מחובר בתור <b>%1</b>"
+msgstr "נכנסת בשם <b>%1</b>"
 
 #: package/contents/ui/main.qml:141
 #, kde-format
@@ -116,27 +111,25 @@ msgstr "ב־%1 (%2)"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
-msgstr ""
+msgstr "החלפה למשתמש %1"
 
 #: package/contents/ui/main.qml:205
-#, fuzzy, kde-format
-#| msgid "New Session"
+#, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "הפעלה חדשה"
 
 #: package/contents/ui/main.qml:217
-#, fuzzy, kde-format
-#| msgid "Lock Screen"
+#, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
-msgstr "מסך נעילה"
+msgstr "נעילת המסך"
 
 #: package/contents/ui/main.qml:229
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Log Out"
-msgstr ""
+msgstr "יציאה"
 
 #, fuzzy
 #~| msgctxt "Show a dialog with options to logout/shutdown/restart"
