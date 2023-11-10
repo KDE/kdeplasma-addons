@@ -156,10 +156,13 @@ PlasmoidItem {
 
                 opacity: 0
                 iconName: "edit-none"
-                text: KX11Extras.compositingActive ? i18nc("@info:usagetip", "No colors") : i18nc("@info:status when color picking is unavailable", "Color picking unavailable when compositing is disabled")
-                explanation: KX11Extras.compositingActive ? "" : i18nc("@info:status when color pick is unavailable", "Compositing has been manually disabled or blocked by a running application")
 
-                helpfulAction: KX11Extras.compositingActive ? pickColorAction : enableCompositingAction
+                readonly property bool compositingActive: KWindowSystem.isPlatformWayland || KX11Extras.compositingActive
+
+                text: compositingActive ? i18nc("@info:usagetip", "No colors") : i18nc("@info:status when color picking is unavailable", "Color picking unavailable when compositing is disabled")
+                explanation: compositingActive ? "" : i18nc("@info:status when color pick is unavailable", "Compositing has been manually disabled or blocked by a running application")
+
+                helpfulAction: compositingActive ? pickColorAction : enableCompositingAction
 
                 QQC2.Action {
                     id: pickColorAction

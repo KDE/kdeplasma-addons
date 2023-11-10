@@ -70,7 +70,7 @@ DropArea {
             property Item loadingIndicator: null
 
             display: PlasmaComponents3.AbstractButton.IconOnly
-            enabled: KX11Extras.compositingActive
+            enabled: KWindowSystem.isPlatformWayland || KX11Extras.compositingActive
             text: i18nc("@info:tooltip", "Pick color")
 
             onClicked: root.pickColor()
