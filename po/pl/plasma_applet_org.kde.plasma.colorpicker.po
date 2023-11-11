@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-26 01:47+0000\n"
+"POT-Creation-Date: 2023-11-11 01:44+0000\n"
 "PO-Revision-Date: 2023-05-20 08:18+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -108,19 +108,19 @@ msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Skopiuj do schowka"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Brak barw"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "Pobieranie barw jest niedostępne przy włączonym kompozytorze"
 
-#: package/contents/ui/main.qml:160
+#: package/contents/ui/main.qml:163
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
@@ -129,25 +129,25 @@ msgstr ""
 "Komponowanie zostało ręcznie wyłączone lub zablokowane przez uruchomioną "
 "aplikację"
 
-#: package/contents/ui/main.qml:167
+#: package/contents/ui/main.qml:170
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Wybierz barwę"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "Ustawienia kompozytora"
 
-#: package/contents/ui/main.qml:360
+#: package/contents/ui/main.qml:363
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Skopiowano!"
 
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:373
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-26 01:47+0000\n"
+"POT-Creation-Date: 2023-11-11 01:44+0000\n"
 "PO-Revision-Date: 2022-12-24 07:24+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -100,44 +100,44 @@ msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Copiar para a Área de Transferência"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Sem cores"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr ""
 
-#: package/contents/ui/main.qml:160
+#: package/contents/ui/main.qml:163
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
 
-#: package/contents/ui/main.qml:167
+#: package/contents/ui/main.qml:170
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Escolher uma Cor"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr ""
 
-#: package/contents/ui/main.qml:360
+#: package/contents/ui/main.qml:363
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Copiada!"
 
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:373
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

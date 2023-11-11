@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-26 01:47+0000\n"
+"POT-Creation-Date: 2023-11-11 01:44+0000\n"
 "PO-Revision-Date: 2023-07-25 00:50+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -105,44 +105,44 @@ msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "클립보드에 복사"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "색상 없음"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "컴포지팅이 비활성화되어 있을 때에는 색상 선택을 사용할 수 없음"
 
-#: package/contents/ui/main.qml:160
+#: package/contents/ui/main.qml:163
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr "컴포지팅이 수동으로 비활성화되었거나 실행 중인 프로그램에서 비활성화함"
 
-#: package/contents/ui/main.qml:167
+#: package/contents/ui/main.qml:170
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "색상 선택"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "컴포지팅 설정"
 
-#: package/contents/ui/main.qml:360
+#: package/contents/ui/main.qml:363
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "복사했습니다!"
 
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:373
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-09-26 01:47+0000\n"
+"POT-Creation-Date: 2023-11-11 01:44+0000\n"
 "PO-Revision-Date: 2023-05-14 09:37+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -113,19 +113,19 @@ msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Kopiraj na odložišče"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Ni barv"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "Pobiranje barv ni možno, kadar je sestavljanje barv onemogočeno"
 
-#: package/contents/ui/main.qml:160
+#: package/contents/ui/main.qml:163
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
@@ -133,25 +133,25 @@ msgid ""
 msgstr ""
 "Sestavljanje barv je bilo ročno onemogočeno ali blokirano z aplikacijo v teku"
 
-#: package/contents/ui/main.qml:167
+#: package/contents/ui/main.qml:170
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Izberite barvo"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "Konfiguriraj sestavljanje barv"
 
-#: package/contents/ui/main.qml:360
+#: package/contents/ui/main.qml:363
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopirano!"
 
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:373
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
