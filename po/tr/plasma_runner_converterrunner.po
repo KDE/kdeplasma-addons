@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 01:38+0000\n"
-"PO-Revision-Date: 2023-05-01 12:18+0300\n"
+"PO-Revision-Date: 2023-11-13 06:59+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.03.70\n"
+"X-Generator: Lokalize 23.11.70\n"
 
 #: converterrunner.cpp:29
 #, kde-format
@@ -32,7 +32,7 @@ msgid ""
 "unit.You can use the Unit converter applet to find all available units."
 msgstr ""
 ":q: değerini \"değer birim [>, kaç] birim\" kalıbında olduğunda çevirir. Tüm "
-"kullanılabilir birimleri görmek için Birim Dönüştürücü uygulamacığını "
+"kullanılabilir birimleri görmek için Birim Dönüştürücüsü uygulamacığını "
 "kullanabilirsiniz."
 
 #: converterrunner.cpp:39
