@@ -271,8 +271,7 @@ QHash<QString, QTimeZone> DateTimeRunner::matchingTimeZones(const QStringView &z
         const QTime atTime = referenceDatetime.time().isValid() ? referenceDatetime.time() : QDateTime::currentDateTime().toTimeZone(timeZone).time();
         const QDateTime atDatetime(atDate, atTime, timeZone);
 
-        const QString zoneName = QString::fromUtf8(zoneId);
-        if (zoneName.startsWith(QLatin1String("UTC+")) || zoneName.startsWith(QLatin1String("UTC-"))) {
+        if (zoneId.startsWith(QByteArrayView("UTC+")) || zoneId.startsWith(QByteArrayView("UTC-"))) {
             // Qt time zones are either of the form
             // (where {zone name} {long name} {abbreviation} {short name} {offset name} {country})
             // - "Europe/Stockholm" "Central European Standard Time" "CET" "GMT+1" "UTC+01:00" "Sweden"
@@ -281,6 +280,7 @@ QHash<QString, QTimeZone> DateTimeRunner::matchingTimeZones(const QStringView &z
             continue;
         }
 
+        const QString zoneName = QString::fromUtf8(zoneId);
         // eg "Stockholm"
         const QString city = zoneName.mid(zoneName.indexOf(QLatin1Char('/')) + 1).replace(QLatin1Char('_'), QLatin1Char(' '));
         if (city.contains(zoneTerm, Qt::CaseInsensitive)) {
