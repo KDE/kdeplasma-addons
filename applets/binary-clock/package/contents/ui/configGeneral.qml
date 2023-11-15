@@ -13,12 +13,9 @@ import QtQuick.Controls 2.5 as QtControls
 import QtQuick.Layouts 1.1
 import org.kde.kquickcontrols 2.0 as KQuickControls
 import org.kde.kirigami 2.5 as Kirigami
+import org.kde.kcmutils as KCM
 
-Kirigami.FormLayout {
-    id: generalConfigPage
-    anchors.left: parent.left
-    anchors.right: parent.right
-
+KCM.SimpleKCM {
     property alias cfg_showGrid: showGridCheckBox.checked
     property alias cfg_showOffLeds: showOffLedsCheckBox.checked
     property alias cfg_showSeconds: showSecondsCheckBox.checked
@@ -30,6 +27,7 @@ Kirigami.FormLayout {
     property alias cfg_useCustomColorForGrid: useCustomColorForGridCheckBox.checked
     property alias cfg_customColorForGrid: customColorForGrid.color
 
+    Kirigami.FormLayout {
         QtControls.CheckBox {
             id: showGridCheckBox
             Kirigami.FormData.label:i18n("Display:")
@@ -95,4 +93,5 @@ Kirigami.FormLayout {
                 enabled: useCustomColorForGridCheckBox.checked
             }
         }
+    }
 }

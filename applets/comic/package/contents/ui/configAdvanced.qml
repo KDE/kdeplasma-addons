@@ -10,12 +10,10 @@ import QtQuick.Layouts 1.1 as Layouts
 
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasmoid
+import org.kde.kcmutils as KCM
 
-
-Kirigami.FormLayout {
+KCM.SimpleKCM {
     id: root
-    anchors.left: parent.left
-    anchors.right: parent.right
 
     signal configurationChanged
 
@@ -27,28 +25,30 @@ Kirigami.FormLayout {
         Plasmoid.configChanged();
     }
 
-    Component.onCompleted: {
-        showErrorPicture.checked = Plasmoid.showErrorPicture;
-        maxComicLimit.value = Plasmoid.maxComicLimit;
-    }
-
-    Layouts.RowLayout {
-        Kirigami.FormData.label: i18nc("@label:spinbox", "Comic cache:")
-
-        Controls.SpinBox {
-            id: maxComicLimit
-            stepSize: 1
-            onValueChanged: root.configurationChanged();
+    Kirigami.FormLayout {
+        Component.onCompleted: {
+            showErrorPicture.checked = Plasmoid.showErrorPicture;
+            maxComicLimit.value = Plasmoid.maxComicLimit;
         }
 
-        Controls.Label {
-            text: i18ncp("@item:valuesuffix spacing to number + unit", "strip per comic", "strips per comic")
-        }
-    }
+        Layouts.RowLayout {
+            Kirigami.FormData.label: i18nc("@label:spinbox", "Comic cache:")
 
-    Controls.CheckBox {
-        id: showErrorPicture
-        text: i18nc("@option:check", "Display error when downloading comic fails")
-        onCheckedChanged: root.configurationChanged();
+            Controls.SpinBox {
+                id: maxComicLimit
+                stepSize: 1
+                onValueChanged: root.configurationChanged();
+            }
+
+            Controls.Label {
+                text: i18ncp("@item:valuesuffix spacing to number + unit", "strip per comic", "strips per comic")
+            }
+        }
+
+        Controls.CheckBox {
+            id: showErrorPicture
+            text: i18nc("@option:check", "Display error when downloading comic fails")
+            onCheckedChanged: root.configurationChanged();
+        }
     }
 }

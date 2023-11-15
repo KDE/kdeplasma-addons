@@ -9,33 +9,33 @@ import QtQuick.Controls 2.5 as QQC2
 import QtQuick.Layouts 1.0
 
 import org.kde.kirigami 2.5 as Kirigami
+import org.kde.kcmutils as KCM
 
-Kirigami.FormLayout {
-    id: generalPage
-
+KCM.SimpleKCM {
     property alias cfg_runCommand: runCommand.checked
     property alias cfg_command: command.text
 
-    RowLayout {
-        Layout.fillWidth: true
+    Kirigami.FormLayout {
+        RowLayout {
+            Layout.fillWidth: true
 
-        Kirigami.FormData.label: i18nc("@title:label", "After timer completes:")
+            Kirigami.FormData.label: i18nc("@title:label", "After timer completes:")
 
-        QQC2.CheckBox {
-            id: runCommand
-            text: i18nc("@option:check", "Execute command:")
-            onClicked: {
-                if (checked) {
-                    command.forceActiveFocus();
+            QQC2.CheckBox {
+                id: runCommand
+                text: i18nc("@option:check", "Execute command:")
+                onClicked: {
+                    if (checked) {
+                        command.forceActiveFocus();
+                    }
                 }
             }
-        }
 
-        QQC2.TextField {
-            id: command
-            Layout.fillWidth: true
-            enabled: runCommand.checked
+            QQC2.TextField {
+                id: command
+                Layout.fillWidth: true
+                enabled: runCommand.checked
+            }
         }
     }
 }
-

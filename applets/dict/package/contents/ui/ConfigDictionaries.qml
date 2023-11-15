@@ -8,14 +8,12 @@ import QtQuick 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.15
 import org.kde.kirigami 2.19 as Kirigami
+import org.kde.kcmutils as KCM
 import org.kde.plasma.private.dict 1.0
 
-ColumnLayout {
-    id: page
-    property string cfg_dictionary: ""
+KCM.ScrollViewKCM {
 
-    // "root" is from ConfigurationAppletPage.qml
-    implicitHeight: root.availableHeight
+    property string cfg_dictionary: ""
 
     DictionariesModel {
         id: dictionariesModel
@@ -27,38 +25,28 @@ ColumnLayout {
         id: sheet
     }
 
-    Item {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
+    view: ListView {
+        id: listView
 
-        ScrollView {
-            anchors.fill: parent
-            Component.onCompleted: background.visible = true;
+        model: dictionariesModel.enabledDictModel
+        reuseItems: true
 
-            ListView {
-                id: listView
+        displaced: Transition {
+            NumberAnimation {
+                properties: "y"
+                duration: Kirigami.Units.longDuration
+            }
+        }
 
-                model: dictionariesModel.enabledDictModel
-                reuseItems: true
+        delegate: DictItemDelegate {
+            width: listView.width
+            view: listView
 
-                displaced: Transition {
-                    NumberAnimation {
-                        properties: "y"
-                        duration: Kirigami.Units.longDuration
-                    }
-                }
-
-                delegate: DictItemDelegate {
-                    width: listView.width
-                    view: listView
-
-                    onMoveRequested: (oldIndex, newIndex) => {
-                        dictionariesModel.move(oldIndex, newIndex);
-                    }
-                    onRemoved: index => {
-                        dictionariesModel.setDisabled(index);
-                    }
-                }
+            onMoveRequested: (oldIndex, newIndex) => {
+                dictionariesModel.move(oldIndex, newIndex);
+            }
+            onRemoved: index => {
+                dictionariesModel.setDisabled(index);
             }
         }
 
@@ -104,9 +92,7 @@ ColumnLayout {
         }
     }
 
-    RowLayout {
-        Layout.fillWidth: true
-
+    footer: RowLayout {
         Button {
             enabled: sheet.view.count > 0
             text: i18n("Add More…")

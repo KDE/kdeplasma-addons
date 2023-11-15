@@ -11,11 +11,9 @@ import QtQuick.Controls 2.5 as QtControls
 import org.kde.kirigami 2.5 as Kirigami
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.private.weather 1.0
+import org.kde.kcmutils as KCM
 
-
-Kirigami.FormLayout {
-    id: displayConfigPage
-
+KCM.SimpleKCM {
     readonly property bool canShowMoreInCompactMode: !Plasmoid.needsToBeSquare
 
     property bool cfg_showTemperatureInCompactMode
@@ -31,59 +29,61 @@ Kirigami.FormLayout {
         cfg_showTemperatureInBadge = inBadge
     }
 
-    Item {
-        Kirigami.FormData.isSection: true
-        Kirigami.FormData.label: i18nc("@title:group", "Compact Mode")
+    Kirigami.FormLayout {
+        Item {
+            Kirigami.FormData.isSection: true
+            Kirigami.FormData.label: i18nc("@title:group", "Compact Mode")
 
-        // TODO: conditionalize this once there are also settings for non-compact mode
-        visible: false
-    }
+            // TODO: conditionalize this once there are also settings for non-compact mode
+            visible: false
+        }
 
-    QtControls.RadioButton {
-        id: radioTempInBadge
-        Kirigami.FormData.label: i18nc("@label", "Show temperature:")
-        checked: cfg_showTemperatureInCompactMode && (cfg_showTemperatureInBadge || !canShowMoreInCompactMode)
-        onToggled: setShowTemperature(true, true)
-        text: i18nc("@option:radio Show temperature:", "Over the widget icon")
-    }
+        QtControls.RadioButton {
+            id: radioTempInBadge
+            Kirigami.FormData.label: i18nc("@label", "Show temperature:")
+            checked: cfg_showTemperatureInCompactMode && (cfg_showTemperatureInBadge || !canShowMoreInCompactMode)
+            onToggled: setShowTemperature(true, true)
+            text: i18nc("@option:radio Show temperature:", "Over the widget icon")
+        }
 
-    QtControls.RadioButton {
-        id: radioTempBesideIcon
-        visible: canShowMoreInCompactMode
-        checked: cfg_showTemperatureInCompactMode && !cfg_showTemperatureInBadge && canShowMoreInCompactMode
-        onToggled: setShowTemperature(true, false)
-        text: i18nc("@option:radio Show temperature:", "Beside the widget icon")
-    }
+        QtControls.RadioButton {
+            id: radioTempBesideIcon
+            visible: canShowMoreInCompactMode
+            checked: cfg_showTemperatureInCompactMode && !cfg_showTemperatureInBadge && canShowMoreInCompactMode
+            onToggled: setShowTemperature(true, false)
+            text: i18nc("@option:radio Show temperature:", "Beside the widget icon")
+        }
 
-    QtControls.RadioButton {
-        id: radioTempHide
-        checked: !cfg_showTemperatureInCompactMode
-        onToggled: setShowTemperature(false, false)
-        text: i18nc("@option:radio Show temperature:", "Do not show")
-    }
+        QtControls.RadioButton {
+            id: radioTempHide
+            checked: !cfg_showTemperatureInCompactMode
+            onToggled: setShowTemperature(false, false)
+            text: i18nc("@option:radio Show temperature:", "Do not show")
+        }
 
-    Item {
-        Kirigami.FormData.isSection: true
-    }
+        Item {
+            Kirigami.FormData.isSection: true
+        }
 
-    QtControls.CheckBox {
-        id: showTemperatureInTooltipCheckBox
-        Kirigami.FormData.label: i18nc("@label", "Show in tooltip:")
-        text: i18nc("@option:check", "Temperature")
-    }
+        QtControls.CheckBox {
+            id: showTemperatureInTooltipCheckBox
+            Kirigami.FormData.label: i18nc("@label", "Show in tooltip:")
+            text: i18nc("@option:check", "Temperature")
+        }
 
-    QtControls.CheckBox {
-        id: showWindInTooltipCheckBox
-        text: i18nc("@option:check Show in tooltip: wind", "Wind")
-    }
+        QtControls.CheckBox {
+            id: showWindInTooltipCheckBox
+            text: i18nc("@option:check Show in tooltip: wind", "Wind")
+        }
 
-    QtControls.CheckBox {
-        id: showPressureInTooltipCheckBox
-        text: i18nc("@option:check Show in tooltip: pressure", "Pressure")
-    }
+        QtControls.CheckBox {
+            id: showPressureInTooltipCheckBox
+            text: i18nc("@option:check Show in tooltip: pressure", "Pressure")
+        }
 
-    QtControls.CheckBox {
-        id: showHumidityInTooltipCheckBox
-        text: i18nc("@option:check Show in tooltip: humidity", "Humidity")
+        QtControls.CheckBox {
+            id: showHumidityInTooltipCheckBox
+            text: i18nc("@option:check Show in tooltip: humidity", "Humidity")
+        }
     }
 }

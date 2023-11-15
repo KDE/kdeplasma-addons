@@ -11,11 +11,10 @@ import QtQuick.Layouts 1.1 as Layouts
 import org.kde.newstuff 1.62 as NewStuff
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasmoid
+import org.kde.kcmutils as KCM
 
-Kirigami.FormLayout {
+KCM.SimpleKCM {
     id: root
-    anchors.left: parent.left
-    anchors.right: parent.right
 
     signal configurationChanged
 
@@ -37,82 +36,84 @@ Kirigami.FormLayout {
         Plasmoid.configChanged();
     }
 
-    Component.onCompleted: {
-        middleClickCheckBox.checked = Plasmoid.middleClick;
-        checkNewComicStripsInterval.value = Plasmoid.checkNewComicStripsInterval;
-        providerUpdateInterval.value = Plasmoid.providerUpdateInterval
-    }
+    Kirigami.FormLayout {
+        Component.onCompleted: {
+            middleClickCheckBox.checked = Plasmoid.middleClick;
+            checkNewComicStripsInterval.value = Plasmoid.checkNewComicStripsInterval;
+            providerUpdateInterval.value = Plasmoid.providerUpdateInterval
+        }
 
-    Item {
-        Kirigami.FormData.isSection: true
-    }
+        Item {
+            Kirigami.FormData.isSection: true
+        }
 
-    Layouts.ColumnLayout {
-        id: providerColumn
-        Kirigami.FormData.label: i18nc("@title:group", "Comics:")
-        Kirigami.FormData.buddyFor: children[1] // 0 is the Repeater
+        Layouts.ColumnLayout {
+            id: providerColumn
+            Kirigami.FormData.label: i18nc("@title:group", "Comics:")
+            Kirigami.FormData.buddyFor: children[1] // 0 is the Repeater
 
-        Repeater {
-            model: Plasmoid.availableComicsModel
-            delegate: Controls.CheckBox {
-                id: checkbox
-                text: model.display
-                checked: model.checked
-                property string plugin: model.plugin
-                Component.onCompleted: {
-                    checkbox.checked = Plasmoid.tabIdentifiers.indexOf(model.plugin) !== -1
+            Repeater {
+                model: Plasmoid.availableComicsModel
+                delegate: Controls.CheckBox {
+                    id: checkbox
+                    text: model.display
+                    checked: model.checked
+                    property string plugin: model.plugin
+                    Component.onCompleted: {
+                        checkbox.checked = Plasmoid.tabIdentifiers.indexOf(model.plugin) !== -1
+                    }
+                    onCheckedChanged: root.configurationChanged();
                 }
-                onCheckedChanged: root.configurationChanged();
             }
         }
-    }
 
-    NewStuff.Button {
-        id: ghnsButton
-        text: i18nc("@action:button", "Get New Comics…")
-        configFile: "comic.knsrc"
-        onEntryEvent: function(entry, event) {
-            if (event == 1) {
-                Plasmoid.loadProviders()
+        NewStuff.Button {
+            id: ghnsButton
+            text: i18nc("@action:button", "Get New Comics…")
+            configFile: "comic.knsrc"
+            onEntryEvent: function(entry, event) {
+                if (event == 1) {
+                    Plasmoid.loadProviders()
+                }
             }
         }
-    }
 
-    Controls.CheckBox {
-        id: middleClickCheckBox
-        text: i18nc("@option:check", "Middle-click on comic to display at original size")
-        onCheckedChanged: root.configurationChanged();
-    }
-
-    Item {
-        Kirigami.FormData.isSection: true
-    }
-
-    Layouts.RowLayout {
-            Kirigami.FormData.label: i18nc("@label:spinbox", "Check for new plugins every:")
-
-        Controls.SpinBox {
-            id: providerUpdateInterval
-            stepSize: 1
-            onValueChanged: root.configurationChanged();
+        Controls.CheckBox {
+            id: middleClickCheckBox
+            text: i18nc("@option:check", "Middle-click on comic to display at original size")
+            onCheckedChanged: root.configurationChanged();
         }
 
-        Controls.Label {
-            text: i18ncp("@item:valuesuffix spacing to number + unit", "day", "days")
-        }
-    }
-
-    Layouts.RowLayout {
-            Kirigami.FormData.label: i18nc("@label:spinbox", "Check for new comics every:")
-
-        Controls.SpinBox {
-            id: checkNewComicStripsInterval
-            stepSize: 1
-            onValueChanged: root.configurationChanged();
+        Item {
+            Kirigami.FormData.isSection: true
         }
 
-        Controls.Label {
-            text: i18ncp("@item:valuesuffix spacing to number + unit (minutes)", "minute", "minutes")
+        Layouts.RowLayout {
+                Kirigami.FormData.label: i18nc("@label:spinbox", "Check for new plugins every:")
+
+            Controls.SpinBox {
+                id: providerUpdateInterval
+                stepSize: 1
+                onValueChanged: root.configurationChanged();
+            }
+
+            Controls.Label {
+                text: i18ncp("@item:valuesuffix spacing to number + unit", "day", "days")
+            }
+        }
+
+        Layouts.RowLayout {
+                Kirigami.FormData.label: i18nc("@label:spinbox", "Check for new comics every:")
+
+            Controls.SpinBox {
+                id: checkNewComicStripsInterval
+                stepSize: 1
+                onValueChanged: root.configurationChanged();
+            }
+
+            Controls.Label {
+                text: i18ncp("@item:valuesuffix spacing to number + unit (minutes)", "minute", "minutes")
+            }
         }
     }
 }

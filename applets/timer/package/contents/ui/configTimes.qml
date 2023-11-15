@@ -11,7 +11,7 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasmoid 2.0
 import org.kde.kcmutils as KCM
 
-ColumnLayout {
+KCM.ScrollViewKCM {
     id: timesPage
     property var cfg_predefinedTimers: []
     readonly property int maxListSize: 15
@@ -49,40 +49,38 @@ ColumnLayout {
         }
     }
 
-    KCM.ScrollViewKCM {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        view: ListView {
-            id: timeListView
-            anchors.margins: 4
-            model: timeListModel
-            spacing: parent.spacing
-            clip: true
-            reuseItems: true
-            delegate: timeEditDelegate
-            add: Transition {
-                NumberAnimation { properties: "y"; duration: Kirigami.Units.longDuration }
-            }
-            displaced: Transition {
-                NumberAnimation { properties: "y"; duration: Kirigami.Units.longDuration }
-            }
+    view: ListView {
+        id: timeListView
+        anchors.margins: 4
+        model: timeListModel
+        spacing: parent.spacing
+        clip: true
+        reuseItems: true
+        delegate: timeEditDelegate
+        add: Transition {
+            NumberAnimation { properties: "y"; duration: Kirigami.Units.longDuration }
+        }
+        displaced: Transition {
+            NumberAnimation { properties: "y"; duration: Kirigami.Units.longDuration }
+        }
 
-            Kirigami.PlaceholderMessage {
-                visible: timeListView.count === 0
-                anchors.centerIn: parent
-                width: parent.width - (Kirigami.Units.gridUnit * 4)
-                text: i18n("If you add predefined timers here, they will appear in plasmoid context menu.");
-            }
+        Kirigami.PlaceholderMessage {
+            visible: timeListView.count === 0
+            anchors.centerIn: parent
+            width: parent.width - (Kirigami.Units.gridUnit * 4)
+            text: i18n("If you add predefined timers here, they will appear in plasmoid context menu.");
         }
     }
 
-    QQC2.Button {
-        icon.name: "list-add"
-        text: i18n("Add")
-        enabled: timeListModel.count < maxListSize
-        onClicked: {
-            timeListModel.addTimer("0")
-            timeListView.positionViewAtEnd()
+    footer: RowLayout {
+        QQC2.Button {
+            icon.name: "list-add"
+            text: i18n("Add")
+            enabled: timeListModel.count < maxListSize
+            onClicked: {
+                timeListModel.addTimer("0")
+                timeListView.positionViewAtEnd()
+            }
         }
     }
 

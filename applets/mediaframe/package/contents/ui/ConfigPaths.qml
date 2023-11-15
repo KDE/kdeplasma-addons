@@ -12,9 +12,9 @@ import QtQuick.Layouts
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.kirigami 2.5 as Kirigami
+import org.kde.kcmutils as KCM
 
-ColumnLayout {
-    id: root
+KCM.ScrollViewKCM {
 
     signal configurationChanged
 
@@ -43,90 +43,78 @@ ColumnLayout {
         }
     }
 
-    FileDialog {
-        id: fileDialog
+    view: ListView {
+        id: pathsList
 
-        title: i18nc("@title:window", "Choose Files")
-        currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
-        fileMode: FileDialog.OpenFiles
+        model: ListModel {
+            id: pathModel
+        }
 
-        // TODO get valid filter list from native code?
-        //nameFilters: [ "Image files (*.png *.jpg)", "All files (*)" ]
-        //selectedNameFilter: "All files (*)"
+        delegate: Kirigami.SwipeListItem {
+            id: folderDelegate
 
-        onAccepted: {
-            console.log("Accepted: " + selectedFiles)
+            width: pathsList.width
 
-            for (var i = 0; i < selectedFiles.length; ++i) {
-                var item = { 'path':selectedFiles[i], 'type':'file' }
+            contentItem: QQC2.Label {
+                Layout.fillWidth: true
+                text: String(model.path).replace("file://", "")
+            }
+
+            actions: [
+                Kirigami.Action {
+                    icon.name: "list-remove"
+                    tooltip: i18nd("plasma_wallpaper_org.kde.image", "Remove path")
+                    onTriggered: removePath(model.index)
+                }
+            ]
+        }
+
+        FileDialog {
+            id: fileDialog
+
+            title: i18nc("@title:window", "Choose Files")
+            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+            fileMode: FileDialog.OpenFiles
+
+            // TODO get valid filter list from native code?
+            //nameFilters: [ "Image files (*.png *.jpg)", "All files (*)" ]
+            //selectedNameFilter: "All files (*)"
+
+            onAccepted: {
+                console.log("Accepted: " + selectedFiles)
+
+                for (var i = 0; i < selectedFiles.length; ++i) {
+                    var item = { 'path':selectedFiles[i], 'type':'file' }
+                    addPath(item)
+                }
+            }
+
+            onRejected: {
+                console.log("Canceled")
+            }
+        }
+
+        FolderDialog {
+            id: folderDialog
+
+            visible: false
+            title: i18nc("@title:window", "Choose a Folder")
+            currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
+
+            onAccepted: {
+                console.log("Accepted: " + selectedFolder)
+
+                var item = { 'path':selectedFolder, 'type':'folder' }
                 addPath(item)
             }
-        }
 
-        onRejected: {
-            console.log("Canceled")
-        }
-    }
-
-    FolderDialog {
-        id: folderDialog
-
-        visible: false
-        title: i18nc("@title:window", "Choose a Folder")
-        currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
-
-        onAccepted: {
-            console.log("Accepted: " + selectedFolder)
-
-            var item = { 'path':selectedFolder, 'type':'folder' }
-            addPath(item)
-        }
-
-        onRejected: {
-            console.log("Canceled")
-        }
-
-    }
-
-    ListModel {
-        id: pathModel
-    }
-
-    QQC2.ScrollView {
-        Layout.fillWidth: true
-        Layout.fillHeight: true
-        Component.onCompleted: background.visible = true;
-
-        ListView {
-            id: pathsList
-
-            anchors.margins: 4
-            model: pathModel
-
-            delegate: Kirigami.SwipeListItem {
-                id: folderDelegate
-
-                width: pathsList.width
-
-                contentItem: QQC2.Label {
-                    Layout.fillWidth: true
-                    text: String(model.path).replace("file://", "")
-                }
-
-                actions: [
-                    Kirigami.Action {
-                        icon.name: "list-remove"
-                        tooltip: i18nd("plasma_wallpaper_org.kde.image", "Remove path")
-                        onTriggered: removePath(model.index)
-                    }
-                ]
+            onRejected: {
+                console.log("Canceled")
             }
         }
     }
 
-    RowLayout {
-        Layout.fillWidth: true
-
+    footer: RowLayout {
         QQC2.Button {
             icon.name: "folder-new"
             onClicked: folderDialog.visible = true
@@ -137,6 +125,9 @@ ColumnLayout {
             icon.name: "document-new"
             onClicked: fileDialog.visible = true
             text: i18nc("@action:button", "Add Files…")
+        }
+        Item {
+            Layout.fillWidth: true
         }
     }
 }
