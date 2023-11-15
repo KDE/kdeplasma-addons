@@ -9,7 +9,7 @@ import QtQuick.Controls 2.5 as Controls
 import QtQuick.Layouts 1.1 as Layouts
 
 import org.kde.kirigami 2.20 as Kirigami
-
+import org.kde.plasma.plasmoid
 
 Kirigami.FormLayout {
     id: root

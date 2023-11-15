@@ -10,6 +10,7 @@ import QtQuick.Layouts 1.1 as Layouts
 
 import org.kde.newstuff 1.62 as NewStuff
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.plasmoid
 
 Kirigami.FormLayout {
     id: root
