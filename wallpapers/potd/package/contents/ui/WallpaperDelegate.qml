@@ -237,7 +237,7 @@ FocusScope {
                 Repeater {
                     model: delegate.actions
                     delegate: QQC2.Button {
-                        icon.name: modelData.iconName
+                        icon.name: modelData.icon.name
                         activeFocusOnTab: visible
                         onClicked: modelData.trigger()
                         enabled: modelData.enabled
