@@ -8,9 +8,10 @@
  */
 
 import QtQuick 2.15
+import QtCore
 import QtQuick.Controls 2.15 as QtControls
 import QtQuick.Layouts 1.15
-import QtQuick.Dialogs 1.3 as QtDialogs
+import QtQuick.Dialogs as QtDialogs
 
 import org.kde.kquickcontrols 2.0 as KQC
 import org.kde.kirigami 2.20 as Kirigami
@@ -80,7 +81,7 @@ Kirigami.FormLayout {
 
             rightActions: [
                 Kirigami.Action {
-                    iconName: "edit-clear"
+                    icon.name: "edit-clear"
                     visible: imagePathTextField.text.length !== 0
                     onTriggered: imagePathTextField.text = "";
                 }
@@ -105,13 +106,13 @@ Kirigami.FormLayout {
 
                 title: i18nc("@title:window", "Choose an Image")
 
-                folder: shortcuts.pictures
+                currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
 
                 // TODO ask QImageReader for supported formats
                 nameFilters: [ i18n("Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)") ]
 
-                onFileUrlChanged: {
-                    imagePathTextField.text = fileUrl.toString().replace("file://", "")
+                onAccepted: {
+                    imagePathTextField.text = selectedFile.toString().replace("file://", "")
                 }
             }
         }
