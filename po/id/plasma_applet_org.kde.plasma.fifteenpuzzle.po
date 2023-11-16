@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-29 01:59+0000\n"
+"POT-Creation-Date: 2023-11-16 01:45+0000\n"
 "PO-Revision-Date: 2022-06-07 14:33+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -24,56 +24,56 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Penampilan"
 
-#: package/contents/ui/configAppearance.qml:41
+#: package/contents/ui/configAppearance.qml:42
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr "Ukuran kisi:"
 
-#: package/contents/ui/configAppearance.qml:50
+#: package/contents/ui/configAppearance.qml:51
 #, kde-format
 msgid "Background:"
 msgstr "LatarBelakang:"
 
-#: package/contents/ui/configAppearance.qml:56
+#: package/contents/ui/configAppearance.qml:57
 #, kde-format
 msgid "Color:"
 msgstr "Warna:"
 
-#: package/contents/ui/configAppearance.qml:71
+#: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgid "Image:"
 msgstr "Citra:"
 
-#: package/contents/ui/configAppearance.qml:79
+#: package/contents/ui/configAppearance.qml:80
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Alur ke citra kustom..."
 
-#: package/contents/ui/configAppearance.qml:98
+#: package/contents/ui/configAppearance.qml:99
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
 msgstr "Pilih citra..."
 
-#: package/contents/ui/configAppearance.qml:106
+#: package/contents/ui/configAppearance.qml:107
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Pilihlah sebuah Citra"
 
-#: package/contents/ui/configAppearance.qml:111
+#: package/contents/ui/configAppearance.qml:112
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "File-file Citra (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:125
+#: package/contents/ui/configAppearance.qml:126
 #, kde-format
 msgid "Tiles:"
 msgstr "Kartu:"
 
-#: package/contents/ui/configAppearance.qml:129
+#: package/contents/ui/configAppearance.qml:130
 #, kde-format
 msgid "Colored numbers:"
 msgstr "Angka berwarna:"

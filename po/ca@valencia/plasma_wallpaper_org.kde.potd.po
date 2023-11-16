@@ -167,7 +167,7 @@ msgstr "No s'ha pogut recuperar el fons de pantalla des d'Internet."
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
-msgstr "Guarda la imatge com a…"
+msgstr "Anomena i guarda la imatge…"
 
 #: package/contents/ui/WallpaperPreview.qml:52
 #, kde-format
