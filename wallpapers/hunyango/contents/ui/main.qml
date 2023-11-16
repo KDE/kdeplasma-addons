@@ -16,9 +16,7 @@ WallpaperItem {
         PlasmaCore.Action {
             text: i18nd("plasma_wallpaper_org.kde.hunyango", "Randomize Wallpaper Color")
             icon.name: "color-profile"
-            onTriggered: {
-                ColorProvider.updateColor()
-            }
+            onTriggered: ColorProvider.updateColor(true)
         }
     ]
 
@@ -38,23 +36,6 @@ WallpaperItem {
 
             //FIXME: Svg doesn't support relative paths
             imagePath: String(Qt.resolvedUrl("wallpaper.svgz")).substring(7)
-        }
-
-        // Intentionally not using a standard duration value as this is an animated
-        // wallpaper so disabling animations doesn't make sense, and the duration
-        // shouldn't be scaled with the user's preferences because this is tuned to
-        // create a specific visual effect.
-        Behavior on color {
-            SequentialAnimation {
-                ColorAnimation {
-                    duration: 1000
-                    easing.type: Easing.InQuad
-                }
-
-                ScriptAction {
-                    script: root.accentColorChanged()
-                }
-            }
         }
     }
 }

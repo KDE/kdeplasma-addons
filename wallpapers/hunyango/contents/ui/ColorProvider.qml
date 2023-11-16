@@ -8,23 +8,37 @@ pragma Singleton
 
 import QtQuick
 
-Timer {
+Item {
     property color color: _randomColor()
+
+    // Intentionally not using standard durations because this is an
+    // animated wallpaper - animations shouldn't be disabled and the
+    // duration shouldn't be scaled with the user's preferences.
+    readonly property int fastDuration: 2000
+    readonly property int slowDuration: 30000
+
+    Behavior on color {
+        SequentialAnimation {
+            ColorAnimation {
+                id: colorAnimation
+                duration: slowDuration
+                easing.type: Easing.InOutQuad
+            }
+
+            ScriptAction {
+                script: updateColor()
+            }
+        }
+    }
 
     function _randomColor() {
         return Qt.hsla(Math.random(), 1, 0.5, 1)
     }
 
-    function updateColor(restartTimer = true) {
+    function updateColor(fast = false) {
+        colorAnimation.duration = fast ? fastDuration : slowDuration;
         color = _randomColor()
-
-        if (restartTimer) {
-            restart()
-        }
     }
 
-    running: true
-    repeat: true
-    interval: 30000
-    onTriggered: updateColor(false)
+    Component.onCompleted: updateColor()
 }
