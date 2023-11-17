@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-04 01:40+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-11-07 11:04+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@lists.kde.org>\n"
@@ -103,13 +103,13 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "מתקדם"
 
-#: package/contents/ui/ComicBottomInfo.qml:61
+#: package/contents/ui/ComicBottomInfo.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "קפיצה לרצועה…"
 
-#: package/contents/ui/ComicBottomInfo.qml:101
+#: package/contents/ui/ComicBottomInfo.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -184,31 +184,31 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "רק בעת ריחוף מעל"
 
-#: package/contents/ui/configGeneral.qml:51
+#: package/contents/ui/configGeneral.qml:52
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "קומיקס:"
 
-#: package/contents/ui/configGeneral.qml:71
+#: package/contents/ui/configGeneral.qml:72
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "הורדת קומיקס חדש…"
 
-#: package/contents/ui/configGeneral.qml:82
+#: package/contents/ui/configGeneral.qml:83
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "לחיצה אמצעית על קומיקס תציג את גודלו המקורי"
 
-#: package/contents/ui/configGeneral.qml:91
+#: package/contents/ui/configGeneral.qml:92
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
 msgstr "לבדוק אם יש תוספים חדשים כל:"
 
-#: package/contents/ui/configGeneral.qml:100
+#: package/contents/ui/configGeneral.qml:101
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
@@ -218,13 +218,13 @@ msgstr[1] "יומיים"
 msgstr[2] "ימים"
 msgstr[3] "ימים"
 
-#: package/contents/ui/configGeneral.qml:105
+#: package/contents/ui/configGeneral.qml:106
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "לבדוק אם יש קומיקסים חדשים כל:"
 
-#: package/contents/ui/configGeneral.qml:114
+#: package/contents/ui/configGeneral.qml:115
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-11 01:44+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-11-07 11:18+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -48,37 +48,37 @@ msgstr ""
 "יש לגרור לכאן קוד צבע כדי לשמור אותו<nl/>יש לגרור לכאן תמונה כדי לקבל את "
 "הצבע הממוצע שלה"
 
-#: package/contents/ui/configGeneral.qml:25
+#: package/contents/ui/configGeneral.qml:23
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "תבנית הצבע כברירת מחדל:"
 
-#: package/contents/ui/configGeneral.qml:33
+#: package/contents/ui/configGeneral.qml:31
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "להעתיק צבע אוטומטית ללוח הגזירים"
 
-#: package/contents/ui/configGeneral.qml:41
+#: package/contents/ui/configGeneral.qml:39
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "בלחיצה על כפתור הקיצור במקלדת:"
 
-#: package/contents/ui/configGeneral.qml:42
+#: package/contents/ui/configGeneral.qml:40
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "בחירת צבע"
 
-#: package/contents/ui/configGeneral.qml:48
+#: package/contents/ui/configGeneral.qml:46
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "הצגת היסטוריה"
 
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:56
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"

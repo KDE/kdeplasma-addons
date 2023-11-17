@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-03 02:37+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2019-10-30 21:40+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -23,49 +23,49 @@ msgctxt "@title"
 msgid "General"
 msgstr "Üldine"
 
-#: package/contents/ui/ConfigGeneral.qml:30
+#: package/contents/ui/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Maksimaalselt veerge:"
 
-#: package/contents/ui/ConfigGeneral.qml:30
+#: package/contents/ui/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Maksimaalselt ridu:"
 
-#: package/contents/ui/ConfigGeneral.qml:44
+#: package/contents/ui/ConfigGeneral.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Välimus:"
 
-#: package/contents/ui/ConfigGeneral.qml:46
+#: package/contents/ui/ConfigGeneral.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
 msgstr "Käivitaja nimede näitamine"
 
-#: package/contents/ui/ConfigGeneral.qml:51
+#: package/contents/ui/ConfigGeneral.qml:46
 #, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Hüpikute lubamine"
 
-#: package/contents/ui/ConfigGeneral.qml:61
+#: package/contents/ui/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Nimi:"
 
-#: package/contents/ui/ConfigGeneral.qml:69
+#: package/contents/ui/ConfigGeneral.qml:64
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Näitamine: "
 
-#: package/contents/ui/ConfigGeneral.qml:85
+#: package/contents/ui/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"

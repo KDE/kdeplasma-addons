@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-03 02:37+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2022-09-24 10:42+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -22,49 +22,49 @@ msgctxt "@title"
 msgid "General"
 msgstr "Allgemein"
 
-#: package/contents/ui/ConfigGeneral.qml:30
+#: package/contents/ui/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Maximale Anzahl Spalten:"
 
-#: package/contents/ui/ConfigGeneral.qml:30
+#: package/contents/ui/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Maximale Anzahl Zeilen:"
 
-#: package/contents/ui/ConfigGeneral.qml:44
+#: package/contents/ui/ConfigGeneral.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Erscheinungsbild:"
 
-#: package/contents/ui/ConfigGeneral.qml:46
+#: package/contents/ui/ConfigGeneral.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
 msgstr "Starternamen anzeigen"
 
-#: package/contents/ui/ConfigGeneral.qml:51
+#: package/contents/ui/ConfigGeneral.qml:46
 #, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Aufklappfenster aktivieren"
 
-#: package/contents/ui/ConfigGeneral.qml:61
+#: package/contents/ui/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Titel:"
 
-#: package/contents/ui/ConfigGeneral.qml:69
+#: package/contents/ui/ConfigGeneral.qml:64
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Anzeigen:"
 
-#: package/contents/ui/ConfigGeneral.qml:85
+#: package/contents/ui/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"

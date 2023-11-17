@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-04 01:40+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2009-01-10 23:44+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <kde-i18n-doc@kde.org>\n"
@@ -108,14 +108,14 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr ""
 
-#: package/contents/ui/ComicBottomInfo.qml:61
+#: package/contents/ui/ComicBottomInfo.qml:62
 #, fuzzy, kde-format
 #| msgid "&Jump to first Strip"
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "&Biçe Beşa yekemîn"
 
-#: package/contents/ui/ComicBottomInfo.qml:101
+#: package/contents/ui/ComicBottomInfo.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -193,33 +193,33 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:51
+#: package/contents/ui/configGeneral.qml:52
 #, fuzzy, kde-format
 #| msgid "Comic:"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Pirtûka Qerfî:"
 
-#: package/contents/ui/configGeneral.qml:71
+#: package/contents/ui/configGeneral.qml:72
 #, fuzzy, kde-format
 #| msgid "Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Pirtûkên Qerfî yê Nû Bîne..."
 
-#: package/contents/ui/configGeneral.qml:82
+#: package/contents/ui/configGeneral.qml:83
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:91
+#: package/contents/ui/configGeneral.qml:92
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:100
+#: package/contents/ui/configGeneral.qml:101
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
@@ -227,13 +227,13 @@ msgid_plural "days"
 msgstr[0] ""
 msgstr[1] ""
 
-#: package/contents/ui/configGeneral.qml:105
+#: package/contents/ui/configGeneral.qml:106
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:114
+#: package/contents/ui/configGeneral.qml:115
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

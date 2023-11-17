@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-04 01:40+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-11-11 07:19\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -102,13 +102,13 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "高级"
 
-#: package/contents/ui/ComicBottomInfo.qml:61
+#: package/contents/ui/ComicBottomInfo.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "跳转到指定一条漫画…"
 
-#: package/contents/ui/ComicBottomInfo.qml:101
+#: package/contents/ui/ComicBottomInfo.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -180,44 +180,44 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "仅悬停时"
 
-#: package/contents/ui/configGeneral.qml:51
+#: package/contents/ui/configGeneral.qml:52
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "漫画："
 
-#: package/contents/ui/configGeneral.qml:71
+#: package/contents/ui/configGeneral.qml:72
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "获取新漫画…"
 
-#: package/contents/ui/configGeneral.qml:82
+#: package/contents/ui/configGeneral.qml:83
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "中键单击漫画显示为原始尺寸"
 
-#: package/contents/ui/configGeneral.qml:91
+#: package/contents/ui/configGeneral.qml:92
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
 msgstr "检查新插件间隔时间："
 
-#: package/contents/ui/configGeneral.qml:100
+#: package/contents/ui/configGeneral.qml:101
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
 msgid_plural "days"
 msgstr[0] "天"
 
-#: package/contents/ui/configGeneral.qml:105
+#: package/contents/ui/configGeneral.qml:106
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "检查新漫画间隔时间："
 
-#: package/contents/ui/configGeneral.qml:114
+#: package/contents/ui/configGeneral.qml:115
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

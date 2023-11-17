@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 01:55+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2021-10-16 18:26+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -21,7 +21,7 @@ msgctxt "@title"
 msgid "Keys"
 msgstr "キー"
 
-#: contents/ui/configAppearance.qml:34
+#: contents/ui/configAppearance.qml:37
 #, fuzzy, kde-format
 #| msgid "No lock keys activated"
 msgctxt ""
@@ -29,13 +29,13 @@ msgctxt ""
 msgid "Show when activated:"
 msgstr "有効なロックキーはありません"
 
-#: contents/ui/configAppearance.qml:37
+#: contents/ui/configAppearance.qml:40
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: contents/ui/configAppearance.qml:44
+#: contents/ui/configAppearance.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"

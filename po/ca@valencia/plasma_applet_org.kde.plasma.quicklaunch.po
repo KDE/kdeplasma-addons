@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-03 02:37+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2022-02-03 11:04+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -27,49 +27,49 @@ msgctxt "@title"
 msgid "General"
 msgstr "General"
 
-#: package/contents/ui/ConfigGeneral.qml:30
+#: package/contents/ui/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Màxim de columnes:"
 
-#: package/contents/ui/ConfigGeneral.qml:30
+#: package/contents/ui/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Màxim de files:"
 
-#: package/contents/ui/ConfigGeneral.qml:44
+#: package/contents/ui/ConfigGeneral.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Aparença:"
 
-#: package/contents/ui/ConfigGeneral.qml:46
+#: package/contents/ui/ConfigGeneral.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
 msgstr "Mostra els noms dels iniciadors"
 
-#: package/contents/ui/ConfigGeneral.qml:51
+#: package/contents/ui/ConfigGeneral.qml:46
 #, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Habilita les finestres emergents"
 
-#: package/contents/ui/ConfigGeneral.qml:61
+#: package/contents/ui/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Títol:"
 
-#: package/contents/ui/ConfigGeneral.qml:69
+#: package/contents/ui/ConfigGeneral.qml:64
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Mostra:"
 
-#: package/contents/ui/ConfigGeneral.qml:85
+#: package/contents/ui/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"

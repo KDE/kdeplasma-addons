@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-06 01:41+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-01-05 22:00+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -27,67 +27,62 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Görünüş"
 
-#: package/contents/ui/configAppearance.qml:32
+#: package/contents/ui/configAppearance.qml:31
 #, kde-format
 msgid "%1pt"
 msgstr "%1 pt"
 
-#: package/contents/ui/configAppearance.qml:38
+#: package/contents/ui/configAppearance.qml:37
 #, kde-format
 msgid "Text font size:"
 msgstr "Metin yazıtipi boyutu:"
 
-#: package/contents/ui/configAppearance.qml:43
-#, kde-format
-msgid "Background color"
-msgstr "Arka plan rengi"
-
-#: package/contents/ui/configAppearance.qml:74
+#: package/contents/ui/configAppearance.qml:62
 #, kde-format
 msgid "A white sticky note"
 msgstr "Bir beyaz yapışkan not"
 
-#: package/contents/ui/configAppearance.qml:75
+#: package/contents/ui/configAppearance.qml:63
 #, kde-format
 msgid "A black sticky note"
 msgstr "Bir siyah yapışkan not"
 
-#: package/contents/ui/configAppearance.qml:76
+#: package/contents/ui/configAppearance.qml:64
 #, kde-format
 msgid "A red sticky note"
 msgstr "Bir kırmızı yapışkan not"
 
-#: package/contents/ui/configAppearance.qml:77
+#: package/contents/ui/configAppearance.qml:65
 #, kde-format
 msgid "An orange sticky note"
 msgstr "Bir turuncu yapışkan not"
 
-#: package/contents/ui/configAppearance.qml:78
+#: package/contents/ui/configAppearance.qml:66
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "Bir sarı yapışkan not"
 
-#: package/contents/ui/configAppearance.qml:79
+#: package/contents/ui/configAppearance.qml:67
 #, kde-format
 msgid "A green sticky note"
 msgstr "Bir yeşil yapışkan not"
 
-#: package/contents/ui/configAppearance.qml:80
+#: package/contents/ui/configAppearance.qml:68
 #, kde-format
 msgid "A blue sticky note"
 msgstr "Bir mavi yapışkan not"
 
-#: package/contents/ui/configAppearance.qml:81
+#: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgid "A pink sticky note"
 msgstr "Bir pembe yapışkan not"
 
-#: package/contents/ui/configAppearance.qml:82
+#: package/contents/ui/configAppearance.qml:70
 #, kde-format
 msgid "A translucent sticky note"
 msgstr "Bir yarısaydam yapışkan not"
 
-#: package/contents/ui/configAppearance.qml:83
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "A translucent sticky note with light text"
 msgstr "Açık renkli metin içeren yarısaydam yapışkan not"
@@ -236,3 +231,6 @@ msgstr "Yarısaydam"
 msgctxt "@item:inmenu"
 msgid "Translucent Light"
 msgstr "Yarısaydam Işık"
+
+#~ msgid "Background color"
+#~ msgstr "Arka plan rengi"

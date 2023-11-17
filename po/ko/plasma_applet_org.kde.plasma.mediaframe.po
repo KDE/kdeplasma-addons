@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2022-04-16 22:51+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -163,30 +163,30 @@ msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "그림을 클릭해서 외부 앱으로 열기"
 
-#: package/contents/ui/ConfigPaths.qml:49
+#: package/contents/ui/ConfigPaths.qml:66
+#, kde-format
+msgid "Remove path"
+msgstr "경로 삭제"
+
+#: package/contents/ui/ConfigPaths.qml:75
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "파일 선택"
 
-#: package/contents/ui/ConfigPaths.qml:75
+#: package/contents/ui/ConfigPaths.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "폴더 선택"
 
-#: package/contents/ui/ConfigPaths.qml:119
-#, kde-format
-msgid "Remove path"
-msgstr "경로 삭제"
-
-#: package/contents/ui/ConfigPaths.qml:133
+#: package/contents/ui/ConfigPaths.qml:121
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "폴더 추가…"
 
-#: package/contents/ui/ConfigPaths.qml:139
+#: package/contents/ui/ConfigPaths.qml:127
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

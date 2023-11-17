@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-01 01:41+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2022-06-16 23:47+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -28,24 +28,24 @@ msgstr "Lüğətlər"
 msgid "Add More Dictionaries"
 msgstr "Daha çox lüğət əlavə edin"
 
-#: package/contents/ui/ConfigDictionaries.qml:89
+#: package/contents/ui/ConfigDictionaries.qml:77
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "Lüğət sisyahısı yüklənə bilmədi"
 
-#: package/contents/ui/ConfigDictionaries.qml:90
+#: package/contents/ui/ConfigDictionaries.qml:78
 #: package/contents/ui/main.qml:153
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "XƏta kodu: %1(%2)"
 
-#: package/contents/ui/ConfigDictionaries.qml:101
+#: package/contents/ui/ConfigDictionaries.qml:89
 #, kde-format
 msgid "No dictionaries"
 msgstr "Heç bir lüğət yoxdur"
 
-#: package/contents/ui/ConfigDictionaries.qml:112
+#: package/contents/ui/ConfigDictionaries.qml:98
 #, kde-format
 msgid "Add More…"
 msgstr "Daha çox əlavə edin..."

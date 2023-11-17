@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-11 01:44+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-06-08 20:23+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -47,37 +47,37 @@ msgstr ""
 "Trenu kolorkodon ĉi tien por konservi ĝin<nl/>Trenu bilddosieron ĉi tien por "
 "akiri ĝian mezan koloron"
 
-#: package/contents/ui/configGeneral.qml:25
+#: package/contents/ui/configGeneral.qml:23
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Defaŭlta kolorformato:"
 
-#: package/contents/ui/configGeneral.qml:33
+#: package/contents/ui/configGeneral.qml:31
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Aŭtomate kopii koloron al tondujo"
 
-#: package/contents/ui/configGeneral.qml:41
+#: package/contents/ui/configGeneral.qml:39
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "Kiam vi premas la klavaran ŝparvojon:"
 
-#: package/contents/ui/configGeneral.qml:42
+#: package/contents/ui/configGeneral.qml:40
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Elekti koloron"
 
-#: package/contents/ui/configGeneral.qml:48
+#: package/contents/ui/configGeneral.qml:46
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Montri historion"
 
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:56
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-09-25 02:25+0200\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2019-06-09 20:05+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -27,43 +27,43 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Itxura"
 
-#: package/contents/ui/configGeneral.qml:35
+#: package/contents/ui/configGeneral.qml:33
 #, kde-format
 msgid "Display:"
 msgstr "Bistaratzea:"
 
-#: package/contents/ui/configGeneral.qml:36
-#: package/contents/ui/configGeneral.qml:90
+#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:88
 #, kde-format
 msgctxt "@option:check"
 msgid "Grid"
 msgstr "Sareta"
 
-#: package/contents/ui/configGeneral.qml:41
-#: package/contents/ui/configGeneral.qml:77
+#: package/contents/ui/configGeneral.qml:39
+#: package/contents/ui/configGeneral.qml:75
 #, kde-format
 msgctxt "@option:check"
 msgid "Inactive LEDs"
 msgstr "LED ez-aktiboak"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "segundoak"
 
-#: package/contents/ui/configGeneral.qml:51
+#: package/contents/ui/configGeneral.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "In BCD format (decimal)"
 msgstr "BCD formatuan (hamartarra)"
 
-#: package/contents/ui/configGeneral.qml:60
+#: package/contents/ui/configGeneral.qml:58
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Erabili norberak finkatutako koloreak honekin:"
 
-#: package/contents/ui/configGeneral.qml:64
+#: package/contents/ui/configGeneral.qml:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Active LEDs"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-06 01:41+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-01-07 16:57+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -25,67 +25,62 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "المظهر"
 
-#: package/contents/ui/configAppearance.qml:32
+#: package/contents/ui/configAppearance.qml:31
 #, kde-format
 msgid "%1pt"
 msgstr "%1نقطة"
 
-#: package/contents/ui/configAppearance.qml:38
+#: package/contents/ui/configAppearance.qml:37
 #, kde-format
 msgid "Text font size:"
 msgstr "حجم الخط:"
 
-#: package/contents/ui/configAppearance.qml:43
-#, kde-format
-msgid "Background color"
-msgstr "لون الخلفية"
-
-#: package/contents/ui/configAppearance.qml:74
+#: package/contents/ui/configAppearance.qml:62
 #, kde-format
 msgid "A white sticky note"
 msgstr "ملاحظة بيضاء لاصقة"
 
-#: package/contents/ui/configAppearance.qml:75
+#: package/contents/ui/configAppearance.qml:63
 #, kde-format
 msgid "A black sticky note"
 msgstr "ملاحظة سوداء"
 
-#: package/contents/ui/configAppearance.qml:76
+#: package/contents/ui/configAppearance.qml:64
 #, kde-format
 msgid "A red sticky note"
 msgstr "ملاحظة حمراء لاصقة"
 
-#: package/contents/ui/configAppearance.qml:77
+#: package/contents/ui/configAppearance.qml:65
 #, kde-format
 msgid "An orange sticky note"
 msgstr "ملاحظة برتقاليّة لاصقة"
 
-#: package/contents/ui/configAppearance.qml:78
+#: package/contents/ui/configAppearance.qml:66
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "ملاحظة صفراء لاصقة"
 
-#: package/contents/ui/configAppearance.qml:79
+#: package/contents/ui/configAppearance.qml:67
 #, kde-format
 msgid "A green sticky note"
 msgstr "ملاحظة خضراء لاصقة"
 
-#: package/contents/ui/configAppearance.qml:80
+#: package/contents/ui/configAppearance.qml:68
 #, kde-format
 msgid "A blue sticky note"
 msgstr "ملاحظة زرقاء لاصقة"
 
-#: package/contents/ui/configAppearance.qml:81
+#: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgid "A pink sticky note"
 msgstr "ملاحظة ورديّة لاصقة"
 
-#: package/contents/ui/configAppearance.qml:82
+#: package/contents/ui/configAppearance.qml:70
 #, kde-format
 msgid "A translucent sticky note"
 msgstr "ملاحظة شفّافة لاصقة"
 
-#: package/contents/ui/configAppearance.qml:83
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "A translucent sticky note with light text"
 msgstr "ملاحظة شفّافة لاصقة مع نص فاتح"
@@ -234,6 +229,9 @@ msgstr "شفّاف"
 msgctxt "@item:inmenu"
 msgid "Translucent Light"
 msgstr "شفّاف فاتح"
+
+#~ msgid "Background color"
+#~ msgstr "لون الخلفية"
 
 #~ msgid "Toggle text format options"
 #~ msgstr "اقلب خيارات تنسيق النّصّ"

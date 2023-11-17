@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-09-25 02:25+0200\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2010-03-31 23:15+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -24,47 +24,47 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Көрініс"
 
-#: package/contents/ui/configGeneral.qml:35
+#: package/contents/ui/configGeneral.qml:33
 #, kde-format
 msgid "Display:"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:36
-#: package/contents/ui/configGeneral.qml:90
+#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:88
 #, fuzzy, kde-format
 #| msgid "Grid:"
 msgctxt "@option:check"
 msgid "Grid"
 msgstr "Торының бояуы:"
 
-#: package/contents/ui/configGeneral.qml:41
-#: package/contents/ui/configGeneral.qml:77
+#: package/contents/ui/configGeneral.qml:39
+#: package/contents/ui/configGeneral.qml:75
 #, fuzzy, kde-format
 #| msgid "Inactive LEDs:"
 msgctxt "@option:check"
 msgid "Inactive LEDs"
 msgstr "Сонген шаршылардың бояуы:"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:44
 #, fuzzy, kde-format
 #| msgid "Seconds:"
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Секундтары:"
 
-#: package/contents/ui/configGeneral.qml:51
+#: package/contents/ui/configGeneral.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "In BCD format (decimal)"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:60
+#: package/contents/ui/configGeneral.qml:58
 #, fuzzy, kde-format
 #| msgid "Use custom color for active LEDs:"
 msgid "Use custom color for:"
 msgstr "келесі түспен болсын:"
 
-#: package/contents/ui/configGeneral.qml:64
+#: package/contents/ui/configGeneral.qml:62
 #, fuzzy, kde-format
 #| msgid "Active LEDs:"
 msgctxt "@option:check"

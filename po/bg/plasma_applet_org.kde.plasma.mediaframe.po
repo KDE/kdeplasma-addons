@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2022-02-12 16:05+0100\n"
 "Last-Translator: mkkDr2010 <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -171,30 +171,30 @@ msgstr ""
 "Отваряне на изображението във външно приложение при щракване върху "
 "изображение"
 
-#: package/contents/ui/ConfigPaths.qml:49
+#: package/contents/ui/ConfigPaths.qml:66
+#, kde-format
+msgid "Remove path"
+msgstr "Премахване на пътя"
+
+#: package/contents/ui/ConfigPaths.qml:75
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Избиране на файлове"
 
-#: package/contents/ui/ConfigPaths.qml:75
+#: package/contents/ui/ConfigPaths.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Избиране на папка"
 
-#: package/contents/ui/ConfigPaths.qml:119
-#, kde-format
-msgid "Remove path"
-msgstr "Премахване на пътя"
-
-#: package/contents/ui/ConfigPaths.qml:133
+#: package/contents/ui/ConfigPaths.qml:121
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Добавяне на папка…"
 
-#: package/contents/ui/ConfigPaths.qml:139
+#: package/contents/ui/ConfigPaths.qml:127
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

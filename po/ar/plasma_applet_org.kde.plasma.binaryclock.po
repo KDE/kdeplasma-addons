@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-09-25 02:25+0200\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2021-07-04 22:11+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -25,43 +25,43 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "المظهر"
 
-#: package/contents/ui/configGeneral.qml:35
+#: package/contents/ui/configGeneral.qml:33
 #, kde-format
 msgid "Display:"
 msgstr "العرض:"
 
-#: package/contents/ui/configGeneral.qml:36
-#: package/contents/ui/configGeneral.qml:90
+#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:88
 #, kde-format
 msgctxt "@option:check"
 msgid "Grid"
 msgstr "الشّبكة"
 
-#: package/contents/ui/configGeneral.qml:41
-#: package/contents/ui/configGeneral.qml:77
+#: package/contents/ui/configGeneral.qml:39
+#: package/contents/ui/configGeneral.qml:75
 #, kde-format
 msgctxt "@option:check"
 msgid "Inactive LEDs"
 msgstr "المصابيح الخاملة"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "الثّواني"
 
-#: package/contents/ui/configGeneral.qml:51
+#: package/contents/ui/configGeneral.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "In BCD format (decimal)"
 msgstr "بتنسيق BCD (عشري)"
 
-#: package/contents/ui/configGeneral.qml:60
+#: package/contents/ui/configGeneral.qml:58
 #, kde-format
 msgid "Use custom color for:"
 msgstr "استخدم لون مخصّص:"
 
-#: package/contents/ui/configGeneral.qml:64
+#: package/contents/ui/configGeneral.qml:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Active LEDs"

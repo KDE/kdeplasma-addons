@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-11 01:44+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-01-28 14:34+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -53,37 +53,37 @@ msgstr ""
 "Для сохранения кода цвета, перетащите его сюда.<nl/> Для получения среднего "
 "цвета изображения, перетащите его сюда"
 
-#: package/contents/ui/configGeneral.qml:25
+#: package/contents/ui/configGeneral.qml:23
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Формат цвета по умолчанию:"
 
-#: package/contents/ui/configGeneral.qml:33
+#: package/contents/ui/configGeneral.qml:31
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Автоматически копировать цвет в буфер обмена"
 
-#: package/contents/ui/configGeneral.qml:41
+#: package/contents/ui/configGeneral.qml:39
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "При нажатии комбинации клавиш:"
 
-#: package/contents/ui/configGeneral.qml:42
+#: package/contents/ui/configGeneral.qml:40
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Начать выбор цвета"
 
-#: package/contents/ui/configGeneral.qml:48
+#: package/contents/ui/configGeneral.qml:46
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Показать журнал"
 
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:56
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"

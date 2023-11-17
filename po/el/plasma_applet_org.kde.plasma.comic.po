@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-04 01:40+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2015-11-23 16:27+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -124,14 +124,14 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Για προχωρημένους"
 
-#: package/contents/ui/ComicBottomInfo.qml:61
+#: package/contents/ui/ComicBottomInfo.qml:62
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Μετάβαση στο απόκομμα..."
 
-#: package/contents/ui/ComicBottomInfo.qml:101
+#: package/contents/ui/ComicBottomInfo.qml:102
 #, fuzzy, kde-format
 #| msgid "Visit the comic website"
 msgctxt "@info:tooltip"
@@ -212,35 +212,35 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:51
+#: package/contents/ui/configGeneral.qml:52
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Κόμικ"
 
-#: package/contents/ui/configGeneral.qml:71
+#: package/contents/ui/configGeneral.qml:72
 #, fuzzy, kde-format
 #| msgid "Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Λήψη νέων κόμικ..."
 
-#: package/contents/ui/configGeneral.qml:82
+#: package/contents/ui/configGeneral.qml:83
 #, fuzzy, kde-format
 #| msgid "Middle-click on the comic to show it at its original size"
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Εμφάνιση σε κανονικό μέγεθος κάνοντας μεσαίο κλικ στο κόμικ"
 
-#: package/contents/ui/configGeneral.qml:91
+#: package/contents/ui/configGeneral.qml:92
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
 msgstr "Έλεγχος για νέες σειρές κόμικ:"
 
-#: package/contents/ui/configGeneral.qml:100
+#: package/contents/ui/configGeneral.qml:101
 #, fuzzy, kde-format
 #| msgid "days"
 msgctxt "@item:valuesuffix spacing to number + unit"
@@ -249,14 +249,14 @@ msgid_plural "days"
 msgstr[0] "ημέρες"
 msgstr[1] "ημέρες"
 
-#: package/contents/ui/configGeneral.qml:105
+#: package/contents/ui/configGeneral.qml:106
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Έλεγχος για νέες σειρές κόμικ:"
 
-#: package/contents/ui/configGeneral.qml:114
+#: package/contents/ui/configGeneral.qml:115
 #, fuzzy, kde-format
 #| msgid "minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"

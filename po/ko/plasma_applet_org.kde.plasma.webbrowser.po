@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-07-25 00:52+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -29,25 +29,25 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "모양"
 
-#: package/contents/ui/ConfigAppearance.qml:28
+#: package/contents/ui/ConfigAppearance.qml:31
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "아이콘:"
 
-#: package/contents/ui/ConfigAppearance.qml:29
+#: package/contents/ui/ConfigAppearance.qml:32
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "웹사이트의 파비콘"
 
-#: package/contents/ui/ConfigAppearance.qml:52
+#: package/contents/ui/ConfigAppearance.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "웹 브라우저 아이콘 변경"
 
-#: package/contents/ui/ConfigAppearance.qml:53
+#: package/contents/ui/ConfigAppearance.qml:56
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -57,25 +57,25 @@ msgstr ""
 "현재 아이콘은 %1입니다. 현재 아이콘을 변경하거나 기본 아이콘으로 초기화하려"
 "면 클릭하여 메뉴를 여십시오."
 
-#: package/contents/ui/ConfigAppearance.qml:57
+#: package/contents/ui/ConfigAppearance.qml:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "아이콘 이름: \"%1\""
 
-#: package/contents/ui/ConfigAppearance.qml:92
+#: package/contents/ui/ConfigAppearance.qml:95
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "선택…"
 
-#: package/contents/ui/ConfigAppearance.qml:94
+#: package/contents/ui/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "웹 브라우저 아이콘 선택"
 
-#: package/contents/ui/ConfigAppearance.qml:98
+#: package/contents/ui/ConfigAppearance.qml:101
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-06-22 09:41+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -30,25 +30,25 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "المظهر"
 
-#: package/contents/ui/ConfigAppearance.qml:28
+#: package/contents/ui/ConfigAppearance.qml:31
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "الرمز:"
 
-#: package/contents/ui/ConfigAppearance.qml:29
+#: package/contents/ui/ConfigAppearance.qml:32
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "رمز الموقع"
 
-#: package/contents/ui/ConfigAppearance.qml:52
+#: package/contents/ui/ConfigAppearance.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "غير رمز متصف الويب"
 
-#: package/contents/ui/ConfigAppearance.qml:53
+#: package/contents/ui/ConfigAppearance.qml:56
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -58,25 +58,25 @@ msgstr ""
 "الأيقونة الحالية %1. انقر لتفتح قائمة لتغير الأيقونة الحالية أو تصفرها إلى "
 "المبدئية."
 
-#: package/contents/ui/ConfigAppearance.qml:57
+#: package/contents/ui/ConfigAppearance.qml:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "اسم الرمز \"%1\""
 
-#: package/contents/ui/ConfigAppearance.qml:92
+#: package/contents/ui/ConfigAppearance.qml:95
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "اختر..."
 
-#: package/contents/ui/ConfigAppearance.qml:94
+#: package/contents/ui/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "اختر رمزاً لمتصفح الويب"
 
-#: package/contents/ui/ConfigAppearance.qml:98
+#: package/contents/ui/ConfigAppearance.qml:101
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"

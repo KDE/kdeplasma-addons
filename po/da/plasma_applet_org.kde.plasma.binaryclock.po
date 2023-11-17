@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2020-09-25 02:25+0200\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2020-02-08 15:52+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -24,43 +24,43 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Udseende"
 
-#: package/contents/ui/configGeneral.qml:35
+#: package/contents/ui/configGeneral.qml:33
 #, kde-format
 msgid "Display:"
 msgstr "Vis:"
 
-#: package/contents/ui/configGeneral.qml:36
-#: package/contents/ui/configGeneral.qml:90
+#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:88
 #, kde-format
 msgctxt "@option:check"
 msgid "Grid"
 msgstr "Gitter"
 
-#: package/contents/ui/configGeneral.qml:41
-#: package/contents/ui/configGeneral.qml:77
+#: package/contents/ui/configGeneral.qml:39
+#: package/contents/ui/configGeneral.qml:75
 #, kde-format
 msgctxt "@option:check"
 msgid "Inactive LEDs"
 msgstr "Inaktive lysdioder"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Sekunder"
 
-#: package/contents/ui/configGeneral.qml:51
+#: package/contents/ui/configGeneral.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "In BCD format (decimal)"
 msgstr "I BCD-format (decimal)"
 
-#: package/contents/ui/configGeneral.qml:60
+#: package/contents/ui/configGeneral.qml:58
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Brug tilpasset farve til:"
 
-#: package/contents/ui/configGeneral.qml:64
+#: package/contents/ui/configGeneral.qml:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Active LEDs"

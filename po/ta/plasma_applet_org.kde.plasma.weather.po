@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-08 01:39+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2022-12-01 21:55+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -143,146 +143,146 @@ msgctxt "@title"
 msgid "Units"
 msgstr "அலகுகள்"
 
-#: package/contents/ui/config/ConfigAppearance.qml:36
+#: package/contents/ui/config/ConfigAppearance.qml:35
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "சுருக்கமான காட்சி முறை"
 
-#: package/contents/ui/config/ConfigAppearance.qml:44
+#: package/contents/ui/config/ConfigAppearance.qml:43
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "வெப்பநிலையைக் காட்டுவது:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:47
+#: package/contents/ui/config/ConfigAppearance.qml:46
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "சின்னத்துக்கு மேல்"
 
-#: package/contents/ui/config/ConfigAppearance.qml:55
+#: package/contents/ui/config/ConfigAppearance.qml:54
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "சின்னத்துக்குப் பக்கத்தில்"
 
-#: package/contents/ui/config/ConfigAppearance.qml:62
+#: package/contents/ui/config/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "காட்டாதே"
 
-#: package/contents/ui/config/ConfigAppearance.qml:71
+#: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "கருவித்துப்பில் காட்டுவது:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:72
+#: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "வெப்பநிலை"
 
-#: package/contents/ui/config/ConfigAppearance.qml:77
+#: package/contents/ui/config/ConfigAppearance.qml:76
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "காற்று"
 
-#: package/contents/ui/config/ConfigAppearance.qml:82
+#: package/contents/ui/config/ConfigAppearance.qml:81
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "அழுத்தும்"
 
-#: package/contents/ui/config/ConfigAppearance.qml:87
+#: package/contents/ui/config/ConfigAppearance.qml:86
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "ஈரப்பதம்"
 
-#: package/contents/ui/config/ConfigUnits.qml:33
+#: package/contents/ui/config/ConfigUnits.qml:32
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "வெப்பநிலை:"
 
-#: package/contents/ui/config/ConfigUnits.qml:39
+#: package/contents/ui/config/ConfigUnits.qml:38
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "அழுத்தும்:"
 
-#: package/contents/ui/config/ConfigUnits.qml:45
+#: package/contents/ui/config/ConfigUnits.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "காற்றின் வேகம்:"
 
-#: package/contents/ui/config/ConfigUnits.qml:51
+#: package/contents/ui/config/ConfigUnits.qml:50
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "கட்புலப்பாடு:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:46
+#: package/contents/ui/config/ConfigWeatherStation.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "புதுப்பிக்கும் இடைவெளி:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:49
+#: package/contents/ui/config/ConfigWeatherStation.qml:53
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 நிமிடம்"
 msgstr[1] "%1 நிமிடங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:61
+#: package/contents/ui/config/ConfigWeatherStation.qml:65
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "இருப்பிடம்:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:67
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "எதுவும் தேர்ந்தெடுக்கப்படவில்லை"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#: package/contents/ui/config/ConfigWeatherStation.qml:75
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "வழங்கி:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "புதிய இருப்பிடத்தை உள்ளிடுங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "இருப்பிடத்தை உள்ளிடுங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:188
+#: package/contents/ui/config/ConfigWeatherStation.qml:183
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "'%1' என்பதற்கான எந்த வானிலை நிலையமும் கண்டுபிடிக்கப்படவில்லை"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:190
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "உங்கள் இருப்பிடத்தை மாற்ற, ஏதாவதொரு வானிலை மையத்தைத் தேடுங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"

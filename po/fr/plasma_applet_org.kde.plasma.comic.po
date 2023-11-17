@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-04 01:40+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2022-07-21 21:52+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -108,13 +108,13 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Avancé"
 
-#: package/contents/ui/ComicBottomInfo.qml:61
+#: package/contents/ui/ComicBottomInfo.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Aller à la bande dessinée..."
 
-#: package/contents/ui/ComicBottomInfo.qml:101
+#: package/contents/ui/ComicBottomInfo.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -188,19 +188,19 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Seulement au-dessus"
 
-#: package/contents/ui/configGeneral.qml:51
+#: package/contents/ui/configGeneral.qml:52
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Bandes dessinées :"
 
-#: package/contents/ui/configGeneral.qml:71
+#: package/contents/ui/configGeneral.qml:72
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Obtenir de nouvelles bandes dessinées..."
 
-#: package/contents/ui/configGeneral.qml:82
+#: package/contents/ui/configGeneral.qml:83
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
@@ -208,13 +208,13 @@ msgstr ""
 "Cliquez avec le bouton central de la souris sur une bande dessinée pour "
 "l'afficher à sa taille initiale"
 
-#: package/contents/ui/configGeneral.qml:91
+#: package/contents/ui/configGeneral.qml:92
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
 msgstr "Vérifier les nouveaux modules externes tous les :"
 
-#: package/contents/ui/configGeneral.qml:100
+#: package/contents/ui/configGeneral.qml:101
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
@@ -222,13 +222,13 @@ msgid_plural "days"
 msgstr[0] "jour"
 msgstr[1] "jours"
 
-#: package/contents/ui/configGeneral.qml:105
+#: package/contents/ui/configGeneral.qml:106
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Vérifier les nouvelles bandes dessinées tous les :"
 
-#: package/contents/ui/configGeneral.qml:114
+#: package/contents/ui/configGeneral.qml:115
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

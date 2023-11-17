@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-11-07 14:27+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -31,25 +31,25 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "מראה"
 
-#: package/contents/ui/ConfigAppearance.qml:28
+#: package/contents/ui/ConfigAppearance.qml:31
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "סמל:"
 
-#: package/contents/ui/ConfigAppearance.qml:29
+#: package/contents/ui/ConfigAppearance.qml:32
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "סמל המועדפים של האתר"
 
-#: package/contents/ui/ConfigAppearance.qml:52
+#: package/contents/ui/ConfigAppearance.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "החלפת סמל הדפדפן"
 
-#: package/contents/ui/ConfigAppearance.qml:53
+#: package/contents/ui/ConfigAppearance.qml:56
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -59,25 +59,25 @@ msgstr ""
 "הסמל הנוכחי הוא %1. לחיצה תפתח את התפריט לשינוי הסמל הנוכחי או איפוס לסמל "
 "ברירת המחדל."
 
-#: package/contents/ui/ConfigAppearance.qml:57
+#: package/contents/ui/ConfigAppearance.qml:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "שם הסמל הוא „%1”"
 
-#: package/contents/ui/ConfigAppearance.qml:92
+#: package/contents/ui/ConfigAppearance.qml:95
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "בחירה…"
 
-#: package/contents/ui/ConfigAppearance.qml:94
+#: package/contents/ui/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "נא לבחור סמל לדפדפן"
 
-#: package/contents/ui/ConfigAppearance.qml:98
+#: package/contents/ui/ConfigAppearance.qml:101
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"

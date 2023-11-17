@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-08 01:39+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2010-01-20 09:32+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -150,13 +150,13 @@ msgctxt "@title"
 msgid "Units"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:36
+#: package/contents/ui/config/ConfigAppearance.qml:35
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:44
+#: package/contents/ui/config/ConfigAppearance.qml:43
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -164,31 +164,31 @@ msgctxt "@label"
 msgid "Show temperature:"
 msgstr "សម្ពាធ ៖ %1 %2"
 
-#: package/contents/ui/config/ConfigAppearance.qml:47
+#: package/contents/ui/config/ConfigAppearance.qml:46
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:55
+#: package/contents/ui/config/ConfigAppearance.qml:54
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:62
+#: package/contents/ui/config/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:71
+#: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:72
+#: package/contents/ui/config/ConfigAppearance.qml:71
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -196,13 +196,13 @@ msgctxt "@option:check"
 msgid "Temperature"
 msgstr "សម្ពាធ ៖ %1 %2"
 
-#: package/contents/ui/config/ConfigAppearance.qml:77
+#: package/contents/ui/config/ConfigAppearance.qml:76
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:82
+#: package/contents/ui/config/ConfigAppearance.qml:81
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -210,7 +210,7 @@ msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "សម្ពាធ ៖ %1 %2"
 
-#: package/contents/ui/config/ConfigAppearance.qml:87
+#: package/contents/ui/config/ConfigAppearance.qml:86
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"
@@ -218,13 +218,13 @@ msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "សំណើម ៖ %1%2"
 
-#: package/contents/ui/config/ConfigUnits.qml:33
+#: package/contents/ui/config/ConfigUnits.qml:32
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigUnits.qml:39
+#: package/contents/ui/config/ConfigUnits.qml:38
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -232,13 +232,13 @@ msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "សម្ពាធ ៖ %1 %2"
 
-#: package/contents/ui/config/ConfigUnits.qml:45
+#: package/contents/ui/config/ConfigUnits.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigUnits.qml:51
+#: package/contents/ui/config/ConfigUnits.qml:50
 #, fuzzy, kde-format
 #| msgctxt "visibility from distance"
 #| msgid "Visibility: %1"
@@ -246,61 +246,61 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "ភាព​​មើលឃើញ ៖ %1"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:46
+#: package/contents/ui/config/ConfigWeatherStation.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:49
+#: package/contents/ui/config/ConfigWeatherStation.qml:53
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:61
+#: package/contents/ui/config/ConfigWeatherStation.qml:65
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:67
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#: package/contents/ui/config/ConfigWeatherStation.qml:75
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:188
+#: package/contents/ui/config/ConfigWeatherStation.qml:183
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:190
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"

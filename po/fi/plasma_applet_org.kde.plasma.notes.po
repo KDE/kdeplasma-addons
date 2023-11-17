@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-06 01:41+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-03-05 17:40+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -31,67 +31,62 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Ulkoasu"
 
-#: package/contents/ui/configAppearance.qml:32
+#: package/contents/ui/configAppearance.qml:31
 #, kde-format
 msgid "%1pt"
 msgstr "%1 pt"
 
-#: package/contents/ui/configAppearance.qml:38
+#: package/contents/ui/configAppearance.qml:37
 #, kde-format
 msgid "Text font size:"
 msgstr "Tekstifontin koko:"
 
-#: package/contents/ui/configAppearance.qml:43
-#, kde-format
-msgid "Background color"
-msgstr "Taustaväri"
-
-#: package/contents/ui/configAppearance.qml:74
+#: package/contents/ui/configAppearance.qml:62
 #, kde-format
 msgid "A white sticky note"
 msgstr "Valkoinen muistilappu"
 
-#: package/contents/ui/configAppearance.qml:75
+#: package/contents/ui/configAppearance.qml:63
 #, kde-format
 msgid "A black sticky note"
 msgstr "Musta muistilappu"
 
-#: package/contents/ui/configAppearance.qml:76
+#: package/contents/ui/configAppearance.qml:64
 #, kde-format
 msgid "A red sticky note"
 msgstr "Punainen muistilappu"
 
-#: package/contents/ui/configAppearance.qml:77
+#: package/contents/ui/configAppearance.qml:65
 #, kde-format
 msgid "An orange sticky note"
 msgstr "Oranssi muistilappu"
 
-#: package/contents/ui/configAppearance.qml:78
+#: package/contents/ui/configAppearance.qml:66
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "Keltainen muistilappu"
 
-#: package/contents/ui/configAppearance.qml:79
+#: package/contents/ui/configAppearance.qml:67
 #, kde-format
 msgid "A green sticky note"
 msgstr "Vihreä muistilappu"
 
-#: package/contents/ui/configAppearance.qml:80
+#: package/contents/ui/configAppearance.qml:68
 #, kde-format
 msgid "A blue sticky note"
 msgstr "Sininen muistilappu"
 
-#: package/contents/ui/configAppearance.qml:81
+#: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgid "A pink sticky note"
 msgstr "Vaaleanpunainen muistilappu"
 
-#: package/contents/ui/configAppearance.qml:82
+#: package/contents/ui/configAppearance.qml:70
 #, kde-format
 msgid "A translucent sticky note"
 msgstr "Läpikuultava muistilappu"
 
-#: package/contents/ui/configAppearance.qml:83
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "A translucent sticky note with light text"
 msgstr "Läpikuultava muistilappu vaalealla tekstillä"
@@ -240,6 +235,9 @@ msgstr "Läpikuultava"
 msgctxt "@item:inmenu"
 msgid "Translucent Light"
 msgstr "Vaalea läpikuultava"
+
+#~ msgid "Background color"
+#~ msgstr "Taustaväri"
 
 #~ msgid "Toggle text format options"
 #~ msgstr "Näytä tai piilota tekstin muotoilun valinnat"

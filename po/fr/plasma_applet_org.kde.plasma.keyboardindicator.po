@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-29 01:55+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-08-21 14:15+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: fr\n"
@@ -25,20 +25,20 @@ msgctxt "@title"
 msgid "Keys"
 msgstr "Touches"
 
-#: contents/ui/configAppearance.qml:34
+#: contents/ui/configAppearance.qml:37
 #, kde-format
 msgctxt ""
 "@label show keyboard indicator when Caps Lock or Num Lock is activated"
 msgid "Show when activated:"
 msgstr "Afficher si activé :"
 
-#: contents/ui/configAppearance.qml:37
+#: contents/ui/configAppearance.qml:40
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
 msgstr "Verrouillage des majuscules"
 
-#: contents/ui/configAppearance.qml:44
+#: contents/ui/configAppearance.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"

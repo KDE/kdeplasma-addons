@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2017-02-09 21:51+0200\n"
 "Last-Translator: Petros Vidalis <pvidalis@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -185,33 +185,33 @@ msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Με αριστερό κλικ στην εικόνα άνοιγμα σε εξωτερικό προβολέα"
 
-#: package/contents/ui/ConfigPaths.qml:49
+#: package/contents/ui/ConfigPaths.qml:66
+#, kde-format
+msgid "Remove path"
+msgstr ""
+
+#: package/contents/ui/ConfigPaths.qml:75
 #, fuzzy, kde-format
 #| msgid "Choose files"
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Επιλογή αρχείων"
 
-#: package/contents/ui/ConfigPaths.qml:75
+#: package/contents/ui/ConfigPaths.qml:101
 #, fuzzy, kde-format
 #| msgid "Choose a folder"
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Επιλογή φακέλου"
 
-#: package/contents/ui/ConfigPaths.qml:119
-#, kde-format
-msgid "Remove path"
-msgstr ""
-
-#: package/contents/ui/ConfigPaths.qml:133
+#: package/contents/ui/ConfigPaths.qml:121
 #, fuzzy, kde-format
 #| msgid "Add folder..."
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Προσθήκη φακέλου..."
 
-#: package/contents/ui/ConfigPaths.qml:139
+#: package/contents/ui/ConfigPaths.qml:127
 #, fuzzy, kde-format
 #| msgid "Add files..."
 msgctxt "@action:button"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-11-07 11:08+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -165,30 +165,30 @@ msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "יש ללחוץ על תמונה כדי לפתוח אותה ביישום חיצוני"
 
-#: package/contents/ui/ConfigPaths.qml:49
+#: package/contents/ui/ConfigPaths.qml:66
+#, kde-format
+msgid "Remove path"
+msgstr "הסרת נתיב"
+
+#: package/contents/ui/ConfigPaths.qml:75
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "בחירת קבצים"
 
-#: package/contents/ui/ConfigPaths.qml:75
+#: package/contents/ui/ConfigPaths.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "בחירת תיקייה"
 
-#: package/contents/ui/ConfigPaths.qml:119
-#, kde-format
-msgid "Remove path"
-msgstr "הסרת נתיב"
-
-#: package/contents/ui/ConfigPaths.qml:133
+#: package/contents/ui/ConfigPaths.qml:121
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "הוספת תיקיה…"
 
-#: package/contents/ui/ConfigPaths.qml:139
+#: package/contents/ui/ConfigPaths.qml:127
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

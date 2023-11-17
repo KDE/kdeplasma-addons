@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-16 01:45+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2022-02-05 20:22+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -26,56 +26,56 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Aspect"
 
-#: package/contents/ui/configAppearance.qml:42
+#: package/contents/ui/configAppearance.qml:43
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr "Dimensiune grilă:"
 
-#: package/contents/ui/configAppearance.qml:51
+#: package/contents/ui/configAppearance.qml:52
 #, kde-format
 msgid "Background:"
 msgstr "Fundal:"
 
-#: package/contents/ui/configAppearance.qml:57
+#: package/contents/ui/configAppearance.qml:58
 #, kde-format
 msgid "Color:"
 msgstr "Culoare:"
 
-#: package/contents/ui/configAppearance.qml:72
+#: package/contents/ui/configAppearance.qml:73
 #, kde-format
 msgid "Image:"
 msgstr "Imagine:"
 
-#: package/contents/ui/configAppearance.qml:80
+#: package/contents/ui/configAppearance.qml:81
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Cale spre imagine personalizată…"
 
-#: package/contents/ui/configAppearance.qml:99
+#: package/contents/ui/configAppearance.qml:100
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
 msgstr "Alege imaginea…"
 
-#: package/contents/ui/configAppearance.qml:107
+#: package/contents/ui/configAppearance.qml:108
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Alege o imagine"
 
-#: package/contents/ui/configAppearance.qml:112
+#: package/contents/ui/configAppearance.qml:113
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Fișiere cu imagini (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:126
+#: package/contents/ui/configAppearance.qml:127
 #, kde-format
 msgid "Tiles:"
 msgstr "Dale:"
 
-#: package/contents/ui/configAppearance.qml:130
+#: package/contents/ui/configAppearance.qml:131
 #, kde-format
 msgid "Colored numbers:"
 msgstr "Numere colorate:"

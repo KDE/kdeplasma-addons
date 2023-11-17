@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-03 02:37+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2022-02-09 17:50+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -23,49 +23,49 @@ msgctxt "@title"
 msgid "General"
 msgstr "Chung"
 
-#: package/contents/ui/ConfigGeneral.qml:30
+#: package/contents/ui/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Số cột tối đa:"
 
-#: package/contents/ui/ConfigGeneral.qml:30
+#: package/contents/ui/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Số dòng tối đa:"
 
-#: package/contents/ui/ConfigGeneral.qml:44
+#: package/contents/ui/ConfigGeneral.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Diện mạo:"
 
-#: package/contents/ui/ConfigGeneral.qml:46
+#: package/contents/ui/ConfigGeneral.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
 msgstr "Hiện tên mục khởi chạy"
 
-#: package/contents/ui/ConfigGeneral.qml:51
+#: package/contents/ui/ConfigGeneral.qml:46
 #, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Dùng ô bật lên"
 
-#: package/contents/ui/ConfigGeneral.qml:61
+#: package/contents/ui/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Tiêu đề:"
 
-#: package/contents/ui/ConfigGeneral.qml:69
+#: package/contents/ui/ConfigGeneral.qml:64
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Hiện:"
 
-#: package/contents/ui/ConfigGeneral.qml:85
+#: package/contents/ui/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"

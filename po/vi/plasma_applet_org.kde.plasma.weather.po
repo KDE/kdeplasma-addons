@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-08 01:39+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2023-01-08 18:17+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -144,145 +144,145 @@ msgctxt "@title"
 msgid "Units"
 msgstr "Đơn vị"
 
-#: package/contents/ui/config/ConfigAppearance.qml:36
+#: package/contents/ui/config/ConfigAppearance.qml:35
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "Chế độ gọn"
 
-#: package/contents/ui/config/ConfigAppearance.qml:44
+#: package/contents/ui/config/ConfigAppearance.qml:43
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Hiện nhiệt độ:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:47
+#: package/contents/ui/config/ConfigAppearance.qml:46
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Trên biểu tượng phụ kiện"
 
-#: package/contents/ui/config/ConfigAppearance.qml:55
+#: package/contents/ui/config/ConfigAppearance.qml:54
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Cạnh biểu tượng phụ kiện"
 
-#: package/contents/ui/config/ConfigAppearance.qml:62
+#: package/contents/ui/config/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Không hiện"
 
-#: package/contents/ui/config/ConfigAppearance.qml:71
+#: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "Hiện trong chú giải:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:72
+#: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Nhiệt độ"
 
-#: package/contents/ui/config/ConfigAppearance.qml:77
+#: package/contents/ui/config/ConfigAppearance.qml:76
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Gió"
 
-#: package/contents/ui/config/ConfigAppearance.qml:82
+#: package/contents/ui/config/ConfigAppearance.qml:81
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Áp suất"
 
-#: package/contents/ui/config/ConfigAppearance.qml:87
+#: package/contents/ui/config/ConfigAppearance.qml:86
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "Độ ẩm"
 
-#: package/contents/ui/config/ConfigUnits.qml:33
+#: package/contents/ui/config/ConfigUnits.qml:32
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "Nhiệt độ:"
 
-#: package/contents/ui/config/ConfigUnits.qml:39
+#: package/contents/ui/config/ConfigUnits.qml:38
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "Áp suất:"
 
-#: package/contents/ui/config/ConfigUnits.qml:45
+#: package/contents/ui/config/ConfigUnits.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "Tốc độ gió:"
 
-#: package/contents/ui/config/ConfigUnits.qml:51
+#: package/contents/ui/config/ConfigUnits.qml:50
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Tầm nhìn:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:46
+#: package/contents/ui/config/ConfigWeatherStation.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Cập nhật mỗi:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:49
+#: package/contents/ui/config/ConfigWeatherStation.qml:53
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 phút"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:61
+#: package/contents/ui/config/ConfigWeatherStation.qml:65
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Địa điểm:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:67
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "Chưa chọn gì"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#: package/contents/ui/config/ConfigWeatherStation.qml:75
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "Nhà cung cấp:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Nhập địa điểm mới"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:95
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Nhập địa điểm"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:188
+#: package/contents/ui/config/ConfigWeatherStation.qml:183
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Không tìm thấy trạm thời tiết nào cho '%1'"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:190
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Tìm một trạm thời tiết để đổi địa điểm của bạn"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"

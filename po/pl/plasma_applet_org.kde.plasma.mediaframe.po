@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-01 02:16+0000\n"
+"POT-Creation-Date: 2023-11-17 01:38+0000\n"
 "PO-Revision-Date: 2021-12-19 12:37+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -168,30 +168,30 @@ msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Kliknij na obrazie, aby otworzyć w zewnętrznej przeglądarce"
 
-#: package/contents/ui/ConfigPaths.qml:49
+#: package/contents/ui/ConfigPaths.qml:66
+#, kde-format
+msgid "Remove path"
+msgstr "Usuń ścieżkę"
+
+#: package/contents/ui/ConfigPaths.qml:75
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Wybierz pliki"
 
-#: package/contents/ui/ConfigPaths.qml:75
+#: package/contents/ui/ConfigPaths.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Wybierz katalog"
 
-#: package/contents/ui/ConfigPaths.qml:119
-#, kde-format
-msgid "Remove path"
-msgstr "Usuń ścieżkę"
-
-#: package/contents/ui/ConfigPaths.qml:133
+#: package/contents/ui/ConfigPaths.qml:121
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Dodaj katalog..."
 
-#: package/contents/ui/ConfigPaths.qml:139
+#: package/contents/ui/ConfigPaths.qml:127
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
