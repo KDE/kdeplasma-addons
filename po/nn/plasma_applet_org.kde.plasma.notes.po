@@ -231,6 +231,3 @@ msgstr "Gjennomsiktig"
 msgctxt "@item:inmenu"
 msgid "Translucent Light"
 msgstr "Gjennomsiktig lys"
-
-#~ msgid "Background color"
-#~ msgstr "Bakgrunnsfarge"
