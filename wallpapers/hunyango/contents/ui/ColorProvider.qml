@@ -17,6 +17,9 @@ Item {
     readonly property int fastDuration: 2000
     readonly property int slowDuration: 30000
 
+    // For accent color, tell the wallpaper we've changed the color
+    signal repaintNeeded()
+
     Behavior on color {
         SequentialAnimation {
             ColorAnimation {
@@ -37,7 +40,8 @@ Item {
 
     function updateColor(fast = false) {
         colorAnimation.duration = fast ? fastDuration : slowDuration;
-        color = _randomColor()
+        color = _randomColor();
+        repaintNeeded();
     }
 
     Component.onCompleted: updateColor()

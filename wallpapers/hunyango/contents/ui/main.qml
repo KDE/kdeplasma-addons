@@ -38,4 +38,9 @@ WallpaperItem {
             imagePath: String(Qt.resolvedUrl("wallpaper.svgz")).substring(7)
         }
     }
+
+    Connections {
+        target: ColorProvider
+        onRepaintNeeded: root.repaintNeeded()
+    }
 }
