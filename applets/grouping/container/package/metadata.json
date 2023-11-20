@@ -131,5 +131,6 @@
         "Name[zh_CN]": "Plasma 小程序分组",
         "Name[zh_TW]": "群組元件",
         "Website": "https://kde.org/plasma-desktop/"
-    }
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
 }

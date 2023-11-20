@@ -131,5 +131,6 @@
         "Name[zh_CN]": "计时器",
         "Name[zh_TW]": "計時器",
         "Website": "https://kde.org/plasma-desktop/"
-    }
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
 }

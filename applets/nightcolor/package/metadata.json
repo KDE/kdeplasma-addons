@@ -133,6 +133,7 @@
         "Name[zh_TW]": "夜色控制",
         "Website": "https://kde.org/plasma-desktop"
     },
+    "X-Plasma-API-Minimum-Version": "6.0",
     "X-KDE-Keywords": "kwin,window,manager,night,colors,redshift,eyes,night mode,colour,dark mode,dark,dim,sleep,eye strain,red,shift,orange,yellow,warm,screen tint,temperature,blue,light",
     "X-Plasma-DBusActivationService": "org.kde.NightColor",
     "X-Plasma-NotificationAreaCategory": "SystemServices"

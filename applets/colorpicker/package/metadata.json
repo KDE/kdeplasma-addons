@@ -134,5 +134,6 @@
         "Name[zh_CN]": "拾色器",
         "Name[zh_TW]": "取色工具",
         "Website": "https://userbase.kde.org/Plasma/ColorPicker"
-    }
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
 }

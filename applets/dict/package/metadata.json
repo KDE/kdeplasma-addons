@@ -133,5 +133,6 @@
         "Name[zh_CN]": "词典",
         "Name[zh_TW]": "字典",
         "Website": "https://kde.org/plasma-desktop/"
-    }
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
 }

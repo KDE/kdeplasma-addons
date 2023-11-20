@@ -134,5 +134,6 @@
         "Name[zh_CN]": "Konsole 配置方案",
         "Name[zh_TW]": "Konsole 設定檔",
         "Website": "https://userbase.kde.org/Plasma"
-    }
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
 }

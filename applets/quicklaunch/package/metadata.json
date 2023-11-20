@@ -134,5 +134,6 @@
         "Name[zh_CN]": "快速启动",
         "Name[zh_TW]": "快速啟動",
         "Website": "https://kde.org/plasma-desktop/"
-    }
+    },
+    "X-Plasma-API-Minimum-Version": "6.0"
 }
