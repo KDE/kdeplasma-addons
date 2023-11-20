@@ -10,12 +10,10 @@ import QtQuick.Layouts 1.3
 
 import org.kde.plasmacalendar.astronomicaleventsconfig 1.0
 import org.kde.kirigami 2.5 as Kirigami
+import org.kde.kcmutils as KCM
 
-Kirigami.FormLayout {
+KCM.SimpleKCM {
     id: configPage
-
-    anchors.left: parent.left
-    anchors.right: parent.right
 
     // expected API
     signal configurationChanged
@@ -29,25 +27,28 @@ Kirigami.FormLayout {
         configStorage.save();
     }
 
-    ConfigStorage {
-        id: configStorage
-    }
+    Kirigami.FormLayout {
 
-    QQC2.CheckBox {
-        id: showLunarPhasesCheckBox
+        ConfigStorage {
+            id: configStorage
+        }
 
-        Kirigami.FormData.label: i18nd("plasma_calendar_astronomicalevents", "Show:")
+        QQC2.CheckBox {
+            id: showLunarPhasesCheckBox
 
-        checked: configStorage.isLunarPhaseShown
-        text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Lunar phases")
-        onCheckedChanged: configPage.configurationChanged();
-    }
+            Kirigami.FormData.label: i18nd("plasma_calendar_astronomicalevents", "Show:")
 
-    QQC2.CheckBox {
-        id: showSeasonsCheckBox
+            checked: configStorage.isLunarPhaseShown
+            text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Lunar phases")
+            onCheckedChanged: configPage.configurationChanged();
+        }
 
-        checked: configStorage.isSeasonShown
-        text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Astronomical seasons (solstices and equinoxes)")
-        onCheckedChanged: configPage.configurationChanged();
+        QQC2.CheckBox {
+            id: showSeasonsCheckBox
+
+            checked: configStorage.isSeasonShown
+            text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Astronomical seasons (solstices and equinoxes)")
+            onCheckedChanged: configPage.configurationChanged();
+        }
     }
 }
