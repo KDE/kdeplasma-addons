@@ -134,8 +134,8 @@
         "Name[zh_TW]": "鎖定鍵狀態",
         "Website": "https://kde.org/plasma-desktop/"
     },
-    "X-Plasma-API-Minimum-Version": "6.0",
     "Keywords": "CapsLock;NumLock;",
     "Keywords[x-test]": "xxCapsLockxx;xxNumLockxx;",
+    "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-NotificationAreaCategory": "Hardware"
 }
