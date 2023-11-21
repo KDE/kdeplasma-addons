@@ -18,7 +18,7 @@
 #include <QJSValueList>
 #include <QPainter>
 #include <QStandardPaths>
-#include <QTextCodec>
+#include <QStringDecoder>
 #include <QTimer>
 #include <QUrl>
 
@@ -694,14 +694,11 @@ void ComicProviderWrapper::pageRetrieved(int id, const QByteArray &data)
             finished();
         }
     } else {
-        QTextCodec *codec = nullptr;
-        if (!mTextCodec.isEmpty()) {
-            codec = QTextCodec::codecForName(mTextCodec);
+        QStringDecoder codec(mTextCodec);
+        if (mTextCodec.isEmpty() || !codec.isValid()) {
+            codec = QStringDecoder(QStringDecoder::encodingForHtml(data).value_or(QStringDecoder::Utf8));
         }
-        if (!codec) {
-            codec = QTextCodec::codecForHtml(data);
-        }
-        QString html = codec->toUnicode(data);
+        QString html = codec.decode(data);
 
         callFunction(QLatin1String("pageRetrieved"), {id, html});
     }
