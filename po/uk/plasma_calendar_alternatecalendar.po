@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-03 01:40+0000\n"
+"POT-Creation-Date: 2023-11-22 01:36+0000\n"
 "PO-Revision-Date: 2023-05-19 20:33+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -78,13 +78,13 @@ msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
 msgstr "Єврейський календар"
 
-#: config/qml/AlternateCalendarConfig.qml:38
+#: config/qml/AlternateCalendarConfig.qml:37
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "Календарна система:"
 
-#: config/qml/AlternateCalendarConfig.qml:52
+#: config/qml/AlternateCalendarConfig.qml:51
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -94,13 +94,13 @@ msgstr ""
 "Цей календар засновано на суто астрономічних обчисленнях. У ньому знехтувано "
 "усі критерії видимості місяця."
 
-#: config/qml/AlternateCalendarConfig.qml:60
+#: config/qml/AlternateCalendarConfig.qml:59
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "Зсув дати:"
 
-#: config/qml/AlternateCalendarConfig.qml:71
+#: config/qml/AlternateCalendarConfig.qml:70
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
@@ -109,7 +109,7 @@ msgstr[1] "%1 дні"
 msgstr[2] "%1 днів"
 msgstr[3] "%1 день"
 
-#: config/qml/AlternateCalendarConfig.qml:74
+#: config/qml/AlternateCalendarConfig.qml:73
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

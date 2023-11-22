@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-03 01:40+0000\n"
+"POT-Creation-Date: 2023-11-22 01:36+0000\n"
 "PO-Revision-Date: 2023-11-19 03:37\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -78,13 +78,13 @@ msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
 msgstr "希伯来历"
 
-#: config/qml/AlternateCalendarConfig.qml:38
+#: config/qml/AlternateCalendarConfig.qml:37
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "历法："
 
-#: config/qml/AlternateCalendarConfig.qml:52
+#: config/qml/AlternateCalendarConfig.qml:51
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -92,19 +92,19 @@ msgid ""
 "any crescent visibility criteria."
 msgstr "此日历基于单纯的天文学计算，它并不反映实际可观测的月相。"
 
-#: config/qml/AlternateCalendarConfig.qml:60
+#: config/qml/AlternateCalendarConfig.qml:59
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "日期偏移："
 
-#: config/qml/AlternateCalendarConfig.qml:71
+#: config/qml/AlternateCalendarConfig.qml:70
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 天"
 
-#: config/qml/AlternateCalendarConfig.qml:74
+#: config/qml/AlternateCalendarConfig.qml:73
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

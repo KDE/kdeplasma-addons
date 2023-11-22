@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-03 01:40+0000\n"
+"POT-Creation-Date: 2023-11-22 01:36+0000\n"
 "PO-Revision-Date: 2023-05-28 16:43+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -78,13 +78,13 @@ msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
 msgstr "Juutalainen kalenteri"
 
-#: config/qml/AlternateCalendarConfig.qml:38
+#: config/qml/AlternateCalendarConfig.qml:37
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "Kalenterijärjestelmä:"
 
-#: config/qml/AlternateCalendarConfig.qml:52
+#: config/qml/AlternateCalendarConfig.qml:51
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -94,20 +94,20 @@ msgstr ""
 "Tämä kalenteri perustuu puhtaaseen tähtitieteelliseen laskentaan, se ei ota "
 "huomioon kuunsirpin näkyvyysehtoja."
 
-#: config/qml/AlternateCalendarConfig.qml:60
+#: config/qml/AlternateCalendarConfig.qml:59
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "Päiväyssiirtymä:"
 
-#: config/qml/AlternateCalendarConfig.qml:71
+#: config/qml/AlternateCalendarConfig.qml:70
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "Yksi päivä"
 msgstr[1] "%1 päivää"
 
-#: config/qml/AlternateCalendarConfig.qml:74
+#: config/qml/AlternateCalendarConfig.qml:73
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
