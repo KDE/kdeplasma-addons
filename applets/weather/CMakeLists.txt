@@ -3,7 +3,7 @@ add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.weather\")
 kcoreaddons_add_plugin(org.kde.plasma.weather SOURCES weatherapplet.cpp INSTALL_NAMESPACE "plasma/applets")
 
 target_link_libraries(org.kde.plasma.weather
-    KF6::Plasma
+    Plasma::Plasma
     KF6::Plasma5Support
     KF6::UnitConversion
     KF6::I18n
@@ -21,7 +21,7 @@ target_sources(weatherplugin PRIVATE
     plugin/locationlistmodel.cpp
 )
 target_link_libraries(weatherplugin PRIVATE
-    KF6::Plasma
+    Plasma::Plasma
     KF6::Plasma5Support
     KF6::UnitConversion
     KF6::I18n

@@ -66,7 +66,9 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     JobWidgets
 )
 
-find_package(KF6 ${PROJECT_VERSION} REQUIRED COMPONENTS Plasma PlasmaQuick Plasma5Support)
+find_package(KF6 ${PROJECT_VERSION} REQUIRED COMPONENTS Plasma5Support)
+find_package(Plasma ${PROJECT_VERSION} REQUIRED)
+find_package(PlasmaQuick ${PROJECT_VERSION} REQUIRED)
 
 find_package(KF6Purpose CONFIG QUIET)
 set_package_properties(KF6Purpose PROPERTIES

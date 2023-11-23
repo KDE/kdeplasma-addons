@@ -18,7 +18,7 @@ kcoreaddons_add_plugin(org.kde.plasma.comic SOURCES ${comic_SRCS} INSTALL_NAMESP
 target_link_libraries(org.kde.plasma.comic
     Qt::Gui
     Qt::Widgets
-    KF6::Plasma
+    Plasma::Plasma
     KF6::I18n
     KF6::KIOCore
     KF6::KIOWidgets

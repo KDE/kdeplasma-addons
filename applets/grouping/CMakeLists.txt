@@ -7,7 +7,7 @@ target_link_libraries(org.kde.plasma.private.grouping
     Qt::Quick
     Qt::DBus
     Qt::Widgets
-    KF6::Plasma
+    Plasma::Plasma
     KF6::Plasma5Support
     KF6::XmlGui
     KF6::I18n
