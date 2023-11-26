@@ -68,6 +68,7 @@
         "Description[uk]": "Упорядкування стільниць у віртуальний куб",
         "Description[vi]": "Sắp xếp các bàn làm việc trên một khối hộp ảo",
         "Description[x-test]": "xxArrange desktops in a virtual cubexx",
+        "Description[zh_CN]": "在虚拟立方体中安排桌面",
         "Description[zh_TW]": "將各虛擬桌面排列成一個立體方塊",
         "EnabledByDefault": false,
         "Id": "cube",
@@ -94,6 +95,7 @@
         "Name[uk]": "Куб",
         "Name[vi]": "Khối hộp",
         "Name[x-test]": "xxCubexx",
+        "Name[zh_CN]": "立方体",
         "Name[zh_TW]": "立體方塊"
     },
     "X-KDE-ConfigModule": "kwin_cube_config",
