@@ -4,11 +4,12 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15
-import QtQuick.Window 2.15
+import QtQuick
+import QtQuick.Controls as QQC2
 
-MenuItem {
+QQC2.MenuItem {
+    id: root
+
     property var _sequence: []
     property alias _text: actionElement.text
     property alias _enabled: actionElement.enabled
@@ -16,11 +17,11 @@ MenuItem {
 
     Shortcut {
         id: shortcutElement
-        sequences: [_sequence]
+        sequences: [root._sequence]
         enabled: false
     }
 
-    action: Action {
+    action: QQC2.Action {
         id: actionElement
         shortcut: shortcutElement.sequences ? shortcutElement.sequences[0] : null
     }

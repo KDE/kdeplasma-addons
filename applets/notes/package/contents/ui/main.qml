@@ -8,19 +8,19 @@
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Layouts
-import QtQuick.Window
+import QtQuick.Templates as T
 import QtQuick.Dialogs
 
-import org.kde.draganddrop 2.0 as DragDrop
+import org.kde.draganddrop as DragDrop
 
 import org.kde.plasma.core as PlasmaCore
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.plasmoid 2.0
+import org.kde.kirigami as Kirigami
+import org.kde.ksvg as KSvg
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.plasma.plasmoid
 
-import org.kde.plasma.private.notes 0.1
+import org.kde.plasma.private.notes
 
 PlasmoidItem {
     id: root
@@ -33,7 +33,7 @@ PlasmoidItem {
     // this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
     readonly property real horizontalMargins: fullRepresentationItem.width * 0.07
     readonly property real verticalMargins: fullRepresentationItem.height * 0.07
-    readonly property PlasmaComponents3.TextArea mainTextArea: fullRepresentationItem.mainTextArea
+    readonly property T.TextArea mainTextArea: fullRepresentationItem.mainTextArea
 
     // note is of type Note
     property QtObject note: noteManager.loadNote(Plasmoid.configuration.noteId);

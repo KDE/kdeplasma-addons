@@ -4,19 +4,17 @@
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15 as QQC2
-import QtQuick.Layouts 1.15
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
 
-import org.kde.kcmutils as KCM
 import org.kde.plasma.core as PlasmaCore
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.kirigami 2.5 as Kirigami
-import org.kde.kcmutils as KCM
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.kcmutils as KCMUtils
+import org.kde.kirigami as Kirigami
+import org.kde.ksvg as KSvg
 
-KCM.GridViewKCM {
+KCMUtils.GridViewKCM {
     property string cfg_color
     property alias cfg_fontSize: fontSizeSpinBox.value
 
@@ -42,7 +40,7 @@ KCM.GridViewKCM {
     view.currentIndex: view.model.indexOf(cfg_color)
     view.onCurrentIndexChanged: cfg_color = view.model[view.currentIndex]
 
-    view.delegate: KCM.GridDelegate {
+    view.delegate: KCMUtils.GridDelegate {
         id: delegate
         thumbnailAvailable: true
         thumbnail: KSvg.SvgItem {
