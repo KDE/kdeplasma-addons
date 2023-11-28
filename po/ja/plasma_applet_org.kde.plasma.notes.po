@@ -231,6 +231,3 @@ msgstr "半透明"
 msgctxt "@item:inmenu"
 msgid "Translucent Light"
 msgstr "明るい半透明"
-
-#~ msgid "Background color"
-#~ msgstr "背景色"
