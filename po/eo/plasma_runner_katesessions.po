@@ -1,13 +1,16 @@
 # Translation of plasma_runner_katesessions into esperanto.
+# Copyright (C) 2009 Free Software Foundation, Inc.
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-10-31 02:25+0000\n"
-"PO-Revision-Date: 2009-11-15 12:06+0100\n"
-"Last-Translator: Axel Rousseau <axel@esperanto-jeunes.org>\n"
+"PO-Revision-Date: 2023-03-26 18:35+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -19,14 +22,14 @@ msgstr ""
 #: katesessions.cpp:30
 #, kde-format
 msgid "Finds Kate sessions matching :q:."
-msgstr ""
+msgstr "Trovas Kate-seancojn kongruajn al :q:."
 
 #: katesessions.cpp:31
 #, kde-format
 msgid "Lists all the Kate editor sessions in your account."
-msgstr ""
+msgstr "Listigas ĉiujn Kate-redaktilseancojn en via konto."
 
 #: katesessions.cpp:65 katesessions.cpp:76
 #, kde-format
 msgid "Open Kate Session"
-msgstr ""
+msgstr "Malfermi Kate-seancon"

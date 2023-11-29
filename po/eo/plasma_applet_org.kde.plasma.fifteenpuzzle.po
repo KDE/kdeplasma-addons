@@ -39,7 +39,7 @@ msgstr "Fono:"
 #: package/contents/ui/configAppearance.qml:56
 #, kde-format
 msgid "Color:"
-msgstr ""
+msgstr "Koloro:"
 
 #: package/contents/ui/configAppearance.qml:71
 #, kde-format
