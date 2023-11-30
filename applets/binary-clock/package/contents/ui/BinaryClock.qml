@@ -3,6 +3,7 @@
  *
  * SPDX-FileCopyrightText: 2014 Joseph Wenninger <jowenn@kde.org>
  * SPDX-FileCopyrightText: 2018 Piotr Kąkol <piotrkakol@protonmail.com>
+ * SPDX-FileCopyrightText: 2023 Bharadwaj Raju <bharadwaj.raju777@protonmail.com>
  *
  * Original code (KDE4):
  * SPDX-FileCopyrightText: 2007 Riccardo Iaconelli <riccardo@kde.org>
@@ -18,10 +19,10 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 import org.kde.plasma.core as PlasmaCore
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami as Kirigami
 
 Item {
     id: main
@@ -46,20 +47,16 @@ Item {
     readonly property int minutes: root.minutes
     readonly property int seconds: root.seconds
 
-    readonly property bool showOffLeds: plasmoid.configuration.showOffLeds
-    readonly property bool showGrid: plasmoid.configuration.showGrid
+    readonly property int base: 10
 
-    readonly property int base: plasmoid.configuration.showBcdFormat ? 10 : 16
+    readonly property bool showOffLeds: plasmoid.configuration.showOffLeds
 
     readonly property int dots: showSeconds ? 6 : 4
 
     readonly property color onColor: plasmoid.configuration.useCustomColorForActive ? plasmoid.configuration.customColorForActive : Kirigami.Theme.textColor
-    readonly property color offColor: plasmoid.configuration.useCustomColorForInactive ? plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.4)
-    readonly property color gridColor: plasmoid.configuration.useCustomColorForGrid ? plasmoid.configuration.customColorForGrid : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.6)
+    readonly property color offColor: plasmoid.configuration.useCustomColorForInactive ? plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.2)
 
     readonly property int dotSize: Math.min((height-5*Kirigami.Units.smallSpacing)/4, (width-(dots+1)*Kirigami.Units.smallSpacing)/dots)
-    readonly property real displayTop: (height - 4*dotSize-3*Kirigami.Units.smallSpacing)/2
-    readonly property real displayLeft: (width - dots*dotSize-(dots-1)*Kirigami.Units.smallSpacing)/2
 
     property bool wasExpanded: false
 
@@ -73,61 +70,24 @@ Item {
         onClicked: root.expanded = !wasExpanded
     }
 
-    /* hours */
-    DotColumn {
-        x:   displayLeft
-        y:   displayTop
-        val: hours/base
-    }
-    DotColumn {
-        x:   displayLeft+(dotSize+Kirigami.Units.smallSpacing)
-        y:   displayTop
-        val: hours%base
-    }
-
-    /* minutes */
-    DotColumn {
-        x:   displayLeft+(dotSize+Kirigami.Units.smallSpacing)*2
-        y:   displayTop
-        val: minutes/base
-    }
-    DotColumn {
-        x:   displayLeft+(dotSize+Kirigami.Units.smallSpacing)*3
-        y:   displayTop
-        val: minutes%base
-    }
-
-    /* seconds */
-    DotColumn {
-        x:       displayLeft+(dotSize+Kirigami.Units.smallSpacing)*4
-        y:       displayTop
-        val:     seconds/base
-        visible: showSeconds
-    }
-    DotColumn {
-        x:       displayLeft+(dotSize+Kirigami.Units.smallSpacing)*5
-        y:       displayTop
-        val:     seconds%base
-        visible: showSeconds
-    }
-
-    /* upper grid border */
-    Rectangle {
-        x:       displayLeft-Kirigami.Units.smallSpacing
-        y:       displayTop-Kirigami.Units.smallSpacing
-        width:   dots*(dotSize+Kirigami.Units.smallSpacing)+Kirigami.Units.smallSpacing
-        height:  Kirigami.Units.smallSpacing
-        visible: showGrid
-        color:   gridColor
-    }
-
-    /* left grid border */
-    Rectangle {
-        x:       displayLeft-Kirigami.Units.smallSpacing
-        y:       displayTop
-        width:   Kirigami.Units.smallSpacing
-        height:  4*(dotSize+Kirigami.Units.smallSpacing)
-        visible: showGrid
-        color:   gridColor
+    GridLayout {
+        anchors.horizontalCenter: parent.horizontalCenter
+        anchors.verticalCenter: parent.verticalCenter
+        columns: main.showSeconds ? 6 : 4
+        Repeater {
+            model: [8, 4, 2, 1]
+            Repeater {
+                model: [hours/base, hours%base, minutes/base, minutes%base, seconds/base, seconds%base]
+                property var bit: modelData
+                Rectangle {
+                    property var timeVal: modelData
+                    visible: main.dotSize >= 0 && (main.showSeconds || index < 4)
+                    width: main.dotSize
+                    height: width
+                    radius: width/2
+                    color: (timeVal & bit) ? main.onColor : (main.showOffLeds ? main.offColor : "transparent")
+                }
+            }
+        }
     }
 }

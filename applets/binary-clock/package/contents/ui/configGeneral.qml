@@ -1,5 +1,5 @@
 /*
- *  SPDX-FileCopyrightText: 2014 Joseph Wenninger <jowenn@kde.org>
+ *  SP9X-FileCopyrightText: 2014 Joseph Wenninger <jowenn@kde.org>
  *  SPDX-FileCopyrightText: 2018 Piotr Kąkol <piotrkakol@protonmail.com>
  *
  *  Based on analog-clock configGeneral.qml:
@@ -16,39 +16,23 @@ import org.kde.kirigami 2.5 as Kirigami
 import org.kde.kcmutils as KCM
 
 KCM.SimpleKCM {
-    property alias cfg_showGrid: showGridCheckBox.checked
     property alias cfg_showOffLeds: showOffLedsCheckBox.checked
     property alias cfg_showSeconds: showSecondsCheckBox.checked
-    property alias cfg_showBcdFormat: showBcdFormatCheckBox.checked
     property alias cfg_useCustomColorForActive: useCustomColorForActiveCheckBox.checked
     property alias cfg_customColorForActive: customColorForActive.color
     property alias cfg_useCustomColorForInactive: useCustomColorForInactiveCheckBox.checked
     property alias cfg_customColorForInactive: customColorForInactive.color
-    property alias cfg_useCustomColorForGrid: useCustomColorForGridCheckBox.checked
-    property alias cfg_customColorForGrid: customColorForGrid.color
 
     Kirigami.FormLayout {
         QtControls.CheckBox {
-            id: showGridCheckBox
-            Kirigami.FormData.label:i18n("Display:")
-            text: i18nc("@option:check", "Grid")
-        }
-
-        QtControls.CheckBox {
             id: showOffLedsCheckBox
-            text: i18nc("@option:check", "Inactive LEDs")
+            text: i18nc("@option:check", "Inactive lights")
         }
 
         QtControls.CheckBox {
             id: showSecondsCheckBox
             text: i18nc("@option:check", "Seconds")
         }
-
-        QtControls.CheckBox {
-            id: showBcdFormatCheckBox
-            text: i18nc("@option:check", "In BCD format (decimal)")
-        }
-
 
         Item {
             Kirigami.FormData.isSection:true
@@ -59,7 +43,7 @@ KCM.SimpleKCM {
 
             QtControls.CheckBox {
                 id: useCustomColorForActiveCheckBox
-                text: i18nc("@option:check", "Active LEDs")
+                text: i18nc("@option:check", "Active lights")
             }
 
             KQuickControls.ColorButton {
@@ -72,25 +56,12 @@ KCM.SimpleKCM {
 
             QtControls.CheckBox {
                 id: useCustomColorForInactiveCheckBox
-                text: i18nc("@option:check", "Inactive LEDs")
+                text: i18nc("@option:check", "Inactive lights")
             }
 
             KQuickControls.ColorButton {
                 id:customColorForInactive
                 enabled: useCustomColorForInactiveCheckBox.checked
-            }
-        }
-
-        RowLayout {
-
-            QtControls.CheckBox {
-                id: useCustomColorForGridCheckBox
-                text: i18nc("@option:check", "Grid")
-            }
-
-            KQuickControls.ColorButton {
-                id:customColorForGrid
-                enabled: useCustomColorForGridCheckBox.checked
             }
         }
     }

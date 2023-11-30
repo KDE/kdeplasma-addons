@@ -17,6 +17,7 @@ import QtQuick.Layouts 1.1
 import org.kde.plasma.plasmoid 2.0
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.plasma5support 2.0 as P5Support
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.workspace.calendar 2.0 as PlasmaCalendar
 
@@ -30,6 +31,7 @@ PlasmoidItem {
     width: Kirigami.Units.gridUnit * 10
     height: Kirigami.Units.gridUnit * 4
 
+    Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
     preferredRepresentation: compactRepresentation
 
     // keep this consistent with toolTipMainText and toolTipSubText in analog-clock
