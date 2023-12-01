@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-01 01:38+0000\n"
 "PO-Revision-Date: 2019-03-24 19:35+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -24,47 +24,44 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Appearance"
 
-#: package/contents/ui/configGeneral.qml:33
-#, kde-format
-msgid "Display:"
-msgstr "Display:"
-
-#: package/contents/ui/configGeneral.qml:34
-#: package/contents/ui/configGeneral.qml:88
-#, kde-format
+#: package/contents/ui/configGeneral.qml:29
+#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Inactive LEDs"
 msgctxt "@option:check"
-msgid "Grid"
-msgstr "Grid"
-
-#: package/contents/ui/configGeneral.qml:39
-#: package/contents/ui/configGeneral.qml:75
-#, kde-format
-msgctxt "@option:check"
-msgid "Inactive LEDs"
+msgid "Inactive lights"
 msgstr "Inactive LEDs"
 
-#: package/contents/ui/configGeneral.qml:44
+#: package/contents/ui/configGeneral.qml:34
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Seconds"
 
-#: package/contents/ui/configGeneral.qml:49
-#, kde-format
-msgctxt "@option:check"
-msgid "In BCD format (decimal)"
-msgstr "In BCD format (decimal)"
-
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:42
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Use custom colour for:"
 
-#: package/contents/ui/configGeneral.qml:62
-#, kde-format
+#: package/contents/ui/configGeneral.qml:46
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Active LEDs"
 msgctxt "@option:check"
-msgid "Active LEDs"
+msgid "Active lights"
 msgstr "Active LEDs"
+
+#~ msgid "Display:"
+#~ msgstr "Display:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Grid"
+#~ msgstr "Grid"
+
+#~ msgctxt "@option:check"
+#~ msgid "In BCD format (decimal)"
+#~ msgstr "In BCD format (decimal)"
 
 #~ msgctxt "@option:check"
 #~ msgid "Draw grid"

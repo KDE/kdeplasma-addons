@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-01 01:38+0000\n"
 "PO-Revision-Date: 2019-03-18 20:47+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -29,48 +29,45 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Ulkoasu"
 
-#: package/contents/ui/configGeneral.qml:33
-#, kde-format
-msgid "Display:"
-msgstr "Näkymä:"
-
-#: package/contents/ui/configGeneral.qml:34
-#: package/contents/ui/configGeneral.qml:88
-#, kde-format
+#: package/contents/ui/configGeneral.qml:29
+#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Inactive LEDs"
 msgctxt "@option:check"
-msgid "Grid"
-msgstr "Ruudukko"
-
-#: package/contents/ui/configGeneral.qml:39
-#: package/contents/ui/configGeneral.qml:75
-#, kde-format
-msgctxt "@option:check"
-msgid "Inactive LEDs"
+msgid "Inactive lights"
 msgstr "Passiiviset valot"
 
-#: package/contents/ui/configGeneral.qml:44
+#: package/contents/ui/configGeneral.qml:34
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Sekunnit"
 
-#: package/contents/ui/configGeneral.qml:49
-#, kde-format
-msgctxt "@option:check"
-msgid "In BCD format (decimal)"
-msgstr "Näytä BCD-muodossa (desimaalisena)"
-
 # HUOM! Käännös muotoiltu sen perusteella, etten tiedä, missä muodossa vaihtoehdot tulevat (”Käytä mukautettua väriä” edellyttäisi tulosijaa, esim. siihen-ja-siihen tai sille-ja-sille)
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:42
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Mukautetun värin käyttö:"
 
-#: package/contents/ui/configGeneral.qml:62
-#, kde-format
+#: package/contents/ui/configGeneral.qml:46
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Active LEDs"
 msgctxt "@option:check"
-msgid "Active LEDs"
+msgid "Active lights"
 msgstr "Aktiiviset valot"
+
+#~ msgid "Display:"
+#~ msgstr "Näkymä:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Grid"
+#~ msgstr "Ruudukko"
+
+#~ msgctxt "@option:check"
+#~ msgid "In BCD format (decimal)"
+#~ msgstr "Näytä BCD-muodossa (desimaalisena)"
 
 #~ msgctxt "@option:check"
 #~ msgid "Draw grid"

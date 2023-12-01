@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-01 01:38+0000\n"
 "PO-Revision-Date: 2019-03-15 18:14+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <kde-i18n-doc@kde.org>\n"
@@ -25,47 +25,44 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Aparencia"
 
-#: package/contents/ui/configGeneral.qml:33
-#, kde-format
-msgid "Display:"
-msgstr "Pantalla:"
-
-#: package/contents/ui/configGeneral.qml:34
-#: package/contents/ui/configGeneral.qml:88
-#, kde-format
+#: package/contents/ui/configGeneral.qml:29
+#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Inactive LEDs"
 msgctxt "@option:check"
-msgid "Grid"
-msgstr "Grade"
-
-#: package/contents/ui/configGeneral.qml:39
-#: package/contents/ui/configGeneral.qml:75
-#, kde-format
-msgctxt "@option:check"
-msgid "Inactive LEDs"
+msgid "Inactive lights"
 msgstr "LED apagados"
 
-#: package/contents/ui/configGeneral.qml:44
+#: package/contents/ui/configGeneral.qml:34
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Segundos"
 
-#: package/contents/ui/configGeneral.qml:49
-#, kde-format
-msgctxt "@option:check"
-msgid "In BCD format (decimal)"
-msgstr "En formato BCD (decimal)"
-
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:42
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Usar unha cor personalizada para:"
 
-#: package/contents/ui/configGeneral.qml:62
-#, kde-format
+#: package/contents/ui/configGeneral.qml:46
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Active LEDs"
 msgctxt "@option:check"
-msgid "Active LEDs"
+msgid "Active lights"
 msgstr "LED activos"
+
+#~ msgid "Display:"
+#~ msgstr "Pantalla:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Grid"
+#~ msgstr "Grade"
+
+#~ msgctxt "@option:check"
+#~ msgid "In BCD format (decimal)"
+#~ msgstr "En formato BCD (decimal)"
 
 #~ msgctxt "@option:check"
 #~ msgid "Draw grid"

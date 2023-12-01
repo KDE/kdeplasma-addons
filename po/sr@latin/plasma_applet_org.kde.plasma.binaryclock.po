@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-01 01:38+0000\n"
 "PO-Revision-Date: 2017-05-07 22:20+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -26,49 +26,35 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Izgled"
 
-# >> @option:check
-#: package/contents/ui/configGeneral.qml:33
-#, fuzzy, kde-format
-#| msgid "Display seconds"
-msgid "Display:"
-msgstr "Sa sekundama"
-
-#: package/contents/ui/configGeneral.qml:34
-#: package/contents/ui/configGeneral.qml:88
-#, kde-format
-msgctxt "@option:check"
-msgid "Grid"
-msgstr ""
-
-#: package/contents/ui/configGeneral.qml:39
-#: package/contents/ui/configGeneral.qml:75
+#: package/contents/ui/configGeneral.qml:29
+#: package/contents/ui/configGeneral.qml:59
 #, fuzzy, kde-format
 #| msgid "Show inactive LEDs:"
 msgctxt "@option:check"
-msgid "Inactive LEDs"
+msgid "Inactive lights"
 msgstr "Prikaži neaktivne lampice:"
 
-#: package/contents/ui/configGeneral.qml:44
+#: package/contents/ui/configGeneral.qml:34
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:49
-#, kde-format
-msgctxt "@option:check"
-msgid "In BCD format (decimal)"
-msgstr ""
-
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:42
 #, fuzzy, kde-format
 #| msgid "Use custom color for grid"
 msgid "Use custom color for:"
 msgstr "Posebna boja za mrežu"
 
-#: package/contents/ui/configGeneral.qml:62
+#: package/contents/ui/configGeneral.qml:46
 #, fuzzy, kde-format
 #| msgid "Show inactive LEDs:"
 msgctxt "@option:check"
-msgid "Active LEDs"
+msgid "Active lights"
 msgstr "Prikaži neaktivne lampice:"
+
+# >> @option:check
+#, fuzzy
+#~| msgid "Display seconds"
+#~ msgid "Display:"
+#~ msgstr "Sa sekundama"

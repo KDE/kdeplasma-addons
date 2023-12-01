@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-01 01:38+0000\n"
 "PO-Revision-Date: 2019-04-21 12:29+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -25,47 +25,44 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Vzhľad"
 
-#: package/contents/ui/configGeneral.qml:33
-#, kde-format
-msgid "Display:"
-msgstr "Zobrazenie"
-
-#: package/contents/ui/configGeneral.qml:34
-#: package/contents/ui/configGeneral.qml:88
-#, kde-format
+#: package/contents/ui/configGeneral.qml:29
+#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Inactive LEDs"
 msgctxt "@option:check"
-msgid "Grid"
-msgstr "Mriežka"
-
-#: package/contents/ui/configGeneral.qml:39
-#: package/contents/ui/configGeneral.qml:75
-#, kde-format
-msgctxt "@option:check"
-msgid "Inactive LEDs"
+msgid "Inactive lights"
 msgstr "Neaktívne LED"
 
-#: package/contents/ui/configGeneral.qml:44
+#: package/contents/ui/configGeneral.qml:34
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Sekundy"
 
-#: package/contents/ui/configGeneral.qml:49
-#, kde-format
-msgctxt "@option:check"
-msgid "In BCD format (decimal)"
-msgstr "Zobraziť vo formáte BCD (decimálne)"
-
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:42
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Použiť vlastnú farbu pre:"
 
-#: package/contents/ui/configGeneral.qml:62
-#, kde-format
+#: package/contents/ui/configGeneral.qml:46
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Active LEDs"
 msgctxt "@option:check"
-msgid "Active LEDs"
+msgid "Active lights"
 msgstr "Aktívne LED"
+
+#~ msgid "Display:"
+#~ msgstr "Zobrazenie"
+
+#~ msgctxt "@option:check"
+#~ msgid "Grid"
+#~ msgstr "Mriežka"
+
+#~ msgctxt "@option:check"
+#~ msgid "In BCD format (decimal)"
+#~ msgstr "Zobraziť vo formáte BCD (decimálne)"
 
 #~ msgctxt "@option:check"
 #~ msgid "Draw grid"

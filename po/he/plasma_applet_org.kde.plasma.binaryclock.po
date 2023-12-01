@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-01 01:38+0000\n"
 "PO-Revision-Date: 2023-11-07 11:23+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@lists.kde.org>\n"
@@ -25,47 +25,44 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "מראה"
 
-#: package/contents/ui/configGeneral.qml:33
-#, kde-format
-msgid "Display:"
-msgstr "תצוגה:"
-
-#: package/contents/ui/configGeneral.qml:34
-#: package/contents/ui/configGeneral.qml:88
-#, kde-format
+#: package/contents/ui/configGeneral.qml:29
+#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Inactive LEDs"
 msgctxt "@option:check"
-msgid "Grid"
-msgstr "רשת"
-
-#: package/contents/ui/configGeneral.qml:39
-#: package/contents/ui/configGeneral.qml:75
-#, kde-format
-msgctxt "@option:check"
-msgid "Inactive LEDs"
+msgid "Inactive lights"
 msgstr "נוריות לא פעילות"
 
-#: package/contents/ui/configGeneral.qml:44
+#: package/contents/ui/configGeneral.qml:34
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "שניות"
 
-#: package/contents/ui/configGeneral.qml:49
-#, kde-format
-msgctxt "@option:check"
-msgid "In BCD format (decimal)"
-msgstr "בתצוגת BCD (עשרונית)"
-
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:42
 #, kde-format
 msgid "Use custom color for:"
 msgstr "להשתמש בצבע מותאם אישית עבור:"
 
-#: package/contents/ui/configGeneral.qml:62
-#, kde-format
+#: package/contents/ui/configGeneral.qml:46
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Active LEDs"
 msgctxt "@option:check"
-msgid "Active LEDs"
+msgid "Active lights"
 msgstr "נוריות פעילות"
+
+#~ msgid "Display:"
+#~ msgstr "תצוגה:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Grid"
+#~ msgstr "רשת"
+
+#~ msgctxt "@option:check"
+#~ msgid "In BCD format (decimal)"
+#~ msgstr "בתצוגת BCD (עשרונית)"
 
 #, fuzzy
 #~ msgctxt "@option:check"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_binaryclock.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-01 01:38+0000\n"
 "PO-Revision-Date: 2007-11-16 11:40-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -24,53 +24,44 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Cuma"
 
-#: package/contents/ui/configGeneral.qml:33
-#, fuzzy, kde-format
-#| msgid "Display seconds"
-msgid "Display:"
-msgstr "Taispeáin na soicindí"
-
-#: package/contents/ui/configGeneral.qml:34
-#: package/contents/ui/configGeneral.qml:88
-#, fuzzy, kde-format
-#| msgid "Grid:"
-msgctxt "@option:check"
-msgid "Grid"
-msgstr "Greille:"
-
-#: package/contents/ui/configGeneral.qml:39
-#: package/contents/ui/configGeneral.qml:75
+#: package/contents/ui/configGeneral.qml:29
+#: package/contents/ui/configGeneral.qml:59
 #, fuzzy, kde-format
 #| msgid "Inactive LEDs:"
 msgctxt "@option:check"
-msgid "Inactive LEDs"
+msgid "Inactive lights"
 msgstr "LEDanna neamhghníomhacha:"
 
-#: package/contents/ui/configGeneral.qml:44
+#: package/contents/ui/configGeneral.qml:34
 #, fuzzy, kde-format
 #| msgid "Seconds:"
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Soicindí:"
 
-#: package/contents/ui/configGeneral.qml:49
-#, kde-format
-msgctxt "@option:check"
-msgid "In BCD format (decimal)"
-msgstr ""
-
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:42
 #, fuzzy, kde-format
 #| msgid "Use custom color for active LEDs:"
 msgid "Use custom color for:"
 msgstr "Úsáid dath saincheaptha do LEDanna gníomhacha:"
 
-#: package/contents/ui/configGeneral.qml:62
+#: package/contents/ui/configGeneral.qml:46
 #, fuzzy, kde-format
 #| msgid "Active LEDs:"
 msgctxt "@option:check"
-msgid "Active LEDs"
+msgid "Active lights"
 msgstr "LEDanna gníomhacha:"
+
+#, fuzzy
+#~| msgid "Display seconds"
+#~ msgid "Display:"
+#~ msgstr "Taispeáin na soicindí"
+
+#, fuzzy
+#~| msgid "Grid:"
+#~ msgctxt "@option:check"
+#~ msgid "Grid"
+#~ msgstr "Greille:"
 
 #, fuzzy
 #~| msgid "Show the inactive LEDs"
