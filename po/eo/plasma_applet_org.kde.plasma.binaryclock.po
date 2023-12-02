@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-01 01:38+0000\n"
-"PO-Revision-Date: 2023-01-08 21:45+0100\n"
+"PO-Revision-Date: 2023-12-01 06:54+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -27,12 +27,10 @@ msgstr "Aspekto"
 
 #: package/contents/ui/configGeneral.qml:29
 #: package/contents/ui/configGeneral.qml:59
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Inactive LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
-msgstr "Neaktivaj LEDoj"
+msgstr "Neaktivaj lumoj"
 
 #: package/contents/ui/configGeneral.qml:34
 #, kde-format
@@ -43,23 +41,10 @@ msgstr "Sekundoj"
 #: package/contents/ui/configGeneral.qml:42
 #, kde-format
 msgid "Use custom color for:"
-msgstr "Uzi ropran koloron por:"
+msgstr "Uzi propran koloron por:"
 
 #: package/contents/ui/configGeneral.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Active LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Active lights"
-msgstr "Aktivaj LEDoj"
-
-#~ msgid "Display:"
-#~ msgstr "Bildigo:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Grid"
-#~ msgstr "Krado"
-
-#~ msgctxt "@option:check"
-#~ msgid "In BCD format (decimal)"
-#~ msgstr "En BCD-formato (duum-dekuma)"
+msgstr "Aktivaj lumoj"
