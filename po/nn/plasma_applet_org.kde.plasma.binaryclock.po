@@ -54,14 +54,3 @@ msgstr "Bruk sjølvvald farge på:"
 msgctxt "@option:check"
 msgid "Active lights"
 msgstr "På-lysdiodar"
-
-#~ msgid "Display:"
-#~ msgstr "Vising:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Grid"
-#~ msgstr "Rutenett"
-
-#~ msgctxt "@option:check"
-#~ msgid "In BCD format (decimal)"
-#~ msgstr "Binærkoda desimaltal (BCD)"
