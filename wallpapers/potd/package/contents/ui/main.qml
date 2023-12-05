@@ -96,7 +96,7 @@ WallpaperItem {
                 autoTransform: true
                 smooth: true
 
-                QQC2.StackView.onActivated: root.repaintNeeded()
+                QQC2.StackView.onActivated: root.accentColorChanged()
                 QQC2.StackView.onRemoved: destroy()
             }
         }
