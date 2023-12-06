@@ -119,9 +119,9 @@ PlasmoidItem {
             id: topInfo
 
             anchors {
-                top: comicTabbar.visible ? comicTabbar.bottom : mainWindow.top
-                left: mainWindow.left
-                right: mainWindow.right
+                top: comicTabbar.visible ? comicTabbar.bottom : parent.top
+                left: parent.left
+                right: parent.right
             }
 
             visible: (topInfo.text.length > 0)
@@ -149,10 +149,10 @@ PlasmoidItem {
             id: centerLayout
 
             anchors {
-                left: mainWindow.left
-                right: mainWindow.right
-                bottom: (bottomInfo.visible) ? bottomInfo.top : mainWindow.bottom
-                top: (topInfo.visible) ? topInfo.bottom : (comicTabbar.visible ? comicTabbar.bottom : mainWindow.top)
+                left: parent.left
+                right: parent.right
+                bottom: (bottomInfo.visible) ? bottomInfo.top : parent.bottom
+                top: (topInfo.visible) ? topInfo.bottom : (comicTabbar.visible ? comicTabbar.bottom : parent.top)
                 topMargin: (comicTabbar.visible) ? 3 : 0
             }
 
@@ -164,9 +164,9 @@ PlasmoidItem {
             id:bottomInfo
 
             anchors {
-                left: mainWindow.left
-                right: mainWindow.right
-                bottom: mainWindow.bottom
+                left: parent.left
+                right: parent.right
+                bottom: parent.bottom
             }
 
             comicData: plasmoid.comicData
