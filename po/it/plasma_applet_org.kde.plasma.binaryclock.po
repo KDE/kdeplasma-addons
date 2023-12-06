@@ -4,21 +4,22 @@
 # Federico Zenith <zenith@chemeng.ntnu.no>, 2008.
 # Federico Zenith <federico.zenith@member.fsf.org>, 2008.
 # Paolo Zamponi <feus73@gmail.com>, 2017, 2018, 2019.
+# SPDX-FileCopyrightText: 2023 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-01 01:38+0000\n"
-"PO-Revision-Date: 2019-03-18 09:40+0100\n"
-"Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
+"PO-Revision-Date: 2023-12-01 13:13+0100\n"
+"Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 18.12.3\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: package/contents/config/config.qml:17
 #, kde-format
@@ -28,12 +29,10 @@ msgstr "Aspetto"
 
 #: package/contents/ui/configGeneral.qml:29
 #: package/contents/ui/configGeneral.qml:59
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Inactive LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
-msgstr "LED inattivi"
+msgstr "Luci inattive"
 
 #: package/contents/ui/configGeneral.qml:34
 #, kde-format
@@ -47,12 +46,10 @@ msgid "Use custom color for:"
 msgstr "Usa colore personalizzato per:"
 
 #: package/contents/ui/configGeneral.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Active LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Active lights"
-msgstr "LED attivi"
+msgstr "Luci attive"
 
 #~ msgid "Display:"
 #~ msgstr "Visualizza:"
