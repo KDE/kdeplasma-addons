@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-01 01:38+0000\n"
-"PO-Revision-Date: 2023-11-25 02:26\n"
+"PO-Revision-Date: 2023-12-09 09:24\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -26,12 +26,10 @@ msgstr "外观"
 
 #: package/contents/ui/configGeneral.qml:29
 #: package/contents/ui/configGeneral.qml:59
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Inactive LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
-msgstr "非活动的 LED"
+msgstr "非活动灯光"
 
 #: package/contents/ui/configGeneral.qml:34
 #, kde-format
@@ -45,20 +43,7 @@ msgid "Use custom color for:"
 msgstr "使用自定义颜色："
 
 #: package/contents/ui/configGeneral.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Active LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Active lights"
-msgstr "活动的 LED"
-
-#~ msgid "Display:"
-#~ msgstr "显示："
-
-#~ msgctxt "@option:check"
-#~ msgid "Grid"
-#~ msgstr "网格"
-
-#~ msgctxt "@option:check"
-#~ msgid "In BCD format (decimal)"
-#~ msgstr "以 BCD 格式显示 (十进制)"
+msgstr "活动灯光"
