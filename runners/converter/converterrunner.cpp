@@ -224,7 +224,7 @@ void ConverterRunner::updateCompatibleUnits()
             KUnitConversion::UnitCategory currencyCategory = converter->category(KUnitConversion::CurrencyCategory);
             auto updateJob = currencyCategory.syncConversionTable();
             if (!updateJob) [[unlikely]] {
-                return compatibleUnits.empty();
+                return !compatibleUnits.empty();
             }
             QEventLoop loop;
             loop.connect(updateJob, &KUnitConversion::UpdateJob::finished, &loop, &QEventLoop::quit);
