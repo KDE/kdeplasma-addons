@@ -51,12 +51,17 @@ Rectangle {
         case Qt.Key_Enter:
         case Qt.Key_Return:
         case Qt.Key_Select:
-            tapHandler.tapped(null);
+            piece.trigger();
             break;
         }
     }
     Accessible.name: pieceNumeral.text
     Accessible.role: Accessible.Button
+
+    function trigger() {
+        piece.forceActiveFocus();
+        piece.activated(position);
+    }
 
     Behavior on x {
         NumberAnimation {
@@ -69,6 +74,10 @@ Rectangle {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
+    }
+
+    TapHandler {
+        onTapped: piece.trigger()
     }
 
     Loader {
@@ -102,15 +111,6 @@ Rectangle {
             id: pieceImage
             source: "image://fifteenpuzzle/" + boardSize + "-" + number + "-" + pieceWidth + "-" + pieceHeight + "-" + Plasmoid.configuration.imagePath
             cache: false
-        }
-    }
-
-    TapHandler {
-        id: tapHandler
-
-        onTapped: {
-            piece.forceActiveFocus();
-            piece.activated(position);
         }
     }
 }
