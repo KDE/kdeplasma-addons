@@ -283,17 +283,11 @@ void ComicProvider::redirected(int, const QUrl &)
 
 QString ComicProvider::pluginName() const
 {
-    if (!d->mComicDescription.isValid()) {
-        return QString();
-    }
     return d->mComicDescription.pluginId();
 }
 
 QString ComicProvider::name() const
 {
-    if (!d->mComicDescription.isValid()) {
-        return QString();
-    }
     return d->mComicDescription.name();
 }
 

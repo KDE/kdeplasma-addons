@@ -5,8 +5,11 @@
  *   SPDX-License-Identifier: LGPL-2.0-only
  */
 
+#include <KConfigGroup>
+#include <KDesktopFile>
 #include <KPackage/Package>
 #include <KPackage/PackageStructure>
+#include <KPackage/packagestructure_compat_p>
 
 class ComicPackage : public KPackage::PackageStructure
 {
@@ -21,9 +24,17 @@ public:
         package->addDirectoryDefinition("scripts", QStringLiteral("code"));
         package->setMimeTypes("scripts", QStringList{QStringLiteral("text/*")});
 
-        package->addFileDefinition("mainscript", QStringLiteral("code/main"));
-        // package->setRequired("mainscript", true); Package::isValid() fails with this because of Kross and different file extensions
+        package->addFileDefinition("mainscript", QStringLiteral("code/main.js"));
+        package->addFileDefinition("mainscript", QStringLiteral("code/main.es"));
+        package->addFileDefinition("metadata", QStringLiteral("metadata.desktop"));
+        package->setRequired("metadata", true);
+        package->setRequired("mainscript", true);
         package->setDefaultPackageRoot(QStringLiteral("plasma/comics/"));
+    }
+    void pathChanged(KPackage::Package *package) override
+    {
+        QMap<QString, QMetaType::Type> extra{{QStringLiteral("X-KDE-PlasmaComicProvider-SuffixType"), QMetaType::QString}};
+        KPackagePrivate::convertCompatMetaDataDesktopFile(package, extra);
     }
 };
 

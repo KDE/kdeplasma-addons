@@ -28,4 +28,4 @@ target_link_libraries(plasma_engine_comic
 )
 
 kcoreaddons_add_plugin(plasma_comic SOURCES comic_package.cpp INSTALL_NAMESPACE "kf6/packagestructure")
-target_link_libraries(plasma_comic KF6::Package)
+target_link_libraries(plasma_comic KF6::ConfigCore KF6::Package)
