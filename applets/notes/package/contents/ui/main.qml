@@ -114,8 +114,8 @@ PlasmoidItem {
         property alias mainTextArea: mainTextArea
         Layout.preferredWidth: Kirigami.Units.gridUnit * 25
         Layout.preferredHeight: Kirigami.Units.gridUnit * 25
-        Layout.minimumWidth: Kirigami.Units.gridUnit * 15
-        Layout.minimumHeight: Kirigami.Units.gridUnit * 15
+        Layout.minimumWidth: Kirigami.Units.gridUnit * 2
+        Layout.minimumHeight: Kirigami.Units.gridUnit * 2
 
         imagePath: "widgets/notes"
         elementId: Plasmoid.configuration.color + "-notes"
