@@ -288,55 +288,40 @@ void ComicProviderWrapper::init()
         mPackage->setPath(path);
 
         if (mPackage->isValid()) {
-            // QString mainscript = mPackage->filePath("mainscript")
-            // doesn't work because the mainscript file can be a different Kross script type ending with main.es or main.kjs etc.
-            // Maybe this should be added to Plasma::Package or maybe directly change the packagestructure mainscript definition as "main.es" and avoid all
-            // this. https://techbase.kde.org/Development/Tutorials/Plasma4/ComicPlugin#Package_Structure has main.es defined as mainscript. Also
-            // Package::isValid() fails because the mainscript search fails to find the "main" file from mainscript.
+            m_engine = new QJSEngine(this);
+            QString mainscript = mPackage->filePath("mainscript");
+            QFile f(mainscript);
+            if (f.open(QFile::ReadOnly)) {
+                m_engine->globalObject().setProperty("Comic", m_engine->newQMetaObject(&ComicProviderWrapper::staticMetaObject));
+                auto obj = m_engine->newQObject(this);
 
-            QString mainscript = mPackage->filePath("scripts") + QLatin1String("/main");
-            const QStringList extensions{QStringLiteral(".es"), QStringLiteral(".js")};
-            QFileInfo info(mainscript);
-            for (int i = 0; i < extensions.count() && !info.exists(); ++i) {
-                info.setFile(mainscript + extensions.value(i));
-                qCDebug(PLASMA_COMIC) << "ComicProviderWrapper::init() mainscript found as" << info.filePath();
-            }
+                // If we set the comic in the global object we can not access the staticMetaObject
+                // consequently the values have to be written manually
+                obj.setProperty("Page", ComicProvider::Page);
+                obj.setProperty("Image", ComicProvider::Image);
+                obj.setProperty("User", ComicProvider::User);
+                obj.setProperty("Left", ComicProviderWrapper::Left);
+                obj.setProperty("Top", ComicProviderWrapper::Top);
+                obj.setProperty("Right", ComicProviderWrapper::Right);
+                obj.setProperty("Bottom", ComicProviderWrapper::Bottom);
+                obj.setProperty("DateIdentifier", (int)IdentifierType::DateIdentifier);
+                obj.setProperty("NumberIdentifier", (int)IdentifierType::NumberIdentifier);
+                obj.setProperty("StringIdentifier", (int)IdentifierType::StringIdentifier);
 
-            if (info.exists()) {
-                m_engine = new QJSEngine(this);
-                QFile f(info.absoluteFilePath());
-                if (f.open(QFile::ReadOnly)) {
-                    m_engine->globalObject().setProperty("Comic", m_engine->newQMetaObject(&ComicProviderWrapper::staticMetaObject));
-                    auto obj = m_engine->newQObject(this);
-
-                    // If we set the comic in the global object we can not access the staticMetaObject
-                    // consequently the values have to be written manually
-                    obj.setProperty("Page", ComicProvider::Page);
-                    obj.setProperty("Image", ComicProvider::Image);
-                    obj.setProperty("User", ComicProvider::User);
-                    obj.setProperty("Left", ComicProviderWrapper::Left);
-                    obj.setProperty("Top", ComicProviderWrapper::Top);
-                    obj.setProperty("Right", ComicProviderWrapper::Right);
-                    obj.setProperty("Bottom", ComicProviderWrapper::Bottom);
-                    obj.setProperty("DateIdentifier", (int)IdentifierType::DateIdentifier);
-                    obj.setProperty("NumberIdentifier", (int)IdentifierType::NumberIdentifier);
-                    obj.setProperty("StringIdentifier", (int)IdentifierType::StringIdentifier);
-
-                    m_engine->globalObject().setProperty("comic", obj);
-                    m_engine->globalObject().setProperty("date", m_engine->newQObject(new StaticDateWrapper(this)));
-                    m_engine->evaluate("var print = comic.print");
-                    mIdentifierSpecified = !mProvider->isCurrent();
-                    m_engine->evaluate(f.readAll(), info.absoluteFilePath());
-                    QJSValueIterator it(m_engine->globalObject());
-                    while (it.hasNext()) {
-                        it.next();
-                        if (it.value().isCallable()) {
-                            mFunctions << it.name();
-                        }
+                m_engine->globalObject().setProperty("comic", obj);
+                m_engine->globalObject().setProperty("date", m_engine->newQObject(new StaticDateWrapper(this)));
+                m_engine->evaluate("var print = comic.print");
+                mIdentifierSpecified = !mProvider->isCurrent();
+                m_engine->evaluate(f.readAll(), mainscript);
+                QJSValueIterator it(m_engine->globalObject());
+                while (it.hasNext()) {
+                    it.next();
+                    if (it.value().isCallable()) {
+                        mFunctions << it.name();
                     }
-                    setIdentifierToDefault();
-                    callFunction(QStringLiteral("init"));
                 }
+                setIdentifierToDefault();
+                callFunction(QStringLiteral("init"));
             }
         }
     }
