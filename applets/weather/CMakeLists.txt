@@ -4,7 +4,7 @@ kcoreaddons_add_plugin(org.kde.plasma.weather SOURCES weatherapplet.cpp INSTALL_
 
 target_link_libraries(org.kde.plasma.weather
     Plasma::Plasma
-    KF6::Plasma5Support
+    Plasma::Plasma5Support
     KF6::UnitConversion
     KF6::I18n
 )
@@ -22,7 +22,7 @@ target_sources(weatherplugin PRIVATE
 )
 target_link_libraries(weatherplugin PRIVATE
     Plasma::Plasma
-    KF6::Plasma5Support
+    Plasma::Plasma5Support
     KF6::UnitConversion
     KF6::I18n
     Qt::Qml
