@@ -26,7 +26,7 @@ Q_DECLARE_METATYPE(KUnitConversion::Value)
 
 ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
-    , actionList({Action(QStringLiteral("copy"), i18n("Copy unit and number"), QStringLiteral("edit-copy"))})
+    , actionList({Action(QStringLiteral("copy"), QStringLiteral("edit-copy"), i18n("Copy unit and number"))})
 {
     addSyntax(QStringLiteral(":q:"),
               i18n("Converts the value of :q: when :q: is made up of value unit [>, to, as, in] unit."
