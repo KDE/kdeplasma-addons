@@ -67,8 +67,8 @@ KCM.GridViewKCM {
                     case "green": return i18n("A green sticky note")
                     case "blue": return i18n("A blue sticky note")
                     case "pink": return i18n("A pink sticky note")
-                    case "translucent": return i18n("A translucent sticky note")
-                    case "translucent-light": return i18n("A translucent sticky note with light text")
+                    case "translucent": return i18n("A transparent sticky note")
+                    case "translucent-light": return i18n("A transparent sticky note with light text")
                     }
                 }
                 elide: Text.ElideRight

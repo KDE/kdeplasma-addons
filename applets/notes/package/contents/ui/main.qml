@@ -634,11 +634,11 @@ PlasmoidItem {
             onTriggered: Plasmoid.configuration.color = "pink"
         },
         PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "Translucent")
+            text: i18nc("@item:inmenu", "Transparent")
             onTriggered: Plasmoid.configuration.color = "translucent"
         },
         PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "Translucent Light")
+            text: i18nc("@item:inmenu", "Transparent Light")
             onTriggered: Plasmoid.configuration.color = "translucent-light"
         },
         PlasmaCore.Action {
