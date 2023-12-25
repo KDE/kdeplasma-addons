@@ -1,13 +1,13 @@
 # Translation of plasma_runner_converterrunner to Russian
 # This file is distributed under the same license as the kdelibs package.
 # Yuri Chornoivan <yurchor@ukr.net>, 2009.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2020.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2020, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 01:38+0000\n"
-"PO-Revision-Date: 2020-11-08 22:29+0300\n"
+"PO-Revision-Date: 2023-12-24 18:34+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.08.3\n"
+"X-Generator: Lokalize 21.08.3\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -27,17 +27,13 @@ msgid "Copy unit and number"
 msgstr "Копировать единицу измерения и число"
 
 #: converterrunner.cpp:32
-#, fuzzy, kde-format
-#| msgid ""
-#| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
-#| "in] unit\". You can use the Unit converter applet to find all available "
-#| "units."
+#, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
 "unit.You can use the Unit converter applet to find all available units."
 msgstr ""
 "Преобразовывает значение :q:, указанное в одной из единиц измерения в "
-"формате «значение единица [>, в] единица». Воспользуйтесь виджетом "
+"формате [значение единица [>, в] единица]. Воспользуйтесь виджетом "
 "преобразования единиц, чтобы ознакомиться со списком единиц, которые можно "
 "использовать в преобразованиях."
 

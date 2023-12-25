@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Alexander Potashev <aspotashev@gmail.com>, 2018.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2021, 2022.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2021, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-17 01:38+0000\n"
-"PO-Revision-Date: 2022-05-18 12:36+0300\n"
+"PO-Revision-Date: 2023-12-24 18:35+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -45,16 +45,14 @@ msgid "Num Lock"
 msgstr "Num Lock"
 
 #: contents/ui/main.qml:42
-#, fuzzy, kde-format
-#| msgid "Caps Lock activated\n"
+#, kde-format
 msgid "Caps Lock activated"
-msgstr "Caps Lock включён\n"
+msgstr "Caps Lock включён"
 
 #: contents/ui/main.qml:43
-#, fuzzy, kde-format
-#| msgid "Num Lock activated\n"
+#, kde-format
 msgid "Num Lock activated"
-msgstr "Num Lock включён\n"
+msgstr "Num Lock включён"
 
 #: contents/ui/main.qml:114
 #, kde-format
