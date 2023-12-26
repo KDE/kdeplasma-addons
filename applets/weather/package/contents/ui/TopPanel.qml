@@ -55,8 +55,10 @@ GridLayout {
         Layout.minimumHeight: Kirigami.Units.iconSizes.huge
         Layout.minimumWidth: Kirigami.Units.iconSizes.huge
         Layout.preferredHeight: Layout.minimumHeight
-        Layout.preferredWidth: Layout.minimumWidth
         Layout.fillWidth: true
+        // All the items have `fillWidth: true`, so the layout weights each
+        // contribution and splits the space accordingly to their proportion.
+        Layout.preferredWidth: 50 // 50% of the view
 
         source: generalModel.currentConditionIconName
     }
@@ -72,18 +74,22 @@ GridLayout {
         text: observationModel.conditions
     }
 
-    ColumnLayout {
+    Item {
         Layout.row: 1
         Layout.column: 0
+        Layout.fillWidth: true
+        Layout.preferredWidth: 25 // 25% of the view
         Layout.minimumWidth: sideWidth
-        Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+        Layout.alignment: Qt.AlignCenter
+
+        implicitHeight: windSpeedDirection.implicitHeight + windSpeedLabel.implicitHeight
 
         KSvg.SvgItem {
             id: windSpeedDirection
 
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            Layout.preferredHeight: naturalSize.height
-            Layout.preferredWidth: naturalSize.width
+            anchors.horizontalCenter: parent.horizontalCenter
+            implicitWidth: Kirigami.Units.iconSizes.medium
+            implicitHeight: Kirigami.Units.iconSizes.medium
 
             imagePath: "weather/wind-arrows"
             elementId: observationModel.windDirectionId || ""
@@ -93,27 +99,29 @@ GridLayout {
 
         PlasmaComponents.Label {
             id: windSpeedLabel
-
+            anchors {
+                top: windSpeedDirection.bottom
+                horizontalCenter: parent.horizontalCenter
+            }
             text: observationModel.windSpeed
         }
     }
 
-    ColumnLayout {
+    PlasmaComponents.Label {
+        id: tempLabel
+
         Layout.row: 1
         Layout.column: 2
+        Layout.fillWidth: true
+        Layout.preferredWidth: 25 // 25% of the view
         Layout.minimumWidth: sideWidth
-        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+        Layout.alignment: Qt.AlignCenter
 
-        Kirigami.Heading {
-            id: tempLabel
+        font.pixelSize: Kirigami.Units.iconSizes.medium
+        font.bold: true
+        horizontalAlignment: Text.AlignHCenter
+        wrapMode: Text.NoWrap
 
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-
-            level: 3
-            horizontalAlignment: Text.AlignRight
-            wrapMode: Text.NoWrap
-
-            text: observationModel.temperature
-        }
+        text: observationModel.temperature
     }
 }
