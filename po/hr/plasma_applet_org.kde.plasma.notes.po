@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-26 01:34+0000\n"
 "PO-Revision-Date: 2010-07-23 12:07+0200\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -80,12 +80,12 @@ msgstr ""
 
 #: package/contents/ui/configAppearance.qml:70
 #, kde-format
-msgid "A translucent sticky note"
+msgid "A transparent sticky note"
 msgstr ""
 
 #: package/contents/ui/configAppearance.qml:71
 #, kde-format
-msgid "A translucent sticky note with light text"
+msgid "A transparent sticky note with light text"
 msgstr ""
 
 #: package/contents/ui/main.qml:267
@@ -238,14 +238,14 @@ msgstr "Ružičasta"
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
-msgid "Translucent"
+msgid "Transparent"
 msgstr "Prozirna"
 
 #: package/contents/ui/main.qml:641
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
-msgid "Translucent Light"
+msgid "Transparent Light"
 msgstr "Prozirna"
 
 #, fuzzy

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-26 01:34+0000\n"
 "PO-Revision-Date: 2022-06-07 14:40+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -75,13 +75,15 @@ msgid "A pink sticky note"
 msgstr "Sebuah catatan lekat jambon"
 
 #: package/contents/ui/configAppearance.qml:70
-#, kde-format
-msgid "A translucent sticky note"
+#, fuzzy, kde-format
+#| msgid "A translucent sticky note"
+msgid "A transparent sticky note"
 msgstr "Sebuah catatan lekat translusen"
 
 #: package/contents/ui/configAppearance.qml:71
-#, kde-format
-msgid "A translucent sticky note with light text"
+#, fuzzy, kde-format
+#| msgid "A translucent sticky note with light text"
+msgid "A transparent sticky note with light text"
 msgstr "Sebuah catatan lekat translusen dengan teks terang"
 
 #: package/contents/ui/main.qml:267
@@ -220,15 +222,19 @@ msgid "Pink"
 msgstr "Jambon"
 
 #: package/contents/ui/main.qml:637
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Translucent"
 msgctxt "@item:inmenu"
-msgid "Translucent"
+msgid "Transparent"
 msgstr "Bening"
 
 #: package/contents/ui/main.qml:641
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Translucent Light"
 msgctxt "@item:inmenu"
-msgid "Translucent Light"
+msgid "Transparent Light"
 msgstr "Bening Terang"
 
 #~ msgid "Background color"

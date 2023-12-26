@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-26 01:34+0000\n"
 "PO-Revision-Date: 2023-01-09 18:55+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -70,13 +70,15 @@ msgid "A pink sticky note"
 msgstr "Uma nota autocolante rosa"
 
 #: package/contents/ui/configAppearance.qml:70
-#, kde-format
-msgid "A translucent sticky note"
+#, fuzzy, kde-format
+#| msgid "A translucent sticky note"
+msgid "A transparent sticky note"
 msgstr "Uma nota autocolante translúcida"
 
 #: package/contents/ui/configAppearance.qml:71
-#, kde-format
-msgid "A translucent sticky note with light text"
+#, fuzzy, kde-format
+#| msgid "A translucent sticky note with light text"
+msgid "A transparent sticky note with light text"
 msgstr "Uma nota autocolante translúcida com texto claro"
 
 #: package/contents/ui/main.qml:267
@@ -213,15 +215,19 @@ msgid "Pink"
 msgstr "Rosa"
 
 #: package/contents/ui/main.qml:637
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Translucent"
 msgctxt "@item:inmenu"
-msgid "Translucent"
+msgid "Transparent"
 msgstr "Translúcido"
 
 #: package/contents/ui/main.qml:641
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Translucent Light"
 msgctxt "@item:inmenu"
-msgid "Translucent Light"
+msgid "Transparent Light"
 msgstr "Translúcido Claro"
 
 #~ msgid "Background color"

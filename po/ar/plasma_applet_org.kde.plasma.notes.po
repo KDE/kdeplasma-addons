@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-26 01:34+0000\n"
 "PO-Revision-Date: 2023-01-07 16:57+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -76,13 +76,15 @@ msgid "A pink sticky note"
 msgstr "ملاحظة ورديّة لاصقة"
 
 #: package/contents/ui/configAppearance.qml:70
-#, kde-format
-msgid "A translucent sticky note"
+#, fuzzy, kde-format
+#| msgid "A translucent sticky note"
+msgid "A transparent sticky note"
 msgstr "ملاحظة شفّافة لاصقة"
 
 #: package/contents/ui/configAppearance.qml:71
-#, kde-format
-msgid "A translucent sticky note with light text"
+#, fuzzy, kde-format
+#| msgid "A translucent sticky note with light text"
+msgid "A transparent sticky note with light text"
 msgstr "ملاحظة شفّافة لاصقة مع نص فاتح"
 
 #: package/contents/ui/main.qml:267
@@ -219,15 +221,19 @@ msgid "Pink"
 msgstr "الوردي"
 
 #: package/contents/ui/main.qml:637
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Translucent"
 msgctxt "@item:inmenu"
-msgid "Translucent"
+msgid "Transparent"
 msgstr "شفّاف"
 
 #: package/contents/ui/main.qml:641
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Translucent Light"
 msgctxt "@item:inmenu"
-msgid "Translucent Light"
+msgid "Transparent Light"
 msgstr "شفّاف فاتح"
 
 #~ msgid "Background color"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-26 01:34+0000\n"
 "PO-Revision-Date: 2023-03-01 01:28+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -74,13 +74,15 @@ msgid "A pink sticky note"
 msgstr "분홍색 메모지"
 
 #: package/contents/ui/configAppearance.qml:70
-#, kde-format
-msgid "A translucent sticky note"
+#, fuzzy, kde-format
+#| msgid "A translucent sticky note"
+msgid "A transparent sticky note"
 msgstr "투명한 메모지"
 
 #: package/contents/ui/configAppearance.qml:71
-#, kde-format
-msgid "A translucent sticky note with light text"
+#, fuzzy, kde-format
+#| msgid "A translucent sticky note with light text"
+msgid "A transparent sticky note with light text"
 msgstr "밝은 텍스트가 있는 반투명한 메모지"
 
 #: package/contents/ui/main.qml:267
@@ -217,15 +219,19 @@ msgid "Pink"
 msgstr "분홍색"
 
 #: package/contents/ui/main.qml:637
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Translucent"
 msgctxt "@item:inmenu"
-msgid "Translucent"
+msgid "Transparent"
 msgstr "투명"
 
 #: package/contents/ui/main.qml:641
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Translucent Light"
 msgctxt "@item:inmenu"
-msgid "Translucent Light"
+msgid "Transparent Light"
 msgstr "투명한 조명"
 
 #~ msgid "Background color"

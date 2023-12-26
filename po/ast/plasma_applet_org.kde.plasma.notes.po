@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-26 01:34+0000\n"
 "PO-Revision-Date: 2023-05-03 21:20+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -75,12 +75,12 @@ msgstr ""
 
 #: package/contents/ui/configAppearance.qml:70
 #, kde-format
-msgid "A translucent sticky note"
+msgid "A transparent sticky note"
 msgstr ""
 
 #: package/contents/ui/configAppearance.qml:71
 #, kde-format
-msgid "A translucent sticky note with light text"
+msgid "A transparent sticky note with light text"
 msgstr ""
 
 #: package/contents/ui/main.qml:267
@@ -219,11 +219,11 @@ msgstr ""
 #: package/contents/ui/main.qml:637
 #, kde-format
 msgctxt "@item:inmenu"
-msgid "Translucent"
+msgid "Transparent"
 msgstr ""
 
 #: package/contents/ui/main.qml:641
 #, kde-format
 msgctxt "@item:inmenu"
-msgid "Translucent Light"
+msgid "Transparent Light"
 msgstr ""

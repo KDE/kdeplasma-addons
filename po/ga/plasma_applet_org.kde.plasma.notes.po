@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_notes.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-26 01:34+0000\n"
 "PO-Revision-Date: 2007-07-23 06:59-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -76,12 +76,12 @@ msgstr ""
 
 #: package/contents/ui/configAppearance.qml:70
 #, kde-format
-msgid "A translucent sticky note"
+msgid "A transparent sticky note"
 msgstr ""
 
 #: package/contents/ui/configAppearance.qml:71
 #, kde-format
-msgid "A translucent sticky note with light text"
+msgid "A transparent sticky note with light text"
 msgstr ""
 
 #: package/contents/ui/main.qml:267
@@ -234,14 +234,14 @@ msgstr "Bándearg"
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
-msgid "Translucent"
+msgid "Transparent"
 msgstr "Tréshoilseach"
 
 #: package/contents/ui/main.qml:641
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
-msgid "Translucent Light"
+msgid "Transparent Light"
 msgstr "Tréshoilseach"
 
 #, fuzzy

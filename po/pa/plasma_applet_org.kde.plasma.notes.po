@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2023-12-26 01:34+0000\n"
 "PO-Revision-Date: 2018-11-08 22:44-0800\n"
 "Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -76,14 +76,15 @@ msgid "A pink sticky note"
 msgstr "ਗੁਲਾਬੀ ਸਟਿੱਕੀ ਨੋਟ"
 
 #: package/contents/ui/configAppearance.qml:70
-#, kde-format
-msgid "A translucent sticky note"
+#, fuzzy, kde-format
+#| msgid "A translucent sticky note"
+msgid "A transparent sticky note"
 msgstr "ਬਲੌਰੀ ਸਟਿੱਕੀ ਨੋਟ"
 
 #: package/contents/ui/configAppearance.qml:71
 #, fuzzy, kde-format
 #| msgid "A translucent sticky note"
-msgid "A translucent sticky note with light text"
+msgid "A transparent sticky note with light text"
 msgstr "ਬਲੌਰੀ ਸਟਿੱਕੀ ਨੋਟ"
 
 #: package/contents/ui/main.qml:267
@@ -221,9 +222,11 @@ msgid "Pink"
 msgstr "ਗੁਲਾਬੀ"
 
 #: package/contents/ui/main.qml:637
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@item:inmenu"
+#| msgid "Translucent"
 msgctxt "@item:inmenu"
-msgid "Translucent"
+msgid "Transparent"
 msgstr "ਬਲੌਰੀ"
 
 #: package/contents/ui/main.qml:641
@@ -231,7 +234,7 @@ msgstr "ਬਲੌਰੀ"
 #| msgctxt "@item:inmenu"
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
-msgid "Translucent Light"
+msgid "Transparent Light"
 msgstr "ਬਲੌਰੀ"
 
 #~ msgid "Toggle text format options"
