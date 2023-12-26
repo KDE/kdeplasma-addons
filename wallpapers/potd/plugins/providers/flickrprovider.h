@@ -12,7 +12,7 @@
 #include <QDate>
 #include <QXmlStreamReader>
 
-#include <KIO/Job>
+#include <KJob>
 
 /**
  * This class grabs a random image from the flickr

@@ -10,7 +10,7 @@
 
 #include <QTextDocumentFragment>
 
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KPluginFactory>
 
 NatGeoProvider::NatGeoProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)

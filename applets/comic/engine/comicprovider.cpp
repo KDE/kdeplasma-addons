@@ -11,7 +11,7 @@
 #include <QTimer>
 #include <QUrl>
 
-#include <KIO/Job>
+#include <KIO/MimetypeJob>
 #include <KIO/StoredTransferJob>
 
 class ComicProvider::Private

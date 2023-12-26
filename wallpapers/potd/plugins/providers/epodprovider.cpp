@@ -10,7 +10,7 @@
 #include <QRegularExpression>
 #include <QTextDocumentFragment>
 
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KPluginFactory>
 
 EpodProvider::EpodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)

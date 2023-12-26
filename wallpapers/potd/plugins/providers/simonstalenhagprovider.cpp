@@ -11,7 +11,7 @@
 #include <QJsonArray>
 #include <QJsonDocument>
 
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KPluginFactory>
 
 static QJsonValue randomArrayValueByKey(const QJsonObject &object, QLatin1String key)

@@ -13,7 +13,7 @@
 #include <QTextDocumentFragment>
 #include <QUrlQuery>
 
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KPluginFactory>
 
 WcpotdProvider::WcpotdProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)

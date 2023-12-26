@@ -10,7 +10,7 @@
 #include <QJsonDocument>
 #include <QRegularExpression> // Extract from the copyright text
 
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KPluginFactory>
 
 BingProvider::BingProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)

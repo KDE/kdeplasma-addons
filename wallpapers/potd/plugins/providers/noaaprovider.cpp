@@ -10,7 +10,7 @@
 #include <QRegularExpression>
 #include <QTextDocumentFragment> // For parsing title from HTML source
 
-#include <KIO/Job>
+#include <KIO/StoredTransferJob>
 #include <KPluginFactory>
 
 #include "debug.h"
