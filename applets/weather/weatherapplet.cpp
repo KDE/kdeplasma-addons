@@ -32,6 +32,8 @@ WeatherApplet::WeatherApplet(QObject *parent, const KPluginMetaData &data, const
         }
     }
     Q_EMIT providersChanged();
+
+    setDefaultUnits();
 }
 
 WeatherApplet::~WeatherApplet()
@@ -41,7 +43,6 @@ WeatherApplet::~WeatherApplet()
 void WeatherApplet::init()
 {
     migrateConfig();
-    setDefaultUnits();
 }
 
 // Old configuration was stored via config() and without further config sub group
