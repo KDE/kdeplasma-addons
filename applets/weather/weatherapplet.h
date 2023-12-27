@@ -11,10 +11,6 @@
 #define WEATHERAPPLET_H
 
 #include <Plasma5Support/DataEngineConsumer>
-
-#include <KUnitConversion/Converter>
-#include <KUnitConversion/Unit>
-
 #include <Plasma/Applet>
 
 class WeatherApplet : public Plasma::Applet, public Plasma5Support::DataEngineConsumer

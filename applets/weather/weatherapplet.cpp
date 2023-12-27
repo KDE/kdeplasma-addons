@@ -16,7 +16,7 @@
 // KF
 #include <KConfigGroup>
 #include <KLocalizedString>
-#include <KUnitConversion/Value>
+#include <KUnitConversion/Unit>
 
 using namespace KUnitConversion;
 

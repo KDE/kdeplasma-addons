@@ -5,11 +5,11 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15 as QtControls
+import QtQuick
+import QtQuick.Controls as QQC2
 
-import org.kde.kirigami 2.15 as Kirigami
-import org.kde.plasma.private.weather 1.0
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.private.weather
 import org.kde.kcmutils as KCM
 
 KCM.SimpleKCM {
@@ -19,7 +19,7 @@ KCM.SimpleKCM {
     property alias cfg_visibilityUnit: visibilityComboBox.unit
 
     Kirigami.FormLayout {
-        component UnitSelector: QtControls.ComboBox {
+        component UnitSelector: QQC2.ComboBox {
             property int unit
 
             textRole: "display"
