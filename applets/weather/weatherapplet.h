@@ -25,14 +25,11 @@ public:
     WeatherApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
     ~WeatherApplet() override;
 
-    void init() override;
-
 Q_SIGNALS:
     void needsToBeSquareChanged();
     void providersChanged();
 
 private:
-    void migrateConfig();
     void setDefaultUnits();
 
 private:

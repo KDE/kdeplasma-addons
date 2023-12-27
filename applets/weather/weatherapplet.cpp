@@ -40,57 +40,6 @@ WeatherApplet::~WeatherApplet()
 {
 }
 
-void WeatherApplet::init()
-{
-    migrateConfig();
-}
-
-// Old configuration was stored via config() and without further config sub group
-// [Containments][18][Applets][101][Configuration]
-// main.xml based config storage though uses additional subgroups using the name attribute of
-// the <group> containers, so e.g. <group name="General"> would use
-// [Containments][18][Applets][101][Configuration][General]
-void WeatherApplet::migrateConfig()
-{
-    KConfigGroup oldCfg = config();
-
-    const bool isConfigMigrated = oldCfg.readEntry(QStringLiteral("configMigrated"), false);
-    if (isConfigMigrated) {
-        return;
-    }
-
-    const QString pluginId = pluginMetaData().pluginId();
-
-    auto migrateKey = [&oldCfg, pluginId](const QString &key, const QString &group) {
-        if (oldCfg.hasKey(key)) {
-            qInfo() << pluginId << ": Moving config key" << key << "to group" << group;
-            KConfigGroup newCfg = KConfigGroup(&oldCfg, group);
-            const auto value = oldCfg.readEntry(key);
-            newCfg.writeEntry(key, value);
-            oldCfg.deleteEntry(key);
-        }
-    };
-
-    qInfo() << pluginId << ": Migrate settings to plasma XML config";
-
-    // Appearance
-    migrateKey(QStringLiteral("showTemperatureInTooltip"), QStringLiteral("Appearance"));
-    migrateKey(QStringLiteral("showWindInTooltip"), QStringLiteral("Appearance"));
-    migrateKey(QStringLiteral("showPressureInTooltip"), QStringLiteral("Appearance"));
-    migrateKey(QStringLiteral("showHumidityInTooltip"), QStringLiteral("Appearance"));
-    migrateKey(QStringLiteral("showTemperatureInCompactMode"), QStringLiteral("Appearance"));
-    // Units
-    migrateKey(QStringLiteral("temperatureUnit"), QStringLiteral("Units"));
-    migrateKey(QStringLiteral("speedUnit"), QStringLiteral("Units"));
-    migrateKey(QStringLiteral("pressureUnit"), QStringLiteral("Units"));
-    migrateKey(QStringLiteral("visibilityUnit"), QStringLiteral("Units"));
-    // WeatherSource
-    migrateKey(QStringLiteral("updateInterval"), QStringLiteral("WeatherStation"));
-    migrateKey(QStringLiteral("source"), QStringLiteral("WeatherStation"));
-
-    oldCfg.writeEntry(QStringLiteral("configMigrated"), true);
-}
-
 // Plasma XML configuration is loaded at runtime, so it's not possible to set locale aware defaults.
 // We set them here if the corresponding key is not already in the configuration
 void WeatherApplet::setDefaultUnits()
