@@ -14,60 +14,29 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 ColumnLayout {
     id: root
 
-    property var model
+    required property var model
 
     GridLayout {
-        Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+        Layout.alignment: Qt.AlignCenter
 
+        rows: labelRepeater.count
+        flow: GridLayout.TopToBottom
         rowSpacing: Kirigami.Units.smallSpacing
 
         Repeater {
             id: labelRepeater
-
             model: root.model
-
-            delegate: Loader {
-                readonly property int rowIndex: index
-                readonly property var rowData: modelData
-
-                Layout.minimumWidth: item.Layout.minimumWidth
-                Layout.minimumHeight: item.Layout.minimumHeight
-                Layout.alignment: item.Layout.alignment
-                Layout.preferredWidth: item.Layout.preferredWidth
-                Layout.preferredHeight: item.Layout.preferredHeight
-                Layout.row: rowIndex
-                Layout.column: 0
-
-                sourceComponent: PlasmaComponents.Label {
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-
-                    text: rowData.label
-                }
+            delegate: PlasmaComponents.Label {
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+                text: modelData.label
             }
         }
 
         Repeater {
-            id: repeater
-
             model: root.model
-
-            delegate: Loader {
-                readonly property int rowIndex: index
-                readonly property var rowData: modelData
-
-                Layout.minimumWidth: item.Layout.minimumWidth
-                Layout.minimumHeight: item.Layout.minimumHeight
-                Layout.alignment: item.Layout.alignment
-                Layout.preferredWidth: item.Layout.preferredWidth
-                Layout.preferredHeight: item.Layout.preferredHeight
-                Layout.row: rowIndex
-                Layout.column: 1
-
-                sourceComponent: PlasmaComponents.Label {
-                    Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
-
-                    text: rowData.text
-                }
+            delegate: PlasmaComponents.Label {
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+                text: modelData.text
             }
         }
     }
