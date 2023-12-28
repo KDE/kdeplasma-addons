@@ -1,5 +1,6 @@
 /*
  * SPDX-FileCopyrightText: 2018 Friedrich W. H. Kossebau <kossebau@kde.org>
+ * SPDX-FileCopyrightText: 2023 Ismael Asensio <isma.af@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -14,70 +15,51 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 ColumnLayout {
     id: root
 
-    property alias forecastModel: forecastView.model
-    property alias detailsModel: detailsView.model
-    property alias noticesModel: noticesView.model
-    property alias forecastViewTitle: forecastTabButton.text
-    property alias forecastViewNightRow: forecastView.showNightRow
+    required property var forecastModel
+    required property var detailsModel
+    required property var noticesModel
 
-    readonly property bool hasDetailsContent: detailsModel && detailsModel.length > 0
-    readonly property alias hasNoticesContent: noticesView.hasContent
+    required property bool forecastViewNightRow
+    required property string forecastViewTitle
 
-    function removePage(page) {
-        // fill-in for removeItem, replace for QQC >= 2.3
-        for (let n = 0; n < swipeView.count; n++) {
-            if (page === swipeView.itemAt(n)) {
-                swipeView.removeItem(n);
-                tabBar.itemAt(n).visible = false;
-                tabBar.removeItem(n);
-            }
+    readonly property var pagesModel: {
+        const pages = [{
+            title: root.forecastViewTitle,
+            view: forecastView,
+        }]
+        if (root.detailsModel && root.detailsModel.length > 0) {
+            pages.push({
+                title: i18nc("@title:tab", "Details"),
+                view: detailsView,
+            })
         }
-        page.visible = false
-    }
-
-    PlasmaComponents.TabButton {
-        id: detailsTabButton
-
-        visible: false;
-
-        text: i18nc("@title:tab", "Details")
-    }
-
-    DetailsView {
-        id: detailsView
-
-        visible: false;
-
-        model: detailsModel
-    }
-
-    PlasmaComponents.TabButton {
-        id: noticesTabButton
-
-        visible: false;
-
-        text: i18nc("@title:tab", "Notices")
-    }
-
-    NoticesView {
-        id: noticesView
-
-        visible: false;
-
-        model: noticesModel
+        if (root.noticesModel && root.noticesModel.length > 0
+                && (root.noticesModel[0].length > 0 || root.noticesModel[1].length > 0)) {
+            pages.push({
+                title: i18nc("@title:tab", "Notices"),
+                view: noticesView,
+            })
+        }
+        return pages
     }
 
     PlasmaComponents.TabBar {
         id: tabBar
 
         Layout.fillWidth: true
-        visible: hasDetailsContent || hasNoticesContent
+        visible: root.pagesModel.length > 1
 
-        PlasmaComponents.TabButton {
-            id: forecastTabButton
+        Repeater {
+            model: root.pagesModel
+            delegate: PlasmaComponents.TabButton {
+                text: modelData.title
+            }
+        }
+
+        onCurrentIndexChanged: {
+            swipeView.setCurrentIndex(currentIndex);
         }
     }
-
 
     QtControls.SwipeView {
         id: swipeView
@@ -85,23 +67,16 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        Layout.minimumWidth: Math.max(forecastView.Layout.minimumWidth,
-                                      detailsView.Layout.minimumWidth,
-                                      noticesView.Layout.minimumWidth)
-        Layout.minimumHeight: Math.max(forecastView.Layout.minimumHeight,
-                                       detailsView.Layout.minimumHeight,
-                                       noticesView.Layout.minimumHeight)
-
+        Layout.minimumWidth: contentChildren.reduce((acc, loader) => Math.max(loader.item.Layout.minimumWidth, acc), 0)
+        Layout.minimumHeight: contentChildren.reduce((acc, loader) => Math.max(loader.item.Layout.minimumHeight, acc), 0)
         clip: true // previous/next views are prepared outside of view, do not render them
 
         currentIndex: tabBar.currentIndex
 
-        ColumnLayout {
-            ForecastView {
-                id: forecastView
-
-                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                Layout.fillWidth: false
+        Repeater {
+            model: root.pagesModel
+            delegate: Loader {
+                sourceComponent: modelData.view
             }
         }
 
@@ -110,36 +85,25 @@ ColumnLayout {
         }
     }
 
-    // perhaps
-    onHasDetailsContentChanged: {
-        if (hasDetailsContent) {
-            tabBar.insertItem(1, detailsTabButton);
-            detailsTabButton.visible = true;
-            swipeView.insertItem(1, detailsView);
-            detailsView.visible = true
-        } else {
-            removePage(detailsView);
+    Component {
+        id: forecastView
+        ForecastView {
+            model: root.forecastModel
+            showNightRow: root.forecastViewNightRow
         }
     }
 
-    onHasNoticesContentChanged: {
-        if (hasNoticesContent) {
-            tabBar.addItem(noticesTabButton);
-            noticesTabButton.visible = true;
-            swipeView.addItem(noticesView);
-            noticesView.visible = true
-        } else {
-            removePage(noticesView);
+    Component {
+        id: detailsView
+        DetailsView {
+            model: root.detailsModel
         }
     }
 
-    Component.onDestruction: {
-        // prevent double deletion, take back inserted items
-        if (hasDetailsContent) {
-            removePage(detailsView);
-        }
-        if (hasNoticesContent) {
-            removePage(noticesView);
+    Component {
+        id: noticesView
+        NoticesView {
+            model: root.noticesModel
         }
     }
 }
