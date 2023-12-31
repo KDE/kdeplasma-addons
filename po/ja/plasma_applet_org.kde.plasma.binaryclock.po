@@ -52,14 +52,3 @@ msgstr "カスタム色を使う:"
 msgctxt "@option:check"
 msgid "Active lights"
 msgstr "点灯している LED"
-
-#~ msgid "Display:"
-#~ msgstr "表示:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Grid"
-#~ msgstr "グリッド"
-
-#~ msgctxt "@option:check"
-#~ msgid "In BCD format (decimal)"
-#~ msgstr "BCD 型式 (十進数)"
