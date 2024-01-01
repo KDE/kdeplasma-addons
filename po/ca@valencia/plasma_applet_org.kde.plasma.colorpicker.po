@@ -59,7 +59,7 @@ msgstr "Format de color predeterminat:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
-msgstr "Copia automàticament el color al porta-retalls"
+msgstr "Copia automàticament el color a dins del porta-retalls"
 
 #: package/contents/ui/configGeneral.qml:39
 #, kde-format
