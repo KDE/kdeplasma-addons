@@ -63,12 +63,28 @@ PlasmoidItem {
         onCurrentColorChanged: colorPicked(currentColor)
     }
 
-    QtDialogs.ColorDialog {
-        id: colorDialog
-        title: Plasmoid.title
-        selectedColor: recentColor
+    Component {
+        id: colorWindowComponent
 
-        onAccepted: colorPicked(selectedColor)
+        Window { // QTBUG-119055
+            id: window
+            width: Kirigami.Units.gridUnit * 19
+            height: Kirigami.Units.gridUnit * 23
+            visible: true
+            title: Plasmoid.title
+            QtDialogs.ColorDialog {
+                id: colorDialog
+                title: Plasmoid.title
+                selectedColor: historyModel.count > 0 ? root.recentColor : undefined /* Prevent transparent colors */
+                onAccepted: {
+                    root.colorPicked(selectedColor);
+                    window.destroy();
+                }
+                onRejected: window.destroy()
+            }
+            onClosing: destroy()
+            Component.onCompleted: colorDialog.open()
+        }
     }
 
     // prevents the popup from actually opening, needs to be queued
@@ -100,7 +116,7 @@ PlasmoidItem {
         PlasmaCore.Action {
             text: i18nc("@action", "Open Color Dialog")
             icon.name: "color-management"
-            onTriggered: colorDialog.open()
+            onTriggered: colorWindowComponent.createObject(root)
         },
         PlasmaCore.Action {
             text: i18nc("@action", "Clear History")
