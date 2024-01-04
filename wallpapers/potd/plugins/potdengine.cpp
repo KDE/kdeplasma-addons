@@ -147,7 +147,7 @@ void PotdClient::slotCached(const QString &localPath)
 {
     setLocalUrl(localPath);
     setLoading(false);
-    Q_EMIT done(this, false);
+    Q_EMIT done(this, true);
 }
 
 void PotdClient::setLoading(bool status)
