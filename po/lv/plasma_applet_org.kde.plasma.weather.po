@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
 "PO-Revision-Date: 2010-01-30 20:04+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -520,7 +520,7 @@ msgctxt "@title:column weather watches"
 msgid "Watches Issued"
 msgstr "Izsūtītas patruļas:"
 
-#: package/contents/ui/SwitchPanel.qml:43
+#: package/contents/ui/SwitchPanel.qml:32
 #, fuzzy, kde-format
 #| msgctxt "current weather information"
 #| msgid "Details"
@@ -528,7 +528,7 @@ msgctxt "@title:tab"
 msgid "Details"
 msgstr "Detaļas"
 
-#: package/contents/ui/SwitchPanel.qml:59
+#: package/contents/ui/SwitchPanel.qml:39
 #, fuzzy, kde-format
 #| msgctxt "weather notices"
 #| msgid "Notices"

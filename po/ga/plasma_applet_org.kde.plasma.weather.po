@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
 "PO-Revision-Date: 2009-02-03 08:48-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -519,7 +519,7 @@ msgctxt "@title:column weather watches"
 msgid "Watches Issued"
 msgstr "Fairí a Eisíodh:"
 
-#: package/contents/ui/SwitchPanel.qml:43
+#: package/contents/ui/SwitchPanel.qml:32
 #, fuzzy, kde-format
 #| msgctxt "current weather information"
 #| msgid "Details"
@@ -527,7 +527,7 @@ msgctxt "@title:tab"
 msgid "Details"
 msgstr "Mionsonraí"
 
-#: package/contents/ui/SwitchPanel.qml:59
+#: package/contents/ui/SwitchPanel.qml:39
 #, fuzzy, kde-format
 #| msgctxt "weather notices"
 #| msgid "Notices"

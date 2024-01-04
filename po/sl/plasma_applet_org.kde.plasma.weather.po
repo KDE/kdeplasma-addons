@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
 "PO-Revision-Date: 2023-02-25 08:58+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -462,13 +462,13 @@ msgctxt "@title:column weather watches"
 msgid "Watches Issued"
 msgstr "Izdana opazovanja"
 
-#: package/contents/ui/SwitchPanel.qml:43
+#: package/contents/ui/SwitchPanel.qml:32
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Podrobnosti"
 
-#: package/contents/ui/SwitchPanel.qml:59
+#: package/contents/ui/SwitchPanel.qml:39
 #, kde-format
 msgctxt "@title:tab"
 msgid "Notices"

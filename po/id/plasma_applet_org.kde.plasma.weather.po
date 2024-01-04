@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
 "PO-Revision-Date: 2022-06-07 14:59+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -483,13 +483,13 @@ msgctxt "@title:column weather watches"
 msgid "Watches Issued"
 msgstr "Waspada Yang Dikabarkan"
 
-#: package/contents/ui/SwitchPanel.qml:43
+#: package/contents/ui/SwitchPanel.qml:32
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Perincian"
 
-#: package/contents/ui/SwitchPanel.qml:59
+#: package/contents/ui/SwitchPanel.qml:39
 #, kde-format
 msgctxt "@title:tab"
 msgid "Notices"

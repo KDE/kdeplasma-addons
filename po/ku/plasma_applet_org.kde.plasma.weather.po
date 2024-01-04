@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
 "PO-Revision-Date: 2009-01-12 03:03+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <kde-i18n-doc@kde.org>\n"
@@ -498,14 +498,14 @@ msgctxt "@title:column weather watches"
 msgid "Watches Issued"
 msgstr "Tiştên Nihêrînê:"
 
-#: package/contents/ui/SwitchPanel.qml:43
+#: package/contents/ui/SwitchPanel.qml:32
 #, fuzzy, kde-format
 #| msgid "Details"
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Kitekît"
 
-#: package/contents/ui/SwitchPanel.qml:59
+#: package/contents/ui/SwitchPanel.qml:39
 #, fuzzy, kde-format
 #| msgid "Notices"
 msgctxt "@title:tab"

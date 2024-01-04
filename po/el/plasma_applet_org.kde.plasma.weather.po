@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-04 01:35+0000\n"
 "PO-Revision-Date: 2016-08-31 20:04+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -521,14 +521,14 @@ msgctxt "@title:column weather watches"
 msgid "Watches Issued"
 msgstr "Εμφανιζόμενες παρακολουθήσεις:"
 
-#: package/contents/ui/SwitchPanel.qml:43
+#: package/contents/ui/SwitchPanel.qml:32
 #, fuzzy, kde-format
 #| msgid "Details"
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Λεπτομέρειες"
 
-#: package/contents/ui/SwitchPanel.qml:59
+#: package/contents/ui/SwitchPanel.qml:39
 #, fuzzy, kde-format
 #| msgid "Notices"
 msgctxt "@title:tab"
