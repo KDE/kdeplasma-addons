@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-10 22:29+0000\n"
 "PO-Revision-Date: 2023-05-03 19:57+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -83,68 +83,68 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Počet náhľadov:"
 
-#: package/contents/ui/main.qml:101
+#: package/contents/ui/main.qml:117
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Otvoriť dialóg farby"
 
-#: package/contents/ui/main.qml:106
+#: package/contents/ui/main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Vyčistiť históriu"
 
-#: package/contents/ui/main.qml:114
+#: package/contents/ui/main.qml:130
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Zobraziť históriu"
 
-#: package/contents/ui/main.qml:122
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Kopírovať do schránky"
 
-#: package/contents/ui/main.qml:162
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Žiadne farby"
 
-#: package/contents/ui/main.qml:162
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr ""
 
-#: package/contents/ui/main.qml:163
+#: package/contents/ui/main.qml:179
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
 
-#: package/contents/ui/main.qml:170
+#: package/contents/ui/main.qml:186
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Vybrať farbu"
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:194
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr ""
 
-#: package/contents/ui/main.qml:363
+#: package/contents/ui/main.qml:379
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Skopírované!"
 
-#: package/contents/ui/main.qml:373
+#: package/contents/ui/main.qml:389
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
