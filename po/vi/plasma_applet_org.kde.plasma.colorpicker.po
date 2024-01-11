@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-11 00:38+0000\n"
 "PO-Revision-Date: 2023-10-24 11:09+0200\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -81,43 +81,43 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Số lượng màu xem thử:"
 
-#: package/contents/ui/main.qml:101
+#: package/contents/ui/main.qml:117
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Mở hộp thoại màu"
 
-#: package/contents/ui/main.qml:106
+#: package/contents/ui/main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Xoá lịch sử"
 
-#: package/contents/ui/main.qml:114
+#: package/contents/ui/main.qml:130
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Xem lịch sử"
 
-#: package/contents/ui/main.qml:122
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Chép vào bảng nháp"
 
-#: package/contents/ui/main.qml:162
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Không màu"
 
-#: package/contents/ui/main.qml:162
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "Nhặt màu không khả dụng khi việc kết hợp bị tắt"
 
-#: package/contents/ui/main.qml:163
+#: package/contents/ui/main.qml:179
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
@@ -126,25 +126,25 @@ msgstr ""
 "Việc kết hợp đã bị tắt một cách thủ công hoặc bị chặn bởi một ứng dụng đang "
 "chạy"
 
-#: package/contents/ui/main.qml:170
+#: package/contents/ui/main.qml:186
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Nhặt màu"
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:194
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "Cấu hình việc kết hợp"
 
-#: package/contents/ui/main.qml:363
+#: package/contents/ui/main.qml:379
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Đã chép!"
 
-#: package/contents/ui/main.qml:373
+#: package/contents/ui/main.qml:389
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

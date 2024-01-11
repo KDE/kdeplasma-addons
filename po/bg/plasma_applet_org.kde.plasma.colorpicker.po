@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-11 00:38+0000\n"
 "PO-Revision-Date: 2023-05-16 23:15+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -81,69 +81,69 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Преглед:"
 
-#: package/contents/ui/main.qml:101
+#: package/contents/ui/main.qml:117
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Отваряне на диалоговия прозорец за избиране на цвят"
 
-#: package/contents/ui/main.qml:106
+#: package/contents/ui/main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Изчистване на историята"
 
-#: package/contents/ui/main.qml:114
+#: package/contents/ui/main.qml:130
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Преглед на историята"
 
-#: package/contents/ui/main.qml:122
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Копиране в клипборда"
 
-#: package/contents/ui/main.qml:162
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Няма цветове"
 
-#: package/contents/ui/main.qml:162
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr ""
 "Избирането на цвят не е достъпно, когато са деактивирани графичните ефекти"
 
-#: package/contents/ui/main.qml:163
+#: package/contents/ui/main.qml:179
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr "Ефектите са спрени  ръчно или са блокирани от изпълняваща се програма"
 
-#: package/contents/ui/main.qml:170
+#: package/contents/ui/main.qml:186
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Избиране на цвят"
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:194
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "Графични ефекти"
 
-#: package/contents/ui/main.qml:363
+#: package/contents/ui/main.qml:379
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Копиран!"
 
-#: package/contents/ui/main.qml:373
+#: package/contents/ui/main.qml:389
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
