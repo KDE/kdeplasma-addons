@@ -237,8 +237,6 @@ PlasmoidItem {
         Layout.preferredWidth: main.switchWidth * 2
         Layout.preferredHeight: main.switchHeight * 2
 
-        focus: main.expanded
-
         contentItem: ColumnLayout {
             id: mainLayout
             anchors.fill: parent
@@ -327,6 +325,8 @@ PlasmoidItem {
                     horizontalAlignment: TextEdit.AlignRight;
                     verticalAlignment: TextEdit.AlignVCenter;
                     readOnly: true;
+
+                    focus: main.expanded
 
                     Accessible.name: text
                     Accessible.description: i18nc("@label calculation result", "Result")
