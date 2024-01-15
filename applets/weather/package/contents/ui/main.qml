@@ -308,28 +308,17 @@ PlasmoidItem {
         const model = [];
         const data = weatherDataSource.currentData;
 
-        const notice = (type, i) => { return {
-            'type': type,
-            'description': data[`${type} Description ${i}`],
-            'infoUrl': data[`${type} Info ${i}`],
-            'timestamp': data[`${type} Timestamp ${i}`],
-            'priority': data[`${type} Priority ${i}`] ?? 0,
-        }};
-
         let warningsCount = parseInt((data && data["Total Warnings Issued"]) || "");
         if (isNaN(warningsCount)) {
             warningsCount = 0;
         }
         for (let i = 0; i < warningsCount; ++i) {
-            model.push(notice('Warning', i));
-        }
-
-        let watchesCount = parseInt((data && data["Total Watches Issued"]) || "");
-        if (isNaN(watchesCount)) {
-            watchesCount = 0;
-        }
-        for (let i = 0; i < watchesCount; ++i) {
-            model.push(notice('Watch', i));
+            model.push({
+                'description': data[`Warning Description ${i}`],
+                'infoUrl': data[`Warning Info ${i}`],
+                'timestamp': data[`Warning Timestamp ${i}`],
+                'priority': data[`Warning Priority ${i}`] ?? 0,
+            });
         }
 
         return model;

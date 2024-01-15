@@ -18,14 +18,6 @@ ListView {
     anchors.fill: parent
     boundsBehavior: Flickable.StopAtBounds
 
-    section.property: 'type'
-    section.delegate: Kirigami.ListSectionHeader {
-        width: ListView.view.width
-        text: section == 'Warning'
-            ? i18nc("@title:column weather warnings", "Warnings Issued")
-            : i18nc("@title:column weather watches", "Watches Issued")
-    }
-
     delegate: RowLayout {
         width: ListView.view.width - (scrollBar.visible ? scrollBar.width : 0)
         spacing: 0
