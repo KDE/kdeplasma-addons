@@ -4,20 +4,21 @@
 # Tamas Szanto <tszanto@interware.hu>, 2008.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2010, 2019.
 # Kiszel Kristóf <kiszel.kristof@gmail.com>, 2017.
+# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-10 22:29+0000\n"
-"PO-Revision-Date: 2019-11-18 23:50+0100\n"
-"Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
+"PO-Revision-Date: 2024-01-16 21:22+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.03.70\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -29,7 +30,7 @@ msgstr "Általános"
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
-msgstr ""
+msgstr "Kattintson a középső gombbal a színkód másolásához"
 
 #: package/contents/ui/CompactRepresentation.qml:74
 #, kde-format
@@ -44,6 +45,8 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Húzzon ide egy színkódot a mentéséhez<nl/>Húzzon ide egy képfájlt, hogy "
+"megkapja az átlagos színét"
 
 #: package/contents/ui/configGeneral.qml:23
 #, kde-format
@@ -79,7 +82,7 @@ msgstr "Előzmények megjelenítése"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Előnézetszám:"
 
 #: package/contents/ui/main.qml:117
 #, kde-format
@@ -94,12 +97,10 @@ msgid "Clear History"
 msgstr "Az előzmények törlése"
 
 #: package/contents/ui/main.qml:130
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "Az előzmények törlése"
+msgstr "Előzmények megtekintése"
 
 #: package/contents/ui/main.qml:138
 #, kde-format
@@ -108,18 +109,16 @@ msgid "Copy to Clipboard"
 msgstr "Másolás a vágólapra"
 
 #: package/contents/ui/main.qml:178
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Pick color"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr "Színválasztás"
+msgstr "Nincsenek színek"
 
 #: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
+msgstr "A színválasztás nem érhető el, ha a kompozitálás ki van kapcsolva"
 
 #: package/contents/ui/main.qml:179
 #, kde-format
@@ -127,6 +126,7 @@ msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
+"A kompozitálást kézzel kapcsolták ki, vagy egy futó alkalmazás tiltotta le"
 
 #: package/contents/ui/main.qml:186
 #, kde-format
@@ -138,19 +138,19 @@ msgstr "Színválasztás"
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "Kompozitálás beállítása"
 
 #: package/contents/ui/main.qml:379
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "Másolva."
 
 #: package/contents/ui/main.qml:389
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr ""
+msgstr "Törlés"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

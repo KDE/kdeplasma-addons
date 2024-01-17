@@ -3,20 +3,21 @@
 #
 # Tamas Szanto <tszanto@interware.hu>, 2008.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2019.
+# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-26 01:34+0000\n"
-"PO-Revision-Date: 2019-11-21 08:31+0100\n"
-"Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
+"PO-Revision-Date: 2024-01-16 21:27+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.03.70\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -27,13 +28,12 @@ msgstr "Megjelenés"
 #: package/contents/ui/configAppearance.qml:31
 #, kde-format
 msgid "%1pt"
-msgstr ""
+msgstr "%1 pt"
 
 #: package/contents/ui/configAppearance.qml:37
-#, fuzzy, kde-format
-#| msgid "Use custom font size:"
+#, kde-format
 msgid "Text font size:"
-msgstr "Egyedi betűméret:"
+msgstr "Szöveg betűmérete:"
 
 #: package/contents/ui/configAppearance.qml:62
 #, kde-format
@@ -76,14 +76,12 @@ msgid "A pink sticky note"
 msgstr "Rózsaszín cetli"
 
 #: package/contents/ui/configAppearance.qml:70
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note"
+#, kde-format
 msgid "A transparent sticky note"
 msgstr "Átlátszó cetli"
 
 #: package/contents/ui/configAppearance.qml:71
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note with light text"
+#, kde-format
 msgid "A transparent sticky note with light text"
 msgstr "Átlátszó cetli világos szöveggel"
 
@@ -113,17 +111,15 @@ msgid "Paste"
 msgstr "Beillesztés"
 
 #: package/contents/ui/main.qml:307
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "Beillesztés formázás nélkül"
+msgstr "Beillesztés teljes formázással"
 
 #: package/contents/ui/main.qml:314
-#, fuzzy, kde-format
-#| msgid "Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Formázás"
+msgstr "Formázás eltávolítása"
 
 #: package/contents/ui/main.qml:329
 #, kde-format
@@ -167,12 +163,12 @@ msgstr "Áthúzott"
 #: package/contents/ui/main.qml:584
 #, kde-format
 msgid "Discard this note?"
-msgstr ""
+msgstr "Elveti ezt a jegyzetet?"
 
 #: package/contents/ui/main.qml:585
 #, kde-format
 msgid "Are you sure you want to discard this note?"
-msgstr ""
+msgstr "Biztosan el szeretné vetni ezt a jegyzetet?"
 
 #: package/contents/ui/main.qml:605
 #, kde-format
@@ -223,17 +219,13 @@ msgid "Pink"
 msgstr "Rózsaszín"
 
 #: package/contents/ui/main.qml:637
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "Átlátszó"
 
 #: package/contents/ui/main.qml:641
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent Light"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
 msgstr "Átlátszó, világos"
