@@ -4,20 +4,21 @@
 # Tamas Szanto <taszanto@gmail.com>, 2009.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2010, 2011, 2019.
 # Kiszel Kristóf <kiszel.kristof@gmail.com>, 2017, 2021.
+# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-04 01:35+0000\n"
-"PO-Revision-Date: 2021-01-02 14:39+0100\n"
-"Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
+"PO-Revision-Date: 2024-01-17 22:09+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.03.70\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -152,33 +153,28 @@ msgid "Compact Mode"
 msgstr "Kompakt mód"
 
 #: package/contents/ui/config/ConfigAppearance.qml:43
-#, fuzzy, kde-format
-#| msgid "Temperature:"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "Hőmérséklet:"
+msgstr "Hőmérséklet megjelenítése:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Megjelenítés az ikon mellett:"
+msgstr "Az elem ikonja felett"
 
 #: package/contents/ui/config/ConfigAppearance.qml:54
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "Megjelenítés az ikon mellett:"
+msgstr "Az elem ikonja mellett"
 
 #: package/contents/ui/config/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Ne jelenjen meg"
 
 #: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
@@ -257,21 +253,19 @@ msgstr "Hely:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Nincs kiválasztva"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:75
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Szolgáltató:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:99
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Adja meg a helyet"
+msgstr "Új hely megadása"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
@@ -289,13 +283,13 @@ msgstr "Nem található időjárásjelző-állomás ehhez: „%1”"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Keressen egy időjárás-állomást a hely változtatásához"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Keressen egy időjárás-állomást a helymeghatározáshoz"
 
 #: package/contents/ui/ForecastView.qml:74
 #: package/contents/ui/ForecastView.qml:81
@@ -307,14 +301,12 @@ msgstr "-"
 #: package/contents/ui/FullRepresentation.qml:37
 #, kde-format
 msgid "Please set your location"
-msgstr ""
+msgstr "Adja meg a helyét"
 
 #: package/contents/ui/FullRepresentation.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgid "Set location…"
-msgstr "Adja meg a helyet"
+msgstr "Hely megadása…"
 
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
@@ -402,19 +394,16 @@ msgid "Wind Gust:"
 msgstr "Széllökés:"
 
 #: package/contents/ui/main.qml:247
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 nap"
+msgstr "Nappal"
 
 #: package/contents/ui/main.qml:248
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Éjszaka"
 
 #: package/contents/ui/main.qml:286
 #, kde-format
@@ -426,7 +415,7 @@ msgstr "%1 (%2 %)"
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
-msgstr ""
+msgstr "Kattintson az %1 beállításához"
 
 #: package/contents/ui/main.qml:411
 #, kde-format
