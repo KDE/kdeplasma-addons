@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2014, 2015.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-26 01:34+0000\n"
-"PO-Revision-Date: 2023-01-07 16:57+0400\n"
+"PO-Revision-Date: 2024-01-17 17:37+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 23.08.1\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -76,14 +76,12 @@ msgid "A pink sticky note"
 msgstr "ملاحظة ورديّة لاصقة"
 
 #: package/contents/ui/configAppearance.qml:70
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note"
+#, kde-format
 msgid "A transparent sticky note"
 msgstr "ملاحظة شفّافة لاصقة"
 
 #: package/contents/ui/configAppearance.qml:71
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note with light text"
+#, kde-format
 msgid "A transparent sticky note with light text"
 msgstr "ملاحظة شفّافة لاصقة مع نص فاتح"
 
@@ -221,17 +219,13 @@ msgid "Pink"
 msgstr "الوردي"
 
 #: package/contents/ui/main.qml:637
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "شفّاف"
 
 #: package/contents/ui/main.qml:641
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent Light"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
 msgstr "شفّاف فاتح"

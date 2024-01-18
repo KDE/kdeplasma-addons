@@ -1,21 +1,22 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2019.
+# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-17 01:38+0000\n"
-"PO-Revision-Date: 2019-11-30 10:20+0100\n"
-"Last-Translator: Kristóf Kiszel <ulysses@kubuntu.org>\n"
+"PO-Revision-Date: 2024-01-17 22:05+0100\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 20.03.70\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -181,25 +182,19 @@ msgid "Choose a Folder"
 msgstr "Válasszon egy mappát"
 
 #: package/contents/ui/ConfigPaths.qml:121
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add Folder..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Mappa hozzáadása…"
 
 #: package/contents/ui/ConfigPaths.qml:127
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add Files..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Fájlok hozzáadása…"
 
 #: package/contents/ui/main.qml:452
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Configure..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure…"
 msgstr "Beállítás…"
