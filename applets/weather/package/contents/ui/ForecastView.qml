@@ -39,14 +39,13 @@ GridLayout {
             readonly property bool isFirstRow: (model.index % root.rows) === 0
 
             Layout.fillWidth: true
-            Layout.preferredWidth: Math.max(preferredIconSize + Kirigami.Units.smallSpacing, periodLabel.implicitWidth)
 
             PlasmaComponents.Label {
                 id: periodLabel
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 Layout.fillHeight: isPlaceHolder
-                // Hide period titles on the second row (but keep the space for separation and visual alignment)
-                opacity: (isPlaceHolder || isFirstRow) ? 1 : 0
+                // Hide period titles on the second row
+                visible: (isPlaceHolder || isFirstRow)
 
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
