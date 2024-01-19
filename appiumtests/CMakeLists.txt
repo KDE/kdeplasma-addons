@@ -26,3 +26,9 @@ add_test(
     COMMAND selenium-webdriver-at-spi-run ${CMAKE_CURRENT_SOURCE_DIR}/calculatortest.py --failfast
 )
 set_tests_properties(calculatortest PROPERTIES TIMEOUT 300 ENVIRONMENT "TEST_WITH_KWIN_WAYLAND=1")
+
+add_test(
+    NAME keyboardindicatortest
+    COMMAND selenium-webdriver-at-spi-run ${CMAKE_CURRENT_SOURCE_DIR}/keyboardindicatortest.py --failfast
+)
+set_tests_properties(keyboardindicatortest PROPERTIES TIMEOUT 300 ENVIRONMENT "TEST_WITH_KWIN_WAYLAND=0")

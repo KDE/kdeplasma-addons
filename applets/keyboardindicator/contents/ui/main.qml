@@ -10,57 +10,31 @@ import QtQuick
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.plasma5support as P5Support
+import org.kde.plasma.private.keyboardindicator as KeyboardIndicator
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.extras as PlasmaExtras
 
 PlasmoidItem {
     id: root
 
-    P5Support.DataSource {
-        id: keystateSource
-        engine: "keystate"
-        connectedSources: Plasmoid.configuration.key
-    }
-
-    readonly property list<string> lockedSources: {
-        const sources = [];
-        for (const source of keystateSource.connectedSources) {
-            const data = keystateSource.data[source];
-            if (data?.Locked) {
-                sources.push(source);
-            }
-        }
-        return sources;
-    }
-
-    function translate(identifier: string): string {
-        switch (identifier) {
-            // Not using KUIT markup for these newline characters because those
-            // get translated into HTML, and this text is displayed in the applet's
-            // tooltip which does not render HTML at all for security reasons
-            case "Caps Lock": return i18n("Caps Lock activated");
-            case "Num Lock": return i18n("Num Lock activated");
-        }
-        return identifier;
-    }
-
-    function icon(identifier: string): string {
-        switch (identifier) {
-            case "Caps Lock": return "input-caps-on";
-            case "Num Lock": return "input-num-on";
-        }
-        return null;
-    }
+    readonly property KeyboardIndicator.KeyState capsLockState: Plasmoid.configuration.key.includes("Caps Lock") ? kiComponent.createObject(null, {key: Qt.Key_CapsLock}) : null
+    readonly property KeyboardIndicator.KeyState numLockState: Plasmoid.configuration.key.includes("Num Lock") ? kiComponent.createObject(null, {key: Qt.Key_NumLock}) : null
 
     Plasmoid.icon: {
-        if (lockedSources.length > 1) {
+        if (capsLockState?.locked && numLockState?.locked) {
             return "input-combo-on";
-        } else if (lockedSources.length === 1) {
-            return icon(lockedSources[0]);
+        } else if (capsLockState?.locked) {
+            return "input-caps-on";
+        } else if (numLockState?.locked) {
+            return "input-num-on";
         } else {
             return "input-caps-on";
         }
+    }
+
+    Component {
+        id: kiComponent
+        KeyboardIndicator.KeyState { }
     }
 
     // Only exists because the default CompactRepresentation doesn't expose a
@@ -84,7 +58,7 @@ PlasmoidItem {
             anchors.fill: parent
             source: Plasmoid.icon
             active: compactMouse.containsMouse
-            enabled: root.lockedSources.length > 0
+            enabled: root.capsLockState?.locked || root.numLockState?.locked
         }
     }
 
@@ -103,13 +77,23 @@ PlasmoidItem {
     switchWidth: Kirigami.Units.gridUnit * 12
     switchHeight: Kirigami.Units.gridUnit * 12
 
-    Plasmoid.status: lockedSources.length > 0
+    Plasmoid.status: root.capsLockState?.locked || root.numLockState?.locked
         ? PlasmaCore.Types.ActiveStatus
         : PlasmaCore.Types.PassiveStatus
 
     toolTipSubText: {
-        if (lockedSources.length > 0) {
-            return lockedSources.map(translate).join("\n");
+        let text = [];
+        if (root.capsLockState?.locked) {
+            text.push(i18n("Caps Lock activated"));
+        }
+        if (root.numLockState?.locked) {
+            text.push(i18n("Num Lock activated"));
+        }
+        if (text.length > 0) {
+            // Not using KUIT markup for these newline characters because those
+            // get translated into HTML, and this text is displayed in the applet's
+            // tooltip which does not render HTML at all for security reasons
+            return text.join("\n");
         } else {
             return i18n("No lock keys activated");
         }
