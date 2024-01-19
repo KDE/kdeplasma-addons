@@ -48,14 +48,3 @@ msgstr "Използване на персонализиран цвят за:"
 msgctxt "@option:check"
 msgid "Active lights"
 msgstr "Активни светодиоди"
-
-#~ msgid "Display:"
-#~ msgstr "Дисплей:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Grid"
-#~ msgstr "Решетка"
-
-#~ msgctxt "@option:check"
-#~ msgid "In BCD format (decimal)"
-#~ msgstr "Във формат BCD (десетичен)"

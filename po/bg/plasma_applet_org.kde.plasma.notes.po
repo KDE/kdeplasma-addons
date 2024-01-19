@@ -227,6 +227,3 @@ msgstr "Прозрачен"
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
 msgstr "Прозрачен светъл"
-
-#~ msgid "Background color"
-#~ msgstr "Цвят на фон"
