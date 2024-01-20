@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-04 01:35+0000\n"
+"POT-Creation-Date: 2024-01-20 00:38+0000\n"
 "PO-Revision-Date: 2020-02-04 20:50-0800\n"
 "Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -295,8 +295,8 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr ""
 
-#: package/contents/ui/ForecastView.qml:74
-#: package/contents/ui/ForecastView.qml:81
+#: package/contents/ui/ForecastView.qml:73
+#: package/contents/ui/ForecastView.qml:80
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
@@ -319,31 +319,31 @@ msgstr "ਟਿਕਾਣਾ ਦਿਓ"
 msgid "Weather information retrieval for %1 timed out."
 msgstr "%1 ਲਈ ਮੌਸਮ ਜਾਣਕਾਰੀ ਲਈ ਪੁਰਾਣੀ ਹੋ ਚੁੱਕੀ ਹੈ।"
 
-#: package/contents/ui/main.qml:94
+#: package/contents/ui/main.qml:95
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Rising"
 msgstr "ਵੱਧ ਰਿਹਾ"
 
-#: package/contents/ui/main.qml:95
+#: package/contents/ui/main.qml:96
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Falling"
 msgstr "ਘੱਟ ਰਿਹਾ"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:97
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Steady"
 msgstr "ਟਿਕਵਾਂ"
 
-#: package/contents/ui/main.qml:118
+#: package/contents/ui/main.qml:119
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "ਸਥਿਰ"
 
-#: package/contents/ui/main.qml:156
+#: package/contents/ui/main.qml:157
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
@@ -351,55 +351,55 @@ msgid_plural "%1 Days"
 msgstr[0] "1 ਦਿਨ"
 msgstr[1] "%1 ਦਿਨ"
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:179
 #, kde-format
 msgctxt "@label"
 msgid "Windchill:"
 msgstr "ਸਰਦ-ਹਵਾ:"
 
-#: package/contents/ui/main.qml:185
+#: package/contents/ui/main.qml:186
 #, kde-format
 msgctxt "@label"
 msgid "Humidex:"
 msgstr "ਨਮੀ-ਇੰਡੈਕਸ:"
 
-#: package/contents/ui/main.qml:192
+#: package/contents/ui/main.qml:193
 #, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "ਤਰੇਲ-ਦਰਜਾ:"
 
-#: package/contents/ui/main.qml:199
+#: package/contents/ui/main.qml:200
 #, kde-format
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "ਦਬਾਓ:"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:207
 #, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "ਦਬਾਉ ਰੁਝਾਨ:"
 
-#: package/contents/ui/main.qml:213
+#: package/contents/ui/main.qml:214
 #, kde-format
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "ਦਿੱਖ:"
 
-#: package/contents/ui/main.qml:220
+#: package/contents/ui/main.qml:221
 #, kde-format
 msgctxt "@label"
 msgid "Humidity:"
 msgstr "ਨਮੀਂ:"
 
-#: package/contents/ui/main.qml:227
+#: package/contents/ui/main.qml:228
 #, kde-format
 msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "ਝੱਖੜ:"
 
-#: package/contents/ui/main.qml:247
+#: package/contents/ui/main.qml:248
 #, fuzzy, kde-format
 #| msgctxt "Forecast period timeframe"
 #| msgid "1 Day"
@@ -408,64 +408,58 @@ msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
 msgstr "1 ਦਿਨ"
 
-#: package/contents/ui/main.qml:248
+#: package/contents/ui/main.qml:249
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
 msgstr ""
 
-#: package/contents/ui/main.qml:286
+#: package/contents/ui/main.qml:287
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2 %)"
 msgstr "%1 (%2 %)"
 
-#: package/contents/ui/main.qml:400
+#: package/contents/ui/main.qml:388
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr ""
 
-#: package/contents/ui/main.qml:411
+#: package/contents/ui/main.qml:399
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:418
+#: package/contents/ui/main.qml:406
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:421
+#: package/contents/ui/main.qml:409
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:430
+#: package/contents/ui/main.qml:418
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:437
+#: package/contents/ui/main.qml:425
 #, kde-format
 msgid "Humidity: %1"
 msgstr "ਨਮੀਂ: %1"
 
-#: package/contents/ui/NoticesView.qml:37
+#: package/contents/ui/NoticesView.qml:60
 #, kde-format
-msgctxt "@title:column weather warnings"
-msgid "Warnings Issued"
-msgstr "ਦਿੱਤੀਆਂ ਚੇਤਾਵਨੀਆਂ"
-
-#: package/contents/ui/NoticesView.qml:37
-#, kde-format
-msgctxt "@title:column weather watches"
-msgid "Watches Issued"
-msgstr "ਨਿਗਰਾਨੀ ਜਾਰੀ ਕੀਤੀ"
+msgctxt "@action:button"
+msgid "Show more information"
+msgstr ""
 
 #: package/contents/ui/SwitchPanel.qml:32
 #, kde-format
@@ -474,10 +468,16 @@ msgid "Details"
 msgstr "ਵੇਰਵੇ"
 
 #: package/contents/ui/SwitchPanel.qml:39
-#, kde-format
-msgctxt "@title:tab"
-msgid "Notices"
-msgstr "ਨੋਟਿਸ"
+#, fuzzy, kde-format
+#| msgctxt "@title:tab"
+#| msgid "Notices"
+msgctxt ""
+"@title:tab %1 is the number of weather notices (alerts, warnings, "
+"watches, ...) issued"
+msgid "%1 Notice"
+msgid_plural "%1 Notices"
+msgstr[0] "ਨੋਟਿਸ"
+msgstr[1] "ਨੋਟਿਸ"
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format
@@ -524,6 +524,14 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgctxt "@title:column weather warnings"
+#~ msgid "Warnings Issued"
+#~ msgstr "ਦਿੱਤੀਆਂ ਚੇਤਾਵਨੀਆਂ"
+
+#~ msgctxt "@title:column weather watches"
+#~ msgid "Watches Issued"
+#~ msgstr "ਨਿਗਰਾਨੀ ਜਾਰੀ ਕੀਤੀ"
 
 #, fuzzy
 #~| msgctxt "@action:button"
