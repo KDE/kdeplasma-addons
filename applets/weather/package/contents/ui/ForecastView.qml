@@ -50,6 +50,7 @@ GridLayout {
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
                 text: isPlaceHolder ? modelData.placeholder || "" : modelData.period.replace(" nt", "")
+                textFormat: Text.PlainText
             }
 
             Kirigami.Icon {
@@ -71,6 +72,7 @@ GridLayout {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
                 text: !isPlaceHolder && modelData.tempHigh || i18nc("Short for no data available", "-")
+                textFormat: Text.PlainText
                 visible: !isPlaceHolder && (modelData.tempHigh || !showNightRow)
             }
 
@@ -78,6 +80,7 @@ GridLayout {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
                 text: !isPlaceHolder && modelData.tempLow || i18nc("Short for no data available", "-")
+                textFormat: Text.PlainText
                 visible: !isPlaceHolder && (modelData.tempLow || !showNightRow)
             }
         }

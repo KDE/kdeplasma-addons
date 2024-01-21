@@ -67,6 +67,7 @@ PlasmoidItem {
             PlasmaComponents3.Label {
                 id: header
                 text: i18nc("@title", "Konsole Profiles")
+                textFormat: Text.PlainText
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 width: parent.width - appIcon.width * 2

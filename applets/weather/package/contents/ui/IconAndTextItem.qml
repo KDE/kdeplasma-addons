@@ -85,6 +85,7 @@ GridLayout {
 
             // pattern to reserve some constant space TODO: improve and take formatting/i18n into account
             text: "888° X"
+            textFormat: Text.PlainText
         }
 
         PlasmaComponents.Label {
@@ -97,6 +98,7 @@ GridLayout {
             }
             minimumPixelSize: Math.round(Kirigami.Units.gridUnit / 2)
             fontSizeMode: Text.Fit
+            textFormat: Text.PlainText
             wrapMode: Text.NoWrap
 
             height: 0

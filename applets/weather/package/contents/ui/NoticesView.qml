@@ -29,6 +29,7 @@ ListView {
             Layout.margins: Kirigami.Units.largeSpacing
 
             text: modelData.timestamp
+            textFormat: Text.PlainText
             horizontalAlignment: Text.AlignRight
             wrapMode: Text.Wrap
         }

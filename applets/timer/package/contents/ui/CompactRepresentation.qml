@@ -179,6 +179,7 @@ Item {
                 horizontalAlignment: remainingTimeLabel.horizontalAlignment
                 minimumPointSize: remainingTimeLabel.minimumPointSize
                 text: root.title
+                textFormat: Text.PlainText
             }
 
             PlasmaComponents3.Label {
@@ -217,6 +218,7 @@ Item {
 
                     return root.showSeconds ? TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm:ss") : TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm");
                 }
+                textFormat: Text.PlainText
 
                 Accessible.name: Plasmoid.toolTipMainText
                 Accessible.description: Plasmoid.toolTipSubText

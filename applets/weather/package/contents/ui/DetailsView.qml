@@ -28,6 +28,7 @@ ColumnLayout {
             delegate: PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
                 text: modelData.label
+                textFormat: Text.PlainText
             }
         }
 
@@ -36,6 +37,7 @@ ColumnLayout {
             delegate: PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
                 text: modelData.text
+                textFormat: Text.PlainText
             }
         }
     }

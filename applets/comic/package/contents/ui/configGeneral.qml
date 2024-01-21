@@ -99,6 +99,7 @@ KCM.SimpleKCM {
 
             Controls.Label {
                 text: i18ncp("@item:valuesuffix spacing to number + unit", "day", "days")
+                textFormat: Text.PlainText
             }
         }
 
@@ -113,6 +114,7 @@ KCM.SimpleKCM {
 
             Controls.Label {
                 text: i18ncp("@item:valuesuffix spacing to number + unit (minutes)", "minute", "minutes")
+                textFormat: Text.PlainText
             }
         }
     }

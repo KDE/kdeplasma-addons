@@ -97,6 +97,7 @@ PlasmoidItem {
                 height: root.isVertical ? contentHeight : compactRoot.height
 
                 text: root.displayedName
+                textFormat: Text.PlainText
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: Text.NoWrap

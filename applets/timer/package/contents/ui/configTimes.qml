@@ -117,6 +117,7 @@ KCM.ScrollViewKCM {
                     id: hintText
                     visible: editor.editable
                     text: i18n("Scroll over digits to change time")
+                    textFormat: Text.PlainText
                     anchors.verticalCenter: parent.verticalCenter
                 }
             }

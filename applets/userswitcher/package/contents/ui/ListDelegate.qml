@@ -56,6 +56,7 @@ PlasmaComponents3.ItemDelegate {
                 id: label
                 Layout.fillWidth: true
                 text: item.text
+                textFormat: Text.PlainText
                 wrapMode: Text.NoWrap
                 elide: Text.ElideRight
             }
@@ -63,6 +64,7 @@ PlasmaComponents3.ItemDelegate {
             PlasmaComponents3.Label {
                 id: sublabel
                 Layout.fillWidth: true
+                textFormat: Text.PlainText
                 wrapMode: Text.NoWrap
                 elide: Text.ElideRight
                 opacity: 0.6

@@ -69,6 +69,7 @@ KCM.ScrollViewKCM {
                 opacity: hasSource ? 1 : 0.7
 
                 text: hasSource ? sourceDetails[2] : i18nc("No location is currently selected", "None selected")
+                textFormat: Text.PlainText
             }
 
             QQC2.Label {
@@ -80,6 +81,7 @@ KCM.ScrollViewKCM {
                 opacity: hasSource ? 1 : 0
 
                 text: hasSource ? providers[sourceDetails[0]] : ""
+                textFormat: Text.PlainText
             }
 
             Item {

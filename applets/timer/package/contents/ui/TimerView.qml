@@ -32,6 +32,7 @@ MouseArea {
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignHCenter
                 text: root.title
+                textFormat: Text.PlainText
             }
         }
     }
@@ -43,6 +44,7 @@ MouseArea {
             elide: Text.ElideRight
             font.pixelSize: 0.3 * timerDigits.height
             text: root.title
+            textFormat: Text.PlainText
         }
     }
 

@@ -54,11 +54,13 @@ PlasmaComponents3.ItemDelegate {
                 PlasmaComponents3.Label {
                     Layout.fillWidth: true
                     text: details
+                    textFormat: Text.PlainText
                 }
                 PlasmaComponents3.Label {
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignRight
                     text: freeString
+                    textFormat: Text.PlainText
                     opacity: 0.6
                 }
             }
@@ -78,6 +80,7 @@ PlasmaComponents3.ItemDelegate {
             PlasmaComponents3.Label {
                 anchors.left: parent.left
                 text: usedString
+                textFormat: Text.PlainText
                 opacity: 0.6
             }
         }

@@ -127,6 +127,7 @@ PlasmoidItem {
             visible: (topInfo.text.length > 0)
             horizontalAlignment: Text.AlignHCenter
             text: (showComicAuthor || showComicTitle) ? getTopInfo() : ""
+            textFormat: Text.PlainText
 
             function getTopInfo() {
                 var tempTop = "";

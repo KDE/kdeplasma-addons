@@ -95,6 +95,7 @@ Rectangle {
         id: pieceNumeral
         anchors.centerIn: parent
         text: piece.number
+        textFormat: Text.PlainText
         color: Plasmoid.configuration.numberColor
         visible: Plasmoid.configuration.showNumerals
         z: 1

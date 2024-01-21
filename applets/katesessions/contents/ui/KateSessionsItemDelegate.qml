@@ -60,6 +60,7 @@ PlasmaComponents3.ItemDelegate {
                 }
                 maximumLineCount: 1
                 text: name.trim()
+                textFormat: Text.PlainText
                 visible: !showInput
                 elide: Text.ElideRight
                 wrapMode: Text.Wrap

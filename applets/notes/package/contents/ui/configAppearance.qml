@@ -71,6 +71,7 @@ KCM.GridViewKCM {
                     case "translucent-light": return i18n("A transparent sticky note with light text")
                     }
                 }
+                textFormat: Text.PlainText
                 elide: Text.ElideRight
                 wrapMode: Text.WordWrap
 

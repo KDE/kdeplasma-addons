@@ -96,6 +96,7 @@ PlasmoidItem {
             verticalAlignment: Text.AlignTop
             elide: Text.ElideMiddle
             text: title
+            textFormat: Text.PlainText
         }
 
         Item {

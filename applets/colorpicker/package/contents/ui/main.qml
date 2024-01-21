@@ -365,6 +365,7 @@ PlasmoidItem {
                         fontSizeMode: Text.HorizontalFit
                         minimumPointSize: Kirigami.Theme.smallFont.pointSize
                         text: Logic.formatColor(delegateMouse.currentColor, root.defaultFormat)
+                        textFormat: Text.PlainText
                     }
 
                     PlasmaComponents3.Label {
@@ -377,6 +378,7 @@ PlasmoidItem {
                         fontSizeMode: Text.HorizontalFit
                         minimumPointSize: Kirigami.Theme.smallFont.pointSize
                         text: i18nc("@info:progress just copied a color to clipboard", "Copied!")
+                        textFormat: Text.PlainText
                     }
                 }
             }

@@ -31,6 +31,7 @@ Kirigami.OverlaySheet {
         Kirigami.Heading {
             Layout.fillWidth: true
             text: i18n("Add More Dictionaries")
+            textFormat: Text.PlainText
             wrapMode: Text.Wrap
         }
         Kirigami.SearchField {

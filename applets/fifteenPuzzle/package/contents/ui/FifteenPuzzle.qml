@@ -307,6 +307,7 @@ Item {
             id: timeLabel
             Layout.fillWidth: true
             text: main.timerText()
+            textFormat: Text.PlainText
             color: Kirigami.Theme.textColor
         }
     }
@@ -337,6 +338,7 @@ Item {
             anchors.centerIn: parent
             color: Kirigami.Theme.textColor
             text: i18nc("@info", "Solved! Try again.")
+            textFormat: Text.PlainText
             z: 2
         }
     }

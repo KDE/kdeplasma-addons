@@ -42,6 +42,7 @@ KCM.SimpleKCM {
 
             Controls.Label {
                 text: i18ncp("@item:valuesuffix spacing to number + unit", "strip per comic", "strips per comic")
+                textFormat: Text.PlainText
             }
         }
 

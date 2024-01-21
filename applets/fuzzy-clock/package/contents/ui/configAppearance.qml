@@ -47,6 +47,7 @@ KCM.SimpleKCM {
 
             QQC2.Label {
                 text: i18nc("@item:inrange", "Accurate")
+                textFormat: Text.PlainText
             }
 
             Item {
@@ -55,6 +56,7 @@ KCM.SimpleKCM {
 
             QQC2.Label {
                 text: i18nc("@item:inrange", "Fuzzy")
+                textFormat: Text.PlainText
             }
         }
     }

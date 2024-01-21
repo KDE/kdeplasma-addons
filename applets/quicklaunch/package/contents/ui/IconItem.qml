@@ -225,6 +225,7 @@ Item {
                 }
 
                 text: iconItem.launcher.applicationName
+                textFormat: Text.PlainText
                 maximumLineCount: 1
                 wrapMode: Text.Wrap
             }

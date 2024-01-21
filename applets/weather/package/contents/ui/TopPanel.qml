@@ -45,6 +45,7 @@ GridLayout {
         wrapMode: Text.NoWrap
 
         text: generalModel.location
+        textFormat: Text.PlainText
     }
 
     Kirigami.Icon {
@@ -72,6 +73,7 @@ GridLayout {
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
         text: observationModel.conditions
+        textFormat: Text.PlainText
     }
 
     Item {
@@ -104,6 +106,7 @@ GridLayout {
                 horizontalCenter: parent.horizontalCenter
             }
             text: observationModel.windSpeed
+            textFormat: Text.PlainText
         }
     }
 
@@ -123,5 +126,6 @@ GridLayout {
         wrapMode: Text.NoWrap
 
         text: observationModel.temperature
+        textFormat: Text.PlainText
     }
 }

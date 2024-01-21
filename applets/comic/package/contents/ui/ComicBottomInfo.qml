@@ -37,6 +37,7 @@ Item {
         color: Kirigami.Theme.textColor
         visible: (showIdentifier && comicIdentifier.text.length > 0)
         text: (showIdentifier && comicData.currentReadable != undefined) ? comicData.currentReadable : ""
+        textFormat: Text.PlainText
 
         MouseArea {
             id: idLabelArea
@@ -77,6 +78,7 @@ Item {
         color: Kirigami.Theme.textColor
         visible: (showUrl && comicUrl.text.length > 0)
         text: (showUrl && comicData.websiteHost.length > 0) ? comicData.websiteHost : ""
+        textFormat: Text.PlainText
 
         MouseArea {
             id: idUrlLabelArea
