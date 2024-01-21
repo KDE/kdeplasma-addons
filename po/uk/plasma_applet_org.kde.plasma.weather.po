@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2016, 2018, 2019, 2020, 2021, 2022.
+# Yuri Chornoivan <yurchor@ukr.net>, 2016, 2018, 2019, 2020, 2021, 2022, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-20 00:38+0000\n"
-"PO-Revision-Date: 2022-11-25 09:33+0200\n"
+"PO-Revision-Date: 2024-01-20 19:41+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
 "Language: uk\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 23.04.1\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -454,7 +454,7 @@ msgstr "Вологість: %1"
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
-msgstr ""
+msgstr "Докладніше"
 
 #: package/contents/ui/SwitchPanel.qml:32
 #, kde-format
@@ -463,18 +463,16 @@ msgid "Details"
 msgstr "Подробиці"
 
 #: package/contents/ui/SwitchPanel.qml:39
-#, fuzzy, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Notices"
+#, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
 "watches, ...) issued"
 msgid "%1 Notice"
 msgid_plural "%1 Notices"
-msgstr[0] "Примітки"
-msgstr[1] "Примітки"
-msgstr[2] "Примітки"
-msgstr[3] "Примітки"
+msgstr[0] "%1 примітка"
+msgstr[1] "%1 примітки"
+msgstr[2] "%1 приміток"
+msgstr[3] "%1 примітка"
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format

@@ -4,13 +4,13 @@
 # obsoleteman <tulliana@gmail.com>, 2008-2009.
 # Volkan Gezer <volkangezer@gmail.com>, 2013-2014, 2017.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# Emir SARI <emir_sari@icloud.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-20 00:38+0000\n"
-"PO-Revision-Date: 2022-11-25 19:25+0300\n"
+"PO-Revision-Date: 2024-01-20 16:33+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 24.01.95\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -450,7 +450,7 @@ msgstr "Nem: %1"
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
-msgstr ""
+msgstr "Daha Fazla Bilgi Göster"
 
 #: package/contents/ui/SwitchPanel.qml:32
 #, kde-format
@@ -459,16 +459,14 @@ msgid "Details"
 msgstr "Ayrıntılar"
 
 #: package/contents/ui/SwitchPanel.qml:39
-#, fuzzy, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Notices"
+#, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
 "watches, ...) issued"
 msgid "%1 Notice"
 msgid_plural "%1 Notices"
-msgstr[0] "İhbarlar"
-msgstr[1] "İhbarlar"
+msgstr[0] "%1 İhbar"
+msgstr[1] "%1 İhbar"
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format
