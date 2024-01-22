@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-22 00:38+0000\n"
 "PO-Revision-Date: 2021-10-16 18:26+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -41,19 +41,19 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: contents/ui/main.qml:42
+#: contents/ui/main.qml:87
 #, fuzzy, kde-format
 #| msgid "Caps Lock activated\n"
 msgid "Caps Lock activated"
 msgstr "Caps Lock が有効になりました\n"
 
-#: contents/ui/main.qml:43
+#: contents/ui/main.qml:90
 #, fuzzy, kde-format
 #| msgid "Num Lock activated\n"
 msgid "Num Lock activated"
 msgstr "Num Lock が有効になりました\n"
 
-#: contents/ui/main.qml:114
+#: contents/ui/main.qml:98
 #, kde-format
 msgid "No lock keys activated"
 msgstr "有効なロックキーはありません"

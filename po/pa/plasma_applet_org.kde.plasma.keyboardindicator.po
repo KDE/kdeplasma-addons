@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-22 00:38+0000\n"
 "PO-Revision-Date: 2018-06-22 20:31-0600\n"
 "Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
 "Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
@@ -42,19 +42,19 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "ਨਮ ਲਾਕ"
 
-#: contents/ui/main.qml:42
+#: contents/ui/main.qml:87
 #, fuzzy, kde-format
 #| msgid "Caps Lock"
 msgid "Caps Lock activated"
 msgstr "ਕੈਪਸ ਲਾਕ"
 
-#: contents/ui/main.qml:43
+#: contents/ui/main.qml:90
 #, fuzzy, kde-format
 #| msgid "Caps Lock"
 msgid "Num Lock activated"
 msgstr "ਕੈਪਸ ਲਾਕ"
 
-#: contents/ui/main.qml:114
+#: contents/ui/main.qml:98
 #, kde-format
 msgid "No lock keys activated"
 msgstr ""
