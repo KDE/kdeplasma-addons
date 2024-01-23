@@ -9,6 +9,7 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
     message(FATAL_ERROR "plasma requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma [options]' there.")
 endif()
 
+set(PROJECT_DEP_VERSION "6.0.80")
 set(QT_MIN_VERSION "6.6.0")
 set(KF6_MIN_VERSION 5.240.0)
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
@@ -66,9 +67,9 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     JobWidgets
 )
 
-find_package(Plasma5Support ${PROJECT_VERSION} REQUIRED)
-find_package(Plasma ${PROJECT_VERSION} REQUIRED)
-find_package(PlasmaQuick ${PROJECT_VERSION} REQUIRED)
+find_package(Plasma5Support ${PROJECT_DEP_VERSION} REQUIRED)
+find_package(Plasma ${PROJECT_DEP_VERSION} REQUIRED)
+find_package(PlasmaQuick ${PROJECT_DEP_VERSION} REQUIRED)
 
 find_package(KF6Purpose CONFIG QUIET)
 set_package_properties(KF6Purpose PROPERTIES
