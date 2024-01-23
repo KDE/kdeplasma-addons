@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2021-10-17 13:41-0700\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -51,8 +51,8 @@ msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "タイマー"
 
-#: package/contents/ui/CompactRepresentation.qml:197
-#: package/contents/ui/CompactRepresentation.qml:215
+#: package/contents/ui/CompactRepresentation.qml:198
+#: package/contents/ui/CompactRepresentation.qml:216
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
@@ -139,22 +139,22 @@ msgstr "追加"
 msgid "Scroll over digits to change time"
 msgstr "数字をスクロールして時間を変更"
 
-#: package/contents/ui/configTimes.qml:125
+#: package/contents/ui/configTimes.qml:126
 #, kde-format
 msgid "Apply"
 msgstr "適用"
 
-#: package/contents/ui/configTimes.qml:133
+#: package/contents/ui/configTimes.qml:134
 #, kde-format
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: package/contents/ui/configTimes.qml:142
+#: package/contents/ui/configTimes.qml:143
 #, kde-format
 msgid "Edit"
 msgstr "編集"
 
-#: package/contents/ui/configTimes.qml:151
+#: package/contents/ui/configTimes.qml:152
 #, kde-format
 msgid "Delete"
 msgstr "削除"

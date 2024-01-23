@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2022-01-11 22:39+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -164,30 +164,30 @@ msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Avaa ulkoiseen sovellukseen napsauttamalla kuvaa"
 
-#: package/contents/ui/ConfigPaths.qml:66
+#: package/contents/ui/ConfigPaths.qml:67
 #, kde-format
 msgid "Remove path"
 msgstr "Poista sijainti"
 
-#: package/contents/ui/ConfigPaths.qml:75
+#: package/contents/ui/ConfigPaths.qml:76
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Valitse tiedostot"
 
-#: package/contents/ui/ConfigPaths.qml:101
+#: package/contents/ui/ConfigPaths.qml:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Valitse kansio"
 
-#: package/contents/ui/ConfigPaths.qml:121
+#: package/contents/ui/ConfigPaths.qml:122
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Lisää kansio…"
 
-#: package/contents/ui/ConfigPaths.qml:127
+#: package/contents/ui/ConfigPaths.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

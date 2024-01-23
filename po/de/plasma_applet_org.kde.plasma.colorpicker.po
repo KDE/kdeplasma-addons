@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-11 00:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2023-05-18 19:56+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -137,13 +137,13 @@ msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr ""
 
-#: package/contents/ui/main.qml:379
+#: package/contents/ui/main.qml:380
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopiert."
 
-#: package/contents/ui/main.qml:389
+#: package/contents/ui/main.qml:391
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

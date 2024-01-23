@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2021-12-15 23:33+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -167,30 +167,30 @@ msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Clic sobre la imagen para abrirla en una aplicación externa"
 
-#: package/contents/ui/ConfigPaths.qml:66
+#: package/contents/ui/ConfigPaths.qml:67
 #, kde-format
 msgid "Remove path"
 msgstr "Eliminar ruta"
 
-#: package/contents/ui/ConfigPaths.qml:75
+#: package/contents/ui/ConfigPaths.qml:76
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Escoger archivos"
 
-#: package/contents/ui/ConfigPaths.qml:101
+#: package/contents/ui/ConfigPaths.qml:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Escoger una carpeta"
 
-#: package/contents/ui/ConfigPaths.qml:121
+#: package/contents/ui/ConfigPaths.qml:122
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Añadir carpeta..."
 
-#: package/contents/ui/ConfigPaths.qml:127
+#: package/contents/ui/ConfigPaths.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

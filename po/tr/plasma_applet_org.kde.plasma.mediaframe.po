@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2023-06-10 12:10+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -164,30 +164,30 @@ msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Resme sol tıklamak, onu harici bir görüntüleyicide açar"
 
-#: package/contents/ui/ConfigPaths.qml:66
+#: package/contents/ui/ConfigPaths.qml:67
 #, kde-format
 msgid "Remove path"
 msgstr "Yolu kaldır"
 
-#: package/contents/ui/ConfigPaths.qml:75
+#: package/contents/ui/ConfigPaths.qml:76
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Dosyaları seç"
 
-#: package/contents/ui/ConfigPaths.qml:101
+#: package/contents/ui/ConfigPaths.qml:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Bir Klasör Seç"
 
-#: package/contents/ui/ConfigPaths.qml:121
+#: package/contents/ui/ConfigPaths.qml:122
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Klasör ekle…"
 
-#: package/contents/ui/ConfigPaths.qml:127
+#: package/contents/ui/ConfigPaths.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

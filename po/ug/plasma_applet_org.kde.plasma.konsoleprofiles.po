@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-15 01:40+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -23,7 +23,7 @@ msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr ""
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:90
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr ""

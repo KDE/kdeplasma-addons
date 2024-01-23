@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2023-01-19 23:57+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -107,13 +107,13 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "進階"
 
-#: package/contents/ui/ComicBottomInfo.qml:62
+#: package/contents/ui/ComicBottomInfo.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "跳到其他篇…"
 
-#: package/contents/ui/ComicBottomInfo.qml:102
+#: package/contents/ui/ComicBottomInfo.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -132,7 +132,7 @@ msgid "strip per comic"
 msgid_plural "strips per comic"
 msgstr[0] " 則 / 每篇漫畫"
 
-#: package/contents/ui/configAdvanced.qml:50
+#: package/contents/ui/configAdvanced.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
@@ -216,13 +216,13 @@ msgid "day"
 msgid_plural "days"
 msgstr[0] " 天"
 
-#: package/contents/ui/configGeneral.qml:106
+#: package/contents/ui/configGeneral.qml:107
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "檢查新漫畫的週期："
 
-#: package/contents/ui/configGeneral.qml:115
+#: package/contents/ui/configGeneral.qml:116
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

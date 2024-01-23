@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2022-02-12 16:05+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -77,30 +77,30 @@ msgstr "Własny tytuł"
 msgid "Launch %1"
 msgstr "Uruchom %1"
 
-#: package/contents/ui/IconItem.qml:260
+#: package/contents/ui/IconItem.qml:261
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Dodaj program uruchamiający..."
 
-#: package/contents/ui/IconItem.qml:266
+#: package/contents/ui/IconItem.qml:267
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Edytuj program uruchamiający..."
 
-#: package/contents/ui/IconItem.qml:272
+#: package/contents/ui/IconItem.qml:273
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Usuń program uruchamiający"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Szybkie uruchamianie"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
@@ -108,17 +108,17 @@ msgstr ""
 "Dodaj programy uruchamiające za pomocą \"przeciągnij i upuść\" lub z menu "
 "kontekstowego."
 
-#: package/contents/ui/main.qml:177
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Hide icons"
 msgstr "Ukryj ikony"
 
-#: package/contents/ui/main.qml:177
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Pokaż ukryte ikony"
 
-#: package/contents/ui/main.qml:280
+#: package/contents/ui/main.qml:281
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

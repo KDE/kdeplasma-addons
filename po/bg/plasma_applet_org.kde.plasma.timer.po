@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2022-12-02 00:11+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -47,8 +47,8 @@ msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Стартиране на таймера"
 
-#: package/contents/ui/CompactRepresentation.qml:197
-#: package/contents/ui/CompactRepresentation.qml:215
+#: package/contents/ui/CompactRepresentation.qml:198
+#: package/contents/ui/CompactRepresentation.qml:216
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
@@ -134,22 +134,22 @@ msgstr "Добавяне"
 msgid "Scroll over digits to change time"
 msgstr "Превъртете над цифрите, за да промените времето"
 
-#: package/contents/ui/configTimes.qml:125
+#: package/contents/ui/configTimes.qml:126
 #, kde-format
 msgid "Apply"
 msgstr "Прилагане"
 
-#: package/contents/ui/configTimes.qml:133
+#: package/contents/ui/configTimes.qml:134
 #, kde-format
 msgid "Cancel"
 msgstr "Отказ"
 
-#: package/contents/ui/configTimes.qml:142
+#: package/contents/ui/configTimes.qml:143
 #, kde-format
 msgid "Edit"
 msgstr "Редактиране"
 
-#: package/contents/ui/configTimes.qml:151
+#: package/contents/ui/configTimes.qml:152
 #, kde-format
 msgid "Delete"
 msgstr "Изтриване"

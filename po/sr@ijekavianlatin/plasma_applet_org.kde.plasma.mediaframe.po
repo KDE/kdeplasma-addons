@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2017-12-03 22:53+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -199,13 +199,13 @@ msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Levi klik otvara sliku u spoljašnjem prikazivaču"
 
-#: package/contents/ui/ConfigPaths.qml:66
+#: package/contents/ui/ConfigPaths.qml:67
 #, kde-format
 msgid "Remove path"
 msgstr ""
 
 # >> @title:window
-#: package/contents/ui/ConfigPaths.qml:75
+#: package/contents/ui/ConfigPaths.qml:76
 #, fuzzy, kde-format
 #| msgid "Choose files"
 msgctxt "@title:window"
@@ -213,21 +213,21 @@ msgid "Choose Files"
 msgstr "Izbor fajlova"
 
 # >> @title:window
-#: package/contents/ui/ConfigPaths.qml:101
+#: package/contents/ui/ConfigPaths.qml:102
 #, fuzzy, kde-format
 #| msgid "Choose a folder"
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Izbor fascikle"
 
-#: package/contents/ui/ConfigPaths.qml:121
+#: package/contents/ui/ConfigPaths.qml:122
 #, fuzzy, kde-format
 #| msgid "Add folder..."
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Dodaj fasciklu..."
 
-#: package/contents/ui/ConfigPaths.qml:127
+#: package/contents/ui/ConfigPaths.qml:128
 #, fuzzy, kde-format
 #| msgid "Add files..."
 msgctxt "@action:button"

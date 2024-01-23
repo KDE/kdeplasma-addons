@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2024-01-21 14:11\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -54,7 +54,7 @@ msgctxt "@item:inrange"
 msgid "Accurate"
 msgstr "精确"
 
-#: package/contents/ui/configAppearance.qml:57
+#: package/contents/ui/configAppearance.qml:58
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"

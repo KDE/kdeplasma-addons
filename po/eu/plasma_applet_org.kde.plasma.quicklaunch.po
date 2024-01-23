@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2022-08-17 09:51+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -80,47 +80,47 @@ msgstr "Norberak finkatutako titulua"
 msgid "Launch %1"
 msgstr "Abiarazi %1"
 
-#: package/contents/ui/IconItem.qml:260
+#: package/contents/ui/IconItem.qml:261
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Gehitu abiarazlea..."
 
-#: package/contents/ui/IconItem.qml:266
+#: package/contents/ui/IconItem.qml:267
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Editatu abiarazlea..."
 
-#: package/contents/ui/IconItem.qml:272
+#: package/contents/ui/IconItem.qml:273
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Kendu abiarazlea"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:147
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Abiarazte azkarra"
 
-#: package/contents/ui/main.qml:147
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr ""
 "Gehitu abiarazleak arrastatu eta jareginez edo testuinguru menua erabiliz."
 
-#: package/contents/ui/main.qml:177
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Hide icons"
 msgstr "Ezkutatu ikonoak"
 
-#: package/contents/ui/main.qml:177
+#: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Erakutsi ezkutuko ikonoak"
 
-#: package/contents/ui/main.qml:280
+#: package/contents/ui/main.qml:281
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

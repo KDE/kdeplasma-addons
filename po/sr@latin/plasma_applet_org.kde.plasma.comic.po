@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2015-03-14 17:59+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -117,14 +117,14 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Napredno"
 
-#: package/contents/ui/ComicBottomInfo.qml:62
+#: package/contents/ui/ComicBottomInfo.qml:63
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Skoči na strip..."
 
-#: package/contents/ui/ComicBottomInfo.qml:102
+#: package/contents/ui/ComicBottomInfo.qml:104
 #, fuzzy, kde-format
 #| msgid "Visit the comic website"
 msgctxt "@info:tooltip"
@@ -150,7 +150,7 @@ msgstr[2] "kaiševa po stripu"
 msgstr[3] "kaiševa po stripu"
 
 # >> @option:check
-#: package/contents/ui/configAdvanced.qml:50
+#: package/contents/ui/configAdvanced.qml:51
 #, fuzzy, kde-format
 #| msgid "Display error when getting comic failed"
 msgctxt "@option:check"
@@ -251,14 +251,14 @@ msgstr[1] "dana"
 msgstr[2] "dana"
 msgstr[3] "dana"
 
-#: package/contents/ui/configGeneral.qml:106
+#: package/contents/ui/configGeneral.qml:107
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Traži nove kaiševe stripa:"
 
-#: package/contents/ui/configGeneral.qml:115
+#: package/contents/ui/configGeneral.qml:116
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

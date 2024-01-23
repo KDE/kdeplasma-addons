@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2022-08-05 11:17+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -109,13 +109,13 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Lisäasetukset"
 
-#: package/contents/ui/ComicBottomInfo.qml:62
+#: package/contents/ui/ComicBottomInfo.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Siirry sarjakuvaan…"
 
-#: package/contents/ui/ComicBottomInfo.qml:102
+#: package/contents/ui/ComicBottomInfo.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -135,7 +135,7 @@ msgid_plural "strips per comic"
 msgstr[0] "strippi per sarjakuva"
 msgstr[1] "strippiä per sarjakuva"
 
-#: package/contents/ui/configAdvanced.qml:50
+#: package/contents/ui/configAdvanced.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
@@ -222,14 +222,14 @@ msgid_plural "days"
 msgstr[0] "päivän välein"
 msgstr[1] "päivän välein"
 
-#: package/contents/ui/configGeneral.qml:106
+#: package/contents/ui/configGeneral.qml:107
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Etsi uusia strippejä:"
 
 # Konteksti: Check for new comics every: __ minute(s)
-#: package/contents/ui/configGeneral.qml:115
+#: package/contents/ui/configGeneral.qml:116
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2024-01-21 14:11\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -48,8 +48,8 @@ msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "开始计时"
 
-#: package/contents/ui/CompactRepresentation.qml:197
-#: package/contents/ui/CompactRepresentation.qml:215
+#: package/contents/ui/CompactRepresentation.qml:198
+#: package/contents/ui/CompactRepresentation.qml:216
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
@@ -132,22 +132,22 @@ msgstr "添加"
 msgid "Scroll over digits to change time"
 msgstr "鼠标滚轮在数字上方滚动，即可更改时间"
 
-#: package/contents/ui/configTimes.qml:125
+#: package/contents/ui/configTimes.qml:126
 #, kde-format
 msgid "Apply"
 msgstr "应用"
 
-#: package/contents/ui/configTimes.qml:133
+#: package/contents/ui/configTimes.qml:134
 #, kde-format
 msgid "Cancel"
 msgstr "取消"
 
-#: package/contents/ui/configTimes.qml:142
+#: package/contents/ui/configTimes.qml:143
 #, kde-format
 msgid "Edit"
 msgstr "编辑"
 
-#: package/contents/ui/configTimes.qml:151
+#: package/contents/ui/configTimes.qml:152
 #, kde-format
 msgid "Delete"
 msgstr "删除"

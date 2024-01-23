@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2012-07-05 21:11+0300\n"
 "Last-Translator: Einars Sprugis <einars8@gmail.com>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -119,14 +119,14 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Paplašināti"
 
-#: package/contents/ui/ComicBottomInfo.qml:62
+#: package/contents/ui/ComicBottomInfo.qml:63
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Iet uz lentu..."
 
-#: package/contents/ui/ComicBottomInfo.qml:102
+#: package/contents/ui/ComicBottomInfo.qml:104
 #, fuzzy, kde-format
 #| msgid "Visit the comic website"
 msgctxt "@info:tooltip"
@@ -150,7 +150,7 @@ msgstr[0] " lentas komiksā"
 msgstr[1] " lentas komiksā"
 msgstr[2] " lentas komiksā"
 
-#: package/contents/ui/configAdvanced.qml:50
+#: package/contents/ui/configAdvanced.qml:51
 #, fuzzy, kde-format
 #| msgid "Display error image when getting comic failed:"
 msgctxt "@option:check"
@@ -246,14 +246,14 @@ msgstr[0] " dienas"
 msgstr[1] " dienas"
 msgstr[2] " dienas"
 
-#: package/contents/ui/configGeneral.qml:106
+#: package/contents/ui/configGeneral.qml:107
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Pārbaudīt jaunas komiksa lentas:"
 
-#: package/contents/ui/configGeneral.qml:115
+#: package/contents/ui/configGeneral.qml:116
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"

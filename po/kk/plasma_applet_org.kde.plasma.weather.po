@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-20 00:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2010-04-17 07:29+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -265,44 +265,44 @@ msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:75
+#: package/contents/ui/config/ConfigWeatherStation.qml:76
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:183
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: package/contents/ui/config/ConfigWeatherStation.qml:189
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr ""
 
-#: package/contents/ui/ForecastView.qml:73
-#: package/contents/ui/ForecastView.qml:80
+#: package/contents/ui/ForecastView.qml:74
+#: package/contents/ui/ForecastView.qml:82
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
@@ -490,7 +490,7 @@ msgstr "%1 (%2%)"
 msgid "Humidity: %1"
 msgstr "Ылғалдылығы: %1%2"
 
-#: package/contents/ui/NoticesView.qml:60
+#: package/contents/ui/NoticesView.qml:61
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fuzzy_clock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2019-03-16 11:24+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -57,7 +57,7 @@ msgctxt "@item:inrange"
 msgid "Accurate"
 msgstr "Nøyaktig"
 
-#: package/contents/ui/configAppearance.qml:57
+#: package/contents/ui/configAppearance.qml:58
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"

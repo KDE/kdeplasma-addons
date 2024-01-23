@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2023-02-19 17:24+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -47,8 +47,8 @@ msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Vaxtölçəni başladın"
 
-#: package/contents/ui/CompactRepresentation.qml:197
-#: package/contents/ui/CompactRepresentation.qml:215
+#: package/contents/ui/CompactRepresentation.qml:198
+#: package/contents/ui/CompactRepresentation.qml:216
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
@@ -134,22 +134,22 @@ msgstr "Əlavə etmək"
 msgid "Scroll over digits to change time"
 msgstr "Vaxtı dəyişdirmək üçün rəqəmləri sürüşdürün"
 
-#: package/contents/ui/configTimes.qml:125
+#: package/contents/ui/configTimes.qml:126
 #, kde-format
 msgid "Apply"
 msgstr "Tətbiq etmək"
 
-#: package/contents/ui/configTimes.qml:133
+#: package/contents/ui/configTimes.qml:134
 #, kde-format
 msgid "Cancel"
 msgstr "İmtina"
 
-#: package/contents/ui/configTimes.qml:142
+#: package/contents/ui/configTimes.qml:143
 #, kde-format
 msgid "Edit"
 msgstr "Düzəliş etmək"
 
-#: package/contents/ui/configTimes.qml:151
+#: package/contents/ui/configTimes.qml:152
 #, kde-format
 msgid "Delete"
 msgstr "Silmək"

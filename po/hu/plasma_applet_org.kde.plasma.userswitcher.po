@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-16 01:59+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2024-01-16 21:25+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -83,48 +83,48 @@ msgstr "Technikai információk megjelenítése"
 msgid "You are logged in as <b>%1</b>"
 msgstr "Bejelentkezve, mint <b>%1</b>"
 
-#: package/contents/ui/main.qml:141
+#: package/contents/ui/main.qml:142
 #, kde-format
 msgid "Current user"
 msgstr "Jelenlegi felhasználó"
 
-#: package/contents/ui/main.qml:170
+#: package/contents/ui/main.qml:171
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "Nem használt"
 
-#: package/contents/ui/main.qml:186
+#: package/contents/ui/main.qml:187
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
-#: package/contents/ui/main.qml:188
+#: package/contents/ui/main.qml:189
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "a(z) %1. konzolon (%2)"
 
-#: package/contents/ui/main.qml:196
+#: package/contents/ui/main.qml:197
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr "Váltás rá: %1"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:206
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "Új munkamenet"
 
-#: package/contents/ui/main.qml:217
+#: package/contents/ui/main.qml:218
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Képernyő zárolása"
 
-#: package/contents/ui/main.qml:229
+#: package/contents/ui/main.qml:230
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Log Out"

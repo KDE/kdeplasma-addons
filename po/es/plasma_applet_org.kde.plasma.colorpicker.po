@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-11 00:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2023-10-02 20:43+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -142,13 +142,13 @@ msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "Configurar la composición"
 
-#: package/contents/ui/main.qml:379
+#: package/contents/ui/main.qml:380
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Copiado"
 
-#: package/contents/ui/main.qml:389
+#: package/contents/ui/main.qml:391
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

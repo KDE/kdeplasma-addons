@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-20 00:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2022-12-01 21:55+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -252,44 +252,44 @@ msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "எதுவும் தேர்ந்தெடுக்கப்படவில்லை"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:75
+#: package/contents/ui/config/ConfigWeatherStation.qml:76
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "வழங்கி:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "புதிய இருப்பிடத்தை உள்ளிடுங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "இருப்பிடத்தை உள்ளிடுங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:183
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "'%1' என்பதற்கான எந்த வானிலை நிலையமும் கண்டுபிடிக்கப்படவில்லை"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "உங்கள் இருப்பிடத்தை மாற்ற, ஏதாவதொரு வானிலை மையத்தைத் தேடுங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: package/contents/ui/config/ConfigWeatherStation.qml:189
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "உங்கள் இருப்பிடத்தை அமைக்க, ஏதாவதொரு வானிலை மையத்தைத் தேடுங்கள்"
 
-#: package/contents/ui/ForecastView.qml:73
-#: package/contents/ui/ForecastView.qml:80
+#: package/contents/ui/ForecastView.qml:74
+#: package/contents/ui/ForecastView.qml:82
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
@@ -443,7 +443,7 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "ஈரப்பதம்: %1"
 
-#: package/contents/ui/NoticesView.qml:60
+#: package/contents/ui/NoticesView.qml:61
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"

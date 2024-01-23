@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2023-02-25 08:58+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -52,8 +52,8 @@ msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Zaženi časomer"
 
-#: package/contents/ui/CompactRepresentation.qml:197
-#: package/contents/ui/CompactRepresentation.qml:215
+#: package/contents/ui/CompactRepresentation.qml:198
+#: package/contents/ui/CompactRepresentation.qml:216
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
@@ -141,22 +141,22 @@ msgstr "Dodaj"
 msgid "Scroll over digits to change time"
 msgstr "Pomaknite se prek številk, da spremenite čas"
 
-#: package/contents/ui/configTimes.qml:125
+#: package/contents/ui/configTimes.qml:126
 #, kde-format
 msgid "Apply"
 msgstr "Uveljavi"
 
-#: package/contents/ui/configTimes.qml:133
+#: package/contents/ui/configTimes.qml:134
 #, kde-format
 msgid "Cancel"
 msgstr "Prekliči"
 
-#: package/contents/ui/configTimes.qml:142
+#: package/contents/ui/configTimes.qml:143
 #, kde-format
 msgid "Edit"
 msgstr "Uredi"
 
-#: package/contents/ui/configTimes.qml:151
+#: package/contents/ui/configTimes.qml:152
 #, kde-format
 msgid "Delete"
 msgstr "Zbriši"

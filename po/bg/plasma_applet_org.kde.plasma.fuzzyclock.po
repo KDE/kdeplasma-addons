@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2022-11-17 16:05+0200\n"
 "Last-Translator: Светослав Стефанов <svetlisashkov@yahoo.com>\n"
 "Language-Team: none\n"
@@ -54,7 +54,7 @@ msgctxt "@item:inrange"
 msgid "Accurate"
 msgstr "Точно"
 
-#: package/contents/ui/configAppearance.qml:57
+#: package/contents/ui/configAppearance.qml:58
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"

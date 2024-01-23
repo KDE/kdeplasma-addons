@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-30 01:57+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2016-08-18 21:32+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-i18n-doc@kde.org>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: contents/ui/KateSessionsItemDelegate.qml:92
 #, kde-format
 msgid "Session name"
 msgstr "Seansi nimi"
 
-#: contents/ui/KateSessionsItemDelegate.qml:103
+#: contents/ui/KateSessionsItemDelegate.qml:104
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "Uue seansi loomine ja Kate käivitamine"
 
-#: contents/ui/KateSessionsItemDelegate.qml:115
+#: contents/ui/KateSessionsItemDelegate.qml:116
 #, kde-format
 msgid "Cancel session creation"
 msgstr "Seansi loomise katkestamine"

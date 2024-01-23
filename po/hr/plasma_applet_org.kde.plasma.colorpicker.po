@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-11 00:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2010-07-18 14:26+0200\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -143,13 +143,13 @@ msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr ""
 
-#: package/contents/ui/main.qml:379
+#: package/contents/ui/main.qml:380
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:389
+#: package/contents/ui/main.qml:391
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

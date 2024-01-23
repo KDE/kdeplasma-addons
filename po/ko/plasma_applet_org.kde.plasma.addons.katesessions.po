@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_katesession\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-30 01:57+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2021-07-18 13:03+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 20.12.3\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: contents/ui/KateSessionsItemDelegate.qml:92
 #, kde-format
 msgid "Session name"
 msgstr "세션 이름"
 
-#: contents/ui/KateSessionsItemDelegate.qml:103
+#: contents/ui/KateSessionsItemDelegate.qml:104
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "새 세션을 만들고 Kate 시작"
 
-#: contents/ui/KateSessionsItemDelegate.qml:115
+#: contents/ui/KateSessionsItemDelegate.qml:116
 #, kde-format
 msgid "Cancel session creation"
 msgstr "세션 생성 취소"

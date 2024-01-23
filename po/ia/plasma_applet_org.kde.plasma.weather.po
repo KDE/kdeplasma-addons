@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# giovanni <g.sora@tiscali.it>, 2017, 2020, 2021, 2022.
+# giovanni <g.sora@tiscali.it>, 2017, 2020, 2021, 2022, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-20 00:38+0000\n"
-"PO-Revision-Date: 2022-12-14 16:16+0100\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"PO-Revision-Date: 2024-01-22 10:54+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -252,44 +252,44 @@ msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "Necun seligite"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:75
+#: package/contents/ui/config/ConfigWeatherStation.qml:76
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "Fornitor (Provider):"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Inserta nove location"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Inserta location"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:183
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Necun stationes meteorologic trovate per '%1'"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Cerca un station meteorolig per cambiar tu location"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: package/contents/ui/config/ConfigWeatherStation.qml:189
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Cerca un station meteorologic per fixar tu location"
 
-#: package/contents/ui/ForecastView.qml:73
-#: package/contents/ui/ForecastView.qml:80
+#: package/contents/ui/ForecastView.qml:74
+#: package/contents/ui/ForecastView.qml:82
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
@@ -443,11 +443,11 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "Humiditate: %1"
 
-#: package/contents/ui/NoticesView.qml:60
+#: package/contents/ui/NoticesView.qml:61
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
-msgstr ""
+msgstr "Monstra Plus Information"
 
 #: package/contents/ui/SwitchPanel.qml:32
 #, kde-format
@@ -456,16 +456,14 @@ msgid "Details"
 msgstr "Detalios"
 
 #: package/contents/ui/SwitchPanel.qml:39
-#, fuzzy, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Notices"
+#, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
 "watches, ...) issued"
 msgid "%1 Notice"
 msgid_plural "%1 Notices"
-msgstr[0] "Notitias"
-msgstr[1] "Notitias"
+msgstr[0] "%1 Notitia"
+msgstr[1] "%1 Notitias"
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-08-30 01:57+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2016-07-22 17:51+0530\n"
 "Last-Translator: G Karunakar <karunakar@indlinux.org>\n"
 "Language-Team: Hindi <indlinux-hindi@lists.sourceforge.net>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 "X-Generator: Lokalize 1.5\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: contents/ui/KateSessionsItemDelegate.qml:92
 #, kde-format
 msgid "Session name"
 msgstr "सत्र नाम"
 
-#: contents/ui/KateSessionsItemDelegate.qml:103
+#: contents/ui/KateSessionsItemDelegate.qml:104
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "नया सत्र बना कर केट चालू करें"
 
-#: contents/ui/KateSessionsItemDelegate.qml:115
+#: contents/ui/KateSessionsItemDelegate.qml:116
 #, kde-format
 msgid "Cancel session creation"
 msgstr "सत्र बनाना रद्द करें"

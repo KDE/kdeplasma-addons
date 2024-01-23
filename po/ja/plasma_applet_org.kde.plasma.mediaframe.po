@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
 "PO-Revision-Date: 2022-03-06 11:55+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -162,30 +162,30 @@ msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "画像をクリックして他のアプリケーションを開く"
 
-#: package/contents/ui/ConfigPaths.qml:66
+#: package/contents/ui/ConfigPaths.qml:67
 #, kde-format
 msgid "Remove path"
 msgstr "パスを削除"
 
-#: package/contents/ui/ConfigPaths.qml:75
+#: package/contents/ui/ConfigPaths.qml:76
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "ファイル選択"
 
-#: package/contents/ui/ConfigPaths.qml:101
+#: package/contents/ui/ConfigPaths.qml:102
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "フォルダ選択"
 
-#: package/contents/ui/ConfigPaths.qml:121
+#: package/contents/ui/ConfigPaths.qml:122
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "フォルダーを追加…"
 
-#: package/contents/ui/ConfigPaths.qml:127
+#: package/contents/ui/ConfigPaths.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
