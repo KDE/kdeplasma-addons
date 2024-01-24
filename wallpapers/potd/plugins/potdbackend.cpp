@@ -16,8 +16,8 @@
 
 namespace
 {
-static PotdEngine *s_engine = nullptr;
-static int s_instanceCount = 0;
+constinit PotdEngine *s_engine = nullptr;
+constinit int s_instanceCount = 0;
 }
 
 PotdBackend::PotdBackend(QObject *parent)

@@ -21,7 +21,7 @@ using namespace std::chrono_literals;
 
 namespace
 {
-static bool s_networkInformationAvailable = false;
+constinit bool s_networkInformationAvailable = false;
 
 bool isUsingMeteredConnection()
 {
