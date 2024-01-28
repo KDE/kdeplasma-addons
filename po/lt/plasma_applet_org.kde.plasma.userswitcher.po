@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-08-16 01:59+0000\n"
-"PO-Revision-Date: 2022-11-18 00:01+0200\n"
+"PO-Revision-Date: 2024-01-27 14:58+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr "Bendri"
+msgstr "Bendra"
 
 #: package/contents/ui/configGeneral.qml:27
 #, kde-format

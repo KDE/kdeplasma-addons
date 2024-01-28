@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-20 02:23+0000\n"
-"PO-Revision-Date: 2022-11-17 23:29+0200\n"
+"PO-Revision-Date: 2024-01-27 15:25+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -255,21 +255,19 @@ msgstr "Vietovė:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Nepasirinkta"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:75
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Teikėjas:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:99
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Įveskite vietovę"
+msgstr "Įveskite naują vietovę"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
@@ -287,13 +285,13 @@ msgstr "Vietovei „%1“ nerasta jokių orų stočių"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Ieškokite meteorologinę stotį norėdami pakeisti savo vietovę"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Ieškokite meteorologinę stotį norėdami nustatyti savo vietovę"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -400,19 +398,16 @@ msgid "Wind Gust:"
 msgstr "Vėjo gūsiai:"
 
 #: package/contents/ui/main.qml:247
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "%1 diena"
+msgstr "Diena"
 
 #: package/contents/ui/main.qml:248
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Naktis"
 
 #: package/contents/ui/main.qml:286
 #, kde-format

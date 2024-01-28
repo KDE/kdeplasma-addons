@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-17 01:38+0000\n"
-"PO-Revision-Date: 2022-10-17 00:48+0000\n"
+"PO-Revision-Date: 2024-01-27 16:43+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,36 +17,37 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "Bendra"
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "Išvaizda"
 
 #: package/contents/ui/ConfigAppearance.qml:31
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
-msgstr ""
+msgstr "Piktograma:"
 
 #: package/contents/ui/ConfigAppearance.qml:32
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
-msgstr ""
+msgstr "Svetainės piktograma"
 
 #: package/contents/ui/ConfigAppearance.qml:55
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
-msgstr ""
+msgstr "Keisti saityno naršyklės piktogramą"
 
 #: package/contents/ui/ConfigAppearance.qml:56
 #, kde-format
@@ -55,96 +56,98 @@ msgid ""
 "Current icon is %1. Click to open menu to change the current icon or reset "
 "to the default icon."
 msgstr ""
+"Dabartinė piktograma yra %1. Spustelėkite norėdami atverti meniu, kad "
+"pakeistumėte dabartinę piktogramą ar atstatytumėte numatytąją piktogramą."
 
 #: package/contents/ui/ConfigAppearance.qml:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
-msgstr ""
+msgstr "Piktogramos pavadinimas yra „%1“"
 
 #: package/contents/ui/ConfigAppearance.qml:95
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr ""
+msgstr "Pasirinkti…"
 
 #: package/contents/ui/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
-msgstr ""
+msgstr "Pasirinkti saityno naršyklės piktogramą"
 
 #: package/contents/ui/ConfigAppearance.qml:101
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
-msgstr ""
+msgstr "Atstatyti į numatytąją piktogramą"
 
 #: package/contents/ui/ConfigGeneral.qml:18
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
-msgstr ""
+msgstr "Turinio mastelio keitimas:"
 
 #: package/contents/ui/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
-msgstr ""
+msgstr "Fiksuotas mastelis:"
 
 #: package/contents/ui/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
-msgstr ""
+msgstr "Automatinis mastelio keitimas, jei plotis yra mažiau nei"
 
 #: package/contents/ui/main.qml:66
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
-msgstr ""
+msgstr "Grįžti"
 
 #: package/contents/ui/main.qml:73
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
-msgstr ""
+msgstr "Pirmyn"
 
 #: package/contents/ui/main.qml:92
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
-msgstr ""
+msgstr "Įrašykite URL adresą"
 
 #: package/contents/ui/main.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
-msgstr ""
+msgstr "Stabdyti šio puslapio įkėlimą"
 
 #: package/contents/ui/main.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
-msgstr ""
+msgstr "Įkelti šį puslapį iš naujo"
 
 #: package/contents/ui/main.qml:178
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
-msgstr ""
+msgstr "Atverti nuorodą naršyklėje"
 
 #: package/contents/ui/main.qml:184
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
-msgstr ""
+msgstr "Kopijuoti nuorodos adresą"
 
 #: package/contents/ui/main.qml:246
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
-msgstr ""
+msgstr "Užblokuotas iškylantysis langas"
 
 #: package/contents/ui/main.qml:247
 #, kde-format
@@ -152,3 +155,5 @@ msgid ""
 "Click here to open the following blocked popup:\n"
 "%1"
 msgstr ""
+"Spustelėkite čia, jei norite atverti šį užblokuotą iškylantįjį langą:\n"
+"%1"

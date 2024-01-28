@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-26 01:34+0000\n"
-"PO-Revision-Date: 2021-08-18 01:07+0300\n"
+"PO-Revision-Date: 2024-01-27 17:30+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.0\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -77,16 +77,14 @@ msgid "A pink sticky note"
 msgstr "Rožinis lipnus lapelis"
 
 #: package/contents/ui/configAppearance.qml:70
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note"
+#, kde-format
 msgid "A transparent sticky note"
-msgstr "Dalinai permatomas lipnus lapelis"
+msgstr "Permatomas lipnus lapelis"
 
 #: package/contents/ui/configAppearance.qml:71
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note with light text"
+#, kde-format
 msgid "A transparent sticky note with light text"
-msgstr "Dalinai permatomas lipnus lapelis su šviesiu tekstu"
+msgstr "Permatomas lipnus lapelis su šviesiu tekstu"
 
 #: package/contents/ui/main.qml:267
 #, kde-format
@@ -114,17 +112,15 @@ msgid "Paste"
 msgstr "Įdėti"
 
 #: package/contents/ui/main.qml:307
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgid "Paste with Full Formatting"
-msgstr "Įdėti be formatavimo"
+msgstr "Įdėti su visu formatavimu"
 
 #: package/contents/ui/main.qml:314
-#, fuzzy, kde-format
-#| msgid "Paste Without Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Įdėti be formatavimo"
+msgstr "Šalinti formatavimą"
 
 #: package/contents/ui/main.qml:329
 #, kde-format
@@ -224,20 +220,16 @@ msgid "Pink"
 msgstr "Rožinis"
 
 #: package/contents/ui/main.qml:637
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
-msgstr "Dalinai permatomas"
+msgstr "Permatomas"
 
 #: package/contents/ui/main.qml:641
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent Light"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
-msgstr "Dalinai permatomas, šviesus"
+msgstr "Permatomas, šviesus"
 
 #~ msgid "Background color"
 #~ msgstr "Fono spalva"

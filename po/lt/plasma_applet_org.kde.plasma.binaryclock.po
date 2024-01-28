@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-01 01:38+0000\n"
-"PO-Revision-Date: 2019-06-01 19:22+0000\n"
+"PO-Revision-Date: 2024-01-27 17:33+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: package/contents/config/config.qml:17
 #, kde-format
@@ -29,12 +29,10 @@ msgstr "Išvaizda"
 
 #: package/contents/ui/configGeneral.qml:29
 #: package/contents/ui/configGeneral.qml:59
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Inactive LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
-msgstr "Neaktyvūs šviesos diodai"
+msgstr "Neaktyvios šviesos"
 
 #: package/contents/ui/configGeneral.qml:34
 #, kde-format
@@ -48,12 +46,10 @@ msgid "Use custom color for:"
 msgstr "Naudoti tinkintą spalvą, skirtą:"
 
 #: package/contents/ui/configGeneral.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Active LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Active lights"
-msgstr "Aktyvūs šviesos diodai"
+msgstr "Aktyvios šviesos"
 
 #~ msgid "Display:"
 #~ msgstr "Rodyti:"

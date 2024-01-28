@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-17 01:38+0000\n"
-"PO-Revision-Date: 2022-11-18 00:14+0200\n"
+"PO-Revision-Date: 2024-01-27 17:32+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -42,19 +42,17 @@ msgstr "Didžiosios raidės"
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"
-msgstr "Skaitmeninė klaviatūra"
+msgstr "Skaitmenų klaviatūra"
 
 #: contents/ui/main.qml:42
-#, fuzzy, kde-format
-#| msgid "Caps Lock activated\n"
+#, kde-format
 msgid "Caps Lock activated"
-msgstr "Įjungtos didžiosios raidės\n"
+msgstr "Įjungtos didžiosios raidės"
 
 #: contents/ui/main.qml:43
-#, fuzzy, kde-format
-#| msgid "Num Lock activated\n"
+#, kde-format
 msgid "Num Lock activated"
-msgstr "Įjungta skaitmeninė klaviatūra\n"
+msgstr "Įjungta skaitmenų klaviatūra"
 
 #: contents/ui/main.qml:114
 #, kde-format
