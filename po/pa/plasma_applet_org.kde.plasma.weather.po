@@ -2,7 +2,7 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# A S Alam <aalam@users.sf.net>, 2007, 2009, 2010, 2018, 2020.
+# SPDX-FileCopyrightText: 2007, 2009, 2010, 2018, 2020, 2024 A S Alam <aalam@users.sf.net>
 # Amanpreet Singh Alam <apreet.alam@gmail.com>, 2008.
 # Amanpreet Singh Alam <aalam@users.sf.net>, 2008, 2016.
 msgid ""
@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2020-02-04 20:50-0800\n"
-"Last-Translator: A S Alam <alam.yellow@gmail.com>\n"
-"Language-Team: Punjabi <punjabi-users@lists.sf.net>\n"
+"PO-Revision-Date: 2024-01-28 18:58-0600\n"
+"Last-Translator: A S Alam <aalam@punlinux.org>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 19.04.3\n"
+"X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: i18n.dat:1
@@ -153,42 +153,40 @@ msgid "Compact Mode"
 msgstr "ਸੰਖੇਪ ਢੰਗ"
 
 #: package/contents/ui/config/ConfigAppearance.qml:43
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "ਤਾਮਮਾਨ ਵੇਖੋ:"
+msgstr "ਤਾਪਮਾਨ ਵੇਖੋ:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:46
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr ""
+msgstr "ਵਿਜੈੱਟ ਆਈਕਾਨ ਉੱਤੇ"
 
 #: package/contents/ui/config/ConfigAppearance.qml:54
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr ""
+msgstr "ਵਿਜੈਟ ਆਈਕਾਨ ਦੇ ਨਾਲ"
 
 #: package/contents/ui/config/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "ਨਾ ਵੇਖਾਓ"
 
 #: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
-msgstr ""
+msgstr "ਟੂਲ-ਟਿੱਪ ਵਿੱਚ ਵੇਖਾਓ:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
-msgstr "ਤਾਮਮਾਨ"
+msgstr "ਤਾਪਮਾਨ"
 
 #: package/contents/ui/config/ConfigAppearance.qml:76
 #, kde-format
@@ -255,21 +253,19 @@ msgstr "ਟਿਕਾਣਾ:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "ਕੋਈ ਨਹੀਂ ਚੁਣੇ"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:76
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "ਪੂਰਕ:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:101
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "ਟਿਕਾਣਾ ਦਿਓ"
+msgstr "ਨਵਾਂ ਟਿਕਾਣਾ ਦਿਓ"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
@@ -287,13 +283,13 @@ msgstr "'%1' ਲਈ ਕੋਈ ਮੌਸਮੀ ਸਟੇਸ਼ਨ ਨਹੀਂ ਲ�
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "ਆਪਣੇ ਟਿਕਾਣੇ ਨੂੰ ਬਦਲਣ ਲਈ ਮੌਸਮੀ ਸਟੇਸ਼ਨ ਲਈ ਖੋਜ ਕਰੋ"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:189
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "ਆਪਣੇ ਟਿਕਾਣਾ ਸੈੱਟ ਕਰਨ ਲਈ ਮੌਸਮੀ ਸਟੇਸ਼ਨ ਲਈ ਖੋਜ ਕਰੋ"
 
 #: package/contents/ui/ForecastView.qml:74
 #: package/contents/ui/ForecastView.qml:82
@@ -305,14 +301,12 @@ msgstr "-"
 #: package/contents/ui/FullRepresentation.qml:37
 #, kde-format
 msgid "Please set your location"
-msgstr ""
+msgstr "ਆਪਣਾ ਟਿਕਾਣਾ ਸੈੱਟ ਕਰੋ"
 
 #: package/contents/ui/FullRepresentation.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgid "Set location…"
-msgstr "ਟਿਕਾਣਾ ਦਿਓ"
+msgstr "ਟਿਕਾਣਾ ਦਿਓ…"
 
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
@@ -400,19 +394,16 @@ msgid "Wind Gust:"
 msgstr "ਝੱਖੜ:"
 
 #: package/contents/ui/main.qml:248
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 ਦਿਨ"
+msgstr "ਦਿਨ"
 
 #: package/contents/ui/main.qml:249
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "ਰਾਤ"
 
 #: package/contents/ui/main.qml:287
 #, kde-format
@@ -424,7 +415,7 @@ msgstr "%1 (%2 %)"
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
-msgstr ""
+msgstr "%1 ਸੰਰਚਨਾ ਲਈ ਕਲਿੱਕ ਕਰੋ"
 
 #: package/contents/ui/main.qml:399
 #, kde-format
@@ -459,7 +450,7 @@ msgstr "ਨਮੀਂ: %1"
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
-msgstr ""
+msgstr "ਹੋਰ ਜਾਣਕਾਰੀ ਵੇਖਾਓ"
 
 #: package/contents/ui/SwitchPanel.qml:32
 #, kde-format
@@ -468,16 +459,14 @@ msgid "Details"
 msgstr "ਵੇਰਵੇ"
 
 #: package/contents/ui/SwitchPanel.qml:39
-#, fuzzy, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Notices"
+#, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
 "watches, ...) issued"
 msgid "%1 Notice"
 msgid_plural "%1 Notices"
-msgstr[0] "ਨੋਟਿਸ"
-msgstr[1] "ਨੋਟਿਸ"
+msgstr[0] "%1 ਨੋਟਿਸ"
+msgstr[1] "%1 ਨੋਟਿਸ"
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format
