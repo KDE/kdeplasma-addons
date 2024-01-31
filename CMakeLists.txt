@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(kdeplasma-addons)
-set(PROJECT_VERSION "5.92.90")
+set(PROJECT_VERSION "5.93.0")
 set(PROJECT_VERSION_MAJOR 6)
 
 ################# Disallow in-source build #################
@@ -9,7 +9,7 @@ if("${CMAKE_SOURCE_DIR}" STREQUAL "${CMAKE_BINARY_DIR}")
     message(FATAL_ERROR "plasma requires an out of source build. Please create a separate build directory and run 'cmake path_to_plasma [options]' there.")
 endif()
 
-set(PROJECT_DEP_VERSION "5.92.90")
+set(PROJECT_DEP_VERSION "5.93.0")
 set(QT_MIN_VERSION "6.6.0")
 set(KF6_MIN_VERSION 5.240.0)
 set(KDE_COMPILERSETTINGS_LEVEL "5.82")
