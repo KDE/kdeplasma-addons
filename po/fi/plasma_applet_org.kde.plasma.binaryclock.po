@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Teemu Rytilahti <teemu.rytilahti@kde-fi.org>, 2008.
 # Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2008.
-# Tommi Nieminen <translator@legisign.org>, 2010, 2017, 2018, 2019.
+# Tommi Nieminen <translator@legisign.org>, 2010, 2017, 2018, 2019, 2024.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2012.
 #
 # KDE Finnish translation sprint participants:
@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-01 01:38+0000\n"
-"PO-Revision-Date: 2019-03-18 20:47+0200\n"
+"PO-Revision-Date: 2024-01-22 16:10+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-POT-Import-Date: 2012-12-01 22:25:23+0000\n"
-"X-Generator: Lokalize 18.12.3\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/config/config.qml:17
 #, kde-format
@@ -31,9 +31,7 @@ msgstr "Ulkoasu"
 
 #: package/contents/ui/configGeneral.qml:29
 #: package/contents/ui/configGeneral.qml:59
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Inactive LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "Passiiviset valot"
@@ -51,9 +49,7 @@ msgid "Use custom color for:"
 msgstr "Mukautetun värin käyttö:"
 
 #: package/contents/ui/configGeneral.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Active LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Active lights"
 msgstr "Aktiiviset valot"
