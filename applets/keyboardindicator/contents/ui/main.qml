@@ -105,7 +105,7 @@ PlasmoidItem {
 
     Plasmoid.status: lockedSources.length > 0
         ? PlasmaCore.Types.ActiveStatus
-        : PlasmaCore.Types.PassiveStatus
+        : PlasmaCore.Types.HiddenStatus
 
     toolTipSubText: {
         if (lockedSources.length > 0) {
