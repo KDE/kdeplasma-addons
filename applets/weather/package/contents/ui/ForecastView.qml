@@ -91,7 +91,7 @@ GridLayout {
                 // i18n: \ufe0e forces the text representation of the umbrella emoji
                 text: modelData.probability ? i18nc("Probability of precipitation in percentage", "\ufe0e☂%1%", modelData.probability) : "·"
                 textFormat: Text.PlainText
-                visible: root.rowHasProbability[index % root.rows] && modelData.icon
+                visible: root.rowHasProbability[index % root.rows] && !!modelData.icon
             }
 
             PlasmaComponents.Label {
