@@ -79,7 +79,7 @@ PlasmoidItem {
 
     Plasmoid.status: root.capsLockState?.locked || root.numLockState?.locked
         ? PlasmaCore.Types.ActiveStatus
-        : PlasmaCore.Types.PassiveStatus
+        : PlasmaCore.Types.HiddenStatus
 
     toolTipSubText: {
         let text = [];
