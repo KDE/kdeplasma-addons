@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2024-02-02 00:38+0000\n"
 "PO-Revision-Date: 2024-01-20 22:39+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -291,8 +291,23 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "חיפוש אחר תחנת מזג אוויר כדי להגדיר את המקום שלך"
 
-#: package/contents/ui/ForecastView.qml:74
-#: package/contents/ui/ForecastView.qml:82
+#: package/contents/ui/ForecastView.qml:79
+#, fuzzy, kde-format
+#| msgctxt "certain weather condition (probability percentage)"
+#| msgid "%1 (%2 %)"
+msgctxt "certain weather condition (probability percentage)"
+msgid "%1 (%2%)"
+msgstr "%1 (%2 %)"
+
+#. i18n: \ufe0e forces the text representation of the umbrella emoji
+#: package/contents/ui/ForecastView.qml:92
+#, kde-format
+msgctxt "Probability of precipitation in percentage"
+msgid "︎☂%1%"
+msgstr ""
+
+#: package/contents/ui/ForecastView.qml:100
+#: package/contents/ui/ForecastView.qml:108
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
@@ -407,43 +422,37 @@ msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
 msgstr "לילה"
 
-#: package/contents/ui/main.qml:287
-#, kde-format
-msgctxt "certain weather condition (probability percentage)"
-msgid "%1 (%2 %)"
-msgstr "%1 (%2 %)"
-
-#: package/contents/ui/main.qml:388
+#: package/contents/ui/main.qml:386
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr "נא ללחוץ כאן כדי להגדיר את %1"
 
-#: package/contents/ui/main.qml:399
+#: package/contents/ui/main.qml:397
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:406
+#: package/contents/ui/main.qml:404
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:409
+#: package/contents/ui/main.qml:407
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:418
+#: package/contents/ui/main.qml:416
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:425
+#: package/contents/ui/main.qml:423
 #, kde-format
 msgid "Humidity: %1"
 msgstr "לחות: %1"
