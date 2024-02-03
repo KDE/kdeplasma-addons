@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-02 00:38+0000\n"
-"PO-Revision-Date: 2024-01-20 12:06+0100\n"
+"PO-Revision-Date: 2024-02-02 09:20+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -293,9 +293,7 @@ msgid "Search for a weather station to set your location"
 msgstr "Cerqueu una estació meteorològica per a establir la ubicació"
 
 #: package/contents/ui/ForecastView.qml:79
-#, fuzzy, kde-format
-#| msgctxt "certain weather condition (probability percentage)"
-#| msgid "%1 (%2 %)"
+#, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
@@ -305,7 +303,7 @@ msgstr "%1 (%2%)"
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "︎☂%1%"
-msgstr ""
+msgstr "︎☂%1%"
 
 #: package/contents/ui/ForecastView.qml:100
 #: package/contents/ui/ForecastView.qml:108

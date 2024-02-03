@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-02 00:38+0000\n"
-"PO-Revision-Date: 2024-01-20 10:59+0100\n"
+"PO-Revision-Date: 2024-02-02 19:45+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -292,19 +292,17 @@ msgid "Search for a weather station to set your location"
 msgstr "Bilatu estazio meteorologiko bat zure kokalekua ezartzeko"
 
 #: package/contents/ui/ForecastView.qml:79
-#, fuzzy, kde-format
-#| msgctxt "certain weather condition (probability percentage)"
-#| msgid "%1 (%2 %)"
+#, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
-msgstr "%1 (% %2)"
+msgstr "%1 (%%2)"
 
 #. i18n: \ufe0e forces the text representation of the umbrella emoji
 #: package/contents/ui/ForecastView.qml:92
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "︎☂%1%"
-msgstr ""
+msgstr "︎☂%%1"
 
 #: package/contents/ui/ForecastView.qml:100
 #: package/contents/ui/ForecastView.qml:108
