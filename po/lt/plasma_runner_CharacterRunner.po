@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_runner_CharacterRunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 01:38+0000\n"
-"PO-Revision-Date: 2020-03-21 12:14+0200\n"
+"PO-Revision-Date: 2024-02-02 21:43+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 3.0.1\n"
 
 #: charrunner.cpp:40
 #, kde-format
@@ -48,7 +48,7 @@ msgstr "Character Runner konfigūracija"
 #: charrunner_config.ui:26
 #, kde-format
 msgid "&Trigger word:"
-msgstr "&Iššaukiantis žodis:"
+msgstr "Ž&odis-paleidiklis:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_alias)
 #: charrunner_config.ui:47
