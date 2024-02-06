@@ -288,9 +288,7 @@ msgid "Search for a weather station to set your location"
 msgstr "현재 위치를 설정하기 위하여 기상대 검색"
 
 #: package/contents/ui/ForecastView.qml:79
-#, fuzzy, kde-format
-#| msgctxt "certain weather condition (probability percentage)"
-#| msgid "%1 (%2 %)"
+#, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
