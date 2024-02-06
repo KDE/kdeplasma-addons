@@ -6,7 +6,7 @@
 */
 
 import QtQuick
-import QtQuick.Controls as QQC2
+import QtQuick.Controls as QQC2 // just for desktop-styled context menus
 import QtQuick.Layouts
 import QtQuick.Window
 import QtQuick.Dialogs
@@ -152,7 +152,7 @@ PlasmoidItem {
                 bottomMargin: verticalMargins
             }
 
-            QQC2.ScrollView {
+            PlasmaComponents3.ScrollView {
                 id: scrollview
                 anchors {
                     top: parent.top
@@ -462,50 +462,50 @@ PlasmoidItem {
                     enabled: opacity > 0
                     visible: fontButtons.showFormatButtons
 
-                    QQC2.ToolButton {
+                    PlasmaComponents3.ToolButton {
                         focusPolicy: Qt.TabFocus
                         icon.name: "format-text-bold"
                         icon.color: textIconColor
                         checked: documentHandler.bold
                         onClicked: documentHandler.bold = !documentHandler.bold
                         Accessible.name: boldTooltip.text
-                        QQC2.ToolTip {
+                        PlasmaComponents3.ToolTip {
                             id: boldTooltip
                             text: i18nc("@info:tooltip", "Bold")
                         }
                     }
-                    QQC2.ToolButton {
+                    PlasmaComponents3.ToolButton {
                         focusPolicy: Qt.TabFocus
                         icon.name: "format-text-italic"
                         icon.color: textIconColor
                         checked: documentHandler.italic
                         onClicked: documentHandler.italic = !documentHandler.italic
                         Accessible.name: italicTooltip.text
-                        QQC2.ToolTip {
+                        PlasmaComponents3.ToolTip {
                             id: italicTooltip
                             text: i18nc("@info:tooltip", "Italic")
                         }
                     }
-                    QQC2.ToolButton {
+                    PlasmaComponents3.ToolButton {
                         focusPolicy: Qt.TabFocus
                         icon.name: "format-text-underline"
                         icon.color: textIconColor
                         checked: documentHandler.underline
                         onClicked: documentHandler.underline = !documentHandler.underline
                         Accessible.name: underlineTooltip.text
-                        QQC2.ToolTip {
+                        PlasmaComponents3.ToolTip {
                             id: underlineTooltip
                             text: i18nc("@info:tooltip", "Underline")
                         }
                     }
-                    QQC2.ToolButton {
+                    PlasmaComponents3.ToolButton {
                         focusPolicy: Qt.TabFocus
                         icon.name: "format-text-strikethrough"
                         icon.color: textIconColor
                         checked: documentHandler.strikeOut
                         onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
                         Accessible.name: strikethroughTooltip.text
-                        QQC2.ToolTip {
+                        PlasmaComponents3.ToolTip {
                             id: strikethroughTooltip
                             text: i18nc("@info:tooltip", "Strikethrough")
                         }
@@ -517,20 +517,20 @@ PlasmoidItem {
                     Layout.fillHeight: true
                 }
 
-                QQC2.ToolButton {
+                PlasmaComponents3.ToolButton {
                     id: settingsButton
                     focusPolicy: Qt.TabFocus
                     icon.name: "configure"
                     icon.color: textIconColor
                     onClicked: Plasmoid.internalAction("configure").trigger()
                     Accessible.name: settingsTooltip.text
-                    QQC2.ToolTip {
+                    PlasmaComponents3.ToolTip {
                         id: settingsTooltip
                         text: Plasmoid.internalAction("configure").text
                     }
                 }
 
-                QQC2.ToolButton {
+                PlasmaComponents3.ToolButton {
                     id: removeButton
                     focusPolicy: Qt.TabFocus
                     icon.name: "edit-delete"
@@ -557,7 +557,7 @@ PlasmoidItem {
                         }
                     }
                     Accessible.name: removeTooltip.text
-                    QQC2.ToolTip {
+                    PlasmaComponents3.ToolTip {
                         id: removeTooltip
                         text: Plasmoid.internalAction("remove").text
                     }
