@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2010.
 # Lasse Liehu <lliehu@kolumbus.fi>, 2011, 2016.
-# Tommi Nieminen <translator@legisign.org>, 2016, 2018, 2019, 2020, 2021, 2022, 2023.
+# Tommi Nieminen <translator@legisign.org>, 2016, 2018, 2019, 2020, 2021, 2022, 2023, 2024.
 #
 # KDE Finnish translation sprint participants:
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-02 00:38+0000\n"
-"PO-Revision-Date: 2023-03-05 17:41+0200\n"
+"PO-Revision-Date: 2024-01-31 17:41+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -293,9 +293,7 @@ msgid "Search for a weather station to set your location"
 msgstr "Aseta sijainti etsimällä sääasemaa"
 
 #: package/contents/ui/ForecastView.qml:79
-#, fuzzy, kde-format
-#| msgctxt "certain weather condition (probability percentage)"
-#| msgid "%1 (%2 %)"
+#, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2 %)"
@@ -460,7 +458,7 @@ msgstr "Ilmankosteus: %1"
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
-msgstr ""
+msgstr "Näytä lisätietoa"
 
 #: package/contents/ui/SwitchPanel.qml:32
 #, kde-format
@@ -469,16 +467,14 @@ msgid "Details"
 msgstr "Yksityiskohdat"
 
 #: package/contents/ui/SwitchPanel.qml:39
-#, fuzzy, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Notices"
+#, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
 "watches, ...) issued"
 msgid "%1 Notice"
 msgid_plural "%1 Notices"
-msgstr[0] "Huomautukset"
-msgstr[1] "Huomautukset"
+msgstr[0] "%1 ilmoitus"
+msgstr[1] "%1 ilmoitusta"
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format

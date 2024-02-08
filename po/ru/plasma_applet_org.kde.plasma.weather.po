@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-02 00:38+0000\n"
-"PO-Revision-Date: 2024-02-04 19:30+0300\n"
+"PO-Revision-Date: 2024-02-07 10:03+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -308,7 +308,7 @@ msgstr "%1 (%2 %)"
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "︎☂%1%"
-msgstr ""
+msgstr "︎☂%1%"
 
 #: package/contents/ui/ForecastView.qml:100
 #: package/contents/ui/ForecastView.qml:108
