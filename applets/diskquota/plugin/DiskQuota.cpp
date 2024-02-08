@@ -128,17 +128,6 @@ static QString iconNameForQuota(int quota)
     return QStringLiteral("disk-quota-critical");
 }
 
-static bool isQuotaLine(const QString &line)
-{
-    const int iMax = line.size();
-    for (int i = 0; i < iMax; ++i) {
-        if (!line[i].isSpace() && line[i] == QLatin1Char('/')) {
-            return true;
-        }
-    }
-    return false;
-}
-
 void DiskQuota::updateQuota()
 {
     const bool quotaFound = !QStandardPaths::findExecutable(QStringLiteral("quota")).isEmpty();
@@ -201,8 +190,7 @@ void DiskQuota::quotaProcessFinished(int exitCode, QProcess::ExitStatus exitStat
 
     // assumption: Filesystem starts with slash
     for (const QString &line : lines) {
-        //         qDebug() << line << isQuotaLine(line);
-        if (!isQuotaLine(line)) {
+        if (!line.contains(QLatin1Char('/'))) {
             continue;
         }
 
