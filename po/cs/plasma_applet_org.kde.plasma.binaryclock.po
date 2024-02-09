@@ -25,12 +25,10 @@ msgstr "Vzhled"
 
 #: package/contents/ui/configGeneral.qml:29
 #: package/contents/ui/configGeneral.qml:59
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Inactive LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
-msgstr "Neaktivní LED"
+msgstr ""
 
 #: package/contents/ui/configGeneral.qml:34
 #, kde-format
@@ -44,20 +42,7 @@ msgid "Use custom color for:"
 msgstr "Použít vlastní barvu pro:"
 
 #: package/contents/ui/configGeneral.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Active LEDs"
+#, kde-format
 msgctxt "@option:check"
 msgid "Active lights"
-msgstr "Aktivní LED:"
-
-#~ msgid "Display:"
-#~ msgstr "Zobrazení:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Grid"
-#~ msgstr "Mřížka"
-
-#~ msgctxt "@option:check"
-#~ msgid "In BCD format (decimal)"
-#~ msgstr "Ve formátu BCD (dekadické)"
+msgstr ""

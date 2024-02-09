@@ -75,16 +75,14 @@ msgid "A pink sticky note"
 msgstr "Růžová poznámka na plochu"
 
 #: package/contents/ui/configAppearance.qml:70
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note"
+#, kde-format
 msgid "A transparent sticky note"
-msgstr "Průhledná poznámka na plochu"
+msgstr ""
 
 #: package/contents/ui/configAppearance.qml:71
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note with light text"
+#, kde-format
 msgid "A transparent sticky note with light text"
-msgstr "Průhledná poznámka na plochu se světlým textem"
+msgstr ""
 
 #: package/contents/ui/main.qml:267
 #, kde-format
@@ -220,20 +218,13 @@ msgid "Pink"
 msgstr "Růžová"
 
 #: package/contents/ui/main.qml:637
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
-msgstr "Průhledné"
+msgstr ""
 
 #: package/contents/ui/main.qml:641
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent Light"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
-msgstr "Průhledná světlá"
-
-#~ msgid "Background color"
-#~ msgstr "Barva pozadí"
+msgstr ""
