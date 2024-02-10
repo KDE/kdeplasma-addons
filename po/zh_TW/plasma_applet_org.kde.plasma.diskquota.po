@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.diskquota\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2024-02-10 00:40+0000\n"
 "PO-Revision-Date: 2022-10-30 08:04+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -36,7 +36,7 @@ msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
 msgstr "請安裝 'quota'"
 
-#: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:177 plugin/DiskQuota.cpp:264
+#: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:166 plugin/DiskQuota.cpp:252
 #, kde-format
 msgid "Disk Quota"
 msgstr "磁碟配額"
@@ -46,36 +46,36 @@ msgstr "磁碟配額"
 msgid "Please install 'quota'"
 msgstr "請安裝 'quota'"
 
-#: plugin/DiskQuota.cpp:178
+#: plugin/DiskQuota.cpp:167
 #, kde-format
 msgid "Running quota failed"
 msgstr "quota 執行失敗"
 
-#: plugin/DiskQuota.cpp:239
+#: plugin/DiskQuota.cpp:227
 #, kde-format
 msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
 msgid "%1: %2% used"
 msgstr "%1：%2% 已使用"
 
-#: plugin/DiskQuota.cpp:240
+#: plugin/DiskQuota.cpp:228
 #, kde-format
 msgctxt "e.g.: 12 GiB of 20 GiB"
 msgid "%1 of %2"
 msgstr "%1 之 %2"
 
-#: plugin/DiskQuota.cpp:241
+#: plugin/DiskQuota.cpp:229
 #, kde-format
 msgctxt "e.g.: 8 GiB free"
 msgid "%1 free"
 msgstr "剩餘 %1"
 
-#: plugin/DiskQuota.cpp:261
+#: plugin/DiskQuota.cpp:249
 #, kde-format
 msgctxt "example: Quota: 83% used"
 msgid "Quota: %1% used"
 msgstr "配額：已使用 %1%"
 
-#: plugin/DiskQuota.cpp:265
+#: plugin/DiskQuota.cpp:253
 #, kde-format
 msgid "No quota restrictions found."
 msgstr "找不到大小的限制。"

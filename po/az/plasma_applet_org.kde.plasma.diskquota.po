@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-06-21 02:02+0000\n"
+"POT-Creation-Date: 2024-02-10 00:40+0000\n"
 "PO-Revision-Date: 2022-08-24 17:55+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -35,7 +35,7 @@ msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
 msgstr "Lütfən \"quota\" paketini quraşdırın"
 
-#: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:177 plugin/DiskQuota.cpp:264
+#: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:166 plugin/DiskQuota.cpp:252
 #, kde-format
 msgid "Disk Quota"
 msgstr "Disk kvotası"
@@ -45,36 +45,36 @@ msgstr "Disk kvotası"
 msgid "Please install 'quota'"
 msgstr "Lütfən \"quota\" quraşdırın"
 
-#: plugin/DiskQuota.cpp:178
+#: plugin/DiskQuota.cpp:167
 #, kde-format
 msgid "Running quota failed"
 msgstr "Kvota mümkün olmadı"
 
-#: plugin/DiskQuota.cpp:239
+#: plugin/DiskQuota.cpp:227
 #, kde-format
 msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
 msgid "%1: %2% used"
 msgstr "%1: %2% istifadə edildi"
 
-#: plugin/DiskQuota.cpp:240
+#: plugin/DiskQuota.cpp:228
 #, kde-format
 msgctxt "e.g.: 12 GiB of 20 GiB"
 msgid "%1 of %2"
 msgstr "%2 - %1"
 
-#: plugin/DiskQuota.cpp:241
+#: plugin/DiskQuota.cpp:229
 #, kde-format
 msgctxt "e.g.: 8 GiB free"
 msgid "%1 free"
 msgstr "%1 boş"
 
-#: plugin/DiskQuota.cpp:261
+#: plugin/DiskQuota.cpp:249
 #, kde-format
 msgctxt "example: Quota: 83% used"
 msgid "Quota: %1% used"
 msgstr "Kvota: %1% istifadə olundu"
 
-#: plugin/DiskQuota.cpp:265
+#: plugin/DiskQuota.cpp:253
 #, kde-format
 msgid "No quota restrictions found."
 msgstr "Kvota məhdudiyyəti tapılmadı."

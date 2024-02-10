@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-02 00:38+0000\n"
-"PO-Revision-Date: 2024-02-02 16:27+0300\n"
+"PO-Revision-Date: 2024-02-09 17:46+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -422,7 +422,7 @@ msgstr "Gece"
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
-msgstr "%1 Plasmoid'ini yapılandırmak için tıklayın"
+msgstr "%1 Plasmoid’ini yapılandırmak için tıklayın"
 
 #: package/contents/ui/main.qml:397
 #, kde-format
