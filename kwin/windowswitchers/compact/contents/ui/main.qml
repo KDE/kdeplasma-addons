@@ -33,7 +33,7 @@ KWin.TabBoxSwitcher {
 
     TextMetrics {
         id: textMetrics
-        property string longestCaption: tabBox.model.longestCaption()
+        property string longestCaption: tabBox.model.longestCaption() || placeholderLabel.text
         text: itemCaption(longestCaption, true)
         font.bold: true
     }
@@ -41,11 +41,11 @@ KWin.TabBoxSwitcher {
     onVisibleChanged: {
         if (visible) {
             // Window captions may have change completely
-            textMetrics.longestCaption = tabBox.model.longestCaption();
+            textMetrics.longestCaption = tabBox.model.longestCaption() || placeholderLabel.text;
         }
     }
     onModelChanged: {
-        textMetrics.longestCaption = tabBox.model.longestCaption();
+        textMetrics.longestCaption = tabBox.model.longestCaption() || placeholderLabel.text;
     }
 
     PlasmaCore.Dialog {
@@ -60,7 +60,7 @@ KWin.TabBoxSwitcher {
             id: dialogMainItem
 
             property int optimalWidth: textMetrics.width + Kirigami.Units.iconSizes.small + 2 * Kirigami.Units.smallSpacing + hoverItem.margins.right + hoverItem.margins.left
-            property int optimalHeight: compactListView.rowHeight * compactListView.count
+            property int optimalHeight: compactListView.rowHeight * (compactListView.count || 1)
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.2, optimalWidth), tabBox.screenGeometry.width * 0.8)
             height: Math.min(optimalHeight, tabBox.screenGeometry.height * 0.8)
             focus: true
@@ -133,6 +133,30 @@ KWin.TabBoxSwitcher {
                 Connections {
                     target: tabBox
                     function onCurrentIndexChanged() {compactListView.currentIndex = tabBox.currentIndex;}
+                }
+
+                RowLayout {
+                    visible: compactListView.count === 0
+                    anchors.centerIn: parent
+                    spacing: 2 * Kirigami.Units.smallSpacing
+
+                    Kirigami.Icon {
+                        source:  "edit-none"
+                        Layout.preferredWidth: Kirigami.Units.iconSizes.small
+                        Layout.preferredHeight: Kirigami.Units.iconSizes.small
+                        Layout.leftMargin: hoverItem.margins.left
+                    }
+                    PlasmaComponents3.Label {
+                        id: placeholderLabel
+                        horizontalAlignment: Text.AlignLeft
+                        verticalAlignment: Text.AlignBottom
+                        text: i18ndc("kwin", "@info:placeholder no entries in the task switcher", "No open windows")
+                        textFormat: Text.PlainText
+                        Layout.fillWidth: true
+                        Layout.rightMargin: hoverItem.margins.right
+                        Layout.topMargin: hoverItem.margins.top
+                        Layout.bottomMargin: hoverItem.margins.bottom
+                    }
                 }
             }
             /*

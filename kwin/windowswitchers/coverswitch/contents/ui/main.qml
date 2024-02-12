@@ -62,6 +62,15 @@ KWin.TabBoxSwitcher {
             opacity: enableBlur ? 0.5 : 0.75
         }
 
+        Kirigami.PlaceholderMessage {
+            anchors.centerIn: parent
+            width: parent.width - Kirigami.Units.largeSpacing * 2
+            icon.source: "edit-none"
+            text: i18ndc("kwin", "@info:placeholder no entries in the task switcher", "No open windows")
+            visible: thumbnailView.count === 0
+        }
+
+
         PathView {
             id: thumbnailView
 
@@ -231,6 +240,7 @@ KWin.TabBoxSwitcher {
 
             height: Kirigami.Units.iconSizes.large
             spacing: Kirigami.Units.gridUnit
+            visible: thumbnailView.count > 0
 
             anchors {
                 horizontalCenter: parent.horizontalCenter
@@ -239,7 +249,7 @@ KWin.TabBoxSwitcher {
             }
 
             Kirigami.Icon {
-                source: thumbnailView.currentItem ? thumbnailView.currentItem.icon : ""
+                source: thumbnailView.currentItem?.icon ?? ""
                 implicitWidth: Kirigami.Units.iconSizes.large
                 implicitHeight: Kirigami.Units.iconSizes.large
                 Layout.alignment: Qt.AlignCenter
@@ -248,13 +258,21 @@ KWin.TabBoxSwitcher {
             PC3.Label {
                 font.bold: true
                 font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.6)
-                text: thumbnailView.currentItem ? thumbnailView.currentItem.caption : ""
+                text: thumbnailView.currentItem?.caption ?? ""
                 textFormat: Text.PlainText
                 maximumLineCount: 1
                 elide: Text.ElideMiddle
                 Layout.maximumWidth: tabBox.screenGeometry.width * 0.8
                 Layout.alignment: Qt.AlignCenter
             }
+        }
+
+        Kirigami.PlaceholderMessage {
+            anchors.centerIn: parent
+            width: parent.width - Kirigami.Units.largeSpacing * 2
+            icon.source: "edit-none"
+            text: i18ndc("kwin", "@info:placeholder no entries in the task switcher", "No open windows")
+            visible: thumbnailView.count === 0
         }
     }
 

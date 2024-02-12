@@ -42,8 +42,8 @@ KWin.TabBoxSwitcher {
                 Layout.alignment: Qt.AlignHCenter
                 Layout.maximumWidth: tabBox.screenGeometry.width * 0.9
 
-                implicitWidth: contentWidth
-                implicitHeight: delegateWidth
+                implicitWidth: contentWidth || delegateWidth * 4
+                implicitHeight: delegateHeight
 
                 focus: true
                 orientation: ListView.Horizontal
@@ -52,8 +52,8 @@ KWin.TabBoxSwitcher {
                 delegate: Kirigami.Icon {
                     property string caption: model.caption
 
-                    width: icons.delegateHeight
-                    height: icons.delegateWidth
+                    width: icons.delegateWidth
+                    height: icons.delegateHeight
 
                     source: model.icon
                     active: index == icons.currentIndex
@@ -78,12 +78,22 @@ KWin.TabBoxSwitcher {
                     height: icons.iconSize + margins.top + margins.bottom
                 }
 
+                Kirigami.PlaceholderMessage {
+                    anchors.centerIn: parent
+                    anchors.verticalCenterOffset: Math.round(captionLabel.height / 2)
+                    width: parent.width - Kirigami.Units.largeSpacing * 2
+                    icon.source: "edit-none"
+                    text: i18ndc("kwin", "@info:placeholder no entries in the task switcher", "No open windows")
+                    visible: icons.count === 0
+                }
+
                 highlightMoveDuration: 0
                 highlightResizeDuration: 0
                 boundsBehavior: Flickable.StopAtBounds
             }
 
             PlasmaComponents3.Label {
+                id: captionLabel
                 text: icons.currentItem ? icons.currentItem.caption : ""
                 textFormat: Text.PlainText
                 horizontalAlignment: Text.AlignHCenter
