@@ -18,7 +18,8 @@ using namespace Qt::StringLiterals;
 namespace
 {
 std::shared_mutex s_solarTermsMapMutex;
-constinit QHash<int /*year*/, std::array<QDate, 25>> s_solarTermsMap;
+using SolarTermsMap = QHash<int /*year*/, std::array<QDate, 25>>;
+constinit SolarTermsMap s_solarTermsMap;
 const std::array<QString, 25> s_solarTermNames{
     u"春分"_s, u"清明"_s, u"谷雨"_s, u"立夏"_s, u"小满"_s, u"芒种"_s, u"夏至"_s, u"小暑"_s, u"大暑"_s, u"立秋"_s, u"处暑"_s, u"白露"_s,
     u"秋分"_s, u"寒露"_s, u"霜降"_s, u"立冬"_s, u"小雪"_s, u"大雪"_s, u"冬至"_s, u"小寒"_s, u"大寒"_s, u"立春"_s, u"雨水"_s, u"惊蛰"_s,
@@ -70,7 +71,7 @@ private:
     QString monthDisplayName() const;
     QString dayDisplayName() const;
 
-    decltype(std::declval<decltype(s_solarTermsMap)>().begin()) generateSolarTermsCache(int year);
+    SolarTermsMap::iterator generateSolarTermsCache(int year);
 
     /**
      * Calculates Julian day of a solar term based on Newton's method
@@ -93,7 +94,7 @@ ChineseCalendarProviderPrivate::ChineseCalendarProviderPrivate()
     m_calendar.reset(icu::Calendar::createInstance("en_US@calendar=chinese", m_errorCode));
 }
 
-decltype(std::declval<decltype(s_solarTermsMap)>().begin()) ChineseCalendarProviderPrivate::generateSolarTermsCache(int year)
+SolarTermsMap::iterator ChineseCalendarProviderPrivate::generateSolarTermsCache(int year)
 {
 #if __has_cpp_attribute(assume)
     [[assume(year > 0)]];
