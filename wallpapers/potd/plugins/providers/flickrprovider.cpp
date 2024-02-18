@@ -181,9 +181,9 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
                 // has higher quality, otherwise, url_o is worse than k/h size.
                 // If url_o is better, prefer url_o.
                 if (found) {
-                    QLatin1String originAttr("url_o");
+                    constexpr QLatin1String originAttr("url_o");
                     if (attributes.hasAttribute(originAttr)) {
-                        m_photoList.back().urlString = attributes.value(QLatin1String(originAttr)).toString();
+                        m_photoList.back().urlString = attributes.value(originAttr).toString();
                     }
                 }
             }
