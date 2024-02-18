@@ -21,6 +21,8 @@
 
 #include "debug.h"
 
+using namespace Qt::StringLiterals;
+
 static QUrl buildUrl(const QDate &date, const QString &apiKey)
 {
     QUrl url(QLatin1String("https://api.flickr.com/services/rest/"));
@@ -150,12 +152,11 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
                     continue;
                 }
 
-                const char *fallbackList[] = {"url_k", "url_h"};
+                constexpr QLatin1String fallbackList[] = {"url_k"_L1, "url_h"_L1};
 
                 bool found = false;
-                for (auto urlAttr : fallbackList) {
+                for (auto urlAttrString : fallbackList) {
                     // Get the best url.
-                    QLatin1String urlAttrString(urlAttr);
                     if (attributes.hasAttribute(urlAttrString)) {
                         QString title, userId, photoId;
                         if (attributes.hasAttribute(QStringLiteral("title"))) {
