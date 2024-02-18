@@ -139,16 +139,16 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
         xml.readNext();
 
         if (xml.isStartElement()) {
-            auto attributes = xml.attributes();
+            const auto attributes = xml.attributes();
             if (xml.name() == QLatin1String("rsp")) {
                 /* no pictures available for the specified parameters */
-                if (attributes.value(QLatin1String("stat")).toString() != QLatin1String("ok")) {
+                if (attributes.value(QLatin1String("stat")) != QLatin1String("ok")) {
                     qCWarning(WALLPAPERPOTD) << "xmlRequestFinished error: no photos for the query";
                     Q_EMIT error(this);
                     return;
                 }
             } else if (xml.name() == QLatin1String("photo")) {
-                if (attributes.value(QLatin1String("ispublic")).toString() != QLatin1String("1")) {
+                if (attributes.value(QLatin1String("ispublic")) != QLatin1String("1")) {
                     continue;
                 }
 
@@ -159,12 +159,12 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
                     // Get the best url.
                     if (attributes.hasAttribute(urlAttrString)) {
                         QString title, userId, photoId;
-                        if (attributes.hasAttribute(QStringLiteral("title"))) {
-                            title = QTextDocumentFragment::fromHtml(attributes.value(QStringLiteral("title")).toString().trimmed()).toPlainText();
+                        if (attributes.hasAttribute(QLatin1String("title"))) {
+                            title = QTextDocumentFragment::fromHtml(attributes.value(QLatin1String("title")).toString().trimmed()).toPlainText();
                         }
-                        if (attributes.hasAttribute(QStringLiteral("owner")) && attributes.hasAttribute(QStringLiteral("id"))) {
-                            userId = attributes.value(QStringLiteral("owner")).toString();
-                            photoId = attributes.value(QStringLiteral("id")).toString();
+                        if (attributes.hasAttribute(QLatin1String("owner")) && attributes.hasAttribute(QLatin1String("id"))) {
+                            userId = attributes.value(QLatin1String("owner")).toString();
+                            photoId = attributes.value(QLatin1String("id")).toString();
                         }
                         m_photoList.emplace_back(PhotoEntry{
                             attributes.value(urlAttrString).toString(),
