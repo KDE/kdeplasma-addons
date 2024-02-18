@@ -126,14 +126,12 @@ void FlickrProvider::xmlRequestFinished(KJob *_job)
         return;
     }
 
-    const QString data = QString::fromUtf8(job->data());
-
     // Clear the list
     m_photoList.clear();
     m_photoList.reserve(100);
 
     xml.clear();
-    xml.addData(data);
+    xml.addData(job->data());
 
     while (!xml.atEnd()) {
         xml.readNext();
