@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Kishore G <kishore96@gmail.com>, 2021, 2023.
+# SPDX-FileCopyrightText: 2021, 2023, 2024 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-26 01:34+0000\n"
-"PO-Revision-Date: 2023-01-05 21:35+0530\n"
+"PO-Revision-Date: 2024-02-18 17:45+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.0\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -74,14 +74,12 @@ msgid "A pink sticky note"
 msgstr "ரோஜா ஒட்டுகுறிப்பு"
 
 #: package/contents/ui/configAppearance.qml:70
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note"
+#, kde-format
 msgid "A transparent sticky note"
 msgstr "ஒளிபுகும் ஒட்டுகுறிப்பு"
 
 #: package/contents/ui/configAppearance.qml:71
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note with light text"
+#, kde-format
 msgid "A transparent sticky note with light text"
 msgstr "வெளிர்ந்த உரையைக் கொண்ட ஒளிபுகும் ஒட்டுகுறிப்பு"
 
@@ -219,17 +217,13 @@ msgid "Pink"
 msgstr "ரோஜா"
 
 #: package/contents/ui/main.qml:637
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "ஒளிபுகக்கூடியது"
 
 #: package/contents/ui/main.qml:641
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent Light"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
 msgstr "ஒளிபுகக்கூடியது, வெள்ளை"

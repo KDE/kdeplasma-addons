@@ -1,14 +1,14 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-# Sergiu Bivol <sergiu@cip.md>, 2014.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Sergiu Bivol <sergiu@cip.md>, 2023.
 #
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2014-10-18 00:39+0300\n"
-"Last-Translator: Sergiu Bivol <sergiu@ase.md>\n"
+"PO-Revision-Date: 2023-06-18 19:22+0100\n"
+"Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
 "MIME-Version: 1.0\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: contents/ui/KateSessionsItemDelegate.qml:92
 #, kde-format
@@ -38,10 +39,9 @@ msgid "Kate Sessions"
 msgstr "Sesiuni Kate"
 
 #: contents/ui/main.qml:48
-#, fuzzy, kde-format
-#| msgid "Search"
+#, kde-format
 msgid "Search…"
-msgstr "Caută"
+msgstr "Caută…"
 
 #~ msgid "Delete session"
 #~ msgstr "Șterge sesiunea"
