@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Kishore G <kishore96@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-20 02:23+0000\n"
-"PO-Revision-Date: 2022-12-01 21:55+0530\n"
+"PO-Revision-Date: 2024-02-18 17:47+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -123,7 +123,7 @@ msgstr ""
 #, kde-format
 msgctxt "wind speed"
 msgid "Calm"
-msgstr ""
+msgstr "அசைவில்லை"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -332,7 +332,7 @@ msgstr "நிலையாயுள்ளது"
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
-msgstr ""
+msgstr "அசைவில்லை"
 
 #: package/contents/ui/main.qml:156
 #, kde-format
