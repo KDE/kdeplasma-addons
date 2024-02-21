@@ -103,7 +103,7 @@ msgstr "빠른 실행"
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
-msgstr "콘텍스트 메뉴나 끌어다 놓기로 실행 아이콘을 추가하십시오."
+msgstr "상황에 맞는 메뉴나 끌어다 놓기로 실행 아이콘을 추가하십시오."
 
 #: package/contents/ui/main.qml:171
 #, kde-format
