@@ -119,7 +119,8 @@ msgstr "알림 텍스트 표시:"
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
-msgstr "미리 정의된 타이머를 추가했다면 Plasmoid 콘텍스트 메뉴에 표시됩니다."
+msgstr ""
+"미리 정의된 타이머를 추가했다면 Plasmoid 상황에 맞는 메뉴에 표시됩니다."
 
 #: package/contents/ui/configTimes.qml:78
 #, kde-format
@@ -173,8 +174,8 @@ msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
 msgstr ""
-"마우스 휠로 숫자를 변경하거나 콘텍스트 메뉴에서 미리 설정된 숫자를 선택하십시"
-"오"
+"마우스 휠로 숫자를 변경하거나 상황에 맞는 메뉴에서 미리 설정된 숫자를 선택하"
+"십시오"
 
 #: package/contents/ui/main.qml:89
 #, kde-format
