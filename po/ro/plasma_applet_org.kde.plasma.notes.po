@@ -4,14 +4,14 @@
 # This file is distributed under the same license as the plasma_applet_notes package.
 # Laurenţiu Buzdugan <lbuz@rolix.org>, 2008".
 # Sergiu Bivol <sergiu@cip.md>, 2008.
-# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2020, 2021, 2023.
+# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2020, 2021, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-26 01:34+0000\n"
-"PO-Revision-Date: 2023-06-18 19:36+0100\n"
+"PO-Revision-Date: 2024-02-24 19:09+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -79,16 +79,14 @@ msgid "A pink sticky note"
 msgstr "Notă lipicioasă roză"
 
 #: package/contents/ui/configAppearance.qml:70
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note"
+#, kde-format
 msgid "A transparent sticky note"
-msgstr "Notă lipicioasă translucidă"
+msgstr "Notă lipicioasă transparentă"
 
 #: package/contents/ui/configAppearance.qml:71
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note with light text"
+#, kde-format
 msgid "A transparent sticky note with light text"
-msgstr "Notă lipicioasă translucidă cu text luminos"
+msgstr "Notă lipicioasă transparentă cu text luminos"
 
 #: package/contents/ui/main.qml:267
 #, kde-format
@@ -224,20 +222,16 @@ msgid "Pink"
 msgstr "Roz"
 
 #: package/contents/ui/main.qml:637
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
-msgstr "Translucid"
+msgstr "Transparentă"
 
 #: package/contents/ui/main.qml:641
-#, fuzzy, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent Light"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
-msgstr "Translucid luminos"
+msgstr "Transparentă luminoasă"
 
 #~ msgid "Background color"
 #~ msgstr "Culoare de fundal"
