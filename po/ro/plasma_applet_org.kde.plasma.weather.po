@@ -2,14 +2,14 @@
 # Copyright (C) 2008 This_file_is_part_of_KDE
 # This file is distributed under the same license as the plasma_applet_weather package.
 # Laurenţiu Buzdugan <lbuz@rolix.org>, 2008".
-# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2020, 2022.
+# Sergiu Bivol <sergiu@cip.md>, 2008, 2009, 2020, 2022, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-20 02:23+0000\n"
-"PO-Revision-Date: 2022-08-14 16:49+0100\n"
+"PO-Revision-Date: 2024-02-24 19:16+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -153,33 +153,28 @@ msgid "Compact Mode"
 msgstr "Regim compact"
 
 #: package/contents/ui/config/ConfigAppearance.qml:43
-#, fuzzy, kde-format
-#| msgid "&Temperature unit"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "Unitate &temperatură"
+msgstr "Arată temperatura:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Arată lângă pictograma controlului:"
+msgstr "Peste pictograma controlului"
 
 #: package/contents/ui/config/ConfigAppearance.qml:54
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "Arată lângă pictograma controlului:"
+msgstr "Lângă pictograma controlului"
 
 #: package/contents/ui/config/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Nu arăta"
 
 #: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
@@ -259,21 +254,19 @@ msgstr "Amplasare:"
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Niciuna aleasă"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:75
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Furnizor:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:99
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Introduceți locul"
+msgstr "Introduceți amplasarea nouă"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
@@ -291,13 +284,13 @@ msgstr "Nicio stație meteorologică găsită pentru „%1”"
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Căutați o stație meteorologică pentru a vă schimba amplasarea"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Căutați o stație meteorologică pentru a vă stabili amplasarea"
 
 #: package/contents/ui/ForecastView.qml:73
 #: package/contents/ui/ForecastView.qml:80
@@ -319,7 +312,7 @@ msgstr "Stabilește amplasarea…"
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Weather information retrieval for %1 timed out."
-msgstr ""
+msgstr "Preluarea informațiilor meteorologice pentru %1 a expirat."
 
 #: package/contents/ui/main.qml:94
 #, kde-format
@@ -397,27 +390,22 @@ msgid "Humidity:"
 msgstr "Umiditate:"
 
 #: package/contents/ui/main.qml:227
-#, fuzzy, kde-format
-#| msgctxt "winds exceeding wind speed briefly"
-#| msgid "Wind Gust: %1 %2"
+#, kde-format
 msgctxt "@label"
 msgid "Wind Gust:"
-msgstr "Rafale: %1 %2"
+msgstr "Viteza vântului:"
 
 #: package/contents/ui/main.qml:247
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 zi"
+msgstr "Zi"
 
 #: package/contents/ui/main.qml:248
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Noapte"
 
 #: package/contents/ui/main.qml:286
 #, kde-format

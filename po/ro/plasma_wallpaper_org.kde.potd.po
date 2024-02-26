@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# Sergiu Bivol <sergiu@cip.md>, 2020, 2022.
+# Sergiu Bivol <sergiu@cip.md>, 2020, 2022, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-13 02:10+0000\n"
-"PO-Revision-Date: 2022-08-14 16:49+0100\n"
+"PO-Revision-Date: 2024-02-24 19:13+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -31,6 +31,9 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"Acest furnizor de tapete nu filtrează imaginile ce pot fi delicate sau "
+"provocatoare. Dați dovadă de prudență dacă veți afișa aceste imagini în "
+"public."
 
 #: package/contents/ui/config.qml:72
 #, kde-format
@@ -119,7 +122,7 @@ msgstr "Deschide dosarul-destinație în care a fost salvată imaginea tapetului
 #: package/contents/ui/main.qml:22
 #, kde-format
 msgid "Open Wallpaper Image"
-msgstr ""
+msgstr "Deschide imagine cu tapet"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
