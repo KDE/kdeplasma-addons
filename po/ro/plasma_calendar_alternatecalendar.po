@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# Sergiu Bivol <sergiu@cip.md>, 2022.
+# Sergiu Bivol <sergiu@cip.md>, 2022, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-22 02:40+0000\n"
-"PO-Revision-Date: 2022-06-01 15:21+0100\n"
+"PO-Revision-Date: 2024-02-25 14:28+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -58,7 +58,7 @@ msgstr "Calendarul național indian"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
-msgstr ""
+msgstr "Calendar evreiesc"
 
 #: config/qml/AlternateCalendarConfig.qml:38
 #, kde-format
@@ -86,16 +86,16 @@ msgctxt ""
 "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
 "number %4 Full date in Hebrew"
 msgid "%1 %2, %3 (%4)"
-msgstr ""
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/indiancalendar.cpp:73
 #, kde-format
 msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 msgid "%1 %2, %3"
-msgstr ""
+msgstr "%1 %2, %3"
 
 #: provider/qtcalendar.cpp:52
 #, kde-format
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
-msgstr ""
+msgstr "%1 %2, %3"
