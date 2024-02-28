@@ -70,6 +70,10 @@ PlasmoidItem {
             id: window
             width: Kirigami.Units.gridUnit * 19
             height: Kirigami.Units.gridUnit * 23
+            maximumWidth: width
+            maximumHeight: height
+            minimumWidth: width
+            minimumHeight: height
             visible: true
             title: Plasmoid.title
             QtDialogs.ColorDialog {
