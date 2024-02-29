@@ -14,7 +14,10 @@ KWinComponents.SceneEffect {
     property bool activated: false
     readonly property int animationDuration: Kirigami.Units.longDuration
 
-    delegate: ScreenView {}
+    delegate: Loader {
+        focus: true
+        source: KWinComponents.Workspace.desktops.length < 3 ? "PlaceholderView.qml" : "ScreenView.qml"
+    }
 
     Instantiator {
         model: effect.configuration.BorderActivate
@@ -57,9 +60,6 @@ KWinComponents.SceneEffect {
 
     function activate() {
         if (activated || deactivateTimer.running) {
-            return;
-        }
-        if (KWinComponents.Workspace.desktops.length < 3) {
             return;
         }
         visible = true;
