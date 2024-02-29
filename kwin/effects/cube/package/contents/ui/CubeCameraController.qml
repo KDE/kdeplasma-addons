@@ -51,7 +51,7 @@ Item {
         orientation: Qt.Vertical
         target: null
         onWheel: event => {
-            let delta = event.angleDelta.y * 0.01;
+            let delta = (event.inverted ? -1 : 1) * event.angleDelta.y * 0.01;
             root.radius += root.radius * 0.1 * delta
         }
     }
