@@ -66,7 +66,11 @@ Item {
             }
         }
 
-        PerspectiveCamera { id: camera }
+        PerspectiveCamera {
+            id: camera
+            clipNear: 10.0
+            clipFar: 100000.0
+        }
 
         Cube {
             id: cube
