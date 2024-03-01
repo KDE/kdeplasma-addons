@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kwin_effect_cube\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-24 01:42+0000\n"
+"POT-Creation-Date: 2024-03-01 00:39+0000\n"
 "PO-Revision-Date: 2023-10-24 12:19+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -24,7 +24,25 @@ msgstr ""
 msgid "KWin"
 msgstr "KWin"
 
-#: kcm/cubeeffectkcm.cpp:41 package/contents/ui/main.qml:39
+#: kcm/cubeeffectkcm.cpp:41 package/contents/ui/main.qml:42
 #, kde-format
 msgid "Toggle Cube"
 msgstr "Alternar cubo"
+
+#: package/contents/ui/PlaceholderView.qml:28
+#, kde-format
+msgctxt "@info:placeholder"
+msgid ""
+"At least 3 virtual desktops are required to display the Cube, but only %1 is "
+"present"
+msgid_plural ""
+"At least 3 virtual desktops are required to display the Cube, but only %1 "
+"are present"
+msgstr[0] ""
+msgstr[1] ""
+
+#: package/contents/ui/PlaceholderView.qml:32
+#, kde-format
+msgctxt "@action:button"
+msgid "Add Virtual Desktop"
+msgstr ""

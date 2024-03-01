@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-24 01:42+0000\n"
+"POT-Creation-Date: 2024-03-01 00:39+0000\n"
 "PO-Revision-Date: 2023-12-24 18:33+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -23,7 +23,27 @@ msgstr ""
 msgid "KWin"
 msgstr "KWin"
 
-#: kcm/cubeeffectkcm.cpp:41 package/contents/ui/main.qml:39
+#: kcm/cubeeffectkcm.cpp:41 package/contents/ui/main.qml:42
 #, kde-format
 msgid "Toggle Cube"
 msgstr "Виртуальный куб "
+
+#: package/contents/ui/PlaceholderView.qml:28
+#, kde-format
+msgctxt "@info:placeholder"
+msgid ""
+"At least 3 virtual desktops are required to display the Cube, but only %1 is "
+"present"
+msgid_plural ""
+"At least 3 virtual desktops are required to display the Cube, but only %1 "
+"are present"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
+msgstr[3] ""
+
+#: package/contents/ui/PlaceholderView.qml:32
+#, kde-format
+msgctxt "@action:button"
+msgid "Add Virtual Desktop"
+msgstr ""

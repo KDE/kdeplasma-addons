@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2024-03-01 00:39+0000\n"
 "PO-Revision-Date: 2023-10-07 15:20+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -86,43 +86,43 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Forskoðunarfjöldi:"
 
-#: package/contents/ui/main.qml:117
+#: package/contents/ui/main.qml:121
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Opna litaglugga"
 
-#: package/contents/ui/main.qml:122
+#: package/contents/ui/main.qml:126
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Hreinsa feril"
 
-#: package/contents/ui/main.qml:130
+#: package/contents/ui/main.qml:134
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Skoða feril"
 
-#: package/contents/ui/main.qml:138
+#: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Afrita á klippispjald"
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:182
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Enginn litur"
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:182
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "Litaplokkun ekki í boði þegar myndsmíði (compositing) er óvirk"
 
-#: package/contents/ui/main.qml:179
+#: package/contents/ui/main.qml:183
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
@@ -131,25 +131,25 @@ msgstr ""
 "Myndsmíði (compositin) var gerð óvirk handvirkt eða forrit í keyrslu lokar á "
 "hana"
 
-#: package/contents/ui/main.qml:186
+#: package/contents/ui/main.qml:190
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Velja lit"
 
-#: package/contents/ui/main.qml:194
+#: package/contents/ui/main.qml:198
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "Grunnstilla myndsmíði (compositing)"
 
-#: package/contents/ui/main.qml:380
+#: package/contents/ui/main.qml:384
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Afritað!"
 
-#: package/contents/ui/main.qml:391
+#: package/contents/ui/main.qml:395
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
