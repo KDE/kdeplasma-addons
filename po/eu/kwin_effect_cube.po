@@ -1,16 +1,16 @@
 # Translation for kwin_effect_cube.po to Euskara/Basque (eu).
-# Copyright (C) 2023 This file is copyright:
+# Copyright (C) 2023-2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2024 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# SPDX-FileCopyrightText: 2023 Iñigo Salvador Azurmendi <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2023, 2024, Iñigo Salvador Azurmendi <xalba@ni.eus>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-01 00:39+0000\n"
-"PO-Revision-Date: 2023-10-24 20:56+0200\n"
+"PO-Revision-Date: 2024-03-01 22:27+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 24.02.0\n"
 
 #: kcm/cubeeffectkcm.cpp:35
 #, kde-format
@@ -40,10 +40,14 @@ msgid_plural ""
 "At least 3 virtual desktops are required to display the Cube, but only %1 "
 "are present"
 msgstr[0] ""
+"Kuboa azaltzeko, gutxienez alegiazko 3 mahaigain behar dira, baina %1 "
+"besterik ez dago"
 msgstr[1] ""
+"Kuboa azaltzeko, gutxienez alegiazko 3 mahaigain behar dira, baina %1 "
+"besterik ez daude"
 
 #: package/contents/ui/PlaceholderView.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Virtual Desktop"
-msgstr ""
+msgstr "Gehitu alegiazko mahaigaina"

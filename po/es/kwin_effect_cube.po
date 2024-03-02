@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Automatically generated, 2023.
 #
-# SPDX-FileCopyrightText: 2023 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2023, 2024 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kwin_effect_cube\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-01 00:39+0000\n"
-"PO-Revision-Date: 2023-10-24 12:19+0200\n"
+"PO-Revision-Date: 2024-03-01 21:16+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.2\n"
+"X-Generator: Lokalize 23.08.4\n"
 
 #: kcm/cubeeffectkcm.cpp:35
 #, kde-format
@@ -39,10 +39,14 @@ msgid_plural ""
 "At least 3 virtual desktops are required to display the Cube, but only %1 "
 "are present"
 msgstr[0] ""
+"Hacen falta al menos 3 escritorios virtuales para mostrar el cubo, pero solo "
+"hay %1 presente"
 msgstr[1] ""
+"Hacen falta al menos 3 escritorios virtuales para mostrar el cubo, pero solo "
+"hay %1 presentes"
 
 #: package/contents/ui/PlaceholderView.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Virtual Desktop"
-msgstr ""
+msgstr "Añadir escritorio virtual"
