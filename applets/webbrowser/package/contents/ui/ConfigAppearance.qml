@@ -18,6 +18,8 @@ import org.kde.plasma.core as PlasmaCore
 KCM.SimpleKCM {
     property string cfg_icon: plasmoid.configuration.icon
     property alias cfg_useFavIcon: useFavIcon.checked
+    property alias cfg_enableNavigationBar: enableNavigationBar.checked
+
 
     Kirigami.FormLayout {
 
@@ -104,6 +106,20 @@ KCM.SimpleKCM {
                         onClicked: cfg_icon = ""
                     }
                 }
+            }
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        QQC2.CheckBox {
+            id: enableNavigationBar
+            text: i18nc("@option:check", "Display Navigation Bar")
+            checked: enableNavigationBar.checked
+
+            onCheckedChanged: {
+                cfg_enableNavigationBar = enableNavigationBar.checked
             }
         }
     }

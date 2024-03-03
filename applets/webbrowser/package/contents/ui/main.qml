@@ -57,6 +57,7 @@ PlasmoidItem {
         Layout.minimumHeight: root.switchHeight
 
         RowLayout{
+            visible: plasmoid.configuration.enableNavigationBar
             Layout.fillWidth: true
             PlasmaComponents3.Button {
                 icon.name: "go-previous"
