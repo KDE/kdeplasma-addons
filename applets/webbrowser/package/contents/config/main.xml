@@ -6,6 +6,12 @@
   <kcfgfile name=""/>
 
   <group name="General">
+    <entry name="useDefaultUrl" type="Bool">
+      <default>false</default>
+    </entry>
+    <entry name="defaultUrl" type="String">
+        <default>https://www.kde.org/</default>
+    </entry>
     <entry name="url" type="String">
         <default>https://www.kde.org/</default>
     </entry>

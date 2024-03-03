@@ -73,6 +73,19 @@ PlasmoidItem {
                 display: PlasmaComponents3.AbstractButton.IconOnly
                 text: i18nc("@action:button", "Go Forward")
             }
+            PlasmaComponents3.Button {
+                id: goHomeButton
+                icon.name: "go-home-symbolic"
+                onClicked: webview.url = plasmoid.configuration.defaultUrl
+                display: PlasmaComponents3.AbstractButton.IconOnly
+                visible: plasmoid.configuration.useDefaultUrl
+                text: i18nc("@action:button", "Go Home")
+                PlasmaComponents3.ToolTip {
+                    text: goHomeButton.text
+                }
+                Accessible.name: goHomeButton.text
+                Accessible.description: i18n("Open Default URL")
+            }
             PlasmaComponents3.TextField {
                 Layout.fillWidth: true
                 onAccepted: {
@@ -192,7 +205,7 @@ PlasmoidItem {
                 id: webview
                 anchors.fill: parent
                 onUrlChanged: plasmoid.configuration.url = url;
-                Component.onCompleted: url = plasmoid.configuration.url;
+                Component.onCompleted: url = plasmoid.configuration.useDefaultUrl ? plasmoid.configuration.defaultUrl : plasmoid.configuration.url;
 
                 readonly property bool useMinViewWidth : plasmoid.configuration.useMinViewWidth
 
