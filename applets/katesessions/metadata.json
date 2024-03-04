@@ -132,7 +132,8 @@
         "Name[vi]": "Các phiên Kate",
         "Name[x-test]": "xxKate Sessionsxx",
         "Name[zh_CN]": "Kate 会话",
-        "Name[zh_TW]": "Kate 工作階段"
+        "Name[zh_TW]": "Kate 工作階段",
+        "Website": "https://kde.org/plasma-desktop"
     },
     "X-Plasma-API-Minimum-Version": "6.0",
     "X-Plasma-NotificationAreaCategory": "ApplicationStatus"
