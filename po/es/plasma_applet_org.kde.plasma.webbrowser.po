@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-03-05 00:38+0000\n"
 "PO-Revision-Date: 2023-06-17 01:22+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -31,25 +31,25 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Aspecto"
 
-#: package/contents/ui/ConfigAppearance.qml:31
+#: package/contents/ui/ConfigAppearance.qml:33
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "Icono:"
 
-#: package/contents/ui/ConfigAppearance.qml:32
+#: package/contents/ui/ConfigAppearance.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "Icono del sitio web"
 
-#: package/contents/ui/ConfigAppearance.qml:55
+#: package/contents/ui/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "Cambiar icono del navegador web"
 
-#: package/contents/ui/ConfigAppearance.qml:56
+#: package/contents/ui/ConfigAppearance.qml:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -59,29 +59,35 @@ msgstr ""
 "El icono actual es %1. Pulse para abrir el menú para cambiar el icono actual "
 "o restaurar el icono predeterminado."
 
-#: package/contents/ui/ConfigAppearance.qml:60
+#: package/contents/ui/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "El nombre del icono es «%1»"
 
-#: package/contents/ui/ConfigAppearance.qml:95
+#: package/contents/ui/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "Escoger..."
 
-#: package/contents/ui/ConfigAppearance.qml:97
+#: package/contents/ui/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "Escoger un icono para el navegador web"
 
-#: package/contents/ui/ConfigAppearance.qml:101
+#: package/contents/ui/ConfigAppearance.qml:103
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "Restaurar el icono predeterminado"
+
+#: package/contents/ui/ConfigAppearance.qml:118
+#, kde-format
+msgctxt "@option:check"
+msgid "Display Navigation Bar"
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:18
 #, kde-format
@@ -101,55 +107,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Escalar automáticamente si el ancho es inferior"
 
-#: package/contents/ui/main.qml:66
+#: package/contents/ui/main.qml:67
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Retroceder"
 
-#: package/contents/ui/main.qml:73
+#: package/contents/ui/main.qml:74
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Avanzar"
 
-#: package/contents/ui/main.qml:92
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Escriba una URL"
 
-#: package/contents/ui/main.qml:128
+#: package/contents/ui/main.qml:129
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Detener la carga de esta página"
 
-#: package/contents/ui/main.qml:128
+#: package/contents/ui/main.qml:129
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Volver a cargar esta paǵina"
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:179
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Abrir enlace en el navegador"
 
-#: package/contents/ui/main.qml:184
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copiar dirección del enlace"
 
-#: package/contents/ui/main.qml:246
+#: package/contents/ui/main.qml:247
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Ventana emergente bloqueada"
 
-#: package/contents/ui/main.qml:247
+#: package/contents/ui/main.qml:248
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

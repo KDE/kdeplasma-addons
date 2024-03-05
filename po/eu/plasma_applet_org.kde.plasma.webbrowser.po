@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2024-03-05 00:38+0000\n"
 "PO-Revision-Date: 2023-07-16 10:18+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -32,25 +32,25 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Itxura"
 
-#: package/contents/ui/ConfigAppearance.qml:31
+#: package/contents/ui/ConfigAppearance.qml:33
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "Ikonoa:"
 
-#: package/contents/ui/ConfigAppearance.qml:32
+#: package/contents/ui/ConfigAppearance.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "Webgunearen «favicon»"
 
-#: package/contents/ui/ConfigAppearance.qml:55
+#: package/contents/ui/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "Aldatu web arakatzailearen ikonoa"
 
-#: package/contents/ui/ConfigAppearance.qml:56
+#: package/contents/ui/ConfigAppearance.qml:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -60,29 +60,35 @@ msgstr ""
 "Uneko ikonoa %1 da. Egin klik, uneko ikonoa aldatzeko edo lehenetsitako "
 "ikonora berrezartzeko menua irekitzeko."
 
-#: package/contents/ui/ConfigAppearance.qml:60
+#: package/contents/ui/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "Ikonoaren izena \"%1\" da"
 
-#: package/contents/ui/ConfigAppearance.qml:95
+#: package/contents/ui/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "Hautatu…"
 
-#: package/contents/ui/ConfigAppearance.qml:97
+#: package/contents/ui/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "Hautatu web arakatzailerako ikono bat"
 
-#: package/contents/ui/ConfigAppearance.qml:101
+#: package/contents/ui/ConfigAppearance.qml:103
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "Berrezarri lehenetsitako ikonora"
+
+#: package/contents/ui/ConfigAppearance.qml:118
+#, kde-format
+msgctxt "@option:check"
+msgid "Display Navigation Bar"
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:18
 #, kde-format
@@ -102,55 +108,55 @@ msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Eskalatze automatikoa zabalera azpitik badago"
 
-#: package/contents/ui/main.qml:66
+#: package/contents/ui/main.qml:67
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Joan atzera"
 
-#: package/contents/ui/main.qml:73
+#: package/contents/ui/main.qml:74
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Joan aurrera"
 
-#: package/contents/ui/main.qml:92
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Tekleatu URL bat"
 
-#: package/contents/ui/main.qml:128
+#: package/contents/ui/main.qml:129
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Gelditu orri hau zamatzen"
 
-#: package/contents/ui/main.qml:128
+#: package/contents/ui/main.qml:129
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Birzamatu orri hau"
 
-#: package/contents/ui/main.qml:178
+#: package/contents/ui/main.qml:179
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Ireki esteka arakatzailean"
 
-#: package/contents/ui/main.qml:184
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopiatu estekaren helbidea"
 
-#: package/contents/ui/main.qml:246
+#: package/contents/ui/main.qml:247
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Gainerakorra oztopatuta"
 
-#: package/contents/ui/main.qml:247
+#: package/contents/ui/main.qml:248
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"
