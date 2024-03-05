@@ -29,7 +29,7 @@ Item {
 
     readonly property real w1: (main.height-5*Kirigami.Units.smallSpacing)*dots/4
 
-    Layout.minimumWidth: w1 < 20 ? 20 : w1
+    Layout.minimumWidth: w1 < 40 ? (main.height*dots/4) : w1
     Layout.maximumWidth: Infinity
     Layout.preferredWidth: Layout.minimumWidth
 
