@@ -60,14 +60,14 @@ PlasmoidItem {
             visible: plasmoid.configuration.enableNavigationBar
             Layout.fillWidth: true
             PlasmaComponents3.Button {
-                icon.name: "go-previous"
+                icon.name: "go-previous-symbolic"
                 onClicked: webview.goBack()
                 enabled: webview.canGoBack
                 display: PlasmaComponents3.AbstractButton.IconOnly
                 text: i18nc("@action:button", "Go Back")
             }
             PlasmaComponents3.Button {
-                icon.name: "go-next"
+                icon.name: "go-next-symbolic"
                 onClicked: webview.goForward()
                 enabled: webview.canGoForward
                 display: PlasmaComponents3.AbstractButton.IconOnly
@@ -125,7 +125,7 @@ PlasmoidItem {
 
             PlasmaComponents3.Button {
                 display: PlasmaComponents3.AbstractButton.IconOnly
-                icon.name: webview.loading ? "process-stop" : "view-refresh"
+                icon.name: webview.loading ? "process-stop-symbolic" : "view-refresh-symbolic"
                 text: webview.loading ? i18nc("@action:button", "Stop Loading This Page") : i18nc("@action:button", "Reload This Page")
                 onClicked: webview.loading ? webview.stop() : webview.reload()
             }
@@ -177,13 +177,13 @@ PlasmoidItem {
 
                 PlasmaExtras.MenuItem {
                     text: i18nc("@action:inmenu", "Open Link in Browser")
-                    icon:  "internet-web-browser"
+                    icon:  "internet-web-browser-symbolic"
                     onClicked: Qt.openUrlExternally(linkContextMenu.link)
                 }
 
                 PlasmaExtras.MenuItem {
                     text: i18nc("@action:inmenu", "Copy Link Address")
-                    icon: "edit-copy"
+                    icon: "edit-copy-symbolic"
                     onClicked: webview.triggerWebAction(WebEngineView.CopyLinkToClipboard)
                 }
             }
@@ -244,7 +244,7 @@ PlasmoidItem {
                     if (request.userInitiated) {
                         Qt.openUrlExternally(url);
                     } else {
-                        infoButton.show(i18nc("An unwanted popup was blocked", "Popup blocked"), "document-close",
+                        infoButton.show(i18nc("An unwanted popup was blocked", "Popup blocked"), "document-close-symbolic",
                                         i18n("Click here to open the following blocked popup:\n%1", url), function () {
                             Qt.openUrlExternally(url);
                             infoButton.dismiss();
