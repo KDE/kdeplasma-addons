@@ -23,7 +23,7 @@ Item {
     Layout.maximumWidth: vertical ? Infinity : Layout.minimumWidth
     Layout.preferredWidth: vertical ? undefined : Layout.minimumWidth
 
-    Layout.minimumHeight: vertical ? sizehelper.paintedHeight + (Kirigami.Units.smallSpacing * 2) : 0
+    Layout.minimumHeight: vertical ? sizehelper.paintedHeight * 2 + (Kirigami.Units.gridUnit * 4) : 0
     Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
     Layout.preferredHeight: vertical ? Layout.minimumHeight : Kirigami.Units.iconSizes.sizeForLabels * 2
 
@@ -269,7 +269,7 @@ Item {
         fontSizeMode: Text.Fit
         text: timeString()
 
-        wrapMode: Text.NoWrap
+        wrapMode: vertical ? Text.Wrap : Text.NoWrap
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         height: 0
@@ -304,7 +304,7 @@ Item {
         text: timeLabel.text
         fontSizeMode: vertical ? Text.HorizontalFit : Text.VerticalFit
 
-        wrapMode: Text.NoWrap
+        wrapMode: vertical ? Text.Wrap : Text.NoWrap
         visible: false
         anchors {
             fill: parent
