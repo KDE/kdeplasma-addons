@@ -9,6 +9,7 @@
 import QtQuick
 import QtWebEngine
 import QtQuick.Layouts 1.1
+import QtQuick.Controls as QQC2
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kirigami 2.20 as Kirigami
@@ -87,6 +88,7 @@ PlasmoidItem {
                 Accessible.description: i18n("Open Default URL")
             }
             PlasmaComponents3.TextField {
+                visible: plasmoid.configuration.editableUrlBar
                 Layout.fillWidth: true
                 onAccepted: {
                     var url = text;
@@ -104,6 +106,15 @@ PlasmoidItem {
                 text: webview.url
 
                 Accessible.description: text.length > 0 ? text : i18nc("@info", "Type a URL")
+            }
+
+            QQC2.Label {
+                visible: !plasmoid.configuration.editableUrlBar
+                Layout.fillWidth: true
+                elide: Text.ElideRight
+                maximumLineCount: 1
+
+                text: webview.url
             }
 
             // this shows page-related information such as blocked popups

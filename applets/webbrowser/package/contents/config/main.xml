@@ -39,5 +39,8 @@
     <entry name="enableNavigationBar" type="Bool">
       <default>true</default>
     </entry>
+    <entry name="editableUrlBar" type="Bool">
+      <default>true</default>
+    </entry>
   </group>
 </kcfg>

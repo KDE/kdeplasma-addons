@@ -19,7 +19,7 @@ KCM.SimpleKCM {
     property string cfg_icon: plasmoid.configuration.icon
     property alias cfg_useFavIcon: useFavIcon.checked
     property alias cfg_enableNavigationBar: enableNavigationBar.checked
-
+    property alias cfg_editableUrlBar: editableUrlBar.checked
 
     Kirigami.FormLayout {
 
@@ -122,5 +122,15 @@ KCM.SimpleKCM {
                 cfg_enableNavigationBar = enableNavigationBar.checked
             }
         }
+        QQC2.CheckBox {
+            id: editableUrlBar
+            text: i18nc("@option:check", "Make URL bar editable")
+            checked: cfg_editableUrlBar.checked
+
+            onToggled: {
+                cfg_editableUrlBar = editableUrlBar.checked
+            }
+        }
+
     }
 }
