@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-05 00:38+0000\n"
-"PO-Revision-Date: 2023-06-17 05:38+0200\n"
+"PO-Revision-Date: 2024-03-05 04:46+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.3.1\n"
+"X-Generator: Poedit 3.3.2\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -86,7 +86,7 @@ msgstr "ნაგულისხმებ ხატულაზე დაბრ�
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
-msgstr ""
+msgstr "ნავიგაციის პანელის ჩვენება"
 
 #: package/contents/ui/ConfigGeneral.qml:18
 #, kde-format
