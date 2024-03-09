@@ -52,7 +52,7 @@ void ConverterRunner::init()
 
     m_currencyUpdateTimer.setInterval(24h);
     connect(&m_currencyUpdateTimer, &QTimer::timeout, this, &ConverterRunner::updateCompatibleUnits);
-    m_currencyUpdateTimer.start();
+    QMetaObject::invokeMethod(&m_currencyUpdateTimer, qOverload<>(&QTimer::start));
 }
 
 ConverterRunner::~ConverterRunner() = default;
