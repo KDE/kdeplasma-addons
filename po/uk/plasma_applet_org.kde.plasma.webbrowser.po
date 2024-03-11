@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-05 00:38+0000\n"
+"POT-Creation-Date: 2024-03-11 00:38+0000\n"
 "PO-Revision-Date: 2024-03-05 09:45+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -88,19 +88,45 @@ msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "Показувати панель навігації"
 
-#: package/contents/ui/ConfigGeneral.qml:18
+#: package/contents/ui/ConfigGeneral.qml:21
+#, kde-format
+msgctxt "@option:radio"
+msgid "Load last-visited page"
+msgstr ""
+
+#: package/contents/ui/ConfigGeneral.qml:25
+#, kde-format
+msgctxt "@title:group"
+msgid "On startup:"
+msgstr ""
+
+#: package/contents/ui/ConfigGeneral.qml:32
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Reload This Page"
+msgctxt "@option:radio"
+msgid "Always load this page:"
+msgstr "Перезавантажити цю сторінку"
+
+#: package/contents/ui/ConfigGeneral.qml:64 package/contents/ui/main.qml:106
+#, kde-format
+msgctxt "@info"
+msgid "Type a URL"
+msgstr "Введіть адресу"
+
+#: package/contents/ui/ConfigGeneral.qml:75
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "Масштабування вмісту:"
 
-#: package/contents/ui/ConfigGeneral.qml:22
+#: package/contents/ui/ConfigGeneral.qml:79
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "Фіксований масштаб:"
 
-#: package/contents/ui/ConfigGeneral.qml:56
+#: package/contents/ui/ConfigGeneral.qml:113
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
@@ -118,43 +144,50 @@ msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Вперед"
 
-#: package/contents/ui/main.qml:93
+#: package/contents/ui/main.qml:82
 #, kde-format
-msgctxt "@info"
-msgid "Type a URL"
+msgctxt "@action:button"
+msgid "Go Home"
+msgstr ""
+
+#: package/contents/ui/main.qml:87
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid "Type a URL"
+msgid "Open Default URL"
 msgstr "Введіть адресу"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Зупинити завантаження цієї сторінки"
 
-#: package/contents/ui/main.qml:129
+#: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Перезавантажити цю сторінку"
 
-#: package/contents/ui/main.qml:179
+#: package/contents/ui/main.qml:192
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Відкрити посилання у Інтернет-навігаторі"
 
-#: package/contents/ui/main.qml:185
+#: package/contents/ui/main.qml:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Скопіювати адресу посилання"
 
-#: package/contents/ui/main.qml:247
+#: package/contents/ui/main.qml:260
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Заблоковано контекстне вікно"
 
-#: package/contents/ui/main.qml:248
+#: package/contents/ui/main.qml:261
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"
