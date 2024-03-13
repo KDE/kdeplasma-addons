@@ -103,6 +103,13 @@ if(ICU_FOUND)
     set(HAVE_ICU TRUE)
 endif()
 
+find_package(Qt6Quick3D CONFIG)
+set_package_properties(Qt6Quick3D PROPERTIES
+    DESCRIPTION "A high-level API for creating 3D content and 3D user interfaces based on Qt Quick"
+    PURPOSE "Required for desktop cube"
+    TYPE RUNTIME
+)
+
 add_definitions(
     -DQT_DEPRECATED_WARNINGS
     -DQT_NO_URL_CAST_FROM_STRING
