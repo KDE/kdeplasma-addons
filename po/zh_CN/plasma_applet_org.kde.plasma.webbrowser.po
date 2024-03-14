@@ -3,7 +3,7 @@ msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-11 00:38+0000\n"
-"PO-Revision-Date: 2024-03-09 04:45\n"
+"PO-Revision-Date: 2024-03-13 20:04\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
 "Language: zh_CN\n"
@@ -90,21 +90,19 @@ msgstr "显示导航栏"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
-msgstr ""
+msgstr "加载最后访问页面"
 
 #: package/contents/ui/ConfigGeneral.qml:25
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
-msgstr ""
+msgstr "启动时："
 
 #: package/contents/ui/ConfigGeneral.qml:32
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Reload This Page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
-msgstr "重新加载此页面"
+msgstr "总是加载此页面："
 
 #: package/contents/ui/ConfigGeneral.qml:64 package/contents/ui/main.qml:106
 #, kde-format
@@ -146,14 +144,12 @@ msgstr "前进"
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
-msgstr ""
+msgstr "转到主页"
 
 #: package/contents/ui/main.qml:87
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Type a URL"
+#, kde-format
 msgid "Open Default URL"
-msgstr "请输入 URL"
+msgstr "打开默认 URL"
 
 #: package/contents/ui/main.qml:142
 #, kde-format
