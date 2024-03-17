@@ -1,0 +1,10 @@
+[Domain]
+Name=Kameleon
+Icon=color
+
+[org.kde.kameleonhelper.writecolor]
+Name=Write color
+Description=Allow writing accent color to device LEDs
+Policy=yes
+PolicyInactive=yes
+Persistence=session
