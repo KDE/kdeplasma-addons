@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-11 00:38+0000\n"
-"PO-Revision-Date: 2024-03-09 09:22+0100\n"
+"PO-Revision-Date: 2024-03-17 05:34+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -92,21 +92,19 @@ msgstr "Montri Navigadobreton"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
-msgstr ""
+msgstr "Ŝargi laste vizititan paĝon"
 
 #: package/contents/ui/ConfigGeneral.qml:25
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
-msgstr ""
+msgstr "Je startigo:"
 
 #: package/contents/ui/ConfigGeneral.qml:32
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Reload This Page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
-msgstr "Reŝargi ĉi tiun paĝon"
+msgstr "Ĉiam reŝargi ĉi tiun paĝon:"
 
 #: package/contents/ui/ConfigGeneral.qml:64 package/contents/ui/main.qml:106
 #, kde-format
@@ -148,14 +146,12 @@ msgstr "Iri Antaŭen"
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
-msgstr ""
+msgstr "Iri Hejmen"
 
 #: package/contents/ui/main.qml:87
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Type a URL"
+#, kde-format
 msgid "Open Default URL"
-msgstr "Tajpu URL"
+msgstr "Malfermi Defaŭltan URL"
 
 #: package/contents/ui/main.qml:142
 #, kde-format
