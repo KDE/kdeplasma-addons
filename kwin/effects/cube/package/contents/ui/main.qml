@@ -14,10 +14,7 @@ KWinComponents.SceneEffect {
     property bool activated: false
     readonly property int animationDuration: Kirigami.Units.longDuration
 
-    delegate: Loader {
-        focus: true
-        source: KWinComponents.Workspace.desktops.length < 3 ? "PlaceholderView.qml" : "ScreenView.qml"
-    }
+    delegate: KWinComponents.Workspace.desktops.length < 3 ? Qt.createComponent("PlaceholderView.qml") : Qt.createComponent("ScreenView.qml")
 
     Instantiator {
         model: effect.configuration.BorderActivate
