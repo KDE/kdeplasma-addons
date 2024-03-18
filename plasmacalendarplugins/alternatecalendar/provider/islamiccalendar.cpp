@@ -74,7 +74,7 @@ QString IslamicCalendarProviderPrivate::formattedDateString(const icu::UnicodeSt
     formatter.setCalendar(*m_calendar);
     formatter.format(m_calendar->getTime(errorCode), dateString);
 
-    return QString::fromUtf16(dateString.getBuffer(), dateString.length());
+    return QStringView(dateString.getBuffer(), dateString.length()).toString();
 }
 
 QString IslamicCalendarProviderPrivate::formattedDateStringInNativeLanguage(const icu::UnicodeString &str) const
@@ -85,7 +85,7 @@ QString IslamicCalendarProviderPrivate::formattedDateStringInNativeLanguage(cons
     formatter.setCalendar(*m_calendar);
     formatter.format(m_calendar->getTime(errorCode), dateString);
 
-    return QString::fromUtf16(dateString.getBuffer(), dateString.length());
+    return QStringView(dateString.getBuffer(), dateString.length()).toString();
 }
 
 QCalendar::YearMonthDay IslamicCalendarProviderPrivate::fromGregorian(const QDate &_date)

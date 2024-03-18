@@ -49,7 +49,7 @@ QString HebrewCalendarProviderPrivate::formattedDateString(const icu::UnicodeStr
     formatter.setCalendar(*m_calendar);
     formatter.format(m_calendar->getTime(errorCode), dateString);
 
-    return QString::fromUtf16(dateString.getBuffer(), dateString.length());
+    return QStringView(dateString.getBuffer(), dateString.length()).toString();
 }
 
 QString HebrewCalendarProviderPrivate::formattedDateStringInNativeLanguage(const icu::UnicodeString &str) const
@@ -60,7 +60,7 @@ QString HebrewCalendarProviderPrivate::formattedDateStringInNativeLanguage(const
     formatter.setCalendar(*m_calendar);
     formatter.format(m_calendar->getTime(errorCode), dateString);
 
-    return QString::fromUtf16(dateString.getBuffer(), dateString.length());
+    return QStringView(dateString.getBuffer(), dateString.length()).toString();
 }
 
 QCalendar::YearMonthDay HebrewCalendarProviderPrivate::fromGregorian(const QDate &_date)

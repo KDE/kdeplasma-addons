@@ -44,7 +44,7 @@ QString IndianCalendarProviderPrivate::formattedDateStringInNativeLanguage(const
     formatter.setCalendar(*m_calendar);
     formatter.format(m_calendar->getTime(errorCode), dateString);
 
-    return QString::fromUtf16(dateString.getBuffer(), dateString.length());
+    return QStringView(dateString.getBuffer(), dateString.length()).toString();
 }
 
 QCalendar::YearMonthDay IndianCalendarProviderPrivate::fromGregorian(const QDate &_date)
