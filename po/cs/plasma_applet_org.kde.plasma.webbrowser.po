@@ -148,11 +148,9 @@ msgid "Go Home"
 msgstr ""
 
 #: package/contents/ui/main.qml:87
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Type a URL"
+#, kde-format
 msgid "Open Default URL"
-msgstr "Napište URL"
+msgstr ""
 
 #: package/contents/ui/main.qml:142
 #, kde-format
