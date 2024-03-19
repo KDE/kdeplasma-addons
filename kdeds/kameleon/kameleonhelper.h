@@ -10,6 +10,9 @@
 
 #include <KAuth/ActionReply>
 
+#define LED_SYSFS_PATH "/sys/class/leds/"
+#define LED_RGB_FILE "/multi_intensity"
+
 class KameleonHelper : public QObject
 {
     Q_OBJECT

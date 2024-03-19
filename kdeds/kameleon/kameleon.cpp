@@ -24,7 +24,8 @@ K_PLUGIN_CLASS_WITH_JSON(Kameleon, "kameleon.json")
 
 Kameleon::Kameleon(QObject *parent, const QList<QVariant> &)
     : KDEDModule(parent)
-    , m_configWatcher(KConfigWatcher::create(KSharedConfig::openConfig("kdeglobals")))
+    , m_config(KSharedConfig::openConfig("kdeglobals"))
+    , m_configWatcher(KConfigWatcher::create(m_config))
 {
     findRgbLedDevices();
     if (!isSupported()) {
@@ -52,10 +53,9 @@ void Kameleon::findRgbLedDevices()
     });
 
     for (const QString &ledDevice : ledDevices) {
-        QFile rgbFile(LED_SYSFS_PATH + ledDevice + QLatin1String("/") + LED_RGB_FILE);
-        if (QFileInfo(rgbFile).exists()) {
+        if (QFileInfo(QFile(LED_SYSFS_PATH + ledDevice + LED_RGB_FILE)).exists()) {
             qCInfo(KAMELEON) << "found RGB LED device" << ledDevice;
-            m_rgbLedDevices.append(rgbFile.fileName());
+            m_rgbLedDevices.append(ledDevice);
         }
     }
 }
@@ -75,9 +75,7 @@ void Kameleon::setEnabled(bool enabled)
     if (enabled != m_enabled) {
         qCInfo(KAMELEON) << "enabled changed" << enabled;
         m_enabled = enabled;
-
-        KSharedConfig::Ptr config = KSharedConfig::openConfig("kdeglobals");
-        config->group("General").writeEntry<bool>("AccentColoredDeviceLeds", enabled);
+        m_config->group("General").writeEntry<bool>("AccentColoredDeviceLeds", enabled);
 
         if (enabled) {
             applyColor(m_accentColor);
@@ -89,12 +87,10 @@ void Kameleon::setEnabled(bool enabled)
 
 void Kameleon::loadConfig()
 {
-    KSharedConfig::Ptr config = KSharedConfig::openConfig("kdeglobals");
+    m_enabled = m_config->group("General").readEntry<bool>("AccentColoredDeviceLeds", true);
 
-    m_enabled = config->group("General").readEntry<bool>("AccentColoredDeviceLeds", true);
-
-    QColor customAccentColor = config->group("General").readEntry<QColor>("AccentColor", QColor::Invalid);
-    QColor schemeAccentColor = config->group("Colors::View").readEntry<QColor>("ForegroundActive", QColor::Invalid);
+    QColor customAccentColor = m_config->group("General").readEntry<QColor>("AccentColor", QColor::Invalid);
+    QColor schemeAccentColor = m_config->group("Colors::View").readEntry<QColor>("ForegroundActive", QColor::Invalid);
     QColor activeAccentColor = customAccentColor.isValid() ? customAccentColor
         : schemeAccentColor.isValid()                      ? schemeAccentColor
                                                            : QColor(QColorConstants::White);
@@ -110,11 +106,9 @@ void Kameleon::loadConfig()
 
 void Kameleon::applyColor(QColor color)
 {
-    const QByteArray accentColorStr = QByteArray::number(color.red()) + " " + QByteArray::number(color.green()) + " " + QByteArray::number(color.blue());
-
     KAuth::Action action("org.kde.kameleonhelper.writecolor");
     action.setHelperId("org.kde.kameleonhelper");
-    action.addArgument("color", accentColorStr);
+    action.addArgument("color", color.name());
     action.addArgument("devices", m_rgbLedDevices);
     auto *job = action.execute();
 

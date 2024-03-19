@@ -12,7 +12,7 @@
 #include <qnamespace.h>
 
 #define LED_SYSFS_PATH "/sys/class/leds/"
-#define LED_RGB_FILE "multi_intensity"
+#define LED_RGB_FILE "/multi_intensity"
 
 class Kameleon : public KDEDModule
 {
@@ -40,6 +40,7 @@ private:
     bool m_enabled = true;
     QColor m_accentColor = QColor(QColorConstants::White);
 
+    KSharedConfig::Ptr m_config;
     KConfigWatcher::Ptr m_configWatcher;
     QStringList m_rgbLedDevices;
 
