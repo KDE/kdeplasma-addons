@@ -19,6 +19,7 @@
 #include <QColor>
 #include <QDir>
 #include <QFileInfo>
+#include <qcontainerfwd.h>
 
 K_PLUGIN_CLASS_WITH_JSON(Kameleon, "kameleon.json")
 
@@ -53,10 +54,29 @@ void Kameleon::findRgbLedDevices()
     });
 
     for (const QString &ledDevice : ledDevices) {
-        if (QFileInfo(QFile(LED_SYSFS_PATH + ledDevice + LED_RGB_FILE)).exists()) {
-            qCInfo(KAMELEON) << "found RGB LED device" << ledDevice;
-            m_rgbLedDevices.append(ledDevice);
+        QFile indexFile(LED_SYSFS_PATH + ledDevice + LED_INDEX_FILE);
+        QFile intensityFile(LED_SYSFS_PATH + ledDevice + LED_RGB_FILE);
+        if (!QFileInfo(indexFile).exists() || !QFileInfo(intensityFile).exists()) {
+            continue;
         }
+
+        // Get color index (order of red,green,blue) in format {"red", "green", "blue"}
+        if (!indexFile.open(QIODevice::ReadOnly)) {
+            qCWarning(KAMELEON) << "failed to open" << indexFile.fileName() << indexFile.error() << indexFile.errorString();
+            continue;
+        }
+        QTextStream stream(&indexFile);
+        QString str;
+        stream >> str;
+        indexFile.close();
+        QStringList colorIndex = str.split(" ");
+        if (!(colorIndex.length() == 3 && colorIndex.contains("red") && colorIndex.contains("green") && colorIndex.contains("blue"))) {
+            qCWarning(KAMELEON) << "invalid color index" << str << "for device" << ledDevice;
+            continue;
+        }
+
+        qCInfo(KAMELEON) << "found RGB LED device" << ledDevice;
+        m_rgbLedDevices.insert(ledDevice, colorIndex);
     }
 }
 
@@ -106,10 +126,22 @@ void Kameleon::loadConfig()
 
 void Kameleon::applyColor(QColor color)
 {
+    QMap<QString, QVariant> entries;
+    for (auto i = m_rgbLedDevices.cbegin(), end = m_rgbLedDevices.cend(); i != end; ++i) {
+        QString deviceName = i.key();
+        QStringList colorIndex = i.value();
+        QStringList colorBytesList = {"", "", ""};
+        colorBytesList[colorIndex.indexOf("red")] = QString::number(color.red());
+        colorBytesList[colorIndex.indexOf("green")] = QString::number(color.green());
+        colorBytesList[colorIndex.indexOf("blue")] = QString::number(color.blue());
+        QByteArray colorBytes = QByteArray::fromStdString(colorBytesList.join(" ").toStdString());
+        entries.insert(deviceName, colorBytes);
+    }
+
+    qCInfo(KAMELEON) << "writing color" << color.name() << "to LED devices";
     KAuth::Action action("org.kde.kameleonhelper.writecolor");
     action.setHelperId("org.kde.kameleonhelper");
-    action.addArgument("color", color.name());
-    action.addArgument("devices", m_rgbLedDevices);
+    action.addArgument("entries", entries);
     auto *job = action.execute();
 
     connect(job, &KAuth::ExecuteJob::result, this, [job] {
