@@ -8,47 +8,52 @@
 
 #include <KAuth/HelperSupport>
 
-#include <QColor>
 #include <QDebug>
 #include <QFile>
 #include <QFileInfo>
 
 KAuth::ActionReply KameleonHelper::writecolor(const QVariantMap &args)
 {
-    QColor color(args.value(QStringLiteral("color")).toString());
-    if (!color.isValid()) {
-        qCWarning(KAMELEONHELPER) << "invalid color" << args.value(QStringLiteral("color")).toString();
+    QStringList devices = args.value(QStringLiteral("devices")).toStringList();
+    QStringList colors = args.value(QStringLiteral("colors")).toStringList();
+    if (devices.length() != colors.length()) {
+        qCWarning(KAMELEONHELPER) << "lists of devices and colors do not match in length";
         return KAuth::ActionReply::HelperErrorReply();
     }
-    const QByteArray colorStr = QByteArray::number(color.red()) + " " + QByteArray::number(color.green()) + " " + QByteArray::number(color.blue());
+    for (int i = 0; i < devices.length(); ++i) {
+        QString device = devices.at(i);
+        if (device.contains(QLatin1String(".."))) {
+            qCWarning(KAMELEONHELPER) << "invalid character sequence '..' for device" << device;
+            return KAuth::ActionReply::HelperErrorReply();
+        }
 
-    QStringList devices = args.value(QStringLiteral("devices")).toStringList();
+        QByteArray color = colors.at(i).toUtf8();
+        if (!(color.length() >= QByteArray("0 0 0").length() && color.length() <= QByteArray("255 255 255").length())) {
+            qCWarning(KAMELEONHELPER) << "invalid RGB color" << color << "for device" << device;
+            return KAuth::ActionReply::HelperErrorReply();
+        }
 
-    qCInfo(KAMELEONHELPER) << "writing color" << colorStr << "to LED devices";
-
-    for (const QString &device : devices) {
         QFile file(LED_SYSFS_PATH + device + LED_RGB_FILE);
         if (!QFileInfo(file).exists()) {
             qCWarning(KAMELEONHELPER) << "writing to" << file.fileName() << "failed:"
                                       << "file does not exist";
-            continue;
+            return KAuth::ActionReply::HelperErrorReply();
         }
         if (!QFileInfo(file).isWritable()) {
             qCWarning(KAMELEONHELPER) << "writing to" << file.fileName() << "failed:"
                                       << "file is not writable";
-            continue;
+            return KAuth::ActionReply::HelperErrorReply();
         }
         if (!file.open(QIODevice::WriteOnly)) {
             qCWarning(KAMELEONHELPER) << "writing to" << file.fileName() << "failed:" << file.error() << file.errorString();
-            continue;
+            return KAuth::ActionReply::HelperErrorReply();
         }
-        const int bytesWritten = file.write(colorStr);
+        const int bytesWritten = file.write(color);
         if (bytesWritten == -1) {
             qCWarning(KAMELEONHELPER) << "writing to" << file.fileName() << "failed:" << file.error() << file.errorString();
-            continue;
-        } else {
-            qCInfo(KAMELEONHELPER) << "wrote color to" << file.fileName();
+            return KAuth::ActionReply::HelperErrorReply();
         }
+        qCDebug(KAMELEONHELPER) << "wrote" << color << "to" << device;
     }
 
     return KAuth::ActionReply::SuccessReply();
