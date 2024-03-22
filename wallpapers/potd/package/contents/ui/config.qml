@@ -9,7 +9,6 @@ import QtQuick.Controls 2.8 as QQC2
 import QtQuick.Layouts 1.15
 import QtQuick.Window 2.15
 
-import org.kde.kcmutils as KCM
 import org.kde.kquickcontrols 2.0 as KQC2
 import org.kde.kirigami 2.20 as Kirigami
 
@@ -57,7 +56,7 @@ Kirigami.FormLayout {
             }
         }
 
-        KCM.ContextualHelpButton {
+        Kirigami.ContextualHelpButton {
             anchors.verticalCenter: providerComboBox.verticalCenter
             visible: providerComboBox.model.isNSFW(providerComboBox.currentIndex)
             toolTipText: i18ndc("plasma_wallpaper_org.kde.potd", "@info:tooltip", "This wallpaper provider does not filter out images that may be sensitive or objectionable. Use caution if these images will be displayed in public.")

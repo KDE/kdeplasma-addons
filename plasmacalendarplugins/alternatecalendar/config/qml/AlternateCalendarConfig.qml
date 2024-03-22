@@ -45,7 +45,7 @@ KCM.SimpleKCM {
                 onActivated: configPage.configurationChanged();
             }
 
-            KCM.ContextualHelpButton {
+            Kirigami.ContextualHelpButton {
                 anchors.verticalCenter: calendarSystemComboBox.verticalCenter
                 visible: calendarSystemComboBox.currentValue === "Islamic"
                 toolTipText: i18ndc("plasma_calendar_alternatecalendar", "@info:tooltip", "This calendar is based on pure astronomical calculation. It doesn't consider any crescent visibility criteria.")
