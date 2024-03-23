@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-13 02:10+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2023-07-27 14:22+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: \n"
@@ -17,13 +17,13 @@ msgstr ""
 "X-Generator: Lokalize 23.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:43
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Доставчик:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -34,85 +34,85 @@ msgstr ""
 "чувствителни или неприемливи. Бъдете внимателни, ако тези изображения ще "
 "бъдат показвани публично."
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Актуализиране при използване на измервана мрежова връзка"
 
-#: package/contents/ui/config.qml:81
+#: package/contents/ui/config.qml:80
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Позициониране:"
 
-#: package/contents/ui/config.qml:84
+#: package/contents/ui/config.qml:83
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Мащабирано и изрязано"
 
-#: package/contents/ui/config.qml:88
+#: package/contents/ui/config.qml:87
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Мащабиран"
 
-#: package/contents/ui/config.qml:92
+#: package/contents/ui/config.qml:91
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Мащабирано, запазени пропорции"
 
-#: package/contents/ui/config.qml:96
+#: package/contents/ui/config.qml:95
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Центрирано"
 
-#: package/contents/ui/config.qml:100
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Плочки"
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:120
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Цвят на фона:"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Избиране на цвят на фона"
 
-#: package/contents/ui/config.qml:133
+#: package/contents/ui/config.qml:132
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Снимка на деня"
 
-#: package/contents/ui/config.qml:149
+#: package/contents/ui/config.qml:148
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Заглавие:"
 
-#: package/contents/ui/config.qml:164
+#: package/contents/ui/config.qml:163
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Автор:"
 
-#: package/contents/ui/config.qml:183
+#: package/contents/ui/config.qml:182
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Отваряне на съдържащата папка"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:186
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

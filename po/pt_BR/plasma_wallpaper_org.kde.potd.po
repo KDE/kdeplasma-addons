@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-13 02:10+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2023-09-18 11:47-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -19,13 +19,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:43
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Provedor:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -35,85 +35,85 @@ msgstr ""
 "Este provedor de papel de parede não filtra imagens que possam ser sensíveis "
 "ou censuráveis. Tenha cuidado se essas imagens forem exibidas em público."
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Atualizar ao usar uma conexão de rede limitada"
 
-#: package/contents/ui/config.qml:81
+#: package/contents/ui/config.qml:80
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Posicionamento:"
 
-#: package/contents/ui/config.qml:84
+#: package/contents/ui/config.qml:83
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Ajustado e cortado"
 
-#: package/contents/ui/config.qml:88
+#: package/contents/ui/config.qml:87
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Ajustado"
 
-#: package/contents/ui/config.qml:92
+#: package/contents/ui/config.qml:91
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Ajustado, manter proporções"
 
-#: package/contents/ui/config.qml:96
+#: package/contents/ui/config.qml:95
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Centralizado"
 
-#: package/contents/ui/config.qml:100
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Lado a lado"
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:120
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Cor de fundo:"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Selecionar cor de fundo"
 
-#: package/contents/ui/config.qml:133
+#: package/contents/ui/config.qml:132
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Imagem de hoje:"
 
-#: package/contents/ui/config.qml:149
+#: package/contents/ui/config.qml:148
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Título:"
 
-#: package/contents/ui/config.qml:164
+#: package/contents/ui/config.qml:163
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Autor:"
 
-#: package/contents/ui/config.qml:183
+#: package/contents/ui/config.qml:182
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Abrir pasta que contém"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:186
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

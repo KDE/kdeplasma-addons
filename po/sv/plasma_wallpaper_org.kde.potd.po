@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-13 02:10+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2022-09-25 10:07+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.08.1\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:43
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Leverantör:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -31,85 +31,85 @@ msgid ""
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Uppdatera när uppmätt nätverksanslutning används"
 
-#: package/contents/ui/config.qml:81
+#: package/contents/ui/config.qml:80
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Positionering:"
 
-#: package/contents/ui/config.qml:84
+#: package/contents/ui/config.qml:83
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Skalat och beskuret"
 
-#: package/contents/ui/config.qml:88
+#: package/contents/ui/config.qml:87
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Skalat"
 
-#: package/contents/ui/config.qml:92
+#: package/contents/ui/config.qml:91
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Skalat, behåll proportion"
 
-#: package/contents/ui/config.qml:96
+#: package/contents/ui/config.qml:95
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Centrerat"
 
-#: package/contents/ui/config.qml:100
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Sida vid sida"
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:120
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Bakgrundsfärg:"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Välj bakgrundsfärg"
 
-#: package/contents/ui/config.qml:133
+#: package/contents/ui/config.qml:132
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Dagens bild:"
 
-#: package/contents/ui/config.qml:149
+#: package/contents/ui/config.qml:148
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Titel:"
 
-#: package/contents/ui/config.qml:164
+#: package/contents/ui/config.qml:163
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Upphovsman:"
 
-#: package/contents/ui/config.qml:183
+#: package/contents/ui/config.qml:182
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Öppna katalog med innehåll"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:186
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

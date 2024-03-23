@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-01 00:39+0000\n"
-"PO-Revision-Date: 2024-03-01 11:07+0200\n"
+"PO-Revision-Date: 2024-03-22 08:19+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: kcm/cubeeffectkcm.cpp:35
 #, kde-format
@@ -26,7 +26,7 @@ msgstr "KWin"
 #: kcm/cubeeffectkcm.cpp:41 package/contents/ui/main.qml:42
 #, kde-format
 msgid "Toggle Cube"
-msgstr "הפעלה/כיבוי קוביה"
+msgstr "הפעלת/כיבוי קובייה"
 
 #: package/contents/ui/PlaceholderView.qml:28
 #, kde-format
@@ -38,13 +38,13 @@ msgid_plural ""
 "At least 3 virtual desktops are required to display the Cube, but only %1 "
 "are present"
 msgstr[0] ""
-"צריך לפחות 3 שולחנות עבודה וירטואליים כדי להציג את הקוביה אבל יש רק אחד"
+"צריך לפחות 3 שולחנות עבודה וירטואליים כדי להציג את הקובייה אבל יש רק אחד"
 msgstr[1] ""
-"צריך לפחות 3 שולחנות עבודה וירטואליים כדי להציג את הקוביה אבל יש רק אחד"
+"צריך לפחות 3 שולחנות עבודה וירטואליים כדי להציג את הקובייה אבל יש רק אחד"
 msgstr[2] ""
-"צריך לפחות 3 שולחנות עבודה וירטואליים כדי להציג את הקוביה אבל יש רק %1"
+"צריך לפחות 3 שולחנות עבודה וירטואליים כדי להציג את הקובייה אבל יש רק %1"
 msgstr[3] ""
-"צריך לפחות 3 שולחנות עבודה וירטואליים כדי להציג את הקוביה אבל יש רק %1"
+"צריך לפחות 3 שולחנות עבודה וירטואליים כדי להציג את הקובייה אבל יש רק %1"
 
 #: package/contents/ui/PlaceholderView.qml:32
 #, kde-format

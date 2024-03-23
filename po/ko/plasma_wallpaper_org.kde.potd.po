@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-13 02:10+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2023-07-25 00:55+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:43
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "공급자:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -33,85 +33,85 @@ msgstr ""
 "이 공급자는 민감한 그림을 필터하지 않습니다. 공개 장소에서 사용해야 할 때 주"
 "의하십시오."
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "종량제 연결을 사용할 때 업데이트"
 
-#: package/contents/ui/config.qml:81
+#: package/contents/ui/config.qml:80
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "위치:"
 
-#: package/contents/ui/config.qml:84
+#: package/contents/ui/config.qml:83
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "크기 조정 후 자르기"
 
-#: package/contents/ui/config.qml:88
+#: package/contents/ui/config.qml:87
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "크기 조정"
 
-#: package/contents/ui/config.qml:92
+#: package/contents/ui/config.qml:91
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "크기 조정, 비율 유지"
 
-#: package/contents/ui/config.qml:96
+#: package/contents/ui/config.qml:95
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "가운데"
 
-#: package/contents/ui/config.qml:100
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "바둑판식 배열"
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:120
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "배경색:"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "배경색 선택"
 
-#: package/contents/ui/config.qml:133
+#: package/contents/ui/config.qml:132
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "오늘의 그림:"
 
-#: package/contents/ui/config.qml:149
+#: package/contents/ui/config.qml:148
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "제목:"
 
-#: package/contents/ui/config.qml:164
+#: package/contents/ui/config.qml:163
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "제작자:"
 
-#: package/contents/ui/config.qml:183
+#: package/contents/ui/config.qml:182
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "포함하는 폴더 열기"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:186
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

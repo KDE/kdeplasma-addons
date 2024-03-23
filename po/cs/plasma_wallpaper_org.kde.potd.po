@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-13 02:10+0000\n"
+"POT-Creation-Date: 2024-03-23 00:38+0000\n"
 "PO-Revision-Date: 2023-02-13 13:00+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 22.12.2\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:43
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Poskytovatel:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -33,85 +33,85 @@ msgstr ""
 "Tento poskytovatel tapet nefiltruje obrázky, které mohou být citlivé nebo "
 "nevhodné. Pokud se tyto obrázky budou zobrazovat veřejně, buďte opatrní."
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Aktualizovat při použití měřeného síťového připojení"
 
-#: package/contents/ui/config.qml:81
+#: package/contents/ui/config.qml:80
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Umístění:"
 
-#: package/contents/ui/config.qml:84
+#: package/contents/ui/config.qml:83
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Zvětšená a oříznutá"
 
-#: package/contents/ui/config.qml:88
+#: package/contents/ui/config.qml:87
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Zvětšená"
 
-#: package/contents/ui/config.qml:92
+#: package/contents/ui/config.qml:91
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Zvětšená s proporcemi"
 
-#: package/contents/ui/config.qml:96
+#: package/contents/ui/config.qml:95
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Na střed"
 
-#: package/contents/ui/config.qml:100
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Vydlážděná"
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:120
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Barva pozadí:"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Vyberte barvu pozadí"
 
-#: package/contents/ui/config.qml:133
+#: package/contents/ui/config.qml:132
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Obrázek dne:"
 
-#: package/contents/ui/config.qml:149
+#: package/contents/ui/config.qml:148
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Titul:"
 
-#: package/contents/ui/config.qml:164
+#: package/contents/ui/config.qml:163
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Autor:"
 
-#: package/contents/ui/config.qml:183
+#: package/contents/ui/config.qml:182
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Otevřít odpovídající složku"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:186
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
