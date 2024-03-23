@@ -7,6 +7,7 @@
 #include "kameleon_debug.h"
 
 #include <KConfigGroup>
+#include <KConfigWatcher>
 #include <KPluginFactory>
 #include <KSharedConfig>
 
@@ -19,6 +20,8 @@
 #include <QColor>
 #include <QDir>
 #include <QFileInfo>
+#include <QFileSystemWatcher>
+#include <QTimer>
 
 K_PLUGIN_CLASS_WITH_JSON(Kameleon, "kameleon.json")
 
@@ -26,6 +29,7 @@ Kameleon::Kameleon(QObject *parent, const QList<QVariant> &)
     : KDEDModule(parent)
     , m_config(KSharedConfig::openConfig("kdeglobals"))
     , m_configWatcher(KConfigWatcher::create(m_config))
+    , m_fsWatcher()
 {
     findRgbLedDevices();
     if (!isSupported()) {
@@ -33,12 +37,25 @@ Kameleon::Kameleon(QObject *parent, const QList<QVariant> &)
         return;
     }
 
+    loadLedColor();
+    connect(&m_fsWatcher, &QFileSystemWatcher::fileChanged, this, [this]() {
+        // When any device file changes, check all of them so we know if they have a uniform color.
+        // Wait a little before we load the colors to ensure the ongoing write operation is done with all files.
+        // While we're already checking, avoid firing more signals.
+        m_fsWatcher.blockSignals(true);
+        QTimer *timer = new QTimer(this);
+        timer->setSingleShot(true);
+        connect(timer, &QTimer::timeout, this, &Kameleon::loadLedColor);
+        timer->start(3000);
+    });
+
     loadConfig();
     connect(m_configWatcher.get(), &KConfigWatcher::configChanged, this, &Kameleon::updateAccentColor);
 }
 
 void Kameleon::findRgbLedDevices()
 {
+    // See https://github.com/torvalds/linux/blob/master/Documentation/leds/leds-class-multicolor.rst
     QDir ledsDir(LED_SYSFS_PATH);
     ledsDir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable);
     auto ledDevices = ledsDir.entryList();
@@ -74,9 +91,20 @@ void Kameleon::findRgbLedDevices()
         qCInfo(KAMELEON) << "found RGB LED device" << ledDevice;
         m_rgbLedDevices.append(ledDevice);
         m_deviceRgbIndices.append(colorIndex);
+        m_fsWatcher.addPath(LED_SYSFS_PATH + ledDevice + LED_RGB_FILE);
+    }
+}
 
-        // Get current color
-        // TODO: Monitor color changes continiously rather than only checking once on startup?
+bool Kameleon::isSupported()
+{
+    return !m_rgbLedDevices.isEmpty();
+}
+
+void Kameleon::loadLedColor()
+{
+    qCInfo(KAMELEON) << "load led color";
+    QColor activeColor;
+    for (const QString &ledDevice : m_rgbLedDevices) {
         QFile intensityFile(LED_SYSFS_PATH + ledDevice + LED_RGB_FILE);
         if (!QFileInfo(intensityFile).exists()) {
             qCWarning(KAMELEON) << "failed to read from" << intensityFile.fileName() << "file does not exist";
@@ -94,6 +122,7 @@ void Kameleon::findRgbLedDevices()
             qCWarning(KAMELEON) << "invalid color intensity" << deviceColorStr << "read from" << LED_RGB_FILE << "for device" << ledDevice;
             continue;
         }
+        QString colorIndex = m_deviceRgbIndices.at(m_rgbLedDevices.indexOf(ledDevice));
         int red = deviceColorLst.at(colorIndex.indexOf("r")).toInt();
         int green = deviceColorLst.at(colorIndex.indexOf("g")).toInt();
         int blue = deviceColorLst.at(colorIndex.indexOf("b")).toInt();
@@ -102,18 +131,27 @@ void Kameleon::findRgbLedDevices()
             qCWarning(KAMELEON) << "invalid color" << deviceColorStr << "read from" << LED_RGB_FILE << "for device" << ledDevice;
             continue;
         }
-        if (!m_activeColor.isValid()) {
-            m_activeColor = deviceColor;
-        } else if (m_activeColor != deviceColor) {
+        if (!activeColor.isValid()) {
+            activeColor = deviceColor;
+        } else if (activeColor != deviceColor) {
             qCWarning(KAMELEON) << "different colors found on multiple devices; treating as white";
-            m_activeColor = QColor(QColorConstants::White);
+            activeColor = QColor(QColorConstants::White);
+        }
+        if (activeColor != m_activeColor) {
+            qCInfo(KAMELEON) << "led color changed" << activeColor.name();
+            m_activeColor = activeColor;
+            Q_EMIT activeColorChanged(activeColor.name());
+
+            if (m_accent) {
+                qCInfo(KAMELEON) << "accent changed" << false;
+                m_config->group("General").writeEntry<bool>(CONFIG_KEY_ACCENT, false);
+                m_config->sync();
+                m_accent = false;
+                Q_EMIT accentChanged(false);
+            }
         }
     }
-}
-
-bool Kameleon::isSupported()
-{
-    return !m_rgbLedDevices.isEmpty();
+    m_fsWatcher.blockSignals(false);
 }
 
 void Kameleon::loadConfig()
@@ -170,14 +208,14 @@ void Kameleon::updateCustomColor()
     }
 }
 
-QString Kameleon::activeColor()
-{
-    return m_activeColor.name();
-}
-
 bool Kameleon::isAccent()
 {
     return m_accent;
+}
+
+QString Kameleon::activeColor()
+{
+    return m_activeColor.name();
 }
 
 void Kameleon::setAccent(bool enabled)
@@ -193,6 +231,7 @@ void Kameleon::setAccent(bool enabled)
     } else {
         setColor(QColorConstants::White.name());
     }
+    Q_EMIT accentChanged(enabled);
 }
 
 void Kameleon::setColor(QString colorName)
@@ -239,13 +278,16 @@ void Kameleon::applyColor(QColor color)
     auto *job = action.execute();
 
     connect(job, &KAuth::ExecuteJob::result, this, [this, job, color]() {
+        m_fsWatcher.blockSignals(false);
         if (job->error()) {
             qCWarning(KAMELEON) << "failed to write color to devices" << job->errorText();
             return;
         }
-        m_activeColor = color;
         qCInfo(KAMELEON) << "wrote color" << color.name() << "to LED devices";
+        m_activeColor = color;
+        Q_EMIT activeColorChanged(color.name());
     });
+    m_fsWatcher.blockSignals(true); // Don't fire loadLedColor() while we're writing a color to the devices ourselves
     job->start();
 }
 
