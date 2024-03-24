@@ -1,14 +1,13 @@
 # Translation of plasma_applet_org.kde.plasma.weather to Norwegian Nynorsk
 #
 # Eirik U. Birkeland <eirbir@gmail.com>, 2009, 2010.
-# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2019, 2020, 2022, 2023.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2018, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-02-02 00:38+0000\n"
-"PO-Revision-Date: 2023-02-23 18:05+0100\n"
+"PO-Revision-Date: 2024-03-23 13:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -16,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 24.02.0\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -303,7 +302,7 @@ msgstr "%1 (%2 %)"
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "︎☂%1%"
-msgstr ""
+msgstr "︎☂%1 %"
 
 #: package/contents/ui/ForecastView.qml:100
 #: package/contents/ui/ForecastView.qml:108
@@ -458,7 +457,7 @@ msgstr "Luftfukt: %1"
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
-msgstr ""
+msgstr "Vis meir informasjon"
 
 #: package/contents/ui/SwitchPanel.qml:32
 #, kde-format
@@ -466,17 +465,16 @@ msgctxt "@title:tab"
 msgid "Details"
 msgstr "Detaljar"
 
+# Her er det faktisk snakk om varsel, ikkje berre varslingar.
 #: package/contents/ui/SwitchPanel.qml:39
-#, fuzzy, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Notices"
+#, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
 "watches, ...) issued"
 msgid "%1 Notice"
 msgid_plural "%1 Notices"
-msgstr[0] "Varsel"
-msgstr[1] "Varsel"
+msgstr[0] "%1 varsel"
+msgstr[1] "%1 varsel"
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format

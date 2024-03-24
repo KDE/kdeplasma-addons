@@ -1,12 +1,11 @@
 # Translation of plasma_applet_org.kde.plasma.webbrowser to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-03-11 00:38+0000\n"
-"PO-Revision-Date: 2023-07-15 13:52+0200\n"
+"PO-Revision-Date: 2024-03-23 13:11+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
 "Language: nn\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 24.02.0\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -87,27 +86,25 @@ msgstr "Tilbakestill til standardikon"
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
-msgstr ""
+msgstr "Vis navigasjonslinje"
 
 #: package/contents/ui/ConfigGeneral.qml:21
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
-msgstr ""
+msgstr "Siste vitja side"
 
 #: package/contents/ui/ConfigGeneral.qml:25
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
-msgstr ""
+msgstr "Ved oppstart:"
 
 #: package/contents/ui/ConfigGeneral.qml:32
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Reload This Page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
-msgstr "Last sida på nytt"
+msgstr "Last alltid denne sida:"
 
 #: package/contents/ui/ConfigGeneral.qml:64 package/contents/ui/main.qml:106
 #, kde-format
@@ -149,14 +146,12 @@ msgstr "Gå fram"
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
-msgstr ""
+msgstr "Gå heim"
 
 #: package/contents/ui/main.qml:87
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Type a URL"
+#, kde-format
 msgid "Open Default URL"
-msgstr "Skriv inn nettadresse"
+msgstr "Opna standardside"
 
 #: package/contents/ui/main.qml:142
 #, kde-format
