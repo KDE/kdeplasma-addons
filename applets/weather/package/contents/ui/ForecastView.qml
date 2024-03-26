@@ -21,8 +21,6 @@ GridLayout {
     readonly property int preferredIconSize: Kirigami.Units.iconSizes.large
     readonly property bool hasContent: model && model.length > 0
 
-    Layout.minimumWidth: implicitWidth
-
     columnSpacing: Kirigami.Units.smallSpacing
     rowSpacing: Kirigami.Units.smallSpacing
 

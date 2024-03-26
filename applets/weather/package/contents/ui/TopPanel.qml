@@ -24,7 +24,7 @@ GridLayout {
 
     Layout.minimumWidth: Math.max(
         locationLabel.implicitWidth,
-        (sideWidth + columnSpacing) * 2 + conditionIcon.Layout.minimumWidth
+        (sideWidth + columnSpacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
     )
 
     visible: !!generalModel.location

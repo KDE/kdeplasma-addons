@@ -67,8 +67,8 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        Layout.minimumWidth: contentChildren.reduce((acc, loader) => Math.max(loader.item.Layout.minimumWidth, acc), 0)
-        Layout.minimumHeight: contentChildren.reduce((acc, loader) => Math.max(loader.item.Layout.minimumHeight, acc), 0)
+        Layout.minimumWidth: contentChildren.reduce((acc, loader) => Math.max(loader.implicitWidth, acc), 0)
+        Layout.minimumHeight: contentChildren.reduce((acc, loader) => Math.max(loader.implicitHeight, acc), 0)
         clip: true // previous/next views are prepared outside of view, do not render them
 
         currentIndex: tabBar.currentIndex
