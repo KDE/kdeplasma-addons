@@ -24,8 +24,6 @@ GridLayout {
         row => model.filter((_, index) => index % root.rows == row)
                     .some(item => item.probability))
 
-    Layout.minimumWidth: implicitWidth
-
     columnSpacing: Kirigami.Units.smallSpacing
     rowSpacing: Kirigami.Units.largeSpacing
 
