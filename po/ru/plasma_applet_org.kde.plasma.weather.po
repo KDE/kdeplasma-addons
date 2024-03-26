@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-20 02:23+0000\n"
+"POT-Creation-Date: 2024-03-26 02:53+0000\n"
 "PO-Revision-Date: 2023-01-29 13:52+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -297,8 +297,8 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Чтобы задать местоположение выполните поиск погодной станции"
 
-#: package/contents/ui/ForecastView.qml:73
-#: package/contents/ui/ForecastView.qml:80
+#: package/contents/ui/ForecastView.qml:71
+#: package/contents/ui/ForecastView.qml:78
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
