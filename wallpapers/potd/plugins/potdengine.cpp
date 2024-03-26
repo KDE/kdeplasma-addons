@@ -41,6 +41,9 @@ bool isUsingMeteredConnection()
 
 bool isNetworkConnected()
 {
+    if (!s_networkInformationAvailable) {
+        return true;
+    }
     const auto instance = QNetworkInformation::instance();
     if (instance->supports(QNetworkInformation::Feature::Reachability) && instance->reachability() != QNetworkInformation::Reachability::Online) {
         return false;
