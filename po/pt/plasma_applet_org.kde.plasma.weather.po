@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-02 00:38+0000\n"
+"POT-Creation-Date: 2024-03-26 00:38+0000\n"
 "PO-Revision-Date: 2022-11-28 18:34+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -286,7 +286,7 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Procurar por uma estação meteorológica para definir a sua localização"
 
-#: package/contents/ui/ForecastView.qml:79
+#: package/contents/ui/ForecastView.qml:77
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition (probability percentage)"
 #| msgid "%1 (%2 %)"
@@ -295,14 +295,14 @@ msgid "%1 (%2%)"
 msgstr "%1 (%2 %)"
 
 #. i18n: \ufe0e forces the text representation of the umbrella emoji
-#: package/contents/ui/ForecastView.qml:92
+#: package/contents/ui/ForecastView.qml:90
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "︎☂%1%"
 msgstr ""
 
-#: package/contents/ui/ForecastView.qml:100
-#: package/contents/ui/ForecastView.qml:108
+#: package/contents/ui/ForecastView.qml:98
+#: package/contents/ui/ForecastView.qml:106
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
