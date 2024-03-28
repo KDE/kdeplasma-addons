@@ -1,12 +1,12 @@
 /*
     SPDX-FileCopyrightText: 2018 Friedrich W. H. Kossebau <kossebau@kde.org>
     SPDX-FileCopyrightText: 2022 Fushan Wen <qydwhotmail@gmail.com>
+    SPDX-FileCopyrightText: 2024 ivan tkachenko <me@ratijas.tk>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
 #include "configstorage.h"
-#include "../../config-ICU.h"
 
 #include <QMetaEnum>
 
@@ -90,7 +90,7 @@ ConfigStorage::ConfigStorage(QObject *parent)
     m_dateOffset = m_generalConfigGroup.readEntry("dateOffset", 0);
 }
 
-QAbstractListModel *ConfigStorage::calendarSystemModel() const
+CalendarSystemModel *ConfigStorage::calendarSystemModel() const
 {
     return m_calendarSystemModel;
 }

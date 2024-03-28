@@ -11,7 +11,7 @@ import QtQuick.Controls 2.15 as QQC2
 import org.kde.kcmutils as KCM
 import org.kde.kirigami 2.20 as Kirigami
 
-import org.kde.plasmacalendar.alternatecalendarconfig 1.0
+import org.kde.plasma.private.alternatecalendarconfig as Private
 
 KCM.SimpleKCM {
     id: configPage
@@ -29,7 +29,7 @@ KCM.SimpleKCM {
 
     Kirigami.FormLayout {
 
-        ConfigStorage {
+        Private.ConfigStorage {
             id: configStorage
         }
 
@@ -73,7 +73,7 @@ KCM.SimpleKCM {
                 QQC2.ToolTip.text: i18ndc("plasma_calendar_alternatecalendar", "@info:tooltip", "A positive offset signifies a later date, while a negative offset signifies an earlier date.")
                 QQC2.ToolTip.visible: hovered
                 QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
-        }
+            }
         }
     }
 }

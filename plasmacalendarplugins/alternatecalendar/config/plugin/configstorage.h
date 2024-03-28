@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2018 Friedrich W. H. Kossebau <kossebau@kde.org>
     SPDX-FileCopyrightText: 2022 Fushan Wen <qydwhotmail@gmail.com>
+    SPDX-FileCopyrightText: 2024 ivan tkachenko <me@ratijas.tk>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -9,6 +10,7 @@
 #define CONFIGSTORAGE_H
 
 #include <QAbstractListModel>
+#include <qqmlintegration.h>
 
 #include <KConfigGroup>
 
@@ -17,6 +19,7 @@
 class CalendarSystemModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     enum Role {
@@ -38,6 +41,7 @@ private:
 class ConfigStorage : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     /**
      * The current choosen calendar system
@@ -47,7 +51,7 @@ class ConfigStorage : public QObject
     /**
      * The available calendar system list
      */
-    Q_PROPERTY(QAbstractListModel *calendarSystemModel READ calendarSystemModel CONSTANT)
+    Q_PROPERTY(CalendarSystemModel *calendarSystemModel READ calendarSystemModel CONSTANT)
 
     /**
      * The index of current choosen calendar system
@@ -62,7 +66,7 @@ class ConfigStorage : public QObject
 public:
     explicit ConfigStorage(QObject *parent = nullptr);
 
-    QAbstractListModel *calendarSystemModel() const;
+    CalendarSystemModel *calendarSystemModel() const;
 
     int currentIndex() const;
 
