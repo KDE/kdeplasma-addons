@@ -7,10 +7,11 @@
 
 #include <QQmlEngine>
 
-#include "../../calendarsystem.h"
 #include "configstorage.h"
+#include "types.h"
 
 #include <QQmlExtensionPlugin>
+#include <qqml.h>
 
 class AlternateCalendarConfigPlugin : public QQmlExtensionPlugin
 {
@@ -21,7 +22,7 @@ public:
     void registerTypes(const char *uri) override
     {
         qmlRegisterType<ConfigStorage>(uri, 1, 0, "ConfigStorage");
-        qmlRegisterUncreatableType<CalendarSystem>(uri, 1, 0, "CalendarSystem", QStringLiteral("Error: only enums"));
+        qmlRegisterUncreatableMetaObject(CalendarSystemForeign::staticMetaObject, uri, 1, 0, "CalendarSystem", QStringLiteral("Error: only enums"));
     }
 };
 

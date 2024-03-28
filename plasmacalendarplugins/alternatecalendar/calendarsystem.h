@@ -13,31 +13,29 @@
 
 #include <KLocalizedString>
 
-class CalendarSystem
+namespace CalendarSystem
 {
-    Q_GADGET
+Q_NAMESPACE
 
-public:
-    /**
-     * @note When adding a new calendar system, \s_calendarMap should also be updated.
-     */
-    enum System : int {
-        Gregorian = static_cast<int>(QCalendar::System::Gregorian),
+/**
+ * @note When adding a new calendar system, \s_calendarMap should also be updated.
+ */
+enum System : int {
+    Gregorian = static_cast<int>(QCalendar::System::Gregorian),
 #ifndef QT_BOOTSTRAPPED
-        Julian = static_cast<int>(QCalendar::System::Julian),
-        Milankovic = static_cast<int>(QCalendar::System::Milankovic),
+    Julian = static_cast<int>(QCalendar::System::Julian),
+    Milankovic = static_cast<int>(QCalendar::System::Milankovic),
 #endif
-        Chinese = static_cast<int>(QCalendar::System::Last) + 1, // QTBUG-89824: QCalendar doesn't support Chinese calendar system
-        Indian, // QCalendar doesn't support India calendar system
-        Hebrew,
-        Jalali, // Persian
-        Islamic, // Astronomical
-        IslamicCivil,
-        IslamicUmalqura,
-    };
-    Q_ENUM(System)
+    Chinese = static_cast<int>(QCalendar::System::Last) + 1, // QTBUG-89824: QCalendar doesn't support Chinese calendar system
+    Indian, // QCalendar doesn't support India calendar system
+    Hebrew,
+    Jalali, // Persian
+    Islamic, // Astronomical
+    IslamicCivil,
+    IslamicUmalqura,
 };
-Q_DECLARE_METATYPE(CalendarSystem)
+Q_ENUM_NS(System)
+};
 
 struct CalendarSystemItem {
     const CalendarSystem::System system;

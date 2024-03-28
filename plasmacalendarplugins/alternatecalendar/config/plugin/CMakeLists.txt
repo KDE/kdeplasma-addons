@@ -3,7 +3,13 @@
 # SPDX-License-Identifier: GPL-2.0-or-later
 
 ecm_add_qml_module(plasmacalendaralternatecalendarconfig URI org.kde.plasmacalendar.alternatecalendarconfig)
-target_sources(plasmacalendaralternatecalendarconfig PRIVATE configplugin.cpp configstorage.cpp ../../calendarsystem.h)
+target_sources(plasmacalendaralternatecalendarconfig
+    PRIVATE
+        ../../calendarsystem.h
+        configplugin.cpp
+        configstorage.cpp
+        types.cpp
+)
 
 target_link_libraries(plasmacalendaralternatecalendarconfig PRIVATE
     Qt::Qml
