@@ -1,68 +1,68 @@
+# translation of plasma_applet_org.kde.plasma_applet_dict.pot to Esperanto
+# Copyright (C) 2024 Free Software Foundation, Inc.
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2024.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-31 00:48+0000\n"
-"PO-Revision-Date: 2024-03-28 19:25\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2024-03-28 09:21+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"Language-Team: Esperanto <kde-i18n-eo.org>\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-stable/messages/kdeplasma-addons/plasma_applet_org.kde."
-"plasma_applet_dict.pot\n"
-"X-Crowdin-File-ID: 7510\n"
+"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Dictionaries"
-msgstr "词典"
+msgstr "Vortaroj"
 
 #: package/contents/ui/AvailableDictSheet.qml:35
 #, kde-format
 msgid "Add More Dictionaries"
-msgstr "添加更多词典"
+msgstr "Aldoni Pliajn Vortarojn"
 
 #: package/contents/ui/ConfigDictionaries.qml:89
 #, kde-format
 msgid "Unable to load dictionary list"
-msgstr "无法加载词典列表"
+msgstr "Ne eblas ŝargi vortarliston"
 
 #: package/contents/ui/ConfigDictionaries.qml:90
 #: package/contents/ui/main.qml:121
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
-msgstr "错误代码：%1 (%2)"
+msgstr "Erarkodo: %1 (%2)"
 
 #: package/contents/ui/ConfigDictionaries.qml:101
 #, kde-format
 msgid "No dictionaries"
-msgstr "没有字典"
+msgstr "Neniuj vortaroj"
 
 #: package/contents/ui/ConfigDictionaries.qml:112
 #, kde-format
 msgid "Add More…"
-msgstr "添加更多…"
+msgstr "Aldoni pli…"
 
 #: package/contents/ui/DictItemDelegate.qml:51
 #, kde-format
 msgid "Delete"
-msgstr "删除"
+msgstr "Forigi"
 
 #: package/contents/ui/main.qml:40
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
-msgstr "输入要查找的单词…"
+msgstr "Enigu ĉi tie vorton por difini…"
 
 #: package/contents/ui/main.qml:120
 #, kde-format
 msgid "Unable to load definition"
-msgstr "无法加载词义"
+msgstr "Ne eblas ŝargi difinon"

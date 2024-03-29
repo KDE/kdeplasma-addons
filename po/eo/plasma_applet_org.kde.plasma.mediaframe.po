@@ -1,200 +1,200 @@
+# translation of plasma_applet_org.kde.plasma.mediaframe.pot to Esperanto
+# Copyright (C) 2024 Free Software Foundation, Inc.
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Oliver Kellogg <okellogg@users.sourceforge.net>, 2024.
+#
 msgid ""
 msgstr ""
-"Project-Id-Version: kdeorg\n"
+"Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-03 00:49+0000\n"
-"PO-Revision-Date: 2024-03-28 19:25\n"
-"Last-Translator: \n"
-"Language-Team: Chinese Simplified\n"
-"Language: zh_CN\n"
+"PO-Revision-Date: 2024-03-28 09:21+0100\n"
+"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"Language-Team: Esperanto <kde-i18n-eo.org>\n"
+"Language: eo\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
-"X-Crowdin-Project: kdeorg\n"
-"X-Crowdin-Project-ID: 269464\n"
-"X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf5-stable/messages/kdeplasma-addons/plasma_applet_org.kde."
-"plasma.mediaframe.pot\n"
-"X-Crowdin-File-ID: 2748\n"
+"X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr "常规"
+msgstr "Ĝenerala"
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Paths"
-msgstr "路径"
+msgstr "Vojetoj"
 
 #: package/contents/ui/ConfigGeneral.qml:48
 #, kde-format
 msgid "Change picture every:"
-msgstr "图像更换间隔时间："
+msgstr "Ŝanĝi bildon ĉiujn:"
 
 #: package/contents/ui/ConfigGeneral.qml:65
 #, kde-format
 msgid "Hours"
-msgstr "小时"
+msgstr "Horoj"
 
 #: package/contents/ui/ConfigGeneral.qml:79
 #, kde-format
 msgid "Minutes"
-msgstr "分"
+msgstr "Minutoj"
 
 #: package/contents/ui/ConfigGeneral.qml:93
 #, kde-format
 msgid "Seconds"
-msgstr "秒"
+msgstr "Sekundoj"
 
 #: package/contents/ui/ConfigGeneral.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
-msgstr "图像填充模式："
+msgstr "Bilda pleniga reĝimo:"
 
 #: package/contents/ui/ConfigGeneral.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
-msgstr "拉伸"
+msgstr "Streĉi"
 
 #: package/contents/ui/ConfigGeneral.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
-msgstr "图片将缩放到适合相框的大小"
+msgstr "La bildo estas skalita por kongrui al la kadro"
 
 #: package/contents/ui/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
-msgstr "保持宽高比缩放"
+msgstr "Konservi aspekton"
 
 #: package/contents/ui/ConfigGeneral.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
-msgstr "图像将保持原有宽高比缩放到适合大小，不进行裁剪"
+msgstr "La bildo estas skalita unuforme por ĝisrandiĝi sen tondado"
 
 #: package/contents/ui/ConfigGeneral.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
-msgstr "保持宽高比缩放并裁剪"
+msgstr "Konservi aspektostucon"
 
 #: package/contents/ui/ConfigGeneral.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
-msgstr "图像将保持原有宽高比缩放到适合大小，按需进行裁剪"
+msgstr "La bildo estas skalita unuforme por plenigi, tranĉante se necese"
 
 #: package/contents/ui/ConfigGeneral.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
-msgstr "平铺"
+msgstr "Kahelo"
 
 #: package/contents/ui/ConfigGeneral.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
-msgstr "图片将在水平和垂直方向上重复显示"
+msgstr "La bildo estas duobligita horizontale kaj vertikale"
 
 #: package/contents/ui/ConfigGeneral.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
-msgstr "垂直平铺"
+msgstr "Kahelo vertikale"
 
 #: package/contents/ui/ConfigGeneral.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
-msgstr "图片将被水平拉伸，然后垂直平铺"
+msgstr "La bildo estas etendita horizontale kaj kahelita vertikale"
 
 #: package/contents/ui/ConfigGeneral.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
-msgstr "水平平铺"
+msgstr "Kahelo horizontale"
 
 #: package/contents/ui/ConfigGeneral.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
-msgstr "图片将被垂直拉伸，然后水平平铺"
+msgstr "La bildo estas etendita vertikale kaj kahelita horizontale"
 
 #: package/contents/ui/ConfigGeneral.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
-msgstr "原图"
+msgstr "Pad"
 
 #: package/contents/ui/ConfigGeneral.qml:141
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
-msgstr "图片将不进行变形处理"
+msgstr "La bildo ne estas transformita"
 
 #: package/contents/ui/ConfigGeneral.qml:186
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
-msgstr "常规："
+msgstr "Ĝenerala:"
 
 #: package/contents/ui/ConfigGeneral.qml:187
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
-msgstr "随机顺序"
+msgstr "Hazardigi ordon"
 
 #: package/contents/ui/ConfigGeneral.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
-msgstr "鼠标光标悬停在图像上时暂停幻灯片切换"
+msgstr "Paŭzi la bildaron kiam kursoro estas super bildo"
 
 #: package/contents/ui/ConfigGeneral.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
-msgstr "点击图像在外部程序中打开"
+msgstr "Alklaku la bildon por malfermi en ekstera aplikaĵo"
 
 #: package/contents/ui/ConfigPaths.qml:49
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
-msgstr "选择文件"
+msgstr "Elekti Dosierojn"
 
 #: package/contents/ui/ConfigPaths.qml:75
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
-msgstr "选择一个文件夹"
+msgstr "Elekti Dosierujon"
 
 #: package/contents/ui/ConfigPaths.qml:123
 #, kde-format
 msgid "Remove path"
-msgstr "移除路径"
+msgstr "Forigi vojon"
 
 #: package/contents/ui/ConfigPaths.qml:137
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
-msgstr "添加文件夹…"
+msgstr "Aldoni dosierujon..."
 
 #: package/contents/ui/ConfigPaths.qml:143
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
-msgstr "添加文件…"
+msgstr "Aldoni dosierojn…"
 
 #: package/contents/ui/main.qml:438
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure…"
-msgstr "配置…"
+msgstr "Agordi…"
