@@ -24,19 +24,25 @@ Kirigami.FormLayout {
     property int cfg_UpdateOverMeteredConnection
     property alias formLayout: root
 
+    property var screen : Screen
+    property var screenSize
+    onScreenChanged: function() {
+        screenSize = !!screen.geometry ? Qt.size(screen.geometry.width, screen.geometry.height):  Qt.size(screen.width, screen.height);
+    }
+
     PotdBackend {
         id: backend
         identifier: cfg_Provider
         arguments: {
             if (identifier === "bing") {
                 // Bing supports 1366/1920/UHD resolutions
-                const w = Screen.width * Screen.devicePixelRatio > 1920 ? 3840 : 1920;
-                const h = Screen.height * Screen.devicePixelRatio > 1080 ? 2160 : 1080;
+                const w = screenSize.width * Screen.devicePixelRatio > 1920 ? 3840 : 1920;
+                const h = screenSize.height * Screen.devicePixelRatio > 1080 ? 2160 : 1080;
                 return [w, h];
             }
             return [];
         }
-        updateOverMeteredConnection: wallpaper.configuration.UpdateOverMeteredConnection
+        updateOverMeteredConnection: root.configuration.UpdateOverMeteredConnection
     }
 
     Row {
@@ -75,6 +81,10 @@ Kirigami.FormLayout {
         }
     }
 
+    onCfg_FillModeChanged: {
+        resizeComboBox.setMethod()
+    }
+
     QQC2.ComboBox {
         id: resizeComboBox
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Positioning:")
@@ -102,14 +112,14 @@ Kirigami.FormLayout {
                 ]
 
         textRole: "label"
-        onCurrentIndexChanged: cfg_FillMode = model[currentIndex]["fillMode"]
+        onActivated: cfg_FillMode = model[currentIndex]["fillMode"]
         Component.onCompleted: setMethod();
 
         function setMethod() {
             for (var i = 0; i < model.length; i++) {
-                if (model[i]["fillMode"] == wallpaper.configuration.FillMode) {
+                if (model[i]["fillMode"] === root.cfg_FillMode) {
                     resizeComboBox.currentIndex = i;
-                    var tl = model[i]["label"].length;
+                    break;
                 }
             }
         }
@@ -131,7 +141,7 @@ Kirigami.FormLayout {
         id: wallpaperPreview
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label", "Today's picture:")
         backgroundColor: root.cfg_Color
-        visible: !!wallpaper.configuration.Provider
+        visible: !!root.configuration.Provider // provider is not empty
     }
 
     Item {

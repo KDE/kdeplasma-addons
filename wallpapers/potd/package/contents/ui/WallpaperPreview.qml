@@ -30,8 +30,8 @@ Column {
     WallpaperDelegate {
         id: delegate
 
-        width: Math.round(Screen.width / 10 + Kirigami.Units.smallSpacing * 2)
-        height: Math.round(Screen.height / 10 + Kirigami.Units.smallSpacing * 2)
+        width: Math.round(root.screenSize.width / 4 + Kirigami.Units.smallSpacing * 2)
+        height: Math.round(root.screenSize.height / 4 + Kirigami.Units.smallSpacing * 2)
 
         localUrl: backend.localUrl
         infoUrl: backend.infoUrl

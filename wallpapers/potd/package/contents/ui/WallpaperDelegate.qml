@@ -147,7 +147,7 @@ FocusScope {
                 anchors.fill: parent
                 autoTransform: false
                 cache: false
-                fillMode: wallpaper.configuration.FillMode || Image.PreserveAspectCrop
+                fillMode: cfg_FillMode || Image.PreserveAspectCrop
                 smooth: true
 
                 Drag.dragType: Drag.Automatic
