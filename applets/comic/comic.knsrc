@@ -53,6 +53,7 @@ Name[zh_CN]=连环画
 Name[zh_TW]=漫畫
 
 Categories=Plasma Comic
+ContentWarning=Executables
 TargetDir=plasma/comics
 Uncompress=kpackage
 KPackageStructure=Plasma/Comic
