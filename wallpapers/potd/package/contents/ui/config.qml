@@ -25,7 +25,7 @@ Kirigami.FormLayout {
     property alias formLayout: root
 
     property var screen : Screen
-    property var screenSize
+    property size screenSize
     onScreenChanged: function() {
         screenSize = !!screen.geometry ? Qt.size(screen.geometry.width, screen.geometry.height):  Qt.size(screen.width, screen.height);
     }
