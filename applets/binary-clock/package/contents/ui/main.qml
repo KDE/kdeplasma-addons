@@ -35,8 +35,8 @@ PlasmoidItem {
     preferredRepresentation: compactRepresentation
 
     // keep this consistent with toolTipMainText and toolTipSubText in analog-clock
-    toolTipMainText: Qt.formatDate(dataSource.data["Local"]["DateTime"], "dddd")
-    toolTipSubText: Qt.formatTime(dataSource.data["Local"]["DateTime"],  Qt.locale().timeFormat(Locale.LongFormat)) + "\n" + Qt.formatDate(dataSource.data["Local"]["DateTime"], Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
+    toolTipMainText: Qt.locale().toString(dataSource.data["Local"]["DateTime"],"dddd")
+    toolTipSubText: Qt.locale().toString(dataSource.data["Local"]["DateTime"], Qt.locale().timeFormat(Locale.LongFormat)) + "\n" + Qt.locale().toString(dataSource.data["Local"]["DateTime"], Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
 
     P5Support.DataSource {
         id: dataSource
