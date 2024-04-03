@@ -27,8 +27,8 @@ PlasmoidItem {
     preferredRepresentation: compactRepresentation
 
     // keep this consistent with toolTipMainText and toolTipSubText in analog-clock
-    toolTipMainText: Qt.formatDate(currentDateTime, "dddd")
-    toolTipSubText: Qt.formatTime(currentDateTime,  Qt.locale().timeFormat(Locale.LongFormat)) + "\n" + Qt.formatDate(currentDateTime, Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
+    toolTipMainText: Qt.locale().toString(currentDateTime, "dddd")
+    toolTipSubText: Qt.locale().toString(currentDateTime, Qt.locale().timeFormat(Locale.LongFormat)) + "\n" + Qt.locale().toString(currentDateTime, Qt.locale().dateFormat(Locale.LongFormat).replace(/(^dddd.?\s)|(,?\sdddd$)/, ""))
 
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
 
