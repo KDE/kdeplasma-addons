@@ -5,24 +5,25 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.15 as QQC2
+import QtQuick
+import QtQuick.Controls as QQC2
+import QtQuick.Templates as T
 
-import org.kde.kcmutils as KCM
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kcmutils as KCMUtils
+import org.kde.kirigami as Kirigami
 
 import org.kde.plasma.private.alternatecalendarconfig as Private
 
-KCM.SimpleKCM {
+KCMUtils.SimpleKCM {
     id: configPage
 
     // expected API
-    signal configurationChanged
+    signal configurationChanged()
 
     // expected API
     function saveConfig() {
         configStorage.calendarSystem = calendarSystemComboBox.currentValue;
-        configStorage.dateOffset = dateOffsetSpinBoxLoader.active && dateOffsetSpinBoxLoader.item.value || 0;
+        configStorage.dateOffset = (dateOffsetSpinBoxLoader?.item as T.SpinBox).value ?? 0;
 
         configStorage.save();
     }
@@ -42,7 +43,7 @@ KCM.SimpleKCM {
                 textRole: "display"
                 valueRole: "id"
                 currentIndex: configStorage.currentIndex
-                onActivated: configPage.configurationChanged();
+                onActivated: configPage.configurationChanged()
             }
 
             Kirigami.ContextualHelpButton {
