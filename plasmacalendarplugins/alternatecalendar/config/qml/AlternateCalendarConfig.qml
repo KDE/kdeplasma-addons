@@ -1,6 +1,7 @@
 /*
     SPDX-FileCopyrightText: 2018 Friedrich W. H. Kossebau <kossebau@kde.org>
     SPDX-FileCopyrightText: 2022 Fushan Wen <qydwhotmail@gmail.com>
+    SPDX-FileCopyrightText: 2024 ivan tkachenko <me@ratijas.tk>
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
@@ -42,8 +43,10 @@ KCMUtils.SimpleKCM {
                 model: configStorage.calendarSystemModel
                 textRole: "display"
                 valueRole: "id"
-                currentIndex: configStorage.currentIndex
                 onActivated: configPage.configurationChanged()
+                Component.onCompleted: {
+                    currentIndex = configStorage.currentIndex;
+                }
             }
 
             Kirigami.ContextualHelpButton {
@@ -66,7 +69,7 @@ KCMUtils.SimpleKCM {
                 from: -10
                 to: 10
                 value: configStorage.dateOffset
-                onValueChanged: configPage.configurationChanged()
+                onValueModified: configPage.configurationChanged()
 
                 textFromValue: (value, locale) => i18ndp("plasma_calendar_alternatecalendar","%1 day", "%1 days", value)
                 valueFromText: (text, locale) => parseInt(text)
