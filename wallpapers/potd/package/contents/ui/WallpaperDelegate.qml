@@ -10,7 +10,7 @@ import Qt5Compat.GraphicalEffects as GE
 import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 
-import org.kde.kirigami 2.15 as Kirigami
+import org.kde.kirigami as Kirigami
 
 FocusScope {
     // FocusScope can pass Tab to inline buttons
@@ -112,7 +112,7 @@ FocusScope {
     Kirigami.ShadowedRectangle {
         id: thumbnail
         anchors.fill: parent
-        radius: Kirigami.Units.smallSpacing
+        radius: Kirigami.Kirigami.Units.cornerRadius
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: Kirigami.Theme.View
 
@@ -125,7 +125,7 @@ FocusScope {
 
         Rectangle {
             id: thumbnailArea
-            radius: Math.round(Kirigami.Units.smallSpacing / 2)
+            radius: Math.round(Kirigami.Units.cornerRadius / 2)
             anchors {
                 fill: parent
                 margins: Kirigami.Units.smallSpacing
