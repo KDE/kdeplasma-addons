@@ -6,74 +6,67 @@
 # Viesturs Zarins <viesturs.zarins@mii.lu.lv>, 2008, 2010.
 # Viesturs Zariņš <viesturs.zarins@mii.lu.lv>, 2009.
 # Einars Sprugis <einars8@gmail.com>, 2012.
+# SPDX-FileCopyrightText: 2024 Toms Trasūns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2012-07-05 21:11+0300\n"
-"Last-Translator: Einars Sprugis <einars8@gmail.com>\n"
-"Language-Team: Latvian <locale@laka.lv>\n"
+"PO-Revision-Date: 2024-04-02 16:29+0300\n"
+"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
+"Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.4\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
 #: comic.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "here strip means comic strip"
-#| msgid "&Next Tab with a new Strip"
+#, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
-msgstr "&Nākamā cilne ar jaunu lentu"
+msgstr "&Nākamā cilne ar jaunu komiksa lapu"
 
 #: comic.cpp:86
-#, fuzzy, kde-format
-#| msgid "Jump to &first Strip"
+#, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
-msgstr "Iet uz &pirmo lentu"
+msgstr "Iet uz &pirmo komiksu lapu"
 
 #: comic.cpp:90
-#, fuzzy, kde-format
-#| msgid "Jump to &current Strip"
+#, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
-msgstr "Iet uz &jaunāko lentu"
+msgstr "Iet uz &jaunāko komiksu lapu"
 
 #: comic.cpp:94
-#, fuzzy, kde-format
-#| msgid "Jump to Strip ..."
+#, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
-msgstr "Iet uz lentu..."
+msgstr "Iet uz komiksu..."
 
 #: comic.cpp:98
-#, fuzzy, kde-format
-#| msgid "Visit the shop &website"
+#, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
-msgstr "Doties uz veikala &tīmekļa lapu"
+msgstr "Apmeklēt tīmekļā vietni"
 
 #: comic.cpp:102
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
-msgstr ""
+msgstr "Atvērt ar „%1“"
 
 #: comic.cpp:110
-#, fuzzy, kde-format
-#| msgid "Visit the shop &website"
+#, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
-msgstr "Doties uz veikala &tīmekļa lapu"
+msgstr "Apmeklēt &veikala vietni"
 
 #: comic.cpp:115
-#, fuzzy, kde-format
-#| msgid "&Save Comic As..."
+#, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Saglabāt komiksu kā..."
@@ -82,15 +75,13 @@ msgstr "&Saglabāt komiksu kā..."
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
-msgstr "&Patiesais izmērs"
+msgstr "&Faktiskais izmērs"
 
 #: comic.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "@option:check Context menu of comic image"
-#| msgid "Store current &Position"
+#, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
-msgstr "Saglabāt šobrīdējo &novietojumu"
+msgstr "Saglabāt pašreizējo &novietojumu"
 
 #: comicdata.cpp:86
 #, kde-format
@@ -99,190 +90,168 @@ msgid "# %1"
 msgstr "# %1"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Pamata"
 
 #: package/contents/config/config.qml:18
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Izskats"
 
 #: package/contents/config/config.qml:23
-#, fuzzy, kde-format
-#| msgid "Advanced"
+#, kde-format
 msgctxt "@title"
 msgid "Advanced"
 msgstr "Paplašināti"
 
 #: package/contents/ui/ComicBottomInfo.qml:63
-#, fuzzy, kde-format
-#| msgid "Jump to Strip ..."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
-msgstr "Iet uz lentu..."
+msgstr "Iet uz komisku..."
 
 #: package/contents/ui/ComicBottomInfo.qml:104
-#, fuzzy, kde-format
-#| msgid "Visit the comic website"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
-msgstr "Apmeklēt komiksa lapu"
+msgstr "Apmeklēt komiksa tīmekļa vietni"
 
 #: package/contents/ui/configAdvanced.qml:35
-#, fuzzy, kde-format
-#| msgid "Comic cache:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "Komiksu kešatmiņa:"
 
 #: package/contents/ui/configAdvanced.qml:44
-#, fuzzy, kde-format
-#| msgid " strips per comic"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
 msgid_plural "strips per comic"
-msgstr[0] " lentas komiksā"
-msgstr[1] " lentas komiksā"
-msgstr[2] " lentas komiksā"
+msgstr[0] "lapa komiksam"
+msgstr[1] "lapas komiksam"
+msgstr[2] "lapu komiksam"
 
 #: package/contents/ui/configAdvanced.qml:51
-#, fuzzy, kde-format
-#| msgid "Display error image when getting comic failed:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
-msgstr "Parādīt kļūdas attēlu, kad komiksa ielāde neizdodas:"
+msgstr "Parādīt kļūdu, ja lejupielāde neizdodas"
 
 #: package/contents/ui/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
-msgstr ""
+msgstr "Rādīt:"
 
 #: package/contents/ui/configAppearance.qml:43
-#, fuzzy, kde-format
-#| msgid "Show comic &title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
-msgstr "Rādīt komiksa &nosaukumu:"
+msgstr "Komiksa nosaukumu"
 
 #: package/contents/ui/configAppearance.qml:49
-#, fuzzy, kde-format
-#| msgid "Show comic &identifier:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
-msgstr "Rādīt komiksa &identifikatoru:"
+msgstr "Komiksa identifikatoru"
 
 #: package/contents/ui/configAppearance.qml:55
-#, fuzzy, kde-format
-#| msgid "Show comic &author:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
-msgstr "Rādīt komiksa &autoru:"
+msgstr "Komiksa autoru"
 
 #: package/contents/ui/configAppearance.qml:61
-#, fuzzy, kde-format
-#| msgid "Comic"
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
-msgstr "Komikss"
+msgstr "Komiksa URL"
 
 #: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
-msgstr ""
+msgstr "Rādīt navigācijas pogas:"
 
 #: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
-msgstr ""
+msgstr "Vienmēr"
 
 #: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
-msgstr ""
+msgstr "Tikai pārliekot peles kursoru"
 
 #: package/contents/ui/configGeneral.qml:52
-#, fuzzy, kde-format
-#| msgid "Comic"
+#, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
-msgstr "Komikss"
+msgstr "Komikss:"
 
 #: package/contents/ui/configGeneral.qml:72
-#, fuzzy, kde-format
-#| msgid "&Get New Comics..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
-msgstr "&Ielādēt jaunus komiksus..."
+msgstr "Iegūt jaunus komiksus..."
 
 #: package/contents/ui/configGeneral.qml:83
-#, fuzzy, kde-format
-#| msgid "&Middle-click on the comic to show it at its original size"
+#, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
-msgstr "&Vidējais klikšķis uz komiksa parāda to orģinālajā izmērā"
+msgstr "Vidējais klikšķis uz komiksa parāda to sākotnējā izmērā"
 
 #: package/contents/ui/configGeneral.qml:92
-#, fuzzy, kde-format
-#| msgid "Check for new comic strips:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
-msgstr "Pārbaudīt jaunas komiksa lentas:"
+msgstr "Pārbaudīt jaunus spraudņus ik pēc:"
 
 #: package/contents/ui/configGeneral.qml:101
-#, fuzzy, kde-format
-#| msgid " days"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
 msgid_plural "days"
 msgstr[0] " dienas"
-msgstr[1] " dienas"
-msgstr[2] " dienas"
+msgstr[1] " dienām"
+msgstr[2] " dienām"
 
 #: package/contents/ui/configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgid "Check for new comic strips:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
-msgstr "Pārbaudīt jaunas komiksa lentas:"
+msgstr "Pārbaudīt jaunus komiksus ik pēc:"
 
 #: package/contents/ui/configGeneral.qml:116
-#, fuzzy, kde-format
-#| msgid " minutes"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] " minūtes"
-msgstr[1] " minūtes"
-msgstr[2] " minūtes"
+msgstr[1] " minūtēm"
+msgstr[2] " minūtēm"
 
 #: stripselector.cpp:31 stripselector.cpp:101
-#, fuzzy, kde-format
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@title:window"
 msgid "Go to Strip"
-msgstr "Iet uz lentu"
+msgstr "Iet uz komiska lapu"
 
 #: stripselector.cpp:39
-#, fuzzy, kde-format
-#| msgid "&Strip Number:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "&Strip number:"
-msgstr "&Lentas numurs:"
+msgstr "&Komiksa lapas numurs:"
 
 #: stripselector.cpp:102
-#, fuzzy, kde-format
-#| msgid "Strip identifier:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
-msgstr "Lentas identifikators:"
+msgstr "Komiksa lapas identifikators:"
 
 #, fuzzy
 #~| msgid "&Create Comic Book Archive..."

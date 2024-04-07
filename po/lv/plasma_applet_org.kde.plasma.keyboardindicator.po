@@ -1,14 +1,15 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # Maris Nartiss <maris.kde@gmail.com>, 2019.
+# SPDX-FileCopyrightText: 2024 Toms Trasūns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-22 00:38+0000\n"
-"PO-Revision-Date: 2019-01-04 11:27+0200\n"
-"Last-Translator: Maris Nartiss <maris.kde@gmail.com>\n"
+"PO-Revision-Date: 2024-04-02 17:03+0300\n"
+"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 18.12.0\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -29,7 +30,7 @@ msgstr "Taustiņi"
 msgctxt ""
 "@label show keyboard indicator when Caps Lock or Num Lock is activated"
 msgid "Show when activated:"
-msgstr ""
+msgstr "Rādīt, kad ieslēgts:"
 
 #: contents/ui/configAppearance.qml:40
 #, kde-format
@@ -44,21 +45,19 @@ msgid "Num Lock"
 msgstr "Ciparslēgs"
 
 #: contents/ui/main.qml:87
-#, fuzzy, kde-format
-#| msgid "Caps Lock"
+#, kde-format
 msgid "Caps Lock activated"
-msgstr "Burtslēga taustiņš"
+msgstr "Burtslēgs ir ieslēgts"
 
 #: contents/ui/main.qml:90
-#, fuzzy, kde-format
-#| msgid "Caps Lock"
+#, kde-format
 msgid "Num Lock activated"
-msgstr "Burtslēga taustiņš"
+msgstr "Ciparslēgs ir ieslēgts"
 
 #: contents/ui/main.qml:98
 #, kde-format
 msgid "No lock keys activated"
-msgstr ""
+msgstr "Neviens slēgtaustiņš nav ieslēgts"
 
 #~ msgid "Num Lock"
 #~ msgstr "Ciparslēga taustiņš"
