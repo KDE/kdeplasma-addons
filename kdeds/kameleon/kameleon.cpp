@@ -41,6 +41,9 @@ Kameleon::Kameleon(QObject *parent, const QList<QVariant> &)
 
 void Kameleon::findRgbLedDevices()
 {
+    // For documentation on multicolor LED handling in Linux, see
+    // https://github.com/torvalds/linux/blob/master/Documentation/leds/leds-class.rst and
+    // https://github.com/torvalds/linux/blob/master/Documentation/leds/leds-class-multicolor.rst
     QDir ledsDir(LED_SYSFS_PATH);
     ledsDir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable);
     auto ledDevices = ledsDir.entryList();
@@ -69,6 +72,24 @@ void Kameleon::findRgbLedDevices()
             colorIndexStr.toLower().replace("red", "r").replace("green", "g").replace("blue", "b").replace(" ", ""); // eg "red green blue" -> "rgb"
         if (!(colorIndex.length() == 3 && colorIndex.contains("r") && colorIndex.contains("g") && colorIndex.contains("b"))) {
             qCWarning(KAMELEON) << "invalid color index" << colorIndexStr << "read from" << LED_INDEX_FILE << "for device" << ledDevice;
+            continue;
+        }
+
+        // Get RGB bitness (= max brightness of the color LEDs)
+        QFile bitnessFile(LED_SYSFS_PATH + ledDevice + LED_BITNESS_FILE);
+        if (!QFileInfo(bitnessFile).exists()) {
+            // No information about color bits
+            qCWarning(KAMELEON) << "no maximum intensity information for device" << ledDevice;
+            continue;
+        }
+        if (!bitnessFile.open(QIODevice::ReadOnly)) {
+            qCWarning(KAMELEON) << "failed to open" << bitnessFile.fileName() << bitnessFile.error() << bitnessFile.errorString();
+            continue;
+        }
+        QString bitnessStr = bitnessFile.readAll().trimmed();
+        bitnessFile.close();
+        if (bitnessStr.toInt() != 255) {
+            qCInfo(KAMELEON) << "device" << ledDevice << "has max_brightness" << bitnessStr << "!= 255 and does not support 8 bit color";
             continue;
         }
 

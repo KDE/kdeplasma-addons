@@ -12,6 +12,7 @@
 
 #define LED_SYSFS_PATH "/sys/class/leds/"
 #define LED_INDEX_FILE "/multi_index"
+#define LED_BITNESS_FILE "/max_brightness"
 #define LED_RGB_FILE "/multi_intensity"
 
 class Kameleon : public KDEDModule
