@@ -1,7 +1,29 @@
 {
     "KPlugin": {
         "Description": "Synchronizes device LEDs with the Plasma accent color",
-        "Name": "Kameleon"
+        "Description[ar]": "يزامن مصابيح LED الخاصة بالجهاز مع لون البلازما المميز",
+        "Description[ca@valencia]": "Sincronitza els LED del dispositiu amb el color d'accent de Plasma",
+        "Description[ca]": "Sincronitza els LED del dispositiu amb el color d'accent del Plasma",
+        "Description[eo]": "Sinkronigas aparat-LEDojn kun la akcentkoloro de Plasma",
+        "Description[he]": "מסנכרן את נוריות ההתקן עם הצבע המשני של פלזמה",
+        "Description[ka]": "მოწყობილობის LED-ების სინქრონიზაცია Plasma-ის მახვილის ფერთან",
+        "Description[nl]": "LED's van apparaat synchroniseren met de kleur voor accentueren van Plasma",
+        "Description[sl]": "Sinhronizira LED diode naprave z barvo poudarka Plasme",
+        "Description[tr]": "Aygıt LED’lerini Plasma vurgu rengiyle eşleştirir",
+        "Description[uk]": "Синхронізує світлодіоди пристрою із кольором акценту Плазми",
+        "Description[x-test]": "xxSynchronizes device LEDs with the Plasma accent colorxx",
+        "Name": "Kameleon",
+        "Name[ar]": "كاميليون",
+        "Name[ca@valencia]": "Kameleon",
+        "Name[ca]": "Kameleon",
+        "Name[eo]": "Kameleon",
+        "Name[he]": "Kameleon",
+        "Name[ka]": "კამელეონი",
+        "Name[nl]": "Kameleon",
+        "Name[sl]": "Kameleon",
+        "Name[tr]": "Kameleon",
+        "Name[uk]": "Kameleon",
+        "Name[x-test]": "xxKameleonxx"
     },
     "X-KDE-Kded-autoload": true
 }

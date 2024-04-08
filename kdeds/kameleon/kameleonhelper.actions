@@ -3,11 +3,44 @@
 
 [Domain]
 Name=Kameleon
+Name[ar]=كاميليون
+Name[ca]=Kameleon
+Name[ca@valencia]=Kameleon
+Name[eo]=Kameleon
+Name[he]=Kameleon
+Name[ka]=კამელეონი
+Name[nl]=Kameleon
+Name[sl]=Kameleon
+Name[tr]=Kameleon
+Name[uk]=Kameleon
+Name[x-test]=xxKameleonxx
 Icon=color
 
 [org.kde.kameleonhelper.writecolor]
 Name=Write color
+Name[ar]=اكتب لون
+Name[ca]=Escriu un color
+Name[ca@valencia]=Escriu un color
+Name[eo]=Skribkoloro
+Name[he]=כתיבת צבע
+Name[ka]=ჩაწერის ფერი
+Name[nl]=Kleur schrijven
+Name[sl]=Barva pisanja
+Name[tr]=Renk yaz
+Name[uk]=Записування кольору
+Name[x-test]=xxWrite colorxx
 Description=Allow writing accent color to device LEDs
+Description[ar]=اسمح بكتابة لون التمييز إلى مصابيح الجهاز
+Description[ca]=Permet escriure l'accent de color a un dispositiu LED
+Description[ca@valencia]=Permet escriure l'accent de color a un dispositiu LED
+Description[eo]=Permesi skribadon de akcentkoloro al aparat-LEDoj
+Description[he]=לאפשר כתיבת צבע משני לנוריות ההתקן
+Description[ka]=მახვილის ფერების ჩაწერის დაშვება მოწყობილობის LED-ებზე
+Description[nl]=Accentuatiekleur toestaan te schrijven naar LED's van apparaat
+Description[sl]=Dovoli pisanje poudarjene barve na LED diode naprave
+Description[tr]=Vurgu rengini aygıt LED’lerine yazmaya olanak tanır
+Description[uk]=Уможливлення запису кольору акценту на світлодіоди пристрою
+Description[x-test]=xxAllow writing accent color to device LEDsxx
 Policy=yes
 PolicyInactive=yes
 Persistence=session
