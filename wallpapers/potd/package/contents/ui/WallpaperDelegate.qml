@@ -112,7 +112,7 @@ FocusScope {
     Kirigami.ShadowedRectangle {
         id: thumbnail
         anchors.fill: parent
-        radius: Kirigami.Kirigami.Units.cornerRadius
+        radius: Kirigami.Units.cornerRadius
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: Kirigami.Theme.View
 
