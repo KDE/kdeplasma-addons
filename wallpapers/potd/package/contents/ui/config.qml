@@ -42,7 +42,7 @@ Kirigami.FormLayout {
             }
             return [];
         }
-        updateOverMeteredConnection: root.configuration.UpdateOverMeteredConnection
+        updateOverMeteredConnection: cfg_UpdateOverMeteredConnection
     }
 
     Row {
@@ -72,12 +72,12 @@ Kirigami.FormLayout {
     QQC2.CheckBox {
         id: updateOverMeteredConnectionCheckBox
 
-        checked: root.cfg_UpdateOverMeteredConnection === 1
+        checked: cfg_UpdateOverMeteredConnection === 1
         visible: backend.networkInfomationAvailable
         text: i18ndc("plasma_wallpaper_org.kde.potd", "@option:check", "Update when using metered network connection")
 
         onToggled: {
-            root.cfg_UpdateOverMeteredConnection = checked ? 1 : 0;
+            cfg_UpdateOverMeteredConnection = checked ? 1 : 0;
         }
     }
 
@@ -117,7 +117,7 @@ Kirigami.FormLayout {
 
         function setMethod() {
             for (var i = 0; i < model.length; i++) {
-                if (model[i]["fillMode"] === root.cfg_FillMode) {
+                if (model[i]["fillMode"] === cfg_FillMode) {
                     resizeComboBox.currentIndex = i;
                     break;
                 }
@@ -140,8 +140,8 @@ Kirigami.FormLayout {
     WallpaperPreview {
         id: wallpaperPreview
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label", "Today's picture:")
-        backgroundColor: root.cfg_Color
-        visible: !!root.configuration.Provider // provider is not empty
+        backgroundColor: cfg_Color
+        visible: !!cfg_Provider // provider is not empty
     }
 
     Item {
