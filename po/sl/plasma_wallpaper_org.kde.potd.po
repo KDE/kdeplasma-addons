@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:38+0000\n"
+"POT-Creation-Date: 2024-04-10 00:39+0000\n"
 "PO-Revision-Date: 2023-07-13 06:37+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#: package/contents/ui/config.qml:43
+#: package/contents/ui/config.qml:49
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Ponudnik:"
 
-#: package/contents/ui/config.qml:62
+#: package/contents/ui/config.qml:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -34,85 +34,85 @@ msgstr ""
 "Ta ponudnik ozadij ne filtrira slik, ki bi bile lahko občutljive oz. sporne. "
 "Bodite previdni, če bodo te slike prikazane v javnosti."
 
-#: package/contents/ui/config.qml:71
+#: package/contents/ui/config.qml:77
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Posodobi, kadar je v rabi merjena povezava z omrežjem"
 
-#: package/contents/ui/config.qml:80
+#: package/contents/ui/config.qml:90
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Pozicioniranje:"
 
-#: package/contents/ui/config.qml:83
+#: package/contents/ui/config.qml:93
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Povečane in obrezane"
 
-#: package/contents/ui/config.qml:87
+#: package/contents/ui/config.qml:97
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Povečane"
 
-#: package/contents/ui/config.qml:91
+#: package/contents/ui/config.qml:101
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Povečane z obržanimi proporci"
 
-#: package/contents/ui/config.qml:95
+#: package/contents/ui/config.qml:105
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Usredinjene"
 
-#: package/contents/ui/config.qml:99
+#: package/contents/ui/config.qml:109
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Tlakovane"
 
-#: package/contents/ui/config.qml:120
+#: package/contents/ui/config.qml:130
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Barva ozadja:"
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:131
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Izbrana barva ozadja"
 
-#: package/contents/ui/config.qml:132
+#: package/contents/ui/config.qml:142
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Današnja slika:"
 
-#: package/contents/ui/config.qml:148
+#: package/contents/ui/config.qml:158
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Naslov:"
 
-#: package/contents/ui/config.qml:163
+#: package/contents/ui/config.qml:173
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Avtor:"
 
-#: package/contents/ui/config.qml:182
+#: package/contents/ui/config.qml:192
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Odpri vsebovano mapo"
 
-#: package/contents/ui/config.qml:186
+#: package/contents/ui/config.qml:196
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

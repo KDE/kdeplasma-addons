@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:38+0000\n"
+"POT-Creation-Date: 2024-04-10 00:39+0000\n"
 "PO-Revision-Date: 2024-01-17 17:36+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -18,13 +18,13 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 "X-Generator: Lokalize 23.08.1\n"
 
-#: package/contents/ui/config.qml:43
+#: package/contents/ui/config.qml:49
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "المزود:"
 
-#: package/contents/ui/config.qml:62
+#: package/contents/ui/config.qml:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -34,85 +34,85 @@ msgstr ""
 "لا يقوم مزود خلفية هذا بتصفية الصور التي قد تكون حساسة أو مرفوضة. توخي الحذر "
 "إذا تم عرض هذه الصور في الأماكن العامة."
 
-#: package/contents/ui/config.qml:71
+#: package/contents/ui/config.qml:77
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "حدّث عندما تستخدم اتصال بشبكة محدودة"
 
-#: package/contents/ui/config.qml:80
+#: package/contents/ui/config.qml:90
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "الموضع:"
 
-#: package/contents/ui/config.qml:83
+#: package/contents/ui/config.qml:93
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "مكبّرة ومقصوصة"
 
-#: package/contents/ui/config.qml:87
+#: package/contents/ui/config.qml:97
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "مكبّرة"
 
-#: package/contents/ui/config.qml:91
+#: package/contents/ui/config.qml:101
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "مكبّرة مع إبقاء النّسب"
 
-#: package/contents/ui/config.qml:95
+#: package/contents/ui/config.qml:105
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "موسّطة"
 
-#: package/contents/ui/config.qml:99
+#: package/contents/ui/config.qml:109
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "مكرّرة"
 
-#: package/contents/ui/config.qml:120
+#: package/contents/ui/config.qml:130
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "لون الخلفيّة:"
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:131
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "اختر لون الخفيّة"
 
-#: package/contents/ui/config.qml:132
+#: package/contents/ui/config.qml:142
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "صورة اليوم:"
 
-#: package/contents/ui/config.qml:148
+#: package/contents/ui/config.qml:158
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "العنوان:"
 
-#: package/contents/ui/config.qml:163
+#: package/contents/ui/config.qml:173
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "المؤلّف:"
 
-#: package/contents/ui/config.qml:182
+#: package/contents/ui/config.qml:192
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "افتح المجلد الحاوي"
 
-#: package/contents/ui/config.qml:186
+#: package/contents/ui/config.qml:196
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

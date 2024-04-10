@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:38+0000\n"
+"POT-Creation-Date: 2024-04-10 00:39+0000\n"
 "PO-Revision-Date: 2023-07-28 11:07+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: package/contents/ui/config.qml:43
+#: package/contents/ui/config.qml:49
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Provizanto:"
 
-#: package/contents/ui/config.qml:62
+#: package/contents/ui/config.qml:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -34,85 +34,85 @@ msgstr ""
 "Ĉi tiu tapeta provizanto ne filtras bildojn, kiuj povas esti sentemaj aŭ "
 "kritikindaj. Atentu se ĉi tiuj bildoj aperos publike."
 
-#: package/contents/ui/config.qml:71
+#: package/contents/ui/config.qml:77
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Ĝisdatigu kiam vi uzas mezuritan retkonekton"
 
-#: package/contents/ui/config.qml:80
+#: package/contents/ui/config.qml:90
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Pozicio:"
 
-#: package/contents/ui/config.qml:83
+#: package/contents/ui/config.qml:93
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Skalita kaj Tondita"
 
-#: package/contents/ui/config.qml:87
+#: package/contents/ui/config.qml:97
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Skalita"
 
-#: package/contents/ui/config.qml:91
+#: package/contents/ui/config.qml:101
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Skalitaj, Konservi Proporciojn"
 
-#: package/contents/ui/config.qml:95
+#: package/contents/ui/config.qml:105
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Centrita"
 
-#: package/contents/ui/config.qml:99
+#: package/contents/ui/config.qml:109
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Kahelizita"
 
-#: package/contents/ui/config.qml:120
+#: package/contents/ui/config.qml:130
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Fona koloro:"
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:131
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Elekti Fona Koloro"
 
-#: package/contents/ui/config.qml:132
+#: package/contents/ui/config.qml:142
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Hodiaŭa bildo:"
 
-#: package/contents/ui/config.qml:148
+#: package/contents/ui/config.qml:158
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Titolo:"
 
-#: package/contents/ui/config.qml:163
+#: package/contents/ui/config.qml:173
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Aŭtoro:"
 
-#: package/contents/ui/config.qml:182
+#: package/contents/ui/config.qml:192
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Malfermi Enhavan Dosierujon"
 
-#: package/contents/ui/config.qml:186
+#: package/contents/ui/config.qml:196
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

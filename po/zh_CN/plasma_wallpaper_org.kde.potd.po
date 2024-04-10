@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-23 00:38+0000\n"
+"POT-Creation-Date: 2024-04-10 00:39+0000\n"
 "PO-Revision-Date: 2024-03-30 19:36\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,13 +18,13 @@ msgstr ""
 "kde.potd.pot\n"
 "X-Crowdin-File-ID: 43667\n"
 
-#: package/contents/ui/config.qml:43
+#: package/contents/ui/config.qml:49
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "提供："
 
-#: package/contents/ui/config.qml:62
+#: package/contents/ui/config.qml:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -34,85 +34,85 @@ msgstr ""
 "此壁纸提供者不会过滤敏感的或令人反感的图像。如果这些图像将在公共场所展示，请"
 "小心使用。"
 
-#: package/contents/ui/config.qml:71
+#: package/contents/ui/config.qml:77
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "使用按流量计费网络连接时更新"
 
-#: package/contents/ui/config.qml:80
+#: package/contents/ui/config.qml:90
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "位置："
 
-#: package/contents/ui/config.qml:83
+#: package/contents/ui/config.qml:93
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "缩放并裁剪"
 
-#: package/contents/ui/config.qml:87
+#: package/contents/ui/config.qml:97
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "缩放"
 
-#: package/contents/ui/config.qml:91
+#: package/contents/ui/config.qml:101
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "缩放，保持比例"
 
-#: package/contents/ui/config.qml:95
+#: package/contents/ui/config.qml:105
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "居中"
 
-#: package/contents/ui/config.qml:99
+#: package/contents/ui/config.qml:109
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "平铺"
 
-#: package/contents/ui/config.qml:120
+#: package/contents/ui/config.qml:130
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "背景色："
 
-#: package/contents/ui/config.qml:121
+#: package/contents/ui/config.qml:131
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "选择背景色"
 
-#: package/contents/ui/config.qml:132
+#: package/contents/ui/config.qml:142
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "今日图片："
 
-#: package/contents/ui/config.qml:148
+#: package/contents/ui/config.qml:158
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "标题："
 
-#: package/contents/ui/config.qml:163
+#: package/contents/ui/config.qml:173
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "作者："
 
-#: package/contents/ui/config.qml:182
+#: package/contents/ui/config.qml:192
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "打开所在文件夹"
 
-#: package/contents/ui/config.qml:186
+#: package/contents/ui/config.qml:196
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
