@@ -4,10 +4,9 @@
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
 
-import QtQuick 2.5
+import QtQuick
 import QtQuick.Controls 2.8 as QQC2
 import QtQuick.Layouts 1.15
-import QtQuick.Window 2.15
 
 import org.kde.kquickcontrols 2.0 as KQC2
 import org.kde.kirigami 2.20 as Kirigami
@@ -24,11 +23,7 @@ Kirigami.FormLayout {
     property int cfg_UpdateOverMeteredConnection
     property alias formLayout: root
 
-    property var screen : Screen
-    property size screenSize
-    onScreenChanged: function() {
-        screenSize = !!screen.geometry ? Qt.size(screen.geometry.width, screen.geometry.height):  Qt.size(screen.width, screen.height);
-    }
+    readonly property size screenSize: Qt.size(Screen.width, Screen.height)
 
     PotdBackend {
         id: backend
