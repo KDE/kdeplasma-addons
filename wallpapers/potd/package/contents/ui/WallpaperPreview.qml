@@ -4,8 +4,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-import QtQuick 2.15
-import QtQuick.Window 2.0 // for Screen
+import QtQuick
 
 import org.kde.kirigami 2.12 as Kirigami // For Action and Units
 
@@ -17,21 +16,21 @@ Column {
     spacing: 0
 
     /**
-     * The background color of the preview area when the image is loaded
-     */
+    * The background color of the preview area when the image is loaded
+    */
     property alias backgroundColor: delegate.backgroundColor
 
     /**
-     * The shadow height needs to be considered in the padding.
-     */
+    * The shadow height needs to be considered in the padding.
+    */
     property alias shadowOffset: delegate.shadowOffset
 
     // Wallpaper preview (including save button)
     WallpaperDelegate {
         id: delegate
 
-        width: Math.round(root.screenSize.width / 4 + Kirigami.Units.smallSpacing * 2)
-        height: Math.round(root.screenSize.height / 4 + Kirigami.Units.smallSpacing * 2)
+        width: Math.round(root.screenSize.width / 10 + Kirigami.Units.smallSpacing * 2) * Screen.devicePixelRatio
+        height: Math.round(root.screenSize.height / 10 + Kirigami.Units.smallSpacing * 2) * Screen.devicePixelRatio
 
         localUrl: backend.localUrl
         infoUrl: backend.infoUrl
