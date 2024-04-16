@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-10 00:39+0000\n"
+"POT-Creation-Date: 2024-04-16 00:39+0000\n"
 "PO-Revision-Date: 2024-01-16 00:04+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
@@ -19,13 +19,13 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 3.0.1\n"
 
-#: package/contents/ui/config.qml:49
+#: package/contents/ui/config.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Teikėjas:"
 
-#: package/contents/ui/config.qml:68
+#: package/contents/ui/config.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -36,85 +36,85 @@ msgstr ""
 "įžeidžiantis ar nepageidaujamas turinys. Naudokite apdairiai, jei šie "
 "paveikslai bus rodomi viešoje vietoje."
 
-#: package/contents/ui/config.qml:77
+#: package/contents/ui/config.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Atnaujinti, kai naudojamas ribotų duomenų tinklo ryšys"
 
-#: package/contents/ui/config.qml:90
+#: package/contents/ui/config.qml:85
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Išdėstymas:"
 
-#: package/contents/ui/config.qml:93
+#: package/contents/ui/config.qml:88
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and Cropped"
 msgstr "Pakeisto mastelio ir apkarpytas"
 
-#: package/contents/ui/config.qml:97
+#: package/contents/ui/config.qml:92
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Pakeisto mastelio"
 
-#: package/contents/ui/config.qml:101
+#: package/contents/ui/config.qml:96
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, Keep Proportions"
 msgstr "Pakeisto mastelio, išlaikytų proporcijų"
 
-#: package/contents/ui/config.qml:105
+#: package/contents/ui/config.qml:100
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Centruotas"
 
-#: package/contents/ui/config.qml:109
+#: package/contents/ui/config.qml:104
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Išklotas"
 
-#: package/contents/ui/config.qml:130
+#: package/contents/ui/config.qml:125
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Fono spalva:"
 
-#: package/contents/ui/config.qml:131
+#: package/contents/ui/config.qml:126
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Pasirinkite fono spalvą"
 
-#: package/contents/ui/config.qml:142
+#: package/contents/ui/config.qml:137
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Šiandienos paveikslas:"
 
-#: package/contents/ui/config.qml:158
+#: package/contents/ui/config.qml:153
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Pavadinimas:"
 
-#: package/contents/ui/config.qml:173
+#: package/contents/ui/config.qml:168
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Autorius:"
 
-#: package/contents/ui/config.qml:192
+#: package/contents/ui/config.qml:187
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Atverti vidinį aplanką"
 
-#: package/contents/ui/config.qml:196
+#: package/contents/ui/config.qml:191
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
@@ -165,26 +165,26 @@ msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
 msgstr "Nepavyko gauti darbalaukio fono iš interneto."
 
-#: package/contents/ui/WallpaperPreview.qml:49
+#: package/contents/ui/WallpaperPreview.qml:48
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
 msgstr "Įrašyti paveikslą kaip…"
 
-#: package/contents/ui/WallpaperPreview.qml:52
+#: package/contents/ui/WallpaperPreview.qml:51
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
 msgstr "Įrašyti šiandienos paveikslą į vietinį diską"
 
-#: package/contents/ui/WallpaperPreview.qml:58
+#: package/contents/ui/WallpaperPreview.qml:57
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
 msgstr "Atverti nuorodą naršyklėje…"
 
-#: package/contents/ui/WallpaperPreview.qml:61
+#: package/contents/ui/WallpaperPreview.qml:60
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
