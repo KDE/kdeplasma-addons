@@ -21,6 +21,7 @@ Name[tr]=Kameleon
 Name[uk]=Kameleon
 Name[x-test]=xxKameleonxx
 Name[zh_CN]=变色龙
+Name[zh_TW]=Kameleon
 Icon=color
 
 [org.kde.kameleonhelper.writecolor]
@@ -43,6 +44,7 @@ Name[tr]=Renk yaz
 Name[uk]=Записування кольору
 Name[x-test]=xxWrite colorxx
 Name[zh_CN]=写入颜色
+Name[zh_TW]=寫入顏色
 Description=Allow writing accent color to device LEDs
 Description[ar]=اسمح بكتابة لون التمييز إلى مصابيح الجهاز
 Description[bg]=Разрешаване на запис на акцентен цвят на светодиодите на устройството
@@ -62,6 +64,7 @@ Description[tr]=Vurgu rengini aygıt LED’lerine yazmaya olanak tanır
 Description[uk]=Уможливлення запису кольору акценту на світлодіоди пристрою
 Description[x-test]=xxAllow writing accent color to device LEDsxx
 Description[zh_CN]=允许将系统重点色写入到设备灯效
+Description[zh_TW]=提供寫入強調色到裝置 LED 的支援
 Policy=yes
 PolicyInactive=yes
 Persistence=session
