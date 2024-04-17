@@ -153,7 +153,7 @@ FocusScope {
                 Drag.dragType: Drag.Automatic
                 Drag.supportedActions: Qt.CopyAction
                 Drag.mimeData: {
-                    "text/uri-list" : delegate.localUrl,
+                    "text/uri-list" : [delegate.localUrl],
                     "text/plain": delegate.title,
                 }
 
