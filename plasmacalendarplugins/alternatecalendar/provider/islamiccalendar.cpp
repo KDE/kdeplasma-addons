@@ -7,6 +7,7 @@
 #include "islamiccalendar.h"
 
 #include "icucalendar_p.h"
+#include <unicode/numsys.h>
 
 class IslamicCalendarProviderPrivate : public ICUCalendarPrivate
 {
@@ -27,6 +28,7 @@ private:
     // See https://unicode-org.github.io/icu/userguide/locale/#keywords for available keywords
     icu::Locale m_arabicLocale;
     icu::Locale m_nativeLocale;
+    bool m_isArabicNumberingSystem = false;
 };
 
 IslamicCalendarProviderPrivate::IslamicCalendarProviderPrivate(CalendarSystem::System calendarSystem)
@@ -38,36 +40,50 @@ IslamicCalendarProviderPrivate::IslamicCalendarProviderPrivate(CalendarSystem::S
 
     // See https://github.com/unicode-org/cldr/blob/main/common/bcp47/number.xml for available number systems
     // See https://cldr.unicode.org/development/development-process/design-proposals/islamic-calendar-types for available Islamic caneldar types
+    const QByteArray iso639Language = QLocale::languageToCode(QLocale::system().language()).toLatin1().toLower();
+    const QByteArray iso3166Country = QLocale::territoryToCode(QLocale::system().territory()).toLatin1().toUpper();
+    const char *keywords = nullptr;
+    QLocale::Language typicalLanguage = QLocale::Arabic;
+    QLocale::Territory typicalTerritory = QLocale::SaudiArabia;
     switch (calendarSystem) {
     case CalendarSystem::Jalali: {
-        m_arabicLocale = icu::Locale("ar_IR", 0, 0, "calendar=persian;numbers=arab");
-        m_nativeLocale = icu::Locale(QLocale::system().name().toLatin1(), 0, 0, "calendar=persian;");
+        keywords = "calendar=persian;";
+        typicalLanguage = QLocale::Persian;
+        typicalTerritory = QLocale::Iran;
         break;
     }
     case CalendarSystem::Islamic: {
-        m_arabicLocale = icu::Locale("ar_SA", 0, 0, "calendar=islamic;numbers=arab");
-        m_nativeLocale = icu::Locale(QLocale::system().name().toLatin1(), 0, 0, "calendar=islamic;");
+        keywords = "calendar=islamic;";
         break;
     }
     case CalendarSystem::IslamicCivil: {
-        m_arabicLocale = icu::Locale("ar_SA", 0, 0, "calendar=islamic-civil;numbers=arab");
-        m_nativeLocale = icu::Locale(QLocale::system().name().toLatin1(), 0, 0, "calendar=islamic-civil;");
+        keywords = "calendar=islamic-civil;";
         break;
     }
     case CalendarSystem::IslamicUmalqura: {
-        m_arabicLocale = icu::Locale("ar_SA", 0, 0, "calendar=islamic-umalqura;numbers=arab");
-        m_nativeLocale = icu::Locale(QLocale::system().name().toLatin1(), 0, 0, "calendar=islamic-umalqura;");
+        keywords = "calendar=islamic-umalqura;";
         break;
     }
     default:
         Q_UNREACHABLE();
     }
 
-    m_calendar.reset(icu::Calendar::createInstance(m_arabicLocale, m_errorCode));
+    m_nativeLocale = icu::Locale(iso639Language, iso3166Country, nullptr, keywords);
+    std::unique_ptr<icu::NumberingSystem> numberingSystem(icu::NumberingSystem::createInstance(m_nativeLocale, m_errorCode));
+    m_isArabicNumberingSystem = U_SUCCESS(m_errorCode) && QByteArrayView(numberingSystem->getName()).startsWith(QByteArrayView("arab"));
+    if (!m_isArabicNumberingSystem) {
+        m_arabicLocale = icu::Locale(QLocale::languageToCode(typicalLanguage).toLatin1().toLower(),
+                                     QLocale::territoryToCode(typicalTerritory).toLatin1().toUpper(),
+                                     nullptr,
+                                     keywords);
+    }
+
+    m_calendar.reset(icu::Calendar::createInstance(m_nativeLocale, m_errorCode));
 }
 
 QString IslamicCalendarProviderPrivate::formattedDateString(const icu::UnicodeString &str) const
 {
+    Q_ASSERT(!m_isArabicNumberingSystem);
     UErrorCode errorCode = U_ZERO_ERROR;
     icu::UnicodeString dateString;
     icu::SimpleDateFormat formatter(str, m_arabicLocale, errorCode);
@@ -105,21 +121,17 @@ CalendarEvents::CalendarEventsPlugin::SubLabel IslamicCalendarProviderPrivate::s
         return sublabel;
     }
 
-    const bool isLocaleArabicOrPersian = QLocale::system().language() == QLocale::Arabic || QLocale::system().language() == QLocale::Persian;
-
-    sublabel.dayLabel = isLocaleArabicOrPersian ? formattedDateString("d") : QString::number(day());
-    // From QLocale(QLocale::Arabic).dateFormat() and QLocale(QLocale::Persian).dateFormat()
-    const QString arabicDateString = formattedDateString("d MMMM yyyy");
+    sublabel.dayLabel = formattedDateStringInNativeLanguage("d");
     // Translated month names are available in https://github.com/unicode-org/icu/tree/main/icu4c/source/data/locales
-    sublabel.label = isLocaleArabicOrPersian
-        ? arabicDateString
+    sublabel.label = m_isArabicNumberingSystem
+        ? formattedDateStringInNativeLanguage("d MMMM yyyy")
         : i18ndc("plasma_calendar_alternatecalendar",
                  "@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 Islamic calendar date in Arabic",
                  "%1 %2, %3 (%4)",
                  QString::number(day()),
                  formattedDateStringInNativeLanguage("MMMM"),
                  QString::number(year()),
-                 arabicDateString);
+                 formattedDateString("d MMMM yyyy"));
     sublabel.priority = CalendarEvents::CalendarEventsPlugin::SubLabelPriority::Low;
 
     return sublabel;
