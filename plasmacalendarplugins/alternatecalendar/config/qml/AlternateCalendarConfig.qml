@@ -24,7 +24,7 @@ KCMUtils.SimpleKCM {
     // expected API
     function saveConfig() {
         configStorage.calendarSystem = calendarSystemComboBox.currentValue;
-        configStorage.dateOffset = (dateOffsetSpinBoxLoader?.item as T.SpinBox).value ?? 0;
+        configStorage.dateOffset = (dateOffsetSpinBoxLoader.item as T.SpinBox)?.value ?? 0;
 
         configStorage.save();
     }
