@@ -21,6 +21,8 @@ if(NOT SeleniumWebDriverATSPI_FOUND)
     return()
 endif()
 
+add_subdirectory(calendarplugins)
+
 add_test(
     NAME calculatortest
     COMMAND selenium-webdriver-at-spi-run ${CMAKE_CURRENT_SOURCE_DIR}/calculatortest.py --failfast

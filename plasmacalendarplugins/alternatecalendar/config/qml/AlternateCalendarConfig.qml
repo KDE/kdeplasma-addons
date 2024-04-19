@@ -43,6 +43,11 @@ KCMUtils.SimpleKCM {
                 model: configStorage.calendarSystemModel
                 textRole: "display"
                 valueRole: "id"
+                Accessible.name: currentText
+                Accessible.onPressAction: {
+                    currentIndex = currentIndex == count - 1 ? 0 : currentIndex + 1;
+                    configPage.configurationChanged();
+                }
                 onActivated: configPage.configurationChanged()
                 Component.onCompleted: {
                     currentIndex = configStorage.currentIndex;

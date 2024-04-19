@@ -39,6 +39,7 @@ Dependencies:
 RuntimeDependencies:
 - 'on': ['Linux']
   'require':
+    'plasma/plasma-desktop': '@same'
     'plasma/plasma-nano': '@same' # For appium tests
 
 Options:
