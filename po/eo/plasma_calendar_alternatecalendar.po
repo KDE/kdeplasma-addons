@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-19 00:39+0000\n"
+"POT-Creation-Date: 2024-04-20 00:39+0000\n"
 "PO-Revision-Date: 2023-05-19 12:27+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -84,7 +84,7 @@ msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "Kalendara sistemo:"
 
-#: config/qml/AlternateCalendarConfig.qml:55
+#: config/qml/AlternateCalendarConfig.qml:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -94,20 +94,20 @@ msgstr ""
 "Ĉi tiu kalendaro baziĝas sur pura astronomia kalkulo. Ĝi ne konsideras iujn "
 "ajn kriteriojn pri kreskan videbleco."
 
-#: config/qml/AlternateCalendarConfig.qml:63
+#: config/qml/AlternateCalendarConfig.qml:68
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "Data deŝovo:"
 
-#: config/qml/AlternateCalendarConfig.qml:74
+#: config/qml/AlternateCalendarConfig.qml:79
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 tago"
 msgstr[1] "%1 tagoj"
 
-#: config/qml/AlternateCalendarConfig.qml:77
+#: config/qml/AlternateCalendarConfig.qml:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

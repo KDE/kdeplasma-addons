@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-19 00:39+0000\n"
+"POT-Creation-Date: 2024-04-20 00:39+0000\n"
 "PO-Revision-Date: 2023-05-21 07:26+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -81,7 +81,7 @@ msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "Système de calendrier :"
 
-#: config/qml/AlternateCalendarConfig.qml:55
+#: config/qml/AlternateCalendarConfig.qml:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -91,20 +91,20 @@ msgstr ""
 "Ce calendrier repose sur un calcul purement astronomique. Il ne tient compte "
 "d'aucun critère de visibilité du croissant de lune."
 
-#: config/qml/AlternateCalendarConfig.qml:63
+#: config/qml/AlternateCalendarConfig.qml:68
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "Décalage de date :"
 
-#: config/qml/AlternateCalendarConfig.qml:74
+#: config/qml/AlternateCalendarConfig.qml:79
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "Jour %1"
 msgstr[1] "%1 jours"
 
-#: config/qml/AlternateCalendarConfig.qml:77
+#: config/qml/AlternateCalendarConfig.qml:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

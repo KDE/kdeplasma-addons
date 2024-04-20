@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-19 00:39+0000\n"
+"POT-Creation-Date: 2024-04-20 00:39+0000\n"
 "PO-Revision-Date: 2023-05-21 14:49+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -83,7 +83,7 @@ msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "Calendar system:"
 
-#: config/qml/AlternateCalendarConfig.qml:55
+#: config/qml/AlternateCalendarConfig.qml:60
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -93,20 +93,20 @@ msgstr ""
 "This calendar is based on pure astronomical calculation. It doesn't consider "
 "any crescent visibility criteria."
 
-#: config/qml/AlternateCalendarConfig.qml:63
+#: config/qml/AlternateCalendarConfig.qml:68
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "Date offset:"
 
-#: config/qml/AlternateCalendarConfig.qml:74
+#: config/qml/AlternateCalendarConfig.qml:79
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 day"
 msgstr[1] "%1 days"
 
-#: config/qml/AlternateCalendarConfig.qml:77
+#: config/qml/AlternateCalendarConfig.qml:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
