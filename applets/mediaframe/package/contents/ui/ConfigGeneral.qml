@@ -178,8 +178,8 @@ KCM.SimpleKCM {
         }
 
         Item {
-                Kirigami.FormData.isSection: false
-            }
+            Kirigami.FormData.isSection: false
+        }
 
         CheckBox {
             id: randomizeCheckBox
