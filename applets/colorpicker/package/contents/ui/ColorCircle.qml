@@ -99,7 +99,7 @@ PlasmaComponents3.ToolButton {
 
         TapHandler {
             acceptedButtons: Qt.MiddleButton
-            onTapped: picker.copyToClipboard(colorButton.text)
+            onTapped: root.copyToClipboard(colorButton.text)
         }
     }
 }

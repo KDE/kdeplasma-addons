@@ -17,8 +17,9 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kcmutils as KCMUtils
 import org.kde.config as KConfig
 import org.kde.kwindowsystem 1.0
+import org.kde.plasma.workspace.dbus as DBus
+import org.kde.plasma.private.colorpicker as Private
 
-import org.kde.plasma.private.colorpicker 2.0 as ColorPicker
 import "logic.js" as Logic
 
 PlasmoidItem {
@@ -49,18 +50,30 @@ PlasmoidItem {
         }
 
         if (Plasmoid.configuration.autoClipboard) {
-            picker.copyToClipboard(Logic.formatColor(color, root.defaultFormat))
+            root.copyToClipboard(Logic.formatColor(color, root.defaultFormat))
         }
     }
 
     function pickColor() {
-        root.expanded = false
-        picker.pick()
+        root.expanded = false;
+        const msg = {service: "org.kde.KWin", path: "/ColorPicker", iface: "org.kde.kwin.ColorPicker", member: "pick"} as DBus.dbusMessage;
+        const asyncReply = DBus.SessionBus.asyncCall(msg);
+        function callback() {
+            if (!asyncReply.isValid) {
+                console.error(asyncReply.error)
+                return;
+            }
+            root.colorPicked(Private.Utils.fromRGBA(Number(asyncReply.value[0])));
+        }
+        asyncReply.finished.connect(callback);
     }
 
-    ColorPicker.GrabWidget {
-        id: picker
-        onCurrentColorChanged: colorPicked(currentColor)
+    function copyToClipboard(text) {
+        const textEdit = Qt.createQmlObject("import QtQuick; TextEdit {}", root);
+        textEdit.text = text;
+        textEdit.selectAll();
+        textEdit.copy();
+        textEdit.destroy();
     }
 
     Component {
@@ -303,14 +316,14 @@ PlasmoidItem {
             }
 
             function copy() {
-                picker.copyToClipboard(Logic.formatColor(currentColor, root.defaultFormat))
+                root.copyToClipboard(Logic.formatColor(currentColor, root.defaultFormat))
                 colorLabel.visible = false;
                 copyIndicatorLabel.visible = true;
                 colorLabelRestoreTimer.start()
             }
 
             function openMenu() {
-                const menu = Logic.createContextMenu(this, currentColor, picker, colorLabel, copyIndicatorLabel, colorLabelRestoreTimer);
+                const menu = Logic.createContextMenu(this, currentColor, root, colorLabel, copyIndicatorLabel, colorLabelRestoreTimer);
                 menu.openRelative();
             }
 
