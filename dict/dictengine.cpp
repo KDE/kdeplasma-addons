@@ -114,9 +114,6 @@ static QString wnToHtml(const QString &word, QByteArray &text)
 
 void DictEngine::getDefinition()
 {
-    // One-time connection
-    disconnect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDefinition);
-
     // Clear the old data to prepare for a new lookup
     m_definitionData.clear();
 
@@ -226,7 +223,7 @@ void DictEngine::requestDefinition(const QString &query)
         Q_EMIT dictErrorOccurred(m_tcpSocket->error(), m_tcpSocket->errorString());
         socketClosed();
     });
-    connect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDefinition);
+    connect(m_tcpSocket, &QTcpSocket::readyRead, this, &DictEngine::getDefinition, Qt::SingleShotConnection);
     m_tcpSocket->connectToHost(m_serverName, 2628);
 }
 
