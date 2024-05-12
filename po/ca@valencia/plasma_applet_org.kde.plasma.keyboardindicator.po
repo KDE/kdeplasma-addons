@@ -32,7 +32,7 @@ msgstr "Tecles"
 msgctxt ""
 "@label show keyboard indicator when Caps Lock or Num Lock is activated"
 msgid "Show when activated:"
-msgstr "Mostra quan està activada:"
+msgstr "Mostra quan es marca:"
 
 #: contents/ui/configAppearance.qml:40
 #, kde-format
