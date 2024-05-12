@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2023-03-26 18:35+0100\n"
+"PO-Revision-Date: 2024-05-10 11:33+0100\n"
 "Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -109,12 +109,12 @@ msgstr "Aldonu lanĉilojn per Ŝovi kaj Demeti aŭ per la kunteksta menuo."
 #: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Hide icons"
-msgstr "Kaŝi ikonojn"
+msgstr "Kaŝi piktogramojn"
 
 #: package/contents/ui/main.qml:178
 #, kde-format
 msgid "Show hidden icons"
-msgstr "Montri kaŝitajn ikonojn"
+msgstr "Montri kaŝitajn piktogramojn"
 
 #: package/contents/ui/main.qml:281
 #, kde-format
