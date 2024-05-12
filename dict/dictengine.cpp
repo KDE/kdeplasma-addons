@@ -9,6 +9,7 @@
 #include "dictengine.h"
 
 #include <chrono>
+#include <ranges>
 
 #include <KLocalizedString>
 #include <QDebug>
@@ -148,8 +149,11 @@ void DictEngine::getDicts()
     }
 
     QMap<QString, QString> availableDicts;
-    const QList<QByteArray> retLines = ret.split('\n');
-    for (const QByteArray &curr : retLines) {
+#if (defined(__GNUC__) && __GNUC__ >= 12) || !defined(__GNUC__)
+    for (const QByteArrayView curr : QByteArrayView(ret) | std::views::split('\n')) {
+#else
+    for (const QByteArrayView curr : ret.split('\n')) {
+#endif
         if (curr.endsWith("420") || curr.startsWith("421")) {
             // TODO: what happens if the server is down
         }
@@ -160,7 +164,7 @@ void DictEngine::getDicts()
         }
 
         // ignore status code and empty lines
-        if (curr.startsWith("250") || curr.startsWith("110") || curr.isEmpty()) {
+        if (curr.startsWith("250") || curr.startsWith("110") || curr.empty()) {
             continue;
         }
 
