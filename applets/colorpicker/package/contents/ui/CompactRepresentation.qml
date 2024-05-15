@@ -56,6 +56,7 @@ DropArea {
         width: root.isVertical ? dropArea.buttonSize : implicitWidth
         height: root.isVertical ? implicitHeight : dropArea.buttonSize
 
+        anchors.centerIn: parent
         columns: root.isVertical ? 1 : (1 + (circleRepeater.count > 0 ? circleRepeater.count + 1 : 0))
         rows: root.isVertical ? (1 + (circleRepeater.count > 0 ? circleRepeater.count + 1 : 0)) : 1
         rowSpacing: 0
