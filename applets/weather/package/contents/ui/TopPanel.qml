@@ -48,6 +48,25 @@ GridLayout {
         textFormat: Text.PlainText
     }
 
+    PlasmaComponents.Label {
+        id: tempLabel
+
+        Layout.row: 1
+        Layout.column: 0
+        Layout.fillWidth: true
+        Layout.preferredWidth: 25 // 25% of the view
+        Layout.minimumWidth: sideWidth
+        Layout.alignment: Qt.AlignCenter
+
+        font.pixelSize: Kirigami.Units.iconSizes.medium
+        font.bold: true
+        horizontalAlignment: Text.AlignHCenter
+        wrapMode: Text.NoWrap
+
+        text: observationModel.temperature
+        textFormat: Text.PlainText
+    }
+
     Kirigami.Icon {
         id: conditionIcon
 
@@ -78,7 +97,7 @@ GridLayout {
 
     Item {
         Layout.row: 1
-        Layout.column: 0
+        Layout.column: 2
         Layout.fillWidth: true
         Layout.preferredWidth: 25 // 25% of the view
         Layout.minimumWidth: sideWidth
@@ -110,22 +129,4 @@ GridLayout {
         }
     }
 
-    PlasmaComponents.Label {
-        id: tempLabel
-
-        Layout.row: 1
-        Layout.column: 2
-        Layout.fillWidth: true
-        Layout.preferredWidth: 25 // 25% of the view
-        Layout.minimumWidth: sideWidth
-        Layout.alignment: Qt.AlignCenter
-
-        font.pixelSize: Kirigami.Units.iconSizes.medium
-        font.bold: true
-        horizontalAlignment: Text.AlignHCenter
-        wrapMode: Text.NoWrap
-
-        text: observationModel.temperature
-        textFormat: Text.PlainText
-    }
 }
