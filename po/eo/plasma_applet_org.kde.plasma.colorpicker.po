@@ -2,15 +2,15 @@
 # Copyright (C) 2009 Free Software Foundation, Inc.
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Axel Rousseau <axel@esperanto-jeunes.org>, 2009.
-# Oliver Kellogg <okellogg@users.sourceforge.net>, 2023.
+# Oliver Kellogg <olivermkellogg@gmail.com>, 2023.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-01 00:39+0000\n"
+"POT-Creation-Date: 2024-05-16 00:39+0000\n"
 "PO-Revision-Date: 2024-05-10 11:33+0100\n"
-"Last-Translator: Oliver Kellogg <okellogg@users.sourceforge.net>\n"
+"Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
 "MIME-Version: 1.0\n"
@@ -31,13 +31,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Mezklaku por kopii la kolorkodon"
 
-#: package/contents/ui/CompactRepresentation.qml:74
+#: package/contents/ui/CompactRepresentation.qml:75
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Elekti koloron"
 
-#: package/contents/ui/CompactRepresentation.qml:81
+#: package/contents/ui/CompactRepresentation.qml:82
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
