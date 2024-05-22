@@ -49,6 +49,7 @@
                 "Name[zh_TW]": "Plasma 團隊"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=dictionary",
         "Category": "Language",
         "Description": "Look up the meaning of words and their translation into different languages",
         "Description[ar]": "انظر معاني الكلمات و ترجمتها بلغات مختلفة",

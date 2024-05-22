@@ -48,6 +48,7 @@
                 "Name[zh_TW]": "Vlad Zahorodnii"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Cube",
         "Category": "Window Management",
         "Description": "Arrange desktops in a virtual cube",
         "Description[ar]": "رتب أسطح المكتب في مكعب خيالي",

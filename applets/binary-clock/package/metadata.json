@@ -138,6 +138,7 @@
                 "Name[zh_TW]": "Piotr Kąkol"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Binary Clock",
         "Category": "Date and Time",
         "Description": "Time displayed in binary format",
         "Description[ar]": "الوقت يظهر بالتنسيق الثنائي",

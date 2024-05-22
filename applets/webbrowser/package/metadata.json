@@ -48,6 +48,7 @@
                 "Name[zh_TW]": "Mikhail Ivchenko"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Web Browser",
         "Category": "Online Services",
         "Description": "Add a webpage on your desktop.",
         "Description[ar]": "أضف صفحة ويب لسطح مكتبك",

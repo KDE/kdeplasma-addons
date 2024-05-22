@@ -48,6 +48,7 @@
                 "Name[zh_TW]": "Henry Stanaland, Davide Bettio"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=calculator",
         "Category": "Utilities",
         "Description": "Calculate simple sums",
         "Description[ar]": "احسب عمليات جمع بسيطة",

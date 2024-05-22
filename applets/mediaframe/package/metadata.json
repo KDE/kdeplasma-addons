@@ -48,6 +48,7 @@
                 "Name[zh_TW]": "Lars Pontoppidan"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Media Frame",
         "Category": "Utilities",
         "Description": "(Picture) Frame",
         "Description[ar]": "إطار (الصورة)",

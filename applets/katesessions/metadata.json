@@ -48,6 +48,7 @@
                 "Name[zh_TW]": "Joseph Wenninger"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Kate Sessions",
         "Category": "Utilities",
         "Description": "Kate Session Launcher",
         "Description[ar]": "مُطلق جلسات كيت",

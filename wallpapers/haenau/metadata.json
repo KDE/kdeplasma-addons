@@ -48,6 +48,7 @@
                 "Name[zh_TW]": "Marco Martin"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=haenau",
         "Description": "Haenau wallpaper",
         "Description[ar]": "خلفية الطبقات",
         "Description[az]": "Haenau divar kağızı",

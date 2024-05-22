@@ -48,6 +48,7 @@
                 "Name[zh_TW]": "Shaun Reich"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=konsoleprofiles",
         "Category": "Utilities",
         "Description": "List and launch Konsole profiles",
         "Description[ar]": "تعرض و تطلق تشكيلات كونسول",

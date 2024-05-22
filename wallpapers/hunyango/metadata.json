@@ -48,6 +48,7 @@
                 "Name[zh_TW]": "Marco Martin"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=hunyango",
         "Description": "Hunyango wallpaper",
         "Description[ar]": "خلفية الحرباء",
         "Description[az]": "Hunyango divar kağızı",

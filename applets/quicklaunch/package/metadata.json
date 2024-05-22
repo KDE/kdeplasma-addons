@@ -48,6 +48,7 @@
                 "Name[zh_TW]": "David Rosca"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Quicklaunch",
         "Category": "Application Launchers",
         "Description": "Launch your favourite Applications",
         "Description[ar]": "تشغل تطبيقاتك المفضلة",
