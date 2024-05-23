@@ -46,7 +46,7 @@ ColumnLayout {
 
     PlasmaExtras.PlaceholderMessage {
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        Layout.margins: Kirigami.Units.gridUnit
+        Layout.margins: Kirigami.Units.largeSpacing * 4
         Layout.maximumWidth: Kirigami.Units.gridUnit * 20
         visible: root.status === Util.Timeout
         iconName: "network-disconnect"

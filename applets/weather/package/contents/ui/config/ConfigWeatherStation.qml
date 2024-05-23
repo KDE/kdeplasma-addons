@@ -178,7 +178,7 @@ KCM.ScrollViewKCM {
         Kirigami.PlaceholderMessage {
             id: listViewPlaceholder
             anchors.centerIn: parent
-            width: parent.width - Kirigami.Units.gridUnit
+            width: parent.width - (Kirigami.Units.largeSpacing * 4)
             visible: locationListView.count === 0 && !isSearching
             text: {
                 if (canSearch) {    // There is a search text
