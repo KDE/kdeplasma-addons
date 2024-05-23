@@ -52,8 +52,9 @@ ColumnLayout {
         iconName: "network-disconnect"
         text: {
             const sourceTokens = root.weatherSource.split("|");
-            return i18n("Weather information retrieval for %1 timed out.", sourceTokens[2]);
+            return i18n("Unable to retrieve weather information for %1", sourceTokens[2]);
         }
+        explanation: i18nc("@info:usagetip", "The network request timed out, possibly due to a server outage at the weather station provider. Check again later.")
     }
 
     TopPanel {

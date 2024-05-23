@@ -189,6 +189,7 @@ KCM.ScrollViewKCM {
                     return i18nc("@info", "Search for a weather station to set your location");
                 }
             }
+            explanation: canSearch ? i18nc("@info:usagetip", "If you've used this weather station in the past, it's possible that a server outage at the weather station provider has made it temporarily unavailable. Try again later.") : ""
 
         }
 
