@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-26 00:38+0000\n"
+"POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2016-07-03 22:52+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -144,20 +144,20 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "без ветра"
 
-#: package/contents/config/config.qml:13
+#: package/contents/config/config.qml:15
 #, fuzzy, kde-format
 #| msgid "Weather Station"
 msgctxt "@title"
 msgid "Weather Station"
 msgstr "Метеостаница"
 
-#: package/contents/config/config.qml:19
+#: package/contents/config/config.qml:21
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr ""
 
-#: package/contents/config/config.qml:25
+#: package/contents/config/config.qml:31
 #, fuzzy, kde-format
 #| msgid "Units"
 msgctxt "@title"

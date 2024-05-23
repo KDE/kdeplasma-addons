@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-26 00:38+0000\n"
+"POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2022-12-31 16:36+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -125,19 +125,19 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "Calm"
 
-#: package/contents/config/config.qml:13
+#: package/contents/config/config.qml:15
 #, kde-format
 msgctxt "@title"
 msgid "Weather Station"
 msgstr "Weather Station"
 
-#: package/contents/config/config.qml:19
+#: package/contents/config/config.qml:21
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Appearance"
 
-#: package/contents/config/config.qml:25
+#: package/contents/config/config.qml:31
 #, kde-format
 msgctxt "@title"
 msgid "Units"

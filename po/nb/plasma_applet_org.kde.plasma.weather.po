@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-26 00:38+0000\n"
+"POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2009-09-27 18:16+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -127,19 +127,19 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "Stille"
 
-#: package/contents/config/config.qml:13
+#: package/contents/config/config.qml:15
 #, kde-format
 msgctxt "@title"
 msgid "Weather Station"
 msgstr ""
 
-#: package/contents/config/config.qml:19
+#: package/contents/config/config.qml:21
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr ""
 
-#: package/contents/config/config.qml:25
+#: package/contents/config/config.qml:31
 #, kde-format
 msgctxt "@title"
 msgid "Units"

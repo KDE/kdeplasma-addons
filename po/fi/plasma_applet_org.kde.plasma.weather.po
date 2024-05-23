@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-26 00:38+0000\n"
+"POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2024-02-25 02:41+0200\n"
 "Last-Translator: Lasse Liehu <lasse.liehu@iki.fi>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -129,19 +129,19 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "Tyyntä"
 
-#: package/contents/config/config.qml:13
+#: package/contents/config/config.qml:15
 #, kde-format
 msgctxt "@title"
 msgid "Weather Station"
 msgstr "Sääasema"
 
-#: package/contents/config/config.qml:19
+#: package/contents/config/config.qml:21
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Ulkoasu"
 
-#: package/contents/config/config.qml:25
+#: package/contents/config/config.qml:31
 #, kde-format
 msgctxt "@title"
 msgid "Units"

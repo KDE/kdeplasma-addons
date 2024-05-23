@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-26 00:38+0000\n"
+"POT-Creation-Date: 2024-05-23 00:39+0000\n"
 "PO-Revision-Date: 2023-03-16 21:40+0100\n"
 "Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -128,19 +128,19 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "Windstill"
 
-#: package/contents/config/config.qml:13
+#: package/contents/config/config.qml:15
 #, kde-format
 msgctxt "@title"
 msgid "Weather Station"
 msgstr "Wetterstation"
 
-#: package/contents/config/config.qml:19
+#: package/contents/config/config.qml:21
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Erscheinungsbild"
 
-#: package/contents/config/config.qml:25
+#: package/contents/config/config.qml:31
 #, kde-format
 msgctxt "@title"
 msgid "Units"
