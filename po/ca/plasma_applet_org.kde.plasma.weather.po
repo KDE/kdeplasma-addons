@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:39+0000\n"
+"POT-Creation-Date: 2024-05-24 00:40+0000\n"
 "PO-Revision-Date: 2024-02-02 09:20+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -292,6 +292,15 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Cerqueu una estació meteorològica per a establir la ubicació"
 
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"If you've used this weather station in the past, it's possible that a server "
+"outage at the weather station provider has made it temporarily unavailable. "
+"Try again later."
+msgstr ""
+
 #: package/contents/ui/ForecastView.qml:77
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
@@ -324,9 +333,16 @@ msgstr "Estableix la ubicació…"
 
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
-msgid "Weather information retrieval for %1 timed out."
+msgid "Unable to retrieve weather information for %1"
 msgstr ""
-"La recuperació de la informació meteorològica per a %1 ha exhaurit el temps."
+
+#: package/contents/ui/FullRepresentation.qml:57
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"The network request timed out, possibly due to a server outage at the "
+"weather station provider. Check again later."
+msgstr ""
 
 #: package/contents/ui/main.qml:95
 #, kde-format
@@ -522,6 +538,11 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgid "Weather information retrieval for %1 timed out."
+#~ msgstr ""
+#~ "La recuperació de la informació meteorològica per a %1 ha exhaurit el "
+#~ "temps."
 
 #~ msgctxt "@title:column weather warnings"
 #~ msgid "Warnings Issued"

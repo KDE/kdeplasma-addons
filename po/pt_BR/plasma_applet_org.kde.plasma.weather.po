@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:39+0000\n"
+"POT-Creation-Date: 2024-05-24 00:40+0000\n"
 "PO-Revision-Date: 2022-12-20 11:16-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -290,6 +290,15 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Pesquisar uma estação meteorológica para definir sua localização"
 
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"If you've used this weather station in the past, it's possible that a server "
+"outage at the weather station provider has made it temporarily unavailable. "
+"Try again later."
+msgstr ""
+
 #: package/contents/ui/ForecastView.qml:77
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition (probability percentage)"
@@ -324,8 +333,16 @@ msgstr "Definir localização..."
 
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
-msgid "Weather information retrieval for %1 timed out."
-msgstr "A recuperação de informações meteorológicas para %1 expirou."
+msgid "Unable to retrieve weather information for %1"
+msgstr ""
+
+#: package/contents/ui/FullRepresentation.qml:57
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"The network request timed out, possibly due to a server outage at the "
+"weather station provider. Check again later."
+msgstr ""
 
 #: package/contents/ui/main.qml:95
 #, kde-format
@@ -523,6 +540,9 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgid "Weather information retrieval for %1 timed out."
+#~ msgstr "A recuperação de informações meteorológicas para %1 expirou."
 
 #~ msgctxt "@title:column weather warnings"
 #~ msgid "Warnings Issued"

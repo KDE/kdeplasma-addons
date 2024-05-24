@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:39+0000\n"
+"POT-Creation-Date: 2024-05-24 00:40+0000\n"
 "PO-Revision-Date: 2016-08-31 20:04+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -310,6 +310,15 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr ""
 
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"If you've used this weather station in the past, it's possible that a server "
+"outage at the weather station provider has made it temporarily unavailable. "
+"Try again later."
+msgstr ""
+
 #: package/contents/ui/ForecastView.qml:77
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition (probability percentage)"
@@ -344,8 +353,17 @@ msgid "Set location…"
 msgstr "Μετεωρολογικός σταθμός"
 
 #: package/contents/ui/FullRepresentation.qml:55
+#, fuzzy, kde-format
+#| msgid "Update weather information every"
+msgid "Unable to retrieve weather information for %1"
+msgstr "Ενημέρωση πληροφοριών καιρού κάθε"
+
+#: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
-msgid "Weather information retrieval for %1 timed out."
+msgctxt "@info:usagetip"
+msgid ""
+"The network request timed out, possibly due to a server outage at the "
+"weather station provider. Check again later."
 msgstr ""
 
 #: package/contents/ui/main.qml:95
@@ -944,9 +962,6 @@ msgstr "%1 (%2)"
 
 #~ msgid "&Remove Place"
 #~ msgstr "&Αφαίρεση τοποθεσίας"
-
-#~ msgid "Update weather information every"
-#~ msgstr "Ενημέρωση πληροφοριών καιρού κάθε"
 
 #~ msgid "Select wind format:"
 #~ msgstr "Επιλογή μορφής ανέμου:"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:39+0000\n"
+"POT-Creation-Date: 2024-05-24 00:40+0000\n"
 "PO-Revision-Date: 2024-02-02 08:39+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -293,6 +293,15 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Шукати метеостанцію для встановлення місця, для якого буде надано дані"
 
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"If you've used this weather station in the past, it's possible that a server "
+"outage at the weather station provider has made it temporarily unavailable. "
+"Try again later."
+msgstr ""
+
 #: package/contents/ui/ForecastView.qml:77
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
@@ -325,8 +334,16 @@ msgstr "Визначення місця перебування…"
 
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
-msgid "Weather information retrieval for %1 timed out."
-msgstr "Перевищено час очікування даних про погоду від %1."
+msgid "Unable to retrieve weather information for %1"
+msgstr ""
+
+#: package/contents/ui/FullRepresentation.qml:57
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"The network request timed out, possibly due to a server outage at the "
+"weather station provider. Check again later."
+msgstr ""
 
 #: package/contents/ui/main.qml:95
 #, kde-format
@@ -527,6 +544,9 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgid "Weather information retrieval for %1 timed out."
+#~ msgstr "Перевищено час очікування даних про погоду від %1."
 
 #~ msgctxt "@title:column weather warnings"
 #~ msgid "Warnings Issued"

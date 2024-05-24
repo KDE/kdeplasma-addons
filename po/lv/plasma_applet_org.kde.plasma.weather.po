@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-23 00:39+0000\n"
+"POT-Creation-Date: 2024-05-24 00:40+0000\n"
 "PO-Revision-Date: 2024-04-03 08:37+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -294,6 +294,15 @@ msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Meklējiet laikapstākļu staciju, lai iestatītu savu atrašanās vietu"
 
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"If you've used this weather station in the past, it's possible that a server "
+"outage at the weather station provider has made it temporarily unavailable. "
+"Try again later."
+msgstr ""
+
 #: package/contents/ui/ForecastView.qml:77
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
@@ -325,9 +334,18 @@ msgid "Set location…"
 msgstr "Norādīt atrašanās vietu..."
 
 #: package/contents/ui/FullRepresentation.qml:55
+#, fuzzy, kde-format
+#| msgid "Update weather information every"
+msgid "Unable to retrieve weather information for %1"
+msgstr "Atjaunināt laikapstākļu informāciju ik pēc"
+
+#: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
-msgid "Weather information retrieval for %1 timed out."
-msgstr "Iestājās noildze, iegūstot laikapstākļu informāciju vietai „%1“"
+msgctxt "@info:usagetip"
+msgid ""
+"The network request timed out, possibly due to a server outage at the "
+"weather station provider. Check again later."
+msgstr ""
 
 #: package/contents/ui/main.qml:95
 #, kde-format
@@ -525,6 +543,9 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgid "Weather information retrieval for %1 timed out."
+#~ msgstr "Iestājās noildze, iegūstot laikapstākļu informāciju vietai „%1“"
 
 #, fuzzy
 #~| msgctxt "weather warnings"
@@ -752,9 +773,6 @@ msgstr "%1 (%2)"
 
 #~ msgid "&Remove Place"
 #~ msgstr "&Aizvākt vietu"
-
-#~ msgid "Update weather information every"
-#~ msgstr "Atjaunināt laikapstākļu informāciju ik pēc"
 
 #, fuzzy
 #~| msgid "Select Wind format:"
