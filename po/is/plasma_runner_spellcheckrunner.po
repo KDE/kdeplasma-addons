@@ -3,19 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Sveinn í Felli <sveinki@nett.is>, 2009.
+# SPDX-FileCopyrightText: 2024 Gummi <gudmundure@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-23 00:46+0000\n"
-"PO-Revision-Date: 2011-03-24 09:47+0000\n"
-"Last-Translator: \n"
-"Language-Team:  <en@li.org>\n"
+"PO-Revision-Date: 2024-05-13 12:15+0000\n"
+"Last-Translator: Gummi <gudmundure@gmail.com>\n"
+"Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: KBabel 1.11.4\n"
+"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -35,31 +36,29 @@ msgstr "%1:q:"
 #: spellcheck.cpp:104
 #, kde-format
 msgid "Checks the spelling of :q:."
-msgstr "Skoðar stafsetningu á :q:."
+msgstr "Kannar stafsetningu á :q:."
 
 #: spellcheck.cpp:224
-#, fuzzy, kde-format
-#| msgid "Correct"
+#, kde-format
 msgctxt "Term is spelled correctly"
 msgid "Correct"
-msgstr "Leiðrétt"
+msgstr "Rétt"
 
 #: spellcheck.cpp:233
-#, fuzzy, kde-format
-#| msgid "Suggested words: %1"
+#, kde-format
 msgid "Suggested term"
-msgstr "Uppástungur: %1"
+msgstr "Uppástunga"
 
 #: spellcheck.cpp:263
 #, kde-format
 msgid "No dictionary found, please install hspell"
-msgstr ""
+msgstr "Ekkert orðasafn fannst, settu endilega upp hspell"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
 #, kde-format
 msgid "Spell Check Settings"
-msgstr "Stilla yfirlestur stafsetningar"
+msgstr "Stillingar stafsetningarkönnunar"
 
 #. i18n: ectx: property (text), widget (QCheckBox, m_requireTriggerWord)
 #: spellcheck_config.ui:23
@@ -77,7 +76,7 @@ msgstr "&Markorð:"
 #: spellcheck_config.ui:62
 #, kde-format
 msgid "Configure Dictionaries…"
-msgstr ""
+msgstr "Grunnstilla orðasöfn..."
 
 #, fuzzy
 #~ msgctxt "separator for a list of words"
