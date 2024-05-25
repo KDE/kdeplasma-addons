@@ -3,14 +3,14 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2016, 2018, 2019, 2020, 2022, 2023, 2024.
+# SPDX-FileCopyrightText: 2016, 2018, 2019, 2020, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2018, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-02-02 09:20+0100\n"
+"PO-Revision-Date: 2024-05-24 17:45+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -300,6 +300,9 @@ msgid ""
 "outage at the weather station provider has made it temporarily unavailable. "
 "Try again later."
 msgstr ""
+"Si heu utilitzat esta estació meteorològica en el passat, és possible que "
+"una apagada en el servidor del proveïdor de l'estació meteorològica l'haja "
+"deixat temporalment no disponible. Torneu-ho a provar més tard."
 
 #: package/contents/ui/ForecastView.qml:77
 #, kde-format
@@ -334,7 +337,7 @@ msgstr "Establix la ubicació…"
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
-msgstr ""
+msgstr "No s'ha pogut recuperar la informació meteorològica per a %1"
 
 #: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
@@ -342,7 +345,7 @@ msgctxt "@info:usagetip"
 msgid ""
 "The network request timed out, possibly due to a server outage at the "
 "weather station provider. Check again later."
-msgstr ""
+msgstr "S'ha exhaurit el temps de la sol·licitud de xarxa."
 
 #: package/contents/ui/main.qml:95
 #, kde-format
@@ -538,8 +541,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgid "Weather information retrieval for %1 timed out."
-#~ msgstr ""
-#~ "La recuperació de la informació meteorològica per a %1 ha exhaurit el "
-#~ "temps."
