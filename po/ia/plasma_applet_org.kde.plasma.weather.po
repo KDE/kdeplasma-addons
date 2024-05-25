@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-02-29 15:53+0100\n"
+"PO-Revision-Date: 2024-05-24 12:16+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -296,6 +296,9 @@ msgid ""
 "outage at the weather station provider has made it temporarily unavailable. "
 "Try again later."
 msgstr ""
+"Si tu ha usate iste station meteorologic in le passato, il es possibile que "
+"un interruption de servitor al fornitor de station meteorologic lo ha facite "
+"temporaneemente non disponibile. Tu essaya plus tarde."
 
 #: package/contents/ui/ForecastView.qml:77
 #, kde-format
@@ -330,7 +333,7 @@ msgstr "Fixa le location..."
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
-msgstr ""
+msgstr "Incapace a recuperar information meteorologic per %1"
 
 #: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
@@ -339,6 +342,9 @@ msgid ""
 "The network request timed out, possibly due to a server outage at the "
 "weather station provider. Check again later."
 msgstr ""
+"Le requesta de rete expirava, probabilemente debite a un interruption de "
+"servitor al fornitor de station meteorologic. Tu verifica novemente plus "
+"tarde."
 
 #: package/contents/ui/main.qml:95
 #, kde-format
