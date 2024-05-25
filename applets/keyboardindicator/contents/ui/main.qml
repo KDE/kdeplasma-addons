@@ -58,7 +58,7 @@ PlasmoidItem {
             anchors.fill: parent
             source: Plasmoid.icon
             active: compactMouse.containsMouse
-            enabled: root.capsLockState?.locked || root.numLockState?.locked
+            enabled: root.capsLockState?.locked || root.numLockState?.locked || false
         }
     }
 
