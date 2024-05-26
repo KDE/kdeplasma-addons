@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-02-04 12:44+0100\n"
+"PO-Revision-Date: 2024-05-25 08:50+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.2\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -302,6 +302,9 @@ msgid ""
 "outage at the weather station provider has made it temporarily unavailable. "
 "Try again later."
 msgstr ""
+"Se usou esta estación meteorolóxica no pasado, pode que non estea dispoñíbel "
+"temporalmente por mor dunha caída do servidor do fornecedor da estación. "
+"Inténteo de novo máis tarde."
 
 #: package/contents/ui/ForecastView.qml:77
 #, kde-format
@@ -336,7 +339,7 @@ msgstr "Definir a localización…"
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
-msgstr ""
+msgstr "Non é posíbel obter a información meteorolóxica de %1."
 
 #: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
@@ -345,6 +348,8 @@ msgid ""
 "The network request timed out, possibly due to a server outage at the "
 "weather station provider. Check again later."
 msgstr ""
+"A solicitude de rede esgotou o tempo límite, quizais por caer o servidor do "
+"fornecedor da estación meteorolóxica. Compróbeo de novo máis tarde."
 
 #: package/contents/ui/main.qml:95
 #, kde-format
