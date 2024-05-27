@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kdeplasma-addons/plasma_applet_org.kde."
+"X-Crowdin-File: /kf6-stable/messages/kdeplasma-addons/plasma_applet_org.kde."
 "plasma.weather.pot\n"
-"X-Crowdin-File-ID: 43089\n"
+"X-Crowdin-File-ID: 52248\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -532,6 +532,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgid "Weather information retrieval for %1 timed out."
-#~ msgstr "获取 %1 的气象信息超时。"

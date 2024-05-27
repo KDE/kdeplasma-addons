@@ -16,17 +16,17 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-02-03 09:17+0100\n"
+"PO-Revision-Date: 2024-05-25 09:58+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <kde-francophone@kde.org>\n"
+"Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
-"X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
+"X-Environment: kde\n"
+"X-Generator: Lokalize 23.08.5\n"
 "X-Text-Markup: kde4\n"
 
 #: i18n.dat:1
@@ -308,6 +308,10 @@ msgid ""
 "outage at the weather station provider has made it temporarily unavailable. "
 "Try again later."
 msgstr ""
+"Si vous avez utilisé cette station météorologique par le passé, il est "
+"possible qu'une panne de serveur chez le fournisseur de la station "
+"météorologique l'ait rendue temporairement indisponible. Veuillez essayer à "
+"nouveau plus tard."
 
 #: package/contents/ui/ForecastView.qml:77
 #, kde-format
@@ -342,7 +346,7 @@ msgstr "Définir un emplacement..."
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
-msgstr ""
+msgstr "Impossible de récupérer les informations météorologiques pour %1"
 
 #: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
@@ -351,6 +355,9 @@ msgid ""
 "The network request timed out, possibly due to a server outage at the "
 "weather station provider. Check again later."
 msgstr ""
+"La demande de réseau a expiré, peut-être en raison d'une panne de serveur "
+"chez le fournisseur de la station météorologique. Veuillez vérifier à "
+"nouveau plus tard."
 
 #: package/contents/ui/main.qml:95
 #, kde-format
