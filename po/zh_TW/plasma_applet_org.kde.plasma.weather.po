@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-02-05 17:19+0900\n"
+"PO-Revision-Date: 2024-05-26 16:06+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.01.95\n"
+"X-Generator: Lokalize 24.04.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: i18n.dat:1
@@ -276,7 +276,7 @@ msgstr "輸入位置"
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
-msgstr "找不到 %1 的天氣站 "
+msgstr "找不到 '%1' 的氣象站"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
@@ -298,6 +298,8 @@ msgid ""
 "outage at the weather station provider has made it temporarily unavailable. "
 "Try again later."
 msgstr ""
+"如果您過去曾經使用過這個氣象站，可能是氣象站提供者有伺服器問題，使它暫時無法"
+"使用。請稍後再試。"
 
 #: package/contents/ui/ForecastView.qml:77
 #, kde-format
@@ -332,7 +334,7 @@ msgstr "設定位置…"
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
-msgstr ""
+msgstr "無法為 %1 取得天氣資訊"
 
 #: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
@@ -340,7 +342,7 @@ msgctxt "@info:usagetip"
 msgid ""
 "The network request timed out, possibly due to a server outage at the "
 "weather station provider. Check again later."
-msgstr ""
+msgstr "網路請求逾時，可能是源自於氣象站提供者的伺服器問題。請稍後再試試看。"
 
 #: package/contents/ui/main.qml:95
 #, kde-format

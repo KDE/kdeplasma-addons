@@ -532,6 +532,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgid "Weather information retrieval for %1 timed out."
-#~ msgstr "获取 %1 的气象信息超时。"
