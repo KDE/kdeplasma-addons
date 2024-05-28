@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-24 00:40+0000\n"
+"POT-Creation-Date: 2024-05-28 00:39+0000\n"
 "PO-Revision-Date: 2024-03-23 13:09+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -476,14 +476,20 @@ msgctxt "@action:button"
 msgid "Show more information"
 msgstr "Vis meir informasjon"
 
-#: package/contents/ui/SwitchPanel.qml:32
+#: package/contents/ui/SwitchPanel.qml:29
+#, kde-format
+msgctxt "@title:tab Weather forecast"
+msgid "Forecast"
+msgstr ""
+
+#: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Detaljar"
 
 # Her er det faktisk snakk om varsel, ikkje berre varslingar.
-#: package/contents/ui/SwitchPanel.qml:39
+#: package/contents/ui/SwitchPanel.qml:42
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -492,6 +498,20 @@ msgid "%1 Notice"
 msgid_plural "%1 Notices"
 msgstr[0] "%1 varsel"
 msgstr[1] "%1 varsel"
+
+#: package/contents/ui/SwitchPanel.qml:114
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Unable to load weather forecast"
+msgstr ""
+
+#: package/contents/ui/SwitchPanel.qml:116
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"There may be a technical issue with the weather provider. If the issue "
+"persists for longer than a day, submit a bug report."
+msgstr ""
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format
@@ -538,6 +558,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgid "Weather information retrieval for %1 timed out."
-#~ msgstr "Tidsavbrot ved henting av vêrinformasjon for %1."
