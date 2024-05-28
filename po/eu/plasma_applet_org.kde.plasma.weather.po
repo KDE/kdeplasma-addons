@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-24 00:40+0000\n"
-"PO-Revision-Date: 2024-02-02 19:45+0100\n"
+"PO-Revision-Date: 2024-05-27 16:57+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.02.2\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: i18n.dat:1
@@ -299,6 +299,9 @@ msgid ""
 "outage at the weather station provider has made it temporarily unavailable. "
 "Try again later."
 msgstr ""
+"Meteorologia-estazio hau iraganean erabili baduzu, baliteke metereologia-"
+"estazio hornitzailearen zerbitzari baten itzalaldiak aldi baterako "
+"erabilgarri ez egotea eragin izana. Saiatu berriz beranduago."
 
 #: package/contents/ui/ForecastView.qml:77
 #, kde-format
@@ -333,7 +336,7 @@ msgstr "Ezarri kokalekua…"
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
-msgstr ""
+msgstr "%1(e)ren eguraldiari buruzko informazioa ezin du berreskuratu"
 
 #: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
@@ -342,6 +345,9 @@ msgid ""
 "The network request timed out, possibly due to a server outage at the "
 "weather station provider. Check again later."
 msgstr ""
+"Sareko eskaerak denbora-muga gainditu du, baliteke meteorologia-estazio "
+"hornitzailearen zerbitzariaren itzalaldi baten ondorio izatea. Egiaztatu "
+"berriz geroago."
 
 #: package/contents/ui/main.qml:95
 #, kde-format
