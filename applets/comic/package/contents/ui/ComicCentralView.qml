@@ -34,10 +34,8 @@ Item {
             Plasmoid.updateComic(comicData.prev);
         }
     }
-
-    MouseArea {
-        id: comicImageArea
-
+    PlasmaCore.ToolTipArea {
+        id: tooltip
         anchors {
             left: arrowLeft.visible ? arrowLeft.right : root.left
             right: arrowRight.visible ? arrowRight.left : root.right
@@ -46,67 +44,69 @@ Item {
             top: root.top
             bottom: root.bottom
         }
+        subText: Plasmoid.comicData.additionalText
+        active: subText
 
-        hoverEnabled: true
-        preventStealing: false
-        acceptedButtons: Qt.LeftButton | Qt.MiddleButton
-
-        onClicked: {
-            if (mouse.button == Qt.MiddleButton && Plasmoid.middleClick) {
-                fullDialog.toggleVisibility();
-            }
-        }
-
-        PlasmaCore.ToolTipArea {
-            id: tooltip
-            anchors.fill: comicImageArea
-            subText: Plasmoid.comicData.additionalText
-            active: subText
-        }
-
-        ImageWidget {
-            id: comicImage
+        MouseArea {
+            id: comicImageArea
 
             anchors.fill: parent
 
-            image: Plasmoid.comicData.image
-            actualSize: Plasmoid.showActualSize
-            isLeftToRight: Plasmoid.comicData.isLeftToRight
-            isTopToBottom: Plasmoid.comicData.isTopToBottom
-        }
+            hoverEnabled: true
+            preventStealing: false
+            acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
-        ButtonBar {
-            id: buttonBar
-
-            anchors {
-                horizontalCenter: parent.horizontalCenter
-                bottom: parent.bottom
-                bottomMargin: 10
+            onClicked: {
+                if (mouse.button == Qt.MiddleButton && Plasmoid.middleClick) {
+                    fullDialog.toggleVisibility();
+                }
             }
 
-            visible: Plasmoid.arrowsOnHover && comicImageArea.containsMouse
-            opacity: 0
+            ImageWidget {
+                id: comicImage
 
-            onPrevClicked: {
-                Plasmoid.updateComic(comicData.prev);
+                anchors.fill: parent
+                enabled: false
+
+                image: Plasmoid.comicData.image
+                actualSize: Plasmoid.showActualSize
+                isLeftToRight: Plasmoid.comicData.isLeftToRight
+                isTopToBottom: Plasmoid.comicData.isTopToBottom
             }
 
-            onNextClicked: {
-                Plasmoid.updateComic(comicData.next);
-            }
+            ButtonBar {
+                id: buttonBar
 
-            onZoomClicked: {
-                fullDialog.toggleVisibility();
-            }
+                anchors {
+                    horizontalCenter: parent.horizontalCenter
+                    bottom: parent.bottom
+                    bottomMargin: 10
+                }
 
-            states: State {
-                name: "show"; when: (Plasmoid.arrowsOnHover && comicImageArea.containsMouse)
-                PropertyChanges { target: buttonBar; opacity: 1; }
-            }
+                visible: Plasmoid.arrowsOnHover && comicImageArea.containsMouse
+                opacity: 0
 
-            transitions: Transition {
-                from: ""; to: "show"; reversible: true
-                NumberAnimation { properties: "opacity"; duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
+                onPrevClicked: {
+                    Plasmoid.updateComic(comicData.prev);
+                }
+
+                onNextClicked: {
+                    Plasmoid.updateComic(comicData.next);
+                }
+
+                onZoomClicked: {
+                    fullDialog.toggleVisibility();
+                }
+
+                states: State {
+                    name: "show"; when: (Plasmoid.arrowsOnHover && comicImageArea.containsMouse)
+                    PropertyChanges { target: buttonBar; opacity: 1; }
+                }
+
+                transitions: Transition {
+                    from: ""; to: "show"; reversible: true
+                    NumberAnimation { properties: "opacity"; duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
+                }
             }
         }
     }

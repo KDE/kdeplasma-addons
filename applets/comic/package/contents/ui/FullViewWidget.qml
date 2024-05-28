@@ -18,6 +18,7 @@ PlasmaCore.Dialog {
 
     flags: Qt.Popup
     visible: false
+    hideOnWindowDeactivate: true
 
     function toggleVisibility()
     {
