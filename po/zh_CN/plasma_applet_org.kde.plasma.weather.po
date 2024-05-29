@@ -496,11 +496,10 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 条公告"
 
 #: package/contents/ui/SwitchPanel.qml:114
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
-msgstr "无法获取气象信息：%1"
+msgstr ""
 
 #: package/contents/ui/SwitchPanel.qml:116
 #, kde-format
