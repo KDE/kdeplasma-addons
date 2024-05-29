@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-24 00:40+0000\n"
+"POT-Creation-Date: 2024-05-29 03:09+0000\n"
 "PO-Revision-Date: 2024-05-25 12:30+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -16,7 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 23.08.5\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -481,13 +480,19 @@ msgctxt "@action:button"
 msgid "Show more information"
 msgstr "Pokaż więcej szczegółów"
 
-#: package/contents/ui/SwitchPanel.qml:32
+#: package/contents/ui/SwitchPanel.qml:29
+#, kde-format
+msgctxt "@title:tab Weather forecast"
+msgid "Forecast"
+msgstr ""
+
+#: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Szczegóły"
 
-#: package/contents/ui/SwitchPanel.qml:39
+#: package/contents/ui/SwitchPanel.qml:42
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -497,6 +502,21 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 Uwaga"
 msgstr[1] "%1 Uwagi"
 msgstr[2] "%1 Uwag"
+
+#: package/contents/ui/SwitchPanel.qml:114
+#, fuzzy, kde-format
+#| msgid "Unable to retrieve weather information for %1"
+msgctxt "@info:placeholder"
+msgid "Unable to load weather forecast"
+msgstr "Nie można pobrać pogody dla %1"
+
+#: package/contents/ui/SwitchPanel.qml:116
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"There may be a technical issue with the weather provider. If the issue "
+"persists for longer than a day, submit a bug report."
+msgstr ""
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format

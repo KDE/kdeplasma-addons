@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-24 00:40+0000\n"
+"POT-Creation-Date: 2024-05-29 03:09+0000\n"
 "PO-Revision-Date: 2013-03-21 16:35+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -516,13 +516,19 @@ msgctxt "@action:button"
 msgid "Show more information"
 msgstr ""
 
-#: package/contents/ui/SwitchPanel.qml:32
+#: package/contents/ui/SwitchPanel.qml:29
+#, kde-format
+msgctxt "@title:tab Weather forecast"
+msgid "Forecast"
+msgstr ""
+
+#: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr ""
 
-#: package/contents/ui/SwitchPanel.qml:39
+#: package/contents/ui/SwitchPanel.qml:42
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -531,6 +537,20 @@ msgid "%1 Notice"
 msgid_plural "%1 Notices"
 msgstr[0] ""
 msgstr[1] ""
+
+#: package/contents/ui/SwitchPanel.qml:114
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Unable to load weather forecast"
+msgstr ""
+
+#: package/contents/ui/SwitchPanel.qml:116
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"There may be a technical issue with the weather provider. If the issue "
+"persists for longer than a day, submit a bug report."
+msgstr ""
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format

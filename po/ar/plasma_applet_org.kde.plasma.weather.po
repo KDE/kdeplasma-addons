@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-24 00:40+0000\n"
+"POT-Creation-Date: 2024-05-29 03:09+0000\n"
 "PO-Revision-Date: 2024-05-25 16:26+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: \n"
@@ -490,13 +490,19 @@ msgctxt "@action:button"
 msgid "Show more information"
 msgstr "أظهر المزيد من المعلومات"
 
-#: package/contents/ui/SwitchPanel.qml:32
+#: package/contents/ui/SwitchPanel.qml:29
+#, kde-format
+msgctxt "@title:tab Weather forecast"
+msgid "Forecast"
+msgstr ""
+
+#: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "التفاصيل"
 
-#: package/contents/ui/SwitchPanel.qml:39
+#: package/contents/ui/SwitchPanel.qml:42
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -509,6 +515,21 @@ msgstr[2] "إخطارين"
 msgstr[3] "%1 إخطارات"
 msgstr[4] "%1 إخطارا"
 msgstr[5] "%1 إخطار"
+
+#: package/contents/ui/SwitchPanel.qml:114
+#, fuzzy, kde-format
+#| msgid "Unable to retrieve weather information for %1"
+msgctxt "@info:placeholder"
+msgid "Unable to load weather forecast"
+msgstr "غير قادر على جلب معلومات الطقس لـ %1"
+
+#: package/contents/ui/SwitchPanel.qml:116
+#, kde-format
+msgctxt "@info:usagetip"
+msgid ""
+"There may be a technical issue with the weather provider. If the issue "
+"persists for longer than a day, submit a bug report."
+msgstr ""
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format
