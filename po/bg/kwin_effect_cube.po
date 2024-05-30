@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-13 00:39+0000\n"
-"PO-Revision-Date: 2024-05-26 12:10+0200\n"
+"PO-Revision-Date: 2024-05-29 22:46+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.0\n"
 
 #: kcm/cubeeffectkcm.cpp:35
 #, kde-format
@@ -37,10 +37,14 @@ msgid_plural ""
 "At least 3 virtual desktops are required to display the Cube, but only %1 "
 "are present"
 msgstr[0] ""
+"Необходими са поне 3 виртуални работни плота, за да се покаже кубът, но "
+"присъства само %1"
 msgstr[1] ""
+"Необходими са поне 3 виртуални работни плота, за да се покаже кубът, но "
+"присъстват само %1"
 
 #: package/contents/ui/PlaceholderView.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Virtual Desktop"
-msgstr ""
+msgstr "Добавяне на виртуален работен плот"

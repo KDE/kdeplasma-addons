@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-29 03:09+0000\n"
-"PO-Revision-Date: 2024-05-28 22:55+0200\n"
+"PO-Revision-Date: 2024-05-29 09:13+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -486,7 +486,7 @@ msgstr "További információk"
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
-msgstr ""
+msgstr "Előrejelzés"
 
 #: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
@@ -505,11 +505,10 @@ msgstr[0] "%1 tájékoztató"
 msgstr[1] "%1 tájékoztató"
 
 #: package/contents/ui/SwitchPanel.qml:114
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
-msgstr "Nem lehet lekérni a(z) %1 időjárási adatait"
+msgstr "Nem lehet betölteni az időjárás-előrejelzést"
 
 #: package/contents/ui/SwitchPanel.qml:116
 #, kde-format
@@ -518,6 +517,8 @@ msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, submit a bug report."
 msgstr ""
+"Technikai probléma merülhetett fel az időjárás-szolgáltatóval. Ha a probléma "
+"egy napnál tovább fennáll, küldjön hibajelentést."
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format

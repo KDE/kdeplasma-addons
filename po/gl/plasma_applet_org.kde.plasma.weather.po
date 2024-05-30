@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-29 03:09+0000\n"
-"PO-Revision-Date: 2024-05-25 08:50+0200\n"
+"PO-Revision-Date: 2024-05-29 09:02+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.05.0\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -488,7 +488,7 @@ msgstr "Amosar máis información"
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
-msgstr ""
+msgstr "Prognóstico"
 
 #: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
@@ -507,11 +507,10 @@ msgstr[0] "%1 aviso"
 msgstr[1] "%1 avisos"
 
 #: package/contents/ui/SwitchPanel.qml:114
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
-msgstr "Non é posíbel obter a información meteorolóxica de %1."
+msgstr "Non é posíbel cargar o prognóstico meteorolóxico."
 
 #: package/contents/ui/SwitchPanel.qml:116
 #, kde-format
@@ -520,6 +519,8 @@ msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, submit a bug report."
 msgstr ""
+"Pode que o fornecedor meteorolóxico teña problemas técnicos. Se o problema "
+"persiste máis dun día, informe do erro."
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format
