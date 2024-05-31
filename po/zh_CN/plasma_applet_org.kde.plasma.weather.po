@@ -478,7 +478,7 @@ msgstr "显示更多信息"
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
-msgstr ""
+msgstr "预报"
 
 #: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
@@ -496,11 +496,10 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 条公告"
 
 #: package/contents/ui/SwitchPanel.qml:114
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
-msgstr "无法获取气象信息：%1"
+msgstr "无法加载天气预报"
 
 #: package/contents/ui/SwitchPanel.qml:116
 #, kde-format
@@ -509,6 +508,8 @@ msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, submit a bug report."
 msgstr ""
+"天气预报提供来源可能发生了技术故障。如果此问题持续了一天以上，请提交一个程序"
+"缺陷报告。"
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format

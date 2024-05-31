@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-29 03:09+0000\n"
-"PO-Revision-Date: 2024-05-25 09:58+0200\n"
+"PO-Revision-Date: 2024-05-29 08:52+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -496,7 +496,7 @@ msgstr "Affiche plus d'informations"
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
-msgstr ""
+msgstr "Prévisions météorologiques"
 
 #: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
@@ -515,11 +515,10 @@ msgstr[0] "Remarque %1"
 msgstr[1] "%1 remarques"
 
 #: package/contents/ui/SwitchPanel.qml:114
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
-msgstr "Impossible de récupérer les informations météorologiques pour %1"
+msgstr "Impossible de récupérer les informations de prévision météorologique"
 
 #: package/contents/ui/SwitchPanel.qml:116
 #, kde-format
@@ -528,6 +527,9 @@ msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, submit a bug report."
 msgstr ""
+"Il pourrait y avoir un problème technique avec le fournisseur d'informations "
+"météo. Si le problème persiste pendant plus d’une journée, veuillez ouvrir "
+"un rapport de bogue."
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format

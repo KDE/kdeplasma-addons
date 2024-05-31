@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-29 03:09+0000\n"
-"PO-Revision-Date: 2024-05-25 12:30+0200\n"
+"PO-Revision-Date: 2024-05-30 11:12+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -484,7 +485,7 @@ msgstr "Pokaż więcej szczegółów"
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
-msgstr ""
+msgstr "Prognoza"
 
 #: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
@@ -504,11 +505,10 @@ msgstr[1] "%1 Uwagi"
 msgstr[2] "%1 Uwag"
 
 #: package/contents/ui/SwitchPanel.qml:114
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
-msgstr "Nie można pobrać pogody dla %1"
+msgstr "Nie udało się pobrać pogody"
 
 #: package/contents/ui/SwitchPanel.qml:116
 #, kde-format
@@ -517,6 +517,8 @@ msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, submit a bug report."
 msgstr ""
+"Możliwe, że to kłopoty po stronie dostawcy pogody. Jeśli nie znikną po dniu, "
+"to zalecamy zgłoszenie tego jako błąd."
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format
