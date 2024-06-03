@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-29 03:09+0000\n"
-"PO-Revision-Date: 2024-05-24 16:29+0200\n"
+"PO-Revision-Date: 2024-06-02 05:49+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -482,7 +482,7 @@ msgstr "მეტი ინფორმაციის ჩვენება"
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
-msgstr ""
+msgstr "პროგნოზი"
 
 #: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
@@ -501,11 +501,10 @@ msgstr[0] "%1 შენიშვნა"
 msgstr[1] "%1 შენიშვნა"
 
 #: package/contents/ui/SwitchPanel.qml:114
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
-msgstr "შეუძლებელია ამინდის ინფორმაციის მიღება მდებარეობისთვის: %1"
+msgstr "ამინდის პროგნოზის ჩატვირთვა შეუძლებელია"
 
 #: package/contents/ui/SwitchPanel.qml:116
 #, kde-format
@@ -514,6 +513,8 @@ msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, submit a bug report."
 msgstr ""
+"შეიძლება, ამინდის პროგნოზის სერვისს ტექნიკური პრობლემები აქვს. თუ ეს "
+"პრობლემა დღეზე მეტხანს გაგრძელდება, მოგვწერეთ, როგორც შეცდომა."
 
 #: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
 #, kde-format
