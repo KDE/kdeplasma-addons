@@ -22,8 +22,10 @@ KCM.SimpleKCM {
             id: defaultFormatCombo
             Kirigami.FormData.label: i18nc("@label:listbox", "Default color format:")
             model: Logic.formats
-            currentIndex: defaultFormatCombo.model.indexOf(cfg_defaultFormat)
-            onActivated: cfg_defaultFormat = model[index]
+            currentIndex: model.indexOf(cfg_defaultFormat)
+            onActivated: index => {
+                cfg_defaultFormat = model[index];
+            }
         }
 
         QQC2.CheckBox {

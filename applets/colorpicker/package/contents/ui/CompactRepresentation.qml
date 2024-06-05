@@ -27,9 +27,11 @@ DropArea {
     readonly property real buttonSize: root.isVertical ? parent.width : parent.height
     property bool containsAcceptableDrag: false
 
-    onEntered: containsAcceptableDrag = (drag.hasColor || drag.hasUrls || ColorPicker.Utils.isValidColor(drag.text))
+    onEntered: drag => {
+        containsAcceptableDrag = (drag.hasColor || drag.hasUrls || ColorPicker.Utils.isValidColor(drag.text));
+    }
     onExited: containsAcceptableDrag = false
-    onDropped: {
+    onDropped: drop => {
         if (drop.hasColor) {
             addColorToHistory(drop.colorData)
         } else if (ColorPicker.Utils.isValidColor(drop.text)) {
