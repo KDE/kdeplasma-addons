@@ -19,7 +19,7 @@ PlasmaExtras.ModelContextMenu {
     required property Item copyIndicatorLabel
     required property Timer colorLabelRestoreTimer
 
-    placement: PlasmaCore.Types.BottomPosedLeftAlignedPopup
+    placement: PlasmaExtras.Menu.BottomPosedLeftAlignedPopup
 
     onClicked: {
         picker.copyToClipboard(model.text)
