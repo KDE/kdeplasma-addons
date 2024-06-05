@@ -29,7 +29,7 @@ PlasmaExtras.ModelContextMenu {
     }
 
     onStatusChanged: {
-        if (status == PlasmaExtras.Menu.Closed) {
+        if (status === PlasmaExtras.Menu.Closed) {
             formattingMenu.destroy();
         }
     }
