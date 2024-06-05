@@ -41,7 +41,7 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18nc("@label", "When pressing the keyboard shortcut:")
             text: i18nc("@option:radio", "Pick a color")
             checked: cfg_pickOnActivate
-            onCheckedChanged: cfg_pickOnActivate = checked
+            onToggled: cfg_pickOnActivate = checked
         }
 
         QQC2.RadioButton {
