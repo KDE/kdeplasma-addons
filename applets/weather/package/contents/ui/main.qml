@@ -145,12 +145,12 @@ PlasmoidItem {
 
         let forecastDayCount = parseInt(data["Total Weather Days"] || "");
 
-        // We know EnvCan provides 13 items (7 day and 6 night) or 12 if starting with tonight's forecast
-        const hasNightForecasts = weatherSource && weatherSource.split("|")[0] === "envcan" && forecastDayCount > 8;
+        // Some providers use a 12h forecast, with day and night distinct info
+        const hasNightForecasts = weatherSource && forecastDayCount > 8;
         model["forecastNightRow"] = hasNightForecasts;
         if (hasNightForecasts) {
-            model["forecastStartsAtNight"] = (forecastDayCount % 2 === 0);
-            forecastDayCount = Math.ceil((forecastDayCount+1) / 2);
+            model["forecastStartsAtNight"] = data["Forecast Starts at Night"] || false;
+            forecastDayCount = Math.ceil(forecastDayCount / 2);
         }
 
         const forecastTitle = (!isNaN(forecastDayCount) && forecastDayCount > 0) ?
