@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 00:39+0000\n"
+"POT-Creation-Date: 2024-06-07 00:40+0000\n"
 "PO-Revision-Date: 2024-04-02 16:18+0300\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -32,13 +32,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Vidējais klikšķis kopē krāsas kodu"
 
-#: package/contents/ui/CompactRepresentation.qml:75
+#: package/contents/ui/CompactRepresentation.qml:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Krāsas noteicējs"
 
-#: package/contents/ui/CompactRepresentation.qml:82
+#: package/contents/ui/CompactRepresentation.qml:84
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -54,31 +54,31 @@ msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Noklusējuma krāsas formāts:"
 
-#: package/contents/ui/configGeneral.qml:31
+#: package/contents/ui/configGeneral.qml:33
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Automātiski kopēt starpliktuvē"
 
-#: package/contents/ui/configGeneral.qml:39
+#: package/contents/ui/configGeneral.qml:41
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "Nospiežot tastatūras saīsni:"
 
-#: package/contents/ui/configGeneral.qml:40
+#: package/contents/ui/configGeneral.qml:42
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Noteikt krāsu"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:48
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Rādīt vēsturi"
 
-#: package/contents/ui/configGeneral.qml:56
+#: package/contents/ui/configGeneral.qml:58
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"

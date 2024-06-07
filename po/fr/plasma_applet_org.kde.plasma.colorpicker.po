@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 00:39+0000\n"
+"POT-Creation-Date: 2024-06-07 00:40+0000\n"
 "PO-Revision-Date: 2023-05-15 12:52+0200\n"
 "Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -38,13 +38,13 @@ msgid "Middle-click to copy the color code"
 msgstr ""
 "Effectuer un clic avec le bouton central pour copier le code de la couleur"
 
-#: package/contents/ui/CompactRepresentation.qml:75
+#: package/contents/ui/CompactRepresentation.qml:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Sélectionner une couleur"
 
-#: package/contents/ui/CompactRepresentation.qml:82
+#: package/contents/ui/CompactRepresentation.qml:84
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -60,31 +60,31 @@ msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Format par défaut de la couleur :"
 
-#: package/contents/ui/configGeneral.qml:31
+#: package/contents/ui/configGeneral.qml:33
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Copier automatiquement la couleur vers le presse-papier"
 
-#: package/contents/ui/configGeneral.qml:39
+#: package/contents/ui/configGeneral.qml:41
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "Lorsque le raccourci clavier est composé"
 
-#: package/contents/ui/configGeneral.qml:40
+#: package/contents/ui/configGeneral.qml:42
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Sélectionner une couleur"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:48
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Afficher l'historique"
 
-#: package/contents/ui/configGeneral.qml:56
+#: package/contents/ui/configGeneral.qml:58
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"

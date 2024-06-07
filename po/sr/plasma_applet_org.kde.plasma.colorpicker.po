@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-16 00:39+0000\n"
+"POT-Creation-Date: 2024-06-07 00:40+0000\n"
 "PO-Revision-Date: 2016-12-18 21:56+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -33,14 +33,14 @@ msgid "Middle-click to copy the color code"
 msgstr ""
 
 # >> @option:radio When pressing the keyboard shortcut:
-#: package/contents/ui/CompactRepresentation.qml:75
+#: package/contents/ui/CompactRepresentation.qml:77
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Изабери боју"
 
-#: package/contents/ui/CompactRepresentation.qml:82
+#: package/contents/ui/CompactRepresentation.qml:84
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -55,14 +55,14 @@ msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Подразумевани формат боје:"
 
-#: package/contents/ui/configGeneral.qml:31
+#: package/contents/ui/configGeneral.qml:33
 #, fuzzy, kde-format
 #| msgid "Automatically copy color to clipboard"
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Аутоматски копирај боју у клипборд"
 
-#: package/contents/ui/configGeneral.qml:39
+#: package/contents/ui/configGeneral.qml:41
 #, fuzzy, kde-format
 #| msgid "When pressing the keyboard shortcut:"
 msgctxt "@label"
@@ -70,7 +70,7 @@ msgid "When pressing the keyboard shortcut:"
 msgstr "На притисак пречице са тастатуре:"
 
 # >> @option:radio When pressing the keyboard shortcut:
-#: package/contents/ui/configGeneral.qml:40
+#: package/contents/ui/configGeneral.qml:42
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@option:radio"
@@ -78,14 +78,14 @@ msgid "Pick a color"
 msgstr "Изабери боју"
 
 # >> @option:radio When pressing the keyboard shortcut:
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:48
 #, fuzzy, kde-format
 #| msgid "Show history"
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Прикажи историјат"
 
-#: package/contents/ui/configGeneral.qml:56
+#: package/contents/ui/configGeneral.qml:58
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
