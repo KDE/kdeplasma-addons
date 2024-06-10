@@ -4,6 +4,7 @@
 [Domain]
 Name=Kameleon
 Name[ar]=كاميليون
+Name[az]=Xameleon
 Name[bg]=Kameleon
 Name[ca]=Kameleon
 Name[ca@valencia]=Kameleon
@@ -34,6 +35,7 @@ Icon=color
 [org.kde.kameleonhelper.writecolor]
 Name=Write color
 Name[ar]=اكتب لون
+Name[az]=Rəngi yazmaq
 Name[bg]=Запис на цвят
 Name[ca]=Escriu un color
 Name[ca@valencia]=Escriu un color
@@ -60,6 +62,7 @@ Name[zh_CN]=写入颜色
 Name[zh_TW]=寫入顏色
 Description=Allow writing accent color to device LEDs
 Description[ar]=اسمح بكتابة لون التمييز إلى مصابيح الجهاز
+Description[az]=Vurğu rəngini cihazın LED-lərinə yazılmasına icazə verir
 Description[bg]=Разрешаване на запис на акцентен цвят на светодиодите на устройството
 Description[ca]=Permet escriure l'accent de color a un dispositiu LED
 Description[ca@valencia]=Permet escriure l'accent de color a un dispositiu LED

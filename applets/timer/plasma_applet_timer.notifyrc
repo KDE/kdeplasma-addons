@@ -69,6 +69,7 @@ IconName=chronometer
 [Event/timerFinished]
 Name=Timer finished
 Name[ar]=انتهى المؤقّت
+Name[az]=Sayma tamamlandı
 Name[bg]=Таймерът завърши
 Name[ca]=El temporitzador ha finalitzat
 Name[ca@valencia]=El temporitzador ha finalitzat
@@ -109,6 +110,7 @@ Name[zh_CN]=计时结束
 Name[zh_TW]=計時器已完成
 Comment=Your timer has finished
 Comment[ar]=انتهى المؤقّت
+Comment[az]=Sayma tamamlandı
 Comment[bg]=Таймерът завърши
 Comment[ca]=El temporitzador ha finalitzat
 Comment[ca@valencia]=El temporitzador ha finalitzat
