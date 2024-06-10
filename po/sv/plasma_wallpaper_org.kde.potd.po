@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2018, 2019, 2022.
+# SPDX-FileCopyrightText: 2018, 2019, 2022, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-16 00:39+0000\n"
-"PO-Revision-Date: 2022-09-25 10:07+0200\n"
+"PO-Revision-Date: 2024-06-09 11:34+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: package/contents/ui/config.qml:44
 #, kde-format
@@ -30,6 +30,8 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"Skrivbordsunderläggsleverantören filtrerar inte bor bilder som kan upplevas "
+"som känsliga eller stötande. Använd försiktighet om bilderna ska visas öppet."
 
 #: package/contents/ui/config.qml:72
 #, kde-format
@@ -118,7 +120,7 @@ msgstr "Öppna målkatalog där skrivbordsunderläggets bild sparades."
 #: package/contents/ui/main.qml:22
 #, kde-format
 msgid "Open Wallpaper Image"
-msgstr ""
+msgstr "Öppna skrivbordsunderläggsbild"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format

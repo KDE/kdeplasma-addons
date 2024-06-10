@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@bredband.net>, 2015, 2016, 2018, 2022.
+# SPDX-FileCopyrightText: 2015, 2016, 2018, 2022, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-16 00:39+0000\n"
-"PO-Revision-Date: 2022-09-25 10:06+0200\n"
+"PO-Revision-Date: 2024-06-09 11:25+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@bredband.net>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -27,7 +27,7 @@ msgstr "Allmänt"
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
-msgstr ""
+msgstr "Mittenklicka för att kopiera färgkoden"
 
 #: package/contents/ui/CompactRepresentation.qml:75
 #, kde-format
@@ -42,6 +42,8 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Dra en färg hit för att spara den<nl/>Dra en bildfil hit för att hämta dess "
+"medelfärg"
 
 #: package/contents/ui/configGeneral.qml:23
 #, kde-format
@@ -77,7 +79,7 @@ msgstr "Visa historik"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Förhandsgranskningsantal:"
 
 #: package/contents/ui/main.qml:121
 #, kde-format
@@ -92,12 +94,10 @@ msgid "Clear History"
 msgstr "Rensa historik"
 
 #: package/contents/ui/main.qml:134
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "Rensa historik"
+msgstr "Visa historik"
 
 #: package/contents/ui/main.qml:142
 #, kde-format
@@ -115,7 +115,7 @@ msgstr "inga färger"
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
+msgstr "Färghämtning är otillgänglig när sammansättning är inaktiverad"
 
 #: package/contents/ui/main.qml:183
 #, kde-format
@@ -123,6 +123,8 @@ msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
+"Sammansättning har inaktiverats manuellt eller blockerats av ett program som "
+"kör"
 
 #: package/contents/ui/main.qml:190
 #, kde-format
@@ -134,13 +136,13 @@ msgstr "Hämta färg"
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "Anpassa sammansättning"
 
 #: package/contents/ui/main.qml:384
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "Kopierad."
 
 #: package/contents/ui/main.qml:395
 #, kde-format
