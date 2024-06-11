@@ -3,15 +3,14 @@
 # Copyright (C) 2008 This_file_is_part_of_KDE
 # This file is distributed under the same license as the plasma_applet_comic package.
 # Laurenţiu Buzdugan <lbuz@rolix.org>, 2008".
-# Sergiu Bivol <sergiu@cip.md>, 2008.
-# Sergiu Bivol <sergiu@cip.md>, 2008, 2013, 2021, 2023.
+# Sergiu Bivol <sergiu@cip.md>, 2008, 2013, 2021, 2023, 2024.
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2023-06-18 19:41+0100\n"
+"PO-Revision-Date: 2024-02-24 23:10+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -26,32 +25,31 @@ msgstr ""
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
-msgstr ""
+msgstr "Fila următoare cu bandă &nouă"
 
 #: comic.cpp:86
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
-msgstr ""
+msgstr "Salt la prima &bandă"
 
 #: comic.cpp:90
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
-msgstr ""
+msgstr "Salt la banda a&ctuală"
 
 #: comic.cpp:94
-#, fuzzy, kde-format
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
-msgstr "Mergi la banda"
+msgstr "Salt la banda…"
 
 #: comic.cpp:98
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
-msgstr ""
+msgstr "Vizitează saitul"
 
 #: comic.cpp:102
 #, kde-format
@@ -63,14 +61,13 @@ msgstr "Vezi în %1"
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
-msgstr ""
+msgstr "&Vizitează saitul magazinului"
 
 #: comic.cpp:115
-#, fuzzy, kde-format
-#| msgid "&Save Comic As..."
+#, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr "&Salvare benzi ca..."
+msgstr "&Salvează banda ca…"
 
 #: comic.cpp:120
 #, kde-format
@@ -79,12 +76,10 @@ msgid "&Actual Size"
 msgstr "Dimensiune re&ală"
 
 #: comic.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "@option:check Context menu of comic image"
-#| msgid "Store current &Position"
+#, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
-msgstr "Păstrează &poziția actuală"
+msgstr "Stochează &poziția actuală"
 
 #: comicdata.cpp:86
 #, kde-format
@@ -120,7 +115,7 @@ msgstr "Salt la banda…"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
-msgstr ""
+msgstr "Vizitează saitul benzii desenate"
 
 #: package/contents/ui/configAdvanced.qml:35
 #, fuzzy, kde-format
@@ -148,66 +143,60 @@ msgstr ""
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
-msgstr ""
+msgstr "Arată:"
 
 #: package/contents/ui/configAppearance.qml:43
-#, fuzzy, kde-format
-#| msgid "Show comic &title:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
-msgstr "Arată &titlul benzii:"
+msgstr "Titlul benzii"
 
 #: package/contents/ui/configAppearance.qml:49
-#, fuzzy, kde-format
-#| msgid "Show comic &identifier:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
-msgstr "Arată &identificatorul benzii:"
+msgstr "Identificatorul benzii"
 
 #: package/contents/ui/configAppearance.qml:55
-#, fuzzy, kde-format
-#| msgid "Show comic &author:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
-msgstr "Arată &autorul benzii:"
+msgstr "Autorul benzii"
 
 #: package/contents/ui/configAppearance.qml:61
-#, fuzzy, kde-format
-#| msgid "Comic:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
-msgstr "Benzi desenate:"
+msgstr "URL-ul benzii"
 
 #: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
-msgstr ""
+msgstr "Arată butoane de navigare:"
 
 #: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
-msgstr ""
+msgstr "Întotdeauna"
 
 #: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
-msgstr ""
+msgstr "Numai la planare"
 
 #: package/contents/ui/configGeneral.qml:52
-#, fuzzy, kde-format
-#| msgid "Comic:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Benzi desenate:"
 
 #: package/contents/ui/configGeneral.qml:72
-#, fuzzy, kde-format
-#| msgid "Get New Comics..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
-msgstr "Obținere benzi noi..."
+msgstr "Obține benzi noi…"
 
 #: package/contents/ui/configGeneral.qml:83
 #, kde-format

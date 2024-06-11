@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-20 00:39+0000\n"
-"PO-Revision-Date: 2024-02-24 19:11+0000\n"
+"PO-Revision-Date: 2024-02-25 14:28+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -91,6 +91,8 @@ msgid ""
 "This calendar is based on pure astronomical calculation. It doesn't consider "
 "any crescent visibility criteria."
 msgstr ""
+"Acest calendar e bazat doar pe calcule astronomice. Acesta nu ia în calcul "
+"criteriile de vizibilitate a pătrarelor."
 
 #: config/qml/AlternateCalendarConfig.qml:68
 #, kde-format
@@ -113,6 +115,8 @@ msgid ""
 "A positive offset signifies a later date, while a negative offset signifies "
 "an earlier date."
 msgstr ""
+"Un decalaj pozitiv semnifică o dată ulterioară, pe când un decalaj negativ "
+"semnifică o dată anterioară."
 
 #: provider/hebrewcalendar.cpp:91
 #, kde-format
