@@ -22,8 +22,8 @@ KAuth::ActionReply KameleonHelper::writecolor(const QVariantMap &args)
     }
     for (int i = 0; i < devices.length(); ++i) {
         QString device = devices.at(i);
-        if (device.contains(QLatin1String(".."))) {
-            qCWarning(KAMELEONHELPER) << "invalid character sequence '..' for device" << device;
+        if (device.contains(QLatin1String("..")) || device.contains(QLatin1Char('/'))) {
+            qCWarning(KAMELEONHELPER) << "invalid device name" << device;
             return KAuth::ActionReply::HelperErrorReply();
         }
 
