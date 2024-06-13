@@ -34,18 +34,8 @@ KAuth::ActionReply KameleonHelper::writecolor(const QVariantMap &args)
         }
 
         QFile file(LED_SYSFS_PATH + device + LED_RGB_FILE);
-        if (!QFileInfo(file).exists()) {
-            qCWarning(KAMELEONHELPER) << "writing to" << file.fileName() << "failed:"
-                                      << "file does not exist";
-            return KAuth::ActionReply::HelperErrorReply();
-        }
-        if (!QFileInfo(file).isWritable()) {
-            qCWarning(KAMELEONHELPER) << "writing to" << file.fileName() << "failed:"
-                                      << "file is not writable";
-            return KAuth::ActionReply::HelperErrorReply();
-        }
-        if (!file.open(QIODevice::WriteOnly)) {
-            qCWarning(KAMELEONHELPER) << "writing to" << file.fileName() << "failed:" << file.error() << file.errorString();
+        if (!file.open(QIODevice::WriteOnly | QIODevice::ExistingOnly)) {
+            qCWarning(KAMELEONHELPER) << "Opening" << file.fileName() << "failed:" << file.error() << file.errorString();
             return KAuth::ActionReply::HelperErrorReply();
         }
         const int bytesWritten = file.write(color);
