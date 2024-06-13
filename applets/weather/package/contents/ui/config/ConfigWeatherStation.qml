@@ -117,19 +117,19 @@ KCM.ScrollViewKCM {
                 searchDelayTimer.restart();
             }
 
-            Keys.onUpPressed: {
+            Keys.onUpPressed: event => {
                 if (locationListView.currentIndex != 0) {
                     locationListView.currentIndex--;
                 }
                 event.accepted = true;
             }
-            Keys.onDownPressed: {
+            Keys.onDownPressed: event => {
                 if (locationListView.currentIndex != locationListView.count - 1) {
                     locationListView.currentIndex++;
                 }
                 event.accepted = true;
             }
-            Keys.onEscapePressed: {
+            Keys.onEscapePressed: event => {
                 if (searchStringEdit.text.length === 0) {
                     event.accepted = false;
                     return;

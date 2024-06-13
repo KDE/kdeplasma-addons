@@ -61,12 +61,8 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma5Support::
                 ++i;
             }
         }
-
     } else if (validationResult[1] == QLatin1String("timeout")) {
         Q_EMIT error(i18n("Connection to %1 weather server timed out.", m_ionName));
-    } else {
-        const QString searchTerm = validationResult.size() > 3 ? validationResult[3] : source;
-        Q_EMIT error(i18n("Cannot find '%1' using %2.", searchTerm, m_ionName));
     }
 
     Q_EMIT finished(locationSources);
@@ -200,7 +196,6 @@ void LocationListModel::addSources(const QMap<QString, QString> &sources)
         it.next();
         const QStringList list = it.value().split(QLatin1Char('|'), Qt::SkipEmptyParts);
         if (list.count() > 2) {
-            qDebug() << list;
             m_locations.append(LocationItem(list[2], list[0], it.value()));
         }
     }
