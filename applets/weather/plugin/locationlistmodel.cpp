@@ -226,7 +226,11 @@ void LocationListModel::addSources(const QMap<QString, QString> &sources)
         if (item.weatherStation.isEmpty()) {
             continue;
         }
-        m_locations << item;
+        if (item.quality >= 0) {
+            m_locations << item;
+        } else {
+            fallbackLocations << item;
+        }
     }
 
     // Promote services with better quality to the top of the list
@@ -238,6 +242,12 @@ void LocationListModel::addSources(const QMap<QString, QString> &sources)
 
     ++m_checkedInCount;
     if (m_checkedInCount >= m_validators.count()) {
+        if (m_locations.isEmpty()) {
+            beginResetModel();
+            m_locations = fallbackLocations;
+            endResetModel();
+        }
+        fallbackLocations.clear();
         completeSearch();
     }
 }
