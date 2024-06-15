@@ -49,19 +49,14 @@ private:
 class LocationItem
 {
 public:
-    LocationItem()
-    {
-    }
-    LocationItem(const QString &_weatherStation, const QString &_weatherService, const QString &_value)
-        : weatherStation(_weatherStation)
-        , weatherService(_weatherService)
-        , value(_value)
-    {
-    }
+    LocationItem(const QString &source);
+
+    int relativeQuality(const QString &service) const;
 
     QString weatherStation;
     QString weatherService;
     QString value;
+    int quality = 0;
 };
 
 Q_DECLARE_METATYPE(LocationItem)

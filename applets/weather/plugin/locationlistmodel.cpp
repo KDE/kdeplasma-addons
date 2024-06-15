@@ -68,6 +68,35 @@ void WeatherValidator::dataUpdated(const QString &source, const Plasma5Support::
     Q_EMIT finished(locationSources);
 }
 
+LocationItem::LocationItem(const QString &source)
+    : value(source)
+{
+    const QStringList sourceTerms = source.split(QLatin1Char('|'), Qt::SkipEmptyParts);
+    if (sourceTerms.count() <= 2) {
+        return;
+    }
+    weatherService = sourceTerms[0];
+    weatherStation = sourceTerms[2];
+    quality = relativeQuality(weatherService);
+}
+
+int LocationItem::relativeQuality(const QString &service) const
+{
+    static const QMap<QString, int> serviceQuality = {
+        {"wettercom", -1}, // wetter.com does not provide current weather status
+        {"bbcukmet", 0}, // only 3-day forecast and no alerts
+        {"dwd", 1}, // 7-day forecast and alerts, but some stations do not provide observation data,
+        {"noaa", 2}, // 12h 7-day forecast, observation and alerts
+        {"envcan", 2}, // 12h 7-day forecast, observation and alerts
+    };
+
+    if (!serviceQuality.contains(service)) {
+        return 1; // Fallback. Default quality
+    }
+
+    return serviceQuality.value(service);
+}
+
 LocationListModel::LocationListModel(QObject *parent)
     : QAbstractListModel(parent)
     , m_validatingInput(false)
@@ -187,18 +216,23 @@ void LocationListModel::validatorError(const QString &error)
 
 void LocationListModel::addSources(const QMap<QString, QString> &sources)
 {
-    QMapIterator<QString, QString> it(sources);
+    static QList<LocationItem> fallbackLocations;
 
     // TODO: be more elaborate and use beginInsertRows() & endInsertRows()
     beginResetModel();
 
-    while (it.hasNext()) {
-        it.next();
-        const QStringList list = it.value().split(QLatin1Char('|'), Qt::SkipEmptyParts);
-        if (list.count() > 2) {
-            m_locations.append(LocationItem(list[2], list[0], it.value()));
+    for (const auto &source : sources) {
+        const auto item = LocationItem(source);
+        if (item.weatherStation.isEmpty()) {
+            continue;
         }
+        m_locations << item;
     }
+
+    // Promote services with better quality to the top of the list
+    std::stable_sort(m_locations.begin(), m_locations.end(), [](const auto &a, const auto &b) {
+        return a.quality >= b.quality;
+    });
 
     endResetModel();
 
