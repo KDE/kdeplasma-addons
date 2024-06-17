@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-29 03:09+0000\n"
-"PO-Revision-Date: 2024-02-18 18:05+0530\n"
+"PO-Revision-Date: 2024-06-16 18:12+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.05.1\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -330,7 +330,7 @@ msgstr "இருப்பிடத்தை அமை…"
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
-msgstr ""
+msgstr "%1 என்பதற்கான வானிலை விவரங்களைப் பெற முடியவில்லை"
 
 #: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
@@ -477,7 +477,7 @@ msgstr "மேலும் விவரங்களை காட்டு"
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
-msgstr ""
+msgstr "கணிப்பு"
 
 #: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
@@ -499,7 +499,7 @@ msgstr[1] "%1 அறிக்கைகள்"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
-msgstr ""
+msgstr "வானிலை கணிப்பை ஏற்ற முடியவில்லை"
 
 #: package/contents/ui/SwitchPanel.qml:116
 #, kde-format
