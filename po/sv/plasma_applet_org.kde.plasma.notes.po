@@ -2,20 +2,20 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2007, 2008, 2009, 2015, 2018, 2019, 2021.
+# SPDX-FileCopyrightText: 2007, 2008, 2009, 2015, 2018, 2019, 2021, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-26 01:34+0000\n"
-"PO-Revision-Date: 2021-04-10 07:57+0200\n"
+"PO-Revision-Date: 2024-06-18 19:40+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: package/contents/config/config.qml:13
@@ -75,13 +75,13 @@ msgid "A pink sticky note"
 msgstr "En rosa anteckningslapp"
 
 #: package/contents/ui/configAppearance.qml:70
-#, fuzzy, kde-format
+#, kde-format
 #| msgid "A translucent sticky note"
 msgid "A transparent sticky note"
 msgstr "En genomskinlig anteckningslapp"
 
 #: package/contents/ui/configAppearance.qml:71
-#, fuzzy, kde-format
+#, kde-format
 #| msgid "A translucent sticky note with light text"
 msgid "A transparent sticky note with light text"
 msgstr "En genomskinlig anteckningslapp med ljus text"
@@ -112,17 +112,17 @@ msgid "Paste"
 msgstr "Klistra in"
 
 #: package/contents/ui/main.qml:307
-#, fuzzy, kde-format
+#, kde-format
 #| msgid "Paste Without Formatting"
 msgid "Paste with Full Formatting"
-msgstr "Klistra in utan formatering"
+msgstr "Klistra in med fullständig formatering"
 
 #: package/contents/ui/main.qml:314
-#, fuzzy, kde-format
+#, kde-format
 #| msgid "Formatting"
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Formatering"
+msgstr "Ta bort formatering"
 
 #: package/contents/ui/main.qml:329
 #, kde-format
@@ -222,20 +222,20 @@ msgid "Pink"
 msgstr "Rosa"
 
 #: package/contents/ui/main.qml:637
-#, fuzzy, kde-format
+#, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
 msgid "Transparent"
-msgstr "Halvgenomskinlig"
+msgstr "Genomskinlig"
 
 #: package/contents/ui/main.qml:641
-#, fuzzy, kde-format
+#, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "Translucent Light"
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
-msgstr "Ljus halvgenomskinlig"
+msgstr "Genomskinlig ljus"
 
 #~ msgid "Background color"
 #~ msgstr "Bakgrundsfärg"
@@ -318,3 +318,4 @@ msgstr "Ljus halvgenomskinlig"
 #~ msgid "Welcome to the Notes Plasmoid! Type your notes here..."
 #~ msgstr ""
 #~ "Välkommen till plasmoiden Anteckningar. Skriv in dina anteckningar här..."
+

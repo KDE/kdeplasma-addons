@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Stefan Asserhäll <stefan.asserhall@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Stefan Asserhäll <stefan.asserhall@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-20 00:39+0000\n"
-"PO-Revision-Date: 2022-05-21 20:45+0200\n"
+"PO-Revision-Date: 2024-06-18 19:41+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: calendarsystem.h:50
 #, kde-format
@@ -41,17 +41,17 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Astronomical)"
-msgstr ""
+msgstr "Islamsk kalender (astronomisk)"
 
 #: calendarsystem.h:66
-#, fuzzy, kde-format
+#, kde-format
 #| msgctxt "@item:inlist"
 #| msgid "The Islamic Civil Calendar"
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "The Islamic Civil Calendar (Tabular)"
-msgstr "Allmän Islamsk kalender"
+msgstr "Allmän Islamsk kalender (tabell)"
 
 #: calendarsystem.h:70
 #, kde-format
@@ -59,7 +59,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Umm al-Qura)"
-msgstr ""
+msgstr "Islamsk kalender (Umm al-Qura)"
 
 #: calendarsystem.h:74
 #, kde-format
@@ -77,7 +77,7 @@ msgstr "Indisk nationell kalender"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
-msgstr ""
+msgstr "Hebreisk kalender"
 
 #: config/qml/AlternateCalendarConfig.qml:39
 #, kde-format
@@ -92,6 +92,8 @@ msgid ""
 "This calendar is based on pure astronomical calculation. It doesn't consider "
 "any crescent visibility criteria."
 msgstr ""
+"Kalendern är helt baserad på astronomiska beräkningar. Den tar inte hänsyn "
+"till några synlighetskriterier för månskäran."
 
 #: config/qml/AlternateCalendarConfig.qml:68
 #, kde-format
@@ -113,6 +115,8 @@ msgid ""
 "A positive offset signifies a later date, while a negative offset signifies "
 "an earlier date."
 msgstr ""
+"En positiv förändring anger ett senare datum, medan en negativ förändring "
+"anger ett tidigare datum."
 
 #: provider/hebrewcalendar.cpp:91
 #, kde-format
@@ -120,13 +124,13 @@ msgctxt ""
 "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
 "number %4 Full date in Hebrew"
 msgid "%1 %2, %3 (%4)"
-msgstr ""
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/indiancalendar.cpp:70
 #, kde-format
 msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 msgid "%1 %2, %3"
-msgstr ""
+msgstr "%1 %2, %3"
 
 #: provider/islamiccalendar.cpp:130
 #, kde-format
@@ -134,10 +138,11 @@ msgctxt ""
 "@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 "
 "Islamic calendar date in Arabic"
 msgid "%1 %2, %3 (%4)"
-msgstr ""
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/qtcalendar.cpp:55
 #, kde-format
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
-msgstr ""
+msgstr "%1 %2, %3"
+
