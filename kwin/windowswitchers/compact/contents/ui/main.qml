@@ -48,6 +48,16 @@ KWin.TabBoxSwitcher {
         textMetrics.longestCaption = tabBox.model.longestCaption() || placeholderLabel.text;
     }
 
+    // For mouse clicking, we delay the activation just enough to have
+    // visual feedback of the highlight switching to the selected item
+    Timer {
+        id: activationTimer
+        interval: Kirigami.Units.shortDuration
+        onTriggered: {
+            tabBox.model.activate(compactListView.currentIndex)
+        }
+    }
+
     PlasmaCore.Dialog {
         id: dialog
         location: PlasmaCore.Types.Floating
@@ -112,14 +122,10 @@ KWin.TabBoxSwitcher {
                         Layout.bottomMargin: hoverItem.margins.bottom
                     }
                     TapHandler {
-                        onSingleTapped: {
-                            if (index === compactListView.currentIndex) {
-                                compactListView.model.activate(index);
-                                return;
-                            }
+                        onTapped: {
                             compactListView.currentIndex = index;
+                            activationTimer.start();
                         }
-                        onDoubleTapped: compactListView.model.activate(index)
                     }
                 }
                 highlight: KSvg.FrameSvgItem {
