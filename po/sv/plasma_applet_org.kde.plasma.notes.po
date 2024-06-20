@@ -76,13 +76,11 @@ msgstr "En rosa anteckningslapp"
 
 #: package/contents/ui/configAppearance.qml:70
 #, kde-format
-#| msgid "A translucent sticky note"
 msgid "A transparent sticky note"
 msgstr "En genomskinlig anteckningslapp"
 
 #: package/contents/ui/configAppearance.qml:71
 #, kde-format
-#| msgid "A translucent sticky note with light text"
 msgid "A transparent sticky note with light text"
 msgstr "En genomskinlig anteckningslapp med ljus text"
 
@@ -113,13 +111,11 @@ msgstr "Klistra in"
 
 #: package/contents/ui/main.qml:307
 #, kde-format
-#| msgid "Paste Without Formatting"
 msgid "Paste with Full Formatting"
 msgstr "Klistra in med fullständig formatering"
 
 #: package/contents/ui/main.qml:314
 #, kde-format
-#| msgid "Formatting"
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "Ta bort formatering"
@@ -223,16 +219,12 @@ msgstr "Rosa"
 
 #: package/contents/ui/main.qml:637
 #, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent"
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "Genomskinlig"
 
 #: package/contents/ui/main.qml:641
 #, kde-format
-#| msgctxt "@item:inmenu"
-#| msgid "Translucent Light"
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
 msgstr "Genomskinlig ljus"
@@ -318,4 +310,3 @@ msgstr "Genomskinlig ljus"
 #~ msgid "Welcome to the Notes Plasmoid! Type your notes here..."
 #~ msgstr ""
 #~ "Välkommen till plasmoiden Anteckningar. Skriv in dina anteckningar här..."
-

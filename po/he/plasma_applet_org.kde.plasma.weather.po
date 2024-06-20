@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-28 00:39+0000\n"
+"POT-Creation-Date: 2024-06-20 00:40+0000\n"
 "PO-Revision-Date: 2024-05-28 09:26+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -522,17 +522,17 @@ msgstr ""
 "עלולות להתרחש תקלות טכניות עם ספק מזג האוויר. אם התקלה נמשכת מעבר ליום אחד, "
 "נא לדווח על תקלה."
 
-#: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
+#: plugin/locationlistmodel.cpp:41
 #, kde-format
 msgid "Cannot find '%1' using %2."
 msgstr "לא ניתן למצוא את ‚%1’ באמצעות %2."
 
-#: plugin/locationlistmodel.cpp:66
+#: plugin/locationlistmodel.cpp:65
 #, kde-format
 msgid "Connection to %1 weather server timed out."
 msgstr "תם הזמן שהוקצב לחיבור לשרת מזג האוויר %1."
 
-#: plugin/locationlistmodel.cpp:125
+#: plugin/locationlistmodel.cpp:150
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"

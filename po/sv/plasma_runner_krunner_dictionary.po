@@ -45,4 +45,3 @@ msgstr "Definitionen av \"%1\" har kopierats till klippbordet"
 msgctxt "@label:textbox"
 msgid "Trigger word:"
 msgstr "Uppslagsord:"
-

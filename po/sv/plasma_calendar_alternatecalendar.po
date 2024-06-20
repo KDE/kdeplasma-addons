@@ -45,8 +45,6 @@ msgstr "Islamsk kalender (astronomisk)"
 
 #: calendarsystem.h:66
 #, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "The Islamic Civil Calendar"
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
@@ -145,4 +143,3 @@ msgstr "%1 %2, %3 (%4)"
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
 msgstr "%1 %2, %3"
-

@@ -44,13 +44,11 @@ msgstr "Num Lock"
 
 #: contents/ui/main.qml:87
 #, kde-format
-#| msgid "Caps Lock activated\n"
 msgid "Caps Lock activated"
 msgstr "Caps Lock aktiverad"
 
 #: contents/ui/main.qml:90
 #, kde-format
-#| msgid "Num Lock activated\n"
 msgid "Num Lock activated"
 msgstr "Num Lock aktiverad"
 
@@ -70,4 +68,3 @@ msgstr "Inga låstangenter aktiverade"
 
 #~ msgid "Appearance"
 #~ msgstr "Utseende"
-

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-05-28 00:39+0000\n"
+"POT-Creation-Date: 2024-06-20 00:40+0000\n"
 "PO-Revision-Date: 2024-06-18 19:41+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -151,24 +151,18 @@ msgstr "Kompakt läge"
 
 #: package/contents/ui/config/ConfigAppearance.qml:43
 #, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show temperature"
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Visa temperatur:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:46
 #, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Över komponentens ikon"
 
 #: package/contents/ui/config/ConfigAppearance.qml:54
 #, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Bredvid komponentens ikon"
@@ -266,8 +260,6 @@ msgstr "Leverantör:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Ange ny plats"
@@ -310,8 +302,6 @@ msgstr ""
 
 #: package/contents/ui/ForecastView.qml:77
 #, kde-format
-#| msgctxt "certain weather condition (probability percentage)"
-#| msgid "%1 (%2 %)"
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2 %)"
@@ -437,9 +427,6 @@ msgstr "Vindbyar:"
 
 #: package/contents/ui/main.qml:248
 #, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
 msgstr "Dag"
@@ -505,8 +492,6 @@ msgstr "Detaljinformation"
 
 #: package/contents/ui/SwitchPanel.qml:42
 #, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Notices"
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
 "watches, ...) issued"
@@ -531,17 +516,17 @@ msgstr ""
 "Det kan finnas ett tekniskt problem med väderleverantören. Om problemet "
 "kvarstår längre än en dag, skicka en felrapport."
 
-#: plugin/locationlistmodel.cpp:41 plugin/locationlistmodel.cpp:69
+#: plugin/locationlistmodel.cpp:41
 #, kde-format
 msgid "Cannot find '%1' using %2."
 msgstr "Kan inte hitta '%1' med användning av %2."
 
-#: plugin/locationlistmodel.cpp:66
+#: plugin/locationlistmodel.cpp:65
 #, kde-format
 msgid "Connection to %1 weather server timed out."
 msgstr "Tidsgräns gick ut vid anslutning till vädertjänsten %1."
 
-#: plugin/locationlistmodel.cpp:125
+#: plugin/locationlistmodel.cpp:150
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
@@ -756,4 +741,3 @@ msgstr "%1 (%2)"
 
 #~ msgid "General"
 #~ msgstr "Allmänt"
-

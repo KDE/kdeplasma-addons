@@ -27,8 +27,6 @@ msgstr "Utseende"
 #: package/contents/ui/configGeneral.qml:29
 #: package/contents/ui/configGeneral.qml:59
 #, kde-format
-#| msgctxt "@option:check"
-#| msgid "Inactive LEDs"
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "Avstängda ljus"
@@ -46,8 +44,6 @@ msgstr "Använd egen färg för:"
 
 #: package/contents/ui/configGeneral.qml:46
 #, kde-format
-#| msgctxt "@option:check"
-#| msgid "Active LEDs"
 msgctxt "@option:check"
 msgid "Active lights"
 msgstr "Aktiva ljus"
@@ -125,4 +121,3 @@ msgstr "Aktiva ljus"
 
 #~ msgid "General"
 #~ msgstr "Allmänt"
-

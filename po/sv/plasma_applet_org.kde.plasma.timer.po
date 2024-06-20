@@ -94,8 +94,6 @@ msgstr "Visa sekunder"
 
 #: package/contents/ui/configAppearance.qml:63
 #, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show title:"
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Visa eller dölj tidtagare"
@@ -235,4 +233,3 @@ msgstr "&Nollställ"
 
 #~ msgid "Timer Configuration"
 #~ msgstr "Tidsinställning"
-

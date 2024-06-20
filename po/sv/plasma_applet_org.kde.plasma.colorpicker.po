@@ -95,8 +95,6 @@ msgstr "Rensa historik"
 
 #: package/contents/ui/main.qml:134
 #, kde-format
-#| msgctxt "@action"
-#| msgid "Clear History"
 msgctxt "@action"
 msgid "View History"
 msgstr "Visa historik"
@@ -155,4 +153,3 @@ msgstr "Ta bort"
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"
 #~ msgstr "Färgalternativ"
-

@@ -56,7 +56,6 @@ msgstr " <tidszon>"
 
 #: datetimerunner.cpp:37
 #, kde-format
-#| msgid "Displays the current date in a given timezone"
 msgid ""
 "Displays the current date and difference to system date in a given timezone"
 msgstr ""
@@ -64,7 +63,6 @@ msgstr ""
 
 #: datetimerunner.cpp:39
 #, kde-format
-#| msgid "Displays the current time in a given timezone"
 msgid ""
 "Displays the current time and difference to system time in a given timezone"
 msgstr "Visar aktuell tid och skillnaden mot systemets tid i en given tidszon"
@@ -167,4 +165,3 @@ msgstr "ingen tidsskillnad"
 
 #~ msgid "The current time in %1 is %2"
 #~ msgstr "Aktuell i %1 är %2"
-

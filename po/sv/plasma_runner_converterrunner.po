@@ -25,17 +25,13 @@ msgstr "Kopiera enhet och nummer"
 
 #: converterrunner.cpp:32
 #, kde-format
-#| msgid ""
-#| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
-#| "in] unit\". You can use the Unit converter applet to find all available "
-#| "units."
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
 "unit.You can use the Unit converter applet to find all available units."
 msgstr ""
-"Konverterar värdet av :q: när :q: består av \"värde enhet [>, till, som i]"
-" enhet\". Du kan använda miniprogrammet Enhetskonvertering för att hitta alla"
-" tillgängliga enheter."
+"Konverterar värdet av :q: när :q: består av \"värde enhet [>, till, som i] "
+"enhet\". Du kan använda miniprogrammet Enhetskonvertering för att hitta alla "
+"tillgängliga enheter."
 
 #: converterrunner.cpp:39
 #, kde-format
@@ -57,4 +53,3 @@ msgstr "i;till;som"
 #~ msgctxt "amount of 'unit1' as 'unit2'"
 #~ msgid "as"
 #~ msgstr "som"
-

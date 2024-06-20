@@ -30,8 +30,8 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
-"Skrivbordsunderläggsleverantören filtrerar inte bor bilder som kan upplevas"
-" som känsliga eller stötande. Använd försiktighet om bilderna ska visas öppet."
+"Skrivbordsunderläggsleverantören filtrerar inte bor bilder som kan upplevas "
+"som känsliga eller stötande. Använd försiktighet om bilderna ska visas öppet."
 
 #: package/contents/ui/config.qml:72
 #, kde-format
@@ -318,4 +318,3 @@ msgstr "Bilden sparades som <a href=\"%1\">%2</a>"
 #~ msgctxt "@item:inlistbox"
 #~ msgid "Tabliss"
 #~ msgstr "Tabliss"
-

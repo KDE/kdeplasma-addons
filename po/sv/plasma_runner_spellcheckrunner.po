@@ -54,8 +54,8 @@ msgid ""
 "No dictionary found. Please install <resource>hunspell</resource> package "
 "using your package manager"
 msgstr ""
-"Ingen ordlista hittades. Installera paketet <resource>hunspell</resource> med"
-" pakethanteraren."
+"Ingen ordlista hittades. Installera paketet <resource>hunspell</resource> "
+"med pakethanteraren."
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
@@ -94,4 +94,3 @@ msgstr "Anpassa ordlistor…"
 #~ msgctxt "separator for a list of words"
 #~ msgid ", "
 #~ msgstr ", "
-
