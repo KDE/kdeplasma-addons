@@ -1,0 +1,21 @@
+{
+    "KPackageStructure": "KWin/Effect",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "fanzhuyifan@gmail.com",
+                "Name": "Yifan Zhu",
+                "Name[en_GB]": "Yifan Zhu",
+                "Name[x-test]": "Yifan Zhu",
+                "Name[zh_CN]": "Yifan Zhu",
+                "Name[zh_TW]": "Yifan Zhu"
+            }
+        ],
+        "Category": "Accessibility",
+        "Description": "When partially obscured by the screen edge, rotate the cursor so it is always fully visible.",
+        "EnabledByDefault": false,
+        "License": "GPL",
+        "Name": "Force Cursor Visibility Near Screen Edges",
+        "X-KDE-Ordering": 60
+    }
+}
