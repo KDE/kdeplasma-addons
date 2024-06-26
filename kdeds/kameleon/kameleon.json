@@ -27,7 +27,7 @@
         "Description[tr]": "Aygıt LED’lerini Plasma vurgu rengiyle eşleştirir",
         "Description[uk]": "Синхронізує світлодіоди пристрою із кольором акценту Плазми",
         "Description[x-test]": "xxSynchronizes device LEDs with the Plasma accent colorxx",
-        "Description[zh_CN]": "将 Plasma 的重点色与设备的灯效同步",
+        "Description[zh_CN]": "将 Plasma 的强调色与设备的灯效同步",
         "Description[zh_TW]": "讓裝置 LED 同步使用 Plasma 強調色",
         "Name": "Kameleon",
         "Name[ar]": "كاميليون",
