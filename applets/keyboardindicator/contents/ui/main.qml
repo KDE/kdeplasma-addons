@@ -20,7 +20,35 @@ PlasmoidItem {
     readonly property KeyboardIndicator.KeyState capsLockState: Plasmoid.configuration.key.includes("Caps Lock") ? kiComponent.createObject(null, {key: Qt.Key_CapsLock}) : null
     readonly property KeyboardIndicator.KeyState numLockState: Plasmoid.configuration.key.includes("Num Lock") ? kiComponent.createObject(null, {key: Qt.Key_NumLock}) : null
 
+    readonly property KeyboardIndicator.KeyState altState: kiComponent.createObject(null, {key: Qt.Key_Alt})
+    readonly property KeyboardIndicator.KeyState shiftState: kiComponent.createObject(null, {key: Qt.Key_Shift})
+    readonly property KeyboardIndicator.KeyState controlState: kiComponent.createObject(null, {key: Qt.Key_Control})
+    readonly property KeyboardIndicator.KeyState metaState: kiComponent.createObject(null, {key: Qt.Key_Meta})
+    readonly property KeyboardIndicator.KeyState altGrState: kiComponent.createObject(null, {key: Qt.Key_AltGr})
+
+    readonly property bool anyActive: {
+        var ret = anyModifierActive
+
+        if (capsLockState) {
+            ret = ret || capsLockState.locked
+        }
+
+        if (numLockState) {
+            ret = ret || numLockState.locked
+        }
+        return ret
+    }
+
+    readonly property bool anyModifierActive: altState.latched || altState.locked || shiftState.latched || shiftState.locked || controlState.latched || controlState.locked || metaState.latched || metaState.locked || altGrState.latched || altGrState.locked
+
     Plasmoid.icon: {
+
+        if (anyModifierActive && !numLockState?.locked) {
+            return "input-caps-on";
+        } else if (anyModifierActive && numLockState?.locked) {
+            return "input-combo-on";
+        }
+
         if (capsLockState?.locked && numLockState?.locked) {
             return "input-combo-on";
         } else if (capsLockState?.locked) {
@@ -58,7 +86,7 @@ PlasmoidItem {
             anchors.fill: parent
             source: Plasmoid.icon
             active: compactMouse.containsMouse
-            enabled: root.capsLockState?.locked || root.numLockState?.locked || false
+            enabled: anyActive
         }
     }
 
@@ -77,12 +105,41 @@ PlasmoidItem {
     switchWidth: Kirigami.Units.gridUnit * 12
     switchHeight: Kirigami.Units.gridUnit * 12
 
-    Plasmoid.status: root.capsLockState?.locked || root.numLockState?.locked
-        ? PlasmaCore.Types.ActiveStatus
-        : PlasmaCore.Types.HiddenStatus
+    Plasmoid.status: anyActive ? PlasmaCore.Types.ActiveStatus : PlasmaCore.Types.HiddenStatus
 
     toolTipSubText: {
         let text = [];
+
+        if (root.altState.latched) {
+            text.push(i18n("Alt is latched"))
+        } else if (root.altState.locked) {
+            text.push(i18n("Alt is locked"))
+        }
+
+        if (root.shiftState.latched) {
+            text.push(i18n("Shift is latched"))
+        } else if (root.shiftState.locked) {
+            text.push(i18n("Shift is locked"))
+        }
+
+        if (root.controlState.latched) {
+            text.push(i18n("Control is latched"))
+        } else if (root.controlState.locked) {
+            text.push(i18n("Control is locked"))
+        }
+
+        if (root.metaState.latched) {
+            text.push(i18n("Meta is latched"))
+        } else if (root.metaState.locked) {
+            text.push(i18n("Meta is locked"))
+        }
+
+        if (root.altGrState.latched) {
+            text.push(i18n("Alt Gr is latched"))
+        } else if (root.altGrState.locked) {
+            text.push(i18n("Alt Gr is locked"))
+        }
+
         if (root.capsLockState?.locked) {
             text.push(i18n("Caps Lock activated"));
         }
