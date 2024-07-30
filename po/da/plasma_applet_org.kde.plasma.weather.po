@@ -2,20 +2,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Martin Schlander <mschlander@opensuse.org>, 2016, 2018, 2019, 2020.
+# SPDX-FileCopyrightText: 2024 rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-20 00:40+0000\n"
-"PO-Revision-Date: 2020-07-21 17:56+0200\n"
-"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"PO-Revision-Date: 2024-07-15 22:46+0200\n"
+"Last-Translator: rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -150,34 +151,28 @@ msgid "Compact Mode"
 msgstr "Kompakt tilstand"
 
 #: package/contents/ui/config/ConfigAppearance.qml:43
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
-msgstr "Vis temperatur"
+msgstr "Vis temperatur:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "Vis ved siden af widget-ikon:"
+msgstr "Over widgeti-kon:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:54
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show beside widget icon:"
+#, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "Vis ved siden af widget-ikon:"
+msgstr "Ved siden af widget-ikon:"
 
 #: package/contents/ui/config/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Vis ikke"
 
 #: package/contents/ui/config/ConfigAppearance.qml:70
 #, kde-format
@@ -250,33 +245,31 @@ msgstr[1] "%1 minutter"
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
-msgstr "Placering:"
+msgstr "Lokation:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Ingen valgte"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:76
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Udbyder:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:101
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "Angiv placering"
+msgstr "Angiv ny lokation"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
-msgstr "Angiv placering"
+msgstr "Angiv lokation"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
@@ -288,13 +281,13 @@ msgstr "Ingen vejrstationer fundet for \"%1\""
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Søg for en vejrstation for at ændre lokationen"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:189
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Søg for en vejrstation for at sætte lokationen"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
@@ -304,21 +297,22 @@ msgid ""
 "outage at the weather station provider has made it temporarily unavailable. "
 "Try again later."
 msgstr ""
+"Hvis du har brugt denne vejrstation før, er det muligt at en "
+"serverafbrydelse hos vejrstationsudbyderen har gjort den midlertidigt "
+"utilgængelig. Prøv igen senere."
 
 #: package/contents/ui/ForecastView.qml:77
-#, fuzzy, kde-format
-#| msgctxt "certain weather condition (probability percentage)"
-#| msgid "%1 (%2 %)"
+#, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
-msgstr "%1 (%2 %)"
+msgstr "%1 (%2%)"
 
 #. i18n: \ufe0e forces the text representation of the umbrella emoji
 #: package/contents/ui/ForecastView.qml:90
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "︎☂%1%"
-msgstr ""
+msgstr "︎☂%1%"
 
 #: package/contents/ui/ForecastView.qml:98
 #: package/contents/ui/ForecastView.qml:106
@@ -330,19 +324,17 @@ msgstr "-"
 #: package/contents/ui/FullRepresentation.qml:37
 #, kde-format
 msgid "Please set your location"
-msgstr ""
+msgstr "Sæt venligst din lokation"
 
 #: package/contents/ui/FullRepresentation.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Enter location"
+#, kde-format
 msgid "Set location…"
-msgstr "Angiv placering"
+msgstr "Angiv lokation…"
 
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
-msgstr ""
+msgstr "Kunne ikke hente vejrinformation fra %1"
 
 #: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
@@ -351,6 +343,8 @@ msgid ""
 "The network request timed out, possibly due to a server outage at the "
 "weather station provider. Check again later."
 msgstr ""
+"Netværksanmodningen udløb, muligvis på grund af serverafbrydelse hos "
+"vejrstationsudbyderen. Tjek igen senere."
 
 #: package/contents/ui/main.qml:95
 #, kde-format
@@ -433,25 +427,22 @@ msgid "Wind Gust:"
 msgstr "Vindstød:"
 
 #: package/contents/ui/main.qml:248
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
-msgstr "1 dag"
+msgstr "Dag"
 
 #: package/contents/ui/main.qml:249
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
-msgstr ""
+msgstr "Nat"
 
 #: package/contents/ui/main.qml:386
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
-msgstr ""
+msgstr "Klik for at konfigurerer %1"
 
 #: package/contents/ui/main.qml:397
 #, kde-format
@@ -486,13 +477,13 @@ msgstr "Luftfugtighed: %1"
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
-msgstr ""
+msgstr "Vis mere information"
 
 #: package/contents/ui/SwitchPanel.qml:29
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
-msgstr ""
+msgstr "Prognose"
 
 #: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
@@ -501,22 +492,20 @@ msgid "Details"
 msgstr "Detaljer"
 
 #: package/contents/ui/SwitchPanel.qml:42
-#, fuzzy, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Notices"
+#, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
 "watches, ...) issued"
 msgid "%1 Notice"
 msgid_plural "%1 Notices"
-msgstr[0] "Bemærkninger"
-msgstr[1] "Bemærkninger"
+msgstr[0] "%1 bemærkning"
+msgstr[1] "%1 bemærkninger"
 
 #: package/contents/ui/SwitchPanel.qml:114
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
-msgstr ""
+msgstr "Kunne ikke indlæse vejrprognose"
 
 #: package/contents/ui/SwitchPanel.qml:116
 #, kde-format
@@ -525,6 +514,8 @@ msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, submit a bug report."
 msgstr ""
+"Der er måske tekniske fejl hos vejrudbyderen. Hvis problemet fortsætter i "
+"mere end én dag, skal du indsende en fejlrapport."
 
 #: plugin/locationlistmodel.cpp:41
 #, kde-format

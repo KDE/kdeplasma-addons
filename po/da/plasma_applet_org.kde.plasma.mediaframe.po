@@ -2,20 +2,21 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Martin Schlander <mschlander@opensuse.org>, 2016, 2018, 2019.
+# SPDX-FileCopyrightText: 2024 rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2019-11-22 20:56+0100\n"
-"Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
+"PO-Revision-Date: 2024-07-15 22:16+0200\n"
+"Last-Translator: rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
 "Language: da\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 18.12.3\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -181,28 +182,22 @@ msgid "Choose a Folder"
 msgstr "Vælg en mappe"
 
 #: package/contents/ui/ConfigPaths.qml:122
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add Folder..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
-msgstr "Tilføj mappe..."
+msgstr "Tilføj mappe…"
 
 #: package/contents/ui/ConfigPaths.qml:128
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Add Files..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
-msgstr "Tilføj filer..."
+msgstr "Tilføj filer…"
 
 #: package/contents/ui/main.qml:452
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Configure..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure…"
-msgstr "Indstil..."
+msgstr "Indstil…"
 
 #~ msgctxt "@option:check"
 #~ msgid "Show background frame"
