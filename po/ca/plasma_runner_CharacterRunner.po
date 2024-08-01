@@ -1,22 +1,22 @@
 # Translation of plasma_runner_CharacterRunner.po to Catalan
-# Copyright (C) 2010-2020 This_file_is_part_of_KDE
+# Copyright (C) 2010-2024 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2010, 2018, 2020.
+# SPDX-FileCopyrightText: 2010, 2018, 2020, 2024 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 01:38+0000\n"
-"PO-Revision-Date: 2020-03-20 19:40+0100\n"
+"PO-Revision-Date: 2024-07-31 12:01+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 24.05.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -83,4 +83,4 @@ msgstr "Afegeix un element"
 #: charrunner_config.ui:114
 #, kde-format
 msgid "Delete Item"
-msgstr "Elimina l'element"
+msgstr "Suprimeix l'element"
