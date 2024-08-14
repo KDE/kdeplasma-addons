@@ -62,6 +62,9 @@ ColumnLayout {
         visible: root.status !== Util.NeedsConfiguration && root.status !== Util.Timeout
 
         Layout.fillWidth: true
+        // Allow the top panel to vertically grow but within a limit
+        Layout.fillHeight: true
+        Layout.maximumHeight: implicitHeight * 1.5
     }
 
     SwitchPanel {

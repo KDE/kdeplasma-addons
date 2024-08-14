@@ -29,8 +29,8 @@ GridLayout {
 
     visible: !!generalModel.location
 
-    columnSpacing: Kirigami.Units.gridUnit
-    rowSpacing: Kirigami.Units.gridUnit
+    columnSpacing: Kirigami.Units.largeSpacing
+    rowSpacing: Kirigami.Units.largeSpacing
 
     columns: 3
 
@@ -85,6 +85,8 @@ GridLayout {
 
     PlasmaComponents.Label {
         id: conditionLabel
+
+        visible: text.length > 0
 
         Layout.row: 2
         Layout.column: 0
