@@ -67,28 +67,18 @@ PlasmoidItem {
         const temperature = getNumber("Temperature");
         model["temperature"] = temperature !== null ? Util.temperatureToDisplayString(displayTemperatureUnit, temperature, reportTemperatureUnit, true, false) : "";
 
-        const windchill = getNumber("Windchill");
-        // Use temperature unit to convert windchill temperature
-        // we only show degrees symbol not actual temperature unit
-        model["windchill"] = windchill !== null ?
-            Util.temperatureToDisplayString(displayTemperatureUnit, windchill, reportTemperatureUnit, false, true) :
-            "";
 
-        const humidex = getNumber("Humidex");
-        // TODO: this seems wrong, does the humidex have temperature as units?
-        // Use temperature unit to convert humidex temperature
-        // we only show degrees symbol not actual temperature unit
-        model["humidex"] = humidex !== null ?
-            Util.temperatureToDisplayString(displayTemperatureUnit, humidex, reportTemperatureUnit, false, true) :
-            "";
-
-        const heatIndex = getNumber("Heat Index");
-        // Don't show temperature unit, to be consistent with windchill and humidex
-        // TODO: We should at some point. IMHO the concept not being a pure temperature
-        // is just a technicallity, and their intent is to be interpreted as such
-        model["heatIndex"] = heatIndex !== null ?
-            Util.temperatureToDisplayString(displayTemperatureUnit, heatIndex, reportTemperatureUnit, false, true) :
-            "";
+        // "Feels like" temperature indices. They are mutually exclusive as
+        // they're used by different agencies or on different range of temperatures
+        for (const indexName of ["Windchill", "Humidex", "Heat Index"]) {
+            const value = getNumber(indexName);
+            if (value !== null) {
+                model["feelsLikeIndex"] = indexName;
+                model["feelsLikeTemperature"] =
+                    Util.temperatureToDisplayString(displayTemperatureUnit, value, reportTemperatureUnit, true, false);
+                break;
+            }
+        }
 
         const dewpoint = getNumber("Dewpoint");
         model["dewpoint"] = dewpoint !== null ?
@@ -181,27 +171,6 @@ PlasmoidItem {
 
     readonly property var detailsModel: {
         const model = [];
-
-        if (observationModel.windchill) {
-            model.push({
-                "label": i18nc("@label", "Windchill:"),
-                "text":  observationModel.windchill
-            });
-        };
-
-        if (observationModel.humidex) {
-            model.push({
-                "label": i18nc("@label", "Humidex:"),
-                "text":  observationModel.humidex
-            });
-        }
-
-        if (observationModel.heatIndex) {
-            model.push({
-                "label": i18nc("@label", "Heat Index:"),
-                "text":  observationModel.heatIndex
-            });
-        }
 
         if (observationModel.dewpoint) {
             model.push({

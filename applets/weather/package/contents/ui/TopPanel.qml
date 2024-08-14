@@ -48,23 +48,40 @@ GridLayout {
         textFormat: Text.PlainText
     }
 
-    PlasmaComponents.Label {
-        id: tempLabel
-
+    ColumnLayout {
         Layout.row: 1
         Layout.column: 0
         Layout.fillWidth: true
         Layout.preferredWidth: 25 // 25% of the view
         Layout.minimumWidth: sideWidth
-        Layout.alignment: Qt.AlignCenter
 
-        font.pixelSize: Kirigami.Units.iconSizes.medium
-        font.bold: true
-        horizontalAlignment: Text.AlignHCenter
-        wrapMode: Text.NoWrap
+        spacing: Kirigami.Units.smallSpacing
 
-        text: observationModel.temperature
-        textFormat: Text.PlainText
+        PlasmaComponents.Label {
+            id: tempLabel
+            Layout.fillWidth: true
+
+            font.pixelSize: Kirigami.Units.iconSizes.medium
+            font.bold: true
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.NoWrap
+            textFormat: Text.PlainText
+
+            text: observationModel.temperature
+        }
+
+        PlasmaComponents.Label {
+            Layout.fillWidth: true
+
+            visible: !!observationModel.feelsLikeTemperature && observationModel.feelsLikeTemperature !== observationModel.temperature
+
+            horizontalAlignment: Text.AlignHCenter
+            wrapMode: Text.Wrap
+            textFormat: Text.PlainText
+
+            text: i18nc("@label %1 is the perceived temperature due to conditions like wind or humidity. Use the common phrasing for this concept and keep it short, adding a colon if necessary",
+                        "Feels like %1", observationModel.feelsLikeTemperature || "")
+        }
     }
 
     Kirigami.Icon {
