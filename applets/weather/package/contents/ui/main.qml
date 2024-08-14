@@ -82,6 +82,14 @@ PlasmoidItem {
             Util.temperatureToDisplayString(displayTemperatureUnit, humidex, reportTemperatureUnit, false, true) :
             "";
 
+        const heatIndex = getNumber("Heat Index");
+        // Don't show temperature unit, to be consistent with windchill and humidex
+        // TODO: We should at some point. IMHO the concept not being a pure temperature
+        // is just a technicallity, and their intent is to be interpreted as such
+        model["heatIndex"] = heatIndex !== null ?
+            Util.temperatureToDisplayString(displayTemperatureUnit, heatIndex, reportTemperatureUnit, false, true) :
+            "";
+
         const dewpoint = getNumber("Dewpoint");
         model["dewpoint"] = dewpoint !== null ?
             Util.temperatureToDisplayString(displayTemperatureUnit, dewpoint, reportTemperatureUnit) : "";
@@ -185,6 +193,13 @@ PlasmoidItem {
             model.push({
                 "label": i18nc("@label", "Humidex:"),
                 "text":  observationModel.humidex
+            });
+        }
+
+        if (observationModel.heatIndex) {
+            model.push({
+                "label": i18nc("@label", "Heat Index:"),
+                "text":  observationModel.heatIndex
             });
         }
 
