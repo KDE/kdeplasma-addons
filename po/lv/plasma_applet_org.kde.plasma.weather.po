@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-20 00:40+0000\n"
+"POT-Creation-Date: 2024-08-15 00:40+0000\n"
 "PO-Revision-Date: 2024-04-03 08:37+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -347,31 +347,31 @@ msgid ""
 "weather station provider. Check again later."
 msgstr ""
 
-#: package/contents/ui/main.qml:95
+#: package/contents/ui/main.qml:103
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Rising"
 msgstr "Paaugstinās"
 
-#: package/contents/ui/main.qml:96
+#: package/contents/ui/main.qml:104
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Falling"
 msgstr "Pazeminās"
 
-#: package/contents/ui/main.qml:97
+#: package/contents/ui/main.qml:105
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Steady"
 msgstr "Vienmērīgs"
 
-#: package/contents/ui/main.qml:119
+#: package/contents/ui/main.qml:127
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "Mierīgs"
 
-#: package/contents/ui/main.qml:157
+#: package/contents/ui/main.qml:165
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
@@ -380,97 +380,103 @@ msgstr[0] "%1 diena"
 msgstr[1] "%1 dienas"
 msgstr[2] "%1 dienu"
 
-#: package/contents/ui/main.qml:179
+#: package/contents/ui/main.qml:187
 #, kde-format
 msgctxt "@label"
 msgid "Windchill:"
 msgstr "vēja dzesējošais efekts:"
 
-#: package/contents/ui/main.qml:186
+#: package/contents/ui/main.qml:194
 #, kde-format
 msgctxt "@label"
 msgid "Humidex:"
 msgstr "Mitruma indekss:"
 
-#: package/contents/ui/main.qml:193
+#: package/contents/ui/main.qml:201
+#, kde-format
+msgctxt "@label"
+msgid "Heat Index:"
+msgstr ""
+
+#: package/contents/ui/main.qml:208
 #, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "Rasas punkts:"
 
-#: package/contents/ui/main.qml:200
+#: package/contents/ui/main.qml:215
 #, kde-format
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "Spiediens:"
 
-#: package/contents/ui/main.qml:207
+#: package/contents/ui/main.qml:222
 #, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "Spiediena tendence:"
 
-#: package/contents/ui/main.qml:214
+#: package/contents/ui/main.qml:229
 #, kde-format
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "Redzamība:"
 
-#: package/contents/ui/main.qml:221
+#: package/contents/ui/main.qml:236
 #, kde-format
 msgctxt "@label"
 msgid "Humidity:"
 msgstr "Mitrums:"
 
-#: package/contents/ui/main.qml:228
+#: package/contents/ui/main.qml:243
 #, kde-format
 msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "Brāzmas:"
 
-#: package/contents/ui/main.qml:248
+#: package/contents/ui/main.qml:263
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
 msgstr "Diena"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:264
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
 msgstr "Nakts"
 
-#: package/contents/ui/main.qml:386
+#: package/contents/ui/main.qml:401
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr "Spiediet, lai konfigurētu „%1“"
 
-#: package/contents/ui/main.qml:397
+#: package/contents/ui/main.qml:412
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:404
+#: package/contents/ui/main.qml:419
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:407
+#: package/contents/ui/main.qml:422
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:416
+#: package/contents/ui/main.qml:431
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:423
+#: package/contents/ui/main.qml:438
 #, kde-format
 msgid "Humidity: %1"
 msgstr "Mitrums: %1"
