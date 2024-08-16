@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-15 00:40+0000\n"
-"PO-Revision-Date: 2024-05-28 06:48+0200\n"
+"PO-Revision-Date: 2024-08-15 06:58+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -400,7 +400,7 @@ msgstr "Humidex (vlažnost in toplota):"
 #, kde-format
 msgctxt "@label"
 msgid "Heat Index:"
-msgstr ""
+msgstr "Vročinski indeks:"
 
 #: package/contents/ui/main.qml:208
 #, kde-format
