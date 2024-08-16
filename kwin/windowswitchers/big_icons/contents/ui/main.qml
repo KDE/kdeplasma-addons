@@ -119,15 +119,15 @@ KWin.TabBoxSwitcher {
             * @li we have to emit the change signal
             * @li on multiple invocation it does not work on the list view. Focus seems to be lost.
             **/
-            Keys.onPressed: {
-                if (event.key == Qt.Key_Up || event.key == Qt.Key_Left) {
-                    if (icons.currentIndex == 0){
-                        icons.currentIndex = icons.count-1
+            Keys.onPressed: event => {
+                if (event.key === Qt.Key_Up || event.key === Qt.Key_Left) {
+                    if (icons.currentIndex === 0) {
+                        icons.currentIndex = icons.count - 1
                     } else {
                         icons.decrementCurrentIndex()
                     }
-                } else if (event.key == Qt.Key_Down || event.key == Qt.Key_Right) {
-                    if (icons.currentIndex == icons.count-1){
+                } else if (event.key === Qt.Key_Down || event.key === Qt.Key_Right) {
+                    if (icons.currentIndex == icons.count - 1) {
                         icons.currentIndex = 0
                     } else {
                         icons.incrementCurrentIndex()
