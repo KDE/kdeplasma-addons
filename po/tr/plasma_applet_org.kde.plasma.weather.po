@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-15 00:40+0000\n"
+"POT-Creation-Date: 2024-08-17 00:40+0000\n"
 "PO-Revision-Date: 2024-08-15 14:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -348,31 +348,31 @@ msgstr ""
 "Ağ isteği zaman aşımına uğradı; büyük olasılıkla hava durumu tahmini "
 "istasyonundaki bir sunucu sorunu olabilir. Daha sonra yeniden denetleyin."
 
-#: package/contents/ui/main.qml:103
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Rising"
 msgstr "Yükseliyor"
 
-#: package/contents/ui/main.qml:104
+#: package/contents/ui/main.qml:94
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Falling"
 msgstr "Düşüyor"
 
-#: package/contents/ui/main.qml:105
+#: package/contents/ui/main.qml:95
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Steady"
 msgstr "Sabit"
 
-#: package/contents/ui/main.qml:127
+#: package/contents/ui/main.qml:117
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "Dingin"
 
-#: package/contents/ui/main.qml:165
+#: package/contents/ui/main.qml:155
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
@@ -380,103 +380,85 @@ msgid_plural "%1 Days"
 msgstr[0] "1 Gün"
 msgstr[1] "%1 Gün"
 
-#: package/contents/ui/main.qml:187
-#, kde-format
-msgctxt "@label"
-msgid "Windchill:"
-msgstr "Rüzgâr Soğutması:"
-
-#: package/contents/ui/main.qml:194
-#, kde-format
-msgctxt "@label"
-msgid "Humidex:"
-msgstr "Nemlilik:"
-
-#: package/contents/ui/main.qml:201
-#, kde-format
-msgctxt "@label"
-msgid "Heat Index:"
-msgstr "Isı indeksi:"
-
-#: package/contents/ui/main.qml:208
+#: package/contents/ui/main.qml:177
 #, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "Çiy Noktası:"
 
-#: package/contents/ui/main.qml:215
+#: package/contents/ui/main.qml:184
 #, kde-format
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "Basınç:"
 
-#: package/contents/ui/main.qml:222
+#: package/contents/ui/main.qml:191
 #, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "Basınç Eğilimi:"
 
-#: package/contents/ui/main.qml:229
+#: package/contents/ui/main.qml:198
 #, kde-format
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "Görüş mesafesi:"
 
-#: package/contents/ui/main.qml:236
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgctxt "@label"
 msgid "Humidity:"
 msgstr "Nem:"
 
-#: package/contents/ui/main.qml:243
+#: package/contents/ui/main.qml:212
 #, kde-format
 msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "Fırtına:"
 
-#: package/contents/ui/main.qml:263
+#: package/contents/ui/main.qml:232
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
 msgstr "Gündüz"
 
-#: package/contents/ui/main.qml:264
+#: package/contents/ui/main.qml:233
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
 msgstr "Gece"
 
-#: package/contents/ui/main.qml:401
+#: package/contents/ui/main.qml:370
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr "%1 Plasmoid’ini yapılandırmak için tıklayın"
 
-#: package/contents/ui/main.qml:412
+#: package/contents/ui/main.qml:381
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:419
+#: package/contents/ui/main.qml:388
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:422
+#: package/contents/ui/main.qml:391
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:431
+#: package/contents/ui/main.qml:400
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:438
+#: package/contents/ui/main.qml:407
 #, kde-format
 msgid "Humidity: %1"
 msgstr "Nem: %1"
@@ -525,6 +507,15 @@ msgstr ""
 "Hava durumu sağlayıcısıyla ilgili bir sorun olabilir. Bu sorun sürerse bir "
 "hata raporu gönderin."
 
+#: package/contents/ui/TopPanel.qml:83
+#, kde-format
+msgctxt ""
+"@label %1 is the perceived temperature due to conditions like wind or "
+"humidity. Use the common phrasing for this concept and keep it short, adding "
+"a colon if necessary"
+msgid "Feels like %1"
+msgstr ""
+
 #: plugin/locationlistmodel.cpp:41
 #, kde-format
 msgid "Cannot find '%1' using %2."
@@ -570,6 +561,18 @@ msgstr "%​%1"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgctxt "@label"
+#~ msgid "Windchill:"
+#~ msgstr "Rüzgâr Soğutması:"
+
+#~ msgctxt "@label"
+#~ msgid "Humidex:"
+#~ msgstr "Nemlilik:"
+
+#~ msgctxt "@label"
+#~ msgid "Heat Index:"
+#~ msgstr "Isı indeksi:"
 
 #~ msgid "Weather information retrieval for %1 timed out."
 #~ msgstr "%1 için hava durumu bilgisi getirme zaman aşımına uğradı."

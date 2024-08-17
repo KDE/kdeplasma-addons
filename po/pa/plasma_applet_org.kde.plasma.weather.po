@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-15 00:40+0000\n"
+"POT-Creation-Date: 2024-08-17 00:40+0000\n"
 "PO-Revision-Date: 2024-01-28 18:58-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -345,31 +345,31 @@ msgid ""
 "weather station provider. Check again later."
 msgstr ""
 
-#: package/contents/ui/main.qml:103
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Rising"
 msgstr "ਵੱਧ ਰਿਹਾ"
 
-#: package/contents/ui/main.qml:104
+#: package/contents/ui/main.qml:94
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Falling"
 msgstr "ਘੱਟ ਰਿਹਾ"
 
-#: package/contents/ui/main.qml:105
+#: package/contents/ui/main.qml:95
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Steady"
 msgstr "ਟਿਕਵਾਂ"
 
-#: package/contents/ui/main.qml:127
+#: package/contents/ui/main.qml:117
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "ਸਥਿਰ"
 
-#: package/contents/ui/main.qml:165
+#: package/contents/ui/main.qml:155
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
@@ -377,103 +377,85 @@ msgid_plural "%1 Days"
 msgstr[0] "1 ਦਿਨ"
 msgstr[1] "%1 ਦਿਨ"
 
-#: package/contents/ui/main.qml:187
-#, kde-format
-msgctxt "@label"
-msgid "Windchill:"
-msgstr "ਸਰਦ-ਹਵਾ:"
-
-#: package/contents/ui/main.qml:194
-#, kde-format
-msgctxt "@label"
-msgid "Humidex:"
-msgstr "ਨਮੀ-ਇੰਡੈਕਸ:"
-
-#: package/contents/ui/main.qml:201
-#, kde-format
-msgctxt "@label"
-msgid "Heat Index:"
-msgstr ""
-
-#: package/contents/ui/main.qml:208
+#: package/contents/ui/main.qml:177
 #, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "ਤਰੇਲ-ਦਰਜਾ:"
 
-#: package/contents/ui/main.qml:215
+#: package/contents/ui/main.qml:184
 #, kde-format
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "ਦਬਾਓ:"
 
-#: package/contents/ui/main.qml:222
+#: package/contents/ui/main.qml:191
 #, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "ਦਬਾਉ ਰੁਝਾਨ:"
 
-#: package/contents/ui/main.qml:229
+#: package/contents/ui/main.qml:198
 #, kde-format
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "ਦਿੱਖ:"
 
-#: package/contents/ui/main.qml:236
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgctxt "@label"
 msgid "Humidity:"
 msgstr "ਨਮੀਂ:"
 
-#: package/contents/ui/main.qml:243
+#: package/contents/ui/main.qml:212
 #, kde-format
 msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "ਝੱਖੜ:"
 
-#: package/contents/ui/main.qml:263
+#: package/contents/ui/main.qml:232
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
 msgstr "ਦਿਨ"
 
-#: package/contents/ui/main.qml:264
+#: package/contents/ui/main.qml:233
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
 msgstr "ਰਾਤ"
 
-#: package/contents/ui/main.qml:401
+#: package/contents/ui/main.qml:370
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr "%1 ਸੰਰਚਨਾ ਲਈ ਕਲਿੱਕ ਕਰੋ"
 
-#: package/contents/ui/main.qml:412
+#: package/contents/ui/main.qml:381
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:419
+#: package/contents/ui/main.qml:388
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:422
+#: package/contents/ui/main.qml:391
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:431
+#: package/contents/ui/main.qml:400
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:438
+#: package/contents/ui/main.qml:407
 #, kde-format
 msgid "Humidity: %1"
 msgstr "ਨਮੀਂ: %1"
@@ -518,6 +500,15 @@ msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, submit a bug report."
+msgstr ""
+
+#: package/contents/ui/TopPanel.qml:83
+#, kde-format
+msgctxt ""
+"@label %1 is the perceived temperature due to conditions like wind or "
+"humidity. Use the common phrasing for this concept and keep it short, adding "
+"a colon if necessary"
+msgid "Feels like %1"
 msgstr ""
 
 #: plugin/locationlistmodel.cpp:41
@@ -565,6 +556,14 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgctxt "@label"
+#~ msgid "Windchill:"
+#~ msgstr "ਸਰਦ-ਹਵਾ:"
+
+#~ msgctxt "@label"
+#~ msgid "Humidex:"
+#~ msgstr "ਨਮੀ-ਇੰਡੈਕਸ:"
 
 #~ msgid "Weather information retrieval for %1 timed out."
 #~ msgstr "%1 ਲਈ ਮੌਸਮ ਜਾਣਕਾਰੀ ਲਈ ਪੁਰਾਣੀ ਹੋ ਚੁੱਕੀ ਹੈ।"
