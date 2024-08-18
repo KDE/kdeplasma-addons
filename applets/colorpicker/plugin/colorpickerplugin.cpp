@@ -17,7 +17,7 @@ class Utils : public QObject
 public:
     Q_INVOKABLE bool isValidColor(const QString &colorString) const
     {
-        return QColor::isValidColor(colorString);
+        return QColor::isValidColorName(colorString);
     }
 };
 
