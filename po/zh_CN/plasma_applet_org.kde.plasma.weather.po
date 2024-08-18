@@ -553,11 +553,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgctxt "@label"
-#~ msgid "Windchill:"
-#~ msgstr "风寒指数："
-
-#~ msgctxt "@label"
-#~ msgid "Humidex:"
-#~ msgstr "湿热指数："
