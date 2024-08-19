@@ -37,7 +37,7 @@ public:
     /**
      * Destroys the PoTD provider.
      */
-    virtual ~PotdProvider() override;
+    ~PotdProvider() override;
 
     /**
      * Returns the local path of the requested image.
