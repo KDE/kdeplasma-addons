@@ -506,7 +506,7 @@ msgctxt ""
 "humidity. Use the common phrasing for this concept and keep it short, adding "
 "a colon if necessary"
 msgid "Feels like %1"
-msgstr ""
+msgstr "体感温度 %1"
 
 #: plugin/locationlistmodel.cpp:41
 #, kde-format
