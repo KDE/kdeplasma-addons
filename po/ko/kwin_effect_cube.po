@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-06-22 02:39+0000\n"
-"PO-Revision-Date: 2024-02-09 23:34+0100\n"
+"PO-Revision-Date: 2024-08-19 23:16+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: kcm/cubeeffectkcm.cpp:35
 #, kde-format
@@ -37,9 +37,10 @@ msgid_plural ""
 "At least 3 virtual desktops are required to display the Cube, but only %1 "
 "are present"
 msgstr[0] ""
+"큐브를 표시하려면 가상 바탕 화면이 최소 3개 있어야 하지만 현재 %1개만 있음"
 
 #: package/contents/ui/PlaceholderView.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Virtual Desktop"
-msgstr ""
+msgstr "가상 바탕 화면 추가"
