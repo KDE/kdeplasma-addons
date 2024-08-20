@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-17 00:40+0000\n"
-"PO-Revision-Date: 2024-02-09 23:35+0100\n"
+"PO-Revision-Date: 2024-08-19 23:29+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -295,6 +295,8 @@ msgid ""
 "outage at the weather station provider has made it temporarily unavailable. "
 "Try again later."
 msgstr ""
+"이 기상대를 전에 사용한 적이 있으며 서버 사정으로 인하여 정보를 사용하지 못"
+"할 수도 있습니다. 나중에 다시 시도하십시오."
 
 #: package/contents/ui/ForecastView.qml:77
 #, kde-format
@@ -329,7 +331,7 @@ msgstr "위치 설정…"
 #: package/contents/ui/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
-msgstr ""
+msgstr "%1의 날씨 정보를 가져올 수 없음"
 
 #: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
@@ -338,6 +340,8 @@ msgid ""
 "The network request timed out, possibly due to a server outage at the "
 "weather station provider. Check again later."
 msgstr ""
+"네트워크 요청 시간이 초과되었습니다. 날씨 정보 공급자 측 서버 이상일 수도 있"
+"습니다. 나중에 다시 확인하십시오."
 
 #: package/contents/ui/main.qml:93
 #, kde-format
@@ -463,7 +467,7 @@ msgstr "더 많은 정보 표시"
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
-msgstr ""
+msgstr "예보"
 
 #: package/contents/ui/SwitchPanel.qml:35
 #, kde-format
@@ -484,7 +488,7 @@ msgstr[0] "공지 %1개"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
-msgstr ""
+msgstr "일기 예보를 불러올 수 없음"
 
 #: package/contents/ui/SwitchPanel.qml:116
 #, kde-format
@@ -493,6 +497,8 @@ msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, submit a bug report."
 msgstr ""
+"일기 예보 공급자에 기술적인 문제가 발생했을 수도 있습니다. 하루 이상 문제가 "
+"지속된다면 버그를 보고해 주십시오."
 
 #: package/contents/ui/TopPanel.qml:83
 #, kde-format
