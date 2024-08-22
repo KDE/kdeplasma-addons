@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-17 00:40+0000\n"
-"PO-Revision-Date: 2024-05-28 13:16+0200\n"
+"PO-Revision-Date: 2024-08-17 11:10+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -516,7 +516,7 @@ msgctxt ""
 "humidity. Use the common phrasing for this concept and keep it short, adding "
 "a colon if necessary"
 msgid "Feels like %1"
-msgstr ""
+msgstr "Sensació de %1"
 
 #: plugin/locationlistmodel.cpp:41
 #, kde-format
@@ -563,11 +563,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgctxt "@label"
-#~ msgid "Windchill:"
-#~ msgstr "Sensació tèrmica pel vent:"
-
-#~ msgctxt "@label"
-#~ msgid "Humidex:"
-#~ msgstr "Sensació de xafogor:"
