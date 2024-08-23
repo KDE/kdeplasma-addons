@@ -227,13 +227,13 @@ PlasmoidItem {
 
             ActionListDelegate {
                 id: leaveButton
-                text: i18nc("Show a dialog with options to logout/shutdown/restart", "Log Out")
+                text: i18nc("Show a dialog with options to logout/shutdown/restart", "Show Logout Screen")
                 icon.name: "system-log-out"
                 visible: sm.canLogout
 
                 KeyNavigation.up: lockScreenButton
 
-                onClicked: sm.requestLogout()
+                onClicked: sm.requestLogoutPrompt()
             }
         }
 
