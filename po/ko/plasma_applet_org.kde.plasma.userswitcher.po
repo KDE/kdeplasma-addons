@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2024-08-24 00:40+0000\n"
 "PO-Revision-Date: 2023-03-01 01:27+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -124,10 +124,16 @@ msgid "Lock Screen"
 msgstr "화면 잠그기"
 
 #: package/contents/ui/main.qml:230
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action"
+#| msgid "Lock Screen"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
-msgid "Log Out"
-msgstr "로그아웃"
+msgid "Show Logout Screen"
+msgstr "화면 잠그기"
+
+#~ msgctxt "Show a dialog with options to logout/shutdown/restart"
+#~ msgid "Log Out"
+#~ msgstr "로그아웃"
 
 #~ msgctxt "Show a dialog with options to logout/shutdown/restart"
 #~ msgid "Leave…"

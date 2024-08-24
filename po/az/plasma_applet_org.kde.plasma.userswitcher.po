@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2024-08-24 00:40+0000\n"
 "PO-Revision-Date: 2022-11-11 17:41+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -124,10 +124,16 @@ msgid "Lock Screen"
 msgstr "Ekranı kilidləmək"
 
 #: package/contents/ui/main.qml:230
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action"
+#| msgid "Lock Screen"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
-msgid "Log Out"
-msgstr "Çıxış"
+msgid "Show Logout Screen"
+msgstr "Ekranı kilidləmək"
+
+#~ msgctxt "Show a dialog with options to logout/shutdown/restart"
+#~ msgid "Log Out"
+#~ msgstr "Çıxış"
 
 #~ msgctxt "Show a dialog with options to logout/shutdown/restart"
 #~ msgid "Leave…"

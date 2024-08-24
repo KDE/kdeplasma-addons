@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2024-08-24 00:40+0000\n"
 "PO-Revision-Date: 2022-09-23 22:02+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -129,10 +129,16 @@ msgid "Lock Screen"
 msgstr "Заблокировать экран"
 
 #: package/contents/ui/main.qml:230
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action"
+#| msgid "Lock Screen"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
-msgid "Log Out"
-msgstr "Завершить сеанс"
+msgid "Show Logout Screen"
+msgstr "Заблокировать экран"
+
+#~ msgctxt "Show a dialog with options to logout/shutdown/restart"
+#~ msgid "Log Out"
+#~ msgstr "Завершить сеанс"
 
 #~ msgctxt "Show a dialog with options to logout/shutdown/restart"
 #~ msgid "Leave…"

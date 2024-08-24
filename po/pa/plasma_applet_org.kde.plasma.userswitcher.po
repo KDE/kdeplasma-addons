@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2024-08-24 00:40+0000\n"
 "PO-Revision-Date: 2024-01-28 18:58-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -124,10 +124,16 @@ msgid "Lock Screen"
 msgstr "ਸਕਰੀਨ ਲਾਕ ਕਰੋ"
 
 #: package/contents/ui/main.qml:230
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@action"
+#| msgid "Lock Screen"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
-msgid "Log Out"
-msgstr "ਲਾਗ ਆਉਟ"
+msgid "Show Logout Screen"
+msgstr "ਸਕਰੀਨ ਲਾਕ ਕਰੋ"
+
+#~ msgctxt "Show a dialog with options to logout/shutdown/restart"
+#~ msgid "Log Out"
+#~ msgstr "ਲਾਗ ਆਉਟ"
 
 #, fuzzy
 #~| msgctxt "Show a dialog with options to logout/shutdown/restart"
