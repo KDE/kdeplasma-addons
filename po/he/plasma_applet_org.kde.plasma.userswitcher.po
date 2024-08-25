@@ -3,21 +3,22 @@
 #
 # Elkana Bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2024 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-24 00:40+0000\n"
-"PO-Revision-Date: 2023-11-07 11:19+0200\n"
+"PO-Revision-Date: 2024-08-24 13:14+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Lokalize 24.05.2\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -126,12 +127,10 @@ msgid "Lock Screen"
 msgstr "נעילת המסך"
 
 #: package/contents/ui/main.qml:230
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Lock Screen"
+#, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
-msgstr "נעילת המסך"
+msgstr "הצגת מסך יציאה"
 
 #~ msgctxt "Show a dialog with options to logout/shutdown/restart"
 #~ msgid "Log Out"
