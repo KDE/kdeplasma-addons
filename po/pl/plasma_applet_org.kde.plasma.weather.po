@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-05-29 03:09+0000\n"
-"PO-Revision-Date: 2024-05-30 11:12+0200\n"
+"PO-Revision-Date: 2024-08-24 11:38+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
 "Language: pl\n"
@@ -148,7 +148,7 @@ msgstr "Jednostki"
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
-msgstr "Tryb kompaktowy"
+msgstr "Tryb zwarty"
 
 #: package/contents/ui/config/ConfigAppearance.qml:43
 #, kde-format
