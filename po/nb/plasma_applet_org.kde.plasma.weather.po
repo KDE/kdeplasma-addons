@@ -301,8 +301,6 @@ msgstr ""
 
 #: package/contents/ui/ForecastView.qml:77
 #, fuzzy, kde-format
-#| msgctxt "A weather station location and the weather service it comes from"
-#| msgid "%1 (%2)"
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2)"
