@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Frederik Schwarzer <schwarzer@kde.org>, 2016, 2018, 2023.
 # Burkhard Lück <lueck@hube-lueck.de>, 2016, 2018, 2019, 2020.
-# Alois Spitzbart <spitz234@hotmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2024 Alois Spitzbart <spitz234@hotmail.com>
 # Jannick Kuhr <opensource@kuhr.org>, 2023.
 #
 msgid ""
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 24.05.0\n"
 
 #: i18n.dat:1
 #, kde-format
