@@ -126,8 +126,6 @@ msgstr "锁定屏幕"
 
 #: package/contents/ui/main.qml:230
 #, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Lock Screen"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
 msgstr "锁定屏幕"
