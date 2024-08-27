@@ -6,9 +6,6 @@ target_link_libraries(plasma_potd_flickrprovider plasmapotdprovidercore plasma_w
 kcoreaddons_add_plugin(plasma_potd_apodprovider SOURCES apodprovider.cpp INSTALL_NAMESPACE "potd")
 target_link_libraries(plasma_potd_apodprovider plasmapotdprovidercore KF6::KIOCore)
 
-kcoreaddons_add_plugin(plasma_potd_natgeoprovider SOURCES natgeoprovider.cpp INSTALL_NAMESPACE "potd")
-target_link_libraries(plasma_potd_natgeoprovider plasmapotdprovidercore KF6::KIOCore)
-
 kcoreaddons_add_plugin(plasma_potd_epodprovider SOURCES epodprovider.cpp INSTALL_NAMESPACE "potd")
 target_link_libraries(plasma_potd_epodprovider plasmapotdprovidercore KF6::KIOCore)
 
