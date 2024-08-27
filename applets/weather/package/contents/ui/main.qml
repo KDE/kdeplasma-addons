@@ -228,11 +228,6 @@ PlasmoidItem {
 
         const reportTemperatureUnit = (data && data["Temperature Unit"]) || invalidUnit;
 
-        if (generalModel.forecastNightRow) {
-            model.push({placeholder: i18nc("Time of the day (from the duple Day/Night)", "Day")})
-            model.push({placeholder: i18nc("Time of the day (from the duple Day/Night)", "Night")})
-        }
-
         for (let i = 0; i < forecastDayCount; ++i) {
             const forecastInfo = {
                 period: "",
@@ -250,10 +245,9 @@ PlasmoidItem {
                 continue;
             }
 
-            // If the first item is a night forecast and we are showing them on second row,
-            // add an empty placeholder
+            // If the first item is a night forecast add an empty item to reserve the space in the grid
             if (i === 0 && generalModel.forecastNightRow && generalModel.forecastStartsAtNight) {
-                model.push({placeholder: ""})
+                model.push(undefined)
             }
 
             forecastInfo["period"] = forecastDayTokens[0];

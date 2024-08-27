@@ -18,26 +18,44 @@ GridLayout {
 
     property alias model: repeater.model
     property bool showNightRow: false
+
+    readonly property bool startsAtNight: !model[0] // When the first item is undefined
     readonly property int preferredIconSize: Kirigami.Units.iconSizes.large
     readonly property bool hasContent: model && model.length > 0
     readonly property var rowHasProbability: [...Array(rows).keys()].map(
         row => model.filter((_, index) => index % root.rows == row)
-                    .some(item => item.probability))
+                    .some(item => item?.probability ?? false))
 
-    columnSpacing: Kirigami.Units.smallSpacing
+    columnSpacing: 0
     rowSpacing: Kirigami.Units.largeSpacing
 
     rows: showNightRow ? 2 : 1
     flow: showNightRow ? GridLayout.TopToBottom : GridLayout.LeftToRight
+
+    // Add Day/Night labels as the row headings when there is a night row
+    component DayNightLabel: PlasmaComponents.Label {
+        visible: root.showNightRow
+        Layout.alignment: Qt.AlignLeft | Qt.AlignTop
+        Layout.fillWidth: true
+        Layout.preferredWidth: startsAtNight ? Kirigami.Units.largeSpacing : implicitWidth
+        font.bold: true
+    }
+
+    DayNightLabel {
+        text: i18nc("Time of the day (from the duple Day/Night)", "Day")
+    }
+
+    DayNightLabel {
+        text: i18nc("Time of the day (from the duple Day/Night)", "Night")
+        // Save space by moving this label over the night row when possible
+        Layout.topMargin: startsAtNight ? -Kirigami.Units.gridUnit : 0
+    }
 
     Repeater {
         id: repeater
 
         delegate: ColumnLayout {
             id: dayDelegate
-            // Allow to set placeholder items by leaving the data empty or setting a label text
-            readonly property bool isPlaceHolder: !modelData || modelData.lenght === 0 || !!modelData.placeholder
-            readonly property bool isFirstRow: (model.index % root.rows) === 0
 
             Layout.fillWidth: true
             spacing: Math.round(Kirigami.Units.smallSpacing / 2)
@@ -45,13 +63,12 @@ GridLayout {
             PlasmaComponents.Label {
                 id: periodLabel
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                Layout.fillHeight: isPlaceHolder
                 // Hide period titles on the second row
-                visible: (isPlaceHolder || isFirstRow)
+                visible: (model.index % root.rows) === 0
 
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
-                text: isPlaceHolder ? modelData.placeholder || "" : modelData.period.replace(" nt", "")
+                text: modelData?.placeholder || modelData.period?.replace(" nt", "") || ""
                 textFormat: Text.PlainText
             }
 
@@ -59,9 +76,8 @@ GridLayout {
                 Layout.fillWidth: true
                 Layout.preferredHeight: preferredIconSize
                 Layout.preferredWidth: preferredIconSize
-                visible: !isPlaceHolder
 
-                source: isPlaceHolder ? "" : modelData.icon
+                source: modelData?.icon ?? ""
 
                 PlasmaCore.ToolTipArea {
                     id: iconToolTip
@@ -87,7 +103,7 @@ GridLayout {
 
                 horizontalAlignment: Text.AlignHCenter
                 // i18n: \ufe0e forces the text representation of the umbrella emoji
-                text: modelData.probability ? i18nc("Probability of precipitation in percentage", "\ufe0e☂%1%", modelData.probability) : "·"
+                text: modelData?.probability ? i18nc("Probability of precipitation in percentage", "\ufe0e☂%1%", modelData.probability) : "·"
                 textFormat: Text.PlainText
                 visible: root.rowHasProbability[index % root.rows] && !!modelData.icon
             }
@@ -95,17 +111,17 @@ GridLayout {
             PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
-                text: !isPlaceHolder && modelData.tempHigh || i18nc("Short for no data available", "-")
+                text: modelData ? modelData.tempHigh || i18nc("Short for no data available", "-") : ""
                 textFormat: Text.PlainText
-                visible: !isPlaceHolder && (modelData.tempHigh || !showNightRow)
+                visible: modelData?.tempHigh || !showNightRow
             }
 
             PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
-                text: !isPlaceHolder && modelData.tempLow || i18nc("Short for no data available", "-")
+                text: modelData ? modelData.tempLow || i18nc("Short for no data available", "-") : ""
                 textFormat: Text.PlainText
-                visible: !isPlaceHolder && (modelData.tempLow || !showNightRow)
+                visible: modelData?.tempLow || !showNightRow
             }
         }
     }
