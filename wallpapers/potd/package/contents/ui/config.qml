@@ -40,42 +40,6 @@ Kirigami.FormLayout {
         updateOverMeteredConnection: cfg_UpdateOverMeteredConnection
     }
 
-    Row {
-        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Provider:")
-
-        QQC2.ComboBox {
-            id: providerComboBox
-            model: PotdProviderModel { }
-            currentIndex: model.indexOf(cfg_Provider)
-            textRole: "display"
-            valueRole: "id"
-            onCurrentValueChanged: {
-                if (currentIndex < 0) {
-                    return;
-                }
-                cfg_Provider = currentValue;
-            }
-        }
-
-        Kirigami.ContextualHelpButton {
-            anchors.verticalCenter: providerComboBox.verticalCenter
-            visible: providerComboBox.model.isNSFW(providerComboBox.currentIndex)
-            toolTipText: i18ndc("plasma_wallpaper_org.kde.potd", "@info:tooltip", "This wallpaper provider does not filter out images that may be sensitive or objectionable. Use caution if these images will be displayed in public.")
-        }
-    }
-
-    QQC2.CheckBox {
-        id: updateOverMeteredConnectionCheckBox
-
-        checked: cfg_UpdateOverMeteredConnection === 1
-        visible: backend.networkInfomationAvailable
-        text: i18ndc("plasma_wallpaper_org.kde.potd", "@option:check", "Update when using metered network connection")
-
-        onToggled: {
-            cfg_UpdateOverMeteredConnection = checked ? 1 : 0;
-        }
-    }
-
     onCfg_FillModeChanged: {
         resizeComboBox.setMethod()
     }
@@ -124,6 +88,42 @@ Kirigami.FormLayout {
         id: colorButton
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:chooser", "Background color:")
         dialogTitle: i18ndc("plasma_wallpaper_org.kde.potd", "@title:window", "Select Background Color")
+    }
+
+    Row {
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Provider:")
+
+        QQC2.ComboBox {
+            id: providerComboBox
+            model: PotdProviderModel { }
+            currentIndex: model.indexOf(cfg_Provider)
+            textRole: "display"
+            valueRole: "id"
+            onCurrentValueChanged: {
+                if (currentIndex < 0) {
+                    return;
+                }
+                cfg_Provider = currentValue;
+            }
+        }
+
+        Kirigami.ContextualHelpButton {
+            anchors.verticalCenter: providerComboBox.verticalCenter
+            visible: providerComboBox.model.isNSFW(providerComboBox.currentIndex)
+            toolTipText: i18ndc("plasma_wallpaper_org.kde.potd", "@info:tooltip", "This wallpaper provider does not filter out images that may be sensitive or objectionable. Use caution if these images will be displayed in public.")
+        }
+    }
+
+    QQC2.CheckBox {
+        id: updateOverMeteredConnectionCheckBox
+
+        checked: cfg_UpdateOverMeteredConnection === 1
+        visible: backend.networkInfomationAvailable
+        text: i18ndc("plasma_wallpaper_org.kde.potd", "@option:check", "Update when using metered network connection")
+
+        onToggled: {
+            cfg_UpdateOverMeteredConnection = checked ? 1 : 0;
+        }
     }
 
     Kirigami.Separator {
