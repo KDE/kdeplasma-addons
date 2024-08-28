@@ -85,7 +85,7 @@ Kirigami.FormLayout {
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox", "Positioning:")
         model: [
                     {
-                        'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Scaled and Cropped"),
+                        'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Scaled and cropped"),
                         'fillMode': Image.PreserveAspectCrop
                     },
                     {
@@ -93,7 +93,7 @@ Kirigami.FormLayout {
                         'fillMode': Image.Stretch
                     },
                     {
-                        'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Scaled, Keep Proportions"),
+                        'label': i18ndc("plasma_wallpaper_org.kde.potd", "@item:inlistbox", "Scaled, keep proportions"),
                         'fillMode': Image.PreserveAspectFit
                     },
                     {
