@@ -14,6 +14,7 @@
                 "Name[cs]": "Team Plasma",
                 "Name[da]": "Plasma-holdet",
                 "Name[de]": "Das Plasma-Team",
+                "Name[en_GB]": "The Plasma Team",
                 "Name[eo]": "La Plasma Teamo",
                 "Name[es]": "El equipo de Plasma",
                 "Name[eu]": "Plasma taldea",
@@ -45,6 +46,7 @@
                 "Name[uk]": "Команда розробників Плазми",
                 "Name[vi]": "Đội Plasma",
                 "Name[x-test]": "xxThe Plasma Teamxx",
+                "Name[zh_CN]": "The Plasma Team",
                 "Name[zh_TW]": "Plasma 團隊"
             }
         ],
@@ -59,6 +61,7 @@
         "Description[cs]": "Vyhledat význam slov a jejich překlad do různých jazyků",
         "Description[da]": "Se på betydningen af ord og deres oversættelse til andre sprog",
         "Description[de]": "Die Bedeutung von Wörtern und ihre Übersetzung in verschiedene Sprachen nachschlagen",
+        "Description[en_GB]": "Look up the meaning of words and their translation into different languages",
         "Description[eo]": "Serĉi la signifon de vortoj kaj ilian tradukon en malsamajn lingvojn",
         "Description[es]": "Buscar el significado de palabras y su traducción a otros idiomas",
         "Description[eu]": "Bilatu hitzen esanahia eta beraien itzulpena hizkuntza ezberdinetan",
@@ -105,6 +108,7 @@
         "Name[cs]": "Slovník",
         "Name[da]": "Ordbog",
         "Name[de]": "Wörterbuch",
+        "Name[en_GB]": "Dictionary",
         "Name[eo]": "Vortaro",
         "Name[es]": "Diccionario",
         "Name[eu]": "Hiztegia",

@@ -12,6 +12,7 @@
                 "Name[cs]": "Team Plasma",
                 "Name[da]": "Plasma-holdet",
                 "Name[de]": "Das Plasma-Team",
+                "Name[en_GB]": "Plasma Team",
                 "Name[eo]": "Plasma Teamo",
                 "Name[es]": "Equipo de Plasma",
                 "Name[eu]": "Plasma taldea",
@@ -43,6 +44,7 @@
                 "Name[uk]": "Команда розробників Плазми",
                 "Name[vi]": "Đội Plasma",
                 "Name[x-test]": "xxPlasma Teamxx",
+                "Name[zh_CN]": "Plasma Team",
                 "Name[zh_TW]": "Plasma 團隊"
             }
         ],
@@ -55,6 +57,7 @@
         "Description[cs]": "Aktuální datum a čas, lokální, nebo v libovolném časovém pásmu",
         "Description[da]": "Den nuværende dato og tid, lokalt eller i enhver tidszone",
         "Description[de]": "Aktuelles Datum und Zeit; lokal oder in einer anderen Zeitzone",
+        "Description[en_GB]": "The current date and time, locally or in any timezone",
         "Description[eo]": "La aktuala dato kaj horo, loke aŭ en iu ajn horzono",
         "Description[es]": "La fecha y hora actuales, locales o de cualquier zona horaria",
         "Description[eu]": "Uneko data eta ordua, tokikoa edo edozein ordu-eremuetakoa",
@@ -101,6 +104,7 @@
         "Name[cs]": "Datum a čas",
         "Name[da]": "Dato og tid",
         "Name[de]": "Datum und Zeit",
+        "Name[en_GB]": "Date and Time",
         "Name[eo]": "Dato kaj Tempo",
         "Name[es]": "Fecha y hora",
         "Name[eu]": "Data eta ordua",
