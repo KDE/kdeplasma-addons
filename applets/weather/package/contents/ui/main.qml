@@ -247,7 +247,7 @@ PlasmoidItem {
 
             // If the first item is a night forecast add an empty item to reserve the space in the grid
             if (i === 0 && generalModel.forecastNightRow && generalModel.forecastStartsAtNight) {
-                model.push(undefined)
+                model.push(null)
             }
 
             forecastInfo["period"] = forecastDayTokens[0];

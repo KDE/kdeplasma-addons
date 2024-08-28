@@ -68,7 +68,7 @@ GridLayout {
 
                 font.bold: true
                 horizontalAlignment: Text.AlignHCenter
-                text: modelData?.placeholder || modelData.period?.replace(" nt", "") || ""
+                text: modelData?.period?.replace(" nt", "") || ""
                 textFormat: Text.PlainText
             }
 
@@ -83,10 +83,10 @@ GridLayout {
                     id: iconToolTip
                     anchors.fill: parent
                     mainText: {
-                        if (!modelData.condition) {
+                        if (!modelData?.condition) {
                             return "";
                         }
-                        if (!modelData.probability) {
+                        if (!modelData?.probability) {
                             return modelData.condition;
                         }
                         return i18nc("certain weather condition (probability percentage)",
@@ -105,7 +105,7 @@ GridLayout {
                 // i18n: \ufe0e forces the text representation of the umbrella emoji
                 text: modelData?.probability ? i18nc("Probability of precipitation in percentage", "\ufe0e☂%1%", modelData.probability) : "·"
                 textFormat: Text.PlainText
-                visible: root.rowHasProbability[index % root.rows] && !!modelData.icon
+                visible: modelData && root.rowHasProbability[index % root.rows]
             }
 
             PlasmaComponents.Label {
