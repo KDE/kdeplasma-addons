@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-17 00:40+0000\n"
+"POT-Creation-Date: 2024-08-28 00:40+0000\n"
 "PO-Revision-Date: 2022-11-28 18:34+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -295,7 +295,19 @@ msgid ""
 "Try again later."
 msgstr ""
 
-#: package/contents/ui/ForecastView.qml:77
+#: package/contents/ui/ForecastView.qml:45
+#, kde-format
+msgctxt "Time of the day (from the duple Day/Night)"
+msgid "Day"
+msgstr "Dia"
+
+#: package/contents/ui/ForecastView.qml:49
+#, kde-format
+msgctxt "Time of the day (from the duple Day/Night)"
+msgid "Night"
+msgstr "Noite"
+
+#: package/contents/ui/ForecastView.qml:93
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition (probability percentage)"
 #| msgid "%1 (%2 %)"
@@ -304,14 +316,14 @@ msgid "%1 (%2%)"
 msgstr "%1 (%2 %)"
 
 #. i18n: \ufe0e forces the text representation of the umbrella emoji
-#: package/contents/ui/ForecastView.qml:90
+#: package/contents/ui/ForecastView.qml:106
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "︎☂%1%"
 msgstr ""
 
-#: package/contents/ui/ForecastView.qml:98
-#: package/contents/ui/ForecastView.qml:106
+#: package/contents/ui/ForecastView.qml:114
+#: package/contents/ui/ForecastView.qml:122
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
@@ -408,49 +420,37 @@ msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "Rajada de Vento:"
 
-#: package/contents/ui/main.qml:232
-#, kde-format
-msgctxt "Time of the day (from the duple Day/Night)"
-msgid "Day"
-msgstr "Dia"
-
-#: package/contents/ui/main.qml:233
-#, kde-format
-msgctxt "Time of the day (from the duple Day/Night)"
-msgid "Night"
-msgstr "Noite"
-
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:364
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr "Carregue para configurar o %1"
 
-#: package/contents/ui/main.qml:381
+#: package/contents/ui/main.qml:375
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:388
+#: package/contents/ui/main.qml:382
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:391
+#: package/contents/ui/main.qml:385
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:400
+#: package/contents/ui/main.qml:394
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:407
+#: package/contents/ui/main.qml:401
 #, kde-format
 msgid "Humidity: %1"
 msgstr "Humidade: %1"

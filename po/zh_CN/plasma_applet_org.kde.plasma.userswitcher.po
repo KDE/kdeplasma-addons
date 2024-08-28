@@ -125,11 +125,7 @@ msgid "Lock Screen"
 msgstr "锁定屏幕"
 
 #: package/contents/ui/main.qml:230
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
-msgstr "锁定屏幕"
-
-#~ msgctxt "Show a dialog with options to logout/shutdown/restart"
-#~ msgid "Log Out"
-#~ msgstr "注销"
+msgstr ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-17 00:40+0000\n"
+"POT-Creation-Date: 2024-08-28 00:40+0000\n"
 "PO-Revision-Date: 2024-08-21 00:36+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -298,21 +298,33 @@ msgstr ""
 "이 기상대를 전에 사용한 적이 있으며 서버 사정으로 인하여 정보를 사용하지 못"
 "할 수도 있습니다. 나중에 다시 시도하십시오."
 
-#: package/contents/ui/ForecastView.qml:77
+#: package/contents/ui/ForecastView.qml:45
+#, kde-format
+msgctxt "Time of the day (from the duple Day/Night)"
+msgid "Day"
+msgstr "주간"
+
+#: package/contents/ui/ForecastView.qml:49
+#, kde-format
+msgctxt "Time of the day (from the duple Day/Night)"
+msgid "Night"
+msgstr "야간"
+
+#: package/contents/ui/ForecastView.qml:93
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
 
 #. i18n: \ufe0e forces the text representation of the umbrella emoji
-#: package/contents/ui/ForecastView.qml:90
+#: package/contents/ui/ForecastView.qml:106
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "︎☂%1%"
 msgstr "︎☂%1%"
 
-#: package/contents/ui/ForecastView.qml:98
-#: package/contents/ui/ForecastView.qml:106
+#: package/contents/ui/ForecastView.qml:114
+#: package/contents/ui/ForecastView.qml:122
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
@@ -410,49 +422,37 @@ msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "돌풍:"
 
-#: package/contents/ui/main.qml:232
-#, kde-format
-msgctxt "Time of the day (from the duple Day/Night)"
-msgid "Day"
-msgstr "주간"
-
-#: package/contents/ui/main.qml:233
-#, kde-format
-msgctxt "Time of the day (from the duple Day/Night)"
-msgid "Night"
-msgstr "야간"
-
-#: package/contents/ui/main.qml:370
+#: package/contents/ui/main.qml:364
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr "%1을(를) 설정하려면 클릭하십시오"
 
-#: package/contents/ui/main.qml:381
+#: package/contents/ui/main.qml:375
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:388
+#: package/contents/ui/main.qml:382
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 %3"
 
-#: package/contents/ui/main.qml:391
+#: package/contents/ui/main.qml:385
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:400
+#: package/contents/ui/main.qml:394
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1(%2)"
 
-#: package/contents/ui/main.qml:407
+#: package/contents/ui/main.qml:401
 #, kde-format
 msgid "Humidity: %1"
 msgstr "습도: %1"
