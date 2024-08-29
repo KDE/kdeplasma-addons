@@ -128,4 +128,4 @@ msgstr "锁定屏幕"
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
-msgstr ""
+msgstr "显示注销屏幕"

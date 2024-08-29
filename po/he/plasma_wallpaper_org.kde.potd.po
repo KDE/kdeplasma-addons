@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-16 00:39+0000\n"
+"POT-Creation-Date: 2024-08-29 00:40+0000\n"
 "PO-Revision-Date: 2023-11-07 14:51+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -19,13 +19,65 @@ msgstr ""
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:49
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "הצבה:"
+
+#: package/contents/ui/config.qml:52
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Scaled and Cropped"
+msgctxt "@item:inlistbox"
+msgid "Scaled and cropped"
+msgstr "מותאם קנה מידה וחתוך"
+
+#: package/contents/ui/config.qml:56
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "מותאם קנה מידה"
+
+#: package/contents/ui/config.qml:60
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Scaled, Keep Proportions"
+msgctxt "@item:inlistbox"
+msgid "Scaled, keep proportions"
+msgstr "מותאם קנה מידה, שימור יחס"
+
+#: package/contents/ui/config.qml:64
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "ממורכז"
+
+#: package/contents/ui/config.qml:68
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "מרוצף"
+
+#: package/contents/ui/config.qml:89
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "צבע רקע:"
+
+#: package/contents/ui/config.qml:90
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "בחירת צבע רקע"
+
+#: package/contents/ui/config.qml:94
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "ספק:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -35,59 +87,11 @@ msgstr ""
 "ספק טפטים זה לא מסנן תמונות שיכולות להיות פוגעניות או מפוקפקות. כדאי להיזהר "
 "אם התמונות האלו מוצגות בפומבי."
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "לעדכן בעת שימוש ברשתות מוגבלות"
-
-#: package/contents/ui/config.qml:85
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Positioning:"
-msgstr "הצבה:"
-
-#: package/contents/ui/config.qml:88
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled and Cropped"
-msgstr "מותאם קנה מידה וחתוך"
-
-#: package/contents/ui/config.qml:92
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled"
-msgstr "מותאם קנה מידה"
-
-#: package/contents/ui/config.qml:96
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled, Keep Proportions"
-msgstr "מותאם קנה מידה, שימור יחס"
-
-#: package/contents/ui/config.qml:100
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Centered"
-msgstr "ממורכז"
-
-#: package/contents/ui/config.qml:104
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tiled"
-msgstr "מרוצף"
-
-#: package/contents/ui/config.qml:125
-#, kde-format
-msgctxt "@label:chooser"
-msgid "Background color:"
-msgstr "צבע רקע:"
-
-#: package/contents/ui/config.qml:126
-#, kde-format
-msgctxt "@title:window"
-msgid "Select Background Color"
-msgstr "בחירת צבע רקע"
 
 #: package/contents/ui/config.qml:137
 #, kde-format

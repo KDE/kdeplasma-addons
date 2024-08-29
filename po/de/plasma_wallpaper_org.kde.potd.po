@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-16 00:39+0000\n"
+"POT-Creation-Date: 2024-08-29 00:40+0000\n"
 "PO-Revision-Date: 2023-12-21 18:50+0100\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -20,13 +20,65 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.08.4\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:49
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "Positionierung:"
+
+#: package/contents/ui/config.qml:52
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Scaled and Cropped"
+msgctxt "@item:inlistbox"
+msgid "Scaled and cropped"
+msgstr "Skaliert und beschnitten"
+
+#: package/contents/ui/config.qml:56
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "Skaliert"
+
+#: package/contents/ui/config.qml:60
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Scaled, Keep Proportions"
+msgctxt "@item:inlistbox"
+msgid "Scaled, keep proportions"
+msgstr "Skaliert, Proportionen beibehalten"
+
+#: package/contents/ui/config.qml:64
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "Zentriert"
+
+#: package/contents/ui/config.qml:68
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "Gekachelt"
+
+#: package/contents/ui/config.qml:89
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "Hintergrundfarbe:"
+
+#: package/contents/ui/config.qml:90
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "Hintergrundfarbe auswählen"
+
+#: package/contents/ui/config.qml:94
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Anbieter:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -37,59 +89,11 @@ msgstr ""
 "empfunden werden könnten, nicht heraus. Seien Sie entsprechend vorsichtig, "
 "wenn diese Bilder in der Öffentlichkeit gezeigt werden."
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Bei Verwendung einer gebührenpflichtigen Verbindung aktualisieren"
-
-#: package/contents/ui/config.qml:85
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Positioning:"
-msgstr "Positionierung:"
-
-#: package/contents/ui/config.qml:88
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled and Cropped"
-msgstr "Skaliert und beschnitten"
-
-#: package/contents/ui/config.qml:92
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled"
-msgstr "Skaliert"
-
-#: package/contents/ui/config.qml:96
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled, Keep Proportions"
-msgstr "Skaliert, Proportionen beibehalten"
-
-#: package/contents/ui/config.qml:100
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Centered"
-msgstr "Zentriert"
-
-#: package/contents/ui/config.qml:104
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tiled"
-msgstr "Gekachelt"
-
-#: package/contents/ui/config.qml:125
-#, kde-format
-msgctxt "@label:chooser"
-msgid "Background color:"
-msgstr "Hintergrundfarbe:"
-
-#: package/contents/ui/config.qml:126
-#, kde-format
-msgctxt "@title:window"
-msgid "Select Background Color"
-msgstr "Hintergrundfarbe auswählen"
 
 #: package/contents/ui/config.qml:137
 #, kde-format

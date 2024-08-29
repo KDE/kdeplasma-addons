@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-16 00:39+0000\n"
+"POT-Creation-Date: 2024-08-29 00:40+0000\n"
 "PO-Revision-Date: 2023-07-13 10:41+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -20,13 +20,65 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:49
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "Posicionament:"
+
+#: package/contents/ui/config.qml:52
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Scaled and Cropped"
+msgctxt "@item:inlistbox"
+msgid "Scaled and cropped"
+msgstr "Escalat i escapçat"
+
+#: package/contents/ui/config.qml:56
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "Escalat"
+
+#: package/contents/ui/config.qml:60
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Scaled, Keep Proportions"
+msgctxt "@item:inlistbox"
+msgid "Scaled, keep proportions"
+msgstr "Escalat, mantenint les proporcions"
+
+#: package/contents/ui/config.qml:64
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "Centrat"
+
+#: package/contents/ui/config.qml:68
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "En mosaic"
+
+#: package/contents/ui/config.qml:89
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "Color de fons:"
+
+#: package/contents/ui/config.qml:90
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "Selecció del color de fons"
+
+#: package/contents/ui/config.qml:94
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Proveïdor:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -37,59 +89,11 @@ msgstr ""
 "sensibles o objectables. Pareu atenció si aquestes imatges es mostren en "
 "públic."
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Actualitza en usar una connexió de xarxa d'ús mesurat"
-
-#: package/contents/ui/config.qml:85
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Positioning:"
-msgstr "Posicionament:"
-
-#: package/contents/ui/config.qml:88
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled and Cropped"
-msgstr "Escalat i escapçat"
-
-#: package/contents/ui/config.qml:92
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled"
-msgstr "Escalat"
-
-#: package/contents/ui/config.qml:96
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled, Keep Proportions"
-msgstr "Escalat, mantenint les proporcions"
-
-#: package/contents/ui/config.qml:100
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Centered"
-msgstr "Centrat"
-
-#: package/contents/ui/config.qml:104
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tiled"
-msgstr "En mosaic"
-
-#: package/contents/ui/config.qml:125
-#, kde-format
-msgctxt "@label:chooser"
-msgid "Background color:"
-msgstr "Color de fons:"
-
-#: package/contents/ui/config.qml:126
-#, kde-format
-msgctxt "@title:window"
-msgid "Select Background Color"
-msgstr "Selecció del color de fons"
 
 #: package/contents/ui/config.qml:137
 #, kde-format

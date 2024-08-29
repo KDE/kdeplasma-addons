@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-16 00:39+0000\n"
+"POT-Creation-Date: 2024-08-29 00:40+0000\n"
 "PO-Revision-Date: 2024-01-17 22:02+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -18,13 +18,65 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 23.08.4\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:49
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "Elhelyezkedés:"
+
+#: package/contents/ui/config.qml:52
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Scaled and Cropped"
+msgctxt "@item:inlistbox"
+msgid "Scaled and cropped"
+msgstr "Nyújtva és levágva"
+
+#: package/contents/ui/config.qml:56
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "Nyújtva"
+
+#: package/contents/ui/config.qml:60
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Scaled, Keep Proportions"
+msgctxt "@item:inlistbox"
+msgid "Scaled, keep proportions"
+msgstr "Arányosan nyújtva"
+
+#: package/contents/ui/config.qml:64
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "Középre"
+
+#: package/contents/ui/config.qml:68
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "Mozaik"
+
+#: package/contents/ui/config.qml:89
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "Háttérszín:"
+
+#: package/contents/ui/config.qml:90
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "Válassza ki a háttér színét"
+
+#: package/contents/ui/config.qml:94
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Szolgáltató:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -34,59 +86,11 @@ msgstr ""
 "Ez a háttérkép-szolgáltató nem szűri az érzékeny vagy kifogásolható képeket. "
 "Legyen óvatos, ha ezek a képek nyilvánosan fognak megjelenni."
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Frissítés forgalmi díjas hálózati kapcsolat használatakor"
-
-#: package/contents/ui/config.qml:85
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Positioning:"
-msgstr "Elhelyezkedés:"
-
-#: package/contents/ui/config.qml:88
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled and Cropped"
-msgstr "Nyújtva és levágva"
-
-#: package/contents/ui/config.qml:92
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled"
-msgstr "Nyújtva"
-
-#: package/contents/ui/config.qml:96
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled, Keep Proportions"
-msgstr "Arányosan nyújtva"
-
-#: package/contents/ui/config.qml:100
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Centered"
-msgstr "Középre"
-
-#: package/contents/ui/config.qml:104
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tiled"
-msgstr "Mozaik"
-
-#: package/contents/ui/config.qml:125
-#, kde-format
-msgctxt "@label:chooser"
-msgid "Background color:"
-msgstr "Háttérszín:"
-
-#: package/contents/ui/config.qml:126
-#, kde-format
-msgctxt "@title:window"
-msgid "Select Background Color"
-msgstr "Válassza ki a háttér színét"
 
 #: package/contents/ui/config.qml:137
 #, kde-format

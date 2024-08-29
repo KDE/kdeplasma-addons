@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-16 00:39+0000\n"
+"POT-Creation-Date: 2024-08-29 00:40+0000\n"
 "PO-Revision-Date: 2022-06-07 15:06+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -18,13 +18,65 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.04.1\n"
 
-#: package/contents/ui/config.qml:44
+#: package/contents/ui/config.qml:49
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "Pemosisian:"
+
+#: package/contents/ui/config.qml:52
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Scaled and Cropped"
+msgctxt "@item:inlistbox"
+msgid "Scaled and cropped"
+msgstr "Diskalakan dan Dipangkas"
+
+#: package/contents/ui/config.qml:56
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "Diskalakan"
+
+#: package/contents/ui/config.qml:60
+#, fuzzy, kde-format
+#| msgctxt "@item:inlistbox"
+#| msgid "Scaled, Keep Proportions"
+msgctxt "@item:inlistbox"
+msgid "Scaled, keep proportions"
+msgstr "Diskalakan, Jaga Proporsi"
+
+#: package/contents/ui/config.qml:64
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "Dipusatkan"
+
+#: package/contents/ui/config.qml:68
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "Diubinkan"
+
+#: package/contents/ui/config.qml:89
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "Warna latarbelakang:"
+
+#: package/contents/ui/config.qml:90
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "Pilih Warna Latarbelakang"
+
+#: package/contents/ui/config.qml:94
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Penyedia:"
 
-#: package/contents/ui/config.qml:63
+#: package/contents/ui/config.qml:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -32,59 +84,11 @@ msgid ""
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
 
-#: package/contents/ui/config.qml:72
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr ""
-
-#: package/contents/ui/config.qml:85
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Positioning:"
-msgstr "Pemosisian:"
-
-#: package/contents/ui/config.qml:88
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled and Cropped"
-msgstr "Diskalakan dan Dipangkas"
-
-#: package/contents/ui/config.qml:92
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled"
-msgstr "Diskalakan"
-
-#: package/contents/ui/config.qml:96
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Scaled, Keep Proportions"
-msgstr "Diskalakan, Jaga Proporsi"
-
-#: package/contents/ui/config.qml:100
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Centered"
-msgstr "Dipusatkan"
-
-#: package/contents/ui/config.qml:104
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tiled"
-msgstr "Diubinkan"
-
-#: package/contents/ui/config.qml:125
-#, kde-format
-msgctxt "@label:chooser"
-msgid "Background color:"
-msgstr "Warna latarbelakang:"
-
-#: package/contents/ui/config.qml:126
-#, kde-format
-msgctxt "@title:window"
-msgid "Select Background Color"
-msgstr "Pilih Warna Latarbelakang"
 
 #: package/contents/ui/config.qml:137
 #, kde-format
