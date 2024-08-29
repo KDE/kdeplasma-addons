@@ -45,11 +45,15 @@ void DateTimeRunnerTest::testLocalTimeInfo()
 {
     const QTime localTime = QDateTime::currentDateTime().time();
     const QString timeStr = QLocale().toString(localTime);
+    const QString timeStr2 = QLocale().toString(localTime.addSecs(1));
 
     launchQuery("time");
 
     QCOMPARE(manager->matches().count(), 1);
-    QVERIFY(manager->matches().first().text().contains(timeStr));
+
+    const QString matchText = manager->matches().first().text();
+    QVERIFY2(matchText.contains(timeStr) || matchText.contains(timeStr2), // Avoid time alignment errors
+             u"first match: %1 timeStr: %2"_s.arg(matchText, timeStr).toUtf8().constData());
 }
 
 void DateTimeRunnerTest::testRemoteTimeInfo()
