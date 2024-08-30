@@ -25,12 +25,10 @@ msgid "Positioning:"
 msgstr "位置："
 
 #: package/contents/ui/config.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Scaled and Cropped"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
-msgstr "缩放并裁剪"
+msgstr ""
 
 #: package/contents/ui/config.qml:56
 #, kde-format
@@ -39,12 +37,10 @@ msgid "Scaled"
 msgstr "缩放"
 
 #: package/contents/ui/config.qml:60
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Scaled, Keep Proportions"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
-msgstr "缩放，保持比例"
+msgstr ""
 
 #: package/contents/ui/config.qml:64
 #, kde-format

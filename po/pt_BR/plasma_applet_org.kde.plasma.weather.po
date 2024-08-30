@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-28 00:40+0000\n"
+"POT-Creation-Date: 2024-08-30 00:40+0000\n"
 "PO-Revision-Date: 2022-12-20 11:16-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -311,7 +311,7 @@ msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
 msgstr "Noite"
 
-#: package/contents/ui/ForecastView.qml:93
+#: package/contents/ui/ForecastView.qml:105
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition (probability percentage)"
 #| msgid "%1 (%2 %)"
@@ -319,15 +319,14 @@ msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2 %)"
 
-#. i18n: \ufe0e forces the text representation of the umbrella emoji
-#: package/contents/ui/ForecastView.qml:106
+#: package/contents/ui/ForecastView.qml:119
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
-msgid "︎☂%1%"
+msgid "☂%1%"
 msgstr ""
 
-#: package/contents/ui/ForecastView.qml:114
-#: package/contents/ui/ForecastView.qml:122
+#: package/contents/ui/ForecastView.qml:127
+#: package/contents/ui/ForecastView.qml:135
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
