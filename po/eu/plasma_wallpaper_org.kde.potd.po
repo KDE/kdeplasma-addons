@@ -1,16 +1,16 @@
 # Translation for plasma_wallpaper_org.kde.potd.po to Euskara/Basque (eu).
-# Copyright (C) 2018-2023 This file is copyright:
+# Copyright (C) 2018-2024 This file is copyright:
 # This file is distributed under the same license as kdeplasma-addons package.
-# KDE euskatzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2024 KDE euskatzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2018, 2019, 2022, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2018, 2019, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-29 00:40+0000\n"
-"PO-Revision-Date: 2023-07-16 10:07+0200\n"
+"PO-Revision-Date: 2024-08-30 18:34+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: package/contents/ui/config.qml:49
 #, kde-format
@@ -27,9 +27,7 @@ msgid "Positioning:"
 msgstr "Kokatzea:"
 
 #: package/contents/ui/config.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Scaled and Cropped"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "Eskalatuta eta moztuta"
@@ -41,12 +39,10 @@ msgid "Scaled"
 msgstr "Eskalatuta"
 
 #: package/contents/ui/config.qml:60
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Scaled, Keep Proportions"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
-msgstr "Eskalatuta, mantendu proportzioak"
+msgstr "Eskalatuta, proportzioei eutsiz"
 
 #: package/contents/ui/config.qml:64
 #, kde-format
