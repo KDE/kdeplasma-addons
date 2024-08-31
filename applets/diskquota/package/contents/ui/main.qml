@@ -73,7 +73,6 @@ PlasmoidItem {
 
             sourceComponent: PlasmaExtras.PlaceholderMessage {
                 width: parent.width
-                readonly property bool hasText: model.filterRegularExpression.length > 0
                 iconName: diskQuota.quotaInstalled ? "edit-none" : "disk-quota"
                 text: diskQuota.quotaInstalled ? i18nc("@info:status", "No quota restrictions found") : i18nc("@info:status", "Quota tool not found")
                 explanation: diskQuota.quotaInstalled ? "" : i18nc("@info:usagetip", "Please install 'quota'")
