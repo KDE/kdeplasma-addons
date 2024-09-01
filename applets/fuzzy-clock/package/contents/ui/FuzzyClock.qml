@@ -263,7 +263,6 @@ Item {
             weight: plasmoid.configuration.boldText ? Font.Bold : Font.Normal
             italic: plasmoid.configuration.italicText
             pixelSize: 1024
-            pointSize: 0 // we need to unset pointSize otherwise it breaks the Text.Fit size mode
         }
         minimumPixelSize: Kirigami.Units.iconSizes.sizeForLabels
         fontSizeMode: Text.Fit

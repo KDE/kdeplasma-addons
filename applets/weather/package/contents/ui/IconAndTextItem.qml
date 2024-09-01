@@ -94,7 +94,6 @@ GridLayout {
             font {
                 weight: Font.Normal
                 pixelSize: 1024
-                pointSize: 0 // we need to unset pointSize otherwise it breaks the Text.Fit size mode
             }
             minimumPixelSize: Math.round(Kirigami.Units.gridUnit / 2)
             fontSizeMode: Text.Fit
