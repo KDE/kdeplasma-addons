@@ -52,7 +52,7 @@ PlasmoidItem {
             seconds = date.getSeconds();
         }
         Component.onCompleted: {
-            onDataChanged();
+            dataChanged();
         }
     }
 
