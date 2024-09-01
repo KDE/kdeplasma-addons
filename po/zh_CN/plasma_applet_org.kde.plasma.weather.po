@@ -318,12 +318,10 @@ msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
 
 #: package/contents/ui/ForecastView.qml:119
-#, fuzzy, kde-format
-#| msgctxt "Probability of precipitation in percentage"
-#| msgid "︎☂%1%"
+#, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
-msgstr "︎☂%1%"
+msgstr "☂%1%"
 
 #: package/contents/ui/ForecastView.qml:127
 #: package/contents/ui/ForecastView.qml:135
