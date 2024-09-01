@@ -39,7 +39,7 @@ PlasmoidItem {
     toolTipMainText: i18n("Kate Sessions")
 
     Component.onCompleted: {
-        plasmoid.removeAction("configure");
+        plasmoid.removeInternalAction("configure");
     }
 
     property var searchHeader: PlasmaExtras.PlasmoidHeading {

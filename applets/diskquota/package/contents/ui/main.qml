@@ -38,7 +38,7 @@ PlasmoidItem {
     toolTipMainText: diskQuota.toolTip
     toolTipSubText: diskQuota.subToolTip
 
-    Component.onCompleted: plasmoid.removeAction("configure")
+    Component.onCompleted: plasmoid.removeInternalAction("configure")
 
     DiskQuota {
         id: diskQuota
