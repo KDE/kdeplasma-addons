@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-24 00:40+0000\n"
-"PO-Revision-Date: 2024-04-25 14:56+0200\n"
+"PO-Revision-Date: 2024-08-25 11:44+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -129,12 +129,10 @@ msgid "Lock Screen"
 msgstr "Verrouiller l'écran"
 
 #: package/contents/ui/main.qml:230
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Lock Screen"
+#, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
-msgstr "Verrouiller l'écran"
+msgstr "Afficher l'écran de déconnexion"
 
 #~ msgctxt "Show a dialog with options to logout/shutdown/restart"
 #~ msgid "Log Out"

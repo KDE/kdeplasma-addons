@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.diskquota\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-02-10 00:40+0000\n"
+"POT-Creation-Date: 2024-09-02 00:40+0000\n"
 "PO-Revision-Date: 2022-10-30 08:04+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@linux.org.tw>\n"
@@ -18,19 +18,19 @@ msgstr ""
 "X-Generator: Lokalize 22.08.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: package/contents/ui/main.qml:78
+#: package/contents/ui/main.qml:77
 #, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "找不到大小的限制"
 
-#: package/contents/ui/main.qml:78
+#: package/contents/ui/main.qml:77
 #, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
 msgstr "找不到配額工具"
 
-#: package/contents/ui/main.qml:79
+#: package/contents/ui/main.qml:78
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
