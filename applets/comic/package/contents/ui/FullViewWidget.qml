@@ -38,9 +38,11 @@ PlasmaCore.Dialog {
 
         anchors.fill: parent
 
-        Layout.minimumWidth: comicPicture.nativeWidth
+        // 4×gridUnit in case image is empty, to show something and avoid anchor loops.
+        // value is arbitrary, but small enough to be unlikely to increase popup size for real comics
+        Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * 4, comicPicture.nativeWidth)
         Layout.maximumWidth: Layout.minimumWidth
-        Layout.minimumHeight: comicPicture.nativeHeight
+        Layout.minimumHeight: Math.max(Kirigami.Units.gridUnit * 4, comicPicture.nativeHeight)
         Layout.maximumHeight: Layout.minimumHeight
 
         Flickable {
