@@ -3,4 +3,4 @@ Name=Plasma Picture-of-the-Day Provider
 Comment=A provider for the Plasma Picture-of-the-day dataengine, providing access to one image service
 
 ShowFilesAfterGeneration=src/%{APPNAMELC}.cpp
-Category=Plasma/Dataengine
+Category=Plasma
