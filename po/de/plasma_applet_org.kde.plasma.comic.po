@@ -6,7 +6,7 @@
 # Torbjörn Klatt <torbjoern.k@googlemail.com>, 2011.
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_comic\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-27 00:48+0000\n"
 "PO-Revision-Date: 2022-07-23 22:38+0200\n"
