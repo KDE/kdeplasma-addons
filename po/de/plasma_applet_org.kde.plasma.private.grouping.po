@@ -4,7 +4,7 @@
 # Burkhard Lück <lueck@hube-lueck.de>, 2017.
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.private.grouping\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-29 01:59+0000\n"
 "PO-Revision-Date: 2017-01-08 21:55+0100\n"

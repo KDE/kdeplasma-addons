@@ -4,7 +4,7 @@
 # Burkhard Lück <lueck@hube-lueck.de>, 2011, 2014, 2015, 2018, 2019, 2021.
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_notes\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-26 01:34+0000\n"
 "PO-Revision-Date: 2024-06-02 11:21+0200\n"
