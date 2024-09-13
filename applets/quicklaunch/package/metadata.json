@@ -52,6 +52,14 @@
         "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Quicklaunch",
         "Category": "Application Launchers",
         "Description": "Launch your favourite applications",
+        "Description[ca]": "Llança les vostres aplicacions preferides",
+        "Description[he]": "שיגור היישומים המועדפים עליך",
+        "Description[ia]": "Lancea tu applicationes favorite",
+        "Description[ka]": "გაუშვით თქვენი რჩეული პროგრამები",
+        "Description[sl]": "Zaženi vaše priljubljene aplikacije",
+        "Description[tr]": "Favori uygulamaları çalıştır",
+        "Description[uk]": "Запуск ваших улюблених програм",
+        "Description[x-test]": "xxLaunch your favourite applicationsxx",
         "FormFactors": [
             "desktop"
         ],
