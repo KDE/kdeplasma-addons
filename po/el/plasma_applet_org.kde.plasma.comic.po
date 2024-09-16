@@ -25,37 +25,32 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.08.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: comic.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "here strip means comic strip"
-#| msgid "&Next Tab with a new Strip"
+#, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Επόμενη καρτέλα με νέα σειρά"
 
 #: comic.cpp:86
-#, fuzzy, kde-format
-#| msgid "Jump to &first Strip"
+#, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "&Μετάβαση στο πρώτο απόκομμα"
 
 #: comic.cpp:90
-#, fuzzy, kde-format
-#| msgid "Jump to &current Strip"
+#, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "&Μετάβαση στο τρέχον απόκομμα"
 
 #: comic.cpp:94
-#, fuzzy, kde-format
-#| msgid "Jump to Strip ..."
+#, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
-msgstr "Μετάβαση στο απόκομμα..."
+msgstr "Μετάβαση στο απόκομμα…"
 
 #: comic.cpp:98
 #, kde-format
@@ -76,11 +71,10 @@ msgid "Visit the Shop &Website"
 msgstr "Επίσκεψη του &δικτυακού καταστήματος"
 
 #: comic.cpp:115
-#, fuzzy, kde-format
-#| msgid "&Save Comic As..."
+#, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr "&Αποθήκευση κόμικ ως..."
+msgstr "&Αποθήκευση κόμικ ως…"
 
 #: comic.cpp:120
 #, kde-format
@@ -89,9 +83,7 @@ msgid "&Actual Size"
 msgstr "&Πραγματικό μέγεθος"
 
 #: comic.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "@option:check Context menu of comic image"
-#| msgid "Store current &Position"
+#, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Αποθήκευση τρέχουσας &θέσης"
@@ -103,32 +95,28 @@ msgid "# %1"
 msgstr "# %1"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Γενικά"
 
 #: package/contents/config/config.qml:18
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
 #: package/contents/config/config.qml:23
-#, fuzzy, kde-format
-#| msgid "Advanced"
+#, kde-format
 msgctxt "@title"
 msgid "Advanced"
 msgstr "Για προχωρημένους"
 
 #: package/contents/ui/ComicBottomInfo.qml:63
-#, fuzzy, kde-format
-#| msgid "Jump to Strip ..."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
-msgstr "Μετάβαση στο απόκομμα..."
+msgstr "Μετάβαση στο απόκομμα…"
 
 #: package/contents/ui/ComicBottomInfo.qml:104
 #, kde-format
@@ -137,8 +125,7 @@ msgid "Visit the comic website"
 msgstr "Επισκεφθείτε την ιστοσελίδα του κόμικ"
 
 #: package/contents/ui/configAdvanced.qml:35
-#, fuzzy, kde-format
-#| msgid "Comic cache:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "Λανθάνουσα μνήμη κόμικ:"
@@ -218,11 +205,10 @@ msgid "Comics:"
 msgstr "Κόμικ"
 
 #: package/contents/ui/configGeneral.qml:72
-#, fuzzy, kde-format
-#| msgid "Get New Comics..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
-msgstr "Λήψη νέων κόμικ..."
+msgstr "Λήψη νέων κόμικ…"
 
 #: package/contents/ui/configGeneral.qml:83
 #, fuzzy, kde-format
@@ -264,22 +250,19 @@ msgstr[0] "λεπτά"
 msgstr[1] "λεπτά"
 
 #: stripselector.cpp:31 stripselector.cpp:101
-#, fuzzy, kde-format
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@title:window"
 msgid "Go to Strip"
 msgstr "Μετάβαση σε απόκομμα"
 
 #: stripselector.cpp:39
-#, fuzzy, kde-format
-#| msgid "&Strip Number:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "&Strip number:"
 msgstr "&Αριθμός αποκόμματος:"
 
 #: stripselector.cpp:102
-#, fuzzy, kde-format
-#| msgid "Strip identifier:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Αναγνωριστικό αποκόμματος:"

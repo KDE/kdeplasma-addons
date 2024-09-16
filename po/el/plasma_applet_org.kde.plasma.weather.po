@@ -18,8 +18,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -130,8 +130,7 @@ msgid "Calm"
 msgstr "Ήρεμα"
 
 #: package/contents/config/config.qml:15
-#, fuzzy, kde-format
-#| msgid "Weather Station"
+#, kde-format
 msgctxt "@title"
 msgid "Weather Station"
 msgstr "Μετεωρολογικός σταθμός"
@@ -143,8 +142,7 @@ msgid "Appearance"
 msgstr ""
 
 #: package/contents/config/config.qml:31
-#, fuzzy, kde-format
-#| msgid "Units"
+#, kde-format
 msgctxt "@title"
 msgid "Units"
 msgstr "Μονάδες"
@@ -187,11 +185,10 @@ msgid "Show in tooltip:"
 msgstr ""
 
 #: package/contents/ui/config/ConfigAppearance.qml:71
-#, fuzzy, kde-format
-#| msgid "Temperature:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
-msgstr "Θερμοκρασία:"
+msgstr "Θερμοκρασία"
 
 #: package/contents/ui/config/ConfigAppearance.qml:76
 #, fuzzy, kde-format
@@ -201,11 +198,10 @@ msgid "Wind"
 msgstr "Άνεμος: %1"
 
 #: package/contents/ui/config/ConfigAppearance.qml:81
-#, fuzzy, kde-format
-#| msgid "Pressure:"
+#, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
-msgstr "Πίεση:"
+msgstr "Πίεση"
 
 #: package/contents/ui/config/ConfigAppearance.qml:86
 #, fuzzy, kde-format
@@ -216,36 +212,31 @@ msgid "Humidity"
 msgstr "Υγρασία: %1%2"
 
 #: package/contents/ui/config/ConfigUnits.qml:32
-#, fuzzy, kde-format
-#| msgid "Temperature:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "Θερμοκρασία:"
 
 #: package/contents/ui/config/ConfigUnits.qml:38
-#, fuzzy, kde-format
-#| msgid "Pressure:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "Πίεση:"
 
 #: package/contents/ui/config/ConfigUnits.qml:44
-#, fuzzy, kde-format
-#| msgid "Wind speed:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "Ταχύτητα ανέμου:"
 
 #: package/contents/ui/config/ConfigUnits.qml:50
-#, fuzzy, kde-format
-#| msgid "Visibility:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Ορατότητα:"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:50
-#, fuzzy, kde-format
-#| msgid "Update every:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Ενημέρωση κάθε:"
@@ -259,8 +250,7 @@ msgstr[0] " λεπτά"
 msgstr[1] " λεπτά"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:65
-#, fuzzy, kde-format
-#| msgid "Location:"
+#, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Τοποθεσία:"
@@ -292,8 +282,7 @@ msgid "Enter location"
 msgstr "Μετεωρολογικός σταθμός"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:185
-#, fuzzy, kde-format
-#| msgid "No weather stations found for '%1'"
+#, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Δε βρέθηκαν μετεωρολογικοί σταθμοί για '%1'"
@@ -335,9 +324,7 @@ msgid "Night"
 msgstr ""
 
 #: package/contents/ui/ForecastView.qml:105
-#, fuzzy, kde-format
-#| msgctxt "certain weather condition (probability percentage)"
-#| msgid "%1 (%2%)"
+#, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
@@ -381,28 +368,22 @@ msgid ""
 msgstr ""
 
 #: package/contents/ui/main.qml:93
-#, fuzzy, kde-format
-#| msgctxt "pressure tendency"
-#| msgid "rising"
+#, kde-format
 msgctxt "pressure tendency"
 msgid "Rising"
-msgstr "αύξουσα"
+msgstr "Αύξουσα"
 
 #: package/contents/ui/main.qml:94
-#, fuzzy, kde-format
-#| msgctxt "pressure tendency"
-#| msgid "falling"
+#, kde-format
 msgctxt "pressure tendency"
 msgid "Falling"
-msgstr "φθίνουσα"
+msgstr "Φθίνουσα"
 
 #: package/contents/ui/main.qml:95
-#, fuzzy, kde-format
-#| msgctxt "pressure tendency"
-#| msgid "steady"
+#, kde-format
 msgctxt "pressure tendency"
 msgid "Steady"
-msgstr "σταθερή"
+msgstr "Σταθερή"
 
 #: package/contents/ui/main.qml:117
 #, kde-format
@@ -427,8 +408,7 @@ msgid "Dewpoint:"
 msgstr "Σημείο υγροποίησης: %1"
 
 #: package/contents/ui/main.qml:184
-#, fuzzy, kde-format
-#| msgid "Pressure:"
+#, kde-format
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "Πίεση:"
@@ -442,8 +422,7 @@ msgid "Pressure Tendency:"
 msgstr "Τάση πίεσης: %1"
 
 #: package/contents/ui/main.qml:198
-#, fuzzy, kde-format
-#| msgid "Visibility:"
+#, kde-format
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "Ορατότητα:"
@@ -471,11 +450,7 @@ msgid "Click to configure %1"
 msgstr ""
 
 #: package/contents/ui/main.qml:375
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 is the weather condition, %2 is the temperature,  both come from the "
-#| "weather provider"
-#| msgid "%1 %2"
+#, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
@@ -489,19 +464,13 @@ msgid "%1 %2 (%3)"
 msgstr "%1 %2 %3"
 
 #: package/contents/ui/main.qml:385
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 is the weather condition, %2 is the temperature,  both come from the "
-#| "weather provider"
-#| msgid "%1 %2"
+#, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
 #: package/contents/ui/main.qml:394
-#, fuzzy, kde-format
-#| msgctxt "A weather station location and the weather service it comes from"
-#| msgid "%1 (%2)"
+#, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
@@ -526,8 +495,7 @@ msgid "Forecast"
 msgstr ""
 
 #: package/contents/ui/SwitchPanel.qml:35
-#, fuzzy, kde-format
-#| msgid "Details"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Λεπτομέρειες"
@@ -590,21 +558,13 @@ msgid "°"
 msgstr "°"
 
 #: plugin/util.cpp:48 plugin/util.cpp:52
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 is the weather condition, %2 is the temperature,  both come from the "
-#| "weather provider"
-#| msgid "%1 %2"
+#, kde-format
 msgctxt "temperature unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
 
 #: plugin/util.cpp:62
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 is the weather condition, %2 is the temperature,  both come from the "
-#| "weather provider"
-#| msgid "%1 %2"
+#, kde-format
 msgctxt "value unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
@@ -620,9 +580,7 @@ msgid "%1 %"
 msgstr "%1 %2"
 
 #: plugin/util.cpp:74
-#, fuzzy, kde-format
-#| msgctxt "A weather station location and the weather service it comes from"
-#| msgid "%1 (%2)"
+#, kde-format
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"

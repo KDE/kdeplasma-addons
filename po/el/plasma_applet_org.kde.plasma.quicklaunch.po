@@ -18,53 +18,46 @@ msgstr ""
 "X-Generator: Lokalize 2.0\n"
 
 #: package/contents/config/config.qml:12
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Γενικά"
 
 #: package/contents/ui/ConfigGeneral.qml:27
-#, fuzzy, kde-format
-#| msgid "Maximum columns:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Μέγιστος αριθμός στηλών:"
 
 #: package/contents/ui/ConfigGeneral.qml:27
-#, fuzzy, kde-format
-#| msgid "Maximum rows:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Μέγιστος αριθμός γραμμών:"
 
 #: package/contents/ui/ConfigGeneral.qml:39
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
-msgstr "Εμφάνιση"
+msgstr "Εμφάνιση:"
 
 #: package/contents/ui/ConfigGeneral.qml:41
-#, fuzzy, kde-format
-#| msgid "Show launcher names"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
 msgstr "Εμφάνιση ονομάτων εκτελεστών"
 
 #: package/contents/ui/ConfigGeneral.qml:46
-#, fuzzy, kde-format
-#| msgid "Enable popup"
+#, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Ενεργοποίηση αναδυόμενου"
 
 #: package/contents/ui/ConfigGeneral.qml:56
-#, fuzzy, kde-format
-#| msgid "Title"
+#, kde-format
 msgctxt "@title:group"
 msgid "Title:"
-msgstr "Τίτλος"
+msgstr "Τίτλος:"
 
 #: package/contents/ui/ConfigGeneral.qml:64
 #, kde-format
@@ -85,22 +78,19 @@ msgid "Launch %1"
 msgstr ""
 
 #: package/contents/ui/IconItem.qml:261
-#, fuzzy, kde-format
-#| msgid "Add Launcher..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
-msgstr "Προσθήκη εκτελεστή..."
+msgstr "Προσθήκη εκτελεστή…"
 
 #: package/contents/ui/IconItem.qml:267
-#, fuzzy, kde-format
-#| msgid "Edit Launcher..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
-msgstr "Επεξεργασία εκτελεστή..."
+msgstr "Επεξεργασία εκτελεστή…"
 
 #: package/contents/ui/IconItem.qml:273
-#, fuzzy, kde-format
-#| msgid "Remove Launcher"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Αφαίρεση εκτελεστή"
@@ -111,8 +101,7 @@ msgid "Quicklaunch"
 msgstr "Γρήγορη εκτέλεση"
 
 #: package/contents/ui/main.qml:148
-#, fuzzy, kde-format
-#| msgid "Add launchers by Drag and Drop or by using the context menu."
+#, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr ""
@@ -130,11 +119,10 @@ msgid "Show hidden icons"
 msgstr "Εμφάνιση κρυφών εικονιδίων"
 
 #: package/contents/ui/main.qml:281
-#, fuzzy, kde-format
-#| msgid "Add Launcher..."
+#, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"
-msgstr "Προσθήκη εκτελεστή..."
+msgstr "Προσθήκη εκτελεστή…"
 
 #, fuzzy
 #~| msgid "Arrangement"

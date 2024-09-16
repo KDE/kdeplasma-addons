@@ -19,8 +19,7 @@ msgstr ""
 "X-Generator: Lokalize 1.4\n"
 
 #: package/contents/ui/main.qml:69
-#, fuzzy, kde-format
-#| msgid "Konsole Profiles"
+#, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Προφίλ της κονσόλας"

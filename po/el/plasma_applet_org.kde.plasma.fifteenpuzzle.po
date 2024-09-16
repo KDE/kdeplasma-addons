@@ -20,12 +20,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Εμφάνιση"
@@ -52,11 +51,10 @@ msgid "Image:"
 msgstr "Εικόνα:"
 
 #: package/contents/ui/configAppearance.qml:81
-#, fuzzy, kde-format
-#| msgid "Path to custom image"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
-msgstr "Διαδρομή για την προσαρμοσμένη εικόνα"
+msgstr "Διαδρομή για την προσαρμοσμένη εικόνα…"
 
 #: package/contents/ui/configAppearance.qml:100
 #, fuzzy, kde-format
@@ -66,8 +64,7 @@ msgid "Choose image…"
 msgstr "Επιλογή εικόνας"
 
 #: package/contents/ui/configAppearance.qml:108
-#, fuzzy, kde-format
-#| msgid "Choose an image"
+#, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Επιλογή εικόνας"
@@ -94,15 +91,13 @@ msgid "Time: %1"
 msgstr "Χρόνος: %1"
 
 #: package/contents/ui/FifteenPuzzle.qml:302
-#, fuzzy, kde-format
-#| msgid "Shuffle"
+#, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Ανακάτεμα"
 
 #: package/contents/ui/FifteenPuzzle.qml:340
-#, fuzzy, kde-format
-#| msgid "Solved! Try again."
+#, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Λύθηκε! Δοκιμάστε ξανά."

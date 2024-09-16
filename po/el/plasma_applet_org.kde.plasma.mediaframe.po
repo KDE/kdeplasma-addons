@@ -19,24 +19,21 @@ msgstr ""
 "X-Generator: Lokalize 2.0\n"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Γενικά"
 
 #: package/contents/config/config.qml:18
-#, fuzzy, kde-format
-#| msgid "Paths"
+#, kde-format
 msgctxt "@title"
 msgid "Paths"
 msgstr "Διαδρομές"
 
 #: package/contents/ui/ConfigGeneral.qml:48
-#, fuzzy, kde-format
-#| msgid "Change picture every"
+#, kde-format
 msgid "Change picture every:"
-msgstr "Αλλαγή εικόνας κάθε"
+msgstr "Αλλαγή εικόνας κάθε:"
 
 #: package/contents/ui/ConfigGeneral.qml:65
 #, kde-format
@@ -61,8 +58,7 @@ msgid "Image fill mode:"
 msgstr "Λειτουργία γεμίσματος"
 
 #: package/contents/ui/ConfigGeneral.qml:110
-#, fuzzy, kde-format
-#| msgid "Stretch"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Επιμήκυνση"
@@ -75,95 +71,82 @@ msgid "The image is scaled to fit the frame"
 msgstr "Κλιμάκωση της εικόνας για να ταιριάζει"
 
 #: package/contents/ui/ConfigGeneral.qml:115
-#, fuzzy, kde-format
-#| msgid "Preserve aspect fit"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Διατήρηση ταιριάσματος διαστάσεων"
 
 #: package/contents/ui/ConfigGeneral.qml:116
-#, fuzzy, kde-format
-#| msgid "The image is scaled uniformly to fit without cropping"
+#, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "Ομοιόμορφη κλιμάκωση της εικόνας για να ταιριάζει χωρίς κόψιμο"
 
 #: package/contents/ui/ConfigGeneral.qml:120
-#, fuzzy, kde-format
-#| msgid "Preserve aspect crop"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Διατήρηση διαστάσεων κοψίματος"
 
 #: package/contents/ui/ConfigGeneral.qml:121
-#, fuzzy, kde-format
-#| msgid "The image is scaled uniformly to fill, cropping if necessary"
+#, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr "Ομοιόμορφη κλιμάκωση της εικόνας για γέμισμα, κόψιμο αν χρειάζεται"
 
 #: package/contents/ui/ConfigGeneral.qml:125
-#, fuzzy, kde-format
-#| msgid "Tile"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Παράθεση"
 
 #: package/contents/ui/ConfigGeneral.qml:126
-#, fuzzy, kde-format
-#| msgid "The image is duplicated horizontally and vertically"
+#, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Διπλότυπο εικόνας οριζόντια και κάθετα"
 
 #: package/contents/ui/ConfigGeneral.qml:130
-#, fuzzy, kde-format
-#| msgid "Tile vertically"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Κατακόρυφη παράθεση"
 
 #: package/contents/ui/ConfigGeneral.qml:131
-#, fuzzy, kde-format
-#| msgid "The image is stretched horizontally and tiled vertically"
+#, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "Οριζόντια επιμήκυνση εικόνας και παράθεση κατακόρυφα"
 
 #: package/contents/ui/ConfigGeneral.qml:135
-#, fuzzy, kde-format
-#| msgid "Tile horizontally"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Οριζόντια παράθεση"
 
 #: package/contents/ui/ConfigGeneral.qml:136
-#, fuzzy, kde-format
-#| msgid "The image is stretched vertically and tiled horizontally"
+#, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "Κατακόρυφη επιμήκυνση εικόνας και παράθεση οριζόντια"
 
 #: package/contents/ui/ConfigGeneral.qml:140
-#, fuzzy, kde-format
-#| msgid "Pad"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Γέμισμα"
 
 #: package/contents/ui/ConfigGeneral.qml:141
-#, fuzzy, kde-format
-#| msgid "The image is not transformed"
+#, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Η εικόνα δε μετασχηματίζεται"
 
 #: package/contents/ui/ConfigGeneral.qml:186
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
-msgstr "Γενικά"
+msgstr "Γενικά:"
 
 #: package/contents/ui/ConfigGeneral.qml:187
 #, fuzzy, kde-format
@@ -191,32 +174,28 @@ msgid "Remove path"
 msgstr ""
 
 #: package/contents/ui/ConfigPaths.qml:76
-#, fuzzy, kde-format
-#| msgid "Choose files"
+#, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Επιλογή αρχείων"
 
 #: package/contents/ui/ConfigPaths.qml:102
-#, fuzzy, kde-format
-#| msgid "Choose a folder"
+#, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Επιλογή φακέλου"
 
 #: package/contents/ui/ConfigPaths.qml:122
-#, fuzzy, kde-format
-#| msgid "Add folder..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
-msgstr "Προσθήκη φακέλου..."
+msgstr "Προσθήκη φακέλου…"
 
 #: package/contents/ui/ConfigPaths.qml:128
-#, fuzzy, kde-format
-#| msgid "Add files..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
-msgstr "Προσθήκη αρχείων..."
+msgstr "Προσθήκη αρχείων…"
 
 #: package/contents/ui/main.qml:452
 #, fuzzy, kde-format

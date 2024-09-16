@@ -18,8 +18,7 @@ msgstr ""
 "X-Generator: Lokalize 2.0\n"
 
 #: package/contents/ui/main.qml:77
-#, fuzzy, kde-format
-#| msgid "No quota restrictions found."
+#, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "Δεν εντοπίστηκαν περιορισμοί μεριδίων δίσκου"
@@ -38,8 +37,7 @@ msgstr ""
 "Εγκαταστήστε το 'quota'."
 
 #: package/contents/ui/main.qml:78
-#, fuzzy, kde-format
-#| msgid "Please install 'quota'"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
 msgstr "Εγκαταστήστε το 'quota'"

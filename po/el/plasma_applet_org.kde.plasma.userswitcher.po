@@ -18,8 +18,7 @@ msgstr ""
 "X-Generator: Lokalize 2.0\n"
 
 #: package/contents/config/config.qml:11
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Γενικά"
@@ -117,15 +116,13 @@ msgid "Switch to User %1"
 msgstr ""
 
 #: package/contents/ui/main.qml:206
-#, fuzzy, kde-format
-#| msgid "New Session"
+#, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "Νέα συνεδρία"
 
 #: package/contents/ui/main.qml:218
-#, fuzzy, kde-format
-#| msgid "Lock Screen"
+#, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Κλείδωμα οθόνης"

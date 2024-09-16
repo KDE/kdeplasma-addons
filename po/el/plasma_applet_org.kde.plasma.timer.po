@@ -18,26 +18,23 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
 #: package/contents/config/config.qml:19
-#, fuzzy, kde-format
-#| msgid "Predefined Timers"
+#, kde-format
 msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Προκαθορισμένα χρονόμετρα"
 
 #: package/contents/config/config.qml:24
-#, fuzzy, kde-format
-#| msgid "Advanced"
+#, kde-format
 msgctxt "@title"
 msgid "Advanced"
 msgstr "Για προχωρημένους"
@@ -72,25 +69,22 @@ msgid "After timer completes:"
 msgstr ""
 
 #: package/contents/ui/configAdvanced.qml:26
-#, fuzzy, kde-format
-#| msgid "Execute command"
+#, kde-format
 msgctxt "@option:check"
 msgid "Execute command:"
-msgstr "Εκτέλεση εντολής"
+msgstr "Εκτέλεση εντολής:"
 
 #: package/contents/ui/configAppearance.qml:30
-#, fuzzy, kde-format
-#| msgid "Display"
+#, kde-format
 msgctxt "@title:label"
 msgid "Display:"
-msgstr "Εμφάνιση"
+msgstr "Εμφάνιση:"
 
 #: package/contents/ui/configAppearance.qml:35
-#, fuzzy, kde-format
-#| msgid "Show title"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
-msgstr "Εμφάνιση τίτλου"
+msgstr "Εμφάνιση τίτλου:"
 
 #: package/contents/ui/configAppearance.qml:52
 #, kde-format
@@ -99,8 +93,7 @@ msgid "Show remaining time"
 msgstr ""
 
 #: package/contents/ui/configAppearance.qml:58
-#, fuzzy, kde-format
-#| msgid "Show seconds"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Εμφάνιση δευτερολέπτων"
@@ -119,11 +112,10 @@ msgid "Show progress bar"
 msgstr ""
 
 #: package/contents/ui/configAppearance.qml:78
-#, fuzzy, kde-format
-#| msgid "Notifications"
+#, kde-format
 msgctxt "@title:label"
 msgid "Notifications:"
-msgstr "Ειδοποιήσεις"
+msgstr "Ειδοποιήσεις:"
 
 #: package/contents/ui/configAppearance.qml:82
 #, fuzzy, kde-format
@@ -205,22 +197,19 @@ msgid "Timer finished"
 msgstr "Ολοκλήρωση χρονομέτρου"
 
 #: package/contents/ui/main.qml:130
-#, fuzzy, kde-format
-#| msgid "&Start"
+#, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Εκκίνηση"
 
 #: package/contents/ui/main.qml:135
-#, fuzzy, kde-format
-#| msgid "S&top"
+#, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Σ&ταμάτημα"
 
 #: package/contents/ui/main.qml:140
-#, fuzzy, kde-format
-#| msgid "&Reset"
+#, kde-format
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Μηδενισμός"

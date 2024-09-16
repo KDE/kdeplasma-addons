@@ -18,12 +18,11 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 2.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 2.0\n"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Εμφάνιση"
@@ -144,29 +143,25 @@ msgid "Select All"
 msgstr ""
 
 #: package/contents/ui/main.qml:474
-#, fuzzy, kde-format
-#| msgid "Bold"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Έντονα"
 
 #: package/contents/ui/main.qml:486
-#, fuzzy, kde-format
-#| msgid "Italic"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Πλάγια"
 
 #: package/contents/ui/main.qml:498
-#, fuzzy, kde-format
-#| msgid "Underline"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Υπογράμμιση"
 
 #: package/contents/ui/main.qml:510
-#, fuzzy, kde-format
-#| msgid "Strikethrough"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Επιγράμμιση"
@@ -182,57 +177,49 @@ msgid "Are you sure you want to discard this note?"
 msgstr ""
 
 #: package/contents/ui/main.qml:605
-#, fuzzy, kde-format
-#| msgid "White"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Λευκό"
 
 #: package/contents/ui/main.qml:609
-#, fuzzy, kde-format
-#| msgid "Black"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Μαύρο"
 
 #: package/contents/ui/main.qml:613
-#, fuzzy, kde-format
-#| msgid "Red"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Κόκκινο"
 
 #: package/contents/ui/main.qml:617
-#, fuzzy, kde-format
-#| msgid "Orange"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Πορτοκαλί"
 
 #: package/contents/ui/main.qml:621
-#, fuzzy, kde-format
-#| msgid "Yellow"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Κίτρινο"
 
 #: package/contents/ui/main.qml:625
-#, fuzzy, kde-format
-#| msgid "Green"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Πράσινο"
 
 #: package/contents/ui/main.qml:629
-#, fuzzy, kde-format
-#| msgid "Blue"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Μπλε"
 
 #: package/contents/ui/main.qml:633
-#, fuzzy, kde-format
-#| msgid "Pink"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Ροζ"

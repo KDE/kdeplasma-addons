@@ -42,8 +42,7 @@ msgid "Definition for \"%1\" has been copied to clipboard"
 msgstr ""
 
 #: dictionaryrunner_config.cpp:22
-#, fuzzy, kde-format
-#| msgid "Trigger Word"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Trigger word:"
-msgstr "Λέξη ενεργοποίησης"
+msgstr "Λέξη ενεργοποίησης:"

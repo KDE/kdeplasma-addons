@@ -18,54 +18,47 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.5\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 1.5\n"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Εμφάνιση"
 
 #: package/contents/ui/configAppearance.qml:24
-#, fuzzy, kde-format
-#| msgid "Font"
+#, kde-format
 msgctxt "@title:group"
 msgid "Font:"
-msgstr "Γραμματοσειρά"
+msgstr "Γραμματοσειρά:"
 
 #: package/contents/ui/configAppearance.qml:25
-#, fuzzy, kde-format
-#| msgid "Bold text"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bold text"
 msgstr "Έντονο κείμενο"
 
 #: package/contents/ui/configAppearance.qml:30
-#, fuzzy, kde-format
-#| msgid "Italic text"
+#, kde-format
 msgctxt "@option:check"
 msgid "Italic text"
 msgstr "Πλάγιο κείμενο"
 
 #: package/contents/ui/configAppearance.qml:39
-#, fuzzy, kde-format
-#| msgid "Fuzzyness"
+#, kde-format
 msgctxt "@title:group"
 msgid "Fuzzyness:"
-msgstr "Ασάφεια"
+msgstr "Ασάφεια:"
 
 #: package/contents/ui/configAppearance.qml:49
-#, fuzzy, kde-format
-#| msgid "Accurate"
+#, kde-format
 msgctxt "@item:inrange"
 msgid "Accurate"
 msgstr "Ακριβείας"
 
 #: package/contents/ui/configAppearance.qml:58
-#, fuzzy, kde-format
-#| msgid "Fuzzy"
+#, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"
 msgstr "Ασαφές"
