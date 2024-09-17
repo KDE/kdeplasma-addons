@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Alexander Potashev <aspotashev@gmail.com>, 2018.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2019, 2021, 2022, 2023.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2019, 2021, 2022, 2023, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-29 00:40+0000\n"
-"PO-Revision-Date: 2023-12-24 18:32+0300\n"
+"PO-Revision-Date: 2024-09-15 13:47+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -26,9 +26,7 @@ msgid "Positioning:"
 msgstr "Расположение:"
 
 #: package/contents/ui/config.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Scaled and Cropped"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "Масштабирование с кадрированием"
@@ -40,9 +38,7 @@ msgid "Scaled"
 msgstr "На весь рабочий стол"
 
 #: package/contents/ui/config.qml:60
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Scaled, Keep Proportions"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
 msgstr "По центру пропорционально"
