@@ -64,12 +64,15 @@
         "Description[ia]": "Lancea tu applicationes favorite",
         "Description[it]": "Avvia le tue applicazioni preferite",
         "Description[ka]": "გაუშვით თქვენი რჩეული პროგრამები",
+        "Description[nl]": "Uw favoriete programma's starten",
         "Description[pl]": "Uruchamia ulubione programy",
+        "Description[ru]": "Быстрый запуск избранных приложений",
         "Description[sl]": "Zaženi vaše priljubljene aplikacije",
         "Description[sv]": "Start dina favoritprogram",
         "Description[tr]": "Favori uygulamaları çalıştır",
         "Description[uk]": "Запуск ваших улюблених програм",
         "Description[x-test]": "xxLaunch your favourite applicationsxx",
+        "Description[zh_TW]": "啟動您最愛的應用程式",
         "FormFactors": [
             "desktop"
         ],
