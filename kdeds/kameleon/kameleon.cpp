@@ -94,6 +94,7 @@ void Kameleon::setEnabled(bool enabled)
         qCInfo(KAMELEON) << "enabled changed" << enabled;
         m_enabled = enabled;
         m_config->group("General").writeEntry<bool>("DeviceLedsAccentColored", enabled);
+        m_config->sync();
 
         if (enabled) {
             applyColor(m_accentColor);
