@@ -456,12 +456,10 @@ msgid "%1 %2"
 msgstr "%1 %2"
 
 #: package/contents/ui/main.qml:382
-#, fuzzy, kde-format
-#| msgctxt "wind direction, speed"
-#| msgid "%1 %2 %3"
+#, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
-msgstr "%1 %2 %3"
+msgstr "%1 %2 (%3)"
 
 #: package/contents/ui/main.qml:385
 #, kde-format
