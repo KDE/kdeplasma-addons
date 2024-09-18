@@ -100,6 +100,7 @@
         "Name[bg]": "Уеб браузър",
         "Name[ca@valencia]": "Navegador web",
         "Name[ca]": "Navegador web",
+        "Name[cs]": "Internetový prohlížeč",
         "Name[de]": "Webbrowser",
         "Name[en_GB]": "Web Browser",
         "Name[es]": "Navegador web",
@@ -109,11 +110,13 @@
         "Name[it]": "Browser web",
         "Name[ka]": "ვებ-ბრაუზერი",
         "Name[pl]": "Przeglądarka sieciowa",
+        "Name[ru]": "Веб-браузер",
         "Name[sl]": "Spletni brskalnik",
         "Name[sv]": "Webbläsare",
         "Name[tr]": "Web Tarayıcısı",
         "Name[uk]": "Браузер",
         "Name[x-test]": "xxWeb Browserxx",
+        "Name[zh_TW]": "網頁瀏覽器",
         "Website": "https://kde.org/plasma-desktop"
     },
     "X-Plasma-API-Minimum-Version": "6.0"
