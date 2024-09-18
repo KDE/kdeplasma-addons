@@ -5,7 +5,7 @@
             {
                 "Email": "ematirov@gmail.com",
                 "Name": "Mikhail Ivchenko",
-                "Name[ar]": "Mikhail Ivchenko",
+                "Name[ar]": "ميخائيل ايفتشينكو",
                 "Name[az]": "Mikhail Ivchenko",
                 "Name[bg]": "Mikhail Ivchenko",
                 "Name[ca@valencia]": "Mikhail Ivchenko",
@@ -97,6 +97,7 @@
         "Id": "org.kde.plasma.webbrowser",
         "License": "GPL-2.0+",
         "Name": "Web Browser",
+        "Name[ar]": "متصفّح الوبّ",
         "Name[bg]": "Уеб браузър",
         "Name[ca@valencia]": "Navegador web",
         "Name[ca]": "Navegador web",

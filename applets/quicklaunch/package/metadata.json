@@ -5,7 +5,7 @@
             {
                 "Email": "nowrep@gmail.com",
                 "Name": "David Rosca",
-                "Name[ar]": "David Rosca",
+                "Name[ar]": "ديفيد روسكا",
                 "Name[az]": "David Rosca",
                 "Name[bg]": "David Rosca",
                 "Name[ca@valencia]": "David Rosca",
@@ -52,6 +52,7 @@
         "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Quicklaunch",
         "Category": "Application Launchers",
         "Description": "Launch your favourite applications",
+        "Description[ar]": "تشغل تطبيقاتك المفضلة",
         "Description[bg]": "Стартиране на вашите предпочитани приложения",
         "Description[ca@valencia]": "Inicia les vostres aplicacions preferides",
         "Description[ca]": "Llança les vostres aplicacions preferides",

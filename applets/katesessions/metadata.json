@@ -5,7 +5,7 @@
             {
                 "Email": "jowenn@kde.org",
                 "Name": "Joseph Wenninger",
-                "Name[ar]": "Joseph Wenninger",
+                "Name[ar]": "جوزيف وينينجر",
                 "Name[az]": "Joseph Wenninger",
                 "Name[bg]": "Joseph Wenninger",
                 "Name[ca@valencia]": "Joseph Wenninger",
@@ -52,6 +52,7 @@
         "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Kate Sessions",
         "Category": "Utilities",
         "Description": "Kate session launcher",
+        "Description[ar]": "مُطلق جلسات كيت",
         "Description[bg]": "Зареждане на сесии на Kate",
         "Description[ca@valencia]": "Iniciador de sessió de Kate",
         "Description[ca]": "Llançador de sessió del Kate",
