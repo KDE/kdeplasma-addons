@@ -45,7 +45,7 @@
             }
         ],
         "Description": "The current date and time, locally or in any timezone",
-        "Description[ar]": "التاريخ والوقت الحاليين، محلياً أو في أيّ منطقة زمنية",
+        "Description[ar]": "التاريخ والوقت الحاليين,محلياً أو في أيّ منطقة زمنية",
         "Description[az]": "Cari tarix və vaxt. Yerli və ya istənilən vaxt qurşağı",
         "Description[bg]": "Настояща дата и час на местната или друга часова зона",
         "Description[ca@valencia]": "La data i l'hora actuals, localment o en qualsevol zona horària",
