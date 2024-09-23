@@ -51,7 +51,7 @@
         ],
         "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Cube",
         "Category": "Window Management",
-        "Description": "Arrange desktops in a virtual cube",
+        "Description": "Arrange desktops in a virtual cube; activated with a keyboard shortcut",
         "Description[ar]": "رتب أسطح المكتب في مكعب خيالي",
         "Description[bg]": "Подреждане на работните площи във виртуален куб",
         "Description[ca@valencia]": "Organitza els escriptoris en un cub virtual",
