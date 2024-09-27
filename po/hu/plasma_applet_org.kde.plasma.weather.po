@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-30 00:40+0000\n"
-"PO-Revision-Date: 2024-05-29 09:13+0200\n"
+"PO-Revision-Date: 2024-09-26 15:19+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.0\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -322,12 +322,10 @@ msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
 
 #: package/contents/ui/ForecastView.qml:119
-#, fuzzy, kde-format
-#| msgctxt "Probability of precipitation in percentage"
-#| msgid "︎☂%1%"
+#, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
-msgstr "︎☂%1%"
+msgstr "☂%1%"
 
 #: package/contents/ui/ForecastView.qml:127
 #: package/contents/ui/ForecastView.qml:135
@@ -516,7 +514,7 @@ msgctxt ""
 "humidity. Use the common phrasing for this concept and keep it short, adding "
 "a colon if necessary"
 msgid "Feels like %1"
-msgstr ""
+msgstr "Hőérzet: %1"
 
 #: plugin/locationlistmodel.cpp:41
 #, kde-format
