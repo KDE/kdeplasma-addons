@@ -49,10 +49,10 @@ void ConverterRunner::init()
     setMatchRegex(valueRegex);
 
     converter = std::make_unique<KUnitConversion::Converter>();
-    updateCompatibleUnits();
+    checkCompatibleUnits();
 
     m_currencyUpdateTimer->setInterval(24h);
-    connect(m_currencyUpdateTimer, &QTimer::timeout, this, &ConverterRunner::updateCompatibleUnits);
+    connect(m_currencyUpdateTimer, &QTimer::timeout, this, &ConverterRunner::checkCompatibleUnits);
     m_currencyUpdateTimer->start();
 }
 
@@ -215,29 +215,27 @@ QList<KUnitConversion::Unit> ConverterRunner::createResultUnits(QString &outputU
     return units;
 }
 
-void ConverterRunner::updateCompatibleUnits()
+void ConverterRunner::checkCompatibleUnits()
 {
     // Add all currency symbols to the map, if their ISO code is supported by backend
-    bool isLatest = false;
     QMetaObject::invokeMethod(
         QCoreApplication::instance(),
         [this] {
             KUnitConversion::UnitCategory currencyCategory = converter->category(KUnitConversion::CurrencyCategory);
             auto updateJob = currencyCategory.syncConversionTable();
             if (!updateJob) [[unlikely]] {
-                return !compatibleUnits.empty();
+                if (compatibleUnits.empty()) {
+                    QMetaObject::invokeMethod(this, &ConverterRunner::updateCompatibleUnits);
+                }
+                return;
             }
-            QEventLoop loop;
-            loop.connect(updateJob, &KUnitConversion::UpdateJob::finished, &loop, &QEventLoop::quit);
-            loop.exec();
-            return false;
+            connect(updateJob, &KUnitConversion::UpdateJob::finished, this, &ConverterRunner::updateCompatibleUnits);
         },
-        Qt::BlockingQueuedConnection,
-        &isLatest);
-    if (isLatest) {
-        return;
-    }
+        Qt::BlockingQueuedConnection);
+}
 
+void ConverterRunner::updateCompatibleUnits()
+{
     KUnitConversion::UnitCategory currencyCategory = converter->category(KUnitConversion::CurrencyCategory);
     const QList<QLocale> allLocales = QLocale::matchingLocales(QLocale::AnyLanguage, QLocale::AnyScript, QLocale::AnyCountry);
     const QStringList availableISOCodes = currencyCategory.allUnits();
@@ -263,4 +261,5 @@ void ConverterRunner::updateCompatibleUnits()
         }
     }
 }
+
 #include "converterrunner.moc"
