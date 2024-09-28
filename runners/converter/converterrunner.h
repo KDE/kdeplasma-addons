@@ -35,6 +35,7 @@ public:
     QMimeData *mimeDataForMatch(const QueryMatch &match) override;
 
 private Q_SLOTS:
+    void checkCompatibleUnits();
     void updateCompatibleUnits();
 
 private:
