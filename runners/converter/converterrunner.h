@@ -45,7 +45,7 @@ private:
     /** To convert currency symbols back to ISO string and handle case sensitive units */
     QMap<QString, QString> compatibleUnits;
 
-    QTimer m_currencyUpdateTimer;
+    QTimer *m_currencyUpdateTimer;
 
     const KRunner::Actions actionList;
     QPair<bool, double> stringToDouble(const QStringView &value);

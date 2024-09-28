@@ -26,6 +26,7 @@ Q_DECLARE_METATYPE(KUnitConversion::Value)
 
 ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
+    , m_currencyUpdateTimer(new QTimer(this))
     , actionList({Action(QStringLiteral("copy"), QStringLiteral("edit-copy"), i18n("Copy unit and number"))})
 {
     addSyntax(QStringLiteral(":q:"),
@@ -50,9 +51,9 @@ void ConverterRunner::init()
     converter = std::make_unique<KUnitConversion::Converter>();
     updateCompatibleUnits();
 
-    m_currencyUpdateTimer.setInterval(24h);
-    connect(&m_currencyUpdateTimer, &QTimer::timeout, this, &ConverterRunner::updateCompatibleUnits);
-    QMetaObject::invokeMethod(&m_currencyUpdateTimer, qOverload<>(&QTimer::start));
+    m_currencyUpdateTimer->setInterval(24h);
+    connect(m_currencyUpdateTimer, &QTimer::timeout, this, &ConverterRunner::updateCompatibleUnits);
+    m_currencyUpdateTimer->start();
 }
 
 ConverterRunner::~ConverterRunner() = default;
