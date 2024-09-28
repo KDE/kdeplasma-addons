@@ -32,6 +32,13 @@ private Q_SLOTS:
 void ConverterRunnerTest::initTestCase()
 {
     initProperties();
+
+    Converter converter;
+    KUnitConversion::UnitCategory currencyCategory = converter.category(KUnitConversion::CurrencyCategory);
+    if (auto job = currencyCategory.syncConversionTable()) {
+        QSignalSpy finishedSpy(job, &KUnitConversion::UpdateJob::finished);
+        QVERIFY(!finishedSpy.empty() || finishedSpy.wait());
+    }
 }
 
 /**
