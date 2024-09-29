@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2024-09-29 00:40+0000\n"
 "PO-Revision-Date: 2023-05-03 08:49+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -21,12 +21,12 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: converterrunner.cpp:29
+#: converterrunner.cpp:30
 #, kde-format
 msgid "Copy unit and number"
 msgstr "Skopiuj jednostkę i liczbę"
 
-#: converterrunner.cpp:32
+#: converterrunner.cpp:33
 #, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
@@ -36,7 +36,7 @@ msgstr ""
 "jednostka. Możesz użyć apletu Przelicznik jednostek, aby znaleźć wszystkie "
 "dostępne jednostki."
 
-#: converterrunner.cpp:39
+#: converterrunner.cpp:40
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
