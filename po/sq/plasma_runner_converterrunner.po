@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2024-09-29 02:29+0000\n"
 "PO-Revision-Date: 2010-02-25 14:59+0000\n"
 "Last-Translator: Vilson Gjeci <vilsongjeci@gmail.com>\n"
 "Language-Team: Albanian <sq@li.org>\n"
@@ -19,12 +19,12 @@ msgstr ""
 "X-Generator: Launchpad (build 12883)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: converterrunner.cpp:29
+#: converterrunner.cpp:30
 #, kde-format
 msgid "Copy unit and number"
 msgstr ""
 
-#: converterrunner.cpp:32
+#: converterrunner.cpp:33
 #, fuzzy, kde-format
 #| msgid ""
 #| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
@@ -38,7 +38,7 @@ msgstr ""
 "\". Ju mund të përdorni programthin e Konvertimit të njësive për të gjetur "
 "të gjitha njësitë e disponueshme."
 
-#: converterrunner.cpp:39
+#: converterrunner.cpp:40
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
