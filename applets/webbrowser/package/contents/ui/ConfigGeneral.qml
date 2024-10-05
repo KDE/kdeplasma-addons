@@ -77,6 +77,7 @@ KCM.SimpleKCM {
             QQC2.RadioButton {
                 id: useConstantZoom
                 text: i18nc("@option:radio", "Fixed scale:")
+                checked: !cfg_useMinViewWidth
 
                 QQC2.ButtonGroup.group: zoomGroup
 
