@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 00:38+0000\n"
+"POT-Creation-Date: 2024-10-06 02:32+0000\n"
 "PO-Revision-Date: 2024-04-03 08:47+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -124,7 +124,7 @@ msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "Fiksēts mērogs:"
 
-#: package/contents/ui/ConfigGeneral.qml:113
+#: package/contents/ui/ConfigGeneral.qml:114
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"

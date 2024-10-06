@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-03-11 00:38+0000\n"
+"POT-Creation-Date: 2024-10-06 02:32+0000\n"
 "PO-Revision-Date: 2024-03-11 09:04+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -124,7 +124,7 @@ msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "Fiksno merilo:"
 
-#: package/contents/ui/ConfigGeneral.qml:113
+#: package/contents/ui/ConfigGeneral.qml:114
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
