@@ -207,6 +207,11 @@ PlasmoidItem {
                 onUrlChanged: plasmoid.configuration.url = url;
                 Component.onCompleted: url = plasmoid.configuration.useDefaultUrl ? plasmoid.configuration.defaultUrl : plasmoid.configuration.url;
 
+                profile: WebEngineProfile {
+                    storageName: Plasmoid.metaData.pluginId
+                    offTheRecord: plasmoid.configuration.privateBrowsing
+                }
+
                 readonly property bool useMinViewWidth : plasmoid.configuration.useMinViewWidth
 
                 Connections {

@@ -39,5 +39,8 @@
     <entry name="enableNavigationBar" type="Bool">
       <default>true</default>
     </entry>
+    <entry name="privateBrowsing" type="Bool">
+      <default>true</default>
+    </entry>
   </group>
 </kcfg>

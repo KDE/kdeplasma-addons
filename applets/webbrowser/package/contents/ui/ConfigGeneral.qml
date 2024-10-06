@@ -12,6 +12,7 @@ KCM.SimpleKCM {
     property alias cfg_constantZoomFactor: constantZoomFactor.value
     property alias cfg_useDefaultUrl: useDefaultUrlRadio.checked
     property alias cfg_defaultUrl: defaultUrl.text
+    property alias cfg_privateBrowsing: privateBrowsing.checked
 
     Kirigami.FormLayout {
         QQC2.ButtonGroup { id: defaultUrlGroup }
@@ -139,6 +140,19 @@ KCM.SimpleKCM {
 
                 from: 320
                 to: 3840
+            }
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        RowLayout {
+            Kirigami.FormData.label: i18nc("@title:group", "Browser Settings:")
+
+            QQC2.CheckBox {
+                id: privateBrowsing
+                text: i18nc("@option:radio", "Private Browsing")
             }
         }
     }
