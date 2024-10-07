@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-06 00:40+0000\n"
+"POT-Creation-Date: 2024-10-07 00:40+0000\n"
 "PO-Revision-Date: 2024-05-13 22:47+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -87,47 +87,59 @@ msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "Показване на лентата за навигация"
 
-#: package/contents/ui/ConfigGeneral.qml:21
+#: package/contents/ui/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "Зареждане на последно посетената страница"
 
-#: package/contents/ui/ConfigGeneral.qml:25
+#: package/contents/ui/ConfigGeneral.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "При стартиране:"
 
-#: package/contents/ui/ConfigGeneral.qml:32
+#: package/contents/ui/ConfigGeneral.qml:33
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Зареждане на тази страница винаги:"
 
-#: package/contents/ui/ConfigGeneral.qml:64 package/contents/ui/main.qml:106
+#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:106
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Въвеждане на URL"
 
-#: package/contents/ui/ConfigGeneral.qml:75
+#: package/contents/ui/ConfigGeneral.qml:76
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "Мащабиране на съдържание:"
 
-#: package/contents/ui/ConfigGeneral.qml:79
+#: package/contents/ui/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "Фиксиран мащаб:"
 
-#: package/contents/ui/ConfigGeneral.qml:114
+#: package/contents/ui/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Автоматично мащабиране, ако ширината е под"
+
+#: package/contents/ui/ConfigGeneral.qml:151
+#, kde-format
+msgctxt "@title:group"
+msgid "Browser Settings:"
+msgstr ""
+
+#: package/contents/ui/ConfigGeneral.qml:155
+#, kde-format
+msgctxt "@option:radio"
+msgid "Private Browsing"
+msgstr ""
 
 #: package/contents/ui/main.qml:67
 #, kde-format
@@ -176,13 +188,13 @@ msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Копиране адреса на препратката"
 
-#: package/contents/ui/main.qml:260
+#: package/contents/ui/main.qml:265
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Блокиран е изскачащ прозорец"
 
-#: package/contents/ui/main.qml:261
+#: package/contents/ui/main.qml:266
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

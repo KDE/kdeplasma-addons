@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-06 00:40+0000\n"
+"POT-Creation-Date: 2024-10-07 00:40+0000\n"
 "PO-Revision-Date: 2024-03-12 09:20+0100\n"
 "Last-Translator: xavier <xyz@yahoo.com>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -84,47 +84,59 @@ msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "Afficher la barre de navigation"
 
-#: package/contents/ui/ConfigGeneral.qml:21
+#: package/contents/ui/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "Charger la dernière page consultée"
 
-#: package/contents/ui/ConfigGeneral.qml:25
+#: package/contents/ui/ConfigGeneral.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "Au démarrage :"
 
-#: package/contents/ui/ConfigGeneral.qml:32
+#: package/contents/ui/ConfigGeneral.qml:33
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Toujours charger cette page :"
 
-#: package/contents/ui/ConfigGeneral.qml:64 package/contents/ui/main.qml:106
+#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:106
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Saisir une URL"
 
-#: package/contents/ui/ConfigGeneral.qml:75
+#: package/contents/ui/ConfigGeneral.qml:76
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "Mise à l'échelle des contenus :"
 
-#: package/contents/ui/ConfigGeneral.qml:79
+#: package/contents/ui/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "Échelle fixe :"
 
-#: package/contents/ui/ConfigGeneral.qml:114
+#: package/contents/ui/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Mise à l'échelle automatique si la largeur est inférieure"
+
+#: package/contents/ui/ConfigGeneral.qml:151
+#, kde-format
+msgctxt "@title:group"
+msgid "Browser Settings:"
+msgstr ""
+
+#: package/contents/ui/ConfigGeneral.qml:155
+#, kde-format
+msgctxt "@option:radio"
+msgid "Private Browsing"
+msgstr ""
 
 #: package/contents/ui/main.qml:67
 #, kde-format
@@ -173,13 +185,13 @@ msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copier l'adresse du lien"
 
-#: package/contents/ui/main.qml:260
+#: package/contents/ui/main.qml:265
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Infobulles bloquées"
 
-#: package/contents/ui/main.qml:261
+#: package/contents/ui/main.qml:266
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"
