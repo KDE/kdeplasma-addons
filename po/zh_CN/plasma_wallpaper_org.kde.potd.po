@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kdeplasma-addons/plasma_wallpaper_org."
+"X-Crowdin-File: /kf6-stable/messages/kdeplasma-addons/plasma_wallpaper_org."
 "kde.potd.pot\n"
-"X-Crowdin-File-ID: 43667\n"
+"X-Crowdin-File-ID: 52296\n"
 
 #: package/contents/ui/config.qml:49
 #, kde-format
@@ -28,7 +28,7 @@ msgstr "位置："
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
-msgstr ""
+msgstr "缩放并裁剪"
 
 #: package/contents/ui/config.qml:56
 #, kde-format
@@ -40,7 +40,7 @@ msgstr "缩放"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
-msgstr ""
+msgstr "缩放，保持比例"
 
 #: package/contents/ui/config.qml:64
 #, kde-format
