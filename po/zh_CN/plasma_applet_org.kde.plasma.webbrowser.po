@@ -132,13 +132,13 @@ msgstr "自动缩放，若宽度小于"
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
-msgstr ""
+msgstr "浏览器设置："
 
 #: package/contents/ui/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
-msgstr ""
+msgstr "隐私浏览"
 
 #: package/contents/ui/main.qml:67
 #, kde-format

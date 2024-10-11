@@ -28,7 +28,7 @@ msgstr "位置："
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
-msgstr ""
+msgstr "缩放并裁剪"
 
 #: package/contents/ui/config.qml:56
 #, kde-format
@@ -40,7 +40,7 @@ msgstr "缩放"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
-msgstr ""
+msgstr "缩放，保持比例"
 
 #: package/contents/ui/config.qml:64
 #, kde-format
