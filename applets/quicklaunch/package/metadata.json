@@ -79,6 +79,7 @@
         "Description[tr]": "Favori uygulamaları çalıştır",
         "Description[uk]": "Запуск ваших улюблених програм",
         "Description[x-test]": "xxLaunch your favourite applicationsxx",
+        "Description[zh_CN]": "启动您最常用的程序",
         "Description[zh_TW]": "啟動您最愛的應用程式",
         "FormFactors": [
             "desktop"
