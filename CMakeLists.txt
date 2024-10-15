@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 
 project(kdeplasma-addons)
-set(PROJECT_VERSION "6.2.1")
+set(PROJECT_VERSION "6.2.2")
 set(PROJECT_VERSION_MAJOR 6)
 
 ################# Disallow in-source build #################
