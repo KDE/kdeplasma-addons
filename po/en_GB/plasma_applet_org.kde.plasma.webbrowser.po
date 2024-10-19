@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-07 00:40+0000\n"
-"PO-Revision-Date: 2024-05-23 19:51+0100\n"
+"PO-Revision-Date: 2024-10-18 17:11+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -133,13 +133,13 @@ msgstr "Automatic scaling if width is below"
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
-msgstr ""
+msgstr "Browser Settings:"
 
 #: package/contents/ui/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
-msgstr ""
+msgstr "Private Browsing"
 
 #: package/contents/ui/main.qml:67
 #, kde-format
