@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-06 02:32+0000\n"
-"PO-Revision-Date: 2024-04-22 21:48+0530\n"
+"PO-Revision-Date: 2024-10-20 16:16+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -27,25 +27,25 @@ msgstr "பொதுவானவை"
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "தோற்றம்"
 
 #: package/contents/ui/ConfigAppearance.qml:33
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
-msgstr ""
+msgstr "சின்னம்:"
 
 #: package/contents/ui/ConfigAppearance.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
-msgstr ""
+msgstr "இணையதளத்தின் சின்னம்"
 
 #: package/contents/ui/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
-msgstr ""
+msgstr "இணைய உலாவியின் சின்னத்தை மாற்று"
 
 #: package/contents/ui/ConfigAppearance.qml:58
 #, kde-format
@@ -54,18 +54,19 @@ msgid ""
 "Current icon is %1. Click to open menu to change the current icon or reset "
 "to the default icon."
 msgstr ""
+"தற்போதைய சின்னம் %1 ஆகும். சின்னத்தை மாற்ற அல்லது இயல்பிருப்பாக மீட்டமைக்க கிளிக் செய்யவும்."
 
 #: package/contents/ui/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
-msgstr ""
+msgstr "சின்னத்தின் பெயர் \"%1\""
 
 #: package/contents/ui/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr ""
+msgstr "தேர்வு செய்…"
 
 #: package/contents/ui/ConfigAppearance.qml:99
 #, kde-format
@@ -77,102 +78,102 @@ msgstr ""
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
-msgstr ""
+msgstr "இயல்பிருப்பு சின்னத்தை மீட்டமை"
 
 #: package/contents/ui/ConfigAppearance.qml:118
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
-msgstr ""
+msgstr "உலாவல் பட்டையைக் காட்டு"
 
 #: package/contents/ui/ConfigGeneral.qml:21
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
-msgstr ""
+msgstr "கடைசியாக பார்த்த பக்கத்தை ஏற்று"
 
 #: package/contents/ui/ConfigGeneral.qml:25
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
-msgstr ""
+msgstr "துவக்கத்தில்"
 
 #: package/contents/ui/ConfigGeneral.qml:32
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
-msgstr ""
+msgstr "எப்போதும் இப்பக்கத்தை ஏற்று:"
 
 #: package/contents/ui/ConfigGeneral.qml:64 package/contents/ui/main.qml:106
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
-msgstr ""
+msgstr "முகவரியை உள்ளிடவும்"
 
 #: package/contents/ui/ConfigGeneral.qml:75
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
-msgstr ""
+msgstr "உருப்பெருக்கம்:"
 
 #: package/contents/ui/ConfigGeneral.qml:79
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
-msgstr ""
+msgstr "மாறா உருப்பெருக்கம்:"
 
 #: package/contents/ui/ConfigGeneral.qml:114
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
-msgstr ""
+msgstr "இதைவிட அகலம் குறைவாக இருந்தால் உருப்பெருக்கு"
 
 #: package/contents/ui/main.qml:67
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
-msgstr ""
+msgstr "முந்தைய பக்கத்திற்கு செல்"
 
 #: package/contents/ui/main.qml:74
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
-msgstr ""
+msgstr "பிந்தைய பக்கத்திற்கு செல்"
 
 #: package/contents/ui/main.qml:82
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
-msgstr ""
+msgstr "முகப்புக்கு செல்"
 
 #: package/contents/ui/main.qml:87
 #, kde-format
 msgid "Open Default URL"
-msgstr ""
+msgstr "இயல்பிருப்பு முகவரியைத் திற"
 
 #: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
-msgstr ""
+msgstr "இப்பக்கத்தை ஏற்றுவதை நிறுத்து"
 
 #: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
-msgstr ""
+msgstr "இப்பக்கத்தை மீளேற்று"
 
 #: package/contents/ui/main.qml:192
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
-msgstr ""
+msgstr "இணைப்பை உலாவியில் திற"
 
 #: package/contents/ui/main.qml:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
-msgstr ""
+msgstr "இணைப்பின் முகவரியை நகலெடு"
 
 #: package/contents/ui/main.qml:260
 #, kde-format
