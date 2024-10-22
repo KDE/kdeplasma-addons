@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-29 00:40+0000\n"
-"PO-Revision-Date: 2024-07-15 22:41+0200\n"
+"PO-Revision-Date: 2024-10-21 11:28+0200\n"
 "Last-Translator: rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
 "Language: da\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: package/contents/ui/config.qml:49
 #, kde-format
@@ -25,9 +25,7 @@ msgid "Positioning:"
 msgstr "Positionering:"
 
 #: package/contents/ui/config.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Scaled and Cropped"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "Skaleret og beskåret"
@@ -39,9 +37,7 @@ msgid "Scaled"
 msgstr "Skaleret"
 
 #: package/contents/ui/config.qml:60
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Scaled, Keep Proportions"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
 msgstr "Skaleret, behold proportioner"
