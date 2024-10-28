@@ -177,7 +177,11 @@ PlasmoidItem {
 
                             return model.name
                         }
-                        source: model.icon
+                        source: {
+                            model.icon !== ""
+                            ? "file://" + model.icon
+                            : ""
+                        }
                         subText: {
                             if (!root.showTechnicalInfo) {
                                 return ""
