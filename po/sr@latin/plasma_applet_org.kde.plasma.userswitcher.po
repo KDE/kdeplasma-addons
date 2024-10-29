@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-24 00:40+0000\n"
+"POT-Creation-Date: 2024-10-29 00:41+0000\n"
 "PO-Revision-Date: 2016-04-15 23:42+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -101,40 +101,40 @@ msgid "Unused"
 msgstr "nekorišćeno"
 
 # >> @item
-#: package/contents/ui/main.qml:187
+#: package/contents/ui/main.qml:191
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
 # >> @item
-#: package/contents/ui/main.qml:189
+#: package/contents/ui/main.qml:193
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "na %1 %2|/|na $[lok %1] %2"
 
-#: package/contents/ui/main.qml:197
+#: package/contents/ui/main.qml:201
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr ""
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:210
 #, fuzzy, kde-format
 #| msgid "New Session"
 msgctxt "@action"
 msgid "New Session"
 msgstr "Nova sesija"
 
-#: package/contents/ui/main.qml:218
+#: package/contents/ui/main.qml:222
 #, fuzzy, kde-format
 #| msgid "Lock Screen"
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Zaključaj ekran"
 
-#: package/contents/ui/main.qml:230
+#: package/contents/ui/main.qml:234
 #, fuzzy, kde-format
 #| msgid "Lock Screen"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
