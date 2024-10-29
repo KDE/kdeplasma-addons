@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-24 00:40+0000\n"
+"POT-Creation-Date: 2024-10-29 02:31+0000\n"
 "PO-Revision-Date: 2023-06-18 19:36+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -94,37 +94,37 @@ msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "Nefolosită"
 
-#: package/contents/ui/main.qml:187
+#: package/contents/ui/main.qml:191
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
-#: package/contents/ui/main.qml:189
+#: package/contents/ui/main.qml:193
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "pe %1 (%2)"
 
-#: package/contents/ui/main.qml:197
+#: package/contents/ui/main.qml:201
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr "Schimbă la utilizatorul „%1”"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:210
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "Sesiune nouă"
 
-#: package/contents/ui/main.qml:218
+#: package/contents/ui/main.qml:222
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Blochează ecranul"
 
-#: package/contents/ui/main.qml:230
+#: package/contents/ui/main.qml:234
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "Lock Screen"
