@@ -114,7 +114,7 @@ bool ComicEngine::requestSource(const QString &identifier)
     ComicProvider *provider = nullptr;
 
     QVariant data;
-    const IdentifierType identifierType = stringToIdentifierType(pkg.metadata().value(QStringLiteral("X-KDE-PlasmaComicProvider-SuffixType")));
+    const IdentifierType identifierType = stringToIdentifierType(pkg.metadata().value(u"X-KDE-PlasmaComicProvider-SuffixType"));
     if (identifierType == IdentifierType::DateIdentifier) {
         QDate date = QDate::fromString(parts[1], Qt::ISODate);
         if (!date.isValid()) {

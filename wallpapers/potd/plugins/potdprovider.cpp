@@ -36,7 +36,7 @@ PotdProvider::PotdProvider(QObject *parent, const KPluginMetaData &data, const Q
         d->name = QStringLiteral("Unknown");
     }
 
-    if (const QString identifier = data.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")); !identifier.isEmpty()) {
+    if (const QString identifier = data.value(u"X-KDE-PlasmaPoTDProvider-Identifier"); !identifier.isEmpty()) {
         d->identifier = identifier;
     } else {
         d->identifier = d->name;

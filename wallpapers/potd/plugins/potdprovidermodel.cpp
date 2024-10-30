@@ -36,9 +36,9 @@ QVariant PotdProviderModel::data(const QModelIndex &index, int role) const
     case Qt::DecorationRole:
         return item.iconName();
     case Roles::Id:
-        return item.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier"));
+        return item.value(u"X-KDE-PlasmaPoTDProvider-Identifier");
     case Roles::NotSafeForWork: {
-        return item.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-NotSafeForWork"), false);
+        return item.value(u"X-KDE-PlasmaPoTDProvider-NotSafeForWork", false);
     }
     default:
         return QVariant();
@@ -58,7 +58,7 @@ QHash<int, QByteArray> PotdProviderModel::roleNames() const
 int PotdProviderModel::indexOf(const QString &identifier)
 {
     auto it = std::find_if(m_providers.cbegin(), m_providers.cend(), [&identifier](const KPluginMetaData &metadata) {
-        return identifier == metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier"));
+        return identifier == metadata.value(u"X-KDE-PlasmaPoTDProvider-Identifier");
     });
 
     if (it == m_providers.cend()) {
@@ -83,7 +83,7 @@ void PotdProviderModel::loadPluginMetaData()
     m_providers.reserve(plugins.size());
 
     std::copy_if(plugins.cbegin(), plugins.cend(), std::back_inserter(m_providers), [](const KPluginMetaData &metadata) {
-        return !metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")).isEmpty();
+        return !metadata.value(u"X-KDE-PlasmaPoTDProvider-Identifier").isEmpty();
     });
 
     endResetModel();

@@ -55,7 +55,7 @@ bool isNetworkConnected()
 PotdClient::PotdClient(const KPluginMetaData &metadata, const QVariantList &args, QObject *parent)
     : QObject(parent)
     , m_metadata(metadata)
-    , m_identifier(metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")))
+    , m_identifier(metadata.value(u"X-KDE-PlasmaPoTDProvider-Identifier"))
     , m_args(args)
 {
     // updateSource() will be called in PotdClient::setUpdateOverMeteredConnection(bool)
@@ -307,7 +307,7 @@ void PotdEngine::updateSource(bool refresh)
 
         connect(clientPair.client, &PotdClient::done, this, &PotdEngine::slotDone);
         m_updateCount++;
-        qCDebug(WALLPAPERPOTD) << clientPair.client->m_metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier")) << "starts updating wallpaper.";
+        qCDebug(WALLPAPERPOTD) << clientPair.client->m_metadata.value(u"X-KDE-PlasmaPoTDProvider-Identifier") << "starts updating wallpaper.";
         clientPair.client->updateSource(refresh);
     }
 }
@@ -393,7 +393,7 @@ void PotdEngine::loadPluginMetaData()
     m_providersMap.reserve(plugins.size());
 
     for (const KPluginMetaData &metadata : plugins) {
-        const QString identifier = metadata.value(QStringLiteral("X-KDE-PlasmaPoTDProvider-Identifier"));
+        const QString identifier = metadata.value(u"X-KDE-PlasmaPoTDProvider-Identifier");
         if (!identifier.isEmpty()) {
             m_providersMap.emplace(identifier, metadata);
         }

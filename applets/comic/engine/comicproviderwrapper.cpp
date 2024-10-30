@@ -330,7 +330,7 @@ void ComicProviderWrapper::init()
 IdentifierType ComicProviderWrapper::identifierType() const
 {
     IdentifierType result = IdentifierType::StringIdentifier;
-    const QString type = mProvider->description().value(QLatin1String("X-KDE-PlasmaComicProvider-SuffixType"));
+    const QString type = mProvider->description().value(u"X-KDE-PlasmaComicProvider-SuffixType");
     if (type == QLatin1String("Date")) {
         result = IdentifierType::DateIdentifier;
     } else if (type == QLatin1String("Number")) {
