@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-22 00:38+0000\n"
+"POT-Creation-Date: 2024-11-05 00:41+0000\n"
 "PO-Revision-Date: 2024-07-25 12:27+0200\n"
 "Last-Translator: rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -43,17 +43,67 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Num lock"
 
-#: contents/ui/main.qml:87
+#: contents/ui/main.qml:114
+#, kde-format
+msgid "Alt is latched"
+msgstr ""
+
+#: contents/ui/main.qml:116
+#, kde-format
+msgid "Alt is locked"
+msgstr ""
+
+#: contents/ui/main.qml:120
+#, kde-format
+msgid "Shift is latched"
+msgstr ""
+
+#: contents/ui/main.qml:122
+#, kde-format
+msgid "Shift is locked"
+msgstr ""
+
+#: contents/ui/main.qml:126
+#, kde-format
+msgid "Control is latched"
+msgstr ""
+
+#: contents/ui/main.qml:128
+#, kde-format
+msgid "Control is locked"
+msgstr ""
+
+#: contents/ui/main.qml:132
+#, kde-format
+msgid "Meta is latched"
+msgstr ""
+
+#: contents/ui/main.qml:134
+#, kde-format
+msgid "Meta is locked"
+msgstr ""
+
+#: contents/ui/main.qml:138
+#, kde-format
+msgid "Alt Gr is latched"
+msgstr ""
+
+#: contents/ui/main.qml:140
+#, kde-format
+msgid "Alt Gr is locked"
+msgstr ""
+
+#: contents/ui/main.qml:144
 #, kde-format
 msgid "Caps Lock activated"
 msgstr "Caps lock aktiveret"
 
-#: contents/ui/main.qml:90
+#: contents/ui/main.qml:147
 #, kde-format
 msgid "Num Lock activated"
 msgstr "Num lock aktiveret"
 
-#: contents/ui/main.qml:98
+#: contents/ui/main.qml:155
 #, kde-format
 msgid "No lock keys activated"
 msgstr "Ingen låsetaster aktiveret"
