@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 01:38+0000\n"
-"PO-Revision-Date: 2024-05-30 19:25+0200\n"
+"PO-Revision-Date: 2024-11-06 23:19+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.0\n"
+"X-Generator: Lokalize 24.11.70\n"
 
 #: dictionaryrunner.cpp:34 dictionaryrunner_config.cpp:34
 #: dictionaryrunner_config.cpp:52
@@ -38,7 +38,7 @@ msgstr "Намира дефиницията на :q:."
 #: dictionaryrunner.cpp:118
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
-msgstr "Дефиницията за \"%1\" е копирана в клипборда"
+msgstr "Дефиницията за „%1“ е копирана в клипборда"
 
 #: dictionaryrunner_config.cpp:22
 #, kde-format
