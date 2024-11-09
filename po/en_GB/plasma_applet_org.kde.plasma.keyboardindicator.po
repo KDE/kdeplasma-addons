@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-05 00:41+0000\n"
-"PO-Revision-Date: 2024-05-23 19:49+0100\n"
+"PO-Revision-Date: 2024-11-08 14:56+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
 "Language: en_GB\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -45,52 +45,52 @@ msgstr "Num Lock"
 #: contents/ui/main.qml:114
 #, kde-format
 msgid "Alt is latched"
-msgstr ""
+msgstr "Alt is latched"
 
 #: contents/ui/main.qml:116
 #, kde-format
 msgid "Alt is locked"
-msgstr ""
+msgstr "Alt is locked"
 
 #: contents/ui/main.qml:120
 #, kde-format
 msgid "Shift is latched"
-msgstr ""
+msgstr "Shift is latched"
 
 #: contents/ui/main.qml:122
 #, kde-format
 msgid "Shift is locked"
-msgstr ""
+msgstr "Shift is locked"
 
 #: contents/ui/main.qml:126
 #, kde-format
 msgid "Control is latched"
-msgstr ""
+msgstr "Control is latched"
 
 #: contents/ui/main.qml:128
 #, kde-format
 msgid "Control is locked"
-msgstr ""
+msgstr "Control is locked"
 
 #: contents/ui/main.qml:132
 #, kde-format
 msgid "Meta is latched"
-msgstr ""
+msgstr "Meta is latched"
 
 #: contents/ui/main.qml:134
 #, kde-format
 msgid "Meta is locked"
-msgstr ""
+msgstr "Meta is locked"
 
 #: contents/ui/main.qml:138
 #, kde-format
 msgid "Alt Gr is latched"
-msgstr ""
+msgstr "Alt Gr is latched"
 
 #: contents/ui/main.qml:140
 #, kde-format
 msgid "Alt Gr is locked"
-msgstr ""
+msgstr "Alt Gr is locked"
 
 #: contents/ui/main.qml:144
 #, kde-format
