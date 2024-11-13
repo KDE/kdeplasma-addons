@@ -28,6 +28,9 @@ PlasmoidItem {
     switchWidth: Kirigami.Units.gridUnit * 5
     switchHeight: Kirigami.Units.gridUnit * 5
 
+    expandedOnDragHover: true
+
+    Plasmoid.icon: "knotes-symbolic"
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
     // this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
@@ -75,36 +78,6 @@ PlasmoidItem {
 
     NoteManager {
         id: noteManager
-    }
-
-    // Only exists because the default CompactRepresentation doesn't open on drag.
-    // TODO remove once it gains that feature (perhaps optionally?)
-    compactRepresentation: DragDrop.DropArea {
-        id: compactDropArea
-        onDragEnter: activationTimer.restart()
-        onDragLeave: activationTimer.stop()
-
-        Timer {
-            id: activationTimer
-            interval: 250 // matches taskmanager delay
-            onTriggered: root.expanded = true
-        }
-
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-
-            property bool wasExpanded
-
-            onPressed: wasExpanded = root.expanded
-            onClicked: root.expanded = !wasExpanded
-
-            Kirigami.Icon {
-                anchors.fill: parent
-                source: "knotes-symbolic"
-                active: parent.containsMouse
-            }
-        }
     }
 
     preloadFullRepresentation: true
