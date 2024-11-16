@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-05 00:41+0000\n"
-"PO-Revision-Date: 2024-04-02 17:03+0300\n"
-"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
+"PO-Revision-Date: 2024-11-12 20:42+0200\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -47,52 +47,52 @@ msgstr "Ciparslēgs"
 #: contents/ui/main.qml:114
 #, kde-format
 msgid "Alt is latched"
-msgstr ""
+msgstr "„Alt“ ir īslaicīgi bloķēts"
 
 #: contents/ui/main.qml:116
 #, kde-format
 msgid "Alt is locked"
-msgstr ""
+msgstr "„Alt“ ir bloķēts"
 
 #: contents/ui/main.qml:120
 #, kde-format
 msgid "Shift is latched"
-msgstr ""
+msgstr "„Shift“ ir īslaicīgi bloķēts"
 
 #: contents/ui/main.qml:122
 #, kde-format
 msgid "Shift is locked"
-msgstr ""
+msgstr "„Shift“ ir bloķēts"
 
 #: contents/ui/main.qml:126
 #, kde-format
 msgid "Control is latched"
-msgstr ""
+msgstr "„Ctrl“ ir īslaicīgi bloķēts"
 
 #: contents/ui/main.qml:128
 #, kde-format
 msgid "Control is locked"
-msgstr ""
+msgstr "„Ctrl“ ir bloķēts"
 
 #: contents/ui/main.qml:132
 #, kde-format
 msgid "Meta is latched"
-msgstr ""
+msgstr "„Meta“ ir īslaicīgi bloķēts"
 
 #: contents/ui/main.qml:134
 #, kde-format
 msgid "Meta is locked"
-msgstr ""
+msgstr "„Meta“ ir bloķēts"
 
 #: contents/ui/main.qml:138
 #, kde-format
 msgid "Alt Gr is latched"
-msgstr ""
+msgstr "„Alt Gr“ ir īslaicīgi bloķēts"
 
 #: contents/ui/main.qml:140
 #, kde-format
 msgid "Alt Gr is locked"
-msgstr ""
+msgstr "„Alt Gr“ ir bloķēts"
 
 #: contents/ui/main.qml:144
 #, kde-format

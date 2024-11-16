@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-07 00:40+0000\n"
-"PO-Revision-Date: 2024-04-03 08:47+0300\n"
+"PO-Revision-Date: 2024-11-12 20:40+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -134,13 +134,13 @@ msgstr "Automātiska mērogošana, ja platums ir zem"
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
-msgstr ""
+msgstr "Pārlūka iestatījumi:"
 
 #: package/contents/ui/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
-msgstr ""
+msgstr "Privātā pārlūkošana"
 
 #: package/contents/ui/main.qml:67
 #, kde-format
