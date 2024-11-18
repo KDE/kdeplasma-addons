@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-05 00:41+0000\n"
-"PO-Revision-Date: 2024-04-22 21:46+0530\n"
+"PO-Revision-Date: 2024-11-17 22:19+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
 "Language: ta\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 24.08.3\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -34,13 +34,13 @@ msgstr "இவற்றின் நிலையை காட்டு:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
-msgstr ""
+msgstr "Caps Lock"
 
 #: contents/ui/configAppearance.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"
-msgstr ""
+msgstr "Num Lock"
 
 #: contents/ui/main.qml:114
 #, kde-format
@@ -95,14 +95,14 @@ msgstr ""
 #: contents/ui/main.qml:144
 #, kde-format
 msgid "Caps Lock activated"
-msgstr ""
+msgstr "Caps Lock செயலிலுள்ளது"
 
 #: contents/ui/main.qml:147
 #, kde-format
 msgid "Num Lock activated"
-msgstr ""
+msgstr "Num Lock செயலிலுள்ளது"
 
 #: contents/ui/main.qml:155
 #, kde-format
 msgid "No lock keys activated"
-msgstr ""
+msgstr "எந்த பூட்டுவிசையும் செயலிலில்லை"
