@@ -116,11 +116,11 @@ PlasmoidItem {
         implicitWidth: column.implicitWidth
 
         Layout.preferredWidth: Kirigami.Units.gridUnit * 12
-        Layout.preferredHeight: implicitHeight
+        Layout.preferredHeight: Math.min(implicitHeight, Screen.height / 3)
         Layout.minimumWidth: Layout.preferredWidth
         Layout.minimumHeight: Layout.preferredHeight
         Layout.maximumWidth: Layout.preferredWidth
-        Layout.maximumHeight: Screen.height / 2
+        Layout.maximumHeight: Layout.preferredHeight
 
         Sessions.SessionManagement {
             id: sm
