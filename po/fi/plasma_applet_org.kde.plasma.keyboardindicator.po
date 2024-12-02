@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Tommi Nieminen <translator@legisign.org>, 2018, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2018, 2021, 2022, 2023, 2024 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-05 00:41+0000\n"
-"PO-Revision-Date: 2023-07-27 11:32+0300\n"
+"PO-Revision-Date: 2024-11-06 17:18+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -42,55 +42,60 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Numerolukko"
 
+# *** TARKISTA: Ei aavistustakaan, miten ”latched” tässä eroaa sanasta ”locked”. Latch on kuitenkin periaatteessa salpa (perinteinen tapa lukita ovi yksinkertaisemmin kuin lukolla).
 #: contents/ui/main.qml:114
 #, kde-format
 msgid "Alt is latched"
-msgstr ""
+msgstr "Alt on salvattu"
 
 #: contents/ui/main.qml:116
 #, kde-format
 msgid "Alt is locked"
-msgstr ""
+msgstr "Alt on lukittu"
 
+# *** TARKISTA: Ei aavistustakaan, miten ”latched” tässä eroaa sanasta ”locked”. Latch on kuitenkin periaatteessa salpa (perinteinen tapa lukita ovi yksinkertaisemmin kuin lukolla).
 #: contents/ui/main.qml:120
 #, kde-format
 msgid "Shift is latched"
-msgstr ""
+msgstr "Vaihto on salvattu"
 
 #: contents/ui/main.qml:122
 #, kde-format
 msgid "Shift is locked"
-msgstr ""
+msgstr "Vaihto on lukittu"
 
+# *** TARKISTA: Ei aavistustakaan, miten ”latched” tässä eroaa sanasta ”locked”. Latch on kuitenkin periaatteessa salpa (perinteinen tapa lukita ovi yksinkertaisemmin kuin lukolla).
 #: contents/ui/main.qml:126
 #, kde-format
 msgid "Control is latched"
-msgstr ""
+msgstr "Ctrl on salvattu"
 
 #: contents/ui/main.qml:128
 #, kde-format
 msgid "Control is locked"
-msgstr ""
+msgstr "Ctrl on lukittu"
 
+# *** TARKISTA: Ei aavistustakaan, miten ”latched” tässä eroaa sanasta ”locked”. Latch on kuitenkin periaatteessa salpa (perinteinen tapa lukita ovi yksinkertaisemmin kuin lukolla).
 #: contents/ui/main.qml:132
 #, kde-format
 msgid "Meta is latched"
-msgstr ""
+msgstr "Meta on salvattu"
 
 #: contents/ui/main.qml:134
 #, kde-format
 msgid "Meta is locked"
-msgstr ""
+msgstr "Meta on lukittu"
 
+# *** TARKISTA: Ei aavistustakaan, miten ”latched” tässä eroaa sanasta ”locked”. Latch on kuitenkin periaatteessa salpa (perinteinen tapa lukita ovi yksinkertaisemmin kuin lukolla).
 #: contents/ui/main.qml:138
 #, kde-format
 msgid "Alt Gr is latched"
-msgstr ""
+msgstr "AltGr on salvattu"
 
 #: contents/ui/main.qml:140
 #, kde-format
 msgid "Alt Gr is locked"
-msgstr ""
+msgstr "AltGr on lukittu"
 
 #: contents/ui/main.qml:144
 #, kde-format
