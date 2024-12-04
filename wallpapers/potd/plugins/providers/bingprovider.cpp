@@ -64,16 +64,17 @@ void BingProvider::pageRequestFinished(KJob *_job)
 
         // Parse the title and the copyright text from the json data
         // Example copyright text: "草丛中的母狮和它的幼崽，南非 (© Andrew Coleman/Getty Images)"
+        // Copyright has always the format (© names)
         const QString copyright = imageObject.value(QStringLiteral("copyright")).toString();
-        const QRegularExpression copyrightRegEx(QStringLiteral("(.+?)[\\(（](.+?)[\\)）]"));
+        const QRegularExpression copyrightRegEx(QStringLiteral("(.+?)[\\(（]©(.+?)[\\)）]"));
         if (const QRegularExpressionMatch match = copyrightRegEx.match(copyright); match.hasMatch()) {
             // In some regions "title" is empty, so extract the title from the copyright text.
             m_title = match.captured(1).trimmed();
             m_author = match.captured(2).remove(QStringLiteral("©")).trimmed();
         }
-
+        // The JSON result from BING contains "Info" as title. If this is the case, use the regexp result.
         const QString title = imageObject.value(QStringLiteral("title")).toString();
-        if (!title.isEmpty()) {
+        if ((!title.isEmpty()) && (title.compare(QStringLiteral("Info"), Qt::CaseSensitive) != 0)) {
             m_title = title;
         }
 
