@@ -1,0 +1,228 @@
+# Sanskrit translations for kdeplasma-addons package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-12-04 00:41+0000\n"
+"PO-Revision-Date: 2024-12-13 19:09+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:31
+#, kde-format
+msgid "%1pt"
+msgstr "%1pt"
+
+#: package/contents/ui/configAppearance.qml:37
+#, kde-format
+msgid "Text font size:"
+msgstr "पाठस्य फ़ॉन्ट् आकारः : १."
+
+#: package/contents/ui/configAppearance.qml:62
+#, kde-format
+msgid "A white sticky note"
+msgstr "एकः श्वेतः चिपचिपा टिप्पणः"
+
+#: package/contents/ui/configAppearance.qml:63
+#, kde-format
+msgid "A black sticky note"
+msgstr "कृष्णवर्णीयः चिपचिपा टिप्पणः"
+
+#: package/contents/ui/configAppearance.qml:64
+#, kde-format
+msgid "A red sticky note"
+msgstr "एकः रक्तः चिपचिपः टिप्पणः"
+
+#: package/contents/ui/configAppearance.qml:65
+#, kde-format
+msgid "An orange sticky note"
+msgstr "एकः नारङ्गवर्णीयः चिपचिपा टिप्पणः"
+
+#: package/contents/ui/configAppearance.qml:66
+#, kde-format
+msgid "A yellow sticky note"
+msgstr "पीतवर्णीयः चिपचिपा टिप्पणः"
+
+#: package/contents/ui/configAppearance.qml:67
+#, kde-format
+msgid "A green sticky note"
+msgstr "एकः हरितः चिपचिपा टिप्पणः"
+
+#: package/contents/ui/configAppearance.qml:68
+#, kde-format
+msgid "A blue sticky note"
+msgstr "नीलवर्णीयः चिपचिपा टिप्पणः"
+
+#: package/contents/ui/configAppearance.qml:69
+#, kde-format
+msgid "A pink sticky note"
+msgstr "एकः गुलाबी चिपचिपा टिप्पणी"
+
+#: package/contents/ui/configAppearance.qml:70
+#, kde-format
+msgid "A transparent sticky note"
+msgstr "एकः पारदर्शी चिपचिपा टिप्पणी"
+
+#: package/contents/ui/configAppearance.qml:71
+#, kde-format
+msgid "A transparent sticky note with light text"
+msgstr "हल्केन पाठेन सह पारदर्शी चिपचिपा टिप्पणी"
+
+#: package/contents/ui/main.qml:240
+#, kde-format
+msgid "Undo"
+msgstr "पूर्ववत"
+
+#: package/contents/ui/main.qml:248
+#, kde-format
+msgid "Redo"
+msgstr "पुनः करो"
+
+#: package/contents/ui/main.qml:258
+#, kde-format
+msgid "Cut"
+msgstr "छिन्न"
+
+#: package/contents/ui/main.qml:266
+#, kde-format
+msgid "Copy"
+msgstr "प्रतिलिपि"
+
+#: package/contents/ui/main.qml:274
+#, kde-format
+msgid "Paste"
+msgstr "चिनोतु"
+
+#: package/contents/ui/main.qml:280
+#, kde-format
+msgid "Paste with Full Formatting"
+msgstr "पूर्णस्वरूपणेन सह चिनोतु"
+
+#: package/contents/ui/main.qml:287
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Remove Formatting"
+msgstr ""
+
+#: package/contents/ui/main.qml:302
+#, kde-format
+msgid "Delete"
+msgstr "लुप्"
+
+#: package/contents/ui/main.qml:309
+#, kde-format
+msgid "Clear"
+msgstr "स्पष्टः"
+
+#: package/contents/ui/main.qml:319
+#, kde-format
+msgid "Select All"
+msgstr "सर्वं चिनोतु"
+
+#: package/contents/ui/main.qml:447
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Bold"
+msgstr ""
+
+#: package/contents/ui/main.qml:459
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Italic"
+msgstr ""
+
+#: package/contents/ui/main.qml:471
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Underline"
+msgstr ""
+
+#: package/contents/ui/main.qml:483
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Strikethrough"
+msgstr ""
+
+#: package/contents/ui/main.qml:557
+#, kde-format
+msgid "Discard this note?"
+msgstr "एतत् टिप्पणं परित्यजन्तु ?"
+
+#: package/contents/ui/main.qml:558
+#, kde-format
+msgid "Are you sure you want to discard this note?"
+msgstr "किं भवन्तः निश्चयेन एतत् टिप्पणं परित्यक्तुं इच्छन्ति?"
+
+#: package/contents/ui/main.qml:578
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "White"
+msgstr ""
+
+#: package/contents/ui/main.qml:582
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Black"
+msgstr ""
+
+#: package/contents/ui/main.qml:586
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Red"
+msgstr ""
+
+#: package/contents/ui/main.qml:590
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Orange"
+msgstr ""
+
+#: package/contents/ui/main.qml:594
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Yellow"
+msgstr ""
+
+#: package/contents/ui/main.qml:598
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Green"
+msgstr ""
+
+#: package/contents/ui/main.qml:602
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Blue"
+msgstr ""
+
+#: package/contents/ui/main.qml:606
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Pink"
+msgstr ""
+
+#: package/contents/ui/main.qml:610
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Transparent"
+msgstr ""
+
+#: package/contents/ui/main.qml:614
+#, kde-format
+msgctxt "@item:inmenu"
+msgid "Transparent Light"
+msgstr ""

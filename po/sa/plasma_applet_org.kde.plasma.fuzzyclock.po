@@ -1,0 +1,879 @@
+# Sanskrit translations for kdeplasma-addons package.
+# Copyright (C) 2024 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Kali <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"PO-Revision-Date: 2024-12-13 19:09+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Sanskrit\n"
+"Language: sa\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: package/contents/config/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:24
+#, kde-format
+msgctxt "@title:group"
+msgid "Font:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:25
+#, kde-format
+msgctxt "@option:check"
+msgid "Bold text"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:30
+#, kde-format
+msgctxt "@option:check"
+msgid "Italic text"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:39
+#, kde-format
+msgctxt "@title:group"
+msgid "Fuzzyness:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:49
+#, kde-format
+msgctxt "@item:inrange"
+msgid "Accurate"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:58
+#, kde-format
+msgctxt "@item:inrange"
+msgid "Fuzzy"
+msgstr ""
+
+#: package/contents/ui/FuzzyClock.qml:35
+#, kde-format
+msgid "One o’clock"
+msgstr "एकवादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:36
+#, kde-format
+msgid "Five past one"
+msgstr "पञ्च गत एक"
+
+#: package/contents/ui/FuzzyClock.qml:37
+#, kde-format
+msgid "Ten past one"
+msgstr "दश अतीतैकम्"
+
+#: package/contents/ui/FuzzyClock.qml:38
+#, kde-format
+msgid "Quarter past one"
+msgstr "एकतः परं चतुर्थांशः"
+
+#: package/contents/ui/FuzzyClock.qml:39
+#, kde-format
+msgid "Twenty past one"
+msgstr "विंशतिः एकतः अतीतः"
+
+#: package/contents/ui/FuzzyClock.qml:40
+#, kde-format
+msgid "Twenty-five past one"
+msgstr "पञ्चविंशतिः अतीतः एकः"
+
+#: package/contents/ui/FuzzyClock.qml:41
+#, kde-format
+msgid "Half past one"
+msgstr "अर्धं व्यतीतम्"
+
+#: package/contents/ui/FuzzyClock.qml:42
+#, kde-format
+msgid "Twenty-five to two"
+msgstr "पञ्चविंशतिः द्वयम्"
+
+#: package/contents/ui/FuzzyClock.qml:43
+#, kde-format
+msgid "Twenty to two"
+msgstr "विंशतिः द्वाभ्यां यावत्"
+
+#: package/contents/ui/FuzzyClock.qml:44
+#, kde-format
+msgid "Quarter to two"
+msgstr "त्रैमासिकं द्वौ यावत्"
+
+#: package/contents/ui/FuzzyClock.qml:45
+#, kde-format
+msgid "Ten to two"
+msgstr "दश द्वयम्"
+
+#: package/contents/ui/FuzzyClock.qml:46
+#, kde-format
+msgid "Five to two"
+msgstr "पञ्च द्वौ"
+
+#: package/contents/ui/FuzzyClock.qml:47
+#, kde-format
+msgid "Two o’clock"
+msgstr "द्विवादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:48
+#, kde-format
+msgid "Five past two"
+msgstr "पञ्च गतद्वयम्"
+
+#: package/contents/ui/FuzzyClock.qml:49
+#, kde-format
+msgid "Ten past two"
+msgstr "दश गतद्वयम्"
+
+#: package/contents/ui/FuzzyClock.qml:50
+#, kde-format
+msgid "Quarter past two"
+msgstr "चतुर्थांशः द्वौ गतौ"
+
+#: package/contents/ui/FuzzyClock.qml:51
+#, kde-format
+msgid "Twenty past two"
+msgstr "विंशतिः गतद्वयम्"
+
+#: package/contents/ui/FuzzyClock.qml:52
+#, kde-format
+msgid "Twenty-five past two"
+msgstr "पञ्चविंशतिः द्वौ गतौ"
+
+#: package/contents/ui/FuzzyClock.qml:53
+#, kde-format
+msgid "Half past two"
+msgstr "अर्धद्वयं वादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:54
+#, kde-format
+msgid "Twenty-five to three"
+msgstr "पञ्चविंशतितः त्रीणि यावत्"
+
+#: package/contents/ui/FuzzyClock.qml:55
+#, kde-format
+msgid "Twenty to three"
+msgstr "विंशतिः त्रयो यावत्"
+
+#: package/contents/ui/FuzzyClock.qml:56
+#, kde-format
+msgid "Quarter to three"
+msgstr "त्रैमासिकतः त्रयः यावत्"
+
+#: package/contents/ui/FuzzyClock.qml:57
+#, kde-format
+msgid "Ten to three"
+msgstr "दश त्रीणि"
+
+#: package/contents/ui/FuzzyClock.qml:58
+#, kde-format
+msgid "Five to three"
+msgstr "पञ्च त्रयः"
+
+#: package/contents/ui/FuzzyClock.qml:59
+#, kde-format
+msgid "Three o’clock"
+msgstr "त्रयः वादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:60
+#, kde-format
+msgid "Five past three"
+msgstr "पञ्च त्रीणि गतानि"
+
+#: package/contents/ui/FuzzyClock.qml:61
+#, kde-format
+msgid "Ten past three"
+msgstr "दश गत त्रीणि"
+
+#: package/contents/ui/FuzzyClock.qml:62
+#, kde-format
+msgid "Quarter past three"
+msgstr "त्रैमासिकं त्रीणि अतीतानि"
+
+#: package/contents/ui/FuzzyClock.qml:63
+#, kde-format
+msgid "Twenty past three"
+msgstr "विंशतिः त्रीणि गतानि"
+
+#: package/contents/ui/FuzzyClock.qml:64
+#, kde-format
+msgid "Twenty-five past three"
+msgstr "पञ्चविंशतिः त्रीणि गतानि"
+
+#: package/contents/ui/FuzzyClock.qml:65
+#, kde-format
+msgid "Half past three"
+msgstr "अर्धं त्रीणि वादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:66
+#, kde-format
+msgid "Twenty-five to four"
+msgstr "पञ्चविंशतितः चतुःपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:67
+#, kde-format
+msgid "Twenty to four"
+msgstr "विंशतितः चतुर्णां यावत्"
+
+#: package/contents/ui/FuzzyClock.qml:68
+#, kde-format
+msgid "Quarter to four"
+msgstr "चतुर्थांशतः चतुःपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:69
+#, kde-format
+msgid "Ten to four"
+msgstr "दश चत्वारि"
+
+#: package/contents/ui/FuzzyClock.qml:70
+#, kde-format
+msgid "Five to four"
+msgstr "पञ्च चत्वारि"
+
+#: package/contents/ui/FuzzyClock.qml:71
+#, kde-format
+msgid "Four o’clock"
+msgstr "चतुःवादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:72
+#, kde-format
+msgid "Five past four"
+msgstr "पञ्च चतुः गताः"
+
+#: package/contents/ui/FuzzyClock.qml:73
+#, kde-format
+msgid "Ten past four"
+msgstr "दश गतचतुः"
+
+#: package/contents/ui/FuzzyClock.qml:74
+#, kde-format
+msgid "Quarter past four"
+msgstr "चतुर्थांशः अतीतः चतुर्थः"
+
+#: package/contents/ui/FuzzyClock.qml:75
+#, kde-format
+msgid "Twenty past four"
+msgstr "चतुर्णां गतानां विंशतिः"
+
+#: package/contents/ui/FuzzyClock.qml:76
+#, kde-format
+msgid "Twenty-five past four"
+msgstr "पञ्चविंशतिः गतचतुः"
+
+#: package/contents/ui/FuzzyClock.qml:77
+#, kde-format
+msgid "Half past four"
+msgstr "चतुर्णाम् अर्धम्"
+
+#: package/contents/ui/FuzzyClock.qml:78
+#, kde-format
+msgid "Twenty-five to five"
+msgstr "पञ्चविंशतिः पञ्च"
+
+#: package/contents/ui/FuzzyClock.qml:79
+#, kde-format
+msgid "Twenty to five"
+msgstr "विंशतिः पञ्च"
+
+#: package/contents/ui/FuzzyClock.qml:80
+#, kde-format
+msgid "Quarter to five"
+msgstr "चतुर्थांशतः पञ्चपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:81
+#, kde-format
+msgid "Ten to five"
+msgstr "दश पञ्च"
+
+#: package/contents/ui/FuzzyClock.qml:82
+#, kde-format
+msgid "Five to five"
+msgstr "पञ्च पञ्च"
+
+#: package/contents/ui/FuzzyClock.qml:83
+#, kde-format
+msgid "Five o’clock"
+msgstr "पञ्चवादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:84
+#, kde-format
+msgid "Five past five"
+msgstr "पञ्च पञ्च गताः"
+
+#: package/contents/ui/FuzzyClock.qml:85
+#, kde-format
+msgid "Ten past five"
+msgstr "दश पञ्च पञ्च"
+
+#: package/contents/ui/FuzzyClock.qml:86
+#, kde-format
+msgid "Quarter past five"
+msgstr "पञ्चतः परं त्रैमासिकम्"
+
+#: package/contents/ui/FuzzyClock.qml:87
+#, kde-format
+msgid "Twenty past five"
+msgstr "पञ्च पञ्च विंशतिः"
+
+#: package/contents/ui/FuzzyClock.qml:88
+#, kde-format
+msgid "Twenty-five past five"
+msgstr "पञ्चविंशतिः पञ्च गताः"
+
+#: package/contents/ui/FuzzyClock.qml:89
+#, kde-format
+msgid "Half past five"
+msgstr "अर्धं पञ्चवादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:90
+#, kde-format
+msgid "Twenty-five to six"
+msgstr "पञ्चविंशतिः षट्"
+
+#: package/contents/ui/FuzzyClock.qml:91
+#, kde-format
+msgid "Twenty to six"
+msgstr "विंशतिः षट्"
+
+#: package/contents/ui/FuzzyClock.qml:92
+#, kde-format
+msgid "Quarter to six"
+msgstr "त्रैमासिकतः षड्पर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:93
+#, kde-format
+msgid "Ten to six"
+msgstr "दश षट्"
+
+#: package/contents/ui/FuzzyClock.qml:94
+#, kde-format
+msgid "Five to six"
+msgstr "पञ्च षट्"
+
+#: package/contents/ui/FuzzyClock.qml:95
+#, kde-format
+msgid "Six o’clock"
+msgstr "षड्वादने"
+
+#: package/contents/ui/FuzzyClock.qml:96
+#, kde-format
+msgid "Five past six"
+msgstr "पञ्च षड् गताः"
+
+#: package/contents/ui/FuzzyClock.qml:97
+#, kde-format
+msgid "Ten past six"
+msgstr "दश षड् गताः"
+
+#: package/contents/ui/FuzzyClock.qml:98
+#, kde-format
+msgid "Quarter past six"
+msgstr "षड् तः परं त्रैमासिकम्"
+
+#: package/contents/ui/FuzzyClock.qml:99
+#, kde-format
+msgid "Twenty past six"
+msgstr "षड्विंशतिः"
+
+#: package/contents/ui/FuzzyClock.qml:100
+#, kde-format
+msgid "Twenty-five past six"
+msgstr "पञ्चविंशतिः षड् गताः"
+
+#: package/contents/ui/FuzzyClock.qml:101
+#, kde-format
+msgid "Half past six"
+msgstr "षड्वादनात् अर्धम्"
+
+#: package/contents/ui/FuzzyClock.qml:102
+#, kde-format
+msgid "Twenty-five to seven"
+msgstr "पञ्चविंशतितः सप्तपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:103
+#, kde-format
+msgid "Twenty to seven"
+msgstr "विंशतितः सप्तपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:104
+#, kde-format
+msgid "Quarter to seven"
+msgstr "त्रैमासिकतः सप्तपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:105
+#, kde-format
+msgid "Ten to seven"
+msgstr "दश सप्त"
+
+#: package/contents/ui/FuzzyClock.qml:106
+#, kde-format
+msgid "Five to seven"
+msgstr "पञ्च सप्त"
+
+#: package/contents/ui/FuzzyClock.qml:107
+#, kde-format
+msgid "Seven o’clock"
+msgstr "सप्तवादने"
+
+#: package/contents/ui/FuzzyClock.qml:108
+#, kde-format
+msgid "Five past seven"
+msgstr "पञ्च सप्त गताः"
+
+#: package/contents/ui/FuzzyClock.qml:109
+#, kde-format
+msgid "Ten past seven"
+msgstr "दश सप्त गताः"
+
+#: package/contents/ui/FuzzyClock.qml:110
+#, kde-format
+msgid "Quarter past seven"
+msgstr "सप्तवादने त्रैमासिकम्"
+
+#: package/contents/ui/FuzzyClock.qml:111
+#, kde-format
+msgid "Twenty past seven"
+msgstr "सप्तविंशतिः"
+
+#: package/contents/ui/FuzzyClock.qml:112
+#, kde-format
+msgid "Twenty-five past seven"
+msgstr "पञ्चविंशतिः सप्त गताः"
+
+#: package/contents/ui/FuzzyClock.qml:113
+#, kde-format
+msgid "Half past seven"
+msgstr "सार्धं वादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:114
+#, kde-format
+msgid "Twenty-five to eight"
+msgstr "पञ्चविंशतितः अष्टौ यावत्"
+
+#: package/contents/ui/FuzzyClock.qml:115
+#, kde-format
+msgid "Twenty to eight"
+msgstr "विंशतिः अष्टावधिः"
+
+#: package/contents/ui/FuzzyClock.qml:116
+#, kde-format
+msgid "Quarter to eight"
+msgstr "त्रैमासिकतः अष्टपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:117
+#, kde-format
+msgid "Ten to eight"
+msgstr "दश तः अष्टपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:118
+#, kde-format
+msgid "Five to eight"
+msgstr "पञ्चतः अष्टपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:119
+#, kde-format
+msgid "Eight o’clock"
+msgstr "अष्टवादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:120
+#, kde-format
+msgid "Five past eight"
+msgstr "पञ्च अष्टौ गताः"
+
+#: package/contents/ui/FuzzyClock.qml:121
+#, kde-format
+msgid "Ten past eight"
+msgstr "दश अष्टोत्तरम्"
+
+#: package/contents/ui/FuzzyClock.qml:122
+#, kde-format
+msgid "Quarter past eight"
+msgstr "अष्टोत्तरं त्रैमासिकम्"
+
+#: package/contents/ui/FuzzyClock.qml:123
+#, kde-format
+msgid "Twenty past eight"
+msgstr "अष्टोत्तरं विंशतिः"
+
+#: package/contents/ui/FuzzyClock.qml:124
+#, kde-format
+msgid "Twenty-five past eight"
+msgstr "पञ्चविंशतिः अष्टाः गताः"
+
+#: package/contents/ui/FuzzyClock.qml:125
+#, kde-format
+msgid "Half past eight"
+msgstr "अष्टोत्तरार्धम्"
+
+#: package/contents/ui/FuzzyClock.qml:126
+#, kde-format
+msgid "Twenty-five to nine"
+msgstr "पञ्चविंशतिः नव"
+
+#: package/contents/ui/FuzzyClock.qml:127
+#, kde-format
+msgid "Twenty to nine"
+msgstr "विंशतिः नव"
+
+#: package/contents/ui/FuzzyClock.qml:128
+#, kde-format
+msgid "Quarter to nine"
+msgstr "चतुर्थांशतः नवपर्यन्तं"
+
+#: package/contents/ui/FuzzyClock.qml:129
+#, kde-format
+msgid "Ten to nine"
+msgstr "दश नव"
+
+#: package/contents/ui/FuzzyClock.qml:130
+#, kde-format
+msgid "Five to nine"
+msgstr "पञ्च नव"
+
+#: package/contents/ui/FuzzyClock.qml:131
+#, kde-format
+msgid "Nine o’clock"
+msgstr "नववादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:132
+#, kde-format
+msgid "Five past nine"
+msgstr "पञ्च नव गताः"
+
+#: package/contents/ui/FuzzyClock.qml:133
+#, kde-format
+msgid "Ten past nine"
+msgstr "दश नव गताः"
+
+#: package/contents/ui/FuzzyClock.qml:134
+#, kde-format
+msgid "Quarter past nine"
+msgstr "नववादनतः परं त्रैमासिकम्"
+
+#: package/contents/ui/FuzzyClock.qml:135
+#, kde-format
+msgid "Twenty past nine"
+msgstr "नव वादनविंशतिः"
+
+#: package/contents/ui/FuzzyClock.qml:136
+#, kde-format
+msgid "Twenty-five past nine"
+msgstr "पञ्चविंशतिः नव गताः"
+
+#: package/contents/ui/FuzzyClock.qml:137
+#, kde-format
+msgid "Half past nine"
+msgstr "नववादनस्य सार्धम्"
+
+#: package/contents/ui/FuzzyClock.qml:138
+#, kde-format
+msgid "Twenty-five to ten"
+msgstr "पञ्चविंशतितः दशपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:139
+#, kde-format
+msgid "Twenty to ten"
+msgstr "विंशतिः दश"
+
+#: package/contents/ui/FuzzyClock.qml:140
+#, kde-format
+msgid "Quarter to ten"
+msgstr "त्रैमासिकतः दशपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:141
+#, kde-format
+msgid "Ten to ten"
+msgstr "दश दश"
+
+#: package/contents/ui/FuzzyClock.qml:142
+#, kde-format
+msgid "Five to ten"
+msgstr "पञ्च दश"
+
+#: package/contents/ui/FuzzyClock.qml:143
+#, kde-format
+msgid "Ten o’clock"
+msgstr "दशवादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:144
+#, kde-format
+msgid "Five past ten"
+msgstr "पञ्च दश गताः"
+
+#: package/contents/ui/FuzzyClock.qml:145
+#, kde-format
+msgid "Ten past ten"
+msgstr "दश दश गताः"
+
+#: package/contents/ui/FuzzyClock.qml:146
+#, kde-format
+msgid "Quarter past ten"
+msgstr "त्रैमासिकः दशः गतः"
+
+#: package/contents/ui/FuzzyClock.qml:147
+#, kde-format
+msgid "Twenty past ten"
+msgstr "विंशतिः दशः गताः"
+
+#: package/contents/ui/FuzzyClock.qml:148
+#, kde-format
+msgid "Twenty-five past ten"
+msgstr "पञ्चविंशतिः दश गताः"
+
+#: package/contents/ui/FuzzyClock.qml:149
+#, kde-format
+msgid "Half past ten"
+msgstr "अर्धदशवादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:150
+#, kde-format
+msgid "Twenty-five to eleven"
+msgstr "पञ्चविंशतितः एकादशपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:151
+#, kde-format
+msgid "Twenty to eleven"
+msgstr "विंशतितः एकादशपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:152
+#, kde-format
+msgid "Quarter to eleven"
+msgstr "त्रैमासिकतः एकादशपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:153
+#, kde-format
+msgid "Ten to eleven"
+msgstr "दश तः एकादश यावत्"
+
+#: package/contents/ui/FuzzyClock.qml:154
+#, kde-format
+msgid "Five to eleven"
+msgstr "पञ्च तः एकादशपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:155
+#, kde-format
+msgid "Eleven o’clock"
+msgstr "एकादशवादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:156
+#, kde-format
+msgid "Five past eleven"
+msgstr "पञ्च एकादश गताः"
+
+#: package/contents/ui/FuzzyClock.qml:157
+#, kde-format
+msgid "Ten past eleven"
+msgstr "दश गत एकादश"
+
+#: package/contents/ui/FuzzyClock.qml:158
+#, kde-format
+msgid "Quarter past eleven"
+msgstr "एकादशतः परं चतुर्थांशः"
+
+#: package/contents/ui/FuzzyClock.qml:159
+#, kde-format
+msgid "Twenty past eleven"
+msgstr "एकादश तः विंशतिः"
+
+#: package/contents/ui/FuzzyClock.qml:160
+#, kde-format
+msgid "Twenty-five past eleven"
+msgstr "पञ्चविंशतिः एकादश गताः"
+
+#: package/contents/ui/FuzzyClock.qml:161
+#, kde-format
+msgid "Half past eleven"
+msgstr "एकादशवादनस्य सार्धम्"
+
+#: package/contents/ui/FuzzyClock.qml:162
+#, kde-format
+msgid "Twenty-five to twelve"
+msgstr "पञ्चविंशतिः द्वादशपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:163
+#, kde-format
+msgid "Twenty to twelve"
+msgstr "विंशतिः द्वादशपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:164
+#, kde-format
+msgid "Quarter to twelve"
+msgstr "त्रैमासिकतः द्वादशपर्यन्तम्"
+
+#: package/contents/ui/FuzzyClock.qml:165
+#, kde-format
+msgid "Ten to twelve"
+msgstr "दश द्वादश"
+
+#: package/contents/ui/FuzzyClock.qml:166
+#, kde-format
+msgid "Five to twelve"
+msgstr "पञ्च द्वादश"
+
+#: package/contents/ui/FuzzyClock.qml:167
+#, kde-format
+msgid "Twelve o’clock"
+msgstr "द्वादशवादनम्"
+
+#: package/contents/ui/FuzzyClock.qml:168
+#, kde-format
+msgid "Five past twelve"
+msgstr "पञ्च द्वादश गताः"
+
+#: package/contents/ui/FuzzyClock.qml:169
+#, kde-format
+msgid "Ten past twelve"
+msgstr "दश द्वादश गताः"
+
+#: package/contents/ui/FuzzyClock.qml:170
+#, kde-format
+msgid "Quarter past twelve"
+msgstr "द्वादशवादनतः परं चतुर्थांशः"
+
+#: package/contents/ui/FuzzyClock.qml:171
+#, kde-format
+msgid "Twenty past twelve"
+msgstr "द्वादश गतविंशतिः"
+
+#: package/contents/ui/FuzzyClock.qml:172
+#, kde-format
+msgid "Twenty-five past twelve"
+msgstr "पञ्चविंशतिः द्वादश गताः"
+
+#: package/contents/ui/FuzzyClock.qml:173
+#, kde-format
+msgid "Half past twelve"
+msgstr "सार्ध द्वादशवादनतः"
+
+#: package/contents/ui/FuzzyClock.qml:174
+#, kde-format
+msgid "Twenty-five to one"
+msgstr "पञ्चविंशतिः एकम्"
+
+#: package/contents/ui/FuzzyClock.qml:175
+#, kde-format
+msgid "Twenty to one"
+msgstr "विंशतिः एकम्"
+
+#: package/contents/ui/FuzzyClock.qml:176
+#, kde-format
+msgid "Quarter to one"
+msgstr "चतुर्थांशं यावत्"
+
+#: package/contents/ui/FuzzyClock.qml:177
+#, kde-format
+msgid "Ten to one"
+msgstr "दश तः एकम्"
+
+#: package/contents/ui/FuzzyClock.qml:178
+#, kde-format
+msgid "Five to one"
+msgstr "पञ्च एकम्"
+
+#: package/contents/ui/FuzzyClock.qml:182
+#, kde-format
+msgid "Sleep"
+msgstr "शयनं करोतु"
+
+#: package/contents/ui/FuzzyClock.qml:182
+#, kde-format
+msgid "Breakfast"
+msgstr "अल्पाहार"
+
+#: package/contents/ui/FuzzyClock.qml:182
+#, kde-format
+msgid "Second Breakfast"
+msgstr "द्वितीयः प्रातःभोजनः"
+
+#: package/contents/ui/FuzzyClock.qml:182
+#, kde-format
+msgid "Elevenses"
+msgstr "एकादशः"
+
+#: package/contents/ui/FuzzyClock.qml:183
+#, kde-format
+msgid "Lunch"
+msgstr "मध्याह्नभोजनम्‌"
+
+#: package/contents/ui/FuzzyClock.qml:183
+#, kde-format
+msgid "Afternoon tea"
+msgstr "अपराह्णे चायः"
+
+#: package/contents/ui/FuzzyClock.qml:183
+#, kde-format
+msgid "Dinner"
+msgstr "रात्रिभोजनम्‌"
+
+#: package/contents/ui/FuzzyClock.qml:183
+#, kde-format
+msgid "Supper"
+msgstr "नक्तभोजन"
+
+#: package/contents/ui/FuzzyClock.qml:187
+#, kde-format
+msgid "Night"
+msgstr "निशा"
+
+#: package/contents/ui/FuzzyClock.qml:187
+#, kde-format
+msgid "Early morning"
+msgstr "प्रातःकाले"
+
+#: package/contents/ui/FuzzyClock.qml:187
+#, kde-format
+msgid "Morning"
+msgstr "प्रातः"
+
+#: package/contents/ui/FuzzyClock.qml:187
+#, kde-format
+msgid "Almost noon"
+msgstr "प्रायः मध्याह्न"
+
+#: package/contents/ui/FuzzyClock.qml:188
+#, kde-format
+msgid "Noon"
+msgstr "अपराह्न"
+
+#: package/contents/ui/FuzzyClock.qml:188
+#, kde-format
+msgid "Afternoon"
+msgstr "अपराह्नः"
+
+#: package/contents/ui/FuzzyClock.qml:188
+#, kde-format
+msgid "Evening"
+msgstr "सायंकालः"
+
+#: package/contents/ui/FuzzyClock.qml:188
+#, kde-format
+msgid "Late evening"
+msgstr "विलम्बेन सायंकाले"
+
+#: package/contents/ui/FuzzyClock.qml:192
+#, kde-format
+msgid "Start of week"
+msgstr "सप्ताहस्य आरम्भः"
+
+#: package/contents/ui/FuzzyClock.qml:192
+#, kde-format
+msgid "Middle of week"
+msgstr "सप्ताहस्य मध्यभागे"
+
+#: package/contents/ui/FuzzyClock.qml:192
+#, kde-format
+msgid "End of week"
+msgstr "सप्ताहस्य समाप्तिः"
+
+#: package/contents/ui/FuzzyClock.qml:192
+#, kde-format
+msgid "Weekend!"
+msgstr "सप्ताहांत!"
