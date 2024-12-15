@@ -20,43 +20,43 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "स्वरूपम्‌"
 
 #: package/contents/ui/configAppearance.qml:24
 #, kde-format
 msgctxt "@title:group"
 msgid "Font:"
-msgstr ""
+msgstr "फन्ट् : १."
 
 #: package/contents/ui/configAppearance.qml:25
 #, kde-format
 msgctxt "@option:check"
 msgid "Bold text"
-msgstr ""
+msgstr "बोल्ड पाठ"
 
 #: package/contents/ui/configAppearance.qml:30
 #, kde-format
 msgctxt "@option:check"
 msgid "Italic text"
-msgstr ""
+msgstr "इटालिक पाठ"
 
 #: package/contents/ui/configAppearance.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Fuzzyness:"
-msgstr ""
+msgstr "अस्पष्टता : १."
 
 #: package/contents/ui/configAppearance.qml:49
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Accurate"
-msgstr ""
+msgstr "परिशुद्धः"
 
 #: package/contents/ui/configAppearance.qml:58
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"
-msgstr ""
+msgstr "फजी"
 
 #: package/contents/ui/FuzzyClock.qml:35
 #, kde-format

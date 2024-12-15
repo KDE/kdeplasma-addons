@@ -3,72 +3,75 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-29 00:40+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-14 01:48+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: package/contents/ui/config.qml:49
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
-msgstr ""
+msgstr "स्थितिः : १."
 
 #: package/contents/ui/config.qml:52
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
-msgstr ""
+msgstr "स्केल कृत्वा क्रॉप् कृतम्"
 
 #: package/contents/ui/config.qml:56
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
-msgstr ""
+msgstr "स्केल कृतम्"
 
 #: package/contents/ui/config.qml:60
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
-msgstr ""
+msgstr "स्केल कृत्वा, अनुपातं रक्षन्तु"
 
 #: package/contents/ui/config.qml:64
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
-msgstr ""
+msgstr "केन्द्रित"
 
 #: package/contents/ui/config.qml:68
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
-msgstr ""
+msgstr "टाइल्युक्तम्"
 
 #: package/contents/ui/config.qml:89
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
-msgstr ""
+msgstr "पृष्ठभूमिवर्णः : १."
 
 #: package/contents/ui/config.qml:90
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
-msgstr ""
+msgstr "Background Color इति चिनोतु"
 
 #: package/contents/ui/config.qml:94
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
-msgstr ""
+msgstr "प्रदाता : १."
 
 #: package/contents/ui/config.qml:113
 #, kde-format
@@ -77,42 +80,44 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"अयं वॉलपेपरप्रदाता संवेदनशीलाः आक्षेपार्हाः वा चित्राणि न छानति । यदि एतानि चित्राणि "
+"सार्वजनिकरूपेण प्रदर्शितानि भविष्यन्ति तर्हि सावधानतां कुर्वन्तु।"
 
 #: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
-msgstr ""
+msgstr "मीटर् कृते संजालसंयोजनस्य उपयोगं कुर्वन् अद्यतनं कुर्वन्तु"
 
 #: package/contents/ui/config.qml:137
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
-msgstr ""
+msgstr "अद्यतनं चित्रम् : १."
 
 #: package/contents/ui/config.qml:153
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
-msgstr ""
+msgstr "शीर्षक:"
 
 #: package/contents/ui/config.qml:168
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
-msgstr ""
+msgstr "लेखकः:"
 
 #: package/contents/ui/config.qml:187
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "Containing Folder उद्घाटयन्तु"
 
 #: package/contents/ui/config.qml:191
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
-msgstr ""
+msgstr "गन्तव्यपुटं उद्घाटयन्तु यत्र वॉलपेपरप्रतिबिम्बं रक्षितम् आसीत् ।"
 
 #: package/contents/ui/main.qml:22
 #, kde-format
@@ -123,83 +128,83 @@ msgstr "वॉलपेपर इमेज उद्घाटयन्तु"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
-msgstr ""
+msgstr "अद्यतनं चित्रम्"
 
 #: package/contents/ui/WallpaperDelegate.qml:138
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
-msgstr ""
+msgstr "लोडिंग"
 
 #: package/contents/ui/WallpaperDelegate.qml:139
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
-msgstr ""
+msgstr "अनुपलब्धम्"
 
 #: package/contents/ui/WallpaperDelegate.qml:140
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
-msgstr ""
+msgstr "%1 लेखकः %2. अधिकानि क्रियाणि द्रष्टुं चित्रे राइट्-क्लिक् कुर्वन्तु ।"
 
 #: package/contents/ui/WallpaperDelegate.qml:141
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
-msgstr ""
+msgstr "अन्तर्जालतः वॉलपेपरम् आनयन्ति।"
 
 #: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
-msgstr ""
+msgstr "अन्तर्जालतः वॉलपेपरं आनेतुं असफलम्।"
 
 #: package/contents/ui/WallpaperPreview.qml:48
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
-msgstr ""
+msgstr "चित्रं रक्षन्तु यथा…"
 
 #: package/contents/ui/WallpaperPreview.qml:51
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
-msgstr ""
+msgstr "अद्यतनं चित्रं स्थानीयडिस्कमध्ये रक्षन्तु"
 
 #: package/contents/ui/WallpaperPreview.qml:57
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
-msgstr ""
+msgstr "ब्राउजर् मध्ये लिङ्कं उद्घाटयन्तु…"
 
 #: package/contents/ui/WallpaperPreview.qml:60
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
-msgstr ""
+msgstr "अद्यतनचित्रस्य जालपुटं पूर्वनिर्धारितब्राउजरे उद्घाटयन्तु"
 
 #: plugins/potdbackend.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Today's Picture"
-msgstr ""
+msgstr "अद्यतनं चित्रं रक्षतु"
 
 #: plugins/potdbackend.cpp:215
 #, kde-format
 msgctxt "@label:listbox Template for file dialog"
 msgid "JPEG image (*.jpeg *.jpg *.jpe)"
-msgstr ""
+msgstr "JPEG चित्रम् (*.jpeg *.jpg *.jpe)"
 
 #: plugins/potdbackend.cpp:232
 #, kde-format
 msgctxt "@info:status after a save action"
 msgid "The image was not saved."
-msgstr ""
+msgstr "प्रतिबिम्बं न रक्षितम् ।"
 
 #: plugins/potdbackend.cpp:239
 #, kde-format
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
-msgstr ""
+msgstr "चित्रं <a href=\"%1\">%2</a> इति रूपेण रक्षितम्"

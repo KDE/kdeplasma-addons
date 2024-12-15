@@ -3,30 +3,33 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 01:38+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-14 01:08+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: datetimerunner.cpp:23
 #, kde-format
 msgctxt "Note this is a KRunner keyword"
 msgid "date"
-msgstr ""
+msgstr "दिनाङ्कः"
 
 #: datetimerunner.cpp:24
 #, kde-format
 msgctxt "Note this is a KRunner keyword"
 msgid "time"
-msgstr ""
+msgstr "कालः"
 
 #: datetimerunner.cpp:28
 #, kde-format
@@ -35,7 +38,7 @@ msgctxt ""
 "e.g. 'current time in Berlin' or '18:00 UTC to CET', separated by '|' (will "
 "be used as a regex)"
 msgid "to|in|as|at"
-msgstr ""
+msgstr "to|इन्|अस्|अत्"
 
 #: datetimerunner.cpp:34
 #, kde-format
@@ -51,7 +54,7 @@ msgstr "वर्तमानसमयं प्रदर्शयति"
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid " <timezone>"
-msgstr ""
+msgstr " <समयक्षेत्रम्>"
 
 #: datetimerunner.cpp:37
 #, kde-format
@@ -69,7 +72,7 @@ msgstr "दत्तसमयक्षेत्रे वर्तमानस�
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid "<time> <timezone> in <timezone>"
-msgstr ""
+msgstr "<time><timezone>इत्यस्मिन्‌<timezone>"
 
 #: datetimerunner.cpp:41
 #, kde-format
@@ -93,7 +96,7 @@ msgctxt ""
 "time difference between time zones, e.g. in Stockholm it's 1 calendar day "
 "later than in Brasilia"
 msgid "%1 later"
-msgstr ""
+msgstr "%1 पश्चात्"
 
 #: datetimerunner.cpp:76
 #, kde-format
@@ -101,7 +104,7 @@ msgctxt ""
 "date difference between time zones, e.g. in Brasilia it's 1 calendar day "
 "earlier than in Stockholm"
 msgid "%1 earlier"
-msgstr ""
+msgstr "%1 पूर्वम्"
 
 #: datetimerunner.cpp:78
 #, kde-format
@@ -109,7 +112,7 @@ msgctxt ""
 "no date difference between time zones, e.g. in Stockholm it's the same "
 "calendar day as in Berlin"
 msgid "no date difference"
-msgstr ""
+msgstr "न तिथिभेदः"
 
 #: datetimerunner.cpp:93
 #, kde-format
@@ -123,7 +126,7 @@ msgctxt ""
 "Brasilia time in Stockholm = 02:00 + 1 day, where %1 is the time and %2 is "
 "the days later"
 msgid "%1 + %2"
-msgstr ""
+msgstr "%1 + %2"
 
 #: datetimerunner.cpp:119 datetimerunner.cpp:213
 #, kde-format
@@ -132,7 +135,7 @@ msgctxt ""
 "Stockholm time in Brasilia = 22:00 - 1 day, where %1 is the time and %2 is "
 "the days earlier"
 msgid "%1 - %2"
-msgstr ""
+msgstr "%1 - %2"
 
 #: datetimerunner.cpp:128 datetimerunner.cpp:223
 #, kde-format
@@ -140,7 +143,7 @@ msgctxt ""
 "time difference between time zones, e.g. in Stockholm it's 4 hours later "
 "than in Brasilia"
 msgid "%1 later"
-msgstr ""
+msgstr "%1 पश्चात्"
 
 #: datetimerunner.cpp:130 datetimerunner.cpp:225
 #, kde-format
@@ -148,7 +151,7 @@ msgctxt ""
 "time difference between time zones, e.g. in Brasilia it's 4 hours earlier "
 "than in Stockholm"
 msgid "%1 earlier"
-msgstr ""
+msgstr "%1 पूर्वम्"
 
 #: datetimerunner.cpp:132 datetimerunner.cpp:227
 #, kde-format
@@ -156,4 +159,4 @@ msgctxt ""
 "no time difference between time zones, e.g. in Stockholm it's the same time "
 "as in Berlin"
 msgid "no time difference"
-msgstr ""
+msgstr "न कालान्तरम्"

@@ -20,7 +20,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "स्वरूपम्‌"
 
 #: package/contents/ui/configAppearance.qml:31
 #, kde-format
@@ -116,7 +116,7 @@ msgstr "पूर्णस्वरूपणेन सह चिनोतु"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr ""
+msgstr "स्वरूपणं निष्कासयन्तु"
 
 #: package/contents/ui/main.qml:302
 #, kde-format
@@ -137,25 +137,25 @@ msgstr "सर्वं चिनोतु"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
-msgstr ""
+msgstr "विक्रान्तः"
 
 #: package/contents/ui/main.qml:459
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
-msgstr ""
+msgstr "इटालिक"
 
 #: package/contents/ui/main.qml:471
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
-msgstr ""
+msgstr "रेखांकनम्"
 
 #: package/contents/ui/main.qml:483
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
-msgstr ""
+msgstr "स्ट्राइकथ्रू"
 
 #: package/contents/ui/main.qml:557
 #, kde-format
@@ -171,58 +171,58 @@ msgstr "किं भवन्तः निश्चयेन एतत् ट�
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
-msgstr ""
+msgstr "श्वेतः"
 
 #: package/contents/ui/main.qml:582
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
-msgstr ""
+msgstr "कृष्णः"
 
 #: package/contents/ui/main.qml:586
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
-msgstr ""
+msgstr "रक्त"
 
 #: package/contents/ui/main.qml:590
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
-msgstr ""
+msgstr "नारङ्ग"
 
 #: package/contents/ui/main.qml:594
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
-msgstr ""
+msgstr "पीतं"
 
 #: package/contents/ui/main.qml:598
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
-msgstr ""
+msgstr "हरित"
 
 #: package/contents/ui/main.qml:602
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
-msgstr ""
+msgstr "नील"
 
 #: package/contents/ui/main.qml:606
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
-msgstr ""
+msgstr "पाटल"
 
 #: package/contents/ui/main.qml:610
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
-msgstr ""
+msgstr "पारदर्शी"
 
 #: package/contents/ui/main.qml:614
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
-msgstr ""
+msgstr "पारदर्शी प्रकाश"

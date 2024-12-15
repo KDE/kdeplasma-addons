@@ -30,6 +30,8 @@ msgid ""
 "Config entries for alias list and code list have different sizes, ignoring "
 "all."
 msgstr ""
+"उपनामसूचिकायाः कोडसूचिकायाः च विन्यासप्रविष्टीनां भिन्नाः आकाराः सन्ति, सर्वेषां अवहेलना "
+"।"
 
 #. i18n: ectx: property (title), widget (QGroupBox, main)
 #: charrunner_config.ui:18

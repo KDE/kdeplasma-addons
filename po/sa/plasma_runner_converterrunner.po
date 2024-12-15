@@ -32,4 +32,4 @@ msgstr ":q: इत्यस्य मूल्यं परिवर्तयत
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
-msgstr ""
+msgstr "in;to;as"

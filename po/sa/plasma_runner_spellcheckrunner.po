@@ -3,18 +3,21 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-16 00:39+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-14 01:48+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: spellcheck.cpp:81 spellcheck_config.cpp:73 spellcheck_config.cpp:104
 #, kde-format
@@ -26,7 +29,7 @@ msgstr "मन्त्र"
 msgctxt ""
 "Spelling checking runner syntax, first word is trigger word, e.g.  \"spell\"."
 msgid "%1:q:"
-msgstr ""
+msgstr "%1:q: 1.1."
 
 #: spellcheck.cpp:90
 #, kde-format
@@ -37,7 +40,7 @@ msgstr ":q: इत्यस्य वर्तनीपरीक्षां क
 #, kde-format
 msgctxt "Term is spelled correctly"
 msgid "Correct"
-msgstr ""
+msgstr "उचितं"
 
 #: spellcheck.cpp:220
 #, kde-format
@@ -51,6 +54,8 @@ msgid ""
 "No dictionary found. Please install <resource>hunspell</resource> package "
 "using your package manager"
 msgstr ""
+"कोऽपि शब्दकोशः न लब्धः। कृपया स्वस्य संकुलप्रबन्धकस्य उपयोगेन <resource>hunspell</"
+"resource> संकुलं संस्थापयन्तु"
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
@@ -74,4 +79,4 @@ msgstr "&Trigger शब्दः : १."
 #: spellcheck_config.ui:62
 #, kde-format
 msgid "Configure Dictionaries…"
-msgstr "शब्दकोशान् विन्यस्तं कुर्वन्तु..."
+msgstr "शब्दकोशान् विन्यस्तं कुर्वन्तु…"

@@ -20,19 +20,19 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "सामान्य"
 
 #: package/contents/ui/ColorCircle.qml:41
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
-msgstr ""
+msgstr "वर्णसङ्केतस्य प्रतिलिपिं कर्तुं मध्य-क्लिक् कुर्वन्तु"
 
 #: package/contents/ui/CompactRepresentation.qml:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
-msgstr ""
+msgstr "वर्णं चिनुत"
 
 #: package/contents/ui/CompactRepresentation.qml:84
 #, kde-kuit-format
@@ -41,106 +41,107 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"अत्र वर्णसङ्केतं कर्षयन्तु तस्य रक्षणार्थं<nl/>तस्य औसतवर्णं प्राप्तुं चित्रसञ्चिकां अत्र कर्षयन्तु"
 
 #: package/contents/ui/configGeneral.qml:23
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
-msgstr ""
+msgstr "पूर्वनिर्धारितवर्णस्वरूपम् : १."
 
 #: package/contents/ui/configGeneral.qml:33
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
-msgstr ""
+msgstr "स्वयमेव वर्णं क्लिप्बोर्ड् प्रति प्रतिलिख्यताम्"
 
 #: package/contents/ui/configGeneral.qml:41
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
-msgstr ""
+msgstr "कीबोर्ड-शॉर्टकट् नुदन्ते सति :"
 
 #: package/contents/ui/configGeneral.qml:42
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
-msgstr ""
+msgstr "एकं वर्णं चिनुत"
 
 #: package/contents/ui/configGeneral.qml:48
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
-msgstr ""
+msgstr "इतिहासं दर्शयतु"
 
 #: package/contents/ui/configGeneral.qml:58
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "पूर्वावलोकनगणना : १."
 
 #: package/contents/ui/main.qml:121
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
-msgstr ""
+msgstr "रङ्गसंवादं उद्घाटयतु"
 
 #: package/contents/ui/main.qml:126
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
-msgstr ""
+msgstr "इतिहासं स्पष्टं कुरुत"
 
 #: package/contents/ui/main.qml:134
 #, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr ""
+msgstr "इतिहासं पश्यन्तु"
 
 #: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
-msgstr ""
+msgstr "क्लिप्बोर्ड् प्रति प्रतिलिख्यताम्"
 
 #: package/contents/ui/main.qml:182
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr ""
+msgstr "न वर्णाः"
 
 #: package/contents/ui/main.qml:182
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
+msgstr "यदा कम्पोजिटिङ्ग् निष्क्रियं भवति तदा वर्णचयनम् अनुपलब्धम्"
 
 #: package/contents/ui/main.qml:183
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
-msgstr ""
+msgstr "रचनां चालितेन अनुप्रयोगेन मैन्युअल् रूपेण निष्क्रियं वा अवरुद्धं वा कृतम् अस्ति"
 
 #: package/contents/ui/main.qml:190
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
-msgstr ""
+msgstr "रङ्गं चिनुत"
 
 #: package/contents/ui/main.qml:198
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "रचना विन्यस्तं कुर्वन्तु"
 
 #: package/contents/ui/main.qml:384
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "प्रतिलिपिकृतम् !"
 
 #: package/contents/ui/main.qml:395
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr ""
+msgstr "लुप्"

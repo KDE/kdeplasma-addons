@@ -25,10 +25,10 @@ msgstr "दर्शयतु:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Lunar phases"
-msgstr ""
+msgstr "चन्द्रचरणम्"
 
 #: config/qml/AstronomicalEventsConfig.qml:50
 #, kde-format
 msgctxt "@option:check"
 msgid "Astronomical seasons (solstices and equinoxes)"
-msgstr ""
+msgstr "खगोलीयऋतुः (संक्रान्ताः विषुवः च) २."

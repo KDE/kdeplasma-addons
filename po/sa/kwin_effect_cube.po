@@ -37,10 +37,12 @@ msgid_plural ""
 "At least 3 virtual desktops are required to display the Cube, but only %1 "
 "are present"
 msgstr[0] ""
+"Cube प्रदर्शयितुं न्यूनातिन्यूनं 3 वर्चुअल् डेस्कटॉप् आवश्यकाः, परन्तु केवलं %1 एव उपस्थितः अस्ति"
 msgstr[1] ""
+"Cube प्रदर्शयितुं न्यूनातिन्यूनं 3 वर्चुअल् डेस्कटॉप् आवश्यकाः, परन्तु केवलं %1 एव वर्तन्ते"
 
 #: package/contents/ui/PlaceholderView.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Virtual Desktop"
-msgstr ""
+msgstr "वर्चुअल् डेस्कटॉप् योजयन्तु"

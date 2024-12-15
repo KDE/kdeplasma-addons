@@ -20,7 +20,7 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
-msgstr ""
+msgstr "कन्सोल प्रोफाइल"
 
 #: package/contents/ui/main.qml:90
 #, kde-format

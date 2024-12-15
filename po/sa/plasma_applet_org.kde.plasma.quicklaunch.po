@@ -3,72 +3,75 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-14 01:48+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "सामान्य"
 
 #: package/contents/ui/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
-msgstr ""
+msgstr "अधिकतमस्तम्भाः : १."
 
 #: package/contents/ui/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
-msgstr ""
+msgstr "अधिकतमं पङ्क्तयः : १."
 
 #: package/contents/ui/ConfigGeneral.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
-msgstr ""
+msgstr "स्वरूपम्‌:"
 
 #: package/contents/ui/ConfigGeneral.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
-msgstr ""
+msgstr "प्रक्षेपकनामानि दर्शयतु"
 
 #: package/contents/ui/ConfigGeneral.qml:46
 #, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
-msgstr ""
+msgstr "पॉपअप सक्षमं कुर्वन्तु"
 
 #: package/contents/ui/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
-msgstr ""
+msgstr "शीर्षक:"
 
 #: package/contents/ui/ConfigGeneral.qml:64
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
-msgstr ""
+msgstr "दर्शयतु:"
 
 #: package/contents/ui/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"
-msgstr ""
+msgstr "कस्टम शीर्षक"
 
 #: package/contents/ui/IconItem.qml:177
 #, kde-format
@@ -79,19 +82,19 @@ msgstr "%1 प्रारम्भं कुर्वन्तु"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
-msgstr ""
+msgstr "प्रक्षेपकं योजयतु…"
 
 #: package/contents/ui/IconItem.qml:267
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
-msgstr ""
+msgstr "सम्पादयतु प्रक्षेपक…"
 
 #: package/contents/ui/IconItem.qml:273
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
-msgstr ""
+msgstr "प्रक्षेपकं निष्कासयन्तु"
 
 #: package/contents/ui/main.qml:147
 #, kde-format
@@ -102,7 +105,7 @@ msgstr "त्वरित प्रक्षेपण"
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
-msgstr ""
+msgstr "Drag and Drop इत्यनेन अथवा context menu इत्यस्य उपयोगेन launchers योजयन्तु ।"
 
 #: package/contents/ui/main.qml:178
 #, kde-format
@@ -118,4 +121,4 @@ msgstr "गुप्तचिह्नानि दर्शयतु"
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"
-msgstr ""
+msgstr "प्रक्षेपकं योजयतु…"

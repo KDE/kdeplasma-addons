@@ -20,26 +20,26 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Keys"
-msgstr ""
+msgstr "कीलम्"
 
 #: contents/ui/configAppearance.qml:37
 #, kde-format
 msgctxt ""
 "@label show keyboard indicator when Caps Lock or Num Lock is activated"
 msgid "Show when activated:"
-msgstr ""
+msgstr "सक्रियतायां दर्शयतु:"
 
 #: contents/ui/configAppearance.qml:40
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
-msgstr ""
+msgstr "टोपी ताला"
 
 #: contents/ui/configAppearance.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"
-msgstr ""
+msgstr "नुम् ताला"
 
 #: contents/ui/main.qml:114
 #, kde-format

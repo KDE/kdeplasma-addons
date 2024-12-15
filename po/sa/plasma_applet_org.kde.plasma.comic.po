@@ -3,165 +3,167 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
+# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
-"Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
+"PO-Revision-Date: 2024-12-14 01:48+0530\n"
+"Last-Translator: kali <skkalwar999@gmail.com>\n"
+"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
+"X-Generator: Lokalize 24.08.2\n"
 
 #: comic.cpp:80
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
-msgstr ""
+msgstr "&नवीनपट्टिका सह अग्रिमः ट्याब्"
 
 #: comic.cpp:86
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
-msgstr ""
+msgstr "&First Strip इत्यत्र कूदन्तु"
 
 #: comic.cpp:90
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
-msgstr ""
+msgstr "&Current Strip इत्यत्र कूदन्तु"
 
 #: comic.cpp:94
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
-msgstr ""
+msgstr "पट्टिकां प्रति कूदन्तु…"
 
 #: comic.cpp:98
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
-msgstr ""
+msgstr "वेबसाइट् पश्यन्तु"
 
 #: comic.cpp:102
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
-msgstr ""
+msgstr "%1 इत्यत्र पश्यन्तु"
 
 #: comic.cpp:110
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
-msgstr ""
+msgstr "Shop &Website इत्यत्र गच्छन्तु"
 
 #: comic.cpp:115
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr ""
+msgstr "&हास्यं यथा…"
 
 #: comic.cpp:120
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
-msgstr ""
+msgstr "&वास्तविक आकार"
 
 #: comic.cpp:128
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
-msgstr ""
+msgstr "भण्डार वर्तमान &स्थिति"
 
 #: comicdata.cpp:86
 #, kde-format
 msgctxt "an abbreviation for Number"
 msgid "# %1"
-msgstr ""
+msgstr "# %1"
 
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "सामान्य"
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "स्वरूपम्‌"
 
 #: package/contents/config/config.qml:23
 #, kde-format
 msgctxt "@title"
 msgid "Advanced"
-msgstr ""
+msgstr "उन्नतं"
 
 #: package/contents/ui/ComicBottomInfo.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
-msgstr ""
+msgstr "पट्टिकां कर्तुं कूदन्तु…"
 
 #: package/contents/ui/ComicBottomInfo.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
-msgstr ""
+msgstr "हास्यजालस्थलं पश्यन्तु"
 
 #: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
-msgstr ""
+msgstr "हास्य संग्रहः : १."
 
 #: package/contents/ui/configAdvanced.qml:44
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
 msgid_plural "strips per comic"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "प्रति हास्यं पट्टिका"
+msgstr[1] "प्रति हास्यं पट्टिकाः"
 
 #: package/contents/ui/configAdvanced.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
-msgstr ""
+msgstr "हास्यस्य डाउनलोड् करणं विफलं भवति तदा प्रदर्शनदोषः"
 
 #: package/contents/ui/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
-msgstr ""
+msgstr "दर्शयतु:"
 
 #: package/contents/ui/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
-msgstr ""
+msgstr "हास्य शीर्षक"
 
 #: package/contents/ui/configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
-msgstr ""
+msgstr "हास्यपरिचयकर्ता"
 
 #: package/contents/ui/configAppearance.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
-msgstr ""
+msgstr "हास्य लेखक"
 
 #: package/contents/ui/configAppearance.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
-msgstr ""
+msgstr "हास्य URL"
 
 #: package/contents/ui/configAppearance.qml:71
 #, kde-format
@@ -172,74 +174,74 @@ msgstr "नेविगेशन बटन्स् दर्शयतु : १.
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
-msgstr ""
+msgstr "सर्वदा"
 
 #: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
-msgstr ""
+msgstr "केवलं होवर इत्यत्र एव"
 
 #: package/contents/ui/configGeneral.qml:52
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
-msgstr ""
+msgstr "हास्यकथाः : १."
 
 #: package/contents/ui/configGeneral.qml:72
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
-msgstr ""
+msgstr "नवीन हास्यकथाः प्राप्नुवन्तु…"
 
 #: package/contents/ui/configGeneral.qml:83
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
-msgstr ""
+msgstr "मूल आकारे प्रदर्शयितुं comic इत्यत्र मध्य-क्लिक् कुर्वन्तु"
 
 #: package/contents/ui/configGeneral.qml:92
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
-msgstr ""
+msgstr "प्रत्येकं नूतनानां प्लगिन्स् कृते जाँचं कुर्वन्तु:"
 
 #: package/contents/ui/configGeneral.qml:101
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "दिनं"
+msgstr[1] "दिवसाः"
 
 #: package/contents/ui/configGeneral.qml:107
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
-msgstr ""
+msgstr "प्रत्येकं नूतनानि हास्यकथाः पश्यन्तु:"
 
 #: package/contents/ui/configGeneral.qml:116
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "क्षणं"
+msgstr[1] "पन्चनिमेषः"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Go to Strip"
-msgstr ""
+msgstr "पट्टिकां गच्छन्तु"
 
 #: stripselector.cpp:39
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "&Strip number:"
-msgstr ""
+msgstr "&पट्टिका संख्या: 1 ."
 
 #: stripselector.cpp:102
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
-msgstr ""
+msgstr "पट्टीपरिचयः : १."

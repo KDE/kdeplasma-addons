@@ -21,13 +21,13 @@ msgstr ""
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"
-msgstr ""
+msgstr "परिभाच्छसि"
 
 #: dictionaryrunner.cpp:41
 #, kde-format
 msgctxt "Dictionary keyword"
 msgid "%1:q:"
-msgstr ""
+msgstr "%1:q: 1.1."
 
 #: dictionaryrunner.cpp:41
 #, kde-format
@@ -43,4 +43,4 @@ msgstr "\"%1\" इत्यस्य परिभाषा क्लिप्ब
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Trigger word:"
-msgstr ""
+msgstr "ट्रिगर शब्दः : १."
