@@ -1,4 +1,4 @@
-# Sanskrit translations for kdeplasma-addons package.
+# Hindi translations for kdeplasma-addons package.
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Kali <EMAIL@ADDRESS>, 2024.
@@ -8,44 +8,43 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-07 00:40+0000\n"
-"PO-Revision-Date: 2024-12-13 19:09+0530\n"
+"PO-Revision-Date: 2024-12-15 15:57+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
-"Language-Team: Sanskrit\n"
-"Language: sa\n"
+"Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n>2);\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr "सामान्य"
+msgstr ""
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr "स्वरूपम्‌"
+msgstr ""
 
 #: package/contents/ui/ConfigAppearance.qml:33
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
-msgstr "चिह्नम् : १."
+msgstr ""
 
 #: package/contents/ui/ConfigAppearance.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
-msgstr "वेबसाइटस्य favicon इति"
+msgstr ""
 
 #: package/contents/ui/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
-msgstr "Web Browser इत्यस्य चिह्नं परिवर्तयन्तु"
+msgstr ""
 
 #: package/contents/ui/ConfigAppearance.qml:58
 #, kde-format
@@ -54,145 +53,143 @@ msgid ""
 "Current icon is %1. Click to open menu to change the current icon or reset "
 "to the default icon."
 msgstr ""
-"वर्तमान चिह्नं %1 अस्ति । वर्तमानचिह्नं परिवर्तयितुं अथवा पूर्वनिर्धारितचिह्नं प्रति "
-"पुनःस्थापयितुं मेनू उद्घाटयितुं क्लिक् कुर्वन्तु ।"
 
 #: package/contents/ui/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
-msgstr "चिह्ननाम \"%1\" अस्ति ।"
+msgstr ""
 
 #: package/contents/ui/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr "चिनोतु…"
+msgstr ""
 
 #: package/contents/ui/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
-msgstr "Web Browser कृते एकं चिह्नं चिनोतु"
+msgstr ""
 
 #: package/contents/ui/ConfigAppearance.qml:103
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
-msgstr "पूर्वनिर्धारितचिह्नं प्रति पुनः सेट् कुर्वन्तु"
+msgstr ""
 
 #: package/contents/ui/ConfigAppearance.qml:118
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
-msgstr "नेविगेशन पट्टी प्रदर्शयतु"
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
-msgstr "अन्तिमवारं भ्रमणं कृतं पृष्ठं लोडं कुर्वन्तु"
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
-msgstr "प्रारम्भे : १."
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:33
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
-msgstr "सदैव एतत् पृष्ठं लोड् कुर्वन्तु:"
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:106
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
-msgstr "एकं URL टङ्कयन्तु"
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:76
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
-msgstr "सामग्रीमापनम् : १."
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
-msgstr "नियत स्केल : १."
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
-msgstr "यदि विस्तारः अधः अस्ति तर्हि स्वचालितं स्केलिंग्"
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:151
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
-msgstr "ब्राउजर् सेटिंग्स् : १."
+msgstr ""
 
 #: package/contents/ui/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
-msgstr "निजी ब्राउजिंग"
+msgstr ""
 
 #: package/contents/ui/main.qml:67
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
-msgstr "Go Back इति"
+msgstr ""
 
 #: package/contents/ui/main.qml:74
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
-msgstr "अग्रे गच्छतु"
+msgstr ""
 
 #: package/contents/ui/main.qml:82
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
-msgstr "गृहं गच्छतु"
+msgstr ""
 
 #: package/contents/ui/main.qml:87
 #, kde-format
 msgid "Open Default URL"
-msgstr "Default URL उद्घाटयन्तु"
+msgstr ""
 
 #: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
-msgstr "एतत् पृष्ठं लोड् करणं स्थगयन्तु"
+msgstr ""
 
 #: package/contents/ui/main.qml:142
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
-msgstr "Reload This Page"
+msgstr ""
 
 #: package/contents/ui/main.qml:192
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
-msgstr "Browser मध्ये Link उद्घाटयन्तु"
+msgstr ""
 
 #: package/contents/ui/main.qml:198
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
-msgstr "लिङ्क पता प्रतिलिपि कुर्वन्तु"
+msgstr ""
 
 #: package/contents/ui/main.qml:265
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
-msgstr "पॉपअप अवरुद्धम्"
+msgstr ""
 
 #: package/contents/ui/main.qml:266
 #, kde-format
@@ -200,5 +197,3 @@ msgid ""
 "Click here to open the following blocked popup:\n"
 "%1"
 msgstr ""
-"निम्नलिखितम् अवरुद्धं पॉपअप उद्घाटयितुं अत्र क्लिक् कुर्वन्तु:\n"
-"%1"

@@ -1,82 +1,79 @@
-# Sanskrit translations for kdeplasma-addons package.
+# Hindi translations for kdeplasma-addons package.
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Kali <EMAIL@ADDRESS>, 2024.
 #
-# SPDX-FileCopyrightText: 2024 kali <skkalwar999@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-09-02 00:40+0000\n"
-"PO-Revision-Date: 2024-12-14 01:08+0530\n"
-"Last-Translator: kali <skkalwar999@gmail.com>\n"
-"Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
-"Language: sa\n"
+"PO-Revision-Date: 2024-12-15 15:57+0530\n"
+"Last-Translator: Kali <EMAIL@ADDRESS>\n"
+"Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
+"Language: hi\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n>2);\n"
-"X-Generator: Lokalize 24.08.2\n"
 
 #: package/contents/ui/main.qml:77
 #, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
-msgstr "कोटाप्रतिबन्धाः न प्राप्ताः"
+msgstr ""
 
 #: package/contents/ui/main.qml:77
 #, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
-msgstr "कोटा साधनं न प्राप्तम्"
+msgstr ""
 
 #: package/contents/ui/main.qml:78
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
-msgstr "कृपया 'quota' संस्थापयन्तु।"
+msgstr ""
 
 #: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:166 plugin/DiskQuota.cpp:252
 #, kde-format
 msgid "Disk Quota"
-msgstr "डिस्क कोटा"
+msgstr ""
 
 #: plugin/DiskQuota.cpp:45
 #, kde-format
 msgid "Please install 'quota'"
-msgstr "कृपया 'quota' संस्थापयन्तु।"
+msgstr ""
 
 #: plugin/DiskQuota.cpp:167
 #, kde-format
 msgid "Running quota failed"
-msgstr "कोटा चालनं विफलम् अभवत्"
+msgstr ""
 
 #: plugin/DiskQuota.cpp:227
 #, kde-format
 msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
 msgid "%1: %2% used"
-msgstr "%1: %2% प्रयुक्तम्"
+msgstr ""
 
 #: plugin/DiskQuota.cpp:228
 #, kde-format
 msgctxt "e.g.: 12 GiB of 20 GiB"
 msgid "%1 of %2"
-msgstr "%2 इत्यस्य %1"
+msgstr ""
 
 #: plugin/DiskQuota.cpp:229
 #, kde-format
 msgctxt "e.g.: 8 GiB free"
 msgid "%1 free"
-msgstr "%1 मुक्तम्"
+msgstr ""
 
 #: plugin/DiskQuota.cpp:249
 #, kde-format
 msgctxt "example: Quota: 83% used"
 msgid "Quota: %1% used"
-msgstr "कोटा: %1% प्रयुक्तम्"
+msgstr ""
 
 #: plugin/DiskQuota.cpp:253
 #, kde-format
 msgid "No quota restrictions found."
-msgstr "कोटाप्रतिबन्धाः न प्राप्ताः।"
+msgstr ""
