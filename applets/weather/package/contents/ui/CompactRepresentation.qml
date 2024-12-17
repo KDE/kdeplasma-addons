@@ -55,6 +55,8 @@ Loader {
             Layout.minimumHeight: compactRoot.vertical ? minIconSize : Kirigami.Units.iconSizes.small
 
             WorkspaceComponents.BadgeOverlay {
+                id: badge
+
                 anchors.bottom: parent.bottom
                 anchors.right: parent.right
 
@@ -62,6 +64,18 @@ Loader {
 
                 text: observationModel.temperature
                 icon: parent
+
+                // Non-default state to center if the badge is wider than the icon
+                states: [
+                    State {
+                        when: badge.width >= badge.icon.width
+                        AnchorChanges {
+                            target: badge
+                            anchors.right: undefined
+                            anchors.horizontalCenter: parent.horizontalCenter
+                        }
+                    }
+                ]
             }
         }
     }
