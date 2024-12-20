@@ -118,7 +118,8 @@ add_definitions(
 )
 
 ecm_set_disabled_deprecation_versions(
-    QT 6.5.0
+    QT 6.8.1
+    KF 6.9.0
 )
 
 add_subdirectory(dict)

@@ -289,7 +289,7 @@ QHash<QString, QTimeZone> DateTimeRunner::matchingTimeZones(const QStringView &z
         }
 
         // eg "Sweden"
-        const QString country = QLocale::countryToString(timeZone.country());
+        const QString country = QLocale::territoryToString(timeZone.territory());
         const QString comment = timeZone.comment();
         if (country.contains(zoneTerm, Qt::CaseInsensitive) || comment.contains(zoneTerm, Qt::CaseInsensitive)) {
             const QString regionName = comment.isEmpty() ? country : QLatin1String("%1 - %2").arg(country, comment);
