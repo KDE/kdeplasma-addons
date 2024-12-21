@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2024-12-14 01:48+0530\n"
+"PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -119,7 +119,7 @@ msgstr "हास्यजालस्थलं पश्यन्तु"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
-msgstr "हास्य संग्रहः : १."
+msgstr "हास्य संग्रहः :"
 
 #: package/contents/ui/configAdvanced.qml:44
 #, kde-format
@@ -168,7 +168,7 @@ msgstr "हास्य URL"
 #: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
-msgstr "नेविगेशन बटन्स् दर्शयतु : १."
+msgstr "नेविगेशन बटन्स् दर्शयतु :"
 
 #: package/contents/ui/configAppearance.qml:72
 #, kde-format
@@ -186,7 +186,7 @@ msgstr "केवलं होवर इत्यत्र एव"
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
-msgstr "हास्यकथाः : १."
+msgstr "हास्यकथाः :"
 
 #: package/contents/ui/configGeneral.qml:72
 #, kde-format
@@ -244,4 +244,4 @@ msgstr "&पट्टिका संख्या: 1 ."
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
-msgstr "पट्टीपरिचयः : १."
+msgstr "पट्टीपरिचयः :"

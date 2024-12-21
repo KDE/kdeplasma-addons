@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-20 00:39+0000\n"
-"PO-Revision-Date: 2024-12-14 01:42+0530\n"
+"PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -35,7 +35,7 @@ msgstr "मिलान्कोविच्"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Solar Hijri Calendar (Persian)"
-msgstr "सौर हिजरी पञ्चाङ्ग (फारसी) २."
+msgstr "सौर हिजरी पञ्चाङ्ग (फारसी)"
 
 #: calendarsystem.h:62
 #, kde-format
@@ -43,7 +43,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Astronomical)"
-msgstr "इस्लामिक पञ्चाङ्ग (खगोलीय) २."
+msgstr "इस्लामिक पञ्चाङ्ग (खगोलीय)"
 
 #: calendarsystem.h:66
 #, kde-format
@@ -51,7 +51,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "The Islamic Civil Calendar (Tabular)"
-msgstr "इस्लामिक नागरिक पञ्चाङ्गम् (सारणीबद्धम्) २."
+msgstr "इस्लामिक नागरिक पञ्चाङ्गम् (सारणीबद्धम्)"
 
 #: calendarsystem.h:70
 #, kde-format
@@ -59,7 +59,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Umm al-Qura)"
-msgstr "इस्लामिक पंचांग (उम्म अल-कुरा) २."
+msgstr "इस्लामिक पंचांग (उम्म अल-कुरा)"
 
 #: calendarsystem.h:74
 #, kde-format
@@ -83,7 +83,7 @@ msgstr "हिब्रू पञ्चाङ्ग"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
-msgstr "पञ्चाङ्गव्यवस्था : १."
+msgstr "पञ्चाङ्गव्यवस्था :"
 
 #: config/qml/AlternateCalendarConfig.qml:60
 #, kde-format
@@ -98,7 +98,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
-msgstr "तिथि ऑफसेटः : १."
+msgstr "तिथि ऑफसेटः :"
 
 #: config/qml/AlternateCalendarConfig.qml:79
 #, kde-format
@@ -121,7 +121,7 @@ msgctxt ""
 "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
 "number %4 Full date in Hebrew"
 msgid "%1 %2, %3 (%4)"
-msgstr "%1 %2, %3 (%4) २."
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/indiancalendar.cpp:70
 #, kde-format
@@ -135,7 +135,7 @@ msgctxt ""
 "@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 "
 "Islamic calendar date in Arabic"
 msgid "%1 %2, %3 (%4)"
-msgstr "%1 %2, %3 (%4) २."
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/qtcalendar.cpp:55
 #, kde-format

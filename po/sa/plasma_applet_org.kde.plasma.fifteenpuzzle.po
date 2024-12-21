@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2024-12-14 01:48+0530\n"
+"PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -29,7 +29,7 @@ msgstr "स्वरूपम्‌"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
-msgstr "जालस्य आकारः : १."
+msgstr "जालस्य आकारः :"
 
 #: package/contents/ui/configAppearance.qml:52
 #, kde-format
@@ -72,12 +72,12 @@ msgstr "चित्रसञ्चिकाः (*.png *.jpg *.jpeg *.bmp *.svg 
 #: package/contents/ui/configAppearance.qml:127
 #, kde-format
 msgid "Tiles:"
-msgstr "टाइल्स् : १."
+msgstr "टाइल्स् :"
 
 #: package/contents/ui/configAppearance.qml:131
 #, kde-format
 msgid "Colored numbers:"
-msgstr "रङ्गिणः सङ्ख्याः : १."
+msgstr "रङ्गिणः सङ्ख्याः :"
 
 #: package/contents/ui/FifteenPuzzle.qml:259
 #, kde-format

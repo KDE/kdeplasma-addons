@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2024-12-14 01:48+0530\n"
+"PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
 "Language: sa\n"
@@ -29,13 +29,13 @@ msgstr "सामान्य"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
-msgstr "अधिकतमस्तम्भाः : १."
+msgstr "अधिकतमस्तम्भाः :"
 
 #: package/contents/ui/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
-msgstr "अधिकतमं पङ्क्तयः : १."
+msgstr "अधिकतमं पङ्क्तयः :"
 
 #: package/contents/ui/ConfigGeneral.qml:39
 #, kde-format
