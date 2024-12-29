@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-07 00:40+0000\n"
-"PO-Revision-Date: 2024-03-17 05:34+0100\n"
+"PO-Revision-Date: 2024-12-28 17:41+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -134,13 +134,13 @@ msgstr "Aŭtomata skalo se la larĝo estas malsupre"
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
-msgstr ""
+msgstr "Retumila Agordo:"
 
 #: package/contents/ui/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
-msgstr ""
+msgstr "Privata Retumado"
 
 #: package/contents/ui/main.qml:67
 #, kde-format
