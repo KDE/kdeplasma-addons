@@ -31,16 +31,8 @@ SpellCheckConfig::SpellCheckConfig(QObject *parent, const KPluginMetaData &metaD
 
     layout->addWidget(m_ui, 0, 0);
 
-#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
-    connect(m_ui->m_requireTriggerWord, &QCheckBox::stateChanged, this, &SpellCheckConfig::markAsChanged);
-#else
     connect(m_ui->m_requireTriggerWord, &QCheckBox::checkStateChanged, this, &SpellCheckConfig::markAsChanged);
-#endif
-#if QT_VERSION < QT_VERSION_CHECK(6, 7, 0)
-    connect(m_ui->m_requireTriggerWord, &QCheckBox::stateChanged, this, &SpellCheckConfig::toggleTriggerWord);
-#else
     connect(m_ui->m_requireTriggerWord, &QCheckBox::checkStateChanged, this, &SpellCheckConfig::toggleTriggerWord);
-#endif
     connect(m_ui->m_triggerWord, &QLineEdit::textChanged, this, &SpellCheckConfig::markAsChanged);
     connect(m_ui->m_openKcmButton, &QPushButton::clicked, this, &SpellCheckConfig::openKcm);
 
