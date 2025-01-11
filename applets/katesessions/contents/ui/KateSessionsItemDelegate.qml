@@ -38,7 +38,6 @@ PlasmaComponents3.ItemDelegate {
             }
         }
         onEntered: menuListView.currentIndex = index
-        onExited: menuListView.currentIndex = -1
 
         Item {
             id: label
