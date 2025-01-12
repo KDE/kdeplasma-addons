@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-01-12 02:42+0000\n"
 "PO-Revision-Date: 2021-07-02 11:24+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -19,17 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 21.04.2\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:92
+#: contents/ui/KateSessionsItemDelegate.qml:91
 #, kde-format
 msgid "Session name"
 msgstr "Nombre de la sesión"
 
-#: contents/ui/KateSessionsItemDelegate.qml:104
+#: contents/ui/KateSessionsItemDelegate.qml:103
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "Crear una nueva sesión e iniciar Kate"
 
-#: contents/ui/KateSessionsItemDelegate.qml:116
+#: contents/ui/KateSessionsItemDelegate.qml:115
 #, kde-format
 msgid "Cancel session creation"
 msgstr "Cancelar la creación de sesión"

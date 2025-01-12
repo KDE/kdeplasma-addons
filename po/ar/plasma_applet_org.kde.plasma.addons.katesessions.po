@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-01-12 02:42+0000\n"
 "PO-Revision-Date: 2021-07-22 23:58+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: \n"
@@ -18,17 +18,17 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:92
+#: contents/ui/KateSessionsItemDelegate.qml:91
 #, kde-format
 msgid "Session name"
 msgstr "اسم الجلسة"
 
-#: contents/ui/KateSessionsItemDelegate.qml:104
+#: contents/ui/KateSessionsItemDelegate.qml:103
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "أنشئ جلسة جديدة وابدأ «كيت»"
 
-#: contents/ui/KateSessionsItemDelegate.qml:116
+#: contents/ui/KateSessionsItemDelegate.qml:115
 #, kde-format
 msgid "Cancel session creation"
 msgstr "ألغ إنشاء الجلسة"
