@@ -39,6 +39,8 @@ KWin.TabBoxSwitcher {
 
         color: "transparent"
 
+        Accessible.name: currentItem?.caption
+
         KWin.DesktopBackground {
             activity: KWin.Workspace.currentActivity
             desktop: KWin.Workspace.currentVirtualDesktop
@@ -161,6 +163,7 @@ KWin.TabBoxSwitcher {
                 height: Math.round(thumbnail.implicitHeight * scaleFactor)
                 scale: PathView.onPath ? PathView.scale : 0
                 z: PathView.onPath ? Math.floor(PathView.progress * thumbnailView.visibleCount) : -1
+                Accessible.name: caption
 
                 KWin.WindowThumbnail {
                     id: thumbnail

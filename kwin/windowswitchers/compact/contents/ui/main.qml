@@ -73,7 +73,6 @@ KWin.TabBoxSwitcher {
             property int optimalHeight: compactListView.rowHeight * (compactListView.count || 1)
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.2, optimalWidth), tabBox.screenGeometry.width * 0.8)
             height: Math.min(optimalHeight, tabBox.screenGeometry.height * 0.8)
-            focus: true
 
             // just to get the margin sizes
             KSvg.FrameSvgItem {
@@ -91,6 +90,7 @@ KWin.TabBoxSwitcher {
 
                 anchors.fill: parent
                 clip: true
+                focus: true
 
                 model: tabBox.model
                 delegate: RowLayout {
@@ -101,6 +101,7 @@ KWin.TabBoxSwitcher {
 
                     spacing: 2 * Kirigami.Units.smallSpacing
 
+                    Accessible.name: captionItem.text//Accessible.name
                     Kirigami.Icon {
                         id: iconItem
                         source: model.icon

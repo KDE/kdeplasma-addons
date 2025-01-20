@@ -58,6 +58,8 @@ KWin.TabBoxSwitcher {
                     source: model.icon
                     active: index == icons.currentIndex
 
+                    Accessible.name: caption
+
                     TapHandler {
                         onSingleTapped: {
                             if (index === icons.currentIndex) {
