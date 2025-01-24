@@ -88,6 +88,8 @@ KWin.TabBoxSwitcher {
 
             pathItemCount: 12
 
+            Accessible.name: currentItem?.Accessible.name
+
             path: Path {
                 // Nearest point of the path
                 startX: Math.round(thumbnailView.width * 0.75)
@@ -130,6 +132,8 @@ KWin.TabBoxSwitcher {
 
                 // Reduce opacity on the end so items dissapear more naturally
                 opacity: Math.min(1, (1 - PathView.progress) / thumbnailView.preferredHighlightBegin);
+
+                Accessible.name: caption
 
                 KWin.WindowThumbnail {
                     id: thumbnail
