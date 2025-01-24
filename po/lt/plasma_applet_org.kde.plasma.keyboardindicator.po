@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-05 00:41+0000\n"
-"PO-Revision-Date: 2024-01-27 17:35+0200\n"
+"PO-Revision-Date: 2025-01-24 00:58+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.5\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -47,52 +47,52 @@ msgstr "Skaitmenų klaviatūra"
 #: contents/ui/main.qml:114
 #, kde-format
 msgid "Alt is latched"
-msgstr ""
+msgstr "Alt yra užfiksuotas"
 
 #: contents/ui/main.qml:116
 #, kde-format
 msgid "Alt is locked"
-msgstr ""
+msgstr "Alt yra užrakintas"
 
 #: contents/ui/main.qml:120
 #, kde-format
 msgid "Shift is latched"
-msgstr ""
+msgstr "Lyg2 yra užfiksuotas"
 
 #: contents/ui/main.qml:122
 #, kde-format
 msgid "Shift is locked"
-msgstr ""
+msgstr "Lyg2 yra užrakintas"
 
 #: contents/ui/main.qml:126
 #, kde-format
 msgid "Control is latched"
-msgstr ""
+msgstr "Vald yra užfiksuotas"
 
 #: contents/ui/main.qml:128
 #, kde-format
 msgid "Control is locked"
-msgstr ""
+msgstr "Vald yra užrakintas"
 
 #: contents/ui/main.qml:132
 #, kde-format
 msgid "Meta is latched"
-msgstr ""
+msgstr "Meta yra užfiksuotas"
 
 #: contents/ui/main.qml:134
 #, kde-format
 msgid "Meta is locked"
-msgstr ""
+msgstr "Meta yra užrakintas"
 
 #: contents/ui/main.qml:138
 #, kde-format
 msgid "Alt Gr is latched"
-msgstr ""
+msgstr "Alt Gr yra užfiksuotas"
 
 #: contents/ui/main.qml:140
 #, kde-format
 msgid "Alt Gr is locked"
-msgstr ""
+msgstr "Alt Gr yra užrakintas"
 
 #: contents/ui/main.qml:144
 #, kde-format
