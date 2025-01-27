@@ -51,6 +51,9 @@ PlasmoidItem {
         return "#202020";
     }
 
+    property bool scheduledForDestruction: false
+    Plasmoid.onDestroyedChanged: destroyed => scheduledForDestruction = destroyed
+
     onExternalData: (mimetype, data) => {
         // if we dropped a text file, we want its contents,
         // otherwise we take the external data verbatim
@@ -112,7 +115,11 @@ PlasmoidItem {
             }
         }
         Component.onDestruction: {
-            note.save(mainTextArea.text);
+            if (scheduledForDestruction) {
+                noteManager.deleteNoteResources(note.id);
+            } else {
+                note.save(mainTextArea.text);
+            }
         }
 
         FocusScope {
