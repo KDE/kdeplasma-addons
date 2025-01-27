@@ -233,9 +233,10 @@ PlasmoidItem {
                     QQC2.Menu {
                         id: contextMenu
 
+                        readonly property bool shortcutsEnabled: contextMenu.visible
                         ShortcutMenuItem {
                             _sequence: StandardKey.Undo
-                            _enabled: mainTextArea.canUndo
+                            _enabled: contextMenu.shortcutsEnabled && mainTextArea.canUndo
                             _iconName: "edit-undo"
                             _text: i18n("Undo")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.undo())
@@ -243,7 +244,7 @@ PlasmoidItem {
 
                         ShortcutMenuItem {
                             _sequence: StandardKey.Redo
-                            _enabled: mainTextArea.canRedo
+                            _enabled: contextMenu.shortcutsEnabled && mainTextArea.canRedo
                             _iconName: "edit-redo"
                             _text: i18n("Redo")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.redo())
@@ -253,7 +254,7 @@ PlasmoidItem {
 
                         ShortcutMenuItem {
                             _sequence: StandardKey.Cut
-                            _enabled: mainTextArea.selectedText.length > 0
+                            _enabled: contextMenu.shortcutsEnabled && mainTextArea.selectedText.length > 0
                             _iconName: "edit-cut"
                             _text: i18n("Cut")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.cut())
@@ -261,7 +262,7 @@ PlasmoidItem {
 
                         ShortcutMenuItem {
                             _sequence: StandardKey.Copy
-                            _enabled: mainTextArea.selectedText.length > 0
+                            _enabled: contextMenu.shortcutsEnabled && mainTextArea.selectedText.length > 0
                             _iconName: "edit-copy"
                             _text: i18n("Copy")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.copy())
@@ -269,21 +270,21 @@ PlasmoidItem {
 
                         ShortcutMenuItem {
                             _sequence: StandardKey.Paste
-                            _enabled: mainTextArea.canPaste
+                            _enabled: contextMenu.shortcutsEnabled && mainTextArea.canPaste
                             _iconName: "edit-paste"
                             _text: i18n("Paste")
                             onTriggered: contextMenu.retFocus(() => documentHandler.pasteWithoutFormatting())
                         }
 
                         ShortcutMenuItem {
-                            _enabled: mainTextArea.canPaste
+                            _enabled: contextMenu.shortcutsEnabled && mainTextArea.canPaste
                             _text: i18n("Paste with Full Formatting")
                             _iconName: "edit-paste"
                             onTriggered: contextMenu.retFocus(() => mainTextArea.paste())
                         }
 
                         ShortcutMenuItem {
-                            _enabled: mainTextArea.selectedText.length > 0
+                            _enabled: contextMenu.shortcutsEnabled && mainTextArea.selectedText.length > 0
                             _text: i18nc("@action:inmenu", "Remove Formatting")
                             _iconName: "edit-clear-all"
                             onTriggered: {
@@ -297,14 +298,14 @@ PlasmoidItem {
 
                         ShortcutMenuItem {
                             _sequence: StandardKey.Delete
-                            _enabled: mainTextArea.selectedText.length > 0
+                            _enabled: contextMenu.shortcutsEnabled && mainTextArea.selectedText.length > 0
                             _iconName: "edit-delete"
                             _text: i18n("Delete")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.remove(mainTextArea.selectionStart, mainTextArea.selectionEnd))
                         }
 
                         ShortcutMenuItem {
-                            _enabled: mainTextArea.text.length > 0
+                            _enabled: contextMenu.shortcutsEnabled && mainTextArea.text.length > 0
                             _iconName: "edit-clear"
                             _text: i18n("Clear")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.clear())
@@ -314,7 +315,7 @@ PlasmoidItem {
 
                         ShortcutMenuItem {
                             _sequence: StandardKey.SelectAll
-                            _enabled: mainTextArea.text.length > 0
+                            _enabled: contextMenu.shortcutsEnabled && mainTextArea.text.length > 0
                             _iconName: "edit-select-all"
                             _text: i18n("Select All")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.selectAll())
