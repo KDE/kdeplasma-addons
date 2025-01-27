@@ -6,14 +6,14 @@
 # Xosé <xosecalvo@gmail.com>, 2009.
 # Marce Villarino <mvillarino@gmail.com>, 2009.
 # Adrian Chaves Fernandez <adriyetichaves@gmail.com>, 2013, 2016.
-# SPDX-FileCopyrightText: 2024 Adrián Chaves (Gallaecio)
+# SPDX-FileCopyrightText: 2024, 2025 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-30 00:40+0000\n"
-"PO-Revision-Date: 2024-08-30 12:24+0200\n"
+"PO-Revision-Date: 2025-01-26 18:56+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
@@ -21,7 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 24.12.1\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -507,7 +507,7 @@ msgid ""
 "persists for longer than a day, submit a bug report."
 msgstr ""
 "Pode que o fornecedor meteorolóxico teña problemas técnicos. Se o problema "
-"persiste máis dun día, informe do erro."
+"persiste máis dun día, entregue un informe de fallo."
 
 #: package/contents/ui/TopPanel.qml:83
 #, kde-format
