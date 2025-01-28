@@ -83,6 +83,14 @@ PlasmoidItem {
         id: noteManager
     }
 
+    Component.onDestruction: {
+        if (scheduledForDestruction) {
+            noteManager.deleteNoteResources(note.id);
+        } else {
+            note.save(mainTextArea.text);
+        }
+    }
+
     preloadFullRepresentation: true
     fullRepresentation: KSvg.SvgItem {
         id: backgroundItem
@@ -112,13 +120,6 @@ PlasmoidItem {
                 if (expanded && (Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal)) {
                     mainTextArea.forceActiveFocus()
                 }
-            }
-        }
-        Component.onDestruction: {
-            if (scheduledForDestruction) {
-                noteManager.deleteNoteResources(note.id);
-            } else {
-                note.save(mainTextArea.text);
             }
         }
 
