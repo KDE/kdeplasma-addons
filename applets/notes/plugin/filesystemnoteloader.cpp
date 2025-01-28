@@ -11,9 +11,11 @@
 
 #include <QDebug>
 #include <QStandardPaths>
+#include <QUrl>
 #include <QUuid>
 
 #include <KDirWatch>
+#include <KIO/CopyJob>
 
 class FileNote : public Note
 {
@@ -44,7 +46,9 @@ QStringList FileSystemNoteLoader::allNoteIds()
 
 void FileSystemNoteLoader::deleteNoteResources(const QString &id)
 {
-    m_notesDir.remove(id);
+    // m_notesDir.remove(id);
+    QUrl url = QUrl::fromLocalFile(m_notesDir.absoluteFilePath(id));
+    KIO::trash(url, KIO::HideProgressInfo);
 }
 
 Note *FileSystemNoteLoader::loadNote(const QString &id)
