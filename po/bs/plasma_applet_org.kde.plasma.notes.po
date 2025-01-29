@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-28 00:42+0000\n"
+"POT-Creation-Date: 2025-01-29 00:42+0000\n"
 "PO-Revision-Date: 2012-10-05 17:28+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -87,160 +87,160 @@ msgstr ""
 msgid "A transparent sticky note with light text"
 msgstr ""
 
-#: package/contents/ui/main.qml:241
+#: package/contents/ui/main.qml:249
 #, kde-format
 msgid "Undo"
 msgstr ""
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:257
 #, kde-format
 msgid "Redo"
 msgstr ""
 
-#: package/contents/ui/main.qml:259
+#: package/contents/ui/main.qml:267
 #, kde-format
 msgid "Cut"
 msgstr ""
 
-#: package/contents/ui/main.qml:267
+#: package/contents/ui/main.qml:275
 #, kde-format
 msgid "Copy"
 msgstr ""
 
-#: package/contents/ui/main.qml:275
+#: package/contents/ui/main.qml:283
 #, kde-format
 msgid "Paste"
 msgstr ""
 
-#: package/contents/ui/main.qml:281
+#: package/contents/ui/main.qml:289
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr ""
 
-#: package/contents/ui/main.qml:288
+#: package/contents/ui/main.qml:296
 #, fuzzy, kde-format
 #| msgid "Formatting"
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "Formatiranje"
 
-#: package/contents/ui/main.qml:303
+#: package/contents/ui/main.qml:311
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: package/contents/ui/main.qml:310
+#: package/contents/ui/main.qml:318
 #, kde-format
 msgid "Clear"
 msgstr ""
 
-#: package/contents/ui/main.qml:320
+#: package/contents/ui/main.qml:328
 #, kde-format
 msgid "Select All"
 msgstr ""
 
-#: package/contents/ui/main.qml:448
+#: package/contents/ui/main.qml:456
 #, fuzzy, kde-format
 #| msgid "Bold"
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Podebljano"
 
-#: package/contents/ui/main.qml:460
+#: package/contents/ui/main.qml:468
 #, fuzzy, kde-format
 #| msgid "Italic"
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Kurziv"
 
-#: package/contents/ui/main.qml:472
+#: package/contents/ui/main.qml:480
 #, fuzzy, kde-format
 #| msgid "Underline"
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Podvučeno"
 
-#: package/contents/ui/main.qml:484
+#: package/contents/ui/main.qml:492
 #, fuzzy, kde-format
 #| msgid "StrikeOut"
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Precrtano"
 
-#: package/contents/ui/main.qml:558
+#: package/contents/ui/main.qml:566
 #, kde-format
 msgid "Discard this note?"
 msgstr ""
 
-#: package/contents/ui/main.qml:559
+#: package/contents/ui/main.qml:567
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr ""
 
-#: package/contents/ui/main.qml:579
+#: package/contents/ui/main.qml:587
 #, fuzzy, kde-format
 #| msgid "White"
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Bijela"
 
-#: package/contents/ui/main.qml:583
+#: package/contents/ui/main.qml:591
 #, fuzzy, kde-format
 #| msgid "Black"
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Crna"
 
-#: package/contents/ui/main.qml:587
+#: package/contents/ui/main.qml:595
 #, fuzzy, kde-format
 #| msgid "Red"
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Crvena"
 
-#: package/contents/ui/main.qml:591
+#: package/contents/ui/main.qml:599
 #, fuzzy, kde-format
 #| msgid "Orange"
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Narandžasta"
 
-#: package/contents/ui/main.qml:595
+#: package/contents/ui/main.qml:603
 #, fuzzy, kde-format
 #| msgid "Yellow"
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Žuta"
 
-#: package/contents/ui/main.qml:599
+#: package/contents/ui/main.qml:607
 #, fuzzy, kde-format
 #| msgid "Green"
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Zelena"
 
-#: package/contents/ui/main.qml:603
+#: package/contents/ui/main.qml:611
 #, fuzzy, kde-format
 #| msgid "Blue"
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Plava"
 
-#: package/contents/ui/main.qml:607
+#: package/contents/ui/main.qml:615
 #, fuzzy, kde-format
 #| msgid "Pink"
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Roza"
 
-#: package/contents/ui/main.qml:611
+#: package/contents/ui/main.qml:619
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "Prozirno"
 
-#: package/contents/ui/main.qml:615
+#: package/contents/ui/main.qml:623
 #, fuzzy, kde-format
 #| msgid "Translucent"
 msgctxt "@item:inmenu"

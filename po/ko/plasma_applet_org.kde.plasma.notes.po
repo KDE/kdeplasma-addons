@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-28 00:42+0000\n"
+"POT-Creation-Date: 2025-01-29 00:42+0000\n"
 "PO-Revision-Date: 2024-02-09 23:35+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -83,146 +83,146 @@ msgstr "투명한 메모지"
 msgid "A transparent sticky note with light text"
 msgstr "밝은 텍스트가 있는 반투명한 메모지"
 
-#: package/contents/ui/main.qml:241
+#: package/contents/ui/main.qml:249
 #, kde-format
 msgid "Undo"
 msgstr "실행 취소"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:257
 #, kde-format
 msgid "Redo"
 msgstr "다시 실행"
 
-#: package/contents/ui/main.qml:259
+#: package/contents/ui/main.qml:267
 #, kde-format
 msgid "Cut"
 msgstr "잘라내기"
 
-#: package/contents/ui/main.qml:267
+#: package/contents/ui/main.qml:275
 #, kde-format
 msgid "Copy"
 msgstr "복사"
 
-#: package/contents/ui/main.qml:275
+#: package/contents/ui/main.qml:283
 #, kde-format
 msgid "Paste"
 msgstr "붙여넣기"
 
-#: package/contents/ui/main.qml:281
+#: package/contents/ui/main.qml:289
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "서식을 포함하여 붙여넣기"
 
-#: package/contents/ui/main.qml:288
+#: package/contents/ui/main.qml:296
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "서식 제거"
 
-#: package/contents/ui/main.qml:303
+#: package/contents/ui/main.qml:311
 #, kde-format
 msgid "Delete"
 msgstr "삭제"
 
-#: package/contents/ui/main.qml:310
+#: package/contents/ui/main.qml:318
 #, kde-format
 msgid "Clear"
 msgstr "지우기"
 
-#: package/contents/ui/main.qml:320
+#: package/contents/ui/main.qml:328
 #, kde-format
 msgid "Select All"
 msgstr "모두 선택"
 
-#: package/contents/ui/main.qml:448
+#: package/contents/ui/main.qml:456
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "굵게"
 
-#: package/contents/ui/main.qml:460
+#: package/contents/ui/main.qml:468
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "이탤릭"
 
-#: package/contents/ui/main.qml:472
+#: package/contents/ui/main.qml:480
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "밑줄"
 
-#: package/contents/ui/main.qml:484
+#: package/contents/ui/main.qml:492
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "취소선"
 
-#: package/contents/ui/main.qml:558
+#: package/contents/ui/main.qml:566
 #, kde-format
 msgid "Discard this note?"
 msgstr "이 메모를 삭제하시겠습니까?"
 
-#: package/contents/ui/main.qml:559
+#: package/contents/ui/main.qml:567
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "이 메모를 삭제하시겠습니까?"
 
-#: package/contents/ui/main.qml:579
+#: package/contents/ui/main.qml:587
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "흰색"
 
-#: package/contents/ui/main.qml:583
+#: package/contents/ui/main.qml:591
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "검은색"
 
-#: package/contents/ui/main.qml:587
+#: package/contents/ui/main.qml:595
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "빨간색"
 
-#: package/contents/ui/main.qml:591
+#: package/contents/ui/main.qml:599
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "주황색"
 
-#: package/contents/ui/main.qml:595
+#: package/contents/ui/main.qml:603
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "노란색"
 
-#: package/contents/ui/main.qml:599
+#: package/contents/ui/main.qml:607
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "녹색"
 
-#: package/contents/ui/main.qml:603
+#: package/contents/ui/main.qml:611
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "파란색"
 
-#: package/contents/ui/main.qml:607
+#: package/contents/ui/main.qml:615
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "분홍색"
 
-#: package/contents/ui/main.qml:611
+#: package/contents/ui/main.qml:619
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "투명"
 
-#: package/contents/ui/main.qml:615
+#: package/contents/ui/main.qml:623
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
