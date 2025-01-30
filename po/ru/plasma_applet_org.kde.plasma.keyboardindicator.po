@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Alexander Potashev <aspotashev@gmail.com>, 2018.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2021, 2022, 2023.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2018, 2021, 2022, 2023, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-05 00:41+0000\n"
-"PO-Revision-Date: 2023-12-24 18:35+0300\n"
+"PO-Revision-Date: 2025-01-27 11:27+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -47,52 +47,52 @@ msgstr "Num Lock"
 #: contents/ui/main.qml:114
 #, kde-format
 msgid "Alt is latched"
-msgstr ""
+msgstr "Клавиша Alt зажата"
 
 #: contents/ui/main.qml:116
 #, kde-format
 msgid "Alt is locked"
-msgstr ""
+msgstr "Клавиша Alt заблокирована"
 
 #: contents/ui/main.qml:120
 #, kde-format
 msgid "Shift is latched"
-msgstr ""
+msgstr "Клавиша Shift зажата"
 
 #: contents/ui/main.qml:122
 #, kde-format
 msgid "Shift is locked"
-msgstr ""
+msgstr "Клавиша Shift заблокирована"
 
 #: contents/ui/main.qml:126
 #, kde-format
 msgid "Control is latched"
-msgstr ""
+msgstr "Клавиша Control зажата"
 
 #: contents/ui/main.qml:128
 #, kde-format
 msgid "Control is locked"
-msgstr ""
+msgstr "Клавиша Control заблокирована"
 
 #: contents/ui/main.qml:132
 #, kde-format
 msgid "Meta is latched"
-msgstr ""
+msgstr "Клавиша Meta зажата"
 
 #: contents/ui/main.qml:134
 #, kde-format
 msgid "Meta is locked"
-msgstr ""
+msgstr "Клавиша Meta заблокирована"
 
 #: contents/ui/main.qml:138
 #, kde-format
 msgid "Alt Gr is latched"
-msgstr ""
+msgstr "Клавиша Alt Gr зажата"
 
 #: contents/ui/main.qml:140
 #, kde-format
 msgid "Alt Gr is locked"
-msgstr ""
+msgstr "Клавиша Alt Gr заблокирована"
 
 #: contents/ui/main.qml:144
 #, kde-format
