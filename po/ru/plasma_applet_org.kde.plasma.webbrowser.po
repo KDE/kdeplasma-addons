@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # Olesya Gerasimenko <translation-team@basealt.ru>, 2022.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2023, 2024.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2023, 2024, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-07 00:40+0000\n"
-"PO-Revision-Date: 2024-06-27 20:06+0300\n"
+"PO-Revision-Date: 2025-01-27 12:01+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -135,13 +135,13 @@ msgstr "Масштабировать автоматически, если шир
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
-msgstr ""
+msgstr "Параметры браузера:"
 
 #: package/contents/ui/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
-msgstr ""
+msgstr "Режим конфиденциального просмотра"
 
 #: package/contents/ui/main.qml:67
 #, kde-format
