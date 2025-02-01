@@ -40,8 +40,6 @@ CharacterRunnerConfig::CharacterRunnerConfig(QObject *parent, const KPluginMetaD
 
 void CharacterRunnerConfig::load()
 {
-    KCModule::load();
-
     KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
     KConfigGroup grp = cfg->group("Runners").group(KRUNNER_PLUGIN_NAME);
 
@@ -61,6 +59,8 @@ void CharacterRunnerConfig::load()
                                             widget());
         m_ui->verticalLayout->insertWidget(0, msg);
     }
+
+    KCModule::load();
 }
 
 void CharacterRunnerConfig::save()
