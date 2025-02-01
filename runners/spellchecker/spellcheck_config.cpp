@@ -55,8 +55,6 @@ void SpellCheckConfig::openKcm()
 
 void SpellCheckConfig::load()
 {
-    KCModule::load();
-
     // FIXME: This shouldn't be hardcoded!
     const KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
     const KConfigGroup grp = cfg->group("Runners").group(KRUNNER_PLUGIN_NAME);
@@ -71,11 +69,13 @@ void SpellCheckConfig::load()
     m_ui->m_requireTriggerWord->setCheckState((requireTrigger) ? Qt::Checked : Qt::Unchecked);
     m_ui->m_triggerWord->setText(trigger);
 
-    setNeedsSave(false);
+    KCModule::load();
 }
 
 void SpellCheckConfig::save()
 {
+    KCModule::save();
+
     // FIXME: This shouldn't be hardcoded!
     KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
     KConfigGroup grp = cfg->group("Runners").group(KRUNNER_PLUGIN_NAME);
@@ -86,15 +86,13 @@ void SpellCheckConfig::save()
     }
     grp.writeEntry("requireTriggerWord", requireTrigger);
     grp.sync();
-
-    setNeedsSave(false);
 }
 
 void SpellCheckConfig::defaults()
 {
     m_ui->m_requireTriggerWord->setCheckState(Qt::Checked);
     m_ui->m_triggerWord->setText(i18n("spell"));
-    setNeedsSave(true);
+    markAsChanged();
 }
 
 K_PLUGIN_CLASS(SpellCheckConfig)

@@ -27,12 +27,11 @@ DictionaryRunnerConfig::DictionaryRunnerConfig(QObject *parent, const KPluginMet
 
 void DictionaryRunnerConfig::load()
 {
-    KCModule::load();
     KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QLatin1String("krunnerrc"));
     KConfigGroup grp = cfg->group("Runners");
     grp = KConfigGroup(&grp, KRUNNER_PLUGIN_NAME);
     m_triggerWord->setText(grp.readEntry(CONFIG_TRIGGERWORD, i18nc("Trigger word before word to define", "define")));
-    setNeedsSave(false);
+    KCModule::load();
 }
 
 void DictionaryRunnerConfig::save()
@@ -43,14 +42,13 @@ void DictionaryRunnerConfig::save()
     grp = KConfigGroup(&grp, KRUNNER_PLUGIN_NAME);
     grp.writeEntry(CONFIG_TRIGGERWORD, m_triggerWord->text());
     grp.sync();
-    setNeedsSave(false);
 }
 
 void DictionaryRunnerConfig::defaults()
 {
     KCModule::defaults();
     m_triggerWord->setText(i18nc("Trigger word before word to define", "define"));
-    setNeedsSave(true);
+    markAsChanged();
 }
 
 #include "dictionaryrunner_config.moc"
