@@ -200,7 +200,10 @@ PlasmoidItem {
 
                         Accessible.description: i18nc("@action:button", "Switch to User %1", text)
 
-                        onClicked: sessionsModel.switchUser(model.vtNumber, sessionsModel.shouldLock)
+                        onClicked: {
+                            root.expanded = false
+                            sessionsModel.switchUser(model.vtNumber, sessionsModel.shouldLock)
+                        }
                     }
                 }
             }
@@ -214,7 +217,10 @@ PlasmoidItem {
                 KeyNavigation.up: userList.count > 0 ? userList.itemAtIndex(userList.count - 1) : currentUserItem.nextItemInFocusChain()
                 KeyNavigation.down: lockScreenButton
 
-                onClicked: sessionsModel.startNewSession(sessionsModel.shouldLock)
+                onClicked: {
+                    root.expanded = false
+                    sessionsModel.startNewSession(sessionsModel.shouldLock)
+                }
             }
 
             ActionListDelegate {
