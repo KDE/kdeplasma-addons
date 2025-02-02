@@ -25,96 +25,91 @@ PlasmaComponents3.ItemDelegate {
 
     height: Math.max(label.height, sessionnameditlayout.implicitHeight) + Kirigami.Units.smallSpacing
 
-    MouseArea {
-        anchors.fill: parent
-        hoverEnabled: true
-
-        onClicked: {
-            if (profileIdentifier !== "")
-                menuItem.itemSelected(profileIdentifier);
-            else {
-                showInput=true;
-                sessionname.forceActiveFocus(Qt.MouseFocusReason);
-            }
+    onClicked: {
+        if (profileIdentifier !== "")
+            menuItem.itemSelected(profileIdentifier);
+        else {
+            showInput=true;
+            sessionname.forceActiveFocus(Qt.MouseFocusReason);
         }
-        onEntered: menuListView.currentIndex = index
+    }
 
-        Item {
-            id: label
-            height: iconItem.height
+    Item {
+        id: label
+        height: iconItem.height
+        anchors {
+            left: parent.left
+            leftMargin: Kirigami.Units.smallSpacing
+            right: parent.right
+            verticalCenter: parent.verticalCenter
+        }
+
+        PlasmaComponents3.Label {
             anchors {
                 left: parent.left
-                leftMargin: Kirigami.Units.smallSpacing
                 right: parent.right
+                rightMargin: Kirigami.Units.gridUnit * 2
+                leftMargin: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing * 2
                 verticalCenter: parent.verticalCenter
             }
+            maximumLineCount: 1
+            text: name.trim()
+            textFormat: Text.PlainText
+            visible: !showInput
+            elide: Text.ElideRight
+            wrapMode: Text.Wrap
+        }
 
-            PlasmaComponents3.Label {
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    rightMargin: Kirigami.Units.gridUnit * 2
-                    leftMargin: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing * 2
-                    verticalCenter: parent.verticalCenter
-                }
-                maximumLineCount: 1
-                text: name.trim()
-                textFormat: Text.PlainText
-                visible: !showInput
-                elide: Text.ElideRight
-                wrapMode: Text.Wrap
-            }
+        Kirigami.Icon {
+            id: iconItem
+            width: Kirigami.Units.iconSizes.small
+            height: width
+            anchors.verticalCenter: parent.verticalCenter
+            source: iconName
+        }
+    }
 
-            Kirigami.Icon {
-                id: iconItem
-                width: Kirigami.Units.iconSizes.small
-                height: width
-                anchors.verticalCenter: parent.verticalCenter
-                source: iconName
+    RowLayout {
+        id:sessionnameditlayout
+        visible:showInput
+        height: implicitHeight
+        anchors {
+            left: parent.left
+            right: parent.right
+            rightMargin: 0
+            leftMargin: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing * 2
+            verticalCenter: parent.verticalCenter
+        }
+
+        PlasmaComponents3.TextField {
+            id: sessionname
+            placeholderText: i18n("Session name")
+            clearButtonShown: true
+            Layout.fillWidth: true
+            Keys.onReturnPressed: {menuItem.itemSelected(sessionname.text.replace(/^\s+|\s+$/g, '')); showInput=false;}
+        }
+
+        PlasmaComponents3.ToolButton {
+            icon.name: "dialog-ok"
+            enabled: sessionname.text.replace(/^\s+|\s+$/g, '').length>0
+            onClicked: {menuItem.itemSelected(sessionname.text.replace(/^\s+|\s+$/g, '')); showInput=false;}
+
+            PlasmaComponents3.ToolTip {
+                text: i18n("Create new session and start Kate")
             }
         }
 
-        RowLayout {
-                id:sessionnameditlayout
-                visible:showInput
-                height: implicitHeight
-                anchors {
-                    left: parent.left
-                    right: parent.right
-                    rightMargin: 0
-                    leftMargin: Kirigami.Units.iconSizes.small + Kirigami.Units.smallSpacing * 2
-                    verticalCenter: parent.verticalCenter
-                }
+        PlasmaComponents3.ToolButton {
+            icon.name: "dialog-cancel"
+            onClicked: {
+                showInput=false;
+                sessionname.text='';
+            }
 
-                PlasmaComponents3.TextField {
-                    id: sessionname
-                    placeholderText: i18n("Session name")
-                    clearButtonShown: true
-                    Layout.fillWidth: true
-                    Keys.onReturnPressed: {menuItem.itemSelected(sessionname.text.replace(/^\s+|\s+$/g, '')); showInput=false;}
-                }
-
-                PlasmaComponents3.ToolButton {
-                    icon.name: "dialog-ok"
-                    enabled: sessionname.text.replace(/^\s+|\s+$/g, '').length>0
-                    onClicked: {menuItem.itemSelected(sessionname.text.replace(/^\s+|\s+$/g, '')); showInput=false;}
-
-                    PlasmaComponents3.ToolTip {
-                        text: i18n("Create new session and start Kate")
-                    }
-                }
-
-                PlasmaComponents3.ToolButton {
-                    icon.name: "dialog-cancel"
-                    onClicked: {
-                        showInput=false;
-                        sessionname.text='';
-                    }
-
-                    PlasmaComponents3.ToolTip {
-                        text: i18n("Cancel session creation")
-                    }
-                }
+            PlasmaComponents3.ToolTip {
+                text: i18n("Cancel session creation")
+            }
         }
     }
 }
+

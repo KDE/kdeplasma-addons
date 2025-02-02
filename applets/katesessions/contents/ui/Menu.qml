@@ -37,6 +37,14 @@ PlasmaComponents3.ScrollView {
             onItemSelected: function(profileIdentifier) {
                 menu.itemSelected(profileIdentifier)
             }
+
+            onHoveredChanged: () => {
+                if (hovered)  {
+                    menuListView.currentIndex = index
+                } else {
+                    if (menuListView.currentIndex == index) menuListView.currentIndex = -1
+                }
+            }
         }
     }
 }
