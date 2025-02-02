@@ -11,6 +11,7 @@ import org.kde.config as KConfig
 import org.kde.kcmutils as KCMUtils
 import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.components as KirigamiComponents
+import org.kde.plasma.components as PC3
 
 ListDelegate {
     id: item
@@ -23,6 +24,8 @@ ListDelegate {
         anchors.fill: parent
 
         name: item.text
+        PC3.ToolTip.text: Accessible.description
+        Accessible.description: i18nc("@action:button @info:tooltip accessible","Open user configuration")
 
         // don't block mouse hover from the underlying ListView highlight
         enabled: KConfig.KAuthorized.authorizeControlModule("kcm_users")
