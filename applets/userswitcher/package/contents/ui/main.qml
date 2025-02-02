@@ -142,6 +142,7 @@ PlasmoidItem {
                 subText: i18n("Current user")
                 source: root.avatarIcon
                 hoverEnabled: false
+                down: false
             }
 
             PlasmaComponents3.ScrollView {
