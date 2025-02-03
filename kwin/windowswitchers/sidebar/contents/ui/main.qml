@@ -57,7 +57,7 @@ KWin.TabBoxSwitcher {
 
                 delegate: MouseArea {
                     width: thumbnailListView.width
-                    height: delegateColumn.height + 2 * delegateColumn.y
+                    height: delegateColumn.implicitHeight + 2 * delegateColumn.anchors.margins
                     focus: ListView.isCurrentItem
 
                     Accessible.name: model.caption
@@ -73,10 +73,13 @@ KWin.TabBoxSwitcher {
 
                     ColumnLayout {
                         id: delegateColumn
-                        anchors.horizontalCenter: parent.horizontalCenter
-                        // anchors.centerIn causes layouting glitches
-                        y: Kirigami.Units.smallSpacing
-                        width: parent.width - 2 * Kirigami.Units.smallSpacing
+                        anchors {
+                            left: parent.left
+                            top: parent.top
+                            right: parent.right
+                            margins: Kirigami.Units.smallSpacing
+                        }
+
                         spacing: Kirigami.Units.smallSpacing
 
                         Item {
