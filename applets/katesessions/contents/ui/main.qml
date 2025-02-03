@@ -71,7 +71,7 @@ PlasmoidItem {
             visible: false
         }
 
-        Keys.onPressed: {
+        Keys.onPressed: (event) => {
             switch(event.key) {
                 case Qt.Key_Up: {
                     sessionsMenu.view.decrementCurrentIndex();
@@ -86,11 +86,8 @@ PlasmoidItem {
                 case Qt.Key_Enter:
                 case Qt.Key_Return: {
                     if (sessionsMenu.view.currentIndex >= 0) {
-                        const profileIdentifier = sessionsMenu.model.get(sessionsMenu.view.currentIndex).profileIdentifier;
-                        if (profileIdentifier) {
-                            model.openProfile(profileIdentifier);
+                        sessionsMenu.view.currentItem.clicked()
                             sessionsMenu.view.currentIndex = 0;
-                        }
                     }
                     break;
                 }

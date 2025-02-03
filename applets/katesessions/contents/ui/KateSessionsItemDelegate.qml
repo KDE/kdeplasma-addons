@@ -24,8 +24,10 @@ PlasmaComponents3.ItemDelegate {
     property bool showInput: false
 
     height: Math.max(label.height, sessionnameditlayout.implicitHeight) + Kirigami.Units.smallSpacing
+    onClicked: itemMouseArea.clicked(profileIdentifier)
 
     MouseArea {
+        id: itemMouseArea
         anchors.fill: parent
         hoverEnabled: true
 
