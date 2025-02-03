@@ -44,15 +44,6 @@ PlasmoidItem {
         plasmoid.removeInternalAction("configure");
     }
 
-    property var searchHeader: PlasmaExtras.PlasmoidHeading {
-        PlasmaComponents3.TextField {
-            id: filter
-            placeholderText: i18n("Search…")
-            clearButtonShown: true
-            anchors.fill: parent
-        }
-    }
-
     fullRepresentation: PlasmaComponents3.Page {
 
         id: dialogItem
@@ -62,7 +53,32 @@ PlasmoidItem {
         Layout.preferredHeight: Kirigami.Units.gridUnit * 24
 
         focus: true
-        header: searchHeader
+        header: PlasmaExtras.PlasmoidHeading {
+            PlasmaComponents3.TextField {
+                id: filter
+                placeholderText: i18n("Search…")
+                clearButtonShown: true
+                anchors.fill: parent
+
+                onActiveFocusChanged: if (activeFocus) sessionsMenu.view.currentIndex = -1
+
+                KeyNavigation.down: sessionsMenu.view
+                KeyNavigation.tab: sessionsMenu.view
+                Keys.onReturnPressed: {
+                    (sessionsMenu.view.itemAtIndex(0) as KateSessionsItemDelegate)?.clicked()
+                }
+                Keys.onEnterPressed: Keys.returnPressed()
+                Keys.onEscapePressed: clearOrHide()
+
+                function clearOrHide() {
+                    if (text == "") {
+                        main.expanded = false;
+                    } else {
+                        text = "";
+                    }
+                }
+            }
+        }
 
         property alias listMargins: listItemSvg.margins
 
@@ -73,55 +89,24 @@ PlasmoidItem {
             visible: false
         }
 
-            switch(event.key) {
-                case Qt.Key_Up: {
-                    sessionsMenu.view.decrementCurrentIndex();
-                    event.accepted = true;
-                    break;
-                }
-                case Qt.Key_Down: {
-                    sessionsMenu.view.incrementCurrentIndex();
-                    event.accepted = true;
-                    break;
-                }
-                case Qt.Key_Enter:
-                case Qt.Key_Return: {
-                    if (sessionsMenu.view.currentIndex >= 0) {
-                        const profileIdentifier = sessionsMenu.model.get(sessionsMenu.view.currentIndex).profileIdentifier;
-                        if (profileIdentifier) {
-                            model.openProfile(profileIdentifier);
-                            sessionsMenu.view.currentIndex = 0;
-                        }
-                    }
-                    break;
-                }
-                case Qt.Key_Escape: {
-                    if (filter.text == "") {
-                        main.expanded = false;
-                    } else {
-                        filter.text = "";
-                    }
-                    event.accepted = true;
-                    break;
-                }
-                default: { // forward key to filter
-                    // filter.text += event.text wil break if the key is backspace
-                    if (event.key == Qt.Key_Backspace && filter.text == "") {
-                        return;
-                    }
-                    if (event.text != "" && !filter.activeFocus) {
-                        sessionsMenu.view.currentIndex = -1
-                        if (event.text == "v" && event.modifiers & Qt.ControlModifier) {
-                            filter.paste();
-                        } else {
-                            filter.text = "";
-                            filter.text += event.text;
-                        }
-                        filter.forceActiveFocus();
-                        event.accepted = true;
-                    }
+        Keys.onEscapePressed: filter.clearOrHide()
+        Keys.onTabPressed: filter.forceActiveFocus(Qt.TabFocusReason)
         Keys.onPressed: (event) => {
+            // forward key to filter
+            // filter.text += event.text wil break if the key is backspace
+            if (event.key == Qt.Key_Backspace && filter.text == "") {
+                return;
+            }
+            if (event.text != "" && !filter.activeFocus) {
+                sessionsMenu.view.currentIndex = -1
+                if (event.text == "v" && event.modifiers & Qt.ControlModifier) {
+                    filter.paste();
+                } else {
+                    filter.text = "";
+                    filter.text += event.text;
                 }
+                filter.forceActiveFocus(Qt.ShortcutFocusReason);
+                event.accepted = true;
             }
         }
         ColumnLayout {
@@ -143,6 +128,15 @@ PlasmoidItem {
                 onItemSelected: function (profileIdentifier) {
                     model.openProfile(profileIdentifier)
                     main.expanded = false;
+                }
+            }
+        }
+        Connections {
+            target: main
+            function onExpandedChanged() {
+                if (main.expanded) {
+                    sessionsMenu.view.currentIndex = -1
+                    filter.forceActiveFocus(Qt.PopupFocusReason)
                 }
             }
         }

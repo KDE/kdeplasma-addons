@@ -22,7 +22,9 @@ PlasmaComponents3.ScrollView {
     ListView {
         id: menuListView
         focus: true
+        Accessible.role: Accessible.List
 
+        keyNavigationEnabled: true
         boundsBehavior: Flickable.StopAtBounds
         interactive: contentHeight > height
         highlight: PlasmaExtras.Highlight {
