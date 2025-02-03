@@ -8,18 +8,20 @@
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+pragma ComponentBehavior: Bound
+import QtQuick
+import QtQuick.Layouts
+import QtQuick.Controls as QQC2
 
-import org.kde.plasma.plasmoid 2.0
+import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.ksvg 1.0 as KSvg
-import org.kde.kitemmodels 1.0 as KItemModels
-import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.plasma.extras 2.0 as PlasmaExtras
+import org.kde.kirigami as Kirigami
+import org.kde.ksvg as KSvg
+import org.kde.kitemmodels as KItemModels
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.plasma.extras as PlasmaExtras
 
-import org.kde.plasma.private.profiles 1.0
+import org.kde.plasma.private.profiles
 
 PlasmoidItem {
     id: main
@@ -71,7 +73,6 @@ PlasmoidItem {
             visible: false
         }
 
-        Keys.onPressed: {
             switch(event.key) {
                 case Qt.Key_Up: {
                     sessionsMenu.view.decrementCurrentIndex();
@@ -119,6 +120,7 @@ PlasmoidItem {
                         filter.forceActiveFocus();
                         event.accepted = true;
                     }
+        Keys.onPressed: (event) => {
                 }
             }
         }

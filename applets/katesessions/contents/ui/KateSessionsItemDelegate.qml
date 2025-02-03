@@ -8,16 +8,21 @@
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
-import org.kde.plasma.components 3.0 as PlasmaComponents3
-import org.kde.kquickcontrolsaddons 2.0 as KQuickControlsAddons
-import org.kde.kirigami 2.20 as Kirigami
+import QtQuick
+import QtQuick.Layouts
+import org.kde.plasma.components as PlasmaComponents3
+import org.kde.kquickcontrolsaddons as KQuickControlsAddons
+import org.kde.kirigami as Kirigami
 
-import org.kde.plasma.private.profiles 1.0
+import org.kde.plasma.private.profiles
 
 PlasmaComponents3.ItemDelegate {
     id: menuItem
+
+    required property string name
+    required property string profileIdentifier
+    required property string iconName
+    required property int index
 
     signal itemSelected(string profileIdentifier)
 
@@ -55,7 +60,7 @@ PlasmaComponents3.ItemDelegate {
             maximumLineCount: 1
             text: name.trim()
             textFormat: Text.PlainText
-            visible: !showInput
+            visible: !menuItem.showInput
             elide: Text.ElideRight
             wrapMode: Text.Wrap
         }
@@ -71,7 +76,7 @@ PlasmaComponents3.ItemDelegate {
 
     RowLayout {
         id:sessionnameditlayout
-        visible:showInput
+        visible:menuItem.showInput
         height: implicitHeight
         anchors {
             left: parent.left
@@ -102,7 +107,7 @@ PlasmaComponents3.ItemDelegate {
         PlasmaComponents3.ToolButton {
             icon.name: "dialog-cancel"
             onClicked: {
-                showInput=false;
+                menuItem.showInput=false;
                 sessionname.text='';
             }
 

@@ -7,9 +7,11 @@
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
-import QtQuick 2.0
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.components 3.0 as PlasmaComponents3
+pragma ComponentBehavior: Bound
+import QtQuick
+import QtQuick.Controls as QQC2
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.plasma.components as PlasmaComponents3
 
 PlasmaComponents3.ScrollView {
     id: menu
@@ -30,12 +32,16 @@ PlasmaComponents3.ScrollView {
         highlightMoveDuration: 0
         highlightResizeDuration: 0
         currentIndex: -1
+        onActiveFocusChanged: if (activeFocus && currentIndex == -1) currentIndex = 0
+        Keys.onReturnPressed: (currentItem as KateSessionsItemDelegate).clicked()
+        Keys.onEnterPressed: Keys.returnPressed()
 
         delegate: KateSessionsItemDelegate {
             width: menuListView.width
 
-            onItemSelected: function(profileIdentifier) {
+            onItemSelected: (profileIdentifier) => {
                 menu.itemSelected(profileIdentifier)
+                menuListView.currentIndex=-1
             }
 
             onHoveredChanged: () => {
