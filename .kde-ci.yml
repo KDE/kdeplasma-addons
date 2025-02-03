@@ -2,8 +2,8 @@
 # SPDX-License-Identifier: CC0-1.0
 
 Dependencies:
-- 'on': ['@all']
-  'require':
+ - 'on': ['@all']
+   'require':
     'frameworks/attica': '@latest-kf6'
     'frameworks/extra-cmake-modules': '@latest-kf6'
     'frameworks/kauth': '@latest-kf6'
@@ -32,16 +32,16 @@ Dependencies:
     'plasma/libplasma': '@same'
     'plasma/plasma-workspace': '@same'
     'plasma/plasma5support': '@same'
-- 'on': ['Linux']
-  'require':
+ - 'on': ['Linux']
+   'require':
     'sdk/selenium-webdriver-at-spi': '@latest-kf6'
 
 RuntimeDependencies:
-- 'on': ['Linux']
-  'require':
+ - 'on': ['Linux']
+   'require':
     'plasma/plasma-desktop': '@same'
     'plasma/plasma-nano': '@same' # For appium tests
 
 Options:
-  require-passing-tests-on: [ 'Linux', 'FreeBSD']
-  cppcheck-ignore-files: ['templates/']
+ require-passing-tests-on: ['Linux', 'FreeBSD']
+ cppcheck-ignore-files: ['templates/']
