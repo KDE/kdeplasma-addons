@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-29 00:41+0000\n"
+"POT-Creation-Date: 2025-02-04 00:41+0000\n"
 "PO-Revision-Date: 2024-08-25 01:57+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -89,43 +89,43 @@ msgstr "您現在登入成 <b>%1</b>"
 msgid "Current user"
 msgstr "目前的使用者"
 
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:172
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "未使用"
 
-#: package/contents/ui/main.qml:191
+#: package/contents/ui/main.qml:192
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
-#: package/contents/ui/main.qml:193
+#: package/contents/ui/main.qml:194
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "在 %1 (%2)"
 
-#: package/contents/ui/main.qml:201
+#: package/contents/ui/main.qml:202
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr "切換到使用者 %1"
 
-#: package/contents/ui/main.qml:210
+#: package/contents/ui/main.qml:214
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "新工作階段"
 
-#: package/contents/ui/main.qml:222
+#: package/contents/ui/main.qml:229
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "鎖定螢幕"
 
-#: package/contents/ui/main.qml:234
+#: package/contents/ui/main.qml:241
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"

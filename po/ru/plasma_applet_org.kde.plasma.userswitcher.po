@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-29 00:41+0000\n"
+"POT-Creation-Date: 2025-02-04 00:41+0000\n"
 "PO-Revision-Date: 2024-09-16 15:10+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -91,45 +91,45 @@ msgid "Current user"
 msgstr "Текущий пользователь"
 
 # BUGME: this string is duplicate against plasma_lookandfeel_org.kde.lookandfeel.po --aspotashev
-#: package/contents/ui/main.qml:171
+#: package/contents/ui/main.qml:172
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "Не используется"
 
 # BUGME: this string is duplicate against plasma_lookandfeel_org.kde.lookandfeel.po --aspotashev
-#: package/contents/ui/main.qml:191
+#: package/contents/ui/main.qml:192
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "Терминал %1"
 
 # BUGME: this string is duplicate against plasma_lookandfeel_org.kde.lookandfeel.po --aspotashev
-#: package/contents/ui/main.qml:193
+#: package/contents/ui/main.qml:194
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "на %1 (%2)"
 
-#: package/contents/ui/main.qml:201
+#: package/contents/ui/main.qml:202
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr "Переключить на пользователя %1"
 
-#: package/contents/ui/main.qml:210
+#: package/contents/ui/main.qml:214
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "Начать новый сеанс"
 
-#: package/contents/ui/main.qml:222
+#: package/contents/ui/main.qml:229
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Заблокировать экран"
 
-#: package/contents/ui/main.qml:234
+#: package/contents/ui/main.qml:241
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
