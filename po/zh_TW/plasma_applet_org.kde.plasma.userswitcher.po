@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-04 00:41+0000\n"
+"POT-Creation-Date: 2025-02-05 00:43+0000\n"
 "PO-Revision-Date: 2024-08-25 01:57+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -130,6 +130,12 @@ msgstr "鎖定螢幕"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
 msgstr "顯示登出畫面"
+
+#: package/contents/ui/UserListDelegate.qml:28
+#, kde-format
+msgctxt "@action:button @info:tooltip accessible"
+msgid "Open user configuration"
+msgstr ""
 
 #~ msgctxt "Show a dialog with options to logout/shutdown/restart"
 #~ msgid "Log Out"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-04 00:41+0000\n"
+"POT-Creation-Date: 2025-02-05 00:43+0000\n"
 "PO-Revision-Date: 2024-11-16 01:35-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -131,6 +131,12 @@ msgstr "Bloquear tela"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
 msgstr "Mostrar tela de encerramento de sessão"
+
+#: package/contents/ui/UserListDelegate.qml:28
+#, kde-format
+msgctxt "@action:button @info:tooltip accessible"
+msgid "Open user configuration"
+msgstr ""
 
 #~ msgctxt "Show a dialog with options to logout/shutdown/restart"
 #~ msgid "Log Out"

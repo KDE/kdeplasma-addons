@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-04 00:41+0000\n"
+"POT-Creation-Date: 2025-02-05 00:43+0000\n"
 "PO-Revision-Date: 2024-12-24 16:52+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -128,6 +128,12 @@ msgstr "화면 잠그기"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
 msgstr "로그아웃 화면 표시"
+
+#: package/contents/ui/UserListDelegate.qml:28
+#, kde-format
+msgctxt "@action:button @info:tooltip accessible"
+msgid "Open user configuration"
+msgstr ""
 
 #~ msgctxt "Show a dialog with options to logout/shutdown/restart"
 #~ msgid "Log Out"

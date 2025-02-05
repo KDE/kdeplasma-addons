@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-04 00:41+0000\n"
+"POT-Creation-Date: 2025-02-05 00:43+0000\n"
 "PO-Revision-Date: 2024-08-24 05:21+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -129,6 +129,12 @@ msgstr "ეკრანის დაბლოკვა"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
 msgstr "გასვლის ეკრანის ჩვენება"
+
+#: package/contents/ui/UserListDelegate.qml:28
+#, kde-format
+msgctxt "@action:button @info:tooltip accessible"
+msgid "Open user configuration"
+msgstr ""
 
 #~ msgctxt "Show a dialog with options to logout/shutdown/restart"
 #~ msgid "Log Out"

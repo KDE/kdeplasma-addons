@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-04 00:41+0000\n"
+"POT-Creation-Date: 2025-02-05 00:43+0000\n"
 "PO-Revision-Date: 2019-09-15 15:48+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -130,6 +130,12 @@ msgstr "Қулфи экран"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
 msgstr "Қулфи экран"
+
+#: package/contents/ui/UserListDelegate.qml:28
+#, kde-format
+msgctxt "@action:button @info:tooltip accessible"
+msgid "Open user configuration"
+msgstr ""
 
 #, fuzzy
 #~| msgctxt "Show a dialog with options to logout/shutdown/restart"
