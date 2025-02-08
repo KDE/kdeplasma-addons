@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kate\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 00:43+0000\n"
+"POT-Creation-Date: 2025-02-08 00:42+0000\n"
 "PO-Revision-Date: 2022-08-25 21:39+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -32,12 +32,12 @@ msgstr "கேட்டை புதிய அமர்வுடன் திற
 msgid "Cancel session creation"
 msgstr "அமர்வை உருவாக்குவதை ரத்து செய்"
 
-#: contents/ui/main.qml:39
+#: contents/ui/main.qml:41
 #, kde-format
 msgid "Kate Sessions"
 msgstr "கேட் அமர்வுகள்"
 
-#: contents/ui/main.qml:48
+#: contents/ui/main.qml:59
 #, kde-format
 msgid "Search…"
 msgstr "தேடு…"

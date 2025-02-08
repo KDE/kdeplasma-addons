@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 00:43+0000\n"
+"POT-Creation-Date: 2025-02-08 00:42+0000\n"
 "PO-Revision-Date: 2024-12-13 19:09+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -32,12 +32,12 @@ msgstr "नूतनं सत्रं रचयन्तु तथा च क�
 msgid "Cancel session creation"
 msgstr "सत्रनिर्माणं रद्दं कुर्वन्तु"
 
-#: contents/ui/main.qml:39
+#: contents/ui/main.qml:41
 #, kde-format
 msgid "Kate Sessions"
 msgstr "केट सत्र"
 
-#: contents/ui/main.qml:48
+#: contents/ui/main.qml:59
 #, kde-format
 msgid "Search…"
 msgstr "अन्वेषण…"

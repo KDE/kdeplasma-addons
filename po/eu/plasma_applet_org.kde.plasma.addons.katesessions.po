@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 00:43+0000\n"
+"POT-Creation-Date: 2025-02-08 00:42+0000\n"
 "PO-Revision-Date: 2022-08-24 22:49+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -36,12 +36,12 @@ msgstr "Sortu saio berria eta kate abiatu"
 msgid "Cancel session creation"
 msgstr "Utzi saio-sortzea"
 
-#: contents/ui/main.qml:39
+#: contents/ui/main.qml:41
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate saioak"
 
-#: contents/ui/main.qml:48
+#: contents/ui/main.qml:59
 #, kde-format
 msgid "Search…"
 msgstr "Bilatu..."

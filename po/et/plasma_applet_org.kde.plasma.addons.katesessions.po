@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 00:43+0000\n"
+"POT-Creation-Date: 2025-02-08 00:42+0000\n"
 "PO-Revision-Date: 2016-08-18 21:32+0300\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-i18n-doc@kde.org>\n"
@@ -32,12 +32,12 @@ msgstr "Uue seansi loomine ja Kate käivitamine"
 msgid "Cancel session creation"
 msgstr "Seansi loomise katkestamine"
 
-#: contents/ui/main.qml:39
+#: contents/ui/main.qml:41
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate seansid"
 
-#: contents/ui/main.qml:48
+#: contents/ui/main.qml:59
 #, fuzzy, kde-format
 #| msgid "Search"
 msgid "Search…"
