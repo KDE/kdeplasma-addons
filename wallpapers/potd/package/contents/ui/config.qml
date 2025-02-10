@@ -118,7 +118,7 @@ Kirigami.FormLayout {
         id: updateOverMeteredConnectionCheckBox
 
         checked: cfg_UpdateOverMeteredConnection === 1
-        visible: backend.networkInfomationAvailable
+        visible: backend.networkInformationAvailable
         text: i18ndc("plasma_wallpaper_org.kde.potd", "@option:check", "Update when using metered network connection")
 
         onToggled: {
