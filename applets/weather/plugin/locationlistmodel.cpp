@@ -11,6 +11,7 @@
 
 #include <KLocalizedString>
 
+#include <QCollator>
 #include <QDebug>
 
 WeatherValidator::WeatherValidator(Plasma5Support::DataEngine *weatherDataengine, const QString &ionName, QObject *parent)
@@ -233,9 +234,14 @@ void LocationListModel::addSources(const QMap<QString, QString> &sources)
         }
     }
 
-    // Promote services with better quality to the top of the list
-    std::stable_sort(m_locations.begin(), m_locations.end(), [](const auto &a, const auto &b) {
-        return a.quality >= b.quality;
+    QCollator collator;
+    std::ranges::stable_sort(m_locations, [&collator](const auto &a, const auto &b) {
+        // Promote services with better quality to the top of the list
+        if (a.quality != b.quality) {
+            return a.quality > b.quality;
+        }
+        // Otherwise sort alphabetically to produce a stable list
+        return collator.compare(a.weatherStation, b.weatherStation) <= 0;
     });
 
     endResetModel();
