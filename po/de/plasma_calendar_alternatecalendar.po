@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Frederik Schwarzer <schwarzer@kde.org>, 2022, 2023.
 # Jannick Kuhr <opensource@kuhr.org>, 2023.
+# SPDX-FileCopyrightText: 2025 Johannes Obermayr <johannesobermayr@gmx.de>
 #
 # Automatically generated, 2022.
 msgid ""
@@ -10,15 +11,15 @@ msgstr ""
 "Project-Id-Version: plasma_calendar_alternatecalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-04-20 00:39+0000\n"
-"PO-Revision-Date: 2023-03-16 22:08+0100\n"
-"Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
+"PO-Revision-Date: 2025-01-15 12:14+0100\n"
+"Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #: calendarsystem.h:50
 #, kde-format
@@ -116,6 +117,8 @@ msgid ""
 "A positive offset signifies a later date, while a negative offset signifies "
 "an earlier date."
 msgstr ""
+"Eine positive Abweichung ist für ein späteres Datum und eine negative "
+"Abweichung für ein früheres Datum."
 
 #: provider/hebrewcalendar.cpp:91
 #, kde-format

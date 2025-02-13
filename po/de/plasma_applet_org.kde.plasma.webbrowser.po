@@ -3,6 +3,7 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Frederik Schwarzer <schwarzer@kde.org>, 2023.
 # Jannick Kuhr <opensource@kuhr.org>, 2023.
+# SPDX-FileCopyrightText: 2025 Johannes Obermayr <johannesobermayr@gmx.de>
 #
 # Automatically generated, 2022.
 msgid ""
@@ -10,15 +11,15 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.webbrowser\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-07 00:40+0000\n"
-"PO-Revision-Date: 2023-06-16 20:44+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2025-01-15 12:19+0100\n"
+"Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -42,13 +43,13 @@ msgstr "Symbol:"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
-msgstr ""
+msgstr "Webseitensymbol"
 
 #: package/contents/ui/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
-msgstr ""
+msgstr "Webbrowsersymbol ändern"
 
 #: package/contents/ui/ConfigAppearance.qml:58
 #, kde-format
@@ -88,27 +89,25 @@ msgstr "Auf Standardsymbol zurücksetzen"
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
-msgstr ""
+msgstr "Navigationsleiste anzeigen"
 
 #: package/contents/ui/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
-msgstr ""
+msgstr "Zuletzt geöffnete Seite laden"
 
 #: package/contents/ui/ConfigGeneral.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
-msgstr ""
+msgstr "Beim Start:"
 
 #: package/contents/ui/ConfigGeneral.qml:33
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Reload This Page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
-msgstr "Diese Seite neu laden"
+msgstr "Immer diese Seite laden:"
 
 #: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:106
 #, kde-format
@@ -138,13 +137,13 @@ msgstr "Automatische Skalierung, wenn Breite unter"
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
-msgstr ""
+msgstr "Browsereinstellungen:"
 
 #: package/contents/ui/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
-msgstr ""
+msgstr "Privater Modus"
 
 #: package/contents/ui/main.qml:67
 #, kde-format
@@ -162,14 +161,12 @@ msgstr "Vorwärts"
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
-msgstr ""
+msgstr "Zur Startseite"
 
 #: package/contents/ui/main.qml:87
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Type a URL"
+#, kde-format
 msgid "Open Default URL"
-msgstr "Adresse eingeben"
+msgstr "Standardadresse öffnen"
 
 #: package/contents/ui/main.qml:142
 #, kde-format

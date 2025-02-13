@@ -134,4 +134,4 @@ msgstr "显示注销屏幕"
 #, kde-format
 msgctxt "@action:button @info:tooltip accessible"
 msgid "Open user configuration"
-msgstr ""
+msgstr "打开用户配置"
