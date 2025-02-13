@@ -3,21 +3,22 @@
 # Frederik Schwarzer <schwarzer@kde.org>, 2018, 2023.
 # Burkhard Lück <lueck@hube-lueck.de>, 2018, 2021.
 # Alois Spitzbart <spitz234@hotmail.com>, 2022.
+# SPDX-FileCopyrightText: 2025 Johannes Obermayr <johannesobermayr@gmx.de>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-11-05 00:41+0000\n"
-"PO-Revision-Date: 2023-07-01 18:28+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2025-01-15 12:23+0100\n"
+"Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #: contents/config/config.qml:13
 #, kde-format
@@ -47,52 +48,52 @@ msgstr "Num-Feststelltaste"
 #: contents/ui/main.qml:114
 #, kde-format
 msgid "Alt is latched"
-msgstr ""
+msgstr "Alt-Taste ist eingerastet"
 
 #: contents/ui/main.qml:116
 #, kde-format
 msgid "Alt is locked"
-msgstr ""
+msgstr "Alt-Taste ist gesperrt"
 
 #: contents/ui/main.qml:120
 #, kde-format
 msgid "Shift is latched"
-msgstr ""
+msgstr "Umschalttaste ist eingerastet"
 
 #: contents/ui/main.qml:122
 #, kde-format
 msgid "Shift is locked"
-msgstr ""
+msgstr "Umschalttaste ist gesperrt"
 
 #: contents/ui/main.qml:126
 #, kde-format
 msgid "Control is latched"
-msgstr ""
+msgstr "Strg-Taste ist eingerastet"
 
 #: contents/ui/main.qml:128
 #, kde-format
 msgid "Control is locked"
-msgstr ""
+msgstr "Strg-Taste ist gesperrt"
 
 #: contents/ui/main.qml:132
 #, kde-format
 msgid "Meta is latched"
-msgstr ""
+msgstr "Meta-Taste ist eingerastet"
 
 #: contents/ui/main.qml:134
 #, kde-format
 msgid "Meta is locked"
-msgstr ""
+msgstr "Meta-Taste ist gesperrt"
 
 #: contents/ui/main.qml:138
 #, kde-format
 msgid "Alt Gr is latched"
-msgstr ""
+msgstr "Alt Gr-Taste ist eingerastet"
 
 #: contents/ui/main.qml:140
 #, kde-format
 msgid "Alt Gr is locked"
-msgstr ""
+msgstr "Alt Gr-Taste ist gesperrt"
 
 #: contents/ui/main.qml:144
 #, kde-format
