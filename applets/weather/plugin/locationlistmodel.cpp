@@ -84,10 +84,10 @@ int LocationItem::relativeQuality(const QString &service) const
 {
     static const QMap<QString, int> serviceQuality = {
         {"wettercom", -1}, // wetter.com does not provide current weather status
-        {"bbcukmet", 0}, // only 3-day forecast and no alerts
-        {"dwd", 1}, // 7-day forecast and alerts, but some stations do not provide observation data,
-        {"noaa", 2}, // 12h 7-day forecast, observation and alerts
-        {"envcan", 2}, // 12h 7-day forecast, observation and alerts
+        {"dwd", 1}, // 7-day forecast and alerts, but some stations do not provide observation data
+        {"bbcukmet", 2}, // 7-day forecast and observation. Worldwide general coverage
+        {"noaa", 3}, // 12h 7-day forecast, observation and alerts
+        {"envcan", 3}, // 12h 7-day forecast, observation and alerts
     };
 
     if (!serviceQuality.contains(service)) {
