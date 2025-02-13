@@ -11,6 +11,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.ksvg as KSvg
 import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.core as PlasmaCore
 
 GridLayout {
     property var generalModel
@@ -20,11 +21,6 @@ GridLayout {
         windSpeedLabel.implicitWidth,
         tempLabel.implicitWidth,
         windSpeedDirection.naturalSize.width
-    )
-
-    Layout.minimumWidth: Math.max(
-        locationLabel.implicitWidth,
-        (sideWidth + columnSpacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
     )
 
     visible: !!generalModel.location
@@ -42,10 +38,16 @@ GridLayout {
         Layout.columnSpan: 3
         Layout.fillWidth: true
 
-        wrapMode: Text.NoWrap
+        elide: Text.ElideRight
 
         text: generalModel.location
         textFormat: Text.PlainText
+
+        PlasmaCore.ToolTipArea {
+            anchors.fill: parent
+            mainText: generalModel.location
+            visible: locationLabel.truncated
+        }
     }
 
     ColumnLayout {
