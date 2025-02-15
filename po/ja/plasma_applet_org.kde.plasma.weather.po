@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-30 00:40+0000\n"
+"POT-Creation-Date: 2025-02-15 00:44+0000\n"
 "PO-Revision-Date: 2022-03-06 11:56+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -519,17 +519,17 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr ""
 
-#: plugin/locationlistmodel.cpp:41
+#: plugin/locationlistmodel.cpp:42
 #, kde-format
 msgid "Cannot find '%1' using %2."
 msgstr "%2 を使って '%1' を見つけられませんでした。"
 
-#: plugin/locationlistmodel.cpp:65
+#: plugin/locationlistmodel.cpp:66
 #, kde-format
 msgid "Connection to %1 weather server timed out."
 msgstr "%1 天気サーバへの接続がタイムアウトしました。"
 
-#: plugin/locationlistmodel.cpp:150
+#: plugin/locationlistmodel.cpp:151
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"

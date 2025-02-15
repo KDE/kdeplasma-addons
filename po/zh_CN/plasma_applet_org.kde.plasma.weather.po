@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-30 00:40+0000\n"
+"POT-Creation-Date: 2025-02-15 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -507,17 +507,17 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "体感温度 %1"
 
-#: plugin/locationlistmodel.cpp:41
+#: plugin/locationlistmodel.cpp:42
 #, kde-format
 msgid "Cannot find '%1' using %2."
 msgstr "无法使用 %2 找到“%1”。"
 
-#: plugin/locationlistmodel.cpp:65
+#: plugin/locationlistmodel.cpp:66
 #, kde-format
 msgid "Connection to %1 weather server timed out."
 msgstr "连接到 %1 气象服务器超时。"
 
-#: plugin/locationlistmodel.cpp:150
+#: plugin/locationlistmodel.cpp:151
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"

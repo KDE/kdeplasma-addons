@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-30 00:40+0000\n"
+"POT-Creation-Date: 2025-02-15 00:44+0000\n"
 "PO-Revision-Date: 2009-09-09 23:03+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -561,17 +561,17 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr ""
 
-#: plugin/locationlistmodel.cpp:41
+#: plugin/locationlistmodel.cpp:42
 #, kde-format
 msgid "Cannot find '%1' using %2."
 msgstr ""
 
-#: plugin/locationlistmodel.cpp:65
+#: plugin/locationlistmodel.cpp:66
 #, kde-format
 msgid "Connection to %1 weather server timed out."
 msgstr ""
 
-#: plugin/locationlistmodel.cpp:150
+#: plugin/locationlistmodel.cpp:151
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition, probability percentage"
 #| msgid "%1 (%2%)"
