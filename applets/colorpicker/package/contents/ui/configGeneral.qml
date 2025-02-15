@@ -47,6 +47,7 @@ KCM.SimpleKCM {
         QQC2.RadioButton {
             text: i18nc("@option:radio", "Show history")
             checked: !cfg_pickOnActivate
+            onToggled: cfg_pickOnActivate = !checked
         }
 
         Item {
