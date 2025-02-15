@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2015, 2016, 2022.
-# SPDX-FileCopyrightText: 2018, 2019, 2022, 2024 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2018, 2019, 2022, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-04 02:35+0000\n"
-"PO-Revision-Date: 2024-10-21 18:44+0300\n"
+"PO-Revision-Date: 2025-01-12 17:25+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -124,11 +124,12 @@ msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Lukitse näyttö"
 
+# OLI: ”uloskirjautumisnäyttö” – paitsi pitkä myös sekava. Tämä on minusta tolkullisempi.
 #: package/contents/ui/main.qml:235
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
-msgstr "Näytä uloskirjautumisnäyttö"
+msgstr "Näytä sammutusvalinnat"
 
 #~ msgctxt "Show a dialog with options to logout/shutdown/restart"
 #~ msgid "Log Out"
