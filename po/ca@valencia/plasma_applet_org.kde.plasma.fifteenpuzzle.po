@@ -97,7 +97,7 @@ msgstr "Barreja"
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
-msgstr "Solucionat! Torneu-ho a intentar."
+msgstr "Solucionat! Torneu-ho a provar."
 
 #: package/contents/ui/main.qml:25
 #, kde-format
