@@ -25,7 +25,9 @@ ColumnLayout {
     property alias generalModel: topPanel.generalModel
     property alias observationModel: topPanel.observationModel
 
-    Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * 10, implicitWidth)
+    Layout.minimumWidth: Math.min(Kirigami.Units.gridUnit * 25,
+                         Math.max(Kirigami.Units.gridUnit * 10,
+                                  implicitWidth))
     Layout.minimumHeight: Math.max(Kirigami.Units.gridUnit * 10, implicitHeight)
 
     PlasmaExtras.PlaceholderMessage {
