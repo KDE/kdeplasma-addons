@@ -32,6 +32,9 @@ PlasmoidItem {
 
     preferredRepresentation: compactRepresentation
 
+    toolTipMainText: "" // set to empty to prevent automatic tooltip generation through compactRepresentation
+    toolTipSubText: ""
+
     function addColorToHistory(color) {
         // this .toString() is needed otherwise Qt completely screws it up
         // replacing *all* items in the list by the new items and other nonsense
