@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-07 00:40+0000\n"
+"POT-Creation-Date: 2025-02-19 00:42+0000\n"
 "PO-Revision-Date: 2024-06-18 19:40+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -75,49 +75,49 @@ msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Visa historik"
 
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:59
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
 msgstr "Förhandsgranskningsantal:"
 
-#: package/contents/ui/main.qml:121
+#: package/contents/ui/main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Visa färgdialogruta"
 
-#: package/contents/ui/main.qml:126
+#: package/contents/ui/main.qml:129
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Rensa historik"
 
-#: package/contents/ui/main.qml:134
+#: package/contents/ui/main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Visa historik"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:145
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Kopiera till klippbordet"
 
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "inga färger"
 
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "Färghämtning är otillgänglig när sammansättning är inaktiverad"
 
-#: package/contents/ui/main.qml:183
+#: package/contents/ui/main.qml:186
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
@@ -126,25 +126,25 @@ msgstr ""
 "Sammansättning har inaktiverats manuellt eller blockerats av ett program som "
 "kör"
 
-#: package/contents/ui/main.qml:190
+#: package/contents/ui/main.qml:193
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Hämta färg"
 
-#: package/contents/ui/main.qml:198
+#: package/contents/ui/main.qml:201
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "Anpassa sammansättning"
 
-#: package/contents/ui/main.qml:384
+#: package/contents/ui/main.qml:387
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopierad."
 
-#: package/contents/ui/main.qml:395
+#: package/contents/ui/main.qml:398
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-15 00:44+0000\n"
+"POT-Creation-Date: 2025-02-19 00:42+0000\n"
 "PO-Revision-Date: 2016-07-03 22:52+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -371,23 +371,23 @@ msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:37
+#: package/contents/ui/FullRepresentation.qml:39
 #, kde-format
 msgid "Please set your location"
 msgstr ""
 
-#: package/contents/ui/FullRepresentation.qml:40
+#: package/contents/ui/FullRepresentation.qml:42
 #, fuzzy, kde-format
 #| msgid "Weather Station"
 msgid "Set location…"
 msgstr "Метеостаница"
 
-#: package/contents/ui/FullRepresentation.qml:55
+#: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
 msgstr ""
 
-#: package/contents/ui/FullRepresentation.qml:57
+#: package/contents/ui/FullRepresentation.qml:59
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -576,7 +576,7 @@ msgid ""
 "persists for longer than a day, submit a bug report."
 msgstr ""
 
-#: package/contents/ui/TopPanel.qml:83
+#: package/contents/ui/TopPanel.qml:85
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

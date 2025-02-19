@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-07 00:40+0000\n"
+"POT-Creation-Date: 2025-02-19 00:42+0000\n"
 "PO-Revision-Date: 2024-05-10 11:33+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -77,74 +77,74 @@ msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Montri historion"
 
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:59
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
 msgstr "Antaŭrigarda nombro:"
 
-#: package/contents/ui/main.qml:121
+#: package/contents/ui/main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Malfermi Koloran Dialogon"
 
-#: package/contents/ui/main.qml:126
+#: package/contents/ui/main.qml:129
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Forviŝi la historion"
 
-#: package/contents/ui/main.qml:134
+#: package/contents/ui/main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Rigardo Historion"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:145
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Kopii al tondujo"
 
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Neniuj koloroj"
 
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "Kolorelektado nedisponebla kiam kunmetado estas malŝaltita"
 
-#: package/contents/ui/main.qml:183
+#: package/contents/ui/main.qml:186
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr "Kunmetado estis malŝaltita permane aŭ blokita per rulanta aplikaĵo"
 
-#: package/contents/ui/main.qml:190
+#: package/contents/ui/main.qml:193
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Elekti Koloron"
 
-#: package/contents/ui/main.qml:198
+#: package/contents/ui/main.qml:201
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "Agordi Kunmetadon"
 
-#: package/contents/ui/main.qml:384
+#: package/contents/ui/main.qml:387
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopiita!"
 
-#: package/contents/ui/main.qml:395
+#: package/contents/ui/main.qml:398
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

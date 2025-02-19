@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-15 00:44+0000\n"
+"POT-Creation-Date: 2025-02-19 00:42+0000\n"
 "PO-Revision-Date: 2024-08-30 12:48+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -331,22 +331,22 @@ msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:37
+#: package/contents/ui/FullRepresentation.qml:39
 #, kde-format
 msgid "Please set your location"
 msgstr "Stel uw locatie in"
 
-#: package/contents/ui/FullRepresentation.qml:40
+#: package/contents/ui/FullRepresentation.qml:42
 #, kde-format
 msgid "Set location…"
 msgstr "Locatie instellen…"
 
-#: package/contents/ui/FullRepresentation.qml:55
+#: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
 msgstr "Ophalen van weerinformatie voor %1 lukt niet"
 
-#: package/contents/ui/FullRepresentation.qml:57
+#: package/contents/ui/FullRepresentation.qml:59
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -504,7 +504,7 @@ msgstr ""
 "Er kan een technisch probleem zijn met de leverancier van het weer. Als het "
 "probleem langer dan een dag blijft, dien een bugrapport in."
 
-#: package/contents/ui/TopPanel.qml:83
+#: package/contents/ui/TopPanel.qml:85
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

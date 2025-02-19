@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-15 00:44+0000\n"
+"POT-Creation-Date: 2025-02-19 00:42+0000\n"
 "PO-Revision-Date: 2023-01-08 18:17+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -330,22 +330,22 @@ msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:37
+#: package/contents/ui/FullRepresentation.qml:39
 #, kde-format
 msgid "Please set your location"
 msgstr "Vui lòng đặt địa điểm của bạn"
 
-#: package/contents/ui/FullRepresentation.qml:40
+#: package/contents/ui/FullRepresentation.qml:42
 #, kde-format
 msgid "Set location…"
 msgstr "Đặt địa điểm…"
 
-#: package/contents/ui/FullRepresentation.qml:55
+#: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
 msgstr ""
 
-#: package/contents/ui/FullRepresentation.qml:57
+#: package/contents/ui/FullRepresentation.qml:59
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -498,7 +498,7 @@ msgid ""
 "persists for longer than a day, submit a bug report."
 msgstr ""
 
-#: package/contents/ui/TopPanel.qml:83
+#: package/contents/ui/TopPanel.qml:85
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
