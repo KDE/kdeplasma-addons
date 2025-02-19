@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 02:42+0000\n"
+"POT-Creation-Date: 2025-02-19 02:36+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,17 +18,17 @@ msgstr ""
 "plasma.addons.katesessions.pot\n"
 "X-Crowdin-File-ID: 50488\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: contents/ui/KateSessionsItemDelegate.qml:93
 #, kde-format
 msgid "Session name"
 msgstr "会话名称"
 
-#: contents/ui/KateSessionsItemDelegate.qml:103
+#: contents/ui/KateSessionsItemDelegate.qml:105
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "创建新会话并启动 Kate"
 
-#: contents/ui/KateSessionsItemDelegate.qml:115
+#: contents/ui/KateSessionsItemDelegate.qml:117
 #, kde-format
 msgid "Cancel session creation"
 msgstr "取消创建会话"

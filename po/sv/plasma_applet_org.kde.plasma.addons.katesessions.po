@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-12 02:42+0000\n"
+"POT-Creation-Date: 2025-02-19 02:36+0000\n"
 "PO-Revision-Date: 2021-07-02 20:33+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 20.08.1\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: contents/ui/KateSessionsItemDelegate.qml:93
 #, kde-format
 msgid "Session name"
 msgstr "Sessionsnamn"
 
-#: contents/ui/KateSessionsItemDelegate.qml:103
+#: contents/ui/KateSessionsItemDelegate.qml:105
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "Skapa ny session och starta Kate"
 
-#: contents/ui/KateSessionsItemDelegate.qml:115
+#: contents/ui/KateSessionsItemDelegate.qml:117
 #, kde-format
 msgid "Cancel session creation"
 msgstr "Avbryt skapa session"

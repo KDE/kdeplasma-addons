@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-06-07 00:40+0000\n"
+"POT-Creation-Date: 2025-02-19 02:36+0000\n"
 "PO-Revision-Date: 2023-02-19 17:19+0400\n"
 "Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -75,74 +75,74 @@ msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Tarixçəni göstərmək"
 
-#: package/contents/ui/configGeneral.qml:58
+#: package/contents/ui/configGeneral.qml:59
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
 msgstr "Önbaxış sayğacı:"
 
-#: package/contents/ui/main.qml:121
+#: package/contents/ui/main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Rəng dialoqu açmaq"
 
-#: package/contents/ui/main.qml:126
+#: package/contents/ui/main.qml:129
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Tarixçəni Təmizləmək"
 
-#: package/contents/ui/main.qml:134
+#: package/contents/ui/main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Tarixçəyə baxış"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:145
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Mübadilə buferinə kopyalamaq"
 
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Rənglər yoxdur"
 
-#: package/contents/ui/main.qml:182
+#: package/contents/ui/main.qml:185
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr ""
 
-#: package/contents/ui/main.qml:183
+#: package/contents/ui/main.qml:186
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
 
-#: package/contents/ui/main.qml:190
+#: package/contents/ui/main.qml:193
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Rəng seçmək"
 
-#: package/contents/ui/main.qml:198
+#: package/contents/ui/main.qml:201
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr ""
 
-#: package/contents/ui/main.qml:384
+#: package/contents/ui/main.qml:387
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopyalandı!"
 
-#: package/contents/ui/main.qml:395
+#: package/contents/ui/main.qml:398
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
