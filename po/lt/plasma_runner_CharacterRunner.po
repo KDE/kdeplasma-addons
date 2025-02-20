@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_CharacterRunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2025-02-20 00:42+0000\n"
 "PO-Revision-Date: 2024-02-02 21:42+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Sukuria simbolius iš :q: jei :q: yra šešioliktainis kodas ar aprašyta "
 "santrumpa."
 
-#: charrunner_config.cpp:60
+#: charrunner_config.cpp:58
 #, kde-format
 msgctxt "Message that config is corrupted"
 msgid ""

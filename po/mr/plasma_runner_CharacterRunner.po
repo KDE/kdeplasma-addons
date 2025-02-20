@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2025-02-20 00:42+0000\n"
 "PO-Revision-Date: 2013-03-20 17:52+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -23,7 +23,7 @@ msgid ""
 "Creates Characters from :q: if it is a hexadecimal code or defined alias."
 msgstr ":q: वरून अक्षरे तयार करतो, जर तो हेक्साडेसिमल कोड किंवा अलायस असेल तर."
 
-#: charrunner_config.cpp:60
+#: charrunner_config.cpp:58
 #, kde-format
 msgctxt "Message that config is corrupted"
 msgid ""

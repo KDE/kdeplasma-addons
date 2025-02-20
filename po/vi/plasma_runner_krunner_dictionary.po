@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2025-02-20 00:42+0000\n"
 "PO-Revision-Date: 2022-10-31 12:10+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 22.08.1\n"
 
-#: dictionaryrunner.cpp:34 dictionaryrunner_config.cpp:34
-#: dictionaryrunner_config.cpp:52
+#: dictionaryrunner.cpp:34 dictionaryrunner_config.cpp:33
+#: dictionaryrunner_config.cpp:50
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"

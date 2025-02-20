@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_krunner_dictionary\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2025-02-20 00:42+0000\n"
 "PO-Revision-Date: 2023-03-16 22:51+0100\n"
 "Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -17,8 +17,8 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: dictionaryrunner.cpp:34 dictionaryrunner_config.cpp:34
-#: dictionaryrunner_config.cpp:52
+#: dictionaryrunner.cpp:34 dictionaryrunner_config.cpp:33
+#: dictionaryrunner_config.cpp:50
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"

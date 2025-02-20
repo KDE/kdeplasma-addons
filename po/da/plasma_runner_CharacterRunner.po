@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2025-02-20 00:42+0000\n"
 "PO-Revision-Date: 2020-07-21 17:57+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -25,7 +25,7 @@ msgstr ""
 "Opretter tegn fra :q: hvis det er en hexadecimal-kode eller et defineret "
 "alias."
 
-#: charrunner_config.cpp:60
+#: charrunner_config.cpp:58
 #, kde-format
 msgctxt "Message that config is corrupted"
 msgid ""

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-10 09:29+0000\n"
+"POT-Creation-Date: 2025-02-20 00:42+0000\n"
 "PO-Revision-Date: 2023-03-15 16:49+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: spellcheck.cpp:81 spellcheck_config.cpp:65 spellcheck_config.cpp:96
+#: spellcheck.cpp:81 spellcheck_config.cpp:63 spellcheck_config.cpp:94
 #, kde-format
 msgid "spell"
 msgstr "ortografía"

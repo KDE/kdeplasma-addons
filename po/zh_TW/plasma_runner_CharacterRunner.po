@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2025-02-20 00:42+0000\n"
 "PO-Revision-Date: 2020-03-24 19:58+0800\n"
 "Last-Translator: Yi-Jyun Pan <pan93412@gmail.com>\n"
 "Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
@@ -25,7 +25,7 @@ msgid ""
 "Creates Characters from :q: if it is a hexadecimal code or defined alias."
 msgstr "若 :q: 是十六進位碼或已定義的別名，則建立字元。"
 
-#: charrunner_config.cpp:60
+#: charrunner_config.cpp:58
 #, kde-format
 msgctxt "Message that config is corrupted"
 msgid ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2025-02-20 00:42+0000\n"
 "PO-Revision-Date: 2022-10-29 18:42+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -18,8 +18,8 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
 
-#: dictionaryrunner.cpp:34 dictionaryrunner_config.cpp:34
-#: dictionaryrunner_config.cpp:52
+#: dictionaryrunner.cpp:34 dictionaryrunner_config.cpp:33
+#: dictionaryrunner_config.cpp:50
 #, kde-format
 msgctxt "Trigger word before word to define"
 msgid "define"
