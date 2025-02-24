@@ -1,0 +1,15 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "kde@broulik.de",
+                "Name": "Kai Uwe Broulik"
+            }
+        ],
+        "Description": "Display hex colors, rgb color triplets, and SVG color names",
+        "EnabledByDefault": true,
+        "Icon": "color-picker",
+        "License": "GPL",
+        "Name": "Colors"
+    }
+}
