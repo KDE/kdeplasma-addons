@@ -3,20 +3,21 @@
 #
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2022, 2023.
 # SPDX-FileCopyrightText: 2024, 2025 Geraldo Simiao <geraldosimiao@fedoraproject.org>
+# SPDX-FileCopyrightText: 2025 Guilherme Marçal Silva <guimarcalsilva@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-10-07 00:40+0000\n"
-"PO-Revision-Date: 2025-02-04 08:23-0300\n"
-"Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
+"PO-Revision-Date: 2025-02-23 19:21-0300\n"
+"Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -193,7 +194,7 @@ msgstr "Copiar endereço do link"
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
-msgstr "Popup bloqueado"
+msgstr "Pop-up bloqueado"
 
 #: package/contents/ui/main.qml:266
 #, kde-format
@@ -201,5 +202,5 @@ msgid ""
 "Click here to open the following blocked popup:\n"
 "%1"
 msgstr ""
-"Clique aqui para abrir o seguinte popup bloqueado:\n"
+"Clique aqui para abrir o seguinte pop-up bloqueado:\n"
 "%1"
