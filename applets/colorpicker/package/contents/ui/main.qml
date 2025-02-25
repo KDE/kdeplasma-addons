@@ -30,7 +30,11 @@ PlasmoidItem {
     readonly property string defaultFormat: Plasmoid.configuration.defaultFormat
     readonly property int maxColorCount: 9
 
+    property QtObject colorPickerWindow: null
+
     preferredRepresentation: compactRepresentation
+
+    hideOnWindowDeactivate: !colorPickerWindow
 
     toolTipMainText: "" // set to empty to prevent automatic tooltip generation through compactRepresentation
     toolTipSubText: ""
@@ -71,6 +75,7 @@ PlasmoidItem {
 
         Window { // QTBUG-119055
             id: window
+            property int colorIndex: -1
             width: Kirigami.Units.gridUnit * 19
             height: Kirigami.Units.gridUnit * 23
             maximumWidth: width
@@ -78,18 +83,38 @@ PlasmoidItem {
             minimumWidth: width
             minimumHeight: height
             visible: true
-            title: Plasmoid.title
+            title: colorIndex > -1 ? i18nc("@title:window", "Edit Color") : Plasmoid.title
             QtDialogs.ColorDialog {
                 id: colorDialog
-                title: Plasmoid.title
-                selectedColor: historyModel.count > 0 ? root.recentColor : undefined /* Prevent transparent colors */
+                title: window.title
+                selectedColor: {
+                    if (colorIndex > -1) {
+                        return historyModel.get(colorIndex).color
+                    } else if (historyModel.count > 0) {
+                        return root.recentColor;
+                    } else {
+                        return undefined; // Prevent transparent colors.
+                    }
+                }
                 onAccepted: {
-                    root.colorPicked(selectedColor);
+                    if (colorIndex > -1) {
+                        historyModel.setProperty(colorIndex, "color", selectedColor.toString());
+                        historyModel.save();
+                    } else {
+                        root.colorPicked(selectedColor);
+                    }
+                    root.colorPickerWindow = null;
                     window.destroy();
                 }
-                onRejected: window.destroy()
+                onRejected: {
+                    root.colorPickerWindow = null;
+                    window.destroy();
+                }
             }
-            onClosing: destroy()
+            onClosing: {
+                root.colorPickerWindow = null;
+                destroy();
+            }
             Component.onCompleted: colorDialog.open()
         }
     }
@@ -123,7 +148,8 @@ PlasmoidItem {
         PlasmaCore.Action {
             text: i18nc("@action", "Open Color Dialog")
             icon.name: "color-management"
-            onTriggered: colorWindowComponent.createObject(root)
+            enabled: !root.colorPickerWindow
+            onTriggered: root.colorPickerWindow = colorWindowComponent.createObject(root)
         },
         PlasmaCore.Action {
             text: i18nc("@action", "Clear History")
@@ -246,6 +272,12 @@ PlasmoidItem {
             id: delegateMouse
 
             readonly property color currentColor: model.color
+            readonly property bool editing: root.colorPickerWindow?.colorIndex === index ?? false
+
+            // When editing color, invalidate drag pixmap.
+            onCurrentColorChanged: {
+                Drag.imageSource = "";
+            }
 
             width: fullRoot.cellWidth
             height: fullRoot.cellHeight
@@ -391,18 +423,41 @@ PlasmoidItem {
             }
 
             Loader {
-                active: parent.containsMouse || Kirigami.Settings.tabletMode || Kirigami.Settings.hasTransientTouchInput
+                active: delegateMouse.editing || parent.containsMouse || Kirigami.Settings.tabletMode || Kirigami.Settings.hasTransientTouchInput
                 anchors.right: parent.right
                 anchors.top: parent.top
-                sourceComponent: PlasmaComponents3.Button {
-                    text: i18nc("@action:button", "Delete")
-                    icon.name: "delete"
-                    display: PlasmaComponents3.AbstractButton.IconOnly
+                sourceComponent: RowLayout {
+                    PlasmaComponents3.Button {
+                        text: i18nc("@action:button", "Edit")
+                        icon.name: "document-edit"
+                        display: PlasmaComponents3.AbstractButton.IconOnly
+                        enabled: delegateMouse.editing || !root.colorPickerWindow
+                        checked: delegateMouse.editing
 
-                    onClicked: delegateMouse.remove()
+                        onClicked: {
+                            if (root.colorPickerWindow) {
+                                root.colorPickerWindow.destroy();
+                                root.colorPickerWindow = null;
+                            } else {
+                                root.colorPickerWindow = colorWindowComponent.createObject(delegateMouse, {colorIndex: index});
+                            }
+                        }
 
-                    PlasmaComponents3.ToolTip {
-                        text: parent.text
+                        PlasmaComponents3.ToolTip {
+                            text: parent.text
+                        }
+                    }
+
+                    PlasmaComponents3.Button {
+                        text: i18nc("@action:button", "Delete")
+                        icon.name: "delete"
+                        display: PlasmaComponents3.AbstractButton.IconOnly
+
+                        onClicked: delegateMouse.remove()
+
+                        PlasmaComponents3.ToolTip {
+                            text: parent.text
+                        }
                     }
                 }
             }
