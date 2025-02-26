@@ -26,7 +26,7 @@ ColorsRunner::ColorsRunner(QObject *parent, const KPluginMetaData &metaData)
 {
     setObjectName(QStringLiteral("ColorsRunner"));
 
-    addSyntax(QStringLiteral(":q:"), i18n("Diplays the value of :q: as a color when :q: is a hexadecimal color (e.g. #FF00FF) or an SVG named color."));
+    addSyntax(QStringLiteral(":q:"), i18n("Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. #FF00FF) or an SVG named color."));
 
     addSyntax(QStringLiteral("rgb(:q:)"), i18n("Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. 255,255,255)."));
 
