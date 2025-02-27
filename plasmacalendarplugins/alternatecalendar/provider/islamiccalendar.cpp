@@ -121,17 +121,17 @@ CalendarEvents::CalendarEventsPlugin::SubLabel IslamicCalendarProviderPrivate::s
         return sublabel;
     }
 
-    sublabel.dayLabel = formattedDateStringInNativeLanguage("d");
+    sublabel.dayLabel = formattedDateStringInNativeLanguage(u"d");
     // Translated month names are available in https://github.com/unicode-org/icu/tree/main/icu4c/source/data/locales
     sublabel.label = m_isArabicNumberingSystem
-        ? formattedDateStringInNativeLanguage("d MMMM yyyy")
+        ? formattedDateStringInNativeLanguage(u"d MMMM yyyy")
         : i18ndc("plasma_calendar_alternatecalendar",
                  "@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 Islamic calendar date in Arabic",
                  "%1 %2, %3 (%4)",
                  QString::number(day()),
-                 formattedDateStringInNativeLanguage("MMMM"),
+                 formattedDateStringInNativeLanguage(u"MMMM"),
                  QString::number(year()),
-                 formattedDateString("d MMMM yyyy"));
+                 formattedDateString(u"d MMMM yyyy"));
     sublabel.priority = CalendarEvents::CalendarEventsPlugin::SubLabelPriority::Low;
 
     return sublabel;

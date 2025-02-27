@@ -69,7 +69,7 @@ CalendarEvents::CalendarEventsPlugin::SubLabel IndianCalendarProviderPrivate::su
                             "@label %1 day %2 month name in India National Calendar %3 year",
                             "%1 %2, %3",
                             sublabel.dayLabel,
-                            formattedDateStringInNativeLanguage("MMMM"),
+                            formattedDateStringInNativeLanguage(u"MMMM"),
                             QString::number(year()));
     sublabel.priority = CalendarEvents::CalendarEventsPlugin::SubLabelPriority::Low;
 

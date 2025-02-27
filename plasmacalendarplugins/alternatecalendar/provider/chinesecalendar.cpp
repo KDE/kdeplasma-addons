@@ -171,17 +171,17 @@ QString ChineseCalendarProviderPrivate::formattedDateString(const icu::UnicodeSt
 
 QString ChineseCalendarProviderPrivate::yearDisplayName() const
 {
-    return formattedDateString("U");
+    return formattedDateString(u"U");
 }
 
 QString ChineseCalendarProviderPrivate::monthDisplayName() const
 {
-    return formattedDateString("MMM");
+    return formattedDateString(u"MMM");
 }
 
 QString ChineseCalendarProviderPrivate::dayDisplayName() const
 {
-    return formattedDateString("d", true);
+    return formattedDateString(u"d", true);
 }
 
 QDate ChineseCalendarProviderPrivate::getSolarTermDate(int year, SolarTerm order) const

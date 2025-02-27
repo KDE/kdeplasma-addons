@@ -82,15 +82,15 @@ CalendarEvents::CalendarEventsPlugin::SubLabel HebrewCalendarProviderPrivate::su
 
     const bool isLocaleHebrew = QLocale::system().language() == QLocale::Hebrew;
 
-    sublabel.dayLabel = isLocaleHebrew ? formattedDateString("d") : QString::number(day());
-    const QString hebrewDateString = formattedDateString("d בMMMM y"); // See https://unicode-org.github.io/cldr/ldml/tr35-dates.html
+    sublabel.dayLabel = isLocaleHebrew ? formattedDateString(u"d") : QString::number(day());
+    const QString hebrewDateString = formattedDateString(u"d בMMMM y"); // See https://unicode-org.github.io/cldr/ldml/tr35-dates.html
     // Translated month names are available in https://github.com/unicode-org/icu/tree/main/icu4c/source/data/locales
     sublabel.label = isLocaleHebrew ? hebrewDateString
                                     : i18ndc("plasma_calendar_alternatecalendar",
                                              "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year number %4 Full date in Hebrew",
                                              "%1 %2, %3 (%4)",
                                              QString::number(day()),
-                                             formattedDateStringInNativeLanguage("MMMM"),
+                                             formattedDateStringInNativeLanguage(u"MMMM"),
                                              QString::number(year()),
                                              hebrewDateString);
     sublabel.priority = CalendarEvents::CalendarEventsPlugin::SubLabelPriority::Low;
