@@ -1,0 +1,62 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-02-27 00:42+0000\n"
+"PO-Revision-Date: 2025-02-26 08:40+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 24.12.2\n"
+
+#: colorsrunner.cpp:29
+#, fuzzy, kde-format
+#| msgid ""
+#| "Diplays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
+#| "#FF00FF) or an SVG named color."
+msgid ""
+"Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
+"#FF00FF) or an SVG named color."
+msgstr ""
+"הצגת הערך :q: כצבע כאשר :q: הוא צבע הקסדצימלי (למשל: ‎#FF00FF) או צבע לפי "
+"השמות ב־SVG."
+
+#: colorsrunner.cpp:31
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
+"255,255,255)."
+msgstr ""
+"מציג את הערך של :q: כצבע כאשר :q: הוא שלשת צבע RGB (למשל: 255,255,255)."
+
+#: colorsrunner.cpp:34
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
+"color quadruplet (e.g. 255,255,255,255)."
+msgstr ""
+"הצגת הערך של :q: כצבע עם ערוץ שקיפות :q: הוא רביעיית צבע RGBA למשל: "
+"255,255,255,255)."
+
+#: colorsrunner.cpp:139
+#, kde-format
+msgid "RGBA: %1, %2, %3, %4"
+msgstr "RGBA: %1, %2, %3, %4"
+
+#: colorsrunner.cpp:141
+#, kde-format
+msgid "RGB: %1, %2, %3"
+msgstr "RGB: %1, %2, %3"
+
+#: colorsrunner.cpp:146
+#, kde-format
+msgid "CMYK: %1%, %2%, %3%, %4%"
+msgstr "CMYK: %1%, %2%, %3%, %4%"
