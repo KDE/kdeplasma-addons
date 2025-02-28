@@ -1,21 +1,21 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# SPDX-FileCopyrightText: 2025 Stefan Asserhäll <stefan.asserhall@gmail.com>
+# SPDX-FileCopyrightText: 2025 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-27 00:42+0000\n"
-"PO-Revision-Date: 2025-02-26 18:09+0100\n"
-"Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
-"Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
-"Language: sv\n"
+"PO-Revision-Date: 2025-02-26 16:59+0100\n"
+"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"Language-Team: \n"
+"Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.0\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #: colorsrunner.cpp:29
 #, fuzzy, kde-format
@@ -26,8 +26,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
 "#FF00FF) or an SVG named color."
 msgstr ""
-"Visar värdet på :q: som en färg när :q: är en hexadecimal färg (t.ex. "
-"#FF00FF) eller en SVG namngiven färg."
+"Toont de waarde van :q: als een kleur wanneer :q: een hexadecimale kleur is "
+"(d.w.z. #FF00FF) of een SVG genaamde kleur."
 
 #: colorsrunner.cpp:31
 #, kde-format
@@ -35,8 +35,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
 "255,255,255)."
 msgstr ""
-"Visar värdet på :q: som en färg när :q: är  en RGB-färgtrippel (t.ex. "
-"255,255,255)."
+"Toont de waarde van :q: als een kleur wanneer :q: een RGB-kleur-triplet is "
+"(d.w.z. 255,255,255)."
 
 #: colorsrunner.cpp:34
 #, kde-format
@@ -44,8 +44,8 @@ msgid ""
 "Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
 "color quadruplet (e.g. 255,255,255,255)."
 msgstr ""
-"Visar värdet på :q: som en färg med alfakanal när :q: är en RGBA-"
-"färgkvadrupel (t.ex. 255,255,255,255)."
+"Toont de waarde van :q: als een kleur met alfa-kleur wanneer :q: een RGBA-"
+"kleur-quadruplet is (d.w.z. 255,255,255,255)."
 
 #: colorsrunner.cpp:139
 #, kde-format
