@@ -1,16 +1,19 @@
+#
+# SPDX-FileCopyrightText: 2025 Xavier Besnard <xavier.besnard@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-27 00:42+0000\n"
-"PO-Revision-Date: 2025-02-27 05:32+0100\n"
-"Last-Translator: KDE Francophone <kde-francophone@kde.org>\n"
-"Language-Team: KDE Francophone <kde-francophone@kde.org>\n"
+"PO-Revision-Date: 2025-02-27 09:30+0100\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
+"Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #: colorsrunner.cpp:29
 #, kde-format
@@ -25,6 +28,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
 "255,255,255)."
 msgstr ""
+"Affiche la valeur de :q : en tant que couleur lorsque :q : est un triplet de "
+"couleurs « RGB » (Par exemple 255, 255, 255)."
 
 #: colorsrunner.cpp:34
 #, kde-format
@@ -32,18 +37,20 @@ msgid ""
 "Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
 "color quadruplet (e.g. 255,255,255,255)."
 msgstr ""
+"Affiche la valeur de :q : en tant que couleur avec un canal alpha lorsque :"
+"q : est un quadruplet de couleurs « RVBA » (Par exemple 255, 255, 255, 255)."
 
 #: colorsrunner.cpp:139
 #, kde-format
 msgid "RGBA: %1, %2, %3, %4"
-msgstr ""
+msgstr "RVBA : %1, %2, %3, %4"
 
 #: colorsrunner.cpp:141
 #, kde-format
 msgid "RGB: %1, %2, %3"
-msgstr ""
+msgstr "RVB : %1, %2, %3"
 
 #: colorsrunner.cpp:146
 #, kde-format
 msgid "CMYK: %1%, %2%, %3%, %4%"
-msgstr ""
+msgstr "CMYK : %1%, %2%, %3%, %4%"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-27 00:42+0000\n"
-"PO-Revision-Date: 2025-02-26 18:09+0100\n"
+"PO-Revision-Date: 2025-02-28 19:32+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -18,10 +18,7 @@ msgstr ""
 "X-Generator: Lokalize 24.12.0\n"
 
 #: colorsrunner.cpp:29
-#, fuzzy, kde-format
-#| msgid ""
-#| "Diplays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
-#| "#FF00FF) or an SVG named color."
+#, kde-format
 msgid ""
 "Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
 "#FF00FF) or an SVG named color."
