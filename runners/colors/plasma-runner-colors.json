@@ -50,6 +50,7 @@
             }
         ],
         "Description": "Display hex colors, rgb color triplets, and SVG color names",
+        "Description[ar]": "اعرض الألوان السداسية، وثلاثيات ألوان RGB، وأسماء ألوان SVG",
         "Description[ca@valencia]": "Mostra els colors hexadecimals, els triplets de color RGB i els noms de colors SVG",
         "Description[ca]": "Mostra els colors hexadecimals, els triplets de color RGB i els noms de colors SVG",
         "Description[es]": "Mostrar colores en hexadecimal, tripletes de colores RGB y nombres de colores SVG",
@@ -69,6 +70,7 @@
         "Icon": "color-picker",
         "License": "GPL",
         "Name": "Colors",
+        "Name[ar]": "الألوان",
         "Name[ca@valencia]": "Colors",
         "Name[ca]": "Colors",
         "Name[es]": "Colores",
