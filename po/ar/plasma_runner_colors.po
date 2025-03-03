@@ -1,22 +1,22 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# SPDX-FileCopyrightText: 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-27 00:42+0000\n"
-"PO-Revision-Date: 2025-03-01 08:02+0100\n"
-"Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
-"Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
-"Language: ka\n"
+"PO-Revision-Date: 2025-03-02 10:43+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
+"Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 3.5\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
+"&& n%100<=10 ? 3 : n%100>=11 && n%100<=99 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: colorsrunner.cpp:29
 #, kde-format
@@ -24,8 +24,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
 "#FF00FF) or an SVG named color."
 msgstr ""
-"აჩვენებს :q:-ის მნიშვნელობას ფერის სახით, როცა :q:თექვსმეტობითი (მაგ: "
-"#FF00FF) ან SVG-ის სახელიანი ფერია."
+"يعرض قيمة :q: كلون عندما يكون :q: لونًا سداسي عشريًا (على سبيل المثال #FF00FF) "
+"أو لونًا باسم SVG."
 
 #: colorsrunner.cpp:31
 #, kde-format
@@ -33,8 +33,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
 "255,255,255)."
 msgstr ""
-"აჩვენებს :q:-ის მნიშვნელობას ფერის სახით, როცა :q: RGB ფერის სამეულია (მაგ: "
-"255,255,255)."
+"يعرض قيمة :q: كلون عندما يكون :q: عبارة عن ثلاثية ألوان RGB (على سبيل المثال "
+"255،255،255)."
 
 #: colorsrunner.cpp:34
 #, kde-format
@@ -42,8 +42,8 @@ msgid ""
 "Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
 "color quadruplet (e.g. 255,255,255,255)."
 msgstr ""
-"აჩვენებს :q:-ის მნიშვნელობას ალფა არხის მქონე ფერის სახით, როცა :q: RGBA "
-"ფერის ოთხეულია (მაგ: 255,255,255,255)."
+"يعرض قيمة :q: كلون مع قناة ألفا عندما يكون :q: عبارة عن رباعي ألوان RGBA "
+"(على سبيل المثال 255،255،255،255)."
 
 #: colorsrunner.cpp:139
 #, kde-format
