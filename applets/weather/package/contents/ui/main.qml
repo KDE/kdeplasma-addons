@@ -315,8 +315,11 @@ PlasmoidItem {
         readonly property var currentData: data[weatherSource]
 
         engine: "weather"
-        connectedSources: weatherSource
         interval: updateInterval * 60 * 1000
+        Binding on connectedSources {
+            when: weatherSource !== ""
+            value: weatherSource
+        }
         onConnectedSourcesChanged: {
             if (weatherSource) {
                 status = Util.Connecting
