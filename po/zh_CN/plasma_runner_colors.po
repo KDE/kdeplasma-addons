@@ -1,0 +1,60 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeorg\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-02-27 00:42+0000\n"
+"PO-Revision-Date: 2025-03-04 19:31\n"
+"Last-Translator: \n"
+"Language-Team: Chinese Simplified\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Crowdin-Project: kdeorg\n"
+"X-Crowdin-Project-ID: 269464\n"
+"X-Crowdin-Language: zh-CN\n"
+"X-Crowdin-File: /kf6-trunk/messages/kdeplasma-addons/plasma_runner_colors."
+"pot\n"
+"X-Crowdin-File-ID: 57225\n"
+
+#: colorsrunner.cpp:29
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
+"#FF00FF) or an SVG named color."
+msgstr ""
+"当 :q: 是十六进制颜色 (例如 #FF00FF) 或 SVG 具名颜色时，以颜色形式显示 :q: 的"
+"值。"
+
+#: colorsrunner.cpp:31
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
+"255,255,255)."
+msgstr ""
+"当 :q: 是一个 RGB 颜色三元组 (例如 255,255,255) 时，以颜色形式显示 :q: 的值。"
+
+#: colorsrunner.cpp:34
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
+"color quadruplet (e.g. 255,255,255,255)."
+msgstr ""
+"当 :q: 是一个 RGB 颜色四元组 (例如 255,255,255,255) 时，以带透明度通道的颜色"
+"形式显示 :q: 的值。"
+
+#: colorsrunner.cpp:139
+#, kde-format
+msgid "RGBA: %1, %2, %3, %4"
+msgstr "RGBA：%1, %2, %3, %4"
+
+#: colorsrunner.cpp:141
+#, kde-format
+msgid "RGB: %1, %2, %3"
+msgstr "RGB：%1, %2, %3"
+
+#: colorsrunner.cpp:146
+#, kde-format
+msgid "CMYK: %1%, %2%, %3%, %4%"
+msgstr "CMYK：%1%, %2%, %3%, %4%"
