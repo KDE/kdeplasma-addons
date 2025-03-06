@@ -60,6 +60,7 @@
         "Description[ia]": "Monstra colores hex, triplettes de color rgb, e nomines de color SVG",
         "Description[it]": "Visualizza colori esadecimali, triplette di colori RGB e nomi di colori SVG",
         "Description[ka]": "თექვსმ. ფერების, RGB ფერის სამეულების და SVG ფერის სახელების ჩვენება",
+        "Description[lv]": "Rādīt heksadecimālas krāsas, RGP krāsu trijotnes un SVG krāsu nosaukumus",
         "Description[nl]": "Hex-kleuren, rgb-kleur-triplets en SVG kleur namen",
         "Description[pt_BR]": "Exibe cores HEX, trio de cores RGB e nomes de cores SVG",
         "Description[sl]": "Prikaži šestnajstiške barve, triplete barv rgb in imena barv SVG",
@@ -67,6 +68,7 @@
         "Description[tr]": "Onaltılık renkleri, RGB renk üçlülerini ve SVG renk adlarını görüntüleyin",
         "Description[uk]": "Показ шістнадцяткових кольорів, триплетів кольорів rgb та назв кольорів SVG",
         "Description[x-test]": "xxDisplay hex colors, rgb color triplets, and SVG color namesxx",
+        "Description[zh_CN]": "显示十六进制颜色、RGB 颜色三元组和 SVG 颜色名称",
         "EnabledByDefault": true,
         "Icon": "color-picker",
         "License": "GPL",
@@ -81,12 +83,14 @@
         "Name[ia]": "Colores",
         "Name[it]": "Colori",
         "Name[ka]": "ფერები",
+        "Name[lv]": "Krāsas",
         "Name[nl]": "Kleuren",
         "Name[pt_BR]": "Cores",
         "Name[sl]": "Barve",
         "Name[sv]": "Färger",
         "Name[tr]": "Renkler",
         "Name[uk]": "Кольори",
-        "Name[x-test]": "xxColorsxx"
+        "Name[x-test]": "xxColorsxx",
+        "Name[zh_CN]": "颜色"
     }
 }
