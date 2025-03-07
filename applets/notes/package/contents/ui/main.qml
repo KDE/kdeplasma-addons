@@ -145,6 +145,14 @@ PlasmoidItem {
 
                 clip: true
 
+                // avoids a binding loop
+                property bool scrollBarNecessary: false
+                Binding on scrollBarNecessary {
+                    value: mainTextArea.height > scrollview.height
+                    delayed: true
+                }
+                PlasmaComponents3.ScrollBar.vertical.visible: scrollBarNecessary
+
                 PlasmaComponents3.TextArea {
                     id: mainTextArea
                     property int cfgFontPointSize: Plasmoid.configuration.fontSize
