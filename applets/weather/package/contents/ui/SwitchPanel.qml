@@ -24,30 +24,33 @@ ColumnLayout {
     required property bool forecastViewNightRow
     required property string forecastViewTitle
 
-    readonly property var pagesModel: {
-        const pages = [{
-            title: root.forecastViewTitle || i18nc("@title:tab Weather forecast", "Forecast"),
-            view: root.forecastModel?.length > 0 ? forecastView : forecastPlaceholder,
-        }]
-
-        if (root.detailsModel && root.detailsModel.length > 0) {
-            pages.push({
-                title: i18nc("@title:tab", "Details"),
-                view: detailsView,
-            })
-        }
-        if (root.noticesModel && root.noticesModel.length > 0) {
-            pages.push({
-                title: i18ncp("@title:tab %1 is the number of weather notices (alerts, warnings, watches, ...) issued",
-                              "%1 Notice", "%1 Notices", noticesModel.length),
-                view: noticesView,
-                // Show warning icon if the maximum priority shown is at least 2 (Moderate)
-                icon: noticesModel.reduce((acc, notice) => Math.max(notice.priority, acc), 0) >= 2 ?
-                    'data-warning-symbolic' : 'data-information-symbolic',
-            })
-        }
-        return pages
+    component WeatherInfoPanel: QtObject {
+        property string title
+        property bool visible: true
+        property Component view
+        property string icon: ""
     }
+
+    readonly property list<WeatherInfoPanel> weatherPanelModel: [
+        WeatherInfoPanel {
+            title: root.forecastViewTitle || i18nc("@title:tab Weather forecast", "Forecast")
+            view: root.forecastModel?.length > 0 ? forecastView : forecastPlaceholder
+        },
+        WeatherInfoPanel {
+            title: i18nc("@title:tab", "Details")
+            visible: root.detailsModel && root.detailsModel.length > 0
+            view: detailsView
+        },
+        WeatherInfoPanel {
+            title: i18ncp("@title:tab %1 is the number of weather notices (alerts, warnings, watches, ...) issued", "%1 Notice", "%1 Notices", noticesModel.length)
+            visible: root.noticesModel && root.noticesModel.length > 0
+            view: noticesView
+            // Show warning icon if the maximum priority shown is at least 2 (Moderate)
+            icon: root.noticesModel.reduce((acc, notice) => Math.max(notice.priority, acc), 0) >= 2 ? 'data-warning-symbolic' : 'data-information-symbolic'
+        }
+    ]
+
+    readonly property list<WeatherInfoPanel> pagesModel: weatherPanelModel.filter(page => page.visible)
 
     PlasmaComponents.TabBar {
         id: tabBar
