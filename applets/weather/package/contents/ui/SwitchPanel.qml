@@ -54,6 +54,7 @@ ColumnLayout {
 
         Layout.fillWidth: true
         visible: root.pagesModel.length > 1
+        implicitWidth: 0 // this avoids a binding loop
 
         Repeater {
             model: root.pagesModel
