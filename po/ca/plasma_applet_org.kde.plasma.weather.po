@@ -562,28 +562,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgctxt "@label"
-#~ msgid "Windchill:"
-#~ msgstr "Sensació tèrmica pel vent:"
-
-#~ msgctxt "@label"
-#~ msgid "Humidex:"
-#~ msgstr "Sensació de xafogor:"
-
-#~ msgctxt "@label"
-#~ msgid "Heat Index:"
-#~ msgstr "Temperatura de xafogor:"
-
-#~ msgid "Weather information retrieval for %1 timed out."
-#~ msgstr ""
-#~ "La recuperació de la informació meteorològica per a %1 ha exhaurit el "
-#~ "temps."
-
-#~ msgctxt "@title:column weather warnings"
-#~ msgid "Warnings Issued"
-#~ msgstr "Alertes emeses"
-
-#~ msgctxt "@title:column weather watches"
-#~ msgid "Watches Issued"
-#~ msgstr "Avisos emesos"

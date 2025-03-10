@@ -132,7 +132,3 @@ msgstr "Bloqueig de pantalla"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
 msgstr "Mostra la pantalla de sortida"
-
-#~ msgctxt "Show a dialog with options to logout/shutdown/restart"
-#~ msgid "Log Out"
-#~ msgstr "Sortida"
