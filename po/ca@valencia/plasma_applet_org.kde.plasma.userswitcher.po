@@ -125,7 +125,7 @@ msgstr "Sessió nova"
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
-msgstr "Bloqueig de pantalla"
+msgstr "Bloqueig de la pantalla"
 
 #: package/contents/ui/main.qml:235
 #, kde-format
