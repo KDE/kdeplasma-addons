@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-19 00:42+0000\n"
+"POT-Creation-Date: 2025-03-11 00:42+0000\n"
 "PO-Revision-Date: 2009-01-12 03:03+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <kde-i18n-doc@kde.org>\n"
@@ -499,20 +499,20 @@ msgctxt "@action:button"
 msgid "Show more information"
 msgstr ""
 
-#: package/contents/ui/SwitchPanel.qml:29
+#: package/contents/ui/SwitchPanel.qml:36
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
 msgstr ""
 
-#: package/contents/ui/SwitchPanel.qml:35
+#: package/contents/ui/SwitchPanel.qml:40
 #, fuzzy, kde-format
 #| msgid "Details"
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Kitekît"
 
-#: package/contents/ui/SwitchPanel.qml:42
+#: package/contents/ui/SwitchPanel.qml:45
 #, fuzzy, kde-format
 #| msgid "Notices"
 msgctxt ""
@@ -523,13 +523,13 @@ msgid_plural "%1 Notices"
 msgstr[0] "Hişyarî"
 msgstr[1] "Hişyarî"
 
-#: package/contents/ui/SwitchPanel.qml:114
+#: package/contents/ui/SwitchPanel.qml:118
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr ""
 
-#: package/contents/ui/SwitchPanel.qml:116
+#: package/contents/ui/SwitchPanel.qml:120
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

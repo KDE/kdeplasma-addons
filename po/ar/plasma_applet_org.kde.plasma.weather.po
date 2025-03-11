@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-19 00:42+0000\n"
+"POT-Creation-Date: 2025-03-11 00:42+0000\n"
 "PO-Revision-Date: 2024-09-05 09:36+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -477,19 +477,19 @@ msgctxt "@action:button"
 msgid "Show more information"
 msgstr "أظهر المزيد من المعلومات"
 
-#: package/contents/ui/SwitchPanel.qml:29
+#: package/contents/ui/SwitchPanel.qml:36
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
 msgstr "التنبّؤ"
 
-#: package/contents/ui/SwitchPanel.qml:35
+#: package/contents/ui/SwitchPanel.qml:40
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "التفاصيل"
 
-#: package/contents/ui/SwitchPanel.qml:42
+#: package/contents/ui/SwitchPanel.qml:45
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -503,13 +503,13 @@ msgstr[3] "%1 إخطارات"
 msgstr[4] "%1 إخطارا"
 msgstr[5] "%1 إخطار"
 
-#: package/contents/ui/SwitchPanel.qml:114
+#: package/contents/ui/SwitchPanel.qml:118
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr "غير قادر على جلب معلومات الطقس"
 
-#: package/contents/ui/SwitchPanel.qml:116
+#: package/contents/ui/SwitchPanel.qml:120
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

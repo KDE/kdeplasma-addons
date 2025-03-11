@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-19 00:42+0000\n"
+"POT-Creation-Date: 2025-03-11 00:42+0000\n"
 "PO-Revision-Date: 2024-06-09 14:31+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -468,19 +468,19 @@ msgctxt "@action:button"
 msgid "Show more information"
 msgstr "Arată informații suplimentare"
 
-#: package/contents/ui/SwitchPanel.qml:29
+#: package/contents/ui/SwitchPanel.qml:36
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
 msgstr "Prognoză"
 
-#: package/contents/ui/SwitchPanel.qml:35
+#: package/contents/ui/SwitchPanel.qml:40
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Detalii"
 
-#: package/contents/ui/SwitchPanel.qml:42
+#: package/contents/ui/SwitchPanel.qml:45
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -491,13 +491,13 @@ msgstr[0] "%1 atenționare"
 msgstr[1] "%1 atenționări"
 msgstr[2] "%1 de atenționări"
 
-#: package/contents/ui/SwitchPanel.qml:114
+#: package/contents/ui/SwitchPanel.qml:118
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr "Prognoza vremii nu poate fi încărcată"
 
-#: package/contents/ui/SwitchPanel.qml:116
+#: package/contents/ui/SwitchPanel.qml:120
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

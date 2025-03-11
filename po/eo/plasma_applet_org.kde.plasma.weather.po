@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-19 00:42+0000\n"
+"POT-Creation-Date: 2025-03-11 00:42+0000\n"
 "PO-Revision-Date: 2024-09-21 10:41+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -467,19 +467,19 @@ msgctxt "@action:button"
 msgid "Show more information"
 msgstr "Montri pliajn informojn"
 
-#: package/contents/ui/SwitchPanel.qml:29
+#: package/contents/ui/SwitchPanel.qml:36
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
 msgstr "Prognozo"
 
-#: package/contents/ui/SwitchPanel.qml:35
+#: package/contents/ui/SwitchPanel.qml:40
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Detaloj"
 
-#: package/contents/ui/SwitchPanel.qml:42
+#: package/contents/ui/SwitchPanel.qml:45
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -489,13 +489,13 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 Avizo"
 msgstr[1] "%1 Avizoj"
 
-#: package/contents/ui/SwitchPanel.qml:114
+#: package/contents/ui/SwitchPanel.qml:118
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr "Ne eblas ŝargi veterprogrnozon"
 
-#: package/contents/ui/SwitchPanel.qml:116
+#: package/contents/ui/SwitchPanel.qml:120
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
