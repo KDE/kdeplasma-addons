@@ -52,6 +52,7 @@
             }
         ],
         "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Keyboard Indicator",
+        "Category": "System Information",
         "Description": "Shows whether Caps Lock or Num Lock are active",
         "Description[ar]": "تعرض إذا ما كان قفل الأرقام أو الحروف الكبيرة مفعل",
         "Description[az]": "Caps Lock və ya Num Lock'un aktivliyini göstərir",
