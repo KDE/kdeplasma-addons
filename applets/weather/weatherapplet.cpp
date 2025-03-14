@@ -32,12 +32,15 @@ WeatherApplet::WeatherApplet(QObject *parent, const KPluginMetaData &data, const
         }
     }
     Q_EMIT providersChanged();
-
-    setDefaultUnits();
 }
 
 WeatherApplet::~WeatherApplet()
 {
+}
+
+void WeatherApplet::init()
+{
+    setDefaultUnits();
 }
 
 // Plasma XML configuration is loaded at runtime, so it's not possible to set locale aware defaults.
