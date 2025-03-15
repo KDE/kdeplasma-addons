@@ -399,7 +399,7 @@ PlasmoidItem {
                     return mainTextArea.positionAt(event.x, event.y)
                 }
 
-                onDrop: {
+                onDrop: event => {
                     var mimeData = event.mimeData
                     var text = ""
                     if (mimeData.hasUrls) {
@@ -415,7 +415,7 @@ PlasmoidItem {
                     mainTextArea.insert(positionOfDrop(event), text)
                     event.accept(Qt.CopyAction)
                 }
-                onDragMove: {
+                onDragMove: event => {
                     // there doesn't seem to be a "just move the cursor", so we move
                     // the selection and then unselect so the cursor follows the mouse
                     mainTextArea.moveCursorSelection(positionOfDrop(event))
