@@ -257,7 +257,7 @@ PlasmoidItem {
             Keys.onDigit9Pressed: { digitClicked(9); nineButton.forceActiveFocus(Qt.TabFocusReason); }
             Keys.onEscapePressed: { allClearClicked(); allClearButton.forceActiveFocus(Qt.TabFocusReason); }
             Keys.onDeletePressed: { clearClicked(); clearButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onPressed: {
+            Keys.onPressed: event => {
                 switch (event.key) {
                 case Qt.Key_Plus:
                     setOperator("+");
