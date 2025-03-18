@@ -117,6 +117,7 @@ PlasmoidItem {
 
         showingInput = false;
         displayNumber(result);
+        Accessible.announce(i18nc("@info accessible result of calculation", "Result is %1", result))
     }
 
     function clearOperand() {
