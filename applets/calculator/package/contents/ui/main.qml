@@ -357,6 +357,8 @@ PlasmoidItem {
 
                     KeyNavigation.down: sevenButton
                     KeyNavigation.right: divideButton
+                    KeyNavigation.up: zeroButton
+                    KeyNavigation.left: allClearButton
 
                     text: i18nc("Text of the clear button", "C");
                     onClicked: clearClicked();
@@ -370,6 +372,7 @@ PlasmoidItem {
 
                     KeyNavigation.down: eightButton
                     KeyNavigation.right: multiplyButton
+                    KeyNavigation.up: zeroButton
 
                     text: i18nc("Text of the division button", "÷");
                     onClicked: setOperator("/");
@@ -383,6 +386,7 @@ PlasmoidItem {
 
                     KeyNavigation.down: nineButton
                     KeyNavigation.right: allClearButton
+                    KeyNavigation.up: decimalButton
 
                     text: i18nc("Text of the multiplication button", "×");
                     onClicked: setOperator("*");
@@ -395,6 +399,8 @@ PlasmoidItem {
                     Layout.fillHeight: true
 
                     KeyNavigation.down: minusButton
+                    KeyNavigation.up: ansButton
+                    KeyNavigation.right: clearButton
 
                     text: i18nc("Text of the all clear button", "AC");
                     onClicked: allClearClicked();
@@ -409,6 +415,7 @@ PlasmoidItem {
 
                     KeyNavigation.down: fourButton
                     KeyNavigation.right: eightButton
+                    KeyNavigation.left: minusButton
 
                     text: "7";
                     onClicked: digitClicked(7);
@@ -447,6 +454,7 @@ PlasmoidItem {
                     Layout.fillHeight: true
 
                     KeyNavigation.down: plusButton
+                    KeyNavigation.right: sevenButton
 
                     text: i18nc("Text of the minus button", "-");
                     onClicked: setOperator("-");
@@ -461,6 +469,7 @@ PlasmoidItem {
 
                     KeyNavigation.down: oneButton
                     KeyNavigation.right: fiveButton
+                    KeyNavigation.left: plusButton
 
                     text: "4";
                     onClicked: digitClicked(4);
@@ -499,6 +508,7 @@ PlasmoidItem {
                     Layout.fillHeight: true
 
                     KeyNavigation.down: ansButton
+                    KeyNavigation.right: fourButton
 
                     text: i18nc("Text of the plus button", "+");
                     onClicked: setOperator("+");
@@ -513,6 +523,7 @@ PlasmoidItem {
 
                     KeyNavigation.down: zeroButton
                     KeyNavigation.right: twoButton
+                    KeyNavigation.left: ansButton
 
                     text: "1";
                     onClicked: digitClicked(1);
@@ -550,6 +561,8 @@ PlasmoidItem {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
 
+                    KeyNavigation.right: oneButton
+
                     Layout.rowSpan: 2
                     text: i18nc("Text of the equals button", "=");
                     onClicked: equalsClicked();
@@ -562,6 +575,8 @@ PlasmoidItem {
                     Layout.fillHeight: true
 
                     KeyNavigation.right: decimalButton
+                    KeyNavigation.left: ansButton
+                    KeyNavigation.down: clearButton
 
                     Layout.columnSpan: 2
                     text: "0";
