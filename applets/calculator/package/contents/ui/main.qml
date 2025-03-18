@@ -236,7 +236,6 @@ PlasmoidItem {
         Layout.minimumHeight: main.switchHeight
         Layout.preferredWidth: main.switchWidth * 2
         Layout.preferredHeight: main.switchHeight * 2
-
         contentItem: ColumnLayout {
             id: mainLayout
             anchors.fill: parent
@@ -244,6 +243,11 @@ PlasmoidItem {
 
             focus: true;
             spacing: 4;
+
+            // Calculators customarily have the same button arrangements in RtL as LtR
+            layoutDirection: Qt.LeftToRight
+            LayoutMirroring.enabled: false
+            LayoutMirroring.childrenInherit: true
 
             Keys.onDigit0Pressed: { digitClicked(0); zeroButton.forceActiveFocus(Qt.TabFocusReason); }
             Keys.onDigit1Pressed: { digitClicked(1); oneButton.forceActiveFocus(Qt.TabFocusReason); }
