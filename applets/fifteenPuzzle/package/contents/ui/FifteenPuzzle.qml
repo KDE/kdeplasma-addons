@@ -323,7 +323,7 @@ Item {
             id: solvedImage
             anchors.fill: parent
             z: 1
-            source: "image://fifteenpuzzle/" + boardSize + "-all-0-0-" + Plasmoid.configuration.imagePath
+            source: Plasmoid.configuration.imagePath ? "image://fifteenpuzzle/" + boardSize + "-all-0-0-" + Plasmoid.configuration.imagePath : null
             visible: Plasmoid.configuration.useImage
             cache: false
             function update() {
