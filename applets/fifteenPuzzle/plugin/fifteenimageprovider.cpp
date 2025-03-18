@@ -5,6 +5,7 @@
  */
 
 #include "fifteenimageprovider.h"
+#include "debug_p.h"
 
 #include <QDebug>
 
@@ -21,7 +22,7 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
     Q_UNUSED(requestedSize); // wanted sizes are actually encoded in the id
 
     // id format is boardSize-imagenumber-pieceWidth-pieceHeight-imagePath
-    qDebug() << "pixmap requested with id " << id;
+    qDebug(PLASMA_FIFTEENPUZZLE) << "pixmap requested with id " << id;
     QStringList idParts = id.split(QLatin1Char('-'));
     if (idParts.size() < 4) {
         *size = QSize();
@@ -35,7 +36,7 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
     QString path = idParts.at(4);
     if (path != m_imagePath && !path.isEmpty()) {
         m_imagePath = path;
-        qDebug() << "loading pixmap from file " << path << m_pixmap.load(path);
+        qDebug(PLASMA_FIFTEENPUZZLE) << "loading pixmap from file " << path << m_pixmap.load(path);
         update = true;
     }
 
@@ -59,7 +60,7 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
 
         int number = idParts.at(1).toInt();
 
-        qDebug() << "pixmap for piece " << number << " requested";
+        qDebug(PLASMA_FIFTEENPUZZLE) << "pixmap for piece " << number << " requested";
         if (number > 0 && number < m_pixmaps.size()) {
             *size = QSize(m_pieceWidth, m_pieceHeight);
             return m_pixmaps.at(number);

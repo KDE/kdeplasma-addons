@@ -4,6 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
+#include "debug_p.h"
 #include "fifteenimageprovider.h"
 
 #include <QDebug>
@@ -23,7 +24,7 @@ public:
     }
     void initializeEngine(QQmlEngine *engine, const char *uri) override
     {
-        qDebug() << "initializeEngine called, uri is " << uri;
+        qCDebug(PLASMA_FIFTEENPUZZLE) << "initializeEngine called, uri is " << uri;
         engine->addImageProvider(QStringLiteral("fifteenpuzzle"), new FifteenImageProvider());
     }
 };
