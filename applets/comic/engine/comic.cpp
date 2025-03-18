@@ -80,7 +80,7 @@ bool ComicEngine::requestSource(const QString &identifier)
     // ... start a new query otherwise
     if (parts.count() < 2) {
         Q_EMIT requestFinished(ComicMetaData{.error = true});
-        qWarning() << "Less than two arguments specified.";
+        qCWarning(PLASMA_COMIC) << "Less than two arguments specified.";
         return false;
     }
     if (!mProviders.contains(parts[0])) {
@@ -88,7 +88,7 @@ bool ComicEngine::requestSource(const QString &identifier)
         loadProviders();
         if (!mProviders.contains(parts[0])) {
             Q_EMIT requestFinished(ComicMetaData{.error = true});
-            qWarning() << identifier << "comic plugin does not seem to be installed.";
+            qCWarning(PLASMA_COMIC) << identifier << "comic plugin does not seem to be installed.";
             return false;
         }
     }
@@ -176,7 +176,7 @@ void ComicEngine::error(ComicProvider *provider)
     QString identifier(provider->identifier());
     mIdentifierError = identifier;
 
-    qWarning() << identifier << "plugging reported an error.";
+    qCWarning(PLASMA_COMIC) << identifier << "plugging reported an error.";
 
     ComicMetaData data = metaDataFromProvider(provider);
     data.error = true;

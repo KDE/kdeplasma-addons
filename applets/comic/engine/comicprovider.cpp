@@ -96,7 +96,7 @@ ComicProvider::ComicProvider(QObject *parent, const KPluginMetaData &data, Ident
         int index = d->mRequestedId.indexOf(QLatin1Char(':'));
         d->mRequestedComicName = d->mRequestedId.mid(0, index);
     } else {
-        qFatal("Invalid type passed to comic provider");
+        qCFatal(PLASMA_COMIC) << "Invalid type passed to comic provider";
     }
 
     d->mTimer->start();

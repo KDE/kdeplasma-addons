@@ -377,7 +377,7 @@ void ComicApplet::slotFoundLastStrip(int index, const QString &identifier, const
 
     KConfigGroup cg = config();
     if (suffix != cg.readEntry(QLatin1String("lastStrip_") + identifier, QString())) {
-        qDebug() << identifier << "has a newer strip.";
+        qCDebug(PLASMA_COMIC) << identifier << "has a newer strip.";
         cg.writeEntry(QLatin1String("lastStripVisited_") + identifier, false);
         updateComic(suffix);
     }
@@ -434,8 +434,8 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
         slotScaleToContent();
     } else {
         setBusy(false);
-        qWarning() << "Either no identifier was specified or the engine could not be created:"
-                   << "id" << id;
+        qCWarning(PLASMA_COMIC) << "Either no identifier was specified or the engine could not be created:"
+                                << "id" << id;
     }
     updateContextMenu();
 }

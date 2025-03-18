@@ -8,6 +8,7 @@
 #ifndef COMICPROVIDERWRAPPER_H
 #define COMICPROVIDERWRAPPER_H
 
+#include "comic_debug.h"
 #include "comicprovider.h"
 #include "types.h"
 
@@ -173,7 +174,7 @@ public:
 
     Q_INVOKABLE void print(const QJSValue &str)
     {
-        qWarning() << str.toString();
+        qCWarning(PLASMA_COMIC) << str.toString();
     }
 
     IdentifierType identifierType() const;
