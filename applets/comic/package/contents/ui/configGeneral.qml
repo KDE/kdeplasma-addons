@@ -30,7 +30,6 @@ KCM.SimpleKCM {
         Plasmoid.middleClick = middleClickCheckBox.checked;
 
         Plasmoid.checkNewComicStripsInterval = checkNewComicStripsInterval.value;
-        Plasmoid.providerUpdateInterval = providerUpdateInterval.value;
 
         Plasmoid.saveConfig();
         Plasmoid.configChanged();
@@ -40,7 +39,6 @@ KCM.SimpleKCM {
         Component.onCompleted: {
             middleClickCheckBox.checked = Plasmoid.middleClick;
             checkNewComicStripsInterval.value = Plasmoid.checkNewComicStripsInterval;
-            providerUpdateInterval.value = Plasmoid.providerUpdateInterval
         }
 
         Item {
@@ -86,21 +84,6 @@ KCM.SimpleKCM {
 
         Item {
             Kirigami.FormData.isSection: true
-        }
-
-        Layouts.RowLayout {
-                Kirigami.FormData.label: i18nc("@label:spinbox", "Check for new plugins every:")
-
-            Controls.SpinBox {
-                id: providerUpdateInterval
-                stepSize: 1
-                onValueChanged: root.configurationChanged();
-            }
-
-            Controls.Label {
-                text: i18ncp("@item:valuesuffix spacing to number + unit", "day", "days")
-                textFormat: Text.PlainText
-            }
         }
 
         Layouts.RowLayout {
