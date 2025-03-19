@@ -63,6 +63,9 @@ void ComicApplet::init()
 {
     mSavingDir = new SavingDir(config());
 
+    mDateChangedTimer = new QTimer(this);
+    mDateChangedTimer->setInterval(5 * 60 * 1000); // every 5 minutes
+
     configChanged();
 
     mModel = new ComicModel(mEngine, mTabIdentifier, this);
@@ -72,10 +75,7 @@ void ComicApplet::init()
     mProxy->sort(1, Qt::AscendingOrder);
 
     mCurrentDay = QDate::currentDate();
-    mDateChangedTimer = new QTimer(this);
     connect(mDateChangedTimer, &QTimer::timeout, this, &ComicApplet::checkDayChanged);
-    mDateChangedTimer->setInterval(5 * 60 * 1000); // every 5 minutes
-    mDateChangedTimer->start();
 
     mActionNextNewStripTab = new QAction(QIcon::fromTheme(QStringLiteral("go-next-view")), i18nc("@action comic strip", "&Next Tab with a New Strip"), this);
     mActionNextNewStripTab->setShortcuts(KStandardShortcut::openNew());
@@ -135,7 +135,9 @@ void ComicApplet::init()
     updateView();
 
     updateUsedComics();
-    changeComic(true);
+    if (!mTabIdentifier.isEmpty()) {
+        changeComic(true);
+    }
 
     connect(mEngine, &ComicEngine::requestFinished, this, &ComicApplet::dataUpdated);
 
@@ -289,7 +291,9 @@ void ComicApplet::slotTabChanged(const QString &identifier)
     bool differentComic = (mCurrent.id() != identifier);
     mCurrent = ComicData();
     mCurrent.init(identifier, config());
-    changeComic(differentComic);
+    if (!mTabIdentifier.isEmpty()) {
+        changeComic(differentComic);
+    }
 }
 
 void ComicApplet::checkDayChanged()
@@ -328,6 +332,12 @@ void ComicApplet::configChanged()
     mMaxComicLimit = cg.readEntry("maxComicLimit", 29);
     if (oldMaxComicLimit != mMaxComicLimit) {
         mEngine->setMaxComicLimit(mMaxComicLimit);
+    }
+    if (mTabIdentifier.isEmpty()) {
+        setConfigurationRequired(true);
+        mDateChangedTimer->stop();
+    } else {
+        mDateChangedTimer->start();
     }
 }
 
