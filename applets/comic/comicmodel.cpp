@@ -58,7 +58,7 @@ QVariant ComicModel::data(const QModelIndex &index, int role) const
     case Qt::DisplayRole:
         return info.name;
     case Qt::DecorationRole:
-        return QIcon::fromTheme(info.icon);
+        return info.icon;
     case Qt::UserRole:
         return info.pluginId;
     }

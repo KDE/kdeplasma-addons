@@ -25,7 +25,7 @@ QHash<int, QByteArray> ActiveComicModel::roleNames() const
     return roleNames;
 }
 
-void ActiveComicModel::addComic(const QString &key, const QString &title, const QIcon &icon, bool highlight)
+void ActiveComicModel::addComic(const QString &key, const QString &title, const QString &icon, bool highlight)
 {
     QList<QStandardItem *> newRow;
     QStandardItem *item = new QStandardItem(title);
