@@ -109,7 +109,7 @@ PlasmoidItem {
         }
     }
 
-    fullRepresentation: Item {
+    fullRepresentation: FocusScope {
         id: fullRoot
 
         implicitHeight: column.implicitHeight
@@ -128,6 +128,12 @@ PlasmoidItem {
 
         Sessions.SessionsModel {
             id: sessionsModel
+        }
+
+        Window.onVisibilityChanged: {
+            if (Window.visibility !== Window.Hidden && !fullRoot.focus) {
+                newSessionButton.forceActiveFocus()
+            }
         }
 
         ColumnLayout {
@@ -160,7 +166,8 @@ PlasmoidItem {
 
                     focus: true
                     interactive: true
-                    keyNavigationWraps: true
+                    keyNavigationEnabled: true
+                    keyNavigationWraps: false
 
                     delegate: UserListDelegate {
                         width: ListView.view.width

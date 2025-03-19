@@ -23,6 +23,11 @@ PlasmaComponents3.ItemDelegate {
     highlighted: activeFocus
 
     Accessible.name: `${text}${subText ? `: ${subText}` : ""}`
+    Keys.onPressed: event => {
+        if (event.key === Qt.Key_Enter || event.key === Qt.Key_Return) {
+            clicked()
+        }
+    }
 
     onHoveredChanged: if (hovered) {
         if (ListView.view) {
