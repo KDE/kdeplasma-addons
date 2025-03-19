@@ -44,7 +44,7 @@ Item {
             top: root.top
             bottom: root.bottom
         }
-        subText: Plasmoid.comicData.additionalText
+        subText: Plasmoid.comicData.additionalText ?? ""
         active: subText
 
         MouseArea {
@@ -70,8 +70,8 @@ Item {
 
                 image: Plasmoid.comicData.image
                 actualSize: Plasmoid.showActualSize
-                isLeftToRight: Plasmoid.comicData.isLeftToRight
-                isTopToBottom: Plasmoid.comicData.isTopToBottom
+                isLeftToRight: Plasmoid.comicData.isLeftToRight ?? false
+                isTopToBottom: Plasmoid.comicData.isTopToBottom ?? false
             }
 
             ButtonBar {
