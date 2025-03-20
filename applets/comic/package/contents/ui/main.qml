@@ -120,6 +120,7 @@ PlasmoidItem {
             horizontalAlignment: Text.AlignHCenter
             text: (showComicAuthor || showComicTitle) ? getTopInfo() : ""
             textFormat: Text.PlainText
+            elide: Text.ElideRight
 
             function getTopInfo() {
                 var tempTop = "";

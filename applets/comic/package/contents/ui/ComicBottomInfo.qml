@@ -28,8 +28,6 @@ Item {
 
         anchors {
             left: root.left
-            top: root.top
-            bottom: root.bottom
             right: comicUrl.left
             leftMargin: 2
         }
@@ -38,6 +36,7 @@ Item {
         visible: (showIdentifier && comicIdentifier.text.length > 0)
         text: (showIdentifier && comicData.currentReadable != undefined) ? comicData.currentReadable : ""
         textFormat: Text.PlainText
+        elide: Text.ElideRight
 
         MouseArea {
             id: idLabelArea
@@ -69,8 +68,6 @@ Item {
         id:comicUrl
 
         anchors {
-            top: root.top
-            bottom: root.bottom
             right: root.right
             rightMargin: 2
         }
@@ -79,6 +76,7 @@ Item {
         visible: (showUrl && comicUrl.text.length > 0)
         text: (showUrl && comicData.websiteHost.length > 0) ? comicData.websiteHost : ""
         textFormat: Text.PlainText
+        elide: Text.ElideRight
 
         MouseArea {
             id: idUrlLabelArea
