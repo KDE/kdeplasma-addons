@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-04 02:35+0000\n"
+"POT-Creation-Date: 2025-03-20 02:40+0000\n"
 "PO-Revision-Date: 2016-04-15 23:42+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -88,53 +88,53 @@ msgstr "Prikaži tehničke podatke o sesijama"
 msgid "You are logged in as <b>%1</b>"
 msgstr "Prijavljeni ste kao <b>%1</b>"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgid "Current user"
 msgstr "Tekući korisnik"
 
 # >> @item
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:179
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "nekorišćeno"
 
 # >> @item
-#: package/contents/ui/main.qml:192
+#: package/contents/ui/main.qml:199
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
 # >> @item
-#: package/contents/ui/main.qml:194
+#: package/contents/ui/main.qml:201
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "na %1 %2|/|na $[lok %1] %2"
 
-#: package/contents/ui/main.qml:202
+#: package/contents/ui/main.qml:209
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr ""
 
-#: package/contents/ui/main.qml:211
+#: package/contents/ui/main.qml:218
 #, fuzzy, kde-format
 #| msgid "New Session"
 msgctxt "@action"
 msgid "New Session"
 msgstr "Nova sesija"
 
-#: package/contents/ui/main.qml:223
+#: package/contents/ui/main.qml:230
 #, fuzzy, kde-format
 #| msgid "Lock Screen"
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Zaključaj ekran"
 
-#: package/contents/ui/main.qml:235
+#: package/contents/ui/main.qml:242
 #, fuzzy, kde-format
 #| msgid "Lock Screen"
 msgctxt "Show a dialog with options to logout/shutdown/restart"

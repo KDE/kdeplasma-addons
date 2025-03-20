@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-04 02:35+0000\n"
+"POT-Creation-Date: 2025-03-20 02:40+0000\n"
 "PO-Revision-Date: 2024-12-24 16:52+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -82,48 +82,48 @@ msgstr "기술적인 세션 정보 표시"
 msgid "You are logged in as <b>%1</b>"
 msgstr "<b>%1</b>(으)로 로그인되었습니다"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgid "Current user"
 msgstr "현재 사용자"
 
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:179
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "사용하지 않음"
 
-#: package/contents/ui/main.qml:192
+#: package/contents/ui/main.qml:199
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
-#: package/contents/ui/main.qml:194
+#: package/contents/ui/main.qml:201
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "%1(%2)에 있음"
 
-#: package/contents/ui/main.qml:202
+#: package/contents/ui/main.qml:209
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr "%1 사용자로 전환"
 
-#: package/contents/ui/main.qml:211
+#: package/contents/ui/main.qml:218
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "새 세션"
 
-#: package/contents/ui/main.qml:223
+#: package/contents/ui/main.qml:230
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "화면 잠그기"
 
-#: package/contents/ui/main.qml:235
+#: package/contents/ui/main.qml:242
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
