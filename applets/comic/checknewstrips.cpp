@@ -31,6 +31,10 @@ void CheckNewStrips::dataUpdated(const ComicMetaData &data)
     const QString source = data.identifier;
     QString lastIdentifierSuffix;
 
+    if (!mEngine->isCheckingForUpdates()) {
+        return;
+    }
+
     if (!data.error) {
         lastIdentifierSuffix = data.identifier;
         lastIdentifierSuffix.remove(source);

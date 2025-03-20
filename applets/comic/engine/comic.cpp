@@ -66,6 +66,11 @@ void ComicEngine::setIsCheckingForUpdates(bool isCheckingForUpdates)
     mIsCheckingForUpdates = isCheckingForUpdates;
 }
 
+bool ComicEngine::isCheckingForUpdates()
+{
+    return mIsCheckingForUpdates;
+}
+
 bool ComicEngine::requestSource(const QString &identifier)
 {
     if (m_jobs.contains(identifier)) {
