@@ -20,46 +20,30 @@ PlasmaComponents.ScrollView {
 
     property alias image: comicPicture.image
 
-    function calculateContentWidth() {
-        return actualSize ? (comicPicture.nativeWidth > viewContainer.width ? comicPicture.nativeWidth : viewContainer.width) : viewContainer.width;
-    }
-
-    function calculateContentHeight() {
-        return actualSize ? (comicPicture.nativeHeight > viewContainer.height ? comicPicture.nativeHeight : viewContainer.height) : viewContainer.height;
-    }
-
     Flickable {
         id: viewContainer
 
         anchors.fill:parent
 
-        contentWidth: comicPictureHolder.width
-        contentHeight: comicPictureHolder.height
-
+        contentWidth: comicPicture.width
+        contentHeight: comicPicture.height
         clip: true
 
-        Item {
-            id: comicPictureHolder
+        QImageItem {
+            id: comicPicture
 
-            width: Math.max(comicPicture.width, viewContainer.width);
-            height: Math.max(comicPicture.height, viewContainer.height);
+            anchors.centerIn: parent
 
-            QImageItem {
-                id: comicPicture
+            width: actualSize ? comicPicture.nativeWidth : viewContainer.width
+            height: actualSize ? comicPicture.nativeHeight : viewContainer.height
 
-                anchors.centerIn: parent
-
-                width: actualSize ? comicPicture.nativeWidth : viewContainer.width
-                height: actualSize ? comicPicture.nativeHeight : viewContainer.height
-
-                onImageChanged: {
-                    viewContainer.contentX = (root.isLeftToRight) ? 0 : ( viewContainer.contentWidth - viewContainer.width);
-                    viewContainer.contentY = (root.isTopToBottom) ? 0 : ( viewContainer.contentHeight - viewContainer.height);
-                }
-
-                smooth: true
-                fillMode: QImageItem.PreserveAspectFit
+            onImageChanged: {
+                viewContainer.contentX = (root.isLeftToRight) ? 0 : ( viewContainer.contentWidth - viewContainer.width);
+                viewContainer.contentY = (root.isTopToBottom) ? 0 : ( viewContainer.contentHeight - viewContainer.height);
             }
+
+            smooth: true
+            fillMode: QImageItem.PreserveAspectFit
         }
     }
 }
