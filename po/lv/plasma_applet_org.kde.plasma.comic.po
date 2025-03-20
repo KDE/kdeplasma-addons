@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2024-04-02 16:29+0300\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -187,46 +187,31 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Tikai pārliekot peles kursoru"
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:50
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Komikss:"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Iegūt jaunus komiksus..."
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Vidējais klikšķis uz komiksa parāda to sākotnējā izmērā"
 
-#: package/contents/ui/configGeneral.qml:92
-#, kde-format
-msgctxt "@label:spinbox"
-msgid "Check for new plugins every:"
-msgstr "Pārbaudīt jaunus spraudņus ik pēc:"
-
-#: package/contents/ui/configGeneral.qml:101
-#, kde-format
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "day"
-msgid_plural "days"
-msgstr[0] " dienas"
-msgstr[1] " dienām"
-msgstr[2] " dienām"
-
-#: package/contents/ui/configGeneral.qml:107
+#: package/contents/ui/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Pārbaudīt jaunus komiksus ik pēc:"
 
-#: package/contents/ui/configGeneral.qml:116
+#: package/contents/ui/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -252,6 +237,17 @@ msgstr "&Komiksa lapas numurs:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Komiksa lapas identifikators:"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Check for new plugins every:"
+#~ msgstr "Pārbaudīt jaunus spraudņus ik pēc:"
+
+#~ msgctxt "@item:valuesuffix spacing to number + unit"
+#~ msgid "day"
+#~ msgid_plural "days"
+#~ msgstr[0] " dienas"
+#~ msgstr[1] " dienām"
+#~ msgstr[2] " dienām"
 
 #, fuzzy
 #~| msgid "&Create Comic Book Archive..."

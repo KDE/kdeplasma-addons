@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2023-10-08 11:08+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -184,45 +184,31 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Bara með bendli yfir"
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:50
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Myndasögur:"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Sækja nýjar myndasögur..."
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Miðjusmella á myndasöguna til að sýna hana í upprunalegri stærð"
 
-#: package/contents/ui/configGeneral.qml:92
-#, kde-format
-msgctxt "@label:spinbox"
-msgid "Check for new plugins every:"
-msgstr "Gá að nýjum viðbótum eftir:"
-
-#: package/contents/ui/configGeneral.qml:101
-#, kde-format
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "day"
-msgid_plural "days"
-msgstr[0] "dag"
-msgstr[1] "daga"
-
-#: package/contents/ui/configGeneral.qml:107
+#: package/contents/ui/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Gá að nýjum myndasögum eftir:"
 
-#: package/contents/ui/configGeneral.qml:116
+#: package/contents/ui/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -247,6 +233,16 @@ msgstr "&Syrpa númer:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Auðkenni syrpu:"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Check for new plugins every:"
+#~ msgstr "Gá að nýjum viðbótum eftir:"
+
+#~ msgctxt "@item:valuesuffix spacing to number + unit"
+#~ msgid "day"
+#~ msgid_plural "days"
+#~ msgstr[0] "dag"
+#~ msgstr[1] "daga"
 
 #, fuzzy
 #~ msgctxt "@action"

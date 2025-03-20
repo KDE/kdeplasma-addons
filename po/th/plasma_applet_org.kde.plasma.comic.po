@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2010-03-27 22:05+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -190,46 +190,33 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:50
 #, fuzzy, kde-format
 #| msgid "Comic:"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "การ์ตูน:"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:70
 #, fuzzy, kde-format
 #| msgid "&Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "&หาการ์ตูนใหม่ ๆ ..."
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:92
-#, kde-format
-msgctxt "@label:spinbox"
-msgid "Check for new plugins every:"
-msgstr ""
-
-#: package/contents/ui/configGeneral.qml:101
-#, kde-format
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "day"
-msgid_plural "days"
-msgstr[0] ""
-
-#: package/contents/ui/configGeneral.qml:107
+#: package/contents/ui/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:116
+#: package/contents/ui/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

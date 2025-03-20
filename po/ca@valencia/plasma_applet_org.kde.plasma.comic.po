@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2022-07-30 23:37+0200\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -184,45 +184,31 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Només en passar-hi per damunt"
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:50
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Còmics:"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Aconseguix còmics nous…"
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Clic del mig en el còmic per a veure'l a la mida original"
 
-#: package/contents/ui/configGeneral.qml:92
-#, kde-format
-msgctxt "@label:spinbox"
-msgid "Check for new plugins every:"
-msgstr "Comprova si hi ha connectors nous cada:"
-
-#: package/contents/ui/configGeneral.qml:101
-#, kde-format
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "day"
-msgid_plural "days"
-msgstr[0] "dia"
-msgstr[1] "dies"
-
-#: package/contents/ui/configGeneral.qml:107
+#: package/contents/ui/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Comprova si hi ha còmics nous cada:"
 
-#: package/contents/ui/configGeneral.qml:116
+#: package/contents/ui/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -247,3 +233,13 @@ msgstr "&Tira número:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identificador de tira:"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Check for new plugins every:"
+#~ msgstr "Comprova si hi ha connectors nous cada:"
+
+#~ msgctxt "@item:valuesuffix spacing to number + unit"
+#~ msgid "day"
+#~ msgid_plural "days"
+#~ msgstr[0] "dia"
+#~ msgstr[1] "dies"

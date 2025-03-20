@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2022-08-08 23:15+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: Arabic <kde-l10n-ar@kde.org>\n"
@@ -184,49 +184,31 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "فقط عند التحويم"
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:50
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "الرسمات:"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "احصل على رسمات جديدة..."
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "النقر بالزر الأوسط لعرض حجمها الفعلي"
 
-#: package/contents/ui/configGeneral.qml:92
-#, kde-format
-msgctxt "@label:spinbox"
-msgid "Check for new plugins every:"
-msgstr "التمس الملحقات الجديدة كل:"
-
-#: package/contents/ui/configGeneral.qml:101
-#, kde-format
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "day"
-msgid_plural "days"
-msgstr[0] "يوم"
-msgstr[1] "يوم"
-msgstr[2] "يومين"
-msgstr[3] "أيّام"
-msgstr[4] "يومًا"
-msgstr[5] "يوم"
-
-#: package/contents/ui/configGeneral.qml:107
+#: package/contents/ui/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "التمس الرسمات الجديدة كل:"
 
-#: package/contents/ui/configGeneral.qml:116
+#: package/contents/ui/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -255,6 +237,20 @@ msgstr "رقم ال&شريط:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "معرف الشريط:"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Check for new plugins every:"
+#~ msgstr "التمس الملحقات الجديدة كل:"
+
+#~ msgctxt "@item:valuesuffix spacing to number + unit"
+#~ msgid "day"
+#~ msgid_plural "days"
+#~ msgstr[0] "يوم"
+#~ msgstr[1] "يوم"
+#~ msgstr[2] "يومين"
+#~ msgstr[3] "أيّام"
+#~ msgstr[4] "يومًا"
+#~ msgstr[5] "يوم"
 
 #~ msgctxt "@action"
 #~ msgid "&Create Comic Book Archive…"

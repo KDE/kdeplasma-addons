@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2022-07-21 22:20+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -183,46 +183,32 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Alleen onder cursor"
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:50
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Stripboeken:"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Nieuwe stripverhalen ophalen…"
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr ""
 "Klikken met middenknop op stripverhaal om de oorspronkelijke grootte te tonen"
 
-#: package/contents/ui/configGeneral.qml:92
-#, kde-format
-msgctxt "@label:spinbox"
-msgid "Check for new plugins every:"
-msgstr "Op nieuwe plug-ins controleren elke:"
-
-#: package/contents/ui/configGeneral.qml:101
-#, kde-format
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "day"
-msgid_plural "days"
-msgstr[0] "dag"
-msgstr[1] "dagen"
-
-#: package/contents/ui/configGeneral.qml:107
+#: package/contents/ui/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Op nieuwe stripverhalen controleren elke:"
 
-#: package/contents/ui/configGeneral.qml:116
+#: package/contents/ui/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -247,6 +233,16 @@ msgstr "&Stripverhaalnummer:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identifier van stripverhaal:"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Check for new plugins every:"
+#~ msgstr "Op nieuwe plug-ins controleren elke:"
+
+#~ msgctxt "@item:valuesuffix spacing to number + unit"
+#~ msgid "day"
+#~ msgid_plural "days"
+#~ msgstr[0] "dag"
+#~ msgstr[1] "dagen"
 
 #~ msgctxt "@action"
 #~ msgid "&Create Comic Book Archive…"

@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-11 00:42+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2009-09-27 18:16+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -421,37 +421,37 @@ msgctxt "@label"
 msgid "Wind Gust:"
 msgstr ""
 
-#: package/contents/ui/main.qml:364
+#: package/contents/ui/main.qml:367
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
 msgstr ""
 
-#: package/contents/ui/main.qml:375
+#: package/contents/ui/main.qml:378
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr ""
 
-#: package/contents/ui/main.qml:382
+#: package/contents/ui/main.qml:385
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr ""
 
-#: package/contents/ui/main.qml:385
+#: package/contents/ui/main.qml:388
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr ""
 
-#: package/contents/ui/main.qml:394
+#: package/contents/ui/main.qml:397
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr ""
 
-#: package/contents/ui/main.qml:401
+#: package/contents/ui/main.qml:404
 #, kde-format
 msgid "Humidity: %1"
 msgstr ""

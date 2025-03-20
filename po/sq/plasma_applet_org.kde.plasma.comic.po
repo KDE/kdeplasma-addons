@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2010-02-06 14:33+0000\n"
 "Last-Translator: Vilson Gjeci <vilsongjeci@gmail.com>\n"
 "Language-Team: Albanian <sq@li.org>\n"
@@ -199,21 +199,21 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:50
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Komike"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:70
 #, fuzzy, kde-format
 #| msgid "&Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "&Merr Komika të Reja..."
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:81
 #, fuzzy, kde-format
 #| msgid "&Middle-click on the comic to show it at its original size"
 msgctxt "@option:check"
@@ -222,29 +222,14 @@ msgstr ""
 "&kliko me butonin e mesit mbi komikë për ta shfaqur atë me përmasën e vet "
 "origjinale"
 
-#: package/contents/ui/configGeneral.qml:92
-#, fuzzy, kde-format
-#| msgid "Choose a comic strip"
-msgctxt "@label:spinbox"
-msgid "Check for new plugins every:"
-msgstr "Zgjidh një shirit komik"
-
-#: package/contents/ui/configGeneral.qml:101
-#, kde-format
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "day"
-msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
-
-#: package/contents/ui/configGeneral.qml:107
+#: package/contents/ui/configGeneral.qml:90
 #, fuzzy, kde-format
 #| msgid "Choose a comic strip"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Zgjidh një shirit komik"
 
-#: package/contents/ui/configGeneral.qml:116
+#: package/contents/ui/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -272,6 +257,12 @@ msgstr "&Numri i Shiritit:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Shfaq identifikuesin e &komikës:"
+
+#, fuzzy
+#~| msgid "Choose a comic strip"
+#~ msgctxt "@label:spinbox"
+#~ msgid "Check for new plugins every:"
+#~ msgstr "Zgjidh një shirit komik"
 
 #, fuzzy
 #~| msgid "&Save Comic As..."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_comic.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2007-11-16 11:40-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -201,54 +201,35 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:50
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Stiallchartún"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:70
 #, fuzzy, kde-format
 #| msgid "&Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Fai&gh Stiallchartúin Nua..."
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:81
 #, fuzzy, kde-format
 #| msgid "&Middle-click on the comic to show it at its original size"
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "&Lárchliceáil an stiallchartún chun é a thaispeáint sa bhunmhéid"
 
-#: package/contents/ui/configGeneral.qml:92
-#, fuzzy, kde-format
-#| msgid "Check for new comic strips:"
-msgctxt "@label:spinbox"
-msgid "Check for new plugins every:"
-msgstr "Lorg stiallchartúin nua:"
-
-#: package/contents/ui/configGeneral.qml:101
-#, fuzzy, kde-format
-#| msgid " days"
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "day"
-msgid_plural "days"
-msgstr[0] " lá"
-msgstr[1] " lá"
-msgstr[2] " lá"
-msgstr[3] " lá"
-msgstr[4] " lá"
-
-#: package/contents/ui/configGeneral.qml:107
+#: package/contents/ui/configGeneral.qml:90
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Lorg stiallchartúin nua:"
 
-#: package/contents/ui/configGeneral.qml:116
+#: package/contents/ui/configGeneral.qml:99
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -280,6 +261,23 @@ msgstr "&Uimhir Stiallchartúin:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Aitheantóir an stiallchartúin:"
+
+#, fuzzy
+#~| msgid "Check for new comic strips:"
+#~ msgctxt "@label:spinbox"
+#~ msgid "Check for new plugins every:"
+#~ msgstr "Lorg stiallchartúin nua:"
+
+#, fuzzy
+#~| msgid " days"
+#~ msgctxt "@item:valuesuffix spacing to number + unit"
+#~ msgid "day"
+#~ msgid_plural "days"
+#~ msgstr[0] " lá"
+#~ msgstr[1] " lá"
+#~ msgstr[2] " lá"
+#~ msgstr[3] " lá"
+#~ msgstr[4] " lá"
 
 #, fuzzy
 #~| msgid "&Save Comic As..."

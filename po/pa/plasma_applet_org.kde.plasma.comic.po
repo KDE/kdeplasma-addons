@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2011-06-29 23:33+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -199,50 +199,34 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:50
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "ਕਾਮਿਕ"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:70
 #, fuzzy, kde-format
 #| msgid "&Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "ਨਵੇਂ ਕਾਮਿਕ ਲਵੋ(&G)..."
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:92
-#, fuzzy, kde-format
-#| msgid "Choose a comic strip"
-msgctxt "@label:spinbox"
-msgid "Check for new plugins every:"
-msgstr "ਕੌਮਿਕ ਪੱਟੀ ਚੁਣੋ"
-
-#: package/contents/ui/configGeneral.qml:101
-#, fuzzy, kde-format
-#| msgid " days"
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "day"
-msgid_plural "days"
-msgstr[0] " ਦਿਨ"
-msgstr[1] " ਦਿਨ"
-
-#: package/contents/ui/configGeneral.qml:107
+#: package/contents/ui/configGeneral.qml:90
 #, fuzzy, kde-format
 #| msgid "Choose a comic strip"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "ਕੌਮਿਕ ਪੱਟੀ ਚੁਣੋ"
 
-#: package/contents/ui/configGeneral.qml:116
+#: package/contents/ui/configGeneral.qml:99
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -271,6 +255,20 @@ msgstr "ਪੱਟੀ ਨੰਬਰ(&S):"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "ਕਾਮਿਕ ਪਛਾਣ ਵੇਖੋ(&i):"
+
+#, fuzzy
+#~| msgid "Choose a comic strip"
+#~ msgctxt "@label:spinbox"
+#~ msgid "Check for new plugins every:"
+#~ msgstr "ਕੌਮਿਕ ਪੱਟੀ ਚੁਣੋ"
+
+#, fuzzy
+#~| msgid " days"
+#~ msgctxt "@item:valuesuffix spacing to number + unit"
+#~ msgid "day"
+#~ msgid_plural "days"
+#~ msgstr[0] " ਦਿਨ"
+#~ msgstr[1] " ਦਿਨ"
 
 #, fuzzy
 #~| msgid "&Save Comic As..."

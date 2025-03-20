@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-05 00:43+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2023-05-03 21:21+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -82,48 +82,48 @@ msgstr ""
 msgid "You are logged in as <b>%1</b>"
 msgstr ""
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:148
 #, kde-format
 msgid "Current user"
 msgstr ""
 
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:179
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr ""
 
-#: package/contents/ui/main.qml:192
+#: package/contents/ui/main.qml:199
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr ""
 
-#: package/contents/ui/main.qml:194
+#: package/contents/ui/main.qml:201
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr ""
 
-#: package/contents/ui/main.qml:202
+#: package/contents/ui/main.qml:209
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr ""
 
-#: package/contents/ui/main.qml:214
+#: package/contents/ui/main.qml:221
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr ""
 
-#: package/contents/ui/main.qml:229
+#: package/contents/ui/main.qml:236
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr ""
 
-#: package/contents/ui/main.qml:241
+#: package/contents/ui/main.qml:248
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"

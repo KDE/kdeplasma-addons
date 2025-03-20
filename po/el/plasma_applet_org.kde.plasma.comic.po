@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2024-09-07 23:35+0300\n"
 "Last-Translator: kde-el <b3lievem@yandex.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -197,50 +197,34 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:50
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Κόμικ"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Λήψη νέων κόμικ…"
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:81
 #, fuzzy, kde-format
 #| msgid "Middle-click on the comic to show it at its original size"
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Εμφάνιση σε κανονικό μέγεθος κάνοντας μεσαίο κλικ στο κόμικ"
 
-#: package/contents/ui/configGeneral.qml:92
-#, fuzzy, kde-format
-#| msgid "Check for new comic strips:"
-msgctxt "@label:spinbox"
-msgid "Check for new plugins every:"
-msgstr "Έλεγχος για νέες σειρές κόμικ:"
-
-#: package/contents/ui/configGeneral.qml:101
-#, fuzzy, kde-format
-#| msgid "days"
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "day"
-msgid_plural "days"
-msgstr[0] "ημέρες"
-msgstr[1] "ημέρες"
-
-#: package/contents/ui/configGeneral.qml:107
+#: package/contents/ui/configGeneral.qml:90
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Έλεγχος για νέες σειρές κόμικ:"
 
-#: package/contents/ui/configGeneral.qml:116
+#: package/contents/ui/configGeneral.qml:99
 #, fuzzy, kde-format
 #| msgid "minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -266,6 +250,20 @@ msgstr "&Αριθμός αποκόμματος:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Αναγνωριστικό αποκόμματος:"
+
+#, fuzzy
+#~| msgid "Check for new comic strips:"
+#~ msgctxt "@label:spinbox"
+#~ msgid "Check for new plugins every:"
+#~ msgstr "Έλεγχος για νέες σειρές κόμικ:"
+
+#, fuzzy
+#~| msgid "days"
+#~ msgctxt "@item:valuesuffix spacing to number + unit"
+#~ msgid "day"
+#~ msgid_plural "days"
+#~ msgstr[0] "ημέρες"
+#~ msgstr[1] "ημέρες"
 
 #, fuzzy
 #~| msgid "&Create Comic Book Archive..."

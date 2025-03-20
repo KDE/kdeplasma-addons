@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-10-15 01:40+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2023-02-27 20:23+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -17,7 +17,15 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: package/contents/ui/main.qml:227
+#: package/contents/ui/main.qml:120
+#, fuzzy, kde-format
+#| msgctxt "@label calculation result"
+#| msgid "Result"
+msgctxt "@info accessible result of calculation"
+msgid "Result is %1"
+msgstr "Result"
+
+#: package/contents/ui/main.qml:228
 #, kde-format
 msgctxt ""
 "Abbreviation for result (undefined) of division by zero, max. six to nine "
@@ -25,49 +33,49 @@ msgctxt ""
 msgid "undef"
 msgstr "undef"
 
-#: package/contents/ui/main.qml:332
+#: package/contents/ui/main.qml:337
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
 msgstr "Result"
 
-#: package/contents/ui/main.qml:361
+#: package/contents/ui/main.qml:368
 #, kde-format
 msgctxt "Text of the clear button"
 msgid "C"
 msgstr "C"
 
-#: package/contents/ui/main.qml:374
+#: package/contents/ui/main.qml:382
 #, kde-format
 msgctxt "Text of the division button"
 msgid "÷"
 msgstr "÷"
 
-#: package/contents/ui/main.qml:387
+#: package/contents/ui/main.qml:396
 #, kde-format
 msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr "×"
 
-#: package/contents/ui/main.qml:399
+#: package/contents/ui/main.qml:410
 #, kde-format
 msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr "AC"
 
-#: package/contents/ui/main.qml:451
+#: package/contents/ui/main.qml:464
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/main.qml:503
+#: package/contents/ui/main.qml:518
 #, kde-format
 msgctxt "Text of the plus button"
 msgid "+"
 msgstr "+"
 
-#: package/contents/ui/main.qml:554
+#: package/contents/ui/main.qml:572
 #, kde-format
 msgctxt "Text of the equals button"
 msgid "="

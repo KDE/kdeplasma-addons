@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-03-20 00:43+0000\n"
 "PO-Revision-Date: 2022-08-13 15:31+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -191,49 +191,32 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Только при наведении мыши"
 
-#: package/contents/ui/configGeneral.qml:52
+#: package/contents/ui/configGeneral.qml:50
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Комиксы:"
 
-#: package/contents/ui/configGeneral.qml:72
+#: package/contents/ui/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Загрузить новые комиксы…"
 
-#: package/contents/ui/configGeneral.qml:83
+#: package/contents/ui/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Щелчок средней кнопкой мыши показывает комикс в исходном размере"
 
-#: package/contents/ui/configGeneral.qml:92
-#, kde-format
-msgctxt "@label:spinbox"
-msgid "Check for new plugins every:"
-msgstr "Проверять наличие новых подключаемых модулей каждые:"
-
-# BUGME: https://bugs.kde.org/show_bug.cgi?id=386957 --aspotashev
-#: package/contents/ui/configGeneral.qml:101
-#, kde-format
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "day"
-msgid_plural "days"
-msgstr[0] "день"
-msgstr[1] "дня"
-msgstr[2] "дня"
-msgstr[3] "день"
-
-#: package/contents/ui/configGeneral.qml:107
+#: package/contents/ui/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Проверять наличие новых комиксов каждые:"
 
 # BUGME: https://bugs.kde.org/show_bug.cgi?id=386957 --aspotashev
-#: package/contents/ui/configGeneral.qml:116
+#: package/contents/ui/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -260,6 +243,19 @@ msgstr "Номер &стрипа:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Идентификатор стрипа:"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Check for new plugins every:"
+#~ msgstr "Проверять наличие новых подключаемых модулей каждые:"
+
+# BUGME: https://bugs.kde.org/show_bug.cgi?id=386957 --aspotashev
+#~ msgctxt "@item:valuesuffix spacing to number + unit"
+#~ msgid "day"
+#~ msgid_plural "days"
+#~ msgstr[0] "день"
+#~ msgstr[1] "дня"
+#~ msgstr[2] "дня"
+#~ msgstr[3] "день"
 
 #~ msgctxt "@action"
 #~ msgid "&Create Comic Book Archive…"
