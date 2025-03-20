@@ -26,6 +26,7 @@
 ComicEngine::ComicEngine(QObject *parent)
     : QObject(parent)
     , mEmptySuffix(false)
+    , mIsCheckingForUpdates(false)
 {
     QNetworkInformation::instance()->loadBackendByFeatures(QNetworkInformation::Feature::Reachability);
     loadProviders();
@@ -60,6 +61,11 @@ void ComicEngine::setMaxComicLimit(int maxComicLimit)
     CachedProvider::setMaxComicLimit(maxComicLimit);
 }
 
+void ComicEngine::setIsCheckingForUpdates(bool isCheckingForUpdates)
+{
+    mIsCheckingForUpdates = isCheckingForUpdates;
+}
+
 bool ComicEngine::requestSource(const QString &identifier)
 {
     if (m_jobs.contains(identifier)) {
@@ -69,7 +75,9 @@ bool ComicEngine::requestSource(const QString &identifier)
     const QStringList parts = identifier.split(QLatin1Char(':'), Qt::KeepEmptyParts);
 
     // check whether it is cached, make sure second part present
-    if (parts.count() > 1 && (CachedProvider::isCached(identifier) || !isOnline())) {
+    bool lookInCache = parts.count() > 1 && !(parts[1].isEmpty() && mIsCheckingForUpdates) && CachedProvider::isCached(identifier);
+
+    if (lookInCache || !isOnline()) {
         ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, IdentifierType::StringIdentifier, identifier);
         m_jobs[identifier] = provider;
         connect(provider, &ComicProvider::finished, this, &ComicEngine::finished);
@@ -161,6 +169,10 @@ void ComicEngine::finished(ComicProvider *provider)
     // store in cache if it's not the response of a CachedProvider,
     if (!provider->inherits("CachedProvider") && !provider->image().isNull()) {
         CachedProvider::storeInCache(provider->identifier(), provider->image(), data);
+        if (provider->isCurrent()) {
+            QString currentIdentifier = provider->identifier().left(provider->identifier().indexOf(QLatin1Char(':')) + 1);
+            CachedProvider::storeInCache(currentIdentifier, provider->image(), data);
+        }
     }
     provider->deleteLater();
 

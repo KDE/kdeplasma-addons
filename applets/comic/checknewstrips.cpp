@@ -48,6 +48,7 @@ void CheckNewStrips::dataUpdated(const ComicMetaData &data)
         mEngine->requestSource(newSource);
     } else {
         mIndex = 0;
+        mEngine->setIsCheckingForUpdates(false);
     }
 }
 
@@ -57,6 +58,8 @@ void CheckNewStrips::start()
     if (mIndex) {
         return;
     }
+
+    mEngine->setIsCheckingForUpdates(true);
 
     if (mIndex < mIdentifiers.count()) {
         const QString newSource = mIdentifiers[mIndex] + QLatin1Char(':');
