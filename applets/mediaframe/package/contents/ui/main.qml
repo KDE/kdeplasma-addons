@@ -178,20 +178,6 @@ PlasmoidItem {
             id: itemView
             anchors.fill: parent
 
-            /*
-            Video {
-                id: video
-                width : 800
-                height : 600
-                source: ""
-
-                onStatusChanged: {
-                    if(status == Video.Loaded)
-                        video.play()
-                }
-            }
-            */
-
             Item {
                 id: imageView
                 visible: hasItems
@@ -254,21 +240,6 @@ PlasmoidItem {
                     }
                 }
             }
-
-            // BUG TODO fix the rendering of the drop shadow
-            /*
-            DropShadow {
-                id: itemViewDropShadow
-                anchors.fill: parent
-                visible: imageView.visible && !plasmoid.configuration.useBackground
-
-                radius: 8.0
-                samples: 16
-                color: "#80000000"
-                source: image1
-            }
-            */
-
         }
 
         SequentialAnimation {
@@ -362,33 +333,10 @@ PlasmoidItem {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottomMargin: Kirigami.Units.smallSpacing
 
-                /*
                 PlasmaComponents3.Button {
-                    icon.name: "documentinfo"
-                    onClicked: {  }
-                }
-                */
-                PlasmaComponents3.Button {
-
-                    //text: activeSource.split("/").pop().slice(-25)
                     icon.name: "document-preview"
                     onClicked: Qt.openUrlExternally(main.activeSource)
-
-                    // PlasmaComponents3.ToolTip {
-                    //     text: activeSource
-                    // }
                 }
-                /*
-                PlasmaComponents3.Button {
-                    icon.name: "trash-empty"
-                    onClicked: {  }
-                }
-
-                PlasmaComponents3.Button {
-                    icon.name: "flag-black"
-                    onClicked: {  }
-                }
-                */
             }
 
             // BUG TODO Fix overlay so _all_ mouse events reach lower components
@@ -400,70 +348,13 @@ PlasmoidItem {
 
                 propagateComposedEvents: true
 
-                //onClicked: mouse => mouse.accepted = false;
                 onPressed: mouse => mouse.accepted = false;
-                //onReleased: mouse => mouse.accepted = false;
                 onDoubleClicked: mouse => mouse.accepted = false;
-                //onPositionChanged: mouse => mouse.accepted = false;
-                //onPressAndHold: mouse => mouse.accepted = false;
-
             }
 
         }
-
-        // Visualization of the count down
-        // TODO Makes plasmashell suck CPU until the universe or the computer collapse in on itself
-        /*
-        Rectangle {
-            id: progress
-
-            visible: plasmoid.configuration.showCountdown && hasItems && itemCount > 1
-
-            color: "transparent"
-
-            implicitWidth: Kirigami.Units.gridUnit
-            implicitHeight: implicitWidth
-
-            Rectangle {
-                anchors.fill: parent
-
-                opacity:  pause ? 0.1 : 0.5
-
-                radius: width / 2
-                color: "gray"
-
-                Rectangle {
-                    id: innerRing
-                    anchors.fill: parent
-
-                    scale: 0
-
-                    radius: width / 2
-
-                    color: "lightblue"
-
-                    ScaleAnimator on scale {
-                        running: nextTimer.running
-                        loops: Animation.Infinite
-                        from: 0;
-                        to: 1;
-                        duration: nextTimer.interval
-                    }
-
-                }
-            }
-
-            Kirigami.Icon {
-                id: pauseIcon
-                visible: pause
-                anchors.fill: parent
-                source: "media-playback-pause"
-            }
-        }
-        */
 
         PlasmaComponents3.Button {
-
             anchors.centerIn: parent
 
             visible: !hasItems
