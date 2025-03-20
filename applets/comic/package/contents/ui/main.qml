@@ -49,12 +49,12 @@ PlasmoidItem {
         target: plasmoid
 
         function onComicsModelChanged() {
-            comicTabbar.currentTab = comicTabbar.layout.children[1];
+            comicTabbar.setCurrentIndex(0);
         }
 
         function onTabHighlightRequest(id, highlight) {
-            for (var i = 0; i < comicTabbar.layout.children.length; ++i) {
-                var button = comicTabbar.layout.children[i];
+            for (var i = 0; i < comicTabbar.count; ++i) {
+                var button = comicTabbar.itemAt(i);
 
                 if (button.key !== undefined && button.key == id) {
                     button.highlighted = highlight;
@@ -63,23 +63,23 @@ PlasmoidItem {
         }
 
         function onShowNextNewStrip() {
-            var firstButton = undefined;
+            var firstHighlightedButtonIndex = undefined;
 
-            for (var i = 0; i < comicTabbar.layout.children.length; ++i) {
-                var button = comicTabbar.layout.children[i];
+            for (var i = 0; i < comicTabbar.count; ++i) {
+                var button = comicTabbar.itemAt(i);
                 if (button.key !== undefined && button.highlighted == true) {
                     //key is ordered
-                    if (button.key > comicTabbar.currentTab.key) {
-                        comicTabbar.currentTab = button;
+                    if (button.key > comicTabbar.currentItem.key) {
+                        comicTabbar.setCurrentIndex(i);
                         return;
-                    } else if (firstButton === undefined){
-                        firstButton = button;
+                    } else if (firstHighlightedButtonIndex === undefined){
+                        firstHighlightedButtonIndex = button;
                     }
                 }
             }
 
-            if (firstButton !== undefined) {
-                comicTabbar.currentTab = firstButton;
+            if (firstHighlightedButtonIndex !== undefined) {
+                comicTabbar.setCurrentIndex(firstHighlightedButtonIndex);
             }
         }
     }
