@@ -8,7 +8,8 @@ set_property(TARGET plasma_engine_comic PROPERTY POSITION_INDEPENDENT_CODE ON)
 ecm_qt_declare_logging_category(plasma_engine_comic
     HEADER comic_debug.h
     IDENTIFIER PLASMA_COMIC
-    CATEGORY_NAME ork.kde.plasma.comic
+    CATEGORY_NAME org.kde.plasma.comic
+    OLD_CATEGORY_NAMES ork.kde.plasma.comic
     DESCRIPTION "Plasma Comic Engine"
     EXPORT KDEPLASMAADDONS
 )
