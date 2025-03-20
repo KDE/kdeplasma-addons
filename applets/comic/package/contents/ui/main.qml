@@ -94,8 +94,9 @@ PlasmoidItem {
             visible: plasmoid.tabIdentifiers.length > 1
 
             onCurrentIndexChanged: {
-                console.log("onCurrentTabChanged:" + comicTabbar.currentItem.key);
-                plasmoid.tabChanged(comicTabbar.currentItem.key);
+                if (comicTabbar.currentItem) {
+                    plasmoid.tabChanged(comicTabbar.currentItem.key);
+                }
             }
 
             Repeater {
@@ -126,12 +127,11 @@ PlasmoidItem {
                 var tempTop = "";
 
                 if ( showComicTitle ) {
-                    tempTop = plasmoid.comicData.title;
-                    tempTop += ( ( (plasmoid.comicData.stripTitle.length > 0) && (plasmoid.comicData.title.length > 0) ) ? " - " : "" ) + plasmoid.comicData.stripTitle;
+                    tempTop = plasmoid.comicData.title ?? "";
+                    tempTop += ( ( (plasmoid.comicData.stripTitle?.length > 0) && (plasmoid.comicData.title?.length > 0) ) ? " - " : "" ) + (plasmoid.comicData.stripTitle ?? "");
                 }
 
-                if ( showComicAuthor &&
-                    (plasmoid.comicData.author != undefined || plasmoid.comicData.author.length > 0) ) {
+                if ( showComicAuthor && plasmoid.comicData.author?.length > 0 ) {
                     tempTop = ( tempTop.length > 0 ? plasmoid.comicData.author + ": " + tempTop : plasmoid.comicData.author );
                 }
 

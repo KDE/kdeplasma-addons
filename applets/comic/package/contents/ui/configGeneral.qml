@@ -48,7 +48,7 @@ KCM.SimpleKCM {
         Layouts.ColumnLayout {
             id: providerColumn
             Kirigami.FormData.label: i18nc("@title:group", "Comics:")
-            Kirigami.FormData.buddyFor: children[1] // 0 is the Repeater
+            Kirigami.FormData.buddyFor: children[1] ?? null// 0 is the Repeater
 
             Repeater {
                 model: Plasmoid.availableComicsModel

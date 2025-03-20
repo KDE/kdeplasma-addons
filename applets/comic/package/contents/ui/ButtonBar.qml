@@ -41,12 +41,14 @@ Item {
 
             icon.name: "arrow-left"
             enabled: (comicData.prev != undefined && comicData.prev.length > 0)
+            onClicked: root.prevClicked()
         }
 
         PlasmaComponents3.Button {
             id: zoomButton
 
             icon.name: "zoom-original"
+            onClicked: root.zoomClicked()
         }
 
         PlasmaComponents3.Button {
@@ -54,12 +56,7 @@ Item {
 
             icon.name: "arrow-right"
             enabled: (comicData.next != undefined && comicData.next.length > 0)
+            onClicked: root.nextClicked()
         }
-    }
-
-    Component.onCompleted: {
-        prevButton.clicked.connect(root.prevClicked);
-        nextButton.clicked.connect(root.nextClicked);
-        zoomButton.clicked.connect(root.zoomClicked);
     }
 }

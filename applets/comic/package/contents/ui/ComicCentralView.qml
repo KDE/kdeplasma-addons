@@ -56,7 +56,7 @@ Item {
             preventStealing: false
             acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
-            onClicked: {
+            onClicked: mouse => {
                 if (mouse.button == Qt.MiddleButton && Plasmoid.middleClick) {
                     fullDialog.toggleVisibility();
                 }
