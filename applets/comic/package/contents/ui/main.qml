@@ -84,15 +84,12 @@ PlasmoidItem {
         }
     }
 
-    Item {
+    ColumnLayout {
         anchors.fill: parent
         PlasmaComponents3.TabBar {
             id: comicTabbar
 
-            anchors {
-                left: parent.left
-                right: parent.right
-            }
+            Layout.fillWidth: true
 
             visible: plasmoid.tabIdentifiers.length > 1
 
@@ -118,13 +115,8 @@ PlasmoidItem {
         PlasmaComponents3.Label {
             id: topInfo
 
-            anchors {
-                top: comicTabbar.visible ? comicTabbar.bottom : parent.top
-                left: parent.left
-                right: parent.right
-            }
-
             visible: (topInfo.text.length > 0)
+            Layout.fillWidth: true
             horizontalAlignment: Text.AlignHCenter
             text: (showComicAuthor || showComicTitle) ? getTopInfo() : ""
             textFormat: Text.PlainText
@@ -148,14 +140,9 @@ PlasmoidItem {
 
         ComicCentralView {
             id: centerLayout
-
-            anchors {
-                left: parent.left
-                right: parent.right
-                bottom: (bottomInfo.visible) ? bottomInfo.top : parent.bottom
-                top: (topInfo.visible) ? topInfo.bottom : (comicTabbar.visible ? comicTabbar.bottom : parent.top)
-                topMargin: (comicTabbar.visible) ? 3 : 0
-            }
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.topMargin: comicTabbar.visible ? 3 : 0
 
             visible: plasmoid.tabIdentifiers.length > 0
             comicData: plasmoid.comicData
@@ -163,52 +150,13 @@ PlasmoidItem {
 
         ComicBottomInfo {
             id:bottomInfo
-
-            anchors {
-                left: parent.left
-                right: parent.right
-                bottom: parent.bottom
-            }
+            Layout.fillWidth: true
 
             comicData: plasmoid.comicData
             showUrl: plasmoid.showComicUrl
             showIdentifier: plasmoid.showComicIdentifier
         }
+
+
     }
-
-    states: [
-        State {
-            name: "topInfoVisible"
-            when: topInfo.visible && !bottomInfo.visible
-            AnchorChanges {
-                target: centerLayout
-                anchors.top: topInfo.bottom
-            }
-        },
-        State {
-            name: "bottomInfoVisible"
-            when: bottomInfo.visible && !topInfo.visible
-            AnchorChanges {
-                target: centerLayout
-                anchors.bottom: bottomInfo.top
-            }
-        },
-        State {
-            name: "topBottomInfoVisible"
-            when: bottomInfo.visible && topInfo.visible
-            AnchorChanges {
-                target: centerLayout
-                anchors.top: topInfo.bottom
-                anchors.bottom: bottomInfo.top
-            }
-        }
-    ]
-
-    transitions:
-        Transition {
-            AnchorAnimation {
-                duration: Kirigami.Units.veryLongDuration
-                easing.type: Easing.InOutQuad
-            }
-        }
 }
