@@ -137,12 +137,15 @@ PlasmoidItem {
     }
 
     function setActiveSource(source) {
-        if(itemCount > 1) { // Only do transition if we have more that one item
+        if (itemCount > 1) {
             transitionSource = source
-            fullRepresentationItem.faderAnimation.restart()
         } else {
             transitionSource = source
             activeSource = source
+        }
+
+        if (fullRepresentationItem) {
+            fullRepresentationItem.faderAnimation.restart()
         }
     }
 
@@ -167,6 +170,9 @@ PlasmoidItem {
 
     fullRepresentation: Item {
         property alias faderAnimation: faderAnimation
+
+        property Image frontImage: image1
+        property Image bufferImage: image2
 
         Item {
             id: itemView
@@ -198,35 +204,34 @@ PlasmoidItem {
                     interval: 250
                     running: false
                     onTriggered: {
-                        frontImage.sourceSize.width = width
-                        frontImage.sourceSize.height = height
+                        image1.sourceSize.width = width
+                        image1.sourceSize.height = height
                     }
                 }
 
                 Image {
-                    id: bufferImage
-
+                    id: image2
 
                     anchors.fill: parent
+                    z: image2 === frontImage
                     fillMode: plasmoid.configuration.fillMode
 
                     opacity: 0
 
                     cache: false
-                    source: transitionSource
 
                     asynchronous: true
                     autoTransform: true
                 }
 
                 Image {
-                    id: frontImage
+                    id: image1
 
                     anchors.fill: parent
+                    z: image2 === frontImage
                     fillMode: plasmoid.configuration.fillMode
 
                     cache: false
-                    source: activeSource
 
                     asynchronous: true
                     autoTransform: true
@@ -260,7 +265,7 @@ PlasmoidItem {
                 radius: 8.0
                 samples: 16
                 color: "#80000000"
-                source: frontImage
+                source: image1
             }
             */
 
@@ -269,6 +274,20 @@ PlasmoidItem {
         SequentialAnimation {
             id: faderAnimation
 
+            ScriptAction {
+                script: {
+                    frontImage.source = activeSource
+                    bufferImage.source = transitionSource
+                    if (image1 === frontImage) {
+                        frontImage = image2
+                        bufferImage = image1
+                    } else {
+                        frontImage = image1
+                        bufferImage = image2
+                    }
+
+                }
+            }
             ParallelAnimation {
                 OpacityAnimator { target: frontImage; from: 1; to: 0; duration: Kirigami.Units.veryLongDuration }
                 OpacityAnimator { target: bufferImage; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration }
@@ -278,9 +297,7 @@ PlasmoidItem {
                     // Copy the transitionSource
                     var ts = transitionSource
                     activeSource = ts
-                    frontImage.opacity = 1
-                    transitionSource = ""
-                    bufferImage.opacity = 0
+                    bufferImage.source = activeSource
                 }
             }
         }
