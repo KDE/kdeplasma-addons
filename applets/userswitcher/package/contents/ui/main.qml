@@ -94,7 +94,7 @@ PlasmoidItem {
                 id: label
 
                 width: root.isVertical ? compactRoot.width : contentWidth
-                height: root.isVertical ? contentHeight : compactRoot.height
+                height: root.isVertical ? contentHeight : Math.min(Kirigami.Units.gridUnit * 3, compactRoot.height)
 
                 text: root.displayedName
                 textFormat: Text.PlainText
