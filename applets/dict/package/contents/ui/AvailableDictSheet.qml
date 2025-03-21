@@ -10,46 +10,46 @@ import QtQuick.Controls 2.15 as QQC2
 import QtQuick.Layouts 1.15
 
 import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kirigami.dialogs as KDialogs
 import org.kde.kitemmodels 1.0 as KItemModels
 
-Kirigami.OverlaySheet {
-    id: sheet
+Kirigami.Dialog {
+    id: dictDialog
 
-    readonly property alias view: sheetListView
+    readonly property alias view: dialogListView
+
+    title: i18n("Add More Dictionaries")
+    implicitWidth: dialogListView.implicitWidth
+    implicitHeight: Math.round(dictDialog.parent.height * 0.8)
+    padding: 0
 
     onOpened: {
         filter.text = "";
         filter.forceActiveFocus()
     }
 
-    // Need to manually set the parent when using this in a Plasma config dialog
-    parent: sheet.parent.parent
+    header: KDialogs.DialogHeader {
+        dialog: dictDialog
+        contentItem: ColumnLayout {
+            spacing: Kirigami.Units.smallSpacing
 
-    header: ColumnLayout {
-        Layout.preferredWidth: sheetListView.implicitWidth
+            KDialogs.DialogHeaderTopContent {
+                dialog: dictDialog
+            }
 
-        Kirigami.Heading {
-            Layout.fillWidth: true
-            text: i18n("Add More Dictionaries")
-            textFormat: Text.PlainText
-            wrapMode: Text.Wrap
+            Kirigami.SearchField {
+                id: filter
+                Layout.fillWidth: true
+            }
         }
-        Kirigami.SearchField {
-            id: filter
-            Layout.fillWidth: true
-        }
-    }
-
-    footer: QQC2.DialogButtonBox {
-        standardButtons: QQC2.DialogButtonBox.Ok
-        onAccepted: sheet.close()
     }
 
     ListView {
-        id: sheetListView
+        id: dialogListView
         focus: true // keyboard navigation
         activeFocusOnTab: true // keyboard navigation
         implicitWidth: Kirigami.Units.gridUnit * 25
+
 
         reuseItems: true
 
@@ -62,14 +62,14 @@ Kirigami.OverlaySheet {
 
         delegate: QQC2.CheckDelegate {
             id: checkbox
-            width: sheetListView.width
+            width: dialogListView.width
             focus: true // keyboard navigation
             text: `${model.id} (${model.description})`
             checked: model.checked
             onToggled: {
                 model.checked = checked;
-                sheetListView.currentIndex = index; // highlight
-                sheetListView.forceActiveFocus(); // keyboard navigation
+                dialogListView.currentIndex = index; // highlight
+                dialogListView.forceActiveFocus(); // keyboard navigation
             }
             highlighted: ListView.isCurrentItem
         }
