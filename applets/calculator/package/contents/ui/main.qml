@@ -15,7 +15,6 @@ import QtQuick.Layouts 1.3
 import QtQuick.Controls 2.5 as QQC2
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.plasmoid
 
@@ -163,14 +162,6 @@ PlasmoidItem {
                             Math.floor(Math.log(Math.abs(number))/Math.log(10)) + 1;
     }
 
-    // use the clipboard datasource for being able to inspect the clipboard content before pasting it
-    P5Support.DataSource {
-        id: clipboardSource
-        property bool editing: false;
-        engine: "org.kde.plasma.clipboard"
-        connectedSources: "clipboard"
-    }
-
     function copyToClipboard() {
         display.selectAll();
         display.copy();
@@ -178,7 +169,9 @@ PlasmoidItem {
     }
 
     function pasteFromClipboard() {
-        var content = clipboardSource.data["clipboard"]["current"];
+        dummyTextEditForPasting.paste()
+        var content = dummyTextEditForPasting.text
+        dummyTextEditForPasting.clear()
         if (content != "") {
             content = content.trim();
         }
@@ -225,6 +218,13 @@ PlasmoidItem {
         showingInput = false;
         showingResult = true;
         display.text = i18nc("Abbreviation for result (undefined) of division by zero, max. six to nine characters.", "undef");
+    }
+
+    TextEdit {
+        id: dummyTextEditForPasting
+        visible: false
+        height: 0
+        activeFocusOnTab: false
     }
 
     fullRepresentation: QQC2.Control {
