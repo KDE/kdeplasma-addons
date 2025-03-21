@@ -233,13 +233,3 @@ msgstr "&Stripenummer:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Stripeidentifikator:"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Check for new plugins every:"
-#~ msgstr "Sjå etter nye tillegg kvar:"
-
-#~ msgctxt "@item:valuesuffix spacing to number + unit"
-#~ msgid "day"
-#~ msgid_plural "days"
-#~ msgstr[0] "dag"
-#~ msgstr[1] "dagar"
