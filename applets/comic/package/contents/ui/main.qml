@@ -9,6 +9,7 @@ import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
@@ -19,24 +20,11 @@ PlasmoidItem {
     readonly property int implicitWidth: Kirigami.Units.gridUnit * 40
     readonly property int implicitHeight: Kirigami.Units.gridUnit * 15
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
-    switchWidth: {
-        if (centerLayout.comicData.image) {
-            return Math.max(minimumWidth, Math.min(centerLayout.comicData.image.nativeWidth * 0.6, implicitWidth));
-        } else {
-            return Kirigami.Units.gridUnit * 8;
-        }
-    }
-    switchHeight: {
-        if (centerLayout.comicData.image) {
-            return Math.max(minimumHeight, Math.min(centerLayout.comicData.image.nativeHeight * 0.6, implicitHeight));
-        } else {
-            return Kirigami.Units.gridUnit * 8;
-        }
-    }
-    Plasmoid.icon: "face-laughing"
 
-    width: implicitWidth
-    height: implicitHeight
+    switchWidth: Kirigami.Units.gridUnit * 5
+    switchHeight: Kirigami.Units.gridUnit * 5
+
+    Plasmoid.icon: "face-laughing"
 
     readonly property int minimumWidth: Kirigami.Units.gridUnit * 8
     readonly property int minimumHeight: Kirigami.Units.gridUnit * 8
@@ -45,47 +33,51 @@ PlasmoidItem {
     readonly property bool showErrorPicture: plasmoid.showErrorPicture
     readonly property bool middleClick: plasmoid.middleClick
 
-    Connections {
-        target: plasmoid
+    fullRepresentation:  ColumnLayout {
+        anchors.fill: parent
 
-        function onComicsModelChanged() {
-            comicTabbar.setCurrentIndex(0);
-        }
+        Layout.preferredWidth: mainWindow.switchWidth
+        Layout.preferredHeight: mainWindow.switchHeight
 
-        function onTabHighlightRequest(id, highlight) {
-            for (var i = 0; i < comicTabbar.count; ++i) {
-                var button = comicTabbar.itemAt(i);
+        Connections {
+            target: plasmoid
 
-                if (button.key !== undefined && button.key == id) {
-                    button.highlighted = highlight;
-                }
+            function onComicsModelChanged() {
+                comicTabbar.setCurrentIndex(0);
             }
-        }
 
-        function onShowNextNewStrip() {
-            var firstHighlightedButtonIndex = undefined;
+            function onTabHighlightRequest(id, highlight) {
+                for (var i = 0; i < comicTabbar.count; ++i) {
+                    var button = comicTabbar.itemAt(i);
 
-            for (var i = 0; i < comicTabbar.count; ++i) {
-                var button = comicTabbar.itemAt(i);
-                if (button.key !== undefined && button.highlighted == true) {
-                    //key is ordered
-                    if (button.key > comicTabbar.currentItem.key) {
-                        comicTabbar.setCurrentIndex(i);
-                        return;
-                    } else if (firstHighlightedButtonIndex === undefined){
-                        firstHighlightedButtonIndex = button;
+                    if (button.key !== undefined && button.key == id) {
+                        button.highlighted = highlight;
                     }
                 }
             }
 
-            if (firstHighlightedButtonIndex !== undefined) {
-                comicTabbar.setCurrentIndex(firstHighlightedButtonIndex);
+            function onShowNextNewStrip() {
+                var firstHighlightedButtonIndex = undefined;
+
+                for (var i = 0; i < comicTabbar.count; ++i) {
+                    var button = comicTabbar.itemAt(i);
+                    if (button.key !== undefined && button.highlighted == true) {
+                        //key is ordered
+                        if (button.key > comicTabbar.currentItem.key) {
+                            comicTabbar.setCurrentIndex(i);
+                            return;
+                        } else if (firstHighlightedButtonIndex === undefined){
+                            firstHighlightedButtonIndex = button;
+                        }
+                    }
+                }
+
+                if (firstHighlightedButtonIndex !== undefined) {
+                    comicTabbar.setCurrentIndex(firstHighlightedButtonIndex);
+                }
             }
         }
-    }
 
-    ColumnLayout {
-        anchors.fill: parent
         PlasmaComponents3.TabBar {
             id: comicTabbar
 
@@ -158,6 +150,18 @@ PlasmoidItem {
             showIdentifier: plasmoid.showComicIdentifier
         }
 
-
+        PlasmaExtras.PlaceholderMessage {
+            id: configNeededPlaceholder
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+            Layout.margins: Kirigami.Units.gridUnit
+            visible: plasmoid.tabIdentifiers.length === 0
+            iconName: "folder-comic-symbolic"
+            text: i18nc("@info placeholdermessage if no comics loaded", "No comics configured")
+            helpfulAction: Kirigami.Action {
+                icon.name: "configure"
+                text: i18nc("@action:button helpfulAction opens settings dialog", "Choose comic…")
+                onTriggered: Plasmoid.internalAction("configure").trigger();
+            }
+        }
     }
 }

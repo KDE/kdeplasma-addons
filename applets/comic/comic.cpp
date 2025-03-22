@@ -166,8 +166,6 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
         return;
     }
 
-    setConfigurationRequired(mCurrent.id().isEmpty());
-
     // there was an error, display information as image
     if (data.error) {
         mPreviousFailedIdentifier = source;
@@ -334,7 +332,6 @@ void ComicApplet::configChanged()
         mEngine->setMaxComicLimit(mMaxComicLimit);
     }
     if (mTabIdentifier.isEmpty()) {
-        setConfigurationRequired(true);
         mDateChangedTimer->stop();
     } else {
         mDateChangedTimer->start();
@@ -426,7 +423,6 @@ QList<QAction *> ComicApplet::contextualActions()
 void ComicApplet::updateComic(const QString &identifierSuffix)
 {
     const QString id = mCurrent.id();
-    setConfigurationRequired(id.isEmpty());
 
     if (!id.isEmpty()) {
         setBusy(true);
