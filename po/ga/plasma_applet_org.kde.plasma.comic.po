@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_comic.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-22 00:42+0000\n"
 "PO-Revision-Date: 2007-11-16 11:40-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -112,14 +112,14 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Casta"
 
-#: package/contents/ui/ComicBottomInfo.qml:63
+#: package/contents/ui/ComicBottomInfo.qml:62
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Léim go Stiallchartún..."
 
-#: package/contents/ui/ComicBottomInfo.qml:104
+#: package/contents/ui/ComicBottomInfo.qml:102
 #, fuzzy, kde-format
 #| msgid "Visit the comic website"
 msgctxt "@info:tooltip"

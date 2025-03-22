@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-22 00:42+0000\n"
 "PO-Revision-Date: 2011-01-03 11:16+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux@walon.org>\n"
@@ -112,14 +112,14 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Sipepieus"
 
-#: package/contents/ui/ComicBottomInfo.qml:63
+#: package/contents/ui/ComicBottomInfo.qml:62
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Potchî al binde..."
 
-#: package/contents/ui/ComicBottomInfo.qml:104
+#: package/contents/ui/ComicBottomInfo.qml:102
 #, fuzzy, kde-format
 #| msgid "Visit the comic website"
 msgctxt "@info:tooltip"

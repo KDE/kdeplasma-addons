@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-03-22 00:42+0000\n"
 "PO-Revision-Date: 2023-03-05 17:38+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
-#: package/contents/ui/main.qml:120
+#: package/contents/ui/main.qml:119
 #, fuzzy, kde-format
 #| msgctxt "@label calculation result"
 #| msgid "Result"
@@ -26,7 +26,7 @@ msgctxt "@info accessible result of calculation"
 msgid "Result is %1"
 msgstr "Tulos"
 
-#: package/contents/ui/main.qml:228
+#: package/contents/ui/main.qml:221
 #, kde-format
 msgctxt ""
 "Abbreviation for result (undefined) of division by zero, max. six to nine "
