@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.devicenotifier\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2025-03-23 00:43+0000\n"
 "PO-Revision-Date: 2022-10-04 17:51+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -23,7 +23,7 @@ msgctxt "@title"
 msgid "Dictionaries"
 msgstr "Slovníky"
 
-#: package/contents/ui/AvailableDictSheet.qml:33
+#: package/contents/ui/AvailableDictSheet.qml:21
 #, kde-format
 msgid "Add More Dictionaries"
 msgstr "Pridať ďalšie slovníky"

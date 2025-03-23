@@ -22,7 +22,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info accessible result of calculation"
 msgid "Result is %1"
-msgstr ""
+msgstr "结果为 %1"
 
 #: package/contents/ui/main.qml:221
 #, kde-format

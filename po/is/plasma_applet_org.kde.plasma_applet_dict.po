@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2025-03-23 00:43+0000\n"
 "PO-Revision-Date: 2023-10-17 22:27+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -23,7 +23,7 @@ msgctxt "@title"
 msgid "Dictionaries"
 msgstr "Orðasöfn"
 
-#: package/contents/ui/AvailableDictSheet.qml:33
+#: package/contents/ui/AvailableDictSheet.qml:21
 #, kde-format
 msgid "Add More Dictionaries"
 msgstr "Bæta við fleiri orðasöfnum"

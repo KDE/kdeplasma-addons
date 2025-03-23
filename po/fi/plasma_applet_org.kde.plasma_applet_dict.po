@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2025-03-23 00:43+0000\n"
 "PO-Revision-Date: 2022-06-13 19:35+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -22,7 +22,7 @@ msgctxt "@title"
 msgid "Dictionaries"
 msgstr "Sanastot"
 
-#: package/contents/ui/AvailableDictSheet.qml:33
+#: package/contents/ui/AvailableDictSheet.qml:21
 #, kde-format
 msgid "Add More Dictionaries"
 msgstr "Lisää enemmän sanastoja"

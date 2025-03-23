@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-22 00:42+0000\n"
-"PO-Revision-Date: 2023-03-26 18:35+0100\n"
+"PO-Revision-Date: 2025-03-22 22:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
 "Language: eo\n"
@@ -20,12 +20,10 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: package/contents/ui/main.qml:119
-#, fuzzy, kde-format
-#| msgctxt "@label calculation result"
-#| msgid "Result"
+#, kde-format
 msgctxt "@info accessible result of calculation"
 msgid "Result is %1"
-msgstr "Rezulto"
+msgstr "Rezulto estas %1"
 
 #: package/contents/ui/main.qml:221
 #, kde-format

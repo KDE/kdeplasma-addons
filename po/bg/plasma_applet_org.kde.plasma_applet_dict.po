@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-17 01:38+0000\n"
+"POT-Creation-Date: 2025-03-23 00:43+0000\n"
 "PO-Revision-Date: 2024-05-13 22:47+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -23,7 +23,7 @@ msgctxt "@title"
 msgid "Dictionaries"
 msgstr "Речници"
 
-#: package/contents/ui/AvailableDictSheet.qml:33
+#: package/contents/ui/AvailableDictSheet.qml:21
 #, kde-format
 msgid "Add More Dictionaries"
 msgstr "Добавяне на още речници"
