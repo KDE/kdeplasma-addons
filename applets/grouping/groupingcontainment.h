@@ -18,6 +18,8 @@ class GroupingContainment : public Plasma::Containment
 public:
     explicit GroupingContainment(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
+    void init() override;
+
     // Creates an applet
     Q_INVOKABLE void newTask(const QString &task);
 
@@ -50,6 +52,9 @@ public:
      * @see QQuickITem::stackAfter
      */
     Q_INVOKABLE void reorderItemAfter(QQuickItem *after, QQuickItem *before);
+
+private:
+    void migrateFromContainer();
 };
 
 #endif
