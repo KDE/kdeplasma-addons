@@ -18,12 +18,12 @@ PlasmaCore.ToolTipArea {
     objectName: "org.kde.desktop-CompactApplet"
     anchors.fill: parent
 
-    icon: plasmoid.icon
-    mainText: plasmoid.toolTipMainText
-    subText: plasmoid.toolTipSubText
-    location: plasmoid.location
-    active: !plasmoidItem.expanded
-    textFormat: plasmoid.toolTipTextFormat
+    icon: plasmoid.icon ?? ""
+    mainText: plasmoid.toolTipMainText ?? ""
+    subText: plasmoid.toolTipSubText ?? ""
+    location: plasmoid.location ?? PlasmaCore.Types.Floating
+    active: !plasmoidItem.expanded ?? false
+    textFormat: plasmoid.toolTipTextFormat ?? Text.AutoText
     mainItem: plasmoid.toolTipItem ? plasmoid.toolTipItem : null
     property PlasmoidItem plasmoidItem
 
