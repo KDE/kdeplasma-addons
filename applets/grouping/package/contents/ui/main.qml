@@ -108,6 +108,16 @@ ContainmentItem {
             anchors.right: parent.right
             anchors.bottom: parent.bottom
         }
+
+        PlasmaComponents.Label {
+            anchors.fill: mainStack
+            text: i18n("Drag applets here")
+            textFormat: Text.PlainText
+            visible: mainStack.count === 0
+            elide: Text.ElideRight
+            horizontalAlignment: Text.AlignHCenter
+            verticalAlignment: Text.AlignVCenter
+        }
     }
 
     DnD.DropArea {
@@ -139,15 +149,5 @@ ContainmentItem {
             }
             plasmoid.newTask(plasmoidId);
         }
-    }
-
-    PlasmaComponents.Label {
-        anchors.fill: mainStack
-        text: i18n("Drag applets here")
-        textFormat: Text.PlainText
-        visible: mainStack.count === 0
-        elide: Text.ElideRight
-        horizontalAlignment: Text.AlignHCenter
-        verticalAlignment: Text.AlignVCenter
     }
 }
