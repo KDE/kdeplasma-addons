@@ -27,13 +27,13 @@ ContainmentItem {
 
     property Component plasmoidItemComponent
 
-    Containment.onAppletAdded: {
+    Containment.onAppletAdded: applet => {
         addApplet(applet);
         //when we add an applet, select it straight away
         //we know it will always be at the end of the stack
         tabbar.currentIndex = mainStack.count -1;
     }
-    Containment.onAppletRemoved: {
+    Containment.onAppletRemoved: applet => {
         for (var i = 0; i < mainStack.count; i++) {
             if (mainStack.children[i].itemId === applet.id) {
                 mainStack.children[i].destroy();
@@ -135,13 +135,13 @@ ContainmentItem {
             return plasmoidId;
         }
 
-        onDragEnter: {
+        onDragEnter: event => {
             if (!appletName(event)) {
                 event.ignore();
             }
         }
 
-        onDrop: {
+        onDrop: event => {
             var plasmoidId = appletName(event);
             if (!plasmoidId) {
                 event.ignore();
