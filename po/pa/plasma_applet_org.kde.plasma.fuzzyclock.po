@@ -3,222 +3,173 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Amanpreet Singh Alam <aalam@users.sf.net>, 2008.
-# A S Alam <aalam@users.sf.net>, 2009.
+# SPDX-FileCopyrightText: 2009, 2025 A S Alam <aalam@users.sf.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fuzzy_clock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2009-12-12 10:10+0530\n"
-"Last-Translator: A S Alam <aalam@users.sf.net>\n"
-"Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
+"PO-Revision-Date: 2025-03-24 15:04-0500\n"
+"Last-Translator: A S Alam <aalam@punlinux.org>\n"
+"Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
 "Language: pa\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 1.0\n"
+"X-Generator: Lokalize 24.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "ਦਿੱਖ"
 
 #: package/contents/ui/configAppearance.qml:24
-#, fuzzy, kde-format
-#| msgid "Font style:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Font:"
-msgstr "ਫੋਂਟ ਸਟਾਈਲ:"
+msgstr "ਫੋਂਟ:"
 
 #: package/contents/ui/configAppearance.qml:25
-#, fuzzy, kde-format
-#| msgid "&Italic"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bold text"
-msgstr "ਤਿਰਛੇ(&I)"
+msgstr "ਗੂੜ੍ਹੇ ਤਿਰਛੇ"
 
 #: package/contents/ui/configAppearance.qml:30
-#, fuzzy, kde-format
-#| msgid "&Italic"
+#, kde-format
 msgctxt "@option:check"
 msgid "Italic text"
-msgstr "ਤਿਰਛੇ(&I)"
+msgstr "ਤਿਰਛੀ ਲਿਖਤ"
 
 #: package/contents/ui/configAppearance.qml:39
-#, fuzzy, kde-format
-#| msgid "Degree of fuzzyness:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Fuzzyness:"
-msgstr "ਫ਼ੱਜ਼ੀਨੈਸ ਦੀ ਡਿਗਰੀ:"
+msgstr "ਫ਼ੱਜ਼ੀਨੈਸ:"
 
 #: package/contents/ui/configAppearance.qml:49
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Accurate"
-msgstr ""
+msgstr "ਦਰੁਸਤ"
 
 #: package/contents/ui/configAppearance.qml:58
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"
-msgstr ""
+msgstr "ਫਜ਼ੀ"
 
 #: package/contents/ui/FuzzyClock.qml:35
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "%1 o'clock"
+#, kde-format
 msgid "One o’clock"
-msgstr "%1 ਵਜੇ"
+msgstr "ਇੱਕ ਵਜੇ"
 
 #: package/contents/ui/FuzzyClock.qml:36
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five past %1"
+#, kde-format
 msgid "Five past one"
-msgstr "%1 ਵੱਜ ਕੇ ਪੰਜ ਮਿੰਟ"
+msgstr "ਇੱਕ ਵੱਜ ਕੇ ਪੰਜ ਮਿੰਟ"
 
 #: package/contents/ui/FuzzyClock.qml:37
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "ten past %1"
+#, kde-format
 msgid "Ten past one"
-msgstr "%1 ਵੱਜ ਕੇ ਦਸ ਮਿੰਟ"
+msgstr "ਇੱਕ ਵੱਜ ਕੇ ਦਸ ਮਿੰਟ"
 
 #: package/contents/ui/FuzzyClock.qml:38
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter past %1"
+#, kde-format
 msgid "Quarter past one"
-msgstr "ਸਵਾ %1"
+msgstr "ਸਵਾ ਇੱਕ"
 
 #: package/contents/ui/FuzzyClock.qml:39
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty past %1"
+#, kde-format
 msgid "Twenty past one"
-msgstr "%1 ਵੱਜ ਕੇ ਵੀਹ ਮਿੰਟ"
+msgstr "ਇੱਕ ਵੱਜ ਕੇ ਵੀਹ ਮਿੰਟ"
 
 #: package/contents/ui/FuzzyClock.qml:40
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five past %1"
+#, kde-format
 msgid "Twenty-five past one"
-msgstr "%1 ਵੱਜ ਕੇ ਪੰਚੀ ਮਿੰਟ"
+msgstr "ਇੱਕ ਵੱਜ ਕੇ ਪੰਚੀ ਮਿੰਟ"
 
 #: package/contents/ui/FuzzyClock.qml:41
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "half past %1"
+#, kde-format
 msgid "Half past one"
-msgstr "ਸਾਢੇ %1"
+msgstr "ਡੇਢ ਵਜੇ"
 
 #: package/contents/ui/FuzzyClock.qml:42
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to two"
-msgstr "%1 ਵੱਜਣ ਲਈ ਪੰਚੀ ਮਿੰਟ ਬਾਕੀ"
+msgstr "ਦੋ ਵੱਜਣ ਲਈ ਪੰਚੀ ਮਿੰਟ ਬਾਕੀ"
 
 #: package/contents/ui/FuzzyClock.qml:43
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to two"
-msgstr "%1 ਲਈ ਵੀਹ ਬਾਕੀ"
+msgstr "ਦੋ ਵੱਜਣ ਲਈ ਵੀਹ ਬਾਕੀ"
 
 #: package/contents/ui/FuzzyClock.qml:44
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to two"
-msgstr "%1 ਵੱਜਣ ਲਈ ਅੱਧਾ ਘੰਟਾ"
+msgstr "ਪੌਣੇ ਦੋ"
 
 #: package/contents/ui/FuzzyClock.qml:45
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "ten to %1"
+#, kde-format
 msgid "Ten to two"
-msgstr "%1 ਵੱਜਣ ਲਈ 10 ਮਿੰਟ"
+msgstr "ਦੋ ਵੱਜਣ ਲਈ ਦਸ ਮਿੰਟ"
 
 #: package/contents/ui/FuzzyClock.qml:46
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five to %1"
+#, kde-format
 msgid "Five to two"
-msgstr "%1 ਵੱਜਣ ਲਈ ਪੰਜ ਮਿੰਟ"
+msgstr "ਦੋ ਵੱਜਣ ਲਈ ਪੰਜ ਮਿੰਟ"
 
 #: package/contents/ui/FuzzyClock.qml:47
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "%1 o'clock"
+#, kde-format
 msgid "Two o’clock"
-msgstr "%1 ਵਜੇ"
+msgstr "ਦੋ ਵਜੇ"
 
 #: package/contents/ui/FuzzyClock.qml:48
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five past %1"
+#, kde-format
 msgid "Five past two"
-msgstr "%1 ਵੱਜ ਕੇ ਪੰਜ ਮਿੰਟ"
+msgstr "ਦੋ ਵੱਜ ਕੇ ਪੰਜ ਮਿੰਟ"
 
 #: package/contents/ui/FuzzyClock.qml:49
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "ten past %1"
+#, kde-format
 msgid "Ten past two"
-msgstr "%1 ਵੱਜ ਕੇ ਦਸ ਮਿੰਟ"
+msgstr "ਦੋ ਵੱਜ ਕੇ ਦਸ ਮਿੰਟ"
 
 #: package/contents/ui/FuzzyClock.qml:50
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter past %1"
+#, kde-format
 msgid "Quarter past two"
-msgstr "ਸਵਾ %1"
+msgstr "ਸਵਾ ਦੋ"
 
 #: package/contents/ui/FuzzyClock.qml:51
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty past %1"
+#, kde-format
 msgid "Twenty past two"
-msgstr "%1 ਵੱਜ ਕੇ ਵੀਹ ਮਿੰਟ"
+msgstr "ਦੋ ਵੱਜ ਕੇ ਵੀਹ ਮਿੰਟ"
 
 #: package/contents/ui/FuzzyClock.qml:52
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five past %1"
+#, kde-format
 msgid "Twenty-five past two"
-msgstr "%1 ਵੱਜ ਕੇ ਪੰਚੀ ਮਿੰਟ"
+msgstr "ਦੋ ਵੱਜ ਕੇ ਪੰਚੀ ਮਿੰਟ"
 
 #: package/contents/ui/FuzzyClock.qml:53
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "half past %1"
+#, kde-format
 msgid "Half past two"
-msgstr "ਸਾਢੇ %1"
+msgstr "ਢਾਈ ਵਜੇ"
 
 #: package/contents/ui/FuzzyClock.qml:54
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to three"
-msgstr "%1 ਵੱਜਣ ਲਈ ਪੰਚੀ ਮਿੰਟ ਬਾਕੀ"
+msgstr "ਤਿੰਨ ਵੱਜਣ ਲਈ ਪੰਚੀ ਮਿੰਟ ਬਾਕੀ"
 
 #: package/contents/ui/FuzzyClock.qml:55
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to three"
-msgstr "%1 ਲਈ ਵੀਹ ਬਾਕੀ"
+msgstr "ਤਿੰਨ ਲਈ ਵੀਹ ਬਾਕੀ"
 
 #: package/contents/ui/FuzzyClock.qml:56
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to three"
-msgstr "%1 ਵੱਜਣ ਲਈ ਅੱਧਾ ਘੰਟਾ"
+msgstr "ਪੌਣੇ ਤਿੰਨ"
 
 #: package/contents/ui/FuzzyClock.qml:57
 #, kde-format
@@ -1076,7 +1027,7 @@ msgstr "ਬਾਅਦ ਦੁਪੈਹਰ"
 #: package/contents/ui/FuzzyClock.qml:183
 #, kde-format
 msgid "Dinner"
-msgstr ""
+msgstr "ਰਾਤ ਦਾ ਖਾਣਾ"
 
 #: package/contents/ui/FuzzyClock.qml:183
 #, kde-format
