@@ -286,11 +286,13 @@ void ComicApplet::updateUsedComics()
 
 void ComicApplet::slotTabChanged(const QString &identifier)
 {
-    bool differentComic = (mCurrent.id() != identifier);
+    if (mCurrent.id() == identifier) {
+        return;
+    }
     mCurrent = ComicData();
     mCurrent.init(identifier, config());
     if (!mTabIdentifier.isEmpty()) {
-        changeComic(differentComic);
+        changeComic(true);
     }
 }
 
