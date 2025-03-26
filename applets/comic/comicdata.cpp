@@ -64,6 +64,7 @@ void ComicData::setData(const ComicMetaData &data)
         mReady = true;
     }
 
+    mIsError = data.error;
     mWebsiteUrl = data.websiteUrl;
     mImageUrl = data.imageUrl;
     mShopUrl = data.shopUrl;

@@ -196,6 +196,11 @@ public:
         return mReady;
     }
 
+    bool isError() const
+    {
+        return mIsError;
+    }
+
     void save();
 
 private:
@@ -232,6 +237,7 @@ private:
     bool mIsLeftToRight = false;
     bool mIsTopToBottom = false;
     bool mReady = false;
+    bool mIsError = false;
 
     KConfigGroup mCfg;
 };

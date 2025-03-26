@@ -171,15 +171,15 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
         mPreviousFailedIdentifier = source;
         if (!mShowErrorPicture && !data.previousIdentifier.isEmpty()) {
             updateComic(data.previousIdentifier);
+            return;
         }
-        return;
     }
 
     mCurrent.setData(data);
 
     // looking at the last index, thus not mark it as new
     KConfigGroup cg = config();
-    if (!mCurrent.hasNext() && mCheckNewComicStripsInterval) {
+    if (!data.error && !mCurrent.hasNext() && mCheckNewComicStripsInterval) {
         setTabHighlighted(mCurrent.id(), false);
         mActionNextNewStripTab->setEnabled(isTabHighlighted(mCurrent.id()));
     }
@@ -188,11 +188,11 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
     slotStorePosition();
 
     // prefetch the previous and following comic for faster navigation
-    if (mCurrent.hasNext()) {
+    if (!data.error && mCurrent.hasNext()) {
         const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.next();
         mEngine->requestSource(prefetch);
     }
-    if (mCurrent.hasPrev()) {
+    if (!data.error && mCurrent.hasPrev()) {
         const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.prev();
         mEngine->requestSource(prefetch);
     }
@@ -657,6 +657,7 @@ void ComicApplet::refreshComicData()
     mComicData[QStringLiteral("maxStripNum")] = mCurrent.maxStripNum();
     mComicData[QStringLiteral("isLeftToRight")] = mCurrent.isLeftToRight();
     mComicData[QStringLiteral("isTopToBottom")] = mCurrent.isTopToBottom();
+    mComicData[QStringLiteral("isError")] = mCurrent.isError();
 
     Q_EMIT comicDataChanged();
 }
