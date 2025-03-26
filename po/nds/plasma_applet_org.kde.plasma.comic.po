@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-22 00:42+0000\n"
+"POT-Creation-Date: 2025-03-26 00:43+0000\n"
 "PO-Revision-Date: 2011-08-18 06:54+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -240,6 +240,19 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] " Minuten"
 msgstr[1] " Minuten"
+
+#: package/contents/ui/main.qml:159
+#, fuzzy, kde-format
+#| msgid "Comic Configuration"
+msgctxt "@info placeholdermessage if no comics loaded"
+msgid "No comics configured"
+msgstr "Comic-Instellen"
+
+#: package/contents/ui/main.qml:162
+#, kde-format
+msgctxt "@action:button helpfulAction opens settings dialog"
+msgid "Choose comic…"
+msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, fuzzy, kde-format
@@ -524,9 +537,6 @@ msgstr "Comic-Beteker:"
 
 #~ msgid "Make comic resizable"
 #~ msgstr "Topassen vun Comicgrött tolaten"
-
-#~ msgid "Comic Configuration"
-#~ msgstr "Comic-Instellen"
 
 #~ msgid "Userfriendly"
 #~ msgstr "Eenfach"

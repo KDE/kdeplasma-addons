@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-22 00:42+0000\n"
+"POT-Creation-Date: 2025-03-26 00:43+0000\n"
 "PO-Revision-Date: 2010-12-07 14:23+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -235,6 +235,18 @@ msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "នាទី"
+
+#: package/contents/ui/main.qml:159
+#, kde-format
+msgctxt "@info placeholdermessage if no comics loaded"
+msgid "No comics configured"
+msgstr ""
+
+#: package/contents/ui/main.qml:162
+#, kde-format
+msgctxt "@action:button helpfulAction opens settings dialog"
+msgid "Choose comic…"
+msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, fuzzy, kde-format

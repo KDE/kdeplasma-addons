@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-22 00:42+0000\n"
+"POT-Creation-Date: 2025-03-26 00:43+0000\n"
 "PO-Revision-Date: 2022-07-22 16:57+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -213,6 +213,18 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "minute"
 msgstr[1] "minutes"
+
+#: package/contents/ui/main.qml:159
+#, kde-format
+msgctxt "@info placeholdermessage if no comics loaded"
+msgid "No comics configured"
+msgstr ""
+
+#: package/contents/ui/main.qml:162
+#, kde-format
+msgctxt "@action:button helpfulAction opens settings dialog"
+msgid "Choose comic…"
+msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format

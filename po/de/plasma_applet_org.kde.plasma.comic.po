@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-22 00:42+0000\n"
+"POT-Creation-Date: 2025-03-26 00:43+0000\n"
 "PO-Revision-Date: 2022-07-23 22:38+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -213,6 +213,19 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "Minute"
 msgstr[1] "Minuten"
+
+#: package/contents/ui/main.qml:159
+#, fuzzy, kde-format
+#| msgid "Comic Configuration"
+msgctxt "@info placeholdermessage if no comics loaded"
+msgid "No comics configured"
+msgstr "Einrichtung von Comic"
+
+#: package/contents/ui/main.qml:162
+#, kde-format
+msgctxt "@action:button helpfulAction opens settings dialog"
+msgid "Choose comic…"
+msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
@@ -468,9 +481,6 @@ msgstr "Kennung der Comic-Seite:"
 
 #~ msgid "Scale to &Content"
 #~ msgstr "&Inhalt skalieren"
-
-#~ msgid "Comic Configuration"
-#~ msgstr "Einrichtung von Comic"
 
 #~ msgid "Userfriendly"
 #~ msgstr "Benutzerfreundlich"

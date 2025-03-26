@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-07-29 01:59+0000\n"
+"POT-Creation-Date: 2025-03-26 00:43+0000\n"
 "PO-Revision-Date: 2024-04-03 07:58+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "2);\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: package/contents/ui/main.qml:146
+#: package/contents/ui/main.qml:114
 #, kde-format
 msgid "Drag applets here"
 msgstr "Velciet logdaļas te"

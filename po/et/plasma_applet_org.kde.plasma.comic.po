@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-22 00:42+0000\n"
+"POT-Creation-Date: 2025-03-26 00:43+0000\n"
 "PO-Revision-Date: 2019-11-01 22:21+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -222,6 +222,19 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] " minuti järel"
 msgstr[1] " minuti järel"
+
+#: package/contents/ui/main.qml:159
+#, fuzzy, kde-format
+#| msgid "Comic Configuration"
+msgctxt "@info placeholdermessage if no comics loaded"
+msgid "No comics configured"
+msgstr "Koomiksi seadistamine"
+
+#: package/contents/ui/main.qml:162
+#, kde-format
+msgctxt "@action:button helpfulAction opens settings dialog"
+msgid "Choose comic…"
+msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
@@ -509,9 +522,6 @@ msgstr "Koomiksi ID:"
 #~ "Sujuva skaleerimise kasutamine piltide suuruse muutmisel. Tavaliselt "
 #~ "näevad pildid sel moel paremad välja, aga nende laadimine võtab kauem "
 #~ "aega."
-
-#~ msgid "Comic Configuration"
-#~ msgstr "Koomiksi seadistamine"
 
 #~ msgid "Userfriendly"
 #~ msgstr "Userfriendly"

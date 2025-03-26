@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-22 00:42+0000\n"
+"POT-Creation-Date: 2025-03-26 00:43+0000\n"
 "PO-Revision-Date: 2024-09-07 23:35+0300\n"
 "Last-Translator: kde-el <b3lievem@yandex.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -232,6 +232,19 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "λεπτά"
 msgstr[1] "λεπτά"
+
+#: package/contents/ui/main.qml:159
+#, fuzzy, kde-format
+#| msgid "Comic Configuration"
+msgctxt "@info placeholdermessage if no comics loaded"
+msgid "No comics configured"
+msgstr "Ρύθμιση του Comic"
+
+#: package/contents/ui/main.qml:162
+#, kde-format
+msgctxt "@action:button helpfulAction opens settings dialog"
+msgid "Choose comic…"
+msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
@@ -498,9 +511,6 @@ msgstr "Αναγνωριστικό αποκόμματος:"
 
 #~ msgid "Make comic resizable"
 #~ msgstr "Δυνατότητα αλλαγής μεγέθους του comic"
-
-#~ msgid "Comic Configuration"
-#~ msgstr "Ρύθμιση του Comic"
 
 #~ msgid "Userfriendly"
 #~ msgstr "Φιλικό προς το χρήστη"

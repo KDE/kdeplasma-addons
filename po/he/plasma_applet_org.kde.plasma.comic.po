@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-22 00:42+0000\n"
+"POT-Creation-Date: 2025-03-26 00:43+0000\n"
 "PO-Revision-Date: 2023-11-07 11:04+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@lists.kde.org>\n"
@@ -217,6 +217,18 @@ msgstr[0] "דקה"
 msgstr[1] "דקות"
 msgstr[2] "דקות"
 msgstr[3] "דקות"
+
+#: package/contents/ui/main.qml:159
+#, kde-format
+msgctxt "@info placeholdermessage if no comics loaded"
+msgid "No comics configured"
+msgstr ""
+
+#: package/contents/ui/main.qml:162
+#, kde-format
+msgctxt "@action:button helpfulAction opens settings dialog"
+msgid "Choose comic…"
+msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
