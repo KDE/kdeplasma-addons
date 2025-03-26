@@ -163,7 +163,14 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
             }
         }
     }
-    comics.append(QString::fromLatin1(QUrl::toPercentEncoding(identifier)));
+
+    QString encodedIdentifier = QString::fromLatin1(QUrl::toPercentEncoding(identifier));
+
+    // We may download and cache a comic multiple tmes, in particular the latest comic, so we need
+    // to drop the existing entries or they'll clog the cache. The files are overwritten automatically.
+    comics.removeAll(encodedIdentifier);
+
+    comics.append(encodedIdentifier);
 
     const int limit = CachedProvider::maxComicLimit();
     // limit is on
