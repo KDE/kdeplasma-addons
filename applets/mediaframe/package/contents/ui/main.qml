@@ -38,7 +38,7 @@ PlasmoidItem {
     property string activeSource: ""
     property string transitionSource: ""
 
-    readonly property bool pause: overlayMouseArea.containsMouse
+    readonly property bool pause: fullRepresentationItem?.overlayMouseArea?.containsMouse ?? false
 
     readonly property int itemCount: (items.count + items.futureLength)
     readonly property bool hasItems: ((itemCount > 0) || (items.futureLength > 0))
@@ -170,6 +170,7 @@ PlasmoidItem {
 
     fullRepresentation: Item {
         property alias faderAnimation: faderAnimation
+        property alias overlayMouseArea: overlayMouseArea
 
         property Image frontImage: image1
         property Image bufferImage: image2
