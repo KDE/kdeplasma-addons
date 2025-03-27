@@ -5,6 +5,7 @@
  */
 
 #include "mediaframe.h"
+#include "debug_p.h"
 
 #include <QCryptographicHash>
 #include <QDebug>
@@ -29,7 +30,7 @@ MediaFrame::MediaFrame(QObject *parent)
         const auto mimeType = mimeDb.mimeTypeForName(QLatin1String(imageMimeTypeName));
         m_filters << mimeType.globPatterns();
     }
-    qDebug() << "Added" << m_filters.count() << "filters";
+    qCDebug(PLASMA_MEDIAFRAME) << "Added" << m_filters.count() << "filters";
     // qDebug() << m_filters;
     m_next = 0;
 
@@ -103,7 +104,7 @@ void MediaFrame::add(const QString &path)
 void MediaFrame::add(const QString &path, AddOption option)
 {
     if (isAdded(path)) {
-        qWarning() << "Path" << path << "already added";
+        qCWarning(PLASMA_MEDIAFRAME) << "Path" << path << "already added";
         return;
     }
 
@@ -133,12 +134,12 @@ void MediaFrame::add(const QString &path, AddOption option)
             }
             if (paths.count() > 0) {
                 m_pathMap.insert(path, paths);
-                qDebug() << "Added" << paths.count() << "files from" << path;
+                qCDebug(PLASMA_MEDIAFRAME) << "Added" << paths.count() << "files from" << path;
             } else {
-                qWarning() << "No images found in directory" << path;
+                qCWarning(PLASMA_MEDIAFRAME) << "No images found in directory" << path;
             }
         } else {
-            qWarning() << "Not adding empty directory" << path;
+            qCWarning(PLASMA_MEDIAFRAME) << "Not adding empty directory" << path;
         }
 
         // the pictures have to be sorted before adding them to the list,
@@ -149,17 +150,17 @@ void MediaFrame::add(const QString &path, AddOption option)
         paths.append(path);
         m_pathMap.insert(path, paths);
         m_allFiles.append(path);
-        qDebug() << "Added" << paths.count() << "files from" << path;
+        qCDebug(PLASMA_MEDIAFRAME) << "Added" << paths.count() << "files from" << path;
         Q_EMIT countChanged();
     } else {
         if (url.isValid() && !url.isLocalFile()) {
-            qDebug() << "Adding" << url.toString() << "as remote file";
+            qCDebug(PLASMA_MEDIAFRAME) << "Adding" << url.toString() << "as remote file";
             paths.append(path);
             m_pathMap.insert(path, paths);
             m_allFiles.append(path);
             Q_EMIT countChanged();
         } else {
-            qWarning() << "Path" << path << "is not a valid file url or directory";
+            qCWarning(PLASMA_MEDIAFRAME) << "Path" << path << "is not a valid file url or directory";
         }
     }
 }
@@ -180,14 +181,14 @@ void MediaFrame::watch(const QString &path)
             // qDebug() << "Removing" << m_watchFile << "from watch list";
             m_watcher.removePath(m_watchFile);
         } else {
-            qDebug() << "Nothing in watch list";
+            qCDebug(PLASMA_MEDIAFRAME) << "Nothing in watch list";
         }
 
         // qDebug() << "watching" << localPath << "for changes";
         m_watcher.addPath(localPath);
         m_watchFile = localPath;
     } else {
-        qWarning() << "Can't watch remote file" << path << "for changes";
+        qCWarning(PLASMA_MEDIAFRAME) << "Can't watch remote file" << path << "for changes";
     }
 }
 
@@ -220,7 +221,7 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
             return;
         } else {
             errorMessage = QStringLiteral("No files available");
-            qWarning() << errorMessage;
+            qCWarning(PLASMA_MEDIAFRAME) << errorMessage;
 
             args << QJSValue(errorMessage);
             errorCallback.call(args);
@@ -234,7 +235,7 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
         path = m_allFiles.at(m_next);
         m_next++;
         if (m_next > size) {
-            qDebug() << "Resetting next count from" << m_next << "due to queue size" << size;
+            qCDebug(PLASMA_MEDIAFRAME) << "Resetting next count from" << m_next << "due to queue size" << size;
             m_next = 0;
         }
     }
@@ -251,7 +252,7 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
 
             if (isFile(cachedFile)) {
                 // File has been cached
-                qDebug() << path << "is cached as" << cachedFile;
+                qCDebug(PLASMA_MEDIAFRAME) << path << "is cached as" << cachedFile;
 
                 if (successCallback.isCallable()) {
                     args << QJSValue(cachedFile);
@@ -264,7 +265,7 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
             m_errorCallback = errorCallback;
             m_filename = cachedFile;
 
-            qDebug() << path << "doesn't exist locally, trying remote.";
+            qCDebug(PLASMA_MEDIAFRAME) << path << "doesn't exist locally, trying remote.";
 
             KIO::StoredTransferJob *job = KIO::storedGet(url, KIO::NoReload, KIO::HideProgressInfo);
             connect(job, &KJob::finished, this, &MediaFrame::slotFinished);
@@ -278,7 +279,7 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
         }
     } else {
         errorMessage = path + QLatin1String(" is not a valid URL");
-        qCritical() << errorMessage;
+        qCCritical(PLASMA_MEDIAFRAME) << errorMessage;
 
         if (errorCallback.isCallable()) {
             args << QJSValue(errorMessage);
@@ -354,7 +355,7 @@ void MediaFrame::slotFinished(KJob *job)
 
     if (job->error()) {
         errorMessage = QLatin1String("Error loading image: ") + job->errorString();
-        qCritical() << errorMessage;
+        qCCritical(PLASMA_MEDIAFRAME) << errorMessage;
 
         if (m_errorCallback.isCallable()) {
             args << QJSValue(errorMessage);
@@ -365,12 +366,12 @@ void MediaFrame::slotFinished(KJob *job)
 
         // TODO make proper caching calls
         QString path = m_filename;
-        qDebug() << "Saving download to" << path;
+        qCDebug(PLASMA_MEDIAFRAME) << "Saving download to" << path;
 
         image.loadFromData(transferJob->data());
         image.save(path);
 
-        qDebug() << "Saved to" << path;
+        qCDebug(PLASMA_MEDIAFRAME) << "Saved to" << path;
 
         if (m_successCallback.isCallable()) {
             args << QJSValue(path);
@@ -379,7 +380,7 @@ void MediaFrame::slotFinished(KJob *job)
     } else {
         errorMessage = QStringLiteral("Unknown error occurred");
 
-        qCritical() << errorMessage;
+        qCCritical(PLASMA_MEDIAFRAME) << errorMessage;
 
         if (m_errorCallback.isCallable()) {
             args << QJSValue(errorMessage);

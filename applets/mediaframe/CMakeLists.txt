@@ -5,6 +5,15 @@ target_sources(mediaframeplugin PRIVATE
     plugin/mediaframe.cpp
     plugin/mediaframeplugin.cpp
 )
+ecm_qt_declare_logging_category(mediaframeplugin
+    HEADER debug_p.h
+    IDENTIFIER "PLASMA_MEDIAFRAME"
+    CATEGORY_NAME org.kde.plasma.mediaframe
+    DESCRIPTION "Plasma Media Frame widget"
+    DEFAULT_SEVERITY Warning
+    EXPORT "PLASMA_MEDIAFRAME"
+)
+
 target_link_libraries(mediaframeplugin PRIVATE
     Qt::Core
     Qt::Qml
