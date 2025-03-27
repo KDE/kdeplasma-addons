@@ -91,7 +91,6 @@ PlasmoidItem {
     function addItem(item) {
 
         if(items.isAdded(item.path)) {
-            console.info(item.path,"already exists. Skipping…")
             return
         }
         // work-around for QTBUG-67773:
@@ -105,7 +104,6 @@ PlasmoidItem {
     function nextItem() {
 
         if(!hasItems) {
-            console.warn("No items available")
             return
         }
 
@@ -124,7 +122,6 @@ PlasmoidItem {
                 //unsetLoading()
             },function(errorMessage){
                 //unsetLoading()
-                console.error("Error while getting next image",errorMessage)
             })
         }
     }
@@ -153,7 +150,6 @@ PlasmoidItem {
         target: items
 
         function onItemChanged(path) {
-            console.log("item",path,"changed")
             activeSource = ""
             setActiveSource(path)
         }
