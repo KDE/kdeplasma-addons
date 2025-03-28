@@ -42,7 +42,7 @@ PlasmoidItem {
             preventStealing: true
             enabled: !plasmoid.immutable
 
-            onDragEnter: {
+            onDragEnter: event => {
                 if (event.mimeData.hasUrls) {
                     dragging = true;
                 } else {
@@ -50,7 +50,7 @@ PlasmoidItem {
                 }
             }
 
-            onDragMove: {
+            onDragMove: event => {
                 var index = grid.indexAt(event.x, event.y);
 
                 if (isInternalDrop(event)) {
@@ -67,7 +67,7 @@ PlasmoidItem {
                 launcherModel.clearDropMarker();
             }
 
-            onDrop: {
+            onDrop: event => {
                 dragging = false;
                 launcherModel.clearDropMarker();
 
@@ -183,7 +183,7 @@ PlasmoidItem {
 
                 activeFocusOnTab: parent.visible
 
-                Keys.onPressed: {
+                Keys.onPressed: event => {
                     switch (event.key) {
                     case Qt.Key_Space:
                     case Qt.Key_Enter:
