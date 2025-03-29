@@ -220,8 +220,8 @@ Item {
                 }
                 textFormat: Text.PlainText
 
-                Accessible.name: Plasmoid.toolTipMainText
-                Accessible.description: Plasmoid.toolTipSubText
+                Accessible.name: root.toolTipMainText
+                Accessible.description: root.toolTipSubText
                 Accessible.role: Accessible.Button
             }
 

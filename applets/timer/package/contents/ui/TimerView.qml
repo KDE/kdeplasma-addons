@@ -15,7 +15,7 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 
 MouseArea {
-    Layout.preferredWidth: Math.max(Plasmoid.compactRepresentationItem.width, Kirigami.Units.gridUnit * 10)
+    Layout.preferredWidth: Math.max(root.compactRepresentationItem.width, Kirigami.Units.gridUnit * 10)
     Layout.preferredHeight: main.implicitHeight
 
     onClicked: root.toggleTimer()
