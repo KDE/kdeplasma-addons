@@ -3,21 +3,22 @@
 #
 # David Shalmiev <vertigo.rus@gmail.com>, 2008.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-26 00:43+0000\n"
-"PO-Revision-Date: 2023-11-07 11:04+0200\n"
+"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"PO-Revision-Date: 2025-03-28 22:28+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: Hebrew <kde-i18n-doc@lists.kde.org>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #: comic.cpp:80
 #, kde-format
@@ -79,7 +80,7 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "א&חסון המקום הנוכחי"
 
-#: comicdata.cpp:86
+#: comicdata.cpp:87
 #, kde-format
 msgctxt "an abbreviation for Number"
 msgid "# %1"
@@ -218,17 +219,29 @@ msgstr[1] "דקות"
 msgstr[2] "דקות"
 msgstr[3] "דקות"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:153
+#, kde-format
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Error loading comic"
+msgstr ""
+
+#: package/contents/ui/main.qml:154
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
+#: package/contents/ui/main.qml:172
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
-msgstr ""
+msgstr "לא הוגדר קומיקס"
 
-#: package/contents/ui/main.qml:162
+#: package/contents/ui/main.qml:175
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
-msgstr ""
+msgstr "בחירת קומיקס…"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format

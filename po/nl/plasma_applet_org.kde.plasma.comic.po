@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-26 00:43+0000\n"
+"POT-Creation-Date: 2025-03-29 00:43+0000\n"
 "PO-Revision-Date: 2025-03-26 11:38+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -80,7 +80,7 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Huidige &positie opslaan"
 
-#: comicdata.cpp:86
+#: comicdata.cpp:87
 #, kde-format
 msgctxt "an abbreviation for Number"
 msgid "# %1"
@@ -216,13 +216,27 @@ msgid_plural "minutes"
 msgstr[0] "minuut"
 msgstr[1] "minuten"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:153
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Error Handling"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Error loading comic"
+msgstr "Afhandelen van fouten"
+
+#: package/contents/ui/main.qml:154
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
+#: package/contents/ui/main.qml:172
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Geen stripverhalen geconfigureerd"
 
-#: package/contents/ui/main.qml:162
+#: package/contents/ui/main.qml:175
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -354,10 +368,6 @@ msgstr "Identifier van stripverhaal:"
 #~ msgctxt "@title:group"
 #~ msgid "Cache"
 #~ msgstr "Cache"
-
-#~ msgctxt "@title:group"
-#~ msgid "Error Handling"
-#~ msgstr "Afhandelen van fouten"
 
 #~ msgctxt "@title:group"
 #~ msgid "Navigation"

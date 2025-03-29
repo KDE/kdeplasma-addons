@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-26 00:43+0000\n"
+"POT-Creation-Date: 2025-03-29 00:43+0000\n"
 "PO-Revision-Date: 2025-03-27 00:10+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -86,7 +86,7 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Geçerli &Konumu Depola"
 
-#: comicdata.cpp:86
+#: comicdata.cpp:87
 #, kde-format
 msgctxt "an abbreviation for Number"
 msgid "# %1"
@@ -223,13 +223,25 @@ msgid_plural "minutes"
 msgstr[0] "dakika"
 msgstr[1] "dakika"
 
-#: package/contents/ui/main.qml:159
+#: package/contents/ui/main.qml:153
+#, kde-format
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Error loading comic"
+msgstr ""
+
+#: package/contents/ui/main.qml:154
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
+#: package/contents/ui/main.qml:172
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Yapılandırılmış çizgi roman yok"
 
-#: package/contents/ui/main.qml:162
+#: package/contents/ui/main.qml:175
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
