@@ -14,6 +14,7 @@ import org.kde.kcmutils as KCM
 KCM.ScrollViewKCM {
     id: timesPage
     property var cfg_predefinedTimers: []
+    property bool cfg_showSeconds
     readonly property int maxListSize: 15
 
     signal configurationChanged()
@@ -104,6 +105,7 @@ KCM.ScrollViewKCM {
                     id: editor
                     alertMode: editable
                     value: time
+                    showSeconds: cfg_showSeconds
                     property int oldValue: 0
                     onDigitModified: valueDelta => {
                         set(value + valueDelta)

@@ -14,6 +14,7 @@ import org.kde.plasma.private.timer 0.1 as TimerPlasmoid
 Row {
     id: timerEdit
     property int value // time in seconds
+    property bool showSeconds: true
     property bool editable: true
     // in alert mode 2nd set of digits from svg file will be drawn
     property bool alertMode: false
@@ -24,7 +25,7 @@ Row {
         id: internal
         readonly property string digitSuffix: alertMode ? "_1" : ""
         // digits count include separators with 50% of digit width
-        readonly property real digits: root.showSeconds ? 7 : 4.5;
+        readonly property real digits: timerEdit.showSeconds ? 7 : 4.5;
         readonly property int digitH: (parent.height / 2) * digits < parent.width ? parent.height : parent.width / digits * 2
         readonly property int digitW: digitH / 2;
         property string valueString: "000000"
@@ -143,11 +144,11 @@ Row {
         }
     }
 
-    Loader { sourceComponent: root.showSeconds ? separator : undefined } // ":"
+    Loader { sourceComponent: timerEdit.showSeconds ? separator : undefined } // ":"
 
     Loader {
         id: second1
-        sourceComponent: root.showSeconds ? digit : undefined
+        sourceComponent: timerEdit.showSeconds ? digit : undefined
         onLoaded: {
             item.meaning = 10 //10s
             item.num = internal.valueString[4]
@@ -155,7 +156,7 @@ Row {
     }
     Loader {
         id: second2
-        sourceComponent: root.showSeconds ? digit : undefined
+        sourceComponent: timerEdit.showSeconds ? digit : undefined
         onLoaded: {
             item.meaning = 1 //1s
             item.num = internal.valueString[5]
@@ -170,7 +171,7 @@ Row {
         hour2.item.num = internal.valueString[1]
         minute1.item.num = internal.valueString[2]
         minute2.item.num = internal.valueString[3]
-        if (root.showSeconds) {
+        if (timerEdit.showSeconds) {
             second1.item.num = internal.valueString[4]
             second2.item.num = internal.valueString[5]
         }

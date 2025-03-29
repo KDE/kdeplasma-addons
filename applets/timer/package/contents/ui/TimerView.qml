@@ -70,6 +70,7 @@ MouseArea {
             value: root.seconds
             editable: !root.running
             alertMode: root.alertMode
+            showSeconds: root.showSeconds
             onDigitModified: valueDelta => root.seconds += valueDelta
             SequentialAnimation on opacity {
                 running: root.suspended;
