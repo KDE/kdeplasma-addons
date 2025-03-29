@@ -170,8 +170,10 @@ Row {
         hour2.item.num = internal.valueString[1]
         minute1.item.num = internal.valueString[2]
         minute2.item.num = internal.valueString[3]
-        second1.item.num = internal.valueString[4]
-        second2.item.num = internal.valueString[5]
+        if (root.showSeconds) {
+            second1.item.num = internal.valueString[4]
+            second2.item.num = internal.valueString[5]
+        }
     }
 }
 
