@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-29 00:43+0000\n"
-"PO-Revision-Date: 2025-03-27 00:10+0300\n"
+"PO-Revision-Date: 2025-03-29 14:23+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -227,13 +227,13 @@ msgstr[1] "dakika"
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Error loading comic"
-msgstr ""
+msgstr "Çizgi roman yüklenirken hata"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Daha sonra yeniden deneyin veya başka bir çizgi roman seçin"
 
 #: package/contents/ui/main.qml:172
 #, kde-format

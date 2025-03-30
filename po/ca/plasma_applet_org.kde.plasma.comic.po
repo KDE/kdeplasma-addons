@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-29 00:43+0000\n"
-"PO-Revision-Date: 2025-03-26 09:29+0100\n"
+"PO-Revision-Date: 2025-03-29 14:01+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -220,13 +220,13 @@ msgstr[1] "minuts"
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Error loading comic"
-msgstr ""
+msgstr "Error en carregar el còmic"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Torneu-ho a intentar més tard, o trieu un còmic diferent"
 
 #: package/contents/ui/main.qml:172
 #, kde-format

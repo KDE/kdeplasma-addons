@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-29 00:43+0000\n"
-"PO-Revision-Date: 2025-03-26 05:27+0100\n"
+"PO-Revision-Date: 2025-03-29 11:28+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -224,17 +224,16 @@ msgstr[2] "minute"
 msgstr[3] "minut"
 
 #: package/contents/ui/main.qml:153
-#, fuzzy, kde-format
-#| msgid "Error Handling"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Error loading comic"
-msgstr "Obravnavanje napak"
+msgstr "Napaka pri nalaganju stripa"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Poskusite znova pozneje ali izberite drug strip"
 
 #: package/contents/ui/main.qml:172
 #, kde-format

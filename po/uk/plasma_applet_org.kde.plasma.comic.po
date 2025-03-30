@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-29 00:43+0000\n"
-"PO-Revision-Date: 2025-03-26 11:48+0200\n"
+"PO-Revision-Date: 2025-03-29 12:25+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -220,18 +220,16 @@ msgstr[2] "хвилин"
 msgstr[3] "хвилину"
 
 #: package/contents/ui/main.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Error Handling"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Error loading comic"
-msgstr "Обробка помилок"
+msgstr "Помилка під час завантаження коміксу"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Повторіть спробу пізніше або виберіть інший комікс"
 
 #: package/contents/ui/main.qml:172
 #, kde-format
