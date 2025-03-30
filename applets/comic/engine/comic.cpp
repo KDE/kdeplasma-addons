@@ -172,6 +172,12 @@ void ComicEngine::finished(ComicProvider *provider)
         mIdentifierError.clear();
     }
 
+    if (provider->isCurrent()) {
+        data.lastCachedStripIdentifier = provider->identifier().mid(provider->identifier().indexOf(QLatin1Char(':')) + 1);
+    } else {
+        data.lastCachedStripIdentifier = lastCachedIdentifier(provider->identifier());
+    }
+
     // store in cache if it's not the response of a CachedProvider,
     if (!provider->inherits("CachedProvider") && !provider->image().isNull()) {
         CachedProvider::storeInCache(provider->identifier(), provider->image(), data);
