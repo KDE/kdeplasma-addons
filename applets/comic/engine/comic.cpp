@@ -79,11 +79,14 @@ bool ComicEngine::requestSource(const QString &identifier)
 
     const QStringList parts = identifier.split(QLatin1Char(':'), Qt::KeepEmptyParts);
 
+    bool isCurrentComic = parts[1].isEmpty();
+
     // check whether it is cached, make sure second part present
-    bool lookInCache = parts.count() > 1 && !(parts[1].isEmpty() && mIsCheckingForUpdates) && CachedProvider::isCached(identifier);
+    bool lookInCache = parts.count() > 1 && !(isCurrentComic && mIsCheckingForUpdates) && CachedProvider::isCached(identifier);
 
     if (lookInCache || !isOnline()) {
         ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, IdentifierType::StringIdentifier, identifier);
+        provider->setIsCurrent(isCurrentComic);
         m_jobs[identifier] = provider;
         connect(provider, &ComicProvider::finished, this, &ComicEngine::finished);
         connect(provider, &ComicProvider::error, this, &ComicEngine::error);
@@ -121,8 +124,6 @@ bool ComicEngine::requestSource(const QString &identifier)
     }
 
     KPackage::Package pkg = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Comic"), parts[0]);
-
-    bool isCurrentComic = parts[1].isEmpty();
 
     ComicProvider *provider = nullptr;
 
