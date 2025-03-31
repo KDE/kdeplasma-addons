@@ -215,13 +215,13 @@ msgstr[0] "分钟"
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Error loading comic"
-msgstr ""
+msgstr "加载漫画出错"
 
 #: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "稍后重试，或选择其他漫画"
 
 #: package/contents/ui/main.qml:172
 #, kde-format
