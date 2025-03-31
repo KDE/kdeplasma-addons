@@ -38,6 +38,8 @@ PlasmoidItem {
 
         Layout.preferredWidth: mainWindow.switchWidth
         Layout.preferredHeight: mainWindow.switchHeight
+        Layout.minimumHeight: implicitHeight
+
 
         Connections {
             target: plasmoid
@@ -137,21 +139,8 @@ PlasmoidItem {
             Layout.fillHeight: true
             Layout.topMargin: comicTabbar.visible ? 3 : 0
 
-            visible: plasmoid.tabIdentifiers.length > 0 && !plasmoid.comicData.isError
+            visible: plasmoid.tabIdentifiers.length > 0
             comicData: plasmoid.comicData
-        }
-
-        PlasmaExtras.PlaceholderMessage {
-            id: errorPlaceholder
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.topMargin: comicTabbar.visible ? 3 : 0
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            Layout.margins: Kirigami.Units.gridUnit
-            visible: (plasmoid.comicData.isError) ?? false
-            iconName: "error-symbolic"
-            text: i18nc("@info placeholdermessage if comic loading failed", "Error loading comic")
-            explanation: i18nc("@info placeholdermessage explanation", "Try again later, or choose a different comic")
         }
 
         ComicBottomInfo {

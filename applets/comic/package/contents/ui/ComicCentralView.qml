@@ -8,6 +8,7 @@ import QtQuick 2.1
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.plasmoid
 
@@ -16,6 +17,13 @@ Item {
 
     width: Kirigami.Units.gridUnit
     height: Kirigami.Units.gridUnit
+
+    implicitHeight: Math.max (arrowLeft.visible ? arrowLeft.implicitHeight : 0,
+                              tooltip.implicitHeight,
+                              arrowRight.visible ? arrowRight.implicitHeight : 0)
+    implicitWidth: (arrowLeft.visible ? arrowLeft.implicitWidth : 0) +
+                    tooltip.implicitHeight +
+                    (arrowRight.visible ? arrowRight.implicitWidth : 0)
 
     property variant comicData
 
@@ -36,6 +44,8 @@ Item {
     }
     PlasmaCore.ToolTipArea {
         id: tooltip
+        implicitHeight: errorPlaceholder.visible ? errorPlaceholder.implicitHeight : comicImage.implicitHeight
+        implicitWidth: errorPlaceholder.visible ? errorPlaceholder.implicitWidth : comicImage.implicitWidth
         anchors {
             left: arrowLeft.visible ? arrowLeft.right : root.left
             right: arrowRight.visible ? arrowRight.left : root.right
@@ -67,11 +77,25 @@ Item {
 
                 anchors.fill: parent
                 enabled: false
+                visible: !comicData.isError ?? true
+                implicitHeight: 0
+                implicitWidth: 0
 
                 image: Plasmoid.comicData.image
                 actualSize: Plasmoid.showActualSize
                 isLeftToRight: Plasmoid.comicData.isLeftToRight ?? false
                 isTopToBottom: Plasmoid.comicData.isTopToBottom ?? false
+            }
+
+            PlasmaExtras.PlaceholderMessage {
+                id: errorPlaceholder
+                anchors.centerIn: parent
+                width: parent.width
+                height: parent.height
+                visible: comicData.isError ?? false
+                iconName: "error-symbolic"
+                text: i18nc("@info placeholdermessage if comic loading failed", "Could not load comic")
+                explanation: i18nc("@info placeholdermessage explanation", "Try again later, or choose a different comic")
             }
 
             ButtonBar {
