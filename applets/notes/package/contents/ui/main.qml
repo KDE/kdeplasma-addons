@@ -37,6 +37,7 @@ PlasmoidItem {
     readonly property real horizontalMargins: fullRepresentationItem.width * 0.07
     readonly property real verticalMargins: fullRepresentationItem.height * 0.07
     readonly property PlasmaComponents3.TextArea mainTextArea: fullRepresentationItem.mainTextArea
+    readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge,PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge].includes(Plasmoid.location)
 
     // note is of type Note
     property QtObject note: noteManager.loadNote(Plasmoid.configuration.noteId);
@@ -439,7 +440,7 @@ PlasmoidItem {
                 }
                 height: visible ? implicitHeight : 0
                 visible: opacity > 0
-                opacity: focusScope.activeFocus ? 1 : 0
+                opacity: (focusScope.activeFocus || inPanel) ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
 
                 readonly property int requiredWidth: formatButtonsRow.width + spacing + settingsButton.width + removeButton.width
@@ -508,19 +509,6 @@ PlasmoidItem {
                 }
 
                 PlasmaComponents3.ToolButton {
-                    id: settingsButton
-                    focusPolicy: Qt.TabFocus
-                    icon.name: "configure"
-                    icon.color: textIconColor
-                    onClicked: Plasmoid.internalAction("configure").trigger()
-                    Accessible.name: settingsTooltip.text
-                    PlasmaComponents3.ToolTip {
-                        id: settingsTooltip
-                        text: Plasmoid.internalAction("configure").text
-                    }
-                }
-
-                PlasmaComponents3.ToolButton {
                     id: removeButton
                     focusPolicy: Qt.TabFocus
                     icon.name: "edit-delete"
@@ -551,6 +539,45 @@ PlasmoidItem {
                         id: removeTooltip
                         text: Plasmoid.internalAction("remove").text
                     }
+                }
+
+                Item { // spacer
+                    implicitWidth: Kirigami.Units.largeSpacing
+                }
+
+                PlasmaComponents3.ToolButton {
+                    id: settingsButton
+                    focusPolicy: Qt.TabFocus
+                    icon.name: "configure"
+                    icon.color: textIconColor
+                    onClicked: Plasmoid.internalAction("configure").trigger()
+                    Accessible.name: settingsTooltip.text
+                    PlasmaComponents3.ToolTip {
+                        id: settingsTooltip
+                        text: Plasmoid.internalAction("configure").text
+                    }
+                }
+
+                PlasmaComponents3.ToolButton {
+                    id: pinButton
+                    visible: inPanel
+                    checkable: true
+                    checked: Plasmoid.configuration.pinOpen
+                    focusPolicy: Qt.TabFocus
+                    icon.name: "window-pin"
+                    icon.color: textIconColor
+                    Accessible.name: pinTooltip.text
+                    PlasmaComponents3.ToolTip {
+                        id: pinTooltip
+                        text: i18nc("@action:button pin popup for panel widget", "Keep Open")
+                    }
+                    Binding {
+                        target: root
+                        property: "hideOnWindowDeactivate"
+                        value: !Plasmoid.configuration.pinOpen
+                        restoreMode: Binding.RestoreNone
+                    }
+                    onToggled: Plasmoid.configuration.pinOpen = checked
                 }
             }
         }
