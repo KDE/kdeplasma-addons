@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-04-01 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -116,38 +116,38 @@ msgctxt "@option:check"
 msgid "Show notification text:"
 msgstr "显示通知文字："
 
-#: package/contents/ui/configTimes.qml:71
+#: package/contents/ui/configTimes.qml:72
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr "在此处添加计时器预设后，它们将显示在 Plasma 小程序的右键菜单中。"
 
-#: package/contents/ui/configTimes.qml:78
+#: package/contents/ui/configTimes.qml:79
 #, kde-format
 msgid "Add"
 msgstr "添加"
 
-#: package/contents/ui/configTimes.qml:119
+#: package/contents/ui/configTimes.qml:121
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "鼠标滚轮在数字上方滚动，即可更改时间"
 
-#: package/contents/ui/configTimes.qml:126
+#: package/contents/ui/configTimes.qml:128
 #, kde-format
 msgid "Apply"
 msgstr "应用"
 
-#: package/contents/ui/configTimes.qml:134
+#: package/contents/ui/configTimes.qml:136
 #, kde-format
 msgid "Cancel"
 msgstr "取消"
 
-#: package/contents/ui/configTimes.qml:143
+#: package/contents/ui/configTimes.qml:145
 #, kde-format
 msgid "Edit"
 msgstr "编辑"
 
-#: package/contents/ui/configTimes.qml:152
+#: package/contents/ui/configTimes.qml:154
 #, kde-format
 msgid "Delete"
 msgstr "删除"

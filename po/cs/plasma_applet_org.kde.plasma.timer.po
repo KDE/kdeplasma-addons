@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-04-01 00:43+0000\n"
 "PO-Revision-Date: 2023-01-31 15:47+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -119,38 +119,38 @@ msgctxt "@option:check"
 msgid "Show notification text:"
 msgstr "Zobrazit text upozornění:"
 
-#: package/contents/ui/configTimes.qml:71
+#: package/contents/ui/configTimes.qml:72
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr ""
 
-#: package/contents/ui/configTimes.qml:78
+#: package/contents/ui/configTimes.qml:79
 #, kde-format
 msgid "Add"
 msgstr "Přidat"
 
-#: package/contents/ui/configTimes.qml:119
+#: package/contents/ui/configTimes.qml:121
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Rolujte čísly pro změnu času"
 
-#: package/contents/ui/configTimes.qml:126
+#: package/contents/ui/configTimes.qml:128
 #, kde-format
 msgid "Apply"
 msgstr "Použít"
 
-#: package/contents/ui/configTimes.qml:134
+#: package/contents/ui/configTimes.qml:136
 #, kde-format
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: package/contents/ui/configTimes.qml:143
+#: package/contents/ui/configTimes.qml:145
 #, kde-format
 msgid "Edit"
 msgstr "Upravit"
 
-#: package/contents/ui/configTimes.qml:152
+#: package/contents/ui/configTimes.qml:154
 #, kde-format
 msgid "Delete"
 msgstr "Smazat"

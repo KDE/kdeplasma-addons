@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-04-01 00:43+0000\n"
 "PO-Revision-Date: 2023-03-01 01:28+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -115,39 +115,39 @@ msgctxt "@option:check"
 msgid "Show notification text:"
 msgstr "알림 텍스트 표시:"
 
-#: package/contents/ui/configTimes.qml:71
+#: package/contents/ui/configTimes.qml:72
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr ""
 "미리 정의된 타이머를 추가했다면 Plasmoid 상황에 맞는 메뉴에 표시됩니다."
 
-#: package/contents/ui/configTimes.qml:78
+#: package/contents/ui/configTimes.qml:79
 #, kde-format
 msgid "Add"
 msgstr "추가"
 
-#: package/contents/ui/configTimes.qml:119
+#: package/contents/ui/configTimes.qml:121
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "숫자 위에서 스크롤해서 시간 변경"
 
-#: package/contents/ui/configTimes.qml:126
+#: package/contents/ui/configTimes.qml:128
 #, kde-format
 msgid "Apply"
 msgstr "적용"
 
-#: package/contents/ui/configTimes.qml:134
+#: package/contents/ui/configTimes.qml:136
 #, kde-format
 msgid "Cancel"
 msgstr "취소"
 
-#: package/contents/ui/configTimes.qml:143
+#: package/contents/ui/configTimes.qml:145
 #, kde-format
 msgid "Edit"
 msgstr "편집"
 
-#: package/contents/ui/configTimes.qml:152
+#: package/contents/ui/configTimes.qml:154
 #, kde-format
 msgid "Delete"
 msgstr "삭제"
