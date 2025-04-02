@@ -1,11 +1,11 @@
-# Ryuichi Yamada <ryuichi_ya220@outlook.jp>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2025 Ryuichi Yamada <ryuichi_ya220@outlook.jp>
 # Fumiaki Okushi <fumiaki.okushi@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 02:37+0000\n"
-"PO-Revision-Date: 2023-08-12 01:51+0900\n"
+"PO-Revision-Date: 2025-03-24 21:36+0900\n"
 "Last-Translator: Ryuichi Yamada <ryuichi_ya220@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
 "Language: ja\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: package/contents/ui/config.qml:48
 #, kde-format
@@ -91,7 +91,7 @@ msgstr "自然"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tumblr"
-msgstr "タンブラー"
+msgstr "Tumblr"
 
 #: package/contents/ui/config.qml:122
 #, kde-format
