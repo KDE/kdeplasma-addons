@@ -207,11 +207,11 @@ void ComicEngine::error(ComicProvider *provider)
 
     // if there was an error loading the last cached comic strip, do not return its id anymore
     const QString lastCachedId = lastCachedIdentifier(identifier);
-    if (lastCachedId != provider->identifier().mid(provider->identifier().indexOf(QLatin1Char(':')) + 1)) {
+    bool hasPreviousIdentifier = data.previousIdentifier.length() > 0;
+    if (!hasPreviousIdentifier && lastCachedId != provider->identifier().mid(provider->identifier().indexOf(QLatin1Char(':')) + 1)) {
         // sets the previousIdentifier to the identifier of a strip that has been cached before
         data.previousIdentifier = lastCachedId;
     }
-    data.nextIdentifier = QString();
 
     const QString key = m_jobs.key(provider);
     if (!key.isEmpty()) {

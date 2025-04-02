@@ -58,12 +58,12 @@ void ComicData::setData(const ComicMetaData &data)
 {
     if (!data.error) {
         mImage = data.image;
-        mNext = data.nextIdentifier;
         mAdditionalText = data.additionalText;
         mReady = true;
     }
 
     mPrev = data.previousIdentifier;
+    mNext = data.nextIdentifier;
     mIsError = data.error;
     mWebsiteUrl = data.websiteUrl;
     mImageUrl = data.imageUrl;
