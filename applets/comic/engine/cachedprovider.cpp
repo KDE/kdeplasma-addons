@@ -129,20 +129,6 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
     const QString dirPath = QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/plasma_engine_comic/");
 
     QSettings settingsMain(pathMain + QLatin1String(".conf"), QSettings::IniFormat);
-    settingsMain.setValue(QStringLiteral("firstStripIdentifier"), data.firstStripIdentifier);
-    settingsMain.setValue(QStringLiteral("title"), data.providerName);
-    settingsMain.setValue(QStringLiteral("lastCachedStripIdentifier"), data.lastCachedStripIdentifier);
-    settingsMain.setValue(QStringLiteral("shopUrl"), data.shopUrl);
-    settingsMain.setValue(QStringLiteral("isLeftToRight"), data.isLeftToRight);
-    settingsMain.setValue(QStringLiteral("isTopToBottom"), data.isTopToBottom);
-
-    QSettings settings(path + QLatin1String(".conf"), QSettings::IniFormat);
-    settings.setValue(QStringLiteral("additionalText"), data.additionalText);
-    settings.setValue(QStringLiteral("comicAuthor"), data.comicAuthor);
-    settings.setValue(QStringLiteral("imageUrl"), data.imageUrl);
-    settings.setValue(QStringLiteral("nextIdentifier"), data.nextIdentifier);
-    settings.setValue(QStringLiteral("previousIdentifier"), data.previousIdentifier);
-    settings.setValue(QStringLiteral("websiteUrl"), data.websiteUrl);
 
     QStringList comics;
     if (settingsMain.contains(QLatin1String("comics"))) {
@@ -163,6 +149,32 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
             }
         }
     }
+
+    QString oldCachedStripIdentifier = settingsMain.value(QStringLiteral("lastCachedStripIdentifier")).toString();
+    if (oldCachedStripIdentifier != data.lastCachedStripIdentifier) {
+        // We need to delete the most recent cached strip if there's a newer one,
+        // as its nextIdentifier needs to be updated. We can't set it directly,
+        // as there may have been multiple strips released since the last check.
+        QString encodedFullIdentifier = QString::fromLatin1(QUrl::toPercentEncoding(comicName + ":" + oldCachedStripIdentifier));
+        QFile::remove(dirPath + encodedFullIdentifier);
+        QFile::remove(dirPath + encodedFullIdentifier + QLatin1String(".conf"));
+        comics.removeAll(encodedFullIdentifier);
+    }
+
+    settingsMain.setValue(QStringLiteral("firstStripIdentifier"), data.firstStripIdentifier);
+    settingsMain.setValue(QStringLiteral("title"), data.providerName);
+    settingsMain.setValue(QStringLiteral("lastCachedStripIdentifier"), data.lastCachedStripIdentifier);
+    settingsMain.setValue(QStringLiteral("shopUrl"), data.shopUrl);
+    settingsMain.setValue(QStringLiteral("isLeftToRight"), data.isLeftToRight);
+    settingsMain.setValue(QStringLiteral("isTopToBottom"), data.isTopToBottom);
+
+    QSettings settings(path + QLatin1String(".conf"), QSettings::IniFormat);
+    settings.setValue(QStringLiteral("additionalText"), data.additionalText);
+    settings.setValue(QStringLiteral("comicAuthor"), data.comicAuthor);
+    settings.setValue(QStringLiteral("imageUrl"), data.imageUrl);
+    settings.setValue(QStringLiteral("nextIdentifier"), data.nextIdentifier);
+    settings.setValue(QStringLiteral("previousIdentifier"), data.previousIdentifier);
+    settings.setValue(QStringLiteral("websiteUrl"), data.websiteUrl);
 
     QString encodedIdentifier = QString::fromLatin1(QUrl::toPercentEncoding(identifier));
 
