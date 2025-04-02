@@ -200,7 +200,7 @@ void ComicEngine::error(ComicProvider *provider)
     QString identifier(provider->identifier());
     mIdentifierError = identifier;
 
-    qCWarning(PLASMA_COMIC) << identifier << "plugging reported an error.";
+    qCWarning(PLASMA_COMIC) << identifier << "plugin reported an error.";
 
     ComicMetaData data = metaDataFromProvider(provider);
     data.error = true;

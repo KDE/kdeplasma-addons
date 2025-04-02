@@ -11,6 +11,7 @@ ecm_qt_declare_logging_category(plasma_engine_comic
     CATEGORY_NAME org.kde.plasma.comic
     OLD_CATEGORY_NAMES ork.kde.plasma.comic
     DESCRIPTION "Plasma Comic Engine"
+    DEFAULT_SEVERITY Warning
     EXPORT KDEPLASMAADDONS
 )
 
