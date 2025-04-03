@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2025-03-26 18:30+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -119,6 +119,20 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "造訪漫畫網站"
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Download Comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "下載漫畫"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
 #: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
@@ -216,25 +230,13 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "每分鐘"
 
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "未設定漫畫"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -359,10 +361,6 @@ msgstr "集數辨識器："
 #~ "\n"
 #~ "\n"
 #~ "選擇前一則漫畫，進入上次快取的漫畫。"
-
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "下載漫畫"
 
 #~ msgctxt "@action:button"
 #~ msgid "Configure..."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2015-03-14 17:59+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -131,6 +131,20 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Посети веб сајт стрипа"
 
+# >> @title
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgid "Download Comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "Преузимање стрипова"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
 #: package/contents/ui/configAdvanced.qml:35
 #, fuzzy, kde-format
 #| msgid "Comic cache:"
@@ -249,25 +263,13 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -317,13 +319,6 @@ msgstr "Идентификатор стрипа:"
 #~ msgctxt "@action"
 #~ msgid "&Create Comic Book Archive..."
 #~ msgstr "&Направи архиву стрипа..."
-
-# >> @title
-#, fuzzy
-#~| msgid "Download Comics"
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "Преузимање стрипова"
 
 #~ msgid "Archiving comic failed"
 #~ msgstr "Архивирање стрипа није успело"

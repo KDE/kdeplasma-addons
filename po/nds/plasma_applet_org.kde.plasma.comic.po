@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2011-08-18 06:54+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -130,6 +130,19 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Na de Comic-Nettsiet gahn"
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgid "Download new comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "Nieg Comics daalladen"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
 #: package/contents/ui/configAdvanced.qml:35
 #, fuzzy, kde-format
 #| msgid "Comic cache:"
@@ -241,27 +254,14 @@ msgid_plural "minutes"
 msgstr[0] " Minuten"
 msgstr[1] " Minuten"
 
-#: package/contents/ui/main.qml:153
-#, fuzzy, kde-format
-#| msgid "Error Handling"
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr "Fehlerverarbeiden"
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Comic-Instellen"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -287,6 +287,12 @@ msgstr "&Reegnummer:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Comic-Beteker:"
+
+#, fuzzy
+#~| msgid "Error Handling"
+#~ msgctxt "@info placeholdermessage if comic loading failed"
+#~ msgid "Error loading comic"
+#~ msgstr "Fehlerverarbeiden"
 
 #, fuzzy
 #~| msgid "Check for new comic strips:"
@@ -397,12 +403,6 @@ msgstr "Comic-Beteker:"
 #~ "\n"
 #~ "Söök den verleden Comic ut, wenn Du na den tolest twischenspiekert Comic "
 #~ "gahn wullt."
-
-#, fuzzy
-#~| msgid "Download new comics"
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "Nieg Comics daalladen"
 
 #, fuzzy
 #~| msgctxt "refers to caching of files on the users hd"

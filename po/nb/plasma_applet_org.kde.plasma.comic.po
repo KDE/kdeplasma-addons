@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2011-05-21 15:16+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -115,6 +115,18 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr ""
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, kde-format
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr ""
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
 #: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
@@ -214,25 +226,13 @@ msgid_plural "minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"

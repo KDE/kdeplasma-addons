@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2025-03-30 11:14+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -120,6 +120,20 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Visiter le site Internet de la bande dessinée"
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Download Comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "Télécharger de nouvelles bandes dessinées"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr "Veuillez réessayer plus tard ou sélectionner une autre bande dessinée"
+
 #: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
@@ -222,25 +236,13 @@ msgid_plural "minutes"
 msgstr[0] "minute"
 msgstr[1] "minutes"
 
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr "Erreur lors du chargement d'une bande dessinée"
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr "Veuillez réessayer plus tard ou sélectionner une autre bande dessinée"
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Aucune bande dessinée configurée"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -263,6 +265,10 @@ msgstr "Numéro de la &bande dessinée :"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identifiant de la bande dessinée :"
+
+#~ msgctxt "@info placeholdermessage if comic loading failed"
+#~ msgid "Error loading comic"
+#~ msgstr "Erreur lors du chargement d'une bande dessinée"
 
 #~ msgctxt "@label:spinbox"
 #~ msgid "Check for new plugins every:"
@@ -362,10 +368,6 @@ msgstr "Identifiant de la bande dessinée :"
 #~ "\n"
 #~ "Sélectionnez la bande dessinée précédente pour aller à la dernière bande "
 #~ "dessinée mise en cache."
-
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "Télécharger de nouvelles bandes dessinées"
 
 #~ msgctxt "@action:button"
 #~ msgid "Configure..."

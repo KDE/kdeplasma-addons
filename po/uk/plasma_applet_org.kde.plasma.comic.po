@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2025-03-29 12:25+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -116,6 +116,20 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Відвідати вебсайт коміксу"
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Download Comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "Отримати комікси"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr "Повторіть спробу пізніше або виберіть інший комікс"
+
 #: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
@@ -219,25 +233,13 @@ msgstr[1] "хвилини"
 msgstr[2] "хвилин"
 msgstr[3] "хвилину"
 
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr "Помилка під час завантаження коміксу"
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr "Повторіть спробу пізніше або виберіть інший комікс"
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Не налаштовано коміксів"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -260,6 +262,10 @@ msgstr "&Номер стрічки:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "І&дентифікатор стрічки:"
+
+#~ msgctxt "@info placeholdermessage if comic loading failed"
+#~ msgid "Error loading comic"
+#~ msgstr "Помилка під час завантаження коміксу"
 
 #~ msgctxt "@label:spinbox"
 #~ msgid "Check for new plugins every:"
@@ -359,10 +365,6 @@ msgstr "І&дентифікатор стрічки:"
 #~ "\n"
 #~ "\n"
 #~ "Виберіть попередню стрічку, щоб перейти до останньої стрічки з кешу."
-
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "Отримати комікси"
 
 #~ msgctxt "@action:button"
 #~ msgid "Configure..."

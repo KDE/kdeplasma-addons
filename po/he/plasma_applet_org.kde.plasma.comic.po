@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2025-03-30 07:48+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -116,6 +116,18 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "ביקור באתר הקומיקס"
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "הורדת קומיקס חדש"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr "נא לנסות שוב בהמשך או לבחור בקומיקס אחר"
+
 #: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
@@ -219,25 +231,13 @@ msgstr[1] "דקות"
 msgstr[2] "דקות"
 msgstr[3] "דקות"
 
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr "שגיאה בטעינת הקומיקס"
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr "נא לנסות שוב בהמשך או לבחור בקומיקס אחר"
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "לא הוגדר קומיקס"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -260,6 +260,10 @@ msgstr "מספר ה&רצועה:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "מזהה הרצועה:"
+
+#~ msgctxt "@info placeholdermessage if comic loading failed"
+#~ msgid "Error loading comic"
+#~ msgstr "שגיאה בטעינת הקומיקס"
 
 #~ msgctxt "@label:spinbox"
 #~ msgid "Check for new plugins every:"
@@ -286,11 +290,6 @@ msgstr "מזהה הרצועה:"
 #, fuzzy
 #~ msgid "*.cbz|Comic Book Archive (Zip)"
 #~ msgstr "&שמור קומיקס בשם..."
-
-#, fuzzy
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "הורדת קומיקס חדש"
 
 #, fuzzy
 #~ msgctxt "@option:check"

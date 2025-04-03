@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2023-03-01 01:29+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -113,6 +113,20 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "만화 웹사이트 방문"
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Download Comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "만화 다운로드"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
 #: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
@@ -210,27 +224,13 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "분"
 
-#: package/contents/ui/main.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Error Handling"
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr "오류 처리"
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -253,6 +253,13 @@ msgstr "화 번호(&S):"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "화 식별자:"
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Error Handling"
+#~ msgctxt "@info placeholdermessage if comic loading failed"
+#~ msgid "Error loading comic"
+#~ msgstr "오류 처리"
 
 #~ msgctxt "@label:spinbox"
 #~ msgid "Check for new plugins every:"
@@ -349,10 +356,6 @@ msgstr "화 식별자:"
 #~ "\n"
 #~ "\n"
 #~ "이전 화를 누르면 마지막으로 캐시된 화를 볼 수 있습니다."
-
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "만화 다운로드"
 
 #~ msgctxt "@action:button"
 #~ msgid "Configure..."

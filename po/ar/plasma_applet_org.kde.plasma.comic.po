@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2022-08-08 23:15+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: Arabic <kde-l10n-ar@kde.org>\n"
@@ -112,6 +112,19 @@ msgstr "اقفز إلى الشريط..."
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "زر موقع الرسمة"
+
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgid "Download new comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "نزل رسمات هزلية جديدة"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
 
 #: package/contents/ui/configAdvanced.qml:35
 #, kde-format
@@ -220,25 +233,13 @@ msgstr[3] "دقائق"
 msgstr[4] "دقيقة"
 msgstr[5] "دقيقة"
 
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -362,12 +363,6 @@ msgstr "معرف الشريط:"
 #~ "\n"
 #~ "\n"
 #~ "اختر الشريط السابق للانتقال إلى آخر شريط مخزن مؤقتًا."
-
-#, fuzzy
-#~| msgid "Download new comics"
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "نزل رسمات هزلية جديدة"
 
 #, fuzzy
 #~| msgid "Show arrows only on &hover:"

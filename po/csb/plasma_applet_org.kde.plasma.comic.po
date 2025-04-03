@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2009-06-29 20:47+0200\n"
 "Last-Translator: Michôł Òstrowsczi <michol@linuxcsb.org>\n"
 "Language-Team: Kashubian <i18n-csb@linuxcsb.org>\n"
@@ -129,6 +129,19 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Òbaczë starnã kòmiksu"
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgid "Download new comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "Zladëjë nowé kòmiksë"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
 #: package/contents/ui/configAdvanced.qml:35
 #, fuzzy, kde-format
 #| msgid "C&omic:"
@@ -240,26 +253,14 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Kònfigùracjô kòmiksu"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -308,12 +309,6 @@ msgstr "Pòkażë &jidentifikator kòmiksa:"
 #~| msgid "&Save Comic As..."
 #~ msgid "*.cbz|Comic Book Archive (Zip)"
 #~ msgstr "&Zapiszë kòmiks jakno..."
-
-#, fuzzy
-#~| msgid "Download new comics"
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "Zladëjë nowé kòmiksë"
 
 #, fuzzy
 #~| msgid "Information"

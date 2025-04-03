@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2022-07-22 16:57+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -115,6 +115,20 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Visit the comic website"
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Download Comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "Download Comics"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
 #: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
@@ -214,27 +228,13 @@ msgid_plural "minutes"
 msgstr[0] "minute"
 msgstr[1] "minutes"
 
-#: package/contents/ui/main.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Error Handling"
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr "Error Handling"
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -257,6 +257,13 @@ msgstr "&Strip number:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Strip identifier:"
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Error Handling"
+#~ msgctxt "@info placeholdermessage if comic loading failed"
+#~ msgid "Error loading comic"
+#~ msgstr "Error Handling"
 
 #~ msgctxt "@label:spinbox"
 #~ msgid "Check for new plugins every:"
@@ -354,10 +361,6 @@ msgstr "Strip identifier:"
 #~ "\n"
 #~ "\n"
 #~ "Choose the previous strip to go to the last cached strip."
-
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "Download Comics"
 
 #~ msgctxt "@action:button"
 #~ msgid "Configure..."

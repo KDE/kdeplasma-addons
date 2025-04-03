@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_comic.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2007-11-16 11:40-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -126,6 +126,19 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Déan cuairt ar shuíomh Gréasáin an stiallchartúin"
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgid "Download new comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "Íosluchtaigh stiallchartúin nua"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
 #: package/contents/ui/configAdvanced.qml:35
 #, fuzzy, kde-format
 #| msgid "Comic cache:"
@@ -241,26 +254,14 @@ msgstr[2] " nóiméad"
 msgstr[3] " nóiméad"
 msgstr[4] " nóiméad"
 
-#: package/contents/ui/main.qml:153
-#, kde-format
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Cumraíocht Stiallchartún"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -321,12 +322,6 @@ msgstr "Aitheantóir an stiallchartúin:"
 
 #~ msgid "dd.MM.yyyy"
 #~ msgstr "MM.dd.yyyy"
-
-#, fuzzy
-#~| msgid "Download new comics"
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "Íosluchtaigh stiallchartúin nua"
 
 #, fuzzy
 #~| msgid "Show arrows only on &hover:"

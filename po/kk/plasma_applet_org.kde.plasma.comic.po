@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2011-06-30 05:13+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -129,6 +129,19 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Комикстің веб-сайтына жолығу"
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgid "Download new comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "Жаңа комиксті жүктеп алу"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
 #: package/contents/ui/configAdvanced.qml:35
 #, fuzzy, kde-format
 #| msgid "Comic cache:"
@@ -238,26 +251,13 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] " минут сайын"
 
-#: package/contents/ui/main.qml:153
-#, fuzzy, kde-format
-#| msgid "Error Handling"
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr "Қатеге тап болғанда"
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -283,6 +283,12 @@ msgstr "&Тізбектің нөмірі:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Тізбектің идентификаторы:"
+
+#, fuzzy
+#~| msgid "Error Handling"
+#~ msgctxt "@info placeholdermessage if comic loading failed"
+#~ msgid "Error loading comic"
+#~ msgstr "Қатеге тап болғанда"
 
 #, fuzzy
 #~| msgid "Check for new comic strips:"
@@ -391,12 +397,6 @@ msgstr "Тізбектің идентификаторы:"
 #~ "\n"
 #~ "\n"
 #~ "Кештегі соңғы комикске ауысу үшін алдыңғысына барыңыз."
-
-#, fuzzy
-#~| msgid "Download new comics"
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "Жаңа комиксті жүктеп алу"
 
 #, fuzzy
 #~| msgctxt "refers to caching of files on the users hd"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-03 00:43+0000\n"
 "PO-Revision-Date: 2024-07-15 22:20+0200\n"
 "Last-Translator: rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -116,6 +116,20 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Besøg tegneseriens hjemmeside"
 
+#: package/contents/ui/ComicCentralView.qml:97
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Download Comics"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "Download tegneserier"
+
+#: package/contents/ui/ComicCentralView.qml:98
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr ""
+
 #: package/contents/ui/configAdvanced.qml:35
 #, kde-format
 msgctxt "@label:spinbox"
@@ -215,28 +229,14 @@ msgid_plural "minutes"
 msgstr[0] "minut"
 msgstr[1] "minutter"
 
-#: package/contents/ui/main.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Error Handling"
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Error loading comic"
-msgstr "Fejlhåndtering"
-
-#: package/contents/ui/main.qml:154
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr ""
-
-#: package/contents/ui/main.qml:172
+#: package/contents/ui/main.qml:161
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Konfiguration af tegneserie"
 
-#: package/contents/ui/main.qml:175
+#: package/contents/ui/main.qml:164
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -259,6 +259,13 @@ msgstr "&Stribenummer:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Stribens identifikator:"
+
+#, fuzzy
+#~| msgctxt "@title:group"
+#~| msgid "Error Handling"
+#~ msgctxt "@info placeholdermessage if comic loading failed"
+#~ msgid "Error loading comic"
+#~ msgstr "Fejlhåndtering"
 
 #~ msgctxt "@label:spinbox"
 #~ msgid "Check for new plugins every:"
@@ -363,10 +370,6 @@ msgstr "Stribens identifikator:"
 #~ "\n"
 #~ "\n"
 #~ "Vælg den forrige stribe for at gå til den senest cachede stribe."
-
-#~ msgctxt "@title:window"
-#~ msgid "Download Comics"
-#~ msgstr "Download tegneserier"
 
 #~ msgctxt "@action:button"
 #~ msgid "Configure..."
