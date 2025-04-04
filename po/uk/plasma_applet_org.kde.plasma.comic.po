@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-03 00:43+0000\n"
-"PO-Revision-Date: 2025-03-29 12:25+0200\n"
+"PO-Revision-Date: 2025-04-03 17:41+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -117,12 +117,10 @@ msgid "Visit the comic website"
 msgstr "Відвідати вебсайт коміксу"
 
 #: package/contents/ui/ComicCentralView.qml:97
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Download Comics"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "Отримати комікси"
+msgstr "Не вдалося завантажити комікс"
 
 #: package/contents/ui/ComicCentralView.qml:98
 #, kde-format

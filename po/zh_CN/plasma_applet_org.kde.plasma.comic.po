@@ -115,12 +115,10 @@ msgid "Visit the comic website"
 msgstr "访问漫画网站"
 
 #: package/contents/ui/ComicCentralView.qml:97
-#, fuzzy, kde-format
-#| msgctxt "@info placeholdermessage if comic loading failed"
-#| msgid "Error loading comic"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "加载漫画出错"
+msgstr ""
 
 #: package/contents/ui/ComicCentralView.qml:98
 #, kde-format

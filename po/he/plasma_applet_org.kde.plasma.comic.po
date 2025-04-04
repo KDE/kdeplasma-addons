@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-03 00:43+0000\n"
-"PO-Revision-Date: 2025-03-30 07:48+0300\n"
+"PO-Revision-Date: 2025-04-03 20:42+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -117,10 +117,10 @@ msgid "Visit the comic website"
 msgstr "ביקור באתר הקומיקס"
 
 #: package/contents/ui/ComicCentralView.qml:97
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "הורדת קומיקס חדש"
+msgstr "לא ניתן לטעון את הקומיקס"
 
 #: package/contents/ui/ComicCentralView.qml:98
 #, kde-format
