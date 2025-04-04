@@ -459,7 +459,8 @@ PlasmoidItem {
                         icon.color: textIconColor
                         checked: documentHandler.bold
                         onClicked: documentHandler.bold = !documentHandler.bold
-                        Accessible.name: boldTooltip.text
+                        text: boldTooltip.text
+                        display: PlasmaComponents3.AbstractButton.IconOnly
                         PlasmaComponents3.ToolTip {
                             id: boldTooltip
                             text: i18nc("@info:tooltip", "Bold")
@@ -471,7 +472,8 @@ PlasmoidItem {
                         icon.color: textIconColor
                         checked: documentHandler.italic
                         onClicked: documentHandler.italic = !documentHandler.italic
-                        Accessible.name: italicTooltip.text
+                        text: italicTooltip.text
+                        display: PlasmaComponents3.AbstractButton.IconOnly
                         PlasmaComponents3.ToolTip {
                             id: italicTooltip
                             text: i18nc("@info:tooltip", "Italic")
@@ -483,7 +485,8 @@ PlasmoidItem {
                         icon.color: textIconColor
                         checked: documentHandler.underline
                         onClicked: documentHandler.underline = !documentHandler.underline
-                        Accessible.name: underlineTooltip.text
+                        text: underlineTooltip.text
+                        display: PlasmaComponents3.AbstractButton.IconOnly
                         PlasmaComponents3.ToolTip {
                             id: underlineTooltip
                             text: i18nc("@info:tooltip", "Underline")
@@ -495,7 +498,8 @@ PlasmoidItem {
                         icon.color: textIconColor
                         checked: documentHandler.strikeOut
                         onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
-                        Accessible.name: strikethroughTooltip.text
+                        text: strikethroughTooltip.text
+                        display: PlasmaComponents3.AbstractButton.IconOnly
                         PlasmaComponents3.ToolTip {
                             id: strikethroughTooltip
                             text: i18nc("@info:tooltip", "Strikethrough")
@@ -551,7 +555,8 @@ PlasmoidItem {
                     icon.name: "configure"
                     icon.color: textIconColor
                     onClicked: Plasmoid.internalAction("configure").trigger()
-                    Accessible.name: settingsTooltip.text
+                    text: settingsTooltip.text
+                    display: PlasmaComponents3.AbstractButton.IconOnly
                     PlasmaComponents3.ToolTip {
                         id: settingsTooltip
                         text: Plasmoid.internalAction("configure").text
@@ -566,7 +571,8 @@ PlasmoidItem {
                     focusPolicy: Qt.TabFocus
                     icon.name: "window-pin"
                     icon.color: textIconColor
-                    Accessible.name: pinTooltip.text
+                    text: pinTooltip.text
+                    display: PlasmaComponents3.AbstractButton.IconOnly
                     PlasmaComponents3.ToolTip {
                         id: pinTooltip
                         text: i18nc("@action:button pin popup for panel widget", "Keep Open")
