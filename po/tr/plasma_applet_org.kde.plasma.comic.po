@@ -16,7 +16,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-03 00:43+0000\n"
-"PO-Revision-Date: 2025-03-29 14:23+0300\n"
+"PO-Revision-Date: 2025-04-04 18:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -123,12 +123,10 @@ msgid "Visit the comic website"
 msgstr "Çizgi romanın web sitesine git"
 
 #: package/contents/ui/ComicCentralView.qml:97
-#, fuzzy, kde-format
-#| msgctxt "@info placeholdermessage if comic loading failed"
-#| msgid "Error loading comic"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "Çizgi roman yüklenirken hata"
+msgstr "Çizgi roman yüklenemedi"
 
 #: package/contents/ui/ComicCentralView.qml:98
 #, kde-format

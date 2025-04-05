@@ -118,7 +118,7 @@ msgstr "访问漫画网站"
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr ""
+msgstr "无法加载漫画"
 
 #: package/contents/ui/ComicCentralView.qml:98
 #, kde-format

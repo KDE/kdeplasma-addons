@@ -22,8 +22,6 @@ msgstr ""
 
 #: package/contents/ui/main.qml:119
 #, fuzzy, kde-format
-#| msgctxt "@label calculation result"
-#| msgid "Result"
 msgctxt "@info accessible result of calculation"
 msgid "Result is %1"
 msgstr "Resultat"
