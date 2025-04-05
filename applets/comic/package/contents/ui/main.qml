@@ -33,136 +33,139 @@ PlasmoidItem {
     readonly property bool showErrorPicture: plasmoid.showErrorPicture
     readonly property bool middleClick: plasmoid.middleClick
 
-    fullRepresentation:  ColumnLayout {
+    fullRepresentation:  Item {
         anchors.fill: parent
+        ColumnLayout {
+            anchors.fill: parent
 
-        Layout.preferredWidth: mainWindow.switchWidth
-        Layout.preferredHeight: mainWindow.switchHeight
-        Layout.minimumHeight: implicitHeight
+            Layout.preferredWidth: mainWindow.switchWidth
+            Layout.preferredHeight: mainWindow.switchHeight
+            Layout.minimumHeight: implicitHeight
 
 
-        Connections {
-            target: plasmoid
+            Connections {
+                target: plasmoid
 
-            function onComicsModelChanged() {
-                comicTabbar.setCurrentIndex(0);
-            }
-
-            function onTabHighlightRequest(id, highlight) {
-                for (var i = 0; i < comicTabbar.count; ++i) {
-                    var button = comicTabbar.itemAt(i);
-
-                    if (button.key !== undefined && button.key == id) {
-                        button.highlighted = highlight;
-                    }
+                function onComicsModelChanged() {
+                    comicTabbar.setCurrentIndex(0);
                 }
-            }
 
-            function onShowNextNewStrip() {
-                var firstHighlightedButtonIndex = undefined;
+                function onTabHighlightRequest(id, highlight) {
+                    for (var i = 0; i < comicTabbar.count; ++i) {
+                        var button = comicTabbar.itemAt(i);
 
-                for (var i = 0; i < comicTabbar.count; ++i) {
-                    var button = comicTabbar.itemAt(i);
-                    if (button.key !== undefined && button.highlighted == true) {
-                        //key is ordered
-                        if (button.key > comicTabbar.currentItem.key) {
-                            comicTabbar.setCurrentIndex(i);
-                            return;
-                        } else if (firstHighlightedButtonIndex === undefined){
-                            firstHighlightedButtonIndex = button;
+                        if (button.key !== undefined && button.key == id) {
+                            button.highlighted = highlight;
                         }
                     }
                 }
 
-                if (firstHighlightedButtonIndex !== undefined) {
-                    comicTabbar.setCurrentIndex(firstHighlightedButtonIndex);
+                function onShowNextNewStrip() {
+                    var firstHighlightedButtonIndex = undefined;
+
+                    for (var i = 0; i < comicTabbar.count; ++i) {
+                        var button = comicTabbar.itemAt(i);
+                        if (button.key !== undefined && button.highlighted == true) {
+                            //key is ordered
+                            if (button.key > comicTabbar.currentItem.key) {
+                                comicTabbar.setCurrentIndex(i);
+                                return;
+                            } else if (firstHighlightedButtonIndex === undefined){
+                                firstHighlightedButtonIndex = button;
+                            }
+                        }
+                    }
+
+                    if (firstHighlightedButtonIndex !== undefined) {
+                        comicTabbar.setCurrentIndex(firstHighlightedButtonIndex);
+                    }
                 }
             }
-        }
 
-        PlasmaComponents3.TabBar {
-            id: comicTabbar
+            PlasmaComponents3.TabBar {
+                id: comicTabbar
 
-            Layout.fillWidth: true
+                Layout.fillWidth: true
 
-            visible: plasmoid.tabIdentifiers.length > 1
+                visible: plasmoid.tabIdentifiers.length > 1
 
-            onCurrentIndexChanged: {
-                if (comicTabbar.currentItem) {
-                    plasmoid.tabChanged(comicTabbar.currentItem.key);
+                onCurrentIndexChanged: {
+                    if (comicTabbar.currentItem) {
+                        plasmoid.tabChanged(comicTabbar.currentItem.key);
+                    }
+                }
+
+                Repeater {
+                    model: plasmoid.comicsModel
+                    delegate:  PlasmaComponents3.TabButton {
+                        id: tabButton
+
+                        readonly property string key: model.key
+                        property bool highlighted: model.highlight
+
+                        text: model.title
+                        icon.source: model.icon
+                    }
                 }
             }
 
-            Repeater {
-                model: plasmoid.comicsModel
-                delegate:  PlasmaComponents3.TabButton {
-                    id: tabButton
+            PlasmaComponents3.Label {
+                id: topInfo
 
-                    readonly property string key: model.key
-                    property bool highlighted: model.highlight
+                visible: (topInfo.text.length > 0)
+                Layout.fillWidth: true
+                horizontalAlignment: Text.AlignHCenter
+                text: (showComicAuthor || showComicTitle) ? getTopInfo() : ""
+                textFormat: Text.PlainText
+                elide: Text.ElideRight
 
-                    text: model.title
-                    icon.source: model.icon
+                function getTopInfo() {
+                    var tempTop = "";
+
+                    if ( showComicTitle ) {
+                        tempTop = plasmoid.comicData.title ?? "";
+                        tempTop += ( ( (plasmoid.comicData.stripTitle?.length > 0) && (plasmoid.comicData.title?.length > 0) ) ? " - " : "" ) + (plasmoid.comicData.stripTitle ?? "");
+                    }
+
+                    if ( showComicAuthor && plasmoid.comicData.author?.length > 0 ) {
+                        tempTop = ( tempTop.length > 0 ? plasmoid.comicData.author + ": " + tempTop : plasmoid.comicData.author );
+                    }
+
+                    return tempTop;
                 }
             }
-        }
 
-        PlasmaComponents3.Label {
-            id: topInfo
+            ComicCentralView {
+                id: centerLayout
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                Layout.topMargin: comicTabbar.visible ? 3 : 0
 
-            visible: (topInfo.text.length > 0)
-            Layout.fillWidth: true
-            horizontalAlignment: Text.AlignHCenter
-            text: (showComicAuthor || showComicTitle) ? getTopInfo() : ""
-            textFormat: Text.PlainText
-            elide: Text.ElideRight
-
-            function getTopInfo() {
-                var tempTop = "";
-
-                if ( showComicTitle ) {
-                    tempTop = plasmoid.comicData.title ?? "";
-                    tempTop += ( ( (plasmoid.comicData.stripTitle?.length > 0) && (plasmoid.comicData.title?.length > 0) ) ? " - " : "" ) + (plasmoid.comicData.stripTitle ?? "");
-                }
-
-                if ( showComicAuthor && plasmoid.comicData.author?.length > 0 ) {
-                    tempTop = ( tempTop.length > 0 ? plasmoid.comicData.author + ": " + tempTop : plasmoid.comicData.author );
-                }
-
-                return tempTop;
+                visible: plasmoid.tabIdentifiers.length > 0
+                comicData: plasmoid.comicData
             }
-        }
 
-        ComicCentralView {
-            id: centerLayout
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.topMargin: comicTabbar.visible ? 3 : 0
+            ComicBottomInfo {
+                id:bottomInfo
+                Layout.fillWidth: true
 
-            visible: plasmoid.tabIdentifiers.length > 0
-            comicData: plasmoid.comicData
-        }
+                comicData: plasmoid.comicData
+                showUrl: plasmoid.showComicUrl
+                showIdentifier: plasmoid.showComicIdentifier
+            }
 
-        ComicBottomInfo {
-            id:bottomInfo
-            Layout.fillWidth: true
-
-            comicData: plasmoid.comicData
-            showUrl: plasmoid.showComicUrl
-            showIdentifier: plasmoid.showComicIdentifier
-        }
-
-        PlasmaExtras.PlaceholderMessage {
-            id: configNeededPlaceholder
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            Layout.margins: Kirigami.Units.gridUnit
-            visible: plasmoid.tabIdentifiers.length === 0
-            iconName: "folder-comic-symbolic"
-            text: i18nc("@info placeholdermessage if no comics loaded", "No comics configured")
-            helpfulAction: Kirigami.Action {
-                icon.name: "configure"
-                text: i18nc("@action:button helpfulAction opens settings dialog", "Choose comic…")
-                onTriggered: Plasmoid.internalAction("configure").trigger();
+            PlasmaExtras.PlaceholderMessage {
+                id: configNeededPlaceholder
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                Layout.margins: Kirigami.Units.gridUnit
+                visible: plasmoid.tabIdentifiers.length === 0
+                iconName: "folder-comic-symbolic"
+                text: i18nc("@info placeholdermessage if no comics loaded", "No comics configured")
+                helpfulAction: Kirigami.Action {
+                    icon.name: "configure"
+                    text: i18nc("@action:button helpfulAction opens settings dialog", "Choose comic…")
+                    onTriggered: Plasmoid.internalAction("configure").trigger();
+                }
             }
         }
     }
