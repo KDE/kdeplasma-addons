@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-03 00:43+0000\n"
-"PO-Revision-Date: 2025-03-29 13:25+0100\n"
+"PO-Revision-Date: 2025-04-04 12:34+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -117,12 +117,10 @@ msgid "Visit the comic website"
 msgstr "Bezoek de stripverhaalwebsite"
 
 #: package/contents/ui/ComicCentralView.qml:97
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Download Comics"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "Stripverhalen downloaden"
+msgstr "Kon stripverhaal niet laden"
 
 #: package/contents/ui/ComicCentralView.qml:98
 #, kde-format

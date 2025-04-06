@@ -4,13 +4,13 @@
 # david <vertigo.rus@gmail.com>, 2008.
 # elkana bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
-# SPDX-FileCopyrightText: 2023 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-05 00:43+0000\n"
-"PO-Revision-Date: 2023-12-26 10:19+0200\n"
+"PO-Revision-Date: 2025-04-05 14:55+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 24.12.2\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -166,7 +166,7 @@ msgstr "קו חוצה"
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
-msgstr ""
+msgstr "להשאיר פתוח"
 
 #: package/contents/ui/main.qml:607
 #, kde-format

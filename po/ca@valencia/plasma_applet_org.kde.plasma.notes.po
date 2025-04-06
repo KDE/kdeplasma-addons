@@ -1,8 +1,8 @@
 # Translation of plasma_applet_org.kde.plasma.notes.po to Catalan (Valencian)
-# Copyright (C) 2008-2023 This_file_is_part_of_KDE
+# Copyright (C) 2008-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2015, 2018, 2021, 2023.
+# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2015, 2018, 2021, 2023, 2025.
 # Joan Maspons <joanmaspons@gmail.com>, 2009.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2019, 2021.
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-05 00:43+0000\n"
-"PO-Revision-Date: 2023-12-26 11:10+0100\n"
+"PO-Revision-Date: 2025-04-05 10:04+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -166,7 +166,7 @@ msgstr "Barrat"
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
-msgstr ""
+msgstr "Mantín obert"
 
 #: package/contents/ui/main.qml:607
 #, kde-format
