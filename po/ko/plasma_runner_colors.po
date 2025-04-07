@@ -1,0 +1,59 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# SPDX-FileCopyrightText: 2025 Shinjo Park <kde@peremen.name>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-02-27 00:42+0000\n"
+"PO-Revision-Date: 2025-04-06 23:07+0200\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
+"Language: ko\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Lokalize 23.08.5\n"
+
+#: colorsrunner.cpp:29
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
+"#FF00FF) or an SVG named color."
+msgstr ""
+":q:가 16진수 색상(예: #FF00FF)이거나 SVG 색상 이름일 때 :q:의 값을 색상으로 "
+"표시합니다."
+
+#: colorsrunner.cpp:31
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
+"255,255,255)."
+msgstr ""
+":q:가 RGB 색상 순서쌍(예: 255,255,255)일 때 :q:의 값을 색상으로 표시합니다."
+
+#: colorsrunner.cpp:34
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
+"color quadruplet (e.g. 255,255,255,255)."
+msgstr ""
+":q:가 RGBA 색상 순서쌍(예: 255,255,255,255)일 때 :q:의 값을 색상으로 표시합니"
+"다."
+
+#: colorsrunner.cpp:139
+#, kde-format
+msgid "RGBA: %1, %2, %3, %4"
+msgstr "RGBA: %1, %2, %3, %4"
+
+#: colorsrunner.cpp:141
+#, kde-format
+msgid "RGB: %1, %2, %3"
+msgstr "RGB: %1, %2, %3"
+
+#: colorsrunner.cpp:146
+#, kde-format
+msgid "CMYK: %1%, %2%, %3%, %4%"
+msgstr "CMYK: %1%, %2%, %3%, %4%"

@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-03 00:43+0000\n"
-"PO-Revision-Date: 2025-03-29 13:48+0100\n"
+"PO-Revision-Date: 2025-04-06 16:07+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -114,12 +114,10 @@ msgid "Visit the comic website"
 msgstr "Отиване на уебсайта на комикса"
 
 #: package/contents/ui/ComicCentralView.qml:97
-#, fuzzy, kde-format
-#| msgctxt "@info placeholdermessage if comic loading failed"
-#| msgid "Error loading comic"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "Грешка при зареждането на комикс"
+msgstr "Неуспешно зареждане на комикс"
 
 #: package/contents/ui/ComicCentralView.qml:98
 #, kde-format
