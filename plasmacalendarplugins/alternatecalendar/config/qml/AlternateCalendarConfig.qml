@@ -21,12 +21,21 @@ KCMUtils.SimpleKCM {
     // expected API
     signal configurationChanged()
 
+    property bool unsavedChanges: false
+
     // expected API
     function saveConfig() {
         configStorage.calendarSystem = calendarSystemComboBox.currentValue;
         configStorage.dateOffset = (dateOffsetSpinBoxLoader.item as T.SpinBox)?.value ?? 0;
 
         configStorage.save();
+        unsavedChanges = false;
+    }
+
+    function checkUnsavedChanges() {
+        unsavedChanges = configStorage.calendarSystem !== calendarSystemComboBox.currentValue ||
+                         (dateOffsetSpinBoxLoader.active &&
+                          configStorage.dateOffset !== (dateOffsetSpinBoxLoader.item as T.SpinBox)?.value)
     }
 
     Kirigami.FormLayout {
@@ -46,9 +55,9 @@ KCMUtils.SimpleKCM {
                 Accessible.name: currentText
                 Accessible.onPressAction: {
                     currentIndex = currentIndex == count - 1 ? 0 : currentIndex + 1;
-                    configPage.configurationChanged();
+                    configPage.checkUnsavedChanges();
                 }
-                onActivated: configPage.configurationChanged()
+                onActivated: configPage.checkUnsavedChanges()
                 Component.onCompleted: {
                     currentIndex = configStorage.currentIndex;
                 }
@@ -74,7 +83,7 @@ KCMUtils.SimpleKCM {
                 from: -10
                 to: 10
                 value: configStorage.dateOffset
-                onValueModified: configPage.configurationChanged()
+                onValueModified: configPage.checkUnsavedChanges()
 
                 textFromValue: (value, locale) => i18ndp("plasma_calendar_alternatecalendar","%1 day", "%1 days", value)
                 valueFromText: (text, locale) => parseInt(text)

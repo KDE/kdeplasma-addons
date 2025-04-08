@@ -18,6 +18,8 @@ KCM.SimpleKCM {
     // expected API
     signal configurationChanged
 
+    property bool unsavedChanges: false
+
     // expected API
     function saveConfig()
     {
@@ -25,6 +27,12 @@ KCM.SimpleKCM {
         configStorage.isSeasonShown = showSeasonsCheckBox.checked;
 
         configStorage.save();
+        unsavedChanges = false;
+    }
+
+    function checkUnsavedChanges() {
+        unsavedChanges = !(configStorage.isLunarPhaseShown === showLunarPhasesCheckBox.checked &&
+                           configStorage.isSeasonShown === showSeasonsCheckBox.checked)
     }
 
     Kirigami.FormLayout {
@@ -40,7 +48,7 @@ KCM.SimpleKCM {
 
             checked: configStorage.isLunarPhaseShown
             text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Lunar phases")
-            onCheckedChanged: configPage.configurationChanged();
+            onCheckedChanged: configPage.checkUnsavedChanges();
         }
 
         QQC2.CheckBox {
@@ -48,7 +56,7 @@ KCM.SimpleKCM {
 
             checked: configStorage.isSeasonShown
             text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Astronomical seasons (solstices and equinoxes)")
-            onCheckedChanged: configPage.configurationChanged();
+            onCheckedChanged: configPage.checkUnsavedChanges();
         }
     }
 }
