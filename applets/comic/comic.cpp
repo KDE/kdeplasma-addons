@@ -146,8 +146,10 @@ void ComicApplet::init()
         if (reachability != QNetworkInformation::Reachability::Online) {
             return;
         }
-        qCDebug(PLASMA_COMIC) << "Online status changed to true, requesting comic" << mPreviousFailedIdentifier;
-        mEngine->requestSource(mPreviousFailedIdentifier);
+        if (!mPreviousFailedIdentifier.isEmpty()) {
+            qCDebug(PLASMA_COMIC) << "Online status changed to true, requesting comic" << mPreviousFailedIdentifier;
+            mEngine->requestSource(mPreviousFailedIdentifier);
+        }
     });
 }
 
@@ -173,6 +175,8 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
             updateComic(data.previousIdentifier);
             return;
         }
+    } else {
+        mPreviousFailedIdentifier.clear();
     }
 
     mCurrent.setData(data);
