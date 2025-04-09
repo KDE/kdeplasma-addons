@@ -143,7 +143,7 @@ KCM.SimpleKCM {
                 }
             ]
 
-            onActivated: root.fillMode = comboBox.model[index].value
+            onActivated: index => root.fillMode = comboBox.model[index].value
 
             function fillModeToIndex(fillMode) {
                 if(fillMode == Image.Stretch) {
