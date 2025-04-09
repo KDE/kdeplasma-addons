@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-20 00:39+0000\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
 "PO-Revision-Date: 2024-05-19 23:03+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -77,13 +77,13 @@ msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
 msgstr "İbrani Takvimi"
 
-#: config/qml/AlternateCalendarConfig.qml:39
+#: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "Takvim sistemi:"
 
-#: config/qml/AlternateCalendarConfig.qml:60
+#: config/qml/AlternateCalendarConfig.qml:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -93,20 +93,20 @@ msgstr ""
 "Bu takvim, tümüyle gökbilimsel hesaplamalar üzerine ayarlıdır. Hilal "
 "görünürlüğünü hesaba katmaz."
 
-#: config/qml/AlternateCalendarConfig.qml:68
+#: config/qml/AlternateCalendarConfig.qml:77
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "Tarih ofseti:"
 
-#: config/qml/AlternateCalendarConfig.qml:79
+#: config/qml/AlternateCalendarConfig.qml:88
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 gün"
 msgstr[1] "%1 gün"
 
-#: config/qml/AlternateCalendarConfig.qml:82
+#: config/qml/AlternateCalendarConfig.qml:91
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

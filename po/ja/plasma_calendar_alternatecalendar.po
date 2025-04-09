@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-20 00:39+0000\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
 "PO-Revision-Date: 2022-05-26 21:46-0700\n"
 "Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -74,13 +74,13 @@ msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
 msgstr ""
 
-#: config/qml/AlternateCalendarConfig.qml:39
+#: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr ""
 
-#: config/qml/AlternateCalendarConfig.qml:60
+#: config/qml/AlternateCalendarConfig.qml:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -88,19 +88,19 @@ msgid ""
 "any crescent visibility criteria."
 msgstr ""
 
-#: config/qml/AlternateCalendarConfig.qml:68
+#: config/qml/AlternateCalendarConfig.qml:77
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr ""
 
-#: config/qml/AlternateCalendarConfig.qml:79
+#: config/qml/AlternateCalendarConfig.qml:88
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] ""
 
-#: config/qml/AlternateCalendarConfig.qml:82
+#: config/qml/AlternateCalendarConfig.qml:91
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

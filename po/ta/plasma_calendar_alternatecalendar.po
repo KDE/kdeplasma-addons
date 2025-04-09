@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-04-20 00:39+0000\n"
+"POT-Creation-Date: 2025-04-09 00:43+0000\n"
 "PO-Revision-Date: 2023-05-21 14:30+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -77,13 +77,13 @@ msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
 msgstr "யூத நாள்காட்டி"
 
-#: config/qml/AlternateCalendarConfig.qml:39
+#: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "நாள்காட்டு முறை:"
 
-#: config/qml/AlternateCalendarConfig.qml:60
+#: config/qml/AlternateCalendarConfig.qml:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -93,20 +93,20 @@ msgstr ""
 "இந்நாள்காட்டி வானியல் சார்ந்த கணிப்புகளை மட்டும் பயன்படுத்தி அமைக்கப்பட்டுள்ளது. பிறை "
 "புலப்பாட்டை இது பொருட்படுத்தாது."
 
-#: config/qml/AlternateCalendarConfig.qml:68
+#: config/qml/AlternateCalendarConfig.qml:77
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "தேதி வித்தியாசம்:"
 
-#: config/qml/AlternateCalendarConfig.qml:79
+#: config/qml/AlternateCalendarConfig.qml:88
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 நாள்"
 msgstr[1] "%1 நாட்கள்"
 
-#: config/qml/AlternateCalendarConfig.qml:82
+#: config/qml/AlternateCalendarConfig.qml:91
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
