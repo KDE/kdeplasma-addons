@@ -17,8 +17,6 @@ KCM.ScrollViewKCM {
     property bool cfg_showSeconds
     readonly property int maxListSize: 15
 
-    signal configurationChanged()
-
     Component.onCompleted: {
         for (var i of plasmoid.configuration.predefinedTimers) {
             timeListModel.append({"time": i})
@@ -30,23 +28,23 @@ KCM.ScrollViewKCM {
         function addTimer(value) {
             timeListModel.append({"time": value})
             cfg_predefinedTimers.splice(count, 0, value)
-            timesPage.configurationChanged()
+            timesPage.cfg_predefinedTimersChanged()
         }
         function removeTimer(index) {
             remove(index)
             cfg_predefinedTimers.splice(index, 1)
-            timesPage.configurationChanged()
+            timesPage.cfg_predefinedTimersChanged()
         }
         function moveTimer(oldIndex, newIndex) {
             move(oldIndex, newIndex, 1)
             cfg_predefinedTimers[oldIndex] = get(oldIndex).time
             cfg_predefinedTimers[newIndex] = get(newIndex).time
-            timesPage.configurationChanged()
+            timesPage.cfg_predefinedTimersChanged()
         }
         function setTimer(index, newValue) {
             setProperty(index, "time", newValue)
             cfg_predefinedTimers[index] = newValue
-            timesPage.configurationChanged()
+            timesPage.cfg_predefinedTimersChanged()
         }
     }
 
