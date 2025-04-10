@@ -82,16 +82,10 @@ KCM.ScrollViewKCM {
             //selectedNameFilter: "All files (*)"
 
             onAccepted: {
-                console.log("Accepted: " + selectedFiles)
-
                 for (var i = 0; i < selectedFiles.length; ++i) {
                     var item = { 'path':selectedFiles[i], 'type':'file' }
                     addPath(item)
                 }
-            }
-
-            onRejected: {
-                console.log("Canceled")
             }
         }
 
