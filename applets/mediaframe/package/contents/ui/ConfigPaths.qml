@@ -23,14 +23,14 @@ KCM.ScrollViewKCM {
     function addPath(object) {
         pathModel.append( object )
         cfg_pathList.push( JSON.stringify(object) )
-        configurationChanged();
+        cfg_pathListChanged()
     }
 
     function removePath(index) {
         if(pathModel.count > 0) {
             pathModel.remove(index)
             cfg_pathList.splice(index,1)
-            configurationChanged();
+            cfg_pathListChanged()
         }
     }
 
