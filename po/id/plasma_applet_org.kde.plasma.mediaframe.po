@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-12 00:42+0000\n"
 "PO-Revision-Date: 2022-06-07 14:36+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -175,19 +175,19 @@ msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Memilih File"
 
-#: package/contents/ui/ConfigPaths.qml:102
+#: package/contents/ui/ConfigPaths.qml:96
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Memilih Folder"
 
-#: package/contents/ui/ConfigPaths.qml:122
+#: package/contents/ui/ConfigPaths.qml:116
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Tambahkan Folder..."
 
-#: package/contents/ui/ConfigPaths.qml:128
+#: package/contents/ui/ConfigPaths.qml:122
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

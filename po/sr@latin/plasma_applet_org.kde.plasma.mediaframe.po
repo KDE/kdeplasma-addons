@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-12 00:42+0000\n"
 "PO-Revision-Date: 2017-12-03 22:53+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -213,21 +213,21 @@ msgid "Choose Files"
 msgstr "Izbor fajlova"
 
 # >> @title:window
-#: package/contents/ui/ConfigPaths.qml:102
+#: package/contents/ui/ConfigPaths.qml:96
 #, fuzzy, kde-format
 #| msgid "Choose a folder"
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Izbor fascikle"
 
-#: package/contents/ui/ConfigPaths.qml:122
+#: package/contents/ui/ConfigPaths.qml:116
 #, fuzzy, kde-format
 #| msgid "Add folder..."
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Dodaj fasciklu..."
 
-#: package/contents/ui/ConfigPaths.qml:128
+#: package/contents/ui/ConfigPaths.qml:122
 #, fuzzy, kde-format
 #| msgid "Add files..."
 msgctxt "@action:button"

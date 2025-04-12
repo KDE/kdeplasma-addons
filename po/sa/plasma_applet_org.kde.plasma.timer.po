@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-01 00:43+0000\n"
+"POT-Creation-Date: 2025-04-12 00:42+0000\n"
 "PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -118,7 +118,7 @@ msgctxt "@option:check"
 msgid "Show notification text:"
 msgstr "सूचनापाठं दर्शयतु :"
 
-#: package/contents/ui/configTimes.qml:72
+#: package/contents/ui/configTimes.qml:70
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
@@ -126,32 +126,32 @@ msgstr ""
 "यदि भवान् अत्र पूर्वनिर्धारितसमयनिर्धारकान् योजयति तर्हि ते प्लाज्मोइड् सन्दर्भमेनूमध्ये दृश्यन्ते "
 "।"
 
-#: package/contents/ui/configTimes.qml:79
+#: package/contents/ui/configTimes.qml:77
 #, kde-format
 msgid "Add"
 msgstr "संयोजयति"
 
-#: package/contents/ui/configTimes.qml:121
+#: package/contents/ui/configTimes.qml:119
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "समयं परिवर्तयितुं अङ्कानां उपरि स्क्रॉलं कुर्वन्तु"
 
-#: package/contents/ui/configTimes.qml:128
+#: package/contents/ui/configTimes.qml:126
 #, kde-format
 msgid "Apply"
 msgstr "आचरतु"
 
-#: package/contents/ui/configTimes.qml:136
+#: package/contents/ui/configTimes.qml:134
 #, kde-format
 msgid "Cancel"
 msgstr "निरसयतु"
 
-#: package/contents/ui/configTimes.qml:145
+#: package/contents/ui/configTimes.qml:143
 #, kde-format
 msgid "Edit"
 msgstr "सम्पादन"
 
-#: package/contents/ui/configTimes.qml:154
+#: package/contents/ui/configTimes.qml:152
 #, kde-format
 msgid "Delete"
 msgstr "लुप्"

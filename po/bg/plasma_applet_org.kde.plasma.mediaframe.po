@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-12 00:42+0000\n"
 "PO-Revision-Date: 2024-05-13 22:47+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -181,19 +181,19 @@ msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Избиране на файлове"
 
-#: package/contents/ui/ConfigPaths.qml:102
+#: package/contents/ui/ConfigPaths.qml:96
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Избиране на папка"
 
-#: package/contents/ui/ConfigPaths.qml:122
+#: package/contents/ui/ConfigPaths.qml:116
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Добавяне на папка…"
 
-#: package/contents/ui/ConfigPaths.qml:128
+#: package/contents/ui/ConfigPaths.qml:122
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

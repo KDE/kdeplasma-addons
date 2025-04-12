@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediacontroller\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-12 00:42+0000\n"
 "PO-Revision-Date: 2022-01-31 17:02+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -173,19 +173,19 @@ msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Zvoľte súbory"
 
-#: package/contents/ui/ConfigPaths.qml:102
+#: package/contents/ui/ConfigPaths.qml:96
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Vybrať priečinok"
 
-#: package/contents/ui/ConfigPaths.qml:122
+#: package/contents/ui/ConfigPaths.qml:116
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Pridať priečinok..."
 
-#: package/contents/ui/ConfigPaths.qml:128
+#: package/contents/ui/ConfigPaths.qml:122
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"

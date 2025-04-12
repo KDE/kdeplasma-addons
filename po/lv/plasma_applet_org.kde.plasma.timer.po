@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-01 00:43+0000\n"
+"POT-Creation-Date: 2025-04-12 00:42+0000\n"
 "PO-Revision-Date: 2024-04-03 08:07+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -122,38 +122,38 @@ msgctxt "@option:check"
 msgid "Show notification text:"
 msgstr "Rādīt paziņojuma tekstu:"
 
-#: package/contents/ui/configTimes.qml:72
+#: package/contents/ui/configTimes.qml:70
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr "Ja saglabāsiet taimerus, tie parādīsies plazmoīda konteksta izvēlnē."
 
-#: package/contents/ui/configTimes.qml:79
+#: package/contents/ui/configTimes.qml:77
 #, kde-format
 msgid "Add"
 msgstr "Pievienot"
 
-#: package/contents/ui/configTimes.qml:121
+#: package/contents/ui/configTimes.qml:119
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Ritināt pāri cipariem, lai mainītu laiku"
 
-#: package/contents/ui/configTimes.qml:128
+#: package/contents/ui/configTimes.qml:126
 #, kde-format
 msgid "Apply"
 msgstr "Pielietot"
 
-#: package/contents/ui/configTimes.qml:136
+#: package/contents/ui/configTimes.qml:134
 #, kde-format
 msgid "Cancel"
 msgstr "Atcelt"
 
-#: package/contents/ui/configTimes.qml:145
+#: package/contents/ui/configTimes.qml:143
 #, kde-format
 msgid "Edit"
 msgstr "Rediģēt"
 
-#: package/contents/ui/configTimes.qml:154
+#: package/contents/ui/configTimes.qml:152
 #, kde-format
 msgid "Delete"
 msgstr "Dzēst"

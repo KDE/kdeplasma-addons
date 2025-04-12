@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-29 00:43+0000\n"
+"POT-Creation-Date: 2025-04-12 00:42+0000\n"
 "PO-Revision-Date: 2023-06-18 16:15+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -178,19 +178,19 @@ msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Escoller ficheiros"
 
-#: package/contents/ui/ConfigPaths.qml:102
+#: package/contents/ui/ConfigPaths.qml:96
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Seleccionar un cartafol"
 
-#: package/contents/ui/ConfigPaths.qml:122
+#: package/contents/ui/ConfigPaths.qml:116
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Engadir un cartafol…"
 
-#: package/contents/ui/ConfigPaths.qml:128
+#: package/contents/ui/ConfigPaths.qml:122
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
