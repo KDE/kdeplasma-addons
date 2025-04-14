@@ -1,14 +1,14 @@
 # translation of plasma_applet_comic.po to Italian
 #
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2015, 2021, 2022, 2025 Vincenzo Reale <smart2128vr@gmail.com>
 # Dario Panico <Dareus_Persarumrex@fastwebnet.it>, 2008.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2009, 2010, 2011, 2015, 2021, 2022.
 # Paolo Zamponi <feus73@gmail.com>, 2018, 2019.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-08 00:43+0000\n"
-"PO-Revision-Date: 2022-07-23 07:43+0200\n"
+"PO-Revision-Date: 2025-04-05 17:51+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: comic.cpp:80
 #, kde-format
@@ -115,18 +115,16 @@ msgid "Visit the comic website"
 msgstr "Visita il sito web del fumetto"
 
 #: package/contents/ui/ComicCentralView.qml:97
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Download Comics"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "Scarica fumetti"
+msgstr "Impossibile caricare il fumetto"
 
 #: package/contents/ui/ComicCentralView.qml:98
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Riprova più tardi o scegli un fumetto diverso"
 
 #: package/contents/ui/configAdvanced.qml:35
 #, kde-format
@@ -233,13 +231,13 @@ msgstr[1] "minuti"
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
-msgstr ""
+msgstr "Nessun fumetto configurato"
 
 #: package/contents/ui/main.qml:166
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
-msgstr ""
+msgstr "Scegli il fumetto…"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
