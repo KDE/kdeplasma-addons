@@ -56,5 +56,5 @@ All kind of add-ons to improve your Plasma experience.
 - Haenau
 
 
-# Reporting bugs
-Please use [KDE's bugtracker](https://bugs.kde.org) and report for [product kdeplasma-addons](https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons).
+# Bug Reports and Feature Requests
+Please report bugs and feature requests in [KDE's bugtracker](https://bugs.kde.org) under the [plasmashell](https://bugs.kde.org/enter_bug.cgi?product=plasmashell) category.
