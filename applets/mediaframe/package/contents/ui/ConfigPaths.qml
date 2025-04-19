@@ -13,6 +13,8 @@ import QtQuick.Layouts
 import org.kde.plasma.plasmoid 2.0
 import org.kde.kirigami 2.5 as Kirigami
 import org.kde.kcmutils as KCM
+import org.kde.plasma.extras as PlasmaExtras
+
 
 KCM.ScrollViewKCM {
 
@@ -81,6 +83,14 @@ KCM.ScrollViewKCM {
                     onTriggered: removePath(model.index)
                 }
             ]
+        }
+
+        PlasmaExtras.PlaceholderMessage {
+            anchors.centerIn: parent
+            visible: pathModel.count === 0
+            iconName: "viewimage-symbolic"
+            text: i18nc("@info placeholdermessage if no paths set", "No media configured")
+            explanation: i18nc("@info placeholdermessage explanation", "Add files or folders to display them in the widget.")
         }
 
         FileDialog {
