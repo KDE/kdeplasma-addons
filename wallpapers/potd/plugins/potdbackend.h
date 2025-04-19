@@ -10,6 +10,7 @@
 #include <QQmlParserStatus>
 #include <QUrl>
 #include <QVariantList>
+#include <qqmlregistration.h>
 
 #include "potdengine.h"
 
@@ -20,6 +21,7 @@
 class PotdBackend : public QObject, public QQmlParserStatus
 {
     Q_OBJECT
+    QML_ELEMENT
     Q_INTERFACES(QQmlParserStatus)
 
     Q_PROPERTY(QString identifier READ identifier WRITE setIdentifier NOTIFY identifierChanged)

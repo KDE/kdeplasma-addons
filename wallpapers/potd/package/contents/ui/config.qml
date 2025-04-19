@@ -185,7 +185,7 @@ Kirigami.FormLayout {
             Kirigami.Action {
                 icon.name: "document-open-folder"
                 text: i18ndc("plasma_wallpaper_org.kde.potd", "@action:button", "Open Containing Folder")
-                visible: backend.saveStatus === Global.Successful
+                visible: backend.saveStatus === PotdBackend.Successful
                 onTriggered: Qt.openUrlExternally(backend.savedFolder)
 
                 Accessible.description: i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis for a button", "Open the destination folder where the wallpaper image was saved.")
@@ -199,11 +199,11 @@ Kirigami.FormLayout {
 
             function onSaveStatusChanged() {
                 switch (backend.saveStatus) {
-                case Global.Successful:
+                case PotdBackend.Successful:
                     saveMessage.text = backend.saveStatusMessage;
                     saveMessage.type = Kirigami.MessageType.Positive;
                     break;
-                case Global.Failed:
+                case PotdBackend.Failed:
                     saveMessage.text = backend.saveStatusMessage;
                     saveMessage.type = Kirigami.MessageType.Error;
                     break;
