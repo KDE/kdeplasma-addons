@@ -79,7 +79,7 @@ KCM.ScrollViewKCM {
             actions: [
                 Kirigami.Action {
                     icon.name: "list-remove"
-                    tooltip: i18nd("plasma_wallpaper_org.kde.image", "Remove path")
+                    tooltip: i18nc("@action:button tooltip on icon-only button", "Remove path")
                     onTriggered: removePath(model.index)
                 }
             ]
