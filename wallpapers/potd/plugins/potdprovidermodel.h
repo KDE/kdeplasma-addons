@@ -8,6 +8,7 @@
 #pragma once
 
 #include <QAbstractListModel>
+#include <qqmlregistration.h>
 
 #include <KPluginMetaData>
 
@@ -17,6 +18,7 @@
 class PotdProviderModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     enum Roles {

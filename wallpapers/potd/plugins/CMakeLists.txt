@@ -12,13 +12,18 @@ ecm_qt_declare_logging_category(plasma_wallpaper_potdplugin_debug
     EXPORT KDEPLASMAADDONS
 )
 
-ecm_add_qml_module(plasma_wallpaper_potdplugin URI org.kde.plasma.wallpapers.potd)
+ecm_add_qml_module(plasma_wallpaper_potdplugin
+    URI org.kde.plasma.wallpapers.potd
+    VERSION 1.0
+    DEPENDENCIES QtCore
+    GENERATE_PLUGIN_SOURCE
+)
+
 target_sources(plasma_wallpaper_potdplugin PRIVATE
     cachedprovider.cpp
     potdbackend.cpp
     potdengine.cpp
     potdprovidermodel.cpp
-    potdplugin.cpp
 )
 target_link_libraries(plasma_wallpaper_potdplugin PRIVATE plasmapotdprovidercore
     KF6::I18n
