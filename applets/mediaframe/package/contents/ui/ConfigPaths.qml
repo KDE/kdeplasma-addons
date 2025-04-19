@@ -20,6 +20,19 @@ KCM.ScrollViewKCM {
 
     property var cfg_pathList: []
 
+    actions: [
+        Kirigami.Action {
+            text: i18nc("@action:button", "Add Folder…")
+            icon.name: "folder-new"
+            onTriggered: folderDialog.visible = true
+        },
+        Kirigami.Action {
+            text: i18nc("@action:button", "Add Files…")
+            icon.name: "document-new"
+            onTriggered: fileDialog.visible = true
+        }
+    ]
+
     function addPath(object) {
         pathModel.append( object )
         cfg_pathList.push( JSON.stringify(object) )
@@ -106,23 +119,6 @@ KCM.ScrollViewKCM {
             onRejected: {
                 console.log("Canceled")
             }
-        }
-    }
-
-    footer: RowLayout {
-        QQC2.Button {
-            icon.name: "folder-new"
-            onClicked: folderDialog.visible = true
-            text: i18nc("@action:button", "Add Folder…")
-        }
-
-        QQC2.Button {
-            icon.name: "document-new"
-            onClicked: fileDialog.visible = true
-            text: i18nc("@action:button", "Add Files…")
-        }
-        Item {
-            Layout.fillWidth: true
         }
     }
 }
