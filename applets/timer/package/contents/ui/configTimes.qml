@@ -17,6 +17,18 @@ KCM.ScrollViewKCM {
     property bool cfg_showSeconds
     readonly property int maxListSize: 15
 
+    actions: [
+        Kirigami.Action {
+            icon.name: "list-add"
+            text: i18nc("@action:button Add timer", "Add")
+            enabled: timeListModel.count < maxListSize
+            onTriggered: {
+                timeListModel.addTimer("0")
+                timeListView.positionViewAtEnd()
+            }
+        }
+    ]
+
     Component.onCompleted: {
         for (var i of plasmoid.configuration.predefinedTimers) {
             timeListModel.append({"time": i})
@@ -68,18 +80,6 @@ KCM.ScrollViewKCM {
             anchors.centerIn: parent
             width: parent.width - (Kirigami.Units.gridUnit * 4)
             text: i18n("If you add predefined timers here, they will appear in plasmoid context menu.");
-        }
-    }
-
-    footer: RowLayout {
-        QQC2.Button {
-            icon.name: "list-add"
-            text: i18n("Add")
-            enabled: timeListModel.count < maxListSize
-            onClicked: {
-                timeListModel.addTimer("0")
-                timeListView.positionViewAtEnd()
-            }
         }
     }
 
