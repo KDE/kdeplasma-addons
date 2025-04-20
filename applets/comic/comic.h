@@ -54,7 +54,6 @@ public:
     ~ComicApplet() override;
 
     void init() override;
-    QList<QAction *> contextualActions() override;
 
     // For QML
     QObject *comicsModel() const;
@@ -116,15 +115,13 @@ private Q_SLOTS:
     void slotTabChanged(const QString &newIdentifier);
     void slotNextDay();
     void slotPreviousDay();
-    void slotFirstDay();
-    void slotCurrentDay();
     void slotFoundLastStrip(int index, const QString &identifier, const QString &suffix);
     void slotGoJump();
     void slotSaveComicAs();
-    void slotScaleToContent();
+    void slotShowActualSize(bool show);
     void slotShop();
     void slotWebsite();
-    void slotStorePosition();
+    void slotStorePosition(bool store);
     void checkDayChanged();
 
 public Q_SLOTS:
@@ -140,6 +137,21 @@ public Q_SLOTS:
     Q_INVOKABLE void shop()
     {
         slotShop();
+    }
+
+    Q_INVOKABLE void website()
+    {
+        slotWebsite();
+    }
+
+    Q_INVOKABLE void storePosition(bool store)
+    {
+        slotStorePosition(store);
+    }
+
+    Q_INVOKABLE void saveComicAs()
+    {
+        slotSaveComicAs();
     }
 
     Q_INVOKABLE void tabChanged(const QString &newIdentifier)
@@ -184,17 +196,6 @@ private:
     int mMaxComicLimit;
     CheckNewStrips *mCheckNewStrips;
     QTimer *mDateChangedTimer;
-    QList<QAction *> mActions;
-    QAction *mActionGoFirst;
-    QAction *mActionGoLast;
-    QAction *mActionGoJump;
-    QAction *mActionScaleContent;
-    QAction *mActionWebsite;
-    QAction *mActionShop;
-    QAction *mActionStorePosition;
-    QAction *mActionNextNewStripTab;
-    QAction *mActionSaveComicAs;
-    QAction *mActionCreateComicBook;
     QSizeF mMaxSize;
     QSizeF mLastSize;
     QSizeF mIdealSize;

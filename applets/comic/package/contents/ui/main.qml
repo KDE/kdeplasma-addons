@@ -4,7 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.1
+import QtQuick
 import QtQuick.Layouts 1.1
 
 import org.kde.plasma.plasmoid 2.0
@@ -32,6 +32,70 @@ PlasmoidItem {
     readonly property bool showComicTitle: plasmoid.showComicTitle
     readonly property bool showErrorPicture: plasmoid.showErrorPicture
     readonly property bool middleClick: plasmoid.middleClick
+
+    Plasmoid.contextualActions: [
+        PlasmaCore.Action {
+            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready && plasmoid.comicData.nextNewStripEnabled
+            visible: Plasmoid.checkNewComicStripsInterval
+            text: i18nc("@action comic strip", "&Next Tab with a New Strip")
+            icon.name: "go-next-view"
+            shortcut: StandardKey.New
+            onTriggered: Plasmoid.showNextNewStrip()
+        },
+        PlasmaCore.Action {
+            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready && plasmoid.comicData.hasFirst
+            text: i18nc("@action", "Jump to &First Strip")
+            icon.name: "go-first"
+            onTriggered: Plasmoid.updateComic(plasmoid.comicData.first)
+        },
+        PlasmaCore.Action {
+            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            text: i18nc("@action", "Jump to &Current Strip")
+            icon.name: "go-last"
+            onTriggered: Plasmoid.updateComic("")
+        },
+        PlasmaCore.Action {
+            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            text: i18nc("@action", "Jump to Strip…")
+            icon.name: "go-jump"
+            onTriggered: plasmoid.goJump()
+        },
+        PlasmaCore.Action {
+            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            text: i18nc("@action", "Visit the Website")
+            onTriggered: plasmoid.website()
+        },
+        PlasmaCore.Action {
+            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready && plasmoid.comicData.shopUrl !== ""
+            text: i18nc("@action", "Visit the Shop &Website")
+            onTriggered: {
+                console.log("shopUrl:", plasmoid.comicData.shopUrl, plasmoid.comicData.shopUrl != "", plasmoid.comicData.id != "" && plasmoid.comicData.ready && plasmoid.comicData.shopUrl !== "", this.enabled)
+                plasmoid.shop()
+            }
+        },
+        PlasmaCore.Action {
+            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            text: i18nc("@action", "&Save Comic As…")
+            icon.name: "document-save-as"
+            onTriggered: plasmoid.saveComicAs()
+        },
+        PlasmaCore.Action {
+            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            text: i18nc("@option:check Context menu of comic image", "&Actual Size")
+            icon.name: "zoom-original"
+            checkable: true
+            checked: plasmoid.showActualSize ?? false
+            onTriggered: Plasmoid.showActualSize = this.checked
+        },
+        PlasmaCore.Action {
+            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            text: i18nc("@option:check Context menu of comic image", "Store Current &Position")
+            icon.name: "go-home"
+            checkable: true
+            checked: plasmoid.comicData.storePosition ?? false
+            onTriggered: Plasmoid.storePosition(this.checked)
+        }
+    ]
 
     fullRepresentation:  Item {
         anchors.fill: parent

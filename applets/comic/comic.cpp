@@ -52,7 +52,6 @@ ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVa
     , mCheckNewComicStripsInterval(0)
     , mMaxComicLimit(0)
     , mCheckNewStrips(nullptr)
-    , mActionShop(nullptr)
     , mEngine(new ComicEngine(this))
     , mSavingDir(nullptr)
 {
@@ -76,60 +75,6 @@ void ComicApplet::init()
 
     mCurrentDay = QDate::currentDate();
     connect(mDateChangedTimer, &QTimer::timeout, this, &ComicApplet::checkDayChanged);
-
-    mActionNextNewStripTab = new QAction(QIcon::fromTheme(QStringLiteral("go-next-view")), i18nc("@action comic strip", "&Next Tab with a New Strip"), this);
-    mActionNextNewStripTab->setShortcuts(KStandardShortcut::openNew());
-    setInternalAction(QStringLiteral("next new strip"), mActionNextNewStripTab);
-    mActions.append(mActionNextNewStripTab);
-    connect(mActionNextNewStripTab, &QAction::triggered, this, &ComicApplet::showNextNewStrip);
-
-    mActionGoFirst = new QAction(QIcon::fromTheme(QStringLiteral("go-first")), i18nc("@action", "Jump to &First Strip"), this);
-    mActions.append(mActionGoFirst);
-    connect(mActionGoFirst, &QAction::triggered, this, &ComicApplet::slotFirstDay);
-
-    mActionGoLast = new QAction(QIcon::fromTheme(QStringLiteral("go-last")), i18nc("@action", "Jump to &Current Strip"), this);
-    mActions.append(mActionGoLast);
-    connect(mActionGoLast, &QAction::triggered, this, &ComicApplet::slotCurrentDay);
-
-    mActionGoJump = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")), i18nc("@action", "Jump to Strip…"), this);
-    mActions.append(mActionGoJump);
-    connect(mActionGoJump, &QAction::triggered, this, &ComicApplet::slotGoJump);
-
-    mActionWebsite = new QAction(i18nc("@action", "Visit the Website"), this);
-    KService::Ptr browser = KApplicationTrader::preferredService(QStringLiteral("x-scheme-handler/https"));
-
-    if (browser) {
-        mActionWebsite->setText(i18nc("@action:inmenu %1 is the name of a web browser", "View in %1", browser->name()));
-        mActionWebsite->setIcon(QIcon::fromTheme(browser->icon()));
-    }
-
-    mActionWebsite->setEnabled(false);
-    mActions.append(mActionWebsite);
-    connect(mActionWebsite, &QAction::triggered, this, &ComicApplet::slotWebsite);
-
-    mActionShop = new QAction(i18nc("@action", "Visit the Shop &Website"), this);
-    mActionShop->setEnabled(false);
-    mActions.append(mActionShop);
-    connect(mActionShop, &QAction::triggered, this, &ComicApplet::slotShop);
-
-    mActionSaveComicAs = new QAction(QIcon::fromTheme(QStringLiteral("document-save-as")), i18nc("@action", "&Save Comic As…"), this);
-    mActions.append(mActionSaveComicAs);
-    connect(mActionSaveComicAs, &QAction::triggered, this, &ComicApplet::slotSaveComicAs);
-
-    mActionScaleContent = new QAction(QIcon::fromTheme(QStringLiteral("zoom-original")), //
-                                      i18nc("@option:check Context menu of comic image", "&Actual Size"),
-                                      this);
-    mActionScaleContent->setCheckable(true);
-    mActionScaleContent->setChecked(mCurrent.scaleComic());
-    mActions.append(mActionScaleContent);
-    connect(mActionScaleContent, &QAction::triggered, this, &ComicApplet::slotScaleToContent);
-
-    mActionStorePosition =
-        new QAction(QIcon::fromTheme(QStringLiteral("go-home")), i18nc("@option:check Context menu of comic image", "Store Current &Position"), this);
-    mActionStorePosition->setCheckable(true);
-    mActionStorePosition->setChecked(mCurrent.hasStored());
-    mActions.append(mActionStorePosition);
-    connect(mActionStorePosition, &QAction::triggered, this, &ComicApplet::slotStorePosition);
 
     // make sure that tabs etc. are displayed even if the comic strip in the first tab does not work
     updateView();
@@ -185,11 +130,10 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
     KConfigGroup cg = config();
     if (!data.error && !mCurrent.hasNext() && mCheckNewComicStripsInterval) {
         setTabHighlighted(mCurrent.id(), false);
-        mActionNextNewStripTab->setEnabled(isTabHighlighted(mCurrent.id()));
     }
 
     // call the slot to check if the position needs to be saved
-    slotStorePosition();
+    slotStorePosition(mCurrent.hasStored());
 
     // prefetch the previous and following comic for faster navigation
     if (!data.error && mCurrent.hasNext()) {
@@ -204,6 +148,7 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
     updateView();
 
     refreshComicData();
+    Q_EMIT showActualSizeChanged(); // if switching comics the new one might have a different setting
 }
 
 void ComicApplet::updateView()
@@ -224,12 +169,6 @@ void ComicApplet::changeComic(bool differentComic)
 {
     if (differentComic) {
         KConfigGroup cg = config();
-        mActionStorePosition->setChecked(mCurrent.storePosition());
-
-        // assign mScaleComic the moment the new strip has been loaded (dataUpdated) as up to this point
-        // the old one should be still shown with its scaling settings
-        mActionScaleContent->setChecked(mCurrent.scaleComic());
-
         updateComic(mCurrent.stored());
     } else {
         updateComic(mCurrent.current());
@@ -274,9 +213,6 @@ void ComicApplet::updateUsedComics()
             ++tab;
         }
     }
-
-    mActionNextNewStripTab->setVisible(mCheckNewComicStripsInterval);
-    mActionNextNewStripTab->setEnabled(isTabHighlighted(mCurrent.id()));
 
     delete mCheckNewStrips;
     mCheckNewStrips = nullptr;
@@ -370,16 +306,6 @@ void ComicApplet::slotPreviousDay()
     updateComic(mCurrent.prev());
 }
 
-void ComicApplet::slotFirstDay()
-{
-    updateComic(mCurrent.first());
-}
-
-void ComicApplet::slotCurrentDay()
-{
-    updateComic(QString());
-}
-
 void ComicApplet::slotFoundLastStrip(int index, const QString &identifier, const QString &suffix)
 {
     Q_UNUSED(index)
@@ -404,9 +330,9 @@ void ComicApplet::slotGoJump()
     selector->select(mCurrent);
 }
 
-void ComicApplet::slotStorePosition()
+void ComicApplet::slotStorePosition(bool store)
 {
-    mCurrent.storePosition(mActionStorePosition->isChecked());
+    mCurrent.storePosition(store);
 }
 
 void ComicApplet::slotWebsite()
@@ -419,11 +345,6 @@ void ComicApplet::slotShop()
 {
     auto *job = new KIO::OpenUrlJob(mCurrent.shopUrl());
     job->start();
-}
-
-QList<QAction *> ComicApplet::contextualActions()
-{
-    return mActions;
 }
 
 void ComicApplet::updateComic(const QString &identifierSuffix)
@@ -443,7 +364,7 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
         }
         mOldSource = identifier;
         mEngine->requestSource(identifier);
-        slotScaleToContent();
+        slotShowActualSize(mCurrent.showActualSize());
     } else {
         setBusy(false);
         qCWarning(PLASMA_COMIC) << "Either no identifier was specified or the engine could not be created:"
@@ -457,29 +378,6 @@ void ComicApplet::updateContextMenu()
     if (mCurrent.id().isEmpty()) {
         mActiveComicModel->clear();
     }
-
-    if (mCurrent.id().isEmpty() || !mCurrent.ready()) {
-        mActionNextNewStripTab->setEnabled(false);
-        mActionGoFirst->setEnabled(false);
-        mActionGoLast->setEnabled(false);
-        mActionScaleContent->setEnabled(false);
-        mActionWebsite->setEnabled(false);
-        mActionShop->setEnabled(false);
-        mActionStorePosition->setEnabled(false);
-        mActionGoJump->setEnabled(false);
-        mActionSaveComicAs->setEnabled(false);
-        mActionScaleContent->setChecked(false);
-    } else {
-        mActionGoFirst->setVisible(mCurrent.hasFirst());
-        mActionGoFirst->setEnabled(mCurrent.hasPrev());
-        mActionGoLast->setEnabled(true);
-        mActionWebsite->setEnabled(true);
-        mActionShop->setEnabled(mCurrent.shopUrl().isValid());
-        mActionScaleContent->setEnabled(true);
-        mActionStorePosition->setEnabled(true);
-        mActionGoJump->setEnabled(true);
-        mActionSaveComicAs->setEnabled(true);
-    }
 }
 
 void ComicApplet::slotSaveComicAs()
@@ -488,9 +386,9 @@ void ComicApplet::slotSaveComicAs()
     saver.save(mCurrent);
 }
 
-void ComicApplet::slotScaleToContent()
+void ComicApplet::slotShowActualSize(bool scale)
 {
-    setShowActualSize(mActionScaleContent->isChecked());
+    setShowActualSize(scale);
 }
 
 // QML
@@ -641,6 +539,7 @@ void ComicApplet::setTabIdentifiers(const QStringList &tabs)
 
 void ComicApplet::refreshComicData()
 {
+    mComicData[QStringLiteral("id")] = mCurrent.id();
     mComicData[QStringLiteral("image")] = mCurrent.image();
     mComicData[QStringLiteral("prev")] = mCurrent.prev();
     mComicData[QStringLiteral("next")] = mCurrent.next();
@@ -649,8 +548,9 @@ void ComicApplet::refreshComicData()
     mComicData[QStringLiteral("websiteUrl")] = mCurrent.websiteUrl().toString();
     mComicData[QStringLiteral("websiteHost")] = mCurrent.websiteUrl().host();
     mComicData[QStringLiteral("imageUrl")] = mCurrent.websiteUrl().toString();
-    mComicData[QStringLiteral("shopUrl")] = mCurrent.websiteUrl().toString();
+    mComicData[QStringLiteral("shopUrl")] = mCurrent.shopUrl().toString();
     mComicData[QStringLiteral("first")] = mCurrent.first();
+    mComicData[QStringLiteral("hasFirst")] = mCurrent.hasFirst();
     mComicData[QStringLiteral("stripTitle")] = mCurrent.stripTitle();
     mComicData[QStringLiteral("author")] = mCurrent.author();
     mComicData[QStringLiteral("title")] = mCurrent.title();
@@ -664,22 +564,25 @@ void ComicApplet::refreshComicData()
     mComicData[QStringLiteral("isLeftToRight")] = mCurrent.isLeftToRight();
     mComicData[QStringLiteral("isTopToBottom")] = mCurrent.isTopToBottom();
     mComicData[QStringLiteral("isError")] = mCurrent.isError();
+    mComicData[QStringLiteral("storePosition")] = mCurrent.storePosition();
+    mComicData[QStringLiteral("ready")] = mCurrent.ready();
+    mComicData[QStringLiteral("nextNewStripEnabled")] = isTabHighlighted(mCurrent.id());
 
     Q_EMIT comicDataChanged();
 }
 
 bool ComicApplet::showActualSize() const
 {
-    return mCurrent.scaleComic();
+    return mCurrent.showActualSize();
 }
 
 void ComicApplet::setShowActualSize(bool show)
 {
-    if (show == mCurrent.scaleComic()) {
+    if (show == mCurrent.showActualSize()) {
         return;
     }
 
-    mCurrent.setScaleComic(show);
+    mCurrent.setShowActualSize(show);
 
     Q_EMIT showActualSizeChanged();
 }

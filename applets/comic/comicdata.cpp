@@ -24,14 +24,14 @@ void ComicData::init(const QString &id, const KConfigGroup &config)
 
 void ComicData::load()
 {
-    mScaleComic = mCfg.readEntry(QLatin1String("scaleToContent_") + mId, false);
+    mShowActualSize = mCfg.readEntry(QLatin1String("scaleToContent_") + mId, false);
     mMaxStripNum = mCfg.readEntry(QLatin1String("maxStripNum_") + mId, 0);
     mStored = mCfg.readEntry(QLatin1String("storedPosition_") + mId, QString());
 }
 
 void ComicData::save()
 {
-    mCfg.writeEntry(QLatin1String("scaleToContent_") + mId, mScaleComic);
+    mCfg.writeEntry(QLatin1String("scaleToContent_") + mId, mShowActualSize);
     mCfg.writeEntry(QLatin1String("maxStripNum_") + mId, mMaxStripNum);
     mCfg.writeEntry(QLatin1String("storedPosition_") + id(), mStored);
 
@@ -42,9 +42,9 @@ void ComicData::save()
     }
 }
 
-void ComicData::setScaleComic(bool scale)
+void ComicData::setShowActualSize(bool show)
 {
-    mScaleComic = scale;
+    mShowActualSize = show;
     save();
 }
 

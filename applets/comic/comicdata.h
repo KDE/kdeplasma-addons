@@ -154,9 +154,9 @@ public:
         return mImage;
     }
 
-    bool scaleComic() const
+    bool showActualSize() const
     {
-        return mScaleComic;
+        return mShowActualSize;
     }
 
     bool isLeftToRight() const
@@ -174,7 +174,7 @@ public:
         return !mStored.isEmpty();
     }
 
-    void setScaleComic(bool scale);
+    void setShowActualSize(bool show);
 
     QString errorStrip() const
     {
@@ -233,7 +233,7 @@ private:
     int mFirstStripNum = 0;
     int mMaxStripNum = 0;
 
-    bool mScaleComic = false;
+    bool mShowActualSize = false;
     bool mIsLeftToRight = false;
     bool mIsTopToBottom = false;
     bool mReady = false;
