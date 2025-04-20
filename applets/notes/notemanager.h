@@ -11,6 +11,7 @@
 #include <QObject>
 #include <QPointer>
 #include <QSharedPointer>
+#include <qqmlregistration.h>
 
 #include "abstractnoteloader.h"
 class Note;
@@ -18,6 +19,7 @@ class Note;
 class NoteManager : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     explicit NoteManager(QObject *parent = nullptr);

@@ -9,10 +9,13 @@
 #define NOTE_H
 
 #include <QObject>
+#include <qqmlregistration.h>
 
 class Note : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_UNCREATABLE("Create through NoteManager")
     Q_PROPERTY(QString id READ id CONSTANT)
     Q_PROPERTY(QString noteText READ noteText NOTIFY noteTextChanged)
 
