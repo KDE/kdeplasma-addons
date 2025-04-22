@@ -36,9 +36,10 @@ Q_DECLARE_TYPEINFO(UnitItem, Q_MOVABLE_TYPE);
 class AbstractUnitListModel : public QAbstractListModel
 {
     Q_OBJECT
+    Q_PROPERTY(int defaultUnit READ defaultUnitId CONSTANT)
 
 public:
-    explicit AbstractUnitListModel(const QList<UnitItem> &items, QObject *parent = nullptr);
+    explicit AbstractUnitListModel(const QList<UnitItem> &items, int defaultUnitId, QObject *parent = nullptr);
 
 public: // QAbstractListModel API
     QVariant data(const QModelIndex &index, int role) const override;
@@ -47,9 +48,11 @@ public: // QAbstractListModel API
 public:
     Q_INVOKABLE int listIndexForUnitId(int unitId) const;
     Q_INVOKABLE int unitIdForListIndex(int listIndex) const;
+    int defaultUnitId() const;
 
 private:
     const QList<UnitItem> m_items;
+    const int m_defaultIndex;
 };
 
 #endif // ABSTRACTUNITLISTMODEL_H

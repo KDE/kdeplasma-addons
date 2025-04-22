@@ -27,10 +27,10 @@ PlasmoidItem {
 
     readonly property string weatherSource: Plasmoid.configuration.source
     readonly property int updateInterval: Plasmoid.configuration.updateInterval
-    readonly property int displayTemperatureUnit: Plasmoid.configuration.temperatureUnit
-    readonly property int displaySpeedUnit: Plasmoid.configuration.speedUnit
-    readonly property int displayPressureUnit: Plasmoid.configuration.pressureUnit
-    readonly property int displayVisibilityUnit: Plasmoid.configuration.visibilityUnit
+    readonly property int displayTemperatureUnit: Plasmoid.configuration.temperatureUnit || TemperatureUnitListModel.defaultUnit
+    readonly property int displaySpeedUnit: Plasmoid.configuration.speedUnit || WindSpeedUnitListModel.defaultUnit
+    readonly property int displayPressureUnit: Plasmoid.configuration.pressureUnit ||  PressureUnitListModel.defaultUnit
+    readonly property int displayVisibilityUnit: Plasmoid.configuration.visibilityUnit || VisibilityUnitListModel.defaultUnit
 
     property int status: Util.Normal
 
