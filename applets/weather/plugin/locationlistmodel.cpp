@@ -135,6 +135,11 @@ void LocationListModel::initProviders()
     }
 }
 
+bool LocationListModel::hasProviders() const
+{
+    return !m_validators.isEmpty();
+}
+
 QVariant LocationListModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid() || index.row() >= m_locations.size()) {

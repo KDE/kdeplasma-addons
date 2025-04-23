@@ -66,6 +66,7 @@ class LocationListModel : public QAbstractListModel, public Plasma5Support::Data
 {
     Q_OBJECT
     Q_PROPERTY(bool validatingInput READ isValidatingInput NOTIFY validatingInputChanged)
+    Q_PROPERTY(bool hasProviders READ hasProviders CONSTANT)
 
 public:
     explicit LocationListModel(QObject *parent = nullptr);
@@ -75,11 +76,9 @@ public: // QAbstractListModel API
     int rowCount(const QModelIndex &index) const override;
 
 public:
-    bool isValidatingInput() const;
-
-public:
     Q_INVOKABLE QString nameForListIndex(int listIndex) const;
     Q_INVOKABLE QString valueForListIndex(int listIndex) const;
+    Q_INVOKABLE QString providerName(const QString &providerId) const;
     Q_INVOKABLE void searchLocations(const QString &searchString);
     Q_INVOKABLE void clear();
 
@@ -92,6 +91,9 @@ private:
     void addSources(const QMap<QString, QString> &sources);
     void validatorError(const QString &error);
     void completeSearch();
+
+    bool isValidatingInput() const;
+    bool hasProviders() const;
 
 private:
     QList<LocationItem> m_locations;

@@ -1,14 +1,5 @@
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.weather\")
 
-kcoreaddons_add_plugin(org.kde.plasma.weather SOURCES weatherapplet.cpp INSTALL_NAMESPACE "plasma/applets")
-
-target_link_libraries(org.kde.plasma.weather
-    Plasma::Plasma
-    Plasma::Plasma5Support
-    KF6::UnitConversion
-    KF6::I18n
-)
-
 install(FILES wind-arrows.svgz DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/weather/)
 plasma_install_package(package org.kde.plasma.weather)
 
