@@ -108,7 +108,7 @@ KCM.ScrollViewKCM {
                         locationListModel.clear();
                         return;
                     }
-                    locationListModel.searchLocations(searchStringEdit.text, Object.keys(providers));
+                    locationListModel.searchLocations(searchStringEdit.text);
                 }
             }
 

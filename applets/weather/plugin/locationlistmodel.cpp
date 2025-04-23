@@ -1,6 +1,7 @@
 /*
  * SPDX-FileCopyrightText: 2009 Petri Damstén <damu@iki.fi>
  * SPDX-FileCopyrightText: 2016, 2018 Friedrich W. H. Kossebau <kossebau@kde.org>
+ * SPDX-FileCopyrightText: 2025 Ismael Asensio <isma.af@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -103,6 +104,35 @@ LocationListModel::LocationListModel(QObject *parent)
     , m_validatingInput(false)
     , m_checkedInCount(0)
 {
+    initProviders();
+}
+
+void LocationListModel::initProviders()
+{
+    qDeleteAll(m_validators);
+    m_validators.clear();
+
+    // The data engine is managed by the base class and should not be deleted
+    Plasma5Support::DataEngine *weatherEngine = dataEngine(QStringLiteral("weather"));
+    const QVariantList plugins = weatherEngine->containerForSource(QStringLiteral("ions"))->data().values();
+
+    for (const QVariant &plugin : plugins) {
+        const QStringList pluginInfo = plugin.toString().split(QLatin1Char('|'));
+        if (pluginInfo.count() < 2) {
+            continue;
+        }
+
+        const QString &ionName = pluginInfo[0];
+        const QString &ionId = pluginInfo[1];
+
+        m_serviceCodeToDisplayName[ionId] = ionName;
+
+        auto validator = new WeatherValidator(weatherEngine, ionId, this);
+        connect(validator, &WeatherValidator::error, this, &LocationListModel::validatorError);
+        connect(validator, &WeatherValidator::finished, this, &LocationListModel::addSources);
+
+        m_validators.append(validator);
+    }
 }
 
 QVariant LocationListModel::data(const QModelIndex &index, int role) const
@@ -157,13 +187,14 @@ QString LocationListModel::nameForListIndex(int listIndex) const
     return QString();
 }
 
-void LocationListModel::searchLocations(const QString &searchString, const QStringList &services)
+QString LocationListModel::providerName(const QString &providerId) const
+{
+    return m_serviceCodeToDisplayName.value(providerId, providerId);
+}
+
+void LocationListModel::searchLocations(const QString &searchString)
 {
     m_checkedInCount = 0;
-
-    // reset current validators
-    qDeleteAll(m_validators);
-    m_validators.clear();
 
     m_searchString = searchString;
 
@@ -176,33 +207,9 @@ void LocationListModel::searchLocations(const QString &searchString, const QStri
     m_locations.clear();
     endResetModel();
 
-    if (searchString.isEmpty()) {
+    if (searchString.isEmpty() || m_validators.isEmpty()) {
         completeSearch();
         return;
-    }
-
-    Plasma5Support::DataEngine *dataengine = dataEngine(QStringLiteral("weather"));
-
-    const QVariantList plugins = dataengine->containerForSource(QStringLiteral("ions"))->data().values();
-    for (const QVariant &plugin : plugins) {
-        const QStringList pluginInfo = plugin.toString().split(QLatin1Char('|'));
-        if (pluginInfo.count() > 1) {
-            const QString &ionId = pluginInfo[1];
-            if (!services.contains(ionId)) {
-                continue;
-            }
-
-            m_serviceCodeToDisplayName[pluginInfo[1]] = pluginInfo[0];
-
-            // qDebug() << "ion: " << pluginInfo[0] << pluginInfo[1];
-            // d->ions.insert(pluginInfo[1], pluginInfo[0]);
-
-            auto *validator = new WeatherValidator(dataengine, ionId, this);
-            connect(validator, &WeatherValidator::error, this, &LocationListModel::validatorError);
-            connect(validator, &WeatherValidator::finished, this, &LocationListModel::addSources);
-
-            m_validators.append(validator);
-        }
     }
 
     for (auto *validator : std::as_const(m_validators)) {
