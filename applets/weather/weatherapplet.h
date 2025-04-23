@@ -24,14 +24,10 @@ class WeatherApplet : public Plasma::Applet, public Plasma5Support::DataEngineCo
 public:
     WeatherApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
     ~WeatherApplet() override;
-    void init() override;
 
 Q_SIGNALS:
     void needsToBeSquareChanged();
     void providersChanged();
-
-private:
-    void setDefaultUnits();
 
 private:
     QVariantMap m_providers;

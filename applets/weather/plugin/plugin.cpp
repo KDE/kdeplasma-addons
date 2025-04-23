@@ -8,13 +8,25 @@
 #include "locationlistmodel.h"
 #include "util.h"
 
+#include <QLocale>
 #include <QQmlEngine>
 #include <QQmlExtensionPlugin>
 
+static bool isMetric()
+{
+    return QLocale().measurementSystem() == QLocale::MetricSystem;
+}
+
 static QObject *temperatureUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
 {
-    QList<UnitItem> items{UnitItem(KUnitConversion::Celsius), UnitItem(KUnitConversion::Fahrenheit), UnitItem(KUnitConversion::Kelvin)};
-    return new AbstractUnitListModel(items, engine);
+    QList<UnitItem> items{
+        UnitItem(KUnitConversion::Celsius),
+        UnitItem(KUnitConversion::Fahrenheit),
+        UnitItem(KUnitConversion::Kelvin),
+    };
+
+    const int defaultUnitId = isMetric() ? KUnitConversion::Celsius : KUnitConversion::Fahrenheit;
+    return new AbstractUnitListModel(items, defaultUnitId, engine);
 }
 
 static QObject *pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
@@ -28,7 +40,8 @@ static QObject *pressureUnitListModelSingletonTypeProvider(QQmlEngine *engine, Q
         UnitItem(KUnitConversion::MillimetersOfMercury),
     };
 
-    return new AbstractUnitListModel(items, engine);
+    const int defaultUnitId = isMetric() ? KUnitConversion::Hectopascal : KUnitConversion::InchesOfMercury;
+    return new AbstractUnitListModel(items, defaultUnitId, engine);
 }
 
 static QObject *windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
@@ -41,14 +54,19 @@ static QObject *windSpeedUnitListModelSingletonTypeProvider(QQmlEngine *engine, 
         UnitItem(KUnitConversion::Beaufort),
     };
 
-    return new AbstractUnitListModel(items, engine);
+    const int defaultUnitId = isMetric() ? KUnitConversion::MeterPerSecond : KUnitConversion::MilePerHour;
+    return new AbstractUnitListModel(items, defaultUnitId, engine);
 }
 
 static QObject *visibilityUnitListModelSingletonTypeProvider(QQmlEngine *engine, QJSEngine * /*scriptEngine*/)
 {
-    QList<UnitItem> items{UnitItem(KUnitConversion::Kilometer), UnitItem(KUnitConversion::Mile)};
+    QList<UnitItem> items{
+        UnitItem(KUnitConversion::Kilometer),
+        UnitItem(KUnitConversion::Mile),
+    };
 
-    return new AbstractUnitListModel(items, engine);
+    const int defaultUnitId = isMetric() ? KUnitConversion::Kilometer : KUnitConversion::Mile;
+    return new AbstractUnitListModel(items, defaultUnitId, engine);
 }
 
 static QObject *utilSingletonTypeProvider(QQmlEngine * /*engine*/, QJSEngine * /*scriptEngine*/)

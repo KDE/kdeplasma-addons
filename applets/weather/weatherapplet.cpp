@@ -38,30 +38,6 @@ WeatherApplet::~WeatherApplet()
 {
 }
 
-void WeatherApplet::init()
-{
-    setDefaultUnits();
-}
-
-// Plasma XML configuration is loaded at runtime, so it's not possible to set locale aware defaults.
-// We set them here if the corresponding key is not already in the configuration
-void WeatherApplet::setDefaultUnits()
-{
-    KConfigGroup cfg = config().group(QStringLiteral("Units"));
-    const bool isMetric = (QLocale().measurementSystem() == QLocale::MetricSystem);
-
-    auto setLocaleAwareDefault = [&cfg, isMetric](const QString &key, KUnitConversion::UnitId metricDefault, KUnitConversion::UnitId imperialDefault) {
-        if (!cfg.hasKey(key)) {
-            cfg.writeEntry(key, static_cast<int>(isMetric ? metricDefault : imperialDefault));
-        }
-    };
-
-    setLocaleAwareDefault(QStringLiteral("temperatureUnit"), KUnitConversion::Celsius, KUnitConversion::Fahrenheit);
-    setLocaleAwareDefault(QStringLiteral("speedUnit"), KUnitConversion::MeterPerSecond, KUnitConversion::MilePerHour);
-    setLocaleAwareDefault(QStringLiteral("pressureUnit"), KUnitConversion::Hectopascal, KUnitConversion::InchesOfMercury);
-    setLocaleAwareDefault(QStringLiteral("visibilityUnit"), KUnitConversion::Kilometer, KUnitConversion::Mile);
-}
-
 K_PLUGIN_CLASS(WeatherApplet)
 
 #include "weatherapplet.moc"
