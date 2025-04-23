@@ -421,13 +421,6 @@ PlasmoidItem {
         observationModel: root.observationModel
     }
 
-    Binding {
-        target: Plasmoid
-        property: "needsToBeSquare"
-        value: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment)
-                | (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
-    }
-
     onWeatherSourceChanged: {
         if (weatherSource.length === 0) {
             status = Util.NeedsConfiguration

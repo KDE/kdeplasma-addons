@@ -16,9 +16,6 @@
 class WeatherApplet : public Plasma::Applet, public Plasma5Support::DataEngineConsumer
 {
     Q_OBJECT
-    // used for making this information available to the config pages
-    Q_PROPERTY(bool needsToBeSquare MEMBER m_needsToBeSquare NOTIFY needsToBeSquareChanged FINAL)
-
     Q_PROPERTY(QVariantMap providers MEMBER m_providers NOTIFY providersChanged FINAL)
 
 public:
@@ -26,12 +23,10 @@ public:
     ~WeatherApplet() override;
 
 Q_SIGNALS:
-    void needsToBeSquareChanged();
     void providersChanged();
 
 private:
     QVariantMap m_providers;
-    bool m_needsToBeSquare = false;
 };
 
 #endif

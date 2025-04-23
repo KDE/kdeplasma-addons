@@ -9,12 +9,15 @@ import QtQuick
 import QtQuick.Controls as QQC2
 
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasmoid
 import org.kde.plasma.private.weather
 import org.kde.kcmutils as KCM
 
+
 KCM.SimpleKCM {
-    readonly property bool canShowMoreInCompactMode: !Plasmoid.needsToBeSquare
+    readonly property bool needsToBeSquare: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment)
+        || (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
 
     property bool cfg_showTemperatureInCompactMode
     property bool cfg_showTemperatureInBadge
@@ -41,15 +44,15 @@ KCM.SimpleKCM {
         QQC2.RadioButton {
             id: radioTempInBadge
             Kirigami.FormData.label: i18nc("@label", "Show temperature:")
-            checked: cfg_showTemperatureInCompactMode && (cfg_showTemperatureInBadge || !canShowMoreInCompactMode)
+            checked: cfg_showTemperatureInCompactMode && (cfg_showTemperatureInBadge || needsToBeSquare)
             onToggled: setShowTemperature(true, true)
             text: i18nc("@option:radio Show temperature:", "Over the widget icon")
         }
 
         QQC2.RadioButton {
             id: radioTempBesideIcon
-            visible: canShowMoreInCompactMode
-            checked: cfg_showTemperatureInCompactMode && !cfg_showTemperatureInBadge && canShowMoreInCompactMode
+            visible: !needsToBeSquare
+            checked: cfg_showTemperatureInCompactMode && !cfg_showTemperatureInBadge && !needsToBeSquare
             onToggled: setShowTemperature(true, false)
             text: i18nc("@option:radio Show temperature:", "Beside the widget icon")
         }

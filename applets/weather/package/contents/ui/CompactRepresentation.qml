@@ -21,7 +21,10 @@ Loader {
 
     readonly property bool vertical: (Plasmoid.formFactor == PlasmaCore.Types.Vertical)
     readonly property bool showTemperature: Plasmoid.configuration.showTemperatureInCompactMode
-    readonly property bool useBadge: Plasmoid.configuration.showTemperatureInBadge || Plasmoid.needsToBeSquare
+
+    readonly property bool needsToBeSquare: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment)
+        || (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
+    readonly property bool useBadge: Plasmoid.configuration.showTemperatureInBadge || needsToBeSquare
 
     sourceComponent: (showTemperature && !useBadge) ? iconAndTextComponent : iconComponent
     Layout.fillWidth: compactRoot.vertical
