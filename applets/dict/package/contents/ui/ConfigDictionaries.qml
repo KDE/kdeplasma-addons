@@ -7,13 +7,22 @@
 import QtQuick 2.15
 import QtQuick.Controls 2.5
 import QtQuick.Layouts 1.15
-import org.kde.kirigami 2.19 as Kirigami
+import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 import org.kde.plasma.private.dict 1.0
 
 KCM.ScrollViewKCM {
 
     property string cfg_dictionary: ""
+
+    actions: [
+        Kirigami.Action {
+            enabled: sheet.view.count > 0
+            text: i18nc("@action:button Add more dictionaries", "Add More…")
+            icon.name: "list-add"
+            onTriggered: sheet.open()
+        }
+    ]
 
     DictionariesModel {
         id: dictionariesModel
@@ -88,17 +97,6 @@ KCM.ScrollViewKCM {
                     icon.name: "edit-none"
                     text: i18n("No dictionaries")
                 }
-            }
-        }
-    }
-
-    footer: RowLayout {
-        Button {
-            enabled: sheet.view.count > 0
-            text: i18n("Add More…")
-            icon.name: "list-add"
-            onClicked: {
-                sheet.open();
             }
         }
     }
