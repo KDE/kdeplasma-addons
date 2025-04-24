@@ -23,6 +23,9 @@ KCM.SimpleKCM {
     property alias cfg_showNotification: showNotification.checked
     property alias cfg_notificationText: notificationText.text
 
+    property alias cfg_runCommand: runCommand.checked
+    property alias cfg_command: command.text
+
     Kirigami.FormLayout {
         RowLayout {
             Layout.fillWidth: true
@@ -75,11 +78,11 @@ KCM.SimpleKCM {
         RowLayout {
             Layout.fillWidth: true
 
-            Kirigami.FormData.label: i18nc("@title:label", "Notifications:")
+            Kirigami.FormData.label: i18nc("@title:label", "On timeout:")
 
             QQC2.CheckBox {
                 id: showNotification
-                text: i18nc("@option:check", "Show notification text:");
+                text: i18nc("@option:check", "Show notification:");
                 onClicked: {
                     if (checked) {
                         notificationText.forceActiveFocus();
@@ -91,6 +94,29 @@ KCM.SimpleKCM {
                 id: notificationText
                 Layout.fillWidth: true
                 enabled: showNotification.checked
+                placeholderText: i18nc("@placeholder", "Timer finished")
+            }
+        }
+
+        RowLayout {
+            Layout.fillWidth: true
+            spacing: Kirigami.Units.smallSpacing
+
+            QQC2.CheckBox {
+                id: runCommand
+                text: i18nc("@option:check", "Run command:")
+                onClicked: {
+                    if (checked) {
+                        command.forceActiveFocus();
+                    }
+                }
+            }
+
+            QQC2.TextField {
+                id: command
+                Layout.fillWidth: true
+                enabled: runCommand.checked
+                placeholderText: i18nc("@placeholder", "kdialog --msgbox 'Timer finished'")
             }
         }
     }
