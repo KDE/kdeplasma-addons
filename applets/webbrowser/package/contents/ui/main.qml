@@ -65,6 +65,9 @@ PlasmoidItem {
                 enabled: webview.canGoBack
                 display: PlasmaComponents3.AbstractButton.IconOnly
                 text: i18nc("@action:button", "Go Back")
+                PlasmaComponents3.ToolTip.visible: hovered
+                PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents3.ToolTip.text: text
             }
             PlasmaComponents3.Button {
                 icon.name: "go-next-symbolic"
@@ -72,6 +75,9 @@ PlasmoidItem {
                 enabled: webview.canGoForward
                 display: PlasmaComponents3.AbstractButton.IconOnly
                 text: i18nc("@action:button", "Go Forward")
+                PlasmaComponents3.ToolTip.visible: hovered
+                PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents3.ToolTip.text: text
             }
             PlasmaComponents3.Button {
                 id: goHomeButton
@@ -80,9 +86,9 @@ PlasmoidItem {
                 display: PlasmaComponents3.AbstractButton.IconOnly
                 visible: plasmoid.configuration.useDefaultUrl
                 text: i18nc("@action:button", "Go Home")
-                PlasmaComponents3.ToolTip {
-                    text: goHomeButton.text
-                }
+                PlasmaComponents3.ToolTip.visible: hovered
+                PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents3.ToolTip.text: text
                 Accessible.name: goHomeButton.text
                 Accessible.description: i18n("Open Default URL")
             }
@@ -119,6 +125,10 @@ PlasmoidItem {
 
                 onClicked: cb();
 
+                PlasmaComponents3.ToolTip.visible: hovered
+                PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents3.ToolTip.text: text
+
                 PlasmaComponents3.ToolTip {
                     id: tooltip
                 }
@@ -141,6 +151,9 @@ PlasmoidItem {
                 icon.name: webview.loading ? "process-stop-symbolic" : "view-refresh-symbolic"
                 text: webview.loading ? i18nc("@action:button", "Stop Loading This Page") : i18nc("@action:button", "Reload This Page")
                 onClicked: webview.loading ? webview.stop() : webview.reload()
+                PlasmaComponents3.ToolTip.visible: hovered
+                PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents3.ToolTip.text: text
             }
         }
 
