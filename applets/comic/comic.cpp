@@ -46,7 +46,6 @@ ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVa
     , mShowComicAuthor(false)
     , mShowComicTitle(false)
     , mShowComicIdentifier(false)
-    , mShowErrorPicture(true)
     , mArrowsOnHover(true)
     , mMiddleClick(true)
     , mCheckNewComicStripsInterval(0)
@@ -116,10 +115,6 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
     // there was an error, display information as image
     if (data.error) {
         mPreviousFailedIdentifier = source;
-        if (!mShowErrorPicture && !data.previousIdentifier.isEmpty()) {
-            updateComic(data.previousIdentifier);
-            return;
-        }
     } else {
         mPreviousFailedIdentifier.clear();
     }
@@ -263,7 +258,6 @@ void ComicApplet::configChanged()
     mShowComicAuthor = cg.readEntry("showComicAuthor", false);
     mShowComicTitle = cg.readEntry("showComicTitle", false);
     mShowComicIdentifier = cg.readEntry("showComicIdentifier", false);
-    mShowErrorPicture = cg.readEntry("showErrorPicture", true);
     mArrowsOnHover = cg.readEntry("arrowsOnHover", true);
     mMiddleClick = cg.readEntry("middleClick", true);
     mCheckNewComicStripsInterval = cg.readEntry("checkNewComicStripsIntervall", 30);
@@ -288,7 +282,6 @@ void ComicApplet::saveConfig()
     cg.writeEntry("showComicAuthor", mShowComicAuthor);
     cg.writeEntry("showComicTitle", mShowComicTitle);
     cg.writeEntry("showComicIdentifier", mShowComicIdentifier);
-    cg.writeEntry("showErrorPicture", mShowErrorPicture);
     cg.writeEntry("arrowsOnHover", mArrowsOnHover);
     cg.writeEntry("middleClick", mMiddleClick);
     cg.writeEntry("tabIdentifier", mTabIdentifier);
@@ -464,22 +457,6 @@ void ComicApplet::setShowComicIdentifier(bool show)
     mShowComicIdentifier = show;
 
     Q_EMIT showComicIdentifierChanged();
-}
-
-bool ComicApplet::showErrorPicture() const
-{
-    return mShowErrorPicture;
-}
-
-void ComicApplet::setShowErrorPicture(bool show)
-{
-    if (show == mShowErrorPicture) {
-        return;
-    }
-
-    mShowErrorPicture = show;
-
-    Q_EMIT showErrorPictureChanged();
 }
 
 bool ComicApplet::arrowsOnHover() const

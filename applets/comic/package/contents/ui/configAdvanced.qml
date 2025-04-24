@@ -18,7 +18,6 @@ KCM.SimpleKCM {
     signal configurationChanged
 
     function saveConfig() {
-        Plasmoid.showErrorPicture = showErrorPicture.checked;
         Plasmoid.maxComicLimit = maxComicLimit.value;
 
         Plasmoid.saveConfig();
@@ -27,7 +26,6 @@ KCM.SimpleKCM {
 
     Kirigami.FormLayout {
         Component.onCompleted: {
-            showErrorPicture.checked = Plasmoid.showErrorPicture;
             maxComicLimit.value = Plasmoid.maxComicLimit;
         }
 
@@ -44,12 +42,6 @@ KCM.SimpleKCM {
                 text: i18ncp("@item:valuesuffix spacing to number + unit", "strip per comic", "strips per comic")
                 textFormat: Text.PlainText
             }
-        }
-
-        Controls.CheckBox {
-            id: showErrorPicture
-            text: i18nc("@option:check", "Display error when downloading comic fails")
-            onCheckedChanged: root.configurationChanged();
         }
     }
 }

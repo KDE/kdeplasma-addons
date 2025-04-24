@@ -30,7 +30,6 @@ PlasmoidItem {
     readonly property int minimumHeight: Kirigami.Units.gridUnit * 8
     readonly property bool showComicAuthor: plasmoid.showComicAuthor
     readonly property bool showComicTitle: plasmoid.showComicTitle
-    readonly property bool showErrorPicture: plasmoid.showErrorPicture
     readonly property bool middleClick: plasmoid.middleClick
 
     Plasmoid.contextualActions: [

@@ -40,7 +40,6 @@ class ComicApplet : public Plasma::Applet
     Q_PROPERTY(bool showComicAuthor READ showComicAuthor WRITE setShowComicAuthor NOTIFY showComicAuthorChanged)
     Q_PROPERTY(bool showComicTitle READ showComicTitle WRITE setShowComicTitle NOTIFY showComicTitleChanged)
     Q_PROPERTY(bool showComicIdentifier READ showComicIdentifier WRITE setShowComicIdentifier NOTIFY showComicIdentifierChanged)
-    Q_PROPERTY(bool showErrorPicture READ showErrorPicture WRITE setShowErrorPicture NOTIFY showErrorPictureChanged)
     Q_PROPERTY(bool arrowsOnHover READ arrowsOnHover WRITE setArrowsOnHover NOTIFY arrowsOnHoverChanged)
     Q_PROPERTY(bool middleClick READ middleClick WRITE setMiddleClick NOTIFY middleClickChanged)
     Q_PROPERTY(QVariantMap comicData READ comicData NOTIFY comicDataChanged)
@@ -75,9 +74,6 @@ public:
     bool showComicIdentifier() const;
     void setShowComicIdentifier(bool show);
 
-    bool showErrorPicture() const;
-    void setShowErrorPicture(bool show);
-
     bool arrowsOnHover() const;
     void setArrowsOnHover(bool show);
 
@@ -100,7 +96,6 @@ Q_SIGNALS:
     void showComicAuthorChanged();
     void showComicTitleChanged();
     void showComicIdentifierChanged();
-    void showErrorPictureChanged();
     void arrowsOnHoverChanged();
     void middleClickChanged();
     void comicDataChanged();
@@ -189,7 +184,6 @@ private:
     bool mShowComicAuthor;
     bool mShowComicTitle;
     bool mShowComicIdentifier;
-    bool mShowErrorPicture;
     bool mArrowsOnHover;
     bool mMiddleClick;
     int mCheckNewComicStripsInterval;
