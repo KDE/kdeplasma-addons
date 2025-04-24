@@ -50,7 +50,7 @@
                 "Name[zh_TW]": "Luís Gabriel Lima"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Weather",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Weather widget",
         "Category": "Environment and Weather",
         "Description": "Forecast and current conditions",
         "Description[ar]": "حالة الطق الحالية و المتوقعة",

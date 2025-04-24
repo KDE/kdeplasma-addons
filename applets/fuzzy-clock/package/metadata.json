@@ -50,7 +50,7 @@
                 "Name[zh_TW]": "Kai Uwe Broulik"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=fuzzy-clock",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Fuzzy Clock widget",
         "Category": "Date and Time",
         "Description": "Time displayed in a less precise format",
         "Description[ar]": "الوقت يظهر بتنسيق أقل دقة",

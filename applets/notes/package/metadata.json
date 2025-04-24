@@ -50,7 +50,7 @@
                 "Name[zh_TW]": "Davide Bettio, Lukas Kropatschek"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=notes",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Notes widget",
         "Category": "Utilities",
         "Description": "Desktop sticky note",
         "Description[ar]": "ملاحظة سطح مكتب لاصقة",
