@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"POT-Creation-Date: 2025-04-24 00:42+0000\n"
 "PO-Revision-Date: 2022-08-17 10:19+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -32,27 +32,29 @@ msgstr "Hiztegiak"
 msgid "Add More Dictionaries"
 msgstr "Gehitu hiztegia gehiago"
 
-#: package/contents/ui/ConfigDictionaries.qml:77
+#: package/contents/ui/ConfigDictionaries.qml:21
+#, fuzzy, kde-format
+#| msgid "Add More…"
+msgctxt "@action:button Add more dictionaries"
+msgid "Add More…"
+msgstr "Gehitu gehiago…"
+
+#: package/contents/ui/ConfigDictionaries.qml:86
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "Ezin du hiztegi-zerrenda zamatu:"
 
-#: package/contents/ui/ConfigDictionaries.qml:78
+#: package/contents/ui/ConfigDictionaries.qml:87
 #: package/contents/ui/main.qml:153
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "Errore kodea: %1 (%2)"
 
-#: package/contents/ui/ConfigDictionaries.qml:89
+#: package/contents/ui/ConfigDictionaries.qml:98
 #, kde-format
 msgid "No dictionaries"
 msgstr "Hiztegirik ez"
-
-#: package/contents/ui/ConfigDictionaries.qml:98
-#, kde-format
-msgid "Add More…"
-msgstr "Gehitu gehiago…"
 
 #: package/contents/ui/DictItemDelegate.qml:58
 #, kde-format

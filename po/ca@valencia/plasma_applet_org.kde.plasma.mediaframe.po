@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-12 00:42+0000\n"
+"POT-Creation-Date: 2025-04-24 00:42+0000\n"
 "PO-Revision-Date: 2024-07-16 08:11+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -169,34 +169,48 @@ msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Feu clic damunt de la imatge per a obrir-la en una aplicació externa"
 
-#: package/contents/ui/ConfigPaths.qml:67
-#, kde-format
-msgid "Remove path"
-msgstr "Elimina el camí"
-
-#: package/contents/ui/ConfigPaths.qml:76
-#, kde-format
-msgctxt "@title:window"
-msgid "Choose Files"
-msgstr "Seleccioneu els fitxers"
-
-#: package/contents/ui/ConfigPaths.qml:96
-#, kde-format
-msgctxt "@title:window"
-msgid "Choose a Folder"
-msgstr "Seleccioneu una carpeta"
-
-#: package/contents/ui/ConfigPaths.qml:116
+#: package/contents/ui/ConfigPaths.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Afig una carpeta…"
 
-#: package/contents/ui/ConfigPaths.qml:122
+#: package/contents/ui/ConfigPaths.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Afig fitxers…"
+
+#: package/contents/ui/ConfigPaths.qml:82
+#, fuzzy, kde-format
+#| msgid "Remove path"
+msgctxt "@action:button tooltip on icon-only button"
+msgid "Remove path"
+msgstr "Elimina el camí"
+
+#: package/contents/ui/ConfigPaths.qml:92
+#, kde-format
+msgctxt "@info placeholdermessage if no paths set"
+msgid "No media configured"
+msgstr ""
+
+#: package/contents/ui/ConfigPaths.qml:93
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Add files or folders to display them in the widget."
+msgstr ""
+
+#: package/contents/ui/ConfigPaths.qml:99
+#, kde-format
+msgctxt "@title:window"
+msgid "Choose Files"
+msgstr "Seleccioneu els fitxers"
+
+#: package/contents/ui/ConfigPaths.qml:119
+#, kde-format
+msgctxt "@title:window"
+msgid "Choose a Folder"
+msgstr "Seleccioneu una carpeta"
 
 #: package/contents/ui/main.qml:359
 #, kde-format

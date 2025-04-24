@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"POT-Creation-Date: 2025-04-24 00:42+0000\n"
 "PO-Revision-Date: 2024-01-16 21:16+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -29,27 +29,29 @@ msgstr "Szótárak"
 msgid "Add More Dictionaries"
 msgstr "További szótárak hozzáadása"
 
-#: package/contents/ui/ConfigDictionaries.qml:77
+#: package/contents/ui/ConfigDictionaries.qml:21
+#, fuzzy, kde-format
+#| msgid "Add More…"
+msgctxt "@action:button Add more dictionaries"
+msgid "Add More…"
+msgstr "Hozzáadás…"
+
+#: package/contents/ui/ConfigDictionaries.qml:86
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "Nem lehet betölteni a szótárlistát"
 
-#: package/contents/ui/ConfigDictionaries.qml:78
+#: package/contents/ui/ConfigDictionaries.qml:87
 #: package/contents/ui/main.qml:153
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "Hibakód: %1 (%2)"
 
-#: package/contents/ui/ConfigDictionaries.qml:89
+#: package/contents/ui/ConfigDictionaries.qml:98
 #, kde-format
 msgid "No dictionaries"
 msgstr "Nincsenek szótárak"
-
-#: package/contents/ui/ConfigDictionaries.qml:98
-#, kde-format
-msgid "Add More…"
-msgstr "Hozzáadás…"
 
 #: package/contents/ui/DictItemDelegate.qml:58
 #, kde-format

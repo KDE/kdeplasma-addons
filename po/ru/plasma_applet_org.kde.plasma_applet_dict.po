@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"POT-Creation-Date: 2025-04-24 00:42+0000\n"
 "PO-Revision-Date: 2022-08-13 15:27+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -30,27 +30,29 @@ msgstr "Словари"
 msgid "Add More Dictionaries"
 msgstr "Добавить словари"
 
-#: package/contents/ui/ConfigDictionaries.qml:77
+#: package/contents/ui/ConfigDictionaries.qml:21
+#, fuzzy, kde-format
+#| msgid "Add More…"
+msgctxt "@action:button Add more dictionaries"
+msgid "Add More…"
+msgstr "Добавить…"
+
+#: package/contents/ui/ConfigDictionaries.qml:86
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "Не удалось загрузить список словарей"
 
-#: package/contents/ui/ConfigDictionaries.qml:78
+#: package/contents/ui/ConfigDictionaries.qml:87
 #: package/contents/ui/main.qml:153
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "Error code: %1 (%2)"
 
-#: package/contents/ui/ConfigDictionaries.qml:89
+#: package/contents/ui/ConfigDictionaries.qml:98
 #, kde-format
 msgid "No dictionaries"
 msgstr "Словари отсутствуют"
-
-#: package/contents/ui/ConfigDictionaries.qml:98
-#, kde-format
-msgid "Add More…"
-msgstr "Добавить…"
 
 #: package/contents/ui/DictItemDelegate.qml:58
 #, kde-format

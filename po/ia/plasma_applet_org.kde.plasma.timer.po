@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-12 00:42+0000\n"
+"POT-Creation-Date: 2025-04-24 00:42+0000\n"
 "PO-Revision-Date: 2022-12-14 16:14+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -116,18 +116,20 @@ msgctxt "@option:check"
 msgid "Show notification text:"
 msgstr "Monstra etxto de notification:"
 
-#: package/contents/ui/configTimes.qml:70
+#: package/contents/ui/configTimes.qml:23
+#, fuzzy, kde-format
+#| msgid "Add"
+msgctxt "@action:button Add timer"
+msgid "Add"
+msgstr "Adde"
+
+#: package/contents/ui/configTimes.qml:82
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr ""
 "Si tu adde temporisatores predefinite hic, illos apparera inmenu de contexto "
 "de plasmoid."
-
-#: package/contents/ui/configTimes.qml:77
-#, kde-format
-msgid "Add"
-msgstr "Adde"
 
 #: package/contents/ui/configTimes.qml:119
 #, kde-format

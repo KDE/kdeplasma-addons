@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-12 00:42+0000\n"
+"POT-Creation-Date: 2025-04-24 00:42+0000\n"
 "PO-Revision-Date: 2023-01-31 15:47+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -119,16 +119,18 @@ msgctxt "@option:check"
 msgid "Show notification text:"
 msgstr "Zobrazit text upozornění:"
 
-#: package/contents/ui/configTimes.qml:70
+#: package/contents/ui/configTimes.qml:23
+#, fuzzy, kde-format
+#| msgid "Add"
+msgctxt "@action:button Add timer"
+msgid "Add"
+msgstr "Přidat"
+
+#: package/contents/ui/configTimes.qml:82
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr ""
-
-#: package/contents/ui/configTimes.qml:77
-#, kde-format
-msgid "Add"
-msgstr "Přidat"
 
 #: package/contents/ui/configTimes.qml:119
 #, kde-format

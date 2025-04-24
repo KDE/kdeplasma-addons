@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"POT-Creation-Date: 2025-04-24 00:42+0000\n"
 "PO-Revision-Date: 2022-05-27 08:47+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -31,27 +31,29 @@ msgstr "Diccionaris"
 msgid "Add More Dictionaries"
 msgstr "Afegeix més diccionaris"
 
-#: package/contents/ui/ConfigDictionaries.qml:77
+#: package/contents/ui/ConfigDictionaries.qml:21
+#, fuzzy, kde-format
+#| msgid "Add More…"
+msgctxt "@action:button Add more dictionaries"
+msgid "Add More…"
+msgstr "Afegeix-ne més…"
+
+#: package/contents/ui/ConfigDictionaries.qml:86
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "No s'ha pogut carregar la llista de diccionaris"
 
-#: package/contents/ui/ConfigDictionaries.qml:78
+#: package/contents/ui/ConfigDictionaries.qml:87
 #: package/contents/ui/main.qml:153
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "Codi d'error: %1 (%2)"
 
-#: package/contents/ui/ConfigDictionaries.qml:89
+#: package/contents/ui/ConfigDictionaries.qml:98
 #, kde-format
 msgid "No dictionaries"
 msgstr "Cap diccionari"
-
-#: package/contents/ui/ConfigDictionaries.qml:98
-#, kde-format
-msgid "Add More…"
-msgstr "Afegeix-ne més…"
 
 #: package/contents/ui/DictItemDelegate.qml:58
 #, kde-format

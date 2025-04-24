@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-23 00:43+0000\n"
+"POT-Creation-Date: 2025-04-24 00:42+0000\n"
 "PO-Revision-Date: 2023-11-07 14:01+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
@@ -30,27 +30,29 @@ msgstr "מילונים"
 msgid "Add More Dictionaries"
 msgstr "הוספת עוד מילונים"
 
-#: package/contents/ui/ConfigDictionaries.qml:77
+#: package/contents/ui/ConfigDictionaries.qml:21
+#, fuzzy, kde-format
+#| msgid "Add More…"
+msgctxt "@action:button Add more dictionaries"
+msgid "Add More…"
+msgstr "להוסיף עוד…"
+
+#: package/contents/ui/ConfigDictionaries.qml:86
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "לא ניתן לטעון את רשימת המילונים"
 
-#: package/contents/ui/ConfigDictionaries.qml:78
+#: package/contents/ui/ConfigDictionaries.qml:87
 #: package/contents/ui/main.qml:153
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "קוד שגיאה: %1 (%2)"
 
-#: package/contents/ui/ConfigDictionaries.qml:89
+#: package/contents/ui/ConfigDictionaries.qml:98
 #, kde-format
 msgid "No dictionaries"
 msgstr "אין מילונים"
-
-#: package/contents/ui/ConfigDictionaries.qml:98
-#, kde-format
-msgid "Add More…"
-msgstr "להוסיף עוד…"
 
 #: package/contents/ui/DictItemDelegate.qml:58
 #, kde-format

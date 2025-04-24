@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-12 00:42+0000\n"
+"POT-Creation-Date: 2025-04-24 00:42+0000\n"
 "PO-Revision-Date: 2017-12-03 22:53+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -199,13 +199,40 @@ msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Levi klik otvara sliku u spoljašnjem prikazivaču"
 
-#: package/contents/ui/ConfigPaths.qml:67
+#: package/contents/ui/ConfigPaths.qml:27
+#, fuzzy, kde-format
+#| msgid "Add folder..."
+msgctxt "@action:button"
+msgid "Add Folder…"
+msgstr "Dodaj fasciklu..."
+
+#: package/contents/ui/ConfigPaths.qml:32
+#, fuzzy, kde-format
+#| msgid "Add files..."
+msgctxt "@action:button"
+msgid "Add Files…"
+msgstr "Dodaj fajlove..."
+
+#: package/contents/ui/ConfigPaths.qml:82
 #, kde-format
+msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr ""
 
+#: package/contents/ui/ConfigPaths.qml:92
+#, kde-format
+msgctxt "@info placeholdermessage if no paths set"
+msgid "No media configured"
+msgstr ""
+
+#: package/contents/ui/ConfigPaths.qml:93
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Add files or folders to display them in the widget."
+msgstr ""
+
 # >> @title:window
-#: package/contents/ui/ConfigPaths.qml:76
+#: package/contents/ui/ConfigPaths.qml:99
 #, fuzzy, kde-format
 #| msgid "Choose files"
 msgctxt "@title:window"
@@ -213,26 +240,12 @@ msgid "Choose Files"
 msgstr "Izbor fajlova"
 
 # >> @title:window
-#: package/contents/ui/ConfigPaths.qml:96
+#: package/contents/ui/ConfigPaths.qml:119
 #, fuzzy, kde-format
 #| msgid "Choose a folder"
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Izbor fascikle"
-
-#: package/contents/ui/ConfigPaths.qml:116
-#, fuzzy, kde-format
-#| msgid "Add folder..."
-msgctxt "@action:button"
-msgid "Add Folder…"
-msgstr "Dodaj fasciklu..."
-
-#: package/contents/ui/ConfigPaths.qml:122
-#, fuzzy, kde-format
-#| msgid "Add files..."
-msgctxt "@action:button"
-msgid "Add Files…"
-msgstr "Dodaj fajlove..."
 
 #: package/contents/ui/main.qml:359
 #, fuzzy, kde-format
