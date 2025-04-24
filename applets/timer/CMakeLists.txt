@@ -1,8 +1,7 @@
 plasma_add_applet(org.kde.plasma.timer
     QML_SOURCES
         CompactRepresentation.qml
-        configAdvanced.qml
-        configAppearance.qml
+        configGeneral.qml
         config.qml
         configTimes.qml
         main.qml
