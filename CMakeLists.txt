@@ -80,15 +80,15 @@ set_package_properties(KF6Purpose PROPERTIES
     TYPE RUNTIME
 )
 
-find_package(KirigamiAddons CONFIG)
-set_package_properties(KirigamiAddons PROPERTIES
+find_package(KF6KirigamiAddons CONFIG)
+set_package_properties(KF6KirigamiAddons PROPERTIES
     DESCRIPTION "Extra controls for Kirigami applications"
     PURPOSE "Required at runtime for the User List widget"
     TYPE RUNTIME
 )
 
-find_package(KItemModels CONFIG)
-set_package_properties(KItemModels PROPERTIES
+find_package(KF6ItemModels CONFIG)
+set_package_properties(KF6ItemModels PROPERTIES
     DESCRIPTION "Set of item models extending the Qt model-view framework"
     PURPOSE "Required at runtime for the Dictionary, Kate Profiles, and Konsole Profiles applets"
     TYPE RUNTIME
