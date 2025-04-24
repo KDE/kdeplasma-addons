@@ -50,7 +50,7 @@
                 "Name[zh_TW]": "Dominik Haumann"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Disk Quota",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Disk Quota widget",
         "Category": "Utilities",
         "Description": "Shows details about disk quota",
         "Description[ar]": "تظهر تفاصيل حول حصة القرص",

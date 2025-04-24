@@ -50,7 +50,7 @@
                 "Name[zh_TW]": "David Edmundson"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Grouping",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Grouping widget",
         "Category": "Windows and Tasks",
         "Description": "Group Plasma widgets together",
         "Description[ar]": "جمع ودجات بلازما معا",

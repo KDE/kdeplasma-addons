@@ -50,7 +50,7 @@
                 "Name[zh_TW]": "Kai Uwe Broulik"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=User Switcher",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=User Switcher widget",
         "Category": "System Information",
         "Description": "Quickly switch between different users",
         "Description[ar]": "بدل بسرعة بين المستخدمين",
