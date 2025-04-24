@@ -346,10 +346,9 @@ PlasmoidItem {
 
     Plasmoid.icon: {
         let iconName;
-        // workaround for now to ensure "Please configure" tooltip
-        // TODO: remove when configurationRequired works
+
         if (status === Util.NeedsConfiguration) {
-            iconName = "configure";
+            iconName = "weather-clouds-symbolic";
         } else {
             iconName = generalModel.currentConditionIconName;
         }
@@ -360,14 +359,17 @@ PlasmoidItem {
 
         return iconName;
     }
+    Plasmoid.title: status === Util.NeedsConfiguration ? i18nc("@info:usagetip Minimize the length of this string so it is as short as possible! Omitting or changing words is fine as long as the original meaning is retained.", "Set up Weather Report…") : undefined
     Plasmoid.busy: status === Util.Connecting
     Plasmoid.configurationRequired: status === Util.NeedsConfiguration
+    Plasmoid.status: status === Util.NeedsConfiguration ? PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.ActiveStatus
 
-    toolTipMainText: (status === Util.NeedsConfiguration) ?
-        i18nc("@info:tooltip %1 is the translated plasmoid name", "Click to configure %1", Plasmoid.title) :
-        generalModel.location
+    toolTipMainText: status === Util.NeedsConfiguration ? "" : generalModel.location
 
     toolTipSubText: {
+        if (status === Util.NeedsConfiguration) {
+            return i18nc("@info:tooltip", "Click to choose a location and monitor the weather there")
+        }
         if (!generalModel.location) {
             return "";
         }
