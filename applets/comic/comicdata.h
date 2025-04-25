@@ -176,11 +176,6 @@ public:
 
     void setShowActualSize(bool show);
 
-    QString errorStrip() const
-    {
-        return mErrorStrip;
-    }
-
     int firstStripNum() const
     {
         return mFirstStripNum;
@@ -216,8 +211,6 @@ private:
     QString mPrev;
     QString mStored;
     QString mCurrentReadable;
-
-    QString mErrorStrip;
 
     QString mAuthor;
     QString mTitle;

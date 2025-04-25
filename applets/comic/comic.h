@@ -23,7 +23,6 @@
 
 class CheckNewStrips;
 class ComicModel;
-class ConfigWidget;
 class QAction;
 class KJob;
 class QAction;
@@ -176,7 +175,6 @@ private:
     QDate mCurrentDay;
 
     QString mOldSource;
-    ConfigWidget *mConfigWidget;
     bool mShowComicUrl;
     bool mShowComicAuthor;
     bool mShowComicTitle;
@@ -187,13 +185,9 @@ private:
     int mMaxComicLimit;
     CheckNewStrips *mCheckNewStrips;
     QTimer *mDateChangedTimer;
-    QSizeF mMaxSize;
-    QSizeF mLastSize;
-    QSizeF mIdealSize;
     ComicEngine *const mEngine;
 
     // Tabs
-    bool mTabAdded;
     QStringList mTabIdentifier;
 
     ComicData mCurrent;
