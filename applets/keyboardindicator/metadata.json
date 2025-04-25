@@ -99,7 +99,6 @@
         "Description[zh_TW]": "顯示大寫鎖定 (Caps Lock) 或數字鎖定 (Num Lock) 是否開啟",
         "EnabledByDefault": true,
         "Icon": "input-caps-on",
-        "Id": "org.kde.plasma.keyboardindicator",
         "License": "GPL-2.0+",
         "Name": "Lock Keys Status",
         "Name[ar]": "حالة قفل المفاتيح",
