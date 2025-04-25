@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-01 01:38+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2024-02-09 23:35+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -24,24 +24,32 @@ msgid "Appearance"
 msgstr "모양"
 
 #: package/contents/ui/configGeneral.qml:29
-#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgid "Show"
+msgctxt ""
+"@title:group The things being potentially shown are lights and seconds"
+msgid "Show:"
+msgstr "보이기"
+
+#: package/contents/ui/configGeneral.qml:30
+#: package/contents/ui/configGeneral.qml:60
 #, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "꺼진 조명등"
 
-#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "초"
 
-#: package/contents/ui/configGeneral.qml:42
+#: package/contents/ui/configGeneral.qml:43
 #, kde-format
 msgid "Use custom color for:"
 msgstr "다음에 사용자 정의 색상 사용하기:"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Active lights"
@@ -90,9 +98,6 @@ msgstr "켜진 조명등"
 
 #~ msgid "Check this if you want to see the inactive LEDs."
 #~ msgstr "꺼진 LED를 보려면 선택하십시오."
-
-#~ msgid "Show"
-#~ msgstr "보이기"
 
 #~ msgid "Use theme color"
 #~ msgstr "테마 색상 사용하기"

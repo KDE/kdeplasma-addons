@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-08 00:43+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2022-07-23 22:38+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -18,66 +18,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.07.70\n"
-
-#: comic.cpp:80
-#, kde-format
-msgctxt "@action comic strip"
-msgid "&Next Tab with a New Strip"
-msgstr "&Nächste Registerkarte mit einer neuen Comic-Seite"
-
-#: comic.cpp:86
-#, kde-format
-msgctxt "@action"
-msgid "Jump to &First Strip"
-msgstr "Zum &ersten Comic springen"
-
-#: comic.cpp:90
-#, kde-format
-msgctxt "@action"
-msgid "Jump to &Current Strip"
-msgstr "Zum &aktuellen Comic springen"
-
-#: comic.cpp:94
-#, kde-format
-msgctxt "@action"
-msgid "Jump to Strip…"
-msgstr "Zu Comic springen ..."
-
-#: comic.cpp:98
-#, kde-format
-msgctxt "@action"
-msgid "Visit the Website"
-msgstr "Webseite besuchen"
-
-#: comic.cpp:102
-#, kde-format
-msgctxt "@action:inmenu %1 is the name of a web browser"
-msgid "View in %1"
-msgstr "In %1 öffnen"
-
-#: comic.cpp:110
-#, kde-format
-msgctxt "@action"
-msgid "Visit the Shop &Website"
-msgstr "&Webseite des Shops besuchen"
-
-#: comic.cpp:115
-#, kde-format
-msgctxt "@action"
-msgid "&Save Comic As…"
-msgstr "Comic &speichern unter ..."
-
-#: comic.cpp:120
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "&Actual Size"
-msgstr "&Originalgröße"
-
-#: comic.cpp:128
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "Store Current &Position"
-msgstr "Aktuelle &Position speichern"
 
 #: comicdata.cpp:87
 #, kde-format
@@ -228,14 +168,68 @@ msgid_plural "minutes"
 msgstr[0] "Minute"
 msgstr[1] "Minuten"
 
-#: package/contents/ui/main.qml:163
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgctxt "@action comic strip"
+msgid "&Next Tab with a New Strip"
+msgstr "&Nächste Registerkarte mit einer neuen Comic-Seite"
+
+#: package/contents/ui/main.qml:47
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &First Strip"
+msgstr "Zum &ersten Comic springen"
+
+#: package/contents/ui/main.qml:53
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &Current Strip"
+msgstr "Zum &aktuellen Comic springen"
+
+#: package/contents/ui/main.qml:59
+#, kde-format
+msgctxt "@action"
+msgid "Jump to Strip…"
+msgstr "Zu Comic springen ..."
+
+#: package/contents/ui/main.qml:65
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Website"
+msgstr "Webseite besuchen"
+
+#: package/contents/ui/main.qml:70
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Shop &Website"
+msgstr "&Webseite des Shops besuchen"
+
+#: package/contents/ui/main.qml:78
+#, kde-format
+msgctxt "@action"
+msgid "&Save Comic As…"
+msgstr "Comic &speichern unter ..."
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "&Actual Size"
+msgstr "&Originalgröße"
+
+#: package/contents/ui/main.qml:92
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "Store Current &Position"
+msgstr "Aktuelle &Position speichern"
+
+#: package/contents/ui/main.qml:227
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Einrichtung von Comic"
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:230
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -258,6 +252,10 @@ msgstr "&Comic-Nummer:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Kennung der Comic-Seite:"
+
+#~ msgctxt "@action:inmenu %1 is the name of a web browser"
+#~ msgid "View in %1"
+#~ msgstr "In %1 öffnen"
 
 #, fuzzy
 #~| msgctxt "@title:group"

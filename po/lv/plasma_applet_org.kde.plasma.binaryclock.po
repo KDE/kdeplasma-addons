@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-01 01:38+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2024-04-02 16:13+0300\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -29,24 +29,32 @@ msgid "Appearance"
 msgstr "Izskats"
 
 #: package/contents/ui/configGeneral.qml:29
-#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgid "Show"
+msgctxt ""
+"@title:group The things being potentially shown are lights and seconds"
+msgid "Show:"
+msgstr "Rādīt"
+
+#: package/contents/ui/configGeneral.qml:30
+#: package/contents/ui/configGeneral.qml:60
 #, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "Neaktīvas gaismas"
 
-#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Sekundes"
 
-#: package/contents/ui/configGeneral.qml:42
+#: package/contents/ui/configGeneral.qml:43
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Lietot pielāgotu aktīvo gaismu krāsu"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Active lights"
@@ -90,9 +98,6 @@ msgstr "Aktīvas gaismas"
 
 #~ msgid "Check this if you want to see the inactive LEDs."
 #~ msgstr "Atzīmējiet šo, ja vēlaties redzēt izslēgtās lampiņas."
-
-#~ msgid "Show"
-#~ msgstr "Rādīt"
 
 #~ msgid "Use theme color"
 #~ msgstr "Lietot tēmas krāsu"

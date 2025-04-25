@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2016-08-31 20:04+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -147,63 +147,63 @@ msgctxt "@title"
 msgid "Units"
 msgstr "Μονάδες"
 
-#: package/contents/ui/config/ConfigAppearance.qml:35
+#: package/contents/ui/config/ConfigAppearance.qml:38
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:43
+#: package/contents/ui/config/ConfigAppearance.qml:46
 #, fuzzy, kde-format
 #| msgid "Temperature:"
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Θερμοκρασία:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:46
+#: package/contents/ui/config/ConfigAppearance.qml:49
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:54
+#: package/contents/ui/config/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:61
+#: package/contents/ui/config/ConfigAppearance.qml:64
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:70
+#: package/contents/ui/config/ConfigAppearance.qml:73
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigAppearance.qml:71
+#: package/contents/ui/config/ConfigAppearance.qml:74
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Θερμοκρασία"
 
-#: package/contents/ui/config/ConfigAppearance.qml:76
+#: package/contents/ui/config/ConfigAppearance.qml:79
 #, fuzzy, kde-format
 #| msgid "Wind: %1"
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Άνεμος: %1"
 
-#: package/contents/ui/config/ConfigAppearance.qml:81
+#: package/contents/ui/config/ConfigAppearance.qml:84
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Πίεση"
 
-#: package/contents/ui/config/ConfigAppearance.qml:86
+#: package/contents/ui/config/ConfigAppearance.qml:89
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"
@@ -235,13 +235,13 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Ορατότητα:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:50
+#: package/contents/ui/config/ConfigWeatherStation.qml:48
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Ενημέρωση κάθε:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:53
+#: package/contents/ui/config/ConfigWeatherStation.qml:51
 #, fuzzy, kde-format
 #| msgid " min"
 msgid "%1 minute"
@@ -249,57 +249,57 @@ msgid_plural "%1 minutes"
 msgstr[0] " λεπτά"
 msgstr[1] " λεπτά"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:65
+#: package/contents/ui/config/ConfigWeatherStation.qml:63
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Τοποθεσία:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#: package/contents/ui/config/ConfigWeatherStation.qml:69
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:76
+#: package/contents/ui/config/ConfigWeatherStation.qml:74
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, fuzzy, kde-format
 #| msgid "Weather Station"
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Μετεωρολογικός σταθμός"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, fuzzy, kde-format
 #| msgid "Weather Station"
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Μετεωρολογικός σταθμός"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: package/contents/ui/config/ConfigWeatherStation.qml:183
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Δε βρέθηκαν μετεωρολογικοί σταθμοί για '%1'"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:189
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#: package/contents/ui/config/ConfigWeatherStation.qml:190
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -533,17 +533,17 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr ""
 
-#: plugin/locationlistmodel.cpp:42
+#: plugin/locationlistmodel.cpp:43
 #, kde-format
 msgid "Cannot find '%1' using %2."
 msgstr ""
 
-#: plugin/locationlistmodel.cpp:66
+#: plugin/locationlistmodel.cpp:67
 #, kde-format
 msgid "Connection to %1 weather server timed out."
 msgstr ""
 
-#: plugin/locationlistmodel.cpp:151
+#: plugin/locationlistmodel.cpp:186
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"

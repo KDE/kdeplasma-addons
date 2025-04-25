@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-01 01:38+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2013-03-20 17:03+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -25,26 +25,34 @@ msgid "Appearance"
 msgstr "दर्शनीयता"
 
 #: package/contents/ui/configGeneral.qml:29
-#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgid "Show"
+msgctxt ""
+"@title:group The things being potentially shown are lights and seconds"
+msgid "Show:"
+msgstr "दर्शवा"
+
+#: package/contents/ui/configGeneral.qml:30
+#: package/contents/ui/configGeneral.qml:60
 #, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:35
 #, fuzzy, kde-format
 #| msgid "Seconds:"
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "सेकंद :"
 
-#: package/contents/ui/configGeneral.qml:42
+#: package/contents/ui/configGeneral.qml:43
 #, fuzzy, kde-format
 #| msgid "Use custom grid color:"
 msgid "Use custom color for:"
 msgstr "ऐच्छिक जाळे रंग वापरा :"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Active lights"
@@ -73,9 +81,6 @@ msgstr ""
 #~ msgctxt "@title:group"
 #~ msgid "Appearance"
 #~ msgstr "दर्शनीयता"
-
-#~ msgid "Show"
-#~ msgstr "दर्शवा"
 
 #~ msgid "Use theme color"
 #~ msgstr "शैली रंग वापरा"

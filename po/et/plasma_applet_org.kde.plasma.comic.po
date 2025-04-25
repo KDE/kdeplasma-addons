@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-08 00:43+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2019-11-01 22:21+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -17,72 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 19.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-
-#: comic.cpp:80
-#, kde-format
-msgctxt "@action comic strip"
-msgid "&Next Tab with a New Strip"
-msgstr "&Järgmine kaart uue koomiksiga"
-
-#: comic.cpp:86
-#, kde-format
-msgctxt "@action"
-msgid "Jump to &First Strip"
-msgstr "&Hüppa esimesele koomiksile"
-
-#: comic.cpp:90
-#, kde-format
-msgctxt "@action"
-msgid "Jump to &Current Strip"
-msgstr "Hü&ppa tänasele koomiksile"
-
-#: comic.cpp:94
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Jump to Strip..."
-msgctxt "@action"
-msgid "Jump to Strip…"
-msgstr "Hüppa koomiksile..."
-
-#: comic.cpp:98
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "Visit the Shop &Website"
-msgctxt "@action"
-msgid "Visit the Website"
-msgstr "Külasta kodule&hekülge"
-
-#: comic.cpp:102
-#, kde-format
-msgctxt "@action:inmenu %1 is the name of a web browser"
-msgid "View in %1"
-msgstr ""
-
-#: comic.cpp:110
-#, kde-format
-msgctxt "@action"
-msgid "Visit the Shop &Website"
-msgstr "Külasta kodule&hekülge"
-
-#: comic.cpp:115
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "&Save Comic As..."
-msgctxt "@action"
-msgid "&Save Comic As…"
-msgstr "&Salvesta koomiks kui..."
-
-#: comic.cpp:120
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "&Actual Size"
-msgstr "Te&gelik suurus"
-
-#: comic.cpp:128
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "Store Current &Position"
-msgstr "Ak&tiivse asukoha salvestamine"
 
 #: comicdata.cpp:87
 #, kde-format
@@ -237,14 +171,74 @@ msgid_plural "minutes"
 msgstr[0] " minuti järel"
 msgstr[1] " minuti järel"
 
-#: package/contents/ui/main.qml:163
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgctxt "@action comic strip"
+msgid "&Next Tab with a New Strip"
+msgstr "&Järgmine kaart uue koomiksiga"
+
+#: package/contents/ui/main.qml:47
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &First Strip"
+msgstr "&Hüppa esimesele koomiksile"
+
+#: package/contents/ui/main.qml:53
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &Current Strip"
+msgstr "Hü&ppa tänasele koomiksile"
+
+#: package/contents/ui/main.qml:59
+#, fuzzy, kde-format
+#| msgctxt "@action"
+#| msgid "Jump to Strip..."
+msgctxt "@action"
+msgid "Jump to Strip…"
+msgstr "Hüppa koomiksile..."
+
+#: package/contents/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgctxt "@action"
+#| msgid "Visit the Shop &Website"
+msgctxt "@action"
+msgid "Visit the Website"
+msgstr "Külasta kodule&hekülge"
+
+#: package/contents/ui/main.qml:70
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Shop &Website"
+msgstr "Külasta kodule&hekülge"
+
+#: package/contents/ui/main.qml:78
+#, fuzzy, kde-format
+#| msgctxt "@action"
+#| msgid "&Save Comic As..."
+msgctxt "@action"
+msgid "&Save Comic As…"
+msgstr "&Salvesta koomiks kui..."
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "&Actual Size"
+msgstr "Te&gelik suurus"
+
+#: package/contents/ui/main.qml:92
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "Store Current &Position"
+msgstr "Ak&tiivse asukoha salvestamine"
+
+#: package/contents/ui/main.qml:227
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Koomiksi seadistamine"
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:230
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"

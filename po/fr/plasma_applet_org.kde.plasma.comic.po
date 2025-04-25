@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-08 00:43+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2025-04-04 13:56+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -23,66 +23,6 @@ msgstr ""
 "X-Environment: kde\n"
 "X-Generator: Lokalize 24.12.3\n"
 "X-Text-Markup: kde4\n"
-
-#: comic.cpp:80
-#, kde-format
-msgctxt "@action comic strip"
-msgid "&Next Tab with a New Strip"
-msgstr "O&nglet suivant avec une nouvelle bande dessinée"
-
-#: comic.cpp:86
-#, kde-format
-msgctxt "@action"
-msgid "Jump to &First Strip"
-msgstr "Aller à la &première bande dessinée"
-
-#: comic.cpp:90
-#, kde-format
-msgctxt "@action"
-msgid "Jump to &Current Strip"
-msgstr "Aller à la bande dessinée a&ctuelle"
-
-#: comic.cpp:94
-#, kde-format
-msgctxt "@action"
-msgid "Jump to Strip…"
-msgstr "Aller à la bande dessinée..."
-
-#: comic.cpp:98
-#, kde-format
-msgctxt "@action"
-msgid "Visit the Website"
-msgstr "Visiter le site Internet"
-
-#: comic.cpp:102
-#, kde-format
-msgctxt "@action:inmenu %1 is the name of a web browser"
-msgid "View in %1"
-msgstr "Afficher dans %1"
-
-#: comic.cpp:110
-#, kde-format
-msgctxt "@action"
-msgid "Visit the Shop &Website"
-msgstr "Visiter le site &Web du commerçant"
-
-#: comic.cpp:115
-#, kde-format
-msgctxt "@action"
-msgid "&Save Comic As…"
-msgstr "Enregi&strer la bande dessinée sous..."
-
-#: comic.cpp:120
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "&Actual Size"
-msgstr "Taille &actuelle"
-
-#: comic.cpp:128
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "Store Current &Position"
-msgstr "Enregistrer la &position actuelle"
 
 #: comicdata.cpp:87
 #, kde-format
@@ -234,13 +174,67 @@ msgid_plural "minutes"
 msgstr[0] "minute"
 msgstr[1] "minutes"
 
-#: package/contents/ui/main.qml:163
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgctxt "@action comic strip"
+msgid "&Next Tab with a New Strip"
+msgstr "O&nglet suivant avec une nouvelle bande dessinée"
+
+#: package/contents/ui/main.qml:47
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &First Strip"
+msgstr "Aller à la &première bande dessinée"
+
+#: package/contents/ui/main.qml:53
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &Current Strip"
+msgstr "Aller à la bande dessinée a&ctuelle"
+
+#: package/contents/ui/main.qml:59
+#, kde-format
+msgctxt "@action"
+msgid "Jump to Strip…"
+msgstr "Aller à la bande dessinée..."
+
+#: package/contents/ui/main.qml:65
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Website"
+msgstr "Visiter le site Internet"
+
+#: package/contents/ui/main.qml:70
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Shop &Website"
+msgstr "Visiter le site &Web du commerçant"
+
+#: package/contents/ui/main.qml:78
+#, kde-format
+msgctxt "@action"
+msgid "&Save Comic As…"
+msgstr "Enregi&strer la bande dessinée sous..."
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "&Actual Size"
+msgstr "Taille &actuelle"
+
+#: package/contents/ui/main.qml:92
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "Store Current &Position"
+msgstr "Enregistrer la &position actuelle"
+
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Aucune bande dessinée configurée"
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:230
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -263,6 +257,10 @@ msgstr "Numéro de la &bande dessinée :"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identifiant de la bande dessinée :"
+
+#~ msgctxt "@action:inmenu %1 is the name of a web browser"
+#~ msgid "View in %1"
+#~ msgstr "Afficher dans %1"
 
 #~ msgctxt "@info placeholdermessage if comic loading failed"
 #~ msgid "Error loading comic"

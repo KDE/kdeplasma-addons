@@ -1,8 +1,8 @@
 # Translation of plasma_applet_org.kde.plasma.timer.po to Catalan
-# Copyright (C) 2008-2022 This_file_is_part_of_KDE
+# Copyright (C) 2008-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2012, 2015, 2018, 2019, 2022.
+# SPDX-FileCopyrightText: 2008, 2012, 2015, 2018, 2019, 2022, 2025 Josep M. Ferrer <txemaq@gmail.com>
 # Joan Maspons <joanmaspons@gmail.com>, 2009.
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2014, 2020.
 msgid ""
@@ -10,14 +10,14 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-24 00:42+0000\n"
-"PO-Revision-Date: 2022-12-01 13:31+0100\n"
+"PO-Revision-Date: 2025-04-24 12:37+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -121,8 +121,7 @@ msgid "Show notification text:"
 msgstr "Mostra el text de notificació:"
 
 #: package/contents/ui/configTimes.qml:23
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Afegeix"

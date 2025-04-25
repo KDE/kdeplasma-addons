@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2024-08-30 08:19+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -146,61 +146,61 @@ msgctxt "@title"
 msgid "Units"
 msgstr "Одиниці"
 
-#: package/contents/ui/config/ConfigAppearance.qml:35
+#: package/contents/ui/config/ConfigAppearance.qml:38
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "Компактний режим"
 
-#: package/contents/ui/config/ConfigAppearance.qml:43
+#: package/contents/ui/config/ConfigAppearance.qml:46
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Показувати температуру:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:46
+#: package/contents/ui/config/ConfigAppearance.qml:49
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Над піктограмою віджета"
 
-#: package/contents/ui/config/ConfigAppearance.qml:54
+#: package/contents/ui/config/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Поряд із піктограмою віджета"
 
-#: package/contents/ui/config/ConfigAppearance.qml:61
+#: package/contents/ui/config/ConfigAppearance.qml:64
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Не показувати"
 
-#: package/contents/ui/config/ConfigAppearance.qml:70
+#: package/contents/ui/config/ConfigAppearance.qml:73
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "Показувати у підказці:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:71
+#: package/contents/ui/config/ConfigAppearance.qml:74
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Температуру"
 
-#: package/contents/ui/config/ConfigAppearance.qml:76
+#: package/contents/ui/config/ConfigAppearance.qml:79
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Вітер"
 
-#: package/contents/ui/config/ConfigAppearance.qml:81
+#: package/contents/ui/config/ConfigAppearance.qml:84
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Тиск"
 
-#: package/contents/ui/config/ConfigAppearance.qml:86
+#: package/contents/ui/config/ConfigAppearance.qml:89
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
@@ -230,13 +230,13 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Видимість:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:50
+#: package/contents/ui/config/ConfigWeatherStation.qml:48
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Інтервал оновлення:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:53
+#: package/contents/ui/config/ConfigWeatherStation.qml:51
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -245,55 +245,55 @@ msgstr[1] "%1 хв."
 msgstr[2] "%1 хв."
 msgstr[3] "%1 хв."
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:65
+#: package/contents/ui/config/ConfigWeatherStation.qml:63
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Місце:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#: package/contents/ui/config/ConfigWeatherStation.qml:69
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "Нічого не вибрано"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:76
+#: package/contents/ui/config/ConfigWeatherStation.qml:74
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "Надавач:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Введіть нове розташування"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Введіть розташування"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: package/contents/ui/config/ConfigWeatherStation.qml:183
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Для «%1» не знайдено метеорологічних станцій"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Шукати метеостанцію для зміни місця, для якого буде надано дані"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:189
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Шукати метеостанцію для встановлення місця, для якого буде надано дані"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#: package/contents/ui/config/ConfigWeatherStation.qml:190
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -522,18 +522,18 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "Відчувається як %1"
 
-#: plugin/locationlistmodel.cpp:42
+#: plugin/locationlistmodel.cpp:43
 #, kde-format
 msgid "Cannot find '%1' using %2."
 msgstr "Не вдалося знайти «%1» за допомогою %2."
 
-#: plugin/locationlistmodel.cpp:66
+#: plugin/locationlistmodel.cpp:67
 #, kde-format
 msgid "Connection to %1 weather server timed out."
 msgstr ""
 "Перевищено час очікування на встановлення з’єднання з сервером погоди %1."
 
-#: plugin/locationlistmodel.cpp:151
+#: plugin/locationlistmodel.cpp:186
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-07 00:40+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2024-12-24 16:53+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -105,7 +105,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "항상 이 페이지 불러 오기:"
 
-#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:106
+#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:112
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -147,54 +147,54 @@ msgctxt "@action:button"
 msgid "Go Back"
 msgstr "뒤로 이동"
 
-#: package/contents/ui/main.qml:74
+#: package/contents/ui/main.qml:77
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "앞으로 이동"
 
-#: package/contents/ui/main.qml:82
+#: package/contents/ui/main.qml:88
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "홈으로 이동"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgid "Open Default URL"
 msgstr "기본 URL 열기"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:152
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "이 페이지 불러오기 중지"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:152
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "이 페이지 새로 고침"
 
-#: package/contents/ui/main.qml:192
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "브라우저에서 링크 열기"
 
-#: package/contents/ui/main.qml:198
+#: package/contents/ui/main.qml:211
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "링크 주소 복사"
 
-#: package/contents/ui/main.qml:265
+#: package/contents/ui/main.qml:278
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "팝업 차단됨"
 
-#: package/contents/ui/main.qml:266
+#: package/contents/ui/main.qml:279
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

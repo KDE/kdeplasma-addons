@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-08 00:43+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2025-04-03 20:42+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -19,66 +19,6 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Lokalize 24.12.2\n"
-
-#: comic.cpp:80
-#, kde-format
-msgctxt "@action comic strip"
-msgid "&Next Tab with a New Strip"
-msgstr "הלשונית ה&באה עם רצועה חדשה"
-
-#: comic.cpp:86
-#, kde-format
-msgctxt "@action"
-msgid "Jump to &First Strip"
-msgstr "קפיצה לרצועה ה&ראשונה"
-
-#: comic.cpp:90
-#, kde-format
-msgctxt "@action"
-msgid "Jump to &Current Strip"
-msgstr "קפיצה לרצועה ה&נוכחית"
-
-#: comic.cpp:94
-#, kde-format
-msgctxt "@action"
-msgid "Jump to Strip…"
-msgstr "קפיצה לרצועה…"
-
-#: comic.cpp:98
-#, kde-format
-msgctxt "@action"
-msgid "Visit the Website"
-msgstr "ביקור באתר"
-
-#: comic.cpp:102
-#, kde-format
-msgctxt "@action:inmenu %1 is the name of a web browser"
-msgid "View in %1"
-msgstr "הצגה ב־%1"
-
-#: comic.cpp:110
-#, kde-format
-msgctxt "@action"
-msgid "Visit the Shop &Website"
-msgstr "ביקור באתר ה&חנות"
-
-#: comic.cpp:115
-#, kde-format
-msgctxt "@action"
-msgid "&Save Comic As…"
-msgstr "&שמירת קומיקס בשם…"
-
-#: comic.cpp:120
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "&Actual Size"
-msgstr "גודל &אמיתי"
-
-#: comic.cpp:128
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "Store Current &Position"
-msgstr "א&חסון המקום הנוכחי"
 
 #: comicdata.cpp:87
 #, kde-format
@@ -231,13 +171,67 @@ msgstr[1] "דקות"
 msgstr[2] "דקות"
 msgstr[3] "דקות"
 
-#: package/contents/ui/main.qml:163
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgctxt "@action comic strip"
+msgid "&Next Tab with a New Strip"
+msgstr "הלשונית ה&באה עם רצועה חדשה"
+
+#: package/contents/ui/main.qml:47
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &First Strip"
+msgstr "קפיצה לרצועה ה&ראשונה"
+
+#: package/contents/ui/main.qml:53
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &Current Strip"
+msgstr "קפיצה לרצועה ה&נוכחית"
+
+#: package/contents/ui/main.qml:59
+#, kde-format
+msgctxt "@action"
+msgid "Jump to Strip…"
+msgstr "קפיצה לרצועה…"
+
+#: package/contents/ui/main.qml:65
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Website"
+msgstr "ביקור באתר"
+
+#: package/contents/ui/main.qml:70
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Shop &Website"
+msgstr "ביקור באתר ה&חנות"
+
+#: package/contents/ui/main.qml:78
+#, kde-format
+msgctxt "@action"
+msgid "&Save Comic As…"
+msgstr "&שמירת קומיקס בשם…"
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "&Actual Size"
+msgstr "גודל &אמיתי"
+
+#: package/contents/ui/main.qml:92
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "Store Current &Position"
+msgstr "א&חסון המקום הנוכחי"
+
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "לא הוגדר קומיקס"
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:230
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -260,6 +254,10 @@ msgstr "מספר ה&רצועה:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "מזהה הרצועה:"
+
+#~ msgctxt "@action:inmenu %1 is the name of a web browser"
+#~ msgid "View in %1"
+#~ msgstr "הצגה ב־%1"
 
 #~ msgctxt "@info placeholdermessage if comic loading failed"
 #~ msgid "Error loading comic"

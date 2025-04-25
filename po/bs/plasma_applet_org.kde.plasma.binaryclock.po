@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-01 01:38+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2012-09-03 15:46+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -28,27 +28,35 @@ msgid "Appearance"
 msgstr "Izgled"
 
 #: package/contents/ui/configGeneral.qml:29
-#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgid "Show"
+msgctxt ""
+"@title:group The things being potentially shown are lights and seconds"
+msgid "Show:"
+msgstr "Prikaži"
+
+#: package/contents/ui/configGeneral.qml:30
+#: package/contents/ui/configGeneral.qml:60
 #, fuzzy, kde-format
 #| msgid "Inactive LEDs:"
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "Neaktivne lampice:"
 
-#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:35
 #, fuzzy, kde-format
 #| msgid "Seconds:"
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Sekunde:"
 
-#: package/contents/ui/configGeneral.qml:42
+#: package/contents/ui/configGeneral.qml:43
 #, fuzzy, kde-format
 #| msgid "Use custom color for active LEDs:"
 msgid "Use custom color for:"
 msgstr "Posebna boja za aktivne lampice:"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:47
 #, fuzzy, kde-format
 #| msgid "Active LEDs:"
 msgctxt "@option:check"
@@ -87,9 +95,6 @@ msgstr "Aktivne lampice:"
 
 #~ msgid "Check this if you want to see the inactive LEDs."
 #~ msgstr "Popunite ako želite da vidite i neaktivne lampice."
-
-#~ msgid "Show"
-#~ msgstr "Prikaži"
 
 #~ msgid "Use theme color"
 #~ msgstr "Boja teme"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-08 00:43+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2025-04-03 09:37+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -20,66 +20,6 @@ msgstr ""
 "X-Generator: Lokalize 22.12.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-
-#: comic.cpp:80
-#, kde-format
-msgctxt "@action comic strip"
-msgid "&Next Tab with a New Strip"
-msgstr "Pestanya següe&nt amb una tira nova"
-
-#: comic.cpp:86
-#, kde-format
-msgctxt "@action"
-msgid "Jump to &First Strip"
-msgstr "Salta a la &primera tira"
-
-#: comic.cpp:90
-#, kde-format
-msgctxt "@action"
-msgid "Jump to &Current Strip"
-msgstr "Salta a la tira a&ctual"
-
-#: comic.cpp:94
-#, kde-format
-msgctxt "@action"
-msgid "Jump to Strip…"
-msgstr "Salta a la tira…"
-
-#: comic.cpp:98
-#, kde-format
-msgctxt "@action"
-msgid "Visit the Website"
-msgstr "Visiteu el lloc web"
-
-#: comic.cpp:102
-#, kde-format
-msgctxt "@action:inmenu %1 is the name of a web browser"
-msgid "View in %1"
-msgstr "Visualitzeu amb el %1"
-
-#: comic.cpp:110
-#, kde-format
-msgctxt "@action"
-msgid "Visit the Shop &Website"
-msgstr "Visita la &web de la botiga"
-
-#: comic.cpp:115
-#, kde-format
-msgctxt "@action"
-msgid "&Save Comic As…"
-msgstr "De&sa el còmic com a…"
-
-#: comic.cpp:120
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "&Actual Size"
-msgstr "Mida re&al"
-
-#: comic.cpp:128
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "Store Current &Position"
-msgstr "Emmagatzema la &posició actual"
 
 #: comicdata.cpp:87
 #, kde-format
@@ -228,13 +168,67 @@ msgid_plural "minutes"
 msgstr[0] "minut"
 msgstr[1] "minuts"
 
-#: package/contents/ui/main.qml:163
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgctxt "@action comic strip"
+msgid "&Next Tab with a New Strip"
+msgstr "Pestanya següe&nt amb una tira nova"
+
+#: package/contents/ui/main.qml:47
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &First Strip"
+msgstr "Salta a la &primera tira"
+
+#: package/contents/ui/main.qml:53
+#, kde-format
+msgctxt "@action"
+msgid "Jump to &Current Strip"
+msgstr "Salta a la tira a&ctual"
+
+#: package/contents/ui/main.qml:59
+#, kde-format
+msgctxt "@action"
+msgid "Jump to Strip…"
+msgstr "Salta a la tira…"
+
+#: package/contents/ui/main.qml:65
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Website"
+msgstr "Visiteu el lloc web"
+
+#: package/contents/ui/main.qml:70
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Shop &Website"
+msgstr "Visita la &web de la botiga"
+
+#: package/contents/ui/main.qml:78
+#, kde-format
+msgctxt "@action"
+msgid "&Save Comic As…"
+msgstr "De&sa el còmic com a…"
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "&Actual Size"
+msgstr "Mida re&al"
+
+#: package/contents/ui/main.qml:92
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "Store Current &Position"
+msgstr "Emmagatzema la &posició actual"
+
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "No s'ha configurat cap còmic"
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:230
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -257,3 +251,7 @@ msgstr "&Tira número:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identificador de tira:"
+
+#~ msgctxt "@action:inmenu %1 is the name of a web browser"
+#~ msgid "View in %1"
+#~ msgstr "Visualitzeu amb el %1"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-07 00:40+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -104,7 +104,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "总是加载此页面："
 
-#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:106
+#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:112
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -146,54 +146,54 @@ msgctxt "@action:button"
 msgid "Go Back"
 msgstr "后退"
 
-#: package/contents/ui/main.qml:74
+#: package/contents/ui/main.qml:77
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "前进"
 
-#: package/contents/ui/main.qml:82
+#: package/contents/ui/main.qml:88
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "转到主页"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgid "Open Default URL"
 msgstr "打开默认 URL"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:152
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "停止加载此页面"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:152
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "重新加载此页面"
 
-#: package/contents/ui/main.qml:192
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "用浏览器打开连接"
 
-#: package/contents/ui/main.qml:198
+#: package/contents/ui/main.qml:211
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "复制链接地址"
 
-#: package/contents/ui/main.qml:265
+#: package/contents/ui/main.qml:278
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "弹窗已被拦截"
 
-#: package/contents/ui/main.qml:266
+#: package/contents/ui/main.qml:279
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

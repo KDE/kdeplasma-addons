@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-08 00:43+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2015-02-04 16:15+0000\n"
 "Last-Translator: Vedran Ljubovic <vljubovic@smartnet.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -19,76 +19,6 @@ msgstr ""
 "X-Generator: Launchpad (build 17331)\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-
-#: comic.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "here strip means comic strip"
-#| msgid "&Next Tab with a new Strip"
-msgctxt "@action comic strip"
-msgid "&Next Tab with a New Strip"
-msgstr "&Naredna kartica s novim stripom"
-
-#: comic.cpp:86
-#, fuzzy, kde-format
-#| msgid "Jump to &first Strip"
-msgctxt "@action"
-msgid "Jump to &First Strip"
-msgstr "Skoči na &prvi strip"
-
-#: comic.cpp:90
-#, fuzzy, kde-format
-#| msgid "Jump to &current Strip"
-msgctxt "@action"
-msgid "Jump to &Current Strip"
-msgstr "Skoči na &tekući strip"
-
-#: comic.cpp:94
-#, fuzzy, kde-format
-#| msgid "Jump to Strip ..."
-msgctxt "@action"
-msgid "Jump to Strip…"
-msgstr "Skoči na strip ..."
-
-#: comic.cpp:98
-#, fuzzy, kde-format
-#| msgid "Visit the shop &website"
-msgctxt "@action"
-msgid "Visit the Website"
-msgstr "Posjeti &web stranicu za kupovinu"
-
-#: comic.cpp:102
-#, kde-format
-msgctxt "@action:inmenu %1 is the name of a web browser"
-msgid "View in %1"
-msgstr ""
-
-#: comic.cpp:110
-#, fuzzy, kde-format
-#| msgid "Visit the shop &website"
-msgctxt "@action"
-msgid "Visit the Shop &Website"
-msgstr "Posjeti &web stranicu za kupovinu"
-
-#: comic.cpp:115
-#, fuzzy, kde-format
-#| msgid "&Save Comic As..."
-msgctxt "@action"
-msgid "&Save Comic As…"
-msgstr "&Snimi strip kao..."
-
-#: comic.cpp:120
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "&Actual Size"
-msgstr "&Stvarna veličina"
-
-#: comic.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "@option:check Context menu of comic image"
-#| msgid "Store current &Position"
-msgctxt "@option:check Context menu of comic image"
-msgid "Store Current &Position"
-msgstr "Spremi  tekuću &poziciju"
 
 #: comicdata.cpp:87
 #, kde-format
@@ -257,13 +187,77 @@ msgstr[0] " minuta"
 msgstr[1] " minuta"
 msgstr[2] " minuta"
 
-#: package/contents/ui/main.qml:163
+#: package/contents/ui/main.qml:40
+#, fuzzy, kde-format
+#| msgctxt "here strip means comic strip"
+#| msgid "&Next Tab with a new Strip"
+msgctxt "@action comic strip"
+msgid "&Next Tab with a New Strip"
+msgstr "&Naredna kartica s novim stripom"
+
+#: package/contents/ui/main.qml:47
+#, fuzzy, kde-format
+#| msgid "Jump to &first Strip"
+msgctxt "@action"
+msgid "Jump to &First Strip"
+msgstr "Skoči na &prvi strip"
+
+#: package/contents/ui/main.qml:53
+#, fuzzy, kde-format
+#| msgid "Jump to &current Strip"
+msgctxt "@action"
+msgid "Jump to &Current Strip"
+msgstr "Skoči na &tekući strip"
+
+#: package/contents/ui/main.qml:59
+#, fuzzy, kde-format
+#| msgid "Jump to Strip ..."
+msgctxt "@action"
+msgid "Jump to Strip…"
+msgstr "Skoči na strip ..."
+
+#: package/contents/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Visit the shop &website"
+msgctxt "@action"
+msgid "Visit the Website"
+msgstr "Posjeti &web stranicu za kupovinu"
+
+#: package/contents/ui/main.qml:70
+#, fuzzy, kde-format
+#| msgid "Visit the shop &website"
+msgctxt "@action"
+msgid "Visit the Shop &Website"
+msgstr "Posjeti &web stranicu za kupovinu"
+
+#: package/contents/ui/main.qml:78
+#, fuzzy, kde-format
+#| msgid "&Save Comic As..."
+msgctxt "@action"
+msgid "&Save Comic As…"
+msgstr "&Snimi strip kao..."
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "&Actual Size"
+msgstr "&Stvarna veličina"
+
+#: package/contents/ui/main.qml:92
+#, fuzzy, kde-format
+#| msgctxt "@option:check Context menu of comic image"
+#| msgid "Store current &Position"
+msgctxt "@option:check Context menu of comic image"
+msgid "Store Current &Position"
+msgstr "Spremi  tekuću &poziciju"
+
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:230
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-01 01:38+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2023-12-01 18:41+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -27,24 +27,31 @@ msgid "Appearance"
 msgstr "Aparença"
 
 #: package/contents/ui/configGeneral.qml:29
-#: package/contents/ui/configGeneral.qml:59
+#, kde-format
+msgctxt ""
+"@title:group The things being potentially shown are lights and seconds"
+msgid "Show:"
+msgstr ""
+
+#: package/contents/ui/configGeneral.qml:30
+#: package/contents/ui/configGeneral.qml:60
 #, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "Llums inactius"
 
-#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Segons"
 
-#: package/contents/ui/configGeneral.qml:42
+#: package/contents/ui/configGeneral.qml:43
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Utilitza un color personalitzat per a:"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Active lights"

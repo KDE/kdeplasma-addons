@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-24 00:42+0000\n"
-"PO-Revision-Date: 2022-07-21 21:36+0200\n"
+"PO-Revision-Date: 2025-04-24 04:44+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.5\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -30,8 +30,7 @@ msgid "Add More Dictionaries"
 msgstr "მეტი ლექსიკონის დამატება"
 
 #: package/contents/ui/ConfigDictionaries.qml:21
-#, fuzzy, kde-format
-#| msgid "Add More…"
+#, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "მეტის დამატება…"

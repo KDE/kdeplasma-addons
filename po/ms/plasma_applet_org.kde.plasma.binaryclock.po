@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-01 01:38+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2009-06-09 02:05+0800\n"
 "Last-Translator: Sharuzzaman Ahmat Raslan <sharuzzaman@myrealbox.com>\n"
 "Language-Team: Malay <kedidiemas@yahoogroups.com>\n"
@@ -26,24 +26,32 @@ msgid "Appearance"
 msgstr "Rupa"
 
 #: package/contents/ui/configGeneral.qml:29
-#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgid "Show"
+msgctxt ""
+"@title:group The things being potentially shown are lights and seconds"
+msgid "Show:"
+msgstr "Papar"
+
+#: package/contents/ui/configGeneral.qml:30
+#: package/contents/ui/configGeneral.qml:60
 #, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:42
+#: package/contents/ui/configGeneral.qml:43
 #, kde-format
 msgid "Use custom color for:"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Active lights"
@@ -54,9 +62,6 @@ msgstr ""
 #~ msgctxt "@title:group"
 #~ msgid "Appearance"
 #~ msgstr "Rupa"
-
-#~ msgid "Show"
-#~ msgstr "Papar"
 
 #, fuzzy
 #~ msgid "Information"

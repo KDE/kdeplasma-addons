@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-03-20 00:43+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2024-08-30 06:41+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -143,61 +143,61 @@ msgctxt "@title"
 msgid "Units"
 msgstr "Enheter"
 
-#: package/contents/ui/config/ConfigAppearance.qml:35
+#: package/contents/ui/config/ConfigAppearance.qml:38
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "Kompakt läge"
 
-#: package/contents/ui/config/ConfigAppearance.qml:43
+#: package/contents/ui/config/ConfigAppearance.qml:46
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Visa temperatur:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:46
+#: package/contents/ui/config/ConfigAppearance.qml:49
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Över komponentens ikon"
 
-#: package/contents/ui/config/ConfigAppearance.qml:54
+#: package/contents/ui/config/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Bredvid komponentens ikon"
 
-#: package/contents/ui/config/ConfigAppearance.qml:61
+#: package/contents/ui/config/ConfigAppearance.qml:64
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Visa inte"
 
-#: package/contents/ui/config/ConfigAppearance.qml:70
+#: package/contents/ui/config/ConfigAppearance.qml:73
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "Visa i verktygstips:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:71
+#: package/contents/ui/config/ConfigAppearance.qml:74
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Temperatur"
 
-#: package/contents/ui/config/ConfigAppearance.qml:76
+#: package/contents/ui/config/ConfigAppearance.qml:79
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Vind"
 
-#: package/contents/ui/config/ConfigAppearance.qml:81
+#: package/contents/ui/config/ConfigAppearance.qml:84
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Lufttryck"
 
-#: package/contents/ui/config/ConfigAppearance.qml:86
+#: package/contents/ui/config/ConfigAppearance.qml:89
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
@@ -227,68 +227,68 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Sikt:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:50
+#: package/contents/ui/config/ConfigWeatherStation.qml:48
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Uppdatera var:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:53
+#: package/contents/ui/config/ConfigWeatherStation.qml:51
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 minut"
 msgstr[1] "%1 minuter"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:65
+#: package/contents/ui/config/ConfigWeatherStation.qml:63
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Plats:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#: package/contents/ui/config/ConfigWeatherStation.qml:69
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "Ingen vald"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:76
+#: package/contents/ui/config/ConfigWeatherStation.qml:74
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "Leverantör:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Ange ny plats"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: package/contents/ui/config/ConfigWeatherStation.qml:99
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Ange plats"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: package/contents/ui/config/ConfigWeatherStation.qml:183
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Inga väderstationer hittades för '%1'"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Sök efter en väderstation för att byta plats"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:189
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Sök efter en väderstation för att ange plats"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#: package/contents/ui/config/ConfigWeatherStation.qml:190
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -512,17 +512,17 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "Känns som %1"
 
-#: plugin/locationlistmodel.cpp:42
+#: plugin/locationlistmodel.cpp:43
 #, kde-format
 msgid "Cannot find '%1' using %2."
 msgstr "Kan inte hitta '%1' med användning av %2."
 
-#: plugin/locationlistmodel.cpp:66
+#: plugin/locationlistmodel.cpp:67
 #, kde-format
 msgid "Connection to %1 weather server timed out."
 msgstr "Tidsgräns gick ut vid anslutning till vädertjänsten %1."
 
-#: plugin/locationlistmodel.cpp:151
+#: plugin/locationlistmodel.cpp:186
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"

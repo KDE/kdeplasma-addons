@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-07 00:40+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2024-11-12 20:40+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -106,7 +106,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Vienmēr ielādēt šo lapu:"
 
-#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:106
+#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:112
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -148,54 +148,54 @@ msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Atpakaļ"
 
-#: package/contents/ui/main.qml:74
+#: package/contents/ui/main.qml:77
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Uz priekšu"
 
-#: package/contents/ui/main.qml:82
+#: package/contents/ui/main.qml:88
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "Mājup"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgid "Open Default URL"
 msgstr "Atvērt noklusēto URL"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:152
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Apturēt lapas ielādi"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:152
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Pārlādēt šo lapu"
 
-#: package/contents/ui/main.qml:192
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Atvērt saiti pārlūkā"
 
-#: package/contents/ui/main.qml:198
+#: package/contents/ui/main.qml:211
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopēt saites adresi"
 
-#: package/contents/ui/main.qml:265
+#: package/contents/ui/main.qml:278
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Bloķēts uznirstošais logs"
 
-#: package/contents/ui/main.qml:266
+#: package/contents/ui/main.qml:279
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

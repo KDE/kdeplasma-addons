@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-10-07 00:40+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2024-10-08 01:26+0200\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -107,7 +107,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Cargar siempre esta página:"
 
-#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:106
+#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:112
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -149,54 +149,54 @@ msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Retroceder"
 
-#: package/contents/ui/main.qml:74
+#: package/contents/ui/main.qml:77
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Avanzar"
 
-#: package/contents/ui/main.qml:82
+#: package/contents/ui/main.qml:88
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "Ir al inicio"
 
-#: package/contents/ui/main.qml:87
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgid "Open Default URL"
 msgstr "Abrir la URL predeterminada"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:152
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Detener la carga de esta página"
 
-#: package/contents/ui/main.qml:142
+#: package/contents/ui/main.qml:152
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Volver a cargar esta página"
 
-#: package/contents/ui/main.qml:192
+#: package/contents/ui/main.qml:205
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Abrir enlace en el navegador"
 
-#: package/contents/ui/main.qml:198
+#: package/contents/ui/main.qml:211
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copiar dirección del enlace"
 
-#: package/contents/ui/main.qml:265
+#: package/contents/ui/main.qml:278
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Ventana emergente bloqueada"
 
-#: package/contents/ui/main.qml:266
+#: package/contents/ui/main.qml:279
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

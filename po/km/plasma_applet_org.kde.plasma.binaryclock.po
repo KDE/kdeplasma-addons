@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-01 01:38+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2009-05-27 16:47+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -26,27 +26,35 @@ msgid "Appearance"
 msgstr "រូបរាង"
 
 #: package/contents/ui/configGeneral.qml:29
-#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgid "Show"
+msgctxt ""
+"@title:group The things being potentially shown are lights and seconds"
+msgid "Show:"
+msgstr "បង្ហាញ​"
+
+#: package/contents/ui/configGeneral.qml:30
+#: package/contents/ui/configGeneral.qml:60
 #, fuzzy, kde-format
 #| msgid "Inactive LEDs:"
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "LEDs អសកម្ម ៖"
 
-#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:35
 #, fuzzy, kde-format
 #| msgid "Seconds:"
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "វិនាទី ៖"
 
-#: package/contents/ui/configGeneral.qml:42
+#: package/contents/ui/configGeneral.qml:43
 #, fuzzy, kde-format
 #| msgid "Use custom color for active LEDs:"
 msgid "Use custom color for:"
 msgstr "ប្រើ​ពណ៌​ផ្ទាល់ខ្លួន​សម្រាប់​ទ្រនិច​សកម្ម ៖"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:47
 #, fuzzy, kde-format
 #| msgid "Active LEDs:"
 msgctxt "@option:check"
@@ -85,9 +93,6 @@ msgstr "LEDs សកម្ម ៖"
 
 #~ msgid "Check this if you want to see the inactive LEDs."
 #~ msgstr "គូសធីក​វា​ប្រសិន​បើ​អ្នក​ចង់​មើលទ្រនិច​អសកម្ម ។"
-
-#~ msgid "Show"
-#~ msgstr "បង្ហាញ​"
 
 #~ msgid "Use theme color"
 #~ msgstr "ប្រើ​ពណ៌​ស្បែក"

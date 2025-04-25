@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-08 00:43+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2011-06-29 23:33+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -17,74 +17,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "X-Generator: Lokalize 1.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-
-#: comic.cpp:80
-#, kde-format
-msgctxt "@action comic strip"
-msgid "&Next Tab with a New Strip"
-msgstr ""
-
-#: comic.cpp:86
-#, fuzzy, kde-format
-#| msgid "Jump to &first Strip"
-msgctxt "@action"
-msgid "Jump to &First Strip"
-msgstr "ਪਹਿਲੀਂ ਪੱਟੀ ਉੱਤੇ ਜਾਓ(&f)"
-
-#: comic.cpp:90
-#, fuzzy, kde-format
-#| msgid "Jump to &current Strip"
-msgctxt "@action"
-msgid "Jump to &Current Strip"
-msgstr "ਮੌਜੂਦਾ ਪੱਟੀ ਉੱਤੇ ਜਾਓ(&c)"
-
-#: comic.cpp:94
-#, fuzzy, kde-format
-#| msgid "Jump to Strip ..."
-msgctxt "@action"
-msgid "Jump to Strip…"
-msgstr "ਪਹਿਲੀ ਪੱਟੀ ਉੱਤੇ ਜਾਓ..."
-
-#: comic.cpp:98
-#, fuzzy, kde-format
-#| msgid "Visit the shop &website"
-msgctxt "@action"
-msgid "Visit the Website"
-msgstr "ਦੁਕਾਨ ਵੈੱਬਸਾਈਟ ਵੇਖੋ(&w)"
-
-#: comic.cpp:102
-#, kde-format
-msgctxt "@action:inmenu %1 is the name of a web browser"
-msgid "View in %1"
-msgstr ""
-
-#: comic.cpp:110
-#, fuzzy, kde-format
-#| msgid "Visit the shop &website"
-msgctxt "@action"
-msgid "Visit the Shop &Website"
-msgstr "ਦੁਕਾਨ ਵੈੱਬਸਾਈਟ ਵੇਖੋ(&w)"
-
-#: comic.cpp:115
-#, fuzzy, kde-format
-#| msgid "&Save Comic As..."
-msgctxt "@action"
-msgid "&Save Comic As…"
-msgstr "ਕਾਮਿਕ ਇੰਝ ਸੰਭਾਲੋ(&S)..."
-
-#: comic.cpp:120
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "&Actual Size"
-msgstr "ਅਸਲੀ ਸਾਈਜ਼(&A)"
-
-#: comic.cpp:128
-#, fuzzy, kde-format
-#| msgctxt "@option:check Context menu of comic image"
-#| msgid "Store current &Position"
-msgctxt "@option:check Context menu of comic image"
-msgid "Store Current &Position"
-msgstr "ਮੌਜੂਦਾ ਸਥਿਤੀ ਸਟੋਰ ਕਰੋ(&P)"
 
 #: comicdata.cpp:87
 #, kde-format
@@ -248,13 +180,75 @@ msgid_plural "minutes"
 msgstr[0] " ਮਿੰਟ"
 msgstr[1] " ਮਿੰਟ"
 
-#: package/contents/ui/main.qml:163
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgctxt "@action comic strip"
+msgid "&Next Tab with a New Strip"
+msgstr ""
+
+#: package/contents/ui/main.qml:47
+#, fuzzy, kde-format
+#| msgid "Jump to &first Strip"
+msgctxt "@action"
+msgid "Jump to &First Strip"
+msgstr "ਪਹਿਲੀਂ ਪੱਟੀ ਉੱਤੇ ਜਾਓ(&f)"
+
+#: package/contents/ui/main.qml:53
+#, fuzzy, kde-format
+#| msgid "Jump to &current Strip"
+msgctxt "@action"
+msgid "Jump to &Current Strip"
+msgstr "ਮੌਜੂਦਾ ਪੱਟੀ ਉੱਤੇ ਜਾਓ(&c)"
+
+#: package/contents/ui/main.qml:59
+#, fuzzy, kde-format
+#| msgid "Jump to Strip ..."
+msgctxt "@action"
+msgid "Jump to Strip…"
+msgstr "ਪਹਿਲੀ ਪੱਟੀ ਉੱਤੇ ਜਾਓ..."
+
+#: package/contents/ui/main.qml:65
+#, fuzzy, kde-format
+#| msgid "Visit the shop &website"
+msgctxt "@action"
+msgid "Visit the Website"
+msgstr "ਦੁਕਾਨ ਵੈੱਬਸਾਈਟ ਵੇਖੋ(&w)"
+
+#: package/contents/ui/main.qml:70
+#, fuzzy, kde-format
+#| msgid "Visit the shop &website"
+msgctxt "@action"
+msgid "Visit the Shop &Website"
+msgstr "ਦੁਕਾਨ ਵੈੱਬਸਾਈਟ ਵੇਖੋ(&w)"
+
+#: package/contents/ui/main.qml:78
+#, fuzzy, kde-format
+#| msgid "&Save Comic As..."
+msgctxt "@action"
+msgid "&Save Comic As…"
+msgstr "ਕਾਮਿਕ ਇੰਝ ਸੰਭਾਲੋ(&S)..."
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "&Actual Size"
+msgstr "ਅਸਲੀ ਸਾਈਜ਼(&A)"
+
+#: package/contents/ui/main.qml:92
+#, fuzzy, kde-format
+#| msgctxt "@option:check Context menu of comic image"
+#| msgid "Store current &Position"
+msgctxt "@option:check Context menu of comic image"
+msgid "Store Current &Position"
+msgstr "ਮੌਜੂਦਾ ਸਥਿਤੀ ਸਟੋਰ ਕਰੋ(&P)"
+
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:230
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"

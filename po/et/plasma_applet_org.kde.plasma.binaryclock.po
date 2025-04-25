@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-12-01 01:38+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2019-10-30 23:54+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -25,7 +25,15 @@ msgid "Appearance"
 msgstr "Välimus"
 
 #: package/contents/ui/configGeneral.qml:29
-#: package/contents/ui/configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgid "Show"
+msgctxt ""
+"@title:group The things being potentially shown are lights and seconds"
+msgid "Show:"
+msgstr "Näitamine"
+
+#: package/contents/ui/configGeneral.qml:30
+#: package/contents/ui/configGeneral.qml:60
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "Inactive LEDs"
@@ -33,18 +41,18 @@ msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "Mitteaktiivsed LED-id"
 
-#: package/contents/ui/configGeneral.qml:34
+#: package/contents/ui/configGeneral.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Sekundid"
 
-#: package/contents/ui/configGeneral.qml:42
+#: package/contents/ui/configGeneral.qml:43
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Kohandatud värvi kasutamine:"
 
-#: package/contents/ui/configGeneral.qml:46
+#: package/contents/ui/configGeneral.qml:47
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "Active LEDs"
@@ -95,9 +103,6 @@ msgstr "Aktiivsed LED-id"
 
 #~ msgid "Check this if you want to see the inactive LEDs."
 #~ msgstr "Märkimisel näidatakse väljalülitatud LED-e."
-
-#~ msgid "Show"
-#~ msgstr "Näitamine"
 
 #~ msgid "Use theme color"
 #~ msgstr "Teema värvi kasutamine"

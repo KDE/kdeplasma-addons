@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-08 00:43+0000\n"
+"POT-Creation-Date: 2025-04-25 00:43+0000\n"
 "PO-Revision-Date: 2009-01-10 23:44+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <kde-i18n-doc@kde.org>\n"
@@ -18,70 +18,6 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-Language: Kurdish\n"
 "X-Poedit-SourceCharset: utf8\n"
-
-#: comic.cpp:80
-#, kde-format
-msgctxt "@action comic strip"
-msgid "&Next Tab with a New Strip"
-msgstr ""
-
-#: comic.cpp:86
-#, fuzzy, kde-format
-#| msgid "&Jump to first Strip"
-msgctxt "@action"
-msgid "Jump to &First Strip"
-msgstr "&Biçe Beşa yekemîn"
-
-#: comic.cpp:90
-#, fuzzy, kde-format
-#| msgid "&Jump to current Strip"
-msgctxt "@action"
-msgid "Jump to &Current Strip"
-msgstr "&Biçe Beşa niha vekirî"
-
-#: comic.cpp:94
-#, fuzzy, kde-format
-#| msgid "&Jump to first Strip"
-msgctxt "@action"
-msgid "Jump to Strip…"
-msgstr "&Biçe Beşa yekemîn"
-
-#: comic.cpp:98
-#, kde-format
-msgctxt "@action"
-msgid "Visit the Website"
-msgstr ""
-
-#: comic.cpp:102
-#, kde-format
-msgctxt "@action:inmenu %1 is the name of a web browser"
-msgid "View in %1"
-msgstr ""
-
-#: comic.cpp:110
-#, kde-format
-msgctxt "@action"
-msgid "Visit the Shop &Website"
-msgstr ""
-
-#: comic.cpp:115
-#, fuzzy, kde-format
-#| msgid "&Save Comic As..."
-msgctxt "@action"
-msgid "&Save Comic As…"
-msgstr "Pirtûka Qerfî Cuda &Tomar Bike..."
-
-#: comic.cpp:120
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "&Actual Size"
-msgstr "&Mezinahiya Rastî"
-
-#: comic.cpp:128
-#, kde-format
-msgctxt "@option:check Context menu of comic image"
-msgid "Store Current &Position"
-msgstr ""
 
 #: comicdata.cpp:87
 #, kde-format
@@ -240,13 +176,71 @@ msgid_plural "minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: package/contents/ui/main.qml:163
+#: package/contents/ui/main.qml:40
+#, kde-format
+msgctxt "@action comic strip"
+msgid "&Next Tab with a New Strip"
+msgstr ""
+
+#: package/contents/ui/main.qml:47
+#, fuzzy, kde-format
+#| msgid "&Jump to first Strip"
+msgctxt "@action"
+msgid "Jump to &First Strip"
+msgstr "&Biçe Beşa yekemîn"
+
+#: package/contents/ui/main.qml:53
+#, fuzzy, kde-format
+#| msgid "&Jump to current Strip"
+msgctxt "@action"
+msgid "Jump to &Current Strip"
+msgstr "&Biçe Beşa niha vekirî"
+
+#: package/contents/ui/main.qml:59
+#, fuzzy, kde-format
+#| msgid "&Jump to first Strip"
+msgctxt "@action"
+msgid "Jump to Strip…"
+msgstr "&Biçe Beşa yekemîn"
+
+#: package/contents/ui/main.qml:65
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Website"
+msgstr ""
+
+#: package/contents/ui/main.qml:70
+#, kde-format
+msgctxt "@action"
+msgid "Visit the Shop &Website"
+msgstr ""
+
+#: package/contents/ui/main.qml:78
+#, fuzzy, kde-format
+#| msgid "&Save Comic As..."
+msgctxt "@action"
+msgid "&Save Comic As…"
+msgstr "Pirtûka Qerfî Cuda &Tomar Bike..."
+
+#: package/contents/ui/main.qml:84
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "&Actual Size"
+msgstr "&Mezinahiya Rastî"
+
+#: package/contents/ui/main.qml:92
+#, kde-format
+msgctxt "@option:check Context menu of comic image"
+msgid "Store Current &Position"
+msgstr ""
+
+#: package/contents/ui/main.qml:227
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:166
+#: package/contents/ui/main.qml:230
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
