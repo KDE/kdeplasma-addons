@@ -1,12 +1,12 @@
 plasma_install_package(calculator/package org.kde.plasma.calculator)
 plasma_install_package(fuzzy-clock/package org.kde.plasma.fuzzyclock)
 plasma_install_package(katesessions org.kde.plasma.addons.katesessions)
-plasma_install_package(keyboardindicator org.kde.plasma.keyboardindicator)
 plasma_install_package(kickerdash org.kde.plasma.kickerdash)
 plasma_install_package(konsoleprofiles/package org.kde.plasma.konsoleprofiles)
 plasma_install_package(userswitcher/package org.kde.plasma.userswitcher)
 
 add_subdirectory(binary-clock)
+add_subdirectory(keyboardindicator)
 add_subdirectory(colorpicker)
 add_subdirectory(comic)
 add_subdirectory(dict)
