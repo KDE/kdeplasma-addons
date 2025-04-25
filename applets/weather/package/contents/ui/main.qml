@@ -359,7 +359,7 @@ PlasmoidItem {
 
         return iconName;
     }
-    Plasmoid.title: status === Util.NeedsConfiguration ? i18nc("@info:usagetip Minimize the length of this string so it is as short as possible! Omitting or changing words is fine as long as the original meaning is retained.", "Set up Weather Report…") : undefined
+    Plasmoid.title: status === Util.NeedsConfiguration ? i18nc("@info:usagetip Minimize the length of this string so it is as short as possible! Omitting or changing words is fine as long as the original meaning is retained.", "Set up Weather Report…") : null
     Plasmoid.busy: status === Util.Connecting
     Plasmoid.configurationRequired: status === Util.NeedsConfiguration
     Plasmoid.status: status === Util.NeedsConfiguration ? PlasmaCore.Types.PassiveStatus : PlasmaCore.Types.ActiveStatus
