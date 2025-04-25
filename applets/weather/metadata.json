@@ -98,7 +98,6 @@
         "Description[zh_TW]": "預報及目前氣象觀測",
         "EnabledByDefault": true,
         "Icon": "weather-clear",
-        "Id": "org.kde.plasma.weather",
         "License": "GPL-2.0+",
         "Name": "Weather Report",
         "Name[ar]": "تقرير الطقس",

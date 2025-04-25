@@ -11,7 +11,6 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasmoid
-import org.kde.plasma.private.weather
 import org.kde.kcmutils as KCM
 
 

@@ -11,8 +11,6 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasma5support as P5Support
 
-import org.kde.plasma.private.weather
-
 PlasmoidItem {
     id: root
 

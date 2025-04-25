@@ -15,8 +15,6 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 
-import org.kde.plasma.private.weather
-
 ColumnLayout {
     id: fullRoot
 

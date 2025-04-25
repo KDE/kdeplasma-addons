@@ -11,7 +11,6 @@ import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
-import org.kde.plasma.private.weather
 import org.kde.kcmutils as KCM
 
 KCM.ScrollViewKCM {
