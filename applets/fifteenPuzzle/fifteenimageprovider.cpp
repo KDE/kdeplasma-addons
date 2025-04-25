@@ -9,6 +9,8 @@
 
 #include <QDebug>
 
+using namespace Qt::Literals::StringLiterals;
+
 FifteenImageProvider::FifteenImageProvider()
     : QQuickImageProvider(QQuickImageProvider::Pixmap)
     , m_boardSize(4)
@@ -85,4 +87,17 @@ void FifteenImageProvider::updatePixmaps()
 
         m_pixmaps[i] = copyPixmap.copy(posX, posY, m_pieceWidth, m_pieceHeight);
     }
+}
+
+FifteenImageProvider *FifteenImageProvider::create(QQmlEngine *engine, QJSEngine *)
+{
+    static FifteenImageProvider instance;
+    QQmlEngine::setObjectOwnership(&instance, QQmlEngine::CppOwnership);
+    engine->addImageProvider(u"fifteenpuzzle"_s, &instance);
+    return &instance;
+}
+
+void FifteenImageProvider::init()
+{
+    // Only here to initialize the image singleton, which registers it as an image provider
 }

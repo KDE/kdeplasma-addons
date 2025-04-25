@@ -13,12 +13,20 @@
 
 class FifteenImageProvider : public QQuickImageProvider
 {
+    Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 public:
-    FifteenImageProvider();
+
+    static FifteenImageProvider *create(QQmlEngine *engine, QJSEngine *);
 
     QPixmap requestPixmap(const QString &id, QSize *size, const QSize &requestedSize) override;
 
+    Q_INVOKABLE void init();
+
 private:
+    FifteenImageProvider();
+
     // Update our pixmaps, called when sizes change or boardSize changes
     void updatePixmaps();
 

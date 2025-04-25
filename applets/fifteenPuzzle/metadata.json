@@ -97,7 +97,6 @@
         "Description[zh_CN]": "按顺序排列板块的小游戏",
         "Description[zh_TW]": "把磁磚整理整齊",
         "Icon": "fifteenpuzzle",
-        "Id": "org.kde.plasma.fifteenpuzzle",
         "License": "GPL-2.0+",
         "Name": "Fifteen Puzzle",
         "Name[ar]": "أحجية الخمسة عشر",
