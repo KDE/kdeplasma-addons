@@ -14,13 +14,13 @@ ConfigModel {
     ConfigCategory {
         name: i18nc("@title", "Weather Station")
         icon: "services"
-        source: "config/ConfigWeatherStation.qml"
+        source: "ConfigWeatherStation.qml"
     }
 
     ConfigCategory {
         name: i18nc("@title", "Appearance")
         icon: "preferences-desktop-color"
-        source: "config/ConfigAppearance.qml"
+        source: "ConfigAppearance.qml"
         // This category's settings only apply to the CompactRepresentation in the panel
         visible: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.BottomEdge,
                   PlasmaCore.Types.LeftEdge, PlasmaCore.Types.RightEdge,
@@ -30,6 +30,6 @@ ConfigModel {
     ConfigCategory {
         name: i18nc("@title", "Units")
         icon: "preferences-other"
-        source: "config/ConfigUnits.qml"
+        source: "ConfigUnits.qml"
     }
 }

@@ -12,9 +12,13 @@
 // Qt
 #include <QObject>
 
+#include <qqmlintegration.h>
+
 class Util : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
     explicit Util(QObject *parent = nullptr);

@@ -13,6 +13,7 @@
 #include <QAbstractListModel>
 #include <QList>
 #include <QMap>
+#include <qqmlintegration.h>
 
 class WeatherValidator : public QObject
 {
@@ -65,6 +66,8 @@ Q_DECLARE_TYPEINFO(LocationItem, Q_MOVABLE_TYPE);
 class LocationListModel : public QAbstractListModel, public Plasma5Support::DataEngineConsumer
 {
     Q_OBJECT
+    QML_ELEMENT
+
     Q_PROPERTY(bool validatingInput READ isValidatingInput NOTIFY validatingInputChanged)
     Q_PROPERTY(bool hasProviders READ hasProviders CONSTANT)
 
