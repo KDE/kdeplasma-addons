@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-04-26 00:43+0000\n"
 "PO-Revision-Date: 2025-04-07 13:54+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -29,206 +29,200 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: package/contents/config/config.qml:13
-#, kde-format
-msgctxt "@title"
-msgid "General"
-msgstr "一般"
-
-#: package/contents/config/config.qml:18
-#, kde-format
-msgctxt "@title"
-msgid "Appearance"
-msgstr "外觀"
-
-#: package/contents/config/config.qml:23
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "進階"
-
-#: package/contents/ui/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "跳到其他篇…"
 
-#: package/contents/ui/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "造訪漫畫網站"
 
-#: package/contents/ui/ComicCentralView.qml:97
+#: qml/ComicCentralView.qml:97
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr "無法載入漫畫"
 
-#: package/contents/ui/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:98
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
 msgstr "請稍候再試，或是選擇別的漫畫"
 
-#: package/contents/ui/configAdvanced.qml:35
+#: qml/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "一般"
+
+#: qml/config.qml:18
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "外觀"
+
+#: qml/config.qml:23
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "進階"
+
+#: qml/configAdvanced.qml:33
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "漫畫快取："
 
-#: package/contents/ui/configAdvanced.qml:44
+#: qml/configAdvanced.qml:42
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
 msgid_plural "strips per comic"
 msgstr[0] " 則 / 每篇漫畫"
 
-#: package/contents/ui/configAdvanced.qml:51
-#, kde-format
-msgctxt "@option:check"
-msgid "Display error when downloading comic fails"
-msgstr "下載漫畫失敗時顯示發生錯誤："
-
-#: package/contents/ui/configAppearance.qml:42
+#: qml/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "顯示："
 
-#: package/contents/ui/configAppearance.qml:43
+#: qml/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "漫畫標題"
 
-#: package/contents/ui/configAppearance.qml:49
+#: qml/configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "漫畫辨識碼"
 
-#: package/contents/ui/configAppearance.qml:55
+#: qml/configAppearance.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "漫畫作者"
 
-#: package/contents/ui/configAppearance.qml:61
+#: qml/configAppearance.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "漫畫網址"
 
-#: package/contents/ui/configAppearance.qml:71
+#: qml/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "顯示導覽按鈕："
 
-#: package/contents/ui/configAppearance.qml:72
+#: qml/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "總是顯示"
 
-#: package/contents/ui/configAppearance.qml:79
+#: qml/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "只在游標駐停時顯示"
 
-#: package/contents/ui/configGeneral.qml:50
+#: qml/configGeneral.qml:50
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "漫畫："
 
-#: package/contents/ui/configGeneral.qml:70
+#: qml/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "取得新漫畫…"
 
-#: package/contents/ui/configGeneral.qml:81
+#: qml/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "對漫畫按一下中鍵顯示回原始大小"
 
-#: package/contents/ui/configGeneral.qml:90
+#: qml/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "檢查新漫畫的週期："
 
-#: package/contents/ui/configGeneral.qml:99
+#: qml/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "每分鐘"
 
-#: package/contents/ui/main.qml:40
+#: qml/main.qml:39
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "下一則新漫畫(&N)"
 
-#: package/contents/ui/main.qml:47
+#: qml/main.qml:46
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "跳到第一篇(&F)"
 
-#: package/contents/ui/main.qml:53
+#: qml/main.qml:52
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "跳到目前這一篇(&C)"
 
-#: package/contents/ui/main.qml:59
+#: qml/main.qml:58
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "跳到其他篇…"
 
-#: package/contents/ui/main.qml:65
+#: qml/main.qml:64
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "造訪網站"
 
-#: package/contents/ui/main.qml:70
+#: qml/main.qml:69
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "造訪商店網站(&W)"
 
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:77
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "另存漫畫為(&S)…"
 
-#: package/contents/ui/main.qml:84
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "實際大小(&A)"
 
-#: package/contents/ui/main.qml:92
+#: qml/main.qml:91
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "商店目前位置(&P)"
 
-#: package/contents/ui/main.qml:227
+#: qml/main.qml:226
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "未設定漫畫"
 
-#: package/contents/ui/main.qml:230
+#: qml/main.qml:229
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -251,6 +245,10 @@ msgstr "篇數(&S)："
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "集數辨識器："
+
+#~ msgctxt "@option:check"
+#~ msgid "Display error when downloading comic fails"
+#~ msgstr "下載漫畫失敗時顯示發生錯誤："
 
 #~ msgctxt "@action:inmenu %1 is the name of a web browser"
 #~ msgid "View in %1"

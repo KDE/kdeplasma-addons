@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-04-26 00:43+0000\n"
 "PO-Revision-Date: 2016-07-03 22:52+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -481,13 +481,22 @@ msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "naleti vjetra: %1 %2"
 
-#: package/contents/ui/main.qml:367
+#: package/contents/ui/main.qml:362
 #, kde-format
-msgctxt "@info:tooltip %1 is the translated plasmoid name"
-msgid "Click to configure %1"
+msgctxt ""
+"@info:usagetip Minimize the length of this string so it is as short as "
+"possible! Omitting or changing words is fine as long as the original meaning "
+"is retained."
+msgid "Set up Weather Report…"
 msgstr ""
 
-#: package/contents/ui/main.qml:378
+#: package/contents/ui/main.qml:371
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Click to choose a location and monitor the weather there"
+msgstr ""
+
+#: package/contents/ui/main.qml:380
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the weather condition, %2 is the temperature,  both come from the "
@@ -497,7 +506,7 @@ msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:385
+#: package/contents/ui/main.qml:387
 #, fuzzy, kde-format
 #| msgctxt "wind direction, speed"
 #| msgid "%1 %2 %3"
@@ -505,7 +514,7 @@ msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 %3"
 
-#: package/contents/ui/main.qml:388
+#: package/contents/ui/main.qml:390
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the weather condition, %2 is the temperature,  both come from the "
@@ -515,7 +524,7 @@ msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:397
+#: package/contents/ui/main.qml:399
 #, fuzzy, kde-format
 #| msgctxt "A weather station location and the weather service it comes from"
 #| msgid "%1 (%2)"
@@ -523,7 +532,7 @@ msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:404
+#: package/contents/ui/main.qml:406
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"

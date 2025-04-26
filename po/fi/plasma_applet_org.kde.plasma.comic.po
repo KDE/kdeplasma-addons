@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-04-26 00:43+0000\n"
 "PO-Revision-Date: 2022-08-05 11:17+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -29,37 +29,19 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: package/contents/config/config.qml:13
-#, kde-format
-msgctxt "@title"
-msgid "General"
-msgstr "Yleisasetukset"
-
-#: package/contents/config/config.qml:18
-#, kde-format
-msgctxt "@title"
-msgid "Appearance"
-msgstr "Ulkoasu"
-
-#: package/contents/config/config.qml:23
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Lisäasetukset"
-
-#: package/contents/ui/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Siirry sarjakuvaan…"
 
-#: package/contents/ui/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Vieraile sarjakuvasivustossa"
 
-#: package/contents/ui/ComicCentralView.qml:97
+#: qml/ComicCentralView.qml:97
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Download Comics"
@@ -67,19 +49,37 @@ msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr "Lataa sarjakuvia"
 
-#: package/contents/ui/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:98
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
 msgstr ""
 
-#: package/contents/ui/configAdvanced.qml:35
+#: qml/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Yleisasetukset"
+
+#: qml/config.qml:18
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Ulkoasu"
+
+#: qml/config.qml:23
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "Lisäasetukset"
+
+#: qml/configAdvanced.qml:33
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "Sarjakuvavälimuisti:"
 
-#: package/contents/ui/configAdvanced.qml:44
+#: qml/configAdvanced.qml:42
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -87,86 +87,80 @@ msgid_plural "strips per comic"
 msgstr[0] "strippi per sarjakuva"
 msgstr[1] "strippiä per sarjakuva"
 
-#: package/contents/ui/configAdvanced.qml:51
-#, kde-format
-msgctxt "@option:check"
-msgid "Display error when downloading comic fails"
-msgstr "Sarjakuvahaun epäonnistuttua näytä virhe"
-
-#: package/contents/ui/configAppearance.qml:42
+#: qml/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "Näytä:"
 
-#: package/contents/ui/configAppearance.qml:43
+#: qml/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "Sarjakuvan otsikko"
 
-#: package/contents/ui/configAppearance.qml:49
+#: qml/configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "Sarjakuvan tunniste"
 
-#: package/contents/ui/configAppearance.qml:55
+#: qml/configAppearance.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "Sarjakuvan tekijä"
 
-#: package/contents/ui/configAppearance.qml:61
+#: qml/configAppearance.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "Sarjakuvan verkko-osoite"
 
-#: package/contents/ui/configAppearance.qml:71
+#: qml/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "Näytä navigointipainikkeet:"
 
-#: package/contents/ui/configAppearance.qml:72
+#: qml/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "Aina"
 
-#: package/contents/ui/configAppearance.qml:79
+#: qml/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Vain osoittimen alla"
 
-#: package/contents/ui/configGeneral.qml:50
+#: qml/configGeneral.qml:50
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Sarjakuvat:"
 
-#: package/contents/ui/configGeneral.qml:70
+#: qml/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Hae uusia sarjakuvia…"
 
-#: package/contents/ui/configGeneral.qml:81
+#: qml/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr ""
 "Näytä sarjakuva alkuperäiskoossaan hiiren keskipainikkeen napsautuksella"
 
-#: package/contents/ui/configGeneral.qml:90
+#: qml/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Etsi uusia strippejä:"
 
 # Konteksti: Check for new comics every: __ minute(s)
-#: package/contents/ui/configGeneral.qml:99
+#: qml/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -174,68 +168,68 @@ msgid_plural "minutes"
 msgstr[0] "minuutin välein"
 msgstr[1] "minuutin välein"
 
-#: package/contents/ui/main.qml:40
+#: qml/main.qml:39
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "S&euraava välilehti, jossa on uusi sarjakuva"
 
-#: package/contents/ui/main.qml:47
+#: qml/main.qml:46
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Siirry &ensimmäiseen sarjakuvaan"
 
-#: package/contents/ui/main.qml:53
+#: qml/main.qml:52
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Siirry &nykyiseen sarjakuvaan"
 
-#: package/contents/ui/main.qml:59
+#: qml/main.qml:58
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Siirry sarjakuvaan…"
 
-#: package/contents/ui/main.qml:65
+#: qml/main.qml:64
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Käy sivustolla"
 
-#: package/contents/ui/main.qml:70
+#: qml/main.qml:69
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Vieraile &kauppasivustossa"
 
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:77
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Tallenna sarjakuva nimellä…"
 
-#: package/contents/ui/main.qml:84
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Todellinen koko"
 
-#: package/contents/ui/main.qml:92
+#: qml/main.qml:91
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Tallenna nykyinen si&jainti"
 
-#: package/contents/ui/main.qml:227
+#: qml/main.qml:226
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Sarjakuva-asetukset"
 
-#: package/contents/ui/main.qml:230
+#: qml/main.qml:229
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -258,6 +252,10 @@ msgstr "S&tripin numero:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Stripin tunniste:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Display error when downloading comic fails"
+#~ msgstr "Sarjakuvahaun epäonnistuttua näytä virhe"
 
 #~ msgctxt "@action:inmenu %1 is the name of a web browser"
 #~ msgid "View in %1"

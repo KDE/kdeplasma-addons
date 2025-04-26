@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-04-26 00:43+0000\n"
 "PO-Revision-Date: 2025-04-07 09:41+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -428,37 +428,46 @@ msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "Vindhviður:"
 
-#: package/contents/ui/main.qml:367
+#: package/contents/ui/main.qml:362
 #, kde-format
-msgctxt "@info:tooltip %1 is the translated plasmoid name"
-msgid "Click to configure %1"
-msgstr "Smelltu til að grunnstilla %1"
+msgctxt ""
+"@info:usagetip Minimize the length of this string so it is as short as "
+"possible! Omitting or changing words is fine as long as the original meaning "
+"is retained."
+msgid "Set up Weather Report…"
+msgstr ""
 
-#: package/contents/ui/main.qml:378
+#: package/contents/ui/main.qml:371
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Click to choose a location and monitor the weather there"
+msgstr ""
+
+#: package/contents/ui/main.qml:380
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:385
+#: package/contents/ui/main.qml:387
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:388
+#: package/contents/ui/main.qml:390
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:397
+#: package/contents/ui/main.qml:399
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:404
+#: package/contents/ui/main.qml:406
 #, kde-format
 msgid "Humidity: %1"
 msgstr "Raki: %1"
@@ -561,6 +570,10 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
+
+#~ msgctxt "@info:tooltip %1 is the translated plasmoid name"
+#~ msgid "Click to configure %1"
+#~ msgstr "Smelltu til að grunnstilla %1"
 
 #~ msgctxt "@label"
 #~ msgid "Windchill:"

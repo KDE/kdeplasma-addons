@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-04-26 00:43+0000\n"
 "PO-Revision-Date: 2025-04-03 20:42+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -26,55 +26,55 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "מס׳ %1"
 
-#: package/contents/config/config.qml:13
-#, kde-format
-msgctxt "@title"
-msgid "General"
-msgstr "כללי"
-
-#: package/contents/config/config.qml:18
-#, kde-format
-msgctxt "@title"
-msgid "Appearance"
-msgstr "מראה"
-
-#: package/contents/config/config.qml:23
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "מתקדם"
-
-#: package/contents/ui/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "קפיצה לרצועה…"
 
-#: package/contents/ui/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "ביקור באתר הקומיקס"
 
-#: package/contents/ui/ComicCentralView.qml:97
+#: qml/ComicCentralView.qml:97
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr "לא ניתן לטעון את הקומיקס"
 
-#: package/contents/ui/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:98
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
 msgstr "נא לנסות שוב בהמשך או לבחור בקומיקס אחר"
 
-#: package/contents/ui/configAdvanced.qml:35
+#: qml/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "כללי"
+
+#: qml/config.qml:18
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "מראה"
+
+#: qml/config.qml:23
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "מתקדם"
+
+#: qml/configAdvanced.qml:33
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "מטמון קומיקס:"
 
-#: package/contents/ui/configAdvanced.qml:44
+#: qml/configAdvanced.qml:42
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -84,84 +84,78 @@ msgstr[1] "רצועות לקומיקס"
 msgstr[2] "רצועות לקומיקס"
 msgstr[3] "רצועות לקומיקס"
 
-#: package/contents/ui/configAdvanced.qml:51
-#, kde-format
-msgctxt "@option:check"
-msgid "Display error when downloading comic fails"
-msgstr "הצגת שגיאה כשהורדת קומיקס נכשלת"
-
-#: package/contents/ui/configAppearance.qml:42
+#: qml/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "הצגה:"
 
-#: package/contents/ui/configAppearance.qml:43
+#: qml/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "כותרת הקומיקס"
 
-#: package/contents/ui/configAppearance.qml:49
+#: qml/configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "מזהה הקומיקס"
 
-#: package/contents/ui/configAppearance.qml:55
+#: qml/configAppearance.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "יוצר הקומיקס"
 
-#: package/contents/ui/configAppearance.qml:61
+#: qml/configAppearance.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "כתובת קומיקס"
 
-#: package/contents/ui/configAppearance.qml:71
+#: qml/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "להציג כפתורי ניווט:"
 
-#: package/contents/ui/configAppearance.qml:72
+#: qml/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "תמיד"
 
-#: package/contents/ui/configAppearance.qml:79
+#: qml/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "רק בעת ריחוף מעל"
 
-#: package/contents/ui/configGeneral.qml:50
+#: qml/configGeneral.qml:50
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "קומיקס:"
 
-#: package/contents/ui/configGeneral.qml:70
+#: qml/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "הורדת קומיקס חדש…"
 
-#: package/contents/ui/configGeneral.qml:81
+#: qml/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "לחיצה אמצעית על קומיקס תציג את גודלו המקורי"
 
-#: package/contents/ui/configGeneral.qml:90
+#: qml/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "לבדוק אם יש קומיקסים חדשים כל:"
 
-#: package/contents/ui/configGeneral.qml:99
+#: qml/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -171,67 +165,67 @@ msgstr[1] "דקות"
 msgstr[2] "דקות"
 msgstr[3] "דקות"
 
-#: package/contents/ui/main.qml:40
+#: qml/main.qml:39
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "הלשונית ה&באה עם רצועה חדשה"
 
-#: package/contents/ui/main.qml:47
+#: qml/main.qml:46
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "קפיצה לרצועה ה&ראשונה"
 
-#: package/contents/ui/main.qml:53
+#: qml/main.qml:52
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "קפיצה לרצועה ה&נוכחית"
 
-#: package/contents/ui/main.qml:59
+#: qml/main.qml:58
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "קפיצה לרצועה…"
 
-#: package/contents/ui/main.qml:65
+#: qml/main.qml:64
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "ביקור באתר"
 
-#: package/contents/ui/main.qml:70
+#: qml/main.qml:69
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "ביקור באתר ה&חנות"
 
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:77
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&שמירת קומיקס בשם…"
 
-#: package/contents/ui/main.qml:84
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "גודל &אמיתי"
 
-#: package/contents/ui/main.qml:92
+#: qml/main.qml:91
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "א&חסון המקום הנוכחי"
 
-#: package/contents/ui/main.qml:227
+#: qml/main.qml:226
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "לא הוגדר קומיקס"
 
-#: package/contents/ui/main.qml:230
+#: qml/main.qml:229
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -254,6 +248,10 @@ msgstr "מספר ה&רצועה:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "מזהה הרצועה:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Display error when downloading comic fails"
+#~ msgstr "הצגת שגיאה כשהורדת קומיקס נכשלת"
 
 #~ msgctxt "@action:inmenu %1 is the name of a web browser"
 #~ msgid "View in %1"

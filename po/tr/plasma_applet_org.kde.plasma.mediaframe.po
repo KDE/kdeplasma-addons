@@ -2,21 +2,21 @@
 # Translators:
 # Kaan <kaanozdincer@gmail.com>
 #
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-24 00:42+0000\n"
-"PO-Revision-Date: 2023-06-10 12:10+0300\n"
-"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"PO-Revision-Date: 2025-04-25 09:36+0300\n"
+"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -177,8 +177,7 @@ msgid "Add Files…"
 msgstr "Dosyaları ekle…"
 
 #: package/contents/ui/ConfigPaths.qml:82
-#, fuzzy, kde-format
-#| msgid "Remove path"
+#, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Yolu kaldır"
@@ -187,13 +186,13 @@ msgstr "Yolu kaldır"
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
-msgstr ""
+msgstr "Yapılandırılmış ortam yok"
 
 #: package/contents/ui/ConfigPaths.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
-msgstr ""
+msgstr "Araç takımında görüntülemek için dosyalar veya klasörler ekleyin."
 
 #: package/contents/ui/ConfigPaths.qml:99
 #, kde-format

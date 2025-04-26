@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-04-26 00:43+0000\n"
 "PO-Revision-Date: 2024-01-16 21:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -25,37 +25,19 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: package/contents/config/config.qml:13
-#, kde-format
-msgctxt "@title"
-msgid "General"
-msgstr "Általános"
-
-#: package/contents/config/config.qml:18
-#, kde-format
-msgctxt "@title"
-msgid "Appearance"
-msgstr "Megjelenés"
-
-#: package/contents/config/config.qml:23
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Speciális"
-
-#: package/contents/ui/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Ugrás a képsorra…"
 
-#: package/contents/ui/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "A képregény weboldalának megnyitása"
 
-#: package/contents/ui/ComicCentralView.qml:97
+#: qml/ComicCentralView.qml:97
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Download Comics"
@@ -63,19 +45,37 @@ msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr "Képregények letöltése"
 
-#: package/contents/ui/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:98
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
 msgstr ""
 
-#: package/contents/ui/configAdvanced.qml:35
+#: qml/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Általános"
+
+#: qml/config.qml:18
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Megjelenés"
+
+#: qml/config.qml:23
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "Speciális"
+
+#: qml/configAdvanced.qml:33
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "Képregény-gyorsítótár:"
 
-#: package/contents/ui/configAdvanced.qml:44
+#: qml/configAdvanced.qml:42
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -83,84 +83,78 @@ msgid_plural "strips per comic"
 msgstr[0] "képsor képregényenként"
 msgstr[1] "képsor képregényenként"
 
-#: package/contents/ui/configAdvanced.qml:51
-#, kde-format
-msgctxt "@option:check"
-msgid "Display error when downloading comic fails"
-msgstr "Hiba megjelenítése, ha nem sikerül letölteni a képregényt"
-
-#: package/contents/ui/configAppearance.qml:42
+#: qml/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "Megjelenítés:"
 
-#: package/contents/ui/configAppearance.qml:43
+#: qml/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "Cím"
 
-#: package/contents/ui/configAppearance.qml:49
+#: qml/configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "Azonosító"
 
-#: package/contents/ui/configAppearance.qml:55
+#: qml/configAppearance.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "Szerző"
 
-#: package/contents/ui/configAppearance.qml:61
+#: qml/configAppearance.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "URL-cím"
 
-#: package/contents/ui/configAppearance.qml:71
+#: qml/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "Navigációs gombok megjelenítése:"
 
-#: package/contents/ui/configAppearance.qml:72
+#: qml/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "Mindig"
 
-#: package/contents/ui/configAppearance.qml:79
+#: qml/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Csak az egérmutató alatt"
 
-#: package/contents/ui/configGeneral.qml:50
+#: qml/configGeneral.qml:50
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Képregények:"
 
-#: package/contents/ui/configGeneral.qml:70
+#: qml/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Új képregények beszerzése…"
 
-#: package/contents/ui/configGeneral.qml:81
+#: qml/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Megjelenítés az eredeti méretben középső kattintásra"
 
-#: package/contents/ui/configGeneral.qml:90
+#: qml/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Új képregények keresési időköze:"
 
-#: package/contents/ui/configGeneral.qml:99
+#: qml/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -168,67 +162,67 @@ msgid_plural "minutes"
 msgstr[0] "perc"
 msgstr[1] "perc"
 
-#: package/contents/ui/main.qml:40
+#: qml/main.qml:39
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "Következő lap új képregé&nnyel"
 
-#: package/contents/ui/main.qml:47
+#: qml/main.qml:46
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Ugrás az &elsőre"
 
-#: package/contents/ui/main.qml:53
+#: qml/main.qml:52
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Ugrás az &aktuálisra"
 
-#: package/contents/ui/main.qml:59
+#: qml/main.qml:58
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Ugrás az elsőre…"
 
-#: package/contents/ui/main.qml:65
+#: qml/main.qml:64
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Weboldal felkeresése"
 
-#: package/contents/ui/main.qml:70
+#: qml/main.qml:69
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "A web&bolt oldalának megnyitása"
 
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:77
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "Men&tés mint…"
 
-#: package/contents/ui/main.qml:84
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Eredeti mé&ret"
 
-#: package/contents/ui/main.qml:92
+#: qml/main.qml:91
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Mentés a jelenlegi &pozícióban"
 
-#: package/contents/ui/main.qml:227
+#: qml/main.qml:226
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:230
+#: qml/main.qml:229
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -251,6 +245,10 @@ msgstr "&Adott számúra:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Képregényazonosító:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Display error when downloading comic fails"
+#~ msgstr "Hiba megjelenítése, ha nem sikerül letölteni a képregényt"
 
 #~ msgctxt "@action:inmenu %1 is the name of a web browser"
 #~ msgid "View in %1"

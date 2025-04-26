@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-04-26 00:43+0000\n"
 "PO-Revision-Date: 2022-07-26 20:44+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -27,55 +27,55 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "nr. %1"
 
-#: package/contents/config/config.qml:13
-#, kde-format
-msgctxt "@title"
-msgid "General"
-msgstr "Generelt"
-
-#: package/contents/config/config.qml:18
-#, kde-format
-msgctxt "@title"
-msgid "Appearance"
-msgstr "Utsjånad"
-
-#: package/contents/config/config.qml:23
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Avansert"
-
-#: package/contents/ui/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Gå til stripe …"
 
-#: package/contents/ui/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Besøk heimesida til teikneserien"
 
-#: package/contents/ui/ComicCentralView.qml:97
+#: qml/ComicCentralView.qml:97
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr ""
 
-#: package/contents/ui/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:98
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
 msgstr ""
 
-#: package/contents/ui/configAdvanced.qml:35
+#: qml/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Generelt"
+
+#: qml/config.qml:18
+#, kde-format
+msgctxt "@title"
+msgid "Appearance"
+msgstr "Utsjånad"
+
+#: qml/config.qml:23
+#, kde-format
+msgctxt "@title"
+msgid "Advanced"
+msgstr "Avansert"
+
+#: qml/configAdvanced.qml:33
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "Mellomlager for teikneserie:"
 
-#: package/contents/ui/configAdvanced.qml:44
+#: qml/configAdvanced.qml:42
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -83,84 +83,78 @@ msgid_plural "strips per comic"
 msgstr[0] "stripe per teikneserie"
 msgstr[1] "striper per teikneserie"
 
-#: package/contents/ui/configAdvanced.qml:51
-#, kde-format
-msgctxt "@option:check"
-msgid "Display error when downloading comic fails"
-msgstr "Vis feilmelding ved feil ved nedlasting av teikneseriar"
-
-#: package/contents/ui/configAppearance.qml:42
+#: qml/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "Vis:"
 
-#: package/contents/ui/configAppearance.qml:43
+#: qml/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "Stripetittel"
 
-#: package/contents/ui/configAppearance.qml:49
+#: qml/configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "Stripenummer"
 
-#: package/contents/ui/configAppearance.qml:55
+#: qml/configAppearance.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "Teikneserieskapar"
 
-#: package/contents/ui/configAppearance.qml:61
+#: qml/configAppearance.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "Adresse til teikneserie"
 
-#: package/contents/ui/configAppearance.qml:71
+#: qml/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "Vis navigasjonsknappar:"
 
-#: package/contents/ui/configAppearance.qml:72
+#: qml/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "Alltid"
 
-#: package/contents/ui/configAppearance.qml:79
+#: qml/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Berre når peikaren er over"
 
-#: package/contents/ui/configGeneral.qml:50
+#: qml/configGeneral.qml:50
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Teikneseriar:"
 
-#: package/contents/ui/configGeneral.qml:70
+#: qml/configGeneral.qml:70
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Hent nye striper …"
 
-#: package/contents/ui/configGeneral.qml:81
+#: qml/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Midtklikk på teikneserien for å visa han i opphavleg storleik"
 
-#: package/contents/ui/configGeneral.qml:90
+#: qml/configGeneral.qml:90
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Sjå etter nye striper kvart:"
 
-#: package/contents/ui/configGeneral.qml:99
+#: qml/configGeneral.qml:99
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -168,67 +162,67 @@ msgid_plural "minutes"
 msgstr[0] "minutt"
 msgstr[1] "minutt"
 
-#: package/contents/ui/main.qml:40
+#: qml/main.qml:39
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Neste fane med ei ny stripe"
 
-#: package/contents/ui/main.qml:47
+#: qml/main.qml:46
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Gå til &første stripe"
 
-#: package/contents/ui/main.qml:53
+#: qml/main.qml:52
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Gå til &nyaste stripe"
 
-#: package/contents/ui/main.qml:59
+#: qml/main.qml:58
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Gå til stripe …"
 
-#: package/contents/ui/main.qml:65
+#: qml/main.qml:64
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Besøk heimesida"
 
-#: package/contents/ui/main.qml:70
+#: qml/main.qml:69
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "&Besøk heimesida til butikken"
 
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:77
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "Lagra &stripa som …"
 
-#: package/contents/ui/main.qml:84
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Verkeleg storleik"
 
-#: package/contents/ui/main.qml:92
+#: qml/main.qml:91
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Lagra gjeldande &plassering"
 
-#: package/contents/ui/main.qml:227
+#: qml/main.qml:226
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:230
+#: qml/main.qml:229
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
@@ -251,6 +245,10 @@ msgstr "&Stripenummer:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Stripeidentifikator:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Display error when downloading comic fails"
+#~ msgstr "Vis feilmelding ved feil ved nedlasting av teikneseriar"
 
 #~ msgctxt "@action:inmenu %1 is the name of a web browser"
 #~ msgid "View in %1"

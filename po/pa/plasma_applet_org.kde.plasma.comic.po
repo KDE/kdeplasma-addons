@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-04-26 00:43+0000\n"
 "PO-Revision-Date: 2011-06-29 23:33+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -24,62 +24,62 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
-msgctxt "@title"
-msgid "General"
-msgstr "ਆਮ"
-
-#: package/contents/config/config.qml:18
-#, fuzzy, kde-format
-#| msgid "Appearance"
-msgctxt "@title"
-msgid "Appearance"
-msgstr "ਦਿੱਖ"
-
-#: package/contents/config/config.qml:23
-#, fuzzy, kde-format
-#| msgid "Advanced"
-msgctxt "@title"
-msgid "Advanced"
-msgstr "ਤਕਨੀਕੀ"
-
-#: package/contents/ui/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:62
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "ਪਹਿਲੀ ਪੱਟੀ ਉੱਤੇ ਜਾਓ..."
 
-#: package/contents/ui/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:102
 #, fuzzy, kde-format
 #| msgid "Visit the comic website"
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "ਕੌਮਿਕ ਵੈੱਬਸਾਈਟ ਵੇਖੋ"
 
-#: package/contents/ui/ComicCentralView.qml:97
+#: qml/ComicCentralView.qml:97
 #, fuzzy, kde-format
 #| msgid "Download new comics"
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr "ਨਵੇਂ ਕਾਮਿਕ ਡਾਊਨਲੋਡ ਕਰੋ"
 
-#: package/contents/ui/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:98
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
 msgstr ""
 
-#: package/contents/ui/configAdvanced.qml:35
+#: qml/config.qml:13
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title"
+msgid "General"
+msgstr "ਆਮ"
+
+#: qml/config.qml:18
+#, fuzzy, kde-format
+#| msgid "Appearance"
+msgctxt "@title"
+msgid "Appearance"
+msgstr "ਦਿੱਖ"
+
+#: qml/config.qml:23
+#, fuzzy, kde-format
+#| msgid "Advanced"
+msgctxt "@title"
+msgid "Advanced"
+msgstr "ਤਕਨੀਕੀ"
+
+#: qml/configAdvanced.qml:33
 #, fuzzy, kde-format
 #| msgid "C&omic:"
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "ਕਾਮਿਕ(&o):"
 
-#: package/contents/ui/configAdvanced.qml:44
+#: qml/configAdvanced.qml:42
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -87,91 +87,85 @@ msgid_plural "strips per comic"
 msgstr[0] ""
 msgstr[1] ""
 
-#: package/contents/ui/configAdvanced.qml:51
-#, kde-format
-msgctxt "@option:check"
-msgid "Display error when downloading comic fails"
-msgstr ""
-
-#: package/contents/ui/configAppearance.qml:42
+#: qml/configAppearance.qml:42
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:43
+#: qml/configAppearance.qml:43
 #, fuzzy, kde-format
 #| msgid "Show comic &title:"
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "ਕਾਮਿਕ ਟਾਈਟਲ ਵੇਖੋ(&t):"
 
-#: package/contents/ui/configAppearance.qml:49
+#: qml/configAppearance.qml:49
 #, fuzzy, kde-format
 #| msgid "Show comic &identifier:"
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "ਕਾਮਿਕ ਪਛਾਣ ਵੇਖੋ(&i):"
 
-#: package/contents/ui/configAppearance.qml:55
+#: qml/configAppearance.qml:55
 #, fuzzy, kde-format
 #| msgid "Show comic &author:"
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "ਕਾਮਿਕ ਲੇਖਕ ਵੇਖੋ(&a):"
 
-#: package/contents/ui/configAppearance.qml:61
+#: qml/configAppearance.qml:61
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "ਕਾਮਿਕ"
 
-#: package/contents/ui/configAppearance.qml:71
+#: qml/configAppearance.qml:71
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:72
+#: qml/configAppearance.qml:72
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:79
+#: qml/configAppearance.qml:79
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:50
+#: qml/configGeneral.qml:50
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "ਕਾਮਿਕ"
 
-#: package/contents/ui/configGeneral.qml:70
+#: qml/configGeneral.qml:70
 #, fuzzy, kde-format
 #| msgid "&Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "ਨਵੇਂ ਕਾਮਿਕ ਲਵੋ(&G)..."
 
-#: package/contents/ui/configGeneral.qml:81
+#: qml/configGeneral.qml:81
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:90
+#: qml/configGeneral.qml:90
 #, fuzzy, kde-format
 #| msgid "Choose a comic strip"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "ਕੌਮਿਕ ਪੱਟੀ ਚੁਣੋ"
 
-#: package/contents/ui/configGeneral.qml:99
+#: qml/configGeneral.qml:99
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -180,61 +174,61 @@ msgid_plural "minutes"
 msgstr[0] " ਮਿੰਟ"
 msgstr[1] " ਮਿੰਟ"
 
-#: package/contents/ui/main.qml:40
+#: qml/main.qml:39
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr ""
 
-#: package/contents/ui/main.qml:47
+#: qml/main.qml:46
 #, fuzzy, kde-format
 #| msgid "Jump to &first Strip"
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "ਪਹਿਲੀਂ ਪੱਟੀ ਉੱਤੇ ਜਾਓ(&f)"
 
-#: package/contents/ui/main.qml:53
+#: qml/main.qml:52
 #, fuzzy, kde-format
 #| msgid "Jump to &current Strip"
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "ਮੌਜੂਦਾ ਪੱਟੀ ਉੱਤੇ ਜਾਓ(&c)"
 
-#: package/contents/ui/main.qml:59
+#: qml/main.qml:58
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "ਪਹਿਲੀ ਪੱਟੀ ਉੱਤੇ ਜਾਓ..."
 
-#: package/contents/ui/main.qml:65
+#: qml/main.qml:64
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "ਦੁਕਾਨ ਵੈੱਬਸਾਈਟ ਵੇਖੋ(&w)"
 
-#: package/contents/ui/main.qml:70
+#: qml/main.qml:69
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "ਦੁਕਾਨ ਵੈੱਬਸਾਈਟ ਵੇਖੋ(&w)"
 
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:77
 #, fuzzy, kde-format
 #| msgid "&Save Comic As..."
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "ਕਾਮਿਕ ਇੰਝ ਸੰਭਾਲੋ(&S)..."
 
-#: package/contents/ui/main.qml:84
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "ਅਸਲੀ ਸਾਈਜ਼(&A)"
 
-#: package/contents/ui/main.qml:92
+#: qml/main.qml:91
 #, fuzzy, kde-format
 #| msgctxt "@option:check Context menu of comic image"
 #| msgid "Store current &Position"
@@ -242,13 +236,13 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "ਮੌਜੂਦਾ ਸਥਿਤੀ ਸਟੋਰ ਕਰੋ(&P)"
 
-#: package/contents/ui/main.qml:227
+#: qml/main.qml:226
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: package/contents/ui/main.qml:230
+#: qml/main.qml:229
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"

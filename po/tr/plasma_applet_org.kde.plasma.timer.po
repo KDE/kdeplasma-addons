@@ -3,14 +3,14 @@
 #
 # obsoleteman <tulliana@gmail.com>, 2008-2009,2012.
 # Volkan Gezer <volkangezer@gmail.com>, 2021.
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022, 2023, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-24 00:42+0000\n"
-"PO-Revision-Date: 2023-06-04 02:08+0300\n"
-"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"PO-Revision-Date: 2025-04-25 09:35+0300\n"
+"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-POOTLE-MTIME: 1413102232.000000\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -120,8 +120,7 @@ msgid "Show notification text:"
 msgstr "Bildirim metnini göster:"
 
 #: package/contents/ui/configTimes.qml:23
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Ekle"
