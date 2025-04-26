@@ -175,7 +175,6 @@ private:
 
     QDate mCurrentDay;
 
-    QString mIdentifierError;
     QString mOldSource;
     ConfigWidget *mConfigWidget;
     bool mShowComicUrl;

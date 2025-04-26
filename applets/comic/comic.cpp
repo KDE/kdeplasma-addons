@@ -335,9 +335,6 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
         // disconnecting of the oldSource is needed, otherwise you could get data for comics you are not looking at if you use tabs
         // if there was an error only disconnect the oldSource if it had nothing to do with the error or if the comic changed, that way updates of the error can
         // come in
-        if (!mIdentifierError.isEmpty() && !mIdentifierError.contains(id)) {
-            mIdentifierError.clear();
-        }
         mOldSource = identifier;
         mEngine->requestSource(identifier);
         slotShowActualSize(mCurrent.showActualSize());
