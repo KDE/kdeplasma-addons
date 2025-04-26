@@ -158,7 +158,6 @@ public Q_SLOTS:
     Q_INVOKABLE void positionFullView(QWindow *window);
 
 private:
-    void changeComic(bool differentComic);
     void updateUsedComics();
     void updateContextMenu();
     void updateView();
@@ -179,7 +178,6 @@ private:
     QString mIdentifierError;
     QString mOldSource;
     ConfigWidget *mConfigWidget;
-    bool mDifferentComic;
     bool mShowComicUrl;
     bool mShowComicAuthor;
     bool mShowComicTitle;

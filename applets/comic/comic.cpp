@@ -41,7 +41,6 @@ ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVa
     : Plasma::Applet(parent, data, args)
     , mProxy(nullptr)
     , mActiveComicModel(new ActiveComicModel(parent))
-    , mDifferentComic(true)
     , mShowComicUrl(false)
     , mShowComicAuthor(false)
     , mShowComicTitle(false)
@@ -80,7 +79,7 @@ void ComicApplet::init()
 
     updateUsedComics();
     if (!mTabIdentifier.isEmpty()) {
-        changeComic(true);
+        updateComic(mCurrent.stored());
     }
 
     connect(mEngine, &ComicEngine::requestFinished, this, &ComicApplet::dataUpdated);
@@ -160,27 +159,14 @@ void ComicApplet::positionFullView(QWindow *window)
     window->setPosition(window->screen()->availableGeometry().center() - QPoint(window->size().width() / 2, window->size().height() / 2));
 }
 
-void ComicApplet::changeComic(bool differentComic)
-{
-    if (differentComic) {
-        KConfigGroup cg = config();
-        updateComic(mCurrent.stored());
-    } else {
-        updateComic(mCurrent.current());
-    }
-}
-
 void ComicApplet::updateUsedComics()
 {
-    const QString oldIdentifier = mCurrent.id();
-
     mActiveComicModel->clear();
     mCurrent = ComicData();
 
     bool isFirst = true;
     QModelIndex data;
     KConfigGroup cg = config();
-    int tab = 0;
     for (int i = 0; i < mProxy->rowCount(); ++i) {
         if (mTabIdentifier.contains(mProxy->index(i, 0).data(Qt::UserRole).toString())) {
             data = mProxy->index(i, 1);
@@ -188,7 +174,6 @@ void ComicApplet::updateUsedComics()
             if (isFirst) {
                 isFirst = false;
                 const QString id = data.data(Qt::UserRole).toString();
-                mDifferentComic = (oldIdentifier != id);
                 const QString title = data.data().toString();
                 mCurrent.init(id, config());
                 mCurrent.setTitle(title);
@@ -204,8 +189,6 @@ void ComicApplet::updateUsedComics()
             } else {
                 mActiveComicModel->addComic(identifier, name, icon);
             }
-
-            ++tab;
         }
     }
 
@@ -227,7 +210,7 @@ void ComicApplet::slotTabChanged(const QString &identifier)
     mCurrent = ComicData();
     mCurrent.init(identifier, config());
     if (!mTabIdentifier.isEmpty()) {
-        changeComic(true);
+        updateComic(mCurrent.stored());
     }
 }
 
@@ -511,7 +494,11 @@ void ComicApplet::setTabIdentifiers(const QStringList &tabs)
     mTabIdentifier = tabs;
     Q_EMIT tabIdentifiersChanged();
     saveConfig();
-    changeComic(mDifferentComic);
+    if (mTabIdentifier.contains(mCurrent.id())) {
+        updateComic(mCurrent.current());
+    } else {
+        updateComic(mCurrent.stored());
+    }
 }
 
 void ComicApplet::refreshComicData()
