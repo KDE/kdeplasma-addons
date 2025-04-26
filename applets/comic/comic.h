@@ -35,17 +35,8 @@ class ComicApplet : public Plasma::Applet
     Q_OBJECT
     Q_PROPERTY(QObject *comicsModel READ comicsModel NOTIFY comicModelChanged)
     Q_PROPERTY(QObject *availableComicsModel READ availableComicsModel CONSTANT)
-    Q_PROPERTY(bool showComicUrl READ showComicUrl WRITE setShowComicUrl NOTIFY showComicUrlChanged)
-    Q_PROPERTY(bool showComicAuthor READ showComicAuthor WRITE setShowComicAuthor NOTIFY showComicAuthorChanged)
-    Q_PROPERTY(bool showComicTitle READ showComicTitle WRITE setShowComicTitle NOTIFY showComicTitleChanged)
-    Q_PROPERTY(bool showComicIdentifier READ showComicIdentifier WRITE setShowComicIdentifier NOTIFY showComicIdentifierChanged)
-    Q_PROPERTY(bool arrowsOnHover READ arrowsOnHover WRITE setArrowsOnHover NOTIFY arrowsOnHoverChanged)
-    Q_PROPERTY(bool middleClick READ middleClick WRITE setMiddleClick NOTIFY middleClickChanged)
     Q_PROPERTY(QVariantMap comicData READ comicData NOTIFY comicDataChanged)
     Q_PROPERTY(bool showActualSize READ showActualSize WRITE setShowActualSize NOTIFY showActualSizeChanged)
-    Q_PROPERTY(QStringList tabIdentifiers READ tabIdentifiers WRITE setTabIdentifiers NOTIFY tabIdentifiersChanged)
-    Q_PROPERTY(int checkNewComicStripsInterval READ checkNewComicStripsInterval WRITE setCheckNewComicStripsInterval NOTIFY checkNewComicStripsIntervalChanged)
-    Q_PROPERTY(int maxComicLimit READ maxComicLimit WRITE setMaxComicLimit NOTIFY maxComicLimitChanged)
 
 public:
     ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
@@ -58,52 +49,17 @@ public:
     QObject *availableComicsModel() const;
     QVariantMap comicData() const;
 
-    QStringList tabIdentifiers() const;
-    void setTabIdentifiers(const QStringList &tabs);
-
-    bool showComicUrl() const;
-    void setShowComicUrl(bool show);
-
-    bool showComicAuthor() const;
-    void setShowComicAuthor(bool show);
-
-    bool showComicTitle() const;
-    void setShowComicTitle(bool show);
-
-    bool showComicIdentifier() const;
-    void setShowComicIdentifier(bool show);
-
-    bool arrowsOnHover() const;
-    void setArrowsOnHover(bool show);
-
-    bool middleClick() const;
-    void setMiddleClick(bool show);
-
     bool showActualSize() const;
     void setShowActualSize(bool show);
 
-    int checkNewComicStripsInterval() const;
-    void setCheckNewComicStripsInterval(int interval);
-
-    void setMaxComicLimit(int limit);
-    int maxComicLimit() const;
     // End for QML
 
 Q_SIGNALS:
     void comicModelChanged();
-    void showComicUrlChanged();
-    void showComicAuthorChanged();
-    void showComicTitleChanged();
-    void showComicIdentifierChanged();
-    void arrowsOnHoverChanged();
-    void middleClickChanged();
     void comicDataChanged();
     void tabHighlightRequest(const QString &id, bool highlight);
     void showNextNewStrip();
     void showActualSizeChanged();
-    void tabIdentifiersChanged();
-    void checkNewComicStripsIntervalChanged();
-    void maxComicLimitChanged();
 
 private Q_SLOTS:
     void slotTabChanged(const QString &newIdentifier);
@@ -170,20 +126,9 @@ private:
     QDate mCurrentDay;
 
     QString mOldSource;
-    bool mShowComicUrl;
-    bool mShowComicAuthor;
-    bool mShowComicTitle;
-    bool mShowComicIdentifier;
-    bool mArrowsOnHover;
-    bool mMiddleClick;
-    int mCheckNewComicStripsInterval;
-    int mMaxComicLimit;
     CheckNewStrips *mCheckNewStrips;
     QTimer *mDateChangedTimer;
     ComicEngine *const mEngine;
-
-    // Tabs
-    QStringList mTabIdentifier;
 
     ComicData mCurrent;
     SavingDir *mSavingDir;

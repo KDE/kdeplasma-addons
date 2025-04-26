@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<kcfg xmlns="http://www.kde.org/standards/kcfg/1.0"
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      xsi:schemaLocation="http://www.kde.org/standards/kcfg/1.0
+      http://www.kde.org/standards/kcfg/1.0/kcfg.xsd" >
+
+    <kcfgfile name=""/>
+
+    <group name="">
+        <entry name="comic" type="string">
+            <label>The currently viewed comic tab.</label>
+            <default></default>
+        </entry>
+        <entry name="showComicUrl" type="Bool">
+            <label>Whether to display the comic url in strip metadata rows.</label>
+            <default>false</default>
+        </entry>
+        <entry name="showComicAuthor" type="Bool">
+            <label>Whether to display the author name in strip metadata rows</label>
+            <default>false</default>
+        </entry>
+        <entry name="showComicTitle" type="Bool">
+            <label>Whether to show the comic title in strip metadata rows.</label>
+            <default>false</default>
+        </entry>
+        <entry name="showComicIdentifier" type="Bool">
+            <label>Whether to show a strip identifier in  in strip metadata rows.</label>
+            <default>false</default>
+        </entry>
+        <entry name="arrowsOnHover" type="Bool">
+            <label>Whether navigation arrows should appear only on hover.</label>
+            <default>true</default>
+        </entry>
+        <entry name="middleClick" type="Bool">
+            <label>Whether middle click should open a full view popup</label>
+            <default>true</default>
+        </entry>
+        <entry name="tabIdentifier" type="StringList">
+            <label>The list of enabled comic plugins</label>
+            <default></default>
+        </entry>
+        <entry name="checkNewComicStripsIntervall" type="Int">
+            <label>The time in minutes between checking for new comic strips</label>
+            <default>30</default>
+        </entry>
+        <entry name="maxComicLimit" type="Int">
+            <label>The number of strips to cache per comic.</label>
+            <default>29</default>
+        </entry>
+    </group>
+</kcfg>

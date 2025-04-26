@@ -23,6 +23,8 @@ plasma_add_applet(org.kde.plasma.comic
         comicsaver.cpp
         stripselector.cpp
         activecomicmodel.cpp
+    RESOURCES
+        main.xml
 )
 
 target_link_libraries(org.kde.plasma.comic PRIVATE

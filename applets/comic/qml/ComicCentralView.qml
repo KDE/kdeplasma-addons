@@ -36,7 +36,7 @@ Item {
         }
 
         icon.name: "go-previous"
-        visible: (!Plasmoid.arrowsOnHover && (comicData.prev !== undefined))
+        visible: (!Plasmoid.configuration.arrowsOnHover && (comicData.prev !== undefined))
 
         onClicked: {
             Plasmoid.updateComic(comicData.prev);
@@ -67,7 +67,7 @@ Item {
             acceptedButtons: Qt.LeftButton | Qt.MiddleButton
 
             onClicked: mouse => {
-                if (mouse.button == Qt.MiddleButton && Plasmoid.middleClick) {
+                if (mouse.button == Qt.MiddleButton && Plasmoid.configuration.middleClick) {
                     fullDialog.toggleVisibility();
                 }
             }
@@ -107,7 +107,7 @@ Item {
                     bottomMargin: 10
                 }
 
-                visible: Plasmoid.arrowsOnHover && comicImageArea.containsMouse
+                visible: Plasmoid.configuration.arrowsOnHover && comicImageArea.containsMouse
                 opacity: 0
 
                 onPrevClicked: {
@@ -123,7 +123,7 @@ Item {
                 }
 
                 states: State {
-                    name: "show"; when: (Plasmoid.arrowsOnHover && comicImageArea.containsMouse)
+                    name: "show"; when: (Plasmoid.configuration.arrowsOnHover && comicImageArea.containsMouse)
                     PropertyChanges { target: buttonBar; opacity: 1; }
                 }
 
@@ -144,7 +144,7 @@ Item {
         }
 
         icon.name: "go-next"
-        visible: (!Plasmoid.arrowsOnHover && (comicData.next !== undefined))
+        visible: (!Plasmoid.configuration.arrowsOnHover && (comicData.next !== undefined))
 
         onClicked: {
             Plasmoid.updateComic(comicData.next);

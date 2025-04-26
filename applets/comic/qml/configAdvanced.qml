@@ -15,20 +15,11 @@ import org.kde.kcmutils as KCM
 KCM.SimpleKCM {
     id: root
 
+    property alias cfg_maxComicLimit: maxComicLimit.value
+
     signal configurationChanged
 
-    function saveConfig() {
-        Plasmoid.maxComicLimit = maxComicLimit.value;
-
-        Plasmoid.saveConfig();
-        Plasmoid.configChanged();
-    }
-
     Kirigami.FormLayout {
-        Component.onCompleted: {
-            maxComicLimit.value = Plasmoid.maxComicLimit;
-        }
-
         Layouts.RowLayout {
             Kirigami.FormData.label: i18nc("@label:spinbox", "Comic cache:")
 

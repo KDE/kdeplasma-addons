@@ -16,25 +16,19 @@ import org.kde.kcmutils as KCM
 KCM.SimpleKCM {
     id: root
 
+    property list<string> cfg_tabIdentifier
+    property alias cfg_middleClick: middleClickCheckBox.checked
+    property alias cfg_checkNewComicStripsIntervall: checkNewComicStripsInterval.value
+
     signal configurationChanged
 
     function saveConfig() {
-        Plasmoid.tabIdentifiers = Plasmoid.availableComicsModel.checkedProviders();
-
-        Plasmoid.middleClick = middleClickCheckBox.checked;
-
-        Plasmoid.checkNewComicStripsInterval = checkNewComicStripsInterval.value;
-
+        root.cfg_tabIdentifier = Plasmoid.availableComicsModel.checkedProviders();
         Plasmoid.saveConfig();
         Plasmoid.configChanged();
     }
 
     Kirigami.FormLayout {
-        Component.onCompleted: {
-            middleClickCheckBox.checked = Plasmoid.middleClick;
-            checkNewComicStripsInterval.value = Plasmoid.checkNewComicStripsInterval;
-        }
-
         Item {
             Kirigami.FormData.isSection: true
         }
@@ -73,7 +67,6 @@ KCM.SimpleKCM {
         Controls.CheckBox {
             id: middleClickCheckBox
             text: i18nc("@option:check", "Middle-click on comic to display at original size")
-            onCheckedChanged: root.configurationChanged();
         }
 
         Item {
@@ -86,7 +79,6 @@ KCM.SimpleKCM {
             Controls.SpinBox {
                 id: checkNewComicStripsInterval
                 stepSize: 1
-                onValueChanged: root.configurationChanged();
             }
 
             Controls.Label {

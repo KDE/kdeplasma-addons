@@ -40,14 +40,6 @@
 ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
     , mActiveComicModel(new ActiveComicModel(parent))
-    , mShowComicUrl(false)
-    , mShowComicAuthor(false)
-    , mShowComicTitle(false)
-    , mShowComicIdentifier(false)
-    , mArrowsOnHover(true)
-    , mMiddleClick(true)
-    , mCheckNewComicStripsInterval(0)
-    , mMaxComicLimit(0)
     , mCheckNewStrips(nullptr)
     , mEngine(new ComicEngine(this))
     , mSavingDir(nullptr)
@@ -64,13 +56,17 @@ void ComicApplet::init()
 
     configChanged();
 
-    mModel = new ComicModel(mEngine, mTabIdentifier, this);
+    KConfigGroup cg = config();
+    QStringList tabIdentifier = cg.readEntry("tabIdentifier", QStringList());
+
+    mModel = new ComicModel(mEngine, tabIdentifier, this);
 
     mCurrentDay = QDate::currentDate();
     connect(mDateChangedTimer, &QTimer::timeout, this, &ComicApplet::checkDayChanged);
 
     updateUsedComics();
-    if (!mTabIdentifier.isEmpty()) {
+
+    if (!tabIdentifier.isEmpty()) {
         updateComic(mCurrent.stored());
     }
 
@@ -114,7 +110,7 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
 
     // looking at the last index, thus not mark it as new
     KConfigGroup cg = config();
-    if (!data.error && !mCurrent.hasNext() && mCheckNewComicStripsInterval) {
+    if (!data.error && !mCurrent.hasNext() && cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0)) {
         setTabHighlighted(mCurrent.id(), false);
     }
 
@@ -153,7 +149,7 @@ void ComicApplet::updateUsedComics()
     QModelIndex data;
     KConfigGroup cg = config();
     for (int i = 0; i < mModel->rowCount(); ++i) {
-        if (mTabIdentifier.contains(mModel->index(i, 0).data(Qt::UserRole).toString())) {
+        if (cg.readEntry("tabIdentifier", QStringList()).contains(mModel->index(i, 0).data(Qt::UserRole).toString())) {
             data = mModel->index(i, 1);
 
             if (isFirst) {
@@ -169,7 +165,7 @@ void ComicApplet::updateUsedComics()
             const QString icon = data.data(Qt::DecorationRole).toString();
             // found a newer strip last time, which was not visited
 
-            if (mCheckNewComicStripsInterval && !cg.readEntry(QLatin1String("lastStripVisited_") + identifier, true)) {
+            if (cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0) && !cg.readEntry(QLatin1String("lastStripVisited_") + identifier, true)) {
                 mActiveComicModel->addComic(identifier, name, icon, true);
             } else {
                 mActiveComicModel->addComic(identifier, name, icon);
@@ -179,8 +175,9 @@ void ComicApplet::updateUsedComics()
 
     delete mCheckNewStrips;
     mCheckNewStrips = nullptr;
-    if (mCheckNewComicStripsInterval) {
-        mCheckNewStrips = new CheckNewStrips(mTabIdentifier, mEngine, mCheckNewComicStripsInterval, this);
+    if (cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0)) {
+        mCheckNewStrips =
+            new CheckNewStrips(cg.readEntry("tabIdentifier", QStringList()), mEngine, cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0), this);
         connect(mCheckNewStrips, &CheckNewStrips::lastStrip, this, &ComicApplet::slotFoundLastStrip);
     }
 
@@ -194,7 +191,9 @@ void ComicApplet::slotTabChanged(const QString &identifier)
     }
     mCurrent = ComicData();
     mCurrent.init(identifier, config());
-    if (!mTabIdentifier.isEmpty()) {
+
+    KConfigGroup cg = config();
+    if (!cg.readEntry("tabIdentifier", QStringList()).isEmpty()) {
         updateComic(mCurrent.stored());
     }
 }
@@ -212,30 +211,19 @@ void ComicApplet::checkDayChanged()
 void ComicApplet::configChanged()
 {
     KConfigGroup cg = config();
-    mTabIdentifier = cg.readEntry("tabIdentifier", QStringList());
+
+    QStringList tabIdentifier = cg.readEntry("tabIdentifier", QStringList());
 
     if (mModel) {
         updateUsedComics();
     }
 
-    const QString id = mTabIdentifier.count() ? mTabIdentifier.at(0) : QString();
+    const QString id = tabIdentifier.count() ? tabIdentifier.at(0) : QString();
     mCurrent = ComicData();
     mCurrent.init(id, cg);
 
-    mShowComicUrl = cg.readEntry("showComicUrl", false);
-    mShowComicAuthor = cg.readEntry("showComicAuthor", false);
-    mShowComicTitle = cg.readEntry("showComicTitle", false);
-    mShowComicIdentifier = cg.readEntry("showComicIdentifier", false);
-    mArrowsOnHover = cg.readEntry("arrowsOnHover", true);
-    mMiddleClick = cg.readEntry("middleClick", true);
-    mCheckNewComicStripsInterval = cg.readEntry("checkNewComicStripsIntervall", 30);
-
-    auto oldMaxComicLimit = mMaxComicLimit;
-    mMaxComicLimit = cg.readEntry("maxComicLimit", 29);
-    if (oldMaxComicLimit != mMaxComicLimit) {
-        mEngine->setMaxComicLimit(mMaxComicLimit);
-    }
-    if (mTabIdentifier.isEmpty()) {
+    mEngine->setMaxComicLimit(cg.readEntry("maxComicLimit", 29));
+    if (tabIdentifier.isEmpty()) {
         mDateChangedTimer->stop();
     } else {
         mDateChangedTimer->start();
@@ -246,15 +234,6 @@ void ComicApplet::saveConfig()
 {
     KConfigGroup cg = config();
     cg.writeEntry("comic", mCurrent.id());
-    cg.writeEntry("showComicUrl", mShowComicUrl);
-    cg.writeEntry("showComicAuthor", mShowComicAuthor);
-    cg.writeEntry("showComicTitle", mShowComicTitle);
-    cg.writeEntry("showComicIdentifier", mShowComicIdentifier);
-    cg.writeEntry("arrowsOnHover", mArrowsOnHover);
-    cg.writeEntry("middleClick", mMiddleClick);
-    cg.writeEntry("tabIdentifier", mTabIdentifier);
-    cg.writeEntry("checkNewComicStripsIntervall", mCheckNewComicStripsInterval);
-    cg.writeEntry("maxComicLimit", mMaxComicLimit);
 }
 
 void ComicApplet::slotFoundLastStrip(int index, const QString &identifier, const QString &suffix)
@@ -342,127 +321,9 @@ QObject *ComicApplet::availableComicsModel() const
     return mModel;
 }
 
-bool ComicApplet::showComicUrl() const
-{
-    return mShowComicUrl;
-}
-
-void ComicApplet::setShowComicUrl(bool show)
-{
-    if (show == mShowComicUrl) {
-        return;
-    }
-
-    mShowComicUrl = show;
-
-    Q_EMIT showComicUrlChanged();
-}
-
-bool ComicApplet::showComicAuthor() const
-{
-    return mShowComicAuthor;
-}
-
-void ComicApplet::setShowComicAuthor(bool show)
-{
-    if (show == mShowComicAuthor) {
-        return;
-    }
-
-    mShowComicAuthor = show;
-
-    Q_EMIT showComicAuthorChanged();
-}
-
-bool ComicApplet::showComicTitle() const
-{
-    return mShowComicTitle;
-}
-
-void ComicApplet::setShowComicTitle(bool show)
-{
-    if (show == mShowComicTitle) {
-        return;
-    }
-
-    mShowComicTitle = show;
-
-    Q_EMIT showComicTitleChanged();
-}
-
-bool ComicApplet::showComicIdentifier() const
-{
-    return mShowComicIdentifier;
-}
-
-void ComicApplet::setShowComicIdentifier(bool show)
-{
-    if (show == mShowComicIdentifier) {
-        return;
-    }
-
-    mShowComicIdentifier = show;
-
-    Q_EMIT showComicIdentifierChanged();
-}
-
-bool ComicApplet::arrowsOnHover() const
-{
-    return mArrowsOnHover;
-}
-
-void ComicApplet::setArrowsOnHover(bool show)
-{
-    if (show == mArrowsOnHover) {
-        return;
-    }
-
-    mArrowsOnHover = show;
-
-    Q_EMIT arrowsOnHoverChanged();
-}
-
-bool ComicApplet::middleClick() const
-{
-    return mMiddleClick;
-}
-
-void ComicApplet::setMiddleClick(bool show)
-{
-    if (show == mMiddleClick) {
-        return;
-    }
-
-    mMiddleClick = show;
-
-    Q_EMIT middleClickChanged();
-    saveConfig();
-}
-
 QVariantMap ComicApplet::comicData() const
 {
     return mComicData;
-}
-
-QStringList ComicApplet::tabIdentifiers() const
-{
-    return mTabIdentifier;
-}
-
-void ComicApplet::setTabIdentifiers(const QStringList &tabs)
-{
-    if (mTabIdentifier == tabs) {
-        return;
-    }
-
-    mTabIdentifier = tabs;
-    Q_EMIT tabIdentifiersChanged();
-    saveConfig();
-    if (mTabIdentifier.contains(mCurrent.id())) {
-        updateComic(mCurrent.current());
-    } else {
-        updateComic(mCurrent.stored());
-    }
 }
 
 void ComicApplet::refreshComicData()
@@ -513,36 +374,6 @@ void ComicApplet::setShowActualSize(bool show)
     mCurrent.setShowActualSize(show);
 
     Q_EMIT showActualSizeChanged();
-}
-
-int ComicApplet::checkNewComicStripsInterval() const
-{
-    return mCheckNewComicStripsInterval;
-}
-
-void ComicApplet::setCheckNewComicStripsInterval(int interval)
-{
-    if (mCheckNewComicStripsInterval == interval) {
-        return;
-    }
-
-    mCheckNewComicStripsInterval = interval;
-    Q_EMIT checkNewComicStripsIntervalChanged();
-}
-
-void ComicApplet::setMaxComicLimit(int limit)
-{
-    if (mMaxComicLimit == limit) {
-        return;
-    }
-
-    mMaxComicLimit = limit;
-    Q_EMIT maxComicLimitChanged();
-}
-
-int ComicApplet::maxComicLimit() const
-{
-    return mMaxComicLimit;
 }
 
 // Endof QML

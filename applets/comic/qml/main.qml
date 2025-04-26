@@ -28,14 +28,14 @@ PlasmoidItem {
 
     readonly property int minimumWidth: Kirigami.Units.gridUnit * 8
     readonly property int minimumHeight: Kirigami.Units.gridUnit * 8
-    readonly property bool showComicAuthor: plasmoid.showComicAuthor
-    readonly property bool showComicTitle: plasmoid.showComicTitle
-    readonly property bool middleClick: plasmoid.middleClick
+    readonly property bool showComicAuthor: plasmoid.configuration.showComicAuthor
+    readonly property bool showComicTitle: plasmoid.configuration.showComicTitle
+    readonly property bool middleClick: plasmoid.configuration.middleClick
 
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
             enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready && plasmoid.comicData.nextNewStripEnabled
-            visible: Plasmoid.checkNewComicStripsInterval
+            visible: Plasmoid.configuration.checkNewComicStripsIntervall
             text: i18nc("@action comic strip", "&Next Tab with a New Strip")
             icon.name: "go-next-view"
             shortcut: StandardKey.New
@@ -67,10 +67,7 @@ PlasmoidItem {
         PlasmaCore.Action {
             enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready && plasmoid.comicData.shopUrl !== ""
             text: i18nc("@action", "Visit the Shop &Website")
-            onTriggered: {
-                console.log("shopUrl:", plasmoid.comicData.shopUrl, plasmoid.comicData.shopUrl != "", plasmoid.comicData.id != "" && plasmoid.comicData.ready && plasmoid.comicData.shopUrl !== "", this.enabled)
-                plasmoid.shop()
-            }
+            onTriggered: plasmoid.shop()
         },
         PlasmaCore.Action {
             enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
@@ -150,7 +147,7 @@ PlasmoidItem {
 
                 Layout.fillWidth: true
 
-                visible: plasmoid.tabIdentifiers.length > 1
+                visible: plasmoid.configuration.tabIdentifier.length > 1
 
                 onCurrentIndexChanged: {
                     if (comicTabbar.currentItem) {
@@ -204,7 +201,7 @@ PlasmoidItem {
                 Layout.fillHeight: true
                 Layout.topMargin: comicTabbar.visible ? 3 : 0
 
-                visible: plasmoid.tabIdentifiers.length > 0
+                visible: plasmoid.configuration.tabIdentifier.length > 0
                 comicData: plasmoid.comicData
             }
 
@@ -213,15 +210,15 @@ PlasmoidItem {
                 Layout.fillWidth: true
 
                 comicData: plasmoid.comicData
-                showUrl: plasmoid.showComicUrl
-                showIdentifier: plasmoid.showComicIdentifier
+                showUrl: plasmoid.configuration.showComicUrl
+                showIdentifier: plasmoid.configuration.showComicIdentifier
             }
 
             PlasmaExtras.PlaceholderMessage {
                 id: configNeededPlaceholder
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 Layout.margins: Kirigami.Units.gridUnit
-                visible: plasmoid.tabIdentifiers.length === 0
+                visible: plasmoid.configuration.tabIdentifier.length === 0
                 iconName: "folder-comic-symbolic"
                 text: i18nc("@info placeholdermessage if no comics loaded", "No comics configured")
                 helpfulAction: Kirigami.Action {
