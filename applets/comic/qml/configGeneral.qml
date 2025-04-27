@@ -19,13 +19,7 @@ KCM.SimpleKCM {
     signal configurationChanged
 
     function saveConfig() {
-        var newTabs = [];
-        for (var i in providerColumn.children) {
-            if (providerColumn.children[i].checked) {
-                newTabs.push(providerColumn.children[i].plugin)
-            }
-        }
-        Plasmoid.tabIdentifiers = newTabs;
+        Plasmoid.tabIdentifiers = Plasmoid.availableComicsModel.checkedProviders();
 
         Plasmoid.middleClick = middleClickCheckBox.checked;
 
@@ -57,10 +51,10 @@ KCM.SimpleKCM {
                     text: model.display
                     checked: model.checked
                     property string plugin: model.plugin
-                    Component.onCompleted: {
-                        checkbox.checked = Plasmoid.tabIdentifiers.indexOf(model.plugin) !== -1
+                    onCheckedChanged: {
+                        model.checked = checked
+                        root.configurationChanged();
                     }
-                    onCheckedChanged: root.configurationChanged();
                 }
             }
         }

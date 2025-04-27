@@ -11,6 +11,7 @@
 #define COMICMODEL_H
 
 #include <QAbstractTableModel>
+#include <QBitArray>
 
 #include "engine/comic.h"
 
@@ -27,11 +28,14 @@ public:
     int columnCount(const QModelIndex &index = QModelIndex()) const override;
     QVariant data(const QModelIndex &index, int role = Qt::CheckStateRole) const override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;
+    bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
 
     void load();
+    Q_INVOKABLE QStringList checkedProviders();
 
 private:
     QList<ComicProviderInfo> mComics;
+    QBitArray mChecked;
     QStringList mUsedComics;
     ComicEngine *mEngine;
 };
