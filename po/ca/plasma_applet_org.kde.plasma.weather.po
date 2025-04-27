@@ -1,16 +1,16 @@
 # Translation of plasma_applet_org.kde.plasma.weather.po to Catalan
-# Copyright (C) 2016-2024 This_file_is_part_of_KDE
+# Copyright (C) 2016-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2016, 2018, 2019, 2020, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2016, 2018, 2019, 2020, 2022, 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
 # Antoni Bella Pérez <antonibella5@yahoo.com>, 2018, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-26 00:43+0000\n"
-"PO-Revision-Date: 2024-08-30 10:12+0200\n"
+"PO-Revision-Date: 2025-04-26 09:52+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 22.12.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -436,13 +436,13 @@ msgctxt ""
 "possible! Omitting or changing words is fine as long as the original meaning "
 "is retained."
 msgid "Set up Weather Report…"
-msgstr ""
+msgstr "Configura l'informe meteorològic…"
 
 #: package/contents/ui/main.qml:371
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
-msgstr ""
+msgstr "Feu clic per a triar una ubicació i observar la seva meteorologia"
 
 #: package/contents/ui/main.qml:380
 #, kde-format
@@ -571,32 +571,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgctxt "@info:tooltip %1 is the translated plasmoid name"
-#~ msgid "Click to configure %1"
-#~ msgstr "Feu un clic per a configurar %1"
-
-#~ msgctxt "@label"
-#~ msgid "Windchill:"
-#~ msgstr "Sensació tèrmica pel vent:"
-
-#~ msgctxt "@label"
-#~ msgid "Humidex:"
-#~ msgstr "Sensació de xafogor:"
-
-#~ msgctxt "@label"
-#~ msgid "Heat Index:"
-#~ msgstr "Temperatura de xafogor:"
-
-#~ msgid "Weather information retrieval for %1 timed out."
-#~ msgstr ""
-#~ "La recuperació de la informació meteorològica per a %1 ha exhaurit el "
-#~ "temps."
-
-#~ msgctxt "@title:column weather warnings"
-#~ msgid "Warnings Issued"
-#~ msgstr "Alertes emeses"
-
-#~ msgctxt "@title:column weather watches"
-#~ msgid "Watches Issued"
-#~ msgstr "Avisos emesos"
