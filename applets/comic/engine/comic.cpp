@@ -53,6 +53,9 @@ QList<ComicProviderInfo> ComicEngine::loadProviders()
         mProviders << comic.pluginId();
         providers << data;
     }
+    std::sort(providers.begin(), providers.end(), [](ComicProviderInfo a, ComicProviderInfo b) {
+        return QString::localeAwareCompare(a.name, b.name) < 1;
+    });
     return providers;
 }
 

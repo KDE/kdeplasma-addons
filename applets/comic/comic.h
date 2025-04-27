@@ -164,9 +164,8 @@ private:
     void dataUpdated(const ComicMetaData &data);
 
 private:
-    ComicModel *mModel;
+    ComicModel *mModel = nullptr;
     QString mPreviousFailedIdentifier;
-    QSortFilterProxyModel *mProxy;
     ActiveComicModel *mActiveComicModel;
     QVariantMap mComicData;
 

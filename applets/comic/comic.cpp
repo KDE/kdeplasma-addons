@@ -39,7 +39,6 @@
 
 ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
-    , mProxy(nullptr)
     , mActiveComicModel(new ActiveComicModel(parent))
     , mShowComicUrl(false)
     , mShowComicAuthor(false)
@@ -66,10 +65,6 @@ void ComicApplet::init()
     configChanged();
 
     mModel = new ComicModel(mEngine, mTabIdentifier, this);
-    mProxy = new QSortFilterProxyModel(this);
-    mProxy->setSourceModel(mModel);
-    mProxy->setSortCaseSensitivity(Qt::CaseInsensitive);
-    mProxy->sort(1, Qt::AscendingOrder);
 
     mCurrentDay = QDate::currentDate();
     connect(mDateChangedTimer, &QTimer::timeout, this, &ComicApplet::checkDayChanged);
@@ -167,9 +162,9 @@ void ComicApplet::updateUsedComics()
     bool isFirst = true;
     QModelIndex data;
     KConfigGroup cg = config();
-    for (int i = 0; i < mProxy->rowCount(); ++i) {
-        if (mTabIdentifier.contains(mProxy->index(i, 0).data(Qt::UserRole).toString())) {
-            data = mProxy->index(i, 1);
+    for (int i = 0; i < mModel->rowCount(); ++i) {
+        if (mTabIdentifier.contains(mModel->index(i, 0).data(Qt::UserRole).toString())) {
+            data = mModel->index(i, 1);
 
             if (isFirst) {
                 isFirst = false;
@@ -229,7 +224,7 @@ void ComicApplet::configChanged()
     KConfigGroup cg = config();
     mTabIdentifier = cg.readEntry("tabIdentifier", QStringList());
 
-    if (mProxy) {
+    if (mModel) {
         updateUsedComics();
     }
 
@@ -362,7 +357,7 @@ QObject *ComicApplet::comicsModel() const
 
 QObject *ComicApplet::availableComicsModel() const
 {
-    return mProxy;
+    return mModel;
 }
 
 bool ComicApplet::showComicUrl() const
