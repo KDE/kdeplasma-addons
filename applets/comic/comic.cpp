@@ -272,16 +272,6 @@ void ComicApplet::saveConfig()
     cg.writeEntry("maxComicLimit", mMaxComicLimit);
 }
 
-void ComicApplet::slotNextDay()
-{
-    updateComic(mCurrent.next());
-}
-
-void ComicApplet::slotPreviousDay()
-{
-    updateComic(mCurrent.prev());
-}
-
 void ComicApplet::slotFoundLastStrip(int index, const QString &identifier, const QString &suffix)
 {
     Q_UNUSED(index)

@@ -107,8 +107,6 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void slotTabChanged(const QString &newIdentifier);
-    void slotNextDay();
-    void slotPreviousDay();
     void slotFoundLastStrip(int index, const QString &identifier, const QString &suffix);
     void slotGoJump();
     void slotSaveComicAs();
