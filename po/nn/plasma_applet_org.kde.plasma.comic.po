@@ -245,11 +245,3 @@ msgstr "&Stripenummer:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Stripeidentifikator:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Display error when downloading comic fails"
-#~ msgstr "Vis feilmelding ved feil ved nedlasting av teikneseriar"
-
-#~ msgctxt "@action:inmenu %1 is the name of a web browser"
-#~ msgid "View in %1"
-#~ msgstr "Vis i %1"
