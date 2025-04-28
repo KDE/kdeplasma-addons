@@ -69,9 +69,6 @@ void ComicApplet::init()
     mCurrentDay = QDate::currentDate();
     connect(mDateChangedTimer, &QTimer::timeout, this, &ComicApplet::checkDayChanged);
 
-    // make sure that tabs etc. are displayed even if the comic strip in the first tab does not work
-    updateContextMenu();
-
     updateUsedComics();
     if (!mTabIdentifier.isEmpty()) {
         updateComic(mCurrent.stored());
@@ -133,8 +130,6 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
         const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.prev();
         mEngine->requestSource(prefetch);
     }
-
-    updateContextMenu();
 
     refreshComicData();
     Q_EMIT showActualSizeChanged(); // if switching comics the new one might have a different setting
@@ -322,14 +317,6 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
         setBusy(false);
         qCWarning(PLASMA_COMIC) << "Either no identifier was specified or the engine could not be created:"
                                 << "id" << id;
-    }
-    updateContextMenu();
-}
-
-void ComicApplet::updateContextMenu()
-{
-    if (mCurrent.id().isEmpty()) {
-        mActiveComicModel->clear();
     }
 }
 

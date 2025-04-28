@@ -156,7 +156,6 @@ public Q_SLOTS:
 
 private:
     void updateUsedComics();
-    void updateContextMenu();
     void refreshComicData();
     void setTabHighlighted(const QString &id, bool highlight);
     bool isTabHighlighted(const QString &id) const;
