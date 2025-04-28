@@ -70,7 +70,7 @@ void ComicApplet::init()
     connect(mDateChangedTimer, &QTimer::timeout, this, &ComicApplet::checkDayChanged);
 
     // make sure that tabs etc. are displayed even if the comic strip in the first tab does not work
-    updateView();
+    updateContextMenu();
 
     updateUsedComics();
     if (!mTabIdentifier.isEmpty()) {
@@ -134,15 +134,10 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
         mEngine->requestSource(prefetch);
     }
 
-    updateView();
+    updateContextMenu();
 
     refreshComicData();
     Q_EMIT showActualSizeChanged(); // if switching comics the new one might have a different setting
-}
-
-void ComicApplet::updateView()
-{
-    updateContextMenu();
 }
 
 void ComicApplet::positionFullView(QWindow *window)
