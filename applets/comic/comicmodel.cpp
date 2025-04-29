@@ -14,9 +14,9 @@
 #include <QIcon>
 #include <QList>
 
-ComicModel::ComicModel(ComicEngine *engine, const QStringList &usedComics, QObject *parent)
+ComicModel::ComicModel(ComicEngine *engine, const QStringList &enabledProviders, QObject *parent)
     : QAbstractTableModel(parent)
-    , mUsedComics(usedComics)
+    , mEnabledProviders(enabledProviders)
     , mEngine(engine)
 {
     Q_ASSERT(engine);
@@ -29,8 +29,10 @@ QHash<int, QByteArray> ComicModel::roleNames() const
     QHash<int, QByteArray> roles;
     roles[Qt::DisplayRole] = "display";
     roles[Qt::DecorationRole] = "decoration";
-    roles[Qt::UserRole] = "plugin";
     roles[Qt::CheckStateRole] = "checked";
+    roles[ComicPluginRole] = "plugin";
+    roles[ComicEnabledRole] = "enabled";
+    roles[ComicHighlightRole] = "highlight";
     return roles;
 }
 
@@ -61,10 +63,14 @@ QVariant ComicModel::data(const QModelIndex &index, int role) const
         return info.name;
     case Qt::DecorationRole:
         return info.icon;
-    case Qt::UserRole:
-        return info.pluginId;
     case Qt::CheckStateRole:
         return mChecked[index.row()];
+    case ComicPluginRole:
+        return info.pluginId;
+    case ComicEnabledRole:
+        return mEnabled[index.row()];
+    case ComicHighlightRole:
+        return mHighlighted[index.row()];
     }
 
     return QVariant();
@@ -93,22 +99,37 @@ void ComicModel::load()
 {
     beginResetModel();
     mComics = mEngine->loadProviders();
+    mEnabled = QBitArray(mComics.count());
     mChecked = QBitArray(mComics.count());
+    mHighlighted = QBitArray(mComics.count());
     for (int i = 0; i < mComics.count(); ++i) {
-        mChecked[i] = mUsedComics.contains(mComics.at(i).pluginId);
+        mChecked[i] = mEnabledProviders.contains(mComics.at(i).pluginId);
+        mEnabled[i] = mEnabledProviders.contains(mComics.at(i).pluginId);
     }
     endResetModel();
 }
 
 QStringList ComicModel::checkedProviders()
 {
-    QStringList enabledProviders;
-    enabledProviders.reserve(mChecked.count(true));
+    QStringList checkedProviders;
+    checkedProviders.reserve(mChecked.count(true));
     for (int i = 0; i < mComics.count(); ++i) {
         if (mChecked[i]) {
-            enabledProviders << mComics.at(i).pluginId;
+            checkedProviders << mComics.at(i).pluginId;
         }
     }
-    enabledProviders.sort();
-    return enabledProviders;
+    checkedProviders.sort();
+    return checkedProviders;
+}
+
+void ComicModel::setEnabledProviders(const QStringList &enabledProviders)
+{
+    mEnabledProviders = enabledProviders;
+    load();
+}
+
+void ComicModel::setHighlight(const QModelIndex &index, bool highlight)
+{
+    mHighlighted[index.row()] = highlight;
+    emit dataChanged(index, index, {ComicHighlightRole});
 }

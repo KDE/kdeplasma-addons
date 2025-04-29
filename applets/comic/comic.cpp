@@ -15,6 +15,7 @@
 #include "comicsaver.h"
 #include "stripselector.h"
 
+#include <QAbstractItemModel>
 #include <QAction>
 #include <QDebug>
 #include <QNetworkInformation>
@@ -39,7 +40,6 @@
 
 ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
-    , mActiveComicModel(new ActiveComicModel(parent))
     , mCheckNewStrips(nullptr)
     , mEngine(new ComicEngine(this))
     , mSavingDir(nullptr)
@@ -142,34 +142,14 @@ void ComicApplet::positionFullView(QWindow *window)
 
 void ComicApplet::updateUsedComics()
 {
-    mActiveComicModel->clear();
-    mCurrent = ComicData();
+    loadProviders();
 
-    bool isFirst = true;
-    QModelIndex data;
     KConfigGroup cg = config();
     for (int i = 0; i < mModel->rowCount(); ++i) {
-        if (cg.readEntry("tabIdentifier", QStringList()).contains(mModel->index(i, 0).data(Qt::UserRole).toString())) {
-            data = mModel->index(i, 1);
-
-            if (isFirst) {
-                isFirst = false;
-                const QString id = data.data(Qt::UserRole).toString();
-                const QString title = data.data().toString();
-                mCurrent.init(id, config());
-                mCurrent.setTitle(title);
-            }
-
-            const QString name = data.data().toString();
-            const QString identifier = data.data(Qt::UserRole).toString();
-            const QString icon = data.data(Qt::DecorationRole).toString();
-            // found a newer strip last time, which was not visited
-
-            if (cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0) && !cg.readEntry(QLatin1String("lastStripVisited_") + identifier, true)) {
-                mActiveComicModel->addComic(identifier, name, icon, true);
-            } else {
-                mActiveComicModel->addComic(identifier, name, icon);
-            }
+        QModelIndex index = mModel->index(i, 0);
+        if (index.data(ComicModel::Roles::ComicEnabledRole).toBool() && cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0)
+            && !cg.readEntry(QLatin1String("lastStripVisited_") + index.data(ComicModel::Roles::ComicPluginRole).toString(), true)) {
+            mModel->setHighlight(index, true);
         }
     }
 
@@ -180,8 +160,6 @@ void ComicApplet::updateUsedComics()
             new CheckNewStrips(cg.readEntry("tabIdentifier", QStringList()), mEngine, cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0), this);
         connect(mCheckNewStrips, &CheckNewStrips::lastStrip, this, &ComicApplet::slotFoundLastStrip);
     }
-
-    Q_EMIT comicModelChanged();
 }
 
 void ComicApplet::slotTabChanged(const QString &identifier)
@@ -311,10 +289,6 @@ void ComicApplet::slotShowActualSize(bool scale)
 }
 
 // QML
-QObject *ComicApplet::comicsModel() const
-{
-    return mActiveComicModel;
-}
 
 QObject *ComicApplet::availableComicsModel() const
 {
@@ -355,7 +329,6 @@ void ComicApplet::refreshComicData()
     mComicData[QStringLiteral("isError")] = mCurrent.isError();
     mComicData[QStringLiteral("storePosition")] = mCurrent.storePosition();
     mComicData[QStringLiteral("ready")] = mCurrent.ready();
-    mComicData[QStringLiteral("nextNewStripEnabled")] = isTabHighlighted(mCurrent.id());
 
     Q_EMIT comicDataChanged();
 }
@@ -379,36 +352,15 @@ void ComicApplet::setShowActualSize(bool show)
 // Endof QML
 void ComicApplet::setTabHighlighted(const QString &id, bool highlight)
 {
-    // Search for matching id
-    for (int i = 0; i < mActiveComicModel->rowCount(); ++i) {
-        QStandardItem *item = mActiveComicModel->item(i);
-
-        QString currentId = item->data(ActiveComicModel::ComicKeyRole).toString();
-        if (id == currentId) {
-            if (highlight != item->data(ActiveComicModel::ComicHighlightRole).toBool()) {
-                item->setData(highlight, ActiveComicModel::ComicHighlightRole);
-                Q_EMIT tabHighlightRequest(id, highlight);
-            }
-        }
+    QModelIndexList indexList = mModel->match(mModel->index(0, 0), ComicModel::ComicPluginRole, id, 1, Qt::MatchFixedString);
+    if (!indexList.empty()) {
+        mModel->setHighlight(indexList[0], highlight);
     }
-}
-
-bool ComicApplet::isTabHighlighted(const QString &id) const
-{
-    for (int i = 0; i < mActiveComicModel->rowCount(); ++i) {
-        QStandardItem *item = mActiveComicModel->item(i);
-
-        QString currentId = item->data(ActiveComicModel::ComicKeyRole).toString();
-        if (id == currentId) {
-            return item->data(ActiveComicModel::ComicHighlightRole).toBool();
-        }
-    }
-    return false;
 }
 
 void ComicApplet::loadProviders()
 {
-    mModel->load();
+    mModel->setEnabledProviders(config().readEntry("tabIdentifier", QStringList()));
 }
 
 K_PLUGIN_CLASS_WITH_JSON(ComicApplet, "metadata.json")

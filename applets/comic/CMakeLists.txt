@@ -22,7 +22,6 @@ plasma_add_applet(org.kde.plasma.comic
         comicinfo.cpp
         comicsaver.cpp
         stripselector.cpp
-        activecomicmodel.cpp
     RESOURCES
         main.xml
 )

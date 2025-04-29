@@ -20,7 +20,13 @@ class ComicModel : public QAbstractTableModel
     Q_OBJECT
 
 public:
-    ComicModel(ComicEngine *engine, const QStringList &usedComics, QObject *parent = nullptr);
+    enum Roles {
+        ComicPluginRole = Qt::UserRole,
+        ComicEnabledRole,
+        ComicHighlightRole
+    };
+
+    ComicModel(ComicEngine *engine, const QStringList &enabledProviders, QObject *parent = nullptr);
 
     QHash<int, QByteArray> roleNames() const override;
 
@@ -29,6 +35,8 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::CheckStateRole) const override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+    void setEnabledProviders(const QStringList &enabledProviders);
+    void setHighlight(const QModelIndex &index, bool highlight);
 
     void load();
     Q_INVOKABLE QStringList checkedProviders();
@@ -36,7 +44,9 @@ public:
 private:
     QList<ComicProviderInfo> mComics;
     QBitArray mChecked;
-    QStringList mUsedComics;
+    QBitArray mEnabled;
+    QBitArray mHighlighted;
+    QStringList mEnabledProviders;
     ComicEngine *mEngine;
 };
 

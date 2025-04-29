@@ -13,6 +13,7 @@ import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
+import org.kde.kitemmodels as KItemModels
 
 PlasmoidItem {
     id: mainWindow
@@ -32,9 +33,21 @@ PlasmoidItem {
     readonly property bool showComicTitle: plasmoid.configuration.showComicTitle
     readonly property bool middleClick: plasmoid.configuration.middleClick
 
+    KItemModels.KSortFilterProxyModel {
+        id: enabledComicsModel
+        sourceModel: plasmoid.availableComicsModel
+        filterRowCallback: function(source_row, source_parent) {
+            return sourceModel.index(source_row, 0, source_parent).data(KItemModels.KRoleNames.role("enabled"));
+        }
+        onModelReset: {
+            mainWindow.fullRepresentationItem?.comicTabbar.setCurrentIndex(0);
+            mainWindow.fullRepresentationItem?.comicTabbar.currentIndexChanged();
+        }
+    }
+
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
-            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready && plasmoid.comicData.nextNewStripEnabled
+            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready && mainWindow.fullRepresentationItem?.comicTabbar.currentItem.highlighted
             visible: Plasmoid.configuration.checkNewComicStripsIntervall
             text: i18nc("@action comic strip", "&Next Tab with a New Strip")
             icon.name: "go-next-view"
@@ -95,6 +108,7 @@ PlasmoidItem {
 
     fullRepresentation:  Item {
         anchors.fill: parent
+        property alias comicTabbar: comicTabbar
         ColumnLayout {
             anchors.fill: parent
 
@@ -105,20 +119,6 @@ PlasmoidItem {
 
             Connections {
                 target: plasmoid
-
-                function onComicsModelChanged() {
-                    comicTabbar.setCurrentIndex(0);
-                }
-
-                function onTabHighlightRequest(id, highlight) {
-                    for (var i = 0; i < comicTabbar.count; ++i) {
-                        var button = comicTabbar.itemAt(i);
-
-                        if (button.key !== undefined && button.key == id) {
-                            button.highlighted = highlight;
-                        }
-                    }
-                }
 
                 function onShowNextNewStrip() {
                     var firstHighlightedButtonIndex = undefined;
@@ -149,22 +149,24 @@ PlasmoidItem {
 
                 visible: plasmoid.configuration.tabIdentifier.length > 1
 
+                Component.onCompleted: currentIndexChanged()
+
                 onCurrentIndexChanged: {
-                    if (comicTabbar.currentItem) {
+                    if (comicTabbar.currentItem && comicTabbar.currentItem.key != "") {
                         plasmoid.tabChanged(comicTabbar.currentItem.key);
                     }
                 }
 
                 Repeater {
-                    model: plasmoid.comicsModel
+                    model: enabledComicsModel
                     delegate:  PlasmaComponents3.TabButton {
                         id: tabButton
 
-                        readonly property string key: model.key
+                        readonly property string key: model.plugin
                         property bool highlighted: model.highlight
 
-                        text: model.title
-                        icon.source: model.icon
+                        text: model.display
+                        icon.source: model.decoration
                     }
                 }
             }
