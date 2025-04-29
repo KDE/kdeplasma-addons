@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-04-29 00:42+0000\n"
 "PO-Revision-Date: 2011-01-03 11:16+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux@walon.org>\n"
@@ -137,21 +137,21 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: qml/configGeneral.qml:50
+#: qml/configGeneral.qml:44
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Binde d' imådjes"
 
-#: qml/configGeneral.qml:70
+#: qml/configGeneral.qml:64
 #, fuzzy, kde-format
 #| msgid "&Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "&Cweri des novelès bindes d' imådje..."
 
-#: qml/configGeneral.qml:81
+#: qml/configGeneral.qml:75
 #, fuzzy, kde-format
 #| msgid "&Middle-click on the comic to show it at its original size"
 msgctxt "@option:check"
@@ -159,14 +159,14 @@ msgid "Middle-click on comic to display at original size"
 msgstr ""
 "Clitchîz-&mitan sol binde d' imådjes pol mostrer a s' grandeu d' oridjinne"
 
-#: qml/configGeneral.qml:90
+#: qml/configGeneral.qml:84
 #, fuzzy, kde-format
 #| msgid "Choose a comic strip"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Tchoezi ene binde d' imådjes"
 
-#: qml/configGeneral.qml:99
+#: qml/configGeneral.qml:93
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

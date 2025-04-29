@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-04-29 00:42+0000\n"
 "PO-Revision-Date: 2022-08-13 15:31+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -139,32 +139,32 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Только при наведении мыши"
 
-#: qml/configGeneral.qml:50
+#: qml/configGeneral.qml:44
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Комиксы:"
 
-#: qml/configGeneral.qml:70
+#: qml/configGeneral.qml:64
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Загрузить новые комиксы…"
 
-#: qml/configGeneral.qml:81
+#: qml/configGeneral.qml:75
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Щелчок средней кнопкой мыши показывает комикс в исходном размере"
 
-#: qml/configGeneral.qml:90
+#: qml/configGeneral.qml:84
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Проверять наличие новых комиксов каждые:"
 
 # BUGME: https://bugs.kde.org/show_bug.cgi?id=386957 --aspotashev
-#: qml/configGeneral.qml:99
+#: qml/configGeneral.qml:93
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

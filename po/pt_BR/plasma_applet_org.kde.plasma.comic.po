@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-04-29 00:42+0000\n"
 "PO-Revision-Date: 2025-04-12 07:01-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -130,19 +130,19 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Somente ao passar o mouse"
 
-#: qml/configGeneral.qml:50
+#: qml/configGeneral.qml:44
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Tirinhas:"
 
-#: qml/configGeneral.qml:70
+#: qml/configGeneral.qml:64
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Baixar novas tirinhas..."
 
-#: qml/configGeneral.qml:81
+#: qml/configGeneral.qml:75
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
@@ -150,13 +150,13 @@ msgstr ""
 "Clique com o botão do meio do mouse para mostrar o tamanha original da "
 "tirinha"
 
-#: qml/configGeneral.qml:90
+#: qml/configGeneral.qml:84
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Procurar novas tirinhas a cada:"
 
-#: qml/configGeneral.qml:99
+#: qml/configGeneral.qml:93
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

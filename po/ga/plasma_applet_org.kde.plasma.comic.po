@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_comic.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-04-29 00:42+0000\n"
 "PO-Revision-Date: 2007-11-16 11:40-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -140,35 +140,35 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: qml/configGeneral.qml:50
+#: qml/configGeneral.qml:44
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Stiallchartún"
 
-#: qml/configGeneral.qml:70
+#: qml/configGeneral.qml:64
 #, fuzzy, kde-format
 #| msgid "&Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Fai&gh Stiallchartúin Nua..."
 
-#: qml/configGeneral.qml:81
+#: qml/configGeneral.qml:75
 #, fuzzy, kde-format
 #| msgid "&Middle-click on the comic to show it at its original size"
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "&Lárchliceáil an stiallchartún chun é a thaispeáint sa bhunmhéid"
 
-#: qml/configGeneral.qml:90
+#: qml/configGeneral.qml:84
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Lorg stiallchartúin nua:"
 
-#: qml/configGeneral.qml:99
+#: qml/configGeneral.qml:93
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"

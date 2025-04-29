@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-04-29 00:42+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -126,31 +126,31 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "仅悬停时"
 
-#: qml/configGeneral.qml:50
+#: qml/configGeneral.qml:44
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "漫画："
 
-#: qml/configGeneral.qml:70
+#: qml/configGeneral.qml:64
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "获取新漫画…"
 
-#: qml/configGeneral.qml:81
+#: qml/configGeneral.qml:75
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "中键单击漫画显示为原始尺寸"
 
-#: qml/configGeneral.qml:90
+#: qml/configGeneral.qml:84
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "检查新漫画间隔时间："
 
-#: qml/configGeneral.qml:99
+#: qml/configGeneral.qml:93
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

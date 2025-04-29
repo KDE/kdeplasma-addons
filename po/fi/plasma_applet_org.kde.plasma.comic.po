@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-04-29 00:42+0000\n"
 "PO-Revision-Date: 2022-08-05 11:17+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -134,33 +134,33 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Vain osoittimen alla"
 
-#: qml/configGeneral.qml:50
+#: qml/configGeneral.qml:44
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Sarjakuvat:"
 
-#: qml/configGeneral.qml:70
+#: qml/configGeneral.qml:64
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Hae uusia sarjakuvia…"
 
-#: qml/configGeneral.qml:81
+#: qml/configGeneral.qml:75
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr ""
 "Näytä sarjakuva alkuperäiskoossaan hiiren keskipainikkeen napsautuksella"
 
-#: qml/configGeneral.qml:90
+#: qml/configGeneral.qml:84
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Etsi uusia strippejä:"
 
 # Konteksti: Check for new comics every: __ minute(s)
-#: qml/configGeneral.qml:99
+#: qml/configGeneral.qml:93
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"

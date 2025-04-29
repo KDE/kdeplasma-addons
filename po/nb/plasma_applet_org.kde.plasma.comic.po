@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-04-29 00:42+0000\n"
 "PO-Revision-Date: 2011-05-21 15:16+0200\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -128,31 +128,31 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: qml/configGeneral.qml:50
+#: qml/configGeneral.qml:44
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr ""
 
-#: qml/configGeneral.qml:70
+#: qml/configGeneral.qml:64
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr ""
 
-#: qml/configGeneral.qml:81
+#: qml/configGeneral.qml:75
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr ""
 
-#: qml/configGeneral.qml:90
+#: qml/configGeneral.qml:84
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr ""
 
-#: qml/configGeneral.qml:99
+#: qml/configGeneral.qml:93
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
