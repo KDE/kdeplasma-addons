@@ -580,6 +580,6 @@ void ComicApplet::loadProviders()
     mModel->load();
 }
 
-K_PLUGIN_CLASS(ComicApplet)
+K_PLUGIN_CLASS_WITH_JSON(ComicApplet, "metadata.json")
 
 #include "comic.moc"
