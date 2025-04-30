@@ -6,6 +6,8 @@
 
 import QtQuick
 import QtQuick.Layouts 1.1
+import QtQuick.Dialogs
+import QtCore
 
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core as PlasmaCore
@@ -86,7 +88,10 @@ PlasmoidItem {
             enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
             text: i18nc("@action", "&Save Comic As…")
             icon.name: "document-save-as"
-            onTriggered: plasmoid.saveComicAs()
+            onTriggered: {
+                saveDialog.checkCurrentFolder()
+                saveDialog.open()
+            }
         },
         PlasmaCore.Action {
             enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
@@ -229,6 +234,30 @@ PlasmoidItem {
                     onTriggered: Plasmoid.internalAction("configure").trigger();
                 }
             }
+        }
+    }
+
+    FileDialog {
+        id: saveDialog
+        fileMode: FileDialog.SaveFile
+        defaultSuffix: "png"
+        currentFile: i18nc("@other filename pattern %1 path %2 comic (provider) name, %3 image id", "%1/%2 - %3.png", currentFolder, plasmoid.comicData.title, plasmoid.comicData.currentReadable)
+
+        property list<string> paths: [
+            Plasmoid.configuration.savingDir,
+            StandardPaths.writableLocation(StandardPaths.PicturesLocation),
+            StandardPaths.writableLocation(StandardPaths.DownloadLocation),
+            StandardPaths.writableLocation(StandardPaths.HomeLocation)
+        ]
+
+        function checkCurrentFolder() {
+            currentFolder = paths.find(path => path != "" && Plasmoid.urlExists(path))
+        }
+
+        onAccepted: {
+            Plasmoid.saveImage(selectedFile)
+            Plasmoid.configuration.savingDir = currentFolder
+            Plasmoid.configuration.writeConfig()
         }
     }
 }

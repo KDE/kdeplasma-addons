@@ -47,5 +47,9 @@
             <label>The number of strips to cache per comic.</label>
             <default>29</default>
         </entry>
+        <entry name="savingDir" type="String">
+            <label>The folder where the last image was saved.</label>
+            <default></default>
+        </entry>
     </group>
 </kcfg>

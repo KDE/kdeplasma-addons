@@ -9,7 +9,6 @@
 
 #include <QObject>
 
-#include "comicinfo.h"
 #include "engine/types.h"
 
 class ComicData;

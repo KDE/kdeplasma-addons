@@ -12,12 +12,12 @@
 #include "comic.h"
 #include "checknewstrips.h"
 #include "comic_debug.h"
-#include "comicsaver.h"
 #include "stripselector.h"
 
 #include <QAbstractItemModel>
 #include <QAction>
 #include <QDebug>
+#include <QDir>
 #include <QNetworkInformation>
 #include <QScreen>
 #include <QSortFilterProxyModel>
@@ -42,15 +42,12 @@ ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVa
     : Plasma::Applet(parent, data, args)
     , mCheckNewStrips(nullptr)
     , mEngine(new ComicEngine(this))
-    , mSavingDir(nullptr)
 {
     setHasConfigurationInterface(true);
 }
 
 void ComicApplet::init()
 {
-    mSavingDir = new SavingDir(config());
-
     mDateChangedTimer = new QTimer(this);
     mDateChangedTimer->setInterval(5 * 60 * 1000); // every 5 minutes
 
@@ -82,11 +79,6 @@ void ComicApplet::init()
             mEngine->requestSource(mPreviousFailedIdentifier);
         }
     });
-}
-
-ComicApplet::~ComicApplet()
-{
-    delete mSavingDir;
 }
 
 void ComicApplet::dataUpdated(const ComicMetaData &data)
@@ -277,10 +269,13 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
     }
 }
 
-void ComicApplet::slotSaveComicAs()
+bool ComicApplet::saveImage(const QUrl &fileUrl)
 {
-    ComicSaver saver(mSavingDir);
-    saver.save(mCurrent);
+    if (!fileUrl.isValid()) {
+        return false;
+    }
+
+    return mCurrent.image().save(fileUrl.toLocalFile(), "PNG");
 }
 
 void ComicApplet::slotShowActualSize(bool scale)
@@ -361,6 +356,12 @@ void ComicApplet::setTabHighlighted(const QString &id, bool highlight)
 void ComicApplet::loadProviders()
 {
     mModel->setEnabledProviders(config().readEntry("tabIdentifier", QStringList()));
+}
+
+bool ComicApplet::urlExists(const QUrl &url)
+{
+    QDir dir(url.path());
+    return dir.exists();
 }
 
 K_PLUGIN_CLASS_WITH_JSON(ComicApplet, "metadata.json")

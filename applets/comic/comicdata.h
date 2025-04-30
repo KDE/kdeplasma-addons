@@ -7,7 +7,6 @@
 #ifndef COMIC_DATA_H
 #define COMIC_DATA_H
 
-#include "comicinfo.h"
 #include "engine/types.h"
 
 // Qt

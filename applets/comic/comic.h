@@ -38,7 +38,6 @@ class ComicApplet : public Plasma::Applet
 
 public:
     ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
-    ~ComicApplet() override;
 
     void init() override;
 
@@ -48,6 +47,9 @@ public:
 
     bool showActualSize() const;
     void setShowActualSize(bool show);
+
+    Q_INVOKABLE bool urlExists(const QUrl &url);
+    Q_INVOKABLE bool saveImage(const QUrl &fileUrl);
 
     // End for QML
 
@@ -60,7 +62,6 @@ private Q_SLOTS:
     void slotTabChanged(const QString &newIdentifier);
     void slotFoundLastStrip(int index, const QString &identifier, const QString &suffix);
     void slotGoJump();
-    void slotSaveComicAs();
     void slotShowActualSize(bool show);
     void slotShop();
     void slotWebsite();
@@ -92,11 +93,6 @@ public Q_SLOTS:
         slotStorePosition(store);
     }
 
-    Q_INVOKABLE void saveComicAs()
-    {
-        slotSaveComicAs();
-    }
-
     Q_INVOKABLE void tabChanged(const QString &newIdentifier)
     {
         slotTabChanged(newIdentifier);
@@ -124,7 +120,6 @@ private:
     ComicEngine *const mEngine;
 
     ComicData mCurrent;
-    SavingDir *mSavingDir;
 };
 
 #endif

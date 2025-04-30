@@ -19,8 +19,6 @@ plasma_add_applet(org.kde.plasma.comic
         comicmodel.cpp
         checknewstrips.cpp
         comicdata.cpp
-        comicinfo.cpp
-        comicsaver.cpp
         stripselector.cpp
     RESOURCES
         main.xml
