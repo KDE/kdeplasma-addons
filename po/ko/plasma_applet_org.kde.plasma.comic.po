@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-29 00:42+0000\n"
+"POT-Creation-Date: 2025-04-30 00:43+0000\n"
 "PO-Revision-Date: 2025-04-06 23:04+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -65,91 +65,91 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "고급"
 
-#: qml/configAdvanced.qml:33
+#: qml/configAdvanced.qml:24
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "만화 캐시:"
 
-#: qml/configAdvanced.qml:42
+#: qml/configAdvanced.qml:33
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
 msgid_plural "strips per comic"
 msgstr[0] "장면당 화"
 
-#: qml/configAppearance.qml:42
+#: qml/configAppearance.qml:27
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "표시:"
 
-#: qml/configAppearance.qml:43
+#: qml/configAppearance.qml:28
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "만화 제목"
 
-#: qml/configAppearance.qml:49
+#: qml/configAppearance.qml:33
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "만화 식별자"
 
-#: qml/configAppearance.qml:55
+#: qml/configAppearance.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "만화 작성자"
 
-#: qml/configAppearance.qml:61
+#: qml/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "만화 URL"
 
-#: qml/configAppearance.qml:71
+#: qml/configAppearance.qml:52
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "탐색 단추 표시:"
 
-#: qml/configAppearance.qml:72
+#: qml/configAppearance.qml:53
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "항상"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:59
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "지나다닐 때만"
 
-#: qml/configGeneral.qml:44
+#: qml/configGeneral.qml:38
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "만화:"
 
-#: qml/configGeneral.qml:64
+#: qml/configGeneral.qml:58
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "새 만화 가져오기…"
 
-#: qml/configGeneral.qml:75
+#: qml/configGeneral.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "가운데 단추를 클릭하면 원래 크기로 표시"
 
-#: qml/configGeneral.qml:84
+#: qml/configGeneral.qml:77
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "새 만화 자동 확인:"
 
-#: qml/configGeneral.qml:93
+#: qml/configGeneral.qml:85
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -192,31 +192,31 @@ msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "상점 웹사이트 방문(&W)"
 
-#: qml/main.qml:77
+#: qml/main.qml:74
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "다른 이름으로 만화 저장(&S)…"
 
-#: qml/main.qml:83
+#: qml/main.qml:80
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "실제 크기(&A)"
 
-#: qml/main.qml:91
+#: qml/main.qml:88
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "현재 위치 저장하기(&P)"
 
-#: qml/main.qml:226
+#: qml/main.qml:223
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "설정한 만화 없음"
 
-#: qml/main.qml:229
+#: qml/main.qml:226
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"

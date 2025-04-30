@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-29 00:42+0000\n"
+"POT-Creation-Date: 2025-04-30 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -66,91 +66,91 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "高级"
 
-#: qml/configAdvanced.qml:33
+#: qml/configAdvanced.qml:24
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "漫画缓存："
 
-#: qml/configAdvanced.qml:42
+#: qml/configAdvanced.qml:33
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
 msgid_plural "strips per comic"
 msgstr[0] "每篇漫画条数"
 
-#: qml/configAppearance.qml:42
+#: qml/configAppearance.qml:27
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "显示："
 
-#: qml/configAppearance.qml:43
+#: qml/configAppearance.qml:28
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "漫画标题"
 
-#: qml/configAppearance.qml:49
+#: qml/configAppearance.qml:33
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "漫画标识符"
 
-#: qml/configAppearance.qml:55
+#: qml/configAppearance.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "漫画作者"
 
-#: qml/configAppearance.qml:61
+#: qml/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "漫画网址"
 
-#: qml/configAppearance.qml:71
+#: qml/configAppearance.qml:52
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "显示导航按钮："
 
-#: qml/configAppearance.qml:72
+#: qml/configAppearance.qml:53
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "总是"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:59
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "仅悬停时"
 
-#: qml/configGeneral.qml:44
+#: qml/configGeneral.qml:38
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "漫画："
 
-#: qml/configGeneral.qml:64
+#: qml/configGeneral.qml:58
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "获取新漫画…"
 
-#: qml/configGeneral.qml:75
+#: qml/configGeneral.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "中键单击漫画显示为原始尺寸"
 
-#: qml/configGeneral.qml:84
+#: qml/configGeneral.qml:77
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "检查新漫画间隔时间："
 
-#: qml/configGeneral.qml:93
+#: qml/configGeneral.qml:85
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -193,31 +193,31 @@ msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "访问商店网站(&W)"
 
-#: qml/main.qml:77
+#: qml/main.qml:74
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "另存漫画为(&S)..."
 
-#: qml/main.qml:83
+#: qml/main.qml:80
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "实际大小(&A)"
 
-#: qml/main.qml:91
+#: qml/main.qml:88
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "保存当前位置(&P)"
 
-#: qml/main.qml:226
+#: qml/main.qml:223
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "没有配置漫画"
 
-#: qml/main.qml:229
+#: qml/main.qml:226
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"

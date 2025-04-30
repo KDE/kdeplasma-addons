@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-29 00:42+0000\n"
+"POT-Creation-Date: 2025-04-30 00:43+0000\n"
 "PO-Revision-Date: 2011-08-18 06:54+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -73,14 +73,14 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Verwiedert"
 
-#: qml/configAdvanced.qml:33
+#: qml/configAdvanced.qml:24
 #, fuzzy, kde-format
 #| msgid "Comic cache:"
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "Comic-Twischenspieker:"
 
-#: qml/configAdvanced.qml:42
+#: qml/configAdvanced.qml:33
 #, fuzzy, kde-format
 #| msgid " strips per comic"
 msgctxt "@item:valuesuffix spacing to number + unit"
@@ -89,86 +89,86 @@ msgid_plural "strips per comic"
 msgstr[0] " Regen per Comic"
 msgstr[1] " Regen per Comic"
 
-#: qml/configAppearance.qml:42
+#: qml/configAppearance.qml:27
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr ""
 
-#: qml/configAppearance.qml:43
+#: qml/configAppearance.qml:28
 #, fuzzy, kde-format
 #| msgid "Show comic &title:"
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "Comic-&Titel wiesen:"
 
-#: qml/configAppearance.qml:49
+#: qml/configAppearance.qml:33
 #, fuzzy, kde-format
 #| msgid "Show comic &identifier:"
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "Comic-&Beteker wiesen:"
 
-#: qml/configAppearance.qml:55
+#: qml/configAppearance.qml:38
 #, fuzzy, kde-format
 #| msgid "Show comic &author:"
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "Comic-&Autor wiesen:"
 
-#: qml/configAppearance.qml:61
+#: qml/configAppearance.qml:43
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "Comic"
 
-#: qml/configAppearance.qml:71
+#: qml/configAppearance.qml:52
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr ""
 
-#: qml/configAppearance.qml:72
+#: qml/configAppearance.qml:53
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr ""
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:59
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: qml/configGeneral.qml:44
+#: qml/configGeneral.qml:38
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Comic"
 
-#: qml/configGeneral.qml:64
+#: qml/configGeneral.qml:58
 #, fuzzy, kde-format
 #| msgid "&Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Nieg Comics &halen..."
 
-#: qml/configGeneral.qml:75
+#: qml/configGeneral.qml:69
 #, fuzzy, kde-format
 #| msgid "&Middle-click on the comic to show it at its original size"
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "&Middelklick op den Comic, wenn Du em in Orginaalgrött ankieken wullt."
 
-#: qml/configGeneral.qml:84
+#: qml/configGeneral.qml:77
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Na niege Comics kieken:"
 
-#: qml/configGeneral.qml:93
+#: qml/configGeneral.qml:85
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -220,20 +220,20 @@ msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Na de Inkööp-&Nettsiet gahn"
 
-#: qml/main.qml:77
+#: qml/main.qml:74
 #, fuzzy, kde-format
 #| msgid "&Save Comic As..."
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "Comic &sekern as..."
 
-#: qml/main.qml:83
+#: qml/main.qml:80
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Orginaalgrött"
 
-#: qml/main.qml:91
+#: qml/main.qml:88
 #, fuzzy, kde-format
 #| msgctxt "@option:check Context menu of comic image"
 #| msgid "Store current &Position"
@@ -241,14 +241,14 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Aktuell &Positschoon sekern"
 
-#: qml/main.qml:226
+#: qml/main.qml:223
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Comic-Instellen"
 
-#: qml/main.qml:229
+#: qml/main.qml:226
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"

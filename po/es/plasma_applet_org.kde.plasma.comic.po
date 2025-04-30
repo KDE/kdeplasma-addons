@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-29 00:42+0000\n"
+"POT-Creation-Date: 2025-04-30 00:43+0000\n"
 "PO-Revision-Date: 2025-04-04 02:24+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -69,13 +69,13 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Avanzado"
 
-#: qml/configAdvanced.qml:33
+#: qml/configAdvanced.qml:24
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "Caché de cómics:"
 
-#: qml/configAdvanced.qml:42
+#: qml/configAdvanced.qml:33
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -83,78 +83,78 @@ msgid_plural "strips per comic"
 msgstr[0] "tira por cómic"
 msgstr[1] "tiras por cómic"
 
-#: qml/configAppearance.qml:42
+#: qml/configAppearance.qml:27
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "Mostrar:"
 
-#: qml/configAppearance.qml:43
+#: qml/configAppearance.qml:28
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "Título del cómic"
 
-#: qml/configAppearance.qml:49
+#: qml/configAppearance.qml:33
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "Identificador del cómic"
 
-#: qml/configAppearance.qml:55
+#: qml/configAppearance.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "Autor del cómic"
 
-#: qml/configAppearance.qml:61
+#: qml/configAppearance.qml:43
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "URL del cómic"
 
-#: qml/configAppearance.qml:71
+#: qml/configAppearance.qml:52
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "Mostrar botones de navegación:"
 
-#: qml/configAppearance.qml:72
+#: qml/configAppearance.qml:53
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "Siempre"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:59
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Al situar el cursor encima"
 
-#: qml/configGeneral.qml:44
+#: qml/configGeneral.qml:38
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Cómics:"
 
-#: qml/configGeneral.qml:64
+#: qml/configGeneral.qml:58
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Obtener nuevos cómics…"
 
-#: qml/configGeneral.qml:75
+#: qml/configGeneral.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Clic central sobre el cómic para mostrarlo a tamaño original"
 
-#: qml/configGeneral.qml:84
+#: qml/configGeneral.qml:77
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Comprobar si hay nuevos cómics cada:"
 
-#: qml/configGeneral.qml:93
+#: qml/configGeneral.qml:85
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -198,31 +198,31 @@ msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Visitar la página &web de la tienda"
 
-#: qml/main.qml:77
+#: qml/main.qml:74
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Guardar cómic como…"
 
-#: qml/main.qml:83
+#: qml/main.qml:80
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Tamaño re&al"
 
-#: qml/main.qml:91
+#: qml/main.qml:88
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Guardar la &posición actual"
 
-#: qml/main.qml:226
+#: qml/main.qml:223
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "No se ha configurado ningún cómic"
 
-#: qml/main.qml:229
+#: qml/main.qml:226
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"

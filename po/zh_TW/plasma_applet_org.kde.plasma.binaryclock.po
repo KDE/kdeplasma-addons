@@ -6,20 +6,20 @@
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009.
 # Jeff Huang <s8321414@gmail.com>, 2017.
 # pan93412 <pan93412@gmail.com>, 2018, 2019.
-# SPDX-FileCopyrightText: 2023 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-25 00:43+0000\n"
-"PO-Revision-Date: 2023-12-12 18:44+0900\n"
+"PO-Revision-Date: 2025-04-30 02:35+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 25.07.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: package/contents/config/config.qml:17
@@ -33,7 +33,7 @@ msgstr "外觀"
 msgctxt ""
 "@title:group The things being potentially shown are lights and seconds"
 msgid "Show:"
-msgstr ""
+msgstr "顯示："
 
 #: package/contents/ui/configGeneral.qml:30
 #: package/contents/ui/configGeneral.qml:60

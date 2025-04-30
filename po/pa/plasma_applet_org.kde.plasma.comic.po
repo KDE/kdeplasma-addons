@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-29 00:42+0000\n"
+"POT-Creation-Date: 2025-04-30 00:43+0000\n"
 "PO-Revision-Date: 2011-06-29 23:33+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -72,14 +72,14 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "ਤਕਨੀਕੀ"
 
-#: qml/configAdvanced.qml:33
+#: qml/configAdvanced.qml:24
 #, fuzzy, kde-format
 #| msgid "C&omic:"
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "ਕਾਮਿਕ(&o):"
 
-#: qml/configAdvanced.qml:42
+#: qml/configAdvanced.qml:33
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -87,85 +87,85 @@ msgid_plural "strips per comic"
 msgstr[0] ""
 msgstr[1] ""
 
-#: qml/configAppearance.qml:42
+#: qml/configAppearance.qml:27
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr ""
 
-#: qml/configAppearance.qml:43
+#: qml/configAppearance.qml:28
 #, fuzzy, kde-format
 #| msgid "Show comic &title:"
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "ਕਾਮਿਕ ਟਾਈਟਲ ਵੇਖੋ(&t):"
 
-#: qml/configAppearance.qml:49
+#: qml/configAppearance.qml:33
 #, fuzzy, kde-format
 #| msgid "Show comic &identifier:"
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "ਕਾਮਿਕ ਪਛਾਣ ਵੇਖੋ(&i):"
 
-#: qml/configAppearance.qml:55
+#: qml/configAppearance.qml:38
 #, fuzzy, kde-format
 #| msgid "Show comic &author:"
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "ਕਾਮਿਕ ਲੇਖਕ ਵੇਖੋ(&a):"
 
-#: qml/configAppearance.qml:61
+#: qml/configAppearance.qml:43
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "ਕਾਮਿਕ"
 
-#: qml/configAppearance.qml:71
+#: qml/configAppearance.qml:52
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr ""
 
-#: qml/configAppearance.qml:72
+#: qml/configAppearance.qml:53
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr ""
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:59
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: qml/configGeneral.qml:44
+#: qml/configGeneral.qml:38
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "ਕਾਮਿਕ"
 
-#: qml/configGeneral.qml:64
+#: qml/configGeneral.qml:58
 #, fuzzy, kde-format
 #| msgid "&Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "ਨਵੇਂ ਕਾਮਿਕ ਲਵੋ(&G)..."
 
-#: qml/configGeneral.qml:75
+#: qml/configGeneral.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr ""
 
-#: qml/configGeneral.qml:84
+#: qml/configGeneral.qml:77
 #, fuzzy, kde-format
 #| msgid "Choose a comic strip"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "ਕੌਮਿਕ ਪੱਟੀ ਚੁਣੋ"
 
-#: qml/configGeneral.qml:93
+#: qml/configGeneral.qml:85
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -215,20 +215,20 @@ msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "ਦੁਕਾਨ ਵੈੱਬਸਾਈਟ ਵੇਖੋ(&w)"
 
-#: qml/main.qml:77
+#: qml/main.qml:74
 #, fuzzy, kde-format
 #| msgid "&Save Comic As..."
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "ਕਾਮਿਕ ਇੰਝ ਸੰਭਾਲੋ(&S)..."
 
-#: qml/main.qml:83
+#: qml/main.qml:80
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "ਅਸਲੀ ਸਾਈਜ਼(&A)"
 
-#: qml/main.qml:91
+#: qml/main.qml:88
 #, fuzzy, kde-format
 #| msgctxt "@option:check Context menu of comic image"
 #| msgid "Store current &Position"
@@ -236,13 +236,13 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "ਮੌਜੂਦਾ ਸਥਿਤੀ ਸਟੋਰ ਕਰੋ(&P)"
 
-#: qml/main.qml:226
+#: qml/main.qml:223
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: qml/main.qml:229
+#: qml/main.qml:226
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
