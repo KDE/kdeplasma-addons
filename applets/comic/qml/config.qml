@@ -10,18 +10,13 @@ import org.kde.plasma.configuration
 
 ConfigModel {
     ConfigCategory {
-         name: i18nc("@title", "General")
+         name: i18nc("@title", "Comics")
          icon: "face-smile-big"
-         source: "configGeneral.qml"
+         source: "configComics.qml"
     }
     ConfigCategory {
-         name: i18nc("@title", "Appearance")
-         icon: "preferences-desktop-color"
-         source: "configAppearance.qml"
-    }
-    ConfigCategory {
-         name: i18nc("@title", "Advanced")
-         icon: "system-run"
-         source: "configAdvanced.qml"
+         name: i18nc("@title", "Behavior")
+         icon: "preferences-desktop"
+         source: "configBehavior.qml"
     }
 }

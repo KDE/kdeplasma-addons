@@ -7,9 +7,8 @@ plasma_add_applet(org.kde.plasma.comic
         qml/ButtonBar.qml
         qml/ComicBottomInfo.qml
         qml/ComicCentralView.qml
-        qml/configAdvanced.qml
-        qml/configAppearance.qml
-        qml/configGeneral.qml
+        qml/configBehavior.qml
+        qml/configComics.qml
         qml/FullViewWidget.qml
         qml/ImageWidget.qml
         qml/main.qml
