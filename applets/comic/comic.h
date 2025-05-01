@@ -50,6 +50,13 @@ public:
 
     Q_INVOKABLE bool urlExists(const QUrl &url);
     Q_INVOKABLE bool saveImage(const QUrl &fileUrl);
+    Q_INVOKABLE void goJump();
+    Q_INVOKABLE void storePosition(bool store);
+    Q_INVOKABLE void tabChanged(const QString &newIdentifier);
+    Q_INVOKABLE void loadProviders();
+    Q_INVOKABLE void positionFullView(QWindow *window);
+    Q_INVOKABLE void shop();
+    Q_INVOKABLE void website();
 
     // End for QML
 
@@ -59,47 +66,14 @@ Q_SIGNALS:
     void showActualSizeChanged();
 
 private Q_SLOTS:
-    void slotTabChanged(const QString &newIdentifier);
     void slotFoundLastStrip(int index, const QString &identifier, const QString &suffix);
-    void slotGoJump();
     void slotShowActualSize(bool show);
-    void slotShop();
-    void slotWebsite();
-    void slotStorePosition(bool store);
     void checkDayChanged();
 
 public Q_SLOTS:
     void configChanged() override;
     void saveConfig();
     Q_INVOKABLE void updateComic(const QString &identifierSuffix = QString());
-
-    Q_INVOKABLE void goJump()
-    {
-        slotGoJump();
-    }
-
-    Q_INVOKABLE void shop()
-    {
-        slotShop();
-    }
-
-    Q_INVOKABLE void website()
-    {
-        slotWebsite();
-    }
-
-    Q_INVOKABLE void storePosition(bool store)
-    {
-        slotStorePosition(store);
-    }
-
-    Q_INVOKABLE void tabChanged(const QString &newIdentifier)
-    {
-        slotTabChanged(newIdentifier);
-    }
-
-    Q_INVOKABLE void loadProviders();
-    Q_INVOKABLE void positionFullView(QWindow *window);
 
 private:
     void updateUsedComics();

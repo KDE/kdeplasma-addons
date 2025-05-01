@@ -106,8 +106,7 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
         setTabHighlighted(mCurrent.id(), false);
     }
 
-    // call the slot to check if the position needs to be saved
-    slotStorePosition(mCurrent.hasStored());
+    storePosition(mCurrent.hasStored());
 
     // prefetch the previous and following comic for faster navigation
     if (!data.error && mCurrent.hasNext()) {
@@ -154,7 +153,7 @@ void ComicApplet::updateUsedComics()
     }
 }
 
-void ComicApplet::slotTabChanged(const QString &identifier)
+void ComicApplet::tabChanged(const QString &identifier)
 {
     if (mCurrent.id() == identifier) {
         return;
@@ -222,7 +221,7 @@ void ComicApplet::slotFoundLastStrip(int index, const QString &identifier, const
     }
 }
 
-void ComicApplet::slotGoJump()
+void ComicApplet::goJump()
 {
     StripSelector *selector = StripSelectorFactory::create(mCurrent.type());
     connect(selector, &StripSelector::stripChosen, this, &ComicApplet::updateComic);
@@ -230,18 +229,18 @@ void ComicApplet::slotGoJump()
     selector->select(mCurrent);
 }
 
-void ComicApplet::slotStorePosition(bool store)
+void ComicApplet::storePosition(bool store)
 {
     mCurrent.storePosition(store);
 }
 
-void ComicApplet::slotWebsite()
+void ComicApplet::website()
 {
     auto *job = new KIO::OpenUrlJob(mCurrent.websiteUrl());
     job->start();
 }
 
-void ComicApplet::slotShop()
+void ComicApplet::shop()
 {
     auto *job = new KIO::OpenUrlJob(mCurrent.shopUrl());
     job->start();
