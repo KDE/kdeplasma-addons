@@ -312,7 +312,6 @@ void ComicApplet::refreshComicData()
     mComicData[QStringLiteral("author")] = mCurrent.author();
     mComicData[QStringLiteral("title")] = mCurrent.title();
 
-    mComicData[QStringLiteral("suffixType")] = QStringLiteral("Date");
     mComicData[QStringLiteral("current")] = mCurrent.current();
     // mComicData[QStringLiteral("last")] = mCurrent.last();
     mComicData[QStringLiteral("currentReadable")] = mCurrent.currentReadable();

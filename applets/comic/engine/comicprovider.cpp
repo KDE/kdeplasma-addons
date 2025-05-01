@@ -17,12 +17,11 @@
 class ComicProvider::Private
 {
 public:
-    Private(ComicProvider *parent, const KPluginMetaData &data, IdentifierType suffixType)
+    Private(ComicProvider *parent, const KPluginMetaData &data)
         : mParent(parent)
         , mIsCurrent(false)
         , mFirstStripNumber(1)
         , mComicDescription(data)
-        , mSuffixType(suffixType)
     {
         mTimer = new QTimer(parent);
         mTimer->setSingleShot(true);
@@ -79,12 +78,11 @@ public:
     const KPluginMetaData mComicDescription;
     QTimer *mTimer;
     QHash<KJob *, QUrl> mRedirections;
-    const IdentifierType mSuffixType;
 };
 
 ComicProvider::ComicProvider(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier)
     : QObject(parent)
-    , d(new Private(this, data, type))
+    , d(new Private(this, data))
 {
     if (type == IdentifierType::DateIdentifier) {
         d->mRequestedDate = identifier.toDate();
