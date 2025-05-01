@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 00:43+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2025-04-03 07:21+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -169,71 +169,77 @@ msgstr[1] "minuti"
 msgstr[2] "minute"
 msgstr[3] "minut"
 
-#: qml/main.qml:39
+#: qml/main.qml:54
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Naslednji zavihek z novo sliko"
 
-#: qml/main.qml:46
+#: qml/main.qml:61
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Skoči na prvo sliko"
 
-#: qml/main.qml:52
+#: qml/main.qml:67
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Skoči na trenutno sliko"
 
-#: qml/main.qml:58
+#: qml/main.qml:73
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Skoči na sliko…"
 
-#: qml/main.qml:64
+#: qml/main.qml:79
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Obišči spletišče"
 
-#: qml/main.qml:69
+#: qml/main.qml:84
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Obišči spletišče trgovine"
 
-#: qml/main.qml:74
+#: qml/main.qml:89
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Shrani strip kot…"
 
-#: qml/main.qml:80
+#: qml/main.qml:98
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Dejanska velikost"
 
-#: qml/main.qml:88
+#: qml/main.qml:106
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Shrani trenutni &položaj"
 
-#: qml/main.qml:223
+#: qml/main.qml:230
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Ni konfiguriranih stripov"
 
-#: qml/main.qml:226
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "Izberite strip…"
+
+#: qml/main.qml:244
+#, kde-format
+msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
+msgid "%1/%2 - %3.png"
+msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format

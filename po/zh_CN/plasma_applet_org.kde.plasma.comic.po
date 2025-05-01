@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 00:43+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -157,71 +157,77 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "分钟"
 
-#: qml/main.qml:39
+#: qml/main.qml:54
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "跳转到下一个有新漫画的标签页(&N)"
 
-#: qml/main.qml:46
+#: qml/main.qml:61
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "跳转到第一条漫画(&F)"
 
-#: qml/main.qml:52
+#: qml/main.qml:67
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "跳转到当前一条漫画(&C)"
 
-#: qml/main.qml:58
+#: qml/main.qml:73
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "跳转到指定一条漫画…"
 
-#: qml/main.qml:64
+#: qml/main.qml:79
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "访问网站"
 
-#: qml/main.qml:69
+#: qml/main.qml:84
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "访问商店网站(&W)"
 
-#: qml/main.qml:74
+#: qml/main.qml:89
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "另存漫画为(&S)..."
 
-#: qml/main.qml:80
+#: qml/main.qml:98
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "实际大小(&A)"
 
-#: qml/main.qml:88
+#: qml/main.qml:106
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "保存当前位置(&P)"
 
-#: qml/main.qml:223
+#: qml/main.qml:230
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "没有配置漫画"
 
-#: qml/main.qml:226
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "选择漫画…"
+
+#: qml/main.qml:244
+#, kde-format
+msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
+msgid "%1/%2 - %3.png"
+msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format

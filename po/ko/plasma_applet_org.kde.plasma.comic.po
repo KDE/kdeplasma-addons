@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 00:43+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2025-04-06 23:04+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -156,71 +156,77 @@ msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "분"
 
-#: qml/main.qml:39
+#: qml/main.qml:54
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "다음 탭으로 새 화 열기(&N)"
 
-#: qml/main.qml:46
+#: qml/main.qml:61
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "첫 화로 이동(&F)"
 
-#: qml/main.qml:52
+#: qml/main.qml:67
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "현재 화로 이동(&C)"
 
-#: qml/main.qml:58
+#: qml/main.qml:73
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "화로 이동…"
 
-#: qml/main.qml:64
+#: qml/main.qml:79
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "웹사이트 방문"
 
-#: qml/main.qml:69
+#: qml/main.qml:84
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "상점 웹사이트 방문(&W)"
 
-#: qml/main.qml:74
+#: qml/main.qml:89
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "다른 이름으로 만화 저장(&S)…"
 
-#: qml/main.qml:80
+#: qml/main.qml:98
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "실제 크기(&A)"
 
-#: qml/main.qml:88
+#: qml/main.qml:106
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "현재 위치 저장하기(&P)"
 
-#: qml/main.qml:223
+#: qml/main.qml:230
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "설정한 만화 없음"
 
-#: qml/main.qml:226
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "만화 선택…"
+
+#: qml/main.qml:244
+#, kde-format
+msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
+msgid "%1/%2 - %3.png"
+msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format

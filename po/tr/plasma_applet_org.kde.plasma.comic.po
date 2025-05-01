@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 00:43+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2025-04-04 18:07+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -169,71 +169,77 @@ msgid_plural "minutes"
 msgstr[0] "dakika"
 msgstr[1] "dakika"
 
-#: qml/main.qml:39
+#: qml/main.qml:54
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "Ye&ni Şeritli Yeni Sekme"
 
-#: qml/main.qml:46
+#: qml/main.qml:61
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "İl&k Şeride Atla"
 
-#: qml/main.qml:52
+#: qml/main.qml:67
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "&Geçerli Şeride Atla"
 
-#: qml/main.qml:58
+#: qml/main.qml:73
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Şeride Atla…"
 
-#: qml/main.qml:64
+#: qml/main.qml:79
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Web Sayfasını Ziyaret Et"
 
-#: qml/main.qml:69
+#: qml/main.qml:84
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Alışveriş &Web Sayfasını Ziyaret Et"
 
-#: qml/main.qml:74
+#: qml/main.qml:89
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "Çizgi Romanı &Farklı Kaydet…"
 
-#: qml/main.qml:80
+#: qml/main.qml:98
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Ö&zgün Boyut"
 
-#: qml/main.qml:88
+#: qml/main.qml:106
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Geçerli &Konumu Depola"
 
-#: qml/main.qml:223
+#: qml/main.qml:230
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Yapılandırılmış çizgi roman yok"
 
-#: qml/main.qml:226
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "Çizgi Roman Seç…"
+
+#: qml/main.qml:244
+#, kde-format
+msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
+msgid "%1/%2 - %3.png"
+msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format

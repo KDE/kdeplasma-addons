@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-30 00:43+0000\n"
+"POT-Creation-Date: 2025-05-01 00:43+0000\n"
 "PO-Revision-Date: 2011-01-03 11:16+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux@walon.org>\n"
@@ -174,61 +174,61 @@ msgid_plural "minutes"
 msgstr[0] ""
 msgstr[1] ""
 
-#: qml/main.qml:39
+#: qml/main.qml:54
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr ""
 
-#: qml/main.qml:46
+#: qml/main.qml:61
 #, fuzzy, kde-format
 #| msgid "Jump to &first Strip"
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Potchî al &prumire binde"
 
-#: qml/main.qml:52
+#: qml/main.qml:67
 #, fuzzy, kde-format
 #| msgid "Jump to &current Strip"
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Potchî al binde do &moumint"
 
-#: qml/main.qml:58
+#: qml/main.qml:73
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Potchî al binde..."
 
-#: qml/main.qml:64
+#: qml/main.qml:79
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Viziter l' &waibe do botike"
 
-#: qml/main.qml:69
+#: qml/main.qml:84
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Viziter l' &waibe do botike"
 
-#: qml/main.qml:74
+#: qml/main.qml:89
 #, fuzzy, kde-format
 #| msgid "&Save Comic As..."
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Schaper l' binde d' imådjes eyet l' rilomer..."
 
-#: qml/main.qml:80
+#: qml/main.qml:98
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Vraiye &grandeu"
 
-#: qml/main.qml:88
+#: qml/main.qml:106
 #, fuzzy, kde-format
 #| msgctxt "@option:check Context menu of comic image"
 #| msgid "Store current &Position"
@@ -236,16 +236,22 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Si sovni d' l' e&plaeçmint do moumint"
 
-#: qml/main.qml:223
+#: qml/main.qml:230
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: qml/main.qml:226
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
+msgstr ""
+
+#: qml/main.qml:244
+#, kde-format
+msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
+msgid "%1/%2 - %3.png"
 msgstr ""
 
 #: stripselector.cpp:31 stripselector.cpp:101
