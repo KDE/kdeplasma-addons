@@ -23,8 +23,11 @@ target_sources(plasma_engine_comic PRIVATE
     comicproviderwrapper.cpp
 )
 target_link_libraries(plasma_engine_comic
+    PUBLIC
+    Qt6::Gui
+    KF6::CoreAddons
+    PRIVATE
     Qt::Qml
-    KF6::WidgetsAddons
     KF6::Package
     KF6::KIOCore
 )

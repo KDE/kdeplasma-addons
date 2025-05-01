@@ -24,17 +24,8 @@
 #include <QTimer>
 #include <QWindow>
 
-#include <KActionCollection>
-#include <KApplicationTrader>
-#include <KConfigDialog>
 #include <KIO/OpenUrlJob>
 #include <KLocalizedString>
-#include <KNotification>
-#include <KService>
-#include <KStandardShortcut>
-#include <kuiserverjobtracker.h>
-
-#include <Plasma/Containment>
 
 #include "comicmodel.h"
 

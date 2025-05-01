@@ -7,9 +7,6 @@
 #include "comicdata.h"
 
 #include <KLocalizedString>
-#include <Plasma/Theme>
-// Qt
-#include <QPainter>
 
 ComicData::ComicData()
 {

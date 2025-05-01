@@ -29,10 +29,8 @@ target_link_libraries(org.kde.plasma.comic PRIVATE
     Qt::Widgets
     Plasma::Plasma
     KF6::I18n
-    KF6::KIOCore
-    KF6::KIOWidgets
-    KF6::Notifications
-    KF6::XmlGui
+    KF6::WidgetsAddons
+    KF6::KIOGui
     plasma_engine_comic
 )
 
