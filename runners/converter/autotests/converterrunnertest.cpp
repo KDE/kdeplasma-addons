@@ -101,7 +101,11 @@ void ConverterRunnerTest::testQuery_data()
     QTest::addColumn<QString>("expectedText");
 
     QTest::newRow("test specific target unit") << QStringLiteral("1m > cm") << QStringLiteral("100 centimeters (cm)");
+#if QT_VERSION < QT_VERSION_CHECK(6, 10, 0)
     QTest::newRow("test symbols (other than currencies)") << QStringLiteral("1000 µs as year") << QStringLiteral("3.17098E-11 year (y)");
+#else
+    QTest::newRow("test symbols (other than currencies)") << QStringLiteral("1000 µs as year") << QStringLiteral("3.17098e-11 year (y)");
+#endif
     QTest::newRow("test negative value") << QStringLiteral("-4m as cm") << QStringLiteral("-400 centimeters (cm)");
     QTest::newRow("test fractions") << QStringLiteral("6/3m>cm") << QStringLiteral("200 centimeters (cm)");
     QTest::newRow("test case insensitive units") << QStringLiteral("1Liter in ML") << QStringLiteral("1,000 milliliters (ml)");
