@@ -68,7 +68,7 @@ Q_SIGNALS:
 private Q_SLOTS:
     void slotFoundLastStrip(int index, const QString &identifier, const QString &suffix);
     void slotShowActualSize(bool show);
-    void checkDayChanged();
+    void retryRequest();
 
 public Q_SLOTS:
     void configChanged() override;
@@ -86,11 +86,9 @@ private:
     QString mPreviousFailedIdentifier;
     QVariantMap mComicData;
 
-    QDate mCurrentDay;
-
     QString mOldSource;
     CheckNewStrips *mCheckNewStrips;
-    QTimer *mDateChangedTimer;
+    QTimer *mRetryTimer;
     ComicEngine *const mEngine;
 
     ComicData mCurrent;

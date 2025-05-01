@@ -39,8 +39,8 @@ ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVa
 
 void ComicApplet::init()
 {
-    mDateChangedTimer = new QTimer(this);
-    mDateChangedTimer->setInterval(5 * 60 * 1000); // every 5 minutes
+    mRetryTimer = new QTimer(this);
+    mRetryTimer->setInterval(5 * 60 * 1000); // every 5 minutes
 
     configChanged();
 
@@ -49,8 +49,7 @@ void ComicApplet::init()
 
     mModel = new ComicModel(mEngine, tabIdentifier, this);
 
-    mCurrentDay = QDate::currentDate();
-    connect(mDateChangedTimer, &QTimer::timeout, this, &ComicApplet::checkDayChanged);
+    connect(mRetryTimer, &QTimer::timeout, this, &ComicApplet::retryRequest);
 
     updateUsedComics();
 
@@ -158,12 +157,9 @@ void ComicApplet::tabChanged(const QString &identifier)
     }
 }
 
-void ComicApplet::checkDayChanged()
+void ComicApplet::retryRequest()
 {
-    if (mCurrentDay != QDate::currentDate()) {
-        updateComic(mCurrent.current());
-        mCurrentDay = QDate::currentDate();
-    } else if (!mCurrent.hasImage()) {
+    if (!mCurrent.hasImage()) {
         updateComic(mCurrent.stored());
     }
 }
@@ -184,9 +180,9 @@ void ComicApplet::configChanged()
 
     mEngine->setMaxComicLimit(cg.readEntry("maxComicLimit", 29));
     if (tabIdentifier.isEmpty()) {
-        mDateChangedTimer->stop();
+        mRetryTimer->stop();
     } else {
-        mDateChangedTimer->start();
+        mRetryTimer->start();
     }
 }
 
