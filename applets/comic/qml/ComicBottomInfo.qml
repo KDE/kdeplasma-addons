@@ -10,6 +10,7 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.plasmoid
+import plasma.applet.org.kde.plasma.comic as Comic
 
 Item {
     id: root
@@ -19,7 +20,7 @@ Item {
 
     property bool showUrl: false
     property bool showIdentifier: false
-    property variant comicData
+    property Comic.comicData comicData
 
     visible: (comicIdentifier.text.length > 0 || comicUrl.text.length > 0)
 

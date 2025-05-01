@@ -11,6 +11,7 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.plasma.plasmoid
+import plasma.applet.org.kde.plasma.comic as Comic
 
 Item {
     id: root
@@ -25,7 +26,7 @@ Item {
                     tooltip.implicitHeight +
                     (arrowRight.visible ? arrowRight.implicitWidth : 0)
 
-    property variant comicData
+    property Comic.comicData comicData
 
     PlasmaComponents3.ToolButton {
         id: arrowLeft

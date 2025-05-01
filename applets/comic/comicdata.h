@@ -9,14 +9,42 @@
 
 #include "engine/types.h"
 
-// Qt
 #include <KConfigGroup>
+
+// Qt
 #include <QImage>
 #include <QString>
 #include <QUrl>
+#include <qqmlregistration.h>
 
 class ComicData
 {
+    Q_GADGET
+    QML_VALUE_TYPE(comicData)
+
+    Q_PROPERTY(QString id READ id)
+    Q_PROPERTY(QImage image READ image)
+    Q_PROPERTY(QString prev READ prev)
+    Q_PROPERTY(QString next READ next)
+    Q_PROPERTY(QString additionalText READ additionalText)
+    Q_PROPERTY(QUrl websiteUrl READ websiteUrl)
+    Q_PROPERTY(QString websiteHost READ websiteHost)
+    Q_PROPERTY(QUrl shopUrl READ shopUrl)
+    Q_PROPERTY(QString first READ first)
+    Q_PROPERTY(bool hasFirst READ hasFirst)
+    Q_PROPERTY(QString stripTitle READ stripTitle)
+    Q_PROPERTY(QString author READ author)
+    Q_PROPERTY(QString title READ title)
+    Q_PROPERTY(QString current READ current)
+    Q_PROPERTY(QString currentReadable READ currentReadable)
+    Q_PROPERTY(int firstStripNum READ firstStripNum)
+    Q_PROPERTY(int maxStripNum READ maxStripNum)
+    Q_PROPERTY(bool isLeftToRight READ isLeftToRight)
+    Q_PROPERTY(bool isTopToBottom READ isTopToBottom)
+    Q_PROPERTY(bool isError READ isError)
+    Q_PROPERTY(bool storePosition READ storePosition)
+    Q_PROPERTY(bool ready READ ready)
+
 public:
     ComicData();
 
@@ -131,6 +159,11 @@ public:
     QUrl websiteUrl() const
     {
         return mWebsiteUrl;
+    }
+
+    QString websiteHost() const
+    {
+        return mWebsiteUrl.host();
     }
 
     QUrl imageUrl() const

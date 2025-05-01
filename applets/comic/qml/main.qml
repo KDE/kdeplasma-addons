@@ -16,6 +16,7 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.kquickcontrolsaddons 2.0
 import org.kde.kitemmodels as KItemModels
+import plasma.applet.org.kde.plasma.comic as Comic
 
 PlasmoidItem {
     id: mainWindow
@@ -34,6 +35,8 @@ PlasmoidItem {
     readonly property bool showComicAuthor: plasmoid.configuration.showComicAuthor
     readonly property bool showComicTitle: plasmoid.configuration.showComicTitle
     readonly property bool middleClick: plasmoid.configuration.middleClick
+
+    property Comic.comicData comicData: Plasmoid.comicData
 
     KItemModels.KSortFilterProxyModel {
         id: enabledComicsModel

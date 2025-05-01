@@ -33,7 +33,7 @@ class ComicApplet : public Plasma::Applet
 {
     Q_OBJECT
     Q_PROPERTY(QObject *availableComicsModel READ availableComicsModel CONSTANT)
-    Q_PROPERTY(QVariantMap comicData READ comicData NOTIFY comicDataChanged)
+    Q_PROPERTY(ComicData comicData READ comicData NOTIFY comicDataChanged)
     Q_PROPERTY(bool showActualSize READ showActualSize WRITE setShowActualSize NOTIFY showActualSizeChanged)
 
 public:
@@ -43,7 +43,7 @@ public:
 
     // For QML
     QObject *availableComicsModel() const;
-    QVariantMap comicData() const;
+    ComicData comicData() const;
 
     bool showActualSize() const;
     void setShowActualSize(bool show);
@@ -77,14 +77,12 @@ public Q_SLOTS:
 
 private:
     void updateUsedComics();
-    void refreshComicData();
     void setTabHighlighted(const QString &id, bool highlight);
     void dataUpdated(const ComicMetaData &data);
 
 private:
     ComicModel *mModel = nullptr;
     QString mPreviousFailedIdentifier;
-    QVariantMap mComicData;
 
     QString mOldSource;
     CheckNewStrips *mCheckNewStrips;
