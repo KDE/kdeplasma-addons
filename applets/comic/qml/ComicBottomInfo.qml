@@ -34,8 +34,8 @@ Item {
         }
 
         color: Kirigami.Theme.textColor
-        visible: (showIdentifier && comicIdentifier.text.length > 0)
-        text: (showIdentifier && comicData.currentReadable != undefined) ? comicData.currentReadable : ""
+        visible: (root.showIdentifier && comicIdentifier.text.length > 0)
+        text: (root.showIdentifier && root.comicData.currentReadable != undefined) ? root.comicData.currentReadable : ""
         textFormat: Text.PlainText
         elide: Text.ElideRight
 
@@ -74,8 +74,8 @@ Item {
         }
 
         color: Kirigami.Theme.textColor
-        visible: (showUrl && comicUrl.text.length > 0)
-        text: (showUrl && comicData.websiteHost?.length > 0) ? comicData.websiteHost : ""
+        visible: (root.showUrl && comicUrl.text.length > 0)
+        text: (root.showUrl && root.comicData.websiteHost?.length > 0) ? root.comicData.websiteHost : ""
         textFormat: Text.PlainText
         elide: Text.ElideRight
 

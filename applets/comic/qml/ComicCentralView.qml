@@ -37,10 +37,10 @@ Item {
         }
 
         icon.name: "go-previous"
-        visible: (!Plasmoid.configuration.arrowsOnHover && (comicData.prev !== undefined))
+        visible: (!Plasmoid.configuration.arrowsOnHover && (root.comicData.prev !== undefined))
 
         onClicked: {
-            Plasmoid.updateComic(comicData.prev);
+            Plasmoid.updateComic(root.comicData.prev);
         }
     }
     PlasmaCore.ToolTipArea {
@@ -55,7 +55,7 @@ Item {
             top: root.top
             bottom: root.bottom
         }
-        subText: Plasmoid.comicData.additionalText ?? ""
+        subText: root.comicData.additionalText ?? ""
         active: subText
 
         MouseArea {
@@ -78,14 +78,14 @@ Item {
 
                 anchors.fill: parent
                 enabled: false
-                visible: !comicData.isError ?? true
+                visible: !root.comicData.isError ?? true
                 implicitHeight: 0
                 implicitWidth: 0
 
-                image: Plasmoid.comicData.image
+                image: root.comicData.image
                 actualSize: Plasmoid.showActualSize
-                isLeftToRight: Plasmoid.comicData.isLeftToRight ?? false
-                isTopToBottom: Plasmoid.comicData.isTopToBottom ?? false
+                isLeftToRight: root.comicData.isLeftToRight ?? false
+                isTopToBottom: root.comicData.isTopToBottom ?? false
             }
 
             PlasmaExtras.PlaceholderMessage {
@@ -112,11 +112,11 @@ Item {
                 opacity: 0
 
                 onPrevClicked: {
-                    Plasmoid.updateComic(comicData.prev);
+                    Plasmoid.updateComic(root.comicData.prev);
                 }
 
                 onNextClicked: {
-                    Plasmoid.updateComic(comicData.next);
+                    Plasmoid.updateComic(root.comicData.next);
                 }
 
                 onZoomClicked: {
@@ -145,16 +145,16 @@ Item {
         }
 
         icon.name: "go-next"
-        visible: (!Plasmoid.configuration.arrowsOnHover && (comicData.next !== undefined))
+        visible: (!Plasmoid.configuration.arrowsOnHover && (root.comicData.next !== undefined))
 
         onClicked: {
-            Plasmoid.updateComic(comicData.next);
+            Plasmoid.updateComic(root.comicData.next);
         }
     }
 
     FullViewWidget {
         id: fullDialog
 
-        image: Plasmoid.comicData.image
+        image: root.comicData.image
     }
 }

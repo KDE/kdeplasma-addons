@@ -34,8 +34,8 @@ PlasmaComponents.ScrollView {
 
             anchors.centerIn: parent
 
-            width: actualSize ? comicPicture.nativeWidth : viewContainer.width
-            height: actualSize ? comicPicture.nativeHeight : viewContainer.height
+            width: root.actualSize ? comicPicture.nativeWidth : viewContainer.width
+            height: root.actualSize ? comicPicture.nativeHeight : viewContainer.height
 
             onImageChanged: {
                 viewContainer.contentX = (root.isLeftToRight) ? 0 : ( viewContainer.contentWidth - viewContainer.width);

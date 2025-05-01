@@ -52,7 +52,7 @@ PlasmoidItem {
 
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
-            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready && mainWindow.fullRepresentationItem?.comicTabbar.currentItem.highlighted
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.fullRepresentationItem?.comicTabbar.currentItem.highlighted
             visible: Plasmoid.configuration.checkNewComicStripsIntervall
             text: i18nc("@action comic strip", "&Next Tab with a New Strip")
             icon.name: "go-next-view"
@@ -60,35 +60,35 @@ PlasmoidItem {
             onTriggered: Plasmoid.showNextNewStrip()
         },
         PlasmaCore.Action {
-            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready && plasmoid.comicData.hasFirst
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.comicData.hasFirst
             text: i18nc("@action", "Jump to &First Strip")
             icon.name: "go-first"
-            onTriggered: Plasmoid.updateComic(plasmoid.comicData.first)
+            onTriggered: Plasmoid.updateComic(mainWindow.comicData.first)
         },
         PlasmaCore.Action {
-            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
             text: i18nc("@action", "Jump to &Current Strip")
             icon.name: "go-last"
             onTriggered: Plasmoid.updateComic("")
         },
         PlasmaCore.Action {
-            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
             text: i18nc("@action", "Jump to Strip…")
             icon.name: "go-jump"
             onTriggered: plasmoid.goJump()
         },
         PlasmaCore.Action {
-            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
             text: i18nc("@action", "Visit the Website")
             onTriggered: plasmoid.website()
         },
         PlasmaCore.Action {
-            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready && plasmoid.comicData.shopUrl !== ""
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.comicData.shopUrl !== ""
             text: i18nc("@action", "Visit the Shop &Website")
             onTriggered: plasmoid.shop()
         },
         PlasmaCore.Action {
-            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
             text: i18nc("@action", "&Save Comic As…")
             icon.name: "document-save-as"
             onTriggered: {
@@ -97,7 +97,7 @@ PlasmoidItem {
             }
         },
         PlasmaCore.Action {
-            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
             text: i18nc("@option:check Context menu of comic image", "&Actual Size")
             icon.name: "zoom-original"
             checkable: true
@@ -105,11 +105,11 @@ PlasmoidItem {
             onTriggered: Plasmoid.showActualSize = this.checked
         },
         PlasmaCore.Action {
-            enabled: plasmoid.comicData.id != "" && plasmoid.comicData.ready
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
             text: i18nc("@option:check Context menu of comic image", "Store Current &Position")
             icon.name: "go-home"
             checkable: true
-            checked: plasmoid.comicData.storePosition ?? false
+            checked: mainWindow.comicData.storePosition ?? false
             onTriggered: Plasmoid.storePosition(this.checked)
         }
     ]
@@ -193,12 +193,12 @@ PlasmoidItem {
                     var tempTop = "";
 
                     if ( showComicTitle ) {
-                        tempTop = plasmoid.comicData.title ?? "";
-                        tempTop += ( ( (plasmoid.comicData.stripTitle?.length > 0) && (plasmoid.comicData.title?.length > 0) ) ? " - " : "" ) + (plasmoid.comicData.stripTitle ?? "");
+                        tempTop = mainWindow.comicData.title ?? "";
+                        tempTop += ( ( (mainWindow.comicData.stripTitle?.length > 0) && (mainWindow.comicData.title?.length > 0) ) ? " - " : "" ) + (mainWindow.comicData.stripTitle ?? "");
                     }
 
-                    if ( showComicAuthor && plasmoid.comicData.author?.length > 0 ) {
-                        tempTop = ( tempTop.length > 0 ? plasmoid.comicData.author + ": " + tempTop : plasmoid.comicData.author );
+                    if ( showComicAuthor && mainWindow.comicData.author?.length > 0 ) {
+                        tempTop = ( tempTop.length > 0 ? mainWindow.comicData.author + ": " + tempTop : mainWindow.comicData.author );
                     }
 
                     return tempTop;
@@ -212,14 +212,14 @@ PlasmoidItem {
                 Layout.topMargin: comicTabbar.visible ? 3 : 0
 
                 visible: plasmoid.configuration.tabIdentifier.length > 0
-                comicData: plasmoid.comicData
+                comicData: mainWindow.comicData
             }
 
             ComicBottomInfo {
                 id:bottomInfo
                 Layout.fillWidth: true
 
-                comicData: plasmoid.comicData
+                comicData: mainWindow.comicData
                 showUrl: plasmoid.configuration.showComicUrl
                 showIdentifier: plasmoid.configuration.showComicIdentifier
             }
@@ -244,7 +244,7 @@ PlasmoidItem {
         id: saveDialog
         fileMode: FileDialog.SaveFile
         defaultSuffix: "png"
-        currentFile: i18nc("@other filename pattern %1 path %2 comic (provider) name, %3 image id", "%1/%2 - %3.png", currentFolder, plasmoid.comicData.title, plasmoid.comicData.currentReadable)
+        currentFile: i18nc("@other filename pattern %1 path %2 comic (provider) name, %3 image id", "%1/%2 - %3.png", currentFolder, mainWindow.comicData.title, mainWindow.comicData.currentReadable)
 
         property list<string> paths: [
             Plasmoid.configuration.savingDir,
