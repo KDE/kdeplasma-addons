@@ -130,25 +130,7 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
 
     QSettings settingsMain(pathMain + QLatin1String(".conf"), QSettings::IniFormat);
 
-    QStringList comics;
-    if (settingsMain.contains(QLatin1String("comics"))) {
-        comics = settingsMain.value(QLatin1String("comics"), QStringList()).toStringList();
-    } else {
-        // existing strips haven't been stored in the conf-file yet, do that now, oldest first, newest last
-        QDir dir(dirPath);
-        comics = dir.entryList(QStringList() << QString::fromLatin1(QUrl::toPercentEncoding(comicName + QLatin1Char(':'))) + QLatin1Char('*'),
-                               QDir::Files,
-                               QDir::Time | QDir::Reversed);
-        QStringList::iterator it = comics.begin();
-        while (it != comics.end()) {
-            // only count images, not the conf files
-            if ((*it).endsWith(QLatin1String(".conf"))) {
-                it = comics.erase(it);
-            } else {
-                ++it;
-            }
-        }
-    }
+    QStringList comics = settingsMain.value(QLatin1String("comics"), QStringList()).toStringList();
 
     QString oldCachedStripIdentifier = settingsMain.value(QStringLiteral("lastCachedStripIdentifier")).toString();
     if (oldCachedStripIdentifier != data.lastCachedStripIdentifier) {
