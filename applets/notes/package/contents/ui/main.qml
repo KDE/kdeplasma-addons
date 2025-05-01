@@ -28,6 +28,9 @@ PlasmoidItem {
     switchWidth: Kirigami.Units.gridUnit * 5
     switchHeight: Kirigami.Units.gridUnit * 5
 
+    width: Kirigami.Units.gridUnit * 25 // default size for fullRepresentation
+    height: Kirigami.Units.gridUnit * 25 // default size for fullRepresentation
+
     expandedOnDragHover: true
 
     Plasmoid.icon: "knotes-symbolic"
@@ -85,8 +88,6 @@ PlasmoidItem {
         id: backgroundItem
 
         property alias mainTextArea: mainTextArea
-        Layout.preferredWidth: Kirigami.Units.gridUnit * 25
-        Layout.preferredHeight: Kirigami.Units.gridUnit * 25
         Layout.minimumWidth: Kirigami.Units.gridUnit * 2
         Layout.minimumHeight: Kirigami.Units.gridUnit * 2
 
