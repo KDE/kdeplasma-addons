@@ -16,16 +16,6 @@ import plasma.applet.org.kde.plasma.comic as Comic
 Item {
     id: root
 
-    width: Kirigami.Units.gridUnit
-    height: Kirigami.Units.gridUnit
-
-    implicitHeight: Math.max (arrowLeft.visible ? arrowLeft.implicitHeight : 0,
-                              tooltip.implicitHeight,
-                              arrowRight.visible ? arrowRight.implicitHeight : 0)
-    implicitWidth: (arrowLeft.visible ? arrowLeft.implicitWidth : 0) +
-                    tooltip.implicitHeight +
-                    (arrowRight.visible ? arrowRight.implicitWidth : 0)
-
     property Comic.comicData comicData
 
     PlasmaComponents3.ToolButton {
@@ -45,8 +35,6 @@ Item {
     }
     PlasmaCore.ToolTipArea {
         id: tooltip
-        implicitHeight: errorPlaceholder.visible ? errorPlaceholder.implicitHeight : comicImage.implicitHeight
-        implicitWidth: errorPlaceholder.visible ? errorPlaceholder.implicitWidth : comicImage.implicitWidth
         anchors {
             left: arrowLeft.visible ? arrowLeft.right : root.left
             right: arrowRight.visible ? arrowRight.left : root.right
@@ -79,8 +67,6 @@ Item {
                 anchors.fill: parent
                 enabled: false
                 visible: !root.comicData.isError ?? true
-                implicitHeight: 0
-                implicitWidth: 0
 
                 image: root.comicData.image
                 actualSize: Plasmoid.showActualSize
@@ -90,14 +76,26 @@ Item {
 
             PlasmaExtras.PlaceholderMessage {
                 id: errorPlaceholder
+                // intentionally not checking width, it will prevent attempts to fit with word wrap
+                property bool fitsInWidget: implicitHeight <= comicImageArea.height
                 anchors.centerIn: parent
                 width: parent.width
                 height: parent.height
-                visible: comicData.isError ?? false
+                visible: (comicData.isError && fitsInWidget) ?? false
                 iconName: "error-symbolic"
                 text: i18nc("@info placeholdermessage if comic loading failed", "Could not load comic")
                 explanation: i18nc("@info placeholdermessage explanation", "Try again later, or choose a different comic")
             }
+
+            PlasmaExtras.PlaceholderMessage {
+                id: tinyErrorPlaceholder
+                anchors.centerIn: parent
+                width: parent.width
+                height: parent.height
+                visible: (comicData.isError && !errorPlaceholder.visible) ?? false
+                iconName: "error-symbolic"
+            }
+
 
             ButtonBar {
                 id: buttonBar
