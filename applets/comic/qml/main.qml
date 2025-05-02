@@ -19,8 +19,8 @@ import plasma.applet.org.kde.plasma.comic as Comic
 PlasmoidItem {
     id: mainWindow
 
-    readonly property int implicitWidth: Kirigami.Units.gridUnit * 40
-    readonly property int implicitHeight: Kirigami.Units.gridUnit * 15
+    width: Kirigami.Units.gridUnit * 30
+    height: Kirigami.Units.gridUnit * 20
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
 
     switchWidth: Kirigami.Units.gridUnit * 5
@@ -28,8 +28,6 @@ PlasmoidItem {
 
     Plasmoid.icon: "face-laughing"
 
-    readonly property int minimumWidth: Kirigami.Units.gridUnit * 8
-    readonly property int minimumHeight: Kirigami.Units.gridUnit * 8
     readonly property bool showComicAuthor: plasmoid.configuration.showComicAuthor
     readonly property bool showComicTitle: plasmoid.configuration.showComicTitle
     readonly property bool middleClick: plasmoid.configuration.middleClick
@@ -129,11 +127,6 @@ PlasmoidItem {
 
         ColumnLayout {
             anchors.fill: parent
-
-            Layout.preferredWidth: mainWindow.switchWidth
-            Layout.preferredHeight: mainWindow.switchHeight
-            Layout.minimumHeight: implicitHeight
-
 
             Connections {
                 target: plasmoid
@@ -238,8 +231,7 @@ PlasmoidItem {
                 id: configNeededPlaceholder
                 property bool fitsInWidget: implicitWidth <= parent.width && implicitHeight <= parent.height
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                Layout.margins: Kirigami.Units.gridUnit
-                visible: Plasmoid.configuration.tabIdentifier.length === 0  && fitsInWidget
+                visible: Plasmoid.configuration.tabIdentifier.length === 0 && fitsInWidget
                 iconName: "folder-comic-symbolic"
                 text: i18nc("@info placeholdermessage if no comics loaded", "No comics configured")
                 helpfulAction: Kirigami.Action {
