@@ -14,6 +14,7 @@
 #include <QNetworkInformation>
 #include <QSettings>
 #include <QStandardPaths>
+#include <QTimer>
 
 #include <KPackage/PackageLoader>
 #include <QLoggingCategory>
@@ -23,11 +24,11 @@
 #include "comic_debug.h"
 #include "comicprovider.h"
 #include "comicproviderkross.h"
+#include "types.h"
 
 ComicEngine::ComicEngine(QObject *parent)
     : QObject(parent)
     , mEmptySuffix(false)
-    , mIsCheckingForUpdates(false)
 {
     QNetworkInformation::instance()->loadBackendByFeatures(QNetworkInformation::Feature::Reachability);
     loadProviders();
@@ -65,19 +66,12 @@ void ComicEngine::setMaxComicLimit(int maxComicLimit)
     CachedProvider::setMaxComicLimit(maxComicLimit);
 }
 
-void ComicEngine::setIsCheckingForUpdates(bool isCheckingForUpdates)
-{
-    mIsCheckingForUpdates = isCheckingForUpdates;
-}
-
-bool ComicEngine::isCheckingForUpdates()
-{
-    return mIsCheckingForUpdates;
-}
-
-bool ComicEngine::requestSource(const QString &identifier)
+bool ComicEngine::requestSource(const QString &identifier, RequestReason reason)
 {
     if (m_jobs.contains(identifier)) {
+        QTimer::singleShot(250, this, [this, identifier, reason]() {
+            requestSource(identifier, reason);
+        });
         return true;
     }
 
@@ -86,10 +80,10 @@ bool ComicEngine::requestSource(const QString &identifier)
     bool isCurrentComic = parts[1].isEmpty();
 
     // check whether it is cached, make sure second part present
-    bool lookInCache = parts.count() > 1 && !(isCurrentComic && mIsCheckingForUpdates) && CachedProvider::isCached(identifier);
+    bool lookInCache = parts.count() > 1 && !(isCurrentComic && reason == RequestReason::Check) && CachedProvider::isCached(identifier);
 
     if (lookInCache || !isOnline()) {
-        ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, IdentifierType::StringIdentifier, identifier);
+        ComicProvider *provider = new CachedProvider(this, KPluginMetaData{}, reason, IdentifierType::StringIdentifier, identifier);
         provider->setIsCurrent(isCurrentComic);
         m_jobs[identifier] = provider;
         connect(provider, &ComicProvider::finished, this, &ComicEngine::finished);
@@ -102,7 +96,7 @@ bool ComicEngine::requestSource(const QString &identifier)
     QT_WARNING_DISABLE_CLANG("-Wmissing-designated-field-initializers");
     // ... start a new query otherwise
     if (parts.count() < 2) {
-        Q_EMIT requestFinished(ComicMetaData{.error = true});
+        Q_EMIT requestFinished(ComicMetaData{.reason = reason, .error = true});
         qCWarning(PLASMA_COMIC) << "Less than two arguments specified.";
         return false;
     }
@@ -110,7 +104,7 @@ bool ComicEngine::requestSource(const QString &identifier)
         // User might have installed more from GHNS
         loadProviders();
         if (!mProviders.contains(parts[0])) {
-            Q_EMIT requestFinished(ComicMetaData{.error = true});
+            Q_EMIT requestFinished(ComicMetaData{.reason = reason, .error = true});
             qCWarning(PLASMA_COMIC) << identifier << "comic plugin does not seem to be installed.";
             return false;
         }
@@ -149,7 +143,7 @@ bool ComicEngine::requestSource(const QString &identifier)
     } else if (identifierType == IdentifierType::StringIdentifier) {
         data = parts[1];
     }
-    provider = new ComicProviderKross(this, pkg.metadata(), identifierType, data);
+    provider = new ComicProviderKross(this, pkg.metadata(), reason, identifierType, data);
     provider->setIsCurrent(isCurrentComic);
 
     m_jobs[identifier] = provider;
@@ -266,6 +260,7 @@ ComicMetaData ComicEngine::metaDataFromProvider(ComicProvider *provider)
     data.identifierType = provider->identifierType();
     data.isLeftToRight = provider->isLeftToRight();
     data.isTopToBottom = provider->isTopToBottom();
+    data.reason = provider->reason();
 
     return data;
 }

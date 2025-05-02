@@ -21,7 +21,7 @@ class ComicProviderKross : public ComicProvider
     Q_OBJECT
 
 public:
-    ComicProviderKross(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier);
+    ComicProviderKross(QObject *parent, const KPluginMetaData &data, RequestReason reason, IdentifierType type, const QVariant &identifier);
     ~ComicProviderKross() override;
 
     bool isLeftToRight() const override;

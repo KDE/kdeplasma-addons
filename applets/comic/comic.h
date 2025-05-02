@@ -69,7 +69,6 @@ private:
     ComicEngine *const mEngine;
     ComicModel *mModel = nullptr;
 
-    QString mOldSource;
     CheckNewStrips *mCheckNewStrips;
 
     ComicData mCurrent;

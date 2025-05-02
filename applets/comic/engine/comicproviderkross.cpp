@@ -6,9 +6,10 @@
  */
 
 #include "comicproviderkross.h"
+#include "types.h"
 
-ComicProviderKross::ComicProviderKross(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier)
-    : ComicProvider(parent, data, type, identifier)
+ComicProviderKross::ComicProviderKross(QObject *parent, const KPluginMetaData &data, RequestReason reason, IdentifierType type, const QVariant &identifier)
+    : ComicProvider(parent, data, reason, type, identifier)
     , m_wrapper(this)
 {
 }

@@ -27,7 +27,7 @@ public:
      * @param parent The parent object.
      * param args The arguments.
      */
-    explicit CachedProvider(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QString &identifier);
+    explicit CachedProvider(QObject *parent, const KPluginMetaData &data, RequestReason reason, IdentifierType type, const QString &identifier);
 
     /**
      * Destroys the cached provider.

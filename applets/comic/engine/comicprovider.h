@@ -37,7 +37,7 @@ public:
      * @param parent The parent object.
      * @param args Arguments passed by the plugin loader.
      */
-    ComicProvider(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier);
+    ComicProvider(QObject *parent, const KPluginMetaData &data, RequestReason reason, IdentifierType type, const QVariant &identifier);
 
     /**
      * Destroys the comic provider.
@@ -146,6 +146,11 @@ public:
      * Returns whether this request is for the current comic (only used internally).
      */
     bool isCurrent() const;
+
+    /**
+     * Returns the original reason given for the request (only used internally).
+     */
+    RequestReason reason() const;
 
 Q_SIGNALS:
     /**

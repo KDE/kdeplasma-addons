@@ -7,6 +7,7 @@
 
 #include "comicprovider.h"
 #include "comic_debug.h"
+#include "types.h"
 
 #include <QTimer>
 #include <QUrl>
@@ -64,6 +65,7 @@ public:
     }
 
     ComicProvider *mParent;
+    RequestReason mReason;
     QString mRequestedId;
     QString mRequestedComicName;
     QString mComicAuthor;
@@ -80,10 +82,11 @@ public:
     QHash<KJob *, QUrl> mRedirections;
 };
 
-ComicProvider::ComicProvider(QObject *parent, const KPluginMetaData &data, IdentifierType type, const QVariant &identifier)
+ComicProvider::ComicProvider(QObject *parent, const KPluginMetaData &data, RequestReason reason, IdentifierType type, const QVariant &identifier)
     : QObject(parent)
     , d(new Private(this, data))
 {
+    d->mReason = reason;
     if (type == IdentifierType::DateIdentifier) {
         d->mRequestedDate = identifier.toDate();
     } else if (type == IdentifierType::NumberIdentifier) {
@@ -312,6 +315,11 @@ bool ComicProvider::isLeftToRight() const
 bool ComicProvider::isTopToBottom() const
 {
     return true;
+}
+
+RequestReason ComicProvider::reason() const
+{
+    return d->mReason;
 }
 
 #include "moc_comicprovider.cpp"

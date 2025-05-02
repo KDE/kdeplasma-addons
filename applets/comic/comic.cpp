@@ -21,6 +21,7 @@
 #include <kconfiggroup.h>
 
 #include "comicmodel.h"
+#include "types.h"
 
 ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
@@ -43,12 +44,8 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
     const QString source = data.identifier;
     setBusy(false);
 
-    if (mEngine->isCheckingForUpdates() && config().readEntry(QLatin1String("checkNewComicStripsIntervall"), 30) == 0) {
-        mEngine->setIsCheckingForUpdates(false); // turn it back off if auto-updates are disabled
-    }
-
     // disconnect prefetched comic strips
-    if (source != mOldSource) {
+    if (data.reason != RequestReason::View) {
         return;
     }
 
@@ -65,11 +62,11 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
     // prefetch the previous and following comic for faster navigation
     if (!data.error && mCurrent.hasNext()) {
         const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.next();
-        mEngine->requestSource(prefetch);
+        mEngine->requestSource(prefetch, RequestReason::Fetch);
     }
     if (!data.error && mCurrent.hasPrev()) {
         const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.prev();
-        mEngine->requestSource(prefetch);
+        mEngine->requestSource(prefetch, RequestReason::Fetch);
     }
 
     Q_EMIT comicDataChanged();
@@ -162,17 +159,8 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
     if (!id.isEmpty()) {
         setBusy(true);
 
-        if (identifierSuffix.isEmpty() && config().readEntry(QLatin1String("checkNewComicStripsIntervall"), 30) == 0) {
-            mEngine->setIsCheckingForUpdates(true); // if auto-updates are off, we need to check every current request
-        }
-
         const QString identifier = id + QLatin1Char(':') + identifierSuffix;
-
-        // disconnecting of the oldSource is needed, otherwise you could get data for comics you are not looking at if you use tabs
-        // if there was an error only disconnect the oldSource if it had nothing to do with the error or if the comic changed, that way updates of the error can
-        // come in
-        mOldSource = identifier;
-        mEngine->requestSource(identifier);
+        mEngine->requestSource(identifier, RequestReason::View);
         setShowActualSize(mCurrent.showActualSize());
     } else {
         setBusy(false);

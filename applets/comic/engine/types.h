@@ -19,6 +19,12 @@ enum class IdentifierType {
     StringIdentifier, ///< References by arbitrary string
 };
 
+enum class RequestReason {
+    View = 0, /// retrieve comic for immediate viewing
+    Check, /// check for updates
+    Fetch, /// fetch comic in background
+};
+
 inline IdentifierType stringToIdentifierType(const QString type)
 {
     if (type == QLatin1String("Date")) {
@@ -38,6 +44,7 @@ struct ComicProviderInfo {
 };
 
 struct ComicMetaData {
+    RequestReason reason;
     QString stripTitle;
     QUrl imageUrl;
     QImage image;

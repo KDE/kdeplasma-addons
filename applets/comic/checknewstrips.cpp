@@ -6,6 +6,7 @@
  */
 
 #include "checknewstrips.h"
+#include "types.h"
 
 #include <QTimer>
 
@@ -31,7 +32,7 @@ void CheckNewStrips::dataUpdated(const ComicMetaData &data)
     const QString source = data.identifier;
     QString lastIdentifierSuffix;
 
-    if (!mEngine->isCheckingForUpdates()) {
+    if (data.reason != RequestReason::Check) {
         return;
     }
 
@@ -49,10 +50,9 @@ void CheckNewStrips::dataUpdated(const ComicMetaData &data)
 
     if (mIndex < mIdentifiers.count()) {
         const QString newSource = mIdentifiers[mIndex] + QLatin1Char(':');
-        mEngine->requestSource(newSource);
+        mEngine->requestSource(newSource, RequestReason::Check);
     } else {
         mIndex = 0;
-        mEngine->setIsCheckingForUpdates(false);
     }
 }
 
@@ -63,10 +63,8 @@ void CheckNewStrips::start()
         return;
     }
 
-    mEngine->setIsCheckingForUpdates(true);
-
     if (mIndex < mIdentifiers.count()) {
         const QString newSource = mIdentifiers[mIndex] + QLatin1Char(':');
-        mEngine->requestSource(newSource);
+        mEngine->requestSource(newSource, RequestReason::Check);
     }
 }

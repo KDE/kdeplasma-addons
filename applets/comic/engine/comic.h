@@ -43,9 +43,7 @@ public:
     void setMaxComicLimit(int maxComicLimit);
     void setIsCheckingForUpdates(bool isCheckingForUpdates);
 
-    bool isCheckingForUpdates();
-
-    bool requestSource(const QString &identifier);
+    bool requestSource(const QString &identifier, RequestReason reason);
 
 Q_SIGNALS:
     void requestFinished(const ComicMetaData &data);
@@ -59,7 +57,6 @@ private:
 
 private:
     bool mEmptySuffix;
-    bool mIsCheckingForUpdates;
     QString mIdentifierError;
     QHash<QString, ComicProvider *> m_jobs;
     QSet<QString> mProviders;
