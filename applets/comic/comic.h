@@ -82,7 +82,6 @@ private:
 
 private:
     ComicModel *mModel = nullptr;
-    QString mPreviousFailedIdentifier;
 
     QString mOldSource;
     CheckNewStrips *mCheckNewStrips;

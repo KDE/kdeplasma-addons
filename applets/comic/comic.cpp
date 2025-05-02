@@ -64,9 +64,9 @@ void ComicApplet::init()
         if (reachability != QNetworkInformation::Reachability::Online) {
             return;
         }
-        if (!mPreviousFailedIdentifier.isEmpty()) {
-            qCDebug(PLASMA_COMIC) << "Online status changed to true, requesting comic" << mPreviousFailedIdentifier;
-            mEngine->requestSource(mPreviousFailedIdentifier);
+        if (!mCurrent.isError()) {
+            qCDebug(PLASMA_COMIC) << "Online status changed to true, requesting comic" << mCurrent.id() << mCurrent.current();
+            updateComic(mCurrent.current());
         }
     });
 }
@@ -79,13 +79,6 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
     // disconnect prefetched comic strips
     if (source != mOldSource) {
         return;
-    }
-
-    // there was an error, display information as image
-    if (data.error) {
-        mPreviousFailedIdentifier = source;
-    } else {
-        mPreviousFailedIdentifier.clear();
     }
 
     mCurrent.setData(data);
