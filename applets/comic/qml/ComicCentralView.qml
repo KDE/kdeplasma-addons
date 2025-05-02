@@ -156,5 +156,6 @@ Item {
         id: fullDialog
 
         image: root.comicData.image
+        isError: Plasmoid.comicData.isError ?? false
     }
 }

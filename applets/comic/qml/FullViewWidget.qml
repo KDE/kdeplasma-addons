@@ -10,12 +10,14 @@ import org.kde.plasma.components as PlasmaComponents
 import org.kde.kquickcontrolsaddons
 import QtQuick.Layouts
 import org.kde.plasma.plasmoid
+import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kirigami as Kirigami
 
 PlasmaCore.Dialog {
     id: root
 
     property alias image: comicPicture.image
+    property bool isError
 
     flags: Qt.Popup
     visible: false
@@ -40,9 +42,9 @@ PlasmaCore.Dialog {
 
         // 4×gridUnit in case image is empty, to show something and avoid anchor loops.
         // value is arbitrary, but small enough to be unlikely to increase popup size for real comics
-        Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * 4, comicPicture.nativeWidth)
+        Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * 4, viewContainer.contentWidth)
         Layout.maximumWidth: Layout.minimumWidth
-        Layout.minimumHeight: Math.max(Kirigami.Units.gridUnit * 4, comicPicture.nativeHeight)
+        Layout.minimumHeight: Math.max(Kirigami.Units.gridUnit * 4, viewContainer.contentHeight)
         Layout.maximumHeight: Layout.minimumHeight
 
         Flickable {
@@ -50,8 +52,8 @@ PlasmaCore.Dialog {
 
             anchors.fill: parent
 
-            contentWidth: comicPicture.nativeWidth
-            contentHeight: comicPicture.nativeHeight
+            contentWidth: root.isError ? errorPlaceholder.implicitWidth + 2 * Kirigami.Units.largeSpacing : comicPicture.nativeWidth
+            contentHeight: root.isError ? errorPlaceholder.implicitHeight  + 2 * Kirigami.Units.largeSpacing : comicPicture.nativeHeight
 
             //clip: true
 
@@ -72,6 +74,15 @@ PlasmaCore.Dialog {
                         root.close();
                     }
                 }
+            }
+
+            PlasmaExtras.PlaceholderMessage {
+                id: errorPlaceholder
+                anchors.centerIn: parent
+                visible: root.isError
+                iconName: "error-symbolic"
+                text: i18nc("@info placeholdermessage if comic loading failed", "Could not load comic")
+                explanation: i18nc("@info placeholdermessage explanation", "Try again later, or choose a different comic")
             }
         }
     }
