@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-01-28 02:35+0000\n"
+"POT-Creation-Date: 2025-05-02 02:35+0000\n"
 "PO-Revision-Date: 2024-02-18 17:45+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -83,146 +83,146 @@ msgstr "ஒளிபுகும் ஒட்டுகுறிப்பு"
 msgid "A transparent sticky note with light text"
 msgstr "வெளிர்ந்த உரையைக் கொண்ட ஒளிபுகும் ஒட்டுகுறிப்பு"
 
-#: package/contents/ui/main.qml:241
+#: package/contents/ui/main.qml:242
 #, kde-format
 msgid "Undo"
 msgstr "செயல்நீக்கு"
 
-#: package/contents/ui/main.qml:249
+#: package/contents/ui/main.qml:250
 #, kde-format
 msgid "Redo"
 msgstr "மீளச்செய்"
 
-#: package/contents/ui/main.qml:259
+#: package/contents/ui/main.qml:260
 #, kde-format
 msgid "Cut"
 msgstr "வெட்டு"
 
-#: package/contents/ui/main.qml:267
+#: package/contents/ui/main.qml:268
 #, kde-format
 msgid "Copy"
 msgstr "நகலெடு"
 
-#: package/contents/ui/main.qml:275
+#: package/contents/ui/main.qml:276
 #, kde-format
 msgid "Paste"
 msgstr "ஒட்டு"
 
-#: package/contents/ui/main.qml:281
+#: package/contents/ui/main.qml:282
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "வடிவமைப்புடன் அப்படியே ஒட்டு"
 
-#: package/contents/ui/main.qml:288
+#: package/contents/ui/main.qml:289
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "வடிவமைப்பை நீக்கு"
 
-#: package/contents/ui/main.qml:303
+#: package/contents/ui/main.qml:304
 #, kde-format
 msgid "Delete"
 msgstr "நீக்கு"
 
-#: package/contents/ui/main.qml:310
+#: package/contents/ui/main.qml:311
 #, kde-format
 msgid "Clear"
 msgstr "காலியாக்கு"
 
-#: package/contents/ui/main.qml:320
+#: package/contents/ui/main.qml:321
 #, kde-format
 msgid "Select All"
 msgstr "அனைத்தையும் தேர்ந்தெடு"
 
-#: package/contents/ui/main.qml:448
+#: package/contents/ui/main.qml:449
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "தடித்த எழுத்து"
 
-#: package/contents/ui/main.qml:460
+#: package/contents/ui/main.qml:461
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "சாய்வெழுத்து"
 
-#: package/contents/ui/main.qml:472
+#: package/contents/ui/main.qml:473
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "அடிக்கோடு"
 
-#: package/contents/ui/main.qml:484
+#: package/contents/ui/main.qml:485
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "குறுக்கடி"
 
-#: package/contents/ui/main.qml:558
+#: package/contents/ui/main.qml:559
 #, kde-format
 msgid "Discard this note?"
 msgstr "குறிப்பை கைவிடலாமா?"
 
-#: package/contents/ui/main.qml:559
+#: package/contents/ui/main.qml:560
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "உறுதியாக இந்த குறிப்பை கைவிட விரும்புகிறீர்களா?"
 
-#: package/contents/ui/main.qml:579
+#: package/contents/ui/main.qml:580
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "வெள்ளை"
 
-#: package/contents/ui/main.qml:583
+#: package/contents/ui/main.qml:584
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "கருப்பு"
 
-#: package/contents/ui/main.qml:587
+#: package/contents/ui/main.qml:588
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "சிவப்பு"
 
-#: package/contents/ui/main.qml:591
+#: package/contents/ui/main.qml:592
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "ஆரஞ்சு"
 
-#: package/contents/ui/main.qml:595
+#: package/contents/ui/main.qml:596
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "மஞ்சள்"
 
-#: package/contents/ui/main.qml:599
+#: package/contents/ui/main.qml:600
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "பச்சை"
 
-#: package/contents/ui/main.qml:603
+#: package/contents/ui/main.qml:604
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "நீலம்"
 
-#: package/contents/ui/main.qml:607
+#: package/contents/ui/main.qml:608
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "ரோஜா"
 
-#: package/contents/ui/main.qml:611
+#: package/contents/ui/main.qml:612
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "ஒளிபுகக்கூடியது"
 
-#: package/contents/ui/main.qml:615
+#: package/contents/ui/main.qml:616
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
