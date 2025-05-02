@@ -12,18 +12,18 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-01 00:43+0000\n"
-"PO-Revision-Date: 2025-04-07 13:54+0900\n"
+"POT-Creation-Date: 2025-05-02 00:43+0000\n"
+"PO-Revision-Date: 2025-05-01 17:27+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.07.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: comicdata.cpp:87
+#: comicdata.cpp:84
 #, kde-format
 msgctxt "an abbreviation for Number"
 msgid "# %1"
@@ -232,7 +232,7 @@ msgstr "選擇漫畫…"
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
-msgstr ""
+msgstr "%1/%2 - %3.png"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
