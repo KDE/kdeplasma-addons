@@ -36,6 +36,16 @@ PlasmoidItem {
 
     property Comic.comicData comicData: Plasmoid.comicData
 
+    Binding {
+        target: plasmoid
+        property: "configurationRequired"
+        value: plasmoid.configuration.tabIdentifier.length === 0
+            && !mainWindow.fullRepresentationItem?.configNeededPlaceholderVisible
+            && mainWindow.height >= mainWindow.switchHeight
+            && mainWindow.width >= mainWindow.switchWidth
+
+    }
+
     KItemModels.KSortFilterProxyModel {
         id: enabledComicsModel
         sourceModel: Plasmoid.availableComicsModel
@@ -115,6 +125,8 @@ PlasmoidItem {
     fullRepresentation:  Item {
         anchors.fill: parent
         property alias comicTabbar: comicTabbar
+        property alias configNeededPlaceholderVisible: configNeededPlaceholder.visible
+
         ColumnLayout {
             anchors.fill: parent
 
@@ -224,9 +236,10 @@ PlasmoidItem {
 
             PlasmaExtras.PlaceholderMessage {
                 id: configNeededPlaceholder
+                property bool fitsInWidget: implicitWidth <= parent.width && implicitHeight <= parent.height
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 Layout.margins: Kirigami.Units.gridUnit
-                visible: Plasmoid.configuration.tabIdentifier.length === 0
+                visible: Plasmoid.configuration.tabIdentifier.length === 0  && fitsInWidget
                 iconName: "folder-comic-symbolic"
                 text: i18nc("@info placeholdermessage if no comics loaded", "No comics configured")
                 helpfulAction: Kirigami.Action {
