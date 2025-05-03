@@ -37,14 +37,12 @@ ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVa
 
 void ComicApplet::init()
 {
-    configChanged();
-
     KConfigGroup cg = config();
     QStringList tabIdentifier = cg.readEntry("tabIdentifier", QStringList());
 
     mModel = new ComicModel(mEngine, tabIdentifier, this);
 
-    updateUsedComics();
+    configChanged();
 
     if (!tabIdentifier.isEmpty()) {
         updateComic(mCurrent.stored());
