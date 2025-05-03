@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-02 00:43+0000\n"
-"PO-Revision-Date: 2025-04-03 09:37+0200\n"
+"PO-Revision-Date: 2025-05-01 10:24+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -232,7 +232,7 @@ msgstr "Seleccioneu un còmic…"
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
-msgstr ""
+msgstr "%1/%2 - %3.png"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
@@ -251,11 +251,3 @@ msgstr "&Tira número:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identificador de tira:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Display error when downloading comic fails"
-#~ msgstr "Mostra un error si falla la baixada del còmic"
-
-#~ msgctxt "@action:inmenu %1 is the name of a web browser"
-#~ msgid "View in %1"
-#~ msgstr "Visualitzeu amb %1"
