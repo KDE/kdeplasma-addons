@@ -23,7 +23,7 @@ DiskQuota::DiskQuota(QObject *parent)
     connect(m_timer, &QTimer::timeout, this, &DiskQuota::updateQuota);
     m_timer->start(2 * 60 * 1000); // check every 2 minutes
 
-    connect(m_quotaProcess, (void (QProcess::*)(int, QProcess::ExitStatus)) & QProcess::finished, this, &DiskQuota::quotaProcessFinished);
+    connect(m_quotaProcess, (void (QProcess::*)(int, QProcess::ExitStatus))&QProcess::finished, this, &DiskQuota::quotaProcessFinished);
 
     updateQuota();
 }

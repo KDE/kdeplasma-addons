@@ -8,6 +8,7 @@
 
 #include <QAbstractListModel>
 #include <QList>
+#include <qqmlregistration.h>
 
 #include "QuotaItem.h"
 
@@ -17,6 +18,7 @@
 class QuotaListModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
 
 public:
     explicit QuotaListModel(QObject *parent = nullptr);

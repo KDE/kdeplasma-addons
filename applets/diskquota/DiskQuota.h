@@ -7,8 +7,11 @@
 #define PLASMA_DISK_QUOTA_H
 
 #include "QuotaListModel.h"
+
 #include <QObject>
 #include <QProcess>
+#include <qqmlregistration.h>
+
 class QTimer;
 
 /**
@@ -19,6 +22,7 @@ class QTimer;
 class DiskQuota : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(bool quotaInstalled READ quotaInstalled NOTIFY quotaInstalledChanged)
     Q_PROPERTY(bool cleanUpToolInstalled READ cleanUpToolInstalled NOTIFY cleanUpToolInstalledChanged)
