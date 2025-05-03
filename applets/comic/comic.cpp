@@ -185,17 +185,12 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
         // come in
         mOldSource = identifier;
         mEngine->requestSource(identifier);
-        slotShowActualSize(mCurrent.showActualSize());
+        setShowActualSize(mCurrent.showActualSize());
     } else {
         setBusy(false);
         qCWarning(PLASMA_COMIC) << "Either no identifier was specified or the engine could not be created:"
                                 << "id" << id;
     }
-}
-
-void ComicApplet::slotShowActualSize(bool scale)
-{
-    setShowActualSize(scale);
 }
 
 // QML

@@ -62,7 +62,6 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void slotFoundLastStrip(int index, const QString &identifier, const QString &suffix);
-    void slotShowActualSize(bool show);
 
 public Q_SLOTS:
     void configChanged() override;
