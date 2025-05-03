@@ -44,10 +44,6 @@ void ComicApplet::init()
 
     configChanged();
 
-    if (!tabIdentifier.isEmpty()) {
-        updateComic(mCurrent.stored());
-    }
-
     connect(mEngine, &ComicEngine::requestFinished, this, &ComicApplet::dataUpdated);
 
     QNetworkInformation::instance()->loadBackendByFeatures(QNetworkInformation::Feature::Reachability);
@@ -150,10 +146,6 @@ void ComicApplet::configChanged()
     if (mModel) {
         updateUsedComics();
     }
-
-    const QString id = tabIdentifier.count() ? tabIdentifier.at(0) : QString();
-    mCurrent = ComicData();
-    mCurrent.init(id, cg);
 
     mEngine->setMaxComicLimit(cg.readEntry("maxComicLimit", 29));
 }
