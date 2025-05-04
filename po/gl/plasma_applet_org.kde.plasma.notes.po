@@ -6,20 +6,21 @@
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015.
 # SPDX-FileCopyrightText: 2018, 2019, 2023 Adrian Chaves <adrian@chaves.io>
 #
+# SPDX-FileCopyrightText: 2025 Adrián Chaves (Gallaecio)
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-02 00:43+0000\n"
-"PO-Revision-Date: 2023-12-27 20:35+0100\n"
-"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
+"PO-Revision-Date: 2025-05-03 06:58+0200\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -166,7 +167,7 @@ msgstr "Riscar."
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
-msgstr ""
+msgstr "Manter aberta"
 
 #: package/contents/ui/main.qml:608
 #, kde-format

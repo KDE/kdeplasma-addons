@@ -1,13 +1,13 @@
 # translation of plasma_applet_timer.po to Italian
 # Copyright (C) 2008 Free Software Foundation, Inc.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2008, 2012, 2014, 2018, 2019, 2020, 2022.
+# SPDX-FileCopyrightText: 2008, 2012, 2014, 2018, 2019, 2020, 2022, 2025 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-24 00:42+0000\n"
-"PO-Revision-Date: 2022-12-01 14:25+0100\n"
+"PO-Revision-Date: 2025-04-28 08:59+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -117,8 +117,7 @@ msgid "Show notification text:"
 msgstr "Mostrare testo delle notifiche:"
 
 #: package/contents/ui/configTimes.qml:23
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Aggiungi"

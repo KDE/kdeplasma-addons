@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-02 00:40+0000\n"
+"POT-Creation-Date: 2025-05-04 00:43+0000\n"
 "PO-Revision-Date: 2023-01-06 11:07+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -17,6 +17,50 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 22.12.0\n"
+
+#: DiskQuota.cpp:44 DiskQuota.cpp:166 DiskQuota.cpp:252
+#, kde-format
+msgid "Disk Quota"
+msgstr "Kvóta disku"
+
+#: DiskQuota.cpp:45
+#, kde-format
+msgid "Please install 'quota'"
+msgstr "Prosím, nainstalujte 'quota'"
+
+#: DiskQuota.cpp:167
+#, kde-format
+msgid "Running quota failed"
+msgstr "Běh kvót selhal"
+
+#: DiskQuota.cpp:227
+#, kde-format
+msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
+msgid "%1: %2% used"
+msgstr "%1: %2% použito"
+
+#: DiskQuota.cpp:228
+#, kde-format
+msgctxt "e.g.: 12 GiB of 20 GiB"
+msgid "%1 of %2"
+msgstr "%1 z %2"
+
+#: DiskQuota.cpp:229
+#, kde-format
+msgctxt "e.g.: 8 GiB free"
+msgid "%1 free"
+msgstr "%1 volné"
+
+#: DiskQuota.cpp:249
+#, kde-format
+msgctxt "example: Quota: 83% used"
+msgid "Quota: %1% used"
+msgstr "Kvóta: %1% použito"
+
+#: DiskQuota.cpp:253
+#, kde-format
+msgid "No quota restrictions found."
+msgstr "Nebyla nalezena žádná omezení kvót."
 
 #: package/contents/ui/main.qml:77
 #, kde-format
@@ -35,47 +79,3 @@ msgstr "Nebyl nalezen nástroj pro kvóty"
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
 msgstr "Prosím, nainstalujte 'quota'"
-
-#: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:166 plugin/DiskQuota.cpp:252
-#, kde-format
-msgid "Disk Quota"
-msgstr "Kvóta disku"
-
-#: plugin/DiskQuota.cpp:45
-#, kde-format
-msgid "Please install 'quota'"
-msgstr "Prosím, nainstalujte 'quota'"
-
-#: plugin/DiskQuota.cpp:167
-#, kde-format
-msgid "Running quota failed"
-msgstr "Běh kvót selhal"
-
-#: plugin/DiskQuota.cpp:227
-#, kde-format
-msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
-msgid "%1: %2% used"
-msgstr "%1: %2% použito"
-
-#: plugin/DiskQuota.cpp:228
-#, kde-format
-msgctxt "e.g.: 12 GiB of 20 GiB"
-msgid "%1 of %2"
-msgstr "%1 z %2"
-
-#: plugin/DiskQuota.cpp:229
-#, kde-format
-msgctxt "e.g.: 8 GiB free"
-msgid "%1 free"
-msgstr "%1 volné"
-
-#: plugin/DiskQuota.cpp:249
-#, kde-format
-msgctxt "example: Quota: 83% used"
-msgid "Quota: %1% used"
-msgstr "Kvóta: %1% použito"
-
-#: plugin/DiskQuota.cpp:253
-#, kde-format
-msgid "No quota restrictions found."
-msgstr "Nebyla nalezena žádná omezení kvót."

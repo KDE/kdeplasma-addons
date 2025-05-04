@@ -4,22 +4,22 @@
 # mvillarino <mvillarino@users.sourceforge.net>, 2008.
 # Marce Villarino <mvillarino@gmail.com>, 2009, 2013, 2014.
 # Adrian Chaves Fernandez <adriyetichaves@gmail.com>, 2013, 2015, 2018.
-# Adrián Chaves (Gallaecio) <adrian@chaves.io>, 2023.
+# SPDX-FileCopyrightText: 2025 Adrián Chaves (Gallaecio)
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-24 00:42+0000\n"
-"PO-Revision-Date: 2023-06-23 08:28+0200\n"
-"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
-"Language-Team: Galician <proxecto@trasno.gal>\n"
+"PO-Revision-Date: 2025-05-03 06:58+0200\n"
+"Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
+"Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
 "Language: gl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.2\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -121,8 +121,7 @@ msgid "Show notification text:"
 msgstr "Amosar o texto de notificación:"
 
 #: package/contents/ui/configTimes.qml:23
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Engadir"

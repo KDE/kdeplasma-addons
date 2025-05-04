@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-02 00:43+0000\n"
+"POT-Creation-Date: 2025-05-04 00:43+0000\n"
 "PO-Revision-Date: 2025-04-12 07:01-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -27,25 +27,25 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: qml/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Saltar para linha..."
 
-#: qml/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Visitar o site da tirinha"
 
-#: qml/ComicCentralView.qml:97
+#: qml/ComicCentralView.qml:98
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr "Não foi possível carregar a tirinha"
 
-#: qml/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:99
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
@@ -164,73 +164,73 @@ msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minutos"
 
-#: qml/main.qml:54
+#: qml/main.qml:57
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Próxima aba com linha nova"
 
-#: qml/main.qml:61
+#: qml/main.qml:64
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "&Saltar para a primeira linha"
 
-#: qml/main.qml:67
+#: qml/main.qml:70
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Saltar &para a linha atual"
 
-#: qml/main.qml:73
+#: qml/main.qml:76
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Saltar para linha..."
 
-#: qml/main.qml:79
+#: qml/main.qml:82
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Visite o site"
 
-#: qml/main.qml:84
+#: qml/main.qml:87
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Visitar o &site da loja"
 
-#: qml/main.qml:89
+#: qml/main.qml:92
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Salvar tirinha como..."
 
-#: qml/main.qml:98
+#: qml/main.qml:101
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Tamanho re&al"
 
-#: qml/main.qml:106
+#: qml/main.qml:109
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Armazenar a &posição atual"
 
-#: qml/main.qml:230
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Nenhuma tirinha configurada"
 
-#: qml/main.qml:233
+#: qml/main.qml:236
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "Escolher tirinha…"
 
-#: qml/main.qml:244
+#: qml/main.qml:247
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

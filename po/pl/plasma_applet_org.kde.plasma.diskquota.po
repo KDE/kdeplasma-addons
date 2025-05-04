@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-02 00:40+0000\n"
+"POT-Creation-Date: 2025-05-04 00:43+0000\n"
 "PO-Revision-Date: 2022-07-31 09:39+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -16,6 +16,50 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+
+#: DiskQuota.cpp:44 DiskQuota.cpp:166 DiskQuota.cpp:252
+#, kde-format
+msgid "Disk Quota"
+msgstr "Przydział dyskowy"
+
+#: DiskQuota.cpp:45
+#, kde-format
+msgid "Please install 'quota'"
+msgstr "Wgraj narzędzie 'quota'"
+
+#: DiskQuota.cpp:167
+#, kde-format
+msgid "Running quota failed"
+msgstr "Nie udało się uruchomić quota"
+
+#: DiskQuota.cpp:227
+#, kde-format
+msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
+msgid "%1: %2% used"
+msgstr "%1: %2% wykorzystanych"
+
+#: DiskQuota.cpp:228
+#, kde-format
+msgctxt "e.g.: 12 GiB of 20 GiB"
+msgid "%1 of %2"
+msgstr "%1 z %2"
+
+#: DiskQuota.cpp:229
+#, kde-format
+msgctxt "e.g.: 8 GiB free"
+msgid "%1 free"
+msgstr "%1 wolnych"
+
+#: DiskQuota.cpp:249
+#, kde-format
+msgctxt "example: Quota: 83% used"
+msgid "Quota: %1% used"
+msgstr "Przydział: %1% wykorzystano"
+
+#: DiskQuota.cpp:253
+#, kde-format
+msgid "No quota restrictions found."
+msgstr "Nie znaleziono wartości przydziału."
 
 #: package/contents/ui/main.qml:77
 #, kde-format
@@ -34,47 +78,3 @@ msgstr "Nie znaleziono narzędzia przydziału"
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
 msgstr "Wgraj narzędzie 'quota'"
-
-#: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:166 plugin/DiskQuota.cpp:252
-#, kde-format
-msgid "Disk Quota"
-msgstr "Przydział dyskowy"
-
-#: plugin/DiskQuota.cpp:45
-#, kde-format
-msgid "Please install 'quota'"
-msgstr "Wgraj narzędzie 'quota'"
-
-#: plugin/DiskQuota.cpp:167
-#, kde-format
-msgid "Running quota failed"
-msgstr "Nie udało się uruchomić quota"
-
-#: plugin/DiskQuota.cpp:227
-#, kde-format
-msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
-msgid "%1: %2% used"
-msgstr "%1: %2% wykorzystanych"
-
-#: plugin/DiskQuota.cpp:228
-#, kde-format
-msgctxt "e.g.: 12 GiB of 20 GiB"
-msgid "%1 of %2"
-msgstr "%1 z %2"
-
-#: plugin/DiskQuota.cpp:229
-#, kde-format
-msgctxt "e.g.: 8 GiB free"
-msgid "%1 free"
-msgstr "%1 wolnych"
-
-#: plugin/DiskQuota.cpp:249
-#, kde-format
-msgctxt "example: Quota: 83% used"
-msgid "Quota: %1% used"
-msgstr "Przydział: %1% wykorzystano"
-
-#: plugin/DiskQuota.cpp:253
-#, kde-format
-msgid "No quota restrictions found."
-msgstr "Nie znaleziono wartości przydziału."

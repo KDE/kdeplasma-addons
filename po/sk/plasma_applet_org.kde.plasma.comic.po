@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-02 00:43+0000\n"
+"POT-Creation-Date: 2025-05-04 00:43+0000\n"
 "PO-Revision-Date: 2022-10-04 17:53+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -25,19 +25,19 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: qml/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Skočiť na prúžok..."
 
-#: qml/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Navštíviť webovú stránku komiksu"
 
-#: qml/ComicCentralView.qml:97
+#: qml/ComicCentralView.qml:98
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Download Comics"
@@ -45,7 +45,7 @@ msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr "Stiahnuť komiksy"
 
-#: qml/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:99
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
@@ -166,73 +166,73 @@ msgstr[0] "minúta"
 msgstr[1] "minúty"
 msgstr[2] "minút"
 
-#: qml/main.qml:54
+#: qml/main.qml:57
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "Nová karta s novým stripom"
 
-#: qml/main.qml:61
+#: qml/main.qml:64
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Skočiť na &prvý prúžok"
 
-#: qml/main.qml:67
+#: qml/main.qml:70
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Skočiť na &aktuálny prúžok"
 
-#: qml/main.qml:73
+#: qml/main.qml:76
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Skočiť na prúžok..."
 
-#: qml/main.qml:79
+#: qml/main.qml:82
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Navštíviť webovú stránku"
 
-#: qml/main.qml:84
+#: qml/main.qml:87
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Navštíviť &webovú stránku obchodu"
 
-#: qml/main.qml:89
+#: qml/main.qml:92
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Uložiť komiks ako..."
 
-#: qml/main.qml:98
+#: qml/main.qml:101
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Aktuálna veľkosť"
 
-#: qml/main.qml:106
+#: qml/main.qml:109
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Uložiť aktuálnu &pozíciu"
 
-#: qml/main.qml:230
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: qml/main.qml:233
+#: qml/main.qml:236
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:244
+#: qml/main.qml:247
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

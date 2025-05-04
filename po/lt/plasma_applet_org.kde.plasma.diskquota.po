@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-02 00:40+0000\n"
+"POT-Creation-Date: 2025-05-04 00:43+0000\n"
 "PO-Revision-Date: 2022-11-18 00:00+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
@@ -18,6 +18,50 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 3.2.1\n"
+
+#: DiskQuota.cpp:44 DiskQuota.cpp:166 DiskQuota.cpp:252
+#, kde-format
+msgid "Disk Quota"
+msgstr "Leidžiamas disko duomenų kiekis"
+
+#: DiskQuota.cpp:45
+#, kde-format
+msgid "Please install 'quota'"
+msgstr "Įdiekite „quota“ paketą"
+
+#: DiskQuota.cpp:167
+#, kde-format
+msgid "Running quota failed"
+msgstr "Leidžiamo duomenų kiekio paleidimas nepavyko"
+
+#: DiskQuota.cpp:227
+#, kde-format
+msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
+msgid "%1: %2% used"
+msgstr "%1: Panaudota %2%"
+
+#: DiskQuota.cpp:228
+#, kde-format
+msgctxt "e.g.: 12 GiB of 20 GiB"
+msgid "%1 of %2"
+msgstr "%1 iš %2"
+
+#: DiskQuota.cpp:229
+#, kde-format
+msgctxt "e.g.: 8 GiB free"
+msgid "%1 free"
+msgstr "%1 laisva"
+
+#: DiskQuota.cpp:249
+#, kde-format
+msgctxt "example: Quota: 83% used"
+msgid "Quota: %1% used"
+msgstr "Leidžiamas duomenų kiekis: Panaudota %1%"
+
+#: DiskQuota.cpp:253
+#, kde-format
+msgid "No quota restrictions found."
+msgstr "Nerasta jokių leidžiamo duomenų kiekio apribojimų."
 
 #: package/contents/ui/main.qml:77
 #, kde-format
@@ -36,47 +80,3 @@ msgstr "Nerastas leidžiamo duomenų kiekio įrankis"
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
 msgstr "Įdiekite „quota“ paketą"
-
-#: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:166 plugin/DiskQuota.cpp:252
-#, kde-format
-msgid "Disk Quota"
-msgstr "Leidžiamas disko duomenų kiekis"
-
-#: plugin/DiskQuota.cpp:45
-#, kde-format
-msgid "Please install 'quota'"
-msgstr "Įdiekite „quota“ paketą"
-
-#: plugin/DiskQuota.cpp:167
-#, kde-format
-msgid "Running quota failed"
-msgstr "Leidžiamo duomenų kiekio paleidimas nepavyko"
-
-#: plugin/DiskQuota.cpp:227
-#, kde-format
-msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
-msgid "%1: %2% used"
-msgstr "%1: Panaudota %2%"
-
-#: plugin/DiskQuota.cpp:228
-#, kde-format
-msgctxt "e.g.: 12 GiB of 20 GiB"
-msgid "%1 of %2"
-msgstr "%1 iš %2"
-
-#: plugin/DiskQuota.cpp:229
-#, kde-format
-msgctxt "e.g.: 8 GiB free"
-msgid "%1 free"
-msgstr "%1 laisva"
-
-#: plugin/DiskQuota.cpp:249
-#, kde-format
-msgctxt "example: Quota: 83% used"
-msgid "Quota: %1% used"
-msgstr "Leidžiamas duomenų kiekis: Panaudota %1%"
-
-#: plugin/DiskQuota.cpp:253
-#, kde-format
-msgid "No quota restrictions found."
-msgstr "Nerasta jokių leidžiamo duomenų kiekio apribojimų."

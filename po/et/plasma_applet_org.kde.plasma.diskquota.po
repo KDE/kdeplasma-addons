@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-09-02 00:40+0000\n"
+"POT-Creation-Date: 2025-05-04 00:43+0000\n"
 "PO-Revision-Date: 2016-12-09 00:26+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-i18n-doc@kde.org>\n"
@@ -16,6 +16,50 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
+
+#: DiskQuota.cpp:44 DiskQuota.cpp:166 DiskQuota.cpp:252
+#, kde-format
+msgid "Disk Quota"
+msgstr "Kettakvoodid"
+
+#: DiskQuota.cpp:45
+#, kde-format
+msgid "Please install 'quota'"
+msgstr "Palun paigalda \"quota\""
+
+#: DiskQuota.cpp:167
+#, kde-format
+msgid "Running quota failed"
+msgstr "Quota käivitamine nurjus"
+
+#: DiskQuota.cpp:227
+#, kde-format
+msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
+msgid "%1: %2% used"
+msgstr "%1: %2% kasutatud"
+
+#: DiskQuota.cpp:228
+#, kde-format
+msgctxt "e.g.: 12 GiB of 20 GiB"
+msgid "%1 of %2"
+msgstr "%1 / %2"
+
+#: DiskQuota.cpp:229
+#, kde-format
+msgctxt "e.g.: 8 GiB free"
+msgid "%1 free"
+msgstr "%1 vaba"
+
+#: DiskQuota.cpp:249
+#, kde-format
+msgctxt "example: Quota: 83% used"
+msgid "Quota: %1% used"
+msgstr "Kvoot: %1% kasutatud"
+
+#: DiskQuota.cpp:253
+#, kde-format
+msgid "No quota restrictions found."
+msgstr "Kvoodipiiranguid ei leitud."
 
 #: package/contents/ui/main.qml:77
 #, fuzzy, kde-format
@@ -43,47 +87,3 @@ msgstr ""
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
 msgstr "Palun paigalda \"quota\""
-
-#: plugin/DiskQuota.cpp:44 plugin/DiskQuota.cpp:166 plugin/DiskQuota.cpp:252
-#, kde-format
-msgid "Disk Quota"
-msgstr "Kettakvoodid"
-
-#: plugin/DiskQuota.cpp:45
-#, kde-format
-msgid "Please install 'quota'"
-msgstr "Palun paigalda \"quota\""
-
-#: plugin/DiskQuota.cpp:167
-#, kde-format
-msgid "Running quota failed"
-msgstr "Quota käivitamine nurjus"
-
-#: plugin/DiskQuota.cpp:227
-#, kde-format
-msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
-msgid "%1: %2% used"
-msgstr "%1: %2% kasutatud"
-
-#: plugin/DiskQuota.cpp:228
-#, kde-format
-msgctxt "e.g.: 12 GiB of 20 GiB"
-msgid "%1 of %2"
-msgstr "%1 / %2"
-
-#: plugin/DiskQuota.cpp:229
-#, kde-format
-msgctxt "e.g.: 8 GiB free"
-msgid "%1 free"
-msgstr "%1 vaba"
-
-#: plugin/DiskQuota.cpp:249
-#, kde-format
-msgctxt "example: Quota: 83% used"
-msgid "Quota: %1% used"
-msgstr "Kvoot: %1% kasutatud"
-
-#: plugin/DiskQuota.cpp:253
-#, kde-format
-msgid "No quota restrictions found."
-msgstr "Kvoodipiiranguid ei leitud."

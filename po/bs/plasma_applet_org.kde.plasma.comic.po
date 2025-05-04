@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-02 00:43+0000\n"
+"POT-Creation-Date: 2025-05-04 00:43+0000\n"
 "PO-Revision-Date: 2015-02-04 16:15+0000\n"
 "Last-Translator: Vedran Ljubovic <vljubovic@smartnet.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -26,28 +26,28 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: qml/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:63
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Skoči na strip ..."
 
-#: qml/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:103
 #, fuzzy, kde-format
 #| msgid "Visit the comic website"
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Posjeti comic web stranicu"
 
-#: qml/ComicCentralView.qml:97
+#: qml/ComicCentralView.qml:98
 #, fuzzy, kde-format
 #| msgid "Download new comics"
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr "Preuzmi nove stripove"
 
-#: qml/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:99
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
@@ -180,7 +180,7 @@ msgstr[0] " minuta"
 msgstr[1] " minuta"
 msgstr[2] " minuta"
 
-#: qml/main.qml:54
+#: qml/main.qml:57
 #, fuzzy, kde-format
 #| msgctxt "here strip means comic strip"
 #| msgid "&Next Tab with a new Strip"
@@ -188,55 +188,55 @@ msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Naredna kartica s novim stripom"
 
-#: qml/main.qml:61
+#: qml/main.qml:64
 #, fuzzy, kde-format
 #| msgid "Jump to &first Strip"
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Skoči na &prvi strip"
 
-#: qml/main.qml:67
+#: qml/main.qml:70
 #, fuzzy, kde-format
 #| msgid "Jump to &current Strip"
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Skoči na &tekući strip"
 
-#: qml/main.qml:73
+#: qml/main.qml:76
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Skoči na strip ..."
 
-#: qml/main.qml:79
+#: qml/main.qml:82
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Posjeti &web stranicu za kupovinu"
 
-#: qml/main.qml:84
+#: qml/main.qml:87
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Posjeti &web stranicu za kupovinu"
 
-#: qml/main.qml:89
+#: qml/main.qml:92
 #, fuzzy, kde-format
 #| msgid "&Save Comic As..."
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Snimi strip kao..."
 
-#: qml/main.qml:98
+#: qml/main.qml:101
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Stvarna veličina"
 
-#: qml/main.qml:106
+#: qml/main.qml:109
 #, fuzzy, kde-format
 #| msgctxt "@option:check Context menu of comic image"
 #| msgid "Store current &Position"
@@ -244,19 +244,19 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Spremi  tekuću &poziciju"
 
-#: qml/main.qml:230
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: qml/main.qml:233
+#: qml/main.qml:236
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:244
+#: qml/main.qml:247
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
