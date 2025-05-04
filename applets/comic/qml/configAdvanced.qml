@@ -9,7 +9,6 @@ import QtQuick.Controls as Controls
 import QtQuick.Layouts as Layouts
 
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.plasmoid
 import org.kde.kcmutils as KCM
 
 KCM.SimpleKCM {

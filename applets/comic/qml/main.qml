@@ -3,7 +3,6 @@
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
-
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Dialogs
@@ -39,7 +38,7 @@ PlasmoidItem {
 
     KItemModels.KSortFilterProxyModel {
         id: enabledComicsModel
-        sourceModel: plasmoid.availableComicsModel
+        sourceModel: Plasmoid.availableComicsModel
         filterRowCallback: function(source_row, source_parent) {
             return sourceModel.index(source_row, 0, source_parent).data(KItemModels.KRoleNames.role("enabled"));
         }
@@ -184,19 +183,19 @@ PlasmoidItem {
                 visible: (topInfo.text.length > 0)
                 Layout.fillWidth: true
                 horizontalAlignment: Text.AlignHCenter
-                text: (showComicAuthor || showComicTitle) ? getTopInfo() : ""
+                text: (mainWindow.showComicAuthor || mainWindow.showComicTitle) ? getTopInfo() : ""
                 textFormat: Text.PlainText
                 elide: Text.ElideRight
 
                 function getTopInfo() {
                     var tempTop = "";
 
-                    if ( showComicTitle ) {
+                    if ( mainWindow.showComicTitle ) {
                         tempTop = mainWindow.comicData.title ?? "";
                         tempTop += ( ( (mainWindow.comicData.stripTitle?.length > 0) && (mainWindow.comicData.title?.length > 0) ) ? " - " : "" ) + (mainWindow.comicData.stripTitle ?? "");
                     }
 
-                    if ( showComicAuthor && mainWindow.comicData.author?.length > 0 ) {
+                    if ( mainWindow.showComicAuthor && mainWindow.comicData.author?.length > 0 ) {
                         tempTop = ( tempTop.length > 0 ? mainWindow.comicData.author + ": " + tempTop : mainWindow.comicData.author );
                     }
 
@@ -210,7 +209,7 @@ PlasmoidItem {
                 Layout.fillHeight: true
                 Layout.topMargin: comicTabbar.visible ? 3 : 0
 
-                visible: plasmoid.configuration.tabIdentifier.length > 0
+                visible: Plasmoid.configuration.tabIdentifier.length > 0
                 comicData: mainWindow.comicData
             }
 
@@ -219,15 +218,15 @@ PlasmoidItem {
                 Layout.fillWidth: true
 
                 comicData: mainWindow.comicData
-                showUrl: plasmoid.configuration.showComicUrl
-                showIdentifier: plasmoid.configuration.showComicIdentifier
+                showUrl: Plasmoid.configuration.showComicUrl
+                showIdentifier: Plasmoid.configuration.showComicIdentifier
             }
 
             PlasmaExtras.PlaceholderMessage {
                 id: configNeededPlaceholder
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 Layout.margins: Kirigami.Units.gridUnit
-                visible: plasmoid.configuration.tabIdentifier.length === 0
+                visible: Plasmoid.configuration.tabIdentifier.length === 0
                 iconName: "folder-comic-symbolic"
                 text: i18nc("@info placeholdermessage if no comics loaded", "No comics configured")
                 helpfulAction: Kirigami.Action {
