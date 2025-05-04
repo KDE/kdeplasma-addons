@@ -6,6 +6,7 @@
 # Adrián Chaves Fernández <adriyetichaves@gmail.com>, 2015.
 # SPDX-FileCopyrightText: 2018, 2019, 2023 Adrian Chaves <adrian@chaves.io>
 #
+# SPDX-FileCopyrightText: 2025 Adrián Chaves (Gallaecio)
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
@@ -19,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
