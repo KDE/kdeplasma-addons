@@ -28,6 +28,8 @@ KCM.ScrollViewKCM {
     // We use a custom property to provide a more responsive feedback
     property bool isSearching: false
 
+    extraFooterTopPadding: true
+
     LocationListModel {
         id: locationListModel
         onLocationSearchDone: {
