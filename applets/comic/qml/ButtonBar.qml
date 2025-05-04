@@ -12,6 +12,8 @@ import plasma.applet.org.kde.plasma.comic as Comic
 Item {
     id: root
 
+    required property Comic.comicData comicData
+
     implicitWidth: rowButton.width + background.margins.left + background.margins.right
     implicitHeight: rowButton.height + background.margins.top + background.margins.bottom
 
@@ -40,7 +42,7 @@ Item {
             id: prevButton
 
             icon.name: "arrow-left"
-            enabled: (comicData.prev != undefined && comicData.prev.length > 0)
+            enabled: (root.comicData.prev != undefined && root.comicData.prev.length > 0)
             onClicked: root.prevClicked()
         }
 
@@ -55,7 +57,7 @@ Item {
             id: nextButton
 
             icon.name: "arrow-right"
-            enabled: (comicData.next != undefined && comicData.next.length > 0)
+            enabled: (root.comicData.next != undefined && root.comicData.next.length > 0)
             onClicked: root.nextClicked()
         }
     }

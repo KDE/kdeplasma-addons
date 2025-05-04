@@ -102,6 +102,8 @@ Item {
             ButtonBar {
                 id: buttonBar
 
+                comicData: root.comicData
+
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     bottom: parent.bottom
