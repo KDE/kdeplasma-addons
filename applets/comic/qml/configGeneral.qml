@@ -4,12 +4,12 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.0
-import QtQuick.Controls 2.5 as Controls
-import QtQuick.Layouts 1.1 as Layouts
+import QtQuick
+import QtQuick.Controls as Controls
+import QtQuick.Layouts as Layouts
 
-import org.kde.newstuff 1.62 as NewStuff
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.newstuff as NewStuff
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
 import org.kde.kcmutils as KCM
 

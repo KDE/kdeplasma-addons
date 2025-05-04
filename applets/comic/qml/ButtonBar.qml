@@ -4,10 +4,10 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.1
-import org.kde.plasma.core as PlasmaCore
-import org.kde.ksvg 1.0 as KSvg
-import org.kde.plasma.components 3.0 as PlasmaComponents3
+import QtQuick
+import org.kde.ksvg as KSvg
+import org.kde.plasma.components as PlasmaComponents3
+import plasma.applet.org.kde.plasma.comic as Comic
 
 Item {
     id: root
