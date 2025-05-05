@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-04 00:43+0000\n"
+"POT-Creation-Date: 2025-05-05 00:43+0000\n"
 "PO-Revision-Date: 2024-09-07 23:35+0300\n"
 "Last-Translator: kde-el <b3lievem@yandex.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -34,13 +34,13 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: qml/ComicBottomInfo.qml:63
+#: qml/ComicBottomInfo.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Μετάβαση στο απόκομμα…"
 
-#: qml/ComicBottomInfo.qml:103
+#: qml/ComicBottomInfo.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -77,13 +77,13 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Για προχωρημένους"
 
-#: qml/configAdvanced.qml:24
+#: qml/configAdvanced.qml:23
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "Λανθάνουσα μνήμη κόμικ:"
 
-#: qml/configAdvanced.qml:33
+#: qml/configAdvanced.qml:32
 #, fuzzy, kde-format
 #| msgid "strips per comic"
 msgctxt "@item:valuesuffix spacing to number + unit"
@@ -92,52 +92,52 @@ msgid_plural "strips per comic"
 msgstr[0] " σειρές ανά κόμικ"
 msgstr[1] " σειρές ανά κόμικ"
 
-#: qml/configAppearance.qml:27
+#: qml/configAppearance.qml:25
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr ""
 
-#: qml/configAppearance.qml:28
+#: qml/configAppearance.qml:26
 #, fuzzy, kde-format
 #| msgid "Show comic title"
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "Εμφάνιση τίτλου κόμικ"
 
-#: qml/configAppearance.qml:33
+#: qml/configAppearance.qml:31
 #, fuzzy, kde-format
 #| msgid "Show comic identifier"
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "Εμφάνιση αναγνωριστικού κόμικ"
 
-#: qml/configAppearance.qml:38
+#: qml/configAppearance.qml:36
 #, fuzzy, kde-format
 #| msgid "Show comic author"
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "Εμφάνιση συγγραφέα κόμικ"
 
-#: qml/configAppearance.qml:43
+#: qml/configAppearance.qml:41
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "Κόμικ"
 
-#: qml/configAppearance.qml:52
+#: qml/configAppearance.qml:50
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr ""
 
-#: qml/configAppearance.qml:53
+#: qml/configAppearance.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr ""
 
-#: qml/configAppearance.qml:59
+#: qml/configAppearance.qml:57
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
@@ -179,74 +179,74 @@ msgid_plural "minutes"
 msgstr[0] "λεπτά"
 msgstr[1] "λεπτά"
 
-#: qml/main.qml:57
+#: qml/main.qml:55
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Επόμενη καρτέλα με νέα σειρά"
 
-#: qml/main.qml:64
+#: qml/main.qml:62
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "&Μετάβαση στο πρώτο απόκομμα"
 
-#: qml/main.qml:70
+#: qml/main.qml:68
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "&Μετάβαση στο τρέχον απόκομμα"
 
-#: qml/main.qml:76
+#: qml/main.qml:74
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Μετάβαση στο απόκομμα…"
 
-#: qml/main.qml:82
+#: qml/main.qml:80
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Επίσκεψη της ιστοσελίδας"
 
-#: qml/main.qml:87
+#: qml/main.qml:85
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Επίσκεψη του &δικτυακού καταστήματος"
 
-#: qml/main.qml:92
+#: qml/main.qml:90
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Αποθήκευση κόμικ ως…"
 
-#: qml/main.qml:101
+#: qml/main.qml:99
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Πραγματικό μέγεθος"
 
-#: qml/main.qml:109
+#: qml/main.qml:107
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Αποθήκευση τρέχουσας &θέσης"
 
-#: qml/main.qml:233
+#: qml/main.qml:231
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Ρύθμιση του Comic"
 
-#: qml/main.qml:236
+#: qml/main.qml:234
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:247
+#: qml/main.qml:245
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

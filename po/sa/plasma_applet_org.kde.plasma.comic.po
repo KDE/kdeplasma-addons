@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-04 00:43+0000\n"
+"POT-Creation-Date: 2025-05-05 00:43+0000\n"
 "PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -25,13 +25,13 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: qml/ComicBottomInfo.qml:63
+#: qml/ComicBottomInfo.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "पट्टिकां कर्तुं कूदन्तु…"
 
-#: qml/ComicBottomInfo.qml:103
+#: qml/ComicBottomInfo.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -67,13 +67,13 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "उन्नतं"
 
-#: qml/configAdvanced.qml:24
+#: qml/configAdvanced.qml:23
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
 msgstr "हास्य संग्रहः :"
 
-#: qml/configAdvanced.qml:33
+#: qml/configAdvanced.qml:32
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
@@ -81,48 +81,48 @@ msgid_plural "strips per comic"
 msgstr[0] "प्रति हास्यं पट्टिका"
 msgstr[1] "प्रति हास्यं पट्टिकाः"
 
-#: qml/configAppearance.qml:27
+#: qml/configAppearance.qml:25
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
 msgstr "दर्शयतु:"
 
-#: qml/configAppearance.qml:28
+#: qml/configAppearance.qml:26
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
 msgstr "हास्य शीर्षक"
 
-#: qml/configAppearance.qml:33
+#: qml/configAppearance.qml:31
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
 msgstr "हास्यपरिचयकर्ता"
 
-#: qml/configAppearance.qml:38
+#: qml/configAppearance.qml:36
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
 msgstr "हास्य लेखक"
 
-#: qml/configAppearance.qml:43
+#: qml/configAppearance.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
 msgstr "हास्य URL"
 
-#: qml/configAppearance.qml:52
+#: qml/configAppearance.qml:50
 #, kde-format
 msgid "Show navigation buttons:"
 msgstr "नेविगेशन बटन्स् दर्शयतु :"
 
-#: qml/configAppearance.qml:53
+#: qml/configAppearance.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
 msgstr "सर्वदा"
 
-#: qml/configAppearance.qml:59
+#: qml/configAppearance.qml:57
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
@@ -160,73 +160,73 @@ msgid_plural "minutes"
 msgstr[0] "क्षणं"
 msgstr[1] "पन्चनिमेषः"
 
-#: qml/main.qml:57
+#: qml/main.qml:55
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&नवीनपट्टिका सह अग्रिमः ट्याब्"
 
-#: qml/main.qml:64
+#: qml/main.qml:62
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "&First Strip इत्यत्र कूदन्तु"
 
-#: qml/main.qml:70
+#: qml/main.qml:68
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "&Current Strip इत्यत्र कूदन्तु"
 
-#: qml/main.qml:76
+#: qml/main.qml:74
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "पट्टिकां प्रति कूदन्तु…"
 
-#: qml/main.qml:82
+#: qml/main.qml:80
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "वेबसाइट् पश्यन्तु"
 
-#: qml/main.qml:87
+#: qml/main.qml:85
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Shop &Website इत्यत्र गच्छन्तु"
 
-#: qml/main.qml:92
+#: qml/main.qml:90
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&हास्यं यथा…"
 
-#: qml/main.qml:101
+#: qml/main.qml:99
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&वास्तविक आकार"
 
-#: qml/main.qml:109
+#: qml/main.qml:107
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "भण्डार वर्तमान &स्थिति"
 
-#: qml/main.qml:233
+#: qml/main.qml:231
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: qml/main.qml:236
+#: qml/main.qml:234
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:247
+#: qml/main.qml:245
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
