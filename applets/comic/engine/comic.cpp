@@ -189,6 +189,13 @@ void ComicEngine::finished(ComicProvider *provider)
             CachedProvider::storeInCache(currentIdentifier, provider->image(), data);
         }
     }
+
+    if (provider->inherits("CachedProvider")) {
+        // but if it is, we need to re-read the identifierType, or stripselector picks the wrong dialog
+        QString providerName = data.identifier.mid(0, data.identifier.indexOf(QLatin1Char(':')));
+        KPackage::Package pkg = KPackage::PackageLoader::self()->loadPackage(QStringLiteral("Plasma/Comic"), providerName);
+        data.identifierType = stringToIdentifierType(pkg.metadata().value(u"X-KDE-PlasmaComicProvider-SuffixType"));
+    }
     provider->deleteLater();
 
     const QString key = m_jobs.key(provider);
