@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-05-06 00:42+0000\n"
 "PO-Revision-Date: 2022-03-06 11:56+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -235,37 +235,37 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "視程:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:48
+#: package/contents/ui/config/ConfigWeatherStation.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "更新頻度:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:51
+#: package/contents/ui/config/ConfigWeatherStation.qml:53
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 分"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:63
+#: package/contents/ui/config/ConfigWeatherStation.qml:65
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "場所:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:69
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:74
+#: package/contents/ui/config/ConfigWeatherStation.qml:76
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, fuzzy, kde-format
 #| msgctxt "@info:placeholder"
 #| msgid "Enter location"
@@ -273,31 +273,31 @@ msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "場所を入力"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "場所を入力"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:183
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "'%1' の測候所が見つかりません"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: package/contents/ui/config/ConfigWeatherStation.qml:189
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:190
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

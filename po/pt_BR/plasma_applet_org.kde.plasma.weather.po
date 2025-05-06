@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-05-06 00:42+0000\n"
 "PO-Revision-Date: 2024-11-16 01:40-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -230,68 +230,68 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Visibilidade:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:48
+#: package/contents/ui/config/ConfigWeatherStation.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Atualizar a cada:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:51
+#: package/contents/ui/config/ConfigWeatherStation.qml:53
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 minuto"
 msgstr[1] "%1 minutos"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:63
+#: package/contents/ui/config/ConfigWeatherStation.qml:65
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Localização:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:69
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "Nenhum selecionado"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:74
+#: package/contents/ui/config/ConfigWeatherStation.qml:76
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "Fornecedor:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Digitar nova localização"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Digitar localização"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:183
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Nenhuma estação meteorológica encontrada para '%1'"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Pesquisar uma estação meteorológica para alterar sua localização"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: package/contents/ui/config/ConfigWeatherStation.qml:189
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Pesquisar uma estação meteorológica para definir sua localização"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:190
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

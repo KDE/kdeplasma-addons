@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-05 00:43+0000\n"
+"POT-Creation-Date: 2025-05-06 00:42+0000\n"
 "PO-Revision-Date: 2025-05-01 17:47+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -36,13 +36,13 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Visita il sito web del fumetto"
 
-#: qml/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:86 qml/FullViewWidget.qml:84
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr "Impossibile caricare il fumetto"
 
-#: qml/ComicCentralView.qml:99
+#: qml/ComicCentralView.qml:87 qml/FullViewWidget.qml:85
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
@@ -161,73 +161,73 @@ msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minuti"
 
-#: qml/main.qml:55
+#: qml/main.qml:63
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "Scheda successiva co&n una nuova striscia"
 
-#: qml/main.qml:62
+#: qml/main.qml:70
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Vai alla &prima striscia"
 
-#: qml/main.qml:68
+#: qml/main.qml:76
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Vai alla stris&cia attuale"
 
-#: qml/main.qml:74
+#: qml/main.qml:82
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Vai alla striscia..."
 
-#: qml/main.qml:80
+#: qml/main.qml:88
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Visita il sito web"
 
-#: qml/main.qml:85
+#: qml/main.qml:93
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Visita il sito &web del negozio"
 
-#: qml/main.qml:90
+#: qml/main.qml:98
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Salva il fumetto come…"
 
-#: qml/main.qml:99
+#: qml/main.qml:107
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Dimensione &attuale"
 
-#: qml/main.qml:107
+#: qml/main.qml:115
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Memorizza la &posizione attuale"
 
-#: qml/main.qml:231
+#: qml/main.qml:236
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Nessun fumetto configurato"
 
-#: qml/main.qml:234
+#: qml/main.qml:239
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "Scegli il fumetto…"
 
-#: qml/main.qml:245
+#: qml/main.qml:250
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

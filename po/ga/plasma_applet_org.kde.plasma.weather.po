@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-05-06 00:42+0000\n"
 "PO-Revision-Date: 2009-02-03 08:48-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -240,14 +240,14 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Léargas: %1"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:48
+#: package/contents/ui/config/ConfigWeatherStation.qml:50
 #, fuzzy, kde-format
 #| msgid "Update every:"
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Nuashonraigh gach:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:51
+#: package/contents/ui/config/ConfigWeatherStation.qml:53
 #, fuzzy, kde-format
 #| msgid " minute"
 #| msgid_plural " minutes"
@@ -259,58 +259,58 @@ msgstr[2] " nóiméad"
 msgstr[3] " nóiméad"
 msgstr[4] " nóiméad"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:63
+#: package/contents/ui/config/ConfigWeatherStation.qml:65
 #, fuzzy, kde-format
 #| msgid "Location"
 msgctxt "@label"
 msgid "Location:"
 msgstr "Suíomh"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:69
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:74
+#: package/contents/ui/config/ConfigWeatherStation.qml:76
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, fuzzy, kde-format
 #| msgid "Weather Units"
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Aonaid Aimsire"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, fuzzy, kde-format
 #| msgid "Weather Units"
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Aonaid Aimsire"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:183
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: package/contents/ui/config/ConfigWeatherStation.qml:189
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:190
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

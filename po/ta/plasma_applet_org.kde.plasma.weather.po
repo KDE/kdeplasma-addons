@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-05-06 00:42+0000\n"
 "PO-Revision-Date: 2024-09-01 17:18+0200\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -227,68 +227,68 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "கட்புலப்பாடு:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:48
+#: package/contents/ui/config/ConfigWeatherStation.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "புதுப்பிக்கும் இடைவெளி:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:51
+#: package/contents/ui/config/ConfigWeatherStation.qml:53
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 நிமிடம்"
 msgstr[1] "%1 நிமிடங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:63
+#: package/contents/ui/config/ConfigWeatherStation.qml:65
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "இருப்பிடம்:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:69
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "எதுவும் தேர்ந்தெடுக்கப்படவில்லை"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:74
+#: package/contents/ui/config/ConfigWeatherStation.qml:76
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "வழங்கி:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "புதிய இருப்பிடத்தை உள்ளிடுங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "இருப்பிடத்தை உள்ளிடுங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:183
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "'%1' என்பதற்கான எந்த வானிலை நிலையமும் கண்டுபிடிக்கப்படவில்லை"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "உங்கள் இருப்பிடத்தை மாற்ற, ஏதாவதொரு வானிலை மையத்தைத் தேடுங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: package/contents/ui/config/ConfigWeatherStation.qml:189
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "உங்கள் இருப்பிடத்தை அமைக்க, ஏதாவதொரு வானிலை மையத்தைத் தேடுங்கள்"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:190
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

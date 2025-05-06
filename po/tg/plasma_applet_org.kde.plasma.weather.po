@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-26 00:43+0000\n"
+"POT-Creation-Date: 2025-05-06 00:42+0000\n"
 "PO-Revision-Date: 2019-09-29 19:46+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -229,38 +229,38 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Намоёнӣ:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:48
+#: package/contents/ui/config/ConfigWeatherStation.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Навсози кардан ҳар як:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:51
+#: package/contents/ui/config/ConfigWeatherStation.qml:53
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 дақиқа"
 msgstr[1] "%1 дақиқа"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:63
+#: package/contents/ui/config/ConfigWeatherStation.qml:65
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Ҷойгиршавӣ:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:69
+#: package/contents/ui/config/ConfigWeatherStation.qml:71
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:74
+#: package/contents/ui/config/ConfigWeatherStation.qml:76
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, fuzzy, kde-format
 #| msgctxt "@info:placeholder"
 #| msgid "Enter location"
@@ -268,31 +268,31 @@ msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Ҷойгиршавиро ворид намоед"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:99
+#: package/contents/ui/config/ConfigWeatherStation.qml:101
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Ҷойгиршавиро ворид намоед"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:183
+#: package/contents/ui/config/ConfigWeatherStation.qml:185
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Ягон дастгоҳи обу ҳаво барои '%1' ёфт нашуд"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: package/contents/ui/config/ConfigWeatherStation.qml:189
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr ""
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:190
+#: package/contents/ui/config/ConfigWeatherStation.qml:192
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

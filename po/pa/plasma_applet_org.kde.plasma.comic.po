@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-05 00:43+0000\n"
+"POT-Creation-Date: 2025-05-06 00:42+0000\n"
 "PO-Revision-Date: 2011-06-29 23:33+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -38,14 +38,14 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "ਕੌਮਿਕ ਵੈੱਬਸਾਈਟ ਵੇਖੋ"
 
-#: qml/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:86 qml/FullViewWidget.qml:84
 #, fuzzy, kde-format
 #| msgid "Download new comics"
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr "ਨਵੇਂ ਕਾਮਿਕ ਡਾਊਨਲੋਡ ਕਰੋ"
 
-#: qml/ComicCentralView.qml:99
+#: qml/ComicCentralView.qml:87 qml/FullViewWidget.qml:85
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
@@ -174,61 +174,61 @@ msgid_plural "minutes"
 msgstr[0] " ਮਿੰਟ"
 msgstr[1] " ਮਿੰਟ"
 
-#: qml/main.qml:55
+#: qml/main.qml:63
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr ""
 
-#: qml/main.qml:62
+#: qml/main.qml:70
 #, fuzzy, kde-format
 #| msgid "Jump to &first Strip"
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "ਪਹਿਲੀਂ ਪੱਟੀ ਉੱਤੇ ਜਾਓ(&f)"
 
-#: qml/main.qml:68
+#: qml/main.qml:76
 #, fuzzy, kde-format
 #| msgid "Jump to &current Strip"
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "ਮੌਜੂਦਾ ਪੱਟੀ ਉੱਤੇ ਜਾਓ(&c)"
 
-#: qml/main.qml:74
+#: qml/main.qml:82
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "ਪਹਿਲੀ ਪੱਟੀ ਉੱਤੇ ਜਾਓ..."
 
-#: qml/main.qml:80
+#: qml/main.qml:88
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "ਦੁਕਾਨ ਵੈੱਬਸਾਈਟ ਵੇਖੋ(&w)"
 
-#: qml/main.qml:85
+#: qml/main.qml:93
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "ਦੁਕਾਨ ਵੈੱਬਸਾਈਟ ਵੇਖੋ(&w)"
 
-#: qml/main.qml:90
+#: qml/main.qml:98
 #, fuzzy, kde-format
 #| msgid "&Save Comic As..."
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "ਕਾਮਿਕ ਇੰਝ ਸੰਭਾਲੋ(&S)..."
 
-#: qml/main.qml:99
+#: qml/main.qml:107
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "ਅਸਲੀ ਸਾਈਜ਼(&A)"
 
-#: qml/main.qml:107
+#: qml/main.qml:115
 #, fuzzy, kde-format
 #| msgctxt "@option:check Context menu of comic image"
 #| msgid "Store current &Position"
@@ -236,19 +236,19 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "ਮੌਜੂਦਾ ਸਥਿਤੀ ਸਟੋਰ ਕਰੋ(&P)"
 
-#: qml/main.qml:231
+#: qml/main.qml:236
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: qml/main.qml:234
+#: qml/main.qml:239
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:245
+#: qml/main.qml:250
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

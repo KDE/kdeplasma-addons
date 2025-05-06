@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-05 00:43+0000\n"
+"POT-Creation-Date: 2025-05-06 00:42+0000\n"
 "PO-Revision-Date: 2024-07-15 22:20+0200\n"
 "Last-Translator: rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -38,7 +38,7 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Besøg tegneseriens hjemmeside"
 
-#: qml/ComicCentralView.qml:98
+#: qml/ComicCentralView.qml:86 qml/FullViewWidget.qml:84
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Download Comics"
@@ -46,7 +46,7 @@ msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
 msgstr "Download tegneserier"
 
-#: qml/ComicCentralView.qml:99
+#: qml/ComicCentralView.qml:87 qml/FullViewWidget.qml:85
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
@@ -163,74 +163,74 @@ msgid_plural "minutes"
 msgstr[0] "minut"
 msgstr[1] "minutter"
 
-#: qml/main.qml:55
+#: qml/main.qml:63
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Næste faneblad med en ny stribe"
 
-#: qml/main.qml:62
+#: qml/main.qml:70
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Gå til &første stribe"
 
-#: qml/main.qml:68
+#: qml/main.qml:76
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Gå til &nuværende stribe"
 
-#: qml/main.qml:74
+#: qml/main.qml:82
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Gå til stribe…"
 
-#: qml/main.qml:80
+#: qml/main.qml:88
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Besøg hjemmesiden"
 
-#: qml/main.qml:85
+#: qml/main.qml:93
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Besøg butikens &hjemmeside"
 
-#: qml/main.qml:90
+#: qml/main.qml:98
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Gem tegneserie som…"
 
-#: qml/main.qml:99
+#: qml/main.qml:107
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Faktisk størrelse"
 
-#: qml/main.qml:107
+#: qml/main.qml:115
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Gem nuværende &position"
 
-#: qml/main.qml:231
+#: qml/main.qml:236
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Konfiguration af tegneserie"
 
-#: qml/main.qml:234
+#: qml/main.qml:239
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:245
+#: qml/main.qml:250
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
