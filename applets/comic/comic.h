@@ -50,7 +50,6 @@ public:
 
     Q_INVOKABLE bool urlExists(const QUrl &url);
     Q_INVOKABLE bool saveImage(const QUrl &fileUrl);
-    Q_INVOKABLE void goJump();
     Q_INVOKABLE void storePosition(bool store);
     Q_INVOKABLE void tabChanged(const QString &newIdentifier);
     Q_INVOKABLE void loadProviders();

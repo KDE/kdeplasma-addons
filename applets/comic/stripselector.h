@@ -8,10 +8,10 @@
 #define STRIP_SELECTOR_H
 
 #include <QObject>
+#include <qqmlintegration.h>
 
+#include "comicdata.h"
 #include "engine/types.h"
-
-class ComicData;
 
 /**
  * Enables users to visually select a strip they want to navigate to.
@@ -53,6 +53,30 @@ class StripSelectorFactory
 {
 public:
     static StripSelector *create(IdentifierType type);
+};
+
+class JumpDialog : public QObject
+{
+    Q_OBJECT
+    QML_ELEMENT
+
+    Q_PROPERTY(ComicData comicData READ comicData WRITE setComicData)
+
+public:
+    explicit JumpDialog(QObject *parent = nullptr);
+    Q_INVOKABLE void open();
+
+Q_SIGNALS:
+    void accepted(QString chosenValue);
+
+private:
+    ComicData comicData()
+    {
+        return mComicData;
+    }
+    void setComicData(ComicData comicData);
+
+    ComicData mComicData;
 };
 
 #endif

@@ -165,3 +165,21 @@ void DateStripSelector::slotChosenDay(const QDate &date)
         }
     }
 }
+
+JumpDialog::JumpDialog(QObject *parent)
+    : QObject(parent)
+{
+}
+
+void JumpDialog::open()
+{
+    StripSelector *selector = StripSelectorFactory::create(mComicData.type());
+    connect(selector, &StripSelector::stripChosen, this, &JumpDialog::accepted);
+
+    selector->select(mComicData);
+}
+
+void JumpDialog::setComicData(ComicData comicData)
+{
+    mComicData = comicData;
+};

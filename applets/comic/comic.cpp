@@ -12,7 +12,6 @@
 #include "comic.h"
 #include "checknewstrips.h"
 #include "comic_debug.h"
-#include "stripselector.h"
 
 #include <QAbstractItemModel>
 #include <QAction>
@@ -176,14 +175,6 @@ void ComicApplet::slotFoundLastStrip(int index, const QString &identifier, const
         cg.writeEntry(QLatin1String("lastStripVisited_") + identifier, false);
         updateComic(suffix);
     }
-}
-
-void ComicApplet::goJump()
-{
-    StripSelector *selector = StripSelectorFactory::create(mCurrent.type());
-    connect(selector, &StripSelector::stripChosen, this, &ComicApplet::updateComic);
-
-    selector->select(mCurrent);
 }
 
 void ComicApplet::storePosition(bool store)

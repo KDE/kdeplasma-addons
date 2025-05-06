@@ -14,6 +14,8 @@ import plasma.applet.org.kde.plasma.comic as Comic
 Item {
     id: root
 
+    signal jumpClicked
+
     implicitWidth: 10
     implicitHeight: comicIdentifier.height
 
@@ -54,7 +56,7 @@ Item {
             }
 
             onClicked: {
-                Plasmoid.goJump();
+                jumpClicked();
             }
 
             PlasmaCore.ToolTipArea {

@@ -88,7 +88,7 @@ PlasmoidItem {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
             text: i18nc("@action", "Jump to Strip…")
             icon.name: "go-jump"
-            onTriggered: plasmoid.goJump()
+            onTriggered: jumpDialog.open()
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
@@ -228,6 +228,7 @@ PlasmoidItem {
                 comicData: mainWindow.comicData
                 showUrl: Plasmoid.configuration.showComicUrl
                 showIdentifier: Plasmoid.configuration.showComicIdentifier
+                onJumpClicked: jumpDialog.open()
             }
 
             PlasmaExtras.PlaceholderMessage {
@@ -268,5 +269,12 @@ PlasmoidItem {
             Plasmoid.configuration.savingDir = currentFolder
             Plasmoid.configuration.writeConfig()
         }
+    }
+
+    Comic.JumpDialog {
+        id: jumpDialog
+        comicData: Plasmoid.comicData
+
+        onAccepted: identifier => Plasmoid.updateComic(identifier)
     }
 }
