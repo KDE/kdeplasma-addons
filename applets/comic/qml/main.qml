@@ -7,6 +7,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Dialogs
 import QtCore
+import QtNetwork as QtNetwork
 
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
@@ -49,6 +50,15 @@ PlasmoidItem {
         running: Plasmoid.configuration.tabIdentifier.length > 0 && mainWindow.comicData.isError
         interval: 5 * 60 * 1000 // every 5 minutes
         onTriggered: Plasmoid.updateComic(comicData.current)
+    }
+
+    Connections {
+        target: QtNetwork.NetworkInformation
+        function onReachabilityChanged() {
+            if (QtNetwork.NetworkInformation.reachability == QtNetwork.NetworkInformation.Reachability.Online && mainWindow.comicData.isError) {
+                Plasmoid.updateComic(mainWindow.comicData.current)
+            }
+        }
     }
 
     KItemModels.KSortFilterProxyModel {

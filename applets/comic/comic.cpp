@@ -17,7 +17,6 @@
 #include <QAction>
 #include <QDebug>
 #include <QDir>
-#include <QNetworkInformation>
 #include <QScreen>
 #include <QSortFilterProxyModel>
 #include <QTimer>
@@ -45,17 +44,6 @@ void ComicApplet::init()
     configChanged();
 
     connect(mEngine, &ComicEngine::requestFinished, this, &ComicApplet::dataUpdated);
-
-    QNetworkInformation::instance()->loadBackendByFeatures(QNetworkInformation::Feature::Reachability);
-    connect(QNetworkInformation::instance(), &QNetworkInformation::reachabilityChanged, this, [this](auto reachability) {
-        if (reachability != QNetworkInformation::Reachability::Online) {
-            return;
-        }
-        if (!mCurrent.isError()) {
-            qCDebug(PLASMA_COMIC) << "Online status changed to true, requesting comic" << mCurrent.id() << mCurrent.current();
-            updateComic(mCurrent.current());
-        }
-    });
 }
 
 void ComicApplet::dataUpdated(const ComicMetaData &data)
