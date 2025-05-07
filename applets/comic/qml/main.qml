@@ -70,7 +70,7 @@ PlasmoidItem {
             text: i18nc("@action comic strip", "&Next Tab with a New Strip")
             icon.name: "go-next-view"
             shortcut: StandardKey.New
-            onTriggered: Plasmoid.showNextNewStrip()
+            onTriggered: mainWindow.fullRepresentationItem.showNextNewStrip()
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.comicData.hasFirst
@@ -132,33 +132,29 @@ PlasmoidItem {
         property alias comicTabbar: comicTabbar
         property alias configNeededPlaceholderVisible: configNeededPlaceholder.visible
 
-        ColumnLayout {
-            anchors.fill: parent
+        function showNextNewStrip() {
+            var firstHighlightedButtonIndex = undefined;
 
-            Connections {
-                target: plasmoid
-
-                function onShowNextNewStrip() {
-                    var firstHighlightedButtonIndex = undefined;
-
-                    for (var i = 0; i < comicTabbar.count; ++i) {
-                        var button = comicTabbar.itemAt(i);
-                        if (button.key !== undefined && button.highlighted == true) {
-                            //key is ordered
-                            if (button.key > comicTabbar.currentItem.key) {
-                                comicTabbar.setCurrentIndex(i);
-                                return;
-                            } else if (firstHighlightedButtonIndex === undefined){
-                                firstHighlightedButtonIndex = button;
-                            }
-                        }
-                    }
-
-                    if (firstHighlightedButtonIndex !== undefined) {
-                        comicTabbar.setCurrentIndex(firstHighlightedButtonIndex);
+            for (var i = 0; i < comicTabbar.count; ++i) {
+                var button = comicTabbar.itemAt(i);
+                if (button.key !== undefined && button.highlighted == true) {
+                    //key is ordered
+                    if (button.key > comicTabbar.currentItem.key) {
+                        comicTabbar.setCurrentIndex(i);
+                        return;
+                    } else if (firstHighlightedButtonIndex === undefined){
+                        firstHighlightedButtonIndex = button;
                     }
                 }
             }
+
+            if (firstHighlightedButtonIndex !== undefined) {
+                comicTabbar.setCurrentIndex(firstHighlightedButtonIndex);
+            }
+        }
+
+        ColumnLayout {
+            anchors.fill: parent
 
             PlasmaComponents3.TabBar {
                 id: comicTabbar

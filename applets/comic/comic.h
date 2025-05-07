@@ -62,7 +62,6 @@ public:
 
 Q_SIGNALS:
     void comicDataChanged();
-    void showNextNewStrip();
     void showActualSizeChanged();
 
 private Q_SLOTS:
