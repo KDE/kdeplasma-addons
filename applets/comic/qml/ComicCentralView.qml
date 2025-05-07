@@ -81,7 +81,9 @@ Item {
                 anchors.centerIn: parent
                 width: parent.width
                 height: parent.height
-                visible: (comicData.isError && fitsInWidget) ?? false
+                visible: (root.comicData.isError && fitsInWidget) ?? false
+                identifierType: root.comicData.type ?? Comic.comicData.StringIdentifier
+                identifier: root.comicData.current
             }
 
             PlasmaExtras.PlaceholderMessage {
@@ -153,6 +155,8 @@ Item {
         id: fullDialog
 
         image: root.comicData.image
-        isError: Plasmoid.comicData.isError ?? false
+        isError: root.comicData.isError ?? false
+        identifier: root.comicData.current
+        identifierType: root.comicData.type ?? Comic.comicData.StringIdentifier
     }
 }

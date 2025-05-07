@@ -18,6 +18,8 @@ PlasmaCore.Dialog {
 
     property alias image: comicPicture.image
     property bool isError
+    property string identifier
+    property int identifierType
 
     flags: Qt.Popup
     visible: false
@@ -81,6 +83,8 @@ PlasmaCore.Dialog {
                 id: errorPlaceholder
                 anchors.centerIn: parent
                 visible: root.isError
+                identifier: root.identifier
+                identifierType: root.identifierType
             }
         }
     }

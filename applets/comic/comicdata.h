@@ -22,6 +22,7 @@ class ComicData
     Q_GADGET
     QML_VALUE_TYPE(comicData)
 
+    Q_PROPERTY(Type type READ typeForQml)
     Q_PROPERTY(QString id READ id)
     Q_PROPERTY(QImage image READ image)
     Q_PROPERTY(QString prev READ prev)
@@ -46,6 +47,13 @@ class ComicData
     Q_PROPERTY(bool ready READ ready)
 
 public:
+    enum class Type { // redefined for QML access, keep in sync with engine/types.h
+        DateIdentifier,
+        NumberIdentifier,
+        StringIdentifier,
+    };
+    Q_ENUM(Type)
+
     ComicData();
 
     void init(const QString &id, const KConfigGroup &config);
@@ -59,6 +67,11 @@ public:
     IdentifierType type() const
     {
         return mType;
+    }
+
+    Type typeForQml() const
+    {
+        return static_cast<Type>(mType);
     }
 
     /**
