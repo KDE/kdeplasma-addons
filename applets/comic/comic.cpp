@@ -23,6 +23,7 @@
 #include <QWindow>
 
 #include <KLocalizedString>
+#include <kconfiggroup.h>
 
 #include "comicmodel.h"
 
@@ -91,23 +92,30 @@ void ComicApplet::positionFullView(QWindow *window)
 
 void ComicApplet::updateUsedComics()
 {
-    loadProviders();
-
     KConfigGroup cg = config();
-    for (int i = 0; i < mModel->rowCount(); ++i) {
-        QModelIndex index = mModel->index(i, 0);
-        if (index.data(ComicModel::Roles::ComicEnabledRole).toBool() && cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0)
-            && !cg.readEntry(QLatin1String("lastStripVisited_") + index.data(ComicModel::Roles::ComicPluginRole).toString(), true)) {
-            mModel->setHighlight(index, true);
+    const bool enabledProvidersChanged = cg.readEntry("tabIdentifier", QStringList()) != mModel->enabledProviders();
+    const int checkInterval = cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0);
+
+    if (enabledProvidersChanged) {
+        loadProviders();
+
+        KConfigGroup cg = config();
+        for (int i = 0; i < mModel->rowCount(); ++i) {
+            QModelIndex index = mModel->index(i, 0);
+            if (index.data(ComicModel::Roles::ComicEnabledRole).toBool() && checkInterval
+                && !cg.readEntry(QLatin1String("lastStripVisited_") + index.data(ComicModel::Roles::ComicPluginRole).toString(), true)) {
+                mModel->setHighlight(index, true);
+            }
         }
     }
 
-    delete mCheckNewStrips;
-    mCheckNewStrips = nullptr;
-    if (cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0)) {
-        mCheckNewStrips =
-            new CheckNewStrips(cg.readEntry("tabIdentifier", QStringList()), mEngine, cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0), this);
-        connect(mCheckNewStrips, &CheckNewStrips::lastStrip, this, &ComicApplet::slotFoundLastStrip);
+    if (enabledProvidersChanged || (mCheckNewStrips && checkInterval != mCheckNewStrips->minutes())) {
+        delete mCheckNewStrips;
+        mCheckNewStrips = nullptr;
+        if (checkInterval) {
+            mCheckNewStrips = new CheckNewStrips(cg.readEntry("tabIdentifier", QStringList()), mEngine, checkInterval, this);
+            connect(mCheckNewStrips, &CheckNewStrips::lastStrip, this, &ComicApplet::slotFoundLastStrip);
+        }
     }
 }
 

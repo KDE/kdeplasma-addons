@@ -122,6 +122,11 @@ QStringList ComicModel::checkedProviders()
     return checkedProviders;
 }
 
+QStringList ComicModel::enabledProviders() const
+{
+    return mEnabledProviders;
+}
+
 void ComicModel::setEnabledProviders(const QStringList &enabledProviders)
 {
     mEnabledProviders = enabledProviders;

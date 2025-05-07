@@ -21,6 +21,11 @@ class CheckNewStrips : public QObject
 public:
     CheckNewStrips(const QStringList &identifiers, ComicEngine *engine, int minutes, QObject *parent = nullptr);
 
+    int minutes() const
+    {
+        return mMinutes;
+    }
+
 Q_SIGNALS:
     /**
      * @param index of the identifier in identifiers
