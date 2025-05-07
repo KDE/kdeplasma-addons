@@ -61,6 +61,7 @@ PlasmaCore.Dialog {
                 id: comicPicture
 
                 anchors.fill: parent
+                visible: !root.isError
 
                 smooth: true
                 fillMode: QImageItem.PreserveAspectFit
@@ -76,13 +77,10 @@ PlasmaCore.Dialog {
                 }
             }
 
-            PlasmaExtras.PlaceholderMessage {
+            ErrorPlaceholder {
                 id: errorPlaceholder
                 anchors.centerIn: parent
                 visible: root.isError
-                iconName: "error-symbolic"
-                text: i18nc("@info placeholdermessage if comic loading failed", "Could not load comic")
-                explanation: i18nc("@info placeholdermessage explanation", "Try again later, or choose a different comic")
             }
         }
     }

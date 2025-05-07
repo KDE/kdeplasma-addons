@@ -9,6 +9,7 @@ plasma_add_applet(org.kde.plasma.comic
         qml/ComicCentralView.qml
         qml/configBehavior.qml
         qml/configComics.qml
+        qml/ErrorPlaceholder.qml
         qml/FullViewWidget.qml
         qml/ImageWidget.qml
         qml/main.qml

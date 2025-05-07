@@ -74,7 +74,7 @@ Item {
                 isTopToBottom: root.comicData.isTopToBottom ?? false
             }
 
-            PlasmaExtras.PlaceholderMessage {
+            ErrorPlaceholder {
                 id: errorPlaceholder
                 // intentionally not checking width, it will prevent attempts to fit with word wrap
                 property bool fitsInWidget: implicitHeight <= comicImageArea.height
@@ -82,9 +82,6 @@ Item {
                 width: parent.width
                 height: parent.height
                 visible: (comicData.isError && fitsInWidget) ?? false
-                iconName: "error-symbolic"
-                text: i18nc("@info placeholdermessage if comic loading failed", "Could not load comic")
-                explanation: i18nc("@info placeholdermessage explanation", "Try again later, or choose a different comic")
             }
 
             PlasmaExtras.PlaceholderMessage {
