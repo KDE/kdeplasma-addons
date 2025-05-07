@@ -71,7 +71,6 @@ private Q_SLOTS:
 
 public Q_SLOTS:
     void configChanged() override;
-    void saveConfig();
     Q_INVOKABLE void updateComic(const QString &identifierSuffix = QString());
 
 private:

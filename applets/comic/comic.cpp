@@ -162,12 +162,6 @@ void ComicApplet::configChanged()
     mEngine->setMaxComicLimit(cg.readEntry("maxComicLimit", 29));
 }
 
-void ComicApplet::saveConfig()
-{
-    KConfigGroup cg = config();
-    cg.writeEntry("comic", mCurrent.id());
-}
-
 void ComicApplet::slotFoundLastStrip(int index, const QString &identifier, const QString &suffix)
 {
     Q_UNUSED(index)

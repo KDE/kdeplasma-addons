@@ -24,8 +24,6 @@ KCM.SimpleKCM {
 
     function saveConfig() {
         root.cfg_tabIdentifier = Plasmoid.availableComicsModel.checkedProviders();
-        Plasmoid.saveConfig();
-        Plasmoid.configChanged();
     }
 
     Kirigami.FormLayout {
