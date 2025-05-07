@@ -6,6 +6,7 @@
 
 #include "comicdata.h"
 
+#include <KIO/OpenUrlJob>
 #include <KLocalizedString>
 
 ComicData::ComicData()
@@ -99,4 +100,25 @@ void ComicData::setData(const ComicMetaData &data)
     mIsTopToBottom = data.isTopToBottom;
 
     save();
+}
+
+bool ComicData::saveImage(const QUrl &fileUrl)
+{
+    if (!fileUrl.isValid()) {
+        return false;
+    }
+
+    return mImage.save(fileUrl.toLocalFile(), "PNG");
+}
+
+void ComicData::launchWebsite()
+{
+    auto *job = new KIO::OpenUrlJob(mWebsiteUrl);
+    job->start();
+}
+
+void ComicData::launchShop()
+{
+    auto *job = new KIO::OpenUrlJob(mShopUrl);
+    job->start();
 }

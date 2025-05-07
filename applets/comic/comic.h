@@ -49,13 +49,10 @@ public:
     void setShowActualSize(bool show);
 
     Q_INVOKABLE bool urlExists(const QUrl &url);
-    Q_INVOKABLE bool saveImage(const QUrl &fileUrl);
     Q_INVOKABLE void storePosition(bool store);
     Q_INVOKABLE void tabChanged(const QString &newIdentifier);
     Q_INVOKABLE void loadProviders();
     Q_INVOKABLE void positionFullView(QWindow *window);
-    Q_INVOKABLE void shop();
-    Q_INVOKABLE void website();
 
     // End for QML
 

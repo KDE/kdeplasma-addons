@@ -96,7 +96,7 @@ Item {
             }
 
             onClicked: {
-                Plasmoid.shop();
+                root.comicData.launchWebsite();
             }
 
             PlasmaCore.ToolTipArea {

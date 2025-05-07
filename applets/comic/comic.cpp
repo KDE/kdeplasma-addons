@@ -23,7 +23,6 @@
 #include <QTimer>
 #include <QWindow>
 
-#include <KIO/OpenUrlJob>
 #include <KLocalizedString>
 
 #include "comicmodel.h"
@@ -182,18 +181,6 @@ void ComicApplet::storePosition(bool store)
     mCurrent.storePosition(store);
 }
 
-void ComicApplet::website()
-{
-    auto *job = new KIO::OpenUrlJob(mCurrent.websiteUrl());
-    job->start();
-}
-
-void ComicApplet::shop()
-{
-    auto *job = new KIO::OpenUrlJob(mCurrent.shopUrl());
-    job->start();
-}
-
 void ComicApplet::updateComic(const QString &identifierSuffix)
 {
     const QString id = mCurrent.id();
@@ -214,15 +201,6 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
         qCWarning(PLASMA_COMIC) << "Either no identifier was specified or the engine could not be created:"
                                 << "id" << id;
     }
-}
-
-bool ComicApplet::saveImage(const QUrl &fileUrl)
-{
-    if (!fileUrl.isValid()) {
-        return false;
-    }
-
-    return mCurrent.image().save(fileUrl.toLocalFile(), "PNG");
 }
 
 void ComicApplet::slotShowActualSize(bool scale)

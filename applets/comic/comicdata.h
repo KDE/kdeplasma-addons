@@ -52,6 +52,10 @@ public:
 
     void setData(const ComicMetaData &data);
 
+    Q_INVOKABLE bool saveImage(const QUrl &fileUrl);
+    Q_INVOKABLE void launchShop();
+    Q_INVOKABLE void launchWebsite();
+
     IdentifierType type() const
     {
         return mType;

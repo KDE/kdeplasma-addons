@@ -93,12 +93,12 @@ PlasmoidItem {
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
             text: i18nc("@action", "Visit the Website")
-            onTriggered: plasmoid.website()
+            onTriggered: mainWindow.comicData.launchWebsite()
         },
         PlasmaCore.Action {
-            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.comicData.shopUrl !== ""
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.comicData.shopUrl.toString() !== ""
             text: i18nc("@action", "Visit the Shop &Website")
-            onTriggered: plasmoid.shop()
+            onTriggered: mainWindow.comicData.launchShop()
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
@@ -265,7 +265,7 @@ PlasmoidItem {
         }
 
         onAccepted: {
-            Plasmoid.saveImage(selectedFile)
+            mainWindow.comicData.saveImage(selectedFile)
             Plasmoid.configuration.savingDir = currentFolder
             Plasmoid.configuration.writeConfig()
         }
