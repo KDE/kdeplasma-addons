@@ -66,12 +66,12 @@ public:
 
     IdentifierType type() const
     {
-        return mType;
+        return mComicMetaData.identifierType;
     }
 
     Type typeForQml() const
     {
-        return static_cast<Type>(mType);
+        return static_cast<Type>(mComicMetaData.identifierType);
     }
 
     /**
@@ -97,7 +97,7 @@ public:
      */
     QString prev() const
     {
-        return mPrev;
+        return mComicMetaData.previousIdentifier;
     }
 
     /**
@@ -113,7 +113,7 @@ public:
      */
     QString next() const
     {
-        return mNext;
+        return mComicMetaData.nextIdentifier;
     }
 
     QString currentReadable() const
@@ -126,22 +126,22 @@ public:
      */
     QString first() const
     {
-        return mFirst;
+        return mComicMetaData.firstStripIdentifier;
     }
 
     bool hasNext() const
     {
-        return !mNext.isEmpty();
+        return !mComicMetaData.nextIdentifier.isEmpty();
     }
 
     bool hasPrev() const
     {
-        return !mPrev.isEmpty();
+        return !mComicMetaData.previousIdentifier.isEmpty();
     }
 
     bool hasFirst() const
     {
-        return !mFirst.isEmpty();
+        return !mComicMetaData.firstStripIdentifier.isEmpty();
     }
 
     bool hasStored() const
@@ -151,56 +151,52 @@ public:
 
     bool hasImage() const
     {
-        return !mImage.isNull();
+        return !mComicMetaData.image.isNull();
     }
 
     QString additionalText() const
     {
-        return mAdditionalText;
+        return mComicMetaData.additionalText;
     }
 
     QString title() const
     {
-        return mTitle;
-    }
-    void setTitle(const QString &title)
-    {
-        mTitle = title;
+        return mComicMetaData.providerName;
     }
 
     QString stripTitle() const
     {
-        return mStripTitle;
+        return mComicMetaData.stripTitle;
     }
 
     QUrl websiteUrl() const
     {
-        return mWebsiteUrl;
+        return mComicMetaData.websiteUrl;
     }
 
     QString websiteHost() const
     {
-        return mWebsiteUrl.host();
+        return mComicMetaData.websiteUrl.host();
     }
 
     QUrl imageUrl() const
     {
-        return mImageUrl;
+        return mComicMetaData.imageUrl;
     }
 
     QUrl shopUrl() const
     {
-        return mShopUrl;
+        return mComicMetaData.shopUrl;
     }
 
     QString author() const
     {
-        return mAuthor;
+        return mComicMetaData.comicAuthor;
     }
 
     QImage image() const
     {
-        return mImage;
+        return mComicMetaData.image;
     }
 
     bool showActualSize() const
@@ -210,12 +206,12 @@ public:
 
     bool isLeftToRight() const
     {
-        return mIsLeftToRight;
+        return mComicMetaData.isLeftToRight;
     }
 
     bool isTopToBottom() const
     {
-        return mIsTopToBottom;
+        return mComicMetaData.isTopToBottom;
     }
 
     bool storePosition() const
@@ -242,7 +238,7 @@ public:
 
     bool isError() const
     {
-        return mIsError;
+        return mComicMetaData.error;
     }
 
     void save();
@@ -251,35 +247,19 @@ private:
     void load();
 
 private:
-    IdentifierType mType;
+    ComicMetaData mComicMetaData;
     QString mId;
-    QString mFirst;
     QString mLast;
     QString mCurrent;
-    QString mNext;
-    QString mPrev;
     QString mStored;
     QString mCurrentReadable;
-
-    QString mAuthor;
-    QString mTitle;
-    QString mStripTitle;
-    QString mAdditionalText;
-    QUrl mWebsiteUrl;
-    QUrl mImageUrl;
-    QUrl mShopUrl;
-
-    QImage mImage;
 
     // only applicable if the comic is of type Number
     int mFirstStripNum = 0;
     int mMaxStripNum = 0;
 
     bool mShowActualSize = false;
-    bool mIsLeftToRight = false;
-    bool mIsTopToBottom = false;
     bool mReady = false;
-    bool mIsError = false;
 
     KConfigGroup mCfg;
 };

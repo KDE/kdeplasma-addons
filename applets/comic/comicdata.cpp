@@ -54,23 +54,14 @@ void ComicData::storePosition(bool store)
 
 void ComicData::setData(const ComicMetaData &data)
 {
-    if (!data.error) {
-        mImage = data.image;
-        mAdditionalText = data.additionalText;
+    mComicMetaData = data;
+
+    if (data.error) {
+        mComicMetaData.image = QImage();
+        mComicMetaData.additionalText = QString();
+    } else {
         mReady = true;
     }
-
-    mPrev = data.previousIdentifier;
-    mNext = data.nextIdentifier;
-    mIsError = data.error;
-    mWebsiteUrl = data.websiteUrl;
-    mImageUrl = data.imageUrl;
-    mShopUrl = data.shopUrl;
-    mFirst = data.firstStripIdentifier;
-    mStripTitle = data.stripTitle;
-    mAuthor = data.comicAuthor;
-    mTitle = data.providerName;
-    mType = data.identifierType;
 
     QString temp = data.identifier;
     mCurrent = temp.remove(mId + QLatin1Char(':'));
@@ -81,23 +72,19 @@ void ComicData::setData(const ComicMetaData &data)
     }
 
     mCurrentReadable.clear();
-    if (mType == IdentifierType::NumberIdentifier) {
+    if (mComicMetaData.identifierType == IdentifierType::NumberIdentifier) {
         mCurrentReadable = i18nc("an abbreviation for Number", "# %1", mCurrent);
         int tempNum = mCurrent.toInt();
         if (mMaxStripNum < tempNum) {
             mMaxStripNum = tempNum;
         }
-
-        temp = mFirst.remove(mId + QLatin1Char(':'));
+        temp = mComicMetaData.firstStripIdentifier.remove(mId + QLatin1Char(':'));
         mFirstStripNum = temp.toInt();
-    } else if (mType == IdentifierType::DateIdentifier && QDate::fromString(temp, QStringLiteral("yyyy-MM-dd")).isValid()) {
+    } else if (mComicMetaData.identifierType == IdentifierType::DateIdentifier && QDate::fromString(temp, QStringLiteral("yyyy-MM-dd")).isValid()) {
         mCurrentReadable = mCurrent;
-    } else if (mType == IdentifierType::StringIdentifier) {
+    } else if (mComicMetaData.identifierType == IdentifierType::StringIdentifier) {
         mCurrentReadable = mCurrent;
     }
-
-    mIsLeftToRight = data.isLeftToRight;
-    mIsTopToBottom = data.isTopToBottom;
 
     save();
 }
@@ -108,17 +95,17 @@ bool ComicData::saveImage(const QUrl &fileUrl)
         return false;
     }
 
-    return mImage.save(fileUrl.toLocalFile(), "PNG");
+    return mComicMetaData.image.save(fileUrl.toLocalFile(), "PNG");
 }
 
 void ComicData::launchWebsite()
 {
-    auto *job = new KIO::OpenUrlJob(mWebsiteUrl);
+    auto *job = new KIO::OpenUrlJob(mComicMetaData.websiteUrl);
     job->start();
 }
 
 void ComicData::launchShop()
 {
-    auto *job = new KIO::OpenUrlJob(mShopUrl);
+    auto *job = new KIO::OpenUrlJob(mComicMetaData.shopUrl);
     job->start();
 }
