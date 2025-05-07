@@ -68,7 +68,6 @@ Q_SIGNALS:
 private Q_SLOTS:
     void slotFoundLastStrip(int index, const QString &identifier, const QString &suffix);
     void slotShowActualSize(bool show);
-    void retryRequest();
 
 public Q_SLOTS:
     void configChanged() override;
@@ -85,7 +84,6 @@ private:
 
     QString mOldSource;
     CheckNewStrips *mCheckNewStrips;
-    QTimer *mRetryTimer;
     ComicEngine *const mEngine;
 
     ComicData mCurrent;

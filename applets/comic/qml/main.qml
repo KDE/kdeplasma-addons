@@ -44,6 +44,13 @@ PlasmoidItem {
 
     }
 
+    Timer {
+        id: retryTimer
+        running: Plasmoid.configuration.tabIdentifier.length > 0 && mainWindow.comicData.isError
+        interval: 5 * 60 * 1000 // every 5 minutes
+        onTriggered: Plasmoid.updateComic(comicData.current)
+    }
+
     KItemModels.KSortFilterProxyModel {
         id: enabledComicsModel
         sourceModel: Plasmoid.availableComicsModel

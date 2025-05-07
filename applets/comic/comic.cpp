@@ -39,17 +39,12 @@ ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVa
 
 void ComicApplet::init()
 {
-    mRetryTimer = new QTimer(this);
-    mRetryTimer->setInterval(5 * 60 * 1000); // every 5 minutes
-
     configChanged();
 
     KConfigGroup cg = config();
     QStringList tabIdentifier = cg.readEntry("tabIdentifier", QStringList());
 
     mModel = new ComicModel(mEngine, tabIdentifier, this);
-
-    connect(mRetryTimer, &QTimer::timeout, this, &ComicApplet::retryRequest);
 
     updateUsedComics();
 
@@ -150,13 +145,6 @@ void ComicApplet::tabChanged(const QString &identifier)
     }
 }
 
-void ComicApplet::retryRequest()
-{
-    if (!mCurrent.hasImage()) {
-        updateComic(mCurrent.stored());
-    }
-}
-
 void ComicApplet::configChanged()
 {
     KConfigGroup cg = config();
@@ -172,11 +160,6 @@ void ComicApplet::configChanged()
     mCurrent.init(id, cg);
 
     mEngine->setMaxComicLimit(cg.readEntry("maxComicLimit", 29));
-    if (tabIdentifier.isEmpty()) {
-        mRetryTimer->stop();
-    } else {
-        mRetryTimer->start();
-    }
 }
 
 void ComicApplet::saveConfig()
