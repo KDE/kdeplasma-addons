@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-06 00:42+0000\n"
+"POT-Creation-Date: 2025-05-08 00:43+0000\n"
 "PO-Revision-Date: 2019-11-01 22:21+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -24,7 +24,7 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "nr %1"
 
-#: qml/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:64
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Jump to strip..."
@@ -32,7 +32,7 @@ msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Hüppa koomiksile..."
 
-#: qml/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -131,13 +131,13 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Ainult hiirekursori all"
 
-#: qml/configGeneral.qml:38
+#: qml/configGeneral.qml:36
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Koomiks:"
 
-#: qml/configGeneral.qml:58
+#: qml/configGeneral.qml:56
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Get New Comics..."
@@ -145,19 +145,19 @@ msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Hangi uusi koomikseid..."
 
-#: qml/configGeneral.qml:69
+#: qml/configGeneral.qml:67
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Hiire keskmise nupu klõps koomiksil näitab seda originaalsuuruses"
 
-#: qml/configGeneral.qml:77
+#: qml/configGeneral.qml:75
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Uute koomiksite kontrollimine:"
 
-#: qml/configGeneral.qml:85
+#: qml/configGeneral.qml:83
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -165,25 +165,25 @@ msgid_plural "minutes"
 msgstr[0] " minuti järel"
 msgstr[1] " minuti järel"
 
-#: qml/main.qml:63
+#: qml/main.qml:70
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Järgmine kaart uue koomiksiga"
 
-#: qml/main.qml:70
+#: qml/main.qml:77
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "&Hüppa esimesele koomiksile"
 
-#: qml/main.qml:76
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Hü&ppa tänasele koomiksile"
 
-#: qml/main.qml:82
+#: qml/main.qml:89
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "Jump to Strip..."
@@ -191,7 +191,7 @@ msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Hüppa koomiksile..."
 
-#: qml/main.qml:88
+#: qml/main.qml:95
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "Visit the Shop &Website"
@@ -199,13 +199,13 @@ msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Külasta kodule&hekülge"
 
-#: qml/main.qml:93
+#: qml/main.qml:100
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Külasta kodule&hekülge"
 
-#: qml/main.qml:98
+#: qml/main.qml:105
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "&Save Comic As..."
@@ -213,32 +213,32 @@ msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Salvesta koomiks kui..."
 
-#: qml/main.qml:107
+#: qml/main.qml:114
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Te&gelik suurus"
 
-#: qml/main.qml:115
+#: qml/main.qml:122
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Ak&tiivse asukoha salvestamine"
 
-#: qml/main.qml:236
+#: qml/main.qml:240
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Koomiksi seadistamine"
 
-#: qml/main.qml:239
+#: qml/main.qml:243
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:250
+#: qml/main.qml:254
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

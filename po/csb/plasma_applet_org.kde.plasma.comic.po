@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-06 00:42+0000\n"
+"POT-Creation-Date: 2025-05-08 00:43+0000\n"
 "PO-Revision-Date: 2009-06-29 20:47+0200\n"
 "Last-Translator: Michôł Òstrowsczi <michol@linuxcsb.org>\n"
 "Language-Team: Kashubian <i18n-csb@linuxcsb.org>\n"
@@ -27,14 +27,14 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: qml/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:64
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Skóknié do sztripka..."
 
-#: qml/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:104
 #, fuzzy, kde-format
 #| msgid "Visit the comic website"
 msgctxt "@info:tooltip"
@@ -141,21 +141,21 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr ""
 
-#: qml/configGeneral.qml:38
+#: qml/configGeneral.qml:36
 #, fuzzy, kde-format
 #| msgid "Comic"
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Kòmiks"
 
-#: qml/configGeneral.qml:58
+#: qml/configGeneral.qml:56
 #, fuzzy, kde-format
 #| msgid "&Get New Comics..."
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "&Zladëjë nowé kòmiksë..."
 
-#: qml/configGeneral.qml:69
+#: qml/configGeneral.qml:67
 #, fuzzy, kde-format
 #| msgid "&Middle-click on the comic to show it at its original size"
 msgctxt "@option:check"
@@ -163,14 +163,14 @@ msgid "Middle-click on comic to display at original size"
 msgstr ""
 "&Wcësni wëstrzédną knąpã mëszë na kòmiksu żebë pòkazac jegò òriginalną miarã"
 
-#: qml/configGeneral.qml:77
+#: qml/configGeneral.qml:75
 #, fuzzy, kde-format
 #| msgid "Choose a comic strip"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Wëbiérzë kòmiksowi sztripk"
 
-#: qml/configGeneral.qml:85
+#: qml/configGeneral.qml:83
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -179,61 +179,61 @@ msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
 
-#: qml/main.qml:63
+#: qml/main.qml:70
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr ""
 
-#: qml/main.qml:70
+#: qml/main.qml:77
 #, fuzzy, kde-format
 #| msgid "Jump to &first Strip"
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Skóknié do &pierszégò sztripka"
 
-#: qml/main.qml:76
+#: qml/main.qml:83
 #, fuzzy, kde-format
 #| msgid "Jump to &current Strip"
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Skóknié do biéżnégò sztripka"
 
-#: qml/main.qml:82
+#: qml/main.qml:89
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Skóknié do sztripka..."
 
-#: qml/main.qml:88
+#: qml/main.qml:95
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Òbaczë króm &starnë"
 
-#: qml/main.qml:93
+#: qml/main.qml:100
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Òbaczë króm &starnë"
 
-#: qml/main.qml:98
+#: qml/main.qml:105
 #, fuzzy, kde-format
 #| msgid "&Save Comic As..."
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Zapiszë kòmiks jakno..."
 
-#: qml/main.qml:107
+#: qml/main.qml:114
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Aktualnô miara"
 
-#: qml/main.qml:115
+#: qml/main.qml:122
 #, fuzzy, kde-format
 #| msgctxt "@option:check Context menu of comic image"
 #| msgid "Store current &Position"
@@ -241,20 +241,20 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Trzëmôj terné &pòłożenié"
 
-#: qml/main.qml:236
+#: qml/main.qml:240
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Kònfigùracjô kòmiksu"
 
-#: qml/main.qml:239
+#: qml/main.qml:243
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:250
+#: qml/main.qml:254
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

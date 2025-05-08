@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-06 00:42+0000\n"
+"POT-Creation-Date: 2025-05-08 00:43+0000\n"
 "PO-Revision-Date: 2025-04-12 07:01-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -27,13 +27,13 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: qml/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:64
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Saltar para linha..."
 
-#: qml/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -130,19 +130,19 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Somente ao passar o mouse"
 
-#: qml/configGeneral.qml:38
+#: qml/configGeneral.qml:36
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Tirinhas:"
 
-#: qml/configGeneral.qml:58
+#: qml/configGeneral.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Baixar novas tirinhas..."
 
-#: qml/configGeneral.qml:69
+#: qml/configGeneral.qml:67
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
@@ -150,13 +150,13 @@ msgstr ""
 "Clique com o botão do meio do mouse para mostrar o tamanha original da "
 "tirinha"
 
-#: qml/configGeneral.qml:77
+#: qml/configGeneral.qml:75
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Procurar novas tirinhas a cada:"
 
-#: qml/configGeneral.qml:85
+#: qml/configGeneral.qml:83
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -164,73 +164,73 @@ msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minutos"
 
-#: qml/main.qml:63
+#: qml/main.qml:70
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Próxima aba com linha nova"
 
-#: qml/main.qml:70
+#: qml/main.qml:77
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "&Saltar para a primeira linha"
 
-#: qml/main.qml:76
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Saltar &para a linha atual"
 
-#: qml/main.qml:82
+#: qml/main.qml:89
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Saltar para linha..."
 
-#: qml/main.qml:88
+#: qml/main.qml:95
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Visite o site"
 
-#: qml/main.qml:93
+#: qml/main.qml:100
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Visitar o &site da loja"
 
-#: qml/main.qml:98
+#: qml/main.qml:105
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Salvar tirinha como..."
 
-#: qml/main.qml:107
+#: qml/main.qml:114
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Tamanho re&al"
 
-#: qml/main.qml:115
+#: qml/main.qml:122
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Armazenar a &posição atual"
 
-#: qml/main.qml:236
+#: qml/main.qml:240
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Nenhuma tirinha configurada"
 
-#: qml/main.qml:239
+#: qml/main.qml:243
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "Escolher tirinha…"
 
-#: qml/main.qml:250
+#: qml/main.qml:254
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-06 00:42+0000\n"
+"POT-Creation-Date: 2025-05-08 00:43+0000\n"
 "PO-Revision-Date: 2025-05-01 17:27+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -29,13 +29,13 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: qml/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:64
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "跳到其他篇…"
 
-#: qml/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -131,104 +131,104 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "只在游標駐停時顯示"
 
-#: qml/configGeneral.qml:38
+#: qml/configGeneral.qml:36
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "漫畫："
 
-#: qml/configGeneral.qml:58
+#: qml/configGeneral.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "取得新漫畫…"
 
-#: qml/configGeneral.qml:69
+#: qml/configGeneral.qml:67
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "對漫畫按一下中鍵顯示回原始大小"
 
-#: qml/configGeneral.qml:77
+#: qml/configGeneral.qml:75
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "檢查新漫畫的週期："
 
-#: qml/configGeneral.qml:85
+#: qml/configGeneral.qml:83
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
 msgid_plural "minutes"
 msgstr[0] "每分鐘"
 
-#: qml/main.qml:63
+#: qml/main.qml:70
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "下一則新漫畫(&N)"
 
-#: qml/main.qml:70
+#: qml/main.qml:77
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "跳到第一篇(&F)"
 
-#: qml/main.qml:76
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "跳到目前這一篇(&C)"
 
-#: qml/main.qml:82
+#: qml/main.qml:89
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "跳到其他篇…"
 
-#: qml/main.qml:88
+#: qml/main.qml:95
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "造訪網站"
 
-#: qml/main.qml:93
+#: qml/main.qml:100
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "造訪商店網站(&W)"
 
-#: qml/main.qml:98
+#: qml/main.qml:105
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "另存漫畫為(&S)…"
 
-#: qml/main.qml:107
+#: qml/main.qml:114
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "實際大小(&A)"
 
-#: qml/main.qml:115
+#: qml/main.qml:122
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "商店目前位置(&P)"
 
-#: qml/main.qml:236
+#: qml/main.qml:240
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "未設定漫畫"
 
-#: qml/main.qml:239
+#: qml/main.qml:243
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "選擇漫畫…"
 
-#: qml/main.qml:250
+#: qml/main.qml:254
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-06 00:42+0000\n"
+"POT-Creation-Date: 2025-05-08 00:43+0000\n"
 "PO-Revision-Date: 2022-07-22 16:57+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -25,13 +25,13 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: qml/ComicBottomInfo.qml:62
+#: qml/ComicBottomInfo.qml:64
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Jump to strip…"
 
-#: qml/ComicBottomInfo.qml:102
+#: qml/ComicBottomInfo.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -130,31 +130,31 @@ msgctxt "@option:check"
 msgid "Only on hover"
 msgstr "Only on hover"
 
-#: qml/configGeneral.qml:38
+#: qml/configGeneral.qml:36
 #, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
 msgstr "Comics:"
 
-#: qml/configGeneral.qml:58
+#: qml/configGeneral.qml:56
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
 msgstr "Get New Comics…"
 
-#: qml/configGeneral.qml:69
+#: qml/configGeneral.qml:67
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Middle-click on comic to display at original size"
 
-#: qml/configGeneral.qml:77
+#: qml/configGeneral.qml:75
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Check for new comics every:"
 
-#: qml/configGeneral.qml:85
+#: qml/configGeneral.qml:83
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -162,73 +162,73 @@ msgid_plural "minutes"
 msgstr[0] "minute"
 msgstr[1] "minutes"
 
-#: qml/main.qml:63
+#: qml/main.qml:70
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Next Tab with a New Strip"
 
-#: qml/main.qml:70
+#: qml/main.qml:77
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Jump to &First Strip"
 
-#: qml/main.qml:76
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Jump to &Current Strip"
 
-#: qml/main.qml:82
+#: qml/main.qml:89
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Jump to Strip…"
 
-#: qml/main.qml:88
+#: qml/main.qml:95
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Visit the Website"
 
-#: qml/main.qml:93
+#: qml/main.qml:100
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Visit the Shop &Website"
 
-#: qml/main.qml:98
+#: qml/main.qml:105
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Save Comic As…"
 
-#: qml/main.qml:107
+#: qml/main.qml:114
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Actual Size"
 
-#: qml/main.qml:115
+#: qml/main.qml:122
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Store Current &Position"
 
-#: qml/main.qml:236
+#: qml/main.qml:240
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: qml/main.qml:239
+#: qml/main.qml:243
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:250
+#: qml/main.qml:254
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
