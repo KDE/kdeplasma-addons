@@ -82,6 +82,8 @@ KCM.ScrollViewKCM {
 
             Controls.SpinBox {
                 id: checkNewComicStripsInterval
+                from: 0
+                to: 999
                 stepSize: 1
             }
 

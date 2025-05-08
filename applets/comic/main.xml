@@ -41,7 +41,7 @@
         </entry>
         <entry name="checkNewComicStripsIntervall" type="Int">
             <label>The time in minutes between checking for new comic strips</label>
-            <default>30</default>
+            <default>180</default>
         </entry>
         <entry name="maxComicLimit" type="Int">
             <label>The number of strips to cache per comic.</label>

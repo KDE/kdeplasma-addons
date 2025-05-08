@@ -48,7 +48,7 @@ PlasmoidItem {
     Timer {
         id: retryTimer
         running: Plasmoid.configuration.tabIdentifier.length > 0 && mainWindow.comicData.isError
-        interval: 5 * 60 * 1000 // every 5 minutes
+        interval: 30 * 60 * 1000 // every 30 minutes
         onTriggered: Plasmoid.updateComic(comicData.current)
     }
 
