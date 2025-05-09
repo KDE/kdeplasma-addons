@@ -13,13 +13,8 @@
 #include "checknewstrips.h"
 #include "comic_debug.h"
 
-#include <QAbstractItemModel>
-#include <QAction>
-#include <QDebug>
 #include <QDir>
 #include <QScreen>
-#include <QSortFilterProxyModel>
-#include <QTimer>
 #include <QWindow>
 
 #include <KLocalizedString>

@@ -12,7 +12,6 @@
 #ifndef COMIC_H
 #define COMIC_H
 
-#include <QDate>
 #include <QUrl>
 
 #include <Plasma/Applet>
@@ -22,12 +21,6 @@
 
 class CheckNewStrips;
 class ComicModel;
-class QAction;
-class KJob;
-class QAction;
-class QSortFilterProxyModel;
-class QTimer;
-class SavingDir;
 
 class ComicApplet : public Plasma::Applet
 {
