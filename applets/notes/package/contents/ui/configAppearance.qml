@@ -20,6 +20,8 @@ KCM.GridViewKCM {
     property string cfg_color
     property alias cfg_fontSize: fontSizeSpinBox.value
 
+    extraFooterTopPadding: true
+
     header: Kirigami.FormLayout {
         QQC2.SpinBox {
             id: fontSizeSpinBox
