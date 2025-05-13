@@ -29,11 +29,10 @@ msgid "Add More Dictionaries"
 msgstr "Přidat více slovníků"
 
 #: package/contents/ui/ConfigDictionaries.qml:21
-#, fuzzy, kde-format
-#| msgid "Add More…"
+#, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
-msgstr "Přidat další..."
+msgstr ""
 
 #: package/contents/ui/ConfigDictionaries.qml:86
 #, kde-format

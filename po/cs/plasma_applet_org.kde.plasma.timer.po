@@ -120,11 +120,10 @@ msgid "Show notification text:"
 msgstr "Zobrazit text upozornění:"
 
 #: package/contents/ui/configTimes.qml:23
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
-msgstr "Přidat"
+msgstr ""
 
 #: package/contents/ui/configTimes.qml:82
 #, kde-format

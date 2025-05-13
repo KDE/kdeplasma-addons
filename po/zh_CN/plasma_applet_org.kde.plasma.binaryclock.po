@@ -29,7 +29,7 @@ msgstr "外观"
 msgctxt ""
 "@title:group The things being potentially shown are lights and seconds"
 msgid "Show:"
-msgstr ""
+msgstr "显示："
 
 #: package/contents/ui/configGeneral.qml:30
 #: package/contents/ui/configGeneral.qml:60

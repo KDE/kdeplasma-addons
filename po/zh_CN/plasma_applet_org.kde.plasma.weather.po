@@ -427,13 +427,13 @@ msgctxt ""
 "possible! Omitting or changing words is fine as long as the original meaning "
 "is retained."
 msgid "Set up Weather Report…"
-msgstr ""
+msgstr "设置天气报告…"
 
 #: package/contents/ui/main.qml:371
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
-msgstr ""
+msgstr "点击选择一个位置并监视它的天气"
 
 #: package/contents/ui/main.qml:380
 #, kde-format
@@ -561,7 +561,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgctxt "@info:tooltip %1 is the translated plasmoid name"
-#~ msgid "Click to configure %1"
-#~ msgstr "点击配置 %1"

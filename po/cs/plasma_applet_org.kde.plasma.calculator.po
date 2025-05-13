@@ -18,12 +18,10 @@ msgstr ""
 "X-Generator: Lokalize 22.12.2\n"
 
 #: package/contents/ui/main.qml:119
-#, fuzzy, kde-format
-#| msgctxt "@label calculation result"
-#| msgid "Result"
+#, kde-format
 msgctxt "@info accessible result of calculation"
 msgid "Result is %1"
-msgstr "Výsledek"
+msgstr ""
 
 #: package/contents/ui/main.qml:221
 #, kde-format

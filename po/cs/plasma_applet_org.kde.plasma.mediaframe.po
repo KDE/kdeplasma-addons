@@ -177,11 +177,10 @@ msgid "Add Files…"
 msgstr "Přidat soubory…"
 
 #: package/contents/ui/ConfigPaths.qml:82
-#, fuzzy, kde-format
-#| msgid "Remove path"
+#, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
-msgstr "Odstranit cestu"
+msgstr ""
 
 #: package/contents/ui/ConfigPaths.qml:92
 #, kde-format

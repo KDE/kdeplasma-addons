@@ -1,21 +1,21 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Kheyyam Gojayev <xxmn77@gmail.com>, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2021, 2022, 2023, 2025 Kheyyam Gojayev <xxmn77@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-19 00:42+0000\n"
-"PO-Revision-Date: 2023-02-19 17:19+0400\n"
-"Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
+"PO-Revision-Date: 2025-05-12 17:54+0400\n"
+"Last-Translator: linux <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -27,7 +27,7 @@ msgstr "Əsas"
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
-msgstr ""
+msgstr "Orta düymə ilə rəng kodunu kopyalayın"
 
 #: package/contents/ui/CompactRepresentation.qml:77
 #, kde-format
@@ -115,7 +115,7 @@ msgstr "Rənglər yoxdur"
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
+msgstr "Qrafik effektlər söndürüldüyündə rəng seçimi əlçatmazdır"
 
 #: package/contents/ui/main.qml:186
 #, kde-format
@@ -123,6 +123,7 @@ msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
+"Qrafik effektlər əl ilə söndürülüb və ya işlək tətbiq tərəfindən əngəllənib"
 
 #: package/contents/ui/main.qml:193
 #, kde-format
@@ -134,7 +135,7 @@ msgstr "Rəng seçmək"
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
-msgstr ""
+msgstr "Qrafik effektləri tənzimləmək"
 
 #: package/contents/ui/main.qml:387
 #, kde-format

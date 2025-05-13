@@ -177,8 +177,7 @@ msgid "Add Files…"
 msgstr "添加文件…"
 
 #: package/contents/ui/ConfigPaths.qml:82
-#, fuzzy, kde-format
-#| msgid "Remove path"
+#, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "移除路径"
@@ -187,13 +186,13 @@ msgstr "移除路径"
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
-msgstr ""
+msgstr "没有配置媒体"
 
 #: package/contents/ui/ConfigPaths.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
-msgstr ""
+msgstr "添加文件或文件夹以在挂件中显示它们。"
 
 #: package/contents/ui/ConfigPaths.qml:99
 #, kde-format

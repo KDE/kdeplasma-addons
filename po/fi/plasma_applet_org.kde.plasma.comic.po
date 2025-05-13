@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-10 00:44+0000\n"
+"POT-Creation-Date: 2025-05-13 00:43+0000\n"
 "PO-Revision-Date: 2022-08-05 11:17+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -168,74 +168,74 @@ msgid_plural "minutes"
 msgstr[0] "minuutin välein"
 msgstr[1] "minuutin välein"
 
-#: qml/main.qml:70
+#: qml/main.qml:80
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "S&euraava välilehti, jossa on uusi sarjakuva"
 
-#: qml/main.qml:77
+#: qml/main.qml:87
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Siirry &ensimmäiseen sarjakuvaan"
 
-#: qml/main.qml:83
+#: qml/main.qml:93
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Siirry &nykyiseen sarjakuvaan"
 
-#: qml/main.qml:89
+#: qml/main.qml:99
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Siirry sarjakuvaan…"
 
-#: qml/main.qml:95
+#: qml/main.qml:105
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Käy sivustolla"
 
-#: qml/main.qml:100
+#: qml/main.qml:110
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Vieraile &kauppasivustossa"
 
-#: qml/main.qml:105
+#: qml/main.qml:115
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Tallenna sarjakuva nimellä…"
 
-#: qml/main.qml:114
+#: qml/main.qml:124
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Todellinen koko"
 
-#: qml/main.qml:122
+#: qml/main.qml:132
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Tallenna nykyinen si&jainti"
 
-#: qml/main.qml:240
+#: qml/main.qml:250
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Sarjakuva-asetukset"
 
-#: qml/main.qml:243
+#: qml/main.qml:253
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:254
+#: qml/main.qml:264
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

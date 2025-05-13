@@ -1,21 +1,21 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Kheyyam <xxmn77@gmail.com>, 2022.
+# SPDX-FileCopyrightText: 2022, 2025 Kheyyam <xxmn77@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-25 00:43+0000\n"
-"PO-Revision-Date: 2022-11-11 17:48+0400\n"
-"Last-Translator: Kheyyam <xxmn77@gmail.com>\n"
+"PO-Revision-Date: 2025-05-12 18:03+0400\n"
+"Last-Translator: linux <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
 "Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -27,25 +27,25 @@ msgstr "Əsas"
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "Xarici görünüş"
 
 #: package/contents/ui/ConfigAppearance.qml:33
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
-msgstr ""
+msgstr "Nişan"
 
 #: package/contents/ui/ConfigAppearance.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
-msgstr ""
+msgstr "Veb-sayt nişanları"
 
 #: package/contents/ui/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
-msgstr ""
+msgstr "Veb-bələdçi nişanını dəyişmək"
 
 #: package/contents/ui/ConfigAppearance.qml:58
 #, kde-format
@@ -54,56 +54,56 @@ msgid ""
 "Current icon is %1. Click to open menu to change the current icon or reset "
 "to the default icon."
 msgstr ""
+"%1 hazırkı nişandır. Hazırkı nişanı dəyişmək və ya ilkin nişanı qaytarmağa "
+"imkan verən menyunu açmaq üçün vurun."
 
 #: package/contents/ui/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
-msgstr ""
+msgstr "\"%1\" nişanın adıdır"
 
 #: package/contents/ui/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr ""
+msgstr "Seçmək..."
 
 #: package/contents/ui/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
-msgstr ""
+msgstr "Veb-bələdçi üçün bir nişan seçin"
 
 #: package/contents/ui/ConfigAppearance.qml:103
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
-msgstr ""
+msgstr "İlkin nişana sıfırlamaq"
 
 #: package/contents/ui/ConfigAppearance.qml:118
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
-msgstr ""
+msgstr "Naviqasiya zolağını göstərmək"
 
 #: package/contents/ui/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
-msgstr ""
+msgstr "Sonuncu səhifəni yükləmək"
 
 #: package/contents/ui/ConfigGeneral.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
-msgstr ""
+msgstr "Başlanğıcda:"
 
 #: package/contents/ui/ConfigGeneral.qml:33
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Reload This Page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
-msgstr "Bu səhifəni yenidən yüklə"
+msgstr "Həmişə bu səhifəni yükləmək:"
 
 #: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:112
 #, kde-format
@@ -133,13 +133,13 @@ msgstr "Genişlik aşağıdırsa avtomatik miqyaslansın"
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
-msgstr ""
+msgstr "Veb-bələdçi ayarları:"
 
 #: package/contents/ui/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
-msgstr ""
+msgstr "Məxfi baxış"
 
 #: package/contents/ui/main.qml:67
 #, kde-format
@@ -157,14 +157,12 @@ msgstr "İrəli"
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
-msgstr ""
+msgstr "Ev səhifəsinə keçid"
 
 #: package/contents/ui/main.qml:93
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Type a URL"
+#, kde-format
 msgid "Open Default URL"
-msgstr "URL ünvanı yaz"
+msgstr "İlkin ünvanı açmaq"
 
 #: package/contents/ui/main.qml:152
 #, kde-format
