@@ -2,6 +2,7 @@
     "KPlugin": {
         "Description": "Synchronizes device LEDs with the Plasma accent color",
         "Description[ar]": "يزامن مصابيح LED الخاصة بالجهاز مع لون البلازما المميز",
+        "Description[az]": "Alt işıqlanma rəngini Plasma vurğulama rəngi ilə eyniləşdirmək",
         "Description[bg]": "Синхронизира светодиодите на устройството с акцентния цвят на Plasma",
         "Description[ca@valencia]": "Sincronitza els LED del dispositiu amb el color d'accent de Plasma",
         "Description[ca]": "Sincronitza els LED del dispositiu amb el color d'accent del Plasma",
@@ -40,6 +41,7 @@
         "Description[zh_TW]": "讓裝置 LED 同步使用 Plasma 強調色",
         "Name": "Kameleon",
         "Name[ar]": "كاميليون",
+        "Name[az]": "Kameleon",
         "Name[bg]": "Kameleon",
         "Name[ca@valencia]": "Kameleon",
         "Name[ca]": "Kameleon",
