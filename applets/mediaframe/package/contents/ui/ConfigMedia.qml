@@ -88,7 +88,7 @@ KCM.ScrollViewKCM {
         PlasmaExtras.PlaceholderMessage {
             anchors.centerIn: parent
             visible: pathModel.count === 0
-            iconName: "viewimage-symbolic"
+            iconName: "insert-image-symbolic"
             text: i18nc("@info placeholdermessage if no paths set", "No media configured")
             explanation: i18nc("@info placeholdermessage explanation", "Add files or folders to display them in the widget.")
         }

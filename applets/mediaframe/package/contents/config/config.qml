@@ -10,13 +10,13 @@ import org.kde.plasma.configuration 2.0
 
 ConfigModel {
     ConfigCategory {
-         name: i18nc("@title", "General")
-         icon: "image"
-         source: "ConfigGeneral.qml"
+         name: i18nc("@title", "Media")
+         icon: "folder-image"
+         source: "ConfigMedia.qml"
     }
     ConfigCategory {
-         name: i18nc("@title", "Paths")
-         icon: "folder"
-         source: "ConfigPaths.qml"
+         name: i18nc("@title", "Behavior")
+         icon: "image"
+         source: "ConfigBehavior.qml"
     }
 }
