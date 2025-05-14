@@ -14,6 +14,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 
 import org.kde.plasma.private.mediaframe 2.0
@@ -32,8 +33,8 @@ PlasmoidItem {
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
     Plasmoid.icon: activeSource.length > 0 ? activeSource : "settings-configure"
 
-    width: Kirigami.Units.gridUnit * 20
-    height: Kirigami.Units.gridUnit * 13
+    width: Kirigami.Units.gridUnit * 23
+    height: Kirigami.Units.gridUnit * 15
 
     property string activeSource: ""
     property string transitionSource: ""
@@ -351,12 +352,27 @@ PlasmoidItem {
 
         }
 
+        PlasmaExtras.PlaceholderMessage {
+            id: configNeededPlaceholder
+            property bool fitsInWidget: implicitWidth <= parent.width && implicitHeight <= parent.height
+            anchors.centerIn: parent
+            visible: !hasItems && fitsInWidget
+            iconName: "viewimage-symbolic"
+            text: i18nc("@info placeholdermessage if no media loaded", "No media selected")
+            helpfulAction: Kirigami.Action {
+
+                icon.name: "insert-image-symbolic"
+                text: i18nc("@action:button opens settings dialog", "Choose media…")
+                onTriggered: Plasmoid.internalAction("configure").trigger();
+            }
+        }
+
         PlasmaComponents3.Button {
             anchors.centerIn: parent
 
-            visible: !hasItems
-            icon.name: "configure"
-            text: i18nc("@action:button", "Configure…")
+            visible: !hasItems && !configNeededPlaceholder.fitsInWidget
+            icon.name: "insert-image-symbolic"
+            text: i18nc("@action:button opens settings dialog", "Choose media…")
             onClicked: {
                 Plasmoid.internalAction("configure").trigger();
             }
