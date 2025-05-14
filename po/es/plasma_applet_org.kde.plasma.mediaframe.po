@@ -1,15 +1,15 @@
 # Spanish translations for plasma_applet_org.kde.plasma.mediaframe.po package.
-# Copyright (C) 2016 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Copyright (C) 2016-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Automatically generated, 2016.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2016, 2017, 2018, 2019, 2021.
+#
+# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2021, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_org\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2021-12-15 23:33+0100\n"
+"PO-Revision-Date: 2025-05-13 21:31+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -188,32 +188,16 @@ msgstr "Escoger una carpeta"
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
-msgstr "Añadir carpeta..."
+msgstr "Añadir carpeta…"
 
 #: package/contents/ui/ConfigPaths.qml:128
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
-msgstr "Añadir archivos..."
+msgstr "Añadir archivos…"
 
 #: package/contents/ui/main.qml:452
 #, kde-format
 msgctxt "@action:button"
 msgid "Configure…"
-msgstr "Configurar..."
-
-#~ msgctxt "@option:check"
-#~ msgid "Show background frame"
-#~ msgstr "Mostrar marco del fondo"
-
-#~ msgctxt "@label:listbox"
-#~ msgid "Paths:"
-#~ msgstr "Rutas:"
-
-#~ msgctxt "@item:valuesuffix spacing to number + unit (seconds)"
-#~ msgid " s"
-#~ msgstr " s"
-
-#~ msgctxt "@option:check"
-#~ msgid "Pause on mouse-over"
-#~ msgstr "Pausar al situar el ratón encima"
+msgstr "Configurar…"

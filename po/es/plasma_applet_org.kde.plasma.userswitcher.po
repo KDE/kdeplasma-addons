@@ -1,15 +1,15 @@
 # Spanish translations for plasma_applet_org.kde.plasma.userswitcher.po package.
-# Copyright (C) 2015 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Copyright (C) 2015-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Automatically generated, 2015.
-# SPDX-FileCopyrightText: 2015, 2016, 2018, 2019, 2021, 2022, 2024 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2015, 2016, 2018, 2019, 2021, 2022, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_org\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-20 02:40+0000\n"
-"PO-Revision-Date: 2024-08-24 12:21+0200\n"
+"PO-Revision-Date: 2025-05-13 20:55+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -130,27 +130,3 @@ msgstr "Bloquear pantalla"
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
 msgstr "Mostrar pantalla de cierre de sesión"
-
-#~ msgctxt "Show a dialog with options to logout/shutdown/restart"
-#~ msgid "Log Out"
-#~ msgstr "Cerrar sesión"
-
-#~ msgctxt "Show a dialog with options to logout/shutdown/restart"
-#~ msgid "Leave…"
-#~ msgstr "Salir..."
-
-#~ msgctxt "@title:group"
-#~ msgid "Layout"
-#~ msgstr "Distribución"
-
-#~ msgctxt "@option:radio"
-#~ msgid "Show only name"
-#~ msgstr "Mostrar solo el nombre"
-
-#~ msgctxt "@option:radio"
-#~ msgid "Show only avatar"
-#~ msgstr "Mostrar solo el avatar"
-
-#~ msgctxt "@option:radio"
-#~ msgid "Show both avatar and name"
-#~ msgstr "Mostrar el avatar y el nombre"

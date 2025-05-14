@@ -1,15 +1,15 @@
-# Spanish translations for plasma_applet_org.kde.plasma.dict.po package.
-# Copyright (C) 2017 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Spanish translations for plasma_applet_org.kde.plasma_applet_dict.po package.
+# Copyright (C) 2017-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Automatically generated, 2017.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2017, 2018, 2021, 2022.
+#
+# SPDX-FileCopyrightText: 2017, 2018, 2021, 2022, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_org\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma_applet_dict\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-17 01:38+0000\n"
-"PO-Revision-Date: 2022-05-27 12:30+0200\n"
+"PO-Revision-Date: 2025-05-13 20:57+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -50,7 +50,7 @@ msgstr "No hay diccionarios"
 #: package/contents/ui/ConfigDictionaries.qml:98
 #, kde-format
 msgid "Add More…"
-msgstr "Añadir más..."
+msgstr "Añadir más…"
 
 #: package/contents/ui/DictItemDelegate.qml:58
 #, kde-format
@@ -61,12 +61,9 @@ msgstr "Borrar"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
-msgstr "Introduzca aquí la palabra a definir..."
+msgstr "Introduzca aquí la palabra a definir…"
 
 #: package/contents/ui/main.qml:152
 #, kde-format
 msgid "Unable to load definition"
 msgstr "No se puede cargar la definición"
-
-#~ msgid "Looking up definition…"
-#~ msgstr "Buscando definición..."

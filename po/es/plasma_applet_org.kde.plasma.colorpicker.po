@@ -1,15 +1,15 @@
 # Spanish translations for plasma_applet_org.kde.plasma.colorpicker.po package.
-# Copyright (C) 2015 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Copyright (C) 2015-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Automatically generated, 2015.
-# SPDX-FileCopyrightText: 2015, 2016, 2018, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2015, 2016, 2018, 2022, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_org\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-19 02:36+0000\n"
-"PO-Revision-Date: 2023-10-02 20:43+0200\n"
+"PO-Revision-Date: 2025-05-13 21:31+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -153,7 +153,3 @@ msgstr "Copiado"
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Borrar"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Color options"
-#~ msgstr "Opciones del color"

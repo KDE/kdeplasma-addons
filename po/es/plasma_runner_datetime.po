@@ -1,15 +1,16 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for plasma_runner_datetime.po package.
+# Copyright (C) 2010-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Kira J. Fernandez <kirajfdez@gmail.com>, 2010.
-# Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2010.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2015, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2010 Kira J. Fernandez <kirajfdez@gmail.com>
+# SPDX-FileCopyrightText: 2010 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
+# SPDX-FileCopyrightText: 2015, 2021, 2022, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: plasma_runner_datetime\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-11-04 01:38+0000\n"
-"PO-Revision-Date: 2023-02-10 16:12+0100\n"
+"PO-Revision-Date: 2025-05-13 20:59+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -164,15 +165,3 @@ msgctxt ""
 "as in Berlin"
 msgid "no time difference"
 msgstr "no hay diferencia horaria"
-
-#~ msgctxt ""
-#~ "time difference between time zones, e.g. in Brasilia it's 4 hours ealier "
-#~ "than in Stockholm"
-#~ msgid "%1 earlier"
-#~ msgstr "%1 más temprano"
-
-#~ msgid "The date in %1 is %2"
-#~ msgstr "La fecha en %1 es %2"
-
-#~ msgid "The current time in %1 is %2"
-#~ msgstr "La hora actual en %1 es %2"

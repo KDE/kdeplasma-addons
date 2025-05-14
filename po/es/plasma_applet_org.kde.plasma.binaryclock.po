@@ -1,15 +1,15 @@
 # Spanish translations for plasma_applet_org.kde.plasma.binaryclock.po package.
-# Copyright (C) 2017 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Copyright (C) 2017-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Automatically generated, 2017.
-# SPDX-FileCopyrightText: 2017, 2018, 2019, 2023 Eloy Cuadra <ecuadra@eloihr.net>
+#
+# SPDX-FileCopyrightText: 2017, 2018, 2019, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_binaryclock\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-12-01 01:38+0000\n"
-"PO-Revision-Date: 2023-12-01 17:13+0100\n"
+"PO-Revision-Date: 2025-05-13 21:31+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -48,73 +48,3 @@ msgstr "Usar color personalizado para:"
 msgctxt "@option:check"
 msgid "Active lights"
 msgstr "Luces activas"
-
-#~ msgid "Display:"
-#~ msgstr "Mostrar:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Grid"
-#~ msgstr "Cuadrícula"
-
-#~ msgctxt "@option:check"
-#~ msgid "In BCD format (decimal)"
-#~ msgstr "En formato BCD (decimal)"
-
-#~ msgctxt "@option:check"
-#~ msgid "Draw grid"
-#~ msgstr "Dibujar cuadrícula"
-
-#~ msgctxt "@option:check"
-#~ msgid "Show inactive LEDs"
-#~ msgstr "Mostrar LED inactivos"
-
-#~ msgctxt "@option:check"
-#~ msgid "Display seconds"
-#~ msgstr "Mostrar los segundos"
-
-#~ msgctxt "@title:group"
-#~ msgid "Colors"
-#~ msgstr "Colores"
-
-#~ msgctxt "@option:check"
-#~ msgid "Use custom color for active LEDs"
-#~ msgstr "Usar un color personalizado para los LED activos"
-
-#~ msgctxt "@option:check"
-#~ msgid "Use custom color for inactive LEDs"
-#~ msgstr "Usar un color personalizado para los LED inactivos"
-
-#~ msgctxt "@title:group"
-#~ msgid "Appearance"
-#~ msgstr "Aspecto visual"
-
-#~ msgid "Check this if you want to see the inactive LEDs."
-#~ msgstr "Marque esta casilla si desea ver los LED inactivos."
-
-#~ msgid "Show"
-#~ msgstr "Mostrar"
-
-#~ msgid "Use theme color"
-#~ msgstr "Usar el color del tema"
-
-#~ msgid "Show the grid"
-#~ msgstr "Mostrar la cuadrícula"
-
-#~ msgid "Check this if you want to see a grid around leds."
-#~ msgstr ""
-#~ "Marque esta casilla si desea ver una cuadrícula alrededor de los LED."
-
-#~ msgid "Use custom grid color:"
-#~ msgstr "Usar un color personalizado para la cuadrícula:"
-
-#~ msgid "Information"
-#~ msgstr "Información"
-
-#~ msgid "Show the seconds LEDs"
-#~ msgstr "Mostrar los LED de los segundos"
-
-#~ msgid ""
-#~ "Check this if you want to display seconds LEDs in order to see the "
-#~ "seconds."
-#~ msgstr ""
-#~ "Marque esta casilla si desea que se muestren los LED de los segundos."
