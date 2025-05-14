@@ -120,14 +120,8 @@ KCM.ScrollViewKCM {
             currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
 
             onAccepted: {
-                console.log("Accepted: " + selectedFolder)
-
                 var item = { 'path':selectedFolder, 'type':'folder' }
                 addPath(item)
-            }
-
-            onRejected: {
-                console.log("Canceled")
             }
         }
     }
