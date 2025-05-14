@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-02 00:43+0000\n"
+"POT-Creation-Date: 2025-05-14 00:44+0000\n"
 "PO-Revision-Date: 2019-11-01 23:49+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -25,64 +25,64 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Välimus"
 
-#: package/contents/ui/configAppearance.qml:31
+#: package/contents/ui/configAppearance.qml:33
 #, kde-format
 msgid "%1pt"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:37
+#: package/contents/ui/configAppearance.qml:39
 #, fuzzy, kde-format
 #| msgid "Use custom font size:"
 msgid "Text font size:"
 msgstr "Kohandatud fondi suuruse kasutamine:"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:64
 #, kde-format
 msgid "A white sticky note"
 msgstr "Valge märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:63
+#: package/contents/ui/configAppearance.qml:65
 #, kde-format
 msgid "A black sticky note"
 msgstr "Must märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:64
+#: package/contents/ui/configAppearance.qml:66
 #, kde-format
 msgid "A red sticky note"
 msgstr "Punane märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:65
+#: package/contents/ui/configAppearance.qml:67
 #, kde-format
 msgid "An orange sticky note"
 msgstr "Oranž märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:66
+#: package/contents/ui/configAppearance.qml:68
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "Kollane märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:67
+#: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgid "A green sticky note"
 msgstr "Roheline märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:68
+#: package/contents/ui/configAppearance.qml:70
 #, kde-format
 msgid "A blue sticky note"
 msgstr "Sinine märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:69
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "A pink sticky note"
 msgstr "Roosa märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:70
+#: package/contents/ui/configAppearance.qml:72
 #, fuzzy, kde-format
 #| msgid "A translucent sticky note"
 msgid "A transparent sticky note"
 msgstr "Läbipaistev märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:71
+#: package/contents/ui/configAppearance.qml:73
 #, fuzzy, kde-format
 #| msgid "A translucent sticky note with light text"
 msgid "A transparent sticky note with light text"

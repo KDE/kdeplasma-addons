@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-02 00:43+0000\n"
+"POT-Creation-Date: 2025-05-14 00:44+0000\n"
 "PO-Revision-Date: 2015-08-01 14:07+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -26,73 +26,73 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Изглед"
 
-#: package/contents/ui/configAppearance.qml:31
+#: package/contents/ui/configAppearance.qml:33
 #, kde-format
 msgid "%1pt"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:37
+#: package/contents/ui/configAppearance.qml:39
 #, kde-format
 msgid "Text font size:"
 msgstr ""
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:64
 #, kde-format
 msgid "A white sticky note"
 msgstr "бела лепљива белешка"
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:63
+#: package/contents/ui/configAppearance.qml:65
 #, kde-format
 msgid "A black sticky note"
 msgstr "црна лепљива белешка"
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:64
+#: package/contents/ui/configAppearance.qml:66
 #, kde-format
 msgid "A red sticky note"
 msgstr "црвена лепљива белешка"
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:65
+#: package/contents/ui/configAppearance.qml:67
 #, kde-format
 msgid "An orange sticky note"
 msgstr "наранџаста лепљива белешка"
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:66
+#: package/contents/ui/configAppearance.qml:68
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "жута лепљива белешка"
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:67
+#: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgid "A green sticky note"
 msgstr "зелена лепљива белешка"
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:68
+#: package/contents/ui/configAppearance.qml:70
 #, kde-format
 msgid "A blue sticky note"
 msgstr "плава лепљива белешка"
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:69
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "A pink sticky note"
 msgstr "ружичаста лепљива белешка"
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:70
+#: package/contents/ui/configAppearance.qml:72
 #, fuzzy, kde-format
 #| msgid "A translucent sticky note"
 msgid "A transparent sticky note"
 msgstr "прозирна лепљива белешка"
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:71
+#: package/contents/ui/configAppearance.qml:73
 #, fuzzy, kde-format
 #| msgid "A translucent sticky note"
 msgid "A transparent sticky note with light text"

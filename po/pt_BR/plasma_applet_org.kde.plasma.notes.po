@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-02 00:43+0000\n"
+"POT-Creation-Date: 2025-05-14 00:44+0000\n"
 "PO-Revision-Date: 2025-04-12 06:59-0300\n"
 "Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -27,72 +27,72 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Aparência"
 
-#: package/contents/ui/configAppearance.qml:31
+#: package/contents/ui/configAppearance.qml:33
 #, kde-format
 msgid "%1pt"
 msgstr "%1pt"
 
-#: package/contents/ui/configAppearance.qml:37
+#: package/contents/ui/configAppearance.qml:39
 #, kde-format
 msgid "Text font size:"
 msgstr "Tamanho da fonte do texto:"
 
 # Fica melhor sem o "Uma" inicial. (Alvarenga)
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:64
 #, kde-format
 msgid "A white sticky note"
 msgstr "Nota adesiva branca"
 
 # Fica melhor sem o "Uma" inicial. (Alvarenga)
-#: package/contents/ui/configAppearance.qml:63
+#: package/contents/ui/configAppearance.qml:65
 #, kde-format
 msgid "A black sticky note"
 msgstr "Nota adesiva preta"
 
 # Fica melhor sem o "Uma" inicial. (Alvarenga)
-#: package/contents/ui/configAppearance.qml:64
+#: package/contents/ui/configAppearance.qml:66
 #, kde-format
 msgid "A red sticky note"
 msgstr "Nota adesiva vermelha"
 
 # Fica melhor sem o "Uma" inicial. (Alvarenga)
-#: package/contents/ui/configAppearance.qml:65
+#: package/contents/ui/configAppearance.qml:67
 #, kde-format
 msgid "An orange sticky note"
 msgstr "Nota adesiva laranja"
 
 # Fica melhor sem o "Uma" inicial. (Alvarenga)
-#: package/contents/ui/configAppearance.qml:66
+#: package/contents/ui/configAppearance.qml:68
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "Nota adesiva amarela"
 
 # Fica melhor sem o "Uma" inicial. (Alvarenga)
-#: package/contents/ui/configAppearance.qml:67
+#: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgid "A green sticky note"
 msgstr "Nota adesiva verde"
 
 # Fica melhor sem o "Uma" inicial. (Alvarenga)
-#: package/contents/ui/configAppearance.qml:68
+#: package/contents/ui/configAppearance.qml:70
 #, kde-format
 msgid "A blue sticky note"
 msgstr "Nota adesiva azul"
 
 # Fica melhor sem o "Uma" inicial. (Alvarenga)
-#: package/contents/ui/configAppearance.qml:69
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "A pink sticky note"
 msgstr "Nota adesiva rosa"
 
 # Fica melhor sem o "Uma" inicial. (Alvarenga)
-#: package/contents/ui/configAppearance.qml:70
+#: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgid "A transparent sticky note"
 msgstr "Uma nota adesiva transparente"
 
 # Fica melhor sem o "Uma" inicial. (Alvarenga)
-#: package/contents/ui/configAppearance.qml:71
+#: package/contents/ui/configAppearance.qml:73
 #, kde-format
 msgid "A transparent sticky note with light text"
 msgstr "Uma nota adesiva transparente com texto claro"

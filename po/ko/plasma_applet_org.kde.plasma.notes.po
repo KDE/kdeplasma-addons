@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-02 00:43+0000\n"
+"POT-Creation-Date: 2025-05-14 00:44+0000\n"
 "PO-Revision-Date: 2025-04-06 23:04+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -23,62 +23,62 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "모양"
 
-#: package/contents/ui/configAppearance.qml:31
+#: package/contents/ui/configAppearance.qml:33
 #, kde-format
 msgid "%1pt"
 msgstr "%1pt"
 
-#: package/contents/ui/configAppearance.qml:37
+#: package/contents/ui/configAppearance.qml:39
 #, kde-format
 msgid "Text font size:"
 msgstr "텍스트 글꼴 크기:"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:64
 #, kde-format
 msgid "A white sticky note"
 msgstr "흰색 메모지"
 
-#: package/contents/ui/configAppearance.qml:63
+#: package/contents/ui/configAppearance.qml:65
 #, kde-format
 msgid "A black sticky note"
 msgstr "검은색 메모지"
 
-#: package/contents/ui/configAppearance.qml:64
+#: package/contents/ui/configAppearance.qml:66
 #, kde-format
 msgid "A red sticky note"
 msgstr "빨간색 메모지"
 
-#: package/contents/ui/configAppearance.qml:65
+#: package/contents/ui/configAppearance.qml:67
 #, kde-format
 msgid "An orange sticky note"
 msgstr "주황색 메모지"
 
-#: package/contents/ui/configAppearance.qml:66
+#: package/contents/ui/configAppearance.qml:68
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "노란색 메모지"
 
-#: package/contents/ui/configAppearance.qml:67
+#: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgid "A green sticky note"
 msgstr "녹색 메모지"
 
-#: package/contents/ui/configAppearance.qml:68
+#: package/contents/ui/configAppearance.qml:70
 #, kde-format
 msgid "A blue sticky note"
 msgstr "파란색 메모지"
 
-#: package/contents/ui/configAppearance.qml:69
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "A pink sticky note"
 msgstr "분홍색 메모지"
 
-#: package/contents/ui/configAppearance.qml:70
+#: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgid "A transparent sticky note"
 msgstr "투명한 메모지"
 
-#: package/contents/ui/configAppearance.qml:71
+#: package/contents/ui/configAppearance.qml:73
 #, kde-format
 msgid "A transparent sticky note with light text"
 msgstr "밝은 텍스트가 있는 반투명한 메모지"

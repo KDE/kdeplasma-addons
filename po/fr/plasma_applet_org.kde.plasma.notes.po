@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-02 00:43+0000\n"
+"POT-Creation-Date: 2025-05-14 00:44+0000\n"
 "PO-Revision-Date: 2025-04-06 10:50+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -31,62 +31,62 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Apparence"
 
-#: package/contents/ui/configAppearance.qml:31
+#: package/contents/ui/configAppearance.qml:33
 #, kde-format
 msgid "%1pt"
 msgstr "%1 pt"
 
-#: package/contents/ui/configAppearance.qml:37
+#: package/contents/ui/configAppearance.qml:39
 #, kde-format
 msgid "Text font size:"
 msgstr "Taille de la police pour le texte"
 
-#: package/contents/ui/configAppearance.qml:62
+#: package/contents/ui/configAppearance.qml:64
 #, kde-format
 msgid "A white sticky note"
 msgstr "Un post-it blanc"
 
-#: package/contents/ui/configAppearance.qml:63
+#: package/contents/ui/configAppearance.qml:65
 #, kde-format
 msgid "A black sticky note"
 msgstr "Un post-it noir"
 
-#: package/contents/ui/configAppearance.qml:64
+#: package/contents/ui/configAppearance.qml:66
 #, kde-format
 msgid "A red sticky note"
 msgstr "Un post-it rouge"
 
-#: package/contents/ui/configAppearance.qml:65
+#: package/contents/ui/configAppearance.qml:67
 #, kde-format
 msgid "An orange sticky note"
 msgstr "Un post-it orange"
 
-#: package/contents/ui/configAppearance.qml:66
+#: package/contents/ui/configAppearance.qml:68
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "Un post-it jaune"
 
-#: package/contents/ui/configAppearance.qml:67
+#: package/contents/ui/configAppearance.qml:69
 #, kde-format
 msgid "A green sticky note"
 msgstr "Un post-it vert"
 
-#: package/contents/ui/configAppearance.qml:68
+#: package/contents/ui/configAppearance.qml:70
 #, kde-format
 msgid "A blue sticky note"
 msgstr "Un post-it bleu"
 
-#: package/contents/ui/configAppearance.qml:69
+#: package/contents/ui/configAppearance.qml:71
 #, kde-format
 msgid "A pink sticky note"
 msgstr "Un post-it rose"
 
-#: package/contents/ui/configAppearance.qml:70
+#: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgid "A transparent sticky note"
 msgstr "Un note auto-collante transparente"
 
-#: package/contents/ui/configAppearance.qml:71
+#: package/contents/ui/configAppearance.qml:73
 #, kde-format
 msgid "A transparent sticky note with light text"
 msgstr "Un note auto-collante transparente avec un texte clair"

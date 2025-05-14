@@ -1,19 +1,18 @@
-# translation of plasma_applet_fifteenPuzzle.po to Spanish
-# Translation of plasma_applet_fifteenPuzzle to Spanish
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for plasma_applet_org.kde.plasma.fifteenpuzzle.po package.
+# Copyright (C) 2007-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2007, 2009, 2011.
-# Santiago Fernández Sancho <santi@kde-es.org>, 2007, 2008.
-# Jaime Robles <jaime@kde.org>, 2007.
-# Enrique Matias Sanchez (Quique) <cronopios@gmail.com>, 2008, 2009.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2014, 2017, 2018, 2019, 2021.
+# SPDX-FileCopyrightText: 2007, 2009, 2011 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
+# SPDX-FileCopyrightText: 2007, 2008 Santiago Fernández Sancho <santi@kde-es.org>
+# SPDX-FileCopyrightText: 2007 Jaime Robles <jaime@kde.org>
+# SPDX-FileCopyrightText: 2008, 2009 Enrique Matias Sanchez (Quique) <cronopios@gmail.com>
+# SPDX-FileCopyrightText: 2014, 2017, 2018, 2019, 2021, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_fifteenPuzzle\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-01-23 00:38+0000\n"
-"PO-Revision-Date: 2021-12-15 23:33+0100\n"
+"PO-Revision-Date: 2025-05-13 21:07+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -54,13 +53,13 @@ msgstr "Imagen:"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
-msgstr "Ruta a la imagen personalizada..."
+msgstr "Ruta a la imagen personalizada…"
 
 #: package/contents/ui/configAppearance.qml:100
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
-msgstr "Escoger imagen..."
+msgstr "Escoger imagen…"
 
 #: package/contents/ui/configAppearance.qml:108
 #, kde-format
@@ -110,45 +109,3 @@ msgstr "Puzzle Quince"
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Resolver poniendo en orden"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Size:"
-#~ msgstr "Tamaño:"
-
-#~ msgctxt "@label:chooser"
-#~ msgid "Piece color:"
-#~ msgstr "Color de las piezas:"
-
-#~ msgctxt "@label:chooser"
-#~ msgid "Number color:"
-#~ msgstr "Color de los números:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Use custom image"
-#~ msgstr "Usar imagen personalizada"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Browse..."
-#~ msgstr "Explorar..."
-
-#~ msgctxt "@option:check"
-#~ msgid "Show numerals"
-#~ msgstr "Mostrar números"
-
-#, fuzzy
-#~| msgid "Appearance"
-#~ msgctxt "@title:group"
-#~ msgid "Appearance"
-#~ msgstr "Aspecto"
-
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgid "Shuffle Pieces"
-#~ msgstr "Desordenar las piezas"
-
-#~ msgid " pieces wide"
-#~ msgstr " piezas de anchura"
-
-#~ msgid "Use plain pieces:"
-#~ msgstr "Utilizar piezas sencillas:"

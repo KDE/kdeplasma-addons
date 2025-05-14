@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-13 00:43+0000\n"
+"POT-Creation-Date: 2025-05-14 00:44+0000\n"
 "PO-Revision-Date: 2025-04-06 16:07+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -35,96 +35,143 @@ msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Отиване на уебсайта на комикса"
 
-#: qml/ComicCentralView.qml:86 qml/FullViewWidget.qml:84
-#, kde-format
-msgctxt "@info placeholdermessage if comic loading failed"
-msgid "Could not load comic"
-msgstr "Неуспешно зареждане на комикс"
-
-#: qml/ComicCentralView.qml:87 qml/FullViewWidget.qml:85
-#, kde-format
-msgctxt "@info placeholdermessage explanation"
-msgid "Try again later, or choose a different comic"
-msgstr "Опитайте по–късно или използвайте друг комикс"
-
 #: qml/config.qml:13
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Comics:"
 msgctxt "@title"
-msgid "General"
-msgstr "Общи"
+msgid "Comics"
+msgstr "Комикси:"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Външен вид"
+msgid "Behavior"
+msgstr ""
 
-#: qml/config.qml:23
+#: qml/configBehavior.qml:28
 #, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Разширени"
+msgctxt "@title:group form label for checkboxes"
+msgid "Show above image:"
+msgstr ""
 
-#: qml/configAdvanced.qml:23
+#: qml/configBehavior.qml:29
 #, kde-format
-msgctxt "@label:spinbox"
-msgid "Comic cache:"
-msgstr "Кеш на комикса:"
+msgctxt "@option:check show above image: "
+msgid "Title"
+msgstr ""
 
-#: qml/configAdvanced.qml:32
+#: qml/configBehavior.qml:34
 #, kde-format
-msgctxt "@item:valuesuffix spacing to number + unit"
-msgid "strip per comic"
-msgid_plural "strips per comic"
-msgstr[0] "лента на комикс"
-msgstr[1] "ленти на комикс"
+msgctxt "@option:check show above image: "
+msgid "Author"
+msgstr ""
 
-#: qml/configAppearance.qml:25
+#: qml/configBehavior.qml:39
 #, kde-format
-msgctxt "Heading for showing various elements of a comic"
-msgid "Show:"
-msgstr "Показване:"
+msgctxt "@title:group form label for checkboxes"
+msgid "Show below image:"
+msgstr ""
 
-#: qml/configAppearance.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Comic title"
-msgstr "Заглавие на комикс"
-
-#: qml/configAppearance.qml:31
-#, kde-format
-msgctxt "@option:check"
-msgid "Comic identifier"
+#: qml/configBehavior.qml:40
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Comic identifier"
+msgctxt "@option:check show below image"
+msgid "Identifier"
 msgstr "Идентификатор на комикс"
 
-#: qml/configAppearance.qml:36
+#: qml/configBehavior.qml:45
 #, kde-format
-msgctxt "@option:check"
-msgid "Comic author"
-msgstr "Автор на комикс"
+msgctxt "@option:check show below image"
+msgid "Website"
+msgstr ""
 
-#: qml/configAppearance.qml:41
-#, kde-format
-msgctxt "@option:check"
-msgid "Comic URL"
-msgstr "URL на комикс"
-
-#: qml/configAppearance.qml:50
-#, kde-format
-msgid "Show navigation buttons:"
+#: qml/configBehavior.qml:54
+#, fuzzy, kde-format
+#| msgid "Show navigation buttons:"
+msgctxt "@label:group form label for radiobuttons"
+msgid "Navigation buttons:"
 msgstr "Показване на бутони за навигация:"
 
-#: qml/configAppearance.qml:51
+#: qml/configBehavior.qml:55
 #, kde-format
-msgctxt "@option:check"
-msgid "Always"
-msgstr "Винаги"
+msgctxt "@option:radio navigation buttons are…"
+msgid "Always visible at the edges"
+msgstr ""
 
-#: qml/configAppearance.qml:57
+#: qml/configBehavior.qml:61
 #, kde-format
-msgctxt "@option:check"
-msgid "Only on hover"
-msgstr "Само при посочване с мишката"
+msgctxt "@option:radio navigation buttons…"
+msgid "Appear centrally when hovering"
+msgstr ""
+
+#: qml/configBehavior.qml:70
+#, kde-format
+msgctxt "@label for checkbox, completes sentence … opens full-size view"
+msgid "Middle-clicking image:"
+msgstr ""
+
+#: qml/configBehavior.qml:71
+#, kde-format
+msgctxt "@option:check completes sentence Middle-clicking image…"
+msgid "Opens full-size view"
+msgstr ""
+
+#: qml/configComics.qml:26
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Get New Comics…"
+msgctxt "@action:button"
+msgid "Get New…"
+msgstr "Изтегляне на нови комикси…"
+
+#: qml/configComics.qml:65
+#, fuzzy, kde-format
+#| msgctxt "@info placeholdermessage if no comics loaded"
+#| msgid "No comics configured"
+msgctxt "@info placeholdermessage if comic provider list empty"
+msgid "No comics installed"
+msgstr "Няма конфигуриран комикс"
+
+#: qml/configComics.qml:67
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Get New Comics…"
+msgctxt "@action:button"
+msgid "Get Comics…"
+msgstr "Изтегляне на нови комикси…"
+
+#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Check for new comics every:"
+msgstr "Проверяване за нови комикси на всеки:"
+
+#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#, kde-format
+msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
+msgid "minute"
+msgid_plural "minutes"
+msgstr[0] "минута"
+msgstr[1] "минути"
+
+#: qml/configComics.qml:95
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Keep local archive:"
+msgstr ""
+
+#: qml/configComics.qml:103
+#, fuzzy, kde-format
+#| msgctxt "@item:valuesuffix spacing to number + unit"
+#| msgid "strip per comic"
+#| msgid_plural "strips per comic"
+msgctxt "@item:valuesuffix spacing to number + unit"
+msgid "images per comic"
+msgid_plural "images per comic"
+msgstr[0] "лента на комикс"
+msgstr[1] "ленти на комикс"
 
 #: qml/configGeneral.qml:36
 #, kde-format
@@ -144,19 +191,72 @@ msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
 msgstr "Щракнете с мишката върху комикса, за да се покаже в оригинален размер"
 
-#: qml/configGeneral.qml:75
+#: qml/ErrorPlaceholder.qml:18
 #, kde-format
-msgctxt "@label:spinbox"
-msgid "Check for new comics every:"
-msgstr "Проверяване за нови комикси на всеки:"
+msgctxt "@info placeholdermessage if comic loading failed"
+msgid "Could not load comic"
+msgstr "Неуспешно зареждане на комикс"
 
-#: qml/configGeneral.qml:83
+#: qml/ErrorPlaceholder.qml:19
 #, kde-format
-msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
-msgid "minute"
-msgid_plural "minutes"
-msgstr[0] "минута"
-msgstr[1] "минути"
+msgctxt "@info placeholdermessage explanation"
+msgid "Try again later, or choose a different comic"
+msgstr "Опитайте по–късно или използвайте друг комикс"
+
+#: qml/ErrorPlaceholder.qml:27
+#, kde-format
+msgctxt "@info placeholdermessage title if offline"
+msgid "Offline"
+msgstr ""
+
+#: qml/ErrorPlaceholder.qml:28
+#, kde-format
+msgctxt "@info placeholdermessage connection"
+msgid ""
+"Reconnect to the internet to retry loading this image. You can still view "
+"any images in the local archive."
+msgstr ""
+
+#: qml/ErrorPlaceholder.qml:36
+#, kde-format
+msgctxt "@info placeholdermessage title if connection local/unknown"
+msgid "Limited connectivity"
+msgstr ""
+
+#: qml/ErrorPlaceholder.qml:37
+#, kde-format
+msgctxt "@info placeholdermessage explanation if connection local/unknown"
+msgid ""
+"The image may not be available on your current connection. You can still "
+"view any images in the local archive."
+msgstr ""
+
+#: qml/ErrorPlaceholder.qml:45
+#, kde-format
+msgctxt "@info placeholdermessage title if today not available"
+msgid "Not available"
+msgstr ""
+
+#: qml/ErrorPlaceholder.qml:46
+#, kde-format
+msgctxt "@info placeholdermessage explanation if today not available"
+msgid ""
+"Today's image is not yet available or cannot be read. Try a different date."
+msgstr ""
+
+#: qml/ErrorPlaceholder.qml:54
+#, kde-format
+msgctxt "@info placeholdermessage title if date not available"
+msgid "Not available"
+msgstr ""
+
+#: qml/ErrorPlaceholder.qml:55
+#, kde-format
+msgctxt "@info placeholdermessage explanation if date not available"
+msgid ""
+"The image for this day is not available or cannot be read. Try a different "
+"date."
+msgstr ""
 
 #: qml/main.qml:80
 #, kde-format
@@ -247,6 +347,46 @@ msgstr "&Номер на лентата:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Идентификатор на лента:"
+
+#~ msgctxt "@title"
+#~ msgid "General"
+#~ msgstr "Общи"
+
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Външен вид"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "Разширени"
+
+#~ msgctxt "@label:spinbox"
+#~ msgid "Comic cache:"
+#~ msgstr "Кеш на комикса:"
+
+#~ msgctxt "Heading for showing various elements of a comic"
+#~ msgid "Show:"
+#~ msgstr "Показване:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Comic title"
+#~ msgstr "Заглавие на комикс"
+
+#~ msgctxt "@option:check"
+#~ msgid "Comic author"
+#~ msgstr "Автор на комикс"
+
+#~ msgctxt "@option:check"
+#~ msgid "Comic URL"
+#~ msgstr "URL на комикс"
+
+#~ msgctxt "@option:check"
+#~ msgid "Always"
+#~ msgstr "Винаги"
+
+#~ msgctxt "@option:check"
+#~ msgid "Only on hover"
+#~ msgstr "Само при посочване с мишката"
 
 #~ msgctxt "@option:check"
 #~ msgid "Display error when downloading comic fails"
