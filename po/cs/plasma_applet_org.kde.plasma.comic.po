@@ -50,7 +50,7 @@ msgstr "Komiksy:"
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Chování"
 
 #: qml/configBehavior.qml:28
 #, kde-format

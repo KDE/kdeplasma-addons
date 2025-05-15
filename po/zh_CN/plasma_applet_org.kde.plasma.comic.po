@@ -37,12 +37,10 @@ msgid "Visit the comic website"
 msgstr "访问漫画网站"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Comics:"
+#, kde-format
 msgctxt "@title"
 msgid "Comics"
-msgstr "漫画："
+msgstr ""
 
 #: qml/config.qml:18
 #, kde-format
@@ -75,12 +73,10 @@ msgid "Show below image:"
 msgstr ""
 
 #: qml/configBehavior.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Comic identifier"
+#, kde-format
 msgctxt "@option:check show below image"
 msgid "Identifier"
-msgstr "漫画标识符"
+msgstr ""
 
 #: qml/configBehavior.qml:45
 #, kde-format
@@ -89,11 +85,10 @@ msgid "Website"
 msgstr ""
 
 #: qml/configBehavior.qml:54
-#, fuzzy, kde-format
-#| msgid "Show navigation buttons:"
+#, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
-msgstr "显示导航按钮："
+msgstr ""
 
 #: qml/configBehavior.qml:55
 #, kde-format
@@ -120,28 +115,22 @@ msgid "Opens full-size view"
 msgstr ""
 
 #: qml/configComics.qml:26
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
-msgstr "获取新漫画…"
+msgstr ""
 
 #: qml/configComics.qml:65
-#, fuzzy, kde-format
-#| msgctxt "@info placeholdermessage if no comics loaded"
-#| msgid "No comics configured"
+#, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
-msgstr "没有配置漫画"
+msgstr ""
 
 #: qml/configComics.qml:67
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
-msgstr "获取新漫画…"
+msgstr ""
 
 #: qml/configComics.qml:81 qml/configGeneral.qml:75
 #, kde-format
@@ -163,14 +152,11 @@ msgid "Keep local archive:"
 msgstr ""
 
 #: qml/configComics.qml:103
-#, fuzzy, kde-format
-#| msgctxt "@item:valuesuffix spacing to number + unit"
-#| msgid "strip per comic"
-#| msgid_plural "strips per comic"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
-msgstr[0] "每篇漫画条数"
+msgstr[0] ""
 
 #: qml/configGeneral.qml:36
 #, kde-format
@@ -346,43 +332,3 @@ msgstr "漫画条数(&S)："
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "漫画条标识符："
-
-#~ msgctxt "@title"
-#~ msgid "General"
-#~ msgstr "常规"
-
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "外观"
-
-#~ msgctxt "@title"
-#~ msgid "Advanced"
-#~ msgstr "高级"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Comic cache:"
-#~ msgstr "漫画缓存："
-
-#~ msgctxt "Heading for showing various elements of a comic"
-#~ msgid "Show:"
-#~ msgstr "显示："
-
-#~ msgctxt "@option:check"
-#~ msgid "Comic title"
-#~ msgstr "漫画标题"
-
-#~ msgctxt "@option:check"
-#~ msgid "Comic author"
-#~ msgstr "漫画作者"
-
-#~ msgctxt "@option:check"
-#~ msgid "Comic URL"
-#~ msgstr "漫画网址"
-
-#~ msgctxt "@option:check"
-#~ msgid "Always"
-#~ msgstr "总是"
-
-#~ msgctxt "@option:check"
-#~ msgid "Only on hover"
-#~ msgstr "仅悬停时"
