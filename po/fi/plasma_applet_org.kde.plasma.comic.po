@@ -5,7 +5,7 @@
 # Mikko Piippo <piippo@cc.helsinki.fi>, 2008.
 # Teemu Rytilahti <teemu.rytilahti@kde-fi.org>, 2008.
 # Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2008.
-# Tommi Nieminen <translator@legisign.org>, 2010, 2018, 2019, 2020, 2022.
+# SPDX-FileCopyrightText: 2010, 2018, 2019, 2020, 2022, 2025 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lliehu@kolumbus.fi>, 2011, 2013, 2015.
 #
 # KDE Finnish translation sprint participants:
@@ -14,7 +14,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-14 00:44+0000\n"
-"PO-Revision-Date: 2022-08-05 11:17+0300\n"
+"PO-Revision-Date: 2025-04-20 16:32+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -22,6 +22,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: comicdata.cpp:85
 #, kde-format
@@ -199,18 +200,16 @@ msgstr ""
 "Näytä sarjakuva alkuperäiskoossaan hiiren keskipainikkeen napsautuksella"
 
 #: qml/ErrorPlaceholder.qml:18
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Download Comics"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "Lataa sarjakuvia"
+msgstr "Sarjakuvaa ei voitu ladata"
 
 #: qml/ErrorPlaceholder.qml:19
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Yritä myöhemmin uudelleen tai valitse toinen sarjakuva"
 
 #: qml/ErrorPlaceholder.qml:27
 #, kde-format
@@ -322,17 +321,16 @@ msgid "Store Current &Position"
 msgstr "Tallenna nykyinen si&jainti"
 
 #: qml/main.qml:250
-#, fuzzy, kde-format
-#| msgid "Comic Configuration"
+#, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
-msgstr "Sarjakuva-asetukset"
+msgstr "Sarjakuvia ei ole määritetty"
 
 #: qml/main.qml:253
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
-msgstr ""
+msgstr "Valitse sarjakuva…"
 
 #: qml/main.qml:264
 #, kde-format
