@@ -76,7 +76,7 @@ Item {
 
         color: Kirigami.Theme.textColor
         visible: (root.showUrl && comicUrl.text.length > 0)
-        text: (root.showUrl && root.comicData.websiteHost?.length > 0) ? root.comicData.websiteHost : ""
+        text: (root.showUrl && root.comicData.websiteHost.length > 0) ? root.comicData.websiteHost : ""
         textFormat: Text.PlainText
         elide: Text.ElideRight
 
