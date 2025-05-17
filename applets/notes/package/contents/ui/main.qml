@@ -624,51 +624,39 @@ PlasmoidItem {
         }
     }
 
-    Plasmoid.contextualActions: [
-        PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "White")
-            onTriggered: Plasmoid.configuration.color = "white"
-        },
-        PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "Black")
-            onTriggered: Plasmoid.configuration.color = "black"
-        },
-        PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "Red")
-            onTriggered: Plasmoid.configuration.color = "red"
-        },
-        PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "Orange")
-            onTriggered: Plasmoid.configuration.color = "orange"
-        },
-        PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "Yellow")
-            onTriggered: Plasmoid.configuration.color = "yellow"
-        },
-        PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "Green")
-            onTriggered: Plasmoid.configuration.color = "green"
-        },
-        PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "Blue")
-            onTriggered: Plasmoid.configuration.color = "blue"
-        },
-        PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "Pink")
-            onTriggered: Plasmoid.configuration.color = "pink"
-        },
-        PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "Transparent")
-            onTriggered: Plasmoid.configuration.color = "translucent"
-        },
-        PlasmaCore.Action {
-            text: i18nc("@item:inmenu", "Transparent Light")
-            onTriggered: Plasmoid.configuration.color = "translucent-light"
-        },
-        PlasmaCore.Action {
-            isSeparator: true
+    PlasmaCore.ActionGroup {
+        id: noteColorGroup
+    }
+
+    Instantiator {
+        model: [
+            {label: i18nc("@item:inmenu", "White"), color: "white"},
+            {label: i18nc("@item:inmenu", "Black"), color: "black"},
+            {label: i18nc("@item:inmenu", "Red"), color: "red"},
+            {label: i18nc("@item:inmenu", "Orange"), color: "orange"},
+            {label: i18nc("@item:inmenu", "Yellow"), color: "yellow"},
+            {label: i18nc("@item:inmenu", "Green"), color: "green"},
+            {label: i18nc("@item:inmenu", "Blue"), color: "blue"},
+            {label: i18nc("@item:inmenu", "Pink"), color: "pink"},
+            {label: i18nc("@item:inmenu", "Transparent"), color: "translucent"},
+            {label: i18nc("@item:inmenu", "Transparent Light"), color: "translucent-light"},
+        ]
+
+        onObjectAdded: (index, object) => {
+            Plasmoid.contextualActions.push(object);
         }
-    ]
+
+        PlasmaCore.Action {
+            required property string label
+            required property string color
+
+            text: label
+            actionGroup: noteColorGroup
+            checkable: true
+            checked: Plasmoid.configuration.color === color
+            onTriggered: Plasmoid.configuration.color = color
+        }
+    }
 
     Component.onCompleted: {
         // Plasmoid configuration doesn't check before emitting change signal
