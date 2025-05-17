@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -132,13 +132,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "获取漫画…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "检查新漫画间隔时间："
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -157,24 +157,6 @@ msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] "每篇漫画的图像数量"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "漫画："
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "获取新漫画…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "中键单击漫画显示为原始尺寸"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -333,3 +315,15 @@ msgstr "漫画条数(&S)："
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "漫画条标识符："
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "漫画："
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "获取新漫画…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "中键单击漫画显示为原始尺寸"

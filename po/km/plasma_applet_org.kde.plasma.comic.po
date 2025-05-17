@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2010-12-07 14:23+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -136,14 +136,14 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "យក​កំប្លែង​ថ្មី..."
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "ពិនិត្យមើល​រឿង​កំប្លែង​ថ្មី ៖"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -164,27 +164,6 @@ msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] "ឆ្នូត​ក្នុង​មួយ​កំប្លែង"
-
-#: qml/configGeneral.qml:36
-#, fuzzy, kde-format
-#| msgid "Comic"
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "កំប្លែង"
-
-#: qml/configGeneral.qml:56
-#, fuzzy, kde-format
-#| msgid "&Get New Comics..."
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "យក​កំប្លែង​ថ្មី..."
-
-#: qml/configGeneral.qml:67
-#, fuzzy, kde-format
-#| msgid "&Middle-click on the comic to show it at its original size"
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "ចុច​ប៊ូតុង​កណ្ដាល​លើ​កំប្លែង ដើម្បី​បង្ហាញ​​វា​ក្នុង​ទំហំ​ដើម​របស់វា"
 
 #: qml/ErrorPlaceholder.qml:18
 #, fuzzy, kde-format
@@ -356,6 +335,24 @@ msgstr "លេខ​ចម្រៀក ៖"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "ឧបករណ៍​កំណត់​អត្តសញ្ញាណ​ឆ្នូត ៖"
+
+#, fuzzy
+#~| msgid "Comic"
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "កំប្លែង"
+
+#, fuzzy
+#~| msgid "&Get New Comics..."
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "យក​កំប្លែង​ថ្មី..."
+
+#, fuzzy
+#~| msgid "&Middle-click on the comic to show it at its original size"
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "ចុច​ប៊ូតុង​កណ្ដាល​លើ​កំប្លែង ដើម្បី​បង្ហាញ​​វា​ក្នុង​ទំហំ​ដើម​របស់វា"
 
 #, fuzzy
 #~| msgid "General"

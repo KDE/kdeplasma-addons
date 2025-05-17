@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2025-04-20 16:32+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -148,14 +148,14 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Hae uusia sarjakuvia…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Etsi uusia strippejä:"
 
 # Konteksti: Check for new comics every: __ minute(s)
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -179,25 +179,6 @@ msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] "strippi per sarjakuva"
 msgstr[1] "strippiä per sarjakuva"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Sarjakuvat:"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Hae uusia sarjakuvia…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr ""
-"Näytä sarjakuva alkuperäiskoossaan hiiren keskipainikkeen napsautuksella"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -355,6 +336,19 @@ msgstr "S&tripin numero:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Stripin tunniste:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Sarjakuvat:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Hae uusia sarjakuvia…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr ""
+#~ "Näytä sarjakuva alkuperäiskoossaan hiiren keskipainikkeen napsautuksella"
 
 #~ msgctxt "@title"
 #~ msgid "General"

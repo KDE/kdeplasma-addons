@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2025-05-14 17:31+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -132,13 +132,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "احصل على قصص مصورة…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "التمس الرسمات الجديدة كل:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -167,24 +167,6 @@ msgstr[2] "صورتين في كل قصة"
 msgstr[3] "صور في كل قصة"
 msgstr[4] "صورة في كل قصة"
 msgstr[5] "صورة في كل قصة"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "الرسمات:"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "احصل على رسمات جديدة..."
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "النقر بالزر الأوسط لعرض حجمها الفعلي"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -346,6 +328,18 @@ msgstr "رقم ال&شريط:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "معرف الشريط:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "الرسمات:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "احصل على رسمات جديدة..."
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "النقر بالزر الأوسط لعرض حجمها الفعلي"
 
 #~ msgctxt "@title"
 #~ msgid "General"

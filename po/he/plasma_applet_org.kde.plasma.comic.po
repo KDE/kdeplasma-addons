@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2025-05-03 14:20+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -145,13 +145,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "הורדת קומיקס חדש…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "לבדוק אם יש קומיקסים חדשים כל:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -179,24 +179,6 @@ msgstr[0] "רצועה לקומיקס"
 msgstr[1] "רצועות לקומיקס"
 msgstr[2] "רצועות לקומיקס"
 msgstr[3] "רצועות לקומיקס"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "קומיקס:"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "הורדת קומיקס חדש…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "לחיצה אמצעית על קומיקס תציג את גודלו המקורי"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -354,6 +336,18 @@ msgstr "מספר ה&רצועה:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "מזהה הרצועה:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "קומיקס:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "הורדת קומיקס חדש…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "לחיצה אמצעית על קומיקס תציג את גודלו המקורי"
 
 #~ msgctxt "@title"
 #~ msgid "General"

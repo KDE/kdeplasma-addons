@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2022-07-22 16:57+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -142,13 +142,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Get New Comics…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Check for new comics every:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -172,24 +172,6 @@ msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] " strips per comic"
 msgstr[1] "strips per comic"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Comics:"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Get New Comics…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "Middle-click on comic to display at original size"
 
 #: qml/ErrorPlaceholder.qml:18
 #, fuzzy, kde-format
@@ -349,6 +331,18 @@ msgstr "&Strip number:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Strip identifier:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Comics:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Get New Comics…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "Middle-click on comic to display at original size"
 
 #~ msgctxt "@title"
 #~ msgid "General"

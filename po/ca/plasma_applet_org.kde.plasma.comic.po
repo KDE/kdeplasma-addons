@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2025-05-14 10:02+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -135,13 +135,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Obtén còmics…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Comprova si hi ha còmics nous cada:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -162,24 +162,6 @@ msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] "imatges per còmic"
 msgstr[1] "imatges per còmic"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Còmics:"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Aconsegueix còmics nous…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "Clic del mig al còmic per a veure'l a la mida original"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -345,3 +327,15 @@ msgstr "&Tira número:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identificador de tira:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Còmics:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Aconsegueix còmics nous…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "Clic del mig al còmic per a veure'l a la mida original"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_comic.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2007-11-16 11:40-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -138,14 +138,14 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Fai&gh Stiallchartúin Nua..."
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Lorg stiallchartúin nua:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -173,27 +173,6 @@ msgstr[1] ""
 msgstr[2] ""
 msgstr[3] ""
 msgstr[4] ""
-
-#: qml/configGeneral.qml:36
-#, fuzzy, kde-format
-#| msgid "Comic"
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Stiallchartún"
-
-#: qml/configGeneral.qml:56
-#, fuzzy, kde-format
-#| msgid "&Get New Comics..."
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Fai&gh Stiallchartúin Nua..."
-
-#: qml/configGeneral.qml:67
-#, fuzzy, kde-format
-#| msgid "&Middle-click on the comic to show it at its original size"
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "&Lárchliceáil an stiallchartún chun é a thaispeáint sa bhunmhéid"
 
 #: qml/ErrorPlaceholder.qml:18
 #, fuzzy, kde-format
@@ -364,6 +343,24 @@ msgstr "&Uimhir Stiallchartúin:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Aitheantóir an stiallchartúin:"
+
+#, fuzzy
+#~| msgid "Comic"
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Stiallchartún"
+
+#, fuzzy
+#~| msgid "&Get New Comics..."
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Fai&gh Stiallchartúin Nua..."
+
+#, fuzzy
+#~| msgid "&Middle-click on the comic to show it at its original size"
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "&Lárchliceáil an stiallchartún chun é a thaispeáint sa bhunmhéid"
 
 #, fuzzy
 #~| msgid "General"

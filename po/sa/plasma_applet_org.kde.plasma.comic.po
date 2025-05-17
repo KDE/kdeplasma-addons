@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -142,13 +142,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "नवीन हास्यकथाः प्राप्नुवन्तु…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "प्रत्येकं नूतनानि हास्यकथाः पश्यन्तु:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -172,24 +172,6 @@ msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] "प्रति हास्यं पट्टिका"
 msgstr[1] "प्रति हास्यं पट्टिकाः"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "हास्यकथाः :"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "नवीन हास्यकथाः प्राप्नुवन्तु…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "मूल आकारे प्रदर्शयितुं comic इत्यत्र मध्य-क्लिक् कुर्वन्तु"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -347,6 +329,18 @@ msgstr "&पट्टिका संख्या: 1 ."
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "पट्टीपरिचयः :"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "हास्यकथाः :"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "नवीन हास्यकथाः प्राप्नुवन्तु…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "मूल आकारे प्रदर्शयितुं comic इत्यत्र मध्य-क्लिक् कुर्वन्तु"
 
 #~ msgctxt "@title"
 #~ msgid "General"

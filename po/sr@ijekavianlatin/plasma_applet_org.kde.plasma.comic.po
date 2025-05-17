@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2015-03-14 17:59+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -141,14 +141,14 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Dobavi nove stripove..."
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Traži nove kaiševe stripa:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -174,27 +174,6 @@ msgstr[0] "kaiševa po stripu"
 msgstr[1] "kaiševa po stripu"
 msgstr[2] "kaiševa po stripu"
 msgstr[3] "kaiševa po stripu"
-
-#: qml/configGeneral.qml:36
-#, fuzzy, kde-format
-#| msgid "Comic"
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Strip"
-
-#: qml/configGeneral.qml:56
-#, fuzzy, kde-format
-#| msgid "Get New Comics..."
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Dobavi nove stripove..."
-
-#: qml/configGeneral.qml:67
-#, fuzzy, kde-format
-#| msgid "Middle-click on the comic to show it at its original size"
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "Srednji klik na strip daje njegovu izvornu veličinu"
 
 # >> @title
 #: qml/ErrorPlaceholder.qml:18
@@ -368,6 +347,24 @@ msgstr "Broj &stripa:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identifikator stripa:"
+
+#, fuzzy
+#~| msgid "Comic"
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Strip"
+
+#, fuzzy
+#~| msgid "Get New Comics..."
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Dobavi nove stripove..."
+
+#, fuzzy
+#~| msgid "Middle-click on the comic to show it at its original size"
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "Srednji klik na strip daje njegovu izvornu veličinu"
 
 #, fuzzy
 #~| msgid "General"

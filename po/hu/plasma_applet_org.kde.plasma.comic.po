@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2024-01-16 21:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -142,13 +142,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Új képregények beszerzése…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Új képregények keresési időköze:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -172,24 +172,6 @@ msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] "képsor képregényenként"
 msgstr[1] "képsor képregényenként"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Képregények:"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Új képregények beszerzése…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "Megjelenítés az eredeti méretben középső kattintásra"
 
 #: qml/ErrorPlaceholder.qml:18
 #, fuzzy, kde-format
@@ -349,6 +331,18 @@ msgstr "&Adott számúra:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Képregényazonosító:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Képregények:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Új képregények beszerzése…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "Megjelenítés az eredeti méretben középső kattintásra"
 
 #~ msgctxt "@title"
 #~ msgid "General"

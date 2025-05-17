@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2025-05-14 03:37+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -132,13 +132,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "კომიქსების მიღება…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "ახალი კომიქსების შემოწმება ყოველ:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -159,24 +159,6 @@ msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] "გამოსახულება თითოეულ კომიქსზე"
 msgstr[1] "გამოსახულება თითოეულ კომიქსზე"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "კომიქსები:"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "მიიღეთ ახალი კომიქსები…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "შუა წკაპი კომიქსზე მის საწყის ზომაში საჩვენებლად"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -342,6 +324,18 @@ msgstr "&ზოლის ნომერი:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "ზოლის იდენტიფიკატორი:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "კომიქსები:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "მიიღეთ ახალი კომიქსები…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "შუა წკაპი კომიქსზე მის საწყის ზომაში საჩვენებლად"
 
 #~ msgctxt "@title"
 #~ msgid "General"

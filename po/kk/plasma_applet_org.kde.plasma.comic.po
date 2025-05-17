@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2011-06-30 05:13+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -138,14 +138,14 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Жаңа комиксті &табу..."
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Жаңа комикс тізбегі бар ма тексеру:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -166,27 +166,6 @@ msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] " тізбек/комикс"
-
-#: qml/configGeneral.qml:36
-#, fuzzy, kde-format
-#| msgid "Comic"
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Комикс"
-
-#: qml/configGeneral.qml:56
-#, fuzzy, kde-format
-#| msgid "&Get New Comics..."
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Жаңа комиксті &табу..."
-
-#: qml/configGeneral.qml:67
-#, fuzzy, kde-format
-#| msgid "&Middle-click on the comic to show it at its original size"
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "Шын өлшемімен көрсету үшін үстінен &ортаңғы  батырмамен түрту"
 
 #: qml/ErrorPlaceholder.qml:18
 #, fuzzy, kde-format
@@ -358,6 +337,24 @@ msgstr "&Тізбектің нөмірі:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Тізбектің идентификаторы:"
+
+#, fuzzy
+#~| msgid "Comic"
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Комикс"
+
+#, fuzzy
+#~| msgid "&Get New Comics..."
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Жаңа комиксті &табу..."
+
+#, fuzzy
+#~| msgid "&Middle-click on the comic to show it at its original size"
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "Шын өлшемімен көрсету үшін үстінен &ортаңғы  батырмамен түрту"
 
 #, fuzzy
 #~| msgid "General"

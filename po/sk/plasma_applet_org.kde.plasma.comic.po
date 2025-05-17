@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2022-10-04 17:53+0200\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -142,13 +142,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Získať nové komiksy…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Skontrolovať nové komiksové stripy:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -174,26 +174,6 @@ msgid_plural "images per comic"
 msgstr[0] "strip na komiks"
 msgstr[1] "stripy na komiks"
 msgstr[2] "stripov na komiks"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Komiksy:"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Získať nové komiksy…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr ""
-"Kliknutie stredným tlačidlom myši na komiks zobrazí komiks v pôvodnej "
-"veľkosti"
 
 #: qml/ErrorPlaceholder.qml:18
 #, fuzzy, kde-format
@@ -353,6 +333,20 @@ msgstr "Číslo &prúžku:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identifikátor stripu:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Komiksy:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Získať nové komiksy…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr ""
+#~ "Kliknutie stredným tlačidlom myši na komiks zobrazí komiks v pôvodnej "
+#~ "veľkosti"
 
 #~ msgctxt "@title"
 #~ msgid "General"

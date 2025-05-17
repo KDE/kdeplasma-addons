@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2025-05-04 13:44+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -148,13 +148,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Obter novas bandas deseñadas…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Comprobar se hai novas bandas deseñadas cada:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -178,24 +178,6 @@ msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] "banda por banda deseñada"
 msgstr[1] "bandas por banda deseñada"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Bandas deseñadas:"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Obter novas bandas deseñadas…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "Clic central na banda deseñada para amosala co seu tamaño orixinal."
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -353,6 +335,18 @@ msgstr "&Número da banda:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identificador da banda:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Bandas deseñadas:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Obter novas bandas deseñadas…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "Clic central na banda deseñada para amosala co seu tamaño orixinal."
 
 #~ msgctxt "@title"
 #~ msgid "General"

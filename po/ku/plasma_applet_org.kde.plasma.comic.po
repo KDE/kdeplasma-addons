@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2009-01-10 23:44+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <kde-i18n-doc@kde.org>\n"
@@ -138,13 +138,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Pirtûkên Qerfî yê Nû Bîne..."
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr ""
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -165,26 +165,6 @@ msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] ""
 msgstr[1] ""
-
-#: qml/configGeneral.qml:36
-#, fuzzy, kde-format
-#| msgid "Comic:"
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Pirtûka Qerfî:"
-
-#: qml/configGeneral.qml:56
-#, fuzzy, kde-format
-#| msgid "Get New Comics..."
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Pirtûkên Qerfî yê Nû Bîne..."
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr ""
 
 #: qml/ErrorPlaceholder.qml:18
 #, fuzzy, kde-format
@@ -350,6 +330,18 @@ msgstr "Hejmara &Beşê:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Danasînkara pirtûka qerfî nîşan bide"
+
+#, fuzzy
+#~| msgid "Comic:"
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Pirtûka Qerfî:"
+
+#, fuzzy
+#~| msgid "Get New Comics..."
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Pirtûkên Qerfî yê Nû Bîne..."
 
 #, fuzzy
 #~| msgid "General"

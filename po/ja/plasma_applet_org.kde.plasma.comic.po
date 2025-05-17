@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2022-03-06 11:54+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -143,13 +143,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "新しい漫画を取得…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "新しいプラグインを次の間隔で確認:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -171,24 +171,6 @@ msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] "漫画ごとのストリップ"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "漫画:"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "新しい漫画を取得…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "漫画を中クリックしたら実際のサイズで表示する"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -348,6 +330,18 @@ msgstr "ストリップ番号(&S):"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "ストリップ ID:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "漫画:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "新しい漫画を取得…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "漫画を中クリックしたら実際のサイズで表示する"
 
 #~ msgctxt "@title"
 #~ msgid "General"

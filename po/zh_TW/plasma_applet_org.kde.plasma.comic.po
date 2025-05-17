@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-14 00:44+0000\n"
-"PO-Revision-Date: 2025-05-01 17:27+0900\n"
+"PO-Revision-Date: 2025-05-16 16:13+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -42,111 +42,111 @@ msgid "Visit the comic website"
 msgstr "造訪漫畫網站"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
+#, kde-format
 #| msgctxt "@title:group"
 #| msgid "Comics:"
 msgctxt "@title"
 msgid "Comics"
-msgstr "漫畫："
+msgstr "漫畫"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "行為"
 
 #: qml/configBehavior.qml:28
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show above image:"
-msgstr ""
+msgstr "顯示於影像上方："
 
 #: qml/configBehavior.qml:29
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Title"
-msgstr ""
+msgstr "標題"
 
 #: qml/configBehavior.qml:34
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Author"
-msgstr ""
+msgstr "作者"
 
 #: qml/configBehavior.qml:39
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show below image:"
-msgstr ""
+msgstr "顯示於影像下方："
 
 #: qml/configBehavior.qml:40
-#, fuzzy, kde-format
+#, kde-format
 #| msgctxt "@option:check"
 #| msgid "Comic identifier"
 msgctxt "@option:check show below image"
 msgid "Identifier"
-msgstr "漫畫辨識碼"
+msgstr "識別子"
 
 #: qml/configBehavior.qml:45
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Website"
-msgstr ""
+msgstr "網站"
 
 #: qml/configBehavior.qml:54
-#, fuzzy, kde-format
+#, kde-format
 #| msgid "Show navigation buttons:"
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
-msgstr "顯示導覽按鈕："
+msgstr "導覽按鈕："
 
 #: qml/configBehavior.qml:55
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
-msgstr ""
+msgstr "總是顯示在側邊"
 
 #: qml/configBehavior.qml:61
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
-msgstr ""
+msgstr "滑鼠停駐時顯示在中間"
 
 #: qml/configBehavior.qml:70
 #, kde-format
 msgctxt "@label for checkbox, completes sentence … opens full-size view"
 msgid "Middle-clicking image:"
-msgstr ""
+msgstr "中鍵點擊影像時："
 
 #: qml/configBehavior.qml:71
 #, kde-format
 msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
-msgstr ""
+msgstr "開啟完整大小檢視"
 
 #: qml/configComics.qml:26
-#, fuzzy, kde-format
+#, kde-format
 #| msgctxt "@action:button"
 #| msgid "Get New Comics…"
 msgctxt "@action:button"
 msgid "Get New…"
-msgstr "取得新漫畫…"
+msgstr "取得新的…"
 
 #: qml/configComics.qml:65
-#, fuzzy, kde-format
+#, kde-format
 #| msgctxt "@info placeholdermessage if no comics loaded"
 #| msgid "No comics configured"
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
-msgstr "未設定漫畫"
+msgstr "未安裝漫畫"
 
 #: qml/configComics.qml:67
-#, fuzzy, kde-format
+#, kde-format
 #| msgctxt "@action:button"
 #| msgid "Get New Comics…"
 msgctxt "@action:button"
 msgid "Get Comics…"
-msgstr "取得新漫畫…"
+msgstr "取得漫畫…"
 
 #: qml/configComics.qml:81 qml/configGeneral.qml:75
 #, kde-format
@@ -165,17 +165,17 @@ msgstr[0] "每分鐘"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
-msgstr ""
+msgstr "保留本地封存："
 
 #: qml/configComics.qml:103
-#, fuzzy, kde-format
+#, kde-format
 #| msgctxt "@item:valuesuffix spacing to number + unit"
 #| msgid "strip per comic"
 #| msgid_plural "strips per comic"
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
-msgstr[0] " 則 / 每篇漫畫"
+msgstr[0] " 張影像 / 每篇漫畫"
 
 #: qml/configGeneral.qml:36
 #, kde-format
@@ -211,7 +211,7 @@ msgstr "請稍候再試，或是選擇別的漫畫"
 #, kde-format
 msgctxt "@info placeholdermessage title if offline"
 msgid "Offline"
-msgstr ""
+msgstr "離線"
 
 #: qml/ErrorPlaceholder.qml:28
 #, kde-format
@@ -219,13 +219,13 @@ msgctxt "@info placeholdermessage connection"
 msgid ""
 "Reconnect to the internet to retry loading this image. You can still view "
 "any images in the local archive."
-msgstr ""
+msgstr "重新連線到網際網路來重試載入這個影像。您還是可以檢視任何本地封存內的影像。"
 
 #: qml/ErrorPlaceholder.qml:36
 #, kde-format
 msgctxt "@info placeholdermessage title if connection local/unknown"
 msgid "Limited connectivity"
-msgstr ""
+msgstr "受限的網路"
 
 #: qml/ErrorPlaceholder.qml:37
 #, kde-format
@@ -233,26 +233,26 @@ msgctxt "@info placeholdermessage explanation if connection local/unknown"
 msgid ""
 "The image may not be available on your current connection. You can still "
 "view any images in the local archive."
-msgstr ""
+msgstr "影像可能無法透過您目前的連線取得。您還是可以檢視任何本地封存內的影像。"
 
 #: qml/ErrorPlaceholder.qml:45
 #, kde-format
 msgctxt "@info placeholdermessage title if today not available"
 msgid "Not available"
-msgstr ""
+msgstr "不可用"
 
 #: qml/ErrorPlaceholder.qml:46
 #, kde-format
 msgctxt "@info placeholdermessage explanation if today not available"
 msgid ""
 "Today's image is not yet available or cannot be read. Try a different date."
-msgstr ""
+msgstr "今天的影像尚未發佈或是無法閱讀。請嘗試別的日期。"
 
 #: qml/ErrorPlaceholder.qml:54
 #, kde-format
 msgctxt "@info placeholdermessage title if date not available"
 msgid "Not available"
-msgstr ""
+msgstr "不可用"
 
 #: qml/ErrorPlaceholder.qml:55
 #, kde-format
@@ -260,7 +260,7 @@ msgctxt "@info placeholdermessage explanation if date not available"
 msgid ""
 "The image for this day is not available or cannot be read. Try a different "
 "date."
-msgstr ""
+msgstr "這天的影像無法使用或是無法閱讀。請嘗試別的日期。"
 
 #: qml/main.qml:80
 #, kde-format
