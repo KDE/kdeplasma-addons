@@ -651,6 +651,7 @@ PlasmoidItem {
             required property string color
 
             text: label
+            icon.icon: NotesHelper.noteIcon(color)
             actionGroup: noteColorGroup
             checkable: true
             checked: Plasmoid.configuration.color === color

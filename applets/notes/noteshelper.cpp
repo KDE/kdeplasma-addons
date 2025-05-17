@@ -8,7 +8,10 @@
 #include "noteshelper.h"
 
 #include <QFile>
+#include <QIconEngine>
 #include <QUrl>
+
+#include "noteiconengine.h"
 
 NotesHelper::NotesHelper(QObject *parent)
     : QObject(parent)
@@ -27,4 +30,9 @@ QString NotesHelper::fileContents(const QString &path) const
     }
 
     return QString::fromUtf8(file.readAll());
+}
+
+QIcon NotesHelper::noteIcon(const QString &color) const
+{
+    return QIcon{new NoteIconEngine{color}};
 }
