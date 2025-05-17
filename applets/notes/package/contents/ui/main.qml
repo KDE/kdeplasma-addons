@@ -47,9 +47,13 @@ PlasmoidItem {
 
     // define colors used for icons in ToolButtons and for text in TextArea.
     // this is deliberately _NOT_ the theme color as we are over a known bright background!
+    // except in a panel when it is translucent, the panel background is used, so we use the normal text color.
     // an unknown colour over a known colour is a bad move as you end up with white on yellow.
     readonly property color textIconColor: {
-        if (Plasmoid.configuration.color === "black" || Plasmoid.configuration.color === "translucent-light") {
+        const color = Plasmoid.configuration.color;
+        if (inPanel && (color === "translucent" || color === "translucent-light")) {
+            return Kirigami.Theme.textColor;
+        } else if (color === "black" || color === "translucent-light") {
             return "#dfdfdf";
         }
         return "#202020";
@@ -629,18 +633,24 @@ PlasmoidItem {
     }
 
     Instantiator {
-        model: [
-            {label: i18nc("@item:inmenu", "White"), color: "white"},
-            {label: i18nc("@item:inmenu", "Black"), color: "black"},
-            {label: i18nc("@item:inmenu", "Red"), color: "red"},
-            {label: i18nc("@item:inmenu", "Orange"), color: "orange"},
-            {label: i18nc("@item:inmenu", "Yellow"), color: "yellow"},
-            {label: i18nc("@item:inmenu", "Green"), color: "green"},
-            {label: i18nc("@item:inmenu", "Blue"), color: "blue"},
-            {label: i18nc("@item:inmenu", "Pink"), color: "pink"},
-            {label: i18nc("@item:inmenu", "Transparent"), color: "translucent"},
-            {label: i18nc("@item:inmenu", "Transparent Light"), color: "translucent-light"},
-        ]
+        model: {
+            let model = [
+                {label: i18nc("@item:inmenu", "White"), color: "white"},
+                {label: i18nc("@item:inmenu", "Black"), color: "black"},
+                {label: i18nc("@item:inmenu", "Red"), color: "red"},
+                {label: i18nc("@item:inmenu", "Orange"), color: "orange"},
+                {label: i18nc("@item:inmenu", "Yellow"), color: "yellow"},
+                {label: i18nc("@item:inmenu", "Green"), color: "green"},
+                {label: i18nc("@item:inmenu", "Blue"), color: "blue"},
+                {label: i18nc("@item:inmenu", "Pink"), color: "pink"},
+                {label: i18nc("@item:inmenu", "Transparent"), color: "translucent"},
+            ];
+            // Explicit translucent light makes no sense in a panel since it will always be the popup background.
+            if (!root.inPanel) {
+                model.push({label: i18nc("@item:inmenu", "Transparent Light"), color: "translucent-light"});
+            }
+            return model;
+        }
 
         onObjectAdded: (index, object) => {
             Plasmoid.contextualActions.push(object);
@@ -654,7 +664,9 @@ PlasmoidItem {
             icon.icon: NotesHelper.noteIcon(color)
             actionGroup: noteColorGroup
             checkable: true
-            checked: Plasmoid.configuration.color === color
+            checked: (Plasmoid.configuration.color === color)
+            // Pretend to be translucent if translucent light in a panel to allow roaming between panel and desktop.
+                     || (root.inPanel && color === "translucent" && Plasmoid.configuration.color === "translucent-light")
             onTriggered: Plasmoid.configuration.color = color
         }
     }
