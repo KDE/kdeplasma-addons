@@ -103,6 +103,9 @@ PlasmoidItem {
     fullRepresentation: KSvg.SvgItem {
         id: backgroundItem
 
+        // Magic property that makes the popup resizable.
+        readonly property QtObject appletInterface: root
+
         property alias mainTextArea: mainTextArea
         Layout.minimumWidth: Kirigami.Units.gridUnit * 2
         Layout.minimumHeight: Kirigami.Units.gridUnit * 2
