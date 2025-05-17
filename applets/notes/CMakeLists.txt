@@ -13,11 +13,13 @@ target_sources(notesplugin PRIVATE
     documenthandler.cpp
     filesystemnoteloader.cpp
     note.cpp
+    noteiconengine.cpp
     notemanager.cpp
     noteshelper.cpp
 )
 target_link_libraries(notesplugin PRIVATE
     Qt::Quick
     KF6::CoreAddons
+    KF6::Svg
 )
 ecm_finalize_qml_module(notesplugin)

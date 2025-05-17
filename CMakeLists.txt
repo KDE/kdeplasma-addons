@@ -66,6 +66,7 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     XmlGui
     NewStuff
     JobWidgets
+    Svg
 )
 
 find_package(Plasma5Support ${PROJECT_DEP_VERSION} REQUIRED)

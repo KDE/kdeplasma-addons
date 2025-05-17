@@ -5,6 +5,7 @@
  *    SPDX-License-Identifier: GPL-2.0-or-later
  */
 
+#include <QIcon>
 #include <QObject>
 #include <qqmlregistration.h>
 
@@ -20,4 +21,6 @@ public:
     ~NotesHelper() override = default;
 
     Q_INVOKABLE QString fileContents(const QString &path) const;
+
+    Q_INVOKABLE QIcon noteIcon(const QString &color) const;
 };
