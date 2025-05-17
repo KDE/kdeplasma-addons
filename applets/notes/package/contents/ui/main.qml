@@ -41,15 +41,20 @@ PlasmoidItem {
     readonly property real verticalMargins: fullRepresentationItem.height * 0.07
     readonly property PlasmaComponents3.TextArea mainTextArea: fullRepresentationItem.mainTextArea
     readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge,PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge].includes(Plasmoid.location)
+    // In a panel when it is translucent, the panel background is used, so we use the normal text color, and remove any margins.
+    readonly property bool noBackground: inPanel && (Plasmoid.configuration.color === "translucent" || Plasmoid.configuration.color === "translucent-light")
 
     // note is of type Note
     property QtObject note: noteManager.loadNote(Plasmoid.configuration.noteId);
 
     // define colors used for icons in ToolButtons and for text in TextArea.
     // this is deliberately _NOT_ the theme color as we are over a known bright background!
+    // except in a panel when it is translucent, the panel background is used, so we use the normal text color.
     // an unknown colour over a known colour is a bad move as you end up with white on yellow.
     readonly property color textIconColor: {
-        if (Plasmoid.configuration.color === "black" || Plasmoid.configuration.color === "translucent-light") {
+        if (noBackground) {
+            return Kirigami.Theme.textColor;
+        } else if (Plasmoid.configuration.color === "black" || Plasmoid.configuration.color === "translucent-light") {
             return "#dfdfdf";
         }
         return "#202020";
@@ -103,7 +108,7 @@ PlasmoidItem {
         Layout.minimumWidth: Kirigami.Units.gridUnit * 2
         Layout.minimumHeight: Kirigami.Units.gridUnit * 2
 
-        imagePath: "widgets/notes"
+        imagePath: root.noBackground ? "" : "widgets/notes"
         elementId: Plasmoid.configuration.color + "-notes"
 
         DocumentHandler {
@@ -129,10 +134,10 @@ PlasmoidItem {
             id: focusScope
             anchors {
                 fill: parent
-                leftMargin: horizontalMargins
-                rightMargin: horizontalMargins
-                topMargin: verticalMargins
-                bottomMargin: verticalMargins
+                leftMargin: root.noBackground ? 0 : horizontalMargins
+                rightMargin: root.noBackground ? 0 : horizontalMargins
+                topMargin: root.noBackground ? 0 : verticalMargins
+                bottomMargin: root.noBackground ? 0 : verticalMargins
             }
 
             PlasmaComponents3.ScrollView {
@@ -629,18 +634,24 @@ PlasmoidItem {
     }
 
     Instantiator {
-        model: [
-            {label: i18nc("@item:inmenu", "White"), color: "white"},
-            {label: i18nc("@item:inmenu", "Black"), color: "black"},
-            {label: i18nc("@item:inmenu", "Red"), color: "red"},
-            {label: i18nc("@item:inmenu", "Orange"), color: "orange"},
-            {label: i18nc("@item:inmenu", "Yellow"), color: "yellow"},
-            {label: i18nc("@item:inmenu", "Green"), color: "green"},
-            {label: i18nc("@item:inmenu", "Blue"), color: "blue"},
-            {label: i18nc("@item:inmenu", "Pink"), color: "pink"},
-            {label: i18nc("@item:inmenu", "Transparent"), color: "translucent"},
-            {label: i18nc("@item:inmenu", "Transparent Light"), color: "translucent-light"},
-        ]
+        model: {
+            let model = [
+                {label: i18nc("@item:inmenu", "White"), color: "white"},
+                {label: i18nc("@item:inmenu", "Black"), color: "black"},
+                {label: i18nc("@item:inmenu", "Red"), color: "red"},
+                {label: i18nc("@item:inmenu", "Orange"), color: "orange"},
+                {label: i18nc("@item:inmenu", "Yellow"), color: "yellow"},
+                {label: i18nc("@item:inmenu", "Green"), color: "green"},
+                {label: i18nc("@item:inmenu", "Blue"), color: "blue"},
+                {label: i18nc("@item:inmenu", "Pink"), color: "pink"},
+                {label: i18nc("@item:inmenu", "Transparent"), color: "translucent"},
+            ];
+            // Explicit translucent light makes no sense in a panel since it will always be the popup background.
+            if (!root.inPanel) {
+                model.push({label: i18nc("@item:inmenu", "Transparent Light"), color: "translucent-light"});
+            }
+            return model;
+        }
 
         onObjectAdded: (index, object) => {
             Plasmoid.contextualActions.push(object);
@@ -654,7 +665,9 @@ PlasmoidItem {
             icon.icon: NotesHelper.noteIcon(color)
             actionGroup: noteColorGroup
             checkable: true
-            checked: Plasmoid.configuration.color === color
+            checked: (Plasmoid.configuration.color === color)
+            // Pretend to be translucent if translucent light in a panel to allow roaming between panel and desktop.
+                     || (root.inPanel && color === "translucent" && Plasmoid.configuration.color === "translucent-light")
             onTriggered: Plasmoid.configuration.color = color
         }
     }

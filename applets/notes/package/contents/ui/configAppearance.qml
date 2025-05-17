@@ -10,6 +10,7 @@ import QtQuick.Layouts 1.15
 
 import org.kde.kcmutils as KCM
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.plasmoid
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents3
@@ -17,8 +18,11 @@ import org.kde.kirigami 2.5 as Kirigami
 import org.kde.kcmutils as KCM
 
 KCM.GridViewKCM {
+    id: kcm
     property string cfg_color
     property alias cfg_fontSize: fontSizeSpinBox.value
+
+    readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge,PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge].includes(Plasmoid.location)
 
     extraFooterTopPadding: true
 
@@ -40,8 +44,20 @@ KCM.GridViewKCM {
         }
     }
 
-    view.model: ["white", "black", "red", "orange", "yellow", "green", "blue", "pink", "translucent", "translucent-light"]
-    view.currentIndex: view.model.indexOf(cfg_color)
+    view.model: {
+        let model = ["white", "black", "red", "orange", "yellow", "green", "blue", "pink", "translucent"];
+        if (!kcm.inPanel) {
+            model.push("translucent-light");
+        }
+        return model;
+    }
+    view.currentIndex: {
+        let color = cfg_color;
+        if (kcm.inPanel && color === "translucent-light") {
+            color = "translucent";
+        }
+        return view.model.indexOf(color);
+    }
     view.onCurrentIndexChanged: cfg_color = view.model[view.currentIndex]
 
     view.delegate: KCM.GridDelegate {
@@ -80,7 +96,9 @@ KCM.GridViewKCM {
                 //this is deliberately _NOT_ the theme color as we are over a known bright background
                 //an unknown colour over a known colour is a bad move as you end up with white on yellow
                 color: {
-                    if (modelData === "black" || modelData === "translucent-light") {
+                    if (inPanel && modelData === "translucent") {
+                        return Kirigami.Theme.textColor;
+                    } else if (modelData === "black" || modelData === "translucent-light") {
                         return "#dfdfdf"
                     } else {
                         return "#202020"
