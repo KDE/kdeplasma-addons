@@ -104,9 +104,15 @@ PlasmoidItem {
     fullRepresentation: KSvg.SvgItem {
         id: backgroundItem
 
+        // Magic property that makes the popup resizable.
+        readonly property QtObject appletInterface: root
+
         property alias mainTextArea: mainTextArea
-        Layout.minimumWidth: Kirigami.Units.gridUnit * 2
-        Layout.minimumHeight: Kirigami.Units.gridUnit * 2
+        // TODO figure out what element is missing in the requiredWidth calculation...
+        Layout.minimumWidth: root.inPanel ? fontButtons.requiredWidth + focusScope.anchors.leftMargin + focusScope.anchors.rightMargin + Kirigami.Units.smallSpacing
+                                          : Kirigami.Units.gridUnit * 2
+        Layout.minimumHeight: root.inPanel ? Kirigami.Units.gridUnit * 4 + focusScope.anchors.topMargin + focusScope.anchors.bottomMargin
+                                           : Kirigami.Units.gridUnit * 2
 
         imagePath: root.noBackground ? "" : "widgets/notes"
         elementId: Plasmoid.configuration.color + "-notes"
@@ -449,7 +455,8 @@ PlasmoidItem {
                 opacity: (focusScope.activeFocus || inPanel) ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
 
-                readonly property int requiredWidth: formatButtonsRow.width + spacing + settingsButton.width + removeButton.width
+                readonly property int requiredWidth: spacing * (children.length - 1) + formatButtonsRow.width + removeButton.width
+                                                     + spacer.implicitWidth + settingsButton.width + (root.inPanel ? pinButton.width : 0)
                 readonly property bool showFormatButtons: width > requiredWidth
 
                 Row {
@@ -552,6 +559,7 @@ PlasmoidItem {
                 }
 
                 Item { // spacer
+                    id: spacer
                     implicitWidth: Kirigami.Units.largeSpacing
                 }
 
