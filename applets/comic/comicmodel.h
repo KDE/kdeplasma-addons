@@ -35,6 +35,7 @@ public:
     QVariant data(const QModelIndex &index, int role = Qt::CheckStateRole) const override;
     Qt::ItemFlags flags(const QModelIndex &index) const override;
     bool setData(const QModelIndex &index, const QVariant &value, int role = Qt::EditRole) override;
+    QStringList enabledProviders() const;
     void setEnabledProviders(const QStringList &enabledProviders);
     void setHighlight(const QModelIndex &index, bool highlight);
 
