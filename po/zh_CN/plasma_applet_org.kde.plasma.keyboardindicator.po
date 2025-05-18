@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-11-05 00:41+0000\n"
+"POT-Creation-Date: 2025-05-18 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,92 +18,92 @@ msgstr ""
 "plasma.keyboardindicator.pot\n"
 "X-Crowdin-File-ID: 43771\n"
 
-#: contents/config/config.qml:13
+#: config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Keys"
 msgstr "按键"
 
-#: contents/ui/configAppearance.qml:37
+#: configAppearance.qml:37
 #, kde-format
 msgctxt ""
 "@label show keyboard indicator when Caps Lock or Num Lock is activated"
 msgid "Show when activated:"
 msgstr "激活时显示："
 
-#: contents/ui/configAppearance.qml:40
+#: configAppearance.qml:40
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
 msgstr "大写锁定"
 
-#: contents/ui/configAppearance.qml:47
+#: configAppearance.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "小键盘数字锁定"
 
-#: contents/ui/main.qml:114
+#: main.qml:114
 #, kde-format
 msgid "Alt is latched"
 msgstr "Alt 已锁存"
 
-#: contents/ui/main.qml:116
+#: main.qml:116
 #, kde-format
 msgid "Alt is locked"
 msgstr "Alt 已锁定"
 
-#: contents/ui/main.qml:120
+#: main.qml:120
 #, kde-format
 msgid "Shift is latched"
 msgstr "Shift 已锁存"
 
-#: contents/ui/main.qml:122
+#: main.qml:122
 #, kde-format
 msgid "Shift is locked"
 msgstr "Shift 已锁定"
 
-#: contents/ui/main.qml:126
+#: main.qml:126
 #, kde-format
 msgid "Control is latched"
 msgstr "Ctrl 已锁存"
 
-#: contents/ui/main.qml:128
+#: main.qml:128
 #, kde-format
 msgid "Control is locked"
 msgstr "Ctrl 已锁定"
 
-#: contents/ui/main.qml:132
+#: main.qml:132
 #, kde-format
 msgid "Meta is latched"
 msgstr "Meta 已锁存"
 
-#: contents/ui/main.qml:134
+#: main.qml:134
 #, kde-format
 msgid "Meta is locked"
 msgstr "Meta 已锁定"
 
-#: contents/ui/main.qml:138
+#: main.qml:138
 #, kde-format
 msgid "Alt Gr is latched"
 msgstr "Alt Gr 已锁存"
 
-#: contents/ui/main.qml:140
+#: main.qml:140
 #, kde-format
 msgid "Alt Gr is locked"
 msgstr "Alt Gr 已锁定"
 
-#: contents/ui/main.qml:144
+#: main.qml:144
 #, kde-format
 msgid "Caps Lock activated"
 msgstr "大写锁定激活"
 
-#: contents/ui/main.qml:147
+#: main.qml:147
 #, kde-format
 msgid "Num Lock activated"
 msgstr "小键盘数字锁定激活"
 
-#: contents/ui/main.qml:155
+#: main.qml:155
 #, kde-format
 msgid "No lock keys activated"
 msgstr "无激活的锁定键"

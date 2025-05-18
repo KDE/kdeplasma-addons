@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-05-18 00:43+0000\n"
 "PO-Revision-Date: 2025-04-25 06:57+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -22,38 +22,37 @@ msgstr ""
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "X-Generator: Poedit 3.6\n"
 
-#: package/contents/config/config.qml:17
+#: config.qml:17
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Videz"
 
-#: package/contents/ui/configGeneral.qml:29
+#: configGeneral.qml:29
 #, kde-format
 msgctxt ""
 "@title:group The things being potentially shown are lights and seconds"
 msgid "Show:"
 msgstr "Pokaži:"
 
-#: package/contents/ui/configGeneral.qml:30
-#: package/contents/ui/configGeneral.qml:60
+#: configGeneral.qml:30 configGeneral.qml:60
 #, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "Nedejavne luči"
 
-#: package/contents/ui/configGeneral.qml:35
+#: configGeneral.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Sekunde"
 
-#: package/contents/ui/configGeneral.qml:43
+#: configGeneral.qml:43
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Uporabi barvo po meri za:"
 
-#: package/contents/ui/configGeneral.qml:47
+#: configGeneral.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Active lights"

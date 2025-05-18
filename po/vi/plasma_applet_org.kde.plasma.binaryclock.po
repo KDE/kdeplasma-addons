@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-05-18 00:43+0000\n"
 "PO-Revision-Date: 2022-05-12 12:12+0200\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -18,21 +18,20 @@ msgstr ""
 "X-Generator: Lokalize 21.12.2\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: package/contents/config/config.qml:17
+#: config.qml:17
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Diện mạo"
 
-#: package/contents/ui/configGeneral.qml:29
+#: configGeneral.qml:29
 #, kde-format
 msgctxt ""
 "@title:group The things being potentially shown are lights and seconds"
 msgid "Show:"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:30
-#: package/contents/ui/configGeneral.qml:60
+#: configGeneral.qml:30 configGeneral.qml:60
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "Inactive LEDs"
@@ -40,18 +39,18 @@ msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "LED bất hoạt"
 
-#: package/contents/ui/configGeneral.qml:35
+#: configGeneral.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Giây"
 
-#: package/contents/ui/configGeneral.qml:43
+#: configGeneral.qml:43
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Dùng màu riêng cho:"
 
-#: package/contents/ui/configGeneral.qml:47
+#: configGeneral.qml:47
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "Active LEDs"

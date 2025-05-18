@@ -1,24 +1,24 @@
 # Translation for plasma_applet_org.kde.plasma.comic.po to Euskara/Basque (eu).
 # Copyright (C) 2018, The Free Software Foundation.
-# Copyright (C) 2019-2022, This file is copyright:
+# Copyright (C) 2019-2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2025 KDE euskaratzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2009, 2018, 2019, 2022.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2009, 2018, 2019, 2022, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-17 00:43+0000\n"
-"PO-Revision-Date: 2022-08-17 10:05+0200\n"
+"PO-Revision-Date: 2025-05-17 19:33+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 25.04.1\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 
 #: comicdata.cpp:85
@@ -40,115 +40,106 @@ msgid "Visit the comic website"
 msgstr "Bisitatu komikiaren webgunea"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Comics:"
+#, kde-format
 msgctxt "@title"
 msgid "Comics"
-msgstr "Komikiak:"
+msgstr "Komikiak"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Jokabidea"
 
 #: qml/configBehavior.qml:28
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show above image:"
-msgstr ""
+msgstr "Erakutsi irudiaren gainean:"
 
 #: qml/configBehavior.qml:29
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Title"
-msgstr ""
+msgstr "Titulua"
 
 #: qml/configBehavior.qml:34
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Author"
-msgstr ""
+msgstr "Egilea"
 
 #: qml/configBehavior.qml:39
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show below image:"
-msgstr ""
+msgstr "Erakutsi irudiaren azpian:"
 
 #: qml/configBehavior.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Comic identifier"
+#, kde-format
 msgctxt "@option:check show below image"
 msgid "Identifier"
-msgstr "Komikiaren identifikatzailea"
+msgstr "Identifikatzailea"
 
 #: qml/configBehavior.qml:45
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Website"
-msgstr ""
+msgstr "Webgunea"
 
 #: qml/configBehavior.qml:54
-#, fuzzy, kde-format
-#| msgid "Show navigation buttons:"
+#, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
-msgstr "Erakutsi nabigatzeko botoiak:"
+msgstr "Nabigatzeko botoiak:"
 
 #: qml/configBehavior.qml:55
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
-msgstr ""
+msgstr "Ertzetan beti ikusgai"
 
 #: qml/configBehavior.qml:61
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
-msgstr ""
+msgstr "Erdian agertu gainetik igarotzean"
 
 #: qml/configBehavior.qml:70
 #, kde-format
 msgctxt "@label for checkbox, completes sentence … opens full-size view"
 msgid "Middle-clicking image:"
-msgstr ""
+msgstr "Irudiari erdiko-klik:"
 
 #: qml/configBehavior.qml:71
 #, kde-format
 msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
-msgstr ""
+msgstr "Tamaina osoko ikuspegia irekitzen du"
 
 #: qml/configComics.qml:26
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
-msgstr "Lortu komiki berriak..."
+msgstr "Lortu ... berria"
 
 #: qml/configComics.qml:65
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
-msgstr ""
+msgstr "Ez da komikirik instalatu"
 
 #: qml/configComics.qml:67
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
-msgstr "Lortu komiki berriak..."
+msgstr "Lortu komikiak..."
 
 #: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
-msgstr "Ikuskatu komiki-zerrenda berri bila:"
+msgstr "Hainbestero komiki berririk dagoen egiaztatu:"
 
 #: qml/configComics.qml:89
 #, kde-format
@@ -162,38 +153,33 @@ msgstr[1] "minutu"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
-msgstr ""
+msgstr "Mantendu artxibo lokala:"
 
 #: qml/configComics.qml:103
-#, fuzzy, kde-format
-#| msgctxt "@item:valuesuffix spacing to number + unit"
-#| msgid "strip per comic"
-#| msgid_plural "strips per comic"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
-msgstr[0] " zerrenda komikiko"
-msgstr[1] " zerrenda komikiko"
+msgstr[0] "irudi komikiko"
+msgstr[1] "irudi komikiko"
 
 #: qml/ErrorPlaceholder.qml:18
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Download Comics"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "Jaitsi komikiak"
+msgstr "Ezin izan du komikia zamatu"
 
 #: qml/ErrorPlaceholder.qml:19
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Saiatu berriz beranduago, edo hautatu beste komiki bat"
 
 #: qml/ErrorPlaceholder.qml:27
 #, kde-format
 msgctxt "@info placeholdermessage title if offline"
 msgid "Offline"
-msgstr ""
+msgstr "Lerroz kanpo"
 
 #: qml/ErrorPlaceholder.qml:28
 #, kde-format
@@ -202,12 +188,14 @@ msgid ""
 "Reconnect to the internet to retry loading this image. You can still view "
 "any images in the local archive."
 msgstr ""
+"Internetera berriz konektatu irudi hau zamatzen berriz saiatzeko. Artxibo "
+"lokaleko edozein irudi ikus dezakezu oraindik."
 
 #: qml/ErrorPlaceholder.qml:36
 #, kde-format
 msgctxt "@info placeholdermessage title if connection local/unknown"
 msgid "Limited connectivity"
-msgstr ""
+msgstr "Konektagarritasun mugatua"
 
 #: qml/ErrorPlaceholder.qml:37
 #, kde-format
@@ -216,12 +204,14 @@ msgid ""
 "The image may not be available on your current connection. You can still "
 "view any images in the local archive."
 msgstr ""
+"Zure uneko konexioan baliteke irudia erabilgarri ez egotea. Artxibo lokaleko "
+"edozein irudi ikus dezakezu oraindik."
 
 #: qml/ErrorPlaceholder.qml:45
 #, kde-format
 msgctxt "@info placeholdermessage title if today not available"
 msgid "Not available"
-msgstr ""
+msgstr "Ez erabilgarri"
 
 #: qml/ErrorPlaceholder.qml:46
 #, kde-format
@@ -229,12 +219,14 @@ msgctxt "@info placeholdermessage explanation if today not available"
 msgid ""
 "Today's image is not yet available or cannot be read. Try a different date."
 msgstr ""
+"Gaurko irudia ez dago erabilgarri edo ezin da irakurri. Saiatu beste data "
+"batekin."
 
 #: qml/ErrorPlaceholder.qml:54
 #, kde-format
 msgctxt "@info placeholdermessage title if date not available"
 msgid "Not available"
-msgstr ""
+msgstr "Ez erabilgarri"
 
 #: qml/ErrorPlaceholder.qml:55
 #, kde-format
@@ -243,6 +235,8 @@ msgid ""
 "The image for this day is not available or cannot be read. Try a different "
 "date."
 msgstr ""
+"Egun honetarako irudia ez dago erabilgarri edo ezin da irakurri. Saiatu "
+"beste data batekin."
 
 #: qml/main.qml:80
 #, kde-format
@@ -302,19 +296,19 @@ msgstr "Gorde uneko &kokapena"
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
-msgstr ""
+msgstr "Ez da komikirik konfiguratu"
 
 #: qml/main.qml:253
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
-msgstr ""
+msgstr "Hautatu komikia..."
 
 #: qml/main.qml:264
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
-msgstr ""
+msgstr "%1/%2 - %3.png"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format

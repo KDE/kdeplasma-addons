@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-05-18 00:43+0000\n"
 "PO-Revision-Date: 2023-12-27 22:22+0100\n"
 "Last-Translator: Johannes Obermayr <johannesobermayr@gmx.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 24.01.85\n"
 
-#: package/contents/config/config.qml:17
+#: config.qml:17
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Erscheinungsbild"
 
-#: package/contents/ui/configGeneral.qml:29
+#: configGeneral.qml:29
 #, fuzzy, kde-format
 #| msgid "Show"
 msgctxt ""
@@ -31,25 +31,24 @@ msgctxt ""
 msgid "Show:"
 msgstr "Anzeigen"
 
-#: package/contents/ui/configGeneral.qml:30
-#: package/contents/ui/configGeneral.qml:60
+#: configGeneral.qml:30 configGeneral.qml:60
 #, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "Inaktive Lichter"
 
-#: package/contents/ui/configGeneral.qml:35
+#: configGeneral.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Sekunden"
 
-#: package/contents/ui/configGeneral.qml:43
+#: configGeneral.qml:43
 #, kde-format
 msgid "Use custom color for:"
 msgstr "Eigene Farbe für:"
 
-#: package/contents/ui/configGeneral.qml:47
+#: configGeneral.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Active lights"

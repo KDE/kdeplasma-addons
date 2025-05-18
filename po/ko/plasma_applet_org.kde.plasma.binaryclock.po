@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-05-18 00:43+0000\n"
 "PO-Revision-Date: 2024-02-09 23:35+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 23.08.1\n"
 
-#: package/contents/config/config.qml:17
+#: config.qml:17
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "모양"
 
-#: package/contents/ui/configGeneral.qml:29
+#: configGeneral.qml:29
 #, fuzzy, kde-format
 #| msgid "Show"
 msgctxt ""
@@ -31,25 +31,24 @@ msgctxt ""
 msgid "Show:"
 msgstr "보이기"
 
-#: package/contents/ui/configGeneral.qml:30
-#: package/contents/ui/configGeneral.qml:60
+#: configGeneral.qml:30 configGeneral.qml:60
 #, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "꺼진 조명등"
 
-#: package/contents/ui/configGeneral.qml:35
+#: configGeneral.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "초"
 
-#: package/contents/ui/configGeneral.qml:43
+#: configGeneral.qml:43
 #, kde-format
 msgid "Use custom color for:"
 msgstr "다음에 사용자 정의 색상 사용하기:"
 
-#: package/contents/ui/configGeneral.qml:47
+#: configGeneral.qml:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Active lights"

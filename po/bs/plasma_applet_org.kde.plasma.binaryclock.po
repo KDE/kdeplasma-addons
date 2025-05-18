@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-05-18 00:43+0000\n"
 "PO-Revision-Date: 2012-09-03 15:46+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -20,14 +20,14 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && n"
 "%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 
-#: package/contents/config/config.qml:17
+#: config.qml:17
 #, fuzzy, kde-format
 #| msgid "Appearance"
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Izgled"
 
-#: package/contents/ui/configGeneral.qml:29
+#: configGeneral.qml:29
 #, fuzzy, kde-format
 #| msgid "Show"
 msgctxt ""
@@ -35,28 +35,27 @@ msgctxt ""
 msgid "Show:"
 msgstr "Prikaži"
 
-#: package/contents/ui/configGeneral.qml:30
-#: package/contents/ui/configGeneral.qml:60
+#: configGeneral.qml:30 configGeneral.qml:60
 #, fuzzy, kde-format
 #| msgid "Inactive LEDs:"
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "Neaktivne lampice:"
 
-#: package/contents/ui/configGeneral.qml:35
+#: configGeneral.qml:35
 #, fuzzy, kde-format
 #| msgid "Seconds:"
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Sekunde:"
 
-#: package/contents/ui/configGeneral.qml:43
+#: configGeneral.qml:43
 #, fuzzy, kde-format
 #| msgid "Use custom color for active LEDs:"
 msgid "Use custom color for:"
 msgstr "Posebna boja za aktivne lampice:"
 
-#: package/contents/ui/configGeneral.qml:47
+#: configGeneral.qml:47
 #, fuzzy, kde-format
 #| msgid "Active LEDs:"
 msgctxt "@option:check"

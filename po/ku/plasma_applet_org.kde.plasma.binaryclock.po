@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-05-18 00:43+0000\n"
 "PO-Revision-Date: 2009-01-11 17:09+0200\n"
 "Last-Translator: Omer Ensari <oensari@gmail.com>\n"
 "Language-Team: Kurdish <kde-i18n-doc@kde.org>\n"
@@ -19,14 +19,14 @@ msgstr ""
 "X-Poedit-Language: Kurdish\n"
 "X-Poedit-SourceCharset: utf8\n"
 
-#: package/contents/config/config.qml:17
+#: config.qml:17
 #, fuzzy, kde-format
 #| msgid "Appearance"
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Xuyakirin"
 
-#: package/contents/ui/configGeneral.qml:29
+#: configGeneral.qml:29
 #, fuzzy, kde-format
 #| msgid "Show"
 msgctxt ""
@@ -34,28 +34,27 @@ msgctxt ""
 msgid "Show:"
 msgstr "Nîşan Bide"
 
-#: package/contents/ui/configGeneral.qml:30
-#: package/contents/ui/configGeneral.qml:60
+#: configGeneral.qml:30 configGeneral.qml:60
 #, fuzzy, kde-format
 #| msgid "Inactive LEDs:"
 msgctxt "@option:check"
 msgid "Inactive lights"
 msgstr "LEDên Neçalak:"
 
-#: package/contents/ui/configGeneral.qml:35
+#: configGeneral.qml:35
 #, fuzzy, kde-format
 #| msgid "Seconds:"
 msgctxt "@option:check"
 msgid "Seconds"
 msgstr "Çirkan:"
 
-#: package/contents/ui/configGeneral.qml:43
+#: configGeneral.qml:43
 #, fuzzy, kde-format
 #| msgid "Use custom grid color:"
 msgid "Use custom color for:"
 msgstr "Rengê taybet yê izxere yê bi kar bîne:"
 
-#: package/contents/ui/configGeneral.qml:47
+#: configGeneral.qml:47
 #, fuzzy, kde-format
 #| msgid "Active LEDs:"
 msgctxt "@option:check"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-17 00:43+0000\n"
 "PO-Revision-Date: 2025-05-16 16:13+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -43,8 +43,6 @@ msgstr "造訪漫畫網站"
 
 #: qml/config.qml:13
 #, kde-format
-#| msgctxt "@title:group"
-#| msgid "Comics:"
 msgctxt "@title"
 msgid "Comics"
 msgstr "漫畫"
@@ -81,8 +79,6 @@ msgstr "顯示於影像下方："
 
 #: qml/configBehavior.qml:40
 #, kde-format
-#| msgctxt "@option:check"
-#| msgid "Comic identifier"
 msgctxt "@option:check show below image"
 msgid "Identifier"
 msgstr "識別子"
@@ -95,7 +91,6 @@ msgstr "網站"
 
 #: qml/configBehavior.qml:54
 #, kde-format
-#| msgid "Show navigation buttons:"
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
 msgstr "導覽按鈕："
@@ -126,35 +121,29 @@ msgstr "開啟完整大小檢視"
 
 #: qml/configComics.qml:26
 #, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
 msgctxt "@action:button"
 msgid "Get New…"
 msgstr "取得新的…"
 
 #: qml/configComics.qml:65
 #, kde-format
-#| msgctxt "@info placeholdermessage if no comics loaded"
-#| msgid "No comics configured"
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
 msgstr "未安裝漫畫"
 
 #: qml/configComics.qml:67
 #, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
 msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "取得漫畫…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "檢查新漫畫的週期："
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -169,31 +158,10 @@ msgstr "保留本地封存："
 
 #: qml/configComics.qml:103
 #, kde-format
-#| msgctxt "@item:valuesuffix spacing to number + unit"
-#| msgid "strip per comic"
-#| msgid_plural "strips per comic"
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] " 張影像 / 每篇漫畫"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "漫畫："
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "取得新漫畫…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "對漫畫按一下中鍵顯示回原始大小"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -219,7 +187,8 @@ msgctxt "@info placeholdermessage connection"
 msgid ""
 "Reconnect to the internet to retry loading this image. You can still view "
 "any images in the local archive."
-msgstr "重新連線到網際網路來重試載入這個影像。您還是可以檢視任何本地封存內的影像。"
+msgstr ""
+"重新連線到網際網路來重試載入這個影像。您還是可以檢視任何本地封存內的影像。"
 
 #: qml/ErrorPlaceholder.qml:36
 #, kde-format
@@ -351,6 +320,18 @@ msgstr "篇數(&S)："
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "集數辨識器："
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "漫畫："
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "取得新漫畫…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "對漫畫按一下中鍵顯示回原始大小"
 
 #~ msgctxt "@title"
 #~ msgid "General"
