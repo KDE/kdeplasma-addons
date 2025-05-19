@@ -57,11 +57,12 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
         if (update) {
             updatePixmaps();
         }
-
-        int number = idParts.at(1).toInt();
+        
+        // The applet use 1 based id for pieces
+        int number = idParts.at(1).toInt() - 1;
 
         qDebug(PLASMA_FIFTEENPUZZLE) << "pixmap for piece " << number << " requested";
-        if (number > 0 && number < m_pixmaps.size()) {
+        if (number >= 0 && number < m_pixmaps.size()) {
             *size = QSize(m_pieceWidth, m_pieceHeight);
             return m_pixmaps.at(number);
         }
