@@ -4,13 +4,13 @@
 # Tamas Szanto <taszanto@gmail.com>, 2009.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2010, 2011, 2019.
 # Kiszel Kristóf <kiszel.kristof@gmail.com>, 2017, 2021.
-# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
+# SPDX-FileCopyrightText: 2024, 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-06 00:42+0000\n"
-"PO-Revision-Date: 2024-09-26 15:19+0200\n"
+"PO-Revision-Date: 2025-05-18 20:32+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -435,13 +435,13 @@ msgctxt ""
 "possible! Omitting or changing words is fine as long as the original meaning "
 "is retained."
 msgid "Set up Weather Report…"
-msgstr ""
+msgstr "Időjárás-jelentés beállítása…"
 
 #: package/contents/ui/main.qml:371
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
-msgstr ""
+msgstr "Kattintson egy hely kiválasztásához és az ottani időjárás figyeléséhez"
 
 #: package/contents/ui/main.qml:380
 #, kde-format
