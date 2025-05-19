@@ -3,13 +3,13 @@
 #
 # Tamas Szanto <tszanto@interware.hu>, 2008.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2010, 2011, 2015, 2019.
-# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
+# SPDX-FileCopyrightText: 2024, 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-17 00:43+0000\n"
-"PO-Revision-Date: 2024-01-16 21:23+0100\n"
+"POT-Creation-Date: 2025-05-19 00:43+0000\n"
+"PO-Revision-Date: 2025-05-18 20:37+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: comicdata.cpp:85
 #, kde-format
@@ -38,47 +38,43 @@ msgid "Visit the comic website"
 msgstr "A képregény weboldalának megnyitása"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Comics:"
+#, kde-format
 msgctxt "@title"
 msgid "Comics"
-msgstr "Képregények:"
+msgstr "Képregény"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Működés"
 
 #: qml/configBehavior.qml:28
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show above image:"
-msgstr ""
+msgstr "Megjelenítés a kép felett:"
 
 #: qml/configBehavior.qml:29
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Title"
-msgstr ""
+msgstr "Cím"
 
 #: qml/configBehavior.qml:34
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Author"
-msgstr ""
+msgstr "Szerző"
 
 #: qml/configBehavior.qml:39
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show below image:"
-msgstr ""
+msgstr "Megjelenítés a kép alatt:"
 
 #: qml/configBehavior.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Comic identifier"
+#, kde-format
 msgctxt "@option:check show below image"
 msgid "Identifier"
 msgstr "Azonosító"
@@ -87,26 +83,25 @@ msgstr "Azonosító"
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Website"
-msgstr ""
+msgstr "Weboldal"
 
 #: qml/configBehavior.qml:54
-#, fuzzy, kde-format
-#| msgid "Show navigation buttons:"
+#, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
-msgstr "Navigációs gombok megjelenítése:"
+msgstr "Navigációs gombok:"
 
 #: qml/configBehavior.qml:55
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
-msgstr ""
+msgstr "Mindig láthatók a széleken"
 
 #: qml/configBehavior.qml:61
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
-msgstr ""
+msgstr "Középen jelennek meg rámutatáskor"
 
 #: qml/configBehavior.qml:70
 #, kde-format
@@ -191,7 +186,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info placeholdermessage title if offline"
 msgid "Offline"
-msgstr ""
+msgstr "Offline"
 
 #: qml/ErrorPlaceholder.qml:28
 #, kde-format
@@ -219,7 +214,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info placeholdermessage title if today not available"
 msgid "Not available"
-msgstr ""
+msgstr "Nem érhető el"
 
 #: qml/ErrorPlaceholder.qml:46
 #, kde-format
@@ -227,12 +222,14 @@ msgctxt "@info placeholdermessage explanation if today not available"
 msgid ""
 "Today's image is not yet available or cannot be read. Try a different date."
 msgstr ""
+"A mai nap képe nem érhető el vagy nem olvasható. Próbáljon meg egy másik "
+"dátumot."
 
 #: qml/ErrorPlaceholder.qml:54
 #, kde-format
 msgctxt "@info placeholdermessage title if date not available"
 msgid "Not available"
-msgstr ""
+msgstr "Nem érhető el"
 
 #: qml/ErrorPlaceholder.qml:55
 #, kde-format
@@ -241,6 +238,8 @@ msgid ""
 "The image for this day is not available or cannot be read. Try a different "
 "date."
 msgstr ""
+"Ennek a napnak a képe nem érhető el vagy nem olvasható. Próbáljon meg egy "
+"másik dátumot."
 
 #: qml/main.qml:80
 #, kde-format
@@ -296,23 +295,23 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Mentés a jelenlegi &pozícióban"
 
-#: qml/main.qml:250
+#: qml/main.qml:257
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
-msgstr ""
+msgstr "Nincsenek beállított képregények"
 
-#: qml/main.qml:253
+#: qml/main.qml:260
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
-msgstr ""
+msgstr "Képregény kiválasztása…"
 
-#: qml/main.qml:264
+#: qml/main.qml:271
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
-msgstr ""
+msgstr "%1/%2 - %3.png"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format

@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2019.
-# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
+# SPDX-FileCopyrightText: 2024, 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-03-20 00:43+0000\n"
-"PO-Revision-Date: 2024-09-26 15:20+0200\n"
+"PO-Revision-Date: 2025-05-18 20:32+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: package/contents/config/config.qml:11
 #, kde-format
@@ -134,7 +134,7 @@ msgstr "Kijelentkező képernyő megjelenítése"
 #, kde-format
 msgctxt "@action:button @info:tooltip accessible"
 msgid "Open user configuration"
-msgstr ""
+msgstr "Felhasználói beállítások megnyitása"
 
 #~ msgctxt "Show a dialog with options to logout/shutdown/restart"
 #~ msgid "Log Out"

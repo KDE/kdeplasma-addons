@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2019.
-# SPDX-FileCopyrightText: 2024 Kristof Kiszel <ulysses@fsf.hu>
+# SPDX-FileCopyrightText: 2024, 2025 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-24 00:42+0000\n"
-"PO-Revision-Date: 2024-01-16 21:16+0100\n"
+"PO-Revision-Date: 2025-05-18 20:30+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.4\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -30,8 +30,7 @@ msgid "Add More Dictionaries"
 msgstr "További szótárak hozzáadása"
 
 #: package/contents/ui/ConfigDictionaries.qml:21
-#, fuzzy, kde-format
-#| msgid "Add More…"
+#, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "Hozzáadás…"

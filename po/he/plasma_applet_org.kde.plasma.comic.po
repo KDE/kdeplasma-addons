@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-17 00:43+0000\n"
-"PO-Revision-Date: 2025-05-03 14:20+0300\n"
+"POT-Creation-Date: 2025-05-19 00:43+0000\n"
+"PO-Revision-Date: 2025-05-18 17:02+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.04.1\n"
 
 #: comicdata.cpp:85
 #, kde-format
@@ -39,111 +39,100 @@ msgid "Visit the comic website"
 msgstr "ביקור באתר הקומיקס"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Comics:"
+#, kde-format
 msgctxt "@title"
 msgid "Comics"
-msgstr "קומיקס:"
+msgstr "קומיקס"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "התנהגות"
 
 #: qml/configBehavior.qml:28
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show above image:"
-msgstr ""
+msgstr "הצגה מעל התמונה:"
 
 #: qml/configBehavior.qml:29
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Title"
-msgstr ""
+msgstr "כותרת"
 
 #: qml/configBehavior.qml:34
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Author"
-msgstr ""
+msgstr "יוצר"
 
 #: qml/configBehavior.qml:39
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show below image:"
-msgstr ""
+msgstr "הצגה מתחת לתמונה:"
 
 #: qml/configBehavior.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Comic identifier"
+#, kde-format
 msgctxt "@option:check show below image"
 msgid "Identifier"
-msgstr "מזהה הקומיקס"
+msgstr "מזהה"
 
 #: qml/configBehavior.qml:45
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Website"
-msgstr ""
+msgstr "אתר"
 
 #: qml/configBehavior.qml:54
-#, fuzzy, kde-format
-#| msgid "Show navigation buttons:"
+#, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
-msgstr "להציג כפתורי ניווט:"
+msgstr "כפתורי ניווט:"
 
 #: qml/configBehavior.qml:55
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
-msgstr ""
+msgstr "תמיד גלוי בקצוות"
 
 #: qml/configBehavior.qml:61
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
-msgstr ""
+msgstr "מופיע ממורכז בעת ריחוף מעל"
 
 #: qml/configBehavior.qml:70
 #, kde-format
 msgctxt "@label for checkbox, completes sentence … opens full-size view"
 msgid "Middle-clicking image:"
-msgstr ""
+msgstr "לחיצה אמצעית על תמונה:"
 
 #: qml/configBehavior.qml:71
 #, kde-format
 msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
-msgstr ""
+msgstr "פותחת תצוגה בגודל מלא"
 
 #: qml/configComics.qml:26
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
-msgstr "הורדת קומיקס חדש…"
+msgstr "הורדת חדש…"
 
 #: qml/configComics.qml:65
-#, fuzzy, kde-format
-#| msgctxt "@info placeholdermessage if no comics loaded"
-#| msgid "No comics configured"
+#, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
-msgstr "לא הוגדר קומיקס"
+msgstr "לא מותקן קומיקס"
 
 #: qml/configComics.qml:67
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
-msgstr "הורדת קומיקס חדש…"
+msgstr "הורדת קומיקס…"
 
 #: qml/configComics.qml:81
 #, kde-format
@@ -165,20 +154,17 @@ msgstr[3] "דקות"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
-msgstr ""
+msgstr "לשמור על ארכיון מקומי:"
 
 #: qml/configComics.qml:103
-#, fuzzy, kde-format
-#| msgctxt "@item:valuesuffix spacing to number + unit"
-#| msgid "strip per comic"
-#| msgid_plural "strips per comic"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
-msgstr[0] "רצועה לקומיקס"
-msgstr[1] "רצועות לקומיקס"
-msgstr[2] "רצועות לקומיקס"
-msgstr[3] "רצועות לקומיקס"
+msgstr[0] "תמונה לרצועת קומיקס"
+msgstr[1] "תמונות לרצועות לקומיקס"
+msgstr[2] "תמונות לרצועות לקומיקס"
+msgstr[3] "תמונות לרצועות לקומיקס"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -196,7 +182,7 @@ msgstr "נא לנסות שוב בהמשך או לבחור בקומיקס אחר"
 #, kde-format
 msgctxt "@info placeholdermessage title if offline"
 msgid "Offline"
-msgstr ""
+msgstr "מנותק"
 
 #: qml/ErrorPlaceholder.qml:28
 #, kde-format
@@ -205,12 +191,14 @@ msgid ""
 "Reconnect to the internet to retry loading this image. You can still view "
 "any images in the local archive."
 msgstr ""
+"יש להתחבר לאינטרנט כדי לנסות לטעון את התמונה הזאת מחדש. עדיין ניתן לצפות "
+"בתמונות כלשהן שנמצאות בארכיון המקומי."
 
 #: qml/ErrorPlaceholder.qml:36
 #, kde-format
 msgctxt "@info placeholdermessage title if connection local/unknown"
 msgid "Limited connectivity"
-msgstr ""
+msgstr "חיבוריות מוגבלת"
 
 #: qml/ErrorPlaceholder.qml:37
 #, kde-format
@@ -219,12 +207,14 @@ msgid ""
 "The image may not be available on your current connection. You can still "
 "view any images in the local archive."
 msgstr ""
+"כנראה שהתמונה לא זמינה בחיבור הנוכחי שלך. עדיין אפשר לצפות בתמונות כלשהן "
+"מהארכיון המקומי."
 
 #: qml/ErrorPlaceholder.qml:45
 #, kde-format
 msgctxt "@info placeholdermessage title if today not available"
 msgid "Not available"
-msgstr ""
+msgstr "לא זמינה"
 
 #: qml/ErrorPlaceholder.qml:46
 #, kde-format
@@ -232,12 +222,13 @@ msgctxt "@info placeholdermessage explanation if today not available"
 msgid ""
 "Today's image is not yet available or cannot be read. Try a different date."
 msgstr ""
+"התמונה להיום לא זמינה עדיין או שלא ניתן לקרוא אותה. נא לנסות תאריך אחר."
 
 #: qml/ErrorPlaceholder.qml:54
 #, kde-format
 msgctxt "@info placeholdermessage title if date not available"
 msgid "Not available"
-msgstr ""
+msgstr "לא זמינה"
 
 #: qml/ErrorPlaceholder.qml:55
 #, kde-format
@@ -245,7 +236,7 @@ msgctxt "@info placeholdermessage explanation if date not available"
 msgid ""
 "The image for this day is not available or cannot be read. Try a different "
 "date."
-msgstr ""
+msgstr "התמונה ליום הזה לא זמינה או שלא ניתן לקרוא אותה. נא לנסות תאריך אחר."
 
 #: qml/main.qml:80
 #, kde-format
@@ -301,19 +292,19 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "א&חסון המקום הנוכחי"
 
-#: qml/main.qml:250
+#: qml/main.qml:257
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "לא הוגדר קומיקס"
 
-#: qml/main.qml:253
+#: qml/main.qml:260
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "בחירת קומיקס…"
 
-#: qml/main.qml:264
+#: qml/main.qml:271
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
