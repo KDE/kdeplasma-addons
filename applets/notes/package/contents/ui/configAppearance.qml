@@ -44,6 +44,9 @@ KCM.GridViewKCM {
         }
     }
 
+    view.implicitCellWidth: Kirigami.Units.gridUnit * 8
+    view.implicitCellHeight: view.implicitCellWidth
+
     view.model: {
         let model = ["white", "black", "red", "orange", "yellow", "green", "blue", "pink", "translucent"];
         if (!kcm.inPanel) {
@@ -60,35 +63,48 @@ KCM.GridViewKCM {
     }
     view.onCurrentIndexChanged: cfg_color = view.model[view.currentIndex]
 
-    view.delegate: KCM.GridDelegate {
+    view.delegate: QQC2.ItemDelegate {
         id: delegate
-        thumbnailAvailable: true
-        thumbnail: KSvg.SvgItem {
-            anchors.fill: parent
-            anchors.margins: Kirigami.Units.largeSpacing
+        width: GridView.view.cellWidth
+        height: GridView.view.cellHeight
+        highlighted: GridView.isCurrentItem
 
+        text: {
+            switch (modelData) {
+            case "white": return i18n("A white sticky note")
+            case "black": return i18n("A black sticky note")
+            case "red": return i18n("A red sticky note")
+            case "orange": return i18n("An orange sticky note")
+            case "yellow": return i18n("A yellow sticky note")
+            case "green": return i18n("A green sticky note")
+            case "blue": return i18n("A blue sticky note")
+            case "pink": return i18n("A pink sticky note")
+            case "translucent": return i18n("A transparent sticky note")
+            case "translucent-light": return i18n("A transparent sticky note with light text")
+            }
+        }
+
+        contentItem: null
+
+        KSvg.SvgItem {
+            id: thumbnail
+
+            anchors.centerIn: parent
+            width: height
+            height: parent.height - Kirigami.Units.largeSpacing
             imagePath: "widgets/notes"
             elementId: modelData + "-notes"
 
             QQC2.Label {
-                anchors.fill: parent
+                id: thumbnailLabel
+                anchors.centerIn: parent
+                // this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
+                width: Math.round(parent.width - thumbnail.width * 0.07) - Kirigami.Units.smallSpacing
+                height: Math.round(parent.height - thumbnail.height * 0.07)
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter
 
-                text: {
-                    switch (modelData) {
-                    case "white": return i18n("A white sticky note")
-                    case "black": return i18n("A black sticky note")
-                    case "red": return i18n("A red sticky note")
-                    case "orange": return i18n("An orange sticky note")
-                    case "yellow": return i18n("A yellow sticky note")
-                    case "green": return i18n("A green sticky note")
-                    case "blue": return i18n("A blue sticky note")
-                    case "pink": return i18n("A pink sticky note")
-                    case "translucent": return i18n("A transparent sticky note")
-                    case "translucent-light": return i18n("A transparent sticky note with light text")
-                    }
-                }
+                text: delegate.text
                 textFormat: Text.PlainText
                 elide: Text.ElideRight
                 wrapMode: Text.WordWrap
