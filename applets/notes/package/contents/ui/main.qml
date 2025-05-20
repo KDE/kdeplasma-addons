@@ -37,8 +37,8 @@ PlasmoidItem {
     Plasmoid.backgroundHints: PlasmaCore.Types.NoBackground
 
     // this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
-    readonly property real horizontalMargins: fullRepresentationItem.width * 0.07
-    readonly property real verticalMargins: fullRepresentationItem.height * 0.07
+    readonly property int horizontalMargins: Math.round(fullRepresentationItem.width * 0.07)
+    readonly property int verticalMargins: Math.round(fullRepresentationItem.height * 0.07)
     readonly property PlasmaComponents3.TextArea mainTextArea: fullRepresentationItem.mainTextArea
     readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge,PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge].includes(Plasmoid.location)
     // In a panel when it is translucent, the panel background is used, so we use the normal text color, and remove any margins.
