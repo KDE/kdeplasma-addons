@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-21 00:44+0000\n"
 "PO-Revision-Date: 2019-11-01 23:49+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -25,193 +25,193 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Välimus"
 
-#: package/contents/ui/configAppearance.qml:33
+#: package/contents/ui/configAppearance.qml:37
 #, kde-format
 msgid "%1pt"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:39
+#: package/contents/ui/configAppearance.qml:43
 #, fuzzy, kde-format
 #| msgid "Use custom font size:"
 msgid "Text font size:"
 msgstr "Kohandatud fondi suuruse kasutamine:"
 
-#: package/contents/ui/configAppearance.qml:64
+#: package/contents/ui/configAppearance.qml:74
 #, kde-format
 msgid "A white sticky note"
 msgstr "Valge märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:65
+#: package/contents/ui/configAppearance.qml:75
 #, kde-format
 msgid "A black sticky note"
 msgstr "Must märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:66
+#: package/contents/ui/configAppearance.qml:76
 #, kde-format
 msgid "A red sticky note"
 msgstr "Punane märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:67
+#: package/contents/ui/configAppearance.qml:77
 #, kde-format
 msgid "An orange sticky note"
 msgstr "Oranž märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:68
+#: package/contents/ui/configAppearance.qml:78
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "Kollane märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:69
+#: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgid "A green sticky note"
 msgstr "Roheline märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:70
+#: package/contents/ui/configAppearance.qml:80
 #, kde-format
 msgid "A blue sticky note"
 msgstr "Sinine märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:71
+#: package/contents/ui/configAppearance.qml:81
 #, kde-format
 msgid "A pink sticky note"
 msgstr "Roosa märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:72
+#: package/contents/ui/configAppearance.qml:82
 #, fuzzy, kde-format
 #| msgid "A translucent sticky note"
 msgid "A transparent sticky note"
 msgstr "Läbipaistev märkmepaber"
 
-#: package/contents/ui/configAppearance.qml:73
+#: package/contents/ui/configAppearance.qml:83
 #, fuzzy, kde-format
 #| msgid "A translucent sticky note with light text"
 msgid "A transparent sticky note with light text"
 msgstr "Läbipaistev märkmepaber heleda tekstiga"
 
-#: package/contents/ui/main.qml:259
+#: package/contents/ui/main.qml:270
 #, kde-format
 msgid "Undo"
 msgstr "Võta tagasi"
 
-#: package/contents/ui/main.qml:267
+#: package/contents/ui/main.qml:278
 #, kde-format
 msgid "Redo"
 msgstr "Tee uuesti"
 
-#: package/contents/ui/main.qml:277
+#: package/contents/ui/main.qml:288
 #, kde-format
 msgid "Cut"
 msgstr "Lõika"
 
-#: package/contents/ui/main.qml:285
+#: package/contents/ui/main.qml:296
 #, kde-format
 msgid "Copy"
 msgstr "Kopeeri"
 
-#: package/contents/ui/main.qml:293
+#: package/contents/ui/main.qml:304
 #, kde-format
 msgid "Paste"
 msgstr "Aseta"
 
-#: package/contents/ui/main.qml:299
+#: package/contents/ui/main.qml:310
 #, fuzzy, kde-format
 #| msgid "Paste Without Formatting"
 msgid "Paste with Full Formatting"
 msgstr "Aseta vormindamata"
 
-#: package/contents/ui/main.qml:306
+#: package/contents/ui/main.qml:317
 #, fuzzy, kde-format
 #| msgid "Formatting"
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "Vormindus"
 
-#: package/contents/ui/main.qml:321
+#: package/contents/ui/main.qml:332
 #, kde-format
 msgid "Delete"
 msgstr "Kustuta"
 
-#: package/contents/ui/main.qml:328
+#: package/contents/ui/main.qml:339
 #, kde-format
 msgid "Clear"
 msgstr "Puhasta"
 
-#: package/contents/ui/main.qml:338
+#: package/contents/ui/main.qml:349
 #, kde-format
 msgid "Select All"
 msgstr "Vali kõik"
 
-#: package/contents/ui/main.qml:467
+#: package/contents/ui/main.qml:479
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Rasvane"
 
-#: package/contents/ui/main.qml:480
+#: package/contents/ui/main.qml:492
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Kaldkiri"
 
-#: package/contents/ui/main.qml:493
+#: package/contents/ui/main.qml:505
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Allajoonimine"
 
-#: package/contents/ui/main.qml:506
+#: package/contents/ui/main.qml:518
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Läbikriipsutus"
 
-#: package/contents/ui/main.qml:579
+#: package/contents/ui/main.qml:592
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
 msgstr ""
 
-#: package/contents/ui/main.qml:608
+#: package/contents/ui/main.qml:621
 #, kde-format
 msgid "Discard this note?"
 msgstr ""
 
-#: package/contents/ui/main.qml:609
+#: package/contents/ui/main.qml:622
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr ""
 
-#: package/contents/ui/main.qml:629
+#: package/contents/ui/main.qml:647
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Valge"
 
-#: package/contents/ui/main.qml:633
+#: package/contents/ui/main.qml:648
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Must"
 
-#: package/contents/ui/main.qml:637
+#: package/contents/ui/main.qml:649
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Punane"
 
-#: package/contents/ui/main.qml:641
+#: package/contents/ui/main.qml:650
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Oranž"
 
-#: package/contents/ui/main.qml:645
+#: package/contents/ui/main.qml:651
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Kollane"
 
-#: package/contents/ui/main.qml:649
+#: package/contents/ui/main.qml:652
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
@@ -223,13 +223,13 @@ msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Sinine"
 
-#: package/contents/ui/main.qml:657
+#: package/contents/ui/main.qml:654
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Roosa"
 
-#: package/contents/ui/main.qml:661
+#: package/contents/ui/main.qml:655
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "Translucent"
@@ -237,7 +237,7 @@ msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "Läbipaistev"
 
-#: package/contents/ui/main.qml:665
+#: package/contents/ui/main.qml:659
 #, fuzzy, kde-format
 #| msgctxt "@item:inmenu"
 #| msgid "Translucent Light"
