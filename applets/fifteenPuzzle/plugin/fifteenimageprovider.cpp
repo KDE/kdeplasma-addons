@@ -14,6 +14,7 @@ FifteenImageProvider::FifteenImageProvider()
     , m_boardSize(4)
     , m_pieceWidth(30)
     , m_pieceHeight(30)
+    , m_update(false)
 {
 }
 
@@ -29,7 +30,6 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
         return QPixmap();
     }
 
-    bool update = false;
     int boardSize = idParts.at(0).toInt();
     int pieceWidth = idParts.at(2).toInt();
     int pieceHeight = idParts.at(3).toInt();
@@ -37,7 +37,7 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
     if (path != m_imagePath && !path.isEmpty()) {
         m_imagePath = path;
         qDebug(PLASMA_FIFTEENPUZZLE) << "loading pixmap from file " << path << m_pixmap.load(path);
-        update = true;
+        m_update = true;
     }
 
     if (idParts.at(1) == QLatin1String("all")) {
@@ -46,18 +46,19 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
         if (pieceWidth != m_pieceWidth || pieceHeight != m_pieceHeight) {
             m_pieceWidth = pieceWidth;
             m_pieceHeight = pieceHeight;
-            update = true;
+            m_update = true;
         }
 
         if (m_boardSize != boardSize) {
             m_boardSize = boardSize;
-            update = true;
+            m_update = true;
         }
 
-        if (update) {
+        if (m_update) {
             updatePixmaps();
+            m_update = false;
         }
-        
+
         // The applet use 1 based id for pieces
         int number = idParts.at(1).toInt() - 1;
 

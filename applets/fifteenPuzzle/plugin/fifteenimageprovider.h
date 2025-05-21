@@ -27,6 +27,7 @@ private:
     int m_boardSize;
     int m_pieceWidth;
     int m_pieceHeight;
+    bool m_update;
 
     QList<QPixmap> m_pixmaps;
 };
