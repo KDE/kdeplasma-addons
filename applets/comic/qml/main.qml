@@ -173,8 +173,6 @@ PlasmoidItem {
 
                 visible: plasmoid.configuration.tabIdentifier.length > 1
 
-                Component.onCompleted: currentIndexChanged()
-
                 onCurrentIndexChanged: {
                     if (comicTabbar.currentItem && comicTabbar.currentItem.key != "") {
                         plasmoid.tabChanged(comicTabbar.currentItem.key);
@@ -183,11 +181,20 @@ PlasmoidItem {
 
                 Repeater {
                     model: enabledComicsModel
+                    onItemAdded: (index, item) => {
+                        if (item.key === plasmoid.configuration.comic) {
+                            comicTabbar.setCurrentIndex(index)
+                        }
+                    }
                     delegate:  PlasmaComponents3.TabButton {
                         id: tabButton
 
                         readonly property string key: model.plugin
                         property bool highlighted: model.highlight
+                        onToggled: {
+                            plasmoid.configuration.comic = comicTabbar.currentItem.key;
+                            plasmoid.configuration.writeConfig()
+                        }
 
                         text: model.display
                         icon.source: model.decoration
