@@ -16,9 +16,6 @@ import org.kde.plasma.plasmoid 2.0
 Item {
     id: main
 
-    Layout.preferredWidth: Math.max(boardSize * 50, controlsRow.width)
-    Layout.preferredHeight: boardSize * 50 + controlsRow.height
-
     readonly property int boardSize: Plasmoid.configuration.boardSize
     property Component piece: Piece {}
     property var pieces: []
@@ -26,7 +23,7 @@ Item {
 
     property int seconds: 0
 
-    Keys.onPressed: {
+    Keys.onPressed: event => {
         let newPosition = main.currentPosition;
         switch (event.key) {
         case Qt.Key_Up: {
