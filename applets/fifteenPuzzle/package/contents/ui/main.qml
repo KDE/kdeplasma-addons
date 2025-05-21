@@ -18,8 +18,11 @@ import org.kde.plasma.private.fifteenpuzzle 0.1 as Private
 PlasmoidItem {
     id: root
 
-    switchWidth: Kirigami.Units.gridUnit * 16 - 20
-    switchHeight: switchWidth
+    width: Kirigami.Units.gridUnit * 16 - 20
+    height: width
+
+    switchWidth: Kirigami.Units.gridUnit * 5
+    switchHeight: Kirigami.Units.gridUnit * 5
 
     preferredRepresentation: fullRepresentation
 
