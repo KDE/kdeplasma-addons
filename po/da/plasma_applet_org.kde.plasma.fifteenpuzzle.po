@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-05-22 00:43+0000\n"
 "PO-Revision-Date: 2024-07-15 22:15+0200\n"
 "Last-Translator: rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -78,30 +78,30 @@ msgstr "Brikker:"
 msgid "Colored numbers:"
 msgstr "Farvede tal:"
 
-#: package/contents/ui/FifteenPuzzle.qml:259
+#: package/contents/ui/FifteenPuzzle.qml:256
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Tid: %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:302
+#: package/contents/ui/FifteenPuzzle.qml:299
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Bland"
 
-#: package/contents/ui/FifteenPuzzle.qml:340
+#: package/contents/ui/FifteenPuzzle.qml:337
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Samlet! Prøv igen."
 
-#: package/contents/ui/main.qml:26
+#: package/contents/ui/main.qml:29
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Puslespillet 15"
 
-#: package/contents/ui/main.qml:27
+#: package/contents/ui/main.qml:30
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Saml ved arrangere i rækkefølge"
