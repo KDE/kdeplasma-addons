@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-22 02:41+0000\n"
 "PO-Revision-Date: 2024-09-07 23:35+0300\n"
 "Last-Translator: kde-el <b3lievem@yandex.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -149,14 +149,14 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Λήψη νέων κόμικ…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Έλεγχος για νέες σειρές κόμικ:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, fuzzy, kde-format
 #| msgid "minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -179,26 +179,6 @@ msgid "images per comic"
 msgid_plural "images per comic"
 msgstr[0] " σειρές ανά κόμικ"
 msgstr[1] " σειρές ανά κόμικ"
-
-#: qml/configGeneral.qml:36
-#, fuzzy, kde-format
-#| msgid "Comic"
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Κόμικ"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Λήψη νέων κόμικ…"
-
-#: qml/configGeneral.qml:67
-#, fuzzy, kde-format
-#| msgid "Middle-click on the comic to show it at its original size"
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "Εμφάνιση σε κανονικό μέγεθος κάνοντας μεσαίο κλικ στο κόμικ"
 
 #: qml/ErrorPlaceholder.qml:18
 #, fuzzy, kde-format
@@ -322,20 +302,20 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Αποθήκευση τρέχουσας &θέσης"
 
-#: qml/main.qml:250
+#: qml/main.qml:257
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Ρύθμιση του Comic"
 
-#: qml/main.qml:253
+#: qml/main.qml:260
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:264
+#: qml/main.qml:271
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
@@ -358,6 +338,22 @@ msgstr "&Αριθμός αποκόμματος:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Αναγνωριστικό αποκόμματος:"
+
+#, fuzzy
+#~| msgid "Comic"
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Κόμικ"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Λήψη νέων κόμικ…"
+
+#, fuzzy
+#~| msgid "Middle-click on the comic to show it at its original size"
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr "Εμφάνιση σε κανονικό μέγεθος κάνοντας μεσαίο κλικ στο κόμικ"
 
 #~ msgctxt "@title"
 #~ msgid "General"

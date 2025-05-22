@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-05-22 02:41+0000\n"
 "PO-Revision-Date: 2021-12-13 18:28+0100\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -81,30 +81,30 @@ msgstr "Fitxes:"
 msgid "Colored numbers:"
 msgstr "Nombres acolorits:"
 
-#: package/contents/ui/FifteenPuzzle.qml:259
+#: package/contents/ui/FifteenPuzzle.qml:256
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Temps: %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:302
+#: package/contents/ui/FifteenPuzzle.qml:299
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Barreja"
 
-#: package/contents/ui/FifteenPuzzle.qml:340
+#: package/contents/ui/FifteenPuzzle.qml:337
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Solucionat! Torneu-ho a intentar."
 
-#: package/contents/ui/main.qml:26
+#: package/contents/ui/main.qml:29
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Trencaclosques quinze"
 
-#: package/contents/ui/main.qml:27
+#: package/contents/ui/main.qml:30
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Se soluciona posant-ho en ordre"

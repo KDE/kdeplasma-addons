@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-22 02:41+0000\n"
 "PO-Revision-Date: 2009-06-29 20:47+0200\n"
 "Last-Translator: Michôł Òstrowsczi <michol@linuxcsb.org>\n"
 "Language-Team: Kashubian <i18n-csb@linuxcsb.org>\n"
@@ -142,14 +142,14 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "&Zladëjë nowé kòmiksë..."
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, fuzzy, kde-format
 #| msgid "Choose a comic strip"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Wëbiérzë kòmiksowi sztripk"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -172,28 +172,6 @@ msgid_plural "images per comic"
 msgstr[0] ""
 msgstr[1] ""
 msgstr[2] ""
-
-#: qml/configGeneral.qml:36
-#, fuzzy, kde-format
-#| msgid "Comic"
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Kòmiks"
-
-#: qml/configGeneral.qml:56
-#, fuzzy, kde-format
-#| msgid "&Get New Comics..."
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "&Zladëjë nowé kòmiksë..."
-
-#: qml/configGeneral.qml:67
-#, fuzzy, kde-format
-#| msgid "&Middle-click on the comic to show it at its original size"
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr ""
-"&Wcësni wëstrzédną knąpã mëszë na kòmiksu żebë pòkazac jegò òriginalną miarã"
 
 #: qml/ErrorPlaceholder.qml:18
 #, fuzzy, kde-format
@@ -325,20 +303,20 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Trzëmôj terné &pòłożenié"
 
-#: qml/main.qml:250
+#: qml/main.qml:257
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Kònfigùracjô kòmiksu"
 
-#: qml/main.qml:253
+#: qml/main.qml:260
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:264
+#: qml/main.qml:271
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
@@ -364,6 +342,26 @@ msgstr "&Numer sztripka:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Pòkażë &jidentifikator kòmiksa:"
+
+#, fuzzy
+#~| msgid "Comic"
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Kòmiks"
+
+#, fuzzy
+#~| msgid "&Get New Comics..."
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "&Zladëjë nowé kòmiksë..."
+
+#, fuzzy
+#~| msgid "&Middle-click on the comic to show it at its original size"
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr ""
+#~ "&Wcësni wëstrzédną knąpã mëszë na kòmiksu żebë pòkazac jegò òriginalną "
+#~ "miarã"
 
 #, fuzzy
 #~| msgid "General"

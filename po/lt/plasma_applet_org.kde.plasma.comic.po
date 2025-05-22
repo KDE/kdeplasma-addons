@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-14 00:44+0000\n"
+"POT-Creation-Date: 2025-05-22 02:41+0000\n"
 "PO-Revision-Date: 2024-02-02 21:50+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -143,13 +143,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Gauti naujų komiksų…"
 
-#: qml/configComics.qml:81 qml/configGeneral.qml:75
+#: qml/configComics.qml:81
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Tikrinti ar yra naujų komiksų kas:"
 
-#: qml/configComics.qml:89 qml/configGeneral.qml:83
+#: qml/configComics.qml:89
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -177,24 +177,6 @@ msgstr[0] "piešinių serija vienam komiksui"
 msgstr[1] "piešinių serijos vienam komiksui"
 msgstr[2] "piešinių serijų vienam komiksui"
 msgstr[3] "piešinių serija vienam komiksui"
-
-#: qml/configGeneral.qml:36
-#, kde-format
-msgctxt "@title:group"
-msgid "Comics:"
-msgstr "Komiksai:"
-
-#: qml/configGeneral.qml:56
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Comics…"
-msgstr "Gauti naujų komiksų…"
-
-#: qml/configGeneral.qml:67
-#, kde-format
-msgctxt "@option:check"
-msgid "Middle-click on comic to display at original size"
-msgstr "Spustelėjus viduriniuoju pelės mygtuku, rodyti komiksą pradiniu dydžiu"
 
 #: qml/ErrorPlaceholder.qml:18
 #, fuzzy, kde-format
@@ -319,19 +301,19 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Saugoti dabartinę &poziciją"
 
-#: qml/main.qml:250
+#: qml/main.qml:257
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: qml/main.qml:253
+#: qml/main.qml:260
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:264
+#: qml/main.qml:271
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
@@ -354,6 +336,19 @@ msgstr "Pieši&nių serijos numeris:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Piešinių serijos identifikatorius:"
+
+#~ msgctxt "@title:group"
+#~ msgid "Comics:"
+#~ msgstr "Komiksai:"
+
+#~ msgctxt "@action:button"
+#~ msgid "Get New Comics…"
+#~ msgstr "Gauti naujų komiksų…"
+
+#~ msgctxt "@option:check"
+#~ msgid "Middle-click on comic to display at original size"
+#~ msgstr ""
+#~ "Spustelėjus viduriniuoju pelės mygtuku, rodyti komiksą pradiniu dydžiu"
 
 #~ msgctxt "@title"
 #~ msgid "General"
