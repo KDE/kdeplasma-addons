@@ -315,15 +315,3 @@ msgstr "漫画条数(&S)："
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "漫画条标识符："
-
-#~ msgctxt "@title:group"
-#~ msgid "Comics:"
-#~ msgstr "漫画："
-
-#~ msgctxt "@action:button"
-#~ msgid "Get New Comics…"
-#~ msgstr "获取新漫画…"
-
-#~ msgctxt "@option:check"
-#~ msgid "Middle-click on comic to display at original size"
-#~ msgstr "中键单击漫画显示为原始尺寸"
