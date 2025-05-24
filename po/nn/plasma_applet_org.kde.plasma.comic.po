@@ -331,15 +331,3 @@ msgstr "&Stripenummer:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Stripeidentifikator:"
-
-#~ msgctxt "@title:group"
-#~ msgid "Comics:"
-#~ msgstr "Teikneseriar:"
-
-#~ msgctxt "@action:button"
-#~ msgid "Get New Comics…"
-#~ msgstr "Hent nye striper …"
-
-#~ msgctxt "@option:check"
-#~ msgid "Middle-click on comic to display at original size"
-#~ msgstr "Midtklikk på teikneserien for å visa han i opphavleg storleik"
