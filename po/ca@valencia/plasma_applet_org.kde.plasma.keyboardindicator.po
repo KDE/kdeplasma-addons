@@ -38,7 +38,7 @@ msgstr "Mostra quan es marca:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
-msgstr "Bloq Maj"
+msgstr "Bloq Majús"
 
 #: contents/ui/configAppearance.qml:47
 #, kde-format
@@ -59,12 +59,12 @@ msgstr "«Alt» està bloquejada"
 #: contents/ui/main.qml:120
 #, kde-format
 msgid "Shift is latched"
-msgstr "«Maj» està tancada"
+msgstr "«Majús» està tancada"
 
 #: contents/ui/main.qml:122
 #, kde-format
 msgid "Shift is locked"
-msgstr "«Maj» està bloquejada"
+msgstr "«Majús» està bloquejada"
 
 #: contents/ui/main.qml:126
 #, kde-format
@@ -99,7 +99,7 @@ msgstr "«Alt Gr» està bloquejada"
 #: contents/ui/main.qml:144
 #, kde-format
 msgid "Caps Lock activated"
-msgstr "«Bloq Maj» activada"
+msgstr "«Bloq Majús» activada"
 
 #: contents/ui/main.qml:147
 #, kde-format
