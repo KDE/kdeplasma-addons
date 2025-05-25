@@ -39,7 +39,7 @@ msgstr "El color de nit no està disponible"
 #: package/contents/ui/main.qml:41
 #, kde-format
 msgid "Night Color is disabled. Click to configure"
-msgstr "El color de nit està desactivat. Feu clic per a configurar-lo"
+msgstr "El color de nit està desactivat. Cliqueu per a configurar-lo"
 
 #: package/contents/ui/main.qml:44
 #, kde-format

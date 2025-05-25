@@ -200,7 +200,7 @@ msgstr "Aconseguix còmics nous…"
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
-msgstr "Clic del mig en el còmic per a veure'l a la mida original"
+msgstr "Clic del mig damunt del còmic per a veure'l a la mida original"
 
 #: package/contents/ui/configGeneral.qml:92
 #, kde-format

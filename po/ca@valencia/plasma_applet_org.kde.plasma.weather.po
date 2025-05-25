@@ -417,7 +417,7 @@ msgstr "%1 (%2%)"
 #, kde-format
 msgctxt "@info:tooltip %1 is the translated plasmoid name"
 msgid "Click to configure %1"
-msgstr "Feu un clic per a configurar %1"
+msgstr "Cliqueu per a configurar %1"
 
 #: package/contents/ui/main.qml:381
 #, kde-format

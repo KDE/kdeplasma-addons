@@ -313,7 +313,8 @@ msgstr "No disponible"
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
-msgstr "%1 Autoria: %2. Feu un clic dret en la imatge per a veure més accions."
+msgstr ""
+"%1 Autoria: %2. Feu clic dret damunt de la imatge per a veure més accions."
 
 #: package/contents/ui/WallpaperDelegate.qml:146
 #, kde-format

@@ -38,7 +38,7 @@ msgstr "Mostra quan es marca:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
-msgstr "Bloq Maj"
+msgstr "Bloq Majús"
 
 #: contents/ui/configAppearance.qml:44
 #, kde-format
@@ -49,7 +49,7 @@ msgstr "Bloq Núm"
 #: contents/ui/main.qml:30
 #, kde-format
 msgid "Caps Lock activated\n"
-msgstr "«Bloq Maj» activada\n"
+msgstr "«Bloq Majús» activada\n"
 
 #: contents/ui/main.qml:31
 #, kde-format
