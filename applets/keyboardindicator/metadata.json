@@ -57,7 +57,7 @@
         "Description[ar]": "تعرض إذا ما كان قفل الأرقام أو الحروف الكبيرة مفعل",
         "Description[az]": "Caps Lock və ya Num Lock'un aktivliyini göstərir",
         "Description[bg]": "Показва дали са активни Caps Lock или Num Lock",
-        "Description[ca@valencia]": "Mostra si es marca el bloqueig de «Bloq Maj» o «Bloq Núm»",
+        "Description[ca@valencia]": "Mostra si es marca el bloqueig de «Bloq Majús» o «Bloq Núm»",
         "Description[ca]": "Mostra si està actiu el bloqueig de «Bloq Maj» o «Bloq Núm»",
         "Description[cs]": "Zobrazit, zda je CapsLock nebo NumLock aktivní",
         "Description[da]": "Viser hvorvidt caps lock eller num lock er aktiveret",
