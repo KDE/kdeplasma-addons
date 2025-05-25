@@ -167,7 +167,7 @@ msgstr ""
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
-msgstr "Feu clic damunt de la imatge per a obrir-la en una aplicació externa"
+msgstr "Cliqueu damunt de la imatge per a obrir-la en una aplicació externa"
 
 #: package/contents/ui/ConfigPaths.qml:27
 #, kde-format

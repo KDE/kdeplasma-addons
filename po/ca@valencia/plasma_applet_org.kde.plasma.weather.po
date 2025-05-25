@@ -442,7 +442,7 @@ msgstr "Configura l'informe meteorològic…"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
-msgstr "Feu clic per a triar una ubicació i observar la seua meteorologia"
+msgstr "Cliqueu per a triar una ubicació i observar la seua meteorologia"
 
 #: package/contents/ui/main.qml:380
 #, kde-format
