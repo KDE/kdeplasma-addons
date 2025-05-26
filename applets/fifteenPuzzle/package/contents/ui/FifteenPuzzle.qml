@@ -16,7 +16,7 @@ import org.kde.plasma.plasmoid 2.0
 Item {
     id: main
 
-    readonly property int boardSize: Plasmoid.configuration.boardSize
+    readonly property int boardSize: Math.max(Plasmoid.configuration.boardSize, 2)
     property Component piece: Piece {}
     property var pieces: []
     property int currentPosition: -1
