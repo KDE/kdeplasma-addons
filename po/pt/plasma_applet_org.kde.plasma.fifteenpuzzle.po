@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-22 02:41+0000\n"
+"POT-Creation-Date: 2025-05-28 02:38+0000\n"
 "PO-Revision-Date: 2022-03-25 09:53+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -25,50 +25,50 @@ msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr "Tamanho da grelha:"
 
-#: package/contents/ui/configAppearance.qml:52
+#: package/contents/ui/configAppearance.qml:54
 #, kde-format
 msgid "Background:"
 msgstr "Fundo:"
 
-#: package/contents/ui/configAppearance.qml:58
+#: package/contents/ui/configAppearance.qml:60
 #, kde-format
 msgid "Color:"
 msgstr "Cor:"
 
-#: package/contents/ui/configAppearance.qml:73
+#: package/contents/ui/configAppearance.qml:75
 #, kde-format
 msgid "Image:"
 msgstr "Imagem:"
 
-#: package/contents/ui/configAppearance.qml:81
+#: package/contents/ui/configAppearance.qml:83
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Localização da imagem personalizada…"
 
-#: package/contents/ui/configAppearance.qml:100
+#: package/contents/ui/configAppearance.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
 msgstr "Escolher uma imagem…"
 
-#: package/contents/ui/configAppearance.qml:108
+#: package/contents/ui/configAppearance.qml:110
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Escolher uma Imagem"
 
-#: package/contents/ui/configAppearance.qml:113
+#: package/contents/ui/configAppearance.qml:115
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Ficheiros de Imagens (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:127
+#: package/contents/ui/configAppearance.qml:129
 #, kde-format
 msgid "Tiles:"
 msgstr "Peças:"
 
-#: package/contents/ui/configAppearance.qml:131
+#: package/contents/ui/configAppearance.qml:133
 #, kde-format
 msgid "Colored numbers:"
 msgstr "Números coloridos:"
