@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-22 00:43+0000\n"
+"POT-Creation-Date: 2025-05-28 00:43+0000\n"
 "PO-Revision-Date: 2017-01-14 19:23+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -32,22 +32,22 @@ msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:52
+#: package/contents/ui/configAppearance.qml:54
 #, kde-format
 msgid "Background:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:58
+#: package/contents/ui/configAppearance.qml:60
 #, kde-format
 msgid "Color:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:73
+#: package/contents/ui/configAppearance.qml:75
 #, kde-format
 msgid "Image:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:81
+#: package/contents/ui/configAppearance.qml:83
 #, fuzzy, kde-format
 #| msgid "Path to custom image"
 msgctxt "@info:placeholder"
@@ -55,7 +55,7 @@ msgid "Path to custom image…"
 msgstr "Путања до посебне слике"
 
 # >> @title:window
-#: package/contents/ui/configAppearance.qml:100
+#: package/contents/ui/configAppearance.qml:102
 #, fuzzy, kde-format
 #| msgid "Choose an image"
 msgctxt "@info:tooltip"
@@ -63,7 +63,7 @@ msgid "Choose image…"
 msgstr "Избор слике"
 
 # >> @title:window
-#: package/contents/ui/configAppearance.qml:108
+#: package/contents/ui/configAppearance.qml:110
 #, fuzzy, kde-format
 #| msgid "Choose an image"
 msgctxt "@title:window"
@@ -71,17 +71,17 @@ msgid "Choose an Image"
 msgstr "Избор слике"
 
 # >> @item
-#: package/contents/ui/configAppearance.qml:113
+#: package/contents/ui/configAppearance.qml:115
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "фајлови слика (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:127
+#: package/contents/ui/configAppearance.qml:129
 #, kde-format
 msgid "Tiles:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:131
+#: package/contents/ui/configAppearance.qml:133
 #, kde-format
 msgid "Colored numbers:"
 msgstr ""

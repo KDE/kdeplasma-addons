@@ -1,0 +1,60 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# SPDX-FileCopyrightText: 2025 Kristof Kiszel <ulysses@fsf.hu>
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-02-27 00:42+0000\n"
+"PO-Revision-Date: 2025-05-18 20:35+0200\n"
+"Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
+"Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
+"Language: hu\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.1\n"
+
+#: colorsrunner.cpp:29
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
+"#FF00FF) or an SVG named color."
+msgstr ""
+"Megjeleníti a(z) :q: értékét, mint szín, ha :q: egy hexadecimális szín (pl. "
+"#FF00FF) vagy SVG színnév."
+
+#: colorsrunner.cpp:31
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
+"255,255,255)."
+msgstr ""
+"Megjeleníti a(z) :q: értékét, mint szín, ha :q: egy RGB színhármas (pl. "
+"255,255,255)."
+
+#: colorsrunner.cpp:34
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
+"color quadruplet (e.g. 255,255,255,255)."
+msgstr ""
+"Megjeleníti a(z) :q: értékét, mint szín, alfa csatornával, ha :q: egy RGBA "
+"színnégyes (pl. 255,255,255,255)."
+
+#: colorsrunner.cpp:139
+#, kde-format
+msgid "RGBA: %1, %2, %3, %4"
+msgstr "RGBA: %1, %2, %3, %4"
+
+#: colorsrunner.cpp:141
+#, kde-format
+msgid "RGB: %1, %2, %3"
+msgstr "RGB: %1, %2, %3"
+
+#: colorsrunner.cpp:146
+#, kde-format
+msgid "CMYK: %1%, %2%, %3%, %4%"
+msgstr "CMYK: %1%, %2%, %3%, %4%"
