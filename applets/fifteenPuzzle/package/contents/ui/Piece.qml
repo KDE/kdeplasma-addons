@@ -94,7 +94,7 @@ Rectangle {
         text: piece.number
         textFormat: Text.PlainText
         color: Plasmoid.configuration.numberColor
-        visible: Plasmoid.configuration.showNumerals
+        visible: Plasmoid.configuration.showNumerals || !Plasmoid.configuration.useImage
         z: 1
     }
 

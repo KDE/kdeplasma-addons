@@ -7,24 +7,31 @@
  * SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
 
-import QtQuick 2.15
+import QtQuick
 import QtCore
-import QtQuick.Controls 2.15 as QtControls
-import QtQuick.Layouts 1.15
+import QtQuick.Controls as QtControls
+import QtQuick.Layouts
 import QtQuick.Dialogs as QtDialogs
 
-import org.kde.kquickcontrols 2.0 as KQC
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kquickcontrols as KQC
+import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 
 KCM.SimpleKCM {
+    id: root
     property alias cfg_boardSize: sizeSpinBox.value
     property alias cfg_boardColor: pieceColorPicker.color
     property alias cfg_numberColor: numberColorPicker.color
-    property alias cfg_showNumerals: showNumeralsCheckBox.checked
+    property bool  cfg_showNumerals
 
     property alias cfg_useImage: imageBackgroundRadioButton.checked
     property alias cfg_imagePath: imagePathTextField.text
+
+    readonly property bool unsavedChanges: cfg_showNumerals === hideNumeralsRadioButton.checked
+
+    function saveConfig() : void {
+        cfg_showNumerals = !hideNumeralsRadioButton.checked
+    }
 
     Kirigami.FormLayout {
 
@@ -51,14 +58,14 @@ KCM.SimpleKCM {
 
         // Color background
         RowLayout {
-            Kirigami.FormData.label: i18n("Background:")
+            Kirigami.FormData.label: i18nc("@label:group radio button group", "Background:")
 
             QtControls.RadioButton {
                 id: colorBackgroundRadioButton
-                Layout.preferredWidth: Math.max(imageBackgroundRadioButton.implicitWidth, colorBackgroundRadioButton.implicitWidth)
+                Layout.preferredWidth: Math.max(imageBackgroundRadioButton.implicitWidth, colorBackgroundRadioButton.implicitWidth, colorLabelsRadioButton.implicitWidth)
                 QtControls.ButtonGroup.group: radioGroup
 
-                text: i18n("Color:")
+                text: i18nc("@label:chooser opens background color picker", "Color:")
             }
 
             KQC.ColorButton {
@@ -71,10 +78,10 @@ KCM.SimpleKCM {
         RowLayout {
             QtControls.RadioButton {
                 id: imageBackgroundRadioButton
-                Layout.preferredWidth: Math.max(imageBackgroundRadioButton.implicitWidth, colorBackgroundRadioButton.implicitWidth)
+                Layout.preferredWidth: Math.max(imageBackgroundRadioButton.implicitWidth, colorBackgroundRadioButton.implicitWidth, colorLabelsRadioButton.implicitWidth)
                 QtControls.ButtonGroup.group: radioGroup
 
-                text: i18n("Image:")
+                text: i18nc("@label:chooser opens background image file picker", "Image:")
             }
 
             Kirigami.ActionTextField {
@@ -98,11 +105,11 @@ KCM.SimpleKCM {
                 enabled: imageBackgroundRadioButton.checked
 
                 icon.name: "document-open"
-
-                QtControls.ToolTip {
-                    visible: imageButton.hovered
-                    text: i18nc("@info:tooltip", "Choose image…")
-                }
+                text: i18nc("@action:button", "Choose image…")
+                display: QtControls.Button.IconOnly
+                QtControls.ToolTip.text: text
+                QtControls.ToolTip.visible: hovered
+                QtControls.ToolTip.delay: Kirigami.Units.toolTipDelay
 
                 onClicked: imagePicker.open()
 
@@ -114,7 +121,7 @@ KCM.SimpleKCM {
                     currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
 
                     // TODO ask QImageReader for supported formats
-                    nameFilters: [ i18n("Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)") ]
+                    nameFilters: [ i18nc("@item:inlistbox file type category for file picker", "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)") ]
 
                     onAccepted: {
                         imagePathTextField.text = selectedFile.toString().replace("file://", "")
@@ -127,18 +134,33 @@ KCM.SimpleKCM {
             Kirigami.FormData.isSection: true
         }
 
-        RowLayout {
-            Kirigami.FormData.label: i18n("Tiles:")
+        QtControls.ButtonGroup {
+            id: labelGroup
+        }
 
-            QtControls.CheckBox {
-                id: showNumeralsCheckBox
-                text: i18n("Colored numbers:")
+        RowLayout {
+            Kirigami.FormData.label: i18nc("@title:group formdata label", "Tile labels:")
+
+            QtControls.RadioButton {
+                id: colorLabelsRadioButton
+                Layout.preferredWidth: Math.max(imageBackgroundRadioButton.implicitWidth, colorBackgroundRadioButton.implicitWidth, colorLabelsRadioButton.implicitWidth)
+                QtControls.ButtonGroup.group: labelGroup
+                checked: !hideNumeralsRadioButton.enabled || !hideNumeralsRadioButton.checked
+                text: i18nc("@label:chooser opens label color picker", "Color:")
             }
 
             KQC.ColorButton {
                 id: numberColorPicker
-                enabled: showNumeralsCheckBox.checked
+                enabled: colorLabelsRadioButton.checked
             }
+        }
+
+        QtControls.RadioButton {
+            id: hideNumeralsRadioButton
+            QtControls.ButtonGroup.group: labelGroup
+            enabled: imageBackgroundRadioButton.checked
+            checked: !root.cfg_showNumerals
+            text: i18nc("@option:check", "Hide on image backgrounds")
         }
     }
 }
