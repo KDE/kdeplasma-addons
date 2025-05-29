@@ -83,7 +83,7 @@ KCM.SimpleKCM {
                         anchors.centerIn: parent
                         width: Kirigami.Units.iconSizes.large
                         height: width
-                        source: cfg_icon || "applications-internet"
+                        source: cfg_icon || "internet-web-browser-symbolic"
                     }
                 }
 
