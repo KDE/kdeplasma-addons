@@ -300,8 +300,18 @@ Item {
         PlasmaComponents3.Button {
             id: button
             Layout.fillWidth: true
+            visible: button.implicitWidth + timeLabel.implicitWidth + controlsRow.spacing <= main.width
             icon.name: "roll"
             text: i18nc("@action:button", "Shuffle");
+            onClicked: main.shuffleBoard();
+        }
+        PlasmaComponents3.Button {
+            id: fallBackButton
+            Layout.fillWidth: true
+            visible: !button.visible
+            icon.name: "roll"
+            display: PlasmaComponents3.Button.IconOnly
+            text: button.text;
             onClicked: main.shuffleBoard();
         }
 
@@ -338,9 +348,11 @@ Item {
         PlasmaComponents3.Label {
             id: solvedLabel
             anchors.centerIn: parent
+            width: Math.min(implicitWidth, parent.width)
             color: Kirigami.Theme.textColor
             text: i18nc("@info", "Solved! Try again.")
             textFormat: Text.PlainText
+            wrapMode: Text.WordWrap
             z: 2
         }
     }
