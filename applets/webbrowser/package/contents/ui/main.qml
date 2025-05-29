@@ -19,6 +19,7 @@ PlasmoidItem {
 
     switchWidth: Kirigami.Units.gridUnit * 16
     switchHeight: Kirigami.Units.gridUnit * 23
+    Plasmoid.icon: "internet-web-browser-symbolic"
 
     // Only exists because the default CompactRepresentation doesn't expose
     // a way to display arbitrary images; it can only show icons.
