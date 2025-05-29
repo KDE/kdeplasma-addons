@@ -1,6 +1,6 @@
 {
     "KPlugin": {
-        "Description": "Calendar plugin for displaying dates from the alternate calendar system",
+        "Description": "Show dates in an alternate calendar system, such as Chinese Lunar or Islamic",
         "Description[ar]": "ملحق تقويم يعرض التاريخ في نظام تقوم بديل",
         "Description[az]": "Alternativ təqvim sistemindən tarixləri göstərmək üçün təqvim qoşması",
         "Description[bg]": "Приставка на календара за показване на дати от алтернативни календарни системи",
