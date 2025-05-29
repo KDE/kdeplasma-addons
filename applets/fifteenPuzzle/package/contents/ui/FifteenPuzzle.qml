@@ -16,6 +16,9 @@ import org.kde.plasma.plasmoid 2.0
 Item {
     id: main
 
+    Layout.minimumWidth: root.switchWidth
+    Layout.minimumHeight: root.switchHeight
+
     readonly property int boardSize: Math.max(Plasmoid.configuration.boardSize, 2)
     property Component piece: Piece {}
     property var pieces: []
@@ -160,10 +163,6 @@ Item {
             }
         }
 
-        if (blankRow === -1) {
-            console.log("Unable to find row of blank tile");
-        }
-
         // we have a solveable board if:
         // size is odd:  there are an even number of inversions
         // size is even: the number of inversions is odd if and only if
@@ -238,10 +237,7 @@ Item {
     }
 
     function solved() {
-        // Show a message that it was solved.
-        console.log("Puzzle was solved");
         solvedRect.visible = true;
-        // Stop the timer
         secondsTimer.stop();
     }
 
