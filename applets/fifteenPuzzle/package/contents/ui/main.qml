@@ -19,7 +19,7 @@ PlasmoidItem {
     id: root
 
     width: Kirigami.Units.gridUnit * 16 - 20
-    height: width
+    height: Kirigami.Units.gridUnit * 16 - 20
 
     switchWidth: Kirigami.Units.gridUnit * 5
     switchHeight: Kirigami.Units.gridUnit * 5
