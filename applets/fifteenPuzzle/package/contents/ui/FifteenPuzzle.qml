@@ -183,6 +183,9 @@ Item {
             }
             swapPieces(pieceA, pieceB);
         }
+        if (isSolved()) {
+            shuffleBoard(); // try again
+        }
         secondsTimer.stop();
     }
 
@@ -218,18 +221,20 @@ Item {
             }
         }
         secondsTimer.start();
-        checkSolved();
+        if (isSolved()) {
+            solved();
+        }
     }
 
-    function checkSolved() {
+    function isSolved() : bool {
         const count = boardSize * boardSize;
         for (let i = 0; i < count - 2; ++i) {
             if (pieces[i].number > pieces[i + 1].number) {
                 // Not solved.
-                return;
+                return false;
             }
         }
-        solved();
+        return true;
     }
 
     function solved() {
