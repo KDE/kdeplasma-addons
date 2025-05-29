@@ -271,6 +271,7 @@ Item {
             bottom: controlsRow.top
             bottomMargin: Kirigami.Units.smallSpacing
         }
+        visible: !solvedRect.visible
 
         activeFocusOnTab: true
 
@@ -324,11 +325,10 @@ Item {
         }
     }
 
-    Rectangle {
+    Item {
         id: solvedRect
         visible: false
         anchors.fill: mainGrid
-        color: Kirigami.Theme.backgroundColor
         z: 0
 
         Image {
