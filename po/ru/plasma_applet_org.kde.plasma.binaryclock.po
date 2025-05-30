@@ -5,14 +5,14 @@
 # Nick Shaforostoff <shafff@ukr.net>, 2009.
 # Nick Shaforostoff <shaforostoff@kde.ru>, 2009.
 # Alexander Potashev <aspotashev@gmail.com>, 2011, 2017, 2018, 2019.
-# Alexander Yavorsky <kekcuha@gmail.com>, 2019, 2023.
+# Alexander Yavorsky <kekcuha@gmail.com>, 2019, 2023, 2025.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-18 00:43+0000\n"
-"PO-Revision-Date: 2023-12-24 18:31+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
+"PO-Revision-Date: 2025-05-29 21:30+0200\n"
+"Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -32,12 +32,11 @@ msgid "Appearance"
 msgstr "Внешний вид"
 
 #: configGeneral.qml:29
-#, fuzzy, kde-format
-#| msgid "Show"
+#, kde-format
 msgctxt ""
 "@title:group The things being potentially shown are lights and seconds"
 msgid "Show:"
-msgstr "Показать"
+msgstr "Показывать:"
 
 #: configGeneral.qml:30 configGeneral.qml:60
 #, kde-format

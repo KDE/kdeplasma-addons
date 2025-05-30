@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-05-30 00:44+0000\n"
 "PO-Revision-Date: 2019-09-26 17:53+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -44,7 +44,7 @@ msgid "Unable to load dictionary list"
 msgstr "Луғатҳои дастрас:"
 
 #: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -62,7 +62,7 @@ msgstr "Луғатҳо"
 msgid "Delete"
 msgstr ""
 
-#: package/contents/ui/main.qml:44
+#: package/contents/ui/main.qml:45
 #, fuzzy, kde-format
 #| msgctxt "@info:placeholder"
 #| msgid "Enter word to define here"
@@ -70,7 +70,7 @@ msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Барои муайян кардани калима онро дар ин ҷо ворид намоед"
 
-#: package/contents/ui/main.qml:152
+#: package/contents/ui/main.qml:153
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox"
 #| msgid "Available dictionaries:"

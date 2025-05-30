@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-05-30 00:44+0000\n"
 "PO-Revision-Date: 2025-04-28 17:36+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -41,7 +41,7 @@ msgid "Unable to load dictionary list"
 msgstr "لا يستطيع تحميل قائمة القواميس"
 
 #: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -57,13 +57,13 @@ msgstr "لا يوجد قواميس"
 msgid "Delete"
 msgstr "احذف"
 
-#: package/contents/ui/main.qml:44
+#: package/contents/ui/main.qml:45
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "ادخل كلمة ليعرفها هنا…"
 
-#: package/contents/ui/main.qml:152
+#: package/contents/ui/main.qml:153
 #, kde-format
 msgid "Unable to load definition"
 msgstr "غير قادر على تحميل التعريف"

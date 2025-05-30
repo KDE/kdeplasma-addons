@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-28 00:43+0000\n"
+"POT-Creation-Date: 2025-05-30 00:44+0000\n"
 "PO-Revision-Date: 2024-05-13 22:47+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -77,19 +77,19 @@ msgstr "Фаянсови плочки:"
 msgid "Colored numbers:"
 msgstr "Цветни числа:"
 
-#: package/contents/ui/FifteenPuzzle.qml:256
+#: package/contents/ui/FifteenPuzzle.qml:257
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Време: %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:299
+#: package/contents/ui/FifteenPuzzle.qml:302
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Разбъркване"
 
-#: package/contents/ui/FifteenPuzzle.qml:337
+#: package/contents/ui/FifteenPuzzle.qml:349
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."

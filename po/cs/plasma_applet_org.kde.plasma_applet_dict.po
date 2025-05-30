@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-05-30 00:44+0000\n"
 "PO-Revision-Date: 2023-01-06 11:06+0100\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -40,7 +40,7 @@ msgid "Unable to load dictionary list"
 msgstr "Nelze načíst seznam slovníků"
 
 #: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -56,13 +56,13 @@ msgstr "Žádné slovníky"
 msgid "Delete"
 msgstr "Smazat"
 
-#: package/contents/ui/main.qml:44
+#: package/contents/ui/main.qml:45
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Zde zadejte definující slovo…"
 
-#: package/contents/ui/main.qml:152
+#: package/contents/ui/main.qml:153
 #, kde-format
 msgid "Unable to load definition"
 msgstr "Nelze načíst definici"
