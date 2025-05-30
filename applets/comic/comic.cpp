@@ -29,19 +29,15 @@
 
 ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
-    , mCheckNewStrips(nullptr)
     , mEngine(new ComicEngine(this))
+    , mModel(new ComicModel(mEngine, QStringList(), this))
+    , mCheckNewStrips(nullptr)
 {
     setHasConfigurationInterface(true);
 }
 
 void ComicApplet::init()
 {
-    KConfigGroup cg = config();
-    QStringList tabIdentifier = cg.readEntry("tabIdentifier", QStringList());
-
-    mModel = new ComicModel(mEngine, tabIdentifier, this);
-
     configChanged();
 
     connect(mEngine, &ComicEngine::requestFinished, this, &ComicApplet::dataUpdated);
@@ -139,15 +135,8 @@ void ComicApplet::tabChanged(const QString &identifier)
 
 void ComicApplet::configChanged()
 {
-    KConfigGroup cg = config();
-
-    QStringList tabIdentifier = cg.readEntry("tabIdentifier", QStringList());
-
-    if (mModel) {
-        updateUsedComics();
-    }
-
-    mEngine->setMaxComicLimit(cg.readEntry("maxComicLimit", 29));
+    updateUsedComics();
+    mEngine->setMaxComicLimit(config().readEntry("maxComicLimit", 29));
 }
 
 void ComicApplet::slotFoundLastStrip(int index, const QString &identifier, const QString &suffix)
