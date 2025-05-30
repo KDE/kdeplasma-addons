@@ -21,7 +21,6 @@ public:
 private:
     // Update our pixmaps, called when sizes change or boardSize changes
     void updatePixmaps();
-    QStringList maxSplit(const QString &toSplit, QLatin1Char separator);
 
     QString m_imagePath;
     QPixmap m_pixmap;
