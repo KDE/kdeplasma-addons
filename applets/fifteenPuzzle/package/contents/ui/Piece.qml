@@ -21,12 +21,6 @@ Rectangle {
     radius: Kirigami.Units.cornerRadius
     visible: !empty
 
-    Layout.minimumWidth: 10
-    Layout.preferredWidth: 30
-
-    Layout.minimumHeight: 10
-    Layout.preferredHeight: 30
-
     x: boardColumn * (width + margin) + margin / 2
     y: boardRow * (height + margin) + margin / 2
     width: pieceWidth
@@ -45,7 +39,7 @@ Rectangle {
     property int number
     property int position
 
-    Keys.onPressed: {
+    Keys.onPressed: event => {
         switch (event.key) {
         case Qt.Key_Space:
         case Qt.Key_Enter:

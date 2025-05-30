@@ -67,10 +67,6 @@ PlasmoidItem {
         filterRowCallback: function(source_row, source_parent) {
             return sourceModel.index(source_row, 0, source_parent).data(KItemModels.KRoleNames.role("enabled"));
         }
-        onModelReset: {
-            mainWindow.fullRepresentationItem?.comicTabbar.setCurrentIndex(0);
-            mainWindow.fullRepresentationItem?.comicTabbar.currentIndexChanged();
-        }
     }
 
     Plasmoid.contextualActions: [
@@ -184,6 +180,9 @@ PlasmoidItem {
                     onItemAdded: (index, item) => {
                         if (item.key === plasmoid.configuration.comic) {
                             comicTabbar.setCurrentIndex(index)
+                        } else if (count === 1) {
+                            comicTabbar.setCurrentIndex(0)
+                            comicTabbar.currentIndexChanged()
                         }
                     }
                     delegate:  PlasmaComponents3.TabButton {

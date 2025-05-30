@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-05-30 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 21:48+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -29,55 +29,55 @@ msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:52
+#: package/contents/ui/configAppearance.qml:54
 #, kde-format
 msgid "Background:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:58
+#: package/contents/ui/configAppearance.qml:60
 #, kde-format
 msgid "Color:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:73
+#: package/contents/ui/configAppearance.qml:75
 #, kde-format
 msgid "Image:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:81
+#: package/contents/ui/configAppearance.qml:83
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:100
+#: package/contents/ui/configAppearance.qml:102
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:108
+#: package/contents/ui/configAppearance.qml:110
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:113
+#: package/contents/ui/configAppearance.qml:115
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:127
+#: package/contents/ui/configAppearance.qml:129
 #, kde-format
 msgid "Tiles:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:131
+#: package/contents/ui/configAppearance.qml:133
 #, kde-format
 msgid "Colored numbers:"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:259
+#: package/contents/ui/FifteenPuzzle.qml:257
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
@@ -89,18 +89,18 @@ msgctxt "@action:button"
 msgid "Shuffle"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:340
+#: package/contents/ui/FifteenPuzzle.qml:349
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr ""
 
-#: package/contents/ui/main.qml:26
+#: package/contents/ui/main.qml:29
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr ""
 
-#: package/contents/ui/main.qml:27
+#: package/contents/ui/main.qml:30
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr ""

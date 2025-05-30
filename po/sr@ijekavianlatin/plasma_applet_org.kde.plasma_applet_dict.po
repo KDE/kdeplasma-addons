@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.dict\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-05-30 00:44+0000\n"
 "PO-Revision-Date: 2017-12-15 12:38+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -44,7 +44,7 @@ msgid "Unable to load dictionary list"
 msgstr "Dostupni rečnici:"
 
 #: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -61,14 +61,14 @@ msgstr "Rečnici"
 msgid "Delete"
 msgstr ""
 
-#: package/contents/ui/main.qml:44
+#: package/contents/ui/main.qml:45
 #, fuzzy, kde-format
 #| msgid "Enter word to define here"
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Unesite reč za definisanje"
 
-#: package/contents/ui/main.qml:152
+#: package/contents/ui/main.qml:153
 #, kde-format
 msgid "Unable to load definition"
 msgstr ""

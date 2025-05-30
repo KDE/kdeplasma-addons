@@ -29,19 +29,15 @@
 
 ComicApplet::ComicApplet(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : Plasma::Applet(parent, data, args)
-    , mCheckNewStrips(nullptr)
     , mEngine(new ComicEngine(this))
+    , mModel(new ComicModel(mEngine, QStringList(), this))
+    , mCheckNewStrips(nullptr)
 {
     setHasConfigurationInterface(true);
 }
 
 void ComicApplet::init()
 {
-    KConfigGroup cg = config();
-    QStringList tabIdentifier = cg.readEntry("tabIdentifier", QStringList());
-
-    mModel = new ComicModel(mEngine, tabIdentifier, this);
-
     configChanged();
 
     connect(mEngine, &ComicEngine::requestFinished, this, &ComicApplet::dataUpdated);
@@ -52,6 +48,10 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
     const QString source = data.identifier;
     setBusy(false);
 
+    if (mEngine->isCheckingForUpdates() && config().readEntry(QLatin1String("checkNewComicStripsIntervall"), 30) == 0) {
+        mEngine->setIsCheckingForUpdates(false); // turn it back off if auto-updates are disabled
+    }
+
     // disconnect prefetched comic strips
     if (source != mOldSource) {
         return;
@@ -61,7 +61,7 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
 
     // looking at the last index, thus not mark it as new
     KConfigGroup cg = config();
-    if (!data.error && !mCurrent.hasNext() && cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0)) {
+    if (!data.error && !mCurrent.hasNext() && cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 30)) {
         setTabHighlighted(mCurrent.id(), false);
     }
 
@@ -94,7 +94,7 @@ void ComicApplet::updateUsedComics()
 {
     KConfigGroup cg = config();
     const bool enabledProvidersChanged = cg.readEntry("tabIdentifier", QStringList()) != mModel->enabledProviders();
-    const int checkInterval = cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 0);
+    const int checkInterval = cg.readEntry(QLatin1String("checkNewComicStripsIntervall"), 30);
 
     if (enabledProvidersChanged) {
         loadProviders();
@@ -109,7 +109,7 @@ void ComicApplet::updateUsedComics()
         }
     }
 
-    if (enabledProvidersChanged || (mCheckNewStrips && checkInterval != mCheckNewStrips->minutes())) {
+    if (enabledProvidersChanged || !mCheckNewStrips || checkInterval != mCheckNewStrips->minutes()) {
         delete mCheckNewStrips;
         mCheckNewStrips = nullptr;
         if (checkInterval) {
@@ -135,15 +135,8 @@ void ComicApplet::tabChanged(const QString &identifier)
 
 void ComicApplet::configChanged()
 {
-    KConfigGroup cg = config();
-
-    QStringList tabIdentifier = cg.readEntry("tabIdentifier", QStringList());
-
-    if (mModel) {
-        updateUsedComics();
-    }
-
-    mEngine->setMaxComicLimit(cg.readEntry("maxComicLimit", 29));
+    updateUsedComics();
+    mEngine->setMaxComicLimit(config().readEntry("maxComicLimit", 29));
 }
 
 void ComicApplet::slotFoundLastStrip(int index, const QString &identifier, const QString &suffix)
@@ -173,6 +166,10 @@ void ComicApplet::updateComic(const QString &identifierSuffix)
 
     if (!id.isEmpty()) {
         setBusy(true);
+
+        if (identifierSuffix.isEmpty() && config().readEntry(QLatin1String("checkNewComicStripsIntervall"), 30) == 0) {
+            mEngine->setIsCheckingForUpdates(true); // if auto-updates are off, we need to check every current request
+        }
 
         const QString identifier = id + QLatin1Char(':') + identifierSuffix;
 

@@ -16,17 +16,17 @@ import org.kde.plasma.plasmoid 2.0
 Item {
     id: main
 
-    Layout.preferredWidth: Math.max(boardSize * 50, controlsRow.width)
-    Layout.preferredHeight: boardSize * 50 + controlsRow.height
+    Layout.minimumWidth: root.switchWidth
+    Layout.minimumHeight: root.switchHeight
 
-    readonly property int boardSize: Plasmoid.configuration.boardSize
+    readonly property int boardSize: Math.max(Plasmoid.configuration.boardSize, 2)
     property Component piece: Piece {}
     property var pieces: []
     property int currentPosition: -1
 
     property int seconds: 0
 
-    Keys.onPressed: {
+    Keys.onPressed: event => {
         let newPosition = main.currentPosition;
         switch (event.key) {
         case Qt.Key_Up: {
@@ -163,10 +163,6 @@ Item {
             }
         }
 
-        if (blankRow === -1) {
-            console.log("Unable to find row of blank tile");
-        }
-
         // we have a solveable board if:
         // size is odd:  there are an even number of inversions
         // size is even: the number of inversions is odd if and only if
@@ -185,6 +181,9 @@ Item {
                 pieceB = boardSize;
             }
             swapPieces(pieceA, pieceB);
+        }
+        if (isSolved()) {
+            shuffleBoard(); // try again
         }
         secondsTimer.stop();
     }
@@ -221,25 +220,24 @@ Item {
             }
         }
         secondsTimer.start();
-        checkSolved();
+        if (isSolved()) {
+            solved();
+        }
     }
 
-    function checkSolved() {
+    function isSolved() : bool {
         const count = boardSize * boardSize;
         for (let i = 0; i < count - 2; ++i) {
             if (pieces[i].number > pieces[i + 1].number) {
                 // Not solved.
-                return;
+                return false;
             }
         }
-        solved();
+        return true;
     }
 
     function solved() {
-        // Show a message that it was solved.
-        console.log("Puzzle was solved");
         solvedRect.visible = true;
-        // Stop the timer
         secondsTimer.stop();
     }
 
@@ -269,6 +267,7 @@ Item {
             bottom: controlsRow.top
             bottomMargin: Kirigami.Units.smallSpacing
         }
+        visible: !solvedRect.visible
 
         activeFocusOnTab: true
 
@@ -298,8 +297,18 @@ Item {
         PlasmaComponents3.Button {
             id: button
             Layout.fillWidth: true
+            visible: button.implicitWidth + timeLabel.implicitWidth + controlsRow.spacing <= main.width
             icon.name: "roll"
             text: i18nc("@action:button", "Shuffle");
+            onClicked: main.shuffleBoard();
+        }
+        PlasmaComponents3.Button {
+            id: fallBackButton
+            Layout.fillWidth: true
+            visible: !button.visible
+            icon.name: "roll"
+            display: PlasmaComponents3.Button.IconOnly
+            text: button.text;
             onClicked: main.shuffleBoard();
         }
 
@@ -312,11 +321,10 @@ Item {
         }
     }
 
-    Rectangle {
+    Item {
         id: solvedRect
         visible: false
         anchors.fill: mainGrid
-        color: Kirigami.Theme.backgroundColor
         z: 0
 
         Image {
@@ -331,9 +339,11 @@ Item {
         PlasmaComponents3.Label {
             id: solvedLabel
             anchors.centerIn: parent
+            width: Math.min(implicitWidth, parent.width)
             color: Kirigami.Theme.textColor
             text: i18nc("@info", "Solved! Try again.")
             textFormat: Text.PlainText
+            wrapMode: Text.WordWrap
             z: 2
         }
     }

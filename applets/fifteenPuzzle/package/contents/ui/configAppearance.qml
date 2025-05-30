@@ -41,6 +41,8 @@ KCM.SimpleKCM {
         QtControls.SpinBox {
             id: sizeSpinBox
             Kirigami.FormData.label: i18nc("@label:spinbox", "Grid size:")
+            from: 2
+            to: 99
         }
 
         Item {
@@ -53,6 +55,7 @@ KCM.SimpleKCM {
 
             QtControls.RadioButton {
                 id: colorBackgroundRadioButton
+                Layout.preferredWidth: Math.max(imageBackgroundRadioButton.implicitWidth, colorBackgroundRadioButton.implicitWidth)
                 QtControls.ButtonGroup.group: radioGroup
 
                 text: i18n("Color:")
@@ -68,6 +71,7 @@ KCM.SimpleKCM {
         RowLayout {
             QtControls.RadioButton {
                 id: imageBackgroundRadioButton
+                Layout.preferredWidth: Math.max(imageBackgroundRadioButton.implicitWidth, colorBackgroundRadioButton.implicitWidth)
                 QtControls.ButtonGroup.group: radioGroup
 
                 text: i18n("Image:")

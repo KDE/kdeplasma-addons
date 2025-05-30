@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-05-30 00:44+0000\n"
 "PO-Revision-Date: 2025-04-07 09:38+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -106,7 +106,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Alltaf opna þessa síðu:"
 
-#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:112
+#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:113
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -142,60 +142,60 @@ msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "Huliðsvafur"
 
-#: package/contents/ui/main.qml:67
+#: package/contents/ui/main.qml:68
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Fara til baka"
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Fara áfram"
 
-#: package/contents/ui/main.qml:88
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "Fara heim"
 
-#: package/contents/ui/main.qml:93
+#: package/contents/ui/main.qml:94
 #, kde-format
 msgid "Open Default URL"
 msgstr "Opna sjálfgefna slóð"
 
-#: package/contents/ui/main.qml:152
+#: package/contents/ui/main.qml:153
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Hætta að hlaða síðuna"
 
-#: package/contents/ui/main.qml:152
+#: package/contents/ui/main.qml:153
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Endurhlaða þessa síðu"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:206
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Opna tengil í vafra"
 
-#: package/contents/ui/main.qml:211
+#: package/contents/ui/main.qml:212
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Afrita slóð tengils"
 
-#: package/contents/ui/main.qml:278
+#: package/contents/ui/main.qml:279
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Lokað á sprettiglugga"
 
-#: package/contents/ui/main.qml:279
+#: package/contents/ui/main.qml:280
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

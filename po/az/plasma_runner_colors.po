@@ -1,21 +1,21 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# SPDX-FileCopyrightText: 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
+# SPDX-FileCopyrightText: 2025 linux <xxmn77@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-27 00:42+0000\n"
-"PO-Revision-Date: 2025-03-15 10:41+0100\n"
-"Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
-"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
-"Language: pl\n"
+"PO-Revision-Date: 2025-05-12 17:21+0400\n"
+"Last-Translator: linux <xxmn77@gmail.com>\n"
+"Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
+"Language: az\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
-"|| n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: colorsrunner.cpp:29
 #, kde-format
@@ -23,8 +23,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
 "#FF00FF) or an SVG named color."
 msgstr ""
-"Wyświetla wartość :q: jako kolor, gdy :q: jest szesnastkowym kolorem (np. "
-"#FF00FF) lub nazwanym kolorem SVG."
+":q: onaltılıq rəng (məs., #FF00FF) və ya SVG adlı rəng olduqda :q: dəyərini "
+"bir rəng kimi göstərir."
 
 #: colorsrunner.cpp:31
 #, kde-format
@@ -32,8 +32,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
 "255,255,255)."
 msgstr ""
-"Wyświetla wartość :q: jako kolor, gdy :q: jest trójką koloru RGB (np. "
-"255,255,255)."
+":q: bir RGB rəng üçlüyü (məs., 255,255,255) olduqda :q: dəyərini bir rəng "
+"kimi göstərir."
 
 #: colorsrunner.cpp:34
 #, kde-format
@@ -41,8 +41,8 @@ msgid ""
 "Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
 "color quadruplet (e.g. 255,255,255,255)."
 msgstr ""
-"Wyświetla wartość :q: jako kolor z kanałem alfa, gdy :q: jest czwórką koloru "
-"RGBA (np. 255,255,255,255)."
+":q: bir RGB dördlü rəng (məs., 255,255,255,255) olduqda :q: dəyərini alfa "
+"kanallı bir rəng kimi göstərir."
 
 #: colorsrunner.cpp:139
 #, kde-format

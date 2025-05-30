@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Teemu Rytilahti <teemu.rytilahti@kde-fi.org>, 2008.
 # Teemu Rytilahti <teemu.rytilahti@d5k.net>, 2008.
-# Tommi Nieminen <translator@legisign.org>, 2010, 2017, 2018, 2019, 2024.
+# SPDX-FileCopyrightText: 2010, 2017, 2018, 2019, 2024, 2025 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lasse.liehu@gmail.com>, 2012.
 #
 # KDE Finnish translation sprint participants:
@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-18 00:43+0000\n"
-"PO-Revision-Date: 2024-01-22 16:10+0200\n"
+"PO-Revision-Date: 2025-05-25 16:34+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -20,6 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: config.qml:17
 #, kde-format
@@ -28,12 +29,11 @@ msgid "Appearance"
 msgstr "Ulkoasu"
 
 #: configGeneral.qml:29
-#, fuzzy, kde-format
-#| msgid "Show"
+#, kde-format
 msgctxt ""
 "@title:group The things being potentially shown are lights and seconds"
 msgid "Show:"
-msgstr "Näytä"
+msgstr "Näytä:"
 
 #: configGeneral.qml:30 configGeneral.qml:60
 #, kde-format

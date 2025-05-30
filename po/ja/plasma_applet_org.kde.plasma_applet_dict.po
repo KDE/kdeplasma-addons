@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.dict\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-05-30 00:44+0000\n"
 "PO-Revision-Date: 2022-03-06 11:53+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -43,7 +43,7 @@ msgid "Unable to load dictionary list"
 msgstr "利用可能な辞書:"
 
 #: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:154
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -61,7 +61,7 @@ msgstr "辞書"
 msgid "Delete"
 msgstr ""
 
-#: package/contents/ui/main.qml:44
+#: package/contents/ui/main.qml:45
 #, fuzzy, kde-format
 #| msgctxt "@info:placeholder"
 #| msgid "Enter word to define here"
@@ -69,7 +69,7 @@ msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "定義する単語を入力してください"
 
-#: package/contents/ui/main.qml:152
+#: package/contents/ui/main.qml:153
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox"
 #| msgid "Available dictionaries:"

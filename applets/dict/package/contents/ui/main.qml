@@ -19,6 +19,7 @@ PlasmoidItem {
     id: root
     switchWidth: Kirigami.Units.gridUnit * 10
     switchHeight: Kirigami.Units.gridUnit * 10
+    Plasmoid.icon: "accessories-dictionary-symbolic"
 
     fullRepresentation: ColumnLayout {
         Keys.forwardTo: input

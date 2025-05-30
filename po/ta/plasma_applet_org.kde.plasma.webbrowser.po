@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-25 00:43+0000\n"
+"POT-Creation-Date: 2025-05-30 00:44+0000\n"
 "PO-Revision-Date: 2024-10-20 16:16+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -104,7 +104,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "எப்போதும் இப்பக்கத்தை ஏற்று:"
 
-#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:112
+#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:113
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -140,60 +140,60 @@ msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "கமுக்க உலாவல்"
 
-#: package/contents/ui/main.qml:67
+#: package/contents/ui/main.qml:68
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "முந்தைய பக்கத்திற்கு செல்"
 
-#: package/contents/ui/main.qml:77
+#: package/contents/ui/main.qml:78
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "பிந்தைய பக்கத்திற்கு செல்"
 
-#: package/contents/ui/main.qml:88
+#: package/contents/ui/main.qml:89
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "முகப்புக்கு செல்"
 
-#: package/contents/ui/main.qml:93
+#: package/contents/ui/main.qml:94
 #, kde-format
 msgid "Open Default URL"
 msgstr "இயல்பிருப்பு முகவரியைத் திற"
 
-#: package/contents/ui/main.qml:152
+#: package/contents/ui/main.qml:153
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "இப்பக்கத்தை ஏற்றுவதை நிறுத்து"
 
-#: package/contents/ui/main.qml:152
+#: package/contents/ui/main.qml:153
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "இப்பக்கத்தை மீளேற்று"
 
-#: package/contents/ui/main.qml:205
+#: package/contents/ui/main.qml:206
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "இணைப்பை உலாவியில் திற"
 
-#: package/contents/ui/main.qml:211
+#: package/contents/ui/main.qml:212
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "இணைப்பின் முகவரியை நகலெடு"
 
-#: package/contents/ui/main.qml:278
+#: package/contents/ui/main.qml:279
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr ""
 
-#: package/contents/ui/main.qml:279
+#: package/contents/ui/main.qml:280
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

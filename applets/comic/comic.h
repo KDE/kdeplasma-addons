@@ -73,11 +73,11 @@ private:
     void dataUpdated(const ComicMetaData &data);
 
 private:
+    ComicEngine *const mEngine;
     ComicModel *mModel = nullptr;
 
     QString mOldSource;
     CheckNewStrips *mCheckNewStrips;
-    ComicEngine *const mEngine;
 
     ComicData mCurrent;
 };

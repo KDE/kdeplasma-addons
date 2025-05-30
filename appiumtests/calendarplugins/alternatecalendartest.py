@@ -56,7 +56,7 @@ class AlternateCalendarTests(unittest.TestCase):
 
         self.driver.find_element(AppiumBy.NAME, "Calendar").click()
         wait = WebDriverWait(self.driver, 10)
-        wait.until(EC.presence_of_element_located((AppiumBy.NAME, "Available Plugins:")))
+        wait.until(EC.presence_of_element_located((AppiumBy.NAME, "Available Add-Ons")))
         # Enable the plugin
         plugin_checkbox: WebElement = wait.until(EC.presence_of_element_located((AppiumBy.NAME, "Alternate Calendar")))
         plugin_checkbox.click()
