@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-30 02:39+0000\n"
+"POT-Creation-Date: 2025-05-31 02:41+0000\n"
 "PO-Revision-Date: 2022-03-06 11:55+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -37,45 +37,45 @@ msgstr "グリッドサイズ:"
 msgid "Background:"
 msgstr "背景:"
 
-#: package/contents/ui/configAppearance.qml:60
+#: package/contents/ui/configAppearance.qml:61
 #, kde-format
 msgid "Color:"
 msgstr "色:"
 
-#: package/contents/ui/configAppearance.qml:75
+#: package/contents/ui/configAppearance.qml:77
 #, kde-format
 msgid "Image:"
 msgstr "画像:"
 
-#: package/contents/ui/configAppearance.qml:83
+#: package/contents/ui/configAppearance.qml:85
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "カスタム画像のパス…"
 
-#: package/contents/ui/configAppearance.qml:102
+#: package/contents/ui/configAppearance.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
 msgstr "画像を選択してください…"
 
-#: package/contents/ui/configAppearance.qml:110
+#: package/contents/ui/configAppearance.qml:112
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "画像を選択"
 
-#: package/contents/ui/configAppearance.qml:115
+#: package/contents/ui/configAppearance.qml:117
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "画像ファイル (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:129
+#: package/contents/ui/configAppearance.qml:131
 #, kde-format
 msgid "Tiles:"
 msgstr "タイル:"
 
-#: package/contents/ui/configAppearance.qml:133
+#: package/contents/ui/configAppearance.qml:135
 #, kde-format
 msgid "Colored numbers:"
 msgstr "色のついた番号:"

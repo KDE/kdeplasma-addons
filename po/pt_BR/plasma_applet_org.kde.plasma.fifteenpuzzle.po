@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-30 02:39+0000\n"
+"POT-Creation-Date: 2025-05-31 02:41+0000\n"
 "PO-Revision-Date: 2021-12-21 09:26-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -36,45 +36,45 @@ msgstr "Tamanho da grade:"
 msgid "Background:"
 msgstr "Plano de fundo:"
 
-#: package/contents/ui/configAppearance.qml:60
+#: package/contents/ui/configAppearance.qml:61
 #, kde-format
 msgid "Color:"
 msgstr "Cor:"
 
-#: package/contents/ui/configAppearance.qml:75
+#: package/contents/ui/configAppearance.qml:77
 #, kde-format
 msgid "Image:"
 msgstr "Imagem:"
 
-#: package/contents/ui/configAppearance.qml:83
+#: package/contents/ui/configAppearance.qml:85
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Caminho da imagem personalizada..."
 
-#: package/contents/ui/configAppearance.qml:102
+#: package/contents/ui/configAppearance.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
 msgstr "Escolher imagem..."
 
-#: package/contents/ui/configAppearance.qml:110
+#: package/contents/ui/configAppearance.qml:112
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Escolher uma imagem"
 
-#: package/contents/ui/configAppearance.qml:115
+#: package/contents/ui/configAppearance.qml:117
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Arquivos de imagem (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:129
+#: package/contents/ui/configAppearance.qml:131
 #, kde-format
 msgid "Tiles:"
 msgstr "Peças:"
 
-#: package/contents/ui/configAppearance.qml:133
+#: package/contents/ui/configAppearance.qml:135
 #, kde-format
 msgid "Colored numbers:"
 msgstr "Números coloridos:"

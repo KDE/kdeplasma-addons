@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-22 02:41+0000\n"
+"POT-Creation-Date: 2025-05-31 02:41+0000\n"
 "PO-Revision-Date: 2022-07-21 19:40+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -239,73 +239,73 @@ msgid ""
 "date."
 msgstr ""
 
-#: qml/main.qml:80
+#: qml/main.qml:76
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "Pági&na com Banda Nova Seguinte"
 
-#: qml/main.qml:87
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "&Ir para a Primeira Banda-Desenhada"
 
-#: qml/main.qml:93
+#: qml/main.qml:89
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Ir para a Banda-Desenhada A&ctual"
 
-#: qml/main.qml:99
+#: qml/main.qml:95
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Ir para a Banda-Desenhada…"
 
-#: qml/main.qml:105
+#: qml/main.qml:101
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Visitar a Página Web"
 
-#: qml/main.qml:110
+#: qml/main.qml:106
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Visitar a Página &Web da Loja"
 
-#: qml/main.qml:115
+#: qml/main.qml:111
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "Gravar a Banda-De&senhada Como…"
 
-#: qml/main.qml:124
+#: qml/main.qml:120
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Tamanho &Actual"
 
-#: qml/main.qml:132
+#: qml/main.qml:128
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Guardar a &Posição Actual"
 
-#: qml/main.qml:257
+#: qml/main.qml:256
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: qml/main.qml:260
+#: qml/main.qml:259
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:271
+#: qml/main.qml:270
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
