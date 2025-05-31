@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_fifteenPuzzle.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-30 00:44+0000\n"
+"POT-Creation-Date: 2025-05-31 00:43+0000\n"
 "PO-Revision-Date: 2007-11-30 08:38-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -35,46 +35,46 @@ msgstr ""
 msgid "Background:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:60
+#: package/contents/ui/configAppearance.qml:61
 #, kde-format
 msgid "Color:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:75
+#: package/contents/ui/configAppearance.qml:77
 #, kde-format
 msgid "Image:"
 msgstr "Íomhá:"
 
-#: package/contents/ui/configAppearance.qml:83
+#: package/contents/ui/configAppearance.qml:85
 #, fuzzy, kde-format
 #| msgid "Use custom image:"
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Úsáid íomhá shaincheaptha:"
 
-#: package/contents/ui/configAppearance.qml:102
+#: package/contents/ui/configAppearance.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:110
+#: package/contents/ui/configAppearance.qml:112
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:115
+#: package/contents/ui/configAppearance.qml:117
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:129
+#: package/contents/ui/configAppearance.qml:131
 #, kde-format
 msgid "Tiles:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:133
+#: package/contents/ui/configAppearance.qml:135
 #, kde-format
 msgid "Colored numbers:"
 msgstr ""
@@ -94,7 +94,7 @@ msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Suaith"
 
-#: package/contents/ui/FifteenPuzzle.qml:349
+#: package/contents/ui/FifteenPuzzle.qml:344
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-30 00:44+0000\n"
+"POT-Creation-Date: 2025-05-31 00:43+0000\n"
 "PO-Revision-Date: 2022-02-20 22:16+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -34,45 +34,45 @@ msgstr "모눈 크기:"
 msgid "Background:"
 msgstr "배경:"
 
-#: package/contents/ui/configAppearance.qml:60
+#: package/contents/ui/configAppearance.qml:61
 #, kde-format
 msgid "Color:"
 msgstr "색:"
 
-#: package/contents/ui/configAppearance.qml:75
+#: package/contents/ui/configAppearance.qml:77
 #, kde-format
 msgid "Image:"
 msgstr "그림:"
 
-#: package/contents/ui/configAppearance.qml:83
+#: package/contents/ui/configAppearance.qml:85
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "사용자 정의 그림 경로…"
 
-#: package/contents/ui/configAppearance.qml:102
+#: package/contents/ui/configAppearance.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
 msgstr "그림 선택…"
 
-#: package/contents/ui/configAppearance.qml:110
+#: package/contents/ui/configAppearance.qml:112
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "그림 선택"
 
-#: package/contents/ui/configAppearance.qml:115
+#: package/contents/ui/configAppearance.qml:117
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "그림 파일 (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:129
+#: package/contents/ui/configAppearance.qml:131
 #, kde-format
 msgid "Tiles:"
 msgstr "타일:"
 
-#: package/contents/ui/configAppearance.qml:133
+#: package/contents/ui/configAppearance.qml:135
 #, kde-format
 msgid "Colored numbers:"
 msgstr "색이 있는 숫자:"
@@ -89,7 +89,7 @@ msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "섞기"
 
-#: package/contents/ui/FifteenPuzzle.qml:349
+#: package/contents/ui/FifteenPuzzle.qml:344
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."

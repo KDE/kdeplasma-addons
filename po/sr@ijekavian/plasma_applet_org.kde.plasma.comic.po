@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-19 00:43+0000\n"
+"POT-Creation-Date: 2025-05-31 00:43+0000\n"
 "PO-Revision-Date: 2015-03-14 17:59+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -244,7 +244,7 @@ msgid ""
 "date."
 msgstr ""
 
-#: qml/main.qml:80
+#: qml/main.qml:76
 #, fuzzy, kde-format
 #| msgctxt "here strip means comic strip"
 #| msgid "&Next Tab with a new Strip"
@@ -252,55 +252,55 @@ msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Нови језичак за нови стрип"
 
-#: qml/main.qml:87
+#: qml/main.qml:83
 #, fuzzy, kde-format
 #| msgid "Jump to &first Strip"
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Скочи на &први стрип"
 
-#: qml/main.qml:93
+#: qml/main.qml:89
 #, fuzzy, kde-format
 #| msgid "Jump to &current Strip"
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Скочи на &текући стрип"
 
-#: qml/main.qml:99
+#: qml/main.qml:95
 #, fuzzy, kde-format
 #| msgid "Jump to Strip ..."
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Скочи на стрип..."
 
-#: qml/main.qml:105
+#: qml/main.qml:101
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Посјети &веб сајт продавнице"
 
-#: qml/main.qml:110
+#: qml/main.qml:106
 #, fuzzy, kde-format
 #| msgid "Visit the shop &website"
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Посјети &веб сајт продавнице"
 
-#: qml/main.qml:115
+#: qml/main.qml:111
 #, fuzzy, kde-format
 #| msgid "&Save Comic As..."
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Сачувај стрип као..."
 
-#: qml/main.qml:124
+#: qml/main.qml:120
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Стварна величина"
 
-#: qml/main.qml:132
+#: qml/main.qml:128
 #, fuzzy, kde-format
 #| msgctxt "@option:check Context menu of comic image"
 #| msgid "Store current &Position"
@@ -308,19 +308,19 @@ msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Запамти текући &положај"
 
-#: qml/main.qml:257
+#: qml/main.qml:256
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr ""
 
-#: qml/main.qml:260
+#: qml/main.qml:259
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr ""
 
-#: qml/main.qml:271
+#: qml/main.qml:270
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

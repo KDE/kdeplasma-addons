@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-30 00:44+0000\n"
+"POT-Creation-Date: 2025-05-31 00:43+0000\n"
 "PO-Revision-Date: 2022-07-21 20:47+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -35,45 +35,45 @@ msgstr "ბადის ზომა:"
 msgid "Background:"
 msgstr "ფონი:"
 
-#: package/contents/ui/configAppearance.qml:60
+#: package/contents/ui/configAppearance.qml:61
 #, kde-format
 msgid "Color:"
 msgstr "ფერი:"
 
-#: package/contents/ui/configAppearance.qml:75
+#: package/contents/ui/configAppearance.qml:77
 #, kde-format
 msgid "Image:"
 msgstr "გამოსახულება:"
 
-#: package/contents/ui/configAppearance.qml:83
+#: package/contents/ui/configAppearance.qml:85
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "გამოსახულების ბილიკი…"
 
-#: package/contents/ui/configAppearance.qml:102
+#: package/contents/ui/configAppearance.qml:104
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Choose image…"
 msgstr "აირჩიეთ გამოსახულება…"
 
-#: package/contents/ui/configAppearance.qml:110
+#: package/contents/ui/configAppearance.qml:112
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "აირჩიეთ გამოსახულება"
 
-#: package/contents/ui/configAppearance.qml:115
+#: package/contents/ui/configAppearance.qml:117
 #, kde-format
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "გამოსახულების ფაილები (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:129
+#: package/contents/ui/configAppearance.qml:131
 #, kde-format
 msgid "Tiles:"
 msgstr "ნაწილები:"
 
-#: package/contents/ui/configAppearance.qml:133
+#: package/contents/ui/configAppearance.qml:135
 #, kde-format
 msgid "Colored numbers:"
 msgstr "გაფერადებული რიცხვები:"
@@ -90,7 +90,7 @@ msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "შემთხვევით"
 
-#: package/contents/ui/FifteenPuzzle.qml:349
+#: package/contents/ui/FifteenPuzzle.qml:344
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
