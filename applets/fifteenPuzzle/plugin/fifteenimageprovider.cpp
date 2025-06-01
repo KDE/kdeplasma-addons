@@ -23,7 +23,18 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
 
     // id format is boardSize-imagenumber-pieceWidth-pieceHeight-imagePath
     qDebug(PLASMA_FIFTEENPUZZLE) << "pixmap requested with id " << id;
-    QStringList idParts = id.split(QLatin1Char('-'));
+
+    // MaxSplit used as the path can contains '-' but is the last argument
+    auto maxSplit = [](const QString &toSplit, QLatin1Char separator) {
+        QStringList parts = toSplit.split(separator);
+        QStringList res = parts.mid(0, 4);
+
+        QString last = parts.mid(4).join('-');
+        res.append(last);
+
+        return res;
+    };
+    QStringList idParts = maxSplit(id, QLatin1Char('-'));
     if (idParts.size() < 4) {
         *size = QSize();
         return QPixmap();
@@ -40,24 +51,20 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
         update = true;
     }
 
+    if (pieceWidth != m_pieceWidth || pieceHeight != m_pieceHeight || m_boardSize != boardSize) {
+        m_pieceWidth = pieceWidth;
+        m_pieceHeight = pieceHeight;
+        m_boardSize = boardSize;
+        update = true;
+    }
+
+    if (update) {
+        updatePixmaps();
+    }
+
     if (idParts.at(1) == QLatin1String("all")) {
         return m_pixmap;
     } else {
-        if (pieceWidth != m_pieceWidth || pieceHeight != m_pieceHeight) {
-            m_pieceWidth = pieceWidth;
-            m_pieceHeight = pieceHeight;
-            update = true;
-        }
-
-        if (m_boardSize != boardSize) {
-            m_boardSize = boardSize;
-            update = true;
-        }
-
-        if (update) {
-            updatePixmaps();
-        }
-        
         // The applet use 1 based id for pieces
         int number = idParts.at(1).toInt() - 1;
 

@@ -334,11 +334,6 @@ Item {
             source: Plasmoid.configuration.imagePath ? "image://fifteenpuzzle/" + boardSize + "-all-0-0-" + Plasmoid.configuration.imagePath : null
             visible: Plasmoid.configuration.useImage
             cache: false
-            function update() {
-                const tmp = source;
-                source = "";
-                source = tmp;
-            }
         }
 
         PlasmaComponents3.Label {
@@ -365,20 +360,11 @@ Item {
         target: Plasmoid.configuration
         function onBoardSizeChanged() {
             main.fillBoard();
-            solvedImage.update();
         }
     }
 
-    Connections {
-        target: Plasmoid.configuration
-        function onImagePathChanged() {
-            main.fillBoard();
-            solvedImage.update();
-        }
-    }
 
     Component.onCompleted: {
         main.fillBoard();
-        solvedImage.update();
     }
 }
