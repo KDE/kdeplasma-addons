@@ -41,6 +41,7 @@ PlasmoidItem {
     readonly property int verticalMargins: Math.round(fullRepresentationItem.height * 0.07)
     readonly property PlasmaComponents3.TextArea mainTextArea: fullRepresentationItem.mainTextArea
     readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge,PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge].includes(Plasmoid.location)
+    readonly property bool compactInPanel: inPanel && !!compactRepresentationItem?.visible
     // In a panel when it is translucent, the panel background is used, so we use the normal text color, and remove any margins.
     readonly property bool noBackground: inPanel && (Plasmoid.configuration.color === "translucent" || Plasmoid.configuration.color === "translucent-light")
 
@@ -109,10 +110,20 @@ PlasmoidItem {
 
         property alias mainTextArea: mainTextArea
         // TODO figure out what element is missing in the requiredWidth calculation...
-        Layout.minimumWidth: root.inPanel ? fontButtons.requiredWidth + focusScope.anchors.leftMargin + focusScope.anchors.rightMargin + Kirigami.Units.smallSpacing
-                                          : Kirigami.Units.gridUnit * 2
-        Layout.minimumHeight: root.inPanel ? Kirigami.Units.gridUnit * 4 + focusScope.anchors.topMargin + focusScope.anchors.bottomMargin
-                                           : Kirigami.Units.gridUnit * 2
+        Layout.minimumWidth: {
+            if (root.inPanel && !root.compactInPanel) {
+                return -1 // thick panel, make square
+            }
+            root.inPanel ? fontButtons.requiredWidth + focusScope.anchors.leftMargin + focusScope.anchors.rightMargin + Kirigami.Units.smallSpacing
+                         : Kirigami.Units.gridUnit * 2
+        }
+        Layout.minimumHeight: {
+            if (root.inPanel && !root.compactInPanel) {
+                return -1 // thick panel, make square
+            }
+            return root.inPanel ? Kirigami.Units.gridUnit * 4 + focusScope.anchors.topMargin + focusScope.anchors.bottomMargin
+                                : Kirigami.Units.gridUnit * 2
+        }
 
         imagePath: root.noBackground ? "" : "widgets/notes"
         elementId: Plasmoid.configuration.color + "-notes"
@@ -452,11 +463,11 @@ PlasmoidItem {
                 }
                 height: visible ? implicitHeight : 0
                 visible: opacity > 0
-                opacity: (focusScope.activeFocus || inPanel) ? 1 : 0
+                opacity: (focusScope.activeFocus || compactInPanel) ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
 
                 readonly property int requiredWidth: spacing * (children.length - 1) + formatButtonsRow.width + removeButton.width
-                                                     + spacer.implicitWidth + settingsButton.width + (root.inPanel ? pinButton.width : 0)
+                                                     + spacer.implicitWidth + settingsButton.width + (root.compactInPanel ? pinButton.width : 0)
                 readonly property bool showFormatButtons: width > requiredWidth
 
                 Row {
@@ -579,7 +590,7 @@ PlasmoidItem {
 
                 PlasmaComponents3.ToolButton {
                     id: pinButton
-                    visible: inPanel
+                    visible: compactInPanel
                     checkable: true
                     checked: Plasmoid.configuration.pinOpen
                     focusPolicy: Qt.TabFocus
