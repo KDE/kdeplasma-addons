@@ -88,7 +88,7 @@
         "Name[uk]": "Альтернативний календар",
         "Name[vi]": "Lịch khác",
         "Name[x-test]": "xxAlternate Calendarxx",
-        "Name[zh_CN]": "特定文化日历",
+        "Name[zh_CN]": "其他历法系统",
         "Name[zh_TW]": "替代曆法"
     },
     "X-KDE-PlasmaCalendar-ConfigUi": "alternatecalendar/AlternateCalendarConfig.qml"
