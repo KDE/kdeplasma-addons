@@ -104,6 +104,7 @@ KCM.ScrollViewKCM {
                     alertMode: editable
                     value: time
                     showSeconds: cfg_showSeconds
+                    maximumHeight: timeEditItem.availableHeight
                     property int oldValue: 0
                     onDigitModified: valueDelta => {
                         set(value + valueDelta)

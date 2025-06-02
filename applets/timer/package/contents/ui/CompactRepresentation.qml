@@ -16,10 +16,8 @@ import org.kde.plasma.private.timer 0.1 as TimerPlasmoid
 Item {
     id: compactRepresentation
 
-    Layout.minimumHeight: root.inPanel ? Layout.preferredHeight : -1
-
-    Layout.preferredWidth: grid.width
-    Layout.preferredHeight: grid.height
+    Layout.minimumWidth: root.inPanel ? grid.width : -1
+    Layout.minimumHeight: root.inPanel ? grid.height : -1
 
     enum LayoutType {
         HorizontalPanel,

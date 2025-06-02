@@ -18,6 +18,7 @@ Row {
     property bool editable: true
     // in alert mode 2nd set of digits from svg file will be drawn
     property bool alertMode: false
+    required property real maximumHeight
 
     signal digitModified(int valueDelta)
 
@@ -26,7 +27,7 @@ Row {
         readonly property string digitSuffix: alertMode ? "_1" : ""
         // digits count include separators with 50% of digit width
         readonly property real digits: timerEdit.showSeconds ? 7 : 4.5;
-        readonly property int digitH: (parent.height / 2) * digits < parent.width ? parent.height : parent.width / digits * 2
+        readonly property int digitH: (maximumHeight / 2) * digits < parent.width ? maximumHeight : parent.width / digits * 2
         readonly property int digitW: digitH / 2;
         property string valueString: "000000"
     }

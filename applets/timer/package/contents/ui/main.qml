@@ -16,7 +16,10 @@ import org.kde.notification 1.0
 PlasmoidItem {
     id: root;
 
-    switchWidth: Kirigami.Units.gridUnit * 8
+    width: Math.round(switchWidth * 1.5)
+    height: Math.round(switchHeight * 1.5)
+
+    switchWidth: Kirigami.Units.gridUnit * 10
     switchHeight: Kirigami.Units.gridUnit * 4
 
     readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge, PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge]

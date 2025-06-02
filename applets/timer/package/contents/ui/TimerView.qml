@@ -15,8 +15,9 @@ import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 
 MouseArea {
-    Layout.preferredWidth: Math.max(root.compactRepresentationItem?.width ?? 0, Kirigami.Units.gridUnit * 10)
-    Layout.preferredHeight: main.implicitHeight
+    Layout.preferredWidth: root.inPanel ? Math.max(root.compactRepresentationItem?.width ?? 0, Kirigami.Units.gridUnit * 20) : -1
+    Layout.preferredHeight: root.inPanel ? Math.round(Layout.preferredWidth * 2/5) : -1
+    Layout.minimumHeight: root.inPanel ? Layout.preferredHeight : 0
 
     onClicked: root.toggleTimer()
 
@@ -42,7 +43,9 @@ MouseArea {
 
         PlasmaComponents3.Label {
             elide: Text.ElideRight
-            font.pixelSize: 0.3 * timerDigits.height
+            fontSizeMode: Text.VerticalFit
+            minimumPixelSize: 8
+            font.pixelSize: height * 0.7
             text: root.title
             textFormat: Text.PlainText
         }
@@ -51,12 +54,20 @@ MouseArea {
     ColumnLayout {
         id: main
 
+        implicitHeight: (headerLoader.active ? headerLoader.item.implicitHeight : 0) + timerDigits.implicitHeight + (remainingTimeProgressBar.visible ? remainingTimeProgressBar.implicitHeight : 0)
+
         width: parent.width
+        height: parent.height
 
         Loader {
+            id: headerLoader
+            Layout.minimumHeight: root.inPanel ? -1 : Kirigami.Units.gridUnit * 2
+            Layout.maximumHeight: root.inPanel ? -1 : Math.round(main.height / 3)
+            Layout.fillHeight: root.inPanel ? false : true
             Layout.fillWidth: true
 
             active: root.showTitle
+            visible: active
 
             sourceComponent: root.inPanel ? popupHeadingComponent : desktopHeadingComponent
         }
@@ -65,6 +76,8 @@ MouseArea {
             id: timerDigits
 
             Layout.fillWidth: true
+            Layout.fillHeight: true
+            Layout.verticalStretchFactor: 3
             visible: root.showRemainingTime
 
             value: root.seconds
@@ -72,6 +85,7 @@ MouseArea {
             alertMode: root.alertMode
             showSeconds: root.showSeconds
             onDigitModified: valueDelta => root.seconds += valueDelta
+            maximumHeight: height
             SequentialAnimation on opacity {
                 running: root.suspended;
                 loops: Animation.Infinite;
