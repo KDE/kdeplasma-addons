@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-31 02:41+0000\n"
+"POT-Creation-Date: 2025-06-03 02:40+0000\n"
 "PO-Revision-Date: 2021-12-13 21:41+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -97,7 +97,7 @@ msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Mélanger"
 
-#: package/contents/ui/FifteenPuzzle.qml:349
+#: package/contents/ui/FifteenPuzzle.qml:344
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."

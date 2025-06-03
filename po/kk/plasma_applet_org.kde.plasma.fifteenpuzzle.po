@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-31 02:41+0000\n"
+"POT-Creation-Date: 2025-06-03 02:40+0000\n"
 "PO-Revision-Date: 2010-12-04 05:29+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan(at)computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -95,7 +95,7 @@ msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Араластыру"
 
-#: package/contents/ui/FifteenPuzzle.qml:349
+#: package/contents/ui/FifteenPuzzle.qml:344
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
