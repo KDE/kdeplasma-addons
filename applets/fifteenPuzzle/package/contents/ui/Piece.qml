@@ -104,7 +104,7 @@ Rectangle {
 
         sourceComponent: Image {
             id: pieceImage
-            source: "image://fifteenpuzzle/" + boardSize + "-" + number + "-" + pieceWidth + "-" + pieceHeight + "-" + Plasmoid.configuration.imagePath
+            source: (pieceWidth > 0 && pieceHeight > 0 && number > 0) ? "image://fifteenpuzzle/" + boardSize + "-" + number + "-" + pieceWidth + "-" + pieceHeight + "-" + Plasmoid.configuration.imagePath : ""
             cache: false
         }
     }
