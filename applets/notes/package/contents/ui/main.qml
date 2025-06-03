@@ -40,7 +40,9 @@ PlasmoidItem {
     readonly property real horizontalMargins: fullRepresentationItem.width * 0.07
     readonly property real verticalMargins: fullRepresentationItem.height * 0.07
     readonly property PlasmaComponents3.TextArea mainTextArea: fullRepresentationItem.mainTextArea
+
     readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge,PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge].includes(Plasmoid.location)
+    readonly property bool compactInPanel: inPanel && !!compactRepresentationItem?.visible
 
     // note is of type Note
     property QtObject note: noteManager.loadNote(Plasmoid.configuration.noteId);
@@ -100,8 +102,8 @@ PlasmoidItem {
         id: backgroundItem
 
         property alias mainTextArea: mainTextArea
-        Layout.minimumWidth: Kirigami.Units.gridUnit * 2
-        Layout.minimumHeight: Kirigami.Units.gridUnit * 2
+        Layout.minimumWidth: (root.inPanel && !root.compactInPanel) ? -1 : Kirigami.Units.gridUnit * 2
+        Layout.minimumHeight: (root.inPanel && !root.compactInPanel) ? -1 :Kirigami.Units.gridUnit * 2
 
         imagePath: "widgets/notes"
         elementId: Plasmoid.configuration.color + "-notes"
@@ -441,7 +443,7 @@ PlasmoidItem {
                 }
                 height: visible ? implicitHeight : 0
                 visible: opacity > 0
-                opacity: (focusScope.activeFocus || inPanel) ? 1 : 0
+                opacity: (focusScope.activeFocus || compactInPanel) ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
 
                 readonly property int requiredWidth: formatButtonsRow.width + spacing + settingsButton.width + removeButton.width
@@ -566,7 +568,7 @@ PlasmoidItem {
 
                 PlasmaComponents3.ToolButton {
                     id: pinButton
-                    visible: inPanel
+                    visible: compactInPanel
                     checkable: true
                     checked: Plasmoid.configuration.pinOpen
                     focusPolicy: Qt.TabFocus
