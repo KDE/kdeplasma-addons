@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-21 00:44+0000\n"
+"POT-Creation-Date: 2025-06-04 00:44+0000\n"
 "PO-Revision-Date: 2025-04-05 10:04+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -87,152 +87,152 @@ msgstr "Una nota adhesiva transparent"
 msgid "A transparent sticky note with light text"
 msgstr "Una nota adhesiva transparent amb text clar"
 
-#: package/contents/ui/main.qml:270
+#: package/contents/ui/main.qml:281
 #, kde-format
 msgid "Undo"
 msgstr "Desfés"
 
-#: package/contents/ui/main.qml:278
+#: package/contents/ui/main.qml:289
 #, kde-format
 msgid "Redo"
 msgstr "Refés"
 
-#: package/contents/ui/main.qml:288
+#: package/contents/ui/main.qml:299
 #, kde-format
 msgid "Cut"
 msgstr "Retalla"
 
-#: package/contents/ui/main.qml:296
+#: package/contents/ui/main.qml:307
 #, kde-format
 msgid "Copy"
 msgstr "Copia"
 
-#: package/contents/ui/main.qml:304
+#: package/contents/ui/main.qml:315
 #, kde-format
 msgid "Paste"
 msgstr "Enganxa"
 
-#: package/contents/ui/main.qml:310
+#: package/contents/ui/main.qml:321
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "Enganxa amb el format complet"
 
-#: package/contents/ui/main.qml:317
+#: package/contents/ui/main.qml:328
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "Elimina el format"
 
-#: package/contents/ui/main.qml:332
+#: package/contents/ui/main.qml:343
 #, kde-format
 msgid "Delete"
 msgstr "Suprimeix"
 
-#: package/contents/ui/main.qml:339
+#: package/contents/ui/main.qml:350
 #, kde-format
 msgid "Clear"
 msgstr "Neteja"
 
-#: package/contents/ui/main.qml:349
+#: package/contents/ui/main.qml:360
 #, kde-format
 msgid "Select All"
 msgstr "Selecciona-ho tot"
 
-#: package/contents/ui/main.qml:479
+#: package/contents/ui/main.qml:490
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Negreta"
 
-#: package/contents/ui/main.qml:492
+#: package/contents/ui/main.qml:503
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Cursiva"
 
-#: package/contents/ui/main.qml:505
+#: package/contents/ui/main.qml:516
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Subratllat"
 
-#: package/contents/ui/main.qml:518
+#: package/contents/ui/main.qml:529
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Barrat"
 
-#: package/contents/ui/main.qml:592
+#: package/contents/ui/main.qml:603
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
 msgstr "Mantén obert"
 
-#: package/contents/ui/main.qml:621
+#: package/contents/ui/main.qml:632
 #, kde-format
 msgid "Discard this note?"
 msgstr "Descarto aquesta nota?"
 
-#: package/contents/ui/main.qml:622
+#: package/contents/ui/main.qml:633
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Esteu segur de voler descartar aquesta nota?"
 
-#: package/contents/ui/main.qml:647
+#: package/contents/ui/main.qml:658
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Blanc"
 
-#: package/contents/ui/main.qml:648
+#: package/contents/ui/main.qml:659
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Negre"
 
-#: package/contents/ui/main.qml:649
+#: package/contents/ui/main.qml:660
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Vermell"
 
-#: package/contents/ui/main.qml:650
+#: package/contents/ui/main.qml:661
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Taronja"
 
-#: package/contents/ui/main.qml:651
+#: package/contents/ui/main.qml:662
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Groc"
 
-#: package/contents/ui/main.qml:652
+#: package/contents/ui/main.qml:663
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Verd"
 
-#: package/contents/ui/main.qml:653
+#: package/contents/ui/main.qml:664
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Blau"
 
-#: package/contents/ui/main.qml:654
+#: package/contents/ui/main.qml:665
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Rosa"
 
-#: package/contents/ui/main.qml:655
+#: package/contents/ui/main.qml:666
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "Transparent"
 
-#: package/contents/ui/main.qml:659
+#: package/contents/ui/main.qml:670
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
