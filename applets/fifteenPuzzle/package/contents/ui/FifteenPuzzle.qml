@@ -112,8 +112,10 @@ Item {
         pieces = [];
         const count = boardSize * boardSize;
         if (piece.status === Component.Ready) {
+            const enabledBinding = Qt.binding(() => !animationDisabledTimer.running);
+
             for (let i = 0; i < count; ++i) {
-                const newPiece = piece.createObject(mainGrid, {"number": i, "position": i });
+                const newPiece = piece.createObject(mainGrid, {"number": i, "position": i, "animationEnabled": enabledBinding});
                 pieces[i] = newPiece;
                 newPiece.activeFocusChanged.connect(() => {
                     if (newPiece.activeFocus) {
@@ -285,6 +287,16 @@ Item {
                 }
             }
         }
+
+        // Disable animation of pieces when resizing the widget or at startup
+        Timer {
+            id: animationDisabledTimer
+            interval: 200
+            repeat: false
+        }
+
+        onWidthChanged: animationDisabledTimer.restart()
+        onHeightChanged: animationDisabledTimer.restart()
     }
 
     RowLayout {
