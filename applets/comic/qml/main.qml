@@ -71,7 +71,7 @@ PlasmoidItem {
 
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
-            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.fullRepresentationItem?.comicTabbar.currentItem.highlighted
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.fullRepresentationItem?.comicTabbar.currentItem?.highlighted
             visible: Plasmoid.configuration.checkNewComicStripsIntervall
             text: i18nc("@action comic strip", "&Next Tab with a New Strip")
             icon.name: "go-next-view"
