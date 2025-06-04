@@ -2,6 +2,7 @@
     "KPlugin": {
         "Description": "Show dates in an alternate calendar system, such as Chinese Lunar or Islamic",
         "Description[ar]": "أظهر التواريخ في نظام تقويم بديل، مثل التقويم القمري الصيني أو التقويم الإسلامي",
+        "Description[az]": "Tarixləri alternativ təqvim sistemlərində göstərmək, məs., Çin və ya İslam təqvimləri",
         "Description[bg]": "Показване на дати в алтернативна календарна система, като например китайски лунен или ислямски",
         "Description[ca@valencia]": "Mostra les dates en un sistema de calendari alternatiu, com el lunar xinés o l'islàmic",
         "Description[ca]": "Mostra les dates en un sistema de calendari alternatiu, com el lunar xinès o l'islàmic",
@@ -17,6 +18,7 @@
         "Description[tr]": "Tarihleri alternatif bir takvim sisteminde gösterin; örneğin, Çin Ay Takvimi veya İslamik Takvim",
         "Description[uk]": "Показ дат у альтернативній календарній системі, зокрема китайському місячному або ісламському календарі",
         "Description[x-test]": "xxShow dates in an alternate calendar system, such as Chinese Lunar or Islamicxx",
+        "Description[zh_TW]": "用替代曆法查看日期，像是農曆或伊斯蘭曆",
         "Icon": "office-calendar",
         "Name": "Alternate Calendar",
         "Name[ar]": "التقويم البديل",
