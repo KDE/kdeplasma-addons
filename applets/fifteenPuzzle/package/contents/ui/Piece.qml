@@ -38,6 +38,7 @@ Rectangle {
 
     property int number
     property int position
+    property bool animationEnabled
 
     Keys.onPressed: event => {
         switch (event.key) {
@@ -58,12 +59,14 @@ Rectangle {
     }
 
     Behavior on x {
+        enabled: animationEnabled
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
     Behavior on y {
+        enabled: animationEnabled
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
