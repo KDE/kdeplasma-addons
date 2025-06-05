@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-31 00:43+0000\n"
+"POT-Creation-Date: 2025-06-05 00:43+0000\n"
 "PO-Revision-Date: 2010-10-31 10:52+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -79,19 +79,19 @@ msgstr ""
 msgid "Colored numbers:"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:257
+#: package/contents/ui/FifteenPuzzle.qml:259
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:302
+#: package/contents/ui/FifteenPuzzle.qml:314
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:344
+#: package/contents/ui/FifteenPuzzle.qml:356
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
