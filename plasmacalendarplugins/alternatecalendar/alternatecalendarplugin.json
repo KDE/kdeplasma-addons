@@ -7,6 +7,7 @@
         "Description[ca@valencia]": "Mostra les dates en un sistema de calendari alternatiu, com el lunar xinés o l'islàmic",
         "Description[ca]": "Mostra les dates en un sistema de calendari alternatiu, com el lunar xinès o l'islàmic",
         "Description[es]": "Mostrar fechas en un sistema de calendario alternativo, como el calendario lunar o el islámico",
+        "Description[eu]": "Erakutsi datak egutegi sistema alternatibo batean, hala nola Txinako ilargiaren egutegian edo Islamikoan",
         "Description[fr]": "Afficher les dates dans un autre système de calendrier, tel que le calendrier chinois lunaire ou musulman",
         "Description[he]": "הצגת תאריכים בלוח שנה חלופי, כגון היהודי או המוסלמי",
         "Description[ia]": "Monstra data in un systema de calendario  alternative, tal como Lunar Chinese o Islamic ",
@@ -18,6 +19,7 @@
         "Description[tr]": "Tarihleri alternatif bir takvim sisteminde gösterin; örneğin, Çin Ay Takvimi veya İslamik Takvim",
         "Description[uk]": "Показ дат у альтернативній календарній системі, зокрема китайському місячному або ісламському календарі",
         "Description[x-test]": "xxShow dates in an alternate calendar system, such as Chinese Lunar or Islamicxx",
+        "Description[zh_CN]": "使用其他历法系统显示日期，例如中国农历或伊斯兰历",
         "Description[zh_TW]": "用替代曆法查看日期，像是農曆或伊斯蘭曆",
         "Icon": "office-calendar",
         "Name": "Alternate Calendar",
@@ -63,7 +65,7 @@
         "Name[uk]": "Альтернативний календар",
         "Name[vi]": "Lịch khác",
         "Name[x-test]": "xxAlternate Calendarxx",
-        "Name[zh_CN]": "特定文化日历",
+        "Name[zh_CN]": "其他历法系统",
         "Name[zh_TW]": "替代曆法"
     },
     "X-KDE-PlasmaCalendar-ConfigUi": "alternatecalendar/AlternateCalendarConfig.qml"
