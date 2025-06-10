@@ -16,8 +16,8 @@ import org.kde.plasma.plasmoid 2.0
 Item {
     id: main
 
-    Layout.minimumWidth: root.switchWidth
-    Layout.minimumHeight: root.switchHeight
+    Layout.minimumWidth: (root.inPanel && !root.compactInPanel) ? -1 : root.switchWidth
+    Layout.minimumHeight: (root.inPanel && !root.compactInPanel) ? -1 : root.switchHeight
 
     readonly property int boardSize: Math.max(Plasmoid.configuration.boardSize, 2)
     property Component piece: Piece {}
