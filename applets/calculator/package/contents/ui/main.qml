@@ -16,6 +16,7 @@ import QtQuick.Controls 2.5 as QQC2
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.ksvg 1.0 as KSvg
 import org.kde.plasma.components 3.0 as PlasmaComponents
+import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasmoid
 
 PlasmoidItem {
@@ -23,6 +24,9 @@ PlasmoidItem {
 
     switchWidth: Kirigami.Units.gridUnit * 7
     switchHeight: Math.round(Kirigami.Units.gridUnit * 10.5)
+
+    width: main.switchWidth * 2
+    height: main.switchHeight * 2
 
     // Make the buttons' text labels scale with the widget's size
     // This is propagated down to all child controls with text
@@ -42,6 +46,11 @@ PlasmoidItem {
                                               // turns scientific (i.e.: 1.32324e+12).
                                               // When calculating 1/3 the answer is
                                               // 18 characters long.
+    readonly property bool inPanel: (Plasmoid.location === PlasmaCore.Types.TopEdge
+        || Plasmoid.location === PlasmaCore.Types.RightEdge
+        || Plasmoid.location === PlasmaCore.Types.BottomEdge
+        || Plasmoid.location === PlasmaCore.Types.LeftEdge)
+    readonly property bool compactInPanel: inPanel && !!compactRepresentationItem?.visible
 
     function digitClicked(digit) {
         if (showingResult) {
@@ -233,10 +242,8 @@ PlasmoidItem {
         // This is propagated down to all child controls with text
         font.pixelSize: Math.round(width/12)
         padding: 0
-        Layout.minimumWidth: main.switchWidth
-        Layout.minimumHeight: main.switchHeight
-        Layout.preferredWidth: main.switchWidth * 2
-        Layout.preferredHeight: main.switchHeight * 2
+        Layout.minimumWidth: (main.inPanel && !main.compactInPanel) ? -1 : main.switchWidth
+        Layout.minimumHeight: (main.inPanel && !main.compactInPanel) ? -1 : main.switchHeight
         contentItem: ColumnLayout {
             id: mainLayout
             anchors.fill: parent
