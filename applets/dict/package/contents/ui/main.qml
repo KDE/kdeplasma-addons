@@ -7,6 +7,7 @@
 import QtQuick 2.15
 import QtQuick.Layouts 1.1
 import org.kde.plasma.components 3.0 as PlasmaComponents3
+import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
 import org.kde.plasma.extras 2.0 as PlasmaExtras
 import org.kde.plasma.plasmoid 2.0
@@ -17,9 +18,17 @@ import org.kde.plasma.private.dict 1.0
 
 PlasmoidItem {
     id: root
-    switchWidth: Kirigami.Units.gridUnit * 10
-    switchHeight: Kirigami.Units.gridUnit * 10
+    // panels don't take keyboard focus when you click them, so the fullRepresentation in a very thick
+    // panel is worse than useless as the user can't really do anything with it. If that changes, allow
+    // the widget to switch to fullRepresentation in panels too.
+    switchWidth: inPanel ? -1 : Kirigami.Units.gridUnit * 10
+    switchHeight: inPanel ? -1 : Kirigami.Units.gridUnit * 10
     Plasmoid.icon: "accessories-dictionary-symbolic"
+
+    property bool inPanel: (Plasmoid.location === PlasmaCore.Types.TopEdge
+        || Plasmoid.location === PlasmaCore.Types.RightEdge
+        || Plasmoid.location === PlasmaCore.Types.BottomEdge
+        || Plasmoid.location === PlasmaCore.Types.LeftEdge)
 
     fullRepresentation: ColumnLayout {
         Keys.forwardTo: input
