@@ -1,19 +1,17 @@
-# translation of krunner_spellcheckrunner.po to Spanish
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for plasma_runner_spellcheckrunner.po package.
+# Copyright (C) 2008-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Ignacio Poggi <ignaciop.3@gmail.com>, 2008.
-# Enrique Matias Sanchez (Quique) <cronopios@gmail.com>, 2008.
-# Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2009, 2011.
-# Javier Vinal <fjvinalgmail.com>, 2012.
-# Javier Viñal <fjvinal@gmail.com>, 2012, 2013.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2016, 2018, 2020, 2021.
+# SPDX-FileCopyrightText: 2008 Ignacio Poggi <ignaciop.3@gmail.com>
+# SPDX-FileCopyrightText: 2008, 2009, 2011 Enrique Matias Sanchez (Quique) <cronopios@gmail.com>
+# SPDX-FileCopyrightText: 2012, 2013 Javier Viñal <fjvinal@gmail.com>
+# SPDX-FileCopyrightText: 2016, 2018, 2020, 2021, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: krunner_spellcheckrunner\n"
+"Project-Id-Version: plasma_runner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-05-23 00:46+0000\n"
-"PO-Revision-Date: 2021-12-15 23:34+0100\n"
+"PO-Revision-Date: 2025-06-10 00:42+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -78,15 +76,4 @@ msgstr "Palabra de ac&tivación:"
 #: spellcheck_config.ui:62
 #, kde-format
 msgid "Configure Dictionaries…"
-msgstr "Configurar diccionarios..."
-
-#~ msgctxt "@action"
-#~ msgid "Copy to Clipboard"
-#~ msgstr "Copiar en el portapapeles"
-
-#~ msgid "Could not find a dictionary."
-#~ msgstr "No fue posible encontrar ningún diccionario."
-
-#~ msgctxt "separator for a list of words"
-#~ msgid ", "
-#~ msgstr ", "
+msgstr "Configurar diccionarios…"

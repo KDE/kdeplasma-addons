@@ -1,20 +1,17 @@
-# Translation of plasma_applet_timer.po to Spanish
-# translation of plasma_applet_timer.po to Spanish
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for plasma_applet_org.kde.plasma.timer.po package.
+# Copyright (C) 2008-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Ignacio Poggi <ignaciop.3@gmail.com>, 2008.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2008, 2015, 2018, 2019, 2020, 2022.
-# Enrique Matias Sanchez <cronopios@gmail.com>, 2008.
-# Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2009, 2012.
-# Javier Vinal <fjvinalgmail.com>, 2012.
-# Javier Viñal <fjvinal@gmail.com>, 2012, 2014.
+# SPDX-FileCopyrightText: 2008 Ignacio Poggi <ignaciop.3@gmail.com>
+# SPDX-FileCopyrightText: 2008, 2015, 2018, 2019, 2020, 2022, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2008, 2009, 2012 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
+# SPDX-FileCopyrightText: 2012, 2014 Javier Viñal <fjvinal@gmail.com>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_timer\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2022-12-01 16:28+0100\n"
+"PO-Revision-Date: 2025-06-10 00:39+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -214,29 +211,3 @@ msgstr "De&tener"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Reiniciar"
-
-#~ msgid "Timer is running"
-#~ msgstr "El temporizador está en ejecución"
-
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "Ejecutar orden"
-
-#~ msgctxt "@label:textbox"
-#~ msgid "Command:"
-#~ msgstr "Orden:"
-
-#~ msgctxt "@label:textbox"
-#~ msgid "Title:"
-#~ msgstr "Título:"
-
-#~ msgctxt "@label:textbox"
-#~ msgid "Text:"
-#~ msgstr "Texto:"
-
-#~ msgctxt "separator of hours:minutes:seconds in timer strings"
-#~ msgid ":"
-#~ msgstr ":"
-
-#~ msgid "Timer Configuration"
-#~ msgstr "Configuración del temporizador"

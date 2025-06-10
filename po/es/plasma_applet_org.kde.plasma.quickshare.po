@@ -1,14 +1,15 @@
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for plasma_applet_org.kde.plasma.quickshare.po package.
+# Copyright (C) 2014-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Javier Vinal <fjvinal@gmail.com>, 2014.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2015, 2018, 2021.
+# SPDX-FileCopyrightText: 2014 Javier Vinal <fjvinal@gmail.com>
+# SPDX-FileCopyrightText: 2015, 2018, 2021, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.quickshare\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-02-03 00:45+0000\n"
-"PO-Revision-Date: 2021-12-15 23:33+0100\n"
+"PO-Revision-Date: 2025-06-10 00:38+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -49,7 +50,7 @@ msgstr "Enviar %1 a un servicio en línea"
 #: contents/ui/main.qml:307
 #, kde-format
 msgid "Sending…"
-msgstr "Enviando..."
+msgstr "Enviando…"
 
 #: contents/ui/main.qml:308
 #, kde-format
@@ -109,9 +110,3 @@ msgstr "No mostrar este diálogo. Copiar automáticamente."
 msgctxt "@action:button"
 msgid "Close"
 msgstr "Cerrar"
-
-#~ msgid "Text Service:"
-#~ msgstr "Servicio de texto:"
-
-#~ msgid "Image Service:"
-#~ msgstr "Servicio de imagen:"

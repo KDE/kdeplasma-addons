@@ -1,20 +1,18 @@
-# translation of plasma_runner_converterrunner.po to Spanish
-# Translation of krunner_converterrunner to Spanish
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for plasma_runner_converterrunner.po package.
+# Copyright (C) 2007-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2007.
-# Ignacio Poggi <ignaciop.3@gmail.com>, 2008.
-# Jaime Robles <jaime@kde.org>, 2008.
-# Santi <santi@kde-es.org>, 2008.
-# Enrique Matias Sanchez (Quique) <cronopios@gmail.com>, 2009.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2020.
+# SPDX-FileCopyrightText: 2007, 2009 Enrique Matias Sanchez (Quique) <cronopios@gmail.com>
+# SPDX-FileCopyrightText: 2008 Ignacio Poggi <ignaciop.3@gmail.com>
+# SPDX-FileCopyrightText: 2008 Jaime Robles <jaime@kde.org>
+# SPDX-FileCopyrightText: 2008 Santi <santi@kde-es.org>
+# SPDX-FileCopyrightText: 2020, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-09 00:47+0000\n"
-"PO-Revision-Date: 2020-10-26 12:39+0100\n"
+"PO-Revision-Date: 2025-06-10 00:41+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -45,6 +43,3 @@ msgstr "en;a;como"
 #, kde-format
 msgid "Copy unit and number"
 msgstr "Copiar unidad y número"
-
-#~ msgid "Copy number"
-#~ msgstr "Copiar número"

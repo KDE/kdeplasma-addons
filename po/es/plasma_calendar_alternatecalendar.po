@@ -1,15 +1,15 @@
 # Spanish translations for plasma_calendar_alternatecalendar.po package.
-# Copyright (C) 2022 This file is copyright:
+# Copyright (C) 2022-2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-#
 # Automatically generated, 2022.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2022, 2023.
+#
+# SPDX-FileCopyrightText: 2022, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_calendar_alternatecalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-22 02:40+0000\n"
-"PO-Revision-Date: 2023-01-11 17:06+0100\n"
+"PO-Revision-Date: 2025-06-10 00:40+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -99,51 +99,3 @@ msgstr "%1 %2, %3"
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
 msgstr "%1 %2, %3"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Chaitra"
-#~ msgstr "Chaitra"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Vaisākha"
-#~ msgstr "Vaisākha"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Jyēshtha"
-#~ msgstr "Jyēshtha"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Āshādha"
-#~ msgstr "Āshādha"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Shrāvana"
-#~ msgstr "Shrāvana"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Bhādra"
-#~ msgstr "Bhādra"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Āshwin"
-#~ msgstr "Āshwin"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Kārtika"
-#~ msgstr "Kārtika"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Mārgaśīrṣa"
-#~ msgstr "Mārgaśīrṣa"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Pausha"
-#~ msgstr "Pausha"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Māgha"
-#~ msgstr "Māgha"
-
-#~ msgctxt "Month name in Indian National Calendar"
-#~ msgid "Phālguna"
-#~ msgstr "Phālguna"

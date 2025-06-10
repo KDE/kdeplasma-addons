@@ -1,15 +1,15 @@
 # Spanish translations for plasma_applet_org.kde.plasma.nightcolorcontrol.po package.
-# Copyright (C) 2020 This file is copyright:
+# Copyright (C) 2020-2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-#
 # Automatically generated, 2020.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2020, 2021, 2022.
+#
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_org\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.nightcolorcontrol\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-30 08:46+0000\n"
-"PO-Revision-Date: 2022-12-31 10:57+0100\n"
+"PO-Revision-Date: 2025-06-10 00:37+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -52,4 +52,4 @@ msgstr "El color nocturno está activado (%1 K)"
 #: package/contents/ui/main.qml:97
 #, kde-format
 msgid "&Configure Night Color…"
-msgstr "&Configurar el color nocturno..."
+msgstr "&Configurar el color nocturno…"

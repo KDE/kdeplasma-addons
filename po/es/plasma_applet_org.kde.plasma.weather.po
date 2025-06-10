@@ -1,15 +1,15 @@
 # Spanish translations for plasma_applet_org.kde.plasma.weather.po package.
-# Copyright (C) 2016 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Copyright (C) 2016-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Automatically generated, 2016.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2016, 2018, 2019, 2020, 2021, 2022.
+#
+# SPDX-FileCopyrightText: 2016, 2018, 2019, 2020, 2021, 2022, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_org\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-11-26 00:47+0000\n"
-"PO-Revision-Date: 2022-11-25 12:47+0100\n"
+"PO-Revision-Date: 2025-06-10 00:39+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -305,7 +305,7 @@ msgstr "Defina su ubicación"
 #: package/contents/ui/FullRepresentation.qml:39
 #, kde-format
 msgid "Set location…"
-msgstr "Definir ubicación..."
+msgstr "Definir ubicación…"
 
 #: package/contents/ui/FullRepresentation.qml:54
 #, kde-format
@@ -517,172 +517,3 @@ msgstr "%1 %"
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
-
-#~ msgctxt "@action:button"
-#~ msgid "Choose…"
-#~ msgstr "Escoger..."
-
-#~ msgctxt "@title:window"
-#~ msgid "Select Weather Station"
-#~ msgstr "Seleccionar estación meteorológica"
-
-#~ msgctxt "@action:button"
-#~ msgid "Select"
-#~ msgstr "Seleccionar"
-
-#~ msgctxt "@action:button"
-#~ msgid "Cancel"
-#~ msgstr "Cancelar"
-
-#~ msgctxt "@option:check Show on widget icon: temperature"
-#~ msgid "Temperature"
-#~ msgstr "Temperatura"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Please configure"
-#~ msgstr "Por favor, configure el programa"
-
-#~ msgctxt "weather services provider name (id)"
-#~ msgid "%1 (%2)"
-#~ msgstr "%1 (%2)"
-
-#~ msgid "Weather providers:"
-#~ msgstr "Proveedores meteorológicos:"
-
-#~ msgctxt "@action:button"
-#~ msgid "Search"
-#~ msgstr "Buscar"
-
-#~ msgctxt "@action:button"
-#~ msgid "Configure..."
-#~ msgstr "Configurar..."
-
-#~ msgctxt "@item"
-#~ msgid "Celsius °C"
-#~ msgstr "Celsius °C"
-
-#~ msgctxt "@item"
-#~ msgid "Fahrenheit °F"
-#~ msgstr "Fahrenheit °F"
-
-#~ msgctxt "@item"
-#~ msgid "Kelvin K"
-#~ msgstr "Kelvin K"
-
-#~ msgctxt "@item"
-#~ msgid "Hectopascals hPa"
-#~ msgstr "Hectopascales hPa"
-
-#~ msgctxt "@item"
-#~ msgid "Kilopascals kPa"
-#~ msgstr "Kilopascales kPa"
-
-#~ msgctxt "@item"
-#~ msgid "Millibars mbar"
-#~ msgstr "Milibares mbar"
-
-#~ msgctxt "@item"
-#~ msgid "Inches of Mercury inHg"
-#~ msgstr "Pulgadas de mercurio inHg"
-
-#~ msgctxt "@item"
-#~ msgid "Meters per Second m/s"
-#~ msgstr "Metros por segundo m/s"
-
-#~ msgctxt "@item"
-#~ msgid "Kilometers per Hour km/h"
-#~ msgstr "Kilómetros por hora km/h"
-
-#~ msgctxt "@item"
-#~ msgid "Miles per Hour mph"
-#~ msgstr "Millas por hora mph"
-
-#~ msgctxt "@item"
-#~ msgid "Knots kt"
-#~ msgstr "Nudos kt"
-
-#~ msgctxt "@item"
-#~ msgid "Beaufort scale bft"
-#~ msgstr "Escala de Beaufort bft"
-
-#~ msgctxt "@item"
-#~ msgid "Kilometers"
-#~ msgstr "Kilómetros"
-
-#~ msgctxt "@item"
-#~ msgid "Miles"
-#~ msgstr "Millas"
-
-#~ msgctxt "@label"
-#~ msgid "Display:"
-#~ msgstr "Mostrar:"
-
-#~ msgctxt "@label"
-#~ msgid "Tooltip:"
-#~ msgstr "Ayuda emergente:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Show wind"
-#~ msgstr "Mostrar el viento"
-
-#~ msgctxt "@option:check"
-#~ msgid "Show pressure"
-#~ msgstr "Mostrar la presión"
-
-#~ msgctxt "@option:check"
-#~ msgid "Show humidity"
-#~ msgstr "Mostrar la humedad"
-
-#~ msgctxt "no weather station"
-#~ msgid "-"
-#~ msgstr "-"
-
-#~ msgctxt "@label"
-#~ msgid "Show temperature in compact mode:"
-#~ msgstr "Mostrar la temperatura en modo compacto:"
-
-#~ msgid "Pressure: %1"
-#~ msgstr "Presión: %1"
-
-#~ msgid "Visibility: %1"
-#~ msgstr "Visibilidad: %1"
-
-#~ msgctxt ""
-#~ "%1 is the weather condition, %2 is the temperature,  both come from the "
-#~ "weather provider"
-#~ msgid "%1 %2"
-#~ msgstr "%1 %2"
-
-#~ msgctxt "High & Low temperature"
-#~ msgid "H: %1 L: %2"
-#~ msgstr "A: %1 B: %2"
-
-#~ msgctxt "Low temperature"
-#~ msgid "Low: %1"
-#~ msgstr "Mín: %1"
-
-#~ msgctxt "High temperature"
-#~ msgid "High: %1"
-#~ msgstr "Máx: %1"
-
-#~ msgctxt "temperature, unit"
-#~ msgid "%1%2"
-#~ msgstr "%1 %2"
-
-#~ msgid "N/A"
-#~ msgstr "N/D"
-
-#~ msgctxt "distance, unit"
-#~ msgid "Visibility: %1 %2"
-#~ msgstr "Visibilidad: %1 %2"
-
-#~ msgctxt "Percent, measure unit"
-#~ msgid "%"
-#~ msgstr "%"
-
-#~ msgctxt "Not available"
-#~ msgid "N/A"
-#~ msgstr "N/D"
-
-#~ msgid "General"
-#~ msgstr "General"

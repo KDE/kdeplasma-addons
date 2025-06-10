@@ -1,15 +1,15 @@
 # Spanish translations for plasma_wallpaper_org.kde.potd.po package.
-# Copyright (C) 2018 This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
-#
+# Copyright (C) 2018-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 # Automatically generated, 2018.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2018, 2019, 2022, 2023.
+#
+# SPDX-FileCopyrightText: 2018, 2019, 2022, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_wallpaper_org\n"
+"Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-07-01 02:37+0000\n"
-"PO-Revision-Date: 2023-01-15 00:29+0100\n"
+"PO-Revision-Date: 2025-06-10 00:42+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -332,7 +332,7 @@ msgstr "No se ha podido obtener el fondo de escritorio de Internet."
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
-msgstr "Guardar imagen como..."
+msgstr "Guardar imagen como…"
 
 #: package/contents/ui/WallpaperPreview.qml:53
 #, kde-format
@@ -345,7 +345,7 @@ msgstr "Guardar la imagen del día en el disco local"
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
-msgstr "Abrir enlace en el navegador..."
+msgstr "Abrir enlace en el navegador…"
 
 #: package/contents/ui/WallpaperPreview.qml:62
 #, kde-format

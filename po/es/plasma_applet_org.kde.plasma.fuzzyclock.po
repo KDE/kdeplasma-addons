@@ -1,22 +1,20 @@
-# translation of plasma_applet_fuzzy_clock.po to Spanish
-# Translation of plasma_applet_fuzzy_clock to Spanish
-# Copyright (C) YEAR This_file_is_part_of_KDE
-# This file is distributed under the same license as the PACKAGE package.
+# Spanish translations for plasma_applet_org.kde.plasma.fuzzyclock.po package.
+# Copyright (C) 2007-2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Santiago FernÃ¡ndez Sancho <santi@kde-es.org>, 2007, 2008.
-# Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>, 2007, 2009.
-# Mario Young <mayeco@kdemail.net>, 2008.
-# Ignacio A. Poggi <ignaciop.3@gmail.com>, 2008.
-# Enrique Matias Sanchez (Quique) <cronopios@gmail.com>, 2008.
-# Jaime Robles <jaime@kde.org>, 2009.
+# SPDX-FileCopyrightText: 2007, 2008 Santiago Fernández Sancho <santi@kde-es.org>
+# SPDX-FileCopyrightText: 2007, 2008, 2009 Enrique Matias Sanchez (Quique) <cronopios@gmail.com>
+# SPDX-FileCopyrightText: 2008 Mario Young <mayeco@kdemail.net>
+# SPDX-FileCopyrightText: 2008 Ignacio A. Poggi <ignaciop.3@gmail.com>
+# SPDX-FileCopyrightText: 2009 Jaime Robles <jaime@kde.org>
 # Javier Vinal <fjvinalgmail.com>, 2012, 2014.
-# Eloy Cuadra <ecuadra@eloihr.net>, 2014, 2017, 2018, 2019.
+# SPDX-FileCopyrightText: 2014, 2017, 2018, 2019, 2025 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
-"Project-Id-Version: plasma_applet_fuzzy_clock\n"
+"Project-Id-Version: plasma_applet_org.kde.plasma.fuzzyclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-01 00:45+0000\n"
-"PO-Revision-Date: 2019-03-15 19:17+0100\n"
+"PO-Revision-Date: 2025-06-10 00:34+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -887,55 +885,3 @@ msgstr "Fin de la semana"
 #, kde-format
 msgid "Weekend!"
 msgstr "¡Fin de semana!"
-
-#, fuzzy
-#~| msgid "Appearance"
-#~ msgctxt "@title:group"
-#~ msgid "Appearance"
-#~ msgstr "Aspecto"
-
-#~ msgctxt "hour in the messages below"
-#~ msgid "one"
-#~ msgstr "una"
-
-#~ msgctxt "hour in the messages below"
-#~ msgid "two"
-#~ msgstr "dos"
-
-#~ msgctxt "hour in the messages below"
-#~ msgid "three"
-#~ msgstr "tres"
-
-#~ msgctxt "hour in the messages below"
-#~ msgid "four"
-#~ msgstr "cuatro"
-
-#~ msgctxt "hour in the messages below"
-#~ msgid "five"
-#~ msgstr "cinco"
-
-#~ msgctxt "hour in the messages below"
-#~ msgid "six"
-#~ msgstr "seis"
-
-#~ msgctxt "hour in the messages below"
-#~ msgid "seven"
-#~ msgstr "siete"
-
-#~ msgctxt "hour in the messages below"
-#~ msgid "eight"
-#~ msgstr "ocho"
-
-#~ msgctxt "hour in the messages below"
-#~ msgid "nine"
-#~ msgstr "nueve"
-
-#~ msgctxt "hour in the messages below"
-#~ msgid "ten"
-#~ msgstr "diez"
-
-#~ msgctxt ""
-#~ "Whether to uppercase the first letter of completed fuzzy time strings "
-#~ "above: translate as 1 if yes, 0 if no."
-#~ msgid "1"
-#~ msgstr "1"
