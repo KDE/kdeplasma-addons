@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-30 00:44+0000\n"
+"POT-Creation-Date: 2025-06-11 00:43+0000\n"
 "PO-Revision-Date: 2025-04-25 09:36+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -40,7 +40,7 @@ msgid "Unable to load dictionary list"
 msgstr "Sözlük listesi yüklenemedi"
 
 #: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:154
+#: package/contents/ui/main.qml:163
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -56,13 +56,13 @@ msgstr "Sözlük yok"
 msgid "Delete"
 msgstr "Sil"
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:54
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Buraya tanımlamak için sözcük girin…"
 
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Unable to load definition"
 msgstr "Tanım yüklenemedi"

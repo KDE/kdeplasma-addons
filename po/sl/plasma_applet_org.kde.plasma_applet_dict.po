@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-30 00:44+0000\n"
+"POT-Creation-Date: 2025-06-11 00:43+0000\n"
 "PO-Revision-Date: 2025-04-24 07:24+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -43,7 +43,7 @@ msgid "Unable to load dictionary list"
 msgstr "Ni bilo mogoče naložiti seznama slovarjev"
 
 #: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:154
+#: package/contents/ui/main.qml:163
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -59,13 +59,13 @@ msgstr "Ni slovarjev"
 msgid "Delete"
 msgstr "Zbriši"
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:54
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Tu vnesite besedo za določitev…"
 
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Unable to load definition"
 msgstr "Ni bilo mogoče naložiti definicije"

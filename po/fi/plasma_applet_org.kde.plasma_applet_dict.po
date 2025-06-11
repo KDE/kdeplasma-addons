@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-30 00:44+0000\n"
+"POT-Creation-Date: 2025-06-11 00:43+0000\n"
 "PO-Revision-Date: 2025-05-25 16:34+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -40,7 +40,7 @@ msgid "Unable to load dictionary list"
 msgstr "Sanaastoluetteloa ei voitu ladata"
 
 #: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:154
+#: package/contents/ui/main.qml:163
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -56,13 +56,13 @@ msgstr "Ei sanastoja"
 msgid "Delete"
 msgstr "Poista"
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:54
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Kirjoita määriteltävä sana tähän…"
 
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Unable to load definition"
 msgstr "Määritelmää ei voitu ladata"
