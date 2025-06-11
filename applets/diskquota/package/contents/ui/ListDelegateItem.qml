@@ -61,7 +61,7 @@ PlasmaComponents3.ItemDelegate {
                     horizontalAlignment: Text.AlignRight
                     text: freeString
                     textFormat: Text.PlainText
-                    opacity: 0.6
+                    opacity: 0.75
                 }
             }
             PlasmaComponents3.ProgressBar {
@@ -81,7 +81,7 @@ PlasmaComponents3.ItemDelegate {
                 anchors.left: parent.left
                 text: usedString
                 textFormat: Text.PlainText
-                opacity: 0.6
+                opacity: 0.75
             }
         }
     }

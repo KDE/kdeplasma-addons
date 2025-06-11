@@ -72,7 +72,7 @@ PlasmaComponents3.ItemDelegate {
                 textFormat: Text.PlainText
                 wrapMode: Text.NoWrap
                 elide: Text.ElideRight
-                opacity: 0.6
+                opacity: 0.75
                 font: Kirigami.Theme.smallFont
                 visible: text !== ""
             }
