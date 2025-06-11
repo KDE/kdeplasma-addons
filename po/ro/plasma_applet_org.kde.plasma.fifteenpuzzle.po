@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-05 02:36+0000\n"
+"POT-Creation-Date: 2025-06-11 02:47+0000\n"
 "PO-Revision-Date: 2022-02-05 20:22+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian\n"
@@ -98,12 +98,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Rezolvat! Încercați din nou."
 
-#: package/contents/ui/main.qml:29
+#: package/contents/ui/main.qml:35
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Fifteen Puzzle"
 
-#: package/contents/ui/main.qml:30
+#: package/contents/ui/main.qml:36
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Rezolvați prin aranjare în ordine"

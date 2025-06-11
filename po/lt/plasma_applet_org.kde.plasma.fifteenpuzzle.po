@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-05 02:36+0000\n"
+"POT-Creation-Date: 2025-06-11 02:47+0000\n"
 "PO-Revision-Date: 2021-12-18 00:59+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -98,12 +98,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Išspręsta! Bandykite dar kartą."
 
-#: package/contents/ui/main.qml:29
+#: package/contents/ui/main.qml:35
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Penkiolika dalių"
 
-#: package/contents/ui/main.qml:30
+#: package/contents/ui/main.qml:36
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Išspręsti rikiuojant eilėje"

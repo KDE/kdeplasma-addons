@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-05 02:36+0000\n"
+"POT-Creation-Date: 2025-06-11 02:47+0000\n"
 "PO-Revision-Date: 2022-07-21 20:47+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -96,12 +96,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "ამოხსნილია! თავიდან სცადეთ."
 
-#: package/contents/ui/main.qml:29
+#: package/contents/ui/main.qml:35
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "15 პაზლი"
 
-#: package/contents/ui/main.qml:30
+#: package/contents/ui/main.qml:36
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "დაალაგეთ"

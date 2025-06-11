@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-05 02:36+0000\n"
+"POT-Creation-Date: 2025-06-11 02:47+0000\n"
 "PO-Revision-Date: 2019-11-01 22:24+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -100,12 +100,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Lahendatud! Proovi uuesti."
 
-#: package/contents/ui/main.qml:29
+#: package/contents/ui/main.qml:35
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Viieteistkümnemäng"
 
-#: package/contents/ui/main.qml:30
+#: package/contents/ui/main.qml:36
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Tükkide kordaseadmine"

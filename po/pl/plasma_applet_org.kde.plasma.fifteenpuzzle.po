@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-05 02:36+0000\n"
+"POT-Creation-Date: 2025-06-11 02:47+0000\n"
 "PO-Revision-Date: 2021-12-19 12:37+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -99,12 +99,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Rozwiązane! Spróbuj ponownie."
 
-#: package/contents/ui/main.qml:29
+#: package/contents/ui/main.qml:35
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Piętnaście kawałków"
 
-#: package/contents/ui/main.qml:30
+#: package/contents/ui/main.qml:36
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Rozwiąż poprzez ułożenie w odpowiednim porządku"

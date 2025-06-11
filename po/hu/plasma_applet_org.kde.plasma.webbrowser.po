@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-30 02:39+0000\n"
+"POT-Creation-Date: 2025-06-11 02:47+0000\n"
 "PO-Revision-Date: 2024-10-10 21:38+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -105,7 +105,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Mindig ezt az oldalt töltse be:"
 
-#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:113
+#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:118
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -141,60 +141,60 @@ msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "Privát böngészés"
 
-#: package/contents/ui/main.qml:68
+#: package/contents/ui/main.qml:73
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Vissza"
 
-#: package/contents/ui/main.qml:78
+#: package/contents/ui/main.qml:83
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Előre"
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:94
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "Kezdőlap"
 
-#: package/contents/ui/main.qml:94
+#: package/contents/ui/main.qml:99
 #, kde-format
 msgid "Open Default URL"
 msgstr "Alapértelmezett URL megnyitása"
 
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:158
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Oldalbetöltés leállítása"
 
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:158
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Oldal újratöltése"
 
-#: package/contents/ui/main.qml:206
+#: package/contents/ui/main.qml:211
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Hivatkozás megnyitása böngészőben"
 
-#: package/contents/ui/main.qml:212
+#: package/contents/ui/main.qml:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Hivatkozás címének másolása"
 
-#: package/contents/ui/main.qml:279
+#: package/contents/ui/main.qml:284
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Felugró blokkolva"
 
-#: package/contents/ui/main.qml:280
+#: package/contents/ui/main.qml:285
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

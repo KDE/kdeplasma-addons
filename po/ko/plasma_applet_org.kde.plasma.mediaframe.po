@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2016, 2017, 2018, 2019, 2022.
+# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2022, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-24 00:42+0000\n"
-"PO-Revision-Date: 2022-04-16 22:51+0200\n"
+"PO-Revision-Date: 2025-06-10 23:46+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -176,8 +176,7 @@ msgid "Add Files…"
 msgstr "파일 추가…"
 
 #: package/contents/ui/ConfigPaths.qml:82
-#, fuzzy, kde-format
-#| msgid "Remove path"
+#, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "경로 삭제"
@@ -186,13 +185,13 @@ msgstr "경로 삭제"
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
-msgstr ""
+msgstr "설정한 미디어 없음"
 
 #: package/contents/ui/ConfigPaths.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
-msgstr ""
+msgstr "파일이나 폴더를 추가하면 위젯에 표시합니다."
 
 #: package/contents/ui/ConfigPaths.qml:99
 #, kde-format

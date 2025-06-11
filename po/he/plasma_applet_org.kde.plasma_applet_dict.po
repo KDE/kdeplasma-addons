@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-30 02:39+0000\n"
+"POT-Creation-Date: 2025-06-11 02:47+0000\n"
 "PO-Revision-Date: 2025-04-24 20:39+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -41,7 +41,7 @@ msgid "Unable to load dictionary list"
 msgstr "לא ניתן לטעון את רשימת המילונים"
 
 #: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:154
+#: package/contents/ui/main.qml:163
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -57,13 +57,13 @@ msgstr "אין מילונים"
 msgid "Delete"
 msgstr "מחיקה"
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:54
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "נא למלא כאן מילה להגדרה…"
 
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Unable to load definition"
 msgstr "לא ניתן לטעון הגדרה"

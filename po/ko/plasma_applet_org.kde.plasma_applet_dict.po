@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2017, 2018, 2022.
+# SPDX-FileCopyrightText: 2017, 2018, 2022, 2025 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-30 02:39+0000\n"
-"PO-Revision-Date: 2022-07-13 13:29+0200\n"
+"POT-Creation-Date: 2025-06-11 02:47+0000\n"
+"PO-Revision-Date: 2025-06-10 23:46+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 24.12.3\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -29,8 +29,7 @@ msgid "Add More Dictionaries"
 msgstr "더 많은 사전 추가"
 
 #: package/contents/ui/ConfigDictionaries.qml:21
-#, fuzzy, kde-format
-#| msgid "Add More…"
+#, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "더 추가…"
@@ -41,7 +40,7 @@ msgid "Unable to load dictionary list"
 msgstr "사전 목록을 불러올 수 없음"
 
 #: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:154
+#: package/contents/ui/main.qml:163
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -57,13 +56,13 @@ msgstr "사전 없음"
 msgid "Delete"
 msgstr "삭제"
 
-#: package/contents/ui/main.qml:45
+#: package/contents/ui/main.qml:54
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "찾아볼 단어를 입력하십시오…"
 
-#: package/contents/ui/main.qml:153
+#: package/contents/ui/main.qml:162
 #, kde-format
 msgid "Unable to load definition"
 msgstr "뜻을 불러올 수 없음"
