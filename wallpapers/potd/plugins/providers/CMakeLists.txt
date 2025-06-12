@@ -9,9 +9,6 @@ target_link_libraries(plasma_potd_apodprovider plasmapotdprovidercore KF6::KIOCo
 kcoreaddons_add_plugin(plasma_potd_epodprovider SOURCES epodprovider.cpp INSTALL_NAMESPACE "potd")
 target_link_libraries(plasma_potd_epodprovider plasmapotdprovidercore KF6::KIOCore)
 
-kcoreaddons_add_plugin(plasma_potd_noaaprovider SOURCES noaaprovider.cpp INSTALL_NAMESPACE "potd")
-target_link_libraries(plasma_potd_noaaprovider plasmapotdprovidercore plasma_wallpaper_potdplugin_debug KF6::KIOCore)
-
 kcoreaddons_add_plugin(plasma_potd_wcpotdprovider SOURCES wcpotdprovider.cpp INSTALL_NAMESPACE "potd")
 target_link_libraries(plasma_potd_wcpotdprovider plasmapotdprovidercore KF6::KIOCore)
 

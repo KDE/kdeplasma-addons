@@ -19,7 +19,7 @@ http://epod.usra.edu/
 RSS feed http://interglacial.com/rss/epod.rss
 
 * NOAA
-Image Of the Day -------------------------------------  DONE
+Image Of the Day
 http://www.nnvl.noaa.gov/imageoftheday.php
 
 * WCPoTD Wikimedia Commons Picture of The Day ---------- almost DONE (need to add the Credits URL below the pic)
