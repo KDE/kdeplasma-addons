@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-06 00:42+0000\n"
+"POT-Creation-Date: 2025-06-12 00:43+0000\n"
 "PO-Revision-Date: 2025-04-26 15:46+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -506,13 +506,13 @@ msgstr[1] "%1 примітки"
 msgstr[2] "%1 приміток"
 msgstr[3] "%1 примітка"
 
-#: package/contents/ui/SwitchPanel.qml:118
+#: package/contents/ui/SwitchPanel.qml:117
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr "Не вдалося завантажити прогноз погоди"
 
-#: package/contents/ui/SwitchPanel.qml:120
+#: package/contents/ui/SwitchPanel.qml:119
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

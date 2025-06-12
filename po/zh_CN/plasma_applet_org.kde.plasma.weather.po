@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-06 00:42+0000\n"
+"POT-Creation-Date: 2025-06-12 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -491,13 +491,13 @@ msgid "%1 Notice"
 msgid_plural "%1 Notices"
 msgstr[0] "%1 条公告"
 
-#: package/contents/ui/SwitchPanel.qml:118
+#: package/contents/ui/SwitchPanel.qml:117
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr "无法加载天气预报"
 
-#: package/contents/ui/SwitchPanel.qml:120
+#: package/contents/ui/SwitchPanel.qml:119
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

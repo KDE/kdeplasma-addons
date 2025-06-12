@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-06 00:42+0000\n"
+"POT-Creation-Date: 2025-06-12 00:43+0000\n"
 "PO-Revision-Date: 2025-04-28 17:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -512,13 +512,13 @@ msgstr[3] "%1 إخطارات"
 msgstr[4] "%1 إخطارا"
 msgstr[5] "%1 إخطار"
 
-#: package/contents/ui/SwitchPanel.qml:118
+#: package/contents/ui/SwitchPanel.qml:117
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr "غير قادر على جلب معلومات الطقس"
 
-#: package/contents/ui/SwitchPanel.qml:120
+#: package/contents/ui/SwitchPanel.qml:119
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

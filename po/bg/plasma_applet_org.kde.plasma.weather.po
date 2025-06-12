@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-06 00:42+0000\n"
+"POT-Creation-Date: 2025-06-12 00:43+0000\n"
 "PO-Revision-Date: 2025-04-29 22:52+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -496,13 +496,13 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 Известие"
 msgstr[1] "%1 Известия"
 
-#: package/contents/ui/SwitchPanel.qml:118
+#: package/contents/ui/SwitchPanel.qml:117
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr "Невъзможно извличане на информация за времето"
 
-#: package/contents/ui/SwitchPanel.qml:120
+#: package/contents/ui/SwitchPanel.qml:119
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

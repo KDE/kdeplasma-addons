@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-06 00:42+0000\n"
+"POT-Creation-Date: 2025-06-12 00:43+0000\n"
 "PO-Revision-Date: 2024-09-21 10:41+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -498,13 +498,13 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 Avizo"
 msgstr[1] "%1 Avizoj"
 
-#: package/contents/ui/SwitchPanel.qml:118
+#: package/contents/ui/SwitchPanel.qml:117
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr "Ne eblas ŝargi veterprogrnozon"
 
-#: package/contents/ui/SwitchPanel.qml:120
+#: package/contents/ui/SwitchPanel.qml:119
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
