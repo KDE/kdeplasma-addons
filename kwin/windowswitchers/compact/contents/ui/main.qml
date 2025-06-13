@@ -97,7 +97,7 @@ KWin.TabBoxSwitcher {
 
                     width: compactListView.width
                     height: compactListView.rowHeight
-                    opacity: minimized ? 0.6 : 1.0
+                    opacity: minimized ? 0.75 : 1.0
 
                     spacing: 2 * Kirigami.Units.smallSpacing
 

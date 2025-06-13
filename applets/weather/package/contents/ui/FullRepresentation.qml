@@ -102,7 +102,7 @@ ColumnLayout {
             underline: !!creditUrl
         }
         linkColor : color
-        opacity: 0.6
+        opacity: 0.75
         textFormat: Text.StyledText
 
         text: {

@@ -66,7 +66,7 @@ KCM.ScrollViewKCM {
 
                 Layout.fillWidth: true
                 elide: Text.ElideRight
-                opacity: hasSource ? 1 : 0.7
+                opacity: hasSource ? 1 : 0.75
 
                 text: hasSource ? sourceDetails[2] : i18nc("No location is currently selected", "None selected")
                 textFormat: Text.PlainText
