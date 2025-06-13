@@ -268,7 +268,7 @@ msgstr "Besök webbplatsen"
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
-msgstr "Besök affärens &webbplats"
+msgstr "Besök butikens &webbplats"
 
 #: qml/main.qml:111
 #, kde-format
