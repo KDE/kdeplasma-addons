@@ -1,5 +1,3 @@
-add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.comic\")
-
 add_subdirectory(engine)
 
 plasma_add_applet(org.kde.plasma.comic
