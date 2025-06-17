@@ -49,7 +49,7 @@ msgstr "El color de nit no està executant-se"
 #: package/contents/ui/main.qml:46
 #, kde-format
 msgid "Night Color is active (%1K)"
-msgstr "El color de nit està actiu (%1K)"
+msgstr "El color de nit està actiu (%1 K)"
 
 #: package/contents/ui/main.qml:97
 #, kde-format
