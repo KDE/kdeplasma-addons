@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-12 00:43+0000\n"
+"POT-Creation-Date: 2025-06-21 00:44+0000\n"
 "PO-Revision-Date: 2025-04-07 09:41+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -129,170 +129,186 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "Logn"
 
-#: package/contents/config/config.qml:15
+#: locationlistmodel.cpp:43
+#, kde-format
+msgid "Cannot find '%1' using %2."
+msgstr "Tókst ekki að finna '%1' með því að nota %2."
+
+#: locationlistmodel.cpp:67
+#, kde-format
+msgid "Connection to %1 weather server timed out."
+msgstr "Tenging við veðurþjón %1 rann út á tíma."
+
+#: locationlistmodel.cpp:186
+#, kde-format
+msgctxt "A weather station location and the weather service it comes from"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: qml/config/config.qml:15
 #, kde-format
 msgctxt "@title"
 msgid "Weather Station"
 msgstr "Veðurstöð"
 
-#: package/contents/config/config.qml:21
+#: qml/config/config.qml:21
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Útlit"
 
-#: package/contents/config/config.qml:31
+#: qml/config/config.qml:31
 #, kde-format
 msgctxt "@title"
 msgid "Units"
 msgstr "Einingar"
 
-#: package/contents/ui/config/ConfigAppearance.qml:38
+#: qml/config/ConfigAppearance.qml:37
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "Þétt snið"
 
-#: package/contents/ui/config/ConfigAppearance.qml:46
+#: qml/config/ConfigAppearance.qml:45
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Sýna hitastig"
 
-#: package/contents/ui/config/ConfigAppearance.qml:49
+#: qml/config/ConfigAppearance.qml:48
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Sem tákn yfir græju"
 
-#: package/contents/ui/config/ConfigAppearance.qml:57
+#: qml/config/ConfigAppearance.qml:56
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Sem tákn við hlið græju"
 
-#: package/contents/ui/config/ConfigAppearance.qml:64
+#: qml/config/ConfigAppearance.qml:63
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Ekki sýna"
 
-#: package/contents/ui/config/ConfigAppearance.qml:73
+#: qml/config/ConfigAppearance.qml:72
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "Sýna í vísbendingu:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:74
+#: qml/config/ConfigAppearance.qml:73
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Hitastig"
 
-#: package/contents/ui/config/ConfigAppearance.qml:79
+#: qml/config/ConfigAppearance.qml:78
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Vind"
 
-#: package/contents/ui/config/ConfigAppearance.qml:84
+#: qml/config/ConfigAppearance.qml:83
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Þrýsting"
 
-#: package/contents/ui/config/ConfigAppearance.qml:89
+#: qml/config/ConfigAppearance.qml:88
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "Rakastig"
 
-#: package/contents/ui/config/ConfigUnits.qml:32
+#: qml/config/ConfigUnits.qml:31
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "Hitastig:"
 
-#: package/contents/ui/config/ConfigUnits.qml:38
+#: qml/config/ConfigUnits.qml:37
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "Þrýstingur:"
 
-#: package/contents/ui/config/ConfigUnits.qml:44
+#: qml/config/ConfigUnits.qml:43
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "Vindhraði:"
 
-#: package/contents/ui/config/ConfigUnits.qml:50
+#: qml/config/ConfigUnits.qml:49
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Skyggni:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:50
+#: qml/config/ConfigWeatherStation.qml:49
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Uppfæra á:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:53
+#: qml/config/ConfigWeatherStation.qml:52
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 mínútu fresti"
 msgstr[1] "%1 mínútna fresti"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:65
+#: qml/config/ConfigWeatherStation.qml:64
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Staðsetning:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#: qml/config/ConfigWeatherStation.qml:70
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "Ekkert valið"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:76
+#: qml/config/ConfigWeatherStation.qml:75
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "Þjónustuveita:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: qml/config/ConfigWeatherStation.qml:100
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Færðu inn nýja staðsetningu"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: qml/config/ConfigWeatherStation.qml:100
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Færa inn staðsetningu"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: qml/config/ConfigWeatherStation.qml:184
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Engin veðurstofa fannst fyrir '%1'"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: qml/config/ConfigWeatherStation.qml:186
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Leitaðu að veðurstofu til að breyta staðsetningu þinni"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:189
+#: qml/config/ConfigWeatherStation.qml:188
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Leitaðu að veðurstofu til að velja staðsetningu þína"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#: qml/config/ConfigWeatherStation.qml:191
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -304,53 +320,52 @@ msgstr ""
 "tímabundið vegna bilunar í þjóni hjá netþjónustu veðurstofunnar. Prófaðu "
 "aftur síðar."
 
-#: package/contents/ui/ForecastView.qml:45
+#: qml/ForecastView.qml:45
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
 msgstr "Dagur"
 
-#: package/contents/ui/ForecastView.qml:49
+#: qml/ForecastView.qml:49
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
 msgstr "Nótt"
 
-#: package/contents/ui/ForecastView.qml:105
+#: qml/ForecastView.qml:105
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
 
-#: package/contents/ui/ForecastView.qml:119
+#: qml/ForecastView.qml:119
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
 msgstr "☂%1%"
 
-#: package/contents/ui/ForecastView.qml:127
-#: package/contents/ui/ForecastView.qml:135
+#: qml/ForecastView.qml:127 qml/ForecastView.qml:135
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:39
+#: qml/FullRepresentation.qml:37
 #, kde-format
 msgid "Please set your location"
 msgstr "Veldu staðsetningu þína"
 
-#: package/contents/ui/FullRepresentation.qml:42
+#: qml/FullRepresentation.qml:40
 #, kde-format
 msgid "Set location…"
 msgstr "Velja staðsetningu..."
 
-#: package/contents/ui/FullRepresentation.qml:57
+#: qml/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
 msgstr "Tókst ekki að sækja veðurupplýsingar fyrir %1"
 
-#: package/contents/ui/FullRepresentation.qml:59
+#: qml/FullRepresentation.qml:57
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -360,31 +375,31 @@ msgstr ""
 "Netbeiðnin rann út á tíma, hugsanlega vegna bilunar í þjóni hjá netþjónustu "
 "veðurstofunnar. Prófaðu aftur síðar."
 
-#: package/contents/ui/main.qml:93
+#: qml/main.qml:91
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Rising"
 msgstr "Stígandi"
 
-#: package/contents/ui/main.qml:94
+#: qml/main.qml:92
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Falling"
 msgstr "Fallandi"
 
-#: package/contents/ui/main.qml:95
+#: qml/main.qml:93
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Steady"
 msgstr "Stöðugur"
 
-#: package/contents/ui/main.qml:117
+#: qml/main.qml:115
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "Logn"
 
-#: package/contents/ui/main.qml:155
+#: qml/main.qml:153
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
@@ -392,43 +407,43 @@ msgid_plural "%1 Days"
 msgstr[0] "1 dagur"
 msgstr[1] "%1 dagar"
 
-#: package/contents/ui/main.qml:177
+#: qml/main.qml:175
 #, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "Daggarmark:"
 
-#: package/contents/ui/main.qml:184
+#: qml/main.qml:182
 #, kde-format
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "Þrýstingur:"
 
-#: package/contents/ui/main.qml:191
+#: qml/main.qml:189
 #, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "Þrýstibreyting:"
 
-#: package/contents/ui/main.qml:198
+#: qml/main.qml:196
 #, kde-format
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "Skyggni:"
 
-#: package/contents/ui/main.qml:205
+#: qml/main.qml:203
 #, kde-format
 msgctxt "@label"
 msgid "Humidity:"
 msgstr "Raki:"
 
-#: package/contents/ui/main.qml:212
+#: qml/main.qml:210
 #, kde-format
 msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "Vindhviður:"
 
-#: package/contents/ui/main.qml:362
+#: qml/main.qml:360
 #, kde-format
 msgctxt ""
 "@info:usagetip Minimize the length of this string so it is as short as "
@@ -437,60 +452,60 @@ msgctxt ""
 msgid "Set up Weather Report…"
 msgstr ""
 
-#: package/contents/ui/main.qml:371
+#: qml/main.qml:369
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr ""
 
-#: package/contents/ui/main.qml:380
+#: qml/main.qml:378
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:387
+#: qml/main.qml:385
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:390
+#: qml/main.qml:388
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:399
+#: qml/main.qml:397
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:406
+#: qml/main.qml:404
 #, kde-format
 msgid "Humidity: %1"
 msgstr "Raki: %1"
 
-#: package/contents/ui/NoticesView.qml:61
+#: qml/NoticesView.qml:61
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
 msgstr "Sýna frekari upplýsingar"
 
-#: package/contents/ui/SwitchPanel.qml:36
+#: qml/SwitchPanel.qml:36
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
 msgstr "Veðurspá"
 
-#: package/contents/ui/SwitchPanel.qml:40
+#: qml/SwitchPanel.qml:40
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "Nánar"
 
-#: package/contents/ui/SwitchPanel.qml:45
+#: qml/SwitchPanel.qml:45
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -500,13 +515,13 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 athugasemd"
 msgstr[1] "%1 athugasemdir"
 
-#: package/contents/ui/SwitchPanel.qml:117
+#: qml/SwitchPanel.qml:117
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr "Tókst ekki að hlaða inn veðurspá"
 
-#: package/contents/ui/SwitchPanel.qml:119
+#: qml/SwitchPanel.qml:119
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -516,7 +531,7 @@ msgstr ""
 "Hugsanlega eru tæknileg vandamál hjá veðurstofunni. Ef vandamálið er enn til "
 "staðar eftir meira en einn dag skaltu senda inn villuskýrslu."
 
-#: package/contents/ui/TopPanel.qml:85
+#: qml/TopPanel.qml:85
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
@@ -525,47 +540,31 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "Með vindkælingu %1"
 
-#: plugin/locationlistmodel.cpp:43
-#, kde-format
-msgid "Cannot find '%1' using %2."
-msgstr "Tókst ekki að finna '%1' með því að nota %2."
-
-#: plugin/locationlistmodel.cpp:67
-#, kde-format
-msgid "Connection to %1 weather server timed out."
-msgstr "Tenging við veðurþjón %1 rann út á tíma."
-
-#: plugin/locationlistmodel.cpp:186
-#, kde-format
-msgctxt "A weather station location and the weather service it comes from"
-msgid "%1 (%2)"
-msgstr "%1 (%2)"
-
-#: plugin/util.cpp:44
+#: util.cpp:44
 #, kde-format
 msgctxt "Degree, unit symbol"
 msgid "°"
 msgstr "°"
 
-#: plugin/util.cpp:48 plugin/util.cpp:52
+#: util.cpp:48 util.cpp:52
 #, kde-format
 msgctxt "temperature unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: plugin/util.cpp:62
+#: util.cpp:62
 #, kde-format
 msgctxt "value unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: plugin/util.cpp:68
+#: util.cpp:68
 #, kde-format
 msgctxt "value percentsymbol"
 msgid "%1 %"
 msgstr "%1 %"
 
-#: plugin/util.cpp:74
+#: util.cpp:74
 #, kde-format
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"

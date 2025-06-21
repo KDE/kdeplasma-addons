@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-12 00:43+0000\n"
+"POT-Creation-Date: 2025-06-21 00:44+0000\n"
 "PO-Revision-Date: 2025-04-26 04:57+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -126,170 +126,186 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "მშვიდი"
 
-#: package/contents/config/config.qml:15
+#: locationlistmodel.cpp:43
+#, kde-format
+msgid "Cannot find '%1' using %2."
+msgstr "%2-ის გამოყენებით %1 ვერ ვიპოვე."
+
+#: locationlistmodel.cpp:67
+#, kde-format
+msgid "Connection to %1 weather server timed out."
+msgstr "%1 ამინდის სერვერთან დაკავშირების ვადა გავიდა."
+
+#: locationlistmodel.cpp:186
+#, kde-format
+msgctxt "A weather station location and the weather service it comes from"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: qml/config/config.qml:15
 #, kde-format
 msgctxt "@title"
 msgid "Weather Station"
 msgstr "ამინდის სადგური"
 
-#: package/contents/config/config.qml:21
+#: qml/config/config.qml:21
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "გარეგნობა"
 
-#: package/contents/config/config.qml:31
+#: qml/config/config.qml:31
 #, kde-format
 msgctxt "@title"
 msgid "Units"
 msgstr "საზომი ერთეულები"
 
-#: package/contents/ui/config/ConfigAppearance.qml:38
+#: qml/config/ConfigAppearance.qml:37
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "კომპაქტური რეჟიმი"
 
-#: package/contents/ui/config/ConfigAppearance.qml:46
+#: qml/config/ConfigAppearance.qml:45
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "ტემპერატურის ჩვენება:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:49
+#: qml/config/ConfigAppearance.qml:48
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "ვიჯეტის ხატულის ზემოდან"
 
-#: package/contents/ui/config/ConfigAppearance.qml:57
+#: qml/config/ConfigAppearance.qml:56
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "ვიჯეტის ხატულის გვერდზე"
 
-#: package/contents/ui/config/ConfigAppearance.qml:64
+#: qml/config/ConfigAppearance.qml:63
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "აღარ მაჩვენო"
 
-#: package/contents/ui/config/ConfigAppearance.qml:73
+#: qml/config/ConfigAppearance.qml:72
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "მინიატურაში ჩვენება:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:74
+#: qml/config/ConfigAppearance.qml:73
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "ტემპერატურა"
 
-#: package/contents/ui/config/ConfigAppearance.qml:79
+#: qml/config/ConfigAppearance.qml:78
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "ქარი"
 
-#: package/contents/ui/config/ConfigAppearance.qml:84
+#: qml/config/ConfigAppearance.qml:83
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "წნევა"
 
-#: package/contents/ui/config/ConfigAppearance.qml:89
+#: qml/config/ConfigAppearance.qml:88
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "ტენიანბა"
 
-#: package/contents/ui/config/ConfigUnits.qml:32
+#: qml/config/ConfigUnits.qml:31
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "ტემპერატურა:"
 
-#: package/contents/ui/config/ConfigUnits.qml:38
+#: qml/config/ConfigUnits.qml:37
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "წნევა:"
 
-#: package/contents/ui/config/ConfigUnits.qml:44
+#: qml/config/ConfigUnits.qml:43
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "ქარის სიჩქარე:"
 
-#: package/contents/ui/config/ConfigUnits.qml:50
+#: qml/config/ConfigUnits.qml:49
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "ხილვადობა:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:50
+#: qml/config/ConfigWeatherStation.qml:49
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "განახლების პერიოდი:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:53
+#: qml/config/ConfigWeatherStation.qml:52
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 წუთი"
 msgstr[1] "%1 წუთი"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:65
+#: qml/config/ConfigWeatherStation.qml:64
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "მდებარეობა:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#: qml/config/ConfigWeatherStation.qml:70
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "არცერთი არჩეულია"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:76
+#: qml/config/ConfigWeatherStation.qml:75
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "მომწოდებელი:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: qml/config/ConfigWeatherStation.qml:100
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "შეიყვანეთ ახალი მდებარეობა"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: qml/config/ConfigWeatherStation.qml:100
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "შეიყვანეთ ადგილმდებარეობა"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: qml/config/ConfigWeatherStation.qml:184
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "%1-სთვის ამინდის სადგურები არ არსებობს"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: qml/config/ConfigWeatherStation.qml:186
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "მდებარეობის შესაცვლელად იპოვეთ ამინდის სადგური"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:189
+#: qml/config/ConfigWeatherStation.qml:188
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "მდებარეობის დასაყენებლად იპოვეთ ამინდის სადგური"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#: qml/config/ConfigWeatherStation.qml:191
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -300,53 +316,52 @@ msgstr ""
 "თუ ეს ამინდის სადგური ადრეც გამოგიყენებიათ, შესაძლებელია, რომ სერვერის "
 "გათიშვამ ის დროებით ხელმიუწვდომელი გახადა. მოგვიანებით სცადეთ."
 
-#: package/contents/ui/ForecastView.qml:45
+#: qml/ForecastView.qml:45
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
 msgstr "დღე"
 
-#: package/contents/ui/ForecastView.qml:49
+#: qml/ForecastView.qml:49
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
 msgstr "ღამე"
 
-#: package/contents/ui/ForecastView.qml:105
+#: qml/ForecastView.qml:105
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
 
-#: package/contents/ui/ForecastView.qml:119
+#: qml/ForecastView.qml:119
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
 msgstr "☂%1%"
 
-#: package/contents/ui/ForecastView.qml:127
-#: package/contents/ui/ForecastView.qml:135
+#: qml/ForecastView.qml:127 qml/ForecastView.qml:135
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:39
+#: qml/FullRepresentation.qml:37
 #, kde-format
 msgid "Please set your location"
 msgstr "დააყენეთ თქვენი მდებარეობა"
 
-#: package/contents/ui/FullRepresentation.qml:42
+#: qml/FullRepresentation.qml:40
 #, kde-format
 msgid "Set location…"
 msgstr "მდებარეობის დაყენება…"
 
-#: package/contents/ui/FullRepresentation.qml:57
+#: qml/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
 msgstr "შეუძლებელია ამინდის ინფორმაციის მიღება მდებარეობისთვის: %1"
 
-#: package/contents/ui/FullRepresentation.qml:59
+#: qml/FullRepresentation.qml:57
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -356,31 +371,31 @@ msgstr ""
 "ქსელური მოთხოვნის მოლოდინის დრო ამოიწურა, ალბათ, სერვერის გათიშვას გამო. "
 "მოგვიანებით გადაამოწმეთ."
 
-#: package/contents/ui/main.qml:93
+#: qml/main.qml:91
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Rising"
 msgstr "ამომავალი"
 
-#: package/contents/ui/main.qml:94
+#: qml/main.qml:92
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Falling"
 msgstr "ეცემა"
 
-#: package/contents/ui/main.qml:95
+#: qml/main.qml:93
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Steady"
 msgstr "მუდმივია"
 
-#: package/contents/ui/main.qml:117
+#: qml/main.qml:115
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "მშვიდი"
 
-#: package/contents/ui/main.qml:155
+#: qml/main.qml:153
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
@@ -388,43 +403,43 @@ msgid_plural "%1 Days"
 msgstr[0] "%1 დღე"
 msgstr[1] "%1 დღე"
 
-#: package/contents/ui/main.qml:177
+#: qml/main.qml:175
 #, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "ნამის წერტილი:"
 
-#: package/contents/ui/main.qml:184
+#: qml/main.qml:182
 #, kde-format
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "წნევა:"
 
-#: package/contents/ui/main.qml:191
+#: qml/main.qml:189
 #, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "წნევის ტენდენცია:"
 
-#: package/contents/ui/main.qml:198
+#: qml/main.qml:196
 #, kde-format
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "ხილვადობა:"
 
-#: package/contents/ui/main.qml:205
+#: qml/main.qml:203
 #, kde-format
 msgctxt "@label"
 msgid "Humidity:"
 msgstr "ტენიანობა:"
 
-#: package/contents/ui/main.qml:212
+#: qml/main.qml:210
 #, kde-format
 msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "ქარის სიჩქარე:"
 
-#: package/contents/ui/main.qml:362
+#: qml/main.qml:360
 #, kde-format
 msgctxt ""
 "@info:usagetip Minimize the length of this string so it is as short as "
@@ -433,60 +448,60 @@ msgctxt ""
 msgid "Set up Weather Report…"
 msgstr "ამინდის ანგარიშის მორგება…"
 
-#: package/contents/ui/main.qml:371
+#: qml/main.qml:369
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr "დააწკაპუნეთ მდებარეობის ასარჩევად და ამინდის მონიტორინგისთვის"
 
-#: package/contents/ui/main.qml:380
+#: qml/main.qml:378
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:387
+#: qml/main.qml:385
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:390
+#: qml/main.qml:388
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:399
+#: qml/main.qml:397
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:406
+#: qml/main.qml:404
 #, kde-format
 msgid "Humidity: %1"
 msgstr "ტენიანობა: %1"
 
-#: package/contents/ui/NoticesView.qml:61
+#: qml/NoticesView.qml:61
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
 msgstr "მეტი ინფორმაციის ჩვენება"
 
-#: package/contents/ui/SwitchPanel.qml:36
+#: qml/SwitchPanel.qml:36
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
 msgstr "პროგნოზი"
 
-#: package/contents/ui/SwitchPanel.qml:40
+#: qml/SwitchPanel.qml:40
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "დეტალები"
 
-#: package/contents/ui/SwitchPanel.qml:45
+#: qml/SwitchPanel.qml:45
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -496,13 +511,13 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 შენიშვნა"
 msgstr[1] "%1 შენიშვნა"
 
-#: package/contents/ui/SwitchPanel.qml:117
+#: qml/SwitchPanel.qml:117
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr "ამინდის პროგნოზის ჩატვირთვა შეუძლებელია"
 
-#: package/contents/ui/SwitchPanel.qml:119
+#: qml/SwitchPanel.qml:119
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -512,7 +527,7 @@ msgstr ""
 "შეიძლება, ამინდის პროგნოზის სერვისს ტექნიკური პრობლემები აქვს. თუ ეს "
 "პრობლემა დღეზე მეტხანს გაგრძელდება, მოგვწერეთ, როგორც შეცდომა."
 
-#: package/contents/ui/TopPanel.qml:85
+#: qml/TopPanel.qml:85
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
@@ -521,47 +536,31 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "იგრძნობა, როგორც %1"
 
-#: plugin/locationlistmodel.cpp:43
-#, kde-format
-msgid "Cannot find '%1' using %2."
-msgstr "%2-ის გამოყენებით %1 ვერ ვიპოვე."
-
-#: plugin/locationlistmodel.cpp:67
-#, kde-format
-msgid "Connection to %1 weather server timed out."
-msgstr "%1 ამინდის სერვერთან დაკავშირების ვადა გავიდა."
-
-#: plugin/locationlistmodel.cpp:186
-#, kde-format
-msgctxt "A weather station location and the weather service it comes from"
-msgid "%1 (%2)"
-msgstr "%1 (%2)"
-
-#: plugin/util.cpp:44
+#: util.cpp:44
 #, kde-format
 msgctxt "Degree, unit symbol"
 msgid "°"
 msgstr "°"
 
-#: plugin/util.cpp:48 plugin/util.cpp:52
+#: util.cpp:48 util.cpp:52
 #, kde-format
 msgctxt "temperature unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: plugin/util.cpp:62
+#: util.cpp:62
 #, kde-format
 msgctxt "value unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: plugin/util.cpp:68
+#: util.cpp:68
 #, kde-format
 msgctxt "value percentsymbol"
 msgid "%1 %"
 msgstr "%1 %"
 
-#: plugin/util.cpp:74
+#: util.cpp:74
 #, kde-format
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"

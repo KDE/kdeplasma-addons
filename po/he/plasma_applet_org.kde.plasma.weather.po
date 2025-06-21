@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-12 00:43+0000\n"
+"POT-Creation-Date: 2025-06-21 00:44+0000\n"
 "PO-Revision-Date: 2025-04-26 13:31+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -126,115 +126,131 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "רגוע"
 
-#: package/contents/config/config.qml:15
+#: locationlistmodel.cpp:43
+#, kde-format
+msgid "Cannot find '%1' using %2."
+msgstr "לא ניתן למצוא את ‚%1’ באמצעות %2."
+
+#: locationlistmodel.cpp:67
+#, kde-format
+msgid "Connection to %1 weather server timed out."
+msgstr "תם הזמן שהוקצב לחיבור לשרת מזג האוויר %1."
+
+#: locationlistmodel.cpp:186
+#, kde-format
+msgctxt "A weather station location and the weather service it comes from"
+msgid "%1 (%2)"
+msgstr "%1 (%2)"
+
+#: qml/config/config.qml:15
 #, kde-format
 msgctxt "@title"
 msgid "Weather Station"
 msgstr "תחנת מזג אוויר"
 
-#: package/contents/config/config.qml:21
+#: qml/config/config.qml:21
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "מראה"
 
-#: package/contents/config/config.qml:31
+#: qml/config/config.qml:31
 #, kde-format
 msgctxt "@title"
 msgid "Units"
 msgstr "יחידות"
 
-#: package/contents/ui/config/ConfigAppearance.qml:38
+#: qml/config/ConfigAppearance.qml:37
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "מצב מצומצם"
 
-#: package/contents/ui/config/ConfigAppearance.qml:46
+#: qml/config/ConfigAppearance.qml:45
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "להציג טמפרטורה:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:49
+#: qml/config/ConfigAppearance.qml:48
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "על גבי סמל היישומון"
 
-#: package/contents/ui/config/ConfigAppearance.qml:57
+#: qml/config/ConfigAppearance.qml:56
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "לצד סמל היישומון"
 
-#: package/contents/ui/config/ConfigAppearance.qml:64
+#: qml/config/ConfigAppearance.qml:63
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "לא להציג"
 
-#: package/contents/ui/config/ConfigAppearance.qml:73
+#: qml/config/ConfigAppearance.qml:72
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "להציג בחלונית צצה:"
 
-#: package/contents/ui/config/ConfigAppearance.qml:74
+#: qml/config/ConfigAppearance.qml:73
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "טמפרטורה"
 
-#: package/contents/ui/config/ConfigAppearance.qml:79
+#: qml/config/ConfigAppearance.qml:78
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "רוח"
 
-#: package/contents/ui/config/ConfigAppearance.qml:84
+#: qml/config/ConfigAppearance.qml:83
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "לחץ"
 
-#: package/contents/ui/config/ConfigAppearance.qml:89
+#: qml/config/ConfigAppearance.qml:88
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "לחות"
 
-#: package/contents/ui/config/ConfigUnits.qml:32
+#: qml/config/ConfigUnits.qml:31
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "טמפרטורה:"
 
-#: package/contents/ui/config/ConfigUnits.qml:38
+#: qml/config/ConfigUnits.qml:37
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "לחץ:"
 
-#: package/contents/ui/config/ConfigUnits.qml:44
+#: qml/config/ConfigUnits.qml:43
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "מהירות הרוח:"
 
-#: package/contents/ui/config/ConfigUnits.qml:50
+#: qml/config/ConfigUnits.qml:49
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "ראות:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:50
+#: qml/config/ConfigWeatherStation.qml:49
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "לעדכן כל:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:53
+#: qml/config/ConfigWeatherStation.qml:52
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
@@ -243,55 +259,55 @@ msgstr[1] "שתי דקות"
 msgstr[2] "%1 דקות"
 msgstr[3] "%1 דקות"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:65
+#: qml/config/ConfigWeatherStation.qml:64
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "מקום:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:71
+#: qml/config/ConfigWeatherStation.qml:70
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "לא נבחר כלום"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:76
+#: qml/config/ConfigWeatherStation.qml:75
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "ספק:"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: qml/config/ConfigWeatherStation.qml:100
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "נא למלא מקום חדש"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:101
+#: qml/config/ConfigWeatherStation.qml:100
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "נא למלא מקום"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:185
+#: qml/config/ConfigWeatherStation.qml:184
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "לא נמצאו תחנות מזג אוויר למקום ‚%1’"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:187
+#: qml/config/ConfigWeatherStation.qml:186
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "חיפוש אחר תחנת מזג אוויר כדי להחליף את המקום שלך"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:189
+#: qml/config/ConfigWeatherStation.qml:188
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "חיפוש אחר תחנת מזג אוויר כדי להגדיר את המקום שלך"
 
-#: package/contents/ui/config/ConfigWeatherStation.qml:192
+#: qml/config/ConfigWeatherStation.qml:191
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -302,53 +318,52 @@ msgstr ""
 "אם השתמשת בתחנת מזג האוויר הזאת בעבר, יכול להיות שהפסקת חשמל אצל ספק תחנת "
 "מזג האוויר הפכה אותה לבלתי זמינה באופן זמני. נא לנסות שוב מאוחר יותר."
 
-#: package/contents/ui/ForecastView.qml:45
+#: qml/ForecastView.qml:45
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Day"
 msgstr "יום"
 
-#: package/contents/ui/ForecastView.qml:49
+#: qml/ForecastView.qml:49
 #, kde-format
 msgctxt "Time of the day (from the duple Day/Night)"
 msgid "Night"
 msgstr "לילה"
 
-#: package/contents/ui/ForecastView.qml:105
+#: qml/ForecastView.qml:105
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
 
-#: package/contents/ui/ForecastView.qml:119
+#: qml/ForecastView.qml:119
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
 msgstr "☂%1%"
 
-#: package/contents/ui/ForecastView.qml:127
-#: package/contents/ui/ForecastView.qml:135
+#: qml/ForecastView.qml:127 qml/ForecastView.qml:135
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
 msgstr "-"
 
-#: package/contents/ui/FullRepresentation.qml:39
+#: qml/FullRepresentation.qml:37
 #, kde-format
 msgid "Please set your location"
 msgstr "נא להגדיר את המקום שלך"
 
-#: package/contents/ui/FullRepresentation.qml:42
+#: qml/FullRepresentation.qml:40
 #, kde-format
 msgid "Set location…"
 msgstr "הגדרת מקום…"
 
-#: package/contents/ui/FullRepresentation.qml:57
+#: qml/FullRepresentation.qml:55
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
 msgstr "לא ניתן למשוך את פרטי מזג האוויר עבור %1"
 
-#: package/contents/ui/FullRepresentation.qml:59
+#: qml/FullRepresentation.qml:57
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -358,31 +373,31 @@ msgstr ""
 "הזמן שהוקצב לבקשת הרשת הסתיים, כנראה שהשרת אצל ספק מזג האוויר השתבש. נא "
 "לנסות שוב מאוחר יותר."
 
-#: package/contents/ui/main.qml:93
+#: qml/main.qml:91
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Rising"
 msgstr "עולה"
 
-#: package/contents/ui/main.qml:94
+#: qml/main.qml:92
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Falling"
 msgstr "יורד"
 
-#: package/contents/ui/main.qml:95
+#: qml/main.qml:93
 #, kde-format
 msgctxt "pressure tendency"
 msgid "Steady"
 msgstr "יציב"
 
-#: package/contents/ui/main.qml:117
+#: qml/main.qml:115
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "רגוע"
 
-#: package/contents/ui/main.qml:155
+#: qml/main.qml:153
 #, kde-format
 msgctxt "Forecast period timeframe"
 msgid "1 Day"
@@ -392,43 +407,43 @@ msgstr[1] "יומיים"
 msgstr[2] "%1 ימים"
 msgstr[3] "%1 ימים"
 
-#: package/contents/ui/main.qml:177
+#: qml/main.qml:175
 #, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint:"
 msgstr "נקודת הטל:"
 
-#: package/contents/ui/main.qml:184
+#: qml/main.qml:182
 #, kde-format
 msgctxt "@label"
 msgid "Pressure:"
 msgstr "לחץ:"
 
-#: package/contents/ui/main.qml:191
+#: qml/main.qml:189
 #, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure Tendency:"
 msgstr "מגמת הלחץ:"
 
-#: package/contents/ui/main.qml:198
+#: qml/main.qml:196
 #, kde-format
 msgctxt "@label"
 msgid "Visibility:"
 msgstr "ראות:"
 
-#: package/contents/ui/main.qml:205
+#: qml/main.qml:203
 #, kde-format
 msgctxt "@label"
 msgid "Humidity:"
 msgstr "לחות:"
 
-#: package/contents/ui/main.qml:212
+#: qml/main.qml:210
 #, kde-format
 msgctxt "@label"
 msgid "Wind Gust:"
 msgstr "מהירות משב רוח:"
 
-#: package/contents/ui/main.qml:362
+#: qml/main.qml:360
 #, kde-format
 msgctxt ""
 "@info:usagetip Minimize the length of this string so it is as short as "
@@ -437,60 +452,60 @@ msgctxt ""
 msgid "Set up Weather Report…"
 msgstr "הגדרת דוח מזג אוויר…"
 
-#: package/contents/ui/main.qml:371
+#: qml/main.qml:369
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr "נא ללחוץ כדי לבחור מקום ולעקוב אחר מזג האוויר שם"
 
-#: package/contents/ui/main.qml:380
+#: qml/main.qml:378
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:387
+#: qml/main.qml:385
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: package/contents/ui/main.qml:390
+#: qml/main.qml:388
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: package/contents/ui/main.qml:399
+#: qml/main.qml:397
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: package/contents/ui/main.qml:406
+#: qml/main.qml:404
 #, kde-format
 msgid "Humidity: %1"
 msgstr "לחות: %1"
 
-#: package/contents/ui/NoticesView.qml:61
+#: qml/NoticesView.qml:61
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
 msgstr "הצגת מידע נוסף"
 
-#: package/contents/ui/SwitchPanel.qml:36
+#: qml/SwitchPanel.qml:36
 #, kde-format
 msgctxt "@title:tab Weather forecast"
 msgid "Forecast"
 msgstr "תשקיף"
 
-#: package/contents/ui/SwitchPanel.qml:40
+#: qml/SwitchPanel.qml:40
 #, kde-format
 msgctxt "@title:tab"
 msgid "Details"
 msgstr "פרטים"
 
-#: package/contents/ui/SwitchPanel.qml:45
+#: qml/SwitchPanel.qml:45
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -502,13 +517,13 @@ msgstr[1] "שתי התראות"
 msgstr[2] "%1 התראות"
 msgstr[3] "%1 התראות"
 
-#: package/contents/ui/SwitchPanel.qml:117
+#: qml/SwitchPanel.qml:117
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
 msgstr "לא ניתן לטעון את תשקיף מזג האוויר"
 
-#: package/contents/ui/SwitchPanel.qml:119
+#: qml/SwitchPanel.qml:119
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -518,7 +533,7 @@ msgstr ""
 "עלולות להתרחש תקלות טכניות עם ספק מזג האוויר. אם התקלה נמשכת מעבר ליום אחד, "
 "נא לדווח על תקלה."
 
-#: package/contents/ui/TopPanel.qml:85
+#: qml/TopPanel.qml:85
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
@@ -527,47 +542,31 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "%1 בהרגשה"
 
-#: plugin/locationlistmodel.cpp:43
-#, kde-format
-msgid "Cannot find '%1' using %2."
-msgstr "לא ניתן למצוא את ‚%1’ באמצעות %2."
-
-#: plugin/locationlistmodel.cpp:67
-#, kde-format
-msgid "Connection to %1 weather server timed out."
-msgstr "תם הזמן שהוקצב לחיבור לשרת מזג האוויר %1."
-
-#: plugin/locationlistmodel.cpp:186
-#, kde-format
-msgctxt "A weather station location and the weather service it comes from"
-msgid "%1 (%2)"
-msgstr "%1 (%2)"
-
-#: plugin/util.cpp:44
+#: util.cpp:44
 #, kde-format
 msgctxt "Degree, unit symbol"
 msgid "°"
 msgstr "°"
 
-#: plugin/util.cpp:48 plugin/util.cpp:52
+#: util.cpp:48 util.cpp:52
 #, kde-format
 msgctxt "temperature unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: plugin/util.cpp:62
+#: util.cpp:62
 #, kde-format
 msgctxt "value unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: plugin/util.cpp:68
+#: util.cpp:68
 #, kde-format
 msgctxt "value percentsymbol"
 msgid "%1 %"
 msgstr "%1 %"
 
-#: plugin/util.cpp:74
+#: util.cpp:74
 #, kde-format
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
