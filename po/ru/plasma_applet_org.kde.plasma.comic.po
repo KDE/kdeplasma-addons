@@ -7,19 +7,20 @@
 # Alexander Potashev <aspotashev@gmail.com>, 2011, 2015, 2017, 2018, 2019.
 # Julia Dronova <juliette.tux@gmail.com>, 2012.
 # SPDX-FileCopyrightText: 2018, 2019, 2021, 2022, 2025 Alexander Yavorsky <kekcuha@gmail.com>
+# SPDX-FileCopyrightText: 2025 Olesya Gerasimenko <translation-team@basealt.ru>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-31 02:41+0000\n"
-"PO-Revision-Date: 2025-05-18 21:19+0300\n"
-"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
-"Language-Team: Russian <kde-russian@lists.kde.ru>\n"
+"PO-Revision-Date: 2025-06-25 10:37+0300\n"
+"Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
+"Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 23.08.5\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Environment: kde\n"
@@ -102,13 +103,13 @@ msgstr "Кнопки навигации:"
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
-msgstr ""
+msgstr "Всегда видны по краям"
 
 #: qml/configBehavior.qml:61
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
-msgstr ""
+msgstr "Появляются в центре при наведении указателя"
 
 #: qml/configBehavior.qml:70
 #, kde-format
@@ -161,40 +162,35 @@ msgstr[3] "минуту"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
-msgstr ""
+msgstr "Сохранять в локальном архиве:"
 
 #: qml/configComics.qml:103
-#, fuzzy, kde-format
-#| msgctxt "@item:valuesuffix spacing to number + unit"
-#| msgid "strip per comic"
-#| msgid_plural "strips per comic"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
-msgstr[0] "стрип на комикс"
-msgstr[1] "стрипа на комикс"
-msgstr[2] "стрипов на комикс"
-msgstr[3] "стрип на комикс"
+msgstr[0] "изображение на комикс"
+msgstr[1] "изображения на комикс"
+msgstr[2] "изображений на комикс"
+msgstr[3] "изображение на комикс"
 
 #: qml/ErrorPlaceholder.qml:18
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Download Comics"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "Загрузка комиксов"
+msgstr "Не удалось загрузить комикс"
 
 #: qml/ErrorPlaceholder.qml:19
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Повторите попытку позже или выберите другой комикс"
 
 #: qml/ErrorPlaceholder.qml:27
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info placeholdermessage title if offline"
 msgid "Offline"
-msgstr "Не в сети"
+msgstr "Автономный режим"
 
 #: qml/ErrorPlaceholder.qml:28
 #, kde-format
@@ -203,9 +199,11 @@ msgid ""
 "Reconnect to the internet to retry loading this image. You can still view "
 "any images in the local archive."
 msgstr ""
+"Возобновите подключение к Интернету, чтобы повторить попытку загрузки этого "
+"изображения. Просмотр изображений в локальном архиве всё так же доступен."
 
 #: qml/ErrorPlaceholder.qml:36
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info placeholdermessage title if connection local/unknown"
 msgid "Limited connectivity"
 msgstr "Ограниченное подключение"
@@ -217,6 +215,8 @@ msgid ""
 "The image may not be available on your current connection. You can still "
 "view any images in the local archive."
 msgstr ""
+"При текущем подключении это изображение недоступно. Просмотр изображений в "
+"локальном архиве всё так же доступен."
 
 #: qml/ErrorPlaceholder.qml:45
 #, kde-format
