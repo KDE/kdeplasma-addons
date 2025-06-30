@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2024-08-29 00:40+0000\n"
-"PO-Revision-Date: 2025-02-05 11:24+0300\n"
-"Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
+"PO-Revision-Date: 2025-06-29 09:04+0300\n"
+"Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 25.04.2\n"
 
 #: package/contents/ui/config.qml:49
 #, kde-format
@@ -78,7 +78,7 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
-"Bu duvar kağıdı sağlayıcısı, hassas veya içeriği sorgulanabilir görselleri "
+"Bu duvar kâğıdı sağlayıcısı, hassas veya içeriği sorgulanabilir görselleri "
 "süzmüyor. Bu görseller halka açık konumlarda gösterilecekse dikkatli olun."
 
 #: package/contents/ui/config.qml:122
@@ -115,12 +115,12 @@ msgstr "İçeren Klasörü Aç"
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
-msgstr "Duvar kağıdı görselinin kaydedildiği hedef klasörü aç."
+msgstr "Duvar kâğıdı görselinin kaydedildiği hedef klasörü aç."
 
 #: package/contents/ui/main.qml:22
 #, kde-format
 msgid "Open Wallpaper Image"
-msgstr "Duvar Kağıdı Görselini Aç"
+msgstr "Duvar Kâğıdı Görselini Aç"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
@@ -151,13 +151,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
-msgstr "Duvar kağıdı internetten getiriliyor."
+msgstr "Duvar kâğıdı internetten getiriliyor."
 
 #: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
-msgstr "Duvar kağıdı internetten getirilemedi."
+msgstr "Duvar kâğıdı internetten getirilemedi."
 
 #: package/contents/ui/WallpaperPreview.qml:48
 #, kde-format
