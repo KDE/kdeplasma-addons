@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2022-08-17 10:28+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -54,29 +54,17 @@ msgstr "Iradokitako terminoa"
 msgid "No dictionary found, please install hspell"
 msgstr "Ez da hiztegirik aurkitu, instalatu «hspell»"
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: spellcheck_config.ui:17
-#, kde-format
-msgid "Spell Check Settings"
-msgstr "Ortografia-egiaztatze ezarpenak"
+#~ msgid "Spell Check Settings"
+#~ msgstr "Ortografia-egiaztatze ezarpenak"
 
-#. i18n: ectx: property (text), widget (QCheckBox, m_requireTriggerWord)
-#: spellcheck_config.ui:23
-#, kde-format
-msgid "&Require trigger word"
-msgstr "Es&katu aktibazio hitza"
+#~ msgid "&Require trigger word"
+#~ msgstr "Es&katu aktibazio hitza"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: spellcheck_config.ui:32
-#, kde-format
-msgid "&Trigger word:"
-msgstr "Aktiba&zio-hitza:"
+#~ msgid "&Trigger word:"
+#~ msgstr "Aktiba&zio-hitza:"
 
-#. i18n: ectx: property (text), widget (QPushButton, m_openKcmButton)
-#: spellcheck_config.ui:62
-#, kde-format
-msgid "Configure Dictionaries…"
-msgstr "Konfiguratu hiztegiak..."
+#~ msgid "Configure Dictionaries…"
+#~ msgstr "Konfiguratu hiztegiak..."
 
 #~ msgctxt "@action"
 #~ msgid "Copy to Clipboard"

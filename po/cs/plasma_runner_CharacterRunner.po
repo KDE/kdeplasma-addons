@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2021-08-19 16:19+0200\n"
 "Last-Translator: Vit Pelcak <vpelcak@suse.cz>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -35,50 +35,26 @@ msgstr ""
 "Záznamy v nastavení pro seznam aliasů a seznam kódu mají jinou velikost. "
 "Ignoruji vše."
 
-#. i18n: ectx: property (title), widget (QGroupBox, main)
-#: charrunner_config.ui:18
-#, kde-format
-msgid "Character Runner Config"
-msgstr "Nastavení spouštěče znaků"
+#~ msgid "Character Runner Config"
+#~ msgstr "Nastavení spouštěče znaků"
 
-#. i18n: ectx: property (text), widget (QLabel, label_trigger)
-#: charrunner_config.ui:26
-#, kde-format
-msgid "&Trigger word:"
-msgstr "Spouš&těcí slovo:"
+#~ msgid "&Trigger word:"
+#~ msgstr "Spouš&těcí slovo:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_alias)
-#: charrunner_config.ui:47
-#, kde-format
-msgid "Alias:"
-msgstr "Alias:"
+#~ msgid "Alias:"
+#~ msgstr "Alias:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_hex)
-#: charrunner_config.ui:61
-#, kde-format
-msgid "Hex code:"
-msgstr "Šestnáctkový kód:"
+#~ msgid "Hex code:"
+#~ msgstr "Šestnáctkový kód:"
 
-#. i18n: ectx: property (text), widget (QTreeWidget, list)
-#: charrunner_config.ui:89
-#, kde-format
-msgid "Alias"
-msgstr "Alias"
+#~ msgid "Alias"
+#~ msgstr "Alias"
 
-#. i18n: ectx: property (text), widget (QTreeWidget, list)
-#: charrunner_config.ui:94
-#, kde-format
-msgid "Code"
-msgstr "Kód"
+#~ msgid "Code"
+#~ msgstr "Kód"
 
-#. i18n: ectx: property (text), widget (QPushButton, addItem)
-#: charrunner_config.ui:104
-#, kde-format
-msgid "Add Item"
-msgstr "Přidat položku"
+#~ msgid "Add Item"
+#~ msgstr "Přidat položku"
 
-#. i18n: ectx: property (text), widget (QPushButton, deleteItem)
-#: charrunner_config.ui:114
-#, kde-format
-msgid "Delete Item"
-msgstr "Smazat položku"
+#~ msgid "Delete Item"
+#~ msgstr "Smazat položku"

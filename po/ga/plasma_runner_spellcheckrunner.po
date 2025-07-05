@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_spellcheckrunner.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2008-08-14 09:40-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -52,29 +52,14 @@ msgstr "Focail mholta: %1"
 msgid "No dictionary found, please install hspell"
 msgstr ""
 
-#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
-#: spellcheck_config.ui:17
-#, kde-format
-msgid "Spell Check Settings"
-msgstr "Socruithe an Litreora"
+#~ msgid "Spell Check Settings"
+#~ msgstr "Socruithe an Litreora"
 
-#. i18n: ectx: property (text), widget (QCheckBox, m_requireTriggerWord)
-#: spellcheck_config.ui:23
-#, kde-format
-msgid "&Require trigger word"
-msgstr "Éiligh &truicearfhocal"
+#~ msgid "&Require trigger word"
+#~ msgstr "Éiligh &truicearfhocal"
 
-#. i18n: ectx: property (text), widget (QLabel, label)
-#: spellcheck_config.ui:32
-#, kde-format
-msgid "&Trigger word:"
-msgstr "&Truicearfhocal:"
-
-#. i18n: ectx: property (text), widget (QPushButton, m_openKcmButton)
-#: spellcheck_config.ui:62
-#, kde-format
-msgid "Configure Dictionaries…"
-msgstr ""
+#~ msgid "&Trigger word:"
+#~ msgstr "&Truicearfhocal:"
 
 #~ msgid "Could not find a dictionary."
 #~ msgstr "Níorbh fhéidir foclóir a aimsiú."

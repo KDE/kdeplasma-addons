@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2020-07-21 17:57+0200\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <dansk@dansk-gruppen.dk>\n"
@@ -35,50 +35,26 @@ msgstr ""
 "Konfigurationsindgange for aliasliste og kodeliste har forskellig størrelse, "
 "ignorerer alle."
 
-#. i18n: ectx: property (title), widget (QGroupBox, main)
-#: charrunner_config.ui:18
-#, kde-format
-msgid "Character Runner Config"
-msgstr "Konfiguration af tegn-runner"
+#~ msgid "Character Runner Config"
+#~ msgstr "Konfiguration af tegn-runner"
 
-#. i18n: ectx: property (text), widget (QLabel, label_trigger)
-#: charrunner_config.ui:26
-#, kde-format
-msgid "&Trigger word:"
-msgstr "&Udløserord:"
+#~ msgid "&Trigger word:"
+#~ msgstr "&Udløserord:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_alias)
-#: charrunner_config.ui:47
-#, kde-format
-msgid "Alias:"
-msgstr "Alias:"
+#~ msgid "Alias:"
+#~ msgstr "Alias:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_hex)
-#: charrunner_config.ui:61
-#, kde-format
-msgid "Hex code:"
-msgstr "Hex-kode:"
+#~ msgid "Hex code:"
+#~ msgstr "Hex-kode:"
 
-#. i18n: ectx: property (text), widget (QTreeWidget, list)
-#: charrunner_config.ui:89
-#, kde-format
-msgid "Alias"
-msgstr "Alias"
+#~ msgid "Alias"
+#~ msgstr "Alias"
 
-#. i18n: ectx: property (text), widget (QTreeWidget, list)
-#: charrunner_config.ui:94
-#, kde-format
-msgid "Code"
-msgstr "Kode"
+#~ msgid "Code"
+#~ msgstr "Kode"
 
-#. i18n: ectx: property (text), widget (QPushButton, addItem)
-#: charrunner_config.ui:104
-#, kde-format
-msgid "Add Item"
-msgstr "Tilføj element"
+#~ msgid "Add Item"
+#~ msgstr "Tilføj element"
 
-#. i18n: ectx: property (text), widget (QPushButton, deleteItem)
-#: charrunner_config.ui:114
-#, kde-format
-msgid "Delete Item"
-msgstr "Slet element"
+#~ msgid "Delete Item"
+#~ msgstr "Slet element"

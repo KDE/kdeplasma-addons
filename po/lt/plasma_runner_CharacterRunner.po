@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_CharacterRunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2020-03-21 12:14+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -38,50 +38,26 @@ msgstr ""
 "Santrumpų sąrašo ir kodų sąrašo konfigūracijos įrašai yra skirtingų dydžių. "
 "Nepaisoma visų."
 
-#. i18n: ectx: property (title), widget (QGroupBox, main)
-#: charrunner_config.ui:18
-#, kde-format
-msgid "Character Runner Config"
-msgstr "Character Runner konfigūracija"
+#~ msgid "Character Runner Config"
+#~ msgstr "Character Runner konfigūracija"
 
-#. i18n: ectx: property (text), widget (QLabel, label_trigger)
-#: charrunner_config.ui:26
-#, kde-format
-msgid "&Trigger word:"
-msgstr "&Iššaukiantis žodis:"
+#~ msgid "&Trigger word:"
+#~ msgstr "&Iššaukiantis žodis:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_alias)
-#: charrunner_config.ui:47
-#, kde-format
-msgid "Alias:"
-msgstr "Santrumpa:"
+#~ msgid "Alias:"
+#~ msgstr "Santrumpa:"
 
-#. i18n: ectx: property (text), widget (QLabel, label_hex)
-#: charrunner_config.ui:61
-#, kde-format
-msgid "Hex code:"
-msgstr "Šešioliktainis kodas:"
+#~ msgid "Hex code:"
+#~ msgstr "Šešioliktainis kodas:"
 
-#. i18n: ectx: property (text), widget (QTreeWidget, list)
-#: charrunner_config.ui:89
-#, kde-format
-msgid "Alias"
-msgstr "Santrumpa"
+#~ msgid "Alias"
+#~ msgstr "Santrumpa"
 
-#. i18n: ectx: property (text), widget (QTreeWidget, list)
-#: charrunner_config.ui:94
-#, kde-format
-msgid "Code"
-msgstr "Kodas"
+#~ msgid "Code"
+#~ msgstr "Kodas"
 
-#. i18n: ectx: property (text), widget (QPushButton, addItem)
-#: charrunner_config.ui:104
-#, kde-format
-msgid "Add Item"
-msgstr "Pridėti įrašą"
+#~ msgid "Add Item"
+#~ msgstr "Pridėti įrašą"
 
-#. i18n: ectx: property (text), widget (QPushButton, deleteItem)
-#: charrunner_config.ui:114
-#, kde-format
-msgid "Delete Item"
-msgstr "Ištrinti įrašą"
+#~ msgid "Delete Item"
+#~ msgstr "Ištrinti įrašą"

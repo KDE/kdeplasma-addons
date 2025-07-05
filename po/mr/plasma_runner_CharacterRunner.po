@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2022-05-23 00:46+0000\n"
+"POT-Creation-Date: 2025-07-05 03:22+0000\n"
 "PO-Revision-Date: 2013-03-20 17:52+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -31,51 +31,28 @@ msgid ""
 "all."
 msgstr ""
 
-#. i18n: ectx: property (title), widget (QGroupBox, main)
-#: charrunner_config.ui:18
-#, kde-format
-msgid "Character Runner Config"
-msgstr "अक्षर रनर संयोजना"
+#~ msgid "Character Runner Config"
+#~ msgstr "अक्षर रनर संयोजना"
 
-#. i18n: ectx: property (text), widget (QLabel, label_trigger)
-#: charrunner_config.ui:26
-#, kde-format
-msgid "&Trigger word:"
-msgstr "ट्रिगर शब्द (&T):"
+#~ msgid "&Trigger word:"
+#~ msgstr "ट्रिगर शब्द (&T):"
 
-#. i18n: ectx: property (text), widget (QLabel, label_alias)
-#: charrunner_config.ui:47
-#, kde-format
-msgid "Alias:"
-msgstr "अलायस :"
+#~ msgid "Alias:"
+#~ msgstr "अलायस :"
 
-#. i18n: ectx: property (text), widget (QLabel, label_hex)
-#: charrunner_config.ui:61
-#, fuzzy, kde-format
-#| msgid "Hex Code:"
-msgid "Hex code:"
-msgstr "हेक्स कोड:"
+#, fuzzy
+#~| msgid "Hex Code:"
+#~ msgid "Hex code:"
+#~ msgstr "हेक्स कोड:"
 
-#. i18n: ectx: property (text), widget (QTreeWidget, list)
-#: charrunner_config.ui:89
-#, kde-format
-msgid "Alias"
-msgstr "अलायस"
+#~ msgid "Alias"
+#~ msgstr "अलायस"
 
-#. i18n: ectx: property (text), widget (QTreeWidget, list)
-#: charrunner_config.ui:94
-#, kde-format
-msgid "Code"
-msgstr "कोड"
+#~ msgid "Code"
+#~ msgstr "कोड"
 
-#. i18n: ectx: property (text), widget (QPushButton, addItem)
-#: charrunner_config.ui:104
-#, kde-format
-msgid "Add Item"
-msgstr "घटक वाढवा"
+#~ msgid "Add Item"
+#~ msgstr "घटक वाढवा"
 
-#. i18n: ectx: property (text), widget (QPushButton, deleteItem)
-#: charrunner_config.ui:114
-#, kde-format
-msgid "Delete Item"
-msgstr "घटक रद्द करा"
+#~ msgid "Delete Item"
+#~ msgstr "घटक रद्द करा"
