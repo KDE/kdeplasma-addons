@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2021-01-02 14:42+0100\n"
 "Last-Translator: Kristóf Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -36,26 +36,50 @@ msgstr ""
 "Az álnév- és kódlista konfigurációs bejegyzéseinek mérete eltérő, az összes "
 "figyelmen kívül lesz hagyva."
 
-#~ msgid "Character Runner Config"
-#~ msgstr "A karakterindító beállításai"
+#. i18n: ectx: property (title), widget (QGroupBox, main)
+#: charrunner_config.ui:18
+#, kde-format
+msgid "Character Runner Config"
+msgstr "A karakterindító beállításai"
 
-#~ msgid "&Trigger word:"
-#~ msgstr "&Kulcsszó:"
+#. i18n: ectx: property (text), widget (QLabel, label_trigger)
+#: charrunner_config.ui:26
+#, kde-format
+msgid "&Trigger word:"
+msgstr "&Kulcsszó:"
 
-#~ msgid "Alias:"
-#~ msgstr "Álnév:"
+#. i18n: ectx: property (text), widget (QLabel, label_alias)
+#: charrunner_config.ui:47
+#, kde-format
+msgid "Alias:"
+msgstr "Álnév:"
 
-#~ msgid "Hex code:"
-#~ msgstr "Hexa kód:"
+#. i18n: ectx: property (text), widget (QLabel, label_hex)
+#: charrunner_config.ui:61
+#, kde-format
+msgid "Hex code:"
+msgstr "Hexa kód:"
 
-#~ msgid "Alias"
-#~ msgstr "Álnév"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:89
+#, kde-format
+msgid "Alias"
+msgstr "Álnév"
 
-#~ msgid "Code"
-#~ msgstr "Kód"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:94
+#, kde-format
+msgid "Code"
+msgstr "Kód"
 
-#~ msgid "Add Item"
-#~ msgstr "Elem hozzáadása"
+#. i18n: ectx: property (text), widget (QPushButton, addItem)
+#: charrunner_config.ui:104
+#, kde-format
+msgid "Add Item"
+msgstr "Elem hozzáadása"
 
-#~ msgid "Delete Item"
-#~ msgstr "Elem törlése"
+#. i18n: ectx: property (text), widget (QPushButton, deleteItem)
+#: charrunner_config.ui:114
+#, kde-format
+msgid "Delete Item"
+msgstr "Elem törlése"

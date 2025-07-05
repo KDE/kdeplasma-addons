@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2020-10-17 04:53+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -37,26 +37,50 @@ msgstr ""
 "wszystko."
 
 # Nazwa własna, ale brzmi dziwnie jako " Konfigurator Character Runner'a" wiec zostawiłem jako "Konfigurator".
-#~ msgid "Character Runner Config"
-#~ msgstr "Ustawienia znaków wyjątkowych"
+#. i18n: ectx: property (title), widget (QGroupBox, main)
+#: charrunner_config.ui:18
+#, kde-format
+msgid "Character Runner Config"
+msgstr "Ustawienia znaków wyjątkowych"
 
-#~ msgid "&Trigger word:"
-#~ msgstr "&Słowo wyzwalające:"
+#. i18n: ectx: property (text), widget (QLabel, label_trigger)
+#: charrunner_config.ui:26
+#, kde-format
+msgid "&Trigger word:"
+msgstr "&Słowo wyzwalające:"
 
-#~ msgid "Alias:"
-#~ msgstr "Alias:"
+#. i18n: ectx: property (text), widget (QLabel, label_alias)
+#: charrunner_config.ui:47
+#, kde-format
+msgid "Alias:"
+msgstr "Alias:"
 
-#~ msgid "Hex code:"
-#~ msgstr "Kod szesnastkowy:"
+#. i18n: ectx: property (text), widget (QLabel, label_hex)
+#: charrunner_config.ui:61
+#, kde-format
+msgid "Hex code:"
+msgstr "Kod szesnastkowy:"
 
-#~ msgid "Alias"
-#~ msgstr "Alias"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:89
+#, kde-format
+msgid "Alias"
+msgstr "Alias"
 
-#~ msgid "Code"
-#~ msgstr "Kod"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:94
+#, kde-format
+msgid "Code"
+msgstr "Kod"
 
-#~ msgid "Add Item"
-#~ msgstr "Dodaj element"
+#. i18n: ectx: property (text), widget (QPushButton, addItem)
+#: charrunner_config.ui:104
+#, kde-format
+msgid "Add Item"
+msgstr "Dodaj element"
 
-#~ msgid "Delete Item"
-#~ msgstr "Usuń element"
+#. i18n: ectx: property (text), widget (QPushButton, deleteItem)
+#: charrunner_config.ui:114
+#, kde-format
+msgid "Delete Item"
+msgstr "Usuń element"

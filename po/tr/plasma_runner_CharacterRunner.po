@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2021-11-26 16:29+0100\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -35,26 +35,50 @@ msgstr ""
 "Arma listesi ve kod listesi için yapılandırma girişleri, tümü yok sayılarak "
 "farklı boyutlara sahiptir."
 
-#~ msgid "Character Runner Config"
-#~ msgstr "Özel Karakter Yapılandırması"
+#. i18n: ectx: property (title), widget (QGroupBox, main)
+#: charrunner_config.ui:18
+#, kde-format
+msgid "Character Runner Config"
+msgstr "Özel Karakter Yapılandırması"
 
-#~ msgid "&Trigger word:"
-#~ msgstr "&Tetikleme sözcüğü:"
+#. i18n: ectx: property (text), widget (QLabel, label_trigger)
+#: charrunner_config.ui:26
+#, kde-format
+msgid "&Trigger word:"
+msgstr "&Tetikleme sözcüğü:"
 
-#~ msgid "Alias:"
-#~ msgstr "Arma:"
+#. i18n: ectx: property (text), widget (QLabel, label_alias)
+#: charrunner_config.ui:47
+#, kde-format
+msgid "Alias:"
+msgstr "Arma:"
 
-#~ msgid "Hex code:"
-#~ msgstr "Onaltılık kod:"
+#. i18n: ectx: property (text), widget (QLabel, label_hex)
+#: charrunner_config.ui:61
+#, kde-format
+msgid "Hex code:"
+msgstr "Onaltılık kod:"
 
-#~ msgid "Alias"
-#~ msgstr "Arma"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:89
+#, kde-format
+msgid "Alias"
+msgstr "Arma"
 
-#~ msgid "Code"
-#~ msgstr "Kod"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:94
+#, kde-format
+msgid "Code"
+msgstr "Kod"
 
-#~ msgid "Add Item"
-#~ msgstr "Öge Ekle"
+#. i18n: ectx: property (text), widget (QPushButton, addItem)
+#: charrunner_config.ui:104
+#, kde-format
+msgid "Add Item"
+msgstr "Öge Ekle"
 
-#~ msgid "Delete Item"
-#~ msgstr "Öge Sil"
+#. i18n: ectx: property (text), widget (QPushButton, deleteItem)
+#: charrunner_config.ui:114
+#, kde-format
+msgid "Delete Item"
+msgstr "Öge Sil"

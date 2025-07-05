@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2024-03-30 19:46\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -51,14 +51,26 @@ msgstr "建议的词语"
 msgid "No dictionary found, please install hspell"
 msgstr "未找到字典，请安装 hspell"
 
-#~ msgid "Spell Check Settings"
-#~ msgstr "拼写检查设置"
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: spellcheck_config.ui:17
+#, kde-format
+msgid "Spell Check Settings"
+msgstr "拼写检查设置"
 
-#~ msgid "&Require trigger word"
-#~ msgstr "需要触发单词(&R)"
+#. i18n: ectx: property (text), widget (QCheckBox, m_requireTriggerWord)
+#: spellcheck_config.ui:23
+#, kde-format
+msgid "&Require trigger word"
+msgstr "需要触发单词(&R)"
 
-#~ msgid "&Trigger word:"
-#~ msgstr "触发单词(&T)："
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: spellcheck_config.ui:32
+#, kde-format
+msgid "&Trigger word:"
+msgstr "触发单词(&T)："
 
-#~ msgid "Configure Dictionaries…"
-#~ msgstr "配置词典…"
+#. i18n: ectx: property (text), widget (QPushButton, m_openKcmButton)
+#: spellcheck_config.ui:62
+#, kde-format
+msgid "Configure Dictionaries…"
+msgstr "配置词典…"

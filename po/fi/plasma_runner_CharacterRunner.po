@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_CharacterRunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2021-05-06 11:05+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -33,26 +33,50 @@ msgid ""
 "all."
 msgstr "Alias- ja koodiluettelon tietueilla on eri koko: sivuutetaan kaikki."
 
-#~ msgid "Character Runner Config"
-#~ msgstr "Merkkisuoritusohjelman asetukset"
+#. i18n: ectx: property (title), widget (QGroupBox, main)
+#: charrunner_config.ui:18
+#, kde-format
+msgid "Character Runner Config"
+msgstr "Merkkisuoritusohjelman asetukset"
 
-#~ msgid "&Trigger word:"
-#~ msgstr "&Laukaisinsana:"
+#. i18n: ectx: property (text), widget (QLabel, label_trigger)
+#: charrunner_config.ui:26
+#, kde-format
+msgid "&Trigger word:"
+msgstr "&Laukaisinsana:"
 
-#~ msgid "Alias:"
-#~ msgstr "Alias:"
+#. i18n: ectx: property (text), widget (QLabel, label_alias)
+#: charrunner_config.ui:47
+#, kde-format
+msgid "Alias:"
+msgstr "Alias:"
 
-#~ msgid "Hex code:"
-#~ msgstr "Heksakoodi:"
+#. i18n: ectx: property (text), widget (QLabel, label_hex)
+#: charrunner_config.ui:61
+#, kde-format
+msgid "Hex code:"
+msgstr "Heksakoodi:"
 
-#~ msgid "Alias"
-#~ msgstr "Alias"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:89
+#, kde-format
+msgid "Alias"
+msgstr "Alias"
 
-#~ msgid "Code"
-#~ msgstr "Koodi"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:94
+#, kde-format
+msgid "Code"
+msgstr "Koodi"
 
-#~ msgid "Add Item"
-#~ msgstr "Lisää alias"
+#. i18n: ectx: property (text), widget (QPushButton, addItem)
+#: charrunner_config.ui:104
+#, kde-format
+msgid "Add Item"
+msgstr "Lisää alias"
 
-#~ msgid "Delete Item"
-#~ msgstr "Poista alias"
+#. i18n: ectx: property (text), widget (QPushButton, deleteItem)
+#: charrunner_config.ui:114
+#, kde-format
+msgid "Delete Item"
+msgstr "Poista alias"

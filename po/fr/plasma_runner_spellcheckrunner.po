@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2024-04-26 17:05+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -63,18 +63,30 @@ msgstr "Mot suggéré"
 msgid "No dictionary found, please install hspell"
 msgstr "Aucun dictionnaire trouvé. Veuillez installer le paquet « hspell »"
 
-#~ msgid "Spell Check Settings"
-#~ msgstr "Configuration du vérificateur orthographique"
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: spellcheck_config.ui:17
+#, kde-format
+msgid "Spell Check Settings"
+msgstr "Configuration du vérificateur orthographique"
 
-#~ msgid "&Require trigger word"
-#~ msgstr "&Nécessite un mot de déclenchement"
+#. i18n: ectx: property (text), widget (QCheckBox, m_requireTriggerWord)
+#: spellcheck_config.ui:23
+#, kde-format
+msgid "&Require trigger word"
+msgstr "&Nécessite un mot de déclenchement"
 
 # unreviewed-context
-#~ msgid "&Trigger word:"
-#~ msgstr "Mot de déclenchemen&t : "
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: spellcheck_config.ui:32
+#, kde-format
+msgid "&Trigger word:"
+msgstr "Mot de déclenchemen&t : "
 
-#~ msgid "Configure Dictionaries…"
-#~ msgstr "Configurer les dictionnaires..."
+#. i18n: ectx: property (text), widget (QPushButton, m_openKcmButton)
+#: spellcheck_config.ui:62
+#, kde-format
+msgid "Configure Dictionaries…"
+msgstr "Configurer les dictionnaires..."
 
 #~ msgctxt "@action"
 #~ msgid "Copy to Clipboard"

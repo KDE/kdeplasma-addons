@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2009-07-03 08:44+0300\n"
 "Last-Translator: Viesturs Zariņš <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -54,11 +54,26 @@ msgstr "Ieteiktie vārdi: %1"
 msgid "No dictionary found, please install hspell"
 msgstr ""
 
-#~ msgid "Spell Check Settings"
-#~ msgstr "Pareizrakstības pārbaudītāja iestatījumi"
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: spellcheck_config.ui:17
+#, kde-format
+msgid "Spell Check Settings"
+msgstr "Pareizrakstības pārbaudītāja iestatījumi"
 
-#~ msgid "&Require trigger word"
-#~ msgstr "&Nepieciešamas aktivizēšanas vārds"
+#. i18n: ectx: property (text), widget (QCheckBox, m_requireTriggerWord)
+#: spellcheck_config.ui:23
+#, kde-format
+msgid "&Require trigger word"
+msgstr "&Nepieciešamas aktivizēšanas vārds"
 
-#~ msgid "&Trigger word:"
-#~ msgstr "&Aktivizēšanas vārds:"
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: spellcheck_config.ui:32
+#, kde-format
+msgid "&Trigger word:"
+msgstr "&Aktivizēšanas vārds:"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_openKcmButton)
+#: spellcheck_config.ui:62
+#, kde-format
+msgid "Configure Dictionaries…"
+msgstr ""

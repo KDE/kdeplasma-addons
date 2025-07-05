@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2020-03-20 19:40+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -37,26 +37,50 @@ msgstr ""
 "Les entrades de la configuració de la llista d'àlies i la llista de codis "
 "tenen mides diferents. S'ignoren totes."
 
-#~ msgid "Character Runner Config"
-#~ msgstr "Configuració de l'executor de caràcters"
+#. i18n: ectx: property (title), widget (QGroupBox, main)
+#: charrunner_config.ui:18
+#, kde-format
+msgid "Character Runner Config"
+msgstr ""
 
-#~ msgid "&Trigger word:"
-#~ msgstr "Paraula d'ac&tivació:"
+#. i18n: ectx: property (text), widget (QLabel, label_trigger)
+#: charrunner_config.ui:26
+#, kde-format
+msgid "&Trigger word:"
+msgstr ""
 
-#~ msgid "Alias:"
-#~ msgstr "Àlies:"
+#. i18n: ectx: property (text), widget (QLabel, label_alias)
+#: charrunner_config.ui:47
+#, kde-format
+msgid "Alias:"
+msgstr ""
 
-#~ msgid "Hex code:"
-#~ msgstr "Codi hexadecimal:"
+#. i18n: ectx: property (text), widget (QLabel, label_hex)
+#: charrunner_config.ui:61
+#, kde-format
+msgid "Hex code:"
+msgstr ""
 
-#~ msgid "Alias"
-#~ msgstr "Àlies"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:89
+#, kde-format
+msgid "Alias"
+msgstr ""
 
-#~ msgid "Code"
-#~ msgstr "Codi"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:94
+#, kde-format
+msgid "Code"
+msgstr ""
 
-#~ msgid "Add Item"
-#~ msgstr "Afegeix un element"
+#. i18n: ectx: property (text), widget (QPushButton, addItem)
+#: charrunner_config.ui:104
+#, kde-format
+msgid "Add Item"
+msgstr ""
 
-#~ msgid "Delete Item"
-#~ msgstr "Elimina l'element"
+#. i18n: ectx: property (text), widget (QPushButton, deleteItem)
+#: charrunner_config.ui:114
+#, kde-format
+msgid "Delete Item"
+msgstr ""

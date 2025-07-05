@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2010-07-23 12:56+0200\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -37,29 +37,53 @@ msgid ""
 "all."
 msgstr ""
 
-#~ msgid "&Trigger word:"
-#~ msgstr "Okidačka &riječ:"
+#. i18n: ectx: property (title), widget (QGroupBox, main)
+#: charrunner_config.ui:18
+#, kde-format
+msgid "Character Runner Config"
+msgstr ""
 
-#~ msgid "Alias:"
-#~ msgstr "Alias:"
+#. i18n: ectx: property (text), widget (QLabel, label_trigger)
+#: charrunner_config.ui:26
+#, kde-format
+msgid "&Trigger word:"
+msgstr "Okidačka &riječ:"
 
-#, fuzzy
-#~| msgid "Hex Code:"
-#~ msgid "Hex code:"
-#~ msgstr "Heksa kôd:"
+#. i18n: ectx: property (text), widget (QLabel, label_alias)
+#: charrunner_config.ui:47
+#, kde-format
+msgid "Alias:"
+msgstr "Alias:"
 
-#, fuzzy
-#~| msgid "Alias:"
-#~ msgid "Alias"
-#~ msgstr "Alias:"
+#. i18n: ectx: property (text), widget (QLabel, label_hex)
+#: charrunner_config.ui:61
+#, fuzzy, kde-format
+#| msgid "Hex Code:"
+msgid "Hex code:"
+msgstr "Heksa kôd:"
 
-#, fuzzy
-#~| msgid "Hex Code:"
-#~ msgid "Code"
-#~ msgstr "Heksa kôd:"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:89
+#, fuzzy, kde-format
+#| msgid "Alias:"
+msgid "Alias"
+msgstr "Alias:"
 
-#~ msgid "Add Item"
-#~ msgstr "Dodaj stavku"
+#. i18n: ectx: property (text), widget (QTreeWidget, list)
+#: charrunner_config.ui:94
+#, fuzzy, kde-format
+#| msgid "Hex Code:"
+msgid "Code"
+msgstr "Heksa kôd:"
 
-#~ msgid "Delete Item"
-#~ msgstr "Izbriši stavku"
+#. i18n: ectx: property (text), widget (QPushButton, addItem)
+#: charrunner_config.ui:104
+#, kde-format
+msgid "Add Item"
+msgstr "Dodaj stavku"
+
+#. i18n: ectx: property (text), widget (QPushButton, deleteItem)
+#: charrunner_config.ui:114
+#, kde-format
+msgid "Delete Item"
+msgstr "Izbriši stavku"

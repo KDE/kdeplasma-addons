@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-05 03:22+0000\n"
+"POT-Creation-Date: 2025-07-05 05:54+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -51,11 +51,30 @@ msgstr ""
 msgid "No dictionary found, please install hspell"
 msgstr ""
 
-#~ msgid "Spell Check Settings"
-#~ msgstr "Spell Check Settings"
+#. i18n: ectx: property (title), widget (QGroupBox, groupBox)
+#: spellcheck_config.ui:17
+#, kde-format
+msgid "Spell Check Settings"
+msgstr "Spell Check Settings"
 
-#~ msgid "&Trigger word:"
-#~ msgstr "قوزغاتقۇچ سۆز(&T)"
+#. i18n: ectx: property (text), widget (QCheckBox, m_requireTriggerWord)
+#: spellcheck_config.ui:23
+#, fuzzy, kde-format
+#| msgid "&Trigger word:"
+msgid "&Require trigger word"
+msgstr "قوزغاتقۇچ سۆز(&T)"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: spellcheck_config.ui:32
+#, kde-format
+msgid "&Trigger word:"
+msgstr "قوزغاتقۇچ سۆز(&T)"
+
+#. i18n: ectx: property (text), widget (QPushButton, m_openKcmButton)
+#: spellcheck_config.ui:62
+#, kde-format
+msgid "Configure Dictionaries…"
+msgstr ""
 
 #, fuzzy
 #~| msgctxt "seperator for a list of words"
