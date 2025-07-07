@@ -128,6 +128,10 @@ KWin.TabBoxSwitcher {
                 }
             }
         }
+
+        onSceneGraphError: () => {
+            // This slot is intentionally left blank, otherwise QtQuick may post a qFatal() message on a graphics reset.
+        }
     }
 }
 
