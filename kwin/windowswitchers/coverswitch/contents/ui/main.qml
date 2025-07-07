@@ -277,6 +277,10 @@ KWin.TabBoxSwitcher {
             text: i18ndc("kwin", "@info:placeholder no entries in the task switcher", "No open windows")
             visible: thumbnailView.count === 0
         }
+
+        onSceneGraphError: () => {
+            // This slot is intentionally left blank, otherwise QtQuick may post a qFatal() message on a graphics reset.
+        }
     }
 
     onCurrentIndexChanged: {
