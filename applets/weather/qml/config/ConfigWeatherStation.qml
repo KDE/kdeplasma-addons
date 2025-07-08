@@ -16,25 +16,28 @@ import org.kde.kcmutils as KCM
 KCM.ScrollViewKCM {
     id: weatherStationConfigPage
 
-    property string cfg_source
-    property alias cfg_updateInterval: updateIntervalSpin.value
-
-    readonly property var sourceDetails: cfg_source ? cfg_source.split('|') : ""
-    readonly property bool hasSource: sourceDetails.length > 2
-    readonly property bool canSearch: !!searchStringEdit.text && locationListModel.hasProviders
-
-    // The model property `isValidatingInput` doesn't account for the timer delay
-    // We use a custom property to provide a more responsive feedback
-    property bool isSearching: false
-
-    extraFooterTopPadding: true
-
-    LocationListModel {
+    LocationsControl {
         id: locationListModel
         onLocationSearchDone: {
             isSearching = false;
         }
     }
+
+    property string cfg_provider
+    property string cfg_placeInfo
+    property string cfg_providerCredit
+    property string cfg_placeDisplayName
+
+    property alias cfg_updateInterval: updateIntervalSpin.value
+
+    readonly property bool hasSource: cfg_provider !== "" && cfg_placeInfo !== ""
+    readonly property bool canSearch: !!searchStringEdit.text && locationListModel.hasProviders
+
+    // The model property `isValidatingInput` doesn't account for the timer delay
+    // We use a custom property to provide a more responsive feedback
+    property bool isSearching: false
+    
+    extraFooterTopPadding: true
 
     header: ColumnLayout {
 
@@ -67,7 +70,15 @@ KCM.ScrollViewKCM {
                 elide: Text.ElideRight
                 opacity: hasSource ? 1 : 0.75
 
-                text: hasSource ? sourceDetails[2] : i18nc("No location is currently selected", "None selected")
+                text: {
+                    if (hasSource) {
+                        if (weatherStationConfigPage.cfg_placeDisplayName !== "") {
+                            return weatherStationConfigPage.cfg_placeDisplayName;
+                        }
+                        return weatherStationConfigPage.cfg_placeInfo;
+                    }
+                    return i18nc("No location is currently selected", "None selected");
+                }
                 textFormat: Text.PlainText
             }
 
@@ -79,7 +90,15 @@ KCM.ScrollViewKCM {
                 // Keep it visible to avoid height changes which can confuse AppletConfigurationPage
                 opacity: hasSource ? 1 : 0
 
-                text: hasSource ? locationListModel.providerName(sourceDetails[0]) : ""
+                text: {
+                    if (weatherStationConfigPage.hasSource) {
+                        if (weatherStationConfigPage.cfg_providerCredit !== "") {
+                            return weatherStationConfigPage.cfg_providerCredit
+                        }
+                        return weatherStationConfigPage.cfg_provider;
+                    }
+                    return "";
+                }
                 textFormat: Text.PlainText
             }
 
@@ -148,15 +167,30 @@ KCM.ScrollViewKCM {
         enabled: locationListModel.hasProviders
 
         onCurrentIndexChanged: {
-            const source = locationListModel.valueForListIndex(locationListView.currentIndex);
-            if (source) {
-                    weatherStationConfigPage.cfg_source = source;
+            const provider = locationListModel.getProviderByIndex(locationListView.currentIndex);
+            const placeInfo = locationListModel.getPlaceInfoByIndex(locationListView.currentIndex);
+            if (provider && placeInfo) {
+                weatherStationConfigPage.cfg_provider = provider;
+                weatherStationConfigPage.cfg_placeInfo = placeInfo;
+                const providerCredit = locationListModel.getProviderCreditByIndex(locationListView.currentIndex);
+                if (!!providerCredit && providerCredit !== ""){
+                    weatherStationConfigPage.cfg_providerCredit = providerCredit;
+                } else {
+                    weatherStationConfigPage.cfg_providerCredit = "";
+                }
+                const placeDisplayName = locationListModel.getPlaceDisplayNameByIndex(locationListView.currentIndex);
+                if (!!placeDisplayName && placeDisplayName !== "") {
+                    weatherStationConfigPage.cfg_placeDisplayName = placeDisplayName
+                } else {
+                    weatherStationConfigPage.cfg_placeDisplayName = "";
+                }
             }
         }
 
         delegate: QQC2.ItemDelegate {
             width: locationListView.width
-            text: model.display
+            text: i18nc("A weather station location and the weather service it comes from",
+                "%1 (%2)", !!model.displayName ? model.displayName : model.station, model.credit)
             highlighted: ListView.isCurrentItem
 
             onClicked: {

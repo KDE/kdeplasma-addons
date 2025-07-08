@@ -62,3 +62,5 @@ int AbstractUnitListModel::defaultUnitId() const
 {
     return unitIdForListIndex(m_defaultIndex);
 }
+
+#include "moc_abstractunitlistmodel.cpp"

@@ -12,7 +12,6 @@
 // Qt
 #include <QIcon>
 #include <QLocale>
-#include <QPixmap>
 // Std
 #include <cmath>
 
@@ -74,3 +73,5 @@ QString Util::nameFromUnitId(KUnitConversion::UnitId unitId)
     QString unitDescription = i18nc("@item %1 is a unit description and %2 its unit symbol", "%1 (%2)", unit.description(), unit.symbol());
     return unitDescription;
 }
+
+#include "moc_util.cpp"

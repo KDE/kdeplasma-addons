@@ -16,17 +16,21 @@ import org.kde.plasma.workspace.components as WorkspaceComponents
 Loader {
     id: compactRoot
 
-    property var generalModel
-    property var observationModel
+    property var metaData: null
+    property var lastObservation: null
 
-    readonly property bool vertical: (Plasmoid.formFactor == PlasmaCore.Types.Vertical)
+    property int displayTemperatureUnit: 0
+
+    readonly property bool isTemperaturePresent: !!compactRoot.lastObservation?.temperature && !!compactRoot.metaData?.temperatureUnit
+
+    readonly property bool vertical: Plasmoid.formFactor == PlasmaCore.Types.Vertical
     readonly property bool showTemperature: Plasmoid.configuration.showTemperatureInCompactMode
 
     readonly property bool needsToBeSquare: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment)
         || (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
     readonly property bool useBadge: Plasmoid.configuration.showTemperatureInBadge || needsToBeSquare
 
-    sourceComponent: (showTemperature && !useBadge) ? iconAndTextComponent : iconComponent
+    sourceComponent: (compactRoot.isTemperaturePresent && compactRoot.showTemperature && !compactRoot.useBadge) ? iconAndTextComponent : iconComponent
     Layout.fillWidth: compactRoot.vertical
     Layout.fillHeight: !compactRoot.vertical
     Layout.minimumWidth: item.Layout.minimumWidth
@@ -63,9 +67,9 @@ Loader {
                 anchors.bottom: parent.bottom
                 anchors.right: parent.right
 
-                visible: showTemperature && useBadge && text.length > 0
+                visible: compactRoot.isTemperaturePresent && showTemperature && useBadge && text.length > 0
 
-                text: observationModel.temperature
+                text: compactRoot.isTemperaturePresent ? Util.temperatureToDisplayString(compactRoot.displayTemperatureUnit, compactRoot.lastObservation.temperature, compactRoot.metaData.reportTemperatureUnit, true, false) : "";
                 icon: parent
 
                 // Non-default state to center if the badge is wider than the icon
@@ -90,7 +94,7 @@ Loader {
             vertical: compactRoot.vertical
             iconSource: Plasmoid.icon
             active: compactMouseArea.containsMouse
-            text: observationModel.temperature
+            text: compactRoot.isTemperaturePresent ? Util.temperatureToDisplayString(compactRoot.displayTemperatureUnit, compactRoot.lastObservation.temperature, compactRoot.metaData.temperatureUnit, true, false) : "";
         }
     }
 }

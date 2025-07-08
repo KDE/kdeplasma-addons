@@ -10,6 +10,7 @@ import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 
+
 ColumnLayout {
     id: root
 
@@ -27,7 +28,7 @@ ColumnLayout {
             model: root.model
             delegate: PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                text: modelData.label
+                text: model.label
                 textFormat: Text.PlainText
             }
         }
@@ -36,9 +37,10 @@ ColumnLayout {
             model: root.model
             delegate: PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
-                text: modelData.text
+                text: model.text
                 textFormat: Text.PlainText
             }
         }
     }
 }
+

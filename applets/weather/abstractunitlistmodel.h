@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef ABSTRACTUNITLISTMODEL_H
-#define ABSTRACTUNITLISTMODEL_H
+#pragma once
 
 #include "util.h"
 
@@ -54,5 +53,3 @@ private:
     const QList<UnitItem> m_items;
     const int m_defaultIndex;
 };
-
-#endif // ABSTRACTUNITLISTMODEL_H

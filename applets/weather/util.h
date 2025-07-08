@@ -4,8 +4,7 @@
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-#ifndef UTIL_H
-#define UTIL_H
+#pragma once
 
 // KF
 #include <KUnitConversion/Converter>
@@ -24,15 +23,6 @@ public:
     explicit Util(QObject *parent = nullptr);
 
 public:
-    enum Status {
-        Normal = 0,
-        Connecting,
-        NeedsConfiguration,
-        Timeout,
-    };
-    Q_ENUM(Status);
-
-public:
     /**
      * Returns the @p iconName if the current icon theme contains an icon with that name,
      * otherwise returns "weather-not-available" (expecting the icon theme to have that in any case).
@@ -48,5 +38,3 @@ public:
 private:
     static KUnitConversion::Converter m_converter;
 };
-
-#endif

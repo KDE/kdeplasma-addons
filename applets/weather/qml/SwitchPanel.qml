@@ -17,12 +17,70 @@ import org.kde.plasma.extras as PlasmaExtras
 ColumnLayout {
     id: root
 
-    required property var forecastModel
-    required property var detailsModel
-    required property var noticesModel
+    property var warnings: null
+    property var futureDays: null
+    property var lastObservation: null
+    property var metaData: null
 
-    required property bool forecastViewNightRow
-    required property string forecastViewTitle
+    property int invalidUnit: 0
+    property int displayTemperatureUnit: 0
+    property int displayVisibilityUnit: 0
+    property int displayPressureUnit: 0
+    property int displaySpeedUnit: 0
+
+    property bool forecastViewNightRow: false
+
+    property string forecastViewTitle: (!!futureDays && futureDays.daysNumber > 0) ?
+        i18ncp("Forecast period timeframe", "1 Day", "%1 Days", futureDays.daysNumber) : ""
+
+    component DetailsString: QtObject {
+        property string label
+        property string text
+        property bool visible: true
+    }
+
+    readonly property list<DetailsString> detailsModel: [
+        DetailsString {
+            label: i18nc("@label ground temperature", "Dewpoint:")
+            text: visible ? Util.temperatureToDisplayString(root.displayTemperatureUnit, root.lastObservation.dewpoint, root.metaData.temperatureUnit) : ""
+            visible: !!root.lastObservation?.dewpoint && !!root.metaData?.temperatureUnit
+        },
+        DetailsString {
+            label: i18nc("@label", "Pressure:")
+            text: visible ? Util.valueToDisplayString(root.displayPressureUnit, root.lastObservation.pressure, root.metaData.pressureUnit, 2) : ""
+            visible: !!root.lastObservation?.pressure && !!root.metaData?.pressureUnit
+        },
+        DetailsString {
+            label: i18nc("@label pressure tendency, rising/falling/steady", "Pressure Tendency:")
+            text: visible ? root.lastObservation.pressureTendency : ""
+            visible: !!root.lastObservation?.pressureTendency
+        },
+        DetailsString {
+            label: i18nc("@label", "Visibility:")
+            text: {
+                if (!visible) {
+                    return "";
+                }
+                if (typeof root.lastObservation.visibility === "string") {
+                    return root.lastObservation.visibility;
+                }
+                return Util.valueToDisplayString(root.displayVisibilityUnit, root.lastObservation.visibility, root.metaData.visibilityUnit, 1)
+            }
+            visible: !!root.lastObservation?.visibility && (!!root.metaData?.visibilityUnit || typeof root.lastObservation.visibility === "string")
+        },
+        DetailsString {
+            label: i18nc("@label", "Humidity:")
+            text: visible ? Util.percentToDisplayString(root.lastObservation.humidity) : ""
+            visible: !!root.lastObservation?.humidity && !!root.metaData?.humidityUnit
+        },
+        DetailsString {
+            label: i18nc("@label", "Wind Gust:")
+            text: visible ? Util.valueToDisplayString(root.displaySpeedUnit, root.lastObservation.windGust, root.metaData.windSpeedUnit, 1) : ""
+            visible: !!root.lastObservation?.windGust && !!root.metaData?.windSpeedUnit
+        }
+    ]
+
+    readonly property list<DetailsString> detailsVisibleModel: detailsModel.filter(page => page.visible)
 
     component WeatherInfoPanel: QtObject {
         property string title
@@ -34,25 +92,25 @@ ColumnLayout {
     readonly property list<WeatherInfoPanel> weatherPanelModel: [
         WeatherInfoPanel {
             title: root.forecastViewTitle || i18nc("@title:tab Weather forecast", "Forecast")
-            view: root.forecastModel?.length > 0 ? forecastView : forecastPlaceholder
+            view: !!root.futureDays && root.futureDays.daysNumber > 0 ? forecastView : forecastPlaceholder
         },
         WeatherInfoPanel {
             title: i18nc("@title:tab", "Details")
-            visible: root.detailsModel && root.detailsModel.length > 0
+            visible: !!root.lastObservation && root.detailsVisibleModel.length > 0
             view: detailsView
         },
         WeatherInfoPanel {
-            title: i18ncp("@title:tab %1 is the number of weather notices (alerts, warnings, watches, ...) issued", "%1 Notice", "%1 Notices", noticesModel.length)
-            visible: root.noticesModel && root.noticesModel.length > 0
+            title: !!warnings ? i18ncp("@title:tab %1 is the number of weather notices (alerts, warnings, watches, ...) issued", "%1 Notice", "%1 Notices", warnings.count) : ""
+            visible: !!root.warnings && root.warnings.count > 0
             view: noticesView
             // Show warning icon if the maximum priority shown is at least 2 (Moderate)
-            icon: root.noticesModel.reduce((acc, notice) => Math.max(notice.priority, acc), 0) >= 2 ? 'data-warning-symbolic' : 'data-information-symbolic'
+            icon: !!root.warnings && root.warnings.maxPriorityCount >= 2 ? 'data-warning-symbolic' : 'data-information-symbolic'
         }
     ]
 
     readonly property list<WeatherInfoPanel> pagesModel: weatherPanelModel.filter(page => page.visible)
 
-    PlasmaComponents.TabBar {
+    QQC2.TabBar {
         id: tabBar
 
         Layout.fillWidth: true
@@ -88,7 +146,7 @@ ColumnLayout {
         Repeater {
             model: root.pagesModel
             delegate: Loader {
-                sourceComponent: modelData.view
+                sourceComponent: model.view
             }
         }
 
@@ -100,8 +158,9 @@ ColumnLayout {
     Component {
         id: forecastView
         ForecastView {
-            model: root.forecastModel
-            showNightRow: root.forecastViewNightRow
+            futureDays: root.futureDays
+            metaData: root.metaData
+            displayTemperatureUnit: root.displayTemperatureUnit
         }
     }
 
@@ -124,14 +183,14 @@ ColumnLayout {
     Component {
         id: detailsView
         DetailsView {
-            model: root.detailsModel
+            model: root.detailsVisibleModel
         }
     }
 
     Component {
         id: noticesView
         NoticesView {
-            model: root.noticesModel
+            model: root.warnings
             // Avoid scrolling conflicts between SwipeView and NoticesView
             interactive: swipeView.contentItem.atXEnd
         }

@@ -14,8 +14,38 @@ import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.core as PlasmaCore
 
 GridLayout {
-    property var generalModel
-    property var observationModel
+    id: root
+
+    property var metaData: null
+    property var lastObservation: null
+    property var station: null
+    property var futureDays: null
+
+    property int displayWindSpeedUnit: 0
+    property int displayTemperatureUnit: 0
+
+    readonly property bool isTemperaturePresent: !!root.lastObservation?.temperature && !!root.metaData?.temperatureUnit
+
+    function feelsLikeTemperature(windchill, heatIndex, humidex) {
+        if (!root.isTemperaturePresent) {
+            return "";
+        }
+
+        let feelsTemperature;
+        if(windchill !== null) {
+            feelsTemperature = windchill;
+        } else if (heatIndex !== null) {
+            feelsTemperature = heatIndex;
+        } else if (humidex !== null) {
+            feelsTemperature = humidex;
+        }
+
+        if (feelsTemperature == null) {
+            return null;
+        }
+
+        return Util.temperatureToDisplayString(root.displayTemperatureUnit, feelsTemperature, root.metaData.temperatureUnit, true, false);
+    }
 
     readonly property int sideWidth: Math.max(
         windSpeedLabel.implicitWidth,
@@ -23,7 +53,10 @@ GridLayout {
         windSpeedDirection.naturalSize.width
     )
 
-    visible: !!generalModel.location
+    Layout.minimumWidth: Math.max(
+        locationLabel.implicitWidth,
+        (sideWidth + columnSpacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
+    )
 
     columnSpacing: Kirigami.Units.largeSpacing
     rowSpacing: Kirigami.Units.largeSpacing
@@ -40,12 +73,14 @@ GridLayout {
 
         elide: Text.ElideRight
 
-        text: generalModel.location
+        visible: !!root.station?.place
+
+        text: visible ? root.station.place : ""
         textFormat: Text.PlainText
 
         PlasmaCore.ToolTipArea {
             anchors.fill: parent
-            mainText: generalModel.location
+            mainText: locationLabel.visible ? root.station.place : ""
             visible: locationLabel.truncated
         }
     }
@@ -63,31 +98,45 @@ GridLayout {
             id: tempLabel
             Layout.fillWidth: true
 
+            visible: root.isTemperaturePresent
+
             font.pixelSize: Kirigami.Units.iconSizes.medium
             font.bold: true
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.NoWrap
             textFormat: Text.PlainText
 
-            text: observationModel.temperature
+            text: root.isTemperaturePresent ? Util.temperatureToDisplayString(root.displayTemperatureUnit, root.lastObservation.temperature, root.metaData.temperatureUnit, true, false) : ""
         }
 
         PlasmaComponents.Label {
+            id: feelsLikeLabel
             Layout.fillWidth: true
 
-            visible: !!observationModel.feelsLikeTemperature && observationModel.feelsLikeTemperature !== observationModel.temperature
+            readonly property bool isFeelsLikeTemperaturePresent: isTemperaturePresent  && (!!root.lastObservation.heatIndex  || !!root.lastObservation.windchill || !!root.lastObservation.humidex)
+
+            visible: {
+                if (root.isFeelsLikeTemperaturePresent) {
+                    let feelsTemperature = feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
+                    return feelsTemperature !== "" && feelsTemperature !== root.lastObservation.temperature
+                }
+
+                return false;
+            }
 
             horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.Wrap
             textFormat: Text.PlainText
 
-            text: i18nc("@label %1 is the perceived temperature due to conditions like wind or humidity. Use the common phrasing for this concept and keep it short, adding a colon if necessary",
-                        "Feels like %1", observationModel.feelsLikeTemperature || "")
+            text: root.isFeelsLikeTemperaturePresent ? i18nc("@label %1 is the perceived temperature due to conditions like wind or humidity. Use the common phrasing for this concept and keep it short, adding a colon if necessary",
+                        "Feels like %1", feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex) || "") : ""
         }
     }
 
     Kirigami.Icon {
         id: conditionIcon
+
+        visible: !!root.lastObservation?.conditionIcon || !!root.futureDays?.firstDayIcon
 
         Layout.row: 1
         Layout.column: 1
@@ -99,20 +148,31 @@ GridLayout {
         // contribution and splits the space accordingly to their proportion.
         Layout.preferredWidth: 50 // 50% of the view
 
-        source: generalModel.currentConditionIconName
+        source: {
+            //check if there is the icon from last observation and if it exists return it
+            if (!!root.lastObservation?.conditionIcon && root.lastObservation.conditionIcon !== "weather-none-available") {
+                return root.lastObservation.conditionIcon;
+            }
+            //if the icon from last observation not exists use first icon from forecast
+            if (!!root.futureDays?.firstDayIcon) {
+                return root.futureDays.firstDayIcon;
+            }
+            //if there are no icons then use default unavailable icon
+            return "weather-none-available";
+        }
     }
 
     PlasmaComponents.Label {
         id: conditionLabel
 
-        visible: text.length > 0
+        visible: !!root.lastObservation?.currentConditions
 
         Layout.row: 2
         Layout.column: 0
         Layout.columnSpan: 3
         Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
-        text: observationModel.conditions
+        text: visible ? root.lastObservation.currentConditions : ""
         textFormat: Text.PlainText
     }
 
@@ -134,18 +194,24 @@ GridLayout {
             implicitHeight: Kirigami.Units.iconSizes.medium
 
             imagePath: "weather/wind-arrows"
-            elementId: observationModel.windDirectionId || ""
+            elementId: visible ? root.lastObservation.windDirection : ""
 
-            visible: !!observationModel.windDirectionId
+            visible: !!root.lastObservation?.windDirection
         }
 
         PlasmaComponents.Label {
             id: windSpeedLabel
+
+            visible: true
+
+            readonly property bool isWindSpeedPresent: !!root.lastObservation?.windSpeed && !!root.metaData?.windSpeedUnit && root.lastObservation.windSpeed !== 0.0
+
             anchors {
                 top: windSpeedDirection.bottom
                 horizontalCenter: parent.horizontalCenter
             }
-            text: observationModel.windSpeed
+
+            text: isWindSpeedPresent ? Util.valueToDisplayString(root.displayWindSpeedUnit, root.lastObservation.windSpeed, root.metaData.windSpeedUnit, 1) : i18nc("Wind condition", "Calm");
             textFormat: Text.PlainText
         }
     }

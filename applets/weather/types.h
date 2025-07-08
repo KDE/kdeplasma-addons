@@ -4,8 +4,8 @@
 #pragma once
 
 #include <QLocale>
-#include <QQmlEngine>
 #include <QObject>
+#include <QQmlEngine>
 
 #include "abstractunitlistmodel.h"
 
@@ -21,7 +21,8 @@ struct TemperatureUnitListModel
     QML_ELEMENT
     QML_SINGLETON
 public:
-    static AbstractUnitListModel *create(QQmlEngine *engine, QJSEngine *) {
+    static AbstractUnitListModel *create(QQmlEngine *engine, QJSEngine *)
+    {
         QList<UnitItem> items{
             UnitItem(KUnitConversion::Celsius),
             UnitItem(KUnitConversion::Fahrenheit),
@@ -40,7 +41,8 @@ struct VisibilityUnitListModel
     QML_ELEMENT
     QML_SINGLETON
 public:
-    static AbstractUnitListModel *create(QQmlEngine *engine, QJSEngine *) {
+    static AbstractUnitListModel *create(QQmlEngine *engine, QJSEngine *)
+    {
         QList<UnitItem> items{
             UnitItem(KUnitConversion::Kilometer),
             UnitItem(KUnitConversion::Mile),
@@ -51,6 +53,7 @@ public:
     }
 };
 
+
 struct PressureUnitListModel
 {
     Q_GADGET
@@ -58,7 +61,8 @@ struct PressureUnitListModel
     QML_NAMED_ELEMENT(PressureUnitListModel)
     QML_SINGLETON
 public:
-    static AbstractUnitListModel *create(QQmlEngine *engine, QJSEngine *) {
+    static AbstractUnitListModel *create(QQmlEngine *engine, QJSEngine *)
+    {
         const QList<UnitItem> items{
             UnitItem(KUnitConversion::Hectopascal),
             UnitItem(KUnitConversion::Kilopascal),
@@ -80,7 +84,8 @@ struct WindSpeedUnitListModel
     QML_ELEMENT
     QML_SINGLETON
 public:
-    static AbstractUnitListModel *create(QQmlEngine *engine, QJSEngine *) {
+    static AbstractUnitListModel *create(QQmlEngine *engine, QJSEngine *)
+    {
         const QList<UnitItem> items{
             UnitItem(KUnitConversion::MeterPerSecond),
             UnitItem(KUnitConversion::KilometerPerHour),

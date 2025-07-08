@@ -6,52 +6,27 @@
  */
 
 import QtQuick
-
+import QtQuick.Controls
 import QtQuick.Layouts
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 
-GridLayout {
+Item {
     id: root
 
-    property alias model: repeater.model
-    property bool showNightRow: false
+    property var futureDays: null
+    property var metaData: null
 
-    readonly property bool startsAtNight: !model[0] // When the first item is undefined
+    property int displayTemperatureUnit: 0
+
     readonly property int preferredIconSize: Kirigami.Units.iconSizes.large
-    readonly property bool hasContent: model && model.length > 0
-    readonly property var rowHasProbability: [...Array(rows).keys()].map(
-        row => model.filter((_, index) => index % root.rows == row)
-                    .some(item => item?.probability ?? false))
 
-    columnSpacing: 0
-    rowSpacing: Kirigami.Units.largeSpacing
+    implicitHeight: forecast.implicitHeight + horizontalHeader.height
+    implicitWidth: forecast.implicitWidth + verticalHeader.width
 
-    rows: showNightRow ? 2 : 1
-    flow: showNightRow ? GridLayout.TopToBottom : GridLayout.LeftToRight
-
-    // Add Day/Night labels as the row headings when there is a night row
-    component DayNightLabel: PlasmaComponents.Label {
-        visible: root.showNightRow
-        Layout.alignment: Qt.AlignLeft | Qt.AlignTop
-        Layout.fillWidth: true
-        Layout.preferredWidth: startsAtNight ? Kirigami.Units.largeSpacing : implicitWidth
-        font.bold: true
-    }
-
-    DayNightLabel {
-        text: i18nc("Time of the day (from the duple Day/Night)", "Day")
-    }
-
-    DayNightLabel {
-        text: i18nc("Time of the day (from the duple Day/Night)", "Night")
-        // Save space by moving this label over the night row when possible
-        Layout.topMargin: startsAtNight ? -Kirigami.Units.gridUnit : 0
-    }
-
-    // Item to get the metrics of the regular font in a PlasmaComponent.Label
+    //Item to get the metrics of the regular font in a PlasmaComponent.Label
     PlasmaComponents.Label {
         id: helperLabel
         visible: false
@@ -63,46 +38,116 @@ GridLayout {
         }
     }
 
-    Repeater {
-        id: repeater
+    HorizontalHeaderView {
+        id: horizontalHeader
+        anchors.left: forecast.left
+        anchors.top: parent.top
+        syncView: (root.futureDays.daysNumber > 1) ? forecast : null
+        clip: true
+        textRole: "monthDay"
+        resizableColumns: false
+        interactive: false
+
+        delegate: PlasmaComponents.Label {
+            text: (!!model.monthDay) ? model.monthDay :
+                  (!!model.weekDay) ? model.weekDay :
+                  ""
+            textFormat: Text.PlainText
+            horizontalAlignment: Text.AlignHCenter
+        }
+    }
+
+    VerticalHeaderView {
+        id: verticalHeader
+        anchors.top: forecast.top
+        anchors.left: parent.left
+        syncView: root.futureDays.isNightPresent ? forecast : null
+        clip: true
+        textRole: "period"
+        resizableRows: false
+        interactive: false
+
+        delegate: PlasmaComponents.Label {
+            text: !!model.period ? model.period : ""
+            textFormat: Text.PlainText
+        }
+    }
+
+    TableView {
+        id: forecast
+
+        interactive: false
+
+        anchors.left: verticalHeader.right
+        anchors.top: horizontalHeader.bottom
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
+
+        model: root.futureDays
+
+        // calculate spacing and implicit width/height when layout changed
+        onLayoutChanged: {
+            //check if row loaded before calculating row height to prevent rows from being shown incorrectly
+            if(isRowLoaded(topRow)) {
+                var rowsHeight = implicitRowHeight(topRow) * rows;
+                neededRowSpacing = (parent.height - horizontalHeader.height - rowsHeight) / (rows + 1);
+                implicitHeight = rowsHeight
+            } else {
+                //restore default values if none of rows is loaded (which shows that forecast model is empty)
+                neededRowSpacing = 0;
+                implicitHeight = 0;
+
+            }
+            //the same for columns as for rows
+            if(isColumnLoaded(leftColumn)) {
+                var columnsWidth = implicitColumnWidth(leftColumn) * columns;
+                neededColumnSpacing =  (parent.width - verticalHeader.width - columnsWidth) / (columns + 1)
+                implicitWidth = columnsWidth
+            } else {
+                neededColumnSpacing = 0;
+                implicitWidth = 0;
+            }
+        }
+
+        property real neededRowSpacing: 0
+        property real neededColumnSpacing: 0
+
+        anchors.topMargin: neededRowSpacing
+        anchors.bottomMargin: neededRowSpacing
+        anchors.leftMargin: neededColumnSpacing
+        anchors.rightMargin: neededColumnSpacing
+
+        rowSpacing: neededRowSpacing
+        columnSpacing: neededColumnSpacing
 
         delegate: ColumnLayout {
             id: dayDelegate
 
-            Layout.fillWidth: true
+            visible: !!model.conditionIcon
+
             spacing: Math.round(Kirigami.Units.smallSpacing / 2)
-
-            PlasmaComponents.Label {
-                id: periodLabel
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                // Hide period titles on the second row
-                visible: (model.index % root.rows) === 0
-
-                font.bold: true
-                horizontalAlignment: Text.AlignHCenter
-                text: modelData?.period?.replace(" nt", "") || ""
-                textFormat: Text.PlainText
-            }
 
             Kirigami.Icon {
                 Layout.fillWidth: true
                 Layout.preferredHeight: preferredIconSize
                 Layout.preferredWidth: preferredIconSize
 
-                source: modelData?.icon ?? ""
+                Layout.alignment: Qt.AlignTop
+
+                source: model.conditionIcon
 
                 PlasmaCore.ToolTipArea {
                     id: iconToolTip
                     anchors.fill: parent
                     mainText: {
-                        if (!modelData?.condition) {
+                        if (!model.condition) {
                             return "";
                         }
-                        if (!modelData?.probability) {
-                            return modelData.condition;
+                        if (!model.conditionProbability) {
+                            return model.condition;
                         }
                         return i18nc("certain weather condition (probability percentage)",
-                                     "%1 (%2%)", modelData.condition, modelData.probability);
+                            "%1 (%2%)", model.condition, model.conditionProbability);
                     }
                 }
             }
@@ -116,25 +161,27 @@ GridLayout {
                 Layout.preferredHeight: labelFontMetrics.height
 
                 horizontalAlignment: Text.AlignHCenter
-                text: modelData?.probability ? i18nc("Probability of precipitation in percentage", "☂%1%", modelData.probability) : "·"
+                text: !!model.conditionProbability ? i18nc("Probability of precipitation in percentage", "☂%1%", model.conditionProbability) : "·"
                 textFormat: Text.PlainText
-                visible: modelData && root.rowHasProbability[index % root.rows]
+                visible: root.futureDays.hasProbability
             }
 
             PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
-                text: modelData ? modelData.tempHigh || i18nc("Short for no data available", "-") : ""
+                text: !!model.highTemp && !!root.metaData?.temperatureUnit ? Util.temperatureToDisplayString(root.displayTemperatureUnit, model.highTemp, root.metaData.temperatureUnit, true) : i18nc("Short for no data available", "-")
                 textFormat: Text.PlainText
-                visible: modelData?.tempHigh || !showNightRow
+                visible: !!model.highTemp || !futureDays.isNightPresent
+                Layout.preferredHeight: labelFontMetrics.height
             }
 
             PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
-                text: modelData ? modelData.tempLow || i18nc("Short for no data available", "-") : ""
+                text: !!model.lowTemp && !!root.metaData?.temperatureUnit ? Util.temperatureToDisplayString(root.displayTemperatureUnit, model.lowTemp, root.metaData.temperatureUnit, true) : i18nc("Short for no data available", "-")
                 textFormat: Text.PlainText
-                visible: modelData?.tempLow || !showNightRow
+                visible: !!model.lowTemp || !futureDays.isNightPresent
+                Layout.preferredHeight: labelFontMetrics.height
             }
         }
     }

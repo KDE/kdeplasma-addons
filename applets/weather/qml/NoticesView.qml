@@ -28,7 +28,7 @@ ListView {
             Layout.maximumWidth: Kirigami.Units.gridUnit * 10
             Layout.margins: Kirigami.Units.largeSpacing
 
-            text: modelData.timestamp
+            text: model.timestamp
             textFormat: Text.PlainText
             horizontalAlignment: Text.AlignRight
             wrapMode: Text.Wrap
@@ -38,9 +38,9 @@ ListView {
             Layout.alignment: Qt.AlignTop
             Layout.minimumWidth: implicitWidth
             implicitWidth: Kirigami.Units.iconSizes.smallMedium
-            source: (modelData.priority >= 3) ? 'flag-red-symbolic' :
-                    (modelData.priority >= 2) ? 'flag-yellow-symbolic' :
-                                                'flag-blue-symbolic'
+            source: (model.priority === Warnings.High) ? 'flag-red-symbolic' :
+                    (model.priority === Warnings.Medium) ? 'flag-yellow-symbolic' :
+                    'flag-blue-symbolic'
         }
 
         Kirigami.SelectableLabel {
@@ -49,19 +49,19 @@ ListView {
             Layout.minimumWidth: Kirigami.Units.gridUnit * 5
             Layout.margins: Kirigami.Units.largeSpacing
 
-            text: modelData.description
+            text: model.description
             wrapMode: Text.Wrap
         }
 
         PlasmaComponents.ToolButton {
-            visible: !!modelData.infoUrl
+            visible: model.info !== ""
             Layout.alignment: Qt.AlignTop
             Layout.minimumWidth: implicitWidth
             icon.name: 'showinfo-symbolic'
             text: i18nc("@action:button", "Show more information")
             display: PlasmaComponents.ToolButton.IconOnly
             onClicked: {
-                Qt.openUrlExternally(Qt.resolvedUrl(modelData.infoUrl))
+                Qt.openUrlExternally(Qt.resolvedUrl(model.info))
             }
         }
     }
