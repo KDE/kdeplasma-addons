@@ -144,5 +144,3 @@ protected:
 
     static bool isNightTime(const QDateTime &dateTime, double latitude, double longitude);
 };
-
-Q_DECLARE_INTERFACE(Ion, "org.kde.weather.Ion")

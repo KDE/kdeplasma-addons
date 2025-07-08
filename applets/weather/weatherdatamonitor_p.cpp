@@ -13,7 +13,9 @@
 #include <QLibraryInfo>
 #include <QPluginLoader>
 
-#include "ion_config.h"
+#include <KPluginFactory>
+#include <KPluginMetaData>
+
 #include "ioncontrol_p.h"
 
 using namespace Qt::StringLiterals;
@@ -34,72 +36,12 @@ WeatherDataMonitor::WeatherDataMonitor(QObject *parent)
 {
     qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: start initializing";
 
-    QStringList pluginsNameList;
+    const auto plugins = KPluginMetaData::findPlugins("plasma/weather_ions", {}, KPluginMetaData::AllowEmptyMetaData);
 
-    // check library paths and find available plugins
-    const QStringList &paths = QCoreApplication::libraryPaths();
-    for (const QString &path : paths) {
-        qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: check plugins at path: " << path;
-        QDir dir(path);
-        if (!dir.exists() || !dir.cd(PLUGIN_DIR)) {
-            qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: dir with plugins don't exists. Skipping";
-            continue;
-        }
-        qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: dir exists: " << path;
-        auto fileInfoList = dir.entryInfoList();
-        for (auto it = fileInfoList.begin(); it != fileInfoList.end(); ++it) {
-            if (QLibrary::isLibrary(it->filePath())) {
-                qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: found plugin: " << it->baseName();
-                pluginsNameList.append(it->filePath());
-            }
-        }
+    for (const auto &plugin : plugins) {
+        m_providers << plugin.pluginId();
+        m_ions.insert(plugin.pluginId(), plugin);
     }
-
-    qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: total plugins found: " << pluginsNameList.count();
-
-    // Check metadata of plugins and create QPluginLoaders. Plugin should contain name and quality in its metadata.
-    // Those with incorrect metadata are skipped.
-    for (const QString &pluginName : pluginsNameList) {
-        auto pluginLoader = std::make_shared<QPluginLoader>();
-        pluginLoader->setFileName(pluginName);
-        const QJsonObject &metaData = pluginLoader->metaData();
-
-        auto metaDataIt = metaData.constFind("MetaData"_L1);
-        if (metaDataIt == metaData.constEnd()) {
-            qCWarning(WEATHER::CONTROLLER) << "WeatherDataMonitor: metaData not found for plugin: " << pluginName;
-            continue;
-        }
-
-        if (!metaDataIt.value().isObject()) {
-            qCWarning(WEATHER::CONTROLLER) << "WeatherDataMonitor: metaData is not valid for plugin: " << pluginName;
-            continue;
-        }
-
-        QJsonObject object = metaDataIt->toObject();
-
-        auto nameIt = object.constFind("name"_L1);
-        if (nameIt == object.constEnd()) {
-            qCWarning(WEATHER::CONTROLLER) << "WeatherDataMonitor: name not found for plugin: " << pluginName;
-            continue;
-        }
-
-        auto qualityIt = object.constFind("quality"_L1);
-        if (qualityIt == object.constEnd()) {
-            qCWarning(WEATHER::CONTROLLER) << "WeatherDataMonitor: quality not found for plugin: " << pluginName;
-            continue;
-        }
-
-        qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: save plugin: " << pluginName;
-
-        PluginInfo pluginInfo;
-        pluginInfo.quality = qualityIt->toInt();
-        pluginInfo.ionLoader = pluginLoader;
-        m_ionLoaders.insert(nameIt->toString(), pluginInfo);
-    }
-
-    qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: total plugins added: " << m_ionLoaders.count();
-
-    m_providers = m_ionLoaders.keys();
 
     qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: initialized";
 }
@@ -117,8 +59,8 @@ QStringList WeatherDataMonitor::getProviders() const
 
 int WeatherDataMonitor::providerQuality(const QString &providerName) const
 {
-    if (auto it = m_ionLoaders.constFind(providerName); it != m_ionLoaders.cend()) {
-        return it->quality;
+    if (auto it = m_ions.constFind(providerName); it != m_ions.cend()) {
+        return it->value(u"quality"_s).toInt();
     }
     return 0;
 }
@@ -128,7 +70,7 @@ std::shared_ptr<LocationsData> WeatherDataMonitor::getLocationData(const QString
     qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: get location request for provider: " << providerName;
 
     // If there is no IonInfo with such name then create a new
-    if (auto it = m_ionControls.find(providerName); it == m_ionControls.end()) {
+    if (auto it = m_ions.find(providerName); it == m_ions.end()) {
         if (!createIonControl(providerName)) {
             qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: can't find provider: " << providerName;
             return nullptr;
@@ -240,12 +182,8 @@ void WeatherDataMonitor::finishRemoving(const QString &providerName)
 
         qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: ion controller is not needed any more. Remove it";
 
-        // If ionInfo isn't used by LocationData and ForecastData then remove it and unload the plugin related to it
+        // If ionInfo isn't used by LocationData and ForecastData then remove it
         m_ionControls.erase(it);
-        if (auto loaderIt = m_ionLoaders.find(providerName); loaderIt != m_ionLoaders.end()) {
-            qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: remove ion controller from provider: " << providerName;
-            loaderIt->ionLoader->unload();
-        }
     }
 }
 
@@ -253,18 +191,20 @@ bool WeatherDataMonitor::createIonControl(const QString &providerName)
 {
     qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: ion control is not exists. Create new";
 
-    auto it = m_ionLoaders.find(providerName);
+    auto it = m_ions.find(providerName);
 
-    if (it == m_ionLoaders.end()) {
+    if (it == m_ions.end()) {
         qCWarning(WEATHER::CONTROLLER) << "WeatherDataMonitor: ion loader " << providerName << " not found";
         return false;
     }
 
-    std::shared_ptr<Ion> ion{qobject_cast<Ion *>(it->ionLoader->instance())};
-    if (!ion) {
+    auto result = KPluginFactory::instantiatePlugin<Ion>(it.value());
+
+    if (!result) {
         qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: failed to retrieve ion";
         return false;
     }
+    std::shared_ptr<Ion> ion(result.plugin);
 
     std::shared_ptr<QThread> workerThread{new QThread()};
 

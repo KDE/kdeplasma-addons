@@ -93,8 +93,6 @@ public:
 class Q_DECL_EXPORT WetterComIon : public Ion
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.weather.ions.wettercom" FILE "metadata.json")
-    Q_INTERFACES(Ion)
 
 public:
     explicit WetterComIon(QObject *parent = nullptr);

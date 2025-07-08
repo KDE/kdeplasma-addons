@@ -21,6 +21,7 @@
 
 #include <KIO/TransferJob>
 #include <KLocalizedString>
+#include <KPluginFactory>
 #include <KUnitConversion/Converter>
 
 #include <QDateTime>
@@ -29,6 +30,8 @@
 #include <QJsonObject>
 #include <QLocale>
 #include <QVariant>
+
+K_PLUGIN_CLASS_WITH_JSON(DWDIon, "metadata.json")
 
 using namespace Qt::StringLiterals;
 
@@ -656,4 +659,5 @@ bool DWDIon::isNightTime(const WeatherData &weatherData) const
     return weatherData.observationDateTime < weatherData.sunriseTime || weatherData.observationDateTime > weatherData.sunsetTime;
 }
 
+#include "ion_dwd.moc"
 #include "moc_ion_dwd.cpp"

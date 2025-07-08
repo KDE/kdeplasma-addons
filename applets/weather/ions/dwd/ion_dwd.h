@@ -83,11 +83,11 @@ public:
     bool isMeasureDataPending = false;
 };
 
-class Q_DECL_EXPORT DWDIon : public Ion
+class /*Q_DECL_EXPORT*/ DWDIon : public Ion
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.weather.ions.dwd" FILE "metadata.json")
-    Q_INTERFACES(Ion)
+    // Q_PLUGIN_METADATA(IID "org.kde.weather.ions.dwd" FILE "metadata.json")
+    // Q_INTERFACES(Ion)
 
 public:
     explicit DWDIon(QObject *parent = nullptr);

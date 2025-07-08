@@ -72,11 +72,9 @@ public:
     QList<ForecastInfo> forecasts;
 };
 
-class Q_DECL_EXPORT UKMETIon : public Ion
+class UKMETIon : public Ion
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.weather.ions.bbcukmet" FILE "metadata.json")
-    Q_INTERFACES(Ion)
 
 public:
     explicit UKMETIon(QObject *parent = nullptr);

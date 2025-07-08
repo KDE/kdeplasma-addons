@@ -13,6 +13,7 @@
 
 #include <KIO/TransferJob>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 #include <QFile>
 #include <QJsonArray>
@@ -20,6 +21,8 @@
 #include <QLocale>
 #include <QStandardPaths>
 #include <QTimeZone>
+
+K_PLUGIN_CLASS_WITH_JSON(NOAAIon, "metadata.json")
 
 using namespace Qt::StringLiterals;
 using namespace KUnitConversion;
@@ -1188,4 +1191,5 @@ void NOAAIon::readAlerts(KJob *job, const QByteArray &data)
     }
 }
 
+#include "ion_noaa.moc"
 #include "moc_ion_noaa.cpp"

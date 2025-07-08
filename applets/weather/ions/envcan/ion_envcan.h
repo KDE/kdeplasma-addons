@@ -137,11 +137,9 @@ public:
 /**
  * https://weather.gc.ca/mainmenu/disclaimer_e.html
  */
-class Q_DECL_EXPORT EnvCanadaIon : public Ion
+class EnvCanadaIon : public Ion
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.weather.ions.envcan" FILE "metadata.json")
-    Q_INTERFACES(Ion)
 
 public:
     explicit EnvCanadaIon(QObject *parent = nullptr);
