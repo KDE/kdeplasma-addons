@@ -32,7 +32,7 @@ KWin.TabBoxSwitcher {
         y: tabBox.screenGeometry.y
         width: tabBox.screenGeometry.width
         height: tabBox.screenGeometry.height
-        flags: Qt.BypassWindowManagerHint | Qt.FramelessWindowHint
+        flags: Qt.Popup | Qt.BypassWindowManagerHint | Qt.FramelessWindowHint
         visibility: Window.FullScreen
         // Workaround QTBUG-35244. Do not directly assign here to avoid warning
         visible: true
