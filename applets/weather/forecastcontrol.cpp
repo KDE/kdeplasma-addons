@@ -79,7 +79,7 @@ QBindable<ForecastControl::Status> ForecastControl::bindableStatus()
 void ForecastControl::onWeatherDataUpdated()
 {
     qCDebug(WEATHER::CONTROLLER) << "ForecastControl: weatherDataUpdated signal received";
-    if (m_forecastData->forecast()->isError()) {
+    if (!m_forecastData->forecast() || m_forecastData->forecast()->isError()) {
         qCDebug(WEATHER::CONTROLLER) << "ForecastControl: forecast data didn't updated due to error";
         m_status = Timeout;
         Q_EMIT forecastChanged();
