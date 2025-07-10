@@ -29,7 +29,7 @@ ForecastControl::ForecastControl(QObject *parent)
 
 QVariant ForecastControl::getForecast()
 {
-    if (m_forecastData) {
+    if (m_forecastData && m_forecastData->forecast()) {
         return QVariant::fromValue(*m_forecastData->forecast());
     }
     return {};
