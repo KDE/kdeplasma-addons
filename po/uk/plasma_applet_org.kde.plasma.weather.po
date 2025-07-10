@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-09 00:44+0000\n"
-"PO-Revision-Date: 2025-04-26 15:46+0300\n"
+"PO-Revision-Date: 2025-07-09 09:35+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -24,26 +24,20 @@ msgstr ""
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
-msgstr ""
+msgstr "Дані від BBC Weather"
 
 #: ions/bbcukmet/ion_bbcukmet.cpp:704 ions/envcan/ion_envcan.cpp:1573
-#, fuzzy, kde-format
-#| msgctxt "pressure tendency"
-#| msgid "Rising"
+#, kde-format
 msgid "Rising"
 msgstr "Піднімається"
 
 #: ions/bbcukmet/ion_bbcukmet.cpp:706 ions/envcan/ion_envcan.cpp:1575
-#, fuzzy, kde-format
-#| msgctxt "pressure tendency"
-#| msgid "Falling"
+#, kde-format
 msgid "Falling"
 msgstr "Падає"
 
 #: ions/bbcukmet/ion_bbcukmet.cpp:708 ions/envcan/ion_envcan.cpp:1577
-#, fuzzy, kde-format
-#| msgctxt "pressure tendency"
-#| msgid "Steady"
+#, kde-format
 msgid "Steady"
 msgstr "Незмінний"
 
@@ -51,69 +45,66 @@ msgstr "Незмінний"
 #, kde-format
 msgctxt "Short for Today"
 msgid "Today"
-msgstr ""
+msgstr "Сьогодні"
 
 #: ions/bbcukmet/ion_bbcukmet.cpp:729
-#, fuzzy, kde-format
-#| msgctxt "Time of the day (from the duple Day/Night)"
-#| msgid "Night"
+#, kde-format
 msgctxt "Short for Tonight"
 msgid "Tonight"
-msgstr "Ніч"
+msgstr "Ввечері"
 
 #: ions/dwd/ion_dwd.cpp:453
-#, fuzzy, kde-format
-#| msgid "Weather providers:"
+#, kde-format
 msgid "German Weather Service"
-msgstr "Надавачі даних про погоду:"
+msgstr "Німецька служба погоди"
 
 #: ions/dwd/ion_dwd.cpp:484
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
-msgstr ""
+msgstr "Джерело: Deutscher Wetterdienst"
 
 #: ions/dwd/ion_dwd.cpp:550 ions/envcan/ion_envcan.cpp:1456
 #, kde-format
 msgctxt "Short for Saturday"
 msgid "Sat"
-msgstr ""
+msgstr "Сб"
 
 #: ions/dwd/ion_dwd.cpp:551 ions/envcan/ion_envcan.cpp:1457
 #, kde-format
 msgctxt "Short for Sunday"
 msgid "Sun"
-msgstr ""
+msgstr "Нд"
 
 #: ions/dwd/ion_dwd.cpp:552 ions/envcan/ion_envcan.cpp:1458
 #, kde-format
 msgctxt "Short for Monday"
 msgid "Mon"
-msgstr ""
+msgstr "Пн"
 
 #: ions/dwd/ion_dwd.cpp:553 ions/envcan/ion_envcan.cpp:1459
 #, kde-format
 msgctxt "Short for Tuesday"
 msgid "Tue"
-msgstr ""
+msgstr "Вт"
 
 #: ions/dwd/ion_dwd.cpp:554 ions/envcan/ion_envcan.cpp:1460
 #, kde-format
 msgctxt "Short for Wednesday"
 msgid "Wed"
-msgstr ""
+msgstr "Ср"
 
 #: ions/dwd/ion_dwd.cpp:555 ions/envcan/ion_envcan.cpp:1461
 #, kde-format
 msgctxt "Short for Thursday"
 msgid "Thu"
-msgstr ""
+msgstr "Чт"
 
 #: ions/dwd/ion_dwd.cpp:556 ions/envcan/ion_envcan.cpp:1462
 #, kde-format
 msgctxt "Short for Friday"
 msgid "Fri"
-msgstr ""
+msgstr "Пт"
 
 #: ions/envcan/ion_envcan.cpp:971 ions/envcan/ion_envcan.cpp:973
 #: ions/envcan/ion_envcan.cpp:1448 ions/envcan/ion_envcan.cpp:1470
@@ -125,19 +116,19 @@ msgstr "н/д"
 #: ions/envcan/ion_envcan.cpp:1452
 #, kde-format
 msgid "Today"
-msgstr ""
+msgstr "Сьогодні"
 
 #: ions/envcan/ion_envcan.cpp:1497
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from Environment and Climate Change Canada"
-msgstr ""
+msgstr "Дані від Environment and Climate Change Канада"
 
 #: ions/noaa/ion_noaa.cpp:428
 #, kde-format
 msgctxt "credit line, keep string short)"
 msgid "Data from NOAA National Weather Service"
-msgstr ""
+msgstr "Дані від NOAA National Weather Service"
 
 #. i18n: The forecast summary can include several single conditions that follow
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
@@ -148,237 +139,231 @@ msgctxt ""
 "Separator between forecast conditions that follow a temporal sequence (ex. "
 "\"Rain then Sunny\")"
 msgid " then "
-msgstr ""
+msgstr " тоді "
 
 #: ions/wetter.com/ion_wettercom.cpp:130 ions/wetter.com/ion_wettercom.cpp:131
 #, kde-format
 msgctxt "weather condition"
 msgid "few clouds"
-msgstr ""
+msgstr "легка хмарність"
 
 #: ions/wetter.com/ion_wettercom.cpp:132 ions/wetter.com/ion_wettercom.cpp:133
 #, kde-format
 msgctxt "weather condition"
 msgid "cloudy"
-msgstr ""
+msgstr "хмарно"
 
 #: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "weather condition"
 msgid "overcast"
-msgstr "Прогноз"
+msgstr "суцільна хмарність"
 
 #: ions/wetter.com/ion_wettercom.cpp:136 ions/wetter.com/ion_wettercom.cpp:137
 #: ions/wetter.com/ion_wettercom.cpp:138
 #, kde-format
 msgctxt "weather condition"
 msgid "haze"
-msgstr ""
+msgstr "імла"
 
 #: ions/wetter.com/ion_wettercom.cpp:139 ions/wetter.com/ion_wettercom.cpp:140
 #, kde-format
 msgctxt "weather condition"
 msgid "fog with icing"
-msgstr ""
+msgstr "туман з кристалами льоду"
 
 #: ions/wetter.com/ion_wettercom.cpp:141 ions/wetter.com/ion_wettercom.cpp:142
 #: ions/wetter.com/ion_wettercom.cpp:144
 #, kde-format
 msgctxt "weather condition"
 msgid "drizzle"
-msgstr ""
+msgstr "мряка"
 
 #: ions/wetter.com/ion_wettercom.cpp:143
 #, kde-format
 msgctxt "weather condition"
 msgid "light drizzle"
-msgstr ""
+msgstr "незначна мряка"
 
 #: ions/wetter.com/ion_wettercom.cpp:145
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy drizzle"
-msgstr ""
+msgstr "сильна мряка"
 
 #: ions/wetter.com/ion_wettercom.cpp:146
 #, kde-format
 msgctxt "weather condition"
 msgid "freezing drizzle"
-msgstr ""
+msgstr "дрібна льодяна мряка"
 
 #: ions/wetter.com/ion_wettercom.cpp:147
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy freezing drizzle"
-msgstr ""
+msgstr "сильна льодяна мряка"
 
 #: ions/wetter.com/ion_wettercom.cpp:148
 #, kde-format
 msgctxt "weather condition"
 msgid "rain"
-msgstr ""
+msgstr "дощ"
 
 #: ions/wetter.com/ion_wettercom.cpp:149 ions/wetter.com/ion_wettercom.cpp:150
 #, kde-format
 msgctxt "weather condition"
 msgid "light rain"
-msgstr ""
+msgstr "легкий дощ"
 
 #: ions/wetter.com/ion_wettercom.cpp:151
 #, kde-format
 msgctxt "weather condition"
 msgid "moderate rain"
-msgstr ""
+msgstr "помірний дощ"
 
 #: ions/wetter.com/ion_wettercom.cpp:152
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain"
-msgstr ""
+msgstr "сильний дощ"
 
 #: ions/wetter.com/ion_wettercom.cpp:153
 #, kde-format
 msgctxt "weather condition"
 msgid "light freezing rain"
-msgstr ""
+msgstr "незначний льодяний дощ"
 
 #: ions/wetter.com/ion_wettercom.cpp:154
 #, kde-format
 msgctxt "weather condition"
 msgid "freezing rain"
-msgstr ""
+msgstr "льодяний дощ"
 
 #: ions/wetter.com/ion_wettercom.cpp:155
 #, kde-format
 msgctxt "weather condition"
 msgid "light rain snow"
-msgstr ""
+msgstr "незначний дощ, сніг"
 
 #: ions/wetter.com/ion_wettercom.cpp:156
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain snow"
-msgstr ""
+msgstr "сильний дощ, сніг"
 
 #: ions/wetter.com/ion_wettercom.cpp:157
 #, kde-format
 msgctxt "weather condition"
 msgid "snow"
-msgstr ""
+msgstr "сніг"
 
 #: ions/wetter.com/ion_wettercom.cpp:158 ions/wetter.com/ion_wettercom.cpp:159
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow"
-msgstr ""
+msgstr "легкий сніг"
 
 #: ions/wetter.com/ion_wettercom.cpp:160
 #, kde-format
 msgctxt "weather condition"
 msgid "moderate snow"
-msgstr ""
+msgstr "помірний сніг"
 
 #: ions/wetter.com/ion_wettercom.cpp:161
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow"
-msgstr ""
+msgstr "сильний сніг"
 
 #: ions/wetter.com/ion_wettercom.cpp:162 ions/wetter.com/ion_wettercom.cpp:164
 #, kde-format
 msgctxt "weather condition"
 msgid "showers"
-msgstr ""
+msgstr "зливи"
 
 #: ions/wetter.com/ion_wettercom.cpp:163
 #, kde-format
 msgctxt "weather condition"
 msgid "light showers"
-msgstr ""
+msgstr "легкі зливи"
 
 #: ions/wetter.com/ion_wettercom.cpp:165
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy showers"
-msgstr ""
+msgstr "сильні зливи"
 
 #: ions/wetter.com/ion_wettercom.cpp:166
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow rain showers"
-msgstr ""
+msgstr "легкий снігопад з дощем"
 
 #: ions/wetter.com/ion_wettercom.cpp:167
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow rain showers"
-msgstr ""
+msgstr "сильний снігопад з дощем"
 
 #: ions/wetter.com/ion_wettercom.cpp:168
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow showers"
-msgstr ""
+msgstr "легкі снігопади"
 
 #: ions/wetter.com/ion_wettercom.cpp:169
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show temperature:"
-#| msgid "Do not show"
+#, kde-format
 msgctxt "weather condition"
 msgid "snow showers"
-msgstr "Не показувати"
+msgstr "снігопад"
 
 #: ions/wetter.com/ion_wettercom.cpp:170 ions/wetter.com/ion_wettercom.cpp:171
 #, kde-format
 msgctxt "weather condition"
 msgid "thunderstorm"
-msgstr ""
+msgstr "гроза"
 
 #: ions/wetter.com/ion_wettercom.cpp:172
 #, kde-format
 msgctxt "weather condition"
 msgid "light thunderstorm"
-msgstr ""
+msgstr "незначна грозова злива"
 
 #: ions/wetter.com/ion_wettercom.cpp:173
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy thunderstorm"
-msgstr ""
+msgstr "значна грозова злива"
 
 #: ions/wetter.com/ion_wettercom.cpp:174
 #, kde-format
 msgctxt "weather condition"
 msgid "n/a"
-msgstr ""
+msgstr "н/д"
 
 #: ions/wetter.com/ion_wettercom.cpp:181
 #, kde-format
 msgctxt "weather condition"
 msgid "sunny"
-msgstr ""
+msgstr "сонячно"
 
 #: ions/wetter.com/ion_wettercom.cpp:194
 #, kde-format
 msgctxt "weather condition"
 msgid "clear sky"
-msgstr ""
+msgstr "безхмарно"
 
 #: ions/wetter.com/ion_wettercom.cpp:307
 #, kde-format
 msgctxt "Geographical location: city, state, ISO-country-code"
 msgid "%1, %2, %3"
-msgstr ""
+msgstr "%1, %2, %3"
 
 #: ions/wetter.com/ion_wettercom.cpp:309
-#, fuzzy, kde-format
-#| msgctxt "A weather station location and the weather service it comes from"
-#| msgid "%1 (%2)"
+#, kde-format
 msgctxt "Geographical location: quarter (city), state, ISO-country-code"
 msgid "%1 (%2), %3, %4"
-msgstr "%1 (%2)"
+msgstr "%1 (%2), %3, %4"
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -597,10 +582,9 @@ msgid "Unable to retrieve weather information for %1"
 msgstr "Не вдалося отримати дані щодо погоди для %1"
 
 #: qml/FullRepresentation.qml:67
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgid "Unable to retrieve weather information"
-msgstr "Не вдалося отримати дані щодо погоди для %1"
+msgstr "Не вдалося отримати дані щодо погоди"
 
 #: qml/FullRepresentation.qml:68
 #, kde-format
@@ -795,45 +779,39 @@ msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
 #: weatherdata/futuredays.cpp:82
-#, fuzzy, kde-format
-#| msgctxt "Time of the day (from the duple Day/Night)"
-#| msgid "Day"
+#, kde-format
 msgid "Day"
 msgstr "День"
 
 #: weatherdata/futuredays.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "Time of the day (from the duple Day/Night)"
-#| msgid "Night"
+#, kde-format
 msgid "Night"
 msgstr "Ніч"
 
 #: weatherdata/lastobservation.cpp:262
 #, kde-format
 msgid "Low"
-msgstr ""
+msgstr "Низька"
 
 #: weatherdata/lastobservation.cpp:264
 #, kde-format
 msgid "Moderate"
-msgstr ""
+msgstr "Середня"
 
 #: weatherdata/lastobservation.cpp:266
-#, fuzzy, kde-format
-#| msgctxt "High temperature"
-#| msgid "High: %1"
+#, kde-format
 msgid "High"
-msgstr "Висока: %1"
+msgstr "Висока"
 
 #: weatherdata/lastobservation.cpp:268
 #, kde-format
 msgid "Very high"
-msgstr ""
+msgstr "Дуже висока"
 
 #: weatherdata/lastobservation.cpp:270
 #, kde-format
 msgid "Extreme"
-msgstr ""
+msgstr "Екстремальна"
 
 #~ msgctxt "wind direction"
 #~ msgid "N"
