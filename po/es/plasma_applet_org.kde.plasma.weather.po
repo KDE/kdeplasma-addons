@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-12 02:39+0000\n"
-"PO-Revision-Date: 2025-05-13 21:12+0100\n"
+"PO-Revision-Date: 2025-07-09 04:56+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -346,7 +346,7 @@ msgstr "Definir ubicación…"
 #: package/contents/ui/FullRepresentation.qml:57
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
-msgstr "No se puede obtener información meteorológica para %1"
+msgstr "No se puede obtener la información meteorológica para %1"
 
 #: package/contents/ui/FullRepresentation.qml:59
 #, kde-format
