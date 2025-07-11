@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-09 00:44+0000\n"
-"PO-Revision-Date: 2025-07-09 04:56+0100\n"
+"PO-Revision-Date: 2025-07-10 05:02+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -144,13 +144,13 @@ msgstr ""
 #, kde-format
 msgctxt "weather condition"
 msgid "few clouds"
-msgstr ""
+msgstr "poco nuboso"
 
 #: ions/wetter.com/ion_wettercom.cpp:132 ions/wetter.com/ion_wettercom.cpp:133
 #, kde-format
 msgctxt "weather condition"
 msgid "cloudy"
-msgstr "nublado"
+msgstr "nuboso"
 
 #: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
 #, kde-format
@@ -787,24 +787,24 @@ msgstr "Noche"
 #: weatherdata/lastobservation.cpp:262
 #, kde-format
 msgid "Low"
-msgstr ""
+msgstr "Bajo"
 
 #: weatherdata/lastobservation.cpp:264
 #, kde-format
 msgid "Moderate"
-msgstr ""
+msgstr "Moderado"
 
 #: weatherdata/lastobservation.cpp:266
 #, kde-format
 msgid "High"
-msgstr ""
+msgstr "Alto"
 
 #: weatherdata/lastobservation.cpp:268
 #, kde-format
 msgid "Very high"
-msgstr ""
+msgstr "Muy alto"
 
 #: weatherdata/lastobservation.cpp:270
 #, kde-format
 msgid "Extreme"
-msgstr ""
+msgstr "Extremadamente alto"
