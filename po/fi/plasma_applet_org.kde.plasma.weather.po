@@ -118,7 +118,8 @@ msgstr ""
 #: ions/envcan/ion_envcan.cpp:971 ions/envcan/ion_envcan.cpp:973
 #: ions/envcan/ion_envcan.cpp:1448 ions/envcan/ion_envcan.cpp:1470
 #: ions/envcan/ion_envcan.cpp:1521 ions/noaa/ion_noaa.cpp:443
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "N/A"
 msgid "N/A"
 msgstr "–"
 
