@@ -119,7 +119,7 @@ msgstr ""
 #: ions/envcan/ion_envcan.cpp:1521 ions/noaa/ion_noaa.cpp:443
 #, kde-format
 msgid "N/A"
-msgstr ""
+msgstr "–"
 
 #: ions/envcan/ion_envcan.cpp:1452
 #, kde-format
@@ -824,81 +824,3 @@ msgstr ""
 #, kde-format
 msgid "Extreme"
 msgstr ""
-
-#~ msgctxt "wind direction"
-#~ msgid "N"
-#~ msgstr "N"
-
-#~ msgctxt "wind direction"
-#~ msgid "NNE"
-#~ msgstr "NNA"
-
-#~ msgctxt "wind direction"
-#~ msgid "NE"
-#~ msgstr "NA"
-
-#~ msgctxt "wind direction"
-#~ msgid "ENE"
-#~ msgstr "ANA"
-
-#~ msgctxt "wind direction"
-#~ msgid "E"
-#~ msgstr "A"
-
-#~ msgctxt "wind direction"
-#~ msgid "SSE"
-#~ msgstr "SSA"
-
-#~ msgctxt "wind direction"
-#~ msgid "SE"
-#~ msgstr "SA"
-
-#~ msgctxt "wind direction"
-#~ msgid "ESE"
-#~ msgstr "ASA"
-
-#~ msgctxt "wind direction"
-#~ msgid "S"
-#~ msgstr "S"
-
-#~ msgctxt "wind direction"
-#~ msgid "NNW"
-#~ msgstr "NNV"
-
-#~ msgctxt "wind direction"
-#~ msgid "NW"
-#~ msgstr "NV"
-
-#~ msgctxt "wind direction"
-#~ msgid "WNW"
-#~ msgstr "VNV"
-
-#~ msgctxt "wind direction"
-#~ msgid "W"
-#~ msgstr "V"
-
-#~ msgctxt "wind direction"
-#~ msgid "SSW"
-#~ msgstr "SSV"
-
-#~ msgctxt "wind direction"
-#~ msgid "SW"
-#~ msgstr "SV"
-
-#~ msgctxt "wind direction"
-#~ msgid "WSW"
-#~ msgstr "VSV"
-
-#~ msgctxt "wind direction"
-#~ msgid "VR"
-#~ msgstr "var."
-
-#~ msgctxt "wind speed"
-#~ msgid "Calm"
-#~ msgstr "Stille"
-
-#~ msgid "Cannot find '%1' using %2."
-#~ msgstr "Fann ikkje «%1» ved bruk av %2."
-
-#~ msgid "Connection to %1 weather server timed out."
-#~ msgstr "Tidsavbrot ved kopling til vêrtenaren %1."
