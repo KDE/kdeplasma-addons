@@ -50,7 +50,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
-msgstr "ფერის ნაგულისხმები ფორმატი:"
+msgstr "ფერის ნაგულისხმევი ფორმატი:"
 
 #: package/contents/ui/configGeneral.qml:33
 #, kde-format
