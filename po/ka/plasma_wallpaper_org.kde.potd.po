@@ -183,7 +183,7 @@ msgstr "ბმულის ბრაუზერში გახსნა…"
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
-msgstr "დღის სურათის ბმულის ნაგულისხმებ ბრაუზერში გახსნა"
+msgstr "დღის სურათის ბმულის ნაგულისხმევ ბრაუზერში გახსნა"
 
 #: plugins/potdbackend.cpp:213
 #, kde-format

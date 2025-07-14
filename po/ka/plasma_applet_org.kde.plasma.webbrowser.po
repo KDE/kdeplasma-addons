@@ -80,7 +80,7 @@ msgstr "აირჩიეთ ვებ-ბრაუზერის ხატუ
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
-msgstr "ნაგულისხმებ ხატულაზე დაბრუნება"
+msgstr "ნაგულისხმევ ხატულაზე დაბრუნება"
 
 #: package/contents/ui/ConfigAppearance.qml:118
 #, kde-format

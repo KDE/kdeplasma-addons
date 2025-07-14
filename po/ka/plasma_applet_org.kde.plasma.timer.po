@@ -208,7 +208,7 @@ msgstr "&გაჩერება"
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"
-msgstr "&საწყისი მნიშვნელობებზე დაბრუნება"
+msgstr "ჩამოყ&რა"
 
 #~ msgid "Timer is running"
 #~ msgstr "წამმზომი გაშვებულია"
