@@ -8,7 +8,15 @@
 
 #include "weathercontroller_debug.h"
 
+#include <QDBusConnection>
+#include <QDBusConnectionInterface>
+
 #include "weatherdatamonitor_p.h"
+
+using namespace Qt::StringLiterals;
+
+inline constexpr QLatin1StringView LOGIN1_SERVICE("org.freedesktop.login1");
+inline constexpr QLatin1StringView CONSOLEKIT2_SERVICE("org.freedesktop.ConsoleKit");
 
 // Constructor
 ForecastControl::ForecastControl(QObject *parent)
@@ -21,6 +29,28 @@ ForecastControl::ForecastControl(QObject *parent)
         qCDebug(WEATHER::CONTROLLER) << "ForecastControl: UpdateTimer: start updating forecast info";
         updateForecastInfo();
     });
+
+    if (QDBusConnection::systemBus().interface()->isServiceRegistered(LOGIN1_SERVICE)) {
+        m_login1Interface = std::make_unique<QDBusInterface>(LOGIN1_SERVICE,
+                                                             u"/org/freedesktop/login1"_s,
+                                                             u"org.freedesktop.login1.Manager"_s,
+                                                             QDBusConnection::systemBus(),
+                                                             this);
+    }
+
+    // if login1 isn't available, try using the same interface with ConsoleKit2
+    if (!m_login1Interface && QDBusConnection::systemBus().interface()->isServiceRegistered(CONSOLEKIT2_SERVICE)) {
+        m_login1Interface = std::make_unique<QDBusInterface>(CONSOLEKIT2_SERVICE,
+                                                             u"/org/freedesktop/ConsoleKit/Manager"_s,
+                                                             u"org.freedesktop.ConsoleKit.Manager"_s,
+                                                             QDBusConnection::systemBus(),
+                                                             this);
+    }
+
+    // "resuming" signal. Used to update the forecast if it is outdated when system wakes up from sleep
+    if (m_login1Interface) {
+        connect(m_login1Interface.get(), SIGNAL(PrepareForSleep(bool)), this, SLOT(onSleepStateChanged(bool)));
+    }
 
     qCDebug(WEATHER::CONTROLLER) << "ForecastControl: get instance of WeatherDataMonitor";
     m_weatherDataMonitor = WeatherDataMonitor::instance();
@@ -60,6 +90,16 @@ void ForecastControl::onWeatherDataUpdated()
     Q_EMIT forecastChanged();
 
     qCDebug(WEATHER::CONTROLLER) << "ForecastControl: weatherDataUpdated successfully updated";
+}
+
+void ForecastControl::onSleepStateChanged(bool active)
+{
+    qCDebug(WEATHER::CONTROLLER) << "ForecastControl: sleepStateChanged signal received";
+    if (!active && m_forecastData) {
+        qCDebug(WEATHER::CONTROLLER) << "ForecastControl: try to update forecast";
+        updateForecastInfo();
+        m_updateTimer->start();
+    }
 }
 
 void ForecastControl::setUpdateInterval(int minutes)

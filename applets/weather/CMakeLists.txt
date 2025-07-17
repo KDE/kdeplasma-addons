@@ -52,6 +52,7 @@ target_link_libraries(org.kde.plasma.weather PRIVATE
     KF6::UnitConversion
     KF6::I18n
     Qt::Core
+    Qt::DBus
     Qt::Qml
     Qt::Network
     Qt::Gui

@@ -8,6 +8,7 @@
 
 #include <QObject>
 
+#include <QDBusInterface>
 #include <QHash>
 #include <QObjectBindableProperty>
 #include <QTimer>
@@ -86,6 +87,7 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void onWeatherDataUpdated();
+    void onSleepStateChanged(bool active);
 
 private:
     QTimer *m_updateTimer;
@@ -93,6 +95,8 @@ private:
     std::shared_ptr<ForecastData> m_forecastData;
 
     std::shared_ptr<WeatherDataMonitor> m_weatherDataMonitor;
+
+    std::unique_ptr<QDBusInterface> m_login1Interface;
 
     Q_OBJECT_BINDABLE_PROPERTY_WITH_ARGS(ForecastControl, Status, m_status, NeedsConfiguration, &ForecastControl::statusChanged);
 };
