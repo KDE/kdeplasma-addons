@@ -10,10 +10,12 @@
 #include <QObject>
 #include <QUrl>
 #include <QVariantMap>
+#include <qqmlregistration.h>
 
 class QuicklaunchPrivate : public QObject
 {
     Q_OBJECT
+    QML_NAMED_ELEMENT(Logic)
 
 public:
     explicit QuicklaunchPrivate(QObject *parent = nullptr);
