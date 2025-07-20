@@ -14,6 +14,8 @@ import org.kde.kirigami 2.20 as Kirigami
 import org.kde.kcmutils as KCM
 
 KCM.SimpleKCM {
+    id: root
+
     readonly property bool vertical: Plasmoid.formFactor == PlasmaCore.Types.Vertical || (Plasmoid.formFactor == PlasmaCore.Types.Planar && Plasmoid.height > Plasmoid.width)
 
     property alias cfg_maxSectionCount: maxSectionCount.value
@@ -25,7 +27,7 @@ KCM.SimpleKCM {
         QQC2.SpinBox {
             id: maxSectionCount
 
-            Kirigami.FormData.label: vertical ? i18nc("@label:spinbox", "Maximum columns:") : i18nc("@label:spinbox", "Maximum rows:")
+            Kirigami.FormData.label: root.vertical ? i18nc("@label:spinbox", "Maximum columns:") : i18nc("@label:spinbox", "Maximum rows:")
 
             from: 1
         }

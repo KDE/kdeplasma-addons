@@ -3,6 +3,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick 2.2
 import QtQuick.Layouts 1.0
@@ -44,7 +45,7 @@ PlasmoidItem {
 
             onDragEnter: event => {
                 if (event.mimeData.hasUrls) {
-                    dragging = true;
+                    root.dragging = true;
                 } else {
                     event.ignore();
                 }
@@ -53,7 +54,7 @@ PlasmoidItem {
             onDragMove: event => {
                 var index = grid.indexAt(event.x, event.y);
 
-                if (isInternalDrop(event)) {
+                if (root.isInternalDrop(event)) {
                     launcherModel.moveUrl(event.mimeData.source.itemIndex, index);
                 } else {
                     launcherModel.showDropMarker(index);
@@ -63,17 +64,17 @@ PlasmoidItem {
             }
 
             onDragLeave: {
-                dragging = false;
+                root.dragging = false;
                 launcherModel.clearDropMarker();
             }
 
             onDrop: event => {
-                dragging = false;
+                root.dragging = false;
                 launcherModel.clearDropMarker();
 
-                if (isInternalDrop(event)) {
+                if (root.isInternalDrop(event)) {
                     event.accept(Qt.IgnoreAction);
-                    saveConfiguration();
+                    root.saveConfiguration();
                 } else {
                     var index = grid.indexAt(event.x, event.y);
                     launcherModel.insertUrls(index == -1 ? launcherModel.count : index, event.mimeData.urls);
@@ -95,7 +96,7 @@ PlasmoidItem {
             horizontalAlignment: Text.AlignHCenter
             verticalAlignment: Text.AlignTop
             elide: Text.ElideMiddle
-            text: title
+            text: root.title
             textFormat: Text.PlainText
         }
 
@@ -103,17 +104,17 @@ PlasmoidItem {
             id: launcher
 
             anchors {
-                top: title.length ? titleLabel.bottom : parent.top
+                top: root.title.length ? titleLabel.bottom : parent.top
                 left: parent.left
-                right: !vertical && popupArrow.visible ? popupArrow.left : parent.right
-                bottom: vertical && popupArrow.visible ? popupArrow.top : parent.bottom
+                right: !root.vertical && popupArrow.visible ? popupArrow.left : parent.right
+                bottom: root.vertical && popupArrow.visible ? popupArrow.top : parent.bottom
             }
 
             GridView {
                 id: grid
                 anchors.fill: parent
                 interactive: false
-                flow: horizontal ? GridView.FlowTopToBottom : GridView.FlowLeftToRight
+                flow: root.horizontal ? GridView.FlowTopToBottom : GridView.FlowLeftToRight
                 cellWidth: LayoutManager.preferredCellWidth()
                 cellHeight: LayoutManager.preferredCellHeight()
                 visible: count
@@ -122,7 +123,12 @@ PlasmoidItem {
                     id: launcherModel
                 }
 
-                delegate: IconItem { }
+                delegate: IconItem {
+                    logic: logic
+                    grid: grid
+                    popupModel: null
+                    launcherModel: launcherModel
+                }
 
                 function moveItemToPopup(iconItem, url) {
                     if (!popupArrow.visible) {
@@ -157,20 +163,21 @@ PlasmoidItem {
             flags: Qt.WindowStaysOnTopHint
             hideOnWindowDeactivate: true
             location: Plasmoid.location
-            visualParent: vertical ? popupArrow : root
+            visualParent: root.vertical ? popupArrow : root
 
             mainItem: Popup {
                 Keys.onEscapePressed: popup.visible = false
+                launcherModel: launcherModel
             }
         }
 
         PlasmaCore.ToolTipArea {
             id: popupArrow
-            visible: enablePopup
+            visible: root.enablePopup
             location: Plasmoid.location
 
             anchors {
-                top: vertical ? undefined : parent.top
+                top: root.vertical ? undefined : parent.top
                 right: parent.right
                 bottom: parent.bottom
             }
@@ -217,7 +224,7 @@ PlasmoidItem {
                             return "arrow-right";
                         } else if (Plasmoid.location == PlasmaCore.Types.RightEdge) {
                             return "arrow-left";
-                        } else if (vertical) {
+                        } else if (root.vertical) {
                             return "arrow-right";
                         } else {
                             return "arrow-up";
@@ -246,7 +253,7 @@ PlasmoidItem {
     states: [
         State {
             name: "normal"
-            when: !vertical
+            when: !root.vertical
 
             PropertyChanges {
                 target: popupArrow
@@ -257,7 +264,7 @@ PlasmoidItem {
 
         State {
             name: "vertical"
-            when: vertical
+            when: root.vertical
 
             PropertyChanges {
                 target: popupArrow
@@ -270,9 +277,9 @@ PlasmoidItem {
     Connections {
         target: Plasmoid.configuration
        function onLauncherUrlsChanged() {
-            launcherModel.urlsChanged.disconnect(saveConfiguration);
+            launcherModel.urlsChanged.disconnect(root.saveConfiguration);
             launcherModel.setUrls(Plasmoid.configuration.launcherUrls);
-            launcherModel.urlsChanged.connect(saveConfiguration);
+            launcherModel.urlsChanged.connect(root.saveConfiguration);
         }
     }
 
