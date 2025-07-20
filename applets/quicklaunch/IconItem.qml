@@ -12,11 +12,19 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.plasmoid 2.0
 import org.kde.draganddrop 2.0 as DragAndDrop
 import org.kde.plasma.extras 2.0 as PlasmaExtras
+import plasma.applet.org.kde.plasma.quicklaunch
 
 import "layout.js" as LayoutManager
 
 Item {
     id: iconItem
+
+    required property url url
+    required property int index
+    required property Logic logic
+    required property GridView grid
+    required property UrlModel popupModel
+    required property UrlModel launcherModel
 
     readonly property int itemIndex : index
     property bool dragging : false
@@ -27,7 +35,7 @@ Item {
     width: isPopupItem ? LayoutManager.popupItemWidth() : grid.cellWidth
     height: isPopupItem ? LayoutManager.popupItemHeight() : grid.cellHeight
 
-    Keys.onPressed: {
+    Keys.onPressed: event => {
         switch (event.key) {
         case Qt.Key_Space:
         case Qt.Key_Enter:
@@ -149,19 +157,19 @@ Item {
         delegate: icon
 
         mimeData {
-            url: url
+            url: iconItem.url
             source: iconItem
         }
 
         onDragStarted: {
-            dragging = true;
+            iconItem.dragging = true;
         }
 
         onDrop: {
-            dragging = false;
+            iconItem.dragging = false;
 
             if (action == Qt.MoveAction) {
-                removeLauncher();
+                iconItem.removeLauncher();
             }
         }
 
@@ -198,7 +206,7 @@ Item {
 
             onClicked: {
                 if (mouse.button == Qt.LeftButton) {
-                    logic.openUrl(url)
+                    iconItem.logic.openUrl(iconItem.url)
                 }
             }
 
@@ -212,7 +220,7 @@ Item {
 
                 width: Kirigami.Units.iconSizes.medium
                 height: width
-                source: url == "quicklaunch:drop" ? "" : iconName
+                source: iconItem.url == "quicklaunch:drop" ? "" : iconItem.iconName
                 active: mouseArea.containsMouse
             }
 
@@ -234,15 +242,15 @@ Item {
                 anchors.fill: parent
                 imagePath: "widgets/viewitem"
                 prefix: "hover"
-                visible: dragging || url == "quicklaunch:drop"
+                visible: iconItem.dragging || iconItem.url == "quicklaunch:drop"
             }
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: parent
-                active: !dragging
+                active: !iconItem.dragging
                 mainText: iconItem.launcher.applicationName
                 subText: iconItem.launcher.genericName
-                icon: iconName
+                icon: iconItem.iconName
             }
 
             PlasmaExtras.Menu {
@@ -260,19 +268,19 @@ Item {
                 PlasmaExtras.MenuItem {
                     text: i18nc("@action:inmenu", "Add Launcher…")
                     icon: "list-add"
-                    onClicked: addLauncher()
+                    onClicked: iconItem.addLauncher()
                 }
 
                 PlasmaExtras.MenuItem {
                     text: i18nc("@action:inmenu", "Edit Launcher…")
                     icon: "document-edit"
-                    onClicked: editLauncher()
+                    onClicked: iconItem.editLauncher()
                 }
 
                 PlasmaExtras.MenuItem {
                     text: i18nc("@action:inmenu", "Remove Launcher")
                     icon: "list-remove"
-                    onClicked: removeLauncher()
+                    onClicked: iconItem.removeLauncher()
                 }
 
                 PlasmaExtras.MenuItem {
@@ -295,8 +303,8 @@ Item {
                     }
                     jumpListItems = [];
 
-                    for (var i = 0; i < launcher.jumpListActions.length; ++i) {
-                        var action = launcher.jumpListActions[i];
+                    for (var i = 0; i < iconItem.launcher.jumpListActions.length; ++i) {
+                        var action = iconItem.launcher.jumpListActions[i];
                         var item = menuItemComponent.createObject(iconItem, {
                             "text": action.name,
                             "icon": action.icon
@@ -321,7 +329,7 @@ Item {
     states: [
         State {
             name: "popup"
-            when: isPopupItem
+            when: iconItem.isPopupItem
 
             AnchorChanges {
                 target: dragArea
@@ -355,7 +363,7 @@ Item {
 
         State {
             name: "grid"
-            when: !isPopupItem
+            when: !iconItem.isPopupItem
 
             AnchorChanges {
                 target: dragArea

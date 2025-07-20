@@ -20,6 +20,7 @@ Item {
     property bool dragging: false
     property alias popupModel : popupModel
     property alias listView: listView
+    required property UrlModel launcherModel
 
     width: LayoutManager.popupItemWidth()
     height: Math.max(1, popupModel.count) * LayoutManager.popupItemHeight()
@@ -30,7 +31,7 @@ Item {
         enabled: !Plasmoid.immutable
 
         onDragEnter: {
-            dragging = true;
+            popup.dragging = true;
         }
 
         onDragMove: {
@@ -40,7 +41,7 @@ Item {
 
             var index = listView.indexAt(event.x, event.y);
 
-            if (isInternalDrop(event)) {
+            if (popup.isInternalDrop(event)) {
                 popupModel.moveUrl(event.mimeData.source.itemIndex, index);
             } else if (event.mimeData.hasUrls) {
                 popupModel.showDropMarker(index);
@@ -48,17 +49,17 @@ Item {
         }
 
         onDragLeave: {
-            dragging = false;
+            popup.dragging = false;
             popupModel.clearDropMarker();
         }
 
         onDrop: {
-            dragging = false;
+            popup.dragging = false;
             popupModel.clearDropMarker();
 
-            if (isInternalDrop(event)) {
+            if (popup.isInternalDrop(event)) {
                 event.accept(Qt.IgnoreAction);
-                saveConfiguration();
+                popup.saveConfiguration();
             } else if (event.mimeData.hasUrls) {
                 var index = listView.indexAt(event.x, event.y);
                 popupModel.insertUrls(index == -1 ? popupModel.count : index, event.mimeData.urls);
@@ -81,6 +82,8 @@ Item {
 
         delegate: IconItem {
             isPopupItem: true
+            popupModel: popupModel
+            launcherModel: launcherModel
         }
 
         highlight: PlasmaExtras.Highlight {}
@@ -89,8 +92,8 @@ Item {
         highlightMoveVelocity: 1
 
         function moveItemToGrid(iconItem, url) {
-            launcherModel.insertUrl(launcherModel.count, url);
-            listView.currentIndex = launcherModel.count - 1;
+            popup.launcherModel.insertUrl(popup.launcherModel.count, url);
+            listView.currentIndex = popup.launcherModel.count - 1;
             iconItem.removeLauncher();
         }
     }
@@ -98,9 +101,9 @@ Item {
     Connections {
         target: Plasmoid.configuration
         function onPopupUrlsChanged() {
-            popupModel.urlsChanged.disconnect(saveConfiguration);
+            popupModel.urlsChanged.disconnect(popup.saveConfiguration);
             popupModel.setUrls(Plasmoid.configuration.popupUrls);
-            popupModel.urlsChanged.connect(saveConfiguration);
+            popupModel.urlsChanged.connect(popup.saveConfiguration);
         }
     }
 
