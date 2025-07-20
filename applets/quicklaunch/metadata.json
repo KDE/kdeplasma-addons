@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -96,7 +95,6 @@
             "desktop"
         ],
         "Icon": "fork",
-        "Id": "org.kde.plasma.quicklaunch",
         "License": "GPL-2.0+",
         "Name": "Quicklaunch",
         "Name[ar]": "الإطلاق السّريع",
