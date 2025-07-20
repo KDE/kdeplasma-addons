@@ -165,7 +165,7 @@ Item {
             iconItem.dragging = true;
         }
 
-        onDrop: {
+        onDrop: action => {
             iconItem.dragging = false;
 
             if (action == Qt.MoveAction) {
@@ -197,14 +197,14 @@ Item {
                 }
             }
 
-            onPressed: {
+            onPressed: mouse => {
                 if (mouse.button == Qt.RightButton) {
                     contextMenu.refreshActions();
                     contextMenu.open(mouse.x, mouse.y);
                 }
             }
 
-            onClicked: {
+            onClicked: mouse => {
                 if (mouse.button == Qt.LeftButton) {
                     iconItem.logic.openUrl(iconItem.url)
                 }

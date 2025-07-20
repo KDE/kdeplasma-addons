@@ -34,7 +34,7 @@ Item {
             popup.dragging = true;
         }
 
-        onDragMove: {
+        onDragMove: event => {
             if (!event.mimeData.hasUrls) {
                 return;
             }
@@ -53,7 +53,7 @@ Item {
             popupModel.clearDropMarker();
         }
 
-        onDrop: {
+        onDrop: event => {
             popup.dragging = false;
             popupModel.clearDropMarker();
 

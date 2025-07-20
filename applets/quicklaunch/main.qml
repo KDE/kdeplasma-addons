@@ -238,12 +238,12 @@ PlasmoidItem {
     Logic {
         id: logic
 
-        onLauncherAdded: {
+        onLauncherAdded: (url, isPopup) => {
             var m = isPopup ? popup.mainItem.popupModel : launcherModel;
             m.appendUrl(url);
         }
 
-        onLauncherEdited: {
+        onLauncherEdited: (url, index, isPopup) => {
             var m = isPopup ? popup.mainItem.popupModel : launcherModel;
             m.changeUrl(index, url);
         }
