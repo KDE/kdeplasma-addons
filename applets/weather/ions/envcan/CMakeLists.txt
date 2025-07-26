@@ -1,12 +1,14 @@
 # SPDX-FileCopyrightText: 2025 Bohdan Onofriichuk <bogdan.onofriuchuk@gmail.com>
 # SPDX-License-Identifier: BSD-3-Clause
 
-set(envcanplugin_SRCS
+kcoreaddons_add_plugin(envcan INSTALL_NAMESPACE "plasma/weather_ions")
+
+target_sources(envcan PRIVATE
     ion_envcan.cpp
     ion_envcan.h
 )
 
-ecm_qt_declare_logging_category(envcanplugin_SRCS
+ecm_qt_declare_logging_category(envcan
     HEADER envcan_debug.h
     IDENTIFIER WEATHER::ION::ENVCAN
     CATEGORY_NAME org.kde.weather.ion.envcan
@@ -15,15 +17,7 @@ ecm_qt_declare_logging_category(envcanplugin_SRCS
     EXPORT PLASMAWORKSPACE
 )
 
-qt_add_plugin(envcan
-    SHARED
-    CLASS_NAME EnvCanadaIon
-    ${envcanplugin_SRCS}
-)
-
 target_link_libraries(envcan PRIVATE
     weatherion
     KF6::KIOCore
 )
-
-install(TARGETS envcan DESTINATION ${KDE_INSTALL_PLUGINDIR})

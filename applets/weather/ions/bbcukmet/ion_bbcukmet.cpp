@@ -13,6 +13,7 @@
 
 #include <KIO/TransferJob>
 #include <KLocalizedString>
+#include <KPluginFactory>
 #include <KUnitConversion/Converter>
 
 #include <QJsonArray>
@@ -21,12 +22,15 @@
 #include <QTimeZone>
 #include <QTimer>
 
+K_PLUGIN_CLASS_WITH_JSON(UKMETIon, "metadata.json")
+
 using namespace Qt::StringLiterals;
 
-UKMETIon::UKMETIon(QObject *parent)
+UKMETIon::UKMETIon(QObject *parent, const QVariantList &args)
     : Ion(parent)
 
 {
+    Q_UNUSED(args);
 }
 
 UKMETIon::~UKMETIon()
@@ -759,4 +763,5 @@ void UKMETIon::updateWeather()
     qCDebug(WEATHER::ION::BBCUKMET) << "Updated weather data for" << m_placeName;
 }
 
+#include "ion_bbcukmet.moc"
 #include "moc_ion_bbcukmet.cpp"

@@ -83,14 +83,12 @@ public:
     bool isMeasureDataPending = false;
 };
 
-class Q_DECL_EXPORT DWDIon : public Ion
+class DWDIon : public Ion
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.weather.ions.dwd" FILE "metadata.json")
-    Q_INTERFACES(Ion)
 
 public:
-    explicit DWDIon(QObject *parent = nullptr);
+    explicit DWDIon(QObject *parent, const QVariantList &args);
     ~DWDIon() override;
 
     void findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> promise, const QString &searchString) override;

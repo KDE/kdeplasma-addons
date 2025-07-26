@@ -1,5 +1,9 @@
 {
-  "name": "bbcukmet",
-  "quality": 2,
-  "comment": "7-day forecast and observation. Worldwide general coverage"
+  "KPlugin": {
+    "Description": "XML Data from the British Broadcasting Corporation",
+    "Icon": "noneyet",
+    "Name": "BBC Weather"
+  },
+  "Quality": 2,
+  "Comment": "7-day forecast and observation. Worldwide general coverage"
 }

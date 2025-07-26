@@ -90,14 +90,12 @@ public:
     QList<std::shared_ptr<ForecastPeriod>> forecasts;
 };
 
-class Q_DECL_EXPORT WetterComIon : public Ion
+class WetterComIon : public Ion
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.weather.ions.wettercom" FILE "metadata.json")
-    Q_INTERFACES(Ion)
 
 public:
-    explicit WetterComIon(QObject *parent = nullptr);
+    explicit WetterComIon(QObject *parent, const QVariantList &args);
     ~WetterComIon() override;
 
     void findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> promise, const QString &searchString) override;

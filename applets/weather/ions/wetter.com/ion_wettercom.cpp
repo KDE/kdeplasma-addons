@@ -19,6 +19,7 @@
 #include <KLocalizedString>
 #include <KUnitConversion/Converter>
 
+#include <KPluginFactory>
 #include <QCryptographicHash>
 #include <QLocale>
 #include <QUrl>
@@ -28,9 +29,12 @@
 
 #include <QTimeZone>
 
-WetterComIon::WetterComIon(QObject *parent)
+K_PLUGIN_CLASS_WITH_JSON(WetterComIon, "metadata.json")
+
+WetterComIon::WetterComIon(QObject *parent, const QVariantList &args)
     : Ion(parent)
 {
+    Q_UNUSED(args);
 }
 
 WetterComIon::~WetterComIon()
@@ -762,4 +766,5 @@ int WeatherData::ForecastPeriod::getMinTemp(const QList<std::shared_ptr<WeatherD
     return result;
 }
 
+#include "ion_wettercom.moc"
 #include "moc_ion_wettercom.cpp"

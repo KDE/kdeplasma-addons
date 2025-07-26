@@ -137,14 +137,12 @@ public:
 /**
  * https://weather.gc.ca/mainmenu/disclaimer_e.html
  */
-class Q_DECL_EXPORT EnvCanadaIon : public Ion
+class EnvCanadaIon : public Ion
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.weather.ions.envcan" FILE "metadata.json")
-    Q_INTERFACES(Ion)
 
 public:
-    explicit EnvCanadaIon(QObject *parent = nullptr);
+    explicit EnvCanadaIon(QObject *parent, const QVariantList &args);
     ~EnvCanadaIon() override;
 
     void findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> promise, const QString &searchString) override;

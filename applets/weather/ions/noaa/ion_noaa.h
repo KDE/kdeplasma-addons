@@ -82,14 +82,12 @@ public:
 Q_DECLARE_TYPEINFO(WeatherData::Forecast, Q_RELOCATABLE_TYPE);
 Q_DECLARE_TYPEINFO(WeatherData, Q_RELOCATABLE_TYPE);
 
-class Q_DECL_EXPORT NOAAIon : public Ion
+class NOAAIon : public Ion
 {
     Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.kde.weather.ions.noaa" FILE "metadata.json")
-    Q_INTERFACES(Ion)
 
 public:
-    NOAAIon(QObject *parent = nullptr);
+    NOAAIon(QObject *parent, const QVariantList &args);
     ~NOAAIon() override;
 
     void findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> promise, const QString &searchString) override;

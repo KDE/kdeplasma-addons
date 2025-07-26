@@ -7,9 +7,7 @@ set(ionlib_SRCS
     ion.h
 )
 
-qt_add_library(weatherion STATIC ${ionlib_SRCS})
-
-set_property(TARGET weatherion PROPERTY POSITION_INDEPENDENT_CODE ON)
+add_library(weatherion SHARED ${ionlib_SRCS})
 
 target_link_libraries(weatherion PUBLIC
     weatherdata
@@ -19,14 +17,9 @@ target_link_libraries(weatherion PUBLIC
     Qt::Qml
 )
 
-# dir name where ion modules will be installed
-set(WEATHERION_INSTALL_DIR "ions")
+generate_export_header(weatherion)
 
-# add define because weatherdatamonitor need to know where to find ions
-configure_file(ion_config.h.in ion_config.h)
-
-# redefine KDE_INSTALL_PLUGINDIR variable to install ion plugins in the proper directory
-set(KDE_INSTALL_PLUGINDIR ${KDE_INSTALL_PLUGINDIR}/${WEATHERION_INSTALL_DIR})
+install(TARGETS weatherion DESTINATION ${KDE_INSTALL_LIBDIR})
 
 #add ions
 add_subdirectory(wetter.com)

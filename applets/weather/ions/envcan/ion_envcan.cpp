@@ -12,11 +12,14 @@
 
 #include <KIO/TransferJob>
 #include <KLocalizedString>
+#include <KPluginFactory>
 #include <KUnitConversion/Converter>
 
 #include <QRegularExpression>
 #include <QTimeZone>
 #include <QUrl>
+
+K_PLUGIN_CLASS_WITH_JSON(EnvCanadaIon, "metadata.json")
 
 using namespace Qt::StringLiterals;
 
@@ -50,9 +53,10 @@ WeatherData::ForecastInfo::ForecastInfo()
 }
 
 // ctor, dtor
-EnvCanadaIon::EnvCanadaIon(QObject *parent)
+EnvCanadaIon::EnvCanadaIon(QObject *parent, const QVariantList &args)
     : Ion(parent)
 {
+    Q_UNUSED(args);
 }
 
 EnvCanadaIon::~EnvCanadaIon()
@@ -1742,4 +1746,5 @@ void EnvCanadaIon::updateWeather()
     qCDebug(WEATHER::ION::ENVCAN) << "Updated weather for: " << m_territoryName << ", " << m_cityCode;
 }
 
+#include "ion_envcan.moc"
 #include "moc_ion_envcan.cpp"

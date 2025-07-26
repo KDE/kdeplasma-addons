@@ -1,5 +1,9 @@
 {
-  "name": "envcan",
-  "quality": 3,
-  "comment": "12h 7-day forecast, observation and alerts"
+  "KPlugin": {
+    "Description": "XML Data from Environment Canada",
+    "Icon": "noneyet",
+    "Name": "Environment Canada"
+  },
+  "Quality": 3,
+  "Comment": "12h 7-day forecast, observation and alerts"
 }

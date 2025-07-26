@@ -9,8 +9,9 @@
 #include "forecastdata.h"
 #include "locationsdata.h"
 
+#include <KPluginMetaData>
+
 class IonControl;
-class QPluginLoader;
 
 /*!
  * \class WeatherDataMonitor
@@ -115,19 +116,7 @@ private:
     };
 
     QHash<QString, IonInfo> m_ionControls;
-
-    /*!
-     * \class PluginInfo
-     *
-     * Internal struct with plugin info. Used to load and unload plugin.
-     *
-     */
-    struct PluginInfo {
-        int quality;
-        std::shared_ptr<QPluginLoader> ionLoader;
-    };
-
-    QHash<QString, PluginInfo> m_ionLoaders;
+    QHash<QString, KPluginMetaData> m_ions;
 
     QStringList m_providers;
 };

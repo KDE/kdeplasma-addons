@@ -21,6 +21,7 @@
 
 #include <KIO/TransferJob>
 #include <KLocalizedString>
+#include <KPluginFactory>
 #include <KUnitConversion/Converter>
 
 #include <QDateTime>
@@ -30,15 +31,18 @@
 #include <QLocale>
 #include <QVariant>
 
+K_PLUGIN_CLASS_WITH_JSON(DWDIon, "metadata.json")
+
 using namespace Qt::StringLiterals;
 
 constexpr QLatin1String CATALOGUE_URL = "https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/mosmix_stationskatalog.cfg?view=nasPublication&nn=16102"_L1;
 constexpr QLatin1String FORECAST_URL = "https://app-prod-ws.warnwetter.de/v30/stationOverviewExtended?stationIds=%1"_L1;
 constexpr QLatin1String MEASURE_URL = "https://s3.eu-central-1.amazonaws.com/app-prod-static.warnwetter.de/v16/current_measurement_%1.json"_L1;
 
-DWDIon::DWDIon(QObject *parent)
+DWDIon::DWDIon(QObject *parent, const QVariantList &args)
     : Ion(parent)
 {
+    Q_UNUSED(args);
 }
 
 DWDIon::~DWDIon()
@@ -656,4 +660,5 @@ bool DWDIon::isNightTime(const WeatherData &weatherData) const
     return weatherData.observationDateTime < weatherData.sunriseTime || weatherData.observationDateTime > weatherData.sunsetTime;
 }
 
+#include "ion_dwd.moc"
 #include "moc_ion_dwd.cpp"

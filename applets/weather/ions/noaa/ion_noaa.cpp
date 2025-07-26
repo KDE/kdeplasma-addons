@@ -13,6 +13,7 @@
 
 #include <KIO/TransferJob>
 #include <KLocalizedString>
+#include <KPluginFactory>
 
 #include <QFile>
 #include <QJsonArray>
@@ -20,6 +21,8 @@
 #include <QLocale>
 #include <QStandardPaths>
 #include <QTimeZone>
+
+K_PLUGIN_CLASS_WITH_JSON(NOAAIon, "metadata.json")
 
 using namespace Qt::StringLiterals;
 using namespace KUnitConversion;
@@ -37,9 +40,11 @@ QMap<QString, Ion::ConditionIcons> const &NOAAIon::conditionIcons() const
 }
 
 // ctor, dtor
-NOAAIon::NOAAIon(QObject *parent)
+NOAAIon::NOAAIon(QObject *parent, const QVariantList &args)
     : Ion(parent)
 {
+    Q_UNUSED(args);
+
     qCDebug(WEATHER::ION::NOAA) << "Start initializing";
 
     // Schedule the API calls according to the previous information required
@@ -1188,4 +1193,5 @@ void NOAAIon::readAlerts(KJob *job, const QByteArray &data)
     }
 }
 
+#include "ion_noaa.moc"
 #include "moc_ion_noaa.cpp"

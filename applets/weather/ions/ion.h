@@ -6,6 +6,8 @@
 
 #pragma once
 
+#include <weatherion_export.h>
+
 #include <QList>
 #include <QPromise>
 #include <QString>
@@ -23,13 +25,12 @@
  * The main class to create a weather ion. The ion is a class that is used to request
  * locations and forecast on the locations. When inherit the main methods must be implemented:
  * \c findPlaces and \c fetchForecast to receive locations and forecasts respectively. The created
- * class must be installed as Qt Plugin to be properly loaded and used. Also, the plugin must have
- * metadata added through \c Q_PLUGIN_METADATA with next values:
- * * name: the name of the class, string.
- * * quality: the quality of the class, int.
- * Without metadata a class is considered invalid and is skipped by \c WeatherDataMonitor
+ * class must be installed as KPlugin to be properly loaded and used. Also, the plugin must have
+ * metadata added through \c K_PLUGIN_CLASS_WITH_JSON with next additional values:
+ * * Quality: the quality of the class, int.
+ * Without metadata a class is considered low quality and can be skipped when searching for locations.
  */
-class Ion : public QObject
+class WEATHERION_EXPORT Ion : public QObject
 {
     Q_OBJECT
 
@@ -144,5 +145,3 @@ protected:
 
     static bool isNightTime(const QDateTime &dateTime, double latitude, double longitude);
 };
-
-Q_DECLARE_INTERFACE(Ion, "org.kde.weather.Ion")
