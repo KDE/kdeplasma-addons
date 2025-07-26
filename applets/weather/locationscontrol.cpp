@@ -232,6 +232,11 @@ void LocationsControl::clear()
     m_searchString.clear();
 }
 
+QString LocationsControl::getProviderDisplayName(const QString &providerName) const
+{
+    return m_weatherDataMonitor->providerDisplayName(providerName);
+}
+
 QVariant LocationsControl::getPlaceDisplayNameByIndex(int position)
 {
     qCDebug(WEATHER::CONTROLLER) << "LocationsControl: get placeInfo by index: " << position;

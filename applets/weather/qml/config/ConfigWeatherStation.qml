@@ -25,7 +25,6 @@ KCM.ScrollViewKCM {
 
     property string cfg_provider
     property string cfg_placeInfo
-    property string cfg_providerCredit
     property string cfg_placeDisplayName
 
     property alias cfg_updateInterval: updateIntervalSpin.value
@@ -92,10 +91,7 @@ KCM.ScrollViewKCM {
 
                 text: {
                     if (weatherStationConfigPage.hasSource) {
-                        if (weatherStationConfigPage.cfg_providerCredit !== "") {
-                            return weatherStationConfigPage.cfg_providerCredit
-                        }
-                        return weatherStationConfigPage.cfg_provider;
+                        return locationListModel.getProviderDisplayName(weatherStationConfigPage.cfg_provider);
                     }
                     return "";
                 }
@@ -172,12 +168,6 @@ KCM.ScrollViewKCM {
             if (provider && placeInfo) {
                 weatherStationConfigPage.cfg_provider = provider;
                 weatherStationConfigPage.cfg_placeInfo = placeInfo;
-                const providerCredit = locationListModel.getProviderCreditByIndex(locationListView.currentIndex);
-                if (!!providerCredit && providerCredit !== ""){
-                    weatherStationConfigPage.cfg_providerCredit = providerCredit;
-                } else {
-                    weatherStationConfigPage.cfg_providerCredit = "";
-                }
                 const placeDisplayName = locationListModel.getPlaceDisplayNameByIndex(locationListView.currentIndex);
                 if (!!placeDisplayName && placeDisplayName !== "") {
                     weatherStationConfigPage.cfg_placeDisplayName = placeDisplayName
@@ -190,7 +180,7 @@ KCM.ScrollViewKCM {
         delegate: QQC2.ItemDelegate {
             width: locationListView.width
             text: i18nc("A weather station location and the weather service it comes from",
-                "%1 (%2)", !!model.displayName ? model.displayName : model.station, model.credit)
+                "%1 (%2)", !!model.displayName ? model.displayName : model.station, locationListModel.getProviderDisplayName(locationListModel.getProviderByIndex(model.index)))
             highlighted: ListView.isCurrentItem
 
             onClicked: {

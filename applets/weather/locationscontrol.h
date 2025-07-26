@@ -46,6 +46,11 @@ public:
     Q_INVOKABLE void clear();
 
     /*!
+     * return the display name of a provider.
+     */
+    Q_INVOKABLE QString getProviderDisplayName(const QString &providerName) const;
+
+    /*!
      * return provider credit related to location at \c position.
      */
     Q_INVOKABLE QVariant getProviderCreditByIndex(int position);
