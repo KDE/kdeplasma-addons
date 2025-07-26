@@ -1,9 +1,21 @@
-plasma_install_package(package org.kde.plasma.timer)
+plasma_add_applet(org.kde.plasma.timer
+    QML_SOURCES
+        CompactRepresentation.qml
+        configAdvanced.qml
+        configAppearance.qml
+        config.qml
+        configTimes.qml
+        main.qml
+        TimerEdit.qml
+        TimerView.qml
+    RESOURCES
+        main.xml
+    CPP_SOURCES
+        timer.h
+    GENERATE_APPLET_CLASS
+)
 
-ecm_add_qml_module(timerplugin URI org.kde.plasma.private.timer)
-target_sources(timerplugin PRIVATE plugin/timerplugin.cpp)
-target_link_libraries(timerplugin PRIVATE Qt::Core Qt::Qml)
-ecm_finalize_qml_module(timerplugin)
+target_link_libraries(org.kde.plasma.timer PRIVATE Qt::Core Qt::Qml)
 
 install(FILES timer.svgz DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/widgets/)
 install(FILES plasma_applet_timer.notifyrc DESTINATION ${KDE_INSTALL_KNOTIFYRCDIR})

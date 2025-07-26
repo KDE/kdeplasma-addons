@@ -5,12 +5,14 @@
 */
 
 #include <QProcess>
-#include <QQmlEngine>
-#include <QQmlExtensionPlugin>
+#include <QTime>
+#include <qqmlregistration.h>
 
 class Timer : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+    QML_SINGLETON
 
 public:
     Q_INVOKABLE void runCommand(const QString &command)
@@ -30,19 +32,3 @@ public:
         return QTime::fromMSecsSinceStartOfDay(seconds * 1000).toString(format);
     }
 };
-
-class TimerPlugin : public QQmlExtensionPlugin
-{
-    Q_OBJECT
-    Q_PLUGIN_METADATA(IID "org.qt-project.Qt.QQmlExtensionInterface")
-
-public:
-    void registerTypes(const char *uri) override
-    {
-        qmlRegisterSingletonType<Timer>(uri, 0, 1, "Timer", [](QQmlEngine *, QJSEngine *) {
-            return new Timer();
-        });
-    }
-};
-
-#include "timerplugin.moc"

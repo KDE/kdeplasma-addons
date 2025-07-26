@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -98,7 +97,6 @@
         "Description[zh_CN]": "指定时间长度进行倒计时",
         "Description[zh_TW]": "指定期間的倒數計時",
         "Icon": "chronometer",
-        "Id": "org.kde.plasma.timer",
         "License": "GPL-2.0+",
         "Name": "Timer",
         "Name[ar]": "مؤقت",

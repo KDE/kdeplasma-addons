@@ -9,7 +9,7 @@ import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core as PlasmaCore
 import org.kde.ksvg 1.0 as KSvg
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
-import org.kde.plasma.private.timer 0.1 as TimerPlasmoid
+import plasma.applet.org.kde.plasma.timer as TimerPlasmoid
 
 Row {
     id: timerEdit
