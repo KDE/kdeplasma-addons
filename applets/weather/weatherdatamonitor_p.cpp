@@ -72,6 +72,14 @@ int WeatherDataMonitor::providerQuality(const QString &providerName) const
     return -2;
 }
 
+QString WeatherDataMonitor::providerDisplayName(const QString &providerName) const
+{
+    if (auto it = m_ions.constFind(providerName); it != m_ions.cend()) {
+        return it->name();
+    }
+    return {};
+}
+
 std::shared_ptr<LocationsData> WeatherDataMonitor::getLocationData(const QString &providerName)
 {
     qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: get location request for provider: " << providerName;

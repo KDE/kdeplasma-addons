@@ -45,6 +45,13 @@ public:
     int providerQuality(const QString &providerName) const;
 
     /*!
+     * Return the display name of a provider.
+     *
+     * \a providerName The name of a provider.
+     */
+    QString providerDisplayName(const QString &providerName) const;
+
+    /*!
      * Return the \c LocationData associated with given provider. If provider with
      * such name does not exist return  \c nullptr.
      *
