@@ -631,8 +631,6 @@ void UKMETIon::validate()
 
     auto locations = std::make_shared<Locations>();
 
-    locations->setCredit("BBC\302\240Weather");
-
     for (const QString &place : std::as_const(m_locations)) {
         Location location;
         location.setDisplayName(place);

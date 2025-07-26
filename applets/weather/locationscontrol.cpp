@@ -255,13 +255,6 @@ QVariant LocationsControl::getPlaceDisplayNameByIndex(int position)
     return {};
 }
 
-QVariant LocationsControl::getProviderCreditByIndex(int position)
-{
-    qCDebug(WEATHER::CONTROLLER) << "LocationsControl: get placeInfo by index: " << position;
-    QModelIndex locationPosition = index(position, 0, QModelIndex());
-    return data(locationPosition, Locations::Credit);
-}
-
 QVariant LocationsControl::getProviderByIndex(int position)
 {
     qCDebug(WEATHER::CONTROLLER) << "LocationsControl: get provider by index: " << position;

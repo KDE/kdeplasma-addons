@@ -454,8 +454,6 @@ void DWDIon::validate()
 
     auto locations = std::make_shared<Locations>();
 
-    locations->setCredit(i18n("German Weather Service"));
-
     for (const QString &place : std::as_const(m_locations)) {
         Location location;
         location.setStation(place);

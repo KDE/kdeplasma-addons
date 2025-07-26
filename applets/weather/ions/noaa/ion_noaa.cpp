@@ -85,7 +85,6 @@ void NOAAIon::findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> p
     bool checkState = searchString.size() == 2;
 
     auto locations = std::make_shared<Locations>();
-    locations->setCredit(u"NOAA National Weather Service"_s);
 
     for (auto it = m_places.constBegin(); it != m_places.constEnd(); ++it) {
         if (checkState) {

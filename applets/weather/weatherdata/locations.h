@@ -22,7 +22,6 @@ class Location;
  * \brief Data about the weather station
  *
  * Data about the weather station:
- * "credit": string, credit line for the data, required
  * "placeInfo": string, specific string used by provider to receive the forecast, required
  * "displayName": string, display name of the weather station, optional
  * "Code": string, code of the weather station, optional
@@ -37,8 +36,7 @@ class WEATHERDATA_EXPORT Locations : public QAbstractListModel
 
 public:
     enum LocationModel {
-        Credit = Qt::UserRole + 1,
-        PlaceInfo,
+        PlaceInfo = Qt::UserRole + 1,
         DisplayName,
         Code,
         Station,
@@ -56,15 +54,11 @@ public:
     bool isError() const;
     void setError();
 
-    void setCredit(const QString &credit);
-
     void addLocation(const Location &location);
     void addLocations(const QList<Location> &locations);
 
 private:
     bool m_error;
-
-    QString m_credit;
 
     QList<Location> m_locations;
 };

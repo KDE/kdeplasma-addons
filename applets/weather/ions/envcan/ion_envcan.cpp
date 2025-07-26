@@ -444,8 +444,6 @@ void EnvCanadaIon::validate(const QString &source)
 
     auto locations = std::make_shared<Locations>();
 
-    locations->setCredit(u"Environment Canada"_s);
-
     qCDebug(WEATHER::ION::ENVCAN) << "start adding locations";
 
     QString sourceNormalized = source.toUpper();

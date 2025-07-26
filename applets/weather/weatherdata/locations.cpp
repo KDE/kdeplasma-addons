@@ -26,11 +26,6 @@ void Locations::setError()
     m_error = true;
 }
 
-void Locations::setCredit(const QString &credit)
-{
-    m_credit = credit;
-}
-
 int Locations::rowCount(const QModelIndex &parent) const
 {
     if (parent.isValid()) {
@@ -44,10 +39,6 @@ QVariant Locations::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
         return {};
-    }
-
-    if (role == Credit) {
-        return m_credit;
     }
 
     const auto &location = m_locations.at(index.row());
@@ -74,7 +65,6 @@ QHash<int, QByteArray> Locations::roleNames() const
 {
     QHash<int, QByteArray> roles;
 
-    roles[Credit] = "credit";
     roles[PlaceInfo] = "placeInfo";
     roles[DisplayName] = "displayName";
     roles[Code] = "code";

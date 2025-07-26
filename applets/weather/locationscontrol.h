@@ -51,10 +51,6 @@ public:
     Q_INVOKABLE QString getProviderDisplayName(const QString &providerName) const;
 
     /*!
-     * return provider credit related to location at \c position.
-     */
-    Q_INVOKABLE QVariant getProviderCreditByIndex(int position);
-    /*!
      * return place display name related to location at \c position.
      */
     Q_INVOKABLE QVariant getPlaceDisplayNameByIndex(int position);

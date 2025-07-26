@@ -361,8 +361,6 @@ void WetterComIon::updatePlaces(const QList<PlaceInfo> &locations)
 
     auto returnLocations = std::make_shared<Locations>();
 
-    returnLocations->setCredit(QStringLiteral("wetter.com"));
-
     for (const auto &rawLocation : std::as_const(locations)) {
         // Extra data format: placeCode;displayName
         Location location;
