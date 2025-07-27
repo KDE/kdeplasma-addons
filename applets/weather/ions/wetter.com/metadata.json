@@ -1,9 +1,9 @@
 {
-  "KPlugin": {
-    "Description": "Weather forecast by wetter.com",
-    "Icon": "noneyet",
-    "Name": "wetter.com"
-  },
-  "Quality": -1,
-  "Comment": "does not provide current weather status"
+    "Comment": "does not provide current weather status",
+    "KPlugin": {
+        "Description": "Weather forecast by wetter.com",
+        "Icon": "noneyet",
+        "Name": "wetter.com"
+    },
+    "Quality": -1
 }

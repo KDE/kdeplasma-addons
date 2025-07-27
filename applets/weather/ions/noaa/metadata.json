@@ -1,9 +1,9 @@
 {
-  "KPlugin": {
-    "Description": "XML Data from NOAA's National Weather Service",
-    "Icon": "noneyet",
-    "Name": "NOAA's National Weather Service"
-  },
-  "Quality": 3,
-  "Comment": "12h 7-day forecast, observation and alerts"
+    "Comment": "12h 7-day forecast, observation and alerts",
+    "KPlugin": {
+        "Description": "XML Data from NOAA's National Weather Service",
+        "Icon": "noneyet",
+        "Name": "NOAA's National Weather Service"
+    },
+    "Quality": 3
 }
