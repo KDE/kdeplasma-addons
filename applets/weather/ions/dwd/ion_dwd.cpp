@@ -124,6 +124,7 @@ KJob *DWDIon::requestAPIJob(const QUrl &url, QByteArray &result)
 
 void DWDIon::clearForecastData()
 {
+    m_isLegacy = false;
     m_weatherName.clear();
     m_weatherID.clear();
     m_forecastData.clear();
@@ -196,6 +197,12 @@ void DWDIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> 
 
     // place_name|id - Triggers receiving weather of place
     const QList<QString> info = placeInfo.split('|'_L1);
+
+    if (info.size() == 4 && info[1] == "weather" && !m_isLegacy) {
+        m_isLegacy = true;
+        fetchForecast(m_forecastPromise, info[2] + '|' + info[3]);
+        return;
+    }
 
     if (info.count() != 2) {
         m_forecastPromise->finish();
@@ -478,6 +485,10 @@ void DWDIon::updateWeather()
 
     station.setPlace(m_weatherName);
     station.setStation(m_weatherName);
+
+    if (m_isLegacy) {
+        station.setNewPlaceInfo(m_weatherName + u"|"_s + m_weatherID);
+    }
 
     forecast->setStation(station);
 

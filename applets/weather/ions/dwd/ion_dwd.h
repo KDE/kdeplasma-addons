@@ -148,6 +148,9 @@ private:
     QByteArray m_measurementData;
     std::shared_ptr<WeatherData> m_weatherData;
 
+    // used to handle the old format of a forecast request string
+    bool m_isLegacy = false;
+
     std::shared_ptr<QPromise<std::shared_ptr<Locations>>> m_locationPromise;
     std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> m_forecastPromise;
 };

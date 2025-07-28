@@ -22,6 +22,9 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <entry name="placeInfo" type="string">
       <default></default>
     </entry>
+    <entry name="source" type="string">
+      <default></default>
+    </entry>
   </group>
 
   <group name="Appearance">

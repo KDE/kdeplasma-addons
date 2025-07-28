@@ -68,6 +68,14 @@ QVariant Station::getLongitude() const
     return {};
 }
 
+QVariant Station::getNewPlaceInfo() const
+{
+    if (m_newPlaceInfo.has_value()) {
+        return *m_newPlaceInfo;
+    }
+    return {};
+}
+
 void Station::setStation(const QString &station)
 {
     m_station = station;
@@ -96,6 +104,12 @@ void Station::setCoordinates(qreal latitude, qreal longitude)
 {
     m_latitude = latitude;
     m_longitude = longitude;
+    m_isDataPresent = true;
+}
+
+void Station::setNewPlaceInfo(const QString &placeInfo)
+{
+    m_newPlaceInfo = placeInfo;
     m_isDataPresent = true;
 }
 

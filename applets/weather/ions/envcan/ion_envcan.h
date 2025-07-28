@@ -231,6 +231,10 @@ private:
     QString m_cityCode;
     std::shared_ptr<QXmlStreamReader> m_xmlForecast;
 
+    // used to handle the old format of a forecast request string
+    bool m_isLegacy = false;
+    QString m_legacyPlaceInfo;
+
     std::shared_ptr<QPromise<std::shared_ptr<Locations>>> m_locationPromise;
     std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> m_forecastPromise;
 };

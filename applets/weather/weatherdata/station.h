@@ -26,6 +26,7 @@
  * Coordinates: coordinates weather station, optional
  *  "latitude": float, latitude of the weather station in decimal degrees
  *  "longitude": float, longitude of the weather station in decimal degrees
+ *  "newPlaceInfo": QString, new placeInfo which is used to receive a forecast, optional
  */
 class WEATHERDATA_EXPORT Station
 {
@@ -36,6 +37,7 @@ class WEATHERDATA_EXPORT Station
     Q_PROPERTY(QVariant country READ getCountry CONSTANT)
     Q_PROPERTY(QVariant latitude READ getLatitude CONSTANT)
     Q_PROPERTY(QVariant longitude READ getLongitude CONSTANT)
+    Q_PROPERTY(QVariant newPlaceInfo READ getNewPlaceInfo CONSTANT)
 
 public:
     Station();
@@ -49,12 +51,14 @@ public:
     QVariant getCountry() const;
     QVariant getLatitude() const;
     QVariant getLongitude() const;
+    QVariant getNewPlaceInfo() const;
 
     void setStation(const QString &station);
     void setPlace(const QString &place);
     void setRegion(const QString &region);
     void setCountry(const QString &country);
     void setCoordinates(qreal latitude, qreal longitude);
+    void setNewPlaceInfo(const QString &placeInfo);
 
 private:
     std::optional<QString> m_station;
@@ -63,6 +67,7 @@ private:
     std::optional<QString> m_country;
     std::optional<qreal> m_latitude;
     std::optional<qreal> m_longitude;
+    std::optional<QString> m_newPlaceInfo;
 
     bool m_isDataPresent;
 };

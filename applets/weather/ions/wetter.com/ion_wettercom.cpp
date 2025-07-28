@@ -396,6 +396,13 @@ void WetterComIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Foreca
     //"place|%1|extra|%2;%3"
     const QStringList placeAction = placeInfo.split(QLatin1Char('|'));
 
+    if (placeAction.size() == 4 && placeAction[1] == "weather" && !m_isLegacy) {
+        m_isLegacy = true;
+        m_newPlaceInfo = "place|" + placeAction[2] + "|extra|" + placeAction[3];
+        fetchForecast(m_forecastPromise, m_newPlaceInfo);
+        return;
+    }
+
     if (placeAction.count() != 4) {
         m_forecastPromise->finish();
         m_forecastPromise.reset();
@@ -652,6 +659,11 @@ void WetterComIon::updateWeather()
 
         station.setPlace(m_place.displayName);
         station.setStation(m_place.station);
+
+        if (m_isLegacy) {
+            m_isLegacy = false;
+            station.setNewPlaceInfo(m_newPlaceInfo);
+        }
 
         MetaData metaData;
         metaData.setCredit(m_weatherData.credits); // FIXME i18n?

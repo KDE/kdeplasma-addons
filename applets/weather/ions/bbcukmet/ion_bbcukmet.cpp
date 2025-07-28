@@ -244,6 +244,12 @@ void UKMETIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>
     // place_name|id - Triggers receiving weather of place
     const QList<QString> info = placeInfo.split('|'_L1);
 
+    if (info.size() == 4 && info[1] == "weather" && !m_isLegacy) {
+        m_isLegacy = true;
+        fetchForecast(m_forecastPromise, info[2] + '|' + info[3]);
+        return;
+    }
+
     if (info.count() != 2) {
         m_forecastPromise->finish();
         m_forecastPromise.reset();
@@ -269,6 +275,7 @@ void UKMETIon::clearLocationData()
 
 void UKMETIon::clearForecastData()
 {
+    m_isLegacy = false;
     m_forecastPromise.reset();
     m_weatherData.reset();
     m_forecastData.clear();
@@ -658,6 +665,10 @@ void UKMETIon::updateWeather()
     const bool stationCoordsValid = !qIsNaN(m_weatherData->stationLatitude) && !qIsNaN(m_weatherData->stationLongitude);
     if (stationCoordsValid) {
         station.setCoordinates(m_weatherData->stationLatitude, m_weatherData->stationLongitude);
+    }
+
+    if (m_isLegacy) {
+        station.setNewPlaceInfo(m_placeName + u"|"_s + m_placeId);
     }
 
     forecast->setStation(station);

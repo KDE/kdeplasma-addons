@@ -16,12 +16,30 @@ PlasmoidItem {
     ForecastControl {
         id: forecastControl
         Component.onCompleted: weatherPlaceInfoChanged()
+
+        //If forecast contains new placeInfo then save it
+        onForecastChanged: {
+            const station = forecastControl.forecast?.station;
+            if (!station?.newPlaceInfo) {
+                return;
+            }
+            //Reset the old source property if present as it is not needed anymore
+            Plasmoid.configuration.source = "";
+            Plasmoid.configuration.placeInfo = station.newPlaceInfo;
+            Plasmoid.configuration.placeDisplayName = station.place;
+        }
     }
 
     onWeatherPlaceInfoChanged: {
-        if (weatherPlaceInfo !== "") {
+        if (weatherPlaceInfo.length > 0) {
             forecastControl.setUpdateInterval(root.updateInterval);
             forecastControl.setForecastLocation(root.weatherProvider, root.weatherPlaceInfo);
+        //If the old source property present try to fetch forecast for it
+        } else if (Plasmoid.configuration.source.length > 0) {
+            const sourceDetails = Plasmoid.configuration.source.split('|');
+            forecastControl.setUpdateInterval(root.updateInterval);
+            Plasmoid.configuration.provider = sourceDetails[0];
+            forecastControl.setForecastLocation(sourceDetails[0], Plasmoid.configuration.source);
         }
     }
 

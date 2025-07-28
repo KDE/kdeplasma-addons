@@ -504,7 +504,35 @@ void EnvCanadaIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Foreca
     // place_name|id - Triggers receiving weather of place
     const QList<QString> info = placeInfo.split('|'_L1);
 
-    if (info.count() != 2) {
+    qCDebug(WEATHER::ION::ENVCAN) << "Start receiving forecast for info " << placeInfo;
+
+    // Support the old format for receiving a forecast
+    if (info.size() == 3 && info[1] == "weather" && !m_isLegacy) {
+        m_isLegacy = true;
+        if (m_places.isEmpty()) {
+            // If network is down, we need to spin and wait
+            const QUrl url(QStringLiteral("https://dd.weather.gc.ca/today/citypage_weather/siteList.xml"));
+            qCDebug(WEATHER::ION::ENVCAN) << "Fetching station list:" << url;
+
+            KIO::TransferJob *getJob = KIO::get(url, KIO::NoReload, KIO::HideProgressInfo);
+
+            m_xmlSetup = std::make_shared<QXmlStreamReader>();
+            connect(getJob, &KIO::TransferJob::data, this, &EnvCanadaIon::places_slotDataArrived);
+            connect(getJob, &KJob::result, this, &EnvCanadaIon::places_slotJobFinished);
+            m_legacyPlaceInfo = info[2];
+            return;
+        }
+        if (auto it = m_places.constFind(placeInfo); it != m_places.constEnd()) {
+            fetchForecast(m_forecastPromise, it->territoryName + u"|"_s + it->cityCode);
+            return;
+        }
+        m_isLegacy = false;
+        m_forecastPromise->finish();
+        m_forecastPromise.reset();
+        return;
+    }
+
+    if (info.count() > 2) {
         m_forecastPromise->finish();
         m_forecastPromise.reset();
         return;
@@ -535,7 +563,7 @@ void EnvCanadaIon::places_slotDataArrived(KIO::Job *job, const QByteArray &data)
         return;
     }
 
-    if (m_locationPromise->isCanceled()) {
+    if (!m_isLegacy && m_locationPromise->isCanceled()) {
         return;
     }
 
@@ -549,8 +577,21 @@ void EnvCanadaIon::places_slotJobFinished(KJob *job)
 
     qCDebug(WEATHER::ION::ENVCAN) << "Location job finished";
 
-    if (m_locationPromise->isCanceled()) {
+    if (m_isLegacy) {
+        readXMLSetup();
+        if (auto it = m_places.constFind(m_legacyPlaceInfo); it != m_places.constEnd()) {
+            qCDebug(WEATHER::ION::ENVCAN) << "Start fetching default forecast";
+            fetchForecast(m_forecastPromise, it->territoryName + u"|"_s + it->cityCode);
+            return;
+        }
+        m_isLegacy = false;
         m_forecastPromise->finish();
+        clearForecastData();
+        return;
+    }
+
+    if (m_locationPromise->isCanceled()) {
+        m_locationPromise->finish();
         clearLocationData();
         return;
     }
@@ -683,7 +724,7 @@ void EnvCanadaIon::readXMLSetup()
     }
 
     // Update and return locations if no error
-    if (m_xmlSetup->hasError()) {
+    if (m_xmlSetup->hasError() && !m_isLegacy) {
         validate(m_searchString);
     }
 }
@@ -1524,6 +1565,10 @@ void EnvCanadaIon::updateWeather()
 
     if (!qIsNaN(m_weatherData->stationLatitude) && !qIsNaN(m_weatherData->stationLongitude)) {
         station.setCoordinates(m_weatherData->stationLatitude, m_weatherData->stationLongitude);
+    }
+
+    if (m_isLegacy) {
+        station.setNewPlaceInfo(m_territoryName + u"|"_s + m_cityCode);
     }
 
     forecast->setStation(station);

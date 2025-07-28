@@ -199,6 +199,15 @@ void NOAAIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>>
         return;
     }
 
+    const QList<QString> info = placeInfo.split('|'_L1);
+
+    if (info.size() == 3 && info[1] == "weather" && !m_isLegacy) {
+        m_isLegacy = true;
+        m_newPlaceInfo = info[2];
+        fetchForecast(m_forecastPromise, m_newPlaceInfo);
+        return;
+    }
+
     // If this is empty we have no valid data, send out an error and abort.
     if (!m_places.contains(placeInfo)) {
         qCDebug(WEATHER::ION::NOAA) << "Places not found when fetching forecast. Return";
@@ -424,6 +433,11 @@ void NOAAIon::updateWeather()
     station.setStation(m_weatherData->stationID);
     if (!qIsNaN(m_weatherData->stationLatitude) && !qIsNaN(m_weatherData->stationLongitude)) {
         station.setCoordinates(m_weatherData->stationLatitude, m_weatherData->stationLongitude);
+    }
+
+    if (m_isLegacy) {
+        m_isLegacy = false;
+        station.setNewPlaceInfo(m_newPlaceInfo);
     }
 
     returnForecast->setStation(station);
