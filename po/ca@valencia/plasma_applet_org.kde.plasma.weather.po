@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-27 00:43+0000\n"
+"POT-Creation-Date: 2025-07-28 00:42+0000\n"
 "PO-Revision-Date: 2025-07-09 09:40+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -129,111 +129,106 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "Calma"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:669
+#: ions/bbcukmet/ion_bbcukmet.cpp:667
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
 msgstr "Dades de «BBC Weather»"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:708 ions/envcan/ion_envcan.cpp:1577
+#: ions/bbcukmet/ion_bbcukmet.cpp:706 ions/envcan/ion_envcan.cpp:1575
 #, kde-format
 msgid "Rising"
 msgstr "Ascendent"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:710 ions/envcan/ion_envcan.cpp:1579
+#: ions/bbcukmet/ion_bbcukmet.cpp:708 ions/envcan/ion_envcan.cpp:1577
 #, kde-format
 msgid "Falling"
 msgstr "Descendent"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:712 ions/envcan/ion_envcan.cpp:1581
+#: ions/bbcukmet/ion_bbcukmet.cpp:710 ions/envcan/ion_envcan.cpp:1579
 #, kde-format
 msgid "Steady"
 msgstr "Manteniment"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:733 ions/dwd/ion_dwd.cpp:550
+#: ions/bbcukmet/ion_bbcukmet.cpp:731 ions/dwd/ion_dwd.cpp:548
 #, kde-format
 msgctxt "Short for Today"
 msgid "Today"
 msgstr "Hui"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:733
+#: ions/bbcukmet/ion_bbcukmet.cpp:731
 #, kde-format
 msgctxt "Short for Tonight"
 msgid "Tonight"
 msgstr "Esta nit"
 
-#: ions/dwd/ion_dwd.cpp:457
-#, kde-format
-msgid "German Weather Service"
-msgstr "Servei meteorològic alemany"
-
-#: ions/dwd/ion_dwd.cpp:488
+#: ions/dwd/ion_dwd.cpp:486
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
 msgstr "Font: Deutscher Wetterdienst"
 
-#: ions/dwd/ion_dwd.cpp:554 ions/envcan/ion_envcan.cpp:1460
+#: ions/dwd/ion_dwd.cpp:552 ions/envcan/ion_envcan.cpp:1458
 #, kde-format
 msgctxt "Short for Saturday"
 msgid "Sat"
 msgstr "Ds."
 
-#: ions/dwd/ion_dwd.cpp:555 ions/envcan/ion_envcan.cpp:1461
+#: ions/dwd/ion_dwd.cpp:553 ions/envcan/ion_envcan.cpp:1459
 #, kde-format
 msgctxt "Short for Sunday"
 msgid "Sun"
 msgstr "Dg."
 
-#: ions/dwd/ion_dwd.cpp:556 ions/envcan/ion_envcan.cpp:1462
+#: ions/dwd/ion_dwd.cpp:554 ions/envcan/ion_envcan.cpp:1460
 #, kde-format
 msgctxt "Short for Monday"
 msgid "Mon"
 msgstr "Dl."
 
-#: ions/dwd/ion_dwd.cpp:557 ions/envcan/ion_envcan.cpp:1463
+#: ions/dwd/ion_dwd.cpp:555 ions/envcan/ion_envcan.cpp:1461
 #, kde-format
 msgctxt "Short for Tuesday"
 msgid "Tue"
 msgstr "Dt."
 
-#: ions/dwd/ion_dwd.cpp:558 ions/envcan/ion_envcan.cpp:1464
+#: ions/dwd/ion_dwd.cpp:556 ions/envcan/ion_envcan.cpp:1462
 #, kde-format
 msgctxt "Short for Wednesday"
 msgid "Wed"
 msgstr "Dc."
 
-#: ions/dwd/ion_dwd.cpp:559 ions/envcan/ion_envcan.cpp:1465
+#: ions/dwd/ion_dwd.cpp:557 ions/envcan/ion_envcan.cpp:1463
 #, kde-format
 msgctxt "Short for Thursday"
 msgid "Thu"
 msgstr "Dj."
 
-#: ions/dwd/ion_dwd.cpp:560 ions/envcan/ion_envcan.cpp:1466
+#: ions/dwd/ion_dwd.cpp:558 ions/envcan/ion_envcan.cpp:1464
 #, kde-format
 msgctxt "Short for Friday"
 msgid "Fri"
 msgstr "Dv."
 
-#: ions/envcan/ion_envcan.cpp:975 ions/envcan/ion_envcan.cpp:977
-#: ions/envcan/ion_envcan.cpp:1452 ions/envcan/ion_envcan.cpp:1474
-#: ions/envcan/ion_envcan.cpp:1525 ions/noaa/ion_noaa.cpp:448
+#: ions/envcan/ion_envcan.cpp:973 ions/envcan/ion_envcan.cpp:975
+#: ions/envcan/ion_envcan.cpp:1450 ions/envcan/ion_envcan.cpp:1472
+#: ions/envcan/ion_envcan.cpp:1523 ions/noaa/ion_noaa.cpp:447
 #, kde-format
 msgid "N/A"
 msgstr "N/D"
 
-#: ions/envcan/ion_envcan.cpp:1456
+#: ions/envcan/ion_envcan.cpp:1454
 #, kde-format
 msgid "Today"
 msgstr "Hui"
 
-#: ions/envcan/ion_envcan.cpp:1501
+#: ions/envcan/ion_envcan.cpp:1499
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from Environment and Climate Change Canada"
 msgstr "Dades del medi ambient i canvi climàtic del Canadà"
 
-#: ions/noaa/ion_noaa.cpp:433
+#: ions/noaa/ion_noaa.cpp:432
 #, kde-format
 msgctxt "credit line, keep string short)"
 msgid "Data from NOAA National Weather Service"
@@ -242,7 +237,7 @@ msgstr "Dades subministrades pel «NOAA National Weather Service»"
 #. i18n: The forecast summary can include several single conditions that follow
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
 #. If there is no suitable separtor, a sentence separator might do.
-#: ions/noaa/ion_noaa.cpp:742
+#: ions/noaa/ion_noaa.cpp:741
 #, kde-format
 msgctxt ""
 "Separator between forecast conditions that follow a temporal sequence (ex. "
@@ -576,74 +571,74 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Visibilitat:"
 
-#: qml/config/ConfigWeatherStation.qml:52
+#: qml/config/ConfigWeatherStation.qml:51
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Actualitza cada:"
 
-#: qml/config/ConfigWeatherStation.qml:55
+#: qml/config/ConfigWeatherStation.qml:54
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 minut"
 msgstr[1] "%1 minuts"
 
-#: qml/config/ConfigWeatherStation.qml:67
+#: qml/config/ConfigWeatherStation.qml:66
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Ubicació:"
 
-#: qml/config/ConfigWeatherStation.qml:80
+#: qml/config/ConfigWeatherStation.qml:79
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "Res seleccionat"
 
-#: qml/config/ConfigWeatherStation.qml:86
+#: qml/config/ConfigWeatherStation.qml:85
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "Proveïdor:"
 
-#: qml/config/ConfigWeatherStation.qml:119
+#: qml/config/ConfigWeatherStation.qml:115
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Introduïu la ubicació nova"
 
-#: qml/config/ConfigWeatherStation.qml:119
+#: qml/config/ConfigWeatherStation.qml:115
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Introduïu la ubicació"
 
-#: qml/config/ConfigWeatherStation.qml:193
+#: qml/config/ConfigWeatherStation.qml:183
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/config/ConfigWeatherStation.qml:218
+#: qml/config/ConfigWeatherStation.qml:208
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "No s'ha trobat cap estació meteorològica per a «%1»"
 
-#: qml/config/ConfigWeatherStation.qml:220
+#: qml/config/ConfigWeatherStation.qml:210
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Busqueu una estació meteorològica per a canviar la vostra ubicació"
 
-#: qml/config/ConfigWeatherStation.qml:222
+#: qml/config/ConfigWeatherStation.qml:212
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Busqueu una estació meteorològica per a establir la ubicació"
 
-#: qml/config/ConfigWeatherStation.qml:225
+#: qml/config/ConfigWeatherStation.qml:215
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -915,3 +910,6 @@ msgstr "Molt alta"
 #, kde-format
 msgid "Extreme"
 msgstr "Extrema"
+
+#~ msgid "German Weather Service"
+#~ msgstr "Servei meteorològic alemany"
