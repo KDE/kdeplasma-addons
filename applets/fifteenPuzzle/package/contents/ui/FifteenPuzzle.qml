@@ -16,7 +16,7 @@ import org.kde.plasma.plasmoid 2.0
 Item {
     id: main
 
-    Layout.minimumWidth: (root.inPanel && !root.compactInPanel) ? -1 : root.switchWidth
+    Layout.minimumWidth: (root.inPanel && !root.compactInPanel) ? -1 : controlsRow.Layout.minimumWidth
     Layout.minimumHeight: (root.inPanel && !root.compactInPanel) ? -1 : root.switchHeight
 
     readonly property int boardSize: Math.max(Plasmoid.configuration.boardSize, 2)
@@ -25,6 +25,7 @@ Item {
     property int currentPosition: -1
 
     property int seconds: 0
+    property int moveCounter: 0
 
     Keys.onPressed: event => {
         let newPosition = main.currentPosition;
@@ -132,6 +133,7 @@ Item {
         // Hide the solved rectangle in case it was visible
         solvedRect.visible = false;
         main.seconds = 0;
+        main.moveCounter = 0
         main.currentPosition = -1;
 
         const count = boardSize * boardSize;
@@ -218,6 +220,7 @@ Item {
             // stop at first direction that has (or rather "had" at this point) the empty piece
             if (swapWithEmptyPiece(position, row, col)) {
                 main.currentPosition += col + main.boardSize * row;
+                main.moveCounter++;
                 break;
             }
         }
@@ -301,22 +304,24 @@ Item {
 
     RowLayout {
         id: controlsRow
+        Layout.minimumWidth: fallBackButton.implicitWidth + timeLabel.implicitWidth + spacing * 2 
+                             + moveCounterLabel.implicitWidth + Kirigami.Units.smallSpacing * 2
         anchors {
             margins: Kirigami.Units.smallSpacing
             bottom: parent.bottom
-            horizontalCenter: parent.horizontalCenter
+            left: parent.left
+            right: parent.right
         }
         PlasmaComponents3.Button {
             id: button
-            Layout.fillWidth: true
-            visible: button.implicitWidth + timeLabel.implicitWidth + controlsRow.spacing <= main.width
+            visible: button.implicitWidth + timeLabel.implicitWidth + controlsRow.spacing * 2 
+                     + moveCounterLabel.implicitWidth + Kirigami.Units.smallSpacing * 2 <= main.width
             icon.name: "roll"
             text: i18nc("@action:button", "Shuffle");
             onClicked: main.shuffleBoard();
         }
         PlasmaComponents3.Button {
             id: fallBackButton
-            Layout.fillWidth: true
             visible: !button.visible
             icon.name: "roll"
             display: PlasmaComponents3.Button.IconOnly
@@ -326,10 +331,20 @@ Item {
 
         PlasmaComponents3.Label {
             id: timeLabel
-            Layout.fillWidth: true
             text: main.timerText()
             textFormat: Text.PlainText
             color: Kirigami.Theme.textColor
+        }
+
+        Item {
+            Layout.fillWidth: true
+        }
+
+        PlasmaComponents3.Label {
+            id: moveCounterLabel
+            text: i18nc("@info:status The number of moves made by the player so far",
+                        "Moves: %1", main.moveCounter)
+            textFormat: Text.PlainText
         }
     }
 
