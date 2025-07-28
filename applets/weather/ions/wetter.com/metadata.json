@@ -2,8 +2,10 @@
     "Comment": "does not provide current weather status",
     "KPlugin": {
         "Description": "Weather forecast by wetter.com",
+        "Description[x-test]": "xxWeather forecast by wetter.comxx",
         "Icon": "noneyet",
-        "Name": "wetter.com"
+        "Name": "wetter.com",
+        "Name[x-test]": "xxwetter.comxx"
     },
     "Quality": -1
 }

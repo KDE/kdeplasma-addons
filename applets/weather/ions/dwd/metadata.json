@@ -2,8 +2,10 @@
     "Comment": " 7-day forecast and alerts, but some stations do not provide observation data",
     "KPlugin": {
         "Description": "Weather forecast by German Weather Service",
+        "Description[x-test]": "xxWeather forecast by German Weather Servicexx",
         "Icon": "noneyet",
-        "Name": "German Weather Service"
+        "Name": "German Weather Service",
+        "Name[x-test]": "xxGerman Weather Servicexx"
     },
     "Quality": 1
 }

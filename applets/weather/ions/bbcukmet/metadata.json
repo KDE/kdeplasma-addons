@@ -2,8 +2,10 @@
     "Comment": "7-day forecast and observation. Worldwide general coverage",
     "KPlugin": {
         "Description": "XML Data from the British Broadcasting Corporation",
+        "Description[x-test]": "xxXML Data from the British Broadcasting Corporationxx",
         "Icon": "noneyet",
-        "Name": "BBC Weather"
+        "Name": "BBC Weather",
+        "Name[x-test]": "xxBBC Weatherxx"
     },
     "Quality": 2
 }
