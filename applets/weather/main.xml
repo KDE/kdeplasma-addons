@@ -13,9 +13,6 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <entry name="updateInterval" type="int">
       <default>30</default>
     </entry>
-    <entry name="providerCredit" type="string">
-      <default></default>
-    </entry>
     <entry name="placeDisplayName" type="string">
       <default></default>
     </entry>
