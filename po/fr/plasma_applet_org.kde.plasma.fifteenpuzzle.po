@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 00:43+0000\n"
+"POT-Creation-Date: 2025-07-29 00:42+0000\n"
 "PO-Revision-Date: 2021-12-13 21:41+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -85,19 +85,25 @@ msgstr "Tuiles :"
 msgid "Colored numbers:"
 msgstr "Numéros colorés :"
 
-#: package/contents/ui/FifteenPuzzle.qml:259
+#: package/contents/ui/FifteenPuzzle.qml:262
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Temps : %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:314
+#: package/contents/ui/FifteenPuzzle.qml:320
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Mélanger"
 
-#: package/contents/ui/FifteenPuzzle.qml:356
+#: package/contents/ui/FifteenPuzzle.qml:346
+#, kde-format
+msgctxt "@info:status The number of moves made by the player so far"
+msgid "Moves: %1"
+msgstr ""
+
+#: package/contents/ui/FifteenPuzzle.qml:371
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."

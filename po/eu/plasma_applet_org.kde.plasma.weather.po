@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-28 00:42+0000\n"
-"PO-Revision-Date: 2025-07-25 13:20+0200\n"
+"PO-Revision-Date: 2025-07-28 12:11+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -292,7 +292,7 @@ msgstr "zirimiri arina"
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy drizzle"
-msgstr "zirimiri trinkoa"
+msgstr "zirimiri bizia"
 
 #: ions/wetter.com/ion_wettercom.cpp:150
 #, kde-format
@@ -304,7 +304,7 @@ msgstr "zirimiri izoztua"
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy freezing drizzle"
-msgstr "zirimiri izozkor trinkoa"
+msgstr "zirimiri izoztu bizia"
 
 #: ions/wetter.com/ion_wettercom.cpp:152
 #, kde-format
@@ -328,31 +328,31 @@ msgstr "euri ertaina"
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain"
-msgstr "euri trinkoa"
+msgstr "euri bizia"
 
 #: ions/wetter.com/ion_wettercom.cpp:157
 #, kde-format
 msgctxt "weather condition"
 msgid "light freezing rain"
-msgstr "euri izozkor arina"
+msgstr "euri izoztu arina"
 
 #: ions/wetter.com/ion_wettercom.cpp:158
 #, kde-format
 msgctxt "weather condition"
 msgid "freezing rain"
-msgstr "euri izozkorra"
+msgstr "euri izoztua"
 
 #: ions/wetter.com/ion_wettercom.cpp:159
 #, kde-format
 msgctxt "weather condition"
 msgid "light rain snow"
-msgstr "elurbusti arina"
+msgstr "euri-elur arina"
 
 #: ions/wetter.com/ion_wettercom.cpp:160
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain snow"
-msgstr "elurbusti trinkoa"
+msgstr "euri-elur bizia"
 
 #: ions/wetter.com/ion_wettercom.cpp:161
 #, kde-format
@@ -376,49 +376,49 @@ msgstr "elur ertaina"
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow"
-msgstr "elur trinkoa"
+msgstr "elur bizia"
 
 #: ions/wetter.com/ion_wettercom.cpp:166 ions/wetter.com/ion_wettercom.cpp:168
 #, kde-format
 msgctxt "weather condition"
 msgid "showers"
-msgstr "zaparradak"
+msgstr "zaparrada"
 
 #: ions/wetter.com/ion_wettercom.cpp:167
 #, kde-format
 msgctxt "weather condition"
 msgid "light showers"
-msgstr "zaparrada arinak"
+msgstr "zaparrada arina"
 
 #: ions/wetter.com/ion_wettercom.cpp:169
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy showers"
-msgstr "zaparrada trinkoa"
+msgstr "zaparrada gogorra"
 
 #: ions/wetter.com/ion_wettercom.cpp:170
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow rain showers"
-msgstr "elurbusti-zaparrada arinak"
+msgstr "elurbusti-zaparrada arina"
 
 #: ions/wetter.com/ion_wettercom.cpp:171
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow rain showers"
-msgstr "elurbusti-zaparrada trinkoak"
+msgstr "elurbusti-zaparrada gogorra"
 
 #: ions/wetter.com/ion_wettercom.cpp:172
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow showers"
-msgstr "elur-zaparrada arinak"
+msgstr "elur-zaparrada arina"
 
 #: ions/wetter.com/ion_wettercom.cpp:173
 #, kde-format
 msgctxt "weather condition"
 msgid "snow showers"
-msgstr "elur-zaparradak"
+msgstr "elur-zaparrada"
 
 #: ions/wetter.com/ion_wettercom.cpp:174 ions/wetter.com/ion_wettercom.cpp:175
 #, kde-format

@@ -900,6 +900,3 @@ msgstr "很高"
 #, kde-format
 msgid "Extreme"
 msgstr "极高"
-
-#~ msgid "German Weather Service"
-#~ msgstr "德国天气服务"
