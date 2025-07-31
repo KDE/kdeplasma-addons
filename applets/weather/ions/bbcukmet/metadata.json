@@ -2,6 +2,7 @@
     "Comment": "7-day forecast and observation. Worldwide general coverage",
     "KPlugin": {
         "Description": "XML Data from the British Broadcasting Corporation",
+        "Description[bg]": "XML данни от BBC",
         "Description[ca@valencia]": "Dades XML de la British Broadcasting Corporation",
         "Description[ca]": "Dades XML de la British Broadcasting Corporation",
         "Description[es]": "Datos XML de la British Broadcasting Corporation",
@@ -17,6 +18,7 @@
         "Description[x-test]": "xxXML Data from the British Broadcasting Corporationxx",
         "Icon": "noneyet",
         "Name": "BBC Weather",
+        "Name[bg]": "Прогноза за времето на BBC",
         "Name[ca@valencia]": "BBC Weather",
         "Name[ca]": "BBC Weather",
         "Name[es]": "BBC Weather",

@@ -2,6 +2,7 @@
     "Comment": " 7-day forecast and alerts, but some stations do not provide observation data",
     "KPlugin": {
         "Description": "Weather forecast by German Weather Service",
+        "Description[bg]": "Прогноза за времето от Германска метеорологична служба",
         "Description[ca@valencia]": "Previsió meteorològica del Servei meteorològic alemany",
         "Description[ca]": "Previsió meteorològica del Servei meteorològic alemany",
         "Description[es]": "Previsión meteorológica del servicio meteorológico alemán",
@@ -17,6 +18,7 @@
         "Description[x-test]": "xxWeather forecast by German Weather Servicexx",
         "Icon": "noneyet",
         "Name": "German Weather Service",
+        "Name[bg]": "Германска метеорологична служба",
         "Name[ca@valencia]": "Servei meteorològic alemany",
         "Name[ca]": "Servei meteorològic alemany",
         "Name[es]": "Servicio meteorológico alemán",

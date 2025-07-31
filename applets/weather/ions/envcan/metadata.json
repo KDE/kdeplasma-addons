@@ -2,6 +2,7 @@
     "Comment": "12h 7-day forecast, observation and alerts",
     "KPlugin": {
         "Description": "XML Data from Environment Canada",
+        "Description[bg]": "XML данни от Environment Canada",
         "Description[ca@valencia]": "Dades XML des de Medi ambient del Canadà",
         "Description[ca]": "Dades XML des de Medi ambient del Canadà",
         "Description[es]": "Datos XML de medio ambiente de Canada",
@@ -17,6 +18,7 @@
         "Description[x-test]": "xxXML Data from Environment Canadaxx",
         "Icon": "noneyet",
         "Name": "Environment Canada",
+        "Name[bg]": "Environment Canada",
         "Name[ca@valencia]": "Medi ambient del Canadà",
         "Name[ca]": "Medi ambient del Canadà",
         "Name[es]": "Medio ambiente de Canada",

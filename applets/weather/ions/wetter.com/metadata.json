@@ -2,6 +2,7 @@
     "Comment": "does not provide current weather status",
     "KPlugin": {
         "Description": "Weather forecast by wetter.com",
+        "Description[bg]": "Прогноза за времето от wetter.com",
         "Description[ca@valencia]": "Previsió meteorològica de wetter.com",
         "Description[ca]": "Previsió meteorològica de wetter.com",
         "Description[es]": "Previsión meteorológica de wetter.com",
@@ -17,6 +18,7 @@
         "Description[x-test]": "xxWeather forecast by wetter.comxx",
         "Icon": "noneyet",
         "Name": "wetter.com",
+        "Name[bg]": "wetter.com",
         "Name[ca@valencia]": "wetter.com",
         "Name[ca]": "wetter.com",
         "Name[es]": "wetter.com",
