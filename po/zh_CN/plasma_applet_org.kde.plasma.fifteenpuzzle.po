@@ -94,7 +94,7 @@ msgstr "打乱"
 #, kde-format
 msgctxt "@info:status The number of moves made by the player so far"
 msgid "Moves: %1"
-msgstr ""
+msgstr "步数：%1"
 
 #: package/contents/ui/FifteenPuzzle.qml:371
 #, kde-format
