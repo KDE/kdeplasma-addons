@@ -16,6 +16,7 @@
         "Description[tr]": "Environment Canada’dan gelen XML verisi",
         "Description[uk]": "Дані XML з метеорологічного відділу Канади",
         "Description[x-test]": "xxXML Data from Environment Canadaxx",
+        "Description[zh_CN]": "Environment Canada 提供的 XML 数据",
         "Icon": "noneyet",
         "Name": "Environment Canada",
         "Name[bg]": "Environment Canada",
@@ -31,7 +32,8 @@
         "Name[sv]": "Environment Canada",
         "Name[tr]": "Environment Canada",
         "Name[uk]": "Погода в Канаді",
-        "Name[x-test]": "xxEnvironment Canadaxx"
+        "Name[x-test]": "xxEnvironment Canadaxx",
+        "Name[zh_CN]": "Environment Canada"
     },
     "Quality": 3
 }

@@ -16,6 +16,7 @@
         "Description[tr]": "Alman Hava Durumu tarafından sağlanan hava durumu tahminleri",
         "Description[uk]": "Прогноз погоди від Німецької служби погоди",
         "Description[x-test]": "xxWeather forecast by German Weather Servicexx",
+        "Description[zh_CN]": "German Weather Service 提供的天气预报",
         "Icon": "noneyet",
         "Name": "German Weather Service",
         "Name[bg]": "Германска метеорологична служба",
@@ -31,7 +32,8 @@
         "Name[sv]": "Tyska vädertjänsten",
         "Name[tr]": "Alman Hava Durumu Hizmeti",
         "Name[uk]": "Німецька служба погоди",
-        "Name[x-test]": "xxGerman Weather Servicexx"
+        "Name[x-test]": "xxGerman Weather Servicexx",
+        "Name[zh_CN]": "German Weather Service"
     },
     "Quality": 1
 }
