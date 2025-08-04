@@ -2,7 +2,7 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Dario Panico <Dareus_Persarumrex@fastwebnet.it>, 2008.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2009, 2010, 2014, 2021.
+# SPDX-FileCopyrightText: 2009, 2010, 2014, 2021, 2025 Vincenzo Reale <smart2128vr@gmail.com>
 # Paolo Zamponi <feus73@gmail.com>, 2017, 2018, 2019.
 #
 msgid ""
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-29 00:42+0000\n"
-"PO-Revision-Date: 2021-12-13 14:10+0100\n"
+"PO-Revision-Date: 2025-07-29 15:52+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 25.11.70\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -96,7 +96,7 @@ msgstr "Mescola"
 #, kde-format
 msgctxt "@info:status The number of moves made by the player so far"
 msgid "Moves: %1"
-msgstr ""
+msgstr "Mosse: %1"
 
 #: package/contents/ui/FifteenPuzzle.qml:371
 #, kde-format
