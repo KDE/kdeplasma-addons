@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2022-12-22 11:00+0400\n"
+"PO-Revision-Date: 2025-08-05 12:54+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -114,13 +114,13 @@ msgstr "أظهر شريط التقدم"
 #, kde-format
 msgctxt "@title:label"
 msgid "Notifications:"
-msgstr "الإخطارات:"
+msgstr "الإشعارات:"
 
 #: package/contents/ui/configAppearance.qml:85
 #, kde-format
 msgctxt "@option:check"
 msgid "Show notification text:"
-msgstr "أظهر إخطارًا"
+msgstr "أظهر إشعارًا"
 
 #: package/contents/ui/configTimes.qml:76
 #, kde-format
@@ -132,7 +132,7 @@ msgstr ""
 #: package/contents/ui/configTimes.qml:83
 #, kde-format
 msgid "Add"
-msgstr "أضف"
+msgstr "أضِف"
 
 #: package/contents/ui/configTimes.qml:120
 #, kde-format
