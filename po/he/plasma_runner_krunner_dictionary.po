@@ -1,0 +1,47 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2022-10-28 00:47+0000\n"
+"PO-Revision-Date: 2025-08-07 10:18+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.3\n"
+
+#: dictionaryrunner.cpp:36 dictionaryrunner_config.cpp:34
+#: dictionaryrunner_config.cpp:52
+#, kde-format
+msgctxt "Trigger word before word to define"
+msgid "define"
+msgstr "הגדרה"
+
+#: dictionaryrunner.cpp:43
+#, kde-format
+msgctxt "Dictionary keyword"
+msgid "%1:q:"
+msgstr "%1:q:"
+
+#: dictionaryrunner.cpp:43
+#, kde-format
+msgid "Finds the definition of :q:."
+msgstr "איתור ההגדרה של :q:."
+
+#: dictionaryrunner.cpp:120
+#, kde-format
+msgid "Definition for \"%1\" has been copied to clipboard"
+msgstr "ההגדרה של „%1” הועתקה ללוח הגזירים"
+
+#: dictionaryrunner_config.cpp:22
+#, kde-format
+msgctxt "@label:textbox"
+msgid "Trigger word:"
+msgstr "מילת הזנקה:"

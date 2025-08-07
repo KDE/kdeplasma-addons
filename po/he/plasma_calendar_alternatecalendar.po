@@ -1,0 +1,99 @@
+# Copyright (C) 2025 This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+#
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2023-05-22 02:40+0000\n"
+"PO-Revision-Date: 2025-08-07 10:15+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.04.3\n"
+
+#: calendarsystem.h:54
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Julian"
+msgstr "יוליאני"
+
+#: calendarsystem.h:58
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Milankovic"
+msgstr "מילנקוביץ׳"
+
+#: calendarsystem.h:62
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Solar Hijri Calendar (Persian)"
+msgstr "לוח השנה הפרסי"
+
+#: calendarsystem.h:66
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Islamic Civil Calendar"
+msgstr "לוח השנה המוסלמי האזרחי"
+
+#: calendarsystem.h:70
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Chinese Lunar Calendar"
+msgstr "לוח השנה הסיני"
+
+#: calendarsystem.h:74
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Indian National Calendar"
+msgstr "לוח השנה ההינדי"
+
+#: calendarsystem.h:78
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Hebrew Calendar"
+msgstr "לוח השנה העברי"
+
+#: config/qml/AlternateCalendarConfig.qml:38
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Calendar system:"
+msgstr "מערכת לוח שנה:"
+
+#: config/qml/AlternateCalendarConfig.qml:50
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Date offset:"
+msgstr "היסט תאריך:"
+
+#: config/qml/AlternateCalendarConfig.qml:59
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "יום"
+msgstr[1] "%1 ימים"
+
+#: provider/hebrewcalendar.cpp:97
+#, kde-format
+msgctxt ""
+"%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
+"number %4 Full date in Hebrew"
+msgid "%1 %2, %3 (%4)"
+msgstr "%1 %2, %3 (%4)"
+
+#: provider/indiancalendar.cpp:73
+#, kde-format
+msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
+msgid "%1 %2, %3"
+msgstr "%1 %2, %3"
+
+#: provider/qtcalendar.cpp:52
+#, kde-format
+msgctxt "@label %1 day %2 month name %3 year"
+msgid "%1 %2, %3"
+msgstr "%1 %2, %3"

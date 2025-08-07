@@ -3,108 +3,98 @@
 #
 # Elkana Bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-09-15 00:46+0000\n"
-"PO-Revision-Date: 2017-05-16 06:55-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-08-07 21:35+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: package/contents/config/config.qml:12
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "כללי"
 
 #: package/contents/ui/ConfigGeneral.qml:30
-#, fuzzy, kde-format
-#| msgid "Maximum columns:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
-msgstr "מקסימום עמודות"
+msgstr "כמות עמודות מרבית:"
 
 #: package/contents/ui/ConfigGeneral.qml:30
-#, fuzzy, kde-format
-#| msgid "Maximum rows:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
-msgstr "מקסימות שורות:"
+msgstr "כמות שורות מרבית:"
 
 #: package/contents/ui/ConfigGeneral.qml:44
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
-msgstr "מראה"
+msgstr "מראה:"
 
 #: package/contents/ui/ConfigGeneral.qml:46
-#, fuzzy, kde-format
-#| msgid "Show launcher names"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
-msgstr "הראה שם משגר"
+msgstr "הצגת שמות משגר"
 
 #: package/contents/ui/ConfigGeneral.qml:51
-#, fuzzy, kde-format
-#| msgid "Enable popup"
+#, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
-msgstr "אפשר חלון קובץ"
+msgstr "הפעלת חלון קופץ"
 
 #: package/contents/ui/ConfigGeneral.qml:61
-#, fuzzy, kde-format
-#| msgid "Title"
+#, kde-format
 msgctxt "@title:group"
 msgid "Title:"
-msgstr "כותרת"
+msgstr "כותרת:"
 
 #: package/contents/ui/ConfigGeneral.qml:69
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
-msgstr ""
+msgstr "הצגה:"
 
 #: package/contents/ui/ConfigGeneral.qml:85
-#, fuzzy, kde-format
-#| msgid "Show title"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"
-msgstr "הראה כותרת"
+msgstr "כותרת מותאמת אישית"
 
 #: package/contents/ui/IconItem.qml:175
 #, kde-format
 msgid "Launch %1"
-msgstr ""
+msgstr "הפעלת %1"
 
 #: package/contents/ui/IconItem.qml:259
-#, fuzzy, kde-format
-#| msgid "Add Launcher..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
-msgstr "הוסף משגר..."
+msgstr "הוספת משגר…"
 
 #: package/contents/ui/IconItem.qml:265
-#, fuzzy, kde-format
-#| msgid "Edit Launcher..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
-msgstr "ערוך משגר..."
+msgstr "עריכת משגר…"
 
 #: package/contents/ui/IconItem.qml:271
-#, fuzzy, kde-format
-#| msgid "Remove Launcher"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
-msgstr "הסר משגר"
+msgstr "הסרת משגר"
 
 #: package/contents/ui/main.qml:142
 #, kde-format
@@ -112,28 +102,26 @@ msgid "Quicklaunch"
 msgstr "הפעלה מהירה"
 
 #: package/contents/ui/main.qml:143
-#, fuzzy, kde-format
-#| msgid "Add launchers by Drag and Drop or by using the context menu."
+#, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
-msgstr "הוסף משגר על ידי גרירה ושחרור או על ידי שימוש בתפריט ההקשר."
+msgstr "אפשר להוסיף משגרים על ידי גרירה והשלכה שלהם או דרך תפריט ההקשר."
 
 #: package/contents/ui/main.qml:171
 #, kde-format
 msgid "Hide icons"
-msgstr "הסתר סמלים"
+msgstr "הסתרת סמלים"
 
 #: package/contents/ui/main.qml:171
 #, kde-format
 msgid "Show hidden icons"
-msgstr "הראה סמלים מוסתרים"
+msgstr "הצגת סמלים מוסתרים"
 
 #: package/contents/ui/main.qml:285
-#, fuzzy, kde-format
-#| msgid "Add Launcher..."
+#, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"
-msgstr "הוסף משגר..."
+msgstr "הוספת משגר…"
 
 #, fuzzy
 #~| msgid "Arrangement"

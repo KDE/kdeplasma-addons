@@ -4,34 +4,33 @@
 # david <vertigo.rus@gmail.com>, 2008.
 # elkana bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-05-07 02:49+0000\n"
-"PO-Revision-Date: 2017-05-22 05:28-0400\n"
-"Last-Translator: Elkana Bardugo <ttv200@gmail.com>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-08-07 11:14+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 25.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: package/contents/config/config.qml:11
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "כללי"
 
 #: package/contents/ui/CompactRepresentation.qml:72
-#, fuzzy, kde-format
-#| msgid "Pick a color"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
-msgstr "בחר צבע"
+msgstr "בחירת צבע"
 
 #: package/contents/ui/CompactRepresentation.qml:79
 #, kde-kuit-format
@@ -40,101 +39,92 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"יש לגרור לכאן קוד צבע כדי לשמור אותו<nl/>יש לגרור לכאן תמונה כדי לקבל את "
+"הצבע הממוצע שלה"
 
 #: package/contents/ui/configGeneral.qml:25
-#, fuzzy, kde-format
-#| msgid "Default color format:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
-msgstr "פורמט הצבע הברירת מחדל:"
+msgstr "תבנית הצבע כברירת מחדל:"
 
 #: package/contents/ui/configGeneral.qml:33
-#, fuzzy, kde-format
-#| msgid "Automatically copy color to clipboard"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
-msgstr "העתק אוטומטית ללוח הגזירה"
+msgstr "להעתיק צבע אוטומטית ללוח הגזירים"
 
 #: package/contents/ui/configGeneral.qml:41
-#, fuzzy, kde-format
-#| msgid "When pressing the keyboard shortcut:"
+#, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
-msgstr "שלוחצים על קיצור הדרך:"
+msgstr "בלחיצה על כפתור הקיצור במקלדת:"
 
 #: package/contents/ui/configGeneral.qml:42
-#, fuzzy, kde-format
-#| msgid "Pick a color"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
-msgstr "בחר צבע"
+msgstr "בחירת צבע"
 
 #: package/contents/ui/configGeneral.qml:48
-#, fuzzy, kde-format
-#| msgid "Show history"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
-msgstr "הראה היסטוריה"
+msgstr "הצגת היסטוריה"
 
 #: package/contents/ui/configGeneral.qml:58
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "מניין תצוגה מקדימה:"
 
 #: package/contents/ui/main.qml:114
-#, fuzzy, kde-format
-#| msgid "Open Color Dialog"
+#, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
-msgstr "פתח את תיבת הדו-שיח 'צבע'"
+msgstr "פתיחת חלונית צבעים"
 
 #: package/contents/ui/main.qml:115
-#, fuzzy, kde-format
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "Clear History"
-msgstr "מחיקת היסטוריה"
+msgstr "פינוי ההיסטוריה"
 
 #: package/contents/ui/main.qml:116
-#, fuzzy, kde-format
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "מחיקת היסטוריה"
+msgstr "הצגת ההיסטוריה"
 
 #: package/contents/ui/main.qml:118
-#, fuzzy, kde-format
-#| msgid "Copy to Clipboard"
+#, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
-msgstr "העתק ללוח הגזירה"
+msgstr "העתקה ללוח גזירים"
 
 #: package/contents/ui/main.qml:155
-#, fuzzy, kde-format
-#| msgid "Pick a color"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr "בחר צבע"
+msgstr "אין צבעים"
 
 #: package/contents/ui/main.qml:160
-#, fuzzy, kde-format
-#| msgid "Pick Color"
+#, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
-msgstr "בחר צבע"
+msgstr "בחירת צבע"
 
 #: package/contents/ui/main.qml:345
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "הועתק!"
 
 #: package/contents/ui/main.qml:355
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr ""
+msgstr "מחיקה"
 
 #, fuzzy
 #~| msgid "Color Options"
