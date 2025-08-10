@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-#
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2016.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2021.
+# SPDX-FileCopyrightText: 2021, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-05 05:54+0000\n"
-"PO-Revision-Date: 2021-07-04 22:10+0400\n"
+"PO-Revision-Date: 2025-08-09 22:59+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: charrunner.cpp:41
 #, kde-format
@@ -31,8 +32,8 @@ msgid ""
 "Config entries for alias list and code list have different sizes, ignoring "
 "all."
 msgstr ""
-"إدخالات التكوين لقائمة الأسماء المستعارة وقائمة الرموز لها أحجام مختلفة ، "
-"تجاهلالكل. "
+"إدخالات ضبط لقائمة الأسماء المستعارة وقائمة الرموز لها أحجام مختلفة ، تجاهل "
+"الكل. "
 
 #. i18n: ectx: property (title), widget (QGroupBox, main)
 #: charrunner_config.ui:18
