@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-29 00:42+0000\n"
+"POT-Creation-Date: 2025-08-11 00:44+0000\n"
 "PO-Revision-Date: 2010-02-03 14:07+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -25,59 +25,72 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "រូបរាង"
 
-#: package/contents/ui/configAppearance.qml:43
+#: package/contents/ui/configAppearance.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:54
+#: package/contents/ui/configAppearance.qml:61
 #, kde-format
+msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:61
+#: package/contents/ui/configAppearance.qml:68
 #, kde-format
+msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:77
+#: package/contents/ui/configAppearance.qml:84
 #, kde-format
+msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:85
+#: package/contents/ui/configAppearance.qml:92
 #, fuzzy, kde-format
 #| msgid "Use custom image:"
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "ប្រើ​រូបភាព​ផ្ទាល់ខ្លួន ៖"
 
-#: package/contents/ui/configAppearance.qml:104
-#, kde-format
-msgctxt "@info:tooltip"
+#: package/contents/ui/configAppearance.qml:108
+#, fuzzy, kde-format
+#| msgid "Use custom image:"
+msgctxt "@action:button"
 msgid "Choose image…"
-msgstr ""
+msgstr "ប្រើ​រូបភាព​ផ្ទាល់ខ្លួន ៖"
 
-#: package/contents/ui/configAppearance.qml:112
+#: package/contents/ui/configAppearance.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:117
+#: package/contents/ui/configAppearance.qml:124
 #, kde-format
+msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:131
+#: package/contents/ui/configAppearance.qml:142
 #, kde-format
-msgid "Tiles:"
+msgctxt "@title:group formdata label"
+msgid "Tile labels:"
 msgstr ""
 
-#: package/contents/ui/configAppearance.qml:135
+#: package/contents/ui/configAppearance.qml:149
 #, kde-format
-msgid "Colored numbers:"
+msgctxt "@label:chooser opens label color picker"
+msgid "Color:"
+msgstr ""
+
+#: package/contents/ui/configAppearance.qml:163
+#, kde-format
+msgctxt "@option:check"
+msgid "Hide on image backgrounds"
 msgstr ""
 
 #: package/contents/ui/FifteenPuzzle.qml:262

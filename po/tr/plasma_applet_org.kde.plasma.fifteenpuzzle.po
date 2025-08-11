@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-29 00:42+0000\n"
+"POT-Creation-Date: 2025-08-11 00:44+0000\n"
 "PO-Revision-Date: 2025-07-30 17:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -28,59 +28,79 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Görünüş"
 
-#: package/contents/ui/configAppearance.qml:43
+#: package/contents/ui/configAppearance.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr "Izgara boyutu:"
 
-#: package/contents/ui/configAppearance.qml:54
-#, kde-format
+#: package/contents/ui/configAppearance.qml:61
+#, fuzzy, kde-format
+#| msgid "Background:"
+msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "Arka plan:"
 
-#: package/contents/ui/configAppearance.qml:61
-#, kde-format
+#: package/contents/ui/configAppearance.qml:68
+#, fuzzy, kde-format
+#| msgid "Color:"
+msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "Renk:"
 
-#: package/contents/ui/configAppearance.qml:77
-#, kde-format
+#: package/contents/ui/configAppearance.qml:84
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr "Görsel:"
 
-#: package/contents/ui/configAppearance.qml:85
+#: package/contents/ui/configAppearance.qml:92
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Özel resmin yolu…"
 
-#: package/contents/ui/configAppearance.qml:104
-#, kde-format
-msgctxt "@info:tooltip"
+#: package/contents/ui/configAppearance.qml:108
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Choose image…"
+msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "Görsel seç…"
 
-#: package/contents/ui/configAppearance.qml:112
+#: package/contents/ui/configAppearance.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Bir Görsel Seç"
 
-#: package/contents/ui/configAppearance.qml:117
-#, kde-format
+#: package/contents/ui/configAppearance.qml:124
+#, fuzzy, kde-format
+#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Görsel dosyaları (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:131
-#, kde-format
-msgid "Tiles:"
+#: package/contents/ui/configAppearance.qml:142
+#, fuzzy, kde-format
+#| msgid "Tiles:"
+msgctxt "@title:group formdata label"
+msgid "Tile labels:"
 msgstr "Karolar:"
 
-#: package/contents/ui/configAppearance.qml:135
+#: package/contents/ui/configAppearance.qml:149
+#, fuzzy, kde-format
+#| msgid "Color:"
+msgctxt "@label:chooser opens label color picker"
+msgid "Color:"
+msgstr "Renk:"
+
+#: package/contents/ui/configAppearance.qml:163
 #, kde-format
-msgid "Colored numbers:"
-msgstr "Renkli numaralar:"
+msgctxt "@option:check"
+msgid "Hide on image backgrounds"
+msgstr ""
 
 #: package/contents/ui/FifteenPuzzle.qml:262
 #, kde-format
@@ -115,3 +135,6 @@ msgstr "Onbeşli Yapboz"
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Sırayla düzenleyerek çöz"
+
+#~ msgid "Colored numbers:"
+#~ msgstr "Renkli numaralar:"

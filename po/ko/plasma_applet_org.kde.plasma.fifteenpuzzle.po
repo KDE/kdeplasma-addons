@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-29 00:42+0000\n"
+"POT-Creation-Date: 2025-08-11 00:44+0000\n"
 "PO-Revision-Date: 2022-02-20 22:16+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -23,59 +23,79 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "모양"
 
-#: package/contents/ui/configAppearance.qml:43
+#: package/contents/ui/configAppearance.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr "모눈 크기:"
 
-#: package/contents/ui/configAppearance.qml:54
-#, kde-format
+#: package/contents/ui/configAppearance.qml:61
+#, fuzzy, kde-format
+#| msgid "Background:"
+msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "배경:"
 
-#: package/contents/ui/configAppearance.qml:61
-#, kde-format
+#: package/contents/ui/configAppearance.qml:68
+#, fuzzy, kde-format
+#| msgid "Color:"
+msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "색:"
 
-#: package/contents/ui/configAppearance.qml:77
-#, kde-format
+#: package/contents/ui/configAppearance.qml:84
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr "그림:"
 
-#: package/contents/ui/configAppearance.qml:85
+#: package/contents/ui/configAppearance.qml:92
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "사용자 정의 그림 경로…"
 
-#: package/contents/ui/configAppearance.qml:104
-#, kde-format
-msgctxt "@info:tooltip"
+#: package/contents/ui/configAppearance.qml:108
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Choose image…"
+msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "그림 선택…"
 
-#: package/contents/ui/configAppearance.qml:112
+#: package/contents/ui/configAppearance.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "그림 선택"
 
-#: package/contents/ui/configAppearance.qml:117
-#, kde-format
+#: package/contents/ui/configAppearance.qml:124
+#, fuzzy, kde-format
+#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "그림 파일 (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:131
-#, kde-format
-msgid "Tiles:"
+#: package/contents/ui/configAppearance.qml:142
+#, fuzzy, kde-format
+#| msgid "Tiles:"
+msgctxt "@title:group formdata label"
+msgid "Tile labels:"
 msgstr "타일:"
 
-#: package/contents/ui/configAppearance.qml:135
+#: package/contents/ui/configAppearance.qml:149
+#, fuzzy, kde-format
+#| msgid "Color:"
+msgctxt "@label:chooser opens label color picker"
+msgid "Color:"
+msgstr "색:"
+
+#: package/contents/ui/configAppearance.qml:163
 #, kde-format
-msgid "Colored numbers:"
-msgstr "색이 있는 숫자:"
+msgctxt "@option:check"
+msgid "Hide on image backgrounds"
+msgstr ""
 
 #: package/contents/ui/FifteenPuzzle.qml:262
 #, kde-format
@@ -110,6 +130,9 @@ msgstr "열다섯 조각 퍼즐"
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "숫자대로 정렬해서 풀어 보십시오."
+
+#~ msgid "Colored numbers:"
+#~ msgstr "색이 있는 숫자:"
 
 #~ msgctxt "@label:spinbox"
 #~ msgid "Size:"

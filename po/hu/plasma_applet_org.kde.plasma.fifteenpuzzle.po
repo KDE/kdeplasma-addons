@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-29 00:42+0000\n"
+"POT-Creation-Date: 2025-08-11 00:44+0000\n"
 "PO-Revision-Date: 2024-01-16 21:23+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -25,59 +25,79 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Megjelenés"
 
-#: package/contents/ui/configAppearance.qml:43
+#: package/contents/ui/configAppearance.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr "Rácsméret:"
 
-#: package/contents/ui/configAppearance.qml:54
-#, kde-format
+#: package/contents/ui/configAppearance.qml:61
+#, fuzzy, kde-format
+#| msgid "Background:"
+msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "Háttér:"
 
-#: package/contents/ui/configAppearance.qml:61
-#, kde-format
+#: package/contents/ui/configAppearance.qml:68
+#, fuzzy, kde-format
+#| msgid "Color:"
+msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "Szín:"
 
-#: package/contents/ui/configAppearance.qml:77
-#, kde-format
+#: package/contents/ui/configAppearance.qml:84
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr "Kép:"
 
-#: package/contents/ui/configAppearance.qml:85
+#: package/contents/ui/configAppearance.qml:92
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Egyéni kép elérési útja…"
 
-#: package/contents/ui/configAppearance.qml:104
-#, kde-format
-msgctxt "@info:tooltip"
+#: package/contents/ui/configAppearance.qml:108
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Choose image…"
+msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "Kép kiválasztása…"
 
-#: package/contents/ui/configAppearance.qml:112
+#: package/contents/ui/configAppearance.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Válasszon ki egy képet"
 
-#: package/contents/ui/configAppearance.qml:117
-#, kde-format
+#: package/contents/ui/configAppearance.qml:124
+#, fuzzy, kde-format
+#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Képfájlok (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:131
-#, kde-format
-msgid "Tiles:"
+#: package/contents/ui/configAppearance.qml:142
+#, fuzzy, kde-format
+#| msgid "Tiles:"
+msgctxt "@title:group formdata label"
+msgid "Tile labels:"
 msgstr "Elemek:"
 
-#: package/contents/ui/configAppearance.qml:135
+#: package/contents/ui/configAppearance.qml:149
+#, fuzzy, kde-format
+#| msgid "Color:"
+msgctxt "@label:chooser opens label color picker"
+msgid "Color:"
+msgstr "Szín:"
+
+#: package/contents/ui/configAppearance.qml:163
 #, kde-format
-msgid "Colored numbers:"
-msgstr "Számok színe:"
+msgctxt "@option:check"
+msgid "Hide on image backgrounds"
+msgstr ""
 
 #: package/contents/ui/FifteenPuzzle.qml:262
 #, kde-format
@@ -112,6 +132,9 @@ msgstr "15-ös kirakó"
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Oldja meg az elemek sorba rendezésével"
+
+#~ msgid "Colored numbers:"
+#~ msgstr "Számok színe:"
 
 #, fuzzy
 #~| msgid "Size:"

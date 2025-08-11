@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-29 00:42+0000\n"
+"POT-Creation-Date: 2025-08-11 00:44+0000\n"
 "PO-Revision-Date: 2025-07-29 12:12+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -26,59 +26,79 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Uiterlijk"
 
-#: package/contents/ui/configAppearance.qml:43
+#: package/contents/ui/configAppearance.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr "Rastergrootte:"
 
-#: package/contents/ui/configAppearance.qml:54
-#, kde-format
+#: package/contents/ui/configAppearance.qml:61
+#, fuzzy, kde-format
+#| msgid "Background:"
+msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "Achtergrond:"
 
-#: package/contents/ui/configAppearance.qml:61
-#, kde-format
+#: package/contents/ui/configAppearance.qml:68
+#, fuzzy, kde-format
+#| msgid "Color:"
+msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "Kleur:"
 
-#: package/contents/ui/configAppearance.qml:77
-#, kde-format
+#: package/contents/ui/configAppearance.qml:84
+#, fuzzy, kde-format
+#| msgid "Image:"
+msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr "Afbeelding:"
 
-#: package/contents/ui/configAppearance.qml:85
+#: package/contents/ui/configAppearance.qml:92
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Pad naar eigen afbeelding…"
 
-#: package/contents/ui/configAppearance.qml:104
-#, kde-format
-msgctxt "@info:tooltip"
+#: package/contents/ui/configAppearance.qml:108
+#, fuzzy, kde-format
+#| msgctxt "@info:tooltip"
+#| msgid "Choose image…"
+msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "Afbeelding kiezen…"
 
-#: package/contents/ui/configAppearance.qml:112
+#: package/contents/ui/configAppearance.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Een afbeelding kiezen"
 
-#: package/contents/ui/configAppearance.qml:117
-#, kde-format
+#: package/contents/ui/configAppearance.qml:124
+#, fuzzy, kde-format
+#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Afbeeldingsbestanden (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:131
-#, kde-format
-msgid "Tiles:"
+#: package/contents/ui/configAppearance.qml:142
+#, fuzzy, kde-format
+#| msgid "Tiles:"
+msgctxt "@title:group formdata label"
+msgid "Tile labels:"
 msgstr "Stenen:"
 
-#: package/contents/ui/configAppearance.qml:135
+#: package/contents/ui/configAppearance.qml:149
+#, fuzzy, kde-format
+#| msgid "Color:"
+msgctxt "@label:chooser opens label color picker"
+msgid "Color:"
+msgstr "Kleur:"
+
+#: package/contents/ui/configAppearance.qml:163
 #, kde-format
-msgid "Colored numbers:"
-msgstr "Gekleurde getallen:"
+msgctxt "@option:check"
+msgid "Hide on image backgrounds"
+msgstr ""
 
 #: package/contents/ui/FifteenPuzzle.qml:262
 #, kde-format
@@ -113,6 +133,9 @@ msgstr "Vijftien-puzzel"
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Oplossen door volgorde te sorteren"
+
+#~ msgid "Colored numbers:"
+#~ msgstr "Gekleurde getallen:"
 
 #~ msgctxt "@label:spinbox"
 #~ msgid "Size:"
