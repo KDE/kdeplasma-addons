@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-11 00:44+0000\n"
-"PO-Revision-Date: 2025-07-29 05:21+0200\n"
+"PO-Revision-Date: 2025-08-11 07:13+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -31,22 +31,19 @@ msgid "Grid size:"
 msgstr "ბადის ზომა:"
 
 #: package/contents/ui/configAppearance.qml:61
-#, fuzzy, kde-format
-#| msgid "Background:"
+#, kde-format
 msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "ფონი:"
 
 #: package/contents/ui/configAppearance.qml:68
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "ფერი:"
 
 #: package/contents/ui/configAppearance.qml:84
-#, fuzzy, kde-format
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr "გამოსახულება:"
@@ -58,9 +55,7 @@ msgid "Path to custom image…"
 msgstr "გამოსახულების ბილიკი…"
 
 #: package/contents/ui/configAppearance.qml:108
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Choose image…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "აირჩიეთ გამოსახულება…"
@@ -72,22 +67,19 @@ msgid "Choose an Image"
 msgstr "აირჩიეთ გამოსახულება"
 
 #: package/contents/ui/configAppearance.qml:124
-#, fuzzy, kde-format
-#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+#, kde-format
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "გამოსახულების ფაილები (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
 #: package/contents/ui/configAppearance.qml:142
-#, fuzzy, kde-format
-#| msgid "Tiles:"
+#, kde-format
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
-msgstr "ნაწილები:"
+msgstr "ფილის ჭდეები:"
 
 #: package/contents/ui/configAppearance.qml:149
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color:"
 msgstr "ფერი:"
@@ -96,7 +88,7 @@ msgstr "ფერი:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Hide on image backgrounds"
-msgstr ""
+msgstr "დამალვა გამოსახულების ფონზე"
 
 #: package/contents/ui/FifteenPuzzle.qml:262
 #, kde-format

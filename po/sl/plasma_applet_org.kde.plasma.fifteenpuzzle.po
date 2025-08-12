@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-11 00:44+0000\n"
-"PO-Revision-Date: 2025-07-29 06:31+0200\n"
+"PO-Revision-Date: 2025-08-11 08:19+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -37,22 +37,19 @@ msgid "Grid size:"
 msgstr "Velikost mreže:"
 
 #: package/contents/ui/configAppearance.qml:61
-#, fuzzy, kde-format
-#| msgid "Background:"
+#, kde-format
 msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "Ozadje:"
 
 #: package/contents/ui/configAppearance.qml:68
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "Barva:"
 
 #: package/contents/ui/configAppearance.qml:84
-#, fuzzy, kde-format
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr "Slika:"
@@ -64,9 +61,7 @@ msgid "Path to custom image…"
 msgstr "Pot do slike po meri…"
 
 #: package/contents/ui/configAppearance.qml:108
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Choose image…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "Izberi sliko…"
@@ -78,22 +73,19 @@ msgid "Choose an Image"
 msgstr "Izberi sliko"
 
 #: package/contents/ui/configAppearance.qml:124
-#, fuzzy, kde-format
-#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+#, kde-format
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
-msgstr "Datoteke s sliko (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+msgstr "Slikovne datoteke (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
 #: package/contents/ui/configAppearance.qml:142
-#, fuzzy, kde-format
-#| msgid "Tiles:"
+#, kde-format
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
-msgstr "Ploščice:"
+msgstr "Oznake ploščice:"
 
 #: package/contents/ui/configAppearance.qml:149
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color:"
 msgstr "Barva:"
@@ -102,7 +94,7 @@ msgstr "Barva:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Hide on image backgrounds"
-msgstr ""
+msgstr "Skrivaj na ozadjih slik"
 
 #: package/contents/ui/FifteenPuzzle.qml:262
 #, kde-format

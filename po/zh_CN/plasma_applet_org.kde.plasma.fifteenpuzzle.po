@@ -31,22 +31,19 @@ msgid "Grid size:"
 msgstr "网格大小："
 
 #: package/contents/ui/configAppearance.qml:61
-#, fuzzy, kde-format
-#| msgid "Background:"
+#, kde-format
 msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "背景："
 
 #: package/contents/ui/configAppearance.qml:68
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "颜色："
 
 #: package/contents/ui/configAppearance.qml:84
-#, fuzzy, kde-format
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr "图像："
@@ -58,9 +55,7 @@ msgid "Path to custom image…"
 msgstr "自定义图像路径…"
 
 #: package/contents/ui/configAppearance.qml:108
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Choose image…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "选择图像…"
@@ -72,22 +67,19 @@ msgid "Choose an Image"
 msgstr "选择图像"
 
 #: package/contents/ui/configAppearance.qml:124
-#, fuzzy, kde-format
-#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+#, kde-format
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "图像文件 (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
 #: package/contents/ui/configAppearance.qml:142
-#, fuzzy, kde-format
-#| msgid "Tiles:"
+#, kde-format
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
-msgstr "图块："
+msgstr ""
 
 #: package/contents/ui/configAppearance.qml:149
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color:"
 msgstr "颜色："
@@ -131,6 +123,3 @@ msgstr "十五格拼图"
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "图块排序解谜游戏"
-
-#~ msgid "Colored numbers:"
-#~ msgstr "彩色数字："
