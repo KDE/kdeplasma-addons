@@ -134,6 +134,3 @@ msgstr "Spelet femten"
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Løys ved å flytta i rett rekkjefølgje"
-
-#~ msgid "Colored numbers:"
-#~ msgstr "Farga tal:"
