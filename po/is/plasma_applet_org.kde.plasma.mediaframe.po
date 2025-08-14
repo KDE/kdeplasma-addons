@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-08-14 00:43+0000\n"
 "PO-Revision-Date: 2023-10-17 22:30+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -20,195 +20,213 @@ msgstr ""
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
-msgid "General"
-msgstr "Almennt"
+msgid "Media"
+msgstr ""
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
-msgid "Paths"
-msgstr "Slóðir"
+msgid "Behavior"
+msgstr ""
 
-#: package/contents/ui/ConfigGeneral.qml:48
+#: package/contents/ui/ConfigBehavior.qml:48
 #, kde-format
 msgid "Change picture every:"
 msgstr "Skipta um mynd eftir:"
 
-#: package/contents/ui/ConfigGeneral.qml:65
+#: package/contents/ui/ConfigBehavior.qml:65
 #, kde-format
 msgid "Hours"
 msgstr "klst."
 
-#: package/contents/ui/ConfigGeneral.qml:79
+#: package/contents/ui/ConfigBehavior.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr "mínútur"
 
-#: package/contents/ui/ConfigGeneral.qml:93
+#: package/contents/ui/ConfigBehavior.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr "sekúndur"
 
-#: package/contents/ui/ConfigGeneral.qml:103
+#: package/contents/ui/ConfigBehavior.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Fyllisnið myndar:"
 
-#: package/contents/ui/ConfigGeneral.qml:110
+#: package/contents/ui/ConfigBehavior.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Teygja"
 
-#: package/contents/ui/ConfigGeneral.qml:111
+#: package/contents/ui/ConfigBehavior.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "Myndin er teygð til svo hún fylli rammann"
 
-#: package/contents/ui/ConfigGeneral.qml:115
+#: package/contents/ui/ConfigBehavior.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Halda hlutföllum"
 
-#: package/contents/ui/ConfigGeneral.qml:116
+#: package/contents/ui/ConfigBehavior.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr ""
 "Myndin er stækkuð í réttum hlutföllum svo hún passi án þess að skera af henni"
 
-#: package/contents/ui/ConfigGeneral.qml:120
+#: package/contents/ui/ConfigBehavior.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Halda hlutföllum og skera"
 
-#: package/contents/ui/ConfigGeneral.qml:121
+#: package/contents/ui/ConfigBehavior.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr "Rétt hlutföll notuð og ramminn fylltur, skorið af ef þörf krefur"
 
-#: package/contents/ui/ConfigGeneral.qml:125
+#: package/contents/ui/ConfigBehavior.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Flísaleggja"
 
-#: package/contents/ui/ConfigGeneral.qml:126
+#: package/contents/ui/ConfigBehavior.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Myndin er endurtekin lárétt og lóðrétt"
 
-#: package/contents/ui/ConfigGeneral.qml:130
+#: package/contents/ui/ConfigBehavior.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Flísaleggja lóðrétt"
 
-#: package/contents/ui/ConfigGeneral.qml:131
+#: package/contents/ui/ConfigBehavior.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "Myndin er teygð lárétt og flísalögð lóðrétt"
 
-#: package/contents/ui/ConfigGeneral.qml:135
+#: package/contents/ui/ConfigBehavior.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Flísaleggja lárétt"
 
-#: package/contents/ui/ConfigGeneral.qml:136
+#: package/contents/ui/ConfigBehavior.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "Myndin er teygð lóðrétt og flísalögð lárétt"
 
-#: package/contents/ui/ConfigGeneral.qml:140
+#: package/contents/ui/ConfigBehavior.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Óbreytt"
 
-#: package/contents/ui/ConfigGeneral.qml:141
+#: package/contents/ui/ConfigBehavior.qml:141
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Myndinni er ekki breytt"
 
-#: package/contents/ui/ConfigGeneral.qml:186
+#: package/contents/ui/ConfigBehavior.qml:186
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Almennt:"
 
-#: package/contents/ui/ConfigGeneral.qml:187
+#: package/contents/ui/ConfigBehavior.qml:187
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Slembiröðun"
 
-#: package/contents/ui/ConfigGeneral.qml:192
+#: package/contents/ui/ConfigBehavior.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "Setja skyggnusýningu á pásu þegar bendillinn er yfir myndinni"
 
-#: package/contents/ui/ConfigGeneral.qml:197
+#: package/contents/ui/ConfigBehavior.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Smella á mynd til að opna hana í öðru forriti"
 
-#: package/contents/ui/ConfigPaths.qml:27
+#: package/contents/ui/ConfigMedia.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Bæta við möppu…"
 
-#: package/contents/ui/ConfigPaths.qml:32
+#: package/contents/ui/ConfigMedia.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Bæta við skrám..."
 
-#: package/contents/ui/ConfigPaths.qml:82
+#: package/contents/ui/ConfigMedia.qml:82
 #, fuzzy, kde-format
 #| msgid "Remove path"
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Fjarlægja slóð"
 
-#: package/contents/ui/ConfigPaths.qml:92
+#: package/contents/ui/ConfigMedia.qml:92
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr ""
 
-#: package/contents/ui/ConfigPaths.qml:93
+#: package/contents/ui/ConfigMedia.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr ""
 
-#: package/contents/ui/ConfigPaths.qml:99
+#: package/contents/ui/ConfigMedia.qml:99
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Velja skrár"
 
-#: package/contents/ui/ConfigPaths.qml:119
+#: package/contents/ui/ConfigMedia.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Velja möppu"
 
-#: package/contents/ui/main.qml:359
+#: package/contents/ui/main.qml:361
 #, kde-format
-msgctxt "@action:button"
-msgid "Configure…"
-msgstr "Grunnstilla…"
+msgctxt "@info placeholdermessage if no media loaded"
+msgid "No media selected"
+msgstr ""
+
+#: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
+#, kde-format
+msgctxt "@action:button opens settings dialog"
+msgid "Choose media…"
+msgstr ""
+
+#~ msgctxt "@title"
+#~ msgid "General"
+#~ msgstr "Almennt"
+
+#~ msgctxt "@title"
+#~ msgid "Paths"
+#~ msgstr "Slóðir"
+
+#~ msgctxt "@action:button"
+#~ msgid "Configure…"
+#~ msgstr "Grunnstilla…"

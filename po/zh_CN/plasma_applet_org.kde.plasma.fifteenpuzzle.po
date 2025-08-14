@@ -76,7 +76,7 @@ msgstr "图像文件 (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 #, kde-format
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
-msgstr ""
+msgstr "方砖标签："
 
 #: package/contents/ui/configAppearance.qml:149
 #, kde-format
@@ -88,7 +88,7 @@ msgstr "颜色："
 #, kde-format
 msgctxt "@option:check"
 msgid "Hide on image backgrounds"
-msgstr ""
+msgstr "在图像背景上隐藏"
 
 #: package/contents/ui/FifteenPuzzle.qml:262
 #, kde-format

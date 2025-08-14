@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-08-14 00:43+0000\n"
 "PO-Revision-Date: 2025-04-25 09:36+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -21,196 +21,216 @@ msgstr ""
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
-msgid "General"
-msgstr "Genel"
+msgid "Media"
+msgstr ""
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
-msgid "Paths"
-msgstr "Yollar"
+msgid "Behavior"
+msgstr ""
 
-#: package/contents/ui/ConfigGeneral.qml:48
+#: package/contents/ui/ConfigBehavior.qml:48
 #, kde-format
 msgid "Change picture every:"
 msgstr "Resim değiştirme aralığı:"
 
-#: package/contents/ui/ConfigGeneral.qml:65
+#: package/contents/ui/ConfigBehavior.qml:65
 #, kde-format
 msgid "Hours"
 msgstr "Saat"
 
-#: package/contents/ui/ConfigGeneral.qml:79
+#: package/contents/ui/ConfigBehavior.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr "Dakika"
 
-#: package/contents/ui/ConfigGeneral.qml:93
+#: package/contents/ui/ConfigBehavior.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr "Saniye"
 
-#: package/contents/ui/ConfigGeneral.qml:103
+#: package/contents/ui/ConfigBehavior.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Görsel dolgu kipi:"
 
-#: package/contents/ui/ConfigGeneral.qml:110
+#: package/contents/ui/ConfigBehavior.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Genişlet"
 
-#: package/contents/ui/ConfigGeneral.qml:111
+#: package/contents/ui/ConfigBehavior.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "Görsel, çerçeveye sığacak biçimde ölçeklendirildi"
 
-#: package/contents/ui/ConfigGeneral.qml:115
+#: package/contents/ui/ConfigBehavior.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Oranı koru"
 
-#: package/contents/ui/ConfigGeneral.qml:116
+#: package/contents/ui/ConfigBehavior.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "Görsel, kırpılmadan sığması için yekpare ölçeklendirildi"
 
-#: package/contents/ui/ConfigGeneral.qml:120
+#: package/contents/ui/ConfigBehavior.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Oran kırpmasını koru"
 
-#: package/contents/ui/ConfigGeneral.qml:121
+#: package/contents/ui/ConfigBehavior.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr "Görsel, gerekirse kırpılarak yekpare doldurması için ölçeklendi"
 
-#: package/contents/ui/ConfigGeneral.qml:125
+#: package/contents/ui/ConfigBehavior.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Döşe"
 
-#: package/contents/ui/ConfigGeneral.qml:126
+#: package/contents/ui/ConfigBehavior.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Görsel, yatay ve dikey olarak çoğaltıldı"
 
-#: package/contents/ui/ConfigGeneral.qml:130
+#: package/contents/ui/ConfigBehavior.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Dikey döşe"
 
-#: package/contents/ui/ConfigGeneral.qml:131
+#: package/contents/ui/ConfigBehavior.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "Görsel, yatay olarak genişletildi ve dikey olarak döşendi"
 
-#: package/contents/ui/ConfigGeneral.qml:135
+#: package/contents/ui/ConfigBehavior.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Yatay döşe"
 
-#: package/contents/ui/ConfigGeneral.qml:136
+#: package/contents/ui/ConfigBehavior.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "RGörselesim, dikey olarak genişletildi ve yatay olarak döşendi"
 
-#: package/contents/ui/ConfigGeneral.qml:140
+#: package/contents/ui/ConfigBehavior.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Dolgula"
 
-#: package/contents/ui/ConfigGeneral.qml:141
+#: package/contents/ui/ConfigBehavior.qml:141
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Görsel dönüştürülmedi"
 
-#: package/contents/ui/ConfigGeneral.qml:186
+#: package/contents/ui/ConfigBehavior.qml:186
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Genel:"
 
-#: package/contents/ui/ConfigGeneral.qml:187
+#: package/contents/ui/ConfigBehavior.qml:187
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Sırayı rastgele yap"
 
-#: package/contents/ui/ConfigGeneral.qml:192
+#: package/contents/ui/ConfigBehavior.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "İmleç görselin üzerindeyken slayt gösterisini duraklat"
 
-#: package/contents/ui/ConfigGeneral.qml:197
+#: package/contents/ui/ConfigBehavior.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Resme sol tıklamak, onu harici bir görüntüleyicide açar"
 
-#: package/contents/ui/ConfigPaths.qml:27
+#: package/contents/ui/ConfigMedia.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Klasör ekle…"
 
-#: package/contents/ui/ConfigPaths.qml:32
+#: package/contents/ui/ConfigMedia.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Dosyaları ekle…"
 
-#: package/contents/ui/ConfigPaths.qml:82
+#: package/contents/ui/ConfigMedia.qml:82
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Yolu kaldır"
 
-#: package/contents/ui/ConfigPaths.qml:92
+#: package/contents/ui/ConfigMedia.qml:92
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "Yapılandırılmış ortam yok"
 
-#: package/contents/ui/ConfigPaths.qml:93
+#: package/contents/ui/ConfigMedia.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "Araç takımında görüntülemek için dosyalar veya klasörler ekleyin."
 
-#: package/contents/ui/ConfigPaths.qml:99
+#: package/contents/ui/ConfigMedia.qml:99
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Dosyaları seç"
 
-#: package/contents/ui/ConfigPaths.qml:119
+#: package/contents/ui/ConfigMedia.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Bir Klasör Seç"
 
-#: package/contents/ui/main.qml:359
+#: package/contents/ui/main.qml:361
+#, fuzzy, kde-format
+#| msgctxt "@info placeholdermessage if no paths set"
+#| msgid "No media configured"
+msgctxt "@info placeholdermessage if no media loaded"
+msgid "No media selected"
+msgstr "Yapılandırılmış ortam yok"
+
+#: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
 #, kde-format
-msgctxt "@action:button"
-msgid "Configure…"
-msgstr "Yapılandır…"
+msgctxt "@action:button opens settings dialog"
+msgid "Choose media…"
+msgstr ""
+
+#~ msgctxt "@title"
+#~ msgid "General"
+#~ msgstr "Genel"
+
+#~ msgctxt "@title"
+#~ msgid "Paths"
+#~ msgstr "Yollar"
+
+#~ msgctxt "@action:button"
+#~ msgid "Configure…"
+#~ msgstr "Yapılandır…"
 
 #~ msgctxt "@option:check"
 #~ msgid "Show background frame"

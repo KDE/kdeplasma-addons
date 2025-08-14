@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-08-14 00:43+0000\n"
 "PO-Revision-Date: 2025-05-18 20:31+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -21,196 +21,216 @@ msgstr ""
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
-msgid "General"
-msgstr "Általános"
+msgid "Media"
+msgstr ""
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
-msgid "Paths"
-msgstr "Elérési utak"
+msgid "Behavior"
+msgstr ""
 
-#: package/contents/ui/ConfigGeneral.qml:48
+#: package/contents/ui/ConfigBehavior.qml:48
 #, kde-format
 msgid "Change picture every:"
 msgstr "Képváltási időköz:"
 
-#: package/contents/ui/ConfigGeneral.qml:65
+#: package/contents/ui/ConfigBehavior.qml:65
 #, kde-format
 msgid "Hours"
 msgstr "óra"
 
-#: package/contents/ui/ConfigGeneral.qml:79
+#: package/contents/ui/ConfigBehavior.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr "perc"
 
-#: package/contents/ui/ConfigGeneral.qml:93
+#: package/contents/ui/ConfigBehavior.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr "másodperc"
 
-#: package/contents/ui/ConfigGeneral.qml:103
+#: package/contents/ui/ConfigBehavior.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Képkitöltési mód:"
 
-#: package/contents/ui/ConfigGeneral.qml:110
+#: package/contents/ui/ConfigBehavior.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Nyújtás"
 
-#: package/contents/ui/ConfigGeneral.qml:111
+#: package/contents/ui/ConfigBehavior.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "A kép skálázódik a keret kitöltéséhez"
 
-#: package/contents/ui/ConfigGeneral.qml:115
+#: package/contents/ui/ConfigBehavior.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Képarány megőrzése"
 
-#: package/contents/ui/ConfigGeneral.qml:116
+#: package/contents/ui/ConfigBehavior.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "A kép skálázása egységes a levágás elkerülése érdekében"
 
-#: package/contents/ui/ConfigGeneral.qml:120
+#: package/contents/ui/ConfigBehavior.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Képarány megőrzése levágással"
 
-#: package/contents/ui/ConfigGeneral.qml:121
+#: package/contents/ui/ConfigBehavior.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr "A kép skálázása egységes a kitöltéshez, szükség esetén levágással"
 
-#: package/contents/ui/ConfigGeneral.qml:125
+#: package/contents/ui/ConfigBehavior.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Mozaik"
 
-#: package/contents/ui/ConfigGeneral.qml:126
+#: package/contents/ui/ConfigBehavior.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "A kép vízszintesen és függőlegesen duplázódik"
 
-#: package/contents/ui/ConfigGeneral.qml:130
+#: package/contents/ui/ConfigBehavior.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Függőleges csempézés"
 
-#: package/contents/ui/ConfigGeneral.qml:131
+#: package/contents/ui/ConfigBehavior.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "A kép vízszintesen nyúlik, és függőlegesen többszöröződik"
 
-#: package/contents/ui/ConfigGeneral.qml:135
+#: package/contents/ui/ConfigBehavior.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Vízszintes csempézés"
 
-#: package/contents/ui/ConfigGeneral.qml:136
+#: package/contents/ui/ConfigBehavior.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "A kép függőlegesen nyúlik, és vízszintesen többszöröződik"
 
-#: package/contents/ui/ConfigGeneral.qml:140
+#: package/contents/ui/ConfigBehavior.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Kitöltés"
 
-#: package/contents/ui/ConfigGeneral.qml:141
+#: package/contents/ui/ConfigBehavior.qml:141
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "A kép nem méreteződik át"
 
-#: package/contents/ui/ConfigGeneral.qml:186
+#: package/contents/ui/ConfigBehavior.qml:186
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Általános:"
 
-#: package/contents/ui/ConfigGeneral.qml:187
+#: package/contents/ui/ConfigBehavior.qml:187
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Véletlenszerű sorrend"
 
-#: package/contents/ui/ConfigGeneral.qml:192
+#: package/contents/ui/ConfigBehavior.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "Diavetítés leállítása, ha a kurzor a kép fölé ér"
 
-#: package/contents/ui/ConfigGeneral.qml:197
+#: package/contents/ui/ConfigBehavior.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Kattintson a képre külső alkalmazásban megnyitáshoz"
 
-#: package/contents/ui/ConfigPaths.qml:27
+#: package/contents/ui/ConfigMedia.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Mappa hozzáadása…"
 
-#: package/contents/ui/ConfigPaths.qml:32
+#: package/contents/ui/ConfigMedia.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Fájlok hozzáadása…"
 
-#: package/contents/ui/ConfigPaths.qml:82
+#: package/contents/ui/ConfigMedia.qml:82
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Elérési út eltávolítása"
 
-#: package/contents/ui/ConfigPaths.qml:92
+#: package/contents/ui/ConfigMedia.qml:92
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "Nincs beállítva média"
 
-#: package/contents/ui/ConfigPaths.qml:93
+#: package/contents/ui/ConfigMedia.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "Adjon hozzá fájlokat vagy mappákat a megjelenítésükhöz."
 
-#: package/contents/ui/ConfigPaths.qml:99
+#: package/contents/ui/ConfigMedia.qml:99
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Válasszon fájlokat"
 
-#: package/contents/ui/ConfigPaths.qml:119
+#: package/contents/ui/ConfigMedia.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Válasszon egy mappát"
 
-#: package/contents/ui/main.qml:359
+#: package/contents/ui/main.qml:361
+#, fuzzy, kde-format
+#| msgctxt "@info placeholdermessage if no paths set"
+#| msgid "No media configured"
+msgctxt "@info placeholdermessage if no media loaded"
+msgid "No media selected"
+msgstr "Nincs beállítva média"
+
+#: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
 #, kde-format
-msgctxt "@action:button"
-msgid "Configure…"
-msgstr "Beállítás…"
+msgctxt "@action:button opens settings dialog"
+msgid "Choose media…"
+msgstr ""
+
+#~ msgctxt "@title"
+#~ msgid "General"
+#~ msgstr "Általános"
+
+#~ msgctxt "@title"
+#~ msgid "Paths"
+#~ msgstr "Elérési utak"
+
+#~ msgctxt "@action:button"
+#~ msgid "Configure…"
+#~ msgstr "Beállítás…"
 
 #~ msgctxt "@option:check"
 #~ msgid "Show background frame"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-08-14 00:43+0000\n"
 "PO-Revision-Date: 2025-04-24 11:52+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -23,199 +23,219 @@ msgstr ""
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
-msgid "General"
-msgstr "Загальне"
+msgid "Media"
+msgstr ""
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
-msgid "Paths"
-msgstr "Шляхи"
+msgid "Behavior"
+msgstr ""
 
-#: package/contents/ui/ConfigGeneral.qml:48
+#: package/contents/ui/ConfigBehavior.qml:48
 #, kde-format
 msgid "Change picture every:"
 msgstr "Змінювати зображення кожні"
 
-#: package/contents/ui/ConfigGeneral.qml:65
+#: package/contents/ui/ConfigBehavior.qml:65
 #, kde-format
 msgid "Hours"
 msgstr "години"
 
-#: package/contents/ui/ConfigGeneral.qml:79
+#: package/contents/ui/ConfigBehavior.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr "хвилини"
 
-#: package/contents/ui/ConfigGeneral.qml:93
+#: package/contents/ui/ConfigBehavior.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr "секунди"
 
-#: package/contents/ui/ConfigGeneral.qml:103
+#: package/contents/ui/ConfigBehavior.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Режим заповнення:"
 
-#: package/contents/ui/ConfigGeneral.qml:110
+#: package/contents/ui/ConfigBehavior.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Розтягнути"
 
-#: package/contents/ui/ConfigGeneral.qml:111
+#: package/contents/ui/ConfigBehavior.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "Масштабування зображення для заповнення рамки"
 
-#: package/contents/ui/ConfigGeneral.qml:115
+#: package/contents/ui/ConfigBehavior.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Зберегти формат із заповненням"
 
-#: package/contents/ui/ConfigGeneral.qml:116
+#: package/contents/ui/ConfigBehavior.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "Рівномірне масштабування зображення для заповнення без обрізання"
 
-#: package/contents/ui/ConfigGeneral.qml:120
+#: package/contents/ui/ConfigBehavior.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Зберегти формат із обрізанням"
 
-#: package/contents/ui/ConfigGeneral.qml:121
+#: package/contents/ui/ConfigBehavior.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr ""
 "Рівномірне масштабування зображення для заповнення з обрізанням, якщо треба"
 
-#: package/contents/ui/ConfigGeneral.qml:125
+#: package/contents/ui/ConfigBehavior.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Мозаїка"
 
-#: package/contents/ui/ConfigGeneral.qml:126
+#: package/contents/ui/ConfigBehavior.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Зображення дублюється горизонтально і вертикально"
 
-#: package/contents/ui/ConfigGeneral.qml:130
+#: package/contents/ui/ConfigBehavior.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Розставити вертикально"
 
-#: package/contents/ui/ConfigGeneral.qml:131
+#: package/contents/ui/ConfigBehavior.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr ""
 "Зображення буде розтягнуто горизонтально і розкладено плиткою вертикально"
 
-#: package/contents/ui/ConfigGeneral.qml:135
+#: package/contents/ui/ConfigBehavior.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Розставити горизонтально"
 
-#: package/contents/ui/ConfigGeneral.qml:136
+#: package/contents/ui/ConfigBehavior.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr ""
 "Зображення буде розтягнуто вертикально і розкладено плиткою горизонтально"
 
-#: package/contents/ui/ConfigGeneral.qml:140
+#: package/contents/ui/ConfigBehavior.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Підкладка"
 
-#: package/contents/ui/ConfigGeneral.qml:141
+#: package/contents/ui/ConfigBehavior.qml:141
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Зображення не перетворюється"
 
-#: package/contents/ui/ConfigGeneral.qml:186
+#: package/contents/ui/ConfigBehavior.qml:186
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Загальне:"
 
-#: package/contents/ui/ConfigGeneral.qml:187
+#: package/contents/ui/ConfigBehavior.qml:187
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Випадковий порядок"
 
-#: package/contents/ui/ConfigGeneral.qml:192
+#: package/contents/ui/ConfigBehavior.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "Призупиняти показ слайді, якщо вказівник наводять на зображення"
 
-#: package/contents/ui/ConfigGeneral.qml:197
+#: package/contents/ui/ConfigBehavior.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Клацання на зображенні відкриває його у зовнішній програмі"
 
-#: package/contents/ui/ConfigPaths.qml:27
+#: package/contents/ui/ConfigMedia.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Додати теку…"
 
-#: package/contents/ui/ConfigPaths.qml:32
+#: package/contents/ui/ConfigMedia.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Додати файли…"
 
-#: package/contents/ui/ConfigPaths.qml:82
+#: package/contents/ui/ConfigMedia.qml:82
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Вилучити шлях"
 
-#: package/contents/ui/ConfigPaths.qml:92
+#: package/contents/ui/ConfigMedia.qml:92
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "Не налаштовано носія даних"
 
-#: package/contents/ui/ConfigPaths.qml:93
+#: package/contents/ui/ConfigMedia.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "Додати файли або теки для показу у віджеті."
 
-#: package/contents/ui/ConfigPaths.qml:99
+#: package/contents/ui/ConfigMedia.qml:99
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Виберіть файли"
 
-#: package/contents/ui/ConfigPaths.qml:119
+#: package/contents/ui/ConfigMedia.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Виберіть теку"
 
-#: package/contents/ui/main.qml:359
+#: package/contents/ui/main.qml:361
+#, fuzzy, kde-format
+#| msgctxt "@info placeholdermessage if no paths set"
+#| msgid "No media configured"
+msgctxt "@info placeholdermessage if no media loaded"
+msgid "No media selected"
+msgstr "Не налаштовано носія даних"
+
+#: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
 #, kde-format
-msgctxt "@action:button"
-msgid "Configure…"
-msgstr "Налаштувати…"
+msgctxt "@action:button opens settings dialog"
+msgid "Choose media…"
+msgstr ""
+
+#~ msgctxt "@title"
+#~ msgid "General"
+#~ msgstr "Загальне"
+
+#~ msgctxt "@title"
+#~ msgid "Paths"
+#~ msgstr "Шляхи"
+
+#~ msgctxt "@action:button"
+#~ msgid "Configure…"
+#~ msgstr "Налаштувати…"
 
 #~ msgctxt "@option:check"
 #~ msgid "Show background frame"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-08-14 00:43+0000\n"
 "PO-Revision-Date: 2025-06-10 23:46+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -20,196 +20,216 @@ msgstr ""
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
-msgid "General"
-msgstr "일반"
+msgid "Media"
+msgstr ""
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
-msgid "Paths"
-msgstr "경로"
+msgid "Behavior"
+msgstr ""
 
-#: package/contents/ui/ConfigGeneral.qml:48
+#: package/contents/ui/ConfigBehavior.qml:48
 #, kde-format
 msgid "Change picture every:"
 msgstr "그림 변경 주기:"
 
-#: package/contents/ui/ConfigGeneral.qml:65
+#: package/contents/ui/ConfigBehavior.qml:65
 #, kde-format
 msgid "Hours"
 msgstr "시간"
 
-#: package/contents/ui/ConfigGeneral.qml:79
+#: package/contents/ui/ConfigBehavior.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr "분"
 
-#: package/contents/ui/ConfigGeneral.qml:93
+#: package/contents/ui/ConfigBehavior.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr "초"
 
-#: package/contents/ui/ConfigGeneral.qml:103
+#: package/contents/ui/ConfigBehavior.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "채우기 모드:"
 
-#: package/contents/ui/ConfigGeneral.qml:110
+#: package/contents/ui/ConfigBehavior.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "늘이기"
 
-#: package/contents/ui/ConfigGeneral.qml:111
+#: package/contents/ui/ConfigBehavior.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "그림 크기를 조정하여 늘입니다"
 
-#: package/contents/ui/ConfigGeneral.qml:115
+#: package/contents/ui/ConfigBehavior.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "비율 유지하면서 늘이기"
 
-#: package/contents/ui/ConfigGeneral.qml:116
+#: package/contents/ui/ConfigBehavior.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "그림을 자르지 않고 맞도록 크기 조정"
 
-#: package/contents/ui/ConfigGeneral.qml:120
+#: package/contents/ui/ConfigBehavior.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "비율 유지하면서 자르기"
 
-#: package/contents/ui/ConfigGeneral.qml:121
+#: package/contents/ui/ConfigBehavior.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr "필요한 경우 그림을 잘라내는 형태로 크기 조정"
 
-#: package/contents/ui/ConfigGeneral.qml:125
+#: package/contents/ui/ConfigBehavior.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "바둑판식 배열"
 
-#: package/contents/ui/ConfigGeneral.qml:126
+#: package/contents/ui/ConfigBehavior.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "그림을 수평 및 수직으로 반복 배열"
 
-#: package/contents/ui/ConfigGeneral.qml:130
+#: package/contents/ui/ConfigBehavior.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "수직 바둑판식 배열"
 
-#: package/contents/ui/ConfigGeneral.qml:131
+#: package/contents/ui/ConfigBehavior.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "그림을 수평으로 늘이고 수직으로 반복 배열"
 
-#: package/contents/ui/ConfigGeneral.qml:135
+#: package/contents/ui/ConfigBehavior.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "수평 바둑판식 배열"
 
-#: package/contents/ui/ConfigGeneral.qml:136
+#: package/contents/ui/ConfigBehavior.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "그림을 수직으로 늘이고 수평으로 반복 배열"
 
-#: package/contents/ui/ConfigGeneral.qml:140
+#: package/contents/ui/ConfigBehavior.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "둘러싸기"
 
-#: package/contents/ui/ConfigGeneral.qml:141
+#: package/contents/ui/ConfigBehavior.qml:141
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "그림 크기를 조정하지 않음"
 
-#: package/contents/ui/ConfigGeneral.qml:186
+#: package/contents/ui/ConfigBehavior.qml:186
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "일반:"
 
-#: package/contents/ui/ConfigGeneral.qml:187
+#: package/contents/ui/ConfigBehavior.qml:187
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "무작위 순서 사용"
 
-#: package/contents/ui/ConfigGeneral.qml:192
+#: package/contents/ui/ConfigBehavior.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "그림 위에 커서가 있을 때 슬라이드 쇼 일시 정지"
 
-#: package/contents/ui/ConfigGeneral.qml:197
+#: package/contents/ui/ConfigBehavior.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "그림을 클릭해서 외부 앱으로 열기"
 
-#: package/contents/ui/ConfigPaths.qml:27
+#: package/contents/ui/ConfigMedia.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "폴더 추가…"
 
-#: package/contents/ui/ConfigPaths.qml:32
+#: package/contents/ui/ConfigMedia.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "파일 추가…"
 
-#: package/contents/ui/ConfigPaths.qml:82
+#: package/contents/ui/ConfigMedia.qml:82
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "경로 삭제"
 
-#: package/contents/ui/ConfigPaths.qml:92
+#: package/contents/ui/ConfigMedia.qml:92
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "설정한 미디어 없음"
 
-#: package/contents/ui/ConfigPaths.qml:93
+#: package/contents/ui/ConfigMedia.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "파일이나 폴더를 추가하면 위젯에 표시합니다."
 
-#: package/contents/ui/ConfigPaths.qml:99
+#: package/contents/ui/ConfigMedia.qml:99
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "파일 선택"
 
-#: package/contents/ui/ConfigPaths.qml:119
+#: package/contents/ui/ConfigMedia.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "폴더 선택"
 
-#: package/contents/ui/main.qml:359
+#: package/contents/ui/main.qml:361
+#, fuzzy, kde-format
+#| msgctxt "@info placeholdermessage if no paths set"
+#| msgid "No media configured"
+msgctxt "@info placeholdermessage if no media loaded"
+msgid "No media selected"
+msgstr "설정한 미디어 없음"
+
+#: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
 #, kde-format
-msgctxt "@action:button"
-msgid "Configure…"
-msgstr "설정…"
+msgctxt "@action:button opens settings dialog"
+msgid "Choose media…"
+msgstr ""
+
+#~ msgctxt "@title"
+#~ msgid "General"
+#~ msgstr "일반"
+
+#~ msgctxt "@title"
+#~ msgid "Paths"
+#~ msgstr "경로"
+
+#~ msgctxt "@action:button"
+#~ msgid "Configure…"
+#~ msgstr "설정…"
 
 #~ msgctxt "@option:check"
 #~ msgid "Show background frame"
