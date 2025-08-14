@@ -32,7 +32,7 @@ msgid ""
 "Config entries for alias list and code list have different sizes, ignoring "
 "all."
 msgstr ""
-"إدخالات ضبط لقائمة الأسماء المستعارة وقائمة الرموز لها أحجام مختلفة ، تجاهل "
+"إدخالات ضبط لقائمة الأسماء المستعارة وقائمة الرموز لها أحجام مختلفة، تجاهل "
 "الكل. "
 
 #. i18n: ectx: property (title), widget (QGroupBox, main)

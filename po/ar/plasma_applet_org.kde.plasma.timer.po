@@ -127,7 +127,7 @@ msgstr "أظهر إشعارًا"
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr ""
-"إذا قمت بإضافة مؤقتات محددة مسبقًا هنا ، فسوف تظهر في قائمة سياق بلازميد."
+"إذا قمت بإضافة مؤقتات محددة مسبقًا هنا، فسوف تظهر في قائمة سياق بلازميد."
 
 #: package/contents/ui/configTimes.qml:83
 #, kde-format

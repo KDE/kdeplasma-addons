@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: krunner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-07-05 05:54+0000\n"
-"PO-Revision-Date: 2021-12-22 18:23+0400\n"
+"PO-Revision-Date: 2023-03-16 11:14+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -48,7 +48,7 @@ msgstr "الكلمة المقترحة"
 #: spellcheck.cpp:263
 #, kde-format
 msgid "No dictionary found, please install hspell"
-msgstr "لم يعثر على قاموس ، يرجى تثبيت hspell "
+msgstr "لم يعثر على قاموس، يرجى تثبيت hspell "
 
 #. i18n: ectx: property (title), widget (QGroupBox, groupBox)
 #: spellcheck_config.ui:17
