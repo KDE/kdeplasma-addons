@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-08-15 00:47+0000\n"
 "PO-Revision-Date: 2025-05-31 10:57+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -35,20 +35,20 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Avancerat"
 
-#: package/contents/ui/CompactRepresentation.qml:135
+#: package/contents/ui/CompactRepresentation.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Pausa tidtagning"
 
-#: package/contents/ui/CompactRepresentation.qml:135
+#: package/contents/ui/CompactRepresentation.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Starta tidtagning"
 
-#: package/contents/ui/CompactRepresentation.qml:198
-#: package/contents/ui/CompactRepresentation.qml:216
+#: package/contents/ui/CompactRepresentation.qml:196
+#: package/contents/ui/CompactRepresentation.qml:214
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
@@ -130,49 +130,49 @@ msgstr ""
 "Om du lägger till fördefinierade tidtagare här, visas de i Plasmoidens "
 "sammanhangsberoende meny."
 
-#: package/contents/ui/configTimes.qml:119
+#: package/contents/ui/configTimes.qml:120
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Rulla över siffror för att ändra tiden"
 
-#: package/contents/ui/configTimes.qml:126
+#: package/contents/ui/configTimes.qml:127
 #, kde-format
 msgid "Apply"
 msgstr "Verkställ"
 
-#: package/contents/ui/configTimes.qml:134
+#: package/contents/ui/configTimes.qml:135
 #, kde-format
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: package/contents/ui/configTimes.qml:143
+#: package/contents/ui/configTimes.qml:144
 #, kde-format
 msgid "Edit"
 msgstr "Redigera"
 
-#: package/contents/ui/configTimes.qml:152
+#: package/contents/ui/configTimes.qml:153
 #, kde-format
 msgid "Delete"
 msgstr "Ta bort"
 
-#: package/contents/ui/main.qml:67
+#: package/contents/ui/main.qml:70
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 är startad"
 
-#: package/contents/ui/main.qml:69
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 är inte startad"
 
-#: package/contents/ui/main.qml:72
+#: package/contents/ui/main.qml:75
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Återstående tid: %1 sekund"
 msgstr[1] "Återstående tid: %1 sekunder"
 
-#: package/contents/ui/main.qml:72
+#: package/contents/ui/main.qml:75
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -181,29 +181,29 @@ msgstr ""
 "Använd mushjulet för att ändra siffror eller välja bland fördefinierade "
 "tider i den sammanhangsberoende menyn"
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:92
 #, kde-format
 msgid "Timer"
 msgstr "Stoppur"
 
-#: package/contents/ui/main.qml:90
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgid "Timer finished"
 msgstr "Tidtagning stoppad"
 
-#: package/contents/ui/main.qml:130
+#: package/contents/ui/main.qml:133
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Starta"
 
-#: package/contents/ui/main.qml:135
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "S&toppa"
 
-#: package/contents/ui/main.qml:140
+#: package/contents/ui/main.qml:143
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

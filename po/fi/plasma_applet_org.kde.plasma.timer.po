@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-08-15 00:47+0000\n"
 "PO-Revision-Date: 2025-05-25 16:40+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -38,20 +38,20 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "Lisäasetukset"
 
-#: package/contents/ui/CompactRepresentation.qml:135
+#: package/contents/ui/CompactRepresentation.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Keskeytä ajastin"
 
-#: package/contents/ui/CompactRepresentation.qml:135
+#: package/contents/ui/CompactRepresentation.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Käynnistä ajastin"
 
-#: package/contents/ui/CompactRepresentation.qml:198
-#: package/contents/ui/CompactRepresentation.qml:216
+#: package/contents/ui/CompactRepresentation.qml:196
+#: package/contents/ui/CompactRepresentation.qml:214
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
@@ -133,49 +133,49 @@ msgstr ""
 "Jos tähän lisää esiasetettuja ajastimia, ne ilmestyvät sovelman "
 "kontekstivalikkoon."
 
-#: package/contents/ui/configTimes.qml:119
+#: package/contents/ui/configTimes.qml:120
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Muuta aikaa vierittämällä numeroita"
 
-#: package/contents/ui/configTimes.qml:126
+#: package/contents/ui/configTimes.qml:127
 #, kde-format
 msgid "Apply"
 msgstr "Käytä"
 
-#: package/contents/ui/configTimes.qml:134
+#: package/contents/ui/configTimes.qml:135
 #, kde-format
 msgid "Cancel"
 msgstr "Peru"
 
-#: package/contents/ui/configTimes.qml:143
+#: package/contents/ui/configTimes.qml:144
 #, kde-format
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: package/contents/ui/configTimes.qml:152
+#: package/contents/ui/configTimes.qml:153
 #, kde-format
 msgid "Delete"
 msgstr "Poista"
 
-#: package/contents/ui/main.qml:67
+#: package/contents/ui/main.qml:70
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 on käynnissä"
 
-#: package/contents/ui/main.qml:69
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 ei ole käynnissä"
 
-#: package/contents/ui/main.qml:72
+#: package/contents/ui/main.qml:75
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Aikaa jäljellä: %1 sekunti"
 msgstr[1] "Aikaa jäljellä: %1 sekuntia"
 
-#: package/contents/ui/main.qml:72
+#: package/contents/ui/main.qml:75
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -184,29 +184,29 @@ msgstr ""
 "Muuta numeroita käyttämällä hiiren rullaa tai valitse valmis vaihtoehto "
 "kontekstivalikosta"
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:92
 #, kde-format
 msgid "Timer"
 msgstr "Ajastin"
 
-#: package/contents/ui/main.qml:90
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgid "Timer finished"
 msgstr "Aika loppui"
 
-#: package/contents/ui/main.qml:130
+#: package/contents/ui/main.qml:133
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Käynnistä"
 
-#: package/contents/ui/main.qml:135
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "&Pysäytä"
 
-#: package/contents/ui/main.qml:140
+#: package/contents/ui/main.qml:143
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-04-24 00:42+0000\n"
+"POT-Creation-Date: 2025-08-15 00:47+0000\n"
 "PO-Revision-Date: 2022-12-01 21:56+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -35,20 +35,20 @@ msgctxt "@title"
 msgid "Advanced"
 msgstr "மேம்பட்டவை"
 
-#: package/contents/ui/CompactRepresentation.qml:135
+#: package/contents/ui/CompactRepresentation.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "டைமரை இடைநிறுத்து"
 
-#: package/contents/ui/CompactRepresentation.qml:135
+#: package/contents/ui/CompactRepresentation.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "டைமரத் துவக்கு"
 
-#: package/contents/ui/CompactRepresentation.qml:198
-#: package/contents/ui/CompactRepresentation.qml:216
+#: package/contents/ui/CompactRepresentation.qml:196
+#: package/contents/ui/CompactRepresentation.qml:214
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
@@ -129,49 +129,49 @@ msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr "நீங்கள் இங்கு சேர்க்கும் டைமர்கள், பிளாஸ்மாய்டின் வலது-க்ளிக் பட்டியில் இடம்பெறும்."
 
-#: package/contents/ui/configTimes.qml:119
+#: package/contents/ui/configTimes.qml:120
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "நேரத்தை மாற்ற எண்களின்மீது உருளுங்கள்"
 
-#: package/contents/ui/configTimes.qml:126
+#: package/contents/ui/configTimes.qml:127
 #, kde-format
 msgid "Apply"
 msgstr "செயல்படுத்து"
 
-#: package/contents/ui/configTimes.qml:134
+#: package/contents/ui/configTimes.qml:135
 #, kde-format
 msgid "Cancel"
 msgstr "ரத்து செய்"
 
-#: package/contents/ui/configTimes.qml:143
+#: package/contents/ui/configTimes.qml:144
 #, kde-format
 msgid "Edit"
 msgstr "திருத்து"
 
-#: package/contents/ui/configTimes.qml:152
+#: package/contents/ui/configTimes.qml:153
 #, kde-format
 msgid "Delete"
 msgstr "நீக்கு"
 
-#: package/contents/ui/main.qml:67
+#: package/contents/ui/main.qml:70
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 ஓடுகிறது"
 
-#: package/contents/ui/main.qml:69
+#: package/contents/ui/main.qml:72
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 ஓடவில்லை"
 
-#: package/contents/ui/main.qml:72
+#: package/contents/ui/main.qml:75
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "மீதமுள்ள நேரம்: %1 நொடி"
 msgstr[1] "மீதமுள்ள நேரம்: %1 நொடிகள்"
 
-#: package/contents/ui/main.qml:72
+#: package/contents/ui/main.qml:75
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -180,29 +180,29 @@ msgstr ""
 "சுட்டியின் சக்கரத்தைக் கொண்டு எண்களை மாற்றுங்கள், அல்லது முன்னமைக்கப்பட்ட டைமர்களை வலது-க்ளிக் "
 "பட்டியிலிருந்து தேர்ந்தெடுங்கள்"
 
-#: package/contents/ui/main.qml:89
+#: package/contents/ui/main.qml:92
 #, kde-format
 msgid "Timer"
 msgstr "டைமர்"
 
-#: package/contents/ui/main.qml:90
+#: package/contents/ui/main.qml:93
 #, kde-format
 msgid "Timer finished"
 msgstr "டைமர் முடிந்தவிட்டது"
 
-#: package/contents/ui/main.qml:130
+#: package/contents/ui/main.qml:133
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&துவங்கு"
 
-#: package/contents/ui/main.qml:135
+#: package/contents/ui/main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "&நிறுத்து"
 
-#: package/contents/ui/main.qml:140
+#: package/contents/ui/main.qml:143
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"
