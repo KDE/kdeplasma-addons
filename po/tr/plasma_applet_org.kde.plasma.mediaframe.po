@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-04-24 00:42+0000\n"
-"PO-Revision-Date: 2025-04-25 09:36+0300\n"
+"PO-Revision-Date: 2025-08-14 16:53+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -38,17 +38,17 @@ msgstr "Resim değiştirme aralığı:"
 #: package/contents/ui/ConfigGeneral.qml:65
 #, kde-format
 msgid "Hours"
-msgstr "Saat"
+msgstr "saat"
 
 #: package/contents/ui/ConfigGeneral.qml:79
 #, kde-format
 msgid "Minutes"
-msgstr "Dakika"
+msgstr "dakika"
 
 #: package/contents/ui/ConfigGeneral.qml:93
 #, kde-format
 msgid "Seconds"
-msgstr "Saniye"
+msgstr "saniye"
 
 #: package/contents/ui/ConfigGeneral.qml:103
 #, kde-format
@@ -60,37 +60,37 @@ msgstr "Görsel dolgu kipi:"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
-msgstr "Genişlet"
+msgstr "Ger"
 
 #: package/contents/ui/ConfigGeneral.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
-msgstr "Görsel, çerçeveye sığacak biçimde ölçeklendirildi"
+msgstr "Görsel çerçeveye sığacak biçimde ölçeklendirilir"
 
 #: package/contents/ui/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
-msgstr "Oranı koru"
+msgstr "Sığdırırken oranı koru"
 
 #: package/contents/ui/ConfigGeneral.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
-msgstr "Görsel, kırpılmadan sığması için yekpare ölçeklendirildi"
+msgstr "Görsel kırpılmadan sığması için yekpare olarak ölçeklendirilir"
 
 #: package/contents/ui/ConfigGeneral.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
-msgstr "Oran kırpmasını koru"
+msgstr "Kırparken oranı koru"
 
 #: package/contents/ui/ConfigGeneral.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
-msgstr "Görsel, gerekirse kırpılarak yekpare doldurması için ölçeklendi"
+msgstr "Görsel yekpare olarak doldurması için ölçeklenir ve gerekirse kırpılır"
 
 #: package/contents/ui/ConfigGeneral.qml:125
 #, kde-format
@@ -102,7 +102,7 @@ msgstr "Döşe"
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
-msgstr "Görsel, yatay ve dikey olarak çoğaltıldı"
+msgstr "Görsel yatay ve dikey olarak yinelenir"
 
 #: package/contents/ui/ConfigGeneral.qml:130
 #, kde-format
@@ -114,7 +114,7 @@ msgstr "Dikey döşe"
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
-msgstr "Görsel, yatay olarak genişletildi ve dikey olarak döşendi"
+msgstr "Görsel yatay olarak gerilir ve dikey olarak döşenir"
 
 #: package/contents/ui/ConfigGeneral.qml:135
 #, kde-format
@@ -126,7 +126,7 @@ msgstr "Yatay döşe"
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
-msgstr "RGörselesim, dikey olarak genişletildi ve yatay olarak döşendi"
+msgstr "Görsel dikey olarak gerilir ve yatay olarak döşenir"
 
 #: package/contents/ui/ConfigGeneral.qml:140
 #, kde-format
@@ -138,7 +138,7 @@ msgstr "Dolgula"
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
-msgstr "Görsel dönüştürülmedi"
+msgstr "Görsel dönüşüme uğramaz"
 
 #: package/contents/ui/ConfigGeneral.qml:186
 #, kde-format
@@ -150,7 +150,7 @@ msgstr "Genel:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
-msgstr "Sırayı rastgele yap"
+msgstr "Sırayı rastgeleleştir"
 
 #: package/contents/ui/ConfigGeneral.qml:192
 #, kde-format
@@ -162,19 +162,19 @@ msgstr "İmleç görselin üzerindeyken slayt gösterisini duraklat"
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
-msgstr "Resme sol tıklamak, onu harici bir görüntüleyicide açar"
+msgstr "Resme sol tıklamak, onu dış bir görüntüleyicide açar"
 
 #: package/contents/ui/ConfigPaths.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
-msgstr "Klasör ekle…"
+msgstr "Klasör Ekle…"
 
 #: package/contents/ui/ConfigPaths.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
-msgstr "Dosyaları ekle…"
+msgstr "Dosyalar Ekle…"
 
 #: package/contents/ui/ConfigPaths.qml:82
 #, kde-format
@@ -198,13 +198,13 @@ msgstr "Araç takımında görüntülemek için dosyalar veya klasörler ekleyin
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
-msgstr "Dosyaları seç"
+msgstr "Dosyalar Seç"
 
 #: package/contents/ui/ConfigPaths.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
-msgstr "Bir Klasör Seç"
+msgstr "Klasör Seç"
 
 #: package/contents/ui/main.qml:359
 #, kde-format
