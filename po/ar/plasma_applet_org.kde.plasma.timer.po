@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-12-01 00:48+0000\n"
-"PO-Revision-Date: 2025-08-05 12:54+0400\n"
+"PO-Revision-Date: 2025-08-14 11:52+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -126,8 +126,7 @@ msgstr "أظهر إشعارًا"
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
-msgstr ""
-"إذا قمت بإضافة مؤقتات محددة مسبقًا هنا، فسوف تظهر في قائمة سياق بلازميد."
+msgstr "إذا أضفت مؤقتات محددة مسبقًا هنا، فسوف تظهر في قائمة سياق بلازميد."
 
 #: package/contents/ui/configTimes.qml:83
 #, kde-format
