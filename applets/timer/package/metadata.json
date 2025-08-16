@@ -47,7 +47,7 @@
         ],
         "Category": "Date and Time",
         "Description": "Countdown over a specified time period",
-        "Description[ar]": "قم بالعد التنازلي خلال فترة زمنية محددة",
+        "Description[ar]": "العد التنازلي خلال فترة زمنية محددة",
         "Description[az]": "Müəyyən bir vaxtın geri sayımı",
         "Description[bg]": "Обратно броене за определено време",
         "Description[ca@valencia]": "Compte arrere durant un període de temps especificat",
