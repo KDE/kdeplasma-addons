@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-14 00:43+0000\n"
-"PO-Revision-Date: 2025-05-31 10:57+0200\n"
+"PO-Revision-Date: 2025-08-14 07:48+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
@@ -15,19 +15,19 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.04.3\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Media"
-msgstr ""
+msgstr "Media"
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Beteende"
 
 #: package/contents/ui/ConfigBehavior.qml:48
 #, kde-format
@@ -207,18 +207,16 @@ msgid "Choose a Folder"
 msgstr "Välj en katalog"
 
 #: package/contents/ui/main.qml:361
-#, fuzzy, kde-format
-#| msgctxt "@info placeholdermessage if no paths set"
-#| msgid "No media configured"
+#, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
-msgstr "Ingen media inställd"
+msgstr "Ingen media vald"
 
 #: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
-msgstr ""
+msgstr "Välj media…"
 
 #~ msgctxt "@title"
 #~ msgid "General"

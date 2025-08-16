@@ -220,15 +220,3 @@ msgstr ""
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr ""
-
-#~ msgctxt "@title"
-#~ msgid "General"
-#~ msgstr "Generelt"
-
-#~ msgctxt "@title"
-#~ msgid "Paths"
-#~ msgstr "Adresser"
-
-#~ msgctxt "@action:button"
-#~ msgid "Configure…"
-#~ msgstr "Set opp …"

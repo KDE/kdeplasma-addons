@@ -207,27 +207,13 @@ msgid "Choose a Folder"
 msgstr "选择一个文件夹"
 
 #: package/contents/ui/main.qml:361
-#, fuzzy, kde-format
-#| msgctxt "@info placeholdermessage if no paths set"
-#| msgid "No media configured"
+#, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
-msgstr "没有配置媒体"
+msgstr ""
 
 #: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr ""
-
-#~ msgctxt "@title"
-#~ msgid "General"
-#~ msgstr "常规"
-
-#~ msgctxt "@title"
-#~ msgid "Paths"
-#~ msgstr "路径"
-
-#~ msgctxt "@action:button"
-#~ msgid "Configure…"
-#~ msgstr "配置…"
