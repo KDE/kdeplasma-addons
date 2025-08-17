@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-11 00:44+0000\n"
-"PO-Revision-Date: 2025-07-29 21:43+0200\n"
+"PO-Revision-Date: 2025-08-16 22:57+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -30,25 +30,22 @@ msgid "Grid size:"
 msgstr "Размер на мрежата:"
 
 #: package/contents/ui/configAppearance.qml:61
-#, fuzzy, kde-format
-#| msgid "Background:"
+#, kde-format
 msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "Фон:"
 
 #: package/contents/ui/configAppearance.qml:68
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "Цвят:"
 
 #: package/contents/ui/configAppearance.qml:84
-#, fuzzy, kde-format
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
-msgstr "Образ:"
+msgstr "Изображение:"
 
 #: package/contents/ui/configAppearance.qml:92
 #, kde-format
@@ -57,9 +54,7 @@ msgid "Path to custom image…"
 msgstr "Път към персонализирано изображение…"
 
 #: package/contents/ui/configAppearance.qml:108
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Choose image…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "Избиране на изображение…"
@@ -71,22 +66,19 @@ msgid "Choose an Image"
 msgstr "Избиране на изображение"
 
 #: package/contents/ui/configAppearance.qml:124
-#, fuzzy, kde-format
-#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+#, kde-format
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Файлове с изображения (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
 #: package/contents/ui/configAppearance.qml:142
-#, fuzzy, kde-format
-#| msgid "Tiles:"
+#, kde-format
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
-msgstr "Фаянсови плочки:"
+msgstr "Етикети, представени с плочки:"
 
 #: package/contents/ui/configAppearance.qml:149
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color:"
 msgstr "Цвят:"
@@ -95,7 +87,7 @@ msgstr "Цвят:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Hide on image backgrounds"
-msgstr ""
+msgstr "Скриване при фон с изображение"
 
 #: package/contents/ui/FifteenPuzzle.qml:262
 #, kde-format

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-14 00:43+0000\n"
-"PO-Revision-Date: 2025-04-30 02:35+0900\n"
+"PO-Revision-Date: 2025-08-16 14:46+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: Traditional Chinese\n"
@@ -23,13 +23,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Media"
-msgstr ""
+msgstr "媒體"
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "行為"
 
 #: package/contents/ui/ConfigBehavior.qml:48
 #, kde-format
@@ -209,18 +209,16 @@ msgid "Choose a Folder"
 msgstr "選擇資料夾"
 
 #: package/contents/ui/main.qml:361
-#, fuzzy, kde-format
-#| msgctxt "@info placeholdermessage if no paths set"
-#| msgid "No media configured"
+#, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
-msgstr "未設定媒體"
+msgstr "未選取媒體"
 
 #: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
-msgstr ""
+msgstr "選擇媒體…"
 
 #~ msgctxt "@title"
 #~ msgid "General"
