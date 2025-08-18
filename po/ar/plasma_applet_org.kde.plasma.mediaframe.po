@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-14 00:43+0000\n"
-"PO-Revision-Date: 2025-04-28 17:35+0400\n"
+"PO-Revision-Date: 2025-08-17 22:04+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -23,13 +23,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Media"
-msgstr ""
+msgstr "الوسائط"
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "السلوك"
 
 #: package/contents/ui/ConfigBehavior.qml:48
 #, kde-format
@@ -208,18 +208,16 @@ msgid "Choose a Folder"
 msgstr "اختر مجلّدًا"
 
 #: package/contents/ui/main.qml:361
-#, fuzzy, kde-format
-#| msgctxt "@info placeholdermessage if no paths set"
-#| msgid "No media configured"
+#, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
-msgstr "لم يضبط أي من الوسائط"
+msgstr "لا يوجد وسائط محددة"
 
 #: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
-msgstr ""
+msgstr "اختر الوسائط..."
 
 #~ msgctxt "@title"
 #~ msgid "General"
