@@ -69,7 +69,7 @@ Loader {
 
                 visible: compactRoot.isTemperaturePresent && showTemperature && useBadge && text.length > 0
 
-                text: compactRoot.isTemperaturePresent ? Util.temperatureToDisplayString(compactRoot.displayTemperatureUnit, compactRoot.lastObservation.temperature, compactRoot.metaData.reportTemperatureUnit, true, false) : "";
+                text: compactRoot.isTemperaturePresent ? Util.temperatureToDisplayString(compactRoot.displayTemperatureUnit, compactRoot.lastObservation.temperature, compactRoot.metaData.temperatureUnit, true, false) : "";
                 icon: parent
 
                 // Non-default state to center if the badge is wider than the icon
