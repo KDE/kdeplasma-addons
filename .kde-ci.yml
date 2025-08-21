@@ -45,3 +45,4 @@ RuntimeDependencies:
 Options:
  require-passing-tests-on: ['Linux', 'FreeBSD']
  cppcheck-ignore-files: ['templates/']
+ run-qmllint: true
