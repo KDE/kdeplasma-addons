@@ -20,9 +20,9 @@ NoteManager::NoteManager(QObject *parent)
 {
 }
 
-Note *NoteManager::loadNote(const QString &id)
+Note *NoteManager::loadNote(const QString &id, uint appletId)
 {
-    Note *note = m_backend->loadNote(id);
+    Note *note = m_backend->loadNote(id, appletId);
     QQmlEngine::setObjectOwnership(note, QQmlEngine::JavaScriptOwnership);
     return note;
 }
