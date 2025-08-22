@@ -21,5 +21,6 @@ target_link_libraries(notesplugin PRIVATE
     Qt::Quick
     KF6::CoreAddons
     KF6::Svg
+    KF6::KIOCore
 )
 ecm_finalize_qml_module(notesplugin)

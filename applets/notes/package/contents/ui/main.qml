@@ -46,7 +46,7 @@ PlasmoidItem {
     readonly property bool noBackground: inPanel && (Plasmoid.configuration.color === "translucent" || Plasmoid.configuration.color === "translucent-light")
 
     // note is of type Note
-    property QtObject note: noteManager.loadNote(Plasmoid.configuration.noteId);
+    property QtObject note: noteManager.loadNote(Plasmoid.configuration.noteId, Plasmoid.id);
 
     // define colors used for icons in ToolButtons and for text in TextArea.
     // this is deliberately _NOT_ the theme color as we are over a known bright background!
