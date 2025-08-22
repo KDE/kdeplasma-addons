@@ -14,6 +14,7 @@
 #include <QUuid>
 
 #include <KDirWatch>
+#include <KIO/CopyJob>
 
 class FileNote : public Note
 {
@@ -44,18 +45,40 @@ QStringList FileSystemNoteLoader::allNoteIds()
 
 void FileSystemNoteLoader::deleteNoteResources(const QString &id)
 {
-    m_notesDir.remove(id);
+    QUrl url = QUrl::fromLocalFile(m_notesDir.absoluteFilePath(id));
+    KIO::Job *job = KIO::trash(url);
+    if (!job->exec()) {
+        m_notesDir.remove(id);
+    }
+    m_idToApplet.remove(id);
 }
 
-Note *FileSystemNoteLoader::loadNote(const QString &id)
+Note *FileSystemNoteLoader::loadNote(const QString &id, uint appletId)
 {
     QString idToUse = id;
-    if (id.isEmpty()) {
-        idToUse = QUuid::createUuid().toString().mid(1, 34); // UUID adds random braces I don't want them on my file system
+
+    if (idToUse.isEmpty()) {
+        idToUse = QUuid::createUuid().toString().mid(1, 34);
+        m_idToApplet.insert(idToUse, appletId);
+    } else {
+        if (m_idToApplet.contains(id)) {
+            uint existingApplet = m_idToApplet.value(id);
+            if (existingApplet != appletId) {
+                // If two applets are using the same note id, which can
+                // happen if e.g. the panel is cloned, we copy the
+                // note file to a new id and assign one file per applet.
+                // This avoids having different applets using the same
+                // file.
+                idToUse = QUuid::createUuid().toString().mid(1, 34);
+                QFile::copy(m_notesDir.absoluteFilePath(id), m_notesDir.absoluteFilePath(idToUse));
+                m_idToApplet.insert(idToUse, appletId);
+            }
+        } else {
+            m_idToApplet.insert(idToUse, appletId);
+        }
     }
 
-    FileNote *note = new FileNote(m_notesDir.absoluteFilePath(idToUse), idToUse);
-    return note;
+    return new FileNote(m_notesDir.absoluteFilePath(idToUse), idToUse);
 }
 
 FileNote::FileNote(const QString &path, const QString &id)

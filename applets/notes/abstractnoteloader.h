@@ -19,7 +19,7 @@ public:
     virtual ~AbstractNoteLoader();
 
     virtual QStringList allNoteIds() = 0;
-    virtual Note *loadNote(const QString &id) = 0;
+    virtual Note *loadNote(const QString &id, uint appletId) = 0;
     virtual void deleteNoteResources(const QString &id) = 0;
 
 private:

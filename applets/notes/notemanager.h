@@ -28,7 +28,7 @@ public:
      * Loads the note for the ID given
      * Ownership is passed to the QML context
      */
-    Q_INVOKABLE Note *loadNote(const QString &id);
+    Q_INVOKABLE Note *loadNote(const QString &id, uint appletId);
 
     /**
      * Remove any resources associated with the note ID
