@@ -9,6 +9,7 @@
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQml
 import QtQuick 2.0
@@ -24,7 +25,7 @@ import org.kde.plasma.workspace.calendar 2.0 as PlasmaCalendar
 PlasmoidItem {
     id: root
 
-    property bool showSeconds: plasmoid.configuration.showSeconds
+    property bool showSeconds: Plasmoid.configuration.showSeconds
     property int hours
     property int minutes
     property int seconds
@@ -42,8 +43,8 @@ PlasmoidItem {
         id: dataSource
         engine: "time"
         connectedSources: ["Local"]
-        intervalAlignment: plasmoid.configuration.showSeconds || compactRepresentationItem.mouseArea.containsMouse ? P5Support.Types.NoAlignment : P5Support.Types.AlignToMinute
-        interval: showSeconds || compactRepresentationItem.mouseArea.containsMouse ? 1000 : 60000
+        intervalAlignment: Plasmoid.configuration.showSeconds || root.compactRepresentationItem.mouseArea.containsMouse ? P5Support.Types.NoAlignment : P5Support.Types.AlignToMinute
+        interval: root.showSeconds || root.compactRepresentationItem.mouseArea.containsMouse ? 1000 : 60000
 
         onDataChanged: {
             var date = new Date(data["Local"]["DateTime"]);

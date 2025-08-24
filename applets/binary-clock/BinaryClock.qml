@@ -18,11 +18,13 @@
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
+import org.kde.plasma.plasmoid
 
 Item {
     id: main
@@ -37,7 +39,7 @@ Item {
     //Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
     //Layout.preferredHeight: Layout.minimumHeight
 
-    readonly property int formFactor: plasmoid.formFactor
+    readonly property int formFactor: Plasmoid.formFactor
 
     readonly property bool constrained: formFactor == PlasmaCore.Types.Vertical || formFactor == PlasmaCore.Types.Horizontal
 
@@ -49,12 +51,12 @@ Item {
 
     readonly property int base: 10
 
-    readonly property bool showOffLeds: plasmoid.configuration.showOffLeds
+    readonly property bool showOffLeds: Plasmoid.configuration.showOffLeds
 
     readonly property int dots: showSeconds ? 6 : 4
 
-    readonly property color onColor: plasmoid.configuration.useCustomColorForActive ? plasmoid.configuration.customColorForActive : Kirigami.Theme.textColor
-    readonly property color offColor: plasmoid.configuration.useCustomColorForInactive ? plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.2)
+    readonly property color onColor: Plasmoid.configuration.useCustomColorForActive ? Plasmoid.configuration.customColorForActive : Kirigami.Theme.textColor
+    readonly property color offColor: Plasmoid.configuration.useCustomColorForInactive ? Plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.2)
 
     readonly property int dotSize: Math.min((height-5*Kirigami.Units.smallSpacing)/4, (width-(dots+1)*Kirigami.Units.smallSpacing)/dots)
 
@@ -77,15 +79,19 @@ Item {
         Repeater {
             model: [8, 4, 2, 1]
             Repeater {
-                model: [hours/base, hours%base, minutes/base, minutes%base, seconds/base, seconds%base]
+                id: bitRepeater
+                required property var modelData
+                model: [main.hours/main.base, main.hours%main.base, main.minutes/main.base, main.minutes%main.base, main.seconds/main.base, main.seconds%main.base]
                 property var bit: modelData
                 Rectangle {
+                    required property var modelData
+                    required property int index
                     property var timeVal: modelData
                     visible: main.dotSize >= 0 && (main.showSeconds || index < 4)
                     width: main.dotSize
                     height: width
                     radius: width/2
-                    color: (timeVal & bit) ? main.onColor : (main.showOffLeds ? main.offColor : "transparent")
+                    color: (timeVal & bitRepeater.bit) ? main.onColor : (main.showOffLeds ? main.offColor : "transparent")
                 }
             }
         }
