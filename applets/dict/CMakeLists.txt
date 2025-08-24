@@ -13,11 +13,6 @@ endif()
 plasma_install_package(package org.kde.plasma_applet_dict)
 # TODO: fix pluginid "org.kde.plasma_applet_dict" into properly namespaced id "org.kde.plasma.dict"
 
-ecm_install_icons(
-    ICONS sc-apps-accessories-dictionary.svgz
-    DESTINATION ${KDE_INSTALL_ICONDIR}
-)
-
 #######################################################################################
 add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma_applet_dict")
 
