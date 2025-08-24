@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-28 00:42+0000\n"
+"POT-Creation-Date: 2025-08-24 00:43+0000\n"
 "PO-Revision-Date: 2024-09-21 10:41+0200\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -711,7 +711,7 @@ msgstr ""
 "La ret-alpeto ekstempiĝis, eble pro servila malfunkcio ĉe la veterstacia "
 "provizanto. Rekontrolu pli poste."
 
-#: qml/main.qml:63 qml/TopPanel.qml:214
+#: qml/main.qml:63 qml/TopPanel.qml:220
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -849,7 +849,7 @@ msgstr ""
 "Povus ekzisti teknika problemo kun la veterprognoza provizanto. Se la "
 "problemo persistas pli longe ol tago, sendu cimraporton."
 
-#: qml/TopPanel.qml:132
+#: qml/TopPanel.qml:136
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

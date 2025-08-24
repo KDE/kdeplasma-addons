@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-28 00:42+0000\n"
+"POT-Creation-Date: 2025-08-24 00:43+0000\n"
 "PO-Revision-Date: 2025-07-10 13:33+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -695,7 +695,7 @@ msgstr ""
 "vanwege het niet beschikbaar zijn van de server bij de leverancier van het "
 "weerstation. Probeer het later nog eens."
 
-#: qml/main.qml:63 qml/TopPanel.qml:214
+#: qml/main.qml:63 qml/TopPanel.qml:220
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -833,7 +833,7 @@ msgstr ""
 "Er kan een technisch probleem zijn met de leverancier van het weer. Als het "
 "probleem langer dan een dag blijft, dien een bugrapport in."
 
-#: qml/TopPanel.qml:132
+#: qml/TopPanel.qml:136
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

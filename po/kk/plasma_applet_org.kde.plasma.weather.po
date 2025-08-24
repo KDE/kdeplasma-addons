@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-28 00:42+0000\n"
+"POT-Creation-Date: 2025-08-24 00:43+0000\n"
 "PO-Revision-Date: 2010-04-17 07:29+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -710,7 +710,7 @@ msgid ""
 "weather station provider. Check again later."
 msgstr ""
 
-#: qml/main.qml:63 qml/TopPanel.qml:214
+#: qml/main.qml:63 qml/TopPanel.qml:220
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -874,7 +874,7 @@ msgid ""
 "persists for longer than a day, submit a bug report."
 msgstr ""
 
-#: qml/TopPanel.qml:132
+#: qml/TopPanel.qml:136
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

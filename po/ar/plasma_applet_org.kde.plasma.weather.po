@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-28 00:42+0000\n"
+"POT-Creation-Date: 2025-08-24 00:43+0000\n"
 "PO-Revision-Date: 2025-07-14 20:37+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -702,7 +702,7 @@ msgstr ""
 "انتهت مهلة طلب الشبكة، ربما بسبب انقطاع الخادم لدى موفر محطة الطقس. تحقق مرة "
 "أخرى في وقت لاحق."
 
-#: qml/main.qml:63 qml/TopPanel.qml:214
+#: qml/main.qml:63 qml/TopPanel.qml:220
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -848,7 +848,7 @@ msgstr ""
 "قد تكون هناك مشكلة فنية مع مزود الطقس. إذا استمرت المشكلة لمدة تزيد عن يوم، "
 "فأرسل تقريرًا بالأخطاء."
 
-#: qml/TopPanel.qml:132
+#: qml/TopPanel.qml:136
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
