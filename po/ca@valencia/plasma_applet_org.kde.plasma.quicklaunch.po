@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-08-25 00:43+0000\n"
 "PO-Revision-Date: 2022-02-03 11:04+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -21,89 +21,89 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: package/contents/config/config.qml:12
+#: config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "General"
 
-#: package/contents/ui/ConfigGeneral.qml:27
+#: ConfigGeneral.qml:30
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Màxim de columnes:"
 
-#: package/contents/ui/ConfigGeneral.qml:27
+#: ConfigGeneral.qml:30
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Màxim de files:"
 
-#: package/contents/ui/ConfigGeneral.qml:39
+#: ConfigGeneral.qml:42
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Aparença:"
 
-#: package/contents/ui/ConfigGeneral.qml:41
+#: ConfigGeneral.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
 msgstr "Mostra els noms dels iniciadors"
 
-#: package/contents/ui/ConfigGeneral.qml:46
+#: ConfigGeneral.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Habilita les finestres emergents"
 
-#: package/contents/ui/ConfigGeneral.qml:56
+#: ConfigGeneral.qml:59
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Títol:"
 
-#: package/contents/ui/ConfigGeneral.qml:64
+#: ConfigGeneral.qml:67
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Mostra:"
 
-#: package/contents/ui/ConfigGeneral.qml:80
+#: ConfigGeneral.qml:83
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "Títol personalitzat"
 
-#: package/contents/ui/IconItem.qml:177
+#: IconItem.qml:185
 #, kde-format
 msgid "Launch %1"
 msgstr "Inicia %1"
 
-#: package/contents/ui/IconItem.qml:261
+#: IconItem.qml:269
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Afig un iniciador…"
 
-#: package/contents/ui/IconItem.qml:267
+#: IconItem.qml:275
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Edita l'iniciador…"
 
-#: package/contents/ui/IconItem.qml:273
+#: IconItem.qml:281
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Elimina l'iniciador"
 
-#: package/contents/ui/main.qml:147
+#: main.qml:153
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Quicklaunch"
 
-#: package/contents/ui/main.qml:148
+#: main.qml:154
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
@@ -111,17 +111,17 @@ msgstr ""
 "Afegiu els iniciadors arrossegant i deixant anar o utilitzant el menú "
 "contextual."
 
-#: package/contents/ui/main.qml:178
+#: main.qml:185
 #, kde-format
 msgid "Hide icons"
 msgstr "Oculta les icones"
 
-#: package/contents/ui/main.qml:178
+#: main.qml:185
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Mostra les icones ocultes"
 
-#: package/contents/ui/main.qml:281
+#: main.qml:288
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

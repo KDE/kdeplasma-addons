@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-08-25 00:43+0000\n"
 "PO-Revision-Date: 2022-02-03 09:13+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -20,89 +20,89 @@ msgstr ""
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
 "X-Generator: Lokalize 20.12.0\n"
 
-#: package/contents/config/config.qml:12
+#: config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Загальне"
 
-#: package/contents/ui/ConfigGeneral.qml:27
+#: ConfigGeneral.qml:30
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Максимальна кількість стовпчиків:"
 
-#: package/contents/ui/ConfigGeneral.qml:27
+#: ConfigGeneral.qml:30
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Максимальна кількість рядків:"
 
-#: package/contents/ui/ConfigGeneral.qml:39
+#: ConfigGeneral.qml:42
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Вигляд:"
 
-#: package/contents/ui/ConfigGeneral.qml:41
+#: ConfigGeneral.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
 msgstr "Показати назви"
 
-#: package/contents/ui/ConfigGeneral.qml:46
+#: ConfigGeneral.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Увімкнути контекстні підказки"
 
-#: package/contents/ui/ConfigGeneral.qml:56
+#: ConfigGeneral.qml:59
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Заголовок:"
 
-#: package/contents/ui/ConfigGeneral.qml:64
+#: ConfigGeneral.qml:67
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Показувати:"
 
-#: package/contents/ui/ConfigGeneral.qml:80
+#: ConfigGeneral.qml:83
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "Нетиповий заголовок"
 
-#: package/contents/ui/IconItem.qml:177
+#: IconItem.qml:185
 #, kde-format
 msgid "Launch %1"
 msgstr "Запустити %1"
 
-#: package/contents/ui/IconItem.qml:261
+#: IconItem.qml:269
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Додати інструмент запуску…"
 
-#: package/contents/ui/IconItem.qml:267
+#: IconItem.qml:275
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Змінити інструмент запуску…"
 
-#: package/contents/ui/IconItem.qml:273
+#: IconItem.qml:281
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Вилучити інструмент запуску"
 
-#: package/contents/ui/main.qml:147
+#: main.qml:153
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Швидкий запуск"
 
-#: package/contents/ui/main.qml:148
+#: main.qml:154
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
@@ -110,17 +110,17 @@ msgstr ""
 "Додайте піктограми запуску перетягуванням зі скиданням або за допомогою "
 "контекстного меню."
 
-#: package/contents/ui/main.qml:178
+#: main.qml:185
 #, kde-format
 msgid "Hide icons"
 msgstr "Приховати піктограми"
 
-#: package/contents/ui/main.qml:178
+#: main.qml:185
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Показати приховані піктограми"
 
-#: package/contents/ui/main.qml:281
+#: main.qml:288
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

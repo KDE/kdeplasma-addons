@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-08-25 00:43+0000\n"
 "PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -19,105 +19,105 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n>2);\n"
 "X-Generator: Lokalize 24.08.2\n"
 
-#: package/contents/config/config.qml:12
+#: config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "सामान्य"
 
-#: package/contents/ui/ConfigGeneral.qml:27
+#: ConfigGeneral.qml:30
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "अधिकतमस्तम्भाः :"
 
-#: package/contents/ui/ConfigGeneral.qml:27
+#: ConfigGeneral.qml:30
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "अधिकतमं पङ्क्तयः :"
 
-#: package/contents/ui/ConfigGeneral.qml:39
+#: ConfigGeneral.qml:42
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "स्वरूपम्‌:"
 
-#: package/contents/ui/ConfigGeneral.qml:41
+#: ConfigGeneral.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
 msgstr "प्रक्षेपकनामानि दर्शयतु"
 
-#: package/contents/ui/ConfigGeneral.qml:46
+#: ConfigGeneral.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "पॉपअप सक्षमं कुर्वन्तु"
 
-#: package/contents/ui/ConfigGeneral.qml:56
+#: ConfigGeneral.qml:59
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "शीर्षक:"
 
-#: package/contents/ui/ConfigGeneral.qml:64
+#: ConfigGeneral.qml:67
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "दर्शयतु:"
 
-#: package/contents/ui/ConfigGeneral.qml:80
+#: ConfigGeneral.qml:83
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "कस्टम शीर्षक"
 
-#: package/contents/ui/IconItem.qml:177
+#: IconItem.qml:185
 #, kde-format
 msgid "Launch %1"
 msgstr "%1 प्रारम्भं कुर्वन्तु"
 
-#: package/contents/ui/IconItem.qml:261
+#: IconItem.qml:269
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "प्रक्षेपकं योजयतु…"
 
-#: package/contents/ui/IconItem.qml:267
+#: IconItem.qml:275
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "सम्पादयतु प्रक्षेपक…"
 
-#: package/contents/ui/IconItem.qml:273
+#: IconItem.qml:281
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "प्रक्षेपकं निष्कासयन्तु"
 
-#: package/contents/ui/main.qml:147
+#: main.qml:153
 #, kde-format
 msgid "Quicklaunch"
 msgstr "त्वरित प्रक्षेपण"
 
-#: package/contents/ui/main.qml:148
+#: main.qml:154
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Drag and Drop इत्यनेन अथवा context menu इत्यस्य उपयोगेन launchers योजयन्तु ।"
 
-#: package/contents/ui/main.qml:178
+#: main.qml:185
 #, kde-format
 msgid "Hide icons"
 msgstr "चिह्नानि गोपयन्तु"
 
-#: package/contents/ui/main.qml:178
+#: main.qml:185
 #, kde-format
 msgid "Show hidden icons"
 msgstr "गुप्तचिह्नानि दर्शयतु"
 
-#: package/contents/ui/main.qml:281
+#: main.qml:288
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

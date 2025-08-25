@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-08-25 00:43+0000\n"
 "PO-Revision-Date: 2022-02-04 08:36+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -20,106 +20,106 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Lokalize 21.04.3\n"
 
-#: package/contents/config/config.qml:12
+#: config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Splošno"
 
-#: package/contents/ui/ConfigGeneral.qml:27
+#: ConfigGeneral.qml:30
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Največ stolpcev:"
 
-#: package/contents/ui/ConfigGeneral.qml:27
+#: ConfigGeneral.qml:30
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Največ vrstic:"
 
-#: package/contents/ui/ConfigGeneral.qml:39
+#: ConfigGeneral.qml:42
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Videz:"
 
-#: package/contents/ui/ConfigGeneral.qml:41
+#: ConfigGeneral.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
 msgstr "Pokaži imena zaganjalnikov"
 
-#: package/contents/ui/ConfigGeneral.qml:46
+#: ConfigGeneral.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Omogoči pojavna okna"
 
-#: package/contents/ui/ConfigGeneral.qml:56
+#: ConfigGeneral.qml:59
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Naslov:"
 
-#: package/contents/ui/ConfigGeneral.qml:64
+#: ConfigGeneral.qml:67
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Prikaži:"
 
-#: package/contents/ui/ConfigGeneral.qml:80
+#: ConfigGeneral.qml:83
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "Naslov po meri"
 
-#: package/contents/ui/IconItem.qml:177
+#: IconItem.qml:185
 #, kde-format
 msgid "Launch %1"
 msgstr "Zaženi %1"
 
-#: package/contents/ui/IconItem.qml:261
+#: IconItem.qml:269
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Dodaj zaganjalnik…"
 
-#: package/contents/ui/IconItem.qml:267
+#: IconItem.qml:275
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Uredi zaganjalnik…"
 
-#: package/contents/ui/IconItem.qml:273
+#: IconItem.qml:281
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Odstrani zaganjalnik"
 
-#: package/contents/ui/main.qml:147
+#: main.qml:153
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Hitri zagon"
 
-#: package/contents/ui/main.qml:148
+#: main.qml:154
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr ""
 "Zaganjalnike dodajate z vlečenjem in spuščanjem ali pa z uporabo menija."
 
-#: package/contents/ui/main.qml:178
+#: main.qml:185
 #, kde-format
 msgid "Hide icons"
 msgstr "Skrij ikone"
 
-#: package/contents/ui/main.qml:178
+#: main.qml:185
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Prikaži skrite ikone"
 
-#: package/contents/ui/main.qml:281
+#: main.qml:288
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

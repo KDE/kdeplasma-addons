@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-01-23 00:38+0000\n"
+"POT-Creation-Date: 2025-08-25 00:43+0000\n"
 "PO-Revision-Date: 2019-10-30 21:40+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -17,66 +17,66 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 19.08.1\n"
 
-#: package/contents/config/config.qml:12
+#: config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Üldine"
 
-#: package/contents/ui/ConfigGeneral.qml:27
+#: ConfigGeneral.qml:30
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Maksimaalselt veerge:"
 
-#: package/contents/ui/ConfigGeneral.qml:27
+#: ConfigGeneral.qml:30
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Maksimaalselt ridu:"
 
-#: package/contents/ui/ConfigGeneral.qml:39
+#: ConfigGeneral.qml:42
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Välimus:"
 
-#: package/contents/ui/ConfigGeneral.qml:41
+#: ConfigGeneral.qml:44
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
 msgstr "Käivitaja nimede näitamine"
 
-#: package/contents/ui/ConfigGeneral.qml:46
+#: ConfigGeneral.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Hüpikute lubamine"
 
-#: package/contents/ui/ConfigGeneral.qml:56
+#: ConfigGeneral.qml:59
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Nimi:"
 
-#: package/contents/ui/ConfigGeneral.qml:64
+#: ConfigGeneral.qml:67
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Näitamine: "
 
-#: package/contents/ui/ConfigGeneral.qml:80
+#: ConfigGeneral.qml:83
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "Nime näitamine"
 
-#: package/contents/ui/IconItem.qml:177
+#: IconItem.qml:185
 #, kde-format
 msgid "Launch %1"
 msgstr ""
 
-#: package/contents/ui/IconItem.qml:261
+#: IconItem.qml:269
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Add Launcher..."
@@ -84,7 +84,7 @@ msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Lisa käivitaja ..."
 
-#: package/contents/ui/IconItem.qml:267
+#: IconItem.qml:275
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "Edit Launcher..."
@@ -92,34 +92,34 @@ msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Muuda käivitajat ..."
 
-#: package/contents/ui/IconItem.qml:273
+#: IconItem.qml:281
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Eemalda käivitaja"
 
-#: package/contents/ui/main.qml:147
+#: main.qml:153
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Kiirkäivitaja"
 
-#: package/contents/ui/main.qml:148
+#: main.qml:154
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Käivitajaid saab lisada lohistades või kontekstimenüü abil."
 
-#: package/contents/ui/main.qml:178
+#: main.qml:185
 #, kde-format
 msgid "Hide icons"
 msgstr "Peida ikoonid"
 
-#: package/contents/ui/main.qml:178
+#: main.qml:185
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Näita peidetud ikoone"
 
-#: package/contents/ui/main.qml:281
+#: main.qml:288
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "Add Launcher..."
