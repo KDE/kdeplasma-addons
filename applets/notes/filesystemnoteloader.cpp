@@ -45,7 +45,7 @@ QStringList FileSystemNoteLoader::allNoteIds()
 
 void FileSystemNoteLoader::deleteNoteResources(const QString &id)
 {
-    QUrl url = QUrl::fromLocalFile(m_notesDir.absoluteFilePath(id));
+    const QUrl url = QUrl::fromLocalFile(m_notesDir.absoluteFilePath(id));
     KIO::Job *job = KIO::trash(url);
     if (!job->exec()) {
         m_notesDir.remove(id);
