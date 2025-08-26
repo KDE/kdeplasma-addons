@@ -20,21 +20,21 @@ bool LastDay::isDataPresent() const
     return m_isDataPresent;
 }
 
-QVariant LastDay::getNormalHighTemp() const
+QVariant LastDay::normalHighTemp() const
 {
     if (m_normalHighTemp.has_value()) {
         return *m_normalHighTemp;
     }
     return {};
 }
-QVariant LastDay::getNormalLowTemp() const
+QVariant LastDay::normalLowTemp() const
 {
     if (m_normalLowTemp.has_value()) {
         return *m_normalLowTemp;
     }
     return {};
 }
-QVariant LastDay::getPrecipTotal() const
+QVariant LastDay::precipTotal() const
 {
     if (m_precipTotal.has_value()) {
         return *m_precipTotal;

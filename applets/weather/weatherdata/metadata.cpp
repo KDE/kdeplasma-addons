@@ -20,7 +20,7 @@ bool MetaData::isDataPresent() const
     return m_isDataPresent;
 }
 
-QVariant MetaData::getTemperatureUnit() const
+QVariant MetaData::temperatureUnit() const
 {
     if (m_temperatureUnit.has_value()) {
         return *m_temperatureUnit;
@@ -28,7 +28,7 @@ QVariant MetaData::getTemperatureUnit() const
     return {};
 }
 
-QVariant MetaData::getWindSpeedUnit() const
+QVariant MetaData::windSpeedUnit() const
 {
     if (m_windSpeedUnit.has_value()) {
         return *m_windSpeedUnit;
@@ -36,7 +36,7 @@ QVariant MetaData::getWindSpeedUnit() const
     return {};
 }
 
-QVariant MetaData::getVisibilityUnit() const
+QVariant MetaData::visibilityUnit() const
 {
     if (m_visibilityUnit.has_value()) {
         return *m_visibilityUnit;
@@ -44,7 +44,7 @@ QVariant MetaData::getVisibilityUnit() const
     return {};
 }
 
-QVariant MetaData::getPressureUnit() const
+QVariant MetaData::pressureUnit() const
 {
     if (m_pressureUnit.has_value()) {
         return *m_pressureUnit;
@@ -52,7 +52,7 @@ QVariant MetaData::getPressureUnit() const
     return {};
 }
 
-QVariant MetaData::getHumidityUnit() const
+QVariant MetaData::humidityUnit() const
 {
     if (m_humidityUnit.has_value()) {
         return *m_humidityUnit;
@@ -60,7 +60,7 @@ QVariant MetaData::getHumidityUnit() const
     return {};
 }
 
-QVariant MetaData::getRainfallUnit() const
+QVariant MetaData::rainfallUnit() const
 {
     if (m_rainfallUnit.has_value()) {
         return *m_rainfallUnit;
@@ -68,7 +68,7 @@ QVariant MetaData::getRainfallUnit() const
     return {};
 }
 
-QVariant MetaData::getSnowfallUnit() const
+QVariant MetaData::snowfallUnit() const
 {
     if (m_snowfallUnit.has_value()) {
         return *m_snowfallUnit;
@@ -76,7 +76,7 @@ QVariant MetaData::getSnowfallUnit() const
     return {};
 }
 
-QVariant MetaData::getPrecipUnit() const
+QVariant MetaData::precipUnit() const
 {
     if (m_precipUnit.has_value()) {
         return *m_precipUnit;
@@ -84,12 +84,12 @@ QVariant MetaData::getPrecipUnit() const
     return {};
 }
 
-QString MetaData::getCredit() const
+QString MetaData::credit() const
 {
     return m_credit;
 }
 
-QVariant MetaData::getCreditURL() const
+QVariant MetaData::creditURL() const
 {
     if (m_creditURL.has_value()) {
         return *m_creditURL;

@@ -32,12 +32,12 @@ class WEATHERDATA_EXPORT Station
 {
     Q_GADGET
 
-    Q_PROPERTY(QVariant station READ getStation CONSTANT)
-    Q_PROPERTY(QVariant place READ getPlace CONSTANT)
-    Q_PROPERTY(QVariant country READ getCountry CONSTANT)
-    Q_PROPERTY(QVariant latitude READ getLatitude CONSTANT)
-    Q_PROPERTY(QVariant longitude READ getLongitude CONSTANT)
-    Q_PROPERTY(QVariant newPlaceInfo READ getNewPlaceInfo CONSTANT)
+    Q_PROPERTY(QVariant station READ station CONSTANT)
+    Q_PROPERTY(QVariant place READ place CONSTANT)
+    Q_PROPERTY(QVariant country READ country CONSTANT)
+    Q_PROPERTY(QVariant latitude READ latitude CONSTANT)
+    Q_PROPERTY(QVariant longitude READ longitude CONSTANT)
+    Q_PROPERTY(QVariant newPlaceInfo READ newPlaceInfo CONSTANT)
 
 public:
     Station();
@@ -45,13 +45,13 @@ public:
 
     bool isDataPresent() const;
 
-    QVariant getStation() const;
-    QVariant getPlace() const;
-    QVariant getRegion() const;
-    QVariant getCountry() const;
-    QVariant getLatitude() const;
-    QVariant getLongitude() const;
-    QVariant getNewPlaceInfo() const;
+    QVariant station() const;
+    QVariant place() const;
+    QVariant region() const;
+    QVariant country() const;
+    QVariant latitude() const;
+    QVariant longitude() const;
+    QVariant newPlaceInfo() const;
 
     void setStation(const QString &station);
     void setPlace(const QString &place);

@@ -22,7 +22,7 @@ bool LastObservation::isDataPresent() const
     return m_isDataPresent;
 }
 
-QVariant LastObservation::getObservationTimestamp() const
+QVariant LastObservation::observationTimestamp() const
 {
     if (m_observationTimestamp.has_value()) {
         return *m_observationTimestamp;
@@ -30,7 +30,7 @@ QVariant LastObservation::getObservationTimestamp() const
     return {};
 }
 
-QVariant LastObservation::getCurrentConditions() const
+QVariant LastObservation::currentConditions() const
 {
     if (m_currentConditions.has_value()) {
         return *m_currentConditions;
@@ -38,7 +38,7 @@ QVariant LastObservation::getCurrentConditions() const
     return {};
 }
 
-QVariant LastObservation::getConditionIcon() const
+QVariant LastObservation::conditionIcon() const
 {
     if (m_conditionIcon.has_value()) {
         return *m_conditionIcon;
@@ -46,7 +46,7 @@ QVariant LastObservation::getConditionIcon() const
     return {};
 }
 
-QVariant LastObservation::getTemperature() const
+QVariant LastObservation::temperature() const
 {
     if (m_temperature.has_value()) {
         return *m_temperature;
@@ -54,7 +54,7 @@ QVariant LastObservation::getTemperature() const
     return {};
 }
 
-QVariant LastObservation::getWindchill() const
+QVariant LastObservation::windchill() const
 {
     if (m_windchill.has_value()) {
         return *m_windchill;
@@ -62,7 +62,7 @@ QVariant LastObservation::getWindchill() const
     return {};
 }
 
-QVariant LastObservation::getHeatIndex() const
+QVariant LastObservation::heatIndex() const
 {
     if (m_heatIndex.has_value()) {
         return *m_heatIndex;
@@ -70,7 +70,7 @@ QVariant LastObservation::getHeatIndex() const
     return {};
 }
 
-QVariant LastObservation::getHumidex() const
+QVariant LastObservation::humidex() const
 {
     if (m_humidex.has_value()) {
         return *m_humidex;
@@ -81,7 +81,7 @@ QVariant LastObservation::getHumidex() const
     return {};
 }
 
-QVariant LastObservation::getWindSpeed() const
+QVariant LastObservation::windSpeed() const
 {
     if (m_windSpeed.has_value()) {
         return *m_windSpeed;
@@ -89,7 +89,7 @@ QVariant LastObservation::getWindSpeed() const
     return {};
 }
 
-QVariant LastObservation::getWindGust() const
+QVariant LastObservation::windGust() const
 {
     if (m_windGust.has_value()) {
         return *m_windGust;
@@ -97,7 +97,7 @@ QVariant LastObservation::getWindGust() const
     return {};
 }
 
-QVariant LastObservation::getWindDirection() const
+QVariant LastObservation::windDirection() const
 {
     if (m_windDirection.has_value()) {
         return *m_windDirection;
@@ -105,7 +105,7 @@ QVariant LastObservation::getWindDirection() const
     return {};
 }
 
-QVariant LastObservation::getVisibility() const
+QVariant LastObservation::visibility() const
 {
     if (m_visibility.has_value()) {
         return *m_visibility;
@@ -116,7 +116,7 @@ QVariant LastObservation::getVisibility() const
     return {};
 }
 
-QVariant LastObservation::getPressure() const
+QVariant LastObservation::pressure() const
 {
     if (m_pressure.has_value()) {
         return *m_pressure;
@@ -124,7 +124,7 @@ QVariant LastObservation::getPressure() const
     return {};
 }
 
-QVariant LastObservation::getPressureTendency() const
+QVariant LastObservation::pressureTendency() const
 {
     if (m_pressureTendency.has_value()) {
         return QVariant::fromValue(*m_pressureTendency);
@@ -132,7 +132,7 @@ QVariant LastObservation::getPressureTendency() const
     return {};
 }
 
-QVariant LastObservation::getUVIndex() const
+QVariant LastObservation::UVIndex() const
 {
     if (m_UVIndex.has_value()) {
         return *m_UVIndex;
@@ -140,7 +140,7 @@ QVariant LastObservation::getUVIndex() const
     return {};
 }
 
-QVariant LastObservation::getUVRating() const
+QVariant LastObservation::UVRating() const
 {
     if (m_UVRating.has_value()) {
         return *m_UVRating;
@@ -148,7 +148,7 @@ QVariant LastObservation::getUVRating() const
     return {};
 }
 
-QVariant LastObservation::getHumidity() const
+QVariant LastObservation::humidity() const
 {
     if (m_humidity.has_value()) {
         return *m_humidity;
@@ -156,7 +156,7 @@ QVariant LastObservation::getHumidity() const
     return {};
 }
 
-QVariant LastObservation::getDewpoint() const
+QVariant LastObservation::dewpoint() const
 {
     if (m_dewpoint.has_value()) {
         return *m_dewpoint;

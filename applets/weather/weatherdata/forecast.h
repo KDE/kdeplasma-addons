@@ -33,27 +33,27 @@ class WEATHERDATA_EXPORT Forecast
 {
     Q_GADGET
 
-    Q_PROPERTY(QVariant station READ getStation CONSTANT)
-    Q_PROPERTY(QVariant metaData READ getMetaData CONSTANT)
-    Q_PROPERTY(QVariant lastObservation READ getLastObservation CONSTANT)
-    Q_PROPERTY(QVariant lastDay READ getLastDay CONSTANT)
-    Q_PROPERTY(QVariant currentDay READ getCurrentDay CONSTANT)
+    Q_PROPERTY(QVariant station READ station CONSTANT)
+    Q_PROPERTY(QVariant metaData READ metaData CONSTANT)
+    Q_PROPERTY(QVariant lastObservation READ lastObservation CONSTANT)
+    Q_PROPERTY(QVariant lastDay READ lastDay CONSTANT)
+    Q_PROPERTY(QVariant currentDay READ currentDay CONSTANT)
 
-    Q_PROPERTY(Warnings *warnings READ getWarnings CONSTANT)
-    Q_PROPERTY(FutureDays *futureDays READ getFutureDays CONSTANT)
+    Q_PROPERTY(Warnings *warnings READ warnings CONSTANT)
+    Q_PROPERTY(FutureDays *futureDays READ futureDays CONSTANT)
 
 public:
     Forecast();
     ~Forecast();
 
     bool isError() const;
-    QVariant getStation() const;
-    QVariant getMetaData() const;
-    QVariant getCurrentDay() const;
-    QVariant getLastDay() const;
-    QVariant getLastObservation() const;
-    FutureDays *getFutureDays() const;
-    Warnings *getWarnings() const;
+    QVariant station() const;
+    QVariant metaData() const;
+    QVariant currentDay() const;
+    QVariant lastDay() const;
+    QVariant lastObservation() const;
+    FutureDays *futureDays() const;
+    Warnings *warnings() const;
 
     void setError();
     void setMetadata(const MetaData &metaData);

@@ -36,16 +36,16 @@ class WEATHERDATA_EXPORT MetaData
 {
     Q_GADGET
 
-    Q_PROPERTY(QString credit READ getCredit CONSTANT)
-    Q_PROPERTY(QVariant creditURL READ getCreditURL CONSTANT)
-    Q_PROPERTY(QVariant temperatureUnit READ getTemperatureUnit CONSTANT)
-    Q_PROPERTY(QVariant windSpeedUnit READ getWindSpeedUnit CONSTANT)
-    Q_PROPERTY(QVariant visibilityUnit READ getVisibilityUnit CONSTANT)
-    Q_PROPERTY(QVariant pressureUnit READ getPressureUnit CONSTANT)
-    Q_PROPERTY(QVariant humidityUnit READ getHumidityUnit CONSTANT)
-    Q_PROPERTY(QVariant rainfallUnit READ getRainfallUnit CONSTANT)
-    Q_PROPERTY(QVariant snowfallUnit READ getSnowfallUnit CONSTANT)
-    Q_PROPERTY(QVariant precipUnit READ getPrecipUnit CONSTANT)
+    Q_PROPERTY(QString credit READ credit CONSTANT)
+    Q_PROPERTY(QVariant creditURL READ creditURL CONSTANT)
+    Q_PROPERTY(QVariant temperatureUnit READ temperatureUnit CONSTANT)
+    Q_PROPERTY(QVariant windSpeedUnit READ windSpeedUnit CONSTANT)
+    Q_PROPERTY(QVariant visibilityUnit READ visibilityUnit CONSTANT)
+    Q_PROPERTY(QVariant pressureUnit READ pressureUnit CONSTANT)
+    Q_PROPERTY(QVariant humidityUnit READ humidityUnit CONSTANT)
+    Q_PROPERTY(QVariant rainfallUnit READ rainfallUnit CONSTANT)
+    Q_PROPERTY(QVariant snowfallUnit READ snowfallUnit CONSTANT)
+    Q_PROPERTY(QVariant precipUnit READ precipUnit CONSTANT)
 
 public:
     MetaData();
@@ -53,16 +53,16 @@ public:
 
     bool isDataPresent() const;
 
-    QString getCredit() const;
-    QVariant getCreditURL() const;
-    QVariant getTemperatureUnit() const;
-    QVariant getWindSpeedUnit() const;
-    QVariant getVisibilityUnit() const;
-    QVariant getPressureUnit() const;
-    QVariant getHumidityUnit() const;
-    QVariant getRainfallUnit() const;
-    QVariant getSnowfallUnit() const;
-    QVariant getPrecipUnit() const;
+    QString credit() const;
+    QVariant creditURL() const;
+    QVariant temperatureUnit() const;
+    QVariant windSpeedUnit() const;
+    QVariant visibilityUnit() const;
+    QVariant pressureUnit() const;
+    QVariant humidityUnit() const;
+    QVariant rainfallUnit() const;
+    QVariant snowfallUnit() const;
+    QVariant precipUnit() const;
 
     void setCredit(const QString &credit);
     void setCreditURL(const QString &creditURL);

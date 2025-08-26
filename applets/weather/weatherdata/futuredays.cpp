@@ -62,15 +62,15 @@ QVariant FutureDays::headerData(int section, Qt::Orientation orientation, int ro
         }
 
         if (role == MonthDay) {
-            if (m_nextDays.at(section).getMonthDay().has_value()) {
-                return *m_nextDays.at(section).getMonthDay();
+            if (m_nextDays.at(section).monthDay().has_value()) {
+                return *m_nextDays.at(section).monthDay();
             }
             return {};
         }
 
         if (role == WeekDay) {
-            if (m_nextDays.at(section).getWeekDay().has_value()) {
-                return *m_nextDays.at(section).getWeekDay();
+            if (m_nextDays.at(section).weekDay().has_value()) {
+                return *m_nextDays.at(section).weekDay();
             }
             return {};
         }
@@ -100,7 +100,7 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
     }
 
     if (index.row() == 0) {
-        const std::optional<FutureForecast> &forecast = m_nextDays.at(index.column()).getDaytime();
+        const std::optional<FutureForecast> &forecast = m_nextDays.at(index.column()).daytime();
 
         if (!forecast.has_value()) {
             return {};
@@ -108,18 +108,18 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
 
         switch (role) {
         case ConditionIcon:
-            return forecast->getConditionIcon().has_value() ? *forecast->getConditionIcon() : QVariant();
+            return forecast->conditionIcon().has_value() ? *forecast->conditionIcon() : QVariant();
         case Condition:
-            return forecast->getCondition().has_value() ? *forecast->getCondition() : QVariant();
+            return forecast->condition().has_value() ? *forecast->condition() : QVariant();
         case HighTemp:
-            return forecast->getHighTemp().has_value() ? *forecast->getHighTemp() : QVariant();
+            return forecast->highTemp().has_value() ? *forecast->highTemp() : QVariant();
         case LowTemp:
-            return forecast->getLowTemp().has_value() ? *forecast->getLowTemp() : QVariant();
+            return forecast->lowTemp().has_value() ? *forecast->lowTemp() : QVariant();
         case ConditionProbability:
-            return forecast->getConditionProbability().has_value() ? *forecast->getConditionProbability() : QVariant();
+            return forecast->conditionProbability().has_value() ? *forecast->conditionProbability() : QVariant();
         }
     } else {
-        const std::optional<FutureForecast> &forecast = m_nextDays.at(index.column()).getNight();
+        const std::optional<FutureForecast> &forecast = m_nextDays.at(index.column()).night();
 
         if (!forecast.has_value()) {
             return {};
@@ -127,15 +127,15 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
 
         switch (role) {
         case ConditionIcon:
-            return forecast->getConditionIcon().has_value() ? *forecast->getConditionIcon() : QVariant();
+            return forecast->conditionIcon().has_value() ? *forecast->conditionIcon() : QVariant();
         case Condition:
-            return forecast->getCondition().has_value() ? *forecast->getCondition() : QVariant();
+            return forecast->condition().has_value() ? *forecast->condition() : QVariant();
         case HighTemp:
-            return forecast->getHighTemp().has_value() ? *forecast->getHighTemp() : QVariant();
+            return forecast->highTemp().has_value() ? *forecast->highTemp() : QVariant();
         case LowTemp:
-            return forecast->getLowTemp().has_value() ? *forecast->getLowTemp() : QVariant();
+            return forecast->lowTemp().has_value() ? *forecast->lowTemp() : QVariant();
         case ConditionProbability:
-            return forecast->getConditionProbability().has_value() ? *forecast->getConditionProbability() : QVariant();
+            return forecast->conditionProbability().has_value() ? *forecast->conditionProbability() : QVariant();
         }
     }
 
@@ -146,17 +146,17 @@ void FutureDays::addDay(const FutureDayForecast &forecast)
 {
     beginInsertColumns(QModelIndex(), m_nextDays.size(), m_nextDays.size());
 
-    if (m_nextDays.isEmpty() && forecast.getDaytime().has_value()) {
+    if (m_nextDays.isEmpty() && forecast.daytime().has_value()) {
         m_firstDayExist = true;
     }
 
-    if (!m_isNightPresent && forecast.getNight()) {
+    if (!m_isNightPresent && forecast.night()) {
         m_totalRows = 2;
         m_isNightPresent = true;
     }
 
-    if ((forecast.getDaytime().has_value() && forecast.getDaytime()->getConditionProbability() != 0.0)
-        || (forecast.getNight().has_value() && forecast.getNight()->getConditionProbability() != 0.0)) {
+    if ((forecast.daytime().has_value() && forecast.daytime()->conditionProbability() != 0.0)
+        || (forecast.night().has_value() && forecast.night()->conditionProbability() != 0.0)) {
         m_hasProbability = true;
     }
 
@@ -174,32 +174,32 @@ void FutureDays::addDays(const QList<FutureDayForecast> &forecasts)
     endResetModel();
 }
 
-QString FutureDays::getFirstDayIcon() const
+QString FutureDays::firstDayIcon() const
 {
-    const auto &forecast = m_nextDays.at(0).getDaytime();
+    const auto &forecast = m_nextDays.at(0).daytime();
 
     if (forecast.has_value()) {
-        return *forecast->getConditionIcon();
+        return *forecast->conditionIcon();
     }
     return {};
 }
 
-bool FutureDays::getIsNightPresent() const
+bool FutureDays::isNightPresent() const
 {
     return m_isNightPresent;
 }
 
-bool FutureDays::getHasProbability() const
+bool FutureDays::hasProbability() const
 {
     return m_hasProbability;
 }
 
-bool FutureDays::getFirstDayExist() const
+bool FutureDays::firstDayExist() const
 {
     return m_firstDayExist;
 }
 
-int FutureDays::getDaysNumber() const
+int FutureDays::daysNumber() const
 {
     return m_daysNumber;
 }
@@ -212,22 +212,22 @@ FutureDayForecast::~FutureDayForecast()
 {
 }
 
-std::optional<int> FutureDayForecast::getMonthDay() const
+std::optional<int> FutureDayForecast::monthDay() const
 {
     return m_monthDay;
 }
 
-std::optional<QString> FutureDayForecast::getWeekDay() const
+std::optional<QString> FutureDayForecast::weekDay() const
 {
     return m_weekDay;
 }
 
-std::optional<FutureForecast> FutureDayForecast::getDaytime() const
+std::optional<FutureForecast> FutureDayForecast::daytime() const
 {
     return m_daytime;
 }
 
-std::optional<FutureForecast> FutureDayForecast::getNight() const
+std::optional<FutureForecast> FutureDayForecast::night() const
 {
     return m_night;
 }
@@ -260,27 +260,27 @@ FutureForecast::~FutureForecast()
 {
 }
 
-std::optional<QString> FutureForecast::getConditionIcon() const
+std::optional<QString> FutureForecast::conditionIcon() const
 {
     return m_conditionIcon;
 }
 
-std::optional<QString> FutureForecast::getCondition() const
+std::optional<QString> FutureForecast::condition() const
 {
     return m_condition;
 }
 
-std::optional<qreal> FutureForecast::getHighTemp() const
+std::optional<qreal> FutureForecast::highTemp() const
 {
     return m_highTemp;
 }
 
-std::optional<qreal> FutureForecast::getLowTemp() const
+std::optional<qreal> FutureForecast::lowTemp() const
 {
     return m_lowTemp;
 }
 
-std::optional<qreal> FutureForecast::getConditionProbability() const
+std::optional<qreal> FutureForecast::conditionProbability() const
 {
     return m_conditionProbability;
 }

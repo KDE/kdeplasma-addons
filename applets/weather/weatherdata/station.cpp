@@ -20,7 +20,7 @@ bool Station::isDataPresent() const
     return m_isDataPresent;
 }
 
-QVariant Station::getStation() const
+QVariant Station::station() const
 {
     if (m_station.has_value()) {
         return *m_station;
@@ -28,7 +28,7 @@ QVariant Station::getStation() const
     return {};
 }
 
-QVariant Station::getPlace() const
+QVariant Station::place() const
 {
     if (m_place.has_value()) {
         return *m_place;
@@ -36,7 +36,7 @@ QVariant Station::getPlace() const
     return {};
 }
 
-QVariant Station::getRegion() const
+QVariant Station::region() const
 {
     if (m_region.has_value()) {
         return *m_region;
@@ -44,7 +44,7 @@ QVariant Station::getRegion() const
     return {};
 }
 
-QVariant Station::getCountry() const
+QVariant Station::country() const
 {
     if (m_country.has_value()) {
         return *m_country;
@@ -52,7 +52,7 @@ QVariant Station::getCountry() const
     return {};
 }
 
-QVariant Station::getLatitude() const
+QVariant Station::latitude() const
 {
     if (m_latitude.has_value()) {
         return *m_latitude;
@@ -60,7 +60,7 @@ QVariant Station::getLatitude() const
     return {};
 }
 
-QVariant Station::getLongitude() const
+QVariant Station::longitude() const
 {
     if (m_longitude.has_value()) {
         return *m_longitude;
@@ -68,7 +68,7 @@ QVariant Station::getLongitude() const
     return {};
 }
 
-QVariant Station::getNewPlaceInfo() const
+QVariant Station::newPlaceInfo() const
 {
     if (m_newPlaceInfo.has_value()) {
         return *m_newPlaceInfo;

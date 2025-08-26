@@ -31,8 +31,8 @@ class WEATHERDATA_EXPORT Warnings : public QAbstractListModel
     Q_OBJECT
     QML_ANONYMOUS
 
-    Q_PROPERTY(int maxPriorityCount READ getMaxPriorityCount CONSTANT)
-    Q_PROPERTY(int count READ getCount CONSTANT)
+    Q_PROPERTY(int maxPriorityCount READ maxPriorityCount CONSTANT)
+    Q_PROPERTY(int count READ count CONSTANT)
 
 public:
     enum WarningModel {
@@ -64,8 +64,8 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    int getMaxPriorityCount() const;
-    int getCount() const;
+    int maxPriorityCount() const;
+    int count() const;
 
 private:
     QList<Warning> m_warnings;

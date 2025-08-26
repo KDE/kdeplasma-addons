@@ -27,9 +27,9 @@ class WEATHERDATA_EXPORT LastDay
 {
     Q_GADGET
 
-    Q_PROPERTY(QVariant normalHighTemp READ getNormalHighTemp CONSTANT)
-    Q_PROPERTY(QVariant normalLowTemp READ getNormalLowTemp CONSTANT)
-    Q_PROPERTY(QVariant precipTotal READ getPrecipTotal CONSTANT)
+    Q_PROPERTY(QVariant normalHighTemp READ normalHighTemp CONSTANT)
+    Q_PROPERTY(QVariant normalLowTemp READ normalLowTemp CONSTANT)
+    Q_PROPERTY(QVariant precipTotal READ precipTotal CONSTANT)
 
 public:
     LastDay();
@@ -37,9 +37,9 @@ public:
 
     bool isDataPresent() const;
 
-    QVariant getNormalHighTemp() const;
-    QVariant getNormalLowTemp() const;
-    QVariant getPrecipTotal() const;
+    QVariant normalHighTemp() const;
+    QVariant normalLowTemp() const;
+    QVariant precipTotal() const;
 
     void setNormalHighTemp(qreal normalHighTemp);
     void setNormalLowTemp(qreal normalLowTemp);

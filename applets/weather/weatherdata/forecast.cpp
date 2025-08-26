@@ -20,7 +20,7 @@ bool Forecast::isError() const
     return m_error;
 }
 
-QVariant Forecast::getStation() const
+QVariant Forecast::station() const
 {
     if (m_station.has_value()) {
         return QVariant::fromValue(*m_station);
@@ -28,7 +28,7 @@ QVariant Forecast::getStation() const
     return {};
 }
 
-QVariant Forecast::getMetaData() const
+QVariant Forecast::metaData() const
 {
     if (m_metaData.has_value()) {
         return QVariant::fromValue(*m_metaData);
@@ -36,7 +36,7 @@ QVariant Forecast::getMetaData() const
     return {};
 }
 
-QVariant Forecast::getCurrentDay() const
+QVariant Forecast::currentDay() const
 {
     if (m_currentDay.has_value()) {
         return QVariant::fromValue(*m_currentDay);
@@ -44,7 +44,7 @@ QVariant Forecast::getCurrentDay() const
     return {};
 }
 
-QVariant Forecast::getLastDay() const
+QVariant Forecast::lastDay() const
 {
     if (m_lastDay.has_value()) {
         return QVariant::fromValue(*m_lastDay);
@@ -52,7 +52,7 @@ QVariant Forecast::getLastDay() const
     return {};
 }
 
-QVariant Forecast::getLastObservation() const
+QVariant Forecast::lastObservation() const
 {
     if (m_lastObservation.has_value()) {
         return QVariant::fromValue(*m_lastObservation);
@@ -60,12 +60,12 @@ QVariant Forecast::getLastObservation() const
     return {};
 }
 
-FutureDays *Forecast::getFutureDays() const
+FutureDays *Forecast::futureDays() const
 {
     return m_futureDays.get();
 }
 
-Warnings *Forecast::getWarnings() const
+Warnings *Forecast::warnings() const
 {
     return m_warnings.get();
 }

@@ -73,12 +73,12 @@ void Warnings::addWarnings(const QList<Warning> &warnings)
     }
 }
 
-int Warnings::getMaxPriorityCount() const
+int Warnings::maxPriorityCount() const
 {
     return m_maxPriorityCount;
 }
 
-int Warnings::getCount() const
+int Warnings::count() const
 {
     return m_warnings.count();
 }

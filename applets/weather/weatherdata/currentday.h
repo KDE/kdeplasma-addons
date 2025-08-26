@@ -30,12 +30,12 @@ class WEATHERDATA_EXPORT CurrentDay
 {
     Q_GADGET
 
-    Q_PROPERTY(QVariant normalHighTemp READ getNormalHighTemp CONSTANT)
-    Q_PROPERTY(QVariant normalLowTemp READ getNormalLowTemp CONSTANT)
-    Q_PROPERTY(QVariant recordHighTemp READ getRecordHighTemp CONSTANT)
-    Q_PROPERTY(QVariant recordLowTemp READ getRecordLowTemp CONSTANT)
-    Q_PROPERTY(QVariant recordRainfall READ getRecordRainfall CONSTANT)
-    Q_PROPERTY(QVariant recordSnowfall READ getRecordSnowfall CONSTANT)
+    Q_PROPERTY(QVariant normalHighTemp READ normalHighTemp CONSTANT)
+    Q_PROPERTY(QVariant normalLowTemp READ normalLowTemp CONSTANT)
+    Q_PROPERTY(QVariant recordHighTemp READ recordHighTemp CONSTANT)
+    Q_PROPERTY(QVariant recordLowTemp READ recordLowTemp CONSTANT)
+    Q_PROPERTY(QVariant recordRainfall READ recordRainfall CONSTANT)
+    Q_PROPERTY(QVariant recordSnowfall READ recordSnowfall CONSTANT)
 
 public:
     CurrentDay();
@@ -43,12 +43,12 @@ public:
 
     bool isDataPresent() const;
 
-    QVariant getNormalHighTemp() const;
-    QVariant getNormalLowTemp() const;
-    QVariant getRecordHighTemp() const;
-    QVariant getRecordLowTemp() const;
-    QVariant getRecordRainfall() const;
-    QVariant getRecordSnowfall() const;
+    QVariant normalHighTemp() const;
+    QVariant normalLowTemp() const;
+    QVariant recordHighTemp() const;
+    QVariant recordLowTemp() const;
+    QVariant recordRainfall() const;
+    QVariant recordSnowfall() const;
 
     void setNormalHighTemp(qreal value);
     void setNormalLowTemp(qreal value);

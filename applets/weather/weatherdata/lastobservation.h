@@ -43,23 +43,23 @@ class WEATHERDATA_EXPORT LastObservation
 {
     Q_GADGET
 
-    Q_PROPERTY(QVariant observationTimestamp READ getObservationTimestamp CONSTANT)
-    Q_PROPERTY(QVariant currentConditions READ getCurrentConditions CONSTANT)
-    Q_PROPERTY(QVariant conditionIcon READ getConditionIcon CONSTANT)
-    Q_PROPERTY(QVariant temperature READ getTemperature CONSTANT)
-    Q_PROPERTY(QVariant windchill READ getWindchill CONSTANT)
-    Q_PROPERTY(QVariant heatIndex READ getHeatIndex CONSTANT)
-    Q_PROPERTY(QVariant humidex READ getHumidex CONSTANT)
-    Q_PROPERTY(QVariant windSpeed READ getWindSpeed CONSTANT)
-    Q_PROPERTY(QVariant windGust READ getWindGust CONSTANT)
-    Q_PROPERTY(QVariant windDirection READ getWindDirection CONSTANT)
-    Q_PROPERTY(QVariant visibility READ getVisibility CONSTANT)
-    Q_PROPERTY(QVariant pressure READ getPressure CONSTANT)
-    Q_PROPERTY(QVariant pressureTendency READ getPressureTendency CONSTANT)
-    Q_PROPERTY(QVariant UVIndex READ getUVIndex CONSTANT)
-    Q_PROPERTY(QVariant UVRating READ getUVRating CONSTANT)
-    Q_PROPERTY(QVariant humidity READ getHumidity CONSTANT)
-    Q_PROPERTY(QVariant dewpoint READ getDewpoint CONSTANT)
+    Q_PROPERTY(QVariant observationTimestamp READ observationTimestamp CONSTANT)
+    Q_PROPERTY(QVariant currentConditions READ currentConditions CONSTANT)
+    Q_PROPERTY(QVariant conditionIcon READ conditionIcon CONSTANT)
+    Q_PROPERTY(QVariant temperature READ temperature CONSTANT)
+    Q_PROPERTY(QVariant windchill READ windchill CONSTANT)
+    Q_PROPERTY(QVariant heatIndex READ heatIndex CONSTANT)
+    Q_PROPERTY(QVariant humidex READ humidex CONSTANT)
+    Q_PROPERTY(QVariant windSpeed READ windSpeed CONSTANT)
+    Q_PROPERTY(QVariant windGust READ windGust CONSTANT)
+    Q_PROPERTY(QVariant windDirection READ windDirection CONSTANT)
+    Q_PROPERTY(QVariant visibility READ visibility CONSTANT)
+    Q_PROPERTY(QVariant pressure READ pressure CONSTANT)
+    Q_PROPERTY(QVariant pressureTendency READ pressureTendency CONSTANT)
+    Q_PROPERTY(QVariant UVIndex READ UVIndex CONSTANT)
+    Q_PROPERTY(QVariant UVRating READ UVRating CONSTANT)
+    Q_PROPERTY(QVariant humidity READ humidity CONSTANT)
+    Q_PROPERTY(QVariant dewpoint READ dewpoint CONSTANT)
 
 public:
     LastObservation();
@@ -67,23 +67,23 @@ public:
 
     bool isDataPresent() const;
 
-    QVariant getObservationTimestamp() const;
-    QVariant getCurrentConditions() const;
-    QVariant getConditionIcon() const;
-    QVariant getTemperature() const;
-    QVariant getWindchill() const;
-    QVariant getHeatIndex() const;
-    QVariant getHumidex() const;
-    QVariant getWindSpeed() const;
-    QVariant getWindGust() const;
-    QVariant getWindDirection() const;
-    QVariant getVisibility() const;
-    QVariant getPressure() const;
-    QVariant getPressureTendency() const;
-    QVariant getUVIndex() const;
-    QVariant getUVRating() const;
-    QVariant getHumidity() const;
-    QVariant getDewpoint() const;
+    QVariant observationTimestamp() const;
+    QVariant currentConditions() const;
+    QVariant conditionIcon() const;
+    QVariant temperature() const;
+    QVariant windchill() const;
+    QVariant heatIndex() const;
+    QVariant humidex() const;
+    QVariant windSpeed() const;
+    QVariant windGust() const;
+    QVariant windDirection() const;
+    QVariant visibility() const;
+    QVariant pressure() const;
+    QVariant pressureTendency() const;
+    QVariant UVIndex() const;
+    QVariant UVRating() const;
+    QVariant humidity() const;
+    QVariant dewpoint() const;
 
     void setObservationTimestamp(const QDateTime &observationTimestamp);
     void setCurrentConditions(const QString &currentConditions);

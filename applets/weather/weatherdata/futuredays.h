@@ -25,11 +25,11 @@ public:
     explicit FutureForecast();
     ~FutureForecast();
 
-    std::optional<QString> getConditionIcon() const;
-    std::optional<QString> getCondition() const;
-    std::optional<qreal> getHighTemp() const;
-    std::optional<qreal> getLowTemp() const;
-    std::optional<qreal> getConditionProbability() const;
+    std::optional<QString> conditionIcon() const;
+    std::optional<QString> condition() const;
+    std::optional<qreal> highTemp() const;
+    std::optional<qreal> lowTemp() const;
+    std::optional<qreal> conditionProbability() const;
 
     void setConditionIcon(const QString &conditionIcon);
     void setCondition(const QString &condition);
@@ -56,11 +56,11 @@ public:
     explicit FutureDayForecast();
     ~FutureDayForecast();
 
-    std::optional<int> getMonthDay() const;
-    std::optional<QString> getWeekDay() const;
+    std::optional<int> monthDay() const;
+    std::optional<QString> weekDay() const;
 
-    std::optional<FutureForecast> getDaytime() const;
-    std::optional<FutureForecast> getNight() const;
+    std::optional<FutureForecast> daytime() const;
+    std::optional<FutureForecast> night() const;
 
     void setMonthDay(int monthDay);
     void setWeekDay(const QString &weekDay);
@@ -94,11 +94,11 @@ class WEATHERDATA_EXPORT FutureDays : public QAbstractTableModel
     Q_OBJECT
     QML_ANONYMOUS
 
-    Q_PROPERTY(QString firstDayIcon READ getFirstDayIcon CONSTANT)
-    Q_PROPERTY(bool isNightPresent READ getIsNightPresent CONSTANT)
-    Q_PROPERTY(bool hasProbability READ getHasProbability CONSTANT)
-    Q_PROPERTY(bool firstDayExist READ getFirstDayExist CONSTANT)
-    Q_PROPERTY(int daysNumber READ getDaysNumber CONSTANT)
+    Q_PROPERTY(QString firstDayIcon READ firstDayIcon CONSTANT)
+    Q_PROPERTY(bool isNightPresent READ isNightPresent CONSTANT)
+    Q_PROPERTY(bool hasProbability READ hasProbability CONSTANT)
+    Q_PROPERTY(bool firstDayExist READ firstDayExist CONSTANT)
+    Q_PROPERTY(int daysNumber READ daysNumber CONSTANT)
 
 public:
     enum NextDaysModels {
@@ -128,11 +128,11 @@ public:
     QHash<int, QByteArray> roleNames() const override;
 
 private:
-    QString getFirstDayIcon() const;
-    bool getIsNightPresent() const;
-    bool getHasProbability() const;
-    bool getFirstDayExist() const;
-    int getDaysNumber() const;
+    QString firstDayIcon() const;
+    bool isNightPresent() const;
+    bool hasProbability() const;
+    bool firstDayExist() const;
+    int daysNumber() const;
 
 private:
     enum Columns {

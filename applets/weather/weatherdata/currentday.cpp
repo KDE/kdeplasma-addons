@@ -20,14 +20,14 @@ bool CurrentDay::isDataPresent() const
     return m_isDataPresent;
 }
 
-QVariant CurrentDay::getNormalHighTemp() const
+QVariant CurrentDay::normalHighTemp() const
 {
     if (m_recordLowTemp.has_value()) {
         return *m_normalHighTemp;
     }
     return {};
 }
-QVariant CurrentDay::getNormalLowTemp() const
+QVariant CurrentDay::normalLowTemp() const
 {
     if (m_normalLowTemp.has_value()) {
         return *m_normalLowTemp;
@@ -35,7 +35,7 @@ QVariant CurrentDay::getNormalLowTemp() const
     return {};
 }
 
-QVariant CurrentDay::getRecordHighTemp() const
+QVariant CurrentDay::recordHighTemp() const
 {
     if (m_recordRainfall.has_value()) {
         return *m_recordHighTemp;
@@ -43,7 +43,7 @@ QVariant CurrentDay::getRecordHighTemp() const
     return {};
 }
 
-QVariant CurrentDay::getRecordLowTemp() const
+QVariant CurrentDay::recordLowTemp() const
 {
     if (m_recordLowTemp.has_value()) {
         return *m_recordLowTemp;
@@ -51,7 +51,7 @@ QVariant CurrentDay::getRecordLowTemp() const
     return {};
 }
 
-QVariant CurrentDay::getRecordRainfall() const
+QVariant CurrentDay::recordRainfall() const
 {
     if (m_recordRainfall.has_value()) {
         return *m_recordRainfall;
@@ -59,7 +59,7 @@ QVariant CurrentDay::getRecordRainfall() const
     return {};
 }
 
-QVariant CurrentDay::getRecordSnowfall() const
+QVariant CurrentDay::recordSnowfall() const
 {
     if (m_recordSnowfall.has_value()) {
         return *m_recordSnowfall;
