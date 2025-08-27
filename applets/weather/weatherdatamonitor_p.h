@@ -118,7 +118,7 @@ private:
      */
     struct IonInfo {
         std::shared_ptr<IonControl> ionControl;
-        int locationCount;
+        int locationCount = 0;
         QList<std::pair<QString, std::weak_ptr<ForecastData>>> forecastDataList;
     };
 

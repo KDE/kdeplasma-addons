@@ -231,8 +231,9 @@ bool WeatherDataMonitor::createIonControl(const QString &providerName)
 
     qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: Ion moved to thread: " << ion->thread();
 
-    IonInfo info;
-    info.ionControl = std::shared_ptr<IonControl>{new IonControl(providerName, ion, workerThread)};
+    const IonInfo info{
+        .ionControl = std::shared_ptr<IonControl>{new IonControl(providerName, ion, workerThread)},
+    };
     m_ionControls.insert(providerName, info);
     qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: successfully created";
 
