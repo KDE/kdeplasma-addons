@@ -35,7 +35,7 @@ KCM.ScrollViewKCM {
     // The model property `isValidatingInput` doesn't account for the timer delay
     // We use a custom property to provide a more responsive feedback
     property bool isSearching: false
-    
+
     extraFooterTopPadding: true
 
     header: ColumnLayout {
@@ -178,9 +178,16 @@ KCM.ScrollViewKCM {
         }
 
         delegate: QQC2.ItemDelegate {
-            width: locationListView.width
+            required property int index
+            required property string displayName
+            required property string station
+
+            readonly property string provider: locationListModel.getProviderByIndex(index)
+            readonly property string providerName: locationListModel.getProviderDisplayName(provider)
+
+            width: ListView.view.width
             text: i18nc("A weather station location and the weather service it comes from",
-                "%1 (%2)", !!model.displayName ? model.displayName : model.station, locationListModel.getProviderDisplayName(locationListModel.getProviderByIndex(model.index)))
+                "%1 (%2)", displayName || station, providerName);
             highlighted: ListView.isCurrentItem
 
             onClicked: {
