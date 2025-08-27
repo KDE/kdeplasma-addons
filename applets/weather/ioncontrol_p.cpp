@@ -39,6 +39,15 @@ IonControl::IonControl(const QString &name, const std::shared_ptr<Ion> &ion, con
 IonControl::~IonControl()
 {
     qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": destroying";
+
+    if (m_locationsFutureWatcher) {
+        m_locationsFutureWatcher->cancel();
+    }
+
+    if (m_forecastFutureWatcher) {
+        m_forecastFutureWatcher->cancel();
+    }
+
     if (m_fetchThread) {
         qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": remove fetch thread";
         m_fetchThread->quit();
