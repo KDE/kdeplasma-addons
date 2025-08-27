@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-24 00:43+0000\n"
+"POT-Creation-Date: 2025-08-27 00:44+0000\n"
 "PO-Revision-Date: 2025-08-19 05:24+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -128,106 +128,106 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "涼"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:667
+#: ions/bbcukmet/ion_bbcukmet.cpp:678
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
 msgstr "資料來自 BBC Weather"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:706 ions/envcan/ion_envcan.cpp:1575
+#: ions/bbcukmet/ion_bbcukmet.cpp:717 ions/envcan/ion_envcan.cpp:1620
 #, kde-format
 msgid "Rising"
 msgstr "上升"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:708 ions/envcan/ion_envcan.cpp:1577
+#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1622
 #, kde-format
 msgid "Falling"
 msgstr "下降"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:710 ions/envcan/ion_envcan.cpp:1579
+#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1624
 #, kde-format
 msgid "Steady"
 msgstr "穩定"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:731 ions/dwd/ion_dwd.cpp:548
+#: ions/bbcukmet/ion_bbcukmet.cpp:742 ions/dwd/ion_dwd.cpp:559
 #, kde-format
 msgctxt "Short for Today"
 msgid "Today"
 msgstr "今天"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:731
+#: ions/bbcukmet/ion_bbcukmet.cpp:742
 #, kde-format
 msgctxt "Short for Tonight"
 msgid "Tonight"
 msgstr "今晚"
 
-#: ions/dwd/ion_dwd.cpp:486
+#: ions/dwd/ion_dwd.cpp:497
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
 msgstr "來源：Deutscher Wetterdienst"
 
-#: ions/dwd/ion_dwd.cpp:552 ions/envcan/ion_envcan.cpp:1458
+#: ions/dwd/ion_dwd.cpp:563 ions/envcan/ion_envcan.cpp:1499
 #, kde-format
 msgctxt "Short for Saturday"
 msgid "Sat"
 msgstr "週六"
 
-#: ions/dwd/ion_dwd.cpp:553 ions/envcan/ion_envcan.cpp:1459
+#: ions/dwd/ion_dwd.cpp:564 ions/envcan/ion_envcan.cpp:1500
 #, kde-format
 msgctxt "Short for Sunday"
 msgid "Sun"
 msgstr "週日"
 
-#: ions/dwd/ion_dwd.cpp:554 ions/envcan/ion_envcan.cpp:1460
+#: ions/dwd/ion_dwd.cpp:565 ions/envcan/ion_envcan.cpp:1501
 #, kde-format
 msgctxt "Short for Monday"
 msgid "Mon"
 msgstr "週一"
 
-#: ions/dwd/ion_dwd.cpp:555 ions/envcan/ion_envcan.cpp:1461
+#: ions/dwd/ion_dwd.cpp:566 ions/envcan/ion_envcan.cpp:1502
 #, kde-format
 msgctxt "Short for Tuesday"
 msgid "Tue"
 msgstr "週二"
 
-#: ions/dwd/ion_dwd.cpp:556 ions/envcan/ion_envcan.cpp:1462
+#: ions/dwd/ion_dwd.cpp:567 ions/envcan/ion_envcan.cpp:1503
 #, kde-format
 msgctxt "Short for Wednesday"
 msgid "Wed"
 msgstr "週三"
 
-#: ions/dwd/ion_dwd.cpp:557 ions/envcan/ion_envcan.cpp:1463
+#: ions/dwd/ion_dwd.cpp:568 ions/envcan/ion_envcan.cpp:1504
 #, kde-format
 msgctxt "Short for Thursday"
 msgid "Thu"
 msgstr "週四"
 
-#: ions/dwd/ion_dwd.cpp:558 ions/envcan/ion_envcan.cpp:1464
+#: ions/dwd/ion_dwd.cpp:569 ions/envcan/ion_envcan.cpp:1505
 #, kde-format
 msgctxt "Short for Friday"
 msgid "Fri"
 msgstr "週五"
 
-#: ions/envcan/ion_envcan.cpp:973 ions/envcan/ion_envcan.cpp:975
-#: ions/envcan/ion_envcan.cpp:1450 ions/envcan/ion_envcan.cpp:1472
-#: ions/envcan/ion_envcan.cpp:1523 ions/noaa/ion_noaa.cpp:447
+#: ions/envcan/ion_envcan.cpp:1014 ions/envcan/ion_envcan.cpp:1016
+#: ions/envcan/ion_envcan.cpp:1491 ions/envcan/ion_envcan.cpp:1513
+#: ions/envcan/ion_envcan.cpp:1564 ions/noaa/ion_noaa.cpp:461
 #, kde-format
 msgid "N/A"
 msgstr "不適用"
 
-#: ions/envcan/ion_envcan.cpp:1454
+#: ions/envcan/ion_envcan.cpp:1495
 #, kde-format
 msgid "Today"
 msgstr "今天"
 
-#: ions/envcan/ion_envcan.cpp:1499
+#: ions/envcan/ion_envcan.cpp:1540
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from Environment and Climate Change Canada"
 msgstr "來自 Environment and Climate Change Canada 的資料"
 
-#: ions/noaa/ion_noaa.cpp:432
+#: ions/noaa/ion_noaa.cpp:446
 #, kde-format
 msgctxt "credit line, keep string short)"
 msgid "Data from NOAA National Weather Service"
@@ -236,7 +236,7 @@ msgstr "從 NOAA 的國家天氣服務來的資料"
 #. i18n: The forecast summary can include several single conditions that follow
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
 #. If there is no suitable separtor, a sentence separator might do.
-#: ions/noaa/ion_noaa.cpp:741
+#: ions/noaa/ion_noaa.cpp:755
 #, kde-format
 msgctxt ""
 "Separator between forecast conditions that follow a temporal sequence (ex. "
@@ -693,13 +693,13 @@ msgid ""
 "weather station provider. Check again later."
 msgstr "網路請求逾時，可能是源自於氣象站提供者的伺服器問題。請稍後再試試看。"
 
-#: qml/main.qml:63 qml/TopPanel.qml:220
+#: qml/main.qml:81 qml/TopPanel.qml:220
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "涼"
 
-#: qml/main.qml:87
+#: qml/main.qml:105
 #, kde-format
 msgctxt ""
 "@info:usagetip Minimize the length of this string so it is as short as "
@@ -708,37 +708,37 @@ msgctxt ""
 msgid "Set up Weather Report…"
 msgstr "設定天氣預報…"
 
-#: qml/main.qml:96
+#: qml/main.qml:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr "點擊選擇地點來查看該地點的天氣"
 
-#: qml/main.qml:110
+#: qml/main.qml:128
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:123
+#: qml/main.qml:141
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: qml/main.qml:126
+#: qml/main.qml:144
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:137
+#: qml/main.qml:155
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/main.qml:147
+#: qml/main.qml:165
 #, kde-format
 msgid "Humidity: %1"
 msgstr "濕度：%1"

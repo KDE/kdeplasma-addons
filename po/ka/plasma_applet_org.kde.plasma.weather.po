@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-24 00:43+0000\n"
+"POT-Creation-Date: 2025-08-27 00:44+0000\n"
 "PO-Revision-Date: 2025-07-09 05:31+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -126,106 +126,106 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "მშვიდი"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:667
+#: ions/bbcukmet/ion_bbcukmet.cpp:678
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
 msgstr "მონაცემები BBC ამინდიდან"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:706 ions/envcan/ion_envcan.cpp:1575
+#: ions/bbcukmet/ion_bbcukmet.cpp:717 ions/envcan/ion_envcan.cpp:1620
 #, kde-format
 msgid "Rising"
 msgstr "ამომავალი"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:708 ions/envcan/ion_envcan.cpp:1577
+#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1622
 #, kde-format
 msgid "Falling"
 msgstr "ეცემა"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:710 ions/envcan/ion_envcan.cpp:1579
+#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1624
 #, kde-format
 msgid "Steady"
 msgstr "მუდმივია"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:731 ions/dwd/ion_dwd.cpp:548
+#: ions/bbcukmet/ion_bbcukmet.cpp:742 ions/dwd/ion_dwd.cpp:559
 #, kde-format
 msgctxt "Short for Today"
 msgid "Today"
 msgstr "დღეს"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:731
+#: ions/bbcukmet/ion_bbcukmet.cpp:742
 #, kde-format
 msgctxt "Short for Tonight"
 msgid "Tonight"
 msgstr "ამაღამ"
 
-#: ions/dwd/ion_dwd.cpp:486
+#: ions/dwd/ion_dwd.cpp:497
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
 msgstr "წყარო: Deutscher Wetterdienst"
 
-#: ions/dwd/ion_dwd.cpp:552 ions/envcan/ion_envcan.cpp:1458
+#: ions/dwd/ion_dwd.cpp:563 ions/envcan/ion_envcan.cpp:1499
 #, kde-format
 msgctxt "Short for Saturday"
 msgid "Sat"
 msgstr "შაბ"
 
-#: ions/dwd/ion_dwd.cpp:553 ions/envcan/ion_envcan.cpp:1459
+#: ions/dwd/ion_dwd.cpp:564 ions/envcan/ion_envcan.cpp:1500
 #, kde-format
 msgctxt "Short for Sunday"
 msgid "Sun"
 msgstr "კვირა"
 
-#: ions/dwd/ion_dwd.cpp:554 ions/envcan/ion_envcan.cpp:1460
+#: ions/dwd/ion_dwd.cpp:565 ions/envcan/ion_envcan.cpp:1501
 #, kde-format
 msgctxt "Short for Monday"
 msgid "Mon"
 msgstr "ორშ"
 
-#: ions/dwd/ion_dwd.cpp:555 ions/envcan/ion_envcan.cpp:1461
+#: ions/dwd/ion_dwd.cpp:566 ions/envcan/ion_envcan.cpp:1502
 #, kde-format
 msgctxt "Short for Tuesday"
 msgid "Tue"
 msgstr "სამ"
 
-#: ions/dwd/ion_dwd.cpp:556 ions/envcan/ion_envcan.cpp:1462
+#: ions/dwd/ion_dwd.cpp:567 ions/envcan/ion_envcan.cpp:1503
 #, kde-format
 msgctxt "Short for Wednesday"
 msgid "Wed"
 msgstr "ოთხ"
 
-#: ions/dwd/ion_dwd.cpp:557 ions/envcan/ion_envcan.cpp:1463
+#: ions/dwd/ion_dwd.cpp:568 ions/envcan/ion_envcan.cpp:1504
 #, kde-format
 msgctxt "Short for Thursday"
 msgid "Thu"
 msgstr "ხუთ"
 
-#: ions/dwd/ion_dwd.cpp:558 ions/envcan/ion_envcan.cpp:1464
+#: ions/dwd/ion_dwd.cpp:569 ions/envcan/ion_envcan.cpp:1505
 #, kde-format
 msgctxt "Short for Friday"
 msgid "Fri"
 msgstr "პარ"
 
-#: ions/envcan/ion_envcan.cpp:973 ions/envcan/ion_envcan.cpp:975
-#: ions/envcan/ion_envcan.cpp:1450 ions/envcan/ion_envcan.cpp:1472
-#: ions/envcan/ion_envcan.cpp:1523 ions/noaa/ion_noaa.cpp:447
+#: ions/envcan/ion_envcan.cpp:1014 ions/envcan/ion_envcan.cpp:1016
+#: ions/envcan/ion_envcan.cpp:1491 ions/envcan/ion_envcan.cpp:1513
+#: ions/envcan/ion_envcan.cpp:1564 ions/noaa/ion_noaa.cpp:461
 #, kde-format
 msgid "N/A"
 msgstr "ა/მ"
 
-#: ions/envcan/ion_envcan.cpp:1454
+#: ions/envcan/ion_envcan.cpp:1495
 #, kde-format
 msgid "Today"
 msgstr "დღეს"
 
-#: ions/envcan/ion_envcan.cpp:1499
+#: ions/envcan/ion_envcan.cpp:1540
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from Environment and Climate Change Canada"
 msgstr "მონაცემები კანადის გარემოს დაცვის სერვისიდან"
 
-#: ions/noaa/ion_noaa.cpp:432
+#: ions/noaa/ion_noaa.cpp:446
 #, kde-format
 msgctxt "credit line, keep string short)"
 msgid "Data from NOAA National Weather Service"
@@ -234,7 +234,7 @@ msgstr "მონაცემები NOAA-ის ნაციონალუ�
 #. i18n: The forecast summary can include several single conditions that follow
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
 #. If there is no suitable separtor, a sentence separator might do.
-#: ions/noaa/ion_noaa.cpp:741
+#: ions/noaa/ion_noaa.cpp:755
 #, kde-format
 msgctxt ""
 "Separator between forecast conditions that follow a temporal sequence (ex. "
@@ -694,13 +694,13 @@ msgstr ""
 "ქსელური მოთხოვნის მოლოდინის დრო ამოიწურა, ალბათ, სერვერის გათიშვას გამო. "
 "მოგვიანებით გადაამოწმეთ."
 
-#: qml/main.qml:63 qml/TopPanel.qml:220
+#: qml/main.qml:81 qml/TopPanel.qml:220
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "მშვიდი"
 
-#: qml/main.qml:87
+#: qml/main.qml:105
 #, kde-format
 msgctxt ""
 "@info:usagetip Minimize the length of this string so it is as short as "
@@ -709,37 +709,37 @@ msgctxt ""
 msgid "Set up Weather Report…"
 msgstr "ამინდის ანგარიშის მორგება…"
 
-#: qml/main.qml:96
+#: qml/main.qml:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr "დააწკაპუნეთ მდებარეობის ასარჩევად და ამინდის მონიტორინგისთვის"
 
-#: qml/main.qml:110
+#: qml/main.qml:128
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:123
+#: qml/main.qml:141
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: qml/main.qml:126
+#: qml/main.qml:144
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:137
+#: qml/main.qml:155
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/main.qml:147
+#: qml/main.qml:165
 #, kde-format
 msgid "Humidity: %1"
 msgstr "ტენიანობა: %1"

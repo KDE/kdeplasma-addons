@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-14 00:43+0000\n"
-"PO-Revision-Date: 2025-04-30 15:30+0200\n"
+"PO-Revision-Date: 2025-08-15 10:00+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -16,20 +16,20 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.07.90\n"
 "X-Text-Markup: kde4\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Media"
-msgstr ""
+msgstr "Média"
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Comportement"
 
 #: package/contents/ui/ConfigBehavior.qml:48
 #, kde-format
@@ -211,18 +211,16 @@ msgid "Choose a Folder"
 msgstr "Choisir un dossier"
 
 #: package/contents/ui/main.qml:361
-#, fuzzy, kde-format
-#| msgctxt "@info placeholdermessage if no paths set"
-#| msgid "No media configured"
+#, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
-msgstr "Aucun média n'est configuré"
+msgstr "Aucun média n'est sélectionné"
 
 #: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
-msgstr ""
+msgstr "Sélectionnez un média..."
 
 #~ msgctxt "@title"
 #~ msgid "General"
