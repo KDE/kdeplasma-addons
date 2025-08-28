@@ -31,25 +31,22 @@ msgid "Grid size:"
 msgstr "Velikost mřížky:"
 
 #: package/contents/ui/configAppearance.qml:61
-#, fuzzy, kde-format
-#| msgid "Background:"
+#, kde-format
 msgctxt "@label:group radio button group"
 msgid "Background:"
-msgstr "Pozadí:"
+msgstr ""
 
 #: package/contents/ui/configAppearance.qml:68
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
-msgstr "Barva:"
+msgstr ""
 
 #: package/contents/ui/configAppearance.qml:84
-#, fuzzy, kde-format
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
-msgstr "Obrázek:"
+msgstr ""
 
 #: package/contents/ui/configAppearance.qml:92
 #, kde-format
@@ -58,12 +55,10 @@ msgid "Path to custom image…"
 msgstr "Cesta k vlastnímu obrázku…"
 
 #: package/contents/ui/configAppearance.qml:108
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Choose image…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Choose image…"
-msgstr "Vyberte obrázek…"
+msgstr ""
 
 #: package/contents/ui/configAppearance.qml:119
 #, kde-format
@@ -72,25 +67,22 @@ msgid "Choose an Image"
 msgstr "Vyberte obrázek"
 
 #: package/contents/ui/configAppearance.qml:124
-#, fuzzy, kde-format
-#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+#, kde-format
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
-msgstr "Soubory obrázků (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+msgstr ""
 
 #: package/contents/ui/configAppearance.qml:142
-#, fuzzy, kde-format
-#| msgid "Tiles:"
+#, kde-format
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
-msgstr "Dlaždice:"
+msgstr ""
 
 #: package/contents/ui/configAppearance.qml:149
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color:"
-msgstr "Barva:"
+msgstr ""
 
 #: package/contents/ui/configAppearance.qml:163
 #, kde-format
@@ -131,6 +123,3 @@ msgstr "Hra Patnáct"
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Vyřešit seřazením"
-
-#~ msgid "Colored numbers:"
-#~ msgstr "Obarvená čísla:"

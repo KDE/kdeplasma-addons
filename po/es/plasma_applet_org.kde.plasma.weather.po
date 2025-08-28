@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-27 00:44+0000\n"
+"POT-Creation-Date: 2025-08-28 00:44+0000\n"
 "PO-Revision-Date: 2025-07-16 00:36+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -612,31 +612,31 @@ msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Introduzca ubicación"
 
-#: qml/config/ConfigWeatherStation.qml:183
+#: qml/config/ConfigWeatherStation.qml:190
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/config/ConfigWeatherStation.qml:208
+#: qml/config/ConfigWeatherStation.qml:215
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "No se ha encontrado ninguna estación meteorológica para «%1»"
 
-#: qml/config/ConfigWeatherStation.qml:210
+#: qml/config/ConfigWeatherStation.qml:217
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Buscar una estación meteorológica para cambiar su ubicación"
 
-#: qml/config/ConfigWeatherStation.qml:212
+#: qml/config/ConfigWeatherStation.qml:219
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Buscar una estación meteorológica para definir su ubicación"
 
-#: qml/config/ConfigWeatherStation.qml:215
+#: qml/config/ConfigWeatherStation.qml:222
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

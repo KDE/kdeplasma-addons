@@ -39,12 +39,10 @@ msgid "Visit the comic website"
 msgstr "Navštívit domovskou stránku komiksu"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Comics:"
+#, kde-format
 msgctxt "@title"
 msgid "Comics"
-msgstr "Komiksy:"
+msgstr ""
 
 #: qml/config.qml:18
 #, kde-format
@@ -77,12 +75,10 @@ msgid "Show below image:"
 msgstr ""
 
 #: qml/configBehavior.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Comic identifier"
+#, kde-format
 msgctxt "@option:check show below image"
 msgid "Identifier"
-msgstr "Identifikátor komiksu"
+msgstr ""
 
 #: qml/configBehavior.qml:45
 #, kde-format
@@ -91,11 +87,10 @@ msgid "Website"
 msgstr ""
 
 #: qml/configBehavior.qml:54
-#, fuzzy, kde-format
-#| msgid "Show navigation buttons:"
+#, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
-msgstr "Zobrazovat tlačítka pro pohyb:"
+msgstr ""
 
 #: qml/configBehavior.qml:55
 #, kde-format
@@ -122,12 +117,10 @@ msgid "Opens full-size view"
 msgstr ""
 
 #: qml/configComics.qml:26
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
-msgstr "Získat nové komiksy…"
+msgstr ""
 
 #: qml/configComics.qml:65
 #, kde-format
@@ -136,12 +129,10 @@ msgid "No comics installed"
 msgstr ""
 
 #: qml/configComics.qml:67
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
-msgstr "Získat nové komiksy…"
+msgstr ""
 
 #: qml/configComics.qml:81
 #, kde-format
@@ -165,16 +156,13 @@ msgid "Keep local archive:"
 msgstr ""
 
 #: qml/configComics.qml:103
-#, fuzzy, kde-format
-#| msgctxt "@item:valuesuffix spacing to number + unit"
-#| msgid "strip per comic"
-#| msgid_plural "strips per comic"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
-msgstr[0] "proužek na komiks"
-msgstr[1] "proužky na komiks"
-msgstr[2] "proužků na komiks"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
@@ -332,55 +320,3 @@ msgstr "Číslo &stripu:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identifikátor komiksu:"
-
-#~ msgctxt "@title:group"
-#~ msgid "Comics:"
-#~ msgstr "Komiksy:"
-
-#~ msgctxt "@action:button"
-#~ msgid "Get New Comics…"
-#~ msgstr "Získat nové komiksy…"
-
-#~ msgctxt "@option:check"
-#~ msgid "Middle-click on comic to display at original size"
-#~ msgstr "Prostřední kliknutí na komiks jej zobrazí v původní velikosti"
-
-#~ msgctxt "@title"
-#~ msgid "General"
-#~ msgstr "Obecné"
-
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Vzhled"
-
-#~ msgctxt "@title"
-#~ msgid "Advanced"
-#~ msgstr "Pokročilé"
-
-#~ msgctxt "@label:spinbox"
-#~ msgid "Comic cache:"
-#~ msgstr "Mezipaměť komiksů:"
-
-#~ msgctxt "Heading for showing various elements of a comic"
-#~ msgid "Show:"
-#~ msgstr "Zobrazit:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Comic title"
-#~ msgstr "Název komiksu"
-
-#~ msgctxt "@option:check"
-#~ msgid "Comic author"
-#~ msgstr "Autor komiksu"
-
-#~ msgctxt "@option:check"
-#~ msgid "Comic URL"
-#~ msgstr "URL komiksu"
-
-#~ msgctxt "@option:check"
-#~ msgid "Always"
-#~ msgstr "Vždy"
-
-#~ msgctxt "@option:check"
-#~ msgid "Only on hover"
-#~ msgstr "Pouze při přejezdu myší"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-27 00:44+0000\n"
+"POT-Creation-Date: 2025-08-28 00:44+0000\n"
 "PO-Revision-Date: 2024-08-15 13:46+0200\n"
 "Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -143,11 +143,9 @@ msgid "Falling"
 msgstr "Klesající"
 
 #: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1624
-#, fuzzy, kde-format
-#| msgctxt "pressure tendency"
-#| msgid "Steady"
+#, kde-format
 msgid "Steady"
-msgstr "Stabilní"
+msgstr ""
 
 #: ions/bbcukmet/ion_bbcukmet.cpp:742 ions/dwd/ion_dwd.cpp:559
 #, kde-format
@@ -614,31 +612,31 @@ msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Zadejte umístění"
 
-#: qml/config/ConfigWeatherStation.qml:183
+#: qml/config/ConfigWeatherStation.qml:190
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/config/ConfigWeatherStation.qml:208
+#: qml/config/ConfigWeatherStation.qml:215
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Pro '%1' nebyla nalezena žádná meteorologická stanice"
 
-#: qml/config/ConfigWeatherStation.qml:210
+#: qml/config/ConfigWeatherStation.qml:217
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Hledejte meteostanici pro změnu vaší polohy"
 
-#: qml/config/ConfigWeatherStation.qml:212
+#: qml/config/ConfigWeatherStation.qml:219
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Hledejte meteostanici pro nastavení vaší polohy"
 
-#: qml/config/ConfigWeatherStation.qml:215
+#: qml/config/ConfigWeatherStation.qml:222
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -871,11 +869,9 @@ msgid "%1 (%2)"
 msgstr " %1 (%2)"
 
 #: weatherdata/futuredays.cpp:82
-#, fuzzy, kde-format
-#| msgctxt "Time of the day (from the duple Day/Night)"
-#| msgid "Day"
+#, kde-format
 msgid "Day"
-msgstr "Den"
+msgstr ""
 
 #: weatherdata/futuredays.cpp:85
 #, kde-format
@@ -906,9 +902,3 @@ msgstr ""
 #, kde-format
 msgid "Extreme"
 msgstr "Extrémní"
-
-#~ msgid "Cannot find '%1' using %2."
-#~ msgstr "Nelze nalézt '%1' pomocí %2."
-
-#~ msgid "Connection to %1 weather server timed out."
-#~ msgstr "Spojení se serverem počasí %1 vypršelo."
