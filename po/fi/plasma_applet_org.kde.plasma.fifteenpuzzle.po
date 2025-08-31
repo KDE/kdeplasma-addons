@@ -4,7 +4,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Mikko Piippo <piippo@cc.helsinki.fi>, 2008.
 # Teemu Rytilahti <teemu.rytilahti@kde-fi.org>, 2008.
-# Tommi Nieminen <translator@legisign.org>, 2010, 2018, 2019, 2022.
+# SPDX-FileCopyrightText: 2010, 2018, 2019, 2022, 2025 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lliehu@kolumbus.fi>, 2011, 2014, 2017.
 #
 # KDE Finnish translation sprint participants:
@@ -21,6 +21,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format

@@ -65,7 +65,7 @@ msgstr "1080p"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "4K"
-msgstr "4K"
+msgstr "4 K"
 
 #: package/contents/ui/config.qml:102
 #, kde-format
@@ -257,7 +257,7 @@ msgstr "Color de fons:"
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
-msgstr "Seleccioneu el color de fons"
+msgstr "Trieu el color de fons"
 
 #: package/contents/ui/config.qml:276
 #, kde-format

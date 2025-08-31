@@ -31,7 +31,7 @@ msgstr "General"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
-msgstr "Selecciona un color"
+msgstr "Tria un color"
 
 #: package/contents/ui/CompactRepresentation.qml:79
 #, kde-kuit-format
@@ -65,7 +65,7 @@ msgstr "En prémer la drecera del teclat:"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
-msgstr "Selecciona un color"
+msgstr "Tria un color"
 
 #: package/contents/ui/configGeneral.qml:48
 #, kde-format
@@ -113,7 +113,7 @@ msgstr "Sense color"
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
-msgstr "Selecciona un color"
+msgstr "Tria un color"
 
 #: package/contents/ui/main.qml:345
 #, kde-format

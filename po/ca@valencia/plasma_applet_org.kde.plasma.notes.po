@@ -141,7 +141,7 @@ msgstr "Neteja"
 #: package/contents/ui/main.qml:334
 #, kde-format
 msgid "Select All"
-msgstr "Selecciona-ho tot"
+msgstr "Tria-ho tot"
 
 #: package/contents/ui/main.qml:462
 #, kde-format

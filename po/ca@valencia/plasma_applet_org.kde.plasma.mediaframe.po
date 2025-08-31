@@ -173,13 +173,13 @@ msgstr "Cliqueu damunt de la imatge per a obrir-la en una aplicació externa"
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
-msgstr "Seleccioneu els fitxers"
+msgstr "Trieu els fitxers"
 
 #: package/contents/ui/ConfigPaths.qml:75
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
-msgstr "Selecciona una carpeta"
+msgstr "Tria una carpeta"
 
 #: package/contents/ui/ConfigPaths.qml:123
 #, kde-format
