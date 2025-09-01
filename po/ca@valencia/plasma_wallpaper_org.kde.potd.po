@@ -66,7 +66,7 @@ msgstr "Color de fons:"
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
-msgstr "Seleccioneu el color de fons"
+msgstr "Trieu el color de fons"
 
 #: package/contents/ui/config.qml:94
 #, kde-format
