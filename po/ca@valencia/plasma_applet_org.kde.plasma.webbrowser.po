@@ -69,13 +69,13 @@ msgstr "El nom de la icona és «%1»"
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
-msgstr "Seleccioneu…"
+msgstr "Tria…"
 
 #: package/contents/ui/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
-msgstr "Seleccioneu una icona per al navegador web"
+msgstr "Trieu una icona per al navegador web"
 
 #: package/contents/ui/ConfigAppearance.qml:103
 #, kde-format

@@ -203,13 +203,13 @@ msgstr "Afig fitxers o carpetes per a mostrar-los al giny."
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
-msgstr "Seleccioneu els fitxers"
+msgstr "Trieu els fitxers"
 
 #: package/contents/ui/ConfigMedia.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
-msgstr "Seleccioneu una carpeta"
+msgstr "Trieu una carpeta"
 
 #: package/contents/ui/main.qml:361
 #, kde-format
