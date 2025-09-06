@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-05-31 00:43+0000\n"
+"POT-Creation-Date: 2025-09-06 00:43+0000\n"
 "PO-Revision-Date: 2025-05-16 16:13+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Generator: Lokalize 25.07.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: comicdata.cpp:85
+#: comicdata.cpp:76
 #, kde-format
 msgctxt "an abbreviation for Number"
 msgid "# %1"
