@@ -32,7 +32,6 @@ MediaFrame::MediaFrame(QObject *parent)
     }
     qCDebug(PLASMA_MEDIAFRAME) << "Added" << m_filters.count() << "filters";
     // qDebug() << m_filters;
-    m_next = 0;
 
     connect(&m_watcher, &QFileSystemWatcher::directoryChanged, this, &MediaFrame::slotItemChanged);
     connect(&m_watcher, &QFileSystemWatcher::fileChanged, this, &MediaFrame::slotItemChanged);
@@ -60,14 +59,10 @@ void MediaFrame::setRandom(bool random)
 
 int MediaFrame::random(int min, int max)
 {
-    if (min > max) {
-        int temp = min;
-        min = max;
-        max = temp;
-    }
+    const auto &[realMin, realMax] = std::minmax(min, max);
 
     // qDebug() << "random" << min << "<->" << max << "=" << ((qrand()%(max-min+1))+min);
-    return (QRandomGenerator::global()->bounded((max - min + 1)) + min);
+    return QRandomGenerator::global()->bounded(realMin, realMax);
 }
 
 QString MediaFrame::getCacheDirectory()
@@ -126,10 +121,10 @@ void MediaFrame::add(const QString &path, AddOption option)
             while (dirIterator.hasNext()) {
                 dirIterator.next();
 
-                filePath = "file://" + dirIterator.filePath();
+                filePath = QUrl::fromLocalFile(dirIterator.filePath()).toString();
                 paths.append(filePath);
                 m_allFiles.append(filePath);
-                // qDebug() << "Appended" << filePath;
+                // qCDebug(PLASMA_MEDIAFRAME) << "Appended" << filePath;
                 Q_EMIT countChanged();
             }
             if (paths.count() > 0) {
@@ -204,48 +199,45 @@ void MediaFrame::get(QJSValue successCallback)
 
 void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
 {
-    int size = m_allFiles.count() - 1;
+    const auto size = static_cast<int>(m_allFiles.count());
 
-    QString path;
     QString errorMessage;
     QJSValueList args;
 
-    if (size < 1) {
-        if (size == 0) {
-            path = m_allFiles.at(0);
+    if (size == 0) {
+        errorMessage = QStringLiteral("No files available");
+        qCWarning(PLASMA_MEDIAFRAME) << errorMessage;
 
-            if (successCallback.isCallable()) {
-                args << QJSValue(path);
-                successCallback.call(args);
-            }
-            return;
+        args << QJSValue(errorMessage);
+        errorCallback.call(args);
+        return;
+    }
+
+    if (size == 1) {
+        m_current = 0;
+    } else if (m_random) {
+        if (m_current == -1) {
+            m_current = this->random(0, size);
         } else {
-            errorMessage = QStringLiteral("No files available");
-            qCWarning(PLASMA_MEDIAFRAME) << errorMessage;
-
-            args << QJSValue(errorMessage);
-            errorCallback.call(args);
-            return;
+            // Make sure we don't select the same image twice in a row by excluding the current index.
+            const int next = this->random(0, size - 1);
+            m_current = next >= m_current ? next + 1 : next;
         }
-    }
-
-    if (m_random) {
-        path = m_allFiles.at(this->random(0, size));
     } else {
-        path = m_allFiles.at(m_next);
-        m_next++;
-        if (m_next > size) {
-            qCDebug(PLASMA_MEDIAFRAME) << "Resetting next count from" << m_next << "due to queue size" << size;
-            m_next = 0;
+        if (m_current == -1) {
+            m_current = 0;
+        } else if (++m_current >= size) {
+            qCDebug(PLASMA_MEDIAFRAME) << "Resetting next count from" << m_current << "due to queue size" << size;
+            m_current = 0;
         }
     }
 
-    QUrl url = QUrl(path);
+    qCDebug(PLASMA_MEDIAFRAME) << "Selected image #" << m_current;
 
-    if (url.isValid()) {
-        QString localPath = url.toString(QUrl::PreferLocalFile);
+    const QString path{m_allFiles.at(m_current)};
 
-        if (!isFile(localPath)) {
+    if (const QUrl url{path}; url.isValid()) {
+        if (!url.isLocalFile()) {
             m_filename = path.section(QLatin1Char('/'), -1);
 
             QString cachedFile = getCacheDirectory() + QLatin1Char('/') + hash(path) + QLatin1Char('_') + m_filename;

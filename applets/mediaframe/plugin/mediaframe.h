@@ -94,7 +94,7 @@ private:
     QString m_filename;
 
     bool m_random = false;
-    int m_next = 0;
+    int m_current = -1;
 };
 
 #endif
