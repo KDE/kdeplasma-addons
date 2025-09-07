@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-14 00:43+0000\n"
-"PO-Revision-Date: 2024-02-02 21:47+0200\n"
+"PO-Revision-Date: 2025-09-06 22:40+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,19 +17,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.6\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Media"
-msgstr ""
+msgstr "Medija"
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Elgsena"
 
 #: package/contents/ui/ConfigBehavior.qml:48
 #, kde-format
@@ -180,8 +180,7 @@ msgid "Add Files…"
 msgstr "Pridėti failus…"
 
 #: package/contents/ui/ConfigMedia.qml:82
-#, fuzzy, kde-format
-#| msgid "Remove path"
+#, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Šalinti kelią"
@@ -190,13 +189,13 @@ msgstr "Šalinti kelią"
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
-msgstr ""
+msgstr "Nesukonfigūruota jokia medija"
 
 #: package/contents/ui/ConfigMedia.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
-msgstr ""
+msgstr "Pridėti failų ar aplankų, kad jie būtų rodomi valdiklyje."
 
 #: package/contents/ui/ConfigMedia.qml:99
 #, kde-format
@@ -214,13 +213,13 @@ msgstr "Pasirinkite aplanką"
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
-msgstr ""
+msgstr "Nepasirinkta jokia medija"
 
 #: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
-msgstr ""
+msgstr "Pasirinkti mediją…"
 
 #~ msgctxt "@title"
 #~ msgid "General"

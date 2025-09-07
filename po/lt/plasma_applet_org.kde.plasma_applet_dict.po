@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-11 00:43+0000\n"
-"PO-Revision-Date: 2022-11-17 23:36+0200\n"
+"PO-Revision-Date: 2025-09-06 22:21+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.2.1\n"
+"X-Generator: Poedit 3.6\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -31,8 +31,7 @@ msgid "Add More Dictionaries"
 msgstr "Pridėti daugiau žodynų"
 
 #: package/contents/ui/ConfigDictionaries.qml:21
-#, fuzzy, kde-format
-#| msgid "Add More…"
+#, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "Pridėti daugiau…"

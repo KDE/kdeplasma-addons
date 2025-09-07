@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-08-28 00:44+0000\n"
-"PO-Revision-Date: 2025-01-24 00:31+0200\n"
+"PO-Revision-Date: 2025-09-06 23:20+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -132,7 +132,7 @@ msgstr "Ramus"
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
-msgstr ""
+msgstr "Duomenys iš BBC orų"
 
 #: ions/bbcukmet/ion_bbcukmet.cpp:717 ions/envcan/ion_envcan.cpp:1620
 #, fuzzy, kde-format
@@ -159,75 +159,73 @@ msgstr "Nekinta"
 #, kde-format
 msgctxt "Short for Today"
 msgid "Today"
-msgstr ""
+msgstr "Šiandien"
 
 #: ions/bbcukmet/ion_bbcukmet.cpp:742
-#, fuzzy, kde-format
-#| msgctxt "Time of the day (from the duple Day/Night)"
-#| msgid "Night"
+#, kde-format
 msgctxt "Short for Tonight"
 msgid "Tonight"
-msgstr "Naktis"
+msgstr "Šiąnakt"
 
 #: ions/dwd/ion_dwd.cpp:497
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
-msgstr ""
+msgstr "Šaltinis: Deutscher Wetterdienst"
 
 #: ions/dwd/ion_dwd.cpp:563 ions/envcan/ion_envcan.cpp:1499
 #, kde-format
 msgctxt "Short for Saturday"
 msgid "Sat"
-msgstr ""
+msgstr "Šeš"
 
 #: ions/dwd/ion_dwd.cpp:564 ions/envcan/ion_envcan.cpp:1500
 #, kde-format
 msgctxt "Short for Sunday"
 msgid "Sun"
-msgstr ""
+msgstr "Sek"
 
 #: ions/dwd/ion_dwd.cpp:565 ions/envcan/ion_envcan.cpp:1501
 #, kde-format
 msgctxt "Short for Monday"
 msgid "Mon"
-msgstr ""
+msgstr "Pir"
 
 #: ions/dwd/ion_dwd.cpp:566 ions/envcan/ion_envcan.cpp:1502
 #, kde-format
 msgctxt "Short for Tuesday"
 msgid "Tue"
-msgstr ""
+msgstr "Ant"
 
 #: ions/dwd/ion_dwd.cpp:567 ions/envcan/ion_envcan.cpp:1503
 #, kde-format
 msgctxt "Short for Wednesday"
 msgid "Wed"
-msgstr ""
+msgstr "Tre"
 
 #: ions/dwd/ion_dwd.cpp:568 ions/envcan/ion_envcan.cpp:1504
 #, kde-format
 msgctxt "Short for Thursday"
 msgid "Thu"
-msgstr ""
+msgstr "Ket"
 
 #: ions/dwd/ion_dwd.cpp:569 ions/envcan/ion_envcan.cpp:1505
 #, kde-format
 msgctxt "Short for Friday"
 msgid "Fri"
-msgstr ""
+msgstr "Pen"
 
 #: ions/envcan/ion_envcan.cpp:1014 ions/envcan/ion_envcan.cpp:1016
 #: ions/envcan/ion_envcan.cpp:1491 ions/envcan/ion_envcan.cpp:1513
 #: ions/envcan/ion_envcan.cpp:1564 ions/noaa/ion_noaa.cpp:461
 #, kde-format
 msgid "N/A"
-msgstr "?"
+msgstr "Neprieinama"
 
 #: ions/envcan/ion_envcan.cpp:1495
 #, kde-format
 msgid "Today"
-msgstr ""
+msgstr "Šiandien"
 
 #: ions/envcan/ion_envcan.cpp:1540
 #, kde-format
@@ -239,7 +237,7 @@ msgstr ""
 #, kde-format
 msgctxt "credit line, keep string short)"
 msgid "Data from NOAA National Weather Service"
-msgstr ""
+msgstr "Duomenys iš NOAA nacionalinės orų tarnybos"
 
 #. i18n: The forecast summary can include several single conditions that follow
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
@@ -250,7 +248,7 @@ msgctxt ""
 "Separator between forecast conditions that follow a temporal sequence (ex. "
 "\"Rain then Sunny\")"
 msgid " then "
-msgstr ""
+msgstr " tada "
 
 #: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
 #, kde-format
@@ -262,7 +260,7 @@ msgstr ""
 #, kde-format
 msgctxt "weather condition"
 msgid "cloudy"
-msgstr ""
+msgstr "debesuota"
 
 #: ions/wetter.com/ion_wettercom.cpp:138 ions/wetter.com/ion_wettercom.cpp:139
 #, fuzzy, kde-format
@@ -454,33 +452,31 @@ msgstr ""
 #, kde-format
 msgctxt "weather condition"
 msgid "n/a"
-msgstr ""
+msgstr "neprieinama"
 
 #: ions/wetter.com/ion_wettercom.cpp:185
 #, kde-format
 msgctxt "weather condition"
 msgid "sunny"
-msgstr ""
+msgstr "saulėta"
 
 #: ions/wetter.com/ion_wettercom.cpp:198
 #, kde-format
 msgctxt "weather condition"
 msgid "clear sky"
-msgstr ""
+msgstr "giedra"
 
 #: ions/wetter.com/ion_wettercom.cpp:311
 #, kde-format
 msgctxt "Geographical location: city, state, ISO-country-code"
 msgid "%1, %2, %3"
-msgstr ""
+msgstr "%1, %2, %3"
 
 #: ions/wetter.com/ion_wettercom.cpp:313
-#, fuzzy, kde-format
-#| msgctxt "A weather station location and the weather service it comes from"
-#| msgid "%1 (%2)"
+#, kde-format
 msgctxt "Geographical location: quarter (city), state, ISO-country-code"
 msgid "%1 (%2), %3, %4"
-msgstr "%1 (%2)"
+msgstr "%1 (%2), %3, %4"
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -699,10 +695,9 @@ msgid "Unable to retrieve weather information for %1"
 msgstr "Nepavyko gauti informacijos apie orus, skirtus %1"
 
 #: qml/FullRepresentation.qml:67
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgid "Unable to retrieve weather information"
-msgstr "Nepavyko gauti informacijos apie orus, skirtus %1"
+msgstr "Nepavyko gauti informacijos apie orus"
 
 #: qml/FullRepresentation.qml:68
 #, kde-format
@@ -896,16 +891,12 @@ msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
 #: weatherdata/futuredays.cpp:82
-#, fuzzy, kde-format
-#| msgctxt "Time of the day (from the duple Day/Night)"
-#| msgid "Day"
+#, kde-format
 msgid "Day"
 msgstr "Diena"
 
 #: weatherdata/futuredays.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "Time of the day (from the duple Day/Night)"
-#| msgid "Night"
+#, kde-format
 msgid "Night"
 msgstr "Naktis"
 
