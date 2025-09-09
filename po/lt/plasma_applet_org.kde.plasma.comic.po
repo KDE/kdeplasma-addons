@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-06 00:43+0000\n"
-"PO-Revision-Date: 2024-02-02 21:50+0200\n"
+"PO-Revision-Date: 2025-09-08 14:57+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.0.1\n"
+"X-Generator: Poedit 3.6\n"
 
 #: comicdata.cpp:76
 #, kde-format
@@ -39,109 +39,100 @@ msgid "Visit the comic website"
 msgstr "Apsilankyti komiksų interneto svetainėje"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Comics:"
+#, kde-format
 msgctxt "@title"
 msgid "Comics"
-msgstr "Komiksai:"
+msgstr "Komiksai"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Elgsena"
 
 #: qml/configBehavior.qml:28
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show above image:"
-msgstr ""
+msgstr "Rodyti virš paveikslo:"
 
 #: qml/configBehavior.qml:29
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Title"
-msgstr ""
+msgstr "Pavadinimas"
 
 #: qml/configBehavior.qml:34
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Author"
-msgstr ""
+msgstr "Autorius"
 
 #: qml/configBehavior.qml:39
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show below image:"
-msgstr ""
+msgstr "Rodyti po paveikslu:"
 
 #: qml/configBehavior.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Comic identifier"
+#, kde-format
 msgctxt "@option:check show below image"
 msgid "Identifier"
-msgstr "Komiksų identifikatorius"
+msgstr "Identifikatorius"
 
 #: qml/configBehavior.qml:45
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Website"
-msgstr ""
+msgstr "Internetinė svetainė"
 
 #: qml/configBehavior.qml:54
-#, fuzzy, kde-format
-#| msgid "Show navigation buttons:"
+#, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
-msgstr "Rodyti naršymo mygtukus:"
+msgstr "Naršymo mygtukai:"
 
 #: qml/configBehavior.qml:55
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
-msgstr ""
+msgstr "Visada matomi kraštuose"
 
 #: qml/configBehavior.qml:61
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
-msgstr ""
+msgstr "Užvedus pelę atsiranda centre"
 
 #: qml/configBehavior.qml:70
 #, kde-format
 msgctxt "@label for checkbox, completes sentence … opens full-size view"
 msgid "Middle-clicking image:"
-msgstr ""
+msgstr "Spustelėjimas viduriniuoju pelės mygtuku ant paveikslo:"
 
 #: qml/configBehavior.qml:71
 #, kde-format
 msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
-msgstr ""
+msgstr "Atveria viso dydžio rodinį"
 
 #: qml/configComics.qml:26
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
-msgstr "Gauti naujų komiksų…"
+msgstr "Gauti naujų…"
 
 #: qml/configComics.qml:65
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
-msgstr ""
+msgstr "Nėra įdiegtų komiksų"
 
 #: qml/configComics.qml:67
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
-msgstr "Gauti naujų komiksų…"
+msgstr "Gauti komiksų…"
 
 #: qml/configComics.qml:81
 #, kde-format
@@ -163,40 +154,35 @@ msgstr[3] " min."
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
-msgstr ""
+msgstr "Saugoti vietiniame archyve:"
 
 #: qml/configComics.qml:103
-#, fuzzy, kde-format
-#| msgctxt "@item:valuesuffix spacing to number + unit"
-#| msgid "strip per comic"
-#| msgid_plural "strips per comic"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
-msgstr[0] "piešinių serija vienam komiksui"
-msgstr[1] "piešinių serijos vienam komiksui"
-msgstr[2] "piešinių serijų vienam komiksui"
-msgstr[3] "piešinių serija vienam komiksui"
+msgstr[0] "paveikslą vieniems komiksams"
+msgstr[1] "paveikslus vieniems komiksams"
+msgstr[2] "paveikslų vieniems komiksams"
+msgstr[3] "paveikslą vieniems komiksams"
 
 #: qml/ErrorPlaceholder.qml:18
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Download Comics"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "Atsisiųsti komiksus"
+msgstr "Nepavyko įkelti komiksų"
 
 #: qml/ErrorPlaceholder.qml:19
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Vėliau bandykite dar kartą arba pasirinkite kitokius komiksus"
 
 #: qml/ErrorPlaceholder.qml:27
 #, kde-format
 msgctxt "@info placeholdermessage title if offline"
 msgid "Offline"
-msgstr ""
+msgstr "Nėra interneto"
 
 #: qml/ErrorPlaceholder.qml:28
 #, kde-format
@@ -205,12 +191,14 @@ msgid ""
 "Reconnect to the internet to retry loading this image. You can still view "
 "any images in the local archive."
 msgstr ""
+"Prisijunkite prie interneto norėdami iš naujo bandyti įkelti šį paveikslą. "
+"Jūs vis tiek galite peržiūrinėti vietiniame archyve esančius paveikslus."
 
 #: qml/ErrorPlaceholder.qml:36
 #, kde-format
 msgctxt "@info placeholdermessage title if connection local/unknown"
 msgid "Limited connectivity"
-msgstr ""
+msgstr "Ribotas jungiamumas"
 
 #: qml/ErrorPlaceholder.qml:37
 #, kde-format
@@ -219,12 +207,14 @@ msgid ""
 "The image may not be available on your current connection. You can still "
 "view any images in the local archive."
 msgstr ""
+"Gali būti, kad paveikslas neprieinamas naudojant jūsų dabartinį ryšį. Jūs "
+"vis tiek galite peržiūrinėti vietiniame archyve esančius paveikslus."
 
 #: qml/ErrorPlaceholder.qml:45
 #, kde-format
 msgctxt "@info placeholdermessage title if today not available"
 msgid "Not available"
-msgstr ""
+msgstr "Neprieinama"
 
 #: qml/ErrorPlaceholder.qml:46
 #, kde-format
@@ -232,12 +222,14 @@ msgctxt "@info placeholdermessage explanation if today not available"
 msgid ""
 "Today's image is not yet available or cannot be read. Try a different date."
 msgstr ""
+"Šiandienos paveikslas kol kas neprieinamas arba negali būti perskaitytas. "
+"Pamėginkite kitokią datą."
 
 #: qml/ErrorPlaceholder.qml:54
 #, kde-format
 msgctxt "@info placeholdermessage title if date not available"
 msgid "Not available"
-msgstr ""
+msgstr "Neprieinama"
 
 #: qml/ErrorPlaceholder.qml:55
 #, kde-format
@@ -246,6 +238,8 @@ msgid ""
 "The image for this day is not available or cannot be read. Try a different "
 "date."
 msgstr ""
+"Šios dienos paveikslas neprieinamas arba negali būti perskaitytas. "
+"Pamėginkite kitokią datą."
 
 #: qml/main.qml:76
 #, kde-format
@@ -287,7 +281,7 @@ msgstr "Apsilankyti parduotuvės &internetinėje svetainėje"
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr "Į&rašyti komiksą kaip…"
+msgstr "Į&rašyti komiksus kaip…"
 
 #: qml/main.qml:120
 #, kde-format
@@ -305,19 +299,19 @@ msgstr "Saugoti dabartinę &poziciją"
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
-msgstr ""
+msgstr "Nesukonfigūruoti jokie komiksai"
 
 #: qml/main.qml:259
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
-msgstr ""
+msgstr "Pasirinkti komiksus…"
 
 #: qml/main.qml:270
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
-msgstr ""
+msgstr "%1/%2 - %3.png"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format

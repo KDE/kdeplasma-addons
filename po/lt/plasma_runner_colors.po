@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-27 00:42+0000\n"
-"PO-Revision-Date: 2025-02-27 00:42+0000\n"
+"PO-Revision-Date: 2025-09-08 14:32+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -17,6 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
+"X-Generator: Poedit 3.6\n"
 
 #: colorsrunner.cpp:29
 #, kde-format
@@ -24,6 +25,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
 "#FF00FF) or an SVG named color."
 msgstr ""
+"Rodo :q: reikšmę spalvos pavidalu, kai :q: yra šešioliktainė spalva (pvz., "
+"#FF00FF) arba SVG pavadinimo spalva."
 
 #: colorsrunner.cpp:31
 #, kde-format
@@ -31,6 +34,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
 "255,255,255)."
 msgstr ""
+"Rodo :q: reikšmę spalvos pavidalu, kai :q: yra RGB spalvos trejetas (pvz., "
+"255,255,255)."
 
 #: colorsrunner.cpp:34
 #, kde-format
@@ -38,18 +43,20 @@ msgid ""
 "Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
 "color quadruplet (e.g. 255,255,255,255)."
 msgstr ""
+"Rodo :q: reikšmę spalvos pavidalu su alfa kanalu, kai :q: yra RGBA spalvos "
+"ketvertas (pvz., 255,255,255,255)."
 
 #: colorsrunner.cpp:139
 #, kde-format
 msgid "RGBA: %1, %2, %3, %4"
-msgstr ""
+msgstr "RGBA: %1, %2, %3, %4"
 
 #: colorsrunner.cpp:141
 #, kde-format
 msgid "RGB: %1, %2, %3"
-msgstr ""
+msgstr "RGB: %1, %2, %3"
 
 #: colorsrunner.cpp:146
 #, kde-format
 msgid "CMYK: %1%, %2%, %3%, %4%"
-msgstr ""
+msgstr "CMYK: %1%, %2%, %3%, %4%"
