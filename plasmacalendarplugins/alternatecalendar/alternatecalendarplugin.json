@@ -26,7 +26,6 @@
         "Description[ta]": "வேறு நாள்காட்டியில் இன்றைய தேதியைக் காட்டும் (எ.கா. சீன அல்லது இஸ்லாமிய நாள்காட்டியில்)",
         "Description[tr]": "Tarihleri alternatif bir takvim sisteminde gösterin; örneğin, Çin Ay Takvimi veya İslamik Takvim",
         "Description[uk]": "Показ дат у альтернативній календарній системі, зокрема китайському місячному або ісламському календарі",
-        "Description[x-test]": "xxShow dates in an alternate calendar system, such as Chinese Lunar or Islamicxx",
         "Description[zh_CN]": "使用其他历法系统显示日期，例如中国农历或伊斯兰历",
         "Description[zh_TW]": "用替代曆法查看日期，像是農曆或伊斯蘭曆",
         "Icon": "office-calendar",
@@ -72,7 +71,6 @@
         "Name[tr]": "Alternatif Takvim",
         "Name[uk]": "Альтернативний календар",
         "Name[vi]": "Lịch khác",
-        "Name[x-test]": "xxAlternate Calendarxx",
         "Name[zh_CN]": "其他历法系统",
         "Name[zh_TW]": "替代曆法"
     },

@@ -45,7 +45,6 @@
                 "Name[tr]": "Jesper Thomschutz",
                 "Name[uk]": "Jesper Thomschutz",
                 "Name[vi]": "Jesper Thomschutz",
-                "Name[x-test]": "xxJesper Thomschutzxx",
                 "Name[zh_CN]": "Jesper Thomschutz",
                 "Name[zh_TW]": "Jesper Thomschutz"
             }
@@ -93,7 +92,6 @@
         "Description[tr]": "Parçaları sıraya koyun",
         "Description[uk]": "Спробуйте впорядкувати плитки",
         "Description[vi]": "Đảo các ô về đúng thứ tự",
-        "Description[x-test]": "xxPut the pieces in orderxx",
         "Description[zh_CN]": "按顺序排列板块的小游戏",
         "Description[zh_TW]": "把磁磚整理整齊",
         "Icon": "fifteenpuzzle",
@@ -141,7 +139,6 @@
         "Name[tr]": "Onbeşli Yapboz",
         "Name[uk]": "Гра у п’ятнашки",
         "Name[vi]": "Trò chơi đảo ô",
-        "Name[x-test]": "xxFifteen Puzzlexx",
         "Name[zh_CN]": "十五格拼图",
         "Name[zh_TW]": "十五數字推盤遊戲",
         "Website": "https://kde.org/plasma-desktop/"

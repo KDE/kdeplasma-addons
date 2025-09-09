@@ -23,7 +23,6 @@
         "Description[ta]": "BBC வழங்கும் XML தரவு",
         "Description[tr]": "BBC’den gelen XML verisi",
         "Description[uk]": "Дані XML від BBC",
-        "Description[x-test]": "xxXML Data from the British Broadcasting Corporationxx",
         "Description[zh_CN]": "BBC 提供的 XML 数据",
         "Description[zh_TW]": "來自英國廣播公司 (BBC) 的 XML 資料",
         "Icon": "noneyet",
@@ -49,7 +48,6 @@
         "Name[ta]": "BBC வானிலை",
         "Name[tr]": "BBC Hava Durumu",
         "Name[uk]": "Погода BBC",
-        "Name[x-test]": "xxBBC Weatherxx",
         "Name[zh_CN]": "BBC Weather",
         "Name[zh_TW]": "BBC 天氣"
     },

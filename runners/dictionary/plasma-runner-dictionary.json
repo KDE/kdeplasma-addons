@@ -44,7 +44,6 @@
                 "Name[tr]": "Jason A. Donenfeld",
                 "Name[uk]": "Jason A. Donenfeld",
                 "Name[vi]": "Jason A. Donenfeld",
-                "Name[x-test]": "xxJason A. Donenfeldxx",
                 "Name[zh_CN]": "Jason A. Donenfeld",
                 "Name[zh_TW]": "Jason A. Donenfeld"
             }
@@ -92,7 +91,6 @@
         "Description[tr]": "Sözcükleri tanımlayın",
         "Description[uk]": "Визначення термінів",
         "Description[vi]": "Định nghĩa từ",
-        "Description[x-test]": "xxDefine wordsxx",
         "Description[zh_CN]": "查找单词含义",
         "Description[zh_TW]": "查詢詞彙定義",
         "EnabledByDefault": true,
@@ -141,7 +139,6 @@
         "Name[tr]": "Sözlük",
         "Name[uk]": "Словник",
         "Name[vi]": "Từ điển",
-        "Name[x-test]": "xxDictionaryxx",
         "Name[zh_CN]": "词典",
         "Name[zh_TW]": "字典"
     },

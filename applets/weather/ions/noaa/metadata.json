@@ -23,7 +23,6 @@
         "Description[ta]": "NOAA-இன் தேசிய வானிலை சேவை வழங்கும் XML தரவு",
         "Description[tr]": "NOAA's National Weather Service tarafından sağlanan XML verisi",
         "Description[uk]": "Дані XML з національної служби погоди NOAA",
-        "Description[x-test]": "xxXML Data from NOAA's National Weather Servicexx",
         "Description[zh_CN]": "NOAA's National Weather Service 提供的 XML 数据",
         "Description[zh_TW]": "來自 NOAA 國家天氣服務的 XML 資料",
         "Icon": "noneyet",
@@ -49,7 +48,6 @@
         "Name[ta]": "NOAA-வின் தேசிய வானிலை சேவை",
         "Name[tr]": "NOAA's National Weather Service",
         "Name[uk]": "Національна служба погоди NOAA",
-        "Name[x-test]": "xxNOAA's National Weather Servicexx",
         "Name[zh_CN]": "NOAA's National Weather Service",
         "Name[zh_TW]": "NOAA 的國家天氣服務"
     },

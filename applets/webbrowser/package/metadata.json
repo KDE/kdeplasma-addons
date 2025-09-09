@@ -45,7 +45,6 @@
                 "Name[tr]": "Mihail İvçenko",
                 "Name[uk]": "Михайло Івченко",
                 "Name[vi]": "Mikhail Ivchenko",
-                "Name[x-test]": "xxMikhail Ivchenkoxx",
                 "Name[zh_CN]": "Mikhail Ivchenko",
                 "Name[zh_TW]": "Mikhail Ivchenko"
             }
@@ -93,7 +92,6 @@
         "Description[tr]": "Masaüstüne bir web sayfası ekleyin",
         "Description[uk]": "Додати сторінку інтернету на вашу стільницю.",
         "Description[vi]": "Thêm một trang web vào bàn làm việc",
-        "Description[x-test]": "xxAdd a webpage on your desktop.xx",
         "Description[zh_CN]": "添加网页到您的桌面",
         "Description[zh_TW]": "加一個網站在您的桌面上。",
         "Icon": "applications-internet",
@@ -136,7 +134,6 @@
         "Name[ta]": "இணைய உலாவி",
         "Name[tr]": "Web Tarayıcısı",
         "Name[uk]": "Браузер",
-        "Name[x-test]": "xxWeb Browserxx",
         "Name[zh_CN]": "网页浏览器",
         "Name[zh_TW]": "網頁瀏覽器",
         "Website": "https://kde.org/plasma-desktop"

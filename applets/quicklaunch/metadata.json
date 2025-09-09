@@ -44,7 +44,6 @@
                 "Name[tr]": "David Rosca",
                 "Name[uk]": "David Rosca",
                 "Name[vi]": "David Rosca",
-                "Name[x-test]": "xxDavid Roscaxx",
                 "Name[zh_CN]": "David Rosca",
                 "Name[zh_TW]": "David Rosca"
             }
@@ -88,7 +87,6 @@
         "Description[ta]": "பிடித்த செயலிகளை எளிதில் திறக்க உதவும்",
         "Description[tr]": "Favori uygulamaları çalıştırın",
         "Description[uk]": "Запуск ваших улюблених програм",
-        "Description[x-test]": "xxLaunch your favourite applicationsxx",
         "Description[zh_CN]": "启动您最常用的程序",
         "Description[zh_TW]": "啟動您最愛的應用程式",
         "FormFactors": [
@@ -138,7 +136,6 @@
         "Name[tr]": "Hizlı Başlat",
         "Name[uk]": "Швидкий запуск",
         "Name[vi]": "Khởi chạy nhanh",
-        "Name[x-test]": "xxQuicklaunchxx",
         "Name[zh_CN]": "快速启动",
         "Name[zh_TW]": "快速啟動",
         "Website": "https://kde.org/plasma-desktop/"

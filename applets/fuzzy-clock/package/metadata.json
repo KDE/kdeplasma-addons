@@ -45,7 +45,6 @@
                 "Name[tr]": "Kai Uwe Broulik",
                 "Name[uk]": "Kai Uwe Broulik",
                 "Name[vi]": "Kai Uwe Broulik",
-                "Name[x-test]": "xxKai Uwe Broulikxx",
                 "Name[zh_CN]": "Kai Uwe Broulik",
                 "Name[zh_TW]": "Kai Uwe Broulik"
             }
@@ -94,7 +93,6 @@
         "Description[tr]": "Daha az kesin bir biçimde görüntülenen zaman",
         "Description[uk]": "Час, показаний у менш точному форматі",
         "Description[vi]": "Thời gian hiển thị ở dạng ít chính xác hơn",
-        "Description[x-test]": "xxTime displayed in a less precise formatxx",
         "Description[zh_CN]": "用粗略格式显示时间",
         "Description[zh_TW]": "用比較不精確的方式顯示時間",
         "Icon": "preferences-system-time",
@@ -142,7 +140,6 @@
         "Name[tr]": "Belirsiz Saat",
         "Name[uk]": "Нечіткий годинник",
         "Name[vi]": "Đồng mơ hồ",
-        "Name[x-test]": "xxFuzzy Clockxx",
         "Name[zh_CN]": "粗略时钟",
         "Name[zh_TW]": "模糊時鐘",
         "Website": "https://kde.org/plasma-desktop"

@@ -44,7 +44,6 @@
                 "Name[tr]": "Kai Uwe Broulik",
                 "Name[uk]": "Kai Uwe Broulik",
                 "Name[vi]": "Kai Uwe Broulik",
-                "Name[x-test]": "xxKai Uwe Broulikxx",
                 "Name[zh_CN]": "Kai Uwe Broulik",
                 "Name[zh_TW]": "Kai Uwe Broulik"
             }
@@ -78,7 +77,6 @@
         "Description[sv]": "Visa hexadecimala färger, RGB-färgtripplar och SVG-färgnamn",
         "Description[tr]": "Onaltılık renkleri, RGB renk üçlülerini ve SVG renk adlarını görüntüleyin",
         "Description[uk]": "Показ шістнадцяткових кольорів, триплетів кольорів rgb та назв кольорів SVG",
-        "Description[x-test]": "xxDisplay hex colors, rgb color triplets, and SVG color namesxx",
         "Description[zh_CN]": "显示十六进制颜色、RGB 颜色三元组和 SVG 颜色名称",
         "Description[zh_TW]": "顯示十六進制顏色值、RGB 顏色、與 SVG 色彩名",
         "EnabledByDefault": true,
@@ -115,7 +113,6 @@
         "Name[ta]": "நிறங்கள்",
         "Name[tr]": "Renkler",
         "Name[uk]": "Кольори",
-        "Name[x-test]": "xxColorsxx",
         "Name[zh_CN]": "颜色",
         "Name[zh_TW]": "顏色"
     }
