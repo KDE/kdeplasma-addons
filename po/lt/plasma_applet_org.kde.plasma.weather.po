@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-12 02:39+0000\n"
-"PO-Revision-Date: 2025-01-24 00:31+0200\n"
+"PO-Revision-Date: 2025-09-08 15:41+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.6\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -279,7 +279,7 @@ msgstr "Įveskite vietovę"
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
-msgstr "Vietovei „%1“ nerasta jokių orų stočių"
+msgstr "Nerasta jokių orų stočių, skirtų „%1“"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:187
 #, kde-format
@@ -302,8 +302,7 @@ msgid ""
 "Try again later."
 msgstr ""
 "Jei anksčiau esate naudoję šią orų stotį, gali būti, kad avarinis šio orų "
-"teikėjo serverio atjungimas padarė jį neprieinamą. Veliau bandykite dar "
-"kartą."
+"teikėjo serveris yra atjungtas ir neprieinamas. Vėliau bandykite dar kartą."
 
 #: package/contents/ui/ForecastView.qml:45
 #, kde-format
@@ -438,13 +437,13 @@ msgctxt ""
 "possible! Omitting or changing words is fine as long as the original meaning "
 "is retained."
 msgid "Set up Weather Report…"
-msgstr ""
+msgstr "Nustatyti orų pranešimus…"
 
 #: package/contents/ui/main.qml:371
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
-msgstr ""
+msgstr "Spustelėkite norėdami pasirinkti vietą ir stebėti joje orus"
 
 #: package/contents/ui/main.qml:380
 #, kde-format
