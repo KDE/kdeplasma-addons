@@ -40,7 +40,6 @@
                 "Name[tr]": "Ismael Asensio",
                 "Name[uk]": "Ismael Asensio",
                 "Name[vi]": "Ismael Asensio",
-                "Name[x-test]": "xxIsmael Asensioxx",
                 "Name[zh_CN]": "Ismael Asensio",
                 "Name[zh_TW]": "Ismael Asensio"
             }
@@ -82,7 +81,6 @@
         "Description[tr]": "Küçük görselleri 3B atlıkarınca olarak gösteren bir pencere değiştirici yerleşimi",
         "Description[uk]": "Компонування засобу перемикання вікон з мініатюрами у вигляді просторово каруселі",
         "Description[vi]": "Bố cục trình chuyển cửa sổ hiển thị các hình nhỏ thành một băng chuyền 3D",
-        "Description[x-test]": "xxA Window Switcher layout showing thumbnails as a 3D carouselxx",
         "Description[zh_CN]": "使用 3D 转盘风格显示缩略图的窗口切换器",
         "Description[zh_TW]": "用 3D 幻燈片顯示預覽的視窗切換器佈局",
         "Icon": "preferences-system-windows-effect-coverswitch",
@@ -124,7 +122,6 @@
         "Name[tr]": "Kapak Değiştirici",
         "Name[uk]": "Перемикач обкладинок",
         "Name[vi]": "Chuyển kiểu trang bìa",
-        "Name[x-test]": "xxCover Switchxx",
         "Name[zh_CN]": "3D 封面切换",
         "ServiceTypes": [
             "KWin/WindowSwitcher"

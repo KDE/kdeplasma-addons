@@ -40,7 +40,6 @@
                 "Name[tr]": "Joseph Wenninger",
                 "Name[uk]": "Joseph Wenninger",
                 "Name[vi]": "Joseph Wenninger",
-                "Name[x-test]": "xxJoseph Wenningerxx",
                 "Name[zh_CN]": "Joseph Wenninger",
                 "Name[zh_TW]": "Joseph Wenninger"
             }
@@ -83,7 +82,6 @@
         "Description[tr]": "Kate Oturum Başlatıcı",
         "Description[uk]": "Засіб запуску сеансів Kate",
         "Description[vi]": "Trình khởi chạy phiên Kate",
-        "Description[x-test]": "xxKate Session Launcherxx",
         "Description[zh_CN]": "Kate 会话启动器",
         "Description[zh_TW]": "Kate 工作階段啟動器",
         "Icon": "kate",
@@ -126,7 +124,6 @@
         "Name[tr]": "Kate Oturumları",
         "Name[uk]": "Сеанси Kate",
         "Name[vi]": "Các phiên Kate",
-        "Name[x-test]": "xxKate Sessionsxx",
         "Name[zh_CN]": "Kate 会话",
         "Name[zh_TW]": "Kate 工作階段",
         "ServiceTypes": [

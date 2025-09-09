@@ -40,7 +40,6 @@
                 "Name[tr]": "Lars Pontoppidan",
                 "Name[uk]": "Lars Pontoppidan",
                 "Name[vi]": "Lars Pontoppidan",
-                "Name[x-test]": "xxLars Pontoppidanxx",
                 "Name[zh_CN]": "Lars Pontoppidan",
                 "Name[zh_TW]": "Lars Pontoppidan"
             }
@@ -83,7 +82,6 @@
         "Description[tr]": "(Resim) Çerçeve(si)",
         "Description[uk]": "(Картинна) рамка",
         "Description[vi]": "Khung (ảnh)",
-        "Description[x-test]": "xx(Picture) Framexx",
         "Description[zh_CN]": "图片相框",
         "Description[zh_TW]": "相框",
         "EnabledByDefault": true,
@@ -127,7 +125,6 @@
         "Name[tr]": "Ortam Çerçevesi",
         "Name[uk]": "Медіарамка",
         "Name[vi]": "Khung phương tiện",
-        "Name[x-test]": "xxMedia Framexx",
         "Name[zh_CN]": "媒体相框",
         "Name[zh_TW]": "媒體框架",
         "ServiceTypes": [

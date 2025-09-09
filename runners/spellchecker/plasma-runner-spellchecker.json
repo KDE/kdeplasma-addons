@@ -40,7 +40,6 @@
                 "Name[tr]": "Ryan P. Bitanga",
                 "Name[uk]": "Ryan P. Bitanga",
                 "Name[vi]": "Ryan P. Bitanga",
-                "Name[x-test]": "xxRyan P. Bitangaxx",
                 "Name[zh_CN]": "Ryan P. Bitanga",
                 "Name[zh_TW]": "Ryan P. Bitanga"
             }
@@ -82,7 +81,6 @@
         "Description[tr]": "Bir sözcüğün yazımını denetle",
         "Description[uk]": "Перевірте правопис слова",
         "Description[vi]": "Kiểm tra cách đánh vần của một chữ",
-        "Description[x-test]": "xxCheck the spelling of a wordxx",
         "Description[zh_CN]": "检查单词拼写",
         "Description[zh_TW]": "檢查詞彙的拼字",
         "EnabledByDefault": true,
@@ -125,7 +123,6 @@
         "Name[tr]": "Yazım Denetimi",
         "Name[uk]": "Перевірка правопису",
         "Name[vi]": "Trình kiểm tra đánh vần",
-        "Name[x-test]": "xxSpell Checkerxx",
         "Name[zh_CN]": "拼写检查",
         "Name[zh_TW]": "拼字檢查"
     },

@@ -40,7 +40,6 @@
                 "Name[tr]": "Henry Stanaland, Davide Bettio",
                 "Name[uk]": "Henry Stanaland, Davide Bettio",
                 "Name[vi]": "Henry Stanaland, Davide Bettio",
-                "Name[x-test]": "xxHenry Stanaland, Davide Bettioxx",
                 "Name[zh_CN]": "Henry Stanaland, Davide Bettio",
                 "Name[zh_TW]": "Henry Stanaland, Davide Bettio"
             }
@@ -83,7 +82,6 @@
         "Description[tr]": "Yalın toplamları hesapla",
         "Description[uk]": "Обчисліть прості суми",
         "Description[vi]": "Tính các phép tính đơn giản",
-        "Description[x-test]": "xxCalculate simple sumsxx",
         "Description[zh_CN]": "简易四则运算计算器",
         "Description[zh_TW]": "做些基本計算",
         "EnabledByDefault": true,
@@ -127,7 +125,6 @@
         "Name[tr]": "Hesap Makinesi",
         "Name[uk]": "Калькулятор",
         "Name[vi]": "Máy tính bỏ túi",
-        "Name[x-test]": "xxCalculatorxx",
         "Name[zh_CN]": "计算器",
         "Name[zh_TW]": "計算機",
         "ServiceTypes": [

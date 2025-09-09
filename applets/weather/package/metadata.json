@@ -40,7 +40,6 @@
                 "Name[tr]": "Luís Gabriel Lima",
                 "Name[uk]": "Luís Gabriel Lima",
                 "Name[vi]": "Luís Gabriel Lima",
-                "Name[x-test]": "xxLuís Gabriel Limaxx",
                 "Name[zh_CN]": "Luís Gabriel Lima",
                 "Name[zh_TW]": "Luís Gabriel Lima"
             }
@@ -83,7 +82,6 @@
         "Description[tr]": "Hava tahmini ve geçerli durum",
         "Description[uk]": "Прогноз і поточні умови",
         "Description[vi]": "Dự báo và điều kiện hiện tại",
-        "Description[x-test]": "xxForecast and current conditionsxx",
         "Description[zh_CN]": "天气预告和当前天气",
         "Description[zh_TW]": "預報及目前氣象觀測",
         "Icon": "weather-clear",
@@ -126,7 +124,6 @@
         "Name[tr]": "Hava Durumu Raporu",
         "Name[uk]": "Звіт щодо погоди",
         "Name[vi]": "Tin thời tiết",
-        "Name[x-test]": "xxWeather Reportxx",
         "Name[zh_CN]": "天气报告",
         "Name[zh_TW]": "天氣預報",
         "ServiceTypes": [

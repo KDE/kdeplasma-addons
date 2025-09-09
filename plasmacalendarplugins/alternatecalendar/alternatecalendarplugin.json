@@ -37,7 +37,6 @@
         "Description[tr]": "Alternatif takvim sisteminden tarihleri görüntülemek için takvim eklentisi",
         "Description[uk]": "Додаток календаря для показу дат із альтернативної календарної системи",
         "Description[vi]": "Phần cài cắm lịch để hiển thị ngày ở một hệ lịch khác",
-        "Description[x-test]": "xxCalendar plugin for displaying dates from the alternate calendar systemxx",
         "Description[zh_CN]": "用于显示特定文化历法的日期的日历插件",
         "Description[zh_TW]": "用於顯示替代曆法日期的行事曆外掛程式",
         "Icon": "office-calendar",
@@ -78,7 +77,6 @@
         "Name[tr]": "Alternatif Takvim",
         "Name[uk]": "Альтернативний календар",
         "Name[vi]": "Lịch khác",
-        "Name[x-test]": "xxAlternate Calendarxx",
         "Name[zh_CN]": "特定文化日历",
         "Name[zh_TW]": "替代曆法"
     },

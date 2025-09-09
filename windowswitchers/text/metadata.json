@@ -40,7 +40,6 @@
                 "Name[tr]": "Martin Gräßlin",
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
-                "Name[x-test]": "xxMartin Gräßlinxx",
                 "Name[zh_CN]": "Martin Gräßlin",
                 "Name[zh_TW]": "Martin Gräßlin"
             }
@@ -81,7 +80,6 @@
         "Description[tr]": "Yalnızca pencere altyazılarını gösteren bir pencere değiştirici düzeni",
         "Description[uk]": "Компонування засобу перемикання вікон з показом лише підписів вікон",
         "Description[vi]": "Bố cục trình chuyển cửa sổ chỉ hiện các tiêu đề cửa sổ",
-        "Description[x-test]": "xxA window switcher layout only showing window captionsxx",
         "Description[zh_CN]": "只显示窗口标题的窗口切换器布局",
         "Description[zh_TW]": "只顯示視窗標題的視窗切換器佈局",
         "Icon": "preferences-system-windows-switcher-text",
@@ -124,7 +122,6 @@
         "Name[tr]": "Yalnızca Metin",
         "Name[uk]": "Лише текст",
         "Name[vi]": "Chỉ chữ",
-        "Name[x-test]": "xxText Onlyxx",
         "Name[zh_CN]": "仅文字",
         "Name[zh_TW]": "只有文字",
         "ServiceTypes": [

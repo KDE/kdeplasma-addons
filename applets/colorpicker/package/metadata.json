@@ -40,7 +40,6 @@
                 "Name[tr]": "Kai Uwe Broulik",
                 "Name[uk]": "Kai Uwe Broulik",
                 "Name[vi]": "Kai Uwe Broulik",
-                "Name[x-test]": "xxKai Uwe Broulikxx",
                 "Name[zh_CN]": "Kai Uwe Broulik",
                 "Name[zh_TW]": "Kai Uwe Broulik"
             }
@@ -83,7 +82,6 @@
         "Description[tr]": "Masaüstünden bir renk seç",
         "Description[uk]": "Вибір кольору зі стільниці",
         "Description[vi]": "Nhặt một màu trên bàn làm việc",
-        "Description[x-test]": "xxPick a color from the desktopxx",
         "Description[zh_CN]": "拾取桌面环境中的颜色",
         "Description[zh_TW]": "從桌面上提取顏色",
         "FormFactors": [
@@ -129,7 +127,6 @@
         "Name[tr]": "Renk Seçici",
         "Name[uk]": "Піпетка",
         "Name[vi]": "Trình nhặt màu",
-        "Name[x-test]": "xxColor Pickerxx",
         "Name[zh_CN]": "拾色器",
         "Name[zh_TW]": "取色工具",
         "ServiceTypes": [

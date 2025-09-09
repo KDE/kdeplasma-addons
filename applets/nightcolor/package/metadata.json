@@ -40,7 +40,6 @@
                 "Name[tr]": "Vlad Zahorodnii",
                 "Name[uk]": "Влад Загородній",
                 "Name[vi]": "Vlad Zahorodnii",
-                "Name[x-test]": "xxVlad Zahorodniixx",
                 "Name[zh_CN]": "Vlad Zahorodnii",
                 "Name[zh_TW]": "Vlad Zahorodnii"
             }
@@ -82,7 +81,6 @@
         "Description[tr]": "Gece Rengini denetlemek için Plasmoid",
         "Description[uk]": "Плазмоїд для керування нічними кольорами",
         "Description[vi]": "Plasmoid để điều khiển \"Màu buổi tối\"",
-        "Description[x-test]": "xxPlasmoid for controlling Night Colorxx",
         "Description[zh_CN]": "用于控制夜间颜色的 Plasma 小程序",
         "Description[zh_TW]": "用來控制夜色功能的 Plasmoid",
         "EnabledByDefault": true,
@@ -125,7 +123,6 @@
         "Name[tr]": "Gece Rengi Denetimi",
         "Name[uk]": "Керування нічними кольорами",
         "Name[vi]": "Điều khiển \"Màu buổi tối\"",
-        "Name[x-test]": "xxNight Color Controlxx",
         "Name[zh_CN]": "夜间颜色控制",
         "Name[zh_TW]": "夜色控制",
         "ServiceTypes": [
@@ -158,7 +155,6 @@
     "X-KDE-Keywords[sl]": "kwin,okno,upravljalnik,noč,barve,rdeči premik,oči,nočni način,barva,temni način,temno,zatemnjeno,spanje,obremenitev oči,rdeča,premik,oranžna,rumena, topla,ton zaslona,temperatura,modra,svetloba",
     "X-KDE-Keywords[sv]": "kwin,fönster,hanterare,natt,färger,rödskift,ögon,nattläge,färg,mörkt läge,mörk,ljussvag,viloläge,ögonbelastning,röd,skift,orange,gul,varm,skärmfärgton,temperatur,blå,ljus",
     "X-KDE-Keywords[uk]": "kwin,window,manager,night,colors,redshift,eyes,night mode,colour,dark mode,dark,dim,sleep,eye strain,red,shift,orange,yellow,warm,screen tint,temperature,blue,light,квін,вікно,керування,ніч,кольори,редшифт,очі,нічний режим,колір,темний режим,темний,притлумити,сон,навантаження на очі,червоний,зсув,помаранчевий,жовтий,теплий,відтінок екрана,температура,синє,синій,світло",
-    "X-KDE-Keywords[x-test]": "xxkwinxx,xxwindowxx,xxmanagerxx,xxnightxx,xxcolorsxx,xxredshiftxx,xxeyesxx,xxnight modexx,xxcolourxx,xxdark modexx,xxdarkxx,xxdimxx,xxsleepxx,xxeye strainxx,xxredxx,xxshiftxx,xxorangexx,xxyellowxx,xxwarmxx,xxscreen tintxx,xxtemperaturexx,xxbluexx,xxlightxx",
     "X-Plasma-API": "declarativeappletscript",
     "X-Plasma-DBusActivationService": "org.kde.NightColor",
     "X-Plasma-MainScript": "ui/main.qml",

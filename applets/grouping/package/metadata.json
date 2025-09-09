@@ -40,7 +40,6 @@
                 "Name[tr]": "David Edmundson",
                 "Name[uk]": "David Edmundson",
                 "Name[vi]": "David Edmundson",
-                "Name[x-test]": "xxDavid Edmundsonxx",
                 "Name[zh_CN]": "David Edmundson",
                 "Name[zh_TW]": "David Edmundson"
             }
@@ -83,7 +82,6 @@
         "Description[tr]": "Plasma araç takımlarını grupla",
         "Description[uk]": "Групувати віджети Плазми",
         "Description[vi]": "Nhóm các phụ kiện Plasma lại với nhau",
-        "Description[x-test]": "xxGroup Plasma widgets togetherxx",
         "Description[zh_CN]": "将多个 Plasma 挂件合并为一组",
         "Description[zh_TW]": "組合數個 Plasma 元件",
         "EnabledByDefault": true,
@@ -127,7 +125,6 @@
         "Name[tr]": "Gruplayan Plasmoid",
         "Name[uk]": "Плазмоїд групування",
         "Name[vi]": "Plasmoid nhóm",
-        "Name[x-test]": "xxGrouping Plasmoidxx",
         "Name[zh_CN]": "Plasma 小程序分组",
         "Name[zh_TW]": "群組元件",
         "ServiceTypes": [

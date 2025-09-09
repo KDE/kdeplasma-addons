@@ -40,7 +40,6 @@
                 "Name[tr]": "Martin Gräßlin",
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
-                "Name[x-test]": "xxMartin Gräßlinxx",
                 "Name[zh_CN]": "Martin Gräßlin",
                 "Name[zh_TW]": "Martin Gräßlin"
             }
@@ -81,7 +80,6 @@
         "Description[tr]": "Tüm pencereleri küçük görsel olarak bir ızgarada gösteren bir pencere değiştirici düzeni",
         "Description[uk]": "Компонування засобу перемикання вікон з мініатюрами всіх вікон у форматі ґратки",
         "Description[vi]": "Bố cục trình chuyển cửa sổ hiển thị tất cả các cửa sổ thành các hình nhỏ trong một lưới",
-        "Description[x-test]": "xxA Window Switcher layout showing all windows as thumbnails in a gridxx",
         "Description[zh_CN]": "将窗口缩略图按表格显示的窗口切换器布局",
         "Description[zh_TW]": "用格線以縮圖顯示所有視窗的視窗切換器佈局",
         "Icon": "preferences-system-windows-switcher-present-windows",
@@ -124,7 +122,6 @@
         "Name[tr]": "Izgara",
         "Name[uk]": "Таблиця",
         "Name[vi]": "Lưới",
-        "Name[x-test]": "xxGridxx",
         "Name[zh_CN]": "网格",
         "Name[zh_TW]": "格線",
         "ServiceTypes": [

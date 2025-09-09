@@ -39,7 +39,6 @@
                 "Name[tr]": "Veng Şütian",
                 "Name[uk]": "Weng Xuetian",
                 "Name[vi]": "Weng Xuetian",
-                "Name[x-test]": "xxWeng Xuetianxx",
                 "Name[zh_CN]": "Weng Xuetian",
                 "Name[zh_TW]": "Weng Xuetian"
             }
@@ -80,7 +79,6 @@
         "Description[tr]": "Her gün internetten yeni bir resim",
         "Description[uk]": "Нове зображення з інтернету щодня",
         "Description[vi]": "Mỗi ngày một ảnh mới từ Liên Mạng",
-        "Description[x-test]": "xxA new picture from the Internet each dayxx",
         "Description[zh_CN]": "每天从互联网获取一张新图片",
         "Description[zh_TW]": "每天一張來自網路上的新影像",
         "EnabledByDefault": true,
@@ -124,7 +122,6 @@
         "Name[tr]": "Günün Resmi",
         "Name[uk]": "Картинка дня",
         "Name[vi]": "Ảnh của ngày",
-        "Name[x-test]": "xxPicture of the Dayxx",
         "Name[zh_CN]": "每日一图",
         "Name[zh_TW]": "今日影像",
         "ServiceTypes": [

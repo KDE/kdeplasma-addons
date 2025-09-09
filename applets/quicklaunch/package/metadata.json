@@ -40,7 +40,6 @@
                 "Name[tr]": "David Rosca",
                 "Name[uk]": "David Rosca",
                 "Name[vi]": "David Rosca",
-                "Name[x-test]": "xxDavid Roscaxx",
                 "Name[zh_CN]": "David Rosca",
                 "Name[zh_TW]": "David Rosca"
             }
@@ -83,7 +82,6 @@
         "Description[tr]": "Favori uygulamalarınızı çalıştır",
         "Description[uk]": "Запуск ваших улюблених програм",
         "Description[vi]": "Khởi chạy các ứng dụng bạn ưa thích",
-        "Description[x-test]": "xxLaunch your favourite Applicationsxx",
         "Description[zh_CN]": "显示并启动您固定的程序",
         "Description[zh_TW]": "啟動您最愛的應用程式",
         "EnabledByDefault": true,
@@ -130,7 +128,6 @@
         "Name[tr]": "Hizlı Başlat",
         "Name[uk]": "Швидкий запуск",
         "Name[vi]": "Khởi chạy nhanh",
-        "Name[x-test]": "xxQuicklaunchxx",
         "Name[zh_CN]": "快速启动",
         "Name[zh_TW]": "快速啟動",
         "ServiceTypes": [

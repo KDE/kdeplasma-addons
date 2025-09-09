@@ -40,7 +40,6 @@
                 "Name[tr]": "Martin Gräßlin",
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
-                "Name[x-test]": "xxMartin Gräßlinxx",
                 "Name[zh_CN]": "Martin Gräßlin",
                 "Name[zh_TW]": "Martin Gräßlin"
             }
@@ -81,7 +80,6 @@
         "Description[tr]": "Masaüstü adını içeren bilgilendirici bir pencere değiştirici düzeni",
         "Description[uk]": "Інформативне компонування засобу перемикання вікон з назвами стільниць",
         "Description[vi]": "Bố cục mang nhiều thông tin cho trình chuyển cửa sổ, gồm cả tên bàn làm việc",
-        "Description[x-test]": "xxAn informative window switcher layout including desktop namexx",
         "Description[zh_CN]": "显示包含桌面名称在内的详细信息的窗口切换器布局",
         "Description[zh_TW]": "提供較多資訊的視窗切換器佈局，包含桌面名稱",
         "Icon": "preferences-system-windows-switcher-informative",
@@ -122,7 +120,6 @@
         "Name[tr]": "Bilgilendirici",
         "Name[uk]": "Інформативне",
         "Name[vi]": "Nhiều thông tin",
-        "Name[x-test]": "xxInformativexx",
         "Name[zh_CN]": "详细信息",
         "Name[zh_TW]": "資訊提供",
         "ServiceTypes": [

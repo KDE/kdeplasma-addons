@@ -40,7 +40,6 @@
                 "Name[tr]": "Chris Holland",
                 "Name[uk]": "Chris Holland",
                 "Name[vi]": "Chris Holland",
-                "Name[x-test]": "xxChris Hollandxx",
                 "Name[zh_CN]": "Chris Holland",
                 "Name[zh_TW]": "Chris Holland"
             }
@@ -82,7 +81,6 @@
         "Description[tr]": "Küçük görsellerin bir ızgarasını gösteren pencere değiştirici düzeni",
         "Description[uk]": "Компонування засобу перемикання вікон з малою таблицею мініатюр поточного стану вікон",
         "Description[vi]": "Bố cục trình chuyển cửa sổ dùng một lưới nhỏ các hình nhỏ",
-        "Description[x-test]": "xxA window switcher layout using a small grid of thumbnailsxx",
         "Description[zh_CN]": "将窗口缩略图按小型表格显示的窗口切换器布局",
         "Description[zh_TW]": "使用小縮圖格線的視窗切換器佈局",
         "Icon": "preferences-system-windows-switcher-thumbnail-grid",
@@ -125,7 +123,6 @@
         "Name[tr]": "Küçük Görsel Izgarası",
         "Name[uk]": "Таблиця мініатюр",
         "Name[vi]": "Lưới hình nhỏ",
-        "Name[x-test]": "xxThumbnail Gridxx",
         "Name[zh_CN]": "缩略图网格",
         "Name[zh_TW]": "縮圖格線",
         "ServiceTypes": [
