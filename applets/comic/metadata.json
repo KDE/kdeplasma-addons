@@ -45,7 +45,6 @@
                 "Name[tr]": "Reza Fatahilah Şah",
                 "Name[uk]": "Reza Fatahilah Shah",
                 "Name[vi]": "Reza Fatahilah Shah",
-                "Name[x-test]": "xxReza Fatahilah Shahxx",
                 "Name[zh_CN]": "Reza Fatahilah Shah",
                 "Name[zh_TW]": "Reza Fatahilah Shah"
             }
@@ -94,7 +93,6 @@
         "Description[tr]": "İnternetten çizgi roman şeritlerini görüntüleyin",
         "Description[uk]": "Показує стрічку з жартами з Інтернету",
         "Description[vi]": "Xem các truyện tranh trên Liên Mạng",
-        "Description[x-test]": "xxView comic strips from the Internetxx",
         "Description[zh_CN]": "阅读来自互联网的连环画",
         "Description[zh_TW]": "看網路上的連環漫畫",
         "Icon": "face-smile-big",
@@ -141,7 +139,6 @@
         "Name[tr]": "Çizgi Roman Şeridi",
         "Name[uk]": "Комічна стрічка",
         "Name[vi]": "Truyện tranh",
-        "Name[x-test]": "xxComic Stripxx",
         "Name[zh_CN]": "连环画",
         "Name[zh_TW]": "連環漫畫",
         "Website": "https://kde.org/plasma-desktop/"

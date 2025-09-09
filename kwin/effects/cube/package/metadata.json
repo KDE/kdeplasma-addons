@@ -45,7 +45,6 @@
                 "Name[tr]": "Vlad Zahorodnii",
                 "Name[uk]": "Влад Загородній",
                 "Name[vi]": "Vlad Zahorodnii",
-                "Name[x-test]": "xxVlad Zahorodniixx",
                 "Name[zh_CN]": "Vlad Zahorodnii",
                 "Name[zh_TW]": "Vlad Zahorodnii"
             }
@@ -88,7 +87,6 @@
         "Description[ta]": "மெய்நிகர் பணிமேடைகளை கனசதுரமாக அடுக்கி காட்டும்; விசைப்பலகை சுருக்குவழியைக் கொண்டு இதைத் தூண்டலாம்",
         "Description[tr]": "Masaüstlerini sanal bir küp biçiminde düzenleyin; klavye kısayoluyla etkinleştirilir",
         "Description[uk]": "Упорядкування стільниць у віртуальний куб; активується клавіатурним скороченням",
-        "Description[x-test]": "xxArrange desktops in a virtual cube; activated with a keyboard shortcutxx",
         "Description[zh_CN]": "在一个虚拟立方体中排列桌面；使用键盘快捷键激活",
         "Description[zh_TW]": "將各虛擬桌面排列成一個立體方塊——需要用鍵盤快捷鍵觸發",
         "EnabledByDefault": false,
@@ -134,7 +132,6 @@
         "Name[tr]": "Küp",
         "Name[uk]": "Куб",
         "Name[vi]": "Khối hộp",
-        "Name[x-test]": "xxCubexx",
         "Name[zh_CN]": "立方体",
         "Name[zh_TW]": "立體方塊"
     },

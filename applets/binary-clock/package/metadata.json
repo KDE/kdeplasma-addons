@@ -45,7 +45,6 @@
                 "Name[tr]": "Joseph Wenninger",
                 "Name[uk]": "Joseph Wenninger",
                 "Name[vi]": "Joseph Wenninger",
-                "Name[x-test]": "xxJoseph Wenningerxx",
                 "Name[zh_CN]": "Joseph Wenninger",
                 "Name[zh_TW]": "Joseph Wenninger"
             },
@@ -92,7 +91,6 @@
                 "Name[tr]": "Davide Bettio",
                 "Name[uk]": "Davide Bettio",
                 "Name[vi]": "Davide Bettio",
-                "Name[x-test]": "xxDavide Bettioxx",
                 "Name[zh_CN]": "Davide Bettio",
                 "Name[zh_TW]": "Davide Bettio"
             },
@@ -139,7 +137,6 @@
                 "Name[tr]": "Piotr Kąkol",
                 "Name[uk]": "Piotr Kąkol",
                 "Name[vi]": "Piotr Kąkol",
-                "Name[x-test]": "xxPiotr Kąkolxx",
                 "Name[zh_CN]": "Piotr Kąkol",
                 "Name[zh_TW]": "Piotr Kąkol"
             }
@@ -188,7 +185,6 @@
         "Description[tr]": "İkili biçimde gösterilen zaman",
         "Description[uk]": "Час, показаний у двійковому форматі",
         "Description[vi]": "Thời gian hiển thị ở dạng nhị phân",
-        "Description[x-test]": "xxTime displayed in binary formatxx",
         "Description[zh_CN]": "以二进制格式显示时间",
         "Description[zh_TW]": "以二進位制顯示時間",
         "Icon": "clock",
@@ -237,7 +233,6 @@
         "Name[tr]": "İkili Saat",
         "Name[uk]": "Двійковий годинник",
         "Name[vi]": "Đồng hồ nhị phân",
-        "Name[x-test]": "xxBinary Clockxx",
         "Name[zh_CN]": "二进制时钟",
         "Name[zh_TW]": "二進位時鐘",
         "Website": "https://kde.org/plasma-desktop"

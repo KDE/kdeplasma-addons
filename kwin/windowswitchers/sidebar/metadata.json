@@ -43,7 +43,6 @@
                 "Name[tr]": "KDE Görsel Tasarım Grubu",
                 "Name[uk]": "Група з візуального дизайну KDE",
                 "Name[vi]": "Đội Thiết kế Trực quan KDE",
-                "Name[x-test]": "xxKDE Visual Design Groupxx",
                 "Name[zh_CN]": "KDE 视觉设计团队",
                 "Name[zh_TW]": "KDE Visual Design Group"
             }
@@ -88,7 +87,6 @@
         "Description[tr]": "Dikey bir kenar çubuğu kullanan pencere değiştirici yerleşimi",
         "Description[uk]": "Компонування перемикача вікон за допомогою вертикальної бічної панелі",
         "Description[vi]": "Bố cục trình chuyển cửa sổ dùng một thanh bên dọc",
-        "Description[x-test]": "xxWindow switcher layout using a vertical sidebarxx",
         "Description[zh_CN]": "使用垂直侧边栏的窗口切换器布局",
         "Description[zh_TW]": "使用垂直側邊欄的視窗切換器佈局",
         "Id": "sidebar",
@@ -133,7 +131,6 @@
         "Name[tr]": "Kenar çubuğu",
         "Name[uk]": "Бічна панель",
         "Name[vi]": "Thanh bên",
-        "Name[x-test]": "xxSidebarxx",
         "Name[zh_CN]": "侧边栏",
         "Name[zh_TW]": "側邊欄"
     }

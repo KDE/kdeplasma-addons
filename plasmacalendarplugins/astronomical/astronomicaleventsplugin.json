@@ -44,7 +44,6 @@
                 "Name[tr]": "Friedrich W. H. Kossebau",
                 "Name[uk]": "Friedrich W. H. Kossebau",
                 "Name[vi]": "Friedrich W. H. Kossebau",
-                "Name[x-test]": "xxFriedrich W. H. Kossebauxx",
                 "Name[zh_CN]": "Friedrich W. H. Kossebau",
                 "Name[zh_TW]": "Friedrich W. H. Kossebau"
             }
@@ -90,7 +89,6 @@
         "Description[tr]": "Gökbilimsel olayları görüntülemek için takvim eklentisi",
         "Description[uk]": "Додаток календаря для показу астрономічних подій",
         "Description[vi]": "Phần cài cắm lịch để hiển thị các sự kiện thiên văn",
-        "Description[x-test]": "xxCalendar plugin for displaying astronomical eventsxx",
         "Description[zh_CN]": "显示天文事件的日历插件",
         "Description[zh_TW]": "用於顯示天文事件的行事曆外掛程式",
         "Icon": "weather-clear-night",
@@ -137,7 +135,6 @@
         "Name[tr]": "Gökbilimsel Olaylar",
         "Name[uk]": "Астрономічні події",
         "Name[vi]": "Các sự kiện thiên văn",
-        "Name[x-test]": "xxAstronomical Eventsxx",
         "Name[zh_CN]": "天文事件",
         "Name[zh_TW]": "天文事件"
     },

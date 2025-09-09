@@ -45,7 +45,6 @@
                 "Name[tr]": "Davide Bettio",
                 "Name[uk]": "Davide Bettio",
                 "Name[vi]": "Davide Bettio",
-                "Name[x-test]": "xxDavide Bettioxx",
                 "Name[zh_CN]": "Davide Bettio",
                 "Name[zh_TW]": "Davide Bettio"
             }
@@ -94,7 +93,6 @@
         "Description[tr]": "Belirli bir zamandan geriye sayın",
         "Description[uk]": "Зворотній відлік визначеного часу",
         "Description[vi]": "Đếm ngược một khoảng thời gian chỉ định",
-        "Description[x-test]": "xxCountdown over a specified time periodxx",
         "Description[zh_CN]": "指定时间长度进行倒计时",
         "Description[zh_TW]": "指定期間的倒數計時",
         "Icon": "chronometer",
@@ -142,7 +140,6 @@
         "Name[tr]": "Sayaç",
         "Name[uk]": "Таймер",
         "Name[vi]": "Bộ hẹn giờ",
-        "Name[x-test]": "xxTimerxx",
         "Name[zh_CN]": "计时器",
         "Name[zh_TW]": "計時器",
         "Website": "https://kde.org/plasma-desktop/"

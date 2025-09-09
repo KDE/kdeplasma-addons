@@ -45,7 +45,6 @@
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
                 "Name[vi]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx",
                 "Name[zh_CN]": "Marco Martin",
                 "Name[zh_TW]": "Marco Martin"
             }
@@ -91,7 +90,6 @@
         "Description[tr]": "Haenau duvar kağıdı",
         "Description[uk]": "Шпалера Ганау",
         "Description[vi]": "Phông nền Haenau",
-        "Description[x-test]": "xxHaenau wallpaperxx",
         "Description[zh_CN]": "色彩层次壁纸",
         "Description[zh_TW]": "Haenau 桌布",
         "EnabledByDefault": true,
@@ -138,7 +136,6 @@
         "Name[tr]": "Haenau",
         "Name[uk]": "Ганау",
         "Name[vi]": "Haenau",
-        "Name[x-test]": "xxHaenauxx",
         "Name[zh_CN]": "色彩层次",
         "Name[zh_TW]": "Haenau",
         "Website": "https://kde.org/"

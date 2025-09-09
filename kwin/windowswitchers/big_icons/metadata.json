@@ -45,7 +45,6 @@
                 "Name[tr]": "Martin Gräßlin",
                 "Name[uk]": "Martin Gräßlin",
                 "Name[vi]": "Martin Gräßlin",
-                "Name[x-test]": "xxMartin Gräßlinxx",
                 "Name[zh_CN]": "Martin Gräßlin",
                 "Name[zh_TW]": "Martin Gräßlin"
             }
@@ -92,7 +91,6 @@
         "Description[tr]": "Pencereyi göstermek için büyük simgeler kullanan bir pencere değiştirici yerleşimi",
         "Description[uk]": "Компонування засобу перемикання вікон з великими піктограмами вікон",
         "Description[vi]": "Bố cục trình chuyển cửa sổ dùng các biểu tượng cỡ lớn để biểu diễn cửa sổ",
-        "Description[x-test]": "xxA window switcher layout using large icons to represent the windowxx",
         "Description[zh_CN]": "使用大图标代表窗口的窗口切换器布局",
         "Description[zh_TW]": "用大圖示代表視窗的視窗切換器佈局",
         "Icon": "preferences-system-windows-switcher-big-icons",
@@ -140,7 +138,6 @@
         "Name[tr]": "Büyük simgeler",
         "Name[uk]": "Великі піктограми",
         "Name[vi]": "Biểu tượng lớn",
-        "Name[x-test]": "xxLarge Iconsxx",
         "Name[zh_CN]": "大图标",
         "Name[zh_TW]": "大圖示"
     }

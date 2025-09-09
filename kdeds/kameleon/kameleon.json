@@ -37,7 +37,6 @@
         "Description[ta]": "கணினியின் விளக்குகளை பிளாஸ்மாவின் சிறப்பு நிறத்திற்கேற்ப அமைக்கும்",
         "Description[tr]": "Aygıt LED’lerini Plasma vurgu rengiyle eşleştirir",
         "Description[uk]": "Синхронізує світлодіоди пристрою із кольором акценту Плазми",
-        "Description[x-test]": "xxSynchronizes device LEDs with the Plasma accent colorxx",
         "Description[zh_CN]": "将 Plasma 的强调色与设备的灯效同步",
         "Description[zh_TW]": "讓裝置 LED 同步使用 Plasma 強調色",
         "Name": "Kameleon",
@@ -77,7 +76,6 @@
         "Name[sv]": "Kameleon",
         "Name[tr]": "Kameleon",
         "Name[uk]": "Kameleon",
-        "Name[x-test]": "xxKameleonxx",
         "Name[zh_CN]": "变色龙",
         "Name[zh_TW]": "Kameleon"
     },

@@ -45,7 +45,6 @@
                 "Name[tr]": "Lars Pontoppidan",
                 "Name[uk]": "Lars Pontoppidan",
                 "Name[vi]": "Lars Pontoppidan",
-                "Name[x-test]": "xxLars Pontoppidanxx",
                 "Name[zh_CN]": "Lars Pontoppidan",
                 "Name[zh_TW]": "Lars Pontoppidan"
             }
@@ -89,7 +88,6 @@
         "Description[ta]": "படத்தைக் காட்டும்",
         "Description[tr]": "Resim çerçevesi",
         "Description[uk]": "(Картинна) рамка",
-        "Description[x-test]": "xx(Picture) framexx",
         "Description[zh_CN]": "图片相框",
         "Description[zh_TW]": "相框",
         "Icon": "image-x-generic",
@@ -137,7 +135,6 @@
         "Name[tr]": "Ortam Çerçevesi",
         "Name[uk]": "Медіарамка",
         "Name[vi]": "Khung phương tiện",
-        "Name[x-test]": "xxMedia Framexx",
         "Name[zh_CN]": "媒体相框",
         "Name[zh_TW]": "媒體框架",
         "Website": "https://kde.org/plasma-desktop/"

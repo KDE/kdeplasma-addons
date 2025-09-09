@@ -45,7 +45,6 @@
                 "Name[tr]": "Petri Damstén",
                 "Name[uk]": "Petri Damstén",
                 "Name[vi]": "Petri Damstén",
-                "Name[x-test]": "xxPetri Damsténxx",
                 "Name[zh_CN]": "Petri Damstén",
                 "Name[zh_TW]": "Petri Damstén"
             }
@@ -93,7 +92,6 @@
         "Description[tr]": "Değerleri değişik birimlere dönüştürün",
         "Description[uk]": "Перетворення значень у різних одиницях",
         "Description[vi]": "Đổi các giá trị sang các đơn vị khác nhau",
-        "Description[x-test]": "xxConvert values to different unitsxx",
         "Description[zh_CN]": "转换数值到不同单位",
         "Description[zh_TW]": "將數值轉換成不同單位",
         "EnabledByDefault": true,
@@ -141,7 +139,6 @@
         "Name[tr]": "Birim Dönüştürücüsü",
         "Name[uk]": "Перетворювач одиниць",
         "Name[vi]": "Trình đổi đơn vị",
-        "Name[x-test]": "xxUnit Converterxx",
         "Name[zh_CN]": "单位转换器",
         "Name[zh_TW]": "單位轉換"
     }

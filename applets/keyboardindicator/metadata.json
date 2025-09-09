@@ -46,7 +46,6 @@
                 "Name[tr]": "Aleix Pol Gonzalez",
                 "Name[uk]": "Aleix Pol Gonzalez",
                 "Name[vi]": "Aleix Pol Gonzalez",
-                "Name[x-test]": "xxAleix Pol Gonzalezxx",
                 "Name[zh_CN]": "Aleix Pol Gonzalez",
                 "Name[zh_TW]": "Aleix Pol Gonzalez"
             }
@@ -95,7 +94,6 @@
         "Description[tr]": "Büyük Harf veya Sayı Kilidi’nin etkin olup olmadığını gösterir",
         "Description[uk]": "Показує, чи задіяно Caps Lock або Num Lock",
         "Description[vi]": "Cho biết Caps Lock hay Num Lock có đang hoạt động không",
-        "Description[x-test]": "xxShows whether Caps Lock or Num Lock are activexx",
         "Description[zh_CN]": "显示大写或小键盘数字锁定键的激活状态",
         "Description[zh_TW]": "顯示大寫鎖定 (Caps Lock) 或數字鎖定 (Num Lock) 是否開啟",
         "EnabledByDefault": true,
@@ -145,7 +143,6 @@
         "Name[tr]": "Kilit Düğmeleri Durumu",
         "Name[uk]": "Стан клавіш блокування",
         "Name[vi]": "Trạng thái các phím khoá",
-        "Name[x-test]": "xxLock Keys Statusxx",
         "Name[zh_CN]": "锁定键状态",
         "Name[zh_TW]": "鎖定鍵狀態",
         "Website": "https://kde.org/plasma-desktop/"

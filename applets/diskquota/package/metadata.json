@@ -45,7 +45,6 @@
                 "Name[tr]": "Dominik Haumann",
                 "Name[uk]": "Dominik Haumann",
                 "Name[vi]": "Dominik Haumann",
-                "Name[x-test]": "xxDominik Haumannxx",
                 "Name[zh_CN]": "Dominik Haumann",
                 "Name[zh_TW]": "Dominik Haumann"
             }
@@ -93,7 +92,6 @@
         "Description[tr]": "Disk kotası hakkında ayrıntılar gösterin",
         "Description[uk]": "Показати дані щодо квот на диску",
         "Description[vi]": "Hiện các chi tiết về hạn ngạch đĩa",
-        "Description[x-test]": "xxShows details about disk quotaxx",
         "Description[zh_CN]": "显示磁盘配额详情",
         "Description[zh_TW]": "顯示磁碟配額詳細資訊",
         "EnabledByDefault": false,
@@ -142,7 +140,6 @@
         "Name[tr]": "Disk Kotası",
         "Name[uk]": "Квота на диску",
         "Name[vi]": "Hạn ngạch đĩa",
-        "Name[x-test]": "xxDisk Quotaxx",
         "Name[zh_CN]": "磁盘配额",
         "Name[zh_TW]": "磁碟配額",
         "Website": "https://kde.org/plasma-desktop/"

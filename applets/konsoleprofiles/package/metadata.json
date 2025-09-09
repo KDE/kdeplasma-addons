@@ -45,7 +45,6 @@
                 "Name[tr]": "Shaun Reich",
                 "Name[uk]": "Shaun Reich",
                 "Name[vi]": "Shaun Reich",
-                "Name[x-test]": "xxShaun Reichxx",
                 "Name[zh_CN]": "Shaun Reich",
                 "Name[zh_TW]": "Shaun Reich"
             }
@@ -94,7 +93,6 @@
         "Description[tr]": "Konsole profillerini listeleyin ve çalıştırın",
         "Description[uk]": "Перегляньте і запустіть профілі Konsole",
         "Description[vi]": "Liệt kê và khởi chạy các hồ sơ Konsole",
-        "Description[x-test]": "xxList and launch Konsole profilesxx",
         "Description[zh_CN]": "列出并启动 Konsole 配置方案",
         "Description[zh_TW]": "列出並啟動 Konsole 設定檔",
         "FormFactors": [
@@ -145,7 +143,6 @@
         "Name[tr]": "Konsol Profilleri",
         "Name[uk]": "Профілі Konsole",
         "Name[vi]": "Hồ sơ Konsole",
-        "Name[x-test]": "xxKonsole Profilesxx",
         "Name[zh_CN]": "Konsole 配置方案",
         "Name[zh_TW]": "Konsole 設定檔",
         "Website": "https://userbase.kde.org/Plasma"

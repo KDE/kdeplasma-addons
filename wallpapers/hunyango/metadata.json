@@ -45,7 +45,6 @@
                 "Name[tr]": "Marco Martin",
                 "Name[uk]": "Marco Martin",
                 "Name[vi]": "Marco Martin",
-                "Name[x-test]": "xxMarco Martinxx",
                 "Name[zh_CN]": "Marco Martin",
                 "Name[zh_TW]": "Marco Martin"
             }
@@ -91,7 +90,6 @@
         "Description[tr]": "Hunyango duvar kağıdı",
         "Description[uk]": "Шпалера Уньянго",
         "Description[vi]": "Phông nền Hunyango",
-        "Description[x-test]": "xxHunyango wallpaperxx",
         "Description[zh_CN]": "变色龙壁纸",
         "Description[zh_TW]": "Hunyango 桌布",
         "EnabledByDefault": true,
@@ -138,7 +136,6 @@
         "Name[tr]": "Hunyango",
         "Name[uk]": "Уньянго",
         "Name[vi]": "Hunyango",
-        "Name[x-test]": "xxHunyangoxx",
         "Name[zh_CN]": "变色龙",
         "Name[zh_TW]": "Hunyango",
         "Website": "https://kde.org/"
