@@ -278,7 +278,7 @@ msgstr "Visita la &web de la botiga"
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr "Guar&da el còmic com a…"
+msgstr "Anomena i guar&da el còmic…"
 
 #: qml/main.qml:120
 #, kde-format
@@ -302,7 +302,7 @@ msgstr "No s'ha configurat cap còmic"
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
-msgstr "Seleccioneu un còmic…"
+msgstr "Trieu un còmic…"
 
 #: qml/main.qml:270
 #, kde-format
