@@ -666,8 +666,6 @@ void EnvCanadaIon::forecast_slotDataArrived(KIO::Job *job, const QByteArray &dat
 
 void EnvCanadaIon::forecast_slotJobFinished(KJob *job)
 {
-    Q_UNUSED(job);
-
     if (m_forecastPromise->isCanceled()) {
         m_forecastPromise->finish();
         clearForecastData();
