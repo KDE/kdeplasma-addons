@@ -759,7 +759,7 @@ bool WeatherData::ForecastPeriod::hasNightWeather() const
 int WeatherData::ForecastPeriod::getMaxTemp(const QList<std::shared_ptr<WeatherData::ForecastInfo>> &forecastInfos) const
 {
     int result = -273;
-    for (auto forecast : forecastInfos) {
+    for (const auto &forecast : forecastInfos) {
         result = std::max(result, forecast->tempHigh);
     }
 
@@ -769,7 +769,7 @@ int WeatherData::ForecastPeriod::getMaxTemp(const QList<std::shared_ptr<WeatherD
 int WeatherData::ForecastPeriod::getMinTemp(const QList<std::shared_ptr<WeatherData::ForecastInfo>> &forecastInfos) const
 {
     int result = 100;
-    for (auto forecast : forecastInfos) {
+    for (const auto &forecast : forecastInfos) {
         result = std::min(result, forecast->tempLow);
     }
 
