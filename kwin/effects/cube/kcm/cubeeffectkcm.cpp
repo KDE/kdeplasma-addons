@@ -18,6 +18,7 @@
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QFileDialog>
+#include <qstringliteral.h>
 
 K_PLUGIN_CLASS(CubeEffectConfig)
 
@@ -27,7 +28,7 @@ CubeEffectConfig::CubeEffectConfig(QObject *parent, const KPluginMetaData &data)
     ui.setupUi(widget());
 
     QFile xmlFile(QStringLiteral(":/main.xml"));
-    KConfigGroup cg = KSharedConfig::openConfig(QStringLiteral("kwinrc"))->group("Effect-cube");
+    KConfigGroup cg = KSharedConfig::openConfig(QStringLiteral("kwinrc"))->group(QStringLiteral("Effect-cube"));
     m_configLoader = new KConfigLoader(cg, &xmlFile, this);
     addConfig(m_configLoader, widget());
 

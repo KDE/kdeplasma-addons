@@ -29,7 +29,7 @@ QPixmap FifteenImageProvider::requestPixmap(const QString &id, QSize *size, cons
         QStringList parts = toSplit.split(separator);
         QStringList res = parts.mid(0, 4);
 
-        QString last = parts.mid(4).join('-');
+        QString last = parts.mid(4).join(QLatin1Char('-'));
         res.append(last);
 
         return res;

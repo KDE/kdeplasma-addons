@@ -22,6 +22,8 @@
 
 K_PLUGIN_CLASS_WITH_JSON(KateSessions, "plasma-runner-katesessions.json")
 
+using namespace Qt::StringLiterals;
+
 KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData)
     : AbstractRunner(parent, metaData)
 {
@@ -39,7 +41,7 @@ void KateSessions::match(RunnerContext &context)
     if (term.trimmed().compare(m_triggerWord, Qt::CaseInsensitive) == 0) {
         listAll = true;
         term.clear();
-    } else if (term.startsWith(m_triggerWord + ' ')) {
+    } else if (term.startsWith(m_triggerWord + ' '_L1)) {
         term.remove(m_triggerWord, Qt::CaseInsensitive);
         term = std::move(term).trimmed();
     } else if (!context.singleRunnerQueryMode()) {

@@ -27,9 +27,9 @@ DictionaryRunnerConfig::DictionaryRunnerConfig(QObject *parent, const KPluginMet
 
 void DictionaryRunnerConfig::load()
 {
-    KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QLatin1String("krunnerrc"));
-    KConfigGroup grp = cfg->group("Runners");
-    grp = KConfigGroup(&grp, KRUNNER_PLUGIN_NAME);
+    KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
+    KConfigGroup grp = cfg->group(QStringLiteral("Runners"));
+    grp = KConfigGroup(&grp, QStringLiteral(KRUNNER_PLUGIN_NAME));
     m_triggerWord->setText(grp.readEntry(CONFIG_TRIGGERWORD, i18nc("Trigger word before word to define", "define")));
     KCModule::load();
 }
@@ -38,8 +38,8 @@ void DictionaryRunnerConfig::save()
 {
     KCModule::save();
     KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QLatin1String("krunnerrc"));
-    KConfigGroup grp = cfg->group("Runners");
-    grp = KConfigGroup(&grp, KRUNNER_PLUGIN_NAME);
+    KConfigGroup grp = cfg->group(QStringLiteral("Runners"));
+    grp = KConfigGroup(&grp, QStringLiteral(KRUNNER_PLUGIN_NAME));
     grp.writeEntry(CONFIG_TRIGGERWORD, m_triggerWord->text());
     grp.sync();
 }

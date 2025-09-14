@@ -36,7 +36,7 @@ WeatherDataMonitor::WeatherDataMonitor(QObject *parent)
 {
     qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: start initializing";
 
-    const auto plugins = KPluginMetaData::findPlugins("plasma/weather_ions", {}, KPluginMetaData::AllowEmptyMetaData);
+    const auto plugins = KPluginMetaData::findPlugins(u"plasma/weather_ions"_s, {}, KPluginMetaData::AllowEmptyMetaData);
 
     for (const auto &plugin : plugins) {
         m_providers << plugin.pluginId();

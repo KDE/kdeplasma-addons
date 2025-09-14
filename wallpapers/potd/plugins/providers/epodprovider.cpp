@@ -32,7 +32,7 @@ void EpodProvider::pageRequestFinished(KJob *_job)
 
     const QString data = QString::fromUtf8(job->data()).simplified();
 
-    const auto exp = QRegularExpression("://epod\\.usra\\.edu/\\.a/.*-pi");
+    const auto exp = QRegularExpression(QStringLiteral("://epod\\.usra\\.edu/\\.a/.*-pi"));
 
     const auto expMatch = exp.match(data);
 

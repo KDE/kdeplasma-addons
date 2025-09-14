@@ -174,7 +174,7 @@ void QuicklaunchPrivate::editLauncher(QUrl url, int index, bool isPopup)
         const QVariantMap data = launcherData(url);
 
         KConfig desktopFile(desktopFilePath);
-        KConfigGroup desktopEntry(&desktopFile, "Desktop Entry");
+        KConfigGroup desktopEntry(&desktopFile, QStringLiteral("Desktop Entry"));
 
         desktopEntry.writeEntry("Name", data.value(QStringLiteral("applicationName")).toString());
         desktopEntry.writeEntry("Comment", data.value(QStringLiteral("genericName")).toString());

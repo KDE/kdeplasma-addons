@@ -84,7 +84,7 @@ ConfigStorage::ConfigStorage(QObject *parent)
     , m_calendarSystemModel(new CalendarSystemModel(this))
 {
     auto config = KSharedConfig::openConfig(QStringLiteral("plasma_calendar_alternatecalendar"));
-    m_generalConfigGroup = config->group("General");
+    m_generalConfigGroup = config->group(QStringLiteral("General"));
 
     m_calendarSystem = m_generalConfigGroup.readEntry("calendarSystem", "Gregorian");
     m_dateOffset = m_generalConfigGroup.readEntry("dateOffset", 0);

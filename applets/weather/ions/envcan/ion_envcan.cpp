@@ -507,7 +507,7 @@ void EnvCanadaIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Foreca
     qCDebug(WEATHER::ION::ENVCAN) << "Start receiving forecast for info " << placeInfo;
 
     // Support the old format for receiving a forecast
-    if (info.size() == 3 && info[1] == "weather" && !m_isLegacy) {
+    if (info.size() == 3 && info[1] == "weather"_L1 && !m_isLegacy) {
         m_isLegacy = true;
         if (m_places.isEmpty()) {
             // If network is down, we need to spin and wait

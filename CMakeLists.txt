@@ -35,11 +35,6 @@ include(KDEGitCommitHooks)
 include(ECMDeprecationSettings)
 include(ECMQmlModule)
 
-remove_definitions(
-    -DQT_NO_CAST_TO_ASCII # TODO still more work
-    -DQT_NO_CAST_FROM_ASCII
-)
-
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
     Gui
