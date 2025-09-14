@@ -19,12 +19,15 @@
 #include <QColor>
 #include <QDir>
 #include <QFileInfo>
+#include <QString>
 
 K_PLUGIN_CLASS_WITH_JSON(Kameleon, "kameleon.json")
 
+using namespace Qt::StringLiterals;
+
 Kameleon::Kameleon(QObject *parent, const QList<QVariant> &)
     : KDEDModule(parent)
-    , m_config(KSharedConfig::openConfig("kdeglobals"))
+    , m_config(KSharedConfig::openConfig(u"kdeglobals"_s))
     , m_configWatcher(KConfigWatcher::create(m_config))
 {
     findRgbLedDevices();
@@ -41,7 +44,7 @@ Kameleon::Kameleon(QObject *parent, const QList<QVariant> &)
 
 void Kameleon::findRgbLedDevices()
 {
-    QDir ledsDir(LED_SYSFS_PATH);
+    QDir ledsDir(QStringLiteral(LED_SYSFS_PATH));
     ledsDir.setFilter(QDir::Dirs | QDir::NoDotAndDotDot | QDir::Readable);
     auto ledDevices = ledsDir.entryList();
 
@@ -54,7 +57,7 @@ void Kameleon::findRgbLedDevices()
 
     for (const QString &ledDevice : std::as_const(ledDevices)) {
         // Get multicolor index (= RGB capability with order of colors)
-        QFile indexFile(LED_SYSFS_PATH + ledDevice + LED_INDEX_FILE);
+        QFile indexFile(QStringLiteral(LED_SYSFS_PATH) + ledDevice + QStringLiteral(LED_INDEX_FILE));
         if (!QFileInfo(indexFile).exists()) {
             // Not a RGB capable device
             continue;
@@ -63,11 +66,13 @@ void Kameleon::findRgbLedDevices()
             qCWarning(KAMELEON) << "failed to open" << indexFile.fileName() << indexFile.error() << indexFile.errorString();
             continue;
         }
-        QString colorIndexStr = indexFile.readAll().trimmed();
+        QString colorIndexStr = QString::fromLocal8Bit(indexFile.readAll()).trimmed();
         indexFile.close();
         QString colorIndex =
-            colorIndexStr.toLower().replace("red", "r").replace("green", "g").replace("blue", "b").replace(" ", ""); // eg "red green blue" -> "rgb"
-        if (!(colorIndex.length() == 3 && colorIndex.contains("r") && colorIndex.contains("g") && colorIndex.contains("b"))) {
+            colorIndexStr.toLower().replace("red"_L1, "r"_L1).replace("green"_L1, "g"_L1).replace("blue"_L1, "b"_L1).replace(" "_L1, ""_L1); // eg "red green
+                                                                                                                                             // blue"
+                                                                                                                                             // -> "rgb"
+        if (!(colorIndex.length() == 3 && colorIndex.contains("r"_L1) && colorIndex.contains("g"_L1) && colorIndex.contains("b"_L1))) {
             qCWarning(KAMELEON) << "invalid color index" << colorIndexStr << "read from" << LED_INDEX_FILE << "for device" << ledDevice;
             continue;
         }
@@ -93,7 +98,7 @@ void Kameleon::setEnabled(bool enabled)
     if (enabled != m_enabled) {
         qCInfo(KAMELEON) << "enabled changed" << enabled;
         m_enabled = enabled;
-        m_config->group("General").writeEntry<bool>("DeviceLedsAccentColored", enabled);
+        m_config->group(u"General"_s).writeEntry<bool>("DeviceLedsAccentColored", enabled);
         m_config->sync();
 
         if (enabled) {
@@ -106,10 +111,10 @@ void Kameleon::setEnabled(bool enabled)
 
 void Kameleon::loadConfig()
 {
-    m_enabled = m_config->group("General").readEntry<bool>("DeviceLedsAccentColored", true);
+    m_enabled = m_config->group(u"General"_s).readEntry<bool>("DeviceLedsAccentColored", true);
 
-    QColor customAccentColor = m_config->group("General").readEntry<QColor>("AccentColor", QColor::Invalid);
-    QColor schemeAccentColor = m_config->group("Colors:View").readEntry<QColor>("ForegroundActive", QColor::Invalid);
+    QColor customAccentColor = m_config->group(u"General"_s).readEntry<QColor>("AccentColor", QColor::Invalid);
+    QColor schemeAccentColor = m_config->group(u"Colors:View"_s).readEntry<QColor>("ForegroundActive", QColor::Invalid);
     QColor activeAccentColor = customAccentColor.isValid() ? customAccentColor
         : schemeAccentColor.isValid()                      ? schemeAccentColor
                                                            : QColor(QColorConstants::White);
@@ -127,17 +132,17 @@ void Kameleon::applyColor(QColor color)
     QStringList colorStrs;
     for (const QString &colorIndex : std::as_const(m_deviceRgbIndices)) {
         QStringList colorStrList = {QString(), QString(), QString()};
-        colorStrList[colorIndex.indexOf("r")] = QString::number(color.red());
-        colorStrList[colorIndex.indexOf("g")] = QString::number(color.green());
-        colorStrList[colorIndex.indexOf("b")] = QString::number(color.blue());
-        QString colorStr = colorStrList.join(" ");
+        colorStrList[colorIndex.indexOf('r'_L1)] = QString::number(color.red());
+        colorStrList[colorIndex.indexOf('g'_L1)] = QString::number(color.green());
+        colorStrList[colorIndex.indexOf('b'_L1)] = QString::number(color.blue());
+        QString colorStr = colorStrList.join(' '_L1);
         colorStrs.append(colorStr);
     }
 
-    KAuth::Action action("org.kde.kameleonhelper.writecolor");
-    action.setHelperId("org.kde.kameleonhelper");
-    action.addArgument("devices", m_rgbLedDevices);
-    action.addArgument("colors", colorStrs);
+    KAuth::Action action(u"org.kde.kameleonhelper.writecolor"_s);
+    action.setHelperId(u"org.kde.kameleonhelper"_s);
+    action.addArgument(u"devices"_s, m_rgbLedDevices);
+    action.addArgument(u"colors"_s, colorStrs);
     auto *job = action.execute();
 
     connect(job, &KAuth::ExecuteJob::result, this, [job, color] {

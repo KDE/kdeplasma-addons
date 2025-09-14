@@ -211,7 +211,7 @@ void PotdBackend::saveImage()
         QFileDialog::getSaveFileName( //
             nullptr, //
             i18ndc("plasma_wallpaper_org.kde.potd", "@title:window", "Save Today's Picture"), //
-            path + "/" + sanitizeFileName(defaultFileName) + ".jpg", //
+            path + QLatin1String("/") + sanitizeFileName(defaultFileName) + QLatin1String(".jpg"), //
             i18ndc("plasma_wallpaper_org.kde.potd", "@label:listbox Template for file dialog", "JPEG image (*.jpeg *.jpg *.jpe)"), //
             nullptr, //
             QFileDialog::DontConfirmOverwrite // KIO::CopyJob will show the confirmation dialog.

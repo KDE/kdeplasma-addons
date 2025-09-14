@@ -57,7 +57,7 @@ void SpellCheckConfig::load()
 {
     // FIXME: This shouldn't be hardcoded!
     const KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
-    const KConfigGroup grp = cfg->group("Runners").group(KRUNNER_PLUGIN_NAME);
+    const KConfigGroup grp = cfg->group(QStringLiteral("Runners")).group(QStringLiteral(KRUNNER_PLUGIN_NAME));
 
     const bool requireTrigger = grp.readEntry("requireTriggerWord", true);
     const QString trigger = grp.readEntry("trigger", i18n("spell"));
@@ -78,7 +78,7 @@ void SpellCheckConfig::save()
 
     // FIXME: This shouldn't be hardcoded!
     KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
-    KConfigGroup grp = cfg->group("Runners").group(KRUNNER_PLUGIN_NAME);
+    KConfigGroup grp = cfg->group(QStringLiteral("Runners")).group(QStringLiteral(KRUNNER_PLUGIN_NAME));
 
     bool requireTrigger = m_ui->m_requireTriggerWord->checkState() == Qt::Checked;
     if (requireTrigger) {

@@ -60,7 +60,7 @@ void ColorsRunner::match(RunnerContext &context)
     // Try to parse rgb notation.
     if (!color.isValid()) {
         // Match rgb or rgba with 3 or 4 groups of 3 digits, separated by space(s) and/or a comma.
-        static QRegularExpression regExp(R"(^(rgba?)?\s*\(?\s*(\d{1,3})[,\s]\s*(\d{1,3})[,\s]\s*(\d{1,3})[,\s]{0,1}\s*(\d{1,3})?\)?$)");
+        static QRegularExpression regExp(uR"(^(rgba?)?\s*\(?\s*(\d{1,3})[,\s]\s*(\d{1,3})[,\s]\s*(\d{1,3})[,\s]{0,1}\s*(\d{1,3})?\)?$)"_s);
         const auto match = regExp.matchView(queryView);
         if (match.hasMatch()) {
             enum class AlphaBehavior {

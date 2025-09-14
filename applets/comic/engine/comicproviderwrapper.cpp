@@ -22,6 +22,8 @@
 #include <QTimer>
 #include <QUrl>
 
+using namespace Qt::StringLiterals;
+
 QStringList ComicProviderWrapper::mExtensions;
 
 ImageWrapper::ImageWrapper(QObject *parent, const QByteArray &data)
@@ -292,27 +294,27 @@ void ComicProviderWrapper::init()
             QString mainscript = mPackage->filePath("mainscript");
             QFile f(mainscript);
             if (f.open(QFile::ReadOnly)) {
-                m_engine->globalObject().setProperty("Comic", m_engine->newQMetaObject(&ComicProviderWrapper::staticMetaObject));
+                m_engine->globalObject().setProperty(u"Comic"_s, m_engine->newQMetaObject(&ComicProviderWrapper::staticMetaObject));
                 auto obj = m_engine->newQObject(this);
 
                 // If we set the comic in the global object we can not access the staticMetaObject
                 // consequently the values have to be written manually
-                obj.setProperty("Page", ComicProvider::Page);
-                obj.setProperty("Image", ComicProvider::Image);
-                obj.setProperty("User", ComicProvider::User);
-                obj.setProperty("Left", ComicProviderWrapper::Left);
-                obj.setProperty("Top", ComicProviderWrapper::Top);
-                obj.setProperty("Right", ComicProviderWrapper::Right);
-                obj.setProperty("Bottom", ComicProviderWrapper::Bottom);
-                obj.setProperty("DateIdentifier", (int)IdentifierType::DateIdentifier);
-                obj.setProperty("NumberIdentifier", (int)IdentifierType::NumberIdentifier);
-                obj.setProperty("StringIdentifier", (int)IdentifierType::StringIdentifier);
+                obj.setProperty(u"Page"_s, ComicProvider::Page);
+                obj.setProperty(u"Image"_s, ComicProvider::Image);
+                obj.setProperty(u"User"_s, ComicProvider::User);
+                obj.setProperty(u"Left"_s, ComicProviderWrapper::Left);
+                obj.setProperty(u"Top"_s, ComicProviderWrapper::Top);
+                obj.setProperty(u"Right"_s, ComicProviderWrapper::Right);
+                obj.setProperty(u"Bottom"_s, ComicProviderWrapper::Bottom);
+                obj.setProperty(u"DateIdentifier"_s, (int)IdentifierType::DateIdentifier);
+                obj.setProperty(u"NumberIdentifier"_s, (int)IdentifierType::NumberIdentifier);
+                obj.setProperty(u"StringIdentifier"_s, (int)IdentifierType::StringIdentifier);
 
-                m_engine->globalObject().setProperty("comic", obj);
-                m_engine->globalObject().setProperty("date", m_engine->newQObject(new StaticDateWrapper(this)));
-                m_engine->evaluate("var print = comic.print");
+                m_engine->globalObject().setProperty(u"comic"_s, obj);
+                m_engine->globalObject().setProperty(u"date"_s, m_engine->newQObject(new StaticDateWrapper(this)));
+                m_engine->evaluate(u"var print = comic.print"_s);
                 mIdentifierSpecified = !mProvider->isCurrent();
-                m_engine->evaluate(f.readAll(), mainscript);
+                m_engine->evaluate(QString::fromLocal8Bit(f.readAll()), mainscript);
                 QJSValueIterator it(m_engine->globalObject());
                 while (it.hasNext()) {
                     it.next();

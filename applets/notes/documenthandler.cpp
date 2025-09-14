@@ -23,6 +23,8 @@
 
 #include <KTextToHTML>
 
+using namespace Qt::StringLiterals;
+
 DocumentHandler::DocumentHandler()
     : m_target(nullptr)
     , m_doc(nullptr)
@@ -82,8 +84,8 @@ void DocumentHandler::pasteWithoutFormatting()
 
     QString content = KTextToHTML::convertToHtml(mimeData->text(), KTextToHTML::Options(KTextToHTML::PreserveSpaces));
 
-    if (content.endsWith("</a>", Qt::CaseInsensitive)) {
-        content += " ";
+    if (content.endsWith("</a>"_L1, Qt::CaseInsensitive)) {
+        content += " "_L1;
     }
 
     cursor.insertHtml(content);

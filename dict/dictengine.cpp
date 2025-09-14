@@ -9,13 +9,14 @@
 #include "dictengine.h"
 
 #include <chrono>
-#include <ranges>
+#include <ranges> // IWYU pragma: keep
 
 #include <KLocalizedString>
 #include <QDebug>
 #include <QRegularExpression>
 #include <QUrl>
 
+using namespace Qt::StringLiterals;
 using namespace std::chrono_literals;
 
 DictEngine::DictEngine(QObject *parent)
@@ -61,19 +62,19 @@ static QString wnToHtml(const QString &word, QByteArray &text)
         // 151 word database name - text follows
         // 250 ok (optional timing information here)
         // 552 No match
-        QString currentLine = splitText.takeFirst();
+        QString currentLine = QString::fromLocal8Bit(splitText.takeFirst());
         if (currentLine.startsWith(QLatin1String("151"))) {
             isFirst = true;
             continue;
         }
 
-        if (currentLine.startsWith('.')) {
+        if (currentLine.startsWith('.'_L1)) {
             def += QLatin1String("</dd>");
             continue;
         }
 
         // Don't early return if there are multiple dicts
-        if (currentLine.startsWith("552") || currentLine.startsWith("501")) {
+        if (currentLine.startsWith("552"_L1) || currentLine.startsWith("501"_L1)) {
             def += QStringLiteral("<dt><b>%1</b></dt>\n<dd>%2</dd>").arg(word, i18n("No match found for %1", word));
             continue;
         }
@@ -85,7 +86,7 @@ static QString wnToHtml(const QString &word, QByteArray &text)
             while (it.hasNext()) {
                 QRegularExpressionMatch match = it.next();
                 QUrl url;
-                url.setScheme("dict");
+                url.setScheme(u"dict"_s);
                 url.setPath(match.captured(1));
                 const QString linkText = QStringLiteral("<a href=\"%1\">%2</a>").arg(url.toString(), match.captured(1));
                 currentLine.replace(match.capturedStart(0) + offset, match.capturedLength(0), linkText);
@@ -93,7 +94,7 @@ static QString wnToHtml(const QString &word, QByteArray &text)
             }
 
             if (isFirst) {
-                def += "<dt><b>" + currentLine + "</b></dt>\n<dd>";
+                def += u"<dt><b>" + currentLine + u"</b></dt>\n<dd>";
                 isFirst = false;
                 continue;
             } else {
@@ -170,9 +171,9 @@ void DictEngine::getDicts()
 
         if (!curr.startsWith('-') && !curr.startsWith('.')) {
             const QString line = QString::fromUtf8(curr).trimmed();
-            const QString id = line.section(' ', 0, 0);
-            QString description = line.section(' ', 1);
-            if (description.startsWith('"') && description.endsWith('"')) {
+            const QString id = line.section(QLatin1Char(' '), 0, 0);
+            QString description = line.section(QLatin1Char(' '), 1);
+            if (description.startsWith(QLatin1Char('"')) && description.endsWith(QLatin1Char('"'))) {
                 description.remove(0, 1);
                 description.chop(1);
             }

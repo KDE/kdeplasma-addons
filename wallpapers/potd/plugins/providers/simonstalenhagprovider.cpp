@@ -85,7 +85,7 @@ void SimonStalenhagProvider::metaDataRequestFinished(KJob *_job)
     const QString sectionStr = imageObj.toObject().value(QStringLiteral("section")).toString();
     if (!titleStr.isEmpty()) {
         if (!sectionStr.isEmpty()) {
-            m_title = sectionStr + " - " + titleStr;
+            m_title = sectionStr + QLatin1String(" - ") + titleStr;
         } else {
             m_title = titleStr;
         }

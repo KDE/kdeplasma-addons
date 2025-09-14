@@ -244,9 +244,9 @@ void UKMETIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>
     // place_name|id - Triggers receiving weather of place
     const QList<QString> info = placeInfo.split('|'_L1);
 
-    if (info.size() == 4 && info[1] == "weather" && !m_isLegacy) {
+    if (info.size() == 4 && info[1] == "weather"_L1 && !m_isLegacy) {
         m_isLegacy = true;
-        fetchForecast(m_forecastPromise, info[2] + '|' + info[3]);
+        fetchForecast(m_forecastPromise, info[2] + '|'_L1 + info[3]);
         return;
     }
 

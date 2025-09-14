@@ -201,7 +201,7 @@ void NOAAIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>>
 
     const QList<QString> info = placeInfo.split('|'_L1);
 
-    if (info.size() == 3 && info[1] == "weather" && !m_isLegacy) {
+    if (info.size() == 3 && info[1] == "weather"_L1 && !m_isLegacy) {
         m_isLegacy = true;
         m_newPlaceInfo = info[2];
         fetchForecast(m_forecastPromise, m_newPlaceInfo);

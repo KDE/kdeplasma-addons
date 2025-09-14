@@ -19,7 +19,7 @@ AstronomicalEventsPlugin::AstronomicalEventsPlugin()
     : CalendarEvents::CalendarEventsPlugin()
 {
     auto config = KSharedConfig::openConfig(QStringLiteral("plasma_calendar_astronomicalevents"));
-    const KConfigGroup generalConfig = config->group("General");
+    const KConfigGroup generalConfig = config->group(QStringLiteral("General"));
 
     m_lunarPhaseShown = generalConfig.readEntry("showLunarPhase", true);
     m_seasonShown = generalConfig.readEntry("showSeason", true);
