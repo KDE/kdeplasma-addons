@@ -14,6 +14,8 @@
 #include <KRunner/AbstractRunner>
 #include <KSharedConfig>
 
+using namespace Qt::StringLiterals;
+
 CharacterRunnerConfigForm::CharacterRunnerConfigForm(QWidget *parent)
     : QWidget(parent)
 {
@@ -41,7 +43,7 @@ CharacterRunnerConfig::CharacterRunnerConfig(QObject *parent, const KPluginMetaD
 void CharacterRunnerConfig::load()
 {
     KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
-    KConfigGroup grp = cfg->group("Runners").group(KRUNNER_PLUGIN_NAME);
+    KConfigGroup grp = cfg->group(u"Runners"_s).group(QStringLiteral(KRUNNER_PLUGIN_NAME));
 
     m_ui->edit_trigger->setText(grp.readEntry(CONFIG_TRIGGERWORD, DEFAULT_TRIGGERWORD.toString()));
     const auto aliasList = grp.readEntry(CONFIG_ALIASES, QStringList());
@@ -68,7 +70,7 @@ void CharacterRunnerConfig::save()
     KCModule::save();
 
     KSharedConfig::Ptr cfg = KSharedConfig::openConfig(QStringLiteral("krunnerrc"));
-    KConfigGroup grp = cfg->group("Runners").group(KRUNNER_PLUGIN_NAME);
+    KConfigGroup grp = cfg->group(u"Runners"_s).group(QStringLiteral(KRUNNER_PLUGIN_NAME));
 
     grp.writeEntry(CONFIG_TRIGGERWORD, m_ui->edit_trigger->text().isEmpty() ? DEFAULT_TRIGGERWORD.toString() : m_ui->edit_trigger->text());
 

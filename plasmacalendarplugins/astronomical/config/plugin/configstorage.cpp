@@ -13,7 +13,7 @@ ConfigStorage::ConfigStorage(QObject *parent)
     : QObject(parent)
 {
     auto config = KSharedConfig::openConfig(QStringLiteral("plasma_calendar_astronomicalevents"));
-    m_generalConfigGroup = config->group("General");
+    m_generalConfigGroup = config->group(QStringLiteral("General"));
 
     m_lunarPhaseShown = m_generalConfigGroup.readEntry("showLunarPhase", true);
     m_seasonShown = m_generalConfigGroup.readEntry("showSeason", true);

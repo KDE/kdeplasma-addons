@@ -33,7 +33,7 @@ KAuth::ActionReply KameleonHelper::writecolor(const QVariantMap &args)
             return KAuth::ActionReply::HelperErrorReply();
         }
 
-        QFile file(LED_SYSFS_PATH + device + LED_RGB_FILE);
+        QFile file(QStringLiteral(LED_SYSFS_PATH) + device + QStringLiteral(LED_RGB_FILE));
         if (!file.open(QIODevice::WriteOnly | QIODevice::ExistingOnly)) {
             qCWarning(KAMELEONHELPER) << "Opening" << file.fileName() << "failed:" << file.error() << file.errorString();
             return KAuth::ActionReply::HelperErrorReply();

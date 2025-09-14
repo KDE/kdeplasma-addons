@@ -67,7 +67,7 @@ void ProfilesModel::loadProfiles()
         QString iconName;
         if (m_appName == QLatin1String("konsole")) {
             KConfig cfg(profilePath, KConfig::SimpleConfig);
-            KConfigGroup grp(&cfg, "General");
+            KConfigGroup grp(&cfg, QStringLiteral("General"));
             iconName = grp.readEntry("Icon", iconName);
             name = grp.readEntry("Name", name);
         } else {

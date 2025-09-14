@@ -78,7 +78,7 @@ void FlickrProvider::loadConfig()
     m_configLocalUrl = QUrl::fromLocalFile(m_configLocalPath);
 
     auto config = KSharedConfig::openConfig(m_configLocalPath, KConfig::NoGlobals);
-    KConfigGroup apiGroup = config->group("API");
+    KConfigGroup apiGroup = config->group(QStringLiteral("API"));
     QString apiKey = apiGroup.readEntry("API_KEY");
     QString apiSecret = apiGroup.readEntry("API_SECRET");
 

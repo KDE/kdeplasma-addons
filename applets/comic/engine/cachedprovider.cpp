@@ -137,7 +137,7 @@ bool CachedProvider::storeInCache(const QString &identifier, const QImage &comic
         // We need to delete the most recent cached strip if there's a newer one,
         // as its nextIdentifier needs to be updated. We can't set it directly,
         // as there may have been multiple strips released since the last check.
-        QString encodedFullIdentifier = QString::fromLatin1(QUrl::toPercentEncoding(comicName + ":" + oldCachedStripIdentifier));
+        QString encodedFullIdentifier = QString::fromLatin1(QUrl::toPercentEncoding(comicName + QLatin1String(":") + oldCachedStripIdentifier));
         QFile::remove(dirPath + encodedFullIdentifier);
         QFile::remove(dirPath + encodedFullIdentifier + QLatin1String(".conf"));
         comics.removeAll(encodedFullIdentifier);
