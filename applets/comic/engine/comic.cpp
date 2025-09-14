@@ -37,7 +37,7 @@ QList<ComicProviderInfo> ComicEngine::loadProviders()
     mProviders.clear();
     const auto comics = KPackage::PackageLoader::self()->listKPackages(QStringLiteral("Plasma/Comic"));
     QList<ComicProviderInfo> providers;
-    for (auto comicPackage : comics) {
+    for (const auto &comicPackage : comics) {
         const KPluginMetaData comic = comicPackage.metadata();
         qCDebug(PLASMA_COMIC) << "ComicEngine::loadProviders()  service name=" << comic.name();
         ComicProviderInfo data;

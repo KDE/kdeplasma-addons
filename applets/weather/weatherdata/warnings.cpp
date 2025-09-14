@@ -68,7 +68,7 @@ void Warnings::addWarning(const Warning &warning)
 
 void Warnings::addWarnings(const QList<Warning> &warnings)
 {
-    for (auto warning : warnings) {
+    for (const Warning &warning : warnings) {
         addWarning(warning);
     }
 }
