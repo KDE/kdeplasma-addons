@@ -68,12 +68,12 @@ IslamicCalendarProviderPrivate::IslamicCalendarProviderPrivate(CalendarSystem::S
         Q_UNREACHABLE();
     }
 
-    m_nativeLocale = icu::Locale(iso639Language, iso3166Country, nullptr, keywords);
+    m_nativeLocale = icu::Locale(iso639Language.constData(), iso3166Country.constData(), nullptr, keywords);
     std::unique_ptr<icu::NumberingSystem> numberingSystem(icu::NumberingSystem::createInstance(m_nativeLocale, m_errorCode));
     m_isArabicNumberingSystem = U_SUCCESS(m_errorCode) && QByteArrayView(numberingSystem->getName()).startsWith(QByteArrayView("arab"));
     if (!m_isArabicNumberingSystem) {
-        m_arabicLocale = icu::Locale(QLocale::languageToCode(typicalLanguage).toLatin1().toLower(),
-                                     QLocale::territoryToCode(typicalTerritory).toLatin1().toUpper(),
+        m_arabicLocale = icu::Locale(QLocale::languageToCode(typicalLanguage).toLatin1().toLower().data(),
+                                     QLocale::territoryToCode(typicalTerritory).toLatin1().toUpper().data(),
                                      nullptr,
                                      keywords);
     }

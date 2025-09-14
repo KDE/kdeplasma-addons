@@ -31,8 +31,8 @@ private:
 
 HebrewCalendarProviderPrivate::HebrewCalendarProviderPrivate()
     : ICUCalendarPrivate()
-    , m_hebrewLocale(icu::Locale("he_IL", 0, 0, "calendar=hebrew;numbers=hebr"))
-    , m_nativeLocale(icu::Locale(QLocale::system().name().toLatin1(), 0, 0, "calendar=hebrew;numbers=hebr"))
+    , m_hebrewLocale(icu::Locale("he_IL", nullptr, nullptr, "calendar=hebrew;numbers=hebr"))
+    , m_nativeLocale(icu::Locale(QLocale::system().name().toLatin1().constData(), nullptr, nullptr, "calendar=hebrew;numbers=hebr"))
 {
     if (U_FAILURE(m_errorCode)) {
         return; // Failed to create m_GregorianCalendar

@@ -27,7 +27,7 @@ private:
 
 IndianCalendarProviderPrivate::IndianCalendarProviderPrivate()
     : ICUCalendarPrivate()
-    , m_nativeLocale(icu::Locale(QLocale::system().name().toLatin1(), 0, 0, "calendar=indian;"))
+    , m_nativeLocale(icu::Locale(QLocale::system().name().toLatin1().constData(), nullptr, nullptr, "calendar=indian;"))
 {
     if (U_FAILURE(m_errorCode)) {
         return; // Failed to create m_GregorianCalendar

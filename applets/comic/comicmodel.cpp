@@ -89,7 +89,7 @@ bool ComicModel::setData(const QModelIndex &index, const QVariant &value, int ro
 {
     if (index.isValid() && role == Qt::CheckStateRole) {
         mChecked[index.row()] = value.toBool();
-        emit dataChanged(index, index, {role});
+        Q_EMIT dataChanged(index, index, {role});
         return true;
     }
     return false;
@@ -136,5 +136,5 @@ void ComicModel::setEnabledProviders(const QStringList &enabledProviders)
 void ComicModel::setHighlight(const QModelIndex &index, bool highlight)
 {
     mHighlighted[index.row()] = highlight;
-    emit dataChanged(index, index, {ComicHighlightRole});
+    Q_EMIT dataChanged(index, index, {ComicHighlightRole});
 }

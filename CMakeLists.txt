@@ -11,7 +11,7 @@ endif()
 set(PROJECT_DEP_VERSION "6.4.90")
 set(QT_MIN_VERSION "6.9.0")
 set(KF6_MIN_VERSION "6.18.0")
-set(KDE_COMPILERSETTINGS_LEVEL "5.82")
+set(KDE_COMPILERSETTINGS_LEVEL "6.14")
 
 set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
@@ -34,6 +34,11 @@ include(KDEClangFormat)
 include(KDEGitCommitHooks)
 include(ECMDeprecationSettings)
 include(ECMQmlModule)
+
+remove_definitions(
+    -DQT_NO_CAST_TO_ASCII # TODO still more work
+    -DQT_NO_CAST_FROM_ASCII
+)
 
 find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Core
