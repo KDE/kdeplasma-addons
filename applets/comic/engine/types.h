@@ -51,7 +51,7 @@ struct ComicMetaData {
     QString comicAuthor;
     QString additionalText;
     QString identifier;
-    IdentifierType identifierType;
+    IdentifierType identifierType = IdentifierType::DateIdentifier;
     bool isLeftToRight = false;
     bool isTopToBottom = false;
     QString lastCachedStripIdentifier;
