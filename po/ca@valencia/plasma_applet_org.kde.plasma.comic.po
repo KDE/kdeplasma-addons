@@ -67,7 +67,7 @@ msgstr "Visita la &web de la botiga"
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr "Guar&da el còmic com a…"
+msgstr "Anomena i guar&da el còmic…"
 
 #: comic.cpp:127
 #, kde-format
