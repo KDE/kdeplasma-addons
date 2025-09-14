@@ -14,8 +14,7 @@ static bool isMetric()
     return QLocale().measurementSystem() == QLocale::MetricSystem;
 }
 
-struct TemperatureUnitListModel
-{
+struct TemperatureUnitListModel {
     Q_GADGET
     QML_FOREIGN(AbstractUnitListModel)
     QML_ELEMENT
@@ -34,8 +33,7 @@ public:
     }
 };
 
-struct VisibilityUnitListModel
-{
+struct VisibilityUnitListModel {
     Q_GADGET
     QML_FOREIGN(AbstractUnitListModel)
     QML_ELEMENT
@@ -53,9 +51,7 @@ public:
     }
 };
 
-
-struct PressureUnitListModel
-{
+struct PressureUnitListModel {
     Q_GADGET
     QML_FOREIGN(AbstractUnitListModel)
     QML_NAMED_ELEMENT(PressureUnitListModel)
@@ -77,8 +73,7 @@ public:
     }
 };
 
-struct WindSpeedUnitListModel
-{
+struct WindSpeedUnitListModel {
     Q_GADGET
     QML_FOREIGN(AbstractUnitListModel)
     QML_ELEMENT
