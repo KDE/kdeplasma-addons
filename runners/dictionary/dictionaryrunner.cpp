@@ -64,7 +64,7 @@ void DictionaryRunner::match(RunnerContext &context)
     QString returnedQuery;
     QMetaObject::invokeMethod(&m_dictEngine, "requestDefinition", Qt::QueuedConnection, Q_ARG(const QString &, query));
     QEventLoop loop;
-    connect(&m_dictEngine, &DictEngine::definitionRecieved, &loop, [&loop, &query, &returnedQuery, &context](const QString &html) {
+    connect(&m_dictEngine, &DictEngine::definitionRecieved, &loop, [&loop, &returnedQuery](const QString &html) {
         returnedQuery = html;
         loop.quit();
     });

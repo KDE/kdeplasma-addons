@@ -288,7 +288,7 @@ KJob *UKMETIon::requestAPIJob(const QUrl &url, QByteArray &result)
 
     qCDebug(WEATHER::ION::BBCUKMET) << "Requesting URL:" << url;
 
-    connect(getJob, &KIO::TransferJob::data, this, [this, &result](KIO::Job *job, const QByteArray &data) {
+    connect(getJob, &KIO::TransferJob::data, this, [&result](KIO::Job *job, const QByteArray &data) {
         Q_UNUSED(job);
         if (data.isEmpty()) {
             return;
