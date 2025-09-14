@@ -128,7 +128,7 @@ KJob *NOAAIon::requestAPIJob(const QUrl &url, Callback onResult)
 
     auto receivedData = std::make_shared<QByteArray>();
 
-    connect(getJob, &KIO::TransferJob::data, this, [this, receivedData](KIO::Job *job, const QByteArray &data) {
+    connect(getJob, &KIO::TransferJob::data, this, [receivedData](KIO::Job *job, const QByteArray &data) {
         Q_UNUSED(job)
 
         if (data.isEmpty()) {
