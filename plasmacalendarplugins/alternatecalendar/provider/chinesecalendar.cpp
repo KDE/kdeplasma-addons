@@ -84,8 +84,8 @@ private:
 
 ChineseCalendarProviderPrivate::ChineseCalendarProviderPrivate()
     : ICUCalendarPrivate()
-    , m_locale(icu::Locale("zh", 0, 0, "calendar=chinese"))
-    , m_hanidaysLocale(icu::Locale("zh", 0, 0, "calendar=chinese;numbers=hanidays"))
+    , m_locale(icu::Locale("zh", nullptr, nullptr, "calendar=chinese"))
+    , m_hanidaysLocale(icu::Locale("zh", nullptr, nullptr, "calendar=chinese;numbers=hanidays"))
 {
     if (U_FAILURE(m_errorCode)) {
         return; // Failed to create m_GregorianCalendar
