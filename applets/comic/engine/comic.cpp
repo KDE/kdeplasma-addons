@@ -17,6 +17,7 @@
 
 #include <KPackage/PackageLoader>
 #include <qloggingcategory.h>
+#include <qtdeprecationdefinitions.h>
 
 #include "cachedprovider.h"
 #include "comic_debug.h"
@@ -95,7 +96,10 @@ bool ComicEngine::requestSource(const QString &identifier)
         connect(provider, &ComicProvider::error, this, &ComicEngine::error);
         return true;
     }
-
+    // Struct with just error=true is fine!
+    QT_WARNING_PUSH
+    QT_WARNING_DISABLE_GCC("-Wmissing-designated-field-initializers");
+    QT_WARNING_DISABLE_CLANG("-Wmissing-designated-field-initializers");
     // ... start a new query otherwise
     if (parts.count() < 2) {
         Q_EMIT requestFinished(ComicMetaData{.error = true});
@@ -111,6 +115,7 @@ bool ComicEngine::requestSource(const QString &identifier)
             return false;
         }
     }
+    QT_WARNING_POP
 
     // check if there is a connection
     if (!isOnline()) {
