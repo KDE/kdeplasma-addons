@@ -59,4 +59,4 @@ msgstr "RGB: %1, %2, %3"
 #: colorsrunner.cpp:146
 #, kde-format
 msgid "CMYK: %1%, %2%, %3%, %4%"
-msgstr "CMYK: %1%, %2%, %3%, %4%"
+msgstr "CMYK: %1 %, %2 %, %3 %, %4 %"

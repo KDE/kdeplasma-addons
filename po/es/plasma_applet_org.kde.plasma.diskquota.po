@@ -38,7 +38,7 @@ msgstr "La ejecución de «quota» ha fallado"
 #, kde-format
 msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
 msgid "%1: %2% used"
-msgstr "%1: %2% usado"
+msgstr "%1: %2 % usado"
 
 #: DiskQuota.cpp:228
 #, kde-format
@@ -56,7 +56,7 @@ msgstr "%1 libre"
 #, kde-format
 msgctxt "example: Quota: 83% used"
 msgid "Quota: %1% used"
-msgstr "Cuota: %1% usado"
+msgstr "Cuota: %1 % usado"
 
 #: DiskQuota.cpp:253
 #, kde-format
