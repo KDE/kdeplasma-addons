@@ -655,19 +655,19 @@ PlasmoidItem {
     Instantiator {
         model: {
             let model = [
-                {label: i18nc("@item:inmenu", "White"), color: "white"},
-                {label: i18nc("@item:inmenu", "Black"), color: "black"},
-                {label: i18nc("@item:inmenu", "Red"), color: "red"},
-                {label: i18nc("@item:inmenu", "Orange"), color: "orange"},
-                {label: i18nc("@item:inmenu", "Yellow"), color: "yellow"},
-                {label: i18nc("@item:inmenu", "Green"), color: "green"},
-                {label: i18nc("@item:inmenu", "Blue"), color: "blue"},
-                {label: i18nc("@item:inmenu", "Pink"), color: "pink"},
-                {label: i18nc("@item:inmenu", "Transparent"), color: "translucent"},
+                {text: i18nc("@item:inmenu", "White"), color: "white"},
+                {text: i18nc("@item:inmenu", "Black"), color: "black"},
+                {text: i18nc("@item:inmenu", "Red"), color: "red"},
+                {text: i18nc("@item:inmenu", "Orange"), color: "orange"},
+                {text: i18nc("@item:inmenu", "Yellow"), color: "yellow"},
+                {text: i18nc("@item:inmenu", "Green"), color: "green"},
+                {text: i18nc("@item:inmenu", "Blue"), color: "blue"},
+                {text: i18nc("@item:inmenu", "Pink"), color: "pink"},
+                {text: i18nc("@item:inmenu", "Transparent"), color: "translucent"},
             ];
             // Explicit translucent light makes no sense in a panel since it will always be the popup background.
             if (!root.inPanel) {
-                model.push({label: i18nc("@item:inmenu", "Transparent Light"), color: "translucent-light"});
+                model.push({text: i18nc("@item:inmenu", "Transparent Light"), color: "translucent-light"});
             }
             return model;
         }
@@ -677,10 +677,9 @@ PlasmoidItem {
         }
 
         PlasmaCore.Action {
-            required property string label
+            required text
             required property string color
 
-            text: label
             icon.icon: NotesHelper.noteIcon(color)
             actionGroup: noteColorGroup
             checkable: true
