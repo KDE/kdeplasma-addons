@@ -14,13 +14,24 @@
 
 using namespace Qt::StringLiterals;
 
+static std::shared_ptr<KSvg::Svg> noteSvg()
+{
+    static std::weak_ptr<KSvg::Svg> s_instance;
+    if (s_instance.expired()) {
+        auto svg = std::make_shared<KSvg::Svg>();
+        svg->setImagePath(u"widgets/notes"_s);
+        svg->setContainsMultipleImages(true);
+        s_instance = svg;
+        return svg;
+    }
+    return s_instance.lock();
+}
+
 NoteIconEngine::NoteIconEngine(const QString &color)
     : QIconEngine()
     , m_color(color)
-    , m_svg(std::make_unique<KSvg::Svg>())
+    , m_svg(noteSvg())
 {
-    m_svg->setImagePath(u"widgets/notes"_s);
-    m_svg->setContainsMultipleImages(true);
 }
 
 QIconEngine *NoteIconEngine::clone() const

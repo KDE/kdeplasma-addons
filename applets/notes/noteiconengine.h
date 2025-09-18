@@ -29,5 +29,5 @@ public:
 
 private:
     QString m_color;
-    std::unique_ptr<KSvg::Svg> m_svg;
+    std::shared_ptr<KSvg::Svg> m_svg;
 };
