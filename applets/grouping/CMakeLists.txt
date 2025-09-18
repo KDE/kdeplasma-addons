@@ -8,7 +8,6 @@ target_link_libraries(org.kde.plasma.grouping
     Qt::DBus
     Qt::Widgets
     Plasma::Plasma
-    Plasma::Plasma5Support
     KF6::XmlGui
     KF6::I18n
 )
