@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.diskquota\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-31 00:48+0000\n"
-"PO-Revision-Date: 2025-06-10 00:33+0100\n"
+"PO-Revision-Date: 2025-09-20 20:17+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: package/contents/ui/main.qml:77
 #, kde-format
@@ -56,7 +56,7 @@ msgstr "La ejecución de «quota» ha fallado"
 #, kde-format
 msgctxt "usage of quota, e.g.: '/home/bla: 38% used'"
 msgid "%1: %2% used"
-msgstr "%1: %2% usado"
+msgstr "%1: %2 % usado"
 
 #: plugin/DiskQuota.cpp:240
 #, kde-format
@@ -74,7 +74,7 @@ msgstr "%1 libre"
 #, kde-format
 msgctxt "example: Quota: 83% used"
 msgid "Quota: %1% used"
-msgstr "Cuota: %1% usado"
+msgstr "Cuota: %1 % usado"
 
 #: plugin/DiskQuota.cpp:265
 #, kde-format
