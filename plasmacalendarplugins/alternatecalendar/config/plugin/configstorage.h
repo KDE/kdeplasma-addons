@@ -44,7 +44,7 @@ class ConfigStorage : public QObject
     QML_ELEMENT
 
     /**
-     * The current choosen calendar system
+     * The current chosen calendar system
      */
     Q_PROPERTY(QString calendarSystem MEMBER m_calendarSystem NOTIFY calendarSystemChanged)
 
@@ -54,7 +54,7 @@ class ConfigStorage : public QObject
     Q_PROPERTY(CalendarSystemModel *calendarSystemModel READ calendarSystemModel CONSTANT)
 
     /**
-     * The index of current choosen calendar system
+     * The index of current chosen calendar system
      */
     Q_PROPERTY(int currentIndex READ currentIndex CONSTANT)
 
@@ -71,7 +71,7 @@ public:
     int currentIndex() const;
 
     /**
-     * Saves the modifed configuration.
+     * Saves the modified configuration.
      *
      * @see calendarSystem
      * @see dateOffset

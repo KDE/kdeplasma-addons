@@ -76,7 +76,7 @@ class AlternateCalendarTests(unittest.TestCase):
         self.driver.find_element(AppiumBy.NAME, "OK").click()
         wait.until_not(lambda _: combobox_element.is_displayed())
 
-        # Open the widget and check if the sublabel is sucessfully loaded
+        # Open the widget and check if the sublabel is successfully loaded
         self.driver.find_element(AppiumBy.ACCESSIBILITY_ID, "digital-clock-compactrepresentation").click()
         try:
             self.driver.find_element(AppiumBy.NAME, "廿一")

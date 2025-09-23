@@ -130,7 +130,7 @@ KWin.TabBoxSwitcher {
                 scale: PathView.onPath ? PathView.scale : 0
                 z: PathView.onPath ? Math.floor(PathView.progress * thumbnailView.visibleCount) : -1
 
-                // Reduce opacity on the end so items dissapear more naturally
+                // Reduce opacity on the end so items disappear more naturally
                 opacity: Math.min(1, (1 - PathView.progress) / thumbnailView.preferredHighlightBegin);
 
                 Accessible.name: caption

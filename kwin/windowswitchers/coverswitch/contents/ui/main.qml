@@ -119,7 +119,7 @@ KWin.TabBoxSwitcher {
                 PathAttribute { name: "progress"; value: 1 }
                 PathAttribute { name: "scale"; value: 1 }
                 PathAttribute { name: "rotation"; value: 0 }
-                PathPercent { value: 0.49 } // A bit less than 50% so items preferrably stack on the right side
+                PathPercent { value: 0.49 } // A bit less than 50% so items preferably stack on the right side
 
                 // Right stack
                 PathQuad {

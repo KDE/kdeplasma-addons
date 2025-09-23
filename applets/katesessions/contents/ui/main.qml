@@ -93,7 +93,7 @@ PlasmoidItem {
         Keys.onTabPressed: filter.forceActiveFocus(Qt.TabFocusReason)
         Keys.onPressed: (event) => {
             // forward key to filter
-            // filter.text += event.text wil break if the key is backspace
+            // filter.text += event.text will break if the key is backspace
             if (event.key == Qt.Key_Backspace && filter.text == "") {
                 return;
             }

@@ -751,7 +751,7 @@ QString NOAAIon::i18nForecast(const QString &summary) const
 
     // i18n: The forecast summary can include several single conditions that follow
     // a temporary sequence, separated by " then ". Also include spaces if necessary.
-    // If there is no suitable separtor, a sentence separator might do.
+    // If there is no suitable separator, a sentence separator might do.
     const QString separator = i18nc("Separator between forecast conditions that follow a temporal sequence (ex. \"Rain then Sunny\")", " then ");
     return i18nSummary.join(separator);
 }

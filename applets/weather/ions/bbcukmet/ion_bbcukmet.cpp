@@ -306,7 +306,7 @@ int UKMETIon::secondsToRetry()
     m_retryAttempts++;
 
     if (m_retryAttempts > MAX_RETRY_ATTEMPS) {
-        qCWarning(WEATHER::ION::BBCUKMET) << "Coudn't get a valid response after" << MAX_RETRY_ATTEMPS << "attemps";
+        qCWarning(WEATHER::ION::BBCUKMET) << "Couldn't get a valid response after" << MAX_RETRY_ATTEMPS << "attempts";
         return -1;
     }
 

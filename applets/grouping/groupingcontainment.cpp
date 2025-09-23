@@ -34,7 +34,7 @@ void GroupingContainment::migrateFromContainer()
 {
     // Search the old grouping containment containment config group
     KConfigGroup rootCg(corona()->config(), QStringLiteral("Containments"));
-    // NOTE: this function is called from tyhe constructor, so we can't use config() yet
+    // NOTE: this function is called from the constructor, so we can't use config() yet
     KConfigGroup ownCg = KConfigGroup(config());
     // old Configuration group of the old grouping containment applet
     KConfigGroup oldAppletCg(&ownCg, QStringLiteral("Configuration"));

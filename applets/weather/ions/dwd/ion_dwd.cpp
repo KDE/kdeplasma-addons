@@ -156,12 +156,12 @@ void DWDIon::findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> pr
 
     // Checks if the stations have already been loaded, always contains the currently active one
     if (!m_place.isEmpty()) {
-        qCDebug(WEATHER::ION::DWD) << "place list is not empy. Search in it";
+        qCDebug(WEATHER::ION::DWD) << "place list is not empty. Search in it";
         searchInStationList(m_searchString);
         m_locationPromise->finish();
         clearLocationData();
     } else {
-        qCDebug(WEATHER::ION::DWD) << "place list is not empy. Update it first";
+        qCDebug(WEATHER::ION::DWD) << "place list is not empty. Update it first";
         const auto getJob = requestAPIJob(QUrl(CATALOGUE_URL), m_locationsData);
         connect(getJob, &KJob::result, this, &DWDIon::places_slotJobFinished);
     }
