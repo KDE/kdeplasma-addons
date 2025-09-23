@@ -123,6 +123,7 @@
         "Name[uk]": "Тасування карток",
         "Name[vi]": "Chuyển kiểu lật",
         "Name[zh_CN]": "3D 翻牌切换",
+        "Name[zh_TW]": "翻轉切換",
         "ServiceTypes": [
             "KWin/WindowSwitcher"
         ],
