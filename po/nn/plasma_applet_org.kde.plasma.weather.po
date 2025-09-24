@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-28 00:44+0000\n"
+"POT-Creation-Date: 2025-09-24 00:44+0000\n"
 "PO-Revision-Date: 2024-09-01 15:22+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -243,7 +243,7 @@ msgstr ""
 
 #. i18n: The forecast summary can include several single conditions that follow
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
-#. If there is no suitable separtor, a sentence separator might do.
+#. If there is no suitable separator, a sentence separator might do.
 #: ions/noaa/ion_noaa.cpp:755
 #, kde-format
 msgctxt ""

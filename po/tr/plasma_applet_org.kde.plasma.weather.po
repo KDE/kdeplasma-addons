@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-28 00:44+0000\n"
+"POT-Creation-Date: 2025-09-24 00:44+0000\n"
 "PO-Revision-Date: 2025-07-14 13:22+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-i18n-doc@kde.org>\n"
@@ -236,7 +236,7 @@ msgstr "Kaynak: NOAA Ulusal Hava Durumu"
 
 #. i18n: The forecast summary can include several single conditions that follow
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
-#. If there is no suitable separtor, a sentence separator might do.
+#. If there is no suitable separator, a sentence separator might do.
 #: ions/noaa/ion_noaa.cpp:755
 #, kde-format
 msgctxt ""
