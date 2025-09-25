@@ -156,7 +156,7 @@ GridLayout {
 
         source: {
             //check if there is the icon from last observation and if it exists return it
-            if (!!root.lastObservation?.conditionIcon && root.lastObservation.conditionIcon !== "weather-none-available") {
+            if (!!root.lastObservation?.conditionIcon && root.lastObservation.conditionIcon !== "weather-none-available-symbolic") {
                 return root.lastObservation.conditionIcon;
             }
             //if the icon from last observation not exists use first icon from forecast
@@ -164,7 +164,7 @@ GridLayout {
                 return root.futureDays.firstDayIcon;
             }
             //if there are no icons then use default unavailable icon
-            return "weather-none-available";
+            return "weather-none-available-symbolic";
         }
     }
 

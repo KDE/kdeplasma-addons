@@ -70,75 +70,75 @@ QString Ion::getWeatherIcon(ConditionIcons condition) const
 {
     switch (condition) {
     case ClearDay:
-        return QStringLiteral("weather-clear");
+        return QStringLiteral("weather-clear-symbolic");
     case ClearWindyDay:
-        return QStringLiteral("weather-clear-wind");
+        return QStringLiteral("weather-clear-wind-symbolic");
     case FewCloudsDay:
-        return QStringLiteral("weather-few-clouds");
+        return QStringLiteral("weather-few-clouds-symbolic");
     case FewCloudsWindyDay:
-        return QStringLiteral("weather-few-clouds-wind");
+        return QStringLiteral("weather-few-clouds-wind-symbolic");
     case PartlyCloudyDay:
-        return QStringLiteral("weather-clouds");
+        return QStringLiteral("weather-clouds-symbolic");
     case PartlyCloudyWindyDay:
-        return QStringLiteral("weather-clouds-wind");
+        return QStringLiteral("weather-clouds-wind-symbolic");
     case Overcast:
-        return QStringLiteral("weather-overcast");
+        return QStringLiteral("weather-overcast-symbolic");
     case OvercastWindy:
-        return QStringLiteral("weather-overcast-wind");
+        return QStringLiteral("weather-overcast-wind-symbolic");
     case Rain:
-        return QStringLiteral("weather-showers");
+        return QStringLiteral("weather-showers-symbolic");
     case LightRain:
-        return QStringLiteral("weather-showers-scattered");
+        return QStringLiteral("weather-showers-scattered-symbolic");
     case Showers:
-        return QStringLiteral("weather-showers-scattered");
+        return QStringLiteral("weather-showers-scattered-symbolic");
     case ChanceShowersDay:
-        return QStringLiteral("weather-showers-scattered-day");
+        return QStringLiteral("weather-showers-scattered-day-symbolic");
     case ChanceShowersNight:
-        return QStringLiteral("weather-showers-scattered-night");
+        return QStringLiteral("weather-showers-scattered-night-symbolic");
     case ChanceSnowDay:
-        return QStringLiteral("weather-snow-scattered-day");
+        return QStringLiteral("weather-snow-scattered-day-symbolic");
     case ChanceSnowNight:
-        return QStringLiteral("weather-snow-scattered-night");
+        return QStringLiteral("weather-snow-scattered-night-symbolic");
     case Thunderstorm:
-        return QStringLiteral("weather-storm");
+        return QStringLiteral("weather-storm-symbolic");
     case Hail:
-        return QStringLiteral("weather-hail");
+        return QStringLiteral("weather-hail-symbolic");
     case Snow:
-        return QStringLiteral("weather-snow");
+        return QStringLiteral("weather-snow-symbolic");
     case LightSnow:
-        return QStringLiteral("weather-snow-scattered");
+        return QStringLiteral("weather-snow-scattered-symbolic");
     case Flurries:
-        return QStringLiteral("weather-snow-scattered");
+        return QStringLiteral("weather-snow-scattered-symbolic");
     case RainSnow:
-        return QStringLiteral("weather-snow-rain");
+        return QStringLiteral("weather-snow-rain-symbolic");
     case FewCloudsNight:
-        return QStringLiteral("weather-few-clouds-night");
+        return QStringLiteral("weather-few-clouds-night-symbolic");
     case FewCloudsWindyNight:
-        return QStringLiteral("weather-few-clouds-wind-night");
+        return QStringLiteral("weather-few-clouds-wind-night-symbolic");
     case PartlyCloudyNight:
-        return QStringLiteral("weather-clouds-night");
+        return QStringLiteral("weather-clouds-night-symbolic");
     case PartlyCloudyWindyNight:
-        return QStringLiteral("weather-clouds-wind-night");
+        return QStringLiteral("weather-clouds-wind-night-symbolic");
     case ClearNight:
-        return QStringLiteral("weather-clear-night");
+        return QStringLiteral("weather-clear-night-symbolic");
     case ClearWindyNight:
-        return QStringLiteral("weather-clear-wind-night");
+        return QStringLiteral("weather-clear-wind-night-symbolic");
     case Mist:
-        return QStringLiteral("weather-fog");
+        return QStringLiteral("weather-fog-symbolic");
     case Haze:
-        return QStringLiteral("weather-fog");
+        return QStringLiteral("weather-fog-symbolic");
     case FreezingRain:
-        return QStringLiteral("weather-freezing-rain");
+        return QStringLiteral("weather-freezing-rain-symbolic");
     case FreezingDrizzle:
-        return QStringLiteral("weather-freezing-rain");
+        return QStringLiteral("weather-freezing-rain-symbolic");
     case ChanceThunderstormDay:
-        return QStringLiteral("weather-storm-day");
+        return QStringLiteral("weather-storm-day-symbolic");
     case ChanceThunderstormNight:
-        return QStringLiteral("weather-storm-night");
+        return QStringLiteral("weather-storm-night-symbolic");
     case NotAvailable:
-        return QStringLiteral("weather-none-available");
+        return QStringLiteral("weather-none-available-symbolic");
     }
-    return QStringLiteral("weather-none-available");
+    return QStringLiteral("weather-none-available-symbolic");
 }
 
 /**

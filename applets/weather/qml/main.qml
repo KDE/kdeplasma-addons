@@ -93,7 +93,7 @@ PlasmoidItem {
         } else if (!!forecastControl.forecast?.futureDays && forecastControl.forecast.futureDays.daysNumber > 0) {
             iconName = Util.existingWeatherIconName(forecastControl.forecast?.futureDays.firstDayIcon);
         } else {
-            iconName = "weather-none-available"
+            iconName = "weather-none-available-symbolic"
         }
 
         if (inPanel) {
