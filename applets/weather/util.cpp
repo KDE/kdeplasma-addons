@@ -32,7 +32,7 @@ KUnitConversion::Converter Util::m_converter;
 QString Util::existingWeatherIconName(const QString &iconName) const
 {
     const bool isValid = !iconName.isEmpty() && QIcon::hasThemeIcon(iconName);
-    return isValid ? iconName : QStringLiteral("weather-not-available");
+    return isValid ? iconName : QStringLiteral("weather-none-available");
 }
 
 QString Util::temperatureToDisplayString(int displayUnitType, double value, int valueUnitType, bool rounded, bool degreesOnly) const
