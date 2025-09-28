@@ -2,16 +2,15 @@
 # translation of plasma_applet_comic to Romanian
 # Copyright (C) 2008 This_file_is_part_of_KDE
 # This file is distributed under the same license as the plasma_applet_comic package.
-# Laurenţiu Buzdugan <lbuz@rolix.org>, 2008".
-# Sergiu Bivol <sergiu@cip.md>, 2008.
-# Sergiu Bivol <sergiu@cip.md>, 2008, 2013, 2021, 2023, 2024.
+# Laurenţiu Buzdugan <lbuz@rolix.org>, 2008.
+# SPDX-FileCopyrightText: 2008, 2013, 2021, 2023, 2024, 2025 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-27 00:48+0000\n"
-"PO-Revision-Date: 2024-02-24 23:10+0000\n"
+"PO-Revision-Date: 2025-09-27 12:54+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -20,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: comic.cpp:87
 #, kde-format
@@ -119,26 +118,25 @@ msgid "Visit the comic website"
 msgstr "Vizitează saitul benzii desenate"
 
 #: package/contents/ui/configAdvanced.qml:36
-#, fuzzy, kde-format
-#| msgid "Comic:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
-msgstr "Benzi desenate:"
+msgstr "Prestocare benzi desenate:"
 
 #: package/contents/ui/configAdvanced.qml:45
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
 msgid_plural "strips per comic"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "imagine per bandă desenată"
+msgstr[1] "imagini per bandă desenată"
+msgstr[2] "imagini per bandă desenată"
 
 #: package/contents/ui/configAdvanced.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
-msgstr ""
+msgstr "Arată eroare când descărcarea benzii eșuează"
 
 #: package/contents/ui/configAppearance.qml:43
 #, kde-format
@@ -203,60 +201,55 @@ msgstr "Obține benzi noi…"
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
-msgstr ""
+msgstr "Faceți clic mijlociu pe bandă pentru afișare la mărimea originală"
 
 #: package/contents/ui/configGeneral.qml:92
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
-msgstr ""
+msgstr "Verifică pentru extensii noi la fiecare:"
 
 #: package/contents/ui/configGeneral.qml:101
-#, fuzzy, kde-format
-#| msgid " days"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
 msgid_plural "days"
-msgstr[0] " zile"
-msgstr[1] " zile"
-msgstr[2] " zile"
+msgstr[0] "zi"
+msgstr[1] "zile"
+msgstr[2] "de zile"
 
 #: package/contents/ui/configGeneral.qml:106
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
-msgstr ""
+msgstr "Verifică pentru desene noi la fiecare:"
 
 #: package/contents/ui/configGeneral.qml:115
-#, fuzzy, kde-format
-#| msgid " minutes"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] " minute"
-msgstr[1] " minute"
-msgstr[2] " minute"
+msgstr[0] "minut"
+msgstr[1] "minute"
+msgstr[2] "de minute"
 
 #: stripselector.cpp:31 stripselector.cpp:101
-#, fuzzy, kde-format
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@title:window"
 msgid "Go to Strip"
 msgstr "Mergi la banda"
 
 #: stripselector.cpp:39
-#, fuzzy, kde-format
-#| msgid "&Strip Number:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "&Strip number:"
 msgstr "&Numărul benzii:"
 
 #: stripselector.cpp:102
-#, fuzzy, kde-format
-#| msgid "Show comic identifier"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
-msgstr "Arată identificatorul benzii"
+msgstr "Identificatorul benzii:"
 
 #, fuzzy
 #~| msgid "&Save Comic As..."
