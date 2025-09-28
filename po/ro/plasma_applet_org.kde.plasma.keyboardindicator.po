@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# Sergiu Bivol <sergiu@cip.md>, 2020, 2021, 2022, 2024.
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2024, 2025 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-05-18 00:43+0000\n"
-"PO-Revision-Date: 2024-02-24 19:09+0000\n"
+"PO-Revision-Date: 2025-09-27 13:01+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: config.qml:13
 #, kde-format
@@ -46,52 +46,52 @@ msgstr "Num Lock"
 #: main.qml:114
 #, kde-format
 msgid "Alt is latched"
-msgstr ""
+msgstr "Alt e zăvorâtă"
 
 #: main.qml:116
 #, kde-format
 msgid "Alt is locked"
-msgstr ""
+msgstr "Alt e blocată"
 
 #: main.qml:120
 #, kde-format
 msgid "Shift is latched"
-msgstr ""
+msgstr "Shift e zăvorâtă"
 
 #: main.qml:122
 #, kde-format
 msgid "Shift is locked"
-msgstr ""
+msgstr "Shift e blocată"
 
 #: main.qml:126
 #, kde-format
 msgid "Control is latched"
-msgstr ""
+msgstr "Control e zăvorâtă"
 
 #: main.qml:128
 #, kde-format
 msgid "Control is locked"
-msgstr ""
+msgstr "Control e blocată"
 
 #: main.qml:132
 #, kde-format
 msgid "Meta is latched"
-msgstr ""
+msgstr "Meta e zăvorâtă"
 
 #: main.qml:134
 #, kde-format
 msgid "Meta is locked"
-msgstr ""
+msgstr "Meta e blocată"
 
 #: main.qml:138
 #, kde-format
 msgid "Alt Gr is latched"
-msgstr ""
+msgstr "Alt Gr e zăvorâtă"
 
 #: main.qml:140
 #, kde-format
 msgid "Alt Gr is locked"
-msgstr ""
+msgstr "Alt Gr e blocată"
 
 #: main.qml:144
 #, kde-format

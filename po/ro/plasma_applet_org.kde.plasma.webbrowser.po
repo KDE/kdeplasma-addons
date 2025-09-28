@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# Sergiu Bivol <sergiu@cip.md>, 2023.
+# SPDX-FileCopyrightText: 2023, 2025 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-11 00:43+0000\n"
-"PO-Revision-Date: 2023-06-18 19:40+0100\n"
+"PO-Revision-Date: 2025-09-27 13:23+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 25.08.1\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -86,27 +86,25 @@ msgstr "Reinițializează la pictograma implicită"
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
-msgstr ""
+msgstr "Afișează bara de navigare"
 
 #: package/contents/ui/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
-msgstr ""
+msgstr "Încarcă ultima pagină vizitată"
 
 #: package/contents/ui/ConfigGeneral.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
-msgstr ""
+msgstr "La pornire:"
 
 #: package/contents/ui/ConfigGeneral.qml:33
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Reload This Page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
-msgstr "Reîncarcă această pagină"
+msgstr "Încarcă această pagină mereu:"
 
 #: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:118
 #, kde-format
@@ -136,13 +134,13 @@ msgstr "Scalare automată dacă lățimea e sub"
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
-msgstr ""
+msgstr "Configurări navigator:"
 
 #: package/contents/ui/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
-msgstr ""
+msgstr "Navigare privată"
 
 #: package/contents/ui/main.qml:73
 #, kde-format
@@ -160,14 +158,12 @@ msgstr "Mergi înainte"
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
-msgstr ""
+msgstr "Mergi acasă"
 
 #: package/contents/ui/main.qml:99
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Type a URL"
+#, kde-format
 msgid "Open Default URL"
-msgstr "Tastați un URL"
+msgstr "Deschide URL-ul implicit"
 
 #: package/contents/ui/main.qml:158
 #, kde-format
