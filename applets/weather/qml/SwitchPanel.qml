@@ -110,7 +110,7 @@ ColumnLayout {
 
     readonly property list<WeatherInfoPanel> pagesModel: weatherPanelModel.filter(page => page.visible)
 
-    QQC2.TabBar {
+    PlasmaComponents.TabBar {
         id: tabBar
 
         Layout.fillWidth: true
