@@ -2,9 +2,8 @@
 # translation of plasma_applet_comic to Romanian
 # Copyright (C) 2008 This_file_is_part_of_KDE
 # This file is distributed under the same license as the plasma_applet_comic package.
-# Laurenţiu Buzdugan <lbuz@rolix.org>, 2008".
-# SPDX-FileCopyrightText: 2008, 2025 Sergiu Bivol <sergiu@cip.md>
-# Sergiu Bivol <sergiu@cip.md>, 2008, 2013, 2021, 2023, 2024.
+# Laurenţiu Buzdugan <lbuz@rolix.org>, 2008.
+# SPDX-FileCopyrightText: 2008, 2013, 2021, 2023, 2024, 2025 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
