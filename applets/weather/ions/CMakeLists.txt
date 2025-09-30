@@ -2,12 +2,13 @@
 # SPDX-License-Identifier: BSD-3-Clause
 
 # the Ion library
-set(ionlib_SRCS
+
+add_library(plasmaweatherion SHARED)
+
+target_sources(plasmaweatherion PRIVATE
     ion.cpp
     ion.h
 )
-
-add_library(plasmaweatherion SHARED ${ionlib_SRCS})
 
 target_link_libraries(plasmaweatherion PUBLIC
     plasmaweatherdata
