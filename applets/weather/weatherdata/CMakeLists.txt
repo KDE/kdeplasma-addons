@@ -1,7 +1,9 @@
 # SPDX-FileCopyrightText: 2025 Bohdan Onofriichuk <bogdan.onofriuchuk@gmail.com>
 # SPDX-License-Identifier: BSD-3-Clause
 
-set(weatherdata_SRCS
+qt_add_library(plasmaweatherdata SHARED ${weatherdata_SRCS})
+
+target_sources(plasmaweatherdata PRIVATE
     currentday.h
     currentday.cpp
     lastday.h
@@ -21,8 +23,6 @@ set(weatherdata_SRCS
     locations.h
     locations.cpp
 )
-
-qt_add_library(plasmaweatherdata SHARED ${weatherdata_SRCS})
 
 generate_export_header(plasmaweatherdata)
 
