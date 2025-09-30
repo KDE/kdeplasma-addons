@@ -22,15 +22,15 @@ set(weatherdata_SRCS
     locations.cpp
 )
 
-qt_add_library(weatherdata SHARED ${weatherdata_SRCS})
+qt_add_library(plasmaweatherdata SHARED ${weatherdata_SRCS})
 
-generate_export_header(weatherdata)
+generate_export_header(plasmaweatherdata)
 
-target_link_libraries(weatherdata PRIVATE
+target_link_libraries(plasmaweatherdata PRIVATE
     Qt::Core
     KF6::I18n
     KF6::UnitConversion
     Qt::Qml
 )
 
-install(TARGETS weatherdata DESTINATION ${KDE_INSTALL_LIBDIR})
+install(TARGETS plasmaweatherdata DESTINATION ${KDE_INSTALL_LIBDIR})

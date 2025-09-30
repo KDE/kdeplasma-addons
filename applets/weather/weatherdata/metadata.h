@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <weatherdata_export.h>
+#include <plasmaweatherdata_export.h>
 
 #include <QObject>
 #include <QString>
@@ -32,7 +32,7 @@
  * "Credit": string, credit line for the data, required
  * "Credit Url": string, url related to the credit for the data (can be also webpage with more forecast), optional
  */
-class WEATHERDATA_EXPORT MetaData
+class PLASMAWEATHERDATA_EXPORT MetaData
 {
     Q_GADGET
 

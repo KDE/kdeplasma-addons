@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <weatherdata_export.h>
+#include <plasmaweatherdata_export.h>
 
 #include <QAbstractTableModel>
 #include <QObjectBindableProperty>
@@ -19,7 +19,7 @@
  *
  * \brief Data about part of the day
  */
-class WEATHERDATA_EXPORT FutureForecast
+class PLASMAWEATHERDATA_EXPORT FutureForecast
 {
 public:
     explicit FutureForecast();
@@ -50,7 +50,7 @@ private:
  *
  * \brief Data about full day
  */
-class WEATHERDATA_EXPORT FutureDayForecast
+class PLASMAWEATHERDATA_EXPORT FutureDayForecast
 {
 public:
     explicit FutureDayForecast();
@@ -89,7 +89,7 @@ private:
  * lowTemp: number of lowest temperature (using general unit), optional
  * conditionProbability: chance of conditions to happen, optional
  */
-class WEATHERDATA_EXPORT FutureDays : public QAbstractTableModel
+class PLASMAWEATHERDATA_EXPORT FutureDays : public QAbstractTableModel
 {
     Q_OBJECT
     QML_ANONYMOUS

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <weatherdata_export.h>
+#include <plasmaweatherdata_export.h>
 
 #include "currentday.h"
 #include "futuredays.h"
@@ -29,7 +29,7 @@
  * warnings: data obout warnings, optional
  * futureDays: data obout future days, optional
  */
-class WEATHERDATA_EXPORT Forecast
+class PLASMAWEATHERDATA_EXPORT Forecast
 {
     Q_GADGET
 

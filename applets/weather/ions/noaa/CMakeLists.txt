@@ -18,7 +18,7 @@ ecm_qt_declare_logging_category(noaa
 )
 
 target_link_libraries(noaa PRIVATE
-    weatherion
+    plasmaweatherion
     KF6::KIOCore
 )
 

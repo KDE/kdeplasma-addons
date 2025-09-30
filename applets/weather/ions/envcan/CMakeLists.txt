@@ -18,6 +18,6 @@ ecm_qt_declare_logging_category(envcan
 )
 
 target_link_libraries(envcan PRIVATE
-    weatherion
+    plasmaweatherion
     KF6::KIOCore
 )

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <weatherion_export.h>
+#include <plasmaweatherion_export.h>
 
 #include <QList>
 #include <QPromise>
@@ -30,7 +30,7 @@
  * * Quality: the quality of the class, int.
  * Without metadata a class is considered low quality and can be skipped when searching for locations.
  */
-class WEATHERION_EXPORT Ion : public QObject
+class PLASMAWEATHERION_EXPORT Ion : public QObject
 {
     Q_OBJECT
 

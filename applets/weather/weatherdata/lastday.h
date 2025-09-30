@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <weatherdata_export.h>
+#include <plasmaweatherdata_export.h>
 
 #include <QObject>
 #include <QString>
@@ -23,7 +23,7 @@
  * "normalLowTemp": float, lowest temperature at location, optional
  * "precipTotal": float, total precipitation over day, optional TODO: "Trace" injected, should be dealt with at display side?
  */
-class WEATHERDATA_EXPORT LastDay
+class PLASMAWEATHERDATA_EXPORT LastDay
 {
     Q_GADGET
 
