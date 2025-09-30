@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-11 00:44+0000\n"
+"POT-Creation-Date: 2025-09-30 00:44+0000\n"
 "PO-Revision-Date: 2024-04-02 16:35+0300\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -21,46 +21,46 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
 
-#: package/contents/config/config.qml:13
+#: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Izskats"
 
-#: package/contents/ui/configAppearance.qml:50
+#: qml/configAppearance.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr "Režģa izmērs:"
 
-#: package/contents/ui/configAppearance.qml:61
+#: qml/configAppearance.qml:61
 #, fuzzy, kde-format
 #| msgid "Background:"
 msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "Fons:"
 
-#: package/contents/ui/configAppearance.qml:68
+#: qml/configAppearance.qml:68
 #, fuzzy, kde-format
 #| msgid "Color:"
 msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "Krāsa:"
 
-#: package/contents/ui/configAppearance.qml:84
+#: qml/configAppearance.qml:84
 #, fuzzy, kde-format
 #| msgid "Image:"
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr "Attēls:"
 
-#: package/contents/ui/configAppearance.qml:92
+#: qml/configAppearance.qml:92
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Ceļš uz pielāgotu attēlu..."
 
-#: package/contents/ui/configAppearance.qml:108
+#: qml/configAppearance.qml:108
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Choose image…"
@@ -68,69 +68,69 @@ msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "Izvēlieties attēlu..."
 
-#: package/contents/ui/configAppearance.qml:119
+#: qml/configAppearance.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Izvēlieties attēlu"
 
-#: package/contents/ui/configAppearance.qml:124
+#: qml/configAppearance.qml:124
 #, fuzzy, kde-format
 #| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Attēla datnes (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:142
+#: qml/configAppearance.qml:142
 #, fuzzy, kde-format
 #| msgid "Tiles:"
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
 msgstr "Flīzes:"
 
-#: package/contents/ui/configAppearance.qml:149
+#: qml/configAppearance.qml:149
 #, fuzzy, kde-format
 #| msgid "Color:"
 msgctxt "@label:chooser opens label color picker"
 msgid "Color:"
 msgstr "Krāsa:"
 
-#: package/contents/ui/configAppearance.qml:163
+#: qml/configAppearance.qml:163
 #, kde-format
 msgctxt "@option:check"
 msgid "Hide on image backgrounds"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:262
+#: qml/FifteenPuzzle.qml:262
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Laiks: %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:320
+#: qml/FifteenPuzzle.qml:320
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Samaisīt"
 
-#: package/contents/ui/FifteenPuzzle.qml:346
+#: qml/FifteenPuzzle.qml:346
 #, kde-format
 msgctxt "@info:status The number of moves made by the player so far"
 msgid "Moves: %1"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:371
+#: qml/FifteenPuzzle.qml:371
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Atrisināts! Mēģiniet vēlreiz."
 
-#: package/contents/ui/main.qml:35
+#: qml/main.qml:35
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Piecpadsmit puzle"
 
-#: package/contents/ui/main.qml:36
+#: qml/main.qml:36
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Sakārtojiet pēc kārtas"

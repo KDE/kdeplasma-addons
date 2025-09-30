@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-11 00:44+0000\n"
+"POT-Creation-Date: 2025-09-30 00:44+0000\n"
 "PO-Revision-Date: 2022-02-13 14:38+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -21,46 +21,46 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/config/config.qml:13
+#: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Utsjånad"
 
-#: package/contents/ui/configAppearance.qml:50
+#: qml/configAppearance.qml:50
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr "Rutenettstorleik:"
 
-#: package/contents/ui/configAppearance.qml:61
+#: qml/configAppearance.qml:61
 #, fuzzy, kde-format
 #| msgid "Background:"
 msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "Bakgrunn:"
 
-#: package/contents/ui/configAppearance.qml:68
+#: qml/configAppearance.qml:68
 #, fuzzy, kde-format
 #| msgid "Color:"
 msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "Farge:"
 
-#: package/contents/ui/configAppearance.qml:84
+#: qml/configAppearance.qml:84
 #, fuzzy, kde-format
 #| msgid "Image:"
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr "Bilete:"
 
-#: package/contents/ui/configAppearance.qml:92
+#: qml/configAppearance.qml:92
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Adresse til sjølvvalt bilete …"
 
-#: package/contents/ui/configAppearance.qml:108
+#: qml/configAppearance.qml:108
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Choose image…"
@@ -68,69 +68,69 @@ msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "Vel bilete …"
 
-#: package/contents/ui/configAppearance.qml:119
+#: qml/configAppearance.qml:119
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Vel bilete"
 
-#: package/contents/ui/configAppearance.qml:124
+#: qml/configAppearance.qml:124
 #, fuzzy, kde-format
 #| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Biletfiler (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: package/contents/ui/configAppearance.qml:142
+#: qml/configAppearance.qml:142
 #, fuzzy, kde-format
 #| msgid "Tiles:"
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
 msgstr "Brikker:"
 
-#: package/contents/ui/configAppearance.qml:149
+#: qml/configAppearance.qml:149
 #, fuzzy, kde-format
 #| msgid "Color:"
 msgctxt "@label:chooser opens label color picker"
 msgid "Color:"
 msgstr "Farge:"
 
-#: package/contents/ui/configAppearance.qml:163
+#: qml/configAppearance.qml:163
 #, kde-format
 msgctxt "@option:check"
 msgid "Hide on image backgrounds"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:262
+#: qml/FifteenPuzzle.qml:262
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Tid: %1"
 
-#: package/contents/ui/FifteenPuzzle.qml:320
+#: qml/FifteenPuzzle.qml:320
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Stokk om"
 
-#: package/contents/ui/FifteenPuzzle.qml:346
+#: qml/FifteenPuzzle.qml:346
 #, kde-format
 msgctxt "@info:status The number of moves made by the player so far"
 msgid "Moves: %1"
 msgstr ""
 
-#: package/contents/ui/FifteenPuzzle.qml:371
+#: qml/FifteenPuzzle.qml:371
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Løyst! Prøv ein gong til."
 
-#: package/contents/ui/main.qml:35
+#: qml/main.qml:35
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Spelet femten"
 
-#: package/contents/ui/main.qml:36
+#: qml/main.qml:36
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Løys ved å flytta i rett rekkjefølgje"
