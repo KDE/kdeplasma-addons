@@ -33,4 +33,9 @@ target_link_libraries(plasmaweatherdata PRIVATE
     Qt::Qml
 )
 
+set_target_properties(plasmaweatherdata PROPERTIES
+    VERSION     ${PROJECT_VERSION}
+    SOVERSION   ${PROJECT_VERSION_MAJOR}
+)
+
 install(TARGETS plasmaweatherdata DESTINATION ${KDE_INSTALL_LIBDIR})

@@ -17,6 +17,10 @@ target_link_libraries(plasmaweatherion PUBLIC
     Qt::Qml
 )
 
+set_target_properties(plasmaweatherion PROPERTIES
+    VERSION     ${PROJECT_VERSION}
+    SOVERSION   ${PROJECT_VERSION_MAJOR}
+)
 
 generate_export_header(plasmaweatherion)
 
