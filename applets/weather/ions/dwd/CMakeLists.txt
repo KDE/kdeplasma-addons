@@ -18,6 +18,6 @@ ecm_qt_declare_logging_category(dwd
 )
 
 target_link_libraries(dwd PRIVATE
-    weatherion
+    plasmaweatherion
     KF6::KIOCore
 )

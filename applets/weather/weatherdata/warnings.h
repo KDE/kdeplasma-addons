@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <weatherdata_export.h>
+#include <plasmaweatherdata_export.h>
 
 #include <QAbstractListModel>
 #include <QObjectBindableProperty>
@@ -26,7 +26,7 @@ class Warning;
  * "Info " + number, string, free text string, optional
  * "Timestamp " + number, string, free text string, optional TODO: get standardized datetime
  */
-class WEATHERDATA_EXPORT Warnings : public QAbstractListModel
+class PLASMAWEATHERDATA_EXPORT Warnings : public QAbstractListModel
 {
     Q_OBJECT
     QML_ANONYMOUS
@@ -78,7 +78,7 @@ private:
  *
  * \brief Data about one warning
  */
-class WEATHERDATA_EXPORT Warning
+class PLASMAWEATHERDATA_EXPORT Warning
 {
 public:
     Warning(Warnings::PriorityClass priority, QString description);

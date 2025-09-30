@@ -18,6 +18,6 @@ ecm_qt_declare_logging_category(wettercom
 )
 
 target_link_libraries(wettercom PRIVATE
-    weatherion
+    plasmaweatherion
     KF6::KIOCore
 )

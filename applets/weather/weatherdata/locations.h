@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <weatherdata_export.h>
+#include <plasmaweatherdata_export.h>
 
 #include <QAbstractListModel>
 #include <QList>
@@ -30,7 +30,7 @@ class Location;
  *  "latitude": float, latitude of the weather station in decimal degrees
  *  "longitude": float, longitude of the weather station in decimal degrees
  */
-class WEATHERDATA_EXPORT Locations : public QAbstractListModel
+class PLASMAWEATHERDATA_EXPORT Locations : public QAbstractListModel
 {
     Q_OBJECT
 
@@ -68,7 +68,7 @@ private:
  *
  * \brief Data about one location
  */
-class WEATHERDATA_EXPORT Location
+class PLASMAWEATHERDATA_EXPORT Location
 {
 public:
     Location();

@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <weatherdata_export.h>
+#include <plasmaweatherdata_export.h>
 
 #include <QObject>
 #include <QString>
@@ -26,7 +26,7 @@
  * "Record Rainfall": float, highest height of rain (precipitation?) ever measured at location, optional
  * "Record Snowfall": float, highest height of snow ever measured at location, optional
  */
-class WEATHERDATA_EXPORT CurrentDay
+class PLASMAWEATHERDATA_EXPORT CurrentDay
 {
     Q_GADGET
 

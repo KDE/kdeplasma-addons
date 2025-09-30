@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <weatherdata_export.h>
+#include <plasmaweatherdata_export.h>
 
 #include <QDateTime>
 #include <QObject>
@@ -39,7 +39,7 @@
  * "humidity": float, humidity of the air, optional
  * "dewpoint": float, temperature where water condensates given other conditions, optional
  */
-class WEATHERDATA_EXPORT LastObservation
+class PLASMAWEATHERDATA_EXPORT LastObservation
 {
     Q_GADGET
 

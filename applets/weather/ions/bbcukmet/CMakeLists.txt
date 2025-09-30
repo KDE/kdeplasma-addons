@@ -18,6 +18,6 @@ ecm_qt_declare_logging_category(bbcukmet
 )
 
 target_link_libraries(bbcukmet PRIVATE
-    weatherion
+    plasmaweatherion
     KF6::KIOCore
 )

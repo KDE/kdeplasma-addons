@@ -57,6 +57,6 @@ target_link_libraries(org.kde.plasma.weather PRIVATE
     Qt::Network
     Qt::Gui
     KF6::KIOCore
-    weatherion
-    weatherdata
+    plasmaweatherion
+    plasmaweatherdata
 )

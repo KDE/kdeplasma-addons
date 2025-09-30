@@ -6,7 +6,7 @@
 
 #pragma once
 
-#include <weatherdata_export.h>
+#include <plasmaweatherdata_export.h>
 
 #include <QObject>
 #include <QString>
@@ -28,7 +28,7 @@
  *  "longitude": float, longitude of the weather station in decimal degrees
  *  "newPlaceInfo": QString, new placeInfo which is used to receive a forecast, optional
  */
-class WEATHERDATA_EXPORT Station
+class PLASMAWEATHERDATA_EXPORT Station
 {
     Q_GADGET
 
