@@ -80,7 +80,7 @@ void DocumentHandler::pasteWithoutFormatting()
         return;
     }
 
-    QString content = KTextToHTML::convertToHtml(mimeData->text(), KTextToHTML::Options(KTextToHTML::PreserveSpaces));
+    QString content = KTextToHTML::convertToHtml(mimeData->text(), KTextToHTML::Options(KTextToHTML::PreserveSpaces | KTextToHTML::IgnoreUrls));
 
     if (content.endsWith("</a>", Qt::CaseInsensitive)) {
         content += " ";
