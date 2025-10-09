@@ -6,24 +6,24 @@
 # Diego Iastrubni <elcuco@kde.org>, 2009, 2013.
 # elkana bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fuzzyclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-08-01 00:45+0000\n"
-"PO-Revision-Date: 2017-05-16 06:55-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-10-08 11:01+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 25.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "מראה"
@@ -32,39 +32,34 @@ msgstr "מראה"
 #, kde-format
 msgctxt "@title:group"
 msgid "Font:"
-msgstr ""
+msgstr "גופן:"
 
 #: package/contents/ui/configAppearance.qml:25
-#, fuzzy, kde-format
-#| msgid "Bold text"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bold text"
 msgstr "כתב מודגש"
 
 #: package/contents/ui/configAppearance.qml:30
-#, fuzzy, kde-format
-#| msgid "Italic text"
+#, kde-format
 msgctxt "@option:check"
 msgid "Italic text"
-msgstr "טקסט נטוי"
+msgstr "כתב נטוי"
 
 #: package/contents/ui/configAppearance.qml:39
-#, fuzzy, kde-format
-#| msgid "Fuzzyness"
+#, kde-format
 msgctxt "@title:group"
 msgid "Fuzzyness:"
-msgstr "לא ברור"
+msgstr "ערפול:"
 
 #: package/contents/ui/configAppearance.qml:49
-#, fuzzy, kde-format
-#| msgid "Accurate"
+#, kde-format
 msgctxt "@item:inrange"
 msgid "Accurate"
 msgstr "מדויק"
 
 #: package/contents/ui/configAppearance.qml:57
-#, fuzzy, kde-format
-#| msgid "Fuzzy"
+#, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"
 msgstr "מעורפל"
@@ -792,43 +787,42 @@ msgstr "חמישה לשתים עשרה"
 #: package/contents/ui/FuzzyClock.qml:181
 #, kde-format
 msgid "Sleep"
-msgstr ""
+msgstr "שינה"
 
 #: package/contents/ui/FuzzyClock.qml:181
 #, kde-format
 msgid "Breakfast"
-msgstr ""
+msgstr "ארוחת בוקר"
 
 #: package/contents/ui/FuzzyClock.qml:181
 #, kde-format
 msgid "Second Breakfast"
-msgstr ""
+msgstr "ארוחת בוקר שנייה"
 
 #: package/contents/ui/FuzzyClock.qml:181
 #, kde-format
 msgid "Elevenses"
-msgstr ""
+msgstr "ארוחת עשר"
 
 #: package/contents/ui/FuzzyClock.qml:182
 #, kde-format
 msgid "Lunch"
-msgstr ""
+msgstr "ארוחת צוהריים"
 
 #: package/contents/ui/FuzzyClock.qml:182
-#, fuzzy, kde-format
-#| msgid "Afternoon"
+#, kde-format
 msgid "Afternoon tea"
-msgstr "אחר הצהריים"
+msgstr "תה אחה״צ"
 
 #: package/contents/ui/FuzzyClock.qml:182
 #, kde-format
 msgid "Dinner"
-msgstr ""
+msgstr "סעודת ערב"
 
 #: package/contents/ui/FuzzyClock.qml:182
 #, kde-format
 msgid "Supper"
-msgstr ""
+msgstr "ארוחת ערב"
 
 #: package/contents/ui/FuzzyClock.qml:186
 #, kde-format
