@@ -1,9 +1,7 @@
 # German translations for kdeplasma-addons package.
 # Copyright (C) 2022 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# Frederik Schwarzer <schwarzer@kde.org>, 2023.
-#
-# Automatically generated, 2022.
+# SPDX-FileCopyrightText: 2023 Frederik Schwarzer <schwarzer@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_addons_profiles_utility\n"

@@ -1,4 +1,4 @@
-# Frederik Schwarzer <schwarzer@kde.org>, 2008, 2009.
+# SPDX-FileCopyrightText: 2008, 2009 Frederik Schwarzer <schwarzer@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_katesessions\n"
