@@ -1,4 +1,4 @@
-# Burkhard Lück <lueck@hube-lueck.de>, 2009.
+# SPDX-FileCopyrightText: 2009 Burkhard Lück <lueck@hube-lueck.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_packagestructure_comic\n"
