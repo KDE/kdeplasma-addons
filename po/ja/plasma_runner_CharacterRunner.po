@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_CharacterRunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-20 00:42+0000\n"
+"POT-Creation-Date: 2025-10-12 00:43+0000\n"
 "PO-Revision-Date: 2021-10-17 13:50-0700\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -23,7 +23,7 @@ msgid ""
 msgstr ""
 "十六進コードまたは定義済みのエイリアスの場合、:q: から文字を作成します。"
 
-#: charrunner_config.cpp:58
+#: charrunner_config.cpp:60
 #, kde-format
 msgctxt "Message that config is corrupted"
 msgid ""

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2025-10-12 00:43+0000\n"
 "PO-Revision-Date: 2008-08-16 13:55-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -17,17 +17,17 @@ msgstr ""
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
 "3 : 4\n"
 
-#: katesessions.cpp:28
+#: katesessions.cpp:30
 #, kde-format
 msgid "Finds Kate sessions matching :q:."
 msgstr "Aimsíonn sé seisiúin Kate comhoiriúnach do :q:."
 
-#: katesessions.cpp:29
+#: katesessions.cpp:31
 #, kde-format
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Taispeánann sé seo gach seisiún d'eagarthóir Kate i do chuntas."
 
-#: katesessions.cpp:64 katesessions.cpp:75
+#: katesessions.cpp:66 katesessions.cpp:77
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Oscail Seisiún Kate"

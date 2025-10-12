@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_CharacterRunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-20 00:42+0000\n"
+"POT-Creation-Date: 2025-10-12 00:43+0000\n"
 "PO-Revision-Date: 2020-03-20 07:13+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
@@ -28,7 +28,7 @@ msgstr ""
 "Створює символи на основі :q:, якщо вказано шістнадцятковий код або "
 "визначений замінник назви символу."
 
-#: charrunner_config.cpp:58
+#: charrunner_config.cpp:60
 #, kde-format
 msgctxt "Message that config is corrupted"
 msgid ""

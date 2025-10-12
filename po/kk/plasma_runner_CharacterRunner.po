@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-20 00:42+0000\n"
+"POT-Creation-Date: 2025-10-12 00:43+0000\n"
 "PO-Revision-Date: 2010-12-06 04:29+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan(at)computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -25,7 +25,7 @@ msgid ""
 msgstr ""
 ":q: оналтылық код не бүркеншік атауы болса, оған сәйкес таңбаны келтіру."
 
-#: charrunner_config.cpp:58
+#: charrunner_config.cpp:60
 #, kde-format
 msgctxt "Message that config is corrupted"
 msgid ""

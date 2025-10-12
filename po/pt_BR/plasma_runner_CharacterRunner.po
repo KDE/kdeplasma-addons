@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_CharacterRunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-20 00:42+0000\n"
+"POT-Creation-Date: 2025-10-12 00:43+0000\n"
 "PO-Revision-Date: 2020-03-23 15:37-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -27,7 +27,7 @@ msgstr ""
 "Cria caracteres a partir do :q:, caso seja um código hexadecimal ou um "
 "apelido definido."
 
-#: charrunner_config.cpp:58
+#: charrunner_config.cpp:60
 #, kde-format
 msgctxt "Message that config is corrupted"
 msgid ""

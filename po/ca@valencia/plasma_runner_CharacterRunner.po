@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-20 00:42+0000\n"
+"POT-Creation-Date: 2025-10-12 00:43+0000\n"
 "PO-Revision-Date: 2024-07-31 12:01+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -27,7 +27,7 @@ msgid ""
 msgstr ""
 "Crea caràcters a partir de :q: si és un codi hexadecimal o un àlies definit."
 
-#: charrunner_config.cpp:58
+#: charrunner_config.cpp:60
 #, kde-format
 msgctxt "Message that config is corrupted"
 msgid ""

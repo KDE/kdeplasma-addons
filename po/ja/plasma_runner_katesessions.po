@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2025-10-12 00:43+0000\n"
 "PO-Revision-Date: 2021-10-17 14:03-0700\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -19,18 +19,18 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: katesessions.cpp:28
+#: katesessions.cpp:30
 #, kde-format
 msgid "Finds Kate sessions matching :q:."
 msgstr ":q: と一致する Kate のセッションを見つけます。"
 
-#: katesessions.cpp:29
+#: katesessions.cpp:31
 #, kde-format
 msgid "Lists all the Kate editor sessions in your account."
 msgstr ""
 "あなたのアカウントの Kate エディタのすべてのセッションを一覧表示します。"
 
-#: katesessions.cpp:64 katesessions.cpp:75
+#: katesessions.cpp:66 katesessions.cpp:77
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Kate セッションを開く"

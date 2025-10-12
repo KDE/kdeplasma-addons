@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2025-10-12 00:43+0000\n"
 "PO-Revision-Date: 2019-06-08 19:24+0000\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -19,17 +19,17 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 2.0.6\n"
 
-#: katesessions.cpp:28
+#: katesessions.cpp:30
 #, kde-format
 msgid "Finds Kate sessions matching :q:."
 msgstr "Randa Kate seansus, kurie atitinka :q:."
 
-#: katesessions.cpp:29
+#: katesessions.cpp:31
 #, kde-format
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Išvardija visus Kate redaktoriaus seansus jūsų paskyroje."
 
-#: katesessions.cpp:64 katesessions.cpp:75
+#: katesessions.cpp:66 katesessions.cpp:77
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Atverti Kate seansą"

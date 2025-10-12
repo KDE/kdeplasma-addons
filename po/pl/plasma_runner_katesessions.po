@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2023-11-04 01:38+0000\n"
+"POT-Creation-Date: 2025-10-12 00:43+0000\n"
 "PO-Revision-Date: 2010-01-25 13:54+0100\n"
 "Last-Translator: Maciej Wikło <maciej.wiklo@wp.pl>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -19,17 +19,17 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: katesessions.cpp:28
+#: katesessions.cpp:30
 #, kde-format
 msgid "Finds Kate sessions matching :q:."
 msgstr "Znajduje sesje Kate pasujące do :q:."
 
-#: katesessions.cpp:29
+#: katesessions.cpp:31
 #, kde-format
 msgid "Lists all the Kate editor sessions in your account."
 msgstr "Wyświetla wszystkie sesje edytora Kate na Twoim koncie."
 
-#: katesessions.cpp:64 katesessions.cpp:75
+#: katesessions.cpp:66 katesessions.cpp:77
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Otwórz sesję Kate"

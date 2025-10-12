@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-02-20 00:42+0000\n"
+"POT-Creation-Date: 2025-10-12 00:43+0000\n"
 "PO-Revision-Date: 2010-11-02 14:54+0000\n"
 "Last-Translator: Jack Gurulian <jack.gurulian@gmail.com>\n"
 "Language-Team: American English <kde-i18n-doc@kde.org>\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Δημιουργεί χαρακτήρες από :q: αν είναι δεκαεξαδικός κώδικας ή ορισμένο "
 "ψευδώνυμο."
 
-#: charrunner_config.cpp:58
+#: charrunner_config.cpp:60
 #, kde-format
 msgctxt "Message that config is corrupted"
 msgid ""
