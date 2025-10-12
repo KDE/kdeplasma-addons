@@ -135,6 +135,7 @@ GridLayout {
                     return i18nc("@label %1 is the perceived temperature due to conditions like wind or humidity. Use the common phrasing for this concept and keep it short, adding a colon if necessary",
                         "Feels like %1", feelsTemperatureString);
                 }
+                return "";
             }
         }
     }
