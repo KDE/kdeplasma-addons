@@ -54,7 +54,10 @@ void BingProvider::pageRequestFinished(KJob *_job)
 
         urlString = QStringLiteral("https://www.bing.com/") + urlString;
 
-        if (m_screenWidth > 1920 || m_screenHeight > 1080) {
+        if (m_screenHeight > m_screenWidth) {
+            // Use vertical image
+            urlString += QStringLiteral("_1080x1920.jpg");
+        } else if (m_screenWidth > 1920 || m_screenHeight > 1080) {
             // Use 4k wallpaper
             urlString += QStringLiteral("_UHD.jpg");
         } else {

@@ -30,10 +30,19 @@ Kirigami.FormLayout {
         identifier: cfg_Provider
         arguments: {
             if (identifier === "bing") {
-                // Bing supports 1366/1920/UHD resolutions
-                const w = screenSize.width * Screen.devicePixelRatio > 1920 ? 3840 : 1920;
-                const h = screenSize.height * Screen.devicePixelRatio > 1080 ? 2160 : 1080;
-                return [w, h];
+                // Bing supports 1366/1920/UHD resolutions and portrait orientation
+                const w = screenSize.width * Screen.devicePixelRatio;
+                const h = screenSize.height * Screen.devicePixelRatio;
+
+                if (h > w) {
+                    // Portrait orientation
+                    return [1080, 1920];
+                } else if (w > 1920 || h > 1080) {
+                    // UHD resolution
+                    return [3840, 2160];
+                } else {
+                    return [1920, 1080];
+                }
             }
             return [];
         }
