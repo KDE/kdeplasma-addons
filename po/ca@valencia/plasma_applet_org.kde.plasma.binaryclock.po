@@ -3,7 +3,7 @@
 # This file is distributed under the license LGPL version 2 or later.
 #
 # SPDX-FileCopyrightText: 2008, 2017, 2018, 2019, 2023, 2025 Josep M. Ferrer <txemaq@gmail.com>
-# Joan Maspons <joanmaspons@gmail.com>, 2009.
+# SPDX-FileCopyrightText: 2009 Joan Maspons <joanmaspons@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
