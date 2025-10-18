@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-29 00:40+0000\n"
+"POT-Creation-Date: 2025-10-18 00:43+0000\n"
 "PO-Revision-Date: 2024-10-03 20:40+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: https://t.me/Localizations_KDE_Indonesia\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 24.05.2\n"
 
-#: package/contents/ui/config.qml:49
+#: package/contents/ui/config.qml:58
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Pemosisian:"
 
-#: package/contents/ui/config.qml:52
+#: package/contents/ui/config.qml:61
 #, fuzzy, kde-format
 #| msgctxt "@item:inlistbox"
 #| msgid "Scaled and Cropped"
@@ -32,13 +32,13 @@ msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "Diskalakan dan Dipangkas"
 
-#: package/contents/ui/config.qml:56
+#: package/contents/ui/config.qml:65
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Diskalakan"
 
-#: package/contents/ui/config.qml:60
+#: package/contents/ui/config.qml:69
 #, fuzzy, kde-format
 #| msgctxt "@item:inlistbox"
 #| msgid "Scaled, Keep Proportions"
@@ -46,37 +46,37 @@ msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
 msgstr "Diskalakan, Jaga Proporsi"
 
-#: package/contents/ui/config.qml:64
+#: package/contents/ui/config.qml:73
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Dipusatkan"
 
-#: package/contents/ui/config.qml:68
+#: package/contents/ui/config.qml:77
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Diubinkan"
 
-#: package/contents/ui/config.qml:89
+#: package/contents/ui/config.qml:98
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Warna latarbelakang:"
 
-#: package/contents/ui/config.qml:90
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Pilih Warna Latarbelakang"
 
-#: package/contents/ui/config.qml:94
+#: package/contents/ui/config.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Penyedia:"
 
-#: package/contents/ui/config.qml:113
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -84,37 +84,37 @@ msgid ""
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:131
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr ""
 
-#: package/contents/ui/config.qml:137
+#: package/contents/ui/config.qml:146
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Gambar hari ini:"
 
-#: package/contents/ui/config.qml:153
+#: package/contents/ui/config.qml:162
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Judul:"
 
-#: package/contents/ui/config.qml:168
+#: package/contents/ui/config.qml:177
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Pencipta:"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:196
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Buka Folder Konten"
 
-#: package/contents/ui/config.qml:191
+#: package/contents/ui/config.qml:200
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

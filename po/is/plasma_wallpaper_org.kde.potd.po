@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-29 00:40+0000\n"
+"POT-Creation-Date: 2025-10-18 00:43+0000\n"
 "PO-Revision-Date: 2025-04-07 09:41+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
@@ -18,61 +18,61 @@ msgstr ""
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: package/contents/ui/config.qml:49
+#: package/contents/ui/config.qml:58
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Staða:"
 
-#: package/contents/ui/config.qml:52
+#: package/contents/ui/config.qml:61
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "Teygt og sniðið af"
 
-#: package/contents/ui/config.qml:56
+#: package/contents/ui/config.qml:65
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Stækkuð"
 
-#: package/contents/ui/config.qml:60
+#: package/contents/ui/config.qml:69
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
 msgstr "Teygt, halda hlutföllum"
 
-#: package/contents/ui/config.qml:64
+#: package/contents/ui/config.qml:73
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Miðjuð"
 
-#: package/contents/ui/config.qml:68
+#: package/contents/ui/config.qml:77
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Flísalögð"
 
-#: package/contents/ui/config.qml:89
+#: package/contents/ui/config.qml:98
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Bakgrunnslitur:"
 
-#: package/contents/ui/config.qml:90
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Veldu bakgrunnslit"
 
-#: package/contents/ui/config.qml:94
+#: package/contents/ui/config.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Veita:"
 
-#: package/contents/ui/config.qml:113
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -82,37 +82,37 @@ msgstr ""
 "Þessi bakgrunnsmyndasveita síar ekki út myndir sem eru grófar eða gætu sært "
 "viðkvæma. Farðu gætilega ef þessar myndir birtast á almannafæri."
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:131
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Uppfæra þegar notuð er mæld nettenging"
 
-#: package/contents/ui/config.qml:137
+#: package/contents/ui/config.qml:146
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Mynd dagsins:"
 
-#: package/contents/ui/config.qml:153
+#: package/contents/ui/config.qml:162
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Titill:"
 
-#: package/contents/ui/config.qml:168
+#: package/contents/ui/config.qml:177
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Höfundur:"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:196
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Opna möppu sem skráin er í"
 
-#: package/contents/ui/config.qml:191
+#: package/contents/ui/config.qml:200
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

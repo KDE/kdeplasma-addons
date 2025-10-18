@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-29 00:40+0000\n"
+"POT-Creation-Date: 2025-10-18 00:43+0000\n"
 "PO-Revision-Date: 2024-08-30 17:20+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -17,61 +17,61 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: package/contents/ui/config.qml:49
+#: package/contents/ui/config.qml:58
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Positionar:"
 
-#: package/contents/ui/config.qml:52
+#: package/contents/ui/config.qml:61
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "Scalate e Taliate"
 
-#: package/contents/ui/config.qml:56
+#: package/contents/ui/config.qml:65
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Scalate"
 
-#: package/contents/ui/config.qml:60
+#: package/contents/ui/config.qml:69
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
 msgstr "Scalate, manteni le proportiones"
 
-#: package/contents/ui/config.qml:64
+#: package/contents/ui/config.qml:73
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Centrate"
 
-#: package/contents/ui/config.qml:68
+#: package/contents/ui/config.qml:77
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Tegulate"
 
-#: package/contents/ui/config.qml:89
+#: package/contents/ui/config.qml:98
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Color de fundo:"
 
-#: package/contents/ui/config.qml:90
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Selige le color de fundo"
 
-#: package/contents/ui/config.qml:94
+#: package/contents/ui/config.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Fornitor (Provider):"
 
-#: package/contents/ui/config.qml:113
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -82,37 +82,37 @@ msgstr ""
 "sensibile o detestabile. Usa prudentia si iste imagines essera monstrate in "
 "publico."
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:131
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Actualisa quando usa connexion de rete misurate (metered)"
 
-#: package/contents/ui/config.qml:137
+#: package/contents/ui/config.qml:146
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Pictura de hodie:"
 
-#: package/contents/ui/config.qml:153
+#: package/contents/ui/config.qml:162
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Titulo:"
 
-#: package/contents/ui/config.qml:168
+#: package/contents/ui/config.qml:177
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Autor:"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:196
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Aperi dossier continente"
 
-#: package/contents/ui/config.qml:191
+#: package/contents/ui/config.qml:200
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

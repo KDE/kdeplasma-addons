@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-29 00:40+0000\n"
+"POT-Creation-Date: 2025-10-18 00:43+0000\n"
 "PO-Revision-Date: 2024-09-01 15:22+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -19,61 +19,61 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/ui/config.qml:49
+#: package/contents/ui/config.qml:58
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Plassering:"
 
-#: package/contents/ui/config.qml:52
+#: package/contents/ui/config.qml:61
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "Skalert og avskore"
 
-#: package/contents/ui/config.qml:56
+#: package/contents/ui/config.qml:65
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Skalert"
 
-#: package/contents/ui/config.qml:60
+#: package/contents/ui/config.qml:69
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
 msgstr "Skalert, behald storleiksforhold"
 
-#: package/contents/ui/config.qml:64
+#: package/contents/ui/config.qml:73
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Sentrert"
 
-#: package/contents/ui/config.qml:68
+#: package/contents/ui/config.qml:77
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Jamsides"
 
-#: package/contents/ui/config.qml:89
+#: package/contents/ui/config.qml:98
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Bakgrunnsfarge:"
 
-#: package/contents/ui/config.qml:90
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Vel bakgrunnsfarge"
 
-#: package/contents/ui/config.qml:94
+#: package/contents/ui/config.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Leverandør:"
 
-#: package/contents/ui/config.qml:113
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -83,37 +83,37 @@ msgstr ""
 "Denne leverandøren av bakgrunns­bilete filtrerer ikkje ut potensielt "
 "støytande bilete. Ver varsam dersom bileta skal visast offentleg."
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:131
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Oppdater òg ved bruk på forbruksmålt nettverkstillkopling"
 
-#: package/contents/ui/config.qml:137
+#: package/contents/ui/config.qml:146
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Dagens bilete:"
 
-#: package/contents/ui/config.qml:153
+#: package/contents/ui/config.qml:162
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Tittel:"
 
-#: package/contents/ui/config.qml:168
+#: package/contents/ui/config.qml:177
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Opphavsperson:"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:196
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Opna foreldermappa"
 
-#: package/contents/ui/config.qml:191
+#: package/contents/ui/config.qml:200
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."

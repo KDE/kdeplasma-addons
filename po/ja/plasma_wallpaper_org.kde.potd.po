@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2024-08-29 00:40+0000\n"
+"POT-Creation-Date: 2025-10-18 00:43+0000\n"
 "PO-Revision-Date: 2025-03-24 21:36+0900\n"
 "Last-Translator: Ryuichi Yamada <ryuichi_ya220@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -17,61 +17,61 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Generator: Lokalize 24.12.3\n"
 
-#: package/contents/ui/config.qml:49
+#: package/contents/ui/config.qml:58
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "配置:"
 
-#: package/contents/ui/config.qml:52
+#: package/contents/ui/config.qml:61
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "拡大/縮小と切り取り"
 
-#: package/contents/ui/config.qml:56
+#: package/contents/ui/config.qml:65
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "拡大/縮小"
 
-#: package/contents/ui/config.qml:60
+#: package/contents/ui/config.qml:69
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
 msgstr "拡大/縮小 (アスペクト比を保つ)"
 
-#: package/contents/ui/config.qml:64
+#: package/contents/ui/config.qml:73
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "中央に表示"
 
-#: package/contents/ui/config.qml:68
+#: package/contents/ui/config.qml:77
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "タイル状に表示"
 
-#: package/contents/ui/config.qml:89
+#: package/contents/ui/config.qml:98
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "背景色:"
 
-#: package/contents/ui/config.qml:90
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "背景色を選択"
 
-#: package/contents/ui/config.qml:94
+#: package/contents/ui/config.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "プロバイダ:"
 
-#: package/contents/ui/config.qml:113
+#: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -81,37 +81,37 @@ msgstr ""
 "この壁紙プロバイダは、不快に思われる可能性のある画像を除外しません。壁紙が公"
 "共の場で表示される可能性がある場合は、注意して使用してください。"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:131
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "従量課金制ネットワークを使用しているときも更新する"
 
-#: package/contents/ui/config.qml:137
+#: package/contents/ui/config.qml:146
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "今日の写真:"
 
-#: package/contents/ui/config.qml:153
+#: package/contents/ui/config.qml:162
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "タイトル:"
 
-#: package/contents/ui/config.qml:168
+#: package/contents/ui/config.qml:177
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "作者:"
 
-#: package/contents/ui/config.qml:187
+#: package/contents/ui/config.qml:196
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "保存されているフォルダを開く"
 
-#: package/contents/ui/config.qml:191
+#: package/contents/ui/config.qml:200
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
