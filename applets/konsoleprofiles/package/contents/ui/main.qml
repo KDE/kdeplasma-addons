@@ -111,6 +111,7 @@ PlasmoidItem {
                     text: model.name
 
                     Accessible.role: Accessible.Button
+                    Keys.onEnterPressed: openProfile()
 
                     onClicked: {
                         openProfile();
