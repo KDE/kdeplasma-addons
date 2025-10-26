@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-12 00:43+0000\n"
-"PO-Revision-Date: 2025-07-14 20:37+0400\n"
+"PO-Revision-Date: 2025-10-25 16:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -569,7 +569,7 @@ msgstr "سرعة الرّياح:"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
-msgstr "الظّهور:"
+msgstr "الرؤية:"
 
 #: qml/config/ConfigWeatherStation.qml:51
 #, kde-format
