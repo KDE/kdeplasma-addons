@@ -3,6 +3,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick 2.2
 
@@ -12,6 +13,7 @@ import org.kde.plasma.plasmoid 2.0
 
 import org.kde.draganddrop 2.0 as DragAndDrop
 
+import plasma.applet.org.kde.plasma.quicklaunch
 import "layout.js" as LayoutManager
 
 Item {
@@ -20,6 +22,7 @@ Item {
     property bool dragging: false
     property alias popupModel : popupModel
     property alias listView: listView
+    required property Logic logic
     required property UrlModel launcherModel
 
     width: LayoutManager.popupItemWidth()
@@ -83,7 +86,9 @@ Item {
         delegate: IconItem {
             isPopupItem: true
             popupModel: popupModel
-            launcherModel: launcherModel
+            launcherModel: popup.launcherModel
+            grid: null
+            logic: popup.logic
         }
 
         highlight: PlasmaExtras.Highlight {}

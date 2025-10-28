@@ -168,6 +168,7 @@ PlasmoidItem {
             mainItem: Popup {
                 Keys.onEscapePressed: popup.visible = false
                 launcherModel: launcherModel
+                logic: logic
             }
         }
 
