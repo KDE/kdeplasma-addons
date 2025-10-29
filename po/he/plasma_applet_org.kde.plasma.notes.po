@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-06-04 00:44+0000\n"
-"PO-Revision-Date: 2025-04-05 14:55+0300\n"
+"PO-Revision-Date: 2025-10-28 15:18+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: package/contents/config/config.qml:13
 #, kde-format
@@ -40,42 +40,42 @@ msgstr "גודל גופן כתב:"
 #: package/contents/ui/configAppearance.qml:74
 #, kde-format
 msgid "A white sticky note"
-msgstr "פתק דביק לבן"
+msgstr "פתק נצמד לבן"
 
 #: package/contents/ui/configAppearance.qml:75
 #, kde-format
 msgid "A black sticky note"
-msgstr "פתק דביק שחור"
+msgstr "פתק נמצמד שחור"
 
 #: package/contents/ui/configAppearance.qml:76
 #, kde-format
 msgid "A red sticky note"
-msgstr "פתק דביק אדום"
+msgstr "פתק נצמד אדום"
 
 #: package/contents/ui/configAppearance.qml:77
 #, kde-format
 msgid "An orange sticky note"
-msgstr "פתק דביק כתום"
+msgstr "פתק נצמד כתום"
 
 #: package/contents/ui/configAppearance.qml:78
 #, kde-format
 msgid "A yellow sticky note"
-msgstr "פתק דביק צהוב"
+msgstr "פתק נצמד צהוב"
 
 #: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgid "A green sticky note"
-msgstr "פתק דביק ירוק"
+msgstr "פתק נצמד ירוק"
 
 #: package/contents/ui/configAppearance.qml:80
 #, kde-format
 msgid "A blue sticky note"
-msgstr "פתק דביק כחול"
+msgstr "פתק נצמד כחול"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format
 msgid "A pink sticky note"
-msgstr "פתק דביק סגול"
+msgstr "פתק נצמד סגול"
 
 #: package/contents/ui/configAppearance.qml:82
 #, kde-format
