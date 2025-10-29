@@ -4,24 +4,24 @@
 # david <vertigo.rus@gmail.com>, 2008.
 # elkana bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2023-01-05 00:49+0000\n"
-"PO-Revision-Date: 2017-05-16 06:55-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-10-28 15:18+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 25.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "מראה"
@@ -29,144 +29,139 @@ msgstr "מראה"
 #: package/contents/ui/configAppearance.qml:30
 #, kde-format
 msgid "%1pt"
-msgstr ""
+msgstr "%1 נק׳"
 
 #: package/contents/ui/configAppearance.qml:36
 #, kde-format
 msgid "Text font size:"
-msgstr ""
+msgstr "גודל גופן כתב:"
 
 #: package/contents/ui/configAppearance.qml:41
 #, kde-format
 msgid "Background color"
-msgstr ""
+msgstr "צבע רקע"
 
 #: package/contents/ui/configAppearance.qml:77
 #, kde-format
 msgid "A white sticky note"
-msgstr "פתק דביק לבן"
+msgstr "פתק נצמד לבן"
 
 #: package/contents/ui/configAppearance.qml:78
 #, kde-format
 msgid "A black sticky note"
-msgstr "פתק דביק שחור"
+msgstr "פתק נמצמד שחור"
 
 #: package/contents/ui/configAppearance.qml:79
 #, kde-format
 msgid "A red sticky note"
-msgstr "פתק דביק אדום"
+msgstr "פתק נצמד אדום"
 
 #: package/contents/ui/configAppearance.qml:80
 #, kde-format
 msgid "An orange sticky note"
-msgstr "פתק דביק כתום"
+msgstr "פתק נצמד כתום"
 
 #: package/contents/ui/configAppearance.qml:81
 #, kde-format
 msgid "A yellow sticky note"
-msgstr "פתק דביק צהוב"
+msgstr "פתק נצמד צהוב"
 
 #: package/contents/ui/configAppearance.qml:82
 #, kde-format
 msgid "A green sticky note"
-msgstr "פתק דביק ירוק"
+msgstr "פתק נצמד ירוק"
 
 #: package/contents/ui/configAppearance.qml:83
 #, kde-format
 msgid "A blue sticky note"
-msgstr "פתק דביק כחול"
+msgstr "פתק נצמד כחול"
 
 #: package/contents/ui/configAppearance.qml:84
 #, kde-format
 msgid "A pink sticky note"
-msgstr "פתק דביק סגול"
+msgstr "פתק נצמד סגול"
 
 #: package/contents/ui/configAppearance.qml:85
 #, kde-format
 msgid "A translucent sticky note"
-msgstr "פתק דביק שקוף"
+msgstr "פתק נצמד שקוף למחצה"
 
 #: package/contents/ui/configAppearance.qml:86
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note"
+#, kde-format
 msgid "A translucent sticky note with light text"
-msgstr "פתק דביק שקוף"
+msgstr "פתק דביק שקוף עם טקסט בהיר"
 
 #: package/contents/ui/main.qml:255
 #, kde-format
 msgid "Undo"
-msgstr ""
+msgstr "החזרה"
 
 #: package/contents/ui/main.qml:263
 #, kde-format
 msgid "Redo"
-msgstr ""
+msgstr "ביצוע מחדש"
 
 #: package/contents/ui/main.qml:273
 #, kde-format
 msgid "Cut"
-msgstr ""
+msgstr "גזירה"
 
 #: package/contents/ui/main.qml:281
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "העתקה"
 
 #: package/contents/ui/main.qml:289
 #, kde-format
 msgid "Paste"
-msgstr ""
+msgstr "הדבקה"
 
 #: package/contents/ui/main.qml:295
 #, kde-format
 msgid "Paste with Full Formatting"
-msgstr ""
+msgstr "הדבקה עם עיצוב מלא"
 
 #: package/contents/ui/main.qml:302
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr ""
+msgstr "הסרת עיצוב"
 
 #: package/contents/ui/main.qml:317
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "מחיקה"
 
 #: package/contents/ui/main.qml:324
 #, kde-format
 msgid "Clear"
-msgstr ""
+msgstr "פינוי"
 
 #: package/contents/ui/main.qml:334
 #, kde-format
 msgid "Select All"
-msgstr ""
+msgstr "לבחור הכול"
 
 #: package/contents/ui/main.qml:462
-#, fuzzy, kde-format
-#| msgid "Bold"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "מודגש"
 
 #: package/contents/ui/main.qml:474
-#, fuzzy, kde-format
-#| msgid "Italic"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "נטוי"
 
 #: package/contents/ui/main.qml:486
-#, fuzzy, kde-format
-#| msgid "Underline"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
-msgstr "מתחת לשורה"
+msgstr "קו תחתי"
 
 #: package/contents/ui/main.qml:498
-#, fuzzy, kde-format
-#| msgid "Strikethrough"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "קו חוצה"
@@ -174,82 +169,72 @@ msgstr "קו חוצה"
 #: package/contents/ui/main.qml:572
 #, kde-format
 msgid "Discard this note?"
-msgstr ""
+msgstr "להתעלם מההערה הזאת?"
 
 #: package/contents/ui/main.qml:573
 #, kde-format
 msgid "Are you sure you want to discard this note?"
-msgstr ""
+msgstr "להתעלם מההערה הזאת?"
 
 #: package/contents/ui/main.qml:586
-#, fuzzy, kde-format
-#| msgid "White"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "לבן"
 
 #: package/contents/ui/main.qml:587
-#, fuzzy, kde-format
-#| msgid "Black"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "שחור"
 
 #: package/contents/ui/main.qml:588
-#, fuzzy, kde-format
-#| msgid "Red"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "אדום"
 
 #: package/contents/ui/main.qml:589
-#, fuzzy, kde-format
-#| msgid "Orange"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "כתום"
 
 #: package/contents/ui/main.qml:590
-#, fuzzy, kde-format
-#| msgid "Yellow"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "צהוב"
 
 #: package/contents/ui/main.qml:591
-#, fuzzy, kde-format
-#| msgid "Green"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "ירוק"
 
 #: package/contents/ui/main.qml:592
-#, fuzzy, kde-format
-#| msgid "Blue"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "כחול"
 
 #: package/contents/ui/main.qml:593
-#, fuzzy, kde-format
-#| msgid "Pink"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "ורוד"
 
 #: package/contents/ui/main.qml:594
-#, fuzzy, kde-format
-#| msgid "Translucent"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent"
-msgstr "שקוף חלקית"
+msgstr "שקוף למחצה"
 
 #: package/contents/ui/main.qml:595
-#, fuzzy, kde-format
-#| msgid "Translucent"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Translucent Light"
-msgstr "שקוף חלקית"
+msgstr "שקוף למחצה לבן"
 
 #~ msgid "Toggle text format options"
 #~ msgstr "אפשרויות מראה טקסט"

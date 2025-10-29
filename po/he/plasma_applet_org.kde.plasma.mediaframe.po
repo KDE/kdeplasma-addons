@@ -3,189 +3,176 @@
 #
 # Elkana Bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-10-03 00:49+0000\n"
-"PO-Revision-Date: 2017-05-16 06:55-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@kde.org>\n"
+"PO-Revision-Date: 2025-10-28 15:17+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "כללי"
 
 #: package/contents/config/config.qml:18
-#, fuzzy, kde-format
-#| msgid "Paths"
+#, kde-format
 msgctxt "@title"
 msgid "Paths"
 msgstr "נתיבים"
 
 #: package/contents/ui/ConfigGeneral.qml:48
-#, fuzzy, kde-format
-#| msgid "Change picture every"
+#, kde-format
 msgid "Change picture every:"
-msgstr "שנה תמונה כל"
+msgstr "להחליף תמונה כל:"
 
 #: package/contents/ui/ConfigGeneral.qml:65
 #, kde-format
 msgid "Hours"
-msgstr ""
+msgstr "שעות"
 
 #: package/contents/ui/ConfigGeneral.qml:79
 #, kde-format
 msgid "Minutes"
-msgstr ""
+msgstr "דקות"
 
 #: package/contents/ui/ConfigGeneral.qml:93
 #, kde-format
 msgid "Seconds"
-msgstr ""
+msgstr "שניות"
 
 #: package/contents/ui/ConfigGeneral.qml:103
-#, fuzzy, kde-format
-#| msgid "Fill mode"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
-msgstr "מצב מילוי"
+msgstr "מצב מילוי תמונה:"
 
 #: package/contents/ui/ConfigGeneral.qml:110
-#, fuzzy, kde-format
-#| msgid "Stretch"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
-msgstr "מתח"
+msgstr "מתיחה"
 
 #: package/contents/ui/ConfigGeneral.qml:111
-#, fuzzy, kde-format
-#| msgid "The image is scaled to fit"
+#, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
-msgstr "התמונה תשונה כדי להתאים"
+msgstr "התמונה מותאמת לגודל המסגרת"
 
 #: package/contents/ui/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
-msgstr ""
+msgstr "שימוש התאמת יחס"
 
 #: package/contents/ui/ConfigGeneral.qml:116
-#, fuzzy, kde-format
-#| msgid "The image is scaled to fit"
+#, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
-msgstr "התמונה תשונה כדי להתאים"
+msgstr "התמונה מותאמת כך שתתאים באופן אחיד ללא חיתוך"
 
 #: package/contents/ui/ConfigGeneral.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
-msgstr ""
+msgstr "שימור חיתוך יחס"
 
 #: package/contents/ui/ConfigGeneral.qml:121
-#, fuzzy, kde-format
-#| msgid "The image is scaled to fit"
+#, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
-msgstr "התמונה תשונה כדי להתאים"
+msgstr "התמונה מותאמת כך שתתאים באופן אחיד, תיחתך אם צריך"
 
 #: package/contents/ui/ConfigGeneral.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
-msgstr ""
+msgstr "ריצוף"
 
 #: package/contents/ui/ConfigGeneral.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
-msgstr ""
+msgstr "התמונה משוכפלת אופקית ואנכית"
 
 #: package/contents/ui/ConfigGeneral.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
-msgstr ""
+msgstr "ריצוף אנכי"
 
 #: package/contents/ui/ConfigGeneral.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
-msgstr ""
+msgstr "התמונה נמתחת אופקית ומרוצפת אנכית"
 
 #: package/contents/ui/ConfigGeneral.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
-msgstr ""
+msgstr "ריצוף אופקי"
 
 #: package/contents/ui/ConfigGeneral.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
-msgstr ""
+msgstr "התמונה נמתחת אנכית ומרוצפת אופקית"
 
 #: package/contents/ui/ConfigGeneral.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
-msgstr ""
+msgstr "ריפוד"
 
 #: package/contents/ui/ConfigGeneral.qml:141
-#, fuzzy, kde-format
-#| msgid "The image is scaled to fit"
+#, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
-msgstr "התמונה תשונה כדי להתאים"
+msgstr "התמונה לא תשתנה"
 
 #: package/contents/ui/ConfigGeneral.qml:186
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
-msgstr "כללי"
+msgstr "כללי:"
 
 #: package/contents/ui/ConfigGeneral.qml:187
-#, fuzzy, kde-format
-#| msgid "Randomize items"
+#, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
-msgstr "הראה באופן אקראי"
+msgstr "סדר אקראי"
 
 #: package/contents/ui/ConfigGeneral.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
-msgstr ""
+msgstr "להשהות את המצגת כשהסמן עובר מעל לתמונה"
 
 #: package/contents/ui/ConfigGeneral.qml:197
-#, fuzzy, kde-format
-#| msgid "Left click image opens in external viewer"
+#, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
-msgstr "לחיצה שמאלית על תמונה פותחת צופה חיצוני"
+msgstr "יש ללחוץ על תמונה כדי לפתוח אותה ביישום חיצוני"
 
 #: package/contents/ui/ConfigPaths.qml:49
-#, fuzzy, kde-format
-#| msgid "Choose files"
+#, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "בחירת קבצים"
 
 #: package/contents/ui/ConfigPaths.qml:75
-#, fuzzy, kde-format
-#| msgid "Choose a folder"
+#, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "בחירת תיקייה"
@@ -193,28 +180,25 @@ msgstr "בחירת תיקייה"
 #: package/contents/ui/ConfigPaths.qml:123
 #, kde-format
 msgid "Remove path"
-msgstr ""
+msgstr "הסרת נתיב"
 
 #: package/contents/ui/ConfigPaths.qml:137
-#, fuzzy, kde-format
-#| msgid "Add folder..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
-msgstr "הוסף תיקיה..."
+msgstr "הוספת תיקיה…"
 
 #: package/contents/ui/ConfigPaths.qml:143
-#, fuzzy, kde-format
-#| msgid "Add files..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
-msgstr "הוסף קבצים..."
+msgstr "הוספת קבצים…"
 
 #: package/contents/ui/main.qml:438
-#, fuzzy, kde-format
-#| msgid "Configure plasmoid..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Configure…"
-msgstr "הגדרת plasmoid..."
+msgstr "הגדרת פלזמויד…"
 
 #, fuzzy
 #~| msgid "Background frame"

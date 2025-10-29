@@ -3,251 +3,248 @@
 #
 # David Shalmiev <vertigo.rus@gmail.com>, 2008.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
+# SPDX-FileCopyrightText: 2025 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-07-27 00:48+0000\n"
-"PO-Revision-Date: 2017-05-16 06:55-0400\n"
-"Last-Translator: Copied by Zanata <copied-by-zanata@zanata.org>\n"
-"Language-Team: Hebrew <kde-i18n-doc@lists.kde.org>\n"
+"PO-Revision-Date: 2025-10-28 15:21+0200\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Zanata 3.9.6\n"
+"X-Generator: Lokalize 25.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: comic.cpp:87
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
-msgstr ""
+msgstr "הלשונית ה&באה עם רצועה חדשה"
 
 #: comic.cpp:93
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
-msgstr "&עבור לרצועה הראשונה"
+msgstr "קפיצה לרצועה ה&ראשונה"
 
 #: comic.cpp:97
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
-msgstr "&עבור לרצועה העדכנית ביותר"
+msgstr "קפיצה לרצועה ה&נוכחית"
 
 #: comic.cpp:101
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
-msgstr "&עבור לרצועה הראשונה"
+msgstr "קפיצה לרצועה…"
 
 #: comic.cpp:105
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
-msgstr ""
+msgstr "ביקור באתר"
 
 #: comic.cpp:109
 #, kde-format
 msgctxt "@action:inmenu %1 is the name of a web browser"
 msgid "View in %1"
-msgstr ""
+msgstr "הצגה ב־%1"
 
 #: comic.cpp:117
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
-msgstr ""
+msgstr "ביקור באתר ה&חנות"
 
 #: comic.cpp:122
-#, fuzzy, kde-format
-#| msgid "&Save Comic As..."
+#, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr "&שמור קומיקס בשם..."
+msgstr "&שמירת קומיקס בשם…"
 
 #: comic.cpp:127
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
-msgstr ""
+msgstr "גודל ב&פועל"
 
 #: comic.cpp:135
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
-msgstr ""
+msgstr "א&חסון המקום הנוכחי"
 
 #: comicdata.cpp:86
 #, kde-format
 msgctxt "an abbreviation for Number"
 msgid "# %1"
-msgstr ""
+msgstr "מס׳ %1"
 
 #: package/contents/config/config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr "הגדרות כלליות"
+msgstr "כללי"
 
 #: package/contents/config/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "מראה"
 
 #: package/contents/config/config.qml:23
 #, kde-format
 msgctxt "@title"
 msgid "Advanced"
-msgstr ""
+msgstr "מתקדם"
 
 #: package/contents/ui/ComicBottomInfo.qml:60
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
-msgstr "&עבור לרצועה הראשונה"
+msgstr "קפיצה לרצועה…"
 
 #: package/contents/ui/ComicBottomInfo.qml:100
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
-msgstr ""
+msgstr "ביקור באתר הקומיקס"
 
 #: package/contents/ui/configAdvanced.qml:36
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Comic cache:"
-msgstr "קומיקס: "
+msgstr "מטמון קומיקס:"
 
 #: package/contents/ui/configAdvanced.qml:45
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "strip per comic"
 msgid_plural "strips per comic"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "רצועה לקומיקס"
+msgstr[1] "רצועות לקומיקס"
 
 #: package/contents/ui/configAdvanced.qml:51
 #, kde-format
 msgctxt "@option:check"
 msgid "Display error when downloading comic fails"
-msgstr ""
+msgstr "הצגת שגיאה כשהורדת קומיקס נכשלת"
 
 #: package/contents/ui/configAppearance.qml:43
 #, kde-format
 msgctxt "Heading for showing various elements of a comic"
 msgid "Show:"
-msgstr ""
+msgstr "להציג:"
 
 #: package/contents/ui/configAppearance.qml:44
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic title"
-msgstr "הצג כותרת הקומיקס"
+msgstr "כותרת קומיקס"
 
 #: package/contents/ui/configAppearance.qml:50
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic identifier"
-msgstr "הצג זיהוי (תאריך) הקומיקס"
+msgstr "זיהוי (תאריך) הקומיקס"
 
 #: package/contents/ui/configAppearance.qml:56
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic author"
-msgstr "הצג שם יוצר הקומיקס"
+msgstr "יוצר/ת הקומיקס"
 
 #: package/contents/ui/configAppearance.qml:62
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@option:check"
 msgid "Comic URL"
-msgstr "קומיקס: "
+msgstr "כתובת קומיקס"
 
 #: package/contents/ui/configAppearance.qml:72
 #, kde-format
 msgid "Show navigation buttons:"
-msgstr ""
+msgstr "להציג כפתורי ניווט:"
 
 #: package/contents/ui/configAppearance.qml:73
 #, kde-format
 msgctxt "@option:check"
 msgid "Always"
-msgstr ""
+msgstr "תמיד"
 
 #: package/contents/ui/configAppearance.qml:80
 #, kde-format
 msgctxt "@option:check"
 msgid "Only on hover"
-msgstr ""
+msgstr "רק בעת ריחוף מעל"
 
 #: package/contents/ui/configGeneral.qml:52
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@title:group"
 msgid "Comics:"
-msgstr "קומיקס: "
+msgstr "קומיקס:"
 
 #: package/contents/ui/configGeneral.qml:72
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Comics…"
-msgstr "התקנת קומיקס חדש"
+msgstr "הורדת קומיקס חדש…"
 
 #: package/contents/ui/configGeneral.qml:83
 #, kde-format
 msgctxt "@option:check"
 msgid "Middle-click on comic to display at original size"
-msgstr ""
+msgstr "לחיצה אמצעית על קומיקס תציג את גודלו המקורי"
 
 #: package/contents/ui/configGeneral.qml:92
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new plugins every:"
-msgstr ""
+msgstr "לבדוק אם יש תוספים חדשים כל:"
 
 #: package/contents/ui/configGeneral.qml:101
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "day"
 msgid_plural "days"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "יום"
+msgstr[1] "ימים"
 
 #: package/contents/ui/configGeneral.qml:106
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
-msgstr ""
+msgstr "לבדוק אם יש קומיקסים חדשים כל:"
 
 #: package/contents/ui/configGeneral.qml:115
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
+msgstr[0] "דקה"
+msgstr[1] "דקות"
 
 #: stripselector.cpp:31 stripselector.cpp:101
-#, fuzzy, kde-format
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@title:window"
 msgid "Go to Strip"
-msgstr "עבור לרצועה"
+msgstr "מעבר לרצועה"
 
 #: stripselector.cpp:39
-#, fuzzy, kde-format
-#| msgid "&Strip Number:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "&Strip number:"
-msgstr "מספר &הרצועה"
+msgstr "מספר ה&רצועה:"
 
 #: stripselector.cpp:102
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
-msgstr "הצג זיהוי (תאריך) הקומיקס"
+msgstr "מזהה הרצועה:"
 
 #, fuzzy
 #~ msgctxt "@action"
