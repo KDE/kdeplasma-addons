@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:43+0000\n"
+"POT-Creation-Date: 2025-10-30 02:41+0000\n"
 "PO-Revision-Date: 2022-02-05 22:48+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -105,17 +105,17 @@ msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Adde lanceatores per Traher e Deponer o per usar le contexto de menu."
 
-#: main.qml:185
+#: main.qml:186
 #, kde-format
 msgid "Hide icons"
 msgstr "Cela icones"
 
-#: main.qml:185
+#: main.qml:186
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Monstra icones celate"
 
-#: main.qml:288
+#: main.qml:289
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:43+0000\n"
+"POT-Creation-Date: 2025-10-30 02:41+0000\n"
 "PO-Revision-Date: 2016-03-20 15:25+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -121,17 +121,17 @@ msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Додајте покретаче превлачењем или кроз контекстни мени."
 
-#: main.qml:185
+#: main.qml:186
 #, kde-format
 msgid "Hide icons"
 msgstr "Сакриј иконице"
 
-#: main.qml:185
+#: main.qml:186
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Прикажи скривене иконице"
 
-#: main.qml:288
+#: main.qml:289
 #, fuzzy, kde-format
 #| msgid "Add Launcher..."
 msgctxt "@action"

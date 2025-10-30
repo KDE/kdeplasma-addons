@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:43+0000\n"
+"POT-Creation-Date: 2025-10-30 02:41+0000\n"
 "PO-Revision-Date: 2022-02-04 08:36+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -109,17 +109,17 @@ msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr ""
 "Zaganjalnike dodajate z vlečenjem in spuščanjem ali pa z uporabo menija."
 
-#: main.qml:185
+#: main.qml:186
 #, kde-format
 msgid "Hide icons"
 msgstr "Skrij ikone"
 
-#: main.qml:185
+#: main.qml:186
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Prikaži skrite ikone"
 
-#: main.qml:288
+#: main.qml:289
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

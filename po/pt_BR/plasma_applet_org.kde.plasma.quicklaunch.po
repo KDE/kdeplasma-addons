@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:43+0000\n"
+"POT-Creation-Date: 2025-10-30 02:41+0000\n"
 "PO-Revision-Date: 2022-03-04 09:21-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -108,17 +108,17 @@ msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr ""
 "Adicionar lançadores com arrastar e soltar ou usando o menu de contexto."
 
-#: main.qml:185
+#: main.qml:186
 #, kde-format
 msgid "Hide icons"
 msgstr "Ocultar ícones"
 
-#: main.qml:185
+#: main.qml:186
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Mostrar ícones ocultos"
 
-#: main.qml:288
+#: main.qml:289
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

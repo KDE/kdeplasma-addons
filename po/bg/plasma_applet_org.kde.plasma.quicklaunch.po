@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:43+0000\n"
+"POT-Creation-Date: 2025-10-30 02:41+0000\n"
 "PO-Revision-Date: 2024-05-13 22:47+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -105,17 +105,17 @@ msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Добавете стартери чрез влачене и пускане или чрез контекстното меню."
 
-#: main.qml:185
+#: main.qml:186
 #, kde-format
 msgid "Hide icons"
 msgstr "Скриване на икони"
 
-#: main.qml:185
+#: main.qml:186
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Показване на скрити икони"
 
-#: main.qml:288
+#: main.qml:289
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"
