@@ -77,6 +77,16 @@ PlasmoidItem {
         onTriggered: mainTextArea.forceActiveFocus()
     }
 
+    Timer {
+        id: throttledTextSaver
+        interval: 10000
+        repeat: false
+        // Trigger once after being created, to ensure any newly-pasted notes
+        // have their text saved
+        running: true
+        onTriggered: note.save(mainTextArea.text)
+    }
+
     Connections {
         target: Plasmoid
         function onActivated() {
@@ -207,6 +217,11 @@ PlasmoidItem {
                         selectAll();
                         documentHandler.fontSize = cfgFontPointSize;
                         select(start, end);
+                    }
+
+                    // Save semi-continuously to prevent possible data loss
+                    onTextChanged: {
+                        throttledTextSaver.restart();
                     }
 
                     // update the note if the source changes, but only if the user isn't editing it currently
