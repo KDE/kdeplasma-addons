@@ -1,0 +1,42 @@
+{
+    "KPackageStructure": "Plasma/Wallpaper",
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "vlad.zahorodnii@kde.org",
+                "Name": "Vlad Zahorodnii"
+            }
+        ],
+        "Category": "",
+        "Description": "Wallpaper view for tiled images",
+        "Icon": "preferences-desktop-wallpaper",
+        "Id": "org.kde.tiled",
+        "License": "GPLv2+",
+        "MimeTypes": [
+            "image/jpeg",
+            "image/png",
+            "image/svg+xml",
+            "image/svg+xml-compressed",
+            "image/bmp",
+            "image/webp",
+            "image/tiff"
+        ],
+        "Name": "Tiled",
+        "Website": "https://kde.org/plasma-desktop"
+    },
+    "Keywords": "",
+    "MimeType": "image/avif;image/gif;image/heif;image/jpeg;image/png;image/svg+xml;image/svg+xml-compressed;image/bmp;image/webp;image/tiff;",
+    "X-KDE-ParentApp": "org.kde.plasmashell",
+    "X-Plasma-DropMimeTypes": [
+        "image/avif",
+        "image/gif",
+        "image/heif",
+        "image/jpeg",
+        "image/png",
+        "image/svg+xml",
+        "image/svg+xml-compressed",
+        "image/bmp",
+        "image/webp",
+        "image/tiff"
+    ]
+}
