@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-04 00:44+0000\n"
+"POT-Creation-Date: 2025-10-31 00:43+0000\n"
 "PO-Revision-Date: 2025-09-06 22:27+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -86,152 +86,152 @@ msgstr "Permatomas lipnus lapelis"
 msgid "A transparent sticky note with light text"
 msgstr "Permatomas lipnus lapelis su šviesiu tekstu"
 
-#: package/contents/ui/main.qml:281
+#: package/contents/ui/main.qml:296
 #, kde-format
 msgid "Undo"
 msgstr "Atšaukti"
 
-#: package/contents/ui/main.qml:289
+#: package/contents/ui/main.qml:304
 #, kde-format
 msgid "Redo"
 msgstr "Grąžinti"
 
-#: package/contents/ui/main.qml:299
+#: package/contents/ui/main.qml:314
 #, kde-format
 msgid "Cut"
 msgstr "Iškirpti"
 
-#: package/contents/ui/main.qml:307
+#: package/contents/ui/main.qml:322
 #, kde-format
 msgid "Copy"
 msgstr "Kopijuoti"
 
-#: package/contents/ui/main.qml:315
+#: package/contents/ui/main.qml:330
 #, kde-format
 msgid "Paste"
 msgstr "Įdėti"
 
-#: package/contents/ui/main.qml:321
+#: package/contents/ui/main.qml:336
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "Įdėti su visu formatavimu"
 
-#: package/contents/ui/main.qml:328
+#: package/contents/ui/main.qml:343
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "Šalinti formatavimą"
 
-#: package/contents/ui/main.qml:343
+#: package/contents/ui/main.qml:358
 #, kde-format
 msgid "Delete"
 msgstr "Ištrinti"
 
-#: package/contents/ui/main.qml:350
+#: package/contents/ui/main.qml:365
 #, kde-format
 msgid "Clear"
 msgstr "Išvalyti"
 
-#: package/contents/ui/main.qml:360
+#: package/contents/ui/main.qml:375
 #, kde-format
 msgid "Select All"
 msgstr "Pažymėti viską"
 
-#: package/contents/ui/main.qml:490
+#: package/contents/ui/main.qml:505
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Pusjuodis"
 
-#: package/contents/ui/main.qml:503
+#: package/contents/ui/main.qml:518
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Kursyvas"
 
-#: package/contents/ui/main.qml:516
+#: package/contents/ui/main.qml:531
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Pabrauktas"
 
-#: package/contents/ui/main.qml:529
+#: package/contents/ui/main.qml:544
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Perbrauktas"
 
-#: package/contents/ui/main.qml:603
+#: package/contents/ui/main.qml:618
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
 msgstr "Palikti atvertą"
 
-#: package/contents/ui/main.qml:632
+#: package/contents/ui/main.qml:647
 #, kde-format
 msgid "Discard this note?"
 msgstr "Atmesti šį lapelį?"
 
-#: package/contents/ui/main.qml:633
+#: package/contents/ui/main.qml:648
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Ar tikrai norite atmesti šį lapelį?"
 
-#: package/contents/ui/main.qml:658
+#: package/contents/ui/main.qml:673
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Baltas"
 
-#: package/contents/ui/main.qml:659
+#: package/contents/ui/main.qml:674
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Juodas"
 
-#: package/contents/ui/main.qml:660
+#: package/contents/ui/main.qml:675
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Raudonas"
 
-#: package/contents/ui/main.qml:661
+#: package/contents/ui/main.qml:676
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Oranžinis"
 
-#: package/contents/ui/main.qml:662
+#: package/contents/ui/main.qml:677
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Geltonas"
 
-#: package/contents/ui/main.qml:663
+#: package/contents/ui/main.qml:678
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Žalias"
 
-#: package/contents/ui/main.qml:664
+#: package/contents/ui/main.qml:679
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Mėlynas"
 
-#: package/contents/ui/main.qml:665
+#: package/contents/ui/main.qml:680
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Rožinis"
 
-#: package/contents/ui/main.qml:666
+#: package/contents/ui/main.qml:681
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "Permatomas"
 
-#: package/contents/ui/main.qml:670
+#: package/contents/ui/main.qml:685
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
