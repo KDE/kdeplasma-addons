@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-12 00:43+0000\n"
+"POT-Creation-Date: 2025-11-01 00:47+0000\n"
 "PO-Revision-Date: 2025-05-18 20:32+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -713,7 +713,7 @@ msgstr ""
 "állomás szolgáltatójának kiszolgálóhibája miatt. Kérjük, ellenőrizze újra "
 "később."
 
-#: qml/main.qml:81 qml/TopPanel.qml:220
+#: qml/main.qml:81 qml/TopPanel.qml:221
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"

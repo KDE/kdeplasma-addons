@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-12 00:43+0000\n"
+"POT-Creation-Date: 2025-11-01 00:47+0000\n"
 "PO-Revision-Date: 2024-12-20 22:01+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -710,7 +710,7 @@ msgstr ""
 "संजाल-अनुरोधस्य समयः समाप्तः, सम्भवतः मौसम-स्थानक-प्रदातुः सर्वर-विच्छेदस्य कारणतः । "
 "पश्चात् पुनः पश्यन्तु।"
 
-#: qml/main.qml:81 qml/TopPanel.qml:220
+#: qml/main.qml:81 qml/TopPanel.qml:221
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"

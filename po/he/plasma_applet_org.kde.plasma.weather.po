@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-12 00:43+0000\n"
+"POT-Creation-Date: 2025-11-01 00:47+0000\n"
 "PO-Revision-Date: 2025-08-07 10:07+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -696,7 +696,7 @@ msgstr ""
 "הזמן שהוקצב לבקשת הרשת הסתיים, כנראה שהשרת אצל ספק מזג האוויר השתבש. נא "
 "לנסות שוב מאוחר יותר."
 
-#: qml/main.qml:81 qml/TopPanel.qml:220
+#: qml/main.qml:81 qml/TopPanel.qml:221
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"

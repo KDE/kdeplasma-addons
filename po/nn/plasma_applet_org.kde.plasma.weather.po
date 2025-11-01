@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-12 00:43+0000\n"
+"POT-Creation-Date: 2025-11-01 00:47+0000\n"
 "PO-Revision-Date: 2024-09-01 15:22+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -711,7 +711,7 @@ msgstr ""
 "Opplevde tidsavbrot ved forsøk på å henta vêrmeldinga. Ein grunn kan vera "
 "mellombels straumstans på stasjonen. Prøv då på nytt seinare."
 
-#: qml/main.qml:81 qml/TopPanel.qml:220
+#: qml/main.qml:81 qml/TopPanel.qml:221
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"

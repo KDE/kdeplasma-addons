@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-12 00:43+0000\n"
+"POT-Creation-Date: 2025-11-01 00:47+0000\n"
 "PO-Revision-Date: 2025-09-09 10:25+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -699,7 +699,7 @@ msgstr ""
 "wegen eines Serverausfalls beim Wetterstationsanbieter. Versuchen Sie es "
 "später noch einmal."
 
-#: qml/main.qml:81 qml/TopPanel.qml:220
+#: qml/main.qml:81 qml/TopPanel.qml:221
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
