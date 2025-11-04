@@ -10,7 +10,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2022-02-03 00:45+0000\n"
 "PO-Revision-Date: 2021-12-13 21:40+0100\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -107,7 +107,7 @@ msgstr "L'URL vient d'être partagée"
 #, kde-format
 msgctxt "@option:check"
 msgid "Don't show this dialog, copy automatically."
-msgstr "Ne plus afficher cette boîte de dialogue. Copier automatiquement."
+msgstr "Ne plus afficher cette boite de dialogue. Copier automatiquement."
 
 #: contents/ui/ShowUrlDialog.qml:56
 #, kde-format
