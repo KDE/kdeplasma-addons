@@ -106,7 +106,7 @@ msgstr "Toujours visible sur les bords"
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
-msgstr "Apparaître au centre lors du survol"
+msgstr "Apparaitre au centre lors du survol"
 
 #: qml/configBehavior.qml:70
 #, kde-format

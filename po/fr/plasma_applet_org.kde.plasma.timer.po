@@ -138,7 +138,7 @@ msgstr "Ajouter"
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr ""
-"Si vous avez des compteurs prédéfinis ici, il devraient apparaître dans le "
+"Si vous avez des compteurs prédéfinis ici, il devraient apparaitre dans le "
 "menu contextuel du composant graphique."
 
 #: configTimes.qml:120
