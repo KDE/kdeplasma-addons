@@ -18,7 +18,7 @@
 #include <QDBusConnection>
 #include <QDBusMessage>
 #include <QFileDialog>
-#include <qstringliteral.h>
+#include <QStringLiteral>
 
 K_PLUGIN_CLASS(CubeEffectConfig)
 

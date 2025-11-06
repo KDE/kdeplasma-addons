@@ -16,7 +16,7 @@
 #include <QStandardPaths>
 
 #include <KPackage/PackageLoader>
-#include <qloggingcategory.h>
+#include <QLoggingCategory>
 #include <qtdeprecationdefinitions.h>
 
 #include "cachedprovider.h"
