@@ -49,7 +49,7 @@ msgstr "%2 中的 %1"
 #, kde-format
 msgctxt "e.g.: 8 GiB free"
 msgid "%1 free"
-msgstr "%1 空闲"
+msgstr "剩余 %1"
 
 #: DiskQuota.cpp:249
 #, kde-format
