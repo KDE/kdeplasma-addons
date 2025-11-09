@@ -126,10 +126,16 @@ bool ForecastControl::setForecastLocation(const QString &provider, const QString
         m_forecastData.reset();
     }
 
+    if (provider.isEmpty() || place.isEmpty()) {
+        m_status = NeedsConfiguration;
+        return false;
+    }
+
     m_forecastData = m_weatherDataMonitor->getForecastData(provider, place);
 
     if (!m_forecastData) {
         qCDebug(WEATHER::CONTROLLER) << "ForecastControl: error when receiving new forecastData from weatherDataMonitor";
+        m_status = Timeout;
         return false;
     }
 
