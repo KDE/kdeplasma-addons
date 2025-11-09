@@ -31,7 +31,6 @@ Dependencies:
     'libraries/kirigami-addons': '@latest-kf6'
     'plasma/libplasma': '@same'
     'plasma/plasma-workspace': '@same'
-    'plasma/plasma5support': '@same'
  - 'on': ['Linux']
    'require':
     'sdk/selenium-webdriver-at-spi': '@latest-kf6'

@@ -44,7 +44,6 @@ find_package(Qt6 ${QT_MIN_VERSION} CONFIG REQUIRED
     Qml
     Widgets
     Test
-    Core5Compat
 )
 
 find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
@@ -69,11 +68,6 @@ find_package(KF6 ${KF6_MIN_VERSION} REQUIRED COMPONENTS
     Svg
 )
 
-find_package(Plasma5Support ${PROJECT_DEP_VERSION})
-set_package_properties(Plasma5Support PROPERTIES
-    PURPOSE "Required at runtime for a few applets"
-    TYPE RUNTIME
-)
 find_package(Plasma ${PROJECT_DEP_VERSION} REQUIRED)
 find_package(PlasmaQuick ${PROJECT_DEP_VERSION} REQUIRED)
 
