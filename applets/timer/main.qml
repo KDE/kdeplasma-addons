@@ -8,7 +8,6 @@ import QtQuick 2.15
 import org.kde.plasma.plasmoid 2.0
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.plasma5support 2.0 as P5Support
 import org.kde.kquickcontrolsaddons 2.0 as QtExtra
 import plasma.applet.org.kde.plasma.timer as TimerPlasmoid
 import org.kde.notification 1.0
