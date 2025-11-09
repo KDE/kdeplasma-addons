@@ -54,7 +54,7 @@ GridLayout {
     )
 
     Layout.minimumWidth: Math.max(
-        locationLabel.implicitWidth,
+        Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 25),
         (sideWidth + columnSpacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
     )
 
