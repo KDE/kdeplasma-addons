@@ -4,20 +4,21 @@
 #
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2015, 2016, 2019.
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2018, 2019, 2021, 2022.
+# SPDX-FileCopyrightText: 2025 Guilherme Marçal Silva <guimarcalsilva@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-30 00:43+0000\n"
-"PO-Revision-Date: 2022-03-04 09:21-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
-"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"PO-Revision-Date: 2025-11-08 21:10-0300\n"
+"Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
+"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 20.04.2\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: config.qml:12
 #, kde-format
@@ -82,13 +83,13 @@ msgstr "Iniciar %1"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
-msgstr "Adicionar lançador..."
+msgstr "Adicionar lançador…"
 
 #: IconItem.qml:275
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
-msgstr "Editar lançador..."
+msgstr "Editar lançador…"
 
 #: IconItem.qml:281
 #, kde-format
@@ -122,4 +123,4 @@ msgstr "Mostrar ícones ocultos"
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"
-msgstr "Adicionar lançador..."
+msgstr "Adicionar lançador…"

@@ -5,20 +5,21 @@
 # André Marcelo Alvarenga <alvarenga@kde.org>, 2008, 2009, 2010, 2011, 2016, 2018.
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2009, 2018, 2020, 2021, 2023.
 # Marcus Vinícius de Andrade Gama <marcus.gama@gmail.com>, 2010.
+# SPDX-FileCopyrightText: 2025 Guilherme Marçal Silva <guimarcalsilva@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_spellcheckrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-02-20 00:42+0000\n"
-"PO-Revision-Date: 2023-11-08 16:21-0300\n"
-"Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
+"PO-Revision-Date: 2025-11-08 21:10-0300\n"
+"Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: spellcheck.cpp:81 spellcheck_config.cpp:63 spellcheck_config.cpp:94
 #, kde-format
@@ -80,7 +81,7 @@ msgstr "Palavra de a&tivação:"
 #: spellcheck_config.ui:62
 #, kde-format
 msgid "Configure Dictionaries…"
-msgstr "Configurar dicionários..."
+msgstr "Configurar dicionários…"
 
 #~ msgid "No dictionary found, please install hspell"
 #~ msgstr "Nenhum dicionário encontrado, instale o hspell"
