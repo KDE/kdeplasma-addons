@@ -193,7 +193,7 @@ Item {
     ]
 
     function timeString() {
-        var d = new Date(dataSource.data["Local"]["DateTime"])
+        var d = new Date(clockSource.dateTime)
         var hours = d.getHours()
         var minutes = d.getMinutes()
 
