@@ -241,7 +241,7 @@ PlasmoidItem {
 
                     // Save semi-continuously to prevent possible data loss
                     onTextChanged: {
-                        throttledTextSaver.restart();
+                        throttledTextSaver?.restart();
                     }
 
                     // update the note if the source changes, but only if the user isn't editing it currently
