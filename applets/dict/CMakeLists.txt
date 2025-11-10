@@ -10,7 +10,16 @@ if (NOT Qt6WebEngineQuick_FOUND)
     return()
 endif()
 
-plasma_install_package(package org.kde.plasma_applet_dict)
+plasma_add_applet(org.kde.plasma_applet_dict GENERATE_APPLET_CLASS
+    QML_SOURCES
+        qml/AvailableDictSheet.qml
+        qml/ConfigDictionaries.qml
+        qml/config.qml
+        qml/DictItemDelegate.qml
+        qml/main.qml
+    RESOURCES
+        main.xml
+)
 # TODO: fix pluginid "org.kde.plasma_applet_dict" into properly namespaced id "org.kde.plasma.dict"
 
 #######################################################################################
