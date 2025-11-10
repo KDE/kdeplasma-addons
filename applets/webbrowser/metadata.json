@@ -95,7 +95,6 @@
         "Description[zh_CN]": "添加网页到您的桌面",
         "Description[zh_TW]": "加一個網站在您的桌面上。",
         "Icon": "applications-internet",
-        "Id": "org.kde.plasma.webbrowser",
         "License": "GPL-2.0+",
         "Name": "Web Browser",
         "Name[ar]": "متصفّح الوبّ",
