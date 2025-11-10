@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:43+0000\n"
+"POT-Creation-Date: 2025-11-10 00:44+0000\n"
 "PO-Revision-Date: 2023-03-15 21:28+0100\n"
 "Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -155,24 +155,24 @@ msgstr "Bearbeiten"
 msgid "Delete"
 msgstr "Löschen"
 
-#: main.qml:70
+#: main.qml:69
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 läuft"
 
-#: main.qml:72
+#: main.qml:71
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 läuft nicht"
 
-#: main.qml:75
+#: main.qml:74
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Verbleibende Zeit: %1 Sekunde"
 msgstr[1] "Verbleibende Zeit: %1 Sekunden"
 
-#: main.qml:75
+#: main.qml:74
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -181,29 +181,29 @@ msgstr ""
 "Sie können mit dem Mausrad die Ziffern ändern oder vordefinierte Zeiten aus "
 "dem Kontextmenü wählen"
 
-#: main.qml:92
+#: main.qml:91
 #, kde-format
 msgid "Timer"
 msgstr "Eieruhr"
 
-#: main.qml:93
+#: main.qml:92
 #, kde-format
 msgid "Timer finished"
 msgstr "Zeit abgelaufen"
 
-#: main.qml:133
+#: main.qml:132
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Starten"
 
-#: main.qml:138
+#: main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "An&halten"
 
-#: main.qml:143
+#: main.qml:142
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:43+0000\n"
+"POT-Creation-Date: 2025-11-10 00:44+0000\n"
 "PO-Revision-Date: 2025-08-14 11:52+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -158,17 +158,17 @@ msgstr "حرّر"
 msgid "Delete"
 msgstr "احذف"
 
-#: main.qml:70
+#: main.qml:69
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 يعمل"
 
-#: main.qml:72
+#: main.qml:71
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 لا يعمل"
 
-#: main.qml:75
+#: main.qml:74
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
@@ -179,7 +179,7 @@ msgstr[3] "الوقت المتبقّي: %1 ثوان"
 msgstr[4] "الوقت المتبقّي: %1 ثانية"
 msgstr[5] "الوقت المتبقّي: %1 ثانية"
 
-#: main.qml:75
+#: main.qml:74
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -188,29 +188,29 @@ msgstr ""
 "استخدم عجلة الفأرة لتغيير الأرقام أو اختر أحد المؤقّتات المعرّفة مسبقًا في "
 "قائمة السّياق"
 
-#: main.qml:92
+#: main.qml:91
 #, kde-format
 msgid "Timer"
 msgstr "المؤقّت"
 
-#: main.qml:93
+#: main.qml:92
 #, kde-format
 msgid "Timer finished"
 msgstr "انتهى المؤقّت"
 
-#: main.qml:133
+#: main.qml:132
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "ا&بدأ"
 
-#: main.qml:138
+#: main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "أو&قِف"
 
-#: main.qml:143
+#: main.qml:142
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

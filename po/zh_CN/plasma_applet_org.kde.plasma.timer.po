@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:43+0000\n"
+"POT-Creation-Date: 2025-11-10 00:44+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -152,52 +152,52 @@ msgstr "编辑"
 msgid "Delete"
 msgstr "删除"
 
-#: main.qml:70
+#: main.qml:69
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 正在计时"
 
-#: main.qml:72
+#: main.qml:71
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 不在计时"
 
-#: main.qml:75
+#: main.qml:74
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "剩余时间：%1 秒"
 
-#: main.qml:75
+#: main.qml:74
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
 msgstr "使用鼠标滚轮调整数值，或者在菜单中选择预设时间"
 
-#: main.qml:92
+#: main.qml:91
 #, kde-format
 msgid "Timer"
 msgstr "计时器"
 
-#: main.qml:93
+#: main.qml:92
 #, kde-format
 msgid "Timer finished"
 msgstr "计时结束"
 
-#: main.qml:133
+#: main.qml:132
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "开始(&S)"
 
-#: main.qml:138
+#: main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "停止(&T)"
 
-#: main.qml:143
+#: main.qml:142
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

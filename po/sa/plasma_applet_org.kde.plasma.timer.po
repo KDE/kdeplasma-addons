@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-08-25 00:43+0000\n"
+"POT-Creation-Date: 2025-11-10 00:44+0000\n"
 "PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -157,24 +157,24 @@ msgstr "सम्पादन"
 msgid "Delete"
 msgstr "लुप्"
 
-#: main.qml:70
+#: main.qml:69
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 चाल्यते"
 
-#: main.qml:72
+#: main.qml:71
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 न चाल्यते"
 
-#: main.qml:75
+#: main.qml:74
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "अवशिष्टः समयः : %1 सेकण्ड्"
 msgstr[1] "अवशिष्टः समयः : %1 सेकण्ड्"
 
-#: main.qml:75
+#: main.qml:74
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -183,29 +183,29 @@ msgstr ""
 "अङ्कान् परिवर्तयितुं अथवा सन्दर्भमेन्यू मध्ये पूर्वनिर्धारितसमयनिर्धारकाणां मध्ये चयनं कर्तुं "
 "मूषकचक्रस्य उपयोगं कुर्वन्तु"
 
-#: main.qml:92
+#: main.qml:91
 #, kde-format
 msgid "Timer"
 msgstr "समयनिर्धारक"
 
-#: main.qml:93
+#: main.qml:92
 #, kde-format
 msgid "Timer finished"
 msgstr "समयनिर्धारकः समाप्तः"
 
-#: main.qml:133
+#: main.qml:132
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&प्रारंभः"
 
-#: main.qml:138
+#: main.qml:137
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "विरमतु"
 
-#: main.qml:143
+#: main.qml:142
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

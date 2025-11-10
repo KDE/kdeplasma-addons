@@ -223,15 +223,3 @@ msgstr "Няма избрана медия"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "Избиране на медия…"
-
-#~ msgctxt "@title"
-#~ msgid "General"
-#~ msgstr "Общи"
-
-#~ msgctxt "@title"
-#~ msgid "Paths"
-#~ msgstr "Пътища"
-
-#~ msgctxt "@action:button"
-#~ msgid "Configure…"
-#~ msgstr "Конфигуриране…"
