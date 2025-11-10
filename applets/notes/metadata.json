@@ -96,7 +96,6 @@
         "Description[zh_CN]": "桌面记事贴",
         "Description[zh_TW]": "桌面便條貼",
         "Icon": "knotes",
-        "Id": "org.kde.plasma.notes",
         "License": "GPL-2.0+",
         "Name": "Sticky Note",
         "Name[ar]": "ملاحظة لاصقة",

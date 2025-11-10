@@ -1,26 +1,26 @@
 add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma.notes")
 
-plasma_install_package(package org.kde.plasma.notes)
-
-ecm_add_qml_module(notesplugin
-    URI org.kde.plasma.private.notes
-    GENERATE_PLUGIN_SOURCE
-    DEPENDENCIES QtQuick
+plasma_add_applet(org.kde.plasma.notes GENERATE_APPLET_CLASS
+    QML_SOURCES
+        qml/main.qml
+        qml/ShortcutMenuItem.qml
+        qml/configAppearance.qml
+        qml/config.qml
+    CPP_SOURCES
+        abstractnoteloader.cpp
+        documenthandler.cpp
+        filesystemnoteloader.cpp
+        note.cpp
+        noteiconengine.cpp
+        notemanager.cpp
+        noteshelper.cpp
+    RESOURCES
+        main.xml
 )
 
-target_sources(notesplugin PRIVATE
-    abstractnoteloader.cpp
-    documenthandler.cpp
-    filesystemnoteloader.cpp
-    note.cpp
-    noteiconengine.cpp
-    notemanager.cpp
-    noteshelper.cpp
-)
-target_link_libraries(notesplugin PRIVATE
+target_link_libraries(org.kde.plasma.notes PRIVATE
     Qt::Quick
     KF6::CoreAddons
     KF6::Svg
     KF6::KIOCore
 )
-ecm_finalize_qml_module(notesplugin)
