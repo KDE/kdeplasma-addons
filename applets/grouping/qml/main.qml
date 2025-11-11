@@ -14,8 +14,6 @@ import org.kde.plasma.components 3.0 as PlasmaComponents
 import org.kde.plasma.plasmoid 2.0
 import org.kde.draganddrop 2.0 as DnD
 
-import "items"
-
 ContainmentItem {
     id: root
 
