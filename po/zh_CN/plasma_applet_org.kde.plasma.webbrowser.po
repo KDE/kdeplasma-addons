@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 00:43+0000\n"
+"POT-Creation-Date: 2025-11-11 00:43+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,37 +18,37 @@ msgstr ""
 "plasma.webbrowser.pot\n"
 "X-Crowdin-File-ID: 43455\n"
 
-#: package/contents/config/config.qml:12
+#: qml/config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "常规"
 
-#: package/contents/config/config.qml:18
+#: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "外观"
 
-#: package/contents/ui/ConfigAppearance.qml:33
+#: qml/ConfigAppearance.qml:33
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "图标："
 
-#: package/contents/ui/ConfigAppearance.qml:34
+#: qml/ConfigAppearance.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "网站图标"
 
-#: package/contents/ui/ConfigAppearance.qml:57
+#: qml/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "更改网页浏览器图标"
 
-#: package/contents/ui/ConfigAppearance.qml:58
+#: qml/ConfigAppearance.qml:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -56,144 +56,144 @@ msgid ""
 "to the default icon."
 msgstr "当前图标是 %1。点击打开菜单以更改当前图标或者重置为默认图标。"
 
-#: package/contents/ui/ConfigAppearance.qml:62
+#: qml/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "图标名称是“%1”"
 
-#: package/contents/ui/ConfigAppearance.qml:97
+#: qml/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "选择…"
 
-#: package/contents/ui/ConfigAppearance.qml:99
+#: qml/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "为网页浏览器选择一个图标"
 
-#: package/contents/ui/ConfigAppearance.qml:103
+#: qml/ConfigAppearance.qml:103
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "重置为默认图标"
 
-#: package/contents/ui/ConfigAppearance.qml:118
+#: qml/ConfigAppearance.qml:118
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "显示导航栏"
 
-#: package/contents/ui/ConfigGeneral.qml:22
+#: qml/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "加载最后访问页面"
 
-#: package/contents/ui/ConfigGeneral.qml:26
+#: qml/ConfigGeneral.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "启动时："
 
-#: package/contents/ui/ConfigGeneral.qml:33
+#: qml/ConfigGeneral.qml:33
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "总是加载此页面："
 
-#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:118
+#: qml/ConfigGeneral.qml:65 qml/main.qml:118
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "请输入 URL"
 
-#: package/contents/ui/ConfigGeneral.qml:76
+#: qml/ConfigGeneral.qml:76
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "网页缩放："
 
-#: package/contents/ui/ConfigGeneral.qml:80
+#: qml/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "固定比例："
 
-#: package/contents/ui/ConfigGeneral.qml:115
+#: qml/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "自动缩放，若宽度小于"
 
-#: package/contents/ui/ConfigGeneral.qml:151
+#: qml/ConfigGeneral.qml:151
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
 msgstr "浏览器设置："
 
-#: package/contents/ui/ConfigGeneral.qml:155
+#: qml/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "隐私浏览"
 
-#: package/contents/ui/main.qml:73
+#: qml/main.qml:73
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "后退"
 
-#: package/contents/ui/main.qml:83
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "前进"
 
-#: package/contents/ui/main.qml:94
+#: qml/main.qml:94
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "转到主页"
 
-#: package/contents/ui/main.qml:99
+#: qml/main.qml:99
 #, kde-format
 msgid "Open Default URL"
 msgstr "打开默认 URL"
 
-#: package/contents/ui/main.qml:158
+#: qml/main.qml:158
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "停止加载此页面"
 
-#: package/contents/ui/main.qml:158
+#: qml/main.qml:158
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "重新加载此页面"
 
-#: package/contents/ui/main.qml:211
+#: qml/main.qml:211
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "用浏览器打开连接"
 
-#: package/contents/ui/main.qml:217
+#: qml/main.qml:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "复制链接地址"
 
-#: package/contents/ui/main.qml:284
+#: qml/main.qml:284
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "弹窗已被拦截"
 
-#: package/contents/ui/main.qml:285
+#: qml/main.qml:285
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

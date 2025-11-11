@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 00:43+0000\n"
+"POT-Creation-Date: 2025-11-11 00:43+0000\n"
 "PO-Revision-Date: 2024-10-11 19:50+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -18,37 +18,37 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Poedit 3.5\n"
 
-#: package/contents/config/config.qml:12
+#: qml/config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Splošno"
 
-#: package/contents/config/config.qml:18
+#: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Videz"
 
-#: package/contents/ui/ConfigAppearance.qml:33
+#: qml/ConfigAppearance.qml:33
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "Ikona:"
 
-#: package/contents/ui/ConfigAppearance.qml:34
+#: qml/ConfigAppearance.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "Favicon spletišča"
 
-#: package/contents/ui/ConfigAppearance.qml:57
+#: qml/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "Spremeni ikono spletnega brskalnika"
 
-#: package/contents/ui/ConfigAppearance.qml:58
+#: qml/ConfigAppearance.qml:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -58,144 +58,144 @@ msgstr ""
 "Trenutna ikona je %1. Kliknite za odprtje menija za spremembo trenutne ikone "
 "ali ponastavitev privzete ikone."
 
-#: package/contents/ui/ConfigAppearance.qml:62
+#: qml/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "Ime ikone je \"%1\""
 
-#: package/contents/ui/ConfigAppearance.qml:97
+#: qml/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "Izberi…"
 
-#: package/contents/ui/ConfigAppearance.qml:99
+#: qml/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "Izberite ikono za spletni brskalnik"
 
-#: package/contents/ui/ConfigAppearance.qml:103
+#: qml/ConfigAppearance.qml:103
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "Ponastavi na privzeto ikono"
 
-#: package/contents/ui/ConfigAppearance.qml:118
+#: qml/ConfigAppearance.qml:118
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "Prikaži krmilno letvico"
 
-#: package/contents/ui/ConfigGeneral.qml:22
+#: qml/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "Naloži nazadnje obiskano stran"
 
-#: package/contents/ui/ConfigGeneral.qml:26
+#: qml/ConfigGeneral.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "Ob začetku:"
 
-#: package/contents/ui/ConfigGeneral.qml:33
+#: qml/ConfigGeneral.qml:33
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Vedno naloži to stran:"
 
-#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:118
+#: qml/ConfigGeneral.qml:65 qml/main.qml:118
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Vnesi URL"
 
-#: package/contents/ui/ConfigGeneral.qml:76
+#: qml/ConfigGeneral.qml:76
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "Merilo prilagojeno vsebini:"
 
-#: package/contents/ui/ConfigGeneral.qml:80
+#: qml/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "Fiksno merilo:"
 
-#: package/contents/ui/ConfigGeneral.qml:115
+#: qml/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Samodejna sprememba merila, če je širina pod"
 
-#: package/contents/ui/ConfigGeneral.qml:151
+#: qml/ConfigGeneral.qml:151
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
 msgstr "Nastavitve brskalnika:"
 
-#: package/contents/ui/ConfigGeneral.qml:155
+#: qml/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "Zasebno brskanje"
 
-#: package/contents/ui/main.qml:73
+#: qml/main.qml:73
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Pojdi nazaj"
 
-#: package/contents/ui/main.qml:83
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Pojdi naprej"
 
-#: package/contents/ui/main.qml:94
+#: qml/main.qml:94
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "Pojdi domov"
 
-#: package/contents/ui/main.qml:99
+#: qml/main.qml:99
 #, kde-format
 msgid "Open Default URL"
 msgstr "Odpri privzeti naslov URL"
 
-#: package/contents/ui/main.qml:158
+#: qml/main.qml:158
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Ustavi nalaganje te strani"
 
-#: package/contents/ui/main.qml:158
+#: qml/main.qml:158
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Ponovno naloži to stran"
 
-#: package/contents/ui/main.qml:211
+#: qml/main.qml:211
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Odpri povezavo v brskalniku"
 
-#: package/contents/ui/main.qml:217
+#: qml/main.qml:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopiraj naslov povezave"
 
-#: package/contents/ui/main.qml:284
+#: qml/main.qml:284
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Pogovorna okna blokirana"
 
-#: package/contents/ui/main.qml:285
+#: qml/main.qml:285
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

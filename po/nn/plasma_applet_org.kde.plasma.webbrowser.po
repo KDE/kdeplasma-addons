@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 00:43+0000\n"
+"POT-Creation-Date: 2025-11-11 00:43+0000\n"
 "PO-Revision-Date: 2024-10-27 14:44+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -18,37 +18,37 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/config/config.qml:12
+#: qml/config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Generelt"
 
-#: package/contents/config/config.qml:18
+#: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Utsjånad"
 
-#: package/contents/ui/ConfigAppearance.qml:33
+#: qml/ConfigAppearance.qml:33
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "Ikon:"
 
-#: package/contents/ui/ConfigAppearance.qml:34
+#: qml/ConfigAppearance.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "Nettside-ikon"
 
-#: package/contents/ui/ConfigAppearance.qml:57
+#: qml/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "Byt nettside-ikon"
 
-#: package/contents/ui/ConfigAppearance.qml:58
+#: qml/ConfigAppearance.qml:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -58,144 +58,144 @@ msgstr ""
 "Gjeldande ikon er %1. Trykk for å opna menyen for å endra ikonet eller "
 "tilbakestilla til standardikonet."
 
-#: package/contents/ui/ConfigAppearance.qml:62
+#: qml/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "Ikonnamnet er «%1»"
 
-#: package/contents/ui/ConfigAppearance.qml:97
+#: qml/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "Vel …"
 
-#: package/contents/ui/ConfigAppearance.qml:99
+#: qml/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "Vel ikon for nettlesar"
 
-#: package/contents/ui/ConfigAppearance.qml:103
+#: qml/ConfigAppearance.qml:103
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "Tilbakestill til standardikon"
 
-#: package/contents/ui/ConfigAppearance.qml:118
+#: qml/ConfigAppearance.qml:118
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "Vis navigasjonslinje"
 
-#: package/contents/ui/ConfigGeneral.qml:22
+#: qml/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "Siste vitja side"
 
-#: package/contents/ui/ConfigGeneral.qml:26
+#: qml/ConfigGeneral.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "Ved oppstart:"
 
-#: package/contents/ui/ConfigGeneral.qml:33
+#: qml/ConfigGeneral.qml:33
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Last alltid denne sida:"
 
-#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:118
+#: qml/ConfigGeneral.qml:65 qml/main.qml:118
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Skriv inn nettadresse"
 
-#: package/contents/ui/ConfigGeneral.qml:76
+#: qml/ConfigGeneral.qml:76
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "Innhalds­skalering:"
 
-#: package/contents/ui/ConfigGeneral.qml:80
+#: qml/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "Fast skalering:"
 
-#: package/contents/ui/ConfigGeneral.qml:115
+#: qml/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Automatisk skalering viss breidda er under"
 
-#: package/contents/ui/ConfigGeneral.qml:151
+#: qml/ConfigGeneral.qml:151
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
 msgstr "Innstillingar for nettlesar:"
 
-#: package/contents/ui/ConfigGeneral.qml:155
+#: qml/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "Privat nettlesing"
 
-#: package/contents/ui/main.qml:73
+#: qml/main.qml:73
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Gå tilbake"
 
-#: package/contents/ui/main.qml:83
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Gå fram"
 
-#: package/contents/ui/main.qml:94
+#: qml/main.qml:94
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "Gå heim"
 
-#: package/contents/ui/main.qml:99
+#: qml/main.qml:99
 #, kde-format
 msgid "Open Default URL"
 msgstr "Opna standardside"
 
-#: package/contents/ui/main.qml:158
+#: qml/main.qml:158
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Stopp innlasting av sida"
 
-#: package/contents/ui/main.qml:158
+#: qml/main.qml:158
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Last sida på nytt"
 
-#: package/contents/ui/main.qml:211
+#: qml/main.qml:211
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Opna lenkje i nettlesar"
 
-#: package/contents/ui/main.qml:217
+#: qml/main.qml:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopier lenkjeadresse"
 
-#: package/contents/ui/main.qml:284
+#: qml/main.qml:284
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Sprettoppsvindauge blokkert"
 
-#: package/contents/ui/main.qml:285
+#: qml/main.qml:285
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

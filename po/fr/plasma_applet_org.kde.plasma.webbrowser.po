@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 00:43+0000\n"
+"POT-Creation-Date: 2025-11-11 00:43+0000\n"
 "PO-Revision-Date: 2024-10-08 12:07+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -14,37 +14,37 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: package/contents/config/config.qml:12
+#: qml/config.qml:12
 #, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Général"
 
-#: package/contents/config/config.qml:18
+#: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Apparence"
 
-#: package/contents/ui/ConfigAppearance.qml:33
+#: qml/ConfigAppearance.qml:33
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "Icône :"
 
-#: package/contents/ui/ConfigAppearance.qml:34
+#: qml/ConfigAppearance.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "Émoticônes de sites Internet"
 
-#: package/contents/ui/ConfigAppearance.qml:57
+#: qml/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "Modifier l'icône du navigateur Internet"
 
-#: package/contents/ui/ConfigAppearance.qml:58
+#: qml/ConfigAppearance.qml:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -54,144 +54,144 @@ msgstr ""
 "L'icône courante est %1. Cliquez pour ouvrir le menu pour modifier l'icône "
 "courante ou ré-initialiser l'icône par défaut."
 
-#: package/contents/ui/ConfigAppearance.qml:62
+#: qml/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "Le nom de l'icône est « %1 »."
 
-#: package/contents/ui/ConfigAppearance.qml:97
+#: qml/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "Sélectionner…"
 
-#: package/contents/ui/ConfigAppearance.qml:99
+#: qml/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "Sélectionner une icône pour un navigateur Internet"
 
-#: package/contents/ui/ConfigAppearance.qml:103
+#: qml/ConfigAppearance.qml:103
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "Ré-initialiser vers l'icône par défaut"
 
-#: package/contents/ui/ConfigAppearance.qml:118
+#: qml/ConfigAppearance.qml:118
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "Afficher la barre de navigation"
 
-#: package/contents/ui/ConfigGeneral.qml:22
+#: qml/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "Charger la dernière page consultée"
 
-#: package/contents/ui/ConfigGeneral.qml:26
+#: qml/ConfigGeneral.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "Au démarrage :"
 
-#: package/contents/ui/ConfigGeneral.qml:33
+#: qml/ConfigGeneral.qml:33
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Toujours charger cette page :"
 
-#: package/contents/ui/ConfigGeneral.qml:65 package/contents/ui/main.qml:118
+#: qml/ConfigGeneral.qml:65 qml/main.qml:118
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Saisir une URL"
 
-#: package/contents/ui/ConfigGeneral.qml:76
+#: qml/ConfigGeneral.qml:76
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "Mise à l'échelle des contenus :"
 
-#: package/contents/ui/ConfigGeneral.qml:80
+#: qml/ConfigGeneral.qml:80
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "Échelle fixe :"
 
-#: package/contents/ui/ConfigGeneral.qml:115
+#: qml/ConfigGeneral.qml:115
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Mise à l'échelle automatique si la largeur est inférieure"
 
-#: package/contents/ui/ConfigGeneral.qml:151
+#: qml/ConfigGeneral.qml:151
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
 msgstr "Configuration du navigateur :"
 
-#: package/contents/ui/ConfigGeneral.qml:155
+#: qml/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "Navigation privée"
 
-#: package/contents/ui/main.qml:73
+#: qml/main.qml:73
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Retourner en arrière"
 
-#: package/contents/ui/main.qml:83
+#: qml/main.qml:83
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Aller en avant"
 
-#: package/contents/ui/main.qml:94
+#: qml/main.qml:94
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "Revenir à l'accueil"
 
-#: package/contents/ui/main.qml:99
+#: qml/main.qml:99
 #, kde-format
 msgid "Open Default URL"
 msgstr "Ouvrir l'URL par défaut"
 
-#: package/contents/ui/main.qml:158
+#: qml/main.qml:158
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Arrêter le chargement de cette page"
 
-#: package/contents/ui/main.qml:158
+#: qml/main.qml:158
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Recharger cette page"
 
-#: package/contents/ui/main.qml:211
+#: qml/main.qml:211
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Ouvrir un lien dans un navigateur"
 
-#: package/contents/ui/main.qml:217
+#: qml/main.qml:217
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copier l'adresse du lien"
 
-#: package/contents/ui/main.qml:284
+#: qml/main.qml:284
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Infobulles bloquées"
 
-#: package/contents/ui/main.qml:285
+#: qml/main.qml:285
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"
