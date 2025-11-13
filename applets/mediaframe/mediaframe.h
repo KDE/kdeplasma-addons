@@ -13,12 +13,14 @@
 #include <QObject>
 #include <QString>
 #include <QStringList>
+#include <qqmlregistration.h>
 
 #include <KIO/Job>
 
 class MediaFrame : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(int count READ count NOTIFY countChanged)
     Q_PROPERTY(int historyLength READ historyLength NOTIFY historyLengthChanged)

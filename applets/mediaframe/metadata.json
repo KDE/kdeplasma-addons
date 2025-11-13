@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -92,7 +91,6 @@
         "Description[zh_CN]": "图片相框",
         "Description[zh_TW]": "相框",
         "Icon": "image-x-generic",
-        "Id": "org.kde.plasma.mediaframe",
         "License": "GPL-2.0+",
         "Name": "Media Frame",
         "Name[ar]": "إطار صور",
