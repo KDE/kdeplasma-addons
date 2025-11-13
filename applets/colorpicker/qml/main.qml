@@ -18,9 +18,6 @@ import org.kde.kcmutils as KCMUtils
 import org.kde.config as KConfig
 import org.kde.kwindowsystem
 
-import org.kde.plasma.private.colorpicker as ColorPicker
-import "logic.js" as Logic
-
 PlasmoidItem {
     id: root
 
@@ -61,7 +58,7 @@ PlasmoidItem {
         picker.pick()
     }
 
-    ColorPicker.GrabWidget {
+    GrabWidget {
         id: picker
         onCurrentColorChanged: colorPicked(currentColor)
     }

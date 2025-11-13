@@ -14,8 +14,6 @@ import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.plasmoid
 import org.kde.plasma.private.colorpicker as ColorPicker
 
-import "logic.js" as Logic
-
 DropArea {
     id: dropArea
 

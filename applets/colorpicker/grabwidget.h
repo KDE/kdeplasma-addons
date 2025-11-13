@@ -9,10 +9,12 @@
 
 #include <QColor>
 #include <QObject>
+#include <qqmlintegration.h>
 
 class GrabWidget : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
 
     Q_PROPERTY(QColor currentColor READ currentColor NOTIFY currentColorChanged)
 
