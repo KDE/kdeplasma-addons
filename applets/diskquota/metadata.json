@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -96,7 +95,6 @@
         "Description[zh_TW]": "顯示磁碟配額詳細資訊",
         "EnabledByDefault": false,
         "Icon": "disk-quota",
-        "Id": "org.kde.plasma.diskquota",
         "License": "LGPL",
         "Name": "Disk Quota",
         "Name[ar]": "حصّة القرص",
