@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -96,7 +95,6 @@
         "Description[zh_CN]": "在不同用户之间快速切换",
         "Description[zh_TW]": "快速的在不同使用者間切換",
         "Icon": "preferences-desktop-user",
-        "Id": "org.kde.plasma.userswitcher",
         "License": "GPL-2.0+",
         "Name": "User Switcher",
         "Name[ar]": "مبدل المستخدم",

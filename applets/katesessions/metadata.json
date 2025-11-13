@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -92,7 +91,6 @@
         "Description[zh_CN]": "Kate 会话启动器",
         "Description[zh_TW]": "Kate 工作階段啟動器",
         "Icon": "kate",
-        "Id": "org.kde.plasma.addons.katesessions",
         "License": "GPL-2.0+",
         "Name": "Kate Sessions",
         "Name[ar]": "جلسات كيت",
