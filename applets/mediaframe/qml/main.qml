@@ -17,8 +17,6 @@ import org.kde.plasma.components 3.0 as PlasmaComponents3
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kquickcontrolsaddons 2.0
 
-import org.kde.plasma.private.mediaframe 2.0
-
 PlasmoidItem {
     id: main
 
