@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -99,7 +98,6 @@
             "desktop"
         ],
         "Icon": "utilities-terminal",
-        "Id": "org.kde.plasma.konsoleprofiles",
         "License": "GPL-2.0+",
         "Name": "Konsole Profiles",
         "Name[ar]": "تشكيلات كونسول",

@@ -1,5 +1,4 @@
 {
-    "KPackageStructure": "Plasma/Applet",
     "KPlugin": {
         "Authors": [
             {
@@ -96,7 +95,6 @@
         "Description[zh_CN]": "简易四则运算计算器",
         "Description[zh_TW]": "做些基本計算",
         "Icon": "accessories-calculator",
-        "Id": "org.kde.plasma.calculator",
         "License": "GPL-2.0+",
         "Name": "Calculator",
         "Name[ar]": "آلة حاسبة",
