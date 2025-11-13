@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-04-24 04:43+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -41,8 +41,8 @@ msgstr[1] "%1 წმ"
 #: config.qml:13
 #, kde-format
 msgctxt "@title"
-msgid "Appearance"
-msgstr "გარეგნობა"
+msgid "General"
+msgstr ""
 
 #: config.qml:19
 #, kde-format
@@ -50,71 +50,76 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "წინასწარ აღწერილი ტაიმერები"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "დამატებითი"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "როცა წამმზომი მორჩება:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "მითითებული ბრძანების შესრულება:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "ჩვენება:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "სათაურის ჩვენება:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "დარჩენილი დროის ჩვენება"
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "წამების ჩვენება"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "წამმზომის გადამრთველის ჩვენება"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "მიმდინარების ზოლის ჩვენება"
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "შეტყობინებები:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "გაფრთხილების ტექსტის ჩვენება:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "წამმზომი დასრულდა"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Execute command:"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "მითითებული ბრძანების შესრულება:"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, kde-format
@@ -208,6 +213,22 @@ msgstr "&გაჩერება"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "ჩამოყ&რა"
+
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "გარეგნობა"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "დამატებითი"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "როცა წამმზომი მორჩება:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "შეტყობინებები:"
 
 #~ msgid "Timer is running"
 #~ msgstr "წამმზომი გაშვებულია"

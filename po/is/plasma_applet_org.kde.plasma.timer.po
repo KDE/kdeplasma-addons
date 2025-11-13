@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2023-10-09 20:28+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -43,10 +43,11 @@ msgstr[0] "%1s"
 msgstr[1] "%1s"
 
 #: config.qml:13
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Útlit"
+msgid "General"
+msgstr "Almennt"
 
 #: config.qml:19
 #, kde-format
@@ -54,71 +55,75 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Forstilltir teljarar"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Ítarlegt"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "Eftir að talningu lýkur:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Keyra skipun:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Birta:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Sýna titil:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "Sýna tíma sem er eftir"
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Sýna sekúndur"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Sýna víxlhnapp fyrir teljara"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "Sýna framvindustiku"
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "Tilkynningar:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "Sýna tilkynningatexta:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "Niðurtalningu lokið"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgid "Run a command:"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Keyra skipun:"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, fuzzy, kde-format
@@ -214,11 +219,25 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "Endu&rstilla"
 
-#, fuzzy
-#~| msgid "Run a command:"
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Útlit"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "Ítarlegt"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "Eftir að talningu lýkur:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
 #~ msgstr "Keyra skipun:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "Tilkynningar:"
 
 #, fuzzy
 #~| msgid "Run a command:"
@@ -238,9 +257,6 @@ msgstr "Endu&rstilla"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "Tímamörk niðurteljara"
-
-#~ msgid "General"
-#~ msgstr "Almennt"
 
 #~ msgid "Plasma Timer Applet"
 #~ msgstr "Plasma niðurtalningarforrit"

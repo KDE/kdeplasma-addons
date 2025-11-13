@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 00:43+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2022-06-18 14:44+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -20,53 +20,52 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/config/config.qml:13
+#: qml/AvailableDictSheet.qml:21
+#, kde-format
+msgid "Add More Dictionaries"
+msgstr "Legg til fleire ordbøker"
+
+#: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Dictionaries"
 msgstr "Ordbøker"
 
-#: package/contents/ui/AvailableDictSheet.qml:21
-#, kde-format
-msgid "Add More Dictionaries"
-msgstr "Legg til fleire ordbøker"
-
-#: package/contents/ui/ConfigDictionaries.qml:21
+#: qml/ConfigDictionaries.qml:21
 #, fuzzy, kde-format
 #| msgid "Add More…"
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "Legg til fleire …"
 
-#: package/contents/ui/ConfigDictionaries.qml:86
+#: qml/ConfigDictionaries.qml:86
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "Klarte ikkje lesa inn ordboksoversikt"
 
-#: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:163
+#: qml/ConfigDictionaries.qml:87 qml/main.qml:163
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "Feilkode: %1 (%2)"
 
-#: package/contents/ui/ConfigDictionaries.qml:98
+#: qml/ConfigDictionaries.qml:98
 #, kde-format
 msgid "No dictionaries"
 msgstr "Ingen ordbøker"
 
-#: package/contents/ui/DictItemDelegate.qml:58
+#: qml/DictItemDelegate.qml:58
 #, kde-format
 msgid "Delete"
 msgstr "Slett"
 
-#: package/contents/ui/main.qml:54
+#: qml/main.qml:54
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Skriv inn ordet du vil sjå tydinga til …"
 
-#: package/contents/ui/main.qml:162
+#: qml/main.qml:162
 #, kde-format
 msgid "Unable to load definition"
 msgstr "Klarte ikkje henta inn definisjon"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-04-24 12:37+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -44,8 +44,8 @@ msgstr[1] "%1s"
 #: config.qml:13
 #, kde-format
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Aparença"
+msgid "General"
+msgstr ""
 
 #: config.qml:19
 #, kde-format
@@ -53,71 +53,76 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Temporitzadors predefinits"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Avançat"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "Després de completar el temporitzador:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Executa l'ordre:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Visualització:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Mostra el títol:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "Mostra el temps restant"
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Mostra els segons"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Mostra un commutador del temporitzador"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "Mostra la barra de progrés"
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "Notificacions:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "Mostra el text de notificació:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "El temporitzador ha finalitzat"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Execute command:"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Executa l'ordre:"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, kde-format
@@ -211,3 +216,19 @@ msgstr "A&tura"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Inicialitza"
+
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Aparença"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "Avançat"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "Després de completar el temporitzador:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "Notificacions:"

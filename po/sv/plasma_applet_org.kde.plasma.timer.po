@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-05-31 10:57+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -40,8 +40,8 @@ msgstr[1] "%1 s"
 #: config.qml:13
 #, kde-format
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Utseende"
+msgid "General"
+msgstr ""
 
 #: config.qml:19
 #, kde-format
@@ -49,71 +49,76 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Fördefinierade tidtagare"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Avancerat"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "Efter tidtagningen är klar:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Kör kommando:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Visning:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Visa titel:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "Visa återstående tid"
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Visa sekunder"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Visa eller dölj tidtagare"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "Visa förloppsrad"
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "Underrättelser:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "Visa underrättelsetext:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "Tidtagning stoppad"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Run Command"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Utför kommando"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, kde-format
@@ -208,12 +213,28 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "&Nollställ"
 
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Utseende"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "Avancerat"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "Efter tidtagningen är klar:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
+#~ msgstr "Kör kommando:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "Underrättelser:"
+
 #~ msgid "Timer is running"
 #~ msgstr "Tidtagning startad"
-
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "Utför kommando"
 
 #~ msgctxt "@label:textbox"
 #~ msgid "Command:"

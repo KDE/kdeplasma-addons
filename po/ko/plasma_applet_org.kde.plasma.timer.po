@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-06-10 23:46+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -37,10 +37,11 @@ msgid_plural "%1s"
 msgstr[0] "%1초"
 
 #: config.qml:13
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "모양"
+msgid "General"
+msgstr "일반"
 
 #: config.qml:19
 #, kde-format
@@ -48,71 +49,76 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "미리 정의된 타이머"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "고급"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "타이머가 끝난 후:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "명령 실행:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "표시:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "제목 표시:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "남은 시간 표시"
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "초 표시"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "타이머 전환 표시"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "진행 표시기 표시"
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "알림:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "알림 텍스트 표시:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "타이머 완료됨"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Run Command"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "명령 실행"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, kde-format
@@ -205,12 +211,28 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "초기화(&R)"
 
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "모양"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "고급"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "타이머가 끝난 후:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
+#~ msgstr "명령 실행:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "알림:"
+
 #~ msgid "Timer is running"
 #~ msgstr "타이머 실행 중"
-
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "명령 실행"
 
 #~ msgctxt "@label:textbox"
 #~ msgid "Command:"
@@ -236,9 +258,6 @@ msgstr "초기화(&R)"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "타이머 작동 시간"
-
-#~ msgid "General"
-#~ msgstr "일반"
 
 #~ msgid "Plasma Timer Applet"
 #~ msgstr "Plasma 타이머 애플릿"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-04-24 16:20+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -40,8 +40,8 @@ msgstr[1] "%1s"
 #: config.qml:13
 #, kde-format
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Uiterlijk"
+msgid "General"
+msgstr ""
 
 #: config.qml:19
 #, kde-format
@@ -49,71 +49,76 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Voorgedefinieerde timers"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Geavanceerd"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "Nadat de timer afloopt:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Commando uitvoeren:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Beeldscherm:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Titel tonen:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "Resterende tijd tonen"
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Seconden tonen"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Timeromschakeling tonen"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "Voortgangsbalk tonen"
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "Meldingen:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "Meldingtekst tonen:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "Timer is geëindigd"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Run Command"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Commando uitvoeren"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, kde-format
@@ -208,12 +213,28 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "&Resetten"
 
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Uiterlijk"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "Geavanceerd"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "Nadat de timer afloopt:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
+#~ msgstr "Commando uitvoeren:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "Meldingen:"
+
 #~ msgid "Timer is running"
 #~ msgstr "Timer loopt"
-
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "Commando uitvoeren"
 
 #~ msgctxt "@label:textbox"
 #~ msgid "Command:"

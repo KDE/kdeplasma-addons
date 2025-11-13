@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2015-11-26 15:37+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -44,10 +44,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: config.qml:13
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Εμφάνιση"
+msgid "General"
+msgstr "Γενικά"
 
 #: config.qml:19
 #, kde-format
@@ -55,73 +56,75 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Προκαθορισμένα χρονόμετρα"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Για προχωρημένους"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr ""
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Εκτέλεση εντολής:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Εμφάνιση:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Εμφάνιση τίτλου:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr ""
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Εμφάνιση δευτερολέπτων"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, fuzzy, kde-format
 #| msgid "Show title"
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Εμφάνιση τίτλου"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr ""
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "Ειδοποιήσεις:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
+#: configGeneral.qml:85
 #, fuzzy, kde-format
 #| msgid "Show notification"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "Εμφάνιση ειδοποίησης"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "Ολοκλήρωση χρονομέτρου"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgid "Run command"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Εκτέλεση εντολής"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, kde-format
@@ -214,14 +217,24 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "&Μηδενισμός"
 
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Εμφάνιση"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "Για προχωρημένους"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
+#~ msgstr "Εκτέλεση εντολής:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "Ειδοποιήσεις:"
+
 #~ msgid "Timer is running"
 #~ msgstr "Το χρονόμετρο εκτελείται"
-
-#, fuzzy
-#~| msgid "Run command"
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "Εκτέλεση εντολής"
 
 #, fuzzy
 #~| msgid "Command:"
@@ -253,9 +266,6 @@ msgstr "&Μηδενισμός"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "Λήξη χρονομέτρου"
-
-#~ msgid "General"
-#~ msgstr "Γενικά"
 
 #~ msgid "Plasma Timer Applet"
 #~ msgstr "Μικροεφαρμογή χρονομέτρου"

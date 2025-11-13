@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2012-07-19 05:18+0600\n"
 "Last-Translator: Sairan Kikkarin\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -40,10 +40,10 @@ msgstr[0] ""
 
 #: config.qml:13
 #, fuzzy, kde-format
-#| msgid "Appearance"
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Көрінісі"
+msgid "General"
+msgstr "Жалпы"
 
 #: config.qml:19
 #, fuzzy, kde-format
@@ -52,74 +52,75 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Мәзірдегі уақыт аралықтар"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr ""
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr ""
-
-#: configAdvanced.qml:26
-#, fuzzy, kde-format
-#| msgid "Run a command:"
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Команданы орындау:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr ""
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, fuzzy, kde-format
 #| msgid "Show title:"
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Айдарын көрсету:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr ""
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, fuzzy, kde-format
 #| msgid "Hide seconds"
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Секундтар көрсетілмесін"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, fuzzy, kde-format
 #| msgid "Show title:"
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Айдарын көрсету:"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr ""
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
+msgid "On timeout:"
 msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgid "Show title:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
+msgstr "Айдарын көрсету:"
+
+#: configGeneral.qml:97
+#, kde-format
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr ""
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgid "Run a command:"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Команданы орындау:"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
 #: configTimes.qml:23
@@ -213,9 +214,15 @@ msgid "&Reset"
 msgstr "Ысыру"
 
 #, fuzzy
+#~| msgid "Appearance"
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Көрінісі"
+
+#, fuzzy
 #~| msgid "Run a command:"
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
 #~ msgstr "Команданы орындау:"
 
 #, fuzzy
@@ -236,9 +243,6 @@ msgstr "Ысыру"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "Есеп бітті"
-
-#~ msgid "General"
-#~ msgstr "Жалпы"
 
 #~ msgid "Plasma Timer Applet"
 #~ msgstr "Plasma таймер апплеті"

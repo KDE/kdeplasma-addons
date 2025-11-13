@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_timer.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2008-06-02 20:00-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -44,10 +44,10 @@ msgstr[4] ""
 
 #: config.qml:13
 #, fuzzy, kde-format
-#| msgid "Appearance"
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Cuma"
+msgid "General"
+msgstr "Ginearálta"
 
 #: config.qml:19
 #, fuzzy, kde-format
@@ -56,74 +56,76 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Uaineadóirí Réamhshainithe"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr ""
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr ""
-
-#: configAdvanced.qml:26
-#, fuzzy, kde-format
-#| msgid "Run a command:"
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Rith ordú:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr ""
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, fuzzy, kde-format
 #| msgid "Show title:"
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Taispeáin teideal:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr ""
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, fuzzy, kde-format
 #| msgid "Hide seconds"
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Folaigh soicindí"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, fuzzy, kde-format
 #| msgid "Show title:"
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Taispeáin teideal:"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr ""
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
+msgid "On timeout:"
 msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgid "Show title:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
+msgstr "Taispeáin teideal:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Time is up!"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "Tá an t-am istigh!"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgid "Run a command:"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Rith ordú:"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
 #: configTimes.qml:23
@@ -221,14 +223,15 @@ msgid "&Reset"
 msgstr "Athshocraigh"
 
 #, fuzzy
-#~| msgid "Time is up!"
-#~ msgid "Timer is running"
-#~ msgstr "Tá an t-am istigh!"
+#~| msgid "Appearance"
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Cuma"
 
 #, fuzzy
 #~| msgid "Run a command:"
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
 #~ msgstr "Rith ordú:"
 
 #, fuzzy
@@ -249,9 +252,6 @@ msgstr "Athshocraigh"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "Teorainn Ama an Uaineadóra"
-
-#~ msgid "General"
-#~ msgstr "Ginearálta"
 
 #~ msgid "Plasma Timer Applet"
 #~ msgstr "Feidhmchláirín Amadóra Plasma"

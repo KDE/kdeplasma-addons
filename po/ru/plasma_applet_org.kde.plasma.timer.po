@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-05-18 21:43+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -51,10 +51,11 @@ msgstr[2] "%1 с"
 msgstr[3] "%1 с"
 
 #: config.qml:13
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Внешний вид"
+msgid "General"
+msgstr "Основное"
 
 #: config.qml:19
 #, kde-format
@@ -62,71 +63,76 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Предустановленные таймеры"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Дополнительно"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "По истечении времени таймера:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Выполнять команду:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Вид:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Показывать заголовок виджета:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "Показывать оставшееся время"
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Показывать секунды"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Показывать элемент управления таймером"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "Показывать индикатор выполнения"
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "Уведомления:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "Показывать текст уведомления о завершении:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "Отсчёт завершён"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Run Command"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Выполнение команды"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, kde-format
@@ -221,12 +227,28 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "Сб&росить"
 
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Внешний вид"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "Дополнительно"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "По истечении времени таймера:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
+#~ msgstr "Выполнять команду:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "Уведомления:"
+
 #~ msgid "Timer is running"
 #~ msgstr "Таймер запущен"
-
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "Выполнение команды"
 
 #~ msgctxt "@label:textbox"
 #~ msgid "Command:"
@@ -252,9 +274,6 @@ msgstr "Сб&росить"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "Окончание отсчёта"
-
-#~ msgid "General"
-#~ msgstr "Основное"
 
 #~ msgid "Plasma Timer Applet"
 #~ msgstr "Таймер для Plasma"

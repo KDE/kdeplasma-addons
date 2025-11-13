@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-04-24 07:24+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -45,10 +45,11 @@ msgstr[2] "%1s"
 msgstr[3] "%1s"
 
 #: config.qml:13
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Videz"
+msgid "General"
+msgstr "Splošno"
 
 #: config.qml:19
 #, kde-format
@@ -56,71 +57,75 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Vnaprej določeni časomeri"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Napredno"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "Po poteku časa:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Izvedi ukaz:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Prikaži:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Prikazuj naslov:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "Prikazuj preostali čas"
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Pokaži sekunde"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Prikazuj preklop časomera"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "Prikazuj diagram napredka"
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "Obvestila:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "Prikaži besedilo obvestila:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "Odštevalnik časa zaključen"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgid "Run command"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Zaženi ukaz"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, kde-format
@@ -217,14 +222,28 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "Ponastavi"
 
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Videz"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "Napredno"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "Po poteku časa:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
+#~ msgstr "Izvedi ukaz:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "Obvestila:"
+
 #~ msgid "Timer is running"
 #~ msgstr "Odštevalnik teče"
-
-#, fuzzy
-#~| msgid "Run command"
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "Zaženi ukaz"
 
 #, fuzzy
 #~| msgid "Command:"
@@ -256,9 +275,6 @@ msgstr "Ponastavi"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "Potek časa"
-
-#~ msgid "General"
-#~ msgstr "Splošno"
 
 #~ msgid "Plasma Timer Applet"
 #~ msgstr "Aplet časomera"

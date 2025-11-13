@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2022-06-07 14:58+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -43,8 +43,8 @@ msgstr[1] ""
 #: config.qml:13
 #, kde-format
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Penampilan"
+msgid "General"
+msgstr ""
 
 #: config.qml:19
 #, kde-format
@@ -52,49 +52,31 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Prasetel Timer"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Tingkat-lanjut"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "Setelah timer selesai:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Perintah eksekusi:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Displai:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Tampilkan judul:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr ""
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Tampilkan detik"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "Show title:"
@@ -102,23 +84,46 @@ msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Tampilkan judul:"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr ""
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "Notifikasi:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "Tampilkan teks notifikasi:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "Timer selesai"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Run Command"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Jalankan Perintah"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, fuzzy, kde-format
@@ -214,12 +219,28 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "&Setel ulang"
 
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Penampilan"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "Tingkat-lanjut"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "Setelah timer selesai:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
+#~ msgstr "Perintah eksekusi:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "Notifikasi:"
+
 #~ msgid "Timer is running"
 #~ msgstr "Timer telah berjalan"
-
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "Jalankan Perintah"
 
 #~ msgctxt "@label:textbox"
 #~ msgid "Command:"

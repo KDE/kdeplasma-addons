@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-04-24 20:39+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -46,8 +46,8 @@ msgstr[3] "%1 שנ׳"
 #: config.qml:13
 #, kde-format
 msgctxt "@title"
-msgid "Appearance"
-msgstr "מראה"
+msgid "General"
+msgstr ""
 
 #: config.qml:19
 #, kde-format
@@ -55,71 +55,75 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "קוצבי זמן שהוגדרו מראש"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "מתקדם"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "לאחר סיום קוצב הזמן:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "הרצת פקודה:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "תצוגה:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "הצגת כותרת:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "להציג את הזמן שנותר"
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "הצגת שניות"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "הצגת מתג קוצב זמן"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "להציג סרגל התקדמות"
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "התראות:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "הצגת טקסט התראה:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "קוצב הזמן הסתיים"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgid "Run command"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "הרץ פקודה"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, kde-format
@@ -215,14 +219,28 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "&איפוס"
 
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "מראה"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "מתקדם"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "לאחר סיום קוצב הזמן:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
+#~ msgstr "הרצת פקודה:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "התראות:"
+
 #~ msgid "Timer is running"
 #~ msgstr "טיימר פועל"
-
-#, fuzzy
-#~| msgid "Run command"
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "הרץ פקודה"
 
 #, fuzzy
 #~| msgid "Command:"

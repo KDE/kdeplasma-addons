@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2019-10-30 21:51+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -41,10 +41,11 @@ msgstr[0] ""
 msgstr[1] ""
 
 #: config.qml:13
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Välimus"
+msgid "General"
+msgstr "Üldine"
 
 #: config.qml:19
 #, fuzzy, kde-format
@@ -53,49 +54,31 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Eelnevalt määratud taimerid"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Muu"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "Kui taimer lõpetab:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Käsu käivitamine:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Näitamine:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Pealkirja näitamine:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr ""
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Sekundite näitamine"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "Show title:"
@@ -103,23 +86,45 @@ msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Pealkirja näitamine:"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr ""
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "Märguanded:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "Märguande teksti näitamine:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "Taimer lõpetas"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgid "Run command"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Käsu käivitamine"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, kde-format
@@ -211,14 +216,28 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "Lä&htesta"
 
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Välimus"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "Muu"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "Kui taimer lõpetab:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
+#~ msgstr "Käsu käivitamine:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "Märguanded:"
+
 #~ msgid "Timer is running"
 #~ msgstr "Taimer töötab"
-
-#, fuzzy
-#~| msgid "Run command"
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "Käsu käivitamine"
 
 #, fuzzy
 #~| msgid "Command:"
@@ -250,9 +269,6 @@ msgstr "Lä&htesta"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "Taimeri ajaületus"
-
-#~ msgid "General"
-#~ msgstr "Üldine"
 
 #~ msgid "Plasma Timer Applet"
 #~ msgstr "Plasma taimeriaplett"

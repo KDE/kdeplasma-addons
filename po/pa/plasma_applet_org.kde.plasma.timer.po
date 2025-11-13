@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2024-01-28 19:01-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -39,10 +39,11 @@ msgstr[0] "%1s"
 msgstr[1] "%1s"
 
 #: config.qml:13
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "ਦਿੱਖ"
+msgid "General"
+msgstr "ਆਮ"
 
 #: config.qml:19
 #, kde-format
@@ -50,71 +51,76 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "ਪਹਿਲਾਂ-ਸੈੱਟ ਟਾਈਮਰ"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "ਤਕਨੀਕੀ"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr ""
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "ਕਮਾਂਡ ਨੂੰ ਚਲਾਓ:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "ਡਿਸਪਲੇਅ:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "ਟਾਈਟਲ ਵੇਖਾਓ:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "ਬਾਕੀ ਰਹਿੰਦਾ ਸਮਾਂ ਵੇਖਾਓ"
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "ਸਕਿੰਟ ਦਿਖਾਓ"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "ਟਾਈਮਰ ਬਦਲਣ ਨੂੰ ਵੇਖਾਓ"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "ਤਰੱਕੀ ਪੱਟੀ ਵੇਖਾਓ"
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨਾਂ ਲਿਖਤ ਨੂੰ ਵੇਖਾਓ:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "ਟਾਈਮਰ ਪੂਰਾ ਹੋਇਆ"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "Run Command"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "ਕਮਾਂਡ ਨੂੰ ਚਲਾਓ"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, fuzzy, kde-format
@@ -206,9 +212,21 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "ਮੁੜ-ਸੈੱਟ(&R)"
 
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "ਕਮਾਂਡ ਨੂੰ ਚਲਾਓ"
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "ਦਿੱਖ"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "ਤਕਨੀਕੀ"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
+#~ msgstr "ਕਮਾਂਡ ਨੂੰ ਚਲਾਓ:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "ਨੋਟੀਫਿਕੇਸ਼ਨ:"
 
 #~ msgctxt "@label:textbox"
 #~ msgid "Command:"
@@ -234,9 +252,6 @@ msgstr "ਮੁੜ-ਸੈੱਟ(&R)"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "ਟਾਈਮਰ ਟਾਈਮ-ਆਉਟ"
-
-#~ msgid "General"
-#~ msgstr "ਆਮ"
 
 #~ msgid "Actions on Timeout"
 #~ msgstr "ਟਾਈਮ-ਆਉਟ ਉੱਤੇ ਐਕਸ਼ਨ"

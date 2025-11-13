@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-31 00:43+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-09-06 22:27+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -20,218 +20,218 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 3.6\n"
 
-#: package/contents/config/config.qml:13
+#: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Išvaizda"
 
-#: package/contents/ui/configAppearance.qml:37
+#: qml/configAppearance.qml:37
 #, kde-format
 msgid "%1pt"
 msgstr "%1tšk."
 
-#: package/contents/ui/configAppearance.qml:43
+#: qml/configAppearance.qml:43
 #, kde-format
 msgid "Text font size:"
 msgstr "Teksto šrifto dydis:"
 
-#: package/contents/ui/configAppearance.qml:74
+#: qml/configAppearance.qml:74
 #, kde-format
 msgid "A white sticky note"
 msgstr "Baltas lipnus lapelis"
 
-#: package/contents/ui/configAppearance.qml:75
+#: qml/configAppearance.qml:75
 #, kde-format
 msgid "A black sticky note"
 msgstr "Juodas lipnus lapelis"
 
-#: package/contents/ui/configAppearance.qml:76
+#: qml/configAppearance.qml:76
 #, kde-format
 msgid "A red sticky note"
 msgstr "Raudonas lipnus lapelis"
 
-#: package/contents/ui/configAppearance.qml:77
+#: qml/configAppearance.qml:77
 #, kde-format
 msgid "An orange sticky note"
 msgstr "Oranžinis lipnus lapelis"
 
-#: package/contents/ui/configAppearance.qml:78
+#: qml/configAppearance.qml:78
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "Geltonas lipnus lapelis"
 
-#: package/contents/ui/configAppearance.qml:79
+#: qml/configAppearance.qml:79
 #, kde-format
 msgid "A green sticky note"
 msgstr "Žalias lipnus lapelis"
 
-#: package/contents/ui/configAppearance.qml:80
+#: qml/configAppearance.qml:80
 #, kde-format
 msgid "A blue sticky note"
 msgstr "Mėlynas lipnus lapelis"
 
-#: package/contents/ui/configAppearance.qml:81
+#: qml/configAppearance.qml:81
 #, kde-format
 msgid "A pink sticky note"
 msgstr "Rožinis lipnus lapelis"
 
-#: package/contents/ui/configAppearance.qml:82
+#: qml/configAppearance.qml:82
 #, kde-format
 msgid "A transparent sticky note"
 msgstr "Permatomas lipnus lapelis"
 
-#: package/contents/ui/configAppearance.qml:83
+#: qml/configAppearance.qml:83
 #, kde-format
 msgid "A transparent sticky note with light text"
 msgstr "Permatomas lipnus lapelis su šviesiu tekstu"
 
-#: package/contents/ui/main.qml:296
+#: qml/main.qml:294
 #, kde-format
 msgid "Undo"
 msgstr "Atšaukti"
 
-#: package/contents/ui/main.qml:304
+#: qml/main.qml:302
 #, kde-format
 msgid "Redo"
 msgstr "Grąžinti"
 
-#: package/contents/ui/main.qml:314
+#: qml/main.qml:312
 #, kde-format
 msgid "Cut"
 msgstr "Iškirpti"
 
-#: package/contents/ui/main.qml:322
+#: qml/main.qml:320
 #, kde-format
 msgid "Copy"
 msgstr "Kopijuoti"
 
-#: package/contents/ui/main.qml:330
+#: qml/main.qml:328
 #, kde-format
 msgid "Paste"
 msgstr "Įdėti"
 
-#: package/contents/ui/main.qml:336
+#: qml/main.qml:334
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "Įdėti su visu formatavimu"
 
-#: package/contents/ui/main.qml:343
+#: qml/main.qml:341
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "Šalinti formatavimą"
 
-#: package/contents/ui/main.qml:358
+#: qml/main.qml:356
 #, kde-format
 msgid "Delete"
 msgstr "Ištrinti"
 
-#: package/contents/ui/main.qml:365
+#: qml/main.qml:363
 #, kde-format
 msgid "Clear"
 msgstr "Išvalyti"
 
-#: package/contents/ui/main.qml:375
+#: qml/main.qml:373
 #, kde-format
 msgid "Select All"
 msgstr "Pažymėti viską"
 
-#: package/contents/ui/main.qml:505
+#: qml/main.qml:503
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Pusjuodis"
 
-#: package/contents/ui/main.qml:518
+#: qml/main.qml:516
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Kursyvas"
 
-#: package/contents/ui/main.qml:531
+#: qml/main.qml:529
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Pabrauktas"
 
-#: package/contents/ui/main.qml:544
+#: qml/main.qml:542
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Perbrauktas"
 
-#: package/contents/ui/main.qml:618
+#: qml/main.qml:616
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
 msgstr "Palikti atvertą"
 
-#: package/contents/ui/main.qml:647
+#: qml/main.qml:645
 #, kde-format
 msgid "Discard this note?"
 msgstr "Atmesti šį lapelį?"
 
-#: package/contents/ui/main.qml:648
+#: qml/main.qml:646
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Ar tikrai norite atmesti šį lapelį?"
 
-#: package/contents/ui/main.qml:673
+#: qml/main.qml:671
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Baltas"
 
-#: package/contents/ui/main.qml:674
+#: qml/main.qml:672
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Juodas"
 
-#: package/contents/ui/main.qml:675
+#: qml/main.qml:673
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Raudonas"
 
-#: package/contents/ui/main.qml:676
+#: qml/main.qml:674
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Oranžinis"
 
-#: package/contents/ui/main.qml:677
+#: qml/main.qml:675
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Geltonas"
 
-#: package/contents/ui/main.qml:678
+#: qml/main.qml:676
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Žalias"
 
-#: package/contents/ui/main.qml:679
+#: qml/main.qml:677
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Mėlynas"
 
-#: package/contents/ui/main.qml:680
+#: qml/main.qml:678
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Rožinis"
 
-#: package/contents/ui/main.qml:681
+#: qml/main.qml:679
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "Permatomas"
 
-#: package/contents/ui/main.qml:685
+#: qml/main.qml:683
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"

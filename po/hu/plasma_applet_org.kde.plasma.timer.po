@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-05-18 20:31+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -40,10 +40,11 @@ msgstr[0] "%1 s"
 msgstr[1] "%1 s"
 
 #: config.qml:13
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Megjelenés"
+msgid "General"
+msgstr "Általános"
 
 #: config.qml:19
 #, kde-format
@@ -51,71 +52,75 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Előre megadott időértékek"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr "Speciális"
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr "Az időzítő lejártakor:"
-
-#: configAdvanced.qml:26
-#, kde-format
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Parancs végrehajtása:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr "Megjelenés:"
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Cím megjelenítése:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "Hátralévő idő megjelenítése"
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Másodpercek megjelenítése"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Időzítőkapcsoló megjelenítése"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "Folyamatsáv megjelenítése"
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
-msgstr "Értesítések:"
+msgid "On timeout:"
+msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
 msgstr "Értesítés szövege:"
+
+#: configGeneral.qml:97
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr "Az időzítő lejárt"
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgid "Run a command:"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Parancs végrehajtása:"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
+msgstr ""
 
 #: configTimes.qml:23
 #, kde-format
@@ -210,14 +215,28 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "&Alapállapotba"
 
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Megjelenés"
+
+#~ msgctxt "@title"
+#~ msgid "Advanced"
+#~ msgstr "Speciális"
+
+#~ msgctxt "@title:label"
+#~ msgid "After timer completes:"
+#~ msgstr "Az időzítő lejártakor:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
+#~ msgstr "Parancs végrehajtása:"
+
+#~ msgctxt "@title:label"
+#~ msgid "Notifications:"
+#~ msgstr "Értesítések:"
+
 #~ msgid "Timer is running"
 #~ msgstr "Az időzítő fut"
-
-#, fuzzy
-#~| msgid "Run a command:"
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
-#~ msgstr "Parancs végrehajtása:"
 
 #, fuzzy
 #~| msgid "Run a command:"
@@ -237,9 +256,6 @@ msgstr "&Alapállapotba"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "Visszaszámlálási idő"
-
-#~ msgid "General"
-#~ msgstr "Általános"
 
 #~ msgid "Plasma Timer Applet"
 #~ msgstr "Plasma időzítő kisalkalmazás"

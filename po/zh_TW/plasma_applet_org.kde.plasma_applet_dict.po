@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 00:43+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-04-30 02:34+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -18,52 +18,51 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 25.07.70\n"
 
-#: package/contents/config/config.qml:13
+#: qml/AvailableDictSheet.qml:21
+#, kde-format
+msgid "Add More Dictionaries"
+msgstr "新增更多字典"
+
+#: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Dictionaries"
 msgstr "字典"
 
-#: package/contents/ui/AvailableDictSheet.qml:21
-#, kde-format
-msgid "Add More Dictionaries"
-msgstr "新增更多字典"
-
-#: package/contents/ui/ConfigDictionaries.qml:21
+#: qml/ConfigDictionaries.qml:21
 #, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "新增更多…"
 
-#: package/contents/ui/ConfigDictionaries.qml:86
+#: qml/ConfigDictionaries.qml:86
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "無法載入字典列表"
 
-#: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:163
+#: qml/ConfigDictionaries.qml:87 qml/main.qml:163
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "錯誤代碼：%1（%2）"
 
-#: package/contents/ui/ConfigDictionaries.qml:98
+#: qml/ConfigDictionaries.qml:98
 #, kde-format
 msgid "No dictionaries"
 msgstr "沒有字典"
 
-#: package/contents/ui/DictItemDelegate.qml:58
+#: qml/DictItemDelegate.qml:58
 #, kde-format
 msgid "Delete"
 msgstr "刪除"
 
-#: package/contents/ui/main.qml:54
+#: qml/main.qml:54
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "在此輸入要定義的單字…"
 
-#: package/contents/ui/main.qml:162
+#: qml/main.qml:162
 #, kde-format
 msgid "Unable to load definition"
 msgstr "無法載入定義"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2012-06-08 15:19+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer\n"
@@ -41,10 +41,10 @@ msgstr[0] ""
 
 #: config.qml:13
 #, fuzzy, kde-format
-#| msgid "Appearance"
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "រូបរាង"
+msgid "General"
+msgstr "ទូទៅ"
 
 #: config.qml:19
 #, fuzzy, kde-format
@@ -53,74 +53,75 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "កម្មវិធី​កំណត់​ដែលបាន​កំណត់​ជា​មុន"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr ""
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr ""
-
-#: configAdvanced.qml:26
-#, fuzzy, kde-format
-#| msgid "Run a command:"
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "រត់​ពាក្យ​បញ្ជា ៖"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr ""
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, fuzzy, kde-format
 #| msgid "Show title:"
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "បង្ហាញ​ចំណង​ជើង ៖"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr ""
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, fuzzy, kde-format
 #| msgid "Hide seconds"
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "លាក់​វិនាទី"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, fuzzy, kde-format
 #| msgid "Show title:"
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "បង្ហាញ​ចំណង​ជើង ៖"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr ""
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
+msgid "On timeout:"
 msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgid "Show title:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
+msgstr "បង្ហាញ​ចំណង​ជើង ៖"
+
+#: configGeneral.qml:97
+#, kde-format
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr ""
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgid "Run a command:"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "រត់​ពាក្យ​បញ្ជា ៖"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
 #: configTimes.qml:23
@@ -214,9 +215,15 @@ msgid "&Reset"
 msgstr "កំណត់​ឡើង​វិញ"
 
 #, fuzzy
+#~| msgid "Appearance"
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "រូបរាង"
+
+#, fuzzy
 #~| msgid "Run a command:"
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
 #~ msgstr "រត់​ពាក្យ​បញ្ជា ៖"
 
 #, fuzzy
@@ -237,9 +244,6 @@ msgstr "កំណត់​ឡើង​វិញ"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "កម្មវិធី​កំណត់​ពេល​ អស់ពេល"
-
-#~ msgid "General"
-#~ msgstr "ទូទៅ"
 
 #~ msgid "Plasma Timer Applet"
 #~ msgstr "អាប់ភ្លេត​កំណត់ពេលវេលា​ប្លាស្មា"

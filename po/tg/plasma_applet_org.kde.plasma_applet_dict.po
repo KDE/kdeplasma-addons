@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 00:43+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2019-09-26 17:53+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -17,52 +17,51 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 19.04.3\n"
 
-#: package/contents/config/config.qml:13
-#, kde-format
-msgctxt "@title"
-msgid "Dictionaries"
-msgstr "Луғатҳо"
-
-#: package/contents/ui/AvailableDictSheet.qml:21
+#: qml/AvailableDictSheet.qml:21
 #, fuzzy, kde-format
 #| msgctxt "@title"
 #| msgid "Dictionaries"
 msgid "Add More Dictionaries"
 msgstr "Луғатҳо"
 
-#: package/contents/ui/ConfigDictionaries.qml:21
+#: qml/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Dictionaries"
+msgstr "Луғатҳо"
+
+#: qml/ConfigDictionaries.qml:21
 #, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr ""
 
-#: package/contents/ui/ConfigDictionaries.qml:86
+#: qml/ConfigDictionaries.qml:86
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox"
 #| msgid "Available dictionaries:"
 msgid "Unable to load dictionary list"
 msgstr "Луғатҳои дастрас:"
 
-#: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:163
+#: qml/ConfigDictionaries.qml:87 qml/main.qml:163
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr ""
 
-#: package/contents/ui/ConfigDictionaries.qml:98
+#: qml/ConfigDictionaries.qml:98
 #, fuzzy, kde-format
 #| msgctxt "@title"
 #| msgid "Dictionaries"
 msgid "No dictionaries"
 msgstr "Луғатҳо"
 
-#: package/contents/ui/DictItemDelegate.qml:58
+#: qml/DictItemDelegate.qml:58
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: package/contents/ui/main.qml:54
+#: qml/main.qml:54
 #, fuzzy, kde-format
 #| msgctxt "@info:placeholder"
 #| msgid "Enter word to define here"
@@ -70,7 +69,7 @@ msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Барои муайян кардани калима онро дар ин ҷо ворид намоед"
 
-#: package/contents/ui/main.qml:162
+#: qml/main.qml:162
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox"
 #| msgid "Available dictionaries:"

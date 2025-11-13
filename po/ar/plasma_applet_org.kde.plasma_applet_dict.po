@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-06-11 00:43+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2025-04-28 17:36+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -18,52 +18,51 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: package/contents/config/config.qml:13
+#: qml/AvailableDictSheet.qml:21
+#, kde-format
+msgid "Add More Dictionaries"
+msgstr "أضف المزيد من القواميس"
+
+#: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Dictionaries"
 msgstr "القواميس"
 
-#: package/contents/ui/AvailableDictSheet.qml:21
-#, kde-format
-msgid "Add More Dictionaries"
-msgstr "أضف المزيد من القواميس"
-
-#: package/contents/ui/ConfigDictionaries.qml:21
+#: qml/ConfigDictionaries.qml:21
 #, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "أضف المزيد…"
 
-#: package/contents/ui/ConfigDictionaries.qml:86
+#: qml/ConfigDictionaries.qml:86
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "لا يستطيع تحميل قائمة القواميس"
 
-#: package/contents/ui/ConfigDictionaries.qml:87
-#: package/contents/ui/main.qml:163
+#: qml/ConfigDictionaries.qml:87 qml/main.qml:163
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "رقم الخطأ: %1 (%2)"
 
-#: package/contents/ui/ConfigDictionaries.qml:98
+#: qml/ConfigDictionaries.qml:98
 #, kde-format
 msgid "No dictionaries"
 msgstr "لا يوجد قواميس"
 
-#: package/contents/ui/DictItemDelegate.qml:58
+#: qml/DictItemDelegate.qml:58
 #, kde-format
 msgid "Delete"
 msgstr "احذف"
 
-#: package/contents/ui/main.qml:54
+#: qml/main.qml:54
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "ادخل كلمة ليعرفها هنا…"
 
-#: package/contents/ui/main.qml:162
+#: qml/main.qml:162
 #, kde-format
 msgid "Unable to load definition"
 msgstr "غير قادر على تحميل التعريف"

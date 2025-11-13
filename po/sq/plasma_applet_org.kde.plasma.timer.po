@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-10 00:44+0000\n"
+"POT-Creation-Date: 2025-11-13 00:43+0000\n"
 "PO-Revision-Date: 2009-07-31 00:38+0000\n"
 "Last-Translator: Vilson Gjeci <vilsongjeci@gmail.com>\n"
 "Language-Team: Albanian <sq@li.org>\n"
@@ -43,10 +43,10 @@ msgstr[1] ""
 
 #: config.qml:13
 #, fuzzy, kde-format
-#| msgid "Appearance"
+#| msgid "General"
 msgctxt "@title"
-msgid "Appearance"
-msgstr "Paraqitja"
+msgid "General"
+msgstr "Të Përgjithshme"
 
 #: config.qml:19
 #, fuzzy, kde-format
@@ -55,74 +55,75 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Kohëmatës të Përkufizuar"
 
-#: config.qml:24
-#, kde-format
-msgctxt "@title"
-msgid "Advanced"
-msgstr ""
-
-#: configAdvanced.qml:22
-#, kde-format
-msgctxt "@title:label"
-msgid "After timer completes:"
-msgstr ""
-
-#: configAdvanced.qml:26
-#, fuzzy, kde-format
-#| msgid "Run a command:"
-msgctxt "@option:check"
-msgid "Execute command:"
-msgstr "Nis një komandë:"
-
-#: configAppearance.qml:30
+#: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
 msgstr ""
 
-#: configAppearance.qml:35
+#: configGeneral.qml:38
 #, fuzzy, kde-format
 #| msgid "Show title:"
 msgctxt "@option:check"
 msgid "Show title:"
 msgstr "Shfaq titullin:"
 
-#: configAppearance.qml:52
+#: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr ""
 
-#: configAppearance.qml:58
+#: configGeneral.qml:61
 #, fuzzy, kde-format
 #| msgid "Hide seconds"
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Fshihi sekondat"
 
-#: configAppearance.qml:63
+#: configGeneral.qml:66
 #, fuzzy, kde-format
 #| msgid "Show title:"
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Shfaq titullin:"
 
-#: configAppearance.qml:68
+#: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr ""
 
-#: configAppearance.qml:78
+#: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
-msgid "Notifications:"
+msgid "On timeout:"
 msgstr ""
 
-#: configAppearance.qml:82
-#, kde-format
+#: configGeneral.qml:85
+#, fuzzy, kde-format
+#| msgid "Show title:"
 msgctxt "@option:check"
-msgid "Show notification text:"
+msgid "Show notification:"
+msgstr "Shfaq titullin:"
+
+#: configGeneral.qml:97
+#, kde-format
+msgctxt "@placeholder"
+msgid "Timer finished"
+msgstr ""
+
+#: configGeneral.qml:107
+#, fuzzy, kde-format
+#| msgid "Run a command:"
+msgctxt "@option:check"
+msgid "Run command:"
+msgstr "Nis një komandë:"
+
+#: configGeneral.qml:119
+#, kde-format
+msgctxt "@placeholder"
+msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
 #: configTimes.qml:23
@@ -217,9 +218,15 @@ msgid "&Reset"
 msgstr "Rivendose"
 
 #, fuzzy
+#~| msgid "Appearance"
+#~ msgctxt "@title"
+#~ msgid "Appearance"
+#~ msgstr "Paraqitja"
+
+#, fuzzy
 #~| msgid "Run a command:"
-#~ msgctxt "@title:group"
-#~ msgid "Run Command"
+#~ msgctxt "@option:check"
+#~ msgid "Execute command:"
 #~ msgstr "Nis një komandë:"
 
 #, fuzzy
@@ -240,9 +247,6 @@ msgstr "Rivendose"
 
 #~ msgid "Timer Timeout"
 #~ msgstr "Skadenca e Kohëmatësit"
-
-#~ msgid "General"
-#~ msgstr "Të Përgjithshme"
 
 #~ msgid "Actions on Timeout"
 #~ msgstr "Veprimet në Skadimin e Kohës"
