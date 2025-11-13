@@ -11,8 +11,6 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.plasmoid
 
-import "logic.js" as Logic
-
 PlasmaComponents3.ToolButton {
     id: colorButton
 

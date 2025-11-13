@@ -9,8 +9,6 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 
-import "logic.js" as Logic
-
 KCM.SimpleKCM {
     property alias cfg_autoClipboard: autoClipboardCheckBox.checked
     property alias cfg_compactPreviewCount: compactPreviewCountSpinBox.value

@@ -1,10 +1,25 @@
-plasma_install_package(package org.kde.plasma.colorpicker)
-
-ecm_add_qml_module(colorpickerplugin URI org.kde.plasma.private.colorpicker)
-
-target_sources(colorpickerplugin PRIVATE
-    plugin/grabwidget.cpp
-    plugin/colorpickerplugin.cpp
+plasma_add_applet(org.kde.plasma.colorpicker
+    QML_SOURCES
+        qml/ColorCircle.qml
+        qml/ColorContextMenu.qml
+        qml/CompactRepresentation.qml
+        qml/configGeneral.qml
+        qml/config.qml
+        qml/ImageColors.qml
+        qml/LoadingIndicator.qml
+        qml/main.qml
+    CPP_SOURCES
+        grabwidget.cpp
+        utils.cpp
+    RESOURCES
+        main.xml
+        qml/Logic.js
+    GENERATE_APPLET_CLASS
 )
-target_link_libraries(colorpickerplugin PRIVATE Qt::DBus Qt::Gui Qt::Qml Qt::Widgets)
-ecm_finalize_qml_module(colorpickerplugin)
+
+target_link_libraries(org.kde.plasma.colorpicker PRIVATE
+    Qt::DBus
+    Qt::Gui
+    Qt::Qml
+    Qt::Widgets
+)
