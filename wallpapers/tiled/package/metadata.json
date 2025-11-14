@@ -51,6 +51,7 @@
         ],
         "Category": "",
         "Description": "Wallpaper view for tiled images",
+        "Description[ar]": "عرض خلفيات للصور المبلطة",
         "Description[bg]": "Изглед на тапети за изображения, подредени плочковидно",
         "Description[ca]": "Vista del fons de pantalla per a les imatges en mosaic",
         "Description[es]": "Vista de imágenes en mosaico para el fondo del escritorio",
@@ -77,6 +78,7 @@
             "image/webp"
         ],
         "Name": "Tiled",
+        "Name[ar]": "مُبلطة",
         "Name[bg]": "На плочки",
         "Name[ca]": "En mosaic",
         "Name[es]": "En mosaico",

@@ -5,6 +5,7 @@
             {
                 "Email": "kristen@kde.org",
                 "Name": "Kristen McWilliam",
+                "Name[ar]": "كريستين ماكويليام",
                 "Name[bg]": "Kristen McWilliam",
                 "Name[ca]": "Kristen McWilliam",
                 "Name[es]": "Kristen McWilliam",
@@ -21,6 +22,7 @@
             }
         ],
         "Description": "Switching virtual desktops only affects the primary screen",
+        "Description[ar]": "يؤثر تبديل سطح المكتب الافتراضي على الشاشة الرئيسية فقط",
         "Description[bg]": "Превключването на виртуални работни плотове засяга само главния екран.",
         "Description[ca]": "La commutació d'escriptoris virtuals només afecta la pantalla primària",
         "Description[es]": "El cambio de escritorios virtuales solo afecta a la pantalla principal",
@@ -38,6 +40,7 @@
         "Id": "virtualdesktopsonlyonprimary",
         "License": "LGPL-2.1-or-later",
         "Name": "Virtual Desktops Only on Primary",
+        "Name[ar]": "أجهزة سطح المكتب الافتراضية فقط على الأساسية",
         "Name[bg]": "Виртуални работни плотове само на главния",
         "Name[ca]": "Escriptoris virtuals només en el primari",
         "Name[es]": "Escritorios virtuales solo en el principal",
