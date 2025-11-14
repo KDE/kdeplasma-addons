@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-13 00:43+0000\n"
-"PO-Revision-Date: 2025-05-13 21:11+0100\n"
+"PO-Revision-Date: 2025-11-14 00:52+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.08.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: CompactRepresentation.qml:133
@@ -46,7 +46,7 @@ msgstr[1] "%1 s"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: config.qml:19
 #, kde-format
@@ -94,27 +94,22 @@ msgstr "Mostrar barra de avance"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "Al agotarse el tiempo:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Mostrar texto de notificación:"
+msgstr "Mostrar notificación:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Temporizador terminado"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Execute command:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
 msgstr "Ejecutar orden:"
@@ -123,7 +118,7 @@ msgstr "Ejecutar orden:"
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Temporizador terminado'"
 
 #: configTimes.qml:23
 #, kde-format
@@ -217,19 +212,3 @@ msgstr "De&tener"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Reiniciar"
-
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Aspecto visual"
-
-#~ msgctxt "@title"
-#~ msgid "Advanced"
-#~ msgstr "Avanzado"
-
-#~ msgctxt "@title:label"
-#~ msgid "After timer completes:"
-#~ msgstr "Cuando se complete el tiempo:"
-
-#~ msgctxt "@title:label"
-#~ msgid "Notifications:"
-#~ msgstr "Notificaciones:"

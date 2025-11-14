@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-13 00:43+0000\n"
-"PO-Revision-Date: 2025-04-24 04:43+0200\n"
+"PO-Revision-Date: 2025-11-13 03:15+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.5\n"
+"X-Generator: Poedit 3.8\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -42,7 +42,7 @@ msgstr[1] "%1 წმ"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "ზოგადი"
 
 #: config.qml:19
 #, kde-format
@@ -90,36 +90,31 @@ msgstr "მიმდინარების ზოლის ჩვენებ�
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "მოლოდინის ვადის ამოწურვისას:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "გაფრთხილების ტექსტის ჩვენება:"
+msgstr "გაფრთხილების ჩვენება:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "წამმზომი დასრულდა"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Execute command:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "მითითებული ბრძანების შესრულება:"
+msgstr "ბრძანების გაშვება:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'ტაიმერი დასრულდა'"
 
 #: configTimes.qml:23
 #, kde-format

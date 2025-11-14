@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-13 00:43+0000\n"
-"PO-Revision-Date: 2025-04-24 16:20+0200\n"
+"PO-Revision-Date: 2025-11-13 17:15+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -41,7 +41,7 @@ msgstr[1] "%1s"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "Algemeen"
 
 #: config.qml:19
 #, kde-format
@@ -89,36 +89,31 @@ msgstr "Voortgangsbalk tonen"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "Bij tijdslimiet verlopen"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Meldingtekst tonen:"
+msgstr "Melding tonen:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Timer is geëindigd"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Run Command"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "Commando uitvoeren"
+msgstr "Commando uitvoeren:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Timer liep af'"
 
 #: configTimes.qml:23
 #, kde-format

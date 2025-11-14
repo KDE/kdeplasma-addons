@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-13 00:43+0000\n"
-"PO-Revision-Date: 2025-04-24 20:39+0300\n"
+"PO-Revision-Date: 2025-11-13 10:22+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -47,7 +47,7 @@ msgstr[3] "%1 שנ׳"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "כללי"
 
 #: config.qml:19
 #, kde-format
@@ -95,35 +95,31 @@ msgstr "להציג סרגל התקדמות"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "עם תום זמן המתנה:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "הצגת טקסט התראה:"
+msgstr "הצגת התראה:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "קוצב הזמן הסתיים"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgid "Run command"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "הרץ פקודה"
+msgstr "הרצת פקודה:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'קוצב הזמן הסתיים'"
 
 #: configTimes.qml:23
 #, kde-format

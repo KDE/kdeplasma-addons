@@ -92,27 +92,22 @@ msgid "On timeout:"
 msgstr ""
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "显示通知文字："
+msgstr ""
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
-msgstr "计时结束"
+msgstr ""
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Execute command:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "执行命令："
+msgstr ""
 
 #: configGeneral.qml:119
 #, kde-format
@@ -207,19 +202,3 @@ msgstr "停止(&T)"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "重置(&R)"
-
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "外观"
-
-#~ msgctxt "@title"
-#~ msgid "Advanced"
-#~ msgstr "高级"
-
-#~ msgctxt "@title:label"
-#~ msgid "After timer completes:"
-#~ msgstr "计时结束后："
-
-#~ msgctxt "@title:label"
-#~ msgid "Notifications:"
-#~ msgstr "通知："
