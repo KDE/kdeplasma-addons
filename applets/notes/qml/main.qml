@@ -284,6 +284,7 @@ PlasmoidItem {
 
                     QQC2.Menu {
                         id: contextMenu
+                        popupType: QQC2.Menu.Window
 
                         readonly property bool shortcutsEnabled: contextMenu.visible
                         ShortcutMenuItem {
