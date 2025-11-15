@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-13 00:43+0000\n"
-"PO-Revision-Date: 2025-04-25 09:35+0300\n"
+"PO-Revision-Date: 2025-11-14 18:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-POOTLE-MTIME: 1413102232.000000\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -44,7 +44,7 @@ msgstr[1] "%1 sn"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "Genel"
 
 #: config.qml:19
 #, kde-format
@@ -92,36 +92,31 @@ msgstr "İlerleme çubuğunu göster"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "Zaman aşımında:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Bildirim metnini göster:"
+msgstr "Bildirimi göster:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Sayaç bitti"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Execute command:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "Komutu yürüt:"
+msgstr "Komutu çalıştır:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Sayaç bitti'"
 
 #: configTimes.qml:23
 #, kde-format

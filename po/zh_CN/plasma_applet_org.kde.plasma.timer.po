@@ -41,7 +41,7 @@ msgstr[0] "%1秒"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "常规"
 
 #: config.qml:19
 #, kde-format
@@ -89,31 +89,31 @@ msgstr "显示进度条"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "超时后："
 
 #: configGeneral.qml:85
 #, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr ""
+msgstr "显示通知："
 
 #: configGeneral.qml:97
 #, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
-msgstr ""
+msgstr "计时结束"
 
 #: configGeneral.qml:107
 #, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr ""
+msgstr "运行命令："
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox '计时结束'"
 
 #: configTimes.qml:23
 #, kde-format
