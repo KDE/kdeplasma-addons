@@ -18,7 +18,8 @@
                 "Name[sl]": "Kristen McWilliam",
                 "Name[tr]": "Kristen McWilliam",
                 "Name[uk]": "Kristen McWilliam",
-                "Name[zh_CN]": "Kristen McWilliam"
+                "Name[zh_CN]": "Kristen McWilliam",
+                "Name[zh_TW]": "Kristen McWilliam"
             }
         ],
         "Description": "Switching virtual desktops only affects the primary screen",
@@ -36,6 +37,7 @@
         "Description[tr]": "Sanal masaüstleri arasında geçiş yapmak yalnızca ana ekranı etkiler",
         "Description[uk]": "Перемикання віртуальних стільниць стосується лише основного екрана",
         "Description[zh_CN]": "切换虚拟桌面仅影响主屏幕",
+        "Description[zh_TW]": "讓切換虛擬桌面只影響主螢幕",
         "Icon": "preferences-system-windows-script-test",
         "Id": "virtualdesktopsonlyonprimary",
         "License": "LGPL-2.1-or-later",
@@ -53,7 +55,8 @@
         "Name[sl]": "Navidezna namizja samo na primarnem",
         "Name[tr]": "Sanal Masaüstleri Yalnızca Ana Ekranda",
         "Name[uk]": "Віртуальні стільниці лише на основному",
-        "Name[zh_CN]": "仅在主屏幕的虚拟桌面"
+        "Name[zh_CN]": "仅在主屏幕的虚拟桌面",
+        "Name[zh_TW]": "虛擬桌面僅限主螢幕"
     },
     "X-Plasma-API": "javascript"
 }

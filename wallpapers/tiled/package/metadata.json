@@ -65,6 +65,7 @@
         "Description[tr]": "Döşeli duvar kâğıdı görünümü",
         "Description[uk]": "Перегляд фонового зображення для зображень плитки",
         "Description[zh_CN]": "平铺图像壁纸视图",
+        "Description[zh_TW]": "平鋪影像的桌布檢視",
         "Icon": "preferences-desktop-wallpaper",
         "Id": "org.kde.tiled",
         "License": "GPLv2+",
@@ -92,6 +93,7 @@
         "Name[tr]": "Döşeli",
         "Name[uk]": "Плиткою",
         "Name[zh_CN]": "平铺",
+        "Name[zh_TW]": "平鋪",
         "Website": "https://kde.org/plasma-desktop"
     },
     "Keywords": "",
