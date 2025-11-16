@@ -33,7 +33,7 @@ Dependencies:
     'plasma/plasma-workspace': '@same'
  - 'on': ['Linux']
    'require':
-    'sdk/selenium-webdriver-at-spi': '@latest-kf6'
+    'sdk/selenium-webdriver-at-spi': '@same'
 
 RuntimeDependencies:
  - 'on': ['Linux']
