@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-13 00:43+0000\n"
-"PO-Revision-Date: 2025-04-24 12:37+0200\n"
+"PO-Revision-Date: 2025-11-13 15:20+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -45,7 +45,7 @@ msgstr[1] "%1s"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: config.qml:19
 #, kde-format
@@ -93,36 +93,32 @@ msgstr "Mostra la barra de progrés"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "Al venciment:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Mostra el text de notificació:"
+msgstr "Mostra una notificació:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "El temporitzador ha finalitzat"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Execute command:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "Executa l'ordre:"
+msgstr "Executa una ordre:"
 
+# skip-rule: t-apo_ini, t-apo_fim
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'El temporitzador ha finalitzat'"
 
 #: configTimes.qml:23
 #, kde-format
@@ -216,19 +212,3 @@ msgstr "A&tura"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Restablix"
-
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Aparença"
-
-#~ msgctxt "@title"
-#~ msgid "Advanced"
-#~ msgstr "Avançat"
-
-#~ msgctxt "@title:label"
-#~ msgid "After timer completes:"
-#~ msgstr "Després de completar el temporitzador:"
-
-#~ msgctxt "@title:label"
-#~ msgid "Notifications:"
-#~ msgstr "Notificacions:"
