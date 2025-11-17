@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-13 00:43+0000\n"
-"PO-Revision-Date: 2025-04-28 08:59+0200\n"
+"PO-Revision-Date: 2025-11-14 10:12+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.0\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -38,8 +38,7 @@ msgstr[0] "%1s"
 msgstr[1] "%1s"
 
 #: config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Generale"
@@ -90,36 +89,31 @@ msgstr "Mostra la barra di avanzamento"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "Alla scadenza:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Mostrare testo delle notifiche:"
+msgstr "Mostra la notifica:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Timer terminato"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Run Command"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "Esegui un comando"
+msgstr "Esegui il comando:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Timer completato'"
 
 #: configTimes.qml:23
 #, kde-format

@@ -217,19 +217,3 @@ msgstr "S&topp"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Nullstill"
-
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Utsjånad"
-
-#~ msgctxt "@title"
-#~ msgid "Advanced"
-#~ msgstr "Avansert"
-
-#~ msgctxt "@title:label"
-#~ msgid "After timer completes:"
-#~ msgstr "Etter nedteljinga:"
-
-#~ msgctxt "@title:label"
-#~ msgid "Notifications:"
-#~ msgstr "Varslingar:"
