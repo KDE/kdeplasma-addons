@@ -3,20 +3,20 @@
 # This file is distributed under the same license as the PACKAGE package.
 #
 # Sveinn í Felli <sveinki@nett.is>, 2009, 2011, 2013.
-# Guðmundur Erlingsson <gudmundure@gmail.com>, 2023.
+# SPDX-FileCopyrightText: 2023, 2025 Guðmundur Erlingsson <gudmundure@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-13 00:43+0000\n"
-"PO-Revision-Date: 2023-10-09 20:28+0000\n"
-"Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
+"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"PO-Revision-Date: 2025-11-16 12:22+0000\n"
+"Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
 "Language: is\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 25.08.3\n"
 "Plural-Forms: Plural-Forms: nplurals=2; plural=n != 1;\n"
 "\n"
 "\n"
@@ -43,8 +43,7 @@ msgstr[0] "%1s"
 msgstr[1] "%1s"
 
 #: config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Almennt"
@@ -95,26 +94,22 @@ msgstr "Sýna framvindustiku"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "Við tímamörk:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Sýna tilkynningatexta:"
+msgstr "Sýna tilkynningu:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Niðurtalningu lokið"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgid "Run a command:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
 msgstr "Keyra skipun:"
@@ -123,11 +118,10 @@ msgstr "Keyra skipun:"
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Niðurtalningu lokið'"
 
 #: configTimes.qml:23
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Bæta við"
