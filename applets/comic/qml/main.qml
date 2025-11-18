@@ -3,6 +3,8 @@
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Dialogs
@@ -29,17 +31,26 @@ PlasmoidItem {
 
     Plasmoid.icon: "face-laughing"
 
-    readonly property bool showComicAuthor: plasmoid.configuration.showComicAuthor
-    readonly property bool showComicTitle: plasmoid.configuration.showComicTitle
-    readonly property bool middleClick: plasmoid.configuration.middleClick
+    signal showNextNewStripRequested
 
-    property Comic.comicData comicData: Plasmoid.comicData
+    readonly property bool showComicAuthor: Plasmoid.configuration.showComicAuthor
+    readonly property bool showComicTitle: Plasmoid.configuration.showComicTitle
+    readonly property bool middleClick: Plasmoid.configuration.middleClick
+
+    readonly property Comic.comicData comicData: Plasmoid.comicData
+
+    property bool configNeededPlaceholderVisible: false
+    property bool currentTabHighlighted: false
+
+    function updateComic(comicId : string) : void {
+        Plasmoid.updateComic(comicId)
+    }
 
     Binding {
-        target: plasmoid
+        target: Plasmoid
         property: "configurationRequired"
-        value: plasmoid.configuration.tabIdentifier.length === 0
-            && !mainWindow.fullRepresentationItem?.configNeededPlaceholderVisible
+        value: Plasmoid.configuration.tabIdentifier.length === 0
+            && !mainWindow.configNeededPlaceholderVisible
             && mainWindow.height >= mainWindow.switchHeight
             && mainWindow.width >= mainWindow.switchWidth
 
@@ -49,14 +60,14 @@ PlasmoidItem {
         id: retryTimer
         running: Plasmoid.configuration.tabIdentifier.length > 0 && mainWindow.comicData.isError
         interval: 30 * 60 * 1000 // every 30 minutes
-        onTriggered: Plasmoid.updateComic(comicData.current)
+        onTriggered: mainWindow.updateComic(mainWindow.comicData.current)
     }
 
     Connections {
         target: QtNetwork.NetworkInformation
         function onReachabilityChanged() {
             if (QtNetwork.NetworkInformation.reachability == QtNetwork.NetworkInformation.Reachability.Online && mainWindow.comicData.isError) {
-                Plasmoid.updateComic(mainWindow.comicData.current)
+                mainWindow.updateComic(mainWindow.comicData.current)
             }
         }
     }
@@ -71,44 +82,44 @@ PlasmoidItem {
 
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
-            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.fullRepresentationItem?.comicTabbar.currentItem?.highlighted
+            enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.currentTabHighlighted
             visible: Plasmoid.configuration.checkNewComicStripsIntervall
-            text: i18nc("@action comic strip", "&Next Tab with a New Strip")
+            text: i18nc("@action comic strip", "&Next Tab with a New Strip") // qmllint disable unqualified
             icon.name: "go-next-view"
             shortcut: StandardKey.New
-            onTriggered: mainWindow.fullRepresentationItem.showNextNewStrip()
+            onTriggered: mainWindow.showNextNewStripRequested()
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.comicData.hasFirst
-            text: i18nc("@action", "Jump to &First Strip")
+            text: i18nc("@action", "Jump to &First Strip") // qmllint disable unqualified
             icon.name: "go-first"
-            onTriggered: Plasmoid.updateComic(mainWindow.comicData.first)
+            onTriggered: mainWindow.updateComic(mainWindow.comicData.first)
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@action", "Jump to &Current Strip")
+            text: i18nc("@action", "Jump to &Current Strip") // qmllint disable unqualified
             icon.name: "go-last"
-            onTriggered: Plasmoid.updateComic("")
+            onTriggered: mainWindow.updateComic("")
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@action", "Jump to Strip…")
+            text: i18nc("@action", "Jump to Strip…") // qmllint disable unqualified
             icon.name: "go-jump"
             onTriggered: jumpDialog.open()
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@action", "Visit the Website")
+            text: i18nc("@action", "Visit the Website") // qmllint disable unqualified
             onTriggered: mainWindow.comicData.launchWebsite()
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.comicData.shopUrl.toString() !== ""
-            text: i18nc("@action", "Visit the Shop &Website")
+            text: i18nc("@action", "Visit the Shop &Website") // qmllint disable unqualified
             onTriggered: mainWindow.comicData.launchShop()
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@action", "&Save Comic As…")
+            text: i18nc("@action", "&Save Comic As…") // qmllint disable unqualified
             icon.name: "document-save-as"
             onTriggered: {
                 saveDialog.checkCurrentFolder()
@@ -117,15 +128,15 @@ PlasmoidItem {
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@option:check Context menu of comic image", "&Actual Size")
+            text: i18nc("@option:check Context menu of comic image", "&Actual Size") // qmllint disable unqualified
             icon.name: "zoom-original"
             checkable: true
-            checked: plasmoid.showActualSize ?? false
+            checked: Plasmoid.showActualSize ?? false
             onTriggered: Plasmoid.showActualSize = this.checked
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@option:check Context menu of comic image", "Store Current &Position")
+            text: i18nc("@option:check Context menu of comic image", "Store Current &Position") // qmllint disable unqualified
             icon.name: "go-home"
             checkable: true
             checked: mainWindow.comicData.storePosition ?? false
@@ -134,6 +145,8 @@ PlasmoidItem {
     ]
 
     fullRepresentation:  Item {
+        id: widgetFullRepresentation
+
         anchors.fill: parent
         property alias comicTabbar: comicTabbar
         property alias configNeededPlaceholderVisible: configNeededPlaceholder.visible
@@ -142,10 +155,10 @@ PlasmoidItem {
             var firstHighlightedButtonIndex = undefined;
 
             for (var i = 0; i < comicTabbar.count; ++i) {
-                var button = comicTabbar.itemAt(i);
-                if (button.key !== undefined && button.highlighted == true) {
-                    //key is ordered
-                    if (button.key > comicTabbar.currentItem.key) {
+                var button = comicTabbar.itemAt(i) as ComicTab;
+                if (button.plugin !== undefined && button.highlight == true) {
+                    //plugin is ordered
+                    if (button.plugin > comicTabbar.currentComicTab.plugin) {
                         comicTabbar.setCurrentIndex(i);
                         return;
                     } else if (firstHighlightedButtonIndex === undefined){
@@ -159,6 +172,18 @@ PlasmoidItem {
             }
         }
 
+        Connections {
+            target: mainWindow
+            function onShowNextNewStripRequested() {
+                widgetFullRepresentation.showNextNewStrip()
+            }
+        }
+
+        Binding {
+            mainWindow.configNeededPlaceholderVisible: widgetFullRepresentation.configNeededPlaceholderVisible
+            mainWindow.currentTabHighlighted: comicTabbar.currentComicTab?.highlight ?? false
+        }
+
         ColumnLayout {
             anchors.fill: parent
 
@@ -167,37 +192,43 @@ PlasmoidItem {
 
                 Layout.fillWidth: true
 
-                visible: plasmoid.configuration.tabIdentifier.length > 1
+                readonly property ComicTab currentComicTab: comicTabbar.currentItem as ComicTab
 
-                onCurrentIndexChanged: {
-                    if (comicTabbar.currentItem && comicTabbar.currentItem.key != "") {
-                        plasmoid.tabChanged(comicTabbar.currentItem.key);
+                visible: Plasmoid.configuration.tabIdentifier.length > 1
+
+                onCurrentComicTabChanged: {
+                    if (comicTabbar.currentComicTab && comicTabbar.currentComicTab.plugin !== "") {
+                        Plasmoid.tabChanged(comicTabbar.currentComicTab.plugin);
                     }
                 }
 
                 Repeater {
                     model: enabledComicsModel
                     onItemAdded: (index, item) => {
-                        if (item.key === plasmoid.configuration.comic) {
+                        if ((item as ComicTab).plugin === Plasmoid.configuration.comic) {
                             comicTabbar.setCurrentIndex(index)
                         } else if (count === 1) {
                             comicTabbar.setCurrentIndex(0)
                             comicTabbar.currentIndexChanged()
                         }
                     }
-                    delegate:  PlasmaComponents3.TabButton {
-                        id: tabButton
+                    delegate: ComicTab { }
+                }
 
-                        readonly property string key: model.plugin
-                        property bool highlighted: model.highlight
-                        onToggled: {
-                            plasmoid.configuration.comic = comicTabbar.currentItem.key;
-                            plasmoid.configuration.writeConfig()
-                        }
+                component ComicTab: PlasmaComponents3.TabButton {
+                    id: tabButton
 
-                        text: model.display
-                        icon.source: model.decoration
+                    required property bool highlight
+                    required property string plugin
+                    required property string decoration
+                    required property var model
+
+                    onToggled: {
+                        Plasmoid.configuration.comic = plugin;
+                        Plasmoid.configuration.writeConfig()
                     }
+
+                    text: model.display // can't be required as it conflicts with AbstractButton
                 }
             }
 
@@ -216,10 +247,10 @@ PlasmoidItem {
 
                     if ( mainWindow.showComicTitle ) {
                         tempTop = mainWindow.comicData.title ?? "";
-                        tempTop += ( ( (mainWindow.comicData.stripTitle?.length > 0) && (mainWindow.comicData.title?.length > 0) ) ? " - " : "" ) + (mainWindow.comicData.stripTitle ?? "");
+                        tempTop += ( ( (mainWindow.comicData.stripTitle.length > 0) && (mainWindow.comicData.title.length > 0) ) ? " - " : "" ) + (mainWindow.comicData.stripTitle ?? "");
                     }
 
-                    if ( mainWindow.showComicAuthor && mainWindow.comicData.author?.length > 0 ) {
+                    if ( mainWindow.showComicAuthor && mainWindow.comicData.author.length > 0 ) {
                         tempTop = ( tempTop.length > 0 ? mainWindow.comicData.author + ": " + tempTop : mainWindow.comicData.author );
                     }
 
@@ -235,6 +266,7 @@ PlasmoidItem {
 
                 visible: Plasmoid.configuration.tabIdentifier.length > 0
                 comicData: mainWindow.comicData
+                onUpdateComicRequested: comicId =>  mainWindow.updateComic(comicId)
             }
 
             ComicBottomInfo {
@@ -253,10 +285,10 @@ PlasmoidItem {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 visible: Plasmoid.configuration.tabIdentifier.length === 0 && fitsInWidget
                 iconName: "folder-comic-symbolic"
-                text: i18nc("@info placeholdermessage if no comics loaded", "No comics configured")
+                text: i18nc("@info placeholdermessage if no comics loaded", "No comics configured") // qmllint disable unqualified
                 helpfulAction: Kirigami.Action {
                     icon.name: "configure"
-                    text: i18nc("@action:button helpfulAction opens settings dialog", "Choose comic…")
+                    text: i18nc("@action:button helpfulAction opens settings dialog", "Choose comic…") // qmllint disable unqualified
                     onTriggered: Plasmoid.internalAction("configure").trigger();
                 }
             }
@@ -267,7 +299,7 @@ PlasmoidItem {
         id: saveDialog
         fileMode: FileDialog.SaveFile
         defaultSuffix: "png"
-        currentFile: i18nc("@other filename pattern %1 path %2 comic (provider) name, %3 image id", "%1/%2 - %3.png", currentFolder, mainWindow.comicData.title, mainWindow.comicData.currentReadable)
+        currentFile: i18nc("@other filename pattern %1 path %2 comic (provider) name, %3 image id", "%1/%2 - %3.png", currentFolder, mainWindow.comicData.title, mainWindow.comicData.currentReadable)  // qmllint disable unqualified
 
         property list<string> paths: [
             Plasmoid.configuration.savingDir,
@@ -289,8 +321,8 @@ PlasmoidItem {
 
     Comic.JumpDialog {
         id: jumpDialog
-        comicData: Plasmoid.comicData
+        comicData: mainWindow.comicData
 
-        onAccepted: identifier => Plasmoid.updateComic(identifier)
+        onAccepted: identifier => mainWindow.updateComic(identifier)
     }
 }

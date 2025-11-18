@@ -9,7 +9,6 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.extras as PlasmaExtras
-import org.kde.kquickcontrolsaddons
 import org.kde.plasma.plasmoid
 import plasma.applet.org.kde.plasma.comic as Comic
 
@@ -17,6 +16,7 @@ Item {
     id: root
 
     property Comic.comicData comicData
+    signal updateComicRequested(comicId: string)
 
     PlasmaComponents3.ToolButton {
         id: arrowLeft
@@ -30,7 +30,7 @@ Item {
         visible: (!Plasmoid.configuration.arrowsOnHover && (root.comicData.prev !== undefined))
 
         onClicked: {
-            Plasmoid.updateComic(root.comicData.prev);
+            root.updateComicRequested(root.comicData.prev);
         }
     }
     PlasmaCore.ToolTipArea {
@@ -91,7 +91,7 @@ Item {
                 anchors.centerIn: parent
                 width: parent.width
                 height: parent.height
-                visible: (comicData.isError && !errorPlaceholder.visible) ?? false
+                visible: (root.comicData.isError && !errorPlaceholder.visible) ?? false
                 iconName: "error-symbolic"
             }
 
@@ -111,11 +111,11 @@ Item {
                 opacity: 0
 
                 onPrevClicked: {
-                    Plasmoid.updateComic(root.comicData.prev);
+                    root.updateComicRequested(root.comicData.prev);
                 }
 
                 onNextClicked: {
-                    Plasmoid.updateComic(root.comicData.next);
+                    root.updateComicRequested(root.comicData.next);
                 }
 
                 onZoomClicked: {
@@ -124,7 +124,7 @@ Item {
 
                 states: State {
                     name: "show"; when: (Plasmoid.configuration.arrowsOnHover && comicImageArea.containsMouse)
-                    PropertyChanges { target: buttonBar; opacity: 1; }
+                    PropertyChanges { buttonBar.opacity: 1 }
                 }
 
                 transitions: Transition {
@@ -147,7 +147,7 @@ Item {
         visible: (!Plasmoid.configuration.arrowsOnHover && (root.comicData.next !== undefined))
 
         onClicked: {
-            Plasmoid.updateComic(root.comicData.next);
+            root.updateComicRequested(root.comicData.next);
         }
     }
 

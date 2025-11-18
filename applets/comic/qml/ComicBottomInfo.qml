@@ -8,7 +8,6 @@ import QtQuick
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
-import org.kde.plasma.plasmoid
 import plasma.applet.org.kde.plasma.comic as Comic
 
 Item {
@@ -56,12 +55,12 @@ Item {
             }
 
             onClicked: {
-                jumpClicked();
+                root.jumpClicked();
             }
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: idLabelArea
-                mainText: i18nc("@info:tooltip", "Jump to strip…")
+                mainText: i18nc("@info:tooltip", "Jump to strip…") // qmllint disable unqualified
             }
         }
     }
@@ -101,7 +100,7 @@ Item {
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: idUrlLabelArea
-                mainText: i18nc("@info:tooltip", "Visit the comic website")
+                mainText: i18nc("@info:tooltip", "Visit the comic website")  // qmllint disable unqualified
             }
         }
     }

@@ -25,19 +25,19 @@ KCM.SimpleKCM {
     Kirigami.FormLayout {
         Controls.CheckBox {
             id: showComicTitle
-            Kirigami.FormData.label: i18nc ("@title:group form label for checkboxes", "Show above image:")
-            text: i18nc("@option:check show above image: ", "Title")
+            Kirigami.FormData.label: i18nc ("@title:group form label for checkboxes", "Show above image:")  // qmllint disable unqualified
+            text: i18nc("@option:check show above image: ", "Title")  // qmllint disable unqualified
         }
 
         Controls.CheckBox {
             id: showAuthor
-            text: i18nc("@option:check show above image: ", "Author")
+            text: i18nc("@option:check show above image: ", "Author")  // qmllint disable unqualified
         }
 
         Controls.CheckBox {
             id: showIdentifier
-            Kirigami.FormData.label: i18nc ("@title:group form label for checkboxes", "Show below image:")
-            text: i18nc("@option:check show below image", "Identifier")
+            Kirigami.FormData.label: i18nc ("@title:group form label for checkboxes", "Show below image:")  // qmllint disable unqualified
+            text: i18nc("@option:check show below image", "Identifier")  // qmllint disable unqualified
         }
 
         Controls.CheckBox {
@@ -51,14 +51,14 @@ KCM.SimpleKCM {
 
         Controls.RadioButton {
             id: alwaysShowArrows
-            Kirigami.FormData.label: i18nc("@label:group form label for radiobuttons", "Navigation buttons:")
-            text: i18nc("@option:radio navigation buttons are…", "Always visible at the edges")
+            Kirigami.FormData.label: i18nc("@label:group form label for radiobuttons", "Navigation buttons:")  // qmllint disable unqualified
+            text: i18nc("@option:radio navigation buttons are…", "Always visible at the edges")  // qmllint disable unqualified
             checked: !showArrowsOnOver.checked
         }
 
         Controls.RadioButton {
             id: showArrowsOnOver
-            text: i18nc("@option:radio navigation buttons…", "Appear centrally when hovering")
+            text: i18nc("@option:radio navigation buttons…", "Appear centrally when hovering")  // qmllint disable unqualified
         }
 
         Item {
@@ -67,8 +67,8 @@ KCM.SimpleKCM {
 
         Controls.CheckBox {
             id: middleClickCheckBox
-            Kirigami.FormData.label: i18nc("@label for checkbox, completes sentence … opens full-size view", "Middle-clicking image:")
-            text: i18nc("@option:check completes sentence Middle-clicking image…", "Opens full-size view")
+            Kirigami.FormData.label: i18nc("@label for checkbox, completes sentence … opens full-size view", "Middle-clicking image:")  // qmllint disable unqualified
+            text: i18nc("@option:check completes sentence Middle-clicking image…", "Opens full-size view")  // qmllint disable unqualified
         }
     }
 }

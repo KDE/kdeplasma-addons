@@ -3,6 +3,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as Controls
@@ -23,7 +24,7 @@ KCM.ScrollViewKCM {
     actions: [
         NewStuff.Action {
             id: newStuffAction
-            text: i18nc("@action:button", "Get New…")
+            text: i18nc("@action:button", "Get New…")  // qmllint disable unqualified
             configFile: "comic.knsrc"
             onEntryEvent: function(entry, event) {
                 if (event == 1) {
@@ -45,15 +46,19 @@ KCM.ScrollViewKCM {
         model: Plasmoid.availableComicsModel
         delegate: Kirigami.CheckSubtitleDelegate {
             id: checkdelegate
+
+            required property var model
+            required property string decoration
+            required property string plugin
+
             width: comicListView.width
-            text: model.display
-            icon.source: model.decoration
-            checked: model.checked
-            property string plugin: model.plugin
+            text: model.display // can't be required as it conflicts with AbstractButton
+            icon.source: decoration
+            checked: model.checked // can't be required as it conflicts with AbstractButton
             onCheckedChanged: {
                 if (model.checked != checked) {
                     model.checked = checked
-                    cfg_tabIdentifier = Plasmoid.availableComicsModel.checkedProviders()
+                    root.cfg_tabIdentifier = Plasmoid.availableComicsModel.checkedProviders()
                 }
             }
         }
@@ -62,9 +67,9 @@ KCM.ScrollViewKCM {
             anchors.centerIn: parent
             visible: comicListView.count < 1
             icon.name: "folder-comic-symbolic"
-            text: i18nc("@info placeholdermessage if comic provider list empty", "No comics installed")
+            text: i18nc("@info placeholdermessage if comic provider list empty", "No comics installed") // qmllint disable unqualified
             helpfulAction: NewStuff.Action { // not reusing toolbar action as the text feels awkward here
-                text: i18nc("@action:button", "Get Comics…")
+                text: i18nc("@action:button", "Get Comics…") // qmllint disable unqualified
                 configFile: "comic.knsrc"
                 onEntryEvent: function(entry, event) {
                     if (event == 1) {
@@ -78,7 +83,7 @@ KCM.ScrollViewKCM {
 
     footer: Kirigami.FormLayout {
         Layouts.RowLayout {
-            Kirigami.FormData.label: i18nc("@label:spinbox", "Check for new comics every:")
+            Kirigami.FormData.label: i18nc("@label:spinbox", "Check for new comics every:") // qmllint disable unqualified
 
             Controls.SpinBox {
                 id: checkNewComicStripsInterval
@@ -88,13 +93,13 @@ KCM.ScrollViewKCM {
             }
 
             Controls.Label {
-                text: i18ncp("@item:valuesuffix spacing to number + unit (minutes)", "minute", "minutes")
+                text: i18ncp("@item:valuesuffix spacing to number + unit (minutes)", "minute", "minutes") // qmllint disable unqualified
                 textFormat: Text.PlainText
             }
         }
 
         Layouts.RowLayout {
-            Kirigami.FormData.label: i18nc("@label:spinbox", "Keep local archive:")
+            Kirigami.FormData.label: i18nc("@label:spinbox", "Keep local archive:") // qmllint disable unqualified
 
             Controls.SpinBox {
                 id: maxComicLimit
@@ -102,7 +107,7 @@ KCM.ScrollViewKCM {
             }
 
             Controls.Label {
-                text: i18ncp("@item:valuesuffix spacing to number + unit", "images per comic", "images per comic")
+                text: i18ncp("@item:valuesuffix spacing to number + unit", "images per comic", "images per comic") // qmllint disable unqualified
                 textFormat: Text.PlainText
             }
         }
