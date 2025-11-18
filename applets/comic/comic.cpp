@@ -41,11 +41,11 @@ void ComicApplet::init()
 
 void ComicApplet::dataUpdated(const ComicMetaData &data)
 {
-    const QString source = data.identifier;
+    const QString source = data.identifier.left(data.identifier.indexOf(QLatin1Char(':')));
     setBusy(false);
 
     // disconnect prefetched comic strips
-    if (data.reason != RequestReason::View) {
+    if (data.reason != RequestReason::View || source != mCurrent.id()) {
         return;
     }
 
@@ -61,11 +61,11 @@ void ComicApplet::dataUpdated(const ComicMetaData &data)
 
     // prefetch the previous and following comic for faster navigation
     if (!data.error && mCurrent.hasNext()) {
-        const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.next();
+        const QString prefetch = source + QLatin1Char(':') + mCurrent.next();
         mEngine->requestSource(prefetch, RequestReason::Fetch);
     }
     if (!data.error && mCurrent.hasPrev()) {
-        const QString prefetch = mCurrent.id() + QLatin1Char(':') + mCurrent.prev();
+        const QString prefetch = source + QLatin1Char(':') + mCurrent.prev();
         mEngine->requestSource(prefetch, RequestReason::Fetch);
     }
 
