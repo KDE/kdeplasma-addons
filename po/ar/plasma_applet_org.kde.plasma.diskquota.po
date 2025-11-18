@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2022-08-08 23:16+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: Arabic <kde-l10n-ar@kde.org>\n"
@@ -62,19 +62,19 @@ msgstr "الحصّة: %1% مستخدمة"
 msgid "No quota restrictions found."
 msgstr "لم يُعثر على تحديدات للحصّة."
 
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "لم يُعثر على تحديدات للحصّة."
 
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
 msgstr "لم يُعثر على أداة Quota."
 
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:76
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"

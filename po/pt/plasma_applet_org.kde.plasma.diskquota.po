@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2022-07-31 22:58+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -56,19 +56,19 @@ msgstr "Quota: %1% em uso"
 msgid "No quota restrictions found."
 msgstr "Não foram encontradas restrições de quota."
 
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "Não foram encontradas restrições de quota"
 
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
 msgstr "A ferramenta Quota não foi encontrada"
 
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:76
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"

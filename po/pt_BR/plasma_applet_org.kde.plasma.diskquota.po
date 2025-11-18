@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.diskquota\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2022-08-19 15:27-0300\n"
 "Last-Translator: Luiz Fernando Ranghetti <elchevive@opensuse.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -63,19 +63,19 @@ msgstr "Cota: %1% utilizado"
 msgid "No quota restrictions found."
 msgstr "Nenhuma restrição de cota encontrada."
 
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "Nenhuma restrição de cota encontrada"
 
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
 msgstr "Ferramenta de cotas não encontrada"
 
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:76
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"

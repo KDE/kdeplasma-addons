@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2025-05-21 21:26+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -139,7 +139,7 @@ msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Új képregények keresési időköze:"
 
-#: qml/configComics.qml:89
+#: qml/configComics.qml:91
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -147,13 +147,13 @@ msgid_plural "minutes"
 msgstr[0] "perc"
 msgstr[1] "perc"
 
-#: qml/configComics.qml:95
+#: qml/configComics.qml:97
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr "Helyi archívum mérete:"
 
-#: qml/configComics.qml:103
+#: qml/configComics.qml:105
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2015-02-04 16:15+0000\n"
 "Last-Translator: Vedran Ljubovic <vljubovic@smartnet.ba>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -147,7 +147,7 @@ msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Provjeri nove stripove:"
 
-#: qml/configComics.qml:89
+#: qml/configComics.qml:91
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -157,13 +157,13 @@ msgstr[0] " minuta"
 msgstr[1] " minuta"
 msgstr[2] " minuta"
 
-#: qml/configComics.qml:95
+#: qml/configComics.qml:97
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr ""
 
-#: qml/configComics.qml:103
+#: qml/configComics.qml:105
 #, fuzzy, kde-format
 #| msgid " strips per comic"
 msgctxt "@item:valuesuffix spacing to number + unit"

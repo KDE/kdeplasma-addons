@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2016-12-09 00:26+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-i18n-doc@kde.org>\n"
@@ -61,14 +61,14 @@ msgstr "Kvoot: %1% kasutatud"
 msgid "No quota restrictions found."
 msgstr "Kvoodipiiranguid ei leitud."
 
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, fuzzy, kde-format
 #| msgid "No quota restrictions found."
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "Kvoodipiiranguid ei leitud."
 
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, fuzzy, kde-format
 #| msgid ""
 #| "Quota tool not found.\n"
@@ -81,7 +81,7 @@ msgstr ""
 "\n"
 "Palun paigalda \"quota\"."
 
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:76
 #, fuzzy, kde-format
 #| msgid "Please install 'quota'"
 msgctxt "@info:usagetip"

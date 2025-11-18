@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_comic.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2007-11-16 11:40-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -145,7 +145,7 @@ msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Lorg stiallchartúin nua:"
 
-#: qml/configComics.qml:89
+#: qml/configComics.qml:91
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -157,13 +157,13 @@ msgstr[2] " nóiméad"
 msgstr[3] " nóiméad"
 msgstr[4] " nóiméad"
 
-#: qml/configComics.qml:95
+#: qml/configComics.qml:97
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr ""
 
-#: qml/configComics.qml:103
+#: qml/configComics.qml:105
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2022-11-18 00:00+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
@@ -63,19 +63,19 @@ msgstr "Leidžiamas duomenų kiekis: Panaudota %1%"
 msgid "No quota restrictions found."
 msgstr "Nerasta jokių leidžiamo duomenų kiekio apribojimų."
 
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "Nerasta jokių leidžiamo duomenų kiekio apribojimų"
 
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
 msgstr "Nerastas leidžiamo duomenų kiekio įrankis"
 
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:76
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"

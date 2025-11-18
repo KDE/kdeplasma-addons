@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2025-09-08 14:57+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -140,7 +140,7 @@ msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Tikrinti ar yra naujų komiksų kas:"
 
-#: qml/configComics.qml:89
+#: qml/configComics.qml:91
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -150,13 +150,13 @@ msgstr[1] " min."
 msgstr[2] " min."
 msgstr[3] " min."
 
-#: qml/configComics.qml:95
+#: qml/configComics.qml:97
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr "Saugoti vietiniame archyve:"
 
-#: qml/configComics.qml:103
+#: qml/configComics.qml:105
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"

@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.diskquota\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2016-11-28 01:33+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -64,7 +64,7 @@ msgstr "Квота: %1% заузето"
 msgid "No quota restrictions found."
 msgstr "Ограничења квоте нису нађена."
 
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, fuzzy, kde-format
 #| msgid "No quota restrictions found."
 msgctxt "@info:status"
@@ -72,7 +72,7 @@ msgid "No quota restrictions found"
 msgstr "Ограничења квоте нису нађена."
 
 # rewrite-msgid: /install/install command/
-#: package/contents/ui/main.qml:77
+#: qml/main.qml:75
 #, fuzzy, kde-format
 #| msgid ""
 #| "Quota tool not found.\n"
@@ -86,7 +86,7 @@ msgstr ""
 "Инсталирајте наредбу ‘quota’."
 
 # rewrite-msgid: /install/install command/
-#: package/contents/ui/main.qml:78
+#: qml/main.qml:76
 #, fuzzy, kde-format
 #| msgid "Please install 'quota'"
 msgctxt "@info:usagetip"

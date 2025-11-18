@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2022-07-23 22:38+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -149,7 +149,7 @@ msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Nach neuen Comic-Seiten suchen alle:"
 
-#: qml/configComics.qml:89
+#: qml/configComics.qml:91
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -157,13 +157,13 @@ msgid_plural "minutes"
 msgstr[0] "Minute"
 msgstr[1] "Minuten"
 
-#: qml/configComics.qml:95
+#: qml/configComics.qml:97
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr ""
 
-#: qml/configComics.qml:103
+#: qml/configComics.qml:105
 #, fuzzy, kde-format
 #| msgctxt "@item:valuesuffix spacing to number + unit"
 #| msgid "strip per comic"

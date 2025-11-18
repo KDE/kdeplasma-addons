@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-18 00:45+0000\n"
 "PO-Revision-Date: 2011-06-29 23:33+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -145,7 +145,7 @@ msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "ਕੌਮਿਕ ਪੱਟੀ ਚੁਣੋ"
 
-#: qml/configComics.qml:89
+#: qml/configComics.qml:91
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -154,13 +154,13 @@ msgid_plural "minutes"
 msgstr[0] " ਮਿੰਟ"
 msgstr[1] " ਮਿੰਟ"
 
-#: qml/configComics.qml:95
+#: qml/configComics.qml:97
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr ""
 
-#: qml/configComics.qml:103
+#: qml/configComics.qml:105
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
