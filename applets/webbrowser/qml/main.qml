@@ -25,6 +25,7 @@ PlasmoidItem {
     switchWidth: inPanel ? Number.POSITIVE_INFINITY : Kirigami.Units.gridUnit * 16
     switchHeight: inPanel ? Number.POSITIVE_INFINITY : Kirigami.Units.gridUnit * 23
     Plasmoid.icon: "internet-web-browser-symbolic"
+    hideOnWindowDeactivate: !Plasmoid.configuration.pin
 
     // Only exists because the default CompactRepresentation doesn't expose
     // a way to display arbitrary images; it can only show icons.
@@ -92,7 +93,7 @@ PlasmoidItem {
                 display: PlasmaComponents3.AbstractButton.IconOnly
                 visible: plasmoid.configuration.useDefaultUrl
                 text: i18nc("@action:button", "Go Home")
-                PlasmaComponents3.ToolTip.visible: hovered
+                PlasmaComponents3.ToolTip.visible: hovered || activeFocus
                 PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents3.ToolTip.text: text
                 Accessible.name: goHomeButton.text
@@ -161,6 +162,21 @@ PlasmoidItem {
                 PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents3.ToolTip.text: text
             }
+            PlasmaComponents3.ToolButton {
+                checkable: true
+                checked: Plasmoid.configuration.pin
+                onToggled: Plasmoid.configuration.pin = checked
+                icon.name: "window-pin-symbolic"
+                visible: root.inPanel
+
+                display: PlasmaComponents3.AbstractButton.IconOnly
+                text: i18nc("@action:button keep this widget's pop-up open until explicitly dismissed", "Keep open")
+
+                PlasmaComponents3.ToolTip.visible: hovered
+                PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
+                PlasmaComponents3.ToolTip.text: text
+            }
+
         }
 
         Item {
