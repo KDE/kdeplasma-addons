@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-09-06 23:10+0300\n"
+"PO-Revision-Date: 2025-11-19 20:28+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.8\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -46,7 +46,7 @@ msgstr[3] "%1s"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "Bendra"
 
 #: config.qml:19
 #, kde-format
@@ -94,35 +94,31 @@ msgstr "Rodyti eigos juostą"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "Pasibaigus laikui:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Rodyti pranešimo tekstą:"
+msgstr "Rodyti pranešimą:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Pasibaigė laikmačio laikas"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgid "Run command"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "Vykdyti komandą"
+msgstr "Vykdyti komandą:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Pasibaigė laikmačio laikas'"
 
 #: configTimes.qml:23
 #, kde-format

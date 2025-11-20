@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-08-14 11:52+0400\n"
+"PO-Revision-Date: 2025-11-19 20:45+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -47,7 +47,7 @@ msgstr[5] "%1ث"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "عامّ"
 
 #: config.qml:19
 #, kde-format
@@ -95,35 +95,31 @@ msgstr "أظهر شريط التقدم"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "عند انتهت المهلة:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "أظهر إشعارًا"
+msgstr "أظهر إشعارًا:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "انتهى المؤقّت"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgid "Run command"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "شغّل أمرًا"
+msgstr "شغّل أمرًا:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'انتهى المؤقت'"
 
 #: configTimes.qml:23
 #, kde-format
