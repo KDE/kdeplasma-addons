@@ -72,6 +72,8 @@ KCM.ScrollViewKCM {
 
             contentItem: QQC2.Label {
                 Layout.fillWidth: true
+                Layout.fillHeight: true
+                verticalAlignment: Text.AlignVCenter
                 text: String(model.path).replace("file://", "")
                 textFormat: Text.PlainText
             }
