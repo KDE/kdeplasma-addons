@@ -905,9 +905,3 @@ msgstr "Много високо"
 #, kde-format
 msgid "Extreme"
 msgstr "Екстремно"
-
-#~ msgid "Cannot find '%1' using %2."
-#~ msgstr "Не може да се намери „%1“ с  %2."
-
-#~ msgid "Connection to %1 weather server timed out."
-#~ msgstr "Времето за връзка с %1 метеорологичния сървър изтече."

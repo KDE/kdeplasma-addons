@@ -122,6 +122,3 @@ msgstr "Петнадесет пъзела"
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Решете, като подредите по ред"
-
-#~ msgid "Colored numbers:"
-#~ msgstr "Цветни числа:"
