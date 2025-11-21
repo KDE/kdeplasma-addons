@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-04-29 22:52+0200\n"
+"PO-Revision-Date: 2025-11-20 11:02+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -41,7 +41,7 @@ msgstr[1] "%1s"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "Общи"
 
 #: config.qml:19
 #, kde-format
@@ -89,27 +89,22 @@ msgstr "Показване на лентата за прогрес"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "При изтичане на времето:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Показване на текста на известието:"
+msgstr "Показване на известие:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Таймерът завърши"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Execute command:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
 msgstr "Изпълнение на команда:"
@@ -118,7 +113,7 @@ msgstr "Изпълнение на команда:"
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Таймерът завърши'"
 
 #: configTimes.qml:23
 #, kde-format
@@ -212,19 +207,3 @@ msgstr "Ст&оп"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Нулиране"
-
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Външен вид"
-
-#~ msgctxt "@title"
-#~ msgid "Advanced"
-#~ msgstr "Разширени"
-
-#~ msgctxt "@title:label"
-#~ msgid "After timer completes:"
-#~ msgstr "След завършване на таймера:"
-
-#~ msgctxt "@title:label"
-#~ msgid "Notifications:"
-#~ msgstr "Известия:"
