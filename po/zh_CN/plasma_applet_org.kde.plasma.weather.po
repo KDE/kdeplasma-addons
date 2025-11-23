@@ -500,13 +500,13 @@ msgstr "显示温度："
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr "在挂件图标上"
+msgstr "在小部件图标上"
 
 #: qml/config/ConfigAppearance.qml:56
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr "在挂件图标旁"
+msgstr "在小部件图标旁"
 
 #: qml/config/ConfigAppearance.qml:63
 #, kde-format

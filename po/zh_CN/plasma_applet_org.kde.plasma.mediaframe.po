@@ -192,7 +192,7 @@ msgstr "没有配置媒体"
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
-msgstr "添加文件或文件夹以在挂件中显示它们。"
+msgstr "添加文件或文件夹以在小部件中显示它们。"
 
 #: package/contents/ui/ConfigMedia.qml:99
 #, kde-format
