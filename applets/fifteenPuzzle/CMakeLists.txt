@@ -1,8 +1,3 @@
-ecm_install_icons(
-    ICONS sc-apps-fifteenpuzzle.svgz
-    DESTINATION ${KDE_INSTALL_ICONDIR}
-)
-
 ecm_add_qml_module(fifteenpuzzleplugin URI org.kde.plasma.private.fifteenpuzzle)
 target_sources(fifteenpuzzleplugin PRIVATE
     plugin/fifteenimageprovider.cpp

@@ -28,8 +28,11 @@ PlasmoidItem {
         || Plasmoid.location === PlasmaCore.Types.RightEdge
         || Plasmoid.location === PlasmaCore.Types.BottomEdge
         || Plasmoid.location === PlasmaCore.Types.LeftEdge)
+
     readonly property bool compactInPanel: inPanel && !!compactRepresentationItem?.visible
 
+    Plasmoid.icon: inPanel ? "fifteenpuzzle-symbolic" : "fifteenpuzzle"
+    
     preferredRepresentation: fullRepresentation
 
     toolTipMainText: i18n("Fifteen Puzzle");
