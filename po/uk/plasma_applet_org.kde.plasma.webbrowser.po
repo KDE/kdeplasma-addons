@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-24 00:44+0000\n"
 "PO-Revision-Date: 2024-10-07 09:57+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -106,7 +106,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Завжди завантажувати цю сторінку:"
 
-#: qml/ConfigGeneral.qml:65 qml/main.qml:118
+#: qml/ConfigGeneral.qml:65 qml/main.qml:119
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -142,60 +142,67 @@ msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "Режим конфіденційності"
 
-#: qml/main.qml:73
+#: qml/main.qml:74
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Назад"
 
-#: qml/main.qml:83
+#: qml/main.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Вперед"
 
-#: qml/main.qml:94
+#: qml/main.qml:95
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "Перейти до домівки"
 
-#: qml/main.qml:99
+#: qml/main.qml:100
 #, kde-format
 msgid "Open Default URL"
 msgstr "Відкрити типову адресу"
 
-#: qml/main.qml:158
+#: qml/main.qml:159
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Зупинити завантаження цієї сторінки"
 
-#: qml/main.qml:158
+#: qml/main.qml:159
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Перезавантажити цю сторінку"
 
-#: qml/main.qml:211
+#: qml/main.qml:173
+#, kde-format
+msgctxt ""
+"@action:button keep this widget's pop-up open until explicitly dismissed"
+msgid "Keep open"
+msgstr ""
+
+#: qml/main.qml:227
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Відкрити посилання у Інтернет-навігаторі"
 
-#: qml/main.qml:217
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Скопіювати адресу посилання"
 
-#: qml/main.qml:284
+#: qml/main.qml:300
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Заблоковано контекстне вікно"
 
-#: qml/main.qml:285
+#: qml/main.qml:301
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

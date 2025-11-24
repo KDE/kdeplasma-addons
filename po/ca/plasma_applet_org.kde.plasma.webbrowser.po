@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-24 00:44+0000\n"
 "PO-Revision-Date: 2024-10-07 10:12+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -107,7 +107,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Carrega sempre aquesta pàgina:"
 
-#: qml/ConfigGeneral.qml:65 qml/main.qml:118
+#: qml/ConfigGeneral.qml:65 qml/main.qml:119
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -143,60 +143,67 @@ msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "Navegació privada"
 
-#: qml/main.qml:73
+#: qml/main.qml:74
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Retrocedeix"
 
-#: qml/main.qml:83
+#: qml/main.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Avança"
 
-#: qml/main.qml:94
+#: qml/main.qml:95
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "Ves a l'inici"
 
-#: qml/main.qml:99
+#: qml/main.qml:100
 #, kde-format
 msgid "Open Default URL"
 msgstr "Obre un URL predeterminat"
 
-#: qml/main.qml:158
+#: qml/main.qml:159
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Atura la càrrega d'aquesta pàgina"
 
-#: qml/main.qml:158
+#: qml/main.qml:159
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Torna a carregar aquesta pàgina"
 
-#: qml/main.qml:211
+#: qml/main.qml:173
+#, kde-format
+msgctxt ""
+"@action:button keep this widget's pop-up open until explicitly dismissed"
+msgid "Keep open"
+msgstr ""
+
+#: qml/main.qml:227
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Obre l'enllaç en un navegador"
 
-#: qml/main.qml:217
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copia l'adreça de l'enllaç"
 
-#: qml/main.qml:284
+#: qml/main.qml:300
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "S'ha blocat la finestra emergent"
 
-#: qml/main.qml:285
+#: qml/main.qml:301
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

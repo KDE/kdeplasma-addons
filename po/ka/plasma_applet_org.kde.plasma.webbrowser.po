@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-24 00:44+0000\n"
 "PO-Revision-Date: 2024-10-07 05:29+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -106,7 +106,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "ყოველთვის ჩატვირთე ეს გვერდი:"
 
-#: qml/ConfigGeneral.qml:65 qml/main.qml:118
+#: qml/ConfigGeneral.qml:65 qml/main.qml:119
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -142,60 +142,67 @@ msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "ანონიმური ფანჯარა"
 
-#: qml/main.qml:73
+#: qml/main.qml:74
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "უკან დაბრუნება"
 
-#: qml/main.qml:83
+#: qml/main.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "წინ გადასვლა"
 
-#: qml/main.qml:94
+#: qml/main.qml:95
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "საწყისზე გადასვლა"
 
-#: qml/main.qml:99
+#: qml/main.qml:100
 #, kde-format
 msgid "Open Default URL"
 msgstr "ნაგულისხმევი ბმულის გახსნა"
 
-#: qml/main.qml:158
+#: qml/main.qml:159
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "ამ გვერდის ჩატვირთვის გაჩერება"
 
-#: qml/main.qml:158
+#: qml/main.qml:159
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "ამ გვერდის განახლება"
 
-#: qml/main.qml:211
+#: qml/main.qml:173
+#, kde-format
+msgctxt ""
+"@action:button keep this widget's pop-up open until explicitly dismissed"
+msgid "Keep open"
+msgstr ""
+
+#: qml/main.qml:227
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "ბმულის ბრაუზერში გახსნა"
 
-#: qml/main.qml:217
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "ბმულის მისამართის კოპირება"
 
-#: qml/main.qml:284
+#: qml/main.qml:300
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "მხტუნარა დაიბლოკა"
 
-#: qml/main.qml:285
+#: qml/main.qml:301
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

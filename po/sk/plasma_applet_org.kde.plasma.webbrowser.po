@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.webbrowser\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-24 00:44+0000\n"
 "PO-Revision-Date: 2023-12-12 19:25+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -106,7 +106,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Znovu načítať túto stránku"
 
-#: qml/ConfigGeneral.qml:65 qml/main.qml:118
+#: qml/ConfigGeneral.qml:65 qml/main.qml:119
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -142,62 +142,69 @@ msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr ""
 
-#: qml/main.qml:73
+#: qml/main.qml:74
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Návrat"
 
-#: qml/main.qml:83
+#: qml/main.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Dopredu"
 
-#: qml/main.qml:94
+#: qml/main.qml:95
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr ""
 
-#: qml/main.qml:99
+#: qml/main.qml:100
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "Type a URL"
 msgid "Open Default URL"
 msgstr "Napísať URL"
 
-#: qml/main.qml:158
+#: qml/main.qml:159
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Zastaviť načítanie tejto stránky"
 
-#: qml/main.qml:158
+#: qml/main.qml:159
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Znovu načítať túto stránku"
 
-#: qml/main.qml:211
+#: qml/main.qml:173
+#, kde-format
+msgctxt ""
+"@action:button keep this widget's pop-up open until explicitly dismissed"
+msgid "Keep open"
+msgstr ""
+
+#: qml/main.qml:227
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Otvoriť odkaz v prehliadači"
 
-#: qml/main.qml:217
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopírovať adresu odkazu"
 
-#: qml/main.qml:284
+#: qml/main.qml:300
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Blokovanie vyskakovacieho okna"
 
-#: qml/main.qml:285
+#: qml/main.qml:301
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

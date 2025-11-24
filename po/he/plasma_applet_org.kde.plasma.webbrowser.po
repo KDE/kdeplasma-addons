@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-24 00:44+0000\n"
 "PO-Revision-Date: 2025-10-05 12:23+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -106,7 +106,7 @@ msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "תמיד לטעון את העמוד הזה:"
 
-#: qml/ConfigGeneral.qml:65 qml/main.qml:118
+#: qml/ConfigGeneral.qml:65 qml/main.qml:119
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
@@ -142,60 +142,67 @@ msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "גלישה פרטית"
 
-#: qml/main.qml:73
+#: qml/main.qml:74
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "אחורה"
 
-#: qml/main.qml:83
+#: qml/main.qml:84
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "קדימה"
 
-#: qml/main.qml:94
+#: qml/main.qml:95
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "מעבר לדף הבית"
 
-#: qml/main.qml:99
+#: qml/main.qml:100
 #, kde-format
 msgid "Open Default URL"
 msgstr "פתיחת כתובת ברירת המחדל"
 
-#: qml/main.qml:158
+#: qml/main.qml:159
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "עצירת טעינת העמוד הזה"
 
-#: qml/main.qml:158
+#: qml/main.qml:159
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "ריענון העמוד הזה"
 
-#: qml/main.qml:211
+#: qml/main.qml:173
+#, kde-format
+msgctxt ""
+"@action:button keep this widget's pop-up open until explicitly dismissed"
+msgid "Keep open"
+msgstr ""
+
+#: qml/main.qml:227
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "פתיחת הקישור בדפדפן"
 
-#: qml/main.qml:217
+#: qml/main.qml:233
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "העתקת כתובת קישור"
 
-#: qml/main.qml:284
+#: qml/main.qml:300
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "החלון הקופץ נחסם"
 
-#: qml/main.qml:285
+#: qml/main.qml:301
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"
