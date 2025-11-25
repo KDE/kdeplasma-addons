@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-25 00:43+0000\n"
 "PO-Revision-Date: 2017-01-14 19:23+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -125,12 +125,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Rešeno! Probajte opet."
 
-#: qml/main.qml:35
+#: qml/main.qml:38
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Petnaestica"
 
-#: qml/main.qml:36
+#: qml/main.qml:39
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Reši raspoređivanjem po redosledu"

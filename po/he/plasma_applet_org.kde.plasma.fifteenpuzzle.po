@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-25 00:43+0000\n"
 "PO-Revision-Date: 2025-08-11 09:16+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -117,12 +117,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "נפתר! אפשר לנסות שוב."
 
-#: qml/main.qml:35
+#: qml/main.qml:38
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "תצרף חמש־עשרה"
 
-#: qml/main.qml:36
+#: qml/main.qml:39
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "צריך לפתור על ידי סידור נכון"

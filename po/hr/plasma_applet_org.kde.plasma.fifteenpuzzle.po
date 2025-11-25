@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-25 00:43+0000\n"
 "PO-Revision-Date: 2010-07-18 14:30+0200\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -121,13 +121,13 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr ""
 
-#: qml/main.qml:35
+#: qml/main.qml:38
 #, fuzzy, kde-format
 #| msgid "Configure Fifteen Puzzle"
 msgid "Fifteen Puzzle"
 msgstr "Podesi Fifteen Puzzle"
 
-#: qml/main.qml:36
+#: qml/main.qml:39
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr ""

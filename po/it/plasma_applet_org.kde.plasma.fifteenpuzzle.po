@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-25 00:43+0000\n"
 "PO-Revision-Date: 2025-08-14 21:11+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -116,12 +116,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Risolto! Prova ancora."
 
-#: qml/main.qml:35
+#: qml/main.qml:38
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Gioco del quindici"
 
-#: qml/main.qml:36
+#: qml/main.qml:39
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Risolvi ripristinando l'ordine"
