@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-18 00:45+0000\n"
+"POT-Creation-Date: 2025-11-27 00:44+0000\n"
 "PO-Revision-Date: 2025-06-22 09:09+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -29,13 +29,13 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1 "
 
-#: qml/ComicBottomInfo.qml:64
+#: qml/ComicBottomInfo.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Przejdź do paska..."
 
-#: qml/ComicBottomInfo.qml:104
+#: qml/ComicBottomInfo.qml:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -119,31 +119,31 @@ msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
 msgstr "Otwiera widok w pełnowymiarowy"
 
-#: qml/configComics.qml:26
+#: qml/configComics.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
 msgstr "Pobierz nowe…"
 
-#: qml/configComics.qml:65
+#: qml/configComics.qml:70
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
 msgstr "Nie wgrano żadnego komiksu"
 
-#: qml/configComics.qml:67
+#: qml/configComics.qml:72
 #, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Pobierz komiksy…"
 
-#: qml/configComics.qml:81
+#: qml/configComics.qml:86
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Sprawdzaj nowe komiksy co:"
 
-#: qml/configComics.qml:91
+#: qml/configComics.qml:96
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -152,13 +152,13 @@ msgstr[0] "minutę"
 msgstr[1] "minuty"
 msgstr[2] "minut"
 
-#: qml/configComics.qml:97
+#: qml/configComics.qml:102
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr "Zachowaj archiwum lokalne:"
 
-#: qml/configComics.qml:105
+#: qml/configComics.qml:110
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
@@ -241,73 +241,73 @@ msgstr ""
 "Obraz dla tego dnia jest niedostępny lub nie można go odczytać. Spróbuj "
 "innej daty."
 
-#: qml/main.qml:76
+#: qml/main.qml:87
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Następna karta z nowym paskiem"
 
-#: qml/main.qml:83
+#: qml/main.qml:94
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Przejdź do &pierwszego paska"
 
-#: qml/main.qml:89
+#: qml/main.qml:100
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Przejdź do bieżą&cego paska"
 
-#: qml/main.qml:95
+#: qml/main.qml:106
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Przejdź do paska..."
 
-#: qml/main.qml:101
+#: qml/main.qml:112
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Odwiedź stronę sieciową"
 
-#: qml/main.qml:106
+#: qml/main.qml:117
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Odwiedź &witrynę sklepu"
 
-#: qml/main.qml:111
+#: qml/main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "Zapi&sz komiks jako..."
 
-#: qml/main.qml:120
+#: qml/main.qml:131
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Rzeczywisty rozmi&ar"
 
-#: qml/main.qml:128
+#: qml/main.qml:139
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Zapisz bieżące &położenie"
 
-#: qml/main.qml:256
+#: qml/main.qml:288
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Nie ustawiono żadnego komiksu"
 
-#: qml/main.qml:259
+#: qml/main.qml:291
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "Wybierz komiks…"
 
-#: qml/main.qml:270
+#: qml/main.qml:302
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

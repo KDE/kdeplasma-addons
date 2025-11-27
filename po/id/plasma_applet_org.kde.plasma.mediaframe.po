@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-27 00:44+0000\n"
 "PO-Revision-Date: 2022-06-07 14:36+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -176,32 +176,32 @@ msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Tambah File…"
 
-#: package/contents/ui/ConfigMedia.qml:82
+#: package/contents/ui/ConfigMedia.qml:84
 #, fuzzy, kde-format
 #| msgid "Remove path"
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Hapus alur"
 
-#: package/contents/ui/ConfigMedia.qml:92
+#: package/contents/ui/ConfigMedia.qml:94
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr ""
 
-#: package/contents/ui/ConfigMedia.qml:93
+#: package/contents/ui/ConfigMedia.qml:95
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr ""
 
-#: package/contents/ui/ConfigMedia.qml:99
+#: package/contents/ui/ConfigMedia.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Memilih File"
 
-#: package/contents/ui/ConfigMedia.qml:119
+#: package/contents/ui/ConfigMedia.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"

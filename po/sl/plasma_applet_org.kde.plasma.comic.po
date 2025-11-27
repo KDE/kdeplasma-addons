@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-18 00:45+0000\n"
+"POT-Creation-Date: 2025-11-27 00:44+0000\n"
 "PO-Revision-Date: 2025-05-14 07:19+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -30,13 +30,13 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "št. %1"
 
-#: qml/ComicBottomInfo.qml:64
+#: qml/ComicBottomInfo.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Skoči na sliko…"
 
-#: qml/ComicBottomInfo.qml:104
+#: qml/ComicBottomInfo.qml:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -120,31 +120,31 @@ msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
 msgstr "Odpre pogled v polni velikosti"
 
-#: qml/configComics.qml:26
+#: qml/configComics.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
 msgstr "Dobi nove…"
 
-#: qml/configComics.qml:65
+#: qml/configComics.qml:70
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
 msgstr "Ni nameščenih stripov"
 
-#: qml/configComics.qml:67
+#: qml/configComics.qml:72
 #, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Dobi stripe…"
 
-#: qml/configComics.qml:81
+#: qml/configComics.qml:86
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Preveri za novimi slikami stripa vsak:"
 
-#: qml/configComics.qml:91
+#: qml/configComics.qml:96
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -154,13 +154,13 @@ msgstr[1] "minuti"
 msgstr[2] "minute"
 msgstr[3] "minut"
 
-#: qml/configComics.qml:97
+#: qml/configComics.qml:102
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr "Ohranjaj lokalni arhiv:"
 
-#: qml/configComics.qml:105
+#: qml/configComics.qml:110
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
@@ -245,73 +245,73 @@ msgstr ""
 "Slika za ta dan ni na voljo ali je ni mogoče prebrati. Poskusite z drugim "
 "datumom."
 
-#: qml/main.qml:76
+#: qml/main.qml:87
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "&Naslednji zavihek z novo sliko"
 
-#: qml/main.qml:83
+#: qml/main.qml:94
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Skoči na prvo sliko"
 
-#: qml/main.qml:89
+#: qml/main.qml:100
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Skoči na trenutno sliko"
 
-#: qml/main.qml:95
+#: qml/main.qml:106
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Skoči na sliko…"
 
-#: qml/main.qml:101
+#: qml/main.qml:112
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Obišči spletišče"
 
-#: qml/main.qml:106
+#: qml/main.qml:117
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Obišči spletišče trgovine"
 
-#: qml/main.qml:111
+#: qml/main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Shrani strip kot…"
 
-#: qml/main.qml:120
+#: qml/main.qml:131
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "Dejanska velikost"
 
-#: qml/main.qml:128
+#: qml/main.qml:139
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Shrani trenutni &položaj"
 
-#: qml/main.qml:256
+#: qml/main.qml:288
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Ni konfiguriranih stripov"
 
-#: qml/main.qml:259
+#: qml/main.qml:291
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "Izberite strip…"
 
-#: qml/main.qml:270
+#: qml/main.qml:302
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"

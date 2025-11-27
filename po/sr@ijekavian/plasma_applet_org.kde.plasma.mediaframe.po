@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-11-27 00:44+0000\n"
 "PO-Revision-Date: 2017-12-03 22:53+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -211,26 +211,26 @@ msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Додај фајлове..."
 
-#: package/contents/ui/ConfigMedia.qml:82
+#: package/contents/ui/ConfigMedia.qml:84
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr ""
 
-#: package/contents/ui/ConfigMedia.qml:92
+#: package/contents/ui/ConfigMedia.qml:94
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr ""
 
-#: package/contents/ui/ConfigMedia.qml:93
+#: package/contents/ui/ConfigMedia.qml:95
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr ""
 
 # >> @title:window
-#: package/contents/ui/ConfigMedia.qml:99
+#: package/contents/ui/ConfigMedia.qml:101
 #, fuzzy, kde-format
 #| msgid "Choose files"
 msgctxt "@title:window"
@@ -238,7 +238,7 @@ msgid "Choose Files"
 msgstr "Избор фајлова"
 
 # >> @title:window
-#: package/contents/ui/ConfigMedia.qml:119
+#: package/contents/ui/ConfigMedia.qml:121
 #, fuzzy, kde-format
 #| msgid "Choose a folder"
 msgctxt "@title:window"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-18 00:45+0000\n"
+"POT-Creation-Date: 2025-11-27 00:44+0000\n"
 "PO-Revision-Date: 2025-05-17 19:33+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -27,13 +27,13 @@ msgctxt "an abbreviation for Number"
 msgid "# %1"
 msgstr "# %1"
 
-#: qml/ComicBottomInfo.qml:64
+#: qml/ComicBottomInfo.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
 msgstr "Jauzi ... zerrendara"
 
-#: qml/ComicBottomInfo.qml:104
+#: qml/ComicBottomInfo.qml:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
@@ -117,31 +117,31 @@ msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
 msgstr "Tamaina osoko ikuspegia irekitzen du"
 
-#: qml/configComics.qml:26
+#: qml/configComics.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
 msgstr "Lortu ... berria"
 
-#: qml/configComics.qml:65
+#: qml/configComics.qml:70
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
 msgstr "Ez da komikirik instalatu"
 
-#: qml/configComics.qml:67
+#: qml/configComics.qml:72
 #, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Lortu komikiak..."
 
-#: qml/configComics.qml:81
+#: qml/configComics.qml:86
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Hainbestero komiki berririk dagoen egiaztatu:"
 
-#: qml/configComics.qml:91
+#: qml/configComics.qml:96
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -149,13 +149,13 @@ msgid_plural "minutes"
 msgstr[0] "minutu"
 msgstr[1] "minutu"
 
-#: qml/configComics.qml:97
+#: qml/configComics.qml:102
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr "Mantendu artxibo lokala:"
 
-#: qml/configComics.qml:105
+#: qml/configComics.qml:110
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
@@ -238,73 +238,73 @@ msgstr ""
 "Egun honetarako irudia ez dago erabilgarri edo ezin da irakurri. Saiatu "
 "beste data batekin."
 
-#: qml/main.qml:76
+#: qml/main.qml:87
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
 msgstr "Zerrenda berria duen &Hurrengo fitxa"
 
-#: qml/main.qml:83
+#: qml/main.qml:94
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Jauzi &lehenbiziko zerrendara"
 
-#: qml/main.qml:89
+#: qml/main.qml:100
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Jauzi &uneko zerrendara"
 
-#: qml/main.qml:95
+#: qml/main.qml:106
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
 msgstr "Jauzi ... zerrendara"
 
-#: qml/main.qml:101
+#: qml/main.qml:112
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
 msgstr "Bisitatu webgunea"
 
-#: qml/main.qml:106
+#: qml/main.qml:117
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Bisitatu dendaren &webgunea"
 
-#: qml/main.qml:111
+#: qml/main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
 msgstr "&Gorde komikia honela..."
 
-#: qml/main.qml:120
+#: qml/main.qml:131
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "&Actual Size"
 msgstr "&Uneko neurria"
 
-#: qml/main.qml:128
+#: qml/main.qml:139
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Gorde uneko &kokapena"
 
-#: qml/main.qml:256
+#: qml/main.qml:288
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
 msgstr "Ez da komikirik konfiguratu"
 
-#: qml/main.qml:259
+#: qml/main.qml:291
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
 msgstr "Hautatu komikia..."
 
-#: qml/main.qml:270
+#: qml/main.qml:302
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
