@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-09-27 13:22+0100\n"
+"PO-Revision-Date: 2025-11-28 13:09+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -40,11 +40,10 @@ msgstr[1] "%1s"
 msgstr[2] "%1s"
 
 #: config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr "General"
+msgstr "Generale"
 
 #: config.qml:19
 #, kde-format
@@ -92,35 +91,31 @@ msgstr "Arată bara de progres"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "La expirare:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Arată textul notificării:"
+msgstr "Arată notificare:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Temporizatorul a expirat"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgid "Run a command:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "Execută o comandă:"
+msgstr "Rulează comandă:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Temporizator expirat'"
 
 #: configTimes.qml:23
 #, kde-format
