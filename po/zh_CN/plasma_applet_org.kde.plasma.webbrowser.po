@@ -180,7 +180,7 @@ msgstr "重新加载此页面"
 msgctxt ""
 "@action:button keep this widget's pop-up open until explicitly dismissed"
 msgid "Keep open"
-msgstr ""
+msgstr "保持打开"
 
 #: qml/main.qml:227
 #, kde-format
