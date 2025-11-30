@@ -5,13 +5,13 @@
  */
 pragma ComponentBehavior: Bound
 
-import QtQuick 2.2
+import QtQuick
 
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.plasmoid 2.0
+import org.kde.kirigami as Kirigami
+import org.kde.plasma.extras as PlasmaExtras
+import org.kde.plasma.plasmoid
 
-import org.kde.draganddrop 2.0 as DragAndDrop
+import org.kde.draganddrop as DragAndDrop
 
 import plasma.applet.org.kde.plasma.quicklaunch
 import "layout.js" as LayoutManager
