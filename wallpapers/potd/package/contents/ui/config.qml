@@ -5,13 +5,13 @@
  */
 
 import QtQuick
-import QtQuick.Controls 2.8 as QQC2
-import QtQuick.Layouts 1.15
+import QtQuick.Controls as QQC2
+import QtQuick.Layouts
 
-import org.kde.kquickcontrols 2.0 as KQC2
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.kquickcontrols as KQC2
+import org.kde.kirigami as Kirigami
 
-import org.kde.plasma.wallpapers.potd 1.0
+import org.kde.plasma.wallpapers.potd
 
 Kirigami.FormLayout {
     id: root

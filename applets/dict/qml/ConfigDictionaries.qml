@@ -4,12 +4,10 @@
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
 
-import QtQuick 2.15
-import QtQuick.Controls 2.5
-import QtQuick.Layouts 1.15
+import QtQuick
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
-import org.kde.plasma.private.dict 1.0
+import org.kde.plasma.private.dict
 
 KCM.ScrollViewKCM {
 

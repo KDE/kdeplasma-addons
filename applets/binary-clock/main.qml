@@ -12,15 +12,14 @@
 pragma ComponentBehavior: Bound
 
 import QtQml
-import QtQuick 2.0
-import QtQuick.Layouts 1.1
+import QtQuick
+import QtQuick.Layouts
 
-import org.kde.plasma.plasmoid 2.0
-import org.kde.kirigami 2.20 as Kirigami
+import org.kde.plasma.plasmoid
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.clock
 import org.kde.plasma.core as PlasmaCore
-import org.kde.plasma.extras 2.0 as PlasmaExtras
-import org.kde.plasma.workspace.calendar 2.0 as PlasmaCalendar
+import org.kde.plasma.workspace.calendar as PlasmaCalendar
 
 PlasmoidItem {
     id: root

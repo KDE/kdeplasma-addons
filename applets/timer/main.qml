@@ -4,13 +4,12 @@
  *   SPDX-License-Identifier: GPL-3.0-or-later
  */
 
-import QtQuick 2.15
-import org.kde.plasma.plasmoid 2.0
+import QtQuick
+import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
-import org.kde.kirigami 2.20 as Kirigami
-import org.kde.kquickcontrolsaddons 2.0 as QtExtra
+import org.kde.kirigami as Kirigami
 import plasma.applet.org.kde.plasma.timer as TimerPlasmoid
-import org.kde.notification 1.0
+import org.kde.notification
 
 PlasmoidItem {
     id: root;

@@ -6,9 +6,9 @@
 
 import QtQuick
 
-import org.kde.kirigami 2.12 as Kirigami // For Action and Units
+import org.kde.kirigami as Kirigami // For Action and Units
 
-import org.kde.plasma.wallpapers.potd 1.0
+import org.kde.plasma.wallpapers.potd
 
 Column {
     id: wallpaperPreview
