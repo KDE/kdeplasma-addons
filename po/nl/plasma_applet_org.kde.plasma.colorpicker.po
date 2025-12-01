@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2023-05-14 12:05+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -17,25 +17,19 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.1\n"
 
-#: package/contents/config/config.qml:11
-#, kde-format
-msgctxt "@title"
-msgid "General"
-msgstr "Algemeen"
-
-#: package/contents/ui/ColorCircle.qml:41
+#: qml/ColorCircle.qml:39
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Midden-klik om de kleurcode te kopiëren"
 
-#: package/contents/ui/CompactRepresentation.qml:77
+#: qml/CompactRepresentation.qml:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Kies een kleur"
 
-#: package/contents/ui/CompactRepresentation.qml:84
+#: qml/CompactRepresentation.qml:81
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -45,79 +39,85 @@ msgstr ""
 "Sleep hier een kleurcode heen om het op te slaan<nl/>Sleep een "
 "afbeeldingsbestand hier heen om zijn gemiddelde kleur te verkrijgen"
 
-#: package/contents/ui/configGeneral.qml:23
+#: qml/config.qml:11
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "Algemeen"
+
+#: qml/configGeneral.qml:21
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Standaard kleurformaat:"
 
-#: package/contents/ui/configGeneral.qml:33
+#: qml/configGeneral.qml:31
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Kleur automatisch kopiëren naar het klembord"
 
-#: package/contents/ui/configGeneral.qml:41
+#: qml/configGeneral.qml:39
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "Bij indrukken van de sneltoets:"
 
-#: package/contents/ui/configGeneral.qml:42
+#: qml/configGeneral.qml:40
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Kies een kleur"
 
-#: package/contents/ui/configGeneral.qml:48
+#: qml/configGeneral.qml:46
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Geschiedenis tonen"
 
-#: package/contents/ui/configGeneral.qml:59
+#: qml/configGeneral.qml:57
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
 msgstr "Aantal voorbeelden:"
 
-#: package/contents/ui/main.qml:124
+#: qml/main.qml:121
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Kleurendialoog openen"
 
-#: package/contents/ui/main.qml:129
+#: qml/main.qml:126
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Geschiedenis wissen"
 
-#: package/contents/ui/main.qml:137
+#: qml/main.qml:134
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Geschiedenis bekijken"
 
-#: package/contents/ui/main.qml:145
+#: qml/main.qml:142
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Naar klembord kopiëren"
 
-#: package/contents/ui/main.qml:185
+#: qml/main.qml:182
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Geen kleuren"
 
-#: package/contents/ui/main.qml:185
+#: qml/main.qml:182
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "Kleur kiezen is niet beschikbaar wanneer compositing is uitgeschakeld"
 
-#: package/contents/ui/main.qml:186
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
@@ -126,25 +126,25 @@ msgstr ""
 "Compositing is handmatig uitgeschakeld of geblokkeerd door een actieve "
 "toepassing"
 
-#: package/contents/ui/main.qml:193
+#: qml/main.qml:190
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Kies een kleur"
 
-#: package/contents/ui/main.qml:201
+#: qml/main.qml:198
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "Compositing configureren"
 
-#: package/contents/ui/main.qml:387
+#: qml/main.qml:384
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Gekopieerd!"
 
-#: package/contents/ui/main.qml:398
+#: qml/main.qml:395
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

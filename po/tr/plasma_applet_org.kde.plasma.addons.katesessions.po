@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2024-02-09 17:46+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 24.01.95\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: qml/KateSessionsItemDelegate.qml:91
 #, kde-format
 msgid "Session name"
 msgstr "Oturum adı"
 
-#: contents/ui/KateSessionsItemDelegate.qml:103
+#: qml/KateSessionsItemDelegate.qml:103
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "Yeni oturum oluştur ve Kate’i başlat"
 
-#: contents/ui/KateSessionsItemDelegate.qml:115
+#: qml/KateSessionsItemDelegate.qml:115
 #, kde-format
 msgid "Cancel session creation"
 msgstr "Oturum oluşturmayı iptal et"
 
-#: contents/ui/main.qml:41
+#: qml/main.qml:41
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate Oturumları"
 
-#: contents/ui/main.qml:59
+#: qml/main.qml:59
 #, kde-format
 msgid "Search…"
 msgstr "Ara…"

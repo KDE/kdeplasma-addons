@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2025-08-03 12:19+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -19,25 +19,19 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: package/contents/config/config.qml:11
-#, kde-format
-msgctxt "@title"
-msgid "General"
-msgstr "عامّ"
-
-#: package/contents/ui/ColorCircle.qml:41
+#: qml/ColorCircle.qml:39
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "انقر بالزر الأوسط لنسخ رمز اللون"
 
-#: package/contents/ui/CompactRepresentation.qml:77
+#: qml/CompactRepresentation.qml:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "انتقِ لونًا"
 
-#: package/contents/ui/CompactRepresentation.qml:84
+#: qml/CompactRepresentation.qml:81
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -45,104 +39,110 @@ msgid ""
 "average color"
 msgstr "اسحب رمز اللون لتحفظه<nl/> اسحب ملف الصورة هنا لتحصل على اللون المتوسط"
 
-#: package/contents/ui/configGeneral.qml:23
+#: qml/config.qml:11
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "عامّ"
+
+#: qml/configGeneral.qml:21
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "تنسيق اللون المبدئيّ:"
 
-#: package/contents/ui/configGeneral.qml:33
+#: qml/configGeneral.qml:31
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "انسخ اللون إلى الحافظة آليًّا"
 
-#: package/contents/ui/configGeneral.qml:41
+#: qml/configGeneral.qml:39
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "عند ضغط اختصار لوحة المفاتيح:"
 
-#: package/contents/ui/configGeneral.qml:42
+#: qml/configGeneral.qml:40
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "انتقِ لونًا"
 
-#: package/contents/ui/configGeneral.qml:48
+#: qml/configGeneral.qml:46
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "أظهر التأريخ"
 
-#: package/contents/ui/configGeneral.qml:59
+#: qml/configGeneral.qml:57
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
 msgstr "عاين العدد:"
 
-#: package/contents/ui/main.qml:124
+#: qml/main.qml:121
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "افتح حواريّ الألوان"
 
-#: package/contents/ui/main.qml:129
+#: qml/main.qml:126
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "امحُ التاريخ"
 
-#: package/contents/ui/main.qml:137
+#: qml/main.qml:134
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "عرض التاريخ"
 
-#: package/contents/ui/main.qml:145
+#: qml/main.qml:142
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "انسخ إلى الحافظة"
 
-#: package/contents/ui/main.qml:185
+#: qml/main.qml:182
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "بلا ألوان"
 
-#: package/contents/ui/main.qml:185
+#: qml/main.qml:182
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "انتقاء لون غير ممكن عندما يكون التركيب معطل"
 
-#: package/contents/ui/main.qml:186
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr "عُطل التركيب يدويا أو حظر بأحد التطبيقات التي تعمل"
 
-#: package/contents/ui/main.qml:193
+#: qml/main.qml:190
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "انتقِ لونًا"
 
-#: package/contents/ui/main.qml:201
+#: qml/main.qml:198
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "اضبط التركيب"
 
-#: package/contents/ui/main.qml:387
+#: qml/main.qml:384
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "نُسخ!"
 
-#: package/contents/ui/main.qml:398
+#: qml/main.qml:395
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

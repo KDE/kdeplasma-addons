@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2021-10-17 14:03-0700\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -20,25 +20,19 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: package/contents/config/config.qml:11
-#, kde-format
-msgctxt "@title"
-msgid "General"
-msgstr "全般"
-
-#: package/contents/ui/ColorCircle.qml:41
+#: qml/ColorCircle.qml:39
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr ""
 
-#: package/contents/ui/CompactRepresentation.qml:77
+#: qml/CompactRepresentation.qml:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "色選択"
 
-#: package/contents/ui/CompactRepresentation.qml:84
+#: qml/CompactRepresentation.qml:81
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -46,55 +40,61 @@ msgid ""
 "average color"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:23
+#: qml/config.qml:11
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "全般"
+
+#: qml/configGeneral.qml:21
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "デフォルトの色フォーマット:"
 
-#: package/contents/ui/configGeneral.qml:33
+#: qml/configGeneral.qml:31
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "自動的に色をクリップボードにコピー"
 
-#: package/contents/ui/configGeneral.qml:41
+#: qml/configGeneral.qml:39
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "キーボードショートカットが入力されたとき:"
 
-#: package/contents/ui/configGeneral.qml:42
+#: qml/configGeneral.qml:40
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "色を選択"
 
-#: package/contents/ui/configGeneral.qml:48
+#: qml/configGeneral.qml:46
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "履歴を表示"
 
-#: package/contents/ui/configGeneral.qml:59
+#: qml/configGeneral.qml:57
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
 msgstr ""
 
-#: package/contents/ui/main.qml:124
+#: qml/main.qml:121
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "色ダイアログを開く"
 
-#: package/contents/ui/main.qml:129
+#: qml/main.qml:126
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "履歴をクリア"
 
-#: package/contents/ui/main.qml:137
+#: qml/main.qml:134
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "Clear History"
@@ -102,13 +102,13 @@ msgctxt "@action"
 msgid "View History"
 msgstr "履歴をクリア"
 
-#: package/contents/ui/main.qml:145
+#: qml/main.qml:142
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "クリップボードにコピー"
 
-#: package/contents/ui/main.qml:185
+#: qml/main.qml:182
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Pick color"
@@ -116,38 +116,38 @@ msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "色選択"
 
-#: package/contents/ui/main.qml:185
+#: qml/main.qml:182
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr ""
 
-#: package/contents/ui/main.qml:186
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
 
-#: package/contents/ui/main.qml:193
+#: qml/main.qml:190
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "色選択"
 
-#: package/contents/ui/main.qml:201
+#: qml/main.qml:198
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr ""
 
-#: package/contents/ui/main.qml:387
+#: qml/main.qml:384
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:398
+#: qml/main.qml:395
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

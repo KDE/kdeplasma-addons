@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2021-07-05 08:53+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -19,27 +19,27 @@ msgstr ""
 "%100==4 ? 3 : 0);\n"
 "X-Generator: Lokalize 20.12.2\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: qml/KateSessionsItemDelegate.qml:91
 #, kde-format
 msgid "Session name"
 msgstr "Ime seje"
 
-#: contents/ui/KateSessionsItemDelegate.qml:103
+#: qml/KateSessionsItemDelegate.qml:103
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "Ustvari novo sejo in zaženi Kate"
 
-#: contents/ui/KateSessionsItemDelegate.qml:115
+#: qml/KateSessionsItemDelegate.qml:115
 #, kde-format
 msgid "Cancel session creation"
 msgstr "Prekliči ustvarjanje seje"
 
-#: contents/ui/main.qml:41
+#: qml/main.qml:41
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Seje programa Kate"
 
-#: contents/ui/main.qml:59
+#: qml/main.qml:59
 #, kde-format
 msgid "Search…"
 msgstr "Poišči…"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2025-05-13 21:09+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -21,13 +21,13 @@ msgstr ""
 "X-Generator: Lokalize 2.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: package/contents/ui/main.qml:69
+#: main.qml:69
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Perfiles de Konsole"
 
-#: package/contents/ui/main.qml:90
+#: main.qml:90
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "Cadena de texto que significa algo"

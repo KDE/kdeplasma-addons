@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2016-12-18 21:56+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -19,28 +19,21 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: package/contents/config/config.qml:11
-#, fuzzy, kde-format
-#| msgid "General"
-msgctxt "@title"
-msgid "General"
-msgstr "Opšte"
-
-#: package/contents/ui/ColorCircle.qml:41
+#: qml/ColorCircle.qml:39
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr ""
 
 # >> @option:radio When pressing the keyboard shortcut:
-#: package/contents/ui/CompactRepresentation.qml:77
+#: qml/CompactRepresentation.qml:74
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Izaberi boju"
 
-#: package/contents/ui/CompactRepresentation.qml:84
+#: qml/CompactRepresentation.qml:81
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -48,21 +41,28 @@ msgid ""
 "average color"
 msgstr ""
 
-#: package/contents/ui/configGeneral.qml:23
+#: qml/config.qml:11
+#, fuzzy, kde-format
+#| msgid "General"
+msgctxt "@title"
+msgid "General"
+msgstr "Opšte"
+
+#: qml/configGeneral.qml:21
 #, fuzzy, kde-format
 #| msgid "Default color format:"
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Podrazumevani format boje:"
 
-#: package/contents/ui/configGeneral.qml:33
+#: qml/configGeneral.qml:31
 #, fuzzy, kde-format
 #| msgid "Automatically copy color to clipboard"
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Automatski kopiraj boju u klipbord"
 
-#: package/contents/ui/configGeneral.qml:41
+#: qml/configGeneral.qml:39
 #, fuzzy, kde-format
 #| msgid "When pressing the keyboard shortcut:"
 msgctxt "@label"
@@ -70,7 +70,7 @@ msgid "When pressing the keyboard shortcut:"
 msgstr "Na pritisak prečice sa tastature:"
 
 # >> @option:radio When pressing the keyboard shortcut:
-#: package/contents/ui/configGeneral.qml:42
+#: qml/configGeneral.qml:40
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@option:radio"
@@ -78,41 +78,41 @@ msgid "Pick a color"
 msgstr "Izaberi boju"
 
 # >> @option:radio When pressing the keyboard shortcut:
-#: package/contents/ui/configGeneral.qml:48
+#: qml/configGeneral.qml:46
 #, fuzzy, kde-format
 #| msgid "Show history"
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Prikaži istorijat"
 
-#: package/contents/ui/configGeneral.qml:59
+#: qml/configGeneral.qml:57
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
 msgstr ""
 
-#: package/contents/ui/main.qml:124
+#: qml/main.qml:121
 #, fuzzy, kde-format
 #| msgid "Open Color Dialog"
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Otvori dijalog boja"
 
-#: package/contents/ui/main.qml:129
+#: qml/main.qml:126
 #, fuzzy, kde-format
 #| msgid "Clear History"
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Očisti istorijat"
 
-#: package/contents/ui/main.qml:137
+#: qml/main.qml:134
 #, fuzzy, kde-format
 #| msgid "Clear History"
 msgctxt "@action"
 msgid "View History"
 msgstr "Očisti istorijat"
 
-#: package/contents/ui/main.qml:145
+#: qml/main.qml:142
 #, fuzzy, kde-format
 #| msgid "Copy to Clipboard"
 msgctxt "@title:menu"
@@ -120,46 +120,46 @@ msgid "Copy to Clipboard"
 msgstr "Kopiraj u klipbord"
 
 # >> @option:radio When pressing the keyboard shortcut:
-#: package/contents/ui/main.qml:185
+#: qml/main.qml:182
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Izaberi boju"
 
-#: package/contents/ui/main.qml:185
+#: qml/main.qml:182
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr ""
 
-#: package/contents/ui/main.qml:186
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
 
-#: package/contents/ui/main.qml:193
+#: qml/main.qml:190
 #, fuzzy, kde-format
 #| msgid "Pick Color"
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Izaberi boju"
 
-#: package/contents/ui/main.qml:201
+#: qml/main.qml:198
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr ""
 
-#: package/contents/ui/main.qml:387
+#: qml/main.qml:384
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: package/contents/ui/main.qml:398
+#: qml/main.qml:395
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

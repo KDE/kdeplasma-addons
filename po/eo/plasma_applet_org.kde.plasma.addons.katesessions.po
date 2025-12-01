@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2023-03-26 18:35+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -18,27 +18,27 @@ msgstr ""
 "X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: qml/KateSessionsItemDelegate.qml:91
 #, kde-format
 msgid "Session name"
 msgstr "Nomo de la seanco"
 
-#: contents/ui/KateSessionsItemDelegate.qml:103
+#: qml/KateSessionsItemDelegate.qml:103
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "Krei novan seancon kaj komenci Kate"
 
-#: contents/ui/KateSessionsItemDelegate.qml:115
+#: qml/KateSessionsItemDelegate.qml:115
 #, kde-format
 msgid "Cancel session creation"
 msgstr "Nuligi kreadon de seanco"
 
-#: contents/ui/main.qml:41
+#: qml/main.qml:41
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate Seancoj"
 
-#: contents/ui/main.qml:59
+#: qml/main.qml:59
 #, kde-format
 msgid "Search…"
 msgstr "Serĉi…"

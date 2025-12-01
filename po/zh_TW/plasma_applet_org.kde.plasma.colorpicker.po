@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2023-05-27 23:28+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese <zh-l10n@linux.org.tw>\n"
@@ -22,25 +22,19 @@ msgstr ""
 "X-Generator: Lokalize 23.04.1\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: package/contents/config/config.qml:11
-#, kde-format
-msgctxt "@title"
-msgid "General"
-msgstr "一般"
-
-#: package/contents/ui/ColorCircle.qml:41
+#: qml/ColorCircle.qml:39
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "按中鍵複製顏色碼"
 
-#: package/contents/ui/CompactRepresentation.qml:77
+#: qml/CompactRepresentation.qml:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "挑選顏色"
 
-#: package/contents/ui/CompactRepresentation.qml:84
+#: qml/CompactRepresentation.qml:81
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -48,104 +42,110 @@ msgid ""
 "average color"
 msgstr "將顏色碼拖到這裡來儲存它<nl/>將影像檔拖到這裡來取得它的平均顏色"
 
-#: package/contents/ui/configGeneral.qml:23
+#: qml/config.qml:11
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr "一般"
+
+#: qml/configGeneral.qml:21
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "預設色彩格式："
 
-#: package/contents/ui/configGeneral.qml:33
+#: qml/configGeneral.qml:31
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "自動複製顏色到剪貼簿"
 
-#: package/contents/ui/configGeneral.qml:41
+#: qml/configGeneral.qml:39
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "按下鍵盤快捷鍵時："
 
-#: package/contents/ui/configGeneral.qml:42
+#: qml/configGeneral.qml:40
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "挑選顏色"
 
-#: package/contents/ui/configGeneral.qml:48
+#: qml/configGeneral.qml:46
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "顯示歷史紀錄"
 
-#: package/contents/ui/configGeneral.qml:59
+#: qml/configGeneral.qml:57
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
 msgstr "預覽數量："
 
-#: package/contents/ui/main.qml:124
+#: qml/main.qml:121
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "開啟色彩對話框"
 
-#: package/contents/ui/main.qml:129
+#: qml/main.qml:126
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "清除歷史"
 
-#: package/contents/ui/main.qml:137
+#: qml/main.qml:134
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "檢視歷史"
 
-#: package/contents/ui/main.qml:145
+#: qml/main.qml:142
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "複製到剪貼簿"
 
-#: package/contents/ui/main.qml:185
+#: qml/main.qml:182
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "沒有顏色"
 
-#: package/contents/ui/main.qml:185
+#: qml/main.qml:182
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "合成器停用時無法使用顏色挑選功能"
 
-#: package/contents/ui/main.qml:186
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr "合成器已被手動暫停或是被執行中應用程式阻擋"
 
-#: package/contents/ui/main.qml:193
+#: qml/main.qml:190
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "挑選顏色"
 
-#: package/contents/ui/main.qml:201
+#: qml/main.qml:198
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "設定合成"
 
-#: package/contents/ui/main.qml:387
+#: qml/main.qml:384
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "已複製！"
 
-#: package/contents/ui/main.qml:398
+#: qml/main.qml:395
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

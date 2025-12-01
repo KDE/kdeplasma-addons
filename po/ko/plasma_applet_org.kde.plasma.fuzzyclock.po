@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2019-04-12 01:18+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,864 +17,864 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: package/contents/config/config.qml:13
+#: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "모양"
 
-#: package/contents/ui/configAppearance.qml:24
+#: qml/configAppearance.qml:24
 #, kde-format
 msgctxt "@title:group"
 msgid "Font:"
 msgstr "글꼴:"
 
-#: package/contents/ui/configAppearance.qml:25
+#: qml/configAppearance.qml:25
 #, kde-format
 msgctxt "@option:check"
 msgid "Bold text"
 msgstr "굵은 텍스트"
 
-#: package/contents/ui/configAppearance.qml:30
+#: qml/configAppearance.qml:30
 #, kde-format
 msgctxt "@option:check"
 msgid "Italic text"
 msgstr "이탤릭 텍스트"
 
-#: package/contents/ui/configAppearance.qml:39
+#: qml/configAppearance.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Fuzzyness:"
 msgstr "퍼지 정도:"
 
-#: package/contents/ui/configAppearance.qml:49
+#: qml/configAppearance.qml:49
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Accurate"
 msgstr "정확하게"
 
-#: package/contents/ui/configAppearance.qml:58
+#: qml/configAppearance.qml:58
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"
 msgstr "개략적으로"
 
-#: package/contents/ui/FuzzyClock.qml:35
+#: qml/FuzzyClock.qml:35
 #, kde-format
 msgid "One o’clock"
 msgstr "1시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:36
+#: qml/FuzzyClock.qml:36
 #, kde-format
 msgid "Five past one"
 msgstr "1시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:37
+#: qml/FuzzyClock.qml:37
 #, kde-format
 msgid "Ten past one"
 msgstr "1시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:38
+#: qml/FuzzyClock.qml:38
 #, kde-format
 msgid "Quarter past one"
 msgstr "1시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:39
+#: qml/FuzzyClock.qml:39
 #, kde-format
 msgid "Twenty past one"
 msgstr "1시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:40
+#: qml/FuzzyClock.qml:40
 #, kde-format
 msgid "Twenty-five past one"
 msgstr "1시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:41
+#: qml/FuzzyClock.qml:41
 #, kde-format
 msgid "Half past one"
 msgstr "1시 반"
 
-#: package/contents/ui/FuzzyClock.qml:42
+#: qml/FuzzyClock.qml:42
 #, kde-format
 msgid "Twenty-five to two"
 msgstr "2시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:43
+#: qml/FuzzyClock.qml:43
 #, kde-format
 msgid "Twenty to two"
 msgstr "2시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:44
+#: qml/FuzzyClock.qml:44
 #, kde-format
 msgid "Quarter to two"
 msgstr "2시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:45
+#: qml/FuzzyClock.qml:45
 #, kde-format
 msgid "Ten to two"
 msgstr "2시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:46
+#: qml/FuzzyClock.qml:46
 #, kde-format
 msgid "Five to two"
 msgstr "2시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:47
+#: qml/FuzzyClock.qml:47
 #, kde-format
 msgid "Two o’clock"
 msgstr "2시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:48
+#: qml/FuzzyClock.qml:48
 #, kde-format
 msgid "Five past two"
 msgstr "2시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:49
+#: qml/FuzzyClock.qml:49
 #, kde-format
 msgid "Ten past two"
 msgstr "2시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:50
+#: qml/FuzzyClock.qml:50
 #, kde-format
 msgid "Quarter past two"
 msgstr "2시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:51
+#: qml/FuzzyClock.qml:51
 #, kde-format
 msgid "Twenty past two"
 msgstr "2시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:52
+#: qml/FuzzyClock.qml:52
 #, kde-format
 msgid "Twenty-five past two"
 msgstr "2시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:53
+#: qml/FuzzyClock.qml:53
 #, kde-format
 msgid "Half past two"
 msgstr "2시 반"
 
-#: package/contents/ui/FuzzyClock.qml:54
+#: qml/FuzzyClock.qml:54
 #, kde-format
 msgid "Twenty-five to three"
 msgstr "3시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:55
+#: qml/FuzzyClock.qml:55
 #, kde-format
 msgid "Twenty to three"
 msgstr "3시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:56
+#: qml/FuzzyClock.qml:56
 #, kde-format
 msgid "Quarter to three"
 msgstr "3시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:57
+#: qml/FuzzyClock.qml:57
 #, kde-format
 msgid "Ten to three"
 msgstr "3시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:58
+#: qml/FuzzyClock.qml:58
 #, kde-format
 msgid "Five to three"
 msgstr "3시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:59
+#: qml/FuzzyClock.qml:59
 #, kde-format
 msgid "Three o’clock"
 msgstr "3시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:60
+#: qml/FuzzyClock.qml:60
 #, kde-format
 msgid "Five past three"
 msgstr "3시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:61
+#: qml/FuzzyClock.qml:61
 #, kde-format
 msgid "Ten past three"
 msgstr "3시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:62
+#: qml/FuzzyClock.qml:62
 #, kde-format
 msgid "Quarter past three"
 msgstr "3시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:63
+#: qml/FuzzyClock.qml:63
 #, kde-format
 msgid "Twenty past three"
 msgstr "3시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:64
+#: qml/FuzzyClock.qml:64
 #, kde-format
 msgid "Twenty-five past three"
 msgstr "3시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:65
+#: qml/FuzzyClock.qml:65
 #, kde-format
 msgid "Half past three"
 msgstr "3시 반"
 
-#: package/contents/ui/FuzzyClock.qml:66
+#: qml/FuzzyClock.qml:66
 #, kde-format
 msgid "Twenty-five to four"
 msgstr "4시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:67
+#: qml/FuzzyClock.qml:67
 #, kde-format
 msgid "Twenty to four"
 msgstr "4시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:68
+#: qml/FuzzyClock.qml:68
 #, kde-format
 msgid "Quarter to four"
 msgstr "4시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:69
+#: qml/FuzzyClock.qml:69
 #, kde-format
 msgid "Ten to four"
 msgstr "4시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:70
+#: qml/FuzzyClock.qml:70
 #, kde-format
 msgid "Five to four"
 msgstr "4시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:71
+#: qml/FuzzyClock.qml:71
 #, kde-format
 msgid "Four o’clock"
 msgstr "4시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:72
+#: qml/FuzzyClock.qml:72
 #, kde-format
 msgid "Five past four"
 msgstr "4시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:73
+#: qml/FuzzyClock.qml:73
 #, kde-format
 msgid "Ten past four"
 msgstr "4시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:74
+#: qml/FuzzyClock.qml:74
 #, kde-format
 msgid "Quarter past four"
 msgstr "4시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:75
+#: qml/FuzzyClock.qml:75
 #, kde-format
 msgid "Twenty past four"
 msgstr "4시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:76
+#: qml/FuzzyClock.qml:76
 #, kde-format
 msgid "Twenty-five past four"
 msgstr "4시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:77
+#: qml/FuzzyClock.qml:77
 #, kde-format
 msgid "Half past four"
 msgstr "4시 반"
 
-#: package/contents/ui/FuzzyClock.qml:78
+#: qml/FuzzyClock.qml:78
 #, kde-format
 msgid "Twenty-five to five"
 msgstr "5시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:79
+#: qml/FuzzyClock.qml:79
 #, kde-format
 msgid "Twenty to five"
 msgstr "5시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:80
+#: qml/FuzzyClock.qml:80
 #, kde-format
 msgid "Quarter to five"
 msgstr "5시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:81
+#: qml/FuzzyClock.qml:81
 #, kde-format
 msgid "Ten to five"
 msgstr "5시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:82
+#: qml/FuzzyClock.qml:82
 #, kde-format
 msgid "Five to five"
 msgstr "5시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:83
+#: qml/FuzzyClock.qml:83
 #, kde-format
 msgid "Five o’clock"
 msgstr "5시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:84
+#: qml/FuzzyClock.qml:84
 #, kde-format
 msgid "Five past five"
 msgstr "5시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:85
+#: qml/FuzzyClock.qml:85
 #, kde-format
 msgid "Ten past five"
 msgstr "5시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:86
+#: qml/FuzzyClock.qml:86
 #, kde-format
 msgid "Quarter past five"
 msgstr "5시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:87
+#: qml/FuzzyClock.qml:87
 #, kde-format
 msgid "Twenty past five"
 msgstr "5시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:88
+#: qml/FuzzyClock.qml:88
 #, kde-format
 msgid "Twenty-five past five"
 msgstr "5시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:89
+#: qml/FuzzyClock.qml:89
 #, kde-format
 msgid "Half past five"
 msgstr "5시 반"
 
-#: package/contents/ui/FuzzyClock.qml:90
+#: qml/FuzzyClock.qml:90
 #, kde-format
 msgid "Twenty-five to six"
 msgstr "6시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:91
+#: qml/FuzzyClock.qml:91
 #, kde-format
 msgid "Twenty to six"
 msgstr "6시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:92
+#: qml/FuzzyClock.qml:92
 #, kde-format
 msgid "Quarter to six"
 msgstr "6시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:93
+#: qml/FuzzyClock.qml:93
 #, kde-format
 msgid "Ten to six"
 msgstr "6시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:94
+#: qml/FuzzyClock.qml:94
 #, kde-format
 msgid "Five to six"
 msgstr "6시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:95
+#: qml/FuzzyClock.qml:95
 #, kde-format
 msgid "Six o’clock"
 msgstr "6시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:96
+#: qml/FuzzyClock.qml:96
 #, kde-format
 msgid "Five past six"
 msgstr "6시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:97
+#: qml/FuzzyClock.qml:97
 #, kde-format
 msgid "Ten past six"
 msgstr "6시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:98
+#: qml/FuzzyClock.qml:98
 #, kde-format
 msgid "Quarter past six"
 msgstr "6시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:99
+#: qml/FuzzyClock.qml:99
 #, kde-format
 msgid "Twenty past six"
 msgstr "6시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:100
+#: qml/FuzzyClock.qml:100
 #, kde-format
 msgid "Twenty-five past six"
 msgstr "6시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:101
+#: qml/FuzzyClock.qml:101
 #, kde-format
 msgid "Half past six"
 msgstr "6시 반"
 
-#: package/contents/ui/FuzzyClock.qml:102
+#: qml/FuzzyClock.qml:102
 #, kde-format
 msgid "Twenty-five to seven"
 msgstr "7시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:103
+#: qml/FuzzyClock.qml:103
 #, kde-format
 msgid "Twenty to seven"
 msgstr "7시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:104
+#: qml/FuzzyClock.qml:104
 #, kde-format
 msgid "Quarter to seven"
 msgstr "7시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:105
+#: qml/FuzzyClock.qml:105
 #, kde-format
 msgid "Ten to seven"
 msgstr "7시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:106
+#: qml/FuzzyClock.qml:106
 #, kde-format
 msgid "Five to seven"
 msgstr "7시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:107
+#: qml/FuzzyClock.qml:107
 #, kde-format
 msgid "Seven o’clock"
 msgstr "7시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:108
+#: qml/FuzzyClock.qml:108
 #, kde-format
 msgid "Five past seven"
 msgstr "7시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:109
+#: qml/FuzzyClock.qml:109
 #, kde-format
 msgid "Ten past seven"
 msgstr "7시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:110
+#: qml/FuzzyClock.qml:110
 #, kde-format
 msgid "Quarter past seven"
 msgstr "7시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:111
+#: qml/FuzzyClock.qml:111
 #, kde-format
 msgid "Twenty past seven"
 msgstr "7시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:112
+#: qml/FuzzyClock.qml:112
 #, kde-format
 msgid "Twenty-five past seven"
 msgstr "7시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:113
+#: qml/FuzzyClock.qml:113
 #, kde-format
 msgid "Half past seven"
 msgstr "7시 반"
 
-#: package/contents/ui/FuzzyClock.qml:114
+#: qml/FuzzyClock.qml:114
 #, kde-format
 msgid "Twenty-five to eight"
 msgstr "8시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:115
+#: qml/FuzzyClock.qml:115
 #, kde-format
 msgid "Twenty to eight"
 msgstr "8시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:116
+#: qml/FuzzyClock.qml:116
 #, kde-format
 msgid "Quarter to eight"
 msgstr "8시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:117
+#: qml/FuzzyClock.qml:117
 #, kde-format
 msgid "Ten to eight"
 msgstr "8시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:118
+#: qml/FuzzyClock.qml:118
 #, kde-format
 msgid "Five to eight"
 msgstr "8시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:119
+#: qml/FuzzyClock.qml:119
 #, kde-format
 msgid "Eight o’clock"
 msgstr "8시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:120
+#: qml/FuzzyClock.qml:120
 #, kde-format
 msgid "Five past eight"
 msgstr "8시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:121
+#: qml/FuzzyClock.qml:121
 #, kde-format
 msgid "Ten past eight"
 msgstr "8시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:122
+#: qml/FuzzyClock.qml:122
 #, kde-format
 msgid "Quarter past eight"
 msgstr "8시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:123
+#: qml/FuzzyClock.qml:123
 #, kde-format
 msgid "Twenty past eight"
 msgstr "8시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:124
+#: qml/FuzzyClock.qml:124
 #, kde-format
 msgid "Twenty-five past eight"
 msgstr "8시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:125
+#: qml/FuzzyClock.qml:125
 #, kde-format
 msgid "Half past eight"
 msgstr "8시 반"
 
-#: package/contents/ui/FuzzyClock.qml:126
+#: qml/FuzzyClock.qml:126
 #, kde-format
 msgid "Twenty-five to nine"
 msgstr "9시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:127
+#: qml/FuzzyClock.qml:127
 #, kde-format
 msgid "Twenty to nine"
 msgstr "9시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:128
+#: qml/FuzzyClock.qml:128
 #, kde-format
 msgid "Quarter to nine"
 msgstr "9시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:129
+#: qml/FuzzyClock.qml:129
 #, kde-format
 msgid "Ten to nine"
 msgstr "9시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:130
+#: qml/FuzzyClock.qml:130
 #, kde-format
 msgid "Five to nine"
 msgstr "9시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:131
+#: qml/FuzzyClock.qml:131
 #, kde-format
 msgid "Nine o’clock"
 msgstr "9시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:132
+#: qml/FuzzyClock.qml:132
 #, kde-format
 msgid "Five past nine"
 msgstr "9시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:133
+#: qml/FuzzyClock.qml:133
 #, kde-format
 msgid "Ten past nine"
 msgstr "9시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:134
+#: qml/FuzzyClock.qml:134
 #, kde-format
 msgid "Quarter past nine"
 msgstr "9시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:135
+#: qml/FuzzyClock.qml:135
 #, kde-format
 msgid "Twenty past nine"
 msgstr "9시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:136
+#: qml/FuzzyClock.qml:136
 #, kde-format
 msgid "Twenty-five past nine"
 msgstr "9시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:137
+#: qml/FuzzyClock.qml:137
 #, kde-format
 msgid "Half past nine"
 msgstr "9시 반"
 
-#: package/contents/ui/FuzzyClock.qml:138
+#: qml/FuzzyClock.qml:138
 #, kde-format
 msgid "Twenty-five to ten"
 msgstr "10시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:139
+#: qml/FuzzyClock.qml:139
 #, kde-format
 msgid "Twenty to ten"
 msgstr "10시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:140
+#: qml/FuzzyClock.qml:140
 #, kde-format
 msgid "Quarter to ten"
 msgstr "10시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:141
+#: qml/FuzzyClock.qml:141
 #, kde-format
 msgid "Ten to ten"
 msgstr "10시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:142
+#: qml/FuzzyClock.qml:142
 #, kde-format
 msgid "Five to ten"
 msgstr "10시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:143
+#: qml/FuzzyClock.qml:143
 #, kde-format
 msgid "Ten o’clock"
 msgstr "10시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:144
+#: qml/FuzzyClock.qml:144
 #, kde-format
 msgid "Five past ten"
 msgstr "10시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:145
+#: qml/FuzzyClock.qml:145
 #, kde-format
 msgid "Ten past ten"
 msgstr "10시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:146
+#: qml/FuzzyClock.qml:146
 #, kde-format
 msgid "Quarter past ten"
 msgstr "10시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:147
+#: qml/FuzzyClock.qml:147
 #, kde-format
 msgid "Twenty past ten"
 msgstr "10시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:148
+#: qml/FuzzyClock.qml:148
 #, kde-format
 msgid "Twenty-five past ten"
 msgstr "10시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:149
+#: qml/FuzzyClock.qml:149
 #, kde-format
 msgid "Half past ten"
 msgstr "10시 반"
 
-#: package/contents/ui/FuzzyClock.qml:150
+#: qml/FuzzyClock.qml:150
 #, kde-format
 msgid "Twenty-five to eleven"
 msgstr "11시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:151
+#: qml/FuzzyClock.qml:151
 #, kde-format
 msgid "Twenty to eleven"
 msgstr "11시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:152
+#: qml/FuzzyClock.qml:152
 #, kde-format
 msgid "Quarter to eleven"
 msgstr "11시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:153
+#: qml/FuzzyClock.qml:153
 #, kde-format
 msgid "Ten to eleven"
 msgstr "11시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:154
+#: qml/FuzzyClock.qml:154
 #, kde-format
 msgid "Five to eleven"
 msgstr "11시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:155
+#: qml/FuzzyClock.qml:155
 #, kde-format
 msgid "Eleven o’clock"
 msgstr "11시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:156
+#: qml/FuzzyClock.qml:156
 #, kde-format
 msgid "Five past eleven"
 msgstr "11시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:157
+#: qml/FuzzyClock.qml:157
 #, kde-format
 msgid "Ten past eleven"
 msgstr "11시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:158
+#: qml/FuzzyClock.qml:158
 #, kde-format
 msgid "Quarter past eleven"
 msgstr "11시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:159
+#: qml/FuzzyClock.qml:159
 #, kde-format
 msgid "Twenty past eleven"
 msgstr "11시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:160
+#: qml/FuzzyClock.qml:160
 #, kde-format
 msgid "Twenty-five past eleven"
 msgstr "11시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:161
+#: qml/FuzzyClock.qml:161
 #, kde-format
 msgid "Half past eleven"
 msgstr "11시 반"
 
-#: package/contents/ui/FuzzyClock.qml:162
+#: qml/FuzzyClock.qml:162
 #, kde-format
 msgid "Twenty-five to twelve"
 msgstr "12시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:163
+#: qml/FuzzyClock.qml:163
 #, kde-format
 msgid "Twenty to twelve"
 msgstr "12시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:164
+#: qml/FuzzyClock.qml:164
 #, kde-format
 msgid "Quarter to twelve"
 msgstr "12시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:165
+#: qml/FuzzyClock.qml:165
 #, kde-format
 msgid "Ten to twelve"
 msgstr "12시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:166
+#: qml/FuzzyClock.qml:166
 #, kde-format
 msgid "Five to twelve"
 msgstr "12시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:167
+#: qml/FuzzyClock.qml:167
 #, kde-format
 msgid "Twelve o’clock"
 msgstr "12시 정각"
 
-#: package/contents/ui/FuzzyClock.qml:168
+#: qml/FuzzyClock.qml:168
 #, kde-format
 msgid "Five past twelve"
 msgstr "12시 5분"
 
-#: package/contents/ui/FuzzyClock.qml:169
+#: qml/FuzzyClock.qml:169
 #, kde-format
 msgid "Ten past twelve"
 msgstr "12시 10분"
 
-#: package/contents/ui/FuzzyClock.qml:170
+#: qml/FuzzyClock.qml:170
 #, kde-format
 msgid "Quarter past twelve"
 msgstr "12시 15분"
 
-#: package/contents/ui/FuzzyClock.qml:171
+#: qml/FuzzyClock.qml:171
 #, kde-format
 msgid "Twenty past twelve"
 msgstr "12시 20분"
 
-#: package/contents/ui/FuzzyClock.qml:172
+#: qml/FuzzyClock.qml:172
 #, kde-format
 msgid "Twenty-five past twelve"
 msgstr "12시 25분"
 
-#: package/contents/ui/FuzzyClock.qml:173
+#: qml/FuzzyClock.qml:173
 #, kde-format
 msgid "Half past twelve"
 msgstr "12시 반"
 
-#: package/contents/ui/FuzzyClock.qml:174
+#: qml/FuzzyClock.qml:174
 #, kde-format
 msgid "Twenty-five to one"
 msgstr "1시 25분 전"
 
-#: package/contents/ui/FuzzyClock.qml:175
+#: qml/FuzzyClock.qml:175
 #, kde-format
 msgid "Twenty to one"
 msgstr "1시 20분 전"
 
-#: package/contents/ui/FuzzyClock.qml:176
+#: qml/FuzzyClock.qml:176
 #, kde-format
 msgid "Quarter to one"
 msgstr "1시 15분 전"
 
-#: package/contents/ui/FuzzyClock.qml:177
+#: qml/FuzzyClock.qml:177
 #, kde-format
 msgid "Ten to one"
 msgstr "1시 10분 전"
 
-#: package/contents/ui/FuzzyClock.qml:178
+#: qml/FuzzyClock.qml:178
 #, kde-format
 msgid "Five to one"
 msgstr "1시 5분 전"
 
-#: package/contents/ui/FuzzyClock.qml:182
+#: qml/FuzzyClock.qml:182
 #, kde-format
 msgid "Sleep"
 msgstr "수면"
 
-#: package/contents/ui/FuzzyClock.qml:182
+#: qml/FuzzyClock.qml:182
 #, kde-format
 msgid "Breakfast"
 msgstr "아침 식사"
 
-#: package/contents/ui/FuzzyClock.qml:182
+#: qml/FuzzyClock.qml:182
 #, kde-format
 msgid "Second Breakfast"
 msgstr "두 번째 아침밥"
 
-#: package/contents/ui/FuzzyClock.qml:182
+#: qml/FuzzyClock.qml:182
 #, kde-format
 msgid "Elevenses"
 msgstr "오전 휴식 시간"
 
-#: package/contents/ui/FuzzyClock.qml:183
+#: qml/FuzzyClock.qml:183
 #, kde-format
 msgid "Lunch"
 msgstr "점심 식사"
 
-#: package/contents/ui/FuzzyClock.qml:183
+#: qml/FuzzyClock.qml:183
 #, kde-format
 msgid "Afternoon tea"
 msgstr "오후 휴식 시간"
 
-#: package/contents/ui/FuzzyClock.qml:183
+#: qml/FuzzyClock.qml:183
 #, kde-format
 msgid "Dinner"
 msgstr "점심 식사"
 
-#: package/contents/ui/FuzzyClock.qml:183
+#: qml/FuzzyClock.qml:183
 #, kde-format
 msgid "Supper"
 msgstr "늦은 저녁 식사"
 
-#: package/contents/ui/FuzzyClock.qml:187
+#: qml/FuzzyClock.qml:187
 #, kde-format
 msgid "Night"
 msgstr "밤"
 
-#: package/contents/ui/FuzzyClock.qml:187
+#: qml/FuzzyClock.qml:187
 #, kde-format
 msgid "Early morning"
 msgstr "이른 아침"
 
-#: package/contents/ui/FuzzyClock.qml:187
+#: qml/FuzzyClock.qml:187
 #, kde-format
 msgid "Morning"
 msgstr "아침"
 
-#: package/contents/ui/FuzzyClock.qml:187
+#: qml/FuzzyClock.qml:187
 #, kde-format
 msgid "Almost noon"
 msgstr "낮"
 
-#: package/contents/ui/FuzzyClock.qml:188
+#: qml/FuzzyClock.qml:188
 #, kde-format
 msgid "Noon"
 msgstr "정오"
 
-#: package/contents/ui/FuzzyClock.qml:188
+#: qml/FuzzyClock.qml:188
 #, kde-format
 msgid "Afternoon"
 msgstr "오후"
 
-#: package/contents/ui/FuzzyClock.qml:188
+#: qml/FuzzyClock.qml:188
 #, kde-format
 msgid "Evening"
 msgstr "저녁"
 
-#: package/contents/ui/FuzzyClock.qml:188
+#: qml/FuzzyClock.qml:188
 #, kde-format
 msgid "Late evening"
 msgstr "늦은 저녁"
 
-#: package/contents/ui/FuzzyClock.qml:192
+#: qml/FuzzyClock.qml:192
 #, kde-format
 msgid "Start of week"
 msgstr "주초"
 
-#: package/contents/ui/FuzzyClock.qml:192
+#: qml/FuzzyClock.qml:192
 #, kde-format
 msgid "Middle of week"
 msgstr "주중"
 
-#: package/contents/ui/FuzzyClock.qml:192
+#: qml/FuzzyClock.qml:192
 #, kde-format
 msgid "End of week"
 msgstr "주말"
 
-#: package/contents/ui/FuzzyClock.qml:192
+#: qml/FuzzyClock.qml:192
 #, kde-format
 msgid "Weekend!"
 msgstr "즐거운 주말!"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2021-07-02 15:27+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -17,27 +17,27 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 21.04.2\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: qml/KateSessionsItemDelegate.qml:91
 #, kde-format
 msgid "Session name"
 msgstr "Sessienaam"
 
-#: contents/ui/KateSessionsItemDelegate.qml:103
+#: qml/KateSessionsItemDelegate.qml:103
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "Nieuwe sessie aanmaken en Kate starten"
 
-#: contents/ui/KateSessionsItemDelegate.qml:115
+#: qml/KateSessionsItemDelegate.qml:115
 #, kde-format
 msgid "Cancel session creation"
 msgstr "Sessie maken annuleren"
 
-#: contents/ui/main.qml:41
+#: qml/main.qml:41
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate-sessies"
 
-#: contents/ui/main.qml:59
+#: qml/main.qml:59
 #, kde-format
 msgid "Search…"
 msgstr "Zoeken…"

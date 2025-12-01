@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2023-11-07 11:24+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -20,27 +20,27 @@ msgstr ""
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Poedit 3.3.2\n"
 
-#: contents/ui/KateSessionsItemDelegate.qml:91
+#: qml/KateSessionsItemDelegate.qml:91
 #, kde-format
 msgid "Session name"
 msgstr "שם ההפעלה"
 
-#: contents/ui/KateSessionsItemDelegate.qml:103
+#: qml/KateSessionsItemDelegate.qml:103
 #, kde-format
 msgid "Create new session and start Kate"
 msgstr "ליצור הפעלה חדשה עם פתיחת Kate"
 
-#: contents/ui/KateSessionsItemDelegate.qml:115
+#: qml/KateSessionsItemDelegate.qml:115
 #, kde-format
 msgid "Cancel session creation"
 msgstr "ביטול יצירת הפעלה"
 
-#: contents/ui/main.qml:41
+#: qml/main.qml:41
 #, kde-format
 msgid "Kate Sessions"
 msgstr "הפעלות של Kate"
 
-#: contents/ui/main.qml:59
+#: qml/main.qml:59
 #, kde-format
 msgid "Search…"
 msgstr "חיפוש…"

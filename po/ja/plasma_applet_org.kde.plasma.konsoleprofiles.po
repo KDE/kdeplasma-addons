@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2021-10-16 18:27+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -15,13 +15,13 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: package/contents/ui/main.qml:69
+#: main.qml:69
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Konsole プロファイル"
 
-#: package/contents/ui/main.qml:90
+#: main.qml:90
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "何かを言う任意の文字列"

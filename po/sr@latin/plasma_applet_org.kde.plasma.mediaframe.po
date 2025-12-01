@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-27 00:44+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2017-12-03 22:53+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -18,40 +18,40 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: package/contents/config/config.qml:13
+#: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Media"
 msgstr ""
 
-#: package/contents/config/config.qml:18
+#: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
 msgstr ""
 
-#: package/contents/ui/ConfigBehavior.qml:48
+#: qml/ConfigBehavior.qml:48
 #, fuzzy, kde-format
 #| msgid "Change picture every"
 msgid "Change picture every:"
 msgstr "Menjaj sliku svakih"
 
-#: package/contents/ui/ConfigBehavior.qml:65
+#: qml/ConfigBehavior.qml:65
 #, kde-format
 msgid "Hours"
 msgstr ""
 
-#: package/contents/ui/ConfigBehavior.qml:79
+#: qml/ConfigBehavior.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr ""
 
-#: package/contents/ui/ConfigBehavior.qml:93
+#: qml/ConfigBehavior.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr ""
 
-#: package/contents/ui/ConfigBehavior.qml:103
+#: qml/ConfigBehavior.qml:103
 #, fuzzy, kde-format
 #| msgid "Fill mode:"
 msgctxt "@label:listbox"
@@ -59,7 +59,7 @@ msgid "Image fill mode:"
 msgstr "Režim popune:"
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigBehavior.qml:110
+#: qml/ConfigBehavior.qml:110
 #, fuzzy, kde-format
 #| msgid "Stretch"
 msgctxt "@item:inlistbox"
@@ -67,7 +67,7 @@ msgid "Stretch"
 msgstr "razvučeno"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigBehavior.qml:111
+#: qml/ConfigBehavior.qml:111
 #, fuzzy, kde-format
 #| msgid "The image is scaled to fit"
 msgctxt "@info"
@@ -75,7 +75,7 @@ msgid "The image is scaled to fit the frame"
 msgstr "Slika se skalira da stane."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigBehavior.qml:115
+#: qml/ConfigBehavior.qml:115
 #, fuzzy, kde-format
 #| msgid "Preserve aspect fit"
 msgctxt "@item:inlistbox"
@@ -83,7 +83,7 @@ msgid "Preserve aspect fit"
 msgstr "uklapanje po razmeri"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigBehavior.qml:116
+#: qml/ConfigBehavior.qml:116
 #, fuzzy, kde-format
 #| msgid "The image is scaled uniformly to fit without cropping"
 msgctxt "@info"
@@ -91,7 +91,7 @@ msgid "The image is scaled uniformly to fit without cropping"
 msgstr "Slika se skalira ravnomerno da stane bez opsecanja."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigBehavior.qml:120
+#: qml/ConfigBehavior.qml:120
 #, fuzzy, kde-format
 #| msgid "Preserve aspect crop"
 msgctxt "@item:inlistbox"
@@ -99,7 +99,7 @@ msgid "Preserve aspect crop"
 msgstr "opsecanje po razmeri"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigBehavior.qml:121
+#: qml/ConfigBehavior.qml:121
 #, fuzzy, kde-format
 #| msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgctxt "@info"
@@ -107,7 +107,7 @@ msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr "Slika se skalira ravnomerno da popuni sve, ako treba uz opsecanje."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigBehavior.qml:125
+#: qml/ConfigBehavior.qml:125
 #, fuzzy, kde-format
 #| msgid "Tile"
 msgctxt "@item:inlistbox"
@@ -115,7 +115,7 @@ msgid "Tile"
 msgstr "popločano"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigBehavior.qml:126
+#: qml/ConfigBehavior.qml:126
 #, fuzzy, kde-format
 #| msgid "The image is duplicated horizontally and vertically"
 msgctxt "@info"
@@ -123,7 +123,7 @@ msgid "The image is duplicated horizontally and vertically"
 msgstr "Slika se umnožava vodoravno i uspravno."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigBehavior.qml:130
+#: qml/ConfigBehavior.qml:130
 #, fuzzy, kde-format
 #| msgid "Tile vertically"
 msgctxt "@item:inlistbox"
@@ -131,7 +131,7 @@ msgid "Tile vertically"
 msgstr "popločano uspravno"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigBehavior.qml:131
+#: qml/ConfigBehavior.qml:131
 #, fuzzy, kde-format
 #| msgid "The image is stretched horizontally and tiled vertically"
 msgctxt "@info"
@@ -139,7 +139,7 @@ msgid "The image is stretched horizontally and tiled vertically"
 msgstr "Slika se razvlači vodoravno a popločava uspravno."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigBehavior.qml:135
+#: qml/ConfigBehavior.qml:135
 #, fuzzy, kde-format
 #| msgid "Tile horizontally"
 msgctxt "@item:inlistbox"
@@ -147,7 +147,7 @@ msgid "Tile horizontally"
 msgstr "popločano vodoravno"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigBehavior.qml:136
+#: qml/ConfigBehavior.qml:136
 #, fuzzy, kde-format
 #| msgid "The image is stretched vertically and tiled horizontally"
 msgctxt "@info"
@@ -155,7 +155,7 @@ msgid "The image is stretched vertically and tiled horizontally"
 msgstr "Slika se razvlači uspravno a popločava vodoravno."
 
 # >> @item:inlistbox Fill mode
-#: package/contents/ui/ConfigBehavior.qml:140
+#: qml/ConfigBehavior.qml:140
 #, fuzzy, kde-format
 #| msgid "Pad"
 msgctxt "@item:inlistbox"
@@ -163,74 +163,74 @@ msgid "Pad"
 msgstr "popunjene ivice"
 
 # >> @text:tooltip
-#: package/contents/ui/ConfigBehavior.qml:141
+#: qml/ConfigBehavior.qml:141
 #, fuzzy, kde-format
 #| msgid "The image is not transformed"
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Slika se nikako ne menja."
 
-#: package/contents/ui/ConfigBehavior.qml:186
+#: qml/ConfigBehavior.qml:186
 #, fuzzy, kde-format
 #| msgid "General"
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Opšte"
 
-#: package/contents/ui/ConfigBehavior.qml:187
+#: qml/ConfigBehavior.qml:187
 #, fuzzy, kde-format
 #| msgid "Randomize items"
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Nasumične stavke"
 
-#: package/contents/ui/ConfigBehavior.qml:192
+#: qml/ConfigBehavior.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr ""
 
-#: package/contents/ui/ConfigBehavior.qml:197
+#: qml/ConfigBehavior.qml:197
 #, fuzzy, kde-format
 #| msgid "Left click image opens in external viewer"
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Levi klik otvara sliku u spoljašnjem prikazivaču"
 
-#: package/contents/ui/ConfigMedia.qml:27
+#: qml/ConfigMedia.qml:27
 #, fuzzy, kde-format
 #| msgid "Add folder..."
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Dodaj fasciklu..."
 
-#: package/contents/ui/ConfigMedia.qml:32
+#: qml/ConfigMedia.qml:32
 #, fuzzy, kde-format
 #| msgid "Add files..."
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Dodaj fajlove..."
 
-#: package/contents/ui/ConfigMedia.qml:84
+#: qml/ConfigMedia.qml:84
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr ""
 
-#: package/contents/ui/ConfigMedia.qml:94
+#: qml/ConfigMedia.qml:94
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr ""
 
-#: package/contents/ui/ConfigMedia.qml:95
+#: qml/ConfigMedia.qml:95
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr ""
 
 # >> @title:window
-#: package/contents/ui/ConfigMedia.qml:101
+#: qml/ConfigMedia.qml:101
 #, fuzzy, kde-format
 #| msgid "Choose files"
 msgctxt "@title:window"
@@ -238,20 +238,20 @@ msgid "Choose Files"
 msgstr "Izbor fajlova"
 
 # >> @title:window
-#: package/contents/ui/ConfigMedia.qml:121
+#: qml/ConfigMedia.qml:121
 #, fuzzy, kde-format
 #| msgid "Choose a folder"
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Izbor fascikle"
 
-#: package/contents/ui/main.qml:361
+#: qml/main.qml:360
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr ""
 
-#: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
+#: qml/main.qml:364 qml/main.qml:374
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

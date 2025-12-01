@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2012-05-14 16:25-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "Plural-Forms: nplurals=5; plural=n==1 ? 0 : n==2 ? 1 : n<7 ? 2 : n < 11 ? "
 "3 : 4\n"
 
-#: package/contents/ui/main.qml:69
+#: main.qml:69
 #, fuzzy, kde-format
 #| msgid "Konsole Profiles"
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Próifílí Konsole"
 
-#: package/contents/ui/main.qml:90
+#: main.qml:90
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "Teaghrán ar bith a deir rud éigin"

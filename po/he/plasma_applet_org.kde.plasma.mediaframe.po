@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-27 00:44+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2025-08-14 06:34+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -20,201 +20,201 @@ msgstr ""
 "n % 10 == 0) ? 2 : 3));\n"
 "X-Generator: Lokalize 25.04.3\n"
 
-#: package/contents/config/config.qml:13
+#: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Media"
 msgstr "מדיה"
 
-#: package/contents/config/config.qml:18
+#: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
 msgstr "התנהגות"
 
-#: package/contents/ui/ConfigBehavior.qml:48
+#: qml/ConfigBehavior.qml:48
 #, kde-format
 msgid "Change picture every:"
 msgstr "להחליף תמונה כל:"
 
-#: package/contents/ui/ConfigBehavior.qml:65
+#: qml/ConfigBehavior.qml:65
 #, kde-format
 msgid "Hours"
 msgstr "שעות"
 
-#: package/contents/ui/ConfigBehavior.qml:79
+#: qml/ConfigBehavior.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr "דקות"
 
-#: package/contents/ui/ConfigBehavior.qml:93
+#: qml/ConfigBehavior.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr "שניות"
 
-#: package/contents/ui/ConfigBehavior.qml:103
+#: qml/ConfigBehavior.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "מצב מילוי תמונה:"
 
-#: package/contents/ui/ConfigBehavior.qml:110
+#: qml/ConfigBehavior.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "מתיחה"
 
-#: package/contents/ui/ConfigBehavior.qml:111
+#: qml/ConfigBehavior.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "התמונה מותאמת לגודל המסגרת"
 
-#: package/contents/ui/ConfigBehavior.qml:115
+#: qml/ConfigBehavior.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "שימוש התאמת יחס"
 
-#: package/contents/ui/ConfigBehavior.qml:116
+#: qml/ConfigBehavior.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "התמונה מותאמת כך שתתאים באופן אחיד ללא חיתוך"
 
-#: package/contents/ui/ConfigBehavior.qml:120
+#: qml/ConfigBehavior.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "שימור חיתוך יחס"
 
-#: package/contents/ui/ConfigBehavior.qml:121
+#: qml/ConfigBehavior.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr "התמונה מותאמת כך שתתאים באופן אחיד, תיחתך אם צריך"
 
-#: package/contents/ui/ConfigBehavior.qml:125
+#: qml/ConfigBehavior.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "ריצוף"
 
-#: package/contents/ui/ConfigBehavior.qml:126
+#: qml/ConfigBehavior.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "התמונה משוכפלת אופקית ואנכית"
 
-#: package/contents/ui/ConfigBehavior.qml:130
+#: qml/ConfigBehavior.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "ריצוף אנכי"
 
-#: package/contents/ui/ConfigBehavior.qml:131
+#: qml/ConfigBehavior.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "התמונה נמתחת אופקית ומרוצפת אנכית"
 
-#: package/contents/ui/ConfigBehavior.qml:135
+#: qml/ConfigBehavior.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "ריצוף אופקי"
 
-#: package/contents/ui/ConfigBehavior.qml:136
+#: qml/ConfigBehavior.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "התמונה נמתחת אנכית ומרוצפת אופקית"
 
-#: package/contents/ui/ConfigBehavior.qml:140
+#: qml/ConfigBehavior.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "ריפוד"
 
-#: package/contents/ui/ConfigBehavior.qml:141
+#: qml/ConfigBehavior.qml:141
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "התמונה לא תשתנה"
 
-#: package/contents/ui/ConfigBehavior.qml:186
+#: qml/ConfigBehavior.qml:186
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "כללי:"
 
-#: package/contents/ui/ConfigBehavior.qml:187
+#: qml/ConfigBehavior.qml:187
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "סדר אקראי"
 
-#: package/contents/ui/ConfigBehavior.qml:192
+#: qml/ConfigBehavior.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "להשהות את המצגת כשהסמן עובר מעל לתמונה"
 
-#: package/contents/ui/ConfigBehavior.qml:197
+#: qml/ConfigBehavior.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "יש ללחוץ על תמונה כדי לפתוח אותה ביישום חיצוני"
 
-#: package/contents/ui/ConfigMedia.qml:27
+#: qml/ConfigMedia.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "הוספת תיקיה…"
 
-#: package/contents/ui/ConfigMedia.qml:32
+#: qml/ConfigMedia.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "הוספת קבצים…"
 
-#: package/contents/ui/ConfigMedia.qml:84
+#: qml/ConfigMedia.qml:84
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "הסרת נתיב"
 
-#: package/contents/ui/ConfigMedia.qml:94
+#: qml/ConfigMedia.qml:94
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "לא הוגדרה מדיה"
 
-#: package/contents/ui/ConfigMedia.qml:95
+#: qml/ConfigMedia.qml:95
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "יש להוסיף קבצים או תיקיות כדי להציג אותם בווידג׳ט."
 
-#: package/contents/ui/ConfigMedia.qml:101
+#: qml/ConfigMedia.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "בחירת קבצים"
 
-#: package/contents/ui/ConfigMedia.qml:121
+#: qml/ConfigMedia.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "בחירת תיקייה"
 
-#: package/contents/ui/main.qml:361
+#: qml/main.qml:360
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "לא נבחרה מדיה"
 
-#: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
+#: qml/main.qml:364 qml/main.qml:374
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

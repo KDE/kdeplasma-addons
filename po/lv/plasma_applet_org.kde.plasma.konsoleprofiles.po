@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2024-04-02 17:12+0300\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "2);\n"
 "X-Generator: Lokalize 23.08.5\n"
 
-#: package/contents/ui/main.qml:69
+#: main.qml:69
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "„Konsole“ profili"
 
-#: package/contents/ui/main.qml:90
+#: main.qml:90
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "Nejauša virkne, kas kaut ko pasaka"

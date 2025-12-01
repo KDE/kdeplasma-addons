@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2021-07-04 22:09+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 
-#: package/contents/ui/main.qml:69
+#: main.qml:69
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "تشكيلات كونسول"
 
-#: package/contents/ui/main.qml:90
+#: main.qml:90
 #, kde-format
 msgid "Arbitrary String Which Says Something"
 msgstr "نصّ عشوائيّ يقول شيئًا"

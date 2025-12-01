@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-27 00:44+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2025-08-15 10:00+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -19,178 +19,178 @@ msgstr ""
 "X-Generator: Lokalize 25.07.90\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/config/config.qml:13
+#: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Media"
 msgstr "Média"
 
-#: package/contents/config/config.qml:18
+#: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
 msgstr "Comportement"
 
-#: package/contents/ui/ConfigBehavior.qml:48
+#: qml/ConfigBehavior.qml:48
 #, kde-format
 msgid "Change picture every:"
 msgstr "Changer d'image toutes les :"
 
-#: package/contents/ui/ConfigBehavior.qml:65
+#: qml/ConfigBehavior.qml:65
 #, kde-format
 msgid "Hours"
 msgstr "Heures"
 
-#: package/contents/ui/ConfigBehavior.qml:79
+#: qml/ConfigBehavior.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr "Minutes"
 
-#: package/contents/ui/ConfigBehavior.qml:93
+#: qml/ConfigBehavior.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr "Secondes"
 
-#: package/contents/ui/ConfigBehavior.qml:103
+#: qml/ConfigBehavior.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Mode de remplissage de l'image :"
 
-#: package/contents/ui/ConfigBehavior.qml:110
+#: qml/ConfigBehavior.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Étirer"
 
-#: package/contents/ui/ConfigBehavior.qml:111
+#: qml/ConfigBehavior.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "L'image est étirée pour s'ajuster au cadre"
 
-#: package/contents/ui/ConfigBehavior.qml:115
+#: qml/ConfigBehavior.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Ajustement conservant le ratio"
 
-#: package/contents/ui/ConfigBehavior.qml:116
+#: qml/ConfigBehavior.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "L'image est étirée uniformément pour s'ajuster sans rognage"
 
-#: package/contents/ui/ConfigBehavior.qml:120
+#: qml/ConfigBehavior.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Rognage conservant le ratio"
 
-#: package/contents/ui/ConfigBehavior.qml:121
+#: qml/ConfigBehavior.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr ""
 "L'image est étirée uniformément pour tout remplir, avec rognage si nécessaire"
 
-#: package/contents/ui/ConfigBehavior.qml:125
+#: qml/ConfigBehavior.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Mosaïque"
 
-#: package/contents/ui/ConfigBehavior.qml:126
+#: qml/ConfigBehavior.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "L'image est répétée horizontalement et verticalement"
 
-#: package/contents/ui/ConfigBehavior.qml:130
+#: qml/ConfigBehavior.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Mosaïque verticale"
 
-#: package/contents/ui/ConfigBehavior.qml:131
+#: qml/ConfigBehavior.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "L'image est étirée horizontalement et répétée verticalement"
 
-#: package/contents/ui/ConfigBehavior.qml:135
+#: qml/ConfigBehavior.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Mosaïque horizontale"
 
-#: package/contents/ui/ConfigBehavior.qml:136
+#: qml/ConfigBehavior.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "L'image est étirée verticalement et répétée horizontalement"
 
-#: package/contents/ui/ConfigBehavior.qml:140
+#: qml/ConfigBehavior.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Remplir"
 
-#: package/contents/ui/ConfigBehavior.qml:141
+#: qml/ConfigBehavior.qml:141
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "L'image n'est pas transformée"
 
-#: package/contents/ui/ConfigBehavior.qml:186
+#: qml/ConfigBehavior.qml:186
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Général :"
 
-#: package/contents/ui/ConfigBehavior.qml:187
+#: qml/ConfigBehavior.qml:187
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Ordre aléatoire"
 
-#: package/contents/ui/ConfigBehavior.qml:192
+#: qml/ConfigBehavior.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "Mettre en pause le diaporama lorsque le curseur survole l'image"
 
-#: package/contents/ui/ConfigBehavior.qml:197
+#: qml/ConfigBehavior.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Cliquer sur l'image pour l'ouvrir dans une application externe"
 
-#: package/contents/ui/ConfigMedia.qml:27
+#: qml/ConfigMedia.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Ajouter un dossier..."
 
-#: package/contents/ui/ConfigMedia.qml:32
+#: qml/ConfigMedia.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Ajouter des fichiers..."
 
-#: package/contents/ui/ConfigMedia.qml:84
+#: qml/ConfigMedia.qml:84
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Supprimer l'emplacement"
 
-#: package/contents/ui/ConfigMedia.qml:94
+#: qml/ConfigMedia.qml:94
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "Aucun média n'est configuré"
 
-#: package/contents/ui/ConfigMedia.qml:95
+#: qml/ConfigMedia.qml:95
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
@@ -198,25 +198,25 @@ msgstr ""
 "Ajoutez des fichiers ou des dossiers pour les afficher dans le composant "
 "graphique."
 
-#: package/contents/ui/ConfigMedia.qml:101
+#: qml/ConfigMedia.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Choisir des fichiers"
 
-#: package/contents/ui/ConfigMedia.qml:121
+#: qml/ConfigMedia.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Choisir un dossier"
 
-#: package/contents/ui/main.qml:361
+#: qml/main.qml:360
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Aucun média n'est sélectionné"
 
-#: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
+#: qml/main.qml:364 qml/main.qml:374
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

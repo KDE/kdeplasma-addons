@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-27 00:44+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2022-02-13 14:38+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -20,202 +20,202 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: package/contents/config/config.qml:13
+#: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Media"
 msgstr ""
 
-#: package/contents/config/config.qml:18
+#: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
 msgstr ""
 
-#: package/contents/ui/ConfigBehavior.qml:48
+#: qml/ConfigBehavior.qml:48
 #, kde-format
 msgid "Change picture every:"
 msgstr "Byt bilete etter:"
 
-#: package/contents/ui/ConfigBehavior.qml:65
+#: qml/ConfigBehavior.qml:65
 #, kde-format
 msgid "Hours"
 msgstr "Timar"
 
-#: package/contents/ui/ConfigBehavior.qml:79
+#: qml/ConfigBehavior.qml:79
 #, kde-format
 msgid "Minutes"
 msgstr "Minutt"
 
-#: package/contents/ui/ConfigBehavior.qml:93
+#: qml/ConfigBehavior.qml:93
 #, kde-format
 msgid "Seconds"
 msgstr "Sekund"
 
-#: package/contents/ui/ConfigBehavior.qml:103
+#: qml/ConfigBehavior.qml:103
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Fyllmodus for bilete:"
 
-#: package/contents/ui/ConfigBehavior.qml:110
+#: qml/ConfigBehavior.qml:110
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Strekk"
 
-#: package/contents/ui/ConfigBehavior.qml:111
+#: qml/ConfigBehavior.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "Biletet vert skalert for å få plass i ramma"
 
-#: package/contents/ui/ConfigBehavior.qml:115
+#: qml/ConfigBehavior.qml:115
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Hald fast breidd/høgd-forhold"
 
-#: package/contents/ui/ConfigBehavior.qml:116
+#: qml/ConfigBehavior.qml:116
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "Biletet vert skalert likt i begge retningar, utan avskjering"
 
-#: package/contents/ui/ConfigBehavior.qml:120
+#: qml/ConfigBehavior.qml:120
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Hald fast breidd/høgd-avskjering"
 
-#: package/contents/ui/ConfigBehavior.qml:121
+#: qml/ConfigBehavior.qml:121
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr "Biletet vert skalert til å få plass, med avskjering om nødvendig"
 
-#: package/contents/ui/ConfigBehavior.qml:125
+#: qml/ConfigBehavior.qml:125
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Jamsides"
 
-#: package/contents/ui/ConfigBehavior.qml:126
+#: qml/ConfigBehavior.qml:126
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Biletet vert gjenteke vassrett og loddrett"
 
-#: package/contents/ui/ConfigBehavior.qml:130
+#: qml/ConfigBehavior.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Jamsides loddrett"
 
-#: package/contents/ui/ConfigBehavior.qml:131
+#: qml/ConfigBehavior.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "Biletet vert strekt vassrett og gjenteke loddrett"
 
-#: package/contents/ui/ConfigBehavior.qml:135
+#: qml/ConfigBehavior.qml:135
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Jamsides vassrett"
 
-#: package/contents/ui/ConfigBehavior.qml:136
+#: qml/ConfigBehavior.qml:136
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "Biletet vert strekt loddrett og gjenteke vassrett"
 
-#: package/contents/ui/ConfigBehavior.qml:140
+#: qml/ConfigBehavior.qml:140
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Legg luft rundt"
 
-#: package/contents/ui/ConfigBehavior.qml:141
+#: qml/ConfigBehavior.qml:141
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Biletet vert ikkje skalert"
 
-#: package/contents/ui/ConfigBehavior.qml:186
+#: qml/ConfigBehavior.qml:186
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Generelt:"
 
-#: package/contents/ui/ConfigBehavior.qml:187
+#: qml/ConfigBehavior.qml:187
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Tilfeldig rekkjefølgje"
 
-#: package/contents/ui/ConfigBehavior.qml:192
+#: qml/ConfigBehavior.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "Pausa lysbiletvisinga når peikaren er over biletet"
 
-#: package/contents/ui/ConfigBehavior.qml:197
+#: qml/ConfigBehavior.qml:197
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Trykk på biletet for å opna det i eksternt program"
 
-#: package/contents/ui/ConfigMedia.qml:27
+#: qml/ConfigMedia.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Legg til mappe …"
 
-#: package/contents/ui/ConfigMedia.qml:32
+#: qml/ConfigMedia.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Legg til filer …"
 
-#: package/contents/ui/ConfigMedia.qml:84
+#: qml/ConfigMedia.qml:84
 #, fuzzy, kde-format
 #| msgid "Remove path"
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Fjern adresse"
 
-#: package/contents/ui/ConfigMedia.qml:94
+#: qml/ConfigMedia.qml:94
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr ""
 
-#: package/contents/ui/ConfigMedia.qml:95
+#: qml/ConfigMedia.qml:95
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr ""
 
-#: package/contents/ui/ConfigMedia.qml:101
+#: qml/ConfigMedia.qml:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Vel filer"
 
-#: package/contents/ui/ConfigMedia.qml:121
+#: qml/ConfigMedia.qml:121
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Vel mappe"
 
-#: package/contents/ui/main.qml:361
+#: qml/main.qml:360
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr ""
 
-#: package/contents/ui/main.qml:365 package/contents/ui/main.qml:375
+#: qml/main.qml:364 qml/main.qml:374
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

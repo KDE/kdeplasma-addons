@@ -1,21 +1,21 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Kishore G <kishore96@gmail.com>, 2021, 2022.
+# SPDX-FileCopyrightText: 2021, 2022, 2025 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2022-12-01 21:56+0530\n"
+"PO-Revision-Date: 2025-11-30 11:21+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
-"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.08.3\n"
+"X-Generator: Lokalize 25.08.3\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -41,7 +41,7 @@ msgstr[1] "%1நொ"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "பொதுவானவை"
 
 #: config.qml:19
 #, kde-format
@@ -89,27 +89,22 @@ msgstr "முன்னேற்றப் பட்டையைக் காட�
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "காலாவதியாகும்போது:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "அறிவிப்புகளில் இவ்வுரையை காட்டு:"
+msgstr "அறிவிப்பைக் காட்டு:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "டைமர் முடிந்தவிட்டது"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Execute command:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
 msgstr "கட்டளையை இயக்கு:"
@@ -118,11 +113,10 @@ msgstr "கட்டளையை இயக்கு:"
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'டைமர் முடிந்துள்ளது'"
 
 #: configTimes.qml:23
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "சேர்"

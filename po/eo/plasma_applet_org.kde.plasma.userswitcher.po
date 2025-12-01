@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
 "PO-Revision-Date: 2025-03-22 22:36+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -18,119 +18,119 @@ msgstr ""
 "X-Generator: translate-po (https://github.com/zcribe/translate-po)\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: package/contents/config/config.qml:11
+#: qml/config.qml:11
 #, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Ĝenerala"
 
-#: package/contents/ui/configGeneral.qml:27
+#: qml/configGeneral.qml:27
 #, kde-format
 msgctxt "@title:label"
 msgid "Username style:"
 msgstr "Stilo de uzantnomo:"
 
-#: package/contents/ui/configGeneral.qml:30
+#: qml/configGeneral.qml:30
 #, kde-format
 msgctxt "@option:radio"
 msgid "Full name (if available)"
 msgstr "Plena nomo (se disponebla)"
 
-#: package/contents/ui/configGeneral.qml:37
+#: qml/configGeneral.qml:37
 #, kde-format
 msgctxt "@option:radio"
 msgid "Login username"
 msgstr "Ensaluta uzantnomo"
 
-#: package/contents/ui/configGeneral.qml:55
+#: qml/configGeneral.qml:55
 #, kde-format
 msgctxt "@title:label"
 msgid "Show:"
 msgstr "Montri:"
 
-#: package/contents/ui/configGeneral.qml:58
+#: qml/configGeneral.qml:58
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name"
 msgstr "Nomo"
 
-#: package/contents/ui/configGeneral.qml:72
+#: qml/configGeneral.qml:72
 #, kde-format
 msgctxt "@option:radio"
 msgid "User picture"
 msgstr "Bildo de uzanto"
 
-#: package/contents/ui/configGeneral.qml:86
+#: qml/configGeneral.qml:86
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name and user picture"
 msgstr "Nomo kaj uzantbildo"
 
-#: package/contents/ui/configGeneral.qml:105
+#: qml/configGeneral.qml:105
 #, kde-format
 msgctxt "@title:label"
 msgid "Advanced:"
 msgstr "Altnivela:"
 
-#: package/contents/ui/configGeneral.qml:107
+#: qml/configGeneral.qml:107
 #, kde-format
 msgctxt "@option:check"
 msgid "Show technical session information"
 msgstr "Montri teknikajn seancinformojn"
 
-#: package/contents/ui/main.qml:47
+#: qml/main.qml:47
 #, kde-format
 msgid "You are logged in as <b>%1</b>"
 msgstr "Vi estas ensalutinta kiel <b>%1</b>"
 
-#: package/contents/ui/main.qml:148
+#: qml/main.qml:148
 #, kde-format
 msgid "Current user"
 msgstr "Nuna uzanto"
 
-#: package/contents/ui/main.qml:179
+#: qml/main.qml:179
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "Neuzata"
 
-#: package/contents/ui/main.qml:199
+#: qml/main.qml:199
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
-#: package/contents/ui/main.qml:201
+#: qml/main.qml:201
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "je %1 (%2)"
 
-#: package/contents/ui/main.qml:209
+#: qml/main.qml:209
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr "Ŝalti al Uzanto %1"
 
-#: package/contents/ui/main.qml:221
+#: qml/main.qml:221
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "Nova Seanco"
 
-#: package/contents/ui/main.qml:236
+#: qml/main.qml:236
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Ŝlosi Ekranon"
 
-#: package/contents/ui/main.qml:248
+#: qml/main.qml:248
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
 msgstr "Montri Elsalutan Ekranon"
 
-#: package/contents/ui/UserListDelegate.qml:28
+#: qml/UserListDelegate.qml:28
 #, kde-format
 msgctxt "@action:button @info:tooltip accessible"
 msgid "Open user configuration"
