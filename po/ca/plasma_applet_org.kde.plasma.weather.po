@@ -910,12 +910,3 @@ msgstr "Molt alta"
 #, kde-format
 msgid "Extreme"
 msgstr "Extrema"
-
-#~ msgid "German Weather Service"
-#~ msgstr "Servei meteorològic alemany"
-
-#~ msgid "Cannot find '%1' using %2."
-#~ msgstr "No s'ha pogut trobar «%1» usant %2."
-
-#~ msgid "Connection to %1 weather server timed out."
-#~ msgstr "La connexió amb el servidor meteorològic %1 ha exhaurit el temps."

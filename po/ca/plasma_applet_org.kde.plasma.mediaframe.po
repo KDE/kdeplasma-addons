@@ -222,15 +222,3 @@ msgstr "No s'ha seleccionat cap element multimèdia"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "Trieu un element multimèdia…"
-
-#~ msgctxt "@title"
-#~ msgid "General"
-#~ msgstr "General"
-
-#~ msgctxt "@title"
-#~ msgid "Paths"
-#~ msgstr "Camins"
-
-#~ msgctxt "@action:button"
-#~ msgid "Configure…"
-#~ msgstr "Configura…"

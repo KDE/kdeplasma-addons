@@ -126,6 +126,3 @@ msgstr "Trencaclosques quinze"
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Se soluciona posant-ho en ordre"
-
-#~ msgid "Colored numbers:"
-#~ msgstr "Nombres acolorits:"
