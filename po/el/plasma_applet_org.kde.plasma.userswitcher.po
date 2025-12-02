@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2016-09-09 16:59+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -81,53 +81,53 @@ msgctxt "@option:check"
 msgid "Show technical session information"
 msgstr "Εμφάνιση τεχνικών πληροφοριών σχετικά με τις συνεδρίες"
 
-#: qml/main.qml:47
+#: qml/main.qml:46
 #, kde-format
 msgid "You are logged in as <b>%1</b>"
 msgstr "Έχετε συνδεθεί σαν <b>%1</b>"
 
-#: qml/main.qml:148
+#: qml/main.qml:147
 #, kde-format
 msgid "Current user"
 msgstr "Τρέχων χρήστης"
 
-#: qml/main.qml:179
+#: qml/main.qml:178
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "Αχρησιμοποίητη"
 
-#: qml/main.qml:199
+#: qml/main.qml:198
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "TTY %1"
 
-#: qml/main.qml:201
+#: qml/main.qml:200
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "στο %1 (%2)"
 
-#: qml/main.qml:209
+#: qml/main.qml:208
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr ""
 
-#: qml/main.qml:221
+#: qml/main.qml:220
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "Νέα συνεδρία"
 
-#: qml/main.qml:236
+#: qml/main.qml:235
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Κλείδωμα οθόνης"
 
-#: qml/main.qml:248
+#: qml/main.qml:247
 #, fuzzy, kde-format
 #| msgid "Lock Screen"
 msgctxt "Show a dialog with options to logout/shutdown/restart"

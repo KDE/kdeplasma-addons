@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2025-11-13 22:28+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -118,89 +118,89 @@ msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox '時間到！'"
 
-#: configTimes.qml:23
+#: configTimes.qml:22
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "新增"
 
-#: configTimes.qml:82
+#: configTimes.qml:81
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr "如果您在此新增預先設定的計時器，它們會出現在小程式的內文選單裡。"
 
-#: configTimes.qml:120
+#: configTimes.qml:119
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "在數字上捲動以修改時間"
 
-#: configTimes.qml:127
+#: configTimes.qml:126
 #, kde-format
 msgid "Apply"
 msgstr "套用"
 
-#: configTimes.qml:135
+#: configTimes.qml:134
 #, kde-format
 msgid "Cancel"
 msgstr "取消"
 
-#: configTimes.qml:144
+#: configTimes.qml:143
 #, kde-format
 msgid "Edit"
 msgstr "編輯"
 
-#: configTimes.qml:153
+#: configTimes.qml:152
 #, kde-format
 msgid "Delete"
 msgstr "刪除"
 
-#: main.qml:69
+#: main.qml:68
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 執行中"
 
-#: main.qml:71
+#: main.qml:70
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 未在執行"
 
-#: main.qml:74
+#: main.qml:73
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "剩餘時間：%1 秒"
 
-#: main.qml:74
+#: main.qml:73
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
 msgstr "使用滑鼠滾輪變更數字，或從右鍵選單選擇預先設好的計時器"
 
-#: main.qml:91
+#: main.qml:90
 #, kde-format
 msgid "Timer"
 msgstr "計時器"
 
-#: main.qml:92
+#: main.qml:91
 #, kde-format
 msgid "Timer finished"
 msgstr "時間到！"
 
-#: main.qml:132
+#: main.qml:131
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "開始(&S)"
 
-#: main.qml:137
+#: main.qml:136
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "停止(&T)"
 
-#: main.qml:142
+#: main.qml:141
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

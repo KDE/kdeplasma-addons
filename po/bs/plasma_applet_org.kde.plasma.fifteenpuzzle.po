@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:43+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2012-09-03 15:46+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -121,13 +121,13 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr ""
 
-#: qml/main.qml:38
+#: qml/main.qml:37
 #, fuzzy, kde-format
 #| msgid "Configure Fifteen Puzzle"
 msgid "Fifteen Puzzle"
 msgstr "Podešavanje petnaest kvadrata"
 
-#: qml/main.qml:39
+#: qml/main.qml:38
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr ""

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:43+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2022-02-13 14:38+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -125,12 +125,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Løyst! Prøv ein gong til."
 
-#: qml/main.qml:38
+#: qml/main.qml:37
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Spelet femten"
 
-#: qml/main.qml:39
+#: qml/main.qml:38
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Løys ved å flytta i rett rekkjefølgje"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2023-03-15 21:28+0100\n"
 "Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -121,14 +121,14 @@ msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
-#: configTimes.qml:23
+#: configTimes.qml:22
 #, fuzzy, kde-format
 #| msgid "Add"
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Hinzufügen"
 
-#: configTimes.qml:82
+#: configTimes.qml:81
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
@@ -136,49 +136,49 @@ msgstr ""
 "Wenn Sie hier vordefinierte Zeitmesser hinzufügen, werden diese im Plasmoid-"
 "Kontextmenü angezeigt."
 
-#: configTimes.qml:120
+#: configTimes.qml:119
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Drehen Sie das Mausrad über den Ziffern, um die Zeit zu ändern"
 
-#: configTimes.qml:127
+#: configTimes.qml:126
 #, kde-format
 msgid "Apply"
 msgstr "Anwenden"
 
-#: configTimes.qml:135
+#: configTimes.qml:134
 #, kde-format
 msgid "Cancel"
 msgstr "Abbrechen"
 
-#: configTimes.qml:144
+#: configTimes.qml:143
 #, kde-format
 msgid "Edit"
 msgstr "Bearbeiten"
 
-#: configTimes.qml:153
+#: configTimes.qml:152
 #, kde-format
 msgid "Delete"
 msgstr "Löschen"
 
-#: main.qml:69
+#: main.qml:68
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 läuft"
 
-#: main.qml:71
+#: main.qml:70
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 läuft nicht"
 
-#: main.qml:74
+#: main.qml:73
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Verbleibende Zeit: %1 Sekunde"
 msgstr[1] "Verbleibende Zeit: %1 Sekunden"
 
-#: main.qml:74
+#: main.qml:73
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -187,29 +187,29 @@ msgstr ""
 "Sie können mit dem Mausrad die Ziffern ändern oder vordefinierte Zeiten aus "
 "dem Kontextmenü wählen"
 
-#: main.qml:91
+#: main.qml:90
 #, kde-format
 msgid "Timer"
 msgstr "Eieruhr"
 
-#: main.qml:92
+#: main.qml:91
 #, kde-format
 msgid "Timer finished"
 msgstr "Zeit abgelaufen"
 
-#: main.qml:132
+#: main.qml:131
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Starten"
 
-#: main.qml:137
+#: main.qml:136
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "An&halten"
 
-#: main.qml:142
+#: main.qml:141
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

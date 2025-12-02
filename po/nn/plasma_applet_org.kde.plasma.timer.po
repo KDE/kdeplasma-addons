@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2023-02-23 18:03+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -124,14 +124,14 @@ msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
-#: configTimes.qml:23
+#: configTimes.qml:22
 #, fuzzy, kde-format
 #| msgid "Add"
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Legg til"
 
-#: configTimes.qml:82
+#: configTimes.qml:81
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
@@ -139,49 +139,49 @@ msgstr ""
 "Viss du legg ferdigdefinerte nedteljingar til her, vert dei viste i kontekst­"
 "menyen til elementet."
 
-#: configTimes.qml:120
+#: configTimes.qml:119
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Rull på siffera for å endra tid"
 
-#: configTimes.qml:127
+#: configTimes.qml:126
 #, kde-format
 msgid "Apply"
 msgstr "Bruk"
 
-#: configTimes.qml:135
+#: configTimes.qml:134
 #, kde-format
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: configTimes.qml:144
+#: configTimes.qml:143
 #, kde-format
 msgid "Edit"
 msgstr "Rediger"
 
-#: configTimes.qml:153
+#: configTimes.qml:152
 #, kde-format
 msgid "Delete"
 msgstr "Slett"
 
-#: main.qml:69
+#: main.qml:68
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 køyrer"
 
-#: main.qml:71
+#: main.qml:70
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 køyrer ikkje"
 
-#: main.qml:74
+#: main.qml:73
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Tid att: %1 sekund"
 msgstr[1] "Tid att: %1 sekund"
 
-#: main.qml:74
+#: main.qml:73
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -190,29 +190,29 @@ msgstr ""
 "Bruk musehjulet til å endra siffer, eller vel frå ferdiglaga nedteljarar i "
 "kontektmenyen"
 
-#: main.qml:91
+#: main.qml:90
 #, kde-format
 msgid "Timer"
 msgstr "Nedteljar"
 
-#: main.qml:92
+#: main.qml:91
 #, kde-format
 msgid "Timer finished"
 msgstr "Nedteljinga er ferdig"
 
-#: main.qml:132
+#: main.qml:131
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Start"
 
-#: main.qml:137
+#: main.qml:136
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "S&topp"
 
-#: main.qml:142
+#: main.qml:141
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

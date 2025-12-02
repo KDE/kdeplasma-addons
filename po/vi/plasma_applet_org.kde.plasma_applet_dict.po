@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2022-05-29 11:39+0200\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -28,30 +28,30 @@ msgctxt "@title"
 msgid "Dictionaries"
 msgstr "Từ điển"
 
-#: qml/ConfigDictionaries.qml:21
+#: qml/ConfigDictionaries.qml:19
 #, fuzzy, kde-format
 #| msgid "Add More…"
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "Thêm…"
 
-#: qml/ConfigDictionaries.qml:86
+#: qml/ConfigDictionaries.qml:84
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "Không thể tải danh sách từ điển"
 
-#: qml/ConfigDictionaries.qml:87 qml/main.qml:163
+#: qml/ConfigDictionaries.qml:85 qml/main.qml:163
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "Mã lỗi: %1 (%2)"
 
-#: qml/ConfigDictionaries.qml:98
+#: qml/ConfigDictionaries.qml:96
 #, kde-format
 msgid "No dictionaries"
 msgstr "Không có từ điển nào"
 
-#: qml/DictItemDelegate.qml:58
+#: qml/DictItemDelegate.qml:57
 #, kde-format
 msgid "Delete"
 msgstr "Xoá"

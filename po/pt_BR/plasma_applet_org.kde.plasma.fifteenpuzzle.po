@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:43+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2025-11-08 21:10-0300\n"
 "Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -117,12 +117,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Resolvido! Tentar novamente."
 
-#: qml/main.qml:38
+#: qml/main.qml:37
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Quebra-cabeça Quinze"
 
-#: qml/main.qml:39
+#: qml/main.qml:38
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Resolver organizando na ordem"

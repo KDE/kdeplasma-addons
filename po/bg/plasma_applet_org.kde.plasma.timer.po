@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2025-11-20 11:02+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -115,13 +115,13 @@ msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Таймерът завърши'"
 
-#: configTimes.qml:23
+#: configTimes.qml:22
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Добавяне"
 
-#: configTimes.qml:82
+#: configTimes.qml:81
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
@@ -129,49 +129,49 @@ msgstr ""
 "Ако добавите предварително зададени таймери тук, те ще се появят в "
 "контекстното меню на Plasma приставките."
 
-#: configTimes.qml:120
+#: configTimes.qml:119
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Превъртете над цифрите, за да промените времето"
 
-#: configTimes.qml:127
+#: configTimes.qml:126
 #, kde-format
 msgid "Apply"
 msgstr "Прилагане"
 
-#: configTimes.qml:135
+#: configTimes.qml:134
 #, kde-format
 msgid "Cancel"
 msgstr "Отказ"
 
-#: configTimes.qml:144
+#: configTimes.qml:143
 #, kde-format
 msgid "Edit"
 msgstr "Редактиране"
 
-#: configTimes.qml:153
+#: configTimes.qml:152
 #, kde-format
 msgid "Delete"
 msgstr "Изтриване"
 
-#: main.qml:69
+#: main.qml:68
 #, kde-format
 msgid "%1 is running"
 msgstr "%1 се изпълнява"
 
-#: main.qml:71
+#: main.qml:70
 #, kde-format
 msgid "%1 not running"
 msgstr "%1 не се изпълнява"
 
-#: main.qml:74
+#: main.qml:73
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Оставащо време: %1 секунда"
 msgstr[1] "Оставащо време: %1 секунди"
 
-#: main.qml:74
+#: main.qml:73
 #, kde-format
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -180,29 +180,29 @@ msgstr ""
 "Използване на колелото на мишката, за да промените цифрите или да изберете "
 "от предварително зададени таймери в контекстното меню"
 
-#: main.qml:91
+#: main.qml:90
 #, kde-format
 msgid "Timer"
 msgstr "Таймер"
 
-#: main.qml:92
+#: main.qml:91
 #, kde-format
 msgid "Timer finished"
 msgstr "Таймерът завърши"
 
-#: main.qml:132
+#: main.qml:131
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Старт"
 
-#: main.qml:137
+#: main.qml:136
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Ст&оп"
 
-#: main.qml:142
+#: main.qml:141
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

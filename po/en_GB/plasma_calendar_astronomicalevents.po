@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2019-05-19 12:55+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -17,18 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 19.07.70\n"
 
-#: config/qml/AstronomicalEventsConfig.qml:47
+#: config/qml/AstronomicalEventsConfig.qml:46
 #, kde-format
 msgid "Show:"
 msgstr "Show:"
 
-#: config/qml/AstronomicalEventsConfig.qml:50
+#: config/qml/AstronomicalEventsConfig.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Lunar phases"
 msgstr "Lunar phases"
 
-#: config/qml/AstronomicalEventsConfig.qml:58
+#: config/qml/AstronomicalEventsConfig.qml:57
 #, kde-format
 msgctxt "@option:check"
 msgid "Astronomical seasons (solstices and equinoxes)"

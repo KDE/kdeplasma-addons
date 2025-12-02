@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2019-09-26 13:48+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -17,18 +17,18 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 19.04.3\n"
 
-#: config/qml/AstronomicalEventsConfig.qml:47
+#: config/qml/AstronomicalEventsConfig.qml:46
 #, kde-format
 msgid "Show:"
 msgstr "Намоиш додан:"
 
-#: config/qml/AstronomicalEventsConfig.qml:50
+#: config/qml/AstronomicalEventsConfig.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Lunar phases"
 msgstr "Даврҳои қамарӣ"
 
-#: config/qml/AstronomicalEventsConfig.qml:58
+#: config/qml/AstronomicalEventsConfig.qml:57
 #, kde-format
 msgctxt "@option:check"
 msgid "Astronomical seasons (solstices and equinoxes)"

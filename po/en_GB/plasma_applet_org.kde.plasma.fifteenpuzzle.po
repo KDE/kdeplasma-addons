@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:43+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2022-01-01 16:01+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -122,12 +122,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Solved! Try again."
 
-#: qml/main.qml:38
+#: qml/main.qml:37
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Fifteen Puzzle"
 
-#: qml/main.qml:39
+#: qml/main.qml:38
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Solve by arranging in order"

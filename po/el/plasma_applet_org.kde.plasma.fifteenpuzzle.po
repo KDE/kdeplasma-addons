@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:43+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2017-01-19 19:36+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -122,12 +122,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Λύθηκε! Δοκιμάστε ξανά."
 
-#: qml/main.qml:38
+#: qml/main.qml:37
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Παζλ 15 κομματιών"
 
-#: qml/main.qml:39
+#: qml/main.qml:38
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Επίλυση με διάταξη σε σειρά"

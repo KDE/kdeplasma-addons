@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-25 00:43+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2024-04-02 16:35+0300\n"
 "Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -125,12 +125,12 @@ msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Atrisināts! Mēģiniet vēlreiz."
 
-#: qml/main.qml:38
+#: qml/main.qml:37
 #, kde-format
 msgid "Fifteen Puzzle"
 msgstr "Piecpadsmit puzle"
 
-#: qml/main.qml:39
+#: qml/main.qml:38
 #, kde-format
 msgid "Solve by arranging in order"
 msgstr "Sakārtojiet pēc kārtas"
