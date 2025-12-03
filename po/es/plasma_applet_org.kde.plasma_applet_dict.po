@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma_applet_dict\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2025-12-02 00:43+0000\n"
 "PO-Revision-Date: 2025-05-13 21:13+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -30,29 +30,29 @@ msgctxt "@title"
 msgid "Dictionaries"
 msgstr "Diccionarios"
 
-#: qml/ConfigDictionaries.qml:21
+#: qml/ConfigDictionaries.qml:19
 #, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "Añadir más…"
 
-#: qml/ConfigDictionaries.qml:86
+#: qml/ConfigDictionaries.qml:84
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "No se puede cargar la lista de diccionarios"
 
-#: qml/ConfigDictionaries.qml:87 qml/main.qml:163
+#: qml/ConfigDictionaries.qml:85 qml/main.qml:163
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "Código de error: %1 (%2)"
 
-#: qml/ConfigDictionaries.qml:98
+#: qml/ConfigDictionaries.qml:96
 #, kde-format
 msgid "No dictionaries"
 msgstr "No hay diccionarios"
 
-#: qml/DictItemDelegate.qml:58
+#: qml/DictItemDelegate.qml:57
 #, kde-format
 msgid "Delete"
 msgstr "Borrar"
