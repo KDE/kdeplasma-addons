@@ -9,7 +9,10 @@
 #include <QDebug>
 #include <QQuickWebEngineProfile>
 #include <QWebEngineUrlRequestJob>
+#include <QWebEngineUrlScheme>
 #include <QWebEngineUrlSchemeHandler>
+
+using namespace Qt::StringLiterals;
 
 class DictSchemeHandler : public QWebEngineUrlSchemeHandler
 {
@@ -34,6 +37,11 @@ DictObject::DictObject(QObject *parent)
     : QObject(parent)
     , m_selectedDict(QStringLiteral("wn"))
 {
+    static auto _scheme_registered = false;
+    if (!_scheme_registered) {
+        QWebEngineUrlScheme::registerScheme(QWebEngineUrlScheme("dict"_ba));
+        _scheme_registered = true;
+    }
     m_webProfile = new QQuickWebEngineProfile(this);
     auto *schemeHandler = new DictSchemeHandler(this);
     connect(schemeHandler, &DictSchemeHandler::wordClicked, this, &DictObject::lookup);
