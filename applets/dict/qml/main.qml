@@ -14,7 +14,7 @@ import org.kde.plasma.plasmoid
 import QtWebEngine
 import QtQuick.Controls
 
-import org.kde.plasma.private.dict
+import plasma.applet.org.kde.plasma_applet_dict
 
 PlasmoidItem {
     id: root

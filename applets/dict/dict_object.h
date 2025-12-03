@@ -9,10 +9,13 @@
 #include "../../dict/dictengine.h"
 #include <QObject>
 #include <QQuickWebEngineProfile>
+#include <qqmlintegration.h>
 
 class DictObject : public QObject
 {
     Q_OBJECT
+    QML_ELEMENT
+
     Q_PROPERTY(QQuickWebEngineProfile *webProfile READ webProfile CONSTANT)
     Q_PROPERTY(QString selectedDictionary READ selectedDictionary WRITE setSelectedDictionary)
 

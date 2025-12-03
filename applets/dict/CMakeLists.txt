@@ -17,24 +17,19 @@ plasma_add_applet(org.kde.plasma_applet_dict GENERATE_APPLET_CLASS
         qml/config.qml
         qml/DictItemDelegate.qml
         qml/main.qml
+    CPP_SOURCES
+        dict_object.cpp
+        dictionariesmodel.cpp
     RESOURCES
         main.xml
 )
 # TODO: fix pluginid "org.kde.plasma_applet_dict" into properly namespaced id "org.kde.plasma.dict"
 
-#######################################################################################
-add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma_applet_dict")
-
-ecm_add_qml_module(dictplugin URI org.kde.plasma.private.dict)
-target_sources(dictplugin PRIVATE
-  plugin/dict_plugin.cpp
-  plugin/dict_object.cpp
-  plugin/dictionariesmodel.cpp
-)
-target_link_libraries(dictplugin PRIVATE
+target_link_libraries(org.kde.plasma_applet_dict PRIVATE
     KF6::I18n
     Qt::Quick
     Qt::WebEngineQuick
     engine_dict_static
 )
-ecm_finalize_qml_module(dictplugin)
+
+add_definitions(-DTRANSLATION_DOMAIN="plasma_applet_org.kde.plasma_applet_dict")
