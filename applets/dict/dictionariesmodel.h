@@ -12,6 +12,7 @@
 
 #include <QAbstractListModel>
 #include <QAbstractSocket>
+#include <qqmlintegration.h>
 #include <vector>
 
 struct AvailableDict {
@@ -40,6 +41,7 @@ private:
 class DictionariesModel : public QAbstractListModel
 {
     Q_OBJECT
+    QML_ELEMENT
 
     /**
      * @return the list of enabled dictionaries

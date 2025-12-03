@@ -7,7 +7,8 @@
 import QtQuick
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
-import org.kde.plasma.private.dict
+
+import plasma.applet.org.kde.plasma_applet_dict
 
 KCM.ScrollViewKCM {
 
