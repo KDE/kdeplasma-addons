@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-24 00:44+0000\n"
-"PO-Revision-Date: 2025-04-07 09:38+0000\n"
+"PO-Revision-Date: 2025-12-03 17:53+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -182,7 +182,7 @@ msgstr "Endurhlaða þessa síðu"
 msgctxt ""
 "@action:button keep this widget's pop-up open until explicitly dismissed"
 msgid "Keep open"
-msgstr ""
+msgstr "Halda opnu"
 
 #: qml/main.qml:227
 #, kde-format
