@@ -73,7 +73,7 @@ ContainmentItem {
             anchors.left: parent.left
             anchors.right: parent.right
 
-            LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+            LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
             LayoutMirroring.childrenInherit: true
 
             Repeater {

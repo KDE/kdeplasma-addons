@@ -126,7 +126,7 @@ PlasmaCore.ToolTipArea {
                 plasmoidItem.expanded = false;
             }
 
-            LayoutMirroring.enabled: Qt.application.layoutDirection === Qt.RightToLeft
+            LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
             LayoutMirroring.childrenInherit: true
 
             Layout.minimumWidth: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.minimumWidth : 0
