@@ -44,7 +44,7 @@ msgstr[2] "%1 s"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "Obecné"
 
 #: config.qml:19
 #, kde-format
