@@ -43,7 +43,7 @@ ContainmentItem {
         const appletItem = root.itemFor(applet);
 
         if (!plasmoidItemComponent) {
-            plasmoidItemComponent = Qt.createComponent("items/PlasmoidItem.qml");
+            plasmoidItemComponent = Qt.createComponent("PlasmoidItem.qml");
         }
 
         if (plasmoidItemComponent.status === Component.Error) {
