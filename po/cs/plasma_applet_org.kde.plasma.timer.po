@@ -97,10 +97,10 @@ msgstr ""
 #: configGeneral.qml:85
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#| msgid "Show title:"
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Zobrazit text upozornění:"
+msgstr "Zobrazit název:"
 
 #: configGeneral.qml:97
 #, fuzzy, kde-format
@@ -110,12 +110,10 @@ msgid "Timer finished"
 msgstr "Časovač skončil"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Execute command:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "Spustit příkaz:"
+msgstr ""
 
 #: configGeneral.qml:119
 #, kde-format
@@ -212,19 +210,3 @@ msgstr "Zas&tavit"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Obnovit"
-
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Vzhled"
-
-#~ msgctxt "@title"
-#~ msgid "Advanced"
-#~ msgstr "Pokročilé"
-
-#~ msgctxt "@title:label"
-#~ msgid "After timer completes:"
-#~ msgstr "Po dokončení časovače:"
-
-#~ msgctxt "@title:label"
-#~ msgid "Notifications:"
-#~ msgstr "Upozornění:"
