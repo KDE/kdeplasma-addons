@@ -21,8 +21,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
 "#FF00FF) or an SVG named color."
 msgstr ""
-"Affiche la valeur de :q : en tant que couleur lorsque :q : est une couleur "
-"en hexadécimal (Par exemple #FF00FF) ou une couleur nommée « SVG »."
+"Affiche la valeur de :q: en tant que couleur lorsque :q : est une couleur en "
+"hexadécimal (Par exemple #FF00FF) ou une couleur nommée « SVG »."
 
 #: colorsrunner.cpp:31
 #, kde-format
@@ -30,7 +30,7 @@ msgid ""
 "Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
 "255,255,255)."
 msgstr ""
-"Affiche la valeur de :q : en tant que couleur lorsque :q : est un triplet de "
+"Affiche la valeur de :q: en tant que couleur lorsque :q : est un triplet de "
 "couleurs « RGB » (Par exemple 255, 255, 255)."
 
 #: colorsrunner.cpp:34
@@ -39,8 +39,8 @@ msgid ""
 "Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
 "color quadruplet (e.g. 255,255,255,255)."
 msgstr ""
-"Affiche la valeur de :q : en tant que couleur avec un canal alpha lorsque :"
-"q : est un quadruplet de couleurs « RVBA » (Par exemple 255, 255, 255, 255)."
+"Affiche la valeur de :q: en tant que couleur avec un canal alpha lorsque :q: "
+"est un quadruplet de couleurs « RVBA » (Par exemple 255, 255, 255, 255)."
 
 #: colorsrunner.cpp:139
 #, kde-format
