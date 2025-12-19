@@ -17,9 +17,16 @@ import org.kde.kwin as KWin
 KWin.TabBoxSwitcher {
     id: tabBox
 
-    currentIndex: icons.currentIndex
+    currentIndex: (instantiator.object as BigIconsDialog)?.currentIndex ?? currentIndex
 
-    PlasmaCore.Dialog {
+    Instantiator {
+        id: instantiator
+        active: tabBox.visible
+        delegate: BigIconsDialog { }
+    }
+
+    component BigIconsDialog: PlasmaCore.Dialog {
+        property alias currentIndex: icons.currentIndex
         location: PlasmaCore.Types.Floating
         visible: tabBox.visible
         flags: Qt.Popup | Qt.X11BypassWindowManagerHint
@@ -32,21 +39,32 @@ KWin.TabBoxSwitcher {
 
             width: Math.min(Math.max(tabBox.screenGeometry.width * 0.3, icons.implicitWidth), tabBox.screenGeometry.width * 0.9)
 
-            ListView {
+            property int maxItemsPerRow:  Math.floor(tabBox.screenGeometry.width * 0.9 / icons.delegateWidth)
+            property int actualItemsPerRow:  Math.min(tabBox.model.rowCount(), maxItemsPerRow)
+
+            property int gridViewWidth: Math.max(4, actualItemsPerRow) * icons.delegateWidth
+            property int gridViewHeight: Math.ceil(tabBox.model.rowCount() / maxItemsPerRow) * icons.delegateHeight
+
+            GridView {
                 id: icons
 
                 readonly property int iconSize: Kirigami.Units.iconSizes.enormous
                 readonly property int delegateWidth: iconSize + (highlightItem ? highlightItem.margins.left + highlightItem.margins.right : 0)
                 readonly property int delegateHeight: iconSize + (highlightItem ? highlightItem.margins.top + highlightItem.margins.bottom : 0)
 
+                implicitWidth: dialogMainItem.actualItemsPerRow * delegateWidth
+                implicitHeight: dialogMainItem.gridViewHeight
                 Layout.alignment: Qt.AlignHCenter
                 Layout.maximumWidth: tabBox.screenGeometry.width * 0.9
+                Layout.fillWidth: false // to make centering with few icons work
+                Layout.fillHeight: true
+                cellWidth: delegateWidth
+                cellHeight: delegateHeight
 
-                implicitWidth: contentWidth || delegateWidth * 4
-                implicitHeight: delegateHeight
-
+                currentIndex: tabBox.currentIndex
                 focus: true
-                orientation: ListView.Horizontal
+                flow: GridView.LeftToRight
+                keyNavigationWraps: true
 
                 model: tabBox.model
                 delegate: Kirigami.Icon {
@@ -90,7 +108,6 @@ KWin.TabBoxSwitcher {
                 }
 
                 highlightMoveDuration: 0
-                highlightResizeDuration: 0
                 boundsBehavior: Flickable.StopAtBounds
             }
 
@@ -115,23 +132,19 @@ KWin.TabBoxSwitcher {
             }
 
             /*
-            * Key navigation on outer item for two reasons:
-            * @li we have to emit the change signal
-            * @li on multiple invocation it does not work on the list view. Focus seems to be lost.
-            **/
+             * Key navigation on outer item for two reasons:
+             * @li we have to emit the change signal
+             * @li on multiple invocation it does not work on the list view. Focus seems to be lost.
+             **/
             Keys.onPressed: event => {
-                if (event.key === Qt.Key_Up || event.key === Qt.Key_Left) {
-                    if (icons.currentIndex === 0) {
-                        icons.currentIndex = icons.count - 1
-                    } else {
-                        icons.decrementCurrentIndex()
-                    }
-                } else if (event.key === Qt.Key_Down || event.key === Qt.Key_Right) {
-                    if (icons.currentIndex == icons.count - 1) {
-                        icons.currentIndex = 0
-                    } else {
-                        icons.incrementCurrentIndex()
-                    }
+                if (event.key === Qt.Key_Up) {
+                    icons.moveCurrentIndexUp()
+                } else if (event.key === Qt.Key_Down) {
+                    icons.moveCurrentIndexDown()
+                } else if (event.key === Qt.Key_Left) {
+                    icons.moveCurrentIndexLeft()
+                } else if (event.key === Qt.Key_Right) {
+                    icons.moveCurrentIndexRight()
                 }
             }
         }
