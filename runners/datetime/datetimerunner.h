@@ -7,8 +7,6 @@
 #ifndef DATETIMERUNNER_H
 #define DATETIMERUNNER_H
 
-#include <QDateTime>
-
 #include <KRunner/AbstractRunner>
 #include <KRunner/QueryMatch>
 #include <QDateTime>
