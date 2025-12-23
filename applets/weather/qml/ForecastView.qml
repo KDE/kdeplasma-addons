@@ -169,18 +169,18 @@ Item {
             PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
-                text: !!model.highTemp && !!root.metaData?.temperatureUnit ? Util.temperatureToDisplayString(root.displayTemperatureUnit, model.highTemp, root.metaData.temperatureUnit, true) : i18nc("Short for no data available", "-")
+                text: !isNaN(model.highTemp) && !!root.metaData?.temperatureUnit ? Util.temperatureToDisplayString(root.displayTemperatureUnit, model.highTemp, root.metaData.temperatureUnit, true) : i18nc("Short for no data available", "-")
                 textFormat: Text.PlainText
-                visible: !!model.highTemp || !futureDays.isNightPresent
+                visible: !isNaN(model.highTemp) || !futureDays.isNightPresent
                 Layout.preferredHeight: labelFontMetrics.height
             }
 
             PlasmaComponents.Label {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 horizontalAlignment: Text.AlignHCenter
-                text: !!model.lowTemp && !!root.metaData?.temperatureUnit ? Util.temperatureToDisplayString(root.displayTemperatureUnit, model.lowTemp, root.metaData.temperatureUnit, true) : i18nc("Short for no data available", "-")
+                text: !isNaN(model.lowTemp) && !!root.metaData?.temperatureUnit ? Util.temperatureToDisplayString(root.displayTemperatureUnit, model.lowTemp, root.metaData.temperatureUnit, true) : i18nc("Short for no data available", "-")
                 textFormat: Text.PlainText
-                visible: !!model.lowTemp || !futureDays.isNightPresent
+                visible: !isNaN(model.lowTemp) || !futureDays.isNightPresent
                 Layout.preferredHeight: labelFontMetrics.height
             }
         }
