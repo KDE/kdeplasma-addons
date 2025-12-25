@@ -70,9 +70,8 @@ PlasmoidItem {
         var contents = NotesHelper.fileContents(data) || data
         mainTextArea.text = String(contents).replace(/\n/g, "<br>") // what about richtext?
 
-        // place cursor at the end of text, there's no "just move the cursor" function
-        mainTextArea.moveCursorSelection(mainTextArea.length)
-        mainTextArea.deselect()
+        // place cursor at the end of text
+        mainTextArea.cursorPosition = mainTextArea.length
     }
 
     Timer {
@@ -418,10 +417,12 @@ PlasmoidItem {
                 }
 
                 function restoreScroll() {
-                    const flickable = scrollview.contentItem;
-                    flickable.contentX = Plasmoid.configuration.scrollX;
-                    flickable.contentY = Plasmoid.configuration.scrollY;
-                    mainTextArea.cursorPosition = Plasmoid.configuration.cursorPosition;
+                    if (Plasmoid.configuration.cursorPosition > -1) {
+                        const flickable = scrollview.contentItem;
+                        flickable.contentX = Plasmoid.configuration.scrollX;
+                        flickable.contentY = Plasmoid.configuration.scrollY;
+                        mainTextArea.cursorPosition = Plasmoid.configuration.cursorPosition;
+                    }
                 }
 
                 // Give it some time to lay out the text, because at this
