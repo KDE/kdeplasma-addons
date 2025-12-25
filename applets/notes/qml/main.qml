@@ -69,6 +69,7 @@ PlasmoidItem {
 
         // place cursor at the end of text
         mainTextArea.cursorPosition = mainTextArea.length
+        mainTextArea.forceActiveFocus()
     }
 
     Timer {
