@@ -12,6 +12,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.ksvg as KSvg
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.core as PlasmaCore
+import plasma.applet.org.kde.plasma.weather
 
 GridLayout {
     id: root
@@ -209,16 +210,14 @@ GridLayout {
         PlasmaComponents.Label {
             id: windSpeedLabel
 
-            visible: true
-
-            readonly property bool isWindSpeedPresent: !!root.lastObservation?.windSpeed && !!root.metaData?.windSpeedUnit && root.lastObservation.windSpeed !== 0.0
+            visible: !isNaN(root.lastObservation?.windSpeed) && !!root.metaData?.windSpeedUnit
 
             anchors {
                 top: windSpeedDirection.bottom
                 horizontalCenter: parent.horizontalCenter
             }
 
-            text: isWindSpeedPresent ? Util.valueToDisplayString(root.displayWindSpeedUnit, root.lastObservation.windSpeed, root.metaData.windSpeedUnit, 1) : i18nc("Wind condition", "Calm");
+            text: root.lastObservation?.windSpeed !== 0.0 && root.lastObservation && root.metaData ? Util.valueToDisplayString(root.displayWindSpeedUnit, root.lastObservation.windSpeed, root.metaData.windSpeedUnit, 1) : i18nc("Wind condition", "Calm")
             textFormat: Text.PlainText
         }
     }
