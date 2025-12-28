@@ -30,7 +30,8 @@ ComicEngine::ComicEngine(QObject *parent)
     : QObject(parent)
     , mEmptySuffix(false)
 {
-    QNetworkInformation::instance()->loadBackendByFeatures(QNetworkInformation::Feature::Reachability);
+    if (const auto instance = QNetworkInformation::instance())
+        instance->loadBackendByFeatures(QNetworkInformation::Feature::Reachability);
     loadProviders();
 }
 
@@ -278,5 +279,6 @@ QString ComicEngine::lastCachedIdentifier(const QString &identifier) const
 
 bool ComicEngine::isOnline() const
 {
-    return QNetworkInformation::instance()->reachability() == QNetworkInformation::Reachability::Online;
+    const auto instance = QNetworkInformation::instance();
+    return (instance && instance->reachability() == QNetworkInformation::Reachability::Online);
 }
