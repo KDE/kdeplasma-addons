@@ -33,7 +33,7 @@ KWin.TabBoxSwitcher {
 
     TextMetrics {
         id: textMetrics
-        property string longestCaption: tabBox.model.longestCaption() || placeholderLabel.text
+        property string longestCaption: tabBox.model?.longestCaption() || placeholderLabel.text
         text: itemCaption(longestCaption, true)
         font.bold: true
     }
@@ -41,11 +41,11 @@ KWin.TabBoxSwitcher {
     onVisibleChanged: {
         if (visible) {
             // Window captions may have change completely
-            textMetrics.longestCaption = tabBox.model.longestCaption() || placeholderLabel.text;
+            textMetrics.longestCaption = tabBox.model?.longestCaption() || placeholderLabel.text;
         }
     }
     onModelChanged: {
-        textMetrics.longestCaption = tabBox.model.longestCaption() || placeholderLabel.text;
+        textMetrics.longestCaption = tabBox.model?.longestCaption() || placeholderLabel.text;
     }
 
     // For mouse clicking, we delay the activation just enough to have
