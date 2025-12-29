@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-26 00:44+0000\n"
+"POT-Creation-Date: 2025-12-29 00:45+0000\n"
 "PO-Revision-Date: 2025-04-05 08:25+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -90,152 +90,152 @@ msgstr "Prosojno lepljivo sporočilce"
 msgid "A transparent sticky note with light text"
 msgstr "Prosojno lepljivo sporočilce s svetlim besedilom"
 
-#: qml/main.qml:292
+#: qml/main.qml:293
 #, kde-format
 msgid "Undo"
 msgstr "Razveljavi"
 
-#: qml/main.qml:300
+#: qml/main.qml:301
 #, kde-format
 msgid "Redo"
 msgstr "Uveljavi"
 
-#: qml/main.qml:310
+#: qml/main.qml:311
 #, kde-format
 msgid "Cut"
 msgstr "Izreži"
 
-#: qml/main.qml:318
+#: qml/main.qml:319
 #, kde-format
 msgid "Copy"
 msgstr "Kopiraj"
 
-#: qml/main.qml:326
+#: qml/main.qml:327
 #, kde-format
 msgid "Paste"
 msgstr "Prilepi"
 
-#: qml/main.qml:332
+#: qml/main.qml:333
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "Prilepi s polnim oblikovanjem"
 
-#: qml/main.qml:339
+#: qml/main.qml:340
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "Odstrani oblikovanje"
 
-#: qml/main.qml:354
+#: qml/main.qml:355
 #, kde-format
 msgid "Delete"
 msgstr "Izbriši"
 
-#: qml/main.qml:361
+#: qml/main.qml:362
 #, kde-format
 msgid "Clear"
 msgstr "Očisti"
 
-#: qml/main.qml:371
+#: qml/main.qml:372
 #, kde-format
 msgid "Select All"
 msgstr "Izberi vse"
 
-#: qml/main.qml:503
+#: qml/main.qml:504
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Krepko"
 
-#: qml/main.qml:516
+#: qml/main.qml:517
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Ležeče"
 
-#: qml/main.qml:529
+#: qml/main.qml:530
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Podčrtano"
 
-#: qml/main.qml:542
+#: qml/main.qml:543
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Prečrtano"
 
-#: qml/main.qml:616
+#: qml/main.qml:617
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
 msgstr "Ohranjaj odprto"
 
-#: qml/main.qml:645
+#: qml/main.qml:646
 #, kde-format
 msgid "Discard this note?"
 msgstr "Naj zavržem to sporočilce?"
 
-#: qml/main.qml:646
+#: qml/main.qml:647
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Ali ste prepričani, da želite zavreči to sporočilce?"
 
-#: qml/main.qml:671
+#: qml/main.qml:672
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Belo"
 
-#: qml/main.qml:672
+#: qml/main.qml:673
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Črno"
 
-#: qml/main.qml:673
+#: qml/main.qml:674
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Rdeče"
 
-#: qml/main.qml:674
+#: qml/main.qml:675
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Oranžno"
 
-#: qml/main.qml:675
+#: qml/main.qml:676
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Rumeno"
 
-#: qml/main.qml:676
+#: qml/main.qml:677
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Zeleno"
 
-#: qml/main.qml:677
+#: qml/main.qml:678
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Modro"
 
-#: qml/main.qml:678
+#: qml/main.qml:679
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Rožnato"
 
-#: qml/main.qml:679
+#: qml/main.qml:680
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "Prosojno"
 
-#: qml/main.qml:683
+#: qml/main.qml:684
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"

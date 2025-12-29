@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-26 00:44+0000\n"
+"POT-Creation-Date: 2025-12-29 00:45+0000\n"
 "PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -85,152 +85,152 @@ msgstr "एकः पारदर्शी चिपचिपा टिप्प
 msgid "A transparent sticky note with light text"
 msgstr "हल्केन पाठेन सह पारदर्शी चिपचिपा टिप्पणी"
 
-#: qml/main.qml:292
+#: qml/main.qml:293
 #, kde-format
 msgid "Undo"
 msgstr "पूर्ववत"
 
-#: qml/main.qml:300
+#: qml/main.qml:301
 #, kde-format
 msgid "Redo"
 msgstr "पुनः करो"
 
-#: qml/main.qml:310
+#: qml/main.qml:311
 #, kde-format
 msgid "Cut"
 msgstr "छिन्न"
 
-#: qml/main.qml:318
+#: qml/main.qml:319
 #, kde-format
 msgid "Copy"
 msgstr "प्रतिलिपि"
 
-#: qml/main.qml:326
+#: qml/main.qml:327
 #, kde-format
 msgid "Paste"
 msgstr "चिनोतु"
 
-#: qml/main.qml:332
+#: qml/main.qml:333
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "पूर्णस्वरूपणेन सह चिनोतु"
 
-#: qml/main.qml:339
+#: qml/main.qml:340
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "स्वरूपणं निष्कासयन्तु"
 
-#: qml/main.qml:354
+#: qml/main.qml:355
 #, kde-format
 msgid "Delete"
 msgstr "लुप्"
 
-#: qml/main.qml:361
+#: qml/main.qml:362
 #, kde-format
 msgid "Clear"
 msgstr "स्पष्टः"
 
-#: qml/main.qml:371
+#: qml/main.qml:372
 #, kde-format
 msgid "Select All"
 msgstr "सर्वं चिनोतु"
 
-#: qml/main.qml:503
+#: qml/main.qml:504
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "विक्रान्तः"
 
-#: qml/main.qml:516
+#: qml/main.qml:517
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "इटालिक"
 
-#: qml/main.qml:529
+#: qml/main.qml:530
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "रेखांकनम्"
 
-#: qml/main.qml:542
+#: qml/main.qml:543
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "स्ट्राइकथ्रू"
 
-#: qml/main.qml:616
+#: qml/main.qml:617
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
 msgstr ""
 
-#: qml/main.qml:645
+#: qml/main.qml:646
 #, kde-format
 msgid "Discard this note?"
 msgstr "एतत् टिप्पणं परित्यजन्तु ?"
 
-#: qml/main.qml:646
+#: qml/main.qml:647
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "किं भवन्तः निश्चयेन एतत् टिप्पणं परित्यक्तुं इच्छन्ति?"
 
-#: qml/main.qml:671
+#: qml/main.qml:672
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "श्वेतः"
 
-#: qml/main.qml:672
+#: qml/main.qml:673
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "कृष्णः"
 
-#: qml/main.qml:673
+#: qml/main.qml:674
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "रक्त"
 
-#: qml/main.qml:674
+#: qml/main.qml:675
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "नारङ्ग"
 
-#: qml/main.qml:675
+#: qml/main.qml:676
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "पीतं"
 
-#: qml/main.qml:676
+#: qml/main.qml:677
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "हरित"
 
-#: qml/main.qml:677
+#: qml/main.qml:678
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "नील"
 
-#: qml/main.qml:678
+#: qml/main.qml:679
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "पाटल"
 
-#: qml/main.qml:679
+#: qml/main.qml:680
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "पारदर्शी"
 
-#: qml/main.qml:683
+#: qml/main.qml:684
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
