@@ -3,20 +3,21 @@
 #
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2023.
 # SPDX-FileCopyrightText: 2024 Geraldo Simiao <geraldosimiao@fedoraproject.org>
+# SPDX-FileCopyrightText: 2025 Marcus Gama <marcus.gama@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 02:58+0000\n"
-"PO-Revision-Date: 2024-08-23 10:21-0300\n"
-"Last-Translator: Geraldo Simiao <geraldosimiao@fedoraproject.org>\n"
+"PO-Revision-Date: 2025-12-30 06:35-0300\n"
+"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.05.2\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #: kcm/cubeeffectkcm.cpp:35
 #, kde-format
@@ -32,85 +33,85 @@ msgstr "Alternar cubo"
 #: kcm/cubeeffectkcm.ui:23
 #, kde-format
 msgid "Cube face displacement:"
-msgstr ""
+msgstr "Deslocamento da face do cubo:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_less)
 #: kcm/cubeeffectkcm.ui:48
 #, kde-format
 msgid "Less"
-msgstr ""
+msgstr "Menos"
 
 #. i18n: ectx: property (text), widget (QLabel, label_more)
 #: kcm/cubeeffectkcm.ui:61
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "Mais"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kcm/cubeeffectkcm.ui:73
 #, kde-format
 msgid "Distance:"
-msgstr ""
+msgstr "Distância:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_closer)
 #: kcm/cubeeffectkcm.ui:101
 #, kde-format
 msgid "Closer"
-msgstr ""
+msgstr "Mais perto"
 
 #. i18n: ectx: property (text), widget (QLabel, label_farther)
 #: kcm/cubeeffectkcm.ui:114
 #, kde-format
 msgid "Farther"
-msgstr ""
+msgstr "Mais distante"
 
 #. i18n: ectx: property (text), widget (QLabel, label_Mouse)
 #: kcm/cubeeffectkcm.ui:126
 #, kde-format
 msgid "Mouse:"
-msgstr ""
+msgstr "Mouse:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_MouseInvertedX)
 #: kcm/cubeeffectkcm.ui:133
 #, kde-format
 msgid "Invert X"
-msgstr ""
+msgstr "Inverter X"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_MouseInvertedY)
 #: kcm/cubeeffectkcm.ui:140
 #, kde-format
 msgid "Invert Y"
-msgstr ""
+msgstr "Inverter Y"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kcm/cubeeffectkcm.ui:147
 #, kde-format
 msgid "Background:"
-msgstr ""
+msgstr "Plano de fundo:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, button_Color)
 #: kcm/cubeeffectkcm.ui:164
 #, kde-format
 msgid "Plain color:"
-msgstr ""
+msgstr "Cor simples:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, button_SkyBox)
 #: kcm/cubeeffectkcm.ui:198
 #, kde-format
 msgid "Skybox:"
-msgstr ""
+msgstr "Caixa celeste:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, kcfg_SkyBox)
 #: kcm/cubeeffectkcm.ui:208
 #, kde-format
 msgid "Type path or URL..."
-msgstr ""
+msgstr "Digite o caminho ou URL..."
 
 #. i18n: ectx: property (text), widget (QPushButton, button_SelectSkyBox)
 #: kcm/cubeeffectkcm.ui:218
 #, kde-format
 msgid "Select..."
-msgstr ""
+msgstr "Selecionar..."
 
 #: package/contents/ui/PlaceholderView.qml:28
 #, kde-format
