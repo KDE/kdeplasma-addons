@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# SPDX-FileCopyrightText: 2024, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2025, 2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 00:42+0000\n"
-"PO-Revision-Date: 2024-03-30 10:55+0400\n"
+"PO-Revision-Date: 2026-01-08 11:58+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -32,85 +32,85 @@ msgstr "مكن/عطل المكعب"
 #: kcm/cubeeffectkcm.ui:23
 #, kde-format
 msgid "Cube face displacement:"
-msgstr ""
+msgstr "إزاحة وجه المكعب:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_less)
 #: kcm/cubeeffectkcm.ui:48
 #, kde-format
 msgid "Less"
-msgstr ""
+msgstr "أقل"
 
 #. i18n: ectx: property (text), widget (QLabel, label_more)
 #: kcm/cubeeffectkcm.ui:61
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "أكثر"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kcm/cubeeffectkcm.ui:73
 #, kde-format
 msgid "Distance:"
-msgstr ""
+msgstr "المسافة:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_closer)
 #: kcm/cubeeffectkcm.ui:101
 #, kde-format
 msgid "Closer"
-msgstr ""
+msgstr "أقرب"
 
 #. i18n: ectx: property (text), widget (QLabel, label_farther)
 #: kcm/cubeeffectkcm.ui:114
 #, kde-format
 msgid "Farther"
-msgstr ""
+msgstr "أبعد"
 
 #. i18n: ectx: property (text), widget (QLabel, label_Mouse)
 #: kcm/cubeeffectkcm.ui:126
 #, kde-format
 msgid "Mouse:"
-msgstr ""
+msgstr "الفأرة:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_MouseInvertedX)
 #: kcm/cubeeffectkcm.ui:133
 #, kde-format
 msgid "Invert X"
-msgstr ""
+msgstr "اعكس س"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_MouseInvertedY)
 #: kcm/cubeeffectkcm.ui:140
 #, kde-format
 msgid "Invert Y"
-msgstr ""
+msgstr "اعكس ص"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kcm/cubeeffectkcm.ui:147
 #, kde-format
 msgid "Background:"
-msgstr ""
+msgstr "الخلفيّة:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, button_Color)
 #: kcm/cubeeffectkcm.ui:164
 #, kde-format
 msgid "Plain color:"
-msgstr ""
+msgstr "لون صِرف:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, button_SkyBox)
 #: kcm/cubeeffectkcm.ui:198
 #, kde-format
 msgid "Skybox:"
-msgstr ""
+msgstr "صندوق السماء:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, kcfg_SkyBox)
 #: kcm/cubeeffectkcm.ui:208
 #, kde-format
 msgid "Type path or URL..."
-msgstr ""
+msgstr "اكتب مسارًا أو وصلةً هنا…"
 
 #. i18n: ectx: property (text), widget (QPushButton, button_SelectSkyBox)
 #: kcm/cubeeffectkcm.ui:218
 #, kde-format
 msgid "Select..."
-msgstr ""
+msgstr "اختر..."
 
 #: package/contents/ui/PlaceholderView.qml:28
 #, kde-format
