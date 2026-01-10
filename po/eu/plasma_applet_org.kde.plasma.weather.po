@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-01-10 00:44+0000\n"
 "PO-Revision-Date: 2025-07-28 12:11+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -698,7 +698,7 @@ msgstr ""
 "hornitzailearen zerbitzariaren itzalaldi baten ondorio izatea. Egiaztatu "
 "berriz geroago."
 
-#: qml/main.qml:81 qml/TopPanel.qml:221
+#: qml/main.qml:81 qml/TopPanel.qml:220
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -836,7 +836,7 @@ msgstr ""
 "Baliteke eguraldi-hornitzailearekin arazo tekniko bat egotea. Arazoak egun "
 "bat baino gehiago irauten badu, bidali akats-txosten bat."
 
-#: qml/TopPanel.qml:136
+#: qml/TopPanel.qml:137
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

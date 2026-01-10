@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2017, 2020, 2021, 2022, 2024, 2025 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2017, 2020, 2021, 2022, 2024, 2025, 2026 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-09-02 18:03+0200\n"
+"POT-Creation-Date: 2026-01-10 00:44+0000\n"
+"PO-Revision-Date: 2026-01-09 09:26+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -129,7 +129,7 @@ msgstr "Calme"
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
-msgstr ""
+msgstr "Datos ex BBC Weather"
 
 #: ions/bbcukmet/ion_bbcukmet.cpp:717 ions/envcan/ion_envcan.cpp:1618
 #, kde-format
@@ -162,7 +162,7 @@ msgstr "Iste Nocte"
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
-msgstr ""
+msgstr "Fonte: Deutscher Wetterdienst"
 
 #: ions/dwd/ion_dwd.cpp:563 ions/envcan/ion_envcan.cpp:1497
 #, kde-format
@@ -234,12 +234,12 @@ msgstr "Datos ex NOAA National Weather Service"
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
 #. If there is no suitable separator, a sentence separator might do.
 #: ions/noaa/ion_noaa.cpp:755
-#, fuzzy, kde-format
+#, kde-format
 msgctxt ""
 "Separator between forecast conditions that follow a temporal sequence (ex. "
 "\"Rain then Sunny\")"
 msgid " then "
-msgstr "Postea:"
+msgstr " postea "
 
 #: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
 #, kde-format
@@ -352,7 +352,7 @@ msgid "heavy rain snow"
 msgstr "pluvia nive forte"
 
 #: ions/wetter.com/ion_wettercom.cpp:161
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "weather condition"
 msgid "snow"
 msgstr "nive"
@@ -382,7 +382,7 @@ msgid "showers"
 msgstr "passageres de pluvia"
 
 #: ions/wetter.com/ion_wettercom.cpp:167
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "weather condition"
 msgid "light showers"
 msgstr "passageres de pluvia legier"
@@ -406,7 +406,7 @@ msgid "heavy snow rain showers"
 msgstr "passageres de pluvia con nive forte"
 
 #: ions/wetter.com/ion_wettercom.cpp:172
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "weather condition"
 msgid "light snow showers"
 msgstr "passager de nive legier"
@@ -457,7 +457,7 @@ msgstr "celo clar"
 #, kde-format
 msgctxt "Geographical location: city, state, ISO-country-code"
 msgid "%1, %2, %3"
-msgstr ""
+msgstr "%1, %2, %3"
 
 #: ions/wetter.com/ion_wettercom.cpp:313
 #, kde-format
@@ -695,7 +695,7 @@ msgstr ""
 "servitor al fornitor de station meteorologic. Tu verifica novemente plus "
 "tarde."
 
-#: qml/main.qml:81 qml/TopPanel.qml:221
+#: qml/main.qml:81 qml/TopPanel.qml:220
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -832,9 +832,9 @@ msgid ""
 "persists for longer than a day, submit a bug report."
 msgstr ""
 "Il poterea esser un problema technic con le fornitor del meteo. Si le "
-"peorblema persiste plus longe que un die, tu submitte un reporto de bug."
+"problema persiste plus longe que un die, tu submitte un reporto de bug."
 
-#: qml/TopPanel.qml:136
+#: qml/TopPanel.qml:137
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
@@ -899,9 +899,9 @@ msgid "High"
 msgstr "Alte"
 
 #: weatherdata/lastobservation.cpp:268
-#, fuzzy, kde-format
+#, kde-format
 msgid "Very high"
-msgstr "Mult&e Alte"
+msgstr "Multe Alte"
 
 #: weatherdata/lastobservation.cpp:270
 #, kde-format

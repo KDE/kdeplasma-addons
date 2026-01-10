@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2017, 2020, 2021, 2022, 2025 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2017, 2020, 2021, 2022, 2025, 2026 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-02 00:43+0000\n"
-"PO-Revision-Date: 2025-05-09 16:55+0200\n"
+"PO-Revision-Date: 2026-01-09 09:25+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -41,7 +41,7 @@ msgstr[1] "%1s"
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "General"
 
 #: config.qml:19
 #, kde-format
@@ -89,35 +89,31 @@ msgstr "Monstra barra de progresso"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "Sur Tempore limite:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Monstra etxto de notification:"
+msgstr "Monstra notification:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Chronometro terminava"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgid "Run command"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "Executa Commando"
+msgstr "Executa Commando:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Timer-Chronometro  Terminate'"
 
 #: configTimes.qml:22
 #, kde-format

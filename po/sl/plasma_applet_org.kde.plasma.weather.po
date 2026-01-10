@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-01-10 00:44+0000\n"
 "PO-Revision-Date: 2025-11-02 23:01+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -699,7 +699,7 @@ msgstr ""
 "Omrežna zahteva je potekla, možno da zaradi izpada strežnika pri ponudniku "
 "vremenske postaje. Preverite znova pozneje."
 
-#: qml/main.qml:81 qml/TopPanel.qml:221
+#: qml/main.qml:81 qml/TopPanel.qml:220
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -841,7 +841,7 @@ msgstr ""
 "Morda je tehnična težava s ponudnikom vremena. Če težava traja dlje kot en "
 "dan, pošljite poročilo o napaki."
 
-#: qml/TopPanel.qml:136
+#: qml/TopPanel.qml:137
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

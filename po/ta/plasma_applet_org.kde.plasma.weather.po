@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-01-10 00:44+0000\n"
 "PO-Revision-Date: 2024-09-01 17:18+0200\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -708,7 +708,7 @@ msgstr ""
 "பிணைய கோரிக்கை காலாவதி ஆனது. இது சேவையகத்தில் ஏற்பட்டுள்ள தற்காலிக சிக்கலால் "
 "இருக்கக்கூடும். பின்னர் முயற்சிக்கவும்."
 
-#: qml/main.qml:81 qml/TopPanel.qml:221
+#: qml/main.qml:81 qml/TopPanel.qml:220
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -846,7 +846,7 @@ msgstr ""
 "வானிலை சேவையகத்தில் தொழிற்நுட்ப சிக்கல் ஏற்பட்டிருக்கலாம். இது ஒரு நாளுக்கு மேல் "
 "நீடித்தால், பிழையறிக்கையை சமர்ப்பிக்கவும்."
 
-#: qml/TopPanel.qml:136
+#: qml/TopPanel.qml:137
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
