@@ -32,7 +32,7 @@ Kameleon::Kameleon(QObject *parent, const QList<QVariant> &)
 {
     findRgbLedDevices();
     if (!isSupported()) {
-        qCInfo(KAMELEON) << "found no RGB LED devices";
+        qCDebug(KAMELEON) << "found no RGB LED devices";
         return;
     }
 
@@ -77,7 +77,7 @@ void Kameleon::findRgbLedDevices()
             continue;
         }
 
-        qCInfo(KAMELEON) << "found RGB LED device" << ledDevice;
+        qCDebug(KAMELEON) << "found RGB LED device" << ledDevice;
         m_rgbLedDevices.append(ledDevice);
         m_deviceRgbIndices.append(colorIndex);
     }
@@ -96,7 +96,7 @@ bool Kameleon::isEnabled()
 void Kameleon::setEnabled(bool enabled)
 {
     if (enabled != m_enabled) {
-        qCInfo(KAMELEON) << "enabled changed" << enabled;
+        qCDebug(KAMELEON) << "enabled changed" << enabled;
         m_enabled = enabled;
         m_config->group(u"General"_s).writeEntry<bool>("DeviceLedsAccentColored", enabled);
         m_config->sync();
@@ -150,7 +150,7 @@ void Kameleon::applyColor(QColor color)
             qCWarning(KAMELEON) << "failed to write color to devices" << job->errorText();
             return;
         }
-        qCInfo(KAMELEON) << "wrote color" << color.name() << "to LED devices";
+        qCDebug(KAMELEON) << "wrote color" << color.name() << "to LED devices";
     });
     job->start();
 }
