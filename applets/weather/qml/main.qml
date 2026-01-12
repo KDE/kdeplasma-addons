@@ -151,11 +151,11 @@ PlasmoidItem {
 
         let isPressurePresent = !!forecastControl.forecast.lastObservation?.pressure && !!forecastControl.forecast.metaData?.pressureUnit;
         if (Plasmoid.configuration.showPressureInTooltip && isPressurePresent) {
+            const pressure = Util.valueToDisplayString(root.displayPressureUnit, forecastControl.forecast.lastObservation.pressure, forecastControl.forecast.metaData.pressureUnit, 2);
             if (!!forecastControl.forecast.lastObservation?.pressureTendency) {
-                tooltips.push(i18nc("pressure (tendency)", "%1 (%2)",
-                    forecastControl.forecast.lastObservation.pressure, forecastControl.forecast.lastObservation.pressureTendency));
+                tooltips.push(i18nc("pressure (tendency)", "%1 (%2)", pressure, forecastControl.forecast.lastObservation.pressureTendency));
             } else {
-                tooltips.push(forecastControl.forecast.lastObservation.pressure);
+                tooltips.push(pressure);
             }
         }
 
