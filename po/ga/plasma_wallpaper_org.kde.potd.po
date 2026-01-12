@@ -1,78 +1,75 @@
-# Translation of plasma_wallpaper_org.kde.potd.po to Catalan (Valencian)
-# Copyright (C) 2018-2024 This_file_is_part_of_KDE
-# This file is distributed under the license LGPL version 2.1 or
-# version 3 or later versions approved by the membership of KDE e.V.
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
-# SPDX-FileCopyrightText: 2018, 2019, 2021, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
+#, fuzzy
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 14:41+0000\n"
-"PO-Revision-Date: 2024-11-17 20:35+0100\n"
-"Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
-"Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
-"Language: ca@valencia\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: \n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 22.12.3\n"
 
 #: package/contents/ui/config.qml:49
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
-msgstr "Posicionament:"
+msgstr ""
 
 #: package/contents/ui/config.qml:52
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
-msgstr "Escalat i escapçat"
+msgstr ""
 
 #: package/contents/ui/config.qml:56
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
-msgstr "Escalat"
+msgstr ""
 
 #: package/contents/ui/config.qml:60
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
-msgstr "Escalat, mantenint les proporcions"
+msgstr ""
 
 #: package/contents/ui/config.qml:64
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
-msgstr "Centrat"
+msgstr ""
 
 #: package/contents/ui/config.qml:68
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
-msgstr "En mosaic"
+msgstr ""
 
 #: package/contents/ui/config.qml:89
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
-msgstr "Color de fons:"
+msgstr ""
 
 #: package/contents/ui/config.qml:90
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
-msgstr "Trieu el color de fons"
+msgstr ""
 
 #: package/contents/ui/config.qml:94
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
-msgstr "Proveïdor:"
+msgstr ""
 
 #: package/contents/ui/config.qml:113
 #, kde-format
@@ -81,135 +78,129 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
-"El proveïdor d'este fons de pantalla no filtra les imatges que poden ser "
-"susceptibles o objectables. Pareu atenció si estes imatges es mostren en "
-"públic."
 
 #: package/contents/ui/config.qml:122
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
-msgstr "Actualitza en utilitzar una connexió de xarxa d'ús mesurat"
+msgstr ""
 
 #: package/contents/ui/config.qml:137
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
-msgstr "Imatge d'hui:"
+msgstr ""
 
 #: package/contents/ui/config.qml:153
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
-msgstr "Títol:"
+msgstr ""
 
 #: package/contents/ui/config.qml:168
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
-msgstr "Autoria:"
+msgstr ""
 
 #: package/contents/ui/config.qml:187
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
-msgstr "Obri la carpeta contenidora"
+msgstr ""
 
 #: package/contents/ui/config.qml:191
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
 msgstr ""
-"Obri la carpeta de destinació a on s'ha guardat la imatge del fons de "
-"pantalla."
 
 #: package/contents/ui/main.qml:22
 #, kde-format
 msgid "Open Wallpaper Image"
-msgstr "Obri la imatge de fons de pantalla"
+msgstr ""
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
-msgstr "Imatge d'hui"
+msgstr ""
 
 #: package/contents/ui/WallpaperDelegate.qml:138
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
-msgstr "S'està carregant"
+msgstr ""
 
 #: package/contents/ui/WallpaperDelegate.qml:139
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
-msgstr "No disponible"
+msgstr ""
 
 #: package/contents/ui/WallpaperDelegate.qml:140
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
 msgstr ""
-"%1 Autoria: %2. Feu clic dret damunt de la imatge per a veure més accions."
 
 #: package/contents/ui/WallpaperDelegate.qml:141
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
-msgstr "S'està recuperant el fons de pantalla des d'Internet."
+msgstr ""
 
 #: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
-msgstr "Ha fallat mentre es recuperava el fons de pantalla des d'Internet."
+msgstr ""
 
 #: package/contents/ui/WallpaperPreview.qml:48
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
-msgstr "Anomena i guarda la imatge…"
+msgstr ""
 
 #: package/contents/ui/WallpaperPreview.qml:51
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
-msgstr "Guarda la imatge d'hui al disc local"
+msgstr ""
 
 #: package/contents/ui/WallpaperPreview.qml:57
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
-msgstr "Obri l'enllaç en un navegador…"
+msgstr ""
 
 #: package/contents/ui/WallpaperPreview.qml:60
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
-msgstr "Obri el lloc web de la imatge d'hui en el navegador predeterminat"
+msgstr ""
 
 #: plugins/potdbackend.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Today's Picture"
-msgstr "Guarda la imatge d'hui"
+msgstr ""
 
 #: plugins/potdbackend.cpp:215
 #, kde-format
 msgctxt "@label:listbox Template for file dialog"
 msgid "JPEG image (*.jpeg *.jpg *.jpe)"
-msgstr "Imatge JPEG (*.jpeg *.jpg *.jpe)"
+msgstr ""
 
 #: plugins/potdbackend.cpp:232
 #, kde-format
 msgctxt "@info:status after a save action"
 msgid "The image was not saved."
-msgstr "La imatge no s'ha guardat."
+msgstr ""
 
 #: plugins/potdbackend.cpp:239
 #, kde-format
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
-msgstr "La imatge s'ha guardat com a <a href=\"%1\">%2</a>"
+msgstr ""
