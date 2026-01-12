@@ -1,0 +1,122 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: config.qml:12
+#, kde-format
+msgctxt "@title"
+msgid "General"
+msgstr ""
+
+#: ConfigGeneral.qml:30
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Maximum columns:"
+msgstr ""
+
+#: ConfigGeneral.qml:30
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Maximum rows:"
+msgstr ""
+
+#: ConfigGeneral.qml:42
+#, kde-format
+msgctxt "@title:group"
+msgid "Appearance:"
+msgstr ""
+
+#: ConfigGeneral.qml:44
+#, kde-format
+msgctxt "@option:check"
+msgid "Show launcher names"
+msgstr ""
+
+#: ConfigGeneral.qml:49
+#, kde-format
+msgctxt "@option:check"
+msgid "Enable popup"
+msgstr ""
+
+#: ConfigGeneral.qml:59
+#, kde-format
+msgctxt "@title:group"
+msgid "Title:"
+msgstr ""
+
+#: ConfigGeneral.qml:67
+#, kde-format
+msgctxt "@option:check"
+msgid "Show:"
+msgstr ""
+
+#: ConfigGeneral.qml:83
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Custom title"
+msgstr ""
+
+#: IconItem.qml:185
+#, kde-format
+msgid "Launch %1"
+msgstr ""
+
+#: IconItem.qml:269
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Add Launcher…"
+msgstr ""
+
+#: IconItem.qml:275
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit Launcher…"
+msgstr ""
+
+#: IconItem.qml:281
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Remove Launcher"
+msgstr ""
+
+#: main.qml:153
+#, kde-format
+msgid "Quicklaunch"
+msgstr ""
+
+#: main.qml:154
+#, kde-format
+msgctxt "@info"
+msgid "Add launchers by Drag and Drop or by using the context menu."
+msgstr ""
+
+#: main.qml:186
+#, kde-format
+msgid "Hide icons"
+msgstr ""
+
+#: main.qml:186
+#, kde-format
+msgid "Show hidden icons"
+msgstr ""
+
+#: main.qml:289
+#, kde-format
+msgctxt "@action"
+msgid "Add Launcher…"
+msgstr ""

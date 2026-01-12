@@ -1,0 +1,218 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <kde-i18n-doc@kde.org>\n"
+"Language: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: qml/config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Media"
+msgstr ""
+
+#: qml/config.qml:18
+#, kde-format
+msgctxt "@title"
+msgid "Behavior"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:48
+#, kde-format
+msgid "Change picture every:"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:65
+#, kde-format
+msgid "Hours"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:79
+#, kde-format
+msgid "Minutes"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:93
+#, kde-format
+msgid "Seconds"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:103
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Image fill mode:"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:110
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Stretch"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:111
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled to fit the frame"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:115
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Preserve aspect fit"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:116
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled uniformly to fit without cropping"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:120
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Preserve aspect crop"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:121
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled uniformly to fill, cropping if necessary"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:125
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:126
+#, kde-format
+msgctxt "@info"
+msgid "The image is duplicated horizontally and vertically"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:130
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile vertically"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:131
+#, kde-format
+msgctxt "@info"
+msgid "The image is stretched horizontally and tiled vertically"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:135
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile horizontally"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:136
+#, kde-format
+msgctxt "@info"
+msgid "The image is stretched vertically and tiled horizontally"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:140
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Pad"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:141
+#, kde-format
+msgctxt "@info"
+msgid "The image is not transformed"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:186
+#, kde-format
+msgctxt "@label:checkbox"
+msgid "General:"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:187
+#, kde-format
+msgctxt "@option:check"
+msgid "Randomize order"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:192
+#, kde-format
+msgctxt "@option:check"
+msgid "Pause slideshow when cursor is over image"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:197
+#, kde-format
+msgctxt "@option:check"
+msgid "Click on image to open in external application"
+msgstr ""
+
+#: qml/ConfigMedia.qml:27
+#, kde-format
+msgctxt "@action:button"
+msgid "Add Folder…"
+msgstr ""
+
+#: qml/ConfigMedia.qml:32
+#, kde-format
+msgctxt "@action:button"
+msgid "Add Files…"
+msgstr ""
+
+#: qml/ConfigMedia.qml:84
+#, kde-format
+msgctxt "@action:button tooltip on icon-only button"
+msgid "Remove path"
+msgstr ""
+
+#: qml/ConfigMedia.qml:94
+#, kde-format
+msgctxt "@info placeholdermessage if no paths set"
+msgid "No media configured"
+msgstr ""
+
+#: qml/ConfigMedia.qml:95
+#, kde-format
+msgctxt "@info placeholdermessage explanation"
+msgid "Add files or folders to display them in the widget."
+msgstr ""
+
+#: qml/ConfigMedia.qml:101
+#, kde-format
+msgctxt "@title:window"
+msgid "Choose Files"
+msgstr ""
+
+#: qml/ConfigMedia.qml:121
+#, kde-format
+msgctxt "@title:window"
+msgid "Choose a Folder"
+msgstr ""
+
+#: qml/main.qml:360
+#, kde-format
+msgctxt "@info placeholdermessage if no media loaded"
+msgid "No media selected"
+msgstr ""
+
+#: qml/main.qml:364 qml/main.qml:374
+#, kde-format
+msgctxt "@action:button opens settings dialog"
+msgid "Choose media…"
+msgstr ""
