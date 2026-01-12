@@ -29,7 +29,8 @@ class Warning;
 class PLASMAWEATHERDATA_EXPORT Warnings : public QAbstractListModel
 {
     Q_OBJECT
-    QML_ANONYMOUS
+    QML_ELEMENT
+    QML_UNCREATABLE("Enum access only")
 
     Q_PROPERTY(int maxPriorityCount READ maxPriorityCount CONSTANT)
     Q_PROPERTY(int count READ count CONSTANT)
