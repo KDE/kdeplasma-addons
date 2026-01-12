@@ -326,7 +326,7 @@ msgstr "S'està recuperant el fons de pantalla des d'Internet."
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
-msgstr "No s'ha pogut recuperar el fons de pantalla des d'Internet."
+msgstr "Ha fallat mentre es recuperava el fons de pantalla des d'Internet."
 
 #: package/contents/ui/WallpaperPreview.qml:50
 #, kde-format
