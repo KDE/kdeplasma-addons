@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-10 00:44+0000\n"
+"POT-Creation-Date: 2026-01-13 08:42+0000\n"
 "PO-Revision-Date: 2025-07-18 18:54+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -745,7 +745,7 @@ msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1, %2"
 
-#: qml/main.qml:155
+#: qml/main.qml:156
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
