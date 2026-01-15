@@ -212,19 +212,3 @@ msgstr "A&tura"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Inicialitza"
-
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Aparença"
-
-#~ msgctxt "@title"
-#~ msgid "Advanced"
-#~ msgstr "Avançat"
-
-#~ msgctxt "@title:label"
-#~ msgid "After timer completes:"
-#~ msgstr "Després de completar el temporitzador:"
-
-#~ msgctxt "@title:label"
-#~ msgid "Notifications:"
-#~ msgstr "Notificacions:"
