@@ -675,6 +675,7 @@ void EnvCanadaIon::forecast_slotJobFinished(KJob *job)
     if (job->error()) {
         m_forecastPromise->finish();
         clearForecastData();
+        return;
     }
 
     readXMLData(*m_xmlForecast);
