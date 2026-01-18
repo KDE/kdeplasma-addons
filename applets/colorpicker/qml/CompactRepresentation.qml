@@ -12,6 +12,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.plasmoid
+import plasma.applet.org.kde.plasma.colorpicker as ColorPicker
 
 DropArea {
     id: dropArea
@@ -25,13 +26,13 @@ DropArea {
     property bool containsAcceptableDrag: false
 
     onEntered: drag => {
-        containsAcceptableDrag = (drag.hasColor || drag.hasUrls || ColorPicker.Utils.isValidColor(drag.text));
+        containsAcceptableDrag = (drag.hasColor || drag.hasUrls || utils.isValidColor(drag.text));
     }
     onExited: containsAcceptableDrag = false
     onDropped: drop => {
         if (drop.hasColor) {
             addColorToHistory(drop.colorData)
-        } else if (ColorPicker.Utils.isValidColor(drop.text)) {
+        } else if (utils.isValidColor(drop.text)) {
             addColorToHistory(drop.text)
         } else if (drop.hasUrls) {
             // Show loading indicator above the pick button if there are more than 1 circle
@@ -47,6 +48,10 @@ DropArea {
             component.destroy();
         }
         containsAcceptableDrag = false
+    }
+
+    ColorPicker.Utils{
+        id: utils
     }
 
     GridLayout {
