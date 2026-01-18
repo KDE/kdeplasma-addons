@@ -1,14 +1,14 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# SPDX-FileCopyrightText: 2024 Toms Trasūns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2026 Toms Trasūns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 00:42+0000\n"
-"PO-Revision-Date: 2024-04-02 16:10+0300\n"
-"Last-Translator: Toms Trasūns <toms.trasuns@posteo.net>\n"
+"PO-Revision-Date: 2026-01-16 19:29+0200\n"
+"Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
 "MIME-Version: 1.0\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: kcm/cubeeffectkcm.cpp:36
 #, kde-format
@@ -32,85 +32,85 @@ msgstr "Pārslēgt kubu"
 #: kcm/cubeeffectkcm.ui:23
 #, kde-format
 msgid "Cube face displacement:"
-msgstr ""
+msgstr "Kuba sāna izspiešanās:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_less)
 #: kcm/cubeeffectkcm.ui:48
 #, kde-format
 msgid "Less"
-msgstr ""
+msgstr "Mazāka"
 
 #. i18n: ectx: property (text), widget (QLabel, label_more)
 #: kcm/cubeeffectkcm.ui:61
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "Lielāka"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kcm/cubeeffectkcm.ui:73
 #, kde-format
 msgid "Distance:"
-msgstr ""
+msgstr "Attālums:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_closer)
 #: kcm/cubeeffectkcm.ui:101
 #, kde-format
 msgid "Closer"
-msgstr ""
+msgstr "Tuvāk"
 
 #. i18n: ectx: property (text), widget (QLabel, label_farther)
 #: kcm/cubeeffectkcm.ui:114
 #, kde-format
 msgid "Farther"
-msgstr ""
+msgstr "Tālāk"
 
 #. i18n: ectx: property (text), widget (QLabel, label_Mouse)
 #: kcm/cubeeffectkcm.ui:126
 #, kde-format
 msgid "Mouse:"
-msgstr ""
+msgstr "Pele:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_MouseInvertedX)
 #: kcm/cubeeffectkcm.ui:133
 #, kde-format
 msgid "Invert X"
-msgstr ""
+msgstr "Invertēt X"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_MouseInvertedY)
 #: kcm/cubeeffectkcm.ui:140
 #, kde-format
 msgid "Invert Y"
-msgstr ""
+msgstr "Invertēt Y"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kcm/cubeeffectkcm.ui:147
 #, kde-format
 msgid "Background:"
-msgstr ""
+msgstr "Fons:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, button_Color)
 #: kcm/cubeeffectkcm.ui:164
 #, kde-format
 msgid "Plain color:"
-msgstr ""
+msgstr "Tikai krāsa:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, button_SkyBox)
 #: kcm/cubeeffectkcm.ui:198
 #, kde-format
 msgid "Skybox:"
-msgstr ""
+msgstr "Debesu ainava:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, kcfg_SkyBox)
 #: kcm/cubeeffectkcm.ui:208
 #, kde-format
 msgid "Type path or URL..."
-msgstr ""
+msgstr "Ierakstiet ceļu vai URL..."
 
 #. i18n: ectx: property (text), widget (QPushButton, button_SelectSkyBox)
 #: kcm/cubeeffectkcm.ui:218
 #, kde-format
 msgid "Select..."
-msgstr ""
+msgstr "Atlasīt..."
 
 #: package/contents/ui/PlaceholderView.qml:28
 #, kde-format

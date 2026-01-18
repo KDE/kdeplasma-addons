@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# SPDX-FileCopyrightText: 2024, 2025 Toms Trasuns <toms.trasuns@posteo.net>
+# SPDX-FileCopyrightText: 2024, 2025, 2026 Toms Trasuns <toms.trasuns@posteo.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:44+0000\n"
-"PO-Revision-Date: 2025-05-26 16:54+0300\n"
+"PO-Revision-Date: 2026-01-16 19:33+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
 "Language: lv\n"
@@ -16,19 +16,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n != 0 ? 1 : "
 "2);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Media"
-msgstr ""
+msgstr "Multivide"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Uzvedība"
 
 #: qml/ConfigBehavior.qml:48
 #, kde-format
@@ -170,13 +170,13 @@ msgstr "Spiest uz attēla, lai to atvērtu ārējā programmā"
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
-msgstr "Pievienot mapi..."
+msgstr "Pievienot mapi…"
 
 #: qml/ConfigMedia.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
-msgstr "Pievienot datnes..."
+msgstr "Pievienot datnes…"
 
 #: qml/ConfigMedia.qml:84
 #, kde-format
@@ -209,18 +209,16 @@ msgid "Choose a Folder"
 msgstr "Izvēlēties mapi"
 
 #: qml/main.qml:360
-#, fuzzy, kde-format
-#| msgctxt "@info placeholdermessage if no paths set"
-#| msgid "No media configured"
+#, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
-msgstr "Multivide nav konfigurēta"
+msgstr "Multivide nav norādīta"
 
 #: qml/main.qml:364 qml/main.qml:374
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
-msgstr ""
+msgstr "Izvēlieties multividi…"
 
 #~ msgctxt "@title"
 #~ msgid "General"
