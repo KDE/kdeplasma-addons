@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-01-19 00:44+0000\n"
 "PO-Revision-Date: 2023-05-14 21:43+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -23,13 +23,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Clicca in le medie per copair le codice de color"
 
-#: qml/CompactRepresentation.qml:74
+#: qml/CompactRepresentation.qml:79
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Selige color"
 
-#: qml/CompactRepresentation.qml:81
+#: qml/CompactRepresentation.qml:86
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
