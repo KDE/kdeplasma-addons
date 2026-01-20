@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2010, 2018, 2019, 2020, 2022, 2023, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2010, 2018, 2019, 2020, 2022, 2023, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2014, 2015.
 #
 # KDE Finnish translation sprint participants:
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-02 00:43+0000\n"
-"PO-Revision-Date: 2025-05-25 16:40+0300\n"
+"PO-Revision-Date: 2026-01-10 20:51+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -41,11 +41,10 @@ msgstr[0] "%1 s"
 msgstr[1] "%1 s"
 
 #: config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr "Yleistä"
+msgstr "Perusasetukset"
 
 #: config.qml:19
 #, kde-format
@@ -93,36 +92,31 @@ msgstr "Näytä edistymispalkki"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "Aikakatkaisun jälkeen:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Näytä ilmoitusteksti:"
+msgstr "Näytä ilmoitus:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
-msgstr "Aika loppui"
+msgstr "Ajastus valmis"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Run Command"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "Suorita komento"
+msgstr "Suorita komento:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Ajastus valmis'"
 
 #: configTimes.qml:22
 #, kde-format
