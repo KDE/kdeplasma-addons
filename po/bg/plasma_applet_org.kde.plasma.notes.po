@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:45+0000\n"
+"POT-Creation-Date: 2026-01-23 00:45+0000\n"
 "PO-Revision-Date: 2025-04-06 16:06+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -83,152 +83,152 @@ msgstr "Прозрачна лепкава бележка"
 msgid "A transparent sticky note with light text"
 msgstr "Прозрачна лепкава бележка със светъл текст"
 
-#: qml/main.qml:293
+#: qml/main.qml:294
 #, kde-format
 msgid "Undo"
 msgstr "Отмяна"
 
-#: qml/main.qml:301
+#: qml/main.qml:302
 #, kde-format
 msgid "Redo"
 msgstr "Повторение"
 
-#: qml/main.qml:311
+#: qml/main.qml:312
 #, kde-format
 msgid "Cut"
 msgstr "Отрязване"
 
-#: qml/main.qml:319
+#: qml/main.qml:320
 #, kde-format
 msgid "Copy"
 msgstr "Копиране"
 
-#: qml/main.qml:327
+#: qml/main.qml:328
 #, kde-format
 msgid "Paste"
 msgstr "Поставяне"
 
-#: qml/main.qml:333
+#: qml/main.qml:334
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "Поставяне с пълно форматиране"
 
-#: qml/main.qml:340
+#: qml/main.qml:341
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "Премахване на форматирането"
 
-#: qml/main.qml:355
+#: qml/main.qml:356
 #, kde-format
 msgid "Delete"
 msgstr "Изтриване"
 
-#: qml/main.qml:362
+#: qml/main.qml:363
 #, kde-format
 msgid "Clear"
 msgstr "Изчистване"
 
-#: qml/main.qml:372
+#: qml/main.qml:373
 #, kde-format
 msgid "Select All"
 msgstr "Избиране Всички"
 
-#: qml/main.qml:504
+#: qml/main.qml:505
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Получер"
 
-#: qml/main.qml:517
+#: qml/main.qml:518
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Курсив"
 
-#: qml/main.qml:530
+#: qml/main.qml:531
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Подчертаване"
 
-#: qml/main.qml:543
+#: qml/main.qml:544
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Зачертаване"
 
-#: qml/main.qml:617
+#: qml/main.qml:618
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
 msgstr "Задържане отворен"
 
-#: qml/main.qml:646
+#: qml/main.qml:647
 #, kde-format
 msgid "Discard this note?"
 msgstr "Да се изтрие ли тази бележка?"
 
-#: qml/main.qml:647
+#: qml/main.qml:648
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Наистина ли искате да изтриете тази бележка?"
 
-#: qml/main.qml:672
+#: qml/main.qml:673
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Бял"
 
-#: qml/main.qml:673
+#: qml/main.qml:674
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Черен"
 
-#: qml/main.qml:674
+#: qml/main.qml:675
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Червен"
 
-#: qml/main.qml:675
+#: qml/main.qml:676
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Оранжев"
 
-#: qml/main.qml:676
+#: qml/main.qml:677
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Жълт"
 
-#: qml/main.qml:677
+#: qml/main.qml:678
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Зелен"
 
-#: qml/main.qml:678
+#: qml/main.qml:679
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Син"
 
-#: qml/main.qml:679
+#: qml/main.qml:680
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Розов"
 
-#: qml/main.qml:680
+#: qml/main.qml:681
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "Прозрачен"
 
-#: qml/main.qml:684
+#: qml/main.qml:685
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"

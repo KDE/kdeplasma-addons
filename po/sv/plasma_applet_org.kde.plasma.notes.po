@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:45+0000\n"
+"POT-Creation-Date: 2026-01-23 00:45+0000\n"
 "PO-Revision-Date: 2025-04-05 08:56+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -84,152 +84,152 @@ msgstr "En genomskinlig anteckningslapp"
 msgid "A transparent sticky note with light text"
 msgstr "En genomskinlig anteckningslapp med ljus text"
 
-#: qml/main.qml:293
+#: qml/main.qml:294
 #, kde-format
 msgid "Undo"
 msgstr "Ångra"
 
-#: qml/main.qml:301
+#: qml/main.qml:302
 #, kde-format
 msgid "Redo"
 msgstr "Gör om"
 
-#: qml/main.qml:311
+#: qml/main.qml:312
 #, kde-format
 msgid "Cut"
 msgstr "Klipp ut"
 
-#: qml/main.qml:319
+#: qml/main.qml:320
 #, kde-format
 msgid "Copy"
 msgstr "Kopiera"
 
-#: qml/main.qml:327
+#: qml/main.qml:328
 #, kde-format
 msgid "Paste"
 msgstr "Klistra in"
 
-#: qml/main.qml:333
+#: qml/main.qml:334
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "Klistra in med fullständig formatering"
 
-#: qml/main.qml:340
+#: qml/main.qml:341
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "Ta bort formatering"
 
-#: qml/main.qml:355
+#: qml/main.qml:356
 #, kde-format
 msgid "Delete"
 msgstr "Ta bort"
 
-#: qml/main.qml:362
+#: qml/main.qml:363
 #, kde-format
 msgid "Clear"
 msgstr "Rensa"
 
-#: qml/main.qml:372
+#: qml/main.qml:373
 #, kde-format
 msgid "Select All"
 msgstr "Markera alla"
 
-#: qml/main.qml:504
+#: qml/main.qml:505
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Fetstil"
 
-#: qml/main.qml:517
+#: qml/main.qml:518
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Kursiv"
 
-#: qml/main.qml:530
+#: qml/main.qml:531
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Understruken"
 
-#: qml/main.qml:543
+#: qml/main.qml:544
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Överstruken"
 
-#: qml/main.qml:617
+#: qml/main.qml:618
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
 msgstr "Behåll öppen"
 
-#: qml/main.qml:646
+#: qml/main.qml:647
 #, kde-format
 msgid "Discard this note?"
 msgstr "Släng anteckningen?"
 
-#: qml/main.qml:647
+#: qml/main.qml:648
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "Är du säker på att du vill slänga anteckningen?"
 
-#: qml/main.qml:672
+#: qml/main.qml:673
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "Vit"
 
-#: qml/main.qml:673
+#: qml/main.qml:674
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "Svart"
 
-#: qml/main.qml:674
+#: qml/main.qml:675
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "Röd"
 
-#: qml/main.qml:675
+#: qml/main.qml:676
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "Orange"
 
-#: qml/main.qml:676
+#: qml/main.qml:677
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "Gul"
 
-#: qml/main.qml:677
+#: qml/main.qml:678
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "Grön"
 
-#: qml/main.qml:678
+#: qml/main.qml:679
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "Blå"
 
-#: qml/main.qml:679
+#: qml/main.qml:680
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "Rosa"
 
-#: qml/main.qml:680
+#: qml/main.qml:681
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "Genomskinlig"
 
-#: qml/main.qml:684
+#: qml/main.qml:685
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"

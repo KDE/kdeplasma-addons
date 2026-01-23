@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 00:45+0000\n"
+"POT-Creation-Date: 2026-01-23 00:45+0000\n"
 "PO-Revision-Date: 2025-04-05 05:27+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -84,152 +84,152 @@ msgstr "გამჭვირვალე  წებოვანი შენი
 msgid "A transparent sticky note with light text"
 msgstr "გამჭვირვალე წებოვანი შენიშვნა ღია ტექსტით"
 
-#: qml/main.qml:293
+#: qml/main.qml:294
 #, kde-format
 msgid "Undo"
 msgstr "ბრძანების გაუქმება"
 
-#: qml/main.qml:301
+#: qml/main.qml:302
 #, kde-format
 msgid "Redo"
 msgstr "ბრძანების აღდგენა"
 
-#: qml/main.qml:311
+#: qml/main.qml:312
 #, kde-format
 msgid "Cut"
 msgstr "ამოჭრა"
 
-#: qml/main.qml:319
+#: qml/main.qml:320
 #, kde-format
 msgid "Copy"
 msgstr "კოპირება"
 
-#: qml/main.qml:327
+#: qml/main.qml:328
 #, kde-format
 msgid "Paste"
 msgstr "ჩასმა"
 
-#: qml/main.qml:333
+#: qml/main.qml:334
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "სრული ფორმატირებით ჩასმა"
 
-#: qml/main.qml:340
+#: qml/main.qml:341
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "ფორმატირების მოცილება"
 
-#: qml/main.qml:355
+#: qml/main.qml:356
 #, kde-format
 msgid "Delete"
 msgstr "წაშლა"
 
-#: qml/main.qml:362
+#: qml/main.qml:363
 #, kde-format
 msgid "Clear"
 msgstr "გასუფთავება"
 
-#: qml/main.qml:372
+#: qml/main.qml:373
 #, kde-format
 msgid "Select All"
 msgstr "ყველაფრის მონიშვნა"
 
-#: qml/main.qml:504
+#: qml/main.qml:505
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "მუქი"
 
-#: qml/main.qml:517
+#: qml/main.qml:518
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "დახრილი"
 
-#: qml/main.qml:530
+#: qml/main.qml:531
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "ხაზგასმული"
 
-#: qml/main.qml:543
+#: qml/main.qml:544
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "ხაზგადასმული"
 
-#: qml/main.qml:617
+#: qml/main.qml:618
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
 msgstr "ღიად დატოვება"
 
-#: qml/main.qml:646
+#: qml/main.qml:647
 #, kde-format
 msgid "Discard this note?"
 msgstr "გავაუქმო ეს შენიშვნა?"
 
-#: qml/main.qml:647
+#: qml/main.qml:648
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "დარწმუნებული ბრძანდებით, რომ გნებავთ, მოაცილოთ ეს შენიშვნა?"
 
-#: qml/main.qml:672
+#: qml/main.qml:673
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "თეთრი"
 
-#: qml/main.qml:673
+#: qml/main.qml:674
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "შავი"
 
-#: qml/main.qml:674
+#: qml/main.qml:675
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "წითელი"
 
-#: qml/main.qml:675
+#: qml/main.qml:676
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "ნარინჯისფერი"
 
-#: qml/main.qml:676
+#: qml/main.qml:677
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "ყვითელი"
 
-#: qml/main.qml:677
+#: qml/main.qml:678
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "მწვანე"
 
-#: qml/main.qml:678
+#: qml/main.qml:679
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "ლურჯი"
 
-#: qml/main.qml:679
+#: qml/main.qml:680
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "ვარდისფერი"
 
-#: qml/main.qml:680
+#: qml/main.qml:681
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "გამჭვირვალე"
 
-#: qml/main.qml:684
+#: qml/main.qml:685
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
