@@ -48,9 +48,8 @@ QColor GrabWidget::currentColor() const
 
 void GrabWidget::setCurrentColor(const QColor &color)
 {
-    if (m_currentColor == color) {
-        return;
-    }
+    // don't return early if color is unchanged; the widget needs the Changed signal
+    // to know that a color has been picked
     m_currentColor = color;
 
     Q_EMIT currentColorChanged();
