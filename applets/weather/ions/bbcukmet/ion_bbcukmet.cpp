@@ -27,7 +27,7 @@ K_PLUGIN_CLASS_WITH_JSON(UKMETIon, "metadata.json")
 using namespace Qt::StringLiterals;
 
 UKMETIon::UKMETIon(QObject *parent, const QVariantList &args)
-    : Ion(parent)
+    : Ion(QUrl("https://www.bbc.com/weather"_L1), parent)
 
 {
     Q_UNUSED(args);

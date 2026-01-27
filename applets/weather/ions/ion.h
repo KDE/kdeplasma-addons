@@ -8,6 +8,7 @@
 
 #include <plasmaweatherion_export.h>
 
+#include <QFuture>
 #include <QList>
 #include <QPromise>
 #include <QString>
@@ -16,6 +17,9 @@
 
 #include "forecast.h"
 #include "locations.h"
+
+class QNetworkAccessManager;
+class QNetworkRequest;
 
 /*!
  * \class Ion
@@ -93,10 +97,12 @@ public:
     };
 
     /*!
-     * Constructor for the ion
+     * Constructs an ion.
+     * \a providerUrl The URL used to check whether the provider is reachable.
      * \a parent The parent object.
      */
-    explicit Ion(QObject *parent = nullptr);
+    explicit Ion(const QUrl &providerUrl, QObject *parent = nullptr);
+
     /*!
      * Destructor for the ion
      */
@@ -118,6 +124,12 @@ public Q_SLOTS:
      * \a placeInfo a specific string which is used to request a forecast
      */
     virtual void fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> promise, const QString &placeInfo) = 0;
+
+    /*!
+     * Checks whether the provider is available. If the provider URL is empty,
+     * always returns \c true.
+     */
+    QFuture<bool> checkProviderAvailability();
 
 protected:
     /*!
@@ -150,4 +162,9 @@ protected:
     bool matchesSearchString(const QString &location, const QString &searchString) const;
 
     static bool isNightTime(const QDateTime &dateTime, double latitude, double longitude);
+
+private:
+    QUrl m_providerUrl;
+
+    std::unique_ptr<QNetworkAccessManager> m_manager;
 };

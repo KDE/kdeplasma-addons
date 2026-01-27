@@ -6,12 +6,17 @@
 
 #include "ion.h"
 
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
+
 #include <KHolidays/SunEvents>
 
 using namespace Qt::StringLiterals;
 
-Ion::Ion(QObject *parent)
+Ion::Ion(const QUrl &providerUrl, QObject *parent)
     : QObject(parent)
+    , m_providerUrl(providerUrl)
 {
 }
 
@@ -187,6 +192,43 @@ bool Ion::isNightTime(const QDateTime &dateTime, double latitude, double longitu
     }
 
     return dateTime < events.sunrise() || dateTime > events.sunset();
+}
+
+QFuture<bool> Ion::checkProviderAvailability()
+{
+    auto availabilityPromise = std::make_shared<QPromise<bool>>();
+
+    if (m_providerUrl.isEmpty()) {
+        availabilityPromise->start();
+        availabilityPromise->addResult(true);
+        availabilityPromise->finish();
+        return availabilityPromise->future();
+    }
+
+    if (!m_manager) {
+        m_manager = std::make_unique<QNetworkAccessManager>();
+    }
+
+    availabilityPromise->start();
+
+    auto availabilityRequest = std::make_unique<QNetworkRequest>(m_providerUrl);
+
+    QNetworkReply *reply = m_manager->head(*availabilityRequest); // HEAD is fast, no body
+
+    connect(reply, &QNetworkReply::finished, [reply, availabilityPromise]() {
+        // We only need to check whether we can connect to the provider,
+        // so ContentNotFoundError is not a problem here because the server
+        // was successfully reached.
+        if (reply->error() == QNetworkReply::NoError || reply->error() == QNetworkReply::ContentNotFoundError) {
+            availabilityPromise->addResult(true);
+        } else {
+            availabilityPromise->addResult(false);
+        }
+        availabilityPromise->finish();
+        reply->deleteLater();
+    });
+
+    return availabilityPromise->future();
 }
 
 #include "moc_ion.cpp"

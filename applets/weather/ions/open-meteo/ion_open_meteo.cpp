@@ -293,7 +293,7 @@ struct OpenMeteoIon::Private {
 };
 
 OpenMeteoIon::OpenMeteoIon(QObject *parent)
-    : Ion(parent)
+    : Ion(QUrl(CREDIT_URL), parent)
     , d(std::make_unique<Private>())
 {
     qCDebug(IONENGINE_OPEN_METEO) << "loaded OpenMeteo";

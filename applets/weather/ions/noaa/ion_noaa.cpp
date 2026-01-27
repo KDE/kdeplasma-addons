@@ -41,7 +41,7 @@ QMap<QString, Ion::ConditionIcons> const &NOAAIon::conditionIcons() const
 
 // ctor, dtor
 NOAAIon::NOAAIon(QObject *parent, const QVariantList &args)
-    : Ion(parent)
+    : Ion(QUrl("https://www.weather.gov/"_L1), parent)
 {
     Q_UNUSED(args);
 

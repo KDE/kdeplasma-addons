@@ -54,7 +54,7 @@ WeatherData::ForecastInfo::ForecastInfo()
 
 // ctor, dtor
 EnvCanadaIon::EnvCanadaIon(QObject *parent, const QVariantList &args)
-    : Ion(parent)
+    : Ion(QUrl("https://weather.gc.ca"_L1), parent)
 {
     Q_UNUSED(args);
 }
