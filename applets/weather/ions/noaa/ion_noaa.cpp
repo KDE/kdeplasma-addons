@@ -61,6 +61,11 @@ NOAAIon::~NOAAIon()
     qCDebug(WEATHER::ION::NOAA) << "Deleting";
 }
 
+QUrl NOAAIon::providerURL() const
+{
+    return QUrl("https://api.weather.gov/"_L1);
+}
+
 void NOAAIon::findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> promise, const QString &searchString)
 {
     m_locationPromise = promise;

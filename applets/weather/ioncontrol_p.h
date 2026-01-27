@@ -18,6 +18,8 @@
 
 #include "ion.h"
 
+class QNetworkAccessManager;
+
 /*!
  * \class IonControl
  *
@@ -46,6 +48,28 @@ public:
     ~IonControl() override;
 
 private:
+    /*!
+     * \enum IonControl::NetworkStatus
+     * This enum describes the current status of the network.
+     *
+     * \value Disconnected
+     * The network is not available.
+     *
+     * \value Connecting
+     * IonControl is trying to connect to the network.
+     *
+     * \value Connected
+     * Successfully connected to the network.
+     */
+    enum ConnectionStatus {
+        Disconnected = 0,
+        Connecting,
+        Connected,
+        ProviderUnavailable,
+    };
+
+    Q_ENUM(ConnectionStatus)
+
     explicit IonControl(const QString &name, const std::shared_ptr<Ion> &ion, const std::shared_ptr<QThread> &ionThread, QObject *parent = nullptr);
 
     /*!
@@ -53,6 +77,11 @@ private:
      * calls \c updateForecast or \c updateLocations respectively.
      */
     void checkQueues();
+
+    /*!
+     * Check if provider is available
+     */
+    void checkProviderAvailability();
 
 Q_SIGNALS:
     /*!
@@ -69,6 +98,11 @@ private Q_SLOTS:
      * Whenever networking changes, take action
      */
     void onOnlineStateChanged(QNetworkInformation::Reachability reachability);
+
+    /*!
+     * Whenever provider availability changes, take action
+     */
+    void onProviderAvailabilityChanged();
 
     /*!
      * Called when provider(ion) ended locations update
@@ -101,11 +135,18 @@ private:
     std::shared_ptr<Ion> m_ion;
     std::shared_ptr<QThread> m_fetchThread;
 
-    QTimer *m_reconnectTimer;
+    QTimer *m_networkReconnectTimer;
+    QTimer *m_providerReconnectTimer;
 
     bool m_searchStringChanged = false;
 
     bool m_isBusy = false;
 
     QString m_ionName;
+
+    int m_reconnectAttempts;
+
+    ConnectionStatus m_connectionStatus;
+
+    std::unique_ptr<QNetworkAccessManager> m_manager;
 };

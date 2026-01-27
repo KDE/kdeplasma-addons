@@ -35,6 +35,7 @@ K_PLUGIN_CLASS_WITH_JSON(DWDIon, "metadata.json")
 
 using namespace Qt::StringLiterals;
 
+constexpr QLatin1String PROVIDER_URL = "https://www.dwd.de"_L1;
 constexpr QLatin1String CATALOGUE_URL = "https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/mosmix_stationskatalog.cfg?view=nasPublication&nn=16102"_L1;
 constexpr QLatin1String FORECAST_URL = "https://app-prod-ws.warnwetter.de/v30/stationOverviewExtended?stationIds=%1"_L1;
 constexpr QLatin1String MEASURE_URL = "https://s3.eu-central-1.amazonaws.com/app-prod-static.warnwetter.de/v16/current_measurement_%1.json"_L1;
@@ -137,6 +138,11 @@ void DWDIon::clearLocationData()
 {
     m_locationPromise.reset();
     m_locationsData.clear();
+}
+
+QUrl DWDIon::providerURL() const
+{
+    return QUrl(PROVIDER_URL);
 }
 
 void DWDIon::findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> promise, const QString &searchString)

@@ -463,6 +463,11 @@ void EnvCanadaIon::validate(const QString &source)
     m_locationPromise->addResult(locations);
 }
 
+QUrl EnvCanadaIon::providerURL() const
+{
+    return QUrl(QStringLiteral("https://dd.weather.gc.ca"));
+}
+
 void EnvCanadaIon::findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> promise, const QString &searchString)
 {
     m_locationPromise = promise;

@@ -102,6 +102,11 @@ public:
      */
     ~Ion() override;
 
+    /*!
+     * Url of the forecast provider
+     */
+    virtual QUrl providerURL() const = 0;
+
 public Q_SLOTS:
     /*!
      * Slot which is used to request locations.

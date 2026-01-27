@@ -80,6 +80,8 @@ public:
     explicit UKMETIon(QObject *parent, const QVariantList &args);
     ~UKMETIon() override;
 
+    QUrl providerURL() const override;
+
     void findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> promise, const QString &searchString) override;
 
     void fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> promise, const QString &placeInfo) override;

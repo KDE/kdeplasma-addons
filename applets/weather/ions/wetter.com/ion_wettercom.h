@@ -24,6 +24,7 @@
 
 // wetter.com API project data
 #define PROJECTNAME "weatherion"
+#define PROVIDER_URL "https://www.wetter.com/"
 #define SEARCH_URL "https://api.wetter.com/location/index/search/%1/project/" PROJECTNAME "/cs/%2"
 #define FORECAST_URL "https://api.wetter.com/forecast/weather/city/%1/project/" PROJECTNAME "/cs/%2"
 #define APIKEY "07025b9a22b4febcf8e8ec3e6f1140e8"
@@ -97,6 +98,8 @@ class WetterComIon : public Ion
 public:
     explicit WetterComIon(QObject *parent, const QVariantList &args);
     ~WetterComIon() override;
+
+    QUrl providerURL() const override;
 
     void findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> promise, const QString &searchString) override;
 
