@@ -9,31 +9,64 @@
 #include "weathercontroller_debug.h"
 #include "weatherdatamonitor_p.h"
 
+#include <QNetworkAccessManager>
+#include <QNetworkReply>
+#include <QNetworkRequest>
 #include <QPromise>
+
+using namespace std::chrono_literals;
+
+const auto NETWORK_RECONNECT_DELAY = 1s;
+const auto PROVIDER_RECONNECT_DELAY = 1min;
+const auto MAX_RECONNECT_ATTEMPTS = 3;
 
 IonControl::IonControl(const QString &name, const std::shared_ptr<Ion> &ion, const std::shared_ptr<QThread> &ionThread, QObject *parent)
     : QObject(parent)
     , m_ion(ion)
     , m_fetchThread(ionThread)
     , m_ionName(name)
+    , m_reconnectAttempts(0)
+    , m_connectionStatus(Connecting)
 {
-    QNetworkInformation::loadBackendByFeatures(QNetworkInformation::Feature::Reachability);
-    if (const auto instance = QNetworkInformation::instance())
-        connect(instance, &QNetworkInformation::reachabilityChanged, this, &IonControl::onOnlineStateChanged);
-
     qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": The worker thread is: " << m_fetchThread.get();
 
-    // used for start weather update after the network becomes online
-    m_reconnectTimer = new QTimer(this);
-    m_reconnectTimer->setSingleShot(true);
-    m_reconnectTimer->setInterval(std::chrono::seconds(1));
-    connect(m_reconnectTimer, &QTimer::timeout, this, [this]() {
+    m_providerAvailabilityWatcher = std::make_shared<QFutureWatcher<bool>>();
+    connect(m_providerAvailabilityWatcher.get(), &QFutureWatcher<bool>::finished, this, &IonControl::onProviderAvailabilityChanged);
+
+    // additional delay to allow the network to establish properly
+    m_networkReconnectTimer = new QTimer(this);
+    m_networkReconnectTimer->setSingleShot(true);
+    m_networkReconnectTimer->setInterval(NETWORK_RECONNECT_DELAY);
+    connect(m_networkReconnectTimer, &QTimer::timeout, this, [this]() {
         qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": ReconnectTimer: start updating forecast info";
-        checkQueues();
+        m_connectionStatus = Connecting;
+        // First check if provider available.
+        checkProviderAvailability();
+    });
+
+    m_providerReconnectTimer = new QTimer(this);
+    m_providerReconnectTimer->setSingleShot(true);
+    m_providerReconnectTimer->setInterval(PROVIDER_RECONNECT_DELAY);
+    connect(m_providerReconnectTimer, &QTimer::timeout, this, [this]() {
+        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": ReconnectTimer: start reconnect attempt";
+        checkProviderAvailability();
     });
 
     connect(this, &IonControl::fetchLocationsRequest, ion.get(), &Ion::findPlaces);
     connect(this, &IonControl::fetchForecastRequest, ion.get(), &Ion::fetchForecast);
+
+    QNetworkInformation::loadBackendByFeatures(QNetworkInformation::Feature::Reachability);
+
+    if (const auto instance = QNetworkInformation::instance()) {
+        connect(instance, &QNetworkInformation::reachabilityChanged, this, &IonControl::onOnlineStateChanged);
+        onOnlineStateChanged(instance->reachability());
+    } else {
+        // Without reachability information, let requests proceed and handle
+        // network errors through the normal provider request path.
+        m_connectionStatus = Connected;
+        checkProviderAvailability();
+    }
+
     qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": Initialized";
 }
 
@@ -54,6 +87,10 @@ IonControl::~IonControl()
         m_forecastFutureWatcher.reset();
     }
 
+    if (m_providerAvailabilityWatcher->isRunning()) {
+        m_providerAvailabilityWatcher->cancel();
+    }
+
     if (m_fetchThread) {
         qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": remove fetch thread";
         m_fetchThread->quit();
@@ -68,10 +105,21 @@ void IonControl::updateLocations(const std::shared_ptr<LocationsData> &locationD
 {
     qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": get locations request";
 
+    if (m_locationQueue.contains(locationData)) {
+        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": locationData already in queue. Don't add another one";
+        return;
+    }
+
+    if (m_connectionStatus == ProviderUnavailable) {
+        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": Provider is unreachable. Skip update locations";
+        m_locationQueue.enqueue(locationData);
+        checkProviderAvailability();
+        return;
+    }
+
     // skip update and add locations to the queue if the network is offline
-    const auto instance = QNetworkInformation::instance();
-    if (instance && instance->reachability() != QNetworkInformation::Reachability::Online) {
-        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": Network connection is unavailable. Skip update forecast";
+    if (m_connectionStatus == Disconnected) {
+        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": Network connection is unavailable. Skip update locations";
         auto errorLocations = std::make_shared<Locations>();
         errorLocations->setError();
         locationData->setLocations(errorLocations);
@@ -79,8 +127,9 @@ void IonControl::updateLocations(const std::shared_ptr<LocationsData> &locationD
         return;
     }
 
-    if (m_locationQueue.contains(locationData)) {
-        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": locationData already in queue. Don't add another one";
+    if (m_connectionStatus == Connecting) {
+        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": Network is connecting. Add to queue";
+        m_locationQueue.enqueue(locationData);
         return;
     }
 
@@ -163,13 +212,31 @@ void IonControl::updateForecast(const std::shared_ptr<ForecastData> &forecastDat
 {
     qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": get forecast request";
 
+    if (m_forecastQueue.contains(forecastData)) {
+        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": forecastData already in queue. Don't add another one";
+        return;
+    }
+
+    // if provider is unavailable save the forecastData and try to connect to provider again.
+    if (m_connectionStatus == ProviderUnavailable) {
+        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": Provider is unreachable. Skip update forecast";
+        m_forecastQueue.enqueue(forecastData);
+        checkProviderAvailability();
+        return;
+    }
+
     // skip update and add forecast to the queue if the network is offline
-    const auto instance = QNetworkInformation::instance();
-    if (instance && instance->reachability() != QNetworkInformation::Reachability::Online) {
+    if (m_connectionStatus == Disconnected) {
         qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": Network connection is unavailable. Skip update forecast";
         auto errorForecast = std::make_shared<Forecast>();
         errorForecast->setError();
         forecastData->setForecast(errorForecast);
+        m_forecastQueue.enqueue(forecastData);
+        return;
+    }
+
+    if (m_connectionStatus == Connecting) {
+        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": Network is connecting. Add to queue";
         m_forecastQueue.enqueue(forecastData);
         return;
     }
@@ -271,15 +338,31 @@ void IonControl::checkQueues()
     }
 }
 
+void IonControl::checkProviderAvailability()
+{
+    if (m_connectionStatus == Disconnected || m_providerAvailabilityWatcher->isRunning()) {
+        return;
+    }
+
+    qCDebug(WEATHER::CONTROLLER) << "IonControl" << m_ionName << ": checking provider availability";
+
+    auto availabilityFuture = m_ion->checkProviderAvailability();
+    m_providerAvailabilityWatcher->setFuture(availabilityFuture);
+}
+
 void IonControl::onOnlineStateChanged(QNetworkInformation::Reachability reachability)
 {
     // if network is became online start update by check queue. If offline then cancel update and save all not updated data
     if (reachability == QNetworkInformation::Reachability::Online) {
         qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": Network is online. Starting updating weather";
-        m_reconnectTimer->start();
+        m_connectionStatus = Connecting;
+        m_networkReconnectTimer->start();
     } else {
         qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": Network is offline. Stop updating weather";
-        m_reconnectTimer->stop();
+        m_connectionStatus = Disconnected;
+
+        m_networkReconnectTimer->stop();
+        m_providerReconnectTimer->stop();
 
         if (m_fetchThread && m_fetchThread->isRunning()) {
             qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": stop fetch thread: " << m_fetchThread.get();
@@ -298,4 +381,54 @@ void IonControl::onOnlineStateChanged(QNetworkInformation::Reachability reachabi
         m_currentLocationUpdate.reset();
         m_isBusy = false;
     }
+}
+
+void IonControl::onProviderAvailabilityChanged()
+{
+    // Ignore results while offline. A new check will be started after the
+    // network reconnect delay when reachability returns.
+    if (m_connectionStatus == Disconnected) {
+        return;
+    }
+
+    if (m_providerAvailabilityWatcher->isCanceled()) {
+        qCDebug(WEATHER::CONTROLLER) << "IonControl" << m_ionName << ": provider availability check cancelled";
+        return;
+    }
+
+    if (!m_providerAvailabilityWatcher->result()) {
+        ++m_reconnectAttempts;
+        if (m_reconnectAttempts < MAX_RECONNECT_ATTEMPTS) {
+            qCDebug(WEATHER::CONTROLLER) << "IonControl" << m_ionName << ": provider unavailable; retry" << m_reconnectAttempts;
+            m_providerReconnectTimer->start();
+            return;
+        }
+
+        qCDebug(WEATHER::CONTROLLER) << "IonControl" << m_ionName << ": provider is unavailable";
+        m_connectionStatus = ProviderUnavailable;
+        m_reconnectAttempts = 0;
+
+        // Complete queued requests with errors after all retries fail.
+        for (const auto &locationData : std::as_const(m_locationQueue)) {
+            auto locations = std::make_shared<Locations>();
+            locations->setError();
+            locationData->setLocations(locations);
+        }
+        m_locationQueue.clear();
+
+        for (const auto &forecastData : std::as_const(m_forecastQueue)) {
+            qCDebug(WEATHER::CONTROLLER) << "IonControl" << m_ionName << ": provider unavailable for" << forecastData->placeInfo();
+            auto forecast = std::make_shared<Forecast>();
+            forecast->setError();
+            forecastData->setForecast(forecast);
+        }
+        m_forecastQueue.clear();
+        return;
+    }
+
+    qCDebug(WEATHER::CONTROLLER) << "IonControl" << m_ionName << ": provider is available";
+    m_connectionStatus = Connected;
+    m_reconnectAttempts = 0;
+    m_providerReconnectTimer->stop();
+    checkQueues();
 }

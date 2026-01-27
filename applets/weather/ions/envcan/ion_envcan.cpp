@@ -57,6 +57,8 @@ EnvCanadaIon::EnvCanadaIon(QObject *parent, const QVariantList &args)
     : Ion(parent)
 {
     Q_UNUSED(args);
+
+    m_url.setUrl("https://dd.weather.gc.ca"_L1);
 }
 
 EnvCanadaIon::~EnvCanadaIon()
