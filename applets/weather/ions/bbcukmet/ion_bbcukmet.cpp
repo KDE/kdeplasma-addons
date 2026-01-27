@@ -31,6 +31,8 @@ UKMETIon::UKMETIon(QObject *parent, const QVariantList &args)
 
 {
     Q_UNUSED(args);
+
+    m_url.setUrl("https://open.live.bbc.co.uk"_L1);
 }
 
 UKMETIon::~UKMETIon()

@@ -8,6 +8,7 @@
 
 #include <plasmaweatherion_export.h>
 
+#include <QFuture>
 #include <QList>
 #include <QPromise>
 #include <QString>
@@ -16,6 +17,9 @@
 
 #include "forecast.h"
 #include "locations.h"
+
+class QNetworkAccessManager;
+class QNetworkRequest;
 
 /*!
  * \class Ion
@@ -119,6 +123,11 @@ public Q_SLOTS:
      */
     virtual void fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> promise, const QString &placeInfo) = 0;
 
+    /*!
+     * Check if provider is available
+     */
+    QFuture<bool> checkProviderAvailability();
+
 protected:
     /*!
      * Returns weather icon filename to display in applet.
@@ -144,4 +153,13 @@ protected:
     QString getWindDirectionIcon(const QMap<QString, WindDirections> &windDirList, const QString &windDirection) const;
 
     static bool isNightTime(const QDateTime &dateTime, double latitude, double longitude);
+
+protected:
+    /*!
+     * Used by checkProviderAvailability. If empty then the function always returns true.
+     */
+    QUrl m_url;
+
+private:
+    std::unique_ptr<QNetworkAccessManager> m_manager;
 };

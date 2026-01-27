@@ -47,6 +47,8 @@ NOAAIon::NOAAIon(QObject *parent, const QVariantList &args)
 
     qCDebug(WEATHER::ION::NOAA) << "Start initializing";
 
+    m_url.setUrl("https://api.weather.gov/"_L1);
+
     // Schedule the API calls according to the previous information required
     connect(this, &NOAAIon::observationUpdated, this, &NOAAIon::getForecast);
     connect(this, &NOAAIon::observationUpdated, this, &NOAAIon::getAlerts);

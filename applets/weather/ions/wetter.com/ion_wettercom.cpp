@@ -35,6 +35,8 @@ WetterComIon::WetterComIon(QObject *parent, const QVariantList &args)
     : Ion(parent)
 {
     Q_UNUSED(args);
+
+    m_url.setUrl(QString::fromLatin1(PROVIDER_URL));
 }
 
 WetterComIon::~WetterComIon()
