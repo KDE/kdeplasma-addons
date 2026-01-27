@@ -195,6 +195,11 @@ QMap<QString, Ion::WindDirections> const &UKMETIon::windIcons() const
     return wval;
 }
 
+QUrl UKMETIon::providerURL() const
+{
+    return QUrl(QStringLiteral("https://open.live.bbc.co.uk"));
+}
+
 void UKMETIon::findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> promise, const QString &searchString)
 {
     m_locationPromise = promise;

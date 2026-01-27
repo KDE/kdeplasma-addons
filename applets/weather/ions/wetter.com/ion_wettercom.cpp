@@ -210,6 +210,11 @@ QString WetterComIon::getWeatherCondition(const QHash<QString, QString> &conditi
     return conditionList[condition];
 }
 
+QUrl WetterComIon::providerURL() const
+{
+    return QUrl(QStringLiteral(PROVIDER_URL));
+}
+
 /*
  * Handling of place searches
  */
