@@ -205,7 +205,7 @@ msgstr "I&nicia"
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
-msgstr "A&tura"
+msgstr "&Para"
 
 #: main.qml:141
 #, kde-format
