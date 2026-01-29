@@ -139,4 +139,10 @@ ColumnLayout {
             Qt.openUrlExternally(link);
         }
     }
+
+    QQC2.BusyIndicator {
+        id: busy
+        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+        visible: root.status === ForecastControl.Connecting
+    }
 }
