@@ -43,16 +43,19 @@ IonControl::~IonControl()
 
     if (m_locationsFutureWatcher) {
         m_locationsFutureWatcher->cancel();
+        m_locationsFutureWatcher.reset();
     }
 
     if (m_forecastFutureWatcher) {
         m_forecastFutureWatcher->cancel();
+        m_forecastFutureWatcher.reset();
     }
 
     if (m_fetchThread) {
         qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": remove fetch thread";
         m_fetchThread->quit();
         m_fetchThread->wait();
+        m_fetchThread.reset();
     }
     qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": destroyed";
 }
