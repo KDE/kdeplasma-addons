@@ -41,6 +41,9 @@ IonControl::~IonControl()
 {
     qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": destroying";
 
+    m_currentLocationUpdate.reset();
+    m_currentForecastUpdate.reset();
+
     if (m_locationsFutureWatcher) {
         m_locationsFutureWatcher->cancel();
         m_locationsFutureWatcher.reset();
@@ -119,39 +122,49 @@ void IonControl::updateLocations(const std::shared_ptr<LocationsData> &locationD
 
 void IonControl::onFetchLocationsEnded()
 {
-    qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": search ended for search string: " << m_currentLocationUpdate->searchString();
-
-    if (m_locationsFutureWatcher->future().resultCount()) {
-        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": fetch locations ended for search string:" << m_currentLocationUpdate->searchString();
-        m_currentLocationUpdate->setLocations(m_locationsFutureWatcher->result());
-    } else {
-        auto errorLocations = std::make_shared<Locations>();
-        errorLocations->setError();
-        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": fetch locations error for search string:" << m_currentLocationUpdate->searchString();
-        m_currentLocationUpdate->setLocations(errorLocations);
+    if (m_currentLocationUpdate && m_currentLocationUpdate.use_count() > 1) {
+        if (m_locationsFutureWatcher->future().resultCount()) {
+            qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName
+                                         << ": fetch locations ended for search string:" << m_currentLocationUpdate->searchString();
+            m_currentLocationUpdate->setLocations(m_locationsFutureWatcher->result());
+        } else {
+            auto errorLocations = std::make_shared<Locations>();
+            errorLocations->setError();
+            qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName
+                                         << ": fetch locations error for search string:" << m_currentLocationUpdate->searchString();
+            m_currentLocationUpdate->setLocations(errorLocations);
+        }
     }
 
     m_currentLocationUpdate = nullptr;
 
     m_isBusy = false;
 
-    checkQueues();
+    const auto instance = QNetworkInformation::instance();
+    if (instance && instance->reachability() == QNetworkInformation::Reachability::Online) {
+        checkQueues();
+    }
 }
 
 void IonControl::onFetchLocationsCancelled()
 {
-    qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": fetch locations cancelled for search string:" << m_currentLocationUpdate->searchString();
-    if (m_searchStringChanged) {
-        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": restart search for searchstring: " << m_currentLocationUpdate->searchString();
-        m_locationQueue.enqueue(m_currentLocationUpdate);
-        m_searchStringChanged = false;
+    if (m_currentLocationUpdate && m_currentLocationUpdate.use_count() > 1) {
+        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": fetch locations cancelled";
+        if (m_searchStringChanged) {
+            qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": restart search for searchstring: " << m_currentLocationUpdate->searchString();
+            m_locationQueue.enqueue(m_currentLocationUpdate);
+            m_searchStringChanged = false;
+        }
     }
 
     m_currentLocationUpdate = nullptr;
 
     m_isBusy = false;
 
-    checkQueues();
+    const auto instance = QNetworkInformation::instance();
+    if (instance && instance->reachability() == QNetworkInformation::Reachability::Online) {
+        checkQueues();
+    }
 }
 
 void IonControl::updateForecast(const std::shared_ptr<ForecastData> &forecastData)
@@ -206,16 +219,16 @@ void IonControl::updateForecast(const std::shared_ptr<ForecastData> &forecastDat
 
 void IonControl::onFetchForecastEnded()
 {
-    qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": update ended for place: " << m_currentForecastUpdate->placeInfo();
-
-    if (m_forecastFutureWatcher->future().resultCount()) {
-        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": fetch weather ended for place:" << m_currentForecastUpdate->placeInfo();
-        m_currentForecastUpdate->setForecast(m_forecastFutureWatcher->result());
-    } else {
-        auto errorForecast = std::make_shared<Forecast>();
-        qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": fetch weather error for place:" << m_currentForecastUpdate->placeInfo();
-        errorForecast->setError();
-        m_currentForecastUpdate->setForecast(errorForecast);
+    if (m_currentForecastUpdate && m_currentForecastUpdate.use_count() > 1) {
+        if (m_forecastFutureWatcher->future().resultCount()) {
+            qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": fetch weather ended for place:" << m_currentForecastUpdate->placeInfo();
+            m_currentForecastUpdate->setForecast(m_forecastFutureWatcher->result());
+        } else {
+            auto errorForecast = std::make_shared<Forecast>();
+            qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": fetch weather error for place:" << m_currentForecastUpdate->placeInfo();
+            errorForecast->setError();
+            m_currentForecastUpdate->setForecast(errorForecast);
+        }
     }
 
     m_currentForecastUpdate = nullptr;
