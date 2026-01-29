@@ -84,40 +84,40 @@ KCM.GridViewKCM {
             }
         }
 
-        contentItem: null
+        contentItem: Item { // wrapper to prevent automatic resizing
+            KSvg.SvgItem {
+                id: thumbnail
 
-        KSvg.SvgItem {
-            id: thumbnail
-
-            anchors.centerIn: parent
-            width: height
-            height: parent.height - Kirigami.Units.largeSpacing
-            imagePath: "widgets/notes"
-            elementId: modelData + "-notes"
-
-            QQC2.Label {
-                id: thumbnailLabel
                 anchors.centerIn: parent
-                // this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
-                width: Math.round(parent.width - thumbnail.width * 0.07) - Kirigami.Units.smallSpacing
-                height: Math.round(parent.height - thumbnail.height * 0.07)
-                horizontalAlignment: Text.AlignHCenter
-                verticalAlignment: Text.AlignVCenter
+                width: delegate.availableHeight
+                height: delegate.availableHeight
+                imagePath: "widgets/notes"
+                elementId: modelData + "-notes"
 
-                text: delegate.text
-                textFormat: Text.PlainText
-                elide: Text.ElideRight
-                wrapMode: Text.WordWrap
+                QQC2.Label {
+                    id: thumbnailLabel
+                    anchors.centerIn: parent
+                    // this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
+                    width: Math.round(parent.width - thumbnail.width * 0.07) - 2 * Kirigami.Units.smallSpacing
+                    height: Math.round(parent.height - thumbnail.height * 0.07)
+                    horizontalAlignment: Text.AlignHCenter
+                    verticalAlignment: Text.AlignVCenter
 
-                //this is deliberately _NOT_ the theme color as we are over a known bright background
-                //an unknown colour over a known colour is a bad move as you end up with white on yellow
-                color: {
-                    if (inPanel && modelData === "translucent") {
-                        return Kirigami.Theme.textColor;
-                    } else if (modelData === "black" || modelData === "translucent-light") {
-                        return "#dfdfdf"
-                    } else {
-                        return "#202020"
+                    text: delegate.text
+                    textFormat: Text.PlainText
+                    elide: Text.ElideRight
+                    wrapMode: Text.WordWrap
+
+                    //this is deliberately _NOT_ the theme color as we are over a known bright background
+                    //an unknown colour over a known colour is a bad move as you end up with white on yellow
+                    color: {
+                        if (inPanel && modelData === "translucent") {
+                            return Kirigami.Theme.textColor;
+                        } else if (modelData === "black" || modelData === "translucent-light") {
+                            return "#dfdfdf"
+                        } else {
+                            return "#202020"
+                        }
                     }
                 }
             }
