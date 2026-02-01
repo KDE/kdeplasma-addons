@@ -40,7 +40,7 @@ PlasmoidItem {
     readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge,PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge].includes(Plasmoid.location)
     readonly property bool compactInPanel: inPanel && !!compactRepresentationItem?.visible
     // In a panel when it is translucent, the panel background is used, so we use the normal text color, and remove any margins.
-    readonly property bool noBackground: inPanel && (Plasmoid.configuration.color === "translucent" || Plasmoid.configuration.color === "translucent-light")
+    property bool noBackground: false // binding in onCompleted to avoid binding loop
 
     // note is of type Note
     property QtObject note: noteManager.loadNote(Plasmoid.configuration.noteId, Plasmoid.id);
@@ -710,5 +710,8 @@ PlasmoidItem {
         if (note.id != Plasmoid.configuration.noteId) {
             Plasmoid.configuration.noteId = note.id;
         }
+
+        // set imperatively to avoid binding loop during startup
+        root.noBackground = Qt.binding(() => inPanel && (Plasmoid.configuration.color === "translucent" || Plasmoid.configuration.color === "translucent-light"))
     }
 }
