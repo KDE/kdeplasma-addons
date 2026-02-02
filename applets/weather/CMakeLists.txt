@@ -34,7 +34,6 @@ plasma_add_applet(org.kde.plasma.weather
         forecastdata.cpp
         locationsdata.cpp
         types.h
-        weatherdata/warnings.h
     RESOURCES
         main.xml
     GENERATE_APPLET_CLASS
