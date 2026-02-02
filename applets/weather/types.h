@@ -8,6 +8,7 @@
 #include <QQmlEngine>
 
 #include "abstractunitlistmodel.h"
+#include "warnings.h"
 
 static bool isMetric()
 {
@@ -92,4 +93,11 @@ public:
         const int defaultUnitId = isMetric() ? KUnitConversion::MeterPerSecond : KUnitConversion::MilePerHour;
         return new AbstractUnitListModel(items, defaultUnitId, engine);
     }
+};
+
+struct WarningsForeign {
+    Q_GADGET
+    QML_NAMED_ELEMENT(Warnings)
+    QML_UNCREATABLE("Enum access only")
+    QML_FOREIGN(Warnings)
 };
