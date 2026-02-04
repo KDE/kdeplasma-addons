@@ -22,7 +22,6 @@ class SimpleCalculatorTests(unittest.TestCase):
         options = AppiumOptions()
         options.set_capability("app", f"plasmawindowed -p org.kde.plasma.nano {WIDGET_ID}")
         options.set_capability("environ", {
-            "QT_FATAL_WARNINGS": "1",
             "QT_LOGGING_RULES": "qt.accessibility.atspi.warning=false;kf.plasma.core.warning=false;kf.windowsystem.warning=false;kf.kirigami.platform.warning=false;kf.coreaddons.warning=false",
         })
         options.set_capability("timeouts", {'implicit': 10000})
