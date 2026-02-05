@@ -2,12 +2,13 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # SPDX-FileCopyrightText: 2019, 2020, 2022, 2023, 2024 Giovanni Sora <g.sora@tiscali.it>
+# giovanni <g.sora@tiscali.it>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2024-08-30 17:20+0200\n"
+"PO-Revision-Date: 2026-02-04 19:12+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 21.12.1\n"
 
 #: package/contents/ui/config.qml:58
 #, kde-format
@@ -39,7 +40,7 @@ msgstr "Scalate"
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
-msgstr "Scalate, manteni le proportiones"
+msgstr "Scalate, mantene le proportiones"
 
 #: package/contents/ui/config.qml:73
 #, kde-format

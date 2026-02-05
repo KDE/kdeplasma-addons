@@ -8,22 +8,23 @@ msgstr ""
 "Project-Id-Version: konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:44+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-02-03 20:22-0500\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.8\n"
 
 #: main.qml:69
 #, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
-msgstr ""
+msgstr "Konsole سەپلىمە ھۆججەت"
 
 #: main.qml:90
 #, kde-format
 msgid "Arbitrary String Which Says Something"
-msgstr ""
+msgstr "بىرەر نەرسىنى تەسۋىرلەيدىغان خالىغان ھەرپ تىزىقى"

@@ -8,20 +8,21 @@ msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:44+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-02-03 20:21-0500\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.8\n"
 
 #: main.qml:128
 #, kde-format
 msgctxt "@info accessible result of calculation"
 msgid "Result is %1"
-msgstr ""
+msgstr "نەتىجە %1"
 
 #: main.qml:230
 #, kde-format
@@ -29,13 +30,13 @@ msgctxt ""
 "Abbreviation for result (undefined) of division by zero, max. six to nine "
 "characters."
 msgid "undef"
-msgstr ""
+msgstr "ئېنىقلانمىغان"
 
 #: main.qml:344
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
-msgstr ""
+msgstr "نەتىجە"
 
 #: main.qml:375
 #, kde-format

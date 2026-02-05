@@ -8,39 +8,37 @@ msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-02 00:43+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-02-03 20:22-0500\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.8\n"
 
 #: CompactRepresentation.qml:133
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
-msgstr "ۋاقىت ئۆلچىگۈچ"
+msgstr "ۋاقىت خاتىرىلىگۈچنى ۋاقىتلىق توختات"
 
 #: CompactRepresentation.qml:133
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
-msgstr "ۋاقىت ئۆلچىگۈچ"
+msgstr "ۋاقىت خاتىرىلىگۈچنى باشلا"
 
 #: CompactRepresentation.qml:196 CompactRepresentation.qml:214
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
 msgid_plural "%1s"
-msgstr[0] ""
+msgstr[0] "%1s"
 
 #: config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "ئادەتتىكى"
@@ -49,126 +47,128 @@ msgstr "ئادەتتىكى"
 #, kde-format
 msgctxt "@title"
 msgid "Predefined Timers"
-msgstr ""
+msgstr "ئالدىن بەلگىلەنگەن ۋاقىت خاتىرىلىگۈچ"
 
 #: configGeneral.qml:33
 #, kde-format
 msgctxt "@title:label"
 msgid "Display:"
-msgstr ""
+msgstr "كۆرسەت:"
 
 #: configGeneral.qml:38
 #, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
-msgstr ""
+msgstr "ماۋزۇ كۆرسىتىدۇ:"
 
 #: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "قالغان ۋاقىتنى كۆرسىتىدۇ"
 
 #: configGeneral.qml:61
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
-msgstr ""
+msgstr "سېكۇنتنى كۆرسىتىدۇ"
 
 #: configGeneral.qml:66
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr ""
+msgstr "ۋاقىت خاتىرىلىگۈچ ئالماشتۇرۇشنى كۆرسىتىدۇ"
 
 #: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "ئىلگىرىلەش بالداقنى كۆرسىتىدۇ"
 
 #: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "مۆھلەتتىن ھالقىغاندا:"
 
 #: configGeneral.qml:85
 #, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr ""
+msgstr "ئۇقتۇرۇش كۆرسىتىدۇ:"
 
 #: configGeneral.qml:97
 #, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
-msgstr ""
+msgstr "ۋاقىت خاتىرىلىگۈچ تامام"
 
 #: configGeneral.qml:107
 #, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr ""
+msgstr "بۇيرۇق ئىجرا قىلىش:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox «ۋاقىت خاتىرىلىگۈچ تامام»"
 
 #: configTimes.qml:22
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
-msgstr ""
+msgstr "قوش"
 
 #: configTimes.qml:81
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr ""
+"ئەگەر ئالدىن بېكىتىلگەن ۋاقىتنى بۇ جايغا قوشسىڭىز، ئۇلار Plasma ئەپچە مەزمۇن "
+"تىزىملىكىدە كۆرۈنىدۇ."
 
 #: configTimes.qml:119
 #, kde-format
 msgid "Scroll over digits to change time"
-msgstr ""
+msgstr "ۋاقىت ئۆزگەرتىشتە رەقەم سىيرىلىدۇ"
 
 #: configTimes.qml:126
 #, kde-format
 msgid "Apply"
-msgstr ""
+msgstr "قوللان"
 
 #: configTimes.qml:134
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "ۋاز كەچ"
 
 #: configTimes.qml:143
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "تەھرىر"
 
 #: configTimes.qml:152
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "ئۆچۈر"
 
 #: main.qml:68
 #, kde-format
 msgid "%1 is running"
-msgstr ""
+msgstr "ئىجرا قىلىنىۋاتقىنى %1"
 
 #: main.qml:70
 #, kde-format
 msgid "%1 not running"
-msgstr ""
+msgstr "ئىجرا قىلىنمايۋاتقىنى %1"
 
 #: main.qml:73
 #, kde-format
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
-msgstr[0] ""
+msgstr[0] "قالغان ۋاقىت: %1 سېكۇنت"
 
 #: main.qml:73
 #, kde-format
@@ -176,38 +176,37 @@ msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
 msgstr ""
+"چاشقىنەك غالتىكىدە رەقەم ئۆزگەرتىلىدۇ ياكى مەزمۇن تىزىملىكىدىن ئالدىن "
+"بېكىتىلگەن ۋاقىت تاللىنىدۇ"
 
 #: main.qml:90
 #, kde-format
 msgid "Timer"
-msgstr "ۋاقىت ئۆلچىگۈچ"
+msgstr "ۋاقىت خاتىرىلىگۈچ"
 
 #: main.qml:91
 #, kde-format
 msgid "Timer finished"
-msgstr ""
+msgstr "ۋاقىت خاتىرىلىگۈچ تامام"
 
 #: main.qml:131
-#, fuzzy, kde-format
-#| msgid "Start"
+#, kde-format
 msgctxt "@action"
 msgid "&Start"
-msgstr "باشلاش"
+msgstr "باشلا(&S)"
 
 #: main.qml:136
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
-msgstr ""
+msgstr "توختا(&T)"
 
 #: main.qml:141
-#, fuzzy, kde-format
-#| msgid "Reset"
+#, kde-format
 msgctxt "@action"
 msgid "&Reset"
-msgstr "ئەسلىگە قايتۇرۇش"
+msgstr "ئەسلىگە قايتۇر(&R)"
 
-#, fuzzy
 #~| msgid "Appearance"
 #~ msgctxt "@title"
 #~ msgid "Appearance"

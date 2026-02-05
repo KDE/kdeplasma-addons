@@ -8,173 +8,173 @@ msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:44+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-02-03 20:21-0500\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.8\n"
 
 #: comicdata.cpp:76
 #, kde-format
 msgctxt "an abbreviation for Number"
 msgid "# %1"
-msgstr ""
+msgstr "# %1"
 
 #: qml/ComicBottomInfo.qml:63
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
-msgstr ""
+msgstr "باشقىسىغا ئاتلا…"
 
 #: qml/ComicBottomInfo.qml:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
-msgstr ""
+msgstr "ھەجۋىي رەسىم تور بېكىتىنى زىيارەت قىلىدۇ"
 
 #: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Comics"
-msgstr ""
+msgstr "ھەجۋىي رەسىم"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "قىلمىش"
 
 #: qml/configBehavior.qml:28
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show above image:"
-msgstr ""
+msgstr "ئۈستىدىكى سۈرەتنى كۆرسىتىدۇ:"
 
 #: qml/configBehavior.qml:29
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Title"
-msgstr ""
+msgstr "ماۋزۇ"
 
 #: qml/configBehavior.qml:34
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Author"
-msgstr ""
+msgstr "يازغۇچى"
 
 #: qml/configBehavior.qml:39
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show below image:"
-msgstr ""
+msgstr "ئاستىدىكى سۈرەتنى كۆرسىتىدۇ:"
 
 #: qml/configBehavior.qml:40
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Identifier"
-msgstr ""
+msgstr "پەرقلەندۈرگۈچ"
 
 #: qml/configBehavior.qml:45
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Website"
-msgstr ""
+msgstr "تور بېكەت"
 
 #: qml/configBehavior.qml:54
 #, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
-msgstr ""
+msgstr "يولباشچى توپچە:"
 
 #: qml/configBehavior.qml:55
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
-msgstr ""
+msgstr "ھەمىشە گىرۋەكتە كۆرۈنىدۇ"
 
 #: qml/configBehavior.qml:61
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
-msgstr ""
+msgstr "نىشانلىغۇچ لەيلەپ توختىغاندا ئوتتۇرىدا كۆرۈنىدۇ"
 
 #: qml/configBehavior.qml:70
 #, kde-format
 msgctxt "@label for checkbox, completes sentence … opens full-size view"
 msgid "Middle-clicking image:"
-msgstr ""
+msgstr "ئوتتۇرا چېكىش سۈرىتى:"
 
 #: qml/configBehavior.qml:71
 #, kde-format
 msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
-msgstr ""
+msgstr "تولۇق چوڭلۇقتىكى كۆرۈنۈشنى ئاچىدۇ"
 
 #: qml/configComics.qml:27
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
-msgstr ""
+msgstr "يېڭىسىغا ئېرىش…"
 
 #: qml/configComics.qml:70
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
-msgstr ""
+msgstr "ھېچقانداق ھەجۋىي رەسىم ئورنىتىلمىدى"
 
 #: qml/configComics.qml:72
 #, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
-msgstr ""
+msgstr "ھەجۋىي رەسىمگە ئېرىش…"
 
 #: qml/configComics.qml:86
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
-msgstr ""
+msgstr "يېڭى ھەجۋىي رەسىمنى تەكشۈرۈش دەۋرىيلىكى:"
 
 #: qml/configComics.qml:96
-#, fuzzy, kde-format
-#| msgid " minutes"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] " مىنۇت"
+msgstr[0] "مىنۇت"
 
 #: qml/configComics.qml:102
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
-msgstr ""
+msgstr "يەرلىك ئارخىپنى ساقلاپ قالىدۇ:"
 
 #: qml/configComics.qml:110
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
-msgstr[0] ""
+msgstr[0] "ھەر بىر ھەجۋىي رەسىمنىڭ سۈرەت سانى"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr ""
+msgstr "ھەجۋىي رەسىمنى يۈكلىيەلمىدى"
 
 #: qml/ErrorPlaceholder.qml:19
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "كېيىن قايتا سىنايدۇ ياكى پەرقلىق ھەجۋىي رەسىمدىن بىرى تاللىنىدۇ"
 
 #: qml/ErrorPlaceholder.qml:27
 #, kde-format
 msgctxt "@info placeholdermessage title if offline"
 msgid "Offline"
-msgstr ""
+msgstr "تورسىز"
 
 #: qml/ErrorPlaceholder.qml:28
 #, kde-format
@@ -183,12 +183,14 @@ msgid ""
 "Reconnect to the internet to retry loading this image. You can still view "
 "any images in the local archive."
 msgstr ""
+"ئىنتېرنېتقا قايتا باغلانغاندا بۇ سۈرەتنى يۈكلەشنى قايتا سىنايدۇ. سىز يەرلىك "
+"ئارخىپتىكى خالىغان سۈرەتنى يەنىلا كۆرەلەيسىز."
 
 #: qml/ErrorPlaceholder.qml:36
 #, kde-format
 msgctxt "@info placeholdermessage title if connection local/unknown"
 msgid "Limited connectivity"
-msgstr ""
+msgstr "چەكلىمىلىك باغلىنىش"
 
 #: qml/ErrorPlaceholder.qml:37
 #, kde-format
@@ -197,12 +199,14 @@ msgid ""
 "The image may not be available on your current connection. You can still "
 "view any images in the local archive."
 msgstr ""
+"نۆۋەتتىكى باغلىنىشىڭىزدا بۇ سۈرەتنى ئىشلەتكىلى بولماسلىقى مۇمكىن. يەرلىك "
+"ئارخىپتىكى خالىغان سۈرەتنى يەنىلا كۆرەلەيسىز."
 
 #: qml/ErrorPlaceholder.qml:45
 #, kde-format
 msgctxt "@info placeholdermessage title if today not available"
 msgid "Not available"
-msgstr ""
+msgstr "ئىشلەتكىلى بولمايدۇ"
 
 #: qml/ErrorPlaceholder.qml:46
 #, kde-format
@@ -210,12 +214,14 @@ msgctxt "@info placeholdermessage explanation if today not available"
 msgid ""
 "Today's image is not yet available or cannot be read. Try a different date."
 msgstr ""
+"بۈگۈنكى سۈرەتنى ئىشلەتكىلى بولمايدۇ ياكى ئوقۇغىلى بولمايدۇ. پەرقلىق چېسلانى "
+"سىناڭ."
 
 #: qml/ErrorPlaceholder.qml:54
 #, kde-format
 msgctxt "@info placeholdermessage title if date not available"
 msgid "Not available"
-msgstr ""
+msgstr "ئىشلەتكىلى بولمايدۇ"
 
 #: qml/ErrorPlaceholder.qml:55
 #, kde-format
@@ -224,48 +230,50 @@ msgid ""
 "The image for this day is not available or cannot be read. Try a different "
 "date."
 msgstr ""
+"بۈ كۈندىكى سۈرەتنى ئىشلەتكىلى بولمايدۇ ياكى ئوقۇغىلى بولمايدۇ. پەرقلىق "
+"چېسلانى سىناڭ."
 
 #: qml/main.qml:87
 #, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
-msgstr ""
+msgstr "يېڭى ھەجۋىي سۈرەت بار كېيىنكى بەتكۈچ(&N)"
 
 #: qml/main.qml:94
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
-msgstr ""
+msgstr "بىرىنچىسىگە ئاتلا(&F)"
 
 #: qml/main.qml:100
 #, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
-msgstr ""
+msgstr "نۆۋەتتىكىگە ئاتلا(&C)"
 
 #: qml/main.qml:106
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
-msgstr ""
+msgstr "باشقىسىغا ئاتلا…"
 
 #: qml/main.qml:112
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
-msgstr ""
+msgstr "تور بېكەت زىيارەت"
 
 #: qml/main.qml:117
 #, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
-msgstr ""
+msgstr "سودىلىق تور بېكەت زىيارەت(&W)"
 
 #: qml/main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr ""
+msgstr "ھەجۋىي سۈرەتنى باشقا ئاتتا ساقلا(&S)…"
 
 #: qml/main.qml:131
 #, kde-format
@@ -277,63 +285,59 @@ msgstr "ئەسلى چوڭلۇقى(&A)"
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
-msgstr ""
+msgstr "نۆۋەتتىكى ئورۇننى ساقلا(&P)"
 
 #: qml/main.qml:288
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
-msgstr ""
+msgstr "ھېچقانداق ھەجۋىي رەسىم سەپلەنمىگەن"
 
 #: qml/main.qml:291
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
-msgstr ""
+msgstr "ھەجۋىي رەسىم تاللىنىدۇ…"
 
 #: qml/main.qml:302
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
-msgstr ""
+msgstr "%1/%2 - %3.png"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
 msgctxt "@title:window"
 msgid "Go to Strip"
-msgstr ""
+msgstr "ھەجۋىي رەسىمگە يۆتكەل"
 
 #: stripselector.cpp:39
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "&Strip number:"
-msgstr ""
+msgstr "ھەجۋىي رەسىم نومۇرى(&S):"
 
 #: stripselector.cpp:102
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
-msgstr ""
+msgstr "ھەجۋىي رەسىم پەرقلەندۈرگۈچ:"
 
-#, fuzzy
 #~| msgid "General"
 #~ msgctxt "@title"
 #~ msgid "General"
 #~ msgstr "ئادەتتىكى"
 
-#, fuzzy
 #~| msgid "Appearance"
 #~ msgctxt "@title"
 #~ msgid "Appearance"
 #~ msgstr "كۆرۈنۈشى"
 
-#, fuzzy
 #~| msgid "Advanced"
 #~ msgctxt "@title"
 #~ msgid "Advanced"
 #~ msgstr "ئالىي"
 
-#, fuzzy
 #~| msgid " days"
 #~ msgctxt "@item:valuesuffix spacing to number + unit"
 #~ msgid "day"
@@ -360,33 +364,28 @@ msgstr ""
 #~ msgid "dd.MM.yyyy"
 #~ msgstr "dd.MM.yyyy"
 
-#, fuzzy
 #~| msgctxt "refers to caching of files on the users hd"
 #~| msgid "Cache"
 #~ msgctxt "@title:group"
 #~ msgid "Cache"
 #~ msgstr "غەملەك"
 
-#, fuzzy
 #~| msgid "Information"
 #~ msgctxt "@title:group"
 #~ msgid "Information"
 #~ msgstr "ئۇچۇر"
 
-#, fuzzy
 #~| msgid "Update"
 #~ msgctxt "@title:group"
 #~ msgid "Update"
 #~ msgstr "يېڭىلا"
 
-#, fuzzy
 #~| msgctxt "number of days"
 #~| msgid " days"
 #~ msgctxt "@item:valuesuffix spacing to number + unit"
 #~ msgid " days"
 #~ msgstr " كۈن"
 
-#, fuzzy
 #~| msgid "Appearance"
 #~ msgctxt "@title:group"
 #~ msgid "Appearance"

@@ -8,20 +8,23 @@ msgstr ""
 "Project-Id-Version: plasma_runner_CharacterRunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-02-03 20:25-0500\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.8\n"
 
 #: charrunner.cpp:40
 #, kde-format
 msgid ""
 "Creates Characters from :q: if it is a hexadecimal code or defined alias."
 msgstr ""
+"ئەگەر :q: ئون ئالتىلىك كود ياكى ئالدىن ئېنىقلىما بېرىلگەن تەخەللۇس بولسا "
+"ئۇنىڭدىن ھەرپ قۇرىدۇ."
 
 #: charrunner_config.cpp:60
 #, kde-format
@@ -30,12 +33,14 @@ msgid ""
 "Config entries for alias list and code list have different sizes, ignoring "
 "all."
 msgstr ""
+"تەخەللۇس تىزىمى بىلەن كود تىزىمىنىڭ سەپلىمە تۈر ئۇزۇنلۇقى پەرقلىق، ھەممىسىگە "
+"پەرۋا قىلمايدۇ."
 
 #. i18n: ectx: property (title), widget (QGroupBox, main)
 #: charrunner_config.ui:18
 #, kde-format
 msgid "Character Runner Config"
-msgstr ""
+msgstr "ھەرپ ئىجرا قىلغۇچ سەپلىمىسى"
 
 #. i18n: ectx: property (text), widget (QLabel, label_trigger)
 #: charrunner_config.ui:26
@@ -53,7 +58,7 @@ msgstr "تەخەللۇس:"
 #: charrunner_config.ui:61
 #, kde-format
 msgid "Hex code:"
-msgstr ""
+msgstr "ئون ئالتىلىك كود:"
 
 #. i18n: ectx: property (text), widget (QTreeWidget, list)
 #: charrunner_config.ui:89

@@ -8,967 +8,817 @@ msgstr ""
 "Project-Id-Version: plasma_applet_fuzzy_clock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:44+0000\n"
-"PO-Revision-Date: 2013-09-08 07:05+0900\n"
-"Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
+"PO-Revision-Date: 2026-02-03 20:21-0500\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: Poedit 3.8\n"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr "كۆرۈنۈشى"
+msgstr "قىياپەت"
 
 #: qml/configAppearance.qml:24
-#, fuzzy, kde-format
-#| msgid "Font style:"
+#, kde-format
 msgctxt "@title:group"
 msgid "Font:"
-msgstr "خەت ئۇسلۇبى:"
+msgstr "خەت نۇسخا:"
 
 #: qml/configAppearance.qml:25
-#, fuzzy, kde-format
-#| msgid "&Italic"
+#, kde-format
 msgctxt "@option:check"
 msgid "Bold text"
-msgstr "يانتۇ(&I)"
+msgstr "توم خەت"
 
 #: qml/configAppearance.qml:30
-#, fuzzy, kde-format
-#| msgid "&Italic"
+#, kde-format
 msgctxt "@option:check"
 msgid "Italic text"
-msgstr "يانتۇ(&I)"
+msgstr "يانتۇ خەت"
 
 #: qml/configAppearance.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Fuzzyness:"
-msgstr ""
+msgstr "مۈجمەللىكى:"
 
 #: qml/configAppearance.qml:49
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Accurate"
-msgstr ""
+msgstr "دەل"
 
 #: qml/configAppearance.qml:58
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"
-msgstr ""
+msgstr "مۈجمەل"
 
 #: qml/FuzzyClock.qml:35
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "%1 o'clock"
+#, kde-format
 msgid "One o’clock"
-msgstr "دەل %1 بولدى"
+msgstr "سائەت بىر"
 
 #: qml/FuzzyClock.qml:36
 #, kde-format
 msgid "Five past one"
-msgstr ""
+msgstr "بىردىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:37
 #, kde-format
 msgid "Ten past one"
-msgstr ""
+msgstr "بىردىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:38
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter past one"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "بىردىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:39
 #, kde-format
 msgid "Twenty past one"
-msgstr ""
+msgstr "بىردىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:40
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past one"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "بىردىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:41
 #, kde-format
 msgid "Half past one"
-msgstr ""
+msgstr "بىر يېرىم"
 
 #: qml/FuzzyClock.qml:42
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to two"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئىككىگە يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:43
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to two"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "ئىككىگە يىگىرمە قالدى"
 
 #: qml/FuzzyClock.qml:44
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to two"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "ئىككىگە چارەك قالدى"
 
 #: qml/FuzzyClock.qml:45
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "ten to %1"
+#, kde-format
 msgid "Ten to two"
-msgstr "%1 غا ئون مىنۇت قالدى"
+msgstr "ئىككىگە ئون قالدى"
 
 #: qml/FuzzyClock.qml:46
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five to %1"
+#, kde-format
 msgid "Five to two"
-msgstr "%1 غا بەش مىنۇت قالدى"
+msgstr "ئىككىگە بەش قالدى"
 
 #: qml/FuzzyClock.qml:47
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "%1 o'clock"
+#, kde-format
 msgid "Two o’clock"
-msgstr "دەل %1 بولدى"
+msgstr "سائەت ئىككى"
 
 #: qml/FuzzyClock.qml:48
 #, kde-format
 msgid "Five past two"
-msgstr ""
+msgstr "ئىككىدىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:49
 #, kde-format
 msgid "Ten past two"
-msgstr ""
+msgstr "ئىككىدىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:50
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter past two"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "ئىككىدىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:51
 #, kde-format
 msgid "Twenty past two"
-msgstr ""
+msgstr "ئىككىدىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:52
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past two"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئىككىدىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:53
 #, kde-format
 msgid "Half past two"
-msgstr ""
+msgstr "ئىككى يېرىم"
 
 #: qml/FuzzyClock.qml:54
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to three"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئۈچكە يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:55
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to three"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "ئۈچكە يىگىرمە قالدى"
 
 #: qml/FuzzyClock.qml:56
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to three"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "ئۈچكە چارەك قالدى"
 
 #: qml/FuzzyClock.qml:57
 #, kde-format
 msgid "Ten to three"
-msgstr ""
+msgstr "ئۈچكە ئون قالدى"
 
 #: qml/FuzzyClock.qml:58
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five to %1"
+#, kde-format
 msgid "Five to three"
-msgstr "%1 غا بەش مىنۇت قالدى"
+msgstr "ئۈچكە بەش قالدى"
 
 #: qml/FuzzyClock.qml:59
 #, kde-format
 msgid "Three o’clock"
-msgstr ""
+msgstr "سائەت ئۈچ"
 
 #: qml/FuzzyClock.qml:60
 #, kde-format
 msgid "Five past three"
-msgstr ""
+msgstr "ئۈچتىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:61
 #, kde-format
 msgid "Ten past three"
-msgstr ""
+msgstr "ئۈچتىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:62
 #, kde-format
 msgid "Quarter past three"
-msgstr ""
+msgstr "ئۈچتىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:63
 #, kde-format
 msgid "Twenty past three"
-msgstr ""
+msgstr "ئۈچتىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:64
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past three"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئۈچتىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:65
 #, kde-format
 msgid "Half past three"
-msgstr ""
+msgstr "ئۈچ يېرىم"
 
 #: qml/FuzzyClock.qml:66
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to four"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "تۆتكە يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:67
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to four"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "تۆتكە يىگىرمە قالدى"
 
 #: qml/FuzzyClock.qml:68
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to four"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "تۆتكە چارەك قالدى"
 
 #: qml/FuzzyClock.qml:69
 #, kde-format
 msgid "Ten to four"
-msgstr ""
+msgstr "تۆتكە ئون قالدى"
 
 #: qml/FuzzyClock.qml:70
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five to %1"
+#, kde-format
 msgid "Five to four"
-msgstr "%1 غا بەش مىنۇت قالدى"
+msgstr "تۆتكە بەش قالدى"
 
 #: qml/FuzzyClock.qml:71
 #, kde-format
 msgid "Four o’clock"
-msgstr ""
+msgstr "سائەت تۆت"
 
 #: qml/FuzzyClock.qml:72
 #, kde-format
 msgid "Five past four"
-msgstr ""
+msgstr "تۆتتىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:73
 #, kde-format
 msgid "Ten past four"
-msgstr ""
+msgstr "تۆتتىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:74
 #, kde-format
 msgid "Quarter past four"
-msgstr ""
+msgstr "تۆتتىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:75
 #, kde-format
 msgid "Twenty past four"
-msgstr ""
+msgstr "تۆتتىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:76
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past four"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "تۆتتىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:77
 #, kde-format
 msgid "Half past four"
-msgstr ""
+msgstr "تۆت يېرىم"
 
 #: qml/FuzzyClock.qml:78
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to five"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "بەشكە يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:79
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to five"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "بەشكە يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:80
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to five"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "بەشكە چارەك قالدى"
 
 #: qml/FuzzyClock.qml:81
 #, kde-format
 msgid "Ten to five"
-msgstr ""
+msgstr "بەشكە ئون قالدى"
 
 #: qml/FuzzyClock.qml:82
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five to %1"
+#, kde-format
 msgid "Five to five"
-msgstr "%1 غا بەش مىنۇت قالدى"
+msgstr "بەشكە بەش قالدى"
 
 #: qml/FuzzyClock.qml:83
 #, kde-format
 msgid "Five o’clock"
-msgstr ""
+msgstr "سائەت بەش"
 
 #: qml/FuzzyClock.qml:84
 #, kde-format
 msgid "Five past five"
-msgstr ""
+msgstr "بەشتىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:85
 #, kde-format
 msgid "Ten past five"
-msgstr ""
+msgstr "بەشتىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:86
 #, kde-format
 msgid "Quarter past five"
-msgstr ""
+msgstr "بەشتىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:87
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty past five"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "بەشتىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:88
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past five"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "بەشتىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:89
 #, kde-format
 msgid "Half past five"
-msgstr ""
+msgstr "بەش يېرىم"
 
 #: qml/FuzzyClock.qml:90
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to six"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئالتىگە يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:91
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to six"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "ئالتىگە يىگىرمە قالدى"
 
 #: qml/FuzzyClock.qml:92
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to six"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "ئالتىگە چارەك قالدى"
 
 #: qml/FuzzyClock.qml:93
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "ten to %1"
+#, kde-format
 msgid "Ten to six"
-msgstr "%1 غا ئون مىنۇت قالدى"
+msgstr "ئالتىگە ئون قالدى"
 
 #: qml/FuzzyClock.qml:94
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five to %1"
+#, kde-format
 msgid "Five to six"
-msgstr "%1 غا بەش مىنۇت قالدى"
+msgstr "ئالتىگە بەش قالدى"
 
 #: qml/FuzzyClock.qml:95
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "%1 o'clock"
+#, kde-format
 msgid "Six o’clock"
-msgstr "دەل %1 بولدى"
+msgstr "سائەت ئالتە"
 
 #: qml/FuzzyClock.qml:96
 #, kde-format
 msgid "Five past six"
-msgstr ""
+msgstr "ئالتىدىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:97
 #, kde-format
 msgid "Ten past six"
-msgstr ""
+msgstr "ئالتىدىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:98
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter past six"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "ئالتىدىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:99
 #, kde-format
 msgid "Twenty past six"
-msgstr ""
+msgstr "ئالتىدىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:100
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past six"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئالتىدىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:101
 #, kde-format
 msgid "Half past six"
-msgstr ""
+msgstr "ئالتە يېرىم"
 
 #: qml/FuzzyClock.qml:102
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to seven"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "يەتتىگە يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:103
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to seven"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "يەتتىگە يىگىرمە قالدى"
 
 #: qml/FuzzyClock.qml:104
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to seven"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "يەتتىگە چارەك قالدى"
 
 #: qml/FuzzyClock.qml:105
 #, kde-format
 msgid "Ten to seven"
-msgstr ""
+msgstr "يەتتىگە ئون قالدى"
 
 #: qml/FuzzyClock.qml:106
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five to %1"
+#, kde-format
 msgid "Five to seven"
-msgstr "%1 غا بەش مىنۇت قالدى"
+msgstr "يەتتىگە بەش قالدى"
 
 #: qml/FuzzyClock.qml:107
 #, kde-format
 msgid "Seven o’clock"
-msgstr ""
+msgstr "سائەت يەتتە"
 
 #: qml/FuzzyClock.qml:108
 #, kde-format
 msgid "Five past seven"
-msgstr ""
+msgstr "يەتتىدىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:109
 #, kde-format
 msgid "Ten past seven"
-msgstr ""
+msgstr "يەتتىدىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:110
 #, kde-format
 msgid "Quarter past seven"
-msgstr ""
+msgstr "يەتتىدىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:111
 #, kde-format
 msgid "Twenty past seven"
-msgstr ""
+msgstr "يەتتىدىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:112
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past seven"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "يەتتىدىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:113
 #, kde-format
 msgid "Half past seven"
-msgstr ""
+msgstr "يەتتە يېرىم"
 
 #: qml/FuzzyClock.qml:114
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to eight"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "سەككىزگە يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:115
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to eight"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "سەككىزگە يىگىرمە قالدى"
 
 #: qml/FuzzyClock.qml:116
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to eight"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "سەككىزگە چارەك قالدى"
 
 #: qml/FuzzyClock.qml:117
 #, kde-format
 msgid "Ten to eight"
-msgstr ""
+msgstr "سەككىزگە ئون قالدى"
 
 #: qml/FuzzyClock.qml:118
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five to %1"
+#, kde-format
 msgid "Five to eight"
-msgstr "%1 غا بەش مىنۇت قالدى"
+msgstr "سەككىزگە بەش قالدى"
 
 #: qml/FuzzyClock.qml:119
 #, kde-format
 msgid "Eight o’clock"
-msgstr ""
+msgstr "سائەت سەككىز"
 
 #: qml/FuzzyClock.qml:120
 #, kde-format
 msgid "Five past eight"
-msgstr ""
+msgstr "سەككىزدىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:121
 #, kde-format
 msgid "Ten past eight"
-msgstr ""
+msgstr "سەككىزدىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:122
 #, kde-format
 msgid "Quarter past eight"
-msgstr ""
+msgstr "سەككىزدىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:123
 #, kde-format
 msgid "Twenty past eight"
-msgstr ""
+msgstr "سەككىزدىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:124
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past eight"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "سەككىزدىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:125
 #, kde-format
 msgid "Half past eight"
-msgstr ""
+msgstr "سەككىز يېرىم"
 
 #: qml/FuzzyClock.qml:126
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to nine"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "توققۇزغا يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:127
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to nine"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "توققۇزغا يىگىرمە قالدى"
 
 #: qml/FuzzyClock.qml:128
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to nine"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "توققۇزغا چارەك قالدى"
 
 #: qml/FuzzyClock.qml:129
 #, kde-format
 msgid "Ten to nine"
-msgstr ""
+msgstr "توققۇزغا ئون قالدى"
 
 #: qml/FuzzyClock.qml:130
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five to %1"
+#, kde-format
 msgid "Five to nine"
-msgstr "%1 غا بەش مىنۇت قالدى"
+msgstr "توققۇزغا بەش قالدى"
 
 #: qml/FuzzyClock.qml:131
 #, kde-format
 msgid "Nine o’clock"
-msgstr ""
+msgstr "سائەت توققۇز"
 
 #: qml/FuzzyClock.qml:132
 #, kde-format
 msgid "Five past nine"
-msgstr ""
+msgstr "توققۇزدىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:133
 #, kde-format
 msgid "Ten past nine"
-msgstr ""
+msgstr "توققۇزدىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:134
 #, kde-format
 msgid "Quarter past nine"
-msgstr ""
+msgstr "توققۇزدىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:135
 #, kde-format
 msgid "Twenty past nine"
-msgstr ""
+msgstr "توققۇزدىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:136
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past nine"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "توققۇزدىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:137
 #, kde-format
 msgid "Half past nine"
-msgstr ""
+msgstr "توققۇز يېرىم"
 
 #: qml/FuzzyClock.qml:138
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to ten"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئونغا يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:139
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to ten"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "ئونغا يىگىرمە قالدى"
 
 #: qml/FuzzyClock.qml:140
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to ten"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "ئونغا چارەك قالدى"
 
 #: qml/FuzzyClock.qml:141
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "ten to %1"
+#, kde-format
 msgid "Ten to ten"
-msgstr "%1 غا ئون مىنۇت قالدى"
+msgstr "ئونغا ئون قالدى"
 
 #: qml/FuzzyClock.qml:142
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five to %1"
+#, kde-format
 msgid "Five to ten"
-msgstr "%1 غا بەش مىنۇت قالدى"
+msgstr "ئونغا بەش قالدى"
 
 #: qml/FuzzyClock.qml:143
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "%1 o'clock"
+#, kde-format
 msgid "Ten o’clock"
-msgstr "دەل %1 بولدى"
+msgstr "سائەت ئون"
 
 #: qml/FuzzyClock.qml:144
 #, kde-format
 msgid "Five past ten"
-msgstr ""
+msgstr "ئوندىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:145
 #, kde-format
 msgid "Ten past ten"
-msgstr ""
+msgstr "ئوندىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:146
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter past ten"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "ئوندىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:147
 #, kde-format
 msgid "Twenty past ten"
-msgstr ""
+msgstr "ئوندىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:148
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past ten"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئوندىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:149
 #, kde-format
 msgid "Half past ten"
-msgstr ""
+msgstr "ئون يېرىم"
 
 #: qml/FuzzyClock.qml:150
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to eleven"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئون بىرگە يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:151
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to eleven"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "ئون بىرگە يىگىرمە قالدى"
 
 #: qml/FuzzyClock.qml:152
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to eleven"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "ئون بىرگە چارەك قالدى"
 
 #: qml/FuzzyClock.qml:153
-#, fuzzy, kde-format
-#| msgctxt "hour in the messages below"
-#| msgid "eleven"
+#, kde-format
 msgid "Ten to eleven"
-msgstr "ئون بىر"
+msgstr "ئون بىرگە ئون قالدى"
 
 #: qml/FuzzyClock.qml:154
 #, kde-format
 msgid "Five to eleven"
-msgstr ""
+msgstr "ئون بىرگە بەش قالدى"
 
 #: qml/FuzzyClock.qml:155
 #, kde-format
 msgid "Eleven o’clock"
-msgstr ""
+msgstr "سائەت ئون بىر"
 
 #: qml/FuzzyClock.qml:156
 #, kde-format
 msgid "Five past eleven"
-msgstr ""
+msgstr "ئون بىردىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:157
 #, kde-format
 msgid "Ten past eleven"
-msgstr ""
+msgstr "ئون بىردىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:158
 #, kde-format
 msgid "Quarter past eleven"
-msgstr ""
+msgstr "ئون بىردىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:159
 #, kde-format
 msgid "Twenty past eleven"
-msgstr ""
+msgstr "ئون بىردىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:160
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past eleven"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئون بىردىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:161
 #, kde-format
 msgid "Half past eleven"
-msgstr ""
+msgstr "ئون بىر يېرىم"
 
 #: qml/FuzzyClock.qml:162
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to twelve"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئون ئىككىگە يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:163
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to twelve"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "ئون ئىككىگە يىگىرمە قالدى"
 
 #: qml/FuzzyClock.qml:164
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to twelve"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "ئون ئىككىگە چارەك قالدى"
 
 #: qml/FuzzyClock.qml:165
-#, fuzzy, kde-format
-#| msgctxt "hour in the messages below"
-#| msgid "twelve"
+#, kde-format
 msgid "Ten to twelve"
-msgstr "ئون ئىككى"
+msgstr "ئون ئىككىگە ئون قالدى"
 
 #: qml/FuzzyClock.qml:166
 #, kde-format
 msgid "Five to twelve"
-msgstr ""
+msgstr "ئون ئىككىگە بەش قالدى"
 
 #: qml/FuzzyClock.qml:167
 #, kde-format
 msgid "Twelve o’clock"
-msgstr ""
+msgstr "سائەت ئون ئىككى"
 
 #: qml/FuzzyClock.qml:168
 #, kde-format
 msgid "Five past twelve"
-msgstr ""
+msgstr "ئون ئىككىدىن بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:169
 #, kde-format
 msgid "Ten past twelve"
-msgstr ""
+msgstr "ئون ئىككىدىن ئون ئۆتتى"
 
 #: qml/FuzzyClock.qml:170
 #, kde-format
 msgid "Quarter past twelve"
-msgstr ""
+msgstr "ئون ئىككىدىن چارەك ئۆتتى"
 
 #: qml/FuzzyClock.qml:171
 #, kde-format
 msgid "Twenty past twelve"
-msgstr ""
+msgstr "ئون ئىككىدىن يىگىرمە ئۆتتى"
 
 #: qml/FuzzyClock.qml:172
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five past twelve"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "ئون ئىككىدىن يىگىرمە بەش ئۆتتى"
 
 #: qml/FuzzyClock.qml:173
 #, kde-format
 msgid "Half past twelve"
-msgstr ""
+msgstr "ئون ئىككى يېرىم"
 
 #: qml/FuzzyClock.qml:174
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty five to %1"
+#, kde-format
 msgid "Twenty-five to one"
-msgstr "%1 غا يىگىرمە بەش مىنۇت قالدى"
+msgstr "بىرگە يىگىرمە بەش قالدى"
 
 #: qml/FuzzyClock.qml:175
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "twenty to %1"
+#, kde-format
 msgid "Twenty to one"
-msgstr "%1 غا يىگىرمە مىنۇت قالدى"
+msgstr "بىرگە يىگىرمە قالدى"
 
 #: qml/FuzzyClock.qml:176
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "quarter to %1"
+#, kde-format
 msgid "Quarter to one"
-msgstr "%1 غا چارەك مىنۇت قالدى"
+msgstr "بىرگە چارەك قالدى"
 
 #: qml/FuzzyClock.qml:177
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "ten to %1"
+#, kde-format
 msgid "Ten to one"
-msgstr "%1 غا ئون مىنۇت قالدى"
+msgstr "بىرگە ئون قالدى"
 
 #: qml/FuzzyClock.qml:178
-#, fuzzy, kde-format
-#| msgctxt "%1 the hour translated above"
-#| msgid "five to %1"
+#, kde-format
 msgid "Five to one"
-msgstr "%1 غا بەش مىنۇت قالدى"
+msgstr "بىرگە بەش قالدى"
 
 #: qml/FuzzyClock.qml:182
 #, kde-format
 msgid "Sleep"
-msgstr ""
+msgstr "ئۇخلات"
 
 #: qml/FuzzyClock.qml:182
 #, kde-format
 msgid "Breakfast"
-msgstr ""
+msgstr "ناشتا"
 
 #: qml/FuzzyClock.qml:182
 #, kde-format
 msgid "Second Breakfast"
-msgstr ""
+msgstr "ئىككىنچى ناشتا"
 
 #: qml/FuzzyClock.qml:182
 #, kde-format
 msgid "Elevenses"
-msgstr ""
+msgstr "ئەتىگەنلىك چاي"
 
 #: qml/FuzzyClock.qml:183
 #, kde-format
 msgid "Lunch"
-msgstr ""
+msgstr "چۈشلۈك تاماق"
 
 #: qml/FuzzyClock.qml:183
-#, fuzzy, kde-format
-#| msgid "Afternoon"
+#, kde-format
 msgid "Afternoon tea"
-msgstr "چۈشتىن كېيىن"
+msgstr "چۈشتىن كېيىنلىك چاي"
 
 #: qml/FuzzyClock.qml:183
 #, kde-format
 msgid "Dinner"
-msgstr ""
+msgstr "كەچلىك تاماق"
 
 #: qml/FuzzyClock.qml:183
 #, kde-format
 msgid "Supper"
-msgstr ""
+msgstr "كېچىلىك تاماق"
 
 #: qml/FuzzyClock.qml:187
 #, kde-format
@@ -1008,29 +858,28 @@ msgstr "كەچ"
 #: qml/FuzzyClock.qml:188
 #, kde-format
 msgid "Late evening"
-msgstr ""
+msgstr "تۈن يېرىم"
 
 #: qml/FuzzyClock.qml:192
 #, kde-format
 msgid "Start of week"
-msgstr ""
+msgstr "ھەپتە باشلىنىشى"
 
 #: qml/FuzzyClock.qml:192
 #, kde-format
 msgid "Middle of week"
-msgstr ""
+msgstr "ھەپتە ئوتتۇرى"
 
 #: qml/FuzzyClock.qml:192
 #, kde-format
 msgid "End of week"
-msgstr ""
+msgstr "ھەپتەنىڭ ئاخىرى"
 
 #: qml/FuzzyClock.qml:192
 #, kde-format
 msgid "Weekend!"
-msgstr ""
+msgstr "ھەپتە ئاخىرى!"
 
-#, fuzzy
 #~| msgid "Appearance"
 #~ msgctxt "@title:group"
 #~ msgid "Appearance"
