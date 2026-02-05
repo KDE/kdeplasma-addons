@@ -45,7 +45,7 @@ Row {
             imagePath: "widgets/timer"
             elementId: num + internal.digitSuffix
 
-            Keys.onPressed: {
+            Keys.onPressed: event => {
                 switch (event.key) {
                 case Qt.Key_Return:
                 case Qt.Key_Enter:
