@@ -58,21 +58,23 @@ KWin.TabBoxSwitcher {
         }
     }
 
-    PlasmaCore.Dialog {
+    PlasmaCore.Window {
         id: dialog
-        location: PlasmaCore.Types.Floating
         visible: tabBox.visible
         flags: Qt.Popup | Qt.X11BypassWindowManagerHint
         x: tabBox.screenGeometry.x + tabBox.screenGeometry.width * 0.5 - dialogMainItem.width * 0.5
         y: tabBox.screenGeometry.y + tabBox.screenGeometry.height * 0.5 - dialogMainItem.height * 0.5
+
+        width: mainItem.implicitWidth + leftPadding + rightPadding
+        height: mainItem.implicitHeight + topPadding + bottomPadding
 
         mainItem: Item {
             id: dialogMainItem
 
             property int optimalWidth: textMetrics.width + Kirigami.Units.iconSizes.small + 2 * Kirigami.Units.smallSpacing + hoverItem.margins.right + hoverItem.margins.left
             property int optimalHeight: compactListView.rowHeight * (compactListView.count || 1)
-            width: Math.min(Math.max(tabBox.screenGeometry.width * 0.2, optimalWidth), tabBox.screenGeometry.width * 0.8)
-            height: Math.min(optimalHeight, tabBox.screenGeometry.height * 0.8)
+            implicitWidth: Math.min(Math.max(tabBox.screenGeometry.width * 0.2, optimalWidth), tabBox.screenGeometry.width * 0.8)
+            implicitHeight: Math.min(optimalHeight, tabBox.screenGeometry.height * 0.8)
 
             // just to get the margin sizes
             KSvg.FrameSvgItem {
