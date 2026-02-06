@@ -25,19 +25,19 @@ KWin.TabBoxSwitcher {
         delegate: BigIconsDialog { }
     }
 
-    component BigIconsDialog: PlasmaCore.Dialog {
+    component BigIconsDialog: PlasmaCore.Window {
         property alias currentIndex: icons.currentIndex
-        location: PlasmaCore.Types.Floating
         visible: tabBox.visible
         flags: Qt.Popup | Qt.X11BypassWindowManagerHint
         x: tabBox.screenGeometry.x + tabBox.screenGeometry.width * 0.5 - dialogMainItem.width * 0.5
         y: tabBox.screenGeometry.y + tabBox.screenGeometry.height * 0.5 - dialogMainItem.height * 0.5
 
+        width: mainItem.implicitWidth + leftPadding + rightPadding
+        height: mainItem.implicitHeight + topPadding + bottomPadding
+
         mainItem: ColumnLayout {
             id: dialogMainItem
             spacing: Kirigami.Units.smallSpacing * 2
-
-            width: Math.min(Math.max(tabBox.screenGeometry.width * 0.3, icons.implicitWidth), tabBox.screenGeometry.width * 0.9)
 
             property int maxItemsPerRow:  Math.floor(tabBox.screenGeometry.width * 0.9 / icons.delegateWidth)
             property int actualItemsPerRow:  Math.min(tabBox.model.rowCount(), maxItemsPerRow)
