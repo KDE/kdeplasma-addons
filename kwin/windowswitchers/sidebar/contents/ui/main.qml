@@ -20,21 +20,23 @@ KWin.TabBoxSwitcher {
 
     currentIndex: thumbnailListView.currentIndex
 
-    PlasmaCore.Dialog {
+    PlasmaCore.Window {
         id: dialog
-        location: Application.layoutDirection === Qt.RightToLeft ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.LeftEdge
+        borders: Application.layoutDirection === Qt.RightToLeft ? Qt.LeftEdge : Qt.RightEdge
         visible: tabBox.visible
         flags: Qt.Popup | Qt.X11BypassWindowManagerHint
         x: screenGeometry.x + (Application.layoutDirection === Qt.RightToLeft ? screenGeometry.width - width : 0)
         y: screenGeometry.y
+
+        width: mainItem.implicitWidth + leftPadding + rightPadding
+        height: tabBox.screenGeometry.height
 
         mainItem: PlasmaComponents.ScrollView {
             id: dialogMainItem
 
             focus: true
 
-            contentWidth: tabBox.screenGeometry.width * 0.15
-            height: tabBox.screenGeometry.height - dialog.margins.top - dialog.margins.bottom
+            implicitWidth: tabBox.screenGeometry.width * 0.15
 
             LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
             LayoutMirroring.childrenInherit: true
