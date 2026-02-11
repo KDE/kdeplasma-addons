@@ -354,6 +354,7 @@ Item {
             PropertyChanges {
                 target: label
                 horizontalAlignment: Text.AlignHLeft
+                verticalAlignment: Text.AlignVCenter
                 visible: true
                 elide: Text.ElideRight
                 anchors.leftMargin: Kirigami.Units.smallSpacing
