@@ -132,10 +132,6 @@ PlasmoidItem {
 
                 onClicked: cb();
 
-                PlasmaComponents3.ToolTip.visible: hovered
-                PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
-                PlasmaComponents3.ToolTip.text: text
-
                 PlasmaComponents3.ToolTip {
                     id: tooltip
                 }
@@ -291,8 +287,8 @@ PlasmoidItem {
                     }
                 }
 
-                onNavigationRequested: request => {
-                    var url = request.url;
+                onNewWindowRequested: request => {
+                    var url = request.requestedUrl;
 
                     if (request.userInitiated) {
                         Qt.openUrlExternally(url);
