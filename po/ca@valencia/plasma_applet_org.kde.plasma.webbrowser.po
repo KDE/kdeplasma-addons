@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-24 00:44+0000\n"
+"POT-Creation-Date: 2026-02-12 00:44+0000\n"
 "PO-Revision-Date: 2025-11-24 09:05+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -166,44 +166,44 @@ msgstr "Ves fins a l'inici"
 msgid "Open Default URL"
 msgstr "Obri un URL predeterminat"
 
-#: qml/main.qml:159
+#: qml/main.qml:155
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Para la càrrega d'esta pàgina"
 
-#: qml/main.qml:159
+#: qml/main.qml:155
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Torna a carregar esta pàgina"
 
-#: qml/main.qml:173
+#: qml/main.qml:169
 #, kde-format
 msgctxt ""
 "@action:button keep this widget's pop-up open until explicitly dismissed"
 msgid "Keep open"
 msgstr "Mantín obert"
 
-#: qml/main.qml:227
+#: qml/main.qml:223
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Obri l'enllaç en un navegador"
 
-#: qml/main.qml:233
+#: qml/main.qml:229
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copia l'adreça de l'enllaç"
 
-#: qml/main.qml:300
+#: qml/main.qml:296
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "S'ha blocat la finestra emergent"
 
-#: qml/main.qml:301
+#: qml/main.qml:297
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

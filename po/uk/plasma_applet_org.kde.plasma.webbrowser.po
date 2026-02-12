@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-24 00:44+0000\n"
+"POT-Creation-Date: 2026-02-12 00:44+0000\n"
 "PO-Revision-Date: 2025-11-24 13:50+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -165,44 +165,44 @@ msgstr "Перейти до домівки"
 msgid "Open Default URL"
 msgstr "Відкрити типову адресу"
 
-#: qml/main.qml:159
+#: qml/main.qml:155
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Зупинити завантаження цієї сторінки"
 
-#: qml/main.qml:159
+#: qml/main.qml:155
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Перезавантажити цю сторінку"
 
-#: qml/main.qml:173
+#: qml/main.qml:169
 #, kde-format
 msgctxt ""
 "@action:button keep this widget's pop-up open until explicitly dismissed"
 msgid "Keep open"
 msgstr "Тримати відкритим"
 
-#: qml/main.qml:227
+#: qml/main.qml:223
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Відкрити посилання у Інтернет-навігаторі"
 
-#: qml/main.qml:233
+#: qml/main.qml:229
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Скопіювати адресу посилання"
 
-#: qml/main.qml:300
+#: qml/main.qml:296
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Заблоковано контекстне вікно"
 
-#: qml/main.qml:301
+#: qml/main.qml:297
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

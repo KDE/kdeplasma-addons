@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-24 00:44+0000\n"
+"POT-Creation-Date: 2026-02-12 00:44+0000\n"
 "PO-Revision-Date: 2025-11-24 13:27+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -164,44 +164,44 @@ msgstr "Vai alla pagina principale"
 msgid "Open Default URL"
 msgstr "Apri URL predefinito"
 
-#: qml/main.qml:159
+#: qml/main.qml:155
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Ferma il caricamento di questa pagina"
 
-#: qml/main.qml:159
+#: qml/main.qml:155
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Ricarica questa pagina"
 
-#: qml/main.qml:173
+#: qml/main.qml:169
 #, kde-format
 msgctxt ""
 "@action:button keep this widget's pop-up open until explicitly dismissed"
 msgid "Keep open"
 msgstr "Mantieni aperto"
 
-#: qml/main.qml:227
+#: qml/main.qml:223
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Apri collegamento nel browser"
 
-#: qml/main.qml:233
+#: qml/main.qml:229
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Copia l'indirizzo del collegamento"
 
-#: qml/main.qml:300
+#: qml/main.qml:296
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Popup bloccato"
 
-#: qml/main.qml:301
+#: qml/main.qml:297
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"
