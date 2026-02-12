@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-24 00:44+0000\n"
+"POT-Creation-Date: 2026-02-12 02:41+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -163,44 +163,44 @@ msgstr "转到主页"
 msgid "Open Default URL"
 msgstr "打开默认 URL"
 
-#: qml/main.qml:159
+#: qml/main.qml:155
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "停止加载此页面"
 
-#: qml/main.qml:159
+#: qml/main.qml:155
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "重新加载此页面"
 
-#: qml/main.qml:173
+#: qml/main.qml:169
 #, kde-format
 msgctxt ""
 "@action:button keep this widget's pop-up open until explicitly dismissed"
 msgid "Keep open"
 msgstr "保持打开"
 
-#: qml/main.qml:227
+#: qml/main.qml:223
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "用浏览器打开连接"
 
-#: qml/main.qml:233
+#: qml/main.qml:229
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "复制链接地址"
 
-#: qml/main.qml:300
+#: qml/main.qml:296
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "弹窗已被拦截"
 
-#: qml/main.qml:301
+#: qml/main.qml:297
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"
