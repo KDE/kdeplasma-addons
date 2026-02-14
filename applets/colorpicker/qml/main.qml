@@ -23,9 +23,10 @@ PlasmoidItem {
 
     readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
 
-    readonly property color recentColor: historyModel.count > 0 ? historyModel.get(0).color : "#00000000" // transparent as fallback
+    readonly property color recentColor: hasAnyColors ? historyModel.get(0).color : "#00000000" // transparent as fallback
     readonly property string defaultFormat: Plasmoid.configuration.defaultFormat
     readonly property int maxColorCount: 9
+    readonly property bool hasAnyColors: historyModel.count > 0
 
     preferredRepresentation: compactRepresentation
 

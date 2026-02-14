@@ -17,12 +17,13 @@ PlasmaComponents3.ToolButton {
     property alias color: colorCircle.color
     property alias colorCircle: colorCircle
     property Item loadingIndicator: null
+    required property bool hasColor
 
     // indicate viable drag...
     checked: (dropArea.containsAcceptableDrag && index === 0) || colorButton.pressed || dragHandler.active
     checkable: checked
     display: PlasmaComponents3.AbstractButton.IconOnly
-    text: Logic.formatColor(colorCircle.color, root.defaultFormat)
+    text: hasColor ? Logic.formatColor(colorCircle.color, root.defaultFormat) : i18nc("@info", "No Saved Colors")
 
     Drag.dragType: Drag.Automatic
     Drag.supportedActions: Qt.CopyAction
@@ -36,7 +37,7 @@ PlasmaComponents3.ToolButton {
     PlasmaCore.ToolTipArea {
         anchors.fill: parent
         mainText: colorButton.text
-        subText: i18nc("@info:usagetip", "Middle-click to copy the color code")
+        subText: colorButton.hasColor ? i18nc("@info:usagetip", "Middle-click to copy the color code") : ""
     }
 
     Rectangle {
@@ -100,6 +101,11 @@ PlasmaComponents3.ToolButton {
         TapHandler {
             acceptedButtons: Qt.MiddleButton
             onTapped: (eventPoint, button) => {
+                // Don't bother copying an empty color to the clipboard.
+                if (!root.hasColor) {
+                    return;
+                }
+
                 picker.copyToClipboard(colorButton.text);
             }
         }

@@ -120,10 +120,13 @@ DropArea {
             model: Plasmoid.configuration.compactPreviewCount
 
             delegate: ColorCircle {
+                required property int index
+
                 Layout.preferredWidth: dropArea.buttonSize
                 Layout.preferredHeight: dropArea.buttonSize
 
                 color: historyModel.count > index ? historyModel.get(index).color : "#00000000" // transparent as fallback
+                hasColor: historyModel.count > index
             }
         }
     }
