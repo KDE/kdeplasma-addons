@@ -126,7 +126,6 @@ PlasmoidItem {
                         /*var service = profilesSource.serviceForSource(model["DataEngineSource"])
                         var operation = service.operationDescription("open")
                         var  = service.startOperationCall(operation)*/
-                        console.error(model.profileIdentifier)
                         profilesModel.openProfile(model.profileIdentifier)
                     }
                 }
