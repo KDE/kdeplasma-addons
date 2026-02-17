@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-19 00:44+0000\n"
+"POT-Creation-Date: 2026-02-17 00:47+0000\n"
 "PO-Revision-Date: 2016-12-18 21:56+0100\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -19,7 +19,15 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: qml/ColorCircle.qml:39
+# >> @option:radio When pressing the keyboard shortcut:
+#: qml/ColorCircle.qml:26
+#, fuzzy, kde-format
+#| msgid "Pick a color"
+msgctxt "@info"
+msgid "No Saved Colors"
+msgstr "Изабери боју"
+
+#: qml/ColorCircle.qml:40
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
@@ -91,28 +99,28 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr ""
 
-#: qml/main.qml:121
+#: qml/main.qml:122
 #, fuzzy, kde-format
 #| msgid "Open Color Dialog"
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Отвори дијалог боја"
 
-#: qml/main.qml:126
+#: qml/main.qml:127
 #, fuzzy, kde-format
 #| msgid "Clear History"
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Очисти историјат"
 
-#: qml/main.qml:134
+#: qml/main.qml:135
 #, fuzzy, kde-format
 #| msgid "Clear History"
 msgctxt "@action"
 msgid "View History"
 msgstr "Очисти историјат"
 
-#: qml/main.qml:142
+#: qml/main.qml:143
 #, fuzzy, kde-format
 #| msgid "Copy to Clipboard"
 msgctxt "@title:menu"
@@ -120,46 +128,46 @@ msgid "Copy to Clipboard"
 msgstr "Копирај у клипборд"
 
 # >> @option:radio When pressing the keyboard shortcut:
-#: qml/main.qml:182
+#: qml/main.qml:183
 #, fuzzy, kde-format
 #| msgid "Pick a color"
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Изабери боју"
 
-#: qml/main.qml:182
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr ""
 
-#: qml/main.qml:183
+#: qml/main.qml:184
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr ""
 
-#: qml/main.qml:190
+#: qml/main.qml:191
 #, fuzzy, kde-format
 #| msgid "Pick Color"
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Изабери боју"
 
-#: qml/main.qml:198
+#: qml/main.qml:199
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr ""
 
-#: qml/main.qml:384
+#: qml/main.qml:385
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: qml/main.qml:395
+#: qml/main.qml:396
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-19 00:44+0000\n"
+"POT-Creation-Date: 2026-02-17 00:47+0000\n"
 "PO-Revision-Date: 2023-05-20 08:18+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -19,7 +19,15 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
 
-#: qml/ColorCircle.qml:39
+#: qml/ColorCircle.qml:26
+#, fuzzy, kde-format
+#| msgctxt "@info:usagetip"
+#| msgid "No colors"
+msgctxt "@info"
+msgid "No Saved Colors"
+msgstr "Brak barw"
+
+#: qml/ColorCircle.qml:40
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
@@ -83,43 +91,43 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Podejrzyj liczbę:"
 
-#: qml/main.qml:121
+#: qml/main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Otwórz okno dialogowe barw"
 
-#: qml/main.qml:126
+#: qml/main.qml:127
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Wyczyść historię"
 
-#: qml/main.qml:134
+#: qml/main.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Obejrzyj historię"
 
-#: qml/main.qml:142
+#: qml/main.qml:143
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Skopiuj do schowka"
 
-#: qml/main.qml:182
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Brak barw"
 
-#: qml/main.qml:182
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "Pobieranie barw jest niedostępne przy włączonym kompozytorze"
 
-#: qml/main.qml:183
+#: qml/main.qml:184
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
@@ -128,25 +136,25 @@ msgstr ""
 "Komponowanie zostało ręcznie wyłączone lub zablokowane przez uruchomioną "
 "aplikację"
 
-#: qml/main.qml:190
+#: qml/main.qml:191
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Wybierz barwę"
 
-#: qml/main.qml:198
+#: qml/main.qml:199
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "Ustawienia kompozytora"
 
-#: qml/main.qml:384
+#: qml/main.qml:385
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Skopiowano!"
 
-#: qml/main.qml:395
+#: qml/main.qml:396
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

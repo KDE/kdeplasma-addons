@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-19 00:44+0000\n"
+"POT-Creation-Date: 2026-02-17 00:47+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,7 +18,15 @@ msgstr ""
 "plasma.colorpicker.pot\n"
 "X-Crowdin-File-ID: 43107\n"
 
-#: qml/ColorCircle.qml:39
+#: qml/ColorCircle.qml:26
+#, fuzzy, kde-format
+#| msgctxt "@info:usagetip"
+#| msgid "No colors"
+msgctxt "@info"
+msgid "No Saved Colors"
+msgstr "没有颜色"
+
+#: qml/ColorCircle.qml:40
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
@@ -80,68 +88,68 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "预览数量："
 
-#: qml/main.qml:121
+#: qml/main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "打开颜色对话框"
 
-#: qml/main.qml:126
+#: qml/main.qml:127
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "清除历史"
 
-#: qml/main.qml:134
+#: qml/main.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "查看历史"
 
-#: qml/main.qml:142
+#: qml/main.qml:143
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "复制到剪贴板"
 
-#: qml/main.qml:182
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "没有颜色"
 
-#: qml/main.qml:182
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@info:status when color picking is unavailable"
 msgid "Color picking unavailable when compositing is disabled"
 msgstr "禁用显示特效合成时无法拾取颜色。"
 
-#: qml/main.qml:183
+#: qml/main.qml:184
 #, kde-format
 msgctxt "@info:status when color pick is unavailable"
 msgid ""
 "Compositing has been manually disabled or blocked by a running application"
 msgstr "显示特效合成已被手动禁用，或者已被某个正在运行的应用程序阻止"
 
-#: qml/main.qml:190
+#: qml/main.qml:191
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "拾取颜色"
 
-#: qml/main.qml:198
+#: qml/main.qml:199
 #, kde-format
 msgctxt "@action:button open kwincompositing KCM"
 msgid "Configure Compositing"
 msgstr "配置显示特效合成"
 
-#: qml/main.qml:384
+#: qml/main.qml:385
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "已复制！"
 
-#: qml/main.qml:395
+#: qml/main.qml:396
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
