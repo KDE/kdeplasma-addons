@@ -18,6 +18,8 @@
 
 #include <KSystemClipboard>
 
+#include <limits>
+
 Q_DECLARE_METATYPE(QColor)
 
 QDBusArgument &operator<<(QDBusArgument &argument, const QColor &color)
@@ -64,7 +66,7 @@ void GrabWidget::pick()
                                                       QStringLiteral("/ColorPicker"),
                                                       QStringLiteral("org.kde.kwin.ColorPicker"),
                                                       QStringLiteral("pick"));
-    auto call = QDBusConnection::sessionBus().asyncCall(msg);
+    auto call = QDBusConnection::sessionBus().asyncCall(msg, std::numeric_limits<int>::max());
     QDBusPendingCallWatcher *watcher = new QDBusPendingCallWatcher(call, this);
     connect(watcher, &QDBusPendingCallWatcher::finished, this, [this](QDBusPendingCallWatcher *watcher) {
         watcher->deleteLater();
