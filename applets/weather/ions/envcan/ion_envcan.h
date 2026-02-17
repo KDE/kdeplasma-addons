@@ -157,9 +157,13 @@ private:
     FutureForecast forecastInfoToFutureForecast(const std::shared_ptr<WeatherData::ForecastInfo> &info);
 
     QMap<QString, ConditionIcons> setupConditionIconMappings() const;
+    QMap<QString, ConditionIcons> setupDayConditionIconMappings() const;
+    QMap<QString, ConditionIcons> setupNightConditionIconMappings() const;
     QMap<QString, ConditionIcons> setupForecastIconMappings() const;
 
     QMap<QString, ConditionIcons> const &conditionIcons() const;
+    QMap<QString, ConditionIcons> const &dayConditionIcons() const;
+    QMap<QString, ConditionIcons> const &nightConditionIcons() const;
     QMap<QString, ConditionIcons> const &forecastIcons() const;
 
     // Load and Parse the place XML listing

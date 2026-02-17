@@ -73,6 +73,12 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupConditionIconMappings() co
         {QStringLiteral("sunny"), ClearDay},
         {QStringLiteral("clear"), ClearNight},
 
+        // Cloud coverage conditions (generic - will be overridden at night in updateWeather())
+        {QStringLiteral("partly cloudy"), PartlyCloudyDay},
+        {QStringLiteral("mostly cloudy"), PartlyCloudyDay},
+        {QStringLiteral("decreasing cloud"), FewCloudsDay},
+        {QStringLiteral("fair"), FewCloudsDay},
+
         // Available conditions
         {QStringLiteral("blowing snow"), Snow},
         {QStringLiteral("cloudy"), Overcast},
@@ -155,6 +161,25 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupConditionIconMappings() co
         {QStringLiteral("thunderstorm without precipitation"), Thunderstorm},
         {QStringLiteral("tornado"), NotAvailable},
     };
+}
+
+QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupDayConditionIconMappings() const
+{
+    return setupConditionIconMappings();
+}
+
+QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupNightConditionIconMappings() const
+{
+    auto iconMap = setupConditionIconMappings();
+    
+    // Override day-specific cloud icons with night variants
+    iconMap[QStringLiteral("partly cloudy")] = PartlyCloudyNight;
+    iconMap[QStringLiteral("mostly cloudy")] = PartlyCloudyNight;
+    iconMap[QStringLiteral("decreasing cloud")] = FewCloudsNight;
+    iconMap[QStringLiteral("fair")] = FewCloudsNight;
+    iconMap[QStringLiteral("mainly sunny")] = FewCloudsNight;
+    
+    return iconMap;
 }
 
 QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupForecastIconMappings() const
@@ -409,6 +434,18 @@ QMap<QString, Ion::ConditionIcons> const &EnvCanadaIon::conditionIcons() const
 {
     static QMap<QString, ConditionIcons> const condval = setupConditionIconMappings();
     return condval;
+}
+
+QMap<QString, Ion::ConditionIcons> const &EnvCanadaIon::dayConditionIcons() const
+{
+    static QMap<QString, ConditionIcons> const dayval = setupDayConditionIconMappings();
+    return dayval;
+}
+
+QMap<QString, Ion::ConditionIcons> const &EnvCanadaIon::nightConditionIcons() const
+{
+    static QMap<QString, ConditionIcons> const nightval = setupNightConditionIconMappings();
+    return nightval;
 }
 
 QMap<QString, Ion::ConditionIcons> const &EnvCanadaIon::forecastIcons() const
@@ -1583,20 +1620,8 @@ void EnvCanadaIon::updateWeather()
         lastObservation.setCurrentConditions(i18nc("weather condition", m_weatherData->condition.toUtf8().data()));
     }
 
-    QMap<QString, ConditionIcons> conditionList = conditionIcons();
-
-    if (m_weatherData->isNight) {
-        conditionList.insert(QStringLiteral("decreasing cloud"), FewCloudsNight);
-        conditionList.insert(QStringLiteral("mostly cloudy"), PartlyCloudyNight);
-        conditionList.insert(QStringLiteral("partly cloudy"), PartlyCloudyNight);
-        conditionList.insert(QStringLiteral("fair"), FewCloudsNight);
-    } else {
-        conditionList.insert(QStringLiteral("decreasing cloud"), FewCloudsDay);
-        conditionList.insert(QStringLiteral("mostly cloudy"), PartlyCloudyDay);
-        conditionList.insert(QStringLiteral("partly cloudy"), PartlyCloudyDay);
-        conditionList.insert(QStringLiteral("fair"), FewCloudsDay);
-    }
-
+    // Use day or night condition icon mappings based on whether it's night
+    const auto &conditionList = m_weatherData->isNight ? nightConditionIcons() : dayConditionIcons();
     lastObservation.setConditionIcon(getWeatherIcon(conditionList, m_weatherData->condition));
 
     if (!qIsNaN(m_weatherData->temperature)) {
