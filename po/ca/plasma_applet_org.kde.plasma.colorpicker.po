@@ -1,16 +1,16 @@
 # Translation of plasma_applet_org.kde.plasma.colorpicker.po to Catalan
-# Copyright (C) 2015-2023 This_file_is_part_of_KDE
+# Copyright (C) 2015-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
 # SPDX-FileCopyrightText: 2015 Antoni Bella Pérez <antonibella5@yahoo.com>
-# SPDX-FileCopyrightText: 2016, 2018, 2022, 2023 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2016, 2018, 2022, 2023, 2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-17 00:47+0000\n"
-"PO-Revision-Date: 2023-09-20 13:08+0200\n"
+"PO-Revision-Date: 2026-02-17 09:42+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -19,15 +19,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: qml/ColorCircle.qml:26
-#, fuzzy, kde-format
-#| msgctxt "@info:usagetip"
-#| msgid "No colors"
+#, kde-format
 msgctxt "@info"
 msgid "No Saved Colors"
-msgstr "Sense color"
+msgstr "Sense colors desats"
 
 #: qml/ColorCircle.qml:40
 #, kde-format
