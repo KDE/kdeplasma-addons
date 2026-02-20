@@ -31,6 +31,3 @@ msgstr "Taispeánann sé seo gach seisiún d'eagarthóir Kate i do chuntas."
 #, kde-format
 msgid "Open Kate Session"
 msgstr "Oscail Seisiún Kate"
-
-#~ msgid "Kate Sessions"
-#~ msgstr "Seisiúin Kate"

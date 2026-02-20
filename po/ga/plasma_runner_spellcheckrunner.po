@@ -35,17 +35,15 @@ msgid "Checks the spelling of :q:."
 msgstr "Deimhnigh litriú i :q:."
 
 #: spellcheck.cpp:211
-#, fuzzy, kde-format
-#| msgid "Correct"
+#, kde-format
 msgctxt "Term is spelled correctly"
 msgid "Correct"
-msgstr "Ceart"
+msgstr ""
 
 #: spellcheck.cpp:220
-#, fuzzy, kde-format
-#| msgid "Suggested words: %1"
+#, kde-format
 msgid "Suggested term"
-msgstr "Focail mholta: %1"
+msgstr ""
 
 #: spellcheck.cpp:250
 #, kde-kuit-format
@@ -78,16 +76,3 @@ msgstr "&Truicearfhocal:"
 #, kde-format
 msgid "Configure Dictionaries…"
 msgstr ""
-
-#~ msgid "Could not find a dictionary."
-#~ msgstr "Níorbh fhéidir foclóir a aimsiú."
-
-#, fuzzy
-#~| msgctxt "seperator for a list of words"
-#~| msgid ", "
-#~ msgctxt "separator for a list of words"
-#~ msgid ", "
-#~ msgstr ", "
-
-#~ msgid "Spell Checker"
-#~ msgstr "Litreoir"

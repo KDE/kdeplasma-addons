@@ -18,11 +18,10 @@ msgstr ""
 "3 : 4\n"
 
 #: main.qml:69
-#, fuzzy, kde-format
-#| msgid "Konsole Profiles"
+#, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
-msgstr "Próifílí Konsole"
+msgstr ""
 
 #: main.qml:90
 #, kde-format

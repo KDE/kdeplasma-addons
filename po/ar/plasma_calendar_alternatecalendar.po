@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
+# SPDX-FileCopyrightText: 2022, 2023, 2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2023-05-21 09:53+0400\n"
+"PO-Revision-Date: 2026-02-19 09:42+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,6 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: calendarsystem.h:50
 #, kde-format
@@ -103,12 +104,12 @@ msgstr "إزاحة التاريخ:"
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
-msgstr[0] "لا شيء"
-msgstr[1] "يوم واحد"
-msgstr[2] "يومين"
-msgstr[3] "%1 أيام"
-msgstr[4] "%1 يومًا"
-msgstr[5] "%1 يوم"
+msgstr[0] "‏%1"
+msgstr[1] "‏%1 يوم"
+msgstr[2] "‏%1 يوم"
+msgstr[3] "‏%1 أيام"
+msgstr[4] "‏%1 يومًا"
+msgstr[5] "‏%1 يوم"
 
 #: config/qml/AlternateCalendarConfig.qml:91
 #, kde-format
@@ -126,13 +127,13 @@ msgctxt ""
 "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
 "number %4 Full date in Hebrew"
 msgid "%1 %2, %3 (%4)"
-msgstr "%1 %2، %3 (%4)"
+msgstr "‏%1 %2، %3‏ (%4)"
 
 #: provider/indiancalendar.cpp:70
 #, kde-format
 msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 msgid "%1 %2, %3"
-msgstr "%1 %2، %3"
+msgstr "‏%1 %2، %3"
 
 #: provider/islamiccalendar.cpp:130
 #, kde-format
@@ -140,13 +141,13 @@ msgctxt ""
 "@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 "
 "Islamic calendar date in Arabic"
 msgid "%1 %2, %3 (%4)"
-msgstr "%1 %2، %3 (%4)"
+msgstr "‏%1 %2، %3‏ ‏(%4)"
 
 #: provider/qtcalendar.cpp:55
 #, kde-format
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
-msgstr "%1 %2، %3"
+msgstr "‏%1 ‏%2، ‏%3"
 
 #~ msgctxt "Month name in Indian National Calendar"
 #~ msgid "Chaitra"
