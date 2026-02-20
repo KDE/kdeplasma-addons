@@ -52,10 +52,9 @@ msgstr "Ailias:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_hex)
 #: charrunner_config.ui:61
-#, fuzzy, kde-format
-#| msgid "Hex Code:"
+#, kde-format
 msgid "Hex code:"
-msgstr "Cód Heics:"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QTreeWidget, list)
 #: charrunner_config.ui:89

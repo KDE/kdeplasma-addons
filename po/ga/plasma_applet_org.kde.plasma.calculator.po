@@ -64,23 +64,3 @@ msgstr "+"
 msgctxt "Text of the equals button"
 msgid "="
 msgstr "="
-
-#~ msgctxt "The − button of the calculator"
-#~ msgid "−"
-#~ msgstr "−"
-
-#~ msgid "ERROR"
-#~ msgstr "EARRÁID"
-
-#~ msgid "ERROR: DIV BY 0"
-#~ msgstr "EARRÁID: ROINNTE AG NIALAS"
-
-#~ msgid "Copy"
-#~ msgstr "Cóipeáil"
-
-#~ msgid "Paste"
-#~ msgstr "Greamaigh"
-
-#~ msgctxt "The ∕ button of the calculator"
-#~ msgid "∕"
-#~ msgstr "÷"

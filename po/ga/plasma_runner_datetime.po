@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma_runner_datetime\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2025-12-25 01:09+0000\n"
+"PO-Revision-Date: 2025-12-25 04:00+0000\n"
 "Last-Translator: Charlotte <altronic25@protonmail.com>\n"
 "Language-Team: Irish\n"
 "Language: ga\n"
@@ -47,18 +47,16 @@ msgid " <timezone>"
 msgstr " <timezone>"
 
 #: datetimerunner.cpp:32
-#, fuzzy, kde-format
-#| msgid "Displays the current date in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current date and difference to system date in a given timezone"
-msgstr "Taispeánann sé seo an dáta inniu i gcrios ama roghnaithe"
+msgstr ""
 
 #: datetimerunner.cpp:34
-#, fuzzy, kde-format
-#| msgid "Displays the current time in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current time and difference to system time in a given timezone"
-msgstr "Taispeánann sé seo an t-am i gcrios ama roghnaithe"
+msgstr ""
 
 #: datetimerunner.cpp:48
 #, kde-format
@@ -117,9 +115,3 @@ msgctxt ""
 "as in Berlin"
 msgid "no time difference"
 msgstr ""
-
-#~ msgid "The date in %1 is %2"
-#~ msgstr "An Lá Inniu in %1: %2"
-
-#~ msgid "The current time in %1 is %2"
-#~ msgstr "An t-am anois i %1: %2"
