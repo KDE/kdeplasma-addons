@@ -56,18 +56,16 @@ msgid " <timezone>"
 msgstr " <timezone>"
 
 #: datetimerunner.cpp:37
-#, fuzzy, kde-format
-#| msgid "Displays the current date in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current date and difference to system date in a given timezone"
-msgstr "Taispeánann sé seo an dáta inniu i gcrios ama roghnaithe"
+msgstr ""
 
 #: datetimerunner.cpp:39
-#, fuzzy, kde-format
-#| msgid "Displays the current time in a given timezone"
+#, kde-format
 msgid ""
 "Displays the current time and difference to system time in a given timezone"
-msgstr "Taispeánann sé seo an t-am i gcrios ama roghnaithe"
+msgstr ""
 
 #: datetimerunner.cpp:40
 #, kde-format
@@ -158,9 +156,3 @@ msgctxt ""
 "as in Berlin"
 msgid "no time difference"
 msgstr ""
-
-#~ msgid "The date in %1 is %2"
-#~ msgstr "An Lá Inniu in %1: %2"
-
-#~ msgid "The current time in %1 is %2"
-#~ msgstr "An t-am anois i %1: %2"
