@@ -111,13 +111,13 @@ msgstr "Colla"
 #: qml/main.qml:334
 #, kde-format
 msgid "Paste with Full Formatting"
-msgstr "Colla con plen formattation"
+msgstr "Colla con plen fnormatation"
 
 #: qml/main.qml:341
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr "Remove formattation"
+msgstr "Remove fnormatation"
 
 #: qml/main.qml:356
 #, kde-format
