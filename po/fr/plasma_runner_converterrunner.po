@@ -13,8 +13,8 @@ msgstr ""
 "Project-Id-Version: plasma_runner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2021-01-11 17:03+0100\n"
-"Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
+"PO-Revision-Date: 2023-05-05 16:16+0200\n"
+"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
@@ -27,7 +27,11 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 
 #: converterrunner.cpp:33
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
+#| "in] unit\". You can use the Unit converter applet to find all available "
+#| "units."
 msgid ""
 "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
 "in] unit\". You can use the Unit converter applet to find all available "
@@ -41,7 +45,7 @@ msgstr ""
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
-msgstr "dans ; vers ; en"
+msgstr "dans;vers;en"
 
 #: converterrunner.cpp:50
 #, kde-format
