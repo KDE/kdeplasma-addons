@@ -2780,7 +2780,7 @@ consteval double coefficient()
     return secondsToRadians(0.0001);
 }
 
-void getEarthNutationParameter(EarthNutationParameter &earthNutationParameter, double T)
+inline void getEarthNutationParameter(EarthNutationParameter &earthNutationParameter, double T)
 {
     const double T2 = T * T;
     const double T3 = T2 * T;
@@ -2792,7 +2792,7 @@ void getEarthNutationParameter(EarthNutationParameter &earthNutationParameter, d
     earthNutationParameter.Omega = degreesToRadians(125.04452 - 1934.136261 * T + 0.0020708 * T2 + T3 / 450000.0);
 }
 
-double calcEarthLongitudeNutation(double T)
+inline double calcEarthLongitudeNutation(double T)
 {
     EarthNutationParameter radian;
     getEarthNutationParameter(radian, T);
@@ -2830,7 +2830,7 @@ constexpr double getSunRadiusForEarth(double julianDay)
     return R;
 }
 
-double getEarthEclipticLongitudeForSun(double jd)
+inline double getEarthEclipticLongitudeForSun(double jd)
 {
     double l = getSunEclipticLongitudeForEarth(jd);
     const double b = getSunEclipticLatitudeForEarth(jd);
@@ -2845,7 +2845,7 @@ double getEarthEclipticLongitudeForSun(double jd)
     return l;
 }
 
-void getMoonEclipticParameter(MoonEclipticParameter &moonEclipticParameter, double T)
+inline void getMoonEclipticParameter(MoonEclipticParameter &moonEclipticParameter, double T)
 {
     double T2 = T * T;
     double T3 = T2 * T;
@@ -2859,7 +2859,7 @@ void getMoonEclipticParameter(MoonEclipticParameter &moonEclipticParameter, doub
     moonEclipticParameter.E = 1 - 0.002516 * T - 0.0000074 * T2;
 }
 
-double calcMoonECLongitudePeriodic(MoonEclipticParameter &moonEclipticParameter)
+inline double calcMoonECLongitudePeriodic(MoonEclipticParameter &moonEclipticParameter)
 {
     double EI = 0.0;
     for (std::size_t i = 0; i < s_moonLongitude.size(); i++) {
@@ -2870,7 +2870,7 @@ double calcMoonECLongitudePeriodic(MoonEclipticParameter &moonEclipticParameter)
     return EI;
 }
 
-double calcMoonLongitudePerturbation(double T, const MoonEclipticParameter &moonEclipticParameter)
+inline double calcMoonLongitudePerturbation(double T, const MoonEclipticParameter &moonEclipticParameter)
 {
     const double A1 = mod2Pi(degreesToRadians(119.75 + 131.849 * T));
     const double A2 = mod2Pi(degreesToRadians(53.09 + 479264.290 * T));
@@ -2878,7 +2878,7 @@ double calcMoonLongitudePerturbation(double T, const MoonEclipticParameter &moon
     return 3958.0 * std::sin(A1) + 1962.0 * std::sin(moonEclipticParameter.Lp - moonEclipticParameter.F) + 318.0 * std::sin(A2);
 }
 
-double getMoonEclipticLongitudeEC(double julianDay)
+inline double getMoonEclipticLongitudeEC(double julianDay)
 {
     MoonEclipticParameter radian;
     double T = getJulianCentury(julianDay);
@@ -2890,7 +2890,7 @@ double getMoonEclipticLongitudeEC(double julianDay)
     return longitude;
 }
 
-double NewtonIteration(double angle, double x0)
+inline double NewtonIteration(double angle, double x0)
 {
     constexpr double EPSILON = 1e-7;
     constexpr double DELTA = 5e-6;
@@ -2923,7 +2923,7 @@ double NewtonIteration(double angle, double x0)
 }
 
 // From http://eclipse.gsfc.nasa.gov/SEhelp/deltatpoly2004.html
-double getDeltaT(int year, int month)
+inline double getDeltaT(int year, int month)
 {
     double y = double(year) + (double(month) - 0.5) / 12;
 
@@ -3016,7 +3016,7 @@ double getDeltaT(int year, int month)
     }
 }
 
-int64_t toJulianDay(int year, int month, int day)
+inline int64_t toJulianDay(int year, int month, int day)
 {
 #if __has_cpp_attribute(assume)
     [[assume(year > 0 && day > 0)]];
@@ -3028,7 +3028,7 @@ int64_t toJulianDay(int year, int month, int day)
     return day + (153 * m + 2) / 5 + 365 * y + y / 4 - y / 100 + y / 400 - 32045;
 }
 
-void getDateFromJulianDay(double julianDay, int &yy, int &mm, int &dd)
+inline void getDateFromJulianDay(double julianDay, int &yy, int &mm, int &dd)
 {
     /*
      * This algorithm is taken from
