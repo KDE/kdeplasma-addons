@@ -1,23 +1,24 @@
 # SPDX-FileCopyrightText: 2007, 2010 Thomas Reitelbach <tr@erdfunkstelle.de>
-# SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2022 Frederik Schwarzer <schwarzer@kde.org>
-# SPDX-FileCopyrightText: 2009, 2011, 2015, 2018, 2019, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2008-2011, 2022 Frederik Schwarzer <schwarzer@kde.org>
+# SPDX-FileCopyrightText: 2009, 2011, 2015, 2018-2021 Burkhard Lück <lueck@hube-lueck.de>
 # SPDX-FileCopyrightText: 2010 Johannes Obermayr <johannesobermayr@gmx.de>
-# SPDX-FileCopyrightText: 2010, 2011 Panagiotis Papadopoulos <pano_90@gmx.net>
+# SPDX-FileCopyrightText: 2010-2011 Panagiotis Papadopoulos <pano_90@gmx.net>
 # SPDX-FileCopyrightText: 2011 Torbjörn Klatt <torbjoern.k@googlemail.com>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:44+0000\n"
-"PO-Revision-Date: 2022-07-23 22:38+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2026-02-20 01:45+0100\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.07.70\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #: comicdata.cpp:76
 #, kde-format
@@ -29,7 +30,7 @@ msgstr "Nr. %1"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
-msgstr "Zu Comic springen ..."
+msgstr "Zu Comic springen …"
 
 #: qml/ComicBottomInfo.qml:103
 #, kde-format
@@ -121,12 +122,10 @@ msgid "Opens full-size view"
 msgstr ""
 
 #: qml/configComics.qml:27
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
-msgstr "Neue Comics holen ..."
+msgstr "Neue holen …"
 
 #: qml/configComics.qml:70
 #, fuzzy, kde-format
@@ -136,12 +135,10 @@ msgid "No comics installed"
 msgstr "Einrichtung von Comic"
 
 #: qml/configComics.qml:72
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
-msgstr "Neue Comics holen ..."
+msgstr "Comics holen …"
 
 #: qml/configComics.qml:86
 #, kde-format
@@ -265,7 +262,7 @@ msgstr "Zum &aktuellen Comic springen"
 #, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
-msgstr "Zu Comic springen ..."
+msgstr "Zu Comic springen …"
 
 #: qml/main.qml:112
 #, kde-format
@@ -283,7 +280,7 @@ msgstr "&Webseite des Shops besuchen"
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr "Comic &speichern unter ..."
+msgstr "Comic &speichern unter …"
 
 #: qml/main.qml:131
 #, kde-format

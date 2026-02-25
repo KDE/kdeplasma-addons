@@ -1,20 +1,21 @@
-# SPDX-FileCopyrightText: 2015, 2018, 2019 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2015, 2018-2019 Burkhard Lück <lueck@hube-lueck.de>
 # SPDX-FileCopyrightText: 2016 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2022 Alois Spitzbart <spitz234@hotmail.com>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2022-09-24 10:42+0200\n"
-"Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
+"PO-Revision-Date: 2026-02-20 01:41+0100\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.08.0\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #: config.qml:12
 #, kde-format
@@ -79,13 +80,13 @@ msgstr "%1 starten"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
-msgstr "Starter hinzufügen ..."
+msgstr "Starter hinzufügen …"
 
 #: IconItem.qml:275
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
-msgstr "Starter bearbeiten ..."
+msgstr "Starter bearbeiten …"
 
 #: IconItem.qml:281
 #, kde-format
@@ -119,7 +120,7 @@ msgstr "Ausgeblendete Symbole anzeigen"
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"
-msgstr "Starter hinzufügen ..."
+msgstr "Starter hinzufügen …"
 
 #~ msgctxt "@title:group"
 #~ msgid "Arrangement"
