@@ -4,7 +4,7 @@
     SPDX-License-Identifier: GPL-2.0-or-later
 */
 
-#include "vietnamesecalendar.hpp"
+#include "vietnamesecalendar.h"
 
 #include "icucalendar_p.h"
 #include "solarutils.h"
@@ -343,7 +343,11 @@ bool VietnameseCalendarProviderPrivate::setDate(const QDate &date)
     const auto lunarDate = getLunarDate(date);
 
     m_calendar->clear(); // Clear existing time to avoid carry-over "noise".
-    m_calendar->set(UCAL_YEAR, lunarDate.year + 2637); // Calculate from Chinese Calendar BCE.
+
+    // Calculate the Chinese year from Gregorian year, since the lunar date calculation returns the Gregorian one.
+    // 2637 BCE epoch was the first year of the Chinese calendar in Gregorian calendar used by ICU.
+    m_calendar->set(UCAL_YEAR, lunarDate.year + 2637);
+
     m_calendar->set(UCAL_MONTH, lunarDate.month - 1); // Zero-index month.
     m_calendar->set(UCAL_DATE, lunarDate.day);
     m_calendar->set(UCAL_IS_LEAP_MONTH, lunarDate.isLeapMonth ? 1 : 0);

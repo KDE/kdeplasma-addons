@@ -18,7 +18,7 @@
 #include "provider/hebrewcalendar.h"
 #include "provider/indiancalendar.h"
 #include "provider/islamiccalendar.h"
-#include "provider/vietnamesecalendar.hpp"
+#include "provider/vietnamesecalendar.h"
 #endif
 
 using namespace Qt::StringLiterals;
