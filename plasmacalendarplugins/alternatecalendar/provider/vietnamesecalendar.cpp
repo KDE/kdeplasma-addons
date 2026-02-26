@@ -55,9 +55,9 @@ struct LunarDate {
 };
 
 std::shared_mutex s_cacheMutex;
-constinit QHash<int /* k-index */, double> g_winterSolsticeCache;
-constinit QHash<int /* k-index */, double> g_newMoonCache;
-constinit QHash<QDate, LunarDate> g_lunarDateCache;
+constinit QHash<int /* k-index */, double> s_winterSolsticeCache;
+constinit QHash<int /* k-index */, double> s_newMoonCache;
+constinit QHash<QDate, LunarDate> s_lunarDateCache;
 
 /*!
     \brief Get the JDE for the might of \a{dayIndex}.
@@ -151,8 +151,8 @@ double getNewMoonByIndex(int k)
 {
     {
         std::shared_lock lock(s_cacheMutex);
-        if (g_newMoonCache.contains(k)) {
-            return g_newMoonCache.value(k);
+        if (s_newMoonCache.contains(k)) {
+            return s_newMoonCache.value(k);
         }
     }
 
@@ -160,7 +160,7 @@ double getNewMoonByIndex(int k)
 
     {
         std::unique_lock lock(s_cacheMutex);
-        g_newMoonCache.insert(k, value);
+        s_newMoonCache.insert(k, value);
     }
 
     return value;
@@ -179,8 +179,8 @@ double getWinterSolsticeJDE(int year)
 {
     {
         std::shared_lock lock(s_cacheMutex);
-        if (g_winterSolsticeCache.contains(year)) {
-            return g_winterSolsticeCache.value(year);
+        if (s_winterSolsticeCache.contains(year)) {
+            return s_winterSolsticeCache.value(year);
         }
     }
 
@@ -189,7 +189,7 @@ double getWinterSolsticeJDE(int year)
 
     {
         std::unique_lock lock(s_cacheMutex);
-        g_winterSolsticeCache.insert(year, value);
+        s_winterSolsticeCache.insert(year, value);
     }
 
     return value;
@@ -243,8 +243,8 @@ LunarDate getLunarDate(const QDate &date)
 {
     {
         std::shared_lock lock(s_cacheMutex);
-        if (g_lunarDateCache.contains(date)) {
-            return g_lunarDateCache[date];
+        if (s_lunarDateCache.contains(date)) {
+            return s_lunarDateCache[date];
         }
     }
 
@@ -302,7 +302,7 @@ LunarDate getLunarDate(const QDate &date)
 
     {
         std::unique_lock lock(s_cacheMutex);
-        g_lunarDateCache[date] = lunarDate;
+        s_lunarDateCache[date] = lunarDate;
     }
 
     return lunarDate;
