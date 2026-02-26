@@ -313,8 +313,7 @@ class VietnameseCalendarProviderPrivate : public ICUCalendarPrivate
 {
     Q_DISABLE_COPY(VietnameseCalendarProviderPrivate)
 
-    const icu::Locale m_nativeLocale;
-    const icu::Locale m_vietnameseLocale;
+    const icu::Locale m_locale;
 
 public:
     explicit VietnameseCalendarProviderPrivate();
@@ -324,17 +323,15 @@ public:
     bool isLeapMonth() const;
 
     QString formattedDateString(const icu::UnicodeString &str) const;
-    QString formattedDateStringInNativeLanguage(const icu::UnicodeString &str) const;
 
     QCalendar::YearMonthDay fromGregorian(const QDate &date);
     CalendarEvents::CalendarEventsPlugin::SubLabel subLabel(const QDate &date);
 };
 
 VietnameseCalendarProviderPrivate::VietnameseCalendarProviderPrivate()
-    : m_nativeLocale{QLocale::system().name().toLatin1().constData(), nullptr, nullptr, "calendar=chinese"}
-    , m_vietnameseLocale{"vi", nullptr, nullptr, "calendar=chinese"}
+    : m_locale{QLocale::system().name().toLatin1().constData(), nullptr, nullptr, "calendar=chinese"}
 {
-    m_calendar.reset(icu::Calendar::createInstance(m_nativeLocale, m_errorCode));
+    m_calendar.reset(icu::Calendar::createInstance(m_locale, m_errorCode));
 }
 
 bool VietnameseCalendarProviderPrivate::setDate(const QDate &date)
@@ -369,18 +366,7 @@ QString VietnameseCalendarProviderPrivate::formattedDateString(const icu::Unicod
 {
     UErrorCode errorCode = U_ZERO_ERROR;
     icu::UnicodeString dateString;
-    icu::SimpleDateFormat formatter(str, m_vietnameseLocale, errorCode);
-    formatter.setCalendar(*m_calendar);
-    formatter.format(m_calendar->getTime(errorCode), dateString);
-
-    return QStringView(dateString.getBuffer(), dateString.length()).toString();
-}
-
-QString VietnameseCalendarProviderPrivate::formattedDateStringInNativeLanguage(const icu::UnicodeString &str) const
-{
-    UErrorCode errorCode = U_ZERO_ERROR;
-    icu::UnicodeString dateString;
-    icu::SimpleDateFormat formatter(str, m_nativeLocale, errorCode);
+    icu::SimpleDateFormat formatter(str, m_locale, errorCode);
     formatter.setCalendar(*m_calendar);
     formatter.format(m_calendar->getTime(errorCode), dateString);
 
@@ -407,19 +393,16 @@ CalendarEvents::CalendarEventsPlugin::SubLabel VietnameseCalendarProviderPrivate
     sublabel.priority = CalendarEvents::CalendarEventsPlugin::SubLabelPriority::Low;
 
     sublabel.dayLabel = QString::number(day());
-    sublabel.monthLabel = formattedDateStringInNativeLanguage("MMMM");
-    sublabel.yearLabel = isLocaleVietnamese ? formattedDateString("U r") : formattedDateStringInNativeLanguage("U r");
+    sublabel.monthLabel = formattedDateString("MMMM");
+    sublabel.yearLabel = formattedDateString("U r");
 
-    const auto vietnameseLabel = formattedDateString("'Ngày' d 'tháng' MMMM 'năm' U r");
-
-    sublabel.label = isLocaleVietnamese ? vietnameseLabel
+    sublabel.label = isLocaleVietnamese ? formattedDateString("'Ngày' d 'tháng' MMMM 'năm' U r")
                                         : i18ndc("plasma_calendar_alternatecalendar",
-                                                 "%1 Day number %2 Month number with leap %3 Year number with ganzhi name %4 Full date in Vietnamese",
-                                                 "%1 %2, %3 (%4)",
+                                                 "%1 Day number %2 Month number with leap %3 Year number with ganzhi name",
+                                                 "%1 %2, %3",
                                                  sublabel.dayLabel,
                                                  sublabel.monthLabel,
-                                                 sublabel.yearLabel,
-                                                 vietnameseLabel);
+                                                 sublabel.yearLabel);
 
     return sublabel;
 }
