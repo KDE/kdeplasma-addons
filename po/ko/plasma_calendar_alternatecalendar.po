@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-02-27 00:45+0000\n"
 "PO-Revision-Date: 2023-07-25 00:54+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 22.12.3\n"
 
-#: calendarsystem.h:50
+#: calendarsystem.h:51
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Julian"
 msgstr "율리우스력"
 
-#: calendarsystem.h:54
+#: calendarsystem.h:55
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Milankovic"
 msgstr "밀란코비치력(개정 율리우스력)"
 
-#: calendarsystem.h:58
+#: calendarsystem.h:59
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Solar Hijri Calendar (Persian)"
 msgstr "페르시아 양력"
 
-#: calendarsystem.h:62
+#: calendarsystem.h:63
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -43,7 +43,7 @@ msgctxt ""
 msgid "Islamic Calendar (Astronomical)"
 msgstr "이슬람 달력(천문학)"
 
-#: calendarsystem.h:66
+#: calendarsystem.h:67
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -51,7 +51,7 @@ msgctxt ""
 msgid "The Islamic Civil Calendar (Tabular)"
 msgstr "이슬람 민간력(계산적)"
 
-#: calendarsystem.h:70
+#: calendarsystem.h:71
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -59,23 +59,31 @@ msgctxt ""
 msgid "Islamic Calendar (Umm al-Qura)"
 msgstr "이슬람 달력(움 알쿠라)"
 
-#: calendarsystem.h:74
+#: calendarsystem.h:75
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Chinese Lunar Calendar"
 msgstr "중국 음력"
 
-#: calendarsystem.h:78
+#: calendarsystem.h:79
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Indian National Calendar"
 msgstr "인도 국민력"
 
-#: calendarsystem.h:82
+#: calendarsystem.h:83
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
 msgstr "히브리 달력"
+
+#: calendarsystem.h:87
+#, fuzzy, kde-format
+#| msgctxt "@item:inlist"
+#| msgid "Chinese Lunar Calendar"
+msgctxt "@item:inlist"
+msgid "Vietnamese Lunar Calendar"
+msgstr "중국 음력"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -137,5 +145,14 @@ msgstr "%3년 %2 %1일(%4)"
 #: provider/qtcalendar.cpp:55
 #, kde-format
 msgctxt "@label %1 day %2 month name %3 year"
+msgid "%1 %2, %3"
+msgstr "%3년 %2 %1일"
+
+#: provider/vietnamesecalendar.cpp:406
+#, fuzzy, kde-format
+#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
+#| msgid "%1 %2, %3"
+msgctxt ""
+"%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
 msgid "%1 %2, %3"
 msgstr "%3년 %2 %1일"

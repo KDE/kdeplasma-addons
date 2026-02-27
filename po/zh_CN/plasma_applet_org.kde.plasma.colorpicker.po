@@ -19,12 +19,10 @@ msgstr ""
 "X-Crowdin-File-ID: 43107\n"
 
 #: qml/ColorCircle.qml:26
-#, fuzzy, kde-format
-#| msgctxt "@info:usagetip"
-#| msgid "No colors"
+#, kde-format
 msgctxt "@info"
 msgid "No Saved Colors"
-msgstr "没有颜色"
+msgstr ""
 
 #: qml/ColorCircle.qml:40
 #, kde-format

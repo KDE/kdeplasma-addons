@@ -2,14 +2,14 @@
 # Copyright (C) 2009 This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2009, 2010, 2025 Sveinn í Felli <sveinki@nett.is>
+# SPDX-FileCopyrightText: 2009, 2010, 2025, 2026 Sveinn í Felli <sveinki@nett.is>
 # Guðmundur Erlingsson <gudmundure@gmail.com>, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-17 00:47+0000\n"
-"PO-Revision-Date: 2025-10-23 09:18+0000\n"
+"PO-Revision-Date: 2026-02-26 11:19+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -23,12 +23,10 @@ msgstr ""
 "\n"
 
 #: qml/ColorCircle.qml:26
-#, fuzzy, kde-format
-#| msgctxt "@info:usagetip"
-#| msgid "No colors"
+#, kde-format
 msgctxt "@info"
 msgid "No Saved Colors"
-msgstr "Enginn litur"
+msgstr "Engir vistaðir litir"
 
 #: qml/ColorCircle.qml:40
 #, kde-format
