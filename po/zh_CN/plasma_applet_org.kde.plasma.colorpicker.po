@@ -22,7 +22,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info"
 msgid "No Saved Colors"
-msgstr ""
+msgstr "没有已保存的颜色"
 
 #: qml/ColorCircle.qml:40
 #, kde-format
