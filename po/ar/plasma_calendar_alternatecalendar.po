@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-27 00:45+0000\n"
-"PO-Revision-Date: 2026-02-19 09:42+0400\n"
+"PO-Revision-Date: 2026-02-28 13:26+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -79,12 +79,10 @@ msgid "Hebrew Calendar"
 msgstr "التقويم العبري"
 
 #: calendarsystem.h:87
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Chinese Lunar Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
-msgstr "التقويم الصيني القمري"
+msgstr "التقويم الفيتنامي القمري"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -113,11 +111,11 @@ msgstr "إزاحة التاريخ:"
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "‏%1"
-msgstr[1] "‏%1 يوم"
-msgstr[2] "‏%1 يوم"
-msgstr[3] "‏%1 أيام"
-msgstr[4] "‏%1 يومًا"
-msgstr[5] "‏%1 يوم"
+msgstr[1] "‏‏%1 يوم"
+msgstr[2] "‏‏%1 يوم"
+msgstr[3] "‏‏%1 أيام"
+msgstr[4] "‏‏%1 يومًا"
+msgstr[5] "‏‏%1 يوم"
 
 #: config/qml/AlternateCalendarConfig.qml:91
 #, kde-format
@@ -158,9 +156,7 @@ msgid "%1 %2, %3"
 msgstr "‏%1 ‏%2، ‏%3"
 
 #: provider/vietnamesecalendar.cpp:406
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
 msgid "%1 %2, %3"

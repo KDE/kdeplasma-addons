@@ -82,7 +82,7 @@ msgstr "希伯来历"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
-msgstr ""
+msgstr "越南阴历"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -151,4 +151,4 @@ msgstr "%3 年 %2 %1 日"
 msgctxt ""
 "%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
 msgid "%1 %2, %3"
-msgstr ""
+msgstr "%1 %2，%3"
