@@ -196,11 +196,11 @@ KCM.ScrollViewKCM {
             }
         }
 
-        // To avoid start with a highlighted item on the next search
         onCountChanged: {
-            if (count === 0) {
-                currentIndex = -1;
-            }
+            // pre-select first item to facilitate fast keyboard navigation
+            currentIndex = 0;
+            // search results are async; emit the changed signal as the final action
+            currentIndexChanged();
         }
 
         Keys.forwardTo: searchStringEdit
@@ -229,4 +229,6 @@ KCM.ScrollViewKCM {
             visible: locationListView.count === 0 && isSearching
         }
     }
+
+    Component.onCompleted: searchStringEdit.forceActiveFocus()
 }
