@@ -17,6 +17,7 @@
 #include <KFuzzyMatcher>
 #include <KLocalizedString>
 #include <KNotificationJobUiDelegate>
+#include <KService>
 
 #include <KIO/CommandLauncherJob>
 
@@ -36,6 +37,12 @@ KateSessions::KateSessions(QObject *parent, const KPluginMetaData &metaData)
 
 void KateSessions::match(RunnerContext &context)
 {
+    auto service = KService::serviceByDesktopName(u"org.kde.kate"_s);
+
+    if (!service) {
+        return;
+    }
+
     QString term = context.query();
     bool listAll = false;
     if (term.trimmed().compare(m_triggerWord, Qt::CaseInsensitive) == 0) {
