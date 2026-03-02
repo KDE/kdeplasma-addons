@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# Sergiu Bivol <sergiu@cip.md>, 2022, 2024.
+# SPDX-FileCopyrightText: 2022, 2024, 2026 Sergiu Bivol <sergiu@cip.md>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-27 00:45+0000\n"
-"PO-Revision-Date: 2024-02-25 14:28+0000\n"
+"PO-Revision-Date: 2026-02-28 22:26+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
 "Language: ro\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n==1 ? 0 : (n==0 || (n%100 > 0 && n%100 < "
 "20)) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.3\n"
+"X-Generator: Lokalize 25.12.2\n"
 
 #: calendarsystem.h:51
 #, kde-format
@@ -79,12 +79,10 @@ msgid "Hebrew Calendar"
 msgstr "Calendar evreiesc"
 
 #: calendarsystem.h:87
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Chinese Lunar Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
-msgstr "Calendarul lunar chinezesc"
+msgstr "Calendarul lunar vietnamez"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -155,9 +153,7 @@ msgid "%1 %2, %3"
 msgstr "%1 %2, %3"
 
 #: provider/vietnamesecalendar.cpp:406
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
 msgid "%1 %2, %3"
