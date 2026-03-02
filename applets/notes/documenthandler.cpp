@@ -148,7 +148,15 @@ void DocumentHandler::mergeFormatOnWordOrSelection(const QTextCharFormat &format
     if (!cursor.hasSelection()) {
         cursor.select(QTextCursor::WordUnderCursor);
     }
-    cursor.mergeCharFormat(format);
+
+    if (!cursor.hasSelection() && m_doc->isEmpty()) {
+        cursor.mergeBlockCharFormat(format);
+    } else if (!cursor.hasSelection()) {
+        cursor.movePosition(QTextCursor::PreviousCharacter, QTextCursor::KeepAnchor);
+        cursor.mergeCharFormat(format);
+    } else {
+        cursor.mergeCharFormat(format);
+    }
 }
 
 void DocumentHandler::setSelectionStart(int position)
