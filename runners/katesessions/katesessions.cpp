@@ -43,6 +43,10 @@ void KateSessions::match(RunnerContext &context)
         return;
     }
 
+    if (!service->property<QString>(u"X-Flatpak"_s).isEmpty()) {
+        return;
+    }
+
     QString term = context.query();
     bool listAll = false;
     if (term.trimmed().compare(m_triggerWord, Qt::CaseInsensitive) == 0) {
