@@ -36,6 +36,21 @@ target_link_libraries(plasmaweatherdata PRIVATE
 set_target_properties(plasmaweatherdata PROPERTIES
     VERSION     ${PROJECT_VERSION}
     SOVERSION   ${PROJECT_VERSION_MAJOR}
+    EXPORT_NAME Weather::Data
 )
 
-install(TARGETS plasmaweatherdata DESTINATION ${KDE_INSTALL_LIBDIR})
+install(TARGETS plasmaweatherdata EXPORT plasmaweatherTargets DESTINATION ${KDE_INSTALL_LIBDIR} INCLUDES DESTINATION include/plasma/weather)
+install(FILES
+        currentday.h
+        lastday.h
+        lastobservation.h
+        metadata.h
+        futuredays.h
+        station.h
+        warnings.h
+        forecast.h
+        locations.h
+        ${CMAKE_CURRENT_BINARY_DIR}/plasmaweatherdata_export.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/plasma/weather
+    COMPONENT Devel
+)

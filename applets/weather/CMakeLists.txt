@@ -8,6 +8,31 @@ install(FILES wind-arrows.svgz DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktopthe
 add_subdirectory(weatherdata)
 add_subdirectory(ions)
 
+write_basic_package_version_file(${CMAKE_CURRENT_BINARY_DIR}/PlasmaWeatherConfigVersion.cmake
+    VERSION "${PROJECT_VERSION}"
+    COMPATIBILITY SameMajorVersion
+)
+
+set(CMAKECONFIG_INSTALL_DIR ${KDE_INSTALL_CMAKEPACKAGEDIR}/PlasmaWeather)
+configure_package_config_file(PlasmaWeather.cmake.in
+        "${CMAKE_CURRENT_BINARY_DIR}/PlasmaWeatherConfig.cmake"
+    INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+)
+
+install(FILES
+        ${CMAKE_CURRENT_BINARY_DIR}/PlasmaWeatherConfig.cmake
+        ${CMAKE_CURRENT_BINARY_DIR}/PlasmaWeatherConfigVersion.cmake
+    DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+    COMPONENT Devel
+)
+
+install(EXPORT plasmaweatherTargets
+    NAMESPACE Plasma::
+    DESTINATION ${CMAKECONFIG_INSTALL_DIR}
+    FILE PlasmaWeatherTargets.cmake
+    COMPONENT Devel
+)
+
 plasma_add_applet(org.kde.plasma.weather
     QML_SOURCES
         qml/CompactRepresentation.qml

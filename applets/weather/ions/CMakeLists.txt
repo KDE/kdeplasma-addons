@@ -21,11 +21,18 @@ target_link_libraries(plasmaweatherion PUBLIC
 set_target_properties(plasmaweatherion PROPERTIES
     VERSION     ${PROJECT_VERSION}
     SOVERSION   ${PROJECT_VERSION_MAJOR}
+    EXPORT_NAME Weather::Ion
 )
 
 generate_export_header(plasmaweatherion)
 
-install(TARGETS plasmaweatherion DESTINATION ${KDE_INSTALL_LIBDIR})
+install(TARGETS plasmaweatherion EXPORT plasmaweatherTargets DESTINATION ${KDE_INSTALL_LIBDIR} INCLUDES DESTINATION include/plasma/weather)
+install(FILES
+        ion.h
+        ${CMAKE_CURRENT_BINARY_DIR}/plasmaweatherion_export.h
+    DESTINATION ${KDE_INSTALL_INCLUDEDIR}/plasma/weather
+    COMPONENT Devel
+)
 
 #add ions
 add_subdirectory(wetter.com)
