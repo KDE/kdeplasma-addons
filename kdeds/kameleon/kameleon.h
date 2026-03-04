@@ -22,7 +22,7 @@ public:
     Kameleon(QObject *parent, const QList<QVariant> &);
 
     /**
-     * Returns whether there are any RGB cabaple LED devices.
+     * Returns whether there are any RGB capable LED devices.
      */
     Q_SCRIPTABLE bool isSupported();
 
