@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE policyconfig PUBLIC
+"-//freedesktop//DTD PolicyKit Policy Configuration 1.0//EN"
+"http://www.freedesktop.org/standards/PolicyKit/1.0/policyconfig.dtd">
+<!--
+  SPDX-License-Identifier: CC0-1.0
+  SPDX-FileCopyrightText: None
+-->
+<policyconfig>
+   <action id="org.kde.kameleon.qmk.helper.HasDevices">
+      <message>Check if there are any QMK/VIA keyboards connected</message>
+      <description>Check if there are any QMK/VIA keyboards connected</description>
+      <defaults>
+         <allow_inactive>no</allow_inactive>
+         <allow_active>yes</allow_active>
+      </defaults>
+   </action>
+   <action id="org.kde.kameleon.qmk.helper.ApplyColor">
+      <message>Apply color value "$(color)" to all QMK/VIA keyboards</message>
+      <description>Apply color settings to QMK/VIA keyboards</description>
+      <defaults>
+         <allow_inactive>no</allow_inactive>
+         <allow_active>yes</allow_active>
+      </defaults>
+   </action>
+</policyconfig>

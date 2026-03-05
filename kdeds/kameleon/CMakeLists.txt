@@ -5,6 +5,9 @@ kcoreaddons_add_plugin(kameleon
     SOURCES
         kameleon.cpp
         kameleon.h
+        backend.cpp
+        sysfs/sysfs.cpp
+        qmk/qmk.cpp
     INSTALL_NAMESPACE
         "kf6/kded")
 
@@ -47,3 +50,5 @@ ecm_qt_declare_logging_category(kameleonhelper
                       DESCRIPTION "Helper for kded module for accent coloring device leds"
                       EXPORT KDEPLASMAADDONS
                   )
+
+add_subdirectory(qmk/kameleon-qmk-helper)

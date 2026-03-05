@@ -1,0 +1,6 @@
+# SPDX-License-Identifier: CC0-1.0
+# SPDX-FileCopyrightText: None
+[D-BUS Service]
+Name=org.kde.kameleon.qmk.helper
+Exec=@KDE_INSTALL_FULL_LIBEXECDIR_KF@/kameleon-qmk-helper
+User=root
