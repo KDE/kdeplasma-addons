@@ -29,7 +29,7 @@ static QJsonValue randomArrayValueByKey(const QJsonObject &object, QLatin1String
     }
 
     // Plasma 5.24.0 release date
-    std::mt19937 randomEngine(QDate(2022, 2, 3).daysTo(QDate::currentDate()));
+    std::mt19937 randomEngine(QDate(2022, 2, 3).daysTo(QDate::currentDate()) * 50 + key.size());
     std::uniform_int_distribution<int> distrib(0, array.size() - 1);
 
     return array.at(distrib(randomEngine));
