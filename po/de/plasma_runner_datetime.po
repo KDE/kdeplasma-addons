@@ -139,7 +139,7 @@ msgctxt ""
 "Stockholm time in Brasilia = 22:00 - 1 day, where %1 is the time and %2 is "
 "the days earlier"
 msgid "%1 - %2"
-msgstr "%1 - %2"
+msgstr "%1 − %2"
 
 #: datetimerunner.cpp:128 datetimerunner.cpp:223
 #, kde-format
