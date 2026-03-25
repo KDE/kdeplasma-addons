@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2016, 2017.
-# SPDX-FileCopyrightText: 2021, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2021, 2025, 2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2021-12-22 18:25+0400\n"
+"PO-Revision-Date: 2026-03-24 11:04+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -103,19 +103,19 @@ msgstr "تكرر"
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
-msgstr "الصّورة تُكرّر أفقيًّا ورأسيًّا"
+msgstr "الصّورة تُكرّر أفقيًّا وعموديًّا"
 
 #: package/contents/ui/ConfigGeneral.qml:130
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
-msgstr "كرّر رأسيًّا"
+msgstr "كرّر عموديًّا"
 
 #: package/contents/ui/ConfigGeneral.qml:131
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
-msgstr "الصّورة تُمدّد أفقيًّا وتُكرّر رأسيًّا"
+msgstr "الصّورة تُمدّد أفقيًّا وتُكرّر عموديًّا"
 
 #: package/contents/ui/ConfigGeneral.qml:135
 #, kde-format
@@ -127,7 +127,7 @@ msgstr "كرّر أفقيًّا"
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
-msgstr "الصّورة تُمدّد رأسيًّا وتُكرّر أفقيًّا"
+msgstr "الصّورة تُمدّد عموديًّا وتُكرّر أفقيًّا"
 
 #: package/contents/ui/ConfigGeneral.qml:140
 #, kde-format
