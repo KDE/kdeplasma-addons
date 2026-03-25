@@ -36,6 +36,13 @@ KCM.ScrollViewKCM {
     // We use a custom property to provide a more responsive feedback
     property bool isSearching: false
 
+    // Plasmoid config pages don't offer this functionality built-in; manufacture it here
+    function resetLocation() : void {
+        weatherStationConfigPage.cfg_provider = plasmoid.configuration.provider;
+        weatherStationConfigPage.cfg_placeInfo = plasmoid.configuration.placeInfo;
+        weatherStationConfigPage.cfg_placeDisplayName = plasmoid.configuration.placeDisplayName;
+    }
+
     extraFooterTopPadding: true
 
     header: ColumnLayout {
@@ -163,6 +170,11 @@ KCM.ScrollViewKCM {
         enabled: locationListModel.hasProviders
 
         onCurrentIndexChanged: {
+            if (locationListView.currentIndex === -1) {
+                weatherStationConfigPage.resetLocation();
+                return;
+            }
+
             const provider = locationListModel.getProviderByIndex(locationListView.currentIndex);
             const placeInfo = locationListModel.getPlaceInfoByIndex(locationListView.currentIndex);
             if (provider && placeInfo) {
@@ -196,11 +208,17 @@ KCM.ScrollViewKCM {
             }
         }
 
-        // To avoid start with a highlighted item on the next search
         onCountChanged: {
             if (count === 0) {
+                // ensure there's no hidden item selected while nothing is visible
                 currentIndex = -1;
+            } else {
+                // pre-select first item to facilitate fast keyboard navigation
+                currentIndex = 0;
             }
+
+            // search results are async; emit the changed signal as the final action
+            currentIndexChanged();
         }
 
         Keys.forwardTo: searchStringEdit
@@ -229,4 +247,6 @@ KCM.ScrollViewKCM {
             visible: locationListView.count === 0 && isSearching
         }
     }
+
+    Component.onCompleted: searchStringEdit.forceActiveFocus()
 }
