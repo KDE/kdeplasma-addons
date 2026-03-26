@@ -35,7 +35,7 @@
             }
         ],
         "Description": "Switching virtual desktops only affects the primary screen",
-        "Description[ar]": "يؤثر تبديل سطح المكتب الافتراضي على الشاشة الرئيسية فقط",
+        "Description[ar]": "يؤثر تبديل سطح المكتب الافتراضي على الشاشة الرئيسة فقط",
         "Description[bg]": "Превключването на виртуални работни плотове засяга само главния екран.",
         "Description[ca@valencia]": "El canvi d'escriptoris virtuals només afecta la pantalla primària",
         "Description[ca]": "La commutació d'escriptoris virtuals només afecta la pantalla primària",
