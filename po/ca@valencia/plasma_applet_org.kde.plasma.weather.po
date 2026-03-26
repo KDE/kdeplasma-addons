@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-18 00:47+0000\n"
+"POT-Creation-Date: 2026-03-26 00:46+0000\n"
 "PO-Revision-Date: 2025-07-09 09:40+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -571,74 +571,74 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Visibilitat:"
 
-#: qml/config/ConfigWeatherStation.qml:51
+#: qml/config/ConfigWeatherStation.qml:58
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Actualitza cada:"
 
-#: qml/config/ConfigWeatherStation.qml:54
+#: qml/config/ConfigWeatherStation.qml:61
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 minut"
 msgstr[1] "%1 minuts"
 
-#: qml/config/ConfigWeatherStation.qml:66
+#: qml/config/ConfigWeatherStation.qml:73
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Ubicació:"
 
-#: qml/config/ConfigWeatherStation.qml:79
+#: qml/config/ConfigWeatherStation.qml:86
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "Res seleccionat"
 
-#: qml/config/ConfigWeatherStation.qml:85
+#: qml/config/ConfigWeatherStation.qml:92
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "Proveïdor:"
 
-#: qml/config/ConfigWeatherStation.qml:115
+#: qml/config/ConfigWeatherStation.qml:122
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Introduïu la ubicació nova"
 
-#: qml/config/ConfigWeatherStation.qml:115
+#: qml/config/ConfigWeatherStation.qml:122
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Introduïu la ubicació"
 
-#: qml/config/ConfigWeatherStation.qml:190
+#: qml/config/ConfigWeatherStation.qml:202
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/config/ConfigWeatherStation.qml:215
+#: qml/config/ConfigWeatherStation.qml:233
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "No s'ha trobat cap estació meteorològica per a «%1»"
 
-#: qml/config/ConfigWeatherStation.qml:217
+#: qml/config/ConfigWeatherStation.qml:235
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Busqueu una estació meteorològica per a canviar la vostra ubicació"
 
-#: qml/config/ConfigWeatherStation.qml:219
+#: qml/config/ConfigWeatherStation.qml:237
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Busqueu una estació meteorològica per a establir la ubicació"
 
-#: qml/config/ConfigWeatherStation.qml:222
+#: qml/config/ConfigWeatherStation.qml:240
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

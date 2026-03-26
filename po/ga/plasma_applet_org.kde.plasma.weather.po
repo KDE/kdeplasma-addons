@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-18 00:47+0000\n"
+"POT-Creation-Date: 2026-03-26 00:46+0000\n"
 "PO-Revision-Date: 2009-02-03 08:48-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -584,14 +584,14 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Léargas: %1"
 
-#: qml/config/ConfigWeatherStation.qml:51
+#: qml/config/ConfigWeatherStation.qml:58
 #, fuzzy, kde-format
 #| msgid "Update every:"
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Nuashonraigh gach:"
 
-#: qml/config/ConfigWeatherStation.qml:54
+#: qml/config/ConfigWeatherStation.qml:61
 #, fuzzy, kde-format
 #| msgid " minute"
 #| msgid_plural " minutes"
@@ -603,40 +603,40 @@ msgstr[2] " nóiméad"
 msgstr[3] " nóiméad"
 msgstr[4] " nóiméad"
 
-#: qml/config/ConfigWeatherStation.qml:66
+#: qml/config/ConfigWeatherStation.qml:73
 #, fuzzy, kde-format
 #| msgid "Location"
 msgctxt "@label"
 msgid "Location:"
 msgstr "Suíomh"
 
-#: qml/config/ConfigWeatherStation.qml:79
+#: qml/config/ConfigWeatherStation.qml:86
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr ""
 
-#: qml/config/ConfigWeatherStation.qml:85
+#: qml/config/ConfigWeatherStation.qml:92
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr ""
 
-#: qml/config/ConfigWeatherStation.qml:115
+#: qml/config/ConfigWeatherStation.qml:122
 #, fuzzy, kde-format
 #| msgid "Weather Units"
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Aonaid Aimsire"
 
-#: qml/config/ConfigWeatherStation.qml:115
+#: qml/config/ConfigWeatherStation.qml:122
 #, fuzzy, kde-format
 #| msgid "Weather Units"
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Aonaid Aimsire"
 
-#: qml/config/ConfigWeatherStation.qml:190
+#: qml/config/ConfigWeatherStation.qml:202
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition, probability percentage"
 #| msgid "%1 (%2%)"
@@ -644,25 +644,25 @@ msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2%)"
 
-#: qml/config/ConfigWeatherStation.qml:215
+#: qml/config/ConfigWeatherStation.qml:233
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr ""
 
-#: qml/config/ConfigWeatherStation.qml:217
+#: qml/config/ConfigWeatherStation.qml:235
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr ""
 
-#: qml/config/ConfigWeatherStation.qml:219
+#: qml/config/ConfigWeatherStation.qml:237
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr ""
 
-#: qml/config/ConfigWeatherStation.qml:222
+#: qml/config/ConfigWeatherStation.qml:240
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
