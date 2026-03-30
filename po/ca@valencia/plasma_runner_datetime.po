@@ -1,23 +1,23 @@
 # Translation of plasma_runner_datetime.po to Catalan (Valencian)
-# Copyright (C) 2010-2023 This_file_is_part_of_KDE
+# Copyright (C) 2010-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2010, 2015, 2022, 2023 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2010, 2015, 2022, 2023, 2026 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2021 Antoni Bella Pérez <antonibella5@yahoo.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2023-02-09 13:18+0100\n"
+"PO-Revision-Date: 2026-03-29 16:46+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 20.12.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
@@ -47,23 +47,23 @@ msgstr "Mostra l'hora actual"
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid " <timezone>"
-msgstr "<zona horària>"
+msgstr "<fus horari>"
 
 #: datetimerunner.cpp:32
 #, kde-format
 msgid ""
 "Displays the current date and difference to system date in a given timezone"
 msgstr ""
-"Mostra la data actual i la diferència amb la data del sistema en una zona "
-"horària indicada"
+"Mostra la data actual i la diferència amb la data del sistema en un fus "
+"horari indicat"
 
 #: datetimerunner.cpp:34
 #, kde-format
 msgid ""
 "Displays the current time and difference to system time in a given timezone"
 msgstr ""
-"Mostra l'hora actual i la diferència amb l'hora del sistema en una zona "
-"horària indicada"
+"Mostra l'hora actual i la diferència amb l'hora del sistema en un fus horari "
+"indicat"
 
 #: datetimerunner.cpp:48
 #, kde-format
