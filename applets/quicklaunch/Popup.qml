@@ -20,6 +20,8 @@ Item {
     id: popup
 
     property bool dragging: false
+    property int internalDragIndex: -1
+    property int internalDragOriginalIndex: -1
     property alias popupModel : popupModel
     property alias listView: listView
     required property Logic logic
@@ -33,40 +35,71 @@ Item {
         preventStealing: true
         enabled: !Plasmoid.immutable
 
-        onDragEnter: {
-            popup.dragging = true;
+        onDragEnter: event => {
+            if (event.mimeData.hasUrls) {
+                popup.dragging = true;
+                popup.internalDragIndex = -1;
+                popup.internalDragOriginalIndex = -1;
+
+                var urls = event.mimeData.urls;
+                if (urls.length === 1) {
+                    var dragUrl = urls[0].toString();
+                    var modelUrls = popupModel.urls();
+                    for (var i = 0; i < modelUrls.length; ++i) {
+                        if (modelUrls[i].toString() === dragUrl) {
+                            popup.internalDragIndex = i;
+                            popup.internalDragOriginalIndex = i;
+                            break;
+                        }
+                    }
+                }
+            } else {
+                event.ignore();
+            }
         }
 
         onDragMove: event => {
-            if (!event.mimeData.hasUrls) {
-                return;
-            }
-
             var index = listView.indexAt(event.x, event.y);
 
-            if (popup.isInternalDrop(event)) {
-                popupModel.moveUrl(event.mimeData.source.itemIndex, index);
-            } else if (event.mimeData.hasUrls) {
+            if (popup.internalDragIndex >= 0) {
+                if (index >= 0 && index !== popup.internalDragIndex) {
+                    popupModel.move(popup.internalDragIndex, index, 1);
+                    popup.internalDragIndex = index;
+                }
+            } else {
                 popupModel.showDropMarker(index);
             }
         }
 
         onDragLeave: {
             popup.dragging = false;
-            popupModel.clearDropMarker();
+            if (popup.internalDragIndex >= 0) {
+                if (popup.internalDragIndex !== popup.internalDragOriginalIndex) {
+                    popupModel.move(popup.internalDragIndex, popup.internalDragOriginalIndex, 1);
+                }
+                popup.internalDragIndex = -1;
+                popup.internalDragOriginalIndex = -1;
+            } else {
+                popupModel.clearDropMarker();
+            }
         }
 
         onDrop: event => {
             popup.dragging = false;
-            popupModel.clearDropMarker();
 
-            if (popup.isInternalDrop(event)) {
+            if (popup.internalDragIndex >= 0) {
+                popup.internalDragIndex = -1;
+                popup.internalDragOriginalIndex = -1;
                 event.accept(Qt.IgnoreAction);
                 popup.saveConfiguration();
             } else if (event.mimeData.hasUrls) {
                 var index = listView.indexAt(event.x, event.y);
-                popupModel.insertUrls(index == -1 ? popupModel.count : index, event.mimeData.urls);
+                popupModel.clearDropMarker();
+                var urls = event.mimeData.urls;
                 event.accept(event.proposedAction);
+                Qt.callLater(function() {
+                    popupModel.insertUrls(index == -1 ? popupModel.count : index, urls);
+                });
             }
         }
     }
@@ -106,6 +139,19 @@ Item {
     Connections {
         target: Plasmoid.configuration
         function onPopupUrlsChanged() {
+            if (popup.dragging) return;
+            var configUrls = Plasmoid.configuration.popupUrls;
+            var modelUrls = popupModel.urls();
+            if (configUrls.length === modelUrls.length) {
+                var same = true;
+                for (var i = 0; i < configUrls.length; ++i) {
+                    if (configUrls[i].toString() !== modelUrls[i].toString()) {
+                        same = false;
+                        break;
+                    }
+                }
+                if (same) return;
+            }
             popupModel.urlsChanged.disconnect(popup.saveConfiguration);
             popupModel.setUrls(Plasmoid.configuration.popupUrls);
             popupModel.urlsChanged.connect(popup.saveConfiguration);
@@ -122,12 +168,5 @@ Item {
         if (!dragging) {
             Plasmoid.configuration.popupUrls = popupModel.urls();
         }
-    }
-
-    function isInternalDrop(event)
-    {
-        return event.mimeData.source
-            && event.mimeData.source.ListView
-            && event.mimeData.source.ListView.view == listView;
     }
 }

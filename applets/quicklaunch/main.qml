@@ -26,6 +26,8 @@ PlasmoidItem {
     readonly property bool vertical : Plasmoid.formFactor == PlasmaCore.Types.Vertical || (Plasmoid.formFactor == PlasmaCore.Types.Planar && height > width)
     readonly property bool horizontal : Plasmoid.formFactor == PlasmaCore.Types.Horizontal
     property bool dragging : false
+    property int internalDragIndex: -1
+    property int internalDragOriginalIndex: -1
 
     Layout.minimumWidth: LayoutManager.minimumWidth()
     Layout.minimumHeight: LayoutManager.minimumHeight()
@@ -37,51 +39,6 @@ PlasmoidItem {
 
     Item {
         anchors.fill: parent
-
-        DragAndDrop.DropArea {
-            anchors.fill: parent
-            preventStealing: true
-            enabled: !Plasmoid.immutable
-
-            onDragEnter: event => {
-                if (event.mimeData.hasUrls) {
-                    root.dragging = true;
-                } else {
-                    event.ignore();
-                }
-            }
-
-            onDragMove: event => {
-                var index = grid.indexAt(event.x, event.y);
-
-                if (root.isInternalDrop(event)) {
-                    launcherModel.moveUrl(event.mimeData.source.itemIndex, index);
-                } else {
-                    launcherModel.showDropMarker(index);
-                }
-
-                popup.visible = root.childAt(event.x, event.y) == popupArrow;
-            }
-
-            onDragLeave: {
-                root.dragging = false;
-                launcherModel.clearDropMarker();
-            }
-
-            onDrop: event => {
-                root.dragging = false;
-                launcherModel.clearDropMarker();
-
-                if (root.isInternalDrop(event)) {
-                    event.accept(Qt.IgnoreAction);
-                    root.saveConfiguration();
-                } else {
-                    var index = grid.indexAt(event.x, event.y);
-                    launcherModel.insertUrls(index == -1 ? launcherModel.count : index, event.mimeData.urls);
-                    event.accept(event.proposedAction);
-                }
-            }
-        }
 
         PlasmaComponents3.Label {
             id: titleLabel
@@ -234,6 +191,88 @@ PlasmoidItem {
                 }
             }
         }
+
+        DragAndDrop.DropArea {
+            id: dropArea
+            anchors.fill: parent
+            preventStealing: true
+            enabled: !Plasmoid.immutable
+
+            function gridIndexAt(eventX, eventY) {
+                var pos = grid.mapFromItem(dropArea, eventX, eventY);
+                return grid.indexAt(pos.x, pos.y);
+            }
+
+            onDragEnter: event => {
+                if (event.mimeData.hasUrls) {
+                    root.dragging = true;
+                    root.internalDragIndex = -1;
+                    root.internalDragOriginalIndex = -1;
+
+                    var urls = event.mimeData.urls;
+                    if (urls.length === 1) {
+                        var dragUrl = urls[0].toString();
+                        var modelUrls = launcherModel.urls();
+                        for (var i = 0; i < modelUrls.length; ++i) {
+                            if (modelUrls[i].toString() === dragUrl) {
+                                root.internalDragIndex = i;
+                                root.internalDragOriginalIndex = i;
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    event.ignore();
+                }
+            }
+
+            onDragMove: event => {
+                var index = dropArea.gridIndexAt(event.x, event.y);
+
+                if (root.internalDragIndex >= 0) {
+                    if (index >= 0 && index !== root.internalDragIndex) {
+                        launcherModel.move(root.internalDragIndex, index, 1);
+                        root.internalDragIndex = index;
+                    }
+                } else {
+                    launcherModel.showDropMarker(index);
+                }
+
+                popup.visible = root.childAt(event.x, event.y) == popupArrow;
+            }
+
+            onDragLeave: {
+                root.dragging = false;
+                if (root.internalDragIndex >= 0) {
+                    if (root.internalDragIndex !== root.internalDragOriginalIndex) {
+                        launcherModel.move(root.internalDragIndex, root.internalDragOriginalIndex, 1);
+                    }
+                    root.internalDragIndex = -1;
+                    root.internalDragOriginalIndex = -1;
+                } else {
+                    launcherModel.clearDropMarker();
+                }
+            }
+
+            onDrop: event => {
+                root.dragging = false;
+
+                if (root.internalDragIndex >= 0) {
+                    root.internalDragIndex = -1;
+                    root.internalDragOriginalIndex = -1;
+                    event.accept(Qt.IgnoreAction);
+                    root.saveConfiguration();
+                } else {
+                    var index = dropArea.gridIndexAt(event.x, event.y);
+                    launcherModel.clearDropMarker();
+                    var urls = event.mimeData.urls;
+                    event.accept(event.proposedAction);
+                    Qt.callLater(function() {
+                        launcherModel.insertUrls(index == -1 ? launcherModel.count : index, urls);
+                    });
+                }
+            }
+        }
     }
 
     Logic {
@@ -278,6 +317,19 @@ PlasmoidItem {
     Connections {
         target: Plasmoid.configuration
        function onLauncherUrlsChanged() {
+            if (root.dragging) return;
+            var configUrls = Plasmoid.configuration.launcherUrls;
+            var modelUrls = launcherModel.urls();
+            if (configUrls.length === modelUrls.length) {
+                var same = true;
+                for (var i = 0; i < configUrls.length; ++i) {
+                    if (configUrls[i].toString() !== modelUrls[i].toString()) {
+                        same = false;
+                        break;
+                    }
+                }
+                if (same) return;
+            }
             launcherModel.urlsChanged.disconnect(root.saveConfiguration);
             launcherModel.setUrls(Plasmoid.configuration.launcherUrls);
             launcherModel.urlsChanged.connect(root.saveConfiguration);
@@ -302,12 +354,5 @@ PlasmoidItem {
         if (!dragging) {
             Plasmoid.configuration.launcherUrls = launcherModel.urls();
         }
-    }
-
-    function isInternalDrop(event)
-    {
-        return event.mimeData.source
-            && event.mimeData.source.GridView
-            && event.mimeData.source.GridView.view == grid;
     }
 }

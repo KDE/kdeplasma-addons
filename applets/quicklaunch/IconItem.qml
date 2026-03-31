@@ -167,10 +167,6 @@ Item {
 
         onDrop: action => {
             iconItem.dragging = false;
-
-            if (action == Qt.MoveAction) {
-                iconItem.removeLauncher();
-            }
         }
 
         MouseArea {
