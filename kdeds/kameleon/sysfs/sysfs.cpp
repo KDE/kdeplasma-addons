@@ -23,7 +23,7 @@ namespace
 {
 constexpr auto LED_SYSFS_PATH = "/sys/class/leds/"_L1;
 constexpr auto LED_INDEX_FILE = "/multi_index"_L1;
-constexpr auto LED_RGB_FILE = "/multi_intensity"_L1;
+constexpr auto DRIVER_NEEDLE = ":kbd_backlight"_L1; // : is a separator. The actual dir is e.g. "rgb:kbd_backlight/"
 } // namespace
 
 Sysfs::Sysfs(QObject *parent)
@@ -49,14 +49,22 @@ void Sysfs::findRgbLedDevices()
     for (const QString &ledDevice : std::as_const(ledDevices)) {
         // Get multicolor index (= RGB capability with order of colors)
         QFile indexFile(LED_SYSFS_PATH + ledDevice + LED_INDEX_FILE);
-        if (!QFileInfo(indexFile).exists()) {
+        QFileInfo indexFileInfo(indexFile);
+        if (!indexFileInfo.exists()) {
             // Not a RGB capable device
             continue;
         }
+
+        if (!indexFileInfo.path().contains(DRIVER_NEEDLE)) {
+            // Not a keyboard backlight device
+            continue;
+        }
+
         if (!indexFile.open(QIODevice::ReadOnly)) {
             qCWarning(KAMELEON) << "failed to open" << indexFile.fileName() << indexFile.error() << indexFile.errorString();
             continue;
         }
+
         QString colorIndexStr = QString::fromLocal8Bit(indexFile.readAll()).trimmed();
         indexFile.close();
         QString colorIndex =
