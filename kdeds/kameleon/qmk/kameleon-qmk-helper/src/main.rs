@@ -46,7 +46,7 @@ impl Helper {
     ) -> zbus::fdo::Result<()> {
         is_authorized(HashMap::from([("color", color)]), header).await?;
 
-        let hex: Hex = color.try_into().map_err(|e| {
+        let hex: Hex = color.try_into().map_err(|_e| {
             zbus::fdo::Error::Failed(format!("Invalid color format (should be #RRGGBB)"))
         })?;
         let hsv = hex.to_hsv();
