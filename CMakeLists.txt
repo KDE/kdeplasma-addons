@@ -110,6 +110,8 @@ set_package_properties(Qt6Quick3D PROPERTIES
     TYPE RUNTIME
 )
 
+find_package(Corrosion REQUIRED)
+
 add_definitions(
     -DQT_DEPRECATED_WARNINGS
     -DQT_NO_URL_CAST_FROM_STRING
