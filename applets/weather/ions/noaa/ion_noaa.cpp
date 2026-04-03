@@ -720,6 +720,9 @@ Ion::ConditionIcons NOAAIon::getConditionIcon(const QString &weather, bool isDay
         }
 
     } else if (weather.contains("fog"_L1)) {
+        result = Fog;
+
+    } else if (weather.contains("mist"_L1)) {
         result = Mist;
 
     } else if (weather.contains("hot"_L1)) {

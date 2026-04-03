@@ -123,8 +123,10 @@ QString Ion::getWeatherIcon(ConditionIcons condition) const
         return QStringLiteral("weather-clear-night");
     case ClearWindyNight:
         return QStringLiteral("weather-clear-wind-night");
-    case Mist:
+    case Fog:
         return QStringLiteral("weather-fog");
+    case Mist:
+        return QStringLiteral("weather-mist");
     case Haze:
         return QStringLiteral("weather-fog");
     case FreezingRain:

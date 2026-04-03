@@ -87,10 +87,10 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupConditionIconMappings() co
         {QStringLiteral("drizzle"), LightRain},
         {QStringLiteral("dust"), NotAvailable},
         {QStringLiteral("dust devils"), NotAvailable},
-        {QStringLiteral("fog"), Mist},
-        {QStringLiteral("fog bank near station"), Mist},
-        {QStringLiteral("fog depositing ice"), Mist},
-        {QStringLiteral("fog patches"), Mist},
+        {QStringLiteral("fog"), Fog},
+        {QStringLiteral("fog bank near station"), Fog},
+        {QStringLiteral("fog depositing ice"), Fog},
+        {QStringLiteral("fog patches"), Fog},
         {QStringLiteral("freezing drizzle"), FreezingDrizzle},
         {QStringLiteral("freezing rain"), FreezingRain},
         {QStringLiteral("funnel cloud"), NotAvailable},
@@ -130,8 +130,8 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupConditionIconMappings() co
         {QStringLiteral("rain and snow"), RainSnow},
         {QStringLiteral("rainshower"), LightRain},
         {QStringLiteral("recent drizzle"), LightRain},
-        {QStringLiteral("recent dust or sand storm"), NotAvailable},
-        {QStringLiteral("recent fog"), Mist},
+        {QStringLiteral("recent dust or sand storm"), Haze},
+        {QStringLiteral("recent fog"), Fog},
         {QStringLiteral("recent freezing precipitation"), FreezingDrizzle},
         {QStringLiteral("recent hail"), Hail},
         {QStringLiteral("recent rain"), Rain},
@@ -171,14 +171,14 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupDayConditionIconMappings()
 QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupNightConditionIconMappings() const
 {
     auto iconMap = setupConditionIconMappings();
-    
+
     // Override day-specific cloud icons with night variants
     iconMap[QStringLiteral("partly cloudy")] = PartlyCloudyNight;
     iconMap[QStringLiteral("mostly cloudy")] = PartlyCloudyNight;
     iconMap[QStringLiteral("decreasing cloud")] = FewCloudsNight;
     iconMap[QStringLiteral("fair")] = FewCloudsNight;
     iconMap[QStringLiteral("mainly sunny")] = FewCloudsNight;
-    
+
     return iconMap;
 }
 
@@ -222,10 +222,10 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupForecastIconMappings() con
         {QStringLiteral("flurries or ice pellets"), FreezingRain},
         {QStringLiteral("flurries or rain showers"), RainSnow},
         {QStringLiteral("flurries or thundershowers"), Flurries},
-        {QStringLiteral("fog"), Mist},
-        {QStringLiteral("fog developing"), Mist},
-        {QStringLiteral("fog dissipating"), Mist},
-        {QStringLiteral("fog patches"), Mist},
+        {QStringLiteral("fog"), Fog},
+        {QStringLiteral("fog developing"), Fog},
+        {QStringLiteral("fog dissipating"), Fog},
+        {QStringLiteral("fog patches"), Fog},
         {QStringLiteral("freezing drizzle"), FreezingDrizzle},
         {QStringLiteral("freezing rain"), FreezingRain},
         {QStringLiteral("freezing rain mixed with rain"), FreezingRain},
@@ -233,9 +233,9 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupForecastIconMappings() con
         {QStringLiteral("freezing rain or ice pellets"), FreezingRain},
         {QStringLiteral("freezing rain or rain"), FreezingRain},
         {QStringLiteral("freezing rain or snow"), FreezingRain},
-        {QStringLiteral("ice fog"), Mist},
-        {QStringLiteral("ice fog developing"), Mist},
-        {QStringLiteral("ice fog dissipating"), Mist},
+        {QStringLiteral("ice fog"), Fog},
+        {QStringLiteral("ice fog developing"), Fog},
+        {QStringLiteral("ice fog dissipating"), Fog},
         {QStringLiteral("ice pellets"), Hail},
         {QStringLiteral("ice pellets mixed with freezing rain"), Hail},
         {QStringLiteral("ice pellets mixed with snow"), Hail},

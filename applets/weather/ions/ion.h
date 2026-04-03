@@ -60,6 +60,7 @@ public:
         PartlyCloudyWindyNight,
         ClearNight,
         ClearWindyNight,
+        Fog,
         Mist,
         Haze,
         FreezingRain,
