@@ -25,7 +25,7 @@ public:
 public:
     /**
      * Returns the @p iconName if the current icon theme contains an icon with that name,
-     * otherwise returns "weather-not-available" (expecting the icon theme to have that in any case).
+     * otherwise returns "weather-none-available" (expecting the icon theme to have that in any case).
      */
     Q_INVOKABLE QString existingWeatherIconName(const QString &iconName) const;
 

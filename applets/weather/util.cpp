@@ -5,6 +5,7 @@
  */
 
 #include "util.h"
+#include "weathercontroller_debug.h"
 
 // KF
 #include <KLocalizedString>
@@ -32,7 +33,11 @@ KUnitConversion::Converter Util::m_converter;
 QString Util::existingWeatherIconName(const QString &iconName) const
 {
     const bool isValid = !iconName.isEmpty() && QIcon::hasThemeIcon(iconName);
-    return isValid ? iconName : QStringLiteral("weather-not-available");
+    if (!isValid) {
+        qCWarning(WEATHER::CONTROLLER) << "Icon not found in theme:" << iconName;
+        return QStringLiteral("weather-none-available");
+    }
+    return iconName;
 }
 
 QString Util::temperatureToDisplayString(int displayUnitType, double value, int valueUnitType, bool rounded, bool degreesOnly) const
