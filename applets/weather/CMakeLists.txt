@@ -38,6 +38,8 @@ plasma_add_applet(org.kde.plasma.weather
     RESOURCES
         main.xml
     GENERATE_APPLET_CLASS
+    QML_ARGS
+        NO_LINT # https://qt-project.atlassian.net/browse/QTBUG-145572
 )
 
 ecm_qt_declare_logging_category(org.kde.plasma.weather
