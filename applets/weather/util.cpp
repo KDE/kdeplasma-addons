@@ -16,6 +16,8 @@
 // Std
 #include <cmath>
 
+using namespace Qt::StringLiterals;
+
 template<typename T>
 T clampValue(T value, int decimals)
 {
@@ -32,12 +34,16 @@ KUnitConversion::Converter Util::m_converter;
 
 QString Util::existingWeatherIconName(const QString &iconName) const
 {
-    const bool isValid = !iconName.isEmpty() && QIcon::hasThemeIcon(iconName);
-    if (!isValid) {
-        qCWarning(WEATHER::CONTROLLER) << "Icon not found in theme:" << iconName;
-        return QStringLiteral("weather-none-available");
+    // Try to find the icon name or a partial fallback according to the spec
+    QStringList iconNameParts = iconName.split('-'_L1);
+    for (int n = iconNameParts.count(); n > 0; --n) {
+        const QString partialName = iconNameParts.first(n).join('-'_L1);
+        if (QIcon::hasThemeIcon(partialName)) {
+            return partialName;
+        }
     }
-    return iconName;
+    qCWarning(WEATHER::CONTROLLER) << "Icon not found in theme:" << iconName;
+    return u"weather-none-available"_s;
 }
 
 QString Util::temperatureToDisplayString(int displayUnitType, double value, int valueUnitType, bool rounded, bool degreesOnly) const
