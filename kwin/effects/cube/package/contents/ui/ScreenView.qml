@@ -16,12 +16,18 @@ Item {
     focus: true
 
     readonly property QtObject targetScreen: KWinComponents.SceneView.screen
+    property QtObject currentDesktop
 
     function switchTo(desktop) {
-        KWinComponents.Workspace.currentDesktop = desktop;
+        if (typeof KWinComponents.Workspace.setCurrentDesktopForScreen === "function") {
+            KWinComponents.Workspace.setCurrentDesktopForScreen(desktop, root.targetScreen);
+        } else {
+            // Fallback for kwin-x11
+            KWinComponents.Workspace.currentDesktop = desktop;
+        }
+
         effect.deactivate();
     }
-
     function switchToSelected() {
         const eulerRotation = cameraController.rotation.toEulerAngles();
         switchTo(cube.desktopAt(eulerRotation.y));
@@ -92,7 +98,7 @@ Item {
                     PropertyChanges {
                         target: cameraController
                         radius: cube.faceDistance + 0.5 * cube.faceSize.height / Math.tan(0.5 * camera.fieldOfView * Math.PI / 180)
-                        rotation: Quaternion.fromEulerAngles(0, cube.desktopAzimuth(KWinComponents.Workspace.currentDesktop), 0)
+                        rotation: Quaternion.fromEulerAngles(0, cube.desktopAzimuth(currentDesktop), 0)
                     }
                 },
                 State {
@@ -100,7 +106,7 @@ Item {
                     PropertyChanges {
                         target: cameraController
                         radius: cube.faceDistance * effect.configuration.DistanceFactor + 0.5 * cube.faceSize.height / Math.tan(0.5 * camera.fieldOfView * Math.PI / 180)
-                        rotation: Quaternion.fromEulerAngles(0, cube.desktopAzimuth(KWinComponents.Workspace.currentDesktop), 0).times(Quaternion.fromEulerAngles(-20, 0, 0))
+                        rotation: Quaternion.fromEulerAngles(0, cube.desktopAzimuth(currentDesktop), 0).times(Quaternion.fromEulerAngles(-20, 0, 0))
                     }
                 }
             ]
@@ -164,4 +170,30 @@ Item {
     Keys.onEnterPressed: root.switchToSelected();
     Keys.onReturnPressed: root.switchToSelected();
     Keys.onSpacePressed: root.switchToSelected();
+
+    Component.onCompleted: {
+        if (typeof KWinComponents.Workspace.currentDesktopForScreen === "function") {
+            root.currentDesktop = KWinComponents.Workspace.currentDesktopForScreen(root.targetScreen);
+        } else {
+            // Fallback for kwin-x11
+            root.currentDesktop = KWinComponents.Workspace.currentDesktop;
+        }
+    }
+
+    Connections {
+        target: KWinComponents.Workspace
+        onCurrentDesktopChanged: (previous, current, screen) => {
+            // fallback for kwin-x11
+            if (current === undefined && screen === undefined) {
+                root.currentDesktop = KWinComponents.Workspace.currentDesktop;
+                return;
+            }
+
+            if (screen !== root.targetScreen) {
+                return;
+            }
+
+            root.currentDesktop = current;
+        }
+    }
 }
