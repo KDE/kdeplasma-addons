@@ -22,6 +22,13 @@ WallpaperItem {
             text: i18nd("plasma_wallpaper_org.kde.potd", "Open Wallpaper Image")
             icon.name: "document-open"
             onTriggered: Qt.openUrlExternally(backend.localUrl);
+        },
+        PlasmaCore.Action {
+            text: backend.title ? i18ndc("plasma_wallpaper_org.kde.potd", "@action:inmenu Placeholder is title of image", "About “%1”", backend.title)
+                                : i18ndc("plasma_wallpaper_org.kde.potd", "@action:inmenu", "About This Image")
+            icon.name: "help-about-symbolic"
+            onTriggered: Qt.openUrlExternally(backend.infoUrl)
+            visible: backend.infoUrl.toString() !== ""
         }
     ]
 
