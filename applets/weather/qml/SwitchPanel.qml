@@ -19,6 +19,7 @@ ColumnLayout {
 
     property var warnings: null
     property var futureDays: null
+    property var futureHours: null
     property var lastObservation: null
     property var metaData: null
 
@@ -95,6 +96,11 @@ ColumnLayout {
             view: !!root.futureDays && root.futureDays.daysNumber > 0 ? forecastView : forecastPlaceholder
         },
         WeatherInfoPanel {
+            title: i18nc("@title:tab", "Hourly")
+            visible: !!root.futureHours && root.futureHours.hoursNumber > 0
+            view: hourlyForecastView
+        }
+        WeatherInfoPanel {
             title: i18nc("@title:tab", "Details")
             visible: !!root.lastObservation && root.detailsVisibleModel.length > 0
             view: detailsView
@@ -161,6 +167,15 @@ ColumnLayout {
             futureDays: root.futureDays
             metaData: root.metaData
             displayTemperatureUnit: root.displayTemperatureUnit
+        }
+    }
+
+    Component {
+        id: hourlyForecastView
+        HourlyForecastView {
+            futureHours: root.futureHours
+            metaData: root.metaData
+            displayTempereatureUnit: root.displayTemperatureUnit
         }
     }
 
