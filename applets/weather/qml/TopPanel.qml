@@ -9,23 +9,27 @@ import QtQuick
 import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
-import org.kde.ksvg as KSvg
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.core as PlasmaCore
-import plasma.applet.org.kde.plasma.weather
 
-GridLayout {
+ColumnLayout {
     id: root
 
     property var metaData: null
     property var lastObservation: null
     property var station: null
+    property var warnings: null
     property var futureDays: null
 
-    property int displayWindSpeedUnit: 0
+    property int invalidUnit: 0
+    property int displaySpeedUnit: 0
     property int displayTemperatureUnit: 0
+    property int displayVisibilityUnit: 0
+    property int displayPressureUnit: 0
 
     readonly property bool isTemperaturePresent: !!root.lastObservation?.temperature && !!root.metaData?.temperatureUnit
+
+    signal openWarnings
 
     function feelsLikeTemperature(windchill, heatIndex, humidex) {
         if (!root.isTemperaturePresent) {
@@ -33,7 +37,7 @@ GridLayout {
         }
 
         let feelsTemperature;
-        if(windchill) {
+        if (windchill) {
             feelsTemperature = windchill;
         } else if (heatIndex) {
             feelsTemperature = heatIndex;
@@ -48,180 +52,158 @@ GridLayout {
         return feelsTemperature;
     }
 
-    readonly property int sideWidth: Math.max(
-        windSpeedLabel.implicitWidth,
-        tempLabel.implicitWidth,
-        windSpeedDirection.naturalSize.width
-    )
+    readonly property int sideWidth: Math.max(tempLabel.implicitWidth, detailsView.implicitWidth)
 
-    Layout.minimumWidth: Math.max(
-        Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 25),
-        (sideWidth + columnSpacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
-    )
+    Layout.minimumWidth: Math.max(Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 10), (sideWidth + spacing) * 2 + Kirigami.Units.iconSizes.huge)
 
-    columnSpacing: Kirigami.Units.largeSpacing
-    rowSpacing: Kirigami.Units.largeSpacing
-
-    columns: 3
-
-    Kirigami.Heading {
-        id: locationLabel
-
-        Layout.row: 0
-        Layout.column: 0
-        Layout.columnSpan: 3
+    RowLayout {
         Layout.fillWidth: true
-
-        horizontalAlignment: Text.AlignHCenter
-        elide: Text.ElideRight
-
-        visible: !!root.station?.place
-
-        text: visible ? root.station.place : ""
-        textFormat: Text.PlainText
-
-        PlasmaCore.ToolTipArea {
-            anchors.fill: parent
-            mainText: locationLabel.visible ? root.station.place : ""
-            visible: locationLabel.truncated
-        }
-    }
-
-    ColumnLayout {
-        Layout.row: 1
-        Layout.column: 0
-        Layout.fillWidth: true
-        Layout.preferredWidth: 25 // 25% of the view
-        Layout.minimumWidth: sideWidth
-
         spacing: Kirigami.Units.smallSpacing
 
-        PlasmaComponents.Label {
-            id: tempLabel
+        Kirigami.Heading {
+            id: locationLabel
+
             Layout.fillWidth: true
 
-            visible: root.isTemperaturePresent
+            visible: !!root.station?.place
 
-            font.pixelSize: Kirigami.Units.iconSizes.medium
-            font.bold: true
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.NoWrap
+            elide: Text.ElideRight
+            text: visible ? root.station.place : ""
             textFormat: Text.PlainText
 
-            text: root.isTemperaturePresent ? Util.temperatureToDisplayString(root.displayTemperatureUnit, root.lastObservation.temperature, root.metaData.temperatureUnit, true, false) : ""
+            PlasmaCore.ToolTipArea {
+                anchors.fill: parent
+                mainText: locationLabel.text
+                active: locationLabel.truncated
+            }
         }
 
-        PlasmaComponents.Label {
-            id: feelsLikeLabel
+        PlasmaComponents.Button {
+            Layout.alignment: Qt.AlignRight
+            text: !!root.warnings ? i18ncp("@title:tab %1 is the number of weather notices (alerts, warnings, watches, ...) issued", "%1 Notice", "%1 Notices", root.warnings.count) : ""
+            icon.name: !!root.warnings && root.warnings.maxPriorityCount >= 2 ? 'data-warning-symbolic' : 'data-information-symbolic'
+            visible: !!root.warnings && root.warnings.count !== 0
+            flat: true
+
+            onClicked: root.openWarnings()
+        }
+    }
+
+    RowLayout {
+        Layout.fillWidth: true
+        Layout.alignment: Qt.AlignVCenter
+        spacing: Kirigami.Units.smallSpacing
+
+        Kirigami.Icon {
+            id: conditionIcon
+
+            visible: !!root.lastObservation?.conditionIcon || !!root.futureDays?.firstDayIcon
+
+            Layout.alignment: Qt.AlignVCenter
+
+            Layout.preferredWidth: Kirigami.Units.iconSizes.huge
+            Layout.preferredHeight: Kirigami.Units.iconSizes.huge
+
+            fallback: Util.unknownWeatherIcon
+            source: {
+                //check if there is the icon from last observation and if it exists return it
+                if (!!root.lastObservation?.conditionIcon && root.lastObservation.conditionIcon !== Util.unknownWeatherIcon) {
+                    return root.lastObservation.conditionIcon;
+                }
+                //if the icon from last observation not exists use first icon from forecast
+                if (!!root.futureDays?.firstDayIcon) {
+                    return root.futureDays.firstDayIcon;
+                }
+                //if there are no icons then use default unavailable icon
+                return Util.unknownWeatherIcon;
+            }
+        }
+
+        ColumnLayout {
+            Layout.preferredWidth: 25 // 25% of the view
+            Layout.minimumWidth: root.sideWidth
+
+            Layout.alignment: Qt.AlignVCenter
+
+            spacing: 0
+
+            PlasmaComponents.Label {
+                id: tempLabel
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignVCenter
+
+                visible: root.isTemperaturePresent
+
+                font.pixelSize: Kirigami.Units.iconSizes.medium
+                font.bold: true
+                wrapMode: Text.NoWrap
+                textFormat: Text.PlainText
+
+                text: root.isTemperaturePresent ? Util.temperatureToDisplayString(root.displayTemperatureUnit, root.lastObservation.temperature, root.metaData.temperatureUnit, true, false) : ""
+            }
+
+            PlasmaComponents.Label {
+                id: feelsLikeLabel
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignTop
+
+                readonly property bool isFeelsLikeTemperaturePresent: isTemperaturePresent && (!!root.lastObservation.heatIndex || !!root.lastObservation.windchill || !!root.lastObservation.humidex)
+
+                visible: {
+                    if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
+                        let feelsTemperature = feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
+                        return feelsTemperature !== "" && feelsTemperature !== root.lastObservation.temperature;
+                    }
+
+                    return false;
+                }
+
+                wrapMode: Text.Wrap
+                textFormat: Text.PlainText
+
+                opacity: 0.75
+
+                text: {
+                    if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
+                        let feelsTemperature = feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
+                        let feelsTemperatureString = Util.temperatureToDisplayString(root.displayTemperatureUnit, feelsTemperature, root.metaData.temperatureUnit, true, false);
+                        return i18nc("@label %1 is the perceived temperature due to conditions like wind or humidity. Use the common phrasing for this concept and keep it short, adding a colon if necessary", "Feels like %1", feelsTemperatureString);
+                    }
+                    return "";
+                }
+            }
+
+            PlasmaComponents.Label {
+                id: conditionLabel
+
+                visible: !!root.lastObservation?.currentConditions
+
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignTop
+
+                text: visible ? root.lastObservation.currentConditions : ""
+
+                wrapMode: Text.Wrap
+                textFormat: Text.PlainText
+
+                opacity: 0.75
+            }
+        }
+
+        DetailsView {
+            id: detailsView
+
             Layout.fillWidth: true
+            Layout.alignment: Qt.AlignTop
 
-            readonly property bool isFeelsLikeTemperaturePresent: isTemperaturePresent  && (!!root.lastObservation.heatIndex  || !!root.lastObservation.windchill || !!root.lastObservation.humidex)
+            invalidUnit: root.invalidUnit
+            displayTemperatureUnit: root.displayTemperatureUnit
+            displayVisibilityUnit: root.displayVisibilityUnit
+            displayPressureUnit: root.displayPressureUnit
+            displaySpeedUnit: root.displaySpeedUnit
 
-            visible: {
-                if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
-                    let feelsTemperature = feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
-                    return feelsTemperature !== "" && feelsTemperature !== root.lastObservation.temperature
-                }
-
-                return false;
-            }
-
-            horizontalAlignment: Text.AlignHCenter
-            wrapMode: Text.Wrap
-            textFormat: Text.PlainText
-
-            text: {
-                if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
-                    let feelsTemperature = feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
-                    let feelsTemperatureString = Util.temperatureToDisplayString(root.displayTemperatureUnit, feelsTemperature, root.metaData.temperatureUnit, true, false);
-                    return i18nc("@label %1 is the perceived temperature due to conditions like wind or humidity. Use the common phrasing for this concept and keep it short, adding a colon if necessary",
-                        "Feels like %1", feelsTemperatureString);
-                }
-                return "";
-            }
+            metaData: root.metaData
+            lastObservation: root.lastObservation
         }
     }
-
-    Kirigami.Icon {
-        id: conditionIcon
-
-        visible: !!root.lastObservation?.conditionIcon || !!root.futureDays?.firstDayIcon
-
-        Layout.row: 1
-        Layout.column: 1
-        Layout.minimumHeight: Kirigami.Units.iconSizes.huge
-        Layout.minimumWidth: Kirigami.Units.iconSizes.huge
-        Layout.preferredHeight: Layout.minimumHeight
-        Layout.fillWidth: true
-        // All the items have `fillWidth: true`, so the layout weights each
-        // contribution and splits the space accordingly to their proportion.
-        Layout.preferredWidth: 50 // 50% of the view
-
-        fallback: Util.unknownWeatherIcon
-        source: {
-            //check if there is the icon from last observation and if it exists return it
-            if (!!root.lastObservation?.conditionIcon && root.lastObservation.conditionIcon !== Util.unknownWeatherIcon) {
-                return root.lastObservation.conditionIcon;
-            }
-            //if the icon from last observation not exists use first icon from forecast
-            if (!!root.futureDays?.firstDayIcon) {
-                return root.futureDays.firstDayIcon;
-            }
-            //if there are no icons then use default unavailable icon
-            return Util.unknownWeatherIcon;
-        }
-    }
-
-    PlasmaComponents.Label {
-        id: conditionLabel
-
-        visible: !!root.lastObservation?.currentConditions
-
-        Layout.row: 2
-        Layout.column: 0
-        Layout.columnSpan: 3
-        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-
-        text: visible ? root.lastObservation.currentConditions : ""
-        textFormat: Text.PlainText
-    }
-
-    Item {
-        Layout.row: 1
-        Layout.column: 2
-        Layout.fillWidth: true
-        Layout.preferredWidth: 25 // 25% of the view
-        Layout.minimumWidth: sideWidth
-        Layout.alignment: Qt.AlignCenter
-
-        implicitHeight: windSpeedDirection.implicitHeight + windSpeedLabel.implicitHeight
-
-        KSvg.SvgItem {
-            id: windSpeedDirection
-
-            anchors.horizontalCenter: parent.horizontalCenter
-            implicitWidth: Kirigami.Units.iconSizes.medium
-            implicitHeight: Kirigami.Units.iconSizes.medium
-
-            imagePath: "weather/wind-arrows"
-            elementId: visible ? root.lastObservation.windDirection : ""
-
-            visible: !!root.lastObservation?.windDirection
-        }
-
-        PlasmaComponents.Label {
-            id: windSpeedLabel
-
-            visible: !isNaN(root.lastObservation?.windSpeed) && !!root.metaData?.windSpeedUnit
-
-            anchors {
-                top: windSpeedDirection.bottom
-                horizontalCenter: parent.horizontalCenter
-            }
-
-            text: root.lastObservation?.windSpeed !== 0.0 && root.lastObservation && root.metaData ? Util.valueToDisplayString(root.displayWindSpeedUnit, root.lastObservation.windSpeed, root.metaData.windSpeedUnit, 1) : i18nc("Wind condition", "Calm")
-            textFormat: Text.PlainText
-        }
-    }
-
 }
