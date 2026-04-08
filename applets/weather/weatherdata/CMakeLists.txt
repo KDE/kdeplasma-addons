@@ -12,6 +12,8 @@ target_sources(plasmaweatherdata PRIVATE
     lastobservation.cpp
     metadata.h
     metadata.cpp
+    futurehours.h
+    futurehours.cpp
     futuredays.h
     futuredays.cpp
     station.h
@@ -46,6 +48,7 @@ install(FILES
         lastobservation.h
         metadata.h
         futuredays.h
+        futurehours.h
         station.h
         warnings.h
         forecast.h
