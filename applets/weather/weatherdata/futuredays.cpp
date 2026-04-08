@@ -8,6 +8,226 @@
 
 #include <klocalizedstring.h>
 
+FutureDaysPoints::FutureDaysPoints(const std::shared_ptr<FutureDays> &futureDays, QObject *parent)
+    : QAbstractTableModel(parent)
+    , m_highLowTempPresent(false)
+    , m_minTemp(0)
+    , m_maxTemp(0)
+    , m_futureDays(futureDays)
+{
+    if (!m_futureDays->rowCount()) {
+        return;
+    }
+
+    qreal minTemp = std::numeric_limits<qreal>::max();
+    qreal maxTemp = std::numeric_limits<qreal>::lowest();
+    for (int dayTimeIndex = 0; dayTimeIndex < m_futureDays->rowCount(); ++dayTimeIndex) {
+        for (int dayIndex = 0; dayIndex < m_futureDays->columnCount(); ++dayIndex) {
+            QVariant minTempVariant = m_futureDays->data(m_futureDays->index(dayTimeIndex, dayIndex), FutureDays::LowTemp);
+            QVariant maxTempVariant = m_futureDays->data(m_futureDays->index(dayTimeIndex, dayIndex), FutureDays::HighTemp);
+            QVariant generalTempVariant = m_futureDays->data(m_futureDays->index(dayTimeIndex, dayIndex), FutureDays::GeneralTemp);
+
+            // Calculate min and max values according to what data ion provides
+            if (minTempVariant.canConvert<qreal>() && maxTempVariant.canConvert<qreal>()) {
+                minTemp = std::min(minTempVariant.toReal(), minTemp);
+                maxTemp = std::max(maxTempVariant.toReal(), maxTemp);
+                m_highLowTempPresent = true;
+            } else if (minTempVariant.canConvert<qreal>()) {
+                minTemp = std::min(minTempVariant.toReal(), minTemp);
+                maxTemp = std::max(minTempVariant.toReal(), maxTemp);
+                m_highLowTempPresent = true;
+            } else if (maxTempVariant.canConvert<qreal>()) {
+                minTemp = std::min(maxTempVariant.toReal(), minTemp);
+                maxTemp = std::max(maxTempVariant.toReal(), maxTemp);
+                m_highLowTempPresent = true;
+            } else if (generalTempVariant.canConvert<qreal>()) {
+                minTemp = std::min(generalTempVariant.toReal(), minTemp);
+                maxTemp = std::max(generalTempVariant.toReal(), maxTemp);
+            }
+        }
+    }
+
+    m_maxTemp = maxTemp;
+    m_minTemp = minTemp;
+}
+
+FutureDaysPoints::~FutureDaysPoints()
+{
+}
+
+int FutureDaysPoints::rowCount(const QModelIndex &parent) const
+{
+    if (parent.isValid()) {
+        return 0;
+    }
+
+    return EndRow;
+}
+
+int FutureDaysPoints::columnCount(const QModelIndex &parent) const
+{
+    if (parent.isValid()) {
+        return 0;
+    }
+
+    return m_futureDays->columnCount();
+}
+
+QVariant FutureDaysPoints::data(const QModelIndex &index, int role) const
+{
+    if (!index.isValid() || role != Qt::DisplayRole) {
+        return {};
+    }
+
+    if (index.row() == Timestamp) {
+        return m_futureDays->data(m_futureDays->index(FutureDays::Day, index.column()), FutureDays::Timestamp);
+    }
+
+    const QVariant value = aggregatedValue(index.column(), static_cast<RowsData>(index.row()));
+
+    if (!value.canConvert<qreal>()) {
+        return value;
+    }
+
+    if (index.row() == ConditionProbability) {
+        return value;
+    }
+
+    // If the minimum and maximum temperatures are the same, position the point
+    // at the center of the graph to avoid division by zero during normalization.
+    if (qFuzzyCompare(m_maxTemp, m_minTemp)) {
+        return 50.0;
+    }
+
+    return (value.toReal() - m_minTemp) / (m_maxTemp - m_minTemp) * 100.0;
+}
+
+QVariant FutureDaysPoints::displayTemperature(int dayIndex, RowsData row) const
+{
+    switch (row) {
+    case GeneralTemp:
+    case HighTemp:
+    case LowTemp:
+        return aggregatedValue(dayIndex, row);
+
+    default:
+        return {};
+    }
+}
+
+QVariant FutureDaysPoints::displayConditionProbability(int dayIndex) const
+{
+    return aggregatedValue(dayIndex, ConditionProbability);
+}
+
+QVariant FutureDaysPoints::aggregatedValue(int dayIndex, RowsData row) const
+{
+    const QModelIndex dayModelIndex = m_futureDays->index(FutureDays::Day, dayIndex);
+
+    QModelIndex nightModelIndex;
+    if (m_futureDays->isNightPresent()) {
+        nightModelIndex = m_futureDays->index(FutureDays::Night, dayIndex);
+    }
+
+    switch (row) {
+    case HighTemp: {
+        QVariant day = m_futureDays->data(dayModelIndex, FutureDays::HighTemp);
+        QVariant night = m_futureDays->data(nightModelIndex, FutureDays::HighTemp);
+
+        if (day.canConvert<qreal>() && night.canConvert<qreal>()) {
+            return std::max(day.toReal(), night.toReal());
+        }
+
+        return day.canConvert<qreal>() ? day : night;
+    }
+
+    case LowTemp: {
+        QVariant day = m_futureDays->data(dayModelIndex, FutureDays::LowTemp);
+        QVariant night = m_futureDays->data(nightModelIndex, FutureDays::LowTemp);
+
+        if (day.canConvert<qreal>() && night.canConvert<qreal>()) {
+            return std::min(day.toReal(), night.toReal());
+        }
+
+        return day.canConvert<qreal>() ? day : night;
+    }
+
+    case GeneralTemp: {
+        QVariant day = m_futureDays->data(dayModelIndex, FutureDays::GeneralTemp);
+        QVariant night = m_futureDays->data(nightModelIndex, FutureDays::GeneralTemp);
+
+        if (day.canConvert<qreal>() && night.canConvert<qreal>()) {
+            return std::midpoint(day.toReal(), night.toReal());
+        }
+
+        return day.canConvert<qreal>() ? day : night;
+    }
+
+    case ConditionProbability: {
+        QVariant day = m_futureDays->data(dayModelIndex, FutureDays::ConditionProbability);
+        QVariant night = m_futureDays->data(nightModelIndex, FutureDays::ConditionProbability);
+
+        if (day.canConvert<qreal>() && night.canConvert<qreal>()) {
+            return std::max(day.toReal(), night.toReal());
+        }
+
+        return day.canConvert<qreal>() ? day : night;
+    }
+
+    default:
+        return {};
+    }
+}
+
+bool FutureDaysPoints::hasProbability() const
+{
+    return m_futureDays->hasProbability();
+}
+
+bool FutureDaysPoints::highLowTempPresent() const
+{
+    return m_highLowTempPresent;
+}
+
+qreal FutureDaysPoints::minTemp() const
+{
+    return m_minTemp;
+}
+
+qreal FutureDaysPoints::maxTemp() const
+{
+    return m_maxTemp;
+}
+
+QDateTime FutureDaysPoints::minDate() const
+{
+    // It is possible that the day forecast is not present. So check for the night forecast too
+    for (int rowPosition = 0; rowPosition < m_futureDays->rowCount(); ++rowPosition) {
+        QVariant dateVariant = m_futureDays->data(m_futureDays->index(rowPosition, 0), FutureDays::Timestamp);
+        if (dateVariant.canConvert<QDateTime>()) {
+            return dateVariant.toDateTime();
+        }
+    }
+    return {};
+}
+
+QDateTime FutureDaysPoints::maxDate() const
+{
+    // It is possible that the day forecast is not present. So check for the night forecast too
+    for (int rowPosition = 0; rowPosition < m_futureDays->rowCount(); ++rowPosition) {
+        QVariant dateVariant = m_futureDays->data(m_futureDays->index(rowPosition, m_futureDays->columnCount() - 1), FutureDays::Timestamp);
+        if (dateVariant.canConvert<QDateTime>()) {
+            return dateVariant.toDateTime();
+        }
+    }
+    return {};
+}
+
+int FutureDaysPoints::daysNumber() const
+{
+    return m_futureDays->daysNumber();
+}
+
 FutureDays::FutureDays(QObject *parent)
     : QAbstractTableModel(parent)
     , m_isNightPresent(false)
@@ -31,6 +251,7 @@ QHash<int, QByteArray> FutureDays::roleNames() const
     roles[Condition] = "condition";
     roles[HighTemp] = "highTemp";
     roles[LowTemp] = "lowTemp";
+    roles[GeneralTemp] = "generalTemp";
     roles[ConditionProbability] = "conditionProbability";
     return roles;
 }
@@ -68,10 +289,10 @@ QVariant FutureDays::headerData(int section, Qt::Orientation orientation, int ro
     if (orientation == Qt::Vertical && m_totalRows > 1) {
         if (role == Period) {
             if (section == Day) {
-                return i18n("Day");
+                return i18nc("Short for Day", "D");
             }
             if (m_isNightPresent && section == Night) {
-                return i18n("Night");
+                return i18nc("Short for Night", "N");
             }
         }
     }
@@ -80,6 +301,10 @@ QVariant FutureDays::headerData(int section, Qt::Orientation orientation, int ro
 
 QVariant FutureDays::data(const QModelIndex &index, int role) const
 {
+    if (!index.isValid()) {
+        return {};
+    }
+
     if (index.column() >= m_nextDays.count()) {
         return {};
     }
@@ -90,10 +315,9 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
 
     if (role == Timestamp) {
         return m_nextDays.at(index.column()).timestamp();
-        return {};
     }
 
-    if (index.row() == 0) {
+    if (index.row() == Day) {
         const std::optional<FutureForecast> &forecast = m_nextDays.at(index.column()).daytime();
 
         if (!forecast.has_value()) {
@@ -109,10 +333,12 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
             return forecast->highTemp().has_value() ? *forecast->highTemp() : QVariant();
         case LowTemp:
             return forecast->lowTemp().has_value() ? *forecast->lowTemp() : QVariant();
+        case GeneralTemp:
+            return forecast->generalTemp().has_value() ? *forecast->generalTemp() : QVariant();
         case ConditionProbability:
             return forecast->conditionProbability().has_value() ? *forecast->conditionProbability() : QVariant();
         }
-    } else {
+    } else if (index.row() == Night) {
         const std::optional<FutureForecast> &forecast = m_nextDays.at(index.column()).night();
 
         if (!forecast.has_value()) {
@@ -128,6 +354,8 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
             return forecast->highTemp().has_value() ? *forecast->highTemp() : QVariant();
         case LowTemp:
             return forecast->lowTemp().has_value() ? *forecast->lowTemp() : QVariant();
+        case GeneralTemp:
+            return forecast->generalTemp().has_value() ? *forecast->generalTemp() : QVariant();
         case ConditionProbability:
             return forecast->conditionProbability().has_value() ? *forecast->conditionProbability() : QVariant();
         }
@@ -138,15 +366,15 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
 
 void FutureDays::addDay(const FutureDayForecast &forecast)
 {
-    beginInsertColumns(QModelIndex(), m_nextDays.size(), m_nextDays.size());
-
     if (m_nextDays.isEmpty() && forecast.daytime().has_value()) {
         m_firstDayExist = true;
     }
 
-    if (!m_isNightPresent && forecast.night()) {
+    if (!m_isNightPresent && forecast.night().has_value()) {
+        beginInsertRows(QModelIndex(), Night, Night);
         m_totalRows = 2;
         m_isNightPresent = true;
+        endInsertRows();
     }
 
     if ((forecast.daytime().has_value() && forecast.daytime()->conditionProbability() != 0.0)
@@ -154,6 +382,7 @@ void FutureDays::addDay(const FutureDayForecast &forecast)
         m_hasProbability = true;
     }
 
+    beginInsertColumns(QModelIndex(), m_nextDays.size(), m_nextDays.size());
     m_nextDays.append(forecast);
     endInsertColumns();
     m_daysNumber = m_nextDays.count();
@@ -161,11 +390,9 @@ void FutureDays::addDay(const FutureDayForecast &forecast)
 
 void FutureDays::addDays(const QList<FutureDayForecast> &forecasts)
 {
-    beginResetModel();
     for (const auto &forecast : forecasts) {
         addDay(forecast);
     }
-    endResetModel();
 }
 
 QString FutureDays::firstDayIcon() const
@@ -273,6 +500,11 @@ std::optional<qreal> FutureForecast::lowTemp() const
     return m_lowTemp;
 }
 
+std::optional<qreal> FutureForecast::generalTemp() const
+{
+    return m_generalTemp;
+}
+
 std::optional<qreal> FutureForecast::conditionProbability() const
 {
     return m_conditionProbability;
@@ -296,6 +528,11 @@ void FutureForecast::setHighTemp(qreal highTemp)
 void FutureForecast::setLowTemp(qreal lowTemp)
 {
     m_lowTemp = lowTemp;
+}
+
+void FutureForecast::setGeneralTemp(qreal generalTemp)
+{
+    m_generalTemp = generalTemp;
 }
 
 void FutureForecast::setConditionProbability(qreal conditionProbability)
