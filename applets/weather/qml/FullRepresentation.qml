@@ -15,10 +15,13 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 
-ColumnLayout {
+PlasmaExtras.Representation {
     id: root
 
     property int status: 0
+
+    required property bool showHourlyTemperatureGraph
+    required property bool showDayTemperatureGraph
 
     property int invalidUnit: 0
     property int displaySpeedUnit: 0
@@ -27,28 +30,52 @@ ColumnLayout {
     property int displayVisibilityUnit: 0
 
     property var station: null
+    property var futureHours: null
+    property var futureHoursPoints: null
     property var futureDays: null
+    property var futureDaysPoints: null
     property var warnings: null
     property var lastObservation: null
     property var metaData: null
 
-    Layout.minimumWidth: Math.min(Kirigami.Units.gridUnit * 25,
-        Math.max(Kirigami.Units.gridUnit * 10,
-            implicitWidth))
-    Layout.minimumHeight: Math.max(Kirigami.Units.gridUnit * 10, implicitHeight)
+    readonly property alias stackDepth: stack.depth
 
+    function popStack(): void {
+        stack.pop();
+    }
+
+    Layout.minimumWidth: Math.min(Kirigami.Units.gridUnit * 25, Math.max(Kirigami.Units.gridUnit * 10, stack.implicitWidth)) + rightPadding + leftPadding
+    Layout.minimumHeight: stack.implicitHeight + topPadding + bottomPadding
     Layout.margins: Kirigami.Units.smallSpacing
+
+    header: PlasmaExtras.PlasmoidHeading {
+        focus: true
+
+        visible: stack.depth > 1 && Plasmoid.containment.pluginName !== "org.kde.plasma.systemtray"
+        contentItem: RowLayout {
+            Layout.fillWidth: true
+
+            PlasmaComponents.ToolButton {
+                icon.name: mirrored ? "go-previous-rtl-symbolic" : "go-previous-symbolic"
+                text: i18nc("@action:button", "Return to Weather Forecast")
+                visible: stack.depth > 1 && Plasmoid.containment.pluginName !== "org.kde.plasma.systemtray"
+
+                onClicked: {
+                    stack.removePage(stack.lastItem);
+                }
+            }
+        }
+    }
 
     PlasmaExtras.PlaceholderMessage {
         id: placeholderLocation
-        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        Layout.margins: Kirigami.Units.gridUnit
+        anchors.centerIn: parent
+        anchors.margins: Kirigami.Units.gridUnit
         // when not in panel, a configure button is already shown for needsConfiguration
         visible: (root.status === ForecastControl.NeedsConfiguration) && (Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal)
         iconName: "mark-location"
         text: i18n("Please set your location")
-        helpfulAction: QQC2.Action
-        {
+        helpfulAction: QQC2.Action {
             icon.name: "configure"
             text: i18n("Set location…")
 
@@ -59,90 +86,77 @@ ColumnLayout {
     }
 
     PlasmaExtras.PlaceholderMessage {
-        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-        Layout.margins: Kirigami.Units.largeSpacing * 4
-        Layout.maximumWidth: Kirigami.Units.gridUnit * 20
+        anchors.centerIn: parent
+        anchors.margins: Kirigami.Units.largeSpacing * 4
+        width: Math.min(parent.width, Kirigami.Units.gridUnit * 20)
         visible: root.status === ForecastControl.Timeout
         iconName: "network-disconnect"
         text: !!root.station?.place ? i18n("Unable to retrieve weather information for %1", root.station.place) : i18n("Unable to retrieve weather information")
         explanation: i18nc("@info:usagetip", "The network request timed out, possibly due to a server outage at the weather station provider. Check again later.")
     }
 
-    TopPanel {
-        id: topPanel
-        visible: (!!root.station || !!root.lastObservation) && root.status === ForecastControl.Normal
+    PlasmaExtras.PlaceholderMessage {
+        visible: !stack.visible && root.status === ForecastControl.Normal
+        anchors.centerIn: parent
+        anchors.margins: Kirigami.Units.largeSpacing * 4
+        width: Math.min(parent.width, Kirigami.Units.gridUnit * 20)
 
-        station: root.station
-        lastObservation: root.lastObservation
-        metaData: root.metaData
-        futureDays: root.futureDays
+        text: i18nc("@info:placeholder", "Unable to load weather forecast")
+        explanation: xi18nc("@info:usagetip", "There may be a technical issue with the weather provider. If the issue persists for longer than a day, <link url='https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</link>.")
 
-        displayWindSpeedUnit: root.displaySpeedUnit
-        displayTemperatureUnit: root.displayTemperatureUnit
-
-        Layout.fillWidth: true
-        // Allow the top panel to vertically grow but within a limit
-        Layout.fillHeight: true
-        Layout.maximumHeight: implicitHeight * 1.5
-    }
-
-    SwitchPanel {
-        id: switchPanel
-        visible: root.status === ForecastControl.Normal
-        Layout.fillWidth: true
-
-        futureDays: root.futureDays
-        warnings: root.warnings
-        lastObservation: root.lastObservation
-        metaData: root.metaData
-
-        invalidUnit: root.invalidUnit
-        displayPressureUnit: root.displayPressureUnit
-        displaySpeedUnit: root.displaySpeedUnit
-        displayVisibilityUnit: root.displayVisibilityUnit
-        displayTemperatureUnit: root.displayTemperatureUnit
-    }
-
-    PlasmaComponents.Label {
-        id: sourceLabel
-        visible: root.status === ForecastControl.Normal
-
-        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-            acceptedButtons: Qt.NoButton
-            cursorShape: !!metaData?.credit ? Qt.PointingHandCursor : Qt.ArrowCursor
-        }
-
-        wrapMode: Text.WordWrap
-        horizontalAlignment: Text.AlignRight
-        font.pointSize: Kirigami.Theme.smallFont.pointSize
-        linkColor : color
-        opacity: 0.75
-        textFormat: Text.StyledText
-
-        text: {
-            let result = "";
-            if (!!metaData?.credit) {
-                if (!!metaData.creditURL) {
-                    result = "<a href=\"" + root.metaData.creditURL + "\">" + root.metaData.credit + "</a>";
-                } else {
-                    result = root.metaData.credit;
-                }
-            }
-            return result;
-        }
-
-        onLinkActivated: link => {
-            Qt.openUrlExternally(link);
-        }
+        onLinkActivated: Qt.openUrlExternally(link)
     }
 
     QQC2.BusyIndicator {
         id: busy
-        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+        anchors.centerIn: parent
         visible: root.status === ForecastControl.Connecting
+    }
+
+    Kirigami.PageRow {
+        id: stack
+
+        anchors.fill: parent
+
+        visible: root.status === ForecastControl.Normal && ((!!root.futureDays && root.futureDays.daysNumber > 0) || (!!root.futureHours && root.futureHours.hoursNumber > 0))
+
+        initialPage: weatherPage
+
+        defaultColumnWidth: currentItem.width
+
+        implicitWidth: items[0].implicitWidth + items[0].rightPadding + items[0].leftPadding
+        implicitHeight: items[0].implicitHeight + items[0].topPadding + items[0].bottomPadding
+
+        WeatherPage {
+            id: weatherPage
+
+            status: root.status
+
+            showHourlyTemperatureGraph: root.showHourlyTemperatureGraph
+            showDayTemperatureGraph: root.showDayTemperatureGraph
+
+            invalidUnit: root.invalidUnit
+            displaySpeedUnit: root.displaySpeedUnit
+            displayPressureUnit: root.displayPressureUnit
+            displayTemperatureUnit: root.displayTemperatureUnit
+            displayVisibilityUnit: root.displayVisibilityUnit
+
+            station: root.station
+            futureHours: root.futureHours
+            futureHoursPoints: root.futureHoursPoints
+            futureDays: root.futureDays
+            futureDaysPoints: root.futureDaysPoints
+            warnings: root.warnings
+            lastObservation: root.lastObservation
+            metaData: root.metaData
+
+            onOpenWarnings: stack.push(warningsPage)
+        }
+
+        WarningsPage {
+            id: warningsPage
+
+            model: root.warnings
+        }
     }
 }

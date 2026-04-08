@@ -65,6 +65,21 @@ FutureDays *Forecast::futureDays() const
     return m_futureDays.get();
 }
 
+FutureDaysPoints *Forecast::futureDaysPoints() const
+{
+    return m_futureDaysPoints.get();
+}
+
+FutureHours *Forecast::futureHours() const
+{
+    return m_futureHours.get();
+}
+
+FutureHoursPoints *Forecast::futureHoursPoints() const
+{
+    return m_futureHoursPoints.get();
+}
+
 Warnings *Forecast::warnings() const
 {
     return m_warnings.get();
@@ -114,8 +129,18 @@ void Forecast::setFutureDays(std::shared_ptr<FutureDays> futureDays)
 {
     if (futureDays->columnCount()) {
         m_futureDays = futureDays;
+        m_futureDaysPoints = std::make_shared<FutureDaysPoints>(futureDays);
     }
 }
+
+void Forecast::setFutureHours(std::shared_ptr<FutureHours> futureHours)
+{
+    if (futureHours->rowCount()) {
+        m_futureHours = futureHours;
+        m_futureHoursPoints = std::make_shared<FutureHoursPoints>(futureHours);
+    }
+}
+
 void Forecast::setWarnings(std::shared_ptr<Warnings> warnings)
 {
     if (warnings->rowCount()) {
