@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: calendarsystem.h:50
 #, kde-format
@@ -114,6 +114,8 @@ msgid ""
 "A positive offset signifies a later date, while a negative offset signifies "
 "an earlier date."
 msgstr ""
+"Kladný posun znamená neskorší dátum, zatiaľ čo záporný posun znamená skorší "
+"dátum."
 
 #: provider/hebrewcalendar.cpp:91
 #, kde-format

@@ -13,20 +13,20 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.1\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.1\n"
 
 #: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Media"
-msgstr ""
+msgstr "Médiá"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Správanie"
 
 #: qml/ConfigBehavior.qml:48
 #, kde-format
@@ -175,8 +175,7 @@ msgid "Add Files…"
 msgstr "Pridať súbory..."
 
 #: qml/ConfigMedia.qml:84
-#, fuzzy, kde-format
-#| msgid "Remove path"
+#, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Odstrániť cestu"
@@ -185,13 +184,13 @@ msgstr "Odstrániť cestu"
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
-msgstr ""
+msgstr "Žiadne médiá nie sú nakonfigurované"
 
 #: qml/ConfigMedia.qml:95
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
-msgstr ""
+msgstr "Pridajte súbory alebo priečinky, aby sa zobrazovali v miniaplikácii."
 
 #: qml/ConfigMedia.qml:101
 #, kde-format
@@ -209,13 +208,13 @@ msgstr "Vybrať priečinok"
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
-msgstr ""
+msgstr "Žiadne médiá nie sú vybraté"
 
 #: qml/main.qml:364 qml/main.qml:374
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
-msgstr ""
+msgstr "Vybrať médiá…"
 
 #~ msgctxt "@title"
 #~ msgid "General"

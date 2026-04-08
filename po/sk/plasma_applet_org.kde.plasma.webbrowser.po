@@ -13,8 +13,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #: qml/config.qml:12
 #, kde-format
@@ -38,13 +38,13 @@ msgstr "Ikona:"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
-msgstr ""
+msgstr "Ikona webovej stránky"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
-msgstr ""
+msgstr "Zmeniť ikonu Webového prehliadača"
 
 #: qml/ConfigAppearance.qml:58
 #, kde-format
@@ -72,7 +72,7 @@ msgstr "Vybrať..."
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
-msgstr ""
+msgstr "Vyberte ikonu pre Webový prehliadač"
 
 #: qml/ConfigAppearance.qml:103
 #, kde-format
@@ -84,24 +84,22 @@ msgstr "Obnovenie predvolenej ikony"
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
-msgstr ""
+msgstr "Zobraziť navigačný panel"
 
 #: qml/ConfigGeneral.qml:22
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
-msgstr ""
+msgstr "Načítať naposledy navštívenú stránku"
 
 #: qml/ConfigGeneral.qml:26
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
-msgstr ""
+msgstr "Pri spustení:"
 
 #: qml/ConfigGeneral.qml:33
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Reload This Page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Znovu načítať túto stránku"
@@ -134,13 +132,13 @@ msgstr "Automatická zmena mierky, ak je šírka menšia ako"
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
-msgstr ""
+msgstr "Nastavenia prehliadača:"
 
 #: qml/ConfigGeneral.qml:155
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
-msgstr ""
+msgstr "Súkromné prehliadanie"
 
 #: qml/main.qml:74
 #, kde-format
@@ -158,12 +156,10 @@ msgstr "Dopredu"
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
-msgstr ""
+msgstr "Prejsť domov"
 
 #: qml/main.qml:100
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Type a URL"
+#, kde-format
 msgid "Open Default URL"
 msgstr "Napísať URL"
 
@@ -184,7 +180,7 @@ msgstr "Znovu načítať túto stránku"
 msgctxt ""
 "@action:button keep this widget's pop-up open until explicitly dismissed"
 msgid "Keep open"
-msgstr ""
+msgstr "Ponechať otvorené"
 
 #: qml/main.qml:223
 #, kde-format
