@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-04-09 00:46+0000\n"
 "PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -73,51 +73,51 @@ msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "कस्टम शीर्षक"
 
-#: IconItem.qml:185
+#: IconItem.qml:181
 #, kde-format
 msgid "Launch %1"
 msgstr "%1 प्रारम्भं कुर्वन्तु"
 
-#: IconItem.qml:269
+#: IconItem.qml:265
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "प्रक्षेपकं योजयतु…"
 
-#: IconItem.qml:275
+#: IconItem.qml:271
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "सम्पादयतु प्रक्षेपक…"
 
-#: IconItem.qml:281
+#: IconItem.qml:277
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "प्रक्षेपकं निष्कासयन्तु"
 
-#: main.qml:153
+#: main.qml:110
 #, kde-format
 msgid "Quicklaunch"
 msgstr "त्वरित प्रक्षेपण"
 
-#: main.qml:154
+#: main.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Drag and Drop इत्यनेन अथवा context menu इत्यस्य उपयोगेन launchers योजयन्तु ।"
 
-#: main.qml:186
+#: main.qml:143
 #, kde-format
 msgid "Hide icons"
 msgstr "चिह्नानि गोपयन्तु"
 
-#: main.qml:186
+#: main.qml:143
 #, kde-format
 msgid "Show hidden icons"
 msgstr "गुप्तचिह्नानि दर्शयतु"
 
-#: main.qml:289
+#: main.qml:341
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

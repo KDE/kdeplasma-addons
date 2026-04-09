@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-04-09 00:46+0000\n"
 "PO-Revision-Date: 2023-11-07 11:20+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -74,51 +74,51 @@ msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "כותרת מותאמת אישית"
 
-#: IconItem.qml:185
+#: IconItem.qml:181
 #, kde-format
 msgid "Launch %1"
 msgstr "הפעלת %1"
 
-#: IconItem.qml:269
+#: IconItem.qml:265
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "הוספת משגר…"
 
-#: IconItem.qml:275
+#: IconItem.qml:271
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "עריכת משגר…"
 
-#: IconItem.qml:281
+#: IconItem.qml:277
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "הסרת משגר"
 
-#: main.qml:153
+#: main.qml:110
 #, kde-format
 msgid "Quicklaunch"
 msgstr "הפעלה מהירה"
 
-#: main.qml:154
+#: main.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "אפשר להוסיף משגרים על ידי גרירה והשלכה שלהם או דרך תפריט ההקשר."
 
-#: main.qml:186
+#: main.qml:143
 #, kde-format
 msgid "Hide icons"
 msgstr "הסתרת סמלים"
 
-#: main.qml:186
+#: main.qml:143
 #, kde-format
 msgid "Show hidden icons"
 msgstr "הצגת סמלים מוסתרים"
 
-#: main.qml:289
+#: main.qml:341
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-04-09 00:46+0000\n"
 "PO-Revision-Date: 2026-02-20 01:36+0100\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -125,6 +125,18 @@ msgstr "Den Zielordner öffnen, in dem das Hintergrundbild gespeichert wurde."
 #, kde-format
 msgid "Open Wallpaper Image"
 msgstr "Hintergrundbild öffnen"
+
+#: package/contents/ui/main.qml:27
+#, kde-format
+msgctxt "@action:inmenu Placeholder is title of image"
+msgid "About “%1”"
+msgstr ""
+
+#: package/contents/ui/main.qml:28
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "About This Image"
+msgstr ""
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format

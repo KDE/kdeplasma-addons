@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-04-09 00:46+0000\n"
 "PO-Revision-Date: 2022-02-20 22:17+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -71,51 +71,51 @@ msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "사용자 정의 제목"
 
-#: IconItem.qml:185
+#: IconItem.qml:181
 #, kde-format
 msgid "Launch %1"
 msgstr "%1 실행"
 
-#: IconItem.qml:269
+#: IconItem.qml:265
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "실행기 추가…"
 
-#: IconItem.qml:275
+#: IconItem.qml:271
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "실행기 편집…"
 
-#: IconItem.qml:281
+#: IconItem.qml:277
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "실행기 삭제"
 
-#: main.qml:153
+#: main.qml:110
 #, kde-format
 msgid "Quicklaunch"
 msgstr "빠른 실행"
 
-#: main.qml:154
+#: main.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "상황에 맞는 메뉴나 끌어다 놓기로 실행 아이콘을 추가하십시오."
 
-#: main.qml:186
+#: main.qml:143
 #, kde-format
 msgid "Hide icons"
 msgstr "아이콘 숨기기"
 
-#: main.qml:186
+#: main.qml:143
 #, kde-format
 msgid "Show hidden icons"
 msgstr "숨은 아이콘 보기"
 
-#: main.qml:289
+#: main.qml:341
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"

@@ -14,8 +14,8 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 21.12.3\n"
 
 #: calendarsystem.h:51
 #, kde-format
@@ -78,9 +78,7 @@ msgid "Hebrew Calendar"
 msgstr "Hebrejský kalendár"
 
 #: calendarsystem.h:87
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Chinese Lunar Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
 msgstr "Čínsky lunárny kalendár"
@@ -122,6 +120,8 @@ msgid ""
 "A positive offset signifies a later date, while a negative offset signifies "
 "an earlier date."
 msgstr ""
+"Kladný posun znamená neskorší dátum, zatiaľ čo záporný posun znamená skorší "
+"dátum."
 
 #: provider/hebrewcalendar.cpp:91
 #, kde-format
@@ -152,9 +152,7 @@ msgid "%1 %2, %3"
 msgstr "%1 %2, %3"
 
 #: provider/vietnamesecalendar.cpp:406
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
 msgid "%1 %2, %3"

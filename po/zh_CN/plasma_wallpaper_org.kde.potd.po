@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-04-09 00:46+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -122,6 +122,18 @@ msgstr "打开壁纸图像所在的目标文件夹。"
 #, kde-format
 msgid "Open Wallpaper Image"
 msgstr "打开壁纸图像"
+
+#: package/contents/ui/main.qml:27
+#, kde-format
+msgctxt "@action:inmenu Placeholder is title of image"
+msgid "About “%1”"
+msgstr ""
+
+#: package/contents/ui/main.qml:28
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "About This Image"
+msgstr ""
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format

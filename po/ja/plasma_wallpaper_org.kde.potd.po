@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-04-09 00:46+0000\n"
 "PO-Revision-Date: 2025-03-24 21:36+0900\n"
 "Last-Translator: Ryuichi Yamada <ryuichi_ya220@outlook.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -121,6 +121,18 @@ msgstr "壁紙の画像が保存されているフォルダを開く"
 #, kde-format
 msgid "Open Wallpaper Image"
 msgstr "壁紙画像を開く"
+
+#: package/contents/ui/main.qml:27
+#, kde-format
+msgctxt "@action:inmenu Placeholder is title of image"
+msgid "About “%1”"
+msgstr ""
+
+#: package/contents/ui/main.qml:28
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "About This Image"
+msgstr ""
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format

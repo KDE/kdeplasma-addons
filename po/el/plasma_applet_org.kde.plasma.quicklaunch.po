@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-04-09 00:46+0000\n"
 "PO-Revision-Date: 2016-02-07 11:57+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -72,35 +72,35 @@ msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "Εμφάνιση τίτλου"
 
-#: IconItem.qml:185
+#: IconItem.qml:181
 #, kde-format
 msgid "Launch %1"
 msgstr ""
 
-#: IconItem.qml:269
+#: IconItem.qml:265
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Προσθήκη εκτελεστή…"
 
-#: IconItem.qml:275
+#: IconItem.qml:271
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Επεξεργασία εκτελεστή…"
 
-#: IconItem.qml:281
+#: IconItem.qml:277
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Αφαίρεση εκτελεστή"
 
-#: main.qml:153
+#: main.qml:110
 #, kde-format
 msgid "Quicklaunch"
 msgstr "Γρήγορη εκτέλεση"
 
-#: main.qml:154
+#: main.qml:111
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
@@ -108,17 +108,17 @@ msgstr ""
 "Προσθέστε εκτελεστές με σύρσιμο και απόθεση ή χρησιμοποιώντας το βοηθητικό "
 "μενού."
 
-#: main.qml:186
+#: main.qml:143
 #, kde-format
 msgid "Hide icons"
 msgstr "Απόκρυψη εικονιδίων"
 
-#: main.qml:186
+#: main.qml:143
 #, kde-format
 msgid "Show hidden icons"
 msgstr "Εμφάνιση κρυφών εικονιδίων"
 
-#: main.qml:289
+#: main.qml:341
 #, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"
