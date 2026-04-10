@@ -1,15 +1,15 @@
 # Translation of plasma_wallpaper_org.kde.potd.po to Catalan
-# Copyright (C) 2018-2024 This_file_is_part_of_KDE
+# Copyright (C) 2018-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2018, 2019, 2021, 2022, 2023, 2024 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2018, 2019, 2021, 2022, 2023, 2024, 2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-09 00:46+0000\n"
-"PO-Revision-Date: 2024-11-17 20:35+0100\n"
+"PO-Revision-Date: 2026-04-09 10:58+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: package/contents/ui/config.qml:58
 #, kde-format
@@ -131,13 +131,13 @@ msgstr "Obre la imatge de fons de pantalla"
 #, kde-format
 msgctxt "@action:inmenu Placeholder is title of image"
 msgid "About “%1”"
-msgstr ""
+msgstr "Quant a «%1»"
 
 #: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "About This Image"
-msgstr ""
+msgstr "Quant a aquesta imatge"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format

@@ -126,13 +126,13 @@ msgstr "Otvoriť obrázok pozadia"
 #, kde-format
 msgctxt "@action:inmenu Placeholder is title of image"
 msgid "About “%1”"
-msgstr ""
+msgstr "O \"%1\""
 
 #: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "About This Image"
-msgstr ""
+msgstr "About This Image"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
