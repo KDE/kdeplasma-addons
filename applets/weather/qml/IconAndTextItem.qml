@@ -16,6 +16,7 @@ GridLayout {
 
     property alias iconSource: icon.source
     property alias text: label.text
+    property alias fallback: icon.fallback
     property bool vertical: false // too bad we cannot make this an enum
     property alias active: icon.active
 

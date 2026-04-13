@@ -54,6 +54,7 @@ Loader {
             readonly property int minIconSize: Math.max((compactRoot.vertical ? compactRoot.width : compactRoot.height), Kirigami.Units.iconSizes.small)
 
             source: Plasmoid.icon
+            fallback: Util.unknownWeatherIcon
             active: compactMouseArea.containsMouse
             // reset implicit size, so layout in free dimension does not stop at the default one
             implicitWidth: Kirigami.Units.iconSizes.small
@@ -93,6 +94,7 @@ Loader {
         IconAndTextItem {
             vertical: compactRoot.vertical
             iconSource: Plasmoid.icon
+            fallback: Util.unknownWeatherIcon
             active: compactMouseArea.containsMouse
             text: compactRoot.isTemperaturePresent ? Util.temperatureToDisplayString(compactRoot.displayTemperatureUnit, compactRoot.lastObservation.temperature, compactRoot.metaData.temperatureUnit, true, false) : "";
         }

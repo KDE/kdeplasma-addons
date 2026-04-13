@@ -19,16 +19,12 @@ class Util : public QObject
     QML_ELEMENT
     QML_SINGLETON
 
+    Q_PROPERTY(QString unknownWeatherIcon READ unknownWeatherIconName CONSTANT)
+
 public:
     explicit Util(QObject *parent = nullptr);
 
 public:
-    /**
-     * Returns the @p iconName if the current icon theme contains an icon with that name,
-     * otherwise returns "weather-none-available" (expecting the icon theme to have that in any case).
-     */
-    Q_INVOKABLE QString existingWeatherIconName(const QString &iconName) const;
-
     Q_INVOKABLE QString temperatureToDisplayString(int displayUnitType, double value, int valueUnitType, bool rounded = false, bool degreesOnly = false) const;
     Q_INVOKABLE QString valueToDisplayString(int displayUnitType, double value, int valueUnitType, int precision = 0) const;
     Q_INVOKABLE QString percentToDisplayString(double value) const;
@@ -37,4 +33,5 @@ public:
 
 private:
     static KUnitConversion::Converter m_converter;
+    static QString unknownWeatherIconName();
 };

@@ -135,6 +135,7 @@ Item {
                 Layout.alignment: Qt.AlignTop
 
                 source: model.conditionIcon
+                fallback: Util.unknownWeatherIcon
 
                 PlasmaCore.ToolTipArea {
                     id: iconToolTip

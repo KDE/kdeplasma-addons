@@ -85,15 +85,13 @@ PlasmoidItem {
     }
 
     Plasmoid.icon: {
-        let iconName;
+        let iconName = Util.unknownWeatherIcon;
         if (status === ForecastControl.NeedsConfiguration) {
             iconName = "weather-clouds-symbolic";
-        } else if (!!forecastControl.forecast?.lastObservation?.conditionIcon && forecastControl.forecast?.lastObservation?.conditionIcon !== "weather-none-available") {
-            iconName = forecastControl.forecast.lastObservation.conditionIcon;
+        } else if (!!forecastControl.forecast?.lastObservation?.conditionIcon && forecastControl.forecast?.lastObservation?.conditionIcon !== Util.unknownWeatherIcon) {
+            iconName = forecastControl.forecast.lastObservation.conditionIcon || "";
         } else if (!!forecastControl.forecast?.futureDays && forecastControl.forecast.futureDays.daysNumber > 0) {
-            iconName = Util.existingWeatherIconName(forecastControl.forecast?.futureDays.firstDayIcon);
-        } else {
-            iconName = "weather-none-available"
+            iconName = forecastControl.forecast?.futureDays.firstDayIcon || "";
         }
 
         if (inPanel) {
