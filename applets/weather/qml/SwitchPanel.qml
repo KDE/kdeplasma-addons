@@ -99,7 +99,7 @@ ColumnLayout {
             title: i18nc("@title:tab", "Hourly")
             visible: !!root.futureHours && root.futureHours.hoursNumber > 0
             view: hourlyForecastView
-        }
+        },
         WeatherInfoPanel {
             title: i18nc("@title:tab", "Details")
             visible: !!root.lastObservation && root.detailsVisibleModel.length > 0
@@ -175,7 +175,7 @@ ColumnLayout {
         HourlyForecastView {
             futureHours: root.futureHours
             metaData: root.metaData
-            displayTempereatureUnit: root.displayTemperatureUnit
+            displayTemperatureUnit: root.displayTemperatureUnit
         }
     }
 

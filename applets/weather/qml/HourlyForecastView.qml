@@ -13,7 +13,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 
-Item {
+PlasmaComponents.ScrollView {
     id: root
 
     property var futureHours: null
@@ -22,9 +22,10 @@ Item {
     property int displayTemperatureUnit: 0
 
     readonly property int preferredIconSize: Kirigami.Units.iconSizes.large
+    readonly property int preferredCellsMargin: Kirigami.Units.largeSpacing * 2
 
-    implicitHeight: forecast.implicitHeight + horizontalHeader.height
-    implicitWidth: forecast.implicitWidth + verticalHeader.width
+    readonly property real preferredCellWidth: root.preferredIconSize
+    readonly property real preferredCellHeight: root.preferredIconSize + 4 * labelFontMetrics.height + Kirigami.Units.largeSpacing * 2
 
     //Item to get the metrics of the regular font in a PlasmaComponent.Label
     PlasmaComponents.Label {
@@ -38,83 +39,59 @@ Item {
         }
     }
 
-    HorizontalHeaderView {
-        id: horizontalHeader
-        anchors.left: forecast.left
-        anchors.top: parent.top
-        syncView: (root.futureHours.hoursNumber > 1) ? forecast : null
-        clip: true
-        textRole: "monthDay"
-        resizableColumns: false
-        interactive: false
+    contentWidth: availableWidth - (contentItem as GridView).leftMargin - (contentItem as GridView).rightMargin
+    PlasmaComponents.ScrollBar.horizontal.policy: PlasmaComponents.ScrollBar.AlwaysOff
 
-        delegate: PlasmaComponents.Label {
-            text: model.hour
-            textFormat: Text.PlainText
-            horizontalAlignment: Text.AlignHCenter
-        }
-    }
+    implicitWidth: preferredCellWidth * 7
+    implicitHeight: preferredCellHeight
 
-    ListView {
-        id: forecast
+    focus: true
+
+    contentItem: GridView {
+        id: forecasts
 
         interactive: false
-
-        anchors.left: parent.left
-        anchors.top: horizontalHeader.bottom
-        anchors.right: parent.right
-        anchors.bottom: parent.bottom
 
         model: root.futureHours
 
-        // calculate spacing and implicit width/height when layout changed
-        onLayoutChanged: {
-            //check if row loaded before calculating row height to prevent rows from being shown incorrectly
-            if(isRowLoaded(topRow)) {
-                var rowsHeight = implicitRowHeight(topRow) * rows;
-                neededRowSpacing = (parent.height - horizontalHeader.height - rowsHeight) / (rows + 1);
-                implicitHeight = rowsHeight
-            } else {
-                //restore default values if none of rows is loaded (which shows that forecast model is empty)
-                neededRowSpacing = 0;
-                implicitHeight = 0;
+        clip: true
 
-            }
-            //the same for columns as for rows
-            if(isColumnLoaded(leftColumn)) {
-                var columnsWidth = implicitColumnWidth(leftColumn) * columns;
-                neededColumnSpacing =  (parent.width - columnsWidth) / (columns + 1)
-                implicitWidth = columnsWidth
-            } else {
-                neededColumnSpacing = 0;
-                implicitWidth = 0;
-            }
-        }
-
-        property real neededRowSpacing: 0
-        property real neededColumnSpacing: 0
-
-        anchors.topMargin: neededRowSpacing
-        anchors.bottomMargin: neededRowSpacing
-        anchors.leftMargin: neededColumnSpacing
-        anchors.rightMargin: neededColumnSpacing
-
-        rowSpacing: neededRowSpacing
-        columnSpacing: neededColumnSpacing
+        cellWidth: root.preferredCellWidth + (width % root.preferredCellWidth) / (Math.floor(width / root.preferredCellWidth))
+        cellHeight: root.preferredCellHeight
 
         delegate: ColumnLayout {
             id: dayDelegate
 
             visible: !!model.conditionIcon
 
+            width: root.preferredCellWidth
+            height: root.preferredCellHeight - root.preferredCellsMargin
+
+            anchors.bottomMargin: root.preferredCellsMargin
+
             spacing: Math.round(Kirigami.Units.smallSpacing / 2)
 
+            PlasmaComponents.Label {
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                horizontalAlignment: Text.AlignHCenter
+                text: {
+                    const format = Qt.locale().timeFormat(Locale.ShortFormat);
+                    const usesAmPm = format.includes("Ap");
+                    if (usesAmPm) {
+                        return Qt.formatTime(model.time, "h AP");
+                    } else {
+                        return Qt.formatTime(model.time, "HH:mm");
+                    }
+                }
+                textFormat: Text.PlainText
+                Layout.preferredHeight: labelFontMetrics.height
+            }
+
             Kirigami.Icon {
-                Layout.fillWidth: true
                 Layout.preferredHeight: preferredIconSize
                 Layout.preferredWidth: preferredIconSize
 
-                Layout.alignment: Qt.AlignTop
+                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
 
                 source: model.conditionIcon
 
@@ -128,8 +105,7 @@ Item {
                         if (!model.conditionProbability) {
                             return model.condition;
                         }
-                        return i18nc("certain weather condition (probability percentage)",
-                            "%1 (%2%)", model.condition, model.conditionProbability);
+                        return i18nc("certain weather condition (probability percentage)", "%1 (%2%)", model.condition, model.conditionProbability);
                     }
                 }
             }
