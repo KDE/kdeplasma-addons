@@ -1,69 +1,69 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# SPDX-FileCopyrightText: 2024 Kishore G <kishore96@gmail.com>
+# SPDX-FileCopyrightText: 2024, 2026 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-09 00:46+0000\n"
-"PO-Revision-Date: 2024-04-22 21:48+0530\n"
+"PO-Revision-Date: 2026-04-12 17:28+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
-"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.02.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: package/contents/ui/config.qml:58
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
-msgstr ""
+msgstr "காட்டப்படும் விதம்:"
 
 #: package/contents/ui/config.qml:61
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
-msgstr ""
+msgstr "வெட்டி அளவுமாற்றி"
 
 #: package/contents/ui/config.qml:65
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
-msgstr ""
+msgstr "அளவுமாற்றி"
 
 #: package/contents/ui/config.qml:69
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
-msgstr ""
+msgstr "அளவுமாற்றி, உருவத்தை மாற்றாமல்"
 
 #: package/contents/ui/config.qml:73
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
-msgstr ""
+msgstr "நடுப்படுத்தி"
 
 #: package/contents/ui/config.qml:77
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
-msgstr ""
+msgstr "பல நகல்களாக"
 
 #: package/contents/ui/config.qml:98
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
-msgstr ""
+msgstr "பின்புல நிறம்:"
 
 #: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
-msgstr ""
+msgstr "பின்புல நிறத்தை தேர்ந்தெடுப்பது"
 
 #: package/contents/ui/config.qml:103
 #, kde-format
@@ -78,141 +78,143 @@ msgid ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 msgstr ""
+"மனதைப் புண்படுத்தும் படங்களை இந்த வழங்கி வழங்கலாம். பொது இடத்தில் இதைப் பயன்படுத்தம்போது "
+"எச்சரிக்கையாக இருக்கவும்."
 
 #: package/contents/ui/config.qml:131
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
-msgstr ""
+msgstr "வரம்புள்ள பிணையத்திலுள்ளபோதும் புதுப்பி"
 
 #: package/contents/ui/config.qml:146
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
-msgstr ""
+msgstr "இன்றைய படம்"
 
 #: package/contents/ui/config.qml:162
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
-msgstr ""
+msgstr "தலைப்பு:"
 
 #: package/contents/ui/config.qml:177
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
-msgstr ""
+msgstr "இயற்றியவர்:"
 
 #: package/contents/ui/config.qml:196
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
-msgstr ""
+msgstr "கொண்டுள்ள அடைவை திற"
 
 #: package/contents/ui/config.qml:200
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
-msgstr ""
+msgstr "படம் சேமிக்கப்பட்டுள்ள அடைவைத் திறக்கும்."
 
 #: package/contents/ui/main.qml:22
 #, kde-format
 msgid "Open Wallpaper Image"
-msgstr ""
+msgstr "பின்புல படத்தை திற"
 
 #: package/contents/ui/main.qml:27
 #, kde-format
 msgctxt "@action:inmenu Placeholder is title of image"
 msgid "About “%1”"
-msgstr ""
+msgstr "'%1' பற்றி"
 
 #: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "About This Image"
-msgstr ""
+msgstr "இப்படத்தைப் பற்றி"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
-msgstr ""
+msgstr "இன்றைய படம்"
 
 #: package/contents/ui/WallpaperDelegate.qml:138
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
-msgstr ""
+msgstr "ஏற்றப்படுகிறது…"
 
 #: package/contents/ui/WallpaperDelegate.qml:139
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
-msgstr ""
+msgstr "கிட்டவில்லை"
 
 #: package/contents/ui/WallpaperDelegate.qml:140
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
-msgstr ""
+msgstr "%1 இயற்றியவர்: %2. மேலும் செயல்களுக்கு வலது-கிளிக் செய்யவும்."
 
 #: package/contents/ui/WallpaperDelegate.qml:141
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
-msgstr ""
+msgstr "பின்புலப்படம் பதிவிறக்கப்படுகிறது."
 
 #: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
-msgstr ""
+msgstr "பின்புலப்படத்தை பதிவிறக்குவது தோல்வியடைந்தது"
 
 #: package/contents/ui/WallpaperPreview.qml:48
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
-msgstr ""
+msgstr "படத்தை வேறு பெயரில் சேமி…"
 
 #: package/contents/ui/WallpaperPreview.qml:51
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
-msgstr ""
+msgstr "இன்றைய படத்தை இக்கணினியில் சேமி"
 
 #: package/contents/ui/WallpaperPreview.qml:57
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
-msgstr ""
+msgstr "இணைப்பை உலாவியில் திற…"
 
 #: package/contents/ui/WallpaperPreview.qml:60
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
-msgstr ""
+msgstr "இன்றைய படத்திற்கான இணையதளத்தை இயல்பிருப்பு இணைய உலாவியில் திறக்கும்"
 
 #: plugins/potdbackend.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Save Today's Picture"
-msgstr ""
+msgstr "இன்றைய படத்தை சேமிப்பது"
 
 #: plugins/potdbackend.cpp:215
 #, kde-format
 msgctxt "@label:listbox Template for file dialog"
 msgid "JPEG image (*.jpeg *.jpg *.jpe)"
-msgstr ""
+msgstr "JPEG படம் (*.jpeg *.jpg *.jpe)"
 
 #: plugins/potdbackend.cpp:232
 #, kde-format
 msgctxt "@info:status after a save action"
 msgid "The image was not saved."
-msgstr ""
+msgstr "படம் சேமிக்கப்படவில்லை."
 
 #: plugins/potdbackend.cpp:239
 #, kde-format
 msgctxt "@info:status after a save action %1 file path %2 basename"
 msgid "The image was saved as <a href=\"%1\">%2</a>"
-msgstr ""
+msgstr "படம் <a href=\"%1\">%2</a> என சேமிக்கப்பட்டுள்ளது"
