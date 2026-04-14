@@ -2,13 +2,13 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # Guðmundur Erlingsson <gudmundure@gmail.com>, 2023.
-# SPDX-FileCopyrightText: 2025 Sveinn í Felli <sv1@fellsnet.is>
+# SPDX-FileCopyrightText: 2025, 2026 Sveinn í Felli <sv1@fellsnet.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-09 00:46+0000\n"
-"PO-Revision-Date: 2025-04-07 09:41+0000\n"
+"PO-Revision-Date: 2026-04-13 17:30+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -127,13 +127,13 @@ msgstr "Opna bakgrunnsmynd"
 #, kde-format
 msgctxt "@action:inmenu Placeholder is title of image"
 msgid "About “%1”"
-msgstr ""
+msgstr "Um “%1”"
 
 #: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "About This Image"
-msgstr ""
+msgstr "Um þessa mynd"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
