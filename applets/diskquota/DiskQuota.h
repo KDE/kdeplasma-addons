@@ -104,7 +104,7 @@ private:
     bool m_quotaInstalled = true;
     bool m_cleanUpToolInstalled = true;
     TrayStatus m_status = PassiveStatus;
-    QString m_iconName = QStringLiteral("disk-quota");
+    QString m_iconName = QStringLiteral("disk-quota-symbolic");
     QString m_toolTip;
     QString m_subToolTip;
     QuotaListModel *m_model = nullptr;
