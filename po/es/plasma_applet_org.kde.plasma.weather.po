@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-26 00:46+0000\n"
+"POT-Creation-Date: 2026-04-17 00:45+0000\n"
 "PO-Revision-Date: 2025-07-16 00:36+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -648,19 +648,19 @@ msgstr ""
 "interrupción del servidor del proveedor de la estación meteorológica la haya "
 "dejado temporalmente no disponible. Vuelva a intentarlo más tarde."
 
-#: qml/ForecastView.qml:150
+#: qml/ForecastView.qml:151
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2 %)"
 
-#: qml/ForecastView.qml:164
+#: qml/ForecastView.qml:165
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
 msgstr "︎☂ %1 %"
 
-#: qml/ForecastView.qml:172 qml/ForecastView.qml:181
+#: qml/ForecastView.qml:173 qml/ForecastView.qml:182
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
@@ -697,13 +697,13 @@ msgstr ""
 "debido a una interrupción del servidor del proveedor de la estación "
 "meteorológica. Vuelva a probar más tarde."
 
-#: qml/main.qml:81 qml/TopPanel.qml:220
+#: qml/main.qml:81 qml/TopPanel.qml:221
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "En calma"
 
-#: qml/main.qml:105
+#: qml/main.qml:103
 #, kde-format
 msgctxt ""
 "@info:usagetip Minimize the length of this string so it is as short as "
@@ -712,37 +712,37 @@ msgctxt ""
 msgid "Set up Weather Report…"
 msgstr "Configurar el informe meteorológico…"
 
-#: qml/main.qml:114
+#: qml/main.qml:112
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr "Pulse para escoger un lugar y monitorizar su meteorología"
 
-#: qml/main.qml:128
+#: qml/main.qml:126
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:141
+#: qml/main.qml:139
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: qml/main.qml:144
+#: qml/main.qml:142
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:156
+#: qml/main.qml:154
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/main.qml:165
+#: qml/main.qml:163
 #, kde-format
 msgid "Humidity: %1"
 msgstr "Humedad: %1"
@@ -845,31 +845,31 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "Sensación térmica: %1"
 
-#: util.cpp:43
+#: util.cpp:42
 #, kde-format
 msgctxt "Degree, unit symbol"
 msgid "°"
 msgstr "°"
 
-#: util.cpp:47 util.cpp:51
+#: util.cpp:46 util.cpp:50
 #, kde-format
 msgctxt "temperature unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: util.cpp:61
+#: util.cpp:60
 #, kde-format
 msgctxt "value unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: util.cpp:67
+#: util.cpp:66
 #, kde-format
 msgctxt "value percentsymbol"
 msgid "%1 %"
 msgstr "%1 %"
 
-#: util.cpp:73
+#: util.cpp:72
 #, kde-format
 msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
