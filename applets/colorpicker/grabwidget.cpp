@@ -14,6 +14,9 @@
 #include <QDBusPendingCall>
 #include <QDBusPendingCallWatcher>
 #include <QDBusPendingReply>
+#include <QMimeData>
+
+#include <KSystemClipboard>
 
 Q_DECLARE_METATYPE(QColor)
 
@@ -74,5 +77,7 @@ void GrabWidget::pick()
 
 void GrabWidget::copyToClipboard(const QString &text)
 {
-    QApplication::clipboard()->setText(text);
+    auto *mimeData = new QMimeData();
+    mimeData->setText(text);
+    KSystemClipboard::instance()->setMimeData(mimeData, QClipboard::Clipboard);
 }

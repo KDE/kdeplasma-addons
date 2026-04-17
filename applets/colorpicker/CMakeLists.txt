@@ -22,4 +22,5 @@ target_link_libraries(org.kde.plasma.colorpicker PRIVATE
     Qt::Gui
     Qt::Qml
     Qt::Widgets
+    KF6::GuiAddons
 )
