@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-26 02:44+0000\n"
+"POT-Creation-Date: 2026-04-17 02:41+0000\n"
 "PO-Revision-Date: 2016-07-03 22:52+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -913,13 +913,13 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr ""
 
-#: util.cpp:43
+#: util.cpp:48
 #, kde-format
 msgctxt "Degree, unit symbol"
 msgid "°"
 msgstr "°"
 
-#: util.cpp:47 util.cpp:51
+#: util.cpp:52 util.cpp:56
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the weather condition, %2 is the temperature,  both come from the "
@@ -929,7 +929,7 @@ msgctxt "temperature unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: util.cpp:61
+#: util.cpp:66
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the weather condition, %2 is the temperature,  both come from the "
@@ -939,7 +939,7 @@ msgctxt "value unitsymbol"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: util.cpp:67
+#: util.cpp:72
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the weather condition, %2 is the temperature,  both come from the "
@@ -949,7 +949,7 @@ msgctxt "value percentsymbol"
 msgid "%1 %"
 msgstr "%1 %2"
 
-#: util.cpp:73
+#: util.cpp:78
 #, fuzzy, kde-format
 #| msgctxt "A weather station location and the weather service it comes from"
 #| msgid "%1 (%2)"
