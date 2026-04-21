@@ -32,7 +32,7 @@ let primaryScreen = workspace.screenOrder[0];
 const windowMap = new Map();
 
 function processWindow(window) {
-    if (!window.normalWindow) return;
+    if (!window.normalWindow || !window.moveableAcrossScreens) return;
 
     // The virtual desktops this window is on. If it's on all desktops, the list is empty.
     let desktops = window.desktops;
