@@ -17,7 +17,7 @@ Kirigami.FormLayout {
     property string cfg_Image
 
     Button {
-        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.tiled", "@label", "Tile:")
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.tiled", "@label, noun", "Tile:")
         text: i18ndc("plasma_wallpaper_org.kde.tiled", "@action:button Select a tile image", "Select Image…")
         visible: !tileButton.visible
         onClicked: fileDialog.open()
@@ -26,7 +26,7 @@ Kirigami.FormLayout {
     Button {
         id: tileButton
         Accessible.name: i18ndc("plasma_wallpaper_org.kde.tiled", "@action:button", "Select a tile image")
-        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.tiled", "@label", "Tile:")
+        Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.tiled", "@label, noun", "Tile:")
         ToolTip.delay: Kirigami.Units.toolTipDelay
         ToolTip.text: cfg_Image
         ToolTip.visible: hovered

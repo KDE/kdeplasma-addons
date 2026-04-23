@@ -160,7 +160,7 @@ KCM.SimpleKCM {
             QtControls.ButtonGroup.group: labelGroup
             enabled: imageBackgroundRadioButton.checked
             checked: !root.cfg_showNumerals
-            text: i18nc("@option:check", "Hide on image backgrounds")
+            text: i18nc("@option:check Hide tile labels", "Hide on image backgrounds")
         }
     }
 }

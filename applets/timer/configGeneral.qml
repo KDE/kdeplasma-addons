@@ -116,7 +116,7 @@ KCM.SimpleKCM {
                 id: command
                 Layout.fillWidth: true
                 enabled: runCommand.checked
-                placeholderText: i18nc("@placeholder", "kdialog --msgbox 'Timer finished'")
+                placeholderText: i18nc("@placeholder, only translate the message in single quotes", "kdialog --msgbox 'Timer finished'")
             }
         }
     }
