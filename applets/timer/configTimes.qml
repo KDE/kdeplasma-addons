@@ -78,7 +78,7 @@ KCM.ScrollViewKCM {
             visible: timeListView.count === 0
             anchors.centerIn: parent
             width: parent.width - (Kirigami.Units.gridUnit * 4)
-            text: i18n("If you add predefined timers here, they will appear in plasmoid context menu.");
+            text: i18n("If you add predefined timers here, they will appear in the widget’s context menu.");
         }
     }
 
