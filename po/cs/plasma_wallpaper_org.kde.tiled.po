@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-04-24 00:45+0000\n"
 "PO-Revision-Date: 2026-03-17 08:50+0100\n"
 "Last-Translator:  Vít Pelčák <vit@pelcak.org>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -18,8 +18,10 @@ msgstr ""
 "X-Generator: Lokalize 25.12.3\n"
 
 #: package/contents/ui/config.qml:20 package/contents/ui/config.qml:29
-#, kde-format
-msgctxt "@label"
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Tile:"
+msgctxt "@label, noun"
 msgid "Tile:"
 msgstr "Dlaždice:"
 

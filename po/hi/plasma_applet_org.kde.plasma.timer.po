@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-04-24 00:45+0000\n"
 "PO-Revision-Date: 2024-12-15 15:57+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -111,7 +111,7 @@ msgstr ""
 
 #: configGeneral.qml:119
 #, kde-format
-msgctxt "@placeholder"
+msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
@@ -124,7 +124,8 @@ msgstr ""
 #: configTimes.qml:81
 #, kde-format
 msgid ""
-"If you add predefined timers here, they will appear in plasmoid context menu."
+"If you add predefined timers here, they will appear in the widget’s context "
+"menu."
 msgstr ""
 
 #: configTimes.qml:119

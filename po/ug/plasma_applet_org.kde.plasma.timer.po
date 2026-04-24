@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-04-24 00:45+0000\n"
 "PO-Revision-Date: 2026-02-03 20:22-0500\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -110,8 +110,10 @@ msgid "Run command:"
 msgstr "بۇيرۇق ئىجرا قىلىش:"
 
 #: configGeneral.qml:119
-#, kde-format
-msgctxt "@placeholder"
+#, fuzzy, kde-format
+#| msgctxt "@placeholder"
+#| msgid "kdialog --msgbox 'Timer finished'"
+msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox «ۋاقىت خاتىرىلىگۈچ تامام»"
 
@@ -122,9 +124,13 @@ msgid "Add"
 msgstr "قوش"
 
 #: configTimes.qml:81
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If you add predefined timers here, they will appear in plasmoid context "
+#| "menu."
 msgid ""
-"If you add predefined timers here, they will appear in plasmoid context menu."
+"If you add predefined timers here, they will appear in the widget’s context "
+"menu."
 msgstr ""
 "ئەگەر ئالدىن بېكىتىلگەن ۋاقىتنى بۇ جايغا قوشسىڭىز، ئۇلار Plasma ئەپچە مەزمۇن "
 "تىزىملىكىدە كۆرۈنىدۇ."

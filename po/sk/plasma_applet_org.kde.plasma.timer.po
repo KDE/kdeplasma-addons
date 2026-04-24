@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-04-24 00:45+0000\n"
 "PO-Revision-Date: 2023-05-04 19:34+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -112,8 +112,10 @@ msgid "Run command:"
 msgstr "Spustiť príkaz"
 
 #: configGeneral.qml:119
-#, kde-format
-msgctxt "@placeholder"
+#, fuzzy, kde-format
+#| msgctxt "@placeholder"
+#| msgid "kdialog --msgbox 'Timer finished'"
+msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Timer finished'"
 
@@ -124,9 +126,13 @@ msgid "Add"
 msgstr "Pridať"
 
 #: configTimes.qml:81
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If you add predefined timers here, they will appear in plasmoid context "
+#| "menu."
 msgid ""
-"If you add predefined timers here, they will appear in plasmoid context menu."
+"If you add predefined timers here, they will appear in the widget’s context "
+"menu."
 msgstr ""
 "Ak tu pridáte preddefinované časovače, zobrazia sa v kontextovej ponuke "
 "plazmoidu."

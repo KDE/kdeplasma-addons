@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-04-24 00:45+0000\n"
 "PO-Revision-Date: 2026-01-16 19:34+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -116,8 +116,10 @@ msgid "Run command:"
 msgstr "Darbināt komandu:"
 
 #: configGeneral.qml:119
-#, kde-format
-msgctxt "@placeholder"
+#, fuzzy, kde-format
+#| msgctxt "@placeholder"
+#| msgid "kdialog --msgbox 'Timer finished'"
+msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Taimera laiks ir iztecējis'"
 
@@ -128,9 +130,13 @@ msgid "Add"
 msgstr "Pievienot"
 
 #: configTimes.qml:81
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If you add predefined timers here, they will appear in plasmoid context "
+#| "menu."
 msgid ""
-"If you add predefined timers here, they will appear in plasmoid context menu."
+"If you add predefined timers here, they will appear in the widget’s context "
+"menu."
 msgstr "Ja saglabāsiet taimerus, tie parādīsies plazmoīda konteksta izvēlnē."
 
 #: configTimes.qml:119

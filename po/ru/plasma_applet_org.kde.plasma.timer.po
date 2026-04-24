@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-04-24 00:45+0000\n"
 "PO-Revision-Date: 2026-01-28 19:31+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -123,8 +123,10 @@ msgid "Run command:"
 msgstr "Выполнить команду:"
 
 #: configGeneral.qml:119
-#, kde-format
-msgctxt "@placeholder"
+#, fuzzy, kde-format
+#| msgctxt "@placeholder"
+#| msgid "kdialog --msgbox 'Timer finished'"
+msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Отсчёт завершён'"
 
@@ -135,9 +137,13 @@ msgid "Add"
 msgstr "Добавить"
 
 #: configTimes.qml:81
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If you add predefined timers here, they will appear in plasmoid context "
+#| "menu."
 msgid ""
-"If you add predefined timers here, they will appear in plasmoid context menu."
+"If you add predefined timers here, they will appear in the widget’s context "
+"menu."
 msgstr "Предустановленные таймеры будут показаны в контекстном меню виджета."
 
 #: configTimes.qml:119

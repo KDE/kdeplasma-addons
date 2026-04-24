@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-04-24 00:45+0000\n"
 "PO-Revision-Date: 2010-07-18 14:30+0200\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -92,7 +92,7 @@ msgstr ""
 
 #: qml/configAppearance.qml:163
 #, kde-format
-msgctxt "@option:check"
+msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"
 msgstr ""
 

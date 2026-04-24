@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-04-24 00:45+0000\n"
 "PO-Revision-Date: 2026-02-03 20:21-0500\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -85,8 +85,10 @@ msgid "Color:"
 msgstr "رەڭ:"
 
 #: qml/configAppearance.qml:163
-#, kde-format
-msgctxt "@option:check"
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Hide on image backgrounds"
+msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"
 msgstr "سۈرەت تەگلىكىدە يوشۇرىدۇ"
 

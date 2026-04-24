@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-04-24 00:45+0000\n"
 "PO-Revision-Date: 2025-11-16 12:22+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -88,8 +88,10 @@ msgid "Color:"
 msgstr "Litur:"
 
 #: qml/configAppearance.qml:163
-#, kde-format
-msgctxt "@option:check"
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Hide on image backgrounds"
+msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"
 msgstr "Fela á myndabakgrunnum"
 

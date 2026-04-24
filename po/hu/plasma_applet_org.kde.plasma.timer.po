@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-04-24 00:45+0000\n"
 "PO-Revision-Date: 2025-05-18 20:31+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -118,7 +118,7 @@ msgstr "Parancs végrehajtása:"
 
 #: configGeneral.qml:119
 #, kde-format
-msgctxt "@placeholder"
+msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
@@ -129,9 +129,13 @@ msgid "Add"
 msgstr "Hozzáadás"
 
 #: configTimes.qml:81
-#, kde-format
+#, fuzzy, kde-format
+#| msgid ""
+#| "If you add predefined timers here, they will appear in plasmoid context "
+#| "menu."
 msgid ""
-"If you add predefined timers here, they will appear in plasmoid context menu."
+"If you add predefined timers here, they will appear in the widget’s context "
+"menu."
 msgstr ""
 "Ha felvesz itt előre megadott időértékeket, azok megjelennek a plasmoid "
 "helyi menüjében."
