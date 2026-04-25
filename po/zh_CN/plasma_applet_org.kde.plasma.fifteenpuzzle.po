@@ -88,7 +88,7 @@ msgstr "颜色："
 #, kde-format
 msgctxt "@option:check"
 msgid "Hide on image backgrounds"
-msgstr "在图像背景上隐藏"
+msgstr ""
 
 #: qml/FifteenPuzzle.qml:262
 #, kde-format

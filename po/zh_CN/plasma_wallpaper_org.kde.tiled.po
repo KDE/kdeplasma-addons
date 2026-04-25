@@ -22,7 +22,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label"
 msgid "Tile:"
-msgstr "平铺："
+msgstr ""
 
 #: package/contents/ui/config.qml:21
 #, kde-format

@@ -113,7 +113,7 @@ msgstr "运行命令："
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr "kdialog --msgbox '计时结束'"
+msgstr ""
 
 #: configTimes.qml:22
 #, kde-format
