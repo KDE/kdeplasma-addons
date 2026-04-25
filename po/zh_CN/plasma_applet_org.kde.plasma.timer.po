@@ -110,12 +110,10 @@ msgid "Run command:"
 msgstr "运行命令："
 
 #: configGeneral.qml:119
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr "kdialog --msgbox '计时结束'"
+msgstr ""
 
 #: configTimes.qml:22
 #, kde-format
@@ -124,14 +122,11 @@ msgid "Add"
 msgstr "添加"
 
 #: configTimes.qml:81
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in plasmoid context "
-#| "menu."
+#, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
-msgstr "在此处添加计时器预设后，它们将显示在 Plasma 小程序的右键菜单中。"
+msgstr ""
 
 #: configTimes.qml:119
 #, kde-format

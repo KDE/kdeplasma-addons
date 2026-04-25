@@ -6,13 +6,13 @@
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2018, 2021, 2022.
 # SPDX-FileCopyrightText: 2024 Geraldo Simiao <geraldosimiao@fedoraproject.org>
 # SPDX-FileCopyrightText: 2025 Guilherme Marçal Silva <guimarcalsilva@gmail.com>
-# SPDX-FileCopyrightText: 2025 Marcus Gama <marcus.gama@gmail.com>
+# SPDX-FileCopyrightText: 2025-2026 Marcus Gama <marcus.gama@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2025-11-13 07:15-0300\n"
+"PO-Revision-Date: 2026-04-24 08:56-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Lokalize 26.04.0\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -115,9 +115,7 @@ msgid "Run command:"
 msgstr "Executar comando:"
 
 #: configGeneral.qml:119
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Temporizador finalizado'"
@@ -129,16 +127,13 @@ msgid "Add"
 msgstr "Adicionar"
 
 #: configTimes.qml:81
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in plasmoid context "
-#| "menu."
+#, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
 msgstr ""
 "Se você adicionar temporizadores pré-definidos aqui, eles irão aparecer no "
-"menu de contexto do plasmoide."
+"widget de contexto do plasmoide."
 
 #: configTimes.qml:119
 #, kde-format

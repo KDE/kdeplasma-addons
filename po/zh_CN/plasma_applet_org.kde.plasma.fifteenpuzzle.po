@@ -85,12 +85,10 @@ msgid "Color:"
 msgstr "颜色："
 
 #: qml/configAppearance.qml:163
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Hide on image backgrounds"
+#, kde-format
 msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"
-msgstr "在图像背景上隐藏"
+msgstr ""
 
 #: qml/FifteenPuzzle.qml:262
 #, kde-format

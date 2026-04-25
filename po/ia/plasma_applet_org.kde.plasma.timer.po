@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2026-01-09 09:25+0100\n"
+"PO-Revision-Date: 2026-04-24 11:48+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -110,9 +110,7 @@ msgid "Run command:"
 msgstr "Executa Commando:"
 
 #: configGeneral.qml:119
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Timer-Chronometro  Terminate'"
@@ -124,16 +122,13 @@ msgid "Add"
 msgstr "Adde"
 
 #: configTimes.qml:81
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in plasmoid context "
-#| "menu."
+#, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
 msgstr ""
-"Si tu adde temporisatores predefinite hic, illos apparera inmenu de contexto "
-"de plasmoid."
+"Si tu adde temporisatores predefinite hic, illos apparera in menu de "
+"contexto de widget."
 
 #: configTimes.qml:119
 #, kde-format

@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2025-08-11 08:19+0200\n"
+"PO-Revision-Date: 2026-04-24 07:14+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -22,7 +22,7 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -91,9 +91,7 @@ msgid "Color:"
 msgstr "Barva:"
 
 #: qml/configAppearance.qml:163
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Hide on image backgrounds"
+#, kde-format
 msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"
 msgstr "Skrivaj na ozadjih slik"

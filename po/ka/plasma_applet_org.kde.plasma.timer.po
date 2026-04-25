@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2025-11-13 03:15+0100\n"
+"PO-Revision-Date: 2026-04-24 03:41+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -111,12 +111,10 @@ msgid "Run command:"
 msgstr "ბრძანების გაშვება:"
 
 #: configGeneral.qml:119
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr "kdialog --msgbox 'ტაიმერი დასრულდა'"
+msgstr "kdialog --msgbox 'წამზომი დასრულდა'"
 
 #: configTimes.qml:22
 #, kde-format
@@ -125,16 +123,13 @@ msgid "Add"
 msgstr "დამატება"
 
 #: configTimes.qml:81
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in plasmoid context "
-#| "menu."
+#, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
 msgstr ""
-"თუ აქ დაამატებთ წინასწარ აღწერილ წამმზომემს, ისინი პლაზმოიდის კონტექსტურ "
-"მენიუშიც გამოჩნდება."
+"თუ აქ დაამატებთ წინასწარ აღწერილ წამზომემს, ისინი წიჯეტის კონტექსტურ მენიუში "
+"გამოჩნდება."
 
 #: configTimes.qml:119
 #, kde-format
