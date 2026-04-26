@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2025-11-19 20:28+0200\n"
+"PO-Revision-Date: 2026-04-25 23:57+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -115,9 +115,7 @@ msgid "Run command:"
 msgstr "Vykdyti komandą:"
 
 #: configGeneral.qml:119
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Pasibaigė laikmačio laikas'"
@@ -129,16 +127,13 @@ msgid "Add"
 msgstr "Pridėti"
 
 #: configTimes.qml:81
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in plasmoid context "
-#| "menu."
+#, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
 msgstr ""
-"Jeigu čia pridėsite iš anksto nustatytus laikmačius, jie atsiras Plasma "
-"įskiepio kontekstiniame meniu."
+"Jeigu čia pridėsite iš anksto nustatytus laikmačius, jie atsiras valdiklio "
+"kontekstiniame meniu."
 
 #: configTimes.qml:119
 #, kde-format

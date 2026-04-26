@@ -86,9 +86,7 @@ msgid "Color:"
 msgstr "Farba:"
 
 #: qml/configAppearance.qml:163
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Hide on image backgrounds"
+#, kde-format
 msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"
 msgstr "Skryť na obrázkových pozadiach"

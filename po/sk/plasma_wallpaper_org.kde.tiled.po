@@ -18,9 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 
 #: package/contents/ui/config.qml:20 package/contents/ui/config.qml:29
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Tile:"
+#, kde-format
 msgctxt "@label, noun"
 msgid "Tile:"
 msgstr "Dlaždica:"

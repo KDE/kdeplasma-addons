@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2025-11-23 01:25+0200\n"
+"PO-Revision-Date: 2026-04-26 00:00+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
 "Language: lt\n"
@@ -20,12 +20,10 @@ msgstr ""
 "X-Generator: Poedit 3.8\n"
 
 #: package/contents/ui/config.qml:20 package/contents/ui/config.qml:29
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Tile:"
+#, kde-format
 msgctxt "@label, noun"
 msgid "Tile:"
-msgstr "Iškloti:"
+msgstr "Plytelė:"
 
 #: package/contents/ui/config.qml:21
 #, kde-format

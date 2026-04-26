@@ -112,12 +112,10 @@ msgid "Run command:"
 msgstr "Spustiť príkaz"
 
 #: configGeneral.qml:119
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr "kdialog --msgbox 'Timer finished'"
+msgstr "kdialog --msgbox 'Časovač ukončený'"
 
 #: configTimes.qml:22
 #, kde-format
@@ -126,16 +124,13 @@ msgid "Add"
 msgstr "Pridať"
 
 #: configTimes.qml:81
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in plasmoid context "
-#| "menu."
+#, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
 msgstr ""
 "Ak tu pridáte preddefinované časovače, zobrazia sa v kontextovej ponuke "
-"plazmoidu."
+"widgetu."
 
 #: configTimes.qml:119
 #, kde-format
