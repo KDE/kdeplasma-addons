@@ -9,16 +9,16 @@
 # Vincent PINON <vpinon@april.org>, 2014.
 # Yoann Laissus <yoann.laissus@gmail.com>, 2015.
 # Simon Depiets <sdepiets@gmail.com>, 2018, 2019.
-# SPDX-FileCopyrightText: 2020, 2022, 2025 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2020, 2022, 2025, 2026 Xavier Besnard <xavier.besnard@kde.org>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2025-11-14 13:58+0100\n"
+"PO-Revision-Date: 2026-04-25 08:01+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
-"Language-Team: French <French <kde-francophone@kde.org>>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -26,7 +26,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.08.3\n"
+"X-Generator: Lokalize 25.12.3\n"
 "X-Text-Markup: kde4\n"
 
 #: CompactRepresentation.qml:133
@@ -122,12 +122,10 @@ msgid "Run command:"
 msgstr "Exécuter une commande :"
 
 #: configGeneral.qml:119
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr "kdialog --msgbox 'Décompte terminé'"
+msgstr "kdialog --msgbox « Décompte terminé »"
 
 #: configTimes.qml:22
 #, kde-format
@@ -136,16 +134,13 @@ msgid "Add"
 msgstr "Ajouter"
 
 #: configTimes.qml:81
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in plasmoid context "
-#| "menu."
+#, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
 msgstr ""
-"Si vous avez des compteurs prédéfinis ici, il devraient apparaitre dans le "
-"menu contextuel du composant graphique."
+"Si vous ajoutez ici des compteurs prédéfinis, il devraient apparaitre dans "
+"le menu contextuel du composant graphique."
 
 #: configTimes.qml:119
 #, kde-format
