@@ -136,7 +136,7 @@ msgstr "Podložka"
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
-msgstr "Obrázok nie je trasnformovaný"
+msgstr "Obrázok nie je transformovaný"
 
 #: package/contents/ui/ConfigGeneral.qml:186
 #, kde-format
