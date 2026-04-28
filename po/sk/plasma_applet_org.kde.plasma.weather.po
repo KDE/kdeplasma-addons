@@ -693,8 +693,8 @@ msgid ""
 "The network request timed out, possibly due to a server outage at the "
 "weather station provider. Check again later."
 msgstr ""
-"The network request timed out, possibly kvôli a server outage at the weather "
-"station provider. Check again later."
+"Sieťová požiadavka vypršala, pravdepodobne kvôli výpadku servera u "
+"poskytovateľa meteorologickej stanice. Skúste to znova neskôr."
 
 #: qml/main.qml:81 qml/TopPanel.qml:221
 #, kde-format
