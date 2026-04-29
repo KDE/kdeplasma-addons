@@ -187,6 +187,7 @@ PlasmoidItem {
         displayVisibilityUnit: root.displayVisibilityUnit
 
         station: forecastControl.forecast?.station
+        futureHours: forecastControl.forecast?.futureHours
         futureDays: forecastControl.forecast?.futureDays
         warnings: forecastControl.forecast?.warnings
         lastObservation: forecastControl.forecast?.lastObservation

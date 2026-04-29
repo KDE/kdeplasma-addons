@@ -27,6 +27,7 @@ ColumnLayout {
     property int displayVisibilityUnit: 0
 
     property var station: null
+    property var futureHours: null
     property var futureDays: null
     property var warnings: null
     property var lastObservation: null
@@ -92,6 +93,7 @@ ColumnLayout {
         Layout.fillWidth: true
 
         futureDays: root.futureDays
+        futureHours: root.futureHours
         warnings: root.warnings
         lastObservation: root.lastObservation
         metaData: root.metaData
