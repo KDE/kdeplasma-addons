@@ -63,6 +63,16 @@ public:
     };
     QList<Forecast> forecasts;
 
+    struct HourlyForecast {
+        QDateTime timestamp;
+        QString summary;
+        float low = qQNaN();
+        float high = qQNaN();
+        int precipitation = 0;
+        bool isDayTime = true;
+    };
+    QList<HourlyForecast> hourlyForecasts;
+
     struct Alert {
         QString headline;
         QString description;
@@ -76,6 +86,7 @@ public:
     bool isObservationDataError = false;
     bool isPointsInfoDataError = false;
     bool isForecastsDataError = false;
+    bool isHourlyForecastsDataError = false;
     bool isAlertsDataError = false;
 };
 
@@ -121,6 +132,10 @@ private:
     // Load and parse upcoming forecast for the next N days
     void getForecast();
     void readForecast(KJob *job, const QByteArray &data);
+
+    // Load and parse upcoming forecast for the next N hours
+    void getHourlyForecast();
+    void readHourlyForecast(KJob *job, const QByteArray &data);
 
     // The NOAA API is based on grid of points
     void getPointsInfo();

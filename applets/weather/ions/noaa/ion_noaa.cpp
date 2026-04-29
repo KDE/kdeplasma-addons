@@ -49,6 +49,7 @@ NOAAIon::NOAAIon(QObject *parent, const QVariantList &args)
 
     // Schedule the API calls according to the previous information required
     connect(this, &NOAAIon::observationUpdated, this, &NOAAIon::getForecast);
+    connect(this, &NOAAIon::observationUpdated, this, &NOAAIon::getHourlyForecast);
     connect(this, &NOAAIon::observationUpdated, this, &NOAAIon::getAlerts);
 
     // Get the list of stations for search, location and observation data
@@ -603,6 +604,28 @@ void NOAAIon::updateWeather()
 
     returnForecast->setFutureDays(futureDays);
 
+    auto futureHours = std::make_shared<FutureHours>();
+
+    const auto &hourlyForecats = m_weatherData->hourlyForecasts;
+
+    for (auto it = hourlyForecats.begin(); it != hourlyForecats.cend(); ++it) {
+        ConditionIcons icon = getConditionIcon(it->summary.toLower(), it->isDayTime);
+        QString iconName = getWeatherIcon(icon);
+        FutureHourForecast futureHourForecast(it->timestamp);
+        futureHourForecast.setConditionIcon(iconName);
+        futureHourForecast.setCondition(i18nForecast(it->summary));
+        if (!qIsNaN(it->high)) {
+            futureHourForecast.setHighTemp(it->high);
+        }
+        if (!qIsNaN(it->low)) {
+            futureHourForecast.setHighTemp(it->low);
+        }
+        futureHourForecast.setConditionProbability(it->precipitation);
+        futureHours->addHour(futureHourForecast);
+    }
+
+    returnForecast->setFutureHours(futureHours);
+
     if (!m_weatherData->isAlertsDataError) {
         auto warnings = std::make_shared<Warnings>();
 
@@ -846,12 +869,135 @@ QString NOAAIon::windDirectionFromAngle(float degrees) const
     return directions.at(index);
 }
 
-void NOAAIon::getForecast()
+void NOAAIon::getHourlyForecast()
 {
     if (m_weatherData->forecastUrl.isEmpty()) {
         qCWarning(WEATHER::ION::NOAA) << "Cannot request forecast because the URL is missing";
         // If the alerts job also ended with error finish the promise and return.
         if (m_weatherData->isAlertsDataError) {
+            m_forecastPromise->finish();
+            m_forecastPromise.reset();
+            m_weatherData.reset();
+        } else {
+            // Otherwise set the forecast job error to the inform alerts job
+            m_weatherData->isHourlyForecastsDataError = true;
+        }
+        return;
+    }
+
+    auto job = requestAPIJob(QUrl(m_weatherData->forecastUrl + QStringLiteral("/hourly")), &NOAAIon::readHourlyForecast);
+    m_jobs.insert(job);
+}
+
+void NOAAIon::readHourlyForecast(KJob *job, const QByteArray &data)
+{
+    m_jobs.remove(job);
+
+    // we don't stop the forecast job if the warnings job are failed because we can show
+    // forecast even without warnings.
+
+    if (m_forecastPromise->isCanceled()) {
+        qCDebug(WEATHER::ION::NOAA) << "Forecast fetching cancelled. Return";
+        if (m_jobs.isEmpty()) {
+            // if cancelled then don't remove unneeded data until last job is finished because otherwise it
+            // can lead to not correct forecast data or even crash.
+            m_forecastPromise->finish();
+            m_forecastPromise.reset();
+            m_weatherData.reset();
+        }
+        return;
+    }
+
+    if (job->error()) {
+        qCWarning(WEATHER::ION::NOAA) << "Error retrieving data" << job->errorText();
+        if (m_jobs.isEmpty()) {
+            m_forecastPromise->finish();
+            m_forecastPromise.reset();
+            m_weatherData.reset();
+        } else {
+            m_weatherData->isHourlyForecastsDataError = true;
+        }
+        return;
+    }
+
+    QJsonParseError jsonError;
+    QJsonDocument doc = QJsonDocument::fromJson(data, &jsonError);
+
+    if (doc.isNull()) {
+        qCWarning(WEATHER::ION::NOAA) << "Received invalid JSON data:" << jsonError.errorString();
+        if (m_jobs.isEmpty()) {
+            m_forecastPromise->finish();
+            m_forecastPromise.reset();
+            m_weatherData.reset();
+        } else {
+            m_weatherData->isHourlyForecastsDataError = true;
+        }
+        return;
+    }
+
+    const QJsonValue properties = doc[u"properties"_s];
+    if (!properties.isObject()) {
+        qCWarning(WEATHER::ION::NOAA) << "Malformed forecast report" << doc;
+        if (m_jobs.isEmpty()) {
+            m_forecastPromise->finish();
+            m_forecastPromise.reset();
+            m_weatherData.reset();
+        } else {
+            m_weatherData->isHourlyForecastsDataError = true;
+        }
+        return;
+    }
+
+    auto &forecasts = m_weatherData->hourlyForecasts;
+    forecasts.clear();
+
+    const QJsonArray periods = properties[u"periods"_s].toArray();
+    forecasts.reserve(periods.count());
+
+    for (const auto &period : periods) {
+        WeatherData::HourlyForecast forecast;
+
+        // Time period. Date and day/night flag
+        forecast.timestamp = QDateTime::fromString(period[u"startTime"_s].toString(), Qt::ISODate);
+        forecast.isDayTime = period[u"isDaytime"_s].toBool();
+
+        // The temperature reported is daytime's highest or night's lowest
+        // "temperature" can be either an integer (to be deprecated) or a QuantitativeValue
+        // Let's use Fahrenheit for now as the default unit for the provider
+        const auto tempJson = period[u"temperature"_s];
+        float tempF = qQNaN();
+        if (tempJson.isObject()) {
+            tempF = parseQV(tempJson, Fahrenheit);
+        } else {
+            const auto temperature = Value(tempJson.toInt(), parseUnit(period[u"temperatureUnit"_s].toString()));
+            tempF = m_converter.convert(temperature, Fahrenheit).number();
+        }
+
+        forecast.high = tempF;
+
+        // Precipitation (%)
+        forecast.precipitation = period[u"probabilityOfPrecipitation"_s][u"value"_s].toInt();
+
+        // Weather conditions
+        forecast.summary = period[u"shortForecast"].toString();
+
+        forecasts << forecast;
+    }
+
+    qCDebug(WEATHER::ION::NOAA) << "Received hourly forecast data:" << forecasts.count() << "periods."
+                                << "Starts at night:" << (!forecasts.isEmpty() && !forecasts.first().isDayTime);
+
+    if (m_jobs.isEmpty()) {
+        updateWeather();
+    }
+}
+
+void NOAAIon::getForecast()
+{
+    if (m_weatherData->forecastUrl.isEmpty()) {
+        qCWarning(WEATHER::ION::NOAA) << "Cannot request forecast because the URL is missing";
+        // If the alerts or hourly forecasts job also ended with error finish the promise and return.
+        if (m_weatherData->isAlertsDataError || m_weatherData->isHourlyForecastsDataError) {
             m_forecastPromise->finish();
             m_forecastPromise.reset();
             m_weatherData.reset();
@@ -1067,7 +1213,7 @@ void NOAAIon::readPointsInfo(KJob *job, const QByteArray &data)
 
 void NOAAIon::getAlerts()
 {
-    if (m_weatherData->isForecastsDataError) {
+    if (m_weatherData->isForecastsDataError || m_weatherData->isHourlyForecastsDataError) {
         m_forecastPromise->finish();
         m_forecastPromise.reset();
         m_weatherData.reset();
@@ -1080,7 +1226,7 @@ void NOAAIon::getAlerts()
     const QString &countyID = m_weatherData->countyID;
     if (countyID.isEmpty()) {
         qCWarning(WEATHER::ION::NOAA) << "Cannot request alerts because the county ID is missing";
-        m_weatherData->isForecastsDataError = true;
+        m_weatherData->isAlertsDataError = true;
         return;
     }
 
@@ -1131,7 +1277,7 @@ void NOAAIon::readAlerts(KJob *job, const QByteArray &data)
 {
     m_jobs.remove(job);
 
-    if (m_weatherData->isForecastsDataError) {
+    if (m_weatherData->isForecastsDataError || m_weatherData->isHourlyForecastsDataError) {
         qCDebug(WEATHER::ION::NOAA) << "Error reading points info data. Stop reading observation data";
         m_forecastPromise->finish();
         m_forecastPromise.reset();
