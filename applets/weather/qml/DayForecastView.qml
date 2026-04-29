@@ -13,18 +13,18 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 
-PlasmaComponents.ScrollView {
+Item {
     id: root
 
-    property var futureHours: null
+    property var futureDays: null
     property var metaData: null
 
     property int displayTemperatureUnit: 0
 
     readonly property int preferredIconSize: Kirigami.Units.iconSizes.large
 
-    readonly property real preferredCellWidth: root.preferredIconSize
-    readonly property real preferredCellHeight: root.preferredIconSize + 4 * labelFontMetrics.height + Kirigami.Units.largeSpacing * 2
+    implicitHeight: forecast.implicitHeight + horizontalHeader.height
+    implicitWidth: forecast.implicitWidth + verticalHeader.width
 
     //Item to get the metrics of the regular font in a PlasmaComponent.Label
     PlasmaComponents.Label {
@@ -38,54 +38,101 @@ PlasmaComponents.ScrollView {
         }
     }
 
-    PlasmaComponents.ScrollBar.vertical.policy: PlasmaComponents.ScrollBar.AlwaysOff
+    HorizontalHeaderView {
+        id: horizontalHeader
+        anchors.left: forecast.left
+        anchors.top: parent.top
+        syncView: (root.futureDays.daysNumber > 1) ? forecast : null
+        clip: true
+        textRole: "monthDay"
+        resizableColumns: false
+        interactive: false
 
-    implicitWidth: preferredCellWidth * 7
-    implicitHeight: preferredCellHeight
+        delegate: PlasmaComponents.Label {
+            text: (!!model.monthDay) ? model.monthDay :
+                  (!!model.weekDay) ? model.weekDay :
+                  ""
+            textFormat: Text.PlainText
+            horizontalAlignment: Text.AlignHCenter
+        }
+    }
 
-    focus: true
+    VerticalHeaderView {
+        id: verticalHeader
+        anchors.top: forecast.top
+        anchors.left: parent.left
+        syncView: root.futureDays.isNightPresent ? forecast : null
+        clip: true
+        textRole: "period"
+        resizableRows: false
+        interactive: false
 
-    contentItem: ListView {
-        id: forecasts
+        delegate: PlasmaComponents.Label {
+            text: !!model.period ? model.period : ""
+            textFormat: Text.PlainText
+        }
+    }
+
+    TableView {
+        id: forecast
 
         interactive: false
 
-        model: root.futureHours
+        anchors.left: verticalHeader.right
+        anchors.top: horizontalHeader.bottom
+        anchors.right: parent.right
+        anchors.bottom: parent.bottom
 
-        clip: true
+        model: root.futureDays
 
-        orientation: ListView.Horizontal
+        // calculate spacing and implicit width/height when layout changed
+        onLayoutChanged: {
+            //check if row loaded before calculating row height to prevent rows from being shown incorrectly
+            if(isRowLoaded(topRow)) {
+                var rowsHeight = implicitRowHeight(topRow) * rows;
+                neededRowSpacing = (parent.height - horizontalHeader.height - rowsHeight) / (rows + 1);
+                implicitHeight = rowsHeight
+            } else {
+                //restore default values if none of rows is loaded (which shows that forecast model is empty)
+                neededRowSpacing = 0;
+                implicitHeight = 0;
+
+            }
+            //the same for columns as for rows
+            if(isColumnLoaded(leftColumn)) {
+                var columnsWidth = implicitColumnWidth(leftColumn) * columns;
+                neededColumnSpacing =  (parent.width - verticalHeader.width - columnsWidth) / (columns + 1)
+                implicitWidth = columnsWidth
+            } else {
+                neededColumnSpacing = 0;
+                implicitWidth = 0;
+            }
+        }
+
+        property real neededRowSpacing: 0
+        property real neededColumnSpacing: 0
+
+        anchors.topMargin: neededRowSpacing
+        anchors.bottomMargin: neededRowSpacing
+        anchors.leftMargin: neededColumnSpacing
+        anchors.rightMargin: neededColumnSpacing
+
+        rowSpacing: neededRowSpacing
+        columnSpacing: neededColumnSpacing
 
         delegate: ColumnLayout {
             id: dayDelegate
 
             visible: !!model.conditionIcon
 
-            width: root.preferredCellWidth
-
             spacing: Math.round(Kirigami.Units.smallSpacing / 2)
 
-            PlasmaComponents.Label {
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                horizontalAlignment: Text.AlignHCenter
-                text: {
-                    const format = Qt.locale().timeFormat(Locale.ShortFormat);
-                    const usesAmPm = format.includes("Ap");
-                    if (usesAmPm) {
-                        return Qt.formatDateTime(model.timestamp, "h AP");
-                    } else {
-                        return Qt.formatDateTime(model.timestamp, "HH:mm");
-                    }
-                }
-                textFormat: Text.PlainText
-                Layout.preferredHeight: labelFontMetrics.height
-            }
-
             Kirigami.Icon {
+                Layout.fillWidth: true
                 Layout.preferredHeight: preferredIconSize
                 Layout.preferredWidth: preferredIconSize
 
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                Layout.alignment: Qt.AlignTop
 
                 source: model.conditionIcon
 
@@ -99,7 +146,8 @@ PlasmaComponents.ScrollView {
                         if (!model.conditionProbability) {
                             return model.condition;
                         }
-                        return i18nc("certain weather condition (probability percentage)", "%1 (%2%)", model.condition, model.conditionProbability);
+                        return i18nc("certain weather condition (probability percentage)",
+                            "%1 (%2%)", model.condition, model.conditionProbability);
                     }
                 }
             }
@@ -115,7 +163,7 @@ PlasmaComponents.ScrollView {
                 horizontalAlignment: Text.AlignHCenter
                 text: !!model.conditionProbability ? i18nc("Probability of precipitation in percentage", "☂%1%", model.conditionProbability) : "·"
                 textFormat: Text.PlainText
-                visible: root.futureHours.hasProbability
+                visible: root.futureDays.hasProbability
             }
 
             PlasmaComponents.Label {
@@ -123,7 +171,7 @@ PlasmaComponents.ScrollView {
                 horizontalAlignment: Text.AlignHCenter
                 text: !isNaN(model.highTemp) && !!root.metaData?.temperatureUnit ? Util.temperatureToDisplayString(root.displayTemperatureUnit, model.highTemp, root.metaData.temperatureUnit, true) : i18nc("Short for no data available", "-")
                 textFormat: Text.PlainText
-                visible: !isNaN(model.highTemp)
+                visible: !isNaN(model.highTemp) || !futureDays.isNightPresent
                 Layout.preferredHeight: labelFontMetrics.height
             }
 
@@ -132,7 +180,7 @@ PlasmaComponents.ScrollView {
                 horizontalAlignment: Text.AlignHCenter
                 text: !isNaN(model.lowTemp) && !!root.metaData?.temperatureUnit ? Util.temperatureToDisplayString(root.displayTemperatureUnit, model.lowTemp, root.metaData.temperatureUnit, true) : i18nc("Short for no data available", "-")
                 textFormat: Text.PlainText
-                visible: !isNaN(model.lowTemp)
+                visible: !isNaN(model.lowTemp) || !futureDays.isNightPresent
                 Layout.preferredHeight: labelFontMetrics.height
             }
         }

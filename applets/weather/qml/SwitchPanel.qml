@@ -93,12 +93,7 @@ ColumnLayout {
     readonly property list<WeatherInfoPanel> weatherPanelModel: [
         WeatherInfoPanel {
             title: root.forecastViewTitle || i18nc("@title:tab Weather forecast", "Forecast")
-            view: !!root.futureDays && root.futureDays.daysNumber > 0 ? forecastView : forecastPlaceholder
-        },
-        WeatherInfoPanel {
-            title: i18nc("@title:tab", "Hourly")
-            visible: !!root.futureHours && root.futureHours.hoursNumber > 0
-            view: hourlyForecastView
+            view: (!!root.futureDays && root.futureDays.daysNumber > 0) || (!!root.futureHours && root.futureHours.hoursNumber > 0) ? forecastView : forecastPlaceholder
         },
         WeatherInfoPanel {
             title: i18nc("@title:tab", "Details")
@@ -164,16 +159,8 @@ ColumnLayout {
     Component {
         id: forecastView
         ForecastView {
-            futureDays: root.futureDays
-            metaData: root.metaData
-            displayTemperatureUnit: root.displayTemperatureUnit
-        }
-    }
-
-    Component {
-        id: hourlyForecastView
-        HourlyForecastView {
             futureHours: root.futureHours
+            futureDays: root.futureDays
             metaData: root.metaData
             displayTemperatureUnit: root.displayTemperatureUnit
         }
