@@ -4,20 +4,21 @@
 # SPDX-FileCopyrightText: 2022-2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2023 Jannick Kuhr <opensource@kuhr.org>
 # SPDX-FileCopyrightText: 2025 Johannes Obermayr <johannesobermayr@gmx.de>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_calendar_alternatecalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2023-03-16 22:08+0100\n"
-"Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
+"PO-Revision-Date: 2026-04-25 23:18+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.03.70\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: calendarsystem.h:54
 #, kde-format
@@ -86,16 +87,16 @@ msgctxt ""
 "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
 "number %4 Full date in Hebrew"
 msgid "%1 %2, %3 (%4)"
-msgstr "%1 %2, %3 (%4)"
+msgstr "%1. %2 %3 (%4)"
 
 #: provider/indiancalendar.cpp:73
 #, kde-format
 msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
 msgid "%1 %2, %3"
-msgstr "%1 %2, %3"
+msgstr "%1. %2 %3"
 
 #: provider/qtcalendar.cpp:52
 #, kde-format
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
-msgstr "%1 %2, %3"
+msgstr "%1. %2 %3"
