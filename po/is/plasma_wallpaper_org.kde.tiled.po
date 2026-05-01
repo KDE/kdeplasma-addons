@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# SPDX-FileCopyrightText: 2025 Sveinn í Felli <sv1@fellsnet.is>
+# SPDX-FileCopyrightText: 2025, 2026 Sveinn í Felli <sv1@fellsnet.is>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2025-11-17 10:03+0000\n"
+"PO-Revision-Date: 2026-04-30 15:16+0000\n"
 "Last-Translator: Sveinn í Felli <sv1@fellsnet.is>\n"
 "Language-Team: Icelandic\n"
 "Language: is\n"
@@ -18,12 +18,10 @@ msgstr ""
 "X-Generator: Lokalize 23.08.5\n"
 
 #: package/contents/ui/config.qml:20 package/contents/ui/config.qml:29
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Tile:"
+#, kde-format
 msgctxt "@label, noun"
 msgid "Tile:"
-msgstr "Tígla:"
+msgstr "Tíglar:"
 
 #: package/contents/ui/config.qml:21
 #, kde-format
