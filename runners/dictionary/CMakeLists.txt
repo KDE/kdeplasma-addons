@@ -8,3 +8,8 @@ kcoreaddons_add_plugin(kcm_krunner_dictionary INSTALL_NAMESPACE "kf6/krunner/kcm
 target_compile_definitions(kcm_krunner_dictionary PRIVATE -DKRUNNER_PLUGIN_NAME="krunner_dictionary")
 target_sources(kcm_krunner_dictionary PRIVATE dictionaryrunner_config.cpp)
 target_link_libraries(kcm_krunner_dictionary KF6::Runner KF6::I18n KF6::KCMUtils)
+
+add_test(NAME kcm_krunner_dictionary_smoketest COMMAND kcmshell6 --smoke-test kf6/krunner/kcms/kcm_krunner_dictionary)
+set_tests_properties(kcm_krunner_dictionary_smoketest PROPERTIES
+    ENVIRONMENT_MODIFICATION QT_PLUGIN_PATH=path_list_prepend:${CMAKE_BINARY_DIR}/bin
+)

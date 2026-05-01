@@ -17,3 +17,8 @@ target_link_libraries(kcm_krunner_charrunner
     KF6::KCMUtils
     KF6::I18n
 )
+
+add_test(NAME kcm_krunner_charrunner_smoketest COMMAND kcmshell6 --smoke-test kf6/krunner/kcms/kcm_krunner_charrunner)
+set_tests_properties(kcm_krunner_charrunner_smoketest PROPERTIES
+    ENVIRONMENT_MODIFICATION QT_PLUGIN_PATH=path_list_prepend:${CMAKE_BINARY_DIR}/bin
+)
