@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-02 00:43+0000\n"
-"PO-Revision-Date: 2026-02-20 01:44+0100\n"
+"PO-Revision-Date: 2026-04-24 07:35+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -29,25 +29,22 @@ msgstr "Erscheinungsbild"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
-msgstr "Gittergröße"
+msgstr "Rastergröße:"
 
 #: qml/configAppearance.qml:61
-#, fuzzy, kde-format
-#| msgid "Background:"
+#, kde-format
 msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "Hintergrund:"
 
 #: qml/configAppearance.qml:68
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "Farbe:"
 
 #: qml/configAppearance.qml:84
-#, fuzzy, kde-format
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr "Bild:"
@@ -71,22 +68,19 @@ msgid "Choose an Image"
 msgstr "Wählen Sie ein Bild"
 
 #: qml/configAppearance.qml:124
-#, fuzzy, kde-format
-#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+#, kde-format
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Bilddateien (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
 #: qml/configAppearance.qml:142
-#, fuzzy, kde-format
-#| msgid "Tiles:"
+#, kde-format
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
-msgstr "Steine:"
+msgstr "Steinbeschriftungen:"
 
 #: qml/configAppearance.qml:149
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color:"
 msgstr "Farbe:"
@@ -95,7 +89,7 @@ msgstr "Farbe:"
 #, kde-format
 msgctxt "@option:check"
 msgid "Hide on image backgrounds"
-msgstr ""
+msgstr "Auf Bildhintergründen verstecken"
 
 #: qml/FifteenPuzzle.qml:262
 #, kde-format
@@ -113,7 +107,7 @@ msgstr "Mischen"
 #, kde-format
 msgctxt "@info:status The number of moves made by the player so far"
 msgid "Moves: %1"
-msgstr ""
+msgstr "Züge: %1"
 
 #: qml/FifteenPuzzle.qml:371
 #, kde-format

@@ -2,32 +2,33 @@
 # SPDX-FileCopyrightText: 2008-2009, 2012, 2016, 2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2009, 2014-2015, 2018-2019, 2021 Burkhard Lück <lueck@hube-lueck.de>
 # SPDX-FileCopyrightText: 2023 Jannick Kuhr <opensource@kuhr.org>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-02 00:43+0000\n"
-"PO-Revision-Date: 2023-03-15 21:28+0100\n"
-"Last-Translator: Jannick Kuhr <opensource@kuhr.org>\n"
+"PO-Revision-Date: 2026-04-23 20:09+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
-msgstr "Eieruhr anhalten"
+msgstr "Timer anhalten"
 
 #: CompactRepresentation.qml:133
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
-msgstr "Eieruhr starten"
+msgstr "Timer starten"
 
 #: CompactRepresentation.qml:196 CompactRepresentation.qml:214
 #, kde-format
@@ -38,8 +39,7 @@ msgstr[0] "%1 s"
 msgstr[1] "%1 s"
 
 #: config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Allgemein"
@@ -48,7 +48,7 @@ msgstr "Allgemein"
 #, kde-format
 msgctxt "@title"
 msgid "Predefined Timers"
-msgstr "Vordefinierte Zeitmesser"
+msgstr "Vordefinierte Timer"
 
 #: configGeneral.qml:33
 #, kde-format
@@ -78,7 +78,7 @@ msgstr "Sekunden anzeigen"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "Zeitgeber-Steuerung anzeigen"
+msgstr "Timer-Steuerung anzeigen"
 
 #: configGeneral.qml:71
 #, kde-format
@@ -90,40 +90,34 @@ msgstr "Fortschrittsanzeige anzeigen"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "Bei Zeitablauf:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Benachrichtigungstext anzeigen:"
+msgstr "Benachrichtigung anzeigen:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
-msgstr "Zeit abgelaufen"
+msgstr "Timer abgelaufen"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Run Command"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "Befehl ausführen"
+msgstr "Befehl ausführen:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Timer abgelaufen'"
 
 #: configTimes.qml:22
-#, fuzzy, kde-format
-#| msgid "Add"
+#, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Hinzufügen"
@@ -133,8 +127,8 @@ msgstr "Hinzufügen"
 msgid ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 msgstr ""
-"Wenn Sie hier vordefinierte Zeitmesser hinzufügen, werden diese im Plasmoid-"
-"Kontextmenü angezeigt."
+"Wenn Sie hier vordefinierte Timer hinzufügen, werden diese im Kontextmenü "
+"des Miniprogramms angezeigt."
 
 #: configTimes.qml:119
 #, kde-format
@@ -190,12 +184,12 @@ msgstr ""
 #: main.qml:90
 #, kde-format
 msgid "Timer"
-msgstr "Eieruhr"
+msgstr "Timer"
 
 #: main.qml:91
 #, kde-format
 msgid "Timer finished"
-msgstr "Zeit abgelaufen"
+msgstr "Timer abgelaufen"
 
 #: main.qml:131
 #, kde-format

@@ -2,19 +2,21 @@
 # German translation for kdeplasma-addons.
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2025-02-27 09:47+0100\n"
-"Last-Translator: Automatically generated\n"
+"PO-Revision-Date: 2026-04-25 23:19+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: colorsrunner.cpp:29
 #, kde-format
@@ -22,6 +24,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
 "#FF00FF) or an SVG named color."
 msgstr ""
+"Zeigt den Wert von :q: als Farbe an, wenn :q: eine hexadezimale Farbe (z. B. "
+"#FF00FF) oder eine benannte SVG-Farbe ist."
 
 #: colorsrunner.cpp:31
 #, kde-format
@@ -29,6 +33,8 @@ msgid ""
 "Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
 "255,255,255)."
 msgstr ""
+"Zeigt den Wert von :q: als Farbe an, wenn :q: ein RGB-Farbtriplett ist "
+"(z. B. 255,255,255)."
 
 #: colorsrunner.cpp:34
 #, kde-format
@@ -36,18 +42,20 @@ msgid ""
 "Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
 "color quadruplet (e.g. 255,255,255,255)."
 msgstr ""
+"Zeigt den Wert von :q: als Farbe mit Alphakanal an, wenn :q: ein RGBA-"
+"Farbquartett ist (z. B. 255,255,255,255)."
 
 #: colorsrunner.cpp:139
 #, kde-format
 msgid "RGBA: %1, %2, %3, %4"
-msgstr ""
+msgstr "RGBA: %1, %2, %3, %4"
 
 #: colorsrunner.cpp:141
 #, kde-format
 msgid "RGB: %1, %2, %3"
-msgstr ""
+msgstr "RGB: %1, %2, %3"
 
 #: colorsrunner.cpp:146
 #, kde-format
 msgid "CMYK: %1%, %2%, %3%, %4%"
-msgstr ""
+msgstr "CMYK: %1%, %2%, %3%, %4%"

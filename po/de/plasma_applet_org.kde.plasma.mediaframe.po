@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:44+0000\n"
-"PO-Revision-Date: 2026-02-20 01:43+0100\n"
+"PO-Revision-Date: 2026-04-23 19:56+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -16,13 +16,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: qml/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Media"
-msgstr ""
+msgstr "Medien"
 
 #: qml/config.qml:18
 #, kde-format
@@ -187,13 +187,14 @@ msgstr "Pfad entfernen"
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
-msgstr ""
+msgstr "Keine Medien eingerichtet"
 
 #: qml/ConfigMedia.qml:95
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr ""
+"Fügen Sie Dateien oder Ordner hinzu, um sie im Miniprogramm anzuzeigen."
 
 #: qml/ConfigMedia.qml:101
 #, kde-format
@@ -211,13 +212,13 @@ msgstr "Einen Ordner auswählen"
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
-msgstr ""
+msgstr "Keine Medien ausgewählt"
 
 #: qml/main.qml:364 qml/main.qml:374
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
-msgstr ""
+msgstr "Medien auswählen …"
 
 #~ msgctxt "@title"
 #~ msgid "General"
