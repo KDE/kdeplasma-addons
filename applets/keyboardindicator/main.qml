@@ -44,19 +44,19 @@ PlasmoidItem {
     Plasmoid.icon: {
 
         if (anyModifierActive && !numLockState?.locked) {
-            return "input-caps-on";
+            return "input-caps-on-symbolic";
         } else if (anyModifierActive && numLockState?.locked) {
-            return "input-combo-on";
+            return "input-combo-on-symbolic";
         }
 
         if (capsLockState?.locked && numLockState?.locked) {
-            return "input-combo-on";
+            return "input-combo-on-symbolic";
         } else if (capsLockState?.locked) {
-            return "input-caps-on";
+            return "input-caps-on-symbolic";
         } else if (numLockState?.locked) {
-            return "input-num-on";
+            return "input-num-on-symbolic";
         } else {
-            return "input-caps-on";
+            return "input-caps-on-symbolic";
         }
     }
 
