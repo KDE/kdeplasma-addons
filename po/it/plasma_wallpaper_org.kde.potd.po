@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# SPDX-FileCopyrightText: 2020, 2022, 2023, 2024 Vincenzo Reale <smart2128vr@gmail.com>
+# SPDX-FileCopyrightText: 2020, 2022, 2023, 2024, 2026 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-09 00:46+0000\n"
-"PO-Revision-Date: 2024-08-29 18:37+0200\n"
+"PO-Revision-Date: 2026-04-11 12:01+0200\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: package/contents/ui/config.qml:58
 #, kde-format
@@ -129,13 +129,13 @@ msgstr "Apri immagine di sfondo"
 #, kde-format
 msgctxt "@action:inmenu Placeholder is title of image"
 msgid "About “%1”"
-msgstr ""
+msgstr "Informazioni su «%1»"
 
 #: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "About This Image"
-msgstr ""
+msgstr "Informazioni su questa immagine"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
