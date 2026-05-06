@@ -88,7 +88,7 @@ msgstr "颜色："
 #, kde-format
 msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"
-msgstr ""
+msgstr "在图像背景上隐藏"
 
 #: qml/FifteenPuzzle.qml:262
 #, kde-format

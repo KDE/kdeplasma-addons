@@ -113,7 +113,7 @@ msgstr "运行命令："
 #, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox '计时结束'"
 
 #: configTimes.qml:22
 #, kde-format
@@ -126,7 +126,7 @@ msgstr "添加"
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
-msgstr ""
+msgstr "在此处添加计时器预设后，它们将显示在计时器小部件的右键菜单中。"
 
 #: configTimes.qml:119
 #, kde-format
