@@ -115,10 +115,25 @@ void LocationsControl::onSearchEnded(const QString &provider)
         return;
     }
 
-    // if there are no locations in model or the quality of the last location data is better than arrived we just add the
-    // arrived locations to the end of the model
-    if (m_locationsOrder.isEmpty()
-        || m_weatherDataMonitor->providerQuality(locationsData->provider()) <= m_weatherDataMonitor->providerQuality(m_locationsOrder.last()->provider())) {
+    // Insert the arrived result at its sorted position so the list stays in a
+    // deterministic order regardless of which provider responded first.
+    // Primary key: provider quality (desc). Tie-breaker: provider name (asc).
+    auto shouldComeBefore = [this](const std::shared_ptr<LocationsData> &a, const std::shared_ptr<LocationsData> &b) {
+        const int qa = m_weatherDataMonitor->providerQuality(a->provider());
+        const int qb = m_weatherDataMonitor->providerQuality(b->provider());
+        if (qa != qb) {
+            return qa > qb;
+        }
+        return a->provider() < b->provider();
+    };
+
+    int insertPosition = 0;
+    while (insertPosition < m_locationsOrder.size() && shouldComeBefore(m_locationsOrder[insertPosition], locationsData)) {
+        ++insertPosition;
+    }
+
+    // Fast path: the new result belongs at the end, no need to touch existing models.
+    if (insertPosition == m_locationsOrder.size()) {
         qCDebug(WEATHER::CONTROLLER) << "LocationsControl: append " << locationsData->locations()->rowCount() << " locations";
         m_locationsOrder.append(locationsData);
         addSourceModel(locationsData->locations().get());
@@ -126,35 +141,19 @@ void LocationsControl::onSearchEnded(const QString &provider)
         return;
     }
 
-    // Sort all locations by quality. Locations with better quality is above others
-    for (int qualityPosition = 0; qualityPosition < m_locationsOrder.size(); ++qualityPosition) {
-        if (m_weatherDataMonitor->providerQuality(locationsData->provider())
-            > m_weatherDataMonitor->providerQuality(m_locationsOrder[qualityPosition]->provider())) {
-            qCDebug(WEATHER::CONTROLLER) << "LocationsControl: add model with " << locationsData->locations()->rowCount(QModelIndex())
-                                         << " locations, begin at position " << qualityPosition;
+    // QConcatenateTablesProxyModel can only append, so pop the trailing models,
+    // insert the new one, then re-append them in order.
+    qCDebug(WEATHER::CONTROLLER) << "LocationsControl: insert " << locationsData->locations()->rowCount() << " locations at position " << insertPosition;
 
-            // Remove all locations from the model with quality less than the quality of arrived provider,
-            // insert provider and re-add the locations with less quality because QConcatenateTablesProxyModel
-            // don't support adding at arbitrary position
-            QList<std::shared_ptr<LocationsData>> tempLocationsOrder;
-
-            for (int removePosition = qualityPosition; removePosition < m_locationsOrder.size(); ++removePosition) {
-                auto worstQualityData = m_locationsOrder[removePosition];
-                removeSourceModel(worstQualityData->locations().get());
-                tempLocationsOrder.append(worstQualityData);
-            }
-
-            addSourceModel(locationsData->locations().get());
-            m_locationsOrder.insert(qualityPosition, locationsData);
-
-            for (const auto &worstQualityData : tempLocationsOrder) {
-                addSourceModel(worstQualityData->locations().get());
-            }
-            break;
-        }
+    for (int i = insertPosition; i < m_locationsOrder.size(); ++i) {
+        removeSourceModel(m_locationsOrder[i]->locations().get());
     }
 
-    qCDebug(WEATHER::CONTROLLER) << "LocationsControl: add locations from provider: " << provider << " ended";
+    m_locationsOrder.insert(insertPosition, locationsData);
+
+    for (int i = insertPosition; i < m_locationsOrder.size(); ++i) {
+        addSourceModel(m_locationsOrder[i]->locations().get());
+    }
 
     completeSearch();
 }

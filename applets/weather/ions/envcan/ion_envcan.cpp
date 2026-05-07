@@ -635,6 +635,8 @@ void EnvCanadaIon::places_slotJobFinished(KJob *job)
 
     readXMLSetup();
 
+    validate(m_searchString);
+
     m_locationPromise->finish();
     clearLocationData();
 }
@@ -757,11 +759,6 @@ void EnvCanadaIon::readXMLSetup()
             // Set the string list, we will use for the applet to display the available cities.
             m_places[tmp] = info;
         }
-    }
-
-    // Update and return locations if no error
-    if (m_xmlSetup->hasError() && !m_isLegacy) {
-        validate(m_searchString);
     }
 }
 
