@@ -174,7 +174,7 @@ public:
 
     Q_INVOKABLE void print(const QJSValue &str)
     {
-        qCInfo(PLASMA_COMIC) << str.toString();
+        qCDebug(PLASMA_COMIC) << str.toString();
     }
 
     IdentifierType identifierType() const;
