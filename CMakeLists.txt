@@ -19,6 +19,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include(FeatureSummary)
 
 find_package(ECM ${KF6_MIN_VERSION} REQUIRED NO_MODULE)
+find_package(Corrosion REQUIRED)
 set(CMAKE_MODULE_PATH ${ECM_MODULE_PATH})
 
 include(KDEInstallDirs)
@@ -110,8 +111,6 @@ set_package_properties(Qt6Quick3D PROPERTIES
     PURPOSE "Required for desktop cube"
     TYPE RUNTIME
 )
-
-find_package(Corrosion REQUIRED)
 
 add_definitions(
     -DQT_DEPRECATED_WARNINGS
