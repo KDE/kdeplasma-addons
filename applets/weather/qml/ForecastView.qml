@@ -42,11 +42,12 @@ Item {
         id: horizontalHeader
         anchors.left: forecast.left
         anchors.top: parent.top
-        syncView: (root.futureDays.daysNumber > 1) ? forecast : null
+        syncView: forecast
         clip: true
         textRole: "monthDay"
         resizableColumns: false
         interactive: false
+        model: !!root.futureDays && root.futureDays.daysNumber > 1 ? root.futureDays : null
 
         delegate: PlasmaComponents.Label {
             text: model.monthDay ?? model.weekDay ?? ""
@@ -59,11 +60,12 @@ Item {
         id: verticalHeader
         anchors.top: forecast.top
         anchors.left: parent.left
-        syncView: root.futureDays.isNightPresent ? forecast : null
+        syncView: forecast
         clip: true
         textRole: "period"
         resizableRows: false
         interactive: false
+        model: !!root.futureDays && root.futureDays.isNightPresent ? root.futureDays : null
 
         delegate: PlasmaComponents.Label {
             text: model.period ?? ""
