@@ -30,7 +30,6 @@ KCM.GridViewKCM {
         QQC2.SpinBox {
             id: fontSizeSpinBox
 
-            implicitWidth: Kirigami.Units.gridUnit * 3
             from: 4
             to: 128
             textFromValue: function (value) {
