@@ -49,9 +49,7 @@ Item {
         interactive: false
 
         delegate: PlasmaComponents.Label {
-            text: (!!model.monthDay) ? model.monthDay :
-                  (!!model.weekDay) ? model.weekDay :
-                  ""
+            text: model.monthDay ?? model.weekDay ?? ""
             textFormat: Text.PlainText
             horizontalAlignment: Text.AlignHCenter
         }
@@ -68,7 +66,7 @@ Item {
         interactive: false
 
         delegate: PlasmaComponents.Label {
-            text: !!model.period ? model.period : ""
+            text: model.period ?? ""
             textFormat: Text.PlainText
         }
     }
@@ -88,21 +86,20 @@ Item {
         // calculate spacing and implicit width/height when layout changed
         onLayoutChanged: {
             //check if row loaded before calculating row height to prevent rows from being shown incorrectly
-            if(isRowLoaded(topRow)) {
+            if (isRowLoaded(topRow)) {
                 var rowsHeight = implicitRowHeight(topRow) * rows;
                 neededRowSpacing = (parent.height - horizontalHeader.height - rowsHeight) / (rows + 1);
-                implicitHeight = rowsHeight
+                implicitHeight = rowsHeight;
             } else {
                 //restore default values if none of rows is loaded (which shows that forecast model is empty)
                 neededRowSpacing = 0;
                 implicitHeight = 0;
-
             }
             //the same for columns as for rows
-            if(isColumnLoaded(leftColumn)) {
+            if (isColumnLoaded(leftColumn)) {
                 var columnsWidth = implicitColumnWidth(leftColumn) * columns;
-                neededColumnSpacing =  (parent.width - verticalHeader.width - columnsWidth) / (columns + 1)
-                implicitWidth = columnsWidth
+                neededColumnSpacing = (parent.width - verticalHeader.width - columnsWidth) / (columns + 1);
+                implicitWidth = columnsWidth;
             } else {
                 neededColumnSpacing = 0;
                 implicitWidth = 0;
@@ -147,8 +144,7 @@ Item {
                         if (!model.conditionProbability) {
                             return model.condition;
                         }
-                        return i18nc("certain weather condition (probability percentage)",
-                            "%1 (%2%)", model.condition, model.conditionProbability);
+                        return i18nc("certain weather condition (probability percentage)", "%1 (%2%)", model.condition, model.conditionProbability);
                     }
                 }
             }
