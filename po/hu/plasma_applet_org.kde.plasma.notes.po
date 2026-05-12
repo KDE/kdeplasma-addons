@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-23 00:45+0000\n"
+"POT-Creation-Date: 2026-05-12 00:46+0000\n"
 "PO-Revision-Date: 2025-05-18 20:31+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -25,62 +25,62 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Megjelenés"
 
-#: qml/configAppearance.qml:37
+#: qml/configAppearance.qml:36
 #, kde-format
 msgid "%1pt"
 msgstr "%1 pt"
 
-#: qml/configAppearance.qml:43
+#: qml/configAppearance.qml:42
 #, kde-format
 msgid "Text font size:"
 msgstr "Szöveg betűmérete:"
 
-#: qml/configAppearance.qml:74
+#: qml/configAppearance.qml:73
 #, kde-format
 msgid "A white sticky note"
 msgstr "Fehér cetli"
 
-#: qml/configAppearance.qml:75
+#: qml/configAppearance.qml:74
 #, kde-format
 msgid "A black sticky note"
 msgstr "Fekete cetli"
 
-#: qml/configAppearance.qml:76
+#: qml/configAppearance.qml:75
 #, kde-format
 msgid "A red sticky note"
 msgstr "Piros cetli"
 
-#: qml/configAppearance.qml:77
+#: qml/configAppearance.qml:76
 #, kde-format
 msgid "An orange sticky note"
 msgstr "Narancssárga cetli"
 
-#: qml/configAppearance.qml:78
+#: qml/configAppearance.qml:77
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "Sárga cetli"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:78
 #, kde-format
 msgid "A green sticky note"
 msgstr "Zöld cetli"
 
-#: qml/configAppearance.qml:80
+#: qml/configAppearance.qml:79
 #, kde-format
 msgid "A blue sticky note"
 msgstr "Kék cetli"
 
-#: qml/configAppearance.qml:81
+#: qml/configAppearance.qml:80
 #, kde-format
 msgid "A pink sticky note"
 msgstr "Rózsaszín cetli"
 
-#: qml/configAppearance.qml:82
+#: qml/configAppearance.qml:81
 #, kde-format
 msgid "A transparent sticky note"
 msgstr "Átlátszó cetli"
 
-#: qml/configAppearance.qml:83
+#: qml/configAppearance.qml:82
 #, kde-format
 msgid "A transparent sticky note with light text"
 msgstr "Átlátszó cetli világos szöveggel"

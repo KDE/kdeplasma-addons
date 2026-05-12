@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-23 00:45+0000\n"
+"POT-Creation-Date: 2026-05-12 00:46+0000\n"
 "PO-Revision-Date: 2023-01-09 18:55+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -19,63 +19,63 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Aparência"
 
-#: qml/configAppearance.qml:37
+#: qml/configAppearance.qml:36
 #, kde-format
 msgid "%1pt"
 msgstr "%1pt"
 
-#: qml/configAppearance.qml:43
+#: qml/configAppearance.qml:42
 #, kde-format
 msgid "Text font size:"
 msgstr "Tamanho do texto:"
 
-#: qml/configAppearance.qml:74
+#: qml/configAppearance.qml:73
 #, kde-format
 msgid "A white sticky note"
 msgstr "Uma nota autocolante branca"
 
-#: qml/configAppearance.qml:75
+#: qml/configAppearance.qml:74
 #, kde-format
 msgid "A black sticky note"
 msgstr "Uma nota autocolante preta"
 
-#: qml/configAppearance.qml:76
+#: qml/configAppearance.qml:75
 #, kde-format
 msgid "A red sticky note"
 msgstr "Uma nota autocolante vermelha"
 
-#: qml/configAppearance.qml:77
+#: qml/configAppearance.qml:76
 #, kde-format
 msgid "An orange sticky note"
 msgstr "Uma nota autocolante laranja"
 
-#: qml/configAppearance.qml:78
+#: qml/configAppearance.qml:77
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "Uma nota autocolante amarela"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:78
 #, kde-format
 msgid "A green sticky note"
 msgstr "Uma nota autocolante verde"
 
-#: qml/configAppearance.qml:80
+#: qml/configAppearance.qml:79
 #, kde-format
 msgid "A blue sticky note"
 msgstr "Uma nota autocolante azul"
 
-#: qml/configAppearance.qml:81
+#: qml/configAppearance.qml:80
 #, kde-format
 msgid "A pink sticky note"
 msgstr "Uma nota autocolante rosa"
 
-#: qml/configAppearance.qml:82
+#: qml/configAppearance.qml:81
 #, fuzzy, kde-format
 #| msgid "A translucent sticky note"
 msgid "A transparent sticky note"
 msgstr "Uma nota autocolante translúcida"
 
-#: qml/configAppearance.qml:83
+#: qml/configAppearance.qml:82
 #, fuzzy, kde-format
 #| msgid "A translucent sticky note with light text"
 msgid "A transparent sticky note with light text"

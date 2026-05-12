@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-23 00:45+0000\n"
+"POT-Creation-Date: 2026-05-12 00:46+0000\n"
 "PO-Revision-Date: 2025-09-06 22:27+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -26,62 +26,62 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Išvaizda"
 
-#: qml/configAppearance.qml:37
+#: qml/configAppearance.qml:36
 #, kde-format
 msgid "%1pt"
 msgstr "%1tšk."
 
-#: qml/configAppearance.qml:43
+#: qml/configAppearance.qml:42
 #, kde-format
 msgid "Text font size:"
 msgstr "Teksto šrifto dydis:"
 
-#: qml/configAppearance.qml:74
+#: qml/configAppearance.qml:73
 #, kde-format
 msgid "A white sticky note"
 msgstr "Baltas lipnus lapelis"
 
-#: qml/configAppearance.qml:75
+#: qml/configAppearance.qml:74
 #, kde-format
 msgid "A black sticky note"
 msgstr "Juodas lipnus lapelis"
 
-#: qml/configAppearance.qml:76
+#: qml/configAppearance.qml:75
 #, kde-format
 msgid "A red sticky note"
 msgstr "Raudonas lipnus lapelis"
 
-#: qml/configAppearance.qml:77
+#: qml/configAppearance.qml:76
 #, kde-format
 msgid "An orange sticky note"
 msgstr "Oranžinis lipnus lapelis"
 
-#: qml/configAppearance.qml:78
+#: qml/configAppearance.qml:77
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "Geltonas lipnus lapelis"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:78
 #, kde-format
 msgid "A green sticky note"
 msgstr "Žalias lipnus lapelis"
 
-#: qml/configAppearance.qml:80
+#: qml/configAppearance.qml:79
 #, kde-format
 msgid "A blue sticky note"
 msgstr "Mėlynas lipnus lapelis"
 
-#: qml/configAppearance.qml:81
+#: qml/configAppearance.qml:80
 #, kde-format
 msgid "A pink sticky note"
 msgstr "Rožinis lipnus lapelis"
 
-#: qml/configAppearance.qml:82
+#: qml/configAppearance.qml:81
 #, kde-format
 msgid "A transparent sticky note"
 msgstr "Permatomas lipnus lapelis"
 
-#: qml/configAppearance.qml:83
+#: qml/configAppearance.qml:82
 #, kde-format
 msgid "A transparent sticky note with light text"
 msgstr "Permatomas lipnus lapelis su šviesiu tekstu"

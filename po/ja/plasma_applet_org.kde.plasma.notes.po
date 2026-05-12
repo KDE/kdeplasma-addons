@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-23 00:45+0000\n"
+"POT-Creation-Date: 2026-05-12 00:46+0000\n"
 "PO-Revision-Date: 2021-10-17 14:02-0700\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -25,63 +25,63 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "外観"
 
-#: qml/configAppearance.qml:37
+#: qml/configAppearance.qml:36
 #, kde-format
 msgid "%1pt"
 msgstr "%1pt"
 
-#: qml/configAppearance.qml:43
+#: qml/configAppearance.qml:42
 #, kde-format
 msgid "Text font size:"
 msgstr "フォントサイズ:"
 
-#: qml/configAppearance.qml:74
+#: qml/configAppearance.qml:73
 #, kde-format
 msgid "A white sticky note"
 msgstr "白色の付箋"
 
-#: qml/configAppearance.qml:75
+#: qml/configAppearance.qml:74
 #, kde-format
 msgid "A black sticky note"
 msgstr "黒色の付箋"
 
-#: qml/configAppearance.qml:76
+#: qml/configAppearance.qml:75
 #, kde-format
 msgid "A red sticky note"
 msgstr "赤色の付箋"
 
-#: qml/configAppearance.qml:77
+#: qml/configAppearance.qml:76
 #, kde-format
 msgid "An orange sticky note"
 msgstr "オレンジ色の付箋"
 
-#: qml/configAppearance.qml:78
+#: qml/configAppearance.qml:77
 #, kde-format
 msgid "A yellow sticky note"
 msgstr "黄色の付箋"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:78
 #, kde-format
 msgid "A green sticky note"
 msgstr "緑色の付箋"
 
-#: qml/configAppearance.qml:80
+#: qml/configAppearance.qml:79
 #, kde-format
 msgid "A blue sticky note"
 msgstr "青色の付箋"
 
-#: qml/configAppearance.qml:81
+#: qml/configAppearance.qml:80
 #, kde-format
 msgid "A pink sticky note"
 msgstr "ピンク色の付箋"
 
-#: qml/configAppearance.qml:82
+#: qml/configAppearance.qml:81
 #, fuzzy, kde-format
 #| msgid "A translucent sticky note"
 msgid "A transparent sticky note"
 msgstr "半透明の付箋"
 
-#: qml/configAppearance.qml:83
+#: qml/configAppearance.qml:82
 #, fuzzy, kde-format
 #| msgid "A translucent sticky note with light text"
 msgid "A transparent sticky note with light text"
