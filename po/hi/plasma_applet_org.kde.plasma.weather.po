@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-17 00:45+0000\n"
+"POT-Creation-Date: 2026-05-13 00:47+0000\n"
 "PO-Revision-Date: 2024-12-15 15:57+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -643,19 +643,19 @@ msgid ""
 "Try again later."
 msgstr ""
 
-#: qml/ForecastView.qml:151
+#: qml/ForecastView.qml:149
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr ""
 
-#: qml/ForecastView.qml:165
+#: qml/ForecastView.qml:163
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
 msgstr ""
 
-#: qml/ForecastView.qml:173 qml/ForecastView.qml:182
+#: qml/ForecastView.qml:171 qml/ForecastView.qml:180
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"

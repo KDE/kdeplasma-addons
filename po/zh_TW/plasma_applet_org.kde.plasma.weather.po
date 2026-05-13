@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-17 00:45+0000\n"
+"POT-Creation-Date: 2026-05-13 00:47+0000\n"
 "PO-Revision-Date: 2025-08-19 05:24+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -647,19 +647,19 @@ msgstr ""
 "如果您過去曾經使用過這個氣象站，可能是氣象站提供者有伺服器問題，使它暫時無法"
 "使用。請稍後再試。"
 
-#: qml/ForecastView.qml:151
+#: qml/ForecastView.qml:149
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
 
-#: qml/ForecastView.qml:165
+#: qml/ForecastView.qml:163
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
 msgstr "☂%1%"
 
-#: qml/ForecastView.qml:173 qml/ForecastView.qml:182
+#: qml/ForecastView.qml:171 qml/ForecastView.qml:180
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"

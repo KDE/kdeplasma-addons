@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-17 00:45+0000\n"
+"POT-Creation-Date: 2026-05-13 00:47+0000\n"
 "PO-Revision-Date: 2024-01-28 18:58-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -658,7 +658,7 @@ msgid ""
 "Try again later."
 msgstr ""
 
-#: qml/ForecastView.qml:151
+#: qml/ForecastView.qml:149
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition (probability percentage)"
 #| msgid "%1 (%2 %)"
@@ -666,13 +666,13 @@ msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2 %)"
 
-#: qml/ForecastView.qml:165
+#: qml/ForecastView.qml:163
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
 msgstr ""
 
-#: qml/ForecastView.qml:173 qml/ForecastView.qml:182
+#: qml/ForecastView.qml:171 qml/ForecastView.qml:180
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"

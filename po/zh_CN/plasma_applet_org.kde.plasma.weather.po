@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-17 00:45+0000\n"
+"POT-Creation-Date: 2026-05-13 00:47+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -645,19 +645,19 @@ msgstr ""
 "如果您在过去使用过这个气象站，这可能是因为气象站的服务器停电导致服务中断。请"
 "稍后重试。"
 
-#: qml/ForecastView.qml:151
+#: qml/ForecastView.qml:149
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
 
-#: qml/ForecastView.qml:165
+#: qml/ForecastView.qml:163
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
 msgstr "☂%1%"
 
-#: qml/ForecastView.qml:173 qml/ForecastView.qml:182
+#: qml/ForecastView.qml:171 qml/ForecastView.qml:180
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"

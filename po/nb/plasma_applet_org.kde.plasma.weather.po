@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-17 00:45+0000\n"
+"POT-Creation-Date: 2026-05-13 00:47+0000\n"
 "PO-Revision-Date: 2025-03-15 12:37+0100\n"
 "Last-Translator: Martin Hansen <mh306602@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -661,19 +661,19 @@ msgstr ""
 "Hvis du har brukt værstasjonen tidligere, kan det være at strømstans på "
 "stasjonen har gjort den midlertidig utilgjengelig. Prøv da på nytt senere."
 
-#: qml/ForecastView.qml:151
+#: qml/ForecastView.qml:149
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
 msgstr "%1 (%2%)"
 
-#: qml/ForecastView.qml:165
+#: qml/ForecastView.qml:163
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
 msgstr "☂%1%"
 
-#: qml/ForecastView.qml:173 qml/ForecastView.qml:182
+#: qml/ForecastView.qml:171 qml/ForecastView.qml:180
 #, kde-format
 msgctxt "Short for no data available"
 msgid "-"
