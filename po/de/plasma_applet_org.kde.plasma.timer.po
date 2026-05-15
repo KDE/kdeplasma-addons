@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2026-04-23 20:09+0200\n"
+"PO-Revision-Date: 2026-05-11 21:38+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -114,7 +114,7 @@ msgstr "Befehl ausführen:"
 #, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Timer abgelaufen'"
 
 #: configTimes.qml:22
 #, kde-format
@@ -123,16 +123,13 @@ msgid "Add"
 msgstr "Hinzufügen"
 
 #: configTimes.qml:81
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in plasmoid context "
-#| "menu."
+#, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
 msgstr ""
-"Wenn Sie hier vordefinierte Zeitmesser hinzufügen, werden diese im Plasmoid-"
-"Kontextmenü angezeigt."
+"Wenn Sie hier vordefinierte Timer hinzufügen, werden diese im Kontextmenü "
+"des Miniprogramms angezeigt."
 
 #: configTimes.qml:119
 #, kde-format

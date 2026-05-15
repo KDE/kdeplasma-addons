@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2026-04-23 20:19+0200\n"
+"PO-Revision-Date: 2026-05-11 21:38+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
@@ -22,7 +22,7 @@ msgstr ""
 #, kde-format
 msgctxt "@label, noun"
 msgid "Tile:"
-msgstr ""
+msgstr "Kachel:"
 
 #: package/contents/ui/config.qml:21
 #, kde-format
