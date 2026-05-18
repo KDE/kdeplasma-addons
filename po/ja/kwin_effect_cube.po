@@ -1,11 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Mint <5602mint@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-30 00:42+0000\n"
-"PO-Revision-Date: 2023-10-29 10:24-0700\n"
-"Last-Translator: Japanese KDE translation team <kde-jp@kde.org>\n"
-"Language-Team: Japanese <kde-jp@kde.org>\n"
+"PO-Revision-Date: 2026-05-10 14:14+0900\n"
+"Last-Translator: Mint <5602mint@gmail.com>\n"
+"Language-Team: Japanese <kde-i18n-doc@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,100 +14,101 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #: kcm/cubeeffectkcm.cpp:36
 #, kde-format
 msgid "KWin"
-msgstr ""
+msgstr "KWin"
 
 #: kcm/cubeeffectkcm.cpp:42 package/contents/ui/main.qml:40
 #, kde-format
 msgid "Toggle Cube"
-msgstr ""
+msgstr "キューブのオン/オフ"
 
 #. i18n: ectx: property (text), widget (QLabel, label_2)
 #: kcm/cubeeffectkcm.ui:23
 #, kde-format
 msgid "Cube face displacement:"
-msgstr ""
+msgstr "キューブ面の間隔:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_less)
 #: kcm/cubeeffectkcm.ui:48
 #, kde-format
 msgid "Less"
-msgstr ""
+msgstr "狭"
 
 #. i18n: ectx: property (text), widget (QLabel, label_more)
 #: kcm/cubeeffectkcm.ui:61
 #, kde-format
 msgid "More"
-msgstr ""
+msgstr "広"
 
 #. i18n: ectx: property (text), widget (QLabel, label)
 #: kcm/cubeeffectkcm.ui:73
 #, kde-format
 msgid "Distance:"
-msgstr ""
+msgstr "距離:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_closer)
 #: kcm/cubeeffectkcm.ui:101
 #, kde-format
 msgid "Closer"
-msgstr ""
+msgstr "近"
 
 #. i18n: ectx: property (text), widget (QLabel, label_farther)
 #: kcm/cubeeffectkcm.ui:114
 #, kde-format
 msgid "Farther"
-msgstr ""
+msgstr "遠"
 
 #. i18n: ectx: property (text), widget (QLabel, label_Mouse)
 #: kcm/cubeeffectkcm.ui:126
 #, kde-format
 msgid "Mouse:"
-msgstr ""
+msgstr "マウス:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_MouseInvertedX)
 #: kcm/cubeeffectkcm.ui:133
 #, kde-format
 msgid "Invert X"
-msgstr ""
+msgstr "横軸を反転"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_MouseInvertedY)
 #: kcm/cubeeffectkcm.ui:140
 #, kde-format
 msgid "Invert Y"
-msgstr ""
+msgstr "縦軸を反転"
 
 #. i18n: ectx: property (text), widget (QLabel, label_4)
 #: kcm/cubeeffectkcm.ui:147
 #, kde-format
 msgid "Background:"
-msgstr ""
+msgstr "背景:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, button_Color)
 #: kcm/cubeeffectkcm.ui:164
 #, kde-format
 msgid "Plain color:"
-msgstr ""
+msgstr "単色:"
 
 #. i18n: ectx: property (text), widget (QRadioButton, button_SkyBox)
 #: kcm/cubeeffectkcm.ui:198
 #, kde-format
 msgid "Skybox:"
-msgstr ""
+msgstr "スカイボックス:"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, kcfg_SkyBox)
 #: kcm/cubeeffectkcm.ui:208
 #, kde-format
 msgid "Type path or URL..."
-msgstr ""
+msgstr "パスまたは URL を入力..."
 
 #. i18n: ectx: property (text), widget (QPushButton, button_SelectSkyBox)
 #: kcm/cubeeffectkcm.ui:218
 #, kde-format
 msgid "Select..."
-msgstr ""
+msgstr "選択..."
 
 #: package/contents/ui/PlaceholderView.qml:28
 #, kde-format
@@ -118,9 +120,11 @@ msgid_plural ""
 "At least 3 virtual desktops are required to display the Cube, but only %1 "
 "are present"
 msgstr[0] ""
+"キューブの表示には最低3つの仮想デスクトップが必要です。現在 %1 個のみ作成され"
+"ています。"
 
 #: package/contents/ui/PlaceholderView.qml:32
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Virtual Desktop"
-msgstr ""
+msgstr "仮想デスクトップを追加"
