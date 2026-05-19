@@ -163,15 +163,6 @@ void IonControl::onFetchLocationsCancelled()
             m_searchStringChanged = false;
         }
     }
-
-    m_currentLocationUpdate = nullptr;
-
-    m_isBusy = false;
-
-    const auto instance = QNetworkInformation::instance();
-    if (instance && instance->reachability() == QNetworkInformation::Reachability::Online) {
-        checkQueues();
-    }
 }
 
 void IonControl::updateForecast(const std::shared_ptr<ForecastData> &forecastData)
@@ -251,15 +242,6 @@ void IonControl::onFetchForecastEnded()
 void IonControl::onFetchForecastCancelled()
 {
     qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": fetch forecast cancelled for place:" << m_currentForecastUpdate->placeInfo();
-
-    m_currentForecastUpdate = nullptr;
-
-    m_isBusy = false;
-
-    const auto instance = QNetworkInformation::instance();
-    if (instance && instance->reachability() == QNetworkInformation::Reachability::Online) {
-        checkQueues();
-    }
 }
 
 void IonControl::checkQueues()
