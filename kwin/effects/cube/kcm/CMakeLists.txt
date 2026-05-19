@@ -24,7 +24,12 @@ target_compile_definitions(kwin_cube_config PRIVATE
     -DTRANSLATION_DOMAIN=\"kwin_effect_cube\"
 )
 
-add_test(NAME kcm_cube_smoketest COMMAND kcmshell6 --smoke-test kwin/effects/configs/kwin_cube_config)
-set_tests_properties(kcm_cube_smoketest PROPERTIES
-    ENVIRONMENT_MODIFICATION QT_PLUGIN_PATH=path_list_prepend:${CMAKE_BINARY_DIR}/bin
-)
+# kcmshell6 < 6.27.0 doesn't know the --smoke-test param, so skip this test for
+# now.
+# TODO: Drop this when KF6_MIN_VERSION >= 6.27.0
+if(KF6KCMUtils_VERSION VERSION_GREATER_EQUAL "6.27.0")
+    add_test(NAME kcm_cube_smoketest COMMAND kcmshell6 --smoke-test kwin/effects/configs/kwin_cube_config)
+    set_tests_properties(kcm_cube_smoketest PROPERTIES
+        ENVIRONMENT_MODIFICATION QT_PLUGIN_PATH=path_list_prepend:${CMAKE_BINARY_DIR}/bin
+    )
+endif()
