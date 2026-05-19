@@ -596,6 +596,10 @@ void EnvCanadaIon::places_slotDataArrived(KIO::Job *job, const QByteArray &data)
 {
     Q_UNUSED(job)
 
+    if (!m_locationPromise) {
+        return;
+    }
+
     if (data.isEmpty()) {
         return;
     }
@@ -611,6 +615,10 @@ void EnvCanadaIon::places_slotDataArrived(KIO::Job *job, const QByteArray &data)
 void EnvCanadaIon::places_slotJobFinished(KJob *job)
 {
     Q_UNUSED(job)
+
+    if (!m_locationPromise) {
+        return;
+    }
 
     qCDebug(WEATHER::ION::ENVCAN) << "Location job finished";
 
