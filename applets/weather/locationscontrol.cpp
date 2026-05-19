@@ -256,9 +256,7 @@ QVariant LocationsControl::getPlaceDisplayNameByIndex(int position)
 
 QVariant LocationsControl::getProviderByIndex(int position)
 {
-    qCDebug(WEATHER::CONTROLLER) << "LocationsControl: get provider by index: " << position;
     if (position >= rowCount()) {
-        qCDebug(WEATHER::CONTROLLER) << "LocationsControl: index is not valid";
         return {};
     }
 
@@ -266,20 +264,16 @@ QVariant LocationsControl::getProviderByIndex(int position)
 
     for (const auto &locationsData : m_locationsOrder) {
         if (locationCount + locationsData->locations()->rowCount() > position) {
-            qCDebug(WEATHER::CONTROLLER) << "LocationsControl: return provider: " << locationsData->provider();
             return locationsData->provider();
         }
         locationCount += locationsData->locations()->rowCount();
     }
-
-    qCDebug(WEATHER::CONTROLLER) << "LocationsControl: placeInfo have not been found";
 
     return {};
 }
 
 QVariant LocationsControl::getPlaceInfoByIndex(int position)
 {
-    qCDebug(WEATHER::CONTROLLER) << "LocationsControl: get placeInfo by index: " << position;
     QModelIndex locationPosition = index(position, 0, QModelIndex());
     return data(locationPosition, Locations::PlaceInfo);
 }
