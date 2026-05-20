@@ -16,7 +16,14 @@ Item {
     focus: true
 
     readonly property QtObject targetScreen: KWinComponents.SceneView.screen
-    property QtObject currentDesktop
+    property QtObject currentDesktop: {
+        if (typeof KWinComponents.Workspace.currentDesktopForScreen === "function") {
+            return KWinComponents.Workspace.currentDesktopForScreen(root.targetScreen);
+        } else {
+            // Fallback for kwin-x11
+            return KWinComponents.Workspace.currentDesktop;
+        }
+    }
 
     function switchTo(desktop) {
         if (typeof KWinComponents.Workspace.setCurrentDesktopForScreen === "function") {
@@ -170,15 +177,6 @@ Item {
     Keys.onEnterPressed: root.switchToSelected();
     Keys.onReturnPressed: root.switchToSelected();
     Keys.onSpacePressed: root.switchToSelected();
-
-    Component.onCompleted: {
-        if (typeof KWinComponents.Workspace.currentDesktopForScreen === "function") {
-            root.currentDesktop = KWinComponents.Workspace.currentDesktopForScreen(root.targetScreen);
-        } else {
-            // Fallback for kwin-x11
-            root.currentDesktop = KWinComponents.Workspace.currentDesktop;
-        }
-    }
 
     Connections {
         target: KWinComponents.Workspace
