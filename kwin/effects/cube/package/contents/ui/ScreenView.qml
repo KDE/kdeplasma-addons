@@ -43,7 +43,8 @@ Item {
     View3D {
         id: view
         anchors.fill: parent
-        renderMode: View3D.Underlay
+        // TODO: Use the Underlay mode again when the QtQuick3D renderer accounts for QQuickRenderTarget::mirrorVertically().
+        renderMode: View3D.Offscreen
 
         Loader {
             id: transparentSceneEnvironment
