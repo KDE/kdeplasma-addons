@@ -171,14 +171,14 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupDayConditionIconMappings()
 QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupNightConditionIconMappings() const
 {
     auto iconMap = setupConditionIconMappings();
-    
+
     // Override day-specific cloud icons with night variants
     iconMap[QStringLiteral("partly cloudy")] = PartlyCloudyNight;
     iconMap[QStringLiteral("mostly cloudy")] = PartlyCloudyNight;
     iconMap[QStringLiteral("decreasing cloud")] = FewCloudsNight;
     iconMap[QStringLiteral("fair")] = FewCloudsNight;
     iconMap[QStringLiteral("mainly sunny")] = FewCloudsNight;
-    
+
     return iconMap;
 }
 
@@ -596,9 +596,7 @@ void EnvCanadaIon::places_slotDataArrived(KIO::Job *job, const QByteArray &data)
 {
     Q_UNUSED(job)
 
-    if (!m_locationPromise) {
-        return;
-    }
+    Q_ASSERT(m_locationPromise);
 
     if (data.isEmpty()) {
         return;
@@ -616,9 +614,7 @@ void EnvCanadaIon::places_slotJobFinished(KJob *job)
 {
     Q_UNUSED(job)
 
-    if (!m_locationPromise) {
-        return;
-    }
+    Q_ASSERT(m_locationPromise);
 
     qCDebug(WEATHER::ION::ENVCAN) << "Location job finished";
 
