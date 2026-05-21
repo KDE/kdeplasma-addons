@@ -65,8 +65,10 @@ Loader {
             WorkspaceComponents.BadgeOverlay {
                 id: badge
 
+                readonly property bool widerThanIcon: implicitWidth > parent.width
                 anchors.bottom: parent.bottom
-                anchors.right: parent.right
+                anchors.right: widerThanIcon ? undefined : parent.right
+                anchors.horizontalCenter: widerThanIcon ? parent.horizontalCenter : undefined
 
                 visible: compactRoot.isTemperaturePresent && showTemperature && useBadge && text.length > 0
 
