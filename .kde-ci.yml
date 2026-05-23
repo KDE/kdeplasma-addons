@@ -43,6 +43,6 @@ RuntimeDependencies:
     'plasma/plasma-nano': '@same' # For appium tests
 
 Options:
- require-passing-tests-on: ['Linux', 'FreeBSD']
+ require-passing-tests-on: ['@all']
  cppcheck-ignore-files: ['templates/']
  run-qmllint: true
