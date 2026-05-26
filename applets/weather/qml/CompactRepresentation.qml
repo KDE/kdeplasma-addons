@@ -51,6 +51,7 @@ Loader {
         id: iconComponent
 
         Kirigami.Icon {
+            id: weatherIcon
             readonly property int minIconSize: Math.max((compactRoot.vertical ? compactRoot.width : compactRoot.height), Kirigami.Units.iconSizes.small)
 
             source: Plasmoid.icon
@@ -65,10 +66,8 @@ Loader {
             WorkspaceComponents.BadgeOverlay {
                 id: badge
 
-                readonly property bool widerThanIcon: implicitWidth > parent.width
+                anchors.right: parent.right
                 anchors.bottom: parent.bottom
-                anchors.right: widerThanIcon ? undefined : parent.right
-                anchors.horizontalCenter: widerThanIcon ? parent.horizontalCenter : undefined
 
                 visible: compactRoot.isTemperaturePresent && showTemperature && useBadge && text.length > 0
 
@@ -78,7 +77,7 @@ Loader {
                 // Non-default state to center if the badge is wider than the icon
                 states: [
                     State {
-                        when: badge.width >= badge.icon.width
+                        when: badge.width >= weatherIcon.width
                         AnchorChanges {
                             target: badge
                             anchors.right: undefined
