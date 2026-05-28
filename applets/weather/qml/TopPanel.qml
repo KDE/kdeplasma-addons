@@ -7,6 +7,7 @@
 import QtQuick
 
 import QtQuick.Layouts
+import QtQuick.Controls as QQC2
 
 import org.kde.kirigami as Kirigami
 import org.kde.ksvg as KSvg
@@ -20,6 +21,7 @@ GridLayout {
     property var metaData: null
     property var lastObservation: null
     property var station: null
+    property var warnings: null
     property var futureDays: null
 
     property int displayWindSpeedUnit: 0
@@ -27,13 +29,15 @@ GridLayout {
 
     readonly property bool isTemperaturePresent: !!root.lastObservation?.temperature && !!root.metaData?.temperatureUnit
 
+    signal openWarnings
+
     function feelsLikeTemperature(windchill, heatIndex, humidex) {
         if (!root.isTemperaturePresent) {
             return "";
         }
 
         let feelsTemperature;
-        if(windchill) {
+        if (windchill) {
             feelsTemperature = windchill;
         } else if (heatIndex) {
             feelsTemperature = heatIndex;
@@ -48,15 +52,9 @@ GridLayout {
         return feelsTemperature;
     }
 
-    readonly property int sideWidth: Math.max(
-        windSpeedLabel.implicitWidth,
-        tempLabel.implicitWidth,
-        windSpeedDirection.naturalSize.width
-    )
+    readonly property int sideWidth: Math.max(windSpeedLabel.implicitWidth, tempLabel.implicitWidth, windSpeedDirection.naturalSize.width)
 
-    Layout.minimumWidth: Math.max(
-        Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 25),
-        (sideWidth + columnSpacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
+    Layout.minimumWidth: Math.max(Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 25), (sideWidth + columnSpacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
     )
 
     columnSpacing: Kirigami.Units.largeSpacing
@@ -64,25 +62,37 @@ GridLayout {
 
     columns: 3
 
-    Kirigami.Heading {
-        id: locationLabel
-
+    RowLayout {
+        Layout.fillWidth: true
         Layout.row: 0
         Layout.column: 0
         Layout.columnSpan: 3
-        Layout.fillWidth: true
 
-        elide: Text.ElideRight
+        Kirigami.Heading {
+            id: locationLabel
 
-        visible: !!root.station?.place
+            Layout.fillWidth: true
 
-        text: visible ? root.station.place : ""
-        textFormat: Text.PlainText
+            elide: Text.ElideRight
 
-        PlasmaCore.ToolTipArea {
-            anchors.fill: parent
-            mainText: locationLabel.visible ? root.station.place : ""
-            visible: locationLabel.truncated
+            visible: !!root.station?.place
+
+            text: visible ? root.station.place : ""
+            textFormat: Text.PlainText
+
+            PlasmaCore.ToolTipArea {
+                mainText: locationLabel.visible ? root.station.place : ""
+                visible: locationLabel.truncated
+            }
+        }
+        QQC2.Button {
+            Layout.alignment: Qt.AlignRight
+            text: !!root.warnings ? i18ncp("@title:tab %1 is the number of weather notices (alerts, warnings, watches, ...) issued", "%1 Notice", "%1 Notices", root.warnings.count) : ""
+            icon.name: !!root.warnings && root.warnings.maxPriorityCount >= 2 ? 'data-warning-symbolic' : 'data-information-symbolic'
+            visible: !!root.warnings && root.warnings.count !== 0
+            flat: true
+
+            onClicked: root.openWarnings()
         }
     }
 
@@ -114,12 +124,12 @@ GridLayout {
             id: feelsLikeLabel
             Layout.fillWidth: true
 
-            readonly property bool isFeelsLikeTemperaturePresent: isTemperaturePresent  && (!!root.lastObservation.heatIndex  || !!root.lastObservation.windchill || !!root.lastObservation.humidex)
+            readonly property bool isFeelsLikeTemperaturePresent: isTemperaturePresent && (!!root.lastObservation.heatIndex || !!root.lastObservation.windchill || !!root.lastObservation.humidex)
 
             visible: {
                 if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
                     let feelsTemperature = feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
-                    return feelsTemperature !== "" && feelsTemperature !== root.lastObservation.temperature
+                    return feelsTemperature !== "" && feelsTemperature !== root.lastObservation.temperature;
                 }
 
                 return false;
@@ -133,8 +143,7 @@ GridLayout {
                 if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
                     let feelsTemperature = feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
                     let feelsTemperatureString = Util.temperatureToDisplayString(root.displayTemperatureUnit, feelsTemperature, root.metaData.temperatureUnit, true, false);
-                    return i18nc("@label %1 is the perceived temperature due to conditions like wind or humidity. Use the common phrasing for this concept and keep it short, adding a colon if necessary",
-                        "Feels like %1", feelsTemperatureString);
+                    return i18nc("@label %1 is the perceived temperature due to conditions like wind or humidity. Use the common phrasing for this concept and keep it short, adding a colon if necessary", "Feels like %1", feelsTemperatureString);
                 }
                 return "";
             }
@@ -222,5 +231,4 @@ GridLayout {
             textFormat: Text.PlainText
         }
     }
-
 }

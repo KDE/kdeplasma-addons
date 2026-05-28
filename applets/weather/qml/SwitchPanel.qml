@@ -31,8 +31,7 @@ ColumnLayout {
 
     property bool forecastViewNightRow: false
 
-    property string forecastViewTitle: (!!futureDays && futureDays.daysNumber > 0) ?
-        i18ncp("Forecast period timeframe", "1 Day", "%1 Days", futureDays.daysNumber) : ""
+    property string forecastViewTitle: (!!futureDays && futureDays.daysNumber > 0) ? i18ncp("Forecast period timeframe", "1 Day", "%1 Days", futureDays.daysNumber) : ""
 
     component DetailsString: QtObject {
         property string label
@@ -65,7 +64,7 @@ ColumnLayout {
                 if (typeof root.lastObservation.visibility === "string") {
                     return root.lastObservation.visibility;
                 }
-                return Util.valueToDisplayString(root.displayVisibilityUnit, root.lastObservation.visibility, root.metaData.visibilityUnit, 1)
+                return Util.valueToDisplayString(root.displayVisibilityUnit, root.lastObservation.visibility, root.metaData.visibilityUnit, 1);
             }
             visible: !!root.lastObservation?.visibility && (!!root.metaData?.visibilityUnit || typeof root.lastObservation.visibility === "string")
         },
@@ -99,13 +98,6 @@ ColumnLayout {
             title: i18nc("@title:tab", "Details")
             visible: !!root.lastObservation && root.detailsVisibleModel.length > 0
             view: detailsView
-        },
-        WeatherInfoPanel {
-            title: !!warnings ? i18ncp("@title:tab %1 is the number of weather notices (alerts, warnings, watches, ...) issued", "%1 Notice", "%1 Notices", warnings.count) : ""
-            visible: !!root.warnings && root.warnings.count > 0
-            view: noticesView
-            // Show warning icon if the maximum priority shown is at least 2 (Moderate)
-            icon: !!root.warnings && root.warnings.maxPriorityCount >= 2 ? 'data-warning-symbolic' : 'data-information-symbolic'
         }
     ]
 
@@ -177,7 +169,7 @@ ColumnLayout {
 
                 text: i18nc("@info:placeholder", "Unable to load weather forecast")
                 // TODO: Add a link to the bug-report url, which is now not possible to access within the placeholder
-                explanation: i18nc("@info:usagetip", "There may be a technical issue with the weather provider. If the issue persists for longer than a day, submit a bug report.",)
+                explanation: i18nc("@info:usagetip", "There may be a technical issue with the weather provider. If the issue persists for longer than a day, submit a bug report.")
             }
         }
     }
@@ -186,15 +178,6 @@ ColumnLayout {
         id: detailsView
         DetailsView {
             model: root.detailsVisibleModel
-        }
-    }
-
-    Component {
-        id: noticesView
-        NoticesView {
-            model: root.warnings
-            // Avoid scrolling conflicts between SwipeView and NoticesView
-            interactive: swipeView.contentItem.atXEnd
         }
     }
 }
