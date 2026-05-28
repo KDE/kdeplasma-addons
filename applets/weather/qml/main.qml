@@ -34,7 +34,7 @@ PlasmoidItem {
         if (weatherPlaceInfo.length > 0) {
             forecastControl.setUpdateInterval(root.updateInterval);
             forecastControl.setForecastLocation(root.weatherProvider, root.weatherPlaceInfo);
-        //If the old source property present try to fetch forecast for it
+            //If the old source property present try to fetch forecast for it
         } else if (Plasmoid.configuration.source.length > 0) {
             const sourceDetails = Plasmoid.configuration.source.split('|');
             forecastControl.setUpdateInterval(root.updateInterval);
@@ -45,19 +45,14 @@ PlasmoidItem {
 
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
 
-    readonly property bool inPanel: [
-        PlasmaCore.Types.TopEdge,
-        PlasmaCore.Types.RightEdge,
-        PlasmaCore.Types.BottomEdge,
-        PlasmaCore.Types.LeftEdge,
-    ].includes(Plasmoid.location)
+    readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge, PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge,].includes(Plasmoid.location)
 
     readonly property string weatherProvider: Plasmoid.configuration.provider
     readonly property string weatherPlaceInfo: Plasmoid.configuration.placeInfo
     readonly property int updateInterval: Plasmoid.configuration.updateInterval
     readonly property int displayTemperatureUnit: Plasmoid.configuration.temperatureUnit || TemperatureUnitListModel.defaultUnit
     readonly property int displaySpeedUnit: Plasmoid.configuration.speedUnit || WindSpeedUnitListModel.defaultUnit
-    readonly property int displayPressureUnit: Plasmoid.configuration.pressureUnit ||  PressureUnitListModel.defaultUnit
+    readonly property int displayPressureUnit: Plasmoid.configuration.pressureUnit || PressureUnitListModel.defaultUnit
     readonly property int displayVisibilityUnit: Plasmoid.configuration.visibilityUnit || VisibilityUnitListModel.defaultUnit
 
     property alias status: forecastControl.status
@@ -109,7 +104,7 @@ PlasmoidItem {
 
     toolTipSubText: {
         if (status === ForecastControl.NeedsConfiguration) {
-            return i18nc("@info:tooltip", "Click to choose a location and monitor the weather there")
+            return i18nc("@info:tooltip", "Click to choose a location and monitor the weather there");
         }
 
         if (!forecastControl.forecast?.station?.place) {
@@ -120,10 +115,9 @@ PlasmoidItem {
 
         let isTemperaturePresent = !!forecastControl.forecast.lastObservation?.temperature && !!forecastControl.forecast.metaData?.temperatureUnit;
         if (Plasmoid.configuration.showTemperatureInTooltip && isTemperaturePresent) {
-            let temperature = Util.temperatureToDisplayString(root.displayTemperatureUnit, forecastControl.forecast.lastObservation.temperature, forecastControl.forecast.metaData.temperatureUnit, true, false)
+            let temperature = Util.temperatureToDisplayString(root.displayTemperatureUnit, forecastControl.forecast.lastObservation.temperature, forecastControl.forecast.metaData.temperatureUnit, true, false);
             if (!!forecastControl.forecast.lastObservation?.currentConditions && temperature) {
-                tooltips.push(i18nc("weather condition + temperature",
-                    "%1 %2", forecastControl.forecast.lastObservation.currentConditions, temperature));
+                tooltips.push(i18nc("weather condition + temperature", "%1 %2", forecastControl.forecast.lastObservation.currentConditions, temperature));
             } else if (!!forecastControl.forecast.lastObservation?.currentConditions || temperature) {
                 tooltips.push(forecastControl.forecast.lastObservation.currentConditions || temperature);
             }
@@ -133,14 +127,12 @@ PlasmoidItem {
         if (Plasmoid.configuration.showWindInTooltip && isWindSpeedPresent) {
             let windSpeed = windSpeedToString(forecastControl.forecast.lastObservation.windSpeed, forecastControl.forecast.metaData.windSpeedUnit);
             if (!!forecastControl.forecast.lastObservation?.windDirection && forecastControl.forecast.lastObservation.windDirection !== "") {
-                let windDirection =  i18nc("wind direction", forecastControl.forecast.lastObservation.windDirection);
+                let windDirection = i18nc("wind direction", forecastControl.forecast.lastObservation.windDirection);
                 if (!!forecastControl.forecast.lastObservation.windGust && forecastControl.forecast.lastObservation.windGust !== 0.0) {
                     let windGust = Util.valueToDisplayString(root.displaySpeedUnit, forecastControl.forecast.lastObservation.windGust, forecastControl.forecast.metaData.windSpeedUnit, 1);
-                    tooltips.push(i18nc("winddirection windspeed (windgust)", "%1 %2 (%3)",
-                        windDirection, windSpeed, windGust));
+                    tooltips.push(i18nc("winddirection windspeed (windgust)", "%1 %2 (%3)", windDirection, windSpeed, windGust));
                 } else {
-                    tooltips.push(i18nc("winddirection windspeed", "%1 %2",
-                        windDirection, windSpeed));
+                    tooltips.push(i18nc("winddirection windspeed", "%1 %2", windDirection, windSpeed));
                 }
             } else {
                 tooltips.push(windSpeed);
@@ -177,7 +169,6 @@ PlasmoidItem {
     }
 
     fullRepresentation: FullRepresentation {
-
         status: root.status
 
         invalidUnit: root.invalidUnit
