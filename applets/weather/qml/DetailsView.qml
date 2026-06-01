@@ -66,6 +66,11 @@ ColumnLayout {
             label: i18nc("@label", "Wind Gust:")
             text: visible ? Util.valueToDisplayString(root.displaySpeedUnit, root.lastObservation.windGust, root.metaData.windSpeedUnit, 1) : ""
             visible: !!root.lastObservation?.windGust && !!root.metaData?.windSpeedUnit
+        },
+        DetailsString {
+            label: i18nc("@label", "Wind Speed:")
+            text: visible ? Util.valueToDisplayString(root.displaySpeedUnit, root.lastObservation.windSpeed, root.metaData.windSpeedUnit, 1) : ""
+            visible: !isNaN(root.lastObservation?.windSpeed) && root.lastObservation.windSpeed !== 0.0 && !!root.metaData?.windSpeedUnit
         }
     ]
 
