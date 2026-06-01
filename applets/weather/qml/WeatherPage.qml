@@ -52,7 +52,7 @@ ColumnLayout {
         onOpenWarnings: root.openWarnings()
     }
 
-    SwitchPanel {
+    ForecastView {
         id: switchPanel
         visible: root.status === ForecastControl.Normal
         Layout.fillWidth: true
@@ -60,14 +60,8 @@ ColumnLayout {
 
         futureDays: root.futureDays
         futureHours: root.futureHours
-        warnings: root.warnings
-        lastObservation: root.lastObservation
         metaData: root.metaData
 
-        invalidUnit: root.invalidUnit
-        displayPressureUnit: root.displayPressureUnit
-        displaySpeedUnit: root.displaySpeedUnit
-        displayVisibilityUnit: root.displayVisibilityUnit
         displayTemperatureUnit: root.displayTemperatureUnit
     }
 

@@ -43,7 +43,6 @@ plasma_add_applet(org.kde.plasma.weather
         qml/main.qml
         qml/WeatherPage.qml
         qml/WarningsPage.qml
-        qml/SwitchPanel.qml
         qml/TopPanel.qml
         qml/config/ConfigAppearance.qml
         qml/config/ConfigUnits.qml
