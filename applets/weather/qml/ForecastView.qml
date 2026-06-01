@@ -12,6 +12,7 @@ import QtQuick.Layouts
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.extras as PlasmaExtras
 
 ColumnLayout {
     id: root
@@ -22,7 +23,11 @@ ColumnLayout {
 
     property int displayTemperatureUnit: 0
 
+    property string forecastViewTitle: (!!futureDays && futureDays.daysNumber > 0) ? i18ncp("Forecast period timeframe", "1 Day", "%1 Days", futureDays.daysNumber) : ""
+
     ColumnLayout {
+        id: hourlyForecast
+
         visible: !!root.futureHours && root.futureHours.hoursNumber > 0
         Kirigami.Heading {
             visible: !!root.futureDays && root.futureDays.daysNumber > 0
@@ -41,6 +46,8 @@ ColumnLayout {
     }
 
     ColumnLayout {
+        id: dayForecast
+
         visible: !!root.futureDays && root.futureDays.daysNumber > 0
         Kirigami.Heading {
             visible: !!root.futureHours && root.futureHours.hoursNumber > 0
@@ -55,5 +62,18 @@ ColumnLayout {
             metaData: root.metaData
             displayTemperatureUnit: root.displayTemperatureUnit
         }
+    }
+
+    PlasmaExtras.PlaceholderMessage {
+        visible: !hourlyForecast.visible && !dayForecast.visible
+
+        Layout.alignment: Qt.AlignCenter
+        Layout.margins: Kirigami.Units.largeSpacing
+        // Sets a minimum width for the placeholder tab
+        Layout.preferredWidth: Kirigami.Units.gridUnit * 15
+
+        text: i18nc("@info:placeholder", "Unable to load weather forecast")
+        // TODO: Add a link to the bug-report url, which is now not possible to access within the placeholder
+        explanation: i18nc("@info:usagetip", "There may be a technical issue with the weather provider. If the issue persists for longer than a day, submit a bug report.")
     }
 }
