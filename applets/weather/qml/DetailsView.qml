@@ -87,17 +87,8 @@ ColumnLayout {
             id: labelRepeater
             model: root.detailsVisibleModel
             delegate: PlasmaComponents.Label {
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
-                text: model.label
-                textFormat: Text.PlainText
-            }
-        }
-
-        Repeater {
-            model: root.detailsVisibleModel
-            delegate: PlasmaComponents.Label {
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
-                text: model.text
+                Layout.alignment: Qt.AlignRight
+                text: model.label + model.text
                 textFormat: Text.PlainText
             }
         }

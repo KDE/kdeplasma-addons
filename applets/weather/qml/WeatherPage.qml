@@ -41,7 +41,10 @@ ColumnLayout {
         warnings: root.warnings
         futureDays: root.futureDays
 
-        displayWindSpeedUnit: root.displaySpeedUnit
+        invalidUnit: root.invalidUnit
+        displayPressureUnit: root.displayPressureUnit
+        displaySpeedUnit: root.displaySpeedUnit
+        displayVisibilityUnit: root.displayVisibilityUnit
         displayTemperatureUnit: root.displayTemperatureUnit
 
         Layout.fillWidth: true
