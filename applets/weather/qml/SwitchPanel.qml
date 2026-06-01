@@ -44,11 +44,6 @@ ColumnLayout {
         WeatherInfoPanel {
             title: root.forecastViewTitle || i18nc("@title:tab Weather forecast", "Forecast")
             view: (!!root.futureDays && root.futureDays.daysNumber > 0) || (!!root.futureHours && root.futureHours.hoursNumber > 0) ? forecastView : forecastPlaceholder
-        },
-        WeatherInfoPanel {
-            title: i18nc("@title:tab", "Details")
-            visible: !!root.lastObservation && root.detailsVisibleModel.length > 0
-            view: detailsView
         }
     ]
 
@@ -122,20 +117,6 @@ ColumnLayout {
                 // TODO: Add a link to the bug-report url, which is now not possible to access within the placeholder
                 explanation: i18nc("@info:usagetip", "There may be a technical issue with the weather provider. If the issue persists for longer than a day, submit a bug report.")
             }
-        }
-    }
-
-    Component {
-        id: detailsView
-        DetailsView {
-            invalidUnit: root.invalidUnit
-            displayTemperatureUnit: root.displayTemperatureUnit
-            displayVisibilityUnit: root.displayVisibilityUnit
-            displayPressureUnit: root.displayPressureUnit
-            displaySpeedUnit: root.displaySpeedUnit
-
-            metaData: root.metaData
-            lastObservation: root.lastObservation
         }
     }
 }
