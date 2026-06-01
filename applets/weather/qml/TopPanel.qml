@@ -24,8 +24,11 @@ GridLayout {
     property var warnings: null
     property var futureDays: null
 
-    property int displayWindSpeedUnit: 0
+    property int invalidUnit: 0
+    property int displaySpeedUnit: 0
     property int displayTemperatureUnit: 0
+    property int displayVisibilityUnit: 0
+    property int displayPressureUnit: 0
 
     readonly property bool isTemperaturePresent: !!root.lastObservation?.temperature && !!root.metaData?.temperatureUnit
 
@@ -52,7 +55,7 @@ GridLayout {
         return feelsTemperature;
     }
 
-    readonly property int sideWidth: Math.max(tempLabel.implicitWidth)
+    readonly property int sideWidth: Math.max(tempLabel.implicitWidth, detailsView.implicitWidth)
 
     Layout.minimumWidth: Math.max(Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 25), (sideWidth + columnSpacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
     )
@@ -183,5 +186,18 @@ GridLayout {
             wrapMode: Text.Wrap
             textFormat: Text.PlainText
         }
+    }
+
+    DetailsView {
+        id: detailsView
+
+        invalidUnit: root.invalidUnit
+        displayTemperatureUnit: root.displayTemperatureUnit
+        displayVisibilityUnit: root.displayVisibilityUnit
+        displayPressureUnit: root.displayPressureUnit
+        displaySpeedUnit: root.displaySpeedUnit
+
+        metaData: root.metaData
+        lastObservation: root.lastObservation
     }
 }
