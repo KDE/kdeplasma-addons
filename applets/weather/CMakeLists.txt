@@ -3,8 +3,6 @@
 
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.weather\")
 
-install(FILES wind-arrows.svgz DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/weather/)
-
 add_subdirectory(weatherdata)
 add_subdirectory(ions)
 

@@ -52,7 +52,7 @@ GridLayout {
         return feelsTemperature;
     }
 
-    readonly property int sideWidth: Math.max(windSpeedLabel.implicitWidth, tempLabel.implicitWidth, windSpeedDirection.naturalSize.width)
+    readonly property int sideWidth: Math.max(tempLabel.implicitWidth)
 
     Layout.minimumWidth: Math.max(Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 25), (sideWidth + columnSpacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
     )
@@ -181,41 +181,6 @@ GridLayout {
             text: visible ? root.lastObservation.currentConditions : ""
 
             wrapMode: Text.Wrap
-            textFormat: Text.PlainText
-        }
-    }
-
-    Item {
-        Layout.preferredWidth: 25 // 25% of the view
-        Layout.minimumWidth: sideWidth
-        Layout.alignment: Qt.AlignCenter
-
-        implicitHeight: windSpeedDirection.implicitHeight + windSpeedLabel.implicitHeight
-
-        KSvg.SvgItem {
-            id: windSpeedDirection
-
-            anchors.horizontalCenter: parent.horizontalCenter
-            implicitWidth: Kirigami.Units.iconSizes.medium
-            implicitHeight: Kirigami.Units.iconSizes.medium
-
-            imagePath: "weather/wind-arrows"
-            elementId: visible ? root.lastObservation.windDirection : ""
-
-            visible: !!root.lastObservation?.windDirection
-        }
-
-        PlasmaComponents.Label {
-            id: windSpeedLabel
-
-            visible: !isNaN(root.lastObservation?.windSpeed) && !!root.metaData?.windSpeedUnit
-
-            anchors {
-                top: windSpeedDirection.bottom
-                horizontalCenter: parent.horizontalCenter
-            }
-
-            text: root.lastObservation?.windSpeed !== 0.0 && root.lastObservation && root.metaData ? Util.valueToDisplayString(root.displayWindSpeedUnit, root.lastObservation.windSpeed, root.metaData.windSpeedUnit, 1) : i18nc("Wind condition", "Calm")
             textFormat: Text.PlainText
         }
     }
