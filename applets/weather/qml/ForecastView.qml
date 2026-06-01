@@ -30,8 +30,8 @@ ColumnLayout {
 
         visible: !!root.futureHours && root.futureHours.hoursNumber > 0
         Kirigami.Heading {
-            visible: !!root.futureDays && root.futureDays.daysNumber > 0
             Layout.fillWidth: true
+            level: 3
             text: i18n("Hourly Forecast")
         }
 
@@ -50,9 +50,9 @@ ColumnLayout {
 
         visible: !!root.futureDays && root.futureDays.daysNumber > 0
         Kirigami.Heading {
-            visible: !!root.futureHours && root.futureHours.hoursNumber > 0
             Layout.fillWidth: true
-            text: i18n("Day Forecast")
+            level: 3
+            text: i18n(root.futureDays.daysNumber + " Day Forecast")
         }
 
         DayForecastView {
