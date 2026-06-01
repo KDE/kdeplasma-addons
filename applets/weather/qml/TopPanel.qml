@@ -64,8 +64,6 @@ GridLayout {
 
     RowLayout {
         Layout.fillWidth: true
-        Layout.row: 0
-        Layout.column: 0
         Layout.columnSpan: 3
 
         Kirigami.Heading {
@@ -85,6 +83,7 @@ GridLayout {
                 visible: locationLabel.truncated
             }
         }
+
         QQC2.Button {
             Layout.alignment: Qt.AlignRight
             text: !!root.warnings ? i18ncp("@title:tab %1 is the number of weather notices (alerts, warnings, watches, ...) issued", "%1 Notice", "%1 Notices", root.warnings.count) : ""
@@ -96,9 +95,34 @@ GridLayout {
         }
     }
 
+    Kirigami.Icon {
+        id: conditionIcon
+
+        visible: !!root.lastObservation?.conditionIcon || !!root.futureDays?.firstDayIcon
+
+        Layout.minimumHeight: Kirigami.Units.iconSizes.huge
+        Layout.minimumWidth: Kirigami.Units.iconSizes.huge
+        Layout.preferredHeight: Layout.minimumHeight
+        // All the items have `fillWidth: true`, so the layout weights each
+        // contribution and splits the space accordingly to their proportion.
+        Layout.preferredWidth: 50 // 50% of the view
+
+        fallback: Util.unknownWeatherIcon
+        source: {
+            //check if there is the icon from last observation and if it exists return it
+            if (!!root.lastObservation?.conditionIcon && root.lastObservation.conditionIcon !== Util.unknownWeatherIcon) {
+                return root.lastObservation.conditionIcon;
+            }
+            //if the icon from last observation not exists use first icon from forecast
+            if (!!root.futureDays?.firstDayIcon) {
+                return root.futureDays.firstDayIcon;
+            }
+            //if there are no icons then use default unavailable icon
+            return Util.unknownWeatherIcon;
+        }
+    }
+
     ColumnLayout {
-        Layout.row: 1
-        Layout.column: 0
         Layout.fillWidth: true
         Layout.preferredWidth: 25 // 25% of the view
         Layout.minimumWidth: sideWidth
@@ -161,40 +185,7 @@ GridLayout {
         }
     }
 
-    Kirigami.Icon {
-        id: conditionIcon
-
-        visible: !!root.lastObservation?.conditionIcon || !!root.futureDays?.firstDayIcon
-
-        Layout.row: 1
-        Layout.column: 1
-        Layout.minimumHeight: Kirigami.Units.iconSizes.huge
-        Layout.minimumWidth: Kirigami.Units.iconSizes.huge
-        Layout.preferredHeight: Layout.minimumHeight
-        Layout.fillWidth: true
-        // All the items have `fillWidth: true`, so the layout weights each
-        // contribution and splits the space accordingly to their proportion.
-        Layout.preferredWidth: 50 // 50% of the view
-
-        fallback: Util.unknownWeatherIcon
-        source: {
-            //check if there is the icon from last observation and if it exists return it
-            if (!!root.lastObservation?.conditionIcon && root.lastObservation.conditionIcon !== Util.unknownWeatherIcon) {
-                return root.lastObservation.conditionIcon;
-            }
-            //if the icon from last observation not exists use first icon from forecast
-            if (!!root.futureDays?.firstDayIcon) {
-                return root.futureDays.firstDayIcon;
-            }
-            //if there are no icons then use default unavailable icon
-            return Util.unknownWeatherIcon;
-        }
-    }
-
     Item {
-        Layout.row: 1
-        Layout.column: 2
-        Layout.fillWidth: true
         Layout.preferredWidth: 25 // 25% of the view
         Layout.minimumWidth: sideWidth
         Layout.alignment: Qt.AlignCenter
