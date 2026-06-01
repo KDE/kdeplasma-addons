@@ -113,7 +113,6 @@ GridLayout {
 
             font.pixelSize: Kirigami.Units.iconSizes.medium
             font.bold: true
-            horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.NoWrap
             textFormat: Text.PlainText
 
@@ -135,7 +134,6 @@ GridLayout {
                 return false;
             }
 
-            horizontalAlignment: Text.AlignHCenter
             wrapMode: Text.Wrap
             textFormat: Text.PlainText
 
@@ -147,6 +145,19 @@ GridLayout {
                 }
                 return "";
             }
+        }
+
+        PlasmaComponents.Label {
+            id: conditionLabel
+
+            visible: !!root.lastObservation?.currentConditions
+
+            Layout.fillWidth: true
+
+            text: visible ? root.lastObservation.currentConditions : ""
+
+            wrapMode: Text.Wrap
+            textFormat: Text.PlainText
         }
     }
 
@@ -178,20 +189,6 @@ GridLayout {
             //if there are no icons then use default unavailable icon
             return Util.unknownWeatherIcon;
         }
-    }
-
-    PlasmaComponents.Label {
-        id: conditionLabel
-
-        visible: !!root.lastObservation?.currentConditions
-
-        Layout.row: 2
-        Layout.column: 0
-        Layout.columnSpan: 3
-        Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-
-        text: visible ? root.lastObservation.currentConditions : ""
-        textFormat: Text.PlainText
     }
 
     Item {
