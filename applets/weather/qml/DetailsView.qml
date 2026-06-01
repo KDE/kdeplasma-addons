@@ -90,6 +90,10 @@ ColumnLayout {
                 Layout.alignment: Qt.AlignRight
                 text: model.label + model.text
                 textFormat: Text.PlainText
+
+                font.family: Kirigami.Theme.smallFont.family
+                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+                color: Kirigami.Theme.disabledTextColor
             }
         }
     }

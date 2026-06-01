@@ -29,7 +29,7 @@ ColumnLayout {
 
     signal openWarnings
 
-    Layout.margins: Kirigami.Units.smallSpacing
+    spacing: Kirigami.Units.largeSpacing
 
     TopPanel {
         id: topPanel
@@ -48,9 +48,6 @@ ColumnLayout {
         displayTemperatureUnit: root.displayTemperatureUnit
 
         Layout.fillWidth: true
-        // Allow the top panel to vertically grow but within a limit
-        Layout.fillHeight: true
-        Layout.maximumHeight: implicitHeight * 1.5
 
         onOpenWarnings: root.openWarnings()
     }
@@ -59,6 +56,7 @@ ColumnLayout {
         id: switchPanel
         visible: root.status === ForecastControl.Normal
         Layout.fillWidth: true
+        Layout.fillHeight: true
 
         futureDays: root.futureDays
         futureHours: root.futureHours
