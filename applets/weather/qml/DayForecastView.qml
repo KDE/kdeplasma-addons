@@ -23,8 +23,11 @@ Item {
 
     readonly property int preferredIconSize: Kirigami.Units.iconSizes.large
 
-    implicitHeight: forecast.implicitHeight + horizontalHeader.height
-    implicitWidth: forecast.implicitWidth + verticalHeader.width
+    readonly property real preferredCellWidth: root.preferredIconSize
+    readonly property real preferredCellHeight: root.preferredIconSize + 2 * labelFontMetrics.height + Kirigami.Units.largeSpacing * 2
+
+    implicitWidth: preferredCellWidth * 7
+    implicitHeight: (futureDays.isNightPresent ? 2 : 1) * preferredCellHeight
 
     //Item to get the metrics of the regular font in a PlasmaComponent.Label
     PlasmaComponents.Label {
@@ -82,6 +85,8 @@ Item {
         anchors.bottom: parent.bottom
 
         model: root.futureDays
+
+        clip: false
 
         // calculate spacing and implicit width/height when layout changed
         onLayoutChanged: {
