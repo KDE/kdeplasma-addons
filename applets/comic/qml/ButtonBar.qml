@@ -41,7 +41,7 @@ Item {
         PlasmaComponents3.Button {
             id: prevButton
 
-            icon.name: "arrow-left"
+            icon.name: LayoutMirroring.enabled ? "go-previous-rtl-symbolic" : "go-previous-symbolic"
             enabled: (root.comicData.prev != undefined && root.comicData.prev.length > 0)
             onClicked: root.prevClicked()
         }
@@ -56,7 +56,7 @@ Item {
         PlasmaComponents3.Button {
             id: nextButton
 
-            icon.name: "arrow-right"
+            icon.name: LayoutMirroring.enabled ? "go-next-rtl-symbolic" : "go-next-symbolic"
             enabled: (root.comicData.next != undefined && root.comicData.next.length > 0)
             onClicked: root.nextClicked()
         }
