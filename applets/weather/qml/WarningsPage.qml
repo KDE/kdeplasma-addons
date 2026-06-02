@@ -12,80 +12,67 @@ import QtQuick.Controls as QQC2
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
 
-ListView {
+Kirigami.ScrollablePage {
     id: root
 
-    boundsBehavior: Flickable.StopAtBounds
+    property alias model: warnings.model
 
-    clip: true
+    background: Rectangle {
+        anchors.fill: parent
+        color: "transparent"
+    }
 
-    delegate: RowLayout {
-        width: ListView.view.width - (scrollBar.visible ? scrollBar.width : 0)
-        spacing: 0
+    ListView {
+        id: warnings
 
-        PlasmaComponents.Label {
-            Layout.alignment: Qt.AlignTop
-            Layout.minimumWidth: Kirigami.Units.gridUnit * 5
-            Layout.maximumWidth: Kirigami.Units.gridUnit * 10
-            Layout.margins: Kirigami.Units.largeSpacing
+        boundsBehavior: Flickable.StopAtBounds
 
-            text: model.timestamp.toLocaleString(Qt.locale(), "ddd yyyy-MM-dd hh:mm:ss")
-            textFormat: Text.PlainText
-            horizontalAlignment: Text.AlignRight
-            wrapMode: Text.Wrap
-        }
+        clip: false
 
-        Kirigami.Icon {
-            Layout.alignment: Qt.AlignTop
-            Layout.minimumWidth: implicitWidth
-            implicitWidth: Kirigami.Units.iconSizes.smallMedium
-            source: (model.priority === Warnings.High) ? 'flag-red-symbolic' : (model.priority === Warnings.Medium) ? 'flag-yellow-symbolic' : 'flag-blue-symbolic'
-        }
+        delegate: RowLayout {
+            width: ListView.view.width
+            spacing: 0
 
-        Kirigami.SelectableLabel {
-            Layout.fillWidth: true
-            Layout.alignment: Qt.AlignTop
-            Layout.minimumWidth: Kirigami.Units.gridUnit * 5
-            Layout.margins: Kirigami.Units.largeSpacing
+            PlasmaComponents.Label {
+                Layout.alignment: Qt.AlignTop
+                Layout.minimumWidth: Kirigami.Units.gridUnit * 5
+                Layout.maximumWidth: Kirigami.Units.gridUnit * 10
+                Layout.margins: Kirigami.Units.largeSpacing
 
-            text: model.description
-            wrapMode: Text.Wrap
-        }
+                text: model.timestamp.toLocaleString(Qt.locale(), "ddd yyyy-MM-dd hh:mm:ss")
+                textFormat: Text.PlainText
+                horizontalAlignment: Text.AlignRight
+                wrapMode: Text.Wrap
+            }
 
-        PlasmaComponents.ToolButton {
-            visible: model.info !== ""
-            Layout.alignment: Qt.AlignTop
-            Layout.minimumWidth: implicitWidth
-            icon.name: 'showinfo-symbolic'
-            text: i18nc("@action:button", "Show more information")
-            display: PlasmaComponents.ToolButton.IconOnly
-            onClicked: {
-                Qt.openUrlExternally(Qt.resolvedUrl(model.info));
+            Kirigami.Icon {
+                Layout.alignment: Qt.AlignTop
+                Layout.minimumWidth: implicitWidth
+                implicitWidth: Kirigami.Units.iconSizes.smallMedium
+                source: (model.priority === Warnings.High) ? 'flag-red-symbolic' : (model.priority === Warnings.Medium) ? 'flag-yellow-symbolic' : 'flag-blue-symbolic'
+            }
+
+            Kirigami.SelectableLabel {
+                Layout.fillWidth: true
+                Layout.alignment: Qt.AlignTop
+                Layout.minimumWidth: Kirigami.Units.gridUnit * 5
+                Layout.margins: Kirigami.Units.largeSpacing
+
+                text: model.description
+                wrapMode: Text.Wrap
+            }
+
+            PlasmaComponents.ToolButton {
+                visible: model.info !== ""
+                Layout.alignment: Qt.AlignTop
+                Layout.minimumWidth: implicitWidth
+                icon.name: 'showinfo-symbolic'
+                text: i18nc("@action:button", "Show more information")
+                display: PlasmaComponents.ToolButton.IconOnly
+                onClicked: {
+                    Qt.openUrlExternally(Qt.resolvedUrl(model.info));
+                }
             }
         }
-    }
-
-    QQC2.ScrollBar.vertical: QQC2.ScrollBar {
-        id: scrollBar
-        anchors.right: parent.right
-        visible: root.contentHeight > root.height
-    }
-
-    Kirigami.Separator {
-        anchors {
-            top: parent.top
-            left: parent.left
-            right: parent.right
-        }
-        visible: !root.atYBeginning
-    }
-
-    Kirigami.Separator {
-        anchors {
-            bottom: parent.bottom
-            left: parent.left
-            right: parent.right
-        }
-        visible: !root.atYEnd
     }
 }
