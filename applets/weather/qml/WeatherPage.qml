@@ -9,7 +9,7 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 
-ColumnLayout {
+Kirigami.ScrollablePage {
     id: root
 
     property int status: 0
@@ -29,76 +29,82 @@ ColumnLayout {
 
     signal openWarnings
 
-    spacing: Kirigami.Units.largeSpacing
-
-    TopPanel {
-        id: topPanel
-        visible: (!!root.station || !!root.lastObservation) && root.status === ForecastControl.Normal
-
-        station: root.station
-        lastObservation: root.lastObservation
-        metaData: root.metaData
-        warnings: root.warnings
-        futureDays: root.futureDays
-
-        invalidUnit: root.invalidUnit
-        displayPressureUnit: root.displayPressureUnit
-        displaySpeedUnit: root.displaySpeedUnit
-        displayVisibilityUnit: root.displayVisibilityUnit
-        displayTemperatureUnit: root.displayTemperatureUnit
-
-        Layout.fillWidth: true
-
-        onOpenWarnings: root.openWarnings()
+    background: Rectangle {
+        anchors.fill: parent
+        color: "transparent"
     }
 
-    ForecastView {
-        id: switchPanel
-        visible: root.status === ForecastControl.Normal
-        Layout.fillWidth: true
-        Layout.fillHeight: true
+    ColumnLayout {
+        spacing: Kirigami.Units.largeSpacing
 
-        futureDays: root.futureDays
-        futureHours: root.futureHours
-        metaData: root.metaData
+        TopPanel {
+            id: topPanel
+            visible: (!!root.station || !!root.lastObservation) && root.status === ForecastControl.Normal
 
-        displayTemperatureUnit: root.displayTemperatureUnit
-    }
+            station: root.station
+            lastObservation: root.lastObservation
+            metaData: root.metaData
+            warnings: root.warnings
+            futureDays: root.futureDays
 
-    PlasmaComponents.Label {
-        id: sourceLabel
-        visible: root.status === ForecastControl.Normal
+            invalidUnit: root.invalidUnit
+            displayPressureUnit: root.displayPressureUnit
+            displaySpeedUnit: root.displaySpeedUnit
+            displayVisibilityUnit: root.displayVisibilityUnit
+            displayTemperatureUnit: root.displayTemperatureUnit
 
-        Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            Layout.fillWidth: true
 
-        MouseArea {
-            anchors.fill: parent
-            hoverEnabled: true
-            acceptedButtons: Qt.NoButton
-            cursorShape: !!metaData?.credit ? Qt.PointingHandCursor : Qt.ArrowCursor
+            onOpenWarnings: root.openWarnings()
         }
 
-        wrapMode: Text.WordWrap
-        horizontalAlignment: Text.AlignRight
-        font.pointSize: Kirigami.Theme.smallFont.pointSize
-        linkColor: color
-        opacity: 0.75
-        textFormat: Text.StyledText
+        ForecastView {
+            id: switchPanel
+            visible: root.status === ForecastControl.Normal
+            Layout.fillWidth: true
 
-        text: {
-            let result = "";
-            if (!!metaData?.credit) {
-                if (!!metaData.creditURL) {
-                    result = "<a href=\"" + root.metaData.creditURL + "\">" + root.metaData.credit + "</a>";
-                } else {
-                    result = root.metaData.credit;
-                }
+            futureDays: root.futureDays
+            futureHours: root.futureHours
+            metaData: root.metaData
+
+            displayTemperatureUnit: root.displayTemperatureUnit
+        }
+
+        PlasmaComponents.Label {
+            id: sourceLabel
+            visible: root.status === ForecastControl.Normal
+
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+
+            MouseArea {
+                anchors.fill: parent
+                hoverEnabled: true
+                acceptedButtons: Qt.NoButton
+                cursorShape: !!root.metaData?.credit ? Qt.PointingHandCursor : Qt.ArrowCursor
             }
-            return result;
-        }
 
-        onLinkActivated: link => {
-            Qt.openUrlExternally(link);
+            wrapMode: Text.WordWrap
+            horizontalAlignment: Text.AlignRight
+            font.pointSize: Kirigami.Theme.smallFont.pointSize
+            linkColor: color
+            opacity: 0.75
+            textFormat: Text.StyledText
+
+            text: {
+                let result = "";
+                if (!!root.metaData?.credit) {
+                    if (!!root.metaData.creditURL) {
+                        result = "<a href=\"" + root.metaData.creditURL + "\">" + root.metaData.credit + "</a>";
+                    } else {
+                        result = root.metaData.credit;
+                    }
+                }
+                return result;
+            }
+
+            onLinkActivated: link => {
+                Qt.openUrlExternally(link);
+            }
         }
     }
 }

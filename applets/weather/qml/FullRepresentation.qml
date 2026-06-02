@@ -33,8 +33,8 @@ PlasmaExtras.Representation {
     property var lastObservation: null
     property var metaData: null
 
-    Layout.minimumWidth: Math.min(Kirigami.Units.gridUnit * 25, Math.max(Kirigami.Units.gridUnit * 10, stack.currentItem.implicitWidth))
-    Layout.minimumHeight: Math.max(Kirigami.Units.gridUnit * 10, stack.currentItem.implicitHeight)
+    Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * 25, Math.max(Kirigami.Units.gridUnit * 10, stack.implicitWidth))
+    Layout.minimumHeight: Math.min(Kirigami.Units.gridUnit * 10, stack.implicitHeight)
     Layout.margins: Kirigami.Units.smallSpacing
 
     header: PlasmaExtras.PlasmoidHeading {
@@ -42,7 +42,7 @@ PlasmaExtras.Representation {
         contentItem: RowLayout {
             PlasmaComponents.ToolButton {
                 icon.name: "go-previous"
-                onClicked: stack.pop()
+                onClicked: stack.removePage(stack.lastItem)
             }
         }
     }
@@ -81,42 +81,40 @@ PlasmaExtras.Representation {
         visible: root.status === ForecastControl.Connecting
     }
 
-    QQC2.StackView {
+    Kirigami.PageRow {
         id: stack
 
         anchors.fill: parent
 
-        initialItem: weatherPage
+        initialPage: weatherPage
 
-        Component {
+        defaultColumnWidth: currentItem.width
+
+        WeatherPage {
             id: weatherPage
 
-            WeatherPage {
-                status: root.status
+            status: root.status
 
-                invalidUnit: root.invalidUnit
-                displaySpeedUnit: root.displaySpeedUnit
-                displayPressureUnit: root.displayPressureUnit
-                displayTemperatureUnit: root.displayTemperatureUnit
-                displayVisibilityUnit: root.displayVisibilityUnit
+            invalidUnit: root.invalidUnit
+            displaySpeedUnit: root.displaySpeedUnit
+            displayPressureUnit: root.displayPressureUnit
+            displayTemperatureUnit: root.displayTemperatureUnit
+            displayVisibilityUnit: root.displayVisibilityUnit
 
-                station: root.station
-                futureHours: root.futureHours
-                futureDays: root.futureDays
-                warnings: root.warnings
-                lastObservation: root.lastObservation
-                metaData: root.metaData
+            station: root.station
+            futureHours: root.futureHours
+            futureDays: root.futureDays
+            warnings: root.warnings
+            lastObservation: root.lastObservation
+            metaData: root.metaData
 
-                onOpenWarnings: stack.push(warningsPage)
-            }
+            onOpenWarnings: stack.push(warningsPage)
         }
 
-        Component {
+        WarningsPage {
             id: warningsPage
 
-            WarningsPage {
-                model: root.warnings
-            }
+            model: root.warnings
         }
     }
 }
