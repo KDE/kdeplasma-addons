@@ -1,0 +1,218 @@
+# Uyghur translation for plasma_wallpaper_org.
+# Copyright (C) YEAR This file is copyright:
+# This file is distributed under the same license as the kdeplasma-addons package.
+# Abduqadir Abliz <sahranbay@gmail.com>, 2026., YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-04-09 00:46+0000\n"
+"PO-Revision-Date: 2026-05-31 18:05-0400\n"
+"Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
+"Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
+"Language: ug\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 3.9\n"
+
+#: package/contents/ui/config.qml:58
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "ئورنى:"
+
+#: package/contents/ui/config.qml:61
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled and cropped"
+msgstr "كىچىكلەت چوڭايت ۋە كەس"
+
+#: package/contents/ui/config.qml:65
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "كىچىكلەت چوڭايت"
+
+#: package/contents/ui/config.qml:69
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled, keep proportions"
+msgstr "كىچىكلەت چوڭايت، نىسبىتىنى ساقلا"
+
+#: package/contents/ui/config.qml:73
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "ئوتتۇرىدا"
+
+#: package/contents/ui/config.qml:77
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "يېيىلغان"
+
+#: package/contents/ui/config.qml:98
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "تەگلىك رەڭگى:"
+
+#: package/contents/ui/config.qml:99
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "تەگلىك رەڭگى تاللىنىدۇ"
+
+#: package/contents/ui/config.qml:103
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Provider:"
+msgstr "تەمىنلىگۈچى:"
+
+#: package/contents/ui/config.qml:122
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"This wallpaper provider does not filter out images that may be sensitive or "
+"objectionable. Use caution if these images will be displayed in public."
+msgstr ""
+
+#: package/contents/ui/config.qml:131
+#, kde-format
+msgctxt "@option:check"
+msgid "Update when using metered network connection"
+msgstr ""
+
+#: package/contents/ui/config.qml:146
+#, kde-format
+msgctxt "@label"
+msgid "Today's picture:"
+msgstr ""
+
+#: package/contents/ui/config.qml:162
+#, kde-format
+msgctxt "@label"
+msgid "Title:"
+msgstr "ماۋزۇ:"
+
+#: package/contents/ui/config.qml:177
+#, kde-format
+msgctxt "@label"
+msgid "Author:"
+msgstr "يازغۇچى:"
+
+#: package/contents/ui/config.qml:196
+#, kde-format
+msgctxt "@action:button"
+msgid "Open Containing Folder"
+msgstr "ئىچىدىكى قىسقۇچنى ئاچ"
+
+#: package/contents/ui/config.qml:200
+#, kde-format
+msgctxt "@info:whatsthis for a button"
+msgid "Open the destination folder where the wallpaper image was saved."
+msgstr ""
+
+#: package/contents/ui/main.qml:22
+#, kde-format
+msgid "Open Wallpaper Image"
+msgstr "تام قەغەز سۈرىتىنى ئاچ"
+
+#: package/contents/ui/main.qml:27
+#, kde-format
+msgctxt "@action:inmenu Placeholder is title of image"
+msgid "About “%1”"
+msgstr ""
+
+#: package/contents/ui/main.qml:28
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "About This Image"
+msgstr "بۇ سۈرەت ھەققىدە"
+
+#: package/contents/ui/WallpaperDelegate.qml:137
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Today's picture"
+msgstr ""
+
+#: package/contents/ui/WallpaperDelegate.qml:138
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Loading"
+msgstr "يۈكلەۋاتىدۇ"
+
+#: package/contents/ui/WallpaperDelegate.qml:139
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Unavailable"
+msgstr "ئىشلەتكىلى بولمايدۇ"
+
+#: package/contents/ui/WallpaperDelegate.qml:140
+#, kde-format
+msgctxt "@info:whatsthis for an image %1 title %2 author"
+msgid "%1 Author: %2. Right-click on the image to see more actions."
+msgstr ""
+
+#: package/contents/ui/WallpaperDelegate.qml:141
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The wallpaper is being fetched from the Internet."
+msgstr ""
+
+#: package/contents/ui/WallpaperDelegate.qml:142
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Failed to fetch the wallpaper from the Internet."
+msgstr ""
+
+#: package/contents/ui/WallpaperPreview.qml:48
+#, kde-format
+msgctxt "@action:inmenu wallpaper preview menu"
+msgid "Save Image as…"
+msgstr ""
+
+#: package/contents/ui/WallpaperPreview.qml:51
+#, kde-format
+msgctxt "@info:whatsthis for a button and a menu item"
+msgid "Save today's picture to local disk"
+msgstr ""
+
+#: package/contents/ui/WallpaperPreview.qml:57
+#, kde-format
+msgctxt ""
+"@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
+msgid "Open Link in Browser…"
+msgstr ""
+
+#: package/contents/ui/WallpaperPreview.qml:60
+#, kde-format
+msgctxt "@info:whatsthis for a menu item"
+msgid "Open the website of today's picture in the default browser"
+msgstr ""
+
+#: plugins/potdbackend.cpp:213
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Today's Picture"
+msgstr ""
+
+#: plugins/potdbackend.cpp:215
+#, kde-format
+msgctxt "@label:listbox Template for file dialog"
+msgid "JPEG image (*.jpeg *.jpg *.jpe)"
+msgstr ""
+
+#: plugins/potdbackend.cpp:232
+#, kde-format
+msgctxt "@info:status after a save action"
+msgid "The image was not saved."
+msgstr ""
+
+#: plugins/potdbackend.cpp:239
+#, kde-format
+msgctxt "@info:status after a save action %1 file path %2 basename"
+msgid "The image was saved as <a href=\"%1\">%2</a>"
+msgstr ""

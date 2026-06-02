@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-17 00:47+0000\n"
-"PO-Revision-Date: 2026-02-03 20:21-0500\n"
+"PO-Revision-Date: 2026-05-31 16:42-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
 "Language: ug\n"
@@ -16,15 +16,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.9\n"
 
 #: qml/ColorCircle.qml:26
-#, fuzzy, kde-format
-#| msgctxt "@info:usagetip"
-#| msgid "No colors"
+#, kde-format
 msgctxt "@info"
 msgid "No Saved Colors"
-msgstr "رەڭ يوق"
+msgstr "ساقلانغان رەڭ يوق"
 
 #: qml/ColorCircle.qml:40
 #, kde-format
@@ -82,7 +80,7 @@ msgstr "رەڭ ئالىدۇ"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
-msgstr "تارىخنى كۆرسىتىدۇ"
+msgstr "تارىخنى كۆرسەت"
 
 #: qml/configGeneral.qml:57
 #, kde-format
@@ -100,7 +98,7 @@ msgstr "رەڭ سۆزلەشكۈسىنى ئاچ"
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
-msgstr "تارىخنى تازىلاش"
+msgstr "تارىخنى تازىلا"
 
 #: qml/main.qml:135
 #, kde-format
