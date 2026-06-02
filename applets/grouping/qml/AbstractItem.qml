@@ -10,7 +10,7 @@ import QtQuick
 MouseArea {
     id: abstractItem
     property string text
-    property string itemId
+    property int itemId
     property int status     //PlasmaCore.Types.ItemStatus
     property bool active
 

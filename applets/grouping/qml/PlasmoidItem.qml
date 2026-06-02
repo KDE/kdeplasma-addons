@@ -14,7 +14,7 @@ AbstractItem {
     property Item applet
     text: applet ? applet.plasmoid.title : ""
 
-    itemId: applet ? applet.plasmoid.id : ""
+    itemId: applet ? applet.plasmoid.id : -1
     status: applet ? applet.plasmoid.status : PlasmaCore.Types.UnknownStatus
     active: root.activeApplet !== applet
 
