@@ -35,7 +35,7 @@ Kirigami.ScrollablePage {
     }
 
     ColumnLayout {
-        spacing: Kirigami.Units.largeSpacing
+        spacing: Kirigami.Units.largeSpacing * 2
 
         TopPanel {
             id: topPanel
@@ -74,7 +74,7 @@ Kirigami.ScrollablePage {
             id: sourceLabel
             visible: root.status === ForecastControl.Normal
 
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignRight
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
 
             MouseArea {
                 anchors.fill: parent
