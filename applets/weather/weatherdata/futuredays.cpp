@@ -68,10 +68,10 @@ QVariant FutureDays::headerData(int section, Qt::Orientation orientation, int ro
     if (orientation == Qt::Vertical && m_totalRows > 1) {
         if (role == Period) {
             if (section == Day) {
-                return i18n("Day");
+                return i18nc("Short for Day", "D");
             }
             if (m_isNightPresent && section == Night) {
-                return i18n("Night");
+                return i18nc("Short for Night", "N");
             }
         }
     }
