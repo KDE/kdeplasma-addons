@@ -67,7 +67,7 @@ PlasmoidItem {
             visible: plasmoid.configuration.enableNavigationBar
             Layout.fillWidth: true
             PlasmaComponents3.Button {
-                icon.name: "go-previous-symbolic"
+                icon.name: LayoutMirroring.enabled ? "go-previous-rtl-symbolic" : "go-previous-symbolic"
                 onClicked: webview.goBack()
                 enabled: webview.canGoBack
                 display: PlasmaComponents3.AbstractButton.IconOnly
@@ -77,7 +77,7 @@ PlasmoidItem {
                 PlasmaComponents3.ToolTip.text: text
             }
             PlasmaComponents3.Button {
-                icon.name: "go-next-symbolic"
+                icon.name: LayoutMirroring.enabled ? "go-next-rtl-symbolic" : "go-next-symbolic"
                 onClicked: webview.goForward()
                 enabled: webview.canGoForward
                 display: PlasmaComponents3.AbstractButton.IconOnly
