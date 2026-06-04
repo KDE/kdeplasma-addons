@@ -21,10 +21,12 @@ PlasmaComponents.ScrollView {
 
     property int displayTemperatureUnit: 0
 
-    readonly property int preferredIconSize: Kirigami.Units.iconSizes.large
+    readonly property int preferredIconSize: Kirigami.Units.iconSizes.medium
 
-    readonly property real preferredCellWidth: root.preferredIconSize
-    readonly property real preferredCellHeight: root.preferredIconSize + 4 * labelFontMetrics.height + Kirigami.Units.largeSpacing * 2
+    readonly property real minimalSpacing: Kirigami.Units.smallSpacing
+
+    readonly property real preferredCellWidth: root.preferredIconSize + Kirigami.Units.largeSpacing * 2
+    readonly property real preferredCellHeight: root.preferredIconSize + 3 * labelFontMetrics.height + Kirigami.Units.largeSpacing * 2
 
     //Item to get the metrics of the regular font in a PlasmaComponent.Label
     PlasmaComponents.Label {
@@ -41,7 +43,7 @@ PlasmaComponents.ScrollView {
     PlasmaComponents.ScrollBar.vertical.policy: PlasmaComponents.ScrollBar.AlwaysOff
 
     implicitWidth: preferredCellWidth * 7
-    implicitHeight: preferredCellHeight
+    implicitHeight: preferredCellHeight + scrollBar.implicitHeight
 
     focus: true
 
@@ -54,86 +56,111 @@ PlasmaComponents.ScrollView {
 
         clip: true
 
+        anchors.margins: root.minimalSpacing
+
+        spacing: root.minimalSpacing
+
         orientation: ListView.Horizontal
 
-        delegate: ColumnLayout {
-            id: dayDelegate
+        ScrollBar.vertical: ScrollBar {
+            id: scrollBar
+            parent: forecasts.parent
+            anchors.top: forecasts.top
+            anchors.left: forecasts.right
+            anchors.bottom: forecasts.bottom
+        }
 
-            visible: !!model.conditionIcon
+        delegate: Rectangle {
+            color: Qt.alpha(Kirigami.Theme.highlightColor, 0.08)
+            implicitWidth: root.preferredCellWidth
+            implicitHeight: root.preferredCellHeight
+            radius: Kirigami.Units.cornerRadius
 
-            width: root.preferredCellWidth
+            ColumnLayout {
+                id: dayDelegate
 
-            spacing: Math.round(Kirigami.Units.smallSpacing / 2)
+                visible: !!model.conditionIcon
 
-            PlasmaComponents.Label {
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                horizontalAlignment: Text.AlignHCenter
-                text: {
-                    const format = Qt.locale().timeFormat(Locale.ShortFormat);
-                    const usesAmPm = format.includes("Ap");
-                    if (usesAmPm) {
-                        return Qt.formatDateTime(model.timestamp, "h AP");
-                    } else {
-                        return Qt.formatDateTime(model.timestamp, "HH:mm");
+                anchors.centerIn: parent
+
+                spacing: Math.round(Kirigami.Units.smallSpacing / 2)
+
+                PlasmaComponents.Label {
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    text: {
+                        const format = Qt.locale().timeFormat(Locale.ShortFormat);
+                        const usesAmPm = format.includes("Ap");
+                        if (usesAmPm) {
+                            return Qt.formatDateTime(model.timestamp, "h AP");
+                        } else {
+                            return Qt.formatDateTime(model.timestamp, "HH:mm");
+                        }
+                    }
+                    textFormat: Text.PlainText
+                    Layout.preferredHeight: labelFontMetrics.height
+                }
+
+                Kirigami.Icon {
+                    Layout.preferredHeight: preferredIconSize
+                    Layout.preferredWidth: preferredIconSize
+
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+
+                    source: model.conditionIcon
+
+                    PlasmaCore.ToolTipArea {
+                        id: iconToolTip
+                        anchors.fill: parent
+                        mainText: {
+                            if (!model.condition) {
+                                return "";
+                            }
+                            if (!model.conditionProbability) {
+                                return model.condition;
+                            }
+                            return i18nc("certain weather condition (probability percentage)", "%1 (%2%)", model.condition, model.conditionProbability);
+                        }
                     }
                 }
-                textFormat: Text.PlainText
-                Layout.preferredHeight: labelFontMetrics.height
-            }
 
-            Kirigami.Icon {
-                Layout.preferredHeight: preferredIconSize
-                Layout.preferredWidth: preferredIconSize
-
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-
-                source: model.conditionIcon
-
-                PlasmaCore.ToolTipArea {
-                    id: iconToolTip
-                    anchors.fill: parent
-                    mainText: {
-                        if (!model.condition) {
-                            return "";
+                PlasmaComponents.Label {
+                    Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
+                    horizontalAlignment: Text.AlignHCenter
+                    text: {
+                        if (!isNaN(model.highTemp) && !isNaN(model.lowTemp) && !!root.metaData?.temperatureUnit) {
+                            let lowTemp = Util.temperatureToDisplayString(root.displayTemperatureUnit, model.lowTemp, root.metaData.temperatureUnit, true, true);
+                            let highTemp = Util.temperatureToDisplayString(root.displayTemperatureUnit, model.highTemp, root.metaData.temperatureUnit, true, true);
+                            return i18nc("High and low temperature wrapper", "%1/<font color='%2'>%3</font>", highTemp, Kirigami.Theme.disabledTextColor.toString(), lowTemp);
                         }
-                        if (!model.conditionProbability) {
-                            return model.condition;
+                        if (!isNaN(model.highTemp) && !!root.metaData?.temperatureUnit) {
+                            return Util.temperatureToDisplayString(root.displayTemperatureUnit, model.highTemp, root.metaData.temperatureUnit, true, true);
                         }
-                        return i18nc("certain weather condition (probability percentage)", "%1 (%2%)", model.condition, model.conditionProbability);
+
+                        if (!isNaN(model.lowTemp) && !!root.metaData?.temperatureUnit) {
+                            return Util.temperatureToDisplayString(root.displayTemperatureUnit, model.lowTemp, root.metaData.temperatureUnit, true, true);
+                        }
+                        return i18nc("Short for no data available", "-");
                     }
+                    textFormat: Text.RichText
+                    visible: !isNaN(model.highTemp) || !futureDays.isNightPresent
+                    Layout.preferredHeight: labelFontMetrics.height
+                    font.family: Kirigami.Theme.smallFont.family
+                    font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                 }
-            }
 
-            PlasmaComponents.Label {
-                // Position it closer to the weather condition icon
-                Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
-                Layout.topMargin: -Kirigami.Units.smallSpacing
-                Layout.bottomMargin: Kirigami.Units.smallSpacing * 2
-                // Fixed value, to prevent the emoji font from setting a larger height
-                Layout.preferredHeight: labelFontMetrics.height
+                PlasmaComponents.Label {
+                    // Position it closer to the weather condition icon
+                    Layout.alignment: Qt.AlignTop | Qt.AlignHCenter
+                    // Fixed value, to prevent the emoji font from setting a larger height
+                    Layout.preferredHeight: labelFontMetrics.height
 
-                horizontalAlignment: Text.AlignHCenter
-                text: !!model.conditionProbability ? i18nc("Probability of precipitation in percentage", "☂%1%", model.conditionProbability) : "·"
-                textFormat: Text.PlainText
-                visible: root.futureHours.hasProbability
-            }
-
-            PlasmaComponents.Label {
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                horizontalAlignment: Text.AlignHCenter
-                text: !isNaN(model.highTemp) && !!root.metaData?.temperatureUnit ? Util.temperatureToDisplayString(root.displayTemperatureUnit, model.highTemp, root.metaData.temperatureUnit, true) : i18nc("Short for no data available", "-")
-                textFormat: Text.PlainText
-                visible: !isNaN(model.highTemp)
-                Layout.preferredHeight: labelFontMetrics.height
-            }
-
-            PlasmaComponents.Label {
-                Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-                horizontalAlignment: Text.AlignHCenter
-                text: !isNaN(model.lowTemp) && !!root.metaData?.temperatureUnit ? Util.temperatureToDisplayString(root.displayTemperatureUnit, model.lowTemp, root.metaData.temperatureUnit, true) : i18nc("Short for no data available", "-")
-                textFormat: Text.PlainText
-                visible: !isNaN(model.lowTemp)
-                Layout.preferredHeight: labelFontMetrics.height
+                    horizontalAlignment: Text.AlignHCenter
+                    text: !!model.conditionProbability ? i18nc("Probability of precipitation in percentage", "☂%1%", model.conditionProbability) : "·"
+                    textFormat: Text.PlainText
+                    visible: root.futureHours.hasProbability
+                    color: Kirigami.Theme.disabledTextColor
+                }
             }
         }
     }
