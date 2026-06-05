@@ -20,6 +20,8 @@ PlasmaExtras.Representation {
 
     property int status: 0
 
+    property bool showHourlyTemperatureGraph: false
+
     property int invalidUnit: 0
     property int displaySpeedUnit: 0
     property int displayPressureUnit: 0
@@ -28,6 +30,7 @@ PlasmaExtras.Representation {
 
     property var station: null
     property var futureHours: null
+    property var futureHoursPoints: null
     property var futureDays: null
     property var warnings: null
     property var lastObservation: null
@@ -95,6 +98,8 @@ PlasmaExtras.Representation {
 
             status: root.status
 
+            showHourlyTemperatureGraph: root.showHourlyTemperatureGraph
+
             invalidUnit: root.invalidUnit
             displaySpeedUnit: root.displaySpeedUnit
             displayPressureUnit: root.displayPressureUnit
@@ -103,6 +108,7 @@ PlasmaExtras.Representation {
 
             station: root.station
             futureHours: root.futureHours
+            futureHoursPoints: root.futureHoursPoints
             futureDays: root.futureDays
             warnings: root.warnings
             lastObservation: root.lastObservation

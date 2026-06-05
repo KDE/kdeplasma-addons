@@ -3,6 +3,12 @@
 
 qt_add_library(plasmaweatherdata SHARED ${weatherdata_SRCS})
 
+ecm_add_qml_module(plasmaweatherdata
+    URI "org.kde.plasma.weatherdata"
+    VERSION 1.0
+    GENERATE_PLUGIN_SOURCE
+)
+
 target_sources(plasmaweatherdata PRIVATE
     currentday.h
     currentday.cpp
@@ -41,6 +47,9 @@ set_target_properties(plasmaweatherdata PROPERTIES
     EXPORT_NAME Weather::Data
 )
 
+ecm_finalize_qml_module(plasmaweatherdata DESTINATION ${KDE_INSTALL_QMLDIR})
+
+install(TARGETS plasmaweatherdata ${KDE_INSTALL_TARGETS_DEFAULT_ARGS})
 install(TARGETS plasmaweatherdata EXPORT plasmaweatherTargets DESTINATION ${KDE_INSTALL_LIBDIR} INCLUDES DESTINATION include/plasma/weather)
 install(FILES
         currentday.h
