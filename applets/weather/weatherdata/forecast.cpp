@@ -70,6 +70,11 @@ FutureHours *Forecast::futureHours() const
     return m_futureHours.get();
 }
 
+FutureHoursPoints *Forecast::futureHoursPoints() const
+{
+    return m_futureHoursPoints.get();
+}
+
 Warnings *Forecast::warnings() const
 {
     return m_warnings.get();
@@ -126,6 +131,7 @@ void Forecast::setFutureHours(std::shared_ptr<FutureHours> futureHours)
 {
     if (futureHours->rowCount()) {
         m_futureHours = futureHours;
+        m_futureHoursPoints = std::make_shared<FutureHoursPoints>(futureHours);
     }
 }
 
