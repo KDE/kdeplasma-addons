@@ -13,10 +13,8 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasmoid
 import org.kde.kcmutils as KCM
 
-
 KCM.SimpleKCM {
-    readonly property bool needsToBeSquare: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment)
-        || (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
+    readonly property bool needsToBeSquare: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment) || (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
 
     property bool cfg_showTemperatureInCompactMode
     property bool cfg_showTemperatureInBadge
@@ -26,9 +24,11 @@ KCM.SimpleKCM {
     property alias cfg_showPressureInTooltip: showPressureInTooltipCheckBox.checked
     property alias cfg_showHumidityInTooltip: showHumidityInTooltipCheckBox.checked
 
+    property alias cfg_showTemperatureGraphForForecast: showTemperatureGraphForForecast.checked
+
     function setShowTemperature(inCompactMode, inBadge) {
-        cfg_showTemperatureInCompactMode = inCompactMode
-        cfg_showTemperatureInBadge = inBadge
+        cfg_showTemperatureInCompactMode = inCompactMode;
+        cfg_showTemperatureInBadge = inBadge;
     }
 
     Kirigami.FormLayout {
@@ -86,6 +86,16 @@ KCM.SimpleKCM {
         QQC2.CheckBox {
             id: showHumidityInTooltipCheckBox
             text: i18nc("@option:check Show in tooltip: humidity", "Humidity")
+        }
+
+        Item {
+            Kirigami.FormData.isSection: true
+        }
+
+        QQC2.CheckBox {
+            id: showTemperatureGraphForForecast
+            Kirigami.FormData.label: i18nc("@label", "Show temperature graph:")
+            text: i18nc("@option:check", "Hourly Forecast")
         }
     }
 }

@@ -18,8 +18,11 @@ ColumnLayout {
     id: root
 
     property var futureHours: null
+    property var futureHoursPoints: null
     property var futureDays: null
     property var metaData: null
+
+    property bool showHourlyTemperatureGraph: false
 
     property int displayTemperatureUnit: 0
 
@@ -37,13 +40,34 @@ ColumnLayout {
             text: i18n("Hourly Forecast")
         }
 
-        HourlyForecastView {
-            Layout.alignment: Qt.AlignTop
+        Loader {
             Layout.fillWidth: true
+            sourceComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
+        }
 
-            futureHours: root.futureHours
-            metaData: root.metaData
-            displayTemperatureUnit: root.displayTemperatureUnit
+        Component {
+            id: hourlyForecastView
+            HourlyForecastView {
+                Layout.alignment: Qt.AlignTop
+                Layout.fillWidth: true
+
+                futureHours: root.futureHours
+                metaData: root.metaData
+                displayTemperatureUnit: root.displayTemperatureUnit
+            }
+        }
+
+        Component {
+            id: hourlyForecastGraph
+            HourlyForecastGraph {
+                Layout.alignment: Qt.AlignTop
+                Layout.fillWidth: true
+
+                futureHours: root.futureHours
+                futureHoursPoints: root.futureHoursPoints
+                metaData: root.metaData
+                displayTemperatureUnit: root.displayTemperatureUnit
+            }
         }
     }
 

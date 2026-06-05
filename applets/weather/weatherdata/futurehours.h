@@ -105,3 +105,52 @@ private:
 
     bool m_hasProbability;
 };
+
+class PLASMAWEATHERDATA_EXPORT FutureHoursPoints : public QAbstractTableModel
+{
+    Q_OBJECT
+    QML_ANONYMOUS
+
+    Q_PROPERTY(int pointsNumber READ pointsNumber CONSTANT)
+    Q_PROPERTY(QDateTime minDate READ minDate CONSTANT)
+    Q_PROPERTY(QDateTime maxDate READ maxDate CONSTANT)
+    Q_PROPERTY(qreal minTemp READ minTemp CONSTANT)
+    Q_PROPERTY(qreal maxTemp READ maxTemp CONSTANT)
+
+public:
+    enum RowsData {
+        Timestamp = 0,
+        Temperature,
+        EndRow,
+    };
+
+    Q_ENUM(RowsData)
+
+    explicit FutureHoursPoints(const std::shared_ptr<FutureHours> &futureHours, QObject *parent = nullptr);
+    ~FutureHoursPoints() override;
+
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+
+    QVariant data(const QModelIndex &index, int role) const override;
+
+private:
+    int pointsNumber() const;
+    QDateTime minDate() const;
+    QDateTime maxDate() const;
+    qreal minTemp() const;
+    qreal maxTemp() const;
+
+private:
+    qreal m_minTemp;
+    qreal m_maxTemp;
+
+    std::shared_ptr<FutureHours> m_futureHours;
+};
+
+struct FutureHoursPointsForeign {
+    Q_GADGET
+    QML_FOREIGN(FutureHoursPoints)
+    QML_NAMED_ELEMENT(FutureHoursPoints)
+    QML_UNCREATABLE("Enums only")
+};

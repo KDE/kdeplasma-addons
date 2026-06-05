@@ -171,6 +171,8 @@ PlasmoidItem {
     fullRepresentation: FullRepresentation {
         status: root.status
 
+        showHourlyTemperatureGraph: Plasmoid.configuration.showTemperatureGraphForForecast
+
         invalidUnit: root.invalidUnit
         displaySpeedUnit: root.displaySpeedUnit
         displayPressureUnit: root.displayPressureUnit
@@ -179,6 +181,7 @@ PlasmoidItem {
 
         station: forecastControl.forecast?.station
         futureHours: forecastControl.forecast?.futureHours
+        futureHoursPoints: forecastControl.forecast?.futureHoursPoints
         futureDays: forecastControl.forecast?.futureDays
         warnings: forecastControl.forecast?.warnings
         lastObservation: forecastControl.forecast?.lastObservation
