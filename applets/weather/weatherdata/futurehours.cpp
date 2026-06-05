@@ -8,6 +8,130 @@
 
 #include <klocalizedstring.h>
 
+FutureHoursPoints::FutureHoursPoints(const std::shared_ptr<FutureHours> &futureHours, QObject *parent)
+    : QAbstractTableModel(parent)
+    , m_minTemp(0)
+    , m_maxTemp(0)
+    , m_futureHours(futureHours)
+{
+    if (!m_futureHours->rowCount()) {
+        return;
+    }
+
+    qreal minTemp = std::numeric_limits<qreal>::max();
+    qreal maxTemp = std::numeric_limits<qreal>::min();
+    for (int hourIndex = 0; hourIndex < m_futureHours->rowCount(); ++hourIndex) {
+        QVariant minTempVariant = m_futureHours->data(m_futureHours->index(hourIndex), FutureHours::LowTemp);
+        QVariant maxTempVariant = m_futureHours->data(m_futureHours->index(hourIndex), FutureHours::HighTemp);
+
+        // Calculate min and max values according to what data ion provides
+        if (minTempVariant.canConvert<qreal>() && maxTempVariant.canConvert<qreal>()) {
+            minTemp = std::min(minTempVariant.toReal(), minTemp);
+            maxTemp = std::max(maxTempVariant.toReal(), maxTemp);
+        } else if (minTempVariant.canConvert<qreal>()) {
+            minTemp = std::min(minTempVariant.toReal(), minTemp);
+            maxTemp = std::max(minTempVariant.toReal(), maxTemp);
+        } else if (maxTempVariant.canConvert<qreal>()) {
+            minTemp = std::min(maxTempVariant.toReal(), minTemp);
+            maxTemp = std::max(maxTempVariant.toReal(), maxTemp);
+        }
+    }
+
+    m_maxTemp = maxTemp;
+    m_minTemp = minTemp;
+}
+
+FutureHoursPoints::~FutureHoursPoints()
+{
+}
+
+int FutureHoursPoints::rowCount(const QModelIndex &parent) const
+{
+    if (parent.isValid()) {
+        return 0;
+    }
+
+    return EndRow;
+}
+
+int FutureHoursPoints::columnCount(const QModelIndex &parent) const
+{
+    if (parent.isValid()) {
+        return 0;
+    }
+
+    return m_futureHours->rowCount();
+}
+
+QVariant FutureHoursPoints::data(const QModelIndex &index, int role) const
+{
+    if (!index.isValid()) {
+        return {};
+    }
+
+    if (role != Qt::DisplayRole) {
+        return {};
+    }
+
+    if (index.row() == Timestamp) {
+        // reset time to start from the begining of the day. Otherwise graphs that depends on
+        // this can change the position of points which will lead to broken alignment
+        return QDateTime(m_futureHours->data(m_futureHours->index(index.column()), FutureHours::Timestamp).toDate(), QTime());
+    } else if (index.row() == Temperature) {
+        QVariant highTemp = m_futureHours->data(m_futureHours->index(index.column()), FutureHours::HighTemp);
+        QVariant lowTemp = m_futureHours->data(m_futureHours->index(index.column()), FutureHours::LowTemp);
+        // If high and low temperature present then return middle value. Otherwise
+        // return the value which is present;
+        if (highTemp.isValid() && lowTemp.isValid()) {
+            return std::midpoint(highTemp.toReal(), lowTemp.toReal());
+        } else if (highTemp.isValid()) {
+            return highTemp;
+        } else if (lowTemp.isValid()) {
+            return lowTemp;
+        }
+        return {};
+    }
+
+    return {};
+}
+
+int FutureHoursPoints::pointsNumber() const
+{
+    return m_futureHours->rowCount();
+}
+
+QDateTime FutureHoursPoints::minDate() const
+{
+    QVariant date = m_futureHours->data(m_futureHours->index(0), FutureHours::Timestamp);
+    if (date.canConvert<QDateTime>()) {
+        // reset time to start from the begining of the day. Otherwise graphs that depends on
+        // this can change the position of points which will lead to broken alignment
+        return QDateTime(date.toDate(), QTime());
+    }
+    return {};
+}
+
+QDateTime FutureHoursPoints::maxDate() const
+{
+    QVariant date = m_futureHours->data(m_futureHours->index(m_futureHours->rowCount() - 1), FutureHours::Timestamp);
+    if (date.canConvert<QDateTime>()) {
+        // reset time to start from the begining of the day. Otherwise graphs that depends on
+        // this can change the position of points which will lead to broken alignment
+        return QDateTime(date.toDate(), QTime());
+    }
+    return {};
+}
+
+qreal FutureHoursPoints::minTemp() const
+{
+    return m_minTemp;
+}
+
+qreal FutureHoursPoints::maxTemp() const
+{
+    return m_maxTemp;
+}
+
 FutureHours::FutureHours(QObject *parent)
     : QAbstractListModel(parent)
     , m_hasProbability(false)

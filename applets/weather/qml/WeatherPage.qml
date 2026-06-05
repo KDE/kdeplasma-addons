@@ -14,6 +14,8 @@ Kirigami.ScrollablePage {
 
     property int status: 0
 
+    property bool showHourlyTemperatureGraph: false
+
     property int invalidUnit: 0
     property int displaySpeedUnit: 0
     property int displayPressureUnit: 0
@@ -22,6 +24,7 @@ Kirigami.ScrollablePage {
 
     property var station: null
     property var futureHours: null
+    property var futureHoursPoints: null
     property var futureDays: null
     property var warnings: null
     property var lastObservation: null
@@ -63,8 +66,11 @@ Kirigami.ScrollablePage {
             visible: root.status === ForecastControl.Normal
             Layout.fillWidth: true
 
+            showHourlyTemperatureGraph: root.showHourlyTemperatureGraph
+
             futureDays: root.futureDays
             futureHours: root.futureHours
+            futureHoursPoints: root.futureHoursPoints
             metaData: root.metaData
 
             displayTemperatureUnit: root.displayTemperatureUnit

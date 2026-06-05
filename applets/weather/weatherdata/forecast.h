@@ -43,6 +43,7 @@ class PLASMAWEATHERDATA_EXPORT Forecast
     Q_PROPERTY(Warnings *warnings READ warnings CONSTANT)
     Q_PROPERTY(FutureDays *futureDays READ futureDays CONSTANT)
     Q_PROPERTY(FutureHours *futureHours READ futureHours CONSTANT)
+    Q_PROPERTY(FutureHoursPoints *futureHoursPoints READ futureHoursPoints CONSTANT)
 
 public:
     Forecast();
@@ -56,6 +57,7 @@ public:
     QVariant lastObservation() const;
     FutureDays *futureDays() const;
     FutureHours *futureHours() const;
+    FutureHoursPoints *futureHoursPoints() const;
     Warnings *warnings() const;
 
     void setError();
@@ -78,6 +80,7 @@ private:
     std::optional<LastObservation> m_lastObservation;
     std::shared_ptr<FutureDays> m_futureDays;
     std::shared_ptr<FutureHours> m_futureHours;
+    std::shared_ptr<FutureHoursPoints> m_futureHoursPoints;
     std::shared_ptr<Warnings> m_warnings;
 };
 
