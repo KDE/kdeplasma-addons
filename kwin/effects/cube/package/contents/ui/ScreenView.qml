@@ -168,7 +168,7 @@ Item {
 
     Connections {
         target: KWinComponents.Workspace
-        onCurrentDesktopChanged: (previous, current, screen) => {
+        function onCurrentDesktopChanged(previous, current, screen) {
             if (screen !== root.targetScreen) {
                 return;
             }
