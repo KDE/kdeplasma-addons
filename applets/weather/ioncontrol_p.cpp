@@ -302,5 +302,6 @@ void IonControl::onOnlineStateChanged(QNetworkInformation::Reachability reachabi
         }
         m_currentForecastUpdate.reset();
         m_currentLocationUpdate.reset();
+        m_isBusy = false;
     }
 }
