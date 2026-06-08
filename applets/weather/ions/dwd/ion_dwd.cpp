@@ -553,21 +553,7 @@ void DWDIon::updateWeather()
 
         int days = 0;
         for (const auto &dayForecast : m_weatherData->forecasts) {
-            FutureDayForecast futureDay;
-            QString period;
-            if (days == 0) {
-                period = i18nc("Short for Today", "Today");
-            } else {
-                period = dayForecast.period.toString(u"dddd"_s);
-
-                period.replace(u"Saturday"_s, i18nc("Short for Saturday", "Sat"));
-                period.replace(u"Sunday"_s, i18nc("Short for Sunday", "Sun"));
-                period.replace(u"Monday"_s, i18nc("Short for Monday", "Mon"));
-                period.replace(u"Tuesday"_s, i18nc("Short for Tuesday", "Tue"));
-                period.replace(u"Wednesday"_s, i18nc("Short for Wednesday", "Wed"));
-                period.replace(u"Thursday"_s, i18nc("Short for Thursday", "Thu"));
-                period.replace(u"Friday"_s, i18nc("Short for Friday", "Fri"));
-            }
+            FutureDayForecast futureDay(dayForecast.period);
 
             FutureForecast futureForecast;
 
@@ -575,7 +561,6 @@ void DWDIon::updateWeather()
             futureForecast.setHighTemp(dayForecast.tempHigh);
             futureForecast.setLowTemp(dayForecast.tempLow);
 
-            futureDay.setWeekDay(period);
             futureDay.setDaytime(futureForecast);
 
             futureDays->addDay(futureDay);
@@ -591,7 +576,7 @@ void DWDIon::updateWeather()
 
         for (const auto &localWarning : m_weatherData->warnings) {
             Warning warning(localWarning.priority, u"<p><b>%1</b></p>%2"_s.arg(localWarning.headline, localWarning.description));
-            warning.setTimestamp(localWarning.timestamp.toString(u"dd.MM.yyyy"_s));
+            warning.setTimestamp(localWarning.timestamp);
             warnings->addWarning(warning);
         }
         forecast->setWarnings(warnings);

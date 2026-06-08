@@ -58,7 +58,7 @@ public:
 
     // Forecasts
     struct ForecastInfo {
-        QDate period;
+        QDateTime period;
         bool isNight = false;
         QString iconName;
         QString summary;

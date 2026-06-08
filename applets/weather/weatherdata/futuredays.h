@@ -9,8 +9,8 @@
 #include <plasmaweatherdata_export.h>
 
 #include <QAbstractTableModel>
+#include <QDateTime>
 #include <QObjectBindableProperty>
-#include <QString>
 
 #include <qqmlintegration.h>
 
@@ -53,24 +53,19 @@ private:
 class PLASMAWEATHERDATA_EXPORT FutureDayForecast
 {
 public:
-    explicit FutureDayForecast();
+    explicit FutureDayForecast(const QDateTime &timestamp);
     ~FutureDayForecast();
 
-    std::optional<int> monthDay() const;
-    std::optional<QString> weekDay() const;
+    QDateTime timestamp() const;
 
     std::optional<FutureForecast> daytime() const;
     std::optional<FutureForecast> night() const;
-
-    void setMonthDay(int monthDay);
-    void setWeekDay(const QString &weekDay);
 
     void setDaytime(const FutureForecast &daytime);
     void setNight(const FutureForecast &night);
 
 private:
-    std::optional<int> m_monthDay;
-    std::optional<QString> m_weekDay;
+    QDateTime m_timestamp;
     std::optional<FutureForecast> m_daytime;
     std::optional<FutureForecast> m_night;
 };
@@ -80,8 +75,7 @@ private:
  *
  * \brief Data about next days
  *
- * monthDay: day of month, optional,
- * weekDay: day of week, optional,
+ * Timestamp: date of the forecast, optional,
  * period: time of day, required,
  * conditionIcon: xdg icon name for current weather observation, optional,
  * condition: free text string for weather condition, optional
@@ -102,8 +96,7 @@ class PLASMAWEATHERDATA_EXPORT FutureDays : public QAbstractTableModel
 
 public:
     enum NextDaysModels {
-        MonthDay = Qt::UserRole + 1,
-        WeekDay,
+        Timestamp = Qt::UserRole + 1,
         Period,
         ConditionIcon,
         Condition,

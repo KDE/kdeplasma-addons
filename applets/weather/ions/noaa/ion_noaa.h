@@ -54,7 +54,7 @@ public:
     Observation observation;
 
     struct Forecast {
-        int day;
+        QDateTime timestamp;
         QString summary;
         float low = qQNaN();
         float high = qQNaN();

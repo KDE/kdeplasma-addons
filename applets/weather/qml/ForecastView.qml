@@ -44,13 +44,13 @@ Item {
         anchors.top: parent.top
         syncView: forecast
         clip: true
-        textRole: "monthDay"
+        textRole: "timestamp"
         resizableColumns: false
         interactive: false
         model: !!root.futureDays && root.futureDays.daysNumber > 1 ? root.futureDays : null
 
         delegate: PlasmaComponents.Label {
-            text: model.monthDay ?? model.weekDay ?? ""
+            text: model.timestamp.toLocaleString(Qt.locale(), "ddd") ?? ""
             textFormat: Text.PlainText
             horizontalAlignment: Text.AlignHCenter
         }

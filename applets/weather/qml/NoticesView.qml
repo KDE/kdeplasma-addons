@@ -28,7 +28,7 @@ ListView {
             Layout.maximumWidth: Kirigami.Units.gridUnit * 10
             Layout.margins: Kirigami.Units.largeSpacing
 
-            text: model.timestamp
+            text: model.timestamp.toLocaleString(Qt.locale(), "ddd yyyy-MM-dd hh:mm:ss")
             textFormat: Text.PlainText
             horizontalAlignment: Text.AlignRight
             wrapMode: Text.Wrap

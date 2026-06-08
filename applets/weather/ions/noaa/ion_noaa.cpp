@@ -528,8 +528,7 @@ void NOAAIon::updateWeather()
             break;
         }
 
-        FutureDayForecast futureDayForecast;
-        futureDayForecast.setMonthDay(current.day);
+        FutureDayForecast futureDayForecast(current.timestamp);
 
         if (current.isDayTime) {
             // Valid daytime
@@ -562,7 +561,7 @@ void NOAAIon::updateWeather()
                 }
 
                 // if we have day and night forecasts of the same month day then add it to the full day forecast
-                if (!next.isDayTime && next.day == current.day) {
+                if (!next.isDayTime && next.timestamp.date().day() == current.timestamp.date().day()) {
                     ConditionIcons icon = getConditionIcon(next.summary.toLower(), next.isDayTime);
                     QString iconName = getWeatherIcon(icon);
                     FutureForecast futureNightForecast;
@@ -609,7 +608,7 @@ void NOAAIon::updateWeather()
         for (const WeatherData::Alert &alert : m_weatherData->alerts) {
             // TODO: Add a Headline parameter to the plugin and the applet
             Warning warning(alert.priority, u"<p><b>%1</b></p>%2"_s.arg(alert.headline, alert.description));
-            warning.setTimestamp(QLocale().toString(alert.startTime, QLocale::ShortFormat));
+            warning.setTimestamp(alert.startTime);
             warnings->addWarning(warning);
         }
 
@@ -934,9 +933,7 @@ void NOAAIon::readForecast(KJob *job, const QByteArray &data)
     for (const auto &period : periods) {
         WeatherData::Forecast forecast;
 
-        // Time period. Date and day/night flag
-        const QDateTime date = QDateTime::fromString(period[u"startTime"_s].toString(), Qt::ISODate);
-        forecast.day = date.date().day();
+        forecast.timestamp = QDateTime::fromString(period[u"startTime"_s].toString(), Qt::ISODate);
         forecast.isDayTime = period[u"isDaytime"_s].toBool();
 
         // The temperature reported is daytime's highest or night's lowest

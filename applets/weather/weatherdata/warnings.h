@@ -9,8 +9,8 @@
 #include <plasmaweatherdata_export.h>
 
 #include <QAbstractListModel>
+#include <QDateTime>
 #include <QObjectBindableProperty>
-#include <QString>
 
 #include <qqmlintegration.h>
 
@@ -24,7 +24,7 @@ class Warning;
  * "Description " + number, string, free text string, required
  * "Priority " + number, string, free text string, required
  * "Info " + number, string, free text string, optional
- * "Timestamp " + number, string, free text string, optional TODO: get standardized datetime
+ * "Timestamp " + number, string, free text string, optional
  */
 class PLASMAWEATHERDATA_EXPORT Warnings : public QAbstractListModel
 {
@@ -86,14 +86,14 @@ public:
     Warnings::PriorityClass priority() const;
     QString description() const;
     std::optional<QString> info() const;
-    std::optional<QString> timestamp() const;
+    std::optional<QDateTime> timestamp() const;
 
     void setInfo(const QString &info);
-    void setTimestamp(const QString &timestamp);
+    void setTimestamp(const QDateTime &timestamp);
 
 private:
     Warnings::PriorityClass m_priority;
     QString m_description;
     std::optional<QString> m_info;
-    std::optional<QString> m_timestamp;
+    std::optional<QDateTime> m_timestamp;
 };

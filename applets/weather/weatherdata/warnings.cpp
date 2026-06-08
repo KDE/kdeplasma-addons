@@ -108,7 +108,7 @@ std::optional<QString> Warning::info() const
     return m_info;
 }
 
-std::optional<QString> Warning::timestamp() const
+std::optional<QDateTime> Warning::timestamp() const
 {
     return m_timestamp;
 }
@@ -118,7 +118,7 @@ void Warning::setInfo(const QString &info)
     m_info = info;
 }
 
-void Warning::setTimestamp(const QString &timestamp)
+void Warning::setTimestamp(const QDateTime &timestamp)
 {
     m_timestamp = timestamp;
 }

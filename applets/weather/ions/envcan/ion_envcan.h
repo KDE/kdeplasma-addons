@@ -32,13 +32,14 @@ public:
         QString url;
         Warnings::PriorityClass priority;
         QString description;
-        QString timestamp;
+        QDateTime timestamp;
     };
 
     // Five day forecast
     struct ForecastInfo {
         ForecastInfo();
 
+        QDateTime forecastTimestamp;
         QString forecastPeriod;
         QString forecastSummary;
         QString iconName;
@@ -93,7 +94,7 @@ public:
     float normalHigh;
     float normalLow;
 
-    QString forecastTimestamp;
+    QDateTime forecastTimestamp;
 
     QString UVIndex;
     QString UVRating;
@@ -108,10 +109,10 @@ public:
     float prevPrecipTotal;
 
     // Almanac info
-    QString sunriseTimestamp;
-    QString sunsetTimestamp;
-    QString moonriseTimestamp;
-    QString moonsetTimestamp;
+    QDateTime sunriseTimestamp;
+    QDateTime sunsetTimestamp;
+    QDateTime moonriseTimestamp;
+    QDateTime moonsetTimestamp;
 
     // Historical Records
     float recordHigh;
@@ -155,6 +156,7 @@ private:
     // helper functions used to update forecast days in updateWeather
     QString updateForecastPeriod(const std::shared_ptr<WeatherData::ForecastInfo> &info);
     FutureForecast forecastInfoToFutureForecast(const std::shared_ptr<WeatherData::ForecastInfo> &info);
+    QDateTime dateTimeForForecastPeriod(const QString &periodName, const QDate &issueDate) const;
 
     QMap<QString, ConditionIcons> setupConditionIconMappings() const;
     QMap<QString, ConditionIcons> setupDayConditionIconMappings() const;

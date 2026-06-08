@@ -25,8 +25,7 @@ FutureDays::~FutureDays()
 QHash<int, QByteArray> FutureDays::roleNames() const
 {
     QHash<int, QByteArray> roles;
-    roles[MonthDay] = "monthDay";
-    roles[WeekDay] = "weekDay";
+    roles[Timestamp] = "timestamp";
     roles[Period] = "period";
     roles[ConditionIcon] = "conditionIcon";
     roles[Condition] = "condition";
@@ -61,18 +60,8 @@ QVariant FutureDays::headerData(int section, Qt::Orientation orientation, int ro
             return {};
         }
 
-        if (role == MonthDay) {
-            if (m_nextDays.at(section).monthDay().has_value()) {
-                return *m_nextDays.at(section).monthDay();
-            }
-            return {};
-        }
-
-        if (role == WeekDay) {
-            if (m_nextDays.at(section).weekDay().has_value()) {
-                return *m_nextDays.at(section).weekDay();
-            }
-            return {};
+        if (role == Timestamp) {
+            return m_nextDays.at(section).timestamp();
         }
     }
 
@@ -96,6 +85,11 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
     }
 
     if (index.row() >= m_totalRows) {
+        return {};
+    }
+
+    if (role == Timestamp) {
+        return m_nextDays.at(index.column()).timestamp();
         return {};
     }
 
@@ -217,7 +211,8 @@ int FutureDays::daysNumber() const
     return m_daysNumber;
 }
 
-FutureDayForecast::FutureDayForecast()
+FutureDayForecast::FutureDayForecast(const QDateTime &timestamp)
+    : m_timestamp(timestamp)
 {
 }
 
@@ -225,14 +220,9 @@ FutureDayForecast::~FutureDayForecast()
 {
 }
 
-std::optional<int> FutureDayForecast::monthDay() const
+QDateTime FutureDayForecast::timestamp() const
 {
-    return m_monthDay;
-}
-
-std::optional<QString> FutureDayForecast::weekDay() const
-{
-    return m_weekDay;
+    return m_timestamp;
 }
 
 std::optional<FutureForecast> FutureDayForecast::daytime() const
@@ -243,16 +233,6 @@ std::optional<FutureForecast> FutureDayForecast::daytime() const
 std::optional<FutureForecast> FutureDayForecast::night() const
 {
     return m_night;
-}
-
-void FutureDayForecast::setMonthDay(int monthDay)
-{
-    m_monthDay = monthDay;
-}
-
-void FutureDayForecast::setWeekDay(const QString &weekDay)
-{
-    m_weekDay = weekDay;
 }
 
 void FutureDayForecast::setDaytime(const FutureForecast &daytime)

@@ -895,12 +895,15 @@ void EnvCanadaIon::parseDateTime(WeatherData &data, QXmlStreamReader &xml, std::
 {
     Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("dateTime"));
 
-    // What kind of date info is this?
     const QString dateType = xml.attributes().value(u"name"_s).toString();
     const QString dateZone = xml.attributes().value(u"zone"_s).toString();
-    const QString dateUtcOffset = xml.attributes().value(u"UTCOffset"_s).toString();
+    const QString utcOffsetStr = xml.attributes().value(u"UTCOffset"_s).toString();
 
-    QString selectTimeStamp;
+    if (dateZone == QLatin1String("UTC") || dateType == QLatin1String("xmlCreation")) {
+        return;
+    }
+
+    QString timestamp;
 
     while (!xml.atEnd()) {
         xml.readNext();
@@ -912,12 +915,6 @@ void EnvCanadaIon::parseDateTime(WeatherData &data, QXmlStreamReader &xml, std::
         const auto elementName = xml.name();
 
         if (xml.isStartElement()) {
-            if (dateType == QLatin1String("xmlCreation")) {
-                return;
-            }
-            if (dateZone == QLatin1String("UTC")) {
-                return;
-            }
             if (elementName == QLatin1String("year")) {
                 xml.readElementText();
             } else if (elementName == QLatin1String("month")) {
@@ -929,38 +926,56 @@ void EnvCanadaIon::parseDateTime(WeatherData &data, QXmlStreamReader &xml, std::
             else if (elementName == QLatin1String("minute"))
                 xml.readElementText();
             else if (elementName == QLatin1String("timeStamp"))
-                selectTimeStamp = xml.readElementText();
+                timestamp = xml.readElementText();
             else if (elementName == QLatin1String("textSummary")) {
-                if (dateType == QLatin1String("eventIssue")) {
-                    if (event) {
-                        event->timestamp = xml.readElementText();
-                    }
-                } else if (dateType == QLatin1String("observation")) {
-                    xml.readElementText();
-                    QDateTime observationDateTime = QDateTime::fromString(selectTimeStamp, QStringLiteral("yyyyMMddHHmmss"));
-                    QTimeZone timeZone = QTimeZone(dateZone.toUtf8());
-                    // if timezone id not recognized, fallback to utcoffset
-                    if (!timeZone.isValid()) {
-                        timeZone = QTimeZone(dateUtcOffset.toInt() * 3600);
-                    }
-                    if (observationDateTime.isValid() && timeZone.isValid()) {
-                        data.observationDateTime = observationDateTime;
-                        data.observationDateTime.setTimeZone(timeZone);
-                    }
-                    data.obsTimestamp = observationDateTime.toString(QStringLiteral("dd.MM.yyyy @ hh:mm"));
-                } else if (dateType == QLatin1String("forecastIssue")) {
-                    data.forecastTimestamp = xml.readElementText();
-                } else if (dateType == QLatin1String("sunrise")) {
-                    data.sunriseTimestamp = xml.readElementText();
-                } else if (dateType == QLatin1String("sunset")) {
-                    data.sunsetTimestamp = xml.readElementText();
-                } else if (dateType == QLatin1String("moonrise")) {
-                    data.moonriseTimestamp = xml.readElementText();
-                } else if (dateType == QLatin1String("moonset")) {
-                    data.moonsetTimestamp = xml.readElementText();
-                }
+                xml.readElementText();
             }
         }
+    }
+
+    if (timestamp.isEmpty()) {
+        return;
+    }
+
+    QDateTime dateTime = QDateTime::fromString(timestamp, QStringLiteral("yyyyMMddHHmmss"));
+    if (!dateTime.isValid()) {
+        return;
+    }
+
+    QTimeZone timeZone;
+
+    if (!dateZone.isEmpty()) {
+        timeZone = QTimeZone(dateZone.toUtf8());
+    }
+
+    if (!timeZone.isValid()) {
+        bool ok = false;
+        const int offsetHours = utcOffsetStr.toInt(&ok);
+        if (ok) {
+            timeZone = QTimeZone(offsetHours * 3600);
+        }
+    }
+
+    if (timeZone.isValid()) {
+        dateTime.setTimeZone(timeZone);
+    }
+
+    if (dateType == QLatin1String("eventIssue")) {
+        if (event) {
+            event->timestamp = dateTime;
+        }
+    } else if (dateType == QLatin1String("observation")) {
+        data.observationDateTime = dateTime;
+    } else if (dateType == QLatin1String("forecastIssue")) {
+        data.forecastTimestamp = dateTime;
+    } else if (dateType == QLatin1String("sunrise")) {
+        data.sunriseTimestamp = dateTime;
+    } else if (dateType == QLatin1String("sunset")) {
+        data.sunsetTimestamp = dateTime;
+    } else if (dateType == QLatin1String("moonrise")) {
+        data.moonriseTimestamp = dateTime;
+    } else if (dateType == QLatin1String("moonset")) {
+        data.moonsetTimestamp = dateTime;
     }
 }
 
@@ -1136,7 +1151,7 @@ void EnvCanadaIon::parseWarnings(WeatherData &data, QXmlStreamReader &xml)
         if (xml.isStartElement()) {
             if (elementName == QLatin1String("dateTime")) {
                 parseDateTime(data, xml, warning);
-                if (!warning->timestamp.isEmpty() && !warning->url.isEmpty()) {
+                if (!warning->timestamp.isValid() && !warning->url.isEmpty()) {
                     data.warnings.append(warning);
                     warning = std::make_shared<WeatherData::WeatherEvent>();
                 }
@@ -1227,6 +1242,7 @@ void EnvCanadaIon::parseForecast(WeatherData &data, QXmlStreamReader &xml, std::
         if (xml.isStartElement()) {
             if (elementName == QLatin1String("period")) {
                 forecast->forecastPeriod = xml.attributes().value(u"textForecastName"_s).toString();
+                forecast->forecastTimestamp = dateTimeForForecastPeriod(forecast->forecastPeriod, data.forecastTimestamp.date());
             } else if (elementName == QLatin1String("textSummary")) {
                 forecast->forecastSummary = xml.readElementText();
             } else if (elementName == QLatin1String("abbreviatedForecast")) {
@@ -1545,6 +1561,66 @@ QString EnvCanadaIon::updateForecastPeriod(const std::shared_ptr<WeatherData::Fo
     return forecastPeriod;
 }
 
+QDateTime EnvCanadaIon::dateTimeForForecastPeriod(const QString &periodName, const QDate &issueDate) const
+{
+    // EnvCan does not provide dates for individual forecast periods, only the
+    // forecast start day, so calculate them ourselves.
+    QString normalized = periodName.trimmed();
+
+    bool isNight = false;
+
+    // Environment Canada defines daytime forecasts as 06:00-18:00 and
+    // nighttime forecasts as 18:00-06:00.
+    static const auto daytime = QTime(6, 0);
+    static const auto nighttime = QTime(18, 0);
+
+    if (normalized.compare(u"Today"_s, Qt::CaseInsensitive) == 0) {
+        return QDateTime(issueDate, isNight ? nighttime : daytime);
+    }
+
+    if (normalized.compare(u"Tonight"_s, Qt::CaseInsensitive) == 0) {
+        return QDateTime(issueDate, isNight ? nighttime : daytime);
+    }
+
+    if (normalized.endsWith(u" night"_s, Qt::CaseInsensitive)) {
+        isNight = true;
+        // Get the day name. Envcan returns xml where forecasts have textForecastName `Dayname`
+        // for day forecasts and `Dayname night` for night forecasts. so trim the `night` and save
+        //  only the day name.
+        normalized = normalized.split(u" "_s)[0];
+    }
+
+    static const QHash<QString, Qt::DayOfWeek> weekdays{
+        {u"Monday"_s, Qt::Monday},
+        {u"Tuesday"_s, Qt::Tuesday},
+        {u"Wednesday"_s, Qt::Wednesday},
+        {u"Thursday"_s, Qt::Thursday},
+        {u"Friday"_s, Qt::Friday},
+        {u"Saturday"_s, Qt::Saturday},
+        {u"Sunday"_s, Qt::Sunday},
+    };
+
+    const auto it = weekdays.find(normalized);
+    if (it == weekdays.end()) {
+        qCWarning(WEATHER::ION::ENVCAN) << "Unknown forecast period:" << periodName;
+        return {};
+    }
+
+    const int issueDay = issueDate.dayOfWeek();
+    const int targetDay = static_cast<int>(*it);
+
+    int daysToAdd = targetDay - issueDay;
+    // The requested weekday has already passed this week, so use its next
+    // occurrence. This is sufficient because EnvCan forecasts span at most one week.
+    if (daysToAdd <= 0) {
+        daysToAdd += 7;
+    }
+
+    const QDate targetDate = issueDate.addDays(daysToAdd);
+
+    return QDateTime(targetDate, isNight ? nighttime : daytime);
+}
+
 FutureForecast EnvCanadaIon::forecastInfoToFutureForecast(const std::shared_ptr<WeatherData::ForecastInfo> &info)
 {
     const QString shortForecast = info->shortForecast.isEmpty() ? i18n("N/A") : i18nc("weather forecast", info->shortForecast.toUtf8().data());
@@ -1740,23 +1816,20 @@ void EnvCanadaIon::updateWeather()
         if (current->forecastPeriod == QStringLiteral("Today")) {
             // if the second day is a "Tonight" forecast add it too
             if (next && next->forecastPeriod == QStringLiteral("Tonight")) {
-                FutureDayForecast futureDayForecast;
-                futureDayForecast.setWeekDay(updateForecastPeriod(current));
+                FutureDayForecast futureDayForecast(current->forecastTimestamp);
                 futureDayForecast.setDaytime(forecastInfoToFutureForecast(current));
                 futureDayForecast.setNight(forecastInfoToFutureForecast(next));
                 futureDays->addDay(futureDayForecast);
                 ++i;
             } else {
                 // else just create a full day forecast only with a "Today" forecast
-                FutureDayForecast futureDayForecast;
-                futureDayForecast.setWeekDay(updateForecastPeriod(current));
+                FutureDayForecast futureDayForecast(current->forecastTimestamp);
                 futureDayForecast.setDaytime(forecastInfoToFutureForecast(current));
                 futureDays->addDay(futureDayForecast);
             }
             // if the forecast starts with night then create a full day forecast only with "Tonight"
         } else if (current->forecastPeriod == QStringLiteral("Tonight")) {
-            FutureDayForecast futureDayForecast;
-            futureDayForecast.setWeekDay(updateForecastPeriod(current));
+            FutureDayForecast futureDayForecast(current->forecastTimestamp);
             futureDayForecast.setNight(forecastInfoToFutureForecast(current));
             futureDays->addDay(futureDayForecast);
         } else {
@@ -1767,23 +1840,20 @@ void EnvCanadaIon::updateWeather()
                 // if yes then check the next forecast for night
                 if (next && next->forecastPeriod.contains(QStringLiteral("night")) && next->forecastPeriod.contains(current->forecastPeriod)) {
                     // if the next forecast is a night forecast then create full day forecast with day and night forecasts accordingly
-                    FutureDayForecast futureDayForecast;
-                    futureDayForecast.setWeekDay(updateForecastPeriod(current));
+                    FutureDayForecast futureDayForecast(current->forecastTimestamp);
                     futureDayForecast.setDaytime(forecastInfoToFutureForecast(current));
                     futureDayForecast.setNight(forecastInfoToFutureForecast(next));
                     futureDays->addDay(futureDayForecast);
                     ++i;
                 } else {
                     // if the next forecast is not a night forecast then add only the daytime forecast
-                    FutureDayForecast futureDayForecast;
-                    futureDayForecast.setWeekDay(updateForecastPeriod(current));
+                    FutureDayForecast futureDayForecast(current->forecastTimestamp);
                     futureDayForecast.setDaytime(forecastInfoToFutureForecast(current));
                     futureDays->addDay(futureDayForecast);
                 }
             } else {
                 // if no then create a full day forecast just with the night forecast
-                FutureDayForecast futureDayForecast;
-                futureDayForecast.setWeekDay(updateForecastPeriod(current));
+                FutureDayForecast futureDayForecast(current->forecastTimestamp);
                 futureDayForecast.setNight(forecastInfoToFutureForecast(current));
                 futureDays->addDay(futureDayForecast);
             }

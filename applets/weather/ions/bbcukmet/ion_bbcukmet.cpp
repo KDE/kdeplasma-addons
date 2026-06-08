@@ -609,7 +609,7 @@ WeatherData::ForecastInfo UKMETIon::parseForecastReport(const QJsonObject &repor
 {
     WeatherData::ForecastInfo forecast;
 
-    forecast.period = QDate::fromString(report[u"localDate"_s].toString(), Qt::ISODate); // "YYYY-MM-DD" (ISO8601)
+    forecast.period = QDateTime::fromString(report[u"localDate"_s].toString(), Qt::ISODate); // "YYYY-MM-DD" (ISO8601)
     forecast.isNight = isNight;
 
     forecast.summary = report[u"weatherTypeText"_s].toString().toLower();
@@ -736,14 +736,7 @@ void UKMETIon::updateWeather()
 
     int day = 0;
     for (const WeatherData::ForecastInfo &forecast : std::as_const(m_weatherData->forecasts)) {
-        FutureDayForecast futureDayForecast;
-        QString weekDayLabel = QLocale().toString(forecast.period, u"ddd"_s);
-        if (day == 0 && forecast.period <= QDate::currentDate()) {
-            weekDayLabel = forecast.isNight ? i18nc("Short for Tonight", "Tonight") : i18nc("Short for Today", "Today");
-        }
-
-        futureDayForecast.setWeekDay(weekDayLabel);
-
+        FutureDayForecast futureDayForecast(forecast.period);
         FutureForecast futureForecast;
         futureForecast.setConditionIcon(forecast.iconName);
         futureForecast.setCondition(i18nc("weather forecast", forecast.summary.toUtf8().data()));

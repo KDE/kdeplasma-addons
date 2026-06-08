@@ -678,8 +678,7 @@ void WetterComIon::updateWeather()
         for (auto forecastPeriod : m_weatherData.forecasts) {
             WeatherData::ForecastInfo weather = forecastPeriod->getDayWeather();
 
-            FutureDayForecast nextDay;
-            nextDay.setMonthDay(weather.period.date().day());
+            FutureDayForecast nextDay(weather.period);
 
             FutureForecast futureForecast;
             futureForecast.setConditionIcon(weather.iconName);
