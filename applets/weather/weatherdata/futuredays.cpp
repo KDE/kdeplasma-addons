@@ -8,6 +8,154 @@
 
 #include <klocalizedstring.h>
 
+FutureDaysPoints::FutureDaysPoints(const std::shared_ptr<FutureDays> &futureDays, QObject *parent)
+    : QAbstractTableModel(parent)
+    , m_minTemp(0)
+    , m_maxTemp(0)
+    , m_futureDays(futureDays)
+{
+    if (!m_futureDays->rowCount()) {
+        return;
+    }
+
+    qreal minTemp = std::numeric_limits<qreal>::max();
+    qreal maxTemp = std::numeric_limits<qreal>::min();
+    for (int dayTimeIndex = 0; dayTimeIndex < m_futureDays->rowCount(); ++dayTimeIndex) {
+        for (int dayIndex = 0; dayIndex < m_futureDays->columnCount(); ++dayIndex) {
+            QVariant minTempVariant = m_futureDays->data(m_futureDays->index(dayTimeIndex, dayIndex), FutureDays::LowTemp);
+            QVariant maxTempVariant = m_futureDays->data(m_futureDays->index(dayTimeIndex, dayIndex), FutureDays::HighTemp);
+
+            // Calculate min and max values according to what data ion provides
+            if (minTempVariant.canConvert<qreal>() && maxTempVariant.canConvert<qreal>()) {
+                minTemp = std::min(minTempVariant.toReal(), minTemp);
+                maxTemp = std::max(maxTempVariant.toReal(), maxTemp);
+            } else if (minTempVariant.canConvert<qreal>()) {
+                minTemp = std::min(minTempVariant.toReal(), minTemp);
+                maxTemp = std::max(minTempVariant.toReal(), maxTemp);
+            } else if (maxTempVariant.canConvert<qreal>()) {
+                minTemp = std::min(maxTempVariant.toReal(), minTemp);
+                maxTemp = std::max(maxTempVariant.toReal(), maxTemp);
+            }
+        }
+    }
+
+    m_maxTemp = maxTemp;
+    m_minTemp = minTemp;
+}
+
+FutureDaysPoints::~FutureDaysPoints()
+{
+}
+
+int FutureDaysPoints::rowCount(const QModelIndex &parent) const
+{
+    if (parent.isValid()) {
+        return 0;
+    }
+
+    return EndRow;
+}
+
+int FutureDaysPoints::columnCount(const QModelIndex &parent) const
+{
+    if (parent.isValid()) {
+        return 0;
+    }
+
+    return m_futureDays->columnCount();
+}
+
+QVariant FutureDaysPoints::data(const QModelIndex &index, int role) const
+{
+    if (!index.isValid()) {
+        return {};
+    }
+
+    if (role != Qt::DisplayRole) {
+        return {};
+    }
+
+    if (index.row() == Timestamp) {
+        for (int rowPosition = 0; rowPosition < m_futureDays->rowCount(); ++rowPosition) {
+            // reset time to start from the begining of the day. Otherwise graphs that depends on
+            // this can change the position of points which will lead to broken alignment
+            return QDateTime(m_futureDays->data(m_futureDays->index(rowPosition, index.column()), FutureDays::Timestamp).toDate(), QTime());
+        }
+    } else if (index.row() == Temperature) {
+        // Some forecasts contains day and night forecast. So calculate the mid value using day and night.
+        std::optional<qreal> averageOverallTemp = std::nullopt;
+        for (int rowPosition = 0; rowPosition < m_futureDays->rowCount(); ++rowPosition) {
+            std::optional<qreal> averageTemp = std::nullopt;
+            QVariant highTemp = m_futureDays->data(m_futureDays->index(rowPosition, index.column()), FutureDays::HighTemp);
+            QVariant lowTemp = m_futureDays->data(m_futureDays->index(rowPosition, index.column()), FutureDays::LowTemp);
+
+            // If high and low temperature present then return middle value. Otherwise
+            // return the value which is present;
+            if (highTemp.isValid() && lowTemp.isValid()) {
+                averageTemp = std::midpoint(highTemp.toReal(), lowTemp.toReal());
+            } else if (highTemp.isValid()) {
+                averageTemp = highTemp.toReal();
+            } else if (lowTemp.isValid()) {
+                averageTemp = lowTemp.toReal();
+            }
+
+            if (!averageOverallTemp.has_value() && averageTemp.has_value()) {
+                averageOverallTemp = averageTemp;
+            } else if (averageOverallTemp.has_value() && averageTemp.has_value()) {
+                averageOverallTemp = std::midpoint(averageTemp.value(), averageOverallTemp.value());
+            }
+        }
+        if (averageOverallTemp.has_value()) {
+            return averageOverallTemp.value();
+        }
+    }
+
+    return {};
+}
+
+int FutureDaysPoints::pointsNumber() const
+{
+    return m_futureDays->columnCount();
+}
+
+qreal FutureDaysPoints::minTemp() const
+{
+    return m_minTemp;
+}
+
+qreal FutureDaysPoints::maxTemp() const
+{
+    return m_maxTemp;
+}
+
+QDateTime FutureDaysPoints::minDate() const
+{
+    // It is possible that the day forecast is not present. So check for the night forecast too
+    for (int rowPosition = 0; rowPosition < m_futureDays->rowCount(); ++rowPosition) {
+        QVariant date = m_futureDays->data(m_futureDays->index(rowPosition, 0), FutureDays::Timestamp);
+        if (date.canConvert<QDateTime>()) {
+            // reset time to start from the begining of the day. Otherwise graphs that depends on
+            // this can change the position of points which will lead to broken alignment
+            return QDateTime(date.toDate(), QTime());
+        }
+    }
+    return {};
+}
+
+QDateTime FutureDaysPoints::maxDate() const
+{
+    // It is possible that the day forecast is not present. So check for the night forecast too
+    for (int rowPosition = 0; rowPosition < m_futureDays->rowCount(); ++rowPosition) {
+        QVariant date = m_futureDays->data(m_futureDays->index(rowPosition, m_futureDays->columnCount() - 1), FutureDays::Timestamp);
+        if (date.canConvert<QDateTime>()) {
+            // reset time to start from the begining of the day. Otherwise graphs that depends on
+            // this can change the position of points which will lead to broken alignment
+            return QDateTime(date.toDate(), QTime());
+        }
+    }
+    return {};
+}
+
 FutureDays::FutureDays(QObject *parent)
     : QAbstractTableModel(parent)
     , m_isNightPresent(false)

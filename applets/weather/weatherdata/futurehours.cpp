@@ -74,9 +74,7 @@ QVariant FutureHoursPoints::data(const QModelIndex &index, int role) const
     }
 
     if (index.row() == Timestamp) {
-        // reset time to start from the begining of the day. Otherwise graphs that depends on
-        // this can change the position of points which will lead to broken alignment
-        return QDateTime(m_futureHours->data(m_futureHours->index(index.column()), FutureHours::Timestamp).toDate(), QTime());
+        return m_futureHours->data(m_futureHours->index(index.column()), FutureHours::Timestamp).toDateTime();
     } else if (index.row() == Temperature) {
         QVariant highTemp = m_futureHours->data(m_futureHours->index(index.column()), FutureHours::HighTemp);
         QVariant lowTemp = m_futureHours->data(m_futureHours->index(index.column()), FutureHours::LowTemp);
@@ -104,9 +102,7 @@ QDateTime FutureHoursPoints::minDate() const
 {
     QVariant date = m_futureHours->data(m_futureHours->index(0), FutureHours::Timestamp);
     if (date.canConvert<QDateTime>()) {
-        // reset time to start from the begining of the day. Otherwise graphs that depends on
-        // this can change the position of points which will lead to broken alignment
-        return QDateTime(date.toDate(), QTime());
+        return date.toDateTime();
     }
     return {};
 }
@@ -115,9 +111,7 @@ QDateTime FutureHoursPoints::maxDate() const
 {
     QVariant date = m_futureHours->data(m_futureHours->index(m_futureHours->rowCount() - 1), FutureHours::Timestamp);
     if (date.canConvert<QDateTime>()) {
-        // reset time to start from the begining of the day. Otherwise graphs that depends on
-        // this can change the position of points which will lead to broken alignment
-        return QDateTime(date.toDate(), QTime());
+        return date.toDateTime();
     }
     return {};
 }

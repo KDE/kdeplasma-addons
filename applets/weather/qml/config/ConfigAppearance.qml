@@ -24,7 +24,8 @@ KCM.SimpleKCM {
     property alias cfg_showPressureInTooltip: showPressureInTooltipCheckBox.checked
     property alias cfg_showHumidityInTooltip: showHumidityInTooltipCheckBox.checked
 
-    property alias cfg_showTemperatureGraphForForecast: showTemperatureGraphForForecast.checked
+    property alias cfg_showHourlyTemperatureGraph: showHourlyTemperatureGraph.checked
+    property alias cfg_showDayTemperatureGraph: showDayTemperatureGraph.checked
 
     function setShowTemperature(inCompactMode, inBadge) {
         cfg_showTemperatureInCompactMode = inCompactMode;
@@ -93,9 +94,14 @@ KCM.SimpleKCM {
         }
 
         QQC2.CheckBox {
-            id: showTemperatureGraphForForecast
+            id: showHourlyTemperatureGraph
             Kirigami.FormData.label: i18nc("@label", "Show temperature graph:")
             text: i18nc("@option:check", "Hourly Forecast")
+        }
+
+        QQC2.CheckBox {
+            id: showDayTemperatureGraph
+            text: i18nc("@option:check", "Day Forecast")
         }
     }
 }
