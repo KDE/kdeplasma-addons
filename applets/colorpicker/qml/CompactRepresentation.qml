@@ -57,10 +57,8 @@ DropArea {
     GridLayout {
         id: grid
 
-        width: root.isVertical ? dropArea.buttonSize : implicitWidth
-        height: root.isVertical ? implicitHeight : dropArea.buttonSize
+        anchors.fill: parent
 
-        anchors.centerIn: parent
         columns: root.isVertical ? 1 : (1 + (circleRepeater.count > 0 ? circleRepeater.count + 1 : 0))
         rows: root.isVertical ? (1 + (circleRepeater.count > 0 ? circleRepeater.count + 1 : 0)) : 1
         rowSpacing: 0
@@ -69,7 +67,7 @@ DropArea {
         PlasmaComponents3.ToolButton {
             id: pickColorButton
 
-            Layout.preferredWidth: dropArea.buttonSize
+            Layout.fillWidth: true
             Layout.preferredHeight: dropArea.buttonSize
 
             property Item loadingIndicator: null
@@ -122,7 +120,7 @@ DropArea {
             delegate: ColorCircle {
                 required property int index
 
-                Layout.preferredWidth: dropArea.buttonSize
+                Layout.fillWidth: true
                 Layout.preferredHeight: dropArea.buttonSize
 
                 color: historyModel.count > index ? historyModel.get(index).color : "#00000000" // transparent as fallback
