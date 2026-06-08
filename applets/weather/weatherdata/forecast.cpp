@@ -65,6 +65,11 @@ FutureDays *Forecast::futureDays() const
     return m_futureDays.get();
 }
 
+FutureDaysPoints *Forecast::futureDaysPoints() const
+{
+    return m_futureDaysPoints.get();
+}
+
 FutureHours *Forecast::futureHours() const
 {
     return m_futureHours.get();
@@ -124,6 +129,7 @@ void Forecast::setFutureDays(std::shared_ptr<FutureDays> futureDays)
 {
     if (futureDays->columnCount()) {
         m_futureDays = futureDays;
+        m_futureDaysPoints = std::make_shared<FutureDaysPoints>(futureDays);
     }
 }
 
