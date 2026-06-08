@@ -20,9 +20,11 @@ ColumnLayout {
     property var futureHours: null
     property var futureHoursPoints: null
     property var futureDays: null
+    property var futureDaysPoints: null
     property var metaData: null
 
     property bool showHourlyTemperatureGraph: false
+    property bool showDayTemperatureGraph: false
 
     property int displayTemperatureUnit: 0
 
@@ -81,12 +83,32 @@ ColumnLayout {
             text: i18n("%1 Day Forecast", root.futureDays?.daysNumber)
         }
 
-        DayForecastView {
+        Loader {
             Layout.fillWidth: true
-            Layout.fillHeight: true
-            futureDays: root.futureDays
-            metaData: root.metaData
-            displayTemperatureUnit: root.displayTemperatureUnit
+            sourceComponent: root.showDayTemperatureGraph ? dayForecastGraph : dayForecastView
+        }
+
+        Component {
+            id: dayForecastView
+            DayForecastView {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                futureDays: root.futureDays
+                metaData: root.metaData
+                displayTemperatureUnit: root.displayTemperatureUnit
+            }
+        }
+
+        Component {
+            id: dayForecastGraph
+            DayForecastGraph {
+                Layout.fillWidth: true
+                Layout.fillHeight: true
+                futureDays: root.futureDays
+                futureDaysPoints: root.futureDaysPoints
+                metaData: root.metaData
+                displayTemperatureUnit: root.displayTemperatureUnit
+            }
         }
     }
 

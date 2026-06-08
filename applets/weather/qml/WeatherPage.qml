@@ -15,6 +15,7 @@ Kirigami.ScrollablePage {
     property int status: 0
 
     property bool showHourlyTemperatureGraph: false
+    property bool showDayTemperatureGraph: false
 
     property int invalidUnit: 0
     property int displaySpeedUnit: 0
@@ -26,6 +27,7 @@ Kirigami.ScrollablePage {
     property var futureHours: null
     property var futureHoursPoints: null
     property var futureDays: null
+    property var futureDaysPoints: null
     property var warnings: null
     property var lastObservation: null
     property var metaData: null
@@ -67,8 +69,10 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
 
             showHourlyTemperatureGraph: root.showHourlyTemperatureGraph
+            showDayTemperatureGraph: root.showDayTemperatureGraph
 
             futureDays: root.futureDays
+            futureDaysPoints: root.futureDaysPoints
             futureHours: root.futureHours
             futureHoursPoints: root.futureHoursPoints
             metaData: root.metaData

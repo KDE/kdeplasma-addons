@@ -14,6 +14,7 @@ import QtGraphs as Graphs
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.weatherdata as WeatherData
 
 ColumnLayout {
     id: root
@@ -28,12 +29,11 @@ ColumnLayout {
 
     readonly property real preferredCellWidth: root.preferredIconSize + Kirigami.Units.largeSpacing * 2
     // No extra spacing needed when day and night are shown separately; the horizontal header already provides it.
-    readonly property real preferredCellHeight: root.preferredIconSize + 2 * labelFontMetrics.height + Kirigami.Units.largeSpacing * (2 + (futureDays?.isNightPresent ? 0 : 1))
+    readonly property real preferredCellHeight: 2 * labelFontMetrics.height + Kirigami.Units.largeSpacing * (2 + (futureDays?.isNightPresent ? 0 : 1))
 
     readonly property real minimalSpacing: Kirigami.Units.smallSpacing
 
-    implicitWidth: forecast.contentWidth + verticalHeader.width
-    implicitHeight: forecast.contentHeight + horizontalHeader.height
+    readonly property real preferredGraphHeight: Kirigami.Units.iconSizes.enormous
 
     //Item to get the metrics of the regular font in a PlasmaComponent.Label
     PlasmaComponents.Label {
@@ -49,11 +49,14 @@ ColumnLayout {
 
     Graphs.GraphsView {
         id: forecastGraph
+
+        implicitHeight: root.preferredGraphHeight
+
         Layout.fillHeight: true
         Layout.fillWidth: true
         marginBottom: Kirigami.Units.largeSpacing
         marginTop: Kirigami.Units.largeSpacing
-        marginLeft: root.preferredCellWidth / 2 + forecast.columnSpacing
+        marginLeft: root.preferredCellWidth / 2 + forecast.columnSpacing + verticalHeader.width
         marginRight: root.preferredCellWidth / 2 + forecast.columnSpacing
         clipPlotArea: false
         theme: Graphs.GraphsTheme {
@@ -95,8 +98,11 @@ ColumnLayout {
     }
 
     Item {
+        id: forecastView
         implicitHeight: forecast.implicitHeight + horizontalHeader.height
         implicitWidth: forecast.implicitWidth + verticalHeader.width
+
+        Layout.fillWidth: true
 
         HorizontalHeaderView {
             id: horizontalHeader
@@ -104,14 +110,14 @@ ColumnLayout {
             anchors.top: parent.top
             syncView: forecast
             clip: true
-            textRole: "monthDay"
+            textRole: "timestamp"
             resizableColumns: false
             interactive: false
             // Check if a night entry exists, as the TableView delegate shows a month/weekday label when no night entry is present.
             model: !!root.futureDays && root.futureDays.daysNumber > 1 && root.futureDays.isNightPresent ? root.futureDays : null
 
             delegate: PlasmaComponents.Label {
-                text: model.monthDay ?? model.weekDay ?? ""
+                text: model.timestamp.toLocaleString(Qt.locale(), "ddd") ?? ""
                 textFormat: Text.PlainText
                 horizontalAlignment: Text.AlignHCenter
             }
@@ -139,6 +145,9 @@ ColumnLayout {
 
             interactive: false
 
+            implicitWidth: root.preferredCellWidth * 7
+            implicitHeight: root.preferredCellHeight * (root.futureDays.isNightPresent ? 2 : 1)
+
             anchors.left: verticalHeader.right
             anchors.top: horizontalHeader.bottom
             anchors.right: parent.right
@@ -154,20 +163,16 @@ ColumnLayout {
                 if (isRowLoaded(topRow)) {
                     var rowsHeight = implicitRowHeight(topRow) * rows;
                     neededRowSpacing = Math.max((parent.height - horizontalHeader.height - rowsHeight) / (rows + 1), root.minimalSpacing);
-                    implicitHeight = rowsHeight;
                 } else {
                     //restore default values if none of rows is loaded (which shows that forecast model is empty)
                     neededRowSpacing = 0;
-                    implicitHeight = 0;
                 }
                 //the same for columns as for rows
                 if (isColumnLoaded(leftColumn)) {
                     var columnsWidth = implicitColumnWidth(leftColumn) * columns;
                     neededColumnSpacing = Math.max((parent.width - verticalHeader.width - columnsWidth) / (columns + 1), root.minimalSpacing);
-                    implicitWidth = columnsWidth;
                 } else {
                     neededColumnSpacing = 0;
-                    implicitWidth = 0;
                 }
             }
 
