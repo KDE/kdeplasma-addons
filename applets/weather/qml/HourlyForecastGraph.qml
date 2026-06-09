@@ -89,10 +89,30 @@ PlasmaComponents.ScrollView {
                     id: forecastSeries
                     width: 3
                     pointDelegate: Rectangle {
+                        id: seriesDelegate
+
+                        property real pointValueX
+                        property real pointValueY
+                        property int pointIndex
+
                         width: Kirigami.Units.iconSizes.small
                         height: Kirigami.Units.iconSizes.small
-                        color: Kirigami.Theme.highlightColor
                         radius: width * 0.5
+
+                        color: pointHover.hovered ? Kirigami.Theme.linkColor : Kirigami.Theme.highlightColor
+
+                        HoverHandler {
+                            id: pointHover
+                        }
+
+                        PlasmaCore.ToolTipArea {
+                            anchors.fill: parent
+                            active: pointHover.hovered
+                            mainText: {
+                                let index = root.futureHours.index(seriesDelegate.pointIndex, 0);
+                                return root.futureHours.data(index, WeatherData.FutureHours.Condition);
+                            }
+                        }
                     }
                 }
                 Graphs.XYModelMapper {
