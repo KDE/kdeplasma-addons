@@ -3,13 +3,13 @@
 #
 # Tamas Szanto <tszanto@interware.hu>, 2009.
 # Kristóf Kiszel <ulysses@kubuntu.org>, 2012, 2014, 2019, 2021.
-# SPDX-FileCopyrightText: 2024, 2025 Kristof Kiszel <ulysses@fsf.hu>
+# SPDX-FileCopyrightText: 2024-2026 Kristof Kiszel <ulysses@fsf.hu>
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2025-05-18 20:31+0200\n"
+"PO-Revision-Date: 2026-06-08 22:28+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.04.1\n"
+"X-Generator: Lokalize 26.04.2\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -40,8 +40,7 @@ msgstr[0] "%1 s"
 msgstr[1] "%1 s"
 
 #: config.qml:13
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Általános"
@@ -92,26 +91,22 @@ msgstr "Folyamatsáv megjelenítése"
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "Időtúllépéskor:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification text:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Értesítés szövege:"
+msgstr "Értesítés megjelenítése:"
 
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Az időzítő lejárt"
 
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgid "Run a command:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
 msgstr "Parancs végrehajtása:"
@@ -120,7 +115,7 @@ msgstr "Parancs végrehajtása:"
 #, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Az időzítő lejárt'"
 
 #: configTimes.qml:22
 #, kde-format
@@ -129,16 +124,13 @@ msgid "Add"
 msgstr "Hozzáadás"
 
 #: configTimes.qml:81
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in plasmoid context "
-#| "menu."
+#, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
 msgstr ""
-"Ha felvesz itt előre megadott időértékeket, azok megjelennek a plasmoid "
-"helyi menüjében."
+"Ha felvesz itt előre megadott időértékeket, azok megjelennek a widget helyi "
+"menüjében."
 
 #: configTimes.qml:119
 #, kde-format
