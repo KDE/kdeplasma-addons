@@ -81,10 +81,37 @@ ColumnLayout {
             id: forecastSeries
             width: 3
             pointDelegate: Rectangle {
+                id: seriesDelegate
+
+                property real pointValueX
+                property real pointValueY
+                property int pointIndex
+
                 width: Kirigami.Units.iconSizes.small
                 height: Kirigami.Units.iconSizes.small
-                color: Kirigami.Theme.highlightColor
                 radius: width * 0.5
+
+                color: pointHover.hovered ? Kirigami.Theme.linkColor : Kirigami.Theme.highlightColor
+
+                HoverHandler {
+                    id: pointHover
+                }
+
+                PlasmaCore.ToolTipArea {
+                    anchors.fill: parent
+                    active: pointHover.hovered
+                    mainText: {
+                        var dayCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Day, seriesDelegate.pointIndex), WeatherData.FutureDays.Condition);
+                        var nightCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Night, seriesDelegate.pointIndex), WeatherData.FutureDays.Condition);
+                        if (!!dayCondition && !!nightCondition) {
+                            return i18nc("Weather condition summary string", "Day: %1 \nNight: %2", dayCondition, nightCondition);
+                        } else if (!!dayCondition || !!nightCondition) {
+                            return dayCondition || nightCondition;
+                        } else {
+                            return "";
+                        }
+                    }
+                }
             }
         }
         Graphs.XYModelMapper {
@@ -92,8 +119,8 @@ ColumnLayout {
             model: root.futureDaysPoints
             series: forecastSeries
             count: root.futureDaysPoints.pointsNumber
-            xSection: WeatherData.FutureHoursPoints.Timestamp
-            ySection: WeatherData.FutureHoursPoints.Temperature
+            xSection: WeatherData.FutureDaysPoints.Timestamp
+            ySection: WeatherData.FutureDaysPoints.Temperature
         }
     }
 
