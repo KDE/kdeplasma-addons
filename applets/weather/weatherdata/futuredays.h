@@ -107,6 +107,13 @@ public:
 
     Q_ENUM(NextDaysModels)
 
+    enum Columns {
+        Day = 0,
+        Night,
+    };
+
+    Q_ENUM(Columns)
+
     explicit FutureDays(QObject *parent = nullptr);
     ~FutureDays() override;
 
@@ -128,11 +135,6 @@ private:
     int daysNumber() const;
 
 private:
-    enum Columns {
-        Day = 0,
-        Night,
-    };
-
     QList<FutureDayForecast> m_nextDays;
 
     bool m_isNightPresent;
@@ -141,6 +143,13 @@ private:
     int m_daysNumber;
 
     int m_totalRows;
+};
+
+struct FutureDaysForeign {
+    Q_GADGET
+    QML_FOREIGN(FutureDays)
+    QML_NAMED_ELEMENT(FutureDays)
+    QML_UNCREATABLE("Enums only")
 };
 
 class PLASMAWEATHERDATA_EXPORT FutureDaysPoints : public QAbstractTableModel
