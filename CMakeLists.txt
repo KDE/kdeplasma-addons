@@ -111,6 +111,13 @@ set_package_properties(Qt6Quick3D PROPERTIES
     TYPE RUNTIME
 )
 
+find_package(Qt6Graphs CONFIG)
+set_package_properties(Qt6Graphs PROPERTIES
+    DESCRIPTION "QtGraphs QML plugin for data visualization"
+    PURPOSE "Required for weather applet"
+    TYPE RUNTIME
+)
+
 find_package(Corrosion REQUIRED)
 
 add_definitions(
