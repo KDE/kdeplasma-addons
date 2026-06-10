@@ -58,6 +58,7 @@ Rectangle {
         spacing: Math.round(Kirigami.Units.smallSpacing / 2)
 
         PlasmaComponents.Label {
+            visible: root.showTimeHeader
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             horizontalAlignment: Text.AlignHCenter
             text: Qt.formatDateTime(root.timestamp, root.timeFormat)
