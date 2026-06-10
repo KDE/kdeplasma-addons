@@ -26,6 +26,7 @@ ColumnLayout {
     property bool showHourlyTemperatureGraph: false
     property bool showDayTemperatureGraph: false
 
+    property int invalidUnit: 0
     property int displayTemperatureUnit: 0
 
     property string forecastViewTitle: (!!futureDays && futureDays.daysNumber > 0) ? i18ncp("Forecast period timeframe", "1 Day", "%1 Days", futureDays.daysNumber) : ""
@@ -55,6 +56,8 @@ ColumnLayout {
 
                 futureHours: root.futureHours
                 metaData: root.metaData
+
+                invalidUnit: root.invalidUnit
                 displayTemperatureUnit: root.displayTemperatureUnit
             }
         }
@@ -68,6 +71,7 @@ ColumnLayout {
                 futureHours: root.futureHours
                 futureHoursPoints: root.futureHoursPoints
                 metaData: root.metaData
+
                 displayTemperatureUnit: root.displayTemperatureUnit
             }
         }
@@ -95,6 +99,8 @@ ColumnLayout {
                 Layout.fillHeight: true
                 futureDays: root.futureDays
                 metaData: root.metaData
+
+                invalidUnit: root.invalidUnit
                 displayTemperatureUnit: root.displayTemperatureUnit
             }
         }
