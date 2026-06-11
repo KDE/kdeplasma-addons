@@ -29,80 +29,32 @@ ColumnLayout {
 
     readonly property real preferredGraphHeight: Kirigami.Units.iconSizes.enormous
 
-    Graphs.GraphsView {
+    ForecastGraph {
         id: forecastGraph
 
         implicitHeight: root.preferredGraphHeight
 
         Layout.fillHeight: true
         Layout.fillWidth: true
-        marginBottom: Kirigami.Units.largeSpacing
-        marginTop: Kirigami.Units.largeSpacing
+
         marginLeft: forecast.implicitColumnWidth(forecast.leftColumn) / 2 + forecast.neededColumnSpacing + verticalHeader.width
         marginRight: forecast.implicitColumnWidth(forecast.rightColumn) / 2 + forecast.neededColumnSpacing
-        clipPlotArea: false
-        theme: Graphs.GraphsTheme {
-            gridVisible: false
-            backgroundVisible: false
-            plotAreaBackgroundVisible: false
-            seriesColors: [Kirigami.Theme.highlightColor]
-        }
-        axisX: Graphs.DateTimeAxis {
-            min: root.futureDaysPoints.minDate
-            max: root.futureDaysPoints.maxDate
-            visible: false
-            lineVisible: false
-        }
-        axisY: Graphs.ValueAxis {
-            min: root.futureDaysPoints.minTemp
-            max: root.futureDaysPoints.maxTemp
-            visible: false
-            lineVisible: false
-        }
-        Graphs.LineSeries {
-            id: forecastSeries
-            width: 3
-            pointDelegate: Rectangle {
-                id: seriesDelegate
 
-                property real pointValueX
-                property real pointValueY
-                property int pointIndex
+        pointsModel: root.futureDaysPoints
 
-                width: Kirigami.Units.iconSizes.small
-                height: Kirigami.Units.iconSizes.small
-                radius: width * 0.5
+        xSection: WeatherData.FutureDaysPoints.Timestamp
+        ySection: WeatherData.FutureDaysPoints.Temperature
 
-                color: pointHover.hovered ? Kirigami.Theme.linkColor : Kirigami.Theme.highlightColor
-
-                HoverHandler {
-                    id: pointHover
-                }
-
-                PlasmaCore.ToolTipArea {
-                    anchors.fill: parent
-                    active: pointHover.hovered
-                    mainText: {
-                        var dayCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Day, seriesDelegate.pointIndex), WeatherData.FutureDays.Condition);
-                        var nightCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Night, seriesDelegate.pointIndex), WeatherData.FutureDays.Condition);
-                        if (!!dayCondition && !!nightCondition) {
-                            return i18nc("Weather condition summary string", "Day: %1 \nNight: %2", dayCondition, nightCondition);
-                        } else if (!!dayCondition || !!nightCondition) {
-                            return dayCondition || nightCondition;
-                        } else {
-                            return "";
-                        }
-                    }
-                }
+        toolTipTextFunction: function (pointIndex) {
+            var dayCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Day, pointIndex), WeatherData.FutureDays.Condition);
+            var nightCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Night, pointIndex), WeatherData.FutureDays.Condition);
+            if (!!dayCondition && !!nightCondition) {
+                return i18nc("Weather condition summary string", "Day: %1 \nNight: %2", dayCondition, nightCondition);
+            } else if (!!dayCondition || !!nightCondition) {
+                return dayCondition || nightCondition;
+            } else {
+                return "";
             }
-        }
-        Graphs.XYModelMapper {
-            orientation: Qt.Horizontal
-            model: root.futureDaysPoints
-            series: forecastSeries
-            count: root.futureDaysPoints.pointsNumber
-            xSection: WeatherData.FutureDaysPoints.Timestamp
-            ySection: WeatherData.FutureDaysPoints.Temperature
         }
     }
 
