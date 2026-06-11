@@ -114,6 +114,8 @@ ColumnLayout {
                 futureDays: root.futureDays
                 futureDaysPoints: root.futureDaysPoints
                 metaData: root.metaData
+
+                invalidUnit: root.invalidUnit
                 displayTemperatureUnit: root.displayTemperatureUnit
             }
         }
