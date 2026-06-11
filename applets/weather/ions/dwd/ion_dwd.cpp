@@ -357,15 +357,70 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
     }
     weatherMap = weatherMap.first().toMap(); // Mind the .first(). It needs guarding against isEmpty.
     if (!weatherMap.isEmpty()) {
-        // Forecast data
+        // Hourly Forecast data
+        const QVariantMap forecast1Map = weatherMap[u"forecast1"_s].toMap();
+
+        const qlonglong start = forecast1Map[u"start"_s].toLongLong();
+        const qlonglong timeStep = forecast1Map[u"timeStep"_s].toLongLong();
+
+        const QVariantList tempList = forecast1Map[u"temperature"_s].toList();
+        const QVariantList precipList = forecast1Map[u"precipitationTotal"_s].toList();
+        const QVariantList iconList = forecast1Map[u"icon1h"_s].toList();
+        const QVariantList windSpeedList = forecast1Map[u"windSpeed"_s].toList();
+        const QVariantList windDirectionList = forecast1Map[u"windDirection"_s].toList();
+        const QVariantList isDayList = forecast1Map[u"isDay"_s].toList();
+
+        QList<WeatherData::HourlyForecastInfo> &hourlyForecasts = m_weatherData->hourlyForecasts;
+        hourlyForecasts.clear();
+
+        const qsizetype count = std::min(tempList.size(), iconList.size());
+
+        hourlyForecasts.reserve(count);
+
+        for (qsizetype hourNumber = 0; hourNumber < count; ++hourNumber) {
+            WeatherData::HourlyForecastInfo info;
+
+            const qlonglong timestamp = start + (static_cast<qlonglong>(hourNumber) * timeStep);
+            info.period = QDateTime::fromMSecsSinceEpoch(timestamp);
+
+            if (hourNumber < tempList.size()) {
+                info.tempHigh = parseNumber(tempList[hourNumber]);
+            }
+
+            if (hourNumber < precipList.size()) {
+                info.precipitation = precipList[hourNumber].toInt();
+            }
+
+            if (hourNumber < iconList.size()) {
+                bool isDay = true;
+                if (hourNumber < isDayList.size()) {
+                    isDay = isDayList[hourNumber].toBool();
+                }
+                int iconCode = iconList.value(hourNumber).toInt();
+                info.iconName = getWeatherIcon(isDay ? dayIcons() : nightIcons(), QString::number(iconCode));
+            }
+
+            if (hourNumber < windSpeedList.size()) {
+                info.windSpeed = parseNumber(windSpeedList[hourNumber]);
+            }
+
+            if (hourNumber < windDirectionList.size()) {
+                QString windDirection = roundWindDirections(windDirectionList[hourNumber].toInt());
+                info.windDirection = getWindDirectionIcon(windIcons(), windDirection);
+            }
+
+            hourlyForecasts.append(info);
+        }
+
+        // Day Forecast data
         QVariantList daysList = weatherMap[u"days"_s].toList();
 
-        QList<WeatherData::ForecastInfo> &forecasts = m_weatherData->forecasts;
+        QList<WeatherData::DayForecastInfo> &dayForecasts = m_weatherData->dayForecasts;
 
         WeatherData &weatherData = *m_weatherData;
 
         // Flush out the old forecasts when updating.
-        forecasts.clear();
+        dayForecasts.clear();
 
         int dayNumber = 0;
 
@@ -374,12 +429,12 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
             QString period = dayMap[u"dayDate"_s].toString();
             QString cond = dayMap[u"icon"_s].toString();
 
-            WeatherData::ForecastInfo forecast;
-            forecast.period = QDateTime::fromString(period, u"yyyy-MM-dd"_s);
-            forecast.tempHigh = parseNumber(dayMap[u"temperatureMax"_s]);
-            forecast.tempLow = parseNumber(dayMap[u"temperatureMin"_s]);
-            forecast.precipitation = dayMap[u"precipitation"_s].toInt();
-            forecast.iconName = getWeatherIcon(dayIcons(), cond);
+            WeatherData::DayForecastInfo dayForecast;
+            dayForecast.period = QDateTime::fromString(period, u"yyyy-MM-dd"_s);
+            dayForecast.tempHigh = parseNumber(dayMap[u"temperatureMax"_s]);
+            dayForecast.tempLow = parseNumber(dayMap[u"temperatureMin"_s]);
+            dayForecast.precipitation = dayMap[u"precipitation"_s].toInt();
+            dayForecast.iconName = getWeatherIcon(dayIcons(), cond);
 
             if (dayNumber == 0) {
                 // These alternative measurements are used, when the stations doesn't have it's own measurements, uses forecast data from the current day
@@ -393,7 +448,7 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
                 weatherData.sunsetTime = parseDateFromMSecs(dayMap[u"sunset"_s].toLongLong());
             }
 
-            forecasts.append(forecast);
+            dayForecasts.append(dayForecast);
 
             dayNumber++;
             // Only get the next 7 days (including today)
@@ -479,6 +534,14 @@ void DWDIon::updateWeather()
 {
     qCDebug(WEATHER::ION::DWD) << "Updating weather";
 
+    QDateTime observationTimestamp;
+
+    if (!m_weatherData->observationDateTime.isNull()) {
+        observationTimestamp = m_weatherData->observationDateTime;
+    } else {
+        observationTimestamp = QDateTime::currentDateTime();
+    }
+
     auto forecast = std::make_shared<Forecast>();
 
     Station station;
@@ -505,14 +568,10 @@ void DWDIon::updateWeather()
 
     LastObservation lastObservation;
 
-    if (!m_weatherData->observationDateTime.isNull()) {
-        lastObservation.setObservationTimestamp(m_weatherData->observationDateTime);
-    } else {
-        lastObservation.setObservationTimestamp(QDateTime::currentDateTime());
-    }
+    lastObservation.setObservationTimestamp(observationTimestamp);
 
     if (!m_weatherData->condIconNumber.isEmpty()) {
-        lastObservation.setConditionIcon(getWeatherIcon(isNightTime(*m_weatherData) ? nightIcons() : dayIcons(), m_weatherData->condIconNumber));
+        lastObservation.setConditionIcon(getWeatherIcon(isNightTime(observationTimestamp) ? nightIcons() : dayIcons(), m_weatherData->condIconNumber));
     }
 
     if (!qIsNaN(m_weatherData->temperature)) {
@@ -548,11 +607,30 @@ void DWDIon::updateWeather()
 
     forecast->setLastObservation(lastObservation);
 
-    if (!m_weatherData->forecasts.isEmpty()) {
+    if (!m_weatherData->hourlyForecasts.isEmpty()) {
+        auto futureHours = std::make_shared<FutureHours>();
+
+        int hours = 0;
+        for (const auto &hourForecast : m_weatherData->hourlyForecasts) {
+            FutureHourForecast futureHour(hourForecast.period);
+
+            futureHour.setConditionIcon(hourForecast.iconName);
+            futureHour.setHighTemp(hourForecast.tempHigh);
+            futureHour.setLowTemp(hourForecast.tempLow);
+
+            futureHours->addHour(futureHour);
+            ++hours;
+        }
+        qCDebug(WEATHER::ION::DWD) << "Total forecast hours: " << hours;
+
+        forecast->setFutureHours(futureHours);
+    }
+
+    if (!m_weatherData->dayForecasts.isEmpty()) {
         auto futureDays = std::make_shared<FutureDays>();
 
         int days = 0;
-        for (const auto &dayForecast : m_weatherData->forecasts) {
+        for (const auto &dayForecast : m_weatherData->dayForecasts) {
             FutureDayForecast futureDay(dayForecast.period);
 
             FutureForecast futureForecast;
@@ -644,14 +722,14 @@ QString DWDIon::camelCaseString(const QString &text) const
     return result;
 }
 
-bool DWDIon::isNightTime(const WeatherData &weatherData) const
+bool DWDIon::isNightTime(const QDateTime &dateTime) const
 {
-    if (weatherData.sunriseTime.isNull() || weatherData.sunsetTime.isNull()) {
+    if (m_weatherData->sunriseTime.isNull() || m_weatherData->sunsetTime.isNull()) {
         // default to daytime icons if we're missing sunrise/sunset times
         return false;
     }
 
-    return weatherData.observationDateTime < weatherData.sunriseTime || weatherData.observationDateTime > weatherData.sunsetTime;
+    return dateTime < m_weatherData->sunriseTime || dateTime > m_weatherData->sunsetTime;
 }
 
 #include "ion_dwd.moc"
