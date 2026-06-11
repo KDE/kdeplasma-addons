@@ -888,11 +888,3 @@ msgstr "很高"
 #, kde-format
 msgid "Extreme"
 msgstr "极高"
-
-#~ msgctxt "Short for Today"
-#~ msgid "Today"
-#~ msgstr "今天"
-
-#~ msgctxt "Short for Tonight"
-#~ msgid "Tonight"
-#~ msgstr "今晚"

@@ -913,10 +913,3 @@ msgstr ""
 #, kde-format
 msgid "Extreme"
 msgstr ""
-
-#, fuzzy
-#~| msgctxt "Time of the day (from the duple Day/Night)"
-#~| msgid "Night"
-#~ msgctxt "Short for Tonight"
-#~ msgid "Tonight"
-#~ msgstr "Natt"
