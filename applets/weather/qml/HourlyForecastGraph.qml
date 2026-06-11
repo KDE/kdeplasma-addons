@@ -23,6 +23,7 @@ PlasmaComponents.ScrollView {
     property var futureHoursPoints: null
     property var metaData: null
 
+    property int invalidUnit: 0
     property int displayTemperatureUnit: 0
 
     readonly property real minimalSpacing: Kirigami.Units.smallSpacing
@@ -31,8 +32,16 @@ PlasmaComponents.ScrollView {
 
     PlasmaComponents.ScrollBar.vertical.policy: PlasmaComponents.ScrollBar.AlwaysOff
 
+    ScrollBar.vertical: ScrollBar {
+        id: scrollBar
+        parent: root.parent
+        anchors.top: root.top
+        anchors.left: root.right
+        anchors.bottom: root.bottom
+    }
+
     implicitWidth: (forecastInfo.contentWidth / forecastInfo.count) * 7
-    implicitHeight: forecastInfo.implicitHeight + preferredGraphHeight
+    implicitHeight: forecastInfo.implicitHeight + preferredGraphHeight + scrollBar.implicitHeight
 
     focus: true
 
@@ -48,7 +57,7 @@ PlasmaComponents.ScrollView {
                 Layout.fillWidth: true
                 Layout.margins: root.minimalSpacing
 
-                marginLeft: forecastInfo.implicitWidth / (forecastInfo.count * 2)
+                marginLeft: forecastInfo.contentWidth / (forecastInfo.count * 2)
                 marginRight: marginLeft
 
                 pointsModel: root.futureHoursPoints
@@ -62,37 +71,22 @@ PlasmaComponents.ScrollView {
                 }
             }
 
-            ListView {
+            HourlyForecastList {
                 id: forecastInfo
-                Layout.fillWidth: true
+
+                showConditionIcon: false
+                showBackground: false
+
                 Layout.margins: root.minimalSpacing
-                model: root.futureHours
-                interactive: false
-
-                clip: false
-
-                implicitWidth: contentWidth
-                implicitHeight: contentHeight
-
-                contentWidth: contentItem.childrenRect.width
-                contentHeight: contentItem.childrenRect.height
-
-                orientation: ListView.Horizontal
+                Layout.fillWidth: true
 
                 spacing: root.minimalSpacing
 
-                delegate: ForecastDelegate {
-                    showBackground: false
-                    showConditionIcon: false
-                    hasProbability: root.futureHours?.hasProbability
-                    temperatureUnit: root.metaData?.temperatureUnit || root.invalidUnit
-                    displayTemperatureUnit: root.displayTemperatureUnit
-                    timeFormat: {
-                        const format = Qt.locale().timeFormat(Locale.ShortFormat);
-                        const usesAmPm = format.includes("Ap");
-                        return usesAmPm ? "h AP" : "HH:mm";
-                    }
-                }
+                metaData: root.metaData
+                forecastModel: root.futureHours
+
+                invalidUnit: root.invalidUnit
+                displayTemperatureUnit: root.displayTemperatureUnit
             }
         }
     }
