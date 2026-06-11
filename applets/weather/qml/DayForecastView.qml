@@ -22,6 +22,16 @@ Item {
     property int invalidUnit: 0
     property int displayTemperatureUnit: 0
 
+    property bool showConditionIcon: true
+    property bool showBackground: true
+
+    property alias rowHeight: forecast.rowHeight
+    property alias columnWidth: forecast.columnWidth
+    property alias rowSpacing: forecast.rowSpacing
+    property alias columnSpacing: forecast.columnSpacing
+    property alias horizontalHeaderHeight: horizontalHeader.implicitHeight
+    property alias verticalHeaderWidth: verticalHeader.implicitWidth
+
     readonly property real minimalSpacing: Kirigami.Units.smallSpacing
 
     implicitWidth: forecast.contentWidth + minimalSpacing + verticalHeader.width
@@ -66,6 +76,9 @@ Item {
     TableView {
         id: forecast
 
+        property real columnWidth: implicitColumnWidth(leftColumn)
+        property real rowHeight: implicitRowHeight(topRow)
+
         interactive: false
 
         anchors.left: verticalHeader.right
@@ -81,7 +94,8 @@ Item {
         onLayoutChanged: {
             //check if row loaded before calculating row height to prevent rows from being shown incorrectly
             if (isRowLoaded(topRow)) {
-                var rowsHeight = implicitRowHeight(topRow) * rows;
+                rowHeight = implicitRowHeight(topRow);
+                var rowsHeight = rowHeight * rows;
                 neededRowSpacing = Math.max((parent.height - horizontalHeader.height - rowsHeight) / (rows + 1), root.minimalSpacing);
                 implicitHeight = rowsHeight;
             } else {
@@ -91,7 +105,8 @@ Item {
             }
             //the same for columns as for rows
             if (isColumnLoaded(leftColumn)) {
-                var columnsWidth = implicitColumnWidth(leftColumn) * columns;
+                columnWidth = implicitColumnWidth(leftColumn);
+                var columnsWidth = columnWidth * columns;
                 neededColumnSpacing = Math.max((parent.width - verticalHeader.width - columnsWidth) / (columns + 1), root.minimalSpacing);
                 implicitWidth = columnsWidth;
             } else {
@@ -112,7 +127,8 @@ Item {
         columnSpacing: neededColumnSpacing
 
         delegate: ForecastDelegate {
-            showConditionIcon: true
+            showBackground: root.showBackground
+            showConditionIcon: root.showConditionIcon
             showTimeHeader: !root.futureDays?.isNightPresent
             hasProbability: root.futureDays?.hasProbability
             temperatureUnit: root.metaData?.temperatureUnit || root.invalidUnit
