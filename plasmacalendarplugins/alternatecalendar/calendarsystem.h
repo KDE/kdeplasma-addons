@@ -34,6 +34,7 @@ enum System : int {
     IslamicCivil,
     IslamicUmalqura,
     Vietnamese,
+    Ethiopian,
 };
 Q_ENUM_NS(System)
 };
@@ -85,6 +86,10 @@ static const std::map<QString /* id */, CalendarSystemItem> s_calendarMap{
     {
         QStringLiteral("Vietnamese"),
         {CalendarSystem::Vietnamese, QStringLiteral("Vietnamese"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Vietnamese Lunar Calendar")}
+    },
+    {
+        QStringLiteral("Ethiopian"),
+        {CalendarSystem::Ethiopian, QStringLiteral("Ethiopian"), i18ndc("plasma_calendar_alternatecalendar", "@item:inlist", "Ethiopian Calendar")}
     },
 };
 // clang-format on

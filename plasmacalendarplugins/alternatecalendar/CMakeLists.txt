@@ -23,6 +23,7 @@ if(${HAVE_ICU})
         provider/hebrewcalendar.cpp
         provider/indiancalendar.cpp
         provider/islamiccalendar.cpp
+        provider/ethiopiancalendar.cpp
         provider/solarutils.h
         provider/vietnamesecalendar.cpp
     )
