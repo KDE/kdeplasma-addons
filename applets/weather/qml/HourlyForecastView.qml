@@ -31,44 +31,25 @@ PlasmaComponents.ScrollView {
 
     focus: true
 
-    contentItem: ListView {
+    ScrollBar.vertical: ScrollBar {
+        id: scrollBar
+        parent: root.parent
+        anchors.top: root.top
+        anchors.left: root.right
+        anchors.bottom: root.bottom
+    }
+
+    contentItem: HourlyForecastList {
         id: forecasts
-
-        interactive: false
-
-        model: root.futureHours
-
-        clip: true
 
         anchors.margins: root.minimalSpacing
 
         spacing: root.minimalSpacing
 
-        orientation: ListView.Horizontal
+        metaData: root.metaData
+        forecastModel: root.futureHours
 
-        implicitWidth: contentWidth + root.minimalSpacing
-        implicitHeight: contentHeight + root.minimalSpacing
-
-        contentWidth: contentItem.childrenRect.width
-        contentHeight: contentItem.childrenRect.height
-
-        ScrollBar.vertical: ScrollBar {
-            id: scrollBar
-            parent: forecasts.parent
-            anchors.top: forecasts.top
-            anchors.left: forecasts.right
-            anchors.bottom: forecasts.bottom
-        }
-
-        delegate: ForecastDelegate {
-            hasProbability: root.futureHours?.hasProbability
-            temperatureUnit: root.metaData?.temperatureUnit || root.invalidUnit
-            displayTemperatureUnit: root.displayTemperatureUnit
-            timeFormat: {
-                const format = Qt.locale().timeFormat(Locale.ShortFormat);
-                const usesAmPm = format.includes("Ap");
-                return usesAmPm ? "h AP" : "HH:mm";
-            }
-        }
+        invalidUnit: root.invalidUnit
+        displayTemperatureUnit: root.displayTemperatureUnit
     }
 }

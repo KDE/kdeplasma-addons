@@ -72,6 +72,7 @@ ColumnLayout {
                 futureHoursPoints: root.futureHoursPoints
                 metaData: root.metaData
 
+                invalidUnit: root.invalidUnit
                 displayTemperatureUnit: root.displayTemperatureUnit
             }
         }
