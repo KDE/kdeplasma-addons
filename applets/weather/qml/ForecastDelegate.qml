@@ -26,11 +26,11 @@ Rectangle {
     required property int temperatureUnit
 
     required property date timestamp
-    required property string conditionIcon
-    required property string condition
-    required property real highTemp
-    required property real lowTemp
-    required property real conditionProbability
+    required property var conditionIcon
+    required property var condition
+    required property var highTemp
+    required property var lowTemp
+    required property var conditionProbability
 
     color: showBackground ? Qt.alpha(Kirigami.Theme.highlightColor, 0.08) : "transparent"
     radius: Kirigami.Units.cornerRadius
