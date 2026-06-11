@@ -113,11 +113,6 @@ QVariant FutureDaysPoints::data(const QModelIndex &index, int role) const
     return {};
 }
 
-int FutureDaysPoints::pointsNumber() const
-{
-    return m_futureDays->columnCount();
-}
-
 qreal FutureDaysPoints::minTemp() const
 {
     return m_minTemp;
@@ -309,11 +304,9 @@ void FutureDays::addDay(const FutureDayForecast &forecast)
 
 void FutureDays::addDays(const QList<FutureDayForecast> &forecasts)
 {
-    beginResetModel();
     for (const auto &forecast : forecasts) {
         addDay(forecast);
     }
-    endResetModel();
 }
 
 QString FutureDays::firstDayIcon() const
