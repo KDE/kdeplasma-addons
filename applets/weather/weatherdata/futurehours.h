@@ -118,7 +118,6 @@ class PLASMAWEATHERDATA_EXPORT FutureHoursPoints : public QAbstractTableModel
     Q_OBJECT
     QML_ANONYMOUS
 
-    Q_PROPERTY(int pointsNumber READ pointsNumber CONSTANT)
     Q_PROPERTY(QDateTime minDate READ minDate CONSTANT)
     Q_PROPERTY(QDateTime maxDate READ maxDate CONSTANT)
     Q_PROPERTY(qreal minTemp READ minTemp CONSTANT)
@@ -142,7 +141,6 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
 
 private:
-    int pointsNumber() const;
     QDateTime minDate() const;
     QDateTime maxDate() const;
     qreal minTemp() const;

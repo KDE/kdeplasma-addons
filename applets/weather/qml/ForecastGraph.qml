@@ -81,10 +81,9 @@ GraphsView {
 
     XYModelMapper {
         orientation: Qt.Horizontal
-        model: root.pointsModel
-        series: forecastSeries
-        count: root.pointsModel.pointsNumber
         xSection: root.xSection
         ySection: root.ySection
+        model: root.pointsModel
+        series: forecastSeries
     }
 }

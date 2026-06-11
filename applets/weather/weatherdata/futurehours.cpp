@@ -93,11 +93,6 @@ QVariant FutureHoursPoints::data(const QModelIndex &index, int role) const
     return {};
 }
 
-int FutureHoursPoints::pointsNumber() const
-{
-    return m_futureHours->rowCount();
-}
-
 QDateTime FutureHoursPoints::minDate() const
 {
     QVariant date = m_futureHours->data(m_futureHours->index(0), FutureHours::Timestamp);
@@ -215,11 +210,9 @@ void FutureHours::addHour(const FutureHourForecast &forecast)
 
 void FutureHours::addHours(const QList<FutureHourForecast> &forecasts)
 {
-    beginResetModel();
     for (const auto &forecast : forecasts) {
         addHour(forecast);
     }
-    endResetModel();
 }
 
 QString FutureHours::firstDayIcon() const
