@@ -43,71 +43,22 @@ PlasmaComponents.ScrollView {
         ColumnLayout {
             id: forecastView
             anchors.fill: parent
-            Graphs.GraphsView {
-                id: forecastGraph
+            ForecastGraph {
                 Layout.fillHeight: true
                 Layout.fillWidth: true
                 Layout.margins: root.minimalSpacing
-                marginBottom: Kirigami.Units.largeSpacing
-                marginTop: Kirigami.Units.largeSpacing
+
                 marginLeft: forecastInfo.implicitWidth / (forecastInfo.count * 2)
                 marginRight: marginLeft
-                clipPlotArea: false
-                theme: Graphs.GraphsTheme {
-                    gridVisible: false
-                    backgroundVisible: false
-                    plotAreaBackgroundVisible: false
-                    seriesColors: [Kirigami.Theme.highlightColor]
-                }
-                axisX: Graphs.DateTimeAxis {
-                    min: root.futureHoursPoints.minDate
-                    max: root.futureHoursPoints.maxDate
-                    visible: false
-                    lineVisible: false
-                }
-                axisY: Graphs.ValueAxis {
-                    min: root.futureHoursPoints.minTemp
-                    max: root.futureHoursPoints.maxTemp
-                    visible: false
-                    lineVisible: false
-                }
-                Graphs.LineSeries {
-                    id: forecastSeries
-                    width: 3
-                    pointDelegate: Rectangle {
-                        id: seriesDelegate
 
-                        property real pointValueX
-                        property real pointValueY
-                        property int pointIndex
+                pointsModel: root.futureHoursPoints
 
-                        width: Kirigami.Units.iconSizes.small
-                        height: Kirigami.Units.iconSizes.small
-                        radius: width * 0.5
+                xSection: WeatherData.FutureHoursPoints.Timestamp
+                ySection: WeatherData.FutureHoursPoints.Temperature
 
-                        color: pointHover.hovered ? Kirigami.Theme.linkColor : Kirigami.Theme.highlightColor
-
-                        HoverHandler {
-                            id: pointHover
-                        }
-
-                        PlasmaCore.ToolTipArea {
-                            anchors.fill: parent
-                            active: pointHover.hovered
-                            mainText: {
-                                let index = root.futureHours.index(seriesDelegate.pointIndex, 0);
-                                return root.futureHours.data(index, WeatherData.FutureHours.Condition);
-                            }
-                        }
-                    }
-                }
-                Graphs.XYModelMapper {
-                    orientation: Qt.Horizontal
-                    model: root.futureHoursPoints
-                    series: forecastSeries
-                    count: root.futureHoursPoints.pointsNumber
-                    xSection: WeatherData.FutureHoursPoints.Timestamp
-                    ySection: WeatherData.FutureHoursPoints.Temperature
+                toolTipTextFunction: function (pointIndex) {
+                    let index = root.futureHours.index(pointIndex, 0);
+                    return root.futureHours.data(index, WeatherData.FutureHours.Condition);
                 }
             }
 
