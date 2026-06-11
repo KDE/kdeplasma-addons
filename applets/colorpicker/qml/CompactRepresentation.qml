@@ -17,10 +17,11 @@ import plasma.applet.org.kde.plasma.colorpicker as ColorPicker
 DropArea {
     id: dropArea
 
-    Layout.minimumWidth: root.isVertical ? Kirigami.Units.iconSizes.small : (grid.width + spacer.implicitWidth)
-    Layout.minimumHeight: root.isVertical ? (grid.height + spacer.implicitHeight) : Kirigami.Units.iconSizes.small
-    Layout.preferredWidth: Layout.minimumWidth
-    Layout.preferredHeight: Layout.minimumHeight
+    Layout.fillHeight: !root.isVertical
+    Layout.fillWidth: root.isVertical
+
+    Layout.minimumWidth: root.isVertical ? 0 : Kirigami.Units.gridUnit * 3
+    Layout.minimumHeight: root.isVertical ? Kirigami.Units.gridUnit * 3 : 0
 
     readonly property real buttonSize: root.isVertical ? parent.width : parent.height
     property bool containsAcceptableDrag: false
