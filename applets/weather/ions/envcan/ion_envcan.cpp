@@ -10,6 +10,7 @@
 
 #include "envcan_debug.h"
 
+#include <KHolidays/SunEvents>
 #include <KIO/TransferJob>
 #include <KLocalizedString>
 #include <KPluginFactory>
@@ -45,14 +46,21 @@ WeatherData::WeatherData()
 {
 }
 
-WeatherData::ForecastInfo::ForecastInfo()
+WeatherData::DayForecastInfo::DayForecastInfo()
     : tempHigh(qQNaN())
     , tempLow(qQNaN())
     , popPrecent(qQNaN())
 {
 }
 
-// ctor, dtor
+WeatherData::HourlyForecastInfo::HourlyForecastInfo()
+    : temp(qQNaN())
+    , lopPrecent(qQNaN())
+    , windSpeed(qQNaN())
+    , gust(qQNaN())
+{
+}
+
 EnvCanadaIon::EnvCanadaIon(QObject *parent, const QVariantList &args)
     : Ion(parent)
 {
@@ -189,6 +197,7 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupForecastIconMappings() con
         // Abbreviated forecast descriptions
         {QStringLiteral("a few flurries"), Flurries},
         {QStringLiteral("a few flurries mixed with ice pellets"), RainSnow},
+        {QStringLiteral("a few flurries or showers"), RainSnow},
         {QStringLiteral("a few flurries or rain showers"), RainSnow},
         {QStringLiteral("a few flurries or thundershowers"), RainSnow},
         {QStringLiteral("a few rain showers or flurries"), RainSnow},
@@ -203,6 +212,7 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupForecastIconMappings() con
         {QStringLiteral("a few wet flurries or rain showers"), RainSnow},
         {QStringLiteral("a mix of sun and cloud"), PartlyCloudyDay},
         {QStringLiteral("cloudy with sunny periods"), PartlyCloudyDay},
+        {QStringLiteral("haze"), Haze},
         {QStringLiteral("partly cloudy"), PartlyCloudyDay},
         {QStringLiteral("mainly cloudy"), PartlyCloudyDay},
         {QStringLiteral("mainly sunny"), FewCloudsDay},
@@ -240,6 +250,10 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupForecastIconMappings() con
         {QStringLiteral("ice pellets mixed with freezing rain"), Hail},
         {QStringLiteral("ice pellets mixed with snow"), Hail},
         {QStringLiteral("ice pellets or snow"), RainSnow},
+        {QStringLiteral("ice pellet"), Hail},
+        {QStringLiteral("ice pellet mixed with freezing rain"), Hail},
+        {QStringLiteral("ice pellet mixed with snow"), Hail},
+        {QStringLiteral("ice pellet or snow"), RainSnow},
         {QStringLiteral("light snow"), LightSnow},
         {QStringLiteral("light snow and blizzard"), LightSnow},
         {QStringLiteral("light snow and blizzard and blowing snow"), Snow},
@@ -378,7 +392,7 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupForecastIconMappings() con
         {QStringLiteral("wet snow mixed with rain"), RainSnow},
         {QStringLiteral("wet snow or rain"), RainSnow},
         {QStringLiteral("windy"), NotAvailable},
-
+        {QStringLiteral("possibility of drizzle mixed with freezing drizzle"), LightRain},
         {QStringLiteral("chance of drizzle mixed with freezing drizzle"), LightRain},
         {QStringLiteral("chance of flurries mixed with ice pellets"), Flurries},
         {QStringLiteral("chance of flurries or ice pellets"), Flurries},
@@ -402,6 +416,7 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupForecastIconMappings() con
         {QStringLiteral("chance of rain mixed with snow"), RainSnow},
         {QStringLiteral("chance of rain or drizzle"), Rain},
         {QStringLiteral("chance of rain or freezing rain"), Rain},
+        {QStringLiteral("chance of freezing rain or rain"), Rain},
         {QStringLiteral("chance of rain or snow"), RainSnow},
         {QStringLiteral("chance of rain showers or flurries"), RainSnow},
         {QStringLiteral("chance of rain showers or wet flurries"), RainSnow},
@@ -430,10 +445,51 @@ QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupForecastIconMappings() con
     };
 }
 
-QMap<QString, Ion::ConditionIcons> const &EnvCanadaIon::conditionIcons() const
+QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupDayForecastIconMappings() const
 {
-    static QMap<QString, ConditionIcons> const condval = setupConditionIconMappings();
-    return condval;
+    auto iconMap = setupForecastIconMappings();
+
+    iconMap.insert(QStringLiteral("a few clouds"), FewCloudsDay);
+    iconMap.insert(QStringLiteral("cloudy periods"), PartlyCloudyDay);
+    iconMap.insert(QStringLiteral("partly cloudy"), PartlyCloudyDay);
+    iconMap.insert(QStringLiteral("mainly cloudy"), PartlyCloudyDay);
+    iconMap.insert(QStringLiteral("mostly cloudy"), PartlyCloudyDay);
+    iconMap.insert(QStringLiteral("chance of drizzle mixed with rain"), ChanceShowersDay);
+    iconMap.insert(QStringLiteral("possibility of drizzle"), ChanceShowersDay);
+    iconMap.insert(QStringLiteral("chance of drizzle"), ChanceShowersDay);
+    iconMap.insert(QStringLiteral("chance of drizzle or rain"), ChanceShowersDay);
+    iconMap.insert(QStringLiteral("chance of flurries"), ChanceSnowDay);
+    iconMap.insert(QStringLiteral("chance of light snow"), ChanceSnowDay);
+    iconMap.insert(QStringLiteral("chance of flurries at times heavy"), ChanceSnowDay);
+    iconMap.insert(QStringLiteral("chance of showers or drizzle"), ChanceShowersDay);
+    iconMap.insert(QStringLiteral("chance of showers"), ChanceShowersDay);
+    iconMap.insert(QStringLiteral("clearing"), ClearDay);
+
+    return iconMap;
+}
+
+QMap<QString, Ion::ConditionIcons> EnvCanadaIon::setupNightForecastIconMappings() const
+{
+    auto iconMap = setupForecastIconMappings();
+
+    iconMap.insert(QStringLiteral("a few clouds"), FewCloudsNight);
+    iconMap.insert(QStringLiteral("cloudy periods"), PartlyCloudyNight);
+    iconMap.insert(QStringLiteral("partly cloudy"), PartlyCloudyNight);
+    iconMap.insert(QStringLiteral("mainly cloudy"), PartlyCloudyNight);
+    iconMap.insert(QStringLiteral("mostly cloudy"), PartlyCloudyNight);
+    iconMap.insert(QStringLiteral("cloudy"), PartlyCloudyNight);
+    iconMap.insert(QStringLiteral("chance of drizzle mixed with rain"), ChanceShowersNight);
+    iconMap.insert(QStringLiteral("possibility of drizzle"), ChanceShowersNight);
+    iconMap.insert(QStringLiteral("chance of drizzle"), ChanceShowersNight);
+    iconMap.insert(QStringLiteral("chance of drizzle or rain"), ChanceShowersNight);
+    iconMap.insert(QStringLiteral("chance of flurries"), ChanceSnowNight);
+    iconMap.insert(QStringLiteral("chance of light snow"), ChanceSnowNight);
+    iconMap.insert(QStringLiteral("chance of flurries at times heavy"), ChanceSnowNight);
+    iconMap.insert(QStringLiteral("chance of showers or drizzle"), ChanceShowersNight);
+    iconMap.insert(QStringLiteral("chance of showers"), ChanceShowersNight);
+    iconMap.insert(QStringLiteral("clearing"), ClearNight);
+
+    return iconMap;
 }
 
 QMap<QString, Ion::ConditionIcons> const &EnvCanadaIon::dayConditionIcons() const
@@ -448,9 +504,15 @@ QMap<QString, Ion::ConditionIcons> const &EnvCanadaIon::nightConditionIcons() co
     return nightval;
 }
 
-QMap<QString, Ion::ConditionIcons> const &EnvCanadaIon::forecastIcons() const
+QMap<QString, Ion::ConditionIcons> const &EnvCanadaIon::dayForecastIcons() const
 {
-    static QMap<QString, ConditionIcons> const foreval = setupForecastIconMappings();
+    static QMap<QString, ConditionIcons> const foreval = setupDayForecastIconMappings();
+    return foreval;
+}
+
+QMap<QString, Ion::ConditionIcons> const &EnvCanadaIon::nightForecastIcons() const
+{
+    static QMap<QString, ConditionIcons> const foreval = setupNightForecastIconMappings();
     return foreval;
 }
 
@@ -779,15 +841,13 @@ void EnvCanadaIon::parseWeatherSite(WeatherData &data, QXmlStreamReader &xml)
             } else if (elementName == QLatin1String("location")) {
                 parseLocations(data, xml);
             } else if (elementName == QLatin1String("warnings")) {
-                // Cleanup warning list on update
-                data.warnings.clear();
                 parseWarnings(data, xml);
             } else if (elementName == QLatin1String("currentConditions")) {
                 parseConditions(data, xml);
             } else if (elementName == QLatin1String("forecastGroup")) {
-                // Clean up forecast list on update
-                data.forecasts.clear();
-                parseWeatherForecast(data, xml);
+                parseDayForecast(data, xml);
+            } else if (elementName == QLatin1String("hourlyForecastGroup")) {
+                parseHourlyForecast(data, xml);
             } else if (elementName == QLatin1String("yesterdayConditions")) {
                 parseYesterdayWeather(data, xml);
             } else if (elementName == QLatin1String("riseSet")) {
@@ -891,7 +951,7 @@ void EnvCanadaIon::parseFloat(float &value, QXmlStreamReader &xml)
     }
 }
 
-void EnvCanadaIon::parseDateTime(WeatherData &data, QXmlStreamReader &xml, std::shared_ptr<WeatherData::WeatherEvent> event)
+void EnvCanadaIon::parseDateTime(WeatherData &data, QXmlStreamReader &xml, bool isDayForecast, std::shared_ptr<WeatherData::WeatherEvent> event)
 {
     Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("dateTime"));
 
@@ -967,7 +1027,11 @@ void EnvCanadaIon::parseDateTime(WeatherData &data, QXmlStreamReader &xml, std::
     } else if (dateType == QLatin1String("observation")) {
         data.observationDateTime = dateTime;
     } else if (dateType == QLatin1String("forecastIssue")) {
-        data.forecastTimestamp = dateTime;
+        if (isDayForecast) {
+            data.dayForecastTimestamp = dateTime;
+        } else {
+            data.hourlyForecastTimestamp = dateTime;
+        }
     } else if (dateType == QLatin1String("sunrise")) {
         data.sunriseTimestamp = dateTime;
     } else if (dateType == QLatin1String("sunset")) {
@@ -1150,7 +1214,7 @@ void EnvCanadaIon::parseWarnings(WeatherData &data, QXmlStreamReader &xml)
 
         if (xml.isStartElement()) {
             if (elementName == QLatin1String("dateTime")) {
-                parseDateTime(data, xml, warning);
+                parseDateTime(data, xml, false, warning);
                 if (!warning->timestamp.isValid() && !warning->url.isEmpty()) {
                     data.warnings.append(warning);
                     warning = std::make_shared<WeatherData::WeatherEvent>();
@@ -1169,9 +1233,99 @@ void EnvCanadaIon::parseWarnings(WeatherData &data, QXmlStreamReader &xml)
     }
 }
 
-void EnvCanadaIon::parseWeatherForecast(WeatherData &data, QXmlStreamReader &xml)
+void EnvCanadaIon::parseHourlyForecast(WeatherData &data, QXmlStreamReader &xml)
 {
-    auto forecast = std::make_shared<WeatherData::ForecastInfo>();
+    Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("hourlyForecastGroup"));
+
+    while (!xml.atEnd()) {
+        xml.readNext();
+
+        const auto elementName = xml.name();
+
+        if (xml.isEndElement() && elementName == QLatin1String("hourlyForecastGroup")) {
+            break;
+        }
+
+        if (!xml.isStartElement()) {
+            continue;
+        }
+
+        if (elementName == QLatin1String("dateTime")) {
+            // forecastIssue timestamp for the hourly forecast set
+            parseDateTime(data, xml, true);
+            continue;
+        }
+
+        if (elementName != QLatin1String("hourlyForecast")) {
+            parseUnknownElement(xml);
+            continue;
+        }
+
+        auto forecast = std::make_shared<WeatherData::HourlyForecastInfo>();
+
+        const QString dateTimeUtc = xml.attributes().value(u"dateTimeUTC"_s).toString();
+        forecast->forecastTimestamp = QDateTime::fromString(dateTimeUtc, QStringLiteral("yyyyMMddHHmm"));
+
+        while (!xml.atEnd()) {
+            xml.readNext();
+
+            const auto childName = xml.name();
+
+            if (xml.isEndElement() && childName == QLatin1String("hourlyForecast")) {
+                break;
+            }
+
+            if (!xml.isStartElement()) {
+                continue;
+            }
+
+            if (childName == QLatin1String("condition")) {
+                forecast->forecastSummary = xml.readElementText().trimmed();
+                if (isNightTime(forecast->forecastTimestamp, data.stationLatitude, data.stationLongitude)) {
+                    forecast->iconName = getWeatherIcon(nightForecastIcons(), forecast->forecastSummary.toLower());
+                } else {
+                    forecast->iconName = getWeatherIcon(dayForecastIcons(), forecast->forecastSummary.toLower());
+                }
+            } else if (childName == QLatin1String("temperature")) {
+                parseFloat(forecast->temp, xml);
+            } else if (childName == QLatin1String("lop")) {
+                parseFloat(forecast->lopPrecent, xml);
+            } else if (childName == QLatin1String("relativeHumidity")) {
+                forecast->forecastHumidity = xml.readElementText().toInt();
+            } else if (childName == QLatin1String("wind")) {
+                while (!xml.atEnd()) {
+                    xml.readNext();
+
+                    if (xml.isEndElement() && xml.name() == QLatin1String("wind")) {
+                        break;
+                    }
+
+                    if (!xml.isStartElement()) {
+                        continue;
+                    }
+
+                    if (xml.name() == QLatin1String("direction")) {
+                        forecast->windDirection = xml.readElementText().trimmed();
+                    } else if (xml.name() == QLatin1String("speed")) {
+                        forecast->windSpeed = xml.readElementText().trimmed().toDouble();
+                    } else if (xml.name() == QLatin1String("gust")) {
+                        forecast->gust = xml.readElementText().trimmed().toDouble();
+                    } else {
+                        parseUnknownElement(xml);
+                    }
+                }
+
+            } else {
+                parseUnknownElement(xml);
+            }
+        }
+
+        data.hourlyForecasts.append(forecast);
+    }
+}
+
+void EnvCanadaIon::parseDayForecast(WeatherData &data, QXmlStreamReader &xml)
+{
     Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("forecastGroup"));
 
     while (!xml.atEnd()) {
@@ -1189,8 +1343,7 @@ void EnvCanadaIon::parseWeatherForecast(WeatherData &data, QXmlStreamReader &xml
             } else if (elementName == QLatin1String("regionalNormals")) {
                 parseRegionalNormals(data, xml);
             } else if (elementName == QLatin1String("forecast")) {
-                parseForecast(data, xml, forecast);
-                forecast = std::make_shared<WeatherData::ForecastInfo>();
+                parseForecast(data, xml);
             } else {
                 parseUnknownElement(xml);
             }
@@ -1225,9 +1378,11 @@ void EnvCanadaIon::parseRegionalNormals(WeatherData &data, QXmlStreamReader &xml
     }
 }
 
-void EnvCanadaIon::parseForecast(WeatherData &data, QXmlStreamReader &xml, std::shared_ptr<WeatherData::ForecastInfo> forecast)
+void EnvCanadaIon::parseForecast(WeatherData &data, QXmlStreamReader &xml)
 {
     Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("forecast"));
+
+    auto forecast = std::make_shared<WeatherData::DayForecastInfo>();
 
     while (!xml.atEnd()) {
         xml.readNext();
@@ -1235,14 +1390,14 @@ void EnvCanadaIon::parseForecast(WeatherData &data, QXmlStreamReader &xml, std::
         const auto elementName = xml.name();
 
         if (xml.isEndElement() && elementName == QLatin1String("forecast")) {
-            data.forecasts.append(forecast);
+            data.dayForecasts.append(forecast);
             break;
         }
 
         if (xml.isStartElement()) {
             if (elementName == QLatin1String("period")) {
                 forecast->forecastPeriod = xml.attributes().value(u"textForecastName"_s).toString();
-                forecast->forecastTimestamp = dateTimeForForecastPeriod(forecast->forecastPeriod, data.forecastTimestamp.date());
+                forecast->forecastTimestamp = dateTimeForForecastPeriod(forecast->forecastPeriod, data.dayForecastTimestamp.date());
             } else if (elementName == QLatin1String("textSummary")) {
                 forecast->forecastSummary = xml.readElementText();
             } else if (elementName == QLatin1String("abbreviatedForecast")) {
@@ -1267,7 +1422,7 @@ void EnvCanadaIon::parseForecast(WeatherData &data, QXmlStreamReader &xml, std::
     }
 }
 
-void EnvCanadaIon::parseShortForecast(std::shared_ptr<WeatherData::ForecastInfo> forecast, QXmlStreamReader &xml)
+void EnvCanadaIon::parseShortForecast(std::shared_ptr<WeatherData::DayForecastInfo> forecast, QXmlStreamReader &xml)
 {
     Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("abbreviatedForecast"));
 
@@ -1288,31 +1443,11 @@ void EnvCanadaIon::parseShortForecast(std::shared_ptr<WeatherData::ForecastInfo>
             }
             if (elementName == QLatin1String("textSummary")) {
                 shortText = xml.readElementText();
-                QMap<QString, ConditionIcons> forecastList = forecastIcons();
-                if ((forecast->forecastPeriod == QLatin1String("tonight")) || (forecast->forecastPeriod.contains(QLatin1String("night")))) {
-                    forecastList.insert(QStringLiteral("a few clouds"), FewCloudsNight);
-                    forecastList.insert(QStringLiteral("cloudy periods"), PartlyCloudyNight);
-                    forecastList.insert(QStringLiteral("chance of drizzle mixed with rain"), ChanceShowersNight);
-                    forecastList.insert(QStringLiteral("chance of drizzle"), ChanceShowersNight);
-                    forecastList.insert(QStringLiteral("chance of drizzle or rain"), ChanceShowersNight);
-                    forecastList.insert(QStringLiteral("chance of flurries"), ChanceSnowNight);
-                    forecastList.insert(QStringLiteral("chance of light snow"), ChanceSnowNight);
-                    forecastList.insert(QStringLiteral("chance of flurries at times heavy"), ChanceSnowNight);
-                    forecastList.insert(QStringLiteral("chance of showers or drizzle"), ChanceShowersNight);
-                    forecastList.insert(QStringLiteral("chance of showers"), ChanceShowersNight);
-                    forecastList.insert(QStringLiteral("clearing"), ClearNight);
+                QMap<QString, ConditionIcons> forecastList;
+                if ((forecast->forecastPeriod == QLatin1String("Tonight")) || (forecast->forecastPeriod.contains(QLatin1String("night")))) {
+                    forecastList = nightForecastIcons();
                 } else {
-                    forecastList.insert(QStringLiteral("a few clouds"), FewCloudsDay);
-                    forecastList.insert(QStringLiteral("cloudy periods"), PartlyCloudyDay);
-                    forecastList.insert(QStringLiteral("chance of drizzle mixed with rain"), ChanceShowersDay);
-                    forecastList.insert(QStringLiteral("chance of drizzle"), ChanceShowersDay);
-                    forecastList.insert(QStringLiteral("chance of drizzle or rain"), ChanceShowersDay);
-                    forecastList.insert(QStringLiteral("chance of flurries"), ChanceSnowDay);
-                    forecastList.insert(QStringLiteral("chance of light snow"), ChanceSnowDay);
-                    forecastList.insert(QStringLiteral("chance of flurries at times heavy"), ChanceSnowDay);
-                    forecastList.insert(QStringLiteral("chance of showers or drizzle"), ChanceShowersDay);
-                    forecastList.insert(QStringLiteral("chance of showers"), ChanceShowersDay);
-                    forecastList.insert(QStringLiteral("clearing"), ClearDay);
+                    forecastList = dayForecastIcons();
                 }
                 forecast->shortForecast = shortText;
                 forecast->iconName = getWeatherIcon(forecastList, shortText.toLower());
@@ -1345,7 +1480,7 @@ void EnvCanadaIon::parseUVIndex(WeatherData &data, QXmlStreamReader &xml)
     }
 }
 
-void EnvCanadaIon::parseForecastTemperatures(std::shared_ptr<WeatherData::ForecastInfo> forecast, QXmlStreamReader &xml)
+void EnvCanadaIon::parseForecastTemperatures(std::shared_ptr<WeatherData::DayForecastInfo> forecast, QXmlStreamReader &xml)
 {
     Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("temperatures"));
 
@@ -1370,7 +1505,7 @@ void EnvCanadaIon::parseForecastTemperatures(std::shared_ptr<WeatherData::Foreca
     }
 }
 
-void EnvCanadaIon::parsePrecipitationForecast(std::shared_ptr<WeatherData::ForecastInfo> forecast, QXmlStreamReader &xml)
+void EnvCanadaIon::parsePrecipitationForecast(std::shared_ptr<WeatherData::DayForecastInfo> forecast, QXmlStreamReader &xml)
 {
     Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("precipitation"));
 
@@ -1395,7 +1530,7 @@ void EnvCanadaIon::parsePrecipitationForecast(std::shared_ptr<WeatherData::Forec
     }
 }
 
-void EnvCanadaIon::parsePrecipTotals(std::shared_ptr<WeatherData::ForecastInfo> forecast, QXmlStreamReader &xml)
+void EnvCanadaIon::parsePrecipTotals(std::shared_ptr<WeatherData::DayForecastInfo> forecast, QXmlStreamReader &xml)
 {
     Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("accumulation"));
 
@@ -1416,7 +1551,7 @@ void EnvCanadaIon::parsePrecipTotals(std::shared_ptr<WeatherData::ForecastInfo> 
     }
 }
 
-void EnvCanadaIon::parseWindForecast(std::shared_ptr<WeatherData::ForecastInfo> forecast, QXmlStreamReader &xml)
+void EnvCanadaIon::parseWindForecast(std::shared_ptr<WeatherData::DayForecastInfo> forecast, QXmlStreamReader &xml)
 {
     Q_ASSERT(xml.isStartElement() && xml.name() == QLatin1String("winds"));
 
@@ -1536,51 +1671,26 @@ void EnvCanadaIon::parseUnknownElement(QXmlStreamReader &xml) const
     }
 }
 
-QString EnvCanadaIon::updateForecastPeriod(const std::shared_ptr<WeatherData::ForecastInfo> &info)
-{
-    QString forecastPeriod = info->forecastPeriod;
-
-    if (forecastPeriod.isEmpty()) {
-        forecastPeriod = i18n("N/A");
-    } else {
-        // We need to shortform the week day strings and remove the "night" word because FutureDays already
-        // set "day" and "night" labels.
-        const QString today = i18n("Today");
-        forecastPeriod.replace(QStringLiteral("Today"), today);
-        forecastPeriod.replace(QStringLiteral("Tonight"), today);
-        forecastPeriod.replace(QStringLiteral("night"), u""_s);
-        forecastPeriod.replace(QStringLiteral("Saturday"), i18nc("Short for Saturday", "Sat"));
-        forecastPeriod.replace(QStringLiteral("Sunday"), i18nc("Short for Sunday", "Sun"));
-        forecastPeriod.replace(QStringLiteral("Monday"), i18nc("Short for Monday", "Mon"));
-        forecastPeriod.replace(QStringLiteral("Tuesday"), i18nc("Short for Tuesday", "Tue"));
-        forecastPeriod.replace(QStringLiteral("Wednesday"), i18nc("Short for Wednesday", "Wed"));
-        forecastPeriod.replace(QStringLiteral("Thursday"), i18nc("Short for Thursday", "Thu"));
-        forecastPeriod.replace(QStringLiteral("Friday"), i18nc("Short for Friday", "Fri"));
-    }
-
-    return forecastPeriod;
-}
-
 QDateTime EnvCanadaIon::dateTimeForForecastPeriod(const QString &periodName, const QDate &issueDate) const
 {
     // EnvCan does not provide dates for individual forecast periods, only the
     // forecast start day, so calculate them ourselves.
     QString normalized = periodName.trimmed();
 
-    bool isNight = false;
-
     // Environment Canada defines daytime forecasts as 06:00-18:00 and
     // nighttime forecasts as 18:00-06:00.
     static const auto daytime = QTime(6, 0);
     static const auto nighttime = QTime(18, 0);
 
-    if (normalized.compare(u"Today"_s, Qt::CaseInsensitive) == 0) {
-        return QDateTime(issueDate, isNight ? nighttime : daytime);
+    if (normalized.compare(u"today"_s, Qt::CaseInsensitive) == 0) {
+        return QDateTime(issueDate, daytime);
     }
 
-    if (normalized.compare(u"Tonight"_s, Qt::CaseInsensitive) == 0) {
-        return QDateTime(issueDate, isNight ? nighttime : daytime);
+    if (normalized.compare(u"tonight"_s, Qt::CaseInsensitive) == 0) {
+        return QDateTime(issueDate, nighttime);
     }
+
+    bool isNight = false;
 
     if (normalized.endsWith(u" night"_s, Qt::CaseInsensitive)) {
         isNight = true;
@@ -1621,7 +1731,7 @@ QDateTime EnvCanadaIon::dateTimeForForecastPeriod(const QString &periodName, con
     return QDateTime(targetDate, isNight ? nighttime : daytime);
 }
 
-FutureForecast EnvCanadaIon::forecastInfoToFutureForecast(const std::shared_ptr<WeatherData::ForecastInfo> &info)
+FutureForecast EnvCanadaIon::forecastInfoToFutureForecast(const std::shared_ptr<WeatherData::DayForecastInfo> &info)
 {
     const QString shortForecast = info->shortForecast.isEmpty() ? i18n("N/A") : i18nc("weather forecast", info->shortForecast.toUtf8().data());
 
@@ -1796,16 +1906,34 @@ void EnvCanadaIon::updateWeather()
 
     forecast->setWarnings(returnWarnings);
 
+    auto futureHours = std::make_shared<FutureHours>();
+
+    for (auto hourlyForecast : m_weatherData->hourlyForecasts) {
+        for (const auto &hourForecast : m_weatherData->hourlyForecasts) {
+            FutureHourForecast futureHour(hourForecast->forecastTimestamp);
+
+            futureHour.setConditionIcon(hourForecast->iconName);
+            futureHour.setCondition(hourForecast->forecastSummary);
+            futureHour.setHighTemp(hourForecast->temp);
+
+            futureHours->addHour(futureHour);
+        }
+
+        forecast->setFutureHours(futureHours);
+    }
+
+    const auto &forecasts = m_weatherData->dayForecasts;
+
     auto futureDays = std::make_shared<FutureDays>();
 
-    const auto &forecasts = m_weatherData->forecasts;
+    qCDebug(WEATHER::ION::ENVCAN) << "Hourly forecasts added. Total: " << futureHours->rowCount();
 
     // m_weatherData->forecasts is a list with mixed day and night forecasts. Convert them to
     // FutureDays which have day and night spit. Also update and properly show forecast period.
     for (int i = 0; i < forecasts.size(); ++i) {
         const auto &current = forecasts[i];
 
-        std::shared_ptr<WeatherData::ForecastInfo> next = nullptr;
+        std::shared_ptr<WeatherData::DayForecastInfo> next = nullptr;
 
         if (i + 1 < forecasts.size()) {
             next = forecasts[i + 1];
@@ -1860,7 +1988,7 @@ void EnvCanadaIon::updateWeather()
         }
     }
 
-    qCDebug(WEATHER::ION::ENVCAN) << "Forecasts added. Total: " << futureDays->columnCount();
+    qCDebug(WEATHER::ION::ENVCAN) << "Day forecasts added. Total: " << futureDays->columnCount();
 
     forecast->setFutureDays(futureDays);
 
