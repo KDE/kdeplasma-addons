@@ -57,7 +57,8 @@ impl Helper {
         let devices = scan_keyboards()
             .map_err(|e| zbus::fdo::Error::Failed(format!("Failed to scan keyboards: {e}")))?;
         for device in devices {
-            let api = KeyboardApi::from_device(&device).map_err(|e| {
+            let timeout_ms: i32 = 25000; // This is fairly arbitrary.
+            let api = KeyboardApi::from_device(&device, Some(timeout_ms)).map_err(|e| {
                 zbus::fdo::Error::Failed(format!(
                     "Failed to create API for device {:?}: {e}",
                     device.product
@@ -127,8 +128,9 @@ impl Helper {
             .map_err(|i| zbus::fdo::Error::Failed(format!("Failed to scan keyboards: {i}")))?
             .iter()
             .any(|device| {
-                let api =
-                    KeyboardApi::from_device(&device).expect("Failed to create API for device");
+                let timeout_ms: i32 = 25000; // This is fairly arbitrary.
+                let api = KeyboardApi::from_device(&device, Some(timeout_ms))
+                    .expect("Failed to create API for device");
                 api.get_rgblight_effect().is_ok() || api.get_rgb_matrix_effect().is_ok()
             });
         Ok(any)

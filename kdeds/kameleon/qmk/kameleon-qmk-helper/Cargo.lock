@@ -272,9 +272,9 @@ checksum = "7f24254aa9a54b5c858eaee2f5bccdb46aaf0e486a595ed5fd8f86ba55232a70"
 
 [[package]]
 name = "hidapi"
-version = "2.6.5"
+version = "2.6.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d1b71e1f4791fb9e93b9d7ee03d70b501ab48f6151432fbcadeabc30fe15396e"
+checksum = "c78dadfc12f865bc3fcac3897e64533b930737ceb9ef245c8277de98d0b010e9"
 dependencies = [
  "cc",
  "cfg-if",
@@ -483,9 +483,9 @@ dependencies = [
 
 [[package]]
 name = "qmk-via-api"
-version = "0.7.0"
+version = "0.8.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5114393b1167595ad4610d55da2299ecf6c420dbcf1116f89d0a55da260addd6"
+checksum = "492fe58a1a12ba701efdaa5e88d20314424fb9b124cba87bc65f0c2b3777d8b6"
 dependencies = [
  "hidapi",
  "itertools",
