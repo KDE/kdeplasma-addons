@@ -35,9 +35,8 @@ public:
         QDateTime timestamp;
     };
 
-    // Five day forecast
-    struct ForecastInfo {
-        ForecastInfo();
+    struct DayForecastInfo {
+        DayForecastInfo();
 
         QDateTime forecastTimestamp;
         QString forecastPeriod;
@@ -55,6 +54,27 @@ public:
         QString precipTotalExpected;
         int forecastHumidity;
     };
+
+    QList<std::shared_ptr<DayForecastInfo>> dayForecasts;
+
+    struct HourlyForecastInfo {
+        HourlyForecastInfo();
+
+        QDateTime forecastTimestamp;
+        QString forecastSummary;
+        QString iconName;
+
+        float temp;
+        float lopPrecent;
+
+        float windSpeed;
+        float gust;
+        QString windDirection;
+
+        int forecastHumidity;
+    };
+
+    QList<std::shared_ptr<HourlyForecastInfo>> hourlyForecasts;
 
     QString creditUrl;
     QString countryName;
@@ -94,13 +114,11 @@ public:
     float normalHigh;
     float normalLow;
 
-    QDateTime forecastTimestamp;
+    QDateTime dayForecastTimestamp;
+    QDateTime hourlyForecastTimestamp;
 
     QString UVIndex;
     QString UVRating;
-
-    // 5 day Forecast
-    QList<std::shared_ptr<ForecastInfo>> forecasts;
 
     // Historical data from previous day.
     float prevHigh;
@@ -154,19 +172,21 @@ private:
     void updateWeather();
 
     // helper functions used to update forecast days in updateWeather
-    QString updateForecastPeriod(const std::shared_ptr<WeatherData::ForecastInfo> &info);
-    FutureForecast forecastInfoToFutureForecast(const std::shared_ptr<WeatherData::ForecastInfo> &info);
+    FutureForecast forecastInfoToFutureForecast(const std::shared_ptr<WeatherData::DayForecastInfo> &info);
     QDateTime dateTimeForForecastPeriod(const QString &periodName, const QDate &issueDate) const;
 
     QMap<QString, ConditionIcons> setupConditionIconMappings() const;
     QMap<QString, ConditionIcons> setupDayConditionIconMappings() const;
     QMap<QString, ConditionIcons> setupNightConditionIconMappings() const;
     QMap<QString, ConditionIcons> setupForecastIconMappings() const;
+    QMap<QString, ConditionIcons> setupDayForecastIconMappings() const;
+    QMap<QString, ConditionIcons> setupNightForecastIconMappings() const;
 
-    QMap<QString, ConditionIcons> const &conditionIcons() const;
     QMap<QString, ConditionIcons> const &dayConditionIcons() const;
     QMap<QString, ConditionIcons> const &nightConditionIcons() const;
-    QMap<QString, ConditionIcons> const &forecastIcons() const;
+
+    QMap<QString, ConditionIcons> const &dayForecastIcons() const;
+    QMap<QString, ConditionIcons> const &nightForecastIcons() const;
 
     // Load and Parse the place XML listing
     void readXMLSetup();
@@ -187,26 +207,38 @@ private:
 
     // Parse weather XML data
     void parseWeatherSite(WeatherData &data, QXmlStreamReader &xml);
-    void parseDateTime(WeatherData &data, QXmlStreamReader &xml, std::shared_ptr<WeatherData::WeatherEvent> event = nullptr);
+
+    // Locations parsing
     void parseLocations(WeatherData &data, QXmlStreamReader &xml);
+    float parseCoordinate(QStringView coord) const;
+
+    // Conditions parsing
     void parseConditions(WeatherData &data, QXmlStreamReader &xml);
-    void parseWarnings(WeatherData &data, QXmlStreamReader &xml);
     void parseWindInfo(WeatherData &data, QXmlStreamReader &xml);
-    void parseWeatherForecast(WeatherData &data, QXmlStreamReader &xml);
+
+    // Hourly forecast parsing
+    void parseHourlyForecast(WeatherData &data, QXmlStreamReader &xml);
+
+    // Day forecast parsing
+    void parseDayForecast(WeatherData &data, QXmlStreamReader &xml);
     void parseRegionalNormals(WeatherData &data, QXmlStreamReader &xml);
-    void parseForecast(WeatherData &data, QXmlStreamReader &xml, std::shared_ptr<WeatherData::ForecastInfo> forecast);
-    void parseShortForecast(std::shared_ptr<WeatherData::ForecastInfo> forecast, QXmlStreamReader &xml);
-    void parseForecastTemperatures(std::shared_ptr<WeatherData::ForecastInfo> forecast, QXmlStreamReader &xml);
-    void parseWindForecast(std::shared_ptr<WeatherData::ForecastInfo> forecast, QXmlStreamReader &xml);
-    void parsePrecipitationForecast(std::shared_ptr<WeatherData::ForecastInfo> forecast, QXmlStreamReader &xml);
-    void parsePrecipTotals(std::shared_ptr<WeatherData::ForecastInfo> forecast, QXmlStreamReader &xml);
+    void parseForecast(WeatherData &data, QXmlStreamReader &xml);
+    void parseShortForecast(std::shared_ptr<WeatherData::DayForecastInfo> forecast, QXmlStreamReader &xml);
+    void parseForecastTemperatures(std::shared_ptr<WeatherData::DayForecastInfo> forecast, QXmlStreamReader &xml);
+    void parseWindForecast(std::shared_ptr<WeatherData::DayForecastInfo> forecast, QXmlStreamReader &xml);
+    void parsePrecipitationForecast(std::shared_ptr<WeatherData::DayForecastInfo> forecast, QXmlStreamReader &xml);
+    void parsePrecipTotals(std::shared_ptr<WeatherData::DayForecastInfo> forecast, QXmlStreamReader &xml);
     void parseUVIndex(WeatherData &data, QXmlStreamReader &xml);
+
+    // Other data parsing
+    void parseWarnings(WeatherData &data, QXmlStreamReader &xml);
     void parseYesterdayWeather(WeatherData &data, QXmlStreamReader &xml);
     void parseAstronomicals(WeatherData &data, QXmlStreamReader &xml);
     void parseWeatherRecords(WeatherData &data, QXmlStreamReader &xml);
 
+    // general parsing. Called from different functions
+    void parseDateTime(WeatherData &data, QXmlStreamReader &xml, bool isDayForecast = true, std::shared_ptr<WeatherData::WeatherEvent> event = nullptr);
     void parseFloat(float &value, QXmlStreamReader &xml);
-    float parseCoordinate(QStringView coord) const;
 
     // Clear unneeded data
     void clearForecastData();
@@ -245,6 +277,7 @@ private:
     std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> m_forecastPromise;
 };
 
+Q_DECLARE_TYPEINFO(WeatherData::DayForecastInfo, Q_RELOCATABLE_TYPE);
+Q_DECLARE_TYPEINFO(WeatherData::HourlyForecastInfo, Q_RELOCATABLE_TYPE);
 Q_DECLARE_TYPEINFO(WeatherData::WeatherEvent, Q_RELOCATABLE_TYPE);
-Q_DECLARE_TYPEINFO(WeatherData::ForecastInfo, Q_RELOCATABLE_TYPE);
 Q_DECLARE_TYPEINFO(WeatherData, Q_RELOCATABLE_TYPE);
