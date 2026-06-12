@@ -7,9 +7,9 @@ version = "0.1.0"
 edition = "2024"
 
 [dependencies]
-easy_color = "0"
+easy_color = "0.1"
 event-listener = "5"
-qmk-via-api = "0"
+qmk-via-api = "0.7"
 tokio = { version = "1", features = ["rt-multi-thread", "macros"] }
 zbus = { version = "5", default-features = false, features = ["tokio"] }
 zbus_polkit = { version = "5", default-features = false, features = ["tokio"] }
