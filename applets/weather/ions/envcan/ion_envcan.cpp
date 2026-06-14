@@ -1909,18 +1909,16 @@ void EnvCanadaIon::updateWeather()
     auto futureHours = std::make_shared<FutureHours>();
 
     for (auto hourlyForecast : m_weatherData->hourlyForecasts) {
-        for (const auto &hourForecast : m_weatherData->hourlyForecasts) {
-            FutureHourForecast futureHour(hourForecast->forecastTimestamp);
+        FutureHourForecast futureHour(hourlyForecast->forecastTimestamp);
 
-            futureHour.setConditionIcon(hourForecast->iconName);
-            futureHour.setCondition(hourForecast->forecastSummary);
-            futureHour.setHighTemp(hourForecast->temp);
+        futureHour.setConditionIcon(hourlyForecast->iconName);
+        futureHour.setCondition(hourlyForecast->forecastSummary);
+        futureHour.setHighTemp(hourlyForecast->temp);
 
-            futureHours->addHour(futureHour);
-        }
-
-        forecast->setFutureHours(futureHours);
+        futureHours->addHour(futureHour);
     }
+
+    forecast->setFutureHours(futureHours);
 
     const auto &forecasts = m_weatherData->dayForecasts;
 

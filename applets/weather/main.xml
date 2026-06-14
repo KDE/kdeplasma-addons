@@ -47,6 +47,13 @@ SPDX-License-Identifier: GPL-2.0-or-later
     <entry name="showHumidityInTooltip" type="bool">
       <default>true</default>
     </entry>
+
+    <entry name="showHourlyTemperatureGraph" type="bool">
+      <default>false</default>
+    </entry>
+    <entry name="showDayTemperatureGraph" type="bool">
+      <default>false</default>
+    </entry>
   </group>
 
   <group name="Units">

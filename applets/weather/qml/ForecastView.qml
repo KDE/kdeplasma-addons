@@ -31,7 +31,7 @@ ColumnLayout {
 
     property string forecastViewTitle: (!!futureDays && futureDays.daysNumber > 0) ? i18ncp("Forecast period timeframe", "1 Day", "%1 Days", futureDays.daysNumber) : ""
 
-    spacing: Kirigami.Units.largeSpacing * 2
+    spacing: Kirigami.Units.largeSpacing
 
     ColumnLayout {
         id: hourlyForecast

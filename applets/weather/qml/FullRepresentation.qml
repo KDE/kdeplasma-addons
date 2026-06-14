@@ -38,7 +38,7 @@ PlasmaExtras.Representation {
     property var lastObservation: null
     property var metaData: null
 
-    Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * 25, Math.max(Kirigami.Units.gridUnit * 10, stack.implicitWidth))
+    Layout.minimumWidth: Math.min(Kirigami.Units.gridUnit * 25, Math.max(Kirigami.Units.gridUnit * 10, stack.implicitWidth))
     Layout.minimumHeight: Math.max(Kirigami.Units.gridUnit * 10, stack.implicitHeight)
     Layout.margins: Kirigami.Units.smallSpacing
 
@@ -91,9 +91,14 @@ PlasmaExtras.Representation {
 
         anchors.fill: parent
 
+        visible: root.status === ForecastControl.Normal
+
         initialPage: weatherPage
 
         defaultColumnWidth: currentItem.width
+
+        implicitWidth: items[0].implicitWidth + items[0].padding * 2
+        implicitHeight: items[0].implicitHeight + items[0].padding * 2
 
         WeatherPage {
             id: weatherPage

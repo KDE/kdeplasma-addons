@@ -30,6 +30,17 @@ GraphsView {
     marginTop: Kirigami.Units.largeSpacing
     clipPlotArea: false
 
+    //Initialize axis min/max values only when pointsModel is
+    // to prevent warnings
+    onPointsModelChanged: {
+        if (!!root.pointsModel) {
+            axisX.min = root.pointsModel.minDate;
+            axisX.max = root.pointsModel.maxDate;
+            axisY.min = root.pointsModel.minTemp;
+            axisY.max = root.pointsModel.maxTemp;
+        }
+    }
+
     theme: GraphsTheme {
         gridVisible: false
         backgroundVisible: false
@@ -38,15 +49,11 @@ GraphsView {
     }
 
     axisX: DateTimeAxis {
-        min: root.pointsModel.minDate
-        max: root.pointsModel.maxDate
         visible: false
         lineVisible: false
     }
 
     axisY: ValueAxis {
-        min: root.pointsModel.minTemp
-        max: root.pointsModel.maxTemp
         visible: false
         lineVisible: false
     }
@@ -83,7 +90,7 @@ GraphsView {
         orientation: Qt.Horizontal
         xSection: root.xSection
         ySection: root.ySection
-        model: root.pointsModel
+        model: root.pointsModel || null
         series: forecastSeries
     }
 }
