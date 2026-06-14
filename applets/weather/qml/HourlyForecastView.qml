@@ -26,17 +26,16 @@ PlasmaComponents.ScrollView {
 
     PlasmaComponents.ScrollBar.vertical.policy: PlasmaComponents.ScrollBar.AlwaysOff
 
-    implicitWidth: forecasts.implicitWidth
-    implicitHeight: forecasts.implicitHeight + scrollBar.implicitHeight
-
     focus: true
 
-    ScrollBar.vertical: ScrollBar {
+    implicitWidth: 0
+
+    ScrollBar.horizontal: ScrollBar {
         id: scrollBar
         parent: root.parent
-        anchors.top: root.top
-        anchors.left: root.right
         anchors.bottom: root.bottom
+        anchors.right: root.right
+        anchors.left: root.left
     }
 
     contentItem: HourlyForecastList {

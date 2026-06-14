@@ -32,6 +32,8 @@ Rectangle {
     required property var lowTemp
     required property var conditionProbability
 
+    visible: (!!conditionIcon && conditionIcon !== "" && conditionIcon !== "weather-none-available") || (!!condition && condition !== "") || !isNaN(highTemp) || !isNaN(lowTemp) || !isNaN(conditionProbability)
+
     color: showBackground ? Qt.alpha(Kirigami.Theme.highlightColor, 0.08) : "transparent"
     radius: Kirigami.Units.cornerRadius
 
@@ -66,7 +68,6 @@ Rectangle {
         }
 
         Kirigami.Icon {
-            id: conditionIcon
             Layout.preferredHeight: Kirigami.Units.iconSizes.medium
             Layout.preferredWidth: Kirigami.Units.iconSizes.medium
 

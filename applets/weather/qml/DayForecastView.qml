@@ -34,8 +34,8 @@ Item {
 
     readonly property real minimalSpacing: Kirigami.Units.smallSpacing
 
-    implicitWidth: forecast.contentWidth + minimalSpacing + verticalHeader.width
-    implicitHeight: forecast.contentHeight + minimalSpacing + horizontalHeader.height
+    implicitWidth: forecast.implicitWidth + minimalSpacing * 2 + verticalHeader.width
+    implicitHeight: forecast.implicitHeight + minimalSpacing * 2 + horizontalHeader.height
 
     HorizontalHeaderView {
         id: horizontalHeader
@@ -97,7 +97,7 @@ Item {
                 rowHeight = implicitRowHeight(topRow);
                 var rowsHeight = rowHeight * rows;
                 neededRowSpacing = Math.max((parent.height - horizontalHeader.height - rowsHeight) / (rows + 1), root.minimalSpacing);
-                implicitHeight = rowsHeight;
+                implicitHeight = rowsHeight + (rows - 1) * root.minimalSpacing;
             } else {
                 //restore default values if none of rows is loaded (which shows that forecast model is empty)
                 neededRowSpacing = 0;
@@ -108,7 +108,7 @@ Item {
                 columnWidth = implicitColumnWidth(leftColumn);
                 var columnsWidth = columnWidth * columns;
                 neededColumnSpacing = Math.max((parent.width - verticalHeader.width - columnsWidth) / (columns + 1), root.minimalSpacing);
-                implicitWidth = columnsWidth;
+                implicitWidth = columnsWidth + (columns - 1) * root.minimalSpacing;
             } else {
                 neededColumnSpacing = 0;
                 implicitWidth = 0;
