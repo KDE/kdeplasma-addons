@@ -39,8 +39,13 @@ Kirigami.ScrollablePage {
         color: "transparent"
     }
 
+    implicitWidth: weather.implicitWidth
+    implicitHeight: weather.implicitHeight
+
     ColumnLayout {
-        spacing: Kirigami.Units.largeSpacing * 2
+        id: weather
+
+        spacing: Kirigami.Units.largeSpacing
 
         TopPanel {
             id: topPanel
