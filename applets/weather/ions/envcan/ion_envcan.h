@@ -70,6 +70,7 @@ public:
     QString obsTimestamp;
     QDateTime observationDateTime;
 
+    QString iconName;
     QString condition;
     float temperature;
     float dewpoint;
@@ -158,15 +159,8 @@ private:
     FutureForecast forecastInfoToFutureForecast(const std::shared_ptr<WeatherData::ForecastInfo> &info);
     QDateTime dateTimeForForecastPeriod(const QString &periodName, const QDate &issueDate) const;
 
-    QMap<QString, ConditionIcons> setupConditionIconMappings() const;
-    QMap<QString, ConditionIcons> setupDayConditionIconMappings() const;
-    QMap<QString, ConditionIcons> setupNightConditionIconMappings() const;
-    QMap<QString, ConditionIcons> setupForecastIconMappings() const;
-
-    QMap<QString, ConditionIcons> const &conditionIcons() const;
-    QMap<QString, ConditionIcons> const &dayConditionIcons() const;
-    QMap<QString, ConditionIcons> const &nightConditionIcons() const;
-    QMap<QString, ConditionIcons> const &forecastIcons() const;
+    ConditionIcons conditionIconFromCode(int code) const;
+    ConditionIcons forecastIconFromCode(int code) const;
 
     // Load and Parse the place XML listing
     void readXMLSetup();
