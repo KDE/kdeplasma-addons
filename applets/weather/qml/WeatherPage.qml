@@ -45,7 +45,7 @@ Kirigami.ScrollablePage {
     ColumnLayout {
         id: weather
 
-        spacing: Kirigami.Units.largeSpacing
+        anchors.fill: parent
 
         TopPanel {
             id: topPanel
@@ -63,31 +63,109 @@ Kirigami.ScrollablePage {
             displayVisibilityUnit: root.displayVisibilityUnit
             displayTemperatureUnit: root.displayTemperatureUnit
 
+            Layout.alignment: Qt.AlignTop
+
             Layout.fillWidth: true
 
             onOpenWarnings: root.openWarnings()
         }
 
-        ForecastView {
-            Layout.fillWidth: true
+        ColumnLayout {
+            id: hourlyForecast
 
-            showHourlyTemperatureGraph: root.showHourlyTemperatureGraph
-            showDayTemperatureGraph: root.showDayTemperatureGraph
+            Layout.alignment: Qt.AlignTop
 
-            futureDays: root.futureDays
-            futureDaysPoints: root.futureDaysPoints
-            futureHours: root.futureHours
-            futureHoursPoints: root.futureHoursPoints
-            metaData: root.metaData
+            visible: !!root.futureHours && root.futureHours.hoursNumber > 0
+            Kirigami.Heading {
+                Layout.fillWidth: true
+                level: 3
+                text: i18n("Hourly Forecast")
+            }
 
-            invalidUnit: root.invalidUnit
-            displayTemperatureUnit: root.displayTemperatureUnit
+            Loader {
+                Layout.fillWidth: true
+                sourceComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
+            }
+
+            Component {
+                id: hourlyForecastView
+                HourlyForecastView {
+                    Layout.alignment: Qt.AlignTop
+                    Layout.fillWidth: true
+
+                    futureHours: root.futureHours
+                    metaData: root.metaData
+
+                    invalidUnit: root.invalidUnit
+                    displayTemperatureUnit: root.displayTemperatureUnit
+                }
+            }
+
+            Component {
+                id: hourlyForecastGraph
+                HourlyForecastGraph {
+                    Layout.alignment: Qt.AlignTop
+                    Layout.fillWidth: true
+
+                    futureHours: root.futureHours
+                    futureHoursPoints: root.futureHoursPoints
+                    metaData: root.metaData
+
+                    invalidUnit: root.invalidUnit
+                    displayTemperatureUnit: root.displayTemperatureUnit
+                }
+            }
+        }
+
+        ColumnLayout {
+            id: dayForecast
+
+            Layout.alignment: Qt.AlignTop
+
+            visible: !!root.futureDays && root.futureDays.daysNumber > 0
+            Kirigami.Heading {
+                Layout.fillWidth: true
+                level: 3
+                text: i18n("%1 Day Forecast", root.futureDays?.daysNumber)
+            }
+
+            Loader {
+                Layout.fillWidth: true
+                sourceComponent: root.showDayTemperatureGraph ? dayForecastGraph : dayForecastView
+            }
+
+            Component {
+                id: dayForecastView
+                DayForecastView {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    futureDays: root.futureDays
+                    metaData: root.metaData
+
+                    invalidUnit: root.invalidUnit
+                    displayTemperatureUnit: root.displayTemperatureUnit
+                }
+            }
+
+            Component {
+                id: dayForecastGraph
+                DayForecastGraph {
+                    Layout.fillWidth: true
+                    Layout.fillHeight: true
+                    futureDays: root.futureDays
+                    futureDaysPoints: root.futureDaysPoints
+                    metaData: root.metaData
+
+                    invalidUnit: root.invalidUnit
+                    displayTemperatureUnit: root.displayTemperatureUnit
+                }
+            }
         }
 
         PlasmaComponents.Label {
             id: sourceLabel
 
-            Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
+            Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
 
             MouseArea {
                 anchors.fill: parent
