@@ -57,8 +57,7 @@ ColumnLayout {
 
     readonly property int sideWidth: Math.max(tempLabel.implicitWidth, detailsView.implicitWidth)
 
-    Layout.minimumWidth: Math.max(Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 25), (sideWidth + spacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
-    )
+    Layout.minimumWidth: Math.max(Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 10), (sideWidth + spacing) * 2 + Kirigami.Units.iconSizes.huge)
 
     RowLayout {
         Layout.fillWidth: true
@@ -128,7 +127,7 @@ ColumnLayout {
         ColumnLayout {
             Layout.fillWidth: true
             Layout.preferredWidth: 25 // 25% of the view
-            Layout.minimumWidth: sideWidth
+            Layout.minimumWidth: root.sideWidth
 
             Layout.alignment: Qt.AlignVCenter
 
