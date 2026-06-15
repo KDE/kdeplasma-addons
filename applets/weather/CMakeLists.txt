@@ -35,7 +35,6 @@ plasma_add_applet(org.kde.plasma.weather
     QML_SOURCES
         qml/CompactRepresentation.qml
         qml/DetailsView.qml
-        qml/ForecastView.qml
         qml/HourlyForecastView.qml
         qml/HourlyForecastGraph.qml
         qml/HourlyForecastList.qml
