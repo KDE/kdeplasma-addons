@@ -49,7 +49,7 @@ Kirigami.ScrollablePage {
 
         TopPanel {
             id: topPanel
-            visible: (!!root.station || !!root.lastObservation) && root.status === ForecastControl.Normal
+            visible: !!root.station || !!root.lastObservation
 
             station: root.station
             lastObservation: root.lastObservation
@@ -69,8 +69,6 @@ Kirigami.ScrollablePage {
         }
 
         ForecastView {
-            id: switchPanel
-            visible: root.status === ForecastControl.Normal
             Layout.fillWidth: true
 
             showHourlyTemperatureGraph: root.showHourlyTemperatureGraph
@@ -88,7 +86,6 @@ Kirigami.ScrollablePage {
 
         PlasmaComponents.Label {
             id: sourceLabel
-            visible: root.status === ForecastControl.Normal
 
             Layout.alignment: Qt.AlignVCenter | Qt.AlignLeft
 

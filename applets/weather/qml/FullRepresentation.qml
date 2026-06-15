@@ -80,6 +80,16 @@ PlasmaExtras.Representation {
         explanation: i18nc("@info:usagetip", "The network request timed out, possibly due to a server outage at the weather station provider. Check again later.")
     }
 
+    PlasmaExtras.PlaceholderMessage {
+        visible: !stack.visible && root.status === ForecastControl.Normal
+        anchors.centerIn: parent
+        anchors.margins: Kirigami.Units.largeSpacing * 4
+        width: Math.min(parent.width, Kirigami.Units.gridUnit * 20)
+        text: i18nc("@info:placeholder", "Unable to load weather forecast")
+        // TODO: Add a link to the bug-report url, which is now not possible to access within the placeholder
+        explanation: i18nc("@info:usagetip", "There may be a technical issue with the weather provider. If the issue persists for longer than a day, submit a bug report.")
+    }
+
     QQC2.BusyIndicator {
         id: busy
         anchors.centerIn: parent
@@ -91,7 +101,7 @@ PlasmaExtras.Representation {
 
         anchors.fill: parent
 
-        visible: root.status === ForecastControl.Normal
+        visible: root.status === ForecastControl.Normal && ((!!root.futureDays && root.futureDays.daysNumber > 0) || (!!root.futureHours && root.futureHours.hoursNumber > 0))
 
         initialPage: weatherPage
 
