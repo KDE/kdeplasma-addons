@@ -120,17 +120,4 @@ ColumnLayout {
             }
         }
     }
-
-    PlasmaExtras.PlaceholderMessage {
-        visible: !hourlyForecast.visible && !dayForecast.visible
-
-        Layout.alignment: Qt.AlignCenter
-        Layout.margins: Kirigami.Units.largeSpacing
-        // Sets a minimum width for the placeholder tab
-        Layout.preferredWidth: Kirigami.Units.gridUnit * 15
-
-        text: i18nc("@info:placeholder", "Unable to load weather forecast")
-        // TODO: Add a link to the bug-report url, which is now not possible to access within the placeholder
-        explanation: i18nc("@info:usagetip", "There may be a technical issue with the weather provider. If the issue persists for longer than a day, submit a bug report.")
-    }
 }
