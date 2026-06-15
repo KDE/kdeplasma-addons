@@ -45,6 +45,9 @@ ColumnLayout {
         ySection: WeatherData.FutureDaysPoints.Temperature
 
         toolTipTextFunction: function (pointIndex) {
+            if (!root.futureDays) {
+                return "";
+            }
             var dayCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Day, pointIndex), WeatherData.FutureDays.Condition);
             var nightCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Night, pointIndex), WeatherData.FutureDays.Condition);
             if (!!dayCondition && !!nightCondition) {

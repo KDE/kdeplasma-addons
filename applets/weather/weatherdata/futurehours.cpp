@@ -168,6 +168,10 @@ QVariant FutureHours::headerData(int section, Qt::Orientation orientation, int r
 
 QVariant FutureHours::data(const QModelIndex &index, int role) const
 {
+    if (!index.isValid()) {
+        return {};
+    }
+
     if (index.row() >= m_allHours.count()) {
         return {};
     }
