@@ -223,6 +223,10 @@ QVariant FutureDays::headerData(int section, Qt::Orientation orientation, int ro
 
 QVariant FutureDays::data(const QModelIndex &index, int role) const
 {
+    if (!index.isValid()) {
+        return {};
+    }
+
     if (index.column() >= m_nextDays.count()) {
         return {};
     }
@@ -233,7 +237,6 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
 
     if (role == Timestamp) {
         return m_nextDays.at(index.column()).timestamp();
-        return {};
     }
 
     if (index.row() == 0) {
@@ -281,15 +284,15 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
 
 void FutureDays::addDay(const FutureDayForecast &forecast)
 {
-    beginInsertColumns(QModelIndex(), m_nextDays.size(), m_nextDays.size());
-
     if (m_nextDays.isEmpty() && forecast.daytime().has_value()) {
         m_firstDayExist = true;
     }
 
-    if (!m_isNightPresent && forecast.night()) {
+    if (!m_isNightPresent && forecast.night().has_value()) {
+        beginInsertRows(QModelIndex(), Night, Night);
         m_totalRows = 2;
         m_isNightPresent = true;
+        endInsertRows();
     }
 
     if ((forecast.daytime().has_value() && forecast.daytime()->conditionProbability() != 0.0)
@@ -297,6 +300,7 @@ void FutureDays::addDay(const FutureDayForecast &forecast)
         m_hasProbability = true;
     }
 
+    beginInsertColumns(QModelIndex(), m_nextDays.size(), m_nextDays.size());
     m_nextDays.append(forecast);
     endInsertColumns();
     m_daysNumber = m_nextDays.count();

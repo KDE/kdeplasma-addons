@@ -66,6 +66,9 @@ PlasmaComponents.ScrollView {
                 ySection: WeatherData.FutureHoursPoints.Temperature
 
                 toolTipTextFunction: function (pointIndex) {
+                    if (!root.futureHours) {
+                        return "";
+                    }
                     let index = root.futureHours.index(pointIndex, 0);
                     return root.futureHours.data(index, WeatherData.FutureHours.Condition);
                 }

@@ -47,7 +47,7 @@ Item {
         resizableColumns: false
         interactive: false
         // Check if a night entry exists, as the TableView delegate shows a month/weekday label when no night entry is present.
-        model: !!root.futureDays && root.futureDays.daysNumber > 1 && root.futureDays.isNightPresent ? root.futureDays : null
+        model: (!!root.futureDays && root.futureDays.daysNumber > 1 && root.futureDays.isNightPresent) ? root.futureDays : null
 
         delegate: PlasmaComponents.Label {
             text: model.timestamp.toLocaleString(Qt.locale(), "ddd") ?? ""
@@ -65,7 +65,7 @@ Item {
         textRole: "period"
         resizableRows: false
         interactive: false
-        model: !!root.futureDays && root.futureDays.isNightPresent ? root.futureDays : null
+        model: (!!root.futureDays && root.futureDays.isNightPresent) ? root.futureDays : null
 
         delegate: PlasmaComponents.Label {
             text: model.period ?? ""
@@ -130,7 +130,7 @@ Item {
             showBackground: root.showBackground
             showConditionIcon: root.showConditionIcon
             showTimeHeader: !root.futureDays?.isNightPresent
-            hasProbability: root.futureDays?.hasProbability
+            hasProbability: !!root.futureDays?.hasProbability
             temperatureUnit: root.metaData?.temperatureUnit || root.invalidUnit
             displayTemperatureUnit: root.displayTemperatureUnit
             timeFormat: "ddd"

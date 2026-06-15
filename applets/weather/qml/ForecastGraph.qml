@@ -81,7 +81,7 @@ GraphsView {
             PlasmaCore.ToolTipArea {
                 anchors.fill: parent
                 active: pointHover.hovered
-                mainText: root.toolTipTextFunction(seriesDelegate.pointIndex)
+                mainText: !!root.toolTipTextFunction ? root.toolTipTextFunction(seriesDelegate.pointIndex) : ""
             }
         }
     }
