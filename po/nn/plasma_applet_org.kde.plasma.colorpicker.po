@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 00:45+0000\n"
+"POT-Creation-Date: 2026-06-16 00:46+0000\n"
 "PO-Revision-Date: 2023-05-27 14:02+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -34,13 +34,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Midtklikk for å kopiera fargekoden"
 
-#: qml/CompactRepresentation.qml:77
+#: qml/CompactRepresentation.qml:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Vel ein farge"
 
-#: qml/CompactRepresentation.qml:84
+#: qml/CompactRepresentation.qml:88
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
