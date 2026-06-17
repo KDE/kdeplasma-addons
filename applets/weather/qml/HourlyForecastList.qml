@@ -33,11 +33,10 @@ ListView {
 
     orientation: ListView.Horizontal
 
-    implicitWidth: contentWidth
-    implicitHeight: contentHeight
+    currentIndex: 0
 
-    contentWidth: contentItem.childrenRect.width
-    contentHeight: contentItem.childrenRect.height
+    implicitHeight: currentItem.height
+    implicitWidth: currentItem.width
 
     delegate: ForecastDelegate {
         showBackground: root.showBackground

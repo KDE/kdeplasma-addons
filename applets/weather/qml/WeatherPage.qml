@@ -8,6 +8,7 @@ import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
+import org.kde.plasma.weatherdata as WeatherData
 
 Kirigami.ScrollablePage {
     id: root
@@ -79,10 +80,11 @@ Kirigami.ScrollablePage {
             Kirigami.Heading {
                 Layout.fillWidth: true
                 level: 3
-                text: i18n("Hourly Forecast")
+                text: i18n("Hourly Forecast: %1", Qt.formatDateTime(root.futureHours.data(root.futureHours.index(hourlyLoader.item.currentIndex, 0), WeatherData.FutureHours.Timestamp), "dddd"))
             }
 
             Loader {
+                id: hourlyLoader
                 Layout.fillWidth: true
                 sourceComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
             }
