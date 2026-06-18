@@ -893,11 +893,3 @@ msgstr "Много високо"
 #, kde-format
 msgid "Extreme"
 msgstr "Екстремно"
-
-#~ msgctxt "Short for Today"
-#~ msgid "Today"
-#~ msgstr "Днес"
-
-#~ msgctxt "Short for Tonight"
-#~ msgid "Tonight"
-#~ msgstr "Тази вечер"
