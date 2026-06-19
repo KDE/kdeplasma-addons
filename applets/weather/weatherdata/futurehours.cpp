@@ -7,9 +7,11 @@
 #include "futurehours.h"
 
 #include <klocalizedstring.h>
+#include <qdebug.h>
 
 FutureHoursPoints::FutureHoursPoints(const std::shared_ptr<FutureHours> &futureHours, QObject *parent)
     : QAbstractTableModel(parent)
+    , m_highLowTempPresent(false)
     , m_minTemp(0)
     , m_maxTemp(0)
     , m_futureHours(futureHours)
@@ -23,17 +25,24 @@ FutureHoursPoints::FutureHoursPoints(const std::shared_ptr<FutureHours> &futureH
     for (int hourIndex = 0; hourIndex < m_futureHours->rowCount(); ++hourIndex) {
         QVariant minTempVariant = m_futureHours->data(m_futureHours->index(hourIndex), FutureHours::LowTemp);
         QVariant maxTempVariant = m_futureHours->data(m_futureHours->index(hourIndex), FutureHours::HighTemp);
+        QVariant generalTempVariant = m_futureHours->data(m_futureHours->index(hourIndex), FutureHours::GeneralTemp);
 
         // Calculate min and max values according to what data ion provides
         if (minTempVariant.canConvert<qreal>() && maxTempVariant.canConvert<qreal>()) {
             minTemp = std::min(minTempVariant.toReal(), minTemp);
             maxTemp = std::max(maxTempVariant.toReal(), maxTemp);
+            m_highLowTempPresent = true;
         } else if (minTempVariant.canConvert<qreal>()) {
             minTemp = std::min(minTempVariant.toReal(), minTemp);
             maxTemp = std::max(minTempVariant.toReal(), maxTemp);
+            m_highLowTempPresent = true;
         } else if (maxTempVariant.canConvert<qreal>()) {
             minTemp = std::min(maxTempVariant.toReal(), minTemp);
             maxTemp = std::max(maxTempVariant.toReal(), maxTemp);
+            m_highLowTempPresent = true;
+        } else if (generalTempVariant.canConvert<qreal>()) {
+            minTemp = std::min(generalTempVariant.toReal(), minTemp);
+            maxTemp = std::max(generalTempVariant.toReal(), maxTemp);
         }
     }
 
@@ -73,24 +82,85 @@ QVariant FutureHoursPoints::data(const QModelIndex &index, int role) const
         return {};
     }
 
+    auto futureHoursIndex = m_futureHours->index(index.column());
+
     if (index.row() == Timestamp) {
-        return m_futureHours->data(m_futureHours->index(index.column()), FutureHours::Timestamp).toDateTime();
-    } else if (index.row() == Temperature) {
-        QVariant highTemp = m_futureHours->data(m_futureHours->index(index.column()), FutureHours::HighTemp);
-        QVariant lowTemp = m_futureHours->data(m_futureHours->index(index.column()), FutureHours::LowTemp);
-        // If high and low temperature present then return middle value. Otherwise
-        // return the value which is present;
-        if (highTemp.isValid() && lowTemp.isValid()) {
-            return std::midpoint(highTemp.toReal(), lowTemp.toReal());
-        } else if (highTemp.isValid()) {
-            return highTemp;
-        } else if (lowTemp.isValid()) {
-            return lowTemp;
-        }
-        return {};
+        return m_futureHours->data(futureHoursIndex, FutureHours::Timestamp).toDateTime();
+    } else if (index.row() == HighTemp) {
+        return m_futureHours->data(futureHoursIndex, FutureHours::HighTemp);
+    } else if (index.row() == LowTemp) {
+        return m_futureHours->data(futureHoursIndex, FutureHours::LowTemp);
+    } else if (index.row() == GeneralTemp) {
+        return m_futureHours->data(futureHoursIndex, FutureHours::GeneralTemp);
     }
 
     return {};
+}
+
+bool FutureHoursPoints::highLowTempPresent() const
+{
+    return m_highLowTempPresent;
+}
+
+int FutureHoursPoints::totalHours() const
+{
+    return m_futureHours->rowCount();
+}
+
+int FutureHoursPoints::hoursPerDay() const
+{
+    QVariant startDateVariant = m_futureHours->data(m_futureHours->index(0), FutureHours::Timestamp);
+    if (!startDateVariant.canConvert<QDateTime>()) {
+        return 0;
+    }
+
+    QDateTime startDate = startDateVariant.toDateTime();
+
+    int hourCount = 1;
+    while (hourCount < m_futureHours->rowCount()) {
+        QVariant dateVariant = m_futureHours->data(m_futureHours->index(hourCount), FutureHours::Timestamp);
+        if (!dateVariant.canConvert<QDateTime>()) {
+            return hourCount;
+        }
+
+        QDateTime date = dateVariant.toDateTime();
+
+        if (startDate.time().hour() == date.time().hour() || startDate.daysTo(date) >= 2) {
+            break;
+        }
+
+        ++hourCount;
+    }
+
+    return hourCount;
+}
+
+int FutureHoursPoints::totalDays() const
+{
+    QVariant startDateVariant = m_futureHours->data(m_futureHours->index(0), FutureHours::Timestamp);
+    if (!startDateVariant.canConvert<QDateTime>()) {
+        return 0;
+    }
+
+    QDateTime startDate = startDateVariant.toDateTime();
+
+    int daysNumber = 0;
+
+    for (int hourCount = 1; hourCount < m_futureHours->rowCount(); ++hourCount) {
+        QVariant dateVariant = m_futureHours->data(m_futureHours->index(hourCount), FutureHours::Timestamp);
+        if (!dateVariant.canConvert<QDateTime>()) {
+            return daysNumber;
+        }
+
+        QDateTime date = dateVariant.toDateTime();
+
+        if (startDate.daysTo(date) >= 1) {
+            startDate = date;
+            ++daysNumber;
+        }
+    }
+
+    return daysNumber;
 }
 
 QDateTime FutureHoursPoints::minDate() const
@@ -193,6 +263,8 @@ QVariant FutureHours::data(const QModelIndex &index, int role) const
         return forecast->highTemp().has_value() ? *forecast->highTemp() : QVariant();
     case LowTemp:
         return forecast->lowTemp().has_value() ? *forecast->lowTemp() : QVariant();
+    case GeneralTemp:
+        return forecast->generalTemp().has_value() ? *forecast->generalTemp() : QVariant();
     case ConditionProbability:
         return forecast->conditionProbability().has_value() ? *forecast->conditionProbability() : QVariant();
     }
@@ -274,6 +346,11 @@ std::optional<qreal> FutureHourForecast::lowTemp() const
     return m_lowTemp;
 }
 
+std::optional<qreal> FutureHourForecast::generalTemp() const
+{
+    return m_generalTemp;
+}
+
 std::optional<qreal> FutureHourForecast::conditionProbability() const
 {
     return m_conditionProbability;
@@ -297,6 +374,11 @@ void FutureHourForecast::setHighTemp(qreal highTemp)
 void FutureHourForecast::setLowTemp(qreal lowTemp)
 {
     m_lowTemp = lowTemp;
+}
+
+void FutureHourForecast::setGeneralTemp(qreal generalTemp)
+{
+    m_generalTemp = generalTemp;
 }
 
 void FutureHourForecast::setConditionProbability(qreal conditionProbability)

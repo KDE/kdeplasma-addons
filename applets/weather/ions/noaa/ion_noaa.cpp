@@ -613,11 +613,9 @@ void NOAAIon::updateWeather()
         FutureHourForecast futureHourForecast(it->timestamp);
         futureHourForecast.setConditionIcon(iconName);
         futureHourForecast.setCondition(i18nForecast(it->summary));
-        if (!qIsNaN(it->high)) {
-            futureHourForecast.setHighTemp(it->high);
-        }
-        if (!qIsNaN(it->low)) {
-            futureHourForecast.setHighTemp(it->low);
+        // noaa does not provide high and low temperatures. Only general temperature.
+        if (!qIsNaN(it->temp)) {
+            futureHourForecast.setGeneralTemp(it->temp);
         }
         futureHourForecast.setConditionProbability(it->precipitation);
         futureHours->addHour(futureHourForecast);
@@ -972,7 +970,7 @@ void NOAAIon::readHourlyForecast(KJob *job, const QByteArray &data)
             tempF = m_converter.convert(temperature, Fahrenheit).number();
         }
 
-        forecast.high = tempF;
+        forecast.temp = tempF;
 
         // Precipitation (%)
         forecast.precipitation = period[u"probabilityOfPrecipitation"_s][u"value"_s].toInt();
