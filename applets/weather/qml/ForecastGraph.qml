@@ -19,12 +19,24 @@ import org.kde.plasma.weatherdata as WeatherData
 GraphsView {
     id: root
 
-    required property int xSection
-    required property int ySection
+    required property int generalTempSection
+    required property int highTempSection
+    required property int lowTempSection
+    required property int dateTimeSection
 
+    required property color highTempSeriesColor
+    required property color lowTempSeriesColor
+    required property color generalTempSeriesColor
+
+    required property int invalidUnit
+    required property int displayTemperatureUnit
+
+    property bool hovered: false
+
+    property var metaData: null
     property var pointsModel: null
 
-    property var toolTipTextFunction: null
+    property int currentPointIndex: 0
 
     marginBottom: Kirigami.Units.largeSpacing
     marginTop: Kirigami.Units.largeSpacing
@@ -45,7 +57,16 @@ GraphsView {
         gridVisible: false
         backgroundVisible: false
         plotAreaBackgroundVisible: false
-        seriesColors: [Kirigami.Theme.highlightColor]
+        seriesColors: {
+            let colors = [];
+            if (root.pointsModel?.highLowTempPresent) {
+                colors.push(root.lowTempSeriesColor);
+                colors.push(root.highTempSeriesColor);
+            } else {
+                colors.push(root.generalTempSeriesColor);
+            }
+            return colors;
+        }
     }
 
     axisX: DateTimeAxis {
@@ -59,38 +80,116 @@ GraphsView {
     }
 
     LineSeries {
-        id: forecastSeries
+        id: generalTempSeries
         width: 3
-        pointDelegate: Rectangle {
-            id: seriesDelegate
+        visible: !root.pointsModel.highLowTempPresent
+        pointDelegate: Item {
+            id: generalTempDelegate
 
             property real pointValueX
             property real pointValueY
             property int pointIndex
 
-            width: Kirigami.Units.iconSizes.small
-            height: Kirigami.Units.iconSizes.small
-            radius: width * 0.5
+            Rectangle {
+                id: generalTempPoint
+                anchors.centerIn: parent
+                width: Kirigami.Units.gridUnit * 0.5
+                height: width
+                radius: width * 0.5
+                color: root.generalTempSeriesColor
 
-            color: pointHover.hovered ? Kirigami.Theme.linkColor : Kirigami.Theme.highlightColor
+                visible: root.currentPointIndex === generalTempDelegate.pointIndex && root.hovered
 
-            HoverHandler {
-                id: pointHover
-            }
-
-            PlasmaCore.ToolTipArea {
-                anchors.fill: parent
-                active: pointHover.hovered
-                mainText: !!root.toolTipTextFunction ? root.toolTipTextFunction(seriesDelegate.pointIndex) : ""
+                Behavior on opacity {
+                    OpacityAnimator {
+                        duration: Kirigami.Units.shortDuration
+                    }
+                }
             }
         }
     }
 
     XYModelMapper {
         orientation: Qt.Horizontal
-        xSection: root.xSection
-        ySection: root.ySection
+        ySection: root.generalTempSection
+        xSection: root.dateTimeSection
         model: root.pointsModel || null
-        series: forecastSeries
+        series: generalTempSeries
+    }
+
+    LineSeries {
+        id: highTempSeries
+        visible: root.pointsModel.highLowTempPresent
+        width: 3
+        pointDelegate: Item {
+            id: highTempDelegate
+
+            property real pointValueX
+            property real pointValueY
+            property int pointIndex
+
+            Rectangle {
+                id: highTempPoint
+                anchors.centerIn: parent
+                width: Kirigami.Units.gridUnit * 0.5
+                height: width
+                radius: width * 0.5
+                color: root.highTempSeriesColor
+
+                visible: root.currentPointIndex === highTempDelegate.pointIndex && root.hovered
+
+                Behavior on opacity {
+                    OpacityAnimator {
+                        duration: Kirigami.Units.shortDuration
+                    }
+                }
+            }
+        }
+    }
+
+    XYModelMapper {
+        orientation: Qt.Horizontal
+        ySection: root.highTempSection
+        xSection: root.dateTimeSection
+        model: root.pointsModel || null
+        series: highTempSeries
+    }
+
+    LineSeries {
+        id: lowTempSeries
+        visible: root.pointsModel.highLowTempPresent
+        width: 3
+        pointDelegate: Item {
+            id: lowTempDelegate
+
+            property real pointValueX
+            property real pointValueY
+            property int pointIndex
+
+            Rectangle {
+                id: lowTempPoint
+                anchors.centerIn: parent
+                width: Kirigami.Units.gridUnit * 0.5
+                height: width
+                radius: width * 0.5
+                color: root.lowTempSeriesColor
+
+                visible: root.currentPointIndex === lowTempDelegate.pointIndex && root.hovered
+
+                Behavior on opacity {
+                    OpacityAnimator {
+                        duration: Kirigami.Units.shortDuration
+                    }
+                }
+            }
+        }
+    }
+
+    XYModelMapper {
+        orientation: Qt.Horizontal
+        xSection: root.dateTimeSection
+        ySection: root.lowTempSection
+        model: root.pointsModel || null
+        series: lowTempSeries
     }
 }

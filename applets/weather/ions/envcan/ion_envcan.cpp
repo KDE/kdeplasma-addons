@@ -1913,7 +1913,7 @@ void EnvCanadaIon::updateWeather()
 
         futureHour.setConditionIcon(hourlyForecast->iconName);
         futureHour.setCondition(hourlyForecast->forecastSummary);
-        futureHour.setHighTemp(hourlyForecast->temp);
+        futureHour.setGeneralTemp(hourlyForecast->temp);
 
         futureHours->addHour(futureHour);
     }
