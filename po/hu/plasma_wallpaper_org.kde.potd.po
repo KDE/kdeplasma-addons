@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-09 00:46+0000\n"
-"PO-Revision-Date: 2026-05-30 21:26+0200\n"
+"PO-Revision-Date: 2026-06-18 22:38+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
 "Language: hu\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 26.04.1\n"
+"X-Generator: Lokalize 26.04.2\n"
 
 #: package/contents/ui/config.qml:58
 #, kde-format
@@ -133,7 +133,7 @@ msgstr "„%1” névjegye"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "About This Image"
-msgstr ""
+msgstr "A kép névjegye"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
