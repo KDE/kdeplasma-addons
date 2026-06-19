@@ -32,12 +32,14 @@ public:
     std::optional<QString> condition() const;
     std::optional<qreal> highTemp() const;
     std::optional<qreal> lowTemp() const;
+    std::optional<qreal> generalTemp() const;
     std::optional<qreal> conditionProbability() const;
 
     void setConditionIcon(const QString &conditionIcon);
     void setCondition(const QString &condition);
     void setHighTemp(qreal highTemp);
     void setLowTemp(qreal lowTemp);
+    void setGeneralTemp(qreal generalTemp);
     void setConditionProbability(qreal conditionProbability);
 
 private:
@@ -46,6 +48,7 @@ private:
     std::optional<QString> m_condition;
     std::optional<qreal> m_highTemp;
     std::optional<qreal> m_lowTemp;
+    std::optional<qreal> m_generalTemp;
     std::optional<qreal> m_conditionProbability;
 };
 
@@ -59,6 +62,7 @@ private:
  * condition: free text string for weather condition, optional
  * highTemp: number of highest temperature (using general unit), optional
  * lowTemp: number of lowest temperature (using general unit), optional
+ * generalTemp: number of general temperature (use if separate low and high temp is not present) (using general unit).
  * conditionProbability: chance of conditions to happen, optional
  */
 class PLASMAWEATHERDATA_EXPORT FutureHours : public QAbstractListModel
@@ -76,6 +80,7 @@ public:
         Condition,
         HighTemp,
         LowTemp,
+        GeneralTemp,
         ConditionProbability,
     };
 
@@ -118,6 +123,10 @@ class PLASMAWEATHERDATA_EXPORT FutureHoursPoints : public QAbstractTableModel
     Q_OBJECT
     QML_ANONYMOUS
 
+    Q_PROPERTY(bool highLowTempPresent READ highLowTempPresent CONSTANT)
+    Q_PROPERTY(int totalHours READ totalHours CONSTANT)
+    Q_PROPERTY(int hoursPerDay READ hoursPerDay CONSTANT)
+    Q_PROPERTY(int totalDays READ totalDays CONSTANT)
     Q_PROPERTY(QDateTime minDate READ minDate CONSTANT)
     Q_PROPERTY(QDateTime maxDate READ maxDate CONSTANT)
     Q_PROPERTY(qreal minTemp READ minTemp CONSTANT)
@@ -126,7 +135,9 @@ class PLASMAWEATHERDATA_EXPORT FutureHoursPoints : public QAbstractTableModel
 public:
     enum RowsData {
         Timestamp = 0,
-        Temperature,
+        GeneralTemp,
+        HighTemp,
+        LowTemp,
         EndRow,
     };
 
@@ -141,12 +152,18 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
 
 private:
+    bool highLowTempPresent() const;
+    int totalHours() const;
+    int hoursPerDay() const;
+    int totalDays() const;
     QDateTime minDate() const;
     QDateTime maxDate() const;
     qreal minTemp() const;
     qreal maxTemp() const;
 
 private:
+    bool m_highLowTempPresent;
+
     qreal m_minTemp;
     qreal m_maxTemp;
 

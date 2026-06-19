@@ -80,7 +80,7 @@ Kirigami.ScrollablePage {
             Kirigami.Heading {
                 Layout.fillWidth: true
                 level: 3
-                text: i18n("Hourly Forecast: %1", Qt.formatDateTime(root.futureHours.data(root.futureHours.index(hourlyLoader.item.currentIndex, 0), WeatherData.FutureHours.Timestamp), "dddd"))
+                text: i18n("Hourly Forecast")
             }
 
             Loader {

@@ -28,37 +28,37 @@ ColumnLayout {
 
     readonly property real preferredGraphHeight: Kirigami.Units.iconSizes.enormous
 
-    ForecastGraph {
-        id: forecastGraph
+    // ForecastGraph {
+    //     id: forecastGraph
 
-        implicitHeight: root.preferredGraphHeight
+    //     implicitHeight: root.preferredGraphHeight
 
-        Layout.fillHeight: true
-        Layout.fillWidth: true
+    //     Layout.fillHeight: true
+    //     Layout.fillWidth: true
 
-        marginLeft: forecast.columnWidth / 2 + forecast.columnSpacing + forecast.verticalHeaderWidth
-        marginRight: forecast.columnWidth / 2 + forecast.columnSpacing
+    //     marginLeft: forecast.columnWidth / 2 + forecast.columnSpacing + forecast.verticalHeaderWidth
+    //     marginRight: forecast.columnWidth / 2 + forecast.columnSpacing
 
-        pointsModel: root.futureDaysPoints
+    //     pointsModel: root.futureDaysPoints
 
-        xSection: WeatherData.FutureDaysPoints.Timestamp
-        ySection: WeatherData.FutureDaysPoints.Temperature
+    //     xSection: WeatherData.FutureDaysPoints.Timestamp
+    //     ySection: WeatherData.FutureDaysPoints.Temperature
 
-        toolTipTextFunction: function (pointIndex) {
-            if (!root.futureDays) {
-                return "";
-            }
-            var dayCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Day, pointIndex), WeatherData.FutureDays.Condition);
-            var nightCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Night, pointIndex), WeatherData.FutureDays.Condition);
-            if (!!dayCondition && !!nightCondition) {
-                return i18nc("Weather condition summary string", "Day: %1 \nNight: %2", dayCondition, nightCondition);
-            } else if (!!dayCondition || !!nightCondition) {
-                return dayCondition || nightCondition;
-            } else {
-                return "";
-            }
-        }
-    }
+    //     toolTipTextFunction: function (pointIndex) {
+    //         if (!root.futureDays) {
+    //             return "";
+    //         }
+    //         var dayCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Day, pointIndex), WeatherData.FutureDays.Condition);
+    //         var nightCondition = root.futureDays.data(root.futureDays.index(WeatherData.FutureDays.Night, pointIndex), WeatherData.FutureDays.Condition);
+    //         if (!!dayCondition && !!nightCondition) {
+    //             return i18nc("Weather condition summary string", "Day: %1 \nNight: %2", dayCondition, nightCondition);
+    //         } else if (!!dayCondition || !!nightCondition) {
+    //             return dayCondition || nightCondition;
+    //         } else {
+    //             return "";
+    //         }
+    //     }
+    // }
 
     DayForecastView {
         id: forecast
