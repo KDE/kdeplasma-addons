@@ -1,11 +1,12 @@
+# SPDX-FileCopyrightText: 2026 Mint <5602mint@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2021-10-16 18:26+0900\n"
-"Last-Translator: R.Suga <21r.suga@gmail.com>\n"
-"Language-Team: Japanese <kde-jp@kde.org>\n"
+"PO-Revision-Date: 2026-06-14 22:05+0900\n"
+"Last-Translator: Mint <5602mint@gmail.com>\n"
+"Language-Team: Japanese <kde-i18n-doc@kde.org>\n"
 "Language: ja\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -13,7 +14,7 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
-"X-Generator: Poedit 2.4.2\n"
+"X-Generator: Lokalize 26.04.2\n"
 
 #: config.qml:13
 #, kde-format
@@ -22,12 +23,11 @@ msgid "Keys"
 msgstr "キー"
 
 #: configAppearance.qml:37
-#, fuzzy, kde-format
-#| msgid "No lock keys activated"
+#, kde-format
 msgctxt ""
 "@label show keyboard indicator when Caps Lock or Num Lock is activated"
 msgid "Show when activated:"
-msgstr "有効なロックキーはありません"
+msgstr "次が有効なときに表示:"
 
 #: configAppearance.qml:40
 #, kde-format
@@ -44,64 +44,62 @@ msgstr "Num Lock"
 #: main.qml:114
 #, kde-format
 msgid "Alt is latched"
-msgstr ""
+msgstr "Alt が固定されています"
 
 #: main.qml:116
 #, kde-format
 msgid "Alt is locked"
-msgstr ""
+msgstr "Alt がロックされています"
 
 #: main.qml:120
 #, kde-format
 msgid "Shift is latched"
-msgstr ""
+msgstr "Shift が固定されています"
 
 #: main.qml:122
 #, kde-format
 msgid "Shift is locked"
-msgstr ""
+msgstr "Shift がロックされています"
 
 #: main.qml:126
 #, kde-format
 msgid "Control is latched"
-msgstr ""
+msgstr "Ctrl が固定されています"
 
 #: main.qml:128
 #, kde-format
 msgid "Control is locked"
-msgstr ""
+msgstr "Ctrl がロックされています"
 
 #: main.qml:132
 #, kde-format
 msgid "Meta is latched"
-msgstr ""
+msgstr "Meta が固定されています"
 
 #: main.qml:134
 #, kde-format
 msgid "Meta is locked"
-msgstr ""
+msgstr "Meta がロックされています"
 
 #: main.qml:138
 #, kde-format
 msgid "Alt Gr is latched"
-msgstr ""
+msgstr "Alt Gr が固定されています"
 
 #: main.qml:140
 #, kde-format
 msgid "Alt Gr is locked"
-msgstr ""
+msgstr "Alt Gr がロックされています"
 
 #: main.qml:144
-#, fuzzy, kde-format
-#| msgid "Caps Lock activated\n"
+#, kde-format
 msgid "Caps Lock activated"
-msgstr "Caps Lock が有効になりました\n"
+msgstr "Caps Lock が有効です"
 
 #: main.qml:147
-#, fuzzy, kde-format
-#| msgid "Num Lock activated\n"
+#, kde-format
 msgid "Num Lock activated"
-msgstr "Num Lock が有効になりました\n"
+msgstr "Num Lock が有効です"
 
 #: main.qml:155
 #, kde-format
