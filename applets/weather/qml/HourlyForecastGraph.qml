@@ -9,8 +9,6 @@ import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
 
-import QtGraphs as Graphs
-
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
@@ -33,22 +31,43 @@ ColumnLayout {
     readonly property int hoursPerDay: root.futureHoursPoints?.hoursPerDay ?? 0
     readonly property int totalDays: root.futureHoursPoints?.totalDays ?? 0
     readonly property int totalHours: root.futureHoursPoints?.totalHours ?? 0
-    readonly property real minTemp: root.futureHoursPoints?.minTemp ?? 0
-
-    readonly property real pointSpacing: forecastFlickable.width / Math.max(1, root.hoursPerDay)
 
     property color highTempColor: "orange"
     property color lowTempColor: "blue"
     property color generalTempColor: "red"
+    property color conditionProbabilityColor: "gray"
 
     property int currentIndex: 0
 
     function scrollToIndex(dayIndex) {
+        // 1. Calculate the total span of data
+        let totalSpan = forecastGraph.axisX.max - forecastGraph.axisX.min;
+
+        // 2. Calculate the width of the visible window based on zoom level
+        // (Zoom is totalDays, making the window exactly 1 day wide)
+        let windowWidth = totalSpan / forecastGraph.axisX.zoom;
+
+        // 4. Shift left by dayIndex to bring subsequent days into the view window
+        forecastGraph.axisX.pan = forecastGraph.axisX.pan - (currentIndex - dayIndex) * windowWidth;
+
         currentIndex = dayIndex;
-        const firstPointIndex = dayIndex * root.hoursPerDay;
-        const xPosition = Math.max(0, firstPointIndex * root.pointSpacing);
-        const xLastPage = forecastFlickable.contentWidth - forecastFlickable.width;
-        forecastFlickable.contentX = Math.min(xPosition, xLastPage);
+    }
+
+    // Initialize the position when the data model maps its min and max bounds
+    onFutureHoursChanged: {
+        if (!!root.futureHours) {
+            // Wait for properties to bind, then align to the first index (0)
+            Qt.callLater(() => {
+                // DateTimeAxis.pan is a translation from the centered position.
+                // Shift the viewport so its left edge aligns with axisX.min.
+                const totalWidth = forecastGraph.axisX.max - forecastGraph.axisX.min;
+                const visibleWidth = forecastGraph.axisX.visualMax - forecastGraph.axisX.visualMin;
+                forecastGraph.axisX.pan = -(totalWidth - visibleWidth) / 2;
+                const pointSpacing = visibleWidth / root.futureHoursPoints.hoursPerDay;
+                forecastGraph.axisX.pan -= pointSpacing / 2;
+                currentIndex = 0;
+            });
+        }
     }
 
     RowLayout {
@@ -69,62 +88,63 @@ ColumnLayout {
 
             color: "transparent"
 
-            implicitWidth: forecastFlickable.implicitWidth
-            implicitHeight: forecastFlickable.implicitHeight + forecastLine.timestampLabelHeight
+            implicitHeight: forecastGraph.implicitHeight + forecastLine.timestampLabelHeight
 
-            Flickable {
-                id: forecastFlickable
+            visible: !!root.futureHoursPoints
 
+            ForecastGraph {
+                id: forecastGraph
                 anchors.fill: parent
                 anchors.topMargin: forecastLine.timestampLabelHeight
 
-                implicitHeight: contentHeight
-                contentWidth: forecastGraph.implicitWidth
-                contentHeight: forecastGraph.implicitHeight
-                clip: true
-                interactive: false
+                implicitHeight: root.preferredGraphHeight + marginTop + marginBottom
 
-                // On layout resize, re-evaluate the current scroll position.
-                // This ensures the view stays on the same logical page and prevents
-                // contentX from exceeding the last valid scroll position after pageWidth changes.
-                onWidthChanged: root.scrollToIndex(root.currentIndex)
+                marginLeft: 0
+                marginRight: marginLeft
 
-                ForecastGraph {
-                    id: forecastGraph
-                    anchors.fill: parent
+                metaData: root.metaData
 
-                    implicitHeight: root.preferredGraphHeight + marginTop + marginBottom
-                    implicitWidth: forecastFlickable.width * ((root.totalHours - 1) / root.hoursPerDay) + marginLeft * 2
+                hasProbability: root.futureHours?.hasProbability ?? false
 
-                    marginLeft: root.pointSpacing / 2
-                    marginRight: marginLeft
+                minDate: root.futureHoursPoints?.minDate ?? new Date()
 
-                    metaData: root.metaData
-
-                    hovered: forecastLine.hovered
-
-                    invalidUnit: root.invalidUnit
-                    displayTemperatureUnit: root.displayTemperatureUnit
-
-                    pointsModel: root.futureHoursPoints
-
-                    highTempSeriesColor: root.highTempColor
-                    lowTempSeriesColor: root.lowTempColor
-                    generalTempSeriesColor: root.generalTempColor
-
-                    dateTimeSection: WeatherData.FutureHoursPoints.Timestamp
-                    generalTempSection: WeatherData.FutureHoursPoints.GeneralTemp
-                    highTempSection: WeatherData.FutureHoursPoints.HighTemp
-                    lowTempSection: WeatherData.FutureHoursPoints.LowTemp
-
-                    currentPointIndex: root.currentIndex * root.hoursPerDay + forecastLine.pointNumber
+                // Use the end of the last day rather than futureHoursPoints.maxDate so each page displays a full day.
+                // This also preserves the layout of the graph.
+                maxDate: {
+                    if (!root.futureHoursPoints?.minDate) {
+                        return new Date();
+                    }
+                    var maxDate = new Date(root.futureHoursPoints.minDate);
+                    maxDate.setDate(maxDate.getDate() + root.totalDays);
+                    return maxDate;
                 }
+
+                totalDays: root.totalDays
+
+                invalidUnit: root.invalidUnit
+                displayTemperatureUnit: root.displayTemperatureUnit
+
+                pointsModel: root.futureHoursPoints
+
+                highTempSeriesColor: root.highTempColor
+                lowTempSeriesColor: root.lowTempColor
+                generalTempSeriesColor: root.generalTempColor
+                conditionProbabilitySeriesColor: root.conditionProbabilityColor
+
+                dateTimeSection: WeatherData.FutureHoursPoints.Timestamp
+                generalTempSection: WeatherData.FutureHoursPoints.GeneralTemp
+                highTempSection: WeatherData.FutureHoursPoints.HighTemp
+                lowTempSection: WeatherData.FutureHoursPoints.LowTemp
+                conditionProbabilitySection: WeatherData.FutureHoursPoints.ConditionProbability
             }
 
             ForecastGraphLine {
                 id: forecastLine
 
                 anchors.fill: parent
+
+                invalidUnit: root.invalidUnit
+                displayTemperatureUnit: root.displayTemperatureUnit
 
                 graphMarginLeft: forecastGraph.marginLeft
                 graphMarginRight: forecastGraph.marginRight
@@ -134,47 +154,59 @@ ColumnLayout {
                 generalTempColor: root.generalTempColor
                 highTempColor: root.highTempColor
                 lowTempColor: root.lowTempColor
+                conditionProbabilityColor: root.conditionProbabilityColor
 
-                pointSpacing: root.pointSpacing
+                graphHovered: forecastGraph.hovered
 
-                highLowTempPresent: root.futureHoursPoints.highLowTempPresent
+                graphVisualMaxX: forecastGraph.axisX.visualMax
+                graphVisualMinX: forecastGraph.axisX.visualMin
+
+                currentPointDateX: forecastGraph.currentPointDateX
+                currentPointGeneralTempY: forecastGraph.currentPointGeneralTempY
+                currentPointHighTempY: forecastGraph.currentPointHighTempY
+                currentPointLowTempY: forecastGraph.currentPointLowTempY
+                currentPointConditionProbabilityY: forecastGraph.currentPointConditionProbabilityY
+
+                hasProbability: root.futureHours?.hasProbability ?? false
+                highLowTempPresent: root.futureHoursPoints?.highLowTempPresent ?? false
 
                 maxTemp: root.futureHoursPoints?.maxTemp ?? 0
                 minTemp: root.futureHoursPoints?.minTemp ?? 0
 
-                highTemp: {
-                    if (!root.futureHours) {
-                        return null;
-                    }
-                    let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
-                    return root.futureHours.data(index, WeatherData.FutureHours.HighTemp) ?? null;
-                }
-
-                lowTemp: {
-                    if (!root.futureHours) {
-                        return null;
-                    }
-                    let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
-                    return root.futureHours.data(index, WeatherData.FutureHours.LowTemp) ?? null;
-                }
-
-                generalTemp: {
-                    if (!root.futureHours) {
-                        return null;
-                    }
-                    let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
-                    return root.futureHours.data(index, WeatherData.FutureHours.GeneralTemp) ?? null;
-                }
-
-                timestamp: {
+                generalTempText: {
                     if (!root.futureHours) {
                         return "";
                     }
-                    const format = Qt.locale().timeFormat(Locale.ShortFormat);
-                    const usesAmPm = format.includes("Ap");
                     let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
-                    const timestamp = root.futureHours.data(index, WeatherData.FutureHours.Timestamp);
-                    Qt.formatDateTime(timestamp, usesAmPm ? "h AP" : "HH:mm");
+                    let generalTemp = root.futureHours.data(index, WeatherData.FutureHours.GeneralTemp);
+                    return Util.temperatureToDisplayString(root.displayTemperatureUnit, generalTemp, root.metaData.temperatureUnit);
+                }
+
+                highTempText: {
+                    if (!root.futureHours) {
+                        return "";
+                    }
+                    let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
+                    let highTemp = root.futureHours.data(index, WeatherData.FutureHours.HighTemp);
+                    return Util.temperatureToDisplayString(root.displayTemperatureUnit, highTemp, root.metaData.temperatureUnit);
+                }
+
+                lowTempText: {
+                    if (!root.futureHours) {
+                        return "";
+                    }
+                    let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
+                    let lowTemp = root.futureHours.data(index, WeatherData.FutureHours.LowTemp);
+                    return Util.temperatureToDisplayString(root.displayTemperatureUnit, lowTemp, root.metaData.temperatureUnit);
+                }
+
+                conditionProbabilityText: {
+                    if (!root.futureHours) {
+                        return "";
+                    }
+                    let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
+                    let conditionProbability = root.futureHours.data(index, WeatherData.FutureHours.ConditionProbability);
+                    return Util.percentToDisplayString(conditionProbability);
                 }
             }
         }
@@ -182,8 +214,10 @@ ColumnLayout {
         PlasmaComponents.ToolButton {
             Layout.fillHeight: true
             icon.name: "go-next"
-            enabled: root.currentIndex < root.totalDays - 1
-            onClicked: root.scrollToIndex(root.currentIndex + 1)
+            enabled: root.currentIndex < forecastGraph.axisX.zoom - 1
+            onClicked: {
+                root.scrollToIndex(root.currentIndex + 1);
+            }
             Layout.preferredWidth: Kirigami.Units.iconSizes.small
         }
     }
