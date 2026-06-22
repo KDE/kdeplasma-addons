@@ -15,45 +15,50 @@ Item {
     required property real graphMarginBottom
     required property real graphMarginTop
 
+    required property real graphVisualMinX
+    required property real graphVisualMaxX
+
     required property color generalTempColor
     required property color highTempColor
     required property color lowTempColor
+    required property color conditionProbabilityColor
 
-    required property real pointSpacing
+    required property int invalidUnit
+    required property int displayTemperatureUnit
+
+    required property real graphHovered
+
+    required property real currentPointDateX
+    required property real currentPointGeneralTempY
+    required property real currentPointHighTempY
+    required property real currentPointLowTempY
+    required property real currentPointConditionProbabilityY
+
+    required property string generalTempText
+    required property string highTempText
+    required property string lowTempText
+    required property string conditionProbabilityText
 
     property var maxTemp: null
     property var minTemp: null
 
-    property var highTemp: null
-    property var lowTemp: null
-    property var generalTemp: null
-    property var timestamp: null
-
+    property bool hasProbability: false
     property bool highLowTempPresent: false
-
-    readonly property bool hovered: hoverHandler.hovered
 
     readonly property real timestampLabelHeight: timestampLabel.height
 
-    readonly property int pointNumber: {
-        const graphPositionX = hoverHandler.point.position.x - root.graphMarginRight;
-        if ((graphPositionX % root.pointSpacing) > (root.pointSpacing / 2) || hoverHandler.point.position.x < (root.pointSpacing / 2)) {
-            return Math.ceil(graphPositionX / root.pointSpacing);
-        } else {
-            return Math.floor(graphPositionX / root.pointSpacing);
-        }
-    }
-
-    onPointNumberChanged: {
-        if (lineItem.x > (width / 2)) {
-            if (state !== "leftLabels") {
-                state = "leftLabels";
+    onCurrentPointDateXChanged: {
+        Qt.callLater(() => {
+            if (lineItem.x > (width / 2)) {
+                if (state !== "leftLabels") {
+                    state = "leftLabels";
+                }
+            } else {
+                if (state !== "rightLabels") {
+                    state = "rightLabels";
+                }
             }
-        } else {
-            if (state !== "rightLabels") {
-                state = "rightLabels";
-            }
-        }
+        });
     }
 
     PlasmaComponents.Label {
@@ -62,10 +67,10 @@ Item {
         anchors.horizontalCenter: lineItem.horizontalCenter
         visible: lineItem.visible
         text: {
-            if (!root.timestamp) {
-                return "";
-            }
-            return root.timestamp;
+            const timestamp = new Date(root.currentPointDateX);
+            const format = Qt.locale().timeFormat(Locale.ShortFormat);
+            const usesAmPm = format.includes("Ap");
+            Qt.formatDateTime(timestamp, usesAmPm ? "h AP" : "HH:mm");
         }
     }
 
@@ -77,10 +82,24 @@ Item {
         height: parent.height - timestampLabel.height
 
         x: {
-            return root.pointNumber * root.pointSpacing + root.graphMarginRight - cursorLine.width / 2;
+            const plotWidth = parent.width - root.graphMarginLeft - root.graphMarginRight;
+
+            if (plotWidth <= 0) {
+                return root.graphMarginLeft;
+            }
+
+            if (root.graphVisualMaxX <= root.graphVisualMinX) {
+                return root.graphMarginLeft;
+            }
+
+            const ratio = (root.currentPointDateX - root.graphVisualMinX) / (root.graphVisualMaxX - root.graphVisualMinX);
+
+            let linePositionX = root.graphMarginLeft + ratio * plotWidth - cursorLine.width / 2;
+
+            return linePositionX;
         }
 
-        visible: hoverHandler.hovered
+        visible: root.graphHovered
 
         Rectangle {
             id: cursorLine
@@ -104,7 +123,7 @@ Item {
             if (!root.minTemp || !root.maxTemp) {
                 return 0;
             }
-            let coefficient = (1.0 - (temperature - root.minTemp) / (root.maxTemp - root.minTemp));
+            let coefficient = 1.0 - temperature / 100;
             let graphPlaneHeight = dataLabels.height - root.graphMarginTop - root.graphMarginBottom;
             return coefficient * graphPlaneHeight + root.graphMarginTop - rectangleHeight / 2;
         }
@@ -180,12 +199,12 @@ Item {
             implicitHeight: dataLabels.rectangleHeight
             color: Qt.lighter(root.generalTempColor, 1.7)
             radius: Kirigami.Units.cornerRadius
-            visible: !!root.generalTemp && !root.highLowTempPresent
-            property real preferredY: dataLabels.calculateYFromTemp(root.generalTemp ?? 0)
+            visible: !root.highLowTempPresent && root.generalTempText !== ""
+            property real preferredY: dataLabels.calculateYFromTemp(root.currentPointGeneralTempY)
             PlasmaComponents.Label {
                 id: generalTempLabel
                 anchors.centerIn: parent
-                text: root.generalTemp ?? ""
+                text: root.generalTempText
                 color: root.generalTempColor
             }
         }
@@ -195,12 +214,12 @@ Item {
             implicitHeight: dataLabels.rectangleHeight
             color: Qt.lighter(root.highTempColor, 1.7)
             radius: Kirigami.Units.cornerRadius
-            property real preferredY: dataLabels.calculateYFromTemp(root.highTemp ?? 0)
-            visible: !!root.highTemp && root.highLowTempPresent
+            property real preferredY: dataLabels.calculateYFromTemp(root.currentPointHighTempY)
+            visible: root.highLowTempPresent && root.highTempText !== ""
             PlasmaComponents.Label {
                 id: highTempLabel
                 anchors.centerIn: parent
-                text: root.highTemp ?? ""
+                text: root.highTempText
                 color: root.highTempColor
             }
         }
@@ -210,21 +229,42 @@ Item {
             implicitHeight: dataLabels.rectangleHeight
             color: Qt.lighter(root.lowTempColor, 1.7)
             radius: Kirigami.Units.cornerRadius
-            visible: !!root.lowTemp && root.highLowTempPresent
-            property real preferredY: dataLabels.calculateYFromTemp(root.lowTemp ?? 0)
+            visible: root.highLowTempPresent && root.lowTempText !== ""
+            property real preferredY: dataLabels.calculateYFromTemp(root.currentPointLowTempY)
             PlasmaComponents.Label {
                 id: lowTempLabel
                 anchors.centerIn: parent
-                text: root.lowTemp ?? ""
+                text: root.lowTempText
                 color: root.lowTempColor
+            }
+        }
+
+        Rectangle {
+            implicitWidth: conditionProbabilityLabel.implicitWidth + Kirigami.Units.smallSpacing
+            implicitHeight: dataLabels.rectangleHeight
+            color: Qt.lighter(root.conditionProbabilityColor, 1.7)
+            radius: Kirigami.Units.cornerRadius
+            visible: root.hasProbability && root.conditionProbabilityText !== ""
+            property real preferredY: {
+                let coefficient = (1.0 - root.currentPointConditionProbabilityY / 100);
+                let graphPlaneHeight = dataLabels.height - root.graphMarginTop - root.graphMarginBottom;
+                return coefficient * graphPlaneHeight + root.graphMarginTop - parent.rectangleHeight / 2;
+            }
+            PlasmaComponents.Label {
+                id: conditionProbabilityLabel
+                anchors.centerIn: parent
+                text: root.conditionProbabilityText
+                color: root.conditionProbabilityColor
             }
         }
 
         Connections {
             target: root
 
-            function onPointNumberChanged() {
-                dataLabels.updateLayout();
+            function onCurrentPointDateXChanged() {
+                Qt.callLater(() => {
+                    dataLabels.updateLayout();
+                });
             }
         }
 
@@ -268,8 +308,4 @@ Item {
             }
         }
     ]
-
-    HoverHandler {
-        id: hoverHandler
-    }
 }

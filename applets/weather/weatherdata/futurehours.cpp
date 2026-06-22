@@ -87,11 +87,22 @@ QVariant FutureHoursPoints::data(const QModelIndex &index, int role) const
     if (index.row() == Timestamp) {
         return m_futureHours->data(futureHoursIndex, FutureHours::Timestamp).toDateTime();
     } else if (index.row() == HighTemp) {
-        return m_futureHours->data(futureHoursIndex, FutureHours::HighTemp);
+        auto highTempVariant = m_futureHours->data(futureHoursIndex, FutureHours::HighTemp);
+        if (highTempVariant.canConvert<qreal>()) {
+            return highTempVariant.toReal() / m_maxTemp * 100;
+        }
     } else if (index.row() == LowTemp) {
-        return m_futureHours->data(futureHoursIndex, FutureHours::LowTemp);
+        auto lowTempVariant = m_futureHours->data(futureHoursIndex, FutureHours::LowTemp);
+        if (lowTempVariant.canConvert<qreal>()) {
+            return lowTempVariant.toReal() / m_maxTemp * 100;
+        }
     } else if (index.row() == GeneralTemp) {
-        return m_futureHours->data(futureHoursIndex, FutureHours::GeneralTemp);
+        auto generalTempVariant = m_futureHours->data(futureHoursIndex, FutureHours::GeneralTemp);
+        if (generalTempVariant.canConvert<qreal>()) {
+            return (generalTempVariant.toReal() - m_minTemp) / (m_maxTemp - m_minTemp) * 100;
+        }
+    } else if (index.row() == ConditionProbability) {
+        return m_futureHours->data(futureHoursIndex, FutureHours::ConditionProbability);
     }
 
     return {};
@@ -125,7 +136,7 @@ int FutureHoursPoints::hoursPerDay() const
 
         QDateTime date = dateVariant.toDateTime();
 
-        if (startDate.time().hour() == date.time().hour() || startDate.daysTo(date) >= 2) {
+        if (date >= startDate.addDays(1)) {
             break;
         }
 
@@ -137,30 +148,27 @@ int FutureHoursPoints::hoursPerDay() const
 
 int FutureHoursPoints::totalDays() const
 {
-    QVariant startDateVariant = m_futureHours->data(m_futureHours->index(0), FutureHours::Timestamp);
-    if (!startDateVariant.canConvert<QDateTime>()) {
+    if (m_futureHours->rowCount() == 0)
         return 0;
-    }
 
-    QDateTime startDate = startDateVariant.toDateTime();
+    int days = 1;
 
-    int daysNumber = 0;
+    QDateTime startDate = m_futureHours->data(m_futureHours->index(0), FutureHours::Timestamp).toDateTime();
 
-    for (int hourCount = 1; hourCount < m_futureHours->rowCount(); ++hourCount) {
-        QVariant dateVariant = m_futureHours->data(m_futureHours->index(hourCount), FutureHours::Timestamp);
-        if (!dateVariant.canConvert<QDateTime>()) {
-            return daysNumber;
+    for (int hourPosition = 1; hourPosition < m_futureHours->rowCount(); ++hourPosition) {
+        QDateTime date = m_futureHours->data(m_futureHours->index(hourPosition), FutureHours::Timestamp).toDateTime();
+
+        if (!date.isValid()) {
+            break;
         }
 
-        QDateTime date = dateVariant.toDateTime();
-
-        if (startDate.daysTo(date) >= 1) {
+        if (date >= startDate.addDays(1)) {
             startDate = date;
-            ++daysNumber;
+            ++days;
         }
     }
 
-    return daysNumber;
+    return days;
 }
 
 QDateTime FutureHoursPoints::minDate() const
