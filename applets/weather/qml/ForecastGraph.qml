@@ -22,71 +22,78 @@ GraphsView {
     required property int generalTempSection
     required property int highTempSection
     required property int lowTempSection
+    required property int conditionProbabilitySection
     required property int dateTimeSection
 
     required property color highTempSeriesColor
     required property color lowTempSeriesColor
     required property color generalTempSeriesColor
+    required property color conditionProbabilitySeriesColor
 
     required property int invalidUnit
     required property int displayTemperatureUnit
 
+    required property date minDate
+    required property date maxDate
+
+    property real currentPointDateX
+    property real currentPointGeneralTempY
+    property real currentPointHighTempY
+    property real currentPointLowTempY
+    property real currentPointConditionProbabilityY
+
+    property int totalDays: 0
+
     property bool hovered: false
+
+    property bool hasProbability: false
 
     property var metaData: null
     property var pointsModel: null
 
-    property int currentPointIndex: 0
-
     marginBottom: Kirigami.Units.largeSpacing
     marginTop: Kirigami.Units.largeSpacing
-    clipPlotArea: false
+
+    property int currentPointIndex: -1
 
     //Initialize axis min/max values only when pointsModel is
     // to prevent warnings
     onPointsModelChanged: {
-        if (!!root.pointsModel) {
-            axisX.min = root.pointsModel.minDate;
-            axisX.max = root.pointsModel.maxDate;
-            axisY.min = root.pointsModel.minTemp;
-            axisY.max = root.pointsModel.maxTemp;
-        }
+        axisX.min = root.minDate;
+        axisX.max = root.maxDate;
     }
 
     theme: GraphsTheme {
-        gridVisible: false
+        gridVisible: true
         backgroundVisible: false
         plotAreaBackgroundVisible: false
-        seriesColors: {
-            let colors = [];
-            if (root.pointsModel?.highLowTempPresent) {
-                colors.push(root.lowTempSeriesColor);
-                colors.push(root.highTempSeriesColor);
-            } else {
-                colors.push(root.generalTempSeriesColor);
-            }
-            return colors;
-        }
+        grid.mainColor: Kirigami.Theme.activeBackgroundColor
     }
 
     axisX: DateTimeAxis {
         visible: false
         lineVisible: false
+        zoom: root.totalDays
+        pan: 0
     }
 
     axisY: ValueAxis {
         visible: false
+        tickInterval: 20
         lineVisible: false
+        min: 0
+        max: 100
     }
 
     LineSeries {
         id: generalTempSeries
+        visible: !root.pointsModel?.highLowTempPresent ?? false
         width: 3
-        visible: !root.pointsModel.highLowTempPresent
+        color: root.generalTempSeriesColor
         pointDelegate: Item {
             id: generalTempDelegate
 
-            property real pointValueX
+            property date pointValueX
             property real pointValueY
             property int pointIndex
 
@@ -98,7 +105,14 @@ GraphsView {
                 radius: width * 0.5
                 color: root.generalTempSeriesColor
 
-                visible: root.currentPointIndex === generalTempDelegate.pointIndex && root.hovered
+                visible: root.currentPointIndex === generalTempDelegate.pointIndex && hoverHandler.hovered
+
+                onVisibleChanged: {
+                    if (visible) {
+                        root.currentPointDateX = generalTempDelegate.pointValueX;
+                        root.currentPointGeneralTempY = generalTempDelegate.pointValueY;
+                    }
+                }
 
                 Behavior on opacity {
                     OpacityAnimator {
@@ -119,8 +133,9 @@ GraphsView {
 
     LineSeries {
         id: highTempSeries
-        visible: root.pointsModel.highLowTempPresent
+        visible: root.pointsModel?.highLowTempPresent ?? false
         width: 3
+        color: root.highTempSeriesColor
         pointDelegate: Item {
             id: highTempDelegate
 
@@ -136,7 +151,14 @@ GraphsView {
                 radius: width * 0.5
                 color: root.highTempSeriesColor
 
-                visible: root.currentPointIndex === highTempDelegate.pointIndex && root.hovered
+                visible: root.currentPointIndex === highTempDelegate.pointIndex && hoverHandler.hovered
+
+                onVisibleChanged: {
+                    if (visible) {
+                        root.currentPointDateX = highTempDelegate.pointValueX;
+                        root.currentPointHighTempY = highTempDelegate.pointValueY;
+                    }
+                }
 
                 Behavior on opacity {
                     OpacityAnimator {
@@ -157,8 +179,9 @@ GraphsView {
 
     LineSeries {
         id: lowTempSeries
-        visible: root.pointsModel.highLowTempPresent
+        visible: root.pointsModel?.highLowTempPresent ?? false
         width: 3
+        color: root.lowTempSeriesColor
         pointDelegate: Item {
             id: lowTempDelegate
 
@@ -174,7 +197,14 @@ GraphsView {
                 radius: width * 0.5
                 color: root.lowTempSeriesColor
 
-                visible: root.currentPointIndex === lowTempDelegate.pointIndex && root.hovered
+                visible: root.currentPointIndex === lowTempDelegate.pointIndex && hoverHandler.hovered
+
+                onVisibleChanged: {
+                    if (visible) {
+                        root.currentPointDateX = lowTempDelegate.pointValueX;
+                        root.currentPointLowTempY = lowTempDelegate.pointValueY;
+                    }
+                }
 
                 Behavior on opacity {
                     OpacityAnimator {
@@ -191,5 +221,116 @@ GraphsView {
         ySection: root.lowTempSection
         model: root.pointsModel || null
         series: lowTempSeries
+    }
+
+    LineSeries {
+        id: conditionProbabilitySeries
+        visible: !!root.pointsModel && root.hasProbability
+        width: 3
+        color: root.conditionProbabilitySeriesColor
+        pointDelegate: Item {
+            id: conditionProbabilityDelegate
+
+            property real pointValueX
+            property real pointValueY
+            property int pointIndex
+
+            Rectangle {
+                id: conditionProbabilityPoint
+                anchors.centerIn: parent
+                width: Kirigami.Units.gridUnit * 0.5
+                height: width
+                radius: width * 0.5
+                color: root.conditionProbabilitySeriesColor
+
+                visible: root.currentPointIndex === conditionProbabilityDelegate.pointIndex && hoverHandler.hovered
+
+                onVisibleChanged: {
+                    if (visible) {
+                        root.currentPointDateX = conditionProbabilityDelegate.pointValueX;
+                        root.currentPointConditionProbabilityY = conditionProbabilityDelegate.pointValueY;
+                    }
+                }
+
+                Behavior on opacity {
+                    OpacityAnimator {
+                        duration: Kirigami.Units.shortDuration
+                    }
+                }
+            }
+        }
+    }
+
+    XYModelMapper {
+        orientation: Qt.Horizontal
+        xSection: root.dateTimeSection
+        ySection: root.conditionProbabilitySection
+        model: root.pointsModel || null
+        series: conditionProbabilitySeries
+    }
+
+    HoverHandler {
+        id: hoverHandler
+
+        onHoveredChanged: {
+            if (!hovered) {
+                root.hovered = false;
+            }
+        }
+
+        onPointChanged: {
+            if (!root.pointsModel || !hovered) {
+                root.hovered = false;
+                root.currentPointIndex = -1;
+                return;
+            }
+
+            const plotWidth = root.plotArea.width;
+            const xInPlot = point.position.x - root.marginLeft;
+
+            // Ignore the cursor outside the graph area.
+            if (xInPlot < 0 || xInPlot > plotWidth) {
+                root.hovered = false;
+                root.currentPointIndex = -1;
+                return;
+            }
+
+            const ratio = xInPlot / plotWidth;
+
+            const visualMin = root.axisX.visualMin.getTime();
+            const visualMax = root.axisX.visualMax.getTime();
+            const targetTime = visualMin + ratio * (visualMax - visualMin);
+
+            let left = 0;
+            let right = root.pointsModel.columnCount() - 1;
+
+            // Binary search for the first timestamp >= targetTime.
+            while (left < right) {
+                const mid = Math.floor((left + right) / 2);
+
+                const time = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, mid), Qt.DisplayRole)).getTime();
+
+                if (time < targetTime) {
+                    left = mid + 1;
+                } else {
+                    right = mid;
+                }
+            }
+
+            let closest = left;
+
+            // Compare with the previous point to find the nearest one.
+            if (left > 0) {
+                const previousTime = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, left - 1), Qt.DisplayRole)).getTime();
+                const currentTime = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, left), Qt.DisplayRole)).getTime();
+
+                if (Math.abs(previousTime - targetTime) < Math.abs(currentTime - targetTime) || currentTime > visualMax) {
+                    closest = left - 1;
+                }
+            }
+
+            root.currentPointIndex = closest;
+            root.hovered = true;
+        }
     }
 }

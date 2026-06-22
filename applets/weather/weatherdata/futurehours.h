@@ -138,6 +138,7 @@ public:
         GeneralTemp,
         HighTemp,
         LowTemp,
+        ConditionProbability,
         EndRow,
     };
 
