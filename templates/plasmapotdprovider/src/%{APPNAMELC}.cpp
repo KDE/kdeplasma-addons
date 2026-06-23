@@ -9,10 +9,11 @@
 // KF
 #include <KPluginFactory>
 #include <KIO/Job>
+#include <KIO/StoredTransferJob>
 
 
-%{APPNAME}::%{APPNAME}(QObject *parent, const QVariantList &args)
-    : PotdProvider(parent, args)
+%{APPNAME}::%{APPNAME}(QObject *parent, const KPluginMetaData &metaData, const QVariantList &args)
+    : PotdProvider(parent, metaData, args)
 {
     // TODO: replace with url to data about what the current picture of the day is
     const QUrl potdFeed(QStringLiteral("https://kde.org"));
@@ -20,10 +21,6 @@
     KIO::StoredTransferJob* job = KIO::storedGet(potdFeed, KIO::NoReload, KIO::HideProgressInfo);
     connect(job, &KIO::StoredTransferJob::finished,
             this, &%{APPNAME}::handleFinishedFeedRequest);
-}
-
-%{APPNAME}::~%{APPNAME}()
-{
 }
 
 void %{APPNAME}::handleFinishedFeedRequest(KJob *job)
@@ -35,7 +32,7 @@ void %{APPNAME}::handleFinishedFeedRequest(KJob *job)
     }
 
     // TODO: read url to image from requestJob->data()
-    const QUrl picureUrl(QStringLiteral("https://techbase.kde.org/favicon.png"));
+    const QUrl picureUrl(QStringLiteral("https://planet.kde.org/img/planet.svg"));
 
     KIO::StoredTransferJob *imageJob = KIO::storedGet(picureUrl, KIO::NoReload, KIO::HideProgressInfo);
     connect(imageJob, &KIO::StoredTransferJob::finished,
@@ -50,14 +47,14 @@ void %{APPNAME}::handleFinishedImageRequest(KJob *job)
         return;
     }
 
-    potdProviderData()->wallpaperImage = QImage::fromData(requestJob->data());
+    const auto image = QImage::fromData(requestJob->data());
 
-    if (potdProviderData()->wallpaperImage.isNull()) {
+    if (image.isNull()) {
         Q_EMIT error(this);
         return;
     }
 
-    Q_EMIT finished(this);
+    Q_EMIT finished(this, image);
 }
 
 

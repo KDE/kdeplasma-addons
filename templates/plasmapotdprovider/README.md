@@ -1,10 +1,9 @@
-Plasma Picture-Of-The-Day Provider
-----------------------------------
+# Plasma Picture-Of-The-Day Provider
 
--- Note --
+## Note
 
 Remember that this potd plugin relies on a semi-public API,
-as exposed by the "plasma/potdprovider/potdprovider.h" header.
+as exposed by the `plasma/potdprovider/potdprovider.h` header.
 While this API has been the same for some time, there is no guarantee
 that it will be stable for all future versions of the potd dataengine
 as part of Plasma Addons.
@@ -17,13 +16,15 @@ Once your potd plugin is nicely working, please consider to propose it
 for inclusion with in the KDE module kdeplasma-addons with the existing potd providers.
 
 
--- Build instructions --
+# Build instructions
 
+```
 cd /where/your/potdprovider/is/generated
 mkdir build
 cd build
 cmake -DCMAKE_INSTALL_PREFIX=MYPREFIX ..
 make
 make install
+```
 
-(MYPREFIX is where you install your Plasma setup, replace it accordingly)
+(`MYPREFIX` is where you install your Plasma setup, replace it accordingly)

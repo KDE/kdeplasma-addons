@@ -24,12 +24,7 @@ public:
      * @param parent the parent object
      * @param args arguments from the plugin factory (unused)
      */
-    %{APPNAME}(QObject *parent, const QVariantList &args);
-
-    /**
-     * Destroys the provider.
-     */
-    ~%{APPNAME}() override;
+    %{APPNAME}(QObject *parent, const KPluginMetaData &metadata, const QVariantList &args);
 
 private:
     void handleFinishedFeedRequest(KJob *job);
