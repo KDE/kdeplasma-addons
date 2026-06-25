@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-27 00:45+0000\n"
-"PO-Revision-Date: 2026-02-28 23:16+0100\n"
+"PO-Revision-Date: 2026-06-13 16:37+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #: calendarsystem.h:51
 #, kde-format
@@ -36,7 +36,7 @@ msgstr "Milankovic"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Solar Hijri Calendar (Persian)"
-msgstr "Hijri eguzki egutegia (Persiarra)"
+msgstr "Hijri eguzki-egutegia (Persiarra)"
 
 #: calendarsystem.h:63
 #, kde-format
@@ -52,7 +52,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "The Islamic Civil Calendar (Tabular)"
-msgstr "Egutegi zibil islamiarra (tabularra)"
+msgstr "Egutegi-zibil islamiarra (tabularra)"
 
 #: calendarsystem.h:71
 #, kde-format
@@ -66,7 +66,7 @@ msgstr "Egutegi islamiarra (Umm al-Qura)"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Chinese Lunar Calendar"
-msgstr "Ilargi egutegi txinatarra"
+msgstr "Ilargi-egutegi txinatarra"
 
 #: calendarsystem.h:79
 #, kde-format
@@ -84,13 +84,13 @@ msgstr "Egutegi hebrearra"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
-msgstr "Ilargi egutegi vietnamdarra"
+msgstr "Ilargi-egutegi vietnamdarra"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
-msgstr "Egutegi sistema:"
+msgstr "Egutegi-sistema:"
 
 #: config/qml/AlternateCalendarConfig.qml:69
 #, kde-format
