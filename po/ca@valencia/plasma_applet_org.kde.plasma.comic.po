@@ -308,7 +308,7 @@ msgstr "Trieu un còmic…"
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
-msgstr "%1/%2 - %3.png"
+msgstr "%1/%2 – %3.png"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
