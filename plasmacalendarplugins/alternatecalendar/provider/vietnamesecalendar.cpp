@@ -86,7 +86,7 @@ qint64 getLocalDayIndex(double jde)
     double dt = SolarUtils::getDeltaT(year, month) / 86400.0;
     double jdUtc = jde - dt;
     // Vietnamese is UTC+7
-    return std::floor(jdUtc + 7.0 / 24.0) + 0.5;
+    return std::floor(jdUtc + 7.0 / 24.0 + 0.5);
 }
 
 /*!
