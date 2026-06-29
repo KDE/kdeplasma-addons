@@ -1,0 +1,63 @@
+# Translation of plasma_runner_colors to Norwegian Nynorsk
+#
+# SPDX-FileCopyrightText: 2026 Karl Ove Hufthammer <karl@huftis.org>
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"PO-Revision-Date: 2026-06-28 11:55+0200\n"
+"Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
+"Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
+"Language: nn\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 26.07.70\n"
+"X-Environment: kde\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+
+#: colorsrunner.cpp:29
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color when :q: is a hexadecimal color (e.g. "
+"#FF00FF) or an SVG named color."
+msgstr ""
+"Viser verdien av :q: som ein farge når :q: er ein heksadesimal-kode "
+"(eks. #FF00FF) eller namnet på ein SVG-farge."
+
+#: colorsrunner.cpp:31
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color when :q: is an RGB color triplet (e.g. "
+"255,255,255)."
+msgstr ""
+"Viser verdien av :q: som ein farge når :q: er ein RGB-kode "
+"(eks. 255,255,255)."
+
+#: colorsrunner.cpp:34
+#, kde-format
+msgid ""
+"Displays the value of :q: as a color with alpha channel when :q: is an RGBA "
+"color quadruplet (e.g. 255,255,255,255)."
+msgstr ""
+"Viser verdien av :q: som ein farge med alfakanal når :q: er ein RGBA-kode "
+"(eks. 255,255,255,255)."
+
+#: colorsrunner.cpp:139
+#, kde-format
+msgid "RGBA: %1, %2, %3, %4"
+msgstr "RGBA: %1, %2, %3, %4"
+
+#: colorsrunner.cpp:141
+#, kde-format
+msgid "RGB: %1, %2, %3"
+msgstr "RGB: %1, %2, %3"
+
+#: colorsrunner.cpp:146
+#, kde-format
+msgid "CMYK: %1%, %2%, %3%, %4%"
+msgstr "CMYK: %1 %, %2 %, %3 %, %4 %"
