@@ -1,13 +1,12 @@
 # Translation of plasma_applet_org.kde.plasma.mediaframe to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2016, 2018, 2019, 2022.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:44+0000\n"
-"PO-Revision-Date: 2022-02-13 14:38+0100\n"
+"PO-Revision-Date: 2026-06-28 11:50+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -15,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.2\n"
+"X-Generator: Lokalize 26.07.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -24,13 +23,13 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Media"
-msgstr ""
+msgstr "Medium"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Åtferd"
 
 #: qml/ConfigBehavior.qml:48
 #, kde-format
@@ -179,8 +178,7 @@ msgid "Add Files…"
 msgstr "Legg til filer …"
 
 #: qml/ConfigMedia.qml:84
-#, fuzzy, kde-format
-#| msgid "Remove path"
+#, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Fjern adresse"
@@ -189,13 +187,13 @@ msgstr "Fjern adresse"
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
-msgstr ""
+msgstr "Ikkje noko medium er sett opp"
 
 #: qml/ConfigMedia.qml:95
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
-msgstr ""
+msgstr "Legg til filer eller mapper å visa dei i skjermelementet."
 
 #: qml/ConfigMedia.qml:101
 #, kde-format
@@ -213,10 +211,10 @@ msgstr "Vel mappe"
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
-msgstr ""
+msgstr "Inkje medium er valt"
 
 #: qml/main.qml:364 qml/main.qml:374
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
-msgstr ""
+msgstr "Vel medium …"

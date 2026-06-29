@@ -1,12 +1,11 @@
 # Translation of plasma_calendar_alternatecalendar to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-02-27 00:45+0000\n"
-"PO-Revision-Date: 2023-05-27 14:03+0200\n"
+"PO-Revision-Date: 2026-06-28 11:58+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -14,7 +13,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 26.07.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -80,12 +79,10 @@ msgid "Hebrew Calendar"
 msgstr "Hebraisk kalender"
 
 #: calendarsystem.h:87
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Chinese Lunar Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
-msgstr "Den kinesiske kalenderen"
+msgstr "Vietnamesisk månekalender"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -154,10 +151,9 @@ msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
 msgstr "%1. %2 %3"
 
+# Satsar på at standard norsk datoformat vert riktig for dei vietnamesiske datoen òg.
 #: provider/vietnamesecalendar.cpp:406
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
 msgid "%1 %2, %3"
