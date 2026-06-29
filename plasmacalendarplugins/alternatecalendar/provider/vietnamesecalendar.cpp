@@ -329,7 +329,7 @@ public:
 };
 
 VietnameseCalendarProviderPrivate::VietnameseCalendarProviderPrivate()
-    : m_locale{QLocale::system().name().toLatin1().constData(), nullptr, nullptr, "calendar=chinese"}
+    : m_locale{"vi", nullptr, nullptr, "calendar=chinese"} // Force using the Vietnamese translation
 {
     m_calendar.reset(icu::Calendar::createInstance(m_locale, m_errorCode));
 }
@@ -391,22 +391,13 @@ CalendarEvents::CalendarEventsPlugin::SubLabel VietnameseCalendarProviderPrivate
         return {};
     }
 
-    const bool isLocaleVietnamese = QLocale::system().language() == QLocale::Vietnamese;
-
     CalendarEvents::CalendarEventsPlugin::SubLabel sublabel;
     sublabel.priority = CalendarEvents::CalendarEventsPlugin::SubLabelPriority::Low;
 
     sublabel.dayLabel = QString::number(day());
     sublabel.monthLabel = formattedDateString("MMMM");
     sublabel.yearLabel = formattedDateString("U r");
-
-    sublabel.label = isLocaleVietnamese ? formattedDateString("'Ngày' d 'tháng' MMMM 'năm' U r")
-                                        : i18ndc("plasma_calendar_alternatecalendar",
-                                                 "%1 Day number %2 Month number with leap %3 Year number with ganzhi name",
-                                                 "%1 %2, %3",
-                                                 sublabel.dayLabel,
-                                                 sublabel.monthLabel,
-                                                 sublabel.yearLabel);
+    sublabel.label = formattedDateString("'Ngày' d 'tháng' MMMM 'năm' U r");
 
     return sublabel;
 }
