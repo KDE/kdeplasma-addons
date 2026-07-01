@@ -1,6 +1,5 @@
 # Translation of plasma_applet_org.kde.plasma.fifteenpuzzle to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2008, 2009, 2015, 2018, 2019, 2022.
 # Eirik U. Birkeland <eirbir@gmail.com>, 2008, 2010.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2018.
 msgid ""
@@ -8,14 +7,14 @@ msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2022-02-13 14:38+0100\n"
+"PO-Revision-Date: 2026-06-30 22:17+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 21.12.2\n"
+"X-Generator: Lokalize 26.07.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -34,22 +33,19 @@ msgid "Grid size:"
 msgstr "Rutenettstorleik:"
 
 #: qml/configAppearance.qml:61
-#, fuzzy, kde-format
-#| msgid "Background:"
+#, kde-format
 msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "Bakgrunn:"
 
 #: qml/configAppearance.qml:68
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
 msgstr "Farge:"
 
 #: qml/configAppearance.qml:84
-#, fuzzy, kde-format
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
 msgstr "Bilete:"
@@ -61,9 +57,7 @@ msgid "Path to custom image…"
 msgstr "Adresse til sjølvvalt bilete …"
 
 #: qml/configAppearance.qml:108
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Choose image…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "Vel bilete …"
@@ -75,22 +69,19 @@ msgid "Choose an Image"
 msgstr "Vel bilete"
 
 #: qml/configAppearance.qml:124
-#, fuzzy, kde-format
-#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+#, kde-format
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Biletfiler (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
 #: qml/configAppearance.qml:142
-#, fuzzy, kde-format
-#| msgid "Tiles:"
+#, kde-format
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
-msgstr "Brikker:"
+msgstr "Flistekst:"
 
 #: qml/configAppearance.qml:149
-#, fuzzy, kde-format
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color:"
 msgstr "Farge:"
@@ -99,7 +90,7 @@ msgstr "Farge:"
 #, kde-format
 msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"
-msgstr ""
+msgstr "Gøym på biletbakgrunnar"
 
 #: qml/FifteenPuzzle.qml:262
 #, kde-format
@@ -117,7 +108,7 @@ msgstr "Stokk om"
 #, kde-format
 msgctxt "@info:status The number of moves made by the player so far"
 msgid "Moves: %1"
-msgstr ""
+msgstr "Trekk: %1"
 
 #: qml/FifteenPuzzle.qml:371
 #, kde-format
