@@ -1,6 +1,5 @@
 # Translation of plasma_applet_org.kde.plasma.comic to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2008, 2009, 2010, 2015, 2018, 2019, 2020, 2022.
 # Eirik U. Birkeland <eirbir@gmail.com>, 2008, 2009.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2018.
 msgid ""
@@ -8,14 +7,14 @@ msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:44+0000\n"
-"PO-Revision-Date: 2022-07-26 20:44+0200\n"
+"PO-Revision-Date: 2026-06-30 22:29+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 22.04.3\n"
+"X-Generator: Lokalize 26.07.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -40,63 +39,58 @@ msgid "Visit the comic website"
 msgstr "Besøk heimesida til teikneserien"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Comics:"
+#, kde-format
 msgctxt "@title"
 msgid "Comics"
-msgstr "Teikneseriar:"
+msgstr "Teikneseriar"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Åtferd"
 
 #: qml/configBehavior.qml:28
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show above image:"
-msgstr ""
+msgstr "Vis over biletet:"
 
 #: qml/configBehavior.qml:29
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Title"
-msgstr ""
+msgstr "Tittel"
 
 #: qml/configBehavior.qml:34
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Author"
-msgstr ""
+msgstr "Opphavsperson"
 
 #: qml/configBehavior.qml:39
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show below image:"
-msgstr ""
+msgstr "Vis under biletet:"
 
 #: qml/configBehavior.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Comic identifier"
+#, kde-format
 msgctxt "@option:check show below image"
 msgid "Identifier"
-msgstr "Stripenummer"
+msgstr "Identifikator"
 
 #: qml/configBehavior.qml:45
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Website"
-msgstr ""
+msgstr "Heimeside"
 
 #: qml/configBehavior.qml:54
-#, fuzzy, kde-format
-#| msgid "Show navigation buttons:"
+#, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
-msgstr "Vis navigasjonsknappar:"
+msgstr "Navigeringsknappar:"
 
 #: qml/configBehavior.qml:55
 #, kde-format
@@ -114,35 +108,31 @@ msgstr ""
 #, kde-format
 msgctxt "@label for checkbox, completes sentence … opens full-size view"
 msgid "Middle-clicking image:"
-msgstr ""
+msgstr "Midtklikk på biletet:"
 
 #: qml/configBehavior.qml:71
 #, kde-format
 msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
-msgstr ""
+msgstr "Viser biletet i full storleik"
 
 #: qml/configComics.qml:27
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
-msgstr "Hent nye striper …"
+msgstr "Hent nye …"
 
 #: qml/configComics.qml:70
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
-msgstr ""
+msgstr "Ingen teikneseriar er installerte"
 
 #: qml/configComics.qml:72
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Comics…"
+#, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
-msgstr "Hent nye striper …"
+msgstr "Hent nye teikneseriar …"
 
 #: qml/configComics.qml:86
 #, kde-format
@@ -162,30 +152,27 @@ msgstr[1] "minutt"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
-msgstr ""
+msgstr "Behald lokalt arkiv:"
 
 #: qml/configComics.qml:110
-#, fuzzy, kde-format
-#| msgctxt "@item:valuesuffix spacing to number + unit"
-#| msgid "strip per comic"
-#| msgid_plural "strips per comic"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
-msgstr[0] "stripe per teikneserie"
-msgstr[1] "striper per teikneserie"
+msgstr[0] "bilete per teikneserie"
+msgstr[1] "bilete per teikneserie"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr ""
+msgstr "Klarte ikkje henta inn stripa"
 
 #: qml/ErrorPlaceholder.qml:19
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Prøv igjen seinare, eller vel ein annan teikneserie"
 
 #: qml/ErrorPlaceholder.qml:27
 #, kde-format
@@ -300,19 +287,19 @@ msgstr "Lagra gjeldande &plassering"
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
-msgstr ""
+msgstr "Ingen teikneseriar er sette opp"
 
 #: qml/main.qml:291
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
-msgstr ""
+msgstr "Vel teikneserie …"
 
 #: qml/main.qml:302
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
-msgstr ""
+msgstr "%1/%2 – %3.png"
 
 #: stripselector.cpp:31 stripselector.cpp:101
 #, kde-format
