@@ -49,7 +49,10 @@ function minimumHeight()
 function preferredWidth()
 {
     var w = cols() * preferredCellWidth();
-    if (horizontal) {
+    // may be briefly horizontal and vertical when switching
+    // orientation due to binding order. Avoid infinite regression,
+    // we get the correct value when the bindings settle
+    if (horizontal && !vertical) {
         w = (preferredHeight() / rows()) * cols();
     }
     if (!vertical && popupArrow.visible) {
@@ -61,7 +64,7 @@ function preferredWidth()
 function preferredHeight()
 {
     var h = rows() * preferredCellHeight();
-    if (vertical) {
+    if (vertical && !horizontal) {
         h = (preferredWidth() / cols()) * rows();
         if (popupArrow.visible) {
             h += popupArrow.height;
