@@ -187,8 +187,8 @@ PlasmoidItem {
                     interval: 250
                     running: false
                     onTriggered: {
-                        image1.sourceSize.width = width
-                        image1.sourceSize.height = height
+                        image1.sourceSize = Qt.size(image1.width, image1.height)
+                        image2.sourceSize = Qt.size(image2.width, image2.height)
                     }
                 }
 
@@ -205,6 +205,12 @@ PlasmoidItem {
 
                     asynchronous: true
                     autoTransform: true
+
+                    onWidthChanged: imageReloadTimer.restart()
+                    onHeightChanged: imageReloadTimer.restart()
+
+                    sourceSize.width: width
+                    sourceSize.height: height
                 }
 
                 Image {
