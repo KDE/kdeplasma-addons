@@ -68,7 +68,7 @@ void Kameleon::setEnabled(bool enabled)
 
 void Kameleon::loadConfig()
 {
-    m_enabled = m_config->group(u"General"_s).readEntry<bool>("DeviceLedsAccentColored", true);
+    m_enabled = m_config->group(u"General"_s).readEntry<bool>("DeviceLedsAccentColored", false);
 
     auto customAccentColor = m_config->group(u"General"_s).readEntry<QColor>("AccentColor", QColor::Invalid);
     auto schemeAccentColor = m_config->group(u"Colors:View"_s).readEntry<QColor>("ForegroundActive", QColor::Invalid);
