@@ -327,15 +327,3 @@ msgstr "&Tira número:"
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identificador de tira:"
-
-#~ msgctxt "@title:group"
-#~ msgid "Comics:"
-#~ msgstr "Còmics:"
-
-#~ msgctxt "@action:button"
-#~ msgid "Get New Comics…"
-#~ msgstr "Aconsegueix còmics nous…"
-
-#~ msgctxt "@option:check"
-#~ msgid "Middle-click on comic to display at original size"
-#~ msgstr "Clic del mig al còmic per a veure'l a la mida original"
