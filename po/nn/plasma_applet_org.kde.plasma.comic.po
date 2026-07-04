@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:44+0000\n"
-"PO-Revision-Date: 2026-06-30 22:29+0200\n"
+"PO-Revision-Date: 2026-07-03 19:40+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -96,13 +96,13 @@ msgstr "Navigeringsknappar:"
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
-msgstr ""
+msgstr "Alltid synlege ved kantane"
 
 #: qml/configBehavior.qml:61
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
-msgstr ""
+msgstr "Vert viste i midten når peikaren er over"
 
 #: qml/configBehavior.qml:70
 #, kde-format
@@ -178,7 +178,7 @@ msgstr "Prøv igjen seinare, eller vel ein annan teikneserie"
 #, kde-format
 msgctxt "@info placeholdermessage title if offline"
 msgid "Offline"
-msgstr ""
+msgstr "Fråkopla"
 
 #: qml/ErrorPlaceholder.qml:28
 #, kde-format
@@ -192,7 +192,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info placeholdermessage title if connection local/unknown"
 msgid "Limited connectivity"
-msgstr ""
+msgstr "Avgrensa samband"
 
 #: qml/ErrorPlaceholder.qml:37
 #, kde-format
@@ -206,7 +206,7 @@ msgstr ""
 #, kde-format
 msgctxt "@info placeholdermessage title if today not available"
 msgid "Not available"
-msgstr ""
+msgstr "Ikkje tilgjengeleg"
 
 #: qml/ErrorPlaceholder.qml:46
 #, kde-format
@@ -214,12 +214,14 @@ msgctxt "@info placeholdermessage explanation if today not available"
 msgid ""
 "Today's image is not yet available or cannot be read. Try a different date."
 msgstr ""
+"Dagens bilete er ikkje tilgjengeleg enno eller kan ikkje lesast. Prøv ein "
+"annan dato."
 
 #: qml/ErrorPlaceholder.qml:54
 #, kde-format
 msgctxt "@info placeholdermessage title if date not available"
 msgid "Not available"
-msgstr ""
+msgstr "Ikkje tilgjengeleg"
 
 #: qml/ErrorPlaceholder.qml:55
 #, kde-format
@@ -228,6 +230,8 @@ msgid ""
 "The image for this day is not available or cannot be read. Try a different "
 "date."
 msgstr ""
+"Bilete for denne datoen er ikkje tilgjengeleg eller kan ikkje lesast. Prøv "
+"ein annan dato."
 
 #: qml/main.qml:87
 #, kde-format
