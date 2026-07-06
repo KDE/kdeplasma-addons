@@ -9,12 +9,12 @@
 #include "abstractcalendarprovider.h"
 
 /*!
-    @brief An alternate calendar provider for Vietnamese calendar system.
+    @brief An alternate calendar provider for Vietnamese lunar calendar system.
 
-    This class presents an alternate calendar provider for Vietnamese calendar system.
+    This class presents an alternate calendar provider for Vietnamese lunar calendar system.
     Structurely, it is the same as Chinese calendar. However, due to different timezones,
     roughly every 23 years, the twos generally drifted apart by one day. There are also some
-    cultural differences, e.g. different Zodiac names.
+    cultural differences, e.g. different Zodiac names (cat instead of rabbit, buffalo instead of ox).
  */
 class VietnameseCalendarProvider : public AbstractCalendarProvider
 {
