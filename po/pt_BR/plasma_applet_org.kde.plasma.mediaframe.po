@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-07 00:44+0000\n"
 "PO-Revision-Date: 2025-11-08 21:10-0300\n"
 "Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -212,13 +212,13 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Escolher uma pasta"
 
-#: qml/main.qml:360
+#: qml/main.qml:366
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Nenhuma mídia selecionada"
 
-#: qml/main.qml:364 qml/main.qml:374
+#: qml/main.qml:370 qml/main.qml:380
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

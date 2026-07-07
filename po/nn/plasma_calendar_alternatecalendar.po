@@ -4,7 +4,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-27 00:45+0000\n"
+"POT-Creation-Date: 2026-07-07 00:44+0000\n"
 "PO-Revision-Date: 2026-07-05 17:22+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -18,25 +18,25 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: calendarsystem.h:51
+#: calendarsystem.h:52
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Julian"
 msgstr "Den julianske kalenderen"
 
-#: calendarsystem.h:55
+#: calendarsystem.h:56
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Milankovic"
 msgstr "Den reviderte julianske kalenderen (Milanković)"
 
-#: calendarsystem.h:59
+#: calendarsystem.h:60
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Solar Hijri Calendar (Persian)"
 msgstr "Den iranske kalenderen"
 
-#: calendarsystem.h:63
+#: calendarsystem.h:64
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -44,7 +44,7 @@ msgctxt ""
 msgid "Islamic Calendar (Astronomical)"
 msgstr "Islamsk kalender (astronomisk)"
 
-#: calendarsystem.h:67
+#: calendarsystem.h:68
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -53,7 +53,7 @@ msgid "The Islamic Civil Calendar (Tabular)"
 msgstr "Den islamske kalenderen (tabellbasert)"
 
 # skip-rule: bokmålsord
-#: calendarsystem.h:71
+#: calendarsystem.h:72
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -61,29 +61,37 @@ msgctxt ""
 msgid "Islamic Calendar (Umm al-Qura)"
 msgstr "Islamsk kalender (Umm al-Qura)"
 
-#: calendarsystem.h:75
+#: calendarsystem.h:76
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Chinese Lunar Calendar"
 msgstr "Den kinesiske kalenderen"
 
-#: calendarsystem.h:79
+#: calendarsystem.h:80
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Indian National Calendar"
 msgstr "Den indiske nasjonalkalenderen"
 
-#: calendarsystem.h:83
+#: calendarsystem.h:84
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
 msgstr "Hebraisk kalender"
 
-#: calendarsystem.h:87
+#: calendarsystem.h:88
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
 msgstr "Vietnamesisk månekalender"
+
+#: calendarsystem.h:92
+#, fuzzy, kde-format
+#| msgctxt "@item:inlist"
+#| msgid "Indian National Calendar"
+msgctxt "@item:inlist"
+msgid "Ethiopian Calendar"
+msgstr "Den indiske nasjonalkalenderen"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -124,6 +132,18 @@ msgstr ""
 "Tal større enn null svarar til ein seinare dato, tal mindre enn null til ein "
 "tidlegare."
 
+#: provider/ethiopiancalendar.cpp:86
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
+#| "number %4 Full date in Hebrew"
+#| msgid "%1 %2, %3 (%4)"
+msgctxt ""
+"%1 Day number %2 Translated month name in Ethiopian calendar %3 Year number "
+"%4 Full date in Ethiopian"
+msgid "%1 %2, %3 (%4)"
+msgstr "%1. %2 %3 (%4)"
+
 #: provider/hebrewcalendar.cpp:91
 #, kde-format
 msgctxt ""
@@ -153,9 +173,7 @@ msgid "%1 %2, %3"
 msgstr "%1. %2 %3"
 
 # Satsar på at standard norsk datoformat vert riktig for dei vietnamesiske datoen òg.
-#: provider/vietnamesecalendar.cpp:406
-#, kde-format
-msgctxt ""
-"%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
-msgid "%1 %2, %3"
-msgstr "%1. %2 %3"
+#~ msgctxt ""
+#~ "%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
+#~ msgid "%1 %2, %3"
+#~ msgstr "%1. %2 %3"

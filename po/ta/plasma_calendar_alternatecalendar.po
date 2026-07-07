@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-27 00:45+0000\n"
+"POT-Creation-Date: 2026-07-07 00:44+0000\n"
 "PO-Revision-Date: 2023-05-21 14:30+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.04.1\n"
 
-#: calendarsystem.h:51
+#: calendarsystem.h:52
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Julian"
 msgstr "ஜுலியன்"
 
-#: calendarsystem.h:55
+#: calendarsystem.h:56
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Milankovic"
 msgstr "மிலாங்கோவிக்"
 
-#: calendarsystem.h:59
+#: calendarsystem.h:60
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Solar Hijri Calendar (Persian)"
 msgstr "சூரியசார் ஹிஜ்ரி நாள்காட்டி (பார்சீகம்)"
 
-#: calendarsystem.h:63
+#: calendarsystem.h:64
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -43,7 +43,7 @@ msgctxt ""
 msgid "Islamic Calendar (Astronomical)"
 msgstr "இஸ்லாமிய நாள்காட்டி (வானியல் சார்ந்த‍து)"
 
-#: calendarsystem.h:67
+#: calendarsystem.h:68
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -51,7 +51,7 @@ msgctxt ""
 msgid "The Islamic Civil Calendar (Tabular)"
 msgstr "இஸ்லாமிய சிவில் நாள்காட்டி (முற்கணிப்பு)"
 
-#: calendarsystem.h:71
+#: calendarsystem.h:72
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -59,31 +59,39 @@ msgctxt ""
 msgid "Islamic Calendar (Umm al-Qura)"
 msgstr "இஸ்லாமிய நாள்காட்டி (உம் அல்-குறா)"
 
-#: calendarsystem.h:75
+#: calendarsystem.h:76
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Chinese Lunar Calendar"
 msgstr "சீன நிலவுசார் நாள்காட்டி"
 
-#: calendarsystem.h:79
+#: calendarsystem.h:80
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Indian National Calendar"
 msgstr "இந்திய தேசிய நாள்காட்டி"
 
-#: calendarsystem.h:83
+#: calendarsystem.h:84
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
 msgstr "யூத நாள்காட்டி"
 
-#: calendarsystem.h:87
+#: calendarsystem.h:88
 #, fuzzy, kde-format
 #| msgctxt "@item:inlist"
 #| msgid "Chinese Lunar Calendar"
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
 msgstr "சீன நிலவுசார் நாள்காட்டி"
+
+#: calendarsystem.h:92
+#, fuzzy, kde-format
+#| msgctxt "@item:inlist"
+#| msgid "Indian National Calendar"
+msgctxt "@item:inlist"
+msgid "Ethiopian Calendar"
+msgstr "இந்திய தேசிய நாள்காட்டி"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -123,6 +131,18 @@ msgid ""
 msgstr ""
 "நேர்ம எண் பிந்தைய தேதியைக் குறிக்கும்; மாறாக, எதிர்ம எண் முந்தைய தேதியைக் குறிக்கும்."
 
+#: provider/ethiopiancalendar.cpp:86
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
+#| "number %4 Full date in Hebrew"
+#| msgid "%1 %2, %3 (%4)"
+msgctxt ""
+"%1 Day number %2 Translated month name in Ethiopian calendar %3 Year number "
+"%4 Full date in Ethiopian"
+msgid "%1 %2, %3 (%4)"
+msgstr "%1 %2, %3 (%4)"
+
 #: provider/hebrewcalendar.cpp:91
 #, kde-format
 msgctxt ""
@@ -151,14 +171,13 @@ msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
 msgstr "%1 %2, %3"
 
-#: provider/vietnamesecalendar.cpp:406
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
-msgctxt ""
-"%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
-msgid "%1 %2, %3"
-msgstr "%1 %2, %3"
+#, fuzzy
+#~| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
+#~| msgid "%1 %2, %3"
+#~ msgctxt ""
+#~ "%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
+#~ msgid "%1 %2, %3"
+#~ msgstr "%1 %2, %3"
 
 # Going by this one: https://en.wikipedia.org/wiki/Hindu_calendar#Solar_month_and_seasons
 # Apparently there is some kind of offset between the 'Hindu' names and the Tamil names.

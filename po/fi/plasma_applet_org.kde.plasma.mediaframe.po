@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-07 00:44+0000\n"
 "PO-Revision-Date: 2025-09-10 17:01+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -206,13 +206,13 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Valitse kansio"
 
-#: qml/main.qml:360
+#: qml/main.qml:366
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Mediaa ei ole valittu"
 
-#: qml/main.qml:364 qml/main.qml:374
+#: qml/main.qml:370 qml/main.qml:380
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

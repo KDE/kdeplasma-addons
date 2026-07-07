@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-07 00:44+0000\n"
 "PO-Revision-Date: 2025-08-14 15:10+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -207,13 +207,13 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Een map kiezen"
 
-#: qml/main.qml:360
+#: qml/main.qml:366
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Geen media geselecteerd"
 
-#: qml/main.qml:364 qml/main.qml:374
+#: qml/main.qml:370 qml/main.qml:380
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

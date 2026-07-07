@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-27 00:45+0000\n"
+"POT-Creation-Date: 2026-07-07 00:44+0000\n"
 "PO-Revision-Date: 2026-05-30 21:26+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 26.04.1\n"
 
-#: calendarsystem.h:51
+#: calendarsystem.h:52
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Julian"
 msgstr "Julián"
 
-#: calendarsystem.h:55
+#: calendarsystem.h:56
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Milankovic"
 msgstr "Milankovic"
 
-#: calendarsystem.h:59
+#: calendarsystem.h:60
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Solar Hijri Calendar (Persian)"
 msgstr "Hidzsri naptár (perzsa)"
 
-#: calendarsystem.h:63
+#: calendarsystem.h:64
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -43,7 +43,7 @@ msgctxt ""
 msgid "Islamic Calendar (Astronomical)"
 msgstr "Iszlám naptár (csillagászati)"
 
-#: calendarsystem.h:67
+#: calendarsystem.h:68
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -51,7 +51,7 @@ msgctxt ""
 msgid "The Islamic Civil Calendar (Tabular)"
 msgstr "Az iszlám civil naptár (tabular)"
 
-#: calendarsystem.h:71
+#: calendarsystem.h:72
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -59,29 +59,37 @@ msgctxt ""
 msgid "Islamic Calendar (Umm al-Qura)"
 msgstr "Iszlám naptár (Umm al-Qura)"
 
-#: calendarsystem.h:75
+#: calendarsystem.h:76
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Chinese Lunar Calendar"
 msgstr "Kínai holdnaptár"
 
-#: calendarsystem.h:79
+#: calendarsystem.h:80
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Indian National Calendar"
 msgstr "Indiai nemzeti naptár"
 
-#: calendarsystem.h:83
+#: calendarsystem.h:84
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
 msgstr "Zsidó naptár"
 
-#: calendarsystem.h:87
+#: calendarsystem.h:88
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
 msgstr "Vietnami holdnaptár"
+
+#: calendarsystem.h:92
+#, fuzzy, kde-format
+#| msgctxt "@item:inlist"
+#| msgid "Indian National Calendar"
+msgctxt "@item:inlist"
+msgid "Ethiopian Calendar"
+msgstr "Indiai nemzeti naptár"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -122,6 +130,18 @@ msgstr ""
 "A pozitív eltolás későbbi dátumot, míg a negatív eltolás korábbi dátumot "
 "jelent."
 
+#: provider/ethiopiancalendar.cpp:86
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
+#| "number %4 Full date in Hebrew"
+#| msgid "%1 %2, %3 (%4)"
+msgctxt ""
+"%1 Day number %2 Translated month name in Ethiopian calendar %3 Year number "
+"%4 Full date in Ethiopian"
+msgid "%1 %2, %3 (%4)"
+msgstr "%3. %2 %1. (%4)"
+
 #: provider/hebrewcalendar.cpp:91
 #, kde-format
 msgctxt ""
@@ -150,9 +170,7 @@ msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
 msgstr "%3. %2 %1."
 
-#: provider/vietnamesecalendar.cpp:406
-#, kde-format
-msgctxt ""
-"%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
-msgid "%1 %2, %3"
-msgstr "%3. %2 %1."
+#~ msgctxt ""
+#~ "%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
+#~ msgid "%1 %2, %3"
+#~ msgstr "%3. %2 %1."
