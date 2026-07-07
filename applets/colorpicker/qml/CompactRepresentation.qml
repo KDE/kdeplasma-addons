@@ -20,8 +20,8 @@ DropArea {
     Layout.fillHeight: !root.isVertical
     Layout.fillWidth: root.isVertical
 
-    Layout.minimumWidth: root.isVertical ? 0 : Kirigami.Units.gridUnit * 10
-    Layout.minimumHeight: root.isVertical ? Kirigami.Units.gridUnit * 10 : 0
+    Layout.minimumWidth: root.isVertical ? 0 : grid.implicitWidth
+    Layout.minimumHeight: root.isVertical ? grid.implicitHeight : 0
 
     Layout.maximumWidth: height * 3
     Layout.maximumHeight: width * 3
@@ -71,8 +71,9 @@ DropArea {
         PlasmaComponents3.ToolButton {
             id: pickColorButton
 
-            Layout.fillWidth: true
+            Layout.preferredWidth: dropArea.buttonSize
             Layout.preferredHeight: dropArea.buttonSize
+            Layout.alignment: Qt.AlignLeft
 
             property Item loadingIndicator: null
 
@@ -105,6 +106,7 @@ DropArea {
 
             Layout.preferredWidth: root.isVertical ? parent.width : thickness
             Layout.preferredHeight: root.isVertical ? thickness : parent.height
+            Layout.alignment: Qt.AlignHCenter
             visible: circleRepeater.count > 0
 
             Rectangle {
@@ -124,8 +126,12 @@ DropArea {
             delegate: ColorCircle {
                 required property int index
 
-                Layout.fillWidth: true
+                Layout.preferredWidth: dropArea.buttonSize
                 Layout.preferredHeight: dropArea.buttonSize
+
+                Layout.maximumWidth: (root.width - pickColorButton.width - spacer.width) / Plasmoid.configuration.compactPreviewCount
+                Layout.maximumHeight: Layout.maximumWidth
+                Layout.alignment: Qt.AlignRight
 
                 color: historyModel.count > index ? historyModel.get(index).color : "#00000000" // transparent as fallback
                 hasColor: historyModel.count > index
