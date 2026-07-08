@@ -116,12 +116,12 @@ msgstr "Abrir a Pasta Respectiva"
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
-msgstr "Abre a pasta de destino onde foi gravada a imagem do papel de parede."
+msgstr "Abre a pasta de destino onde foi gravada a imagem de fundo."
 
 #: package/contents/ui/main.qml:22
 #, kde-format
 msgid "Open Wallpaper Image"
-msgstr ""
+msgstr "Abrir imagem de fundo"
 
 #: package/contents/ui/main.qml:27
 #, kde-format
@@ -164,13 +164,13 @@ msgstr ""
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
-msgstr "O papel de parede está a ser transferido da Internet."
+msgstr "A imagem de fundo está a ser transferida da Internet."
 
 #: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
-msgstr "Não foi possível obter o papel de parede da Internet."
+msgstr "Não foi possível obter a imagem de fundo da Internet."
 
 #: package/contents/ui/WallpaperPreview.qml:48
 #, kde-format
