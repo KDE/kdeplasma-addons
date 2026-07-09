@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-16 00:46+0000\n"
+"POT-Creation-Date: 2026-07-09 00:45+0000\n"
 "PO-Revision-Date: 2023-05-21 14:50+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -32,13 +32,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Middle-click to copy the colour code"
 
-#: qml/CompactRepresentation.qml:81
+#: qml/CompactRepresentation.qml:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Pick colour"
 
-#: qml/CompactRepresentation.qml:88
+#: qml/CompactRepresentation.qml:89
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
