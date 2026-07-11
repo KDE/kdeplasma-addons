@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-28 02:53+0000\n"
+"POT-Creation-Date: 2026-07-11 02:40+0000\n"
 "PO-Revision-Date: 2026-02-17 13:34+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -31,13 +31,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Clic central para copiar el código de color"
 
-#: qml/CompactRepresentation.qml:81
+#: qml/CompactRepresentation.qml:82
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Escoger color"
 
-#: qml/CompactRepresentation.qml:88
+#: qml/CompactRepresentation.qml:89
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
