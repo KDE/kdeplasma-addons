@@ -7,6 +7,7 @@
 #include "futurehours.h"
 
 #include <klocalizedstring.h>
+#include <optional>
 
 FutureHoursPoints::FutureHoursPoints(const std::shared_ptr<FutureHours> &futureHours, QObject *parent)
     : QAbstractTableModel(parent)
@@ -283,7 +284,9 @@ void FutureHours::addHour(const FutureHourForecast &forecast)
 {
     beginInsertRows(QModelIndex(), m_allHours.size(), m_allHours.size());
 
-    if ((forecast.conditionProbability() != 0.0) || (forecast.conditionProbability() != 0.0)) {
+    if ((forecast.conditionProbability().has_value()) && (forecast.conditionProbability().value() != 0.0)
+        && (forecast.conditionProbability().value() != qQNaN())) {
+        qDebug() << "PROBABILITY IS: " << forecast.conditionProbability();
         m_hasProbability = true;
     }
 

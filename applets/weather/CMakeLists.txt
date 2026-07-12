@@ -43,6 +43,7 @@ plasma_add_applet(org.kde.plasma.weather
         qml/ForecastDelegate.qml
         qml/ForecastGraph.qml
         qml/ForecastGraphLine.qml
+        qml/ForecastGraphLabels.qml
         qml/FullRepresentation.qml
         qml/IconAndTextItem.qml
         qml/main.qml

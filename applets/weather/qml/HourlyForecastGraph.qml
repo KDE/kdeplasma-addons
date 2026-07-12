@@ -81,6 +81,19 @@ ColumnLayout {
             Layout.preferredWidth: Kirigami.Units.iconSizes.small
         }
 
+        ForecastGraphLabels {
+            id: tempLabels
+            Layout.fillHeight: true
+            Layout.topMargin: forecastLine.timestampLabelHeight + forecastGraph.marginTop
+            Layout.bottomMargin: forecastGraph.marginBottom
+            max: root.futureHoursPoints?.maxTemp
+            min: root.futureHoursPoints?.minTemp
+            spacing: root.minimalSpacing
+            formatter: function (temp) {
+                return Util.temperatureToDisplayString(root.displayTemperatureUnit, temp, root.metaData.temperatureUnit);
+            }
+        }
+
         Rectangle {
             id: graphRectangle
             Layout.fillWidth: true
@@ -94,8 +107,9 @@ ColumnLayout {
 
             ForecastGraph {
                 id: forecastGraph
-                anchors.fill: parent
                 anchors.topMargin: forecastLine.timestampLabelHeight
+
+                anchors.fill: parent
 
                 implicitHeight: root.preferredGraphHeight + marginTop + marginBottom
 
@@ -179,6 +193,9 @@ ColumnLayout {
                     }
                     let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
                     let generalTemp = root.futureHours.data(index, WeatherData.FutureHours.GeneralTemp);
+                    if (!generalTemp) {
+                        return "";
+                    }
                     return Util.temperatureToDisplayString(root.displayTemperatureUnit, generalTemp, root.metaData.temperatureUnit);
                 }
 
@@ -188,6 +205,9 @@ ColumnLayout {
                     }
                     let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
                     let highTemp = root.futureHours.data(index, WeatherData.FutureHours.HighTemp);
+                    if (!highTemp) {
+                        return "";
+                    }
                     return Util.temperatureToDisplayString(root.displayTemperatureUnit, highTemp, root.metaData.temperatureUnit);
                 }
 
@@ -197,6 +217,9 @@ ColumnLayout {
                     }
                     let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
                     let lowTemp = root.futureHours.data(index, WeatherData.FutureHours.LowTemp);
+                    if (!lowTemp) {
+                        return "";
+                    }
                     return Util.temperatureToDisplayString(root.displayTemperatureUnit, lowTemp, root.metaData.temperatureUnit);
                 }
 
@@ -206,8 +229,26 @@ ColumnLayout {
                     }
                     let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
                     let conditionProbability = root.futureHours.data(index, WeatherData.FutureHours.ConditionProbability);
+                    if (!conditionProbability) {
+                        return "";
+                    }
                     return Util.percentToDisplayString(conditionProbability);
                 }
+            }
+        }
+
+        ForecastGraphLabels {
+            id: percentLabes
+            Layout.fillHeight: true
+            Layout.topMargin: forecastLine.timestampLabelHeight + forecastGraph.marginTop
+            Layout.bottomMargin: forecastGraph.marginBottom
+            leftAllign: true
+            max: 100
+            min: 0
+            visible: forecastGraph.hasProbability
+            spacing: root.minimalSpacing
+            formatter: function (conditionProbability) {
+                return Util.percentToDisplayString(conditionProbability);
             }
         }
 

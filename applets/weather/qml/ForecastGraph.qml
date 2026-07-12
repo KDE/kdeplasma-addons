@@ -93,7 +93,7 @@ GraphsView {
         pointDelegate: Item {
             id: generalTempDelegate
 
-            property date pointValueX
+            property real pointValueX
             property real pointValueY
             property int pointIndex
 
