@@ -17,14 +17,17 @@ import plasma.applet.org.kde.plasma.colorpicker as ColorPicker
 DropArea {
     id: dropArea
 
+    implicitHeight: grid.implicitHeight
+    implicitWidth: grid.implicitWidth
+
     Layout.fillHeight: !root.isVertical
     Layout.fillWidth: root.isVertical
 
     Layout.minimumWidth: root.isVertical ? 0 : grid.implicitWidth
     Layout.minimumHeight: root.isVertical ? grid.implicitHeight : 0
 
-    Layout.maximumWidth: height * 3
-    Layout.maximumHeight: width * 3
+    Layout.maximumWidth: height * (2 + Plasmoid.configuration.compactPreviewCount)
+    Layout.maximumHeight: width * (2 + Plasmoid.configuration.compactPreviewCount)
 
     readonly property real buttonSize: root.isVertical ? parent.width : parent.height
     property bool containsAcceptableDrag: false
