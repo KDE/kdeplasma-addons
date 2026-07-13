@@ -74,6 +74,7 @@ ColumnLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
         PlasmaComponents.ToolButton {
+            id: backButton
             Layout.fillHeight: true
             icon.name: "go-previous"
             enabled: root.currentIndex > 0
@@ -253,6 +254,7 @@ ColumnLayout {
         }
 
         PlasmaComponents.ToolButton {
+            id: forwardButton
             Layout.fillHeight: true
             icon.name: "go-next"
             enabled: root.currentIndex < forecastGraph.axisX.zoom - 1
@@ -260,6 +262,43 @@ ColumnLayout {
                 root.scrollToIndex(root.currentIndex + 1);
             }
             Layout.preferredWidth: Kirigami.Units.iconSizes.small
+        }
+    }
+
+    ForecastGraphLegend {
+        Layout.alignment: Qt.AlignHCenter
+        Layout.leftMargin: backButton.width
+        Layout.rightMargin: forwardButton.width
+        Layout.bottomMargin: Kirigami.Units.largeSpacing
+
+        forecastLegendData: {
+            let forecastLegend = [];
+            if (!forecastGraph.highLowTempPresent) {
+                let generalTempData = {
+                    label: i18n("General Temperature"),
+                    color: root.generalTempColor
+                };
+                forecastLegend.push(generalTempData);
+            } else {
+                let highTempData = {
+                    label: i18n("High Temperature"),
+                    color: root.highTempColor
+                };
+                let lowTempData = {
+                    label: i18n("Low Temperature"),
+                    color: root.lowTempColor
+                };
+                forecastLegend.push(highTempData);
+                forecastLegend.push(lowTempData);
+            }
+            if (forecastGraph.hasProbability) {
+                let conditionProbability = {
+                    label: i18n("Condition Probability"),
+                    color: root.conditionProbabilityColor
+                };
+                forecastLegend.push(conditionProbability);
+            }
+            return forecastLegend;
         }
     }
 
