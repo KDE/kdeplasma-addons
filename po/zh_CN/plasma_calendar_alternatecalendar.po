@@ -88,7 +88,7 @@ msgstr "越南阴历"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Ethiopian Calendar"
-msgstr ""
+msgstr "埃塞俄比亚日历"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -130,7 +130,7 @@ msgctxt ""
 "%1 Day number %2 Translated month name in Ethiopian calendar %3 Year number "
 "%4 Full date in Ethiopian"
 msgid "%1 %2, %3 (%4)"
-msgstr ""
+msgstr "%1 %2，%3 (%4)"
 
 #: provider/hebrewcalendar.cpp:91
 #, kde-format
