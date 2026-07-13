@@ -85,7 +85,7 @@ GraphsView {
         max: 100
     }
 
-    LineSeries {
+    SplineSeries {
         id: generalTempSeries
         visible: !root.pointsModel?.highLowTempPresent ?? false
         width: 3
@@ -131,7 +131,7 @@ GraphsView {
         series: generalTempSeries
     }
 
-    LineSeries {
+    SplineSeries {
         id: highTempSeries
         visible: root.pointsModel?.highLowTempPresent ?? false
         width: 3
@@ -177,7 +177,7 @@ GraphsView {
         series: highTempSeries
     }
 
-    LineSeries {
+    SplineSeries {
         id: lowTempSeries
         visible: root.pointsModel?.highLowTempPresent ?? false
         width: 3
@@ -223,7 +223,7 @@ GraphsView {
         series: lowTempSeries
     }
 
-    LineSeries {
+    SplineSeries {
         id: conditionProbabilitySeries
         visible: !!root.pointsModel && root.hasProbability
         width: 3
