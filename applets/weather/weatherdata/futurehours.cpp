@@ -286,7 +286,6 @@ void FutureHours::addHour(const FutureHourForecast &forecast)
 
     if ((forecast.conditionProbability().has_value()) && (forecast.conditionProbability().value() != 0.0)
         && (forecast.conditionProbability().value() != qQNaN())) {
-        qDebug() << "PROBABILITY IS: " << forecast.conditionProbability();
         m_hasProbability = true;
     }
 
