@@ -39,6 +39,9 @@ ColumnLayout {
 
     property int currentIndex: 0
 
+    property int horizontalLabelsCount: 5
+    property int verticalLabelsCount: 4
+
     function scrollToIndex(dayIndex) {
         // 1. Calculate the total span of data
         let totalSpan = forecastGraph.axisX.max - forecastGraph.axisX.min;
@@ -89,6 +92,7 @@ ColumnLayout {
             Layout.bottomMargin: forecastGraph.marginBottom
             max: root.futureHoursPoints?.maxTemp
             min: root.futureHoursPoints?.minTemp
+            labelsCount: root.verticalLabelsCount
             spacing: root.minimalSpacing
             formatter: function (temp) {
                 return Util.temperatureToDisplayString(root.displayTemperatureUnit, temp, root.metaData.temperatureUnit);
@@ -105,6 +109,34 @@ ColumnLayout {
             implicitHeight: forecastGraph.implicitHeight + forecastLine.timestampLabelHeight
 
             visible: !!root.futureHoursPoints
+
+            ForecastGraphLabels {
+                id: dateLabels
+                height: forecastLine.timestampLabelHeight
+                width: forecastGraph.plotArea.width
+                max: forecastGraph.axisX.visualMax
+                min: forecastGraph.axisX.visualMin
+                labelsCount: root.horizontalLabelsCount
+                horizontal: true
+                spacing: root.minimalSpacing
+                visible: !forecastGraph.hovered
+                formatter: function (timestamp) {
+                    const date = new Date(timestamp);
+                    const format = Qt.locale().timeFormat(Locale.ShortFormat);
+                    return Qt.formatDateTime(date, format);
+                }
+            }
+
+            // Use a custom graph grid because DateTimeAxis does not allow
+            // arbitrary tick positioning, causing labels to not align with the grid.
+            ForecastGraphGrid {
+                anchors.fill: forecastGraph
+                anchors.topMargin: forecastGraph.marginTop
+                anchors.bottomMargin: forecastGraph.marginBottom
+
+                horizontalLinesNumber: root.verticalLabelsCount
+                verticalLinesNumber: root.horizontalLabelsCount
+            }
 
             ForecastGraph {
                 id: forecastGraph
@@ -246,6 +278,7 @@ ColumnLayout {
             leftAllign: true
             max: 100
             min: 0
+            labelsCount: root.verticalLabelsCount
             visible: forecastGraph.hasProbability
             spacing: root.minimalSpacing
             formatter: function (conditionProbability) {

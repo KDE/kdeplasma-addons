@@ -64,7 +64,7 @@ GraphsView {
     }
 
     theme: GraphsTheme {
-        gridVisible: true
+        gridVisible: false
         backgroundVisible: false
         plotAreaBackgroundVisible: false
         grid.mainColor: Kirigami.Theme.activeBackgroundColor
