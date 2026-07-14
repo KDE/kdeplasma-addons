@@ -13,10 +13,6 @@ GridLayout {
 
     required property var forecastLegendData
 
-    Component.onCompleted: {
-        console.log("THE FORECASTLEGENDDATA IS: " + forecastLegendData);
-    }
-
     columnSpacing: Kirigami.Units.largeSpacing
 
     Repeater {

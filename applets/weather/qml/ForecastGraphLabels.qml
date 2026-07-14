@@ -15,28 +15,29 @@ Item {
 
     required property var formatter
 
-    readonly property int count: Math.floor((height - anchors.topMargin - anchors.bottomMargin) / Kirigami.Units.gridUnit)
-
     property bool leftAllign: false
+    property bool bottomAllign: false
 
     property real spacing: 0
 
-    property real maxWidth: 0
+    property bool horizontal: false
 
-    onVisibleChanged: {
-        updateWidth();
-    }
+    property real estimatedLabelWidth: Kirigami.Units.gridUnit
+
+    property int labelsCount: 2
+
+    onVisibleChanged: updateSize()
 
     Repeater {
         id: repeater
-        model: root.count
+        model: root.labelsCount
 
         PlasmaComponents.Label {
             id: delegate
             required property int index
 
             property real value: {
-                return root.min + index * (root.max - root.min) / (root.count - 1);
+                return root.min + index * (root.max - root.min) / (root.labelsCount - 1);
             }
 
             anchors.leftMargin: root.spacing
@@ -46,23 +47,51 @@ Item {
             font: Kirigami.Theme.smallFont
 
             y: {
+                if (root.horizontal) {
+                    return 0;
+                }
+
                 const ratio = (value - root.min) / (root.max - root.min);
 
                 return root.height - ratio * root.height - height / 2;
             }
 
-            onTextChanged: {
-                root.updateWidth();
+            x: {
+                if (!root.horizontal) {
+                    return 0;
+                }
+
+                const ratio = (value - root.min) / (root.max - root.min);
+
+                return ratio * root.width - implicitWidth / 2;
             }
 
+            onTextChanged: root.updateSize()
+
             Component.onCompleted: {
-                if (root.leftAllign) {
-                    anchors.left = root.left;
+                if (!root.horizontal) {
+                    if (root.leftAllign) {
+                        anchors.left = root.left;
+                    } else {
+                        anchors.right = root.right;
+                    }
                 } else {
-                    anchors.right = root.right;
+                    if (root.bottomAllign) {
+                        anchors.bottom = root.bottom;
+                    } else {
+                        anchors.top = root.top;
+                    }
                 }
-                root.updateWidth();
+                root.updateSize();
             }
+        }
+    }
+
+    function updateSize() {
+        if (root.horizontal) {
+            root.updateHeight();
+        } else {
+            root.updateWidth();
         }
     }
 
@@ -77,9 +106,18 @@ Item {
         for (let i = 0; i < root.children.length; i++) {
             let child = root.children[i];
             if (child.implicitWidth > maxWidth) {
-                maxWidth = child.contentWidth;
+                maxWidth = child.implicitWidth;
             }
         }
         root.implicitWidth = maxWidth + root.spacing;
+    }
+
+    function updateHeight() {
+        if (!root.visible) {
+            root.implicitHeight = 0;
+            return;
+        }
+
+        root.implicitHeight = root.children[0].implicitHeight + root.spacing;
     }
 }
