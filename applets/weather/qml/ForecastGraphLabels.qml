@@ -44,7 +44,9 @@ Item {
             anchors.rightMargin: root.spacing
 
             text: root.formatter(value)
-            font: Kirigami.Theme.smallFont
+            font.family: Kirigami.Theme.smallFont.family
+            font.pixelSize: Kirigami.Theme.smallFont.pixelSize
+            color: Kirigami.Theme.disabledTextColor
 
             y: {
                 if (root.horizontal) {
