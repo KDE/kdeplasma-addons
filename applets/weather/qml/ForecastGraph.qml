@@ -19,16 +19,7 @@ import org.kde.plasma.weatherdata as WeatherData
 Item {
     id: root
 
-    required property int generalTempSection
-    required property int highTempSection
-    required property int lowTempSection
-    required property int conditionProbabilitySection
-    required property int dateTimeSection
-
-    required property color highTempSeriesColor
-    required property color lowTempSeriesColor
-    required property color generalTempSeriesColor
-    required property color conditionProbabilitySeriesColor
+    property var forecastSeries
 
     required property int invalidUnit
     required property int displayTemperatureUnit
@@ -37,10 +28,9 @@ Item {
     required property date maxDate
 
     property real currentPointDateX
-    property real currentPointGeneralTempY
-    property real currentPointHighTempY
-    property real currentPointLowTempY
-    property real currentPointConditionProbabilityY
+    property int xModelRow
+
+    property var currentPointValues: ({})
 
     property int totalDays: 0
 
@@ -72,6 +62,7 @@ Item {
         forecastGraph.axisX.max = root.maxDate;
     }
 
+    //TODO: CHECK IF THE GRAPH UPDATES PROPERLY WHEN futureHours IS CHANGED
     GraphsView {
         id: forecastGraph
         marginBottom: Kirigami.Units.largeSpacing
@@ -99,78 +90,6 @@ Item {
             lineVisible: false
             min: 0
             max: 100
-        }
-
-        ForecastGraphSeries {
-            visible: !root.pointsModel?.highLowTempPresent ?? false
-
-            seriesColor: root.generalTempSeriesColor
-            xSection: root.dateTimeSection
-            ySection: root.generalTempSection
-
-            model: root.pointsModel
-
-            selectedIndex: root.currentPointIndex
-            graphHovered: hoverHandler.hovered
-
-            onPointSelected: (x, y) => {
-                root.currentPointDateX = x;
-                root.currentPointGeneralTempY = y;
-            }
-        }
-
-        ForecastGraphSeries {
-            visible: root.pointsModel?.highLowTempPresent ?? false
-
-            seriesColor: root.highTempSeriesColor
-            ySection: root.highTempSection
-            xSection: root.dateTimeSection
-
-            model: root.pointsModel
-
-            selectedIndex: root.currentPointIndex
-            graphHovered: hoverHandler.hovered
-
-            onPointSelected: (x, y) => {
-                root.currentPointDateX = x;
-                root.currentPointHightTempY = y;
-            }
-        }
-
-        ForecastGraphSeries {
-            visible: root.pointsModel?.highLowTempPresent ?? false
-
-            seriesColor: root.lowTempSeriesColor
-            ySection: root.lowTempSection
-            xSection: root.dateTimeSection
-
-            model: root.pointsModel
-
-            selectedIndex: root.currentPointIndex
-            graphHovered: hoverHandler.hovered
-
-            onPointSelected: (x, y) => {
-                root.currentPointDateX = x;
-                root.currentPointLowTempY = y;
-            }
-        }
-
-        ForecastGraphSeries {
-            visible: root.hasProbability
-
-            seriesColor: root.conditionProbabilitySeriesColor
-            ySection: root.conditionProbabilitySection
-            xSection: root.dateTimeSection
-
-            model: root.pointsModel
-
-            selectedIndex: root.currentPointIndex
-            graphHovered: hoverHandler.hovered
-
-            onPointSelected: (x, y) => {
-                root.currentPointDateX = x;
-                root.currentPointConditionProbabilityY = y;
-            }
         }
 
         HoverHandler {
@@ -212,7 +131,7 @@ Item {
                 while (left < right) {
                     const mid = Math.floor((left + right) / 2);
 
-                    const time = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, mid), Qt.DisplayRole)).getTime();
+                    const time = new Date(root.pointsModel.data(root.pointsModel.index(root.xModelRow, mid), Qt.DisplayRole)).getTime();
 
                     if (time < targetTime) {
                         left = mid + 1;
@@ -225,8 +144,8 @@ Item {
 
                 // Compare with the previous point to find the nearest one.
                 if (left > 0) {
-                    const previousTime = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, left - 1), Qt.DisplayRole)).getTime();
-                    const currentTime = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, left), Qt.DisplayRole)).getTime();
+                    const previousTime = new Date(root.pointsModel.data(root.pointsModel.index(root.xModelRow, left - 1), Qt.DisplayRole)).getTime();
+                    const currentTime = new Date(root.pointsModel.data(root.pointsModel.index(root.xModelRow, left), Qt.DisplayRole)).getTime();
 
                     if (Math.abs(previousTime - targetTime) < Math.abs(currentTime - targetTime) || currentTime > visualMax) {
                         closest = left - 1;
@@ -235,6 +154,37 @@ Item {
 
                 root.currentPointIndex = closest;
                 root.hovered = true;
+            }
+        }
+
+        //TODO: Extract into another function and call when futureHours was updated
+        Component.onCompleted: {
+            var seriesComponent = Qt.createComponent("ForecastGraphSeries.qml");
+            for (const definition of root.forecastSeries) {
+                if (!definition.visible)
+                    continue;
+
+                const series = seriesComponent.createObject(forecastGraph, {
+                    seriesColor: definition.color,
+                    xSection: root.xModelRow,
+                    ySection: definition.ySection,
+                    model: root.pointsModel,
+                    selectedIndex: Qt.binding(function () {
+                        return root.currentPointIndex;
+                    }),
+                    graphHovered: Qt.binding(function () {
+                        return hoverHandler.hovered;
+                    })
+                });
+
+                forecastGraph.addSeries(series);
+
+                series.pointSelected.connect((x, y) => {
+                    root.currentPointDateX = x;
+                    root.currentPointValues = Object.assign({}, root.currentPointValues, {
+                        [definition.name]: y
+                    });
+                });
             }
         }
     }
