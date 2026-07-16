@@ -16,7 +16,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.weatherdata as WeatherData
 
-GraphsView {
+Item {
     id: root
 
     required property int generalTempSection
@@ -51,286 +51,303 @@ GraphsView {
     property var metaData: null
     property var pointsModel: null
 
-    marginBottom: Kirigami.Units.largeSpacing
-    marginTop: Kirigami.Units.largeSpacing
-
     property int currentPointIndex: -1
+
+    property alias marginBottom: forecastGraph.marginBottom
+    property alias marginTop: forecastGraph.marginTop
+    property alias marginRight: forecastGraph.marginRight
+    property alias marginLeft: forecastGraph.marginLeft
+
+    property alias axisX: forecastGraph.axisX
+    property alias axisY: forecastGraph.axisY
+
+    property alias plotArea: forecastGraph.plotArea
+
+    clip: true
 
     //Initialize axis min/max values only when pointsModel is
     // to prevent warnings
     onPointsModelChanged: {
-        axisX.min = root.minDate;
-        axisX.max = root.maxDate;
+        forecastGraph.axisX.min = root.minDate;
+        forecastGraph.axisX.max = root.maxDate;
     }
 
-    theme: GraphsTheme {
-        gridVisible: false
-        backgroundVisible: false
-        plotAreaBackgroundVisible: false
-        grid.mainColor: Kirigami.Theme.activeBackgroundColor
-    }
+    GraphsView {
+        id: forecastGraph
+        marginBottom: Kirigami.Units.largeSpacing
+        marginTop: Kirigami.Units.largeSpacing
+        anchors.fill: parent
 
-    axisX: DateTimeAxis {
-        visible: false
-        lineVisible: false
-        zoom: root.totalDays
-        pan: 0
-    }
+        clipPlotArea: false
 
-    axisY: ValueAxis {
-        visible: false
-        tickInterval: 20
-        lineVisible: false
-        min: 0
-        max: 100
-    }
+        theme: GraphsTheme {
+            gridVisible: false
+            backgroundVisible: false
+            plotAreaBackgroundVisible: false
+            grid.mainColor: Kirigami.Theme.activeBackgroundColor
+        }
 
-    SplineSeries {
-        id: generalTempSeries
-        visible: !root.pointsModel?.highLowTempPresent ?? false
-        width: 3
-        color: root.generalTempSeriesColor
-        pointDelegate: Item {
-            id: generalTempDelegate
+        axisX: DateTimeAxis {
+            visible: false
+            lineVisible: false
+            zoom: root.totalDays
+            pan: 0
+        }
 
-            property real pointValueX
-            property real pointValueY
-            property int pointIndex
+        axisY: ValueAxis {
+            visible: false
+            lineVisible: false
+            min: 0
+            max: 100
+        }
 
-            Rectangle {
-                id: generalTempPoint
-                anchors.centerIn: parent
-                width: Kirigami.Units.gridUnit * 0.5
-                height: width
-                radius: width * 0.5
-                color: root.generalTempSeriesColor
+        SplineSeries {
+            id: generalTempSeries
+            visible: !root.pointsModel?.highLowTempPresent ?? false
+            width: 3
+            color: root.generalTempSeriesColor
+            pointDelegate: Item {
+                id: generalTempDelegate
 
-                visible: root.currentPointIndex === generalTempDelegate.pointIndex && hoverHandler.hovered
+                property real pointValueX
+                property real pointValueY
+                property int pointIndex
 
-                onVisibleChanged: {
-                    if (visible) {
-                        root.currentPointDateX = generalTempDelegate.pointValueX;
-                        root.currentPointGeneralTempY = generalTempDelegate.pointValueY;
+                Rectangle {
+                    id: generalTempPoint
+                    anchors.centerIn: parent
+                    width: Kirigami.Units.gridUnit * 0.5
+                    height: width
+                    radius: width * 0.5
+                    color: root.generalTempSeriesColor
+
+                    visible: root.currentPointIndex === generalTempDelegate.pointIndex && hoverHandler.hovered
+
+                    onVisibleChanged: {
+                        if (visible) {
+                            root.currentPointDateX = generalTempDelegate.pointValueX;
+                            root.currentPointGeneralTempY = generalTempDelegate.pointValueY;
+                        }
                     }
-                }
 
-                Behavior on opacity {
-                    OpacityAnimator {
-                        duration: Kirigami.Units.shortDuration
+                    Behavior on opacity {
+                        OpacityAnimator {
+                            duration: Kirigami.Units.shortDuration
+                        }
                     }
                 }
             }
         }
-    }
 
-    XYModelMapper {
-        orientation: Qt.Horizontal
-        ySection: root.generalTempSection
-        xSection: root.dateTimeSection
-        model: root.pointsModel || null
-        series: generalTempSeries
-    }
+        XYModelMapper {
+            orientation: Qt.Horizontal
+            ySection: root.generalTempSection
+            xSection: root.dateTimeSection
+            model: root.pointsModel || null
+            series: generalTempSeries
+        }
 
-    SplineSeries {
-        id: highTempSeries
-        visible: root.pointsModel?.highLowTempPresent ?? false
-        width: 3
-        color: root.highTempSeriesColor
-        pointDelegate: Item {
-            id: highTempDelegate
+        SplineSeries {
+            id: highTempSeries
+            visible: root.pointsModel?.highLowTempPresent ?? false
+            width: 3
+            color: root.highTempSeriesColor
+            pointDelegate: Item {
+                id: highTempDelegate
 
-            property real pointValueX
-            property real pointValueY
-            property int pointIndex
+                property real pointValueX
+                property real pointValueY
+                property int pointIndex
 
-            Rectangle {
-                id: highTempPoint
-                anchors.centerIn: parent
-                width: Kirigami.Units.gridUnit * 0.5
-                height: width
-                radius: width * 0.5
-                color: root.highTempSeriesColor
+                Rectangle {
+                    id: highTempPoint
+                    anchors.centerIn: parent
+                    width: Kirigami.Units.gridUnit * 0.5
+                    height: width
+                    radius: width * 0.5
+                    color: root.highTempSeriesColor
 
-                visible: root.currentPointIndex === highTempDelegate.pointIndex && hoverHandler.hovered
+                    visible: root.currentPointIndex === highTempDelegate.pointIndex && hoverHandler.hovered
 
-                onVisibleChanged: {
-                    if (visible) {
-                        root.currentPointDateX = highTempDelegate.pointValueX;
-                        root.currentPointHighTempY = highTempDelegate.pointValueY;
+                    onVisibleChanged: {
+                        if (visible) {
+                            root.currentPointDateX = highTempDelegate.pointValueX;
+                            root.currentPointHighTempY = highTempDelegate.pointValueY;
+                        }
                     }
-                }
 
-                Behavior on opacity {
-                    OpacityAnimator {
-                        duration: Kirigami.Units.shortDuration
+                    Behavior on opacity {
+                        OpacityAnimator {
+                            duration: Kirigami.Units.shortDuration
+                        }
                     }
                 }
             }
         }
-    }
 
-    XYModelMapper {
-        orientation: Qt.Horizontal
-        ySection: root.highTempSection
-        xSection: root.dateTimeSection
-        model: root.pointsModel || null
-        series: highTempSeries
-    }
+        XYModelMapper {
+            orientation: Qt.Horizontal
+            ySection: root.highTempSection
+            xSection: root.dateTimeSection
+            model: root.pointsModel || null
+            series: highTempSeries
+        }
 
-    SplineSeries {
-        id: lowTempSeries
-        visible: root.pointsModel?.highLowTempPresent ?? false
-        width: 3
-        color: root.lowTempSeriesColor
-        pointDelegate: Item {
-            id: lowTempDelegate
+        SplineSeries {
+            id: lowTempSeries
+            visible: root.pointsModel?.highLowTempPresent ?? false
+            width: 3
+            color: root.lowTempSeriesColor
+            pointDelegate: Item {
+                id: lowTempDelegate
 
-            property real pointValueX
-            property real pointValueY
-            property int pointIndex
+                property real pointValueX
+                property real pointValueY
+                property int pointIndex
 
-            Rectangle {
-                id: lowTempPoint
-                anchors.centerIn: parent
-                width: Kirigami.Units.gridUnit * 0.5
-                height: width
-                radius: width * 0.5
-                color: root.lowTempSeriesColor
+                Rectangle {
+                    id: lowTempPoint
+                    anchors.centerIn: parent
+                    width: Kirigami.Units.gridUnit * 0.5
+                    height: width
+                    radius: width * 0.5
+                    color: root.lowTempSeriesColor
 
-                visible: root.currentPointIndex === lowTempDelegate.pointIndex && hoverHandler.hovered
+                    visible: root.currentPointIndex === lowTempDelegate.pointIndex && hoverHandler.hovered
 
-                onVisibleChanged: {
-                    if (visible) {
-                        root.currentPointDateX = lowTempDelegate.pointValueX;
-                        root.currentPointLowTempY = lowTempDelegate.pointValueY;
+                    onVisibleChanged: {
+                        if (visible) {
+                            root.currentPointDateX = lowTempDelegate.pointValueX;
+                            root.currentPointLowTempY = lowTempDelegate.pointValueY;
+                        }
                     }
-                }
 
-                Behavior on opacity {
-                    OpacityAnimator {
-                        duration: Kirigami.Units.shortDuration
+                    Behavior on opacity {
+                        OpacityAnimator {
+                            duration: Kirigami.Units.shortDuration
+                        }
                     }
                 }
             }
         }
-    }
 
-    XYModelMapper {
-        orientation: Qt.Horizontal
-        xSection: root.dateTimeSection
-        ySection: root.lowTempSection
-        model: root.pointsModel || null
-        series: lowTempSeries
-    }
+        XYModelMapper {
+            orientation: Qt.Horizontal
+            xSection: root.dateTimeSection
+            ySection: root.lowTempSection
+            model: root.pointsModel || null
+            series: lowTempSeries
+        }
 
-    SplineSeries {
-        id: conditionProbabilitySeries
-        visible: !!root.pointsModel && root.hasProbability
-        width: 3
-        color: root.conditionProbabilitySeriesColor
-        pointDelegate: Item {
-            id: conditionProbabilityDelegate
+        SplineSeries {
+            id: conditionProbabilitySeries
+            visible: !!root.pointsModel && root.hasProbability
+            width: 3
+            color: root.conditionProbabilitySeriesColor
+            pointDelegate: Item {
+                id: conditionProbabilityDelegate
 
-            property real pointValueX
-            property real pointValueY
-            property int pointIndex
+                property real pointValueX
+                property real pointValueY
+                property int pointIndex
 
-            Rectangle {
-                id: conditionProbabilityPoint
-                anchors.centerIn: parent
-                width: Kirigami.Units.gridUnit * 0.5
-                height: width
-                radius: width * 0.5
-                color: root.conditionProbabilitySeriesColor
+                Rectangle {
+                    id: conditionProbabilityPoint
+                    anchors.centerIn: parent
+                    width: Kirigami.Units.gridUnit * 0.5
+                    height: width
+                    radius: width * 0.5
+                    color: root.conditionProbabilitySeriesColor
 
-                visible: root.currentPointIndex === conditionProbabilityDelegate.pointIndex && hoverHandler.hovered
+                    visible: root.currentPointIndex === conditionProbabilityDelegate.pointIndex && hoverHandler.hovered
 
-                onVisibleChanged: {
-                    if (visible) {
-                        root.currentPointDateX = conditionProbabilityDelegate.pointValueX;
-                        root.currentPointConditionProbabilityY = conditionProbabilityDelegate.pointValueY;
+                    onVisibleChanged: {
+                        if (visible) {
+                            root.currentPointDateX = conditionProbabilityDelegate.pointValueX;
+                            root.currentPointConditionProbabilityY = conditionProbabilityDelegate.pointValueY;
+                        }
                     }
-                }
 
-                Behavior on opacity {
-                    OpacityAnimator {
-                        duration: Kirigami.Units.shortDuration
+                    Behavior on opacity {
+                        OpacityAnimator {
+                            duration: Kirigami.Units.shortDuration
+                        }
                     }
                 }
             }
         }
-    }
 
-    XYModelMapper {
-        orientation: Qt.Horizontal
-        xSection: root.dateTimeSection
-        ySection: root.conditionProbabilitySection
-        model: root.pointsModel || null
-        series: conditionProbabilitySeries
-    }
-
-    HoverHandler {
-        id: hoverHandler
-
-        onHoveredChanged: {
-            if (!hovered) {
-                root.hovered = false;
-            }
+        XYModelMapper {
+            orientation: Qt.Horizontal
+            xSection: root.dateTimeSection
+            ySection: root.conditionProbabilitySection
+            model: root.pointsModel || null
+            series: conditionProbabilitySeries
         }
 
-        onPointChanged: {
-            if (!root.pointsModel || !hovered) {
-                root.hovered = false;
-                root.currentPointIndex = -1;
-                return;
-            }
+        HoverHandler {
+            id: hoverHandler
 
-            const plotWidth = root.plotArea.width;
-            const xInPlot = point.position.x - root.marginLeft;
-
-            // Ignore the cursor outside the graph area.
-            if (xInPlot < 0 || xInPlot > plotWidth) {
-                root.hovered = false;
-                root.currentPointIndex = -1;
-                return;
-            }
-
-            const ratio = xInPlot / plotWidth;
-
-            const visualMin = root.axisX.visualMin.getTime();
-            const visualMax = root.axisX.visualMax.getTime();
-            const targetTime = visualMin + ratio * (visualMax - visualMin);
-
-            let left = 0;
-            let right = root.pointsModel.columnCount() - 1;
-
-            // Binary search for the first timestamp >= targetTime.
-            while (left < right) {
-                const mid = Math.floor((left + right) / 2);
-
-                const time = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, mid), Qt.DisplayRole)).getTime();
-
-                if (time < targetTime) {
-                    left = mid + 1;
-                } else {
-                    right = mid;
+            onHoveredChanged: {
+                if (!hovered) {
+                    root.hovered = false;
                 }
             }
 
-            let closest = left;
-
-            // Compare with the previous point to find the nearest one.
-            if (left > 0) {
-                const previousTime = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, left - 1), Qt.DisplayRole)).getTime();
-                const currentTime = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, left), Qt.DisplayRole)).getTime();
-
-                if (Math.abs(previousTime - targetTime) < Math.abs(currentTime - targetTime) || currentTime > visualMax) {
-                    closest = left - 1;
+            onPointChanged: {
+                if (!root.pointsModel || !hovered) {
+                    root.hovered = false;
+                    root.currentPointIndex = -1;
+                    return;
                 }
-            }
 
-            root.currentPointIndex = closest;
-            root.hovered = true;
+                const plotWidth = forecastGraph.plotArea.width;
+                const xInPlot = point.position.x - root.marginLeft;
+
+                // Ignore the cursor outside the graph area.
+                if (xInPlot < 0 || xInPlot > plotWidth) {
+                    root.hovered = false;
+                    root.currentPointIndex = -1;
+                    return;
+                }
+
+                const ratio = xInPlot / plotWidth;
+
+                const visualMin = forecastGraph.axisX.visualMin.getTime();
+                const visualMax = forecastGraph.axisX.visualMax.getTime();
+                const targetTime = visualMin + ratio * (visualMax - visualMin);
+
+                let left = 0;
+                let right = root.pointsModel.columnCount() - 1;
+
+                // Binary search for the first timestamp >= targetTime.
+                while (left < right) {
+                    const mid = Math.floor((left + right) / 2);
+
+                    const time = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, mid), Qt.DisplayRole)).getTime();
+
+                    if (time < targetTime) {
+                        left = mid + 1;
+                    } else {
+                        right = mid;
+                    }
+                }
+
+                let closest = left;
+
+                // Compare with the previous point to find the nearest one.
+                if (left > 0) {
+                    const previousTime = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, left - 1), Qt.DisplayRole)).getTime();
+                    const currentTime = new Date(root.pointsModel.data(root.pointsModel.index(root.dateTimeSection, left), Qt.DisplayRole)).getTime();
+
+                    if (Math.abs(previousTime - targetTime) < Math.abs(currentTime - targetTime) || currentTime > visualMax) {
+                        closest = left - 1;
+                    }
+                }
+
+                root.currentPointIndex = closest;
+                root.hovered = true;
+            }
         }
     }
 }

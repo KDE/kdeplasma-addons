@@ -130,11 +130,13 @@ Item {
 
         function updateLayout() {
             const spacing = Kirigami.Units.smallSpacing;
+            const isRightAligned = (root.state === "rightLabels");
 
             let labels = [];
 
             for (const child of children) {
-                if (child.visible) {
+                // Skip non-visual children, connections, or components
+                if (child.visible && child.hasOwnProperty("x")) {
                     labels.push(child);
                 }
             }
@@ -142,7 +144,20 @@ Item {
             if (labels.length === 0)
                 return;
 
-            // Sort by preferred position
+            // Align labels to the left or right to prevent the spacing between the
+            // line and labels
+            for (const label of labels) {
+                if (isRightAligned) {
+                    // Anchor to the right edge
+                    label.anchors.right = undefined;
+                    label.anchors.left = dataLabels.left;
+                } else {
+                    // Anchor to the left edge
+                    label.anchors.left = undefined;
+                    label.anchors.right = dataLabels.right;
+                }
+            }
+
             labels.sort((a, b) => a.preferredY - b.preferredY);
 
             // Initialize
@@ -164,9 +179,7 @@ Item {
 
             // Preserve the visual center
             const preferredCenter = (labels[0].preferredY + labels[labels.length - 1].preferredY) / 2;
-
             const actualCenter = (labels[0].y + labels[labels.length - 1].y) / 2;
-
             const centerShift = preferredCenter - actualCenter;
 
             for (const label of labels) {
@@ -175,14 +188,12 @@ Item {
 
             // Clamp to top boundary
             let shift = 0;
-
             if (labels[0].y < 0) {
                 shift = -labels[0].y;
             }
 
             // Clamp to bottom boundary
             const last = labels[labels.length - 1];
-
             if (last.y + last.height > height) {
                 shift = height - last.height - last.y;
             }

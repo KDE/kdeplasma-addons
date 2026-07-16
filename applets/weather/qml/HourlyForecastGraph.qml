@@ -99,12 +99,10 @@ ColumnLayout {
             }
         }
 
-        Rectangle {
-            id: graphRectangle
+        Item {
+            id: graphItem
             Layout.fillWidth: true
             Layout.fillHeight: true
-
-            color: "transparent"
 
             implicitHeight: forecastGraph.implicitHeight + forecastLine.timestampLabelHeight
 
