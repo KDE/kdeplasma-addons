@@ -1,16 +1,16 @@
 # Translation for plasma_wallpaper_org.kde.potd.po to Euskara/Basque (eu).
-# Copyright (C) 2018-2024 This file is copyright:
+# Copyright (C) 2018-2026 This file is copyright:
 # This file is distributed under the same license as kdeplasma-addons package.
-# SPDX-FileCopyrightText: 2024 KDE euskatzeko proiektuko arduraduna <xalba@ni.eus>
+# SPDX-FileCopyrightText: 2024, 2026 KDE euskatzeko proiektuaren arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2018, 2019, 2022, 2023, 2024.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2018, 2019, 2022, 2023, 2024, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-09 00:46+0000\n"
-"PO-Revision-Date: 2024-08-30 18:34+0200\n"
+"PO-Revision-Date: 2026-07-15 23:06+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.08.0\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #: package/contents/ui/config.qml:58
 #, kde-format
@@ -130,13 +130,13 @@ msgstr "Ireki horma-paper irudia"
 #, kde-format
 msgctxt "@action:inmenu Placeholder is title of image"
 msgid "About “%1”"
-msgstr ""
+msgstr "“%1”(e)ri buruz"
 
 #: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "About This Image"
-msgstr ""
+msgstr "Irudi honi buruz"
 
 #: package/contents/ui/WallpaperDelegate.qml:137
 #, kde-format
