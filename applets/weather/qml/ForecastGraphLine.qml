@@ -18,26 +18,16 @@ Item {
     required property real graphVisualMinX
     required property real graphVisualMaxX
 
-    required property color generalTempColor
-    required property color highTempColor
-    required property color lowTempColor
-    required property color conditionProbabilityColor
-
     required property int invalidUnit
     required property int displayTemperatureUnit
 
     required property real graphHovered
 
+    required property int currentPointIndex
     required property real currentPointDateX
-    required property real currentPointGeneralTempY
-    required property real currentPointHighTempY
-    required property real currentPointLowTempY
-    required property real currentPointConditionProbabilityY
+    required property var currentPointValues
 
-    required property string generalTempText
-    required property string highTempText
-    required property string lowTempText
-    required property string conditionProbabilityText
+    required property var seriesDefinitions
 
     property var maxTemp: null
     property var minTemp: null
@@ -66,6 +56,7 @@ Item {
         anchors.top: parent.top
         anchors.horizontalCenter: lineItem.horizontalCenter
         visible: lineItem.visible
+        //TODO: make format configurable
         text: {
             const timestamp = new Date(root.currentPointDateX);
             const format = Qt.locale().timeFormat(Locale.ShortFormat);
@@ -119,15 +110,6 @@ Item {
 
         property real rectangleHeight: Kirigami.Units.gridUnit
 
-        function calculateYFromTemp(temperature) {
-            if (!root.minTemp || !root.maxTemp) {
-                return 0;
-            }
-            let coefficient = 1.0 - temperature / 100;
-            let graphPlaneHeight = dataLabels.height - root.graphMarginTop - root.graphMarginBottom;
-            return coefficient * graphPlaneHeight + root.graphMarginTop - rectangleHeight / 2;
-        }
-
         function updateLayout() {
             const spacing = Kirigami.Units.smallSpacing;
             const isRightAligned = (root.state === "rightLabels");
@@ -136,7 +118,7 @@ Item {
 
             for (const child of children) {
                 // Skip non-visual children, connections, or components
-                if (child.visible && child.hasOwnProperty("x")) {
+                if (child.visible && child.hasOwnProperty("preferredY")) {
                     labels.push(child);
                 }
             }
@@ -144,7 +126,7 @@ Item {
             if (labels.length === 0)
                 return;
 
-            // Align labels to the left or right to prevent the spacing between the
+            // Align labels to the left or right to remove the empty space between the
             // line and labels
             for (const label of labels) {
                 if (isRightAligned) {
@@ -205,67 +187,41 @@ Item {
             }
         }
 
-        Rectangle {
-            implicitWidth: generalTempLabel.implicitWidth + Kirigami.Units.smallSpacing
-            implicitHeight: dataLabels.rectangleHeight
-            color: Qt.lighter(root.generalTempColor, 1.7)
-            radius: Kirigami.Units.cornerRadius
-            visible: !root.highLowTempPresent && root.generalTempText !== ""
-            property real preferredY: dataLabels.calculateYFromTemp(root.currentPointGeneralTempY)
-            PlasmaComponents.Label {
-                id: generalTempLabel
-                anchors.centerIn: parent
-                text: root.generalTempText
-                color: root.generalTempColor
-            }
-        }
+        Repeater {
+            model: root.seriesDefinitions
 
-        Rectangle {
-            implicitWidth: highTempLabel.implicitWidth + Kirigami.Units.smallSpacing
-            implicitHeight: dataLabels.rectangleHeight
-            color: Qt.lighter(root.highTempColor, 1.7)
-            radius: Kirigami.Units.cornerRadius
-            property real preferredY: dataLabels.calculateYFromTemp(root.currentPointHighTempY)
-            visible: root.highLowTempPresent && root.highTempText !== ""
-            PlasmaComponents.Label {
-                id: highTempLabel
-                anchors.centerIn: parent
-                text: root.highTempText
-                color: root.highTempColor
-            }
-        }
+            delegate: Rectangle {
+                required property var modelData
 
-        Rectangle {
-            implicitWidth: lowTempLabel.implicitWidth + Kirigami.Units.smallSpacing
-            implicitHeight: dataLabels.rectangleHeight
-            color: Qt.lighter(root.lowTempColor, 1.7)
-            radius: Kirigami.Units.cornerRadius
-            visible: root.highLowTempPresent && root.lowTempText !== ""
-            property real preferredY: dataLabels.calculateYFromTemp(root.currentPointLowTempY)
-            PlasmaComponents.Label {
-                id: lowTempLabel
-                anchors.centerIn: parent
-                text: root.lowTempText
-                color: root.lowTempColor
-            }
-        }
+                implicitWidth: label.implicitWidth + Kirigami.Units.smallSpacing
 
-        Rectangle {
-            implicitWidth: conditionProbabilityLabel.implicitWidth + Kirigami.Units.smallSpacing
-            implicitHeight: dataLabels.rectangleHeight
-            color: Qt.lighter(root.conditionProbabilityColor, 1.7)
-            radius: Kirigami.Units.cornerRadius
-            visible: root.hasProbability && root.conditionProbabilityText !== ""
-            property real preferredY: {
-                let coefficient = (1.0 - root.currentPointConditionProbabilityY / 100);
-                let graphPlaneHeight = dataLabels.height - root.graphMarginTop - root.graphMarginBottom;
-                return coefficient * graphPlaneHeight + root.graphMarginTop - parent.rectangleHeight / 2;
-            }
-            PlasmaComponents.Label {
-                id: conditionProbabilityLabel
-                anchors.centerIn: parent
-                text: root.conditionProbabilityText
-                color: root.conditionProbabilityColor
+                implicitHeight: dataLabels.rectangleHeight
+
+                color: Qt.lighter(modelData.color, 1.7)
+
+                radius: Kirigami.Units.cornerRadius
+
+                visible: modelData.visible && !!modelData.labelTextFunc && label.text !== ""
+
+                property real preferredY: {
+                    const value = root.currentPointValues[modelData.name];
+
+                    const graphPlaneHeight = dataLabels.height - root.graphMarginTop - root.graphMarginBottom;
+
+                    const coefficient = 1.0 - value / 100;
+
+                    return coefficient * graphPlaneHeight + root.graphMarginTop - height / 2;
+                }
+
+                PlasmaComponents.Label {
+                    id: label
+
+                    anchors.centerIn: parent
+
+                    text: !!parent.modelData.labelTextFunc ? parent.modelData.labelTextFunc(root.currentPointIndex) : ""
+
+                    color: parent.modelData.color
+                }
             }
         }
 

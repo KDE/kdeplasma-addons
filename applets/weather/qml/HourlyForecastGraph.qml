@@ -32,15 +32,99 @@ ColumnLayout {
     readonly property int totalDays: root.futureHoursPoints?.totalDays ?? 0
     readonly property int totalHours: root.futureHoursPoints?.totalHours ?? 0
 
-    property color highTempColor: "orange"
-    property color lowTempColor: "blue"
-    property color generalTempColor: "red"
-    property color conditionProbabilityColor: "gray"
+    property int dateTimeSection: WeatherData.FutureHoursPoints.Timestamp
 
     property int currentIndex: 0
 
     property int horizontalLabelsCount: 5
     property int verticalLabelsCount: 4
+
+    component SeriesDefinition: QtObject {
+        property string name
+        property bool visible
+        property color color
+        property int ySection
+        property bool labelVisible
+        property string legendText
+        property var labelTextFunc
+    }
+
+    property list<SeriesDefinition> seriesDefinitions: [
+        SeriesDefinition {
+            name: "generalTemp"
+            visible: !root.futureHoursPoints?.highLowTempPresent
+            color: "red"
+            ySection: WeatherData.FutureHoursPoints.GeneralTemp
+            legendText: i18n("General Temperature")
+            labelTextFunc: function (pointIndex) {
+                if (!root.futureHours) {
+                    return "";
+                }
+
+                let index = root.futureHours.index(pointIndex, 0);
+                let generalTemp = root.futureHours.data(index, WeatherData.FutureHours.GeneralTemp);
+                if (!generalTemp) {
+                    return "";
+                }
+
+                return Util.temperatureToDisplayString(root.displayTemperatureUnit, generalTemp, root.metaData.temperatureUnit);
+            }
+        },
+        SeriesDefinition {
+            name: "highTemp"
+            visible: root.futureHoursPoints?.highLowTempPresent
+            color: "orange"
+            ySection: WeatherData.FutureHoursPoints.HighTemp
+            legendText: i18n("High Temperature")
+            labelTextFunc: function (pointIndex) {
+                if (!root.futureHours) {
+                    return "";
+                }
+                let index = root.futureHours.index(pointIndex, 0);
+                let highTemp = root.futureHours.data(index, WeatherData.FutureHours.HighTemp);
+                if (!highTemp) {
+                    return "";
+                }
+                return Util.temperatureToDisplayString(root.displayTemperatureUnit, highTemp, root.metaData.temperatureUnit);
+            }
+        },
+        SeriesDefinition {
+            name: "lowTemp"
+            visible: root.futureHoursPoints?.highLowTempPresent
+            color: "blue"
+            ySection: WeatherData.FutureHoursPoints.LowTemp
+            legendText: i18n("Low Temperature")
+            labelTextFunc: function (pointIndex) {
+                if (!root.futureHours) {
+                    return "";
+                }
+                let index = root.futureHours.index(pointIndex, 0);
+                let lowTemp = root.futureHours.data(index, WeatherData.FutureHours.LowTemp);
+                if (!lowTemp) {
+                    return "";
+                }
+                return Util.temperatureToDisplayString(root.displayTemperatureUnit, lowTemp, root.metaData.temperatureUnit);
+            }
+        },
+        SeriesDefinition {
+            name: "probability"
+            visible: root.futureHours?.hasProbability
+            color: "gray"
+            ySection: WeatherData.FutureHoursPoints.ConditionProbability
+            legendText: i18n("Condition Probability")
+            labelTextFunc: function (pointIndex) {
+                if (!root.futureHours) {
+                    return "";
+                }
+                let index = root.futureHours.index(pointIndex, 0);
+                let conditionProbability = root.futureHours.data(index, WeatherData.FutureHours.ConditionProbability);
+                if (!conditionProbability) {
+                    return "";
+                }
+                return Util.percentToDisplayString(conditionProbability);
+            }
+        }
+    ]
 
     function scrollToIndex(dayIndex) {
         // 1. Calculate the total span of data
@@ -147,6 +231,10 @@ ColumnLayout {
                 marginLeft: 0
                 marginRight: marginLeft
 
+                xModelRow: root.dateTimeSection
+
+                forecastSeries: root.seriesDefinitions
+
                 metaData: root.metaData
 
                 hasProbability: root.futureHours?.hasProbability ?? false
@@ -170,17 +258,6 @@ ColumnLayout {
                 displayTemperatureUnit: root.displayTemperatureUnit
 
                 pointsModel: root.futureHoursPoints
-
-                highTempSeriesColor: root.highTempColor
-                lowTempSeriesColor: root.lowTempColor
-                generalTempSeriesColor: root.generalTempColor
-                conditionProbabilitySeriesColor: root.conditionProbabilityColor
-
-                dateTimeSection: WeatherData.FutureHoursPoints.Timestamp
-                generalTempSection: WeatherData.FutureHoursPoints.GeneralTemp
-                highTempSection: WeatherData.FutureHoursPoints.HighTemp
-                lowTempSection: WeatherData.FutureHoursPoints.LowTemp
-                conditionProbabilitySection: WeatherData.FutureHoursPoints.ConditionProbability
             }
 
             ForecastGraphLine {
@@ -196,75 +273,22 @@ ColumnLayout {
                 graphMarginBottom: forecastGraph.marginBottom
                 graphMarginTop: forecastGraph.marginTop
 
-                generalTempColor: root.generalTempColor
-                highTempColor: root.highTempColor
-                lowTempColor: root.lowTempColor
-                conditionProbabilityColor: root.conditionProbabilityColor
-
                 graphHovered: forecastGraph.hovered
 
                 graphVisualMaxX: forecastGraph.axisX.visualMax
                 graphVisualMinX: forecastGraph.axisX.visualMin
 
+                currentPointIndex: forecastGraph.currentPointIndex
                 currentPointDateX: forecastGraph.currentPointDateX
-                currentPointGeneralTempY: forecastGraph.currentPointGeneralTempY
-                currentPointHighTempY: forecastGraph.currentPointHighTempY
-                currentPointLowTempY: forecastGraph.currentPointLowTempY
-                currentPointConditionProbabilityY: forecastGraph.currentPointConditionProbabilityY
+                currentPointValues: forecastGraph.currentPointValues
+
+                seriesDefinitions: root.seriesDefinitions
 
                 hasProbability: root.futureHours?.hasProbability ?? false
                 highLowTempPresent: root.futureHoursPoints?.highLowTempPresent ?? false
 
                 maxTemp: root.futureHoursPoints?.maxTemp ?? 0
                 minTemp: root.futureHoursPoints?.minTemp ?? 0
-
-                generalTempText: {
-                    if (!root.futureHours) {
-                        return "";
-                    }
-                    let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
-                    let generalTemp = root.futureHours.data(index, WeatherData.FutureHours.GeneralTemp);
-                    if (!generalTemp) {
-                        return "";
-                    }
-                    return Util.temperatureToDisplayString(root.displayTemperatureUnit, generalTemp, root.metaData.temperatureUnit);
-                }
-
-                highTempText: {
-                    if (!root.futureHours) {
-                        return "";
-                    }
-                    let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
-                    let highTemp = root.futureHours.data(index, WeatherData.FutureHours.HighTemp);
-                    if (!highTemp) {
-                        return "";
-                    }
-                    return Util.temperatureToDisplayString(root.displayTemperatureUnit, highTemp, root.metaData.temperatureUnit);
-                }
-
-                lowTempText: {
-                    if (!root.futureHours) {
-                        return "";
-                    }
-                    let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
-                    let lowTemp = root.futureHours.data(index, WeatherData.FutureHours.LowTemp);
-                    if (!lowTemp) {
-                        return "";
-                    }
-                    return Util.temperatureToDisplayString(root.displayTemperatureUnit, lowTemp, root.metaData.temperatureUnit);
-                }
-
-                conditionProbabilityText: {
-                    if (!root.futureHours) {
-                        return "";
-                    }
-                    let index = root.futureHours.index(forecastGraph.currentPointIndex, 0);
-                    let conditionProbability = root.futureHours.data(index, WeatherData.FutureHours.ConditionProbability);
-                    if (!conditionProbability) {
-                        return "";
-                    }
-                    return Util.percentToDisplayString(conditionProbability);
-                }
             }
         }
 
@@ -304,31 +328,20 @@ ColumnLayout {
 
         forecastLegendData: {
             let forecastLegend = [];
-            if (!forecastGraph.highLowTempPresent) {
-                let generalTempData = {
-                    label: i18n("General Temperature"),
-                    color: root.generalTempColor
-                };
-                forecastLegend.push(generalTempData);
-            } else {
-                let highTempData = {
-                    label: i18n("High Temperature"),
-                    color: root.highTempColor
-                };
-                let lowTempData = {
-                    label: i18n("Low Temperature"),
-                    color: root.lowTempColor
-                };
-                forecastLegend.push(highTempData);
-                forecastLegend.push(lowTempData);
+
+            for (let i = 0; i < seriesDefinitions.length; i++) {
+                let series = seriesDefinitions[i];
+
+                // Only add the series to the legend if it is currently visible
+                if (series.visible) {
+                    let legendItem = {
+                        label: series.legendText,
+                        color: series.color
+                    };
+                    forecastLegend.push(legendItem);
+                }
             }
-            if (forecastGraph.hasProbability) {
-                let conditionProbability = {
-                    label: i18n("Condition Probability"),
-                    color: root.conditionProbabilityColor
-                };
-                forecastLegend.push(conditionProbability);
-            }
+
             return forecastLegend;
         }
     }
