@@ -156,7 +156,6 @@ Kirigami.ScrollablePage {
                 DayForecastGraph {
                     Layout.fillWidth: true
                     Layout.fillHeight: true
-                    futureDays: root.futureDays
                     futureDaysPoints: root.futureDaysPoints
                     metaData: root.metaData
 
