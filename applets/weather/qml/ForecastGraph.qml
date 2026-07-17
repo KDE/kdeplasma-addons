@@ -32,11 +32,9 @@ Item {
 
     property var currentPointValues: ({})
 
-    property int totalDays: 0
+    property int zoom: 1
 
     property bool hovered: false
-
-    property bool hasProbability: false
 
     property var metaData: null
     property var pointsModel: null
@@ -71,6 +69,8 @@ Item {
 
         clipPlotArea: false
 
+        panStyle: GraphsView.PanStyle.Drag
+
         theme: GraphsTheme {
             gridVisible: false
             backgroundVisible: false
@@ -81,7 +81,7 @@ Item {
         axisX: DateTimeAxis {
             visible: false
             lineVisible: false
-            zoom: root.totalDays
+            zoom: root.zoom
             pan: 0
         }
 

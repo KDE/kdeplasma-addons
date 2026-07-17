@@ -29,12 +29,14 @@ public:
     std::optional<QString> condition() const;
     std::optional<qreal> highTemp() const;
     std::optional<qreal> lowTemp() const;
+    std::optional<qreal> generalTemp() const;
     std::optional<qreal> conditionProbability() const;
 
     void setConditionIcon(const QString &conditionIcon);
     void setCondition(const QString &condition);
     void setHighTemp(qreal highTemp);
     void setLowTemp(qreal lowTemp);
+    void setGeneralTemp(qreal generalTemp);
     void setConditionProbability(qreal conditionProbability);
 
 private:
@@ -42,6 +44,7 @@ private:
     std::optional<QString> m_condition;
     std::optional<qreal> m_highTemp;
     std::optional<qreal> m_lowTemp;
+    std::optional<qreal> m_generalTemp;
     std::optional<qreal> m_conditionProbability;
 };
 
@@ -102,6 +105,7 @@ public:
         Condition,
         HighTemp,
         LowTemp,
+        GeneralTemp,
         ConditionProbability,
     };
 
@@ -127,10 +131,11 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
 
-private:
-    QString firstDayIcon() const;
     bool isNightPresent() const;
     bool hasProbability() const;
+
+private:
+    QString firstDayIcon() const;
     bool firstDayExist() const;
     int daysNumber() const;
 
@@ -157,6 +162,8 @@ class PLASMAWEATHERDATA_EXPORT FutureDaysPoints : public QAbstractTableModel
     Q_OBJECT
     QML_ANONYMOUS
 
+    Q_PROPERTY(bool highLowTempPresent READ highLowTempPresent CONSTANT)
+    Q_PROPERTY(bool hasProbability READ hasProbability CONSTANT)
     Q_PROPERTY(QDateTime minDate READ minDate CONSTANT)
     Q_PROPERTY(QDateTime maxDate READ maxDate CONSTANT)
     Q_PROPERTY(qreal minTemp READ minTemp CONSTANT)
@@ -165,7 +172,10 @@ class PLASMAWEATHERDATA_EXPORT FutureDaysPoints : public QAbstractTableModel
 public:
     enum RowsData {
         Timestamp = 0,
-        Temperature,
+        GeneralTemp,
+        HighTemp,
+        LowTemp,
+        ConditionProbability,
         EndRow,
     };
 
@@ -179,13 +189,22 @@ public:
 
     QVariant data(const QModelIndex &index, int role) const override;
 
+    Q_INVOKABLE QVariant displayTemperature(int dayIndex, RowsData row) const;
+    Q_INVOKABLE QVariant displayConditionProbability(int dayIndex) const;
+
 private:
+    QVariant aggregatedValue(int dayIndex, RowsData row) const;
+
+    bool hasProbability() const;
+    bool highLowTempPresent() const;
     QDateTime minDate() const;
     QDateTime maxDate() const;
     qreal minTemp() const;
     qreal maxTemp() const;
 
 private:
+    bool m_highLowTempPresent;
+
     qreal m_minTemp;
     qreal m_maxTemp;
 

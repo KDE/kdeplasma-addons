@@ -236,8 +236,6 @@ ColumnLayout {
 
                 metaData: root.metaData
 
-                hasProbability: root.futureHours?.hasProbability ?? false
-
                 minDate: root.futureHoursPoints?.minDate ?? new Date()
 
                 // Use the end of the last day rather than futureHoursPoints.maxDate so each page displays a full day.
@@ -251,7 +249,7 @@ ColumnLayout {
                     return maxDate;
                 }
 
-                totalDays: root.futureHoursPoints?.totalDays ?? 0
+                zoom: root.futureHoursPoints?.totalDays ?? 0
 
                 invalidUnit: root.invalidUnit
                 displayTemperatureUnit: root.displayTemperatureUnit
@@ -334,8 +332,8 @@ ColumnLayout {
         forecastLegendData: {
             const forecastLegend = [];
 
-            for (let i = 0; i < seriesDefinitions.length; i++) {
-                const series = seriesDefinitions[i];
+            for (let i = 0; i < root.seriesDefinitions.length; i++) {
+                const series = root.seriesDefinitions[i];
 
                 // Only add the series to the legend if it is currently visible
                 if (series.visible) {

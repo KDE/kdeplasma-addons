@@ -538,11 +538,8 @@ void NOAAIon::updateWeather()
             FutureForecast futureDaytimeForecast;
             futureDaytimeForecast.setConditionIcon(iconName);
             futureDaytimeForecast.setCondition(i18nForecast(current.summary));
-            if (!qIsNaN(current.high)) {
-                futureDaytimeForecast.setHighTemp(current.high);
-            }
-            if (!qIsNaN(current.low)) {
-                futureDaytimeForecast.setHighTemp(current.low);
+            if (!qIsNaN(current.temp)) {
+                futureDaytimeForecast.setGeneralTemp(current.temp);
             }
             futureDaytimeForecast.setConditionProbability(current.precipitation);
 
@@ -568,11 +565,8 @@ void NOAAIon::updateWeather()
                     FutureForecast futureNightForecast;
                     futureNightForecast.setConditionIcon(iconName);
                     futureNightForecast.setCondition(i18nForecast(next.summary));
-                    if (!qIsNaN(next.high)) {
-                        futureNightForecast.setHighTemp(next.high);
-                    }
-                    if (!qIsNaN(next.low)) {
-                        futureNightForecast.setHighTemp(next.low);
+                    if (!qIsNaN(current.temp)) {
+                        futureNightForecast.setGeneralTemp(current.temp);
                     }
                     futureNightForecast.setConditionProbability(next.precipitation);
                     futureDayForecast.setNight(futureNightForecast);
@@ -586,11 +580,8 @@ void NOAAIon::updateWeather()
             FutureForecast futureNightForecast;
             futureNightForecast.setConditionIcon(iconName);
             futureNightForecast.setCondition(i18nForecast(current.summary));
-            if (!qIsNaN(current.high)) {
-                futureNightForecast.setHighTemp(current.high);
-            }
-            if (!qIsNaN(current.low)) {
-                futureNightForecast.setHighTemp(current.low);
+            if (!qIsNaN(current.temp)) {
+                futureNightForecast.setGeneralTemp(current.temp);
             }
             futureNightForecast.setConditionProbability(current.precipitation);
 
@@ -1092,11 +1083,7 @@ void NOAAIon::readForecast(KJob *job, const QByteArray &data)
             tempF = m_converter.convert(temperature, Fahrenheit).number();
         }
 
-        if (forecast.isDayTime) {
-            forecast.high = tempF;
-        } else {
-            forecast.low = tempF;
-        }
+        forecast.temp = tempF;
 
         // Precipitation (%)
         forecast.precipitation = period[u"probabilityOfPrecipitation"_s][u"value"_s].toInt();

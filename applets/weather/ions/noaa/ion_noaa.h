@@ -56,8 +56,7 @@ public:
     struct Forecast {
         QDateTime timestamp;
         QString summary;
-        float low = qQNaN();
-        float high = qQNaN();
+        float temp = qQNaN();
         int precipitation = 0;
         bool isDayTime = true;
     };
