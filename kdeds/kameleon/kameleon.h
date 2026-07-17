@@ -37,7 +37,7 @@ public:
     Q_SCRIPTABLE void setEnabled(bool enabled);
 
 private:
-    bool m_enabled = true;
+    bool m_enabled = false;
     QColor m_accentColor = QColor(QColorConstants::White);
 
     KSharedConfig::Ptr m_config;
