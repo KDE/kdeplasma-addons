@@ -60,9 +60,9 @@ Item {
     onPointsModelChanged: {
         forecastGraph.axisX.min = root.minDate;
         forecastGraph.axisX.max = root.maxDate;
+        root.updateSeries();
     }
 
-    //TODO: CHECK IF THE GRAPH UPDATES PROPERLY WHEN futureHours IS CHANGED
     GraphsView {
         id: forecastGraph
         marginBottom: Kirigami.Units.largeSpacing
@@ -157,35 +157,46 @@ Item {
             }
         }
 
-        //TODO: Extract into another function and call when futureHours was updated
         Component.onCompleted: {
-            var seriesComponent = Qt.createComponent("ForecastGraphSeries.qml");
-            for (const definition of root.forecastSeries) {
-                if (!definition.visible)
-                    continue;
+            root.updateSeries();
+        }
+    }
 
-                const series = seriesComponent.createObject(forecastGraph, {
-                    seriesColor: definition.color,
-                    xSection: root.xModelRow,
-                    ySection: definition.ySection,
-                    model: root.pointsModel,
-                    selectedIndex: Qt.binding(function () {
-                        return root.currentPointIndex;
-                    }),
-                    graphHovered: Qt.binding(function () {
-                        return hoverHandler.hovered;
-                    })
+    function updateSeries() {
+        for (const forecastSeries of [...forecastGraph.seriesList]) {
+            forecastGraph.removeSeries(forecastSeries);
+        }
+
+        if (!root.pointsModel) {
+            return;
+        }
+
+        var seriesComponent = Qt.createComponent("ForecastGraphSeries.qml");
+        for (const definition of root.forecastSeries) {
+            if (!definition.visible)
+                continue;
+
+            const series = seriesComponent.createObject(forecastGraph, {
+                seriesColor: definition.color,
+                xSection: root.xModelRow,
+                ySection: definition.ySection,
+                model: root.pointsModel,
+                selectedIndex: Qt.binding(function () {
+                    return root.currentPointIndex;
+                }),
+                graphHovered: Qt.binding(function () {
+                    return hoverHandler.hovered;
+                })
+            });
+
+            forecastGraph.addSeries(series);
+
+            series.pointSelected.connect((x, y) => {
+                root.currentPointDateX = x;
+                root.currentPointValues = Object.assign({}, root.currentPointValues, {
+                    [definition.name]: y
                 });
-
-                forecastGraph.addSeries(series);
-
-                series.pointSelected.connect((x, y) => {
-                    root.currentPointDateX = x;
-                    root.currentPointValues = Object.assign({}, root.currentPointValues, {
-                        [definition.name]: y
-                    });
-                });
-            }
+            });
         }
     }
 }

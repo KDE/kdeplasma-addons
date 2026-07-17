@@ -28,10 +28,6 @@ ColumnLayout {
 
     readonly property real preferredGraphHeight: Kirigami.Units.iconSizes.enormous
 
-    readonly property int hoursPerDay: root.futureHoursPoints?.hoursPerDay ?? 0
-    readonly property int totalDays: root.futureHoursPoints?.totalDays ?? 0
-    readonly property int totalHours: root.futureHoursPoints?.totalHours ?? 0
-
     property int dateTimeSection: WeatherData.FutureHoursPoints.Timestamp
 
     property int currentIndex: 0
@@ -61,9 +57,9 @@ ColumnLayout {
                     return "";
                 }
 
-                let index = root.futureHours.index(pointIndex, 0);
-                let generalTemp = root.futureHours.data(index, WeatherData.FutureHours.GeneralTemp);
-                if (!generalTemp) {
+                const index = root.futureHours.index(pointIndex, 0);
+                const generalTemp = root.futureHours.data(index, WeatherData.FutureHours.GeneralTemp);
+                if (isNaN(generalTemp)) {
                     return "";
                 }
 
@@ -72,7 +68,7 @@ ColumnLayout {
         },
         SeriesDefinition {
             name: "highTemp"
-            visible: root.futureHoursPoints?.highLowTempPresent
+            visible: root.futureHoursPoints?.highLowTempPresent ?? false
             color: "orange"
             ySection: WeatherData.FutureHoursPoints.HighTemp
             legendText: i18n("High Temperature")
@@ -80,9 +76,9 @@ ColumnLayout {
                 if (!root.futureHours) {
                     return "";
                 }
-                let index = root.futureHours.index(pointIndex, 0);
-                let highTemp = root.futureHours.data(index, WeatherData.FutureHours.HighTemp);
-                if (!highTemp) {
+                const index = root.futureHours.index(pointIndex, 0);
+                const highTemp = root.futureHours.data(index, WeatherData.FutureHours.HighTemp);
+                if (isNaN(highTemp)) {
                     return "";
                 }
                 return Util.temperatureToDisplayString(root.displayTemperatureUnit, highTemp, root.metaData.temperatureUnit);
@@ -90,17 +86,17 @@ ColumnLayout {
         },
         SeriesDefinition {
             name: "lowTemp"
-            visible: root.futureHoursPoints?.highLowTempPresent
-            color: "blue"
+            visible: root.futureHoursPoints?.highLowTempPresent ?? false
+            color: "deepskyblue"
             ySection: WeatherData.FutureHoursPoints.LowTemp
             legendText: i18n("Low Temperature")
             labelTextFunc: function (pointIndex) {
                 if (!root.futureHours) {
                     return "";
                 }
-                let index = root.futureHours.index(pointIndex, 0);
-                let lowTemp = root.futureHours.data(index, WeatherData.FutureHours.LowTemp);
-                if (!lowTemp) {
+                const index = root.futureHours.index(pointIndex, 0);
+                const lowTemp = root.futureHours.data(index, WeatherData.FutureHours.LowTemp);
+                if (isNaN(lowTemp)) {
                     return "";
                 }
                 return Util.temperatureToDisplayString(root.displayTemperatureUnit, lowTemp, root.metaData.temperatureUnit);
@@ -108,7 +104,7 @@ ColumnLayout {
         },
         SeriesDefinition {
             name: "probability"
-            visible: root.futureHours?.hasProbability
+            visible: root.futureHours?.hasProbability ?? false
             color: "gray"
             ySection: WeatherData.FutureHoursPoints.ConditionProbability
             legendText: i18n("Condition Probability")
@@ -116,9 +112,9 @@ ColumnLayout {
                 if (!root.futureHours) {
                     return "";
                 }
-                let index = root.futureHours.index(pointIndex, 0);
-                let conditionProbability = root.futureHours.data(index, WeatherData.FutureHours.ConditionProbability);
-                if (!conditionProbability) {
+                const index = root.futureHours.index(pointIndex, 0);
+                const conditionProbability = root.futureHours.data(index, WeatherData.FutureHours.ConditionProbability);
+                if (isNaN(conditionProbability)) {
                     return "";
                 }
                 return Util.percentToDisplayString(conditionProbability);
@@ -127,14 +123,13 @@ ColumnLayout {
     ]
 
     function scrollToIndex(dayIndex) {
-        // 1. Calculate the total span of data
-        let totalSpan = forecastGraph.axisX.max - forecastGraph.axisX.min;
+        const totalSpan = forecastGraph.axisX.max - forecastGraph.axisX.min;
 
-        // 2. Calculate the width of the visible window based on zoom level
+        // Calculate the width of the visible window based on zoom level
         // (Zoom is totalDays, making the window exactly 1 day wide)
-        let windowWidth = totalSpan / forecastGraph.axisX.zoom;
+        const windowWidth = totalSpan / forecastGraph.axisX.zoom;
 
-        // 4. Shift left by dayIndex to bring subsequent days into the view window
+        // Shift left by dayIndex to bring subsequent days into the view window
         forecastGraph.axisX.pan = forecastGraph.axisX.pan - (currentIndex - dayIndex) * windowWidth;
 
         currentIndex = dayIndex;
@@ -142,19 +137,21 @@ ColumnLayout {
 
     // Initialize the position when the data model maps its min and max bounds
     onFutureHoursChanged: {
-        if (!!root.futureHours) {
-            // Wait for properties to bind, then align to the first index (0)
-            Qt.callLater(() => {
-                // DateTimeAxis.pan is a translation from the centered position.
-                // Shift the viewport so its left edge aligns with axisX.min.
-                const totalWidth = forecastGraph.axisX.max - forecastGraph.axisX.min;
-                const visibleWidth = forecastGraph.axisX.visualMax - forecastGraph.axisX.visualMin;
-                forecastGraph.axisX.pan = -(totalWidth - visibleWidth) / 2;
-                const pointSpacing = visibleWidth / root.futureHoursPoints.hoursPerDay;
-                forecastGraph.axisX.pan -= pointSpacing / 2;
-                currentIndex = 0;
-            });
+        if (!root.futureHours || !root.futureHoursPoints) {
+            return;
         }
+        // Wait for properties to bind, then align to the first index (0)
+        Qt.callLater(() => {
+            // Shift the viewport so its left edge aligns with axisX.min.
+            const totalWidth = forecastGraph.axisX.max - forecastGraph.axisX.min;
+            const visibleWidth = forecastGraph.axisX.visualMax - forecastGraph.axisX.visualMin;
+            forecastGraph.axisX.pan = -(totalWidth - visibleWidth) / 2;
+            const pointSpacing = visibleWidth / root.futureHoursPoints.hoursPerDay;
+            // Shift the viewport by half a point spacing so points from the
+            // next day are not partially visible at the right edge.
+            forecastGraph.axisX.pan -= pointSpacing / 2;
+            currentIndex = 0;
+        });
     }
 
     RowLayout {
@@ -169,17 +166,19 @@ ColumnLayout {
             Layout.preferredWidth: Kirigami.Units.iconSizes.small
         }
 
+        // Use custom graph labels because GraphView does not support custom label sizing
+        // or displaying labels on both sides of the graph.
         ForecastGraphLabels {
             id: tempLabels
             Layout.fillHeight: true
             Layout.topMargin: forecastLine.timestampLabelHeight + forecastGraph.marginTop
             Layout.bottomMargin: forecastGraph.marginBottom
-            max: root.futureHoursPoints?.maxTemp
-            min: root.futureHoursPoints?.minTemp
+            max: root.futureHoursPoints?.maxTemp ?? 0
+            min: root.futureHoursPoints?.minTemp ?? 0
             labelsCount: root.verticalLabelsCount
             spacing: root.minimalSpacing
             formatter: function (temp) {
-                return Util.temperatureToDisplayString(root.displayTemperatureUnit, temp, root.metaData.temperatureUnit);
+                return !!root.metaData ? Util.temperatureToDisplayString(root.displayTemperatureUnit, temp, root.metaData.temperatureUnit) : "";
             }
         }
 
@@ -247,12 +246,12 @@ ColumnLayout {
                     if (!root.futureHoursPoints?.minDate) {
                         return new Date();
                     }
-                    var maxDate = new Date(root.futureHoursPoints.minDate);
-                    maxDate.setDate(maxDate.getDate() + root.totalDays);
+                    const maxDate = new Date(root.futureHoursPoints.minDate);
+                    maxDate.setDate(maxDate.getDate() + root.futureHoursPoints.totalDays);
                     return maxDate;
                 }
 
-                totalDays: root.totalDays
+                totalDays: root.futureHoursPoints?.totalDays ?? 0
 
                 invalidUnit: root.invalidUnit
                 displayTemperatureUnit: root.displayTemperatureUnit
@@ -284,6 +283,12 @@ ColumnLayout {
 
                 seriesDefinitions: root.seriesDefinitions
 
+                formatter: function (timestamp) {
+                    const date = new Date(timestamp);
+                    const format = Qt.locale().timeFormat(Locale.ShortFormat);
+                    return Qt.formatDateTime(date, format);
+                }
+
                 hasProbability: root.futureHours?.hasProbability ?? false
                 highLowTempPresent: root.futureHoursPoints?.highLowTempPresent ?? false
 
@@ -293,11 +298,11 @@ ColumnLayout {
         }
 
         ForecastGraphLabels {
-            id: percentLabes
+            id: percentLabels
             Layout.fillHeight: true
             Layout.topMargin: forecastLine.timestampLabelHeight + forecastGraph.marginTop
             Layout.bottomMargin: forecastGraph.marginBottom
-            leftAllign: true
+            leftAlign: true
             max: 100
             min: 0
             labelsCount: root.verticalLabelsCount
@@ -327,14 +332,14 @@ ColumnLayout {
         Layout.bottomMargin: Kirigami.Units.largeSpacing
 
         forecastLegendData: {
-            let forecastLegend = [];
+            const forecastLegend = [];
 
             for (let i = 0; i < seriesDefinitions.length; i++) {
-                let series = seriesDefinitions[i];
+                const series = seriesDefinitions[i];
 
                 // Only add the series to the legend if it is currently visible
                 if (series.visible) {
-                    let legendItem = {
+                    const legendItem = {
                         label: series.legendText,
                         color: series.color
                     };
@@ -349,7 +354,7 @@ ColumnLayout {
     PlasmaComponents.PageIndicator {
         id: indicator
 
-        count: root.totalDays
+        count: root.futureHoursPoints?.totalDays ?? 0
 
         currentIndex: root.currentIndex
 
