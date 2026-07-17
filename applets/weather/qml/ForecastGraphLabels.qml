@@ -15,8 +15,8 @@ Item {
 
     required property var formatter
 
-    property bool leftAllign: false
-    property bool bottomAllign: false
+    property bool leftAlign: false
+    property bool bottomAlign: false
 
     property real spacing: 0
 
@@ -72,13 +72,13 @@ Item {
 
             Component.onCompleted: {
                 if (!root.horizontal) {
-                    if (root.leftAllign) {
+                    if (root.leftAlign) {
                         anchors.left = root.left;
                     } else {
                         anchors.right = root.right;
                     }
                 } else {
-                    if (root.bottomAllign) {
+                    if (root.bottomAlign) {
                         anchors.bottom = root.bottom;
                     } else {
                         anchors.top = root.top;

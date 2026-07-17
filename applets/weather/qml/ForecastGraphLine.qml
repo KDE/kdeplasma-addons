@@ -29,6 +29,8 @@ Item {
 
     required property var seriesDefinitions
 
+    required property var formatter
+
     property var maxTemp: null
     property var minTemp: null
 
@@ -56,12 +58,9 @@ Item {
         anchors.top: parent.top
         anchors.horizontalCenter: lineItem.horizontalCenter
         visible: lineItem.visible
-        //TODO: make format configurable
         text: {
             const timestamp = new Date(root.currentPointDateX);
-            const format = Qt.locale().timeFormat(Locale.ShortFormat);
-            const usesAmPm = format.includes("Ap");
-            Qt.formatDateTime(timestamp, usesAmPm ? "h AP" : "HH:mm");
+            return root.formatter(timestamp);
         }
     }
 
