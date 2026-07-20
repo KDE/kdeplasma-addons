@@ -1,21 +1,22 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Vit Pelcak <vit@pelcak.org>, 2022, 2023.
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-07 00:44+0000\n"
-"PO-Revision-Date: 2023-01-30 11:06+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-07-20 00:11+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 22.12.1\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #: calendarsystem.h:52
 #, kde-format
@@ -33,7 +34,7 @@ msgstr "Milankovic"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Solar Hijri Calendar (Persian)"
-msgstr ""
+msgstr "Solární hidžra kalendář (perský)"
 
 #: calendarsystem.h:64
 #, kde-format
@@ -41,7 +42,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Astronomical)"
-msgstr "Islámský kalendář (Astronomický)"
+msgstr "Islámský kalendář (astronomický)"
 
 #: calendarsystem.h:68
 #, kde-format
@@ -49,7 +50,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "The Islamic Civil Calendar (Tabular)"
-msgstr ""
+msgstr "Islámský občanský kalendář (tabulkový)"
 
 #: calendarsystem.h:72
 #, kde-format
@@ -57,7 +58,7 @@ msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
 "design-proposals/islamic-calendar-types for more details"
 msgid "Islamic Calendar (Umm al-Qura)"
-msgstr ""
+msgstr "Islámský kalendář (Umm al-Qura)"
 
 #: calendarsystem.h:76
 #, kde-format
@@ -78,20 +79,16 @@ msgid "Hebrew Calendar"
 msgstr "Hebrejský kalendář"
 
 #: calendarsystem.h:88
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Chinese Lunar Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
-msgstr "Čínský lunární kalendář"
+msgstr "Vietnamský lunární kalendář"
 
 #: calendarsystem.h:92
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Indian National Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Ethiopian Calendar"
-msgstr "Indický národní kalendář"
+msgstr "Etiopský kalendář"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -106,12 +103,14 @@ msgid ""
 "This calendar is based on pure astronomical calculation. It doesn't consider "
 "any crescent visibility criteria."
 msgstr ""
+"Tento kalendář vychází z čistě astronomických výpočtů. Nezohledňuje žádná "
+"kritéria viditelnosti srpku měsíce."
 
 #: config/qml/AlternateCalendarConfig.qml:77
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
-msgstr ""
+msgstr "Posun data:"
 
 #: config/qml/AlternateCalendarConfig.qml:88
 #, kde-format
@@ -128,13 +127,11 @@ msgid ""
 "A positive offset signifies a later date, while a negative offset signifies "
 "an earlier date."
 msgstr ""
+"Kladný posun znamená pozdější datum, zatímco záporný posun znamená dřívější "
+"datum."
 
 #: provider/ethiopiancalendar.cpp:86
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
-#| "number %4 Full date in Hebrew"
-#| msgid "%1 %2, %3 (%4)"
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Translated month name in Ethiopian calendar %3 Year number "
 "%4 Full date in Ethiopian"

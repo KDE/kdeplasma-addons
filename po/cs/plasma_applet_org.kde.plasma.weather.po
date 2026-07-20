@@ -2,21 +2,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # SPDX-FileCopyrightText: 2011, 2014, 2016, 2017, 2018, 2019, 2020, 2024, 2026 Vít Pelčák <vit@pelcak.org>
 # SPDX-FileCopyrightText: 2021, 2023, 2024 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-06-09 00:45+0000\n"
-"PO-Revision-Date: 2026-03-30 20:02+0200\n"
-"Last-Translator:  Vít Pelčák <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-07-19 21:20+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -632,6 +633,9 @@ msgid ""
 "outage at the weather station provider has made it temporarily unavailable. "
 "Try again later."
 msgstr ""
+"Pokud jste tuto meteorologickou stanici již v minulosti používali, je možné, "
+"že je v současné době dočasně nedostupná kvůli výpadku serveru u "
+"poskytovatele meteorologické stanice. Zkuste to prosím později."
 
 #: qml/ForecastView.qml:149
 #, kde-format
@@ -678,6 +682,9 @@ msgid ""
 "The network request timed out, possibly due to a server outage at the "
 "weather station provider. Check again later."
 msgstr ""
+"Došlo k vypršení časového limitu síťového požadavku, pravděpodobně v "
+"důsledku výpadku serveru u poskytovatele meteorologické stanice. Zkuste to "
+"prosím později."
 
 #: qml/main.qml:81 qml/TopPanel.qml:221
 #, kde-format
@@ -816,6 +823,8 @@ msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, submit a bug report."
 msgstr ""
+"Může se jednat o technický problém u poskytovatele meteorologických dat. "
+"Pokud problém přetrvává déle než jeden den, odešlete hlášení o chybě."
 
 #: qml/TopPanel.qml:137
 #, kde-format

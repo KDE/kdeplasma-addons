@@ -4,21 +4,22 @@
 # SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2015, 2026 Vít Pelčák <vit@pelcak.org>
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012.
 # Vit Pelcak <vit@pelcak.org>, 2015, 2018, 2019, 2021, 2022, 2023.
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:44+0000\n"
-"PO-Revision-Date: 2026-03-30 20:13+0200\n"
-"Last-Translator:  Vít Pelčák <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-07-19 23:58+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #: comicdata.cpp:76
 #, kde-format
@@ -54,7 +55,7 @@ msgstr "Chování"
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show above image:"
-msgstr ""
+msgstr "Zobrazit obrázek výše:"
 
 #: qml/configBehavior.qml:29
 #, kde-format
@@ -72,7 +73,7 @@ msgstr "Autor"
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show below image:"
-msgstr ""
+msgstr "Zobrazit obrázek níže:"
 
 #: qml/configBehavior.qml:40
 #, kde-format
@@ -90,31 +91,31 @@ msgstr "Webová stránka"
 #, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
-msgstr ""
+msgstr "Navigační tlačítka:"
 
 #: qml/configBehavior.qml:55
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
-msgstr ""
+msgstr "Vždy viditelné na okrajích"
 
 #: qml/configBehavior.qml:61
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
-msgstr ""
+msgstr "Zobrazit uprostřed při najetí myší"
 
 #: qml/configBehavior.qml:70
 #, kde-format
 msgctxt "@label for checkbox, completes sentence … opens full-size view"
 msgid "Middle-clicking image:"
-msgstr ""
+msgstr "Kliknutí prostředním tlačítkem na obrázek:"
 
 #: qml/configBehavior.qml:71
 #, kde-format
 msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
-msgstr ""
+msgstr "Otevře zobrazení v plné velikosti"
 
 #: qml/configComics.qml:27
 #, kde-format
@@ -126,7 +127,7 @@ msgstr "Získat nové…"
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
-msgstr ""
+msgstr "Nejsou nainstalovány žádné komiksy"
 
 #: qml/configComics.qml:72
 #, kde-format
@@ -153,34 +154,34 @@ msgstr[2] "minut"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
-msgstr ""
+msgstr "Uchovávat místní archiv:"
 
 #: qml/configComics.qml:110
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "obrázek na komiks"
+msgstr[1] "obrázky na komiks"
+msgstr[2] "obrázků na komiks"
 
 #: qml/ErrorPlaceholder.qml:18
 #, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr ""
+msgstr "Komiks se nepodařilo načíst"
 
 #: qml/ErrorPlaceholder.qml:19
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Zkuste to později, nebo si vyberte jiný komiks"
 
 #: qml/ErrorPlaceholder.qml:27
 #, kde-format
 msgctxt "@info placeholdermessage title if offline"
 msgid "Offline"
-msgstr "Odpojen"
+msgstr "Odpojeno"
 
 #: qml/ErrorPlaceholder.qml:28
 #, kde-format
@@ -189,6 +190,8 @@ msgid ""
 "Reconnect to the internet to retry loading this image. You can still view "
 "any images in the local archive."
 msgstr ""
+"Znovu se připojte k internetu a zkuste tento obrázek načíst znovu. Obrázky v "
+"místním archivu si můžete i nadále prohlížet."
 
 #: qml/ErrorPlaceholder.qml:36
 #, kde-format
@@ -203,6 +206,8 @@ msgid ""
 "The image may not be available on your current connection. You can still "
 "view any images in the local archive."
 msgstr ""
+"Obrázek nemusí být při vašem aktuálním připojení k dispozici. Obrázky v "
+"místním archivu si však můžete prohlížet i nadále."
 
 #: qml/ErrorPlaceholder.qml:45
 #, kde-format
@@ -216,6 +221,8 @@ msgctxt "@info placeholdermessage explanation if today not available"
 msgid ""
 "Today's image is not yet available or cannot be read. Try a different date."
 msgstr ""
+"Dnešní obrázek zatím není k dispozici nebo jej nelze načíst. Zkuste jiné "
+"datum."
 
 #: qml/ErrorPlaceholder.qml:54
 #, kde-format
@@ -230,6 +237,8 @@ msgid ""
 "The image for this day is not available or cannot be read. Try a different "
 "date."
 msgstr ""
+"Obrázek pro tento den není k dispozici nebo jej nelze načíst. Zkuste jiné "
+"datum."
 
 #: qml/main.qml:87
 #, kde-format
@@ -289,13 +298,13 @@ msgstr "Uložit aktuální &pozici"
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
-msgstr ""
+msgstr "Není nastaven žádný komiks"
 
 #: qml/main.qml:291
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
-msgstr ""
+msgstr "Vybrat komiks…"
 
 #: qml/main.qml:302
 #, kde-format
