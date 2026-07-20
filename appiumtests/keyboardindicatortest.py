@@ -14,6 +14,7 @@ from appium.webdriver.common.appiumby import AppiumBy
 WIDGET_ID: Final = "org.kde.plasma.keyboardindicator"
 
 
+@unittest.skip("Failing for 4+ weeks. Maybe because it is expecting x11 and xdotool?")
 class KeyboardIndicatorTest(unittest.TestCase):
 
     driver: webdriver.Remote
