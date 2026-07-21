@@ -3,13 +3,13 @@
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
 # Automatically generated, 2022.
-# SPDX-FileCopyrightText: 2022, 2023, 2026 Mincho Kondarev <mkondarev@yahoo.de>
+# SPDX-FileCopyrightText: 2022-2023, 2026 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-07 00:44+0000\n"
-"PO-Revision-Date: 2026-04-03 00:13+0200\n"
+"PO-Revision-Date: 2026-07-20 20:05+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.03.70\n"
+"X-Generator: Lokalize 26.04.2\n"
 
 #: calendarsystem.h:52
 #, kde-format
@@ -86,12 +86,10 @@ msgid "Vietnamese Lunar Calendar"
 msgstr "Виетнамски лунен календар"
 
 #: calendarsystem.h:92
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Indian National Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Ethiopian Calendar"
-msgstr "Индийски национален календар"
+msgstr "Етиопски календар"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -133,11 +131,7 @@ msgstr ""
 "означава по-ранна дата."
 
 #: provider/ethiopiancalendar.cpp:86
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
-#| "number %4 Full date in Hebrew"
-#| msgid "%1 %2, %3 (%4)"
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Translated month name in Ethiopian calendar %3 Year number "
 "%4 Full date in Ethiopian"
