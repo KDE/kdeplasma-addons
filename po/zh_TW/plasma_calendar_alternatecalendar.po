@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-07 00:44+0000\n"
-"PO-Revision-Date: 2026-03-02 05:37+0900\n"
+"PO-Revision-Date: 2026-07-22 01:18+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.11.70\n"
+"X-Generator: Lokalize 26.11.70\n"
 
 #: calendarsystem.h:52
 #, kde-format
@@ -87,12 +87,10 @@ msgid "Vietnamese Lunar Calendar"
 msgstr "越南陰曆"
 
 #: calendarsystem.h:92
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Indian National Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Ethiopian Calendar"
-msgstr "印度國定曆"
+msgstr "衣索比亞曆法"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -129,16 +127,12 @@ msgid ""
 msgstr "正數的位移代表較晚的日期，而負數的位移則代表較早的日期。"
 
 #: provider/ethiopiancalendar.cpp:86
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
-#| "number %4 Full date in Hebrew"
-#| msgid "%1 %2, %3 (%4)"
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Translated month name in Ethiopian calendar %3 Year number "
 "%4 Full date in Ethiopian"
 msgid "%1 %2, %3 (%4)"
-msgstr "%3 年 %2 月 %1 日 (%4)"
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/hebrewcalendar.cpp:91
 #, kde-format
@@ -146,7 +140,7 @@ msgctxt ""
 "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
 "number %4 Full date in Hebrew"
 msgid "%1 %2, %3 (%4)"
-msgstr "%3 年 %2 月 %1 日 (%4)"
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/indiancalendar.cpp:70
 #, kde-format
@@ -160,7 +154,7 @@ msgctxt ""
 "@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 "
 "Islamic calendar date in Arabic"
 msgid "%1 %2, %3 (%4)"
-msgstr "%3 年 %2 月 %1 日 (%4)"
+msgstr "%1 %2, %3 (%4)"
 
 #: provider/qtcalendar.cpp:55
 #, kde-format
