@@ -36,18 +36,8 @@ ColumnLayout {
 
     property int currentIndex: 0
 
-    component SeriesDefinition: QtObject {
-        property string name
-        property bool visible
-        property color color
-        property int ySection
-        property bool labelVisible
-        property string legendText
-        property var labelTextFunc
-    }
-
-    property list<SeriesDefinition> seriesDefinitions: [
-        SeriesDefinition {
+    property list<ForecastGraph.SeriesDefinition> seriesDefinitions: [
+        ForecastGraph.SeriesDefinition {
             name: "generalTemp"
             visible: !root.futureDaysPoints?.highLowTempPresent
             color: "red"
@@ -64,7 +54,7 @@ ColumnLayout {
                 return Util.temperatureToDisplayString(root.displayTemperatureUnit, generalTemp, root.metaData.temperatureUnit);
             }
         },
-        SeriesDefinition {
+        ForecastGraph.SeriesDefinition {
             name: "highTemp"
             visible: root.futureDaysPoints?.highLowTempPresent ?? false
             color: "orange"
@@ -81,7 +71,7 @@ ColumnLayout {
                 return Util.temperatureToDisplayString(root.displayTemperatureUnit, highTemp, root.metaData.temperatureUnit);
             }
         },
-        SeriesDefinition {
+        ForecastGraph.SeriesDefinition {
             name: "lowTemp"
             visible: root.futureDaysPoints?.highLowTempPresent ?? false
             color: "deepskyblue"
@@ -98,7 +88,7 @@ ColumnLayout {
                 return Util.temperatureToDisplayString(root.displayTemperatureUnit, lowTemp, root.metaData.temperatureUnit);
             }
         },
-        SeriesDefinition {
+        ForecastGraph.SeriesDefinition {
             name: "probability"
             visible: root.futureDaysPoints?.hasProbability ?? false
             color: "gray"

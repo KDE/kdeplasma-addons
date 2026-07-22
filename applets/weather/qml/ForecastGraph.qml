@@ -51,6 +51,15 @@ Item {
 
     property alias plotArea: forecastGraph.plotArea
 
+    component SeriesDefinition: QtObject {
+        property string name
+        property bool visible
+        property color color
+        property int ySection
+        property string legendText
+        property var labelTextFunc
+    }
+
     clip: true
 
     //Initialize axis min/max values only when pointsModel is
