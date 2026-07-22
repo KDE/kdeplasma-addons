@@ -155,6 +155,7 @@ ColumnLayout {
             id: backButton
             Layout.fillHeight: true
             icon.name: "go-previous"
+            visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
             enabled: root.currentIndex > 0
             onClicked: root.scrollToIndex(root.currentIndex - 1)
             Layout.preferredWidth: Kirigami.Units.iconSizes.small
@@ -309,6 +310,7 @@ ColumnLayout {
             id: forwardButton
             Layout.fillHeight: true
             icon.name: "go-next"
+            visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
             enabled: root.currentIndex < forecastGraph.axisX.zoom - 1
             onClicked: {
                 root.scrollToIndex(root.currentIndex + 1);
