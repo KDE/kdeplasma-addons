@@ -6,7 +6,6 @@
 
 #include "vietnamesecalendar.h"
 
-#include "icucalendar_p.h"
 #include "solarutils.h"
 
 #include <KLocalizedString>
@@ -17,6 +16,12 @@
 using namespace Qt::StringLiterals;
 
 /*
+    Vietnamese lunar calendar implementation.
+
+    This work is technically duplicated with ICU Chinese calendar.
+    However, ICU public API does not allow changing the timezone used for calcuation.
+    This code should be revised once upstream provides support Vietnamese calendar.
+
     The algorithm used is based on Hồ Ngọc Đức's work.
     It has been adapted to use what available in `solarutils.h`.
     While providing greater accuracy, it is (in theory) more computational expensive.
@@ -26,6 +31,7 @@ using namespace Qt::StringLiterals;
     E.g. Vietnamese is UTC+7, while Chinese is UTC+8.
 
     References:
+    - https://unicode-org.atlassian.net/browse/ICU-11973
     - https://www.xemamlich.uhm.vn/calrules.html
  */
 
@@ -54,6 +60,20 @@ constexpr double s_J2000NewMoon = 2451550.09766;
  */
 constexpr int s_vietnameseUtcOffset = 7;
 
+/*!
+ * \brief The 10 heavenly stems in Vietnamese.
+ *
+ * \internal
+ */
+const std::array s_heavenlyStems{u"Giáp"_s, u"Ất"_s, u"Bính"_s, u"Đinh"_s, u"Mậu"_s, u"Kỷ"_s, u"Canh"_s, u"Tân"_s, u"Nhâm"_s, u"Quý"_s};
+
+/*!
+ * \brief The 12 earthly branches in Vietnamese.
+ *
+ * \internal
+ */
+const std::array s_earthlyBranches{u"Tý"_s, u"Sửu"_s, u"Dần"_s, u"Mão"_s, u"Thìn"_s, u"Tỵ"_s, u"Ngọ"_s, u"Mùi"_s, u"Thân"_s, u"Dậu"_s, u"Tuất"_s, u"Hợi"_s};
+
 struct LunarDate {
     int year;
     int month;
@@ -65,6 +85,7 @@ std::shared_mutex s_cacheMutex;
 constinit QHash<int /* k-index */, double> s_winterSolsticeCache;
 constinit QHash<int /* k-index */, double> s_newMoonCache;
 constinit QHash<QDate, LunarDate> s_lunarDateCache;
+constinit QHash<int /* lunar year */, QString> s_ganzhiYearCache;
 
 /*!
  * \brief Get the local midnight UTC+7 for \a{dayIndex}.
@@ -327,97 +348,73 @@ LunarDate getLunarDate(const QDate &date)
 
     return lunarDate;
 }
+
+/*!
+   \brief Get the ganzhi name for \a{year}.
+   \internal
+ */
+QString getYearGanzhi(int year)
+{
+    {
+        std::shared_lock lock(s_cacheMutex);
+        if (s_ganzhiYearCache.contains(year)) {
+            return s_ganzhiYearCache[year];
+        }
+    }
+    return s_ganzhiYearCache[year] = s_heavenlyStems.at((year + 6) % 10) + ' '_L1 + s_earthlyBranches.at((year + 8) % 12);
+}
 }
 
-class VietnameseCalendarProviderPrivate : public ICUCalendarPrivate
+class VietnameseCalendarProviderPrivate
 {
     Q_DISABLE_COPY(VietnameseCalendarProviderPrivate)
-
-    const icu::Locale m_locale;
-
 public:
-    explicit VietnameseCalendarProviderPrivate();
-
-    bool setDate(const QDate &date);
-
-    bool isLeapMonth() const;
-
-    QString formattedDateString(const icu::UnicodeString &str) const;
+    VietnameseCalendarProviderPrivate() = default;
 
     QCalendar::YearMonthDay fromGregorian(const QDate &date);
     CalendarEvents::CalendarEventsPlugin::SubLabel subLabel(const QDate &date);
-};
 
-VietnameseCalendarProviderPrivate::VietnameseCalendarProviderPrivate()
-    : m_locale{"vi", nullptr, nullptr, "calendar=chinese"} // Force using the Vietnamese translation
-{
-    m_calendar.reset(icu::Calendar::createInstance(m_locale, m_errorCode));
-}
+private:
+    QDate m_date;
+    LunarDate m_lunarDate{};
+
+    bool setDate(const QDate &date);
+};
 
 bool VietnameseCalendarProviderPrivate::setDate(const QDate &date)
 {
     if (!date.isValid()) {
         return false;
     }
-
-    const auto lunarDate = getLunarDate(date);
-
-    m_calendar->clear(); // Clear existing time to avoid carry-over "noise".
-
-    // Calculate the Chinese year from Gregorian year, since the lunar date calculation returns the Gregorian one.
-    // 2637 BCE epoch was the first year of the Chinese calendar in Gregorian calendar used by ICU.
-    m_calendar->set(UCAL_YEAR, lunarDate.year + 2637);
-
-    m_calendar->set(UCAL_MONTH, lunarDate.month - 1); // Zero-index month.
-    m_calendar->set(UCAL_DATE, lunarDate.day);
-    m_calendar->set(UCAL_IS_LEAP_MONTH, lunarDate.isLeapMonth ? 1 : 0);
-
-    return !U_FAILURE(m_errorCode);
-}
-
-bool VietnameseCalendarProviderPrivate::isLeapMonth() const
-{
-    const int32_t leap = m_calendar->get(UCAL_IS_LEAP_MONTH, m_errorCode);
-
-    if (U_FAILURE(m_errorCode)) {
-        return -1;
-    }
-
-    return leap != 0;
-}
-
-QString VietnameseCalendarProviderPrivate::formattedDateString(const icu::UnicodeString &str) const
-{
-    UErrorCode errorCode = U_ZERO_ERROR;
-    icu::UnicodeString dateString;
-    icu::SimpleDateFormat formatter(str, m_locale, errorCode);
-    formatter.setCalendar(*m_calendar);
-    formatter.format(m_calendar->getTime(errorCode), dateString);
-
-    return QStringView(dateString.getBuffer(), dateString.length()).toString();
+    m_date = date;
+    m_lunarDate = getLunarDate(date);
+    return true;
 }
 
 QCalendar::YearMonthDay VietnameseCalendarProviderPrivate::fromGregorian(const QDate &date)
 {
-    if (U_FAILURE(m_errorCode) || !date.isValid() || setDate(date)) {
+    if (!setDate(date)) {
         return {};
     }
-    return this->date();
+    return {m_lunarDate.year, m_lunarDate.month, m_lunarDate.year};
 }
 
 CalendarEvents::CalendarEventsPlugin::SubLabel VietnameseCalendarProviderPrivate::subLabel(const QDate &date)
 {
-    if (U_FAILURE(m_errorCode) || !date.isValid() || !setDate(date)) {
+    if (!setDate(date)) {
         return {};
     }
 
     CalendarEvents::CalendarEventsPlugin::SubLabel sublabel;
     sublabel.priority = CalendarEvents::CalendarEventsPlugin::SubLabelPriority::Low;
 
-    sublabel.dayLabel = QString::number(day());
-    sublabel.monthLabel = formattedDateString("MMMM");
-    sublabel.yearLabel = formattedDateString("U r");
-    sublabel.label = formattedDateString("'Ngày' d 'tháng' MMMM 'năm' U r");
+    sublabel.dayLabel = QString::number(m_lunarDate.day);
+    sublabel.monthLabel = QString::number(m_lunarDate.month);
+    if (m_lunarDate.isLeapMonth) {
+        sublabel.monthLabel.append(u" Nhuận"_s);
+    }
+    sublabel.yearLabel = getYearGanzhi(m_lunarDate.year).append(' '_L1).append(QString::number(m_lunarDate.year));
+    sublabel.label = u"Ngày %1 tháng %2 năm %3"_s.arg(sublabel.dayLabel, sublabel.monthLabel, sublabel.yearLabel);
 
     return sublabel;
 }
