@@ -28,5 +28,6 @@ public:
     CalendarEvents::CalendarEventsPlugin::SubLabel subLabel(const QDate &date) const override;
 
 private:
+    friend class VietnameseCalendarProviderPrivate;
     const std::unique_ptr<class VietnameseCalendarProviderPrivate> d;
 };

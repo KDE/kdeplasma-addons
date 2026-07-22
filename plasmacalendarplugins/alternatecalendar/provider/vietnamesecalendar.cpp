@@ -368,18 +368,30 @@ QString getYearGanzhi(int year)
 class VietnameseCalendarProviderPrivate
 {
     Q_DISABLE_COPY(VietnameseCalendarProviderPrivate)
+    VietnameseCalendarProvider *const q;
+
 public:
-    VietnameseCalendarProviderPrivate() = default;
+    explicit VietnameseCalendarProviderPrivate(VietnameseCalendarProvider *q);
 
     QCalendar::YearMonthDay fromGregorian(const QDate &date);
     CalendarEvents::CalendarEventsPlugin::SubLabel subLabel(const QDate &date);
 
 private:
+    const int m_monthChangesBetweenStartAndEndDate;
     QDate m_date;
     LunarDate m_lunarDate{};
 
     bool setDate(const QDate &date);
+    bool shouldAppendMonthToDayLabel();
+
+    static int monthBetween(const QDate &d1, const QDate &d2);
 };
+
+VietnameseCalendarProviderPrivate::VietnameseCalendarProviderPrivate(VietnameseCalendarProvider *q)
+    : q{q}
+    , m_monthChangesBetweenStartAndEndDate{monthBetween(q->m_startDate.addDays(q->m_dateOffset), q->m_endDate.addDays(q->m_dateOffset))}
+{
+}
 
 bool VietnameseCalendarProviderPrivate::setDate(const QDate &date)
 {
@@ -389,6 +401,42 @@ bool VietnameseCalendarProviderPrivate::setDate(const QDate &date)
     m_date = date;
     m_lunarDate = getLunarDate(date);
     return true;
+}
+
+int VietnameseCalendarProviderPrivate::monthBetween(const QDate &d1, const QDate &d2)
+{
+    if (!d1.isValid() || !d2.isValid()) {
+        return 0;
+    }
+
+    auto totalMonths1 = d1.year() * 12 + d1.month();
+    auto totalMonths2 = d2.year() * 12 + d2.month();
+
+    return std::abs(totalMonths2 - totalMonths1);
+}
+
+bool VietnameseCalendarProviderPrivate::shouldAppendMonthToDayLabel()
+{
+    // Always append month to day label on the first day of every lunar month.
+    if (m_lunarDate.day == 1) {
+        return true;
+    }
+
+    auto unoffsetDate = m_date.addDays(-q->m_dateOffset);
+
+    if (m_monthChangesBetweenStartAndEndDate >= 1) {
+        // If there are 1 or more month changes between end and start date,
+        // append month to day label of the *first* day 1 of a Gregorian month.
+        if (m_date.day() == 1 && monthBetween(unoffsetDate, q->m_startDate) == 1) {
+            return true;
+        }
+    } else if (m_monthChangesBetweenStartAndEndDate == 0 && unoffsetDate == q->m_startDate) {
+        // If there is 0 month change between end and start date,
+        // append month to day label on the start date.
+        return true;
+    }
+
+    return false;
 }
 
 QCalendar::YearMonthDay VietnameseCalendarProviderPrivate::fromGregorian(const QDate &date)
@@ -416,12 +464,16 @@ CalendarEvents::CalendarEventsPlugin::SubLabel VietnameseCalendarProviderPrivate
     sublabel.yearLabel = getYearGanzhi(m_lunarDate.year).append(' '_L1).append(QString::number(m_lunarDate.year));
     sublabel.label = u"Ngày %1 tháng %2 năm %3"_s.arg(sublabel.dayLabel, sublabel.monthLabel, sublabel.yearLabel);
 
+    if (shouldAppendMonthToDayLabel()) {
+        sublabel.dayLabel.append('/'_L1).append(sublabel.monthLabel);
+    }
+
     return sublabel;
 }
 
 VietnameseCalendarProvider::VietnameseCalendarProvider(QObject *parent, CalendarSystem::System calendarSystem, const QDate &startDate, const QDate &endDate)
     : AbstractCalendarProvider{parent, calendarSystem, startDate, endDate}
-    , d{std::make_unique<VietnameseCalendarProviderPrivate>()}
+    , d{std::make_unique<VietnameseCalendarProviderPrivate>(this)}
 {
     Q_ASSERT(calendarSystem == CalendarSystem::System::Vietnamese);
 }
