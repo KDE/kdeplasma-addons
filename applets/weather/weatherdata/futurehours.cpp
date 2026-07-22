@@ -108,9 +108,37 @@ QVariant FutureHoursPoints::data(const QModelIndex &index, int role) const
     return {};
 }
 
+QVariant FutureHoursPoints::displayTemperature(int dayIndex, RowsData row) const
+{
+    auto futureHoursIndex = m_futureHours->index(dayIndex);
+
+    switch (row) {
+    case GeneralTemp:
+        return m_futureHours->data(futureHoursIndex, FutureHours::GeneralTemp);
+    case HighTemp:
+        return m_futureHours->data(futureHoursIndex, FutureHours::HighTemp);
+    case LowTemp:
+        return m_futureHours->data(futureHoursIndex, FutureHours::LowTemp);
+
+    default:
+        return {};
+    }
+}
+
+QVariant FutureHoursPoints::displayConditionProbability(int dayIndex) const
+{
+    auto futureHoursIndex = m_futureHours->index(dayIndex);
+    return m_futureHours->data(futureHoursIndex, FutureHours::ConditionProbability);
+}
+
 bool FutureHoursPoints::highLowTempPresent() const
 {
     return m_highLowTempPresent;
+}
+
+bool FutureHoursPoints::hasProbability() const
+{
+    return m_futureHours->hasProbability();
 }
 
 int FutureHoursPoints::totalHours() const

@@ -110,7 +110,6 @@ Kirigami.ScrollablePage {
                     Layout.alignment: Qt.AlignTop
                     Layout.fillWidth: true
 
-                    futureHours: root.futureHours
                     futureHoursPoints: root.futureHoursPoints
                     metaData: root.metaData
 

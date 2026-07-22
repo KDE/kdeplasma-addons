@@ -17,9 +17,8 @@ import org.kde.plasma.weatherdata as WeatherData
 ColumnLayout {
     id: root
 
-    property var futureHours: null
-    property var futureHoursPoints: null
     property var metaData: null
+    property var futureHoursPoints: null
 
     property int invalidUnit: 0
     property int displayTemperatureUnit: 0
@@ -53,16 +52,13 @@ ColumnLayout {
             ySection: WeatherData.FutureHoursPoints.GeneralTemp
             legendText: i18n("General Temperature")
             labelTextFunc: function (pointIndex) {
-                if (!root.futureHours) {
+                if (!root.futureHoursPoints) {
                     return "";
                 }
-
-                const index = root.futureHours.index(pointIndex, 0);
-                const generalTemp = root.futureHours.data(index, WeatherData.FutureHours.GeneralTemp);
+                const generalTemp = root.futureHoursPoints.displayTemperature(pointIndex, ySection);
                 if (isNaN(generalTemp)) {
                     return "";
                 }
-
                 return Util.temperatureToDisplayString(root.displayTemperatureUnit, generalTemp, root.metaData.temperatureUnit);
             }
         },
@@ -73,11 +69,10 @@ ColumnLayout {
             ySection: WeatherData.FutureHoursPoints.HighTemp
             legendText: i18n("High Temperature")
             labelTextFunc: function (pointIndex) {
-                if (!root.futureHours) {
+                if (!root.futureHoursPoints) {
                     return "";
                 }
-                const index = root.futureHours.index(pointIndex, 0);
-                const highTemp = root.futureHours.data(index, WeatherData.FutureHours.HighTemp);
+                const highTemp = root.futureHoursPoints.displayTemperature(pointIndex, ySection);
                 if (isNaN(highTemp)) {
                     return "";
                 }
@@ -91,11 +86,10 @@ ColumnLayout {
             ySection: WeatherData.FutureHoursPoints.LowTemp
             legendText: i18n("Low Temperature")
             labelTextFunc: function (pointIndex) {
-                if (!root.futureHours) {
+                if (!root.futureHoursPoints) {
                     return "";
                 }
-                const index = root.futureHours.index(pointIndex, 0);
-                const lowTemp = root.futureHours.data(index, WeatherData.FutureHours.LowTemp);
+                const lowTemp = root.futureHoursPoints.displayTemperature(pointIndex, ySection);
                 if (isNaN(lowTemp)) {
                     return "";
                 }
@@ -104,16 +98,15 @@ ColumnLayout {
         },
         SeriesDefinition {
             name: "probability"
-            visible: root.futureHours?.hasProbability ?? false
+            visible: root.futureHoursPoints?.hasProbability ?? false
             color: "gray"
             ySection: WeatherData.FutureHoursPoints.ConditionProbability
             legendText: i18n("Condition Probability")
             labelTextFunc: function (pointIndex) {
-                if (!root.futureHours) {
+                if (!root.futureHoursPoints) {
                     return "";
                 }
-                const index = root.futureHours.index(pointIndex, 0);
-                const conditionProbability = root.futureHours.data(index, WeatherData.FutureHours.ConditionProbability);
+                const conditionProbability = root.futureHoursPoints.displayConditionProbability(pointIndex);
                 if (isNaN(conditionProbability)) {
                     return "";
                 }
@@ -136,8 +129,8 @@ ColumnLayout {
     }
 
     // Initialize the position when the data model maps its min and max bounds
-    onFutureHoursChanged: {
-        if (!root.futureHours || !root.futureHoursPoints) {
+    onFutureHoursPointsChanged: {
+        if (!root.futureHoursPoints) {
             return;
         }
         // Wait for properties to bind, then align to the first index (0)
@@ -148,7 +141,8 @@ ColumnLayout {
             forecastGraph.axisX.pan = -(totalWidth - visibleWidth) / 2;
             const pointSpacing = visibleWidth / root.futureHoursPoints.hoursPerDay;
             // Shift the viewport by half a point spacing so points from the
-            // next day are not partially visible at the right edge.
+            // next day are not partially visible at the right edge and the leftmost
+            // point is not clipped.
             forecastGraph.axisX.pan -= pointSpacing / 2;
             currentIndex = 0;
         });
@@ -287,7 +281,7 @@ ColumnLayout {
                     return Qt.formatDateTime(date, format);
                 }
 
-                hasProbability: root.futureHours?.hasProbability ?? false
+                hasProbability: root.futureHoursPoints?.hasProbability ?? false
                 highLowTempPresent: root.futureHoursPoints?.highLowTempPresent ?? false
 
                 maxTemp: root.futureHoursPoints?.maxTemp ?? 0
@@ -304,7 +298,7 @@ ColumnLayout {
             max: 100
             min: 0
             labelsCount: root.verticalLabelsCount
-            visible: forecastGraph.hasProbability
+            visible: root.futureHoursPoints?.hasProbability ?? false
             spacing: root.minimalSpacing
             formatter: function (conditionProbability) {
                 return Util.percentToDisplayString(conditionProbability);

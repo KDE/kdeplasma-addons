@@ -98,10 +98,11 @@ public:
     QVariant data(const QModelIndex &index, int role) const override;
     QHash<int, QByteArray> roleNames() const override;
 
+    bool hasProbability() const;
+
 private:
     QString firstDayIcon() const;
     bool isNightPresent() const;
-    bool hasProbability() const;
     bool firstDayExist() const;
     int hoursNumber() const;
 
@@ -124,6 +125,7 @@ class PLASMAWEATHERDATA_EXPORT FutureHoursPoints : public QAbstractTableModel
     QML_ANONYMOUS
 
     Q_PROPERTY(bool highLowTempPresent READ highLowTempPresent CONSTANT)
+    Q_PROPERTY(bool hasProbability READ hasProbability CONSTANT)
     Q_PROPERTY(int totalHours READ totalHours CONSTANT)
     Q_PROPERTY(int hoursPerDay READ hoursPerDay CONSTANT)
     Q_PROPERTY(int totalDays READ totalDays CONSTANT)
@@ -152,8 +154,12 @@ public:
 
     QVariant data(const QModelIndex &index, int role) const override;
 
+    Q_INVOKABLE QVariant displayTemperature(int dayIndex, RowsData row) const;
+    Q_INVOKABLE QVariant displayConditionProbability(int dayIndex) const;
+
 private:
     bool highLowTempPresent() const;
+    bool hasProbability() const;
     int totalHours() const;
     int hoursPerDay() const;
     int totalDays() const;
