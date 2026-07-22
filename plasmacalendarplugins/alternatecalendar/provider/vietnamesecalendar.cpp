@@ -47,6 +47,13 @@ constexpr double s_newMoonInterval = 29.530588853;
  */
 constexpr double s_J2000NewMoon = 2451550.09766;
 
+/*!
+ * \brief The UTC timezone offset of Vietnam.
+ *
+ * \internal
+ */
+constexpr int s_vietnameseUtcOffset = 7;
+
 struct LunarDate {
     int year;
     int month;
@@ -60,13 +67,23 @@ constinit QHash<int /* k-index */, double> s_newMoonCache;
 constinit QHash<QDate, LunarDate> s_lunarDateCache;
 
 /*!
+ * \brief Get the local midnight UTC+7 for \a{dayIndex}.
+ *
+ * \internal
+ */
+double getLocalMidnight(qint64 dayIndex)
+{
+    return double(dayIndex) - 0.5 // shifts backward half a day from noon UTC to midnight UTC (00:00 UTC)
+        - double(s_vietnameseUtcOffset) / 24.0; // shifts backward a further 7 hours
+}
+
+/*!
     \brief Get the JDE for the might of \a{dayIndex}.
     \internal
  */
 double getMidnightJDE(qint64 dayIndex)
 {
-    // Vietnamese is UTC+7
-    double jdUtc = double(dayIndex) - 0.5 - 7.0 / 24.0;
+    double jdUtc = getLocalMidnight(dayIndex);
 
     int y, m, d;
     SolarUtils::getDateFromJulianDay(jdUtc, y, m, d);
@@ -86,7 +103,7 @@ qint64 getLocalDayIndex(double jde)
     double dt = SolarUtils::getDeltaT(year, month) / 86400.0;
     double jdUtc = jde - dt;
     // Vietnamese is UTC+7
-    return std::floor(jdUtc + 7.0 / 24.0 + 0.5);
+    return std::floor(jdUtc + double(s_vietnameseUtcOffset) / 24.0 + 0.5);
 }
 
 /*!
@@ -219,18 +236,17 @@ bool hasMajorSolarTerm(double jdeStart, double jdeEnd)
 }
 
 /*!
-    \brief Find the lunar month index containing the given Julian date \a{jde}.
+    \brief Find the lunar month index containing the given Julian day \a{dayIndex}.
     \internal
  */
-int getLocalMonthIndex(double jde)
+int getLocalMonthIndex(qint64 dayIndex)
 {
-    int k = std::floor((jde - s_J2000NewMoon) / s_newMoonInterval);
+    int k = std::floor((getLocalMidnight(dayIndex) - s_J2000NewMoon) / s_newMoonInterval);
     // Align k perfectly so it points to the month block the day belongs to.
-    const auto targetDay = getLocalDayIndex(jde);
-    while (getLocalDayIndex(getNewMoonByIndex(k + 1)) <= targetDay) {
+    while (getLocalDayIndex(getNewMoonByIndex(k + 1)) <= dayIndex) {
         k++;
     }
-    while (getLocalDayIndex(getNewMoonByIndex(k)) > targetDay) {
+    while (getLocalDayIndex(getNewMoonByIndex(k)) > dayIndex) {
         k--;
     }
     return k;
@@ -238,6 +254,7 @@ int getLocalMonthIndex(double jde)
 
 /*!
     \brief Get the lunar date of \a{date}.
+    \internal
  */
 LunarDate getLunarDate(const QDate &date)
 {
@@ -253,10 +270,9 @@ LunarDate getLunarDate(const QDate &date)
     int year = date.year();
 
     auto jd = SolarUtils::toJulianDay(year, month, day);
-    auto jde = double(jd);
 
     // 1. Get the month index for the target date.
-    auto k = getLocalMonthIndex(jde);
+    auto k = getLocalMonthIndex(jd);
 
     // 2. Locate the framing Winter Solstices.
     int k_wsBefore, k_wsAfter, lunarYear;
@@ -275,9 +291,10 @@ LunarDate getLunarDate(const QDate &date)
 
     // 3. Assess if a Leap Month exists in this Solstice-to-Solstice cycle
     bool isLeapMonth = false;
-    if (k_wsAfter - k_wsBefore == 13) {
-        int k_leap = std::numeric_limits<int>::min();
-        for (int i = k_wsBefore + 1; i <= k_wsAfter; ++i) {
+    bool isLeapYear = k_wsAfter - k_wsBefore == 13; // Leap year has 13 months
+    int k_leap = std::numeric_limits<int>::min();
+    if (isLeapYear) {
+        for (int i = k_wsBefore + 1; i < k_wsAfter; ++i) {
             if (!hasMajorSolarTerm(getNewMoonByIndex(i), getNewMoonByIndex(i + 1))) {
                 k_leap = i; // First month without a Zhongqi becomes the leap month
                 break;
@@ -287,9 +304,12 @@ LunarDate getLunarDate(const QDate &date)
     }
 
     // 4. Calculate final Lunar Date
-    int lunarMonth = ((k - k_wsBefore) + 10) % 12;
+    int leapOffset = (isLeapYear && k > k_leap) ? 1 : 0;
+    int lunarMonth = ((k - k_wsBefore - leapOffset) + 10) % 12;
     if (!isLeapMonth) { // Leap month use the same number as the previous month.
         lunarMonth++;
+    } else if (lunarMonth == 0) {
+        lunarMonth = 12; // wrap 0 to 12 for leap month 12, astronomically rare but not impossible
     }
 
     if (lunarMonth < 11) { // Month before 11 belong to the following year in this calculation.
