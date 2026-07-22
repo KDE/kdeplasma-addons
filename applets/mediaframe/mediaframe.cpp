@@ -337,7 +337,7 @@ int MediaFrame::futureLength() const
 
 void MediaFrame::slotItemChanged(const QString &path)
 {
-    Q_EMIT itemChanged(path);
+    Q_EMIT itemChanged(QUrl::fromLocalFile(path).toString());
 }
 
 void MediaFrame::slotFinished(KJob *job)
