@@ -245,6 +245,7 @@ QHash<int, QByteArray> FutureHours::roleNames() const
     roles[Condition] = "condition";
     roles[HighTemp] = "highTemp";
     roles[LowTemp] = "lowTemp";
+    roles[GeneralTemp] = "generalTemp";
     roles[ConditionProbability] = "conditionProbability";
     return roles;
 }
