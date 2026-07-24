@@ -129,6 +129,10 @@ ColumnLayout {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
+            // If the percentage labels are hidden, reserve the same space on the right
+            // as the temperature labels occupy on the left to keep the graph centered.
+            Layout.rightMargin: percentLabels.visible ? 0 : tempLabels.implicitWidth
+
             implicitHeight: forecastGraph.implicitHeight + forecastLine.timestampLabelHeight
 
             visible: !!root.futureDaysPoints
