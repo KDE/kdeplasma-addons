@@ -1,6 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2018 Friedrich W. H. Kossebau <kossebau@kde.org>
- * SPDX-FileCopyrightText: 2022 Ismael Asensio <isma.af@gmail.com>
+ * SPDX-FileCopyrightText: 2026 Bohdan Onofriichuk <bogdan.onofriuchuk@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */

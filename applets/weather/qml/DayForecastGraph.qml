@@ -1,6 +1,5 @@
 /*
- * SPDX-FileCopyrightText: 2018 Friedrich W. H. Kossebau <kossebau@kde.org>
- * SPDX-FileCopyrightText: 2022 Ismael Asensio <isma.af@gmail.com>
+ * SPDX-FileCopyrightText: 2026 Bohdan Onofriichuk <bogdan.onofriuchuk@gmail.com>
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
@@ -253,23 +252,6 @@ ColumnLayout {
         Layout.alignment: Qt.AlignHCenter
         Layout.bottomMargin: Kirigami.Units.largeSpacing
 
-        forecastLegendData: {
-            const forecastLegend = [];
-
-            for (let i = 0; i < root.seriesDefinitions.length; i++) {
-                const series = root.seriesDefinitions[i];
-
-                // Only add the series to the legend if it is currently visible
-                if (series.visible) {
-                    const legendItem = {
-                        label: series.legendText,
-                        color: series.color
-                    };
-                    forecastLegend.push(legendItem);
-                }
-            }
-
-            return forecastLegend;
-        }
+        seriesDefinitions: root.seriesDefinitions
     }
 }

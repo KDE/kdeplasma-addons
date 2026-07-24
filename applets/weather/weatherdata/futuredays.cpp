@@ -129,14 +129,10 @@ QVariant FutureDaysPoints::aggregatedValue(int dayIndex, RowsData row) const
         nightModelIndex = m_futureDays->index(FutureDays::Night, dayIndex);
     }
 
-    auto valueForRole = [&](const QModelIndex &index, FutureDays::NextDaysModels role) -> QVariant {
-        return index.isValid() ? m_futureDays->data(index, role) : QVariant();
-    };
-
     switch (row) {
     case HighTemp: {
-        QVariant day = valueForRole(dayModelIndex, FutureDays::HighTemp);
-        QVariant night = valueForRole(nightModelIndex, FutureDays::HighTemp);
+        QVariant day = m_futureDays->data(dayModelIndex, FutureDays::HighTemp);
+        QVariant night = m_futureDays->data(nightModelIndex, FutureDays::HighTemp);
 
         if (day.canConvert<qreal>() && night.canConvert<qreal>()) {
             return std::max(day.toReal(), night.toReal());
@@ -146,8 +142,8 @@ QVariant FutureDaysPoints::aggregatedValue(int dayIndex, RowsData row) const
     }
 
     case LowTemp: {
-        QVariant day = valueForRole(dayModelIndex, FutureDays::LowTemp);
-        QVariant night = valueForRole(nightModelIndex, FutureDays::LowTemp);
+        QVariant day = m_futureDays->data(dayModelIndex, FutureDays::LowTemp);
+        QVariant night = m_futureDays->data(nightModelIndex, FutureDays::LowTemp);
 
         if (day.canConvert<qreal>() && night.canConvert<qreal>()) {
             return std::min(day.toReal(), night.toReal());
@@ -157,8 +153,8 @@ QVariant FutureDaysPoints::aggregatedValue(int dayIndex, RowsData row) const
     }
 
     case GeneralTemp: {
-        QVariant day = valueForRole(dayModelIndex, FutureDays::GeneralTemp);
-        QVariant night = valueForRole(nightModelIndex, FutureDays::GeneralTemp);
+        QVariant day = m_futureDays->data(dayModelIndex, FutureDays::GeneralTemp);
+        QVariant night = m_futureDays->data(nightModelIndex, FutureDays::GeneralTemp);
 
         if (day.canConvert<qreal>() && night.canConvert<qreal>()) {
             return std::midpoint(day.toReal(), night.toReal());
@@ -168,8 +164,8 @@ QVariant FutureDaysPoints::aggregatedValue(int dayIndex, RowsData row) const
     }
 
     case ConditionProbability: {
-        QVariant day = valueForRole(dayModelIndex, FutureDays::ConditionProbability);
-        QVariant night = valueForRole(nightModelIndex, FutureDays::ConditionProbability);
+        QVariant day = m_futureDays->data(dayModelIndex, FutureDays::ConditionProbability);
+        QVariant night = m_futureDays->data(nightModelIndex, FutureDays::ConditionProbability);
 
         if (day.canConvert<qreal>() && night.canConvert<qreal>()) {
             return std::max(day.toReal(), night.toReal());

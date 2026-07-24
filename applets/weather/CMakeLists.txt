@@ -41,12 +41,6 @@ plasma_add_applet(org.kde.plasma.weather
         qml/DayForecastView.qml
         qml/DayForecastGraph.qml
         qml/ForecastDelegate.qml
-        qml/ForecastGraph.qml
-        qml/ForecastGraphLine.qml
-        qml/ForecastGraphLabels.qml
-        qml/ForecastGraphLegend.qml
-        qml/ForecastGraphGrid.qml
-        qml/ForecastGraphSeries.qml
         qml/FullRepresentation.qml
         qml/IconAndTextItem.qml
         qml/main.qml
@@ -57,6 +51,12 @@ plasma_add_applet(org.kde.plasma.weather
         qml/config/ConfigUnits.qml
         qml/config/ConfigWeatherStation.qml
         qml/config/config.qml
+        qml/graph/ForecastGraph.qml
+        qml/graph/ForecastGraphLine.qml
+        qml/graph/ForecastGraphLabels.qml
+        qml/graph/ForecastGraphLegend.qml
+        qml/graph/ForecastGraphGrid.qml
+        qml/graph/ForecastGraphSeries.qml
     CPP_SOURCES
         util.cpp
         abstractunitlistmodel.cpp
