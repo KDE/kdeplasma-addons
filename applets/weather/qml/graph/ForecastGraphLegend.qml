@@ -1,3 +1,9 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Bohdan Onofriichuk <bogdan.onofriuchuk@gmail.com>
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ */
+
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Layouts
@@ -11,12 +17,30 @@ import org.kde.plasma.components as PlasmaComponents
 GridLayout {
     id: root
 
-    required property var forecastLegendData
+    required property var seriesDefinitions
 
     columnSpacing: Kirigami.Units.largeSpacing
 
     Repeater {
-        model: root.forecastLegendData
+        model: {
+            const forecastLegend = [];
+
+            for (let i = 0; i < root.seriesDefinitions.length; i++) {
+                const series = root.seriesDefinitions[i];
+
+                // Only add the series to the legend if it is currently visible
+                if (series.visible) {
+                    const legendItem = {
+                        label: series.legendText,
+                        color: series.color
+                    };
+                    forecastLegend.push(legendItem);
+                }
+            }
+
+            return forecastLegend;
+        }
+
         RowLayout {
             id: legendDelegate
             required property var modelData
