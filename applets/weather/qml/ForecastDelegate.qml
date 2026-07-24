@@ -30,6 +30,7 @@ Rectangle {
     required property var condition
     required property var highTemp
     required property var lowTemp
+    required property var generalTemp
     required property var conditionProbability
 
     visible: (!!conditionIcon && conditionIcon !== "" && conditionIcon !== "weather-none-available") || (!!condition && condition !== "") || !isNaN(highTemp) || !isNaN(lowTemp) || !isNaN(conditionProbability)
@@ -108,10 +109,15 @@ Rectangle {
                 if (!isNaN(root.lowTemp) && !!root.temperatureUnit) {
                     return Util.temperatureToDisplayString(root.displayTemperatureUnit, root.lowTemp, root.temperatureUnit, true, true);
                 }
+
+                if (!isNaN(root.generalTemp) && !!root.temperatureUnit) {
+                    return Util.temperatureToDisplayString(root.displayTemperatureUnit, root.generalTemp, root.temperatureUnit, true, true);
+                }
+
                 return i18nc("Short for no data available", "-");
             }
             textFormat: Text.RichText
-            visible: !isNaN(root.highTemp) || !isNaN(root.lowTemp)
+            visible: !isNaN(root.highTemp) || !isNaN(root.lowTemp) || !isNaN(root.generalTemp)
             font.family: Kirigami.Theme.smallFont.family
             font.pixelSize: Kirigami.Theme.smallFont.pixelSize
         }
