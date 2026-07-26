@@ -50,7 +50,7 @@
                 "Name[zh_TW]": "Kai Uwe Broulik"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=kdeplasma-addons&component=Color Picker",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Color%20Picker%20widget",
         "Category": "Graphics",
         "Description": "Pick a color from the desktop",
         "Description[ar]": "اختر لونا من سطح المكتب",
