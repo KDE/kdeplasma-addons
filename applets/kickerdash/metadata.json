@@ -51,6 +51,7 @@
                 "Name[zh_TW]": "Eike Hein"
             }
         ],
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Application%20Dashboard%20widget",
         "Category": "Application Launchers",
         "Description": "A fullscreen application launcher",
         "Description[ar]": "مطلق تطبيقات ملء الشاشة ",
