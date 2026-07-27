@@ -72,6 +72,7 @@ GridLayout {
         Layout.columnSpan: 3
         Layout.fillWidth: true
 
+        horizontalAlignment: Text.AlignHCenter
         elide: Text.ElideRight
 
         visible: !!root.station?.place
