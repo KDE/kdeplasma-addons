@@ -181,8 +181,9 @@ Item {
 
         var seriesComponent = Qt.createComponent("ForecastGraphSeries.qml");
         for (const definition of root.forecastSeries) {
-            if (!definition.visible)
+            if (!definition.visible) {
                 continue;
+            }
 
             const series = seriesComponent.createObject(forecastGraph, {
                 seriesColor: definition.color,
@@ -197,14 +198,14 @@ Item {
                 })
             });
 
-            forecastGraph.addSeries(series);
-
             series.pointSelected.connect((x, y) => {
                 root.currentPointDateX = x;
                 root.currentPointValues = Object.assign({}, root.currentPointValues, {
                     [definition.name]: y
                 });
             });
+
+            forecastGraph.addSeries(series);
         }
     }
 }

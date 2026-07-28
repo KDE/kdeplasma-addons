@@ -76,7 +76,7 @@ Kirigami.ScrollablePage {
 
             Layout.alignment: Qt.AlignTop
 
-            visible: !!root.futureHours && root.futureHours.hoursNumber > 0 && !!root.futureHoursPoints
+            visible: hourlyLoader.active
             Kirigami.Heading {
                 Layout.fillWidth: true
                 level: 3
@@ -86,7 +86,7 @@ Kirigami.ScrollablePage {
             Loader {
                 id: hourlyLoader
                 Layout.fillWidth: true
-                active: hourlyForecast.visible
+                active: !!root.futureHours && root.futureHours.hoursNumber > 0 && !!root.futureHoursPoints
                 sourceComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
             }
 
@@ -124,7 +124,7 @@ Kirigami.ScrollablePage {
 
             Layout.alignment: Qt.AlignTop
 
-            visible: !!root.futureDays && root.futureDays.daysNumber > 0 && !!root.futureDaysPoints
+            visible: dayLoader.active
             Kirigami.Heading {
                 Layout.fillWidth: true
                 level: 3
@@ -132,8 +132,9 @@ Kirigami.ScrollablePage {
             }
 
             Loader {
+                id: dayLoader
                 Layout.fillWidth: true
-                active: dayForecast.visible
+                active: !!root.futureDays && root.futureDays.daysNumber > 0 && !!root.futureDaysPoints
                 sourceComponent: root.showDayTemperatureGraph ? dayForecastGraph : dayForecastView
             }
 
