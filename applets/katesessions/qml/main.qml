@@ -54,10 +54,8 @@ PlasmoidItem {
 
         focus: true
         header: PlasmaExtras.PlasmoidHeading {
-            PlasmaComponents3.TextField {
+            PlasmaExtras.SearchField {
                 id: filter
-                placeholderText: i18n("Search…")
-                clearButtonShown: true
                 anchors.fill: parent
 
                 onActiveFocusChanged: if (activeFocus) sessionsMenu.view.currentIndex = -1
