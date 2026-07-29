@@ -31,9 +31,7 @@ PlasmaComponents3.ItemDelegate {
         diskQuota.openCleanUpTool(mountPoint);
     }
 
-    RowLayout {
-        id: contents
-        width: parent.width
+    contentItem: RowLayout {
         spacing: Kirigami.Units.gridUnit
 
         Kirigami.Icon {
