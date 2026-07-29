@@ -39,7 +39,7 @@ PlasmaExtras.Representation {
     property var metaData: null
 
     Layout.minimumWidth: Math.min(Kirigami.Units.gridUnit * 25, Math.max(Kirigami.Units.gridUnit * 10, stack.implicitWidth))
-    Layout.minimumHeight: Math.max(Kirigami.Units.gridUnit * 10, stack.implicitHeight)
+    Layout.minimumHeight: stack.implicitHeight
     Layout.margins: Kirigami.Units.smallSpacing
 
     header: PlasmaExtras.PlasmoidHeading {
@@ -107,8 +107,8 @@ PlasmaExtras.Representation {
 
         defaultColumnWidth: currentItem.width
 
-        implicitWidth: items[0].implicitWidth + items[0].padding * 2
-        implicitHeight: items[0].implicitHeight + items[0].padding * 2
+        implicitWidth: items[0].implicitWidth + items[0].rightPadding + items[0].leftPadding
+        implicitHeight: items[0].implicitHeight + items[0].topPadding + items[0].bottomPadding
 
         WeatherPage {
             id: weatherPage

@@ -24,7 +24,7 @@ ColumnLayout {
 
     readonly property real minimalSpacing: Kirigami.Units.largeSpacing
 
-    readonly property real preferredGraphHeight: Kirigami.Units.iconSizes.enormous
+    readonly property real preferredGraphHeight: Kirigami.Units.gridUnit * 7
 
     property int dateTimeSection: WeatherData.FutureHoursPoints.Timestamp
 
