@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 00:45+0000\n"
+"POT-Creation-Date: 2026-07-29 00:47+0000\n"
 "PO-Revision-Date: 2025-11-16 12:24+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -686,7 +686,7 @@ msgstr ""
 "Netbeiðnin rann út á tíma, hugsanlega vegna bilunar í þjóni hjá netþjónustu "
 "veðurstofunnar. Prófaðu aftur síðar."
 
-#: qml/main.qml:81 qml/TopPanel.qml:221
+#: qml/main.qml:81 qml/TopPanel.qml:222
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -824,7 +824,7 @@ msgstr ""
 "Hugsanlega eru tæknileg vandamál hjá veðurstofunni. Ef vandamálið er enn til "
 "staðar eftir meira en einn dag skaltu senda inn villuskýrslu."
 
-#: qml/TopPanel.qml:137
+#: qml/TopPanel.qml:138
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

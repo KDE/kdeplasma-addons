@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 00:45+0000\n"
+"POT-Creation-Date: 2026-07-29 00:47+0000\n"
 "PO-Revision-Date: 2026-06-18 22:43+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -686,7 +686,7 @@ msgstr ""
 "állomás szolgáltatójának kiszolgálóhibája miatt. Kérjük, ellenőrizze újra "
 "később."
 
-#: qml/main.qml:81 qml/TopPanel.qml:221
+#: qml/main.qml:81 qml/TopPanel.qml:222
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -824,7 +824,7 @@ msgstr ""
 "Technikai probléma merülhetett fel az időjárás-szolgáltatóval. Ha a probléma "
 "egy napnál tovább fennáll, küldjön hibajelentést."
 
-#: qml/TopPanel.qml:137
+#: qml/TopPanel.qml:138
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 00:45+0000\n"
+"POT-Creation-Date: 2026-07-29 00:47+0000\n"
 "PO-Revision-Date: 2026-07-19 21:20+0200\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -686,7 +686,7 @@ msgstr ""
 "důsledku výpadku serveru u poskytovatele meteorologické stanice. Zkuste to "
 "prosím později."
 
-#: qml/main.qml:81 qml/TopPanel.qml:221
+#: qml/main.qml:81 qml/TopPanel.qml:222
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -826,7 +826,7 @@ msgstr ""
 "Může se jednat o technický problém u poskytovatele meteorologických dat. "
 "Pokud problém přetrvává déle než jeden den, odešlete hlášení o chybě."
 
-#: qml/TopPanel.qml:137
+#: qml/TopPanel.qml:138
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

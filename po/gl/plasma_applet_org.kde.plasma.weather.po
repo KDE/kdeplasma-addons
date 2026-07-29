@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 00:45+0000\n"
+"POT-Creation-Date: 2026-07-29 00:47+0000\n"
 "PO-Revision-Date: 2025-05-04 13:38+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -701,7 +701,7 @@ msgstr ""
 "A solicitude de rede esgotou o tempo límite, quizais por caer o servidor do "
 "fornecedor da estación meteorolóxica. Compróbeo de novo máis tarde."
 
-#: qml/main.qml:81 qml/TopPanel.qml:221
+#: qml/main.qml:81 qml/TopPanel.qml:222
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -841,7 +841,7 @@ msgstr ""
 "Pode que o fornecedor meteorolóxico teña problemas técnicos. Se o problema "
 "persiste máis dun día, entregue un informe de fallo."
 
-#: qml/TopPanel.qml:137
+#: qml/TopPanel.qml:138
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

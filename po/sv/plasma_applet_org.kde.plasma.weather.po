@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 00:45+0000\n"
+"POT-Creation-Date: 2026-07-29 00:47+0000\n"
 "PO-Revision-Date: 2025-07-28 22:39+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -682,7 +682,7 @@ msgstr ""
 "Tidsgräns för nätverksbegäran gick ut, möjligen på grund av ett "
 "serveravbrott hos väderstationsleverantören. Kontrollera igen senare."
 
-#: qml/main.qml:81 qml/TopPanel.qml:221
+#: qml/main.qml:81 qml/TopPanel.qml:222
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -820,7 +820,7 @@ msgstr ""
 "Det kan finnas ett tekniskt problem med väderleverantören. Om problemet "
 "kvarstår längre än en dag, skicka en felrapport."
 
-#: qml/TopPanel.qml:137
+#: qml/TopPanel.qml:138
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "

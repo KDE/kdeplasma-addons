@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-06-09 00:45+0000\n"
+"POT-Creation-Date: 2026-07-29 00:47+0000\n"
 "PO-Revision-Date: 2026-05-31 18:03-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -683,7 +683,7 @@ msgstr ""
 "مۇلازىمېتىرى توك توختىغانلىقتىن مۇلازىمىتى ئۈزۈلۈپ قالغان بولۇشى مۇمكىن، سەل "
 "تۇرۇپ قايتا سىناڭ."
 
-#: qml/main.qml:81 qml/TopPanel.qml:221
+#: qml/main.qml:81 qml/TopPanel.qml:222
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
@@ -819,7 +819,7 @@ msgstr ""
 "ھاۋا رايى تەمىنلىگۈچى تېخنىكىلىق مەسىلىگە يولۇققان بولۇشى مۇمكىن. ئەگەر بۇ "
 "مەسىلە بىر كۈندىن ئارتۇق داۋاملاشسا، كەمتۈكلۈك دوكلاتى يوللاڭ."
 
-#: qml/TopPanel.qml:137
+#: qml/TopPanel.qml:138
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
