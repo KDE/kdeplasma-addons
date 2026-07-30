@@ -101,7 +101,21 @@ Kirigami.ScrollablePage {
                 Layout.fillWidth: true
                 level: 3
                 visible: stackedHourlyLoader.active
-                text: i18n("Hourly Forecast")
+                text: {
+                    let defaultLabel = i18n("Hourly Forecast");
+
+                    if (!stackedHourlyLoader.item || stackedHourlyLoader.item.currentIndex <= 0 || !root.futureHours) {
+                        return defaultLabel;
+                    }
+
+                    const index = root.futureHours.index(stackedHourlyLoader.item.currentIndex, 0);
+                    const format = Qt.locale().dateFormat(Locale.ShortFormat);
+                    const date = Qt.formatDateTime(root.futureHours.data(index, WeatherData.FutureHours.Timestamp), format);
+
+                    const color = Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.75);
+
+                    return defaultLabel + " <font color=\"" + color + "\">" + date + "</font>";
+                }
             }
 
             Loader {
@@ -142,7 +156,21 @@ Kirigami.ScrollablePage {
                 visible: root.hasHourlyForecast && root.hasDayForecast
 
                 PlasmaComponents.TabButton {
-                    text: i18n("Hourly")
+                    text: {
+                        let defaultLabel = i18n("Hourly");
+
+                        if (!tabbedHourlyLoader.item || tabbedHourlyLoader.item.currentIndex <= 0 || !root.futureHours) {
+                            return defaultLabel;
+                        }
+
+                        const index = root.futureHours.index(tabbedHourlyLoader.item.currentIndex, 0);
+                        const format = Qt.locale().dateFormat(Locale.ShortFormat);
+                        const date = Qt.formatDateTime(root.futureHours.data(index, WeatherData.FutureHours.Timestamp), format);
+
+                        const color = Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.75);
+
+                        return defaultLabel + " <font color=\"" + color + "\">" + date + "</font>";
+                    }
                 }
 
                 PlasmaComponents.TabButton {
