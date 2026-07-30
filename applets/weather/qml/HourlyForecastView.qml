@@ -24,9 +24,9 @@ ColumnLayout {
 
     readonly property real minimalSpacing: Kirigami.Units.smallSpacing * 2
 
-    readonly property int pageSize: Math.max(1, Math.floor((width + root.minimalSpacing) / (forecastList.itemWidth + root.minimalSpacing)))
-
     property int currentIndex: 0
+
+    property int pageSize: 1
 
     RowLayout {
         Layout.fillWidth: true
@@ -36,6 +36,7 @@ ColumnLayout {
             Layout.fillHeight: true
             icon.name: "go-previous"
             enabled: root.currentIndex > 0
+            visible: indicator.visible
             onClicked: {
                 let newIndex = Math.max(0, root.currentIndex - root.pageSize);
                 root.currentIndex = newIndex;
@@ -47,27 +48,34 @@ ColumnLayout {
         HourlyForecastList {
             id: forecastList
 
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
             snapMode: ListView.SnapToItem
 
-            readonly property int displayedItemCount: Math.min(count, root.pageSize)
+            Layout.fillWidth: true
 
-            readonly property real itemWidth: currentItem.implicitWidth
-
-            spacing: displayedItemCount > 1 ? (width - displayedItemCount * itemWidth) / (displayedItemCount - 1) : 0
+            spacing: {
+                const displayedItemCount = Math.min(count, root.pageSize);
+                const itemWidth = currentItem.implicitWidth;
+                return displayedItemCount > 1 ? (width - displayedItemCount * itemWidth) / (displayedItemCount - 1) : 0;
+            }
 
             metaData: root.metaData
             forecastModel: root.futureHours
 
             invalidUnit: root.invalidUnit
             displayTemperatureUnit: root.displayTemperatureUnit
+
+            onWidthChanged: Qt.callLater(updatePageSize)
+            Component.onCompleted: updatePageSize()
+
+            function updatePageSize() {
+                root.pageSize = Math.max(1, Math.floor((width + root.minimalSpacing) / (currentItem.implicitWidth + root.minimalSpacing)));
+            }
         }
 
         PlasmaComponents.ToolButton {
             Layout.fillHeight: true
             icon.name: "go-next"
+            visible: indicator.visible
             enabled: root.currentIndex + root.pageSize < forecastList.count
             onClicked: {
                 let newIndex = Math.min(forecastList.count - 1, root.currentIndex + root.pageSize);
@@ -80,6 +88,7 @@ ColumnLayout {
 
     PlasmaComponents.PageIndicator {
         id: indicator
+
         count: Math.ceil(forecastList.count / root.pageSize)
 
         currentIndex: Math.floor(root.currentIndex / root.pageSize)
