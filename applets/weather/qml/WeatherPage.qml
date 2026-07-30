@@ -184,40 +184,16 @@ Kirigami.ScrollablePage {
             }
         }
 
-        PlasmaComponents.Label {
+        Kirigami.UrlButton {
             id: sourceLabel
 
             Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
 
-            MouseArea {
-                anchors.fill: parent
-                hoverEnabled: true
-                acceptedButtons: Qt.NoButton
-                cursorShape: !!root.metaData?.credit ? Qt.PointingHandCursor : Qt.ArrowCursor
-            }
-
             wrapMode: Text.WordWrap
-            horizontalAlignment: Text.AlignRight
             font.pointSize: Kirigami.Theme.smallFont.pointSize
-            linkColor: color
-            opacity: 0.75
-            textFormat: Text.StyledText
 
-            text: {
-                let result = "";
-                if (!!root.metaData?.credit) {
-                    if (!!root.metaData.creditURL) {
-                        result = "<a href=\"" + root.metaData.creditURL + "\">" + root.metaData.credit + "</a>";
-                    } else {
-                        result = root.metaData.credit;
-                    }
-                }
-                return result;
-            }
-
-            onLinkActivated: link => {
-                Qt.openUrlExternally(link);
-            }
+            text: !!root.metaData?.credit ? root.metaData.credit : ""
+            url: !!root.metaData?.creditURL ? root.metaData.creditURL : ""
         }
 
         Component {
