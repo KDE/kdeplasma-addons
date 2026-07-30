@@ -169,7 +169,7 @@ ColumnLayout {
 
                 font.family: Kirigami.Theme.smallFont.family
                 font.pixelSize: Kirigami.Theme.smallFont.pixelSize
-                color: Kirigami.Theme.disabledTextColor
+                opacity: 0.75
 
                 text: {
                     if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
@@ -196,7 +196,7 @@ ColumnLayout {
 
                 font.family: Kirigami.Theme.smallFont.family
                 font.pixelSize: Kirigami.Theme.smallFont.pixelSize
-                color: Kirigami.Theme.disabledTextColor
+                opacity: 0.75
             }
         }
 

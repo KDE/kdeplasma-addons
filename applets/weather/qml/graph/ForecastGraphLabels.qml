@@ -52,7 +52,7 @@ Item {
             text: root.formatter(value)
             font.family: Kirigami.Theme.smallFont.family
             font.pixelSize: Kirigami.Theme.smallFont.pixelSize
-            color: Kirigami.Theme.disabledTextColor
+            opacity: 0.75
 
             y: {
                 if (root.horizontal) {

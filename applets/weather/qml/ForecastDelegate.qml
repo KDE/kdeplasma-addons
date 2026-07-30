@@ -132,7 +132,7 @@ Rectangle {
             text: !!root.conditionProbability ? i18nc("Probability of precipitation in percentage", "☂%1%", root.conditionProbability) : "·"
             textFormat: Text.PlainText
             visible: root.hasProbability
-            color: Kirigami.Theme.disabledTextColor
+            opacity: 0.75
         }
     }
 }
