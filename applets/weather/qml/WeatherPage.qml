@@ -121,6 +121,7 @@ Kirigami.ScrollablePage {
             Loader {
                 id: stackedHourlyLoader
                 Layout.fillWidth: true
+                visible: status == Loader.Ready
                 active: root.hasHourlyForecast
                 sourceComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
             }
@@ -136,6 +137,7 @@ Kirigami.ScrollablePage {
                 id: stackedDayLoader
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                visible: status == Loader.Ready
                 active: root.hasDayForecast
                 sourceComponent: root.showDayTemperatureGraph ? dayForecastGraph : dayForecastView
             }
@@ -196,6 +198,7 @@ Kirigami.ScrollablePage {
                     id: tabbedHourlyLoader
                     Layout.fillWidth: true
                     active: root.hasHourlyForecast
+                    visible: status == Loader.Ready
                     sourceComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
                 }
 
@@ -203,6 +206,7 @@ Kirigami.ScrollablePage {
                     id: tabbedDayLoader
                     Layout.fillWidth: true
                     active: root.hasDayForecast
+                    visible: status == Loader.Ready
                     sourceComponent: root.showDayTemperatureGraph ? dayForecastGraph : dayForecastView
                 }
 
