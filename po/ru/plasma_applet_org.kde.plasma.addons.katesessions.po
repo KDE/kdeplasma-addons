@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2021-07-31 23:12+0300\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -42,10 +42,8 @@ msgid "Kate Sessions"
 msgstr "Сеансы Kate"
 
 # Search box placeholder. --aspotashev
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "Поиск…"
+#~ msgid "Search…"
+#~ msgstr "Поиск…"
 
 #~ msgid "Delete session"
 #~ msgstr "Удалить сеанс"

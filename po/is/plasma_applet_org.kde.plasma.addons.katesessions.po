@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2023-10-11 20:09+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -37,7 +37,5 @@ msgstr "Hætta við að búa til setu"
 msgid "Kate Sessions"
 msgstr "Kate-setur"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "Leita…"
+#~ msgid "Search…"
+#~ msgstr "Leita…"

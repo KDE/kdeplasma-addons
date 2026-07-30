@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2022-06-12 04:38+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Chinese <kde-i18n-doc@kde.org>\n"
@@ -39,10 +39,8 @@ msgstr "取消建立作業階段"
 msgid "Kate Sessions"
 msgstr "Kate 作業階段"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "搜尋…"
+#~ msgid "Search…"
+#~ msgstr "搜尋…"
 
 #~ msgid "Delete session"
 #~ msgstr "刪除作業階段"

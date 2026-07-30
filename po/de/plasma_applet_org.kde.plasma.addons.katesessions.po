@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.addons.katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2026-02-20 01:46+0100\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -36,10 +36,8 @@ msgstr "Sitzungserstellung abbrechen"
 msgid "Kate Sessions"
 msgstr "Kate-Sitzungen"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "Suchen …"
+#~ msgid "Search…"
+#~ msgstr "Suchen …"
 
 #~ msgid "Delete session"
 #~ msgstr "Sitzung löschen"

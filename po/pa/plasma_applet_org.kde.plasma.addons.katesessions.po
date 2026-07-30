@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2025-03-24 14:51-0500\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -37,7 +37,5 @@ msgstr "ਸ਼ੈਸ਼ਨ ਬਣਾਉਣ ਨੂੰ ਰੱਦ ਕਰੋ"
 msgid "Kate Sessions"
 msgstr "ਕੇਟ ਸ਼ੈਸ਼ਨ"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "…ਖੋਜੋ"
+#~ msgid "Search…"
+#~ msgstr "…ਖੋਜੋ"

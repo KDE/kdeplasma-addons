@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kate\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2021-09-15 05:27+0630\n"
 "Last-Translator: \n"
 "Language-Team: Burmese <kde-i18n-doc@kde.org>\n"
@@ -38,10 +38,8 @@ msgstr "ဆက်ရှင် ဖန်တီးခြင်း ပယ်ဖျ�
 msgid "Kate Sessions"
 msgstr "ကိတ် ဆက်ရှင်များ"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "ရှာမည်…"
+#~ msgid "Search…"
+#~ msgstr "ရှာမည်…"
 
 #~ msgid "Delete session"
 #~ msgstr "ဆက်ရှင် ဖျက်မည်"

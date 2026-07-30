@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kate\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2024-05-13 22:47+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -37,7 +37,5 @@ msgstr "Отменяне създаване на сесия"
 msgid "Kate Sessions"
 msgstr "Сесии на Kate"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "Търсене…"
+#~ msgid "Search…"
+#~ msgstr "Търсене…"

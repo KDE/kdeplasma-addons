@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2021-07-03 09:00+0300\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -38,10 +38,8 @@ msgstr "Ακύρωση δημιουργίας συνεδρίας"
 msgid "Kate Sessions"
 msgstr "Συνεδρίες Kate"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "Αναζήτηση…"
+#~ msgid "Search…"
+#~ msgstr "Αναζήτηση…"
 
 #~ msgid "Delete session"
 #~ msgstr "Διαγραφή συνεδρίας"

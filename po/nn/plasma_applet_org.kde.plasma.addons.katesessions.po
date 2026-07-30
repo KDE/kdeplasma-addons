@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_katesession\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2021-09-18 20:01+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -40,7 +40,5 @@ msgstr "Avbryt øktlaging"
 msgid "Kate Sessions"
 msgstr "Kate-øktveljar"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "Søk …"
+#~ msgid "Search…"
+#~ msgstr "Søk …"

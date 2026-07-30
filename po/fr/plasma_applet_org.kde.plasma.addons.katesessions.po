@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_katesession\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2021-07-03 09:56+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@neuf.fr>\n"
 "Language-Team: French <kde-francophone@kde.org>\n"
@@ -45,10 +45,8 @@ msgstr "Annuler la création de session"
 msgid "Kate Sessions"
 msgstr "Sessions de Kate"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "Rechercher..."
+#~ msgid "Search…"
+#~ msgstr "Rechercher..."
 
 #~ msgid "Delete session"
 #~ msgstr "Supprimer la session"

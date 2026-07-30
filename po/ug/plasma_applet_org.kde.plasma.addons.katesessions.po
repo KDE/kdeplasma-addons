@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2026-05-31 16:42-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -38,7 +38,5 @@ msgstr ""
 msgid "Kate Sessions"
 msgstr "Kate جەريانچاق"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "ئىزدە…"
+#~ msgid "Search…"
+#~ msgstr "ئىزدە…"

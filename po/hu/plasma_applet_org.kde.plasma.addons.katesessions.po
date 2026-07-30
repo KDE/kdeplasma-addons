@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2021-12-07 09:53+0100\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -38,10 +38,8 @@ msgstr "Munkamenet létrehozásának megszakítása"
 msgid "Kate Sessions"
 msgstr "Kate munkamenetek"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "Keresés…"
+#~ msgid "Search…"
+#~ msgstr "Keresés…"
 
 #~ msgid "Delete session"
 #~ msgstr "Munkamenet törlése"

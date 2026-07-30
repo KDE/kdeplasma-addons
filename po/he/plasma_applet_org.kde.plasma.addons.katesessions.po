@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2023-11-07 11:24+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -40,10 +40,8 @@ msgstr "ביטול יצירת הפעלה"
 msgid "Kate Sessions"
 msgstr "הפעלות של Kate"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "חיפוש…"
+#~ msgid "Search…"
+#~ msgstr "חיפוש…"
 
 #~ msgid "Delete session"
 #~ msgstr "מחק הפעלה"

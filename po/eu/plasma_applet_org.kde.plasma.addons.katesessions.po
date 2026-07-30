@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-07-30 00:46+0000\n"
 "PO-Revision-Date: 2022-08-24 22:49+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -41,10 +41,8 @@ msgstr "Utzi saio-sortzea"
 msgid "Kate Sessions"
 msgstr "Kate saioak"
 
-#: qml/main.qml:59
-#, kde-format
-msgid "Search…"
-msgstr "Bilatu..."
+#~ msgid "Search…"
+#~ msgstr "Bilatu..."
 
 #~ msgid "Delete session"
 #~ msgstr "Ezabatu saioa"
