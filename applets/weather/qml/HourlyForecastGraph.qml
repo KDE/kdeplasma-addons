@@ -28,7 +28,8 @@ ColumnLayout {
 
     property int dateTimeSection: WeatherData.FutureHoursPoints.Timestamp
 
-    property int currentIndex: 0
+    property int currentIndex: !!futureHoursPoints ? root.futureHoursPoints.hoursPerDay * currentPageIndex : 0
+    property int currentPageIndex: 0
 
     property int horizontalLabelsCount: 5
     property int verticalLabelsCount: 4
@@ -112,9 +113,9 @@ ColumnLayout {
         const windowWidth = totalSpan / forecastGraph.axisX.zoom;
 
         // Shift left by dayIndex to bring subsequent days into the view window
-        forecastGraph.axisX.pan = forecastGraph.axisX.pan - (currentIndex - dayIndex) * windowWidth;
+        forecastGraph.axisX.pan = forecastGraph.axisX.pan - (currentPageIndex - dayIndex) * windowWidth;
 
-        currentIndex = dayIndex;
+        currentPageIndex = dayIndex;
     }
 
     // Initialize the position when the data model maps its min and max bounds
@@ -133,7 +134,7 @@ ColumnLayout {
             // next day are not partially visible at the right edge and the leftmost
             // point is not clipped.
             forecastGraph.axisX.pan -= pointSpacing / 2;
-            currentIndex = 0;
+            currentPageIndex = 0;
         });
     }
 
@@ -145,8 +146,8 @@ ColumnLayout {
             Layout.fillHeight: true
             icon.name: "go-previous"
             visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
-            enabled: root.currentIndex > 0
-            onClicked: root.scrollToIndex(root.currentIndex - 1)
+            enabled: root.currentPageIndex > 0
+            onClicked: root.scrollToIndex(root.currentPageIndex - 1)
             Layout.preferredWidth: Kirigami.Units.iconSizes.small
         }
 
@@ -304,9 +305,9 @@ ColumnLayout {
             Layout.fillHeight: true
             icon.name: "go-next"
             visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
-            enabled: root.currentIndex < forecastGraph.axisX.zoom - 1
+            enabled: root.currentPageIndex < forecastGraph.axisX.zoom - 1
             onClicked: {
-                root.scrollToIndex(root.currentIndex + 1);
+                root.scrollToIndex(root.currentPageIndex + 1);
             }
             Layout.preferredWidth: Kirigami.Units.iconSizes.small
         }
@@ -326,7 +327,7 @@ ColumnLayout {
 
         count: root.futureHoursPoints?.totalDays ?? 0
 
-        currentIndex: root.currentIndex
+        currentIndex: root.currentPageIndex
 
         Layout.alignment: Qt.AlignHCenter
 

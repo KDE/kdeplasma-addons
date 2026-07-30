@@ -109,7 +109,7 @@ Kirigami.ScrollablePage {
                     }
 
                     const index = root.futureHours.index(stackedHourlyLoader.item.currentIndex, 0);
-                    const format = Qt.locale().dateFormat(Locale.ShortFormat);
+                    const format = Qt.locale().dateFormat(Locale.LongFormat);
                     const date = Qt.formatDateTime(root.futureHours.data(index, WeatherData.FutureHours.Timestamp), format);
 
                     const color = Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.75);
