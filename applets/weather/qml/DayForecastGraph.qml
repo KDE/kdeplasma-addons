@@ -92,7 +92,7 @@ ColumnLayout {
             visible: root.futureDaysPoints?.hasProbability ?? false
             color: "gray"
             ySection: WeatherData.FutureDaysPoints.ConditionProbability
-            legendText: i18n("Condition Probability")
+            legendText: i18n("Chance of precipitation")
             labelTextFunc: function (pointIndex) {
                 if (!root.futureDaysPoints) {
                     return "";
