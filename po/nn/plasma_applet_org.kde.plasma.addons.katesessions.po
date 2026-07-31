@@ -39,6 +39,3 @@ msgstr "Avbryt øktlaging"
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate-øktveljar"
-
-#~ msgid "Search…"
-#~ msgstr "Søk …"

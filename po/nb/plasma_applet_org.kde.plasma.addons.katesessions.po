@@ -39,6 +39,3 @@ msgstr "Avbryt øktoppretting"
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate-økter"
-
-#~ msgid "Search…"
-#~ msgstr "Søk …"
