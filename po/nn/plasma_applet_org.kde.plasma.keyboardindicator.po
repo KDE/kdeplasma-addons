@@ -1,5 +1,6 @@
 # Translation of plasma_applet_org.kde.plasma.keyboardindicator to Norwegian Nynorsk
 #
+# Karl Ove Hufthammer <karl@huftis.org>, 2018, 2021, 2022, 2023, 2026.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2018.
 msgid ""
 msgstr ""

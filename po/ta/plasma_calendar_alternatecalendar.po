@@ -1,21 +1,21 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# Kishore G <kishore96@gmail.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022-2023, 2026 Kishore G <kishore96@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-07-07 00:44+0000\n"
-"PO-Revision-Date: 2023-05-21 14:30+0530\n"
+"PO-Revision-Date: 2026-08-01 17:56+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
-"Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
+"Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
 "Language: ta\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 26.04.3\n"
 
 #: calendarsystem.h:52
 #, kde-format
@@ -78,20 +78,16 @@ msgid "Hebrew Calendar"
 msgstr "யூத நாள்காட்டி"
 
 #: calendarsystem.h:88
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Chinese Lunar Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
-msgstr "சீன நிலவுசார் நாள்காட்டி"
+msgstr "வியட்னாமிய நிலவுசார் நாள்காட்டி"
 
 #: calendarsystem.h:92
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Indian National Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Ethiopian Calendar"
-msgstr "இந்திய தேசிய நாள்காட்டி"
+msgstr "எத்தியோப்பிய நாள்காட்டி"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -132,11 +128,7 @@ msgstr ""
 "நேர்ம எண் பிந்தைய தேதியைக் குறிக்கும்; மாறாக, எதிர்ம எண் முந்தைய தேதியைக் குறிக்கும்."
 
 #: provider/ethiopiancalendar.cpp:86
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
-#| "number %4 Full date in Hebrew"
-#| msgid "%1 %2, %3 (%4)"
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Translated month name in Ethiopian calendar %3 Year number "
 "%4 Full date in Ethiopian"
