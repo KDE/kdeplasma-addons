@@ -67,16 +67,16 @@ ColumnLayout {
 
             Layout.fillWidth: true
 
-            elide: Text.ElideRight
-
             visible: !!root.station?.place
 
+            elide: Text.ElideRight
             text: visible ? root.station.place : ""
             textFormat: Text.PlainText
 
             PlasmaCore.ToolTipArea {
-                mainText: locationLabel.visible ? root.station.place : ""
-                visible: locationLabel.truncated
+                anchors.fill: parent
+                mainText: locationLabel.text
+                active: locationLabel.truncated
             }
         }
 
