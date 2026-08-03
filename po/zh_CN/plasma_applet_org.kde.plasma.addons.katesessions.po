@@ -37,6 +37,3 @@ msgstr "取消创建会话"
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kate 会话"
-
-#~ msgid "Search…"
-#~ msgstr "搜索…"
