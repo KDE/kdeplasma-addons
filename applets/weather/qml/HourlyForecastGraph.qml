@@ -91,7 +91,7 @@ ColumnLayout {
         ForecastGraph.SeriesDefinition {
             name: "probability"
             visible: root.futureHoursPoints?.hasProbability ?? false
-            color: "gray"
+            color: "blue"
             ySection: WeatherData.FutureHoursPoints.ConditionProbability
             legendText: i18n("Chance of precipitation")
             labelTextFunc: function (pointIndex) {
