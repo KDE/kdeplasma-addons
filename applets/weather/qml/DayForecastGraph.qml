@@ -41,7 +41,7 @@ ColumnLayout {
             visible: !root.futureDaysPoints?.highLowTempPresent
             color: "red"
             ySection: WeatherData.FutureDaysPoints.GeneralTemp
-            legendText: i18n("General Temperature")
+            legendText: i18n("Temperature")
             labelTextFunc: function (pointIndex) {
                 if (!root.futureDaysPoints) {
                     return "";
