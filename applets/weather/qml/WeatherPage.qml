@@ -61,6 +61,56 @@ Kirigami.ScrollablePage {
         return requiredHeight > availableHeight;
     }
 
+    function hourlyForecastHeading(defaultLabel, currentIndex, hoursPerDay, shortFormat) {
+        if (!root.futureHours || !root.futureHoursPoints) {
+            return defaultLabel;
+        }
+
+        const firstIndex = currentIndex;
+        if (firstIndex < 0 || firstIndex >= root.futureHours.rowCount()) {
+            return defaultLabel;
+        }
+
+        const lastIndex = Math.min(root.futureHours.rowCount() - 1, firstIndex + hoursPerDay - 1);
+
+        const firstDate = root.futureHours.data(root.futureHours.index(firstIndex, 0), WeatherData.FutureHours.Timestamp);
+        const lastDate = root.futureHours.data(root.futureHours.index(lastIndex, 0), WeatherData.FutureHours.Timestamp);
+
+        function isSameDay(a, b) {
+            return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
+        }
+
+        function getDayName(date) {
+            return Qt.locale().dayName(date.getDay(), !shortFormat ? Locale.LongFormat : Locale.ShortFormat);
+        }
+
+        const today = new Date();
+        const tomorrow = new Date(today);
+        tomorrow.setDate(today.getDate() + 1);
+
+        let period;
+
+        if (isSameDay(firstDate, lastDate)) {
+            if (isSameDay(firstDate, today)) {
+                period = i18n("Today");
+            } else if (isSameDay(firstDate, tomorrow)) {
+                period = i18n("Tomorrow");
+            } else {
+                period = getDayName(firstDate);
+            }
+        } else {
+            const firstText = isSameDay(firstDate, today) ? i18n("Today") : getDayName(firstDate);
+
+            const lastText = isSameDay(lastDate, tomorrow) ? i18n("Tomorrow") : getDayName(lastDate);
+
+            period = i18nc("@label", "%1 to %2", firstText, lastText);
+        }
+
+        const color = Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.75);
+
+        return defaultLabel + " <font color=\"" + color + "\">" + period + "</font>";
+    }
+
     ColumnLayout {
         id: weather
 
@@ -102,19 +152,10 @@ Kirigami.ScrollablePage {
                 level: 3
                 visible: stackedHourlyLoader.active
                 text: {
-                    let defaultLabel = i18n("Hourly Forecast");
-
-                    if (!stackedHourlyLoader.item || stackedHourlyLoader.item.currentIndex <= 0 || !root.futureHours) {
-                        return defaultLabel;
+                    if (!stackedHourlyLoader.item) {
+                        return "";
                     }
-
-                    const index = root.futureHours.index(stackedHourlyLoader.item.currentIndex, 0);
-                    const format = Qt.locale().dateFormat(Locale.LongFormat);
-                    const date = Qt.formatDateTime(root.futureHours.data(index, WeatherData.FutureHours.Timestamp), format);
-
-                    const color = Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.75);
-
-                    return defaultLabel + " <font color=\"" + color + "\">" + date + "</font>";
+                    return root.hourlyForecastHeading(i18n("Hourly Forecast"), stackedHourlyLoader.item.currentIndex, stackedHourlyLoader.item.hoursPerPage);
                 }
             }
 
@@ -159,19 +200,10 @@ Kirigami.ScrollablePage {
 
                 PlasmaComponents.TabButton {
                     text: {
-                        let defaultLabel = i18n("Hourly");
-
-                        if (!tabbedHourlyLoader.item || tabbedHourlyLoader.item.currentIndex <= 0 || !root.futureHours) {
-                            return defaultLabel;
+                        if (!tabbedHourlyLoader.item) {
+                            return "";
                         }
-
-                        const index = root.futureHours.index(tabbedHourlyLoader.item.currentIndex, 0);
-                        const format = Qt.locale().dateFormat(Locale.ShortFormat);
-                        const date = Qt.formatDateTime(root.futureHours.data(index, WeatherData.FutureHours.Timestamp), format);
-
-                        const color = Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.75);
-
-                        return defaultLabel + " <font color=\"" + color + "\">" + date + "</font>";
+                        return root.hourlyForecastHeading(i18n("Hourly"), tabbedHourlyLoader.item.currentIndex, tabbedHourlyLoader.item.hoursPerPage);
                     }
                 }
 

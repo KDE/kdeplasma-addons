@@ -26,7 +26,7 @@ ColumnLayout {
 
     property int currentIndex: 0
 
-    property int pageSize: 1
+    property int hoursPerPage: 1
 
     RowLayout {
         Layout.fillWidth: true
@@ -38,7 +38,7 @@ ColumnLayout {
             enabled: root.currentIndex > 0
             visible: indicator.visible
             onClicked: {
-                let newIndex = Math.max(0, root.currentIndex - root.pageSize);
+                let newIndex = Math.max(0, root.currentIndex - root.hoursPerPage);
                 root.currentIndex = newIndex;
                 forecastList.positionViewAtIndex(newIndex, ListView.Beginning);
             }
@@ -53,7 +53,7 @@ ColumnLayout {
             Layout.fillWidth: true
 
             spacing: {
-                const displayedItemCount = Math.min(count, root.pageSize);
+                const displayedItemCount = Math.min(count, root.hoursPerPage);
                 const itemWidth = currentItem.implicitWidth;
                 return displayedItemCount > 1 ? (width - displayedItemCount * itemWidth) / (displayedItemCount - 1) : 0;
             }
@@ -68,7 +68,7 @@ ColumnLayout {
             Component.onCompleted: updatePageSize()
 
             function updatePageSize() {
-                root.pageSize = Math.max(1, Math.floor((width + root.minimalSpacing) / (currentItem.implicitWidth + root.minimalSpacing)));
+                root.hoursPerPage = Math.max(1, Math.floor((width + root.minimalSpacing) / (currentItem.implicitWidth + root.minimalSpacing)));
             }
         }
 
@@ -76,9 +76,9 @@ ColumnLayout {
             Layout.fillHeight: true
             icon.name: "go-next"
             visible: indicator.visible
-            enabled: root.currentIndex + root.pageSize < forecastList.count
+            enabled: root.currentIndex + root.hoursPerPage < forecastList.count
             onClicked: {
-                let newIndex = Math.min(forecastList.count - 1, root.currentIndex + root.pageSize);
+                let newIndex = Math.min(forecastList.count - 1, root.currentIndex + root.hoursPerPage);
                 root.currentIndex = newIndex;
                 forecastList.positionViewAtIndex(newIndex, ListView.Beginning);
             }
@@ -89,9 +89,9 @@ ColumnLayout {
     PlasmaComponents.PageIndicator {
         id: indicator
 
-        count: Math.ceil(forecastList.count / root.pageSize)
+        count: Math.ceil(forecastList.count / root.hoursPerPage)
 
-        currentIndex: Math.floor(root.currentIndex / root.pageSize)
+        currentIndex: Math.floor(root.currentIndex / root.hoursPerPage)
 
         Layout.alignment: Qt.AlignHCenter
 
@@ -108,7 +108,7 @@ ColumnLayout {
             MouseArea {
                 anchors.fill: parent
                 onClicked: {
-                    let newIndex = Math.max(0, index * root.pageSize);
+                    let newIndex = Math.max(0, index * root.hoursPerPage);
                     root.currentIndex = newIndex;
                     forecastList.positionViewAtIndex(newIndex, ListView.Beginning);
                 }

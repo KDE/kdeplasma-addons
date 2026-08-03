@@ -28,7 +28,9 @@ ColumnLayout {
 
     property int dateTimeSection: WeatherData.FutureHoursPoints.Timestamp
 
-    property int currentIndex: !!futureHoursPoints ? root.futureHoursPoints.hoursPerDay * currentPageIndex : 0
+    property int hoursPerPage: root.futureHoursPoints?.hoursPerDay ?? 0
+
+    property int currentIndex: hoursPerPage * currentPageIndex
     property int currentPageIndex: 0
 
     property int horizontalLabelsCount: 5
@@ -129,7 +131,7 @@ ColumnLayout {
             const totalWidth = forecastGraph.axisX.max - forecastGraph.axisX.min;
             const visibleWidth = forecastGraph.axisX.visualMax - forecastGraph.axisX.visualMin;
             forecastGraph.axisX.pan = -(totalWidth - visibleWidth) / 2;
-            const pointSpacing = visibleWidth / root.futureHoursPoints.hoursPerDay;
+            const pointSpacing = visibleWidth / root.hoursPerPage;
             // Shift the viewport by half a point spacing so points from the
             // next day are not partially visible at the right edge and the leftmost
             // point is not clipped.
