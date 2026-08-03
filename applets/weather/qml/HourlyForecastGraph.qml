@@ -143,15 +143,6 @@ ColumnLayout {
     RowLayout {
         Layout.fillWidth: true
         Layout.fillHeight: true
-        PlasmaComponents.ToolButton {
-            id: backButton
-            Layout.fillHeight: true
-            icon.name: "go-previous"
-            visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
-            enabled: root.currentPageIndex > 0
-            onClicked: root.scrollToIndex(root.currentPageIndex - 1)
-            Layout.preferredWidth: Kirigami.Units.iconSizes.small
-        }
 
         // Use custom graph labels because GraphView does not support custom label sizing
         // or displaying labels on both sides of the graph.
@@ -301,6 +292,72 @@ ColumnLayout {
                 return Util.percentToDisplayString(conditionProbability);
             }
         }
+    }
+
+    ForecastGraphLegend {
+        Layout.alignment: Qt.AlignHCenter
+        Layout.leftMargin: backButton.width
+        Layout.rightMargin: forwardButton.width
+        Layout.bottomMargin: Kirigami.Units.largeSpacing
+
+        seriesDefinitions: root.seriesDefinitions
+    }
+
+    RowLayout {
+        Layout.alignment: Qt.AlignHCenter
+        PlasmaComponents.ToolButton {
+            id: firstButton
+            Layout.fillHeight: true
+            icon.name: "go-first"
+            visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
+            enabled: root.currentPageIndex > 0
+            onClicked: root.scrollToIndex(0)
+            Layout.preferredWidth: Kirigami.Units.iconSizes.small
+        }
+
+        PlasmaComponents.ToolButton {
+            id: backButton
+            Layout.fillHeight: true
+            icon.name: "go-previous"
+            visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
+            enabled: root.currentPageIndex > 0
+            onClicked: root.scrollToIndex(root.currentPageIndex - 1)
+            Layout.preferredWidth: Kirigami.Units.iconSizes.small
+        }
+
+        PlasmaComponents.PageIndicator {
+            id: indicator
+
+            count: root.futureHoursPoints?.totalDays ?? 0
+
+            currentIndex: root.currentPageIndex
+
+            Layout.alignment: Qt.AlignHCenter
+
+            visible: count > 1
+
+            delegate: Rectangle {
+                width: Math.round(Kirigami.Units.gridUnit * 0.5)
+                height: width
+                radius: width / 2
+
+                color: index === indicator.currentIndex ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                opacity: index === indicator.currentIndex ? 1.0 : 0.4
+
+                TapHandler {
+                    id: tapHandler
+                    onTapped: {
+                        root.scrollToIndex(index);
+                    }
+                }
+
+                Behavior on opacity {
+                    OpacityAnimator {
+                        duration: Kirigami.Units.shortDuration
+                    }
+                }
+            }
+        }
 
         PlasmaComponents.ToolButton {
             id: forwardButton
@@ -313,48 +370,15 @@ ColumnLayout {
             }
             Layout.preferredWidth: Kirigami.Units.iconSizes.small
         }
-    }
 
-    ForecastGraphLegend {
-        Layout.alignment: Qt.AlignHCenter
-        Layout.leftMargin: backButton.width
-        Layout.rightMargin: forwardButton.width
-        Layout.bottomMargin: Kirigami.Units.largeSpacing
-
-        seriesDefinitions: root.seriesDefinitions
-    }
-
-    PlasmaComponents.PageIndicator {
-        id: indicator
-
-        count: root.futureHoursPoints?.totalDays ?? 0
-
-        currentIndex: root.currentPageIndex
-
-        Layout.alignment: Qt.AlignHCenter
-
-        visible: count > 1
-
-        delegate: Rectangle {
-            width: Math.round(Kirigami.Units.gridUnit * 0.5)
-            height: width
-            radius: width / 2
-
-            color: index === indicator.currentIndex ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-            opacity: index === indicator.currentIndex ? 1.0 : 0.4
-
-            TapHandler {
-                id: tapHandler
-                onTapped: {
-                    root.scrollToIndex(index);
-                }
-            }
-
-            Behavior on opacity {
-                OpacityAnimator {
-                    duration: Kirigami.Units.shortDuration
-                }
-            }
+        PlasmaComponents.ToolButton {
+            id: lastButton
+            Layout.fillHeight: true
+            icon.name: "go-last"
+            visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
+            enabled: root.currentPageIndex < forecastGraph.axisX.zoom - 1
+            onClicked: root.scrollToIndex(forecastGraph.axisX.zoom - 1)
+            Layout.preferredWidth: Kirigami.Units.iconSizes.small
         }
     }
 }

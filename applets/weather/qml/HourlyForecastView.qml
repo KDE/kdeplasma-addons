@@ -28,29 +28,21 @@ ColumnLayout {
 
     property int hoursPerPage: 1
 
-    RowLayout {
+    Item {
         Layout.fillWidth: true
         Layout.fillHeight: true
 
-        PlasmaComponents.ToolButton {
-            Layout.fillHeight: true
-            icon.name: "go-previous"
-            enabled: root.currentIndex > 0
-            visible: indicator.visible
-            onClicked: {
-                let newIndex = Math.max(0, root.currentIndex - root.hoursPerPage);
-                root.currentIndex = newIndex;
-                forecastList.positionViewAtIndex(newIndex, ListView.Beginning);
-            }
-            Layout.preferredWidth: Kirigami.Units.iconSizes.small
-        }
+        implicitWidth: forecastList.implicitWidth
+        implicitHeight: forecastList.implicitHeight
 
         HourlyForecastList {
             id: forecastList
 
             snapMode: ListView.SnapToItem
 
-            Layout.fillWidth: true
+            anchors.right: parent.right
+            anchors.left: parent.left
+            anchors.verticalCenter: parent.verticalCenter
 
             spacing: {
                 const displayedItemCount = Math.min(count, root.hoursPerPage);
@@ -71,6 +63,72 @@ ColumnLayout {
                 root.hoursPerPage = Math.max(1, Math.floor((width + root.minimalSpacing) / (currentItem.implicitWidth + root.minimalSpacing)));
             }
         }
+    }
+
+    RowLayout {
+        Layout.alignment: Qt.AlignHCenter
+
+        PlasmaComponents.ToolButton {
+            Layout.fillHeight: true
+            icon.name: "go-first"
+            enabled: root.currentIndex > 0
+            visible: indicator.visible
+            onClicked: {
+                let newIndex = 0;
+                root.currentIndex = newIndex;
+                forecastList.positionViewAtIndex(newIndex, ListView.Beginning);
+            }
+            Layout.preferredWidth: Kirigami.Units.iconSizes.small
+        }
+
+        PlasmaComponents.ToolButton {
+            Layout.fillHeight: true
+            icon.name: "go-previous"
+            enabled: root.currentIndex > 0
+            visible: indicator.visible
+            onClicked: {
+                let newIndex = Math.max(0, root.currentIndex - root.hoursPerPage);
+                root.currentIndex = newIndex;
+                forecastList.positionViewAtIndex(newIndex, ListView.Beginning);
+            }
+            Layout.preferredWidth: Kirigami.Units.iconSizes.small
+        }
+
+        PlasmaComponents.PageIndicator {
+            id: indicator
+
+            count: Math.ceil(forecastList.count / root.hoursPerPage)
+
+            currentIndex: Math.floor(root.currentIndex / root.hoursPerPage)
+
+            Layout.alignment: Qt.AlignHCenter
+
+            visible: count > 1
+
+            delegate: Rectangle {
+                width: Math.round(Kirigami.Units.gridUnit * 0.5)
+                height: width
+                radius: width / 2
+
+                color: index === indicator.currentIndex ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
+                opacity: index === indicator.currentIndex ? 1.0 : 0.4
+
+                MouseArea {
+                    anchors.fill: parent
+                    onClicked: {
+                        let newIndex = Math.max(0, index * root.hoursPerPage);
+                        root.currentIndex = newIndex;
+                        forecastList.positionViewAtIndex(newIndex, ListView.Beginning);
+                    }
+                }
+
+                Behavior on opacity {
+                    OpacityAnimator {
+                        duration: Kirigami.Units.shortDuration
+                    }
+                }
+            }
+        }
 
         PlasmaComponents.ToolButton {
             Layout.fillHeight: true
@@ -84,41 +142,18 @@ ColumnLayout {
             }
             Layout.preferredWidth: Kirigami.Units.iconSizes.small
         }
-    }
 
-    PlasmaComponents.PageIndicator {
-        id: indicator
-
-        count: Math.ceil(forecastList.count / root.hoursPerPage)
-
-        currentIndex: Math.floor(root.currentIndex / root.hoursPerPage)
-
-        Layout.alignment: Qt.AlignHCenter
-
-        visible: count > 1
-
-        delegate: Rectangle {
-            width: Math.round(Kirigami.Units.gridUnit * 0.5)
-            height: width
-            radius: width / 2
-
-            color: index === indicator.currentIndex ? Kirigami.Theme.highlightColor : Kirigami.Theme.textColor
-            opacity: index === indicator.currentIndex ? 1.0 : 0.4
-
-            MouseArea {
-                anchors.fill: parent
-                onClicked: {
-                    let newIndex = Math.max(0, index * root.hoursPerPage);
-                    root.currentIndex = newIndex;
-                    forecastList.positionViewAtIndex(newIndex, ListView.Beginning);
-                }
+        PlasmaComponents.ToolButton {
+            Layout.fillHeight: true
+            icon.name: "go-last"
+            visible: indicator.visible
+            enabled: root.currentIndex + root.hoursPerPage < forecastList.count
+            onClicked: {
+                let newIndex = Math.min(forecastList.count - 1, (indicator.count - 1) * root.hoursPerPage);
+                root.currentIndex = newIndex;
+                forecastList.positionViewAtIndex(newIndex, ListView.Beginning);
             }
-
-            Behavior on opacity {
-                OpacityAnimator {
-                    duration: Kirigami.Units.shortDuration
-                }
-            }
+            Layout.preferredWidth: Kirigami.Units.iconSizes.small
         }
     }
 }
