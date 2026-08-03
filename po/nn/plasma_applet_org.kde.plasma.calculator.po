@@ -1,5 +1,6 @@
 # Translation of plasma_applet_org.kde.plasma.calculator to Norwegian Nynorsk
 #
+# Karl Ove Hufthammer <karl@huftis.org>, 2008, 2015, 2022, 2023, 2026.
 # Eirik U. Birkeland <eirbir@gmail.com>, 2008, 2009.
 msgid ""
 msgstr ""
