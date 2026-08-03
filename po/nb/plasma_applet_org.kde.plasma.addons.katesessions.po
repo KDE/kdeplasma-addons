@@ -2,6 +2,7 @@
 #
 # Bjørn Kvisli <bjorn.kvisli@gmail.com>, 2011.
 # Bjørn Steensrud <bjornst@skogkatt.homelinux.org>, 2014.
+# Kjetil Sørlund <translate@sorlund.no>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
