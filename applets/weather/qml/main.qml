@@ -8,10 +8,16 @@
 import QtQuick
 
 import org.kde.plasma.plasmoid
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
 
 PlasmoidItem {
     id: root
+
+    readonly property var backAction: Kirigami.Action {
+        onTriggered: (root.fullRepresentationItem as FullRepresentation).popStack()
+        enabled: (root.fullRepresentationItem as FullRepresentation)?.stackDepth > 1
+    }
 
     ForecastControl {
         id: forecastControl

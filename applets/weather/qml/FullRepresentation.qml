@@ -38,16 +38,31 @@ PlasmaExtras.Representation {
     property var lastObservation: null
     property var metaData: null
 
+    readonly property alias stackDepth: stack.depth
+
+    function popStack(): void {
+        stack.pop();
+    }
+
     Layout.minimumWidth: Math.min(Kirigami.Units.gridUnit * 25, Math.max(Kirigami.Units.gridUnit * 10, stack.implicitWidth))
     Layout.minimumHeight: stack.implicitHeight
     Layout.margins: Kirigami.Units.smallSpacing
 
     header: PlasmaExtras.PlasmoidHeading {
-        visible: stack.depth > 1
+        focus: true
+
+        visible: stack.depth > 1 && Plasmoid.containment.pluginName !== "org.kde.plasma.systemtray"
         contentItem: RowLayout {
+            Layout.fillWidth: true
+
             PlasmaComponents.ToolButton {
-                icon.name: "go-previous"
-                onClicked: stack.removePage(stack.lastItem)
+                icon.name: mirrored ? "go-next" : "go-previous"
+                text: i18nc("@action:button", "Return to Weather Forecast")
+                visible: stack.depth > 1 && Plasmoid.containment.pluginName !== "org.kde.plasma.systemtray"
+
+                onClicked: {
+                    stack.removePage(stack.lastItem);
+                }
             }
         }
     }
