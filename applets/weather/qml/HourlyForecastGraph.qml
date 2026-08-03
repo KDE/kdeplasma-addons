@@ -24,7 +24,7 @@ ColumnLayout {
 
     readonly property real minimalSpacing: Kirigami.Units.largeSpacing
 
-    readonly property real preferredGraphHeight: Kirigami.Units.gridUnit * 7
+    readonly property real preferredGraphHeight: Kirigami.Units.gridUnit * 6
 
     property int dateTimeSection: WeatherData.FutureHoursPoints.Timestamp
 
@@ -106,6 +106,8 @@ ColumnLayout {
             }
         }
     ]
+
+    spacing: 0
 
     function scrollToIndex(dayIndex) {
         const totalSpan = forecastGraph.axisX.max - forecastGraph.axisX.min;

@@ -116,6 +116,8 @@ Kirigami.ScrollablePage {
 
         anchors.fill: parent
 
+        spacing: 0
+
         TopPanel {
             id: topPanel
             visible: !!root.station || !!root.lastObservation
