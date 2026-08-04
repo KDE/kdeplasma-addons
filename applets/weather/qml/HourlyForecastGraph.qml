@@ -310,7 +310,15 @@ ColumnLayout {
         PlasmaComponents.ToolButton {
             id: firstButton
             Layout.fillHeight: true
+
             icon.name: "go-first"
+            text: i18n("Go to first day")
+            display: PlasmaComponents.AbstractButton.IconOnly
+
+            PlasmaComponents.ToolTip.text: text
+            PlasmaComponents.ToolTip.visible: hovered || activeFocus
+            PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+
             visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
             enabled: root.currentPageIndex > 0
             onClicked: root.scrollToIndex(0)
@@ -320,7 +328,15 @@ ColumnLayout {
         PlasmaComponents.ToolButton {
             id: backButton
             Layout.fillHeight: true
+
             icon.name: "go-previous"
+            text: i18n("Go to previous day")
+            display: PlasmaComponents.AbstractButton.IconOnly
+
+            PlasmaComponents.ToolTip.text: text
+            PlasmaComponents.ToolTip.visible: hovered || activeFocus
+            PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+
             visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
             enabled: root.currentPageIndex > 0
             onClicked: root.scrollToIndex(root.currentPageIndex - 1)
@@ -364,7 +380,15 @@ ColumnLayout {
         PlasmaComponents.ToolButton {
             id: forwardButton
             Layout.fillHeight: true
+
             icon.name: "go-next"
+            text: i18n("Go to next day")
+            display: PlasmaComponents.AbstractButton.IconOnly
+
+            ToolTip.text: text
+            ToolTip.visible: hovered || activeFocus
+            ToolTip.delay: Kirigami.Units.toolTipDelay
+
             visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
             enabled: root.currentPageIndex < forecastGraph.axisX.zoom - 1
             onClicked: {
@@ -376,7 +400,15 @@ ColumnLayout {
         PlasmaComponents.ToolButton {
             id: lastButton
             Layout.fillHeight: true
+
             icon.name: "go-last"
+            text: i18n("Go to last day")
+            display: PlasmaComponents.AbstractButton.IconOnly
+
+            PlasmaComponents.ToolTip.text: text
+            PlasmaComponents.ToolTip.visible: hovered || activeFocus
+            PlasmaComponents.ToolTip.delay: Kirigami.Units.toolTipDelay
+
             visible: (root.futureHoursPoints?.totalDays ?? 0) > 1
             enabled: root.currentPageIndex < forecastGraph.axisX.zoom - 1
             onClicked: root.scrollToIndex(forecastGraph.axisX.zoom - 1)
