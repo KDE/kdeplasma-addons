@@ -77,8 +77,6 @@ Item {
 
         clipPlotArea: false
 
-        panStyle: GraphsView.PanStyle.Drag
-
         theme: GraphsTheme {
             gridVisible: false
             backgroundVisible: false
