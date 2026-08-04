@@ -10,7 +10,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.plasma.weatherdata as WeatherData
 
-ColumnLayout {
+Item {
     id: root
 
     property bool showHourlyForecast: false
@@ -24,46 +24,66 @@ ColumnLayout {
     property alias hourlyItem: stackedHourlyLoader.item
     property alias dayItem: stackedDayLoader.item
 
-    ColumnLayout {
-        Layout.fillWidth: true
-        RowLayout {
-            visible: stackedHourlyLoader.active
-            Kirigami.Heading {
-                level: 3
-                text: i18n("Hourly Forecast")
-            }
-
-            Kirigami.Heading {
-                level: 3
-                text: root.hourlySubHeaderText
-                opacity: 0.75
-            }
-        }
-
-        Loader {
-            id: stackedHourlyLoader
-            Layout.fillWidth: true
-            visible: status == Loader.Ready
-            active: root.showHourlyForecast
-            sourceComponent: root.hourlyComponent
-        }
-    }
+    implicitHeight: forecast.implicitHeight
+    implicitWidth: forecast.implicitWidth
 
     ColumnLayout {
-        Layout.fillWidth: true
-        Kirigami.Heading {
+        id: forecast
+
+        anchors.fill: parent
+
+        // Center the forecast sections vertically by distributing the unused space
+        // between the top margin, section spacing, and bottom margin.
+        spacing: (parent.height - hourlyForecast.height - dayForecast.height) / 3
+        anchors.topMargin: spacing
+        anchors.bottomMargin: spacing
+
+        ColumnLayout {
+            id: hourlyForecast
             Layout.fillWidth: true
-            level: 3
-            visible: stackedDayLoader.active
-            text: i18n("%1 Day Forecast", root.forecastDaysNumber)
+
+            RowLayout {
+                visible: stackedHourlyLoader.active
+
+                Kirigami.Heading {
+                    level: 3
+                    text: i18n("Hourly Forecast")
+                }
+
+                Kirigami.Heading {
+                    level: 3
+                    text: root.hourlySubHeaderText
+                    opacity: 0.75
+                }
+            }
+
+            Loader {
+                id: stackedHourlyLoader
+                Layout.fillWidth: true
+                visible: status == Loader.Ready
+                active: root.showHourlyForecast
+                sourceComponent: root.hourlyComponent
+            }
         }
 
-        Loader {
-            id: stackedDayLoader
+        ColumnLayout {
+            id: dayForecast
             Layout.fillWidth: true
-            visible: status == Loader.Ready
-            active: root.showDayForecast
-            sourceComponent: root.dayComponent
+
+            Kirigami.Heading {
+                Layout.fillWidth: true
+                level: 3
+                visible: stackedDayLoader.active
+                text: i18n("%1 Day Forecast", root.forecastDaysNumber)
+            }
+
+            Loader {
+                id: stackedDayLoader
+                Layout.fillWidth: true
+                visible: status == Loader.Ready
+                active: root.showDayForecast
+                sourceComponent: root.dayComponent
+            }
         }
     }
 }
