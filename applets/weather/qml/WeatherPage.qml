@@ -61,14 +61,14 @@ Kirigami.ScrollablePage {
         return requiredHeight > availableHeight;
     }
 
-    function hourlyForecastHeading(defaultLabel, currentIndex, hoursPerDay, shortFormat) {
+    function hourlyForecastHeading(currentIndex, hoursPerDay, shortFormat) {
         if (!root.futureHours || !root.futureHoursPoints) {
-            return defaultLabel;
+            return "";
         }
 
         const firstIndex = currentIndex;
         if (firstIndex < 0 || firstIndex >= root.futureHours.rowCount()) {
-            return defaultLabel;
+            return "";
         }
 
         const lastIndex = Math.min(root.futureHours.rowCount() - 1, firstIndex + hoursPerDay - 1);
@@ -92,23 +92,21 @@ Kirigami.ScrollablePage {
 
         if (isSameDay(firstDate, lastDate)) {
             if (isSameDay(firstDate, today)) {
-                period = i18n("Today");
+                return i18nc("@label", "Today");
             } else if (isSameDay(firstDate, tomorrow)) {
-                period = i18n("Tomorrow");
+                return i18nc("@label", "Tomorrow");
             } else {
                 period = getDayName(firstDate);
             }
         } else {
-            const firstText = isSameDay(firstDate, today) ? i18n("Today") : getDayName(firstDate);
+            const firstText = isSameDay(firstDate, today) ? i18nc("@label", "Today") : getDayName(firstDate);
 
-            const lastText = isSameDay(lastDate, tomorrow) ? i18n("Tomorrow") : getDayName(lastDate);
+            const lastText = isSameDay(lastDate, tomorrow) ? i18nc("@label", "Tomorrow") : getDayName(lastDate);
 
-            period = i18nc("@label", "%1 to %2", firstText, lastText);
+            return i18nc("@label", "%1 to %2", firstText, lastText);
         }
 
-        const color = Qt.rgba(Kirigami.Theme.textColor.r, Kirigami.Theme.textColor.g, Kirigami.Theme.textColor.b, 0.75);
-
-        return defaultLabel + " <font color=\"" + color + "\">" + period + "</font>";
+        return "";
     }
 
     ColumnLayout {
@@ -149,15 +147,17 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            Kirigami.Heading {
-                Layout.fillWidth: true
-                level: 3
+            RowLayout {
                 visible: stackedHourlyLoader.active
-                text: {
-                    if (!stackedHourlyLoader.item) {
-                        return "";
-                    }
-                    return root.hourlyForecastHeading(i18n("Hourly Forecast"), stackedHourlyLoader.item.currentIndex, stackedHourlyLoader.item.hoursPerPage);
+                Kirigami.Heading {
+                    level: 3
+                    text: i18n("Hourly Forecast")
+                }
+
+                Kirigami.Heading {
+                    level: 3
+                    text: root.hourlyForecastHeading(stackedHourlyLoader.item.currentIndex, stackedHourlyLoader.item.hoursPerPage)
+                    opacity: 0.75
                 }
             }
 
@@ -201,11 +201,20 @@ Kirigami.ScrollablePage {
                 visible: root.hasHourlyForecast && root.hasDayForecast
 
                 PlasmaComponents.TabButton {
-                    text: {
-                        if (!tabbedHourlyLoader.item) {
-                            return "";
+                    contentItem: ColumnLayout {
+                        spacing: 0
+                        PlasmaComponents.Label {
+                            Layout.alignment: Qt.AlignHCenter
+                            text: i18n("Hourly")
                         }
-                        return root.hourlyForecastHeading(i18n("Hourly"), tabbedHourlyLoader.item.currentIndex, tabbedHourlyLoader.item.hoursPerPage);
+
+                        PlasmaComponents.Label {
+                            Layout.alignment: Qt.AlignHCenter
+                            font.pointSize: Kirigami.Theme.smallFont.pointSize
+                            font.family: Kirigami.Theme.smallFont.family
+                            opacity: 0.75
+                            text: root.hourlyForecastHeading(tabbedHourlyLoader.item.currentIndex, tabbedHourlyLoader.item.hoursPerPage)
+                        }
                     }
                 }
 
