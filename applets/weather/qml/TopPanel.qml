@@ -167,8 +167,6 @@ ColumnLayout {
                 wrapMode: Text.Wrap
                 textFormat: Text.PlainText
 
-                font.family: Kirigami.Theme.smallFont.family
-                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                 opacity: 0.75
 
                 text: {
@@ -194,8 +192,6 @@ ColumnLayout {
                 wrapMode: Text.Wrap
                 textFormat: Text.PlainText
 
-                font.family: Kirigami.Theme.smallFont.family
-                font.pixelSize: Kirigami.Theme.smallFont.pixelSize
                 opacity: 0.75
             }
         }
