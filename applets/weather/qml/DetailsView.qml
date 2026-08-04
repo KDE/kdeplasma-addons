@@ -79,7 +79,7 @@ RowLayout {
     readonly property list<DetailsString> detailsVisibleModel: detailsModel.filter(page => page.available)
 
     ColumnLayout {
-        spacing: Kirigami.Units.smallSpacing
+        spacing: Kirigami.Units.smallSpacing / 2
         Repeater {
             model: root.detailsVisibleModel
 
@@ -97,7 +97,7 @@ RowLayout {
     }
 
     ColumnLayout {
-        spacing: Kirigami.Units.smallSpacing
+        spacing: Kirigami.Units.smallSpacing / 2
         Repeater {
             model: root.detailsVisibleModel
 
