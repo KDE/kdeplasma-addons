@@ -45,6 +45,8 @@ plasma_add_applet(org.kde.plasma.weather
         qml/IconAndTextItem.qml
         qml/main.qml
         qml/WeatherPage.qml
+        qml/StackedView.qml
+        qml/TabbedView.qml
         qml/WarningsPage.qml
         qml/TopPanel.qml
         qml/config/ConfigAppearance.qml
