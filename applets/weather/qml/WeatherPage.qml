@@ -76,6 +76,10 @@ Kirigami.ScrollablePage {
         const firstDate = root.futureHours.data(root.futureHours.index(firstIndex, 0), WeatherData.FutureHours.Timestamp);
         const lastDate = root.futureHours.data(root.futureHours.index(lastIndex, 0), WeatherData.FutureHours.Timestamp);
 
+        if (!firstDate || !lastDate) {
+            return "";
+        }
+
         function isSameDay(a, b) {
             return a.getFullYear() === b.getFullYear() && a.getMonth() === b.getMonth() && a.getDate() === b.getDate();
         }
@@ -147,7 +151,7 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
             Layout.fillHeight: true
 
-            hourlySubHeaderText: root.hourlyForecastHeading(hourlyItem.currentIndex, hourlyItem.hoursPerPage)
+            hourlySubHeaderText: !!hourlyItem ? root.hourlyForecastHeading(hourlyItem.currentIndex, hourlyItem.hoursPerPage) : ""
             showHourlyForecast: root.hasHourlyForecast
             hourlyComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
 
@@ -164,7 +168,7 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
 
             showHourlyForecast: root.hasHourlyForecast
-            hourlySubHeaderText: root.hourlyForecastHeading(tabbedView.hourlyItem.currentIndex, tabbedView.hourlyItem.hoursPerPage)
+            hourlySubHeaderText: !!hourlyItem ? root.hourlyForecastHeading(hourlyItem.currentIndex, hourlyItem.hoursPerPage) : ""
             hourlyComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
 
             forecastDaysNumber: root.futureDays?.daysNumber ?? 0
@@ -188,7 +192,6 @@ Kirigami.ScrollablePage {
             id: hourlyForecastView
             HourlyForecastView {
                 Layout.fillWidth: true
-                Layout.fillHeight: true
 
                 futureHours: root.futureHours
                 metaData: root.metaData
@@ -202,7 +205,6 @@ Kirigami.ScrollablePage {
             id: hourlyForecastGraph
             HourlyForecastGraph {
                 Layout.fillWidth: true
-                Layout.fillHeight: true
 
                 futureHoursPoints: root.futureHoursPoints
                 metaData: root.metaData
@@ -216,7 +218,6 @@ Kirigami.ScrollablePage {
             id: dayForecastView
             DayForecastView {
                 Layout.fillWidth: true
-                Layout.fillHeight: true
 
                 futureDays: root.futureDays
                 metaData: root.metaData
@@ -230,7 +231,6 @@ Kirigami.ScrollablePage {
             id: dayForecastGraph
             DayForecastGraph {
                 Layout.fillWidth: true
-                Layout.fillHeight: true
 
                 futureDaysPoints: root.futureDaysPoints
                 metaData: root.metaData

@@ -35,8 +35,8 @@ ListView {
 
     currentIndex: 0
 
-    implicitHeight: currentItem.height
-    implicitWidth: currentItem.width
+    implicitHeight: currentItem?.height ?? 0
+    implicitWidth: currentItem?.width ?? 0
 
     delegate: ForecastDelegate {
         showBackground: root.showBackground

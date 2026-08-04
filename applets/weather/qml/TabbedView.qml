@@ -70,7 +70,6 @@ ColumnLayout {
 
         Loader {
             id: tabbedHourlyLoader
-            Layout.fillWidth: true
             active: root.showHourlyForecast
             visible: status == Loader.Ready
             sourceComponent: root.hourlyComponent
@@ -78,7 +77,6 @@ ColumnLayout {
 
         Loader {
             id: tabbedDayLoader
-            Layout.fillWidth: true
             active: root.showDayForecast
             visible: status == Loader.Ready
             sourceComponent: root.dayComponent
