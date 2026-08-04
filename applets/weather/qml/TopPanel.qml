@@ -125,13 +125,12 @@ ColumnLayout {
         }
 
         ColumnLayout {
-            Layout.fillWidth: true
             Layout.preferredWidth: 25 // 25% of the view
             Layout.minimumWidth: root.sideWidth
 
             Layout.alignment: Qt.AlignVCenter
 
-            spacing: Kirigami.Units.smallSpacing
+            spacing: 0
 
             PlasmaComponents.Label {
                 id: tempLabel
@@ -199,6 +198,7 @@ ColumnLayout {
         DetailsView {
             id: detailsView
 
+            Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
 
             invalidUnit: root.invalidUnit
