@@ -59,8 +59,7 @@ public:
         QDateTime period;
         QString iconName;
         QString summary;
-        float tempHigh = qQNaN();
-        float tempLow = qQNaN();
+        float temp = qQNaN();
         int precipitation = 0;
         float windSpeed = qQNaN();
         QString windDirection;

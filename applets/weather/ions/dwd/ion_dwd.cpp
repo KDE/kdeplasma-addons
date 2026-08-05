@@ -384,7 +384,7 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
             info.period = QDateTime::fromMSecsSinceEpoch(timestamp);
 
             if (hourNumber < tempList.size()) {
-                info.tempHigh = parseNumber(tempList[hourNumber]);
+                info.temp = parseNumber(tempList[hourNumber]);
             }
 
             if (hourNumber < precipList.size()) {
@@ -615,8 +615,7 @@ void DWDIon::updateWeather()
             FutureHourForecast futureHour(hourForecast.period);
 
             futureHour.setConditionIcon(hourForecast.iconName);
-            futureHour.setHighTemp(hourForecast.tempHigh);
-            futureHour.setLowTemp(hourForecast.tempLow);
+            futureHour.setGeneralTemp(hourForecast.temp);
 
             futureHours->addHour(futureHour);
             ++hours;
