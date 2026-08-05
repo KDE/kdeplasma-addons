@@ -35,12 +35,10 @@ plasma_add_applet(org.kde.plasma.weather
     QML_SOURCES
         qml/CompactRepresentation.qml
         qml/DetailsView.qml
-        qml/HourlyForecastView.qml
+        qml/HourlyForecastCards.qml
         qml/HourlyForecastGraph.qml
-        qml/HourlyForecastList.qml
-        qml/DayForecastView.qml
+        qml/DayForecastCards.qml
         qml/DayForecastGraph.qml
-        qml/ForecastDelegate.qml
         qml/FullRepresentation.qml
         qml/IconAndTextItem.qml
         qml/main.qml
@@ -53,6 +51,8 @@ plasma_add_applet(org.kde.plasma.weather
         qml/config/ConfigUnits.qml
         qml/config/ConfigWeatherStation.qml
         qml/config/config.qml
+        qml/cards/ForecastDelegate.qml
+        qml/cards/HourlyForecastList.qml
         qml/graph/ForecastGraph.qml
         qml/graph/ForecastGraphLine.qml
         qml/graph/ForecastGraphLabels.qml

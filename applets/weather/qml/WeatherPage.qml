@@ -190,7 +190,7 @@ Kirigami.ScrollablePage {
 
         Component {
             id: hourlyForecastView
-            HourlyForecastView {
+            HourlyForecastCards {
                 Layout.fillWidth: true
 
                 futureHours: root.futureHours
@@ -216,7 +216,7 @@ Kirigami.ScrollablePage {
 
         Component {
             id: dayForecastView
-            DayForecastView {
+            DayForecastCards {
                 Layout.fillWidth: true
 
                 futureDays: root.futureDays
