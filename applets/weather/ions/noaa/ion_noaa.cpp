@@ -459,10 +459,9 @@ void NOAAIon::updateWeather()
         lastObservation.setObservationTimestamp(observation.timestamp);
     }
 
-    const QString conditionI18n = observation.weather.isEmpty() ? i18n("N/A") : i18nc("weather condition", observation.weather.toUtf8().data());
-
-    lastObservation.setCurrentConditions(conditionI18n);
-    qCDebug(WEATHER::ION::NOAA) << "i18n condition string: " << qPrintable(conditionI18n);
+    if (observation.weather.isEmpty()) {
+        lastObservation.setCurrentConditions(i18nc("weather condition", observation.weather.toUtf8().data()));
+    }
 
     const QString weather = observation.weather.toLower();
     ConditionIcons condition = getConditionIcon(weather, !observation.isNight);

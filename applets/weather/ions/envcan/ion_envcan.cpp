@@ -1127,9 +1127,7 @@ void EnvCanadaIon::parseConditions(WeatherData &data, QXmlStreamReader &xml)
     // Reset all the condition properties
     data.temperature = qQNaN();
     data.dewpoint = qQNaN();
-    data.condition = i18n("N/A");
     data.humidex.clear();
-    data.stationID = i18n("N/A");
     data.stationLatitude = qQNaN();
     data.stationLongitude = qQNaN();
     data.pressure = qQNaN();
@@ -1733,12 +1731,12 @@ QDateTime EnvCanadaIon::dateTimeForForecastPeriod(const QString &periodName, con
 
 FutureForecast EnvCanadaIon::forecastInfoToFutureForecast(const std::shared_ptr<WeatherData::DayForecastInfo> &info)
 {
-    const QString shortForecast = info->shortForecast.isEmpty() ? i18n("N/A") : i18nc("weather forecast", info->shortForecast.toUtf8().data());
-
     FutureForecast futureForecast;
 
     futureForecast.setConditionIcon(info->iconName);
-    futureForecast.setCondition(shortForecast);
+    if (info->shortForecast.isEmpty()) {
+        futureForecast.setCondition(i18nc("weather forecast", info->shortForecast.toUtf8().data()));
+    }
     if (!qIsNaN(info->tempHigh)) {
         futureForecast.setHighTemp(info->tempHigh);
     }
@@ -1784,7 +1782,9 @@ void EnvCanadaIon::updateWeather()
     station.setCountry(m_weatherData->countryName);
     station.setPlace(m_weatherData->cityName + u", "_s + m_weatherData->shortTerritoryName);
     station.setRegion(m_weatherData->regionName);
-    station.setStation(m_weatherData->stationID.isEmpty() ? i18n("N/A") : m_weatherData->stationID.toUpper());
+    if (m_weatherData->stationID.isEmpty()) {
+        station.setStation(m_weatherData->stationID.toUpper());
+    }
 
     if (!qIsNaN(m_weatherData->stationLatitude) && !qIsNaN(m_weatherData->stationLongitude)) {
         station.setCoordinates(m_weatherData->stationLatitude, m_weatherData->stationLongitude);
