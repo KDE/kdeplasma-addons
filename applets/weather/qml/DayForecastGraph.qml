@@ -56,7 +56,7 @@ ColumnLayout {
         ForecastGraph.SeriesDefinition {
             name: "highTemp"
             visible: root.futureDaysPoints?.highLowTempPresent ?? false
-            color: "orange"
+            color: "red"
             ySection: WeatherData.FutureDaysPoints.HighTemp
             legendText: i18n("High Temperature")
             labelTextFunc: function (pointIndex) {
@@ -73,7 +73,7 @@ ColumnLayout {
         ForecastGraph.SeriesDefinition {
             name: "lowTemp"
             visible: root.futureDaysPoints?.highLowTempPresent ?? false
-            color: "deepskyblue"
+            color: "orange"
             ySection: WeatherData.FutureDaysPoints.LowTemp
             legendText: i18n("Low Temperature")
             labelTextFunc: function (pointIndex) {
@@ -90,7 +90,7 @@ ColumnLayout {
         ForecastGraph.SeriesDefinition {
             name: "probability"
             visible: root.futureDaysPoints?.hasProbability ?? false
-            color: "blue"
+            color: "deepskyblue"
             ySection: WeatherData.FutureDaysPoints.ConditionProbability
             legendText: i18n("Chance of precipitation")
             labelTextFunc: function (pointIndex) {
