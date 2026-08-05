@@ -388,7 +388,7 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
             }
 
             if (hourNumber < precipList.size()) {
-                info.precipitation = precipList[hourNumber].toInt();
+                info.precipitation = parseNumber(precipList[hourNumber]);
             }
 
             if (hourNumber < iconList.size()) {
@@ -614,6 +614,7 @@ void DWDIon::updateWeather()
         for (const auto &hourForecast : m_weatherData->hourlyForecasts) {
             FutureHourForecast futureHour(hourForecast.period);
 
+            futureHour.setConditionProbability(hourForecast.precipitation);
             futureHour.setConditionIcon(hourForecast.iconName);
             futureHour.setGeneralTemp(hourForecast.temp);
 
