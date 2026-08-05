@@ -24,7 +24,7 @@ Item {
     property alias hourlyItem: stackedHourlyLoader.item
     property alias dayItem: stackedDayLoader.item
 
-    implicitHeight: forecast.implicitHeight
+    implicitHeight: (!!stackedHourlyLoader.item ? hourlyForecast.implicitHeight : 0) + (!!stackedDayLoader.item ? dayForecast.implicitHeight : 0)
     implicitWidth: forecast.implicitWidth
 
     ColumnLayout {
@@ -34,16 +34,16 @@ Item {
 
         // Center the forecast sections vertically by distributing the unused space
         // between the top margin, section spacing, and bottom margin.
-        spacing: (parent.height - hourlyForecast.height - dayForecast.height) / 3
+        spacing: (root.height - root.implicitHeight) / (visibleChildren.length + 1)
         anchors.topMargin: spacing
         anchors.bottomMargin: spacing
 
         ColumnLayout {
             id: hourlyForecast
             Layout.fillWidth: true
+            visible: root.showHourlyForecast
 
             RowLayout {
-                visible: stackedHourlyLoader.active
 
                 Kirigami.Heading {
                     level: 3
@@ -69,6 +69,7 @@ Item {
         ColumnLayout {
             id: dayForecast
             Layout.fillWidth: true
+            visible: root.showDayForecast
 
             Kirigami.Heading {
                 Layout.fillWidth: true

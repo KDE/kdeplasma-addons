@@ -41,7 +41,7 @@ Kirigami.ScrollablePage {
     }
 
     implicitWidth: Math.max(stackedView.dayItem?.implicitWidth ?? 0, stackedView.hourlyItem?.implicitWidth ?? 0, topPanel.implicitWidth) + rightPadding + leftPadding
-    implicitHeight: topPanel.implicitHeight + tabbedView.implicitHeight + sourceLabel.implicitHeight + weather.spacing * (weather.children.length - 2) + topPadding + bottomPadding
+    implicitHeight: topPanel.implicitHeight + ((!!stackedView.dayItem && !!stackedView.hourlyItem) ? tabbedView.implicitHeight : stackedView.implicitHeight) + sourceLabel.implicitHeight + weather.spacing * (weather.children.length - 2) + topPadding + bottomPadding
 
     topPadding: 0
     bottomPadding: 0

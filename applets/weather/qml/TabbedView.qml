@@ -62,8 +62,8 @@ ColumnLayout {
         id: swipeView
 
         Layout.fillWidth: true
-        Layout.minimumWidth: contentChildren.reduce((acc, loader) => Math.max(loader.implicitWidth, acc), 0)
-        Layout.minimumHeight: contentChildren.reduce((acc, loader) => Math.max(loader.implicitHeight, acc), 0)
+        Layout.minimumWidth: contentChildren.reduce((acc, loader) => Math.max(loader.status == Loader.Ready ? loader.implicitWidth : 0, acc), 0)
+        Layout.minimumHeight: contentChildren.reduce((acc, loader) => Math.max(loader.status == Loader.Ready ? loader.implicitHeight : 0, acc), 0)
         clip: true // previous/next views are prepared outside of view, do not render them
 
         currentIndex: tabBar.currentIndex
