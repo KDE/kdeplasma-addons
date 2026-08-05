@@ -44,8 +44,8 @@ PlasmaExtras.Representation {
         stack.pop();
     }
 
-    Layout.minimumWidth: Math.min(Kirigami.Units.gridUnit * 25, Math.max(Kirigami.Units.gridUnit * 10, stack.implicitWidth))
-    Layout.minimumHeight: stack.implicitHeight
+    Layout.minimumWidth: Math.min(Kirigami.Units.gridUnit * 25, Math.max(Kirigami.Units.gridUnit * 10, stack.implicitWidth)) + rightPadding + leftPadding
+    Layout.minimumHeight: stack.implicitHeight + topPadding + bottomPadding
     Layout.margins: Kirigami.Units.smallSpacing
 
     header: PlasmaExtras.PlasmoidHeading {
