@@ -155,7 +155,6 @@ Kirigami.ScrollablePage {
             showHourlyForecast: root.hasHourlyForecast
             hourlyComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
 
-            forecastDaysNumber: root.futureDays?.daysNumber ?? 0
             showDayForecast: root.hasDayForecast
             dayComponent: root.showDayTemperatureGraph ? dayForecastGraph : dayForecastView
         }
@@ -171,7 +170,6 @@ Kirigami.ScrollablePage {
             hourlySubHeaderText: !!hourlyItem ? root.hourlyForecastHeading(hourlyItem.currentIndex, hourlyItem.hoursPerPage) : ""
             hourlyComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
 
-            forecastDaysNumber: root.futureDays?.daysNumber ?? 0
             dayComponent: root.showDayTemperatureGraph ? dayForecastGraph : dayForecastView
             showDayForecast: root.hasDayForecast
         }

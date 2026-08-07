@@ -34,6 +34,9 @@ Item {
 
     readonly property real minimalSpacing: Kirigami.Units.smallSpacing
 
+    //Limit the number of delegates to 7 to prevent broken layout at the minimal applet size
+    readonly property int columnCount: Math.min(forecast.columns, 7)
+
     implicitWidth: forecast.implicitWidth + minimalSpacing * 2 + verticalHeader.width
     implicitHeight: forecast.implicitHeight + minimalSpacing * 2 + horizontalHeader.height
 
@@ -90,25 +93,25 @@ Item {
 
         clip: false
 
-        // calculate spacing and implicit width/height when layout changed
+        // calculate spacing to fill the view when layout changed and set the implicitHeight/Width
         onLayoutChanged: {
             //check if row loaded before calculating row height to prevent rows from being shown incorrectly
             if (isRowLoaded(topRow)) {
                 rowHeight = implicitRowHeight(topRow);
-                var rowsHeight = rowHeight * rows;
+                const rowsHeight = rowHeight * rows;
                 neededRowSpacing = Math.max((parent.height - horizontalHeader.height - rowsHeight) / (rows + 1), root.minimalSpacing);
                 implicitHeight = rowsHeight + (rows - 1) * root.minimalSpacing;
             } else {
-                //restore default values if none of rows is loaded (which shows that forecast model is empty)
+                //restore default spacing if none of rows is loaded (which shows that forecast model is empty)
                 neededRowSpacing = 0;
-                implicitHeight = 0;
+                implicitWidth = 0;
             }
             //the same for columns as for rows
             if (isColumnLoaded(leftColumn)) {
                 columnWidth = implicitColumnWidth(leftColumn);
-                var columnsWidth = columnWidth * columns;
-                neededColumnSpacing = Math.max((parent.width - verticalHeader.width - columnsWidth) / (columns + 1), root.minimalSpacing);
-                implicitWidth = columnsWidth + (columns - 1) * root.minimalSpacing;
+                const columnsWidth = columnWidth * root.columnCount;
+                neededColumnSpacing = Math.max((parent.width - verticalHeader.width - columnsWidth) / (root.columnCount + 1), root.minimalSpacing);
+                implicitWidth = columnsWidth + (root.columnCount - 1) * root.minimalSpacing;
             } else {
                 neededColumnSpacing = 0;
                 implicitWidth = 0;

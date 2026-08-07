@@ -17,7 +17,6 @@ Item {
     property string hourlySubHeaderText: ""
     property var hourlyComponent: null
 
-    property int forecastDaysNumber: 0
     property var dayComponent: null
     property bool showDayForecast: false
 
@@ -75,7 +74,7 @@ Item {
                 Layout.fillWidth: true
                 level: 3
                 visible: stackedDayLoader.active
-                text: i18n("%1 Day Forecast", root.forecastDaysNumber)
+                text: i18n("%1 Day Forecast", stackedDayLoader.item?.columnCount ?? 0)
             }
 
             Loader {

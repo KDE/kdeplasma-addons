@@ -17,7 +17,6 @@ ColumnLayout {
     property string hourlySubHeaderText: ""
     property var hourlyComponent: null
 
-    property int forecastDaysNumber: 0
     property var dayComponent: null
     property bool showDayForecast: false
 
@@ -50,7 +49,7 @@ ColumnLayout {
         }
 
         PlasmaComponents.TabButton {
-            text: i18np("%1 Day", "%1 Days", root.forecastDaysNumber)
+            text: i18np("%1 Day", "%1 Days", tabbedDayLoader.item?.columnCount ?? 0)
         }
 
         onCurrentIndexChanged: {
