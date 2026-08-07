@@ -313,8 +313,7 @@ void FutureHours::addHour(const FutureHourForecast &forecast)
 {
     beginInsertRows(QModelIndex(), m_allHours.size(), m_allHours.size());
 
-    if ((forecast.conditionProbability().has_value()) && (forecast.conditionProbability().value() != 0.0)
-        && (forecast.conditionProbability().value() != qQNaN())) {
+    if ((forecast.conditionProbability().has_value()) && (forecast.conditionProbability().value() != qQNaN())) {
         m_hasProbability = true;
     }
 

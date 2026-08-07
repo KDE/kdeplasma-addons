@@ -381,6 +381,16 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
             WeatherData::HourlyForecastInfo info;
 
             const qlonglong timestamp = start + (static_cast<qlonglong>(hourNumber) * timeStep);
+
+            // DWD provides forecasts starting from the beginning of the day. However, for most stations,
+            // forecast data for hours that have already passed is no longer available from the server.
+            //
+            // Skip entries with timestamps in the past. Otherwise, the forecast would start with missing
+            // data in most cases.
+            if (timestamp <= QDateTime::currentMSecsSinceEpoch()) {
+                continue;
+            }
+
             info.period = QDateTime::fromMSecsSinceEpoch(timestamp);
 
             if (hourNumber < tempList.size()) {
@@ -680,6 +690,7 @@ float DWDIon::parseNumber(const QVariant &number) const
     if (intValue == 0x7fff) { // DWD uses 32767 to mark an error value
         return NAN;
     }
+
     // e.g. DWD API int 17 equals 1.7
     return static_cast<float>(intValue) / 10;
 }
