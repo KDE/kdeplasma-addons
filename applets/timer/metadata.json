@@ -49,7 +49,7 @@
                 "Name[zh_TW]": "Davide Bettio"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Timer widget",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Timer%20widget",
         "Category": "Date and Time",
         "Description": "Countdown over a specified time period",
         "Description[ar]": "العد التنازلي خلال فترة زمنية محددة",

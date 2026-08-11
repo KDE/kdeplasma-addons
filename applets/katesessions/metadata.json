@@ -49,7 +49,7 @@
                 "Name[zh_TW]": "Joseph Wenninger"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Kate Sessions widget",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Kate%20Sessions%20widget",
         "Category": "Utilities",
         "Description": "Kate session launcher",
         "Description[ar]": "مُطلق جلسات كيت",

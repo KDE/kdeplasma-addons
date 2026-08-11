@@ -51,7 +51,7 @@
                 "Name[zh_TW]": "Aleix Pol Gonzalez"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Keyboard Indicator widget",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Keyboard%20Indicator%20widget",
         "Category": "System Information",
         "Description": "Shows whether Caps Lock or Num Lock are active",
         "Description[ar]": "تعرض إذا ما كان قفل الأرقام أو الحروف الكبيرة مفعل",

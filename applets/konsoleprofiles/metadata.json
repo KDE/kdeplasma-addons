@@ -49,7 +49,7 @@
                 "Name[zh_TW]": "Shaun Reich"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Konsole widget",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Konsole%20widget",
         "Category": "Utilities",
         "Description": "List and launch Konsole profiles",
         "Description[ar]": "تعرض و تطلق تشكيلات كونسول",

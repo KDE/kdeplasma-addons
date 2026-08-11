@@ -49,7 +49,7 @@
                 "Name[zh_TW]": "Jesper Thomschutz"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Fifteen Puzzle widget",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Fifteen%20Puzzle%20widget",
         "Category": "Fun and Games",
         "Description": "Put the pieces in order",
         "Description[ar]": "ضع القطع في مكانها الصحيح",

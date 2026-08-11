@@ -49,7 +49,7 @@
                 "Name[zh_TW]": "Henry Stanaland, Davide Bettio"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=calculator widget",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Calculator%20widget",
         "Category": "Utilities",
         "Description": "Calculate simple sums",
         "Description[ar]": "احسب عمليات جمع بسيطة",

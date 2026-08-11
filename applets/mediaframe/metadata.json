@@ -49,7 +49,7 @@
                 "Name[zh_TW]": "Lars Pontoppidan"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Media Frame widget",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Media%20Frame%20widget",
         "Category": "Utilities",
         "Description": "(Picture) frame",
         "Description[ar]": "إطار (الصورة)",

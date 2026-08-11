@@ -49,7 +49,7 @@
                 "Name[zh_TW]": "Reza Fatahilah Shah"
             }
         ],
-        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Comic widget",
+        "BugReportUrl": "https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Comic%20widget",
         "Category": "Fun and Games",
         "Description": "View comic strips from the Internet",
         "Description[ar]": "اعرض شرائط هزلية من الإنترنت",
