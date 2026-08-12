@@ -74,7 +74,7 @@ msgstr "اختر..."
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
-msgstr "اختر رمزاً لمتصفح الويب"
+msgstr "اختر رمزًا لمتصفح الويب"
 
 #: qml/ConfigAppearance.qml:103
 #, kde-format
@@ -182,7 +182,7 @@ msgstr "أعد تحميل هذه الصفحة"
 msgctxt ""
 "@action:button keep this widget's pop-up open until explicitly dismissed"
 msgid "Keep open"
-msgstr "أبقه مفتوحاً"
+msgstr "أبقه مفتوحًا"
 
 #: qml/main.qml:223
 #, kde-format

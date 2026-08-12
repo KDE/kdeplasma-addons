@@ -598,7 +598,7 @@ msgstr "المزود:"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "أدخل مكاناً جديداً"
+msgstr "أدخل مكانًا جديدًا"
 
 #: qml/config/ConfigWeatherStation.qml:122
 #, kde-format
@@ -903,7 +903,7 @@ msgstr "عالي"
 #: weatherdata/lastobservation.cpp:268
 #, kde-format
 msgid "Very high"
-msgstr "عالي جداً"
+msgstr "عالي جدًا"
 
 #: weatherdata/lastobservation.cpp:270
 #, kde-format

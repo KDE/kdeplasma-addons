@@ -164,7 +164,7 @@ msgstr "مشطوب"
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
-msgstr "أبقه مفتوحاً"
+msgstr "أبقه مفتوحًا"
 
 #: qml/main.qml:647
 #, kde-format

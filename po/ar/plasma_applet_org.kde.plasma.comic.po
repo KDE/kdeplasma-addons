@@ -94,7 +94,7 @@ msgstr "أزرار التنقل:"
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
-msgstr "مرئية دائماً عند الحواف"
+msgstr "مرئية دائمًا عند الحواف"
 
 #: qml/configBehavior.qml:61
 #, kde-format
@@ -223,7 +223,7 @@ msgstr "غير متوفّر"
 msgctxt "@info placeholdermessage explanation if today not available"
 msgid ""
 "Today's image is not yet available or cannot be read. Try a different date."
-msgstr "صورة اليوم غير متاحة بعد أو لا يمكن قراءتها. جرّب تاريخاً مختلفاً."
+msgstr "صورة اليوم غير متاحة بعد أو لا يمكن قراءتها. جرّب تاريخًا مختلفًا."
 
 #: qml/ErrorPlaceholder.qml:54
 #, kde-format
@@ -237,7 +237,7 @@ msgctxt "@info placeholdermessage explanation if date not available"
 msgid ""
 "The image for this day is not available or cannot be read. Try a different "
 "date."
-msgstr "صورة هذا اليوم غير متوفرة أو لا يمكن قراءتها. جرّب تاريخاً آخر."
+msgstr "صورة هذا اليوم غير متوفرة أو لا يمكن قراءتها. جرّب تاريخًا آخر."
 
 #: qml/main.qml:87
 #, kde-format
