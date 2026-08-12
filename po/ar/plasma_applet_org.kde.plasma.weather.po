@@ -270,7 +270,7 @@ msgstr "المزود:"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
-msgstr "أدخل مكاناً جديداً"
+msgstr "أدخل مكانًا جديدًا"
 
 #: package/contents/ui/config/ConfigWeatherStation.qml:95
 #, kde-format
