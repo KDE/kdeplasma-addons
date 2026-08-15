@@ -84,12 +84,10 @@ msgid "Vietnamese Lunar Calendar"
 msgstr "Čínsky lunárny kalendár"
 
 #: calendarsystem.h:92
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Indian National Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Ethiopian Calendar"
-msgstr "Indický národný kalendár"
+msgstr "Etiópsky kalendár"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -132,11 +130,7 @@ msgstr ""
 "dátum."
 
 #: provider/ethiopiancalendar.cpp:86
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
-#| "number %4 Full date in Hebrew"
-#| msgid "%1 %2, %3 (%4)"
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Translated month name in Ethiopian calendar %3 Year number "
 "%4 Full date in Ethiopian"
