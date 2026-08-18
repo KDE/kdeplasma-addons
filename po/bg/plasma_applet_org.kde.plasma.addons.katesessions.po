@@ -36,6 +36,3 @@ msgstr "Отменяне създаване на сесия"
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Сесии на Kate"
-
-#~ msgid "Search…"
-#~ msgstr "Търсене…"
