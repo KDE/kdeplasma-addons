@@ -54,7 +54,7 @@ ListView {
         }
 
         PlasmaComponents.ToolButton {
-            visible: model.info !== ""
+            visible: !!model.info && model.info !== ""
             Layout.alignment: Qt.AlignTop
             Layout.minimumWidth: implicitWidth
             icon.name: 'showinfo-symbolic'
