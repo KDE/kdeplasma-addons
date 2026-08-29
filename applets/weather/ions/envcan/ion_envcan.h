@@ -155,7 +155,6 @@ private:
     void updateWeather();
 
     // helper functions used to update forecast days in updateWeather
-    QString updateForecastPeriod(const std::shared_ptr<WeatherData::ForecastInfo> &info);
     FutureForecast forecastInfoToFutureForecast(const std::shared_ptr<WeatherData::ForecastInfo> &info);
     QDateTime dateTimeForForecastPeriod(const QString &periodName, const QDate &issueDate) const;
 

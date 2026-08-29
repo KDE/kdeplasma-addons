@@ -1339,31 +1339,6 @@ void EnvCanadaIon::parseUnknownElement(QXmlStreamReader &xml) const
     }
 }
 
-QString EnvCanadaIon::updateForecastPeriod(const std::shared_ptr<WeatherData::ForecastInfo> &info)
-{
-    QString forecastPeriod = info->forecastPeriod;
-
-    if (forecastPeriod.isEmpty()) {
-        forecastPeriod = i18n("N/A");
-    } else {
-        // We need to shortform the week day strings and remove the "night" word because FutureDays already
-        // set "day" and "night" labels.
-        const QString today = i18n("Today");
-        forecastPeriod.replace(QStringLiteral("Today"), today);
-        forecastPeriod.replace(QStringLiteral("Tonight"), today);
-        forecastPeriod.replace(QStringLiteral("night"), u""_s);
-        forecastPeriod.replace(QStringLiteral("Saturday"), i18nc("Short for Saturday", "Sat"));
-        forecastPeriod.replace(QStringLiteral("Sunday"), i18nc("Short for Sunday", "Sun"));
-        forecastPeriod.replace(QStringLiteral("Monday"), i18nc("Short for Monday", "Mon"));
-        forecastPeriod.replace(QStringLiteral("Tuesday"), i18nc("Short for Tuesday", "Tue"));
-        forecastPeriod.replace(QStringLiteral("Wednesday"), i18nc("Short for Wednesday", "Wed"));
-        forecastPeriod.replace(QStringLiteral("Thursday"), i18nc("Short for Thursday", "Thu"));
-        forecastPeriod.replace(QStringLiteral("Friday"), i18nc("Short for Friday", "Fri"));
-    }
-
-    return forecastPeriod;
-}
-
 QDateTime EnvCanadaIon::dateTimeForForecastPeriod(const QString &periodName, const QDate &issueDate) const
 {
     // EnvCan does not provide dates for individual forecast periods, only the
