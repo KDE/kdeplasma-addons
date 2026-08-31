@@ -4,7 +4,7 @@
 # Francescu Garoby <windu.2b@gmail.com>, 2008.
 # Guillaume Pujol <guill.p@gmail.com>, 2008.
 # Olivier Delaune <olivier.delaune@wanadoo.fr>, 2009.
-# SPDX-FileCopyrightText: 2013, 2020, 2021, 2026 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2013, 2020-2021, 2026 Xavier Besnard <xavier.besnard@kde.org>
 # Simon Depiets <sdepiets@gmail.com>, 2018.
 # Xavier Besnard <xavier.besnard@kde.org>, 2023.
 #
@@ -13,15 +13,15 @@ msgstr ""
 "Project-Id-Version: plasma_runner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2023-05-05 16:16+0200\n"
-"Last-Translator: Xavier BESNARD <xavier.besnard]neuf.fr>\n"
-"Language-Team: \n"
+"PO-Revision-Date: 2026-08-29 20:58+0200\n"
+"Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
+"Language-Team: fr\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.12.2\n"
+"X-Generator: Lokalize 26.08.0\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -45,7 +45,7 @@ msgstr ""
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
-msgstr "dans;vers;en"
+msgstr "dans ; vers ; en tant que"
 
 #~ msgid "Copy number"
 #~ msgstr "Copier le numéro"

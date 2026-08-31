@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-26 00:50+0000\n"
+"POT-Creation-Date: 2026-08-31 00:45+0000\n"
 "PO-Revision-Date: 2025-09-27 13:34+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -134,17 +134,17 @@ msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
 msgstr "Date de la „BBC Weather”"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:717 ions/envcan/ion_envcan.cpp:1523
+#: ions/bbcukmet/ion_bbcukmet.cpp:717 ions/envcan/ion_envcan.cpp:1498
 #, kde-format
 msgid "Rising"
 msgstr "În creștere"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1525
+#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1500
 #, kde-format
 msgid "Falling"
 msgstr "În scădere"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1527
+#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1502
 #, kde-format
 msgid "Steady"
 msgstr "Stabilă"
@@ -156,60 +156,13 @@ msgid "Source: Deutscher Wetterdienst"
 msgstr "Sursă: Deutscher Wetterdienst"
 
 #: ions/envcan/ion_envcan.cpp:888 ions/envcan/ion_envcan.cpp:890
-#: ions/envcan/ion_envcan.cpp:1347 ions/envcan/ion_envcan.cpp:1429
-#: ions/envcan/ion_envcan.cpp:1480 ions/noaa/ion_noaa.cpp:461
+#: ions/envcan/ion_envcan.cpp:1404 ions/envcan/ion_envcan.cpp:1455
+#: ions/noaa/ion_noaa.cpp:461
 #, kde-format
 msgid "N/A"
 msgstr "Indisp."
 
-#: ions/envcan/ion_envcan.cpp:1351
-#, kde-format
-msgid "Today"
-msgstr "Astăzi"
-
-#: ions/envcan/ion_envcan.cpp:1355
-#, kde-format
-msgctxt "Short for Saturday"
-msgid "Sat"
-msgstr "Sâm"
-
-#: ions/envcan/ion_envcan.cpp:1356
-#, kde-format
-msgctxt "Short for Sunday"
-msgid "Sun"
-msgstr "Dum"
-
-#: ions/envcan/ion_envcan.cpp:1357
-#, kde-format
-msgctxt "Short for Monday"
-msgid "Mon"
-msgstr "Lun"
-
-#: ions/envcan/ion_envcan.cpp:1358
-#, kde-format
-msgctxt "Short for Tuesday"
-msgid "Tue"
-msgstr "Mar"
-
-#: ions/envcan/ion_envcan.cpp:1359
-#, kde-format
-msgctxt "Short for Wednesday"
-msgid "Wed"
-msgstr "Mie"
-
-#: ions/envcan/ion_envcan.cpp:1360
-#, kde-format
-msgctxt "Short for Thursday"
-msgid "Thu"
-msgstr "Joi"
-
-#: ions/envcan/ion_envcan.cpp:1361
-#, kde-format
-msgctxt "Short for Friday"
-msgid "Fri"
-msgstr "Vin"
-
-#: ions/envcan/ion_envcan.cpp:1456
+#: ions/envcan/ion_envcan.cpp:1431
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from Environment and Climate Change Canada"
@@ -898,6 +851,37 @@ msgstr "Foarte înaltă"
 #, kde-format
 msgid "Extreme"
 msgstr "Extremă"
+
+#~ msgid "Today"
+#~ msgstr "Astăzi"
+
+#~ msgctxt "Short for Saturday"
+#~ msgid "Sat"
+#~ msgstr "Sâm"
+
+#~ msgctxt "Short for Sunday"
+#~ msgid "Sun"
+#~ msgstr "Dum"
+
+#~ msgctxt "Short for Monday"
+#~ msgid "Mon"
+#~ msgstr "Lun"
+
+#~ msgctxt "Short for Tuesday"
+#~ msgid "Tue"
+#~ msgstr "Mar"
+
+#~ msgctxt "Short for Wednesday"
+#~ msgid "Wed"
+#~ msgstr "Mie"
+
+#~ msgctxt "Short for Thursday"
+#~ msgid "Thu"
+#~ msgstr "Joi"
+
+#~ msgctxt "Short for Friday"
+#~ msgid "Fri"
+#~ msgstr "Vin"
 
 #~ msgctxt "Short for Today"
 #~ msgid "Today"
