@@ -25,6 +25,7 @@ FutureDaysPoints::FutureDaysPoints(const std::shared_ptr<FutureDays> &futureDays
         for (int dayIndex = 0; dayIndex < m_futureDays->columnCount(); ++dayIndex) {
             QVariant minTempVariant = m_futureDays->data(m_futureDays->index(dayTimeIndex, dayIndex), FutureDays::LowTemp);
             QVariant maxTempVariant = m_futureDays->data(m_futureDays->index(dayTimeIndex, dayIndex), FutureDays::HighTemp);
+            QVariant generalTempVariant = m_futureDays->data(m_futureDays->index(dayTimeIndex, dayIndex), FutureDays::GeneralTemp);
 
             // Calculate min and max values according to what data ion provides
             if (minTempVariant.canConvert<qreal>() && maxTempVariant.canConvert<qreal>()) {
@@ -39,6 +40,9 @@ FutureDaysPoints::FutureDaysPoints(const std::shared_ptr<FutureDays> &futureDays
                 minTemp = std::min(maxTempVariant.toReal(), minTemp);
                 maxTemp = std::max(maxTempVariant.toReal(), maxTemp);
                 m_highLowTempPresent = true;
+            } else if (generalTempVariant.canConvert<qreal>()) {
+                minTemp = std::min(generalTempVariant.toReal(), minTemp);
+                maxTemp = std::max(generalTempVariant.toReal(), maxTemp);
             }
         }
     }
@@ -101,6 +105,7 @@ QVariant FutureDaysPoints::data(const QModelIndex &index, int role) const
 QVariant FutureDaysPoints::displayTemperature(int dayIndex, RowsData row) const
 {
     switch (row) {
+    case GeneralTemp:
     case HighTemp:
     case LowTemp:
         return aggregatedValue(dayIndex, row);
@@ -142,6 +147,17 @@ QVariant FutureDaysPoints::aggregatedValue(int dayIndex, RowsData row) const
 
         if (day.canConvert<qreal>() && night.canConvert<qreal>()) {
             return std::min(day.toReal(), night.toReal());
+        }
+
+        return day.canConvert<qreal>() ? day : night;
+    }
+
+    case GeneralTemp: {
+        QVariant day = m_futureDays->data(dayModelIndex, FutureDays::GeneralTemp);
+        QVariant night = m_futureDays->data(nightModelIndex, FutureDays::GeneralTemp);
+
+        if (day.canConvert<qreal>() && night.canConvert<qreal>()) {
+            return std::midpoint(day.toReal(), night.toReal());
         }
 
         return day.canConvert<qreal>() ? day : night;
@@ -235,6 +251,7 @@ QHash<int, QByteArray> FutureDays::roleNames() const
     roles[Condition] = "condition";
     roles[HighTemp] = "highTemp";
     roles[LowTemp] = "lowTemp";
+    roles[GeneralTemp] = "generalTemp";
     roles[ConditionProbability] = "conditionProbability";
     return roles;
 }
@@ -316,6 +333,8 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
             return forecast->highTemp().has_value() ? *forecast->highTemp() : QVariant();
         case LowTemp:
             return forecast->lowTemp().has_value() ? *forecast->lowTemp() : QVariant();
+        case GeneralTemp:
+            return forecast->generalTemp().has_value() ? *forecast->generalTemp() : QVariant();
         case ConditionProbability:
             return forecast->conditionProbability().has_value() ? *forecast->conditionProbability() : QVariant();
         }
@@ -335,6 +354,8 @@ QVariant FutureDays::data(const QModelIndex &index, int role) const
             return forecast->highTemp().has_value() ? *forecast->highTemp() : QVariant();
         case LowTemp:
             return forecast->lowTemp().has_value() ? *forecast->lowTemp() : QVariant();
+        case GeneralTemp:
+            return forecast->generalTemp().has_value() ? *forecast->generalTemp() : QVariant();
         case ConditionProbability:
             return forecast->conditionProbability().has_value() ? *forecast->conditionProbability() : QVariant();
         }
@@ -479,6 +500,11 @@ std::optional<qreal> FutureForecast::lowTemp() const
     return m_lowTemp;
 }
 
+std::optional<qreal> FutureForecast::generalTemp() const
+{
+    return m_generalTemp;
+}
+
 std::optional<qreal> FutureForecast::conditionProbability() const
 {
     return m_conditionProbability;
@@ -502,6 +528,11 @@ void FutureForecast::setHighTemp(qreal highTemp)
 void FutureForecast::setLowTemp(qreal lowTemp)
 {
     m_lowTemp = lowTemp;
+}
+
+void FutureForecast::setGeneralTemp(qreal generalTemp)
+{
+    m_generalTemp = generalTemp;
 }
 
 void FutureForecast::setConditionProbability(qreal conditionProbability)
