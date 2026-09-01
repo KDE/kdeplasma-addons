@@ -104,3 +104,60 @@ private:
 
     bool m_hasProbability;
 };
+
+class PLASMAWEATHERDATA_EXPORT FutureHoursPoints : public QAbstractTableModel
+{
+    Q_OBJECT
+    QML_ANONYMOUS
+
+    Q_PROPERTY(bool highLowTempPresent READ highLowTempPresent CONSTANT)
+    Q_PROPERTY(bool hasProbability READ hasProbability CONSTANT)
+    Q_PROPERTY(int totalHours READ totalHours CONSTANT)
+    Q_PROPERTY(int hoursPerDay READ hoursPerDay CONSTANT)
+    Q_PROPERTY(int totalDays READ totalDays CONSTANT)
+    Q_PROPERTY(QDateTime minDate READ minDate CONSTANT)
+    Q_PROPERTY(QDateTime maxDate READ maxDate CONSTANT)
+    Q_PROPERTY(qreal minTemp READ minTemp CONSTANT)
+    Q_PROPERTY(qreal maxTemp READ maxTemp CONSTANT)
+
+public:
+    enum RowsData {
+        Timestamp = 0,
+        HighTemp,
+        LowTemp,
+        ConditionProbability,
+        EndRow,
+    };
+
+    Q_ENUM(RowsData)
+
+    explicit FutureHoursPoints(const std::shared_ptr<FutureHours> &futureHours, QObject *parent = nullptr);
+    ~FutureHoursPoints() override;
+
+    int rowCount(const QModelIndex &parent = QModelIndex()) const override;
+    int columnCount(const QModelIndex &parent = QModelIndex()) const override;
+
+    QVariant data(const QModelIndex &index, int role) const override;
+
+    Q_INVOKABLE QVariant displayTemperature(int dayIndex, RowsData row) const;
+    Q_INVOKABLE QVariant displayConditionProbability(int dayIndex) const;
+
+private:
+    bool highLowTempPresent() const;
+    bool hasProbability() const;
+    int totalHours() const;
+    int hoursPerDay() const;
+    int totalDays() const;
+    QDateTime minDate() const;
+    QDateTime maxDate() const;
+    qreal minTemp() const;
+    qreal maxTemp() const;
+
+private:
+    bool m_highLowTempPresent;
+
+    qreal m_minTemp;
+    qreal m_maxTemp;
+
+    std::shared_ptr<FutureHours> m_futureHours;
+};
