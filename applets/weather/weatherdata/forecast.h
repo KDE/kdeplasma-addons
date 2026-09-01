@@ -10,6 +10,7 @@
 
 #include "currentday.h"
 #include "futuredays.h"
+#include "futurehours.h"
 #include "lastday.h"
 #include "lastobservation.h"
 #include "metadata.h"
@@ -41,6 +42,7 @@ class PLASMAWEATHERDATA_EXPORT Forecast
 
     Q_PROPERTY(Warnings *warnings READ warnings CONSTANT)
     Q_PROPERTY(FutureDays *futureDays READ futureDays CONSTANT)
+    Q_PROPERTY(FutureHours *futureHours READ futureHours CONSTANT)
 
 public:
     Forecast();
@@ -53,6 +55,7 @@ public:
     QVariant lastDay() const;
     QVariant lastObservation() const;
     FutureDays *futureDays() const;
+    FutureHours *futureHours() const;
     Warnings *warnings() const;
 
     void setError();
@@ -62,6 +65,7 @@ public:
     void setLastDay(const LastDay &lastDay);
     void setLastObservation(const LastObservation &lastObservation);
     void setFutureDays(std::shared_ptr<FutureDays> nextDays);
+    void setFutureHours(std::shared_ptr<FutureHours> futureHours);
     void setWarnings(std::shared_ptr<Warnings> warnings);
 
 private:
@@ -73,6 +77,7 @@ private:
     std::optional<LastDay> m_lastDay;
     std::optional<LastObservation> m_lastObservation;
     std::shared_ptr<FutureDays> m_futureDays;
+    std::shared_ptr<FutureHours> m_futureHours;
     std::shared_ptr<Warnings> m_warnings;
 };
 
