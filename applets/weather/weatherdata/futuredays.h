@@ -28,12 +28,14 @@ public:
     std::optional<QString> condition() const;
     std::optional<qreal> highTemp() const;
     std::optional<qreal> lowTemp() const;
+    std::optional<qreal> generalTemp() const;
     std::optional<qreal> conditionProbability() const;
 
     void setConditionIcon(const QString &conditionIcon);
     void setCondition(const QString &condition);
     void setHighTemp(qreal highTemp);
     void setLowTemp(qreal lowTemp);
+    void setGeneralTemp(qreal generalTemp);
     void setConditionProbability(qreal conditionProbability);
 
 private:
@@ -41,6 +43,7 @@ private:
     std::optional<QString> m_condition;
     std::optional<qreal> m_highTemp;
     std::optional<qreal> m_lowTemp;
+    std::optional<qreal> m_generalTemp;
     std::optional<qreal> m_conditionProbability;
 };
 
@@ -80,6 +83,7 @@ private:
  * condition: free text string for weather condition, optional
  * highTemp: number of highest temperature (using general unit), optional
  * lowTemp: number of lowest temperature (using general unit), optional
+ * generalTemp: number of general temperature (use if separate low and high temp is not present) (using general unit).
  * conditionProbability: chance of conditions to happen, optional
  */
 class PLASMAWEATHERDATA_EXPORT FutureDays : public QAbstractTableModel
@@ -101,6 +105,7 @@ public:
         Condition,
         HighTemp,
         LowTemp,
+        GeneralTemp,
         ConditionProbability,
     };
 
@@ -145,6 +150,13 @@ private:
     int m_totalRows;
 };
 
+struct FutureDaysForeign {
+    Q_GADGET
+    QML_FOREIGN(FutureDays)
+    QML_NAMED_ELEMENT(FutureDays)
+    QML_UNCREATABLE("Enums only")
+};
+
 class PLASMAWEATHERDATA_EXPORT FutureDaysPoints : public QAbstractTableModel
 {
     Q_OBJECT
@@ -161,6 +173,7 @@ class PLASMAWEATHERDATA_EXPORT FutureDaysPoints : public QAbstractTableModel
 public:
     enum RowsData {
         Timestamp = 0,
+        GeneralTemp,
         HighTemp,
         LowTemp,
         ConditionProbability,
@@ -198,4 +211,11 @@ private:
     qreal m_maxTemp;
 
     std::shared_ptr<FutureDays> m_futureDays;
+};
+
+struct FutureDaysPointsForeign {
+    Q_GADGET
+    QML_FOREIGN(FutureDaysPoints)
+    QML_NAMED_ELEMENT(FutureDaysPoints)
+    QML_UNCREATABLE("Enums only")
 };
