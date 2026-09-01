@@ -12,14 +12,15 @@
 
 #include <KSharedConfig>
 
+#include "provider/nepalicalendar.h"
 #include "provider/qtcalendar.h"
 #if HAVE_ICU
 #include "provider/chinesecalendar.h"
+#include "provider/ethiopiancalendar.h"
 #include "provider/hebrewcalendar.h"
 #include "provider/indiancalendar.h"
 #include "provider/islamiccalendar.h"
 #include "provider/vietnamesecalendar.h"
-#include "provider/ethiopiancalendar.h"
 #endif
 
 using namespace Qt::StringLiterals;
@@ -82,6 +83,9 @@ void AlternateCalendarPlugin::loadEventsForDateRange(const QDate &startDate, con
     case CalendarSystem::Julian:
     case CalendarSystem::Milankovic:
         m_provider = new QtCalendarProvider(this, m_calendarSystem, startDate, endDate, m_dateOffset);
+        break;
+    case CalendarSystem::BikramSambat:
+        m_provider = new NepaliCalendarProvider(this, m_calendarSystem, startDate, endDate);
         break;
     default:
         m_provider = new AbstractCalendarProvider(this, m_calendarSystem, startDate, endDate, m_dateOffset);

@@ -6,6 +6,7 @@ set(alternatecalendar_LIB_SRCS
     alternatecalendarplugin.cpp
     calendarsystem.h
     provider/abstractcalendarprovider.cpp
+    provider/nepalicalendar.cpp
     provider/qtcalendar.cpp
 )
 
