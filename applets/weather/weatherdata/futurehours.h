@@ -110,6 +110,13 @@ private:
     bool m_hasProbability;
 };
 
+struct FutureHoursForeign {
+    Q_GADGET
+    QML_FOREIGN(FutureHours)
+    QML_NAMED_ELEMENT(FutureHours)
+    QML_UNCREATABLE("Enums only")
+};
+
 class PLASMAWEATHERDATA_EXPORT FutureHoursPoints : public QAbstractTableModel
 {
     Q_OBJECT
@@ -166,4 +173,11 @@ private:
     qreal m_maxTemp;
 
     std::shared_ptr<FutureHours> m_futureHours;
+};
+
+struct FutureHoursPointsForeign {
+    Q_GADGET
+    QML_FOREIGN(FutureHoursPoints)
+    QML_NAMED_ELEMENT(FutureHoursPoints)
+    QML_UNCREATABLE("Enums only")
 };
