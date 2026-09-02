@@ -850,34 +850,3 @@ msgstr "Svært høg"
 #, kde-format
 msgid "Extreme"
 msgstr "Ekstrem"
-
-#~ msgid "Today"
-#~ msgstr "I dag"
-
-#~ msgctxt "Short for Saturday"
-#~ msgid "Sat"
-#~ msgstr "la."
-
-#~ msgctxt "Short for Sunday"
-#~ msgid "Sun"
-#~ msgstr "su."
-
-#~ msgctxt "Short for Monday"
-#~ msgid "Mon"
-#~ msgstr "må."
-
-#~ msgctxt "Short for Tuesday"
-#~ msgid "Tue"
-#~ msgstr "ty."
-
-#~ msgctxt "Short for Wednesday"
-#~ msgid "Wed"
-#~ msgstr "on."
-
-#~ msgctxt "Short for Thursday"
-#~ msgid "Thu"
-#~ msgstr "to."
-
-#~ msgctxt "Short for Friday"
-#~ msgid "Fri"
-#~ msgstr "fr."

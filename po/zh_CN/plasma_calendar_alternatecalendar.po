@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-07 00:44+0000\n"
+"POT-Creation-Date: 2026-09-02 00:45+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -18,25 +18,25 @@ msgstr ""
 "plasma_calendar_alternatecalendar.pot\n"
 "X-Crowdin-File-ID: 42621\n"
 
-#: calendarsystem.h:52
+#: calendarsystem.h:53
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Julian"
 msgstr "儒略历"
 
-#: calendarsystem.h:56
+#: calendarsystem.h:57
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Milankovic"
 msgstr "儒略改革历"
 
-#: calendarsystem.h:60
+#: calendarsystem.h:61
 #, kde-format
 msgctxt "@item:inlist"
 msgid "The Solar Hijri Calendar (Persian)"
 msgstr "波斯历"
 
-#: calendarsystem.h:64
+#: calendarsystem.h:65
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -44,7 +44,7 @@ msgctxt ""
 msgid "Islamic Calendar (Astronomical)"
 msgstr "伊斯兰历 (天文)"
 
-#: calendarsystem.h:68
+#: calendarsystem.h:69
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -52,7 +52,7 @@ msgctxt ""
 msgid "The Islamic Civil Calendar (Tabular)"
 msgstr "伊斯兰历 (算表)"
 
-#: calendarsystem.h:72
+#: calendarsystem.h:73
 #, kde-format
 msgctxt ""
 "@item:inlist See https://cldr.unicode.org/development/development-process/"
@@ -60,35 +60,41 @@ msgctxt ""
 msgid "Islamic Calendar (Umm al-Qura)"
 msgstr "伊斯兰历 (沙特)"
 
-#: calendarsystem.h:76
+#: calendarsystem.h:77
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Chinese Lunar Calendar"
 msgstr "中国农历"
 
-#: calendarsystem.h:80
+#: calendarsystem.h:81
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Indian National Calendar"
 msgstr "印度国定历"
 
-#: calendarsystem.h:84
+#: calendarsystem.h:85
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Hebrew Calendar"
 msgstr "希伯来历"
 
-#: calendarsystem.h:88
+#: calendarsystem.h:89
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Vietnamese Lunar Calendar"
 msgstr "越南阴历"
 
-#: calendarsystem.h:92
+#: calendarsystem.h:93
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Ethiopian Calendar"
 msgstr "埃塞俄比亚日历"
+
+#: calendarsystem.h:97
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Bikram Sambat"
+msgstr ""
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -153,6 +159,20 @@ msgctxt ""
 "Islamic calendar date in Arabic"
 msgid "%1 %2, %3 (%4)"
 msgstr "%3 年 %2 %1 日 (%4)"
+
+#: provider/nepalicalendar.cpp:258
+#, kde-format
+msgctxt "@label date outside the officially published Bikram Sambat range"
+msgid " (approx.)"
+msgstr ""
+
+#: provider/nepalicalendar.cpp:261
+#, fuzzy, kde-format
+#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
+#| msgid "%1 %2, %3"
+msgctxt "@label %1 Day number %2 Month name in Bikram Sambat %3 Year number"
+msgid "%1 %2, %3"
+msgstr "%3 年 %2 %1 日"
 
 #: provider/qtcalendar.cpp:55
 #, kde-format
