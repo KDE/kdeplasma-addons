@@ -61,12 +61,6 @@ IonControl::~IonControl()
         m_fetchThread.reset();
     }
 
-    qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << " process events";
-
-    // Check for pending events before destroying, as m_fetchThread may still
-    // have queued events that could cause a crash.
-    thread()->eventDispatcher()->processEvents(QEventLoop::AllEvents);
-
     qCDebug(WEATHER::CONTROLLER) << "IonControl " << m_ionName << ": destroyed";
 }
 
