@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-02 00:45+0000\n"
-"PO-Revision-Date: 2026-07-07 18:08+0400\n"
+"PO-Revision-Date: 2026-09-02 19:52+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: calendarsystem.h:53
 #, kde-format
@@ -94,7 +94,7 @@ msgstr "التقويم الإثيوبي"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Bikram Sambat"
-msgstr ""
+msgstr "بيكرام سامبات"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -173,15 +173,13 @@ msgstr "‏%1 %2، %3‏ ‏(%4)"
 #, kde-format
 msgctxt "@label date outside the officially published Bikram Sambat range"
 msgid " (approx.)"
-msgstr ""
+msgstr " (تقريبًا.)"
 
 #: provider/nepalicalendar.cpp:261
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#, kde-format
 msgctxt "@label %1 Day number %2 Month name in Bikram Sambat %3 Year number"
 msgid "%1 %2, %3"
-msgstr "‏%1 %2، %3"
+msgstr "%1 %2، %3"
 
 #: provider/qtcalendar.cpp:55
 #, kde-format

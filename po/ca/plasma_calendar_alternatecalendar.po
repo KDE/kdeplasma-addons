@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2022, 2023, 2026 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2022-2023, 2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-02 00:45+0000\n"
-"PO-Revision-Date: 2026-07-07 10:08+0200\n"
+"PO-Revision-Date: 2026-09-02 08:45+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -95,7 +95,7 @@ msgstr "Calendari etiòpic"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Bikram Sambat"
-msgstr ""
+msgstr "Bikram Sambat"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -170,12 +170,10 @@ msgstr "%1 de %2 de %3 (%4)"
 #, kde-format
 msgctxt "@label date outside the officially published Bikram Sambat range"
 msgid " (approx.)"
-msgstr ""
+msgstr " (aprox.)"
 
 #: provider/nepalicalendar.cpp:261
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#, kde-format
 msgctxt "@label %1 Day number %2 Month name in Bikram Sambat %3 Year number"
 msgid "%1 %2, %3"
 msgstr "%1 de %2 de %3"
