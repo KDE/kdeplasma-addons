@@ -4,7 +4,7 @@
 #
 # SPDX-FileCopyrightText: 2008, 2010, 2016, 2018, 2020, 2023 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2009 Joan Maspons <joanmaspons@gmail.com>
-# SPDX-FileCopyrightText: 2015, 2020, 2021 Antoni Bella Pérez <antonibella5@yahoo.com>
+# SPDX-FileCopyrightText: 2015, 2020-2021 Antoni Bella Pérez <antonibella5@yahoo.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"

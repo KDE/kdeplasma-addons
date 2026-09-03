@@ -3,7 +3,7 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2022, 2023, 2026 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2022-2023, 2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
@@ -151,8 +151,3 @@ msgstr "%1 de %2 de %3 (%4)"
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
 msgstr "%1 de %2 de %3"
-
-#~ msgctxt ""
-#~ "%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
-#~ msgid "%1 %2, %3"
-#~ msgstr "%1 de %2 de %3"
