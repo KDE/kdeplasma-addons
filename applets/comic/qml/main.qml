@@ -84,42 +84,42 @@ PlasmoidItem {
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.currentTabHighlighted
             visible: Plasmoid.configuration.checkNewComicStripsIntervall
-            text: i18nc("@action comic strip", "&Next Tab with a New Strip") // qmllint disable unqualified
+            text: i18nc("@action comic strip", "&Next Tab with a New Strip")
             icon.name: "go-next-view"
             shortcut: StandardKey.New
             onTriggered: mainWindow.showNextNewStripRequested()
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.comicData.hasFirst
-            text: i18nc("@action", "Jump to &First Strip") // qmllint disable unqualified
+            text: i18nc("@action", "Jump to &First Strip")
             icon.name: "go-first"
             onTriggered: mainWindow.updateComic(mainWindow.comicData.first)
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@action", "Jump to &Current Strip") // qmllint disable unqualified
+            text: i18nc("@action", "Jump to &Current Strip")
             icon.name: "go-last"
             onTriggered: mainWindow.updateComic("")
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@action", "Jump to Strip…") // qmllint disable unqualified
+            text: i18nc("@action", "Jump to Strip…")
             icon.name: "go-jump"
             onTriggered: jumpDialog.open()
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@action", "Visit the Website") // qmllint disable unqualified
+            text: i18nc("@action", "Visit the Website")
             onTriggered: mainWindow.comicData.launchWebsite()
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready && mainWindow.comicData.shopUrl.toString() !== ""
-            text: i18nc("@action", "Visit the Shop &Website") // qmllint disable unqualified
+            text: i18nc("@action", "Visit the Shop &Website")
             onTriggered: mainWindow.comicData.launchShop()
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@action", "&Save Comic As…") // qmllint disable unqualified
+            text: i18nc("@action", "&Save Comic As…")
             icon.name: "document-save-as"
             onTriggered: {
                 saveDialog.checkCurrentFolder()
@@ -128,7 +128,7 @@ PlasmoidItem {
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@option:check Context menu of comic image", "&Actual Size") // qmllint disable unqualified
+            text: i18nc("@option:check Context menu of comic image", "&Actual Size")
             icon.name: "zoom-original"
             checkable: true
             checked: Plasmoid.showActualSize ?? false
@@ -136,7 +136,7 @@ PlasmoidItem {
         },
         PlasmaCore.Action {
             enabled: mainWindow.comicData.id != "" && mainWindow.comicData.ready
-            text: i18nc("@option:check Context menu of comic image", "Store Current &Position") // qmllint disable unqualified
+            text: i18nc("@option:check Context menu of comic image", "Store Current &Position")
             icon.name: "go-home"
             checkable: true
             checked: mainWindow.comicData.storePosition ?? false
@@ -285,10 +285,10 @@ PlasmoidItem {
                 Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
                 visible: Plasmoid.configuration.tabIdentifier.length === 0 && fitsInWidget
                 iconName: "folder-comic-symbolic"
-                text: i18nc("@info placeholdermessage if no comics loaded", "No comics configured") // qmllint disable unqualified
+                text: i18nc("@info placeholdermessage if no comics loaded", "No comics configured")
                 helpfulAction: Kirigami.Action {
                     icon.name: "configure"
-                    text: i18nc("@action:button helpfulAction opens settings dialog", "Choose comic…") // qmllint disable unqualified
+                    text: i18nc("@action:button helpfulAction opens settings dialog", "Choose comic…")
                     onTriggered: Plasmoid.internalAction("configure").trigger();
                 }
             }
@@ -299,7 +299,7 @@ PlasmoidItem {
         id: saveDialog
         fileMode: FileDialog.SaveFile
         defaultSuffix: "png"
-        currentFile: i18nc("@other filename pattern %1 path %2 comic (provider) name, %3 image id", "%1/%2 - %3.png", currentFolder, mainWindow.comicData.title, mainWindow.comicData.currentReadable)  // qmllint disable unqualified
+        currentFile: i18nc("@other filename pattern %1 path %2 comic (provider) name, %3 image id", "%1/%2 - %3.png", currentFolder, mainWindow.comicData.title, mainWindow.comicData.currentReadable)
 
         property list<string> paths: [
             Plasmoid.configuration.savingDir,

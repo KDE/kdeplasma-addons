@@ -60,7 +60,7 @@ Item {
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: idLabelArea
-                mainText: i18nc("@info:tooltip", "Jump to strip…") // qmllint disable unqualified
+                mainText: i18nc("@info:tooltip", "Jump to strip…")
             }
         }
     }
@@ -100,7 +100,7 @@ Item {
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: idUrlLabelArea
-                mainText: i18nc("@info:tooltip", "Visit the comic website")  // qmllint disable unqualified
+                mainText: i18nc("@info:tooltip", "Visit the comic website")
             }
         }
     }
