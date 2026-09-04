@@ -14,9 +14,6 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kirigami as Kirigami
-import org.kde.kcmutils as KCMUtils
-import org.kde.config as KConfig
-import org.kde.kwindowsystem
 
 PlasmoidItem {
     id: root
@@ -178,26 +175,15 @@ PlasmoidItem {
                 opacity: 0
                 iconName: "edit-none"
 
-                readonly property bool compositingActive: KWindowSystem.isPlatformWayland || KX11Extras.compositingActive
+                text: i18nc("@info:usagetip", "No colors")
 
-                text: compositingActive ? i18nc("@info:usagetip", "No colors") : i18nc("@info:status when color picking is unavailable", "Color picking unavailable when compositing is disabled")
-                explanation: compositingActive ? "" : i18nc("@info:status when color pick is unavailable", "Compositing has been manually disabled or blocked by a running application")
-
-                helpfulAction: compositingActive ? pickColorAction : enableCompositingAction
+                helpfulAction: pickColorAction
 
                 QQC2.Action {
                     id: pickColorAction
                     icon.name: "color-picker"
                     text: i18nc("@action:button", "Pick Color")
                     onTriggered: root.pickColor()
-                }
-
-                QQC2.Action {
-                    id: enableCompositingAction
-                    enabled: KConfig.KAuthorized.authorizeControlModule("kwincompositing")
-                    icon.name: "settings-configure"
-                    text: i18nc("@action:button open kwincompositing KCM", "Configure Compositing")
-                    onTriggered: KCMUtils.KCMLauncher.openSystemSettings("kwincompositing")
                 }
 
                 NumberAnimation {
