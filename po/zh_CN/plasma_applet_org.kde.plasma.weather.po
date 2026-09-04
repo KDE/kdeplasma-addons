@@ -841,34 +841,3 @@ msgstr "很高"
 #, kde-format
 msgid "Extreme"
 msgstr "极高"
-
-#~ msgid "Today"
-#~ msgstr "今天"
-
-#~ msgctxt "Short for Saturday"
-#~ msgid "Sat"
-#~ msgstr "周六"
-
-#~ msgctxt "Short for Sunday"
-#~ msgid "Sun"
-#~ msgstr "周日"
-
-#~ msgctxt "Short for Monday"
-#~ msgid "Mon"
-#~ msgstr "周一"
-
-#~ msgctxt "Short for Tuesday"
-#~ msgid "Tue"
-#~ msgstr "周二"
-
-#~ msgctxt "Short for Wednesday"
-#~ msgid "Wed"
-#~ msgstr "周三"
-
-#~ msgctxt "Short for Thursday"
-#~ msgid "Thu"
-#~ msgstr "周四"
-
-#~ msgctxt "Short for Friday"
-#~ msgid "Fri"
-#~ msgstr "周五"
