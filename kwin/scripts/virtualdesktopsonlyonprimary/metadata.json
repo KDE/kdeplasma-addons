@@ -112,7 +112,7 @@
         "Name[ta]": "பிரதான திரையில் மட்டும் மெய்நிகர் பணிமேடைகள்",
         "Name[tr]": "Sanal Masaüstleri Yalnızca Ana Ekranda",
         "Name[uk]": "Віртуальні стільниці лише на основному",
-        "Name[zh_CN]": "仅在主屏幕的虚拟桌面",
+        "Name[zh_CN]": "虚拟桌面仅在主屏幕生效",
         "Name[zh_TW]": "虛擬桌面僅限主螢幕"
     },
     "X-Plasma-API": "javascript"
