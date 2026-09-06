@@ -26,7 +26,8 @@ Loader {
     readonly property bool vertical: Plasmoid.formFactor == PlasmaCore.Types.Vertical
     readonly property bool showTemperature: Plasmoid.configuration.showTemperatureInCompactMode
 
-    readonly property bool needsToBeSquare: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment) || (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
+    readonly property bool needsToBeSquare: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment)
+        || (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
     readonly property bool useBadge: Plasmoid.configuration.showTemperatureInBadge || needsToBeSquare
 
     sourceComponent: (compactRoot.isTemperaturePresent && compactRoot.showTemperature && !compactRoot.useBadge) ? iconAndTextComponent : iconComponent
@@ -70,7 +71,7 @@ Loader {
 
                 visible: compactRoot.isTemperaturePresent && showTemperature && useBadge && text.length > 0
 
-                text: compactRoot.isTemperaturePresent ? Util.temperatureToDisplayString(compactRoot.displayTemperatureUnit, compactRoot.lastObservation.temperature, compactRoot.metaData.temperatureUnit, true, false) : ""
+                text: compactRoot.isTemperaturePresent ? Util.temperatureToDisplayString(compactRoot.displayTemperatureUnit, compactRoot.lastObservation.temperature, compactRoot.metaData.temperatureUnit, true, false) : "";
                 icon: parent
 
                 // Non-default state to center if the badge is wider than the icon
@@ -96,7 +97,7 @@ Loader {
             iconSource: Plasmoid.icon
             fallback: Util.unknownWeatherIcon
             active: compactMouseArea.containsMouse
-            text: compactRoot.isTemperaturePresent ? Util.temperatureToDisplayString(compactRoot.displayTemperatureUnit, compactRoot.lastObservation.temperature, compactRoot.metaData.temperatureUnit, true, false) : ""
+            text: compactRoot.isTemperaturePresent ? Util.temperatureToDisplayString(compactRoot.displayTemperatureUnit, compactRoot.lastObservation.temperature, compactRoot.metaData.temperatureUnit, true, false) : "";
         }
     }
 }
