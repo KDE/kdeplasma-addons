@@ -1,0 +1,261 @@
+/*
+ * SPDX-FileCopyrightText: 2026 Bohdan Onofriichuk <bogdan.onofriuchuk@gmail.com>
+ *
+ * SPDX-License-Identifier: GPL-2.0-or-later
+ */
+
+import QtQuick
+import QtQuick.Layouts
+
+import org.kde.kirigami as Kirigami
+
+import org.kde.plasma.weatherdata as WeatherData
+
+ColumnLayout {
+    id: root
+
+    property var metaData: null
+    property var futureDaysPoints: null
+
+    property int invalidUnit: 0
+    property int displayTemperatureUnit: 0
+
+    property int horizontalLabelsCount: 5
+    property int verticalLabelsCount: 4
+
+    readonly property real minimalSpacing: Kirigami.Units.largeSpacing
+
+    readonly property real preferredGraphHeight: Kirigami.Units.gridUnit * 6
+
+    readonly property int dateTimeSection: WeatherData.FutureDaysPoints.Timestamp
+
+    readonly property int daysCount: futureDaysPoints?.daysNumber ?? 0
+
+    property int currentIndex: 0
+
+    property list<ForecastGraph.SeriesDefinition> seriesDefinitions: [
+        ForecastGraph.SeriesDefinition {
+            name: "generalTemp"
+            visible: !root.futureDaysPoints?.highLowTempPresent
+            color: "red"
+            ySection: WeatherData.FutureDaysPoints.GeneralTemp
+            legendText: i18nc("@label", "Temperature")
+            labelTextFunc: function (pointIndex) {
+                if (!root.futureDaysPoints) {
+                    return "";
+                }
+                const generalTemp = root.futureDaysPoints.displayTemperature(pointIndex, ySection);
+                if (isNaN(generalTemp)) {
+                    return "";
+                }
+                return Util.temperatureToDisplayString(root.displayTemperatureUnit, generalTemp, root.metaData.temperatureUnit);
+            }
+        },
+        ForecastGraph.SeriesDefinition {
+            name: "highTemp"
+            visible: root.futureDaysPoints?.highLowTempPresent ?? false
+            color: "red"
+            ySection: WeatherData.FutureDaysPoints.HighTemp
+            legendText: i18nc("@label", "High Temperature")
+            labelTextFunc: function (pointIndex) {
+                if (!root.futureDaysPoints) {
+                    return "";
+                }
+                const highTemp = root.futureDaysPoints.displayTemperature(pointIndex, ySection);
+                if (isNaN(highTemp)) {
+                    return "";
+                }
+                return Util.temperatureToDisplayString(root.displayTemperatureUnit, highTemp, root.metaData.temperatureUnit);
+            }
+        },
+        ForecastGraph.SeriesDefinition {
+            name: "lowTemp"
+            visible: root.futureDaysPoints?.highLowTempPresent ?? false
+            color: "orange"
+            ySection: WeatherData.FutureDaysPoints.LowTemp
+            legendText: i18nc("@label", "Low Temperature")
+            labelTextFunc: function (pointIndex) {
+                if (!root.futureDaysPoints) {
+                    return "";
+                }
+                const lowTemp = root.futureDaysPoints.displayTemperature(pointIndex, ySection);
+                if (isNaN(lowTemp)) {
+                    return "";
+                }
+                return Util.temperatureToDisplayString(root.displayTemperatureUnit, lowTemp, root.metaData.temperatureUnit);
+            }
+        },
+        ForecastGraph.SeriesDefinition {
+            name: "probability"
+            visible: root.futureDaysPoints?.hasProbability ?? false
+            color: "deepskyblue"
+            ySection: WeatherData.FutureDaysPoints.ConditionProbability
+            legendText: i18nc("@label", "Chance of precipitation")
+            labelTextFunc: function (pointIndex) {
+                if (!root.futureDaysPoints) {
+                    return "";
+                }
+                const conditionProbability = root.futureDaysPoints.displayConditionProbability(pointIndex);
+                if (isNaN(conditionProbability)) {
+                    return "";
+                }
+                return Util.percentToDisplayString(conditionProbability);
+            }
+        }
+    ]
+
+    RowLayout {
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+
+        spacing: root.minimalSpacing
+
+        // Use custom graph labels because GraphView does not support custom label sizing
+        // or displaying labels on both sides of the graph.
+        ForecastGraphLabels {
+            id: tempLabels
+            Layout.fillHeight: true
+            Layout.topMargin: forecastLine.timestampLabelHeight + forecastGraph.marginTop
+            Layout.bottomMargin: forecastGraph.marginBottom
+            max: root.futureDaysPoints?.maxTemp ?? 0
+            min: root.futureDaysPoints?.minTemp ?? 0
+            labelsCount: root.verticalLabelsCount
+            formatter: function (temp) {
+                return !!root.metaData ? Util.temperatureToDisplayString(root.displayTemperatureUnit, temp, root.metaData.temperatureUnit) : "";
+            }
+        }
+
+        Item {
+            id: graphItem
+            Layout.fillWidth: true
+            Layout.fillHeight: true
+
+            // If the percentage labels are hidden, reserve the same space on the right
+            // as the temperature labels occupy on the left to keep the graph centered.
+            Layout.rightMargin: percentLabels.visible ? 0 : tempLabels.implicitWidth
+
+            implicitHeight: forecastGraph.implicitHeight + forecastLine.timestampLabelHeight
+
+            visible: !!root.futureDaysPoints
+
+            ForecastGraphLabels {
+                id: dateLabels
+                height: forecastLine.timestampLabelHeight
+                anchors.right: forecastGraph.right
+                anchors.left: forecastGraph.left
+                anchors.bottom: forecastGraph.top
+                anchors.rightMargin: forecastGraph.marginRight
+                anchors.leftMargin: forecastGraph.marginLeft
+                max: forecastGraph.axisX.visualMax
+                min: forecastGraph.axisX.visualMin
+                labelsCount: root.horizontalLabelsCount
+                horizontal: true
+                spacing: root.minimalSpacing
+                visible: !forecastGraph.hovered
+                formatter: function (timestamp) {
+                    const date = new Date(timestamp);
+                    const format = Qt.locale().dateFormat(Locale.ShortFormat);
+                    return Qt.formatDateTime(date, format);
+                }
+            }
+
+            // Use a custom graph grid because DateTimeAxis does not allow
+            // arbitrary tick positioning, causing labels to not align with the grid.
+            ForecastGraphGrid {
+                anchors.fill: forecastGraph
+                anchors.topMargin: forecastGraph.marginTop
+                anchors.bottomMargin: forecastGraph.marginBottom
+                anchors.rightMargin: forecastGraph.marginRight
+                anchors.leftMargin: forecastGraph.marginLeft
+
+                horizontalLinesNumber: root.verticalLabelsCount
+                verticalLinesNumber: root.horizontalLabelsCount
+            }
+
+            ForecastGraph {
+                id: forecastGraph
+                anchors.topMargin: forecastLine.timestampLabelHeight
+
+                anchors.fill: parent
+
+                implicitHeight: root.preferredGraphHeight + marginTop + marginBottom
+
+                marginLeft: root.minimalSpacing
+                marginRight: marginLeft
+
+                xModelRow: root.dateTimeSection
+
+                forecastSeries: root.seriesDefinitions
+
+                metaData: root.metaData
+
+                minDate: root.futureDaysPoints?.minDate ?? new Date()
+                maxDate: root.futureDaysPoints?.maxDate ?? new Date()
+
+                invalidUnit: root.invalidUnit
+                displayTemperatureUnit: root.displayTemperatureUnit
+
+                pointsModel: root.futureDaysPoints
+            }
+
+            ForecastGraphLine {
+                id: forecastLine
+
+                anchors.fill: parent
+
+                invalidUnit: root.invalidUnit
+                displayTemperatureUnit: root.displayTemperatureUnit
+
+                graphMarginLeft: forecastGraph.marginLeft
+                graphMarginRight: forecastGraph.marginRight
+                graphMarginBottom: forecastGraph.marginBottom
+                graphMarginTop: forecastGraph.marginTop
+
+                graphHovered: forecastGraph.hovered
+
+                graphVisualMaxX: forecastGraph.axisX.visualMax
+                graphVisualMinX: forecastGraph.axisX.visualMin
+
+                currentPointIndex: forecastGraph.currentPointIndex
+                currentPointDateX: forecastGraph.currentPointDateX
+                currentPointValues: forecastGraph.currentPointValues
+
+                seriesDefinitions: root.seriesDefinitions
+
+                formatter: function (timestamp) {
+                    const date = new Date(timestamp);
+                    const format = Qt.locale().dateFormat(Locale.ShortFormat);
+                    return Qt.formatDateTime(date, format);
+                }
+
+                hasProbability: root.futureDaysPoints?.hasProbability ?? false
+                highLowTempPresent: root.futureDaysPoints?.highLowTempPresent ?? false
+
+                maxTemp: root.futureDaysPoints?.maxTemp ?? 0
+                minTemp: root.futureDaysPoints?.minTemp ?? 0
+            }
+        }
+
+        ForecastGraphLabels {
+            id: percentLabels
+            Layout.fillHeight: true
+            Layout.topMargin: forecastLine.timestampLabelHeight + forecastGraph.marginTop
+            Layout.bottomMargin: forecastGraph.marginBottom
+            leftAlign: true
+            max: 100
+            min: 0
+            labelsCount: root.verticalLabelsCount
+            visible: root.futureDaysPoints?.hasProbability ?? false
+            formatter: function (conditionProbability) {
+                return Util.percentToDisplayString(conditionProbability);
+            }
+        }
+    }
+
+    ForecastGraphLegend {
+        Layout.alignment: Qt.AlignHCenter
+        Layout.bottomMargin: Kirigami.Units.largeSpacing
+
+        seriesDefinitions: root.seriesDefinitions
+    }
+}

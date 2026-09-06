@@ -38,7 +38,9 @@ ListView {
             Layout.alignment: Qt.AlignTop
             Layout.minimumWidth: implicitWidth
             implicitWidth: Kirigami.Units.iconSizes.smallMedium
-            source: (model.priority === Warnings.High) ? 'flag-red-symbolic' : (model.priority === Warnings.Medium) ? 'flag-yellow-symbolic' : 'flag-blue-symbolic'
+            source: (model.priority === Warnings.High) ? 'flag-red-symbolic' :
+                    (model.priority === Warnings.Medium) ? 'flag-yellow-symbolic' :
+                    'flag-blue-symbolic'
         }
 
         Kirigami.SelectableLabel {
@@ -59,7 +61,7 @@ ListView {
             text: i18nc("@action:button", "Show more information")
             display: PlasmaComponents.ToolButton.IconOnly
             onClicked: {
-                Qt.openUrlExternally(Qt.resolvedUrl(model.info));
+                Qt.openUrlExternally(Qt.resolvedUrl(model.info))
             }
         }
     }

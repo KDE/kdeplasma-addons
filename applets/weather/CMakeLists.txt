@@ -3,8 +3,6 @@
 
 add_definitions(-DTRANSLATION_DOMAIN=\"plasma_applet_org.kde.plasma.weather\")
 
-install(FILES wind-arrows.svgz DESTINATION ${PLASMA_DATA_INSTALL_DIR}/desktoptheme/default/weather/)
-
 add_subdirectory(weatherdata)
 add_subdirectory(ions)
 
@@ -37,17 +35,31 @@ plasma_add_applet(org.kde.plasma.weather
     QML_SOURCES
         qml/CompactRepresentation.qml
         qml/DetailsView.qml
-        qml/ForecastView.qml
+        qml/HourlyForecastCards.qml
+        qml/HourlyForecastGraph.qml
+        qml/ForecastNavigation.qml
+        qml/DayForecastCards.qml
+        qml/DayForecastGraph.qml
         qml/FullRepresentation.qml
         qml/IconAndTextItem.qml
         qml/main.qml
-        qml/NoticesView.qml
-        qml/SwitchPanel.qml
+        qml/WeatherPage.qml
+        qml/StackedView.qml
+        qml/TabbedView.qml
+        qml/WarningsPage.qml
         qml/TopPanel.qml
         qml/config/ConfigAppearance.qml
         qml/config/ConfigUnits.qml
         qml/config/ConfigWeatherStation.qml
         qml/config/config.qml
+        qml/cards/ForecastDelegate.qml
+        qml/cards/HourlyForecastList.qml
+        qml/graph/ForecastGraph.qml
+        qml/graph/ForecastGraphLine.qml
+        qml/graph/ForecastGraphLabels.qml
+        qml/graph/ForecastGraphLegend.qml
+        qml/graph/ForecastGraphGrid.qml
+        qml/graph/ForecastGraphSeries.qml
     CPP_SOURCES
         util.cpp
         abstractunitlistmodel.cpp
