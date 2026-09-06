@@ -8,10 +8,16 @@
 import QtQuick
 
 import org.kde.plasma.plasmoid
+import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
 
 PlasmoidItem {
     id: root
+
+    readonly property var backAction: Kirigami.Action {
+        onTriggered: (root.fullRepresentationItem as FullRepresentation).popStack()
+        enabled: (root.fullRepresentationItem as FullRepresentation)?.stackDepth > 1
+    }
 
     ForecastControl {
         id: forecastControl
@@ -169,8 +175,10 @@ PlasmoidItem {
     }
 
     fullRepresentation: FullRepresentation {
-
         status: root.status
+
+        showHourlyTemperatureGraph: Plasmoid.configuration.showHourlyTemperatureGraph
+        showDayTemperatureGraph: Plasmoid.configuration.showDayTemperatureGraph
 
         invalidUnit: root.invalidUnit
         displaySpeedUnit: root.displaySpeedUnit
@@ -179,7 +187,10 @@ PlasmoidItem {
         displayVisibilityUnit: root.displayVisibilityUnit
 
         station: forecastControl.forecast?.station
+        futureHours: forecastControl.forecast?.futureHours
+        futureHoursPoints: forecastControl.forecast?.futureHoursPoints
         futureDays: forecastControl.forecast?.futureDays
+        futureDaysPoints: forecastControl.forecast?.futureDaysPoints
         warnings: forecastControl.forecast?.warnings
         lastObservation: forecastControl.forecast?.lastObservation
         metaData: forecastControl.forecast?.metaData
