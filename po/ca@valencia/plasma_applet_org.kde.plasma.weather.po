@@ -3,8 +3,8 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2016, 2018, 2019, 2020, 2022, 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
-# SPDX-FileCopyrightText: 2018, 2020, 2021 Antoni Bella Pérez <antonibella5@yahoo.com>
+# SPDX-FileCopyrightText: 2016, 2018-2020, 2022-2025 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2018, 2020-2021 Antoni Bella Pérez <antonibella5@yahoo.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
@@ -851,42 +851,3 @@ msgstr "Molt alta"
 #, kde-format
 msgid "Extreme"
 msgstr "Extrema"
-
-#~ msgid "Today"
-#~ msgstr "Hui"
-
-#~ msgctxt "Short for Saturday"
-#~ msgid "Sat"
-#~ msgstr "Ds."
-
-#~ msgctxt "Short for Sunday"
-#~ msgid "Sun"
-#~ msgstr "Dg."
-
-#~ msgctxt "Short for Monday"
-#~ msgid "Mon"
-#~ msgstr "Dl."
-
-#~ msgctxt "Short for Tuesday"
-#~ msgid "Tue"
-#~ msgstr "Dt."
-
-#~ msgctxt "Short for Wednesday"
-#~ msgid "Wed"
-#~ msgstr "Dc."
-
-#~ msgctxt "Short for Thursday"
-#~ msgid "Thu"
-#~ msgstr "Dj."
-
-#~ msgctxt "Short for Friday"
-#~ msgid "Fri"
-#~ msgstr "Dv."
-
-#~ msgctxt "Short for Today"
-#~ msgid "Today"
-#~ msgstr "Hui"
-
-#~ msgctxt "Short for Tonight"
-#~ msgid "Tonight"
-#~ msgstr "Esta nit"
