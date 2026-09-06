@@ -28,7 +28,7 @@ Dependencies:
     'frameworks/solid': 'Frameworks/6.24'
     'frameworks/sonnet': 'Frameworks/6.24'
     'frameworks/kunitconversion': 'Frameworks/6.24'
-    'libraries/kirigami-addons': 'v1.11.0'
+    'libraries/kirigami-addons': 'stable/1.11'
     'plasma/libplasma': '@same'
     'plasma/plasma-workspace': '@same'
  - 'on': ['Linux']
