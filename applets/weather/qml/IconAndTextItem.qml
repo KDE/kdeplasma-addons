@@ -80,7 +80,7 @@ GridLayout {
             // text sizes here are identical with various clock text sizes
             height: {
                 const textHeightScaleFactor = (parent.height > 26) ? 0.7 : 0.9;
-                return Math.min (parent.height * textHeightScaleFactor, 3 * Kirigami.Theme.defaultFont.pixelSize);
+                return Math.min(parent.height * textHeightScaleFactor, 3 * Kirigami.Theme.defaultFont.pixelSize);
             }
             visible: false
 

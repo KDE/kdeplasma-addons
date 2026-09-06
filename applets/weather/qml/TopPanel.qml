@@ -33,7 +33,7 @@ GridLayout {
         }
 
         let feelsTemperature;
-        if(windchill) {
+        if (windchill) {
             feelsTemperature = windchill;
         } else if (heatIndex) {
             feelsTemperature = heatIndex;
@@ -48,15 +48,9 @@ GridLayout {
         return feelsTemperature;
     }
 
-    readonly property int sideWidth: Math.max(
-        windSpeedLabel.implicitWidth,
-        tempLabel.implicitWidth,
-        windSpeedDirection.naturalSize.width
-    )
+    readonly property int sideWidth: Math.max(windSpeedLabel.implicitWidth, tempLabel.implicitWidth, windSpeedDirection.naturalSize.width)
 
-    Layout.minimumWidth: Math.max(
-        Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 25),
-        (sideWidth + columnSpacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
+    Layout.minimumWidth: Math.max(Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 25), (sideWidth + columnSpacing) * 2 + Kirigami.Units.iconSizes.huge /* conditionIcon.Layout.minimumWidth */
     )
 
     columnSpacing: Kirigami.Units.largeSpacing
@@ -115,12 +109,12 @@ GridLayout {
             id: feelsLikeLabel
             Layout.fillWidth: true
 
-            readonly property bool isFeelsLikeTemperaturePresent: isTemperaturePresent  && (!!root.lastObservation.heatIndex  || !!root.lastObservation.windchill || !!root.lastObservation.humidex)
+            readonly property bool isFeelsLikeTemperaturePresent: isTemperaturePresent && (!!root.lastObservation.heatIndex || !!root.lastObservation.windchill || !!root.lastObservation.humidex)
 
             visible: {
                 if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
                     let feelsTemperature = feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
-                    return feelsTemperature !== "" && feelsTemperature !== root.lastObservation.temperature
+                    return feelsTemperature !== "" && feelsTemperature !== root.lastObservation.temperature;
                 }
 
                 return false;
@@ -134,8 +128,7 @@ GridLayout {
                 if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
                     let feelsTemperature = feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
                     let feelsTemperatureString = Util.temperatureToDisplayString(root.displayTemperatureUnit, feelsTemperature, root.metaData.temperatureUnit, true, false);
-                    return i18nc("@label %1 is the perceived temperature due to conditions like wind or humidity. Use the common phrasing for this concept and keep it short, adding a colon if necessary",
-                        "Feels like %1", feelsTemperatureString);
+                    return i18nc("@label %1 is the perceived temperature due to conditions like wind or humidity. Use the common phrasing for this concept and keep it short, adding a colon if necessary", "Feels like %1", feelsTemperatureString);
                 }
                 return "";
             }
@@ -223,5 +216,4 @@ GridLayout {
             textFormat: Text.PlainText
         }
     }
-
 }

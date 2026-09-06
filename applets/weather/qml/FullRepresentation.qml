@@ -32,9 +32,7 @@ ColumnLayout {
     property var lastObservation: null
     property var metaData: null
 
-    Layout.minimumWidth: Math.min(Kirigami.Units.gridUnit * 25,
-        Math.max(Kirigami.Units.gridUnit * 10,
-            implicitWidth))
+    Layout.minimumWidth: Math.min(Kirigami.Units.gridUnit * 25, Math.max(Kirigami.Units.gridUnit * 10, implicitWidth))
     Layout.minimumHeight: Math.max(Kirigami.Units.gridUnit * 10, implicitHeight)
 
     Layout.margins: Kirigami.Units.smallSpacing
@@ -47,8 +45,7 @@ ColumnLayout {
         visible: (root.status === ForecastControl.NeedsConfiguration) && (Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal)
         iconName: "mark-location"
         text: i18n("Please set your location")
-        helpfulAction: QQC2.Action
-        {
+        helpfulAction: QQC2.Action {
             icon.name: "configure"
             text: i18n("Set location…")
 
@@ -119,7 +116,7 @@ ColumnLayout {
         wrapMode: Text.WordWrap
         horizontalAlignment: Text.AlignRight
         font.pointSize: Kirigami.Theme.smallFont.pointSize
-        linkColor : color
+        linkColor: color
         opacity: 0.75
         textFormat: Text.StyledText
 
