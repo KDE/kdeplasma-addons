@@ -37,7 +37,7 @@ KCM.ScrollViewKCM {
     property bool isSearching: false
 
     // Plasmoid config pages don't offer this functionality built-in; manufacture it here
-    function resetLocation(): void {
+    function resetLocation() : void {
         weatherStationConfigPage.cfg_provider = plasmoid.configuration.provider;
         weatherStationConfigPage.cfg_placeInfo = plasmoid.configuration.placeInfo;
         weatherStationConfigPage.cfg_placeDisplayName = plasmoid.configuration.placeDisplayName;
@@ -57,10 +57,10 @@ KCM.ScrollViewKCM {
 
                 Kirigami.FormData.label: i18nc("@label:spinbox", "Update every:")
 
-                textFromValue: function (value) {
+                textFromValue: function(value) {
                     return (i18np("%1 minute", "%1 minutes", value));
                 }
-                valueFromText: function (text) {
+                valueFromText: function(text) {
                     return parseInt(text);
                 }
 
@@ -142,7 +142,7 @@ KCM.ScrollViewKCM {
             }
 
             onTextChanged: {
-                isSearching = text.length > 0;
+                isSearching = text.length > 0
                 searchDelayTimer.restart();
             }
 
@@ -190,7 +190,7 @@ KCM.ScrollViewKCM {
                 weatherStationConfigPage.cfg_placeInfo = placeInfo;
                 const placeDisplayName = locationListModel.getPlaceDisplayNameByIndex(locationListView.currentIndex);
                 if (!!placeDisplayName && placeDisplayName !== "") {
-                    weatherStationConfigPage.cfg_placeDisplayName = placeDisplayName;
+                    weatherStationConfigPage.cfg_placeDisplayName = placeDisplayName
                 } else {
                     weatherStationConfigPage.cfg_placeDisplayName = "";
                 }
@@ -206,7 +206,8 @@ KCM.ScrollViewKCM {
             readonly property string providerName: locationListModel.getProviderDisplayName(provider)
 
             width: ListView.view.width
-            text: i18nc("A weather station location and the weather service it comes from", "%1 (%2)", displayName || station, providerName)
+            text: i18nc("A weather station location and the weather service it comes from",
+                "%1 (%2)", displayName || station, providerName);
             highlighted: ListView.isCurrentItem
 
             onClicked: {
@@ -245,6 +246,7 @@ KCM.ScrollViewKCM {
                 }
             }
             explanation: canSearch ? i18nc("@info:usagetip", "If you've used this weather station in the past, it's possible that a server outage at the weather station provider has made it temporarily unavailable. Try again later.") : ""
+
         }
 
         QQC2.BusyIndicator {

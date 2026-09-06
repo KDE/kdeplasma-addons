@@ -43,11 +43,11 @@ QString Util::temperatureToDisplayString(int displayUnitType, double value, int 
 
     if (rounded) {
         int tempNumber = qRound(v.number());
-        return i18nc("temperature unitsymbol", "%1 %2", tempNumber, unit);
+        return i18nc("temperature unitsymbol", "%1%2", tempNumber, unit);
     }
 
     const QString formattedTemp = QLocale().toString(clampValue(v.number(), 1), 'f', 1);
-    return i18nc("temperature unitsymbol", "%1 %2", formattedTemp, unit);
+    return i18nc("temperature unitsymbol", "%1%2", formattedTemp, unit);
 }
 
 QString Util::valueToDisplayString(int displayUnitType, double value, int valueUnitType, int precision) const
