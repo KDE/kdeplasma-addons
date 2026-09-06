@@ -18,6 +18,13 @@ KCM.SimpleKCM {
     property alias cfg_visibilityUnit: visibilityComboBox.unit
 
     Kirigami.FormLayout {
+        component UnitSelector: QQC2.ComboBox {
+            property int unit
+
+            textRole: "display"
+            currentIndex: model.listIndexForUnitId(unit)
+            onActivated: unit = model.unitIdForListIndex(currentIndex)
+        }
 
         UnitSelector {
             id: temperatureComboBox
@@ -42,12 +49,5 @@ KCM.SimpleKCM {
             Kirigami.FormData.label: i18nc("@label:listbox", "Visibility:")
             model: VisibilityUnitListModel
         }
-    }
-    component UnitSelector: QQC2.ComboBox {
-        property int unit
-
-        textRole: "display"
-        currentIndex: model.listIndexForUnitId(unit)
-        onActivated: unit = model.unitIdForListIndex(currentIndex)
     }
 }
