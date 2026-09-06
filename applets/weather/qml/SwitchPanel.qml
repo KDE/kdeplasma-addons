@@ -30,8 +30,7 @@ ColumnLayout {
 
     property bool forecastViewNightRow: false
 
-    property string forecastViewTitle: (!!futureDays && futureDays.daysNumber > 0) ?
-        i18ncp("Forecast period timeframe", "1 Day", "%1 Days", futureDays.daysNumber) : ""
+    property string forecastViewTitle: (!!futureDays && futureDays.daysNumber > 0) ? i18ncp("Forecast period timeframe", "1 Day", "%1 Days", futureDays.daysNumber) : ""
 
     component DetailsString: QtObject {
         property string label
@@ -64,7 +63,7 @@ ColumnLayout {
                 if (typeof root.lastObservation.visibility === "string") {
                     return root.lastObservation.visibility;
                 }
-                return Util.valueToDisplayString(root.displayVisibilityUnit, root.lastObservation.visibility, root.metaData.visibilityUnit, 1)
+                return Util.valueToDisplayString(root.displayVisibilityUnit, root.lastObservation.visibility, root.metaData.visibilityUnit, 1);
             }
             visible: !!root.lastObservation?.visibility && (!!root.metaData?.visibilityUnit || typeof root.lastObservation.visibility === "string")
         },
@@ -175,7 +174,7 @@ ColumnLayout {
 
                 text: i18nc("@info:placeholder", "Unable to load weather forecast")
                 // TODO: Add a link to the bug-report url, which is now not possible to access within the placeholder
-                explanation: i18nc("@info:usagetip", "There may be a technical issue with the weather provider. If the issue persists for longer than a day, submit a bug report.",)
+                explanation: i18nc("@info:usagetip", "There may be a technical issue with the weather provider. If the issue persists for longer than a day, submit a bug report.")
             }
         }
     }

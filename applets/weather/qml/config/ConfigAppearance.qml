@@ -14,10 +14,8 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasmoid
 import org.kde.kcmutils as KCM
 
-
 KCM.SimpleKCM {
-    readonly property bool needsToBeSquare: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment)
-        || (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
+    readonly property bool needsToBeSquare: (Plasmoid.containmentType & PlasmaCore.Types.CustomEmbeddedContainment) || (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
 
     property bool cfg_showTemperatureInCompactMode
     property bool cfg_showTemperatureInBadge
@@ -28,8 +26,8 @@ KCM.SimpleKCM {
     property alias cfg_showHumidityInTooltip: showHumidityInTooltipCheckBox.checked
 
     function setShowTemperature(inCompactMode, inBadge) {
-        cfg_showTemperatureInCompactMode = inCompactMode
-        cfg_showTemperatureInBadge = inBadge
+        cfg_showTemperatureInCompactMode = inCompactMode;
+        cfg_showTemperatureInBadge = inBadge;
     }
 
     LocationsControl {
