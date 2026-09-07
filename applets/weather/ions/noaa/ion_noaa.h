@@ -53,15 +53,23 @@ public:
     };
     Observation observation;
 
-    struct Forecast {
+    struct DayForecast {
         QDateTime timestamp;
         QString summary;
-        float low = qQNaN();
-        float high = qQNaN();
+        float temp = qQNaN();
         int precipitation = 0;
         bool isDayTime = true;
     };
-    QList<Forecast> forecasts;
+    QList<DayForecast> dayForecasts;
+
+    struct HourlyForecast {
+        QDateTime timestamp;
+        QString summary;
+        float temp = qQNaN();
+        int precipitation = 0;
+        bool isDayTime = true;
+    };
+    QList<HourlyForecast> hourlyForecasts;
 
     struct Alert {
         QString headline;
@@ -76,11 +84,9 @@ public:
     bool isObservationDataError = false;
     bool isPointsInfoDataError = false;
     bool isForecastsDataError = false;
+    bool isHourlyForecastsDataError = false;
     bool isAlertsDataError = false;
 };
-
-Q_DECLARE_TYPEINFO(WeatherData::Forecast, Q_RELOCATABLE_TYPE);
-Q_DECLARE_TYPEINFO(WeatherData, Q_RELOCATABLE_TYPE);
 
 class NOAAIon : public Ion
 {
@@ -118,9 +124,13 @@ private:
     void getObservation();
     void readObservation(KJob *job, const QByteArray &data);
 
-    // Load and parse upcoming forecast for the next N days
-    void getForecast();
-    void readForecast(KJob *job, const QByteArray &data);
+    // Load and parse upcoming day forecast for the next N days
+    void getDayForecast();
+    void readDayForecast(KJob *job, const QByteArray &data);
+
+    // Load and parse upcoming hourly forecast for the next N hours
+    void getHourlyForecast();
+    void readHourlyForecast(KJob *job, const QByteArray &data);
 
     // The NOAA API is based on grid of points
     void getPointsInfo();
