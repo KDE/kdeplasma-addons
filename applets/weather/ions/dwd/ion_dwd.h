@@ -55,7 +55,21 @@ public:
     float gustSpeedAlt = qQNaN();
 
     // 7 forecast
-    struct ForecastInfo {
+    struct HourlyForecastInfo {
+        QDateTime period;
+        QString iconName;
+        QString summary;
+        float temp = qQNaN();
+        int precipitation = 0;
+        float windSpeed = qQNaN();
+        QString windDirection;
+    };
+
+    // 7 day forecast
+    QList<HourlyForecastInfo> hourlyForecasts;
+
+    // 7 forecast
+    struct DayForecastInfo {
         QDateTime period;
         QString iconName;
         QString summary;
@@ -67,7 +81,7 @@ public:
     };
 
     // 7 day forecast
-    QList<ForecastInfo> forecasts;
+    QList<DayForecastInfo> dayForecasts;
 
     struct WarningInfo {
         QString type;
@@ -119,7 +133,7 @@ private:
     // Helper methods
     QString camelCaseString(const QString &text) const;
     QString roundWindDirections(int windDirection) const;
-    bool isNightTime(const WeatherData &weatherData) const;
+    bool isNightTime(const QDateTime &dateTime) const;
     float parseNumber(const QVariant &number) const;
     QDateTime parseDateFromMSecs(const QVariant &timestamp) const;
 
