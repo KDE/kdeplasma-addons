@@ -54,7 +54,7 @@ public:
     QString credits;
     QString creditsUrl;
 
-    class ForecastInfo
+    class Forecast
     {
     public:
         int tempHigh;
@@ -66,25 +66,8 @@ public:
         int probability;
     };
 
-    class ForecastPeriod : public ForecastInfo
-    {
-    public:
-        ~ForecastPeriod();
-
-        ForecastInfo getDayWeather() const;
-        ForecastInfo getNightWeather() const;
-
-        bool hasNightWeather() const;
-
-        QList<std::shared_ptr<ForecastInfo>> dayForecasts;
-        QList<std::shared_ptr<ForecastInfo>> nightForecasts;
-
-    private:
-        int getMaxTemp(const QList<std::shared_ptr<ForecastInfo>> &forecastInfos) const;
-        int getMinTemp(const QList<std::shared_ptr<ForecastInfo>> &forecastInfos) const;
-    };
-
-    QList<std::shared_ptr<ForecastPeriod>> forecasts;
+    QList<std::shared_ptr<Forecast>> dayForecasts;
+    QList<std::shared_ptr<Forecast>> hourlyForecasts;
 };
 
 class WetterComIon : public Ion
@@ -147,6 +130,4 @@ private:
     std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> m_forecastPromise;
 };
 
-Q_DECLARE_TYPEINFO(WeatherData::ForecastInfo, Q_RELOCATABLE_TYPE);
-Q_DECLARE_TYPEINFO(WeatherData::ForecastPeriod, Q_RELOCATABLE_TYPE);
 Q_DECLARE_TYPEINFO(WeatherData, Q_RELOCATABLE_TYPE);

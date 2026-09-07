@@ -512,14 +512,21 @@ void WetterComIon::parseWeatherForecast(QXmlStreamReader &xml)
 {
     qCDebug(WEATHER::ION::WETTERCOM) << "About to parse forecast for source:" << m_place.displayName;
 
-    // Clear old forecasts when updating
-    m_weatherData.forecasts.clear();
+    m_weatherData.dayForecasts.clear();
+    m_weatherData.hourlyForecasts.clear();
 
-    auto forecastPeriod = std::make_shared<WeatherData::ForecastPeriod>();
-    auto forecast = std::make_shared<WeatherData::ForecastInfo>();
-    int summaryWeather = -1, summaryProbability = 0;
-    int tempMax = -273, tempMin = 100, weather = -1, probability = 0;
-    qint64 summaryUtcTime = 0, summaryLocalTime = 0, utcTime = 0, localTime = 0;
+    struct ForecastData {
+        int weather = -1;
+        int probability = 0;
+        int tempMax = -273;
+        int tempMin = 100;
+        qint64 utcTime = 0;
+        qint64 localTime = 0;
+    };
+
+    ForecastData dayData;
+    ForecastData hourlyData;
+
     bool isTimeElement = false;
 
     m_weatherData.place = m_place.displayName;
@@ -535,60 +542,60 @@ void WetterComIon::parseWeatherForecast(QXmlStreamReader &xml)
         const auto elementName = xml.name();
 
         if (xml.isEndElement()) {
-            if (elementName == QLatin1String("city")) {
-                break;
-            }
             if (elementName == QLatin1String("date")) {
-                // we have parsed a complete day
+                if (dayData.weather < 0 || dayData.utcTime == 0 || dayData.localTime == 0) {
+                    continue;
+                }
 
-                const auto forecastTimezone = QTimeZone::fromSecondsAheadOfUtc(summaryLocalTime - summaryUtcTime);
+                auto forecast = std::make_shared<WeatherData::Forecast>();
 
-                QString weatherString = QString::number(summaryWeather);
+                const auto forecastTimezone = QTimeZone::fromSecondsAheadOfUtc(dayData.localTime - dayData.utcTime);
 
-                forecastPeriod->period = QDateTime::fromSecsSinceEpoch(summaryUtcTime, QTimeZone::UTC).toTimeZone(forecastTimezone);
-                forecastPeriod->iconName = getWeatherIcon(dayIcons(), weatherString);
-                forecastPeriod->summary = getWeatherCondition(dayConditions(), weatherString);
-                forecastPeriod->probability = summaryProbability;
+                const QString weatherString = QString::number(dayData.weather);
 
-                m_weatherData.forecasts.append(forecastPeriod);
-                forecastPeriod = std::make_shared<WeatherData::ForecastPeriod>();
+                forecast->period = QDateTime::fromSecsSinceEpoch(dayData.utcTime, QTimeZone::UTC).toTimeZone(forecastTimezone);
+                forecast->iconName = getWeatherIcon(dayIcons(), weatherString);
+                forecast->summary = getWeatherCondition(dayConditions(), weatherString);
+                forecast->tempHigh = dayData.tempMax;
+                forecast->tempLow = dayData.tempMin;
+                forecast->probability = dayData.probability;
 
-                summaryWeather = -1;
-                summaryProbability = 0;
-                summaryUtcTime = 0;
-                summaryLocalTime = 0;
+                m_weatherData.dayForecasts.append(forecast);
 
+                dayData = {};
             } else if (elementName == QLatin1String("time")) {
-                // wetter.com provides both UTC and local timestamps
-                const auto forecastTimezone = QTimeZone::fromSecondsAheadOfUtc(localTime - utcTime);
-                const auto localWeatherTime = QDateTime::fromSecsSinceEpoch(utcTime, QTimeZone::UTC).toTimeZone(forecastTimezone);
+                if (hourlyData.weather < 0 || hourlyData.utcTime == 0 || hourlyData.localTime == 0) {
+                    continue;
+                }
 
-                QString weatherString = QString::number(weather);
+                auto forecast = std::make_shared<WeatherData::Forecast>();
+
+                // wetter.com provides both UTC and local timestamps
+                const auto forecastTimezone = QTimeZone::fromSecondsAheadOfUtc(hourlyData.localTime - hourlyData.utcTime);
+                const auto localWeatherTime = QDateTime::fromSecsSinceEpoch(hourlyData.utcTime, QTimeZone::UTC).toTimeZone(forecastTimezone);
+
+                const QString weatherString = QString::number(hourlyData.weather);
 
                 forecast->period = localWeatherTime;
-                forecast->tempHigh = tempMax;
-                forecast->tempLow = tempMin;
-                forecast->probability = probability;
+                forecast->tempHigh = hourlyData.tempMax;
+                forecast->tempLow = hourlyData.tempMin;
+                forecast->probability = hourlyData.probability;
 
                 // TODO use local sunset/sunrise time
                 if (localWeatherTime.time().hour() < 20 && localWeatherTime.time().hour() > 6) {
                     forecast->iconName = getWeatherIcon(dayIcons(), weatherString);
                     forecast->summary = getWeatherCondition(dayConditions(), weatherString);
-                    forecastPeriod->dayForecasts.append(forecast);
                 } else {
                     forecast->iconName = getWeatherIcon(nightIcons(), weatherString);
                     forecast->summary = getWeatherCondition(nightConditions(), weatherString);
-                    forecastPeriod->nightForecasts.append(forecast);
                 }
 
-                forecast = std::make_shared<WeatherData::ForecastInfo>();
+                m_weatherData.hourlyForecasts.append(forecast);
 
-                tempMax = -273;
-                tempMin = 100;
-                weather = -1;
-                probability = 0;
-                utcTime = localTime = 0;
                 isTimeElement = false;
+                hourlyData = {};
+            } else if (elementName == QLatin1String("city")) {
+                break;
             }
         }
 
@@ -597,54 +604,67 @@ void WetterComIon::parseWeatherForecast(QXmlStreamReader &xml)
                 continue;
             } else if (elementName == QLatin1String("time")) {
                 isTimeElement = true;
+                continue;
             } else if (elementName == QLatin1String("tx")) {
-                tempMax = qRound(xml.readElementText().toDouble());
+                const int value = qRound(xml.readElementText().toDouble());
+
+                if (isTimeElement) {
+                    hourlyData.tempMax = value;
+                } else {
+                    dayData.tempMax = value;
+                }
             } else if (elementName == QLatin1String("tn")) {
-                tempMin = qRound(xml.readElementText().toDouble());
+                const int value = qRound(xml.readElementText().toDouble());
+
+                if (isTimeElement) {
+                    hourlyData.tempMin = value;
+                } else {
+                    dayData.tempMin = value;
+                }
             } else if (elementName == QLatin1Char('w')) {
-                int tmp = xml.readElementText().toInt();
+                const int value = xml.readElementText().toInt();
 
-                if (isTimeElement)
-                    weather = tmp;
-                else
-                    summaryWeather = tmp;
+                if (isTimeElement) {
+                    hourlyData.weather = value;
+                } else {
+                    dayData.weather = value;
+                }
+            } else if (elementName == QLatin1String("pc")) {
+                const int value = xml.readElementText().toInt();
 
+                if (isTimeElement) {
+                    hourlyData.probability = value;
+                } else {
+                    dayData.probability = value;
+                }
+            } else if (elementName == QLatin1String("du")) {
+                const qint64 value = xml.readElementText().toLongLong();
+
+                if (isTimeElement) {
+                    hourlyData.utcTime = value;
+                } else {
+                    dayData.utcTime = value;
+                }
+            } else if (elementName == QLatin1Char('d')) {
+                const qint64 value = xml.readElementText().toLongLong();
+
+                if (isTimeElement) {
+                    hourlyData.localTime = value;
+                } else {
+                    dayData.localTime = value;
+                }
             } else if (elementName == QLatin1String("name")) {
                 m_weatherData.stationName = xml.readElementText();
-            } else if (elementName == QLatin1String("pc")) {
-                int tmp = xml.readElementText().toInt();
-
-                if (isTimeElement)
-                    probability = tmp;
-                else
-                    summaryProbability = tmp;
-
             } else if (elementName == QLatin1String("text")) {
                 m_weatherData.credits = xml.readElementText();
             } else if (elementName == QLatin1String("link")) {
                 m_weatherData.creditsUrl = xml.readElementText();
-            } else if (elementName == QLatin1Char('d')) {
-                qint64 tmp = xml.readElementText().toLongLong();
-
-                if (isTimeElement) {
-                    localTime = tmp;
-                } else {
-                    summaryLocalTime = tmp;
-                }
-
-            } else if (elementName == QLatin1String("du")) {
-                qint64 tmp = xml.readElementText().toLongLong();
-
-                if (isTimeElement)
-                    utcTime = tmp;
-                else
-                    summaryUtcTime = tmp;
             }
         }
     }
 
-    if (xml.error() != QXmlStreamReader::NoError) {
-        qCDebug(WEATHER::ION::WETTERCOM) << "Invalid place";
+    if (xml.hasError()) {
+        qCWarning(WEATHER::ION::WETTERCOM) << "XML error while parsing forecast: " << xml.errorString();
         return;
     }
 
@@ -658,11 +678,13 @@ void WetterComIon::updateWeather()
         return;
     }
 
-    qCDebug(WEATHER::ION::WETTERCOM) << "Update forecast for place code:" << m_place.placeCode << ". Total forecasts" << m_weatherData.forecasts.size();
+    qCDebug(WEATHER::ION::WETTERCOM) << "Update forecast for place code: " << m_place.placeCode
+                                     << ". Total day forecasts: " << m_weatherData.dayForecasts.size()
+                                     << ". Total hourly forecasts: " << m_weatherData.hourlyForecasts.size();
 
     auto forecast = std::make_shared<Forecast>();
 
-    if (!m_weatherData.forecasts.isEmpty()) {
+    if (!m_weatherData.dayForecasts.isEmpty() && !m_weatherData.hourlyForecasts.isEmpty()) {
         Station station;
 
         station.setPlace(m_place.displayName);
@@ -683,104 +705,48 @@ void WetterComIon::updateWeather()
 
         std::shared_ptr<FutureDays> nextDays = std::make_shared<FutureDays>();
 
-        for (auto forecastPeriod : m_weatherData.forecasts) {
-            WeatherData::ForecastInfo weather = forecastPeriod->getDayWeather();
-
-            FutureDayForecast nextDay(weather.period);
+        for (auto dayForecast : m_weatherData.dayForecasts) {
+            FutureDayForecast nextDay(dayForecast->period);
 
             FutureForecast futureForecast;
-            futureForecast.setConditionIcon(weather.iconName);
-            futureForecast.setCondition(weather.summary);
-            futureForecast.setHighTemp(weather.tempHigh);
-            futureForecast.setLowTemp(weather.tempLow);
-            futureForecast.setConditionProbability(weather.probability);
+            futureForecast.setConditionIcon(dayForecast->iconName);
+            futureForecast.setCondition(dayForecast->summary);
+            futureForecast.setHighTemp(dayForecast->tempHigh);
+            futureForecast.setLowTemp(dayForecast->tempLow);
+            futureForecast.setConditionProbability(dayForecast->probability);
 
             nextDay.setDaytime(futureForecast);
-
-            // if also has a night forecast for the same day then add it too
-            if (forecastPeriod->hasNightWeather()) {
-                weather = forecastPeriod->getNightWeather();
-
-                futureForecast.setConditionIcon(weather.iconName);
-                futureForecast.setCondition(weather.summary);
-                futureForecast.setHighTemp(weather.tempHigh);
-                futureForecast.setLowTemp(weather.tempLow);
-                futureForecast.setConditionProbability(weather.probability);
-
-                nextDay.setNight(futureForecast);
-            }
 
             nextDays->addDay(nextDay);
         }
 
         forecast->setFutureDays(nextDays);
-        qCDebug(WEATHER::ION::WETTERCOM) << "Ended fill forecast for :" << m_place.displayName;
+
+        std::shared_ptr<FutureHours> nextHours = std::make_shared<FutureHours>();
+
+        for (auto hourlyForecast : m_weatherData.hourlyForecasts) {
+            FutureHourForecast nextHour(hourlyForecast->period);
+
+            nextHour.setConditionIcon(hourlyForecast->iconName);
+            nextHour.setCondition(hourlyForecast->summary);
+            nextHour.setHighTemp(hourlyForecast->tempHigh);
+            nextHour.setLowTemp(hourlyForecast->tempLow);
+            nextHour.setConditionProbability(hourlyForecast->probability);
+
+            nextHours->addHour(nextHour);
+        }
+
+        forecast->setFutureHours(nextHours);
+
+        qCDebug(WEATHER::ION::WETTERCOM) << "Ended fill forecast for: " << m_place.displayName;
     } else {
         forecast->setError();
-        qCDebug(WEATHER::ION::WETTERCOM) << "Something went wrong when parsing weather data for place with code:" << m_place.displayName;
+        qCDebug(WEATHER::ION::WETTERCOM) << "Something went wrong when parsing weather data for place with code: " << m_place.displayName;
     }
     m_forecastPromise->addResult(forecast);
 
-    m_weatherData.forecasts.clear();
-}
-
-/*
- * WeatherData::ForecastPeriod convenience methods
- */
-
-WeatherData::ForecastPeriod::~ForecastPeriod()
-{
-}
-
-WeatherData::ForecastInfo WeatherData::ForecastPeriod::getDayWeather() const
-{
-    WeatherData::ForecastInfo result;
-    result.period = period;
-    result.iconName = iconName;
-    result.summary = summary;
-    result.tempHigh = getMaxTemp(dayForecasts);
-    result.tempLow = getMinTemp(dayForecasts);
-    result.probability = probability;
-    return result;
-}
-
-WeatherData::ForecastInfo WeatherData::ForecastPeriod::getNightWeather() const
-{
-    qCDebug(WEATHER::ION::WETTERCOM) << "nightForecasts.size() =" << nightForecasts.size();
-
-    WeatherData::ForecastInfo result;
-    result.period = nightForecasts.at(0)->period;
-    result.iconName = nightForecasts.at(0)->iconName;
-    result.summary = nightForecasts.at(0)->summary;
-    result.tempHigh = getMaxTemp(nightForecasts);
-    result.tempLow = getMinTemp(nightForecasts);
-    result.probability = nightForecasts.at(0)->probability;
-    return result;
-}
-
-bool WeatherData::ForecastPeriod::hasNightWeather() const
-{
-    return !nightForecasts.isEmpty();
-}
-
-int WeatherData::ForecastPeriod::getMaxTemp(const QList<std::shared_ptr<WeatherData::ForecastInfo>> &forecastInfos) const
-{
-    int result = -273;
-    for (const auto &forecast : forecastInfos) {
-        result = std::max(result, forecast->tempHigh);
-    }
-
-    return result;
-}
-
-int WeatherData::ForecastPeriod::getMinTemp(const QList<std::shared_ptr<WeatherData::ForecastInfo>> &forecastInfos) const
-{
-    int result = 100;
-    for (const auto &forecast : forecastInfos) {
-        result = std::min(result, forecast->tempLow);
-    }
-
-    return result;
+    m_weatherData.dayForecasts.clear();
+    m_weatherData.hourlyForecasts.clear();
 }
 
 #include "ion_wettercom.moc"
