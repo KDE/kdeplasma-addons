@@ -94,7 +94,7 @@ msgstr "Couleur unie :"
 #: kcm/cubeeffectkcm.ui:198
 #, kde-format
 msgid "Skybox:"
-msgstr "Boîte céleste :"
+msgstr "Boite céleste :"
 
 #. i18n: ectx: property (placeholderText), widget (QLineEdit, kcfg_SkyBox)
 #: kcm/cubeeffectkcm.ui:208
