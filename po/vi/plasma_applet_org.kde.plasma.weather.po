@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-31 00:45+0000\n"
+"POT-Creation-Date: 2026-09-08 00:47+0000\n"
 "PO-Revision-Date: 2023-01-08 18:17+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -126,27 +126,27 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "Lặng"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:678
+#: ions/bbcukmet/ion_bbcukmet.cpp:680
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
 msgstr ""
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:717 ions/envcan/ion_envcan.cpp:1498
+#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1498
 #, fuzzy, kde-format
 #| msgctxt "pressure tendency"
 #| msgid "Rising"
 msgid "Rising"
 msgstr "Đang tăng"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1500
+#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1500
 #, fuzzy, kde-format
 #| msgctxt "pressure tendency"
 #| msgid "Falling"
 msgid "Falling"
 msgstr "Đang giảm"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1502
+#: ions/bbcukmet/ion_bbcukmet.cpp:723 ions/envcan/ion_envcan.cpp:1502
 #, fuzzy, kde-format
 #| msgctxt "pressure tendency"
 #| msgid "Steady"

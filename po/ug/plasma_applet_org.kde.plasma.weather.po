@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-08-31 00:45+0000\n"
+"POT-Creation-Date: 2026-09-08 00:47+0000\n"
 "PO-Revision-Date: 2026-05-31 18:03-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -126,23 +126,23 @@ msgctxt "wind speed"
 msgid "Calm"
 msgstr "تىنچ"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:678
+#: ions/bbcukmet/ion_bbcukmet.cpp:680
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
 msgstr "ب ب س ھاۋا رايى ئۇچۇرى"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:717 ions/envcan/ion_envcan.cpp:1498
+#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1498
 #, kde-format
 msgid "Rising"
 msgstr "ئۆرلەۋاتىدۇ"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1500
+#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1500
 #, kde-format
 msgid "Falling"
 msgstr "چۈشۈۋاتىدۇ"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1502
+#: ions/bbcukmet/ion_bbcukmet.cpp:723 ions/envcan/ion_envcan.cpp:1502
 #, kde-format
 msgid "Steady"
 msgstr "مۇقىم"
