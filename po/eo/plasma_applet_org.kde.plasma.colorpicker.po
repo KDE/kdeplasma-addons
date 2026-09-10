@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-14 00:45+0000\n"
+"POT-Creation-Date: 2026-09-10 00:48+0000\n"
 "PO-Revision-Date: 2024-05-10 11:33+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -33,13 +33,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Mezklaku por kopii la kolorkodon"
 
-#: qml/CompactRepresentation.qml:85
+#: qml/CompactRepresentation.qml:84
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Elekti koloron"
 
-#: qml/CompactRepresentation.qml:92
+#: qml/CompactRepresentation.qml:91
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -91,69 +91,63 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Antaŭrigarda nombro:"
 
-#: qml/main.qml:122
+#: qml/main.qml:119
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Malfermi Koloran Dialogon"
 
-#: qml/main.qml:127
+#: qml/main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Forviŝi la historion"
 
-#: qml/main.qml:135
+#: qml/main.qml:132
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Rigardo Historion"
 
-#: qml/main.qml:143
+#: qml/main.qml:140
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Kopii al tondujo"
 
-#: qml/main.qml:183
+#: qml/main.qml:178
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Neniuj koloroj"
 
-#: qml/main.qml:183
-#, kde-format
-msgctxt "@info:status when color picking is unavailable"
-msgid "Color picking unavailable when compositing is disabled"
-msgstr "Kolorelektado nedisponebla kiam kunmetado estas malŝaltita"
-
-#: qml/main.qml:184
-#, kde-format
-msgctxt "@info:status when color pick is unavailable"
-msgid ""
-"Compositing has been manually disabled or blocked by a running application"
-msgstr "Kunmetado estis malŝaltita permane aŭ blokita per rulanta aplikaĵo"
-
-#: qml/main.qml:191
+#: qml/main.qml:185
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Elekti Koloron"
 
-#: qml/main.qml:199
-#, kde-format
-msgctxt "@action:button open kwincompositing KCM"
-msgid "Configure Compositing"
-msgstr "Agordi Kunmetadon"
-
-#: qml/main.qml:385
+#: qml/main.qml:371
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopiita!"
 
-#: qml/main.qml:396
+#: qml/main.qml:382
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Forigi"
+
+#~ msgctxt "@info:status when color picking is unavailable"
+#~ msgid "Color picking unavailable when compositing is disabled"
+#~ msgstr "Kolorelektado nedisponebla kiam kunmetado estas malŝaltita"
+
+#~ msgctxt "@info:status when color pick is unavailable"
+#~ msgid ""
+#~ "Compositing has been manually disabled or blocked by a running application"
+#~ msgstr "Kunmetado estis malŝaltita permane aŭ blokita per rulanta aplikaĵo"
+
+#~ msgctxt "@action:button open kwincompositing KCM"
+#~ msgid "Configure Compositing"
+#~ msgstr "Agordi Kunmetadon"

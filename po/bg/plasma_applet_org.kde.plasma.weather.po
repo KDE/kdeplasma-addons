@@ -846,34 +846,3 @@ msgstr "Много високо"
 #, kde-format
 msgid "Extreme"
 msgstr "Екстремно"
-
-#~ msgid "Today"
-#~ msgstr "Днес"
-
-#~ msgctxt "Short for Saturday"
-#~ msgid "Sat"
-#~ msgstr "Съб"
-
-#~ msgctxt "Short for Sunday"
-#~ msgid "Sun"
-#~ msgstr "Нед"
-
-#~ msgctxt "Short for Monday"
-#~ msgid "Mon"
-#~ msgstr "Пон"
-
-#~ msgctxt "Short for Tuesday"
-#~ msgid "Tue"
-#~ msgstr "Вто"
-
-#~ msgctxt "Short for Wednesday"
-#~ msgid "Wed"
-#~ msgstr "Сря"
-
-#~ msgctxt "Short for Thursday"
-#~ msgid "Thu"
-#~ msgstr "Чет"
-
-#~ msgctxt "Short for Friday"
-#~ msgid "Fri"
-#~ msgstr "Пет"

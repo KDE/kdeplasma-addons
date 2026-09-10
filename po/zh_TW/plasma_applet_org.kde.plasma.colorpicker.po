@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-14 00:45+0000\n"
+"POT-Creation-Date: 2026-09-10 00:48+0000\n"
 "PO-Revision-Date: 2026-03-02 05:38+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -34,13 +34,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "按中鍵複製顏色碼"
 
-#: qml/CompactRepresentation.qml:85
+#: qml/CompactRepresentation.qml:84
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "挑選顏色"
 
-#: qml/CompactRepresentation.qml:92
+#: qml/CompactRepresentation.qml:91
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -90,72 +90,66 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "預覽數量："
 
-#: qml/main.qml:122
+#: qml/main.qml:119
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "開啟色彩對話框"
 
-#: qml/main.qml:127
+#: qml/main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "清除歷史"
 
-#: qml/main.qml:135
+#: qml/main.qml:132
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "檢視歷史"
 
-#: qml/main.qml:143
+#: qml/main.qml:140
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "複製到剪貼簿"
 
-#: qml/main.qml:183
+#: qml/main.qml:178
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "沒有顏色"
 
-#: qml/main.qml:183
-#, kde-format
-msgctxt "@info:status when color picking is unavailable"
-msgid "Color picking unavailable when compositing is disabled"
-msgstr "合成器停用時無法使用顏色挑選功能"
-
-#: qml/main.qml:184
-#, kde-format
-msgctxt "@info:status when color pick is unavailable"
-msgid ""
-"Compositing has been manually disabled or blocked by a running application"
-msgstr "合成器已被手動暫停或是被執行中應用程式阻擋"
-
-#: qml/main.qml:191
+#: qml/main.qml:185
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "挑選顏色"
 
-#: qml/main.qml:199
-#, kde-format
-msgctxt "@action:button open kwincompositing KCM"
-msgid "Configure Compositing"
-msgstr "設定合成"
-
-#: qml/main.qml:385
+#: qml/main.qml:371
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "已複製！"
 
-#: qml/main.qml:396
+#: qml/main.qml:382
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "刪除"
+
+#~ msgctxt "@info:status when color picking is unavailable"
+#~ msgid "Color picking unavailable when compositing is disabled"
+#~ msgstr "合成器停用時無法使用顏色挑選功能"
+
+#~ msgctxt "@info:status when color pick is unavailable"
+#~ msgid ""
+#~ "Compositing has been manually disabled or blocked by a running application"
+#~ msgstr "合成器已被手動暫停或是被執行中應用程式阻擋"
+
+#~ msgctxt "@action:button open kwincompositing KCM"
+#~ msgid "Configure Compositing"
+#~ msgstr "設定合成"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

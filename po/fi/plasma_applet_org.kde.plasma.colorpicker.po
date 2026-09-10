@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-14 00:45+0000\n"
+"POT-Creation-Date: 2026-09-10 00:48+0000\n"
 "PO-Revision-Date: 2026-02-25 15:43+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -33,13 +33,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Kopioi värikoodi keskinapsautuksella"
 
-#: qml/CompactRepresentation.qml:85
+#: qml/CompactRepresentation.qml:84
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Valitse väri"
 
-#: qml/CompactRepresentation.qml:92
+#: qml/CompactRepresentation.qml:91
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -91,73 +91,68 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Esikatselumäärä:"
 
-#: qml/main.qml:122
+#: qml/main.qml:119
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Avaa väri-ikkuna"
 
-#: qml/main.qml:127
+#: qml/main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Tyhjennä historia"
 
-#: qml/main.qml:135
+#: qml/main.qml:132
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Näytä historia"
 
-#: qml/main.qml:143
+#: qml/main.qml:140
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Kopioi leikepöydälle"
 
-#: qml/main.qml:183
+#: qml/main.qml:178
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Ei värejä"
 
-#: qml/main.qml:183
-#, kde-format
-msgctxt "@info:status when color picking is unavailable"
-msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
-"Värinpoiminta ei ole käytettävissä, kun koostaminen on poistettu käytöstä"
-
-#: qml/main.qml:184
-#, kde-format
-msgctxt "@info:status when color pick is unavailable"
-msgid ""
-"Compositing has been manually disabled or blocked by a running application"
-msgstr "Käyttäjä tai käynnissä oleva ohjelma on poistanut koostamisen käytöstä"
-
-#: qml/main.qml:191
+#: qml/main.qml:185
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Valitse väri"
 
-#: qml/main.qml:199
-#, kde-format
-msgctxt "@action:button open kwincompositing KCM"
-msgid "Configure Compositing"
-msgstr "Koostamisasetukset"
-
-#: qml/main.qml:385
+#: qml/main.qml:371
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopioitu!"
 
-#: qml/main.qml:396
+#: qml/main.qml:382
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Poista"
+
+#~ msgctxt "@info:status when color picking is unavailable"
+#~ msgid "Color picking unavailable when compositing is disabled"
+#~ msgstr ""
+#~ "Värinpoiminta ei ole käytettävissä, kun koostaminen on poistettu käytöstä"
+
+#~ msgctxt "@info:status when color pick is unavailable"
+#~ msgid ""
+#~ "Compositing has been manually disabled or blocked by a running application"
+#~ msgstr ""
+#~ "Käyttäjä tai käynnissä oleva ohjelma on poistanut koostamisen käytöstä"
+
+#~ msgctxt "@action:button open kwincompositing KCM"
+#~ msgid "Configure Compositing"
+#~ msgstr "Koostamisasetukset"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

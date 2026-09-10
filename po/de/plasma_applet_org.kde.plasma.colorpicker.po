@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-14 00:45+0000\n"
+"POT-Creation-Date: 2026-09-10 00:48+0000\n"
 "PO-Revision-Date: 2026-03-05 21:10+0100\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -32,13 +32,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Mittelklick um den Farbcode zu kopieren"
 
-#: qml/CompactRepresentation.qml:85
+#: qml/CompactRepresentation.qml:84
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Wählen Sie eine Farbe"
 
-#: qml/CompactRepresentation.qml:92
+#: qml/CompactRepresentation.qml:91
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -90,76 +90,70 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Vorschauanzahl:"
 
-#: qml/main.qml:122
+#: qml/main.qml:119
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Farbdialog öffnen"
 
-#: qml/main.qml:127
+#: qml/main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Verlauf leeren"
 
-#: qml/main.qml:135
+#: qml/main.qml:132
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Verlauf anzeigen"
 
-#: qml/main.qml:143
+#: qml/main.qml:140
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "In Zwischenablage kopieren"
 
-#: qml/main.qml:183
+#: qml/main.qml:178
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Keine Farben"
 
-#: qml/main.qml:183
-#, kde-format
-msgctxt "@info:status when color picking is unavailable"
-msgid "Color picking unavailable when compositing is disabled"
-msgstr ""
-"Das Auswählen einer Farbe ist nicht möglich, wenn Arbeitsflächen-Effekte "
-"deaktiviert sind"
-
-#: qml/main.qml:184
-#, kde-format
-msgctxt "@info:status when color pick is unavailable"
-msgid ""
-"Compositing has been manually disabled or blocked by a running application"
-msgstr ""
-"Arbeitsflächen-Effekte wurden manuell deaktiviert oder werden durch eine "
-"laufende Anwendung blockiert"
-
-#: qml/main.qml:191
+#: qml/main.qml:185
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Farbe auswählen"
 
-#: qml/main.qml:199
-#, kde-format
-msgctxt "@action:button open kwincompositing KCM"
-msgid "Configure Compositing"
-msgstr "Arbeitsflächen-Effekte einrichten"
-
-#: qml/main.qml:385
+#: qml/main.qml:371
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopiert."
 
-#: qml/main.qml:396
+#: qml/main.qml:382
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Löschen"
+
+#~ msgctxt "@info:status when color picking is unavailable"
+#~ msgid "Color picking unavailable when compositing is disabled"
+#~ msgstr ""
+#~ "Das Auswählen einer Farbe ist nicht möglich, wenn Arbeitsflächen-Effekte "
+#~ "deaktiviert sind"
+
+#~ msgctxt "@info:status when color pick is unavailable"
+#~ msgid ""
+#~ "Compositing has been manually disabled or blocked by a running application"
+#~ msgstr ""
+#~ "Arbeitsflächen-Effekte wurden manuell deaktiviert oder werden durch eine "
+#~ "laufende Anwendung blockiert"
+
+#~ msgctxt "@action:button open kwincompositing KCM"
+#~ msgid "Configure Compositing"
+#~ msgstr "Arbeitsflächen-Effekte einrichten"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"

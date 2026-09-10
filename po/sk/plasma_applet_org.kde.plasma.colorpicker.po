@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-14 00:45+0000\n"
+"POT-Creation-Date: 2026-09-10 00:48+0000\n"
 "PO-Revision-Date: 2023-05-03 19:57+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -31,13 +31,13 @@ msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Kliknutím stredným tlačidlom skopírujete kód farby"
 
-#: qml/CompactRepresentation.qml:85
+#: qml/CompactRepresentation.qml:84
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Zvoľte farbu"
 
-#: qml/CompactRepresentation.qml:92
+#: qml/CompactRepresentation.qml:91
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -89,73 +89,67 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Počet náhľadov:"
 
-#: qml/main.qml:122
+#: qml/main.qml:119
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Otvoriť dialóg farby"
 
-#: qml/main.qml:127
+#: qml/main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Vyčistiť históriu"
 
-#: qml/main.qml:135
+#: qml/main.qml:132
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Zobraziť históriu"
 
-#: qml/main.qml:143
+#: qml/main.qml:140
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Kopírovať do schránky"
 
-#: qml/main.qml:183
+#: qml/main.qml:178
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Žiadne farby"
 
-#: qml/main.qml:183
-#, kde-format
-msgctxt "@info:status when color picking is unavailable"
-msgid "Color picking unavailable when compositing is disabled"
-msgstr "Výber farby nie je dostupný, keď je kompozícia vypnutá"
-
-#: qml/main.qml:184
-#, kde-format
-msgctxt "@info:status when color pick is unavailable"
-msgid ""
-"Compositing has been manually disabled or blocked by a running application"
-msgstr ""
-"Kompozícia bola manuálne vypnutá alebo zablokovaná spustenou aplikáciou"
-
-#: qml/main.qml:191
+#: qml/main.qml:185
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Vybrať farbu"
 
-#: qml/main.qml:199
-#, kde-format
-msgctxt "@action:button open kwincompositing KCM"
-msgid "Configure Compositing"
-msgstr "Nastaviť kompozíciu"
-
-#: qml/main.qml:385
+#: qml/main.qml:371
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Skopírované!"
 
-#: qml/main.qml:396
+#: qml/main.qml:382
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Vymazať"
+
+#~ msgctxt "@info:status when color picking is unavailable"
+#~ msgid "Color picking unavailable when compositing is disabled"
+#~ msgstr "Výber farby nie je dostupný, keď je kompozícia vypnutá"
+
+#~ msgctxt "@info:status when color pick is unavailable"
+#~ msgid ""
+#~ "Compositing has been manually disabled or blocked by a running application"
+#~ msgstr ""
+#~ "Kompozícia bola manuálne vypnutá alebo zablokovaná spustenou aplikáciou"
+
+#~ msgctxt "@action:button open kwincompositing KCM"
+#~ msgid "Configure Compositing"
+#~ msgstr "Nastaviť kompozíciu"
 
 #~ msgctxt "@info:tooltip"
 #~ msgid "Color options"
