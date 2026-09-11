@@ -133,16 +133,3 @@ msgstr "已复制！"
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "删除"
-
-#~ msgctxt "@info:status when color picking is unavailable"
-#~ msgid "Color picking unavailable when compositing is disabled"
-#~ msgstr "禁用显示特效合成时无法拾取颜色。"
-
-#~ msgctxt "@info:status when color pick is unavailable"
-#~ msgid ""
-#~ "Compositing has been manually disabled or blocked by a running application"
-#~ msgstr "显示特效合成已被手动禁用，或者已被某个正在运行的应用程序阻止"
-
-#~ msgctxt "@action:button open kwincompositing KCM"
-#~ msgid "Configure Compositing"
-#~ msgstr "配置显示特效合成"
