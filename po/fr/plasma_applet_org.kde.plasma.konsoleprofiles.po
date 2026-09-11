@@ -32,4 +32,4 @@ msgstr "Profils pour Konsole"
 #: main.qml:90
 #, kde-format
 msgid "Arbitrary String Which Says Something"
-msgstr "Chaîne arbitraire indiquant quelque chose"
+msgstr "Chaine arbitraire indiquant quelque chose"
