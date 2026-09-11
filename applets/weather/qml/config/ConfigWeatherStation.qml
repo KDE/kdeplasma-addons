@@ -112,6 +112,12 @@ KCM.ScrollViewKCM {
             }
         }
 
+        Kirigami.InlineMessage {
+            Layout.fillWidth: true
+            visible: ['wettercom', 'dwd'].includes(weatherStationConfigPage.cfg_provider)
+            text: i18nc("@label:info", "The selected provider may not offer the current weather conditions, such as temperature, for some or all the locations")
+        }
+
         Kirigami.SearchField {
             id: searchStringEdit
 

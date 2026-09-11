@@ -7,6 +7,7 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
+import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.core as PlasmaCore
@@ -29,6 +30,11 @@ KCM.SimpleKCM {
     function setShowTemperature(inCompactMode, inBadge) {
         cfg_showTemperatureInCompactMode = inCompactMode
         cfg_showTemperatureInBadge = inBadge
+    }
+
+    header: Kirigami.InlineMessage {
+            visible: ['wettercom', 'dwd'].includes(plasmoid.configuration.provider)
+            text: i18nc("@label:info", "The selected provider may not offer the current weather conditions, such as temperature, for some or all the locations")
     }
 
     Kirigami.FormLayout {
