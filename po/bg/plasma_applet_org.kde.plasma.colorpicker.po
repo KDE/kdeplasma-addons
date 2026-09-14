@@ -134,18 +134,3 @@ msgstr "Копиран!"
 msgctxt "@action:button"
 msgid "Delete"
 msgstr "Изтриване"
-
-#~ msgctxt "@info:status when color picking is unavailable"
-#~ msgid "Color picking unavailable when compositing is disabled"
-#~ msgstr ""
-#~ "Избирането на цвят не е достъпно, когато са деактивирани графичните ефекти"
-
-#~ msgctxt "@info:status when color pick is unavailable"
-#~ msgid ""
-#~ "Compositing has been manually disabled or blocked by a running application"
-#~ msgstr ""
-#~ "Ефектите са спрени  ръчно или са блокирани от изпълняваща се програма"
-
-#~ msgctxt "@action:button open kwincompositing KCM"
-#~ msgid "Configure Compositing"
-#~ msgstr "Графични ефекти"
