@@ -37,10 +37,15 @@ ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaDat
 void ConverterRunner::init()
 {
     valueRegex = QRegularExpression(QStringLiteral("^([0-9,./+-]+)"));
-    const QStringList conversionWords = i18nc("list of words that can used as amount of 'unit1' [in|to|as] 'unit2'", "in;to;as").split(QLatin1Char(';'));
+    const QStringList conversionWords =
+        i18nc(
+            "list of words that can be used as amount of 'unit1' [in|to|as] 'unit2' (e.g. 'km [in|to|as] miles'). Can be more (or less) than three words, if "
+            "it makes sense. Do not put spaces before or after the `;`!",
+            "in;to;as")
+            .split(QLatin1Char(';'));
     QString conversionRegex;
     for (const auto &word : conversionWords) {
-        conversionRegex.append(QLatin1Char(' ') + word + QStringLiteral(" |"));
+        conversionRegex.append(QLatin1Char(' ') + word.trimmed() + QStringLiteral(" |"));
     }
     conversionRegex.append(QStringLiteral(" ?> ?"));
     unitSeperatorRegex = QRegularExpression(conversionRegex);
