@@ -131,16 +131,19 @@ PlasmoidItem {
             text: root.seconds > 0 && !root.running
                 ? i18nc("@action %1 is the duration that will be started, e.g. 00:05:00", "&Start (%1)", TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm:ss"))
                 : i18nc("@action", "&Start")
+            enabled: !root.running && (root.seconds !== 0 || Plasmoid.configuration.seconds !== 0)
             onTriggered: startTimer()
         },
         PlasmaCore.Action {
             id: stopAction
             text: i18nc("@action", "S&top")
+            enabled: root.running
             onTriggered: stopTimer()
         },
         PlasmaCore.Action {
             id: resetAction
             text: i18nc("@action", "&Reset")
+            enabled: root.seconds !== 0 && Plasmoid.configuration.seconds !== 0
             onTriggered: resetTimer()
         },
         PlasmaCore.Action {
