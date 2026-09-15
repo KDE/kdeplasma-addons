@@ -50,10 +50,12 @@ Item {
 
     function adjustSecond(value) {
         while (value >= 15 && root.seconds + 1 < 24*60*60) {
+            Plasmoid.configuration.seconds += 1
             root.seconds += 1;
             value -= 15;
         }
         while (value <= -15 && root.seconds - 1 >= 0) {
+            Plasmoid.configuration.seconds -= 1
             root.seconds -= 1;
             value += 15;
         }

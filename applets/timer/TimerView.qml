@@ -83,7 +83,10 @@ MouseArea {
             editable: !root.running
             alertMode: root.alertMode
             showSeconds: root.showSeconds
-            onDigitModified: valueDelta => root.seconds += valueDelta
+            onDigitModified: valueDelta => {
+                Plasmoid.configuration.seconds = root.seconds + valueDelta
+                root.seconds += valueDelta
+            }
             maximumHeight: height
             SequentialAnimation on opacity {
                 running: root.suspended;

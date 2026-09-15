@@ -158,7 +158,8 @@ PlasmoidItem {
         delegate: PlasmaCore.Action {
             text: TimerPlasmoid.Timer.secondsToString(modelData, "hh:mm:ss")
             onTriggered: {
-                seconds = modelData
+                Plasmoid.configuration.seconds = modelData
+                seconds = modelData;
                 startTimer();
             }
         }
@@ -186,6 +187,7 @@ PlasmoidItem {
     function resetTimer() {
         running = false;
         suspended = false;
+        Plasmoid.configuration.seconds = 0;
         seconds = 0;
         opacityNeedsReset();
         saveTimer();
