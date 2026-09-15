@@ -142,7 +142,7 @@ Item {
         }
 
         ColumnLayout {
-            Layout.alignment: Qt.AlignVCenter
+            Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
             Layout.fillWidth: layoutForm === CompactRepresentation.LayoutType.VerticalPanel || layoutForm === CompactRepresentation.LayoutType.VerticalDesktop
             Layout.maximumWidth: {
                 switch (layoutForm) {
@@ -185,19 +185,13 @@ Item {
 
                 Layout.fillWidth: parent.Layout.fillWidth
                 Layout.fillHeight: true
-                Layout.maximumWidth: Layout.fillWidth ? -1 : textMetrics.width
-                Layout.minimumWidth: Layout.maximumWidth
+                Layout.maximumWidth: implicitWidth
                 visible: root.showRemainingTime
 
                 TextMetrics {
                     id: textMetrics
-                    text: {
-                        if (root.isVertical) {
-                            return i18ncp("remaining time", "%1s", "%1s", root.seconds);
-                        }
-                        // make it not jump around: reserve space for one extra digit than reasonable
-                        return root.showSeconds ? "44:44:444" : "44:444";
-                    }
+                    // make it not jump around: reserve space for one extra digit than reasonable
+                    text: root.showSeconds ? "44:44:444" : "44:444";
                     font: remainingTimeLabel.font
                 }
 
@@ -207,16 +201,12 @@ Item {
                 font.features: { "tnum": 1 }
                 fontSizeMode: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.VerticalFit : Text.HorizontalFit
                 horizontalAlignment: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.AlignJustify : Text.AlignHCenter
-                minimumPointSize: Kirigami.Theme.smallFont.pointSize
+                minimumPointSize: 1
                 verticalAlignment: Text.AlignVCenter
 
-                text: {
-                    if (root.isVertical) {
-                        return i18ncp("remaining time", "%1s", "%1s", root.seconds);
-                    }
-
-                    return root.showSeconds ? TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm:ss") : TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm");
-                }
+                text: root.showSeconds
+                    ? TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm:ss")
+                    : TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm");
                 textFormat: Text.PlainText
 
                 Accessible.name: root.toolTipMainText
@@ -229,7 +219,7 @@ Item {
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.maximumWidth: (parent.visibleChildren.length > 1) ? Math.max(titleLabel.width, remainingTimeLabel.width) : -1
+                Layout.maximumWidth: (parent.visibleChildren.length > 1) ? Math.max(titleLabel.implicitWidth, remainingTimeLabel.implicitWidth) : -1
                 visible: root.showProgressBar
 
                 from: plasmoid.configuration.seconds
