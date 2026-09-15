@@ -57,6 +57,8 @@ KCM.SimpleKCM {
 
         QQC2.CheckBox {
             id: showSeconds
+            leftPadding: mirrored ? 0 : (showRemainingTime.indicator.width + showRemainingTime.spacing)
+            rightPadding: mirrored ? (showRemainingTime.indicator.width + showRemainingTime.spacing) : 0
             enabled: showRemainingTime.checked
             text: i18nc("@option:check", "Show seconds");
         }
