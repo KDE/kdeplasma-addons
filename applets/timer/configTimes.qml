@@ -6,6 +6,7 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
+import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.plasmoid
 import org.kde.kcmutils as KCM
@@ -90,13 +91,14 @@ KCM.ScrollViewKCM {
 
     Component {
         id: timeEditDelegate
-        Kirigami.SwipeListItem {
+        QQC2.ItemDelegate {
             id: timeEditItem
             width: timeListView.width
-            contentItem: Row {
+            KeyNavigation.right: editor.editable ? editor : editButton
+            contentItem: RowLayout {
                 spacing: Kirigami.Units.gridUnit
                 Kirigami.ListItemDragHandle {
-                    anchors.verticalCenter: parent.verticalCenter
+                    Layout.fillHeight: true
                     enabled: !editor.editable
                     listItem: timeEditItem
                     listView: timeListView
@@ -106,6 +108,7 @@ KCM.ScrollViewKCM {
                 }
                 TimerEdit {
                     id: editor
+                    Layout.fillWidth: true
                     alertMode: editable
                     value: time
                     showSeconds: cfg_showSeconds
@@ -117,6 +120,7 @@ KCM.ScrollViewKCM {
                     function set(newValue) {
                         timeListModel.setTimer(index, (newValue).toString())
                     }
+                    KeyNavigation.right: editable ? applyButton : editButton
                     Component.onCompleted: editable = (value === 0)
                 }
                 QQC2.Label {
@@ -124,45 +128,77 @@ KCM.ScrollViewKCM {
                     visible: editor.editable
                     text: i18n("Scroll over digits to change time")
                     textFormat: Text.PlainText
-                    anchors.verticalCenter: parent.verticalCenter
+                }
+                RowLayout {
+                    Layout.alignment: Qt.AlignRight
+
+                    QQC2.ToolButton {
+                        id: applyButton
+                        visible: editor.editable
+                        action: Kirigami.Action {
+                            text: i18n("Apply")
+                            icon.name: "dialog-ok-apply"
+                            onTriggered: {
+                                editor.editable = false
+                            }
+                        }
+                        KeyNavigation.right: cancelButton
+                        text: action.text
+                        display: QQC2.ToolButton.IconOnly
+                    }
+
+                    QQC2.ToolButton {
+                        id: cancelButton
+                        Layout.alignment: Qt.AlignRight
+                        visible: editor.editable
+                        action: Kirigami.Action {
+                            text: i18n("Cancel")
+                            icon.name: "dialog-cancel"
+                            onTriggered: {
+                                editor.editable = false
+                                editor.set(editor.oldValue)
+                            }
+                        }
+                        text: action.text
+                        display: QQC2.ToolButton.IconOnly
+                        KeyNavigation.right: deleteButton // stop here
+                    }
+
+                    QQC2.ToolButton {
+                        id: editButton
+                        Layout.alignment: Qt.AlignRight
+                        visible: editor.editable === false
+                        action: Kirigami.Action {
+                            text: i18n("Edit")
+                            icon.name: "edit-entry"
+                            onTriggered: {
+                                editor.oldValue = editor.value
+                                editor.editable = true
+                            }
+                        }
+                        text: action.text
+                        display: QQC2.ToolButton.IconOnly
+                        KeyNavigation.left: timeEditItem
+                        KeyNavigation.right: deleteButton
+                    }
+
+                    QQC2.ToolButton {
+                        id: deleteButton
+                        visible: editor.editable === false
+                        Layout.alignment: Qt.AlignRight
+                        action: Kirigami.Action {
+                            text: i18n("Delete")
+                            icon.name: "entry-delete"
+                            onTriggered: {
+                                timeListModel.removeTimer(index)
+                            }
+                        }
+                        text: action.text
+                        display: QQC2.ToolButton.IconOnly
+                        KeyNavigation.right: deleteButton // stop here
+                    }
                 }
             }
-            actions: [
-                Kirigami.Action {
-                    text: i18n("Apply")
-                    icon.name: "dialog-ok-apply"
-                    visible: editor.editable
-                    onTriggered: {
-                        editor.editable = false
-                    }
-                },
-                Kirigami.Action {
-                    text: i18n("Cancel")
-                    icon.name: "dialog-cancel"
-                    visible: editor.editable
-                    onTriggered: {
-                        editor.editable = false
-                        editor.set(editor.oldValue)
-                    }
-                },
-                Kirigami.Action {
-                    text: i18n("Edit")
-                    icon.name: "edit-entry"
-                    visible: editor.editable === false
-                    onTriggered: {
-                        editor.oldValue = editor.value
-                        editor.editable = true
-                    }
-                },
-                Kirigami.Action {
-                    text: i18n("Delete")
-                    icon.name: "entry-delete"
-                    visible: editor.editable === false
-                    onTriggered: {
-                        timeListModel.removeTimer(index)
-                    }
-                }
-            ]
         }
     }
 }
