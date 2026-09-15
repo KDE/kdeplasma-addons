@@ -33,7 +33,7 @@ PlasmoidItem {
 
     // Display seconds in addition to hours and minutes (default: enabled)
     readonly property bool showSeconds: Plasmoid.configuration.showSeconds
-    property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds);
+    property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds, Plasmoid.configuration.suspendedAtSecond);
 
     // Display timer toggle control (default: enabled)
     readonly property bool showTimerToggle: Plasmoid.configuration.showTimerToggle
@@ -52,7 +52,7 @@ PlasmoidItem {
     readonly property string title: plasmoid.configuration.title;
     readonly property bool alertMode: root.running && root.seconds < 60
     property bool running: plasmoid.configuration.running > 0
-    property bool suspended: false;
+    property bool suspended: Plasmoid.configuration.suspendedAtSecond != -1;
 
     readonly property string notificationText: plasmoid.configuration.notificationText;
 
@@ -163,6 +163,7 @@ PlasmoidItem {
             onTriggered: {
                 Plasmoid.configuration.seconds = modelData
                 seconds = modelData;
+                suspended = false
                 startTimer();
             }
         }
@@ -176,7 +177,7 @@ PlasmoidItem {
 
     function startTimer() {
         running = true;
-        suspended = false;
+        // unset suspended in saveTimer - we don't want to set a new seconds value if restarting from suspend
         opacityNeedsReset();
         saveTimer();
     }
@@ -202,10 +203,21 @@ PlasmoidItem {
     function saveTimer() {
         plasmoid.configuration.running = running ? seconds : 0;
         plasmoid.configuration.savedAt = new Date();
-        plasmoid.configuration.seconds = seconds
+        if (suspended && !running) {
+            Plasmoid.configuration.suspendedAtSecond = seconds;
+        } else {
+            if (!suspended) {
+                Plasmoid.configuration.seconds = seconds;
+            }
+            Plasmoid.configuration.suspendedAtSecond = -1;
+            suspended = false;
+        }
     }
 
-    function restoreToSeconds(cRunning, cSavedAt, cSeconds) {
+    function restoreToSeconds(cRunning, cSavedAt, cSeconds, cSuspendedAtSecond) {
+        if (cSuspendedAtSecond > -1 && cSuspendedAtSecond <= cSeconds) {
+            return cSuspendedAtSecond;
+        }
         if (cRunning > 0) {
             var elapsedSeconds = cRunning - ~~(~~(((new Date()).getTime() - cSavedAt.getTime()) / 1000));
             if (elapsedSeconds >= 0) {
