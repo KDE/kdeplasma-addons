@@ -204,6 +204,7 @@ Item {
                 activeFocusOnTab: true
                 elide: root.inPanel ? Text.ElideRight : Text.ElideNone
                 font.bold: root.alertMode
+                font.features: { "tnum": 1 }
                 fontSizeMode: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.VerticalFit : Text.HorizontalFit
                 horizontalAlignment: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.AlignJustify : Text.AlignHCenter
                 minimumPointSize: Kirigami.Theme.smallFont.pointSize
