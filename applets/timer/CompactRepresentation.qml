@@ -45,8 +45,8 @@ Item {
         }
     }
 
-    Keys.onUpPressed: adjustTime(10);
-    Keys.onDownPressed: adjustTime(-10);
+    Keys.onUpPressed: if (!root.running) { adjustTime(15); }
+    Keys.onDownPressed: if (!root.running) { adjustTime(-15); }
 
     function adjustTime(value) {
         const stepsize = Plasmoid.configuration.showSeconds ? 1 : 60
