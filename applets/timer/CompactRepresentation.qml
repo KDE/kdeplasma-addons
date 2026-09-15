@@ -45,18 +45,19 @@ Item {
         }
     }
 
-    Keys.onUpPressed: adjustSecond(10);
-    Keys.onDownPressed: adjustSecond(-10);
+    Keys.onUpPressed: adjustTime(10);
+    Keys.onDownPressed: adjustTime(-10);
 
-    function adjustSecond(value) {
-        while (value >= 15 && root.seconds + 1 < 24*60*60) {
-            Plasmoid.configuration.seconds += 1
-            root.seconds += 1;
+    function adjustTime(value) {
+        const stepsize = Plasmoid.configuration.showSeconds ? 1 : 60
+        while (value >= 15 && root.seconds + stepsize < 24*60*60) {
+            Plasmoid.configuration.seconds += stepsize
+            root.seconds += stepsize;
             value -= 15;
         }
-        while (value <= -15 && root.seconds - 1 >= 0) {
-            Plasmoid.configuration.seconds -= 1
-            root.seconds -= 1;
+        while (value <= -15) {
+            Plasmoid.configuration.seconds = Math.max(Plasmoid.configuration.seconds - stepsize, 0)
+            root.seconds = Math.max(root.seconds - stepsize, 0);
             value += 15;
         }
         return value;
@@ -67,7 +68,7 @@ Item {
         enabled: !root.running
         onWheel: {
             event.accepted = true;
-            rotation = compactRepresentation.adjustSecond(rotation);
+            rotation = compactRepresentation.adjustTime(rotation);
         }
     }
 
