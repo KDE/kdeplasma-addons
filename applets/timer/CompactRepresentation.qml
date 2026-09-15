@@ -181,6 +181,7 @@ Item {
                 font.bold: remainingTimeLabel.font.bold
                 fontSizeMode: remainingTimeLabel.fontSizeMode
                 horizontalAlignment: remainingTimeLabel.horizontalAlignment
+                verticalAlignment: Text.AlignVCenter
                 minimumPointSize: remainingTimeLabel.minimumPointSize
                 text: root.title
                 textFormat: Text.PlainText
