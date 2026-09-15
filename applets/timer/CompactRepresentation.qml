@@ -171,6 +171,9 @@ Item {
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
+                Layout.alignment: Qt.AlignHCenter
+                Layout.maximumWidth: Math.max(implicitWidth, root.showRemainingTime && remainingTimeLabel.implicitWidth)
+
                 visible: root.showTitle && root.title !== ""
 
                 elide: Text.ElideRight
@@ -185,9 +188,10 @@ Item {
             PlasmaComponents3.Label {
                 id: remainingTimeLabel
 
-                Layout.fillWidth: parent.Layout.fillWidth
+                Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.maximumWidth: implicitWidth
+                Layout.alignment: Qt.AlignHCenter
+                Layout.maximumWidth: Math.max(Plasmoid.configuration.showTitle && titleLabel.implicitWidth, implicitWidth)
                 visible: root.showRemainingTime
 
                 TextMetrics {
@@ -206,7 +210,7 @@ Item {
                 minimumPointSize: 1
                 verticalAlignment: Text.AlignVCenter
 
-                text: root.showSeconds
+                text: (root.showSeconds || !root.showRemainingTime)
                     ? TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm:ss")
                     : TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm");
                 textFormat: Text.PlainText
@@ -221,7 +225,9 @@ Item {
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.maximumWidth: (parent.visibleChildren.length > 1) ? Math.max(titleLabel.implicitWidth, remainingTimeLabel.implicitWidth) : -1
+                Layout.maximumWidth: root.inPanel
+                     ? Math.max(Plasmoid.configuration.showTitle && titleLabel.implicitWidth, remainingTimeLabel.implicitWidth)
+                     : -1
                 visible: root.showProgressBar
 
                 from: plasmoid.configuration.seconds
