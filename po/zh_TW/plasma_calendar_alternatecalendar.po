@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-02 00:45+0000\n"
-"PO-Revision-Date: 2026-07-22 01:18+0900\n"
+"PO-Revision-Date: 2026-09-15 14:02+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -96,7 +96,7 @@ msgstr "衣索比亞曆法"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Bikram Sambat"
-msgstr ""
+msgstr "維克拉姆曆"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -166,12 +166,10 @@ msgstr "%1 %2, %3 (%4)"
 #, kde-format
 msgctxt "@label date outside the officially published Bikram Sambat range"
 msgid " (approx.)"
-msgstr ""
+msgstr "（估算）"
 
 #: provider/nepalicalendar.cpp:261
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#, kde-format
 msgctxt "@label %1 Day number %2 Month name in Bikram Sambat %3 Year number"
 msgid "%1 %2, %3"
 msgstr "%1 %2, %3"

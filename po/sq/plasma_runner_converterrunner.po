@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-09-16 00:47+0000\n"
 "PO-Revision-Date: 2010-02-25 14:59+0000\n"
 "Last-Translator: Vilson Gjeci <vilsongjeci@gmail.com>\n"
 "Language-Team: Albanian <sq@li.org>\n"
@@ -38,8 +38,14 @@ msgstr ""
 "\". Ju mund të përdorni programthin e Konvertimit të njësive për të gjetur "
 "të gjitha njësitë e disponueshme."
 
-#: converterrunner.cpp:40
-#, kde-format
-msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
+#: converterrunner.cpp:44
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
+#| msgid "in;to;as"
+msgctxt ""
+"list of words that can be used as amount of 'unit1' [in|to|as] 'unit2' (e.g. "
+"'km [in|to|as] miles'). Can be more (or less) than three words, if it makes "
+"sense. Do not put spaces before or after the `;`!"
 msgid "in;to;as"
 msgstr "in;to;as"
