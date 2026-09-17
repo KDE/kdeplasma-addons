@@ -3,21 +3,22 @@
 # Lukáš Tinkl <ltinkl@redhat.com>, 2010.
 # Vít Pelčák <vit@pelcak.org>, 2011.
 # Vit Pelcak <vit@pelcak.org>, 2021, 2023.
+# SPDX-FileCopyrightText: 2026 Libor Filipek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: krunner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-16 00:47+0000\n"
-"PO-Revision-Date: 2023-05-02 15:15+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-09-16 12:07+0200\n"
+"Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: converterrunner.cpp:30
 #, kde-format
@@ -35,10 +36,7 @@ msgstr ""
 "jednotek."
 
 #: converterrunner.cpp:44
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
-#| msgid "in;to;as"
+#, kde-format
 msgctxt ""
 "list of words that can be used as amount of 'unit1' [in|to|as] 'unit2' (e.g. "
 "'km [in|to|as] miles'). Can be more (or less) than three words, if it makes "

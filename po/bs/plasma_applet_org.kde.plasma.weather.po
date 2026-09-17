@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 00:47+0000\n"
+"POT-Creation-Date: 2026-09-17 00:45+0000\n"
 "PO-Revision-Date: 2012-09-03 13:02+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -433,13 +433,21 @@ msgctxt "@title"
 msgid "Units"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:37
+#: qml/config/ConfigAppearance.qml:46 qml/config/ConfigWeatherStation.qml:119
+#, kde-format
+msgctxt "@label:info. %1 is the name of a weather service"
+msgid ""
+"“%1” may not offer the current temperature or other weather conditions for "
+"this location."
+msgstr ""
+
+#: qml/config/ConfigAppearance.qml:53
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:45
+#: qml/config/ConfigAppearance.qml:61
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -447,31 +455,31 @@ msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Pritisak: %1 %2"
 
-#: qml/config/ConfigAppearance.qml:48
+#: qml/config/ConfigAppearance.qml:64
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:56
+#: qml/config/ConfigAppearance.qml:72
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:63
+#: qml/config/ConfigAppearance.qml:79
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:72
+#: qml/config/ConfigAppearance.qml:88
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:73
+#: qml/config/ConfigAppearance.qml:89
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -479,13 +487,13 @@ msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Pritisak: %1 %2"
 
-#: qml/config/ConfigAppearance.qml:78
+#: qml/config/ConfigAppearance.qml:94
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:83
+#: qml/config/ConfigAppearance.qml:99
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -493,7 +501,7 @@ msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Pritisak: %1 %2"
 
-#: qml/config/ConfigAppearance.qml:88
+#: qml/config/ConfigAppearance.qml:104
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"
@@ -561,19 +569,19 @@ msgctxt "@label"
 msgid "Provider:"
 msgstr ""
 
-#: qml/config/ConfigWeatherStation.qml:122
+#: qml/config/ConfigWeatherStation.qml:130
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr ""
 
-#: qml/config/ConfigWeatherStation.qml:122
+#: qml/config/ConfigWeatherStation.qml:130
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr ""
 
-#: qml/config/ConfigWeatherStation.qml:202
+#: qml/config/ConfigWeatherStation.qml:210
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition, probability percentage"
 #| msgid "%1 (%2%)"
@@ -581,25 +589,25 @@ msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2%)"
 
-#: qml/config/ConfigWeatherStation.qml:233
+#: qml/config/ConfigWeatherStation.qml:241
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr ""
 
-#: qml/config/ConfigWeatherStation.qml:235
+#: qml/config/ConfigWeatherStation.qml:243
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr ""
 
-#: qml/config/ConfigWeatherStation.qml:237
+#: qml/config/ConfigWeatherStation.qml:245
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr ""
 
-#: qml/config/ConfigWeatherStation.qml:240
+#: qml/config/ConfigWeatherStation.qml:248
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

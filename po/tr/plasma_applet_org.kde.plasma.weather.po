@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 00:47+0000\n"
+"POT-Creation-Date: 2026-09-17 00:45+0000\n"
 "PO-Revision-Date: 2026-03-15 13:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -428,61 +428,69 @@ msgctxt "@title"
 msgid "Units"
 msgstr "Birimler"
 
-#: qml/config/ConfigAppearance.qml:37
+#: qml/config/ConfigAppearance.qml:46 qml/config/ConfigWeatherStation.qml:119
+#, kde-format
+msgctxt "@label:info. %1 is the name of a weather service"
+msgid ""
+"“%1” may not offer the current temperature or other weather conditions for "
+"this location."
+msgstr ""
+
+#: qml/config/ConfigAppearance.qml:53
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "Sıkışık Kip"
 
-#: qml/config/ConfigAppearance.qml:45
+#: qml/config/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Sıcaklığı göster:"
 
-#: qml/config/ConfigAppearance.qml:48
+#: qml/config/ConfigAppearance.qml:64
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Araç takımı simgesinin üzerinde"
 
-#: qml/config/ConfigAppearance.qml:56
+#: qml/config/ConfigAppearance.qml:72
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Araç takımı simgesinin yanında"
 
-#: qml/config/ConfigAppearance.qml:63
+#: qml/config/ConfigAppearance.qml:79
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Gösterme"
 
-#: qml/config/ConfigAppearance.qml:72
+#: qml/config/ConfigAppearance.qml:88
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "Araç ipucunda göster:"
 
-#: qml/config/ConfigAppearance.qml:73
+#: qml/config/ConfigAppearance.qml:89
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Sıcaklık"
 
-#: qml/config/ConfigAppearance.qml:78
+#: qml/config/ConfigAppearance.qml:94
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Rüzgâr"
 
-#: qml/config/ConfigAppearance.qml:83
+#: qml/config/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Basınç"
 
-#: qml/config/ConfigAppearance.qml:88
+#: qml/config/ConfigAppearance.qml:104
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
@@ -543,43 +551,43 @@ msgctxt "@label"
 msgid "Provider:"
 msgstr "Sağlayıcı:"
 
-#: qml/config/ConfigWeatherStation.qml:122
+#: qml/config/ConfigWeatherStation.qml:130
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Yeni konum gir"
 
-#: qml/config/ConfigWeatherStation.qml:122
+#: qml/config/ConfigWeatherStation.qml:130
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Konum gir"
 
-#: qml/config/ConfigWeatherStation.qml:202
+#: qml/config/ConfigWeatherStation.qml:210
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/config/ConfigWeatherStation.qml:233
+#: qml/config/ConfigWeatherStation.qml:241
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "“%1” için hava durumu istasyonu bulunamadı"
 
-#: qml/config/ConfigWeatherStation.qml:235
+#: qml/config/ConfigWeatherStation.qml:243
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Konumunuzu değiştirmek için bir hava durumu istasyonu arayın"
 
-#: qml/config/ConfigWeatherStation.qml:237
+#: qml/config/ConfigWeatherStation.qml:245
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Konumunuzu ayarlamak için bir hava durumu istasyonu arayın"
 
-#: qml/config/ConfigWeatherStation.qml:240
+#: qml/config/ConfigWeatherStation.qml:248
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""

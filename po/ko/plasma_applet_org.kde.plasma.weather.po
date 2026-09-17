@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-08 00:47+0000\n"
+"POT-Creation-Date: 2026-09-17 00:45+0000\n"
 "PO-Revision-Date: 2026-04-08 20:12+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -424,61 +424,69 @@ msgctxt "@title"
 msgid "Units"
 msgstr "단위"
 
-#: qml/config/ConfigAppearance.qml:37
+#: qml/config/ConfigAppearance.qml:46 qml/config/ConfigWeatherStation.qml:119
+#, kde-format
+msgctxt "@label:info. %1 is the name of a weather service"
+msgid ""
+"“%1” may not offer the current temperature or other weather conditions for "
+"this location."
+msgstr ""
+
+#: qml/config/ConfigAppearance.qml:53
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "축소 모드"
 
-#: qml/config/ConfigAppearance.qml:45
+#: qml/config/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "온도 표시:"
 
-#: qml/config/ConfigAppearance.qml:48
+#: qml/config/ConfigAppearance.qml:64
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "위젯 아이콘 위에"
 
-#: qml/config/ConfigAppearance.qml:56
+#: qml/config/ConfigAppearance.qml:72
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "위젯 아이콘 옆에"
 
-#: qml/config/ConfigAppearance.qml:63
+#: qml/config/ConfigAppearance.qml:79
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "표시하지 않기"
 
-#: qml/config/ConfigAppearance.qml:72
+#: qml/config/ConfigAppearance.qml:88
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "풍선 도움말에 표시:"
 
-#: qml/config/ConfigAppearance.qml:73
+#: qml/config/ConfigAppearance.qml:89
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "온도"
 
-#: qml/config/ConfigAppearance.qml:78
+#: qml/config/ConfigAppearance.qml:94
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "바람"
 
-#: qml/config/ConfigAppearance.qml:83
+#: qml/config/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "기압"
 
-#: qml/config/ConfigAppearance.qml:88
+#: qml/config/ConfigAppearance.qml:104
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
@@ -538,43 +546,43 @@ msgctxt "@label"
 msgid "Provider:"
 msgstr "공급자:"
 
-#: qml/config/ConfigWeatherStation.qml:122
+#: qml/config/ConfigWeatherStation.qml:130
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "새 위치 입력"
 
-#: qml/config/ConfigWeatherStation.qml:122
+#: qml/config/ConfigWeatherStation.qml:130
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "위치 입력"
 
-#: qml/config/ConfigWeatherStation.qml:202
+#: qml/config/ConfigWeatherStation.qml:210
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/config/ConfigWeatherStation.qml:233
+#: qml/config/ConfigWeatherStation.qml:241
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "'%1'의 기상대를 찾을 수 없습니다"
 
-#: qml/config/ConfigWeatherStation.qml:235
+#: qml/config/ConfigWeatherStation.qml:243
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "현재 위치를 변경하기 위하여 기상대 검색"
 
-#: qml/config/ConfigWeatherStation.qml:237
+#: qml/config/ConfigWeatherStation.qml:245
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "현재 위치를 설정하기 위하여 기상대 검색"
 
-#: qml/config/ConfigWeatherStation.qml:240
+#: qml/config/ConfigWeatherStation.qml:248
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
