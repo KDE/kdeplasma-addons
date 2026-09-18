@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-17 00:45+0000\n"
-"PO-Revision-Date: 2025-07-09 05:31+0200\n"
+"PO-Revision-Date: 2026-09-17 04:55+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.9\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -432,6 +432,8 @@ msgid ""
 "“%1” may not offer the current temperature or other weather conditions for "
 "this location."
 msgstr ""
+"\"%1\"-ს არ შეუძლია მიმდინარე ტემპერატურისა და სხვა ამინდის პირობების "
+"შემოთავაზება ამ მდებარეობისთვის."
 
 #: qml/config/ConfigAppearance.qml:53
 #, kde-format
