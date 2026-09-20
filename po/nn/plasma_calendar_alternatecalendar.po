@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-02 00:45+0000\n"
-"PO-Revision-Date: 2026-07-26 12:48+0200\n"
+"PO-Revision-Date: 2026-09-19 16:36+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -14,7 +14,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.11.70\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -92,11 +92,12 @@ msgctxt "@item:inlist"
 msgid "Ethiopian Calendar"
 msgstr "Etiopisk kalender"
 
+# Brukar stavemåten frå nynorsk wikipedia: https://nn.wikipedia.org/wiki/Vikram_Samvat
 #: calendarsystem.h:97
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Bikram Sambat"
-msgstr ""
+msgstr "Vikram samvat"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -171,12 +172,10 @@ msgstr "%1. %2 %3 (%4)"
 #, kde-format
 msgctxt "@label date outside the officially published Bikram Sambat range"
 msgid " (approx.)"
-msgstr ""
+msgstr " (omtrentleg)"
 
 #: provider/nepalicalendar.cpp:261
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#, kde-format
 msgctxt "@label %1 Day number %2 Month name in Bikram Sambat %3 Year number"
 msgid "%1 %2, %3"
 msgstr "%1. %2 %3"

@@ -1,7 +1,7 @@
 # Translation of plasma_runner_converterrunner to Norwegian Nynorsk
 #
 # Eirik U. Birkeland <eirbir@gmail.com>, 2009, 2010.
-# Karl Ove Hufthammer <karl@huftis.org>, 2020, 2023.
+# Karl Ove Hufthammer <karl@huftis.org>, 2020, 2023, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.1\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
