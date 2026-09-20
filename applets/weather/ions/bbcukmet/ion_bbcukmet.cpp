@@ -427,6 +427,8 @@ void UKMETIon::places_slotJobFinished(KJob *job)
 
 void UKMETIon::places_slotJobAutoFinished(KJob *job)
 {
+    --m_pendingSearchCount;
+
     if (m_locationPromise->isCanceled()) {
         if (!m_pendingSearchCount) {
             m_locationPromise->finish();
@@ -434,8 +436,6 @@ void UKMETIon::places_slotJobAutoFinished(KJob *job)
         }
         return;
     }
-
-    --m_pendingSearchCount;
 
     // If Redirected, don't go to this routine
     if (!job->error()) {
