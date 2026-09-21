@@ -79,8 +79,6 @@ void NOAAIon::findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> p
         return;
     }
 
-    QString sourceNormalized = searchString.toUpper();
-
     // If the source name might look like a station ID, check these too and return the name
     bool checkState = searchString.size() == 2;
 
@@ -96,14 +94,14 @@ void NOAAIon::findPlaces(std::shared_ptr<QPromise<std::shared_ptr<Locations>>> p
                 location.setCode(it.value().stationID);
                 locations->addLocation(location);
             }
-        } else if (it.key().toUpper().contains(sourceNormalized)) {
+        } else if (matchesSearchString(it.key(), searchString)) {
             Location location;
             location.setDisplayName(it.key());
             location.setStation(it.value().stateName);
             location.setPlaceInfo(it.key());
             location.setCode(it.value().stationID);
             locations->addLocation(location);
-        } else if (it.value().stationID == sourceNormalized) {
+        } else if (matchesSearchString(it.value().stationID, searchString)) {
             Location location;
             location.setDisplayName(it.key());
             location.setStation(it.value().stateName);

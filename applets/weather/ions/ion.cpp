@@ -8,6 +8,8 @@
 
 #include <KHolidays/SunEvents>
 
+using namespace Qt::StringLiterals;
+
 Ion::Ion(QObject *parent)
     : QObject(parent)
 {
@@ -147,6 +149,23 @@ QString Ion::getWeatherIcon(ConditionIcons condition) const
 QString Ion::getWeatherIcon(const QMap<QString, ConditionIcons> &conditionList, const QString &condition) const
 {
     return getWeatherIcon(conditionList[condition.toLower()]);
+}
+
+bool Ion::matchesSearchString(const QString &location, const QString &searchString) const
+{
+    const auto normalize = [](const QString &string) {
+        QString result;
+        result.reserve(string.size());
+
+        for (const QChar c : string) {
+            if (c.isLetterOrNumber()) {
+                result += c.toCaseFolded();
+            }
+        }
+
+        return result;
+    };
+    return normalize(location).contains(normalize(searchString));
 }
 
 bool Ion::isNightTime(const QDateTime &dateTime, double latitude, double longitude)

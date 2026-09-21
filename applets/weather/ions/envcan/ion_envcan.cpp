@@ -305,9 +305,8 @@ void EnvCanadaIon::validate(const QString &source)
 
     qCDebug(WEATHER::ION::ENVCAN) << "start adding locations";
 
-    QString sourceNormalized = source.toUpper();
     for (auto it = m_places.constBegin(); it != m_places.constEnd(); ++it) {
-        if (it.key().toUpper().contains(sourceNormalized)) {
+        if (matchesSearchString(it.key(), source)) {
             Location location;
             location.setDisplayName(it.key());
             location.setStation(it->territoryName);

@@ -340,7 +340,7 @@ void DWDIon::searchInStationList(const QString &searchText)
     qCDebug(WEATHER::ION::DWD) << "Searching in station list:" << flatSearchText;
 
     for (const auto [name, id] : m_place.asKeyValueRange()) {
-        if (name.contains(flatSearchText, Qt::CaseInsensitive)) {
+        if (matchesSearchString(name, flatSearchText)) {
             m_locations.append(name);
         }
     }

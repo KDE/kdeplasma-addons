@@ -143,5 +143,11 @@ protected:
      */
     QString getWindDirectionIcon(const QMap<QString, WindDirections> &windDirList, const QString &windDirection) const;
 
+    /*!
+     * Returns whether a location name \a text matches \a searchString,
+     * ignoring case and non-alphanumeric characters.
+     */
+    bool matchesSearchString(const QString &location, const QString &searchString) const;
+
     static bool isNightTime(const QDateTime &dateTime, double latitude, double longitude);
 };
