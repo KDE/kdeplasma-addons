@@ -50,9 +50,6 @@ public:
     QString place;
     QString stationName;
 
-    // time difference to UTC
-    int timeDifference;
-
     // credits as returned from API request
     QString credits;
     QString creditsUrl;
