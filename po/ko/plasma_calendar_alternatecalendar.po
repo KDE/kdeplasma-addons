@@ -1,21 +1,21 @@
 # Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# SPDX-FileCopyrightText: 2022, 2023, 2026 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2022-2023, 2026 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-02 00:45+0000\n"
-"PO-Revision-Date: 2026-04-26 21:40+0200\n"
-"Last-Translator: Shinjo Park <kde@peremen.name>\n"
-"Language-Team: Korean <kde-kr@kde.org>\n"
+"PO-Revision-Date: 2026-09-21 23:48+0200\n"
+"Last-Translator: Shinjo Park <peremen@gmail.com>\n"
+"Language-Team: Korean\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: calendarsystem.h:53
 #, kde-format
@@ -84,18 +84,16 @@ msgid "Vietnamese Lunar Calendar"
 msgstr "베트남 음력"
 
 #: calendarsystem.h:93
-#, fuzzy, kde-format
-#| msgctxt "@item:inlist"
-#| msgid "Indian National Calendar"
+#, kde-format
 msgctxt "@item:inlist"
 msgid "Ethiopian Calendar"
-msgstr "인도 국민력"
+msgstr "에티오피아력"
 
 #: calendarsystem.h:97
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Bikram Sambat"
-msgstr ""
+msgstr "비크람 삼바트"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
@@ -133,11 +131,7 @@ msgid ""
 msgstr "양의 보정치는 이후 날짜, 음의 보정치는 이전 날짜입니다."
 
 #: provider/ethiopiancalendar.cpp:86
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
-#| "number %4 Full date in Hebrew"
-#| msgid "%1 %2, %3 (%4)"
+#, kde-format
 msgctxt ""
 "%1 Day number %2 Translated month name in Ethiopian calendar %3 Year number "
 "%4 Full date in Ethiopian"
@@ -170,12 +164,10 @@ msgstr "%3년 %2 %1일(%4)"
 #, kde-format
 msgctxt "@label date outside the officially published Bikram Sambat range"
 msgid " (approx.)"
-msgstr ""
+msgstr "(대략적)"
 
 #: provider/nepalicalendar.cpp:261
-#, fuzzy, kde-format
-#| msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
-#| msgid "%1 %2, %3"
+#, kde-format
 msgctxt "@label %1 Day number %2 Month name in Bikram Sambat %3 Year number"
 msgid "%1 %2, %3"
 msgstr "%3년 %2 %1일"
