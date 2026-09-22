@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# giovanni <g.sora@tiscali.it>, 2017, 2021, 2023.
+# SPDX-FileCopyrightText: 2017, 2021, 2023, 2026 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-16 00:47+0000\n"
-"PO-Revision-Date: 2023-05-01 16:32+0200\n"
+"PO-Revision-Date: 2026-09-21 12:24+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: converterrunner.cpp:30
 #, kde-format
@@ -33,10 +33,7 @@ msgstr ""
 "omne unitates disponibile."
 
 #: converterrunner.cpp:44
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
-#| msgid "in;to;as"
+#, kde-format
 msgctxt ""
 "list of words that can be used as amount of 'unit1' [in|to|as] 'unit2' (e.g. "
 "'km [in|to|as] miles'). Can be more (or less) than three words, if it makes "
