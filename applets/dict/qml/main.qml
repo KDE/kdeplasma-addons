@@ -21,7 +21,7 @@ PlasmoidItem {
     // panels don't take keyboard focus when you click them, so the fullRepresentation in a very thick
     // panel is worse than useless as the user can't really do anything with it. If that changes, allow
     // the widget to switch to fullRepresentation in panels too.
-    switchWidth: inPanel ? -1 : Kirigami.Units.gridUnit * 10
+    switchWidth: inPanel ? -1 : Kirigami.Units.gridUnit * 15
     switchHeight: inPanel ? -1 : Kirigami.Units.gridUnit * 10
     Plasmoid.icon: "accessories-dictionary-symbolic"
 
@@ -84,7 +84,6 @@ PlasmoidItem {
         Item {
             Layout.fillWidth: true
             Layout.fillHeight: true
-            Layout.minimumHeight: input.Layout.minimumWidth
 
             WebEngineView {
                 id: web
