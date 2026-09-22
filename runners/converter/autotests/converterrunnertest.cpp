@@ -21,6 +21,7 @@ private Q_SLOTS:
     void testMostCommonUnits();
     void testCurrency();
     void testLettersAndCurrency();
+    void testCurrencyUnitBeforeValue();
     void testFractionsWithoutSpecifiedTarget();
     void testQuery_data();
     void testQuery();
@@ -84,6 +85,17 @@ void ConverterRunnerTest::testLettersAndCurrency()
 }
 
 /**
+ * Test having currency unit before the value
+ */
+void ConverterRunnerTest::testCurrencyUnitBeforeValue()
+{
+    launchQuery(QStringLiteral("gbp 10 in cad"));
+
+    QCOMPARE(manager->matches().count(), 1);
+    QVERIFY2(manager->matches().constFirst().text().contains(QLatin1String("Canadian dollars (CAD)")), qUtf8Printable(manager->matches().constFirst().text()));
+}
+
+/**
  * Test if fractions with source unit, but without target unit get parsed
  */
 void ConverterRunnerTest::testFractionsWithoutSpecifiedTarget()
@@ -112,6 +124,12 @@ void ConverterRunnerTest::testQuery_data()
     // megaseconds (Ms) and milliseconds (ms)
     QTest::newRow("test case sensitive units") << QStringLiteral("1Ms as ms") << QStringLiteral("1,000,000,000 milliseconds (ms)");
     QTest::newRow("test case sensitive units") << QStringLiteral("1,000,000,000milliseconds>Ms") << QStringLiteral("1 megasecond (Ms)");
+    QTest::newRow("test arrow conversion") << QStringLiteral("1m->cm") << QStringLiteral("100 centimeters (cm)");
+    QTest::newRow("test same input unit as conversion word") << QStringLiteral("12 in in ft") << QStringLiteral("1 feet (ft)");
+    QTest::newRow("test same output unit as conversion word") << QStringLiteral("1 ft in in") << QStringLiteral("12 inches (in)");
+    QTest::newRow("test scientific notation") << QStringLiteral("1.2e6cm in km") << QStringLiteral("12 kilometers (km)");
+    QTest::newRow("test negative scientific notation") << QStringLiteral("2.5E-5km=mm") << QStringLiteral("25 millimeters (mm)");
+    QTest::newRow("test scientific notation with the + sign") << QStringLiteral("8e+7mm3 => l") << QStringLiteral("80 liters (l)");
 }
 
 void ConverterRunnerTest::testQuery()
@@ -132,6 +150,7 @@ void ConverterRunnerTest::testInvalidQuery_data()
     QTest::newRow("test invalid fraction without unit") << QStringLiteral("1/2");
     QTest::newRow("test invalid fraction without unit but valid target unit") << QStringLiteral("4/4>cm");
     QTest::newRow("test invalid currency") << QStringLiteral("4us$>abc$");
+    QTest::newRow("test non-currency unit before value") << QStringLiteral("m10>cm");
 }
 
 void ConverterRunnerTest::testInvalidQuery()

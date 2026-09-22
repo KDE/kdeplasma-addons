@@ -36,22 +36,29 @@ ConverterRunner::ConverterRunner(QObject *parent, const KPluginMetaData &metaDat
 
 void ConverterRunner::init()
 {
-    valueRegex = QRegularExpression(QStringLiteral("^([0-9,./+-]+)"));
-    const QStringList conversionWords =
+    // Splits the query into 3 groups: everything before the number, the number and everything after.
+    // The number group will not match a '-' at the end to prevent "eating" it from the "->" conversion symbol, in queries like: "usd10->eur"
+    splitRegex = QRegularExpression(QStringLiteral("^(.*?)([0-9,./+-]+(?:[eE][+-]?[0-9]+)?(?<!-))(.*)"));
+
+    const QStringList conversionWordList =
         i18nc(
             "list of words that can be used as amount of 'unit1' [in|to|as] 'unit2' (e.g. 'km [in|to|as] miles'). Can be more (or less) than three words, if "
             "it makes sense. Do not put spaces before or after the `;`!",
             "in;to;as")
             .split(QLatin1Char(';'));
-    QString conversionRegex;
-    for (const auto &word : conversionWords) {
-        conversionRegex.append(QLatin1Char(' ') + word.trimmed() + QStringLiteral(" |"));
+    QString conversionWords;
+    for (qsizetype i = 0; i < conversionWordList.length(); i++) {
+        if (i > 0) {
+            conversionWords.append(QLatin1Char('|'));
+        }
+        conversionWords.append(QRegularExpression::escape(conversionWordList[i].trimmed()));
     }
-    conversionRegex.append(QStringLiteral(" ?> ?"));
-    unitSeperatorRegex = QRegularExpression(conversionRegex);
+
+    // Matches the conversion words/symbols, the conversion words must be surrounded by spaces (or the string boundary), symbols dont have to.
+    conversionOperatorRegex = QRegularExpression(QStringLiteral("(?:^| )(?:%1)(?= |$)|[=-]?>|=+").arg(conversionWords));
 
     setMinLetterCount(2);
-    setMatchRegex(valueRegex);
+    setMatchRegex(splitRegex);
 
     converter = std::make_unique<KUnitConversion::Converter>();
     checkCompatibleUnits();
@@ -65,21 +72,26 @@ ConverterRunner::~ConverterRunner() = default;
 
 void ConverterRunner::match(RunnerContext &context)
 {
-    const QRegularExpressionMatch valueRegexMatch = valueRegex.match(context.query());
-    if (!valueRegexMatch.hasMatch()) {
+    const QRegularExpressionMatch splitRegexMatch = splitRegex.match(context.query().simplified());
+    if (!splitRegexMatch.hasMatch()) {
+        return;
+    }
+    const QStringView beforeValue = splitRegexMatch.capturedView(1).trimmed();
+    const QString inputValueString = splitRegexMatch.captured(2).trimmed();
+    const QStringView afterValue = splitRegexMatch.capturedView(3).trimmed();
+    if (beforeValue.isEmpty() && afterValue.isEmpty()) {
         return;
     }
 
-    const QString inputValueString = valueRegexMatch.captured(1);
-
-    // Get the different units by splitting up the query with the regex
-    QStringList unitStrings = context.query().simplified().remove(valueRegex).split(unitSeperatorRegex);
-    if (unitStrings.isEmpty() || unitStrings.at(0).isEmpty()) {
+    const auto parsedUnitStrings = parseQueryUnits(beforeValue, afterValue);
+    // Return if input unit is empty
+    if (parsedUnitStrings.first.isEmpty()) {
         return;
     }
+    QString inputUnitString = parsedUnitStrings.first.toString();
+    QString outputUnitString = parsedUnitStrings.second.toString();
 
     // Check if unit is valid, otherwise check for the value in the compatibleUnits map
-    QString inputUnitString = unitStrings.first().simplified();
     KUnitConversion::UnitCategory inputCategory = converter->categoryForUnit(inputUnitString);
     if (inputCategory.id() == KUnitConversion::InvalidCategory) {
         inputUnitString = compatibleUnits.value(inputUnitString.toUpper());
@@ -89,9 +101,9 @@ void ConverterRunner::match(RunnerContext &context)
         }
     }
 
-    QString outputUnitString;
-    if (unitStrings.size() == 2) {
-        outputUnitString = unitStrings.at(1).simplified();
+    // Return if the unit is before the value and the unit is not a currency to avoid ambiguous situations like: 'm23' ('3m2' vs '23m')
+    if (!beforeValue.isEmpty() && inputCategory.id() != KUnitConversion::CurrencyCategory) {
+        return;
     }
 
     const KUnitConversion::Unit inputUnit = inputCategory.unit(inputUnitString);
@@ -165,6 +177,10 @@ QPair<bool, double> ConverterRunner::getValidatedNumberValue(const QString &valu
     }
 
     if (fractionParts.count() == 2) {
+        // Dont allow a number containing both a fraction and scientific notation
+        if (value.contains(QLatin1Char('e'), Qt::CaseInsensitive)) {
+            return {false, 0};
+        }
         const QPair<bool, double> doubleFirstResults = stringToDouble(fractionParts.first());
         if (!doubleFirstResults.first) {
             return {false, 0};
@@ -183,6 +199,37 @@ QPair<bool, double> ConverterRunner::getValidatedNumberValue(const QString &valu
     } else {
         return {true, 0};
     }
+}
+
+QPair<QStringView, QStringView> ConverterRunner::parseQueryUnits(const QStringView beforeValue, const QStringView afterValue)
+{
+    if (!beforeValue.isEmpty()) {
+        if (afterValue.isEmpty()) {
+            return {beforeValue, QStringView()};
+        }
+        const QRegularExpressionMatch conversionWordMatch = conversionOperatorRegex.matchView(afterValue);
+        if (conversionWordMatch.hasMatch() && conversionWordMatch.capturedStart() == 0) {
+            return {beforeValue, afterValue.sliced(conversionWordMatch.capturedEnd()).trimmed()};
+        }
+        return {QStringView(), QStringView()};
+    }
+
+    // Searches for a suitable match for the conversion operator
+    QRegularExpressionMatchIterator it = conversionOperatorRegex.globalMatchView(afterValue);
+    while (it.hasNext()) {
+        const auto match = it.next();
+        if (match.capturedStart() == 0) {
+            continue;
+        }
+
+        // Continue only if the next match is directly behind this match and is not at the end of the string
+        if (it.hasNext() && match.capturedEnd() == it.peekNext().capturedStart() && it.peekNext().capturedEnd() != afterValue.length()) {
+            continue;
+        }
+        return {afterValue.first(match.capturedStart()).trimmed(), afterValue.sliced(match.capturedEnd()).trimmed()};
+    }
+
+    return {afterValue, QStringView()};
 }
 
 QList<KUnitConversion::Unit> ConverterRunner::createResultUnits(QString &outputUnitString, const KUnitConversion::UnitCategory &category)

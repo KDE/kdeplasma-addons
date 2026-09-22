@@ -41,8 +41,8 @@ private Q_SLOTS:
 private:
     std::unique_ptr<KUnitConversion::Converter> converter;
     const QLocale locale;
-    QRegularExpression valueRegex;
-    QRegularExpression unitSeperatorRegex;
+    QRegularExpression splitRegex;
+    QRegularExpression conversionOperatorRegex;
     /** To convert currency symbols back to ISO string and handle case sensitive units */
     QMap<QString, QString> compatibleUnits;
 
@@ -51,6 +51,7 @@ private:
     const KRunner::Actions actionList;
     QPair<bool, double> stringToDouble(const QStringView &value);
     QPair<bool, double> getValidatedNumberValue(const QString &value);
+    QPair<QStringView, QStringView> parseQueryUnits(const QStringView beforeValue, const QStringView afterValue);
     QList<KUnitConversion::Unit> createResultUnits(QString &outputUnitString, const KUnitConversion::UnitCategory &category);
 };
 
