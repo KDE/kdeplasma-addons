@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-09-22 19:11+0000\n"
 "PO-Revision-Date: 2025-04-30 02:34+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -40,7 +40,7 @@ msgstr "新增更多…"
 msgid "Unable to load dictionary list"
 msgstr "無法載入字典列表"
 
-#: qml/ConfigDictionaries.qml:85 qml/main.qml:163
+#: qml/ConfigDictionaries.qml:85 qml/main.qml:162
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -62,7 +62,7 @@ msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "在此輸入要定義的單字…"
 
-#: qml/main.qml:162
+#: qml/main.qml:161
 #, kde-format
 msgid "Unable to load definition"
 msgstr "無法載入定義"

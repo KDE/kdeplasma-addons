@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-09-22 19:11+0000\n"
 "PO-Revision-Date: 2023-03-26 18:35+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -41,7 +41,7 @@ msgstr "Aldoni pli…"
 msgid "Unable to load dictionary list"
 msgstr "Ne eblas ŝargi vortarliston"
 
-#: qml/ConfigDictionaries.qml:85 qml/main.qml:163
+#: qml/ConfigDictionaries.qml:85 qml/main.qml:162
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -63,7 +63,7 @@ msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Enigu ĉi tie vorton por difini…"
 
-#: qml/main.qml:162
+#: qml/main.qml:161
 #, kde-format
 msgid "Unable to load definition"
 msgstr "Ne eblas ŝargi difinon"
