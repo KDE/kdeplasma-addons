@@ -31,7 +31,24 @@ PlasmoidItem {
         || Plasmoid.location === PlasmaCore.Types.LeftEdge)
 
     fullRepresentation: ColumnLayout {
+        id: mainView
         Keys.forwardTo: input
+
+        property string resultHtml: ""
+        readonly property string styleSheet: `
+            <style>
+                dl {
+                    color: ${Kirigami.Theme.textColor};
+                    font-family: ${Kirigami.Theme.defaultFont.family};
+                    font-size: ${Kirigami.Theme.defaultFont.pointSize}pt;
+                }
+                a:link { color: ${Kirigami.Theme.linkColor}; }
+                a:visited { color: ${Kirigami.Theme.visitedLinkColor}; }
+            </style>`
+
+        onResultHtmlChanged: if (resultHtml.length) { web.loadHtml(styleSheet + resultHtml) }
+        onStyleSheetChanged: if (resultHtml.length) { web.loadHtml(styleSheet + resultHtml) }
+
 
         DictObject {
             id: dict
@@ -39,7 +56,7 @@ PlasmoidItem {
             // Activate the busy indicator, and deactivate it when page is loaded.
             onSearchInProgress: placeholder.opacity = 1;
             onDefinitionFound: html => {
-                web.loadHtml(html);
+                mainView.resultHtml = html;
                 placeholder.opacity = 0;
             }
         }
@@ -58,7 +75,7 @@ PlasmoidItem {
                     if (input.text === "") {
                         web.visible = false;
                         placeholder.opacity = 0;
-                        web.loadHtml("");
+                        mainView.resultHtml = "";
                     } else {
                         web.visible = Qt.binding(() => !dict.hasError);
                         dict.lookup(input.text);
@@ -87,8 +104,16 @@ PlasmoidItem {
 
             WebEngineView {
                 id: web
-                anchors.fill: parent
+                anchors.top: parent.top
+                anchors.left: parent.left
+                anchors.right: scrollBar.left
+                anchors.bottom: parent.bottom
+
                 visible: false
+                settings.showScrollBars: false
+                backgroundColor: "transparent"
+
+                onScrollPositionChanged: console.log(scrollPosition.y / contentsSize.height, height / contentsSize.height)
 
                 zoomFactor: 1
                 profile: dict.webProfile
@@ -111,6 +136,19 @@ PlasmoidItem {
                 onContextMenuRequested: request => {
                     request.accepted = true;
                     contextMenu.popup();
+                }
+            }
+
+            PlasmaComponents3.ScrollBar {
+                id: scrollBar
+                anchors.top: parent.top
+                anchors.right: parent.right
+                anchors.bottom: parent.bottom
+                visible: web.visible && web.contentsSize.height > web.height
+                size: web.height / web.contentsSize.height
+                position: web.scrollPosition.y / web.contentsSize.height
+                onPositionChanged: if (active) {
+                    web.runJavaScript("window.scrollTo(0, " + position * web.contentsSize.height  + ")")
                 }
             }
 
