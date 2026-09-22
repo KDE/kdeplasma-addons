@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: krunner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-16 00:47+0000\n"
+"POT-Creation-Date: 2026-09-22 16:02+0000\n"
 "PO-Revision-Date: 2023-06-18 19:37+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -38,7 +38,7 @@ msgstr ""
 "ca, la] unitate”. Puteți folosi miniaplicația „Convertor de unități” pentru "
 "a afla toate unitățile disponibile."
 
-#: converterrunner.cpp:44
+#: converterrunner.cpp:47
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"

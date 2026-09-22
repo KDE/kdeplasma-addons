@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-16 00:47+0000\n"
+"POT-Creation-Date: 2026-09-22 16:02+0000\n"
 "PO-Revision-Date: 2023-07-27 11:31+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -35,7 +35,7 @@ msgstr ""
 "yksiköt."
 
 # Jätin englanninkieliset muodot mukaan, koska tällainen ei toimi suomeksi kovin hyvin ja jotkut voivat niitä yrittää käyttää. Voi poistaa vapaasti.
-#: converterrunner.cpp:44
+#: converterrunner.cpp:47
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
