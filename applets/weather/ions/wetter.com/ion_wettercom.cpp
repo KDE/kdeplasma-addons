@@ -519,8 +519,8 @@ void WetterComIon::parseWeatherForecast(QXmlStreamReader &xml)
     auto forecast = std::make_shared<WeatherData::ForecastInfo>();
     int summaryWeather = -1, summaryProbability = 0;
     int tempMax = -273, tempMin = 100, weather = -1, probability = 0;
-    uint summaryUtcTime = 0, utcTime = 0, localTime = 0;
-    QString date, time;
+    qint64 summaryUtcTime = 0, summaryLocalTime = 0, utcTime = 0, localTime = 0;
+    bool isTimeElement = false;
 
     m_weatherData.place = m_place.displayName;
 
@@ -541,8 +541,11 @@ void WetterComIon::parseWeatherForecast(QXmlStreamReader &xml)
             if (elementName == QLatin1String("date")) {
                 // we have parsed a complete day
 
-                forecastPeriod->period = QDateTime::fromSecsSinceEpoch(summaryUtcTime, {QTimeZone::LocalTime});
+                const auto forecastTimezone = QTimeZone::fromSecondsAheadOfUtc(summaryLocalTime - summaryUtcTime);
+
                 QString weatherString = QString::number(summaryWeather);
+
+                forecastPeriod->period = QDateTime::fromSecsSinceEpoch(summaryUtcTime, QTimeZone::UTC).toTimeZone(forecastTimezone);
                 forecastPeriod->iconName = getWeatherIcon(dayIcons(), weatherString);
                 forecastPeriod->summary = getWeatherCondition(dayConditions(), weatherString);
                 forecastPeriod->probability = summaryProbability;
@@ -550,27 +553,25 @@ void WetterComIon::parseWeatherForecast(QXmlStreamReader &xml)
                 m_weatherData.forecasts.append(forecastPeriod);
                 forecastPeriod = std::make_shared<WeatherData::ForecastPeriod>();
 
-                date.clear();
                 summaryWeather = -1;
                 summaryProbability = 0;
                 summaryUtcTime = 0;
-            } else if (elementName == QLatin1String("time")) {
-                // we have parsed one forecast
-                // yep, that field is written to more often than needed...
-                m_weatherData.timeDifference = localTime - utcTime;
+                summaryLocalTime = 0;
 
-                forecast->period = QDateTime::fromSecsSinceEpoch(utcTime, {QTimeZone::LocalTime});
+            } else if (elementName == QLatin1String("time")) {
+                // wetter.com provides both UTC and local timestamps
+                const auto forecastTimezone = QTimeZone::fromSecondsAheadOfUtc(localTime - utcTime);
+                const auto localWeatherTime = QDateTime::fromSecsSinceEpoch(utcTime, QTimeZone::UTC).toTimeZone(forecastTimezone);
+
                 QString weatherString = QString::number(weather);
+
+                forecast->period = localWeatherTime;
                 forecast->tempHigh = tempMax;
                 forecast->tempLow = tempMin;
                 forecast->probability = probability;
 
-                QTime localWeatherTime = QDateTime::fromSecsSinceEpoch(utcTime, {QTimeZone::LocalTime}).time();
-                localWeatherTime = localWeatherTime.addSecs(m_weatherData.timeDifference);
-
                 // TODO use local sunset/sunrise time
-
-                if (localWeatherTime.hour() < 20 && localWeatherTime.hour() > 6) {
+                if (localWeatherTime.time().hour() < 20 && localWeatherTime.time().hour() > 6) {
                     forecast->iconName = getWeatherIcon(dayIcons(), weatherString);
                     forecast->summary = getWeatherCondition(dayConditions(), weatherString);
                     forecastPeriod->dayForecasts.append(forecast);
@@ -587,15 +588,15 @@ void WetterComIon::parseWeatherForecast(QXmlStreamReader &xml)
                 weather = -1;
                 probability = 0;
                 utcTime = localTime = 0;
-                time.clear();
+                isTimeElement = false;
             }
         }
 
         if (xml.isStartElement()) {
             if (elementName == QLatin1String("date")) {
-                date = xml.attributes().value(QStringLiteral("value")).toString();
+                continue;
             } else if (elementName == QLatin1String("time")) {
-                time = xml.attributes().value(QStringLiteral("value")).toString();
+                isTimeElement = true;
             } else if (elementName == QLatin1String("tx")) {
                 tempMax = qRound(xml.readElementText().toDouble());
             } else if (elementName == QLatin1String("tn")) {
@@ -603,7 +604,7 @@ void WetterComIon::parseWeatherForecast(QXmlStreamReader &xml)
             } else if (elementName == QLatin1Char('w')) {
                 int tmp = xml.readElementText().toInt();
 
-                if (!time.isEmpty())
+                if (isTimeElement)
                     weather = tmp;
                 else
                     summaryWeather = tmp;
@@ -613,7 +614,7 @@ void WetterComIon::parseWeatherForecast(QXmlStreamReader &xml)
             } else if (elementName == QLatin1String("pc")) {
                 int tmp = xml.readElementText().toInt();
 
-                if (!time.isEmpty())
+                if (isTimeElement)
                     probability = tmp;
                 else
                     summaryProbability = tmp;
@@ -623,11 +624,18 @@ void WetterComIon::parseWeatherForecast(QXmlStreamReader &xml)
             } else if (elementName == QLatin1String("link")) {
                 m_weatherData.creditsUrl = xml.readElementText();
             } else if (elementName == QLatin1Char('d')) {
-                localTime = xml.readElementText().toInt();
-            } else if (elementName == QLatin1String("du")) {
-                int tmp = xml.readElementText().toInt();
+                qint64 tmp = xml.readElementText().toLongLong();
 
-                if (!time.isEmpty())
+                if (isTimeElement) {
+                    localTime = tmp;
+                } else {
+                    summaryLocalTime = tmp;
+                }
+
+            } else if (elementName == QLatin1String("du")) {
+                qint64 tmp = xml.readElementText().toLongLong();
+
+                if (isTimeElement)
                     utcTime = tmp;
                 else
                     summaryUtcTime = tmp;
