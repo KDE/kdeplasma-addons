@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-09-22 16:02+0000\n"
 "PO-Revision-Date: 2026-06-28 11:59+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -42,7 +42,7 @@ msgstr "Legg til fleire …"
 msgid "Unable to load dictionary list"
 msgstr "Klarte ikkje lesa inn ordboksoversikt"
 
-#: qml/ConfigDictionaries.qml:85 qml/main.qml:163
+#: qml/ConfigDictionaries.qml:85 qml/main.qml:162
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -64,7 +64,7 @@ msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Skriv inn ordet du vil sjå tydinga til …"
 
-#: qml/main.qml:162
+#: qml/main.qml:161
 #, kde-format
 msgid "Unable to load definition"
 msgstr "Klarte ikkje henta inn definisjon"

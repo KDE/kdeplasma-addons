@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-17 00:45+0000\n"
+"POT-Creation-Date: 2026-09-22 16:02+0000\n"
 "PO-Revision-Date: 2025-03-15 12:37+0100\n"
 "Last-Translator: Martin Hansen <mh306602@gmail.com>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@nuug.no>\n"
@@ -134,24 +134,18 @@ msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
 msgstr ""
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1498
+#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1497
 #, fuzzy, kde-format
-#| msgctxt "pressure tendency"
-#| msgid "Rising"
 msgid "Rising"
 msgstr "Økende"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1500
+#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1499
 #, fuzzy, kde-format
-#| msgctxt "pressure tendency"
-#| msgid "Falling"
 msgid "Falling"
 msgstr "Fallende"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:723 ions/envcan/ion_envcan.cpp:1502
+#: ions/bbcukmet/ion_bbcukmet.cpp:723 ions/envcan/ion_envcan.cpp:1501
 #, fuzzy, kde-format
-#| msgctxt "pressure tendency"
-#| msgid "Steady"
 msgid "Steady"
 msgstr "Stabilt"
 
@@ -161,20 +155,20 @@ msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
 msgstr ""
 
-#: ions/envcan/ion_envcan.cpp:888 ions/envcan/ion_envcan.cpp:890
-#: ions/envcan/ion_envcan.cpp:1404 ions/envcan/ion_envcan.cpp:1455
-#: ions/noaa/ion_noaa.cpp:461
+#: ions/envcan/ion_envcan.cpp:887 ions/envcan/ion_envcan.cpp:889
+#: ions/envcan/ion_envcan.cpp:1403 ions/envcan/ion_envcan.cpp:1454
+#: ions/noaa/ion_noaa.cpp:459
 #, kde-format
 msgid "N/A"
 msgstr ""
 
-#: ions/envcan/ion_envcan.cpp:1431
+#: ions/envcan/ion_envcan.cpp:1430
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from Environment and Climate Change Canada"
 msgstr ""
 
-#: ions/noaa/ion_noaa.cpp:446
+#: ions/noaa/ion_noaa.cpp:444
 #, kde-format
 msgctxt "credit line, keep string short)"
 msgid "Data from NOAA National Weather Service"
@@ -183,7 +177,7 @@ msgstr ""
 #. i18n: The forecast summary can include several single conditions that follow
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
 #. If there is no suitable separator, a sentence separator might do.
-#: ions/noaa/ion_noaa.cpp:754
+#: ions/noaa/ion_noaa.cpp:752
 #, kde-format
 msgctxt ""
 "Separator between forecast conditions that follow a temporal sequence (ex. "
@@ -205,8 +199,6 @@ msgstr ""
 
 #: ions/wetter.com/ion_wettercom.cpp:138 ions/wetter.com/ion_wettercom.cpp:139
 #, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
 msgctxt "weather condition"
 msgid "overcast"
 msgstr "Værmelding"
@@ -365,8 +357,6 @@ msgstr ""
 
 #: ions/wetter.com/ion_wettercom.cpp:173
 #, fuzzy, kde-format
-#| msgctxt "@option:radio Show temperature:"
-#| msgid "Do not show"
 msgctxt "weather condition"
 msgid "snow showers"
 msgstr "Ikke vis"
@@ -415,8 +405,6 @@ msgstr ""
 
 #: ions/wetter.com/ion_wettercom.cpp:313
 #, fuzzy, kde-format
-#| msgctxt "A weather station location and the weather service it comes from"
-#| msgid "%1 (%2)"
 msgctxt "Geographical location: quarter (city), state, ISO-country-code"
 msgid "%1 (%2), %3, %4"
 msgstr "%1 (%2)"
@@ -644,7 +632,6 @@ msgstr "Klarte ikke hente værinformasjon for %1"
 
 #: qml/FullRepresentation.qml:67
 #, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
 msgid "Unable to retrieve weather information"
 msgstr "Klarte ikke hente værinformasjon for %1"
 
@@ -837,15 +824,11 @@ msgstr "%1 (%2)"
 
 #: weatherdata/futuredays.cpp:71
 #, fuzzy, kde-format
-#| msgctxt "Time of the day (from the duple Day/Night)"
-#| msgid "Day"
 msgid "Day"
 msgstr "Dag"
 
 #: weatherdata/futuredays.cpp:74
 #, fuzzy, kde-format
-#| msgctxt "Time of the day (from the duple Day/Night)"
-#| msgid "Night"
 msgid "Night"
 msgstr "Natt"
 

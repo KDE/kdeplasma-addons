@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# SPDX-FileCopyrightText: 2022, 2024, 2025 Mincho Kondarev <mkondarev@yahoo.de>
+# SPDX-FileCopyrightText: 2022, 2024-2026 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-22 16:02+0000\n"
-"PO-Revision-Date: 2025-07-28 19:59+0200\n"
+"PO-Revision-Date: 2026-09-22 23:29+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -431,6 +431,8 @@ msgid ""
 "“%1” may not offer the current temperature or other weather conditions for "
 "this location."
 msgstr ""
+"„%1“ може да не предлага текуща температура или други метеорологични условия "
+"за това местоположение."
 
 #: qml/config/ConfigAppearance.qml:53
 #, kde-format
