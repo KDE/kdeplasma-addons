@@ -36,6 +36,11 @@ void CheckNewStrips::dataUpdated(const ComicMetaData &data)
         return;
     }
 
+    // misbehaving comic plugins might end up sending multiple responses, which breaks our tracking and causes it to loop updates forever
+    if (QStringView(data.identifier).left(data.identifier.indexOf(QLatin1Char(':'))) != mIdentifiers[mIndex]) {
+        return;
+    }
+
     if (!data.error) {
         lastIdentifierSuffix = data.identifier;
         lastIdentifierSuffix.remove(source);
