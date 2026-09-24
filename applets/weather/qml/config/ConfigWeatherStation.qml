@@ -43,7 +43,7 @@ KCM.ScrollViewKCM {
         weatherStationConfigPage.cfg_placeDisplayName = plasmoid.configuration.placeDisplayName;
     }
 
-    extraFooterTopPadding: true
+    forceFooterSeparator: true
 
     header: ColumnLayout {
 

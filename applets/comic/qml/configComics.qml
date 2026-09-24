@@ -34,12 +34,8 @@ KCM.ScrollViewKCM {
         }
     ]
 
-    // HACK: get ScrollViewKCM to draw the separator line while there's no proper API to do so
-    function __headerSeparatorVisible(): bool {
-        return true
-    }
-
-    extraFooterTopPadding: true
+    forceHeaderSeparator: true
+    forceFooterSeparator: true
 
     view: ListView {
         id: comicListView

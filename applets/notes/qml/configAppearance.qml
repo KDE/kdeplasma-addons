@@ -20,7 +20,7 @@ KCM.GridViewKCM {
 
     readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge,PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge].includes(Plasmoid.location)
 
-    extraFooterTopPadding: true
+    forceFooterSeparator: true
 
     header: Kirigami.FormLayout {
         QQC2.SpinBox {
