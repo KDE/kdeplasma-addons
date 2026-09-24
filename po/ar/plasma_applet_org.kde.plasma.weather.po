@@ -1,7 +1,7 @@
 # translation of plasma_applet_weather.po to Arabic
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2021, 2022, 2024, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2021, 2022, 2024, 2025, 2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 # OsamaKhalid <osamak.wfm@gmail.com>, 2009.
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2017.
 # Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2024.
@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-22 16:02+0000\n"
-"PO-Revision-Date: 2025-10-25 16:35+0400\n"
+"PO-Revision-Date: 2026-09-23 17:22+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -434,7 +434,7 @@ msgctxt "@label:info. %1 is the name of a weather service"
 msgid ""
 "“%1” may not offer the current temperature or other weather conditions for "
 "this location."
-msgstr ""
+msgstr "قد لا يعرض ”%1“ درجة الحرارة الحالية أو أي ظروف جوية أخرى لهذا الموقع."
 
 #: qml/config/ConfigAppearance.qml:53
 #, kde-format
