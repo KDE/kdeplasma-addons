@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-25 00:47+0000\n"
 "PO-Revision-Date: 2022-12-31 16:35+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -127,7 +127,7 @@ msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Add"
 
-#: configTimes.qml:81
+#: configTimes.qml:87
 #, fuzzy, kde-format
 #| msgid ""
 #| "If you add predefined timers here, they will appear in plasmoid context "
@@ -138,27 +138,27 @@ msgid ""
 msgstr ""
 "If you add predefined timers here, they will appear in plasmoid context menu."
 
-#: configTimes.qml:119
+#: configTimes.qml:125
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Scroll over digits to change time"
 
-#: configTimes.qml:126
+#: configTimes.qml:132
 #, kde-format
 msgid "Apply"
 msgstr "Apply"
 
-#: configTimes.qml:134
+#: configTimes.qml:140
 #, kde-format
 msgid "Cancel"
 msgstr "Cancel"
 
-#: configTimes.qml:143
+#: configTimes.qml:149
 #, kde-format
 msgid "Edit"
 msgstr "Edit"
 
-#: configTimes.qml:152
+#: configTimes.qml:158
 #, kde-format
 msgid "Delete"
 msgstr "Delete"

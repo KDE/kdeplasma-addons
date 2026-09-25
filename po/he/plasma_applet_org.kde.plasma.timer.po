@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-25 00:47+0000\n"
 "PO-Revision-Date: 2026-04-24 19:46+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -127,7 +127,7 @@ msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "הוספה"
 
-#: configTimes.qml:81
+#: configTimes.qml:87
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -135,27 +135,27 @@ msgid ""
 msgstr ""
 "אם יתווספו כאן קוצבי זמן מוגדרים מראש, הם יופיעו בתפריט ההקשר של הווידג׳ט."
 
-#: configTimes.qml:119
+#: configTimes.qml:125
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "יש לגלול מעל הספרות כדי לשנות את השעה"
 
-#: configTimes.qml:126
+#: configTimes.qml:132
 #, kde-format
 msgid "Apply"
 msgstr "החלה"
 
-#: configTimes.qml:134
+#: configTimes.qml:140
 #, kde-format
 msgid "Cancel"
 msgstr "ביטול"
 
-#: configTimes.qml:143
+#: configTimes.qml:149
 #, kde-format
 msgid "Edit"
 msgstr "עריכה"
 
-#: configTimes.qml:152
+#: configTimes.qml:158
 #, kde-format
 msgid "Delete"
 msgstr "מחיקה"

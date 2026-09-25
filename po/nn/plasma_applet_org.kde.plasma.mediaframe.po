@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-07 00:44+0000\n"
+"POT-Creation-Date: 2026-09-25 00:47+0000\n"
 "PO-Revision-Date: 2026-06-28 11:50+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -178,31 +178,31 @@ msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Legg til filer …"
 
-#: qml/ConfigMedia.qml:84
+#: qml/ConfigMedia.qml:90
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Fjern adresse"
 
-#: qml/ConfigMedia.qml:94
+#: qml/ConfigMedia.qml:100
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "Ikkje noko medium er sett opp"
 
-#: qml/ConfigMedia.qml:95
+#: qml/ConfigMedia.qml:101
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "Legg til filer eller mapper å visa dei i skjermelementet."
 
-#: qml/ConfigMedia.qml:101
+#: qml/ConfigMedia.qml:107
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Vel filer"
 
-#: qml/ConfigMedia.qml:121
+#: qml/ConfigMedia.qml:127
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"

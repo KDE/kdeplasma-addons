@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-25 00:47+0000\n"
 "PO-Revision-Date: 2015-04-24 13:57+0200\n"
 "Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -135,34 +135,34 @@ msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr ""
 
-#: configTimes.qml:81
+#: configTimes.qml:87
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
 msgstr ""
 
-#: configTimes.qml:119
+#: configTimes.qml:125
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr ""
 
-#: configTimes.qml:126
+#: configTimes.qml:132
 #, kde-format
 msgid "Apply"
 msgstr ""
 
-#: configTimes.qml:134
+#: configTimes.qml:140
 #, kde-format
 msgid "Cancel"
 msgstr ""
 
-#: configTimes.qml:143
+#: configTimes.qml:149
 #, kde-format
 msgid "Edit"
 msgstr ""
 
-#: configTimes.qml:152
+#: configTimes.qml:158
 #, kde-format
 msgid "Delete"
 msgstr ""

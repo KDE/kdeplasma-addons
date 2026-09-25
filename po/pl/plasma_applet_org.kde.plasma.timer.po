@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-25 00:47+0000\n"
 "PO-Revision-Date: 2026-05-16 12:17+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -123,7 +123,7 @@ msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Dodaj"
 
-#: configTimes.qml:81
+#: configTimes.qml:87
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -132,27 +132,27 @@ msgstr ""
 "Jeśli nastawiłeś tutaj czasomierze, to pojawią się one w menu podręcznym "
 "elementu interfejsu."
 
-#: configTimes.qml:119
+#: configTimes.qml:125
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Aby zmienić czas, przewijaj na cyfrach"
 
-#: configTimes.qml:126
+#: configTimes.qml:132
 #, kde-format
 msgid "Apply"
 msgstr "Zastosuj"
 
-#: configTimes.qml:134
+#: configTimes.qml:140
 #, kde-format
 msgid "Cancel"
 msgstr "Anuluj"
 
-#: configTimes.qml:143
+#: configTimes.qml:149
 #, kde-format
 msgid "Edit"
 msgstr "Edytuj"
 
-#: configTimes.qml:152
+#: configTimes.qml:158
 #, kde-format
 msgid "Delete"
 msgstr "Usuń"
