@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-25 02:44+0000\n"
 "PO-Revision-Date: 2026-06-18 21:48+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -123,7 +123,7 @@ msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Hozzáadás"
 
-#: configTimes.qml:81
+#: configTimes.qml:87
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -132,27 +132,27 @@ msgstr ""
 "Ha felvesz itt előre megadott időértékeket, azok megjelennek a widget helyi "
 "menüjében."
 
-#: configTimes.qml:119
+#: configTimes.qml:125
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Görgessen a számjegyek felett az idő változtatásához"
 
-#: configTimes.qml:126
+#: configTimes.qml:132
 #, kde-format
 msgid "Apply"
 msgstr "Alkalmazás"
 
-#: configTimes.qml:134
+#: configTimes.qml:140
 #, kde-format
 msgid "Cancel"
 msgstr "Mégse"
 
-#: configTimes.qml:143
+#: configTimes.qml:149
 #, kde-format
 msgid "Edit"
 msgstr "Szerkesztés"
 
-#: configTimes.qml:152
+#: configTimes.qml:158
 #, kde-format
 msgid "Delete"
 msgstr "Törlés"

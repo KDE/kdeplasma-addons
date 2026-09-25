@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:45+0000\n"
+"POT-Creation-Date: 2026-09-25 02:44+0000\n"
 "PO-Revision-Date: 2026-01-10 20:51+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -126,7 +126,7 @@ msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Lisää"
 
-#: configTimes.qml:81
+#: configTimes.qml:87
 #, fuzzy, kde-format
 #| msgid ""
 #| "If you add predefined timers here, they will appear in plasmoid context "
@@ -138,27 +138,27 @@ msgstr ""
 "Jos tähän lisää esiasetettuja ajastimia, ne ilmestyvät sovelman "
 "kontekstivalikkoon."
 
-#: configTimes.qml:119
+#: configTimes.qml:125
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Muuta aikaa vierittämällä numeroita"
 
-#: configTimes.qml:126
+#: configTimes.qml:132
 #, kde-format
 msgid "Apply"
 msgstr "Käytä"
 
-#: configTimes.qml:134
+#: configTimes.qml:140
 #, kde-format
 msgid "Cancel"
 msgstr "Peru"
 
-#: configTimes.qml:143
+#: configTimes.qml:149
 #, kde-format
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: configTimes.qml:152
+#: configTimes.qml:158
 #, kde-format
 msgid "Delete"
 msgstr "Poista"

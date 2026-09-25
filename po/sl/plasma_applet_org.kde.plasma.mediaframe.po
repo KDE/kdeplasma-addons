@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-07 00:44+0000\n"
+"POT-Creation-Date: 2026-09-25 02:44+0000\n"
 "PO-Revision-Date: 2025-08-14 07:25+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -179,31 +179,31 @@ msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Dodaj datoteke…"
 
-#: qml/ConfigMedia.qml:84
+#: qml/ConfigMedia.qml:90
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Odstrani pot"
 
-#: qml/ConfigMedia.qml:94
+#: qml/ConfigMedia.qml:100
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "Ni konfiguriranega medija"
 
-#: qml/ConfigMedia.qml:95
+#: qml/ConfigMedia.qml:101
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "Dodajte datoteke ali mape, da jih prikažete v gradniku."
 
-#: qml/ConfigMedia.qml:101
+#: qml/ConfigMedia.qml:107
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Izbor datotek"
 
-#: qml/ConfigMedia.qml:121
+#: qml/ConfigMedia.qml:127
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
