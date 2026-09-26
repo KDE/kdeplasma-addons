@@ -1,7 +1,7 @@
 # translation of plasma_applet_comic.po to Italian
 #
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2015, 2021, 2022, 2025 Vincenzo Reale <smart2128vr@gmail.com>
 # Dario Panico <Dareus_Persarumrex@fastwebnet.it>, 2008.
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2015, 2021, 2022, 2025 Vincenzo Reale <smart2128vr@gmail.com>
 # Paolo Zamponi <feus73@gmail.com>, 2018, 2019.
 msgid ""
 msgstr ""
