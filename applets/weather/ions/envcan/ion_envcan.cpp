@@ -477,6 +477,8 @@ void EnvCanadaIon::getWeatherData()
     info.requests++;
     if (info.requests > 3) {
         qCWarning(WEATHER::ION::ENVCAN) << "Too many requests to find the weather URL";
+        m_forecastPromise->finish();
+        clearForecastData();
         return;
     }
 
