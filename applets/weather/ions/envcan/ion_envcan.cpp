@@ -672,6 +672,12 @@ void EnvCanadaIon::getWeatherData()
     QString url = u"https://dd.weather.gc.ca/today/citypage_weather/%1/"_s.arg(info.province);
     // 2. When we know the hour folder, we check for the weather report files
     if (!info.hours.isEmpty()) {
+        if (info.hourIndex == info.hours.count()) {
+            qCWarning(WEATHER::ION::ENVCAN) << "No forecast file found for city code " << info.cityCode << " in available hour directories";
+            m_forecastPromise->finish();
+            clearForecastData();
+            return;
+        }
         url += info.hours.at(info.hourIndex) + u"/"_s;
     }
     // 3. Now we have the full information to compose the URL
