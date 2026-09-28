@@ -1,16 +1,16 @@
 # Translation for plasma_runner_converterrunner.po to Euskara/Basque (eu).
-# Copyright (C) 2018-2023 This file is copyright:
+# Copyright (C) 2018-2026 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>.
+# SPDX-FileCopyrightText: 2026 KDE euskaratzeko proiektuko arduraduna <xalba@ni.eus>
 #
 # Translators:
-# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2018, 2020, 2023.
+# Iñigo Salvador Azurmendi <xalba@ni.eus>, 2018, 2020, 2023, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2023-05-16 20:38+0200\n"
+"PO-Revision-Date: 2026-09-27 21:29+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
 "Language: eu\n"
@@ -18,12 +18,12 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.04.0\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: converterrunner.cpp:30
 #, kde-format
 msgid "Copy unit and number"
-msgstr "Kopiatu unitatea eta zenbakia"
+msgstr "Unitatea eta zenbakia kopiatu"
 
 #: converterrunner.cpp:33
 #, kde-format
@@ -39,7 +39,7 @@ msgstr ""
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
-msgstr "honela;bihurtu;dira"
+msgstr "bihurtu"
 
 #~ msgid "Copy number"
-#~ msgstr "Kopiatu zenbakia"
+#~ msgstr "Zenbakia kopiatu"
