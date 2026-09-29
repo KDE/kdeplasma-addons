@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:47+0000\n"
+"POT-Creation-Date: 2026-09-29 00:46+0000\n"
 "PO-Revision-Date: 2022-07-22 16:58+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -40,7 +40,7 @@ msgstr "Add More…"
 msgid "Unable to load dictionary list"
 msgstr "Unable to load dictionary list"
 
-#: qml/ConfigDictionaries.qml:91 qml/main.qml:162
+#: qml/ConfigDictionaries.qml:91 qml/main.qml:200
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
@@ -56,13 +56,13 @@ msgstr "No dictionaries"
 msgid "Delete"
 msgstr "Delete"
 
-#: qml/main.qml:54
+#: qml/main.qml:71
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Enter word to define here…"
 
-#: qml/main.qml:161
+#: qml/main.qml:199
 #, kde-format
 msgid "Unable to load definition"
 msgstr "Unable to load definition"
