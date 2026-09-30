@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-22 16:02+0000\n"
+"POT-Creation-Date: 2026-09-30 00:47+0000\n"
 "PO-Revision-Date: 2010-01-20 09:32+0700\n"
 "Last-Translator: Khoem Sokhem <khoemsokhem@khmeros.info>\n"
 "Language-Team: Khmer <support@khmeros.info>\n"
@@ -138,17 +138,17 @@ msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
 msgstr ""
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1497
+#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1505
 #, kde-format
 msgid "Rising"
 msgstr ""
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1499
+#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1507
 #, kde-format
 msgid "Falling"
 msgstr ""
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:723 ions/envcan/ion_envcan.cpp:1501
+#: ions/bbcukmet/ion_bbcukmet.cpp:723 ions/envcan/ion_envcan.cpp:1509
 #, kde-format
 msgid "Steady"
 msgstr ""
@@ -159,8 +159,8 @@ msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
 msgstr ""
 
-#: ions/envcan/ion_envcan.cpp:887 ions/envcan/ion_envcan.cpp:889
-#: ions/envcan/ion_envcan.cpp:1403 ions/envcan/ion_envcan.cpp:1454
+#: ions/envcan/ion_envcan.cpp:895 ions/envcan/ion_envcan.cpp:897
+#: ions/envcan/ion_envcan.cpp:1411 ions/envcan/ion_envcan.cpp:1462
 #: ions/noaa/ion_noaa.cpp:459
 #, fuzzy, kde-format
 #| msgctxt "Not available"
@@ -168,7 +168,7 @@ msgstr ""
 msgid "N/A"
 msgstr "គ្មាន"
 
-#: ions/envcan/ion_envcan.cpp:1430
+#: ions/envcan/ion_envcan.cpp:1438
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from Environment and Climate Change Canada"
