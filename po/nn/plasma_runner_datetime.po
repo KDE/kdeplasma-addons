@@ -1,6 +1,6 @@
 # Translation of plasma_runner_datetime to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2021, 2022, 2023.
+# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2021, 2022, 2023, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: datetimerunner.cpp:21
 #, kde-format
