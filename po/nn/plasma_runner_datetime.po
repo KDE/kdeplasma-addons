@@ -1,12 +1,12 @@
 # Translation of plasma_runner_datetime to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2021, 2022, 2023.
+# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2021, 2022, 2023, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2023-02-12 12:23+0100\n"
+"PO-Revision-Date: 2026-10-02 23:14+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -17,7 +17,7 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.2\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: datetimerunner.cpp:23
 #, kde-format
@@ -74,11 +74,14 @@ msgstr ""
 "Viser gjeldande klokkeslett i ei vald tidssone og forskjellen frå "
 "systemklokkeslettet"
 
+# «time» tyder her klokkeslett, men ev. med dato (sjå neste hjelpetekst). Datoen vert ikkje vist i resultatet, men vert brukt. Ein kan testa det ved å samalikna resultatet av følgjande (her er ein på to sider av sommartid):
+# 14.10.2026 17:00 i Tokyo
+# 14.11.2026 17:00 i Tokyo
 #: datetimerunner.cpp:40
 #, kde-format
 msgctxt "The <> and space are part of the example query"
 msgid "<time> <timezone> in <timezone>"
-msgstr "<dato eller klokkeslett> <tidssone> i/på/som <tidssone>"
+msgstr "<klokkeslett, ev. med dato> <tidssone> i/på/som <tidssone>"
 
 #: datetimerunner.cpp:41
 #, kde-format
