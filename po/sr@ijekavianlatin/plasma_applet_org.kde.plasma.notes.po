@@ -1,13 +1,14 @@
 # Translation of plasma_applet_org.kde.plasma.notes.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2008, 2009, 2015.
 # Slobodan Simic <slsimic@gmail.com>, 2008.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-05-12 00:46+0000\n"
-"PO-Revision-Date: 2015-08-01 14:07+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
 "MIME-Version: 1.0\n"
@@ -20,8 +21,7 @@ msgstr ""
 "X-Environment: kde\n"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Izgled"
@@ -29,150 +29,145 @@ msgstr "Izgled"
 #: qml/configAppearance.qml:36
 #, kde-format
 msgid "%1pt"
-msgstr ""
+msgstr "%1 pt"
 
 #: qml/configAppearance.qml:42
 #, kde-format
 msgid "Text font size:"
-msgstr ""
+msgstr "Veličina fonta teksta:"
 
 # >> @item
 #: qml/configAppearance.qml:73
 #, kde-format
 msgid "A white sticky note"
-msgstr "bela lepljiva beleška"
+msgstr "bijela ljepljiva bilješka"
 
 # >> @item
 #: qml/configAppearance.qml:74
 #, kde-format
 msgid "A black sticky note"
-msgstr "crna lepljiva beleška"
+msgstr "crna ljepljiva bilješka"
 
 # >> @item
 #: qml/configAppearance.qml:75
 #, kde-format
 msgid "A red sticky note"
-msgstr "crvena lepljiva beleška"
+msgstr "crvena ljepljiva bilješka"
 
 # >> @item
 #: qml/configAppearance.qml:76
 #, kde-format
 msgid "An orange sticky note"
-msgstr "narandžasta lepljiva beleška"
+msgstr "narandžasta ljepljiva bilješka"
 
 # >> @item
 #: qml/configAppearance.qml:77
 #, kde-format
 msgid "A yellow sticky note"
-msgstr "žuta lepljiva beleška"
+msgstr "žuta ljepljiva bilješka"
 
 # >> @item
 #: qml/configAppearance.qml:78
 #, kde-format
 msgid "A green sticky note"
-msgstr "zelena lepljiva beleška"
+msgstr "zelena ljepljiva bilješka"
 
 # >> @item
 #: qml/configAppearance.qml:79
 #, kde-format
 msgid "A blue sticky note"
-msgstr "plava lepljiva beleška"
+msgstr "plava ljepljiva bilješka"
 
 # >> @item
 #: qml/configAppearance.qml:80
 #, kde-format
 msgid "A pink sticky note"
-msgstr "ružičasta lepljiva beleška"
+msgstr "ružičasta ljepljiva bilješka"
 
 # >> @item
 #: qml/configAppearance.qml:81
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note"
+#, kde-format
 msgid "A transparent sticky note"
-msgstr "prozirna lepljiva beleška"
+msgstr "prozirna ljepljiva bilješka"
 
 # >> @item
 #: qml/configAppearance.qml:82
-#, fuzzy, kde-format
-#| msgid "A translucent sticky note"
+#, kde-format
 msgid "A transparent sticky note with light text"
-msgstr "prozirna lepljiva beleška"
+msgstr "prozirna ljepljiva bilješka sa svijetlim tekstom"
 
 #: qml/main.qml:294
 #, kde-format
 msgid "Undo"
-msgstr ""
+msgstr "Opozovi"
 
 #: qml/main.qml:302
 #, kde-format
 msgid "Redo"
-msgstr ""
+msgstr "Ponovi"
 
 #: qml/main.qml:312
 #, kde-format
 msgid "Cut"
-msgstr ""
+msgstr "Isijeci"
 
 #: qml/main.qml:320
 #, kde-format
 msgid "Copy"
-msgstr ""
+msgstr "Kopiraj"
 
 #: qml/main.qml:328
 #, kde-format
 msgid "Paste"
-msgstr ""
+msgstr "Nalijepi"
 
 #: qml/main.qml:334
 #, kde-format
 msgid "Paste with Full Formatting"
-msgstr ""
+msgstr "Nalijepi sa punim formatiranjem"
 
+# >> @title:menu
 #: qml/main.qml:341
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
-msgstr ""
+msgstr "Ukloni formatiranje"
 
 #: qml/main.qml:356
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Obriši"
 
 #: qml/main.qml:363
 #, kde-format
 msgid "Clear"
-msgstr ""
+msgstr "Očisti"
 
 #: qml/main.qml:373
 #, kde-format
 msgid "Select All"
-msgstr ""
+msgstr "Izaberi sve"
 
 #: qml/main.qml:505
-#, fuzzy, kde-format
-#| msgid "Bold"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "Podebljano"
 
 #: qml/main.qml:518
-#, fuzzy, kde-format
-#| msgid "Italic"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "Kurzivno"
 
 #: qml/main.qml:531
-#, fuzzy, kde-format
-#| msgid "Underline"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "Podvučeno"
 
 #: qml/main.qml:544
-#, fuzzy, kde-format
-#| msgid "Strikethrough"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "Precrtano"
@@ -181,84 +176,74 @@ msgstr "Precrtano"
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
-msgstr ""
+msgstr "Drži otvoreno"
 
 #: qml/main.qml:647
 #, kde-format
 msgid "Discard this note?"
-msgstr ""
+msgstr "Odbaciti bilješku?"
 
 #: qml/main.qml:648
 #, kde-format
 msgid "Are you sure you want to discard this note?"
-msgstr ""
+msgstr "Želite li zaista da odbacite ovu bilješku?"
 
 #: qml/main.qml:673
-#, fuzzy, kde-format
-#| msgid "White"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "bijela"
 
 #: qml/main.qml:674
-#, fuzzy, kde-format
-#| msgid "Black"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "crna"
 
 #: qml/main.qml:675
-#, fuzzy, kde-format
-#| msgid "Red"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "crvena"
 
 #: qml/main.qml:676
-#, fuzzy, kde-format
-#| msgid "Orange"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "narandžasta"
 
 #: qml/main.qml:677
-#, fuzzy, kde-format
-#| msgid "Yellow"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "žuta"
 
 #: qml/main.qml:678
-#, fuzzy, kde-format
-#| msgid "Green"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "zelena"
 
 #: qml/main.qml:679
-#, fuzzy, kde-format
-#| msgid "Blue"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "plava"
 
 #: qml/main.qml:680
-#, fuzzy, kde-format
-#| msgid "Pink"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "roze"
 
 #: qml/main.qml:681
-#, fuzzy, kde-format
-#| msgid "Translucent"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "prozirna"
 
 #: qml/main.qml:685
-#, fuzzy, kde-format
-#| msgid "Translucent"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"
-msgstr "prozirna"
+msgstr "prozirna svijetla"

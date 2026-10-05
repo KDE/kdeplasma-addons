@@ -1,13 +1,14 @@
 # Translation of plasma_runner_CharacterRunner.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2010.
 # Dalibor Djuric <daliborddjuric@gmail.com>, 2011.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_CharacterRunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2010-08-26 09:22+0200\n"
-"Last-Translator: Dalibor Djuric <daliborddjuric@gmail.com>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@latin\n"
 "MIME-Version: 1.0\n"
@@ -32,6 +33,8 @@ msgid ""
 "Config entries for alias list and code list have different sizes, ignoring "
 "all."
 msgstr ""
+"Unosi postave za spisak alijasa i spisak kodova različite su veličine, "
+"zanemarujem sve."
 
 #. i18n: ectx: property (title), widget (QGroupBox, main)
 #: charrunner_config.ui:18
@@ -53,8 +56,7 @@ msgstr "Alijas:"
 
 #. i18n: ectx: property (text), widget (QLabel, label_hex)
 #: charrunner_config.ui:61
-#, fuzzy, kde-format
-#| msgid "Hex Code:"
+#, kde-format
 msgid "Hex code:"
 msgstr "Heksadekadni kod:"
 

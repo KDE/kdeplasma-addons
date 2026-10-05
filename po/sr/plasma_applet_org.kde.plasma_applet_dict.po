@@ -1,12 +1,13 @@
 # Translation of plasma_applet_org.kde.plasma.dict.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2017.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.dict\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-29 00:46+0000\n"
-"PO-Revision-Date: 2017-12-15 12:38+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -19,14 +20,12 @@ msgstr ""
 "X-Environment: kde\n"
 
 #: qml/AvailableDictSheet.qml:21
-#, fuzzy, kde-format
-#| msgid "Dictionaries"
+#, kde-format
 msgid "Add More Dictionaries"
-msgstr "Речници"
+msgstr "Додавање речника"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Dictionaries"
+#, kde-format
 msgctxt "@title"
 msgid "Dictionaries"
 msgstr "Речници"
@@ -35,42 +34,36 @@ msgstr "Речници"
 #, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
-msgstr ""
+msgstr "Додај још…"
 
 #: qml/ConfigDictionaries.qml:90
-#, fuzzy, kde-format
-#| msgid "Available dictionaries:"
+#, kde-format
 msgid "Unable to load dictionary list"
-msgstr "Доступни речници:"
+msgstr "Не могу да учитам списак речника"
 
 #: qml/ConfigDictionaries.qml:91 qml/main.qml:200
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
-msgstr ""
+msgstr "Кôд грешке: %1 (%2)"
 
 #: qml/ConfigDictionaries.qml:102
-#, fuzzy, kde-format
-#| msgid "Dictionaries"
+#, kde-format
 msgid "No dictionaries"
-msgstr "Речници"
+msgstr "Нема речника"
 
 #: qml/DictItemDelegate.qml:57
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Обриши"
 
 #: qml/main.qml:71
-#, fuzzy, kde-format
-#| msgid "Enter word to define here"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
-msgstr "Унесите реч за дефинисање"
+msgstr "Унесите реч за дефинисање…"
 
 #: qml/main.qml:199
 #, kde-format
 msgid "Unable to load definition"
-msgstr ""
-
-#~ msgid "Looking up definition..."
-#~ msgstr "Тражим дефиницију..."
+msgstr "Не могу да учитам дефиницију"

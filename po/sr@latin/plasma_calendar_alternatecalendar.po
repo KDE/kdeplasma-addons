@@ -1,0 +1,183 @@
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-09-02 00:45+0000\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@latin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: calendarsystem.h:53
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Julian"
+msgstr "julijanski"
+
+#: calendarsystem.h:57
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Milankovic"
+msgstr "Milankovićev"
+
+#: calendarsystem.h:61
+#, kde-format
+msgctxt "@item:inlist"
+msgid "The Solar Hijri Calendar (Persian)"
+msgstr "solarni hidžrijski kalendar (persijski)"
+
+#: calendarsystem.h:65
+#, kde-format
+msgctxt ""
+"@item:inlist See https://cldr.unicode.org/development/development-process/"
+"design-proposals/islamic-calendar-types for more details"
+msgid "Islamic Calendar (Astronomical)"
+msgstr "islamski kalendar (astronomski)"
+
+#: calendarsystem.h:69
+#, kde-format
+msgctxt ""
+"@item:inlist See https://cldr.unicode.org/development/development-process/"
+"design-proposals/islamic-calendar-types for more details"
+msgid "The Islamic Civil Calendar (Tabular)"
+msgstr "islamski građanski kalendar (tabelarni)"
+
+#: calendarsystem.h:73
+#, kde-format
+msgctxt ""
+"@item:inlist See https://cldr.unicode.org/development/development-process/"
+"design-proposals/islamic-calendar-types for more details"
+msgid "Islamic Calendar (Umm al-Qura)"
+msgstr "islamski kalendar (Um al Kura)"
+
+#: calendarsystem.h:77
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Chinese Lunar Calendar"
+msgstr "kineski lunarni kalendar"
+
+#: calendarsystem.h:81
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Indian National Calendar"
+msgstr "indijski državni kalendar"
+
+#: calendarsystem.h:85
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Hebrew Calendar"
+msgstr "jevrejski kalendar"
+
+#: calendarsystem.h:89
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Vietnamese Lunar Calendar"
+msgstr "vijetnamski lunarni kalendar"
+
+#: calendarsystem.h:93
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Ethiopian Calendar"
+msgstr "etiopski kalendar"
+
+#: calendarsystem.h:97
+#, kde-format
+msgctxt "@item:inlist"
+msgid "Bikram Sambat"
+msgstr "bikram sambat"
+
+#: config/qml/AlternateCalendarConfig.qml:48
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Calendar system:"
+msgstr "Kalendarski sistem:"
+
+#: config/qml/AlternateCalendarConfig.qml:69
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"This calendar is based on pure astronomical calculation. It doesn't consider "
+"any crescent visibility criteria."
+msgstr ""
+"Ovaj kalendar se zasniva na čisto astronomskom proračunu. Ne uzima u obzir "
+"nikakve kriterijume vidljivosti mlađaka."
+
+#: config/qml/AlternateCalendarConfig.qml:77
+#, kde-format
+msgctxt "@label:spinbox"
+msgid "Date offset:"
+msgstr "Pomak datuma:"
+
+#: config/qml/AlternateCalendarConfig.qml:88
+#, kde-format
+msgid "%1 day"
+msgid_plural "%1 days"
+msgstr[0] "%1 dan"
+msgstr[1] "%1 dana"
+msgstr[2] "%1 dana"
+msgstr[3] "%1 dan"
+
+#: config/qml/AlternateCalendarConfig.qml:91
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"A positive offset signifies a later date, while a negative offset signifies "
+"an earlier date."
+msgstr "Pozitivan pomak znači kasniji datum, a negativan raniji."
+
+#: provider/ethiopiancalendar.cpp:86
+#, kde-format
+msgctxt ""
+"%1 Day number %2 Translated month name in Ethiopian calendar %3 Year number "
+"%4 Full date in Ethiopian"
+msgid "%1 %2, %3 (%4)"
+msgstr "%1. %2 %3. (%4)"
+
+#: provider/hebrewcalendar.cpp:91
+#, kde-format
+msgctxt ""
+"%1 Day number %2 Translated month name in Hebrew/Jewish calendar %3 Year "
+"number %4 Full date in Hebrew"
+msgid "%1 %2, %3 (%4)"
+msgstr "%1. %2 %3. (%4)"
+
+#: provider/indiancalendar.cpp:70
+#, kde-format
+msgctxt "@label %1 day %2 month name in India National Calendar %3 year"
+msgid "%1 %2, %3"
+msgstr "%1. %2 %3."
+
+#: provider/islamiccalendar.cpp:130
+#, kde-format
+msgctxt ""
+"@label %1 Day number %2 Month name in Islamic Calendar %3 Year number %4 "
+"Islamic calendar date in Arabic"
+msgid "%1 %2, %3 (%4)"
+msgstr "%1. %2 %3. (%4)"
+
+#: provider/nepalicalendar.cpp:258
+#, kde-format
+msgctxt "@label date outside the officially published Bikram Sambat range"
+msgid " (approx.)"
+msgstr " (pribl.)"
+
+#: provider/nepalicalendar.cpp:261
+#, kde-format
+msgctxt "@label %1 Day number %2 Month name in Bikram Sambat %3 Year number"
+msgid "%1 %2, %3"
+msgstr "%1. %2 %3."
+
+#: provider/qtcalendar.cpp:55
+#, kde-format
+msgctxt "@label %1 day %2 month name %3 year"
+msgid "%1 %2, %3"
+msgstr "%1. %2 %3."

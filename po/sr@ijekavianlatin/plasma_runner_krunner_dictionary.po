@@ -1,12 +1,13 @@
 # Translation of plasma_runner_krunner_dictionary.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2012.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_runner_krunner_dictionary\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2012-09-08 19:40+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
 "MIME-Version: 1.0\n"
@@ -39,11 +40,10 @@ msgstr "Nalazi definiciju :q:."
 #: dictionaryrunner.cpp:118
 #, kde-format
 msgid "Definition for \"%1\" has been copied to clipboard"
-msgstr ""
+msgstr "Definicija za „%1“ kopirana je u klipbord"
 
 #: dictionaryrunner_config.cpp:22
-#, fuzzy, kde-format
-#| msgid "Trigger Word"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Trigger word:"
-msgstr "Reč okidač"
+msgstr "Okidačka riječ:"

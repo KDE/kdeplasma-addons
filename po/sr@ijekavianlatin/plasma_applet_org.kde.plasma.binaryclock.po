@@ -1,13 +1,14 @@
 # Translation of plasma_applet_org.kde.plasma.binaryclock.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2008, 2009, 2017.
 # Slobodan Simic <slsimic@gmail.com>, 2008.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 11:53+0000\n"
-"PO-Revision-Date: 2017-05-07 22:20+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
 "MIME-Version: 1.0\n"
@@ -20,8 +21,7 @@ msgstr ""
 "X-Environment: kde\n"
 
 #: config.qml:17
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Izgled"
@@ -31,36 +31,28 @@ msgstr "Izgled"
 msgctxt ""
 "@title:group The things being potentially shown are lights and seconds"
 msgid "Show:"
-msgstr ""
+msgstr "Prikaži:"
 
 #: configGeneral.qml:30 configGeneral.qml:60
-#, fuzzy, kde-format
-#| msgid "Show inactive LEDs:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Inactive lights"
-msgstr "Prikaži neaktivne lampice:"
+msgstr "Neaktivne lampice"
 
+# >> @option:check
 #: configGeneral.qml:35
 #, kde-format
 msgctxt "@option:check"
 msgid "Seconds"
-msgstr ""
+msgstr "Sekunde"
 
 #: configGeneral.qml:43
-#, fuzzy, kde-format
-#| msgid "Use custom color for grid"
+#, kde-format
 msgid "Use custom color for:"
-msgstr "Posebna boja za mrežu"
+msgstr "Posebna boja za:"
 
 #: configGeneral.qml:47
-#, fuzzy, kde-format
-#| msgid "Show inactive LEDs:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Active lights"
-msgstr "Prikaži neaktivne lampice:"
-
-# >> @option:check
-#, fuzzy
-#~| msgid "Display seconds"
-#~ msgid "Display:"
-#~ msgstr "Sa sekundama"
+msgstr "Aktivne lampice"

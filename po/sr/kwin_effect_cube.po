@@ -1,0 +1,136 @@
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: kdeplasma-addons\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-12-30 00:42+0000\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: kcm/cubeeffectkcm.cpp:36
+#, kde-format
+msgid "KWin"
+msgstr "К‑вин"
+
+#: kcm/cubeeffectkcm.cpp:42 package/contents/ui/main.qml:40
+#, kde-format
+msgid "Toggle Cube"
+msgstr "Укључи/искључи коцку"
+
+#. i18n: ectx: property (text), widget (QLabel, label_2)
+#: kcm/cubeeffectkcm.ui:23
+#, kde-format
+msgid "Cube face displacement:"
+msgstr "Помак страница коцке:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_less)
+#: kcm/cubeeffectkcm.ui:48
+#, kde-format
+msgid "Less"
+msgstr "мањи"
+
+#. i18n: ectx: property (text), widget (QLabel, label_more)
+#: kcm/cubeeffectkcm.ui:61
+#, kde-format
+msgid "More"
+msgstr "већи"
+
+#. i18n: ectx: property (text), widget (QLabel, label)
+#: kcm/cubeeffectkcm.ui:73
+#, kde-format
+msgid "Distance:"
+msgstr "Растојање:"
+
+#. i18n: ectx: property (text), widget (QLabel, label_closer)
+#: kcm/cubeeffectkcm.ui:101
+#, kde-format
+msgid "Closer"
+msgstr "ближе"
+
+#. i18n: ectx: property (text), widget (QLabel, label_farther)
+#: kcm/cubeeffectkcm.ui:114
+#, kde-format
+msgid "Farther"
+msgstr "даље"
+
+#. i18n: ectx: property (text), widget (QLabel, label_Mouse)
+#: kcm/cubeeffectkcm.ui:126
+#, kde-format
+msgid "Mouse:"
+msgstr "Миш:"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_MouseInvertedX)
+#: kcm/cubeeffectkcm.ui:133
+#, kde-format
+msgid "Invert X"
+msgstr "Изврни X осу"
+
+#. i18n: ectx: property (text), widget (QCheckBox, kcfg_MouseInvertedY)
+#: kcm/cubeeffectkcm.ui:140
+#, kde-format
+msgid "Invert Y"
+msgstr "Изврни Y осу"
+
+#. i18n: ectx: property (text), widget (QLabel, label_4)
+#: kcm/cubeeffectkcm.ui:147
+#, kde-format
+msgid "Background:"
+msgstr "Позадина:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, button_Color)
+#: kcm/cubeeffectkcm.ui:164
+#, kde-format
+msgid "Plain color:"
+msgstr "Обична боја:"
+
+#. i18n: ectx: property (text), widget (QRadioButton, button_SkyBox)
+#: kcm/cubeeffectkcm.ui:198
+#, kde-format
+msgid "Skybox:"
+msgstr "Небеска кутија:"
+
+#. i18n: ectx: property (placeholderText), widget (QLineEdit, kcfg_SkyBox)
+#: kcm/cubeeffectkcm.ui:208
+#, kde-format
+msgid "Type path or URL..."
+msgstr "Унесите путању или УРЛ..."
+
+#. i18n: ectx: property (text), widget (QPushButton, button_SelectSkyBox)
+#: kcm/cubeeffectkcm.ui:218
+#, kde-format
+msgid "Select..."
+msgstr "Изабери..."
+
+#: package/contents/ui/PlaceholderView.qml:28
+#, kde-format
+msgctxt "@info:placeholder"
+msgid ""
+"At least 3 virtual desktops are required to display the Cube, but only %1 is "
+"present"
+msgid_plural ""
+"At least 3 virtual desktops are required to display the Cube, but only %1 "
+"are present"
+msgstr[0] ""
+"За приказ коцке потребне су бар 3 виртуелне површи, а постоји само %1"
+msgstr[1] ""
+"За приказ коцке потребне су бар 3 виртуелне површи, а постоје само %1"
+msgstr[2] ""
+"За приказ коцке потребне су бар 3 виртуелне површи, а постоји само %1"
+msgstr[3] ""
+"За приказ коцке потребне су бар 3 виртуелне површи, а постоји само једна"
+
+#: package/contents/ui/PlaceholderView.qml:32
+#, kde-format
+msgctxt "@action:button"
+msgid "Add Virtual Desktop"
+msgstr "Додај виртуелну површ"

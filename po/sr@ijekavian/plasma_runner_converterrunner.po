@@ -1,12 +1,13 @@
 # Translation of krunner_converterrunner into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2008, 2009.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: krunner_converterrunner\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-22 16:02+0000\n"
-"PO-Revision-Date: 2009-12-23 11:15+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
 "MIME-Version: 1.0\n"
@@ -21,14 +22,10 @@ msgstr ""
 #: converterrunner.cpp:30
 #, kde-format
 msgid "Copy unit and number"
-msgstr ""
+msgstr "Копирај јединицу и број"
 
 #: converterrunner.cpp:33
-#, fuzzy, kde-format
-#| msgid ""
-#| "Converts the value of :q: when :q: is made up of \"value unit [>, to, as, "
-#| "in] unit\". You can use the Unit converter applet to find all available "
-#| "units."
+#, kde-format
 msgid ""
 "Converts the value of :q: when :q: is made up of value unit [>, to, as, in] "
 "unit.You can use the Unit converter applet to find all available units."
@@ -38,10 +35,7 @@ msgstr ""
 "претварача јединица."
 
 #: converterrunner.cpp:47
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
-#| msgid "in;to;as"
+#, kde-format
 msgctxt ""
 "list of words that can be used as amount of 'unit1' [in|to|as] 'unit2' (e.g. "
 "'km [in|to|as] miles'). Can be more (or less) than three words, if it makes "

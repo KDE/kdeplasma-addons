@@ -1,0 +1,108 @@
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: config.qml:13
+#, kde-format
+msgctxt "@title"
+msgid "Keys"
+msgstr "Тастери"
+
+#: configAppearance.qml:37
+#, kde-format
+msgctxt ""
+"@label show keyboard indicator when Caps Lock or Num Lock is activated"
+msgid "Show when activated:"
+msgstr "Прикажи кад је активиран:"
+
+#: configAppearance.qml:40
+#, kde-format
+msgctxt "@option:check"
+msgid "Caps Lock"
+msgstr "CapsLock"
+
+#: configAppearance.qml:47
+#, kde-format
+msgctxt "@option:check"
+msgid "Num Lock"
+msgstr "NumLock"
+
+#: main.qml:114
+#, kde-format
+msgid "Alt is latched"
+msgstr "Тастер Alt је запет"
+
+#: main.qml:116
+#, kde-format
+msgid "Alt is locked"
+msgstr "Тастер Alt је закључан"
+
+#: main.qml:120
+#, kde-format
+msgid "Shift is latched"
+msgstr "Тастер Shift је запет"
+
+#: main.qml:122
+#, kde-format
+msgid "Shift is locked"
+msgstr "Тастер Shift је закључан"
+
+#: main.qml:126
+#, kde-format
+msgid "Control is latched"
+msgstr "Тастер Control је запет"
+
+#: main.qml:128
+#, kde-format
+msgid "Control is locked"
+msgstr "Тастер Control је закључан"
+
+#: main.qml:132
+#, kde-format
+msgid "Meta is latched"
+msgstr "Тастер Meta је запет"
+
+#: main.qml:134
+#, kde-format
+msgid "Meta is locked"
+msgstr "Тастер Meta је закључан"
+
+#: main.qml:138
+#, kde-format
+msgid "Alt Gr is latched"
+msgstr "Тастер AltGr је запет"
+
+#: main.qml:140
+#, kde-format
+msgid "Alt Gr is locked"
+msgstr "Тастер AltGr је закључан"
+
+#: main.qml:144
+#, kde-format
+msgid "Caps Lock activated"
+msgstr "Тастер CapsLock је активиран"
+
+#: main.qml:147
+#, kde-format
+msgid "Num Lock activated"
+msgstr "Тастер NumLock је активиран"
+
+#: main.qml:155
+#, kde-format
+msgid "No lock keys activated"
+msgstr "Нема активираних тастера за закључавање"
