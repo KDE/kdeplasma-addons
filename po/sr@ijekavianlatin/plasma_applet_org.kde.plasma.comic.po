@@ -2,13 +2,14 @@
 # Chusslove Illich <caslav.ilic@gmx.net>, 2008, 2009, 2010, 2011, 2015.
 # Slobodan Simic <slsimic@gmail.com>, 2008.
 # Dalibor Djuric <daliborddjuric@gmail.com>, 2010, 2011.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:44+0000\n"
-"PO-Revision-Date: 2015-03-14 17:59+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
 "MIME-Version: 1.0\n"
@@ -27,173 +28,166 @@ msgid "# %1"
 msgstr "br. %1"
 
 #: qml/ComicBottomInfo.qml:63
-#, fuzzy, kde-format
-#| msgid "Jump to Strip ..."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Jump to strip…"
-msgstr "Skoči na strip..."
+msgstr "Skoči na strip…"
 
 #: qml/ComicBottomInfo.qml:103
-#, fuzzy, kde-format
-#| msgid "Visit the comic website"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Posjeti veb sajt stripa"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Comic"
+#, kde-format
 msgctxt "@title"
 msgid "Comics"
-msgstr "Strip"
+msgstr "Stripovi"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Ponašanje"
 
 #: qml/configBehavior.qml:28
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show above image:"
-msgstr ""
+msgstr "Prikaži iznad slike:"
 
 #: qml/configBehavior.qml:29
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Title"
-msgstr ""
+msgstr "Naslov"
 
 #: qml/configBehavior.qml:34
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Author"
-msgstr ""
+msgstr "Autora"
 
 #: qml/configBehavior.qml:39
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show below image:"
-msgstr ""
+msgstr "Prikaži ispod slike:"
 
 # >> @option:check
 #: qml/configBehavior.qml:40
-#, fuzzy, kde-format
-#| msgid "Show comic identifier"
+#, kde-format
 msgctxt "@option:check show below image"
 msgid "Identifier"
-msgstr "Identifikator stripa"
+msgstr "Identifikator"
 
 #: qml/configBehavior.qml:45
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Website"
-msgstr ""
+msgstr "Veb sajt"
 
 #: qml/configBehavior.qml:54
 #, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
-msgstr ""
+msgstr "Dugmad za kretanje:"
 
 #: qml/configBehavior.qml:55
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
-msgstr ""
+msgstr "Uvijek vidljiva na ivicama"
 
 #: qml/configBehavior.qml:61
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
-msgstr ""
+msgstr "Pojavljuju se po sredini pri lebdjenju"
 
 #: qml/configBehavior.qml:70
 #, kde-format
 msgctxt "@label for checkbox, completes sentence … opens full-size view"
 msgid "Middle-clicking image:"
-msgstr ""
+msgstr "Srednji klik na sliku:"
 
 #: qml/configBehavior.qml:71
 #, kde-format
 msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
-msgstr ""
+msgstr "Otvara prikaz u punoj veličini"
 
 #: qml/configComics.qml:27
-#, fuzzy, kde-format
-#| msgid "Get New Comics..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New…"
-msgstr "Dobavi nove stripove..."
+msgstr "Dobavi nove…"
 
+# >> @option:check
 #: qml/configComics.qml:70
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
-msgstr ""
+msgstr "Nema instaliranih stripova"
 
 #: qml/configComics.qml:72
-#, fuzzy, kde-format
-#| msgid "Get New Comics..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
-msgstr "Dobavi nove stripove..."
+msgstr "Dobavi stripove…"
 
 #: qml/configComics.qml:86
-#, fuzzy, kde-format
-#| msgid "Check for new comic strips:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
-msgstr "Traži nove kaiševe stripa:"
+msgstr "Traži nove stripove svakih:"
 
+# >! Plurals.
 #: qml/configComics.qml:96
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
 msgid_plural "minutes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "minut"
+msgstr[1] "minuta"
+msgstr[2] "minuta"
+msgstr[3] "minut"
 
 #: qml/configComics.qml:102
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
-msgstr ""
+msgstr "Čuvaj u lokalnoj arhivi:"
 
 #: qml/configComics.qml:110
-#, fuzzy, kde-format
-#| msgid "strips per comic"
+#, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"
 msgid_plural "images per comic"
-msgstr[0] "kaiševa po stripu"
-msgstr[1] "kaiševa po stripu"
-msgstr[2] "kaiševa po stripu"
-msgstr[3] "kaiševa po stripu"
+msgstr[0] "slika po stripu"
+msgstr[1] "slike po stripu"
+msgstr[2] "slika po stripu"
+msgstr[3] "slika po stripu"
 
 # >> @title
 #: qml/ErrorPlaceholder.qml:18
-#, fuzzy, kde-format
-#| msgid "Download Comics"
+#, kde-format
 msgctxt "@info placeholdermessage if comic loading failed"
 msgid "Could not load comic"
-msgstr "Preuzimanje stripova"
+msgstr "Ne mogu da učitam strip"
 
 #: qml/ErrorPlaceholder.qml:19
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Try again later, or choose a different comic"
-msgstr ""
+msgstr "Pokušajte ponovo kasnije ili izaberite drugi strip"
 
 #: qml/ErrorPlaceholder.qml:27
 #, kde-format
 msgctxt "@info placeholdermessage title if offline"
 msgid "Offline"
-msgstr ""
+msgstr "Van veze"
 
 #: qml/ErrorPlaceholder.qml:28
 #, kde-format
@@ -202,12 +196,14 @@ msgid ""
 "Reconnect to the internet to retry loading this image. You can still view "
 "any images in the local archive."
 msgstr ""
+"Ponovo se povežite na internet da biste još jednom pokušali da učitate ovu "
+"sliku. I dalje možete gledati slike iz lokalne arhive."
 
 #: qml/ErrorPlaceholder.qml:36
 #, kde-format
 msgctxt "@info placeholdermessage title if connection local/unknown"
 msgid "Limited connectivity"
-msgstr ""
+msgstr "Ograničena povezivost"
 
 #: qml/ErrorPlaceholder.qml:37
 #, kde-format
@@ -216,12 +212,14 @@ msgid ""
 "The image may not be available on your current connection. You can still "
 "view any images in the local archive."
 msgstr ""
+"Slika možda nije dostupna preko trenutne veze. I dalje možete gledati slike "
+"iz lokalne arhive."
 
 #: qml/ErrorPlaceholder.qml:45
 #, kde-format
 msgctxt "@info placeholdermessage title if today not available"
 msgid "Not available"
-msgstr ""
+msgstr "Nije dostupno"
 
 #: qml/ErrorPlaceholder.qml:46
 #, kde-format
@@ -229,12 +227,14 @@ msgctxt "@info placeholdermessage explanation if today not available"
 msgid ""
 "Today's image is not yet available or cannot be read. Try a different date."
 msgstr ""
+"Današnja slika još nije dostupna ili ne može da se pročita. Pokušajte sa "
+"drugim datumom."
 
 #: qml/ErrorPlaceholder.qml:54
 #, kde-format
 msgctxt "@info placeholdermessage title if date not available"
 msgid "Not available"
-msgstr ""
+msgstr "Nije dostupno"
 
 #: qml/ErrorPlaceholder.qml:55
 #, kde-format
@@ -243,56 +243,50 @@ msgid ""
 "The image for this day is not available or cannot be read. Try a different "
 "date."
 msgstr ""
+"Slika za ovaj dan nije dostupna ili ne može da se pročita. Pokušajte sa "
+"drugim datumom."
 
 #: qml/main.qml:87
-#, fuzzy, kde-format
-#| msgctxt "here strip means comic strip"
-#| msgid "&Next Tab with a new Strip"
+#, kde-format
 msgctxt "@action comic strip"
 msgid "&Next Tab with a New Strip"
-msgstr "&Novi jezičak za novi strip"
+msgstr "Sljedeći jezičak sa &novim stripom"
 
 #: qml/main.qml:94
-#, fuzzy, kde-format
-#| msgid "Jump to &first Strip"
+#, kde-format
 msgctxt "@action"
 msgid "Jump to &First Strip"
 msgstr "Skoči na &prvi strip"
 
 #: qml/main.qml:100
-#, fuzzy, kde-format
-#| msgid "Jump to &current Strip"
+#, kde-format
 msgctxt "@action"
 msgid "Jump to &Current Strip"
 msgstr "Skoči na &tekući strip"
 
 #: qml/main.qml:106
-#, fuzzy, kde-format
-#| msgid "Jump to Strip ..."
+#, kde-format
 msgctxt "@action"
 msgid "Jump to Strip…"
-msgstr "Skoči na strip..."
+msgstr "Skoči na strip…"
 
 #: qml/main.qml:112
-#, fuzzy, kde-format
-#| msgid "Visit the shop &website"
+#, kde-format
 msgctxt "@action"
 msgid "Visit the Website"
-msgstr "Posjeti &veb sajt prodavnice"
+msgstr "Posjeti veb sajt"
 
 #: qml/main.qml:117
-#, fuzzy, kde-format
-#| msgid "Visit the shop &website"
+#, kde-format
 msgctxt "@action"
 msgid "Visit the Shop &Website"
 msgstr "Posjeti &veb sajt prodavnice"
 
 #: qml/main.qml:122
-#, fuzzy, kde-format
-#| msgid "&Save Comic As..."
+#, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr "&Sačuvaj strip kao..."
+msgstr "&Sačuvaj strip kao…"
 
 #: qml/main.qml:131
 #, kde-format
@@ -301,9 +295,7 @@ msgid "&Actual Size"
 msgstr "&Stvarna veličina"
 
 #: qml/main.qml:139
-#, fuzzy, kde-format
-#| msgctxt "@option:check Context menu of comic image"
-#| msgid "Store current &Position"
+#, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
 msgstr "Zapamti tekući &položaj"
@@ -312,216 +304,35 @@ msgstr "Zapamti tekući &položaj"
 #, kde-format
 msgctxt "@info placeholdermessage if no comics loaded"
 msgid "No comics configured"
-msgstr ""
+msgstr "Nema podešenih stripova"
 
 #: qml/main.qml:291
 #, kde-format
 msgctxt "@action:button helpfulAction opens settings dialog"
 msgid "Choose comic…"
-msgstr ""
+msgstr "Izaberi strip…"
 
 #: qml/main.qml:302
 #, kde-format
 msgctxt "@other filename pattern %1 path %2 comic (provider) name, %3 image id"
 msgid "%1/%2 - %3.png"
-msgstr ""
+msgstr "%1/%2 - %3.png"
 
 # >> @title:window
 #: stripselector.cpp:31 stripselector.cpp:101
-#, fuzzy, kde-format
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@title:window"
 msgid "Go to Strip"
 msgstr "Skok na strip"
 
 #: stripselector.cpp:39
-#, fuzzy, kde-format
-#| msgid "&Strip Number:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "&Strip number:"
 msgstr "Broj &stripa:"
 
 #: stripselector.cpp:102
-#, fuzzy, kde-format
-#| msgid "Strip identifier:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Strip identifier:"
 msgstr "Identifikator stripa:"
-
-#, fuzzy
-#~| msgid "Comic"
-#~ msgctxt "@title:group"
-#~ msgid "Comics:"
-#~ msgstr "Strip"
-
-#, fuzzy
-#~| msgid "Get New Comics..."
-#~ msgctxt "@action:button"
-#~ msgid "Get New Comics…"
-#~ msgstr "Dobavi nove stripove..."
-
-#, fuzzy
-#~| msgid "Middle-click on the comic to show it at its original size"
-#~ msgctxt "@option:check"
-#~ msgid "Middle-click on comic to display at original size"
-#~ msgstr "Srednji klik na strip daje njegovu izvornu veličinu"
-
-#, fuzzy
-#~| msgid "General"
-#~ msgctxt "@title"
-#~ msgid "General"
-#~ msgstr "Opšte"
-
-#, fuzzy
-#~| msgid "Appearance"
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Izgled"
-
-#, fuzzy
-#~| msgid "Advanced"
-#~ msgctxt "@title"
-#~ msgid "Advanced"
-#~ msgstr "Napredno"
-
-#, fuzzy
-#~| msgid "Comic cache:"
-#~ msgctxt "@label:spinbox"
-#~ msgid "Comic cache:"
-#~ msgstr "Keš stripova:"
-
-# >> @option:check
-#, fuzzy
-#~| msgid "Show comic title"
-#~ msgctxt "@option:check"
-#~ msgid "Comic title"
-#~ msgstr "Naslov stripa"
-
-# >> @option:check
-#, fuzzy
-#~| msgid "Show comic author"
-#~ msgctxt "@option:check"
-#~ msgid "Comic author"
-#~ msgstr "Autor stripa"
-
-#, fuzzy
-#~| msgid "Comic"
-#~ msgctxt "@option:check"
-#~ msgid "Comic URL"
-#~ msgstr "Strip"
-
-# >> @option:check
-#, fuzzy
-#~| msgid "Display error when getting comic failed"
-#~ msgctxt "@option:check"
-#~ msgid "Display error when downloading comic fails"
-#~ msgstr "Prikaz greške kad ne uspije dobavljanje stripa"
-
-#, fuzzy
-#~| msgid "Check for new comic strips:"
-#~ msgctxt "@label:spinbox"
-#~ msgid "Check for new plugins every:"
-#~ msgstr "Traži nove kaiševe stripa:"
-
-# >! Plurals.
-#, fuzzy
-#~| msgid "days"
-#~ msgctxt "@item:valuesuffix spacing to number + unit"
-#~ msgid "day"
-#~ msgid_plural "days"
-#~ msgstr[0] "dana"
-#~ msgstr[1] "dana"
-#~ msgstr[2] "dana"
-#~ msgstr[3] "dana"
-
-#, fuzzy
-#~| msgid "&Create Comic Book Archive..."
-#~ msgctxt "@action"
-#~ msgid "&Create Comic Book Archive..."
-#~ msgstr "&Napravi arhivu stripa..."
-
-#~ msgid "Archiving comic failed"
-#~ msgstr "Arhiviranje stripa nije uspjelo"
-
-# >> @title:window
-#, fuzzy
-#~| msgid "Create %1 Comic Book Archive"
-#~ msgctxt "@title:window"
-#~ msgid "Create %1 Comic Book Archive"
-#~ msgstr "Stvaranje arhive stripa %1"
-
-#~ msgid "Destination:"
-#~ msgstr "Odredište:"
-
-#~ msgid "*.cbz|Comic Book Archive (Zip)"
-#~ msgstr "*.cbz|arhiva stripa (ZIP)"
-
-#~ msgid "The range of comic strips to archive."
-#~ msgstr "Opseg stripskih kaiševa za arhiviranje."
-
-#~ msgid "Range:"
-#~ msgstr "Opseg:"
-
-#~ msgid "All"
-#~ msgstr "svi"
-
-#~ msgid "From beginning to ..."
-#~ msgstr "od početka do..."
-
-#~ msgid "From end to ..."
-#~ msgstr "od kraja do..."
-
-#~ msgid "Manual range"
-#~ msgstr "ručni opseg"
-
-#~ msgctxt "in a range: from to"
-#~ msgid "From:"
-#~ msgstr "Od:"
-
-#~ msgctxt "in a range: from to"
-#~ msgid "To:"
-#~ msgstr "Do:"
-
-#~ msgid "dd.MM.yyyy"
-#~ msgstr "dd.MM.yyyy"
-
-#~ msgid "No zip file is existing, aborting."
-#~ msgstr "Nema ZIP fajla, obustavljam."
-
-#~ msgid "An error happened for identifier %1."
-#~ msgstr "Došlo je do greške za identifikator %1."
-
-#~ msgid "Failed creating the file with identifier %1."
-#~ msgstr "Neuspelo stvaranje fajla sa identifikatorom %1."
-
-#~ msgid "Creating Comic Book Archive"
-#~ msgstr "Stvaranje fajla arhive stripa"
-
-#~ msgid "Failed adding a file to the archive."
-#~ msgstr "Neuspelo dodavanje fajla u arhivu."
-
-#~ msgid "Could not create the archive at the specified location."
-#~ msgstr "Ne mogu da napravim arhivu na zadatoj lokaciji."
-
-#~ msgid "Getting comic strip failed:"
-#~ msgstr "Dobavljanje stripa nije uspjelo:"
-
-#~ msgid ""
-#~ "Maybe there is no Internet connection.\n"
-#~ "Maybe the comic plugin is broken.\n"
-#~ "Another reason might be that there is no comic for this day/number/"
-#~ "string, so choosing a different one might work."
-#~ msgstr ""
-#~ "Možda ne radi veza sa Internetom.\n"
-#~ "Možda je priključak stripa pokvaren.\n"
-#~ "Takođe može biti da nema stripa za ovaj dan, broj ili nisku, pa "
-#~ "dobavljanje može uspjeti ako izaberete neki drugi."
-
-#~ msgid ""
-#~ "\n"
-#~ "\n"
-#~ "Choose the previous strip to go to the last cached strip."
-#~ msgstr ""
-#~ "\n"
-#~ "\n"
-#~ "Izaberite prethodni strip da prijeđete na posljednji keširani."

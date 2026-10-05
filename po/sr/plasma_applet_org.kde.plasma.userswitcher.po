@@ -1,12 +1,13 @@
 # Translation of plasma_applet_org.kde.plasma.userswitcher.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2015, 2016.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-02 00:43+0000\n"
-"PO-Revision-Date: 2016-04-15 23:42+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -19,66 +20,61 @@ msgstr ""
 "X-Environment: kde\n"
 
 #: qml/config.qml:11
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Опште"
 
 #: qml/configGeneral.qml:27
-#, fuzzy, kde-format
-#| msgid "User name display"
+#, kde-format
 msgctxt "@title:label"
 msgid "Username style:"
-msgstr "Приказ корисничког имена"
+msgstr "Приказ корисничког имена:"
 
 #: qml/configGeneral.qml:30
-#, fuzzy, kde-format
-#| msgid "Show full name (if available)"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Full name (if available)"
-msgstr "Прикажи цело име (ако је дато)"
+msgstr "Пуно име (ако је дато)"
 
 #: qml/configGeneral.qml:37
-#, fuzzy, kde-format
-#| msgid "Show login username"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Login username"
-msgstr "Прикажи пријавно корисничко име"
+msgstr "Пријавно корисничко име"
 
 #: qml/configGeneral.qml:55
 #, kde-format
 msgctxt "@title:label"
 msgid "Show:"
-msgstr ""
+msgstr "Прикажи:"
 
 #: qml/configGeneral.qml:58
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name"
-msgstr ""
+msgstr "Име"
 
 #: qml/configGeneral.qml:72
 #, kde-format
 msgctxt "@option:radio"
 msgid "User picture"
-msgstr ""
+msgstr "Слику корисника"
 
 #: qml/configGeneral.qml:86
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name and user picture"
-msgstr ""
+msgstr "Име и слику корисника"
 
 #: qml/configGeneral.qml:105
 #, kde-format
 msgctxt "@title:label"
 msgid "Advanced:"
-msgstr ""
+msgstr "Напредно:"
 
 #: qml/configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgid "Show technical information about sessions"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show technical session information"
 msgstr "Прикажи техничке податке о сесијама"
@@ -118,35 +114,28 @@ msgstr "на %1 %2|/|на $[лок %1] %2"
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
-msgstr ""
+msgstr "Пребаци на корисника %1"
 
 #: qml/main.qml:220
-#, fuzzy, kde-format
-#| msgid "New Session"
+#, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "Нова сесија"
 
 #: qml/main.qml:235
-#, fuzzy, kde-format
-#| msgid "Lock Screen"
+#, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Закључај екран"
 
 #: qml/main.qml:247
-#, fuzzy, kde-format
-#| msgid "Lock Screen"
+#, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
-msgstr "Закључај екран"
+msgstr "Прикажи одјавни екран"
 
 #: qml/UserListDelegate.qml:28
 #, kde-format
 msgctxt "@action:button @info:tooltip accessible"
 msgid "Open user configuration"
-msgstr ""
-
-#~ msgctxt "Show a dialog with options to logout/shutdown/restart"
-#~ msgid "Leave..."
-#~ msgstr "Напусти..."
+msgstr "Отвори поставу корисника"

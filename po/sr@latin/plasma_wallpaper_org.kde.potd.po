@@ -1,0 +1,221 @@
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
+msgid ""
+msgstr ""
+"Project-Id-Version: plasma_wallpaper_org.kde.potd\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2026-04-09 00:46+0000\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
+"Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
+"Language: sr@latin\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
+"%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
+"X-Accelerator-Marker: &\n"
+"X-Text-Markup: kde4\n"
+"X-Environment: kde\n"
+
+#: package/contents/ui/config.qml:58
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Positioning:"
+msgstr "Postavljanje:"
+
+#: package/contents/ui/config.qml:61
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled and cropped"
+msgstr "skalirano i opsečeno"
+
+#: package/contents/ui/config.qml:65
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled"
+msgstr "skalirano"
+
+#: package/contents/ui/config.qml:69
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Scaled, keep proportions"
+msgstr "skalirano, očuvana proporcija"
+
+#: package/contents/ui/config.qml:73
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Centered"
+msgstr "centrirano"
+
+#: package/contents/ui/config.qml:77
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tiled"
+msgstr "popločano"
+
+#: package/contents/ui/config.qml:98
+#, kde-format
+msgctxt "@label:chooser"
+msgid "Background color:"
+msgstr "Boja pozadine:"
+
+#: package/contents/ui/config.qml:99
+#, kde-format
+msgctxt "@title:window"
+msgid "Select Background Color"
+msgstr "Izbor boje pozadine"
+
+#: package/contents/ui/config.qml:103
+#, kde-format
+msgctxt "@label:listbox"
+msgid "Provider:"
+msgstr "Dobavljač:"
+
+#: package/contents/ui/config.qml:122
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"This wallpaper provider does not filter out images that may be sensitive or "
+"objectionable. Use caution if these images will be displayed in public."
+msgstr ""
+"Ovaj dobavljač tapeta ne filtrira slike koje mogu biti osetljive ili "
+"uvredljive. Budite oprezni ako će se ove slike prikazivati javno."
+
+#: package/contents/ui/config.qml:131
+#, kde-format
+msgctxt "@option:check"
+msgid "Update when using metered network connection"
+msgstr "Ažuriraj i pri korišćenju mrežne veze koja se naplaćuje po protoku"
+
+#: package/contents/ui/config.qml:146
+#, kde-format
+msgctxt "@label"
+msgid "Today's picture:"
+msgstr "Današnja slika:"
+
+#: package/contents/ui/config.qml:162
+#, kde-format
+msgctxt "@label"
+msgid "Title:"
+msgstr "Naslov:"
+
+#: package/contents/ui/config.qml:177
+#, kde-format
+msgctxt "@label"
+msgid "Author:"
+msgstr "Autor:"
+
+#: package/contents/ui/config.qml:196
+#, kde-format
+msgctxt "@action:button"
+msgid "Open Containing Folder"
+msgstr "Otvori obuhvatajuću fasciklu"
+
+#: package/contents/ui/config.qml:200
+#, kde-format
+msgctxt "@info:whatsthis for a button"
+msgid "Open the destination folder where the wallpaper image was saved."
+msgstr "Otvori odredišnu fasciklu u koju je sačuvana tapetna slika."
+
+#: package/contents/ui/main.qml:22
+#, kde-format
+msgid "Open Wallpaper Image"
+msgstr "Otvori tapetnu sliku"
+
+#: package/contents/ui/main.qml:27
+#, kde-format
+msgctxt "@action:inmenu Placeholder is title of image"
+msgid "About “%1”"
+msgstr "O „%1“"
+
+#: package/contents/ui/main.qml:28
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "About This Image"
+msgstr "O ovoj slici"
+
+#: package/contents/ui/WallpaperDelegate.qml:137
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Today's picture"
+msgstr "Današnja slika"
+
+#: package/contents/ui/WallpaperDelegate.qml:138
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Loading"
+msgstr "Učitavam"
+
+#: package/contents/ui/WallpaperDelegate.qml:139
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Unavailable"
+msgstr "Nedostupno"
+
+#: package/contents/ui/WallpaperDelegate.qml:140
+#, kde-format
+msgctxt "@info:whatsthis for an image %1 title %2 author"
+msgid "%1 Author: %2. Right-click on the image to see more actions."
+msgstr ""
+"%1 Autor: %2. Kliknite desnim dugmetom na sliku da biste videli još radnji."
+
+#: package/contents/ui/WallpaperDelegate.qml:141
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "The wallpaper is being fetched from the Internet."
+msgstr "Tapet se dobavlja sa interneta."
+
+#: package/contents/ui/WallpaperDelegate.qml:142
+#, kde-format
+msgctxt "@info:whatsthis"
+msgid "Failed to fetch the wallpaper from the Internet."
+msgstr "Ne mogu da dobavim tapet sa interneta."
+
+#: package/contents/ui/WallpaperPreview.qml:48
+#, kde-format
+msgctxt "@action:inmenu wallpaper preview menu"
+msgid "Save Image as…"
+msgstr "Sačuvaj sliku kao…"
+
+#: package/contents/ui/WallpaperPreview.qml:51
+#, kde-format
+msgctxt "@info:whatsthis for a button and a menu item"
+msgid "Save today's picture to local disk"
+msgstr "Sačuvaj današnju sliku na lokalni disk"
+
+#: package/contents/ui/WallpaperPreview.qml:57
+#, kde-format
+msgctxt ""
+"@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
+msgid "Open Link in Browser…"
+msgstr "Otvori vezu u pregledaču…"
+
+#: package/contents/ui/WallpaperPreview.qml:60
+#, kde-format
+msgctxt "@info:whatsthis for a menu item"
+msgid "Open the website of today's picture in the default browser"
+msgstr "Otvori veb sajt današnje slike u podrazumevanom pregledaču"
+
+#: plugins/potdbackend.cpp:213
+#, kde-format
+msgctxt "@title:window"
+msgid "Save Today's Picture"
+msgstr "Upisivanje današnje slike"
+
+#: plugins/potdbackend.cpp:215
+#, kde-format
+msgctxt "@label:listbox Template for file dialog"
+msgid "JPEG image (*.jpeg *.jpg *.jpe)"
+msgstr "JPEG slika (*.jpeg *.jpg *.jpe)"
+
+#: plugins/potdbackend.cpp:232
+#, kde-format
+msgctxt "@info:status after a save action"
+msgid "The image was not saved."
+msgstr "Slika nije sačuvana."
+
+#: plugins/potdbackend.cpp:239
+#, kde-format
+msgctxt "@info:status after a save action %1 file path %2 basename"
+msgid "The image was saved as <a href=\"%1\">%2</a>"
+msgstr "Slika je sačuvana kao <a href=\"%1\">%2</a>"

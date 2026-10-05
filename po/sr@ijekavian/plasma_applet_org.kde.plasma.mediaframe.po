@@ -1,12 +1,13 @@
 # Translation of plasma_applet_org.kde.plasma.mediaframe.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2016, 2017.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-25 02:44+0000\n"
-"PO-Revision-Date: 2017-12-03 22:53+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
 "MIME-Version: 1.0\n"
@@ -22,225 +23,203 @@ msgstr ""
 #, kde-format
 msgctxt "@title"
 msgid "Media"
-msgstr ""
+msgstr "Медији"
 
 #: qml/config.qml:18
 #, kde-format
 msgctxt "@title"
 msgid "Behavior"
-msgstr ""
+msgstr "Понашање"
 
 #: qml/ConfigBehavior.qml:48
-#, fuzzy, kde-format
-#| msgid "Change picture every"
+#, kde-format
 msgid "Change picture every:"
-msgstr "Мењај слику сваких"
+msgstr "Мијењај слику сваких:"
 
 #: qml/ConfigBehavior.qml:65
 #, kde-format
 msgid "Hours"
-msgstr ""
+msgstr "сати"
 
 #: qml/ConfigBehavior.qml:79
 #, kde-format
 msgid "Minutes"
-msgstr ""
+msgstr "минута"
 
 #: qml/ConfigBehavior.qml:93
 #, kde-format
 msgid "Seconds"
-msgstr ""
+msgstr "секунди"
 
 #: qml/ConfigBehavior.qml:103
-#, fuzzy, kde-format
-#| msgid "Fill mode:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
-msgstr "Режим попуне:"
+msgstr "Режим попуне слике:"
 
 # >> @item:inlistbox Fill mode
 #: qml/ConfigBehavior.qml:110
-#, fuzzy, kde-format
-#| msgid "Stretch"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "развучено"
 
 # >> @text:tooltip
 #: qml/ConfigBehavior.qml:111
-#, fuzzy, kde-format
-#| msgid "The image is scaled to fit"
+#, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
-msgstr "Слика се скалира да стане."
+msgstr "Слика се скалира да стане у оквир."
 
 # >> @item:inlistbox Fill mode
 #: qml/ConfigBehavior.qml:115
-#, fuzzy, kde-format
-#| msgid "Preserve aspect fit"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
-msgstr "уклапање по размери"
+msgstr "уклапање по размјери"
 
 # >> @text:tooltip
 #: qml/ConfigBehavior.qml:116
-#, fuzzy, kde-format
-#| msgid "The image is scaled uniformly to fit without cropping"
+#, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
-msgstr "Слика се скалира равномерно да стане без опсецања."
+msgstr "Слика се скалира равномјерно да стане без опсијецања."
 
 # >> @item:inlistbox Fill mode
 #: qml/ConfigBehavior.qml:120
-#, fuzzy, kde-format
-#| msgid "Preserve aspect crop"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
-msgstr "опсецање по размери"
+msgstr "опсијецање по размјери"
 
 # >> @text:tooltip
 #: qml/ConfigBehavior.qml:121
-#, fuzzy, kde-format
-#| msgid "The image is scaled uniformly to fill, cropping if necessary"
+#, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
-msgstr "Слика се скалира равномерно да попуни све, ако треба уз опсецање."
+msgstr "Слика се скалира равномјерно да попуни све, ако треба уз опсијецање."
 
 # >> @item:inlistbox Fill mode
 #: qml/ConfigBehavior.qml:125
-#, fuzzy, kde-format
-#| msgid "Tile"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "поплочано"
 
 # >> @text:tooltip
 #: qml/ConfigBehavior.qml:126
-#, fuzzy, kde-format
-#| msgid "The image is duplicated horizontally and vertically"
+#, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Слика се умножава водоравно и усправно."
 
 # >> @item:inlistbox Fill mode
 #: qml/ConfigBehavior.qml:130
-#, fuzzy, kde-format
-#| msgid "Tile vertically"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "поплочано усправно"
 
 # >> @text:tooltip
 #: qml/ConfigBehavior.qml:131
-#, fuzzy, kde-format
-#| msgid "The image is stretched horizontally and tiled vertically"
+#, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "Слика се развлачи водоравно а поплочава усправно."
 
 # >> @item:inlistbox Fill mode
 #: qml/ConfigBehavior.qml:135
-#, fuzzy, kde-format
-#| msgid "Tile horizontally"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "поплочано водоравно"
 
 # >> @text:tooltip
 #: qml/ConfigBehavior.qml:136
-#, fuzzy, kde-format
-#| msgid "The image is stretched vertically and tiled horizontally"
+#, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "Слика се развлачи усправно а поплочава водоравно."
 
 # >> @item:inlistbox Fill mode
 #: qml/ConfigBehavior.qml:140
-#, fuzzy, kde-format
-#| msgid "Pad"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "попуњене ивице"
 
 # >> @text:tooltip
 #: qml/ConfigBehavior.qml:141
-#, fuzzy, kde-format
-#| msgid "The image is not transformed"
+#, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
-msgstr "Слика се никако не мења."
+msgstr "Слика се никако не мијења."
 
 #: qml/ConfigBehavior.qml:186
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
-msgstr "Опште"
+msgstr "Опште:"
 
 #: qml/ConfigBehavior.qml:187
-#, fuzzy, kde-format
-#| msgid "Randomize items"
+#, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
-msgstr "Насумичне ставке"
+msgstr "Насумичан редослијед"
 
+# skip-rule: t-cursor
 #: qml/ConfigBehavior.qml:192
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
-msgstr ""
+msgstr "Паузирај слајдшоу када је показивач над сликом"
 
 #: qml/ConfigBehavior.qml:197
-#, fuzzy, kde-format
-#| msgid "Left click image opens in external viewer"
+#, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
-msgstr "Леви клик отвара слику у спољашњем приказивачу"
+msgstr "Клик на слику отвара је у спољашњем програму"
 
 #: qml/ConfigMedia.qml:27
-#, fuzzy, kde-format
-#| msgid "Add folder..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
-msgstr "Додај фасциклу..."
+msgstr "Додај фасциклу…"
 
 #: qml/ConfigMedia.qml:32
-#, fuzzy, kde-format
-#| msgid "Add files..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
-msgstr "Додај фајлове..."
+msgstr "Додај фајлове…"
 
 #: qml/ConfigMedia.qml:90
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
-msgstr ""
+msgstr "Уклони путању"
 
 #: qml/ConfigMedia.qml:100
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
-msgstr ""
+msgstr "Нема подешених медија"
 
 #: qml/ConfigMedia.qml:101
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
-msgstr ""
+msgstr "Додајте фајлове или фасцикле да бисте их приказали у виџету."
 
 # >> @title:window
 #: qml/ConfigMedia.qml:107
-#, fuzzy, kde-format
-#| msgid "Choose files"
+#, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Избор фајлова"
 
 # >> @title:window
 #: qml/ConfigMedia.qml:127
-#, fuzzy, kde-format
-#| msgid "Choose a folder"
+#, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Избор фасцикле"
@@ -249,34 +228,10 @@ msgstr "Избор фасцикле"
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
-msgstr ""
+msgstr "Нема изабраних медија"
 
 #: qml/main.qml:370 qml/main.qml:380
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
-msgstr ""
-
-#, fuzzy
-#~| msgid "General"
-#~ msgctxt "@title"
-#~ msgid "General"
-#~ msgstr "Опште"
-
-#, fuzzy
-#~| msgid "Paths"
-#~ msgctxt "@title"
-#~ msgid "Paths"
-#~ msgstr "Путање"
-
-#, fuzzy
-#~| msgid "Configure plasmoid..."
-#~ msgctxt "@action:button"
-#~ msgid "Configure…"
-#~ msgstr "Подеси плазмоид..."
-
-#, fuzzy
-#~| msgid "Background frame"
-#~ msgctxt "@option:check"
-#~ msgid "Show background frame"
-#~ msgstr "Позадински оквир"
+msgstr "Изабери медије…"

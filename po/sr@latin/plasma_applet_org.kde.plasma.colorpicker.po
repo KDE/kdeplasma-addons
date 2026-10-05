@@ -1,13 +1,14 @@
 # Translation of plasma_applet_org.kde.plasma.colorpicker.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2008, 2010, 2015, 2016.
 # Dalibor Djuric <daliborddjuric@gmail.com>, 2010.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-10 00:48+0000\n"
-"PO-Revision-Date: 2016-12-18 21:56+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@latin\n"
 "MIME-Version: 1.0\n"
@@ -19,24 +20,21 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-# >> @option:radio When pressing the keyboard shortcut:
 #: qml/ColorCircle.qml:26
-#, fuzzy, kde-format
-#| msgid "Pick a color"
+#, kde-format
 msgctxt "@info"
 msgid "No Saved Colors"
-msgstr "Izaberi boju"
+msgstr "Nema sačuvanih boja"
 
 #: qml/ColorCircle.qml:40
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
-msgstr ""
+msgstr "Srednji klik kopira kôd boje"
 
 # >> @option:radio When pressing the keyboard shortcut:
 #: qml/CompactRepresentation.qml:84
-#, fuzzy, kde-format
-#| msgid "Pick a color"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Izaberi boju"
@@ -48,47 +46,43 @@ msgid ""
 "Drag a color code here to save it<nl/>Drag an image file here to get its "
 "average color"
 msgstr ""
+"Prevucite ovamo kôd boje da ga sačuvate<nl/>Prevucite ovamo fajl slike da "
+"dobijete njegovu prosečnu boju"
 
 #: qml/config.qml:11
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Opšte"
 
 #: qml/configGeneral.qml:21
-#, fuzzy, kde-format
-#| msgid "Default color format:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Podrazumevani format boje:"
 
 #: qml/configGeneral.qml:31
-#, fuzzy, kde-format
-#| msgid "Automatically copy color to clipboard"
+#, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Automatski kopiraj boju u klipbord"
 
 #: qml/configGeneral.qml:39
-#, fuzzy, kde-format
-#| msgid "When pressing the keyboard shortcut:"
+#, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "Na pritisak prečice sa tastature:"
 
 # >> @option:radio When pressing the keyboard shortcut:
 #: qml/configGeneral.qml:40
-#, fuzzy, kde-format
-#| msgid "Pick a color"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Izaberi boju"
 
 # >> @option:radio When pressing the keyboard shortcut:
 #: qml/configGeneral.qml:46
-#, fuzzy, kde-format
-#| msgid "Show history"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Prikaži istorijat"
@@ -97,47 +91,41 @@ msgstr "Prikaži istorijat"
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
-msgstr ""
+msgstr "Broj boja u pregledu:"
 
 #: qml/main.qml:119
-#, fuzzy, kde-format
-#| msgid "Open Color Dialog"
+#, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Otvori dijalog boja"
 
 #: qml/main.qml:124
-#, fuzzy, kde-format
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Očisti istorijat"
 
 #: qml/main.qml:132
-#, fuzzy, kde-format
-#| msgid "Clear History"
+#, kde-format
 msgctxt "@action"
 msgid "View History"
-msgstr "Očisti istorijat"
+msgstr "Prikaži istorijat"
 
 #: qml/main.qml:140
-#, fuzzy, kde-format
-#| msgid "Copy to Clipboard"
+#, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Kopiraj u klipbord"
 
 # >> @option:radio When pressing the keyboard shortcut:
 #: qml/main.qml:178
-#, fuzzy, kde-format
-#| msgid "Pick a color"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
-msgstr "Izaberi boju"
+msgstr "Nema boja"
 
 #: qml/main.qml:185
-#, fuzzy, kde-format
-#| msgid "Pick Color"
+#, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Izaberi boju"
@@ -146,17 +134,10 @@ msgstr "Izaberi boju"
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
-msgstr ""
+msgstr "Kopirano!"
 
 #: qml/main.qml:382
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
-msgstr ""
-
-# >> @title:menu
-#, fuzzy
-#~| msgid "Color Options"
-#~ msgctxt "@info:tooltip"
-#~ msgid "Color options"
-#~ msgstr "Opcija boje"
+msgstr "Obriši"

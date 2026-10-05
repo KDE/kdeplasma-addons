@@ -1,13 +1,14 @@
 # Translation of plasma_applet_org.kde.plasma.fifteenpuzzle.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2008, 2009, 2010, 2014, 2017.
 # Dalibor Djuric <daliborddjuric@gmail.com>, 2011.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2017-01-14 19:23+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
 "MIME-Version: 1.0\n"
@@ -20,8 +21,7 @@ msgstr ""
 "X-Environment: kde\n"
 
 #: qml/config.qml:13
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Изглед"
@@ -30,53 +30,49 @@ msgstr "Изглед"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
-msgstr ""
+msgstr "Величина мреже:"
 
 #: qml/configAppearance.qml:61
 #, kde-format
 msgctxt "@label:group radio button group"
 msgid "Background:"
-msgstr ""
+msgstr "Позадина:"
 
 #: qml/configAppearance.qml:68
 #, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
-msgstr ""
+msgstr "Боја:"
 
 #: qml/configAppearance.qml:84
 #, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image:"
-msgstr ""
+msgstr "Слика:"
 
 #: qml/configAppearance.qml:92
-#, fuzzy, kde-format
-#| msgid "Path to custom image"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
-msgstr "Путања до посебне слике"
+msgstr "Путања до посебне слике…"
 
 # >> @title:window
 #: qml/configAppearance.qml:108
-#, fuzzy, kde-format
-#| msgid "Choose an image"
+#, kde-format
 msgctxt "@action:button"
 msgid "Choose image…"
-msgstr "Избор слике"
+msgstr "Изабери слику…"
 
 # >> @title:window
 #: qml/configAppearance.qml:119
-#, fuzzy, kde-format
-#| msgid "Choose an image"
+#, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Избор слике"
 
 # >> @item
 #: qml/configAppearance.qml:124
-#, fuzzy, kde-format
-#| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
+#, kde-format
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "фајлови слика (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
@@ -85,19 +81,19 @@ msgstr "фајлови слика (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 #, kde-format
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
-msgstr ""
+msgstr "Етикете плочица:"
 
 #: qml/configAppearance.qml:149
 #, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color:"
-msgstr ""
+msgstr "Боја:"
 
 #: qml/configAppearance.qml:163
 #, kde-format
 msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"
-msgstr ""
+msgstr "Сакриј на позадини са сликом"
 
 #: qml/FifteenPuzzle.qml:262
 #, kde-format
@@ -106,8 +102,7 @@ msgid "Time: %1"
 msgstr "Вријеме: %1"
 
 #: qml/FifteenPuzzle.qml:320
-#, fuzzy, kde-format
-#| msgid "Shuffle"
+#, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Промијешај"
@@ -116,14 +111,13 @@ msgstr "Промијешај"
 #, kde-format
 msgctxt "@info:status The number of moves made by the player so far"
 msgid "Moves: %1"
-msgstr ""
+msgstr "Потеза: %1"
 
 #: qml/FifteenPuzzle.qml:371
-#, fuzzy, kde-format
-#| msgid "Solved! Try again."
+#, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
-msgstr "Решено! Пробајте опет."
+msgstr "Ријешено! Пробајте опет."
 
 #: qml/main.qml:37
 #, kde-format
@@ -133,4 +127,4 @@ msgstr "Петнаестица"
 #: qml/main.qml:38
 #, kde-format
 msgid "Solve by arranging in order"
-msgstr "Реши распоређивањем по редоследу"
+msgstr "Ријеши распоређивањем по редослиједу"

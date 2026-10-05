@@ -1,12 +1,13 @@
 # Translation of plasma_applet_org.kde.plasma.diskquota.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2015, 2016.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.diskquota\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-18 00:45+0000\n"
-"PO-Revision-Date: 2016-11-28 01:33+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
 "MIME-Version: 1.0\n"
@@ -65,30 +66,21 @@ msgid "No quota restrictions found."
 msgstr "Ограничења квоте нису нађена."
 
 #: qml/main.qml:75
-#, fuzzy, kde-format
-#| msgid "No quota restrictions found."
+#, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
-msgstr "Ограничења квоте нису нађена."
+msgstr "Ограничења квоте нису нађена"
 
 # rewrite-msgid: /install/install command/
 #: qml/main.qml:75
-#, fuzzy, kde-format
-#| msgid ""
-#| "Quota tool not found.\n"
-#| "\n"
-#| "Please install 'quota'."
+#, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
-msgstr ""
-"Алатка за квоту није нађена.\n"
-"\n"
-"Инсталирајте наредбу ‘quota’."
+msgstr "Алатка за квоту није нађена"
 
 # rewrite-msgid: /install/install command/
 #: qml/main.qml:76
-#, fuzzy, kde-format
-#| msgid "Please install 'quota'"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
 msgstr "Инсталирајте наредбу ‘quota’."

@@ -1,13 +1,14 @@
 # Translation of plasma_applet_org.kde.plasma.timer.po into Serbian.
 # Slobodan Simic <slsimic@gmail.com>, 2008.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2009, 2010, 2012, 2014, 2015.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-25 02:44+0000\n"
-"PO-Revision-Date: 2015-04-24 13:57+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -20,120 +21,112 @@ msgstr ""
 "X-Environment: kde\n"
 
 #: CompactRepresentation.qml:133
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
-msgstr "Одбројавач"
+msgstr "Паузирај одбројавач"
 
 #: CompactRepresentation.qml:133
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
-msgstr "Одбројавач"
+msgstr "Покрени одбројавач"
 
 #: CompactRepresentation.qml:196 CompactRepresentation.qml:214
 #, kde-format
 msgctxt "remaining time"
 msgid "%1s"
 msgid_plural "%1s"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%1 с"
+msgstr[1] "%1 с"
+msgstr[2] "%1 с"
+msgstr[3] "%1 с"
 
 #: config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "General"
-msgstr ""
+msgstr "Опште"
 
 #: config.qml:19
 #, kde-format
 msgctxt "@title"
 msgid "Predefined Timers"
-msgstr ""
+msgstr "Предефинисана одбројавања"
 
 #: configGeneral.qml:33
-#, fuzzy, kde-format
-#| msgid "Display"
+#, kde-format
 msgctxt "@title:label"
 msgid "Display:"
-msgstr "Приказ"
+msgstr "Приказ:"
 
 #: configGeneral.qml:38
-#, fuzzy, kde-format
-#| msgid "Show title"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show title:"
-msgstr "Прикажи наслов"
+msgstr "Наслов:"
 
 #: configGeneral.qml:55
 #, kde-format
 msgctxt "@option:check"
 msgid "Show remaining time"
-msgstr ""
+msgstr "Прикажи преостало време"
 
 #: configGeneral.qml:61
-#, fuzzy, kde-format
-#| msgid "Show seconds"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Прикажи секунде"
 
 #: configGeneral.qml:66
-#, fuzzy, kde-format
-#| msgid "Show title"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
-msgstr "Прикажи наслов"
+msgstr "Прикажи прекидач одбројавача"
 
 #: configGeneral.qml:71
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
-msgstr ""
+msgstr "Прикажи траку напретка"
 
 #: configGeneral.qml:81
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
-msgstr ""
+msgstr "При прековремену:"
 
 #: configGeneral.qml:85
-#, fuzzy, kde-format
-#| msgid "Show notification"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
-msgstr "Прикажи обавештење"
+msgstr "Прикажи обавештење:"
 
 # rewrite-msgid: /Timer/Countdown/
 #: configGeneral.qml:97
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Одбројавање завршено"
 
+# >> @title:window
 #: configGeneral.qml:107
-#, fuzzy, kde-format
-#| msgid "Execute command"
+#, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
-msgstr "Изврши наредбу"
+msgstr "Изврши наредбу:"
 
 #: configGeneral.qml:119
 #, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
-msgstr ""
+msgstr "kdialog --msgbox 'Одбројавање завршено'"
 
 #: configTimes.qml:22
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
-msgstr ""
+msgstr "Додај"
 
 #: configTimes.qml:87
 #, kde-format
@@ -141,31 +134,33 @@ msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
 msgstr ""
+"Ако овде додате предефинисана одбројавања, појавиће се у контекстном менију "
+"виџета."
 
 #: configTimes.qml:125
 #, kde-format
 msgid "Scroll over digits to change time"
-msgstr ""
+msgstr "Клизајте преко цифара да промените време"
 
 #: configTimes.qml:132
 #, kde-format
 msgid "Apply"
-msgstr ""
+msgstr "Примени"
 
 #: configTimes.qml:140
 #, kde-format
 msgid "Cancel"
-msgstr ""
+msgstr "Одустани"
 
 #: configTimes.qml:149
 #, kde-format
 msgid "Edit"
-msgstr ""
+msgstr "Уреди"
 
 #: configTimes.qml:158
 #, kde-format
 msgid "Delete"
-msgstr ""
+msgstr "Обриши"
 
 #: main.qml:68
 #, kde-format
@@ -207,43 +202,19 @@ msgid "Timer finished"
 msgstr "Одбројавање завршено"
 
 #: main.qml:131
-#, fuzzy, kde-format
-#| msgid "&Start"
+#, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Покрени"
 
 #: main.qml:136
-#, fuzzy, kde-format
-#| msgid "S&top"
+#, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "&Заустави"
 
 #: main.qml:141
-#, fuzzy, kde-format
-#| msgid "&Reset"
+#, kde-format
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Ресетуј"
-
-#, fuzzy
-#~| msgid "Appearance"
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Изглед"
-
-#, fuzzy
-#~| msgid "Advanced"
-#~ msgctxt "@title"
-#~ msgid "Advanced"
-#~ msgstr "Напредно"
-
-#, fuzzy
-#~| msgid "Notifications"
-#~ msgctxt "@title:label"
-#~ msgid "Notifications:"
-#~ msgstr "Обавештења"
-
-#~ msgid "Timer is running"
-#~ msgstr "Одбројавач у погону"

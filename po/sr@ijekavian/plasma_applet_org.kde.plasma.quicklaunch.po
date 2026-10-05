@@ -1,12 +1,13 @@
 # Translation of plasma_applet_org.kde.plasma.quicklaunch.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2015, 2016.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-09 00:46+0000\n"
-"PO-Revision-Date: 2016-03-20 15:25+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
 "MIME-Version: 1.0\n"
@@ -19,92 +20,81 @@ msgstr ""
 "X-Environment: kde\n"
 
 #: config.qml:12
-#, fuzzy, kde-format
-#| msgid "General"
+#, kde-format
 msgctxt "@title"
 msgid "General"
 msgstr "Опште"
 
 #: ConfigGeneral.qml:30
-#, fuzzy, kde-format
-#| msgid "Maximum columns:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Највише колона:"
 
 #: ConfigGeneral.qml:30
-#, fuzzy, kde-format
-#| msgid "Maximum rows:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Највише врста:"
 
 # >> @title:window
 #: ConfigGeneral.qml:42
-#, fuzzy, kde-format
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
-msgstr "Изглед"
+msgstr "Изглед:"
 
 # >> @option:check
 #: ConfigGeneral.qml:44
-#, fuzzy, kde-format
-#| msgid "Show launcher names"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
 msgstr "Прикажи имена покретача"
 
 # >> @option:check
 #: ConfigGeneral.qml:49
-#, fuzzy, kde-format
-#| msgid "Enable popup"
+#, kde-format
 msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Укључи искакач"
 
 #: ConfigGeneral.qml:59
-#, fuzzy, kde-format
-#| msgid "Title"
+#, kde-format
 msgctxt "@title:group"
 msgid "Title:"
-msgstr "Наслов"
+msgstr "Наслов:"
 
 #: ConfigGeneral.qml:67
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
-msgstr ""
+msgstr "Прикажи:"
 
 #: ConfigGeneral.qml:83
-#, fuzzy, kde-format
-#| msgid "Show title"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"
-msgstr "Прикажи наслов"
+msgstr "Посебан наслов"
 
 #: IconItem.qml:181
 #, kde-format
 msgid "Launch %1"
-msgstr ""
+msgstr "Покрени %1|/|Покрени $[аку %1]"
 
 #: IconItem.qml:265
-#, fuzzy, kde-format
-#| msgid "Add Launcher..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
-msgstr "Додај покретач..."
+msgstr "Додај покретач…"
 
 #: IconItem.qml:271
-#, fuzzy, kde-format
-#| msgid "Edit Launcher..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
-msgstr "Уреди покретач..."
+msgstr "Уреди покретач…"
 
 #: IconItem.qml:277
-#, fuzzy, kde-format
-#| msgid "Remove Launcher"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Уклони покретач"
@@ -115,8 +105,7 @@ msgid "Quicklaunch"
 msgstr "брзокрет"
 
 #: main.qml:111
-#, fuzzy, kde-format
-#| msgid "Add launchers by Drag and Drop or by using the context menu."
+#, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Додајте покретаче превлачењем или кроз контекстни мени."
@@ -132,8 +121,7 @@ msgid "Show hidden icons"
 msgstr "Прикажи скривене иконице"
 
 #: main.qml:341
-#, fuzzy, kde-format
-#| msgid "Add Launcher..."
+#, kde-format
 msgctxt "@action"
 msgid "Add Launcher…"
-msgstr "Додај покретач..."
+msgstr "Додај покретач…"

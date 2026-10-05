@@ -1,12 +1,13 @@
 # Translation of konsoleprofiles.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2012.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-01 00:44+0000\n"
-"PO-Revision-Date: 2012-06-13 23:09+0200\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
 "MIME-Version: 1.0\n"
@@ -19,8 +20,7 @@ msgstr ""
 "X-Environment: kde\n"
 
 #: main.qml:69
-#, fuzzy, kde-format
-#| msgid "Konsole Profiles"
+#, kde-format
 msgctxt "@title"
 msgid "Konsole Profiles"
 msgstr "Конзолини профили"
