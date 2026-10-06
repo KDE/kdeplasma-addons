@@ -28,7 +28,6 @@ generate_export_header(plasmaweatherion)
 install(TARGETS plasmaweatherion DESTINATION ${KDE_INSTALL_LIBDIR})
 
 #add ions
-add_subdirectory(wetter.com)
 add_subdirectory(bbcukmet)
 add_subdirectory(dwd)
 add_subdirectory(envcan)
