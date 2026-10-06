@@ -35,7 +35,6 @@ install(FILES
 )
 
 #add ions
-add_subdirectory(wetter.com)
 add_subdirectory(bbcukmet)
 add_subdirectory(dwd)
 add_subdirectory(envcan)
