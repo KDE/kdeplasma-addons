@@ -9,11 +9,6 @@ Note: sometimes, the webpage shows a YouTube video and picture cannot be fetched
 http://www.flickr.com/explore/interesting/
 API http://www.flickr.com/services/api/flickr.interestingness.getList.html
 
-* EPOD - Earth Science Picture of the Day  -----------  DONE
-http://epod.usra.edu/
-RSS feed http://interglacial.com/rss/epod.rss
-Note that this site might not be reliable with the current political turmoil in US research.
-
 * WCPoTD Wikimedia Commons Picture of The Day --------  DONE
 https://commons.wikimedia.org/wiki/Commons:Picture_of_the_day
 
