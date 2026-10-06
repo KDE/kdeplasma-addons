@@ -112,6 +112,10 @@ PlasmoidItem {
             return i18nc("@info:tooltip", "Click to choose a location and monitor the weather there")
         }
 
+        if (Plasmoid.icon === symbolicizeIconName(Util.unknownWeatherIcon)) {
+            return i18nc("@info:placeholder", "Unable to load weather forecast")
+        }
+
         if (!forecastControl.forecast?.station?.place) {
             return "";
         }
