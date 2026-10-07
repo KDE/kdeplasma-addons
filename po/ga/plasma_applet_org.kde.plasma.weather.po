@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-30 00:47+0000\n"
+"POT-Creation-Date: 2026-10-07 00:50+0000\n"
 "PO-Revision-Date: 2009-02-03 08:48-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -690,7 +690,13 @@ msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr ""
 
-#: qml/main.qml:126
+#: qml/main.qml:116 qml/SwitchPanel.qml:176
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Unable to load weather forecast"
+msgstr ""
+
+#: qml/main.qml:130
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the weather condition, %2 is the temperature, both come from the "
@@ -700,7 +706,7 @@ msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:139
+#: qml/main.qml:143
 #, fuzzy, kde-format
 #| msgctxt "wind direction, speed"
 #| msgid "%1 %2 %3"
@@ -708,7 +714,7 @@ msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 %3"
 
-#: qml/main.qml:142
+#: qml/main.qml:146
 #, fuzzy, kde-format
 #| msgctxt ""
 #| "%1 is the weather condition, %2 is the temperature, both come from the "
@@ -718,7 +724,7 @@ msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:154
+#: qml/main.qml:158
 #, fuzzy, kde-format
 #| msgctxt "certain weather condition, probability percentage"
 #| msgid "%1 (%2%)"
@@ -726,7 +732,7 @@ msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2%)"
 
-#: qml/main.qml:163
+#: qml/main.qml:167
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"
@@ -825,12 +831,6 @@ msgstr[1] "Fógraí"
 msgstr[2] "Fógraí"
 msgstr[3] "Fógraí"
 msgstr[4] "Fógraí"
-
-#: qml/SwitchPanel.qml:176
-#, kde-format
-msgctxt "@info:placeholder"
-msgid "Unable to load weather forecast"
-msgstr ""
 
 #: qml/SwitchPanel.qml:178
 #, kde-format

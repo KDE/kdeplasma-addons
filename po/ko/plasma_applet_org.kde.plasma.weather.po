@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-30 00:47+0000\n"
+"POT-Creation-Date: 2026-10-07 00:50+0000\n"
 "PO-Revision-Date: 2026-09-21 23:47+0200\n"
 "Last-Translator: Shinjo Park <peremen@gmail.com>\n"
 "Language-Team: Korean\n"
@@ -664,31 +664,37 @@ msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr "위치를 선택하고 날씨를 보려면 클릭하십시오"
 
-#: qml/main.qml:126
+#: qml/main.qml:116 qml/SwitchPanel.qml:176
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Unable to load weather forecast"
+msgstr "일기 예보를 불러올 수 없음"
+
+#: qml/main.qml:130
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:139
+#: qml/main.qml:143
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 %3"
 
-#: qml/main.qml:142
+#: qml/main.qml:146
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:154
+#: qml/main.qml:158
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1(%2)"
 
-#: qml/main.qml:163
+#: qml/main.qml:167
 #, kde-format
 msgid "Humidity: %1"
 msgstr "습도: %1"
@@ -762,12 +768,6 @@ msgctxt ""
 msgid "%1 Notice"
 msgid_plural "%1 Notices"
 msgstr[0] "공지 %1개"
-
-#: qml/SwitchPanel.qml:176
-#, kde-format
-msgctxt "@info:placeholder"
-msgid "Unable to load weather forecast"
-msgstr "일기 예보를 불러올 수 없음"
 
 #: qml/SwitchPanel.qml:178
 #, kde-format
