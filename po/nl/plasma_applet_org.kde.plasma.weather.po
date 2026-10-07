@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-30 02:44+0000\n"
+"POT-Creation-Date: 2026-10-07 02:54+0000\n"
 "PO-Revision-Date: 2025-07-10 13:33+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -657,31 +657,37 @@ msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr "Klik om een locatie te kiezen en het weer daar te monitoren"
 
-#: qml/main.qml:126
+#: qml/main.qml:116 qml/SwitchPanel.qml:176
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Unable to load weather forecast"
+msgstr "Laden van weersvoorspelling lukt niet"
+
+#: qml/main.qml:130
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:139
+#: qml/main.qml:143
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: qml/main.qml:142
+#: qml/main.qml:146
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:154
+#: qml/main.qml:158
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/main.qml:163
+#: qml/main.qml:167
 #, kde-format
 msgid "Humidity: %1"
 msgstr "Luchtvochtigheid: %1"
@@ -757,12 +763,6 @@ msgid "%1 Notice"
 msgid_plural "%1 Notices"
 msgstr[0] "%1 melding"
 msgstr[1] "%1 meldingen"
-
-#: qml/SwitchPanel.qml:176
-#, kde-format
-msgctxt "@info:placeholder"
-msgid "Unable to load weather forecast"
-msgstr "Laden van weersvoorspelling lukt niet"
 
 #: qml/SwitchPanel.qml:178
 #, kde-format
