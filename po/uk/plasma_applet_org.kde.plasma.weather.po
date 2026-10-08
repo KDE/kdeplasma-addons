@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-07 02:54+0000\n"
+"POT-Creation-Date: 2026-10-08 02:58+0000\n"
 "PO-Revision-Date: 2025-07-09 09:35+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -184,230 +184,6 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr " тоді "
-
-#: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
-#, kde-format
-msgctxt "weather condition"
-msgid "few clouds"
-msgstr "легка хмарність"
-
-#: ions/wetter.com/ion_wettercom.cpp:136 ions/wetter.com/ion_wettercom.cpp:137
-#, kde-format
-msgctxt "weather condition"
-msgid "cloudy"
-msgstr "хмарно"
-
-#: ions/wetter.com/ion_wettercom.cpp:138 ions/wetter.com/ion_wettercom.cpp:139
-#, kde-format
-msgctxt "weather condition"
-msgid "overcast"
-msgstr "суцільна хмарність"
-
-#: ions/wetter.com/ion_wettercom.cpp:140 ions/wetter.com/ion_wettercom.cpp:141
-#: ions/wetter.com/ion_wettercom.cpp:142
-#, kde-format
-msgctxt "weather condition"
-msgid "haze"
-msgstr "імла"
-
-#: ions/wetter.com/ion_wettercom.cpp:143 ions/wetter.com/ion_wettercom.cpp:144
-#, kde-format
-msgctxt "weather condition"
-msgid "fog with icing"
-msgstr "туман з кристалами льоду"
-
-#: ions/wetter.com/ion_wettercom.cpp:145 ions/wetter.com/ion_wettercom.cpp:146
-#: ions/wetter.com/ion_wettercom.cpp:148
-#, kde-format
-msgctxt "weather condition"
-msgid "drizzle"
-msgstr "мряка"
-
-#: ions/wetter.com/ion_wettercom.cpp:147
-#, kde-format
-msgctxt "weather condition"
-msgid "light drizzle"
-msgstr "незначна мряка"
-
-#: ions/wetter.com/ion_wettercom.cpp:149
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy drizzle"
-msgstr "сильна мряка"
-
-#: ions/wetter.com/ion_wettercom.cpp:150
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing drizzle"
-msgstr "дрібна льодяна мряка"
-
-#: ions/wetter.com/ion_wettercom.cpp:151
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy freezing drizzle"
-msgstr "сильна льодяна мряка"
-
-#: ions/wetter.com/ion_wettercom.cpp:152
-#, kde-format
-msgctxt "weather condition"
-msgid "rain"
-msgstr "дощ"
-
-#: ions/wetter.com/ion_wettercom.cpp:153 ions/wetter.com/ion_wettercom.cpp:154
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain"
-msgstr "легкий дощ"
-
-#: ions/wetter.com/ion_wettercom.cpp:155
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate rain"
-msgstr "помірний дощ"
-
-#: ions/wetter.com/ion_wettercom.cpp:156
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain"
-msgstr "сильний дощ"
-
-#: ions/wetter.com/ion_wettercom.cpp:157
-#, kde-format
-msgctxt "weather condition"
-msgid "light freezing rain"
-msgstr "незначний льодяний дощ"
-
-#: ions/wetter.com/ion_wettercom.cpp:158
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing rain"
-msgstr "льодяний дощ"
-
-#: ions/wetter.com/ion_wettercom.cpp:159
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain snow"
-msgstr "незначний дощ, сніг"
-
-#: ions/wetter.com/ion_wettercom.cpp:160
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain snow"
-msgstr "сильний дощ, сніг"
-
-#: ions/wetter.com/ion_wettercom.cpp:161
-#, kde-format
-msgctxt "weather condition"
-msgid "snow"
-msgstr "сніг"
-
-#: ions/wetter.com/ion_wettercom.cpp:162 ions/wetter.com/ion_wettercom.cpp:163
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow"
-msgstr "легкий сніг"
-
-#: ions/wetter.com/ion_wettercom.cpp:164
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate snow"
-msgstr "помірний сніг"
-
-#: ions/wetter.com/ion_wettercom.cpp:165
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow"
-msgstr "сильний сніг"
-
-#: ions/wetter.com/ion_wettercom.cpp:166 ions/wetter.com/ion_wettercom.cpp:168
-#, kde-format
-msgctxt "weather condition"
-msgid "showers"
-msgstr "зливи"
-
-#: ions/wetter.com/ion_wettercom.cpp:167
-#, kde-format
-msgctxt "weather condition"
-msgid "light showers"
-msgstr "легкі зливи"
-
-#: ions/wetter.com/ion_wettercom.cpp:169
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy showers"
-msgstr "сильні зливи"
-
-#: ions/wetter.com/ion_wettercom.cpp:170
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow rain showers"
-msgstr "легкий снігопад з дощем"
-
-#: ions/wetter.com/ion_wettercom.cpp:171
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow rain showers"
-msgstr "сильний снігопад з дощем"
-
-#: ions/wetter.com/ion_wettercom.cpp:172
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow showers"
-msgstr "легкі снігопади"
-
-#: ions/wetter.com/ion_wettercom.cpp:173
-#, kde-format
-msgctxt "weather condition"
-msgid "snow showers"
-msgstr "снігопад"
-
-#: ions/wetter.com/ion_wettercom.cpp:174 ions/wetter.com/ion_wettercom.cpp:175
-#, kde-format
-msgctxt "weather condition"
-msgid "thunderstorm"
-msgstr "гроза"
-
-#: ions/wetter.com/ion_wettercom.cpp:176
-#, kde-format
-msgctxt "weather condition"
-msgid "light thunderstorm"
-msgstr "незначна грозова злива"
-
-#: ions/wetter.com/ion_wettercom.cpp:177
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy thunderstorm"
-msgstr "значна грозова злива"
-
-#: ions/wetter.com/ion_wettercom.cpp:178
-#, kde-format
-msgctxt "weather condition"
-msgid "n/a"
-msgstr "н/д"
-
-#: ions/wetter.com/ion_wettercom.cpp:185
-#, kde-format
-msgctxt "weather condition"
-msgid "sunny"
-msgstr "сонячно"
-
-#: ions/wetter.com/ion_wettercom.cpp:198
-#, kde-format
-msgctxt "weather condition"
-msgid "clear sky"
-msgstr "безхмарно"
-
-#: ions/wetter.com/ion_wettercom.cpp:311
-#, kde-format
-msgctxt "Geographical location: city, state, ISO-country-code"
-msgid "%1, %2, %3"
-msgstr "%1, %2, %3"
-
-#: ions/wetter.com/ion_wettercom.cpp:313
-#, kde-format
-msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-msgid "%1 (%2), %3, %4"
-msgstr "%1 (%2), %3, %4"
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -856,6 +632,154 @@ msgstr "Дуже висока"
 #, kde-format
 msgid "Extreme"
 msgstr "Екстремальна"
+
+#~ msgctxt "weather condition"
+#~ msgid "few clouds"
+#~ msgstr "легка хмарність"
+
+#~ msgctxt "weather condition"
+#~ msgid "cloudy"
+#~ msgstr "хмарно"
+
+#~ msgctxt "weather condition"
+#~ msgid "overcast"
+#~ msgstr "суцільна хмарність"
+
+#~ msgctxt "weather condition"
+#~ msgid "haze"
+#~ msgstr "імла"
+
+#~ msgctxt "weather condition"
+#~ msgid "fog with icing"
+#~ msgstr "туман з кристалами льоду"
+
+#~ msgctxt "weather condition"
+#~ msgid "drizzle"
+#~ msgstr "мряка"
+
+#~ msgctxt "weather condition"
+#~ msgid "light drizzle"
+#~ msgstr "незначна мряка"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy drizzle"
+#~ msgstr "сильна мряка"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing drizzle"
+#~ msgstr "дрібна льодяна мряка"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy freezing drizzle"
+#~ msgstr "сильна льодяна мряка"
+
+#~ msgctxt "weather condition"
+#~ msgid "rain"
+#~ msgstr "дощ"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain"
+#~ msgstr "легкий дощ"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate rain"
+#~ msgstr "помірний дощ"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain"
+#~ msgstr "сильний дощ"
+
+#~ msgctxt "weather condition"
+#~ msgid "light freezing rain"
+#~ msgstr "незначний льодяний дощ"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing rain"
+#~ msgstr "льодяний дощ"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain snow"
+#~ msgstr "незначний дощ, сніг"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain snow"
+#~ msgstr "сильний дощ, сніг"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow"
+#~ msgstr "сніг"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow"
+#~ msgstr "легкий сніг"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate snow"
+#~ msgstr "помірний сніг"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow"
+#~ msgstr "сильний сніг"
+
+#~ msgctxt "weather condition"
+#~ msgid "showers"
+#~ msgstr "зливи"
+
+#~ msgctxt "weather condition"
+#~ msgid "light showers"
+#~ msgstr "легкі зливи"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy showers"
+#~ msgstr "сильні зливи"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow rain showers"
+#~ msgstr "легкий снігопад з дощем"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow rain showers"
+#~ msgstr "сильний снігопад з дощем"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow showers"
+#~ msgstr "легкі снігопади"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow showers"
+#~ msgstr "снігопад"
+
+#~ msgctxt "weather condition"
+#~ msgid "thunderstorm"
+#~ msgstr "гроза"
+
+#~ msgctxt "weather condition"
+#~ msgid "light thunderstorm"
+#~ msgstr "незначна грозова злива"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy thunderstorm"
+#~ msgstr "значна грозова злива"
+
+#~ msgctxt "weather condition"
+#~ msgid "n/a"
+#~ msgstr "н/д"
+
+#~ msgctxt "weather condition"
+#~ msgid "sunny"
+#~ msgstr "сонячно"
+
+#~ msgctxt "weather condition"
+#~ msgid "clear sky"
+#~ msgstr "безхмарно"
+
+#~ msgctxt "Geographical location: city, state, ISO-country-code"
+#~ msgid "%1, %2, %3"
+#~ msgstr "%1, %2, %3"
+
+#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
+#~ msgid "%1 (%2), %3, %4"
+#~ msgstr "%1 (%2), %3, %4"
 
 #~ msgid "Today"
 #~ msgstr "Сьогодні"

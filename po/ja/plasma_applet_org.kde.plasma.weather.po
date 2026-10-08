@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-07 02:54+0000\n"
+"POT-Creation-Date: 2026-10-08 02:58+0000\n"
 "PO-Revision-Date: 2026-03-31 20:44+0900\n"
 "Last-Translator: Mint <5602mint@gmail.com>\n"
 "Language-Team: Japanese <kde-i18n-doc@kde.org>\n"
@@ -184,230 +184,6 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr " のち "
-
-#: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
-#, kde-format
-msgctxt "weather condition"
-msgid "few clouds"
-msgstr "晴れ"
-
-#: ions/wetter.com/ion_wettercom.cpp:136 ions/wetter.com/ion_wettercom.cpp:137
-#, kde-format
-msgctxt "weather condition"
-msgid "cloudy"
-msgstr "くもり"
-
-#: ions/wetter.com/ion_wettercom.cpp:138 ions/wetter.com/ion_wettercom.cpp:139
-#, kde-format
-msgctxt "weather condition"
-msgid "overcast"
-msgstr "本曇り"
-
-#: ions/wetter.com/ion_wettercom.cpp:140 ions/wetter.com/ion_wettercom.cpp:141
-#: ions/wetter.com/ion_wettercom.cpp:142
-#, kde-format
-msgctxt "weather condition"
-msgid "haze"
-msgstr "煙霧"
-
-#: ions/wetter.com/ion_wettercom.cpp:143 ions/wetter.com/ion_wettercom.cpp:144
-#, kde-format
-msgctxt "weather condition"
-msgid "fog with icing"
-msgstr "着氷性の霧"
-
-#: ions/wetter.com/ion_wettercom.cpp:145 ions/wetter.com/ion_wettercom.cpp:146
-#: ions/wetter.com/ion_wettercom.cpp:148
-#, kde-format
-msgctxt "weather condition"
-msgid "drizzle"
-msgstr "霧雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:147
-#, kde-format
-msgctxt "weather condition"
-msgid "light drizzle"
-msgstr "弱い霧雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:149
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy drizzle"
-msgstr "強い霧雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:150
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing drizzle"
-msgstr "着氷性の霧雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:151
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy freezing drizzle"
-msgstr "強い着氷性の霧雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:152
-#, kde-format
-msgctxt "weather condition"
-msgid "rain"
-msgstr "雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:153 ions/wetter.com/ion_wettercom.cpp:154
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain"
-msgstr "小雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:155
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate rain"
-msgstr "中程度の雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:156
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain"
-msgstr "大雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:157
-#, kde-format
-msgctxt "weather condition"
-msgid "light freezing rain"
-msgstr "弱い雨氷"
-
-#: ions/wetter.com/ion_wettercom.cpp:158
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing rain"
-msgstr "雨氷"
-
-#: ions/wetter.com/ion_wettercom.cpp:159
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain snow"
-msgstr "弱いみぞれ"
-
-#: ions/wetter.com/ion_wettercom.cpp:160
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain snow"
-msgstr "強いみぞれ"
-
-#: ions/wetter.com/ion_wettercom.cpp:161
-#, kde-format
-msgctxt "weather condition"
-msgid "snow"
-msgstr "雪"
-
-#: ions/wetter.com/ion_wettercom.cpp:162 ions/wetter.com/ion_wettercom.cpp:163
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow"
-msgstr "小雪"
-
-#: ions/wetter.com/ion_wettercom.cpp:164
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate snow"
-msgstr "中程度の雪"
-
-#: ions/wetter.com/ion_wettercom.cpp:165
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow"
-msgstr "大雪"
-
-#: ions/wetter.com/ion_wettercom.cpp:166 ions/wetter.com/ion_wettercom.cpp:168
-#, kde-format
-msgctxt "weather condition"
-msgid "showers"
-msgstr "にわか雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:167
-#, kde-format
-msgctxt "weather condition"
-msgid "light showers"
-msgstr "弱いにわか雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:169
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy showers"
-msgstr "強いにわか雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:170
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow rain showers"
-msgstr "弱いにわかみぞれ"
-
-#: ions/wetter.com/ion_wettercom.cpp:171
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow rain showers"
-msgstr "強いにわかみぞれ"
-
-#: ions/wetter.com/ion_wettercom.cpp:172
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow showers"
-msgstr "弱いにわか雪"
-
-#: ions/wetter.com/ion_wettercom.cpp:173
-#, kde-format
-msgctxt "weather condition"
-msgid "snow showers"
-msgstr "にわか雪"
-
-#: ions/wetter.com/ion_wettercom.cpp:174 ions/wetter.com/ion_wettercom.cpp:175
-#, kde-format
-msgctxt "weather condition"
-msgid "thunderstorm"
-msgstr "雷雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:176
-#, kde-format
-msgctxt "weather condition"
-msgid "light thunderstorm"
-msgstr "弱い雷雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:177
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy thunderstorm"
-msgstr "強い雷雨"
-
-#: ions/wetter.com/ion_wettercom.cpp:178
-#, kde-format
-msgctxt "weather condition"
-msgid "n/a"
-msgstr "利用不可"
-
-#: ions/wetter.com/ion_wettercom.cpp:185
-#, kde-format
-msgctxt "weather condition"
-msgid "sunny"
-msgstr "快晴"
-
-#: ions/wetter.com/ion_wettercom.cpp:198
-#, kde-format
-msgctxt "weather condition"
-msgid "clear sky"
-msgstr "快晴"
-
-#: ions/wetter.com/ion_wettercom.cpp:311
-#, kde-format
-msgctxt "Geographical location: city, state, ISO-country-code"
-msgid "%1, %2, %3"
-msgstr "%1, %2, %3"
-
-#: ions/wetter.com/ion_wettercom.cpp:313
-#, kde-format
-msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-msgid "%1 (%2), %3, %4"
-msgstr "%1 (%2), %3, %4"
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -846,6 +622,154 @@ msgstr "非常に高い"
 #, kde-format
 msgid "Extreme"
 msgstr "極めて高い"
+
+#~ msgctxt "weather condition"
+#~ msgid "few clouds"
+#~ msgstr "晴れ"
+
+#~ msgctxt "weather condition"
+#~ msgid "cloudy"
+#~ msgstr "くもり"
+
+#~ msgctxt "weather condition"
+#~ msgid "overcast"
+#~ msgstr "本曇り"
+
+#~ msgctxt "weather condition"
+#~ msgid "haze"
+#~ msgstr "煙霧"
+
+#~ msgctxt "weather condition"
+#~ msgid "fog with icing"
+#~ msgstr "着氷性の霧"
+
+#~ msgctxt "weather condition"
+#~ msgid "drizzle"
+#~ msgstr "霧雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "light drizzle"
+#~ msgstr "弱い霧雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy drizzle"
+#~ msgstr "強い霧雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing drizzle"
+#~ msgstr "着氷性の霧雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy freezing drizzle"
+#~ msgstr "強い着氷性の霧雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "rain"
+#~ msgstr "雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain"
+#~ msgstr "小雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate rain"
+#~ msgstr "中程度の雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain"
+#~ msgstr "大雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "light freezing rain"
+#~ msgstr "弱い雨氷"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing rain"
+#~ msgstr "雨氷"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain snow"
+#~ msgstr "弱いみぞれ"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain snow"
+#~ msgstr "強いみぞれ"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow"
+#~ msgstr "雪"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow"
+#~ msgstr "小雪"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate snow"
+#~ msgstr "中程度の雪"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow"
+#~ msgstr "大雪"
+
+#~ msgctxt "weather condition"
+#~ msgid "showers"
+#~ msgstr "にわか雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "light showers"
+#~ msgstr "弱いにわか雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy showers"
+#~ msgstr "強いにわか雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow rain showers"
+#~ msgstr "弱いにわかみぞれ"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow rain showers"
+#~ msgstr "強いにわかみぞれ"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow showers"
+#~ msgstr "弱いにわか雪"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow showers"
+#~ msgstr "にわか雪"
+
+#~ msgctxt "weather condition"
+#~ msgid "thunderstorm"
+#~ msgstr "雷雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "light thunderstorm"
+#~ msgstr "弱い雷雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy thunderstorm"
+#~ msgstr "強い雷雨"
+
+#~ msgctxt "weather condition"
+#~ msgid "n/a"
+#~ msgstr "利用不可"
+
+#~ msgctxt "weather condition"
+#~ msgid "sunny"
+#~ msgstr "快晴"
+
+#~ msgctxt "weather condition"
+#~ msgid "clear sky"
+#~ msgstr "快晴"
+
+#~ msgctxt "Geographical location: city, state, ISO-country-code"
+#~ msgid "%1, %2, %3"
+#~ msgstr "%1, %2, %3"
+
+#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
+#~ msgid "%1 (%2), %3, %4"
+#~ msgstr "%1 (%2), %3, %4"
 
 #~ msgid "Today"
 #~ msgstr "今日"

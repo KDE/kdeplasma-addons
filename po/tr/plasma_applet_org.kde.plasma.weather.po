@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-07 02:54+0000\n"
+"POT-Creation-Date: 2026-10-08 02:58+0000\n"
 "PO-Revision-Date: 2026-03-15 13:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -185,230 +185,6 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr ", ardından "
-
-#: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
-#, kde-format
-msgctxt "weather condition"
-msgid "few clouds"
-msgstr "az bulutlu"
-
-#: ions/wetter.com/ion_wettercom.cpp:136 ions/wetter.com/ion_wettercom.cpp:137
-#, kde-format
-msgctxt "weather condition"
-msgid "cloudy"
-msgstr "bulutlu"
-
-#: ions/wetter.com/ion_wettercom.cpp:138 ions/wetter.com/ion_wettercom.cpp:139
-#, kde-format
-msgctxt "weather condition"
-msgid "overcast"
-msgstr "kapalı"
-
-#: ions/wetter.com/ion_wettercom.cpp:140 ions/wetter.com/ion_wettercom.cpp:141
-#: ions/wetter.com/ion_wettercom.cpp:142
-#, kde-format
-msgctxt "weather condition"
-msgid "haze"
-msgstr "puslu"
-
-#: ions/wetter.com/ion_wettercom.cpp:143 ions/wetter.com/ion_wettercom.cpp:144
-#, kde-format
-msgctxt "weather condition"
-msgid "fog with icing"
-msgstr "donlu sis"
-
-#: ions/wetter.com/ion_wettercom.cpp:145 ions/wetter.com/ion_wettercom.cpp:146
-#: ions/wetter.com/ion_wettercom.cpp:148
-#, kde-format
-msgctxt "weather condition"
-msgid "drizzle"
-msgstr "çiseleme"
-
-#: ions/wetter.com/ion_wettercom.cpp:147
-#, kde-format
-msgctxt "weather condition"
-msgid "light drizzle"
-msgstr "hafif çiseleme"
-
-#: ions/wetter.com/ion_wettercom.cpp:149
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy drizzle"
-msgstr "yoğun çiseleme"
-
-#: ions/wetter.com/ion_wettercom.cpp:150
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing drizzle"
-msgstr "donan çiseleme"
-
-#: ions/wetter.com/ion_wettercom.cpp:151
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy freezing drizzle"
-msgstr "yoğun dondurucu çiseleme"
-
-#: ions/wetter.com/ion_wettercom.cpp:152
-#, kde-format
-msgctxt "weather condition"
-msgid "rain"
-msgstr "yağmur"
-
-#: ions/wetter.com/ion_wettercom.cpp:153 ions/wetter.com/ion_wettercom.cpp:154
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain"
-msgstr "hafif yağmur"
-
-#: ions/wetter.com/ion_wettercom.cpp:155
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate rain"
-msgstr "orta şiddetli yağmur"
-
-#: ions/wetter.com/ion_wettercom.cpp:156
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain"
-msgstr "yoğun yağmur"
-
-#: ions/wetter.com/ion_wettercom.cpp:157
-#, kde-format
-msgctxt "weather condition"
-msgid "light freezing rain"
-msgstr "hafif donan yağmur"
-
-#: ions/wetter.com/ion_wettercom.cpp:158
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing rain"
-msgstr "donan yağmur"
-
-#: ions/wetter.com/ion_wettercom.cpp:159
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain snow"
-msgstr "hafif karla karışık yağmur"
-
-#: ions/wetter.com/ion_wettercom.cpp:160
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain snow"
-msgstr "yoğun karla karışık yağmur"
-
-#: ions/wetter.com/ion_wettercom.cpp:161
-#, kde-format
-msgctxt "weather condition"
-msgid "snow"
-msgstr "kar"
-
-#: ions/wetter.com/ion_wettercom.cpp:162 ions/wetter.com/ion_wettercom.cpp:163
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow"
-msgstr "hafif kar"
-
-#: ions/wetter.com/ion_wettercom.cpp:164
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate snow"
-msgstr "orta şiddetli kar"
-
-#: ions/wetter.com/ion_wettercom.cpp:165
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow"
-msgstr "yoğun kar"
-
-#: ions/wetter.com/ion_wettercom.cpp:166 ions/wetter.com/ion_wettercom.cpp:168
-#, kde-format
-msgctxt "weather condition"
-msgid "showers"
-msgstr "sağanak yağmur"
-
-#: ions/wetter.com/ion_wettercom.cpp:167
-#, kde-format
-msgctxt "weather condition"
-msgid "light showers"
-msgstr "hafif sağanak"
-
-#: ions/wetter.com/ion_wettercom.cpp:169
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy showers"
-msgstr "yoğun sağanak"
-
-#: ions/wetter.com/ion_wettercom.cpp:170
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow rain showers"
-msgstr "hafif karla karışık sağanak"
-
-#: ions/wetter.com/ion_wettercom.cpp:171
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow rain showers"
-msgstr "yoğun karla karışık sağanak"
-
-#: ions/wetter.com/ion_wettercom.cpp:172
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow showers"
-msgstr "hafif kar sağanağı"
-
-#: ions/wetter.com/ion_wettercom.cpp:173
-#, kde-format
-msgctxt "weather condition"
-msgid "snow showers"
-msgstr "kar sağanağı"
-
-#: ions/wetter.com/ion_wettercom.cpp:174 ions/wetter.com/ion_wettercom.cpp:175
-#, kde-format
-msgctxt "weather condition"
-msgid "thunderstorm"
-msgstr "gök gürültülü fırtına"
-
-#: ions/wetter.com/ion_wettercom.cpp:176
-#, kde-format
-msgctxt "weather condition"
-msgid "light thunderstorm"
-msgstr "hafif gök gürültülü fırtına"
-
-#: ions/wetter.com/ion_wettercom.cpp:177
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy thunderstorm"
-msgstr "yoğun gök gürültülü fırtına"
-
-#: ions/wetter.com/ion_wettercom.cpp:178
-#, kde-format
-msgctxt "weather condition"
-msgid "n/a"
-msgstr "veri yok"
-
-#: ions/wetter.com/ion_wettercom.cpp:185
-#, kde-format
-msgctxt "weather condition"
-msgid "sunny"
-msgstr "güneşli"
-
-#: ions/wetter.com/ion_wettercom.cpp:198
-#, kde-format
-msgctxt "weather condition"
-msgid "clear sky"
-msgstr "açık hava"
-
-#: ions/wetter.com/ion_wettercom.cpp:311
-#, kde-format
-msgctxt "Geographical location: city, state, ISO-country-code"
-msgid "%1, %2, %3"
-msgstr "%1, %2, %3"
-
-#: ions/wetter.com/ion_wettercom.cpp:313
-#, kde-format
-msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-msgid "%1 (%2), %3, %4"
-msgstr "%1 (%2), %3, %4"
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -850,6 +626,154 @@ msgstr "Çok yüksek"
 #, kde-format
 msgid "Extreme"
 msgstr "Aşırı"
+
+#~ msgctxt "weather condition"
+#~ msgid "few clouds"
+#~ msgstr "az bulutlu"
+
+#~ msgctxt "weather condition"
+#~ msgid "cloudy"
+#~ msgstr "bulutlu"
+
+#~ msgctxt "weather condition"
+#~ msgid "overcast"
+#~ msgstr "kapalı"
+
+#~ msgctxt "weather condition"
+#~ msgid "haze"
+#~ msgstr "puslu"
+
+#~ msgctxt "weather condition"
+#~ msgid "fog with icing"
+#~ msgstr "donlu sis"
+
+#~ msgctxt "weather condition"
+#~ msgid "drizzle"
+#~ msgstr "çiseleme"
+
+#~ msgctxt "weather condition"
+#~ msgid "light drizzle"
+#~ msgstr "hafif çiseleme"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy drizzle"
+#~ msgstr "yoğun çiseleme"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing drizzle"
+#~ msgstr "donan çiseleme"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy freezing drizzle"
+#~ msgstr "yoğun dondurucu çiseleme"
+
+#~ msgctxt "weather condition"
+#~ msgid "rain"
+#~ msgstr "yağmur"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain"
+#~ msgstr "hafif yağmur"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate rain"
+#~ msgstr "orta şiddetli yağmur"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain"
+#~ msgstr "yoğun yağmur"
+
+#~ msgctxt "weather condition"
+#~ msgid "light freezing rain"
+#~ msgstr "hafif donan yağmur"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing rain"
+#~ msgstr "donan yağmur"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain snow"
+#~ msgstr "hafif karla karışık yağmur"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain snow"
+#~ msgstr "yoğun karla karışık yağmur"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow"
+#~ msgstr "kar"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow"
+#~ msgstr "hafif kar"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate snow"
+#~ msgstr "orta şiddetli kar"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow"
+#~ msgstr "yoğun kar"
+
+#~ msgctxt "weather condition"
+#~ msgid "showers"
+#~ msgstr "sağanak yağmur"
+
+#~ msgctxt "weather condition"
+#~ msgid "light showers"
+#~ msgstr "hafif sağanak"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy showers"
+#~ msgstr "yoğun sağanak"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow rain showers"
+#~ msgstr "hafif karla karışık sağanak"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow rain showers"
+#~ msgstr "yoğun karla karışık sağanak"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow showers"
+#~ msgstr "hafif kar sağanağı"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow showers"
+#~ msgstr "kar sağanağı"
+
+#~ msgctxt "weather condition"
+#~ msgid "thunderstorm"
+#~ msgstr "gök gürültülü fırtına"
+
+#~ msgctxt "weather condition"
+#~ msgid "light thunderstorm"
+#~ msgstr "hafif gök gürültülü fırtına"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy thunderstorm"
+#~ msgstr "yoğun gök gürültülü fırtına"
+
+#~ msgctxt "weather condition"
+#~ msgid "n/a"
+#~ msgstr "veri yok"
+
+#~ msgctxt "weather condition"
+#~ msgid "sunny"
+#~ msgstr "güneşli"
+
+#~ msgctxt "weather condition"
+#~ msgid "clear sky"
+#~ msgstr "açık hava"
+
+#~ msgctxt "Geographical location: city, state, ISO-country-code"
+#~ msgid "%1, %2, %3"
+#~ msgstr "%1, %2, %3"
+
+#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
+#~ msgid "%1 (%2), %3, %4"
+#~ msgstr "%1 (%2), %3, %4"
 
 #~ msgid "Today"
 #~ msgstr "Bugün"

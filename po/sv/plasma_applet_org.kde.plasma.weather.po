@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-07 02:54+0000\n"
+"POT-Creation-Date: 2026-10-08 02:58+0000\n"
 "PO-Revision-Date: 2025-07-28 22:39+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -181,230 +181,6 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr " sedan "
-
-#: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
-#, kde-format
-msgctxt "weather condition"
-msgid "few clouds"
-msgstr "lätt molnighet"
-
-#: ions/wetter.com/ion_wettercom.cpp:136 ions/wetter.com/ion_wettercom.cpp:137
-#, kde-format
-msgctxt "weather condition"
-msgid "cloudy"
-msgstr "molnigt"
-
-#: ions/wetter.com/ion_wettercom.cpp:138 ions/wetter.com/ion_wettercom.cpp:139
-#, kde-format
-msgctxt "weather condition"
-msgid "overcast"
-msgstr "mulet"
-
-#: ions/wetter.com/ion_wettercom.cpp:140 ions/wetter.com/ion_wettercom.cpp:141
-#: ions/wetter.com/ion_wettercom.cpp:142
-#, kde-format
-msgctxt "weather condition"
-msgid "haze"
-msgstr "dis"
-
-#: ions/wetter.com/ion_wettercom.cpp:143 ions/wetter.com/ion_wettercom.cpp:144
-#, kde-format
-msgctxt "weather condition"
-msgid "fog with icing"
-msgstr "dimma med isbildning"
-
-#: ions/wetter.com/ion_wettercom.cpp:145 ions/wetter.com/ion_wettercom.cpp:146
-#: ions/wetter.com/ion_wettercom.cpp:148
-#, kde-format
-msgctxt "weather condition"
-msgid "drizzle"
-msgstr "duggregn"
-
-#: ions/wetter.com/ion_wettercom.cpp:147
-#, kde-format
-msgctxt "weather condition"
-msgid "light drizzle"
-msgstr "lätt duggregn"
-
-#: ions/wetter.com/ion_wettercom.cpp:149
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy drizzle"
-msgstr "kraftigt duggregn"
-
-#: ions/wetter.com/ion_wettercom.cpp:150
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing drizzle"
-msgstr "iskallt duggregn"
-
-#: ions/wetter.com/ion_wettercom.cpp:151
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy freezing drizzle"
-msgstr "kraftigt underkylt duggregn"
-
-#: ions/wetter.com/ion_wettercom.cpp:152
-#, kde-format
-msgctxt "weather condition"
-msgid "rain"
-msgstr "regn"
-
-#: ions/wetter.com/ion_wettercom.cpp:153 ions/wetter.com/ion_wettercom.cpp:154
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain"
-msgstr "lätt regn"
-
-#: ions/wetter.com/ion_wettercom.cpp:155
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate rain"
-msgstr "måttligt regn"
-
-#: ions/wetter.com/ion_wettercom.cpp:156
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain"
-msgstr "kraftigt regn"
-
-#: ions/wetter.com/ion_wettercom.cpp:157
-#, kde-format
-msgctxt "weather condition"
-msgid "light freezing rain"
-msgstr "lätt underkylt regn"
-
-#: ions/wetter.com/ion_wettercom.cpp:158
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing rain"
-msgstr "underkylt regn"
-
-#: ions/wetter.com/ion_wettercom.cpp:159
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain snow"
-msgstr "lätt regnblandat snöfall"
-
-#: ions/wetter.com/ion_wettercom.cpp:160
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain snow"
-msgstr "kraftigt regnblandat snöfall"
-
-#: ions/wetter.com/ion_wettercom.cpp:161
-#, kde-format
-msgctxt "weather condition"
-msgid "snow"
-msgstr "snöfall"
-
-#: ions/wetter.com/ion_wettercom.cpp:162 ions/wetter.com/ion_wettercom.cpp:163
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow"
-msgstr "lätt snöfall"
-
-#: ions/wetter.com/ion_wettercom.cpp:164
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate snow"
-msgstr "måttligt snöfall"
-
-#: ions/wetter.com/ion_wettercom.cpp:165
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow"
-msgstr "kraftigt snöfall"
-
-#: ions/wetter.com/ion_wettercom.cpp:166 ions/wetter.com/ion_wettercom.cpp:168
-#, kde-format
-msgctxt "weather condition"
-msgid "showers"
-msgstr "regnskurar"
-
-#: ions/wetter.com/ion_wettercom.cpp:167
-#, kde-format
-msgctxt "weather condition"
-msgid "light showers"
-msgstr "lätta regnskurar"
-
-#: ions/wetter.com/ion_wettercom.cpp:169
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy showers"
-msgstr "kraftiga regnskurar"
-
-#: ions/wetter.com/ion_wettercom.cpp:170
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow rain showers"
-msgstr "lätta snöblandade regnskurar"
-
-#: ions/wetter.com/ion_wettercom.cpp:171
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow rain showers"
-msgstr "kraftiga snöblandade regnskurar"
-
-#: ions/wetter.com/ion_wettercom.cpp:172
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow showers"
-msgstr "lätta snöbyar"
-
-#: ions/wetter.com/ion_wettercom.cpp:173
-#, kde-format
-msgctxt "weather condition"
-msgid "snow showers"
-msgstr "snöbyar"
-
-#: ions/wetter.com/ion_wettercom.cpp:174 ions/wetter.com/ion_wettercom.cpp:175
-#, kde-format
-msgctxt "weather condition"
-msgid "thunderstorm"
-msgstr "åskväder"
-
-#: ions/wetter.com/ion_wettercom.cpp:176
-#, kde-format
-msgctxt "weather condition"
-msgid "light thunderstorm"
-msgstr "lätt åskväder"
-
-#: ions/wetter.com/ion_wettercom.cpp:177
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy thunderstorm"
-msgstr "kraftigt åskväder"
-
-#: ions/wetter.com/ion_wettercom.cpp:178
-#, kde-format
-msgctxt "weather condition"
-msgid "n/a"
-msgstr "inte tillgänglig"
-
-#: ions/wetter.com/ion_wettercom.cpp:185
-#, kde-format
-msgctxt "weather condition"
-msgid "sunny"
-msgstr "soligt"
-
-#: ions/wetter.com/ion_wettercom.cpp:198
-#, kde-format
-msgctxt "weather condition"
-msgid "clear sky"
-msgstr "klar himmel"
-
-#: ions/wetter.com/ion_wettercom.cpp:311
-#, kde-format
-msgctxt "Geographical location: city, state, ISO-country-code"
-msgid "%1, %2, %3"
-msgstr "%1, %2, %3"
-
-#: ions/wetter.com/ion_wettercom.cpp:313
-#, kde-format
-msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-msgid "%1 (%2), %3, %4"
-msgstr "%1 (%2), %3, %4"
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -846,6 +622,154 @@ msgstr "Mycket hög"
 #, kde-format
 msgid "Extreme"
 msgstr "Extrem"
+
+#~ msgctxt "weather condition"
+#~ msgid "few clouds"
+#~ msgstr "lätt molnighet"
+
+#~ msgctxt "weather condition"
+#~ msgid "cloudy"
+#~ msgstr "molnigt"
+
+#~ msgctxt "weather condition"
+#~ msgid "overcast"
+#~ msgstr "mulet"
+
+#~ msgctxt "weather condition"
+#~ msgid "haze"
+#~ msgstr "dis"
+
+#~ msgctxt "weather condition"
+#~ msgid "fog with icing"
+#~ msgstr "dimma med isbildning"
+
+#~ msgctxt "weather condition"
+#~ msgid "drizzle"
+#~ msgstr "duggregn"
+
+#~ msgctxt "weather condition"
+#~ msgid "light drizzle"
+#~ msgstr "lätt duggregn"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy drizzle"
+#~ msgstr "kraftigt duggregn"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing drizzle"
+#~ msgstr "iskallt duggregn"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy freezing drizzle"
+#~ msgstr "kraftigt underkylt duggregn"
+
+#~ msgctxt "weather condition"
+#~ msgid "rain"
+#~ msgstr "regn"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain"
+#~ msgstr "lätt regn"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate rain"
+#~ msgstr "måttligt regn"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain"
+#~ msgstr "kraftigt regn"
+
+#~ msgctxt "weather condition"
+#~ msgid "light freezing rain"
+#~ msgstr "lätt underkylt regn"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing rain"
+#~ msgstr "underkylt regn"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain snow"
+#~ msgstr "lätt regnblandat snöfall"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain snow"
+#~ msgstr "kraftigt regnblandat snöfall"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow"
+#~ msgstr "snöfall"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow"
+#~ msgstr "lätt snöfall"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate snow"
+#~ msgstr "måttligt snöfall"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow"
+#~ msgstr "kraftigt snöfall"
+
+#~ msgctxt "weather condition"
+#~ msgid "showers"
+#~ msgstr "regnskurar"
+
+#~ msgctxt "weather condition"
+#~ msgid "light showers"
+#~ msgstr "lätta regnskurar"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy showers"
+#~ msgstr "kraftiga regnskurar"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow rain showers"
+#~ msgstr "lätta snöblandade regnskurar"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow rain showers"
+#~ msgstr "kraftiga snöblandade regnskurar"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow showers"
+#~ msgstr "lätta snöbyar"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow showers"
+#~ msgstr "snöbyar"
+
+#~ msgctxt "weather condition"
+#~ msgid "thunderstorm"
+#~ msgstr "åskväder"
+
+#~ msgctxt "weather condition"
+#~ msgid "light thunderstorm"
+#~ msgstr "lätt åskväder"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy thunderstorm"
+#~ msgstr "kraftigt åskväder"
+
+#~ msgctxt "weather condition"
+#~ msgid "n/a"
+#~ msgstr "inte tillgänglig"
+
+#~ msgctxt "weather condition"
+#~ msgid "sunny"
+#~ msgstr "soligt"
+
+#~ msgctxt "weather condition"
+#~ msgid "clear sky"
+#~ msgstr "klar himmel"
+
+#~ msgctxt "Geographical location: city, state, ISO-country-code"
+#~ msgid "%1, %2, %3"
+#~ msgstr "%1, %2, %3"
+
+#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
+#~ msgid "%1 (%2), %3, %4"
+#~ msgstr "%1 (%2), %3, %4"
 
 #~ msgid "Today"
 #~ msgstr "I dag"

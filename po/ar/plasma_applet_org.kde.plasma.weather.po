@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-07 02:54+0000\n"
+"POT-Creation-Date: 2026-10-08 02:58+0000\n"
 "PO-Revision-Date: 2025-10-25 16:35+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -185,230 +185,6 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr " ثم "
-
-#: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
-#, kde-format
-msgctxt "weather condition"
-msgid "few clouds"
-msgstr "قليلة الغيوم"
-
-#: ions/wetter.com/ion_wettercom.cpp:136 ions/wetter.com/ion_wettercom.cpp:137
-#, kde-format
-msgctxt "weather condition"
-msgid "cloudy"
-msgstr "غائم"
-
-#: ions/wetter.com/ion_wettercom.cpp:138 ions/wetter.com/ion_wettercom.cpp:139
-#, kde-format
-msgctxt "weather condition"
-msgid "overcast"
-msgstr "متلبد بالغيوم"
-
-#: ions/wetter.com/ion_wettercom.cpp:140 ions/wetter.com/ion_wettercom.cpp:141
-#: ions/wetter.com/ion_wettercom.cpp:142
-#, kde-format
-msgctxt "weather condition"
-msgid "haze"
-msgstr "عجاج"
-
-#: ions/wetter.com/ion_wettercom.cpp:143 ions/wetter.com/ion_wettercom.cpp:144
-#, kde-format
-msgctxt "weather condition"
-msgid "fog with icing"
-msgstr "ضباب مع الجليد"
-
-#: ions/wetter.com/ion_wettercom.cpp:145 ions/wetter.com/ion_wettercom.cpp:146
-#: ions/wetter.com/ion_wettercom.cpp:148
-#, kde-format
-msgctxt "weather condition"
-msgid "drizzle"
-msgstr "رذاذ"
-
-#: ions/wetter.com/ion_wettercom.cpp:147
-#, kde-format
-msgctxt "weather condition"
-msgid "light drizzle"
-msgstr "رذاذ خفيف"
-
-#: ions/wetter.com/ion_wettercom.cpp:149
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy drizzle"
-msgstr "رذاذ غزير"
-
-#: ions/wetter.com/ion_wettercom.cpp:150
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing drizzle"
-msgstr "رذاذ مجِمد"
-
-#: ions/wetter.com/ion_wettercom.cpp:151
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy freezing drizzle"
-msgstr "رذاذ كثيف مجِمد"
-
-#: ions/wetter.com/ion_wettercom.cpp:152
-#, kde-format
-msgctxt "weather condition"
-msgid "rain"
-msgstr "مطر"
-
-#: ions/wetter.com/ion_wettercom.cpp:153 ions/wetter.com/ion_wettercom.cpp:154
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain"
-msgstr "مطر خفيف"
-
-#: ions/wetter.com/ion_wettercom.cpp:155
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate rain"
-msgstr "مطر معتدل"
-
-#: ions/wetter.com/ion_wettercom.cpp:156
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain"
-msgstr "مطر غزير"
-
-#: ions/wetter.com/ion_wettercom.cpp:157
-#, kde-format
-msgctxt "weather condition"
-msgid "light freezing rain"
-msgstr "مطر مجِمد خفيف"
-
-#: ions/wetter.com/ion_wettercom.cpp:158
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing rain"
-msgstr "مطر مجِمد"
-
-#: ions/wetter.com/ion_wettercom.cpp:159
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain snow"
-msgstr "مطر خفيف الثلج"
-
-#: ions/wetter.com/ion_wettercom.cpp:160
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain snow"
-msgstr "مطر غزير الثلج"
-
-#: ions/wetter.com/ion_wettercom.cpp:161
-#, kde-format
-msgctxt "weather condition"
-msgid "snow"
-msgstr "ثلج"
-
-#: ions/wetter.com/ion_wettercom.cpp:162 ions/wetter.com/ion_wettercom.cpp:163
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow"
-msgstr "ثلج خفيف"
-
-#: ions/wetter.com/ion_wettercom.cpp:164
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate snow"
-msgstr "ثلج معتدل"
-
-#: ions/wetter.com/ion_wettercom.cpp:165
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow"
-msgstr "ثلج غزير"
-
-#: ions/wetter.com/ion_wettercom.cpp:166 ions/wetter.com/ion_wettercom.cpp:168
-#, kde-format
-msgctxt "weather condition"
-msgid "showers"
-msgstr "زخات"
-
-#: ions/wetter.com/ion_wettercom.cpp:167
-#, kde-format
-msgctxt "weather condition"
-msgid "light showers"
-msgstr "زخات خفيفة"
-
-#: ions/wetter.com/ion_wettercom.cpp:169
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy showers"
-msgstr "زخات غزيرة"
-
-#: ions/wetter.com/ion_wettercom.cpp:170
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow rain showers"
-msgstr "زخات مطر ثلجي خفيف"
-
-#: ions/wetter.com/ion_wettercom.cpp:171
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow rain showers"
-msgstr "زخات مطر ثلجي غزيرة"
-
-#: ions/wetter.com/ion_wettercom.cpp:172
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow showers"
-msgstr "زخات ثلج خفيفة"
-
-#: ions/wetter.com/ion_wettercom.cpp:173
-#, kde-format
-msgctxt "weather condition"
-msgid "snow showers"
-msgstr "زخات ثلج"
-
-#: ions/wetter.com/ion_wettercom.cpp:174 ions/wetter.com/ion_wettercom.cpp:175
-#, kde-format
-msgctxt "weather condition"
-msgid "thunderstorm"
-msgstr "عاصفة رعدية"
-
-#: ions/wetter.com/ion_wettercom.cpp:176
-#, kde-format
-msgctxt "weather condition"
-msgid "light thunderstorm"
-msgstr "عاصفة رعدية خفيفة"
-
-#: ions/wetter.com/ion_wettercom.cpp:177
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy thunderstorm"
-msgstr "عاصفة رعدية غزيرة"
-
-#: ions/wetter.com/ion_wettercom.cpp:178
-#, kde-format
-msgctxt "weather condition"
-msgid "n/a"
-msgstr "غ/م"
-
-#: ions/wetter.com/ion_wettercom.cpp:185
-#, kde-format
-msgctxt "weather condition"
-msgid "sunny"
-msgstr "مشمس"
-
-#: ions/wetter.com/ion_wettercom.cpp:198
-#, kde-format
-msgctxt "weather condition"
-msgid "clear sky"
-msgstr "سماء صافية"
-
-#: ions/wetter.com/ion_wettercom.cpp:311
-#, kde-format
-msgctxt "Geographical location: city, state, ISO-country-code"
-msgid "%1, %2, %3"
-msgstr "%1، %2، %3"
-
-#: ions/wetter.com/ion_wettercom.cpp:313
-#, kde-format
-msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-msgid "%1 (%2), %3, %4"
-msgstr "%1 (%2)، %3، %4"
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -862,6 +638,154 @@ msgstr "عالي جدًا"
 #, kde-format
 msgid "Extreme"
 msgstr "متطرف"
+
+#~ msgctxt "weather condition"
+#~ msgid "few clouds"
+#~ msgstr "قليلة الغيوم"
+
+#~ msgctxt "weather condition"
+#~ msgid "cloudy"
+#~ msgstr "غائم"
+
+#~ msgctxt "weather condition"
+#~ msgid "overcast"
+#~ msgstr "متلبد بالغيوم"
+
+#~ msgctxt "weather condition"
+#~ msgid "haze"
+#~ msgstr "عجاج"
+
+#~ msgctxt "weather condition"
+#~ msgid "fog with icing"
+#~ msgstr "ضباب مع الجليد"
+
+#~ msgctxt "weather condition"
+#~ msgid "drizzle"
+#~ msgstr "رذاذ"
+
+#~ msgctxt "weather condition"
+#~ msgid "light drizzle"
+#~ msgstr "رذاذ خفيف"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy drizzle"
+#~ msgstr "رذاذ غزير"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing drizzle"
+#~ msgstr "رذاذ مجِمد"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy freezing drizzle"
+#~ msgstr "رذاذ كثيف مجِمد"
+
+#~ msgctxt "weather condition"
+#~ msgid "rain"
+#~ msgstr "مطر"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain"
+#~ msgstr "مطر خفيف"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate rain"
+#~ msgstr "مطر معتدل"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain"
+#~ msgstr "مطر غزير"
+
+#~ msgctxt "weather condition"
+#~ msgid "light freezing rain"
+#~ msgstr "مطر مجِمد خفيف"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing rain"
+#~ msgstr "مطر مجِمد"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain snow"
+#~ msgstr "مطر خفيف الثلج"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain snow"
+#~ msgstr "مطر غزير الثلج"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow"
+#~ msgstr "ثلج"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow"
+#~ msgstr "ثلج خفيف"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate snow"
+#~ msgstr "ثلج معتدل"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow"
+#~ msgstr "ثلج غزير"
+
+#~ msgctxt "weather condition"
+#~ msgid "showers"
+#~ msgstr "زخات"
+
+#~ msgctxt "weather condition"
+#~ msgid "light showers"
+#~ msgstr "زخات خفيفة"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy showers"
+#~ msgstr "زخات غزيرة"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow rain showers"
+#~ msgstr "زخات مطر ثلجي خفيف"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow rain showers"
+#~ msgstr "زخات مطر ثلجي غزيرة"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow showers"
+#~ msgstr "زخات ثلج خفيفة"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow showers"
+#~ msgstr "زخات ثلج"
+
+#~ msgctxt "weather condition"
+#~ msgid "thunderstorm"
+#~ msgstr "عاصفة رعدية"
+
+#~ msgctxt "weather condition"
+#~ msgid "light thunderstorm"
+#~ msgstr "عاصفة رعدية خفيفة"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy thunderstorm"
+#~ msgstr "عاصفة رعدية غزيرة"
+
+#~ msgctxt "weather condition"
+#~ msgid "n/a"
+#~ msgstr "غ/م"
+
+#~ msgctxt "weather condition"
+#~ msgid "sunny"
+#~ msgstr "مشمس"
+
+#~ msgctxt "weather condition"
+#~ msgid "clear sky"
+#~ msgstr "سماء صافية"
+
+#~ msgctxt "Geographical location: city, state, ISO-country-code"
+#~ msgid "%1, %2, %3"
+#~ msgstr "%1، %2، %3"
+
+#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
+#~ msgid "%1 (%2), %3, %4"
+#~ msgstr "%1 (%2)، %3، %4"
 
 #~ msgid "Today"
 #~ msgstr "اليوم"

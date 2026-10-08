@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-27 00:44+0000\n"
-"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"PO-Revision-Date: 2026-10-07 11:45+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@latin\n"
@@ -286,7 +286,7 @@ msgstr "Poseti &veb sajt prodavnice"
 #, kde-format
 msgctxt "@action"
 msgid "&Save Comic As…"
-msgstr "&Sačuvaj strip kao…"
+msgstr "Sačuvaj strip &kao…"
 
 #: qml/main.qml:131
 #, kde-format
@@ -298,7 +298,7 @@ msgstr "&Stvarna veličina"
 #, kde-format
 msgctxt "@option:check Context menu of comic image"
 msgid "Store Current &Position"
-msgstr "Zapamti tekući &položaj"
+msgstr "&Zapamti tekući položaj"
 
 #: qml/main.qml:288
 #, kde-format

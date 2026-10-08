@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-07 02:54+0000\n"
+"POT-Creation-Date: 2026-10-08 02:58+0000\n"
 "PO-Revision-Date: 2026-05-31 18:03-0400\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -182,230 +182,6 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr " ئاندىن "
-
-#: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
-#, kde-format
-msgctxt "weather condition"
-msgid "few clouds"
-msgstr "ئازراق بۇلۇت"
-
-#: ions/wetter.com/ion_wettercom.cpp:136 ions/wetter.com/ion_wettercom.cpp:137
-#, kde-format
-msgctxt "weather condition"
-msgid "cloudy"
-msgstr "بۇلۇتلۇق"
-
-#: ions/wetter.com/ion_wettercom.cpp:138 ions/wetter.com/ion_wettercom.cpp:139
-#, kde-format
-msgctxt "weather condition"
-msgid "overcast"
-msgstr "بۇلۇتلۇق"
-
-#: ions/wetter.com/ion_wettercom.cpp:140 ions/wetter.com/ion_wettercom.cpp:141
-#: ions/wetter.com/ion_wettercom.cpp:142
-#, kde-format
-msgctxt "weather condition"
-msgid "haze"
-msgstr "تۈتەك"
-
-#: ions/wetter.com/ion_wettercom.cpp:143 ions/wetter.com/ion_wettercom.cpp:144
-#, kde-format
-msgctxt "weather condition"
-msgid "fog with icing"
-msgstr "مۇزلۇق تۇمان"
-
-#: ions/wetter.com/ion_wettercom.cpp:145 ions/wetter.com/ion_wettercom.cpp:146
-#: ions/wetter.com/ion_wettercom.cpp:148
-#, kde-format
-msgctxt "weather condition"
-msgid "drizzle"
-msgstr "سىم-سىم يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:147
-#, kde-format
-msgctxt "weather condition"
-msgid "light drizzle"
-msgstr "ئۆتكۈنچى سىم-سىم يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:149
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy drizzle"
-msgstr "سىم-سىم قارا يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:150
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing drizzle"
-msgstr "توڭ سىم-سىم يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:151
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy freezing drizzle"
-msgstr "توڭ سىم-سىم قارا يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:152
-#, kde-format
-msgctxt "weather condition"
-msgid "rain"
-msgstr "يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:153 ions/wetter.com/ion_wettercom.cpp:154
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain"
-msgstr "سۇس يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:155
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate rain"
-msgstr "ئوتتۇراھال يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:156
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain"
-msgstr "قارا يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:157
-#, kde-format
-msgctxt "weather condition"
-msgid "light freezing rain"
-msgstr "سۇس توڭ يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:158
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing rain"
-msgstr "توڭ يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:159
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain snow"
-msgstr "قار ئارىلاش سۇس يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:160
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain snow"
-msgstr "قار ئارىلاش ئېغىر يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:161
-#, kde-format
-msgctxt "weather condition"
-msgid "snow"
-msgstr "قار"
-
-#: ions/wetter.com/ion_wettercom.cpp:162 ions/wetter.com/ion_wettercom.cpp:163
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow"
-msgstr "سۇس قار"
-
-#: ions/wetter.com/ion_wettercom.cpp:164
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate snow"
-msgstr "ئوتتۇراھال قار"
-
-#: ions/wetter.com/ion_wettercom.cpp:165
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow"
-msgstr "قېلىن قار"
-
-#: ions/wetter.com/ion_wettercom.cpp:166 ions/wetter.com/ion_wettercom.cpp:168
-#, kde-format
-msgctxt "weather condition"
-msgid "showers"
-msgstr "ئۆتكۈنچى يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:167
-#, kde-format
-msgctxt "weather condition"
-msgid "light showers"
-msgstr "سۇس ئۆتكۈنچى يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:169
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy showers"
-msgstr "قاتتىق ئۆتكۈنچى يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:170
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow rain showers"
-msgstr "قار ئارىلاش سۇس ئۆتكۈنچى يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:171
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow rain showers"
-msgstr "قار ئارىلاش قاتتىق ئۆتكۈنچى يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:172
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow showers"
-msgstr "سۇس ئۆتكۈنچى قار"
-
-#: ions/wetter.com/ion_wettercom.cpp:173
-#, kde-format
-msgctxt "weather condition"
-msgid "snow showers"
-msgstr "ئۆتكۈنچى قار"
-
-#: ions/wetter.com/ion_wettercom.cpp:174 ions/wetter.com/ion_wettercom.cpp:175
-#, kde-format
-msgctxt "weather condition"
-msgid "thunderstorm"
-msgstr "گۈلدۈرمامىلىق يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:176
-#, kde-format
-msgctxt "weather condition"
-msgid "light thunderstorm"
-msgstr "سۇس گۈلدۈرمامىلىق يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:177
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy thunderstorm"
-msgstr "گۈلدۈرمامىلىق قارا يامغۇر"
-
-#: ions/wetter.com/ion_wettercom.cpp:178
-#, kde-format
-msgctxt "weather condition"
-msgid "n/a"
-msgstr "ئىشلەتكىلى بولمايدۇ"
-
-#: ions/wetter.com/ion_wettercom.cpp:185
-#, kde-format
-msgctxt "weather condition"
-msgid "sunny"
-msgstr "قۇياش پارلىغان"
-
-#: ions/wetter.com/ion_wettercom.cpp:198
-#, kde-format
-msgctxt "weather condition"
-msgid "clear sky"
-msgstr "ھاۋا ئوچۇق"
-
-#: ions/wetter.com/ion_wettercom.cpp:311
-#, kde-format
-msgctxt "Geographical location: city, state, ISO-country-code"
-msgid "%1, %2, %3"
-msgstr "%1، %2، %3"
-
-#: ions/wetter.com/ion_wettercom.cpp:313
-#, kde-format
-msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-msgid "%1 (%2), %3, %4"
-msgstr "%1 (%2)، %3، %4"
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -845,6 +621,154 @@ msgstr "ناھايىتى يۇقىرى"
 #, kde-format
 msgid "Extreme"
 msgstr "پەۋقۇلئاددە يۇقىرى"
+
+#~ msgctxt "weather condition"
+#~ msgid "few clouds"
+#~ msgstr "ئازراق بۇلۇت"
+
+#~ msgctxt "weather condition"
+#~ msgid "cloudy"
+#~ msgstr "بۇلۇتلۇق"
+
+#~ msgctxt "weather condition"
+#~ msgid "overcast"
+#~ msgstr "بۇلۇتلۇق"
+
+#~ msgctxt "weather condition"
+#~ msgid "haze"
+#~ msgstr "تۈتەك"
+
+#~ msgctxt "weather condition"
+#~ msgid "fog with icing"
+#~ msgstr "مۇزلۇق تۇمان"
+
+#~ msgctxt "weather condition"
+#~ msgid "drizzle"
+#~ msgstr "سىم-سىم يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "light drizzle"
+#~ msgstr "ئۆتكۈنچى سىم-سىم يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy drizzle"
+#~ msgstr "سىم-سىم قارا يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing drizzle"
+#~ msgstr "توڭ سىم-سىم يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy freezing drizzle"
+#~ msgstr "توڭ سىم-سىم قارا يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "rain"
+#~ msgstr "يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain"
+#~ msgstr "سۇس يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate rain"
+#~ msgstr "ئوتتۇراھال يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain"
+#~ msgstr "قارا يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "light freezing rain"
+#~ msgstr "سۇس توڭ يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing rain"
+#~ msgstr "توڭ يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain snow"
+#~ msgstr "قار ئارىلاش سۇس يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain snow"
+#~ msgstr "قار ئارىلاش ئېغىر يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow"
+#~ msgstr "قار"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow"
+#~ msgstr "سۇس قار"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate snow"
+#~ msgstr "ئوتتۇراھال قار"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow"
+#~ msgstr "قېلىن قار"
+
+#~ msgctxt "weather condition"
+#~ msgid "showers"
+#~ msgstr "ئۆتكۈنچى يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "light showers"
+#~ msgstr "سۇس ئۆتكۈنچى يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy showers"
+#~ msgstr "قاتتىق ئۆتكۈنچى يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow rain showers"
+#~ msgstr "قار ئارىلاش سۇس ئۆتكۈنچى يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow rain showers"
+#~ msgstr "قار ئارىلاش قاتتىق ئۆتكۈنچى يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow showers"
+#~ msgstr "سۇس ئۆتكۈنچى قار"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow showers"
+#~ msgstr "ئۆتكۈنچى قار"
+
+#~ msgctxt "weather condition"
+#~ msgid "thunderstorm"
+#~ msgstr "گۈلدۈرمامىلىق يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "light thunderstorm"
+#~ msgstr "سۇس گۈلدۈرمامىلىق يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy thunderstorm"
+#~ msgstr "گۈلدۈرمامىلىق قارا يامغۇر"
+
+#~ msgctxt "weather condition"
+#~ msgid "n/a"
+#~ msgstr "ئىشلەتكىلى بولمايدۇ"
+
+#~ msgctxt "weather condition"
+#~ msgid "sunny"
+#~ msgstr "قۇياش پارلىغان"
+
+#~ msgctxt "weather condition"
+#~ msgid "clear sky"
+#~ msgstr "ھاۋا ئوچۇق"
+
+#~ msgctxt "Geographical location: city, state, ISO-country-code"
+#~ msgid "%1, %2, %3"
+#~ msgstr "%1، %2، %3"
+
+#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
+#~ msgid "%1 (%2), %3, %4"
+#~ msgstr "%1 (%2)، %3، %4"
 
 #~ msgid "Today"
 #~ msgstr "بۈگۈن"
