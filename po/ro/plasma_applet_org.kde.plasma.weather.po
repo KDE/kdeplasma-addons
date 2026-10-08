@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-07 00:50+0000\n"
+"POT-Creation-Date: 2026-10-08 00:47+0000\n"
 "PO-Revision-Date: 2025-09-27 13:34+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -184,230 +184,6 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr " apoi "
-
-#: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
-#, kde-format
-msgctxt "weather condition"
-msgid "few clouds"
-msgstr "câțiva nori"
-
-#: ions/wetter.com/ion_wettercom.cpp:136 ions/wetter.com/ion_wettercom.cpp:137
-#, kde-format
-msgctxt "weather condition"
-msgid "cloudy"
-msgstr "noros"
-
-#: ions/wetter.com/ion_wettercom.cpp:138 ions/wetter.com/ion_wettercom.cpp:139
-#, kde-format
-msgctxt "weather condition"
-msgid "overcast"
-msgstr "acoperit"
-
-#: ions/wetter.com/ion_wettercom.cpp:140 ions/wetter.com/ion_wettercom.cpp:141
-#: ions/wetter.com/ion_wettercom.cpp:142
-#, kde-format
-msgctxt "weather condition"
-msgid "haze"
-msgstr "ceață ușoară"
-
-#: ions/wetter.com/ion_wettercom.cpp:143 ions/wetter.com/ion_wettercom.cpp:144
-#, kde-format
-msgctxt "weather condition"
-msgid "fog with icing"
-msgstr "ceață cu îngheț"
-
-#: ions/wetter.com/ion_wettercom.cpp:145 ions/wetter.com/ion_wettercom.cpp:146
-#: ions/wetter.com/ion_wettercom.cpp:148
-#, kde-format
-msgctxt "weather condition"
-msgid "drizzle"
-msgstr "burniță"
-
-#: ions/wetter.com/ion_wettercom.cpp:147
-#, kde-format
-msgctxt "weather condition"
-msgid "light drizzle"
-msgstr "burniță slabă"
-
-#: ions/wetter.com/ion_wettercom.cpp:149
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy drizzle"
-msgstr "burniță abundentă"
-
-#: ions/wetter.com/ion_wettercom.cpp:150
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing drizzle"
-msgstr "burniță foarte rece"
-
-#: ions/wetter.com/ion_wettercom.cpp:151
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy freezing drizzle"
-msgstr "burniță foarte rece abundentă"
-
-#: ions/wetter.com/ion_wettercom.cpp:152
-#, kde-format
-msgctxt "weather condition"
-msgid "rain"
-msgstr "ploaie"
-
-#: ions/wetter.com/ion_wettercom.cpp:153 ions/wetter.com/ion_wettercom.cpp:154
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain"
-msgstr "ploaie ușoară"
-
-#: ions/wetter.com/ion_wettercom.cpp:155
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate rain"
-msgstr "ploaie moderată"
-
-#: ions/wetter.com/ion_wettercom.cpp:156
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain"
-msgstr "ploaie torențială"
-
-#: ions/wetter.com/ion_wettercom.cpp:157
-#, kde-format
-msgctxt "weather condition"
-msgid "light freezing rain"
-msgstr "ploaie ușoară foarte rece"
-
-#: ions/wetter.com/ion_wettercom.cpp:158
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing rain"
-msgstr "ploaie foarte rece"
-
-#: ions/wetter.com/ion_wettercom.cpp:159
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain snow"
-msgstr "ploaie ușoară și ninsoare"
-
-#: ions/wetter.com/ion_wettercom.cpp:160
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain snow"
-msgstr "ploaie torențială și ninsoare"
-
-#: ions/wetter.com/ion_wettercom.cpp:161
-#, kde-format
-msgctxt "weather condition"
-msgid "snow"
-msgstr "ninsoare"
-
-#: ions/wetter.com/ion_wettercom.cpp:162 ions/wetter.com/ion_wettercom.cpp:163
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow"
-msgstr "ninsoare ușoară"
-
-#: ions/wetter.com/ion_wettercom.cpp:164
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate snow"
-msgstr "ninsoare moderată"
-
-#: ions/wetter.com/ion_wettercom.cpp:165
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow"
-msgstr "ninsori abundente"
-
-#: ions/wetter.com/ion_wettercom.cpp:166 ions/wetter.com/ion_wettercom.cpp:168
-#, kde-format
-msgctxt "weather condition"
-msgid "showers"
-msgstr "averse"
-
-#: ions/wetter.com/ion_wettercom.cpp:167
-#, kde-format
-msgctxt "weather condition"
-msgid "light showers"
-msgstr "averse ușoare"
-
-#: ions/wetter.com/ion_wettercom.cpp:169
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy showers"
-msgstr "averse abundente"
-
-#: ions/wetter.com/ion_wettercom.cpp:170
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow rain showers"
-msgstr "ninsori ușoare și averse de ploaie"
-
-#: ions/wetter.com/ion_wettercom.cpp:171
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow rain showers"
-msgstr "ninsori abundente și averse de ploaie"
-
-#: ions/wetter.com/ion_wettercom.cpp:172
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow showers"
-msgstr "averse de ninsori ușoare"
-
-#: ions/wetter.com/ion_wettercom.cpp:173
-#, kde-format
-msgctxt "weather condition"
-msgid "snow showers"
-msgstr "averse de ninsori"
-
-#: ions/wetter.com/ion_wettercom.cpp:174 ions/wetter.com/ion_wettercom.cpp:175
-#, kde-format
-msgctxt "weather condition"
-msgid "thunderstorm"
-msgstr "descărcări electrice"
-
-#: ions/wetter.com/ion_wettercom.cpp:176
-#, kde-format
-msgctxt "weather condition"
-msgid "light thunderstorm"
-msgstr "descărcări electrice ușoare"
-
-#: ions/wetter.com/ion_wettercom.cpp:177
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy thunderstorm"
-msgstr "descărcări electrice puternice"
-
-#: ions/wetter.com/ion_wettercom.cpp:178
-#, kde-format
-msgctxt "weather condition"
-msgid "n/a"
-msgstr "indisp."
-
-#: ions/wetter.com/ion_wettercom.cpp:185
-#, kde-format
-msgctxt "weather condition"
-msgid "sunny"
-msgstr "însorit"
-
-#: ions/wetter.com/ion_wettercom.cpp:198
-#, kde-format
-msgctxt "weather condition"
-msgid "clear sky"
-msgstr "cer senin"
-
-#: ions/wetter.com/ion_wettercom.cpp:311
-#, kde-format
-msgctxt "Geographical location: city, state, ISO-country-code"
-msgid "%1, %2, %3"
-msgstr "%1, %2, %3"
-
-#: ions/wetter.com/ion_wettercom.cpp:313
-#, kde-format
-msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-msgid "%1 (%2), %3, %4"
-msgstr "%1 (%2), %3, %4"
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -859,6 +635,154 @@ msgstr "Foarte înaltă"
 #, kde-format
 msgid "Extreme"
 msgstr "Extremă"
+
+#~ msgctxt "weather condition"
+#~ msgid "few clouds"
+#~ msgstr "câțiva nori"
+
+#~ msgctxt "weather condition"
+#~ msgid "cloudy"
+#~ msgstr "noros"
+
+#~ msgctxt "weather condition"
+#~ msgid "overcast"
+#~ msgstr "acoperit"
+
+#~ msgctxt "weather condition"
+#~ msgid "haze"
+#~ msgstr "ceață ușoară"
+
+#~ msgctxt "weather condition"
+#~ msgid "fog with icing"
+#~ msgstr "ceață cu îngheț"
+
+#~ msgctxt "weather condition"
+#~ msgid "drizzle"
+#~ msgstr "burniță"
+
+#~ msgctxt "weather condition"
+#~ msgid "light drizzle"
+#~ msgstr "burniță slabă"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy drizzle"
+#~ msgstr "burniță abundentă"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing drizzle"
+#~ msgstr "burniță foarte rece"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy freezing drizzle"
+#~ msgstr "burniță foarte rece abundentă"
+
+#~ msgctxt "weather condition"
+#~ msgid "rain"
+#~ msgstr "ploaie"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain"
+#~ msgstr "ploaie ușoară"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate rain"
+#~ msgstr "ploaie moderată"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain"
+#~ msgstr "ploaie torențială"
+
+#~ msgctxt "weather condition"
+#~ msgid "light freezing rain"
+#~ msgstr "ploaie ușoară foarte rece"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing rain"
+#~ msgstr "ploaie foarte rece"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain snow"
+#~ msgstr "ploaie ușoară și ninsoare"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain snow"
+#~ msgstr "ploaie torențială și ninsoare"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow"
+#~ msgstr "ninsoare"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow"
+#~ msgstr "ninsoare ușoară"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate snow"
+#~ msgstr "ninsoare moderată"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow"
+#~ msgstr "ninsori abundente"
+
+#~ msgctxt "weather condition"
+#~ msgid "showers"
+#~ msgstr "averse"
+
+#~ msgctxt "weather condition"
+#~ msgid "light showers"
+#~ msgstr "averse ușoare"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy showers"
+#~ msgstr "averse abundente"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow rain showers"
+#~ msgstr "ninsori ușoare și averse de ploaie"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow rain showers"
+#~ msgstr "ninsori abundente și averse de ploaie"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow showers"
+#~ msgstr "averse de ninsori ușoare"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow showers"
+#~ msgstr "averse de ninsori"
+
+#~ msgctxt "weather condition"
+#~ msgid "thunderstorm"
+#~ msgstr "descărcări electrice"
+
+#~ msgctxt "weather condition"
+#~ msgid "light thunderstorm"
+#~ msgstr "descărcări electrice ușoare"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy thunderstorm"
+#~ msgstr "descărcări electrice puternice"
+
+#~ msgctxt "weather condition"
+#~ msgid "n/a"
+#~ msgstr "indisp."
+
+#~ msgctxt "weather condition"
+#~ msgid "sunny"
+#~ msgstr "însorit"
+
+#~ msgctxt "weather condition"
+#~ msgid "clear sky"
+#~ msgstr "cer senin"
+
+#~ msgctxt "Geographical location: city, state, ISO-country-code"
+#~ msgid "%1, %2, %3"
+#~ msgstr "%1, %2, %3"
+
+#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
+#~ msgid "%1 (%2), %3, %4"
+#~ msgstr "%1 (%2), %3, %4"
 
 #~ msgid "Today"
 #~ msgstr "Astăzi"

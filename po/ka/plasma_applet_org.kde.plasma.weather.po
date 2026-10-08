@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-07 00:50+0000\n"
+"POT-Creation-Date: 2026-10-08 00:47+0000\n"
 "PO-Revision-Date: 2026-09-17 04:55+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -182,230 +182,6 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr " მაშინ "
-
-#: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
-#, kde-format
-msgctxt "weather condition"
-msgid "few clouds"
-msgstr "აქა-იქ ღრუბლები"
-
-#: ions/wetter.com/ion_wettercom.cpp:136 ions/wetter.com/ion_wettercom.cpp:137
-#, kde-format
-msgctxt "weather condition"
-msgid "cloudy"
-msgstr "მოღრუბლული"
-
-#: ions/wetter.com/ion_wettercom.cpp:138 ions/wetter.com/ion_wettercom.cpp:139
-#, kde-format
-msgctxt "weather condition"
-msgid "overcast"
-msgstr "მოღრუბლული"
-
-#: ions/wetter.com/ion_wettercom.cpp:140 ions/wetter.com/ion_wettercom.cpp:141
-#: ions/wetter.com/ion_wettercom.cpp:142
-#, kde-format
-msgctxt "weather condition"
-msgid "haze"
-msgstr "თხელი ნისლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:143 ions/wetter.com/ion_wettercom.cpp:144
-#, kde-format
-msgctxt "weather condition"
-msgid "fog with icing"
-msgstr "ნისლი ყინულით"
-
-#: ions/wetter.com/ion_wettercom.cpp:145 ions/wetter.com/ion_wettercom.cpp:146
-#: ions/wetter.com/ion_wettercom.cpp:148
-#, kde-format
-msgctxt "weather condition"
-msgid "drizzle"
-msgstr "ჟინჟღლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:147
-#, kde-format
-msgctxt "weather condition"
-msgid "light drizzle"
-msgstr "მსუბუქი ჟინჟღლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:149
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy drizzle"
-msgstr "ძლიერი ჟინჟღლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:150
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing drizzle"
-msgstr "გაყინული ჟინჟღლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:151
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy freezing drizzle"
-msgstr "ძლიერი გადაციებული ჟინჟღლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:152
-#, kde-format
-msgctxt "weather condition"
-msgid "rain"
-msgstr "წვიმა"
-
-#: ions/wetter.com/ion_wettercom.cpp:153 ions/wetter.com/ion_wettercom.cpp:154
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain"
-msgstr "მსუბუქი წვიმა"
-
-#: ions/wetter.com/ion_wettercom.cpp:155
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate rain"
-msgstr "საშუალო წვიმა"
-
-#: ions/wetter.com/ion_wettercom.cpp:156
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain"
-msgstr "თავსხმა წვიმა"
-
-#: ions/wetter.com/ion_wettercom.cpp:157
-#, kde-format
-msgctxt "weather condition"
-msgid "light freezing rain"
-msgstr "მსუბუქი ყინვა, წვიმა"
-
-#: ions/wetter.com/ion_wettercom.cpp:158
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing rain"
-msgstr "გაყინული წვიმა"
-
-#: ions/wetter.com/ion_wettercom.cpp:159
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain snow"
-msgstr "მსუბუქი წვიმა თოვლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:160
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain snow"
-msgstr "ძლიერი წვიმა, თოვლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:161
-#, kde-format
-msgctxt "weather condition"
-msgid "snow"
-msgstr "თოვლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:162 ions/wetter.com/ion_wettercom.cpp:163
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow"
-msgstr "მსუბუქი თოვლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:164
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate snow"
-msgstr "საშუალო თოვლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:165
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow"
-msgstr "ძლიერი თოვლი"
-
-#: ions/wetter.com/ion_wettercom.cpp:166 ions/wetter.com/ion_wettercom.cpp:168
-#, kde-format
-msgctxt "weather condition"
-msgid "showers"
-msgstr "შხაპები"
-
-#: ions/wetter.com/ion_wettercom.cpp:167
-#, kde-format
-msgctxt "weather condition"
-msgid "light showers"
-msgstr "მსუბუქი შხაპები"
-
-#: ions/wetter.com/ion_wettercom.cpp:169
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy showers"
-msgstr "თავსხმა წვიმები"
-
-#: ions/wetter.com/ion_wettercom.cpp:170
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow rain showers"
-msgstr "მსუბუქი თოვლი წვიმის შხაპებით"
-
-#: ions/wetter.com/ion_wettercom.cpp:171
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow rain showers"
-msgstr "ძლიერი თოვლი წვიმის შხაპებით"
-
-#: ions/wetter.com/ion_wettercom.cpp:172
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow showers"
-msgstr "მსუბუქი თოვლის შხაპები"
-
-#: ions/wetter.com/ion_wettercom.cpp:173
-#, kde-format
-msgctxt "weather condition"
-msgid "snow showers"
-msgstr "თოვლის წვიმა"
-
-#: ions/wetter.com/ion_wettercom.cpp:174 ions/wetter.com/ion_wettercom.cpp:175
-#, kde-format
-msgctxt "weather condition"
-msgid "thunderstorm"
-msgstr "ჭექა-ქუხილი"
-
-#: ions/wetter.com/ion_wettercom.cpp:176
-#, kde-format
-msgctxt "weather condition"
-msgid "light thunderstorm"
-msgstr "მსუბუქი ჭექა-ქუხილი"
-
-#: ions/wetter.com/ion_wettercom.cpp:177
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy thunderstorm"
-msgstr "ძლიერი ჭექა-ქუხილი"
-
-#: ions/wetter.com/ion_wettercom.cpp:178
-#, kde-format
-msgctxt "weather condition"
-msgid "n/a"
-msgstr "ა/მ"
-
-#: ions/wetter.com/ion_wettercom.cpp:185
-#, kde-format
-msgctxt "weather condition"
-msgid "sunny"
-msgstr "მზიანი"
-
-#: ions/wetter.com/ion_wettercom.cpp:198
-#, kde-format
-msgctxt "weather condition"
-msgid "clear sky"
-msgstr "სუფთა ცა"
-
-#: ions/wetter.com/ion_wettercom.cpp:311
-#, kde-format
-msgctxt "Geographical location: city, state, ISO-country-code"
-msgid "%1, %2, %3"
-msgstr "%1, %2, %3"
-
-#: ions/wetter.com/ion_wettercom.cpp:313
-#, kde-format
-msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-msgid "%1 (%2), %3, %4"
-msgstr "%1 (%2), %3, %4"
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -856,6 +632,154 @@ msgstr "ძალიან მაღალი"
 #, kde-format
 msgid "Extreme"
 msgstr "ექსტრემალური"
+
+#~ msgctxt "weather condition"
+#~ msgid "few clouds"
+#~ msgstr "აქა-იქ ღრუბლები"
+
+#~ msgctxt "weather condition"
+#~ msgid "cloudy"
+#~ msgstr "მოღრუბლული"
+
+#~ msgctxt "weather condition"
+#~ msgid "overcast"
+#~ msgstr "მოღრუბლული"
+
+#~ msgctxt "weather condition"
+#~ msgid "haze"
+#~ msgstr "თხელი ნისლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "fog with icing"
+#~ msgstr "ნისლი ყინულით"
+
+#~ msgctxt "weather condition"
+#~ msgid "drizzle"
+#~ msgstr "ჟინჟღლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "light drizzle"
+#~ msgstr "მსუბუქი ჟინჟღლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy drizzle"
+#~ msgstr "ძლიერი ჟინჟღლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing drizzle"
+#~ msgstr "გაყინული ჟინჟღლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy freezing drizzle"
+#~ msgstr "ძლიერი გადაციებული ჟინჟღლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "rain"
+#~ msgstr "წვიმა"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain"
+#~ msgstr "მსუბუქი წვიმა"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate rain"
+#~ msgstr "საშუალო წვიმა"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain"
+#~ msgstr "თავსხმა წვიმა"
+
+#~ msgctxt "weather condition"
+#~ msgid "light freezing rain"
+#~ msgstr "მსუბუქი ყინვა, წვიმა"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing rain"
+#~ msgstr "გაყინული წვიმა"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain snow"
+#~ msgstr "მსუბუქი წვიმა თოვლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain snow"
+#~ msgstr "ძლიერი წვიმა, თოვლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow"
+#~ msgstr "თოვლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow"
+#~ msgstr "მსუბუქი თოვლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate snow"
+#~ msgstr "საშუალო თოვლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow"
+#~ msgstr "ძლიერი თოვლი"
+
+#~ msgctxt "weather condition"
+#~ msgid "showers"
+#~ msgstr "შხაპები"
+
+#~ msgctxt "weather condition"
+#~ msgid "light showers"
+#~ msgstr "მსუბუქი შხაპები"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy showers"
+#~ msgstr "თავსხმა წვიმები"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow rain showers"
+#~ msgstr "მსუბუქი თოვლი წვიმის შხაპებით"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow rain showers"
+#~ msgstr "ძლიერი თოვლი წვიმის შხაპებით"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow showers"
+#~ msgstr "მსუბუქი თოვლის შხაპები"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow showers"
+#~ msgstr "თოვლის წვიმა"
+
+#~ msgctxt "weather condition"
+#~ msgid "thunderstorm"
+#~ msgstr "ჭექა-ქუხილი"
+
+#~ msgctxt "weather condition"
+#~ msgid "light thunderstorm"
+#~ msgstr "მსუბუქი ჭექა-ქუხილი"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy thunderstorm"
+#~ msgstr "ძლიერი ჭექა-ქუხილი"
+
+#~ msgctxt "weather condition"
+#~ msgid "n/a"
+#~ msgstr "ა/მ"
+
+#~ msgctxt "weather condition"
+#~ msgid "sunny"
+#~ msgstr "მზიანი"
+
+#~ msgctxt "weather condition"
+#~ msgid "clear sky"
+#~ msgstr "სუფთა ცა"
+
+#~ msgctxt "Geographical location: city, state, ISO-country-code"
+#~ msgid "%1, %2, %3"
+#~ msgstr "%1, %2, %3"
+
+#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
+#~ msgid "%1 (%2), %3, %4"
+#~ msgstr "%1 (%2), %3, %4"
 
 #~ msgid "Today"
 #~ msgstr "დღეს"

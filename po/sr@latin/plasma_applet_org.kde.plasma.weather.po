@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-07 00:50+0000\n"
+"POT-Creation-Date: 2026-10-08 00:47+0000\n"
 "PO-Revision-Date: 2026-10-04 17:03+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -201,230 +201,6 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr " pa "
-
-#: ions/wetter.com/ion_wettercom.cpp:134 ions/wetter.com/ion_wettercom.cpp:135
-#, kde-format
-msgctxt "weather condition"
-msgid "few clouds"
-msgstr "retki oblaci"
-
-#: ions/wetter.com/ion_wettercom.cpp:136 ions/wetter.com/ion_wettercom.cpp:137
-#, kde-format
-msgctxt "weather condition"
-msgid "cloudy"
-msgstr "oblačno"
-
-#: ions/wetter.com/ion_wettercom.cpp:138 ions/wetter.com/ion_wettercom.cpp:139
-#, kde-format
-msgctxt "weather condition"
-msgid "overcast"
-msgstr "tmurno"
-
-#: ions/wetter.com/ion_wettercom.cpp:140 ions/wetter.com/ion_wettercom.cpp:141
-#: ions/wetter.com/ion_wettercom.cpp:142
-#, kde-format
-msgctxt "weather condition"
-msgid "haze"
-msgstr "izmaglica"
-
-#: ions/wetter.com/ion_wettercom.cpp:143 ions/wetter.com/ion_wettercom.cpp:144
-#, kde-format
-msgctxt "weather condition"
-msgid "fog with icing"
-msgstr "magla sa poledicom"
-
-#: ions/wetter.com/ion_wettercom.cpp:145 ions/wetter.com/ion_wettercom.cpp:146
-#: ions/wetter.com/ion_wettercom.cpp:148
-#, kde-format
-msgctxt "weather condition"
-msgid "drizzle"
-msgstr "rominjanje"
-
-#: ions/wetter.com/ion_wettercom.cpp:147
-#, kde-format
-msgctxt "weather condition"
-msgid "light drizzle"
-msgstr "slabo rominjanje"
-
-#: ions/wetter.com/ion_wettercom.cpp:149
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy drizzle"
-msgstr "jako rominjanje"
-
-#: ions/wetter.com/ion_wettercom.cpp:150
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing drizzle"
-msgstr "ledeno rominjanje"
-
-#: ions/wetter.com/ion_wettercom.cpp:151
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy freezing drizzle"
-msgstr "jako ledeno rominjanje"
-
-#: ions/wetter.com/ion_wettercom.cpp:152
-#, kde-format
-msgctxt "weather condition"
-msgid "rain"
-msgstr "kiša"
-
-#: ions/wetter.com/ion_wettercom.cpp:153 ions/wetter.com/ion_wettercom.cpp:154
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain"
-msgstr "slaba kiša"
-
-#: ions/wetter.com/ion_wettercom.cpp:155
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate rain"
-msgstr "umerena kiša"
-
-#: ions/wetter.com/ion_wettercom.cpp:156
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain"
-msgstr "jaka kiša"
-
-#: ions/wetter.com/ion_wettercom.cpp:157
-#, kde-format
-msgctxt "weather condition"
-msgid "light freezing rain"
-msgstr "slaba ledena kiša"
-
-#: ions/wetter.com/ion_wettercom.cpp:158
-#, kde-format
-msgctxt "weather condition"
-msgid "freezing rain"
-msgstr "ledena kiša"
-
-#: ions/wetter.com/ion_wettercom.cpp:159
-#, kde-format
-msgctxt "weather condition"
-msgid "light rain snow"
-msgstr "slaba kiša, sneg"
-
-#: ions/wetter.com/ion_wettercom.cpp:160
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy rain snow"
-msgstr "jaka kiša, sneg"
-
-#: ions/wetter.com/ion_wettercom.cpp:161
-#, kde-format
-msgctxt "weather condition"
-msgid "snow"
-msgstr "sneg"
-
-#: ions/wetter.com/ion_wettercom.cpp:162 ions/wetter.com/ion_wettercom.cpp:163
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow"
-msgstr "slab sneg"
-
-#: ions/wetter.com/ion_wettercom.cpp:164
-#, kde-format
-msgctxt "weather condition"
-msgid "moderate snow"
-msgstr "umeren sneg"
-
-#: ions/wetter.com/ion_wettercom.cpp:165
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow"
-msgstr "jak sneg"
-
-#: ions/wetter.com/ion_wettercom.cpp:166 ions/wetter.com/ion_wettercom.cpp:168
-#, kde-format
-msgctxt "weather condition"
-msgid "showers"
-msgstr "pljuskovi"
-
-#: ions/wetter.com/ion_wettercom.cpp:167
-#, kde-format
-msgctxt "weather condition"
-msgid "light showers"
-msgstr "laki pljuskovi"
-
-#: ions/wetter.com/ion_wettercom.cpp:169
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy showers"
-msgstr "jaki pljuskovi"
-
-#: ions/wetter.com/ion_wettercom.cpp:170
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow rain showers"
-msgstr "slab sneg, kišni pljuskovi"
-
-#: ions/wetter.com/ion_wettercom.cpp:171
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy snow rain showers"
-msgstr "jak sneg, kišni pljuskovi"
-
-#: ions/wetter.com/ion_wettercom.cpp:172
-#, kde-format
-msgctxt "weather condition"
-msgid "light snow showers"
-msgstr "slabi snežni pljuskovi"
-
-#: ions/wetter.com/ion_wettercom.cpp:173
-#, kde-format
-msgctxt "weather condition"
-msgid "snow showers"
-msgstr "snežni pljuskovi"
-
-#: ions/wetter.com/ion_wettercom.cpp:174 ions/wetter.com/ion_wettercom.cpp:175
-#, kde-format
-msgctxt "weather condition"
-msgid "thunderstorm"
-msgstr "grmljavina"
-
-#: ions/wetter.com/ion_wettercom.cpp:176
-#, kde-format
-msgctxt "weather condition"
-msgid "light thunderstorm"
-msgstr "slaba grmljavina"
-
-#: ions/wetter.com/ion_wettercom.cpp:177
-#, kde-format
-msgctxt "weather condition"
-msgid "heavy thunderstorm"
-msgstr "jaka grmljavina"
-
-#: ions/wetter.com/ion_wettercom.cpp:178
-#, kde-format
-msgctxt "weather condition"
-msgid "n/a"
-msgstr "nd."
-
-#: ions/wetter.com/ion_wettercom.cpp:185
-#, kde-format
-msgctxt "weather condition"
-msgid "sunny"
-msgstr "sunčano"
-
-#: ions/wetter.com/ion_wettercom.cpp:198
-#, kde-format
-msgctxt "weather condition"
-msgid "clear sky"
-msgstr "vedro nebo"
-
-#: ions/wetter.com/ion_wettercom.cpp:311
-#, kde-format
-msgctxt "Geographical location: city, state, ISO-country-code"
-msgid "%1, %2, %3"
-msgstr "%1, %2, %3"
-
-#: ions/wetter.com/ion_wettercom.cpp:313
-#, kde-format
-msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-msgid "%1 (%2), %3, %4"
-msgstr "%1 (%2), %3, %4"
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -883,3 +659,151 @@ msgstr "veoma visok"
 #, kde-format
 msgid "Extreme"
 msgstr "ekstreman"
+
+#~ msgctxt "weather condition"
+#~ msgid "few clouds"
+#~ msgstr "retki oblaci"
+
+#~ msgctxt "weather condition"
+#~ msgid "cloudy"
+#~ msgstr "oblačno"
+
+#~ msgctxt "weather condition"
+#~ msgid "overcast"
+#~ msgstr "tmurno"
+
+#~ msgctxt "weather condition"
+#~ msgid "haze"
+#~ msgstr "izmaglica"
+
+#~ msgctxt "weather condition"
+#~ msgid "fog with icing"
+#~ msgstr "magla sa poledicom"
+
+#~ msgctxt "weather condition"
+#~ msgid "drizzle"
+#~ msgstr "rominjanje"
+
+#~ msgctxt "weather condition"
+#~ msgid "light drizzle"
+#~ msgstr "slabo rominjanje"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy drizzle"
+#~ msgstr "jako rominjanje"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing drizzle"
+#~ msgstr "ledeno rominjanje"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy freezing drizzle"
+#~ msgstr "jako ledeno rominjanje"
+
+#~ msgctxt "weather condition"
+#~ msgid "rain"
+#~ msgstr "kiša"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain"
+#~ msgstr "slaba kiša"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate rain"
+#~ msgstr "umerena kiša"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain"
+#~ msgstr "jaka kiša"
+
+#~ msgctxt "weather condition"
+#~ msgid "light freezing rain"
+#~ msgstr "slaba ledena kiša"
+
+#~ msgctxt "weather condition"
+#~ msgid "freezing rain"
+#~ msgstr "ledena kiša"
+
+#~ msgctxt "weather condition"
+#~ msgid "light rain snow"
+#~ msgstr "slaba kiša, sneg"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy rain snow"
+#~ msgstr "jaka kiša, sneg"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow"
+#~ msgstr "sneg"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow"
+#~ msgstr "slab sneg"
+
+#~ msgctxt "weather condition"
+#~ msgid "moderate snow"
+#~ msgstr "umeren sneg"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow"
+#~ msgstr "jak sneg"
+
+#~ msgctxt "weather condition"
+#~ msgid "showers"
+#~ msgstr "pljuskovi"
+
+#~ msgctxt "weather condition"
+#~ msgid "light showers"
+#~ msgstr "laki pljuskovi"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy showers"
+#~ msgstr "jaki pljuskovi"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow rain showers"
+#~ msgstr "slab sneg, kišni pljuskovi"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy snow rain showers"
+#~ msgstr "jak sneg, kišni pljuskovi"
+
+#~ msgctxt "weather condition"
+#~ msgid "light snow showers"
+#~ msgstr "slabi snežni pljuskovi"
+
+#~ msgctxt "weather condition"
+#~ msgid "snow showers"
+#~ msgstr "snežni pljuskovi"
+
+#~ msgctxt "weather condition"
+#~ msgid "thunderstorm"
+#~ msgstr "grmljavina"
+
+#~ msgctxt "weather condition"
+#~ msgid "light thunderstorm"
+#~ msgstr "slaba grmljavina"
+
+#~ msgctxt "weather condition"
+#~ msgid "heavy thunderstorm"
+#~ msgstr "jaka grmljavina"
+
+#~ msgctxt "weather condition"
+#~ msgid "n/a"
+#~ msgstr "nd."
+
+#~ msgctxt "weather condition"
+#~ msgid "sunny"
+#~ msgstr "sunčano"
+
+#~ msgctxt "weather condition"
+#~ msgid "clear sky"
+#~ msgstr "vedro nebo"
+
+#~ msgctxt "Geographical location: city, state, ISO-country-code"
+#~ msgid "%1, %2, %3"
+#~ msgstr "%1, %2, %3"
+
+#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
+#~ msgid "%1 (%2), %3, %4"
+#~ msgstr "%1 (%2), %3, %4"
