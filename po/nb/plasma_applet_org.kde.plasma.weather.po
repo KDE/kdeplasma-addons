@@ -632,18 +632,3 @@ msgstr ""
 #, kde-format
 msgid "Extreme"
 msgstr ""
-
-#, fuzzy
-#~ msgctxt "weather condition"
-#~ msgid "overcast"
-#~ msgstr "Værmelding"
-
-#, fuzzy
-#~ msgctxt "weather condition"
-#~ msgid "snow showers"
-#~ msgstr "Ikke vis"
-
-#, fuzzy
-#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-#~ msgid "%1 (%2), %3, %4"
-#~ msgstr "%1 (%2)"
