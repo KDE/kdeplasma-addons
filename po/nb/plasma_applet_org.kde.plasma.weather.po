@@ -635,24 +635,3 @@ msgstr ""
 #, kde-format
 msgid "Extreme"
 msgstr ""
-
-#, fuzzy
-#~| msgctxt "@title:tab Weather forecast"
-#~| msgid "Forecast"
-#~ msgctxt "weather condition"
-#~ msgid "overcast"
-#~ msgstr "Værmelding"
-
-#, fuzzy
-#~| msgctxt "@option:radio Show temperature:"
-#~| msgid "Do not show"
-#~ msgctxt "weather condition"
-#~ msgid "snow showers"
-#~ msgstr "Ikke vis"
-
-#, fuzzy
-#~| msgctxt "A weather station location and the weather service it comes from"
-#~| msgid "%1 (%2)"
-#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-#~ msgid "%1 (%2), %3, %4"
-#~ msgstr "%1 (%2)"
