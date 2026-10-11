@@ -30,6 +30,7 @@ static const QString SEARCH_ENDPOINT = u"https://geocoding-api.open-meteo.com/v1
 static const QString WEATHER_ENDPOINT = u"https://api.open-meteo.com/v1/forecast"_s;
 static const QString CREDIT_URL = u"https://open-meteo.com"_s;
 static const QUrlQuery WEATHER_QUERY{
+    {u"hourly"_s, u"weather_code,temperature_2m,precipitation_probability"_s},
     {u"daily"_s, u"weather_code,temperature_2m_max,temperature_2m_min,wind_direction_10m_dominant,precipitation_probability_mean"_s},
     {u"current"_s,
      u"temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,relative_humidity_2m,apparent_temperature,is_day,wind_speed_10m,wind_direction_10m,wind_gusts_10m,surface_pressure,relative_humidity_2m"_s},
@@ -397,21 +398,38 @@ void OpenMeteoIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Foreca
             lastObservation.setHumidity(current[u"relative_humidity_2m"_s].toDouble());
             data->setLastObservation(lastObservation);
 
+            const auto futureHours = std::make_shared<FutureHours>();
+
+            const QJsonObject hourlyForecast = j[u"hourly"_s].toObject();
+            const qsizetype numHours = hourlyForecast[u"time"_s].toArray().size();
+            for (qsizetype hour = 0; hour < numHours; ++hour) {
+                const auto forecastDate = QDateTime::fromString(hourlyForecast[u"time"_s].toArray()[hour].toString(), Qt::ISODate);
+                FutureHourForecast futureHourForecast(forecastDate);
+                const bool isDay = true;
+                const int weatherCode = hourlyForecast[u"weather_code"_s].toArray()[hour].toInt();
+                futureHourForecast.setConditionIcon(getWeatherIcon(d->weatherCodeToIconCode(weatherCode, isDay)));
+                futureHourForecast.setCondition(d->weatherCodeToStr(weatherCode, isDay));
+                futureHourForecast.setGeneralTemp(hourlyForecast[u"temperature_2m"_s].toArray()[hour].toDouble());
+                futureHourForecast.setConditionProbability(hourlyForecast[u"precipitation_probability"_s].toArray()[hour].toDouble());
+                futureHours->addHour(futureHourForecast);
+            }
+            data->setFutureHours(futureHours);
+
             const auto futureDays = std::make_shared<FutureDays>();
 
-            const QJsonObject forecast = j[u"daily"_s].toObject();
-            const qsizetype numDays = forecast[u"time"_s].toArray().size();
+            const QJsonObject dailyForecast = j[u"daily"_s].toObject();
+            const qsizetype numDays = dailyForecast[u"time"_s].toArray().size();
             for (qsizetype day = 0; day < numDays; ++day) {
-                const auto forecastDate = QDateTime::fromString(forecast[u"time"_s].toArray()[day].toString(), Qt::ISODate);
+                const auto forecastDate = QDateTime::fromString(dailyForecast[u"time"_s].toArray()[day].toString(), Qt::ISODate);
                 FutureDayForecast futureDayForecast(forecastDate);
                 FutureForecast futureForecast;
                 const bool isDay = true;
-                const int weatherCode = forecast[u"weather_code"_s].toArray()[day].toInt();
+                const int weatherCode = dailyForecast[u"weather_code"_s].toArray()[day].toInt();
                 futureForecast.setConditionIcon(getWeatherIcon(d->weatherCodeToIconCode(weatherCode, isDay)));
                 futureForecast.setCondition(d->weatherCodeToStr(weatherCode, isDay));
-                futureForecast.setHighTemp(forecast[u"temperature_2m_max"_s].toArray()[day].toDouble());
-                futureForecast.setLowTemp(forecast[u"temperature_2m_min"_s].toArray()[day].toDouble());
-                futureForecast.setConditionProbability(forecast[u"precipitation_probability_mean"_s].toArray()[day].toDouble());
+                futureForecast.setHighTemp(dailyForecast[u"temperature_2m_max"_s].toArray()[day].toDouble());
+                futureForecast.setLowTemp(dailyForecast[u"temperature_2m_min"_s].toArray()[day].toDouble());
+                futureForecast.setConditionProbability(dailyForecast[u"precipitation_probability_mean"_s].toArray()[day].toDouble());
                 futureDayForecast.setDaytime(futureForecast);
                 futureDays->addDay(futureDayForecast);
             }
