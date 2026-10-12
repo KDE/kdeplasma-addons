@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-08 00:47+0000\n"
+"POT-Creation-Date: 2026-10-12 00:53+0000\n"
 "PO-Revision-Date: 2026-09-17 13:57+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -184,6 +184,236 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr " tada "
+
+#: ions/open-meteo/ion_open_meteo.cpp:217
+#: ions/open-meteo/ion_open_meteo.cpp:218
+#, kde-format
+msgctxt "weather condition"
+msgid "few clouds"
+msgstr "mažai debesuota"
+
+#: ions/open-meteo/ion_open_meteo.cpp:219
+#: ions/open-meteo/ion_open_meteo.cpp:220
+#, kde-format
+msgctxt "weather condition"
+msgid "cloudy"
+msgstr "debesuota"
+
+#: ions/open-meteo/ion_open_meteo.cpp:221
+#: ions/open-meteo/ion_open_meteo.cpp:222
+#, kde-format
+msgctxt "weather condition"
+msgid "overcast"
+msgstr "apsiniaukę"
+
+#: ions/open-meteo/ion_open_meteo.cpp:223
+#: ions/open-meteo/ion_open_meteo.cpp:224
+#: ions/open-meteo/ion_open_meteo.cpp:225
+#, kde-format
+msgctxt "weather condition"
+msgid "haze"
+msgstr "migla"
+
+#: ions/open-meteo/ion_open_meteo.cpp:226
+#: ions/open-meteo/ion_open_meteo.cpp:227
+#, kde-format
+msgctxt "weather condition"
+msgid "fog with icing"
+msgstr "rūkas su apledėjimu"
+
+#: ions/open-meteo/ion_open_meteo.cpp:228
+#: ions/open-meteo/ion_open_meteo.cpp:229
+#: ions/open-meteo/ion_open_meteo.cpp:231
+#, kde-format
+msgctxt "weather condition"
+msgid "drizzle"
+msgstr "dulksna"
+
+#: ions/open-meteo/ion_open_meteo.cpp:230
+#, kde-format
+msgctxt "weather condition"
+msgid "light drizzle"
+msgstr "silpna dulksna"
+
+#: ions/open-meteo/ion_open_meteo.cpp:232
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy drizzle"
+msgstr "smarki dulksna"
+
+#: ions/open-meteo/ion_open_meteo.cpp:233
+#, kde-format
+msgctxt "weather condition"
+msgid "freezing drizzle"
+msgstr "ledijanti dulksna"
+
+#: ions/open-meteo/ion_open_meteo.cpp:234
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy freezing drizzle"
+msgstr "smarki ledijanti dulksna"
+
+#: ions/open-meteo/ion_open_meteo.cpp:235
+#, kde-format
+msgctxt "weather condition"
+msgid "rain"
+msgstr "lietus"
+
+#: ions/open-meteo/ion_open_meteo.cpp:236
+#: ions/open-meteo/ion_open_meteo.cpp:237
+#, kde-format
+msgctxt "weather condition"
+msgid "light rain"
+msgstr "silpnas lietus"
+
+#: ions/open-meteo/ion_open_meteo.cpp:238
+#, kde-format
+msgctxt "weather condition"
+msgid "moderate rain"
+msgstr "vidutinis lietus"
+
+#: ions/open-meteo/ion_open_meteo.cpp:239
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy rain"
+msgstr "smarkus lietus"
+
+#: ions/open-meteo/ion_open_meteo.cpp:240
+#, kde-format
+msgctxt "weather condition"
+msgid "light freezing rain"
+msgstr "silpnas ledijantis lietus"
+
+#: ions/open-meteo/ion_open_meteo.cpp:241
+#, kde-format
+msgctxt "weather condition"
+msgid "freezing rain"
+msgstr "ledijantis lietus"
+
+#: ions/open-meteo/ion_open_meteo.cpp:242
+#, kde-format
+msgctxt "weather condition"
+msgid "light rain snow"
+msgstr "silpnas lietus su sniegu"
+
+#: ions/open-meteo/ion_open_meteo.cpp:243
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy rain snow"
+msgstr "smarkus lietus su sniegu"
+
+#: ions/open-meteo/ion_open_meteo.cpp:244
+#, kde-format
+msgctxt "weather condition"
+msgid "snow"
+msgstr "sniegas"
+
+#: ions/open-meteo/ion_open_meteo.cpp:245
+#: ions/open-meteo/ion_open_meteo.cpp:246
+#, kde-format
+msgctxt "weather condition"
+msgid "light snow"
+msgstr "silpnas sniegas"
+
+#: ions/open-meteo/ion_open_meteo.cpp:247
+#, kde-format
+msgctxt "weather condition"
+msgid "moderate snow"
+msgstr "vidutinis sniegas"
+
+#: ions/open-meteo/ion_open_meteo.cpp:248
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy snow"
+msgstr "smarkus sniegas"
+
+#: ions/open-meteo/ion_open_meteo.cpp:249
+#: ions/open-meteo/ion_open_meteo.cpp:251
+#, kde-format
+msgctxt "weather condition"
+msgid "showers"
+msgstr "liūtys"
+
+#: ions/open-meteo/ion_open_meteo.cpp:250
+#, kde-format
+msgctxt "weather condition"
+msgid "light showers"
+msgstr "silpnos liūtys"
+
+#: ions/open-meteo/ion_open_meteo.cpp:252
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy showers"
+msgstr "smarkios liūtys"
+
+#: ions/open-meteo/ion_open_meteo.cpp:253
+#, kde-format
+msgctxt "weather condition"
+msgid "light snow rain showers"
+msgstr "silpnos sniego ir lietaus liūtys"
+
+#: ions/open-meteo/ion_open_meteo.cpp:254
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy snow rain showers"
+msgstr "smarkios sniego ir lietaus liūtys"
+
+#: ions/open-meteo/ion_open_meteo.cpp:255
+#, kde-format
+msgctxt "weather condition"
+msgid "light snow showers"
+msgstr "silpni liūtiniai snygiai"
+
+#: ions/open-meteo/ion_open_meteo.cpp:256
+#, kde-format
+msgctxt "weather condition"
+msgid "snow showers"
+msgstr "liūtiniai snygiai"
+
+#: ions/open-meteo/ion_open_meteo.cpp:257
+#: ions/open-meteo/ion_open_meteo.cpp:258
+#, kde-format
+msgctxt "weather condition"
+msgid "thunderstorm"
+msgstr "perkūnija"
+
+#: ions/open-meteo/ion_open_meteo.cpp:259
+#, kde-format
+msgctxt "weather condition"
+msgid "light thunderstorm"
+msgstr "silpna perkūnija"
+
+#: ions/open-meteo/ion_open_meteo.cpp:260
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy thunderstorm"
+msgstr "smarki perkūnija"
+
+#: ions/open-meteo/ion_open_meteo.cpp:261
+#: ions/open-meteo/ion_open_meteo.cpp:279
+#: ions/open-meteo/ion_open_meteo.cpp:281
+#, kde-format
+msgctxt "weather condition"
+msgid "n/a"
+msgstr "neprieinama"
+
+#: ions/open-meteo/ion_open_meteo.cpp:264
+#, kde-format
+msgctxt "weather condition"
+msgid "sunny"
+msgstr "saulėta"
+
+#: ions/open-meteo/ion_open_meteo.cpp:267
+#, kde-format
+msgctxt "weather condition"
+msgid "clear sky"
+msgstr "giedra"
+
+#: ions/open-meteo/ion_open_meteo.cpp:384
+#, kde-format
+msgctxt "weather credit"
+msgid "Weather data by Open-Meteo"
+msgstr ""
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -640,146 +870,6 @@ msgstr "Labai aukštas"
 #, kde-format
 msgid "Extreme"
 msgstr "Ekstremalus"
-
-#~ msgctxt "weather condition"
-#~ msgid "few clouds"
-#~ msgstr "mažai debesuota"
-
-#~ msgctxt "weather condition"
-#~ msgid "cloudy"
-#~ msgstr "debesuota"
-
-#~ msgctxt "weather condition"
-#~ msgid "overcast"
-#~ msgstr "apsiniaukę"
-
-#~ msgctxt "weather condition"
-#~ msgid "haze"
-#~ msgstr "migla"
-
-#~ msgctxt "weather condition"
-#~ msgid "fog with icing"
-#~ msgstr "rūkas su apledėjimu"
-
-#~ msgctxt "weather condition"
-#~ msgid "drizzle"
-#~ msgstr "dulksna"
-
-#~ msgctxt "weather condition"
-#~ msgid "light drizzle"
-#~ msgstr "silpna dulksna"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy drizzle"
-#~ msgstr "smarki dulksna"
-
-#~ msgctxt "weather condition"
-#~ msgid "freezing drizzle"
-#~ msgstr "ledijanti dulksna"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy freezing drizzle"
-#~ msgstr "smarki ledijanti dulksna"
-
-#~ msgctxt "weather condition"
-#~ msgid "rain"
-#~ msgstr "lietus"
-
-#~ msgctxt "weather condition"
-#~ msgid "light rain"
-#~ msgstr "silpnas lietus"
-
-#~ msgctxt "weather condition"
-#~ msgid "moderate rain"
-#~ msgstr "vidutinis lietus"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy rain"
-#~ msgstr "smarkus lietus"
-
-#~ msgctxt "weather condition"
-#~ msgid "light freezing rain"
-#~ msgstr "silpnas ledijantis lietus"
-
-#~ msgctxt "weather condition"
-#~ msgid "freezing rain"
-#~ msgstr "ledijantis lietus"
-
-#~ msgctxt "weather condition"
-#~ msgid "light rain snow"
-#~ msgstr "silpnas lietus su sniegu"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy rain snow"
-#~ msgstr "smarkus lietus su sniegu"
-
-#~ msgctxt "weather condition"
-#~ msgid "snow"
-#~ msgstr "sniegas"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow"
-#~ msgstr "silpnas sniegas"
-
-#~ msgctxt "weather condition"
-#~ msgid "moderate snow"
-#~ msgstr "vidutinis sniegas"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy snow"
-#~ msgstr "smarkus sniegas"
-
-#~ msgctxt "weather condition"
-#~ msgid "showers"
-#~ msgstr "liūtys"
-
-#~ msgctxt "weather condition"
-#~ msgid "light showers"
-#~ msgstr "silpnos liūtys"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy showers"
-#~ msgstr "smarkios liūtys"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow rain showers"
-#~ msgstr "silpnos sniego ir lietaus liūtys"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy snow rain showers"
-#~ msgstr "smarkios sniego ir lietaus liūtys"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow showers"
-#~ msgstr "silpni liūtiniai snygiai"
-
-#~ msgctxt "weather condition"
-#~ msgid "snow showers"
-#~ msgstr "liūtiniai snygiai"
-
-#~ msgctxt "weather condition"
-#~ msgid "thunderstorm"
-#~ msgstr "perkūnija"
-
-#~ msgctxt "weather condition"
-#~ msgid "light thunderstorm"
-#~ msgstr "silpna perkūnija"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy thunderstorm"
-#~ msgstr "smarki perkūnija"
-
-#~ msgctxt "weather condition"
-#~ msgid "n/a"
-#~ msgstr "neprieinama"
-
-#~ msgctxt "weather condition"
-#~ msgid "sunny"
-#~ msgstr "saulėta"
-
-#~ msgctxt "weather condition"
-#~ msgid "clear sky"
-#~ msgstr "giedra"
 
 #~ msgctxt "Geographical location: city, state, ISO-country-code"
 #~ msgid "%1, %2, %3"

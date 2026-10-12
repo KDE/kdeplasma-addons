@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-08 00:47+0000\n"
+"POT-Creation-Date: 2026-10-12 00:53+0000\n"
 "PO-Revision-Date: 2026-09-17 08:39+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -182,6 +182,236 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr " ואז "
+
+#: ions/open-meteo/ion_open_meteo.cpp:217
+#: ions/open-meteo/ion_open_meteo.cpp:218
+#, kde-format
+msgctxt "weather condition"
+msgid "few clouds"
+msgstr "מעט עננים"
+
+#: ions/open-meteo/ion_open_meteo.cpp:219
+#: ions/open-meteo/ion_open_meteo.cpp:220
+#, kde-format
+msgctxt "weather condition"
+msgid "cloudy"
+msgstr "מעונן"
+
+#: ions/open-meteo/ion_open_meteo.cpp:221
+#: ions/open-meteo/ion_open_meteo.cpp:222
+#, kde-format
+msgctxt "weather condition"
+msgid "overcast"
+msgstr "מעונן"
+
+#: ions/open-meteo/ion_open_meteo.cpp:223
+#: ions/open-meteo/ion_open_meteo.cpp:224
+#: ions/open-meteo/ion_open_meteo.cpp:225
+#, kde-format
+msgctxt "weather condition"
+msgid "haze"
+msgstr "אביך"
+
+#: ions/open-meteo/ion_open_meteo.cpp:226
+#: ions/open-meteo/ion_open_meteo.cpp:227
+#, kde-format
+msgctxt "weather condition"
+msgid "fog with icing"
+msgstr "ערפל עם קפאון"
+
+#: ions/open-meteo/ion_open_meteo.cpp:228
+#: ions/open-meteo/ion_open_meteo.cpp:229
+#: ions/open-meteo/ion_open_meteo.cpp:231
+#, kde-format
+msgctxt "weather condition"
+msgid "drizzle"
+msgstr "טפטוף"
+
+#: ions/open-meteo/ion_open_meteo.cpp:230
+#, kde-format
+msgctxt "weather condition"
+msgid "light drizzle"
+msgstr "טפטוף קל"
+
+#: ions/open-meteo/ion_open_meteo.cpp:232
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy drizzle"
+msgstr "טפטוף כבד"
+
+#: ions/open-meteo/ion_open_meteo.cpp:233
+#, kde-format
+msgctxt "weather condition"
+msgid "freezing drizzle"
+msgstr "טפטוף מקפיא"
+
+#: ions/open-meteo/ion_open_meteo.cpp:234
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy freezing drizzle"
+msgstr "טפטוף מקפיא כבד"
+
+#: ions/open-meteo/ion_open_meteo.cpp:235
+#, kde-format
+msgctxt "weather condition"
+msgid "rain"
+msgstr "גשם"
+
+#: ions/open-meteo/ion_open_meteo.cpp:236
+#: ions/open-meteo/ion_open_meteo.cpp:237
+#, kde-format
+msgctxt "weather condition"
+msgid "light rain"
+msgstr "גשם קל"
+
+#: ions/open-meteo/ion_open_meteo.cpp:238
+#, kde-format
+msgctxt "weather condition"
+msgid "moderate rain"
+msgstr "גשם מתון"
+
+#: ions/open-meteo/ion_open_meteo.cpp:239
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy rain"
+msgstr "גשם כבד"
+
+#: ions/open-meteo/ion_open_meteo.cpp:240
+#, kde-format
+msgctxt "weather condition"
+msgid "light freezing rain"
+msgstr "גשם מקפיא קל"
+
+#: ions/open-meteo/ion_open_meteo.cpp:241
+#, kde-format
+msgctxt "weather condition"
+msgid "freezing rain"
+msgstr "גשם מקפיא"
+
+#: ions/open-meteo/ion_open_meteo.cpp:242
+#, kde-format
+msgctxt "weather condition"
+msgid "light rain snow"
+msgstr "גשם-שלג קל"
+
+#: ions/open-meteo/ion_open_meteo.cpp:243
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy rain snow"
+msgstr "גשם-שלג כבד"
+
+#: ions/open-meteo/ion_open_meteo.cpp:244
+#, kde-format
+msgctxt "weather condition"
+msgid "snow"
+msgstr "שלג"
+
+#: ions/open-meteo/ion_open_meteo.cpp:245
+#: ions/open-meteo/ion_open_meteo.cpp:246
+#, kde-format
+msgctxt "weather condition"
+msgid "light snow"
+msgstr "שלג קל"
+
+#: ions/open-meteo/ion_open_meteo.cpp:247
+#, kde-format
+msgctxt "weather condition"
+msgid "moderate snow"
+msgstr "שלג מתון"
+
+#: ions/open-meteo/ion_open_meteo.cpp:248
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy snow"
+msgstr "שלג כבד"
+
+#: ions/open-meteo/ion_open_meteo.cpp:249
+#: ions/open-meteo/ion_open_meteo.cpp:251
+#, kde-format
+msgctxt "weather condition"
+msgid "showers"
+msgstr "ממטרים"
+
+#: ions/open-meteo/ion_open_meteo.cpp:250
+#, kde-format
+msgctxt "weather condition"
+msgid "light showers"
+msgstr "ממטרים קלים"
+
+#: ions/open-meteo/ion_open_meteo.cpp:252
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy showers"
+msgstr "ממטרים כבדים"
+
+#: ions/open-meteo/ion_open_meteo.cpp:253
+#, kde-format
+msgctxt "weather condition"
+msgid "light snow rain showers"
+msgstr "ממטרי שלג-גשם קלים"
+
+#: ions/open-meteo/ion_open_meteo.cpp:254
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy snow rain showers"
+msgstr "ממטרי שלג-גשם כבדים"
+
+#: ions/open-meteo/ion_open_meteo.cpp:255
+#, kde-format
+msgctxt "weather condition"
+msgid "light snow showers"
+msgstr "ממטרי שלג קלים"
+
+#: ions/open-meteo/ion_open_meteo.cpp:256
+#, kde-format
+msgctxt "weather condition"
+msgid "snow showers"
+msgstr "ממטרי שלג"
+
+#: ions/open-meteo/ion_open_meteo.cpp:257
+#: ions/open-meteo/ion_open_meteo.cpp:258
+#, kde-format
+msgctxt "weather condition"
+msgid "thunderstorm"
+msgstr "סופת רעמים"
+
+#: ions/open-meteo/ion_open_meteo.cpp:259
+#, kde-format
+msgctxt "weather condition"
+msgid "light thunderstorm"
+msgstr "סופת רעמים קלה"
+
+#: ions/open-meteo/ion_open_meteo.cpp:260
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy thunderstorm"
+msgstr "סופת רעמים כבדה"
+
+#: ions/open-meteo/ion_open_meteo.cpp:261
+#: ions/open-meteo/ion_open_meteo.cpp:279
+#: ions/open-meteo/ion_open_meteo.cpp:281
+#, kde-format
+msgctxt "weather condition"
+msgid "n/a"
+msgstr "לא זמין"
+
+#: ions/open-meteo/ion_open_meteo.cpp:264
+#, kde-format
+msgctxt "weather condition"
+msgid "sunny"
+msgstr "שמשי"
+
+#: ions/open-meteo/ion_open_meteo.cpp:267
+#, kde-format
+msgctxt "weather condition"
+msgid "clear sky"
+msgstr "שמיים בהירים"
+
+#: ions/open-meteo/ion_open_meteo.cpp:384
+#, kde-format
+msgctxt "weather credit"
+msgid "Weather data by Open-Meteo"
+msgstr ""
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -638,146 +868,6 @@ msgstr "גבוה מאוד"
 #, kde-format
 msgid "Extreme"
 msgstr "קיצוני"
-
-#~ msgctxt "weather condition"
-#~ msgid "few clouds"
-#~ msgstr "מעט עננים"
-
-#~ msgctxt "weather condition"
-#~ msgid "cloudy"
-#~ msgstr "מעונן"
-
-#~ msgctxt "weather condition"
-#~ msgid "overcast"
-#~ msgstr "מעונן"
-
-#~ msgctxt "weather condition"
-#~ msgid "haze"
-#~ msgstr "אביך"
-
-#~ msgctxt "weather condition"
-#~ msgid "fog with icing"
-#~ msgstr "ערפל עם קפאון"
-
-#~ msgctxt "weather condition"
-#~ msgid "drizzle"
-#~ msgstr "טפטוף"
-
-#~ msgctxt "weather condition"
-#~ msgid "light drizzle"
-#~ msgstr "טפטוף קל"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy drizzle"
-#~ msgstr "טפטוף כבד"
-
-#~ msgctxt "weather condition"
-#~ msgid "freezing drizzle"
-#~ msgstr "טפטוף מקפיא"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy freezing drizzle"
-#~ msgstr "טפטוף מקפיא כבד"
-
-#~ msgctxt "weather condition"
-#~ msgid "rain"
-#~ msgstr "גשם"
-
-#~ msgctxt "weather condition"
-#~ msgid "light rain"
-#~ msgstr "גשם קל"
-
-#~ msgctxt "weather condition"
-#~ msgid "moderate rain"
-#~ msgstr "גשם מתון"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy rain"
-#~ msgstr "גשם כבד"
-
-#~ msgctxt "weather condition"
-#~ msgid "light freezing rain"
-#~ msgstr "גשם מקפיא קל"
-
-#~ msgctxt "weather condition"
-#~ msgid "freezing rain"
-#~ msgstr "גשם מקפיא"
-
-#~ msgctxt "weather condition"
-#~ msgid "light rain snow"
-#~ msgstr "גשם-שלג קל"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy rain snow"
-#~ msgstr "גשם-שלג כבד"
-
-#~ msgctxt "weather condition"
-#~ msgid "snow"
-#~ msgstr "שלג"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow"
-#~ msgstr "שלג קל"
-
-#~ msgctxt "weather condition"
-#~ msgid "moderate snow"
-#~ msgstr "שלג מתון"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy snow"
-#~ msgstr "שלג כבד"
-
-#~ msgctxt "weather condition"
-#~ msgid "showers"
-#~ msgstr "ממטרים"
-
-#~ msgctxt "weather condition"
-#~ msgid "light showers"
-#~ msgstr "ממטרים קלים"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy showers"
-#~ msgstr "ממטרים כבדים"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow rain showers"
-#~ msgstr "ממטרי שלג-גשם קלים"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy snow rain showers"
-#~ msgstr "ממטרי שלג-גשם כבדים"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow showers"
-#~ msgstr "ממטרי שלג קלים"
-
-#~ msgctxt "weather condition"
-#~ msgid "snow showers"
-#~ msgstr "ממטרי שלג"
-
-#~ msgctxt "weather condition"
-#~ msgid "thunderstorm"
-#~ msgstr "סופת רעמים"
-
-#~ msgctxt "weather condition"
-#~ msgid "light thunderstorm"
-#~ msgstr "סופת רעמים קלה"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy thunderstorm"
-#~ msgstr "סופת רעמים כבדה"
-
-#~ msgctxt "weather condition"
-#~ msgid "n/a"
-#~ msgstr "לא זמין"
-
-#~ msgctxt "weather condition"
-#~ msgid "sunny"
-#~ msgstr "שמשי"
-
-#~ msgctxt "weather condition"
-#~ msgid "clear sky"
-#~ msgstr "שמיים בהירים"
 
 #~ msgctxt "Geographical location: city, state, ISO-country-code"
 #~ msgid "%1, %2, %3"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-08 00:47+0000\n"
+"POT-Creation-Date: 2026-10-12 00:53+0000\n"
 "PO-Revision-Date: 2025-11-16 12:24+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -185,6 +185,236 @@ msgctxt ""
 "\"Rain then Sunny\")"
 msgid " then "
 msgstr " og svo "
+
+#: ions/open-meteo/ion_open_meteo.cpp:217
+#: ions/open-meteo/ion_open_meteo.cpp:218
+#, kde-format
+msgctxt "weather condition"
+msgid "few clouds"
+msgstr "léttskýjað"
+
+#: ions/open-meteo/ion_open_meteo.cpp:219
+#: ions/open-meteo/ion_open_meteo.cpp:220
+#, kde-format
+msgctxt "weather condition"
+msgid "cloudy"
+msgstr "skýjað"
+
+#: ions/open-meteo/ion_open_meteo.cpp:221
+#: ions/open-meteo/ion_open_meteo.cpp:222
+#, kde-format
+msgctxt "weather condition"
+msgid "overcast"
+msgstr "hálfskýjað"
+
+#: ions/open-meteo/ion_open_meteo.cpp:223
+#: ions/open-meteo/ion_open_meteo.cpp:224
+#: ions/open-meteo/ion_open_meteo.cpp:225
+#, kde-format
+msgctxt "weather condition"
+msgid "haze"
+msgstr "mistur"
+
+#: ions/open-meteo/ion_open_meteo.cpp:226
+#: ions/open-meteo/ion_open_meteo.cpp:227
+#, kde-format
+msgctxt "weather condition"
+msgid "fog with icing"
+msgstr "þoka með ísingu"
+
+#: ions/open-meteo/ion_open_meteo.cpp:228
+#: ions/open-meteo/ion_open_meteo.cpp:229
+#: ions/open-meteo/ion_open_meteo.cpp:231
+#, kde-format
+msgctxt "weather condition"
+msgid "drizzle"
+msgstr "súld"
+
+#: ions/open-meteo/ion_open_meteo.cpp:230
+#, kde-format
+msgctxt "weather condition"
+msgid "light drizzle"
+msgstr "lítils háttar súld"
+
+#: ions/open-meteo/ion_open_meteo.cpp:232
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy drizzle"
+msgstr "mikil súld"
+
+#: ions/open-meteo/ion_open_meteo.cpp:233
+#, kde-format
+msgctxt "weather condition"
+msgid "freezing drizzle"
+msgstr "frostsúld"
+
+#: ions/open-meteo/ion_open_meteo.cpp:234
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy freezing drizzle"
+msgstr "mikil frostsúld"
+
+#: ions/open-meteo/ion_open_meteo.cpp:235
+#, kde-format
+msgctxt "weather condition"
+msgid "rain"
+msgstr "rigning"
+
+#: ions/open-meteo/ion_open_meteo.cpp:236
+#: ions/open-meteo/ion_open_meteo.cpp:237
+#, kde-format
+msgctxt "weather condition"
+msgid "light rain"
+msgstr "lítils háttar rigning"
+
+#: ions/open-meteo/ion_open_meteo.cpp:238
+#, kde-format
+msgctxt "weather condition"
+msgid "moderate rain"
+msgstr "miðlungs rigning"
+
+#: ions/open-meteo/ion_open_meteo.cpp:239
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy rain"
+msgstr "úrhelli"
+
+#: ions/open-meteo/ion_open_meteo.cpp:240
+#, kde-format
+msgctxt "weather condition"
+msgid "light freezing rain"
+msgstr "lítils háttar frostrigning"
+
+#: ions/open-meteo/ion_open_meteo.cpp:241
+#, kde-format
+msgctxt "weather condition"
+msgid "freezing rain"
+msgstr "frostrigning"
+
+#: ions/open-meteo/ion_open_meteo.cpp:242
+#, kde-format
+msgctxt "weather condition"
+msgid "light rain snow"
+msgstr "lítils háttar rigning, snjókoma"
+
+#: ions/open-meteo/ion_open_meteo.cpp:243
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy rain snow"
+msgstr "úrhelli, snjókoma"
+
+#: ions/open-meteo/ion_open_meteo.cpp:244
+#, kde-format
+msgctxt "weather condition"
+msgid "snow"
+msgstr "snjókoma"
+
+#: ions/open-meteo/ion_open_meteo.cpp:245
+#: ions/open-meteo/ion_open_meteo.cpp:246
+#, kde-format
+msgctxt "weather condition"
+msgid "light snow"
+msgstr "lítils háttar snjókoma"
+
+#: ions/open-meteo/ion_open_meteo.cpp:247
+#, kde-format
+msgctxt "weather condition"
+msgid "moderate snow"
+msgstr "snjókoma í meðallagi"
+
+#: ions/open-meteo/ion_open_meteo.cpp:248
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy snow"
+msgstr "mikil snjókoma"
+
+#: ions/open-meteo/ion_open_meteo.cpp:249
+#: ions/open-meteo/ion_open_meteo.cpp:251
+#, kde-format
+msgctxt "weather condition"
+msgid "showers"
+msgstr "skúrir"
+
+#: ions/open-meteo/ion_open_meteo.cpp:250
+#, kde-format
+msgctxt "weather condition"
+msgid "light showers"
+msgstr "lítils háttar skúrir"
+
+#: ions/open-meteo/ion_open_meteo.cpp:252
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy showers"
+msgstr "miklar skúrir"
+
+#: ions/open-meteo/ion_open_meteo.cpp:253
+#, kde-format
+msgctxt "weather condition"
+msgid "light snow rain showers"
+msgstr "lítils háttar snjókoma, skúrir"
+
+#: ions/open-meteo/ion_open_meteo.cpp:254
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy snow rain showers"
+msgstr "mikil snjóél og rigning"
+
+#: ions/open-meteo/ion_open_meteo.cpp:255
+#, kde-format
+msgctxt "weather condition"
+msgid "light snow showers"
+msgstr "lítils háttar snjóél"
+
+#: ions/open-meteo/ion_open_meteo.cpp:256
+#, kde-format
+msgctxt "weather condition"
+msgid "snow showers"
+msgstr "snjóél"
+
+#: ions/open-meteo/ion_open_meteo.cpp:257
+#: ions/open-meteo/ion_open_meteo.cpp:258
+#, kde-format
+msgctxt "weather condition"
+msgid "thunderstorm"
+msgstr "þrumuveður"
+
+#: ions/open-meteo/ion_open_meteo.cpp:259
+#, kde-format
+msgctxt "weather condition"
+msgid "light thunderstorm"
+msgstr "lítils háttar þrumuveður"
+
+#: ions/open-meteo/ion_open_meteo.cpp:260
+#, kde-format
+msgctxt "weather condition"
+msgid "heavy thunderstorm"
+msgstr "mikið þrumuveður"
+
+#: ions/open-meteo/ion_open_meteo.cpp:261
+#: ions/open-meteo/ion_open_meteo.cpp:279
+#: ions/open-meteo/ion_open_meteo.cpp:281
+#, kde-format
+msgctxt "weather condition"
+msgid "n/a"
+msgstr "á ekki við"
+
+#: ions/open-meteo/ion_open_meteo.cpp:264
+#, kde-format
+msgctxt "weather condition"
+msgid "sunny"
+msgstr "sólskin"
+
+#: ions/open-meteo/ion_open_meteo.cpp:267
+#, kde-format
+msgctxt "weather condition"
+msgid "clear sky"
+msgstr "heiðskírt"
+
+#: ions/open-meteo/ion_open_meteo.cpp:384
+#, kde-format
+msgctxt "weather credit"
+msgid "Weather data by Open-Meteo"
+msgstr ""
 
 #: qml/config/config.qml:15
 #, kde-format
@@ -634,146 +864,6 @@ msgstr "Mjög hátt"
 #, kde-format
 msgid "Extreme"
 msgstr "Ofsafengið"
-
-#~ msgctxt "weather condition"
-#~ msgid "few clouds"
-#~ msgstr "léttskýjað"
-
-#~ msgctxt "weather condition"
-#~ msgid "cloudy"
-#~ msgstr "skýjað"
-
-#~ msgctxt "weather condition"
-#~ msgid "overcast"
-#~ msgstr "hálfskýjað"
-
-#~ msgctxt "weather condition"
-#~ msgid "haze"
-#~ msgstr "mistur"
-
-#~ msgctxt "weather condition"
-#~ msgid "fog with icing"
-#~ msgstr "þoka með ísingu"
-
-#~ msgctxt "weather condition"
-#~ msgid "drizzle"
-#~ msgstr "súld"
-
-#~ msgctxt "weather condition"
-#~ msgid "light drizzle"
-#~ msgstr "lítils háttar súld"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy drizzle"
-#~ msgstr "mikil súld"
-
-#~ msgctxt "weather condition"
-#~ msgid "freezing drizzle"
-#~ msgstr "frostsúld"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy freezing drizzle"
-#~ msgstr "mikil frostsúld"
-
-#~ msgctxt "weather condition"
-#~ msgid "rain"
-#~ msgstr "rigning"
-
-#~ msgctxt "weather condition"
-#~ msgid "light rain"
-#~ msgstr "lítils háttar rigning"
-
-#~ msgctxt "weather condition"
-#~ msgid "moderate rain"
-#~ msgstr "miðlungs rigning"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy rain"
-#~ msgstr "úrhelli"
-
-#~ msgctxt "weather condition"
-#~ msgid "light freezing rain"
-#~ msgstr "lítils háttar frostrigning"
-
-#~ msgctxt "weather condition"
-#~ msgid "freezing rain"
-#~ msgstr "frostrigning"
-
-#~ msgctxt "weather condition"
-#~ msgid "light rain snow"
-#~ msgstr "lítils háttar rigning, snjókoma"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy rain snow"
-#~ msgstr "úrhelli, snjókoma"
-
-#~ msgctxt "weather condition"
-#~ msgid "snow"
-#~ msgstr "snjókoma"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow"
-#~ msgstr "lítils háttar snjókoma"
-
-#~ msgctxt "weather condition"
-#~ msgid "moderate snow"
-#~ msgstr "snjókoma í meðallagi"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy snow"
-#~ msgstr "mikil snjókoma"
-
-#~ msgctxt "weather condition"
-#~ msgid "showers"
-#~ msgstr "skúrir"
-
-#~ msgctxt "weather condition"
-#~ msgid "light showers"
-#~ msgstr "lítils háttar skúrir"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy showers"
-#~ msgstr "miklar skúrir"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow rain showers"
-#~ msgstr "lítils háttar snjókoma, skúrir"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy snow rain showers"
-#~ msgstr "mikil snjóél og rigning"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow showers"
-#~ msgstr "lítils háttar snjóél"
-
-#~ msgctxt "weather condition"
-#~ msgid "snow showers"
-#~ msgstr "snjóél"
-
-#~ msgctxt "weather condition"
-#~ msgid "thunderstorm"
-#~ msgstr "þrumuveður"
-
-#~ msgctxt "weather condition"
-#~ msgid "light thunderstorm"
-#~ msgstr "lítils háttar þrumuveður"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy thunderstorm"
-#~ msgstr "mikið þrumuveður"
-
-#~ msgctxt "weather condition"
-#~ msgid "n/a"
-#~ msgstr "á ekki við"
-
-#~ msgctxt "weather condition"
-#~ msgid "sunny"
-#~ msgstr "sólskin"
-
-#~ msgctxt "weather condition"
-#~ msgid "clear sky"
-#~ msgstr "heiðskírt"
 
 #~ msgctxt "Geographical location: city, state, ISO-country-code"
 #~ msgid "%1, %2, %3"
