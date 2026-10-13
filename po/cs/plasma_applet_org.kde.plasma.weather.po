@@ -9,15 +9,15 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-12 00:53+0000\n"
-"PO-Revision-Date: 2026-09-17 12:00+0200\n"
-"Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
+"PO-Revision-Date: 2026-10-12 12:50+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -412,7 +412,7 @@ msgstr "jasná obloha"
 #, kde-format
 msgctxt "weather credit"
 msgid "Weather data by Open-Meteo"
-msgstr ""
+msgstr "Předpověď počasí od Open-Meteo"
 
 #: qml/config/config.qml:15
 #, kde-format
