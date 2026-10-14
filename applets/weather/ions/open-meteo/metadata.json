@@ -2,8 +2,30 @@
     "Comment": "7-day forecast and observation",
     "KPlugin": {
         "Description": "Weather from Open-Meteo",
+        "Description[ca@valencia]": "Meteorologia d'Open-Meteo",
+        "Description[ca]": "Meteorologia d'Open-Meteo",
+        "Description[cs]": "Předpověď počasí od Open-Meteo",
+        "Description[es]": "Previsión meteorológica de Open-Meteo",
+        "Description[ka]": "ამინდი Open-Meteo-დან",
+        "Description[nl]": "Weer van Open-Meteo",
+        "Description[pt_BR]": "Clima do Open-Meteo",
+        "Description[ru]": "Погода от Open-Meteo",
+        "Description[sl]": "Vreme od Open-Meteo",
+        "Description[tr]": "Open-Meteo sağlayıcısından hava durumu bilgileri",
+        "Description[uk]": "Прогноз погоди від Open-Meteo",
         "Icon": "noneyet",
-        "Name": "Open-Meteo"
+        "Name": "Open-Meteo",
+        "Name[ca@valencia]": "Open-Meteo",
+        "Name[ca]": "Open-Meteo",
+        "Name[cs]": "Open-Meteo",
+        "Name[es]": "Open-Meteo",
+        "Name[ka]": "Open-Meteo",
+        "Name[nl]": "Open-Meteo",
+        "Name[pt_BR]": "Open-Meteo",
+        "Name[ru]": "Open-Meteo",
+        "Name[sl]": "Open-Meteo",
+        "Name[tr]": "Open-Meteo",
+        "Name[uk]": "Open-Meteo"
     },
     "Quality": 1
 }
