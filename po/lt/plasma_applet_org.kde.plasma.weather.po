@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-12 00:53+0000\n"
-"PO-Revision-Date: 2026-09-17 13:57+0300\n"
+"PO-Revision-Date: 2026-10-13 11:48+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -413,7 +413,7 @@ msgstr "giedra"
 #, kde-format
 msgctxt "weather credit"
 msgid "Weather data by Open-Meteo"
-msgstr ""
+msgstr "Orų duomenis teikia Open-Meteo"
 
 #: qml/config/config.qml:15
 #, kde-format
