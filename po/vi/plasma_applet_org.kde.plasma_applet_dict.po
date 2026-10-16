@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-29 00:46+0000\n"
+"POT-Creation-Date: 2026-10-16 00:49+0000\n"
 "PO-Revision-Date: 2022-05-29 11:39+0200\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -28,25 +28,25 @@ msgctxt "@title"
 msgid "Dictionaries"
 msgstr "Từ điển"
 
-#: qml/ConfigDictionaries.qml:19
+#: qml/ConfigDictionaries.qml:20
 #, fuzzy, kde-format
 #| msgid "Add More…"
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "Thêm…"
 
-#: qml/ConfigDictionaries.qml:90
+#: qml/ConfigDictionaries.qml:91
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "Không thể tải danh sách từ điển"
 
-#: qml/ConfigDictionaries.qml:91 qml/main.qml:200
+#: qml/ConfigDictionaries.qml:92 qml/main.qml:200
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "Mã lỗi: %1 (%2)"
 
-#: qml/ConfigDictionaries.qml:102
+#: qml/ConfigDictionaries.qml:103
 #, kde-format
 msgid "No dictionaries"
 msgstr "Không có từ điển nào"
