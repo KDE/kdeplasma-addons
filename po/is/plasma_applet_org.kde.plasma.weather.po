@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-12 00:53+0000\n"
+"POT-Creation-Date: 2026-10-17 00:51+0000\n"
 "PO-Revision-Date: 2025-11-16 12:24+0000\n"
 "Last-Translator: Gummi <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -135,41 +135,34 @@ msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
 msgstr "Gögn frá BBC Weather"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1505
+#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1606
 #, kde-format
 msgid "Rising"
 msgstr "Stígandi"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1507
+#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1608
 #, kde-format
 msgid "Falling"
 msgstr "Fallandi"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:723 ions/envcan/ion_envcan.cpp:1509
+#: ions/bbcukmet/ion_bbcukmet.cpp:723 ions/envcan/ion_envcan.cpp:1610
 #, kde-format
 msgid "Steady"
 msgstr "Stöðugur"
 
-#: ions/dwd/ion_dwd.cpp:497
+#: ions/dwd/ion_dwd.cpp:570
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
 msgstr "Heimild: Deutscher Wetterdienst"
 
-#: ions/envcan/ion_envcan.cpp:895 ions/envcan/ion_envcan.cpp:897
-#: ions/envcan/ion_envcan.cpp:1411 ions/envcan/ion_envcan.cpp:1462
-#: ions/noaa/ion_noaa.cpp:459
-#, kde-format
-msgid "N/A"
-msgstr "Ekki tiltækt"
-
-#: ions/envcan/ion_envcan.cpp:1438
+#: ions/envcan/ion_envcan.cpp:1537
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from Environment and Climate Change Canada"
 msgstr "Gögn frá Environment and Climate Change Canada"
 
-#: ions/noaa/ion_noaa.cpp:444
+#: ions/noaa/ion_noaa.cpp:445
 #, kde-format
 msgctxt "credit line, keep string short)"
 msgid "Data from NOAA National Weather Service"
@@ -178,7 +171,7 @@ msgstr "Gögn frá NOAA National Weather Service"
 #. i18n: The forecast summary can include several single conditions that follow
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
 #. If there is no suitable separator, a sentence separator might do.
-#: ions/noaa/ion_noaa.cpp:752
+#: ions/noaa/ion_noaa.cpp:763
 #, kde-format
 msgctxt ""
 "Separator between forecast conditions that follow a temporal sequence (ex. "
@@ -186,255 +179,279 @@ msgctxt ""
 msgid " then "
 msgstr " og svo "
 
-#: ions/open-meteo/ion_open_meteo.cpp:217
 #: ions/open-meteo/ion_open_meteo.cpp:218
+#: ions/open-meteo/ion_open_meteo.cpp:219
 #, kde-format
 msgctxt "weather condition"
 msgid "few clouds"
 msgstr "léttskýjað"
 
-#: ions/open-meteo/ion_open_meteo.cpp:219
 #: ions/open-meteo/ion_open_meteo.cpp:220
+#: ions/open-meteo/ion_open_meteo.cpp:221
 #, kde-format
 msgctxt "weather condition"
 msgid "cloudy"
 msgstr "skýjað"
 
-#: ions/open-meteo/ion_open_meteo.cpp:221
 #: ions/open-meteo/ion_open_meteo.cpp:222
+#: ions/open-meteo/ion_open_meteo.cpp:223
 #, kde-format
 msgctxt "weather condition"
 msgid "overcast"
 msgstr "hálfskýjað"
 
-#: ions/open-meteo/ion_open_meteo.cpp:223
 #: ions/open-meteo/ion_open_meteo.cpp:224
 #: ions/open-meteo/ion_open_meteo.cpp:225
+#: ions/open-meteo/ion_open_meteo.cpp:226
 #, kde-format
 msgctxt "weather condition"
 msgid "haze"
 msgstr "mistur"
 
-#: ions/open-meteo/ion_open_meteo.cpp:226
 #: ions/open-meteo/ion_open_meteo.cpp:227
+#: ions/open-meteo/ion_open_meteo.cpp:228
 #, kde-format
 msgctxt "weather condition"
 msgid "fog with icing"
 msgstr "þoka með ísingu"
 
-#: ions/open-meteo/ion_open_meteo.cpp:228
 #: ions/open-meteo/ion_open_meteo.cpp:229
-#: ions/open-meteo/ion_open_meteo.cpp:231
+#: ions/open-meteo/ion_open_meteo.cpp:230
+#: ions/open-meteo/ion_open_meteo.cpp:232
 #, kde-format
 msgctxt "weather condition"
 msgid "drizzle"
 msgstr "súld"
 
-#: ions/open-meteo/ion_open_meteo.cpp:230
+#: ions/open-meteo/ion_open_meteo.cpp:231
 #, kde-format
 msgctxt "weather condition"
 msgid "light drizzle"
 msgstr "lítils háttar súld"
 
-#: ions/open-meteo/ion_open_meteo.cpp:232
+#: ions/open-meteo/ion_open_meteo.cpp:233
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy drizzle"
 msgstr "mikil súld"
 
-#: ions/open-meteo/ion_open_meteo.cpp:233
+#: ions/open-meteo/ion_open_meteo.cpp:234
 #, kde-format
 msgctxt "weather condition"
 msgid "freezing drizzle"
 msgstr "frostsúld"
 
-#: ions/open-meteo/ion_open_meteo.cpp:234
+#: ions/open-meteo/ion_open_meteo.cpp:235
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy freezing drizzle"
 msgstr "mikil frostsúld"
 
-#: ions/open-meteo/ion_open_meteo.cpp:235
+#: ions/open-meteo/ion_open_meteo.cpp:236
 #, kde-format
 msgctxt "weather condition"
 msgid "rain"
 msgstr "rigning"
 
-#: ions/open-meteo/ion_open_meteo.cpp:236
 #: ions/open-meteo/ion_open_meteo.cpp:237
+#: ions/open-meteo/ion_open_meteo.cpp:238
 #, kde-format
 msgctxt "weather condition"
 msgid "light rain"
 msgstr "lítils háttar rigning"
 
-#: ions/open-meteo/ion_open_meteo.cpp:238
+#: ions/open-meteo/ion_open_meteo.cpp:239
 #, kde-format
 msgctxt "weather condition"
 msgid "moderate rain"
 msgstr "miðlungs rigning"
 
-#: ions/open-meteo/ion_open_meteo.cpp:239
+#: ions/open-meteo/ion_open_meteo.cpp:240
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain"
 msgstr "úrhelli"
 
-#: ions/open-meteo/ion_open_meteo.cpp:240
+#: ions/open-meteo/ion_open_meteo.cpp:241
 #, kde-format
 msgctxt "weather condition"
 msgid "light freezing rain"
 msgstr "lítils háttar frostrigning"
 
-#: ions/open-meteo/ion_open_meteo.cpp:241
+#: ions/open-meteo/ion_open_meteo.cpp:242
 #, kde-format
 msgctxt "weather condition"
 msgid "freezing rain"
 msgstr "frostrigning"
 
-#: ions/open-meteo/ion_open_meteo.cpp:242
+#: ions/open-meteo/ion_open_meteo.cpp:243
 #, kde-format
 msgctxt "weather condition"
 msgid "light rain snow"
 msgstr "lítils háttar rigning, snjókoma"
 
-#: ions/open-meteo/ion_open_meteo.cpp:243
+#: ions/open-meteo/ion_open_meteo.cpp:244
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain snow"
 msgstr "úrhelli, snjókoma"
 
-#: ions/open-meteo/ion_open_meteo.cpp:244
+#: ions/open-meteo/ion_open_meteo.cpp:245
 #, kde-format
 msgctxt "weather condition"
 msgid "snow"
 msgstr "snjókoma"
 
-#: ions/open-meteo/ion_open_meteo.cpp:245
 #: ions/open-meteo/ion_open_meteo.cpp:246
+#: ions/open-meteo/ion_open_meteo.cpp:247
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow"
 msgstr "lítils háttar snjókoma"
 
-#: ions/open-meteo/ion_open_meteo.cpp:247
+#: ions/open-meteo/ion_open_meteo.cpp:248
 #, kde-format
 msgctxt "weather condition"
 msgid "moderate snow"
 msgstr "snjókoma í meðallagi"
 
-#: ions/open-meteo/ion_open_meteo.cpp:248
+#: ions/open-meteo/ion_open_meteo.cpp:249
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow"
 msgstr "mikil snjókoma"
 
-#: ions/open-meteo/ion_open_meteo.cpp:249
-#: ions/open-meteo/ion_open_meteo.cpp:251
+#: ions/open-meteo/ion_open_meteo.cpp:250
+#: ions/open-meteo/ion_open_meteo.cpp:252
 #, kde-format
 msgctxt "weather condition"
 msgid "showers"
 msgstr "skúrir"
 
-#: ions/open-meteo/ion_open_meteo.cpp:250
+#: ions/open-meteo/ion_open_meteo.cpp:251
 #, kde-format
 msgctxt "weather condition"
 msgid "light showers"
 msgstr "lítils háttar skúrir"
 
-#: ions/open-meteo/ion_open_meteo.cpp:252
+#: ions/open-meteo/ion_open_meteo.cpp:253
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy showers"
 msgstr "miklar skúrir"
 
-#: ions/open-meteo/ion_open_meteo.cpp:253
+#: ions/open-meteo/ion_open_meteo.cpp:254
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow rain showers"
 msgstr "lítils háttar snjókoma, skúrir"
 
-#: ions/open-meteo/ion_open_meteo.cpp:254
+#: ions/open-meteo/ion_open_meteo.cpp:255
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow rain showers"
 msgstr "mikil snjóél og rigning"
 
-#: ions/open-meteo/ion_open_meteo.cpp:255
+#: ions/open-meteo/ion_open_meteo.cpp:256
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow showers"
 msgstr "lítils háttar snjóél"
 
-#: ions/open-meteo/ion_open_meteo.cpp:256
+#: ions/open-meteo/ion_open_meteo.cpp:257
 #, kde-format
 msgctxt "weather condition"
 msgid "snow showers"
 msgstr "snjóél"
 
-#: ions/open-meteo/ion_open_meteo.cpp:257
 #: ions/open-meteo/ion_open_meteo.cpp:258
+#: ions/open-meteo/ion_open_meteo.cpp:259
 #, kde-format
 msgctxt "weather condition"
 msgid "thunderstorm"
 msgstr "þrumuveður"
 
-#: ions/open-meteo/ion_open_meteo.cpp:259
+#: ions/open-meteo/ion_open_meteo.cpp:260
 #, kde-format
 msgctxt "weather condition"
 msgid "light thunderstorm"
 msgstr "lítils háttar þrumuveður"
 
-#: ions/open-meteo/ion_open_meteo.cpp:260
+#: ions/open-meteo/ion_open_meteo.cpp:261
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy thunderstorm"
 msgstr "mikið þrumuveður"
 
-#: ions/open-meteo/ion_open_meteo.cpp:261
-#: ions/open-meteo/ion_open_meteo.cpp:279
-#: ions/open-meteo/ion_open_meteo.cpp:281
+#: ions/open-meteo/ion_open_meteo.cpp:262
+#: ions/open-meteo/ion_open_meteo.cpp:280
+#: ions/open-meteo/ion_open_meteo.cpp:282
 #, kde-format
 msgctxt "weather condition"
 msgid "n/a"
 msgstr "á ekki við"
 
-#: ions/open-meteo/ion_open_meteo.cpp:264
+#: ions/open-meteo/ion_open_meteo.cpp:265
 #, kde-format
 msgctxt "weather condition"
 msgid "sunny"
 msgstr "sólskin"
 
-#: ions/open-meteo/ion_open_meteo.cpp:267
+#: ions/open-meteo/ion_open_meteo.cpp:268
 #, kde-format
 msgctxt "weather condition"
 msgid "clear sky"
 msgstr "heiðskírt"
 
-#: ions/open-meteo/ion_open_meteo.cpp:384
+#: ions/open-meteo/ion_open_meteo.cpp:385
 #, kde-format
 msgctxt "weather credit"
 msgid "Weather data by Open-Meteo"
 msgstr ""
 
-#: qml/config/config.qml:15
+#: qml/cards/ForecastDelegate.qml:95
+#, kde-format
+msgctxt "certain weather condition (probability percentage)"
+msgid "%1 (%2%)"
+msgstr "%1 (%2%)"
+
+#: qml/cards/ForecastDelegate.qml:110
+#, kde-format
+msgctxt "High and low temperature wrapper"
+msgid "%1/<font color='%2'>%3</font>"
+msgstr ""
+
+#: qml/cards/ForecastDelegate.qml:124
+#, kde-format
+msgctxt "Short for no data available"
+msgid "-"
+msgstr "-"
+
+#: qml/cards/ForecastDelegate.qml:136
+#, kde-format
+msgctxt "Probability of precipitation in percentage"
+msgid "☂%1%"
+msgstr "☂%1%"
+
+#: qml/config/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Weather Station"
 msgstr "Veðurstöð"
 
-#: qml/config/config.qml:21
+#: qml/config/config.qml:19
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Útlit"
 
-#: qml/config/config.qml:31
+#: qml/config/config.qml:25
 #, kde-format
 msgctxt "@title"
 msgid "Units"
 msgstr "Einingar"
 
-#: qml/config/ConfigAppearance.qml:46 qml/config/ConfigWeatherStation.qml:119
+#: qml/config/ConfigAppearance.qml:48 qml/config/ConfigWeatherStation.qml:119
 #, kde-format
 msgctxt "@label:info. %1 is the name of a weather service"
 msgid ""
@@ -442,65 +459,89 @@ msgid ""
 "this location."
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:53
+#: qml/config/ConfigAppearance.qml:54
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "Þétt snið"
 
-#: qml/config/ConfigAppearance.qml:61
+#: qml/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Sýna hitastig"
 
-#: qml/config/ConfigAppearance.qml:64
+#: qml/config/ConfigAppearance.qml:66
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Sem tákn yfir græju"
 
-#: qml/config/ConfigAppearance.qml:72
+#: qml/config/ConfigAppearance.qml:74
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Sem tákn við hlið græju"
 
-#: qml/config/ConfigAppearance.qml:79
+#: qml/config/ConfigAppearance.qml:82
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Ekki sýna"
 
-#: qml/config/ConfigAppearance.qml:88
+#: qml/config/ConfigAppearance.qml:93
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "Sýna í vísbendingu:"
 
-#: qml/config/ConfigAppearance.qml:89
+#: qml/config/ConfigAppearance.qml:94
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Hitastig"
 
-#: qml/config/ConfigAppearance.qml:94
+#: qml/config/ConfigAppearance.qml:100
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Vind"
 
-#: qml/config/ConfigAppearance.qml:99
+#: qml/config/ConfigAppearance.qml:106
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Þrýsting"
 
-#: qml/config/ConfigAppearance.qml:104
+#: qml/config/ConfigAppearance.qml:112
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "Rakastig"
+
+#: qml/config/ConfigAppearance.qml:122
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Show temperature:"
+msgctxt "@label"
+msgid "Show temperature graph:"
+msgstr "Sýna hitastig"
+
+#: qml/config/ConfigAppearance.qml:123
+#, fuzzy, kde-format
+#| msgctxt "@title:tab Weather forecast"
+#| msgid "Forecast"
+msgctxt "@option:check"
+msgid "Hourly Forecast"
+msgstr "Veðurspá"
+
+#: qml/config/ConfigAppearance.qml:128
+#, fuzzy, kde-format
+#| msgctxt "@title:tab Weather forecast"
+#| msgid "Forecast"
+msgctxt "@option:check"
+msgid "Day Forecast"
+msgstr "Veðurspá"
 
 #: qml/config/ConfigUnits.qml:31
 #, kde-format
@@ -605,45 +646,145 @@ msgstr ""
 "tímabundið vegna bilunar í þjóni hjá netþjónustu veðurstofunnar. Prófaðu "
 "aftur síðar."
 
-#: qml/ForecastView.qml:149
-#, kde-format
-msgctxt "certain weather condition (probability percentage)"
-msgid "%1 (%2%)"
-msgstr "%1 (%2%)"
+#: qml/DayForecastGraph.qml:42 qml/HourlyForecastGraph.qml:46
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Temperature"
+msgctxt "@label"
+msgid "Temperature"
+msgstr "Hitastig"
 
-#: qml/ForecastView.qml:163
-#, kde-format
-msgctxt "Probability of precipitation in percentage"
-msgid "☂%1%"
-msgstr "☂%1%"
+#: qml/DayForecastGraph.qml:59 qml/HourlyForecastGraph.qml:63
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Temperature"
+msgctxt "@label"
+msgid "High Temperature"
+msgstr "Hitastig"
 
-#: qml/ForecastView.qml:171 qml/ForecastView.qml:180
-#, kde-format
-msgctxt "Short for no data available"
-msgid "-"
-msgstr "-"
+#: qml/DayForecastGraph.qml:76 qml/HourlyForecastGraph.qml:80
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Temperature"
+msgctxt "@label"
+msgid "Low Temperature"
+msgstr "Hitastig"
 
-#: qml/FullRepresentation.qml:49
+#: qml/DayForecastGraph.qml:93 qml/HourlyForecastGraph.qml:97
+#, kde-format
+msgctxt "@label"
+msgid "Chance of precipitation"
+msgstr ""
+
+#: qml/DetailsView.qml:35
+#, fuzzy, kde-format
+#| msgctxt "@label ground temperature"
+#| msgid "Dewpoint:"
+msgctxt "@label ground temperature"
+msgid "Dewpoint"
+msgstr "Daggarmark:"
+
+#: qml/DetailsView.qml:40
+#, fuzzy, kde-format
+#| msgctxt "@option:check Show in tooltip: pressure"
+#| msgid "Pressure"
+msgctxt "@label"
+msgid "Pressure"
+msgstr "Þrýsting"
+
+#: qml/DetailsView.qml:45
+#, fuzzy, kde-format
+#| msgctxt "@label pressure tendency, rising/falling/steady"
+#| msgid "Pressure Tendency:"
+msgctxt "@label pressure tendency, rising/falling/steady"
+msgid "Pressure tendency"
+msgstr "Þrýstibreyting:"
+
+#: qml/DetailsView.qml:50
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Visibility:"
+msgctxt "@label"
+msgid "Visibility"
+msgstr "Skyggni:"
+
+#: qml/DetailsView.qml:63
+#, fuzzy, kde-format
+#| msgctxt "@option:check Show in tooltip: humidity"
+#| msgid "Humidity"
+msgctxt "@label"
+msgid "Humidity"
+msgstr "Rakastig"
+
+#: qml/DetailsView.qml:68
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Wind Gust:"
+msgctxt "@label"
+msgid "Wind gust"
+msgstr "Vindhviður:"
+
+#: qml/DetailsView.qml:73
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox"
+#| msgid "Wind speed:"
+msgctxt "@label"
+msgid "Wind speed"
+msgstr "Vindhraði:"
+
+#: qml/ForecastNavigation.qml:35
+#, kde-format
+msgctxt "@action"
+msgid "Go to first day"
+msgstr ""
+
+#: qml/ForecastNavigation.qml:54
+#, kde-format
+msgctxt "@action"
+msgid "Go to previous day"
+msgstr ""
+
+#: qml/ForecastNavigation.qml:134
+#, kde-format
+msgctxt "@action"
+msgid "Go to next day"
+msgstr ""
+
+#: qml/ForecastNavigation.qml:153
+#, kde-format
+msgctxt "@action"
+msgid "Go to last day"
+msgstr ""
+
+#: qml/FullRepresentation.qml:61
+#, fuzzy, kde-format
+#| msgctxt "@info:placeholder"
+#| msgid "Unable to load weather forecast"
+msgctxt "@action:button"
+msgid "Return to Weather Forecast"
+msgstr "Tókst ekki að hlaða inn veðurspá"
+
+#: qml/FullRepresentation.qml:78
 #, kde-format
 msgid "Please set your location"
 msgstr "Veldu staðsetningu þína"
 
-#: qml/FullRepresentation.qml:53
+#: qml/FullRepresentation.qml:81
 #, kde-format
 msgid "Set location…"
 msgstr "Velja staðsetningu..."
 
-#: qml/FullRepresentation.qml:67
+#: qml/FullRepresentation.qml:95
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
 msgstr "Tókst ekki að sækja veðurupplýsingar fyrir %1"
 
-#: qml/FullRepresentation.qml:67
+#: qml/FullRepresentation.qml:95
 #, kde-format
 msgid "Unable to retrieve weather information"
 msgstr "Tókst ekki að sækja veðurupplýsingar"
 
-#: qml/FullRepresentation.qml:68
+#: qml/FullRepresentation.qml:96
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -653,13 +794,35 @@ msgstr ""
 "Netbeiðnin rann út á tíma, hugsanlega vegna bilunar í þjóni hjá netþjónustu "
 "veðurstofunnar. Prófaðu aftur síðar."
 
-#: qml/main.qml:81 qml/TopPanel.qml:222
+#: qml/FullRepresentation.qml:105 qml/main.qml:117
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Unable to load weather forecast"
+msgstr "Tókst ekki að hlaða inn veðurspá"
+
+#: qml/FullRepresentation.qml:106
+#, fuzzy
+#| msgctxt "@info:usagetip"
+#| msgid ""
+#| "There may be a technical issue with the weather provider. If the issue "
+#| "persists for longer than a day, submit a bug report."
+msgctxt "@info:usagetip"
+msgid ""
+"There may be a technical issue with the weather provider. If the issue "
+"persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
+"cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
+"link>."
+msgstr ""
+"Hugsanlega eru tæknileg vandamál hjá veðurstofunni. Ef vandamálið er enn til "
+"staðar eftir meira en einn dag skaltu senda inn villuskýrslu."
+
+#: qml/main.qml:82
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "Logn"
 
-#: qml/main.qml:103
+#: qml/main.qml:104
 #, kde-format
 msgctxt ""
 "@info:usagetip Minimize the length of this string so it is as short as "
@@ -668,17 +831,11 @@ msgctxt ""
 msgid "Set up Weather Report…"
 msgstr "Set upp veðurfregnir…"
 
-#: qml/main.qml:112
+#: qml/main.qml:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr "Smelltu til að velja stað og fylgjast með veðri þar"
-
-#: qml/main.qml:116 qml/SwitchPanel.qml:176
-#, kde-format
-msgctxt "@info:placeholder"
-msgid "Unable to load weather forecast"
-msgstr "Tókst ekki að hlaða inn veðurspá"
 
 #: qml/main.qml:130
 #, kde-format
@@ -692,86 +849,63 @@ msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: qml/main.qml:146
+#: qml/main.qml:145
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:158
+#: qml/main.qml:156
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/main.qml:167
+#: qml/main.qml:165
 #, kde-format
 msgid "Humidity: %1"
 msgstr "Raki: %1"
 
-#: qml/NoticesView.qml:61
+#: qml/NoticesView.qml:61 qml/WarningsPage.qml:63
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
 msgstr "Sýna frekari upplýsingar"
 
-#: qml/SwitchPanel.qml:34
+#: qml/StackedView.qml:51
+#, fuzzy, kde-format
+#| msgctxt "@title:tab Weather forecast"
+#| msgid "Forecast"
+msgctxt "@title"
+msgid "Hourly Forecast"
+msgstr "Veðurspá"
+
+#: qml/StackedView.qml:81
+#, fuzzy, kde-format
+#| msgctxt "@title:tab Weather forecast"
+#| msgid "Forecast"
+msgctxt "@title %1 is a number of days"
+msgid "%1-Day Forecast"
+msgstr "Veðurspá"
+
+#: qml/TabbedView.qml:40
 #, kde-format
-msgctxt "Forecast period timeframe"
-msgid "1 Day"
+msgctxt "@title:tab"
+msgid "Hourly"
+msgstr ""
+
+#: qml/TabbedView.qml:55
+#, fuzzy, kde-format
+#| msgctxt "Forecast period timeframe"
+#| msgid "1 Day"
+#| msgid_plural "%1 Days"
+msgctxt "@title:tab"
+msgid "%1 Day"
 msgid_plural "%1 Days"
 msgstr[0] "1 dagur"
 msgstr[1] "%1 dagar"
 
-#: qml/SwitchPanel.qml:44
-#, kde-format
-msgctxt "@label ground temperature"
-msgid "Dewpoint:"
-msgstr "Daggarmark:"
-
-#: qml/SwitchPanel.qml:49
-#, kde-format
-msgctxt "@label"
-msgid "Pressure:"
-msgstr "Þrýstingur:"
-
-#: qml/SwitchPanel.qml:54
-#, kde-format
-msgctxt "@label pressure tendency, rising/falling/steady"
-msgid "Pressure Tendency:"
-msgstr "Þrýstibreyting:"
-
-#: qml/SwitchPanel.qml:59
-#, kde-format
-msgctxt "@label"
-msgid "Visibility:"
-msgstr "Skyggni:"
-
-#: qml/SwitchPanel.qml:72
-#, kde-format
-msgctxt "@label"
-msgid "Humidity:"
-msgstr "Raki:"
-
-#: qml/SwitchPanel.qml:77
-#, kde-format
-msgctxt "@label"
-msgid "Wind Gust:"
-msgstr "Vindhviður:"
-
-#: qml/SwitchPanel.qml:94
-#, kde-format
-msgctxt "@title:tab Weather forecast"
-msgid "Forecast"
-msgstr "Veðurspá"
-
-#: qml/SwitchPanel.qml:98
-#, kde-format
-msgctxt "@title:tab"
-msgid "Details"
-msgstr "Nánar"
-
-#: qml/SwitchPanel.qml:103
+#: qml/TopPanel.qml:83
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -781,17 +915,7 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 athugasemd"
 msgstr[1] "%1 athugasemdir"
 
-#: qml/SwitchPanel.qml:178
-#, kde-format
-msgctxt "@info:usagetip"
-msgid ""
-"There may be a technical issue with the weather provider. If the issue "
-"persists for longer than a day, submit a bug report."
-msgstr ""
-"Hugsanlega eru tæknileg vandamál hjá veðurstofunni. Ef vandamálið er enn til "
-"staðar eftir meira en einn dag skaltu senda inn villuskýrslu."
-
-#: qml/TopPanel.qml:138
+#: qml/TopPanel.qml:170
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
@@ -800,6 +924,32 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "Með vindkælingu %1"
 
+#: qml/WeatherPage.qml:96
+#, fuzzy, kde-format
+#| msgid "Today"
+msgctxt "@label"
+msgid "Today"
+msgstr "Í dag"
+
+#: qml/WeatherPage.qml:98
+#, kde-format
+msgctxt "@label"
+msgid "Tomorrow"
+msgstr ""
+
+#: qml/WeatherPage.qml:104
+#, kde-format
+msgctxt "@label"
+msgid "Today to Tomorrow"
+msgstr ""
+
+#: qml/WeatherPage.qml:106
+#, fuzzy, kde-format
+#| msgid "Today"
+msgctxt "@label %1 is a day of the week"
+msgid "Today to %1"
+msgstr "Í dag"
+
 #: util.cpp:42
 #, kde-format
 msgctxt "Degree, unit symbol"
@@ -807,10 +957,12 @@ msgid "°"
 msgstr "°"
 
 #: util.cpp:46 util.cpp:50
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "temperature, unit"
+#| msgid "%1%2"
 msgctxt "temperature unitsymbol"
-msgid "%1 %2"
-msgstr "%1 %2"
+msgid "%1%2"
+msgstr "%1%2"
 
 #: util.cpp:60
 #, kde-format
@@ -830,15 +982,19 @@ msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: weatherdata/futuredays.cpp:71
+#: weatherdata/futuredays.cpp:292
 #, kde-format
-msgid "Day"
-msgstr "Dagur"
+msgctxt "Short for Day"
+msgid "D"
+msgstr ""
 
-#: weatherdata/futuredays.cpp:74
-#, kde-format
-msgid "Night"
-msgstr "Nótt"
+#: weatherdata/futuredays.cpp:295
+#, fuzzy, kde-format
+#| msgctxt "wind direction"
+#| msgid "N"
+msgctxt "Short for Night"
+msgid "N"
+msgstr "N"
 
 #: weatherdata/lastobservation.cpp:262
 #, kde-format
@@ -865,6 +1021,31 @@ msgstr "Mjög hátt"
 msgid "Extreme"
 msgstr "Ofsafengið"
 
+#~ msgid "N/A"
+#~ msgstr "Ekki tiltækt"
+
+#~ msgctxt "@label"
+#~ msgid "Pressure:"
+#~ msgstr "Þrýstingur:"
+
+#~ msgctxt "@label"
+#~ msgid "Humidity:"
+#~ msgstr "Raki:"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Details"
+#~ msgstr "Nánar"
+
+#~ msgctxt "temperature unitsymbol"
+#~ msgid "%1 %2"
+#~ msgstr "%1 %2"
+
+#~ msgid "Day"
+#~ msgstr "Dagur"
+
+#~ msgid "Night"
+#~ msgstr "Nótt"
+
 #~ msgctxt "Geographical location: city, state, ISO-country-code"
 #~ msgid "%1, %2, %3"
 #~ msgstr "%1, %2, %3"
@@ -872,9 +1053,6 @@ msgstr "Ofsafengið"
 #~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
 #~ msgid "%1 (%2), %3, %4"
 #~ msgstr "%1 (%2), %3, %4"
-
-#~ msgid "Today"
-#~ msgstr "Í dag"
 
 #~ msgctxt "Short for Saturday"
 #~ msgid "Sat"
@@ -1020,10 +1198,6 @@ msgstr "Ofsafengið"
 #~ msgctxt "Low temperature"
 #~ msgid "Low: %1"
 #~ msgstr "Lægst: %1"
-
-#~ msgctxt "temperature, unit"
-#~ msgid "%1%2"
-#~ msgstr "%1%2"
 
 #~ msgctxt "distance, unit"
 #~ msgid "Visibility: %1 %2"

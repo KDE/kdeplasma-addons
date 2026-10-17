@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-12 00:53+0000\n"
+"POT-Creation-Date: 2026-10-17 00:51+0000\n"
 "PO-Revision-Date: 2026-10-12 15:36+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -131,41 +131,34 @@ msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
 msgstr "Gegevens uit BBC Weather"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1505
+#: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1606
 #, kde-format
 msgid "Rising"
 msgstr "Stijgend"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1507
+#: ions/bbcukmet/ion_bbcukmet.cpp:721 ions/envcan/ion_envcan.cpp:1608
 #, kde-format
 msgid "Falling"
 msgstr "Dalend"
 
-#: ions/bbcukmet/ion_bbcukmet.cpp:723 ions/envcan/ion_envcan.cpp:1509
+#: ions/bbcukmet/ion_bbcukmet.cpp:723 ions/envcan/ion_envcan.cpp:1610
 #, kde-format
 msgid "Steady"
 msgstr "Gelijkblijvend"
 
-#: ions/dwd/ion_dwd.cpp:497
+#: ions/dwd/ion_dwd.cpp:570
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
 msgstr "Bron: Deutscher Wetterdienst"
 
-#: ions/envcan/ion_envcan.cpp:895 ions/envcan/ion_envcan.cpp:897
-#: ions/envcan/ion_envcan.cpp:1411 ions/envcan/ion_envcan.cpp:1462
-#: ions/noaa/ion_noaa.cpp:459
-#, kde-format
-msgid "N/A"
-msgstr "N.v.t."
-
-#: ions/envcan/ion_envcan.cpp:1438
+#: ions/envcan/ion_envcan.cpp:1537
 #, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from Environment and Climate Change Canada"
 msgstr "Gegevens van Environment en Climate Change Canada"
 
-#: ions/noaa/ion_noaa.cpp:444
+#: ions/noaa/ion_noaa.cpp:445
 #, kde-format
 msgctxt "credit line, keep string short)"
 msgid "Data from NOAA National Weather Service"
@@ -174,7 +167,7 @@ msgstr "Gegevens uit NOAA National Weather Service"
 #. i18n: The forecast summary can include several single conditions that follow
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
 #. If there is no suitable separator, a sentence separator might do.
-#: ions/noaa/ion_noaa.cpp:752
+#: ions/noaa/ion_noaa.cpp:763
 #, kde-format
 msgctxt ""
 "Separator between forecast conditions that follow a temporal sequence (ex. "
@@ -182,255 +175,279 @@ msgctxt ""
 msgid " then "
 msgstr " daarna "
 
-#: ions/open-meteo/ion_open_meteo.cpp:217
 #: ions/open-meteo/ion_open_meteo.cpp:218
+#: ions/open-meteo/ion_open_meteo.cpp:219
 #, kde-format
 msgctxt "weather condition"
 msgid "few clouds"
 msgstr "licht bewolkt"
 
-#: ions/open-meteo/ion_open_meteo.cpp:219
 #: ions/open-meteo/ion_open_meteo.cpp:220
+#: ions/open-meteo/ion_open_meteo.cpp:221
 #, kde-format
 msgctxt "weather condition"
 msgid "cloudy"
 msgstr "bewolkt"
 
-#: ions/open-meteo/ion_open_meteo.cpp:221
 #: ions/open-meteo/ion_open_meteo.cpp:222
+#: ions/open-meteo/ion_open_meteo.cpp:223
 #, kde-format
 msgctxt "weather condition"
 msgid "overcast"
 msgstr "geheel bewolkt"
 
-#: ions/open-meteo/ion_open_meteo.cpp:223
 #: ions/open-meteo/ion_open_meteo.cpp:224
 #: ions/open-meteo/ion_open_meteo.cpp:225
+#: ions/open-meteo/ion_open_meteo.cpp:226
 #, kde-format
 msgctxt "weather condition"
 msgid "haze"
 msgstr "heiig"
 
-#: ions/open-meteo/ion_open_meteo.cpp:226
 #: ions/open-meteo/ion_open_meteo.cpp:227
+#: ions/open-meteo/ion_open_meteo.cpp:228
 #, kde-format
 msgctxt "weather condition"
 msgid "fog with icing"
 msgstr "mist met rijp"
 
-#: ions/open-meteo/ion_open_meteo.cpp:228
 #: ions/open-meteo/ion_open_meteo.cpp:229
-#: ions/open-meteo/ion_open_meteo.cpp:231
+#: ions/open-meteo/ion_open_meteo.cpp:230
+#: ions/open-meteo/ion_open_meteo.cpp:232
 #, kde-format
 msgctxt "weather condition"
 msgid "drizzle"
 msgstr "motregen"
 
-#: ions/open-meteo/ion_open_meteo.cpp:230
+#: ions/open-meteo/ion_open_meteo.cpp:231
 #, kde-format
 msgctxt "weather condition"
 msgid "light drizzle"
 msgstr "lichte motregen"
 
-#: ions/open-meteo/ion_open_meteo.cpp:232
+#: ions/open-meteo/ion_open_meteo.cpp:233
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy drizzle"
 msgstr "zware motregen"
 
-#: ions/open-meteo/ion_open_meteo.cpp:233
+#: ions/open-meteo/ion_open_meteo.cpp:234
 #, kde-format
 msgctxt "weather condition"
 msgid "freezing drizzle"
 msgstr "motijzel"
 
-#: ions/open-meteo/ion_open_meteo.cpp:234
+#: ions/open-meteo/ion_open_meteo.cpp:235
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy freezing drizzle"
 msgstr "zware motijzel"
 
-#: ions/open-meteo/ion_open_meteo.cpp:235
+#: ions/open-meteo/ion_open_meteo.cpp:236
 #, kde-format
 msgctxt "weather condition"
 msgid "rain"
 msgstr "regen"
 
-#: ions/open-meteo/ion_open_meteo.cpp:236
 #: ions/open-meteo/ion_open_meteo.cpp:237
+#: ions/open-meteo/ion_open_meteo.cpp:238
 #, kde-format
 msgctxt "weather condition"
 msgid "light rain"
 msgstr "lichte regen"
 
-#: ions/open-meteo/ion_open_meteo.cpp:238
+#: ions/open-meteo/ion_open_meteo.cpp:239
 #, kde-format
 msgctxt "weather condition"
 msgid "moderate rain"
 msgstr "regen"
 
-#: ions/open-meteo/ion_open_meteo.cpp:239
+#: ions/open-meteo/ion_open_meteo.cpp:240
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain"
 msgstr "zware regen"
 
-#: ions/open-meteo/ion_open_meteo.cpp:240
+#: ions/open-meteo/ion_open_meteo.cpp:241
 #, kde-format
 msgctxt "weather condition"
 msgid "light freezing rain"
 msgstr "lichte ijzel"
 
-#: ions/open-meteo/ion_open_meteo.cpp:241
+#: ions/open-meteo/ion_open_meteo.cpp:242
 #, kde-format
 msgctxt "weather condition"
 msgid "freezing rain"
 msgstr "ijzel"
 
-#: ions/open-meteo/ion_open_meteo.cpp:242
+#: ions/open-meteo/ion_open_meteo.cpp:243
 #, kde-format
 msgctxt "weather condition"
 msgid "light rain snow"
 msgstr "lichte natte sneeuw"
 
-#: ions/open-meteo/ion_open_meteo.cpp:243
+#: ions/open-meteo/ion_open_meteo.cpp:244
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain snow"
 msgstr "zware natte sneeuw"
 
-#: ions/open-meteo/ion_open_meteo.cpp:244
+#: ions/open-meteo/ion_open_meteo.cpp:245
 #, kde-format
 msgctxt "weather condition"
 msgid "snow"
 msgstr "sneeuw"
 
-#: ions/open-meteo/ion_open_meteo.cpp:245
 #: ions/open-meteo/ion_open_meteo.cpp:246
+#: ions/open-meteo/ion_open_meteo.cpp:247
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow"
 msgstr "lichte sneeuw"
 
-#: ions/open-meteo/ion_open_meteo.cpp:247
+#: ions/open-meteo/ion_open_meteo.cpp:248
 #, kde-format
 msgctxt "weather condition"
 msgid "moderate snow"
 msgstr "sneeuw"
 
-#: ions/open-meteo/ion_open_meteo.cpp:248
+#: ions/open-meteo/ion_open_meteo.cpp:249
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow"
 msgstr "zware sneeuw"
 
-#: ions/open-meteo/ion_open_meteo.cpp:249
-#: ions/open-meteo/ion_open_meteo.cpp:251
+#: ions/open-meteo/ion_open_meteo.cpp:250
+#: ions/open-meteo/ion_open_meteo.cpp:252
 #, kde-format
 msgctxt "weather condition"
 msgid "showers"
 msgstr "buien"
 
-#: ions/open-meteo/ion_open_meteo.cpp:250
+#: ions/open-meteo/ion_open_meteo.cpp:251
 #, kde-format
 msgctxt "weather condition"
 msgid "light showers"
 msgstr "lichte buien"
 
-#: ions/open-meteo/ion_open_meteo.cpp:252
+#: ions/open-meteo/ion_open_meteo.cpp:253
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy showers"
 msgstr "zware buien"
 
-#: ions/open-meteo/ion_open_meteo.cpp:253
+#: ions/open-meteo/ion_open_meteo.cpp:254
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow rain showers"
 msgstr "lichte natte sneeuwbuien"
 
-#: ions/open-meteo/ion_open_meteo.cpp:254
+#: ions/open-meteo/ion_open_meteo.cpp:255
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow rain showers"
 msgstr "zware natte sneeuwbuien"
 
-#: ions/open-meteo/ion_open_meteo.cpp:255
+#: ions/open-meteo/ion_open_meteo.cpp:256
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow showers"
 msgstr "lichte sneeuwbuien"
 
-#: ions/open-meteo/ion_open_meteo.cpp:256
+#: ions/open-meteo/ion_open_meteo.cpp:257
 #, kde-format
 msgctxt "weather condition"
 msgid "snow showers"
 msgstr "sneeuwbuien"
 
-#: ions/open-meteo/ion_open_meteo.cpp:257
 #: ions/open-meteo/ion_open_meteo.cpp:258
+#: ions/open-meteo/ion_open_meteo.cpp:259
 #, kde-format
 msgctxt "weather condition"
 msgid "thunderstorm"
 msgstr "onweer"
 
-#: ions/open-meteo/ion_open_meteo.cpp:259
+#: ions/open-meteo/ion_open_meteo.cpp:260
 #, kde-format
 msgctxt "weather condition"
 msgid "light thunderstorm"
 msgstr "licht onweer"
 
-#: ions/open-meteo/ion_open_meteo.cpp:260
+#: ions/open-meteo/ion_open_meteo.cpp:261
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy thunderstorm"
 msgstr "zwaar onweer"
 
-#: ions/open-meteo/ion_open_meteo.cpp:261
-#: ions/open-meteo/ion_open_meteo.cpp:279
-#: ions/open-meteo/ion_open_meteo.cpp:281
+#: ions/open-meteo/ion_open_meteo.cpp:262
+#: ions/open-meteo/ion_open_meteo.cpp:280
+#: ions/open-meteo/ion_open_meteo.cpp:282
 #, kde-format
 msgctxt "weather condition"
 msgid "n/a"
 msgstr "n/b"
 
-#: ions/open-meteo/ion_open_meteo.cpp:264
+#: ions/open-meteo/ion_open_meteo.cpp:265
 #, kde-format
 msgctxt "weather condition"
 msgid "sunny"
 msgstr "zonnig"
 
-#: ions/open-meteo/ion_open_meteo.cpp:267
+#: ions/open-meteo/ion_open_meteo.cpp:268
 #, kde-format
 msgctxt "weather condition"
 msgid "clear sky"
 msgstr "heldere hemel"
 
-#: ions/open-meteo/ion_open_meteo.cpp:384
+#: ions/open-meteo/ion_open_meteo.cpp:385
 #, kde-format
 msgctxt "weather credit"
 msgid "Weather data by Open-Meteo"
 msgstr "Weergegevens door Open-Meteo"
 
-#: qml/config/config.qml:15
+#: qml/cards/ForecastDelegate.qml:95
+#, kde-format
+msgctxt "certain weather condition (probability percentage)"
+msgid "%1 (%2%)"
+msgstr "%1 (%2%)"
+
+#: qml/cards/ForecastDelegate.qml:110
+#, kde-format
+msgctxt "High and low temperature wrapper"
+msgid "%1/<font color='%2'>%3</font>"
+msgstr ""
+
+#: qml/cards/ForecastDelegate.qml:124
+#, kde-format
+msgctxt "Short for no data available"
+msgid "-"
+msgstr "-"
+
+#: qml/cards/ForecastDelegate.qml:136
+#, kde-format
+msgctxt "Probability of precipitation in percentage"
+msgid "☂%1%"
+msgstr "☂%1%"
+
+#: qml/config/config.qml:13
 #, kde-format
 msgctxt "@title"
 msgid "Weather Station"
 msgstr "Weerstation"
 
-#: qml/config/config.qml:21
+#: qml/config/config.qml:19
 #, kde-format
 msgctxt "@title"
 msgid "Appearance"
 msgstr "Uiterlijk"
 
-#: qml/config/config.qml:31
+#: qml/config/config.qml:25
 #, kde-format
 msgctxt "@title"
 msgid "Units"
 msgstr "Eenheden"
 
-#: qml/config/ConfigAppearance.qml:46 qml/config/ConfigWeatherStation.qml:119
+#: qml/config/ConfigAppearance.qml:48 qml/config/ConfigWeatherStation.qml:119
 #, kde-format
 msgctxt "@label:info. %1 is the name of a weather service"
 msgid ""
@@ -440,65 +457,89 @@ msgstr ""
 "“%1” biedt mogelijk niet de huidige temperatuur of andere "
 "weersomstandigheden voor deze locatie."
 
-#: qml/config/ConfigAppearance.qml:53
+#: qml/config/ConfigAppearance.qml:54
 #, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
 msgstr "Compacte modus"
 
-#: qml/config/ConfigAppearance.qml:61
+#: qml/config/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Temperatuur tonen:"
 
-#: qml/config/ConfigAppearance.qml:64
+#: qml/config/ConfigAppearance.qml:66
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Boven het widgetpictogram"
 
-#: qml/config/ConfigAppearance.qml:72
+#: qml/config/ConfigAppearance.qml:74
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Naast het widgetpictogram"
 
-#: qml/config/ConfigAppearance.qml:79
+#: qml/config/ConfigAppearance.qml:82
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Niet tonen"
 
-#: qml/config/ConfigAppearance.qml:88
+#: qml/config/ConfigAppearance.qml:93
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "In tekstballon tonen:"
 
-#: qml/config/ConfigAppearance.qml:89
+#: qml/config/ConfigAppearance.qml:94
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Temperatuur"
 
-#: qml/config/ConfigAppearance.qml:94
+#: qml/config/ConfigAppearance.qml:100
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Wind"
 
-#: qml/config/ConfigAppearance.qml:99
+#: qml/config/ConfigAppearance.qml:106
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Luchtdruk"
 
-#: qml/config/ConfigAppearance.qml:104
+#: qml/config/ConfigAppearance.qml:112
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "Luchtvochtigheid"
+
+#: qml/config/ConfigAppearance.qml:122
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Show temperature:"
+msgctxt "@label"
+msgid "Show temperature graph:"
+msgstr "Temperatuur tonen:"
+
+#: qml/config/ConfigAppearance.qml:123
+#, fuzzy, kde-format
+#| msgctxt "@title:tab Weather forecast"
+#| msgid "Forecast"
+msgctxt "@option:check"
+msgid "Hourly Forecast"
+msgstr "Voorspelling"
+
+#: qml/config/ConfigAppearance.qml:128
+#, fuzzy, kde-format
+#| msgctxt "@title:tab Weather forecast"
+#| msgid "Forecast"
+msgctxt "@option:check"
+msgid "Day Forecast"
+msgstr "Voorspelling"
 
 #: qml/config/ConfigUnits.qml:31
 #, kde-format
@@ -603,45 +644,145 @@ msgstr ""
 "het buiten gebruik zijn van de server bij de leverancier van het weerstation "
 "het tijdelijk onbereikbaar heeft gemaakt. Probeer het later nog eens."
 
-#: qml/ForecastView.qml:149
-#, kde-format
-msgctxt "certain weather condition (probability percentage)"
-msgid "%1 (%2%)"
-msgstr "%1 (%2%)"
+#: qml/DayForecastGraph.qml:42 qml/HourlyForecastGraph.qml:46
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Temperature"
+msgctxt "@label"
+msgid "Temperature"
+msgstr "Temperatuur"
 
-#: qml/ForecastView.qml:163
-#, kde-format
-msgctxt "Probability of precipitation in percentage"
-msgid "☂%1%"
-msgstr "☂%1%"
+#: qml/DayForecastGraph.qml:59 qml/HourlyForecastGraph.qml:63
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Temperature"
+msgctxt "@label"
+msgid "High Temperature"
+msgstr "Temperatuur"
 
-#: qml/ForecastView.qml:171 qml/ForecastView.qml:180
-#, kde-format
-msgctxt "Short for no data available"
-msgid "-"
-msgstr "-"
+#: qml/DayForecastGraph.qml:76 qml/HourlyForecastGraph.qml:80
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Temperature"
+msgctxt "@label"
+msgid "Low Temperature"
+msgstr "Temperatuur"
 
-#: qml/FullRepresentation.qml:49
+#: qml/DayForecastGraph.qml:93 qml/HourlyForecastGraph.qml:97
+#, kde-format
+msgctxt "@label"
+msgid "Chance of precipitation"
+msgstr ""
+
+#: qml/DetailsView.qml:35
+#, fuzzy, kde-format
+#| msgctxt "@label ground temperature"
+#| msgid "Dewpoint:"
+msgctxt "@label ground temperature"
+msgid "Dewpoint"
+msgstr "Dauwpunt:"
+
+#: qml/DetailsView.qml:40
+#, fuzzy, kde-format
+#| msgctxt "@option:check Show in tooltip: pressure"
+#| msgid "Pressure"
+msgctxt "@label"
+msgid "Pressure"
+msgstr "Luchtdruk"
+
+#: qml/DetailsView.qml:45
+#, fuzzy, kde-format
+#| msgctxt "@label pressure tendency, rising/falling/steady"
+#| msgid "Pressure Tendency:"
+msgctxt "@label pressure tendency, rising/falling/steady"
+msgid "Pressure tendency"
+msgstr "Luchtdruktrend:"
+
+#: qml/DetailsView.qml:50
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Visibility:"
+msgctxt "@label"
+msgid "Visibility"
+msgstr "Zicht:"
+
+#: qml/DetailsView.qml:63
+#, fuzzy, kde-format
+#| msgctxt "@option:check Show in tooltip: humidity"
+#| msgid "Humidity"
+msgctxt "@label"
+msgid "Humidity"
+msgstr "Luchtvochtigheid"
+
+#: qml/DetailsView.qml:68
+#, fuzzy, kde-format
+#| msgctxt "@label"
+#| msgid "Wind Gust:"
+msgctxt "@label"
+msgid "Wind gust"
+msgstr "Windvlagen:"
+
+#: qml/DetailsView.qml:73
+#, fuzzy, kde-format
+#| msgctxt "@label:listbox"
+#| msgid "Wind speed:"
+msgctxt "@label"
+msgid "Wind speed"
+msgstr "Windsnelheid:"
+
+#: qml/ForecastNavigation.qml:35
+#, kde-format
+msgctxt "@action"
+msgid "Go to first day"
+msgstr ""
+
+#: qml/ForecastNavigation.qml:54
+#, kde-format
+msgctxt "@action"
+msgid "Go to previous day"
+msgstr ""
+
+#: qml/ForecastNavigation.qml:134
+#, kde-format
+msgctxt "@action"
+msgid "Go to next day"
+msgstr ""
+
+#: qml/ForecastNavigation.qml:153
+#, kde-format
+msgctxt "@action"
+msgid "Go to last day"
+msgstr ""
+
+#: qml/FullRepresentation.qml:61
+#, fuzzy, kde-format
+#| msgctxt "@info:placeholder"
+#| msgid "Unable to load weather forecast"
+msgctxt "@action:button"
+msgid "Return to Weather Forecast"
+msgstr "Laden van weersvoorspelling lukt niet"
+
+#: qml/FullRepresentation.qml:78
 #, kde-format
 msgid "Please set your location"
 msgstr "Stel uw locatie in"
 
-#: qml/FullRepresentation.qml:53
+#: qml/FullRepresentation.qml:81
 #, kde-format
 msgid "Set location…"
 msgstr "Locatie instellen…"
 
-#: qml/FullRepresentation.qml:67
+#: qml/FullRepresentation.qml:95
 #, kde-format
 msgid "Unable to retrieve weather information for %1"
 msgstr "Ophalen van weerinformatie voor %1 lukt niet"
 
-#: qml/FullRepresentation.qml:67
+#: qml/FullRepresentation.qml:95
 #, kde-format
 msgid "Unable to retrieve weather information"
 msgstr "Ophalen van weerinformatie lukt niet"
 
-#: qml/FullRepresentation.qml:68
+#: qml/FullRepresentation.qml:96
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -652,13 +793,35 @@ msgstr ""
 "vanwege het niet beschikbaar zijn van de server bij de leverancier van het "
 "weerstation. Probeer het later nog eens."
 
-#: qml/main.qml:81 qml/TopPanel.qml:222
+#: qml/FullRepresentation.qml:105 qml/main.qml:117
+#, kde-format
+msgctxt "@info:placeholder"
+msgid "Unable to load weather forecast"
+msgstr "Laden van weersvoorspelling lukt niet"
+
+#: qml/FullRepresentation.qml:106
+#, fuzzy
+#| msgctxt "@info:usagetip"
+#| msgid ""
+#| "There may be a technical issue with the weather provider. If the issue "
+#| "persists for longer than a day, submit a bug report."
+msgctxt "@info:usagetip"
+msgid ""
+"There may be a technical issue with the weather provider. If the issue "
+"persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
+"cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
+"link>."
+msgstr ""
+"Er kan een technisch probleem zijn met de leverancier van het weer. Als het "
+"probleem langer dan een dag blijft, dien een bugrapport in."
+
+#: qml/main.qml:82
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "Rustig"
 
-#: qml/main.qml:103
+#: qml/main.qml:104
 #, kde-format
 msgctxt ""
 "@info:usagetip Minimize the length of this string so it is as short as "
@@ -667,17 +830,11 @@ msgctxt ""
 msgid "Set up Weather Report…"
 msgstr "Weerrapport opzetten…"
 
-#: qml/main.qml:112
+#: qml/main.qml:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr "Klik om een locatie te kiezen en het weer daar te monitoren"
-
-#: qml/main.qml:116 qml/SwitchPanel.qml:176
-#, kde-format
-msgctxt "@info:placeholder"
-msgid "Unable to load weather forecast"
-msgstr "Laden van weersvoorspelling lukt niet"
 
 #: qml/main.qml:130
 #, kde-format
@@ -691,86 +848,63 @@ msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: qml/main.qml:146
+#: qml/main.qml:145
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:158
+#: qml/main.qml:156
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/main.qml:167
+#: qml/main.qml:165
 #, kde-format
 msgid "Humidity: %1"
 msgstr "Luchtvochtigheid: %1"
 
-#: qml/NoticesView.qml:61
+#: qml/NoticesView.qml:61 qml/WarningsPage.qml:63
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
 msgstr "Meer informatie tonen over"
 
-#: qml/SwitchPanel.qml:34
+#: qml/StackedView.qml:51
+#, fuzzy, kde-format
+#| msgctxt "@title:tab Weather forecast"
+#| msgid "Forecast"
+msgctxt "@title"
+msgid "Hourly Forecast"
+msgstr "Voorspelling"
+
+#: qml/StackedView.qml:81
+#, fuzzy, kde-format
+#| msgctxt "@title:tab Weather forecast"
+#| msgid "Forecast"
+msgctxt "@title %1 is a number of days"
+msgid "%1-Day Forecast"
+msgstr "Voorspelling"
+
+#: qml/TabbedView.qml:40
 #, kde-format
-msgctxt "Forecast period timeframe"
-msgid "1 Day"
+msgctxt "@title:tab"
+msgid "Hourly"
+msgstr ""
+
+#: qml/TabbedView.qml:55
+#, fuzzy, kde-format
+#| msgctxt "Forecast period timeframe"
+#| msgid "1 Day"
+#| msgid_plural "%1 Days"
+msgctxt "@title:tab"
+msgid "%1 Day"
 msgid_plural "%1 Days"
 msgstr[0] "1 dag"
 msgstr[1] "%1 dagen"
 
-#: qml/SwitchPanel.qml:44
-#, kde-format
-msgctxt "@label ground temperature"
-msgid "Dewpoint:"
-msgstr "Dauwpunt:"
-
-#: qml/SwitchPanel.qml:49
-#, kde-format
-msgctxt "@label"
-msgid "Pressure:"
-msgstr "Luchtdruk:"
-
-#: qml/SwitchPanel.qml:54
-#, kde-format
-msgctxt "@label pressure tendency, rising/falling/steady"
-msgid "Pressure Tendency:"
-msgstr "Luchtdruktrend:"
-
-#: qml/SwitchPanel.qml:59
-#, kde-format
-msgctxt "@label"
-msgid "Visibility:"
-msgstr "Zicht:"
-
-#: qml/SwitchPanel.qml:72
-#, kde-format
-msgctxt "@label"
-msgid "Humidity:"
-msgstr "Luchtvochtigheid:"
-
-#: qml/SwitchPanel.qml:77
-#, kde-format
-msgctxt "@label"
-msgid "Wind Gust:"
-msgstr "Windvlagen:"
-
-#: qml/SwitchPanel.qml:94
-#, kde-format
-msgctxt "@title:tab Weather forecast"
-msgid "Forecast"
-msgstr "Voorspelling"
-
-#: qml/SwitchPanel.qml:98
-#, kde-format
-msgctxt "@title:tab"
-msgid "Details"
-msgstr "Details"
-
-#: qml/SwitchPanel.qml:103
+#: qml/TopPanel.qml:83
 #, kde-format
 msgctxt ""
 "@title:tab %1 is the number of weather notices (alerts, warnings, "
@@ -780,17 +914,7 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 melding"
 msgstr[1] "%1 meldingen"
 
-#: qml/SwitchPanel.qml:178
-#, kde-format
-msgctxt "@info:usagetip"
-msgid ""
-"There may be a technical issue with the weather provider. If the issue "
-"persists for longer than a day, submit a bug report."
-msgstr ""
-"Er kan een technisch probleem zijn met de leverancier van het weer. Als het "
-"probleem langer dan een dag blijft, dien een bugrapport in."
-
-#: qml/TopPanel.qml:138
+#: qml/TopPanel.qml:170
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
@@ -799,6 +923,32 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "Voelt als %1"
 
+#: qml/WeatherPage.qml:96
+#, fuzzy, kde-format
+#| msgid "Today"
+msgctxt "@label"
+msgid "Today"
+msgstr "Vandaag"
+
+#: qml/WeatherPage.qml:98
+#, kde-format
+msgctxt "@label"
+msgid "Tomorrow"
+msgstr ""
+
+#: qml/WeatherPage.qml:104
+#, kde-format
+msgctxt "@label"
+msgid "Today to Tomorrow"
+msgstr ""
+
+#: qml/WeatherPage.qml:106
+#, fuzzy, kde-format
+#| msgid "Today"
+msgctxt "@label %1 is a day of the week"
+msgid "Today to %1"
+msgstr "Vandaag"
+
 #: util.cpp:42
 #, kde-format
 msgctxt "Degree, unit symbol"
@@ -806,10 +956,12 @@ msgid "°"
 msgstr "°"
 
 #: util.cpp:46 util.cpp:50
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "temperature, unit"
+#| msgid "%1%2"
 msgctxt "temperature unitsymbol"
-msgid "%1 %2"
-msgstr "%1 %2"
+msgid "%1%2"
+msgstr "%1%2"
 
 #: util.cpp:60
 #, kde-format
@@ -829,15 +981,19 @@ msgctxt "@item %1 is a unit description and %2 its unit symbol"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: weatherdata/futuredays.cpp:71
+#: weatherdata/futuredays.cpp:292
 #, kde-format
-msgid "Day"
-msgstr "Dag"
+msgctxt "Short for Day"
+msgid "D"
+msgstr ""
 
-#: weatherdata/futuredays.cpp:74
-#, kde-format
-msgid "Night"
-msgstr "Nacht"
+#: weatherdata/futuredays.cpp:295
+#, fuzzy, kde-format
+#| msgctxt "wind direction"
+#| msgid "N"
+msgctxt "Short for Night"
+msgid "N"
+msgstr "N"
 
 #: weatherdata/lastobservation.cpp:262
 #, kde-format
@@ -864,6 +1020,31 @@ msgstr "Zeer hoog"
 msgid "Extreme"
 msgstr "Extreem"
 
+#~ msgid "N/A"
+#~ msgstr "N.v.t."
+
+#~ msgctxt "@label"
+#~ msgid "Pressure:"
+#~ msgstr "Luchtdruk:"
+
+#~ msgctxt "@label"
+#~ msgid "Humidity:"
+#~ msgstr "Luchtvochtigheid:"
+
+#~ msgctxt "@title:tab"
+#~ msgid "Details"
+#~ msgstr "Details"
+
+#~ msgctxt "temperature unitsymbol"
+#~ msgid "%1 %2"
+#~ msgstr "%1 %2"
+
+#~ msgid "Day"
+#~ msgstr "Dag"
+
+#~ msgid "Night"
+#~ msgstr "Nacht"
+
 #~ msgctxt "Geographical location: city, state, ISO-country-code"
 #~ msgid "%1, %2, %3"
 #~ msgstr "%1, %2, %3"
@@ -871,9 +1052,6 @@ msgstr "Extreem"
 #~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
 #~ msgid "%1 (%2), %3, %4"
 #~ msgstr "%1 (%2), %3, %4"
-
-#~ msgid "Today"
-#~ msgstr "Vandaag"
 
 #~ msgctxt "Short for Saturday"
 #~ msgid "Sat"
@@ -1086,10 +1264,6 @@ msgstr "Extreem"
 #~ msgctxt "Low temperature"
 #~ msgid "Low: %1"
 #~ msgstr "Laag: %1"
-
-#~ msgctxt "temperature, unit"
-#~ msgid "%1%2"
-#~ msgstr "%1%2"
 
 #~ msgctxt "distance, unit"
 #~ msgid "Visibility: %1 %2"
