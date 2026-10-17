@@ -97,3 +97,10 @@ private:
     std::optional<QString> m_info;
     std::optional<QDateTime> m_timestamp;
 };
+
+struct WarningsForeign {
+    Q_GADGET
+    QML_NAMED_ELEMENT(Warnings)
+    QML_UNCREATABLE("Enum access only")
+    QML_FOREIGN(Warnings)
+};

@@ -11,6 +11,8 @@ import QtQuick.Layouts
 import org.kde.plasma.components as PlasmaComponents
 import org.kde.kirigami as Kirigami
 
+import org.kde.plasma.weatherdata as WeatherData
+
 Kirigami.ScrollablePage {
     id: root
 
@@ -41,7 +43,7 @@ Kirigami.ScrollablePage {
                 Layout.alignment: Qt.AlignTop
                 Layout.minimumWidth: implicitWidth
                 implicitWidth: Kirigami.Units.iconSizes.smallMedium
-                source: (model.priority === Warnings.High) ? 'flag-red-symbolic' : (model.priority === Warnings.Medium) ? 'flag-yellow-symbolic' : 'flag-blue-symbolic'
+                source: (model.priority === WeatherData.Warnings.High) ? 'flag-red-symbolic' : (model.priority === WeatherData.Warnings.Medium) ? 'flag-yellow-symbolic' : 'flag-blue-symbolic'
             }
 
             Kirigami.SelectableLabel {
