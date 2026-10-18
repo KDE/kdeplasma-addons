@@ -275,6 +275,10 @@ void DWDIon::parseStationData(const QByteArray &data)
 {
     const QString stringData = QString::fromLatin1(data);
     const QList<QStringView> lines = QStringView(stringData).split(QChar::LineFeed);
+    if (lines.size() < 2) {
+        qCWarning(WEATHER::ION::DWD) << "Station catalogue has an invalid header";
+        return;
+    }
 
     // This loop parses the station file (https://www.dwd.de/DE/leistungen/met_verfahren_mosmix/mosmix_stationskatalog.cfg)
     // ID    ICAO NAME                 LAT    LON     ELEV
