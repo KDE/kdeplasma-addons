@@ -40,7 +40,7 @@ public:
     QDateTime sunriseTime;
     QDateTime sunsetTime;
 
-    QString condIconNumber;
+    uint condIconNumber = qQNaN();
     QString windDirection;
     float temperature = qQNaN();
     float humidity = qQNaN();
@@ -110,14 +110,14 @@ public:
     void fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> promise, const QString &placeInfo) override;
 
 private:
-    QMap<QString, ConditionIcons> getUniversalIcons() const;
-    QMap<QString, ConditionIcons> setupDayIconMappings() const;
-    QMap<QString, ConditionIcons> setupNightIconMappings() const;
-    QMap<QString, WindDirections> setupWindIconMappings() const;
+    QMap<uint, ConditionIcons> getUniversalIcons() const;
+    QMap<uint, ConditionIcons> setupDayIconMappings() const;
+    QMap<uint, ConditionIcons> setupNightIconMappings() const;
+    QMap<uint, WindDirections> setupWindIconMappings() const;
 
-    QMap<QString, ConditionIcons> const &dayIcons() const;
-    QMap<QString, ConditionIcons> const &nightIcons() const;
-    QMap<QString, WindDirections> const &windIcons() const;
+    QMap<uint, ConditionIcons> const &dayIcons() const;
+    QMap<uint, ConditionIcons> const &nightIcons() const;
+    QMap<uint, WindDirections> const &windIcons() const;
 
     KJob *requestAPIJob(const QUrl &url, QByteArray &result);
 
@@ -132,7 +132,7 @@ private:
 
     // Helper methods
     QString camelCaseString(const QString &text) const;
-    QString roundWindDirections(int windDirection) const;
+    int roundWindDirections(int windDirection) const;
     bool isNightTime(const QDateTime &dateTime) const;
     float parseNumber(const QVariant &number) const;
     QDateTime parseDateFromMSecs(const QVariant &timestamp) const;

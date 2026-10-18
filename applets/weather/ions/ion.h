@@ -141,6 +141,14 @@ protected:
      * \a windDirList a QList map pair of wind directions mapped to a enumeration of directions.
      * \a windDirection the current wind direction.
      */
+    QString getWindDirectionIcon(WindDirections windDirection) const;
+
+    /*!
+     * Returns wind icon element to display in applet.
+     *
+     * \a windDirList a QList map pair of wind directions mapped to a enumeration of directions.
+     * \a windDirection the current wind direction.
+     */
     QString getWindDirectionIcon(const QMap<QString, WindDirections> &windDirList, const QString &windDirection) const;
 
     /*!

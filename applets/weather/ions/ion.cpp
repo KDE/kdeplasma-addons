@@ -22,9 +22,9 @@ Ion::~Ion()
 /**
  * Return wind direction svg element to display in applet when given a wind direction.
  */
-QString Ion::getWindDirectionIcon(const QMap<QString, WindDirections> &windDirList, const QString &windDirection) const
+QString Ion::getWindDirectionIcon(WindDirections windDirection) const
 {
-    switch (windDirList[windDirection.toLower()]) {
+    switch (windDirection) {
     case N:
         return QStringLiteral("N");
     case NNE:
@@ -63,6 +63,14 @@ QString Ion::getWindDirectionIcon(const QMap<QString, WindDirections> &windDirLi
 
     // No icon available, use 'X'
     return QString();
+}
+
+/**
+ * Return weather icon to display in an applet when given a condition.
+ */
+QString Ion::getWindDirectionIcon(const QMap<QString, WindDirections> &directionList, const QString &condition) const
+{
+    return getWindDirectionIcon(directionList[condition.toLower()]);
 }
 
 /**
