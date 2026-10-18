@@ -171,6 +171,8 @@ void DWDIon::places_slotJobFinished(KJob *job)
 {
     if (job->error()) {
         qCWarning(WEATHER::ION::DWD) << "error during setup" << job->errorText();
+        m_locationPromise->finish();
+        clearLocationData();
         return;
     }
 
