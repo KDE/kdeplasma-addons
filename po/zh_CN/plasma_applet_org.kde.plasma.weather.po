@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-17 00:51+0000\n"
+"POT-Creation-Date: 2026-10-19 00:48+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -859,7 +859,7 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "湿度：%1"
 
-#: qml/NoticesView.qml:61 qml/WarningsPage.qml:63
+#: qml/NoticesView.qml:61 qml/WarningsPage.qml:65
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-17 00:51+0000\n"
+"POT-Creation-Date: 2026-10-19 00:48+0000\n"
 "PO-Revision-Date: 2024-07-25 02:13-0400\n"
 "Last-Translator: Agron Selimaj <as9902613@gmail.com>\n"
 "Language-Team: sq\n"
@@ -873,7 +873,7 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "Lagështia: %1"
 
-#: qml/NoticesView.qml:61 qml/WarningsPage.qml:63
+#: qml/NoticesView.qml:61 qml/WarningsPage.qml:65
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-17 00:51+0000\n"
-"PO-Revision-Date: 2026-10-13 11:48+0300\n"
+"POT-Creation-Date: 2026-10-19 00:48+0000\n"
+"PO-Revision-Date: 2026-10-18 19:44+0300\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -418,7 +418,7 @@ msgstr "%1 (%2%)"
 #, kde-format
 msgctxt "High and low temperature wrapper"
 msgid "%1/<font color='%2'>%3</font>"
-msgstr ""
+msgstr "%1/<font color='%2'>%3</font>"
 
 #: qml/cards/ForecastDelegate.qml:124
 #, kde-format
@@ -521,28 +521,22 @@ msgid "Humidity"
 msgstr "Drėgnumas"
 
 #: qml/config/ConfigAppearance.qml:122
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show temperature:"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature graph:"
-msgstr "Rodyti temperatūrą:"
+msgstr "Rodyti temperatūros kreivę:"
 
 #: qml/config/ConfigAppearance.qml:123
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@option:check"
 msgid "Hourly Forecast"
-msgstr "Orų prognozė"
+msgstr "Valandinė prognozė"
 
 #: qml/config/ConfigAppearance.qml:128
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@option:check"
 msgid "Day Forecast"
-msgstr "Orų prognozė"
+msgstr "Dienos prognozė"
 
 #: qml/config/ConfigUnits.qml:31
 #, kde-format
@@ -649,122 +643,100 @@ msgstr ""
 "teikėjo serveris yra atjungtas ir neprieinamas. Vėliau bandykite dar kartą."
 
 #: qml/DayForecastGraph.qml:42 qml/HourlyForecastGraph.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Temperature"
 msgstr "Temperatūra"
 
 #: qml/DayForecastGraph.qml:59 qml/HourlyForecastGraph.qml:63
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "High Temperature"
-msgstr "Temperatūra"
+msgstr "Aukšta temperatūra"
 
 #: qml/DayForecastGraph.qml:76 qml/HourlyForecastGraph.qml:80
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Low Temperature"
-msgstr "Temperatūra"
+msgstr "Žema temperatūra"
 
 #: qml/DayForecastGraph.qml:93 qml/HourlyForecastGraph.qml:97
 #, kde-format
 msgctxt "@label"
 msgid "Chance of precipitation"
-msgstr ""
+msgstr "Kritulių tikimybė"
 
 #: qml/DetailsView.qml:35
-#, fuzzy, kde-format
-#| msgctxt "@label ground temperature"
-#| msgid "Dewpoint:"
+#, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint"
-msgstr "Rasos taškas:"
+msgstr "Rasos taškas"
 
 #: qml/DetailsView.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@option:check Show in tooltip: pressure"
-#| msgid "Pressure"
+#, kde-format
 msgctxt "@label"
 msgid "Pressure"
 msgstr "Slėgis"
 
 #: qml/DetailsView.qml:45
-#, fuzzy, kde-format
-#| msgctxt "@label pressure tendency, rising/falling/steady"
-#| msgid "Pressure Tendency:"
+#, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure tendency"
-msgstr "Slėgio tendencija:"
+msgstr "Slėgio tendencija"
 
 #: qml/DetailsView.qml:50
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Visibility:"
+#, kde-format
 msgctxt "@label"
 msgid "Visibility"
-msgstr "Matomumas:"
+msgstr "Matomumas"
 
 #: qml/DetailsView.qml:63
-#, fuzzy, kde-format
-#| msgctxt "@option:check Show in tooltip: humidity"
-#| msgid "Humidity"
+#, kde-format
 msgctxt "@label"
 msgid "Humidity"
 msgstr "Drėgnumas"
 
 #: qml/DetailsView.qml:68
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Wind Gust:"
+#, kde-format
 msgctxt "@label"
 msgid "Wind gust"
-msgstr "Vėjo gūsiai:"
+msgstr "Vėjo gūsiai"
 
 #: qml/DetailsView.qml:73
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Wind speed:"
+#, kde-format
 msgctxt "@label"
 msgid "Wind speed"
-msgstr "Vėjo greitis:"
+msgstr "Vėjo greitis"
 
 #: qml/ForecastNavigation.qml:35
 #, kde-format
 msgctxt "@action"
 msgid "Go to first day"
-msgstr ""
+msgstr "Eiti į pirmą dieną"
 
 #: qml/ForecastNavigation.qml:54
 #, kde-format
 msgctxt "@action"
 msgid "Go to previous day"
-msgstr ""
+msgstr "Eiti į ankstesnę dieną"
 
 #: qml/ForecastNavigation.qml:134
 #, kde-format
 msgctxt "@action"
 msgid "Go to next day"
-msgstr ""
+msgstr "Eiti į kitą dieną"
 
 #: qml/ForecastNavigation.qml:153
 #, kde-format
 msgctxt "@action"
 msgid "Go to last day"
-msgstr ""
+msgstr "Eiti į paskutinę dieną"
 
 #: qml/FullRepresentation.qml:61
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Unable to load weather forecast"
+#, kde-format
 msgctxt "@action:button"
 msgid "Return to Weather Forecast"
-msgstr "Nepavyko įkelti orų prognozės"
+msgstr "Grįžti į orų prognozę"
 
 #: qml/FullRepresentation.qml:78
 #, kde-format
@@ -803,11 +775,6 @@ msgid "Unable to load weather forecast"
 msgstr "Nepavyko įkelti orų prognozės"
 
 #: qml/FullRepresentation.qml:106
-#, fuzzy
-#| msgctxt "@info:usagetip"
-#| msgid ""
-#| "There may be a technical issue with the weather provider. If the issue "
-#| "persists for longer than a day, submit a bug report."
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
@@ -816,7 +783,9 @@ msgid ""
 "link>."
 msgstr ""
 "Gali būti techninių problemų susijusių su orų informacijos teikėju. Jei "
-"problema išlieka ilgiau nei vieną dieną, pateikite pranešimą apie klaidą."
+"problema išlieka ilgiau nei vieną dieną, <link url='https://bugs.kde.org/"
+"enter_bug.cgi?product=plasmashell&component=Weather%20widget'>pateikite "
+"pranešimą apie klaidą</link>."
 
 #: qml/main.qml:82
 #, kde-format
@@ -868,39 +837,32 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "Drėgnumas: %1"
 
-#: qml/NoticesView.qml:61 qml/WarningsPage.qml:63
+#: qml/NoticesView.qml:61 qml/WarningsPage.qml:65
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
 msgstr "Rodyti daugiau informacijos"
 
 #: qml/StackedView.qml:51
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@title"
 msgid "Hourly Forecast"
-msgstr "Orų prognozė"
+msgstr "Valandinė prognozė"
 
 #: qml/StackedView.qml:81
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@title %1 is a number of days"
 msgid "%1-Day Forecast"
-msgstr "Orų prognozė"
+msgstr "%1 dienų prognozė"
 
 #: qml/TabbedView.qml:40
 #, kde-format
 msgctxt "@title:tab"
 msgid "Hourly"
-msgstr ""
+msgstr "Valandinė"
 
 #: qml/TabbedView.qml:55
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "@title:tab"
 msgid "%1 Day"
 msgid_plural "%1 Days"
@@ -931,8 +893,7 @@ msgid "Feels like %1"
 msgstr "Jutiminė temperatūra %1"
 
 #: qml/WeatherPage.qml:96
-#, fuzzy, kde-format
-#| msgid "Today"
+#, kde-format
 msgctxt "@label"
 msgid "Today"
 msgstr "Šiandien"
@@ -941,20 +902,19 @@ msgstr "Šiandien"
 #, kde-format
 msgctxt "@label"
 msgid "Tomorrow"
-msgstr ""
+msgstr "Rytoj"
 
 #: qml/WeatherPage.qml:104
 #, kde-format
 msgctxt "@label"
 msgid "Today to Tomorrow"
-msgstr ""
+msgstr "Nuo šiandien iki rytojaus"
 
 #: qml/WeatherPage.qml:106
-#, fuzzy, kde-format
-#| msgid "Today"
+#, kde-format
 msgctxt "@label %1 is a day of the week"
 msgid "Today to %1"
-msgstr "Šiandien"
+msgstr "Nuo šiandien iki %1"
 
 #: util.cpp:42
 #, kde-format
@@ -963,9 +923,7 @@ msgid "°"
 msgstr "°"
 
 #: util.cpp:46 util.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "temperature, unit"
-#| msgid "%1%2"
+#, kde-format
 msgctxt "temperature unitsymbol"
 msgid "%1%2"
 msgstr "%1%2"
@@ -992,15 +950,13 @@ msgstr "%1 (%2)"
 #, kde-format
 msgctxt "Short for Day"
 msgid "D"
-msgstr ""
+msgstr "D"
 
 #: weatherdata/futuredays.cpp:295
-#, fuzzy, kde-format
-#| msgctxt "wind direction"
-#| msgid "N"
+#, kde-format
 msgctxt "Short for Night"
 msgid "N"
-msgstr "Š"
+msgstr "N"
 
 #: weatherdata/lastobservation.cpp:262
 #, kde-format

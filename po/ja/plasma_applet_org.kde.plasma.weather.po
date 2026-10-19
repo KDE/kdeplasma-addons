@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-17 00:51+0000\n"
+"POT-Creation-Date: 2026-10-19 00:48+0000\n"
 "PO-Revision-Date: 2026-03-31 20:44+0900\n"
 "Last-Translator: Mint <5602mint@gmail.com>\n"
 "Language-Team: Japanese <kde-i18n-doc@kde.org>\n"
@@ -864,7 +864,7 @@ msgstr "%1 (%2)"
 msgid "Humidity: %1"
 msgstr "湿度: %1"
 
-#: qml/NoticesView.qml:61 qml/WarningsPage.qml:63
+#: qml/NoticesView.qml:61 qml/WarningsPage.qml:65
 #, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
