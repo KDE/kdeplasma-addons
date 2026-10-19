@@ -34,7 +34,8 @@ static const QUrlQuery WEATHER_QUERY{
     {u"daily"_s, u"weather_code,temperature_2m_max,temperature_2m_min,wind_direction_10m_dominant,precipitation_probability_mean"_s},
     {u"current"_s,
      u"temperature_2m,weather_code,wind_speed_10m,wind_direction_10m,relative_humidity_2m,apparent_temperature,is_day,wind_speed_10m,wind_direction_10m,wind_gusts_10m,surface_pressure,relative_humidity_2m"_s},
-    {u"timezone"_s, u"auto"_s}};
+    {u"timezone"_s, u"auto"_s},
+    {u"timeformat"_s, u"unixtime"_s}};
 static const QStringList ADMIN_AREA_KEYS{
     u"name"_s,
     u"admin4"_s,
@@ -134,6 +135,15 @@ static QString windDirectionToStr(double dir)
 {
     auto index = qRound(dir / 22.5) % 16;
     return WIND_DIRECTION_STRS[index];
+}
+
+QDateTime parseTimestamp(const qint64 &unixTimestamp, const QTimeZone &timezone)
+{
+    // 1. Instantiate QDateTime directly from the Unix epoch seconds in UTC
+    QDateTime utcDateTime = QDateTime::fromMSecsSinceEpoch(unixTimestamp * 1000, QTimeZone::UTC);
+
+    // 2. Convert the UTC time to the DST-aware target local timezone
+    return utcDateTime.toTimeZone(timezone);
 }
 
 template<class T>
@@ -368,9 +378,8 @@ void OpenMeteoIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Foreca
             qCDebug(IONENGINE_OPEN_METEO) << "validated" << res.value();
             const QJsonObject j = std::move(res).value();
             const QJsonObject current = j[u"current"_s].toObject();
-            auto time = QDateTime::fromString(current[u"time"_s].toString(), Qt::ISODate);
             const auto timezone = QTimeZone(j[u"timezone"_s].toString().toLocal8Bit());
-            time.setTimeZone(timezone);
+            auto time = parseTimestamp(current[u"time"_s].toInteger(), timezone);
             const int curWeatherCode = current[u"weather_code"_s].toInt();
             const int currentIsDay = !!current[u"is_day"_s].toInt();
             Station station;
@@ -403,7 +412,7 @@ void OpenMeteoIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Foreca
             const QJsonObject hourlyForecast = j[u"hourly"_s].toObject();
             const qsizetype numHours = hourlyForecast[u"time"_s].toArray().size();
             for (qsizetype hour = 0; hour < numHours; ++hour) {
-                const auto forecastDate = QDateTime::fromString(hourlyForecast[u"time"_s].toArray()[hour].toString(), Qt::ISODate);
+                auto forecastDate = parseTimestamp(hourlyForecast[u"time"_s].toArray()[hour].toInteger(), timezone);
                 FutureHourForecast futureHourForecast(forecastDate);
                 const bool isDay = true;
                 const int weatherCode = hourlyForecast[u"weather_code"_s].toArray()[hour].toInt();
@@ -420,7 +429,7 @@ void OpenMeteoIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Foreca
             const QJsonObject dailyForecast = j[u"daily"_s].toObject();
             const qsizetype numDays = dailyForecast[u"time"_s].toArray().size();
             for (qsizetype day = 0; day < numDays; ++day) {
-                const auto forecastDate = QDateTime::fromString(dailyForecast[u"time"_s].toArray()[day].toString(), Qt::ISODate);
+                auto forecastDate = parseTimestamp(dailyForecast[u"time"_s].toArray()[day].toInteger(), timezone);
                 FutureDayForecast futureDayForecast(forecastDate);
                 FutureForecast futureForecast;
                 const bool isDay = true;
