@@ -232,7 +232,17 @@ ColumnLayout {
                         return new Date();
                     }
                     const maxDate = new Date(root.futureHoursPoints.minDate);
-                    maxDate.setDate(maxDate.getDate() + root.futureHoursPoints.totalDays);
+
+                    // The UTC offset can change between minDate and maxDate due to daylight
+                    // saving time. Compensate for this difference to keep the graph's date
+                    // range aligned with the expected number of hours.
+                    const minDateOffset = root.futureHoursPoints.minDate.getTimezoneOffset();
+                    const maxDateOffset = root.futureHoursPoints.maxDate.getTimezoneOffset();
+
+                    const dstDifferenceHours = (minDateOffset - maxDateOffset) / 60;
+
+                    maxDate.setHours(maxDate.getHours() + root.futureHoursPoints.totalDays * 24 + dstDifferenceHours);
+
                     return maxDate;
                 }
 
