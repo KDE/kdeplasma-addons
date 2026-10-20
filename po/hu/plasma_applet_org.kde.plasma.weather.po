@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-19 00:48+0000\n"
+"POT-Creation-Date: 2026-10-20 00:54+0000\n"
 "PO-Revision-Date: 2026-06-18 22:43+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -178,231 +178,231 @@ msgctxt ""
 msgid " then "
 msgstr " majd "
 
-#: ions/open-meteo/ion_open_meteo.cpp:218
-#: ions/open-meteo/ion_open_meteo.cpp:219
+#: ions/open-meteo/ion_open_meteo.cpp:228
+#: ions/open-meteo/ion_open_meteo.cpp:229
 #, kde-format
 msgctxt "weather condition"
 msgid "few clouds"
 msgstr "kevés felhő"
 
-#: ions/open-meteo/ion_open_meteo.cpp:220
-#: ions/open-meteo/ion_open_meteo.cpp:221
+#: ions/open-meteo/ion_open_meteo.cpp:230
+#: ions/open-meteo/ion_open_meteo.cpp:231
 #, kde-format
 msgctxt "weather condition"
 msgid "cloudy"
 msgstr "felhős"
 
-#: ions/open-meteo/ion_open_meteo.cpp:222
-#: ions/open-meteo/ion_open_meteo.cpp:223
+#: ions/open-meteo/ion_open_meteo.cpp:232
+#: ions/open-meteo/ion_open_meteo.cpp:233
 #, kde-format
 msgctxt "weather condition"
 msgid "overcast"
 msgstr "borús"
 
-#: ions/open-meteo/ion_open_meteo.cpp:224
-#: ions/open-meteo/ion_open_meteo.cpp:225
-#: ions/open-meteo/ion_open_meteo.cpp:226
+#: ions/open-meteo/ion_open_meteo.cpp:234
+#: ions/open-meteo/ion_open_meteo.cpp:235
+#: ions/open-meteo/ion_open_meteo.cpp:236
 #, kde-format
 msgctxt "weather condition"
 msgid "haze"
 msgstr "homály"
 
-#: ions/open-meteo/ion_open_meteo.cpp:227
-#: ions/open-meteo/ion_open_meteo.cpp:228
+#: ions/open-meteo/ion_open_meteo.cpp:237
+#: ions/open-meteo/ion_open_meteo.cpp:238
 #, kde-format
 msgctxt "weather condition"
 msgid "fog with icing"
 msgstr "köd és jegesedés"
 
-#: ions/open-meteo/ion_open_meteo.cpp:229
-#: ions/open-meteo/ion_open_meteo.cpp:230
-#: ions/open-meteo/ion_open_meteo.cpp:232
+#: ions/open-meteo/ion_open_meteo.cpp:239
+#: ions/open-meteo/ion_open_meteo.cpp:240
+#: ions/open-meteo/ion_open_meteo.cpp:242
 #, kde-format
 msgctxt "weather condition"
 msgid "drizzle"
 msgstr "szitáló eső"
 
-#: ions/open-meteo/ion_open_meteo.cpp:231
+#: ions/open-meteo/ion_open_meteo.cpp:241
 #, kde-format
 msgctxt "weather condition"
 msgid "light drizzle"
 msgstr "gyenge szitálás"
 
-#: ions/open-meteo/ion_open_meteo.cpp:233
+#: ions/open-meteo/ion_open_meteo.cpp:243
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy drizzle"
 msgstr "erős szitálás"
 
-#: ions/open-meteo/ion_open_meteo.cpp:234
+#: ions/open-meteo/ion_open_meteo.cpp:244
 #, kde-format
 msgctxt "weather condition"
 msgid "freezing drizzle"
 msgstr "jeges szitálás"
 
-#: ions/open-meteo/ion_open_meteo.cpp:235
+#: ions/open-meteo/ion_open_meteo.cpp:245
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy freezing drizzle"
 msgstr "erős jeges szitálás"
 
-#: ions/open-meteo/ion_open_meteo.cpp:236
+#: ions/open-meteo/ion_open_meteo.cpp:246
 #, kde-format
 msgctxt "weather condition"
 msgid "rain"
 msgstr "eső"
 
-#: ions/open-meteo/ion_open_meteo.cpp:237
-#: ions/open-meteo/ion_open_meteo.cpp:238
+#: ions/open-meteo/ion_open_meteo.cpp:247
+#: ions/open-meteo/ion_open_meteo.cpp:248
 #, kde-format
 msgctxt "weather condition"
 msgid "light rain"
 msgstr "csendes eső"
 
-#: ions/open-meteo/ion_open_meteo.cpp:239
+#: ions/open-meteo/ion_open_meteo.cpp:249
 #, kde-format
 msgctxt "weather condition"
 msgid "moderate rain"
 msgstr "mérsékelt esőzés"
 
-#: ions/open-meteo/ion_open_meteo.cpp:240
+#: ions/open-meteo/ion_open_meteo.cpp:250
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain"
 msgstr "heves esőzés"
 
-#: ions/open-meteo/ion_open_meteo.cpp:241
+#: ions/open-meteo/ion_open_meteo.cpp:251
 #, kde-format
 msgctxt "weather condition"
 msgid "light freezing rain"
 msgstr "enyhe ónos eső"
 
-#: ions/open-meteo/ion_open_meteo.cpp:242
+#: ions/open-meteo/ion_open_meteo.cpp:252
 #, kde-format
 msgctxt "weather condition"
 msgid "freezing rain"
 msgstr "ónos eső"
 
-#: ions/open-meteo/ion_open_meteo.cpp:243
+#: ions/open-meteo/ion_open_meteo.cpp:253
 #, kde-format
 msgctxt "weather condition"
 msgid "light rain snow"
 msgstr "enyhe havaseső"
 
-#: ions/open-meteo/ion_open_meteo.cpp:244
+#: ions/open-meteo/ion_open_meteo.cpp:254
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain snow"
 msgstr "heves havaseső"
 
-#: ions/open-meteo/ion_open_meteo.cpp:245
+#: ions/open-meteo/ion_open_meteo.cpp:255
 #, kde-format
 msgctxt "weather condition"
 msgid "snow"
 msgstr "hó"
 
-#: ions/open-meteo/ion_open_meteo.cpp:246
-#: ions/open-meteo/ion_open_meteo.cpp:247
+#: ions/open-meteo/ion_open_meteo.cpp:256
+#: ions/open-meteo/ion_open_meteo.cpp:257
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow"
 msgstr "enyhe havazás"
 
-#: ions/open-meteo/ion_open_meteo.cpp:248
+#: ions/open-meteo/ion_open_meteo.cpp:258
 #, kde-format
 msgctxt "weather condition"
 msgid "moderate snow"
 msgstr "közepes havazás"
 
-#: ions/open-meteo/ion_open_meteo.cpp:249
+#: ions/open-meteo/ion_open_meteo.cpp:259
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow"
 msgstr "erős havazás"
 
-#: ions/open-meteo/ion_open_meteo.cpp:250
-#: ions/open-meteo/ion_open_meteo.cpp:252
+#: ions/open-meteo/ion_open_meteo.cpp:260
+#: ions/open-meteo/ion_open_meteo.cpp:262
 #, kde-format
 msgctxt "weather condition"
 msgid "showers"
 msgstr "záporok"
 
-#: ions/open-meteo/ion_open_meteo.cpp:251
+#: ions/open-meteo/ion_open_meteo.cpp:261
 #, kde-format
 msgctxt "weather condition"
 msgid "light showers"
 msgstr "enyhe záporok"
 
-#: ions/open-meteo/ion_open_meteo.cpp:253
+#: ions/open-meteo/ion_open_meteo.cpp:263
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy showers"
 msgstr "heves záporok"
 
-#: ions/open-meteo/ion_open_meteo.cpp:254
+#: ions/open-meteo/ion_open_meteo.cpp:264
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow rain showers"
 msgstr "enyhe hózáporok"
 
-#: ions/open-meteo/ion_open_meteo.cpp:255
+#: ions/open-meteo/ion_open_meteo.cpp:265
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow rain showers"
 msgstr "erős hózáporok"
 
-#: ions/open-meteo/ion_open_meteo.cpp:256
+#: ions/open-meteo/ion_open_meteo.cpp:266
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow showers"
 msgstr "enyhe hózáporok"
 
-#: ions/open-meteo/ion_open_meteo.cpp:257
+#: ions/open-meteo/ion_open_meteo.cpp:267
 #, kde-format
 msgctxt "weather condition"
 msgid "snow showers"
 msgstr "hózáporok"
 
-#: ions/open-meteo/ion_open_meteo.cpp:258
-#: ions/open-meteo/ion_open_meteo.cpp:259
+#: ions/open-meteo/ion_open_meteo.cpp:268
+#: ions/open-meteo/ion_open_meteo.cpp:269
 #, kde-format
 msgctxt "weather condition"
 msgid "thunderstorm"
 msgstr "vihar"
 
-#: ions/open-meteo/ion_open_meteo.cpp:260
+#: ions/open-meteo/ion_open_meteo.cpp:270
 #, kde-format
 msgctxt "weather condition"
 msgid "light thunderstorm"
 msgstr "Enyhe vihar"
 
-#: ions/open-meteo/ion_open_meteo.cpp:261
+#: ions/open-meteo/ion_open_meteo.cpp:271
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy thunderstorm"
 msgstr "Erős vihar"
 
-#: ions/open-meteo/ion_open_meteo.cpp:262
-#: ions/open-meteo/ion_open_meteo.cpp:280
-#: ions/open-meteo/ion_open_meteo.cpp:282
+#: ions/open-meteo/ion_open_meteo.cpp:272
+#: ions/open-meteo/ion_open_meteo.cpp:290
+#: ions/open-meteo/ion_open_meteo.cpp:292
 #, kde-format
 msgctxt "weather condition"
 msgid "n/a"
 msgstr "n/a"
 
-#: ions/open-meteo/ion_open_meteo.cpp:265
+#: ions/open-meteo/ion_open_meteo.cpp:275
 #, kde-format
 msgctxt "weather condition"
 msgid "sunny"
 msgstr "napos"
 
-#: ions/open-meteo/ion_open_meteo.cpp:268
+#: ions/open-meteo/ion_open_meteo.cpp:278
 #, kde-format
 msgctxt "weather condition"
 msgid "clear sky"
 msgstr "tiszta ég"
 
-#: ions/open-meteo/ion_open_meteo.cpp:385
+#: ions/open-meteo/ion_open_meteo.cpp:394
 #, kde-format
 msgctxt "weather credit"
 msgid "Weather data by Open-Meteo"
