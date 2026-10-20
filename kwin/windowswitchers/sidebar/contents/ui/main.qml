@@ -24,7 +24,7 @@ KWin.TabBoxSwitcher {
         id: dialog
         location: Application.layoutDirection === Qt.RightToLeft ? PlasmaCore.Types.RightEdge : PlasmaCore.Types.LeftEdge
         visible: tabBox.visible
-        flags: Qt.Popup | Qt.X11BypassWindowManagerHint
+        flags: Qt.ToolTip | Qt.X11BypassWindowManagerHint
         x: screenGeometry.x + (Application.layoutDirection === Qt.RightToLeft ? screenGeometry.width - width : 0)
         y: screenGeometry.y
 
