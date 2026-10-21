@@ -128,7 +128,6 @@ void DWDIon::clearForecastData()
     m_measurementData.clear();
     m_sunriseTime = {};
     m_sunsetTime = {};
-    m_weatherData.reset();
     m_forecast.reset();
     m_forecastPromise.reset();
 }
@@ -213,7 +212,6 @@ void DWDIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> 
     m_weatherName = info.first();
     m_weatherID = info.last();
 
-    m_weatherData = std::make_shared<WeatherData>();
     m_forecast = std::make_shared<Forecast>();
 
     // Fetch forecast data

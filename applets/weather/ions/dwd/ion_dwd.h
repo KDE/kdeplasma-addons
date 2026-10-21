@@ -30,12 +30,6 @@ namespace KIO
 class Job;
 }
 
-class WeatherData
-{
-public:
-    QString place;
-};
-
 class DWDIon : public Ion
 {
     Q_OBJECT
@@ -101,7 +95,6 @@ private:
     QByteArray m_measurementData;
     QDateTime m_sunriseTime;
     QDateTime m_sunsetTime;
-    std::shared_ptr<WeatherData> m_weatherData;
     std::shared_ptr<Forecast> m_forecast;
 
     // used to handle the old format of a forecast request string
