@@ -700,7 +700,7 @@ std::optional<QDateTime> DWDIon::parseDateFromMSecs(const QVariant &timestamp) c
 
 int DWDIon::roundWindDirections(int windDirection) const
 {
-    return qRound(((float)windDirection) / 100) * 10;
+    return qRound(static_cast<float>(windDirection) / 100.0) * 10;
 }
 
 QString DWDIon::camelCaseString(const QString &text) const
