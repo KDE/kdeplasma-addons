@@ -235,6 +235,8 @@ PlasmoidItem {
             WebEngineView {
                 id: webview
                 anchors.fill: parent
+                settings.javascriptCanAccessClipboard: true
+                settings.javascriptCanPaste: true
                 onUrlChanged: plasmoid.configuration.url = url;
                 Component.onCompleted: url = plasmoid.configuration.useDefaultUrl ? plasmoid.configuration.defaultUrl : plasmoid.configuration.url;
 
