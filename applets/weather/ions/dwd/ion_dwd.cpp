@@ -367,20 +367,13 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
         const QVariantList tempList = forecast1Map[u"temperature"_s].toList();
         const QVariantList precipList = forecast1Map[u"precipitationTotal"_s].toList();
         const QVariantList iconList = forecast1Map[u"icon1h"_s].toList();
-        const QVariantList windSpeedList = forecast1Map[u"windSpeed"_s].toList();
-        const QVariantList windDirectionList = forecast1Map[u"windDirection"_s].toList();
         const QVariantList isDayList = forecast1Map[u"isDay"_s].toList();
-
-        QList<WeatherData::HourlyForecastInfo> &hourlyForecasts = m_weatherData->hourlyForecasts;
-        hourlyForecasts.clear();
 
         const qsizetype count = std::min(tempList.size(), iconList.size());
 
-        hourlyForecasts.reserve(count);
+        const auto futureHours = std::make_shared<FutureHours>();
 
         for (qsizetype hourNumber = 0; hourNumber < count; ++hourNumber) {
-            WeatherData::HourlyForecastInfo info;
-
             const qlonglong timestamp = start + (static_cast<qlonglong>(hourNumber) * timeStep);
 
             // DWD provides forecasts starting from the beginning of the day. However, for most stations,
@@ -392,19 +385,19 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
                 continue;
             }
 
-            info.period = QDateTime::fromMSecsSinceEpoch(timestamp);
+            FutureHourForecast futureForecast(QDateTime::fromMSecsSinceEpoch(timestamp));
 
             if (hourNumber < tempList.size()) {
                 const auto temp = parseNumber(tempList[hourNumber]);
                 if (temp.has_value()) {
-                    info.temp = temp.value();
+                    futureForecast.setGeneralTemp(temp.value());
                 }
             }
 
             if (hourNumber < precipList.size()) {
                 const auto precipitation = parseNumber(precipList[hourNumber]);
                 if (precipitation.has_value()) {
-                    info.precipitation = precipitation.value();
+                    futureForecast.setConditionProbability(precipitation.value());
                 }
             }
 
@@ -413,28 +406,21 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
                 if (hourNumber < isDayList.size()) {
                     isDay = isDayList[hourNumber].toBool();
                 }
-                int iconCode = iconList.value(hourNumber).toInt();
-                if (isDay) {
-                    info.iconName = getWeatherIcon(dayIcons().value(iconCode));
-                } else {
-                    info.iconName = getWeatherIcon(nightIcons().value(iconCode));
+                bool iconCodeValid = false;
+                int iconCode = iconList.value(hourNumber).toInt(&iconCodeValid);
+                if (iconCodeValid) {
+                    if (isDay) {
+                        futureForecast.setConditionIcon(getWeatherIcon(dayIcons().value(iconCode)));
+                    } else {
+                        futureForecast.setConditionIcon(getWeatherIcon(nightIcons().value(iconCode)));
+                    }
                 }
             }
 
-            if (hourNumber < windSpeedList.size()) {
-                const auto windSpeed = parseNumber(windSpeedList[hourNumber]);
-                if (windSpeed.has_value()) {
-                    info.windSpeed = windSpeed.value();
-                }
-            }
-
-            if (hourNumber < windDirectionList.size()) {
-                int windDirection = roundWindDirections(windDirectionList[hourNumber].toInt());
-                info.windDirection = getWindDirectionIcon(windIcons().value(windDirection));
-            }
-
-            hourlyForecasts.append(info);
+            futureHours->addHour(futureForecast);
         }
+
+        m_forecast->setFutureHours(futureHours);
 
         // Day Forecast data
         QVariantList daysList = weatherMap[u"days"_s].toList();
@@ -622,25 +608,6 @@ void DWDIon::updateWeather()
     metaData.setPressureUnit(KUnitConversion::Hectopascal);
 
     m_forecast->setMetadata(metaData);
-
-    if (!m_weatherData->hourlyForecasts.isEmpty()) {
-        auto futureHours = std::make_shared<FutureHours>();
-
-        int hours = 0;
-        for (const auto &hourForecast : m_weatherData->hourlyForecasts) {
-            FutureHourForecast futureHour(hourForecast.period);
-
-            futureHour.setConditionProbability(hourForecast.precipitation);
-            futureHour.setConditionIcon(hourForecast.iconName);
-            futureHour.setGeneralTemp(hourForecast.temp);
-
-            futureHours->addHour(futureHour);
-            ++hours;
-        }
-        qCDebug(WEATHER::ION::DWD) << "Total forecast hours: " << hours;
-
-        m_forecast->setFutureHours(futureHours);
-    }
 
     if (!m_weatherData->dayForecasts.isEmpty()) {
         auto futureDays = std::make_shared<FutureDays>();

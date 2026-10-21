@@ -36,20 +36,6 @@ public:
     QString place;
 
     // 7 forecast
-    struct HourlyForecastInfo {
-        QDateTime period;
-        QString iconName;
-        QString summary;
-        float temp = qQNaN();
-        int precipitation = 0;
-        float windSpeed = qQNaN();
-        QString windDirection;
-    };
-
-    // 7 day forecast
-    QList<HourlyForecastInfo> hourlyForecasts;
-
-    // 7 forecast
     struct DayForecastInfo {
         QDateTime period;
         QString iconName;
