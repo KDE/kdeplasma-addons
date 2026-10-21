@@ -49,11 +49,6 @@ public:
     float gustSpeed = qQNaN();
     float dewpoint = qQNaN();
 
-    // If current observations not available, use forecast data for current day
-    QString windDirectionAlt;
-    float windSpeedAlt = qQNaN();
-    float gustSpeedAlt = qQNaN();
-
     // 7 forecast
     struct HourlyForecastInfo {
         QDateTime period;

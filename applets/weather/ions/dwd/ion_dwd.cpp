@@ -447,11 +447,6 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
             dayForecast.iconName = getWeatherIcon(dayIcons().value(dayMap[u"icon"_s].toInt()));
 
             if (dayNumber == 0) {
-                // These alternative measurements are used, when the stations doesn't have it's own measurements, uses forecast data from the current day
-                weatherData.windSpeedAlt = parseNumber(dayMap[u"windSpeed"_s]);
-                weatherData.gustSpeedAlt = parseNumber(dayMap[u"windGust"_s]);
-                weatherData.windDirectionAlt = getWindDirectionIcon(windIcons().value(roundWindDirections(dayMap[u"windDirection"_s].toInt())));
-
                 // Also fetch today's sunrise and sunset times to determine whether to pick day or night icons
                 weatherData.sunriseTime = parseDateFromMSecs(dayMap[u"sunrise"_s].toLongLong());
                 weatherData.sunsetTime = parseDateFromMSecs(dayMap[u"sunset"_s].toLongLong());
@@ -603,23 +598,14 @@ void DWDIon::updateWeather()
     if (!qIsNaN(m_weatherData->dewpoint)) {
         lastObservation.setDewpoint(m_weatherData->dewpoint);
     }
-
     if (!qIsNaN(m_weatherData->windSpeed)) {
         lastObservation.setWindSpeed(m_weatherData->windSpeed);
-    } else {
-        lastObservation.setWindSpeed(m_weatherData->windSpeedAlt);
     }
-
     if (!qIsNaN(m_weatherData->gustSpeed)) {
         lastObservation.setWindGust(m_weatherData->gustSpeed);
-    } else {
-        lastObservation.setWindGust(m_weatherData->gustSpeedAlt);
     }
-
     if (!m_weatherData->windDirection.isEmpty()) {
         lastObservation.setWindDirection(m_weatherData->windDirection);
-    } else {
-        lastObservation.setWindDirection(m_weatherData->windDirectionAlt);
     }
 
     forecast->setLastObservation(lastObservation);
