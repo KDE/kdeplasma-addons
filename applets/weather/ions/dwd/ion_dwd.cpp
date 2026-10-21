@@ -395,11 +395,17 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
             info.period = QDateTime::fromMSecsSinceEpoch(timestamp);
 
             if (hourNumber < tempList.size()) {
-                info.temp = parseNumber(tempList[hourNumber]);
+                const auto temp = parseNumber(tempList[hourNumber]);
+                if (temp.has_value()) {
+                    info.temp = temp.value();
+                }
             }
 
             if (hourNumber < precipList.size()) {
-                info.precipitation = parseNumber(precipList[hourNumber]);
+                const auto precipitation = parseNumber(precipList[hourNumber]);
+                if (precipitation.has_value()) {
+                    info.precipitation = precipitation.value();
+                }
             }
 
             if (hourNumber < iconList.size()) {
@@ -416,7 +422,10 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
             }
 
             if (hourNumber < windSpeedList.size()) {
-                info.windSpeed = parseNumber(windSpeedList[hourNumber]);
+                const auto windSpeed = parseNumber(windSpeedList[hourNumber]);
+                if (windSpeed.has_value()) {
+                    info.windSpeed = windSpeed.value();
+                }
             }
 
             if (hourNumber < windDirectionList.size()) {
@@ -445,15 +454,29 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
 
             WeatherData::DayForecastInfo dayForecast;
             dayForecast.period = QDateTime::fromString(period, u"yyyy-MM-dd"_s);
-            dayForecast.tempHigh = parseNumber(dayMap[u"temperatureMax"_s]);
-            dayForecast.tempLow = parseNumber(dayMap[u"temperatureMin"_s]);
+            const auto tempHigh = parseNumber(dayMap[u"temperatureMax"_s]);
+            if (tempHigh.has_value()) {
+                dayForecast.tempHigh = tempHigh.value();
+            }
+
+            const auto tempLow = parseNumber(dayMap[u"temperatureMin"_s]);
+            if (tempLow.has_value()) {
+                dayForecast.tempLow = tempLow.value();
+            }
+
             dayForecast.precipitation = dayMap[u"precipitation"_s].toInt();
             dayForecast.iconName = getWeatherIcon(dayIcons().value(dayMap[u"icon"_s].toInt()));
 
             if (dayNumber == 0) {
                 // Also fetch today's sunrise and sunset times to determine whether to pick day or night icons
-                m_sunriseTime = parseDateFromMSecs(dayMap[u"sunrise"_s].toLongLong());
-                m_sunsetTime = parseDateFromMSecs(dayMap[u"sunset"_s].toLongLong());
+                const auto sunriseTime = parseDateFromMSecs(dayMap[u"sunrise"_s]);
+                if (sunriseTime.has_value()) {
+                    m_sunriseTime = sunriseTime.value();
+                }
+                const auto sunsetTime = parseDateFromMSecs(dayMap[u"sunset"_s]);
+                if (sunsetTime.has_value()) {
+                    m_sunsetTime = sunsetTime.value();
+                }
             }
 
             dayForecasts.append(dayForecast);
@@ -494,7 +517,10 @@ void DWDIon::parseMeasureData(const QJsonDocument &doc)
     QVariantMap weatherMap = doc.object().toVariantMap();
 
     if (!weatherMap.isEmpty()) {
-        weatherData.observationDateTime = parseDateFromMSecs(weatherMap[u"time"_s]);
+        const auto timestamp = parseDateFromMSecs(weatherMap[u"time"_s]);
+        if (timestamp.has_value()) {
+            weatherData.observationDateTime = timestamp.value();
+        }
 
         bool condIconValid = false;
         const int condIconNumber = weatherMap[u"icon"_s].toInt(&condIconValid);
@@ -508,12 +534,35 @@ void DWDIon::parseMeasureData(const QJsonDocument &doc)
             weatherData.windDirection = getWindDirectionIcon(windIcons().value(roundWindDirections(windDirection)));
         }
 
-        weatherData.temperature = parseNumber(weatherMap[u"temperature"_s]);
-        weatherData.humidity = parseNumber(weatherMap[u"humidity"_s]);
-        weatherData.pressure = parseNumber(weatherMap[u"pressure"_s]);
-        weatherData.windSpeed = parseNumber(weatherMap[u"meanwind"_s]);
-        weatherData.gustSpeed = parseNumber(weatherMap[u"maxwind"_s]);
-        weatherData.dewpoint = parseNumber(weatherMap[u"dewpoint"_s]);
+        const auto temperature = parseNumber(weatherMap[u"temperature"_s]);
+        if (temperature.has_value()) {
+            weatherData.temperature = temperature.value();
+        }
+
+        const auto humidity = parseNumber(weatherMap[u"humidity"_s]);
+        if (humidity.has_value()) {
+            weatherData.humidity = humidity.value();
+        }
+
+        const auto pressure = parseNumber(weatherMap[u"pressure"_s]);
+        if (pressure.has_value()) {
+            weatherData.pressure = pressure.value();
+        }
+
+        const auto windSpeed = parseNumber(weatherMap[u"meanwind"_s]);
+        if (windSpeed.has_value()) {
+            weatherData.windSpeed = windSpeed.value();
+        }
+
+        const auto gustSpeed = parseNumber(weatherMap[u"maxwind"_s]);
+        if (gustSpeed.has_value()) {
+            weatherData.gustSpeed = gustSpeed.value();
+        }
+
+        const auto dewpoint = parseNumber(weatherMap[u"dewpoint"_s]);
+        if (dewpoint.has_value()) {
+            weatherData.dewpoint = dewpoint.value();
+        }
     }
 }
 
@@ -675,26 +724,30 @@ void DWDIon::updateWeather()
 /*
  * Helper methods
  */
-float DWDIon::parseNumber(const QVariant &number) const
+std::optional<qreal> DWDIon::parseNumber(const QVariant &number) const
 {
     bool isValid = false;
     const int intValue = number.toInt(&isValid);
     if (!isValid) {
-        return NAN;
+        return std::nullopt;
     }
     if (intValue == 0x7fff) { // DWD uses 32767 to mark an error value
-        return NAN;
+        return std::nullopt;
     }
     // e.g. DWD API int 17 equals 1.7
-    return static_cast<float>(intValue) / 10;
+    return static_cast<qreal>(intValue) / 10;
 }
 
-QDateTime DWDIon::parseDateFromMSecs(const QVariant &timestamp) const
+std::optional<QDateTime> DWDIon::parseDateFromMSecs(const QVariant &timestamp) const
 {
     bool isValid = false;
     const qint64 msecs = timestamp.toLongLong(&isValid);
 
-    return isValid ? QDateTime::fromMSecsSinceEpoch(msecs) : QDateTime();
+    if (!isValid) {
+        return std::nullopt;
+    }
+
+    return QDateTime::fromMSecsSinceEpoch(msecs);
 }
 
 int DWDIon::roundWindDirections(int windDirection) const

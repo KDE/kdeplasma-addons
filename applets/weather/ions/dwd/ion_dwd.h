@@ -124,8 +124,8 @@ private:
     QString camelCaseString(const QString &text) const;
     int roundWindDirections(int windDirection) const;
     bool isNightTime(const QDateTime &dateTime) const;
-    float parseNumber(const QVariant &number) const;
-    QDateTime parseDateFromMSecs(const QVariant &timestamp) const;
+    std::optional<qreal> parseNumber(const QVariant &number) const;
+    std::optional<QDateTime> parseDateFromMSecs(const QVariant &timestamp) const;
 
     // Clear unneeded data
     void clearForecastData();
