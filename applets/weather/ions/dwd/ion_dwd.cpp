@@ -425,12 +425,9 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
         // Day Forecast data
         QVariantList daysList = weatherMap[u"days"_s].toList();
 
-        QList<WeatherData::DayForecastInfo> &dayForecasts = m_weatherData->dayForecasts;
+        auto futureDays = std::make_shared<FutureDays>();
 
         WeatherData &weatherData = *m_weatherData;
-
-        // Flush out the old forecasts when updating.
-        dayForecasts.clear();
 
         int dayNumber = 0;
 
@@ -438,20 +435,31 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
             QMap dayMap = day.toMap();
             QString period = dayMap[u"dayDate"_s].toString();
 
-            WeatherData::DayForecastInfo dayForecast;
-            dayForecast.period = QDateTime::fromString(period, u"yyyy-MM-dd"_s);
+            FutureDayForecast futureDayForecast(QDateTime::fromString(period, u"yyyy-MM-dd"_s));
+
+            FutureForecast futureForecast;
+
             const auto tempHigh = parseNumber(dayMap[u"temperatureMax"_s]);
             if (tempHigh.has_value()) {
-                dayForecast.tempHigh = tempHigh.value();
+                futureForecast.setHighTemp(tempHigh.value());
             }
 
             const auto tempLow = parseNumber(dayMap[u"temperatureMin"_s]);
             if (tempLow.has_value()) {
-                dayForecast.tempLow = tempLow.value();
+                futureForecast.setLowTemp(tempLow.value());
             }
 
-            dayForecast.precipitation = dayMap[u"precipitation"_s].toInt();
-            dayForecast.iconName = getWeatherIcon(dayIcons().value(dayMap[u"icon"_s].toInt()));
+            bool precipitationValid = false;
+            const int precipitation = dayMap[u"precipitation"_s].toInt(&precipitationValid);
+            if (precipitationValid) {
+                futureForecast.setConditionProbability(precipitation);
+            }
+
+            bool iconNameValid = false;
+            const auto iconName = (dayMap[u"icon"_s].toInt(&iconNameValid));
+            if (iconNameValid) {
+                futureForecast.setConditionIcon(getWeatherIcon(dayIcons().value(iconName)));
+            }
 
             if (dayNumber == 0) {
                 // Also fetch today's sunrise and sunset times to determine whether to pick day or night icons
@@ -465,7 +473,8 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
                 }
             }
 
-            dayForecasts.append(dayForecast);
+            futureDayForecast.setDaytime(futureForecast);
+            futureDays->addDay(futureDayForecast);
 
             dayNumber++;
             // Only get the next 7 days (including today)
@@ -473,6 +482,8 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
                 break;
             }
         }
+
+        m_forecast->setFutureDays(futureDays);
 
         // Warnings data
         QVariantList warningData = weatherMap[u"warnings"_s].toList();
@@ -608,29 +619,6 @@ void DWDIon::updateWeather()
     metaData.setPressureUnit(KUnitConversion::Hectopascal);
 
     m_forecast->setMetadata(metaData);
-
-    if (!m_weatherData->dayForecasts.isEmpty()) {
-        auto futureDays = std::make_shared<FutureDays>();
-
-        int days = 0;
-        for (const auto &dayForecast : m_weatherData->dayForecasts) {
-            FutureDayForecast futureDay(dayForecast.period);
-
-            FutureForecast futureForecast;
-
-            futureForecast.setConditionIcon(dayForecast.iconName);
-            futureForecast.setHighTemp(dayForecast.tempHigh);
-            futureForecast.setLowTemp(dayForecast.tempLow);
-
-            futureDay.setDaytime(futureForecast);
-
-            futureDays->addDay(futureDay);
-            ++days;
-        }
-        qCDebug(WEATHER::ION::DWD) << "Total forecast days: " << days;
-
-        m_forecast->setFutureDays(futureDays);
-    }
 
     if (!m_weatherData->warnings.isEmpty()) {
         auto warnings = std::make_shared<Warnings>();

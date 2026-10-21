@@ -35,21 +35,6 @@ class WeatherData
 public:
     QString place;
 
-    // 7 forecast
-    struct DayForecastInfo {
-        QDateTime period;
-        QString iconName;
-        QString summary;
-        float tempHigh = qQNaN();
-        float tempLow = qQNaN();
-        int precipitation = 0;
-        float windSpeed = qQNaN();
-        QString windDirection;
-    };
-
-    // 7 day forecast
-    QList<DayForecastInfo> dayForecasts;
-
     struct WarningInfo {
         QString type;
         Warnings::PriorityClass priority = Warnings::Low;
