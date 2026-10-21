@@ -15,7 +15,7 @@ WallpaperItem {
         root.configuration.writeConfig();
     }
 
-    Image {
+    AnimatedImage {
         anchors.fill: parent
         source: root.configuration.Image
         fillMode: Image.Tile

@@ -102,7 +102,8 @@
             "image/png",
             "image/bmp",
             "image/tiff",
-            "image/webp"
+            "image/webp",
+            "image/gif"
         ],
         "Name": "Tiled",
         "Name[ar]": "مُبلطة",
@@ -146,7 +147,7 @@
         "Website": "https://kde.org/plasma-desktop"
     },
     "Keywords": "",
-    "MimeType": "image/avif;image/heif;image/jpeg;image/png;image/bmp;image/tiff;image/webp;",
+    "MimeType": "image/avif;image/heif;image/jpeg;image/png;image/bmp;image/tiff;image/webp;image/gif;",
     "X-KDE-ParentApp": "org.kde.plasmashell",
     "X-Plasma-DropMimeTypes": [
         "image/avif",
@@ -155,6 +156,7 @@
         "image/png",
         "image/bmp",
         "image/tiff",
-        "image/webp"
+        "image/webp",
+        "image/gif"
     ]
 }
