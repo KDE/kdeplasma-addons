@@ -199,8 +199,12 @@ PlasmoidItem {
 
                     Keys.onPressed: event => {
                         if (event.key === Qt.Key_Escape) {
-                            root.expanded = false;
-                            event.accepted = true;
+                            if (root.compactRepresentationItem?.visible) {
+                                root.expanded = false;
+                                event.accepted = true;
+                            } else {
+                                focusScope.focus = false;
+                            }
                         } else if (event.modifiers === Qt.ControlModifier) {
                             if (event.key === Qt.Key_B) {
                                 documentHandler.bold = !documentHandler.bold;
