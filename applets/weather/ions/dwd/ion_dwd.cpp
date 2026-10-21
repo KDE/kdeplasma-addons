@@ -126,6 +126,8 @@ void DWDIon::clearForecastData()
     m_weatherID.clear();
     m_forecastData.clear();
     m_measurementData.clear();
+    m_sunriseTime = {};
+    m_sunsetTime = {};
     m_weatherData.reset();
     m_forecastPromise.reset();
 }
@@ -215,20 +217,20 @@ void DWDIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> 
     // Fetch forecast data
     const auto getJob = requestAPIJob(QUrl(FORECAST_URL.arg(m_weatherID)), m_forecastData);
     connect(getJob, &KJob::result, this, &DWDIon::forecast_slotJobFinished);
-    m_weatherData->isForecastsDataPending = true;
+    m_isForecastsDataPending = true;
 
     // Fetch current measurements (different url AND different API, AMAZING)
     const auto getMeasureJob = requestAPIJob(QUrl(MEASURE_URL.arg(m_weatherID)), m_measurementData);
     connect(getMeasureJob, &KJob::result, this, &DWDIon::measure_slotJobFinished);
-    m_weatherData->isMeasureDataPending = true;
+    m_isMeasureDataPending = true;
 }
 
 void DWDIon::measure_slotJobFinished(KJob *job)
 {
-    m_weatherData->isMeasureDataPending = false;
+    m_isMeasureDataPending = false;
 
     if (m_forecastPromise->isCanceled()) {
-        if (!m_weatherData->isForecastsDataPending) {
+        if (!m_isForecastsDataPending) {
             m_forecastPromise->finish();
             clearForecastData();
         }
@@ -243,17 +245,17 @@ void DWDIon::measure_slotJobFinished(KJob *job)
         m_measurementData.clear();
     }
 
-    if (!m_weatherData->isForecastsDataPending) {
+    if (!m_isForecastsDataPending) {
         updateWeather();
     }
 }
 
 void DWDIon::forecast_slotJobFinished(KJob *job)
 {
-    m_weatherData->isForecastsDataPending = false;
+    m_isForecastsDataPending = false;
 
     if (m_forecastPromise->isCanceled()) {
-        if (!m_weatherData->isMeasureDataPending) {
+        if (!m_isMeasureDataPending) {
             m_forecastPromise->finish();
             clearForecastData();
         }
@@ -268,7 +270,7 @@ void DWDIon::forecast_slotJobFinished(KJob *job)
         m_forecastData.clear();
     }
 
-    if (!m_weatherData->isMeasureDataPending) {
+    if (!m_isMeasureDataPending) {
         updateWeather();
     }
 }
@@ -448,8 +450,8 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
 
             if (dayNumber == 0) {
                 // Also fetch today's sunrise and sunset times to determine whether to pick day or night icons
-                weatherData.sunriseTime = parseDateFromMSecs(dayMap[u"sunrise"_s].toLongLong());
-                weatherData.sunsetTime = parseDateFromMSecs(dayMap[u"sunset"_s].toLongLong());
+                m_sunriseTime = parseDateFromMSecs(dayMap[u"sunrise"_s].toLongLong());
+                m_sunsetTime = parseDateFromMSecs(dayMap[u"sunset"_s].toLongLong());
             }
 
             dayForecasts.append(dayForecast);
@@ -726,12 +728,12 @@ QString DWDIon::camelCaseString(const QString &text) const
 
 bool DWDIon::isNightTime(const QDateTime &dateTime) const
 {
-    if (m_weatherData->sunriseTime.isNull() || m_weatherData->sunsetTime.isNull()) {
+    if (m_sunriseTime.isNull() || m_sunsetTime.isNull()) {
         // default to daytime icons if we're missing sunrise/sunset times
         return false;
     }
 
-    return dateTime < m_weatherData->sunriseTime || dateTime > m_weatherData->sunsetTime;
+    return dateTime < m_sunriseTime || dateTime > m_sunsetTime;
 }
 
 #include "ion_dwd.moc"

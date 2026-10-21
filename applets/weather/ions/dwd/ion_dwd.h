@@ -37,8 +37,6 @@ public:
 
     // Current observation information.
     QDateTime observationDateTime;
-    QDateTime sunriseTime;
-    QDateTime sunsetTime;
 
     uint condIconNumber = qQNaN();
     QString windDirection;
@@ -87,9 +85,6 @@ public:
     };
 
     QList<WarningInfo> warnings;
-
-    bool isForecastsDataPending = false;
-    bool isMeasureDataPending = false;
 };
 
 class DWDIon : public Ion
@@ -155,10 +150,15 @@ private:
     QString m_weatherID;
     QByteArray m_forecastData;
     QByteArray m_measurementData;
+    QDateTime m_sunriseTime;
+    QDateTime m_sunsetTime;
     std::shared_ptr<WeatherData> m_weatherData;
 
     // used to handle the old format of a forecast request string
     bool m_isLegacy = false;
+
+    bool m_isForecastsDataPending = false;
+    bool m_isMeasureDataPending = false;
 
     std::shared_ptr<QPromise<std::shared_ptr<Locations>>> m_locationPromise;
     std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> m_forecastPromise;
