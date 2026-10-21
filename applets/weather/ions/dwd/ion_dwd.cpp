@@ -427,8 +427,6 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
 
         auto futureDays = std::make_shared<FutureDays>();
 
-        WeatherData &weatherData = *m_weatherData;
-
         int dayNumber = 0;
 
         for (const QVariant &day : daysList) {
@@ -488,23 +486,33 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
         // Warnings data
         QVariantList warningData = weatherMap[u"warnings"_s].toList();
 
-        QList<WeatherData::WarningInfo> &warningList = weatherData.warnings;
-
-        // Flush out the old forecasts when updating.
-        warningList.clear();
+        auto warnings = std::make_shared<Warnings>();
 
         for (const QVariant &warningElement : warningData) {
             QMap warningMap = warningElement.toMap();
 
-            WeatherData::WarningInfo warning;
-            warning.headline = warningMap[u"headline"_s].toString();
-            warning.description = warningMap[u"description"_s].toString();
-            warning.priority = static_cast<Warnings::PriorityClass>(warningMap[u"level"_s].toInt());
-            warning.type = warningMap[u"event"_s].toString();
-            warning.timestamp = QDateTime::fromMSecsSinceEpoch(warningMap[u"start"_s].toLongLong());
+            const QString headline = warningMap[u"headline"_s].toString();
+            const QString description = warningMap[u"description"_s].toString();
+            if (headline.isEmpty() && description.isEmpty()) {
+                continue;
+            }
 
-            warningList.append(warning);
+            bool priorityValid = false;
+            auto priority = warningMap[u"level"_s].toInt(&priorityValid);
+            if (!priorityValid) {
+                priority = Warnings::Low;
+            }
+
+            Warning warning(static_cast<Warnings::PriorityClass>(priority), u"<p><b>%1</b></p>%2"_s.arg(headline, description));
+            const auto timestamp = parseDateFromMSecs(warningMap[u"start"_s]);
+            if (timestamp.has_value()) {
+                warning.setTimestamp(timestamp.value());
+            }
+
+            warnings->addWarning(warning);
         }
+
+        m_forecast->setWarnings(warnings);
     }
 }
 
@@ -619,17 +627,6 @@ void DWDIon::updateWeather()
     metaData.setPressureUnit(KUnitConversion::Hectopascal);
 
     m_forecast->setMetadata(metaData);
-
-    if (!m_weatherData->warnings.isEmpty()) {
-        auto warnings = std::make_shared<Warnings>();
-
-        for (const auto &localWarning : m_weatherData->warnings) {
-            Warning warning(localWarning.priority, u"<p><b>%1</b></p>%2"_s.arg(localWarning.headline, localWarning.description));
-            warning.setTimestamp(localWarning.timestamp);
-            warnings->addWarning(warning);
-        }
-        m_forecast->setWarnings(warnings);
-    }
 
     qCDebug(WEATHER::ION::DWD) << "Forecast received. Return";
 

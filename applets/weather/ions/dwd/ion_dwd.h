@@ -34,16 +34,6 @@ class WeatherData
 {
 public:
     QString place;
-
-    struct WarningInfo {
-        QString type;
-        Warnings::PriorityClass priority = Warnings::Low;
-        QString headline;
-        QString description;
-        QDateTime timestamp;
-    };
-
-    QList<WarningInfo> warnings;
 };
 
 class DWDIon : public Ion
