@@ -19,6 +19,9 @@
 #include <QStandardPaths>
 #include <QUrl>
 
+// Konsole's built-in profile has no file on disk; this is the path Konsole uses for it internally
+static constexpr QLatin1String s_konsoleBuiltinProfile("FALLBACK/");
+
 ProfilesModel::ProfilesModel(QObject *parent)
     : QAbstractListModel(parent)
 {
@@ -58,6 +61,7 @@ void ProfilesModel::loadProfiles()
     } else {
         const QStringList dirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation, m_appName, QStandardPaths::LocateDirectory);
         profilesPaths = KFileUtils::findAllUniqueFiles(dirs, {QStringLiteral("*.profile")});
+        m_data << ProfileData{i18nc("Name of Konsole's built-in default profile", "Built-in"), s_konsoleBuiltinProfile, QStringLiteral("utilities-terminal")};
     }
 
     for (const auto &profilePath : std::as_const(profilesPaths)) {
@@ -107,7 +111,9 @@ void ProfilesModel::openProfile(const QString profileIdentifier)
 {
     KIO::CommandLauncherJob *job;
     if (m_appName == QLatin1String("konsole")) {
-        job = new KIO::CommandLauncherJob(m_appName, QStringList{QStringLiteral("--profile"), profileIdentifier});
+        const QStringList args = profileIdentifier == s_konsoleBuiltinProfile ? QStringList{QStringLiteral("--builtin-profile")}
+                                                                               : QStringList{QStringLiteral("--profile"), profileIdentifier};
+        job = new KIO::CommandLauncherJob(m_appName, args);
         job->setDesktopName(QStringLiteral("org.kde.konsole"));
     } else if (m_appName == QLatin1String("kate")) {
         QStringList args;
