@@ -128,7 +128,9 @@ PlasmoidItem {
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
             id: startAction
-            text: i18nc("@action", "&Start")
+            text: root.seconds > 0 && !root.running
+                ? i18nc("@action %1 is the duration that will be started, e.g. 00:05:00", "&Start (%1)", TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm:ss"))
+                : i18nc("@action", "&Start")
             onTriggered: startTimer()
         },
         PlasmaCore.Action {
