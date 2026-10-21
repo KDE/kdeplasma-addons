@@ -137,6 +137,7 @@ Q_SIGNALS:
 
 private:
     QTextCursor textCursor() const;
+    QTextCharFormat currentCharFormat() const;
     void mergeFormatOnWordOrSelection(const QTextCharFormat &format);
 
     QQuickItem *m_target;

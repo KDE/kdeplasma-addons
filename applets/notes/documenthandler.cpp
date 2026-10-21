@@ -142,6 +142,15 @@ QTextCursor DocumentHandler::textCursor() const
     return cursor;
 }
 
+QTextCharFormat DocumentHandler::currentCharFormat() const
+{
+    QTextCursor cursor = textCursor();
+    if (cursor.hasSelection()) {
+        cursor.setPosition(cursor.selectionStart() + 1);
+    }
+    return cursor.charFormat();
+}
+
 void DocumentHandler::mergeFormatOnWordOrSelection(const QTextCharFormat &format)
 {
     QTextCursor cursor = textCursor();
@@ -187,7 +196,7 @@ bool DocumentHandler::bold() const
     if (cursor.isNull()) {
         return false;
     }
-    return textCursor().charFormat().fontWeight() == QFont::Bold;
+    return currentCharFormat().fontWeight() == QFont::Bold;
 }
 
 bool DocumentHandler::italic() const
@@ -196,7 +205,7 @@ bool DocumentHandler::italic() const
     if (cursor.isNull()) {
         return false;
     }
-    return textCursor().charFormat().fontItalic();
+    return currentCharFormat().fontItalic();
 }
 
 bool DocumentHandler::underline() const
@@ -205,7 +214,7 @@ bool DocumentHandler::underline() const
     if (cursor.isNull()) {
         return false;
     }
-    return textCursor().charFormat().fontUnderline();
+    return currentCharFormat().fontUnderline();
 }
 
 bool DocumentHandler::strikeOut() const
@@ -214,7 +223,7 @@ bool DocumentHandler::strikeOut() const
     if (cursor.isNull()) {
         return false;
     }
-    return textCursor().charFormat().fontStrikeOut();
+    return currentCharFormat().fontStrikeOut();
 }
 
 void DocumentHandler::setBold(bool arg)
@@ -255,7 +264,7 @@ int DocumentHandler::fontSize() const
     if (cursor.isNull()) {
         return 0;
     }
-    QTextCharFormat format = cursor.charFormat();
+    QTextCharFormat format = currentCharFormat();
     return format.font().pointSize();
 }
 
@@ -298,7 +307,7 @@ QColor DocumentHandler::textColor() const
     if (cursor.isNull()) {
         return QColor(Qt::black);
     }
-    QTextCharFormat format = cursor.charFormat();
+    QTextCharFormat format = currentCharFormat();
     return format.foreground().color();
 }
 
@@ -320,7 +329,7 @@ QString DocumentHandler::fontFamily() const
     if (cursor.isNull()) {
         return QString();
     }
-    QTextCharFormat format = cursor.charFormat();
+    QTextCharFormat format = currentCharFormat();
     return format.font().family();
 }
 
