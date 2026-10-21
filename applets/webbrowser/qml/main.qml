@@ -276,7 +276,7 @@ PlasmoidItem {
                 onLoadingChanged: loadingInfo => {
                     if (loadingInfo.status === WebEngineLoadingInfo.LoadStartedStatus) {
                         infoButton.dismiss();
-                    } else if (loadingInfo.status === WebEngineLoadingInfo.LoadSucceededStatus && useMinViewWidth) {
+                    } else if (loadingInfo.status === WebEngineLoadingInfo.LoadSucceededStatus) {
                         updateZoomTimer.start();
                     }
                 }
