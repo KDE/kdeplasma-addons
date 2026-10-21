@@ -114,7 +114,7 @@ KCM.ScrollViewKCM {
 
             onAccepted: {
                 for (var i = 0; i < selectedFiles.length; ++i) {
-                    var item = { 'path':selectedFiles[i], 'type':'file' }
+                    var item = { 'path':selectedFiles[i].toString(), 'type':'file' }
                     addPath(item)
                 }
             }
@@ -128,7 +128,7 @@ KCM.ScrollViewKCM {
             currentFolder: StandardPaths.standardLocations(StandardPaths.PicturesLocation)[0]
 
             onAccepted: {
-                var item = { 'path':selectedFolder, 'type':'folder' }
+                var item = { 'path':selectedFolder.toString(), 'type':'folder' }
                 addPath(item)
             }
         }
