@@ -513,56 +513,62 @@ void DWDIon::parseForecastData(const QJsonDocument &doc)
 
 void DWDIon::parseMeasureData(const QJsonDocument &doc)
 {
-    WeatherData &weatherData = *m_weatherData;
     QVariantMap weatherMap = doc.object().toVariantMap();
 
     if (!weatherMap.isEmpty()) {
+        LastObservation lastObservation;
         const auto timestamp = parseDateFromMSecs(weatherMap[u"time"_s]);
         if (timestamp.has_value()) {
-            weatherData.observationDateTime = timestamp.value();
+            lastObservation.setObservationTimestamp(timestamp.value());
         }
 
         bool condIconValid = false;
         const int condIconNumber = weatherMap[u"icon"_s].toInt(&condIconValid);
         if (condIconValid) {
-            weatherData.condIconNumber = condIconNumber;
+            if (timestamp.has_value() && isNightTime(timestamp.value())) {
+                lastObservation.setConditionIcon(getWeatherIcon(nightIcons().value(condIconNumber)));
+            } else {
+                lastObservation.setConditionIcon(getWeatherIcon(dayIcons().value(condIconNumber)));
+            }
         }
 
         bool windIconValid = false;
         const int windDirection = weatherMap[u"winddirection"_s].toInt(&windIconValid);
         if (windIconValid) {
-            weatherData.windDirection = getWindDirectionIcon(windIcons().value(roundWindDirections(windDirection)));
+            lastObservation.setWindDirection(getWindDirectionIcon(windIcons().value(roundWindDirections(windDirection))));
         }
 
         const auto temperature = parseNumber(weatherMap[u"temperature"_s]);
         if (temperature.has_value()) {
-            weatherData.temperature = temperature.value();
+            lastObservation.setTemperature(temperature.value());
         }
 
         const auto humidity = parseNumber(weatherMap[u"humidity"_s]);
         if (humidity.has_value()) {
-            weatherData.humidity = humidity.value();
+            lastObservation.setHumidity(humidity.value());
         }
 
         const auto pressure = parseNumber(weatherMap[u"pressure"_s]);
         if (pressure.has_value()) {
-            weatherData.pressure = pressure.value();
+            lastObservation.setPressure(pressure.value());
         }
 
         const auto windSpeed = parseNumber(weatherMap[u"meanwind"_s]);
         if (windSpeed.has_value()) {
-            weatherData.windSpeed = windSpeed.value();
+            lastObservation.setWindSpeed(windSpeed.value());
         }
 
         const auto gustSpeed = parseNumber(weatherMap[u"maxwind"_s]);
         if (gustSpeed.has_value()) {
-            weatherData.gustSpeed = gustSpeed.value();
+            lastObservation.setWindGust(gustSpeed.value());
         }
 
         const auto dewpoint = parseNumber(weatherMap[u"dewpoint"_s]);
         if (dewpoint.has_value()) {
-            weatherData.dewpoint = dewpoint.value();
+            lastObservation.setDewpoint(dewpoint.value());
         }
+
+        m_forecast->setLastObservation(lastObservation);
     }
 }
 
@@ -595,14 +601,6 @@ void DWDIon::updateWeather()
 {
     qCDebug(WEATHER::ION::DWD) << "Updating weather";
 
-    QDateTime observationTimestamp;
-
-    if (!m_weatherData->observationDateTime.isNull()) {
-        observationTimestamp = m_weatherData->observationDateTime;
-    } else {
-        observationTimestamp = QDateTime::currentDateTime();
-    }
-
     Station station;
 
     station.setPlace(m_weatherName);
@@ -624,42 +622,6 @@ void DWDIon::updateWeather()
     metaData.setPressureUnit(KUnitConversion::Hectopascal);
 
     m_forecast->setMetadata(metaData);
-
-    LastObservation lastObservation;
-
-    lastObservation.setObservationTimestamp(observationTimestamp);
-
-    if (!qIsNaN(m_weatherData->condIconNumber)) {
-        if (isNightTime(observationTimestamp)) {
-            lastObservation.setConditionIcon(getWeatherIcon(nightIcons().value(m_weatherData->condIconNumber)));
-        } else {
-            lastObservation.setConditionIcon(getWeatherIcon(dayIcons().value(m_weatherData->condIconNumber)));
-        }
-    }
-
-    if (!qIsNaN(m_weatherData->temperature)) {
-        lastObservation.setTemperature(m_weatherData->temperature);
-    }
-    if (!qIsNaN(m_weatherData->humidity)) {
-        lastObservation.setHumidity(m_weatherData->humidity);
-    }
-    if (!qIsNaN(m_weatherData->pressure)) {
-        lastObservation.setPressure(m_weatherData->pressure);
-    }
-    if (!qIsNaN(m_weatherData->dewpoint)) {
-        lastObservation.setDewpoint(m_weatherData->dewpoint);
-    }
-    if (!qIsNaN(m_weatherData->windSpeed)) {
-        lastObservation.setWindSpeed(m_weatherData->windSpeed);
-    }
-    if (!qIsNaN(m_weatherData->gustSpeed)) {
-        lastObservation.setWindGust(m_weatherData->gustSpeed);
-    }
-    if (!m_weatherData->windDirection.isEmpty()) {
-        lastObservation.setWindDirection(m_weatherData->windDirection);
-    }
-
-    m_forecast->setLastObservation(lastObservation);
 
     if (!m_weatherData->hourlyForecasts.isEmpty()) {
         auto futureHours = std::make_shared<FutureHours>();

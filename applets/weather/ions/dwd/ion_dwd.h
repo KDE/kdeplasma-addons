@@ -35,18 +35,6 @@ class WeatherData
 public:
     QString place;
 
-    // Current observation information.
-    QDateTime observationDateTime;
-
-    uint condIconNumber = qQNaN();
-    QString windDirection;
-    float temperature = qQNaN();
-    float humidity = qQNaN();
-    float pressure = qQNaN();
-    float windSpeed = qQNaN();
-    float gustSpeed = qQNaN();
-    float dewpoint = qQNaN();
-
     // 7 forecast
     struct HourlyForecastInfo {
         QDateTime period;
