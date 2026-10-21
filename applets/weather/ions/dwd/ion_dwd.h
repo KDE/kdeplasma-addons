@@ -59,8 +59,8 @@ private:
 
     void validate();
 
-    void parseForecastData(const QJsonDocument &doc);
-    void parseMeasureData(const QJsonDocument &doc);
+    bool parseForecastData(const QByteArray &data);
+    void parseMeasureData(const QByteArray &data);
     void updateWeather();
 
     // Helper methods
@@ -102,6 +102,7 @@ private:
 
     bool m_isForecastsDataPending = false;
     bool m_isMeasureDataPending = false;
+    bool m_forecastInvalid = false;
 
     std::shared_ptr<QPromise<std::shared_ptr<Locations>>> m_locationPromise;
     std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> m_forecastPromise;

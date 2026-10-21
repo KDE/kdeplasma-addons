@@ -122,6 +122,7 @@ KJob *DWDIon::requestAPIJob(const QUrl &url, QByteArray &result)
 void DWDIon::clearForecastData()
 {
     m_isLegacy = false;
+    m_forecastInvalid = false;
     m_weatherName.clear();
     m_weatherID.clear();
     m_forecastData.clear();
@@ -229,20 +230,18 @@ void DWDIon::measure_slotJobFinished(KJob *job)
 {
     m_isMeasureDataPending = false;
 
-    if (m_forecastPromise->isCanceled()) {
+    if (job->error() || m_measurementData.isEmpty()) {
+        qCWarning(WEATHER::ION::DWD) << "no measurements received" << job->errorText();
+    } else {
+        parseMeasureData(m_measurementData);
+    }
+
+    if (m_forecastPromise->isCanceled() || m_forecastInvalid) {
         if (!m_isForecastsDataPending) {
             m_forecastPromise->finish();
             clearForecastData();
         }
         return;
-    }
-
-    if (job->error() || m_measurementData.isEmpty()) {
-        qCWarning(WEATHER::ION::DWD) << "no measurements received" << job->errorText();
-    } else {
-        QJsonDocument doc = QJsonDocument::fromJson(m_measurementData);
-        parseMeasureData(doc);
-        m_measurementData.clear();
     }
 
     if (!m_isForecastsDataPending) {
@@ -254,20 +253,21 @@ void DWDIon::forecast_slotJobFinished(KJob *job)
 {
     m_isForecastsDataPending = false;
 
-    if (m_forecastPromise->isCanceled()) {
+    if (job->error() || m_forecastData.isEmpty()) {
+        qCWarning(WEATHER::ION::DWD) << "error during forecast" << job->errorText();
+        m_forecastInvalid = true;
+    } else {
+        if (!parseForecastData(m_forecastData)) {
+            m_forecastInvalid = true;
+        };
+    }
+
+    if (m_forecastPromise->isCanceled() || m_forecastInvalid) {
         if (!m_isMeasureDataPending) {
             m_forecastPromise->finish();
             clearForecastData();
         }
         return;
-    }
-
-    if (job->error() || m_forecastData.isEmpty()) {
-        qCWarning(WEATHER::ION::DWD) << "error during forecast" << job->errorText();
-    } else {
-        QJsonDocument doc = QJsonDocument::fromJson(m_forecastData);
-        parseForecastData(doc);
-        m_forecastData.clear();
     }
 
     if (!m_isMeasureDataPending) {
@@ -347,232 +347,260 @@ void DWDIon::searchInStationList(const QString &searchText)
     validate();
 }
 
-void DWDIon::parseForecastData(const QJsonDocument &doc)
+bool DWDIon::parseForecastData(const QByteArray &data)
 {
+    QJsonParseError error;
+    const QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+
+    if (error.error != QJsonParseError::NoError || !doc.isObject()) {
+        qCWarning(WEATHER::ION::DWD) << "Failed to parse forecast JSON:" << error.errorString();
+        return false;
+    }
+
     QVariantMap weatherMap = doc.object().toVariantMap();
+
     if (weatherMap.isEmpty()) {
         qCDebug(WEATHER::ION::DWD) << "Forecast data is empty";
-        return;
+        return false;
     }
+
     weatherMap = weatherMap.first().toMap(); // Mind the .first(). It needs guarding against isEmpty.
-    if (!weatherMap.isEmpty()) {
-        // Hourly Forecast data
-        const QVariantMap forecast1Map = weatherMap[u"forecast1"_s].toMap();
 
-        const qlonglong start = forecast1Map[u"start"_s].toLongLong();
-        const qlonglong timeStep = forecast1Map[u"timeStep"_s].toLongLong();
-
-        const QVariantList tempList = forecast1Map[u"temperature"_s].toList();
-        const QVariantList precipList = forecast1Map[u"precipitationTotal"_s].toList();
-        const QVariantList iconList = forecast1Map[u"icon1h"_s].toList();
-        const QVariantList isDayList = forecast1Map[u"isDay"_s].toList();
-
-        const qsizetype count = std::min(tempList.size(), iconList.size());
-
-        const auto futureHours = std::make_shared<FutureHours>();
-
-        for (qsizetype hourNumber = 0; hourNumber < count; ++hourNumber) {
-            const qlonglong timestamp = start + (static_cast<qlonglong>(hourNumber) * timeStep);
-
-            // DWD provides forecasts starting from the beginning of the day. However, for most stations,
-            // forecast data for hours that have already passed is no longer available from the server.
-            //
-            // Skip entries with timestamps in the past. Otherwise, the forecast would start with missing
-            // data in most cases.
-            if (timestamp <= QDateTime::currentMSecsSinceEpoch()) {
-                continue;
-            }
-
-            FutureHourForecast futureForecast(QDateTime::fromMSecsSinceEpoch(timestamp));
-
-            if (hourNumber < tempList.size()) {
-                const auto temp = parseNumber(tempList[hourNumber]);
-                if (temp.has_value()) {
-                    futureForecast.setGeneralTemp(temp.value());
-                }
-            }
-
-            if (hourNumber < precipList.size()) {
-                const auto precipitation = parseNumber(precipList[hourNumber]);
-                if (precipitation.has_value()) {
-                    futureForecast.setConditionProbability(precipitation.value());
-                }
-            }
-
-            if (hourNumber < iconList.size()) {
-                bool isDay = true;
-                if (hourNumber < isDayList.size()) {
-                    isDay = isDayList[hourNumber].toBool();
-                }
-                bool iconCodeValid = false;
-                int iconCode = iconList.value(hourNumber).toInt(&iconCodeValid);
-                if (iconCodeValid) {
-                    if (isDay) {
-                        futureForecast.setConditionIcon(getWeatherIcon(dayIcons().value(iconCode)));
-                    } else {
-                        futureForecast.setConditionIcon(getWeatherIcon(nightIcons().value(iconCode)));
-                    }
-                }
-            }
-
-            futureHours->addHour(futureForecast);
-        }
-
-        m_forecast->setFutureHours(futureHours);
-
-        // Day Forecast data
-        QVariantList daysList = weatherMap[u"days"_s].toList();
-
-        auto futureDays = std::make_shared<FutureDays>();
-
-        int dayNumber = 0;
-
-        for (const QVariant &day : daysList) {
-            QMap dayMap = day.toMap();
-            QString period = dayMap[u"dayDate"_s].toString();
-
-            FutureDayForecast futureDayForecast(QDateTime::fromString(period, u"yyyy-MM-dd"_s));
-
-            FutureForecast futureForecast;
-
-            const auto tempHigh = parseNumber(dayMap[u"temperatureMax"_s]);
-            if (tempHigh.has_value()) {
-                futureForecast.setHighTemp(tempHigh.value());
-            }
-
-            const auto tempLow = parseNumber(dayMap[u"temperatureMin"_s]);
-            if (tempLow.has_value()) {
-                futureForecast.setLowTemp(tempLow.value());
-            }
-
-            bool precipitationValid = false;
-            const int precipitation = dayMap[u"precipitation"_s].toInt(&precipitationValid);
-            if (precipitationValid) {
-                futureForecast.setConditionProbability(precipitation);
-            }
-
-            bool iconNameValid = false;
-            const auto iconName = (dayMap[u"icon"_s].toInt(&iconNameValid));
-            if (iconNameValid) {
-                futureForecast.setConditionIcon(getWeatherIcon(dayIcons().value(iconName)));
-            }
-
-            if (dayNumber == 0) {
-                // Also fetch today's sunrise and sunset times to determine whether to pick day or night icons
-                const auto sunriseTime = parseDateFromMSecs(dayMap[u"sunrise"_s]);
-                if (sunriseTime.has_value()) {
-                    m_sunriseTime = sunriseTime.value();
-                }
-                const auto sunsetTime = parseDateFromMSecs(dayMap[u"sunset"_s]);
-                if (sunsetTime.has_value()) {
-                    m_sunsetTime = sunsetTime.value();
-                }
-            }
-
-            futureDayForecast.setDaytime(futureForecast);
-            futureDays->addDay(futureDayForecast);
-
-            dayNumber++;
-            // Only get the next 7 days (including today)
-            if (dayNumber == 7) {
-                break;
-            }
-        }
-
-        m_forecast->setFutureDays(futureDays);
-
-        // Warnings data
-        QVariantList warningData = weatherMap[u"warnings"_s].toList();
-
-        auto warnings = std::make_shared<Warnings>();
-
-        for (const QVariant &warningElement : warningData) {
-            QMap warningMap = warningElement.toMap();
-
-            const QString headline = warningMap[u"headline"_s].toString();
-            const QString description = warningMap[u"description"_s].toString();
-            if (headline.isEmpty() && description.isEmpty()) {
-                continue;
-            }
-
-            bool priorityValid = false;
-            auto priority = warningMap[u"level"_s].toInt(&priorityValid);
-            if (!priorityValid) {
-                priority = Warnings::Low;
-            }
-
-            Warning warning(static_cast<Warnings::PriorityClass>(priority), u"<p><b>%1</b></p>%2"_s.arg(headline, description));
-            const auto timestamp = parseDateFromMSecs(warningMap[u"start"_s]);
-            if (timestamp.has_value()) {
-                warning.setTimestamp(timestamp.value());
-            }
-
-            warnings->addWarning(warning);
-        }
-
-        m_forecast->setWarnings(warnings);
+    if (weatherMap.isEmpty()) {
+        qCDebug(WEATHER::ION::DWD) << "Forecast map is empty";
+        return false;
     }
+
+    // Hourly Forecast data
+    const QVariantMap forecast1Map = weatherMap[u"forecast1"_s].toMap();
+
+    const qlonglong start = forecast1Map[u"start"_s].toLongLong();
+    const qlonglong timeStep = forecast1Map[u"timeStep"_s].toLongLong();
+
+    const QVariantList tempList = forecast1Map[u"temperature"_s].toList();
+    const QVariantList precipList = forecast1Map[u"precipitationTotal"_s].toList();
+    const QVariantList iconList = forecast1Map[u"icon1h"_s].toList();
+    const QVariantList isDayList = forecast1Map[u"isDay"_s].toList();
+
+    const qsizetype count = std::min(tempList.size(), iconList.size());
+
+    const auto futureHours = std::make_shared<FutureHours>();
+
+    for (qsizetype hourNumber = 0; hourNumber < count; ++hourNumber) {
+        const qlonglong timestamp = start + (static_cast<qlonglong>(hourNumber) * timeStep);
+
+        // DWD provides forecasts starting from the beginning of the day. However, for most stations,
+        // forecast data for hours that have already passed is no longer available from the server.
+        //
+        // Skip entries with timestamps in the past. Otherwise, the forecast would start with missing
+        // data in most cases.
+        if (timestamp <= QDateTime::currentMSecsSinceEpoch()) {
+            continue;
+        }
+
+        FutureHourForecast futureForecast(QDateTime::fromMSecsSinceEpoch(timestamp));
+
+        if (hourNumber < tempList.size()) {
+            const auto temp = parseNumber(tempList[hourNumber]);
+            if (temp.has_value()) {
+                futureForecast.setGeneralTemp(temp.value());
+            }
+        }
+
+        if (hourNumber < precipList.size()) {
+            const auto precipitation = parseNumber(precipList[hourNumber]);
+            if (precipitation.has_value()) {
+                futureForecast.setConditionProbability(precipitation.value());
+            }
+        }
+
+        if (hourNumber < iconList.size()) {
+            bool isDay = true;
+            if (hourNumber < isDayList.size()) {
+                isDay = isDayList[hourNumber].toBool();
+            }
+            bool iconCodeValid = false;
+            int iconCode = iconList.value(hourNumber).toInt(&iconCodeValid);
+            if (iconCodeValid) {
+                if (isDay) {
+                    futureForecast.setConditionIcon(getWeatherIcon(dayIcons().value(iconCode)));
+                } else {
+                    futureForecast.setConditionIcon(getWeatherIcon(nightIcons().value(iconCode)));
+                }
+            }
+        }
+
+        futureHours->addHour(futureForecast);
+    }
+
+    m_forecast->setFutureHours(futureHours);
+
+    // Day Forecast data
+    QVariantList daysList = weatherMap[u"days"_s].toList();
+
+    auto futureDays = std::make_shared<FutureDays>();
+
+    int dayNumber = 0;
+
+    for (const QVariant &day : daysList) {
+        QMap dayMap = day.toMap();
+        QString period = dayMap[u"dayDate"_s].toString();
+
+        FutureDayForecast futureDayForecast(QDateTime::fromString(period, u"yyyy-MM-dd"_s));
+
+        FutureForecast futureForecast;
+
+        const auto tempHigh = parseNumber(dayMap[u"temperatureMax"_s]);
+        if (tempHigh.has_value()) {
+            futureForecast.setHighTemp(tempHigh.value());
+        }
+
+        const auto tempLow = parseNumber(dayMap[u"temperatureMin"_s]);
+        if (tempLow.has_value()) {
+            futureForecast.setLowTemp(tempLow.value());
+        }
+
+        bool precipitationValid = false;
+        const int precipitation = dayMap[u"precipitation"_s].toInt(&precipitationValid);
+        if (precipitationValid) {
+            futureForecast.setConditionProbability(precipitation);
+        }
+
+        bool iconNameValid = false;
+        const auto iconName = (dayMap[u"icon"_s].toInt(&iconNameValid));
+        if (iconNameValid) {
+            futureForecast.setConditionIcon(getWeatherIcon(dayIcons().value(iconName)));
+        }
+
+        if (dayNumber == 0) {
+            // Also fetch today's sunrise and sunset times to determine whether to pick day or night icons
+            const auto sunriseTime = parseDateFromMSecs(dayMap[u"sunrise"_s]);
+            if (sunriseTime.has_value()) {
+                m_sunriseTime = sunriseTime.value();
+            }
+            const auto sunsetTime = parseDateFromMSecs(dayMap[u"sunset"_s]);
+            if (sunsetTime.has_value()) {
+                m_sunsetTime = sunsetTime.value();
+            }
+        }
+
+        futureDayForecast.setDaytime(futureForecast);
+        futureDays->addDay(futureDayForecast);
+
+        dayNumber++;
+        // Only get the next 7 days (including today)
+        if (dayNumber == 7) {
+            break;
+        }
+    }
+
+    m_forecast->setFutureDays(futureDays);
+
+    // Warnings data
+    QVariantList warningData = weatherMap[u"warnings"_s].toList();
+
+    auto warnings = std::make_shared<Warnings>();
+
+    for (const QVariant &warningElement : warningData) {
+        QMap warningMap = warningElement.toMap();
+
+        const QString headline = warningMap[u"headline"_s].toString();
+        const QString description = warningMap[u"description"_s].toString();
+        if (headline.isEmpty() && description.isEmpty()) {
+            continue;
+        }
+
+        bool priorityValid = false;
+        auto priority = warningMap[u"level"_s].toInt(&priorityValid);
+        if (!priorityValid) {
+            priority = Warnings::Low;
+        }
+
+        Warning warning(static_cast<Warnings::PriorityClass>(priority), u"<p><b>%1</b></p>%2"_s.arg(headline, description));
+        const auto timestamp = parseDateFromMSecs(warningMap[u"start"_s]);
+        if (timestamp.has_value()) {
+            warning.setTimestamp(timestamp.value());
+        }
+
+        warnings->addWarning(warning);
+    }
+
+    m_forecast->setWarnings(warnings);
+
+    return true;
 }
 
-void DWDIon::parseMeasureData(const QJsonDocument &doc)
+void DWDIon::parseMeasureData(const QByteArray &data)
 {
+    QJsonParseError error;
+    const QJsonDocument doc = QJsonDocument::fromJson(data, &error);
+
+    // measurement data is optional so don't return error.
+    if (error.error != QJsonParseError::NoError || !doc.isObject()) {
+        qCWarning(WEATHER::ION::DWD) << "Failed to parse measure JSON:" << error.errorString();
+        return;
+    }
+
     QVariantMap weatherMap = doc.object().toVariantMap();
 
-    if (!weatherMap.isEmpty()) {
-        LastObservation lastObservation;
-        const auto timestamp = parseDateFromMSecs(weatherMap[u"time"_s]);
-        if (timestamp.has_value()) {
-            lastObservation.setObservationTimestamp(timestamp.value());
-        }
-
-        bool condIconValid = false;
-        const int condIconNumber = weatherMap[u"icon"_s].toInt(&condIconValid);
-        if (condIconValid) {
-            if (timestamp.has_value() && isNightTime(timestamp.value())) {
-                lastObservation.setConditionIcon(getWeatherIcon(nightIcons().value(condIconNumber)));
-            } else {
-                lastObservation.setConditionIcon(getWeatherIcon(dayIcons().value(condIconNumber)));
-            }
-        }
-
-        bool windIconValid = false;
-        const int windDirection = weatherMap[u"winddirection"_s].toInt(&windIconValid);
-        if (windIconValid) {
-            lastObservation.setWindDirection(getWindDirectionIcon(windIcons().value(roundWindDirections(windDirection))));
-        }
-
-        const auto temperature = parseNumber(weatherMap[u"temperature"_s]);
-        if (temperature.has_value()) {
-            lastObservation.setTemperature(temperature.value());
-        }
-
-        const auto humidity = parseNumber(weatherMap[u"humidity"_s]);
-        if (humidity.has_value()) {
-            lastObservation.setHumidity(humidity.value());
-        }
-
-        const auto pressure = parseNumber(weatherMap[u"pressure"_s]);
-        if (pressure.has_value()) {
-            lastObservation.setPressure(pressure.value());
-        }
-
-        const auto windSpeed = parseNumber(weatherMap[u"meanwind"_s]);
-        if (windSpeed.has_value()) {
-            lastObservation.setWindSpeed(windSpeed.value());
-        }
-
-        const auto gustSpeed = parseNumber(weatherMap[u"maxwind"_s]);
-        if (gustSpeed.has_value()) {
-            lastObservation.setWindGust(gustSpeed.value());
-        }
-
-        const auto dewpoint = parseNumber(weatherMap[u"dewpoint"_s]);
-        if (dewpoint.has_value()) {
-            lastObservation.setDewpoint(dewpoint.value());
-        }
-
-        m_forecast->setLastObservation(lastObservation);
+    if (weatherMap.isEmpty()) {
+        qCDebug(WEATHER::ION::DWD) << "Mesure data is empty";
+        return;
     }
+
+    LastObservation lastObservation;
+    const auto timestamp = parseDateFromMSecs(weatherMap[u"time"_s]);
+    if (timestamp.has_value()) {
+        lastObservation.setObservationTimestamp(timestamp.value());
+    }
+
+    bool condIconValid = false;
+    const int condIconNumber = weatherMap[u"icon"_s].toInt(&condIconValid);
+    if (condIconValid) {
+        if (timestamp.has_value() && isNightTime(timestamp.value())) {
+            lastObservation.setConditionIcon(getWeatherIcon(nightIcons().value(condIconNumber)));
+        } else {
+            lastObservation.setConditionIcon(getWeatherIcon(dayIcons().value(condIconNumber)));
+        }
+    }
+
+    bool windIconValid = false;
+    const int windDirection = weatherMap[u"winddirection"_s].toInt(&windIconValid);
+    if (windIconValid) {
+        lastObservation.setWindDirection(getWindDirectionIcon(windIcons().value(roundWindDirections(windDirection))));
+    }
+
+    const auto temperature = parseNumber(weatherMap[u"temperature"_s]);
+    if (temperature.has_value()) {
+        lastObservation.setTemperature(temperature.value());
+    }
+
+    const auto humidity = parseNumber(weatherMap[u"humidity"_s]);
+    if (humidity.has_value()) {
+        lastObservation.setHumidity(humidity.value());
+    }
+
+    const auto pressure = parseNumber(weatherMap[u"pressure"_s]);
+    if (pressure.has_value()) {
+        lastObservation.setPressure(pressure.value());
+    }
+
+    const auto windSpeed = parseNumber(weatherMap[u"meanwind"_s]);
+    if (windSpeed.has_value()) {
+        lastObservation.setWindSpeed(windSpeed.value());
+    }
+
+    const auto gustSpeed = parseNumber(weatherMap[u"maxwind"_s]);
+    if (gustSpeed.has_value()) {
+        lastObservation.setWindGust(gustSpeed.value());
+    }
+
+    const auto dewpoint = parseNumber(weatherMap[u"dewpoint"_s]);
+    if (dewpoint.has_value()) {
+        lastObservation.setDewpoint(dewpoint.value());
+    }
+
+    m_forecast->setLastObservation(lastObservation);
 }
 
 void DWDIon::validate()
