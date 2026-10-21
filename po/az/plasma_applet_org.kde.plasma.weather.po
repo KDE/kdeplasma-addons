@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-20 00:54+0000\n"
+"POT-Creation-Date: 2026-10-21 00:53+0000\n"
 "PO-Revision-Date: 2025-05-12 17:51+0400\n"
 "Last-Translator: linux <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -152,7 +152,7 @@ msgstr "Alçalan"
 msgid "Steady"
 msgstr "Dəyişməz"
 
-#: ions/dwd/ion_dwd.cpp:570
+#: ions/dwd/ion_dwd.cpp:573
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"

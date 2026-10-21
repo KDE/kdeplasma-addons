@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-20 00:54+0000\n"
+"POT-Creation-Date: 2026-10-21 00:53+0000\n"
 "PO-Revision-Date: 2026-09-19 16:38+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -150,7 +150,7 @@ msgstr "Fallande"
 msgid "Steady"
 msgstr "Stabilt"
 
-#: ions/dwd/ion_dwd.cpp:570
+#: ions/dwd/ion_dwd.cpp:573
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
