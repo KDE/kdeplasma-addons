@@ -232,8 +232,6 @@ void DWDIon::measure_slotJobFinished(KJob *job)
 
     if (job->error() || m_measurementData.isEmpty()) {
         qCWarning(WEATHER::ION::DWD) << "no measurements received" << job->errorText();
-    } else {
-        parseMeasureData(m_measurementData);
     }
 
     if (m_forecastPromise->isCanceled() || m_forecastInvalid) {
@@ -256,10 +254,6 @@ void DWDIon::forecast_slotJobFinished(KJob *job)
     if (job->error() || m_forecastData.isEmpty()) {
         qCWarning(WEATHER::ION::DWD) << "error during forecast" << job->errorText();
         m_forecastInvalid = true;
-    } else {
-        if (!parseForecastData(m_forecastData)) {
-            m_forecastInvalid = true;
-        };
     }
 
     if (m_forecastPromise->isCanceled() || m_forecastInvalid) {
@@ -631,6 +625,14 @@ void DWDIon::validate()
 void DWDIon::updateWeather()
 {
     qCDebug(WEATHER::ION::DWD) << "Updating weather";
+
+    if (!parseForecastData(m_forecastData)) {
+        m_forecastPromise->finish();
+        clearForecastData();
+        return;
+    }
+
+    parseMeasureData(m_measurementData);
 
     Station station;
 
