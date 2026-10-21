@@ -129,6 +129,7 @@ void DWDIon::clearForecastData()
     m_sunriseTime = {};
     m_sunsetTime = {};
     m_weatherData.reset();
+    m_forecast.reset();
     m_forecastPromise.reset();
 }
 
@@ -213,6 +214,7 @@ void DWDIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> 
     m_weatherID = info.last();
 
     m_weatherData = std::make_shared<WeatherData>();
+    m_forecast = std::make_shared<Forecast>();
 
     // Fetch forecast data
     const auto getJob = requestAPIJob(QUrl(FORECAST_URL.arg(m_weatherID)), m_forecastData);
@@ -552,8 +554,6 @@ void DWDIon::updateWeather()
         observationTimestamp = QDateTime::currentDateTime();
     }
 
-    auto forecast = std::make_shared<Forecast>();
-
     Station station;
 
     station.setPlace(m_weatherName);
@@ -563,7 +563,7 @@ void DWDIon::updateWeather()
         station.setNewPlaceInfo(m_weatherName + u"|"_s + m_weatherID);
     }
 
-    forecast->setStation(station);
+    m_forecast->setStation(station);
 
     MetaData metaData;
 
@@ -574,7 +574,7 @@ void DWDIon::updateWeather()
     metaData.setHumidityUnit(KUnitConversion::Percent);
     metaData.setPressureUnit(KUnitConversion::Hectopascal);
 
-    forecast->setMetadata(metaData);
+    m_forecast->setMetadata(metaData);
 
     LastObservation lastObservation;
 
@@ -610,7 +610,7 @@ void DWDIon::updateWeather()
         lastObservation.setWindDirection(m_weatherData->windDirection);
     }
 
-    forecast->setLastObservation(lastObservation);
+    m_forecast->setLastObservation(lastObservation);
 
     if (!m_weatherData->hourlyForecasts.isEmpty()) {
         auto futureHours = std::make_shared<FutureHours>();
@@ -628,7 +628,7 @@ void DWDIon::updateWeather()
         }
         qCDebug(WEATHER::ION::DWD) << "Total forecast hours: " << hours;
 
-        forecast->setFutureHours(futureHours);
+        m_forecast->setFutureHours(futureHours);
     }
 
     if (!m_weatherData->dayForecasts.isEmpty()) {
@@ -651,7 +651,7 @@ void DWDIon::updateWeather()
         }
         qCDebug(WEATHER::ION::DWD) << "Total forecast days: " << days;
 
-        forecast->setFutureDays(futureDays);
+        m_forecast->setFutureDays(futureDays);
     }
 
     if (!m_weatherData->warnings.isEmpty()) {
@@ -662,12 +662,12 @@ void DWDIon::updateWeather()
             warning.setTimestamp(localWarning.timestamp);
             warnings->addWarning(warning);
         }
-        forecast->setWarnings(warnings);
+        m_forecast->setWarnings(warnings);
     }
 
     qCDebug(WEATHER::ION::DWD) << "Forecast received. Return";
 
-    m_forecastPromise->addResult(forecast);
+    m_forecastPromise->addResult(m_forecast);
     m_forecastPromise->finish();
     clearForecastData();
 }

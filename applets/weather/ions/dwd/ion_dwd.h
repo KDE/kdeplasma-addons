@@ -153,6 +153,7 @@ private:
     QDateTime m_sunriseTime;
     QDateTime m_sunsetTime;
     std::shared_ptr<WeatherData> m_weatherData;
+    std::shared_ptr<Forecast> m_forecast;
 
     // used to handle the old format of a forecast request string
     bool m_isLegacy = false;
