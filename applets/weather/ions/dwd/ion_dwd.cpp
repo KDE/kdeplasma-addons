@@ -228,7 +228,7 @@ void DWDIon::measure_slotJobFinished(KJob *job)
     m_weatherData->isMeasureDataPending = false;
 
     if (m_forecastPromise->isCanceled()) {
-        if (m_weatherData->isForecastsDataPending) {
+        if (!m_weatherData->isForecastsDataPending) {
             m_forecastPromise->finish();
             clearForecastData();
         }
