@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-21 00:53+0000\n"
+"POT-Creation-Date: 2026-10-22 00:52+0000\n"
 "PO-Revision-Date: 2024-09-01 17:18+0200\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -152,7 +152,7 @@ msgstr "இறங்குகிறது"
 msgid "Steady"
 msgstr "நிலையாயுள்ளது"
 
-#: ions/dwd/ion_dwd.cpp:573
+#: ions/dwd/ion_dwd.cpp:656
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"

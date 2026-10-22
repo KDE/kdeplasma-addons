@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-21 00:53+0000\n"
+"POT-Creation-Date: 2026-10-22 00:52+0000\n"
 "PO-Revision-Date: 2026-01-16 19:43+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -151,7 +151,7 @@ msgstr "Pazeminās"
 msgid "Steady"
 msgstr "Vienmērīgs"
 
-#: ions/dwd/ion_dwd.cpp:573
+#: ions/dwd/ion_dwd.cpp:656
 #, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
