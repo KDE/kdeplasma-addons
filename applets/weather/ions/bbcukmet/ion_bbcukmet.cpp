@@ -382,7 +382,7 @@ void UKMETIon::readSearchData(const QByteArray &json)
         // the exact same id, which can happen since we're merging two results
         QString sourceKey = fullName;
         int duplicate = 1;
-        while (m_locations.contains(sourceKey) && m_place.value(sourceKey).placeCode != id) {
+        while (m_locations.contains(sourceKey) && m_place.value(sourceKey).code().value() != id) {
             duplicate++;
             sourceKey = u"%1 (#%2)"_s.arg(fullName).arg(duplicate);
         }
@@ -390,10 +390,11 @@ void UKMETIon::readSearchData(const QByteArray &json)
             continue;
         }
 
-        PlaceInfo &place = m_place[sourceKey];
-        place.placeCode = id;
-        place.station = name;
-        place.displayName = fullName;
+        Location &place = m_place[sourceKey];
+        place.setCode(id);
+        place.setStation(name);
+        place.setDisplayName(sourceKey);
+        place.setPlaceInfo(sourceKey + u"|"_s + id);
 
         m_locations.append(sourceKey);
     }
@@ -636,12 +637,7 @@ void UKMETIon::validate()
     auto locations = std::make_shared<Locations>();
 
     for (const QString &place : std::as_const(m_locations)) {
-        Location location;
-        location.setDisplayName(place);
-        location.setStation(m_place[place].station);
-        location.setCode(m_place[place].placeCode);
-        location.setPlaceInfo(place + u"|"_s + m_place[place].placeCode);
-        locations->addLocation(location);
+        locations->addLocation(m_place[place]);
     }
 
     qCDebug(WEATHER::ION::BBCUKMET) << "Validated. Clear and return";

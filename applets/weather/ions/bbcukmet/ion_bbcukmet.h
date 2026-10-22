@@ -23,13 +23,6 @@ namespace KIO
 class Job;
 }
 
-class PlaceInfo
-{
-public:
-    QString station;
-    QString displayName;
-    QString placeCode;
-};
 class WeatherData
 {
 public:
@@ -126,7 +119,7 @@ private Q_SLOTS:
     void forecast_slotJobFinished(KJob *job);
 
 private:
-    QHash<QString, PlaceInfo> m_place;
+    QHash<QString, Location> m_place;
     QList<QString> m_locations;
 
     // Locations information
