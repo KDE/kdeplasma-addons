@@ -119,8 +119,8 @@ private Q_SLOTS:
     void forecast_slotJobFinished(KJob *job);
 
 private:
-    QHash<QString, Location> m_place;
-    QList<QString> m_locations;
+    QHash<QString, Location> m_locations;
+    QList<QString> m_locationOrder;
 
     // Locations information
     QString m_searchString;
