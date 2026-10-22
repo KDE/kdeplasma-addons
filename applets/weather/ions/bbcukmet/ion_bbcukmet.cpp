@@ -590,42 +590,37 @@ bool UKMETIon::readForecast(const QJsonDocument &doc)
     weatherData.forecasts.clear();
 
     // Indicates if the forecast includes a first report for tonight
-    bool isTonight = doc[u"isNight"_s].toBool(false);
+    bool isNight = doc[u"isNight"_s].toBool(false);
 
-    for (const QJsonValue &forecast : info) {
-        const QJsonObject report = forecast[u"summary"_s][u"report"_s].toObject();
+    for (const QJsonValue &forecastValue : info) {
+        const QJsonObject report = forecastValue[u"summary"_s][u"report"_s].toObject();
         if (report.isEmpty()) {
             continue;
         }
 
-        weatherData.forecasts << parseForecastReport(report, isTonight);
-        isTonight = false; // Just use it on the first report
+        WeatherData::ForecastInfo forecast;
+
+        forecast.period = QDateTime::fromString(report[u"localDate"_s].toString(), Qt::ISODate); // "YYYY-MM-DD" (ISO8601)
+        forecast.isNight = isNight;
+
+        forecast.summary = report[u"weatherTypeText"_s].toString().toLower();
+        forecast.iconName = getWeatherIcon(isNight ? nightIcons() : dayIcons(), forecast.summary);
+
+        forecast.tempLow = report[u"minTempC"_s].toDouble(qQNaN());
+        if (!isNight) { // Don't include max temperatures in a nightly report
+            forecast.tempHigh = report[u"maxTempC"_s].toDouble(qQNaN());
+        }
+        forecast.precipitationPct = report[u"precipitationProbabilityInPercent"_s].toInt();
+        forecast.windSpeed = report[u"windSpeedKph"_s].toDouble(qQNaN());
+        forecast.windDirection = report[u"windDirectionAbbreviation"_s].toString();
+
+        weatherData.forecasts << forecast;
+        isNight = false; // Just use it on the first report
     }
 
     qCDebug(WEATHER::ION::BBCUKMET) << "Read forecast data:" << m_weatherData->forecasts.count() << "days";
 
     return true;
-}
-
-WeatherData::ForecastInfo UKMETIon::parseForecastReport(const QJsonObject &report, bool isNight) const
-{
-    WeatherData::ForecastInfo forecast;
-
-    forecast.period = QDateTime::fromString(report[u"localDate"_s].toString(), Qt::ISODate); // "YYYY-MM-DD" (ISO8601)
-    forecast.isNight = isNight;
-
-    forecast.summary = report[u"weatherTypeText"_s].toString().toLower();
-    forecast.iconName = getWeatherIcon(isNight ? nightIcons() : dayIcons(), forecast.summary);
-
-    forecast.tempLow = report[u"minTempC"_s].toDouble(qQNaN());
-    if (!isNight) { // Don't include max temperatures in a nightly report
-        forecast.tempHigh = report[u"maxTempC"_s].toDouble(qQNaN());
-    }
-    forecast.precipitationPct = report[u"precipitationProbabilityInPercent"_s].toInt();
-    forecast.windSpeed = report[u"windSpeedKph"_s].toDouble(qQNaN());
-    forecast.windDirection = report[u"windDirectionAbbreviation"_s].toString();
-
-    return forecast;
 }
 
 void UKMETIon::validate()
