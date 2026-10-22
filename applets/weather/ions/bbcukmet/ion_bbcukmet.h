@@ -109,7 +109,6 @@ private:
     // Load and parse the weather forecast
     void getForecast();
     bool readForecast(const QJsonDocument &doc);
-    WeatherData::ForecastInfo parseForecastReport(const QJsonObject &report, bool isNight) const;
 
     // Load and parse current observation data
     void getObservation();
