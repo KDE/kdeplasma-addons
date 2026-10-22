@@ -382,11 +382,11 @@ void UKMETIon::readSearchData(const QByteArray &json)
         // the exact same id, which can happen since we're merging two results
         QString sourceKey = fullName;
         int duplicate = 1;
-        while (m_locations.contains(sourceKey) && m_place.value(sourceKey).code().value() != id) {
+        while (m_place.contains(sourceKey) && m_place.value(sourceKey).code().value() != id) {
             duplicate++;
             sourceKey = u"%1 (#%2)"_s.arg(fullName).arg(duplicate);
         }
-        if (m_locations.contains(sourceKey)) {
+        if (m_place.contains(sourceKey)) {
             continue;
         }
 
