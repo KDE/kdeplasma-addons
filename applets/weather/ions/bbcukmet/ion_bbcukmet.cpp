@@ -270,7 +270,7 @@ void UKMETIon::clearLocationData()
     m_locationPromise.reset();
     m_locationsData.clear();
     m_locationsAutoData.clear();
-    m_locations.clear();
+    m_locationOrder.clear();
 }
 
 void UKMETIon::clearForecastData()
@@ -380,26 +380,26 @@ void UKMETIon::readSearchData(const QByteArray &json)
 
         // Duplicate places can exist, show them too, but not if they have
         // the exact same id, which can happen since we're merging two results
-        QString sourceKey = fullName;
+        QString locationKey = fullName;
         int duplicate = 1;
-        while (m_place.contains(sourceKey) && m_place.value(sourceKey).code().value() != id) {
+        while (m_locations.contains(locationKey) && m_locations.value(locationKey).code().value() != id) {
             duplicate++;
-            sourceKey = u"%1 (#%2)"_s.arg(fullName).arg(duplicate);
+            locationKey = u"%1 (#%2)"_s.arg(fullName).arg(duplicate);
         }
-        if (m_place.contains(sourceKey)) {
+        if (m_locations.contains(locationKey)) {
             continue;
         }
 
-        Location &place = m_place[sourceKey];
+        Location &place = m_locations[locationKey];
         place.setCode(id);
         place.setStation(name);
-        place.setDisplayName(sourceKey);
-        place.setPlaceInfo(sourceKey + u"|"_s + id);
+        place.setDisplayName(locationKey);
+        place.setPlaceInfo(locationKey + u"|"_s + id);
 
-        m_locations.append(sourceKey);
+        m_locationOrder.append(locationKey);
     }
 
-    qCDebug(WEATHER::ION::BBCUKMET) << "Search results:" << results.count() << "Total unique locations:" << m_locations.count()
+    qCDebug(WEATHER::ION::BBCUKMET) << "Search results:" << results.count() << "Total unique locations:" << m_locationOrder.count()
                                     << "Pending calls:" << m_pendingSearchCount;
 }
 
@@ -627,7 +627,7 @@ bool UKMETIon::readForecast(const QJsonDocument &doc)
 void UKMETIon::validate()
 {
     qCDebug(WEATHER::ION::BBCUKMET) << "validating...";
-    if (m_locations.isEmpty()) {
+    if (m_locationOrder.isEmpty()) {
         m_locationPromise->finish();
         m_locationPromise.reset();
         qCDebug(WEATHER::ION::BBCUKMET) << "locations are empty. Return";
@@ -636,8 +636,8 @@ void UKMETIon::validate()
 
     auto locations = std::make_shared<Locations>();
 
-    for (const QString &place : std::as_const(m_locations)) {
-        locations->addLocation(m_place[place]);
+    for (const QString &locationKey : std::as_const(m_locationOrder)) {
+        locations->addLocation(m_locations[locationKey]);
     }
 
     qCDebug(WEATHER::ION::BBCUKMET) << "Validated. Clear and return";
