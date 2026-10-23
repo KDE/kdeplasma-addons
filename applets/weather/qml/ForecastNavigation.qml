@@ -94,6 +94,7 @@ RowLayout {
         Layout.alignment: Qt.AlignVCenter
 
         delegate: Rectangle {
+            id: pageDelegate
             required property int index
 
             readonly property int delegateIndex: indicator.firstVisibleIndex + index
@@ -113,7 +114,7 @@ RowLayout {
             scale: isLeadingIndicator || isTrailingIndicator ? 0.7 : 1
 
             TapHandler {
-                onTapped: root.goToIndex(delegateIndex * root.pageSize)
+                onTapped: root.goToIndex(pageDelegate.delegateIndex * root.pageSize)
             }
         }
 

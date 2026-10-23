@@ -32,15 +32,15 @@ GridLayout {
     Kirigami.Icon {
         id: icon
 
-        readonly property int implicitMinimumIconSize: Math.max(iconSize, minimumIconSize)
+        readonly property int implicitMinimumIconSize: Math.max(iconAndTextRoot.iconSize, iconAndTextRoot.minimumIconSize)
         // reset implicit size, so layout in free dimension does not stop at the default one
-        implicitWidth: minimumIconSize
-        implicitHeight: minimumIconSize
+        implicitWidth: iconAndTextRoot.minimumIconSize
+        implicitHeight: iconAndTextRoot.minimumIconSize
 
         Layout.fillWidth: iconAndTextRoot.vertical
         Layout.fillHeight: !iconAndTextRoot.vertical
-        Layout.minimumWidth: iconAndTextRoot.vertical ? minimumIconSize : implicitMinimumIconSize
-        Layout.minimumHeight: iconAndTextRoot.vertical ? implicitMinimumIconSize : minimumIconSize
+        Layout.minimumWidth: iconAndTextRoot.vertical ? iconAndTextRoot.minimumIconSize : implicitMinimumIconSize
+        Layout.minimumHeight: iconAndTextRoot.vertical ? implicitMinimumIconSize : iconAndTextRoot.minimumIconSize
     }
 
     Item {

@@ -106,11 +106,11 @@ ColumnLayout {
                 id: feelsLikeLabel
                 Layout.fillWidth: true
 
-                readonly property bool isFeelsLikeTemperaturePresent: isTemperaturePresent && (!isNaN(root.lastObservation.heatIndex) || !isNaN(root.lastObservation.windchill) || !isNaN(root.lastObservation.humidex))
+                readonly property bool isFeelsLikeTemperaturePresent: root.isTemperaturePresent && (!isNaN(root.lastObservation.heatIndex) || !isNaN(root.lastObservation.windchill) || !isNaN(root.lastObservation.humidex))
 
                 visible: {
                     if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
-                        let feelsTemperature = feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
+                        let feelsTemperature = root.feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
                         return feelsTemperature !== "" && feelsTemperature !== root.lastObservation.temperature;
                     }
 
@@ -124,7 +124,7 @@ ColumnLayout {
 
                 text: {
                     if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
-                        let feelsTemperature = feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
+                        let feelsTemperature = root.feelsLikeTemperature(root.lastObservation.windchill, root.lastObservation.heatIndex, root.lastObservation.humidex);
                         let feelsTemperatureString = Util.temperatureToDisplayString(root.displayTemperatureUnit, feelsTemperature, root.metaData.temperatureUnit, true, false);
                         return i18nc("@label %1 is the perceived temperature due to conditions like wind or humidity. Use the common phrasing for this concept and keep it short, adding a colon if necessary", "Feels like %1", feelsTemperatureString);
                     }

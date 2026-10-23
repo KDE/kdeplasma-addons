@@ -69,7 +69,7 @@ Loader {
                 anchors.right: parent.right
                 anchors.bottom: parent.bottom
 
-                visible: compactRoot.isTemperaturePresent && showTemperature && useBadge && text.length > 0
+                visible: compactRoot.isTemperaturePresent && compactRoot.showTemperature && compactRoot.useBadge && text.length > 0
 
                 text: compactRoot.isTemperaturePresent ? Util.temperatureToDisplayString(compactRoot.displayTemperatureUnit, compactRoot.lastObservation.temperature, compactRoot.metaData.temperatureUnit, true, false) : "";
                 icon: parent

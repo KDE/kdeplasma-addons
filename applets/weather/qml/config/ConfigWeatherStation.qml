@@ -19,7 +19,7 @@ KCM.ScrollViewKCM {
     LocationsControl {
         id: locationListModel
         onLocationSearchDone: {
-            isSearching = false;
+            weatherStationConfigPage.isSearching = false;
         }
     }
 
@@ -74,10 +74,10 @@ KCM.ScrollViewKCM {
 
                 Layout.fillWidth: true
                 elide: Text.ElideRight
-                opacity: hasSource ? 1 : 0.75
+                opacity: weatherStationConfigPage.hasSource ? 1 : 0.75
 
                 text: {
-                    if (hasSource) {
+                    if (weatherStationConfigPage.hasSource) {
                         if (weatherStationConfigPage.cfg_placeDisplayName !== "") {
                             return weatherStationConfigPage.cfg_placeDisplayName;
                         }
@@ -89,12 +89,12 @@ KCM.ScrollViewKCM {
             }
 
             QQC2.Label {
-                Kirigami.FormData.label: hasSource ? i18nc("@label", "Provider:") : ""
+                Kirigami.FormData.label: weatherStationConfigPage.hasSource ? i18nc("@label", "Provider:") : ""
 
                 Layout.fillWidth: true
                 elide: Text.ElideRight
                 // Keep it visible to avoid height changes which can confuse AppletConfigurationPage
-                opacity: hasSource ? 1 : 0
+                opacity: weatherStationConfigPage.hasSource ? 1 : 0
 
                 text: {
                     if (weatherStationConfigPage.hasSource) {
@@ -127,13 +127,13 @@ KCM.ScrollViewKCM {
 
             focus: true
             enabled: locationListModel.hasProviders
-            placeholderText: hasSource ? i18nc("@info:placeholder", "Enter new location") : i18nc("@info:placeholder", "Enter location")
+            placeholderText: weatherStationConfigPage.hasSource ? i18nc("@info:placeholder", "Enter new location") : i18nc("@info:placeholder", "Enter location")
 
             Timer {
                 id: searchDelayTimer
                 interval: 500
                 onTriggered: {
-                    if (!canSearch) {
+                    if (!weatherStationConfigPage.canSearch) {
                         locationListModel.clear();
                         return;
                     }
@@ -142,7 +142,7 @@ KCM.ScrollViewKCM {
             }
 
             onTextChanged: {
-                isSearching = text.length > 0
+                weatherStationConfigPage.isSearching = text.length > 0
                 searchDelayTimer.restart();
             }
 
@@ -235,24 +235,24 @@ KCM.ScrollViewKCM {
             id: listViewPlaceholder
             anchors.centerIn: parent
             width: parent.width - (Kirigami.Units.largeSpacing * 4)
-            visible: locationListView.count === 0 && !isSearching
+            visible: locationListView.count === 0 && !weatherStationConfigPage.isSearching
             text: {
-                if (canSearch) {    // There is a search text
+                if (weatherStationConfigPage.canSearch) {    // There is a search text
                     return i18nc("@info", "No weather stations found for '%1'", searchStringEdit.text);
-                } else if (hasSource) {
+                } else if (weatherStationConfigPage.hasSource) {
                     return i18nc("@info", "Search for a weather station to change your location");
                 } else {
                     return i18nc("@info", "Search for a weather station to set your location");
                 }
             }
-            explanation: canSearch ? i18nc("@info:usagetip", "If you've used this weather station in the past, it's possible that a server outage at the weather station provider has made it temporarily unavailable. Try again later.") : ""
+            explanation: weatherStationConfigPage.canSearch ? i18nc("@info:usagetip", "If you've used this weather station in the past, it's possible that a server outage at the weather station provider has made it temporarily unavailable. Try again later.") : ""
 
         }
 
         QQC2.BusyIndicator {
             id: busy
             anchors.centerIn: parent
-            visible: locationListView.count === 0 && isSearching
+            visible: locationListView.count === 0 && weatherStationConfigPage.isSearching
         }
     }
 
