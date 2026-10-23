@@ -126,8 +126,8 @@ Item {
 
                 const ratio = xInPlot / plotWidth;
 
-                const visualMin = forecastGraph.axisX.visualMin.getTime();
-                const visualMax = forecastGraph.axisX.visualMax.getTime();
+                const visualMin = (forecastGraph.axisX as Graphs.DateTimeAxis).visualMin.getTime();
+                const visualMax = (forecastGraph.axisX as Graphs.DateTimeAxis).visualMax.getTime();
                 const targetTime = visualMin + ratio * (visualMax - visualMin);
 
                 let left = 0;
@@ -194,7 +194,7 @@ Item {
                 graphHovered: Qt.binding(function () {
                     return hoverHandler.hovered;
                 })
-            });
+            }) as ForecastGraphSeries;
 
             series.pointSelected.connect((x, y) => {
                 root.currentPointDateX = x;

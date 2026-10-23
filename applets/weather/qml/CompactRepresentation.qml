@@ -33,8 +33,8 @@ Loader {
     sourceComponent: (compactRoot.isTemperaturePresent && compactRoot.showTemperature && !compactRoot.useBadge) ? iconAndTextComponent : iconComponent
     Layout.fillWidth: compactRoot.vertical
     Layout.fillHeight: !compactRoot.vertical
-    Layout.minimumWidth: item.Layout.minimumWidth
-    Layout.minimumHeight: item.Layout.minimumHeight
+    Layout.minimumWidth: (item as Item).Layout.minimumWidth
+    Layout.minimumHeight: (item as Item).Layout.minimumHeight
 
     MouseArea {
         id: compactMouseArea
