@@ -44,8 +44,8 @@ KCM.SimpleKCM {
 
         Kirigami.InlineMessage {
             Layout.fillWidth: true
-            visible: ['wettercom', 'dwd'].includes(plasmoid.configuration.provider)
-            text: i18nc("@label:info. %1 is the name of a weather service", "“%1” may not offer the current temperature or other weather conditions for this location.", locations.getProviderDisplayName(plasmoid.configuration.provider))
+            visible: ['wettercom', 'dwd'].includes(Plasmoid.configuration.provider)
+            text: i18nc("@label:info. %1 is the name of a weather service", "“%1” may not offer the current temperature or other weather conditions for this location.", locations.getProviderDisplayName(Plasmoid.configuration.provider))
         }
 
         Kirigami.FormLayout {

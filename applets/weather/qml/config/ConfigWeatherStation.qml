@@ -38,9 +38,9 @@ KCM.ScrollViewKCM {
 
     // Plasmoid config pages don't offer this functionality built-in; manufacture it here
     function resetLocation() : void {
-        weatherStationConfigPage.cfg_provider = plasmoid.configuration.provider;
-        weatherStationConfigPage.cfg_placeInfo = plasmoid.configuration.placeInfo;
-        weatherStationConfigPage.cfg_placeDisplayName = plasmoid.configuration.placeDisplayName;
+        weatherStationConfigPage.cfg_provider = Plasmoid.configuration.provider;
+        weatherStationConfigPage.cfg_placeInfo = Plasmoid.configuration.placeInfo;
+        weatherStationConfigPage.cfg_placeDisplayName = Plasmoid.configuration.placeDisplayName;
     }
 
     forceFooterSeparator: true
