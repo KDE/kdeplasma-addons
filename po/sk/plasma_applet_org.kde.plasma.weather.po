@@ -404,7 +404,7 @@ msgstr "clear sky"
 #, kde-format
 msgctxt "weather credit"
 msgid "Weather data by Open-Meteo"
-msgstr ""
+msgstr "Údaje o počasí od Open-Meteo"
 
 #: qml/cards/ForecastDelegate.qml:95
 #, kde-format
@@ -416,7 +416,7 @@ msgstr "%1 (%2%)"
 #, kde-format
 msgctxt "High and low temperature wrapper"
 msgid "%1/<font color='%2'>%3</font>"
-msgstr ""
+msgstr "%1/<font color='%2'>%3</font>"
 
 #: qml/cards/ForecastDelegate.qml:124
 #, kde-format
@@ -455,6 +455,8 @@ msgid ""
 "“%1” may not offer the current temperature or other weather conditions for "
 "this location."
 msgstr ""
+"„%1“ nemusí pre toto miesto poskytovať aktuálnu teplotu ani iné "
+"poveternostné podmienky."
 
 #: qml/config/ConfigAppearance.qml:54
 #, kde-format
@@ -517,28 +519,22 @@ msgid "Humidity"
 msgstr "Vlhkosť"
 
 #: qml/config/ConfigAppearance.qml:122
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show temperature:"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature graph:"
-msgstr "Zobraziť teplotu:"
+msgstr "Zobraziť graf teploty:"
 
 #: qml/config/ConfigAppearance.qml:123
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@option:check"
 msgid "Hourly Forecast"
-msgstr "Forecast"
+msgstr "Hodinová predpoveď"
 
 #: qml/config/ConfigAppearance.qml:128
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@option:check"
 msgid "Day Forecast"
-msgstr "Forecast"
+msgstr "Denná predpoveď"
 
 #: qml/config/ConfigUnits.qml:31
 #, kde-format
@@ -645,122 +641,100 @@ msgstr ""
 "Try again later."
 
 #: qml/DayForecastGraph.qml:42 qml/HourlyForecastGraph.qml:46
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Temperature"
 msgstr "Teplota"
 
 #: qml/DayForecastGraph.qml:59 qml/HourlyForecastGraph.qml:63
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "High Temperature"
-msgstr "Teplota"
+msgstr "Najvyššia teplota"
 
 #: qml/DayForecastGraph.qml:76 qml/HourlyForecastGraph.qml:80
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Low Temperature"
-msgstr "Teplota"
+msgstr "Najnižšia teplota"
 
 #: qml/DayForecastGraph.qml:93 qml/HourlyForecastGraph.qml:97
 #, kde-format
 msgctxt "@label"
 msgid "Chance of precipitation"
-msgstr ""
+msgstr "Pravdepodobnosť zrážok"
 
 #: qml/DetailsView.qml:35
-#, fuzzy, kde-format
-#| msgctxt "@label ground temperature"
-#| msgid "Dewpoint:"
+#, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint"
-msgstr "Rosný bod:"
+msgstr "Rosný bod"
 
 #: qml/DetailsView.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@option:check Show in tooltip: pressure"
-#| msgid "Pressure"
+#, kde-format
 msgctxt "@label"
 msgid "Pressure"
 msgstr "Tlak"
 
 #: qml/DetailsView.qml:45
-#, fuzzy, kde-format
-#| msgctxt "@label pressure tendency, rising/falling/steady"
-#| msgid "Pressure Tendency:"
+#, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure tendency"
-msgstr "Tlaková tendencia:"
+msgstr "Tlaková tendencia"
 
 #: qml/DetailsView.qml:50
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Visibility:"
+#, kde-format
 msgctxt "@label"
 msgid "Visibility"
-msgstr "Viditeľnosť:"
+msgstr "Viditeľnosť"
 
 #: qml/DetailsView.qml:63
-#, fuzzy, kde-format
-#| msgctxt "@option:check Show in tooltip: humidity"
-#| msgid "Humidity"
+#, kde-format
 msgctxt "@label"
 msgid "Humidity"
 msgstr "Vlhkosť"
 
 #: qml/DetailsView.qml:68
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Wind Gust:"
+#, kde-format
 msgctxt "@label"
 msgid "Wind gust"
-msgstr "Náraz vetra:"
+msgstr "Nárazy vetra"
 
 #: qml/DetailsView.qml:73
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Wind speed:"
+#, kde-format
 msgctxt "@label"
 msgid "Wind speed"
-msgstr "Rýchlosť vetra:"
+msgstr "Rýchlosť vetra"
 
 #: qml/ForecastNavigation.qml:35
 #, kde-format
 msgctxt "@action"
 msgid "Go to first day"
-msgstr ""
+msgstr "Prejsť na prvý deň"
 
 #: qml/ForecastNavigation.qml:54
 #, kde-format
 msgctxt "@action"
 msgid "Go to previous day"
-msgstr ""
+msgstr "Prejsť na predchádzajúci deň"
 
 #: qml/ForecastNavigation.qml:134
 #, kde-format
 msgctxt "@action"
 msgid "Go to next day"
-msgstr ""
+msgstr "Prejsť na nasledujúci deň"
 
 #: qml/ForecastNavigation.qml:153
 #, kde-format
 msgctxt "@action"
 msgid "Go to last day"
-msgstr ""
+msgstr "Prejsť na posledný deň"
 
 #: qml/FullRepresentation.qml:61
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Unable to load weather forecast"
+#, kde-format
 msgctxt "@action:button"
 msgid "Return to Weather Forecast"
-msgstr "Unschopný load weather forecast"
+msgstr "Návrat k predpovedi počasia"
 
 #: qml/FullRepresentation.qml:78
 #, kde-format
@@ -799,11 +773,6 @@ msgid "Unable to load weather forecast"
 msgstr "Unschopný load weather forecast"
 
 #: qml/FullRepresentation.qml:106
-#, fuzzy
-#| msgctxt "@info:usagetip"
-#| msgid ""
-#| "There may be a technical issue with the weather provider. If the issue "
-#| "persists for longer than a day, submit a bug report."
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
@@ -811,8 +780,9 @@ msgid ""
 "cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
 "link>."
 msgstr ""
-"There may be a technical issue with the weather provider. If the issue "
-"persists for longer than a day, submit a bug report."
+"Môže ísť o technický problém poskytovateľa počasia. Ak problém pretrváva "
+"dlhšie ako deň, <link url='https://bugs.kde.org/enter_bug.cgi?"
+"product=plasmashell&component=Weather%20widget'>nahláste chybu</link>."
 
 #: qml/main.qml:82
 #, kde-format
@@ -871,36 +841,29 @@ msgid "Show more information"
 msgstr "Show more information"
 
 #: qml/StackedView.qml:51
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@title"
 msgid "Hourly Forecast"
-msgstr "Forecast"
+msgstr "Hodinová predpoveď"
 
 #: qml/StackedView.qml:81
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@title %1 is a number of days"
 msgid "%1-Day Forecast"
-msgstr "Forecast"
+msgstr "Predpoveď na %1 dní"
 
 #: qml/TabbedView.qml:40
 #, kde-format
 msgctxt "@title:tab"
 msgid "Hourly"
-msgstr ""
+msgstr "Po hodinách"
 
 #: qml/TabbedView.qml:55
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "@title:tab"
 msgid "%1 Day"
 msgid_plural "%1 Days"
-msgstr[0] "1 deň"
+msgstr[0] "%1 deň"
 msgstr[1] "%1 dni"
 msgstr[2] "%1 dní"
 
@@ -925,8 +888,7 @@ msgid "Feels like %1"
 msgstr "Feels like %1"
 
 #: qml/WeatherPage.qml:96
-#, fuzzy, kde-format
-#| msgid "Today"
+#, kde-format
 msgctxt "@label"
 msgid "Today"
 msgstr "Dnes"
@@ -935,20 +897,19 @@ msgstr "Dnes"
 #, kde-format
 msgctxt "@label"
 msgid "Tomorrow"
-msgstr ""
+msgstr "Zajtra"
 
 #: qml/WeatherPage.qml:104
 #, kde-format
 msgctxt "@label"
 msgid "Today to Tomorrow"
-msgstr ""
+msgstr "Dnes až zajtra"
 
 #: qml/WeatherPage.qml:106
-#, fuzzy, kde-format
-#| msgid "Today"
+#, kde-format
 msgctxt "@label %1 is a day of the week"
 msgid "Today to %1"
-msgstr "Dnes"
+msgstr "Dnes až %1"
 
 #: util.cpp:42
 #, kde-format
@@ -957,9 +918,7 @@ msgid "°"
 msgstr "°"
 
 #: util.cpp:46 util.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "temperature, unit"
-#| msgid "%1%2"
+#, kde-format
 msgctxt "temperature unitsymbol"
 msgid "%1%2"
 msgstr "%1%2"
@@ -986,12 +945,10 @@ msgstr "%1 (%2)"
 #, kde-format
 msgctxt "Short for Day"
 msgid "D"
-msgstr ""
+msgstr "D"
 
 #: weatherdata/futuredays.cpp:295
-#, fuzzy, kde-format
-#| msgctxt "wind direction"
-#| msgid "N"
+#, kde-format
 msgctxt "Short for Night"
 msgid "N"
 msgstr "S"

@@ -33,10 +33,7 @@ msgstr ""
 "jednotiek."
 
 #: converterrunner.cpp:47
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
-#| msgid "in;to;as"
+#, kde-format
 msgctxt ""
 "list of words that can be used as amount of 'unit1' [in|to|as] 'unit2' (e.g. "
 "'km [in|to|as] miles'). Can be more (or less) than three words, if it makes "
