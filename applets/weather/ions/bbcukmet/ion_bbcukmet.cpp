@@ -630,39 +630,57 @@ bool UKMETIon::readForecast(const QJsonDocument &doc)
         return false;
     }
 
-    WeatherData &weatherData = *m_weatherData;
-    weatherData.forecasts.clear();
+    auto futureDays = std::make_shared<FutureDays>();
 
     // Indicates if the forecast includes a first report for tonight
     bool isNight = doc[u"isNight"_s].toBool(false);
 
+    int day = 0;
     for (const QJsonValue &forecastValue : info) {
         const QJsonObject report = forecastValue[u"summary"_s][u"report"_s].toObject();
         if (report.isEmpty()) {
             continue;
         }
 
-        WeatherData::ForecastInfo forecast;
-
-        forecast.period = QDateTime::fromString(report[u"localDate"_s].toString(), Qt::ISODate); // "YYYY-MM-DD" (ISO8601)
-        forecast.isNight = isNight;
-
-        forecast.summary = report[u"weatherTypeText"_s].toString().toLower();
-        forecast.iconName = getWeatherIcon(isNight ? nightIcons() : dayIcons(), forecast.summary);
-
-        forecast.tempLow = report[u"minTempC"_s].toDouble(qQNaN());
-        if (!isNight) { // Don't include max temperatures in a nightly report
-            forecast.tempHigh = report[u"maxTempC"_s].toDouble(qQNaN());
+        const auto forecastTimestamp = QDateTime::fromString(report[u"localDate"_s].toString(), Qt::ISODate);
+        if (!forecastTimestamp.isValid()) {
+            continue;
         }
-        forecast.precipitationPct = report[u"precipitationProbabilityInPercent"_s].toInt();
-        forecast.windSpeed = report[u"windSpeedKph"_s].toDouble(qQNaN());
-        forecast.windDirection = report[u"windDirectionAbbreviation"_s].toString();
 
-        weatherData.forecasts << forecast;
+        FutureDayForecast futureDayForecast(forecastTimestamp);
+        FutureForecast futureForecast;
+        const auto condition = report[u"weatherTypeText"_s].toString().toLower();
+        if (!condition.isEmpty()) {
+            futureForecast.setCondition(i18nc("weather forecast", condition.toUtf8().data()));
+            futureForecast.setConditionIcon(getWeatherIcon(isNight ? nightIcons() : dayIcons(), condition));
+        }
+        if (report[u"minTempC"_s].isDouble()) {
+            futureForecast.setLowTemp(report[u"minTempC"_s].toDouble());
+        }
+        if (report[u"maxTempC"_s].isDouble() && !isNight) {
+            futureForecast.setHighTemp(report[u"maxTempC"_s].toDouble());
+        }
+        const auto precipitationProbability = report[u"precipitationProbabilityInPercent"_s].toInt(-1);
+        if (precipitationProbability != -1) {
+            futureForecast.setConditionProbability(precipitationProbability);
+        }
+
+        futureDayForecast.setDaytime(futureForecast);
+
+        futureDays->addDay(futureDayForecast);
+
         isNight = false; // Just use it on the first report
+        ++day;
+
+        // Limit the forecast days to 7 days (the applet is not ready for more)
+        if (day >= 7) {
+            break;
+        }
     }
 
-    qCDebug(WEATHER::ION::BBCUKMET) << "Read forecast data:" << m_weatherData->forecasts.count() << "days";
+    m_forecast->setFutureDays(futureDays);
+
+    qCDebug(WEATHER::ION::BBCUKMET) << "Read forecast data";
 
     return true;
 }
@@ -704,36 +722,6 @@ void UKMETIon::updateWeather()
     metaData.setWindSpeedUnit(KUnitConversion::MilePerHour);
 
     m_forecast->setMetadata(metaData);
-
-    // Daily forecast info
-
-    auto futureDays = std::make_shared<FutureDays>();
-
-    int day = 0;
-    for (const WeatherData::ForecastInfo &forecast : std::as_const(m_weatherData->forecasts)) {
-        FutureDayForecast futureDayForecast(forecast.period);
-        FutureForecast futureForecast;
-        futureForecast.setConditionIcon(forecast.iconName);
-        futureForecast.setCondition(i18nc("weather forecast", forecast.summary.toUtf8().data()));
-        if (!qIsNaN(forecast.tempHigh)) {
-            futureForecast.setHighTemp(forecast.tempHigh);
-        }
-        if (!qIsNaN(forecast.tempLow)) {
-            futureForecast.setLowTemp(forecast.tempLow);
-        }
-        futureForecast.setConditionProbability(forecast.precipitationPct);
-        ++day;
-
-        futureDayForecast.setDaytime(futureForecast);
-
-        futureDays->addDay(futureDayForecast);
-        // Limit the forecast days to 7 days (the applet is not ready for more)
-        if (day >= 7) {
-            break;
-        }
-    }
-
-    m_forecast->setFutureDays(futureDays);
 
     qCDebug(WEATHER::ION::BBCUKMET) << "Updated weather data for" << m_placeName;
 }
