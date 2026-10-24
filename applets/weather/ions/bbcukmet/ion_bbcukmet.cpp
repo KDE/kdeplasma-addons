@@ -677,6 +677,11 @@ bool UKMETIon::readForecast(const QJsonDocument &doc)
         }
     }
 
+    if (day == 0) {
+        qCDebug(WEATHER::ION::BBCUKMET) << "can't find any valid forecasts";
+        return false;
+    }
+
     m_forecast->setFutureDays(futureDays);
 
     qCDebug(WEATHER::ION::BBCUKMET) << "Read forecast data";
