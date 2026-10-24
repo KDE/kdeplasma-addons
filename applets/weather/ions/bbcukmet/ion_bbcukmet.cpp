@@ -256,6 +256,7 @@ void UKMETIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>
         return;
     }
 
+    m_forecast = std::make_shared<Forecast>();
     m_weatherData = std::make_shared<WeatherData>();
 
     m_placeName = info.first();
@@ -278,6 +279,7 @@ void UKMETIon::clearForecastData()
     m_isLegacy = false;
     m_forecastPromise.reset();
     m_weatherData.reset();
+    m_forecast.reset();
     m_forecastData.clear();
 }
 
@@ -501,6 +503,7 @@ void UKMETIon::forecast_slotJobFinished(KJob *job)
 
     if (doc.isNull()) {
         qCWarning(WEATHER::ION::BBCUKMET) << "Received invalid data:" << jsonError.errorString();
+        m_forecast->setError();
     } else if (const auto response = doc[u"response"_s].toObject(); !response.isEmpty()) {
         // Server returns some HTTP states as JSON data.
         const int errorCode = response[u"code"_s].toInt();
@@ -517,11 +520,14 @@ void UKMETIon::forecast_slotJobFinished(KJob *job)
     } else {
         if (readForecast(doc)) {
             updateWeather();
+        } else {
+            m_forecast->setError();
         }
     }
 
     m_retryAttempts = 0;
 
+    m_forecastPromise->addResult(m_forecast);
     m_forecastPromise->finish();
     clearForecastData();
 }
@@ -649,8 +655,6 @@ void UKMETIon::validate()
 
 void UKMETIon::updateWeather()
 {
-    auto forecast = std::make_shared<Forecast>();
-
     Station station;
 
     station.setPlace(m_placeName);
@@ -664,7 +668,7 @@ void UKMETIon::updateWeather()
         station.setNewPlaceInfo(m_placeName + u"|"_s + m_placeId);
     }
 
-    forecast->setStation(station);
+    m_forecast->setStation(station);
 
     MetaData metaData;
 
@@ -677,7 +681,7 @@ void UKMETIon::updateWeather()
     metaData.setPressureUnit(KUnitConversion::Millibar);
     metaData.setWindSpeedUnit(KUnitConversion::MilePerHour);
 
-    forecast->setMetadata(metaData);
+    m_forecast->setMetadata(metaData);
 
     LastObservation lastObservation;
 
@@ -721,7 +725,7 @@ void UKMETIon::updateWeather()
         lastObservation.setWindDirection(current.windDirection);
     }
 
-    forecast->setLastObservation(lastObservation);
+    m_forecast->setLastObservation(lastObservation);
 
     // Daily forecast info
 
@@ -751,9 +755,7 @@ void UKMETIon::updateWeather()
         }
     }
 
-    forecast->setFutureDays(futureDays);
-
-    m_forecastPromise->addResult(forecast);
+    m_forecast->setFutureDays(futureDays);
 
     qCDebug(WEATHER::ION::BBCUKMET) << "Updated weather data for" << m_placeName;
 }
