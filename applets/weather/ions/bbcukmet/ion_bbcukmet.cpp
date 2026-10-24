@@ -538,12 +538,22 @@ bool UKMETIon::readObservationData(const QJsonDocument &doc)
     WeatherData::Observation &current = data.current;
 
     // Station data
-    const QJsonObject station = doc[u"station"_s].toObject();
-    if (!station.isEmpty()) {
-        data.stationName = station[u"name"_s].toString();
-        data.stationLatitude = station[u"latitude"_s].toDouble(qQNaN());
-        data.stationLongitude = station[u"longitude"_s].toDouble(qQNaN());
+    const QJsonObject stationObject = doc[u"station"_s].toObject();
+
+    Station station;
+
+    station.setPlace(m_placeName);
+    station.setStation(stationObject[u"name"_s].toString());
+    const bool stationCoordsValid = stationObject[u"latitude"_s].isDouble() && stationObject[u"longitude"_s].isDouble();
+    if (stationCoordsValid) {
+        station.setCoordinates(stationObject[u"latitude"_s].toDouble(), stationObject[u"longitude"_s].toDouble());
     }
+
+    if (m_isLegacy) {
+        station.setNewPlaceInfo(m_placeName + u"|"_s + m_placeId);
+    }
+
+    m_forecast->setStation(station);
 
     // Observation data
     const QJsonArray observations = doc[u"observations"_s].toArray();
@@ -558,7 +568,9 @@ bool UKMETIon::readObservationData(const QJsonDocument &doc)
     current.observationDateTime = QDateTime::fromString(observation[u"updateTimestamp"_s].toString(), Qt::ISODate);
     current.obsTime = observation[u"localDate"_s].toString() + u" "_s + observation[u"localTime"_s].toString();
 
-    current.isNight = isNightTime(current.observationDateTime, data.stationLatitude, data.stationLongitude);
+    if (stationCoordsValid) {
+        current.isNight = isNightTime(current.observationDateTime, stationObject[u"latitude"_s].toDouble(), stationObject[u"longitude"_s].toDouble());
+    }
 
     current.condition = observation[u"weatherTypeText"_s].toString();
     if (current.condition == "null"_L1 || current.condition == "Not Available"_L1) {
@@ -655,21 +667,6 @@ void UKMETIon::validate()
 
 void UKMETIon::updateWeather()
 {
-    Station station;
-
-    station.setPlace(m_placeName);
-    station.setStation(m_weatherData->stationName);
-    const bool stationCoordsValid = !qIsNaN(m_weatherData->stationLatitude) && !qIsNaN(m_weatherData->stationLongitude);
-    if (stationCoordsValid) {
-        station.setCoordinates(m_weatherData->stationLatitude, m_weatherData->stationLongitude);
-    }
-
-    if (m_isLegacy) {
-        station.setNewPlaceInfo(m_placeName + u"|"_s + m_placeId);
-    }
-
-    m_forecast->setStation(station);
-
     MetaData metaData;
 
     metaData.setCredit(i18nc("credit line, keep string short", "Data from BBC\302\240Weather"));
