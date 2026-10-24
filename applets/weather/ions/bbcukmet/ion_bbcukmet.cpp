@@ -271,6 +271,7 @@ void UKMETIon::clearLocationData()
     m_locationsData.clear();
     m_locationsAutoData.clear();
     m_locationOrder.clear();
+    m_locations.clear();
 }
 
 void UKMETIon::clearForecastData()
