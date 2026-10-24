@@ -147,7 +147,9 @@ FocusScope {
                 anchors.fill: parent
                 autoTransform: false
                 cache: false
-                fillMode: cfg_FillMode || Image.PreserveAspectCrop
+                // Image.Stretch ("Scaled") is 0, so don't use || here
+                fillMode: cfg_FillMode ?? Image.PreserveAspectCrop
+                sourceSize: fillMode === Image.Pad || fillMode === Image.Tile ? Qt.size(width, height) : undefined
                 smooth: true
 
                 Drag.dragType: Drag.Automatic
