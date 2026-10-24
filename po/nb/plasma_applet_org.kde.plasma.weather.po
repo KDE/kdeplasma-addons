@@ -1018,27 +1018,3 @@ msgstr ""
 #, kde-format
 msgid "Extreme"
 msgstr ""
-
-#~ msgctxt "@label"
-#~ msgid "Pressure:"
-#~ msgstr "Lufttrykk:"
-
-#~ msgctxt "@label"
-#~ msgid "Humidity:"
-#~ msgstr "Luftfuktighet:"
-
-#~ msgctxt "@title:tab"
-#~ msgid "Details"
-#~ msgstr "Detaljer"
-
-#~ msgctxt "temperature unitsymbol"
-#~ msgid "%1 %2"
-#~ msgstr "%1 %2"
-
-#, fuzzy
-#~ msgid "Day"
-#~ msgstr "Dag"
-
-#, fuzzy
-#~ msgid "Night"
-#~ msgstr "Natt"
