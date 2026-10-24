@@ -85,7 +85,7 @@ KCM.ScrollViewKCM {
             visible: timeListView.count === 0
             anchors.centerIn: parent
             width: parent.width - (Kirigami.Units.gridUnit * 4)
-            text: i18n("If you add predefined timers here, they will appear in the widget’s context menu.");
+            text: i18nc("@info:usagetip PlaceHolderMessage empty ListView", "If you add predefined timers here, they will appear in the widget’s context menu.");
         }
     }
 
@@ -126,7 +126,7 @@ KCM.ScrollViewKCM {
                 QQC2.Label {
                     id: hintText
                     visible: editor.editable
-                    text: i18n("Scroll over digits to change time")
+                    text: i18nc("@info:usagetip", "Scroll over digits to change time")
                     textFormat: Text.PlainText
                 }
                 RowLayout {
@@ -136,7 +136,7 @@ KCM.ScrollViewKCM {
                         id: applyButton
                         visible: editor.editable
                         action: Kirigami.Action {
-                            text: i18n("Apply")
+                            text: i18nc("@action:button accepts change timer", "Apply")
                             icon.name: "dialog-ok-apply"
                             onTriggered: {
                                 editor.editable = false
@@ -152,7 +152,7 @@ KCM.ScrollViewKCM {
                         Layout.alignment: Qt.AlignRight
                         visible: editor.editable
                         action: Kirigami.Action {
-                            text: i18n("Cancel")
+                            text: i18nc("@action:button aborts editing timer", "Cancel")
                             icon.name: "dialog-cancel"
                             onTriggered: {
                                 editor.editable = false
@@ -169,7 +169,7 @@ KCM.ScrollViewKCM {
                         Layout.alignment: Qt.AlignRight
                         visible: editor.editable === false
                         action: Kirigami.Action {
-                            text: i18n("Edit")
+                            text: i18nc("@action:button enter tmer edit mode", "Edit")
                             icon.name: "edit-entry"
                             onTriggered: {
                                 editor.oldValue = editor.value
@@ -187,7 +187,7 @@ KCM.ScrollViewKCM {
                         visible: editor.editable === false
                         Layout.alignment: Qt.AlignRight
                         action: Kirigami.Action {
-                            text: i18n("Delete")
+                            text: i18nc("@action:button delete timer", "Delete")
                             icon.name: "entry-delete"
                             onTriggered: {
                                 timeListModel.removeTimer(index)

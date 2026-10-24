@@ -65,12 +65,14 @@ PlasmoidItem {
         }
 
         if (running) {
-            return i18n("%1 is running", timerName);
+            return i18nc("@info:tooltip for widget, %1 is timer name", "%1 is running", timerName);
         } else {
-            return i18n("%1 not running", timerName);
+            return i18nc("@info:tooltip for widget, %1 is timer name", "%1 not running", timerName);
         }
     }
-    toolTipSubText: running ? i18np("Remaining time left: %1 second", "Remaining time left: %1 seconds", seconds) : i18n("Use mouse wheel to change digits or choose from predefined timers in the context menu");
+    toolTipSubText: running
+        ? i18ncp("@info:tooltip for widget, subtitle, %1 is remaining time in seconds for running timer", "Remaining time left: %1 second", "Remaining time left: %1 seconds", seconds)
+        : i18nc("@info:tooltip for widget, subtitle, timer not running", "Use mouse wheel to change digits or choose from predefined timers in the context menu");
 
     compactRepresentation: CompactRepresentation { }
     fullRepresentation: TimerView { }
@@ -87,8 +89,8 @@ PlasmoidItem {
         id: timerNotification
         componentName: "plasma_applet_timer"
         eventId: "timerFinished"
-        title: root.title || i18n("Timer")
-        text: notificationText || i18n("Timer finished")
+        title: root.title || i18nc("@title:window notification title with no custom timer name set", "Timer")
+        text: notificationText || i18nc("@info:progress notification body when no custom message set", "Timer finished")
     }
 
     Timer {
