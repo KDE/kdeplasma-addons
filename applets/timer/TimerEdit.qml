@@ -24,10 +24,10 @@ Row {
 
     QtObject {
         id: internal
-        readonly property string digitSuffix: alertMode ? "_1" : ""
+        readonly property string digitSuffix: timerEdit.alertMode ? "_1" : ""
         // digits count include separators with 50% of digit width
         readonly property real digits: timerEdit.showSeconds ? 7 : 4.5;
-        readonly property int digitH: (maximumHeight / 2) * digits < parent.width ? maximumHeight : parent.width / digits * 2
+        readonly property int digitH: (timerEdit.maximumHeight / 2) * digits < timerEdit.width ? timerEdit.maximumHeight : timerEdit.width / digits * 2
         readonly property int digitW: digitH / 2;
         property string valueString: "000000"
     }
@@ -35,6 +35,7 @@ Row {
     Component {
         id: digit
         KSvg.SvgItem {
+            id: digitSvg
             property int meaning
             property int num
             readonly property int mouseWheelAngleThreshold: 5
@@ -54,20 +55,20 @@ Row {
                     root.toggleTimer();
                     break;
                 case Qt.Key_Up:
-                    if (value + meaning < 24*60*60) {
+                    if (timerEdit.value + meaning < 24*60*60) {
                         timerEdit.digitModified(meaning)
                     }
                     break;
                 case Qt.Key_Down:
-                    if (value - meaning >= 0) {
+                    if (timerEdit.value - meaning >= 0) {
                         timerEdit.digitModified(-meaning)
                     }
                     break;
                 case Qt.Key_Left:
-                    nextItemInFocusChain(false).forceActiveFocus(Qt.BacktabFocusReason);
+                    digitSvg.nextItemInFocusChain(false).forceActiveFocus(Qt.BacktabFocusReason);
                     break;
                 case Qt.Key_Right:
-                    nextItemInFocusChain(true).forceActiveFocus(Qt.TabFocusReason);
+                    digitSvg.nextItemInFocusChain(true).forceActiveFocus(Qt.TabFocusReason);
                     break;
                 default:
                     return;
@@ -77,18 +78,18 @@ Row {
 
             MouseArea {
                 anchors.fill: parent
-                enabled: editable
+                enabled: timerEdit.editable
                 propagateComposedEvents: true
 
                 onWheel: wheel => {
                     wheel.accepted = true
-                    if (wheel.angleDelta.y > mouseWheelAngleThreshold) {
-                        if (value + meaning < 24*60*60) {
-                            timerEdit.digitModified(meaning)
+                    if (wheel.angleDelta.y > digitSvg.mouseWheelAngleThreshold) {
+                        if (timerEdit.value + digitSvg.meaning < 24*60*60) {
+                            timerEdit.digitModified(digitSvg.meaning)
                         }
-                    } else if (wheel.angleDelta.y < -mouseWheelAngleThreshold) {
-                        if (value - meaning >= 0) {
-                            timerEdit.digitModified(-meaning)
+                    } else if (wheel.angleDelta.y < -digitSvg.mouseWheelAngleThreshold) {
+                        if (timerEdit.value - digitSvg.meaning >= 0) {
+                            timerEdit.digitModified(-digitSvg.meaning)
                         }
                     }
                 }

@@ -115,7 +115,7 @@ Item {
         Item {
             id: spacerItem
             Layout.fillHeight: true
-            visible: layoutForm === CompactRepresentation.LayoutType.VerticalDesktop
+            visible: compactRepresentation.layoutForm === CompactRepresentation.LayoutType.VerticalDesktop
         }
 
         PlasmaComponents3.ToolButton {
@@ -146,9 +146,9 @@ Item {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            Layout.fillWidth: layoutForm === CompactRepresentation.LayoutType.VerticalPanel || layoutForm === CompactRepresentation.LayoutType.VerticalDesktop
+            Layout.fillWidth: compactRepresentation.layoutForm === CompactRepresentation.LayoutType.VerticalPanel || compactRepresentation.layoutForm === CompactRepresentation.LayoutType.VerticalDesktop
             Layout.maximumWidth: {
-                switch (layoutForm) {
+                switch (compactRepresentation.layoutForm) {
                 case CompactRepresentation.LayoutType.HorizontalPanel:
                     return Kirigami.Units.gridUnit * 10;
                 case CompactRepresentation.LayoutType.HorizontalDesktop:
@@ -207,8 +207,8 @@ Item {
                 elide: root.inPanel ? Text.ElideRight : Text.ElideNone
                 font.bold: root.alertMode
                 font.features: { "tnum": 1 }
-                fontSizeMode: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.VerticalFit : Text.HorizontalFit
-                horizontalAlignment: layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.AlignJustify : Text.AlignHCenter
+                fontSizeMode: compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.VerticalFit : Text.HorizontalFit
+                horizontalAlignment: compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.AlignJustify : Text.AlignHCenter
                 minimumPointSize: 1
                 verticalAlignment: Text.AlignVCenter
 

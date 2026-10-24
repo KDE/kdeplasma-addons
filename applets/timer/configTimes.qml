@@ -21,7 +21,7 @@ KCM.ScrollViewKCM {
         Kirigami.Action {
             icon.name: "list-add"
             text: i18nc("@action:button Add timer", "Add")
-            enabled: timeListModel.count < maxListSize
+            enabled: timeListModel.count < timesPage.maxListSize
             onTriggered: {
                 timeListModel.addTimer("0")
                 timeListView.positionViewAtEnd()
@@ -70,7 +70,7 @@ KCM.ScrollViewKCM {
         id: timeListView
         anchors.margins: 4
         model: timeListModel
-        spacing: parent.spacing
+        spacing: timesPage.spacing
         clip: true
         reuseItems: true
         delegate: timeEditDelegate
@@ -112,7 +112,7 @@ KCM.ScrollViewKCM {
                     Layout.fillWidth: true
                     alertMode: editable
                     value: time
-                    showSeconds: cfg_showSeconds
+                    showSeconds: timesPage.cfg_showSeconds
                     maximumHeight: timeEditItem.availableHeight
                     property int oldValue: 0
                     onDigitModified: valueDelta => {

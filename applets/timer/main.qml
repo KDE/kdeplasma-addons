@@ -90,7 +90,7 @@ PlasmoidItem {
         componentName: "plasma_applet_timer"
         eventId: "timerFinished"
         title: root.title || i18nc("@title:window notification title with no custom timer name set", "Timer")
-        text: notificationText || i18nc("@info:progress notification body when no custom message set", "Timer finished")
+        text: root.notificationText || i18nc("@info:progress notification body when no custom message set", "Timer finished")
     }
 
     Timer {
@@ -103,13 +103,13 @@ PlasmoidItem {
             if (root.seconds == 0) {
                 root.running = false;
 
-                if (showNotification) {
+                if (root.showNotification) {
                     timerNotification.sendEvent();
                 }
-                if (runCommand) {
+                if (root.runCommand) {
                     TimerPlasmoid.Timer.runCommand(command);
                 }
-                saveTimer();
+                root.saveTimer();
             }
         }
         repeat: true;
@@ -119,7 +119,7 @@ PlasmoidItem {
     Timer {
         id: delayedSaveTimer;
         interval: 3000;
-        onTriggered: saveTimer();
+        onTriggered: root.saveTimer();
     }
 
     function onDigitHasChanged() {
@@ -134,19 +134,19 @@ PlasmoidItem {
                 ? i18nc("@action %1 is the duration that will be started, e.g. 00:05:00", "&Start (%1)", TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm:ss"))
                 : i18nc("@action", "&Start")
             enabled: !root.running && (root.seconds !== 0 || Plasmoid.configuration.seconds !== 0)
-            onTriggered: startTimer()
+            onTriggered: root.startTimer()
         },
         PlasmaCore.Action {
             id: stopAction
             text: i18nc("@action", "S&top")
             enabled: root.running
-            onTriggered: stopTimer()
+            onTriggered: root.stopTimer()
         },
         PlasmaCore.Action {
             id: resetAction
             text: i18nc("@action", "&Reset")
             enabled: root.seconds !== 0 && Plasmoid.configuration.seconds !== 0
-            onTriggered: resetTimer()
+            onTriggered: root.resetTimer()
         },
         PlasmaCore.Action {
             id: separator1
@@ -164,9 +164,9 @@ PlasmoidItem {
             text: TimerPlasmoid.Timer.secondsToString(modelData, "hh:mm:ss")
             onTriggered: {
                 Plasmoid.configuration.seconds = modelData
-                seconds = modelData;
-                suspended = false
-                startTimer();
+                root.seconds = modelData;
+                root.suspended = false
+                root.startTimer();
             }
         }
         onObjectAdded: (index, object) => {
