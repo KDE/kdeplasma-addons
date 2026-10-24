@@ -26,11 +26,6 @@ class Job;
 class WeatherData
 {
 public:
-    QString place;
-    QString stationName;
-    double stationLatitude = qQNaN();
-    double stationLongitude = qQNaN();
-
     // Current observation information.
     struct Observation {
         QString obsTime;
