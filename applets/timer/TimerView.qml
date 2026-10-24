@@ -14,9 +14,18 @@ import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.extras as PlasmaExtras
 
 MouseArea {
-    Layout.preferredWidth: root.inPanel ? Math.max(root.compactRepresentationItem?.width ?? 0, Kirigami.Units.gridUnit * 20) : -1
-    Layout.preferredHeight: root.inPanel ? Math.round(Layout.preferredWidth * 2/5) : -1
-    Layout.minimumHeight: root.inPanel ? Layout.preferredHeight : 0
+    id: fullRepresentation
+
+    required property bool inPanel
+    required property bool isVertical
+    required property bool running
+    required property bool suspended
+    required property bool alertMode
+    required property int seconds
+
+    Layout.preferredWidth: inPanel ? Math.max(root.compactRepresentationItem?.width ?? 0, Kirigami.Units.gridUnit * 20) : -1
+    Layout.preferredHeight: inPanel ? Math.round(Layout.preferredWidth * 2/5) : -1
+    Layout.minimumHeight: inPanel ? Layout.preferredHeight : 0
 
     onClicked: root.toggleTimer()
 
@@ -60,15 +69,15 @@ MouseArea {
 
         Loader {
             id: headerLoader
-            Layout.minimumHeight: root.inPanel ? -1 : Kirigami.Units.gridUnit * 2
-            Layout.maximumHeight: root.inPanel ? -1 : Math.round(main.height / 3)
-            Layout.fillHeight: root.inPanel ? false : true
+            Layout.minimumHeight: fullRepresentation.inPanel ? -1 : Kirigami.Units.gridUnit * 2
+            Layout.maximumHeight: fullRepresentation.inPanel ? -1 : Math.round(main.height / 3)
+            Layout.fillHeight: fullRepresentation.inPanel ? false : true
             Layout.fillWidth: true
 
             active: Plasmoid.configuration.showTitle
             visible: active
 
-            sourceComponent: root.inPanel ? popupHeadingComponent : desktopHeadingComponent
+            sourceComponent: fullRepresentation.inPanel ? popupHeadingComponent : desktopHeadingComponent
         }
 
         TimerEdit {
@@ -79,9 +88,9 @@ MouseArea {
             Layout.verticalStretchFactor: 3
             visible: Plasmoid.configuration.showRemainingTime
 
-            value: root.seconds
-            editable: !root.running
-            alertMode: root.alertMode
+            value: fullRepresentation.seconds
+            editable: !fullRepresentation.running
+            alertMode: fullRepresentation.alertMode
             showSeconds: Plasmoid.configuration.showSeconds
             onDigitModified: valueDelta => {
                 Plasmoid.configuration.seconds = root.seconds + valueDelta
@@ -89,7 +98,7 @@ MouseArea {
             }
             maximumHeight: height
             SequentialAnimation on opacity {
-                running: root.suspended;
+                running: fullRepresentation.suspended;
                 loops: Animation.Infinite;
                 NumberAnimation {
                     duration: Kirigami.Units.veryLongDuration * 2;
@@ -121,7 +130,7 @@ MouseArea {
 
             from: Plasmoid.configuration.seconds
             to: 0
-            value: root.seconds
+            value: fullRepresentation.seconds
         }
 
         function resetOpacity() {

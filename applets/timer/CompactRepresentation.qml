@@ -16,8 +16,14 @@ import plasma.applet.org.kde.plasma.timer as TimerPlasmoid
 Item {
     id: compactRepresentation
 
-    Layout.minimumWidth: root.inPanel ? grid.width : -1
-    Layout.minimumHeight: root.inPanel ? grid.height : -1
+    required property bool inPanel
+    required property bool isVertical
+    required property bool running
+    required property bool alertMode
+    required property int seconds
+
+    Layout.minimumWidth: inPanel ? grid.width : -1
+    Layout.minimumHeight: inPanel ? grid.height : -1
 
     enum LayoutType {
         HorizontalPanel,
@@ -32,8 +38,8 @@ Item {
     Binding on layoutForm {
         delayed: true
         value: {
-            if (root.inPanel) {
-                return root.isVertical ? CompactRepresentation.LayoutType.VerticalPanel : CompactRepresentation.LayoutType.HorizontalPanel;
+            if (compactRepresentation.inPanel) {
+                return compactRepresentation.isVertical ? CompactRepresentation.LayoutType.VerticalPanel : CompactRepresentation.LayoutType.HorizontalPanel;
             }
             if (compactRepresentation.parent.width - iconItem.Layout.preferredWidth >= remainingTimeLabel.contentWidth) {
                 return CompactRepresentation.LayoutType.HorizontalDesktop;
@@ -45,19 +51,19 @@ Item {
         }
     }
 
-    Keys.onUpPressed: if (!root.running) { adjustTime(15); }
-    Keys.onDownPressed: if (!root.running) { adjustTime(-15); }
+    Keys.onUpPressed: if (!running) { adjustTime(15); }
+    Keys.onDownPressed: if (!running) { adjustTime(-15); }
 
     function adjustTime(value) {
         const stepsize = Plasmoid.configuration.showSeconds ? 1 : 60
-        while (value >= 15 && root.seconds + stepsize < 24*60*60) {
+        while (value >= 15 && compactRepresentation.seconds + stepsize < 24*60*60) {
             Plasmoid.configuration.seconds += stepsize
             root.seconds += stepsize;
             value -= 15;
         }
         while (value <= -15) {
             Plasmoid.configuration.seconds = Math.max(Plasmoid.configuration.seconds - stepsize, 0)
-            root.seconds = Math.max(root.seconds - stepsize, 0);
+            root.seconds = Math.max(compactRepresentation.seconds - stepsize, 0);
             value += 15;
         }
         return value;
@@ -65,7 +71,7 @@ Item {
 
     WheelHandler {
         acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
-        enabled: !root.running
+        enabled: !compactRepresentation.running
         onWheel: {
             event.accepted = true;
             rotation = compactRepresentation.adjustTime(rotation);
@@ -128,15 +134,15 @@ Item {
 
             display: PlasmaComponents3.AbstractButton.IconOnly
             icon.name: {
-                if (root.running) {
+                if (compactRepresentation.running) {
                     return "chronometer-pause";
                 }
-                return root.seconds > 0 ? "chronometer-start" : "chronometer";
+                return compactRepresentation.seconds > 0 ? "chronometer-start" : "chronometer";
             }
-            text: root.running ? i18nc("@action:button", "Pause Timer") : i18nc("@action:button", "Start Timer")
+            text: compactRepresentation.running ? i18nc("@action:button", "Pause Timer") : i18nc("@action:button", "Start Timer")
 
             onClicked: {
-                if (root.seconds === 0) {
+                if (compactRepresentation.seconds === 0) {
                     root.expanded = !root.expanded;
                 } else {
                     root.toggleTimer();
@@ -204,8 +210,8 @@ Item {
                 }
 
                 activeFocusOnTab: true
-                elide: root.inPanel ? Text.ElideRight : Text.ElideNone
-                font.bold: root.alertMode
+                elide: compactRepresentation.inPanel ? Text.ElideRight : Text.ElideNone
+                font.bold: compactRepresentation.alertMode
                 font.features: { "tnum": 1 }
                 fontSizeMode: compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.VerticalFit : Text.HorizontalFit
                 horizontalAlignment: compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.AlignJustify : Text.AlignHCenter
@@ -213,8 +219,8 @@ Item {
                 verticalAlignment: Text.AlignVCenter
 
                 text: (Plasmoid.configuration.showSeconds || !Plasmoid.configuration.showRemainingTime)
-                    ? TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm:ss")
-                    : TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm");
+                    ? TimerPlasmoid.Timer.secondsToString(compactRepresentation.seconds, "hh:mm:ss")
+                    : TimerPlasmoid.Timer.secondsToString(compactRepresentation.seconds, "hh:mm");
                 textFormat: Text.PlainText
 
                 Accessible.name: root.toolTipMainText
@@ -227,14 +233,14 @@ Item {
 
                 Layout.fillWidth: true
                 Layout.fillHeight: true
-                Layout.maximumWidth: root.inPanel
+                Layout.maximumWidth: compactRepresentation.inPanel
                      ? Math.max(Plasmoid.configuration.showTitle && titleLabel.implicitWidth, remainingTimeLabel.implicitWidth)
                      : -1
                 visible: Plasmoid.configuration.showProgressBar
 
                 from: Plasmoid.configuration.seconds
                 to: 0
-                value: root.seconds
+                value: compactRepresentation.seconds
             }
         }
 

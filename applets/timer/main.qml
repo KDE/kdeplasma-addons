@@ -46,8 +46,21 @@ PlasmoidItem {
         ? i18ncp("@info:tooltip for widget, subtitle, %1 is remaining time in seconds for running timer", "Remaining time left: %1 second", "Remaining time left: %1 seconds", seconds)
         : i18nc("@info:tooltip for widget, subtitle, timer not running", "Use mouse wheel to change digits or choose from predefined timers in the context menu");
 
-    compactRepresentation: CompactRepresentation { }
-    fullRepresentation: TimerView { }
+    compactRepresentation: CompactRepresentation {
+        inPanel: root.inPanel
+        isVertical: root.isVertical
+        running: root.running
+        alertMode: root.alertMode
+        seconds: root.seconds
+    }
+    fullRepresentation: TimerView {
+        inPanel: root.inPanel
+        isVertical: root.isVertical
+        suspended: root.suspended
+        running: root.running
+        alertMode: root.alertMode
+        seconds: root.seconds
+    }
 
     function toggleTimer() {
         if (root.running) {
