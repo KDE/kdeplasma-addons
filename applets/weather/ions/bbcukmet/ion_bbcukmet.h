@@ -23,10 +23,6 @@ namespace KIO
 class Job;
 }
 
-class WeatherData
-{
-};
-
 class UKMETIon : public Ion
 {
     Q_OBJECT
@@ -93,7 +89,6 @@ private:
     QString m_placeName;
     QString m_placeId;
     QByteArray m_forecastData;
-    std::shared_ptr<WeatherData> m_weatherData;
     std::shared_ptr<Forecast> m_forecast;
 
     int m_pendingSearchCount = 0;
@@ -105,5 +100,3 @@ private:
     std::shared_ptr<QPromise<std::shared_ptr<Locations>>> m_locationPromise;
     std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> m_forecastPromise;
 };
-
-Q_DECLARE_TYPEINFO(WeatherData, Q_RELOCATABLE_TYPE);

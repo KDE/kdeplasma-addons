@@ -257,7 +257,6 @@ void UKMETIon::fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>
     }
 
     m_forecast = std::make_shared<Forecast>();
-    m_weatherData = std::make_shared<WeatherData>();
 
     m_placeName = info.first();
     m_placeId = info.last();
@@ -278,7 +277,6 @@ void UKMETIon::clearForecastData()
 {
     m_isLegacy = false;
     m_forecastPromise.reset();
-    m_weatherData.reset();
     m_forecast.reset();
     m_forecastData.clear();
 }
