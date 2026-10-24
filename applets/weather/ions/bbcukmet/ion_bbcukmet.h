@@ -132,6 +132,7 @@ private:
     QString m_placeId;
     QByteArray m_forecastData;
     std::shared_ptr<WeatherData> m_weatherData;
+    std::shared_ptr<Forecast> m_forecast;
 
     int m_pendingSearchCount = 0;
     int m_retryAttempts = 0;
