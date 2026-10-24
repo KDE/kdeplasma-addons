@@ -25,21 +25,6 @@ class Job;
 
 class WeatherData
 {
-public:
-    // Forecasts
-    struct ForecastInfo {
-        QDateTime period;
-        bool isNight = false;
-        QString iconName;
-        QString summary;
-        float tempHigh = qQNaN();
-        float tempLow = qQNaN();
-        float windSpeed = qQNaN();
-        QString windDirection;
-        int precipitationPct = 0;
-    };
-
-    QList<ForecastInfo> forecasts;
 };
 
 class UKMETIon : public Ion
@@ -121,5 +106,4 @@ private:
     std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> m_forecastPromise;
 };
 
-Q_DECLARE_TYPEINFO(WeatherData::ForecastInfo, Q_RELOCATABLE_TYPE);
 Q_DECLARE_TYPEINFO(WeatherData, Q_RELOCATABLE_TYPE);
