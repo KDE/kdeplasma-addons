@@ -26,24 +26,6 @@ class Job;
 class WeatherData
 {
 public:
-    // Current observation information.
-    struct Observation {
-        QString obsTime;
-        QDateTime observationDateTime;
-        bool isNight = false;
-
-        QString condition;
-        QString conditionIcon;
-        float temperature_C = qQNaN();
-        QString windDirection;
-        float windSpeed_miles = qQNaN();
-        float humidity = qQNaN();
-        float pressure = qQNaN();
-        QString pressureTendency;
-        QString visibilityStr;
-    };
-    Observation current;
-
     // Forecasts
     struct ForecastInfo {
         QDateTime period;

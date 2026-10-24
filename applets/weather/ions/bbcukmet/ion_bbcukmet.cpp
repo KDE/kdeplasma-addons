@@ -534,9 +534,6 @@ void UKMETIon::forecast_slotJobFinished(KJob *job)
 
 bool UKMETIon::readObservationData(const QJsonDocument &doc)
 {
-    WeatherData &data = *m_weatherData;
-    WeatherData::Observation &current = data.current;
-
     // Station data
     const QJsonObject stationObject = doc[u"station"_s].toObject();
 
@@ -563,36 +560,64 @@ bool UKMETIon::readObservationData(const QJsonDocument &doc)
     }
     const QJsonObject observation = observations.first().toObject();
 
-    current = WeatherData::Observation(); // Clean-up
+    LastObservation lastObservation;
 
-    current.observationDateTime = QDateTime::fromString(observation[u"updateTimestamp"_s].toString(), Qt::ISODate);
-    current.obsTime = observation[u"localDate"_s].toString() + u" "_s + observation[u"localTime"_s].toString();
-
-    if (stationCoordsValid) {
-        current.isNight = isNightTime(current.observationDateTime, stationObject[u"latitude"_s].toDouble(), stationObject[u"longitude"_s].toDouble());
+    const auto observationTimestamp = QDateTime::fromString(observation[u"updateTimestamp"_s].toString(), Qt::ISODate);
+    if (observationTimestamp.isValid()) {
+        lastObservation.setObservationTimestamp(observationTimestamp);
     }
 
-    current.condition = observation[u"weatherTypeText"_s].toString();
-    if (current.condition == "null"_L1 || current.condition == "Not Available"_L1) {
-        current.condition.clear();
+    bool isNight = false;
+    if (stationCoordsValid && observationTimestamp.isValid()) {
+        isNight = isNightTime(observationTimestamp, stationObject[u"latitude"_s].toDouble(), stationObject[u"longitude"_s].toDouble());
+    }
+    const auto condition = observation[u"weatherTypeText"_s].toString();
+    if (!condition.isEmpty() && condition != "null"_L1 && condition != "Not Available"_L1) {
+        lastObservation.setCurrentConditions(i18nc("weather condition", condition.toUtf8().data()));
+        lastObservation.setConditionIcon(getWeatherIcon(isNight ? nightIcons() : dayIcons(), condition));
     }
 
-    current.temperature_C = observation[u"temperature"_s][u"C"_s].toDouble(qQNaN());
-    current.humidity = observation[u"humidityPercent"_s].toDouble(qQNaN());
-    current.pressure = observation[u"pressureMb"_s].toDouble(qQNaN());
-
-    // <ion.h> "Pressure Tendency": string, "rising", "falling", "steady"
-    current.pressureTendency = observation[u"pressureDirection"_s].toString().toLower();
-    if (current.pressureTendency == "no change"_L1) {
-        current.pressureTendency = u"steady"_s;
+    if (observation[u"humidityPercent"_s].isDouble()) {
+        lastObservation.setHumidity(observation[u"humidityPercent"_s].toDouble());
     }
 
-    current.windSpeed_miles = observation[u"wind"_s][u"windSpeedMph"_s].toDouble(qQNaN());
-    current.windDirection = (current.windSpeed_miles > 0) ? observation[u"wind"_s][u"windDirectionAbbreviation"_s].toString() : u"VR"_s;
+    const auto visibilityStr = observation[u"visibility"_s].toString();
+    if (!visibilityStr.isEmpty()) {
+        lastObservation.setVisibility(i18nc("visibility", visibilityStr.toUtf8().data()));
+    }
 
-    current.visibilityStr = observation[u"visibility"_s].toString();
+    if (observation[u"temperature"_s][u"C"_s].isDouble()) {
+        lastObservation.setTemperature(observation[u"temperature"_s][u"C"_s].toDouble());
+    }
 
-    qCDebug(WEATHER::ION::BBCUKMET) << "Read observation data:" << m_weatherData->current.obsTime << m_weatherData->current.condition;
+    if (observation[u"pressureMb"_s].isDouble()) {
+        lastObservation.setPressure(observation[u"pressureMb"_s].toDouble());
+        const auto pressureTendency = observation[u"pressureDirection"_s].toString().toLower();
+        if (!pressureTendency.isEmpty()) {
+            if (pressureTendency == "rising"_L1) {
+                lastObservation.setPressureTendency(i18n("Rising"));
+            } else if (pressureTendency == "falling"_L1) {
+                lastObservation.setPressureTendency(i18n("Falling"));
+            } else {
+                lastObservation.setPressureTendency(i18n("Steady"));
+            }
+        }
+    }
+
+    if (observation[u"wind"_s][u"windSpeedMph"_s].isDouble()) {
+        const auto windSpeedMiles = observation[u"wind"_s][u"windSpeedMph"_s].toDouble();
+        lastObservation.setWindSpeed(windSpeedMiles);
+        const auto windDirection = observation[u"wind"_s][u"windDirectionAbbreviation"_s].toString();
+        if (!windDirection.isEmpty() && (windSpeedMiles > 0)) {
+            lastObservation.setWindDirection(observation[u"wind"_s][u"windDirectionAbbreviation"_s].toString());
+        } else {
+            lastObservation.setWindDirection(u"VR"_s);
+        }
+    }
+
+    m_forecast->setLastObservation(lastObservation);
+
+    qCDebug(WEATHER::ION::BBCUKMET) << "Read observation data:" << observationTimestamp << condition;
 
     return true;
 }
@@ -679,50 +704,6 @@ void UKMETIon::updateWeather()
     metaData.setWindSpeedUnit(KUnitConversion::MilePerHour);
 
     m_forecast->setMetadata(metaData);
-
-    LastObservation lastObservation;
-
-    const WeatherData::Observation &current = m_weatherData->current;
-    if (current.observationDateTime.isValid()) {
-        lastObservation.setObservationTimestamp(current.observationDateTime);
-    }
-
-    if (!current.condition.isEmpty()) {
-        lastObservation.setCurrentConditions(i18nc("weather condition", current.condition.toUtf8().data()));
-        lastObservation.setConditionIcon(getWeatherIcon(current.isNight ? nightIcons() : dayIcons(), current.condition));
-    }
-
-    if (!qIsNaN(current.humidity)) {
-        lastObservation.setHumidity(current.humidity);
-    }
-
-    if (!current.visibilityStr.isEmpty()) {
-        lastObservation.setVisibility(i18nc("visibility", current.visibilityStr.toUtf8().data()));
-    }
-
-    if (!qIsNaN(current.temperature_C)) {
-        lastObservation.setTemperature(current.temperature_C);
-    }
-
-    if (!qIsNaN(current.pressure)) {
-        lastObservation.setPressure(current.pressure);
-        if (!current.pressureTendency.isEmpty()) {
-            if (current.pressureTendency == "rising"_L1) {
-                lastObservation.setPressureTendency(i18n("Rising"));
-            } else if (current.pressureTendency == "falling"_L1) {
-                lastObservation.setPressureTendency(i18n("Falling"));
-            } else {
-                lastObservation.setPressureTendency(i18n("Steady"));
-            }
-        }
-    }
-
-    if (!qIsNaN(current.windSpeed_miles)) {
-        lastObservation.setWindSpeed(current.windSpeed_miles);
-        lastObservation.setWindDirection(current.windDirection);
-    }
-
-    m_forecast->setLastObservation(lastObservation);
 
     // Daily forecast info
 
