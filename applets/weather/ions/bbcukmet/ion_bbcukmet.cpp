@@ -517,7 +517,7 @@ void UKMETIon::forecast_slotJobFinished(KJob *job)
         }
     } else {
         if (readForecast(doc)) {
-            updateWeather();
+            updateMetadata();
         } else {
             m_forecast->setError();
         }
@@ -706,7 +706,7 @@ void UKMETIon::validate()
     clearLocationData();
 }
 
-void UKMETIon::updateWeather()
+void UKMETIon::updateMetadata()
 {
     MetaData metaData;
 

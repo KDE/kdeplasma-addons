@@ -36,8 +36,6 @@ public:
     void fetchForecast(std::shared_ptr<QPromise<std::shared_ptr<Forecast>>> promise, const QString &placeInfo) override;
 
 private:
-    void updateWeather();
-
     /* UKMET Methods - Internal for Ion */
     QMap<QString, ConditionIcons> setupDayIconMappings() const;
     QMap<QString, ConditionIcons> setupNightIconMappings() const;
@@ -64,6 +62,8 @@ private:
     // Load and parse current observation data
     void getObservation();
     bool readObservationData(const QJsonDocument &doc);
+
+    void updateMetadata();
 
     // Clear unneeded data
     void clearForecastData();
