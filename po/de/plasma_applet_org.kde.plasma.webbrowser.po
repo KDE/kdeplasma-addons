@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.webbrowser\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:44+0000\n"
+"POT-Creation-Date: 2026-10-24 02:54+0000\n"
 "PO-Revision-Date: 2026-04-23 20:14+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -198,13 +198,13 @@ msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Verknüpfungsadresse kopieren"
 
-#: qml/main.qml:296
+#: qml/main.qml:298
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Popup-Fenster blockiert"
 
-#: qml/main.qml:297
+#: qml/main.qml:299
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

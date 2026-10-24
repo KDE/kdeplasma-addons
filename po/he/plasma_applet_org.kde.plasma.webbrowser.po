@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:44+0000\n"
+"POT-Creation-Date: 2026-10-24 02:54+0000\n"
 "PO-Revision-Date: 2026-04-13 22:51+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -196,13 +196,13 @@ msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "העתקת כתובת קישור"
 
-#: qml/main.qml:296
+#: qml/main.qml:298
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "החלון הקופץ נחסם"
 
-#: qml/main.qml:297
+#: qml/main.qml:299
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

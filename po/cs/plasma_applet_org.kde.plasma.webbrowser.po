@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:44+0000\n"
+"POT-Creation-Date: 2026-10-24 02:54+0000\n"
 "PO-Revision-Date: 2026-07-20 00:07+0200\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -196,13 +196,13 @@ msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopírovat adresu odkazu"
 
-#: qml/main.qml:296
+#: qml/main.qml:298
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Vyskakovací okno zablokováno"
 
-#: qml/main.qml:297
+#: qml/main.qml:299
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-12 00:44+0000\n"
+"POT-Creation-Date: 2026-10-24 02:54+0000\n"
 "PO-Revision-Date: 2024-12-28 17:41+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -196,13 +196,13 @@ msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopii Ligilo-Adreson"
 
-#: qml/main.qml:296
+#: qml/main.qml:298
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Ŝprucfenestro blokita"
 
-#: qml/main.qml:297
+#: qml/main.qml:299
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"
