@@ -13,7 +13,7 @@ class KJob;
 
 /**
  * This class provides random wallpapers from Simon Stalenhag website
- * http://simonstalenhag.se/
+ * https://simonstalenhag.se/
  * see also: https://github.com/a-andreyev/simonstalenhag-se-metadata
  */
 class SimonStalenhagProvider : public PotdProvider

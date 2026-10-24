@@ -35,6 +35,24 @@ static QJsonValue randomArrayValueByKey(const QJsonObject &object, QLatin1String
     return array.at(distrib(randomEngine));
 }
 
+// The metadata is fetched from a third-party repository, so don't blindly trust the image URL it contains:
+// only download images from the artist's own website, and always over HTTPS.
+static QUrl trustedImageUrl(const QString &urlStr)
+{
+    QUrl url(urlStr);
+    if (url.host() != QLatin1String("simonstalenhag.se") && url.host() != QLatin1String("www.simonstalenhag.se")) {
+        return QUrl();
+    }
+    if (url.scheme() == QLatin1String("http")) {
+        // The website serves the same images over HTTPS, but the metadata still lists plain HTTP URLs
+        url.setScheme(QStringLiteral("https"));
+    }
+    if (url.scheme() != QLatin1String("https")) {
+        return QUrl();
+    }
+    return url;
+}
+
 SimonStalenhagProvider::SimonStalenhagProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : PotdProvider(parent, data, args)
 {
@@ -60,6 +78,10 @@ void SimonStalenhagProvider::entrypointRequestFinished(KJob *_job)
         return;
     }
     QUrl metaDataUrl(urlStr);
+    if (metaDataUrl.scheme() != QLatin1String("https")) {
+        Q_EMIT error(this);
+        return;
+    }
     KIO::StoredTransferJob *metaDataJob = KIO::storedGet(metaDataUrl, KIO::NoReload, KIO::HideProgressInfo);
     connect(metaDataJob, &KIO::StoredTransferJob::finished, this, &SimonStalenhagProvider::metaDataRequestFinished);
 }
@@ -79,7 +101,11 @@ void SimonStalenhagProvider::metaDataRequestFinished(KJob *_job)
         Q_EMIT error(this);
         return;
     }
-    m_remoteUrl = QUrl(urlStr);
+    m_remoteUrl = trustedImageUrl(urlStr);
+    if (!m_remoteUrl.isValid()) {
+        Q_EMIT error(this);
+        return;
+    }
 
     const QString titleStr = imageObj.toObject().value(QStringLiteral("name")).toString();
     const QString sectionStr = imageObj.toObject().value(QStringLiteral("section")).toString();
