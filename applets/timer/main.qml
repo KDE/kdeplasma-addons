@@ -52,6 +52,9 @@ PlasmoidItem {
         running: root.running
         alertMode: root.alertMode
         seconds: root.seconds
+        onToggleExpandedRequested: root.expanded = !root.expanded
+        onToggleTimerRequested: root.toggleTimer()
+        onAdjustTimerRequested: delta => root.adjustTimer(delta)
     }
     fullRepresentation: TimerView {
         inPanel: root.inPanel
@@ -60,6 +63,8 @@ PlasmoidItem {
         running: root.running
         alertMode: root.alertMode
         seconds: root.seconds
+        onToggleTimerRequested: root.toggleTimer()
+        onAdjustTimerRequested: delta => root.adjustTimer(delta)
     }
 
     function toggleTimer() {
@@ -183,6 +188,11 @@ PlasmoidItem {
         seconds = 0;
         opacityNeedsReset();
         saveTimer();
+    }
+
+    function adjustTimer(delta: int) {
+        Plasmoid.configuration.seconds = Math.max(0, Math.min(Plasmoid.configuration.seconds + delta, 24*60*60 - 1))
+        root.seconds = Math.max(Math.max(0, Math.min(root.seconds + delta, 24*60*60 - 1)));
     }
 
     signal opacityNeedsReset()

@@ -22,6 +22,7 @@ Row {
     required property real maximumHeight
 
     signal digitModified(int valueDelta)
+    signal toggleTimerRequested()
 
     QtObject {
         id: internal
@@ -53,7 +54,7 @@ Row {
                 case Qt.Key_Enter:
                 case Qt.Key_Space:
                 case Qt.Key_Select:
-                    root.toggleTimer();
+                    timerEdit.toggleTimerRequested();
                     break;
                 case Qt.Key_Up:
                     if (timerEdit.value + meaning < 24*60*60) {

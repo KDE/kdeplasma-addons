@@ -23,11 +23,14 @@ MouseArea {
     required property bool alertMode
     required property int seconds
 
+    signal toggleTimerRequested
+    signal adjustTimerRequested(int delta)
+
     Layout.preferredWidth: inPanel ? Math.max(root.compactRepresentationItem?.width ?? 0, Kirigami.Units.gridUnit * 20) : -1
     Layout.preferredHeight: inPanel ? Math.round(Layout.preferredWidth * 2/5) : -1
     Layout.minimumHeight: inPanel ? Layout.preferredHeight : 0
 
-    onClicked: root.toggleTimer()
+    onClicked: fullRepresentation.toggleTimerRequested()
 
     Component {
         id: popupHeadingComponent
@@ -92,10 +95,8 @@ MouseArea {
             editable: !fullRepresentation.running
             alertMode: fullRepresentation.alertMode
             showSeconds: Plasmoid.configuration.showSeconds
-            onDigitModified: valueDelta => {
-                Plasmoid.configuration.seconds = root.seconds + valueDelta
-                root.seconds += valueDelta
-            }
+            onDigitModified: valueDelta => fullRepresentation.adjustTimerRequested(valueDelta)
+            onToggleTimerRequested: fullRepresentation.toggleTimerRequested()
             maximumHeight: height
             SequentialAnimation on opacity {
                 running: fullRepresentation.suspended;

@@ -22,6 +22,10 @@ Item {
     required property bool alertMode
     required property int seconds
 
+    signal toggleExpandedRequested
+    signal toggleTimerRequested
+    signal adjustTimerRequested(int delta)
+
     Layout.minimumWidth: inPanel ? grid.width : -1
     Layout.minimumHeight: inPanel ? grid.height : -1
 
@@ -57,13 +61,11 @@ Item {
     function adjustTime(value) {
         const stepsize = Plasmoid.configuration.showSeconds ? 1 : 60
         while (value >= 15 && compactRepresentation.seconds + stepsize < 24*60*60) {
-            Plasmoid.configuration.seconds += stepsize
-            root.seconds += stepsize;
+            compactRepresentation.adjustTimerRequested(stepsize)
             value -= 15;
         }
         while (value <= -15) {
-            Plasmoid.configuration.seconds = Math.max(Plasmoid.configuration.seconds - stepsize, 0)
-            root.seconds = Math.max(compactRepresentation.seconds - stepsize, 0);
+            compactRepresentation.adjustTimerRequested(-1 * stepsize)
             value += 15;
         }
         return value;
@@ -143,9 +145,9 @@ Item {
 
             onClicked: {
                 if (compactRepresentation.seconds === 0) {
-                    root.expanded = !root.expanded;
+                    compactRepresentation.toggleExpandedRequested()
                 } else {
-                    root.toggleTimer();
+                    compactRepresentation.toggleTimerRequested()
                 }
             }
         }
@@ -170,7 +172,7 @@ Item {
 
             TapHandler {
                 acceptedButtons: Qt.LeftButton
-                onTapped: root.expanded = !root.expanded
+                onTapped: compactRepresentation.toggleExpandedRequested()
             }
 
             PlasmaComponents3.Label {
