@@ -3,6 +3,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC2
@@ -93,6 +94,10 @@ KCM.ScrollViewKCM {
         id: timeEditDelegate
         QQC2.ItemDelegate {
             id: timeEditItem
+
+            required property int time
+            required property int index
+
             width: timeListView.width
             Kirigami.Theme.useAlternateBackgroundColor: true
             KeyNavigation.right: editor.editable ? editor : editButton
@@ -111,7 +116,7 @@ KCM.ScrollViewKCM {
                     id: editor
                     Layout.fillWidth: true
                     alertMode: editable
-                    value: time
+                    value: timeEditItem.time
                     showSeconds: timesPage.cfg_showSeconds
                     maximumHeight: timeEditItem.availableHeight
                     property int oldValue: 0
@@ -119,7 +124,7 @@ KCM.ScrollViewKCM {
                         set(value + valueDelta)
                     }
                     function set(newValue) {
-                        timeListModel.setTimer(index, (newValue).toString())
+                        timeListModel.setTimer(timeEditItem.index, (newValue).toString())
                     }
                     KeyNavigation.right: editable ? applyButton : editButton
                     Component.onCompleted: editable = (value === 0)
@@ -200,7 +205,7 @@ KCM.ScrollViewKCM {
                             text: i18nc("@action:button delete timer", "Delete")
                             icon.name: "entry-delete"
                             onTriggered: {
-                                timeListModel.removeTimer(index)
+                                timeListModel.removeTimer(timeEditItem.index)
                             }
                         }
                         text: action.text

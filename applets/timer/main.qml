@@ -3,6 +3,7 @@
  *
  *   SPDX-License-Identifier: GPL-3.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import org.kde.plasma.plasmoid
@@ -132,6 +133,7 @@ PlasmoidItem {
     Instantiator {
         model: Plasmoid.configuration.predefinedTimers
         delegate: PlasmaCore.Action {
+            required property int modelData
             text: TimerPlasmoid.Timer.secondsToString(modelData, "hh:mm:ss")
             onTriggered: {
                 Plasmoid.configuration.seconds = modelData
