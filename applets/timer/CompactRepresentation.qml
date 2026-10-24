@@ -124,7 +124,7 @@ Item {
             Layout.alignment: Qt.AlignVCenter
             Layout.preferredWidth: Math.min(compactRepresentation.parent.width, compactRepresentation.parent.height)
             Layout.preferredHeight: Layout.preferredWidth
-            visible: root.showTimerToggle
+            visible: Plasmoid.configuration.showTimerToggle
 
             display: PlasmaComponents3.AbstractButton.IconOnly
             icon.name: {
@@ -173,9 +173,9 @@ Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignHCenter
-                Layout.maximumWidth: Math.max(implicitWidth, root.showRemainingTime && remainingTimeLabel.implicitWidth)
+                Layout.maximumWidth: Math.max(implicitWidth, Plasmoid.configuration.showRemainingTime && remainingTimeLabel.implicitWidth)
 
-                visible: root.showTitle && root.title !== ""
+                visible: Plasmoid.configuration.showTitle && text !== ""
 
                 elide: Text.ElideRight
                 font.bold: remainingTimeLabel.font.bold
@@ -183,7 +183,7 @@ Item {
                 horizontalAlignment: remainingTimeLabel.horizontalAlignment
                 verticalAlignment: Text.AlignVCenter
                 minimumPointSize: remainingTimeLabel.minimumPointSize
-                text: root.title
+                text: Plasmoid.configuration.title
                 textFormat: Text.PlainText
             }
 
@@ -194,12 +194,12 @@ Item {
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignHCenter
                 Layout.maximumWidth: Math.max(Plasmoid.configuration.showTitle && titleLabel.implicitWidth, implicitWidth)
-                visible: root.showRemainingTime
+                visible: Plasmoid.configuration.showRemainingTime
 
                 TextMetrics {
                     id: textMetrics
                     // make it not jump around: reserve space for one extra digit than reasonable
-                    text: root.showSeconds ? "44:44:444" : "44:444";
+                    text: Plasmoid.configuration.showSeconds ? "44:44:444" : "44:444";
                     font: remainingTimeLabel.font
                 }
 
@@ -212,7 +212,7 @@ Item {
                 minimumPointSize: 1
                 verticalAlignment: Text.AlignVCenter
 
-                text: (root.showSeconds || !root.showRemainingTime)
+                text: (Plasmoid.configuration.showSeconds || !Plasmoid.configuration.showRemainingTime)
                     ? TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm:ss")
                     : TimerPlasmoid.Timer.secondsToString(root.seconds, "hh:mm");
                 textFormat: Text.PlainText
@@ -230,9 +230,9 @@ Item {
                 Layout.maximumWidth: root.inPanel
                      ? Math.max(Plasmoid.configuration.showTitle && titleLabel.implicitWidth, remainingTimeLabel.implicitWidth)
                      : -1
-                visible: root.showProgressBar
+                visible: Plasmoid.configuration.showProgressBar
 
-                from: plasmoid.configuration.seconds
+                from: Plasmoid.configuration.seconds
                 to: 0
                 value: root.seconds
             }

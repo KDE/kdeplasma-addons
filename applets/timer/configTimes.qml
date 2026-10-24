@@ -36,7 +36,7 @@ KCM.ScrollViewKCM {
     extraFooterTopPadding: true
 
     Component.onCompleted: {
-        for (var i of plasmoid.configuration.predefinedTimers) {
+        for (var i of timesPage.cfg_predefinedTimers) {
             timeListModel.append({"time": i})
         }
     }

@@ -31,7 +31,7 @@ MouseArea {
                 level: 3
                 elide: Text.ElideRight
                 horizontalAlignment: Text.AlignHCenter
-                text: root.title
+                text: Plasmoid.configuration.title
                 textFormat: Text.PlainText
             }
         }
@@ -45,7 +45,7 @@ MouseArea {
             fontSizeMode: Text.VerticalFit
             minimumPixelSize: 8
             font.pixelSize: height * 0.7
-            text: root.title
+            text: Plasmoid.configuration.title
             textFormat: Text.PlainText
         }
     }
@@ -65,7 +65,7 @@ MouseArea {
             Layout.fillHeight: root.inPanel ? false : true
             Layout.fillWidth: true
 
-            active: root.showTitle
+            active: Plasmoid.configuration.showTitle
             visible: active
 
             sourceComponent: root.inPanel ? popupHeadingComponent : desktopHeadingComponent
@@ -77,12 +77,12 @@ MouseArea {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.verticalStretchFactor: 3
-            visible: root.showRemainingTime
+            visible: Plasmoid.configuration.showRemainingTime
 
             value: root.seconds
             editable: !root.running
             alertMode: root.alertMode
-            showSeconds: root.showSeconds
+            showSeconds: Plasmoid.configuration.showSeconds
             onDigitModified: valueDelta => {
                 Plasmoid.configuration.seconds = root.seconds + valueDelta
                 root.seconds += valueDelta
@@ -117,9 +117,9 @@ MouseArea {
 
             Layout.fillWidth: true
             Layout.fillHeight: true
-            visible: root.showProgressBar
+            visible: Plasmoid.configuration.showProgressBar
 
-            from: plasmoid.configuration.seconds
+            from: Plasmoid.configuration.seconds
             to: 0
             value: root.seconds
         }

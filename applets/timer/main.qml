@@ -24,45 +24,16 @@ PlasmoidItem {
         .includes(Plasmoid.location)
     readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
 
-    readonly property variant predefinedTimers: plasmoid.configuration.predefinedTimers;
-
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
 
-    // Display remaining time (hours and minutes) (default: enabled)
-    readonly property bool showRemainingTime: Plasmoid.configuration.showRemainingTime
+    property int seconds : restoreToSeconds(Plasmoid.configuration.running, Plasmoid.configuration.savedAt, Plasmoid.configuration.seconds, Plasmoid.configuration.suspendedAtSecond);
 
-    // Display seconds in addition to hours and minutes (default: enabled)
-    readonly property bool showSeconds: Plasmoid.configuration.showSeconds
-    property int seconds : restoreToSeconds(plasmoid.configuration.running, plasmoid.configuration.savedAt, plasmoid.configuration.seconds, Plasmoid.configuration.suspendedAtSecond);
-
-    // Display timer toggle control (default: enabled)
-    readonly property bool showTimerToggle: Plasmoid.configuration.showTimerToggle
-
-    // Display progress bar (default: disabled)
-    readonly property bool showProgressBar: Plasmoid.configuration.showProgressBar
-
-    // show notification on timer completion (default: enabled)
-    property bool showNotification: plasmoid.configuration.showNotification;
-    // run custom command on timer completion (default: disabled)
-    property bool runCommand: plasmoid.configuration.runCommand;
-    property string command: plasmoid.configuration.command;
-
-    // show title (can be customized in the settings dialog, default: disabled)
-    readonly property bool showTitle: plasmoid.configuration.showTitle;
-    readonly property string title: plasmoid.configuration.title;
     readonly property bool alertMode: root.running && root.seconds < 60
-    property bool running: plasmoid.configuration.running > 0
+    property bool running: Plasmoid.configuration.running > 0
     property bool suspended: Plasmoid.configuration.suspendedAtSecond != -1;
 
-    readonly property string notificationText: plasmoid.configuration.notificationText;
-
     toolTipMainText: {
-        var timerName = "";
-        if (showTitle && title != "") {
-            timerName = title;
-        } else {
-            timerName = Plasmoid.title;
-        }
+        const timerName = (Plasmoid.configuration.showTitle && Plasmoid.configuration.title) || Plasmoid.title;
 
         if (running) {
             return i18nc("@info:tooltip for widget, %1 is timer name", "%1 is running", timerName);
@@ -89,8 +60,8 @@ PlasmoidItem {
         id: timerNotification
         componentName: "plasma_applet_timer"
         eventId: "timerFinished"
-        title: root.title || i18nc("@title:window notification title with no custom timer name set", "Timer")
-        text: root.notificationText || i18nc("@info:progress notification body when no custom message set", "Timer finished")
+        title: Plasmoid.configuration.title || i18nc("@title:window notification title with no custom timer name set", "Timer")
+        text: Plasmoid.configuration.notificationText || i18nc("@info:progress notification body when no custom message set", "Timer finished")
     }
 
     Timer {
@@ -103,11 +74,11 @@ PlasmoidItem {
             if (root.seconds == 0) {
                 root.running = false;
 
-                if (root.showNotification) {
+                if (Plasmoid.configuration.showNotification) {
                     timerNotification.sendEvent();
                 }
-                if (root.runCommand) {
-                    TimerPlasmoid.Timer.runCommand(command);
+                if (Plasmoid.configuration.runCommand) {
+                    TimerPlasmoid.Timer.runCommand(Plasmoid.configuration.command);
                 }
                 root.saveTimer();
             }
@@ -159,7 +130,7 @@ PlasmoidItem {
     ]
 
     Instantiator {
-        model: plasmoid.configuration.predefinedTimers
+        model: Plasmoid.configuration.predefinedTimers
         delegate: PlasmaCore.Action {
             text: TimerPlasmoid.Timer.secondsToString(modelData, "hh:mm:ss")
             onTriggered: {
@@ -203,8 +174,8 @@ PlasmoidItem {
     signal digitHasChanged()
 
     function saveTimer() {
-        plasmoid.configuration.running = running ? seconds : 0;
-        plasmoid.configuration.savedAt = new Date();
+        Plasmoid.configuration.running = running ? seconds : 0;
+        Plasmoid.configuration.savedAt = new Date();
         if (suspended && !running) {
             Plasmoid.configuration.suspendedAtSecond = seconds;
         } else {
