@@ -6,10 +6,7 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
-import org.kde.plasma.plasmoid
-import org.kde.plasma.core as PlasmaCore
 import org.kde.ksvg as KSvg
-import org.kde.kquickcontrolsaddons as QtExtra
 import plasma.applet.org.kde.plasma.timer as TimerPlasmoid
 
 Row {
