@@ -171,7 +171,6 @@ PlasmoidItem {
     function startTimer() {
         running = true;
         // unset suspended in saveTimer - we don't want to set a new seconds value if restarting from suspend
-        opacityNeedsReset();
         saveTimer();
     }
 
@@ -186,7 +185,6 @@ PlasmoidItem {
         suspended = false;
         Plasmoid.configuration.seconds = 0;
         seconds = 0;
-        opacityNeedsReset();
         saveTimer();
     }
 
@@ -195,7 +193,6 @@ PlasmoidItem {
         root.seconds = Math.max(Math.max(0, Math.min(root.seconds + delta, 24*60*60 - 1)));
     }
 
-    signal opacityNeedsReset()
     signal digitHasChanged()
 
     function saveTimer() {

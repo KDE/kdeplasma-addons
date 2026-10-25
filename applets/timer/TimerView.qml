@@ -101,6 +101,7 @@ MouseArea {
             SequentialAnimation on opacity {
                 running: fullRepresentation.suspended;
                 loops: Animation.Infinite;
+                onRunningChanged: if (!running) { timerDigits.opacity = 1.0 }
                 NumberAnimation {
                     duration: Kirigami.Units.veryLongDuration * 2;
                     from: 1.0;
@@ -132,14 +133,6 @@ MouseArea {
             from: Plasmoid.configuration.seconds
             to: 0
             value: fullRepresentation.seconds
-        }
-
-        function resetOpacity() {
-            timerDigits.opacity = 1.0;
-        }
-
-        Component.onCompleted: {
-            root.opacityNeedsReset.connect(resetOpacity);
         }
     }
 }
