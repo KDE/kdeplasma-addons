@@ -161,7 +161,9 @@ int FutureHoursPoints::hoursPerDay() const
 
         QDateTime date = dateVariant.toDateTime();
 
-        if (date >= startDate.addDays(1)) {
+        // Use a fixed 24-hour window, even across daylight-saving transitions.
+        const QDateTime nextDay = startDate.addSecs(24 * 60 * 60);
+        if (date >= nextDay) {
             break;
         }
 
