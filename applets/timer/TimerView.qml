@@ -65,7 +65,7 @@ MouseArea {
     ColumnLayout {
         id: main
 
-        implicitHeight: (headerLoader.active ? headerLoader.item.implicitHeight : 0) + timerDigits.implicitHeight + (remainingTimeProgressBar.visible ? remainingTimeProgressBar.implicitHeight : 0)
+        implicitHeight: (headerLoader.active ? (headerLoader.item as Item).implicitHeight : 0) + timerDigits.implicitHeight + (remainingTimeProgressBar.visible ? remainingTimeProgressBar.implicitHeight : 0)
 
         width: parent.width
         height: parent.height

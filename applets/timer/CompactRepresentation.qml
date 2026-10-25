@@ -74,7 +74,7 @@ Item {
     WheelHandler {
         acceptedDevices: PointerDevice.Mouse | PointerDevice.TouchPad
         enabled: !compactRepresentation.running
-        onWheel: {
+        onWheel: event => {
             event.accepted = true;
             rotation = compactRepresentation.adjustTime(rotation);
         }
