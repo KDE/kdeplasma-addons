@@ -225,8 +225,8 @@ Item {
                     : TimerPlasmoid.Timer.secondsToString(compactRepresentation.seconds, "hh:mm");
                 textFormat: Text.PlainText
 
-                Accessible.name: root.toolTipMainText
-                Accessible.description: root.toolTipSubText
+                Accessible.name: compactRepresentation.Accessible.name
+                Accessible.description: compactRepresentation.Accessible.description
                 Accessible.role: Accessible.Button
             }
 

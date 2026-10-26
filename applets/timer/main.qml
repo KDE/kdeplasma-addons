@@ -55,6 +55,8 @@ PlasmoidItem {
         onToggleExpandedRequested: root.expanded = !root.expanded
         onToggleTimerRequested: root.toggleTimer()
         onAdjustTimerRequested: delta => root.adjustTimer(delta)
+        Accessible.name: root.toolTipMainText
+        Accessible.description: root.toolTipSubText
     }
     fullRepresentation: TimerView {
         inPanel: root.inPanel
