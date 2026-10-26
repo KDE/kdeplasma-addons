@@ -106,17 +106,6 @@ PlasmoidItem {
         running: root.running;
     }
 
-    Timer {
-        id: delayedSaveTimer;
-        interval: 3000;
-        onTriggered: root.saveTimer();
-    }
-
-    function onDigitHasChanged() {
-        delayedSaveTimer.stop();
-        delayedSaveTimer.start();
-    }
-
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
             id: startAction
@@ -192,8 +181,6 @@ PlasmoidItem {
         Plasmoid.configuration.seconds = Math.max(0, Math.min(Plasmoid.configuration.seconds + delta, 24*60*60 - 1))
         root.seconds = Math.max(Math.max(0, Math.min(root.seconds + delta, 24*60*60 - 1)));
     }
-
-    signal digitHasChanged()
 
     function saveTimer() {
         Plasmoid.configuration.running = running ? seconds : 0;
