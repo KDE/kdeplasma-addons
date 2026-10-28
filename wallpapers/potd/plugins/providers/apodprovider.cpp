@@ -7,8 +7,10 @@
 
 #include "apodprovider.h"
 
-#include <QRegularExpression>
-#include <QTextDocumentFragment>
+#include <QJsonArray>
+#include <QJsonDocument>
+#include <QJsonObject>
+#include <QJsonParseError>
 
 #include <KIO/StoredTransferJob>
 #include <KPluginFactory>
@@ -16,13 +18,13 @@
 ApodProvider::ApodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args)
     : PotdProvider(parent, data, args)
 {
-    m_infoUrl = QUrl(QStringLiteral("https://apod.nasa.gov/apod/"));
+    QUrl feed_url = QUrl(QStringLiteral("https://science.nasa.gov/wp-json/wp/v2/apod-basic"));
 
-    KIO::StoredTransferJob *job = KIO::storedGet(m_infoUrl, KIO::NoReload, KIO::HideProgressInfo);
-    connect(job, &KIO::StoredTransferJob::finished, this, &ApodProvider::pageRequestFinished);
+    KIO::StoredTransferJob *job = KIO::storedGet(feed_url, KIO::NoReload, KIO::HideProgressInfo);
+    connect(job, &KIO::StoredTransferJob::finished, this, &ApodProvider::feedRequestFinished);
 }
 
-void ApodProvider::pageRequestFinished(KJob *_job)
+void ApodProvider::feedRequestFinished(KJob *_job)
 {
     KIO::StoredTransferJob *job = static_cast<KIO::StoredTransferJob *>(_job);
     if (job->error()) {
@@ -30,33 +32,28 @@ void ApodProvider::pageRequestFinished(KJob *_job)
         return;
     }
 
-    const QString data = QString::fromUtf8(job->data()).simplified(); // Join lines so title match can work
+    QJsonParseError parse_error;
+    QJsonDocument feed = QJsonDocument::fromJson(job->data(), &parse_error);
 
-    const QString pattern = QStringLiteral("<a href=\"(image/.*?)\"");
-    QRegularExpression exp(pattern);
-    const auto expMatch = exp.match(data);
+    if (parse_error.error != QJsonParseError::NoError) {
+        Q_EMIT error(this);
+        return;
+    }
 
-    if (expMatch.hasMatch()) {
-        const QString sub = expMatch.captured(1);
-        m_remoteUrl = QUrl(QStringLiteral("https://apod.nasa.gov/apod/") + sub);
+    QJsonArray items = feed.array();
+    QJsonObject potd = items.at(0).toObject();
 
-        /**
-         * Match title and author
-         * Example:
-         * <b> The Full Moon and the Dancer </b> <br>
-         *
-         * <b>Image Credit &
-         * <a href="lib/about_apod.html#srapply">Copyright</a>:</b>
-         *
-         * <a href="https://www.instagram.com/through_my_lens_84/">Elena Pinna</a>
-         */
-        const QRegularExpression infoRegEx(QStringLiteral("<center>.*?<b>(.+?)</b>.*?Credit.*?</b>(.+?)</center>"));
-        const QRegularExpressionMatch match = infoRegEx.match(data);
+    // If the json object doesn't have the expected structure,
+    // potd will be an empty json object
+    if (potd.keys().size() > 0) {
+        m_title = potd.value(QStringLiteral("title")).toString();
+        m_author = potd.value(QStringLiteral("credit")).toString();
 
-        if (match.hasMatch()) {
-            m_title = QTextDocumentFragment::fromHtml(match.captured(1).trimmed()).toPlainText();
-            m_author = QTextDocumentFragment::fromHtml(match.captured(2).trimmed()).toPlainText();
-        }
+        QString info_url = potd.value(QStringLiteral("permalink")).toString();
+        m_infoUrl = QUrl(info_url);
+
+        QString hd_url = potd.value(QStringLiteral("hdurl")).toString();
+        m_remoteUrl = QUrl(hd_url);
 
         KIO::StoredTransferJob *imageJob = KIO::storedGet(m_remoteUrl, KIO::NoReload, KIO::HideProgressInfo);
         connect(imageJob, &KIO::StoredTransferJob::finished, this, &ApodProvider::imageRequestFinished);
