@@ -14,11 +14,11 @@ class KJob;
 /**
  * This class provides the image for APOD
  * "Astronomy Picture Of the Day"
- * located at https://antwrp.gsfc.nasa.gov/apod.
+ * located at https://science.nasa.gov/apod/.
  * Direct link to the picture of the day page is
- * https://antwrp.gsfc.nasa.gov/apod/apYYMMDD.html
- * where YY is the year last 2 digits,
- * MM is the month and DD the day, in 2 digits.
+ * found inside the `<apod:hdurl>` element inside
+ * the rss feed located at:
+ * https://science.nasa.gov/feed/apod-basic/
  */
 class ApodProvider : public PotdProvider
 {
@@ -28,6 +28,6 @@ public:
     explicit ApodProvider(QObject *parent, const KPluginMetaData &data, const QVariantList &args);
 
 private:
-    void pageRequestFinished(KJob *job);
+    void feedRequestFinished(KJob *job);
     void imageRequestFinished(KJob *job);
 };
