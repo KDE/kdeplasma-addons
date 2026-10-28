@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:47+0000\n"
+"POT-Creation-Date: 2026-10-28 01:02+0000\n"
 "PO-Revision-Date: 2015-01-04 13:38+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -192,21 +192,28 @@ msgstr ""
 msgid "Timer finished"
 msgstr ""
 
-#: main.qml:131
+#: main.qml:132
+#, fuzzy, kde-format
+#| msgid "&Start"
+msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
+msgid "&Start (%1)"
+msgstr "&Pokreni"
+
+#: main.qml:133
 #, fuzzy, kde-format
 #| msgid "&Start"
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Pokreni"
 
-#: main.qml:136
+#: main.qml:138
 #, fuzzy, kde-format
 #| msgid "S&top"
 msgctxt "@action"
 msgid "S&top"
 msgstr "S&tani"
 
-#: main.qml:141
+#: main.qml:143
 #, fuzzy, kde-format
 #| msgid "&Reset"
 msgctxt "@action"

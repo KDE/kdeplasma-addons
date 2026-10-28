@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:47+0000\n"
+"POT-Creation-Date: 2026-10-28 01:02+0000\n"
 "PO-Revision-Date: 2026-10-04 17:03+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -201,19 +201,27 @@ msgstr "Одбројавач"
 msgid "Timer finished"
 msgstr "Одбројавање завршено"
 
-#: main.qml:131
+#: main.qml:132
+#, fuzzy, kde-format
+#| msgctxt "@action"
+#| msgid "&Start"
+msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
+msgid "&Start (%1)"
+msgstr "&Покрени"
+
+#: main.qml:133
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Покрени"
 
-#: main.qml:136
+#: main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "&Заустави"
 
-#: main.qml:141
+#: main.qml:143
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

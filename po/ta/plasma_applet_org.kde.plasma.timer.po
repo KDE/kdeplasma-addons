@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:47+0000\n"
+"POT-Creation-Date: 2026-10-28 01:02+0000\n"
 "PO-Revision-Date: 2026-05-02 18:29+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
@@ -189,19 +189,27 @@ msgstr "டைமர்"
 msgid "Timer finished"
 msgstr "டைமர் முடிந்தவிட்டது"
 
-#: main.qml:131
+#: main.qml:132
+#, fuzzy, kde-format
+#| msgctxt "@action"
+#| msgid "&Start"
+msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
+msgid "&Start (%1)"
+msgstr "&துவங்கு"
+
+#: main.qml:133
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&துவங்கு"
 
-#: main.qml:136
+#: main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "&நிறுத்து"
 
-#: main.qml:141
+#: main.qml:143
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

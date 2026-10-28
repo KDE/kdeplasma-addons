@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:47+0000\n"
+"POT-Creation-Date: 2026-10-28 01:02+0000\n"
 "PO-Revision-Date: 2026-06-18 21:48+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -193,19 +193,27 @@ msgstr "Időzítő"
 msgid "Timer finished"
 msgstr "Az időzítő lejárt"
 
-#: main.qml:131
+#: main.qml:132
+#, fuzzy, kde-format
+#| msgctxt "@action"
+#| msgid "&Start"
+msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
+msgid "&Start (%1)"
+msgstr "Indítá&s"
+
+#: main.qml:133
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "Indítá&s"
 
-#: main.qml:136
+#: main.qml:138
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Leállí&tás"
 
-#: main.qml:141
+#: main.qml:143
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

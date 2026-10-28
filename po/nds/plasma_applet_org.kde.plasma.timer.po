@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:47+0000\n"
+"POT-Creation-Date: 2026-10-28 01:02+0000\n"
 "PO-Revision-Date: 2014-09-18 23:11+0200\n"
 "Last-Translator: Sönke Dibbern <s_dibbern@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -198,21 +198,28 @@ msgstr "Tietgever"
 msgid "Timer finished"
 msgstr ""
 
-#: main.qml:131
+#: main.qml:132
+#, fuzzy, kde-format
+#| msgid "&Start"
+msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
+msgid "&Start (%1)"
+msgstr "&Anfangen"
+
+#: main.qml:133
 #, fuzzy, kde-format
 #| msgid "&Start"
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Anfangen"
 
-#: main.qml:136
+#: main.qml:138
 #, fuzzy, kde-format
 #| msgid "S&top"
 msgctxt "@action"
 msgid "S&top"
 msgstr "&Anhollen"
 
-#: main.qml:141
+#: main.qml:143
 #, fuzzy, kde-format
 #| msgid "&Reset"
 msgctxt "@action"
