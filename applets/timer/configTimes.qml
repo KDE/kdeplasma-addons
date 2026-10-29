@@ -145,6 +145,9 @@ KCM.ScrollViewKCM {
                         KeyNavigation.right: cancelButton
                         text: action.text
                         display: QQC2.ToolButton.IconOnly
+                        QQC2.ToolTip.text: text
+                        QQC2.ToolTip.visible: hovered
+                        QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                     }
 
                     QQC2.ToolButton {
@@ -161,6 +164,9 @@ KCM.ScrollViewKCM {
                         }
                         text: action.text
                         display: QQC2.ToolButton.IconOnly
+                        QQC2.ToolTip.text: text
+                        QQC2.ToolTip.visible: hovered
+                        QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                         KeyNavigation.right: deleteButton // stop here
                     }
 
@@ -178,6 +184,9 @@ KCM.ScrollViewKCM {
                         }
                         text: action.text
                         display: QQC2.ToolButton.IconOnly
+                        QQC2.ToolTip.text: text
+                        QQC2.ToolTip.visible: hovered
+                        QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                         KeyNavigation.left: timeEditItem
                         KeyNavigation.right: deleteButton
                     }
@@ -195,6 +204,9 @@ KCM.ScrollViewKCM {
                         }
                         text: action.text
                         display: QQC2.ToolButton.IconOnly
+                        QQC2.ToolTip.text: text
+                        QQC2.ToolTip.visible: hovered
+                        QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                         KeyNavigation.right: deleteButton // stop here
                     }
                 }
