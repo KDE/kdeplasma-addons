@@ -90,79 +90,85 @@ KCM.ScrollViewKCM {
 
     Component {
         id: timeEditDelegate
-        Kirigami.SwipeListItem {
-            id: timeEditItem
-            width: timeListView.width
-            contentItem: Row {
-                spacing: Kirigami.Units.gridUnit
-                Kirigami.ListItemDragHandle {
-                    anchors.verticalCenter: parent.verticalCenter
-                    enabled: !editor.editable
-                    listItem: timeEditItem
-                    listView: timeListView
-                    onMoveRequested: (oldIndex, newIndex) => {
-                        timeListModel.moveTimer(oldIndex, newIndex)
+        Loader {
+            id: delegate
+            required property int time
+            required property int index
+
+            sourceComponent: Kirigami.SwipeListItem {
+                id: timeEditItem
+                width: timeListView.width
+                contentItem: Row {
+                    spacing: Kirigami.Units.gridUnit
+                    Kirigami.ListItemDragHandle {
+                        anchors.verticalCenter: parent.verticalCenter
+                        enabled: !editor.editable
+                        listItem: timeEditItem
+                        listView: timeListView
+                        onMoveRequested: (oldIndex, newIndex) => {
+                            timeListModel.moveTimer(oldIndex, newIndex)
+                        }
+                    }
+                    TimerEdit {
+                        id: editor
+                        alertMode: editable
+                        value: delegate.time
+                        showSeconds: cfg_showSeconds
+                        maximumHeight: timeEditItem.availableHeight
+                        property int oldValue: 0
+                        onDigitModified: valueDelta => {
+                            set(value + valueDelta)
+                        }
+                        function set(newValue) {
+                            timeListModel.setTimer(index, (newValue).toString())
+                        }
+                        Component.onCompleted: editable = (value === 0)
+                    }
+                    QQC2.Label {
+                        id: hintText
+                        visible: editor.editable
+                        text: i18n("Scroll over digits to change time")
+                        textFormat: Text.PlainText
+                        anchors.verticalCenter: parent.verticalCenter
                     }
                 }
-                TimerEdit {
-                    id: editor
-                    alertMode: editable
-                    value: time
-                    showSeconds: cfg_showSeconds
-                    maximumHeight: timeEditItem.availableHeight
-                    property int oldValue: 0
-                    onDigitModified: valueDelta => {
-                        set(value + valueDelta)
+                actions: [
+                    Kirigami.Action {
+                        text: i18n("Apply")
+                        icon.name: "dialog-ok-apply"
+                        visible: editor.editable
+                        onTriggered: {
+                            editor.editable = false
+                        }
+                    },
+                    Kirigami.Action {
+                        text: i18n("Cancel")
+                        icon.name: "dialog-cancel"
+                        visible: editor.editable
+                        onTriggered: {
+                            editor.editable = false
+                            editor.set(editor.oldValue)
+                        }
+                    },
+                    Kirigami.Action {
+                        text: i18n("Edit")
+                        icon.name: "edit-entry"
+                        visible: editor.editable === false
+                        onTriggered: {
+                            editor.oldValue = editor.value
+                            editor.editable = true
+                        }
+                    },
+                    Kirigami.Action {
+                        text: i18n("Delete")
+                        icon.name: "entry-delete"
+                        visible: editor.editable === false
+                        onTriggered: {
+                            timeListModel.removeTimer(index)
+                        }
                     }
-                    function set(newValue) {
-                        timeListModel.setTimer(index, (newValue).toString())
-                    }
-                    Component.onCompleted: editable = (value === 0)
-                }
-                QQC2.Label {
-                    id: hintText
-                    visible: editor.editable
-                    text: i18n("Scroll over digits to change time")
-                    textFormat: Text.PlainText
-                    anchors.verticalCenter: parent.verticalCenter
-                }
+                ]
             }
-            actions: [
-                Kirigami.Action {
-                    text: i18n("Apply")
-                    icon.name: "dialog-ok-apply"
-                    visible: editor.editable
-                    onTriggered: {
-                        editor.editable = false
-                    }
-                },
-                Kirigami.Action {
-                    text: i18n("Cancel")
-                    icon.name: "dialog-cancel"
-                    visible: editor.editable
-                    onTriggered: {
-                        editor.editable = false
-                        editor.set(editor.oldValue)
-                    }
-                },
-                Kirigami.Action {
-                    text: i18n("Edit")
-                    icon.name: "edit-entry"
-                    visible: editor.editable === false
-                    onTriggered: {
-                        editor.oldValue = editor.value
-                        editor.editable = true
-                    }
-                },
-                Kirigami.Action {
-                    text: i18n("Delete")
-                    icon.name: "entry-delete"
-                    visible: editor.editable === false
-                    onTriggered: {
-                        timeListModel.removeTimer(index)
-                    }
-                }
-            ]
         }
     }
 }
