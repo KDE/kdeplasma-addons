@@ -94,6 +94,7 @@ KCM.ScrollViewKCM {
         QQC2.ItemDelegate {
             id: timeEditItem
             width: timeListView.width
+            Kirigami.Theme.useAlternateBackgroundColor: true
             KeyNavigation.right: editor.editable ? editor : editButton
             contentItem: RowLayout {
                 spacing: Kirigami.Units.gridUnit
@@ -132,7 +133,7 @@ KCM.ScrollViewKCM {
                 RowLayout {
                     Layout.alignment: Qt.AlignRight
 
-                    QQC2.ToolButton {
+                    QQC2.Button {
                         id: applyButton
                         visible: editor.editable
                         action: Kirigami.Action {
@@ -150,7 +151,7 @@ KCM.ScrollViewKCM {
                         QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                     }
 
-                    QQC2.ToolButton {
+                    QQC2.Button {
                         id: cancelButton
                         Layout.alignment: Qt.AlignRight
                         visible: editor.editable
@@ -170,7 +171,7 @@ KCM.ScrollViewKCM {
                         KeyNavigation.right: deleteButton // stop here
                     }
 
-                    QQC2.ToolButton {
+                    QQC2.Button {
                         id: editButton
                         Layout.alignment: Qt.AlignRight
                         visible: editor.editable === false
@@ -191,7 +192,7 @@ KCM.ScrollViewKCM {
                         KeyNavigation.right: deleteButton
                     }
 
-                    QQC2.ToolButton {
+                    QQC2.Button {
                         id: deleteButton
                         visible: editor.editable === false
                         Layout.alignment: Qt.AlignRight
