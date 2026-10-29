@@ -176,6 +176,7 @@ PlasmoidItem {
         }
 
         Item {
+            id: webviewContainer
             Layout.fillWidth: true
             Layout.fillHeight: true
 
@@ -232,6 +233,24 @@ PlasmoidItem {
                 }
             }
 
+            // The widget can't cover the screen, so full screen content moves into this window
+            Window {
+                id: fullScreenWindow
+                title: webview.title
+                color: "black"
+
+                // e.g. closed by the window manager
+                onClosing: close => {
+                    close.accepted = false;
+                    webview.triggerWebAction(WebEngineView.ExitFullScreen);
+                }
+
+                Shortcut {
+                    sequence: "Escape"
+                    onActivated: webview.triggerWebAction(WebEngineView.ExitFullScreen)
+                }
+            }
+
             WebEngineView {
                 id: webview
                 anchors.fill: parent
@@ -239,6 +258,35 @@ PlasmoidItem {
                 settings.javascriptCanPaste: true
                 onUrlChanged: plasmoid.configuration.url = url;
                 Component.onCompleted: url = plasmoid.configuration.useDefaultUrl ? plasmoid.configuration.defaultUrl : plasmoid.configuration.url;
+                settings.fullScreenSupportEnabled: true
+                onFullScreenRequested: request => {
+                    // A hidden popup can't hand the view over safely, see moveTo()
+                    if (request.toggleOn && !webviewContainer.Window.window?.visible) {
+                        request.reject();
+                    } else {
+                        request.accept();
+                    }
+                }
+                onIsFullScreenChanged: {
+                    if (isFullScreen) {
+                        fullScreenWindow.screen = Qt.application.screens.find(screen => screen.name === webviewContainer.Screen.name) ?? null;
+                        moveTo(fullScreenWindow.contentItem);
+                        fullScreenWindow.showFullScreen();
+                        forceActiveFocus();
+                    } else {
+                        moveTo(webviewContainer);
+                        fullScreenWindow.hide();
+                    }
+                }
+
+                // QtWebEngine frees the last frame on the old window's render thread; wait for it
+                // (releaseResources() does) before the view renders elsewhere, or Qt aborts.
+                function moveTo(newParent: Item) {
+                    const oldWindow = Window.window;
+                    parent = null;
+                    oldWindow.releaseResources();
+                    parent = newParent;
+                }
 
                 profile: WebEngineProfile {
                     storageName: Plasmoid.metaData.pluginId
@@ -314,6 +362,8 @@ PlasmoidItem {
             MouseArea {
                 id: mouseArea
                 anchors.fill: parent
+                // Stay above the view when it comes back from full screen
+                z: 1
                 acceptedButtons: Qt.BackButton | Qt.ForwardButton
                 onPressed: mouse => {
                     if (mouse.button === Qt.BackButton) {
