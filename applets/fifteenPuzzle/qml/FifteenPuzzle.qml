@@ -8,16 +8,12 @@ import QtQuick
 import QtQuick.Layouts
 
 import org.kde.coreaddons as KCoreAddons
-import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.plasmoid
 
 Item {
     id: main
-
-    Layout.minimumWidth: (root.inPanel && !root.compactInPanel) ? -1 : controlsRow.Layout.minimumWidth
-    Layout.minimumHeight: (root.inPanel && !root.compactInPanel) ? -1 : root.switchHeight
 
     readonly property int boardSize: Math.max(Plasmoid.configuration.boardSize, 2)
     property Component piece: Piece {}
@@ -26,6 +22,9 @@ Item {
 
     property int seconds: 0
     property int moveCounter: 0
+
+    readonly property real minimumWidth: controlsRow.Layout.minimumWidth
+
 
     Keys.onPressed: event => {
         let newPosition = main.currentPosition;
@@ -358,7 +357,7 @@ Item {
             id: solvedImage
             anchors.fill: parent
             z: 1
-            source: (Plasmoid.configuration.useImage && Plasmoid.configuration.imagePath) ? "image://fifteenpuzzle/" + boardSize + "-all-0-0-" + Plasmoid.configuration.imagePath : ""
+            source: (Plasmoid.configuration.useImage && Plasmoid.configuration.imagePath) ? "image://fifteenpuzzle/" + main.boardSize + "-all-0-0-" + Plasmoid.configuration.imagePath : ""
             visible: Plasmoid.configuration.useImage
             cache: false
         }
