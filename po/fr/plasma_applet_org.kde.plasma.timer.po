@@ -9,7 +9,7 @@
 # Vincent PINON <vpinon@april.org>, 2014.
 # Yoann Laissus <yoann.laissus@gmail.com>, 2015.
 # Simon Depiets <sdepiets@gmail.com>, 2018, 2019.
-# SPDX-FileCopyrightText: 2020, 2022, 2025, 2026 Xavier Besnard <xavier.besnard@kde.org>
+# SPDX-FileCopyrightText: 2020, 2022, 2025-2026 Xavier Besnard <xavier.besnard@kde.org>
 #
 msgid ""
 msgstr ""
@@ -26,7 +26,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Accelerator-Marker: &\n"
 "X-Environment: kde\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.08.1\n"
 "X-Text-Markup: kde4\n"
 
 #: package/contents/config/config.qml:13
