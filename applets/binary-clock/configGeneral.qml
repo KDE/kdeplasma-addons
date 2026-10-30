@@ -40,7 +40,7 @@ KCM.SimpleKCM {
         }
 
         RowLayout {
-            Kirigami.FormData.label:i18n("Use custom color for:")
+            Kirigami.FormData.label: i18nc("@title:group form label for group of checkboxes with color buttons, e.g. …Active lights", "Use custom color for:")
 
             QtControls.CheckBox {
                 id: useCustomColorForActiveCheckBox
