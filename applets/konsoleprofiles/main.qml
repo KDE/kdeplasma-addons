@@ -2,6 +2,7 @@
  *   SPDX-FileCopyrightText: 2011, 2012 Shaun Reich <shaun.reich@kdemail.net>
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
@@ -87,7 +88,7 @@ PlasmoidItem {
             id: textMetric
             visible: false
             // translated but not used, we just need length/height
-            text: i18n("Arbitrary String Which Says Something")
+            text: i18nc("@label unused string, just for sizing", "Arbitrary String Which Says Something")
         }
 
         ScrollView {
@@ -104,11 +105,15 @@ PlasmoidItem {
                 delegate: PlasmaComponents3.ItemDelegate {
                     id: listdelegate
 
+                    required property string name
+                    required property string profileIdentifier
+                    required property int index
+
                     width: ListView.view.width
                     height: textMetric.paintedHeight * 2
 
                     hoverEnabled: true
-                    text: model.name
+                    text: name
 
                     Accessible.role: Accessible.Button
 
@@ -126,7 +131,7 @@ PlasmoidItem {
                         /*var service = profilesSource.serviceForSource(model["DataEngineSource"])
                         var operation = service.operationDescription("open")
                         var  = service.startOperationCall(operation)*/
-                        profilesModel.openProfile(model.profileIdentifier)
+                        profilesModel.openProfile(profileIdentifier)
                     }
                 }
 
