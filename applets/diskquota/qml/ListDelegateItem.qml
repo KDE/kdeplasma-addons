@@ -7,17 +7,16 @@ import QtQuick
 import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.plasmoid
 import org.kde.plasma.components as PlasmaComponents3
 
 PlasmaComponents3.ItemDelegate {
     id: quotaItem
-    property string mountPoint
-    property string details
-    property string iconName
-    property string usedString
-    property string freeString
-    property int usage
+    required property string mountPoint
+    required property string details
+    required property string used
+    required property string free
+    required property int usage
+    required property int index
 
     onHoveredChanged: {
         if (hovered) {
@@ -27,18 +26,14 @@ PlasmaComponents3.ItemDelegate {
         }
     }
 
-    onClicked: {
-        diskQuota.openCleanUpTool(mountPoint);
-    }
-
     contentItem: RowLayout {
         spacing: Kirigami.Units.gridUnit
 
         Kirigami.Icon {
-            source: iconName
+            source: quotaItem.icon.name
             Layout.alignment: Qt.AlignTop
-            width: Kirigami.Units.iconSizes.medium
-            height: width
+            implicitWidth: Kirigami.Units.iconSizes.medium
+            implicitHeight: implicitWidth
         }
 
         Column {
@@ -49,20 +44,20 @@ PlasmaComponents3.ItemDelegate {
                 width: parent.width
                 PlasmaComponents3.Label {
                     Layout.fillWidth: true
-                    text: details
+                    text: quotaItem.details
                     textFormat: Text.PlainText
                 }
                 PlasmaComponents3.Label {
                     Layout.fillWidth: true
                     horizontalAlignment: Text.AlignRight
-                    text: freeString
+                    text: quotaItem.free
                     textFormat: Text.PlainText
                     opacity: 0.75
                 }
             }
             PlasmaComponents3.ProgressBar {
                 width: parent.width
-                value: usage
+                value: quotaItem.usage
                 from: 0
                 to: 100
                 // HACK to make progressbar clickable
@@ -75,7 +70,7 @@ PlasmaComponents3.ItemDelegate {
             }
             PlasmaComponents3.Label {
                 anchors.left: parent.left
-                text: usedString
+                text: quotaItem.used
                 textFormat: Text.PlainText
                 opacity: 0.75
             }
