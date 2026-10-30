@@ -36,14 +36,14 @@ KCM.SimpleKCM {
         Controls.CheckBox {
             Kirigami.FormData.label: i18nc("@label show keyboard indicator when Caps Lock or Num Lock is activated", "Show when activated:")
             readonly property string name: "Caps Lock"
-            checked: cfg_key.indexOf(name) >= 0
+            checked: root.cfg_key.indexOf(name) >= 0
             text: i18nc("@option:check", "Caps Lock")
             onToggled: root.toggle(name, checked)
         }
 
         Controls.CheckBox {
             readonly property string name: "Num Lock"
-            checked: cfg_key.indexOf(name) >= 0
+            checked: root.cfg_key.indexOf(name) >= 0
             text: i18nc("@option:check", "Num Lock")
             onToggled: root.toggle(name, checked)
         }

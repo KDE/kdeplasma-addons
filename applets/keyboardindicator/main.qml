@@ -4,6 +4,7 @@
  *
  *    SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 
@@ -17,14 +18,14 @@ import org.kde.plasma.extras as PlasmaExtras
 PlasmoidItem {
     id: root
 
-    readonly property KeyboardIndicator.KeyState capsLockState: Plasmoid.configuration.key.includes("Caps Lock") ? kiComponent.createObject(null, {key: Qt.Key_CapsLock}) : null
-    readonly property KeyboardIndicator.KeyState numLockState: Plasmoid.configuration.key.includes("Num Lock") ? kiComponent.createObject(null, {key: Qt.Key_NumLock}) : null
+    readonly property KeyboardIndicator.KeyState capsLockState: Plasmoid.configuration.key.includes("Caps Lock") ? kiComponent.createObject(null, {key: Qt.Key_CapsLock}) as KeyboardIndicator.KeyState : null
+    readonly property KeyboardIndicator.KeyState numLockState: Plasmoid.configuration.key.includes("Num Lock") ? kiComponent.createObject(null, {key: Qt.Key_NumLock})  as KeyboardIndicator.KeyState : null
 
-    readonly property KeyboardIndicator.KeyState altState: kiComponent.createObject(null, {key: Qt.Key_Alt})
-    readonly property KeyboardIndicator.KeyState shiftState: kiComponent.createObject(null, {key: Qt.Key_Shift})
-    readonly property KeyboardIndicator.KeyState controlState: kiComponent.createObject(null, {key: Qt.Key_Control})
-    readonly property KeyboardIndicator.KeyState metaState: kiComponent.createObject(null, {key: Qt.Key_Meta})
-    readonly property KeyboardIndicator.KeyState altGrState: kiComponent.createObject(null, {key: Qt.Key_AltGr})
+    readonly property KeyboardIndicator.KeyState altState: kiComponent.createObject(null, {key: Qt.Key_Alt}) as KeyboardIndicator.KeyState
+    readonly property KeyboardIndicator.KeyState shiftState: kiComponent.createObject(null, {key: Qt.Key_Shift}) as KeyboardIndicator.KeyState
+    readonly property KeyboardIndicator.KeyState controlState: kiComponent.createObject(null, {key: Qt.Key_Control})  as KeyboardIndicator.KeyState
+    readonly property KeyboardIndicator.KeyState metaState: kiComponent.createObject(null, {key: Qt.Key_Meta}) as KeyboardIndicator.KeyState
+    readonly property KeyboardIndicator.KeyState altGrState: kiComponent.createObject(null, {key: Qt.Key_AltGr}) as KeyboardIndicator.KeyState
 
     readonly property bool anyActive: {
         var ret = anyModifierActive
@@ -86,7 +87,7 @@ PlasmoidItem {
             anchors.fill: parent
             source: Plasmoid.icon
             active: compactMouse.containsMouse
-            enabled: anyActive
+            enabled: root.anyActive
         }
     }
 
