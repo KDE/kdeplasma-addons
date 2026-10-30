@@ -36,7 +36,7 @@ PlasmoidItem {
     switchHeight: Kirigami.Units.gridUnit * 11
     Plasmoid.status: PlasmaCore.Types.ActiveStatus
     Plasmoid.icon: inPanel ? "kate-symbolic" : "kate"
-    toolTipMainText: i18n("Kate Sessions")
+    toolTipMainText: i18nc("@info:tooltip title for widget tooltip", "Kate Sessions")
 
     Component.onCompleted: {
         plasmoid.removeInternalAction("configure");
