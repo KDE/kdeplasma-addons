@@ -43,24 +43,20 @@ Item {
 
     readonly property bool constrained: formFactor == PlasmaCore.Types.Vertical || formFactor == PlasmaCore.Types.Horizontal
 
-    readonly property bool showSeconds: root.showSeconds
-
-    readonly property int hours: root.hours
-    readonly property int minutes: root.minutes
-    readonly property int seconds: root.seconds
+    required property int hours
+    required property int minutes
+    required property int seconds
 
     readonly property int base: 10
 
     readonly property bool showOffLeds: Plasmoid.configuration.showOffLeds
 
-    readonly property int dots: showSeconds ? 6 : 4
+    readonly property int dots: Plasmoid.configuration.showSeconds ? 6 : 4
 
     readonly property color onColor: Plasmoid.configuration.useCustomColorForActive ? Plasmoid.configuration.customColorForActive : Kirigami.Theme.textColor
     readonly property color offColor: Plasmoid.configuration.useCustomColorForInactive ? Plasmoid.configuration.customColorForInactive : Qt.rgba(onColor.r, onColor.g, onColor.b, 0.2)
 
     readonly property int dotSize: Math.min((height-5*Kirigami.Units.smallSpacing)/4, (width-(dots+1)*Kirigami.Units.smallSpacing)/dots)
-
-    property bool wasExpanded: false
 
     readonly property alias mouseArea: mouseArea
 
@@ -68,14 +64,12 @@ Item {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        onPressed: wasExpanded = root.expanded
-        onClicked: root.expanded = !wasExpanded
     }
 
     GridLayout {
         anchors.horizontalCenter: parent.horizontalCenter
         anchors.verticalCenter: parent.verticalCenter
-        columns: main.showSeconds ? 6 : 4
+        columns: Plasmoid.configuration.showSeconds ? 6 : 4
         Repeater {
             model: [8, 4, 2, 1]
             Repeater {
@@ -87,7 +81,7 @@ Item {
                     required property var modelData
                     required property int index
                     property var timeVal: modelData
-                    visible: main.dotSize >= 0 && (main.showSeconds || index < 4)
+                    visible: main.dotSize >= 0 && (main.Plasmoid.configuration.showSeconds || index < 4)
                     width: main.dotSize
                     height: width
                     radius: width/2
