@@ -36,8 +36,8 @@ PlasmoidItem {
     
     preferredRepresentation: fullRepresentation
 
-    toolTipMainText: i18n("Fifteen Puzzle");
-    toolTipSubText: i18n("Solve by arranging in order");
+    toolTipMainText: i18nc("@info:tooltip main title for widget", "Fifteen Puzzle");
+    toolTipSubText: i18nc("@info:tooltip subtitle for widget", "Solve by arranging in order");
 
     fullRepresentation: FifteenPuzzle {
         Layout.minimumWidth: (root.inPanel && !root.compactInPanel) ? -1 : minimumWidth
