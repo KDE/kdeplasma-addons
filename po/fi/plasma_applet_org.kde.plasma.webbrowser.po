@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-24 00:52+0000\n"
+"POT-Creation-Date: 2026-10-30 00:55+0000\n"
 "PO-Revision-Date: 2026-01-10 20:51+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -184,25 +184,25 @@ msgctxt ""
 msgid "Keep open"
 msgstr "Pidä avoinna"
 
-#: qml/main.qml:223
+#: qml/main.qml:224
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Avaa linkki selaimeen"
 
-#: qml/main.qml:229
+#: qml/main.qml:230
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopioi linkin osoite"
 
-#: qml/main.qml:298
+#: qml/main.qml:346
 #, kde-format
 msgctxt "An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Uusi ikkuna estetty"
 
-#: qml/main.qml:299
+#: qml/main.qml:347
 #, kde-format
 msgid ""
 "Click here to open the following blocked popup:\n"
