@@ -3,6 +3,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
@@ -52,7 +53,7 @@ PlasmoidItem {
 
         DictObject {
             id: dict
-            selectedDictionary: plasmoid.configuration.dictionary
+            selectedDictionary: Plasmoid.configuration.dictionary
             // Activate the busy indicator, and deactivate it when page is loaded.
             onSearchInProgress: placeholder.opacity = 1;
             onDefinitionFound: html => {
@@ -125,6 +126,7 @@ PlasmoidItem {
                             WebEngineView.Copy,
                         ]
                         MenuItem {
+                            required property /*WebEngineView.WebAction*/ int modelData
                             text: web.action(modelData).text
                             enabled: web.action(modelData).enabled
                             onClicked: web.action(modelData).trigger()

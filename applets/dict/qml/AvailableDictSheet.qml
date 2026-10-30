@@ -4,6 +4,7 @@
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC2
@@ -17,6 +18,7 @@ Kirigami.Dialog {
     id: dictDialog
 
     readonly property alias view: dialogListView
+    property alias dictionaryModel: proxyModel.sourceModel
 
     title: i18n("Add More Dictionaries")
     implicitWidth: dialogListView.implicitWidth
@@ -54,7 +56,7 @@ Kirigami.Dialog {
         reuseItems: true
 
         model: KItemModels.KSortFilterProxyModel {
-            sourceModel: dictionariesModel
+            id: proxyModel
             filterRoleName: "EditRole" // id
             filterString: filter.text
             filterCaseSensitivity: Qt.CaseInsensitive
@@ -62,9 +64,15 @@ Kirigami.Dialog {
 
         delegate: QQC2.CheckDelegate {
             id: checkbox
+
+            required property string id
+            required property string description
+            required property int index
+            required property var model // checked shadows CheckDelegate's'
+
             width: dialogListView.width
             focus: true // keyboard navigation
-            text: `${model.id} (${model.description})`
+            text: `${id} (${description})`
             checked: model.checked
             onToggled: {
                 model.checked = checked;
