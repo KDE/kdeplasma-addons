@@ -9,7 +9,7 @@
 */
 pragma ComponentBehavior: Bound
 import QtQuick
-import QtQuick.Controls as QQC2
+import org.kde.ksvg as KSvg
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.components as PlasmaComponents3
 
@@ -28,7 +28,7 @@ PlasmaComponents3.ScrollView {
         boundsBehavior: Flickable.StopAtBounds
         interactive: contentHeight > height
         highlight: PlasmaExtras.Highlight {
-            anchors.bottomMargin: -listMargins.bottom
+            anchors.bottomMargin: -listItemSvg.margins.bottom
             y: 1
         }
         highlightMoveDuration: 0
@@ -53,6 +53,13 @@ PlasmaComponents3.ScrollView {
                     if (menuListView.currentIndex == index) menuListView.currentIndex = -1
                 }
             }
+        }
+
+        KSvg.FrameSvgItem {
+            id : listItemSvg
+            imagePath: "widgets/listitem"
+            prefix: "normal"
+            visible: false
         }
     }
 }
