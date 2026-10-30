@@ -24,10 +24,6 @@ import org.kde.plasma.workspace.calendar as PlasmaCalendar
 PlasmoidItem {
     id: root
 
-    property bool showSeconds: Plasmoid.configuration.showSeconds
-    property int hours: clockSource.dateTime.getHours()
-    property int minutes: clockSource.dateTime.getMinutes()
-    property int seconds: clockSource.dateTime.getSeconds()
     width: Kirigami.Units.gridUnit * 10
     height: Kirigami.Units.gridUnit * 4
 
@@ -40,10 +36,18 @@ PlasmoidItem {
 
     Clock {
         id: clockSource
-        trackSeconds: root.showSeconds || root.compactRepresentationItem.mouseArea.containsMouse
+        trackSeconds: Plasmoid.configuration.showSeconds || (root.compactRepresentationItem as BinaryClock).mouseArea.containsMouse
     }
 
-    compactRepresentation: BinaryClock { }
+    compactRepresentation: BinaryClock {
+        property bool wasExpanded: false
+
+        hours: clockSource.dateTime.getHours()
+        minutes: clockSource.dateTime.getMinutes()
+        seconds: clockSource.dateTime.getSeconds()
+        mouseArea.onPressed: wasExpanded = root.expanded
+        mouseArea.onClicked: root.expanded = !wasExpanded
+    }
 
     fullRepresentation: PlasmaCalendar.MonthView {
         Layout.minimumWidth: Kirigami.Units.gridUnit * 20
