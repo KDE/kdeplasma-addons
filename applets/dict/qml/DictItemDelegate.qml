@@ -15,7 +15,11 @@ import org.kde.kirigami.delegates as KD
 Item {
     id: delegate
 
-    property ListView view
+    required property ListView view
+    // model properties
+    required property string id
+    required property string description
+    required property int index
 
     implicitHeight : dictItem.implicitHeight
 
@@ -30,8 +34,8 @@ Item {
         hoverEnabled: false
         down: false
 
-        text: model.id
-        Accessible.description: model.description
+        text: delegate.id
+        Accessible.description: delegate.description
 
         contentItem: RowLayout {
             Kirigami.ListItemDragHandle {
@@ -57,7 +61,7 @@ Item {
                 text: i18n("Delete")
                 icon.name: "entry-delete"
                 onTriggered: {
-                    delegate.removed(index);
+                    delegate.removed(delegate.index);
                 }
             }
         ]

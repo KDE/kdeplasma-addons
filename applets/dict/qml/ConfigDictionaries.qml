@@ -3,6 +3,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import org.kde.kirigami as Kirigami
@@ -11,6 +12,7 @@ import org.kde.kcmutils as KCM
 import plasma.applet.org.kde.plasma_applet_dict
 
 KCM.ScrollViewKCM {
+    id: root
 
     property string cfg_dictionary: ""
 
@@ -31,12 +33,13 @@ KCM.ScrollViewKCM {
 
     DictionariesModel {
         id: dictionariesModel
-        Component.onCompleted: enabledDicts = cfg_dictionary
-        onEnabledDictsChanged: cfg_dictionary = enabledDicts
+        Component.onCompleted: enabledDicts = root.cfg_dictionary
+        onEnabledDictsChanged: root.cfg_dictionary = enabledDicts
     }
 
     AvailableDictSheet {
         id: sheet
+        dictionaryModel: dictionariesModel
     }
 
     view: ListView {
