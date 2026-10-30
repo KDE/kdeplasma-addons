@@ -197,6 +197,15 @@ PlasmoidItem {
 
                     font.pointSize: cfgFontPointSize
 
+                    // Hide the blinking cursor while text is selected, like most rich text editors
+                    onSelectedTextChanged: cursorVisible = activeFocus && selectedText.length === 0
+                    // TextEdit shows it again whenever it gets focus back
+                    onCursorVisibleChanged: {
+                        if (cursorVisible && selectedText.length > 0) {
+                            cursorVisible = false;
+                        }
+                    }
+
                     Keys.onPressed: event => {
                         if (event.key === Qt.Key_Escape) {
                             root.expanded = false;
