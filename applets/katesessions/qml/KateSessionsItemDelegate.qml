@@ -54,7 +54,7 @@ PlasmaComponents3.ItemDelegate {
         PlasmaComponents3.TextField {
             id: sessionname
             visible: menuItem.showInput
-            placeholderText: i18n("Session name")
+            placeholderText: i18nc("@info:placeholder for text field to create new Kate session with name", "Session name")
             clearButtonShown: true
             Layout.fillWidth: true
             Keys.onReturnPressed: okButton.clicked()
@@ -65,7 +65,7 @@ PlasmaComponents3.ItemDelegate {
             id: okButton
             visible: menuItem.showInput
             enabled: sessionname.text.replace(/^\s+|\s+$/g, '').length>0
-            text: i18n("Create new session and start Kate")
+            text: i18nc("@action:button tooltip/accessible for icon only button", "Create new session and start Kate")
             icon.name: "dialog-ok"
             display: PlasmaComponents3.ToolButton.IconOnly
             PlasmaComponents3.ToolTip.visible: hovered || visualFocus
@@ -80,7 +80,7 @@ PlasmaComponents3.ItemDelegate {
         PlasmaComponents3.ToolButton {
             id: cancelButton
             visible: menuItem.showInput
-            text: i18n("Cancel session creation")
+            text: i18nc("@action:button tooltip/accessible for icon only button", "Cancel session creation")
             icon.name: "dialog-cancel"
             display: PlasmaComponents3.ToolButton.IconOnly
             PlasmaComponents3.ToolTip.visible: hovered || visualFocus
