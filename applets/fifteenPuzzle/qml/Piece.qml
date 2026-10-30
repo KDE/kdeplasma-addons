@@ -3,6 +3,7 @@
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 
@@ -57,14 +58,14 @@ Rectangle {
     }
 
     Behavior on x {
-        enabled: animationEnabled
+        enabled: piece.animationEnabled
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
         }
     }
     Behavior on y {
-        enabled: animationEnabled
+        enabled: piece.animationEnabled
         NumberAnimation {
             duration: Kirigami.Units.longDuration
             easing.type: Easing.InOutQuad
@@ -105,7 +106,7 @@ Rectangle {
 
         sourceComponent: Image {
             id: pieceImage
-            source: (pieceWidth > 0 && pieceHeight > 0 && number > 0) ? "image://fifteenpuzzle/" + boardSize + "-" + number + "-" + pieceWidth + "-" + pieceHeight + "-" + Plasmoid.configuration.imagePath : ""
+            source: (piece.pieceWidth > 0 && piece.pieceHeight > 0 && piece.number > 0) ? "image://fifteenpuzzle/" + piece.boardSize + "-" + piece.number + "-" + piece.pieceWidth + "-" + piece.pieceHeight + "-" + Plasmoid.configuration.imagePath : ""
             cache: false
         }
     }

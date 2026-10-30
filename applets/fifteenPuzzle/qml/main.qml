@@ -5,8 +5,10 @@
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
+import QtQuick.Layouts
 
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
@@ -37,5 +39,8 @@ PlasmoidItem {
     toolTipMainText: i18n("Fifteen Puzzle");
     toolTipSubText: i18n("Solve by arranging in order");
 
-    fullRepresentation: FifteenPuzzle { }
+    fullRepresentation: FifteenPuzzle {
+        Layout.minimumWidth: (root.inPanel && !root.compactInPanel) ? -1 : minimumWidth
+        Layout.minimumHeight: (root.inPanel && !root.compactInPanel) ? -1 : root.switchHeight
+    }
 }
