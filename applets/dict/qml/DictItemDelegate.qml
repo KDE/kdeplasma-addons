@@ -7,6 +7,7 @@
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Controls as QQC2
 
 import org.kde.kirigami as Kirigami
 import org.kde.kirigami.delegates as KD
@@ -26,13 +27,16 @@ Item {
     signal removed(int index)
     signal moveRequested(int oldIndex, int newIndex)
 
-    Kirigami.SwipeListItem {
+    QQC2.ItemDelegate {
         id: dictItem
 
         // Don't need highlight, hover, or pressed effects
         highlighted: false
         hoverEnabled: false
         down: false
+        width: delegate.width
+
+        Kirigami.StyleHints.useAlternateBackgroundColor: true
 
         text: delegate.id
         Accessible.description: delegate.description
@@ -54,16 +58,17 @@ Item {
                 title: dictItem.text
                 subtitle: dictItem.Accessible.description
             }
-        }
 
-        actions: [
-            Kirigami.Action {
+            QQC2.Button {
+                Layout.alignment: Qt.AlignRight
                 text: i18n("Delete")
-                icon.name: "entry-delete"
-                onTriggered: {
-                    delegate.removed(delegate.index);
-                }
+                icon.name: "edit-delete-remove"
+                display: QQC2.Button.IconOnly
+                QQC2.ToolTip.text: text
+                QQC2.ToolTip.visible: hovered || visualFocus
+                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+                onClicked: delegate.removed(delegate.index);
             }
-        ]
+        }
     }
 }
