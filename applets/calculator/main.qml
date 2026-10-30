@@ -9,6 +9,7 @@
  *
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
@@ -191,7 +192,7 @@ PlasmoidItem {
             var digitRegex = new RegExp('^[0-9]$');
             var decimalRegex = new RegExp('^[\.,]$');
 
-            for (var i = 0; i < content.length; i++) {
+            for (let i = 0; i < content.length; i++) {
                 if (digitRegex.test(content[i])) {
                     digitClicked(parseInt(content[i]));
                 } else if (decimalRegex.test(content[i])) {
@@ -257,55 +258,55 @@ PlasmoidItem {
             LayoutMirroring.enabled: false
             LayoutMirroring.childrenInherit: true
 
-            Keys.onDigit0Pressed: { digitClicked(0); zeroButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit1Pressed: { digitClicked(1); oneButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit2Pressed: { digitClicked(2); twoButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit3Pressed: { digitClicked(3); threeButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit4Pressed: { digitClicked(4); fourButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit5Pressed: { digitClicked(5); fiveButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit6Pressed: { digitClicked(6); sixButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit7Pressed: { digitClicked(7); sevenButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit8Pressed: { digitClicked(8); eightButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit9Pressed: { digitClicked(9); nineButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onEscapePressed: { allClearClicked(); allClearButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDeletePressed: { clearClicked(); clearButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit0Pressed: { main.digitClicked(0); zeroButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit1Pressed: { main.digitClicked(1); oneButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit2Pressed: { main.digitClicked(2); twoButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit3Pressed: { main.digitClicked(3); threeButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit4Pressed: { main.digitClicked(4); fourButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit5Pressed: { main.digitClicked(5); fiveButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit6Pressed: { main.digitClicked(6); sixButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit7Pressed: { main.digitClicked(7); sevenButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit8Pressed: { main.digitClicked(8); eightButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit9Pressed: { main.digitClicked(9); nineButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onEscapePressed: { main.allClearClicked(); allClearButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDeletePressed: { main.clearClicked(); clearButton.forceActiveFocus(Qt.TabFocusReason); }
             Keys.onPressed: event => {
                 switch (event.key) {
                 case Qt.Key_Plus:
-                    setOperator("+");
+                    main.setOperator("+");
                     plusButton.forceActiveFocus(Qt.TabFocusReason);
                     break;
                 case Qt.Key_Minus:
-                    setOperator("-");
+                    main.setOperator("-");
                     minusButton.forceActiveFocus(Qt.TabFocusReason);
                     break;
                 case Qt.Key_Asterisk:
-                    setOperator("*");
+                    main.setOperator("*");
                     multiplyButton.forceActiveFocus(Qt.TabFocusReason);
                     break;
                 case Qt.Key_Slash:
-                    setOperator("/");
+                    main.setOperator("/");
                     divideButton.forceActiveFocus(Qt.TabFocusReason);
                     break;
                 case Qt.Key_Comma:
                 case Qt.Key_Period:
-                    decimalClicked();
+                    main.decimalClicked();
                     decimalButton.forceActiveFocus(Qt.TabFocusReason);
                     break;
                 case Qt.Key_Equal:
                 case Qt.Key_Return:
                 case Qt.Key_Enter:
-                    equalsClicked();
+                    main.equalsClicked();
                     break;
                 case Qt.Key_Backspace:
-                    deleteDigit();
+                    main.deleteDigit();
                     display.forceActiveFocus(Qt.TabFocusReason);
                     break;
                 default:
                     if (event.matches(StandardKey.Copy)) {
-                        copyToClipboard();
+                        main.copyToClipboard();
                     } else if (event.matches(StandardKey.Paste)) {
-                        pasteFromClipboard();
+                        main.pasteFromClipboard();
                     }
                     break;
                 }
@@ -373,7 +374,7 @@ PlasmoidItem {
                     KeyNavigation.left: allClearButton
 
                     text: i18nc("Text of the clear button", "C");
-                    onClicked: clearClicked();
+                    onClicked: main.clearClicked();
                 }
 
                 PlasmaComponents.Button {
@@ -387,7 +388,7 @@ PlasmoidItem {
                     KeyNavigation.up: zeroButton
 
                     text: i18nc("Text of the division button", "÷");
-                    onClicked: setOperator("/");
+                    onClicked: main.setOperator("/");
                 }
 
                 PlasmaComponents.Button {
@@ -401,7 +402,7 @@ PlasmoidItem {
                     KeyNavigation.up: decimalButton
 
                     text: i18nc("Text of the multiplication button", "×");
-                    onClicked: setOperator("*");
+                    onClicked: main.setOperator("*");
                 }
 
                 PlasmaComponents.Button {
@@ -415,7 +416,7 @@ PlasmoidItem {
                     KeyNavigation.right: clearButton
 
                     text: i18nc("Text of the all clear button", "AC");
-                    onClicked: allClearClicked();
+                    onClicked: main.allClearClicked();
                 }
 
 
@@ -430,7 +431,7 @@ PlasmoidItem {
                     KeyNavigation.left: minusButton
 
                     text: "7";
-                    onClicked: digitClicked(7);
+                    onClicked: main.digitClicked(7);
                 }
 
                 PlasmaComponents.Button {
@@ -443,7 +444,7 @@ PlasmoidItem {
                     KeyNavigation.right: nineButton
 
                     text: "8";
-                    onClicked: digitClicked(8);
+                    onClicked: main.digitClicked(8);
                 }
 
                 PlasmaComponents.Button {
@@ -456,7 +457,7 @@ PlasmoidItem {
                     KeyNavigation.right: minusButton
 
                     text: "9";
-                    onClicked: digitClicked(9);
+                    onClicked: main.digitClicked(9);
                 }
 
                 PlasmaComponents.Button {
@@ -469,7 +470,7 @@ PlasmoidItem {
                     KeyNavigation.right: sevenButton
 
                     text: i18nc("Text of the minus button", "-");
-                    onClicked: setOperator("-");
+                    onClicked: main.setOperator("-");
                 }
 
 
@@ -484,7 +485,7 @@ PlasmoidItem {
                     KeyNavigation.left: plusButton
 
                     text: "4";
-                    onClicked: digitClicked(4);
+                    onClicked: main.digitClicked(4);
                 }
 
                 PlasmaComponents.Button {
@@ -497,7 +498,7 @@ PlasmoidItem {
                     KeyNavigation.right: sixButton
 
                     text: "5";
-                    onClicked: digitClicked(5);
+                    onClicked: main.digitClicked(5);
                 }
 
                 PlasmaComponents.Button {
@@ -510,7 +511,7 @@ PlasmoidItem {
                     KeyNavigation.right: plusButton
 
                     text: "6";
-                    onClicked: digitClicked(6);
+                    onClicked: main.digitClicked(6);
                 }
 
                 PlasmaComponents.Button {
@@ -523,7 +524,7 @@ PlasmoidItem {
                     KeyNavigation.right: fourButton
 
                     text: i18nc("Text of the plus button", "+");
-                    onClicked: setOperator("+");
+                    onClicked: main.setOperator("+");
                 }
 
 
@@ -538,7 +539,7 @@ PlasmoidItem {
                     KeyNavigation.left: ansButton
 
                     text: "1";
-                    onClicked: digitClicked(1);
+                    onClicked: main.digitClicked(1);
                 }
 
                 PlasmaComponents.Button {
@@ -551,7 +552,7 @@ PlasmoidItem {
                     KeyNavigation.right: threeButton
 
                     text: "2";
-                    onClicked: digitClicked(2);
+                    onClicked: main.digitClicked(2);
                 }
 
                 PlasmaComponents.Button {
@@ -564,7 +565,7 @@ PlasmoidItem {
                     KeyNavigation.right: ansButton
 
                     text: "3";
-                    onClicked: digitClicked(3);
+                    onClicked: main.digitClicked(3);
                 }
 
                 PlasmaComponents.Button {
@@ -577,7 +578,7 @@ PlasmoidItem {
 
                     Layout.rowSpan: 2
                     text: i18nc("Text of the equals button", "=");
-                    onClicked: equalsClicked();
+                    onClicked: main.equalsClicked();
                 }
 
                 PlasmaComponents.Button {
@@ -592,7 +593,7 @@ PlasmoidItem {
 
                     Layout.columnSpan: 2
                     text: "0";
-                    onClicked: digitClicked(0);
+                    onClicked: main.digitClicked(0);
                 }
 
                 PlasmaComponents.Button {
@@ -604,7 +605,7 @@ PlasmoidItem {
                     KeyNavigation.right: ansButton
 
                     text: Qt.locale().decimalPoint;
-                    onClicked: decimalClicked();
+                    onClicked: main.decimalClicked();
                 }
             }
         }
