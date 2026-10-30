@@ -112,40 +112,40 @@ PlasmoidItem {
         let text = [];
 
         if (root.altState.latched) {
-            text.push(i18n("Alt is latched"))
+            text.push(i18nc("@info:tooltip widget subtitle, Alt applies to next press", "Alt is latched"))
         } else if (root.altState.locked) {
-            text.push(i18n("Alt is locked"))
+            text.push(i18nc("@info:tooltip widget subtitle, Alt applies until pressed again", "Alt is locked"))
         }
 
         if (root.shiftState.latched) {
-            text.push(i18n("Shift is latched"))
+            text.push(i18nc("@info:tooltip widget subtitle, Shift applies to next press", "Shift is latched"))
         } else if (root.shiftState.locked) {
-            text.push(i18n("Shift is locked"))
+            text.push(i18nc("@info:tooltip widget subtitle, Shift applies until pressed again", "Shift is locked"))
         }
 
         if (root.controlState.latched) {
-            text.push(i18n("Control is latched"))
+            text.push(i18nc("@info:tooltip widget subtitle, Ctrl applies to next press", "Control is latched"))
         } else if (root.controlState.locked) {
-            text.push(i18n("Control is locked"))
+            text.push(i18nc("@info:tooltip widget subtitle, Ctrl applies until pressed again", "Control is locked"))
         }
 
         if (root.metaState.latched) {
-            text.push(i18n("Meta is latched"))
+            text.push(i18nc("@info:tooltip widget subtitle, Meta applies to next press", "Meta is latched"))
         } else if (root.metaState.locked) {
-            text.push(i18n("Meta is locked"))
+            text.push(i18nc("@info:tooltip widget subtitle, Meta applies until pressed again", "Meta is locked"))
         }
 
         if (root.altGrState.latched) {
-            text.push(i18n("Alt Gr is latched"))
+            text.push(i18nc("@info:tooltip widget subtitle, AltGr applies to next press", "Alt Gr is latched"))
         } else if (root.altGrState.locked) {
-            text.push(i18n("Alt Gr is locked"))
+            text.push(i18nc("@info:tooltip widget subtitle, AltGr applies until pressed again", "Alt Gr is locked"))
         }
 
         if (root.capsLockState?.locked) {
-            text.push(i18n("Caps Lock activated"));
+            text.push(i18nc("@info:tooltip widget subtitle, Caps Lock on", "Caps Lock activated"));
         }
         if (root.numLockState?.locked) {
-            text.push(i18n("Num Lock activated"));
+            text.push(i18nc("@info:tooltip widget subtitle, Num Lock on", "Num Lock activated"));
         }
         if (text.length > 0) {
             // Not using KUIT markup for these newline characters because those
@@ -153,7 +153,7 @@ PlasmoidItem {
             // tooltip which does not render HTML at all for security reasons
             return text.join("\n");
         } else {
-            return i18n("No lock keys activated");
+            return i18nc("@info:tooltip widget subtitle, no Lock keys or sticky modifiers active", "No lock keys activated");
         }
     }
 }
