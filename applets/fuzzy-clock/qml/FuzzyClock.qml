@@ -19,6 +19,8 @@ import org.kde.plasma.plasmoid
 Item {
     id: main
 
+    required property date dateTime
+
     Layout.minimumWidth: vertical ? 0 : sizehelper.paintedWidth + (Kirigami.Units.smallSpacing * 2)
     Layout.maximumWidth: vertical ? Infinity : Layout.minimumWidth
     Layout.preferredWidth: vertical ? undefined : Layout.minimumWidth
@@ -27,9 +29,9 @@ Item {
     Layout.maximumHeight: vertical ? Layout.minimumHeight : Infinity
     Layout.preferredHeight: vertical ? Layout.minimumHeight : Kirigami.Units.iconSizes.sizeForLabels * 2
 
-    readonly property bool vertical: plasmoid.formFactor == PlasmaCore.Types.Vertical
+    readonly property bool vertical: Plasmoid.formFactor == PlasmaCore.Types.Vertical
 
-    readonly property int fuzzyness: plasmoid.configuration.fuzzyness
+    readonly property int fuzzyness: Plasmoid.configuration.fuzzyness
 
     readonly property var hourNames: [
         [ i18n("One o’clock"),
@@ -193,7 +195,7 @@ Item {
     ]
 
     function timeString() {
-        var d = new Date(clockSource.dateTime)
+        var d = new Date(main.dateTime)
         var hours = d.getHours()
         var minutes = d.getMinutes()
 
@@ -260,13 +262,13 @@ Item {
     PlasmaComponents3.Label  {
         id: timeLabel
         font {
-            weight: plasmoid.configuration.boldText ? Font.Bold : Font.Normal
-            italic: plasmoid.configuration.italicText
+            weight: Plasmoid.configuration.boldText ? Font.Bold : Font.Normal
+            italic: Plasmoid.configuration.italicText
             pixelSize: 1024
         }
         minimumPixelSize: Kirigami.Units.iconSizes.sizeForLabels
         fontSizeMode: Text.Fit
-        text: timeString()
+        text: main.timeString()
 
         wrapMode: Text.NoWrap
         horizontalAlignment: Text.AlignHCenter
@@ -280,28 +282,24 @@ Item {
         }
     }
 
-    property bool wasExpanded: false
-
     readonly property alias mouseArea: mouseArea
 
     MouseArea {
         id: mouseArea
         anchors.fill: parent
         hoverEnabled: true
-        onPressed: wasExpanded = root.expanded
-        onClicked: root.expanded = !wasExpanded
     }
 
     Text {
         id: sizehelper
         font.weight: timeLabel.font.weight
         font.italic: timeLabel.font.italic
-        font.pixelSize: vertical ? Kirigami.Units.gridUnit * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
+        font.pixelSize: main.vertical ? Kirigami.Units.gridUnit * 2 : 1024 // random "big enough" size - this is used as a max pixelSize by the fontSizeMode
         minimumPixelSize: Math.round(Kirigami.Units.gridUnit / 2)
         horizontalAlignment: Text.AlignHCenter
         verticalAlignment: Text.AlignVCenter
         text: timeLabel.text
-        fontSizeMode: vertical ? Text.HorizontalFit : Text.VerticalFit
+        fontSizeMode: main.vertical ? Text.HorizontalFit : Text.VerticalFit
 
         wrapMode: Text.NoWrap
         visible: false

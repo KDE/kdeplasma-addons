@@ -5,6 +5,8 @@
  *
  * SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
+
 import QtQml
 import QtQuick
 import QtQuick.Layouts
@@ -13,7 +15,6 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.clock
-import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.workspace.calendar as PlasmaCalendar
 
 PlasmoidItem {
@@ -34,10 +35,16 @@ PlasmoidItem {
 
     Clock {
         id: clockSource
-        trackSeconds: root.compactRepresentationItem.mouseArea.containsMouse
+        trackSeconds: (root.compactRepresentationItem as FuzzyClock).mouseArea.containsMouse
     }
 
-    compactRepresentation: FuzzyClock { }
+    compactRepresentation: FuzzyClock {
+        property bool wasExpanded: false
+
+        dateTime: root.currentDateTime
+        mouseArea.onPressed: wasExpanded = root.expanded
+        mouseArea.onClicked: root.expanded = !wasExpanded
+    }
 
     fullRepresentation: PlasmaCalendar.MonthView {
         Layout.minimumWidth: Kirigami.Units.gridUnit * 20
@@ -46,6 +53,6 @@ PlasmoidItem {
         Kirigami.Theme.inherit: false
         Kirigami.Theme.colorSet: Kirigami.Theme.Window
 
-        today: currentDateTime
+        today: root.currentDateTime
     }
 }
