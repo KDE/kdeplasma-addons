@@ -3,6 +3,8 @@
  *
  * SPDX-License-Identifier: LGPL-2.1-or-later
  */
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 
@@ -88,14 +90,14 @@ PlasmoidItem {
                 highlightResizeDuration: 0
                 currentIndex: -1
                 delegate: ListDelegateItem {
+                    required property var model // icon shadows IconDelegate's
                     enabled: diskQuota.cleanUpToolInstalled
                     width: listView.width
-                    mountPoint: model.mountPoint
-                    details: model.details
-                    iconName: model.icon
-                    usedString: model.used
-                    freeString: model.free
-                    usage: model.usage
+                    icon.name: model.icon
+
+                    onClicked: {
+                        diskQuota.openCleanUpTool(mountPoint);
+                    }
                 }
             }
         }
