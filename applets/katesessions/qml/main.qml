@@ -11,12 +11,10 @@
 pragma ComponentBehavior: Bound
 import QtQuick
 import QtQuick.Layouts
-import QtQuick.Controls as QQC2
 
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
-import org.kde.ksvg as KSvg
 import org.kde.kitemmodels as KItemModels
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.extras as PlasmaExtras
@@ -76,15 +74,6 @@ PlasmoidItem {
                     }
                 }
             }
-        }
-
-        property alias listMargins: listItemSvg.margins
-
-        KSvg.FrameSvgItem {
-            id : listItemSvg
-            imagePath: "widgets/listitem"
-            prefix: "normal"
-            visible: false
         }
 
         Keys.onEscapePressed: filter.clearOrHide()
