@@ -198,7 +198,7 @@ PlasmoidItem {
                         width: parent.width - Kirigami.Units.gridUnit * 2 // For text wrap
                         anchors.centerIn: parent
                         iconName: "network-disconnect"
-                        text: i18n("Unable to load definition")
+                        text: i18nc("@info:status PlaceholderMessage likely connection failure", "Unable to load definition")
                         explanation: i18nc("%2 human-readable error string", "Error code: %1 (%2)", dict.errorCode, dict.errorString)
                     }
                 }

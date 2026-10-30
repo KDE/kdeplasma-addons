@@ -61,7 +61,7 @@ Item {
 
             QQC2.Button {
                 Layout.alignment: Qt.AlignRight
-                text: i18n("Delete")
+                text: i18nc("@action:button remove dictionary from the active list", "Delete")
                 icon.name: "edit-delete-remove"
                 display: QQC2.Button.IconOnly
                 QQC2.ToolTip.text: text

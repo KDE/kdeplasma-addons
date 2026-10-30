@@ -91,7 +91,7 @@ KCM.ScrollViewKCM {
                     anchors.centerIn: parent
                     width: root.width - (Kirigami.Units.largeSpacing * 4)
                     icon.name: "network-disconnect"
-                    text: i18n("Unable to load dictionary list")
+                    text: i18nc("@info:status PlaceholderMessage likely connection failure", "Unable to load dictionary list")
                     explanation: i18nc("%2 human-readable error string", "Error code: %1 (%2)", dictionariesModel.errorCode, dictionariesModel.errorString)
                 }
             }
@@ -103,7 +103,7 @@ KCM.ScrollViewKCM {
                     anchors.centerIn: parent
                     width: root.width - (Kirigami.Units.largeSpacing * 4)
                     icon.name: "edit-none"
-                    text: i18n("No dictionaries")
+                    text: i18nc("@info:status PlaceholderMessage no dictionaries available but no error", "No dictionaries")
                 }
             }
         }

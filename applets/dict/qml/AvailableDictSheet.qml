@@ -20,7 +20,7 @@ Kirigami.Dialog {
     readonly property alias view: dialogListView
     property alias dictionaryModel: proxyModel.sourceModel
 
-    title: i18n("Add More Dictionaries")
+    title: i18nc("@title:window dialog title", "Add More Dictionaries")
     implicitWidth: dialogListView.implicitWidth
     implicitHeight: Math.round(dictDialog.parent.height * 0.8)
     padding: 0
