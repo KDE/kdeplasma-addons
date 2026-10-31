@@ -4,6 +4,7 @@
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC2 // just for desktop-styled context menus
@@ -36,14 +37,13 @@ PlasmoidItem {
     // this isn't a frameSVG, the default SVG margins take up around 7% of the frame size, so we use that
     readonly property int horizontalMargins: Math.round(fullRepresentationItem.width * 0.07)
     readonly property int verticalMargins: Math.round(fullRepresentationItem.height * 0.07)
-    readonly property PlasmaComponents3.TextArea mainTextArea: fullRepresentationItem.mainTextArea
+    readonly property PlasmaComponents3.TextArea mainTextArea: (fullRepresentationItem as FullRepresentation)?.mainTextArea
     readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge,PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge].includes(Plasmoid.location)
     readonly property bool compactInPanel: inPanel && !!compactRepresentationItem?.visible
     // In a panel when it is translucent, the panel background is used, so we use the normal text color, and remove any margins.
     property bool noBackground: false // binding in onCompleted to avoid binding loop
 
-    // note is of type Note
-    property QtObject note: noteManager.loadNote(Plasmoid.configuration.noteId, Plasmoid.id);
+    property Note note: noteManager.loadNote(Plasmoid.configuration.noteId, Plasmoid.id);
 
     // define colors used for icons in ToolButtons and for text in TextArea.
     // this is deliberately _NOT_ the theme color as we are over a known bright background!
@@ -75,7 +75,7 @@ PlasmoidItem {
     Timer {
         id: forceFocusTimer
         interval: 1
-        onTriggered: mainTextArea.forceActiveFocus()
+        onTriggered: root.mainTextArea.forceActiveFocus()
     }
 
     Timer {
@@ -85,7 +85,7 @@ PlasmoidItem {
         // Trigger once after being created, to ensure any newly-pasted notes
         // have their text saved
         running: true
-        onTriggered: note.save(mainTextArea.text)
+        onTriggered: root.note.save(root.mainTextArea.text)
     }
 
     Connections {
@@ -109,7 +109,8 @@ PlasmoidItem {
     }
 
     preloadFullRepresentation: true
-    fullRepresentation: KSvg.SvgItem {
+    fullRepresentation: FullRepresentation { }
+    component FullRepresentation: KSvg.SvgItem {
         id: backgroundItem
 
         // Magic property that makes the popup resizable.
@@ -158,10 +159,10 @@ PlasmoidItem {
             id: focusScope
             anchors {
                 fill: parent
-                leftMargin: root.noBackground ? 0 : horizontalMargins
-                rightMargin: root.noBackground ? 0 : horizontalMargins
-                topMargin: root.noBackground ? 0 : verticalMargins
-                bottomMargin: root.noBackground ? 0 : verticalMargins
+                leftMargin: root.noBackground ? 0 : root.horizontalMargins
+                rightMargin: root.noBackground ? 0 : root.horizontalMargins
+                topMargin: root.noBackground ? 0 : root.verticalMargins
+                bottomMargin: root.noBackground ? 0 : root.verticalMargins
             }
 
             PlasmaComponents3.ScrollView {
@@ -178,8 +179,8 @@ PlasmoidItem {
 
                 // avoids a binding loop
                 property bool scrollBarNecessary: false
-                Binding on scrollBarNecessary {
-                    value: mainTextArea.height > scrollview.height
+                Binding {
+                    scrollview.scrollBarNecessary: mainTextArea.height > scrollview.height
                     delayed: true
                 }
                 PlasmaComponents3.ScrollBar.vertical.visible: scrollBarNecessary
@@ -189,9 +190,9 @@ PlasmoidItem {
                     property int cfgFontPointSize: Plasmoid.configuration.fontSize
 
                     textFormat: TextEdit.RichText
-                    onLinkActivated: Qt.openUrlExternally(link)
+                    onLinkActivated: link => Qt.openUrlExternally(link)
                     background: null
-                    color: textIconColor
+                    color: root.textIconColor
                     persistentSelection: true
                     wrapMode: TextEdit.Wrap
 
@@ -245,7 +246,7 @@ PlasmoidItem {
                     Binding {
                         target: mainTextArea
                         property: "text"
-                        value: note.noteText
+                        value: root.note.noteText
                         when: !mainTextArea.activeFocus
                         // don't restore an empty value (which IS empty by default when the applet starts up),
                         // instead only remove this binding for the time when the user edits the content.
@@ -258,7 +259,7 @@ PlasmoidItem {
                             Plasmoid.status = PlasmaCore.Types.AcceptingInputStatus
                         } else {
                             Plasmoid.status = PlasmaCore.Types.ActiveStatus
-                            note.save(text);
+                            root.note.save(text);
                         }
                     }
 
@@ -409,7 +410,7 @@ PlasmoidItem {
                 }
 
                 function saveScroll() {
-                    const flickable = scrollview.contentItem;
+                    const flickable = scrollview.contentItem as Flickable;
                     Plasmoid.configuration.scrollX = flickable.contentX;
                     Plasmoid.configuration.scrollY = flickable.contentY;
                     Plasmoid.configuration.cursorPosition = mainTextArea.cursorPosition;
@@ -478,7 +479,7 @@ PlasmoidItem {
                 }
                 height: visible ? implicitHeight : 0
                 visible: opacity > 0
-                opacity: (focusScope.activeFocus || compactInPanel) ? 1 : 0
+                opacity: (focusScope.activeFocus || root.compactInPanel) ? 1 : 0
                 Behavior on opacity { NumberAnimation { duration: Kirigami.Units.longDuration } }
 
                 readonly property int requiredWidth: spacing * (children.length - 1) + formatButtonsRow.width + removeButton.width
@@ -495,7 +496,7 @@ PlasmoidItem {
                     PlasmaComponents3.ToolButton {
                         focusPolicy: Qt.TabFocus
                         icon.name: "format-text-bold"
-                        icon.color: textIconColor
+                        icon.color: root.textIconColor
                         checked: documentHandler.bold
                         onClicked: documentHandler.bold = !documentHandler.bold
                         text: boldTooltip.text
@@ -508,7 +509,7 @@ PlasmoidItem {
                     PlasmaComponents3.ToolButton {
                         focusPolicy: Qt.TabFocus
                         icon.name: "format-text-italic"
-                        icon.color: textIconColor
+                        icon.color: root.textIconColor
                         checked: documentHandler.italic
                         onClicked: documentHandler.italic = !documentHandler.italic
                         text: italicTooltip.text
@@ -521,7 +522,7 @@ PlasmoidItem {
                     PlasmaComponents3.ToolButton {
                         focusPolicy: Qt.TabFocus
                         icon.name: "format-text-underline"
-                        icon.color: textIconColor
+                        icon.color: root.textIconColor
                         checked: documentHandler.underline
                         onClicked: documentHandler.underline = !documentHandler.underline
                         text: underlineTooltip.text
@@ -534,7 +535,7 @@ PlasmoidItem {
                     PlasmaComponents3.ToolButton {
                         focusPolicy: Qt.TabFocus
                         icon.name: "format-text-strikethrough"
-                        icon.color: textIconColor
+                        icon.color: root.textIconColor
                         checked: documentHandler.strikeOut
                         onClicked: documentHandler.strikeOut = !documentHandler.strikeOut
                         text: strikethroughTooltip.text
@@ -555,7 +556,7 @@ PlasmoidItem {
                     id: removeButton
                     focusPolicy: Qt.TabFocus
                     icon.name: "edit-delete"
-                    icon.color: textIconColor
+                    icon.color: root.textIconColor
                     onClicked: {
                         // No need to ask for confirmation in the cases when...
                         // ...the note is blank
@@ -593,7 +594,7 @@ PlasmoidItem {
                     id: settingsButton
                     focusPolicy: Qt.TabFocus
                     icon.name: "configure"
-                    icon.color: textIconColor
+                    icon.color: root.textIconColor
                     onClicked: Plasmoid.internalAction("configure").trigger()
                     text: settingsTooltip.text
                     display: PlasmaComponents3.AbstractButton.IconOnly
@@ -605,12 +606,12 @@ PlasmoidItem {
 
                 PlasmaComponents3.ToolButton {
                     id: pinButton
-                    visible: compactInPanel
+                    visible: root.compactInPanel
                     checkable: true
                     checked: Plasmoid.configuration.pinOpen
                     focusPolicy: Qt.TabFocus
                     icon.name: "window-pin"
-                    icon.color: textIconColor
+                    icon.color: root.textIconColor
                     text: pinTooltip.text
                     display: PlasmaComponents3.AbstractButton.IconOnly
                     PlasmaComponents3.ToolTip {
@@ -632,12 +633,13 @@ PlasmoidItem {
             id: discardConfirmationDialogLoader
 
             function open() {
-                if (item) {
-                    item.open();
+                const dialog = item as MessageDialog
+                if (dialog) {
+                    dialog.open();
                 } else {
                     active = true;
                 }
-                item.visible = true;
+                dialog.visible = true;
             }
 
             active: false
