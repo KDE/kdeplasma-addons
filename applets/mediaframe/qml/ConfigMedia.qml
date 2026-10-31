@@ -9,7 +9,6 @@ import QtCore
 import QtQuick
 import QtQuick.Controls as QQC2
 import QtQuick.Dialogs
-import QtQuick.Layouts
 
 import org.kde.plasma.plasmoid
 import org.kde.kirigami as Kirigami
@@ -73,7 +72,7 @@ KCM.ScrollViewKCM {
             id: pathModel
         }
 
-        delegate: Kirigami.SwipeListItem {
+        delegate: QQC2.ItemDelegate {
             id: folderDelegate
 
             required property string path
@@ -81,21 +80,20 @@ KCM.ScrollViewKCM {
 
             width: pathsList.width
 
-            contentItem: QQC2.Label {
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                verticalAlignment: Text.AlignVCenter
-                text: String(folderDelegate.path).replace("file://", "")
-                textFormat: Text.PlainText
-            }
+            Kirigami.StyleHints.useAlternateBackgroundColor: true
 
-            actions: [
-                Kirigami.Action {
-                    icon.name: "list-remove"
-                    tooltip: i18nc("@action:button tooltip on icon-only button", "Remove path")
-                    onTriggered: mediaPage.removePath(folderDelegate.index)
-                }
-            ]
+            contentItem: Kirigami.TitleSubtitleWithActions {
+                title: folderDelegate.path.replace("file://", "")
+                actions: [
+                    Kirigami.Action {
+                        icon.name: "list-remove"
+                        text: i18nc("@action:button tooltip on icon-only button", "Remove path")
+                        onTriggered: mediaPage.removePath(folderDelegate.index)
+                        displayHint: Kirigami.DisplayHint.IconOnly
+                        tooltip: text
+                    }
+                ]
+            }
         }
 
         PlasmaExtras.PlaceholderMessage {
