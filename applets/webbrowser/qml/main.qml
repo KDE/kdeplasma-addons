@@ -5,6 +5,7 @@
  *
  *   SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtWebEngine
@@ -54,7 +55,7 @@ PlasmoidItem {
 
         Kirigami.Icon {
             anchors.fill: parent
-            visible: favIconLoader.item?.status !== Image.Ready
+            visible: (favIconLoader.item as Image)?.status !== Image.Ready
             source: Plasmoid.configuration.icon || Plasmoid.icon
         }
     }
@@ -64,7 +65,7 @@ PlasmoidItem {
         Layout.minimumHeight: root.switchHeight
 
         RowLayout{
-            visible: plasmoid.configuration.enableNavigationBar
+            visible: Plasmoid.configuration.enableNavigationBar
             Layout.fillWidth: true
             PlasmaComponents3.Button {
                 icon.name: LayoutMirroring.enabled ? "go-previous-rtl-symbolic" : "go-previous-symbolic"
@@ -89,9 +90,9 @@ PlasmoidItem {
             PlasmaComponents3.Button {
                 id: goHomeButton
                 icon.name: "go-home-symbolic"
-                onClicked: webview.url = plasmoid.configuration.defaultUrl
+                onClicked: webview.url = Plasmoid.configuration.defaultUrl
                 display: PlasmaComponents3.AbstractButton.IconOnly
-                visible: plasmoid.configuration.useDefaultUrl
+                visible: Plasmoid.configuration.useDefaultUrl
                 text: i18nc("@action:button", "Go Home")
                 PlasmaComponents3.ToolTip.visible: hovered || activeFocus
                 PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
@@ -189,9 +190,9 @@ PlasmoidItem {
                 id: updateZoomTimer
                 interval: 100
 
-                readonly property int minViewWidth: plasmoid.configuration.minViewWidth
-                readonly property bool useMinViewWidth: plasmoid.configuration.useMinViewWidth
-                readonly property int constantZoomFactor: plasmoid.configuration.constantZoomFactor
+                readonly property int minViewWidth: Plasmoid.configuration.minViewWidth
+                readonly property bool useMinViewWidth: Plasmoid.configuration.useMinViewWidth
+                readonly property int constantZoomFactor: Plasmoid.configuration.constantZoomFactor
 
                 onTriggered: {
                     var newZoom = 1;
@@ -256,8 +257,8 @@ PlasmoidItem {
                 anchors.fill: parent
                 settings.javascriptCanAccessClipboard: true
                 settings.javascriptCanPaste: true
-                onUrlChanged: plasmoid.configuration.url = url;
-                Component.onCompleted: url = plasmoid.configuration.useDefaultUrl ? plasmoid.configuration.defaultUrl : plasmoid.configuration.url;
+                onUrlChanged: Plasmoid.configuration.url = url;
+                Component.onCompleted: url = Plasmoid.configuration.useDefaultUrl ? Plasmoid.configuration.defaultUrl : Plasmoid.configuration.url;
                 settings.fullScreenSupportEnabled: true
                 onFullScreenRequested: request => {
                     // A hidden popup can't hand the view over safely, see moveTo()
@@ -290,13 +291,13 @@ PlasmoidItem {
 
                 profile: WebEngineProfile {
                     storageName: Plasmoid.metaData.pluginId
-                    offTheRecord: plasmoid.configuration.privateBrowsing
+                    offTheRecord: Plasmoid.configuration.privateBrowsing
                 }
 
-                readonly property bool useMinViewWidth : plasmoid.configuration.useMinViewWidth
+                readonly property bool useMinViewWidth : Plasmoid.configuration.useMinViewWidth
 
                 Connections {
-                    target: plasmoid.configuration
+                    target: Plasmoid.configuration
 
                     function onMinViewWidthChanged() {updateZoomTimer.start()}
 
@@ -352,7 +353,7 @@ PlasmoidItem {
                 }
 
                 onIconChanged: {
-                    if (loading && icon == "") {
+                    if (loading && icon === "") {
                         return;
                     }
                     Plasmoid.configuration.favIcon = icon.toString().slice(16 /* image://favicon/ */);

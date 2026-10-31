@@ -7,6 +7,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 
 KCM.SimpleKCM {
+    id: root
     property alias cfg_useMinViewWidth: useMinViewWidth.checked
     property alias cfg_minViewWidth: minViewWidth.value
     property alias cfg_constantZoomFactor: constantZoomFactor.value
@@ -20,22 +21,22 @@ KCM.SimpleKCM {
         QQC2.RadioButton {
             id: useUrlRadio
             text: i18nc("@option:radio", "Load last-visited page")
-            checked: !cfg_useDefaultUrl
+            checked: !root.cfg_useDefaultUrl
             QQC2.ButtonGroup.group: defaultUrlGroup
 
             Kirigami.FormData.label: i18nc("@title:group", "On startup:")
 
-            onToggled: cfg_useDefaultUrl = false;
+            onToggled: root.cfg_useDefaultUrl = false;
         }
 
         QQC2.RadioButton {
             id: useDefaultUrlRadio
             text: i18nc("@option:radio", "Always load this page:")
-            checked: cfg_useDefaultUrl
+            checked: root.cfg_useDefaultUrl
             QQC2.ButtonGroup.group: defaultUrlGroup
 
             onToggled: {
-                cfg_useDefaultUrl = true;
+                root.cfg_useDefaultUrl = true;
                 defaultUrl.forceActiveFocus();
                 defaultUrl.selectAll();
             }
@@ -60,7 +61,7 @@ KCM.SimpleKCM {
 
                 Layout.fillWidth: true
 
-                text: cfg_defaultUrl
+                text: root.cfg_defaultUrl
                 enabled: useDefaultUrlRadio.checked
                 Accessible.description: text.length > 0 ? text : i18nc("@info", "Type a URL")
             }
@@ -78,7 +79,7 @@ KCM.SimpleKCM {
             QQC2.RadioButton {
                 id: useConstantZoom
                 text: i18nc("@option:radio", "Fixed scale:")
-                checked: !cfg_useMinViewWidth
+                checked: !root.cfg_useMinViewWidth
 
                 QQC2.ButtonGroup.group: zoomGroup
 
