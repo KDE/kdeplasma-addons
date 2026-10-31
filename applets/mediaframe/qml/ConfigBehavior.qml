@@ -16,24 +16,12 @@ KCM.SimpleKCM {
     property alias cfg_randomize: randomizeCheckBox.checked
     property alias cfg_pauseOnMouseOver: pauseOnMouseOverCheckBox.checked
     property alias cfg_leftClickOpenImage: leftClickOpenImageCheckBox.checked
-    //property alias cfg_showCountdown: showCountdownCheckBox.checked
-    property alias cfg_fillMode: root.fillMode
 
+    property int cfg_fillMode: Image.PreserveAspectFit
     property int cfg_interval: 0
     property int hoursIntervalValue: Math.floor(cfg_interval / 3600)
     property int minutesIntervalValue: Math.floor(cfg_interval % 3600) / 60
     property int secondsIntervalValue: cfg_interval % 3600 % 60
-
-    /*
-    * Image.Stretch - the image is scaled to fit
-    * Image.PreserveAspectFit - the image is scaled uniformly to fit without cropping
-    * Image.PreserveAspectCrop - the image is scaled uniformly to fill, cropping if necessary
-    * Image.Tile - the image is duplicated horizontally and vertically
-    * Image.TileVertically - the image is stretched horizontally and tiled vertically
-    * Image.TileHorizontally - the image is stretched vertically and tiled horizontally
-    * Image.Pad - the image is not transformed
-    */
-    property int fillMode: Image.PreserveAspectFit
 
     Kirigami.FormLayout {
         TextMetrics {
@@ -102,7 +90,7 @@ KCM.SimpleKCM {
             id: comboBox
             Kirigami.FormData.label: i18nc("@label:listbox", "Image fill mode:")
 
-            currentIndex: fillModeToIndex(root.fillMode)
+            currentIndex: model.findIndex(entry => entry.value == root.cfg_fillMode)
             textRole: "text"
             model: [
                 {
@@ -142,31 +130,7 @@ KCM.SimpleKCM {
                 }
             ]
 
-            onActivated: index => root.fillMode = comboBox.model[index].value
-
-            function fillModeToIndex(fillMode) {
-                if(fillMode == Image.Stretch) {
-                    return 0
-                }
-                else if(fillMode == Image.PreserveAspectFit) {
-                    return 1
-                }
-                else if(fillMode == Image.PreserveAspectCrop) {
-                    return 2
-                }
-                else if(fillMode == Image.Tile) {
-                    return 3
-                }
-                else if(fillMode == Image.TileVertically) {
-                    return 4
-                }
-                else if(fillMode == Image.TileHorizontally) {
-                    return 5
-                }
-                else if(fillMode == Image.Pad) {
-                    return 6
-                }
-            }
+            onActivated: index => root.cfg_fillMode = comboBox.model[index].value
         }
 
         Label {
