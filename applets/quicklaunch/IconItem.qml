@@ -181,7 +181,7 @@ Item {
 
             activeFocusOnTab: true
             Accessible.name: iconItem.launcher.applicationName
-            Accessible.description: i18n("Launch %1", iconItem.launcher.genericName || iconItem.launcher.applicationName)
+            Accessible.description: i18nc("@action:button accessible description", "Launch %1", iconItem.launcher.genericName || iconItem.launcher.applicationName)
             Accessible.role: Accessible.Button
 
             onActiveFocusChanged: {

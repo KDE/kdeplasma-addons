@@ -109,8 +109,8 @@ PlasmoidItem {
 
                 PlasmaCore.ToolTipArea {
                     anchors.fill: parent
-                    mainText: i18n("Quicklaunch")
-                    subText: i18nc("@info", "Add launchers by Drag and Drop or by using the context menu.")
+                    mainText: i18nc("@info:tooltip widget title", "Quicklaunch")
+                    subText: i18nc("@info:tooltip widget subtitle", "Add launchers by Drag and Drop or by using the context menu.")
                     location: Plasmoid.location
                 }
             }
@@ -142,7 +142,7 @@ PlasmoidItem {
                 bottom: parent.bottom
             }
 
-            subText: popup.visible ? i18n("Hide icons") : i18n("Show hidden icons")
+            subText: popup.visible ? i18nc("@info:tooltip for expander arrow", "Hide icons") : i18nc("@info:tooltip for expander arrow", "Show hidden icons")
 
             MouseArea {
                 id: arrowMouseArea
