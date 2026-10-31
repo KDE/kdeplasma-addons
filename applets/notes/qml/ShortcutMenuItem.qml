@@ -9,6 +9,7 @@ import QtQuick.Controls
 import QtQuick.Window
 
 MenuItem {
+    id: menuItem
     property var _sequence: []
     property alias _text: actionElement.text
     property alias _enabled: actionElement.enabled
@@ -16,7 +17,7 @@ MenuItem {
 
     Shortcut {
         id: shortcutElement
-        sequences: [_sequence]
+        sequences: [menuItem._sequence]
         enabled: false
     }
 

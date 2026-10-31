@@ -6,16 +6,12 @@
 
 import QtQuick
 import QtQuick.Controls as QQC2
-import QtQuick.Layouts
 
 import org.kde.kcmutils as KCM
 import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.plasmoid
 import org.kde.kirigami as Kirigami
 import org.kde.ksvg as KSvg
-import org.kde.plasma.components as PlasmaComponents3
-import org.kde.kirigami as Kirigami
-import org.kde.kcmutils as KCM
 
 KCM.GridViewKCM {
     id: kcm
@@ -64,6 +60,9 @@ KCM.GridViewKCM {
 
     view.delegate: QQC2.ItemDelegate {
         id: delegate
+
+        required property string modelData
+
         width: GridView.view.cellWidth
         height: GridView.view.cellHeight
         highlighted: GridView.isCurrentItem
@@ -91,7 +90,7 @@ KCM.GridViewKCM {
                 width: delegate.availableHeight
                 height: delegate.availableHeight
                 imagePath: "widgets/notes"
-                elementId: modelData + "-notes"
+                elementId: delegate.modelData + "-notes"
 
                 QQC2.Label {
                     id: thumbnailLabel
@@ -110,9 +109,9 @@ KCM.GridViewKCM {
                     //this is deliberately _NOT_ the theme color as we are over a known bright background
                     //an unknown colour over a known colour is a bad move as you end up with white on yellow
                     color: {
-                        if (inPanel && modelData === "translucent") {
+                        if (kcm.inPanel && delegate.modelData === "translucent") {
                             return Kirigami.Theme.textColor;
-                        } else if (modelData === "black" || modelData === "translucent-light") {
+                        } else if (delegate.modelData === "black" || delegate.modelData === "translucent-light") {
                             return "#dfdfdf"
                         } else {
                             return "#202020"
@@ -122,7 +121,7 @@ KCM.GridViewKCM {
             }
         }
         onClicked: {
-            cfg_color = modelData
+            kcm.cfg_color = modelData
         }
     }
 }
