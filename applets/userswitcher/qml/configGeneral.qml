@@ -11,6 +11,7 @@ import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 
 KCM.SimpleKCM {
+    id: root
     property bool cfg_showFace
     property bool cfg_showName
     property bool cfg_showFullName
@@ -28,15 +29,15 @@ KCM.SimpleKCM {
 
             QtControls.ButtonGroup.group: nameGroup
             text: i18nc("@option:radio", "Full name (if available)")
-            checked: cfg_showFullName
-            onClicked: if (checked) cfg_showFullName = true;
+            checked: root.cfg_showFullName
+            onClicked: if (checked) root.cfg_showFullName = true;
         }
 
         QtControls.RadioButton {
             QtControls.ButtonGroup.group: nameGroup
             text: i18nc("@option:radio", "Login username")
-            checked: !cfg_showFullName
-            onClicked: if (checked) cfg_showFullName = false;
+            checked: !root.cfg_showFullName
+            onClicked: if (checked) root.cfg_showFullName = false;
         }
 
 
@@ -56,11 +57,11 @@ KCM.SimpleKCM {
 
             QtControls.ButtonGroup.group: layoutGroup
             text: i18nc("@option:radio", "Name")
-            checked: cfg_showName && !cfg_showFace
+            checked: root.cfg_showName && !root.cfg_showFace
             onClicked: {
                 if (checked) {
-                    cfg_showName = true;
-                    cfg_showFace = false;
+                    root.cfg_showName = true;
+                    root.cfg_showFace = false;
                 }
             }
         }
@@ -70,11 +71,11 @@ KCM.SimpleKCM {
 
             QtControls.ButtonGroup.group: layoutGroup
             text: i18nc("@option:radio", "User picture")
-            checked: !cfg_showName && cfg_showFace
+            checked: !root.cfg_showName && root.cfg_showFace
             onClicked: {
                 if (checked) {
-                    cfg_showName = false;
-                    cfg_showFace = true;
+                    root.cfg_showName = false;
+                    root.cfg_showFace = true;
                 }
             }
         }
@@ -84,11 +85,11 @@ KCM.SimpleKCM {
 
             QtControls.ButtonGroup.group: layoutGroup
             text: i18nc("@option:radio", "Name and user picture")
-            checked: cfg_showName && cfg_showFace
+            checked: root.cfg_showName && root.cfg_showFace
             onClicked: {
                 if (checked) {
-                    cfg_showName = true;
-                    cfg_showFace = true;
+                    root.cfg_showName = true;
+                    root.cfg_showFace = true;
                 }
             }
         }

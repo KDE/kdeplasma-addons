@@ -9,7 +9,6 @@ import QtQml
 
 import org.kde.config as KConfig
 import org.kde.kcmutils as KCMUtils
-import org.kde.kirigami as Kirigami
 import org.kde.kirigamiaddons.components as KirigamiComponents
 import org.kde.plasma.components as PC3
 

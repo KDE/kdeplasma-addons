@@ -15,6 +15,8 @@ PlasmaComponents3.ItemDelegate {
 
     Layout.fillWidth: true
 
+    property int index: -1
+
     property alias subText: sublabel.text
     property alias iconItem: iconItem.children
 
@@ -29,7 +31,7 @@ PlasmaComponents3.ItemDelegate {
 
     onHoveredChanged: if (hovered) {
         if (ListView.view) {
-            ListView.view.currentIndex = index;
+            ListView.view.currentIndex = item.index;
         }
         forceActiveFocus();
     }

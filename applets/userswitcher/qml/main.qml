@@ -3,6 +3,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Layouts
@@ -10,7 +11,6 @@ import QtQuick.Window
 
 import org.kde.coreaddons as KCoreAddons // kuser
 import org.kde.kirigami as Kirigami
-import org.kde.config as KConfig  // KAuthorized.authorizeControlModule
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigamiaddons.components as KirigamiComponents
@@ -58,13 +58,13 @@ PlasmoidItem {
         // Taken from DigitalClock to ensure uniform sizing when next to each other
         readonly property bool tooSmall: Plasmoid.formFactor === PlasmaCore.Types.Horizontal && Math.round(2 * (compactRoot.height / 5)) <= Kirigami.Theme.smallFont.pixelSize
 
-        Layout.minimumWidth: isVertical ? 0 : compactRow.implicitWidth
-        Layout.maximumWidth: isVertical ? Infinity : Layout.minimumWidth
-        Layout.preferredWidth: isVertical ? -1 : Layout.minimumWidth
+        Layout.minimumWidth: root.isVertical ? 0 : compactRow.implicitWidth
+        Layout.maximumWidth: root.isVertical ? Infinity : Layout.minimumWidth
+        Layout.preferredWidth: root.isVertical ? -1 : Layout.minimumWidth
 
-        Layout.minimumHeight: isVertical ? label.height : Kirigami.Theme.smallFont.pixelSize
-        Layout.maximumHeight: isVertical ? Layout.minimumHeight : Infinity
-        Layout.preferredHeight: isVertical ? Layout.minimumHeight : Kirigami.Units.iconSizes.sizeForLabels * 2
+        Layout.minimumHeight: root.isVertical ? label.height : Kirigami.Theme.smallFont.pixelSize
+        Layout.maximumHeight: root.isVertical ? Layout.minimumHeight : Infinity
+        Layout.preferredHeight: root.isVertical ? Layout.minimumHeight : Kirigami.Units.iconSizes.sizeForLabels * 2
 
         property bool wasExpanded
         onPressed: wasExpanded = root.expanded
@@ -101,7 +101,7 @@ PlasmoidItem {
                 verticalAlignment: Text.AlignVCenter
                 wrapMode: root.isVertical ? Text.Wrap : Text.NoWrap
                 fontSizeMode: root.isVertical ? Text.HorizontalFit : Text.VerticalFit
-                font.pixelSize: tooSmall ? Kirigami.Theme.defaultFont.pixelSize : Kirigami.Units.iconSizes.roundedIconSize(Kirigami.Units.gridUnit * 2)
+                font.pixelSize: compactRoot.tooSmall ? Kirigami.Theme.defaultFont.pixelSize : Kirigami.Units.iconSizes.roundedIconSize(Kirigami.Units.gridUnit * 2)
                 minimumPointSize: Kirigami.Theme.smallFont.pointSize
                 visible: root.showName
             }
@@ -148,6 +148,7 @@ PlasmoidItem {
                 source: root.avatarIcon
                 hoverEnabled: false
                 down: false
+                index: -1
             }
 
             PlasmaComponents3.ScrollView {
@@ -169,20 +170,29 @@ PlasmoidItem {
                     keyNavigationWraps: false
 
                     delegate: UserListDelegate {
+                        required property string session
+                        required property string realName
+                        required property string name
+                        required property string displayNumber
+                        required property var model // icon shadows ItemDelegate's'
+                        required property bool isTty
+                        required property int vtNumber
+                        required index
+
                         width: ListView.view.width
 
                         activeFocusOnTab: true
 
                         text: {
-                            if (!model.session) {
+                            if (!session) {
                                 return i18nc("Nobody logged in on that session", "Unused")
                             }
 
-                            if (model.realName && root.showFullName) {
+                            if (realName && root.showFullName) {
                                 return model.realName
                             }
 
-                            return model.name
+                            return name
                         }
                         source: {
                             model.icon !== ""
@@ -195,8 +205,8 @@ PlasmoidItem {
                             }
 
                             if (model.isTty) {
-                                return i18nc("User logged in on console number", "TTY %1", model.vtNumber)
-                            } else if (model.displayNumber) {
+                                return i18nc("User logged in on console number", "TTY %1", vtNumber)
+                            } else if (displayNumber) {
                                 return i18nc("User logged in on console (X display number)", "on %1 (%2)", model.vtNumber, model.displayNumber)
                             }
                             return ""
@@ -209,7 +219,7 @@ PlasmoidItem {
 
                         onClicked: {
                             root.expanded = false
-                            sessionsModel.switchUser(model.vtNumber, sessionsModel.shouldLock)
+                            sessionsModel.switchUser(vtNumber, sessionsModel.shouldLock)
                         }
                     }
                 }
