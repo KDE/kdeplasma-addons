@@ -93,7 +93,7 @@ PlasmoidItem {
                     }
 
                     popup.visible = true;
-                    popup.mainItem.popupModel.insertUrl(popup.mainItem.popupModel.count, url);
+                    popup.mainItem.popupModel.insertUrl(popup.mainItem.popupModel.count, url.toString());
                     popup.mainItem.listView.currentIndex = popup.mainItem.popupModel.count - 1;
                     iconItem.removeLauncher();
                 }

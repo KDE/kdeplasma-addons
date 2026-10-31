@@ -130,7 +130,7 @@ Item {
         highlightMoveVelocity: 1
 
         function moveItemToGrid(iconItem, url) {
-            popup.launcherModel.insertUrl(popup.launcherModel.count, url);
+            popup.launcherModel.insertUrl(popup.launcherModel.count, url.toString());
             listView.currentIndex = popup.launcherModel.count - 1;
             iconItem.removeLauncher();
         }
