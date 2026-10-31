@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-12 00:46+0000\n"
+"POT-Creation-Date: 2026-10-31 00:53+0000\n"
 "PO-Revision-Date: 2026-09-23 06:56+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -84,152 +84,152 @@ msgstr "سۈزۈك چاپلاق"
 msgid "A transparent sticky note with light text"
 msgstr "سۇس تېكىستلىك سۈزۈك چاپلاق"
 
-#: qml/main.qml:294
+#: qml/main.qml:303
 #, kde-format
 msgid "Undo"
 msgstr "يېنىۋال"
 
-#: qml/main.qml:302
+#: qml/main.qml:311
 #, kde-format
 msgid "Redo"
 msgstr "قايتىلا"
 
-#: qml/main.qml:312
+#: qml/main.qml:321
 #, kde-format
 msgid "Cut"
 msgstr "كەس"
 
-#: qml/main.qml:320
+#: qml/main.qml:329
 #, kde-format
 msgid "Copy"
 msgstr "كۆچۈر"
 
-#: qml/main.qml:328
+#: qml/main.qml:337
 #, kde-format
 msgid "Paste"
 msgstr "چاپلا"
 
-#: qml/main.qml:334
+#: qml/main.qml:343
 #, kde-format
 msgid "Paste with Full Formatting"
 msgstr "تولۇق پىچىمى بىلەن چاپلا"
 
-#: qml/main.qml:341
+#: qml/main.qml:350
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Formatting"
 msgstr "پىچىمنى چىقىرىۋەت"
 
-#: qml/main.qml:356
+#: qml/main.qml:365
 #, kde-format
 msgid "Delete"
 msgstr "ئۆچۈر"
 
-#: qml/main.qml:363
+#: qml/main.qml:372
 #, kde-format
 msgid "Clear"
 msgstr "تازىلا"
 
-#: qml/main.qml:373
+#: qml/main.qml:382
 #, kde-format
 msgid "Select All"
 msgstr "ھەممىنى تاللا"
 
-#: qml/main.qml:505
+#: qml/main.qml:514
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Bold"
 msgstr "توم"
 
-#: qml/main.qml:518
+#: qml/main.qml:527
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Italic"
 msgstr "يانتۇ"
 
-#: qml/main.qml:531
+#: qml/main.qml:540
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Underline"
 msgstr "ئاستى سىزىق"
 
-#: qml/main.qml:544
+#: qml/main.qml:553
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Strikethrough"
 msgstr "ئۆچۈرۈش سىزىقى"
 
-#: qml/main.qml:618
+#: qml/main.qml:627
 #, kde-format
 msgctxt "@action:button pin popup for panel widget"
 msgid "Keep Open"
 msgstr "ئوچۇق تۇت"
 
-#: qml/main.qml:647
+#: qml/main.qml:656
 #, kde-format
 msgid "Discard this note?"
 msgstr "بۇ ئەسكەرتىشنى تاشلىۋېتەمدۇ؟"
 
-#: qml/main.qml:648
+#: qml/main.qml:657
 #, kde-format
 msgid "Are you sure you want to discard this note?"
 msgstr "بۇ ئەسكەرتىشنى راستتىنلا تاشلىۋېتەمسىز؟"
 
-#: qml/main.qml:673
+#: qml/main.qml:682
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "White"
 msgstr "ئاق"
 
-#: qml/main.qml:674
+#: qml/main.qml:683
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Black"
 msgstr "قارا"
 
-#: qml/main.qml:675
+#: qml/main.qml:684
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Red"
 msgstr "قىزىل"
 
-#: qml/main.qml:676
+#: qml/main.qml:685
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Orange"
 msgstr "قىزغۇچ سېرىق"
 
-#: qml/main.qml:677
+#: qml/main.qml:686
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Yellow"
 msgstr "سېرىق"
 
-#: qml/main.qml:678
+#: qml/main.qml:687
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Green"
 msgstr "يېشىل"
 
-#: qml/main.qml:679
+#: qml/main.qml:688
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Blue"
 msgstr "كۆك"
 
-#: qml/main.qml:680
+#: qml/main.qml:689
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Pink"
 msgstr "ھالرەڭ"
 
-#: qml/main.qml:681
+#: qml/main.qml:690
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent"
 msgstr "سۈزۈك"
 
-#: qml/main.qml:685
+#: qml/main.qml:694
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Transparent Light"

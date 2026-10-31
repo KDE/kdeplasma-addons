@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-10-31 00:53+0000\n"
 "PO-Revision-Date: 2026-10-04 17:03+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -17,12 +17,18 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: profilesmodel.cpp:56
+#: profilesmodel.cpp:59
 #, kde-format
 msgid "Start Kate (no arguments)"
 msgstr "Pokreni Kate (bez argumenata)"
 
-#: profilesmodel.cpp:57
+#: profilesmodel.cpp:60
 #, kde-format
 msgid "New Kate Session"
 msgstr "Nova sesija Kate"
+
+#: profilesmodel.cpp:64
+#, kde-format
+msgctxt "Name of Konsole's built-in default profile"
+msgid "Built-in"
+msgstr ""

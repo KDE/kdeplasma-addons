@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-28 01:02+0000\n"
+"POT-Creation-Date: 2026-10-31 00:53+0000\n"
 "PO-Revision-Date: 2025-05-03 06:58+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -21,25 +21,17 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 25.04.0\n"
 
-#: CompactRepresentation.qml:133
+#: CompactRepresentation.qml:136
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Pausar o temporizador"
 
-#: CompactRepresentation.qml:133
+#: CompactRepresentation.qml:136
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Iniciar o temporizador"
-
-#: CompactRepresentation.qml:196 CompactRepresentation.qml:214
-#, kde-format
-msgctxt "remaining time"
-msgid "%1s"
-msgid_plural "%1s"
-msgstr[0] "%1s"
-msgstr[1] "%1s"
 
 #: config.qml:13
 #, fuzzy, kde-format
@@ -72,31 +64,31 @@ msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "Amosar o tempo restante."
 
-#: configGeneral.qml:61
+#: configGeneral.qml:63
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Amosar os segundos."
 
-#: configGeneral.qml:66
+#: configGeneral.qml:68
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Amosar o conmutador do temporizador."
 
-#: configGeneral.qml:71
+#: configGeneral.qml:73
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "Amosar a barra de progreso."
 
-#: configGeneral.qml:81
+#: configGeneral.qml:83
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
 msgstr ""
 
-#: configGeneral.qml:85
+#: configGeneral.qml:87
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "Show notification text:"
@@ -104,14 +96,14 @@ msgctxt "@option:check"
 msgid "Show notification:"
 msgstr "Amosar o texto de notificación:"
 
-#: configGeneral.qml:97
+#: configGeneral.qml:99
 #, fuzzy, kde-format
 #| msgid "Timer finished"
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "O temporizador rematou"
 
-#: configGeneral.qml:107
+#: configGeneral.qml:109
 #, fuzzy, kde-format
 #| msgctxt "@title:group"
 #| msgid "Run Command"
@@ -119,23 +111,24 @@ msgctxt "@option:check"
 msgid "Run command:"
 msgstr "Executar unha orde"
 
-#: configGeneral.qml:119
+#: configGeneral.qml:121
 #, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
-#: configTimes.qml:22
+#: configTimes.qml:23
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Engadir"
 
-#: configTimes.qml:87
+#: configTimes.qml:88
 #, fuzzy, kde-format
 #| msgid ""
 #| "If you add predefined timers here, they will appear in plasmoid context "
 #| "menu."
+msgctxt "@info:usagetip PlaceHolderMessage empty ListView"
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
@@ -143,50 +136,73 @@ msgstr ""
 "Se engade temporizadores predefinidos aquí, aparecerán no menú contextual do "
 "trebello."
 
-#: configTimes.qml:125
-#, kde-format
+#: configTimes.qml:130
+#, fuzzy, kde-format
+#| msgid "Scroll over digits to change time"
+msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Desprazar sobre os díxitos para cambiar o tempo."
 
-#: configTimes.qml:132
-#, kde-format
+#: configTimes.qml:140
+#, fuzzy, kde-format
+#| msgid "Apply"
+msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Aplicar"
 
-#: configTimes.qml:140
-#, kde-format
+#: configTimes.qml:159
+#, fuzzy, kde-format
+#| msgid "Cancel"
+msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: configTimes.qml:149
-#, kde-format
+#: configTimes.qml:179
+#, fuzzy, kde-format
+#| msgid "Edit"
+msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Editar"
 
-#: configTimes.qml:158
-#, kde-format
+#: configTimes.qml:200
+#, fuzzy, kde-format
+#| msgid "Delete"
+msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Eliminar"
 
 #: main.qml:68
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 is running"
+msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 estase a executar"
 
 #: main.qml:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 not running"
+msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 non se está a executar"
 
-#: main.qml:73
-#, kde-format
+#: main.qml:74
+#, fuzzy, kde-format
+#| msgid "Remaining time left: %1 second"
+#| msgid_plural "Remaining time left: %1 seconds"
+msgctxt ""
+"@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
+"running timer"
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Tempo restante: %1 segundo"
 msgstr[1] "Tempo restante: %1 segundos"
 
-#: main.qml:73
-#, kde-format
+#: main.qml:75
+#, fuzzy, kde-format
+#| msgid ""
+#| "Use mouse wheel to change digits or choose from predefined timers in the "
+#| "context menu"
+msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
@@ -194,17 +210,21 @@ msgstr ""
 "Use a roda do rato para cambiar os díxitos ou escolla unha cantidade de "
 "tempo predefinida desde o menú de contexto."
 
-#: main.qml:90
-#, kde-format
+#: main.qml:92
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Temporizador"
 
-#: main.qml:91
-#, kde-format
+#: main.qml:93
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "O temporizador rematou"
 
-#: main.qml:132
+#: main.qml:134
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "&Start"
@@ -212,23 +232,29 @@ msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "&Comezar"
 
-#: main.qml:133
+#: main.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Comezar"
 
-#: main.qml:138
+#: main.qml:141
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "&Deter"
 
-#: main.qml:143
+#: main.qml:147
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Reiniciar"
+
+#~ msgctxt "remaining time"
+#~ msgid "%1s"
+#~ msgid_plural "%1s"
+#~ msgstr[0] "%1s"
+#~ msgstr[1] "%1s"
 
 #~ msgctxt "@title"
 #~ msgid "Appearance"

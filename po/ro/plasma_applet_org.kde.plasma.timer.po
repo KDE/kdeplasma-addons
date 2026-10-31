@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-28 01:02+0000\n"
+"POT-Creation-Date: 2026-10-31 00:53+0000\n"
 "PO-Revision-Date: 2026-05-16 20:17+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -18,26 +18,17 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 25.12.3\n"
 
-#: CompactRepresentation.qml:133
+#: CompactRepresentation.qml:136
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Întrerupe temporizatorul"
 
-#: CompactRepresentation.qml:133
+#: CompactRepresentation.qml:136
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
 msgstr "Pornește temporizatorul"
-
-#: CompactRepresentation.qml:196 CompactRepresentation.qml:214
-#, kde-format
-msgctxt "remaining time"
-msgid "%1s"
-msgid_plural "%1s"
-msgstr[0] "%1s"
-msgstr[1] "%1s"
-msgstr[2] "%1s"
 
 #: config.qml:13
 #, kde-format
@@ -69,62 +60,66 @@ msgctxt "@option:check"
 msgid "Show remaining time"
 msgstr "Arată timpul rămas"
 
-#: configGeneral.qml:61
+#: configGeneral.qml:63
 #, kde-format
 msgctxt "@option:check"
 msgid "Show seconds"
 msgstr "Arată secundele"
 
-#: configGeneral.qml:66
+#: configGeneral.qml:68
 #, kde-format
 msgctxt "@option:check"
 msgid "Show timer toggle"
 msgstr "Arată comutatorul temporizatorului"
 
-#: configGeneral.qml:71
+#: configGeneral.qml:73
 #, kde-format
 msgctxt "@option:check"
 msgid "Show progress bar"
 msgstr "Arată bara de progres"
 
-#: configGeneral.qml:81
+#: configGeneral.qml:83
 #, kde-format
 msgctxt "@title:label"
 msgid "On timeout:"
 msgstr "La expirare:"
 
-#: configGeneral.qml:85
+#: configGeneral.qml:87
 #, kde-format
 msgctxt "@option:check"
 msgid "Show notification:"
 msgstr "Arată notificare:"
 
-#: configGeneral.qml:97
+#: configGeneral.qml:99
 #, kde-format
 msgctxt "@placeholder"
 msgid "Timer finished"
 msgstr "Temporizatorul a expirat"
 
-#: configGeneral.qml:107
+#: configGeneral.qml:109
 #, kde-format
 msgctxt "@option:check"
 msgid "Run command:"
 msgstr "Rulează comandă:"
 
-#: configGeneral.qml:119
+#: configGeneral.qml:121
 #, kde-format
 msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Temporizator expirat'"
 
-#: configTimes.qml:22
+#: configTimes.qml:23
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Adaugă"
 
-#: configTimes.qml:87
-#, kde-format
+#: configTimes.qml:88
+#, fuzzy, kde-format
+#| msgid ""
+#| "If you add predefined timers here, they will appear in the widget’s "
+#| "context menu."
+msgctxt "@info:usagetip PlaceHolderMessage empty ListView"
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
@@ -132,51 +127,74 @@ msgstr ""
 "Dacă adăugați temporizatoare predefinite aici, acestea vor apărea în meniul "
 "contextual al controlului grafic."
 
-#: configTimes.qml:125
-#, kde-format
+#: configTimes.qml:130
+#, fuzzy, kde-format
+#| msgid "Scroll over digits to change time"
+msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Derulați peste cifre pentru a schimba durata"
 
-#: configTimes.qml:132
-#, kde-format
+#: configTimes.qml:140
+#, fuzzy, kde-format
+#| msgid "Apply"
+msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Aplică"
 
-#: configTimes.qml:140
-#, kde-format
+#: configTimes.qml:159
+#, fuzzy, kde-format
+#| msgid "Cancel"
+msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Renunță"
 
-#: configTimes.qml:149
-#, kde-format
+#: configTimes.qml:179
+#, fuzzy, kde-format
+#| msgid "Edit"
+msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Modifică"
 
-#: configTimes.qml:158
-#, kde-format
+#: configTimes.qml:200
+#, fuzzy, kde-format
+#| msgid "Delete"
+msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Șterge"
 
 #: main.qml:68
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 is running"
+msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 rulează"
 
 #: main.qml:70
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "%1 not running"
+msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 nu rulează"
 
-#: main.qml:73
-#, kde-format
+#: main.qml:74
+#, fuzzy, kde-format
+#| msgid "Remaining time left: %1 second"
+#| msgid_plural "Remaining time left: %1 seconds"
+msgctxt ""
+"@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
+"running timer"
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Timp rămas: %1 secundă"
 msgstr[1] "Timp rămas: %1 secunde"
 msgstr[2] "Timp rămas: %1 de secunde"
 
-#: main.qml:73
-#, kde-format
+#: main.qml:75
+#, fuzzy, kde-format
+#| msgid ""
+#| "Use mouse wheel to change digits or choose from predefined timers in the "
+#| "context menu"
+msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
@@ -184,17 +202,21 @@ msgstr ""
 "Folosiți rotița mausului pentru a schimba cifrele sau alegeți din "
 "temporizatoarele predefinite din meniul contextual"
 
-#: main.qml:90
-#, kde-format
+#: main.qml:92
+#, fuzzy, kde-format
+#| msgid "Timer"
+msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Temporizator"
 
-#: main.qml:91
-#, kde-format
+#: main.qml:93
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Temporizatorul a expirat"
 
-#: main.qml:132
+#: main.qml:134
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "&Start"
@@ -202,23 +224,30 @@ msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "&Pornește"
 
-#: main.qml:133
+#: main.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Pornește"
 
-#: main.qml:138
+#: main.qml:141
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Opreș&te"
 
-#: main.qml:143
+#: main.qml:147
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Reinițializează"
+
+#~ msgctxt "remaining time"
+#~ msgid "%1s"
+#~ msgid_plural "%1s"
+#~ msgstr[0] "%1s"
+#~ msgstr[1] "%1s"
+#~ msgstr[2] "%1s"
 
 #~ msgctxt "@title"
 #~ msgid "Appearance"
