@@ -85,6 +85,7 @@ PlasmoidItem {
                     grid: grid
                     popupModel: null
                     launcherModel: launcherModel
+                    onMoveItemToPopup: (item, url) => grid.moveItemToPopup(item, url)
                 }
 
                 function moveItemToPopup(iconItem, url) {
@@ -93,8 +94,9 @@ PlasmoidItem {
                     }
 
                     popup.visible = true;
-                    popup.mainItem.popupModel.insertUrl(popup.mainItem.popupModel.count, url.toString());
-                    popup.mainItem.listView.currentIndex = popup.mainItem.popupModel.count - 1;
+                    const popupMain = popup.mainItem as Popup
+                    popupMain.popupModel.insertUrl(popupMain.popupModel.count, url.toString());
+                    popupMain.listView.currentIndex = popupMain.popupModel.count - 1;
                     iconItem.removeLauncher();
                 }
             }
@@ -279,12 +281,12 @@ PlasmoidItem {
         id: logic
 
         onLauncherAdded: (url, isPopup) => {
-            var m = isPopup ? popup.mainItem.popupModel : launcherModel;
+            var m = isPopup ? (popup.mainItem as Popup).popupModel : launcherModel;
             m.appendUrl(url);
         }
 
         onLauncherEdited: (url, index, isPopup) => {
-            var m = isPopup ? popup.mainItem.popupModel : launcherModel;
+            var m = isPopup ? (popup.mainItem as Popup).popupModel : launcherModel;
             m.changeUrl(index, url);
         }
     }
@@ -296,9 +298,8 @@ PlasmoidItem {
             when: !root.vertical
 
             PropertyChanges {
-                target: popupArrow
-                width: Kirigami.Units.iconSizes.smallMedium
-                height: root.height
+                popupArrow.width: Kirigami.Units.iconSizes.smallMedium
+                popupArrow.height: root.height
             }
         },
 
@@ -307,9 +308,8 @@ PlasmoidItem {
             when: root.vertical
 
             PropertyChanges {
-                target: popupArrow
-                width: root.width
-                height: Kirigami.Units.iconSizes.smallMedium
+                popupArrow.width: root.width
+                popupArrow.height: Kirigami.Units.iconSizes.smallMedium
             }
         }
     ]

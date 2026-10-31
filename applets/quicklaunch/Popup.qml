@@ -122,6 +122,7 @@ Item {
             launcherModel: popup.launcherModel
             grid: null
             logic: popup.logic
+            onMoveItemToGrid: (item, url) => listView.moveItemToGrid(item, url)
         }
 
         highlight: PlasmaExtras.Highlight {}

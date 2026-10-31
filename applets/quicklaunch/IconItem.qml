@@ -35,6 +35,9 @@ Item {
     width: isPopupItem ? LayoutManager.popupItemWidth() : grid.cellWidth
     height: isPopupItem ? LayoutManager.popupItemHeight() : grid.cellHeight
 
+    signal moveItemToGrid(IconItem item, url url)
+    signal moveItemToPopup(IconItem item, url url)
+
     Keys.onPressed: event => {
         switch (event.key) {
         case Qt.Key_Space:
@@ -63,10 +66,10 @@ Item {
         switch (event.key) {
         case Qt.Key_Up: {
             if (iconItem.isPopupItem && iconItem.itemIndex === 0 && Plasmoid.location === PlasmaCore.Types.TopEdge) {
-                iconItem.ListView.view.moveItemToGrid(iconItem, url);
+                iconItem.moveItemToGrid(iconItem, url);
                 break;
             } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.BottomEdge) {
-                iconItem.GridView.view.moveItemToPopup(iconItem, url);
+                iconItem.moveItemToPopup(iconItem, url);
                 break;
             }
 
@@ -76,10 +79,10 @@ Item {
 
         case Qt.Key_Down: {
             if (iconItem.isPopupItem && iconItem.itemIndex === iconItem.ListView.view.count - 1 && Plasmoid.location === PlasmaCore.Types.BottomEdge) {
-                iconItem.ListView.view.moveItemToGrid(iconItem, url);
+                iconItem.moveItemToGrid(iconItem, url);
                 break;
             } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.TopEdge) {
-                iconItem.GridView.view.moveItemToPopup(iconItem, url);
+                iconItem.moveItemToPopup(iconItem, url);
                 break;
             }
 
@@ -89,10 +92,10 @@ Item {
 
         case Qt.Key_Left: {
             if (iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.LeftEdge) {
-                iconItem.ListView.view.moveItemToGrid(iconItem, url);
+                iconItem.moveItemToGrid(iconItem, url);
                 break;
             } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.RightEdge) {
-                iconItem.GridView.view.moveItemToPopup(iconItem, url);
+                iconItem.moveItemToPopup(iconItem, url);
                 break;
             }
 
@@ -101,10 +104,10 @@ Item {
         }
         case Qt.Key_Right: {
             if (iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.RightEdge) {
-                iconItem.ListView.view.moveItemToGrid(iconItem, url);
+                iconItem.moveItemToGrid(iconItem, url);
                 break;
             } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.LeftEdge) {
-                iconItem.GridView.view.moveItemToPopup(iconItem, url);
+                iconItem.moveItemToPopup(iconItem, url);
                 break;
             }
 
@@ -216,7 +219,7 @@ Item {
 
                 width: Kirigami.Units.iconSizes.medium
                 height: width
-                source: iconItem.url == "quicklaunch:drop" ? "" : iconItem.iconName
+                source: iconItem.url === "quicklaunch:drop" ? "" : iconItem.iconName
                 active: mouseArea.containsMouse
             }
 
@@ -238,7 +241,7 @@ Item {
                 anchors.fill: parent
                 imagePath: "widgets/viewitem"
                 prefix: "hover"
-                visible: iconItem.dragging || iconItem.url == "quicklaunch:drop"
+                visible: iconItem.dragging || iconItem.url === "quicklaunch:drop"
             }
 
             PlasmaCore.ToolTipArea {
@@ -304,10 +307,10 @@ Item {
                         var item = menuItemComponent.createObject(iconItem, {
                             "text": action.name,
                             "icon": action.icon
-                        });
+                        }) as PlasmaExtras.MenuItem;
                         item.clicked.connect(function() {
-                            logic.openExec(this.exec);
-                        }.bind(action));
+                            iconItem.logic.openExec(action.exec);
+                        });
 
                         addMenuItem(item, jumpListSeparator);
                         jumpListItems.push(item);
@@ -348,13 +351,12 @@ Item {
             }
 
             PropertyChanges {
-                target: label
-                horizontalAlignment: Text.AlignHLeft
-                verticalAlignment: Text.AlignVCenter
-                visible: true
-                elide: Text.ElideRight
-                anchors.leftMargin: Kirigami.Units.smallSpacing
-                anchors.rightMargin: Kirigami.Units.smallSpacing
+                label.horizontalAlignment: Text.AlignLeft
+                label.verticalAlignment: Text.AlignVCenter
+                label.visible: true
+                label.elide: Text.ElideRight
+                label.anchors.leftMargin: Kirigami.Units.smallSpacing
+                label.anchors.rightMargin: Kirigami.Units.smallSpacing
             }
         },
 
@@ -381,10 +383,9 @@ Item {
             }
 
             PropertyChanges {
-                target: label
-                horizontalAlignment: Text.AlignHCenter
-                visible: showLauncherNames
-                elide: Text.ElideNone
+                label.horizontalAlignment: Text.AlignHCenter
+                label.visible: showLauncherNames
+                label.elide: Text.ElideNone
             }
         }
     ]
