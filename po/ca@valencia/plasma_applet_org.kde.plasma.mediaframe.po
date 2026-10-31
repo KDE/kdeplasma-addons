@@ -57,7 +57,7 @@ msgstr "Segons"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
-msgstr "Mode d'emplenament de la imatge:"
+msgstr "Mode «Emplenament» de la imatge:"
 
 #: qml/ConfigBehavior.qml:110
 #, kde-format

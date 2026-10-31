@@ -183,8 +183,3 @@ msgstr "%1 de %2 de %3"
 msgctxt "@label %1 day %2 month name %3 year"
 msgid "%1 %2, %3"
 msgstr "%1 de %2 de %3"
-
-#~ msgctxt ""
-#~ "%1 Day number %2 Month number with leap %3 Year number with ganzhi name"
-#~ msgid "%1 %2, %3"
-#~ msgstr "%1 de %2 de %3"

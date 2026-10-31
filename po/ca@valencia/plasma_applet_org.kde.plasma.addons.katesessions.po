@@ -41,6 +41,3 @@ msgstr "Cancel·la la creació de la sessió"
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Sessions de Kate"
-
-#~ msgid "Search…"
-#~ msgstr "Busca…"
