@@ -98,7 +98,7 @@ PlasmoidItem {
                 PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
                 PlasmaComponents3.ToolTip.text: text
                 Accessible.name: goHomeButton.text
-                Accessible.description: i18n("Open Default URL")
+                Accessible.description: i18nc("@action:button accessible description", "Open Default URL")
             }
             PlasmaComponents3.TextField {
                 Layout.fillWidth: true
@@ -344,8 +344,8 @@ PlasmoidItem {
                     if (request.userInitiated) {
                         Qt.openUrlExternally(url);
                     } else {
-                        infoButton.show(i18nc("An unwanted popup was blocked", "Popup blocked"), "document-close-symbolic",
-                                        i18n("Click here to open the following blocked popup:\n%1", url), function () {
+                        infoButton.show(i18nc("@info:status An unwanted popup was blocked", "Popup blocked"), "document-close-symbolic",
+                                        i18nc("@info:tooltip, %1 is popup url" , "Click here to open the following blocked popup:\n%1", url), function () {
                             Qt.openUrlExternally(url);
                             infoButton.dismiss();
                         });
