@@ -59,7 +59,7 @@ KCM.SimpleKCM {
                 from: 0
                 to: 24
                 editable: true
-                onValueChanged: cfg_interval = hoursInterval.value * 3600 + minutesInterval.value * 60 + secondsInterval.value
+                onValueChanged: root.cfg_interval = hoursInterval.value * 3600 + minutesInterval.value * 60 + secondsInterval.value
             }
             Label {
                 text: i18n("Hours")
@@ -73,7 +73,7 @@ KCM.SimpleKCM {
                 from: 0
                 to: 60
                 editable: true
-                onValueChanged: cfg_interval = hoursInterval.value * 3600 + minutesInterval.value * 60 + secondsInterval.value
+                onValueChanged: root.cfg_interval = hoursInterval.value * 3600 + minutesInterval.value * 60 + secondsInterval.value
             }
             Label {
                 text: i18n("Minutes")
@@ -87,7 +87,7 @@ KCM.SimpleKCM {
                 from: root.hoursIntervalValue === 0 && root.minutesIntervalValue === 0 ? 1 : 0
                 to: 60
                 editable: true
-                onValueChanged: cfg_interval = hoursInterval.value * 3600 + minutesInterval.value * 60 + secondsInterval.value
+                onValueChanged: root.cfg_interval = hoursInterval.value * 3600 + minutesInterval.value * 60 + secondsInterval.value
             }
             Label {
                 text: i18n("Seconds")
@@ -102,8 +102,7 @@ KCM.SimpleKCM {
             id: comboBox
             Kirigami.FormData.label: i18nc("@label:listbox", "Image fill mode:")
 
-    //         Layout.minimumWidth: Kirigami.Units.gridUnit * 10
-            currentIndex: fillModeToIndex(fillMode)
+            currentIndex: fillModeToIndex(root.fillMode)
             textRole: "text"
             model: [
                 {

@@ -3,10 +3,9 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
-import QtQuick.Layouts
-import QtQuick.Dialogs
 
 import org.kde.draganddrop as DragDrop
 
@@ -15,7 +14,6 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.extras as PlasmaExtras
-import org.kde.kquickcontrolsaddons
 import plasma.applet.org.kde.plasma.mediaframe
 
 PlasmoidItem {
@@ -23,7 +21,12 @@ PlasmoidItem {
 
     MediaFrame {
         id: items
-        random: plasmoid.configuration.randomize
+        random: Plasmoid.configuration.randomize
+
+        onItemChanged: path => {
+            main.activeSource = ""
+            main.setActiveSource(path)
+        }
     }
 
     switchWidth: Kirigami.Units.gridUnit * 5
@@ -38,11 +41,13 @@ PlasmoidItem {
     property string activeSource: ""
     property string transitionSource: ""
 
-    readonly property bool pause: fullRepresentationItem?.overlayMouseArea?.containsMouse ?? false
+    property bool pause: false // set by fullRepresentation's overlayMouseArea
+    property bool isTransitioning: false // set by fullRepresentation's faderAnimation
 
     readonly property int itemCount: (items.count + items.futureLength)
     readonly property bool hasItems: ((itemCount > 0) || (items.futureLength > 0))
-    readonly property bool isTransitioning: fullRepresentationItem?.faderAnimation.running ?? false
+
+    signal restartAnimationRequested
 
     onActiveSourceChanged: {
         items.watch(activeSource)
@@ -77,14 +82,15 @@ PlasmoidItem {
     Component.onCompleted: {
         loadPathList()
 
-        if (items.random)
+        if (items.random) {
             nextItem()
+        }
     }
 
     Connections {
-        target: plasmoid.configuration
+        target: Plasmoid.configuration
         function onPathListChanged() {
-            loadPathList()
+            main.loadPathList()
         }
     }
 
@@ -96,7 +102,7 @@ PlasmoidItem {
         // work-around for QTBUG-67773:
         // C++ object property of type QVariant(QStringList) is not updated on changes from QML
         // so explicitly create a deep JSValue copy, modify that and then set it back to overwrite the old
-        var updatedList = plasmoid.configuration.pathList.slice();
+        var updatedList = Plasmoid.configuration.pathList.slice();
         updatedList.push(JSON.stringify(item));
         plasmoid.configuration.pathList = updatedList;
     }
@@ -141,32 +147,19 @@ PlasmoidItem {
             activeSource = source
         }
 
-        if (fullRepresentationItem) {
-            fullRepresentationItem.faderAnimation.restart()
-        }
-    }
-
-    Connections {
-        target: items
-
-        function onItemChanged(path) {
-            activeSource = ""
-            setActiveSource(path)
-        }
-
+        restartAnimationRequested()
     }
 
     Timer {
         id: nextTimer
-        interval: (plasmoid.configuration.interval*1000)
+        interval: (Plasmoid.configuration.interval*1000)
         repeat: true
-        running: hasItems && !pause
-        onTriggered: nextItem()
+        running: main.hasItems && !main.pause
+        onTriggered: main.nextItem()
     }
 
     fullRepresentation: Item {
-        property alias faderAnimation: faderAnimation
-        property alias overlayMouseArea: overlayMouseArea
+        id: fullRepresentation
 
         property Image frontImage: image1
         property Image bufferImage: image2
@@ -177,7 +170,7 @@ PlasmoidItem {
 
             Item {
                 id: imageView
-                visible: hasItems
+                visible: main.hasItems
                 anchors.fill: parent
 
                 // This timer prevents reloading the image too often when resizing,
@@ -196,8 +189,8 @@ PlasmoidItem {
                     id: image2
 
                     anchors.fill: parent
-                    z: image2 === frontImage
-                    fillMode: plasmoid.configuration.fillMode
+                    z: image2 === fullRepresentation.frontImage
+                    fillMode: Plasmoid.configuration.fillMode
 
                     opacity: 0
 
@@ -217,8 +210,8 @@ PlasmoidItem {
                     id: image1
 
                     anchors.fill: parent
-                    z: image2 === frontImage
-                    fillMode: plasmoid.configuration.fillMode
+                    z: image2 === fullRepresentation.frontImage
+                    fillMode: Plasmoid.configuration.fillMode
 
                     cache: false
 
@@ -239,7 +232,7 @@ PlasmoidItem {
                     TapHandler {
                         acceptedButtons: Qt.LeftButton
                         enabled: Plasmoid.configuration.leftClickOpenImage
-                        onTapped: Qt.openUrlExternally(activeSource)
+                        onTapped: Qt.openUrlExternally(main.activeSource)
                     }
                 }
             }
@@ -263,8 +256,8 @@ PlasmoidItem {
                 }
             }
             ParallelAnimation {
-                OpacityAnimator { target: frontImage; from: 1; to: 0; duration: Kirigami.Units.veryLongDuration }
-                OpacityAnimator { target: bufferImage; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration }
+                OpacityAnimator { target: fullRepresentation.frontImage; from: 1; to: 0; duration: Kirigami.Units.veryLongDuration }
+                OpacityAnimator { target: fullRepresentation.bufferImage; from: 0; to: 1; duration: Kirigami.Units.veryLongDuration }
             }
             ScriptAction {
                 script: {
@@ -275,12 +268,19 @@ PlasmoidItem {
                 }
             }
         }
+        Binding { main.isTransitioning: faderAnimation.running }
+        Connections {
+            target: main
+            function onRestartAnimationRequested() {
+                faderAnimation.restart()
+            }
+        }
 
         DragDrop.DropArea {
             id: dropArea
             anchors.fill: parent
 
-            onDrop: {
+            onDrop: event => {
                 var mimeData = event.mimeData
                 if (mimeData.hasUrls) {
                     var urls = mimeData.urls
@@ -288,7 +288,7 @@ PlasmoidItem {
                         var url = urls[i]
                         var type = items.isDir(url) ? "folder" : "file"
                         var item = { "path":url, "type":type }
-                        addItem(item)
+                        main.addItem(item)
                     }
                 }
                 event.accept(Qt.CopyAction)
@@ -300,7 +300,7 @@ PlasmoidItem {
 
             anchors.fill: parent
 
-            visible: hasItems
+            visible: main.hasItems
             opacity: overlayMouseArea.containsMouse ? 1 : 0
 
             Behavior on opacity {
@@ -310,24 +310,24 @@ PlasmoidItem {
             PlasmaComponents3.Button {
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
-                enabled: (items.historyLength > 0) && !isTransitioning
+                enabled: (items.historyLength > 0) && !main.isTransitioning
                 visible: main.itemCount > 1
                 icon.name: "arrow-left"
                 onClicked: {
                     nextTimer.stop()
-                    previousItem()
+                    main.previousItem()
                 }
             }
 
             PlasmaComponents3.Button {
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
-                enabled: hasItems && !isTransitioning
+                enabled: main.hasItems && !main.isTransitioning
                 visible: main.itemCount > 1
                 icon.name: "arrow-right"
                 onClicked: {
                     nextTimer.stop()
-                    nextItem()
+                    main.nextItem()
                 }
             }
 
@@ -353,6 +353,7 @@ PlasmoidItem {
 
                 onPressed: mouse => mouse.accepted = false;
                 onDoubleClicked: mouse => mouse.accepted = false;
+                Binding { main.pause: overlayMouseArea.containsMouse }
             }
 
         }
@@ -361,7 +362,7 @@ PlasmoidItem {
             id: configNeededPlaceholder
             property bool fitsInWidget: implicitWidth <= parent.width && implicitHeight <= parent.height
             anchors.centerIn: parent
-            visible: !hasItems && fitsInWidget
+            visible: !main.hasItems && fitsInWidget
             iconName: "viewimage-symbolic"
             text: i18nc("@info placeholdermessage if no media loaded", "No media selected")
             helpfulAction: Kirigami.Action {
@@ -375,7 +376,7 @@ PlasmoidItem {
         PlasmaComponents3.Button {
             anchors.centerIn: parent
 
-            visible: !hasItems && !configNeededPlaceholder.fitsInWidget
+            visible: !main.hasItems && !configNeededPlaceholder.fitsInWidget
             icon.name: "insert-image-symbolic"
             text: i18nc("@action:button opens settings dialog", "Choose media…")
             onClicked: {
