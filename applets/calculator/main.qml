@@ -258,46 +258,46 @@ PlasmoidItem {
             LayoutMirroring.enabled: false
             LayoutMirroring.childrenInherit: true
 
-            Keys.onDigit0Pressed: { main.digitClicked(0); zeroButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit1Pressed: { main.digitClicked(1); oneButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit2Pressed: { main.digitClicked(2); twoButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit3Pressed: { main.digitClicked(3); threeButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit4Pressed: { main.digitClicked(4); fourButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit5Pressed: { main.digitClicked(5); fiveButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit6Pressed: { main.digitClicked(6); sixButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit7Pressed: { main.digitClicked(7); sevenButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit8Pressed: { main.digitClicked(8); eightButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDigit9Pressed: { main.digitClicked(9); nineButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onEscapePressed: { main.allClearClicked(); allClearButton.forceActiveFocus(Qt.TabFocusReason); }
-            Keys.onDeletePressed: { main.clearClicked(); clearButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit0Pressed: { zeroButton.animateClick(); zeroButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit1Pressed: { oneButton.animateClick(); oneButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit2Pressed: { twoButton.animateClick(); twoButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit3Pressed: { threeButton.animateClick(); threeButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit4Pressed: { fourButton.animateClick(); fourButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit5Pressed: { fiveButton.animateClick(); fiveButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit6Pressed: { sixButton.animateClick(); sixButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit7Pressed: { sevenButton.animateClick(); sevenButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit8Pressed: { eightButton.animateClick(); eightButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDigit9Pressed: { nineButton.animateClick(); nineButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onEscapePressed: { allClearButton.animateClick(); allClearButton.forceActiveFocus(Qt.TabFocusReason); }
+            Keys.onDeletePressed: { clearButton.animateClick(); clearButton.forceActiveFocus(Qt.TabFocusReason); }
             Keys.onPressed: event => {
                 event.accepted = true;
                 switch (event.key) {
                 case Qt.Key_Plus:
-                    main.setOperator("+");
+                    plusButton.animateClick();
                     plusButton.forceActiveFocus(Qt.TabFocusReason);
                     break;
                 case Qt.Key_Minus:
-                    main.setOperator("-");
+                    minusButton.animateClick();
                     minusButton.forceActiveFocus(Qt.TabFocusReason);
                     break;
                 case Qt.Key_Asterisk:
-                    main.setOperator("*");
+                    multiplyButton.animateClick();
                     multiplyButton.forceActiveFocus(Qt.TabFocusReason);
                     break;
                 case Qt.Key_Slash:
-                    main.setOperator("/");
+                    divideButton.animateClick();
                     divideButton.forceActiveFocus(Qt.TabFocusReason);
                     break;
                 case Qt.Key_Comma:
                 case Qt.Key_Period:
-                    main.decimalClicked();
+                    decimalButton.animateClick();
                     decimalButton.forceActiveFocus(Qt.TabFocusReason);
                     break;
                 case Qt.Key_Equal:
                 case Qt.Key_Return:
                 case Qt.Key_Enter:
-                    main.equalsClicked();
+                    ansButton.animateClick();
                     break;
                 case Qt.Key_Backspace:
                     main.deleteDigit();
