@@ -89,7 +89,7 @@ MouseArea {
             Layout.fillWidth: true
             Layout.fillHeight: true
             Layout.verticalStretchFactor: 3
-            visible: Plasmoid.configuration.showRemainingTime
+            visible: Plasmoid.configuration.showRemainingTime || fullRepresentation.inPanel
 
             value: fullRepresentation.seconds
             editable: !fullRepresentation.running
