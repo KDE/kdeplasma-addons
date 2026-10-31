@@ -43,7 +43,7 @@ PlasmoidItem {
     switchHeight: Kirigami.Units.gridUnit * 12
 
     toolTipTextFormat: Text.StyledText
-    toolTipSubText: i18n("You are logged in as <b>%1</b>", displayedName)
+    toolTipSubText: i18nc("@info:tooltip widget subtitle", "You are logged in as <b>%1</b>", displayedName)
 
     // revert to the Plasmoid icon if no face given
     Plasmoid.icon: kuser.faceIconUrl.toString() || (inPanel ? "system-switch-user-symbolic" : "preferences-system-users" )
@@ -144,7 +144,7 @@ PlasmoidItem {
             UserListDelegate {
                 id: currentUserItem
                 text: root.displayedName
-                subText: i18n("Current user")
+                subText: i18nc("@item subtitle for current user entry", "Current user")
                 source: root.avatarIcon
                 hoverEnabled: false
                 down: false
