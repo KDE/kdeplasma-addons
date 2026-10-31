@@ -33,7 +33,7 @@ KCM.SimpleKCM {
         RowLayout {
             Layout.fillWidth: true
 
-            Kirigami.FormData.label: i18n("Change picture every:")
+            Kirigami.FormData.label: i18nc("@label:group form label for spinboxes", "Change picture every:")
 
             Connections {
                 target: root
@@ -50,7 +50,7 @@ KCM.SimpleKCM {
                 onValueChanged: root.cfg_interval = hoursInterval.value * 3600 + minutesInterval.value * 60 + secondsInterval.value
             }
             Label {
-                text: i18n("Hours")
+                text: i18nc("@item:valuesuffix", "Hours")
             }
             Item {
                 Layout.preferredWidth: Kirigami.Units.gridUnit
@@ -64,7 +64,7 @@ KCM.SimpleKCM {
                 onValueChanged: root.cfg_interval = hoursInterval.value * 3600 + minutesInterval.value * 60 + secondsInterval.value
             }
             Label {
-                text: i18n("Minutes")
+                text: i18nc("@item:valuesuffix", "Minutes")
             }
             Item {
                 Layout.preferredWidth: Kirigami.Units.gridUnit
@@ -78,7 +78,7 @@ KCM.SimpleKCM {
                 onValueChanged: root.cfg_interval = hoursInterval.value * 3600 + minutesInterval.value * 60 + secondsInterval.value
             }
             Label {
-                text: i18n("Seconds")
+                text: i18nc("@item:valuesuffix", "Seconds")
             }
         }
 
