@@ -30,7 +30,7 @@ PlasmoidItem {
     switchHeight: Kirigami.Units.gridUnit * 5
 
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
-    Plasmoid.icon: activeSource.length > 0 ? activeSource : "settings-configure"
+    Plasmoid.icon: transitionSource || activeSource || "settings-configure"
 
     width: Kirigami.Units.gridUnit * 23
     height: Kirigami.Units.gridUnit * 15
