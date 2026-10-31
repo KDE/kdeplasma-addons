@@ -45,7 +45,7 @@ PlasmoidItem {
     property bool isTransitioning: false // set by fullRepresentation's faderAnimation
 
     readonly property int itemCount: (items.count + items.futureLength)
-    readonly property bool hasItems: ((itemCount > 0) || (items.futureLength > 0))
+    readonly property bool hasItems: itemCount > 0
 
     signal restartAnimationRequested
 
@@ -99,12 +99,7 @@ PlasmoidItem {
         if(items.isAdded(item.path)) {
             return
         }
-        // work-around for QTBUG-67773:
-        // C++ object property of type QVariant(QStringList) is not updated on changes from QML
-        // so explicitly create a deep JSValue copy, modify that and then set it back to overwrite the old
-        var updatedList = Plasmoid.configuration.pathList.slice();
-        updatedList.push(JSON.stringify(item));
-        plasmoid.configuration.pathList = updatedList;
+        Plasmoid.configuration.pathList.push(JSON.stringify(item))
     }
 
     function nextItem() {
