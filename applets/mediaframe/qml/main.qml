@@ -226,7 +226,7 @@ PlasmoidItem {
 
                     TapHandler {
                         acceptedButtons: Qt.LeftButton
-                        enabled: Plasmoid.configuration.leftClickOpenImage
+                        enabled: Plasmoid.configuration.leftClickOpenImage && !main.isTransitioning
                         onTapped: Qt.openUrlExternally(main.activeSource)
                     }
                 }
