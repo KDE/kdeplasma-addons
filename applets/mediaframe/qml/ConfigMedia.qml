@@ -3,6 +3,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtCore
 import QtQuick
@@ -17,6 +18,7 @@ import org.kde.plasma.extras as PlasmaExtras
 
 
 KCM.ScrollViewKCM {
+    id: mediaPage
 
     signal configurationChanged
 
@@ -57,7 +59,7 @@ KCM.ScrollViewKCM {
 
     Component.onCompleted: {
         // Load the list back in
-        var list = plasmoid.configuration.pathList
+        var list = Plasmoid.configuration.pathList
         cfg_pathList = []
         for(var i in list) {
             addPath( JSON.parse(list[i]) )
@@ -74,13 +76,16 @@ KCM.ScrollViewKCM {
         delegate: Kirigami.SwipeListItem {
             id: folderDelegate
 
+            required property string path
+            required property int index
+
             width: pathsList.width
 
             contentItem: QQC2.Label {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 verticalAlignment: Text.AlignVCenter
-                text: String(model.path).replace("file://", "")
+                text: String(folderDelegate.path).replace("file://", "")
                 textFormat: Text.PlainText
             }
 
@@ -88,7 +93,7 @@ KCM.ScrollViewKCM {
                 Kirigami.Action {
                     icon.name: "list-remove"
                     tooltip: i18nc("@action:button tooltip on icon-only button", "Remove path")
-                    onTriggered: removePath(model.index)
+                    onTriggered: mediaPage.removePath(folderDelegate.index)
                 }
             ]
         }
@@ -115,7 +120,7 @@ KCM.ScrollViewKCM {
             onAccepted: {
                 for (var i = 0; i < selectedFiles.length; ++i) {
                     var item = { 'path':selectedFiles[i].toString(), 'type':'file' }
-                    addPath(item)
+                    mediaPage.addPath(item)
                 }
             }
         }
@@ -129,7 +134,7 @@ KCM.ScrollViewKCM {
 
             onAccepted: {
                 var item = { 'path':selectedFolder.toString(), 'type':'folder' }
-                addPath(item)
+                mediaPage.addPath(item)
             }
         }
     }
