@@ -29,13 +29,13 @@ KCM.GridViewKCM {
             from: 4
             to: 128
             textFromValue: function (value) {
-                return i18n("%1pt", value)
+                return i18nc("@item:valuesuffix %1 is font size in points", "%1pt", value)
             }
             valueFromText: function (text) {
                 return parseInt(text)
             }
 
-            Kirigami.FormData.label: i18n("Text font size:")
+            Kirigami.FormData.label: i18nc("@label:spinbox", "Text font size:")
         }
     }
 
@@ -69,16 +69,16 @@ KCM.GridViewKCM {
 
         text: {
             switch (modelData) {
-            case "white": return i18n("A white sticky note")
-            case "black": return i18n("A black sticky note")
-            case "red": return i18n("A red sticky note")
-            case "orange": return i18n("An orange sticky note")
-            case "yellow": return i18n("A yellow sticky note")
-            case "green": return i18n("A green sticky note")
-            case "blue": return i18n("A blue sticky note")
-            case "pink": return i18n("A pink sticky note")
-            case "translucent": return i18n("A transparent sticky note")
-            case "translucent-light": return i18n("A transparent sticky note with light text")
+            case "white": return i18nc("@item text on sticky note color option", "A white sticky note")
+            case "black": return i18nc("@item text on sticky note color option", "A black sticky note")
+            case "red": return i18nc("@item text on sticky note color option", "A red sticky note")
+            case "orange": return i18nc("@item text on sticky note color option", "An orange sticky note")
+            case "yellow": return i18nc("@item text on sticky note color option", "A yellow sticky note")
+            case "green": return i18nc("@item text on sticky note color option", "A green sticky note")
+            case "blue": return i18nc("@item text on sticky note color option", "A blue sticky note")
+            case "pink": return i18nc("@item text on sticky note color option", "A pink sticky note")
+            case "translucent": return i18nc("@item text on sticky note color option", "A transparent sticky note")
+            case "translucent-light": return i18nc("@item text on sticky note color option", "A transparent sticky note with light text")
             }
         }
 

@@ -301,7 +301,7 @@ PlasmoidItem {
                             _sequence: StandardKey.Undo
                             _enabled: contextMenu.shortcutsEnabled && mainTextArea.canUndo
                             _iconName: "edit-undo"
-                            _text: i18n("Undo")
+                            _text: i18nc("@action:inmenu", "Undo")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.undo())
                         }
 
@@ -309,7 +309,7 @@ PlasmoidItem {
                             _sequence: StandardKey.Redo
                             _enabled: contextMenu.shortcutsEnabled && mainTextArea.canRedo
                             _iconName: "edit-redo"
-                            _text: i18n("Redo")
+                            _text: i18nc("@action:inmenu", "Redo")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.redo())
                         }
 
@@ -319,7 +319,7 @@ PlasmoidItem {
                             _sequence: StandardKey.Cut
                             _enabled: contextMenu.shortcutsEnabled && mainTextArea.selectedText.length > 0
                             _iconName: "edit-cut"
-                            _text: i18n("Cut")
+                            _text: i18nc("@action:inmenu", "Cut")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.cut())
                         }
 
@@ -327,7 +327,7 @@ PlasmoidItem {
                             _sequence: StandardKey.Copy
                             _enabled: contextMenu.shortcutsEnabled && mainTextArea.selectedText.length > 0
                             _iconName: "edit-copy"
-                            _text: i18n("Copy")
+                            _text: i18nc("@action:inmenu", "Copy")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.copy())
                         }
 
@@ -335,13 +335,13 @@ PlasmoidItem {
                             _sequence: StandardKey.Paste
                             _enabled: contextMenu.shortcutsEnabled && mainTextArea.canPaste
                             _iconName: "edit-paste"
-                            _text: i18n("Paste")
+                            _text: i18nc("@action:inmenu", "Paste")
                             onTriggered: contextMenu.retFocus(() => documentHandler.pasteWithoutFormatting())
                         }
 
                         ShortcutMenuItem {
                             _enabled: contextMenu.shortcutsEnabled && mainTextArea.canPaste
-                            _text: i18n("Paste with Full Formatting")
+                            _text: i18nc("@action:inmenu", "Paste with Full Formatting")
                             _iconName: "edit-paste"
                             onTriggered: contextMenu.retFocus(() => mainTextArea.paste())
                         }
@@ -363,14 +363,14 @@ PlasmoidItem {
                             _sequence: StandardKey.Delete
                             _enabled: contextMenu.shortcutsEnabled && mainTextArea.selectedText.length > 0
                             _iconName: "edit-delete"
-                            _text: i18n("Delete")
+                            _text: i18nc("@action:inmenu", "Delete")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.remove(mainTextArea.selectionStart, mainTextArea.selectionEnd))
                         }
 
                         ShortcutMenuItem {
                             _enabled: contextMenu.shortcutsEnabled && mainTextArea.text.length > 0
                             _iconName: "edit-clear"
-                            _text: i18n("Clear")
+                            _text: i18nc("@action:inmenu", "Clear")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.clear())
                         }
 
@@ -380,7 +380,7 @@ PlasmoidItem {
                             _sequence: StandardKey.SelectAll
                             _enabled: contextMenu.shortcutsEnabled && mainTextArea.text.length > 0
                             _iconName: "edit-select-all"
-                            _text: i18n("Select All")
+                            _text: i18nc("@action:inmenu", "Select All")
                             onTriggered: contextMenu.retFocus(() => mainTextArea.selectAll())
                         }
 
@@ -655,8 +655,8 @@ PlasmoidItem {
 
             sourceComponent: MessageDialog {
                 visible: false
-                title: i18n("Discard this note?")
-                text: i18n("Are you sure you want to discard this note?")
+                title: i18nc("@title;window dialog title", "Discard this note?")
+                text: i18nc("@info", "Are you sure you want to discard this note?")
 
                 buttons: MessageDialog.Discard | MessageDialog.Cancel
 
