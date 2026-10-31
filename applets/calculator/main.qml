@@ -270,6 +270,7 @@ PlasmoidItem {
             Keys.onEscapePressed: { allClearClicked(); allClearButton.forceActiveFocus(Qt.TabFocusReason); }
             Keys.onDeletePressed: { clearClicked(); clearButton.forceActiveFocus(Qt.TabFocusReason); }
             Keys.onPressed: event => {
+                event.accepted = true;
                 switch (event.key) {
                 case Qt.Key_Plus:
                     setOperator("+");
@@ -306,6 +307,8 @@ PlasmoidItem {
                         copyToClipboard();
                     } else if (event.matches(StandardKey.Paste)) {
                         pasteFromClipboard();
+                    } else {
+                        event.accepted = false;
                     }
                     break;
                 }
