@@ -19,9 +19,7 @@ import org.kde.plasma.extras as PlasmaExtras
 KCM.ScrollViewKCM {
     id: mediaPage
 
-    signal configurationChanged
-
-    property var cfg_pathList: []
+    property list<string> cfg_pathList: []
 
     actions: [
         Kirigami.Action {
@@ -56,14 +54,9 @@ KCM.ScrollViewKCM {
         }
     }
 
-    Component.onCompleted: {
-        // Load the list back in
-        var list = Plasmoid.configuration.pathList
-        cfg_pathList = []
-        for(var i in list) {
-            addPath( JSON.parse(list[i]) )
-        }
-    }
+    Component.onCompleted: Plasmoid.configuration.pathList.forEach( entry => {
+            pathModel.append(JSON.parse(entry))
+        })
 
     view: ListView {
         id: pathsList
