@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-01 00:44+0000\n"
+"POT-Creation-Date: 2026-11-01 00:56+0000\n"
 "PO-Revision-Date: 2014-10-21 17:49+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -34,49 +34,49 @@ msgctxt ""
 msgid "undef"
 msgstr ""
 
-#: main.qml:344
+#: main.qml:347
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
 msgstr ""
 
-#: main.qml:375
+#: main.qml:378
 #, kde-format
 msgctxt "Text of the clear button"
 msgid "C"
 msgstr "C"
 
-#: main.qml:389
+#: main.qml:392
 #, kde-format
 msgctxt "Text of the division button"
 msgid "÷"
 msgstr "÷"
 
-#: main.qml:403
+#: main.qml:406
 #, kde-format
 msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr "×"
 
-#: main.qml:417
+#: main.qml:420
 #, kde-format
 msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr "AC"
 
-#: main.qml:471
+#: main.qml:474
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr "-"
 
-#: main.qml:525
+#: main.qml:528
 #, kde-format
 msgctxt "Text of the plus button"
 msgid "+"
 msgstr "+"
 
-#: main.qml:579
+#: main.qml:582
 #, kde-format
 msgctxt "Text of the equals button"
 msgid "="

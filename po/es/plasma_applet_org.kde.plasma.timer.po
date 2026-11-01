@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-31 00:53+0000\n"
-"PO-Revision-Date: 2026-10-29 00:18+0100\n"
+"PO-Revision-Date: 2026-10-31 12:40+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -119,10 +119,7 @@ msgid "Add"
 msgstr "Añadir"
 
 #: configTimes.qml:88
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in the widget’s "
-#| "context menu."
+#, kde-format
 msgctxt "@info:usagetip PlaceHolderMessage empty ListView"
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -132,58 +129,49 @@ msgstr ""
 "del elemento gráfico."
 
 #: configTimes.qml:130
-#, fuzzy, kde-format
-#| msgid "Scroll over digits to change time"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Deslice los dígitos para cambiar la hora"
 
 #: configTimes.qml:140
-#, fuzzy, kde-format
-#| msgid "Apply"
+#, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Aplicar"
 
 #: configTimes.qml:159
-#, fuzzy, kde-format
-#| msgid "Cancel"
+#, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Cancelar"
 
 #: configTimes.qml:179
-#, fuzzy, kde-format
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Editar"
 
 #: configTimes.qml:200
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Borrar"
 
 #: main.qml:68
-#, fuzzy, kde-format
-#| msgid "%1 is running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 está en ejecución"
 
 #: main.qml:70
-#, fuzzy, kde-format
-#| msgid "%1 not running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 no está en ejecución"
 
 #: main.qml:74
-#, fuzzy, kde-format
-#| msgid "Remaining time left: %1 second"
-#| msgid_plural "Remaining time left: %1 seconds"
+#, kde-format
 msgctxt ""
 "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
 "running timer"
@@ -193,10 +181,7 @@ msgstr[0] "Tiempo restante: %1 segundo"
 msgstr[1] "Tiempo restante: %1 segundos"
 
 #: main.qml:75
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use mouse wheel to change digits or choose from predefined timers in the "
-#| "context menu"
+#, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -206,15 +191,13 @@ msgstr ""
 "temporizadores predeterminados en el menú de contexto"
 
 #: main.qml:92
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Temporizador"
 
 #: main.qml:93
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Temporizador terminado"
@@ -242,9 +225,3 @@ msgstr "De&tener"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Reiniciar"
-
-#~ msgctxt "remaining time"
-#~ msgid "%1s"
-#~ msgid_plural "%1s"
-#~ msgstr[0] "%1 s"
-#~ msgstr[1] "%1 s"

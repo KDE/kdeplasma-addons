@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-18 00:45+0000\n"
+"POT-Creation-Date: 2026-11-01 00:56+0000\n"
 "PO-Revision-Date: 2023-10-11 20:12+0000\n"
 "Last-Translator: Guðmundur Erlingsson <gudmundure@gmail.com>\n"
 "Language-Team: Icelandic <kde-i18n-doc@kde.org>\n"
@@ -61,19 +61,19 @@ msgstr "Kvóti: %1% í notkun"
 msgid "No quota restrictions found."
 msgstr "Engar kvótatakmarkanir fundust."
 
-#: qml/main.qml:75
+#: qml/main.qml:77
 #, kde-format
 msgctxt "@info:status"
 msgid "No quota restrictions found"
 msgstr "Engar kvótatakmarkanir fundust"
 
-#: qml/main.qml:75
+#: qml/main.qml:77
 #, kde-format
 msgctxt "@info:status"
 msgid "Quota tool not found"
 msgstr "Kvótaverkfæri fannst ekki"
 
-#: qml/main.qml:76
+#: qml/main.qml:78
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Please install 'quota'"
