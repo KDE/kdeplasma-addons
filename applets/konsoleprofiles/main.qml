@@ -136,9 +136,7 @@ PlasmoidItem {
                 }
 
                 highlight: PlasmaExtras.Highlight {}
-
-                highlightMoveDuration: Kirigami.Units.longDuration
-                highlightMoveVelocity: 1
+                highlightMoveDuration: 0
             }
         }
     }
