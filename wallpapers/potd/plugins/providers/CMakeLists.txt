@@ -14,3 +14,7 @@ target_link_libraries(plasma_potd_bingprovider plasmapotdprovidercore KF6::KIOCo
 
 kcoreaddons_add_plugin(plasma_potd_simonstalenhagprovider SOURCES simonstalenhagprovider.cpp INSTALL_NAMESPACE "potd")
 target_link_libraries(plasma_potd_simonstalenhagprovider plasmapotdprovidercore KF6::KIOCore)
+
+find_package(ZLIB REQUIRED)
+kcoreaddons_add_plugin(plasma_potd_davidrevoyprovider SOURCES davidrevoyprovider.cpp INSTALL_NAMESPACE "potd")
+target_link_libraries(plasma_potd_davidrevoyprovider plasmapotdprovidercore KF6::KIOCore ZLIB::ZLIB)
