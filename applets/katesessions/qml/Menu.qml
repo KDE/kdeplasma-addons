@@ -30,6 +30,7 @@ PlasmaComponents3.ScrollView {
         highlight: PlasmaExtras.Highlight {
             anchors.bottomMargin: -listItemSvg.margins.bottom
             y: 1
+            pressed: !!(menuListView.currentItem as KateSessionsItemDelegate)?.pressed
         }
         highlightMoveDuration: 0
         highlightResizeDuration: 0

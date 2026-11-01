@@ -46,6 +46,7 @@ PlasmaComponents3.ItemDelegate {
             id: iconTitle
             Layout.fillWidth: !menuItem.showInput
             title: menuItem.showInput ? "" : menuItem.name.trim()
+            selected: menuItem.pressed
             icon.name: menuItem.iconName
             icon.width: Kirigami.Units.iconSizes.small
             icon.height: Kirigami.Units.iconSizes.small
