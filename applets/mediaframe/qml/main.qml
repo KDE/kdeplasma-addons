@@ -302,7 +302,7 @@ PlasmoidItem {
                 NumberAnimation {}
             }
 
-            PlasmaComponents3.Button {
+            PlasmaComponents3.RoundButton {
                 anchors.left: parent.left
                 anchors.verticalCenter: parent.verticalCenter
                 enabled: (items.historyLength > 0) && !main.isTransitioning
@@ -314,7 +314,7 @@ PlasmoidItem {
                 }
             }
 
-            PlasmaComponents3.Button {
+            PlasmaComponents3.RoundButton {
                 anchors.right: parent.right
                 anchors.verticalCenter: parent.verticalCenter
                 enabled: main.hasItems && !main.isTransitioning
@@ -331,7 +331,7 @@ PlasmoidItem {
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottomMargin: Kirigami.Units.smallSpacing
 
-                PlasmaComponents3.Button {
+                PlasmaComponents3.RoundButton {
                     icon.name: "document-preview"
                     onClicked: Qt.openUrlExternally(main.activeSource)
                 }
