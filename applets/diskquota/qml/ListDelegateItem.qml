@@ -20,9 +20,9 @@ PlasmaComponents3.ItemDelegate {
     property int usage
 
     onHoveredChanged: {
-        if (containsMouse) {
+        if (hovered) {
             ListView.view.currentIndex = index
-        } else {
+        } else if (ListView.isCurrentItem) {
             ListView.view.currentIndex = -1
         }
     }
