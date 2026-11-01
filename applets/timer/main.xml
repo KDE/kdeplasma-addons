@@ -47,7 +47,7 @@
     </entry>
 
     <entry name="notificationText" type="String">
-      <default>Timer finished</default>
+      <default></default>
     </entry>
 
     <entry name="runCommand" type="Bool">
