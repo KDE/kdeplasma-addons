@@ -130,7 +130,6 @@ ColumnLayout {
             PlasmaComponents.Label {
                 id: tempLabel
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignVCenter
 
                 visible: root.isTemperaturePresent
 
@@ -145,7 +144,6 @@ ColumnLayout {
             PlasmaComponents.Label {
                 id: feelsLikeLabel
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignTop
 
                 readonly property bool isFeelsLikeTemperaturePresent: isTemperaturePresent && (!!root.lastObservation.heatIndex || !!root.lastObservation.windchill || !!root.lastObservation.humidex)
 
@@ -179,7 +177,6 @@ ColumnLayout {
                 visible: !!root.lastObservation?.currentConditions
 
                 Layout.fillWidth: true
-                Layout.alignment: Qt.AlignTop
 
                 text: visible ? root.lastObservation.currentConditions : ""
 
@@ -194,7 +191,7 @@ ColumnLayout {
             id: detailsView
 
             Layout.fillWidth: true
-            Layout.alignment: Qt.AlignTop
+            Layout.alignment: Qt.AlignVCenter
 
             invalidUnit: root.invalidUnit
             displayTemperatureUnit: root.displayTemperatureUnit
