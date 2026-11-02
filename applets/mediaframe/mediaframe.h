@@ -56,6 +56,7 @@ public:
     Q_INVOKABLE void watch(const QString &path);
 
     Q_INVOKABLE bool isAdded(const QString &path);
+    Q_INVOKABLE bool contains(const QString &image);
 
     Q_INVOKABLE void get(QJSValue callback);
     Q_INVOKABLE void get(QJSValue callback, QJSValue error_callback);

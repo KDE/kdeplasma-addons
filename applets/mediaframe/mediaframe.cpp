@@ -192,6 +192,11 @@ bool MediaFrame::isAdded(const QString &path)
     return (m_pathMap.contains(path));
 }
 
+bool MediaFrame::contains(const QString &path)
+{
+    return (m_allFiles.contains(path));
+}
+
 void MediaFrame::get(QJSValue successCallback)
 {
     get(successCallback, QJSValue::UndefinedValue);

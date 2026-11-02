@@ -91,6 +91,10 @@ PlasmoidItem {
         target: Plasmoid.configuration
         function onPathListChanged() {
             main.loadPathList()
+            if ((!main.isTransitioning && !items.contains(main.activeSource))
+                || main.isTransitioning && !items.contains(main.transitionSource)) {
+                main.nextItem()
+            }
         }
     }
 
