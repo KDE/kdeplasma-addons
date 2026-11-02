@@ -120,7 +120,6 @@ ColumnLayout {
         }
 
         ColumnLayout {
-            Layout.preferredWidth: 25 // 25% of the view
             Layout.minimumWidth: root.sideWidth
 
             Layout.alignment: Qt.AlignVCenter
