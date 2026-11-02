@@ -25,7 +25,7 @@ ColumnLayout {
     property int displayVisibilityUnit: 0
     property int displayPressureUnit: 0
 
-    readonly property bool isTemperaturePresent: !!root.lastObservation?.temperature && !!root.metaData?.temperatureUnit
+    readonly property bool isTemperaturePresent: !isNaN(root.lastObservation?.temperature) && !!root.metaData?.temperatureUnit
 
     function feelsLikeTemperature(windchill, heatIndex, humidex) {
         if (!root.isTemperaturePresent) {
@@ -33,11 +33,11 @@ ColumnLayout {
         }
 
         let feelsTemperature;
-        if (windchill) {
+        if (!isNaN(windchill)) {
             feelsTemperature = windchill;
-        } else if (heatIndex) {
+        } else if (!isNaN(heatIndex)) {
             feelsTemperature = heatIndex;
-        } else if (humidex) {
+        } else if (!isNaN(humidex)) {
             feelsTemperature = humidex;
         }
 
@@ -92,7 +92,6 @@ ColumnLayout {
             PlasmaComponents.Label {
                 id: tempLabel
                 Layout.fillWidth: true
-
                 visible: root.isTemperaturePresent
 
                 font.pixelSize: Kirigami.Units.iconSizes.medium
@@ -107,7 +106,7 @@ ColumnLayout {
                 id: feelsLikeLabel
                 Layout.fillWidth: true
 
-                readonly property bool isFeelsLikeTemperaturePresent: isTemperaturePresent && (!!root.lastObservation.heatIndex || !!root.lastObservation.windchill || !!root.lastObservation.humidex)
+                readonly property bool isFeelsLikeTemperaturePresent: isTemperaturePresent && (!isNaN(root.lastObservation.heatIndex) || !isNaN(root.lastObservation.windchill) || !isNaN(root.lastObservation.humidex))
 
                 visible: {
                     if (feelsLikeLabel.isFeelsLikeTemperaturePresent) {
