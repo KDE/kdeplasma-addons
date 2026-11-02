@@ -39,13 +39,9 @@ Kirigami.ScrollablePage {
 
     background: null
 
-    implicitWidth: Math.max(stackedView.dayItem?.implicitWidth ?? 0, stackedView.hourlyItem?.implicitWidth ?? 0, topPanel.implicitWidth, locationHeader.implicitWidth) + rightPadding + leftPadding
+    implicitWidth: Math.max(stackedView.implicitWidth, tabbedView.implicitWidth) + rightPadding + leftPadding
 
-    readonly property bool hasTabbedView: !!stackedView.dayItem && !!stackedView.hourlyItem
-
-    readonly property real contentImplicitHeight: locationHeader.implicitHeight + topPanel.implicitHeight + (hasTabbedView ? tabbedView.implicitHeight : stackedView.implicitHeight) + sourceLabel.implicitHeight
-
-    implicitHeight: contentImplicitHeight + weather.spacing * (weather.children.length - 2) + topPadding + bottomPadding
+    implicitHeight: tabbedView.implicitHeight + topPadding + bottomPadding
 
     topPadding: 0
     bottomPadding: 0
@@ -57,12 +53,10 @@ Kirigami.ScrollablePage {
     readonly property bool hasDayForecast: !!futureDays && futureDays.daysNumber > 0 && !!futureDaysPoints
 
     readonly property bool useTabs: {
-        if (!stackedView.dayItem || !stackedView.hourlyItem) {
+        if (!hasHourlyForecast || !hasDayForecast) {
             return false;
         }
-        const requiredHeight = topPanel.implicitHeight + stackedView.implicitHeight + sourceLabel.implicitHeight + weather.spacing * (weather.children.length - 2);
-
-        return requiredHeight > availableHeight;
+        return stackedView.implicitHeight > availableHeight;
     }
 
     function hourlyForecastHeading(currentIndex, hoursPerDay, shortFormat) {
@@ -117,15 +111,49 @@ Kirigami.ScrollablePage {
         return "";
     }
 
-    ColumnLayout {
-        id: weather
+    StackedView {
+        id: stackedView
+
+        visible: !root.useTabs
 
         anchors.fill: parent
 
-        spacing: 0
+        locationHeaderComponent: locationHeader
+        currentConditionsComponent: currentConditions
 
+        hourlySubHeaderText: !!hourlyItem ? root.hourlyForecastHeading(hourlyItem.currentIndex, hourlyItem.hoursPerPage) : ""
+        showHourlyForecast: root.hasHourlyForecast
+        hourlyComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
+
+        showDayForecast: root.hasDayForecast
+        dayComponent: root.showDayTemperatureGraph ? dayForecastGraph : dayForecastView
+
+        sourceLabelComponent: sourceLabel
+    }
+
+    TabbedView {
+        id: tabbedView
+
+        visible: root.useTabs
+
+        anchors.fill: parent
+
+        locationHeaderComponent: locationHeader
+        currentConditionsComponent: currentConditions
+
+        showHourlyForecast: root.hasHourlyForecast
+        hourlySubHeaderText: !!hourlyItem ? root.hourlyForecastHeading(hourlyItem.currentIndex, hourlyItem.hoursPerPage) : ""
+        hourlyComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
+
+        dayComponent: root.showDayTemperatureGraph ? dayForecastGraph : dayForecastView
+        showDayForecast: root.hasDayForecast
+
+        sourceLabelComponent: sourceLabel
+    }
+
+    Component {
+        id: locationHeader
         LocationHeader {
-            id: locationHeader
             visible: !!root.station
 
             station: root.station
@@ -136,9 +164,11 @@ Kirigami.ScrollablePage {
             Layout.fillWidth: true
             Layout.alignment: Qt.AlignTop
         }
+    }
 
+    Component {
+        id: currentConditions
         TopPanel {
-            id: topPanel
             visible: !!root.lastObservation
 
             station: root.station
@@ -154,41 +184,63 @@ Kirigami.ScrollablePage {
 
             Layout.fillWidth: true
         }
+    }
 
-        StackedView {
-            id: stackedView
-
-            visible: !root.useTabs
-
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-
-            hourlySubHeaderText: !!hourlyItem ? root.hourlyForecastHeading(hourlyItem.currentIndex, hourlyItem.hoursPerPage) : ""
-            showHourlyForecast: root.hasHourlyForecast
-            hourlyComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
-
-            showDayForecast: root.hasDayForecast
-            dayComponent: root.showDayTemperatureGraph ? dayForecastGraph : dayForecastView
-        }
-
-        TabbedView {
-            id: tabbedView
-
-            visible: root.useTabs
-
+    Component {
+        id: hourlyForecastView
+        HourlyForecastCards {
             Layout.fillWidth: true
 
-            showHourlyForecast: root.hasHourlyForecast
-            hourlySubHeaderText: !!hourlyItem ? root.hourlyForecastHeading(hourlyItem.currentIndex, hourlyItem.hoursPerPage) : ""
-            hourlyComponent: root.showHourlyTemperatureGraph ? hourlyForecastGraph : hourlyForecastView
+            futureHours: root.futureHours
+            metaData: root.metaData
 
-            dayComponent: root.showDayTemperatureGraph ? dayForecastGraph : dayForecastView
-            showDayForecast: root.hasDayForecast
+            invalidUnit: root.invalidUnit
+            displayTemperatureUnit: root.displayTemperatureUnit
         }
+    }
 
+    Component {
+        id: hourlyForecastGraph
+        HourlyForecastGraph {
+            Layout.fillWidth: true
+
+            futureHoursPoints: root.futureHoursPoints
+            metaData: root.metaData
+
+            invalidUnit: root.invalidUnit
+            displayTemperatureUnit: root.displayTemperatureUnit
+        }
+    }
+
+    Component {
+        id: dayForecastView
+        DayForecastCards {
+            Layout.fillWidth: true
+
+            futureDays: root.futureDays
+            metaData: root.metaData
+
+            invalidUnit: root.invalidUnit
+            displayTemperatureUnit: root.displayTemperatureUnit
+        }
+    }
+
+    Component {
+        id: dayForecastGraph
+        DayForecastGraph {
+            Layout.fillWidth: true
+
+            futureDaysPoints: root.futureDaysPoints
+            metaData: root.metaData
+
+            invalidUnit: root.invalidUnit
+            displayTemperatureUnit: root.displayTemperatureUnit
+        }
+    }
+
+    Component {
+        id: sourceLabel
         Kirigami.UrlButton {
-            id: sourceLabel
-
             Layout.alignment: Qt.AlignBottom | Qt.AlignLeft
 
             wrapMode: Text.WordWrap
@@ -196,58 +248,6 @@ Kirigami.ScrollablePage {
 
             text: !!root.metaData?.credit ? root.metaData.credit : ""
             url: !!root.metaData?.creditURL ? root.metaData.creditURL : ""
-        }
-
-        Component {
-            id: hourlyForecastView
-            HourlyForecastCards {
-                Layout.fillWidth: true
-
-                futureHours: root.futureHours
-                metaData: root.metaData
-
-                invalidUnit: root.invalidUnit
-                displayTemperatureUnit: root.displayTemperatureUnit
-            }
-        }
-
-        Component {
-            id: hourlyForecastGraph
-            HourlyForecastGraph {
-                Layout.fillWidth: true
-
-                futureHoursPoints: root.futureHoursPoints
-                metaData: root.metaData
-
-                invalidUnit: root.invalidUnit
-                displayTemperatureUnit: root.displayTemperatureUnit
-            }
-        }
-
-        Component {
-            id: dayForecastView
-            DayForecastCards {
-                Layout.fillWidth: true
-
-                futureDays: root.futureDays
-                metaData: root.metaData
-
-                invalidUnit: root.invalidUnit
-                displayTemperatureUnit: root.displayTemperatureUnit
-            }
-        }
-
-        Component {
-            id: dayForecastGraph
-            DayForecastGraph {
-                Layout.fillWidth: true
-
-                futureDaysPoints: root.futureDaysPoints
-                metaData: root.metaData
-
-                invalidUnit: root.invalidUnit
-                displayTemperatureUnit: root.displayTemperatureUnit
-            }
         }
     }
 }
