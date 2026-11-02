@@ -101,8 +101,9 @@ Item {
             if (isColumnLoaded(leftColumn)) {
                 columnWidth = implicitColumnWidth(leftColumn);
                 const columnsWidth = columnWidth * root.daysCount;
-                neededColumnSpacing = Math.max((parent.width - verticalHeader.width - columnsWidth) / (root.daysCount + 1), root.minimalSpacing);
-                implicitWidth = columnsWidth + (root.daysCount - 1) * root.minimalSpacing;
+                const spacingCount = root.daysCount + ((!!root.futureDays && root.futureDays.isNightPresent) ? 0 : -1);
+                neededColumnSpacing = Math.max((parent.width - verticalHeader.width - columnsWidth) / spacingCount, root.minimalSpacing);
+                implicitWidth = columnsWidth + spacingCount * root.minimalSpacing;
             } else {
                 neededColumnSpacing = 0;
                 implicitWidth = 0;
@@ -114,8 +115,7 @@ Item {
 
         anchors.topMargin: neededRowSpacing
         anchors.bottomMargin: neededRowSpacing
-        anchors.leftMargin: neededColumnSpacing
-        anchors.rightMargin: neededColumnSpacing
+        anchors.leftMargin: (!!root.futureDays && root.futureDays.isNightPresent) ? neededColumnSpacing : 0
 
         rowSpacing: neededRowSpacing
         columnSpacing: neededColumnSpacing
