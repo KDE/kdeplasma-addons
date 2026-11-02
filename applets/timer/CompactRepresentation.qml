@@ -55,8 +55,18 @@ Item {
         }
     }
 
-    Keys.onUpPressed: if (!running) { adjustTime(15); }
-    Keys.onDownPressed: if (!running) { adjustTime(-15); }
+    function handleKeyPress(event: KeyEvent, handle: bool, increase: bool) : bool {
+        if (handle) {
+            increase ? adjustTime(15) :adjustTime(-15)
+        } else {
+            event.accepted = false
+        }
+    }
+
+    Keys.onUpPressed: event => handleKeyPress(event, !running && !(isVertical && inPanel), true)
+    Keys.onDownPressed: event => handleKeyPress(event, !running && !(isVertical && inPanel), false)
+    Keys.onLeftPressed: event => handleKeyPress(event, !running && isVertical && inPanel, Application.layoutDirection === Qt.RightToLeft)
+    Keys.onRightPressed: event => handleKeyPress(event, !running && isVertical && inPanel, Application.layoutDirection !== Qt.RightToLeft)
 
     function adjustTime(value) {
         const stepsize = Plasmoid.configuration.showSeconds ? 1 : 60
