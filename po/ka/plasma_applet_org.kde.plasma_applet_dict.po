@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-16 00:49+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2025-04-24 04:44+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 3.5\n"
 
-#: qml/AvailableDictSheet.qml:21
+#: qml/AvailableDictSheet.qml:23
 #, kde-format
 msgid "Add More Dictionaries"
 msgstr "მეტი ლექსიკონის დამატება"
@@ -29,40 +29,40 @@ msgctxt "@title"
 msgid "Dictionaries"
 msgstr "ლექსიკონები"
 
-#: qml/ConfigDictionaries.qml:20
+#: qml/ConfigDictionaries.qml:22
 #, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "მეტის დამატება…"
 
-#: qml/ConfigDictionaries.qml:91
+#: qml/ConfigDictionaries.qml:94
 #, kde-format
 msgid "Unable to load dictionary list"
 msgstr "ლექსიკონების სიის ჩატვირთვის პრობლემა"
 
-#: qml/ConfigDictionaries.qml:92 qml/main.qml:200
+#: qml/ConfigDictionaries.qml:95 qml/main.qml:202
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "შეცდომის კოდი: %1 (%2)"
 
-#: qml/ConfigDictionaries.qml:103
+#: qml/ConfigDictionaries.qml:106
 #, kde-format
 msgid "No dictionaries"
 msgstr "ლექსიკონების გარეშე"
 
-#: qml/DictItemDelegate.qml:57
+#: qml/DictItemDelegate.qml:64
 #, kde-format
 msgid "Delete"
 msgstr "წაშლა"
 
-#: qml/main.qml:71
+#: qml/main.qml:72
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "შეიყვანეთ აღსაწერი სიტყვა…"
 
-#: qml/main.qml:199
+#: qml/main.qml:201
 #, kde-format
 msgid "Unable to load definition"
 msgstr "აღწერის ჩატვირთვის შეცდომა"

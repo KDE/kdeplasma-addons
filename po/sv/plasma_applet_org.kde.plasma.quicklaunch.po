@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-09 00:46+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2022-02-05 18:57+0100\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -71,49 +71,59 @@ msgctxt "@info:placeholder"
 msgid "Custom title"
 msgstr "Egen titel"
 
-#: IconItem.qml:181
-#, kde-format
+#: IconItem.qml:184
+#, fuzzy, kde-format
+#| msgid "Launch %1"
+msgctxt "@action:button accessible description"
 msgid "Launch %1"
 msgstr "Starta %1"
 
-#: IconItem.qml:265
+#: IconItem.qml:268
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Add Launcher…"
 msgstr "Lägg till startprogram…"
 
-#: IconItem.qml:271
+#: IconItem.qml:274
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit Launcher…"
 msgstr "Redigera startprogram…"
 
-#: IconItem.qml:277
+#: IconItem.qml:280
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Remove Launcher"
 msgstr "Ta bort startprogram"
 
-#: main.qml:110
-#, kde-format
+#: main.qml:112
+#, fuzzy, kde-format
+#| msgid "Quicklaunch"
+msgctxt "@info:tooltip widget title"
 msgid "Quicklaunch"
 msgstr "Snabbstart"
 
-#: main.qml:111
-#, kde-format
-msgctxt "@info"
+#: main.qml:113
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid "Add launchers by Drag and Drop or by using the context menu."
+msgctxt "@info:tooltip widget subtitle"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr ""
 "Lägg till startprogram med drag och släpp, eller genom att använda den "
 "sammanhangsberoende menyn."
 
-#: main.qml:143
-#, kde-format
+#: main.qml:145
+#, fuzzy, kde-format
+#| msgid "Hide icons"
+msgctxt "@info:tooltip for expander arrow"
 msgid "Hide icons"
 msgstr "Dölj ikoner"
 
-#: main.qml:143
-#, kde-format
+#: main.qml:145
+#, fuzzy, kde-format
+#| msgid "Show hidden icons"
+msgctxt "@info:tooltip for expander arrow"
 msgid "Show hidden icons"
 msgstr "Visa dolda ikoner"
 

@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-31 00:53+0000\n"
-"PO-Revision-Date: 2026-10-28 22:58+0100\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"PO-Revision-Date: 2026-11-02 01:39+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -20,13 +20,13 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 26.08.2\n"
 
-#: CompactRepresentation.qml:136
+#: CompactRepresentation.qml:144
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Pozastavit časovač"
 
-#: CompactRepresentation.qml:136
+#: CompactRepresentation.qml:144
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
@@ -117,10 +117,7 @@ msgid "Add"
 msgstr "Přidat"
 
 #: configTimes.qml:88
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in the widget’s "
-#| "context menu."
+#, kde-format
 msgctxt "@info:usagetip PlaceHolderMessage empty ListView"
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -129,59 +126,50 @@ msgstr ""
 "Pokud sem přidáte předdefinované časovače, zobrazí se v kontextovém menu "
 "widgetu."
 
-#: configTimes.qml:130
-#, fuzzy, kde-format
-#| msgid "Scroll over digits to change time"
+#: configTimes.qml:134
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Rolujte čísly pro změnu času"
 
-#: configTimes.qml:140
-#, fuzzy, kde-format
-#| msgid "Apply"
+#: configTimes.qml:144
+#, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Použít"
 
-#: configTimes.qml:159
-#, fuzzy, kde-format
-#| msgid "Cancel"
+#: configTimes.qml:163
+#, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: configTimes.qml:179
-#, fuzzy, kde-format
-#| msgid "Edit"
+#: configTimes.qml:183
+#, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Upravit"
 
-#: configTimes.qml:200
-#, fuzzy, kde-format
-#| msgid "Delete"
+#: configTimes.qml:204
+#, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Smazat"
 
-#: main.qml:68
-#, fuzzy, kde-format
-#| msgid "%1 is running"
+#: main.qml:40
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 běží"
 
-#: main.qml:70
-#, fuzzy, kde-format
-#| msgid "%1 not running"
+#: main.qml:42
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 neběží"
 
-#: main.qml:74
-#, fuzzy, kde-format
-#| msgid "Remaining time left: %1 second"
-#| msgid_plural "Remaining time left: %1 seconds"
+#: main.qml:46
+#, kde-format
 msgctxt ""
 "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
 "running timer"
@@ -191,11 +179,8 @@ msgstr[0] "Zbývající čas: %1 sekunda"
 msgstr[1] "Zbývající čas: %1 sekundy"
 msgstr[2] "Zbývající čas: %1 sekund"
 
-#: main.qml:75
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use mouse wheel to change digits or choose from predefined timers in the "
-#| "context menu"
+#: main.qml:47
+#, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -204,39 +189,37 @@ msgstr ""
 "Pomocí kolečka myši můžete měnit číslice nebo v kontextovém menu vybrat z "
 "předdefinovaných časovačů"
 
-#: main.qml:92
-#, fuzzy, kde-format
-#| msgid "Timer"
+#: main.qml:84
+#, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Stopky"
 
-#: main.qml:93
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#: main.qml:85
+#, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Časovač skončil"
 
-#: main.qml:134
+#: main.qml:115
 #, kde-format
 msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "&Spustit (%1)"
 
-#: main.qml:135
+#: main.qml:116
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Spustit"
 
-#: main.qml:141
+#: main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Zas&tavit"
 
-#: main.qml:147
+#: main.qml:128
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-30 00:55+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2026-02-04 00:22+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -29,25 +29,25 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "모양"
 
-#: qml/ConfigAppearance.qml:33
+#: qml/ConfigAppearance.qml:36
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "아이콘:"
 
-#: qml/ConfigAppearance.qml:34
+#: qml/ConfigAppearance.qml:37
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "웹사이트의 파비콘"
 
-#: qml/ConfigAppearance.qml:57
+#: qml/ConfigAppearance.qml:60
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "웹 브라우저 아이콘 변경"
 
-#: qml/ConfigAppearance.qml:58
+#: qml/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -57,152 +57,160 @@ msgstr ""
 "현재 아이콘은 %1입니다. 현재 아이콘을 변경하거나 기본 아이콘으로 초기화하려"
 "면 클릭하여 메뉴를 여십시오."
 
-#: qml/ConfigAppearance.qml:62
+#: qml/ConfigAppearance.qml:65
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "아이콘 이름: \"%1\""
 
-#: qml/ConfigAppearance.qml:97
+#: qml/ConfigAppearance.qml:100
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "선택…"
 
-#: qml/ConfigAppearance.qml:99
+#: qml/ConfigAppearance.qml:102
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "웹 브라우저 아이콘 선택"
 
-#: qml/ConfigAppearance.qml:103
+#: qml/ConfigAppearance.qml:106
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "기본 아이콘으로 초기화"
 
-#: qml/ConfigAppearance.qml:118
+#: qml/ConfigAppearance.qml:121
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "탐색 표시줄 표시"
 
-#: qml/ConfigGeneral.qml:22
+#: qml/ConfigGeneral.qml:23
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "마지막으로 방문한 페이지 불러 오기"
 
-#: qml/ConfigGeneral.qml:26
+#: qml/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "시작할 때:"
 
-#: qml/ConfigGeneral.qml:33
+#: qml/ConfigGeneral.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "항상 이 페이지 불러 오기:"
 
-#: qml/ConfigGeneral.qml:65 qml/main.qml:119
+#: qml/ConfigGeneral.qml:66 qml/main.qml:120
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "URL 입력"
 
-#: qml/ConfigGeneral.qml:76
+#: qml/ConfigGeneral.qml:77
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "내용 크기 조정:"
 
-#: qml/ConfigGeneral.qml:80
+#: qml/ConfigGeneral.qml:81
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "고정 배율:"
 
-#: qml/ConfigGeneral.qml:115
+#: qml/ConfigGeneral.qml:116
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "너비가 다음보다 작을 때 자동 크기 조정"
 
-#: qml/ConfigGeneral.qml:151
+#: qml/ConfigGeneral.qml:152
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
 msgstr "브라우저 설정:"
 
-#: qml/ConfigGeneral.qml:155
+#: qml/ConfigGeneral.qml:156
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "사생활 보호 브라우징"
 
-#: qml/main.qml:74
+#: qml/main.qml:75
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "뒤로 이동"
 
-#: qml/main.qml:84
+#: qml/main.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "앞으로 이동"
 
-#: qml/main.qml:95
+#: qml/main.qml:96
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "홈으로 이동"
 
-#: qml/main.qml:100
-#, kde-format
+#: qml/main.qml:101
+#, fuzzy, kde-format
+#| msgid "Open Default URL"
+msgctxt "@action:button accessible description"
 msgid "Open Default URL"
 msgstr "기본 URL 열기"
 
-#: qml/main.qml:155
+#: qml/main.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "이 페이지 불러오기 중지"
 
-#: qml/main.qml:155
+#: qml/main.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "이 페이지 새로 고침"
 
-#: qml/main.qml:169
+#: qml/main.qml:170
 #, kde-format
 msgctxt ""
 "@action:button keep this widget's pop-up open until explicitly dismissed"
 msgid "Keep open"
 msgstr "열린 상태로 유지"
 
-#: qml/main.qml:224
+#: qml/main.qml:225
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "브라우저에서 링크 열기"
 
-#: qml/main.qml:230
+#: qml/main.qml:231
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "링크 주소 복사"
 
-#: qml/main.qml:346
-#, kde-format
-msgctxt "An unwanted popup was blocked"
+#: qml/main.qml:347
+#, fuzzy, kde-format
+#| msgctxt "An unwanted popup was blocked"
+#| msgid "Popup blocked"
+msgctxt "@info:status An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "팝업 차단됨"
 
-#: qml/main.qml:347
-#, kde-format
+#: qml/main.qml:348
+#, fuzzy, kde-format
+#| msgid ""
+#| "Click here to open the following blocked popup:\n"
+#| "%1"
+msgctxt "@info:tooltip, %1 is popup url"
 msgid ""
 "Click here to open the following blocked popup:\n"
 "%1"

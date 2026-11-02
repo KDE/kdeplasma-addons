@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2009-03-11 17:03+0100\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -51,6 +51,9 @@ msgstr "Sekunnen:"
 #: configGeneral.qml:43
 #, fuzzy, kde-format
 #| msgid "Use custom color for active LEDs:"
+msgctxt ""
+"@title:group form label for group of checkboxes with color buttons, e.g. …"
+"Active lights"
 msgid "Use custom color for:"
 msgstr "Egen Klöör för anmaakt LEDs bruken:"
 

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -43,67 +43,94 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "小键盘数字锁定"
 
-#: main.qml:114
-#, kde-format
+#: main.qml:115
+#, fuzzy, kde-format
+#| msgid "Alt is latched"
+msgctxt "@info:tooltip widget subtitle, Alt applies to next press"
 msgid "Alt is latched"
 msgstr "Alt 已锁存"
 
-#: main.qml:116
-#, kde-format
+#: main.qml:117
+#, fuzzy, kde-format
+#| msgid "Alt is locked"
+msgctxt "@info:tooltip widget subtitle, Alt applies until pressed again"
 msgid "Alt is locked"
 msgstr "Alt 已锁定"
 
-#: main.qml:120
-#, kde-format
+#: main.qml:121
+#, fuzzy, kde-format
+#| msgid "Shift is latched"
+msgctxt "@info:tooltip widget subtitle, Shift applies to next press"
 msgid "Shift is latched"
 msgstr "Shift 已锁存"
 
-#: main.qml:122
-#, kde-format
+#: main.qml:123
+#, fuzzy, kde-format
+#| msgid "Shift is locked"
+msgctxt "@info:tooltip widget subtitle, Shift applies until pressed again"
 msgid "Shift is locked"
 msgstr "Shift 已锁定"
 
-#: main.qml:126
-#, kde-format
+#: main.qml:127
+#, fuzzy, kde-format
+#| msgid "Control is latched"
+msgctxt "@info:tooltip widget subtitle, Ctrl applies to next press"
 msgid "Control is latched"
 msgstr "Ctrl 已锁存"
 
-#: main.qml:128
-#, kde-format
+#: main.qml:129
+#, fuzzy, kde-format
+#| msgid "Control is locked"
+msgctxt "@info:tooltip widget subtitle, Ctrl applies until pressed again"
 msgid "Control is locked"
 msgstr "Ctrl 已锁定"
 
-#: main.qml:132
-#, kde-format
+#: main.qml:133
+#, fuzzy, kde-format
+#| msgid "Meta is latched"
+msgctxt "@info:tooltip widget subtitle, Meta applies to next press"
 msgid "Meta is latched"
 msgstr "Meta 已锁存"
 
-#: main.qml:134
-#, kde-format
+#: main.qml:135
+#, fuzzy, kde-format
+#| msgid "Meta is locked"
+msgctxt "@info:tooltip widget subtitle, Meta applies until pressed again"
 msgid "Meta is locked"
 msgstr "Meta 已锁定"
 
-#: main.qml:138
-#, kde-format
+#: main.qml:139
+#, fuzzy, kde-format
+#| msgid "Alt Gr is latched"
+msgctxt "@info:tooltip widget subtitle, AltGr applies to next press"
 msgid "Alt Gr is latched"
 msgstr "Alt Gr 已锁存"
 
-#: main.qml:140
-#, kde-format
+#: main.qml:141
+#, fuzzy, kde-format
+#| msgid "Alt Gr is locked"
+msgctxt "@info:tooltip widget subtitle, AltGr applies until pressed again"
 msgid "Alt Gr is locked"
 msgstr "Alt Gr 已锁定"
 
-#: main.qml:144
-#, kde-format
+#: main.qml:145
+#, fuzzy, kde-format
+#| msgid "Caps Lock activated"
+msgctxt "@info:tooltip widget subtitle, Caps Lock on"
 msgid "Caps Lock activated"
 msgstr "大写锁定激活"
 
-#: main.qml:147
-#, kde-format
+#: main.qml:148
+#, fuzzy, kde-format
+#| msgid "Num Lock activated"
+msgctxt "@info:tooltip widget subtitle, Num Lock on"
 msgid "Num Lock activated"
 msgstr "小键盘数字锁定激活"
 
-#: main.qml:155
-#, kde-format
+#: main.qml:156
+#, fuzzy, kde-format
+#| msgid "No lock keys activated"
+msgctxt ""
+"@info:tooltip widget subtitle, no Lock keys or sticky modifiers active"
 msgid "No lock keys activated"
 msgstr "无激活的锁定键"

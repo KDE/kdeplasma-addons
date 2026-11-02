@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2024-11-05 19:43+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -45,68 +45,95 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Zenb giltz"
 
-#: main.qml:114
-#, kde-format
+#: main.qml:115
+#, fuzzy, kde-format
+#| msgid "Alt is latched"
+msgctxt "@info:tooltip widget subtitle, Alt applies to next press"
 msgid "Alt is latched"
 msgstr "Alt kisketa emanda dago"
 
-#: main.qml:116
-#, kde-format
+#: main.qml:117
+#, fuzzy, kde-format
+#| msgid "Alt is locked"
+msgctxt "@info:tooltip widget subtitle, Alt applies until pressed again"
 msgid "Alt is locked"
 msgstr "Alt giltzatuta dago"
 
-#: main.qml:120
-#, kde-format
+#: main.qml:121
+#, fuzzy, kde-format
+#| msgid "Shift is latched"
+msgctxt "@info:tooltip widget subtitle, Shift applies to next press"
 msgid "Shift is latched"
 msgstr "Maius kisketa emanda dago"
 
-#: main.qml:122
-#, kde-format
+#: main.qml:123
+#, fuzzy, kde-format
+#| msgid "Shift is locked"
+msgctxt "@info:tooltip widget subtitle, Shift applies until pressed again"
 msgid "Shift is locked"
 msgstr "Maius giltzatuta dago"
 
-#: main.qml:126
-#, kde-format
+#: main.qml:127
+#, fuzzy, kde-format
+#| msgid "Control is latched"
+msgctxt "@info:tooltip widget subtitle, Ctrl applies to next press"
 msgid "Control is latched"
 msgstr "Kontrol kisketa emanda dago"
 
-#: main.qml:128
-#, kde-format
+#: main.qml:129
+#, fuzzy, kde-format
+#| msgid "Control is locked"
+msgctxt "@info:tooltip widget subtitle, Ctrl applies until pressed again"
 msgid "Control is locked"
 msgstr "Kontrol giltzatuta dago"
 
-#: main.qml:132
-#, kde-format
+#: main.qml:133
+#, fuzzy, kde-format
+#| msgid "Meta is latched"
+msgctxt "@info:tooltip widget subtitle, Meta applies to next press"
 msgid "Meta is latched"
 msgstr "Meta kisketa emanda dago"
 
-#: main.qml:134
-#, kde-format
+#: main.qml:135
+#, fuzzy, kde-format
+#| msgid "Meta is locked"
+msgctxt "@info:tooltip widget subtitle, Meta applies until pressed again"
 msgid "Meta is locked"
 msgstr "Meta giltzatuta dago"
 
-#: main.qml:138
-#, kde-format
+#: main.qml:139
+#, fuzzy, kde-format
+#| msgid "Alt Gr is latched"
+msgctxt "@info:tooltip widget subtitle, AltGr applies to next press"
 msgid "Alt Gr is latched"
 msgstr "Alt Gr kisketa emanda dago"
 
-#: main.qml:140
-#, kde-format
+#: main.qml:141
+#, fuzzy, kde-format
+#| msgid "Alt Gr is locked"
+msgctxt "@info:tooltip widget subtitle, AltGr applies until pressed again"
 msgid "Alt Gr is locked"
 msgstr "Alt Gr giltzatuta dago"
 
-#: main.qml:144
-#, kde-format
+#: main.qml:145
+#, fuzzy, kde-format
+#| msgid "Caps Lock activated"
+msgctxt "@info:tooltip widget subtitle, Caps Lock on"
 msgid "Caps Lock activated"
 msgstr "«Maius giltz» aktibatuta"
 
-#: main.qml:147
-#, kde-format
+#: main.qml:148
+#, fuzzy, kde-format
+#| msgid "Num Lock activated"
+msgctxt "@info:tooltip widget subtitle, Num Lock on"
 msgid "Num Lock activated"
 msgstr "«Zk giltz» aktibatuta"
 
-#: main.qml:155
-#, kde-format
+#: main.qml:156
+#, fuzzy, kde-format
+#| msgid "No lock keys activated"
+msgctxt ""
+"@info:tooltip widget subtitle, no Lock keys or sticky modifiers active"
 msgid "No lock keys activated"
 msgstr "Giltzatzeko teklak ez daude aktibatuta"
 

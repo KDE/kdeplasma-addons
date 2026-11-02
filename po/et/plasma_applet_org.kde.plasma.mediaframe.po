@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:47+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2019-11-01 22:48+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -29,141 +29,149 @@ msgctxt "@title"
 msgid "Behavior"
 msgstr ""
 
-#: qml/ConfigBehavior.qml:48
-#, kde-format
+#: qml/ConfigBehavior.qml:36
+#, fuzzy, kde-format
+#| msgid "Change picture every:"
+msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Piltide vahetamise sagedus:"
 
-#: qml/ConfigBehavior.qml:65
-#, kde-format
+#: qml/ConfigBehavior.qml:53
+#, fuzzy, kde-format
+#| msgid "Hours"
+msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "tunni järel"
 
-#: qml/ConfigBehavior.qml:79
-#, kde-format
+#: qml/ConfigBehavior.qml:67
+#, fuzzy, kde-format
+#| msgid "Minutes"
+msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr " minuti järel"
 
-#: qml/ConfigBehavior.qml:93
-#, kde-format
+#: qml/ConfigBehavior.qml:81
+#, fuzzy, kde-format
+#| msgid "Seconds"
+msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "sekundi järel"
 
-#: qml/ConfigBehavior.qml:103
+#: qml/ConfigBehavior.qml:91
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Piltidega täitmise režiim:"
 
-#: qml/ConfigBehavior.qml:110
+#: qml/ConfigBehavior.qml:97
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Venitamine"
 
-#: qml/ConfigBehavior.qml:111
+#: qml/ConfigBehavior.qml:98
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "Pilt skaleeritakse raami sobivaks"
 
-#: qml/ConfigBehavior.qml:115
+#: qml/ConfigBehavior.qml:102
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Proportsioon säilitatakse"
 
-#: qml/ConfigBehavior.qml:116
+#: qml/ConfigBehavior.qml:103
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "Pilt skaleeritakse ühetaoliselt täitmiseks ilma kärpimata"
 
-#: qml/ConfigBehavior.qml:120
+#: qml/ConfigBehavior.qml:107
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Proportsioon säilitatakse, kärpimisvõimalus"
 
-#: qml/ConfigBehavior.qml:121
+#: qml/ConfigBehavior.qml:108
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr "Pilt skaleeritakse ühetaoliselt täitmiseks, vajadusel kärbitakse"
 
-#: qml/ConfigBehavior.qml:125
+#: qml/ConfigBehavior.qml:112
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Paanidena"
 
-#: qml/ConfigBehavior.qml:126
+#: qml/ConfigBehavior.qml:113
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Pilti korratakse rõht- ja püstsuunas"
 
-#: qml/ConfigBehavior.qml:130
+#: qml/ConfigBehavior.qml:117
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Paanidena püstsuunas"
 
-#: qml/ConfigBehavior.qml:131
+#: qml/ConfigBehavior.qml:118
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "Pilti venitatakse rõhtsuunas ja paanitakse püstsuunas"
 
-#: qml/ConfigBehavior.qml:135
+#: qml/ConfigBehavior.qml:122
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Paanidena rõhtsuunas"
 
-#: qml/ConfigBehavior.qml:136
+#: qml/ConfigBehavior.qml:123
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "Pilti venitatakse püstsuunas ja paanitakse rõhtsuunas"
 
-#: qml/ConfigBehavior.qml:140
+#: qml/ConfigBehavior.qml:127
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Polster"
 
-#: qml/ConfigBehavior.qml:141
+#: qml/ConfigBehavior.qml:128
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Pilti ei muudeta"
 
-#: qml/ConfigBehavior.qml:186
+#: qml/ConfigBehavior.qml:149
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Üldine:"
 
-#: qml/ConfigBehavior.qml:187
+#: qml/ConfigBehavior.qml:150
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Elemendid juhuslikult"
 
-#: qml/ConfigBehavior.qml:192
+#: qml/ConfigBehavior.qml:155
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "Slaidiseansi peatamine, kui kursor on pildi kohal"
 
-#: qml/ConfigBehavior.qml:197
+#: qml/ConfigBehavior.qml:160
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Pildil klõpsates avaneb pilt välises näitajas"
 
-#: qml/ConfigMedia.qml:27
+#: qml/ConfigMedia.qml:26
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Add Folder..."
@@ -171,7 +179,7 @@ msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Lisa kataloog ..."
 
-#: qml/ConfigMedia.qml:32
+#: qml/ConfigMedia.qml:31
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Add Files..."
@@ -179,44 +187,44 @@ msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Lisa failid ..."
 
-#: qml/ConfigMedia.qml:90
+#: qml/ConfigMedia.qml:83
 #, fuzzy, kde-format
 #| msgid "Remove path"
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Eemalda asukoht"
 
-#: qml/ConfigMedia.qml:100
+#: qml/ConfigMedia.qml:96
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr ""
 
-#: qml/ConfigMedia.qml:101
+#: qml/ConfigMedia.qml:97
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr ""
 
-#: qml/ConfigMedia.qml:107
+#: qml/ConfigMedia.qml:103
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Failide valimine"
 
-#: qml/ConfigMedia.qml:127
+#: qml/ConfigMedia.qml:123
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Kataloogi valimine"
 
-#: qml/main.qml:366
+#: qml/main.qml:362
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr ""
 
-#: qml/main.qml:370 qml/main.qml:380
+#: qml/main.qml:366 qml/main.qml:376
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

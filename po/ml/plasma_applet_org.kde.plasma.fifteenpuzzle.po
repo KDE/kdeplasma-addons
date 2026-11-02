@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:45+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2018-08-16 09:14+0200\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: Swathanthra|സ്വതന്ത്ര Malayalam|മലയാളം Computing|കമ്പ്യൂട്ടിങ്ങ് <smc."
@@ -90,36 +90,38 @@ msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"
 msgstr ""
 
-#: qml/FifteenPuzzle.qml:262
+#: qml/FifteenPuzzle.qml:261
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr ""
 
-#: qml/FifteenPuzzle.qml:320
+#: qml/FifteenPuzzle.qml:319
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr ""
 
-#: qml/FifteenPuzzle.qml:346
+#: qml/FifteenPuzzle.qml:345
 #, kde-format
 msgctxt "@info:status The number of moves made by the player so far"
 msgid "Moves: %1"
 msgstr ""
 
-#: qml/FifteenPuzzle.qml:371
+#: qml/FifteenPuzzle.qml:370
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr ""
 
-#: qml/main.qml:37
+#: qml/main.qml:39
 #, kde-format
+msgctxt "@info:tooltip main title for widget"
 msgid "Fifteen Puzzle"
 msgstr ""
 
-#: qml/main.qml:38
+#: qml/main.qml:40
 #, kde-format
+msgctxt "@info:tooltip subtitle for widget"
 msgid "Solve by arranging in order"
 msgstr ""

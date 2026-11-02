@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:47+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2025-09-06 22:40+0300\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
@@ -31,63 +31,71 @@ msgctxt "@title"
 msgid "Behavior"
 msgstr "Elgsena"
 
-#: qml/ConfigBehavior.qml:48
-#, kde-format
+#: qml/ConfigBehavior.qml:36
+#, fuzzy, kde-format
+#| msgid "Change picture every:"
+msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Keisti paveikslą kas:"
 
-#: qml/ConfigBehavior.qml:65
-#, kde-format
+#: qml/ConfigBehavior.qml:53
+#, fuzzy, kde-format
+#| msgid "Hours"
+msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "val."
 
-#: qml/ConfigBehavior.qml:79
-#, kde-format
+#: qml/ConfigBehavior.qml:67
+#, fuzzy, kde-format
+#| msgid "Minutes"
+msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "min."
 
-#: qml/ConfigBehavior.qml:93
-#, kde-format
+#: qml/ConfigBehavior.qml:81
+#, fuzzy, kde-format
+#| msgid "Seconds"
+msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "sek."
 
-#: qml/ConfigBehavior.qml:103
+#: qml/ConfigBehavior.qml:91
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Paveikslo užpildymo veiksena:"
 
-#: qml/ConfigBehavior.qml:110
+#: qml/ConfigBehavior.qml:97
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Ištempti"
 
-#: qml/ConfigBehavior.qml:111
+#: qml/ConfigBehavior.qml:98
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "Paveikslo mastelis bus pakeistas taip, kad paveikslas užpildytų rėmelį"
 
-#: qml/ConfigBehavior.qml:115
+#: qml/ConfigBehavior.qml:102
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Talpinti, išlaikyti proporcijas"
 
-#: qml/ConfigBehavior.qml:116
+#: qml/ConfigBehavior.qml:103
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "Paveikslo mastelis bus pakeistas tolygiai taip, kad paveikslas tilptų"
 
-#: qml/ConfigBehavior.qml:120
+#: qml/ConfigBehavior.qml:107
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Apkarpyti, išlaikyti proporcijas"
 
-#: qml/ConfigBehavior.qml:121
+#: qml/ConfigBehavior.qml:108
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
@@ -95,127 +103,127 @@ msgstr ""
 "Paveikslo mastelis bus pakeistas tolygiai ir, jei reikia, apkarpytas taip, "
 "kad paveikslas tilptų"
 
-#: qml/ConfigBehavior.qml:125
+#: qml/ConfigBehavior.qml:112
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Iškloti"
 
-#: qml/ConfigBehavior.qml:126
+#: qml/ConfigBehavior.qml:113
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Paveikslas bus kartojamas horizontaliai ir vertikaliai"
 
-#: qml/ConfigBehavior.qml:130
+#: qml/ConfigBehavior.qml:117
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Iškloti vertikaliai"
 
-#: qml/ConfigBehavior.qml:131
+#: qml/ConfigBehavior.qml:118
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "Paveikslas bus ištemptas horizontaliai ir išklotas vertikaliai"
 
-#: qml/ConfigBehavior.qml:135
+#: qml/ConfigBehavior.qml:122
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Iškloti horizontaliai"
 
-#: qml/ConfigBehavior.qml:136
+#: qml/ConfigBehavior.qml:123
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "Paveikslas bus ištemptas vertikaliai ir išklotas horizontaliai"
 
-#: qml/ConfigBehavior.qml:140
+#: qml/ConfigBehavior.qml:127
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Padėti"
 
-#: qml/ConfigBehavior.qml:141
+#: qml/ConfigBehavior.qml:128
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Paveikslas nebus transformuojamas"
 
-#: qml/ConfigBehavior.qml:186
+#: qml/ConfigBehavior.qml:149
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Bendra:"
 
-#: qml/ConfigBehavior.qml:187
+#: qml/ConfigBehavior.qml:150
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Rodyti atsitiktine tvarka"
 
-#: qml/ConfigBehavior.qml:192
+#: qml/ConfigBehavior.qml:155
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "Užvedus pelės žymeklį ant paveikslo, pristabdyti skaidrių rodymą"
 
-#: qml/ConfigBehavior.qml:197
+#: qml/ConfigBehavior.qml:160
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Spustelėjus ant paveikslo, atverti jį naudojant išorinę programą"
 
-#: qml/ConfigMedia.qml:27
+#: qml/ConfigMedia.qml:26
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Pridėti aplanką…"
 
-#: qml/ConfigMedia.qml:32
+#: qml/ConfigMedia.qml:31
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Pridėti failus…"
 
-#: qml/ConfigMedia.qml:90
+#: qml/ConfigMedia.qml:83
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Šalinti kelią"
 
-#: qml/ConfigMedia.qml:100
+#: qml/ConfigMedia.qml:96
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "Nesukonfigūruota jokia medija"
 
-#: qml/ConfigMedia.qml:101
+#: qml/ConfigMedia.qml:97
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "Pridėti failų ar aplankų, kad jie būtų rodomi valdiklyje."
 
-#: qml/ConfigMedia.qml:107
+#: qml/ConfigMedia.qml:103
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Pasirinkite failus"
 
-#: qml/ConfigMedia.qml:127
+#: qml/ConfigMedia.qml:123
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Pasirinkite aplanką"
 
-#: qml/main.qml:366
+#: qml/main.qml:362
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Nepasirinkta jokia medija"
 
-#: qml/main.qml:370 qml/main.qml:380
+#: qml/main.qml:366 qml/main.qml:376
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

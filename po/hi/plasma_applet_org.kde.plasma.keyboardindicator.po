@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2024-12-15 15:57+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -42,67 +42,81 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr ""
 
-#: main.qml:114
+#: main.qml:115
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, Alt applies to next press"
 msgid "Alt is latched"
 msgstr ""
 
-#: main.qml:116
+#: main.qml:117
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, Alt applies until pressed again"
 msgid "Alt is locked"
 msgstr ""
 
-#: main.qml:120
+#: main.qml:121
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, Shift applies to next press"
 msgid "Shift is latched"
 msgstr ""
 
-#: main.qml:122
+#: main.qml:123
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, Shift applies until pressed again"
 msgid "Shift is locked"
 msgstr ""
 
-#: main.qml:126
+#: main.qml:127
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, Ctrl applies to next press"
 msgid "Control is latched"
 msgstr ""
 
-#: main.qml:128
+#: main.qml:129
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, Ctrl applies until pressed again"
 msgid "Control is locked"
 msgstr ""
 
-#: main.qml:132
+#: main.qml:133
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, Meta applies to next press"
 msgid "Meta is latched"
 msgstr ""
 
-#: main.qml:134
+#: main.qml:135
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, Meta applies until pressed again"
 msgid "Meta is locked"
 msgstr ""
 
-#: main.qml:138
+#: main.qml:139
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, AltGr applies to next press"
 msgid "Alt Gr is latched"
 msgstr ""
 
-#: main.qml:140
+#: main.qml:141
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, AltGr applies until pressed again"
 msgid "Alt Gr is locked"
 msgstr ""
 
-#: main.qml:144
+#: main.qml:145
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, Caps Lock on"
 msgid "Caps Lock activated"
 msgstr ""
 
-#: main.qml:147
+#: main.qml:148
 #, kde-format
+msgctxt "@info:tooltip widget subtitle, Num Lock on"
 msgid "Num Lock activated"
 msgstr ""
 
-#: main.qml:155
+#: main.qml:156
 #, kde-format
+msgctxt ""
+"@info:tooltip widget subtitle, no Lock keys or sticky modifiers active"
 msgid "No lock keys activated"
 msgstr ""

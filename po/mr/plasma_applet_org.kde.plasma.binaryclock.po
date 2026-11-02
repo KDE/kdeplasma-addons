@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2013-03-20 17:03+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -48,6 +48,9 @@ msgstr "सेकंद :"
 #: configGeneral.qml:43
 #, fuzzy, kde-format
 #| msgid "Use custom grid color:"
+msgctxt ""
+"@title:group form label for group of checkboxes with color buttons, e.g. …"
+"Active lights"
 msgid "Use custom color for:"
 msgstr "ऐच्छिक जाळे रंग वापरा :"
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-30 00:55+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2026-07-20 00:07+0200\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -30,25 +30,25 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Vzhled"
 
-#: qml/ConfigAppearance.qml:33
+#: qml/ConfigAppearance.qml:36
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "Ikona:"
 
-#: qml/ConfigAppearance.qml:34
+#: qml/ConfigAppearance.qml:37
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "Ikona webových stránek"
 
-#: qml/ConfigAppearance.qml:57
+#: qml/ConfigAppearance.qml:60
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "Změnit ikonu webových stránek"
 
-#: qml/ConfigAppearance.qml:58
+#: qml/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -58,152 +58,160 @@ msgstr ""
 "Současná ikona je %1. Klikněte pro otevření nabídky pro změnu současné ikony "
 "nebo vrácení původní ikony."
 
-#: qml/ConfigAppearance.qml:62
+#: qml/ConfigAppearance.qml:65
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "Název ikony je \"%1\""
 
-#: qml/ConfigAppearance.qml:97
+#: qml/ConfigAppearance.qml:100
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "Vybrat…"
 
-#: qml/ConfigAppearance.qml:99
+#: qml/ConfigAppearance.qml:102
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "Vyberte ikonu pro webový prohlížeč"
 
-#: qml/ConfigAppearance.qml:103
+#: qml/ConfigAppearance.qml:106
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "Obnovit výchozí ikonu"
 
-#: qml/ConfigAppearance.qml:118
+#: qml/ConfigAppearance.qml:121
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "Zobrazit navigační lištu"
 
-#: qml/ConfigGeneral.qml:22
+#: qml/ConfigGeneral.qml:23
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "Načíst naposledy navštívenou stránku"
 
-#: qml/ConfigGeneral.qml:26
+#: qml/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "Při spuštění:"
 
-#: qml/ConfigGeneral.qml:33
+#: qml/ConfigGeneral.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Tuto stránku načítat vždy:"
 
-#: qml/ConfigGeneral.qml:65 qml/main.qml:119
+#: qml/ConfigGeneral.qml:66 qml/main.qml:120
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Napište URL"
 
-#: qml/ConfigGeneral.qml:76
+#: qml/ConfigGeneral.qml:77
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "Měřítko obsahu:"
 
-#: qml/ConfigGeneral.qml:80
+#: qml/ConfigGeneral.qml:81
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "Pevné měřítko:"
 
-#: qml/ConfigGeneral.qml:115
+#: qml/ConfigGeneral.qml:116
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Automatické přizpůsobení velikosti, pokud je šířka menší než"
 
-#: qml/ConfigGeneral.qml:151
+#: qml/ConfigGeneral.qml:152
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
 msgstr "Nastavení prohlížeče:"
 
-#: qml/ConfigGeneral.qml:155
+#: qml/ConfigGeneral.qml:156
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "Soukromé prohlížení"
 
-#: qml/main.qml:74
+#: qml/main.qml:75
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Jít zpět"
 
-#: qml/main.qml:84
+#: qml/main.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "Jít vpřed"
 
-#: qml/main.qml:95
+#: qml/main.qml:96
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "Přejít domů"
 
-#: qml/main.qml:100
-#, kde-format
+#: qml/main.qml:101
+#, fuzzy, kde-format
+#| msgid "Open Default URL"
+msgctxt "@action:button accessible description"
 msgid "Open Default URL"
 msgstr "Otevřít výchozí URL"
 
-#: qml/main.qml:155
+#: qml/main.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Zastavit načítání této stránky"
 
-#: qml/main.qml:155
+#: qml/main.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Obnovit tuto stránku"
 
-#: qml/main.qml:169
+#: qml/main.qml:170
 #, kde-format
 msgctxt ""
 "@action:button keep this widget's pop-up open until explicitly dismissed"
 msgid "Keep open"
 msgstr "Ponechat otevřené"
 
-#: qml/main.qml:224
+#: qml/main.qml:225
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Otevřít odkaz v prohlížeči..."
 
-#: qml/main.qml:230
+#: qml/main.qml:231
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Kopírovat adresu odkazu"
 
-#: qml/main.qml:346
-#, kde-format
-msgctxt "An unwanted popup was blocked"
+#: qml/main.qml:347
+#, fuzzy, kde-format
+#| msgctxt "An unwanted popup was blocked"
+#| msgid "Popup blocked"
+msgctxt "@info:status An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Vyskakovací okno zablokováno"
 
-#: qml/main.qml:347
-#, kde-format
+#: qml/main.qml:348
+#, fuzzy, kde-format
+#| msgid ""
+#| "Click here to open the following blocked popup:\n"
+#| "%1"
+msgctxt "@info:tooltip, %1 is popup url"
 msgid ""
 "Click here to open the following blocked popup:\n"
 "%1"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 11:53+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2024-04-22 21:45+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -44,6 +44,9 @@ msgstr ""
 
 #: configGeneral.qml:43
 #, kde-format
+msgctxt ""
+"@title:group form label for group of checkboxes with color buttons, e.g. …"
+"Active lights"
 msgid "Use custom color for:"
 msgstr ""
 

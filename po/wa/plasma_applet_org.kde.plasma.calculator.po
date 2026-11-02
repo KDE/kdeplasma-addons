@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_calculator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-01 00:56+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2011-01-03 11:01+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux@walon.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: main.qml:128
+#: main.qml:129
 #, kde-format
 msgctxt "@info accessible result of calculation"
 msgid "Result is %1"
 msgstr ""
 
-#: main.qml:230
+#: main.qml:231
 #, kde-format
 msgctxt ""
 "Abbreviation for result (undefined) of division by zero, max. six to nine "
@@ -31,13 +31,13 @@ msgctxt ""
 msgid "undef"
 msgstr ""
 
-#: main.qml:347
+#: main.qml:348
 #, kde-format
 msgctxt "@label calculation result"
 msgid "Result"
 msgstr ""
 
-#: main.qml:378
+#: main.qml:379
 #, fuzzy, kde-format
 #| msgctxt "The C button of the calculator"
 #| msgid "C"
@@ -45,13 +45,13 @@ msgctxt "Text of the clear button"
 msgid "C"
 msgstr "C"
 
-#: main.qml:392
+#: main.qml:393
 #, kde-format
 msgctxt "Text of the division button"
 msgid "÷"
 msgstr ""
 
-#: main.qml:406
+#: main.qml:407
 #, fuzzy, kde-format
 #| msgctxt "The × button of the calculator"
 #| msgid "×"
@@ -59,7 +59,7 @@ msgctxt "Text of the multiplication button"
 msgid "×"
 msgstr "×"
 
-#: main.qml:420
+#: main.qml:421
 #, fuzzy, kde-format
 #| msgctxt "The AC button of the calculator"
 #| msgid "AC"
@@ -67,13 +67,13 @@ msgctxt "Text of the all clear button"
 msgid "AC"
 msgstr "AC"
 
-#: main.qml:474
+#: main.qml:475
 #, kde-format
 msgctxt "Text of the minus button"
 msgid "-"
 msgstr ""
 
-#: main.qml:528
+#: main.qml:529
 #, fuzzy, kde-format
 #| msgctxt "The + button of the calculator"
 #| msgid "+"
@@ -81,7 +81,7 @@ msgctxt "Text of the plus button"
 msgid "+"
 msgstr "+"
 
-#: main.qml:582
+#: main.qml:583
 #, fuzzy, kde-format
 #| msgctxt "The = button of the calculator"
 #| msgid "="

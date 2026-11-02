@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2025-02-06 10:03+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -28,113 +28,117 @@ msgctxt "@title"
 msgid "General"
 msgstr "Général"
 
-#: qml/configGeneral.qml:27
+#: qml/configGeneral.qml:28
 #, kde-format
 msgctxt "@title:label"
 msgid "Username style:"
 msgstr "Style de nom d'utilisateur :"
 
-#: qml/configGeneral.qml:30
+#: qml/configGeneral.qml:31
 #, kde-format
 msgctxt "@option:radio"
 msgid "Full name (if available)"
 msgstr "Nom complet (si disponible)"
 
-#: qml/configGeneral.qml:37
+#: qml/configGeneral.qml:38
 #, kde-format
 msgctxt "@option:radio"
 msgid "Login username"
 msgstr "Identifiant de connexion"
 
-#: qml/configGeneral.qml:55
+#: qml/configGeneral.qml:56
 #, kde-format
 msgctxt "@title:label"
 msgid "Show:"
 msgstr "Afficher :"
 
-#: qml/configGeneral.qml:58
+#: qml/configGeneral.qml:59
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name"
 msgstr "Nom"
 
-#: qml/configGeneral.qml:72
+#: qml/configGeneral.qml:73
 #, kde-format
 msgctxt "@option:radio"
 msgid "User picture"
 msgstr "Image de l'utilisateur"
 
-#: qml/configGeneral.qml:86
+#: qml/configGeneral.qml:87
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name and user picture"
 msgstr "Nom et image de l'utilisateur"
 
-#: qml/configGeneral.qml:105
+#: qml/configGeneral.qml:106
 #, kde-format
 msgctxt "@title:label"
 msgid "Advanced:"
 msgstr "Avancé :"
 
-#: qml/configGeneral.qml:107
+#: qml/configGeneral.qml:108
 #, kde-format
 msgctxt "@option:check"
 msgid "Show technical session information"
 msgstr "Afficher les informations techniques sur la session"
 
 #: qml/main.qml:46
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "You are logged in as <b>%1</b>"
+msgctxt "@info:tooltip widget subtitle"
 msgid "You are logged in as <b>%1</b>"
 msgstr "Vous êtes connectés en tant que <b>%1</b>"
 
 #: qml/main.qml:147
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Current user"
+msgctxt "@item subtitle for current user entry"
 msgid "Current user"
 msgstr "Utilisateur actuel"
 
-#: qml/main.qml:178
+#: qml/main.qml:188
 #, kde-format
 msgctxt "Nobody logged in on that session"
 msgid "Unused"
 msgstr "Inutilisé"
 
-#: qml/main.qml:198
+#: qml/main.qml:208
 #, kde-format
 msgctxt "User logged in on console number"
 msgid "TTY %1"
 msgstr "tty %1"
 
-#: qml/main.qml:200
+#: qml/main.qml:210
 #, kde-format
 msgctxt "User logged in on console (X display number)"
 msgid "on %1 (%2)"
 msgstr "sur %1 (%2)"
 
-#: qml/main.qml:208
+#: qml/main.qml:218
 #, kde-format
 msgctxt "@action:button"
 msgid "Switch to User %1"
 msgstr "Basculer vers l'utilisateur %1"
 
-#: qml/main.qml:220
+#: qml/main.qml:230
 #, kde-format
 msgctxt "@action"
 msgid "New Session"
 msgstr "Nouvelle session"
 
-#: qml/main.qml:235
+#: qml/main.qml:245
 #, kde-format
 msgctxt "@action"
 msgid "Lock Screen"
 msgstr "Verrouiller l'écran"
 
-#: qml/main.qml:247
+#: qml/main.qml:257
 #, kde-format
 msgctxt "Show a dialog with options to logout/shutdown/restart"
 msgid "Show Logout Screen"
 msgstr "Afficher l'écran de déconnexion"
 
-#: qml/UserListDelegate.qml:28
+#: qml/UserListDelegate.qml:27
 #, kde-format
 msgctxt "@action:button @info:tooltip accessible"
 msgid "Open user configuration"

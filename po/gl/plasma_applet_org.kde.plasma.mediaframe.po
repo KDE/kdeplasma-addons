@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 00:47+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2025-05-04 13:40+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -30,64 +30,72 @@ msgctxt "@title"
 msgid "Behavior"
 msgstr ""
 
-#: qml/ConfigBehavior.qml:48
-#, kde-format
+#: qml/ConfigBehavior.qml:36
+#, fuzzy, kde-format
+#| msgid "Change picture every:"
+msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Cambiar a imaxe cada:"
 
-#: qml/ConfigBehavior.qml:65
-#, kde-format
+#: qml/ConfigBehavior.qml:53
+#, fuzzy, kde-format
+#| msgid "Hours"
+msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "Horas"
 
-#: qml/ConfigBehavior.qml:79
-#, kde-format
+#: qml/ConfigBehavior.qml:67
+#, fuzzy, kde-format
+#| msgid "Minutes"
+msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "Minutos"
 
-#: qml/ConfigBehavior.qml:93
-#, kde-format
+#: qml/ConfigBehavior.qml:81
+#, fuzzy, kde-format
+#| msgid "Seconds"
+msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "Segundos"
 
-#: qml/ConfigBehavior.qml:103
+#: qml/ConfigBehavior.qml:91
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Modo de recheo de imaxe:"
 
-#: qml/ConfigBehavior.qml:110
+#: qml/ConfigBehavior.qml:97
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Alongamento"
 
-#: qml/ConfigBehavior.qml:111
+#: qml/ConfigBehavior.qml:98
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "Cambiar o tamaño da imaxe para axustala ao marco."
 
-#: qml/ConfigBehavior.qml:115
+#: qml/ConfigBehavior.qml:102
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Axustar mantendo as proporcións sen cortar"
 
-#: qml/ConfigBehavior.qml:116
+#: qml/ConfigBehavior.qml:103
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr ""
 "Cámbiase o tamaño da imaxe de maneira uniforme para axustala sen recortala."
 
-#: qml/ConfigBehavior.qml:120
+#: qml/ConfigBehavior.qml:107
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Axustar mantendo as proporcións e cortando"
 
-#: qml/ConfigBehavior.qml:121
+#: qml/ConfigBehavior.qml:108
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
@@ -95,121 +103,121 @@ msgstr ""
 "Cámbiase o tamaño da imaxe de maneira uniforme para axustala, e recortala en "
 "caso de ser necesario."
 
-#: qml/ConfigBehavior.qml:125
+#: qml/ConfigBehavior.qml:112
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Teselado"
 
-#: qml/ConfigBehavior.qml:126
+#: qml/ConfigBehavior.qml:113
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Duplicar a imaxe horizontalmente e verticalmente."
 
-#: qml/ConfigBehavior.qml:130
+#: qml/ConfigBehavior.qml:117
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Teselado vertical"
 
-#: qml/ConfigBehavior.qml:131
+#: qml/ConfigBehavior.qml:118
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "Alongar a imaxe horizontalmente e duplicala verticalmente."
 
-#: qml/ConfigBehavior.qml:135
+#: qml/ConfigBehavior.qml:122
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Teselado horizontal"
 
-#: qml/ConfigBehavior.qml:136
+#: qml/ConfigBehavior.qml:123
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "Alongar a imaxe verticalmente e duplicala horizontalmente."
 
-#: qml/ConfigBehavior.qml:140
+#: qml/ConfigBehavior.qml:127
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Encher"
 
-#: qml/ConfigBehavior.qml:141
+#: qml/ConfigBehavior.qml:128
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "A imaxe non se transforma."
 
-#: qml/ConfigBehavior.qml:186
+#: qml/ConfigBehavior.qml:149
 #, kde-format
 msgctxt "@label:checkbox"
 msgid "General:"
 msgstr "Xeral:"
 
-#: qml/ConfigBehavior.qml:187
+#: qml/ConfigBehavior.qml:150
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Ordenar aleatoriamente."
 
-#: qml/ConfigBehavior.qml:192
+#: qml/ConfigBehavior.qml:155
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
 msgstr "Parar a presentación cando o cursor estea sobre a imaxe."
 
-#: qml/ConfigBehavior.qml:197
+#: qml/ConfigBehavior.qml:160
 #, kde-format
 msgctxt "@option:check"
 msgid "Click on image to open in external application"
 msgstr "Prema a imaxe para abrila nunha aplicación externa."
 
-#: qml/ConfigMedia.qml:27
+#: qml/ConfigMedia.qml:26
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Folder…"
 msgstr "Engadir un cartafol…"
 
-#: qml/ConfigMedia.qml:32
+#: qml/ConfigMedia.qml:31
 #, kde-format
 msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Engadir ficheiros…"
 
-#: qml/ConfigMedia.qml:90
+#: qml/ConfigMedia.qml:83
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Retirar a ruta"
 
-#: qml/ConfigMedia.qml:100
+#: qml/ConfigMedia.qml:96
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "Non hai contido multimedia configurado."
 
-#: qml/ConfigMedia.qml:101
+#: qml/ConfigMedia.qml:97
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "Engada ficheiros ou cartafoles para amosalos no trebello."
 
-#: qml/ConfigMedia.qml:107
+#: qml/ConfigMedia.qml:103
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Escoller ficheiros"
 
-#: qml/ConfigMedia.qml:127
+#: qml/ConfigMedia.qml:123
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Seleccionar un cartafol"
 
-#: qml/main.qml:366
+#: qml/main.qml:362
 #, fuzzy, kde-format
 #| msgctxt "@info placeholdermessage if no paths set"
 #| msgid "No media configured"
@@ -217,7 +225,7 @@ msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Non hai contido multimedia configurado."
 
-#: qml/main.qml:370 qml/main.qml:380
+#: qml/main.qml:366 qml/main.qml:376
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

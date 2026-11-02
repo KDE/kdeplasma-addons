@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-31 00:53+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2026-10-31 12:02+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -28,13 +28,13 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: CompactRepresentation.qml:136
+#: CompactRepresentation.qml:144
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Приостановить таймер"
 
-#: CompactRepresentation.qml:136
+#: CompactRepresentation.qml:144
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
@@ -132,49 +132,49 @@ msgid ""
 "menu."
 msgstr "Предустановленные таймеры будут показаны в контекстном меню виджета."
 
-#: configTimes.qml:130
+#: configTimes.qml:134
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Для изменения времени прокручивайте колесо мыши над цифрами"
 
-#: configTimes.qml:140
+#: configTimes.qml:144
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Применить"
 
-#: configTimes.qml:159
+#: configTimes.qml:163
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: configTimes.qml:179
+#: configTimes.qml:183
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Изменить"
 
-#: configTimes.qml:200
+#: configTimes.qml:204
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Удалить"
 
-#: main.qml:68
+#: main.qml:40
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 запущен"
 
-#: main.qml:70
+#: main.qml:42
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 не запущен"
 
-#: main.qml:74
+#: main.qml:46
 #, kde-format
 msgctxt ""
 "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
@@ -186,7 +186,7 @@ msgstr[1] "Оставшееся время: %1 секунды"
 msgstr[2] "Оставшееся время: %1 секунд"
 msgstr[3] "Оставшееся время: %1 секунда"
 
-#: main.qml:75
+#: main.qml:47
 #, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
@@ -196,37 +196,37 @@ msgstr ""
 "Меняйте часы, минуты и секунды прокруткой колеса мыши или выберите одно из "
 "заранее заданных времён в контекстном меню."
 
-#: main.qml:92
+#: main.qml:84
 #, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Таймер"
 
-#: main.qml:93
+#: main.qml:85
 #, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Отсчёт завершён"
 
-#: main.qml:134
+#: main.qml:115
 #, kde-format
 msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "За&пустить (%1)"
 
-#: main.qml:135
+#: main.qml:116
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "За&пустить"
 
-#: main.qml:141
+#: main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "О&становить"
 
-#: main.qml:147
+#: main.qml:128
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

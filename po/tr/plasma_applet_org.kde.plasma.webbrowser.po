@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-30 00:55+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2025-11-24 16:28+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -29,25 +29,25 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Görünüş"
 
-#: qml/ConfigAppearance.qml:33
+#: qml/ConfigAppearance.qml:36
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "Simge:"
 
-#: qml/ConfigAppearance.qml:34
+#: qml/ConfigAppearance.qml:37
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "Web sitesinin simgesi"
 
-#: qml/ConfigAppearance.qml:57
+#: qml/ConfigAppearance.qml:60
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "Tarayıcı Simgesini Değiştir"
 
-#: qml/ConfigAppearance.qml:58
+#: qml/ConfigAppearance.qml:61
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -57,152 +57,160 @@ msgstr ""
 "Geçerli simge %1. Geçerli simgeyi değiştirmek üzere menüyü açmak için "
 "tıklayın veya öntanımlı simgeye geri dönün."
 
-#: qml/ConfigAppearance.qml:62
+#: qml/ConfigAppearance.qml:65
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "Simge adı “%1”"
 
-#: qml/ConfigAppearance.qml:97
+#: qml/ConfigAppearance.qml:100
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "Seç…"
 
-#: qml/ConfigAppearance.qml:99
+#: qml/ConfigAppearance.qml:102
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "Web Tarayıcısı için bir simge seç"
 
-#: qml/ConfigAppearance.qml:103
+#: qml/ConfigAppearance.qml:106
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "Öntanımlı Simgeye Dön"
 
-#: qml/ConfigAppearance.qml:118
+#: qml/ConfigAppearance.qml:121
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "Dolaşım Çubuğunu Görüntüle"
 
-#: qml/ConfigGeneral.qml:22
+#: qml/ConfigGeneral.qml:23
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "Son ziyaret edilen sayfayı aç"
 
-#: qml/ConfigGeneral.qml:26
+#: qml/ConfigGeneral.qml:27
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "Başlangıçta:"
 
-#: qml/ConfigGeneral.qml:33
+#: qml/ConfigGeneral.qml:34
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
 msgstr "Her zaman bu sayfayı yükle:"
 
-#: qml/ConfigGeneral.qml:65 qml/main.qml:119
+#: qml/ConfigGeneral.qml:66 qml/main.qml:120
 #, kde-format
 msgctxt "@info"
 msgid "Type a URL"
 msgstr "Bir URL Gir"
 
-#: qml/ConfigGeneral.qml:76
+#: qml/ConfigGeneral.qml:77
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "İçerik ölçeklendirme:"
 
-#: qml/ConfigGeneral.qml:80
+#: qml/ConfigGeneral.qml:81
 #, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale:"
 msgstr "Sabit ölçek:"
 
-#: qml/ConfigGeneral.qml:115
+#: qml/ConfigGeneral.qml:116
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "Genişlik şunun altındaysa otomatik ölçeklendirme:"
 
-#: qml/ConfigGeneral.qml:151
+#: qml/ConfigGeneral.qml:152
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
 msgstr "Tarayıcı ayarları:"
 
-#: qml/ConfigGeneral.qml:155
+#: qml/ConfigGeneral.qml:156
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
 msgstr "Gizli tarama kipi"
 
-#: qml/main.qml:74
+#: qml/main.qml:75
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Back"
 msgstr "Geri Git"
 
-#: qml/main.qml:84
+#: qml/main.qml:85
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Forward"
 msgstr "İleri Git"
 
-#: qml/main.qml:95
+#: qml/main.qml:96
 #, kde-format
 msgctxt "@action:button"
 msgid "Go Home"
 msgstr "Ana Sayfaya Git"
 
-#: qml/main.qml:100
-#, kde-format
+#: qml/main.qml:101
+#, fuzzy, kde-format
+#| msgid "Open Default URL"
+msgctxt "@action:button accessible description"
 msgid "Open Default URL"
 msgstr "Öntanımlı URL’yi Aç"
 
-#: qml/main.qml:155
+#: qml/main.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Stop Loading This Page"
 msgstr "Bu Sayfayı Yüklemeyi Durdur"
 
-#: qml/main.qml:155
+#: qml/main.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Reload This Page"
 msgstr "Bu Sayfayı Yeniden Yükle"
 
-#: qml/main.qml:169
+#: qml/main.qml:170
 #, kde-format
 msgctxt ""
 "@action:button keep this widget's pop-up open until explicitly dismissed"
 msgid "Keep open"
 msgstr "Açık tut"
 
-#: qml/main.qml:224
+#: qml/main.qml:225
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Open Link in Browser"
 msgstr "Bağlantıyı Tarayıcıda Aç"
 
-#: qml/main.qml:230
+#: qml/main.qml:231
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy Link Address"
 msgstr "Bağlantı Adresini Kopyala"
 
-#: qml/main.qml:346
-#, kde-format
-msgctxt "An unwanted popup was blocked"
+#: qml/main.qml:347
+#, fuzzy, kde-format
+#| msgctxt "An unwanted popup was blocked"
+#| msgid "Popup blocked"
+msgctxt "@info:status An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Açılır pencere engellendi"
 
-#: qml/main.qml:347
-#, kde-format
+#: qml/main.qml:348
+#, fuzzy, kde-format
+#| msgid ""
+#| "Click here to open the following blocked popup:\n"
+#| "%1"
+msgctxt "@info:tooltip, %1 is popup url"
 msgid ""
 "Click here to open the following blocked popup:\n"
 "%1"

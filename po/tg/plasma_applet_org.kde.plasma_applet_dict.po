@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-16 00:49+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2019-09-26 17:53+0500\n"
 "Last-Translator: Victor Ibragimov <victor.ibragimov@gmail.com>\n"
 "Language-Team: English <kde-i18n-doc@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 19.04.3\n"
 
-#: qml/AvailableDictSheet.qml:21
+#: qml/AvailableDictSheet.qml:23
 #, fuzzy, kde-format
 #| msgctxt "@title"
 #| msgid "Dictionaries"
@@ -30,38 +30,38 @@ msgctxt "@title"
 msgid "Dictionaries"
 msgstr "Луғатҳо"
 
-#: qml/ConfigDictionaries.qml:20
+#: qml/ConfigDictionaries.qml:22
 #, kde-format
 msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr ""
 
-#: qml/ConfigDictionaries.qml:91
+#: qml/ConfigDictionaries.qml:94
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox"
 #| msgid "Available dictionaries:"
 msgid "Unable to load dictionary list"
 msgstr "Луғатҳои дастрас:"
 
-#: qml/ConfigDictionaries.qml:92 qml/main.qml:200
+#: qml/ConfigDictionaries.qml:95 qml/main.qml:202
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr ""
 
-#: qml/ConfigDictionaries.qml:103
+#: qml/ConfigDictionaries.qml:106
 #, fuzzy, kde-format
 #| msgctxt "@title"
 #| msgid "Dictionaries"
 msgid "No dictionaries"
 msgstr "Луғатҳо"
 
-#: qml/DictItemDelegate.qml:57
+#: qml/DictItemDelegate.qml:64
 #, kde-format
 msgid "Delete"
 msgstr ""
 
-#: qml/main.qml:71
+#: qml/main.qml:72
 #, fuzzy, kde-format
 #| msgctxt "@info:placeholder"
 #| msgid "Enter word to define here"
@@ -69,7 +69,7 @@ msgctxt "@info:placeholder"
 msgid "Enter word to define here…"
 msgstr "Барои муайян кардани калима онро дар ин ҷо ворид намоед"
 
-#: qml/main.qml:199
+#: qml/main.qml:201
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox"
 #| msgid "Available dictionaries:"

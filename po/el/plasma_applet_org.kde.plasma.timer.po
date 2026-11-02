@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-31 00:53+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2015-11-26 15:37+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -21,14 +21,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 2.0\n"
 
-#: CompactRepresentation.qml:136
+#: CompactRepresentation.qml:144
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Χρονόμετρο"
 
-#: CompactRepresentation.qml:136
+#: CompactRepresentation.qml:144
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
@@ -132,51 +132,51 @@ msgid ""
 "menu."
 msgstr ""
 
-#: configTimes.qml:130
+#: configTimes.qml:134
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr ""
 
-#: configTimes.qml:140
+#: configTimes.qml:144
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr ""
 
-#: configTimes.qml:159
+#: configTimes.qml:163
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr ""
 
-#: configTimes.qml:179
+#: configTimes.qml:183
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr ""
 
-#: configTimes.qml:200
+#: configTimes.qml:204
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr ""
 
-#: main.qml:68
+#: main.qml:40
 #, fuzzy, kde-format
 #| msgid "%1 is running"
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "Το %1 εκτελείται"
 
-#: main.qml:70
+#: main.qml:42
 #, fuzzy, kde-format
 #| msgid "%1 not running"
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "Το %1 δεν εκτελείται"
 
-#: main.qml:74
+#: main.qml:46
 #, fuzzy, kde-format
 #| msgid "Remaining time left: %1 second"
 #| msgid_plural "Remaining time left: %1 seconds"
@@ -188,7 +188,7 @@ msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Υπολειπόμενος χρόνος: %1 δευτερόλεπτο"
 msgstr[1] "Υπολειπόμενος χρόνος: %1 δευτερόλεπτα"
 
-#: main.qml:75
+#: main.qml:47
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -201,21 +201,21 @@ msgstr ""
 "Χρησιμοποιήστε τη ροδέλα του ποντικιού για να αλλάξετε τα ψηφία ή επιλέξτε "
 "από τα προκαθορισμένα χρονόμετρα στο βοηθητικό μενού"
 
-#: main.qml:92
+#: main.qml:84
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Χρονόμετρο"
 
-#: main.qml:93
+#: main.qml:85
 #, fuzzy, kde-format
 #| msgid "Timer finished"
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Ολοκλήρωση χρονομέτρου"
 
-#: main.qml:134
+#: main.qml:115
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "&Start"
@@ -223,19 +223,19 @@ msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "&Εκκίνηση"
 
-#: main.qml:135
+#: main.qml:116
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Εκκίνηση"
 
-#: main.qml:141
+#: main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Σ&ταμάτημα"
 
-#: main.qml:147
+#: main.qml:128
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

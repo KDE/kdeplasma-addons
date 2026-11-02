@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-31 00:53+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2022-06-07 14:58+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -18,14 +18,14 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Lokalize 22.04.1\n"
 
-#: CompactRepresentation.qml:136
+#: CompactRepresentation.qml:144
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Timer"
 
-#: CompactRepresentation.qml:136
+#: CompactRepresentation.qml:144
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
@@ -137,56 +137,56 @@ msgstr ""
 "Jika kamu menambahkan prasetel timer di sini, timer tersebut akan muncul di "
 "menu konteks plasmoid."
 
-#: configTimes.qml:130
+#: configTimes.qml:134
 #, fuzzy, kde-format
 #| msgid "Scroll over digits to change time"
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Gulir ke atas digit untuk mengubah waktu"
 
-#: configTimes.qml:140
+#: configTimes.qml:144
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Terapkan"
 
-#: configTimes.qml:159
+#: configTimes.qml:163
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Batal"
 
-#: configTimes.qml:179
+#: configTimes.qml:183
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Edit"
 
-#: configTimes.qml:200
+#: configTimes.qml:204
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Hapus"
 
-#: main.qml:68
+#: main.qml:40
 #, fuzzy, kde-format
 #| msgid "%1 is running"
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 telah berjalan"
 
-#: main.qml:70
+#: main.qml:42
 #, fuzzy, kde-format
 #| msgid "%1 not running"
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 tidak berjalan"
 
-#: main.qml:74
+#: main.qml:46
 #, fuzzy, kde-format
 #| msgid "Remaining time left: %1 second"
 #| msgid_plural "Remaining time left: %1 seconds"
@@ -198,7 +198,7 @@ msgid_plural "Remaining time left: %1 seconds"
 msgstr[0] "Sisa waktu tinggal: %1 detik"
 msgstr[1] "Sisa waktu tinggal: %1 detik"
 
-#: main.qml:75
+#: main.qml:47
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -211,21 +211,21 @@ msgstr ""
 "Gunakan roda mouse untuk mengubah digit atau memilih dari prasetel timer di "
 "dalam menu konteks"
 
-#: main.qml:92
+#: main.qml:84
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Timer"
 
-#: main.qml:93
+#: main.qml:85
 #, fuzzy, kde-format
 #| msgid "Timer finished"
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Timer selesai"
 
-#: main.qml:134
+#: main.qml:115
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "&Start"
@@ -233,19 +233,19 @@ msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "&Mulai"
 
-#: main.qml:135
+#: main.qml:116
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Mulai"
 
-#: main.qml:141
+#: main.qml:122
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Hen&tikan"
 
-#: main.qml:147
+#: main.qml:128
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

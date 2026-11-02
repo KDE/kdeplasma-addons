@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:45+0000\n"
+"POT-Creation-Date: 2026-11-02 00:56+0000\n"
 "PO-Revision-Date: 2026-10-04 17:03+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -95,36 +95,40 @@ msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"
 msgstr "Sakrij na pozadini sa slikom"
 
-#: qml/FifteenPuzzle.qml:262
+#: qml/FifteenPuzzle.qml:261
 #, kde-format
 msgctxt "The time since the puzzle started, in minutes and seconds"
 msgid "Time: %1"
 msgstr "Vreme: %1"
 
-#: qml/FifteenPuzzle.qml:320
+#: qml/FifteenPuzzle.qml:319
 #, kde-format
 msgctxt "@action:button"
 msgid "Shuffle"
 msgstr "Promešaj"
 
-#: qml/FifteenPuzzle.qml:346
+#: qml/FifteenPuzzle.qml:345
 #, kde-format
 msgctxt "@info:status The number of moves made by the player so far"
 msgid "Moves: %1"
 msgstr "Poteza: %1"
 
-#: qml/FifteenPuzzle.qml:371
+#: qml/FifteenPuzzle.qml:370
 #, kde-format
 msgctxt "@info"
 msgid "Solved! Try again."
 msgstr "Rešeno! Probajte opet."
 
-#: qml/main.qml:37
-#, kde-format
+#: qml/main.qml:39
+#, fuzzy, kde-format
+#| msgid "Fifteen Puzzle"
+msgctxt "@info:tooltip main title for widget"
 msgid "Fifteen Puzzle"
 msgstr "Petnaestica"
 
-#: qml/main.qml:38
-#, kde-format
+#: qml/main.qml:40
+#, fuzzy, kde-format
+#| msgid "Solve by arranging in order"
+msgctxt "@info:tooltip subtitle for widget"
 msgid "Solve by arranging in order"
 msgstr "Reši raspoređivanjem po redosledu"
