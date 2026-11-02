@@ -39,8 +39,13 @@ Kirigami.ScrollablePage {
 
     background: null
 
-    implicitWidth: Math.max(stackedView.dayItem?.implicitWidth ?? 0, stackedView.hourlyItem?.implicitWidth ?? 0, topPanel.implicitWidth) + rightPadding + leftPadding
-    implicitHeight: topPanel.implicitHeight + ((!!stackedView.dayItem && !!stackedView.hourlyItem) ? tabbedView.implicitHeight : stackedView.implicitHeight) + sourceLabel.implicitHeight + weather.spacing * (weather.children.length - 2) + topPadding + bottomPadding
+    implicitWidth: Math.max(stackedView.dayItem?.implicitWidth ?? 0, stackedView.hourlyItem?.implicitWidth ?? 0, topPanel.implicitWidth, locationHeader.implicitWidth) + rightPadding + leftPadding
+
+    readonly property bool hasTabbedView: !!stackedView.dayItem && !!stackedView.hourlyItem
+
+    readonly property real contentImplicitHeight: locationHeader.implicitHeight + topPanel.implicitHeight + (hasTabbedView ? tabbedView.implicitHeight : stackedView.implicitHeight) + sourceLabel.implicitHeight
+
+    implicitHeight: contentImplicitHeight + weather.spacing * (weather.children.length - 2) + topPadding + bottomPadding
 
     topPadding: 0
     bottomPadding: 0
@@ -119,14 +124,26 @@ Kirigami.ScrollablePage {
 
         spacing: 0
 
+        LocationHeader {
+            id: locationHeader
+            visible: !!root.station
+
+            station: root.station
+            warnings: root.warnings
+
+            onOpenWarnings: root.openWarnings()
+
+            Layout.fillWidth: true
+            Layout.alignment: Qt.AlignTop
+        }
+
         TopPanel {
             id: topPanel
-            visible: !!root.station || !!root.lastObservation
+            visible: !!root.lastObservation
 
             station: root.station
             lastObservation: root.lastObservation
             metaData: root.metaData
-            warnings: root.warnings
             futureDays: root.futureDays
 
             invalidUnit: root.invalidUnit
@@ -135,11 +152,7 @@ Kirigami.ScrollablePage {
             displayVisibilityUnit: root.displayVisibilityUnit
             displayTemperatureUnit: root.displayTemperatureUnit
 
-            Layout.alignment: Qt.AlignTop
-
             Layout.fillWidth: true
-
-            onOpenWarnings: root.openWarnings()
         }
 
         StackedView {

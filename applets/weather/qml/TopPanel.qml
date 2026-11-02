@@ -10,7 +10,6 @@ import QtQuick.Layouts
 
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents
-import org.kde.plasma.core as PlasmaCore
 
 ColumnLayout {
     id: root
@@ -18,7 +17,6 @@ ColumnLayout {
     property var metaData: null
     property var lastObservation: null
     property var station: null
-    property var warnings: null
     property var futureDays: null
 
     property int invalidUnit: 0
@@ -28,8 +26,6 @@ ColumnLayout {
     property int displayPressureUnit: 0
 
     readonly property bool isTemperaturePresent: !!root.lastObservation?.temperature && !!root.metaData?.temperatureUnit
-
-    signal openWarnings
 
     function feelsLikeTemperature(windchill, heatIndex, humidex) {
         if (!root.isTemperaturePresent) {
@@ -54,40 +50,7 @@ ColumnLayout {
 
     readonly property int sideWidth: Math.max(tempLabel.implicitWidth, detailsView.implicitWidth)
 
-    Layout.minimumWidth: Math.max(Math.min(locationLabel.implicitWidth, Kirigami.Units.gridUnit * 10), (sideWidth + spacing) * 2 + Kirigami.Units.iconSizes.huge)
-
-    RowLayout {
-        Layout.fillWidth: true
-        spacing: Kirigami.Units.smallSpacing
-
-        Kirigami.Heading {
-            id: locationLabel
-
-            Layout.fillWidth: true
-
-            visible: !!root.station?.place
-
-            elide: Text.ElideRight
-            text: visible ? root.station.place : ""
-            textFormat: Text.PlainText
-
-            PlasmaCore.ToolTipArea {
-                anchors.fill: parent
-                mainText: locationLabel.text
-                active: locationLabel.truncated
-            }
-        }
-
-        PlasmaComponents.Button {
-            Layout.alignment: Qt.AlignRight
-            text: !!root.warnings ? i18ncp("@title:tab %1 is the number of weather notices (alerts, warnings, watches, ...) issued", "%1 Notice", "%1 Notices", root.warnings.count) : ""
-            icon.name: !!root.warnings && root.warnings.maxPriorityCount >= 2 ? 'data-warning-symbolic' : 'data-information-symbolic'
-            visible: !!root.warnings && root.warnings.count !== 0
-            flat: true
-
-            onClicked: root.openWarnings()
-        }
-    }
+    Layout.minimumWidth: Math.max(Kirigami.Units.gridUnit * 10, (sideWidth + spacing) * 2 + Kirigami.Units.iconSizes.huge)
 
     RowLayout {
         Layout.fillWidth: true
