@@ -153,7 +153,7 @@ PlasmoidItem {
         id: nextTimer
         interval: (Plasmoid.configuration.interval*1000)
         repeat: true
-        running: main.hasItems && !main.pause
+        running: main.itemCount > 1 && !main.pause
         onTriggered: main.nextItem()
     }
 
