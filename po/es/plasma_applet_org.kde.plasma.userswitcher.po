@@ -1,15 +1,15 @@
 # Spanish translations for plasma_applet_org.kde.plasma.userswitcher.po package.
-# Copyright (C) 2015-2025 This file is copyright:
+# Copyright (C) 2015-2026 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Automatically generated, 2015.
 #
-# SPDX-FileCopyrightText: 2015, 2016, 2018, 2019, 2021, 2022, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2015-2016, 2018-2019, 2021-2022, 2024-2026 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2025-05-13 21:12+0100\n"
+"PO-Revision-Date: 2026-11-03 00:29+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.1\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: qml/config.qml:11
 #, kde-format
@@ -80,15 +80,13 @@ msgid "Show technical session information"
 msgstr "Mostrar información técnica sobre la sesión"
 
 #: qml/main.qml:46
-#, fuzzy, kde-format
-#| msgid "You are logged in as <b>%1</b>"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle"
 msgid "You are logged in as <b>%1</b>"
 msgstr "Ha iniciado sesión como <b>%1</b>"
 
 #: qml/main.qml:147
-#, fuzzy, kde-format
-#| msgid "Current user"
+#, kde-format
 msgctxt "@item subtitle for current user entry"
 msgid "Current user"
 msgstr "Usuario actual"

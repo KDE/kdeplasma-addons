@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2025-05-17 19:08+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -22,7 +22,9 @@ msgstr ""
 "X-Generator: Lokalize 25.04.1\n"
 
 #: qml/AvailableDictSheet.qml:23
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Add More Dictionaries"
+msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
 msgstr "Gehitu hiztegia gehiago"
 
@@ -39,7 +41,9 @@ msgid "Add More…"
 msgstr "Gehitu gehiago…"
 
 #: qml/ConfigDictionaries.qml:94
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to load dictionary list"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "Ezin du hiztegi-zerrenda zamatu:"
 
@@ -50,12 +54,17 @@ msgid "Error code: %1 (%2)"
 msgstr "Errore kodea: %1 (%2)"
 
 #: qml/ConfigDictionaries.qml:106
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "No dictionaries"
+msgctxt ""
+"@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
 msgstr "Hiztegirik ez"
 
 #: qml/DictItemDelegate.qml:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete"
+msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr "Ezabatu"
 
@@ -66,7 +75,9 @@ msgid "Enter word to define here…"
 msgstr "Sartu hemen definitu beharreko hitza..."
 
 #: qml/main.qml:201
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to load definition"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
 msgstr "Ezin du definizioa zamatu"
 

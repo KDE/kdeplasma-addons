@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-22 00:52+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2026-09-23 06:56+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -800,6 +800,15 @@ msgid ""
 "link>."
 msgstr ""
 
+#: qml/LocationHeader.qml:48
+#, kde-format
+msgctxt ""
+"@title:tab %1 is the number of weather notices (alerts, warnings, "
+"watches, ...) issued"
+msgid "%1 Notice"
+msgid_plural "%1 Notices"
+msgstr[0] "%1 ئۇقتۇرۇش"
+
 #: qml/main.qml:82
 #, kde-format
 msgctxt "Wind condition"
@@ -856,7 +865,7 @@ msgctxt "@action:button"
 msgid "Show more information"
 msgstr "تېخىمۇ كۆپ ئۇچۇرنى كۆرسەت"
 
-#: qml/StackedView.qml:51
+#: qml/StackedView.qml:56
 #, fuzzy, kde-format
 #| msgctxt "@title:tab Weather forecast"
 #| msgid "Forecast"
@@ -864,7 +873,7 @@ msgctxt "@title"
 msgid "Hourly Forecast"
 msgstr "ئالدىن مەلۇمات"
 
-#: qml/StackedView.qml:81
+#: qml/StackedView.qml:86
 #, fuzzy, kde-format
 #| msgctxt "@title:tab Weather forecast"
 #| msgid "Forecast"
@@ -872,13 +881,13 @@ msgctxt "@title %1 is a number of days"
 msgid "%1-Day Forecast"
 msgstr "ئالدىن مەلۇمات"
 
-#: qml/TabbedView.qml:40
+#: qml/TabbedView.qml:62
 #, kde-format
 msgctxt "@title:tab"
 msgid "Hourly"
 msgstr ""
 
-#: qml/TabbedView.qml:55
+#: qml/TabbedView.qml:77
 #, fuzzy, kde-format
 #| msgctxt "Forecast period timeframe"
 #| msgid "1 Day"
@@ -888,16 +897,7 @@ msgid "%1 Day"
 msgid_plural "%1 Days"
 msgstr[0] "%1 كۈن"
 
-#: qml/TopPanel.qml:83
-#, kde-format
-msgctxt ""
-"@title:tab %1 is the number of weather notices (alerts, warnings, "
-"watches, ...) issued"
-msgid "%1 Notice"
-msgid_plural "%1 Notices"
-msgstr[0] "%1 ئۇقتۇرۇش"
-
-#: qml/TopPanel.qml:170
+#: qml/TopPanel.qml:129
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
@@ -906,26 +906,26 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "بەدەن سېزىمى %1"
 
-#: qml/WeatherPage.qml:96
+#: qml/WeatherPage.qml:95
 #, fuzzy, kde-format
 #| msgid "Today"
 msgctxt "@label"
 msgid "Today"
 msgstr "بۈگۈن"
 
-#: qml/WeatherPage.qml:98
+#: qml/WeatherPage.qml:97
 #, kde-format
 msgctxt "@label"
 msgid "Tomorrow"
 msgstr ""
 
-#: qml/WeatherPage.qml:104
+#: qml/WeatherPage.qml:103
 #, kde-format
 msgctxt "@label"
 msgid "Today to Tomorrow"
 msgstr ""
 
-#: qml/WeatherPage.qml:106
+#: qml/WeatherPage.qml:105
 #, fuzzy, kde-format
 #| msgid "Today"
 msgctxt "@label %1 is a day of the week"

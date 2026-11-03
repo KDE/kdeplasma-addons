@@ -1,24 +1,24 @@
 # Spanish translations for plasma_applet_org.kde.plasma.notes.po package.
-# Copyright (C) 2007-2025 This file is copyright:
+# Copyright (C) 2007-2026 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# SPDX-FileCopyrightText: 2007, 2008 Santiago Fernández Sancho <santi@kde-es.org>
-# SPDX-FileCopyrightText: 2007, 2008, 2009 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
+# SPDX-FileCopyrightText: 2007-2008 Santiago Fernández Sancho <santi@kde-es.org>
+# SPDX-FileCopyrightText: 2007-2009 Enrique Matias Sanchez (aka Quique) <cronopios@gmail.com>
 # SPDX-FileCopyrightText: 2012 Javier Viñal <fjvinal@gmail.com>
-# SPDX-FileCopyrightText: 2015, 2018, 2019, 2021, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2015, 2018-2019, 2021, 2023, 2025-2026 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2025-05-13 21:10+0100\n"
+"PO-Revision-Date: 2026-11-03 00:28+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 26.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #: qml/config.qml:13
@@ -28,127 +28,109 @@ msgid "Appearance"
 msgstr "Aspecto visual"
 
 #: qml/configAppearance.qml:32
-#, fuzzy, kde-format
-#| msgid "%1pt"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is font size in points"
 msgid "%1pt"
-msgstr "%1pt"
+msgstr "%1 pt"
 
 #: qml/configAppearance.qml:38
-#, fuzzy, kde-format
-#| msgid "Text font size:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Text font size:"
 msgstr "Tamaño del texto:"
 
 #: qml/configAppearance.qml:72
-#, fuzzy, kde-format
-#| msgid "A white sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A white sticky note"
 msgstr "Una nota adhesiva de color blanco"
 
 #: qml/configAppearance.qml:73
-#, fuzzy, kde-format
-#| msgid "A black sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A black sticky note"
 msgstr "Una nota adhesiva de color negro"
 
 #: qml/configAppearance.qml:74
-#, fuzzy, kde-format
-#| msgid "A red sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A red sticky note"
 msgstr "Una nota adhesiva de color rojo"
 
 #: qml/configAppearance.qml:75
-#, fuzzy, kde-format
-#| msgid "An orange sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "An orange sticky note"
 msgstr "Una nota adhesiva de color naranja"
 
 #: qml/configAppearance.qml:76
-#, fuzzy, kde-format
-#| msgid "A yellow sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A yellow sticky note"
 msgstr "Una nota adhesiva de color amarillo"
 
 #: qml/configAppearance.qml:77
-#, fuzzy, kde-format
-#| msgid "A green sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A green sticky note"
 msgstr "Una nota adhesiva de color verde"
 
 #: qml/configAppearance.qml:78
-#, fuzzy, kde-format
-#| msgid "A blue sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A blue sticky note"
 msgstr "Una nota adhesiva de color azul"
 
 #: qml/configAppearance.qml:79
-#, fuzzy, kde-format
-#| msgid "A pink sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A pink sticky note"
 msgstr "Una nota adhesiva de color rosa"
 
 #: qml/configAppearance.qml:80
-#, fuzzy, kde-format
-#| msgid "A transparent sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note"
 msgstr "Una nota adhesiva transparente"
 
 #: qml/configAppearance.qml:81
-#, fuzzy, kde-format
-#| msgid "A transparent sticky note with light text"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note with light text"
 msgstr "Una nota adhesiva transparente con texto claro"
 
 #: qml/main.qml:308
-#, fuzzy, kde-format
-#| msgid "Undo"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Undo"
 msgstr "Deshacer"
 
 #: qml/main.qml:316
-#, fuzzy, kde-format
-#| msgid "Redo"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Redo"
 msgstr "Rehacer"
 
 #: qml/main.qml:326
-#, fuzzy, kde-format
-#| msgid "Cut"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Cut"
 msgstr "Cortar"
 
 #: qml/main.qml:334
-#, fuzzy, kde-format
-#| msgid "Copy"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
 msgstr "Copiar"
 
 #: qml/main.qml:342
-#, fuzzy, kde-format
-#| msgid "Paste"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Paste"
 msgstr "Pegar"
 
 #: qml/main.qml:348
-#, fuzzy, kde-format
-#| msgid "Paste with Full Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Paste with Full Formatting"
 msgstr "Pegar con formato completo"
@@ -160,22 +142,19 @@ msgid "Remove Formatting"
 msgstr "Eliminar formato"
 
 #: qml/main.qml:370
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Borrar"
 
 #: qml/main.qml:377
-#, fuzzy, kde-format
-#| msgid "Clear"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Clear"
 msgstr "Borrar todo"
 
 #: qml/main.qml:387
-#, fuzzy, kde-format
-#| msgid "Select All"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select All"
 msgstr "Seleccionar todo"
@@ -211,15 +190,13 @@ msgid "Keep Open"
 msgstr "Mantener abierto"
 
 #: qml/main.qml:662
-#, fuzzy, kde-format
-#| msgid "Discard this note?"
+#, kde-format
 msgctxt "@title;window dialog title"
 msgid "Discard this note?"
 msgstr "¿Descartar esta nota?"
 
 #: qml/main.qml:663
-#, fuzzy, kde-format
-#| msgid "Are you sure you want to discard this note?"
+#, kde-format
 msgctxt "@info"
 msgid "Are you sure you want to discard this note?"
 msgstr "¿Seguro que desea descartar esta nota?"

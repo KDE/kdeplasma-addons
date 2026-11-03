@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2025-05-29 21:30+0200\n"
-"Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
+"PO-Revision-Date: 2026-11-02 07:45+0200\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -51,8 +51,7 @@ msgid "Seconds"
 msgstr "Секунды"
 
 #: configGeneral.qml:43
-#, fuzzy, kde-format
-#| msgid "Use custom color for:"
+#, kde-format
 msgctxt ""
 "@title:group form label for group of checkboxes with color buttons, e.g. …"
 "Active lights"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2026-01-27 19:38+0300\n"
+"PO-Revision-Date: 2026-11-02 07:45+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -32,29 +32,25 @@ msgid "Behavior"
 msgstr "Поведение"
 
 #: qml/ConfigBehavior.qml:36
-#, fuzzy, kde-format
-#| msgid "Change picture every:"
+#, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Сменять изображение каждые:"
 
 #: qml/ConfigBehavior.qml:53
-#, fuzzy, kde-format
-#| msgid "Hours"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "часов"
 
 #: qml/ConfigBehavior.qml:67
-#, fuzzy, kde-format
-#| msgid "Minutes"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "минут"
 
 #: qml/ConfigBehavior.qml:81
-#, fuzzy, kde-format
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "секунд"

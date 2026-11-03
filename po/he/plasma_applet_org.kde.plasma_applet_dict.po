@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2025-04-24 20:39+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -19,7 +19,9 @@ msgstr ""
 "n % 10 == 0) ? 2 : 3));\n"
 
 #: qml/AvailableDictSheet.qml:23
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Add More Dictionaries"
+msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
 msgstr "הוספת עוד מילונים"
 
@@ -36,7 +38,9 @@ msgid "Add More…"
 msgstr "להוסיף עוד…"
 
 #: qml/ConfigDictionaries.qml:94
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to load dictionary list"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "לא ניתן לטעון את רשימת המילונים"
 
@@ -47,12 +51,17 @@ msgid "Error code: %1 (%2)"
 msgstr "קוד שגיאה: %1 (%2)"
 
 #: qml/ConfigDictionaries.qml:106
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "No dictionaries"
+msgctxt ""
+"@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
 msgstr "אין מילונים"
 
 #: qml/DictItemDelegate.qml:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete"
+msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr "מחיקה"
 
@@ -63,6 +72,8 @@ msgid "Enter word to define here…"
 msgstr "נא למלא כאן מילה להגדרה…"
 
 #: qml/main.qml:201
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to load definition"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
 msgstr "לא ניתן לטעון הגדרה"

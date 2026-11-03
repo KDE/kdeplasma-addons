@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-22 00:52+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2023-01-08 18:17+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -816,6 +816,17 @@ msgid ""
 "link>."
 msgstr ""
 
+#: qml/LocationHeader.qml:48
+#, fuzzy, kde-format
+#| msgctxt "@title:tab"
+#| msgid "Notices"
+msgctxt ""
+"@title:tab %1 is the number of weather notices (alerts, warnings, "
+"watches, ...) issued"
+msgid "%1 Notice"
+msgid_plural "%1 Notices"
+msgstr[0] "Thông cáo"
+
 #: qml/main.qml:82
 #, kde-format
 msgctxt "Wind condition"
@@ -872,25 +883,25 @@ msgctxt "@action:button"
 msgid "Show more information"
 msgstr ""
 
-#: qml/StackedView.qml:51
+#: qml/StackedView.qml:56
 #, kde-format
 msgctxt "@title"
 msgid "Hourly Forecast"
 msgstr ""
 
-#: qml/StackedView.qml:81
+#: qml/StackedView.qml:86
 #, kde-format
 msgctxt "@title %1 is a number of days"
 msgid "%1-Day Forecast"
 msgstr ""
 
-#: qml/TabbedView.qml:40
+#: qml/TabbedView.qml:62
 #, kde-format
 msgctxt "@title:tab"
 msgid "Hourly"
 msgstr ""
 
-#: qml/TabbedView.qml:55
+#: qml/TabbedView.qml:77
 #, fuzzy, kde-format
 #| msgctxt "Forecast period timeframe"
 #| msgid "1 Day"
@@ -900,18 +911,7 @@ msgid "%1 Day"
 msgid_plural "%1 Days"
 msgstr[0] "%1 ngày"
 
-#: qml/TopPanel.qml:83
-#, fuzzy, kde-format
-#| msgctxt "@title:tab"
-#| msgid "Notices"
-msgctxt ""
-"@title:tab %1 is the number of weather notices (alerts, warnings, "
-"watches, ...) issued"
-msgid "%1 Notice"
-msgid_plural "%1 Notices"
-msgstr[0] "Thông cáo"
-
-#: qml/TopPanel.qml:170
+#: qml/TopPanel.qml:129
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
@@ -920,25 +920,25 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr ""
 
-#: qml/WeatherPage.qml:96
+#: qml/WeatherPage.qml:95
 #, kde-format
 msgctxt "@label"
 msgid "Today"
 msgstr ""
 
-#: qml/WeatherPage.qml:98
+#: qml/WeatherPage.qml:97
 #, kde-format
 msgctxt "@label"
 msgid "Tomorrow"
 msgstr ""
 
-#: qml/WeatherPage.qml:104
+#: qml/WeatherPage.qml:103
 #, kde-format
 msgctxt "@label"
 msgid "Today to Tomorrow"
 msgstr ""
 
-#: qml/WeatherPage.qml:106
+#: qml/WeatherPage.qml:105
 #, kde-format
 msgctxt "@label %1 is a day of the week"
 msgid "Today to %1"

@@ -2,21 +2,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Vít Pelčák <vit@pelcak.org>, 2015, 2017, 2018, 2019.
 # Vit Pelcak <vit@pelcak.org>, 2021.
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2021-12-22 18:04+0100\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-11-03 00:00+0100\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.12.0\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: config.qml:12
 #, kde-format
@@ -73,8 +74,7 @@ msgid "Custom title"
 msgstr "Vlastní titulek"
 
 #: IconItem.qml:184
-#, fuzzy, kde-format
-#| msgid "Launch %1"
+#, kde-format
 msgctxt "@action:button accessible description"
 msgid "Launch %1"
 msgstr "Spustit %1"
@@ -98,30 +98,25 @@ msgid "Remove Launcher"
 msgstr "Odstranit spouštěč"
 
 #: main.qml:112
-#, fuzzy, kde-format
-#| msgid "Quicklaunch"
+#, kde-format
 msgctxt "@info:tooltip widget title"
 msgid "Quicklaunch"
 msgstr "Rychlé spuštění"
 
 #: main.qml:113
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Add launchers by Drag and Drop or by using the context menu."
+#, kde-format
 msgctxt "@info:tooltip widget subtitle"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Spouštěče přidáte přetažením myší nebo pomocí kontextové nabídky."
 
 #: main.qml:145
-#, fuzzy, kde-format
-#| msgid "Hide icons"
+#, kde-format
 msgctxt "@info:tooltip for expander arrow"
 msgid "Hide icons"
 msgstr "Skrýt ikony"
 
 #: main.qml:145
-#, fuzzy, kde-format
-#| msgid "Show hidden icons"
+#, kde-format
 msgctxt "@info:tooltip for expander arrow"
 msgid "Show hidden icons"
 msgstr "Zobrazit skryté ikony"

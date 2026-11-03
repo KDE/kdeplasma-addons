@@ -11,8 +11,8 @@ msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2026-06-18 19:45+0200\n"
-"Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
+"PO-Revision-Date: 2026-11-02 07:45+0200\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -122,15 +122,13 @@ msgid "Solved! Try again."
 msgstr "Решено! Попробуйте ещё."
 
 #: qml/main.qml:39
-#, fuzzy, kde-format
-#| msgid "Fifteen Puzzle"
+#, kde-format
 msgctxt "@info:tooltip main title for widget"
 msgid "Fifteen Puzzle"
 msgstr "Пятнашки"
 
 #: qml/main.qml:40
-#, fuzzy, kde-format
-#| msgid "Solve by arranging in order"
+#, kde-format
 msgctxt "@info:tooltip subtitle for widget"
 msgid "Solve by arranging in order"
 msgstr "Головоломка, в которой нужно выстроить костяшки по номерам"

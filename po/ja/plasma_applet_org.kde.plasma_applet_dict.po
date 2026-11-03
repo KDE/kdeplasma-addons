@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.dict\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2022-03-06 11:53+0900\n"
 "Last-Translator: R.Suga <21r.suga@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -20,6 +20,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgctxt "@title"
 #| msgid "Dictionaries"
+msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
 msgstr "辞書"
 
@@ -39,6 +40,7 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox"
 #| msgid "Available dictionaries:"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "利用可能な辞書:"
 
@@ -52,11 +54,14 @@ msgstr ""
 #, fuzzy, kde-format
 #| msgctxt "@title"
 #| msgid "Dictionaries"
+msgctxt ""
+"@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
 msgstr "辞書"
 
 #: qml/DictItemDelegate.qml:64
 #, kde-format
+msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr ""
 
@@ -72,5 +77,6 @@ msgstr "定義する単語を入力してください"
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox"
 #| msgid "Available dictionaries:"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
 msgstr "利用可能な辞書:"

@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2021, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2021, 2025, 2026 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2025-08-14 15:10+0200\n"
-"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
+"PO-Revision-Date: 2026-11-02 12:42+0100\n"
+"Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
@@ -30,29 +30,25 @@ msgid "Behavior"
 msgstr "Gedrag"
 
 #: qml/ConfigBehavior.qml:36
-#, fuzzy, kde-format
-#| msgid "Change picture every:"
+#, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Afbeelding wijzigen elke:"
 
 #: qml/ConfigBehavior.qml:53
-#, fuzzy, kde-format
-#| msgid "Hours"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "Uren"
 
 #: qml/ConfigBehavior.qml:67
-#, fuzzy, kde-format
-#| msgid "Minutes"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "Minuten"
 
 #: qml/ConfigBehavior.qml:81
-#, fuzzy, kde-format
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "Seconden"

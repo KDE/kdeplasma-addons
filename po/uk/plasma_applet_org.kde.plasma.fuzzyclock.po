@@ -3,22 +3,22 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2014, 2017, 2018, 2019.
+# SPDX-FileCopyrightText: 2014, 2017, 2018, 2019, 2026 Yuri Chornoivan <yurchor@ukr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fuzzyclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2019-03-15 07:04+0200\n"
+"PO-Revision-Date: 2026-11-02 08:50+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
-"Language-Team: Ukrainian <kde-i18n-uk@kde.org>\n"
+"Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 19.03.70\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -63,1152 +63,988 @@ msgid "Fuzzy"
 msgstr "приблизно"
 
 #: qml/FuzzyClock.qml:37
-#, fuzzy, kde-format
-#| msgid "One o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "One o’clock"
-msgstr "перша година"
+msgstr "Перша година"
 
 #: qml/FuzzyClock.qml:38
-#, fuzzy, kde-format
-#| msgid "Five past one"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past one"
-msgstr "п’ять хвилин по першій"
+msgstr "п'ять хвилин по першій"
 
 #: qml/FuzzyClock.qml:39
-#, fuzzy, kde-format
-#| msgid "Ten past one"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past one"
 msgstr "десять хвилин по першій"
 
 #: qml/FuzzyClock.qml:40
-#, fuzzy, kde-format
-#| msgid "Quarter past one"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past one"
 msgstr "чверть по першій"
 
 #: qml/FuzzyClock.qml:41
-#, fuzzy, kde-format
-#| msgid "Twenty past one"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past one"
 msgstr "двадцять хвилин по першій"
 
 #: qml/FuzzyClock.qml:42
-#, fuzzy, kde-format
-#| msgid "Twenty-five past one"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past one"
 msgstr "двадцять п’ять хвилин по першій"
 
 #: qml/FuzzyClock.qml:43
-#, fuzzy, kde-format
-#| msgid "Half past one"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past one"
 msgstr "о пів на другу"
 
 #: qml/FuzzyClock.qml:44
-#, fuzzy, kde-format
-#| msgid "Twenty-five to two"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to two"
 msgstr "за двадцять п'ять хвилин друга"
 
 #: qml/FuzzyClock.qml:45
-#, fuzzy, kde-format
-#| msgid "Twenty to two"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to two"
 msgstr "за двадцять хвилин друга"
 
 #: qml/FuzzyClock.qml:46
-#, fuzzy, kde-format
-#| msgid "Quarter to two"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to two"
 msgstr "за чверть друга"
 
 #: qml/FuzzyClock.qml:47
-#, fuzzy, kde-format
-#| msgid "Ten to two"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to two"
 msgstr "за десять хвилин друга"
 
 #: qml/FuzzyClock.qml:48
-#, fuzzy, kde-format
-#| msgid "Five to two"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to two"
 msgstr "за п’ять хвилин друга"
 
 #: qml/FuzzyClock.qml:49
-#, fuzzy, kde-format
-#| msgid "Two o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Two o’clock"
-msgstr "друга"
+msgstr "Друга година"
 
 #: qml/FuzzyClock.qml:50
-#, fuzzy, kde-format
-#| msgid "Five past two"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past two"
 msgstr "п’ять хвилин по другій"
 
 #: qml/FuzzyClock.qml:51
-#, fuzzy, kde-format
-#| msgid "Ten past two"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past two"
 msgstr "десять хвилин по другій"
 
 #: qml/FuzzyClock.qml:52
-#, fuzzy, kde-format
-#| msgid "Quarter past two"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past two"
 msgstr "чверть по другій"
 
 #: qml/FuzzyClock.qml:53
-#, fuzzy, kde-format
-#| msgid "Twenty past two"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past two"
 msgstr "двадцять хвилин по другій"
 
 #: qml/FuzzyClock.qml:54
-#, fuzzy, kde-format
-#| msgid "Twenty-five past two"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past two"
 msgstr "двадцять п’ять хвилин по другій"
 
 #: qml/FuzzyClock.qml:55
-#, fuzzy, kde-format
-#| msgid "Half past two"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past two"
 msgstr "о пів на третю"
 
 #: qml/FuzzyClock.qml:56
-#, fuzzy, kde-format
-#| msgid "Twenty-five to three"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to three"
 msgstr "за двадцять п'ять хвилин третя"
 
 #: qml/FuzzyClock.qml:57
-#, fuzzy, kde-format
-#| msgid "Twenty to three"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to three"
 msgstr "за двадцять хвилин третя"
 
 #: qml/FuzzyClock.qml:58
-#, fuzzy, kde-format
-#| msgid "Quarter to three"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to three"
 msgstr "за чверть третя"
 
 #: qml/FuzzyClock.qml:59
-#, fuzzy, kde-format
-#| msgid "Ten to three"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to three"
 msgstr "за десять хвилин третя"
 
 #: qml/FuzzyClock.qml:60
-#, fuzzy, kde-format
-#| msgid "Five to three"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to three"
 msgstr "за п’ять хвилин третя"
 
 #: qml/FuzzyClock.qml:61
-#, fuzzy, kde-format
-#| msgid "Three o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Three o’clock"
-msgstr "третя"
+msgstr "Третя година"
 
 #: qml/FuzzyClock.qml:62
-#, fuzzy, kde-format
-#| msgid "Five past three"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past three"
 msgstr "п’ять хвилин по третій"
 
 #: qml/FuzzyClock.qml:63
-#, fuzzy, kde-format
-#| msgid "Ten past three"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past three"
 msgstr "десять хвилин по третій"
 
 #: qml/FuzzyClock.qml:64
-#, fuzzy, kde-format
-#| msgid "Quarter past three"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past three"
 msgstr "чверть по третій"
 
 #: qml/FuzzyClock.qml:65
-#, fuzzy, kde-format
-#| msgid "Twenty past three"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past three"
 msgstr "двадцять хвилин по третій"
 
 #: qml/FuzzyClock.qml:66
-#, fuzzy, kde-format
-#| msgid "Twenty-five past three"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past three"
 msgstr "двадцять п’ять хвилин по третій"
 
 #: qml/FuzzyClock.qml:67
-#, fuzzy, kde-format
-#| msgid "Half past three"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past three"
 msgstr "о пів на четверту"
 
 #: qml/FuzzyClock.qml:68
-#, fuzzy, kde-format
-#| msgid "Twenty-five to four"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to four"
 msgstr "за двадцять п'ять хвилин четверта"
 
 #: qml/FuzzyClock.qml:69
-#, fuzzy, kde-format
-#| msgid "Twenty to four"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to four"
 msgstr "за двадцять хвилин четверта"
 
 #: qml/FuzzyClock.qml:70
-#, fuzzy, kde-format
-#| msgid "Quarter to four"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to four"
 msgstr "за чверть четверта"
 
 #: qml/FuzzyClock.qml:71
-#, fuzzy, kde-format
-#| msgid "Ten to four"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to four"
 msgstr "за десять хвилин четверта"
 
 #: qml/FuzzyClock.qml:72
-#, fuzzy, kde-format
-#| msgid "Five to four"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to four"
 msgstr "за п’ять хвилин четверта"
 
 #: qml/FuzzyClock.qml:73
-#, fuzzy, kde-format
-#| msgid "Four o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Four o’clock"
-msgstr "четверта"
+msgstr "Четверта година"
 
 #: qml/FuzzyClock.qml:74
-#, fuzzy, kde-format
-#| msgid "Five past four"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past four"
 msgstr "п’ять хвилин по четвертій"
 
 #: qml/FuzzyClock.qml:75
-#, fuzzy, kde-format
-#| msgid "Ten past four"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past four"
 msgstr "десять хвилин по четвертій"
 
 #: qml/FuzzyClock.qml:76
-#, fuzzy, kde-format
-#| msgid "Quarter past four"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past four"
 msgstr "чверть по четвертій"
 
 #: qml/FuzzyClock.qml:77
-#, fuzzy, kde-format
-#| msgid "Twenty past four"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past four"
 msgstr "двадцять хвилин по четвертій"
 
 #: qml/FuzzyClock.qml:78
-#, fuzzy, kde-format
-#| msgid "Twenty-five past four"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past four"
 msgstr "двадцять п’ять хвилин по четвертій"
 
 #: qml/FuzzyClock.qml:79
-#, fuzzy, kde-format
-#| msgid "Half past four"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past four"
 msgstr "о пів на п’яту"
 
 #: qml/FuzzyClock.qml:80
-#, fuzzy, kde-format
-#| msgid "Twenty-five to five"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to five"
 msgstr "за двадцять п'ять хвилин п’ята"
 
 #: qml/FuzzyClock.qml:81
-#, fuzzy, kde-format
-#| msgid "Twenty to five"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to five"
 msgstr "за двадцять хвилин п’ята"
 
 #: qml/FuzzyClock.qml:82
-#, fuzzy, kde-format
-#| msgid "Quarter to five"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to five"
 msgstr "за чверть п’ята"
 
 #: qml/FuzzyClock.qml:83
-#, fuzzy, kde-format
-#| msgid "Ten to five"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to five"
 msgstr "за десять хвилин п’ята"
 
 #: qml/FuzzyClock.qml:84
-#, fuzzy, kde-format
-#| msgid "Five to five"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to five"
 msgstr "за п’ять хвилин п’ята"
 
 #: qml/FuzzyClock.qml:85
-#, fuzzy, kde-format
-#| msgid "Five o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five o’clock"
-msgstr "п’ята"
+msgstr "П'ята година"
 
 #: qml/FuzzyClock.qml:86
-#, fuzzy, kde-format
-#| msgid "Five past five"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past five"
 msgstr "п’ять хвилин по п’ятій"
 
 #: qml/FuzzyClock.qml:87
-#, fuzzy, kde-format
-#| msgid "Ten past five"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past five"
 msgstr "десять хвилин по п’ятій"
 
 #: qml/FuzzyClock.qml:88
-#, fuzzy, kde-format
-#| msgid "Quarter past five"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past five"
 msgstr "чверть по п’ятій"
 
 #: qml/FuzzyClock.qml:89
-#, fuzzy, kde-format
-#| msgid "Twenty past five"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past five"
 msgstr "двадцять хвилин по п’ятій"
 
 #: qml/FuzzyClock.qml:90
-#, fuzzy, kde-format
-#| msgid "Twenty-five past five"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past five"
 msgstr "двадцять п’ять хвилин по п’ятій"
 
 #: qml/FuzzyClock.qml:91
-#, fuzzy, kde-format
-#| msgid "Half past five"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past five"
 msgstr "о пів на шосту"
 
 #: qml/FuzzyClock.qml:92
-#, fuzzy, kde-format
-#| msgid "Twenty-five to six"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to six"
 msgstr "за двадцять п'ять хвилин шоста"
 
 #: qml/FuzzyClock.qml:93
-#, fuzzy, kde-format
-#| msgid "Twenty to six"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to six"
 msgstr "за двадцять хвилин шоста"
 
 #: qml/FuzzyClock.qml:94
-#, fuzzy, kde-format
-#| msgid "Quarter to six"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to six"
 msgstr "за чверть шоста"
 
 #: qml/FuzzyClock.qml:95
-#, fuzzy, kde-format
-#| msgid "Ten to six"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to six"
 msgstr "за десять хвилин шоста"
 
 #: qml/FuzzyClock.qml:96
-#, fuzzy, kde-format
-#| msgid "Five to six"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to six"
 msgstr "за п’ять хвилин шоста"
 
 #: qml/FuzzyClock.qml:97
-#, fuzzy, kde-format
-#| msgid "Six o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Six o’clock"
-msgstr "шоста"
+msgstr "Шоста година"
 
 #: qml/FuzzyClock.qml:98
-#, fuzzy, kde-format
-#| msgid "Five past six"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past six"
 msgstr "п’ять хвилин по шостій"
 
 #: qml/FuzzyClock.qml:99
-#, fuzzy, kde-format
-#| msgid "Ten past six"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past six"
 msgstr "десять хвилин по шостій"
 
 #: qml/FuzzyClock.qml:100
-#, fuzzy, kde-format
-#| msgid "Quarter past six"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past six"
 msgstr "чверть по шостій"
 
 #: qml/FuzzyClock.qml:101
-#, fuzzy, kde-format
-#| msgid "Twenty past six"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past six"
 msgstr "двадцять хвилин по шостій"
 
 #: qml/FuzzyClock.qml:102
-#, fuzzy, kde-format
-#| msgid "Twenty-five past six"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past six"
 msgstr "двадцять п’ять хвилин по шостій"
 
 #: qml/FuzzyClock.qml:103
-#, fuzzy, kde-format
-#| msgid "Half past six"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past six"
 msgstr "о пів на сьому"
 
 #: qml/FuzzyClock.qml:104
-#, fuzzy, kde-format
-#| msgid "Twenty-five to seven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to seven"
 msgstr "за двадцять п'ять хвилин сьома"
 
 #: qml/FuzzyClock.qml:105
-#, fuzzy, kde-format
-#| msgid "Twenty to seven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to seven"
 msgstr "за двадцять хвилин сьома"
 
 #: qml/FuzzyClock.qml:106
-#, fuzzy, kde-format
-#| msgid "Quarter to seven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to seven"
 msgstr "за чверть сьома"
 
 #: qml/FuzzyClock.qml:107
-#, fuzzy, kde-format
-#| msgid "Ten to seven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to seven"
 msgstr "за десять хвилин сьома"
 
 #: qml/FuzzyClock.qml:108
-#, fuzzy, kde-format
-#| msgid "Five to seven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to seven"
 msgstr "за п’ять хвилин сьома"
 
 #: qml/FuzzyClock.qml:109
-#, fuzzy, kde-format
-#| msgid "Seven o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Seven o’clock"
-msgstr "сьома"
+msgstr "Сьома година"
 
 #: qml/FuzzyClock.qml:110
-#, fuzzy, kde-format
-#| msgid "Five past seven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past seven"
 msgstr "п’ять хвилин по сьомій"
 
 #: qml/FuzzyClock.qml:111
-#, fuzzy, kde-format
-#| msgid "Ten past seven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past seven"
 msgstr "десять хвилин по сьомій"
 
 #: qml/FuzzyClock.qml:112
-#, fuzzy, kde-format
-#| msgid "Quarter past seven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past seven"
 msgstr "чверть по сьомій"
 
 #: qml/FuzzyClock.qml:113
-#, fuzzy, kde-format
-#| msgid "Twenty past seven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past seven"
 msgstr "двадцять хвилин по сьомій"
 
 #: qml/FuzzyClock.qml:114
-#, fuzzy, kde-format
-#| msgid "Twenty-five past seven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past seven"
 msgstr "двадцять п’ять хвилин по сьомій"
 
 #: qml/FuzzyClock.qml:115
-#, fuzzy, kde-format
-#| msgid "Half past seven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past seven"
 msgstr "о пів на восьму"
 
 #: qml/FuzzyClock.qml:116
-#, fuzzy, kde-format
-#| msgid "Twenty-five to eight"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to eight"
 msgstr "за двадцять п'ять хвилин восьма"
 
 #: qml/FuzzyClock.qml:117
-#, fuzzy, kde-format
-#| msgid "Twenty to eight"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to eight"
 msgstr "за двадцять хвилин восьма"
 
 #: qml/FuzzyClock.qml:118
-#, fuzzy, kde-format
-#| msgid "Quarter to eight"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to eight"
 msgstr "за чверть восьма"
 
 #: qml/FuzzyClock.qml:119
-#, fuzzy, kde-format
-#| msgid "Ten to eight"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to eight"
 msgstr "за десять хвилин восьма"
 
 #: qml/FuzzyClock.qml:120
-#, fuzzy, kde-format
-#| msgid "Five to eight"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to eight"
 msgstr "за п’ять хвилин восьма"
 
 #: qml/FuzzyClock.qml:121
-#, fuzzy, kde-format
-#| msgid "Eight o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Eight o’clock"
-msgstr "восьма"
+msgstr "Восьма"
 
 #: qml/FuzzyClock.qml:122
-#, fuzzy, kde-format
-#| msgid "Five past eight"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past eight"
 msgstr "п’ять хвилин по восьмій"
 
 #: qml/FuzzyClock.qml:123
-#, fuzzy, kde-format
-#| msgid "Ten past eight"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past eight"
 msgstr "десять хвилин по восьмій"
 
 #: qml/FuzzyClock.qml:124
-#, fuzzy, kde-format
-#| msgid "Quarter past eight"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past eight"
 msgstr "чверть по восьмій"
 
 #: qml/FuzzyClock.qml:125
-#, fuzzy, kde-format
-#| msgid "Twenty past eight"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past eight"
 msgstr "двадцять хвилин по восьмій"
 
 #: qml/FuzzyClock.qml:126
-#, fuzzy, kde-format
-#| msgid "Twenty-five past eight"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past eight"
 msgstr "двадцять п’ять хвилин по восьмій"
 
 #: qml/FuzzyClock.qml:127
-#, fuzzy, kde-format
-#| msgid "Half past eight"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past eight"
 msgstr "о пів на дев’яту"
 
 #: qml/FuzzyClock.qml:128
-#, fuzzy, kde-format
-#| msgid "Twenty-five to nine"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to nine"
 msgstr "за двадцять п'ять хвилин дев’ята"
 
 #: qml/FuzzyClock.qml:129
-#, fuzzy, kde-format
-#| msgid "Twenty to nine"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to nine"
 msgstr "за двадцять хвилин дев’ята"
 
 #: qml/FuzzyClock.qml:130
-#, fuzzy, kde-format
-#| msgid "Quarter to nine"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to nine"
 msgstr "за чверть дев’ята"
 
 #: qml/FuzzyClock.qml:131
-#, fuzzy, kde-format
-#| msgid "Ten to nine"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to nine"
 msgstr "за десять хвилин дев’ята"
 
 #: qml/FuzzyClock.qml:132
-#, fuzzy, kde-format
-#| msgid "Five to nine"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to nine"
 msgstr "за п’ять хвилин дев’ята"
 
 #: qml/FuzzyClock.qml:133
-#, fuzzy, kde-format
-#| msgid "Nine o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Nine o’clock"
-msgstr "дев’ята"
+msgstr "Дев'ята година"
 
 #: qml/FuzzyClock.qml:134
-#, fuzzy, kde-format
-#| msgid "Five past nine"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past nine"
 msgstr "п’ять хвилин по дев’ятій"
 
 #: qml/FuzzyClock.qml:135
-#, fuzzy, kde-format
-#| msgid "Ten past nine"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past nine"
 msgstr "десять хвилин по дев’ятій"
 
 #: qml/FuzzyClock.qml:136
-#, fuzzy, kde-format
-#| msgid "Quarter past nine"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past nine"
 msgstr "чверть по дев’ятій"
 
 #: qml/FuzzyClock.qml:137
-#, fuzzy, kde-format
-#| msgid "Twenty past nine"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past nine"
 msgstr "двадцять хвилин по дев’ятій"
 
 #: qml/FuzzyClock.qml:138
-#, fuzzy, kde-format
-#| msgid "Twenty-five past nine"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past nine"
 msgstr "двадцять п’ять хвилин по дев’ятій"
 
 #: qml/FuzzyClock.qml:139
-#, fuzzy, kde-format
-#| msgid "Half past nine"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past nine"
 msgstr "о пів на десяту"
 
 #: qml/FuzzyClock.qml:140
-#, fuzzy, kde-format
-#| msgid "Twenty-five to ten"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to ten"
 msgstr "за двадцять п'ять хвилин десята"
 
 #: qml/FuzzyClock.qml:141
-#, fuzzy, kde-format
-#| msgid "Twenty to ten"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to ten"
 msgstr "за двадцять хвилин десята"
 
 #: qml/FuzzyClock.qml:142
-#, fuzzy, kde-format
-#| msgid "Quarter to ten"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to ten"
 msgstr "за чверть десята"
 
 #: qml/FuzzyClock.qml:143
-#, fuzzy, kde-format
-#| msgid "Ten to ten"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to ten"
 msgstr "за десять хвилин десята"
 
 #: qml/FuzzyClock.qml:144
-#, fuzzy, kde-format
-#| msgid "Five to ten"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to ten"
 msgstr "за п’ять хвилин десята"
 
 #: qml/FuzzyClock.qml:145
-#, fuzzy, kde-format
-#| msgid "Ten o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten o’clock"
-msgstr "десята"
+msgstr "Десята година"
 
 #: qml/FuzzyClock.qml:146
-#, fuzzy, kde-format
-#| msgid "Five past ten"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past ten"
 msgstr "п’ять хвилин по десятій"
 
 #: qml/FuzzyClock.qml:147
-#, fuzzy, kde-format
-#| msgid "Ten past ten"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past ten"
 msgstr "десять хвилин по десятій"
 
 #: qml/FuzzyClock.qml:148
-#, fuzzy, kde-format
-#| msgid "Quarter past ten"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past ten"
 msgstr "чверть по десятій"
 
 #: qml/FuzzyClock.qml:149
-#, fuzzy, kde-format
-#| msgid "Twenty past ten"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past ten"
 msgstr "двадцять хвилин по десятій"
 
 #: qml/FuzzyClock.qml:150
-#, fuzzy, kde-format
-#| msgid "Twenty-five past ten"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past ten"
 msgstr "двадцять п’ять хвилин по десятій"
 
 #: qml/FuzzyClock.qml:151
-#, fuzzy, kde-format
-#| msgid "Half past ten"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past ten"
 msgstr "о пів на одинадцяту"
 
 #: qml/FuzzyClock.qml:152
-#, fuzzy, kde-format
-#| msgid "Twenty-five to eleven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to eleven"
 msgstr "за двадцять п'ять хвилин одинадцята"
 
 #: qml/FuzzyClock.qml:153
-#, fuzzy, kde-format
-#| msgid "Twenty to eleven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to eleven"
 msgstr "за двадцять хвилин одинадцята"
 
 #: qml/FuzzyClock.qml:154
-#, fuzzy, kde-format
-#| msgid "Quarter to eleven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to eleven"
 msgstr "за чверть одинадцята"
 
 #: qml/FuzzyClock.qml:155
-#, fuzzy, kde-format
-#| msgid "Ten to eleven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to eleven"
 msgstr "за десять хвилин одинадцята"
 
 #: qml/FuzzyClock.qml:156
-#, fuzzy, kde-format
-#| msgid "Five to eleven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to eleven"
 msgstr "за п’ять хвилин одинадцята"
 
 #: qml/FuzzyClock.qml:157
-#, fuzzy, kde-format
-#| msgid "Eleven o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Eleven o’clock"
-msgstr "одинадцята"
+msgstr "Одинадцята"
 
 #: qml/FuzzyClock.qml:158
-#, fuzzy, kde-format
-#| msgid "Five past eleven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past eleven"
 msgstr "п’ять хвилин по одинадцятій"
 
 #: qml/FuzzyClock.qml:159
-#, fuzzy, kde-format
-#| msgid "Ten past eleven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past eleven"
 msgstr "десять хвилин по одинадцятій"
 
 #: qml/FuzzyClock.qml:160
-#, fuzzy, kde-format
-#| msgid "Quarter past eleven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past eleven"
 msgstr "чверть по одинадцятій"
 
 #: qml/FuzzyClock.qml:161
-#, fuzzy, kde-format
-#| msgid "Twenty past eleven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past eleven"
 msgstr "двадцять хвилин по одинадцятій"
 
 #: qml/FuzzyClock.qml:162
-#, fuzzy, kde-format
-#| msgid "Twenty-five past eleven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past eleven"
 msgstr "двадцять п’ять хвилин по одинадцятій"
 
 #: qml/FuzzyClock.qml:163
-#, fuzzy, kde-format
-#| msgid "Half past eleven"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past eleven"
 msgstr "о пів на дванадцяту"
 
 #: qml/FuzzyClock.qml:164
-#, fuzzy, kde-format
-#| msgid "Twenty-five to twelve"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to twelve"
 msgstr "за двадцять п'ять хвилин дванадцята"
 
 #: qml/FuzzyClock.qml:165
-#, fuzzy, kde-format
-#| msgid "Twenty to twelve"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to twelve"
 msgstr "за двадцять хвилин дванадцята"
 
 #: qml/FuzzyClock.qml:166
-#, fuzzy, kde-format
-#| msgid "Quarter to twelve"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to twelve"
 msgstr "за чверть дванадцята"
 
 #: qml/FuzzyClock.qml:167
-#, fuzzy, kde-format
-#| msgid "Ten to twelve"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to twelve"
 msgstr "за десять хвилин дванадцята"
 
 #: qml/FuzzyClock.qml:168
-#, fuzzy, kde-format
-#| msgid "Five to twelve"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to twelve"
 msgstr "за п’ять хвилин дванадцята"
 
 #: qml/FuzzyClock.qml:169
-#, fuzzy, kde-format
-#| msgid "Twelve o’clock"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twelve o’clock"
-msgstr "дванадцята"
+msgstr "Дванадцята"
 
 #: qml/FuzzyClock.qml:170
-#, fuzzy, kde-format
-#| msgid "Five past twelve"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five past twelve"
 msgstr "п’ять хвилин по дванадцятій"
 
 #: qml/FuzzyClock.qml:171
-#, fuzzy, kde-format
-#| msgid "Ten past twelve"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten past twelve"
 msgstr "десять хвилин по дванадцятій"
 
 #: qml/FuzzyClock.qml:172
-#, fuzzy, kde-format
-#| msgid "Quarter past twelve"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter past twelve"
 msgstr "чверть по дванадцятій"
 
 #: qml/FuzzyClock.qml:173
-#, fuzzy, kde-format
-#| msgid "Twenty past twelve"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty past twelve"
 msgstr "двадцять хвилин по дванадцятій"
 
 #: qml/FuzzyClock.qml:174
-#, fuzzy, kde-format
-#| msgid "Twenty-five past twelve"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five past twelve"
 msgstr "двадцять п’ять хвилин по дванадцятій"
 
 #: qml/FuzzyClock.qml:175
-#, fuzzy, kde-format
-#| msgid "Half past twelve"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Half past twelve"
 msgstr "о пів на першу"
 
 #: qml/FuzzyClock.qml:176
-#, fuzzy, kde-format
-#| msgid "Twenty-five to one"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty-five to one"
 msgstr "за двадцять п'ять хвилин перша"
 
 #: qml/FuzzyClock.qml:177
-#, fuzzy, kde-format
-#| msgid "Twenty to one"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Twenty to one"
 msgstr "за двадцять хвилин перша"
 
 #: qml/FuzzyClock.qml:178
-#, fuzzy, kde-format
-#| msgid "Quarter to one"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Quarter to one"
 msgstr "за чверть перша"
 
 #: qml/FuzzyClock.qml:179
-#, fuzzy, kde-format
-#| msgid "Ten to one"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Ten to one"
 msgstr "за десять хвилин перша"
 
 #: qml/FuzzyClock.qml:180
-#, fuzzy, kde-format
-#| msgid "Five to one"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Five to one"
 msgstr "за п’ять хвилин перша"
 
 #: qml/FuzzyClock.qml:184
-#, fuzzy, kde-format
-#| msgid "Sleep"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Sleep"
-msgstr "Сон"
+msgstr "Призупинити"
 
 #: qml/FuzzyClock.qml:184
-#, fuzzy, kde-format
-#| msgid "Breakfast"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Breakfast"
 msgstr "Сніданок"
 
 #: qml/FuzzyClock.qml:184
-#, fuzzy, kde-format
-#| msgid "Second Breakfast"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Second Breakfast"
 msgstr "Другий сніданок"
 
 #: qml/FuzzyClock.qml:184
-#, fuzzy, kde-format
-#| msgid "Elevenses"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Elevenses"
 msgstr "Сніданок об одинадцятій"
 
 #: qml/FuzzyClock.qml:185
-#, fuzzy, kde-format
-#| msgid "Lunch"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Lunch"
 msgstr "Ланч"
 
 #: qml/FuzzyClock.qml:185
-#, fuzzy, kde-format
-#| msgid "Afternoon tea"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Afternoon tea"
 msgstr "Вечірній чай"
 
 #: qml/FuzzyClock.qml:185
-#, fuzzy, kde-format
-#| msgid "Dinner"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Dinner"
 msgstr "Обід"
 
 #: qml/FuzzyClock.qml:185
-#, fuzzy, kde-format
-#| msgid "Supper"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Supper"
 msgstr "Вечеря"
 
 #: qml/FuzzyClock.qml:189
-#, fuzzy, kde-format
-#| msgid "Night"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Night"
 msgstr "Ніч"
 
 #: qml/FuzzyClock.qml:189
-#, fuzzy, kde-format
-#| msgid "Early morning"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Early morning"
 msgstr "Вдосвіта"
 
 #: qml/FuzzyClock.qml:189
-#, fuzzy, kde-format
-#| msgid "Morning"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Morning"
 msgstr "Ранок"
 
 #: qml/FuzzyClock.qml:189
-#, fuzzy, kde-format
-#| msgid "Almost noon"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Almost noon"
 msgstr "Майже полудень"
 
 #: qml/FuzzyClock.qml:190
-#, fuzzy, kde-format
-#| msgid "Noon"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Noon"
-msgstr "Полудень"
+msgstr "нуун"
 
 #: qml/FuzzyClock.qml:190
-#, fuzzy, kde-format
-#| msgid "Afternoon"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Afternoon"
-msgstr "По полудню"
+msgstr "Після обіду"
 
 #: qml/FuzzyClock.qml:190
-#, fuzzy, kde-format
-#| msgid "Evening"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Evening"
 msgstr "Вечір"
 
 #: qml/FuzzyClock.qml:190
-#, fuzzy, kde-format
-#| msgid "Late evening"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Late evening"
 msgstr "Пізній вечір"
 
 #: qml/FuzzyClock.qml:194
-#, fuzzy, kde-format
-#| msgid "Start of week"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Start of week"
 msgstr "Початок тижня"
 
 #: qml/FuzzyClock.qml:194
-#, fuzzy, kde-format
-#| msgid "Middle of week"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Middle of week"
 msgstr "Середина тижня"
 
 #: qml/FuzzyClock.qml:194
-#, fuzzy, kde-format
-#| msgid "End of week"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "End of week"
 msgstr "Кінець тижня"
 
 #: qml/FuzzyClock.qml:194
-#, fuzzy, kde-format
-#| msgid "Weekend!"
+#, kde-format
 msgctxt "@info:status fuzzy clock time"
 msgid "Weekend!"
-msgstr "Вихідні!"
+msgstr "Вихідний!"
 
 #~ msgctxt "@title:group"
 #~ msgid "Appearance"

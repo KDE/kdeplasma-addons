@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2025-05-18 20:30+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -19,7 +19,9 @@ msgstr ""
 "X-Generator: Lokalize 25.04.1\n"
 
 #: qml/AvailableDictSheet.qml:23
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Add More Dictionaries"
+msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
 msgstr "További szótárak hozzáadása"
 
@@ -36,7 +38,9 @@ msgid "Add More…"
 msgstr "Hozzáadás…"
 
 #: qml/ConfigDictionaries.qml:94
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to load dictionary list"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "Nem lehet betölteni a szótárlistát"
 
@@ -47,12 +51,17 @@ msgid "Error code: %1 (%2)"
 msgstr "Hibakód: %1 (%2)"
 
 #: qml/ConfigDictionaries.qml:106
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "No dictionaries"
+msgctxt ""
+"@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
 msgstr "Nincsenek szótárak"
 
 #: qml/DictItemDelegate.qml:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete"
+msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr "Törlés"
 
@@ -63,7 +72,9 @@ msgid "Enter word to define here…"
 msgstr "Írja be a definiálandó szót itt…"
 
 #: qml/main.qml:201
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to load definition"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
 msgstr "Nem lehet betölteni a definíciót"
 

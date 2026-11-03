@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2022-07-21 21:20+0200\n"
+"PO-Revision-Date: 2026-11-02 05:49+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Poedit 3.1.1\n"
+"X-Generator: Poedit 3.10\n"
 
 #: config.qml:12
 #, kde-format
@@ -73,8 +73,7 @@ msgid "Custom title"
 msgstr "ხელით მითითებული სათაური"
 
 #: IconItem.qml:184
-#, fuzzy, kde-format
-#| msgid "Launch %1"
+#, kde-format
 msgctxt "@action:button accessible description"
 msgid "Launch %1"
 msgstr "%1-ს გაშვება"
@@ -98,30 +97,25 @@ msgid "Remove Launcher"
 msgstr "გამშვების წაშლა"
 
 #: main.qml:112
-#, fuzzy, kde-format
-#| msgid "Quicklaunch"
+#, kde-format
 msgctxt "@info:tooltip widget title"
 msgid "Quicklaunch"
 msgstr "სწრაფგამშვები"
 
 #: main.qml:113
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Add launchers by Drag and Drop or by using the context menu."
+#, kde-format
 msgctxt "@info:tooltip widget subtitle"
 msgid "Add launchers by Drag and Drop or by using the context menu."
-msgstr "დაამატეთ გამშვებები მათი გადმოთრევით ან კონტექსტური მენიუდან."
+msgstr "დაამატეთ გამშვებები მათი გადმოთრევით, ან კონტექსტური მენიუდან."
 
 #: main.qml:145
-#, fuzzy, kde-format
-#| msgid "Hide icons"
+#, kde-format
 msgctxt "@info:tooltip for expander arrow"
 msgid "Hide icons"
 msgstr "ხატულების დამალვა"
 
 #: main.qml:145
-#, fuzzy, kde-format
-#| msgid "Show hidden icons"
+#, kde-format
 msgctxt "@info:tooltip for expander arrow"
 msgid "Show hidden icons"
 msgstr "დამალული ხატულების ჩვენება"

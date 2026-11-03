@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2026-07-20 00:07+0200\n"
+"PO-Revision-Date: 2026-11-03 00:01+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.04.3\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: qml/config.qml:12
 #, kde-format
@@ -161,8 +161,7 @@ msgid "Go Home"
 msgstr "Přejít domů"
 
 #: qml/main.qml:101
-#, fuzzy, kde-format
-#| msgid "Open Default URL"
+#, kde-format
 msgctxt "@action:button accessible description"
 msgid "Open Default URL"
 msgstr "Otevřít výchozí URL"
@@ -199,18 +198,13 @@ msgid "Copy Link Address"
 msgstr "Kopírovat adresu odkazu"
 
 #: qml/main.qml:347
-#, fuzzy, kde-format
-#| msgctxt "An unwanted popup was blocked"
-#| msgid "Popup blocked"
+#, kde-format
 msgctxt "@info:status An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Vyskakovací okno zablokováno"
 
 #: qml/main.qml:348
-#, fuzzy, kde-format
-#| msgid ""
-#| "Click here to open the following blocked popup:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info:tooltip, %1 is popup url"
 msgid ""
 "Click here to open the following blocked popup:\n"

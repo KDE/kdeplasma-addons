@@ -8,8 +8,8 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2018-04-21 13:55+0300\n"
-"Last-Translator: Alexander Potashev <aspotashev@gmail.com>\n"
+"PO-Revision-Date: 2026-11-02 07:45+0200\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -26,8 +26,7 @@ msgid "Konsole Profiles"
 msgstr "Профили Konsole"
 
 #: main.qml:91
-#, fuzzy, kde-format
-#| msgid "Arbitrary String Which Says Something"
+#, kde-format
 msgctxt "@label unused string, just for sizing"
 msgid "Arbitrary String Which Says Something"
 msgstr "Произвольная строка, которая о чем-то сообщает"

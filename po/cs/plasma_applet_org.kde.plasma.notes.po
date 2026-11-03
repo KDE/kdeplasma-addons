@@ -2,21 +2,22 @@
 # This file is distributed under the same license as the PACKAGE package.
 # SPDX-FileCopyrightText: 2014, 2015, 2017, 2018, 2019, 2026 Vít Pelčák <vit@pelcak.org>
 # SPDX-FileCopyrightText: 2021, 2023, 2024 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2026-03-30 20:03+0200\n"
-"Last-Translator:  Vít Pelčák <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-11-03 00:00+0100\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -25,127 +26,109 @@ msgid "Appearance"
 msgstr "Vzhled"
 
 #: qml/configAppearance.qml:32
-#, fuzzy, kde-format
-#| msgid "%1pt"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is font size in points"
 msgid "%1pt"
 msgstr "%1pt"
 
 #: qml/configAppearance.qml:38
-#, fuzzy, kde-format
-#| msgid "Text font size:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Text font size:"
 msgstr "Velikost písma:"
 
 #: qml/configAppearance.qml:72
-#, fuzzy, kde-format
-#| msgid "A white sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A white sticky note"
 msgstr "Bílá poznámka na plochu"
 
 #: qml/configAppearance.qml:73
-#, fuzzy, kde-format
-#| msgid "A black sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A black sticky note"
 msgstr "Černá poznámka na plochu"
 
 #: qml/configAppearance.qml:74
-#, fuzzy, kde-format
-#| msgid "A red sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A red sticky note"
 msgstr "Červená poznámka na plochu"
 
 #: qml/configAppearance.qml:75
-#, fuzzy, kde-format
-#| msgid "An orange sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "An orange sticky note"
 msgstr "Oranžová poznámka na plochu"
 
 #: qml/configAppearance.qml:76
-#, fuzzy, kde-format
-#| msgid "A yellow sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A yellow sticky note"
 msgstr "Žlutá poznámka na plochu"
 
 #: qml/configAppearance.qml:77
-#, fuzzy, kde-format
-#| msgid "A green sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A green sticky note"
 msgstr "Zelená poznámka na plochu"
 
 #: qml/configAppearance.qml:78
-#, fuzzy, kde-format
-#| msgid "A blue sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A blue sticky note"
 msgstr "Modrá poznámka na plochu"
 
 #: qml/configAppearance.qml:79
-#, fuzzy, kde-format
-#| msgid "A pink sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A pink sticky note"
 msgstr "Růžová poznámka na plochu"
 
 #: qml/configAppearance.qml:80
-#, fuzzy, kde-format
-#| msgid "A transparent sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note"
 msgstr "Průhledná poznámka na plochu"
 
 #: qml/configAppearance.qml:81
-#, fuzzy, kde-format
-#| msgid "A transparent sticky note with light text"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note with light text"
 msgstr "Průhledná poznámka na plochu se světlým textem"
 
 #: qml/main.qml:308
-#, fuzzy, kde-format
-#| msgid "Undo"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Undo"
 msgstr "Zpět"
 
 #: qml/main.qml:316
-#, fuzzy, kde-format
-#| msgid "Redo"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Redo"
 msgstr "Znovu"
 
 #: qml/main.qml:326
-#, fuzzy, kde-format
-#| msgid "Cut"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Cut"
 msgstr "Vyjmout"
 
 #: qml/main.qml:334
-#, fuzzy, kde-format
-#| msgid "Copy"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
 msgstr "Kopírovat"
 
 #: qml/main.qml:342
-#, fuzzy, kde-format
-#| msgid "Paste"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Paste"
 msgstr "Vložit"
 
 #: qml/main.qml:348
-#, fuzzy, kde-format
-#| msgid "Paste with Full Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Paste with Full Formatting"
 msgstr "Vložit s plným formátováním"
@@ -157,22 +140,19 @@ msgid "Remove Formatting"
 msgstr "Odstranit formátování"
 
 #: qml/main.qml:370
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Smazat"
 
 #: qml/main.qml:377
-#, fuzzy, kde-format
-#| msgid "Clear"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Clear"
-msgstr "Vyprázdnit"
+msgstr "Vyčistit"
 
 #: qml/main.qml:387
-#, fuzzy, kde-format
-#| msgid "Select All"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select All"
 msgstr "Vybrat vše"
@@ -208,15 +188,13 @@ msgid "Keep Open"
 msgstr "Ponechat otevřené"
 
 #: qml/main.qml:662
-#, fuzzy, kde-format
-#| msgid "Discard this note?"
+#, kde-format
 msgctxt "@title;window dialog title"
 msgid "Discard this note?"
 msgstr "Zahodit tuto poznámku?"
 
 #: qml/main.qml:663
-#, fuzzy, kde-format
-#| msgid "Are you sure you want to discard this note?"
+#, kde-format
 msgctxt "@info"
 msgid "Are you sure you want to discard this note?"
 msgstr "Opravdu si přejete smazat tuto poznámku?"

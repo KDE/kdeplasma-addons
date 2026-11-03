@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-22 00:52+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2026-10-04 17:03+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -842,6 +842,18 @@ msgstr ""
 "Možda postoji tehnički problem kod dobavljača vremenske prognoze. Ako "
 "problem potraje duže od jednog dana, prijavite grešku."
 
+#: qml/LocationHeader.qml:48
+#, kde-format
+msgctxt ""
+"@title:tab %1 is the number of weather notices (alerts, warnings, "
+"watches, ...) issued"
+msgid "%1 Notice"
+msgid_plural "%1 Notices"
+msgstr[0] "%1 obavještenje"
+msgstr[1] "%1 obavještenja"
+msgstr[2] "%1 obavještenja"
+msgstr[3] "%1 obavještenje"
+
 #: qml/main.qml:82
 #, kde-format
 msgctxt "Wind condition"
@@ -898,7 +910,7 @@ msgctxt "@action:button"
 msgid "Show more information"
 msgstr "Prikaži više podataka"
 
-#: qml/StackedView.qml:51
+#: qml/StackedView.qml:56
 #, fuzzy, kde-format
 #| msgctxt "@title:tab Weather forecast"
 #| msgid "Forecast"
@@ -906,7 +918,7 @@ msgctxt "@title"
 msgid "Hourly Forecast"
 msgstr "Prognoza"
 
-#: qml/StackedView.qml:81
+#: qml/StackedView.qml:86
 #, fuzzy, kde-format
 #| msgctxt "@title:tab Weather forecast"
 #| msgid "Forecast"
@@ -914,13 +926,13 @@ msgctxt "@title %1 is a number of days"
 msgid "%1-Day Forecast"
 msgstr "Prognoza"
 
-#: qml/TabbedView.qml:40
+#: qml/TabbedView.qml:62
 #, kde-format
 msgctxt "@title:tab"
 msgid "Hourly"
 msgstr ""
 
-#: qml/TabbedView.qml:55
+#: qml/TabbedView.qml:77
 #, fuzzy, kde-format
 #| msgctxt "Forecast period timeframe"
 #| msgid "1 Day"
@@ -933,19 +945,7 @@ msgstr[1] "%1 dana"
 msgstr[2] "%1 dana"
 msgstr[3] "%1 dan"
 
-#: qml/TopPanel.qml:83
-#, kde-format
-msgctxt ""
-"@title:tab %1 is the number of weather notices (alerts, warnings, "
-"watches, ...) issued"
-msgid "%1 Notice"
-msgid_plural "%1 Notices"
-msgstr[0] "%1 obavještenje"
-msgstr[1] "%1 obavještenja"
-msgstr[2] "%1 obavještenja"
-msgstr[3] "%1 obavještenje"
-
-#: qml/TopPanel.qml:170
+#: qml/TopPanel.qml:129
 #, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
@@ -954,25 +954,25 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "Osjećaj: %1"
 
-#: qml/WeatherPage.qml:96
+#: qml/WeatherPage.qml:95
 #, kde-format
 msgctxt "@label"
 msgid "Today"
 msgstr ""
 
-#: qml/WeatherPage.qml:98
+#: qml/WeatherPage.qml:97
 #, kde-format
 msgctxt "@label"
 msgid "Tomorrow"
 msgstr ""
 
-#: qml/WeatherPage.qml:104
+#: qml/WeatherPage.qml:103
 #, kde-format
 msgctxt "@label"
 msgid "Today to Tomorrow"
 msgstr ""
 
-#: qml/WeatherPage.qml:106
+#: qml/WeatherPage.qml:105
 #, kde-format
 msgctxt "@label %1 is a day of the week"
 msgid "Today to %1"

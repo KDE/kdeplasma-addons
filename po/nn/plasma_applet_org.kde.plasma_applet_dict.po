@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2026-06-28 11:59+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
@@ -21,7 +21,9 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 
 #: qml/AvailableDictSheet.qml:23
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Add More Dictionaries"
+msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
 msgstr "Legg til fleire ordbøker"
 
@@ -38,7 +40,9 @@ msgid "Add More…"
 msgstr "Legg til fleire …"
 
 #: qml/ConfigDictionaries.qml:94
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to load dictionary list"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "Klarte ikkje lesa inn ordboksoversikt"
 
@@ -49,12 +53,17 @@ msgid "Error code: %1 (%2)"
 msgstr "Feilkode: %1 (%2)"
 
 #: qml/ConfigDictionaries.qml:106
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "No dictionaries"
+msgctxt ""
+"@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
 msgstr "Ingen ordbøker"
 
 #: qml/DictItemDelegate.qml:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete"
+msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr "Slett"
 
@@ -65,6 +74,8 @@ msgid "Enter word to define here…"
 msgstr "Skriv inn ordet du vil sjå tydinga til …"
 
 #: qml/main.qml:201
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to load definition"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
 msgstr "Klarte ikkje henta inn definisjon"

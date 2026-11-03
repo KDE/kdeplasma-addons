@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2025-04-30 02:34+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -19,7 +19,9 @@ msgstr ""
 "X-Generator: Lokalize 25.07.70\n"
 
 #: qml/AvailableDictSheet.qml:23
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Add More Dictionaries"
+msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
 msgstr "新增更多字典"
 
@@ -36,7 +38,9 @@ msgid "Add More…"
 msgstr "新增更多…"
 
 #: qml/ConfigDictionaries.qml:94
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to load dictionary list"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "無法載入字典列表"
 
@@ -47,12 +51,17 @@ msgid "Error code: %1 (%2)"
 msgstr "錯誤代碼：%1（%2）"
 
 #: qml/ConfigDictionaries.qml:106
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "No dictionaries"
+msgctxt ""
+"@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
 msgstr "沒有字典"
 
 #: qml/DictItemDelegate.qml:64
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Delete"
+msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr "刪除"
 
@@ -63,7 +72,9 @@ msgid "Enter word to define here…"
 msgstr "在此輸入要定義的單字…"
 
 #: qml/main.qml:201
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to load definition"
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
 msgstr "無法載入定義"
 

@@ -9,8 +9,8 @@ msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2025-05-29 21:33+0200\n"
-"Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
+"PO-Revision-Date: 2026-11-02 07:45+0200\n"
+"Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
 "MIME-Version: 1.0\n"
@@ -30,127 +30,109 @@ msgid "Appearance"
 msgstr "Внешний вид"
 
 #: qml/configAppearance.qml:32
-#, fuzzy, kde-format
-#| msgid "%1pt"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is font size in points"
 msgid "%1pt"
 msgstr "%1 пт"
 
 #: qml/configAppearance.qml:38
-#, fuzzy, kde-format
-#| msgid "Text font size:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Text font size:"
 msgstr "Размер шрифта:"
 
 #: qml/configAppearance.qml:72
-#, fuzzy, kde-format
-#| msgid "A white sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A white sticky note"
 msgstr "Белая заметка"
 
 #: qml/configAppearance.qml:73
-#, fuzzy, kde-format
-#| msgid "A black sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A black sticky note"
 msgstr "Чёрная заметка"
 
 #: qml/configAppearance.qml:74
-#, fuzzy, kde-format
-#| msgid "A red sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A red sticky note"
 msgstr "Красная заметка"
 
 #: qml/configAppearance.qml:75
-#, fuzzy, kde-format
-#| msgid "An orange sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "An orange sticky note"
 msgstr "Оранжевая заметка"
 
 #: qml/configAppearance.qml:76
-#, fuzzy, kde-format
-#| msgid "A yellow sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A yellow sticky note"
 msgstr "Жёлтая заметка"
 
 #: qml/configAppearance.qml:77
-#, fuzzy, kde-format
-#| msgid "A green sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A green sticky note"
 msgstr "Зелёная заметка"
 
 #: qml/configAppearance.qml:78
-#, fuzzy, kde-format
-#| msgid "A blue sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A blue sticky note"
 msgstr "Синяя заметка"
 
 #: qml/configAppearance.qml:79
-#, fuzzy, kde-format
-#| msgid "A pink sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A pink sticky note"
 msgstr "Розовая заметка"
 
 #: qml/configAppearance.qml:80
-#, fuzzy, kde-format
-#| msgid "A transparent sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note"
 msgstr "Полупрозрачная заметка"
 
 #: qml/configAppearance.qml:81
-#, fuzzy, kde-format
-#| msgid "A transparent sticky note with light text"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note with light text"
 msgstr "Полупрозрачная заметка со светлым текстом"
 
 #: qml/main.qml:308
-#, fuzzy, kde-format
-#| msgid "Undo"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Undo"
 msgstr "Отменить"
 
 #: qml/main.qml:316
-#, fuzzy, kde-format
-#| msgid "Redo"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Redo"
 msgstr "Повторить"
 
 #: qml/main.qml:326
-#, fuzzy, kde-format
-#| msgid "Cut"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Cut"
 msgstr "Вырезать"
 
 #: qml/main.qml:334
-#, fuzzy, kde-format
-#| msgid "Copy"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
 msgstr "Копировать"
 
 #: qml/main.qml:342
-#, fuzzy, kde-format
-#| msgid "Paste"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Paste"
 msgstr "Вставить"
 
 #: qml/main.qml:348
-#, fuzzy, kde-format
-#| msgid "Paste with Full Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Paste with Full Formatting"
 msgstr "Вставить с сохранением форматирования"
@@ -162,22 +144,19 @@ msgid "Remove Formatting"
 msgstr "Очистить форматирование"
 
 #: qml/main.qml:370
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Удалить"
 
 #: qml/main.qml:377
-#, fuzzy, kde-format
-#| msgid "Clear"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Clear"
 msgstr "Очистить"
 
 #: qml/main.qml:387
-#, fuzzy, kde-format
-#| msgid "Select All"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select All"
 msgstr "Выделить всё"
@@ -213,15 +192,13 @@ msgid "Keep Open"
 msgstr "Держать окно открытым"
 
 #: qml/main.qml:662
-#, fuzzy, kde-format
-#| msgid "Discard this note?"
+#, kde-format
 msgctxt "@title;window dialog title"
 msgid "Discard this note?"
 msgstr "Отмена сохранения изменений"
 
 #: qml/main.qml:663
-#, fuzzy, kde-format
-#| msgid "Are you sure you want to discard this note?"
+#, kde-format
 msgctxt "@info"
 msgid "Are you sure you want to discard this note?"
 msgstr "Не сохранять внесённые изменения?"

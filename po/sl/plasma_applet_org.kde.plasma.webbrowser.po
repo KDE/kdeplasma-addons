@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2025-11-24 06:44+0100\n"
+"PO-Revision-Date: 2026-11-02 11:56+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
-"X-Generator: Poedit 3.8\n"
+"X-Generator: Poedit 3.10\n"
 
 #: qml/config.qml:12
 #, kde-format
@@ -161,11 +161,10 @@ msgid "Go Home"
 msgstr "Pojdi domov"
 
 #: qml/main.qml:101
-#, fuzzy, kde-format
-#| msgid "Open Default URL"
+#, kde-format
 msgctxt "@action:button accessible description"
 msgid "Open Default URL"
-msgstr "Odpri privzeti naslov URL"
+msgstr "Odpri privzeti URL"
 
 #: qml/main.qml:156
 #, kde-format
@@ -199,18 +198,13 @@ msgid "Copy Link Address"
 msgstr "Kopiraj naslov povezave"
 
 #: qml/main.qml:347
-#, fuzzy, kde-format
-#| msgctxt "An unwanted popup was blocked"
-#| msgid "Popup blocked"
+#, kde-format
 msgctxt "@info:status An unwanted popup was blocked"
 msgid "Popup blocked"
-msgstr "Pogovorna okna blokirana"
+msgstr "Pogovorno okno blokirana"
 
 #: qml/main.qml:348
-#, fuzzy, kde-format
-#| msgid ""
-#| "Click here to open the following blocked popup:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info:tooltip, %1 is popup url"
 msgid ""
 "Click here to open the following blocked popup:\n"

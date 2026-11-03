@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-03 00:56+0000\n"
 "PO-Revision-Date: 2024-04-22 21:47+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-i18n-doc@kde.org>\n"
@@ -18,9 +18,12 @@ msgstr ""
 "X-Generator: Lokalize 24.02.2\n"
 
 #: qml/AvailableDictSheet.qml:23
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Dictionaries"
+msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
-msgstr ""
+msgstr "அகரமுதலிகள்"
 
 #: qml/config.qml:13
 #, kde-format
@@ -36,6 +39,7 @@ msgstr ""
 
 #: qml/ConfigDictionaries.qml:94
 #, kde-format
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr ""
 
@@ -46,12 +50,17 @@ msgid "Error code: %1 (%2)"
 msgstr ""
 
 #: qml/ConfigDictionaries.qml:106
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Dictionaries"
+msgctxt ""
+"@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
-msgstr ""
+msgstr "அகரமுதலிகள்"
 
 #: qml/DictItemDelegate.qml:64
 #, kde-format
+msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr ""
 
@@ -63,5 +72,6 @@ msgstr ""
 
 #: qml/main.qml:201
 #, kde-format
+msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
 msgstr ""
