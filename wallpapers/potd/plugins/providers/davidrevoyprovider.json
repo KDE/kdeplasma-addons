@@ -1,7 +1,17 @@
 {
     "KPlugin": {
         "Icon": "",
-        "Name": "David Revoy Wallpapers"
+        "Name": "David Revoy Wallpapers",
+        "Name[ca]": "Fons de pantalla de David Revoy",
+        "Name[cs]": "Tapety Davida Revoye",
+        "Name[es]": "Fondos del escritorio de David Revoy",
+        "Name[ka]": "დევიდ რევოის ფონის სურათები",
+        "Name[nl]": "Achtergrondafbeeldingen van David Revoy",
+        "Name[pt_BR]": "Papéis de parede de David Revoy",
+        "Name[ru]": "Обои от David Revoy",
+        "Name[sl]": "David Revoy Wallpapers",
+        "Name[tr]": "David Revoy Duvar Kâğıtları",
+        "Name[uk]": "Фонові зображення David Revoy"
     },
     "X-KDE-PlasmaPoTDProvider-Identifier": "davidrevoy"
 }
