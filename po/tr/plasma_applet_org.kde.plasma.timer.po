@@ -3,13 +3,13 @@
 #
 # obsoleteman <tulliana@gmail.com>, 2008-2009,2012.
 # Volkan Gezer <volkangezer@gmail.com>, 2021.
-# SPDX-FileCopyrightText: 2022, 2023, 2025, 2026 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022-2023, 2025-2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 02:44+0000\n"
-"PO-Revision-Date: 2026-04-24 16:07+0300\n"
+"POT-Creation-Date: 2026-11-04 03:15+0000\n"
+"PO-Revision-Date: 2026-11-03 21:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-POOTLE-MTIME: 1413102232.000000\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #: CompactRepresentation.qml:133
 #, kde-format
@@ -133,27 +133,27 @@ msgstr ""
 "Buraya önceden tanımlanmış sayaçlar eklerseniz bunlar araç takımı bağlam "
 "menüsünde görünecektir."
 
-#: configTimes.qml:125
+#: configTimes.qml:130
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Zamanı değiştirmek için rakamları sarın"
 
-#: configTimes.qml:132
+#: configTimes.qml:137
 #, kde-format
 msgid "Apply"
 msgstr "Uygula"
 
-#: configTimes.qml:140
+#: configTimes.qml:145
 #, kde-format
 msgid "Cancel"
 msgstr "İptal"
 
-#: configTimes.qml:149
+#: configTimes.qml:154
 #, kde-format
 msgid "Edit"
 msgstr "Düzenle"
 
-#: configTimes.qml:158
+#: configTimes.qml:163
 #, kde-format
 msgid "Delete"
 msgstr "Sil"
@@ -204,7 +204,7 @@ msgstr "&Başlat"
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
-msgstr "&Dur"
+msgstr "&Durdur"
 
 #: main.qml:141
 #, kde-format

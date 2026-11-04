@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 02:44+0000\n"
+"POT-Creation-Date: 2026-11-04 03:15+0000\n"
 "PO-Revision-Date: 2025-05-12 17:21+0400\n"
 "Last-Translator: linux <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -138,27 +138,27 @@ msgstr ""
 "Əvvəlcədən təyin olunmuş vaxtölçənləri buraya əlavə etsəniz, onlar plasmoid "
 "kontekst menyusunda görünəcək."
 
-#: configTimes.qml:125
+#: configTimes.qml:130
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Vaxtı dəyişdirmək üçün rəqəmləri sürüşdürün"
 
-#: configTimes.qml:132
+#: configTimes.qml:137
 #, kde-format
 msgid "Apply"
 msgstr "Tətbiq etmək"
 
-#: configTimes.qml:140
+#: configTimes.qml:145
 #, kde-format
 msgid "Cancel"
 msgstr "İmtina"
 
-#: configTimes.qml:149
+#: configTimes.qml:154
 #, kde-format
 msgid "Edit"
 msgstr "Düzəliş etmək"
 
-#: configTimes.qml:158
+#: configTimes.qml:163
 #, kde-format
 msgid "Delete"
 msgstr "Silmək"

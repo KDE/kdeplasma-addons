@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 02:44+0000\n"
+"POT-Creation-Date: 2026-11-04 03:15+0000\n"
 "PO-Revision-Date: 2026-05-12 02:59+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -131,27 +131,27 @@ msgid ""
 "menu."
 msgstr "如果您在此新增預先設定的計時器，它們會出現在元件的內文選單裡。"
 
-#: configTimes.qml:125
+#: configTimes.qml:130
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "在數字上捲動以修改時間"
 
-#: configTimes.qml:132
+#: configTimes.qml:137
 #, kde-format
 msgid "Apply"
 msgstr "套用"
 
-#: configTimes.qml:140
+#: configTimes.qml:145
 #, kde-format
 msgid "Cancel"
 msgstr "取消"
 
-#: configTimes.qml:149
+#: configTimes.qml:154
 #, kde-format
 msgid "Edit"
 msgstr "編輯"
 
-#: configTimes.qml:158
+#: configTimes.qml:163
 #, kde-format
 msgid "Delete"
 msgstr "刪除"

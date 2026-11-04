@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 02:44+0000\n"
+"POT-Creation-Date: 2026-11-04 03:15+0000\n"
 "PO-Revision-Date: 2022-12-12 18:57+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -139,27 +139,27 @@ msgstr ""
 "Se adicionar aqui temporizadores predefinidos, os mesmos irão aparecer no "
 "menu de contexto do plasmóide."
 
-#: configTimes.qml:125
+#: configTimes.qml:130
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Desloque os algarismos para mudar a hora"
 
-#: configTimes.qml:132
+#: configTimes.qml:137
 #, kde-format
 msgid "Apply"
 msgstr "Aplicar"
 
-#: configTimes.qml:140
+#: configTimes.qml:145
 #, kde-format
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: configTimes.qml:149
+#: configTimes.qml:154
 #, kde-format
 msgid "Edit"
 msgstr "Editar"
 
-#: configTimes.qml:158
+#: configTimes.qml:163
 #, kde-format
 msgid "Delete"
 msgstr "Apagar"

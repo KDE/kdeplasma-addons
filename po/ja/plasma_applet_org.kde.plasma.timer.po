@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 02:44+0000\n"
+"POT-Creation-Date: 2026-11-04 03:15+0000\n"
 "PO-Revision-Date: 2021-10-17 13:41-0700\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -144,27 +144,27 @@ msgstr ""
 "ここにプリセットタイマーを追加すると Plasmoid のコンテキストメニューに表示さ"
 "れます。"
 
-#: configTimes.qml:125
+#: configTimes.qml:130
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "数字をスクロールして時間を変更"
 
-#: configTimes.qml:132
+#: configTimes.qml:137
 #, kde-format
 msgid "Apply"
 msgstr "適用"
 
-#: configTimes.qml:140
+#: configTimes.qml:145
 #, kde-format
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: configTimes.qml:149
+#: configTimes.qml:154
 #, kde-format
 msgid "Edit"
 msgstr "編集"
 
-#: configTimes.qml:158
+#: configTimes.qml:163
 #, kde-format
 msgid "Delete"
 msgstr "削除"
