@@ -1,6 +1,7 @@
 plasma_add_applet(org.kde.plasma.mediaframe GENERATE_APPLET_CLASS
     QML_SOURCES
         qml/main.qml
+        qml/ButtonBar.qml
         qml/ConfigBehavior.qml
         qml/ConfigMedia.qml
         qml/config.qml

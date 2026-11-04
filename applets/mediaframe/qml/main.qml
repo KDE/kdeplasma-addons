@@ -157,6 +157,35 @@ PlasmoidItem {
         onTriggered: main.nextItem()
     }
 
+    Kirigami.Action {
+        id: previousAction
+        enabled: (items.historyLength > 0) && !main.isTransitioning
+        visible: main.itemCount > 1
+        text: i18nc("@action:button icon-only", "Show previous image")
+        icon.name: main.LayoutMirroring.enabled ? "go-previous-rtl-symbolic" : "go-previous-symbolic"
+        onTriggered: {
+            nextTimer.stop()
+            main.previousItem()
+        }
+    }
+    Kirigami.Action {
+        id: nextAction
+        enabled: main.hasItems && !main.isTransitioning
+        visible: main.itemCount > 1
+        text: i18nc("@action:button icon-only", "Show next image")
+        icon.name: main.LayoutMirroring.enabled ? "go-next-rtl-symbolic" : "go-next-symbolic"
+        onTriggered: {
+            nextTimer.stop()
+            main.nextItem()
+        }
+    }
+    Kirigami.Action {
+        id: openViewerAction
+        icon.name: "document-preview"
+        text: i18nc("@action:button icon-only", "Open in default image viewer")
+        onTriggered: Qt.openUrlExternally(main.activeSource)
+    }
+
     fullRepresentation: Item {
         id: fullRepresentation
 
@@ -306,39 +335,27 @@ PlasmoidItem {
                 NumberAnimation {}
             }
 
-            PlasmaComponents3.Button {
-                anchors.left: parent.left
-                anchors.verticalCenter: parent.verticalCenter
-                enabled: (items.historyLength > 0) && !main.isTransitioning
+            ButtonBar {
+                anchors.bottom: parent.bottom
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottomMargin: Kirigami.Units.largeSpacing
                 visible: main.itemCount > 1
-                icon.name: "arrow-left"
-                onClicked: {
-                    nextTimer.stop()
-                    main.previousItem()
-                }
+
+                actions: [previousAction, openViewerAction, nextAction]
             }
 
-            PlasmaComponents3.Button {
-                anchors.right: parent.right
-                anchors.verticalCenter: parent.verticalCenter
-                enabled: main.hasItems && !main.isTransitioning
-                visible: main.itemCount > 1
-                icon.name: "arrow-right"
-                onClicked: {
-                    nextTimer.stop()
-                    main.nextItem()
-                }
-            }
-
-            Row {
+            PlasmaComponents3.RoundButton {
                 anchors.bottom: parent.bottom
                 anchors.horizontalCenter: parent.horizontalCenter
                 anchors.bottomMargin: Kirigami.Units.smallSpacing
-
-                PlasmaComponents3.Button {
-                    icon.name: "document-preview"
-                    onClicked: Qt.openUrlExternally(main.activeSource)
-                }
+                visible: main.itemCount === 1
+                display: PlasmaComponents3.RoundButton.IconOnly
+                action: openViewerAction
+                text: action.text
+                icon.name: action.icon.name
+                PlasmaComponents3.ToolTip.visible: hovered || visualFocus
+                PlasmaComponents3.ToolTip.text: text
+                PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
             }
 
             // BUG TODO Fix overlay so _all_ mouse events reach lower components
