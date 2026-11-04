@@ -37,8 +37,7 @@ Item {
         y: background.margins.top
 
         spacing: 4
-        //ToolButton or Button in C++ use PushButton?
-        PlasmaComponents3.Button {
+        PlasmaComponents3.ToolButton {
             id: prevButton
 
             icon.name: LayoutMirroring.enabled ? "go-previous-rtl-symbolic" : "go-previous-symbolic"
@@ -46,14 +45,14 @@ Item {
             onClicked: root.prevClicked()
         }
 
-        PlasmaComponents3.Button {
+        PlasmaComponents3.ToolButton {
             id: zoomButton
 
             icon.name: "zoom-original"
             onClicked: root.zoomClicked()
         }
 
-        PlasmaComponents3.Button {
+        PlasmaComponents3.ToolButton {
             id: nextButton
 
             icon.name: LayoutMirroring.enabled ? "go-next-rtl-symbolic" : "go-next-symbolic"
