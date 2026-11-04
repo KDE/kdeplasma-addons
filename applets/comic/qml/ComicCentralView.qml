@@ -122,15 +122,18 @@ Item {
                     Kirigami.Action {
                         icon.name: buttonBar.LayoutMirroring.enabled ? "go-previous-rtl-symbolic" : "go-previous-symbolic"
                         enabled: (root.comicData.prev != undefined && root.comicData.prev.length > 0)
+                        text: i18nc("@action:button in floating toolbar, icon-only", "Go to previous strip")
                         onTriggered: root.updateComicRequested(root.comicData.prev)
                     },
                     Kirigami.Action {
                         icon.name: "zoom-original"
+                        text: i18nc("@action:button in floating toolbar, icon-only", "Show full-size in popup")
                         onTriggered: fullDialog.toggleVisibility()
                     },
                     Kirigami.Action {
                         icon.name: buttonBar.LayoutMirroring.enabled ? "go-next-rtl-symbolic" : "go-next-symbolic"
                         enabled: (root.comicData.next != undefined && root.comicData.next.length > 0)
+                        text: i18nc("@action:button in floating toolbar, icon-only", "Go to next strip")
                         onTriggered: root.updateComicRequested(root.comicData.next)
                     }
                 ]

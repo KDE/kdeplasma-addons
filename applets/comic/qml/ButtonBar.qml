@@ -37,6 +37,10 @@ PlasmaComponents3.Control {
                 action: modelData
                 icon.name: action.icon.name
                 enabled: action.enabled
+                display: PlasmaComponents3.ToolButton.IconOnly
+                PlasmaComponents3.ToolTip.visible: hovered || visualFocus
+                PlasmaComponents3.ToolTip.text: action.text
+                PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
             }
         }
     }
