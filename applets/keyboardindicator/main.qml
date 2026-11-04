@@ -56,6 +56,8 @@ PlasmoidItem {
             return "input-caps-on-symbolic";
         } else if (numLockState?.locked) {
             return "input-num-on-symbolic";
+        } else if (numLockState && !capsLockState) {
+            return "input-num-on-symbolic";
         } else {
             return "input-caps-on-symbolic";
         }
@@ -98,7 +100,7 @@ PlasmoidItem {
         PlasmaExtras.PlaceholderMessage {
             anchors.centerIn: parent
             width: parent.width - (Kirigami.Units.gridUnit * 4)
-            iconName: Plasmoid.icon
+            iconName: root.anyActive ? Plasmoid.icon : ""
             text: root.toolTipSubText
         }
     }
