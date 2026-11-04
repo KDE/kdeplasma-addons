@@ -329,7 +329,7 @@ PlasmoidItem {
             anchors.fill: parent
 
             visible: main.hasItems
-            opacity: overlayMouseArea.containsMouse ? 1 : 0
+            opacity: hoverHandler.hovered ? 1 : 0
 
             Behavior on opacity {
                 NumberAnimation {}
@@ -358,19 +358,10 @@ PlasmoidItem {
                 PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
             }
 
-            // BUG TODO Fix overlay so _all_ mouse events reach lower components
-            MouseArea {
-                id: overlayMouseArea
-
-                anchors.fill: parent
-                hoverEnabled: true
-
-                propagateComposedEvents: true
-
-                onPressed: mouse => mouse.accepted = false;
-                onDoubleClicked: mouse => mouse.accepted = false;
-                Binding { main.pause: overlayMouseArea.containsMouse }
+            HoverHandler {
+                id: hoverHandler
             }
+            Binding { main.pause: hoverHandler.hovered }
 
         }
 
