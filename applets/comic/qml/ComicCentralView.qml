@@ -104,7 +104,7 @@ Item {
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     bottom: parent.bottom
-                    bottomMargin: 10
+                    bottomMargin: Kirigami.Units.largeSpacing
                 }
 
                 visible: Plasmoid.configuration.arrowsOnHover && comicImageArea.containsMouse
