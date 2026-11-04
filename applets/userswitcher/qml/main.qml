@@ -15,6 +15,7 @@ import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigamiaddons.components as KirigamiComponents
 import org.kde.plasma.plasmoid
+import org.kde.kworkspace as KWorkspace
 
 import org.kde.plasma.private.sessions as Sessions
 
@@ -121,7 +122,7 @@ PlasmoidItem {
         Layout.maximumWidth: Layout.preferredWidth
         Layout.maximumHeight: Layout.preferredHeight
 
-        Sessions.SessionManagement {
+        KWorkspace.SessionManagement {
             id: sm
         }
 
