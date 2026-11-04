@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-03 00:56+0000\n"
-"PO-Revision-Date: 2025-04-24 07:24+0200\n"
+"PO-Revision-Date: 2026-11-03 07:12+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -18,11 +18,10 @@ msgstr ""
 "Plural-Forms: nplurals=4; plural=(n%100==1 ? 1 : n%100==2 ? 2 : n%100==3 || n"
 "%100==4 ? 3 : 0);\n"
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.10\n"
 
 #: qml/AvailableDictSheet.qml:23
-#, fuzzy, kde-format
-#| msgid "Add More Dictionaries"
+#, kde-format
 msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
 msgstr "Dodaj več slovarjev"
@@ -40,8 +39,7 @@ msgid "Add More…"
 msgstr "Dodaj več…"
 
 #: qml/ConfigDictionaries.qml:94
-#, fuzzy, kde-format
-#| msgid "Unable to load dictionary list"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "Ni bilo mogoče naložiti seznama slovarjev"
@@ -53,16 +51,14 @@ msgid "Error code: %1 (%2)"
 msgstr "Koda napake:  %1 (%2)"
 
 #: qml/ConfigDictionaries.qml:106
-#, fuzzy, kde-format
-#| msgid "No dictionaries"
+#, kde-format
 msgctxt ""
 "@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
 msgstr "Ni slovarjev"
 
 #: qml/DictItemDelegate.qml:64
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr "Zbriši"
@@ -74,11 +70,10 @@ msgid "Enter word to define here…"
 msgstr "Tu vnesite besedo za določitev…"
 
 #: qml/main.qml:201
-#, fuzzy, kde-format
-#| msgid "Unable to load definition"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
-msgstr "Ni bilo mogoče naložiti definicije"
+msgstr "Ni mogoče naložiti definicije"
 
 #~ msgid "Looking up definition…"
 #~ msgstr "Iskanje definicije..."

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-04 01:04+0000\n"
 "PO-Revision-Date: 2026-10-31 12:40+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -22,13 +22,13 @@ msgstr ""
 "X-Generator: Lokalize 26.08.2\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Pausar el temporizador"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
@@ -128,31 +128,31 @@ msgstr ""
 "Si añade aquí temporizadores predefinidos, aparecerán en el menú de contexto "
 "del elemento gráfico."
 
-#: configTimes.qml:134
+#: configTimes.qml:136
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Deslice los dígitos para cambiar la hora"
 
-#: configTimes.qml:144
+#: configTimes.qml:146
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Aplicar"
 
-#: configTimes.qml:163
+#: configTimes.qml:165
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: configTimes.qml:183
+#: configTimes.qml:185
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Editar"
 
-#: configTimes.qml:204
+#: configTimes.qml:206
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"

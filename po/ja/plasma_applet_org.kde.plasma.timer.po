@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-04 01:04+0000\n"
 "PO-Revision-Date: 2021-10-17 13:41-0700\n"
 "Last-Translator: Fumiaki Okushi <fumiaki.okushi@gmail.com>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -19,14 +19,14 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Generator: Poedit 2.4.2\n"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "タイマー"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
@@ -138,35 +138,35 @@ msgstr ""
 "ここにプリセットタイマーを追加すると Plasmoid のコンテキストメニューに表示さ"
 "れます。"
 
-#: configTimes.qml:134
+#: configTimes.qml:136
 #, fuzzy, kde-format
 #| msgid "Scroll over digits to change time"
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "数字をスクロールして時間を変更"
 
-#: configTimes.qml:144
+#: configTimes.qml:146
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "適用"
 
-#: configTimes.qml:163
+#: configTimes.qml:165
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "キャンセル"
 
-#: configTimes.qml:183
+#: configTimes.qml:185
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "編集"
 
-#: configTimes.qml:204
+#: configTimes.qml:206
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"

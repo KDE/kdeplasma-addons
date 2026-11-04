@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2017, 2018, 2021, 2022, 2025.
+# SPDX-FileCopyrightText: 2017, 2018, 2021, 2022, 2025, 2026 Yuri Chornoivan <yurchor@ukr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma_applet_dict\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-03 00:56+0000\n"
-"PO-Revision-Date: 2025-04-24 11:51+0300\n"
+"PO-Revision-Date: 2026-11-03 08:26+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -18,14 +18,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=n==1 ? 3 : n%10==1 && n%100!=11 ? 0 : n"
 "%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Lokalize 23.04.3\n"
+"X-Generator: Lokalize 25.12.1\n"
 
 #: qml/AvailableDictSheet.qml:23
-#, fuzzy, kde-format
-#| msgid "Add More Dictionaries"
+#, kde-format
 msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
-msgstr "Додати словники"
+msgstr "Давання словників"
 
 #: qml/config.qml:13
 #, kde-format
@@ -40,8 +39,7 @@ msgid "Add More…"
 msgstr "Додати…"
 
 #: qml/ConfigDictionaries.qml:94
-#, fuzzy, kde-format
-#| msgid "Unable to load dictionary list"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "Не вдалося завантажити список словників"
@@ -53,16 +51,14 @@ msgid "Error code: %1 (%2)"
 msgstr "Код помилки: %1 (%2)"
 
 #: qml/ConfigDictionaries.qml:106
-#, fuzzy, kde-format
-#| msgid "No dictionaries"
+#, kde-format
 msgctxt ""
 "@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
 msgstr "Немає словників"
 
 #: qml/DictItemDelegate.qml:64
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr "Вилучити"
@@ -74,8 +70,7 @@ msgid "Enter word to define here…"
 msgstr "Введіть слово для визначення…"
 
 #: qml/main.qml:201
-#, fuzzy, kde-format
-#| msgid "Unable to load definition"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
 msgstr "Не вдалося завантажити визначення"

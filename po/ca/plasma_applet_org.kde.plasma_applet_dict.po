@@ -1,16 +1,16 @@
 # Translation of plasma_applet_org.kde.plasma_applet_dict.po to Catalan
-# Copyright (C) 2017-2025 This_file_is_part_of_KDE
+# Copyright (C) 2017-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2017-2018, 2022, 2025 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2017-2018, 2022, 2025-2026 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2021 Antoni Bella Pérez <antonibella5@yahoo.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-03 00:56+0000\n"
-"PO-Revision-Date: 2025-04-24 12:35+0200\n"
+"PO-Revision-Date: 2026-11-03 10:22+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -21,8 +21,7 @@ msgstr ""
 "X-Generator: Lokalize 25.04.0\n"
 
 #: qml/AvailableDictSheet.qml:23
-#, fuzzy, kde-format
-#| msgid "Add More Dictionaries"
+#, kde-format
 msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
 msgstr "Afegeix més diccionaris"
@@ -40,8 +39,7 @@ msgid "Add More…"
 msgstr "Afegeix-ne més…"
 
 #: qml/ConfigDictionaries.qml:94
-#, fuzzy, kde-format
-#| msgid "Unable to load dictionary list"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "No s'ha pogut carregar la llista de diccionaris"
@@ -53,16 +51,14 @@ msgid "Error code: %1 (%2)"
 msgstr "Codi d'error: %1 (%2)"
 
 #: qml/ConfigDictionaries.qml:106
-#, fuzzy, kde-format
-#| msgid "No dictionaries"
+#, kde-format
 msgctxt ""
 "@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
 msgstr "Cap diccionari"
 
 #: qml/DictItemDelegate.qml:64
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr "Suprimeix"
@@ -74,8 +70,7 @@ msgid "Enter word to define here…"
 msgstr "Introduïu aquí la paraula a definir…"
 
 #: qml/main.qml:201
-#, fuzzy, kde-format
-#| msgid "Unable to load definition"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
 msgstr "No s'ha pogut carregar la definició"

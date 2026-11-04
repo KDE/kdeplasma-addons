@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-04 01:04+0000\n"
 "PO-Revision-Date: 2026-05-16 20:17+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "20)) ? 1 : 2;\n"
 "X-Generator: Lokalize 25.12.3\n"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Întrerupe temporizatorul"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
@@ -127,35 +127,35 @@ msgstr ""
 "Dacă adăugați temporizatoare predefinite aici, acestea vor apărea în meniul "
 "contextual al controlului grafic."
 
-#: configTimes.qml:134
+#: configTimes.qml:136
 #, fuzzy, kde-format
 #| msgid "Scroll over digits to change time"
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Derulați peste cifre pentru a schimba durata"
 
-#: configTimes.qml:144
+#: configTimes.qml:146
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Aplică"
 
-#: configTimes.qml:163
+#: configTimes.qml:165
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Renunță"
 
-#: configTimes.qml:183
+#: configTimes.qml:185
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Modifică"
 
-#: configTimes.qml:204
+#: configTimes.qml:206
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"

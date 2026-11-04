@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-04 01:04+0000\n"
 "PO-Revision-Date: 2024-12-15 15:57+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n!=1);\n"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr ""
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
@@ -121,31 +121,31 @@ msgid ""
 "menu."
 msgstr ""
 
-#: configTimes.qml:134
+#: configTimes.qml:136
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr ""
 
-#: configTimes.qml:144
+#: configTimes.qml:146
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr ""
 
-#: configTimes.qml:163
+#: configTimes.qml:165
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr ""
 
-#: configTimes.qml:183
+#: configTimes.qml:185
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr ""
 
-#: configTimes.qml:204
+#: configTimes.qml:206
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"

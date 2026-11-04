@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-04 01:04+0000\n"
 "PO-Revision-Date: 2026-10-31 12:02+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -28,13 +28,13 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Приостановить таймер"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
@@ -132,31 +132,31 @@ msgid ""
 "menu."
 msgstr "Предустановленные таймеры будут показаны в контекстном меню виджета."
 
-#: configTimes.qml:134
+#: configTimes.qml:136
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Для изменения времени прокручивайте колесо мыши над цифрами"
 
-#: configTimes.qml:144
+#: configTimes.qml:146
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Применить"
 
-#: configTimes.qml:163
+#: configTimes.qml:165
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: configTimes.qml:183
+#: configTimes.qml:185
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Изменить"
 
-#: configTimes.qml:204
+#: configTimes.qml:206
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"

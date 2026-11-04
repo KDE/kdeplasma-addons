@@ -1,13 +1,13 @@
 #
 # Translators:
 #
-# Emir SARI <emir_sari@icloud.com>, 2022, 2023.
+# SPDX-FileCopyrightText: 2022-2023, 2026 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2023-06-28 12:00+0300\n"
+"PO-Revision-Date: 2026-11-03 21:57+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 23.07.70\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #: config.qml:13
 #, kde-format
@@ -43,92 +43,79 @@ msgid "Num Lock"
 msgstr "Sayı Kilidi"
 
 #: main.qml:115
-#, fuzzy, kde-format
-#| msgid "Alt is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Alt applies to next press"
 msgid "Alt is latched"
 msgstr "Seçenek takılı"
 
 #: main.qml:117
-#, fuzzy, kde-format
-#| msgid "Alt is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Alt applies until pressed again"
 msgid "Alt is locked"
 msgstr "Seçenek kilitli"
 
 #: main.qml:121
-#, fuzzy, kde-format
-#| msgid "Shift is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Shift applies to next press"
 msgid "Shift is latched"
 msgstr "Üst Karakter takılı"
 
 #: main.qml:123
-#, fuzzy, kde-format
-#| msgid "Shift is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Shift applies until pressed again"
 msgid "Shift is locked"
 msgstr "Üst Karakter kilitli"
 
 #: main.qml:127
-#, fuzzy, kde-format
-#| msgid "Control is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Ctrl applies to next press"
 msgid "Control is latched"
 msgstr "Kontrol takılı"
 
 #: main.qml:129
-#, fuzzy, kde-format
-#| msgid "Control is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Ctrl applies until pressed again"
 msgid "Control is locked"
 msgstr "Kontrol kilitli"
 
 #: main.qml:133
-#, fuzzy, kde-format
-#| msgid "Meta is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Meta applies to next press"
 msgid "Meta is latched"
 msgstr "Meta takılı"
 
 #: main.qml:135
-#, fuzzy, kde-format
-#| msgid "Meta is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Meta applies until pressed again"
 msgid "Meta is locked"
 msgstr "Meta kilitli"
 
 #: main.qml:139
-#, fuzzy, kde-format
-#| msgid "Alt Gr is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, AltGr applies to next press"
 msgid "Alt Gr is latched"
 msgstr "Üst Seçenek takılı"
 
 #: main.qml:141
-#, fuzzy, kde-format
-#| msgid "Alt Gr is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, AltGr applies until pressed again"
 msgid "Alt Gr is locked"
 msgstr "Üst Seçenek kilitli"
 
 #: main.qml:145
-#, fuzzy, kde-format
-#| msgid "Caps Lock activated"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Caps Lock on"
 msgid "Caps Lock activated"
 msgstr "Büyük Harf etkin"
 
 #: main.qml:148
-#, fuzzy, kde-format
-#| msgid "Num Lock activated"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Num Lock on"
 msgid "Num Lock activated"
 msgstr "Sayı Kilidi etkin"
 
 #: main.qml:156
-#, fuzzy, kde-format
-#| msgid "No lock keys activated"
+#, kde-format
 msgctxt ""
 "@info:tooltip widget subtitle, no Lock keys or sticky modifiers active"
 msgid "No lock keys activated"

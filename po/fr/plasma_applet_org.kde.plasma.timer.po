@@ -15,8 +15,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2026-10-29 12:00+0100\n"
+"POT-Creation-Date: 2026-11-04 01:04+0000\n"
+"PO-Revision-Date: 2026-11-02 13:44+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
 "Language: fr\n"
@@ -29,13 +29,13 @@ msgstr ""
 "X-Generator: Lokalize 26.08.1\n"
 "X-Text-Markup: kde4\n"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Mettre le minuteur en pause"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
@@ -126,10 +126,7 @@ msgid "Add"
 msgstr "Ajouter"
 
 #: configTimes.qml:88
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in the widget’s "
-#| "context menu."
+#, kde-format
 msgctxt "@info:usagetip PlaceHolderMessage empty ListView"
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -138,90 +135,76 @@ msgstr ""
 "Si vous ajoutez ici des compteurs prédéfinis, il devraient apparaitre dans "
 "le menu contextuel du composant graphique."
 
-#: configTimes.qml:134
-#, fuzzy, kde-format
-#| msgid "Scroll over digits to change time"
+#: configTimes.qml:136
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
-msgstr "Faire défiler les nombres pour modifier l'heure"
+msgstr "Faites défiler les nombres pour modifier l'heure"
 
-#: configTimes.qml:144
-#, fuzzy, kde-format
-#| msgid "Apply"
+#: configTimes.qml:146
+#, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Appliquer"
 
-#: configTimes.qml:163
-#, fuzzy, kde-format
-#| msgid "Cancel"
+#: configTimes.qml:165
+#, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: configTimes.qml:183
-#, fuzzy, kde-format
-#| msgid "Edit"
+#: configTimes.qml:185
+#, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Modifier"
 
-#: configTimes.qml:204
-#, fuzzy, kde-format
-#| msgid "Delete"
+#: configTimes.qml:206
+#, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Supprimer"
 
 #: main.qml:40
-#, fuzzy, kde-format
-#| msgid "%1 is running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
-msgstr "%1 est en cours d'exécution"
+msgstr "%1 est en cours d'exécution."
 
 #: main.qml:42
-#, fuzzy, kde-format
-#| msgid "%1 not running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
-msgstr "%1 pas en cours d'exécution"
+msgstr "%1 n'est pas en cours d'exécution."
 
 #: main.qml:46
-#, fuzzy, kde-format
-#| msgid "Remaining time left: %1 second"
-#| msgid_plural "Remaining time left: %1 seconds"
+#, kde-format
 msgctxt ""
 "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
 "running timer"
 msgid "Remaining time left: %1 second"
 msgid_plural "Remaining time left: %1 seconds"
-msgstr[0] "Temps restant : %1 seconde"
-msgstr[1] "Temps restant : %1 secondes"
+msgstr[0] "Temps restant : %1 seconde"
+msgstr[1] "Temps restant : %1 secondes"
 
 #: main.qml:47
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use mouse wheel to change digits or choose from predefined timers in the "
-#| "context menu"
+#, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
 msgstr ""
-"Utilisez la molette de la souris pour changer les chiffres ou choisissez "
-"depuis des durées prédéfinies dans le menu contextuel"
+"Utilisez la molette de la souris pour modifier les chiffres ou sélectionnez "
+"depuis des minuteurs prédéfinis dans le menu contextuel"
 
 #: main.qml:84
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Minuteur"
 
 #: main.qml:85
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Décompte terminé"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-04 01:04+0000\n"
 "PO-Revision-Date: 2026-10-31 17:39+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -19,13 +19,13 @@ msgstr ""
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
 "X-Generator: Lokalize 26.08.1\n"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "ألبث المؤقّت"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
@@ -126,35 +126,35 @@ msgid ""
 "menu."
 msgstr "إذا أضفت مؤقتات محددة مسبقًا هنا، فسوف تظهر في قائمة سياق الودجة."
 
-#: configTimes.qml:134
+#: configTimes.qml:136
 #, fuzzy, kde-format
 #| msgid "Scroll over digits to change time"
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "مرر بالفأرة على الأرقام لتغيير الوقت"
 
-#: configTimes.qml:144
+#: configTimes.qml:146
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "طبّق"
 
-#: configTimes.qml:163
+#: configTimes.qml:165
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "ألغِ"
 
-#: configTimes.qml:183
+#: configTimes.qml:185
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "حرّر"
 
-#: configTimes.qml:204
+#: configTimes.qml:206
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"

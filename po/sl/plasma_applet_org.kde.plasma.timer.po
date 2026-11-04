@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-04 01:04+0000\n"
 "PO-Revision-Date: 2026-10-31 07:10+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -22,13 +22,13 @@ msgstr ""
 "Translator: Andrej Mernik <andrejm@ubuntu.si>\n"
 "X-Generator: Poedit 3.10\n"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Začasno zaustavi časomer"
 
-#: CompactRepresentation.qml:144
+#: CompactRepresentation.qml:154
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
@@ -128,31 +128,31 @@ msgstr ""
 "Če sem dodate vnaprej določene časomere, se bodo pojavili v kontekstnem "
 "meniju gradnikov."
 
-#: configTimes.qml:134
+#: configTimes.qml:136
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Pomaknite se prek številk, da spremenite čas"
 
-#: configTimes.qml:144
+#: configTimes.qml:146
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Uveljavi"
 
-#: configTimes.qml:163
+#: configTimes.qml:165
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Prekliči"
 
-#: configTimes.qml:183
+#: configTimes.qml:185
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Uredi"
 
-#: configTimes.qml:204
+#: configTimes.qml:206
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
