@@ -99,8 +99,6 @@ Item {
             ButtonBar {
                 id: buttonBar
 
-                comicData: root.comicData
-
                 anchors {
                     horizontalCenter: parent.horizontalCenter
                     bottom: parent.bottom
@@ -109,18 +107,6 @@ Item {
 
                 visible: Plasmoid.configuration.arrowsOnHover && comicImageArea.containsMouse
                 opacity: 0
-
-                onPrevClicked: {
-                    root.updateComicRequested(root.comicData.prev);
-                }
-
-                onNextClicked: {
-                    root.updateComicRequested(root.comicData.next);
-                }
-
-                onZoomClicked: {
-                    fullDialog.toggleVisibility();
-                }
 
                 states: State {
                     name: "show"; when: (Plasmoid.configuration.arrowsOnHover && comicImageArea.containsMouse)
@@ -131,6 +117,23 @@ Item {
                     from: ""; to: "show"; reversible: true
                     NumberAnimation { properties: "opacity"; duration: Kirigami.Units.longDuration; easing.type: Easing.InOutQuad }
                 }
+
+                actions: [
+                    Kirigami.Action {
+                        icon.name: buttonBar.LayoutMirroring.enabled ? "go-previous-rtl-symbolic" : "go-previous-symbolic"
+                        enabled: (root.comicData.prev != undefined && root.comicData.prev.length > 0)
+                        onTriggered: root.updateComicRequested(root.comicData.prev)
+                    },
+                    Kirigami.Action {
+                        icon.name: "zoom-original"
+                        onTriggered: fullDialog.toggleVisibility()
+                    },
+                    Kirigami.Action {
+                        icon.name: buttonBar.LayoutMirroring.enabled ? "go-next-rtl-symbolic" : "go-next-symbolic"
+                        enabled: (root.comicData.next != undefined && root.comicData.next.length > 0)
+                        onTriggered: root.updateComicRequested(root.comicData.next)
+                    }
+                ]
             }
         }
     }

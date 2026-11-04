@@ -7,57 +7,37 @@
 import QtQuick
 import org.kde.ksvg as KSvg
 import org.kde.plasma.components as PlasmaComponents3
-import plasma.applet.org.kde.plasma.comic as Comic
+import org.kde.kirigami as Kirigami
 
-Item {
+PlasmaComponents3.Control {
     id: root
 
-    required property Comic.comicData comicData
+    required property list<Kirigami.Action> actions
 
-    implicitWidth: rowButton.width + background.margins.left + background.margins.right
-    implicitHeight: rowButton.height + background.margins.top + background.margins.bottom
+    leftPadding: backgroundItem.margins.left
+    rightPadding: backgroundItem.margins.right
+    topPadding: backgroundItem.margins.top
+    bottomPadding: backgroundItem.margins.bottom
 
-    signal prevClicked
-    signal nextClicked
-    signal zoomClicked
-
-    KSvg.FrameSvgItem {
-        id: background
-
+    background: KSvg.FrameSvgItem {
+        id: backgroundItem
         anchors.fill: parent
-
-        imagePath: "widgets/toolbar"
-        prefix: "raised"
+        imagePath: "widgets/background"
     }
 
-    Row {
+    contentItem: Row {
         id: rowButton
+        spacing: Kirigami.Units.mediumSpacing
 
-        x: background.margins.left
-        y: background.margins.top
-
-        spacing: 4
-        PlasmaComponents3.ToolButton {
-            id: prevButton
-
-            icon.name: LayoutMirroring.enabled ? "go-previous-rtl-symbolic" : "go-previous-symbolic"
-            enabled: (root.comicData.prev != undefined && root.comicData.prev.length > 0)
-            onClicked: root.prevClicked()
-        }
-
-        PlasmaComponents3.ToolButton {
-            id: zoomButton
-
-            icon.name: "zoom-original"
-            onClicked: root.zoomClicked()
-        }
-
-        PlasmaComponents3.ToolButton {
-            id: nextButton
-
-            icon.name: LayoutMirroring.enabled ? "go-next-rtl-symbolic" : "go-next-symbolic"
-            enabled: (root.comicData.next != undefined && root.comicData.next.length > 0)
-            onClicked: root.nextClicked()
+        Repeater {
+            id: repeater
+            model: root.actions
+            delegate: PlasmaComponents3.ToolButton {
+                required property Kirigami.Action modelData
+                action: modelData
+                icon.name: action.icon.name
+                enabled: action.enabled
+            }
         }
     }
 }
