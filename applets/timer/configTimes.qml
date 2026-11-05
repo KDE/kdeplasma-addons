@@ -99,6 +99,7 @@ KCM.ScrollViewKCM {
             sourceComponent: QQC2.ItemDelegate {
                 id: timeEditItem
 
+                focus: true
                 width: timeListView.width
                 Kirigami.Theme.useAlternateBackgroundColor: true
                 KeyNavigation.right: editor.editable ? editor : editButton
