@@ -66,6 +66,7 @@ PlasmoidItem {
 
         Window { // QTBUG-119055
             id: window
+            transientParent: null
             width: Kirigami.Units.gridUnit * 19
             height: Kirigami.Units.gridUnit * 23
             maximumWidth: width
@@ -76,6 +77,7 @@ PlasmoidItem {
             title: Plasmoid.title
             QtDialogs.ColorDialog {
                 id: colorDialog
+                modality: Qt.NonModal
                 title: Plasmoid.title
                 selectedColor: historyModel.count > 0 ? root.recentColor : undefined /* Prevent transparent colors */
                 onAccepted: {
