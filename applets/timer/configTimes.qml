@@ -10,12 +10,15 @@ import QtQuick.Controls as QQC2
 import QtQuick.Layouts
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
+import plasma.applet.org.kde.plasma.timer as TimerPlasmoid
+
 
 KCM.ScrollViewKCM {
     id: timesPage
     property var cfg_predefinedTimers: []
     property bool cfg_showSeconds
     readonly property int maxListSize: 15
+
 
     actions: [
         Kirigami.Action {
@@ -99,9 +102,9 @@ KCM.ScrollViewKCM {
                 focus: true
                 width: timeListView.width
                 Kirigami.Theme.useAlternateBackgroundColor: true
-                KeyNavigation.right: editor.editable ? editor : editButton
+                KeyNavigation.right: editor.editable ? hoursSpinBox : editButton
                 contentItem: RowLayout {
-                    spacing: Kirigami.Units.gridUnit
+                    spacing: Kirigami.Units.smallSpacing
                     Kirigami.ListItemDragHandle {
                         Layout.fillHeight: true
                         enabled: !editor.editable
@@ -111,28 +114,75 @@ KCM.ScrollViewKCM {
                             timeListModel.moveTimer(oldIndex, newIndex)
                         }
                     }
-                    TimerEdit {
-                        id: editor
+                    Kirigami.Heading {
+                        id: timeLabel
                         Layout.fillWidth: true
-                        alertMode: editable
-                        value: delegate.time
-                        showSeconds: timesPage.cfg_showSeconds
-                        maximumHeight: timeEditItem.availableHeight
-                        property int oldValue: 0
-                        onDigitModified: valueDelta => {
-                            set(value + valueDelta)
-                        }
-                        function set(newValue) {
-                            timeListModel.setTimer(delegate.index, (newValue).toString())
-                        }
-                        KeyNavigation.right: editable ? applyButton : editButton
-                        Component.onCompleted: editable = (value === 0)
+                        visible: !editor.editable
+                        text: TimerPlasmoid.Timer.secondsToString(delegate.time, "hh:mm:ss")
                     }
-                    QQC2.Label {
-                        id: hintText
-                        visible: editor.editable
-                        text: i18nc("@info:usagetip", "Scroll over digits to change time")
-                        textFormat: Text.PlainText
+                    RowLayout {
+                        id: editor
+
+                        property bool editable: false
+                        property int oldValue: delegate.time
+                        readonly property int value: hoursSpinBox.value * (60*60) + minutesSpinBox.value * 60 + secondsSpinBox.value
+
+                        Layout.fillWidth: true
+                        visible: editable
+
+                        Component.onCompleted: {
+                            set(oldValue)
+                            editable = oldValue === 0
+                        }
+
+                        function set(newValue: int) : void {
+                            const secondsPerHour = 60*60
+                            hoursSpinBox.value = Math.floor(newValue / secondsPerHour)
+                            minutesSpinBox.value = Math.floor((newValue % secondsPerHour) / 60)
+                            secondsSpinBox.value = newValue % 60
+                        }
+
+                        QQC2.SpinBox {
+                            id: hoursSpinBox
+                            from: 0
+                            to: 23
+                            textFromValue: (value) => value.toString().padStart(2, "0")
+                            KeyNavigation.right: minutesSpinBox
+                        }
+                        Kirigami.Heading { text: ":" }
+                        QQC2.SpinBox {
+                            id: minutesSpinBox
+                            from: -1
+                            to: 60
+                            textFromValue: (value) => value.toString().padStart(2, "0")
+                            onValueChanged: {
+                                if (value == 60) {
+                                    value = hoursSpinBox.value < 23 ? 0 : 59
+                                    hoursSpinBox.increase()
+                                } else if (value == -1) {
+                                    value = hoursSpinBox.value > 0 ? 59 : 0
+                                    hoursSpinBox.decrease()
+                                }
+                            }
+                            KeyNavigation.right: secondsSpinBox
+                        }
+                        Kirigami.Heading { text: ":" }
+                        QQC2.SpinBox {
+                            id: secondsSpinBox
+                            from: -1
+                            to: 60
+                            textFromValue: (value) => value.toString().padStart(2, "0")
+                            onValueChanged: {
+                                if (value == 60) {
+                                    value = (hoursSpinBox.value < 23 || minutesSpinBox.value < 60) ? 0 : 59
+                                    minutesSpinBox.increase()
+                                } else if (value == -1) {
+                                    value = (hoursSpinBox.value > 0 || minutesSpinBox.value > 0)? 59 : 0
+                                    minutesSpinBox.decrease()
+                                }
+                            }
+                            KeyNavigation.right: applyButton
+                        }
                     }
                     RowLayout {
                         Layout.alignment: Qt.AlignRight
@@ -164,7 +214,6 @@ KCM.ScrollViewKCM {
                                 icon.name: "dialog-cancel"
                                 onTriggered: {
                                     editor.editable = false
-                                    editor.set(editor.oldValue)
                                 }
                             }
                             text: action.text
@@ -183,7 +232,8 @@ KCM.ScrollViewKCM {
                                 text: i18nc("@action:button enter tmer edit mode", "Edit")
                                 icon.name: "edit-entry"
                                 onTriggered: {
-                                    editor.oldValue = editor.value
+                                    editor.oldValue = delegate.time
+                                    editor.set(editor.oldValue)
                                     editor.editable = true
                                 }
                             }
