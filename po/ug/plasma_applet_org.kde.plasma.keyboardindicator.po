@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-05 00:57+0000\n"
 "PO-Revision-Date: 2026-09-23 06:56+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -43,77 +43,77 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr ""
 
-#: main.qml:115
+#: main.qml:117
 #, fuzzy, kde-format
 #| msgid "Alt is latched"
 msgctxt "@info:tooltip widget subtitle, Alt applies to next press"
 msgid "Alt is latched"
 msgstr "Alt ۋاقىتلىق قۇلۇپلاندى"
 
-#: main.qml:117
+#: main.qml:119
 #, fuzzy, kde-format
 #| msgid "Alt is locked"
 msgctxt "@info:tooltip widget subtitle, Alt applies until pressed again"
 msgid "Alt is locked"
 msgstr "Alt قۇلۇپلاندى"
 
-#: main.qml:121
+#: main.qml:123
 #, fuzzy, kde-format
 #| msgid "Alt is latched"
 msgctxt "@info:tooltip widget subtitle, Shift applies to next press"
 msgid "Shift is latched"
 msgstr "Alt ۋاقىتلىق قۇلۇپلاندى"
 
-#: main.qml:123
+#: main.qml:125
 #, fuzzy, kde-format
 #| msgid "Alt is locked"
 msgctxt "@info:tooltip widget subtitle, Shift applies until pressed again"
 msgid "Shift is locked"
 msgstr "Alt قۇلۇپلاندى"
 
-#: main.qml:127
+#: main.qml:129
 #, fuzzy, kde-format
 #| msgid "Alt is latched"
 msgctxt "@info:tooltip widget subtitle, Ctrl applies to next press"
 msgid "Control is latched"
 msgstr "Alt ۋاقىتلىق قۇلۇپلاندى"
 
-#: main.qml:129
+#: main.qml:131
 #, fuzzy, kde-format
 #| msgid "Alt is locked"
 msgctxt "@info:tooltip widget subtitle, Ctrl applies until pressed again"
 msgid "Control is locked"
 msgstr "Alt قۇلۇپلاندى"
 
-#: main.qml:133
+#: main.qml:135
 #, fuzzy, kde-format
 #| msgid "Alt is latched"
 msgctxt "@info:tooltip widget subtitle, Meta applies to next press"
 msgid "Meta is latched"
 msgstr "Alt ۋاقىتلىق قۇلۇپلاندى"
 
-#: main.qml:135
+#: main.qml:137
 #, fuzzy, kde-format
 #| msgid "Alt is locked"
 msgctxt "@info:tooltip widget subtitle, Meta applies until pressed again"
 msgid "Meta is locked"
 msgstr "Alt قۇلۇپلاندى"
 
-#: main.qml:139
+#: main.qml:141
 #, fuzzy, kde-format
 #| msgid "Alt is latched"
 msgctxt "@info:tooltip widget subtitle, AltGr applies to next press"
 msgid "Alt Gr is latched"
 msgstr "Alt ۋاقىتلىق قۇلۇپلاندى"
 
-#: main.qml:141
+#: main.qml:143
 #, fuzzy, kde-format
 #| msgid "Alt is locked"
 msgctxt "@info:tooltip widget subtitle, AltGr applies until pressed again"
 msgid "Alt Gr is locked"
 msgstr "Alt قۇلۇپلاندى"
 
-#: main.qml:145
+#: main.qml:147
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "Caps Lock"
@@ -121,13 +121,13 @@ msgctxt "@info:tooltip widget subtitle, Caps Lock on"
 msgid "Caps Lock activated"
 msgstr "CapsLock"
 
-#: main.qml:148
+#: main.qml:150
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, Num Lock on"
 msgid "Num Lock activated"
 msgstr ""
 
-#: main.qml:156
+#: main.qml:158
 #, kde-format
 msgctxt ""
 "@info:tooltip widget subtitle, no Lock keys or sticky modifiers active"

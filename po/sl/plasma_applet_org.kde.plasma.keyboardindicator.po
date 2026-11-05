@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-05 00:57+0000\n"
 "PO-Revision-Date: 2026-11-02 10:16+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -43,79 +43,79 @@ msgctxt "@option:check"
 msgid "Num Lock"
 msgstr "Num Lock"
 
-#: main.qml:115
+#: main.qml:117
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, Alt applies to next press"
 msgid "Alt is latched"
 msgstr "Alt je zapahnjen"
 
-#: main.qml:117
+#: main.qml:119
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, Alt applies until pressed again"
 msgid "Alt is locked"
 msgstr "Alt je zaklenjen"
 
-#: main.qml:121
+#: main.qml:123
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, Shift applies to next press"
 msgid "Shift is latched"
 msgstr "Dvigalka je zapahnjena"
 
-#: main.qml:123
+#: main.qml:125
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, Shift applies until pressed again"
 msgid "Shift is locked"
 msgstr "Dvigalka je zaklenjena"
 
-#: main.qml:127
+#: main.qml:129
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, Ctrl applies to next press"
 msgid "Control is latched"
 msgstr "Kontrolka je zapahnjena"
 
-#: main.qml:129
+#: main.qml:131
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, Ctrl applies until pressed again"
 msgid "Control is locked"
 msgstr "Kontrolka je zaklenjena"
 
-#: main.qml:133
+#: main.qml:135
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, Meta applies to next press"
 msgid "Meta is latched"
 msgstr "Meta je zapahnjena"
 
-#: main.qml:135
+#: main.qml:137
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, Meta applies until pressed again"
 msgid "Meta is locked"
 msgstr "Meta je zaklenjena"
 
-#: main.qml:139
+#: main.qml:141
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, AltGr applies to next press"
 msgid "Alt Gr is latched"
 msgstr "Alt Gr je zapahnjena"
 
-#: main.qml:141
+#: main.qml:143
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, AltGr applies until pressed again"
 msgid "Alt Gr is locked"
 msgstr "Alt Gr je zaklenjena"
 
-#: main.qml:145
+#: main.qml:147
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, Caps Lock on"
 msgid "Caps Lock activated"
 msgstr "Aktiviran Caps Lock"
 
-#: main.qml:148
+#: main.qml:150
 #, kde-format
 msgctxt "@info:tooltip widget subtitle, Num Lock on"
 msgid "Num Lock activated"
 msgstr "Aktiviran Num Lock"
 
-#: main.qml:156
+#: main.qml:158
 #, kde-format
 msgctxt ""
 "@info:tooltip widget subtitle, no Lock keys or sticky modifiers active"
