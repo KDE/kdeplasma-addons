@@ -74,9 +74,6 @@ KCM.ScrollViewKCM {
         clip: true
         reuseItems: true
         delegate: timeEditDelegate
-        add: Transition {
-            NumberAnimation { properties: "y"; duration: Kirigami.Units.longDuration }
-        }
         displaced: Transition {
             NumberAnimation { properties: "y"; duration: Kirigami.Units.longDuration }
         }
