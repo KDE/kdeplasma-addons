@@ -91,6 +91,7 @@ KCM.ScrollViewKCM {
 
             sourceComponent: Kirigami.SwipeListItem {
                 id: timeEditItem
+                focus: true
                 width: timeListView.width
                 contentItem: Row {
                     spacing: Kirigami.Units.gridUnit
