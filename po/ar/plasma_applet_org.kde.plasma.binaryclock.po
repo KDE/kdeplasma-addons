@@ -1,14 +1,14 @@
 # translation of plasma_applet_binaryclock.po to Arabic
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2008, 2021, 2024, 2025 zayed <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2008, 2021, 2024-2026 zayed <zayed.alsaidi@gmail.com>
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2015, 2017.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2025-04-28 17:36+0400\n"
+"PO-Revision-Date: 2026-11-05 08:44+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: config.qml:17
 #, kde-format
@@ -45,8 +45,7 @@ msgid "Seconds"
 msgstr "الثّواني"
 
 #: configGeneral.qml:43
-#, fuzzy, kde-format
-#| msgid "Use custom color for:"
+#, kde-format
 msgctxt ""
 "@title:group form label for group of checkboxes with color buttons, e.g. …"
 "Active lights"

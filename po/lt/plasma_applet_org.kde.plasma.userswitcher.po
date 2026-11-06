@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2025-09-06 22:20+0300\n"
+"PO-Revision-Date: 2026-11-05 00:54+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.10\n"
 
 #: qml/config.qml:11
 #, kde-format
@@ -80,15 +80,13 @@ msgid "Show technical session information"
 msgstr "Rodyti techninę seanso informaciją"
 
 #: qml/main.qml:46
-#, fuzzy, kde-format
-#| msgid "You are logged in as <b>%1</b>"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle"
 msgid "You are logged in as <b>%1</b>"
 msgstr "Jūs esate prisijungę kaip <b>%1</b>"
 
 #: qml/main.qml:147
-#, fuzzy, kde-format
-#| msgid "Current user"
+#, kde-format
 msgctxt "@item subtitle for current user entry"
 msgid "Current user"
 msgstr "Dabartinis naudotojas"

@@ -3,13 +3,13 @@
 #
 # Elkana Bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
-# SPDX-FileCopyrightText: 2023 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2026 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2023-10-27 16:48+0300\n"
+"PO-Revision-Date: 2026-11-05 13:18+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 23.08.1\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: main.qml:70
 #, kde-format
@@ -27,8 +27,7 @@ msgid "Konsole Profiles"
 msgstr "פרופילי Konsole"
 
 #: main.qml:91
-#, fuzzy, kde-format
-#| msgid "Arbitrary String Which Says Something"
+#, kde-format
 msgctxt "@label unused string, just for sizing"
 msgid "Arbitrary String Which Says Something"
 msgstr "מחרוזת שרירותית שאומרת משהו"

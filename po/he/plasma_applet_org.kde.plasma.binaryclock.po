@@ -3,13 +3,13 @@
 #
 # David Shalmiev <vertigo.rus@gmail.com>, 2008.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
-# SPDX-FileCopyrightText: 2023, 2025 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2025-2026 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2025-04-26 09:57+0300\n"
+"PO-Revision-Date: 2026-11-05 13:09+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: config.qml:17
 #, kde-format
@@ -46,8 +46,7 @@ msgid "Seconds"
 msgstr "שניות"
 
 #: configGeneral.qml:43
-#, fuzzy, kde-format
-#| msgid "Use custom color for:"
+#, kde-format
 msgctxt ""
 "@title:group form label for group of checkboxes with color buttons, e.g. …"
 "Active lights"

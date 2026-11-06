@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-10 00:48+0000\n"
+"POT-Creation-Date: 2026-11-06 00:53+0000\n"
 "PO-Revision-Date: 2022-12-24 07:24+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -84,49 +84,49 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Número de antevisões:"
 
-#: qml/main.qml:119
+#: qml/main.qml:121
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Abrir a Janela de Cores"
 
-#: qml/main.qml:124
+#: qml/main.qml:126
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Limpar o Histórico"
 
-#: qml/main.qml:132
+#: qml/main.qml:134
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Ver o Histórico"
 
-#: qml/main.qml:140
+#: qml/main.qml:142
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Copiar para a Área de Transferência"
 
-#: qml/main.qml:178
+#: qml/main.qml:180
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Sem cores"
 
-#: qml/main.qml:185
+#: qml/main.qml:187
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Escolher uma Cor"
 
-#: qml/main.qml:371
+#: qml/main.qml:373
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Copiada!"
 
-#: qml/main.qml:382
+#: qml/main.qml:384
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

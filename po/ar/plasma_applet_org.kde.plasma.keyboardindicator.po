@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# SPDX-FileCopyrightText: 2021, 2022, 2023, 2024 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2021-2024, 2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-05 00:57+0000\n"
-"PO-Revision-Date: 2024-11-28 12:31+0400\n"
+"PO-Revision-Date: 2026-11-05 08:42+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: config.qml:13
 #, kde-format
@@ -44,92 +44,79 @@ msgid "Num Lock"
 msgstr "قفل الأرقام"
 
 #: main.qml:117
-#, fuzzy, kde-format
-#| msgid "Alt is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Alt applies to next press"
 msgid "Alt is latched"
 msgstr "مفتاح Alt مثبت"
 
 #: main.qml:119
-#, fuzzy, kde-format
-#| msgid "Alt is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Alt applies until pressed again"
 msgid "Alt is locked"
 msgstr "مفتاح Alt مقفل"
 
 #: main.qml:123
-#, fuzzy, kde-format
-#| msgid "Shift is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Shift applies to next press"
 msgid "Shift is latched"
 msgstr "مفتاح Shift مثبت"
 
 #: main.qml:125
-#, fuzzy, kde-format
-#| msgid "Shift is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Shift applies until pressed again"
 msgid "Shift is locked"
 msgstr "مفتاح Shift مقفل"
 
 #: main.qml:129
-#, fuzzy, kde-format
-#| msgid "Control is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Ctrl applies to next press"
 msgid "Control is latched"
 msgstr "مفتاح Control مثبت"
 
 #: main.qml:131
-#, fuzzy, kde-format
-#| msgid "Control is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Ctrl applies until pressed again"
 msgid "Control is locked"
 msgstr "مفتاح Control مقفل"
 
 #: main.qml:135
-#, fuzzy, kde-format
-#| msgid "Meta is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Meta applies to next press"
 msgid "Meta is latched"
 msgstr "مفتاح Meta مثبت"
 
 #: main.qml:137
-#, fuzzy, kde-format
-#| msgid "Meta is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Meta applies until pressed again"
 msgid "Meta is locked"
 msgstr "مفتاح Meta مقفل"
 
 #: main.qml:141
-#, fuzzy, kde-format
-#| msgid "Alt Gr is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, AltGr applies to next press"
 msgid "Alt Gr is latched"
 msgstr "مفتاح Alt Gr مثبت"
 
 #: main.qml:143
-#, fuzzy, kde-format
-#| msgid "Alt Gr is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, AltGr applies until pressed again"
 msgid "Alt Gr is locked"
 msgstr "مفتاح Alt Gr مقفل"
 
 #: main.qml:147
-#, fuzzy, kde-format
-#| msgid "Caps Lock activated"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Caps Lock on"
 msgid "Caps Lock activated"
 msgstr "قُفْل الحروف الكبيرة مفعل"
 
 #: main.qml:150
-#, fuzzy, kde-format
-#| msgid "Num Lock activated"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Num Lock on"
 msgid "Num Lock activated"
 msgstr "قُفْل الأرقام مفعل"
 
 #: main.qml:158
-#, fuzzy, kde-format
-#| msgid "No lock keys activated"
+#, kde-format
 msgctxt ""
 "@info:tooltip widget subtitle, no Lock keys or sticky modifiers active"
 msgid "No lock keys activated"

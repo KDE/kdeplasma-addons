@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 01:04+0000\n"
+"POT-Creation-Date: 2026-11-06 00:53+0000\n"
 "PO-Revision-Date: 2026-07-07 18:32+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -126,35 +126,35 @@ msgstr ""
 "Om du lägger till fördefinierade tidtagare här, visas de i den grafiska "
 "komponentens sammanhangsberoende meny."
 
-#: configTimes.qml:136
+#: configTimes.qml:137
 #, fuzzy, kde-format
 #| msgid "Scroll over digits to change time"
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Rulla över siffror för att ändra tiden"
 
-#: configTimes.qml:146
+#: configTimes.qml:147
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Verkställ"
 
-#: configTimes.qml:165
+#: configTimes.qml:166
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Avbryt"
 
-#: configTimes.qml:185
+#: configTimes.qml:186
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Redigera"
 
-#: configTimes.qml:206
+#: configTimes.qml:207
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"

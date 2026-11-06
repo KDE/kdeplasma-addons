@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: l 10n\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2019-06-06 12:50+0000\n"
+"PO-Revision-Date: 2026-11-05 00:59+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 2.0.6\n"
+"X-Generator: Poedit 3.10\n"
 
 #: main.qml:70
 #, kde-format
@@ -27,8 +27,7 @@ msgid "Konsole Profiles"
 msgstr "Konsole profiliai"
 
 #: main.qml:91
-#, fuzzy, kde-format
-#| msgid "Arbitrary String Which Says Something"
+#, kde-format
 msgctxt "@label unused string, just for sizing"
 msgid "Arbitrary String Which Says Something"
 msgstr "Sutartinė kažką sakanti eilutė"

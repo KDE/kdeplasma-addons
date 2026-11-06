@@ -1,13 +1,13 @@
 # Copyright (C) 2025 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
-# SPDX-FileCopyrightText: 2021, 2022, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2021-2022, 2025-2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-03 00:56+0000\n"
-"PO-Revision-Date: 2025-04-28 17:36+0400\n"
+"PO-Revision-Date: 2026-11-05 08:42+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -16,11 +16,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: qml/AvailableDictSheet.qml:23
-#, fuzzy, kde-format
-#| msgid "Add More Dictionaries"
+#, kde-format
 msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
 msgstr "أضف المزيد من القواميس"
@@ -38,8 +37,7 @@ msgid "Add More…"
 msgstr "أضف المزيد…"
 
 #: qml/ConfigDictionaries.qml:94
-#, fuzzy, kde-format
-#| msgid "Unable to load dictionary list"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "لا يستطيع تحميل قائمة القواميس"
@@ -51,16 +49,14 @@ msgid "Error code: %1 (%2)"
 msgstr "رقم الخطأ: %1 (%2)"
 
 #: qml/ConfigDictionaries.qml:106
-#, fuzzy, kde-format
-#| msgid "No dictionaries"
+#, kde-format
 msgctxt ""
 "@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
 msgstr "لا يوجد قواميس"
 
 #: qml/DictItemDelegate.qml:64
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr "احذف"
@@ -72,8 +68,7 @@ msgid "Enter word to define here…"
 msgstr "ادخل كلمة ليعرفها هنا…"
 
 #: qml/main.qml:201
-#, fuzzy, kde-format
-#| msgid "Unable to load definition"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
 msgstr "غير قادر على تحميل التعريف"

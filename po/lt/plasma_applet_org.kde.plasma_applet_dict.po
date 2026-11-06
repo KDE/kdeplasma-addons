@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-03 00:56+0000\n"
-"PO-Revision-Date: 2025-09-06 22:21+0300\n"
+"PO-Revision-Date: 2026-11-05 00:51+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -17,11 +17,10 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.10\n"
 
 #: qml/AvailableDictSheet.qml:23
-#, fuzzy, kde-format
-#| msgid "Add More Dictionaries"
+#, kde-format
 msgctxt "@title:window dialog title"
 msgid "Add More Dictionaries"
 msgstr "Pridėti daugiau žodynų"
@@ -39,8 +38,7 @@ msgid "Add More…"
 msgstr "Pridėti daugiau…"
 
 #: qml/ConfigDictionaries.qml:94
-#, fuzzy, kde-format
-#| msgid "Unable to load dictionary list"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "Nepavyko įkelti žodynų sąrašo"
@@ -52,16 +50,14 @@ msgid "Error code: %1 (%2)"
 msgstr "Klaidos kodas: %1 (%2)"
 
 #: qml/ConfigDictionaries.qml:106
-#, fuzzy, kde-format
-#| msgid "No dictionaries"
+#, kde-format
 msgctxt ""
 "@info:status PlaceholderMessage no dictionaries available but no error"
 msgid "No dictionaries"
 msgstr "Nėra žodynų"
 
 #: qml/DictItemDelegate.qml:64
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button remove dictionary from the active list"
 msgid "Delete"
 msgstr "Ištrinti"
@@ -73,8 +69,7 @@ msgid "Enter word to define here…"
 msgstr "Čia įveskite norimą apibrėžti žodį…"
 
 #: qml/main.qml:201
-#, fuzzy, kde-format
-#| msgid "Unable to load definition"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load definition"
 msgstr "Nepavyko įkelti apibrėžimo"

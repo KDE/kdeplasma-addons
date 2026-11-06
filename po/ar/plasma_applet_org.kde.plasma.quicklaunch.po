@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2016.
-# SPDX-FileCopyrightText: 2021, 2022, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2021-2022, 2025-2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2025-08-03 23:25+0400\n"
+"PO-Revision-Date: 2026-11-05 08:43+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: config.qml:12
 #, kde-format
@@ -74,8 +74,7 @@ msgid "Custom title"
 msgstr "عنوان مخصّص"
 
 #: IconItem.qml:184
-#, fuzzy, kde-format
-#| msgid "Launch %1"
+#, kde-format
 msgctxt "@action:button accessible description"
 msgid "Launch %1"
 msgstr "شغّل %1"
@@ -99,30 +98,25 @@ msgid "Remove Launcher"
 msgstr "أزل المطلق"
 
 #: main.qml:112
-#, fuzzy, kde-format
-#| msgid "Quicklaunch"
+#, kde-format
 msgctxt "@info:tooltip widget title"
 msgid "Quicklaunch"
 msgstr "الإطلاق السّريع"
 
 #: main.qml:113
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Add launchers by Drag and Drop or by using the context menu."
+#, kde-format
 msgctxt "@info:tooltip widget subtitle"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "أضف مطلقات بسحبها وإفلاتها أو باستخدام قائمة السّياق."
 
 #: main.qml:145
-#, fuzzy, kde-format
-#| msgid "Hide icons"
+#, kde-format
 msgctxt "@info:tooltip for expander arrow"
 msgid "Hide icons"
 msgstr "أخفِ الأيقونات"
 
 #: main.qml:145
-#, fuzzy, kde-format
-#| msgid "Show hidden icons"
+#, kde-format
 msgctxt "@info:tooltip for expander arrow"
 msgid "Show hidden icons"
 msgstr "أظهر الأيقونات المخفيّة"

@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-10 00:48+0000\n"
+"POT-Creation-Date: 2026-11-06 00:53+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -86,49 +86,49 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "预览数量："
 
-#: qml/main.qml:119
+#: qml/main.qml:121
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "打开颜色对话框"
 
-#: qml/main.qml:124
+#: qml/main.qml:126
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "清除历史"
 
-#: qml/main.qml:132
+#: qml/main.qml:134
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "查看历史"
 
-#: qml/main.qml:140
+#: qml/main.qml:142
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "复制到剪贴板"
 
-#: qml/main.qml:178
+#: qml/main.qml:180
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "没有颜色"
 
-#: qml/main.qml:185
+#: qml/main.qml:187
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "拾取颜色"
 
-#: qml/main.qml:371
+#: qml/main.qml:373
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "已复制！"
 
-#: qml/main.qml:382
+#: qml/main.qml:384
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

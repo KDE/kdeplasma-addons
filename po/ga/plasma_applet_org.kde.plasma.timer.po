@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_timer.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 01:04+0000\n"
+"POT-Creation-Date: 2026-11-06 00:53+0000\n"
 "PO-Revision-Date: 2008-06-02 20:00-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -131,31 +131,31 @@ msgid ""
 "menu."
 msgstr ""
 
-#: configTimes.qml:136
+#: configTimes.qml:137
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr ""
 
-#: configTimes.qml:146
+#: configTimes.qml:147
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr ""
 
-#: configTimes.qml:165
+#: configTimes.qml:166
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr ""
 
-#: configTimes.qml:185
+#: configTimes.qml:186
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr ""
 
-#: configTimes.qml:206
+#: configTimes.qml:207
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"

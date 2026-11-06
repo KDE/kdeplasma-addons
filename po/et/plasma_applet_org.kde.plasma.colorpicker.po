@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-10 00:48+0000\n"
+"POT-Creation-Date: 2026-11-06 00:53+0000\n"
 "PO-Revision-Date: 2019-11-01 22:15+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -89,19 +89,19 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr ""
 
-#: qml/main.qml:119
+#: qml/main.qml:121
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Ava värvidialoog"
 
-#: qml/main.qml:124
+#: qml/main.qml:126
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Puhasta ajalugu"
 
-#: qml/main.qml:132
+#: qml/main.qml:134
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "Clear History"
@@ -109,13 +109,13 @@ msgctxt "@action"
 msgid "View History"
 msgstr "Puhasta ajalugu"
 
-#: qml/main.qml:140
+#: qml/main.qml:142
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Kopeeri lõikepuhvrisse"
 
-#: qml/main.qml:178
+#: qml/main.qml:180
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Pick color"
@@ -123,19 +123,19 @@ msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Värvi valimine"
 
-#: qml/main.qml:185
+#: qml/main.qml:187
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Vali värv"
 
-#: qml/main.qml:371
+#: qml/main.qml:373
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr ""
 
-#: qml/main.qml:382
+#: qml/main.qml:384
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

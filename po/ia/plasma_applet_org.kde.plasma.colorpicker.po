@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-10 00:48+0000\n"
+"POT-Creation-Date: 2026-11-06 00:53+0000\n"
 "PO-Revision-Date: 2026-09-01 17:07+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -87,49 +87,49 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Compuito de vista preliminar:"
 
-#: qml/main.qml:119
+#: qml/main.qml:121
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Aperi dialogo de color"
 
-#: qml/main.qml:124
+#: qml/main.qml:126
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Netta historia"
 
-#: qml/main.qml:132
+#: qml/main.qml:134
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Vide historia (chronologia)"
 
-#: qml/main.qml:140
+#: qml/main.qml:142
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Copia in area de transferentia"
 
-#: qml/main.qml:178
+#: qml/main.qml:180
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Nulle colores "
 
-#: qml/main.qml:185
+#: qml/main.qml:187
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Selige color"
 
-#: qml/main.qml:371
+#: qml/main.qml:373
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Copiate!"
 
-#: qml/main.qml:382
+#: qml/main.qml:384
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

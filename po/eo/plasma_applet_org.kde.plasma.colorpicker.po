@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-10 00:48+0000\n"
+"POT-Creation-Date: 2026-11-06 00:53+0000\n"
 "PO-Revision-Date: 2024-05-10 11:33+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -91,49 +91,49 @@ msgctxt "@label"
 msgid "Preview count:"
 msgstr "Antaŭrigarda nombro:"
 
-#: qml/main.qml:119
+#: qml/main.qml:121
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Malfermi Koloran Dialogon"
 
-#: qml/main.qml:124
+#: qml/main.qml:126
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Forviŝi la historion"
 
-#: qml/main.qml:132
+#: qml/main.qml:134
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Rigardo Historion"
 
-#: qml/main.qml:140
+#: qml/main.qml:142
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Kopii al tondujo"
 
-#: qml/main.qml:178
+#: qml/main.qml:180
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Neniuj koloroj"
 
-#: qml/main.qml:185
+#: qml/main.qml:187
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Elekti Koloron"
 
-#: qml/main.qml:371
+#: qml/main.qml:373
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopiita!"
 
-#: qml/main.qml:382
+#: qml/main.qml:384
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

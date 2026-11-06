@@ -4,13 +4,13 @@
 # David Shalmiev <vertigo.rus@gmail.com>, 2008.
 # elkana bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
-# SPDX-FileCopyrightText: 2025, 2026 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2025-2026 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2026-04-24 19:41+0300\n"
+"PO-Revision-Date: 2026-11-05 13:13+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
 "Language: he\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 25.12.3\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -118,15 +118,13 @@ msgid "Solved! Try again."
 msgstr "נפתר! אפשר לנסות שוב."
 
 #: qml/main.qml:39
-#, fuzzy, kde-format
-#| msgid "Fifteen Puzzle"
+#, kde-format
 msgctxt "@info:tooltip main title for widget"
 msgid "Fifteen Puzzle"
 msgstr "תצרף חמש־עשרה"
 
 #: qml/main.qml:40
-#, fuzzy, kde-format
-#| msgid "Solve by arranging in order"
+#, kde-format
 msgctxt "@info:tooltip subtitle for widget"
 msgid "Solve by arranging in order"
 msgstr "צריך לפתור על ידי סידור נכון"

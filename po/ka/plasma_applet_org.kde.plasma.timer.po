@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 01:04+0000\n"
+"POT-Creation-Date: 2026-11-06 00:53+0000\n"
 "PO-Revision-Date: 2026-11-01 05:19+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -124,31 +124,31 @@ msgstr ""
 "თუ აქ წინასწარ აღწერილ წამზომებს დაამატებთ , ისინი ვიჯეტის კონტექსტურ "
 "მენიუში გამოჩნდება."
 
-#: configTimes.qml:136
+#: configTimes.qml:137
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "დროის შესაცვლელად ზედ თაგუნას რგოლი დაატრიალეთ"
 
-#: configTimes.qml:146
+#: configTimes.qml:147
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "გადატარება"
 
-#: configTimes.qml:165
+#: configTimes.qml:166
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "გაუქმება"
 
-#: configTimes.qml:185
+#: configTimes.qml:186
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "ჩასწორება"
 
-#: configTimes.qml:206
+#: configTimes.qml:207
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"

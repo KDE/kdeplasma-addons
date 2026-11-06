@@ -1,14 +1,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Safa Alfulaij <safa1996alfulaij@gmail.com>, 2016, 2017.
-# SPDX-FileCopyrightText: 2021, 2025, 2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2021, 2025-2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-04 01:04+0000\n"
-"PO-Revision-Date: 2026-03-24 11:04+0400\n"
+"PO-Revision-Date: 2026-11-05 08:43+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -32,29 +32,25 @@ msgid "Behavior"
 msgstr "السلوك"
 
 #: qml/ConfigBehavior.qml:36
-#, fuzzy, kde-format
-#| msgid "Change picture every:"
+#, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "غيّر الصّورة كلّ:"
 
 #: qml/ConfigBehavior.qml:53
-#, fuzzy, kde-format
-#| msgid "Hours"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "ساعة"
 
 #: qml/ConfigBehavior.qml:67
-#, fuzzy, kde-format
-#| msgid "Minutes"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "دقيقة"
 
 #: qml/ConfigBehavior.qml:81
-#, fuzzy, kde-format
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "ثوان"
