@@ -47,7 +47,8 @@ Item {
         model: (!!root.futureDays && root.futureDays.daysNumber > 1 && root.futureDays.isNightPresent) ? root.futureDays : null
 
         delegate: PlasmaComponents.Label {
-            text: model.timestamp.toLocaleString(Qt.locale(), "ddd") ?? ""
+            required property date timestamp
+            text: timestamp.toLocaleString(Qt.locale(), "ddd") ?? ""
             textFormat: Text.PlainText
             horizontalAlignment: Text.AlignHCenter
         }
@@ -64,7 +65,8 @@ Item {
         model: (!!root.futureDays && root.futureDays.isNightPresent) ? root.futureDays : null
 
         delegate: PlasmaComponents.Label {
-            text: model.period ?? ""
+            required property string period
+            text: period ?? ""
             textFormat: Text.PlainText
         }
     }
