@@ -108,7 +108,7 @@ ContainmentItem {
 
         PlasmaComponents.Label {
             anchors.fill: mainStack
-            text: i18n("Drag applets here")
+            text: i18nc("@info:usagetip", "Drag applets here")
             textFormat: Text.PlainText
             visible: mainStack.count === 0
             elide: Text.ElideRight
