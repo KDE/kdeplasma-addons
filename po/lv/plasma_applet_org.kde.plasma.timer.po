@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 03:15+0000\n"
+"POT-Creation-Date: 2026-11-06 03:13+0000\n"
 "PO-Revision-Date: 2026-01-16 19:34+0200\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -139,27 +139,27 @@ msgid ""
 "menu."
 msgstr "Ja saglabāsiet taimerus, tie parādīsies plazmoīda konteksta izvēlnē."
 
-#: configTimes.qml:130
+#: configTimes.qml:131
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Ritināt pāri cipariem, lai mainītu laiku"
 
-#: configTimes.qml:137
+#: configTimes.qml:138
 #, kde-format
 msgid "Apply"
 msgstr "Pielietot"
 
-#: configTimes.qml:145
+#: configTimes.qml:146
 #, kde-format
 msgid "Cancel"
 msgstr "Atcelt"
 
-#: configTimes.qml:154
+#: configTimes.qml:155
 #, kde-format
 msgid "Edit"
 msgstr "Rediģēt"
 
-#: configTimes.qml:163
+#: configTimes.qml:164
 #, kde-format
 msgid "Delete"
 msgstr "Dzēst"

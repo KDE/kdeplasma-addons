@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 03:15+0000\n"
+"POT-Creation-Date: 2026-11-06 03:13+0000\n"
 "PO-Revision-Date: 2026-05-02 18:29+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
@@ -128,27 +128,27 @@ msgid ""
 "menu."
 msgstr "நீங்கள் இங்கு சேர்க்கும் டைமர்கள், பிளாஸ்மாய்டின் வலது-க்ளிக் பட்டியில் இடம்பெறும்."
 
-#: configTimes.qml:130
+#: configTimes.qml:131
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "நேரத்தை மாற்ற எண்களின்மீது உருளுங்கள்"
 
-#: configTimes.qml:137
+#: configTimes.qml:138
 #, kde-format
 msgid "Apply"
 msgstr "செயல்படுத்து"
 
-#: configTimes.qml:145
+#: configTimes.qml:146
 #, kde-format
 msgid "Cancel"
 msgstr "ரத்து செய்"
 
-#: configTimes.qml:154
+#: configTimes.qml:155
 #, kde-format
 msgid "Edit"
 msgstr "திருத்து"
 
-#: configTimes.qml:163
+#: configTimes.qml:164
 #, kde-format
 msgid "Delete"
 msgstr "நீக்கு"

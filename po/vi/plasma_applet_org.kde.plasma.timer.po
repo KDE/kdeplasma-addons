@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 03:15+0000\n"
+"POT-Creation-Date: 2026-11-06 03:13+0000\n"
 "PO-Revision-Date: 2023-01-08 18:15+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -138,27 +138,27 @@ msgstr ""
 "Nếu bạn thêm các bộ hẹn giờ định trước vào đây, chúng sẽ xuất hiện trong "
 "trình đơn ngữ cảnh của plasmoid."
 
-#: configTimes.qml:130
+#: configTimes.qml:131
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Cuộn trên các con số để thay đổi thời gian"
 
-#: configTimes.qml:137
+#: configTimes.qml:138
 #, kde-format
 msgid "Apply"
 msgstr "Áp dụng"
 
-#: configTimes.qml:145
+#: configTimes.qml:146
 #, kde-format
 msgid "Cancel"
 msgstr "Huỷ"
 
-#: configTimes.qml:154
+#: configTimes.qml:155
 #, kde-format
 msgid "Edit"
 msgstr "Sửa"
 
-#: configTimes.qml:163
+#: configTimes.qml:164
 #, kde-format
 msgid "Delete"
 msgstr "Xoá"

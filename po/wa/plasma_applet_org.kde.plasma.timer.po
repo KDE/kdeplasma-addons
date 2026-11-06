@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 03:15+0000\n"
+"POT-Creation-Date: 2026-11-06 03:13+0000\n"
 "PO-Revision-Date: 2011-01-03 11:11+0100\n"
 "Last-Translator: Jean Cayron <jean.cayron@gmail.com>\n"
 "Language-Team: Walloon <linux@walon.org>\n"
@@ -137,27 +137,27 @@ msgid ""
 "menu."
 msgstr ""
 
-#: configTimes.qml:130
+#: configTimes.qml:131
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr ""
 
-#: configTimes.qml:137
+#: configTimes.qml:138
 #, kde-format
 msgid "Apply"
 msgstr ""
 
-#: configTimes.qml:145
+#: configTimes.qml:146
 #, kde-format
 msgid "Cancel"
 msgstr ""
 
-#: configTimes.qml:154
+#: configTimes.qml:155
 #, kde-format
 msgid "Edit"
 msgstr ""
 
-#: configTimes.qml:163
+#: configTimes.qml:164
 #, kde-format
 msgid "Delete"
 msgstr ""
