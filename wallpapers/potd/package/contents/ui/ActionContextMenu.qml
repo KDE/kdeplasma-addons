@@ -24,7 +24,7 @@ QQC2.Menu {
         model: contextMenu.actions
         delegate: QQC2.MenuItem {
             text: modelData.text || modelData.tooltip
-            icon.name: modelData.iconName
+            icon.name: modelData.icon.name
             onTriggered: modelData.trigger()
             enabled: modelData.enabled
             visible: modelData.visible || contextMenu.showAllActions
