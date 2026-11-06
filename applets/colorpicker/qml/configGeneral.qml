@@ -9,7 +9,10 @@ import QtQuick.Controls as QQC2
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
 
+import "Logic.js" as Logic
+
 KCM.SimpleKCM {
+    id: root
     property alias cfg_autoClipboard: autoClipboardCheckBox.checked
     property alias cfg_compactPreviewCount: compactPreviewCountSpinBox.value
     property string cfg_defaultFormat
@@ -20,9 +23,9 @@ KCM.SimpleKCM {
             id: defaultFormatCombo
             Kirigami.FormData.label: i18nc("@label:listbox", "Default color format:")
             model: Logic.formats
-            currentIndex: model.indexOf(cfg_defaultFormat)
+            currentIndex: model.indexOf(root.cfg_defaultFormat)
             onActivated: index => {
-                cfg_defaultFormat = model[index];
+                root.cfg_defaultFormat = model[index];
             }
         }
 
@@ -38,14 +41,14 @@ KCM.SimpleKCM {
         QQC2.RadioButton {
             Kirigami.FormData.label: i18nc("@label", "When pressing the keyboard shortcut:")
             text: i18nc("@option:radio", "Pick a color")
-            checked: cfg_pickOnActivate
-            onToggled: cfg_pickOnActivate = checked
+            checked: root.cfg_pickOnActivate
+            onToggled: root.cfg_pickOnActivate = checked
         }
 
         QQC2.RadioButton {
             text: i18nc("@option:radio", "Show history")
-            checked: !cfg_pickOnActivate
-            onToggled: cfg_pickOnActivate = !checked
+            checked: !root.cfg_pickOnActivate
+            onToggled: root.cfg_pickOnActivate = !checked
         }
 
         Item {

@@ -5,7 +5,6 @@
 */
 
 import QtQuick
-import org.kde.plasma.core as PlasmaCore
 import org.kde.plasma.extras as PlasmaExtras
 
 /**
@@ -14,7 +13,7 @@ import org.kde.plasma.extras as PlasmaExtras
 PlasmaExtras.ModelContextMenu {
     id: formattingMenu
 
-    required property QtObject picker
+    required property GrabWidget picker
     required property Item colorLabel
     required property Item copyIndicatorLabel
     required property Timer colorLabelRestoreTimer
