@@ -30,6 +30,8 @@ Loader {
         || (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentForcesSquarePlasmoids)
     readonly property bool useBadge: Plasmoid.configuration.showTemperatureInBadge || needsToBeSquare
 
+    signal toggleExpandedRequested
+    
     sourceComponent: (compactRoot.isTemperaturePresent && compactRoot.showTemperature && !compactRoot.useBadge) ? iconAndTextComponent : iconComponent
     Layout.fillWidth: compactRoot.vertical
     Layout.fillHeight: !compactRoot.vertical
@@ -42,9 +44,7 @@ Loader {
 
         hoverEnabled: true
 
-        onClicked: {
-            root.expanded = !root.expanded;
-        }
+        onClicked: compactRoot.toggleExpandedRequested()
     }
 
     Component {

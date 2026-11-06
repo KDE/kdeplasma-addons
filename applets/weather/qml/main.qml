@@ -176,6 +176,7 @@ PlasmoidItem {
         metaData: forecastControl.forecast?.metaData
         lastObservation: forecastControl.forecast?.lastObservation
         displayTemperatureUnit: root.displayTemperatureUnit
+        onToggleExpandedRequested: root.expanded = !root.expanded;
     }
 
     fullRepresentation: FullRepresentation {
