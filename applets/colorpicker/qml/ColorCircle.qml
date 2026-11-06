@@ -80,7 +80,7 @@ PlasmaComponents3.ToolButton {
         DragHandler {
             id: dragHandler
 
-            enabled: historyModel.count > 0
+            enabled: colorButton.hasColor
 
             onActiveChanged: if (active) {
                 colorCircle.grabToImage((result) => {
@@ -104,7 +104,7 @@ PlasmaComponents3.ToolButton {
             acceptedButtons: Qt.MiddleButton
             onTapped: (eventPoint, button) => {
                 // Don't bother copying an empty color to the clipboard.
-                if (!root.hasColor) {
+                if (!colorButton.hasColor) {
                     return;
                 }
 
