@@ -11,6 +11,8 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.plasmoid
 
+import "Logic.js" as Logic
+
 PlasmaComponents3.ToolButton {
     id: colorButton
 
@@ -18,13 +20,17 @@ PlasmaComponents3.ToolButton {
     property alias colorCircle: colorCircle
     property Item loadingIndicator: null
     property color viewBackgroundColor
+    property bool forceChecked: false
     required property bool hasColor
 
+    signal copyToClipboardRequested(string color)
+    signal toggleExpandedRequested()
+
     // indicate viable drag...
-    checked: (dropArea.containsAcceptableDrag && index === 0) || colorButton.pressed || dragHandler.active
+    checked: forceChecked || colorButton.pressed || dragHandler.active
     checkable: checked
     display: PlasmaComponents3.AbstractButton.IconOnly
-    text: hasColor ? Logic.formatColor(colorCircle.color, root.defaultFormat) : i18nc("@info", "No Saved Colors")
+    text: hasColor ? Logic.formatColor(colorCircle.color, Plasmoid.configuration.defaultFormat) : i18nc("@info", "No Saved Colors")
 
     Drag.dragType: Drag.Automatic
     Drag.supportedActions: Qt.CopyAction
@@ -33,7 +39,7 @@ PlasmaComponents3.ToolButton {
         "text/plain": colorButton.text
     }
 
-    onClicked: root.expanded = !root.expanded
+    onClicked: toggleExpandedRequested()
 
     PlasmaCore.ToolTipArea {
         anchors.fill: parent
@@ -108,7 +114,7 @@ PlasmaComponents3.ToolButton {
                     return;
                 }
 
-                picker.copyToClipboard(colorButton.text);
+                colorButton.copyToClipboardRequested(colorButton.text);
             }
         }
     }

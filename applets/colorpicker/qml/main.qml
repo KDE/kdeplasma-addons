@@ -3,6 +3,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC2
@@ -15,35 +16,24 @@ import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.kirigami as Kirigami
 
+import "Logic.js" as Logic
+
 PlasmoidItem {
     id: root
 
     readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
 
-    readonly property color recentColor: hasAnyColors ? historyModel.get(0).color : "#00000000" // transparent as fallback
+    readonly property color recentColor: historyModel.hasAnyColors ? historyModel.get(0).color : "#00000000" // transparent as fallback
     readonly property string defaultFormat: Plasmoid.configuration.defaultFormat
-    readonly property int maxColorCount: 9
-    readonly property bool hasAnyColors: historyModel.count > 0
 
     preferredRepresentation: compactRepresentation
 
     toolTipMainText: "" // set to empty to prevent automatic tooltip generation through compactRepresentation
     toolTipSubText: ""
 
-    function addColorToHistory(color) {
-        // this .toString() is needed otherwise Qt completely screws it up
-        // replacing *all* items in the list by the new items and other nonsense
-        historyModel.insert(0, { color: color.toString() });
-        // limit to 9 entries
-        if (historyModel.count > maxColorCount) {
-            historyModel.remove(maxColorCount);
-        }
-        historyModel.save();
-    }
-
     function colorPicked(color) {
         if (color != recentColor) {
-            addColorToHistory(color)
+            historyModel.addColorToHistory(color)
         }
 
         if (Plasmoid.configuration.autoClipboard) {
@@ -58,7 +48,7 @@ PlasmoidItem {
 
     GrabWidget {
         id: picker
-        onCurrentColorChanged: colorPicked(currentColor)
+        onCurrentColorChanged: root.colorPicked(currentColor)
     }
 
     Loader {
@@ -85,17 +75,7 @@ PlasmoidItem {
         onTriggered: root.pickColor()
     }
 
-    ListModel {
-        id: historyModel
-
-        function save() {
-            let history = [];
-            for (let i = 0; i < count; i++) {
-               history.push(get(i).color);
-            }
-            Plasmoid.configuration.history = history;
-        }
-    }
+    HistoryModel { id: historyModel }
 
     Plasmoid.onActivated: {
         if (Plasmoid.configuration.pickOnActivate) {
@@ -129,7 +109,13 @@ PlasmoidItem {
         Logic.copyToClipboardText = i18ndc("plasma_applet_org.kde.plasma.colorpicker", "@title:menu", "Copy to Clipboard"); // i18n is not supported in js library
     }
 
-    compactRepresentation: CompactRepresentation { }
+    compactRepresentation: CompactRepresentation {
+        isVertical: root.isVertical
+        historyModel: historyModel
+        onCopyToClipboardRequested: color=> picker.copyToClipboard(color)
+        onPickColorRequested: root.pickColor()
+        onToggleExpandedRequested: root.expanded = !root.expanded
+    }
 
     fullRepresentation: GridView {
         id: fullRoot
@@ -218,7 +204,8 @@ PlasmoidItem {
         delegate: MouseArea {
             id: delegateMouse
 
-            readonly property color currentColor: model.color
+            required property color color
+            required property int index
 
             width: fullRoot.cellWidth
             height: fullRoot.cellHeight
@@ -263,7 +250,7 @@ PlasmoidItem {
             onPressed: mouse => {
                 // grab pixmap only once
                 if (Drag.imageSource.toString() === "") { // cannot just do !Drag.imageSource on QUrl
-                    dragImageDummy.color = currentColor;
+                    dragImageDummy.color = delegateMouse.color;
                     dragImageDummy.grabToImage(result => {
                         Drag.imageSource = result.url;
                     });
@@ -279,14 +266,15 @@ PlasmoidItem {
             }
 
             function copy() {
-                picker.copyToClipboard(Logic.formatColor(currentColor, root.defaultFormat))
+                picker.copyToClipboard(Logic.formatColor(delegateMouse.color, root.defaultFormat))
                 colorLabel.visible = false;
                 copyIndicatorLabel.visible = true;
                 colorLabelRestoreTimer.start()
             }
 
             function openMenu() {
-                const menu = Logic.createContextMenu(this, currentColor, picker, colorLabel, copyIndicatorLabel, colorLabelRestoreTimer);
+                const menu = Logic.createContextMenu(this, delegateMouse.color, picker, colorLabel, copyIndicatorLabel, colorLabelRestoreTimer) as ColorContextMenu;
+                menu.
                 menu.openRelative();
             }
 
@@ -318,7 +306,7 @@ PlasmoidItem {
                     margins: Kirigami.Units.smallSpacing
                 }
 
-                color: delegateMouse.currentColor
+                color: delegateMouse.color
 
                 border {
                     color: Kirigami.Theme.textColor
@@ -344,7 +332,7 @@ PlasmoidItem {
                         elide: Text.ElideLeft
                         fontSizeMode: Text.HorizontalFit
                         minimumPointSize: Kirigami.Theme.smallFont.pointSize
-                        text: Logic.formatColor(delegateMouse.currentColor, root.defaultFormat)
+                        text: Logic.formatColor(delegateMouse.color, root.defaultFormat)
                         textFormat: Text.PlainText
                     }
 
@@ -368,15 +356,16 @@ PlasmoidItem {
                 anchors.right: parent.right
                 anchors.top: parent.top
                 sourceComponent: PlasmaComponents3.Button {
+                    id: deleteButton
                     text: i18nc("@action:button", "Delete")
                     icon.name: "delete"
                     display: PlasmaComponents3.AbstractButton.IconOnly
 
                     onClicked: delegateMouse.remove()
 
-                    PlasmaComponents3.ToolTip {
-                        text: parent.text
-                    }
+                    PlasmaComponents3.ToolTip.visible: hovered || visualFocus
+                    PlasmaComponents3.ToolTip.text: text
+                    PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
                 }
             }
         }

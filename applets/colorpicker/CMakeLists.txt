@@ -5,6 +5,7 @@ plasma_add_applet(org.kde.plasma.colorpicker
         qml/CompactRepresentation.qml
         qml/configGeneral.qml
         qml/config.qml
+        qml/HistoryModel.qml
         qml/ImageColors.qml
         qml/LoadingIndicator.qml
         qml/main.qml
