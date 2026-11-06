@@ -191,7 +191,7 @@ Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignHCenter
-                Layout.maximumWidth: Math.max(implicitWidth, Plasmoid.configuration.showRemainingTime && remainingTimeLabel.implicitWidth)
+                Layout.maximumWidth: Math.max(implicitWidth, Plasmoid.configuration.showRemainingTime && remainingTimeLabel.implicitWidth, Plasmoid.configuration.showProgressBar && remainingTimeProgressBar.implicitWidth)
 
                 visible: Plasmoid.configuration.showTitle && text !== ""
 
@@ -211,7 +211,7 @@ Item {
                 Layout.fillWidth: true
                 Layout.fillHeight: true
                 Layout.alignment: Qt.AlignHCenter
-                Layout.maximumWidth: Math.max(Plasmoid.configuration.showTitle && titleLabel.implicitWidth, implicitWidth)
+                Layout.maximumWidth: Math.max(Plasmoid.configuration.showTitle && titleLabel.implicitWidth, implicitWidth, Plasmoid.configuration.showProgressBar && remainingTimeProgressBar.implicitWidth)
                 visible: Plasmoid.configuration.showRemainingTime
 
                 TextMetrics {
