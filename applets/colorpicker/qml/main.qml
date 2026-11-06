@@ -61,34 +61,21 @@ PlasmoidItem {
         onCurrentColorChanged: colorPicked(currentColor)
     }
 
-    Component {
-        id: colorWindowComponent
-
-        Window { // QTBUG-119055
-            id: window
-            transientParent: null
-            width: Kirigami.Units.gridUnit * 19
-            height: Kirigami.Units.gridUnit * 23
-            maximumWidth: width
-            maximumHeight: height
-            minimumWidth: width
-            minimumHeight: height
-            visible: true
+    Loader {
+        id: colorDialogLoader
+        active: false
+        sourceComponent: QtDialogs.ColorDialog {
+            id: colorDialog
+            modality: Qt.NonModal
             title: Plasmoid.title
-            QtDialogs.ColorDialog {
-                id: colorDialog
-                modality: Qt.NonModal
-                title: Plasmoid.title
-                selectedColor: historyModel.count > 0 ? root.recentColor : undefined /* Prevent transparent colors */
-                onAccepted: {
-                    root.colorPicked(selectedColor);
-                    window.destroy();
-                }
-                onRejected: window.destroy()
+            selectedColor: historyModel.count > 0 ? root.recentColor : undefined /* Prevent transparent colors */
+            onAccepted: {
+                root.colorPicked(selectedColor);
+                colorDialogLoader.active = false;
             }
-            onClosing: destroy()
-            Component.onCompleted: colorDialog.open()
+            onRejected: colorDialogLoader.active = false
         }
+        onLoaded: (item as QtDialogs.ColorDialog).open()
     }
 
     // prevents the popup from actually opening, needs to be queued
@@ -120,7 +107,7 @@ PlasmoidItem {
         PlasmaCore.Action {
             text: i18nc("@action", "Open Color Dialog")
             icon.name: "color-management"
-            onTriggered: colorWindowComponent.createObject(root)
+            onTriggered: colorDialogLoader.active = true
         },
         PlasmaCore.Action {
             text: i18nc("@action", "Clear History")
