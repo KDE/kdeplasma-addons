@@ -163,7 +163,7 @@ PlasmoidItem {
         let isHumidityPresent = !!forecastControl.forecast.lastObservation?.humidity && !!forecastControl.forecast.lastObservation?.humidityUnit;
         if (Plasmoid.configuration.showHumidityInTooltip && isHumidityPresent) {
             let humidity = Util.percentToDisplayString(forecastControl.forecast.lastObservation.humidity);
-            tooltips.push(i18n("Humidity: %1", humidity));
+            tooltips.push(i18nc("@info:tooltip fragment, %1 is humidity in configured unit", "Humidity: %1", humidity));
         }
 
         return tooltips.join("\n");

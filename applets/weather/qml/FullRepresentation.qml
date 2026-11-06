@@ -75,10 +75,10 @@ PlasmaExtras.Representation {
         // when not in panel, a configure button is already shown for needsConfiguration
         visible: (root.status === ForecastControl.NeedsConfiguration) && (Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal)
         iconName: "mark-location"
-        text: i18n("Please set your location")
+        text: i18nc("@info PlaceholderMessage text", "Please set your location")
         helpfulAction: QQC2.Action {
             icon.name: "configure"
-            text: i18n("Set location…")
+            text: i18nc("@action:button PlaceholderMessage helpfulAction", "Set location…")
 
             onTriggered: {
                 Plasmoid.internalAction("configure").trigger();
@@ -92,7 +92,7 @@ PlasmaExtras.Representation {
         width: Math.min(parent.width, Kirigami.Units.gridUnit * 20)
         visible: root.status === ForecastControl.Timeout
         iconName: "network-disconnect"
-        text: !!root.station?.place ? i18n("Unable to retrieve weather information for %1", root.station.place) : i18n("Unable to retrieve weather information")
+        text: !!root.station?.place ? i18nc("@info:status PlaceholderMessage text", "Unable to retrieve weather information for %1", root.station.place) : i18nc("@info:status PlaceholderMessage text", "Unable to retrieve weather information")
         explanation: i18nc("@info:usagetip", "The network request timed out, possibly due to a server outage at the weather station provider. Check again later.")
     }
 
