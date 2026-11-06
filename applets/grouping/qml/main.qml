@@ -87,8 +87,8 @@ ContainmentItem {
                     MouseArea {
                         acceptedButtons: Qt.RightButton
                         anchors.fill: parent
-                        onClicked: {
-                            modelData.clicked(mouse);
+                        onClicked: event => {
+                            modelData.clicked(event);
                         }
                     }
                 }
@@ -144,7 +144,7 @@ ContainmentItem {
                 event.ignore();
                 return;
             }
-            plasmoid.newTask(plasmoidId);
+            Plasmoid.newTask(plasmoidId);
         }
     }
 }

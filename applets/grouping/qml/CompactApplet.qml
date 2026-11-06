@@ -59,7 +59,7 @@ PlasmaCore.ToolTipArea {
             })
         } else {
             popupWindow.mainItem.width = Qt.binding(function() {
-                return Kirigami.Theme.gridUnit * 35
+                return Kirigami.Units.gridUnit * 35
             })
         }
 
@@ -77,7 +77,7 @@ PlasmaCore.ToolTipArea {
             })
         } else {
             popupWindow.mainItem.height = Qt.binding(function() {
-                return Kirigami.Theme.gridUnit * 25
+                return Kirigami.Units.gridUnit * 25
             })
         }
 
@@ -88,13 +88,13 @@ PlasmaCore.ToolTipArea {
     Timer {
         id: expandedSync
         interval: 100
-        onTriggered: plasmoidItem.expanded = popupWindow.visible;
+        onTriggered: root.plasmoidItem.expanded = popupWindow.visible;
     }
 
     Connections {
         target: plasmoid.internalAction("configure")
         function onTriggered() {
-            plasmoidItem.expanded = false
+            root.plasmoidItem.expanded = false
         }
     }
 
@@ -109,8 +109,8 @@ PlasmaCore.ToolTipArea {
         id: popupWindow
         objectName: "popupWindow"
         flags: Qt.WindowStaysOnTopHint
-        visible: plasmoidItem.expanded && fullRepresentation
-        visualParent: compactRepresentation ? compactRepresentation : null
+        visible: root.plasmoidItem.expanded && root.fullRepresentation
+        visualParent: root.compactRepresentation ? root.compactRepresentation : null
         location: plasmoid.location
         hideOnWindowDeactivate: root.plasmoidItem.hideOnWindowDeactivate
 
@@ -123,20 +123,20 @@ PlasmaCore.ToolTipArea {
             focus: true
 
             Keys.onEscapePressed: {
-                plasmoidItem.expanded = false;
+                root.plasmoidItem.expanded = false;
             }
 
             LayoutMirroring.enabled: Application.layoutDirection === Qt.RightToLeft
             LayoutMirroring.childrenInherit: true
 
-            Layout.minimumWidth: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.minimumWidth : 0
-            Layout.minimumHeight: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.minimumHeight: 0
-            Layout.maximumWidth: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.maximumWidth : Infinity
-            Layout.maximumHeight: (fullRepresentation && fullRepresentation.Layout) ? fullRepresentation.Layout.maximumHeight: Infinity
+            Layout.minimumWidth: (root.fullRepresentation && root.fullRepresentation.Layout) ? root.fullRepresentation.Layout.minimumWidth : 0
+            Layout.minimumHeight: (root.fullRepresentation && root.fullRepresentation.Layout) ? root.fullRepresentation.Layout.minimumHeight: 0
+            Layout.maximumWidth: (root.fullRepresentation && root.fullRepresentation.Layout) ? root.fullRepresentation.Layout.maximumWidth : Infinity
+            Layout.maximumHeight: (root.fullRepresentation && root.fullRepresentation.Layout) ? root.fullRepresentation.Layout.maximumHeight: Infinity
 
             onActiveFocusChanged: {
-                if (activeFocus && fullRepresentation) {
-                    fullRepresentation.forceActiveFocus()
+                if (activeFocus && root.fullRepresentation) {
+                    root.fullRepresentation.forceActiveFocus()
                 }
             }
         }
