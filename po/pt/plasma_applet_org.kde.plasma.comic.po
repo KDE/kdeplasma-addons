@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-27 00:44+0000\n"
+"POT-Creation-Date: 2026-11-07 00:59+0000\n"
 "PO-Revision-Date: 2022-07-21 19:40+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -127,13 +127,13 @@ msgctxt "@action:button"
 msgid "Get New…"
 msgstr "Obter Bandas Desenhadas Novas…"
 
-#: qml/configComics.qml:70
+#: qml/configComics.qml:66
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
 msgstr ""
 
-#: qml/configComics.qml:72
+#: qml/configComics.qml:68
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Get New Comics…"
@@ -141,13 +141,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Obter Bandas Desenhadas Novas…"
 
-#: qml/configComics.qml:86
+#: qml/configComics.qml:82
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Procurar bandas-desenhadas novas a cada:"
 
-#: qml/configComics.qml:96
+#: qml/configComics.qml:92
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -155,13 +155,13 @@ msgid_plural "minutes"
 msgstr[0] "minuto"
 msgstr[1] "minutos"
 
-#: qml/configComics.qml:102
+#: qml/configComics.qml:98
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr ""
 
-#: qml/configComics.qml:110
+#: qml/configComics.qml:106
 #, fuzzy, kde-format
 #| msgctxt "@item:valuesuffix spacing to number + unit"
 #| msgid "strip per comic"

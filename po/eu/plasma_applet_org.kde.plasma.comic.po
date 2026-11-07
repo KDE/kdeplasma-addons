@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-27 00:44+0000\n"
+"POT-Creation-Date: 2026-11-07 00:59+0000\n"
 "PO-Revision-Date: 2026-08-07 20:48+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -123,25 +123,25 @@ msgctxt "@action:button"
 msgid "Get New…"
 msgstr "Lortu … berria"
 
-#: qml/configComics.qml:70
+#: qml/configComics.qml:66
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
 msgstr "Ez da komikirik instalatu"
 
-#: qml/configComics.qml:72
+#: qml/configComics.qml:68
 #, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Lortu komikiak..."
 
-#: qml/configComics.qml:86
+#: qml/configComics.qml:82
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Hainbestero komiki berririk dagoen egiaztatu:"
 
-#: qml/configComics.qml:96
+#: qml/configComics.qml:92
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -149,13 +149,13 @@ msgid_plural "minutes"
 msgstr[0] "minutu"
 msgstr[1] "minutu"
 
-#: qml/configComics.qml:102
+#: qml/configComics.qml:98
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr "Mantendu artxibo lokala:"
 
-#: qml/configComics.qml:110
+#: qml/configComics.qml:106
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"

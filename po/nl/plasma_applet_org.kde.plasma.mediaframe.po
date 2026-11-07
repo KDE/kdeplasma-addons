@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 01:04+0000\n"
+"POT-Creation-Date: 2026-11-07 00:59+0000\n"
 "PO-Revision-Date: 2026-11-02 12:42+0100\n"
 "Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -181,31 +181,31 @@ msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Bestanden toevoegen…"
 
-#: qml/ConfigMedia.qml:83
+#: qml/ConfigMedia.qml:80
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Pad verwijderen"
 
-#: qml/ConfigMedia.qml:96
+#: qml/ConfigMedia.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "Geen media geconfigureerd"
 
-#: qml/ConfigMedia.qml:97
+#: qml/ConfigMedia.qml:94
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "Bestanden of mappen om ze te tonen in het widget."
 
-#: qml/ConfigMedia.qml:103
+#: qml/ConfigMedia.qml:100
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Bestanden kiezen"
 
-#: qml/ConfigMedia.qml:123
+#: qml/ConfigMedia.qml:120
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"

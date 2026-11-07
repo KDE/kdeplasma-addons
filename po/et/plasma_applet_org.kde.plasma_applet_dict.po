@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-03 00:56+0000\n"
+"POT-Creation-Date: 2026-11-07 00:59+0000\n"
 "PO-Revision-Date: 2019-11-08 22:22+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -37,7 +37,7 @@ msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr ""
 
-#: qml/ConfigDictionaries.qml:94
+#: qml/ConfigDictionaries.qml:91
 #, fuzzy, kde-format
 #| msgctxt "@label:listbox"
 #| msgid "Available dictionaries:"
@@ -45,13 +45,13 @@ msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "Saadaolevad sõnaraamatud:"
 
-#: qml/ConfigDictionaries.qml:95 qml/main.qml:202
+#: qml/ConfigDictionaries.qml:92 qml/main.qml:202
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr ""
 
-#: qml/ConfigDictionaries.qml:106
+#: qml/ConfigDictionaries.qml:103
 #, fuzzy, kde-format
 #| msgctxt "@title"
 #| msgid "Dictionaries"

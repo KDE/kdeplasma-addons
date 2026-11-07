@@ -1,16 +1,16 @@
 # Translation of plasma_applet_org.kde.plasma.mediaframe.po to Catalan (Valencian)
-# Copyright (C) 2016-2025 This_file_is_part_of_KDE
+# Copyright (C) 2016-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# SPDX-FileCopyrightText: 2016-2019, 2022-2025 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2016-2019, 2022-2026 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2020-2021 Antoni Bella Pérez <antonibella5@yahoo.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 01:04+0000\n"
-"PO-Revision-Date: 2025-08-14 11:49+0200\n"
+"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"PO-Revision-Date: 2026-11-03 10:22+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -34,29 +34,25 @@ msgid "Behavior"
 msgstr "Comportament"
 
 #: qml/ConfigBehavior.qml:36
-#, fuzzy, kde-format
-#| msgid "Change picture every:"
+#, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Canvia la imatge cada:"
 
 #: qml/ConfigBehavior.qml:53
-#, fuzzy, kde-format
-#| msgid "Hours"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "Hores"
 
 #: qml/ConfigBehavior.qml:67
-#, fuzzy, kde-format
-#| msgid "Minutes"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "Minuts"
 
 #: qml/ConfigBehavior.qml:81
-#, fuzzy, kde-format
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "Segons"
@@ -65,7 +61,7 @@ msgstr "Segons"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
-msgstr "Mode d'emplenament de la imatge:"
+msgstr "Mode «Emplenament» de la imatge:"
 
 #: qml/ConfigBehavior.qml:97
 #, kde-format
@@ -189,31 +185,31 @@ msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "Afig fitxers…"
 
-#: qml/ConfigMedia.qml:83
+#: qml/ConfigMedia.qml:80
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "Elimina el camí"
 
-#: qml/ConfigMedia.qml:96
+#: qml/ConfigMedia.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "No s'ha configurat cap element multimèdia"
 
-#: qml/ConfigMedia.qml:97
+#: qml/ConfigMedia.qml:94
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "Afig fitxers o carpetes per a mostrar-los al giny."
 
-#: qml/ConfigMedia.qml:103
+#: qml/ConfigMedia.qml:100
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "Trieu els fitxers"
 
-#: qml/ConfigMedia.qml:123
+#: qml/ConfigMedia.qml:120
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"

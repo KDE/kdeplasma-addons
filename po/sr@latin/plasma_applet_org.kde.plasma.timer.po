@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-06 00:53+0000\n"
+"POT-Creation-Date: 2026-11-07 00:59+0000\n"
 "PO-Revision-Date: 2026-10-04 17:03+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -118,7 +118,7 @@ msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Dodaj"
 
-#: configTimes.qml:88
+#: configTimes.qml:85
 #, fuzzy, kde-format
 #| msgid ""
 #| "If you add predefined timers here, they will appear in the widget’s "
@@ -131,35 +131,35 @@ msgstr ""
 "Ako ovde dodate predefinisana odbrojavanja, pojaviće se u kontekstnom meniju "
 "vidžeta."
 
-#: configTimes.qml:137
+#: configTimes.qml:134
 #, fuzzy, kde-format
 #| msgid "Scroll over digits to change time"
 msgctxt "@info:usagetip"
 msgid "Scroll over digits to change time"
 msgstr "Klizajte preko cifara da promenite vreme"
 
-#: configTimes.qml:147
+#: configTimes.qml:144
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Primeni"
 
-#: configTimes.qml:166
+#: configTimes.qml:163
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Odustani"
 
-#: configTimes.qml:186
+#: configTimes.qml:183
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Uredi"
 
-#: configTimes.qml:207
+#: configTimes.qml:204
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"

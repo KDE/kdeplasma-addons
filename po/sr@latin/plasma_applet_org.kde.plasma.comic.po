@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-27 00:44+0000\n"
+"POT-Creation-Date: 2026-11-07 00:59+0000\n"
 "PO-Revision-Date: 2026-10-07 11:45+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -125,26 +125,26 @@ msgid "Get New…"
 msgstr "Dobavi nove…"
 
 # >> @option:check
-#: qml/configComics.qml:70
+#: qml/configComics.qml:66
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
 msgstr "Nema instaliranih stripova"
 
-#: qml/configComics.qml:72
+#: qml/configComics.qml:68
 #, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Dobavi stripove…"
 
-#: qml/configComics.qml:86
+#: qml/configComics.qml:82
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Traži nove stripove svakih:"
 
 # >! Plurals.
-#: qml/configComics.qml:96
+#: qml/configComics.qml:92
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -154,13 +154,13 @@ msgstr[1] "minuta"
 msgstr[2] "minuta"
 msgstr[3] "minut"
 
-#: qml/configComics.qml:102
+#: qml/configComics.qml:98
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr "Čuvaj u lokalnoj arhivi:"
 
-#: qml/configComics.qml:110
+#: qml/configComics.qml:106
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"

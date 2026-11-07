@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-27 00:44+0000\n"
+"POT-Creation-Date: 2026-11-07 00:59+0000\n"
 "PO-Revision-Date: 2025-06-25 10:37+0300\n"
 "Last-Translator: Olesya Gerasimenko <goa@altlinux.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -129,26 +129,26 @@ msgctxt "@action:button"
 msgid "Get New…"
 msgstr "Загрузить…"
 
-#: qml/configComics.qml:70
+#: qml/configComics.qml:66
 #, kde-format
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
 msgstr "Не установлено ни одного комикса"
 
-#: qml/configComics.qml:72
+#: qml/configComics.qml:68
 #, kde-format
 msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Загрузить комиксы…"
 
-#: qml/configComics.qml:86
+#: qml/configComics.qml:82
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Проверять наличие новых комиксов каждые:"
 
 # BUGME: https://bugs.kde.org/show_bug.cgi?id=386957 --aspotashev
-#: qml/configComics.qml:96
+#: qml/configComics.qml:92
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -158,13 +158,13 @@ msgstr[1] "минуты"
 msgstr[2] "минут"
 msgstr[3] "минуту"
 
-#: qml/configComics.qml:102
+#: qml/configComics.qml:98
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr "Сохранять в локальном архиве:"
 
-#: qml/configComics.qml:110
+#: qml/configComics.qml:106
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"

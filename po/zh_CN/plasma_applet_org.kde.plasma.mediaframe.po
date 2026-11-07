@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-04 01:04+0000\n"
+"POT-Creation-Date: 2026-11-07 00:59+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -184,31 +184,31 @@ msgctxt "@action:button"
 msgid "Add Files…"
 msgstr "添加文件…"
 
-#: qml/ConfigMedia.qml:83
+#: qml/ConfigMedia.qml:80
 #, kde-format
 msgctxt "@action:button tooltip on icon-only button"
 msgid "Remove path"
 msgstr "移除路径"
 
-#: qml/ConfigMedia.qml:96
+#: qml/ConfigMedia.qml:93
 #, kde-format
 msgctxt "@info placeholdermessage if no paths set"
 msgid "No media configured"
 msgstr "没有配置媒体"
 
-#: qml/ConfigMedia.qml:97
+#: qml/ConfigMedia.qml:94
 #, kde-format
 msgctxt "@info placeholdermessage explanation"
 msgid "Add files or folders to display them in the widget."
 msgstr "添加文件或文件夹以在小部件中显示它们。"
 
-#: qml/ConfigMedia.qml:103
+#: qml/ConfigMedia.qml:100
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose Files"
 msgstr "选择文件"
 
-#: qml/ConfigMedia.qml:123
+#: qml/ConfigMedia.qml:120
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose a Folder"

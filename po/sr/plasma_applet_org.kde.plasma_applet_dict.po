@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.dict\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-03 00:56+0000\n"
+"POT-Creation-Date: 2026-11-07 00:59+0000\n"
 "PO-Revision-Date: 2026-10-04 17:03+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -38,20 +38,20 @@ msgctxt "@action:button Add more dictionaries"
 msgid "Add More…"
 msgstr "Додај још…"
 
-#: qml/ConfigDictionaries.qml:94
+#: qml/ConfigDictionaries.qml:91
 #, fuzzy, kde-format
 #| msgid "Unable to load dictionary list"
 msgctxt "@info:status PlaceholderMessage likely connection failure"
 msgid "Unable to load dictionary list"
 msgstr "Не могу да учитам списак речника"
 
-#: qml/ConfigDictionaries.qml:95 qml/main.qml:202
+#: qml/ConfigDictionaries.qml:92 qml/main.qml:202
 #, kde-format
 msgctxt "%2 human-readable error string"
 msgid "Error code: %1 (%2)"
 msgstr "Кôд грешке: %1 (%2)"
 
-#: qml/ConfigDictionaries.qml:106
+#: qml/ConfigDictionaries.qml:103
 #, fuzzy, kde-format
 #| msgid "No dictionaries"
 msgctxt ""

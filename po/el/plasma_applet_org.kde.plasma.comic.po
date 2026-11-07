@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-27 00:44+0000\n"
+"POT-Creation-Date: 2026-11-07 00:59+0000\n"
 "PO-Revision-Date: 2024-09-07 23:35+0300\n"
 "Last-Translator: kde-el <b3lievem@yandex.com>\n"
 "Language-Team: Greek <kde-i18n-doc@kde.org>\n"
@@ -134,14 +134,14 @@ msgctxt "@action:button"
 msgid "Get New…"
 msgstr "Λήψη νέων κόμικ…"
 
-#: qml/configComics.qml:70
+#: qml/configComics.qml:66
 #, fuzzy, kde-format
 #| msgid "Comic Configuration"
 msgctxt "@info placeholdermessage if comic provider list empty"
 msgid "No comics installed"
 msgstr "Ρύθμιση του Comic"
 
-#: qml/configComics.qml:72
+#: qml/configComics.qml:68
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Get New Comics…"
@@ -149,14 +149,14 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Λήψη νέων κόμικ…"
 
-#: qml/configComics.qml:86
+#: qml/configComics.qml:82
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Έλεγχος για νέες σειρές κόμικ:"
 
-#: qml/configComics.qml:96
+#: qml/configComics.qml:92
 #, fuzzy, kde-format
 #| msgid "minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -165,13 +165,13 @@ msgid_plural "minutes"
 msgstr[0] "λεπτά"
 msgstr[1] "λεπτά"
 
-#: qml/configComics.qml:102
+#: qml/configComics.qml:98
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr ""
 
-#: qml/configComics.qml:110
+#: qml/configComics.qml:106
 #, fuzzy, kde-format
 #| msgid "strips per comic"
 msgctxt "@item:valuesuffix spacing to number + unit"

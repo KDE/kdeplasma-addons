@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2026-04-24 09:44+0200\n"
+"PO-Revision-Date: 2026-11-03 10:21+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -118,15 +118,13 @@ msgid "Solved! Try again."
 msgstr "Solucionat! Torneu-ho a provar."
 
 #: qml/main.qml:39
-#, fuzzy, kde-format
-#| msgid "Fifteen Puzzle"
+#, kde-format
 msgctxt "@info:tooltip main title for widget"
 msgid "Fifteen Puzzle"
 msgstr "Trencaclosques quinze"
 
 #: qml/main.qml:40
-#, fuzzy, kde-format
-#| msgid "Solve by arranging in order"
+#, kde-format
 msgctxt "@info:tooltip subtitle for widget"
 msgid "Solve by arranging in order"
 msgstr "Se soluciona posant-ho en ordre"
