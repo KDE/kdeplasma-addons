@@ -8,7 +8,7 @@ import QtCore
 import QtQuick
 import QtQuick.Controls
 import QtQuick.Dialogs
-import QtQuick.Layouts
+
 import org.kde.kirigami as Kirigami
 
 Kirigami.FormLayout {
@@ -29,12 +29,12 @@ Kirigami.FormLayout {
         Accessible.name: i18ndc("plasma_wallpaper_org.kde.tiled", "@action:button", "Select a tile image")
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.tiled", "@label, noun", "Tile:")
         ToolTip.delay: Kirigami.Units.toolTipDelay
-        ToolTip.text: cfg_Image
+        ToolTip.text: root.cfg_Image
         ToolTip.visible: hovered
         icon.width: Kirigami.Units.gridUnit * 6
         icon.height: Kirigami.Units.gridUnit * 6
-        icon.source: cfg_Image
-        visible: !!cfg_Image
+        icon.source: root.cfg_Image
+        visible: !!root.cfg_Image
         onClicked: fileDialog.open()
     }
 
@@ -50,6 +50,6 @@ Kirigami.FormLayout {
         fileMode: FileDialog.OpenFiles
         options: FileDialog.ReadOnly
         title: i18ndc("plasma_wallpaper_org.kde.tiled", "@title:window", "Open Image")
-        onAccepted: cfg_Image = selectedFile;
+        onAccepted: root.cfg_Image = selectedFile;
     }
 }

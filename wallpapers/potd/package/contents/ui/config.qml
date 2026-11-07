@@ -3,6 +3,7 @@
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC2
@@ -27,12 +28,12 @@ Kirigami.FormLayout {
 
     PotdBackend {
         id: backend
-        identifier: cfg_Provider
+        identifier: root.cfg_Provider
         arguments: {
             if (identifier === "bing") {
                 // Bing supports 1366/1920/UHD resolutions and portrait orientation
-                const w = screenSize.width * Screen.devicePixelRatio;
-                const h = screenSize.height * Screen.devicePixelRatio;
+                const w = root.screenSize.width * Screen.devicePixelRatio;
+                const h = root.screenSize.height * Screen.devicePixelRatio;
 
                 if (h > w) {
                     // Portrait orientation
@@ -46,7 +47,7 @@ Kirigami.FormLayout {
             }
             return [];
         }
-        updateOverMeteredConnection: cfg_UpdateOverMeteredConnection
+        updateOverMeteredConnection: root.cfg_UpdateOverMeteredConnection
     }
 
     onCfg_FillModeChanged: {
@@ -80,12 +81,12 @@ Kirigami.FormLayout {
                 ]
 
         textRole: "label"
-        onActivated: cfg_FillMode = model[currentIndex]["fillMode"]
+        onActivated: root.cfg_FillMode = model[currentIndex]["fillMode"]
         Component.onCompleted: setMethod();
 
         function setMethod() {
             for (var i = 0; i < model.length; i++) {
-                if (model[i]["fillMode"] === cfg_FillMode) {
+                if (model[i]["fillMode"] === root.cfg_FillMode) {
                     resizeComboBox.currentIndex = i;
                     break;
                 }
@@ -105,14 +106,14 @@ Kirigami.FormLayout {
         QQC2.ComboBox {
             id: providerComboBox
             model: PotdProviderModel { }
-            currentIndex: model.indexOf(cfg_Provider)
+            currentIndex: model.indexOf(root.cfg_Provider)
             textRole: "display"
             valueRole: "id"
             onCurrentValueChanged: {
                 if (currentIndex < 0) {
                     return;
                 }
-                cfg_Provider = currentValue;
+                root.cfg_Provider = currentValue;
             }
         }
 
@@ -126,12 +127,12 @@ Kirigami.FormLayout {
     QQC2.CheckBox {
         id: updateOverMeteredConnectionCheckBox
 
-        checked: cfg_UpdateOverMeteredConnection === 1
+        checked: root.cfg_UpdateOverMeteredConnection === 1
         visible: backend.networkInformationAvailable
         text: i18ndc("plasma_wallpaper_org.kde.potd", "@option:check", "Update when using metered network connection")
 
         onToggled: {
-            cfg_UpdateOverMeteredConnection = checked ? 1 : 0;
+            root.cfg_UpdateOverMeteredConnection = checked ? 1 : 0;
         }
     }
 
@@ -144,8 +145,11 @@ Kirigami.FormLayout {
     WallpaperPreview {
         id: wallpaperPreview
         Kirigami.FormData.label: i18ndc("plasma_wallpaper_org.kde.potd", "@label", "Today's picture:")
-        backgroundColor: cfg_Color
-        visible: !!cfg_Provider // provider is not empty
+        backend: backend
+        screenSize: root.screenSize
+        backgroundColor: root.cfg_Color
+        visible: !!root.cfg_Provider // provider is not empty
+        fillMode: root.cfg_FillMode
     }
 
     Item {

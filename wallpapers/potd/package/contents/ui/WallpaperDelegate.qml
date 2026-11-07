@@ -19,6 +19,8 @@ FocusScope {
     readonly property int shadowOffset: thumbnail.shadow.size - thumbnail.shadow.yOffset
     readonly property bool isNull: wallpaperImage.status !== Image.Ready
 
+    property int fillMode
+
     /**
      * The background color of the preview area when the image is loaded
      */
@@ -64,7 +66,7 @@ FocusScope {
 
     ActionContextMenu {
         id: contextMenu
-        showAllActions: thumbnailAvailable
+        showAllActions: delegate.thumbnailAvailable
         actions: delegate.actions
     }
 
@@ -148,7 +150,7 @@ FocusScope {
                 autoTransform: false
                 cache: false
                 // Image.Stretch ("Scaled") is 0, so don't use || here
-                fillMode: cfg_FillMode ?? Image.PreserveAspectCrop
+                fillMode: delegate.fillMode ?? Image.PreserveAspectCrop
                 sourceSize: fillMode === Image.Pad || fillMode === Image.Tile ? Qt.size(width, height) : undefined
                 smooth: true
 
@@ -239,6 +241,8 @@ FocusScope {
                 Repeater {
                     model: delegate.actions
                     delegate: QQC2.Button {
+                        id: buttonDelegate
+                        required property Kirigami.Action modelData
                         icon.name: modelData.icon.name
                         activeFocusOnTab: visible
                         onClicked: modelData.trigger()
@@ -248,12 +252,11 @@ FocusScope {
                         Accessible.name: modelData.tooltip
                         Accessible.description: modelData.Accessible.description
 
-                        QQC2.ToolTip {
-                            visible: modelData.tooltip.length > 0
-                                     && ((Kirigami.Settings.isMobile ? parent.pressed : parent.hovered)
-                                          || (parent.activeFocus && (parent.focusReason === Qt.TabFocusReason || parent.focusReason === Qt.BacktabFocusReason)))
-                            text: modelData.tooltip
-                        }
+                        QQC2.ToolTip.visible: buttonDelegate.modelData.tooltip.length > 0
+                                     && ((Kirigami.Settings.isMobile ? pressed : hovered)
+                                          || visualFocus)
+                        QQC2.ToolTip.text: modelData.tooltip
+                        QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
                     }
                 }
             }

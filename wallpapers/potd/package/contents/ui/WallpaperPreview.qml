@@ -15,6 +15,9 @@ Column {
 
     spacing: 0
 
+    required property PotdBackend backend
+    required property size screenSize
+
     /**
     * The background color of the preview area when the image is loaded
     */
@@ -25,37 +28,43 @@ Column {
     */
     property alias shadowOffset: delegate.shadowOffset
 
+    /**
+    * The fill mode used for the image
+    */
+    property int fillMode
+
     // Wallpaper preview (including save button)
     WallpaperDelegate {
         id: delegate
 
-        width: Math.round(root.screenSize.width / 10 + Kirigami.Units.smallSpacing * 2) * Screen.devicePixelRatio
-        height: Math.round(root.screenSize.height / 10 + Kirigami.Units.smallSpacing * 2) * Screen.devicePixelRatio
+        width: Math.round(wallpaperPreview.screenSize.width / 10 + Kirigami.Units.smallSpacing * 2) * Screen.devicePixelRatio
+        height: Math.round(wallpaperPreview.screenSize.height / 10 + Kirigami.Units.smallSpacing * 2) * Screen.devicePixelRatio
 
-        localUrl: backend.localUrl
-        infoUrl: backend.infoUrl
-        title: backend.title
-        author: backend.author
+        localUrl: wallpaperPreview.backend.localUrl
+        infoUrl: wallpaperPreview.backend.infoUrl
+        title: wallpaperPreview.backend.title
+        author: wallpaperPreview.backend.author
 
+        fillMode: wallpaperPreview.fillMode
         thumbnailAvailable: !delegate.isNull
-        thumbnailLoading: backend.loading
+        thumbnailLoading: wallpaperPreview.backend.loading
 
         actions: [
             Kirigami.Action {
                 icon.name: "document-save"
-                enabled: backend.localUrl.length > 0
+                enabled: wallpaperPreview.backend.localUrl.length > 0
                 visible: enabled
                 tooltip: i18ndc("plasma_wallpaper_org.kde.potd", "@action:inmenu wallpaper preview menu", "Save Image as…")
-                onTriggered: backend.saveImage()
+                onTriggered: wallpaperPreview.backend.saveImage()
 
                 Accessible.description: i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis for a button and a menu item", "Save today's picture to local disk")
             },
             Kirigami.Action {
                 icon.name: "internet-services"
-                enabled: backend.infoUrl.toString().length > 0
+                enabled: wallpaperPreview.backend.infoUrl.toString().length > 0
                 visible: false
                 tooltip: i18ndc("plasma_wallpaper_org.kde.potd", "@action:inmenu wallpaper preview menu, will open the website of the wallpaper", "Open Link in Browser…")
-                onTriggered: Qt.openUrlExternally(backend.infoUrl)
+                onTriggered: Qt.openUrlExternally(wallpaperPreview.backend.infoUrl)
 
                 Accessible.description: i18ndc("plasma_wallpaper_org.kde.potd", "@info:whatsthis for a menu item", "Open the website of today's picture in the default browser")
             }

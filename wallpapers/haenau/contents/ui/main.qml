@@ -23,69 +23,84 @@ WallpaperItem {
         BackgroundElement {
             id: centerLayer0
             elementId: "center-layer0"
+            imagePath: wallpaper.wallpaperPath
         }
         BackgroundElement {
             id: centerLayer1
             elementId: "center-layer1"
+            imagePath: wallpaper.wallpaperPath
         }
 
         BackgroundElement {
             id: leftLayer0
             elementId: "left-layer0"
+            imagePath: wallpaper.wallpaperPath
         }
 
         BackgroundElement {
             id: leftLayer1
             elementId: "left-layer1"
+            imagePath: wallpaper.wallpaperPath
 
             BackgroundElement {
                 id: leftLayer2
                 elementId: "left-layer2"
+                imagePath: wallpaper.wallpaperPath
             }
             BackgroundElement {
                 id: leftLayer3
                 elementId: "left-layer3"
+                imagePath: wallpaper.wallpaperPath
             }
             BackgroundElement {
                 id: leftLayer4
                 elementId: "left-layer4"
+                imagePath: wallpaper.wallpaperPath
             }
         }
 
         BottomBackgroundElement {
             id: bottomLayer0
             elementId: "bottom-layer0"
+            imagePath: wallpaper.wallpaperPath
 
             BottomBackgroundElement {
                 id: bottomLayer1
                 elementId: "bottom-layer1"
+                imagePath: wallpaper.wallpaperPath
             }
             BottomBackgroundElement {
                 id: bottomLayer2
                 elementId: "bottom-layer2"
+                imagePath: wallpaper.wallpaperPath
             }
         }
 
         RightBackgroundElement {
             id: rightLayer0
             elementId: "right-layer0"
+            imagePath: wallpaper.wallpaperPath
         }
 
         RightBackgroundElement {
             id: rightLayer1
             elementId: "right-layer1"
+            imagePath: wallpaper.wallpaperPath
 
             RightBackgroundElement {
                 id: rightLayer2
                 elementId: "right-layer2"
+                imagePath: wallpaper.wallpaperPath
             }
             RightBackgroundElement {
                 id: rightLayer3
                 elementId: "right-layer3"
+                imagePath: wallpaper.wallpaperPath
             }
             RightBackgroundElement {
                 id: rightLayer4
                 elementId: "right-layer4"
+                imagePath: wallpaper.wallpaperPath
             }
         }
 

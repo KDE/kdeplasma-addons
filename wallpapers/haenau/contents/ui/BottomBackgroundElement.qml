@@ -12,7 +12,6 @@ KSvg.SvgItem {
     height: naturalSize.height * (parent.width/naturalSize.width)
     width: parent.width
     y: parent.height - height
-    imagePath: wallpaper.wallpaperPath
 
     signal changeTriggered
 

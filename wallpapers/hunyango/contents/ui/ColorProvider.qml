@@ -9,6 +9,7 @@ pragma Singleton
 import QtQuick
 
 Item {
+    id: root
     property color color: _randomColor()
 
     // Intentionally not using standard durations because this is an
@@ -21,7 +22,7 @@ Item {
         SequentialAnimation {
             ColorAnimation {
                 id: colorAnimation
-                duration: slowDuration
+                duration: root.slowDuration
                 easing.type: Easing.InOutQuad
             }
 

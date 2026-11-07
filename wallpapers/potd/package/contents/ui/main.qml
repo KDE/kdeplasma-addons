@@ -3,6 +3,7 @@
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC2
@@ -38,7 +39,7 @@ WallpaperItem {
 
         readonly property int fillMode: root.configuration.FillMode
         readonly property size sourceSize: Qt.size(imageView.width * Screen.devicePixelRatio, imageView.height * Screen.devicePixelRatio)
-        property Item pendingImage
+        property Image pendingImage
         property bool doesSkipAnimation: true
 
         onFillModeChanged: Qt.callLater(imageView.loadImage)
@@ -54,7 +55,7 @@ WallpaperItem {
                 imageView.pendingImage = null;
             }
 
-            imageView.doesSkipAnimation = imageView.empty || sourceSize !== imageView.currentItem.sourceSize;
+            imageView.doesSkipAnimation = imageView.empty || sourceSize !== (imageView.currentItem as Image).sourceSize;
             imageView.pendingImage = imageComponent.createObject(imageView, {
                 "source": backend.localUrl,
                 "fillMode": imageView.fillMode,

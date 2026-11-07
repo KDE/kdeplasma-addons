@@ -3,9 +3,11 @@
  *
  *   SPDX-License-Identifier: LGPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import QtQuick.Controls as QQC2
+import org.kde.kirigami as Kirigami
 
 QQC2.Menu {
     id: contextMenu
@@ -23,6 +25,7 @@ QQC2.Menu {
     Repeater {
         model: contextMenu.actions
         delegate: QQC2.MenuItem {
+            required property Kirigami.Action modelData
             text: modelData.text || modelData.tooltip
             icon.name: modelData.icon.name
             onTriggered: modelData.trigger()
