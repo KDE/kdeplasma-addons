@@ -247,7 +247,7 @@ void MediaFrame::get(QJSValue successCallback, QJSValue errorCallback)
                 qCDebug(PLASMA_MEDIAFRAME) << path << "is cached as" << cachedFile;
 
                 if (successCallback.isCallable()) {
-                    args << QJSValue(cachedFile);
+                    args << QJSValue(QUrl::fromLocalFile(cachedFile).toString());
                     successCallback.call(args);
                 }
                 return;
@@ -366,7 +366,8 @@ void MediaFrame::slotFinished(KJob *job)
         qCDebug(PLASMA_MEDIAFRAME) << "Saved to" << path;
 
         if (m_successCallback.isCallable()) {
-            args << QJSValue(path);
+            args << QJSValue(QUrl::fromLocalFile(path).toString());
+            qDebug() << "returning " << QUrl::fromLocalFile(path).toString();
             m_successCallback.call(args);
         }
     } else {
