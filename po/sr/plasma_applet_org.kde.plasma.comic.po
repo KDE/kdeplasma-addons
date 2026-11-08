@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2026-10-07 11:45+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -38,6 +38,30 @@ msgstr "Скочи на стрип…"
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Посети веб сајт стрипа"
+
+# >> @title:window
+#: qml/ComicCentralView.qml:125
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Go to Strip"
+msgctxt "@action:button in floating toolbar, icon-only"
+msgid "Go to previous strip"
+msgstr "Скок на стрип"
+
+#: qml/ComicCentralView.qml:130
+#, kde-format
+msgctxt "@action:button in floating toolbar, icon-only"
+msgid "Show full-size in popup"
+msgstr ""
+
+# >> @title:window
+#: qml/ComicCentralView.qml:136
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Go to Strip"
+msgctxt "@action:button in floating toolbar, icon-only"
+msgid "Go to next strip"
+msgstr "Скок на стрип"
 
 #: qml/config.qml:13
 #, kde-format

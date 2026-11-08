@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2026-11-02 01:39+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -110,7 +110,7 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Časovač vypršel'"
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
@@ -126,31 +126,25 @@ msgstr ""
 "Pokud sem přidáte předdefinované časovače, zobrazí se v kontextovém menu "
 "widgetu."
 
-#: configTimes.qml:134
-#, kde-format
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr "Rolujte čísly pro změnu času"
-
-#: configTimes.qml:144
+#: configTimes.qml:191
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Použít"
 
-#: configTimes.qml:163
+#: configTimes.qml:210
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Zrušit"
 
-#: configTimes.qml:183
+#: configTimes.qml:229
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Upravit"
 
-#: configTimes.qml:204
+#: configTimes.qml:251
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
@@ -224,6 +218,10 @@ msgstr "Zas&tavit"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Obnovit"
+
+#~ msgctxt "@info:usagetip"
+#~ msgid "Scroll over digits to change time"
+#~ msgstr "Rolujte čísly pro změnu času"
 
 #~ msgctxt "remaining time"
 #~ msgid "%1s"

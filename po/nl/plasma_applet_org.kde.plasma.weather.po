@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-03 00:56+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2026-10-17 14:00+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
@@ -447,7 +447,7 @@ msgctxt "@title"
 msgid "Units"
 msgstr "Eenheden"
 
-#: qml/config/ConfigAppearance.qml:48 qml/config/ConfigWeatherStation.qml:119
+#: qml/config/ConfigAppearance.qml:48 qml/config/ConfigWeatherStation.qml:120
 #, kde-format
 msgctxt "@label:info. %1 is the name of a weather service"
 msgid ""
@@ -559,74 +559,74 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Zicht:"
 
-#: qml/config/ConfigWeatherStation.qml:58
+#: qml/config/ConfigWeatherStation.qml:59
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Bijwerken elke:"
 
-#: qml/config/ConfigWeatherStation.qml:61
+#: qml/config/ConfigWeatherStation.qml:62
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 minuut"
 msgstr[1] "%1 minuten"
 
-#: qml/config/ConfigWeatherStation.qml:73
+#: qml/config/ConfigWeatherStation.qml:74
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Locatie:"
 
-#: qml/config/ConfigWeatherStation.qml:86
+#: qml/config/ConfigWeatherStation.qml:87
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "Geen geselecteerd"
 
-#: qml/config/ConfigWeatherStation.qml:92
+#: qml/config/ConfigWeatherStation.qml:93
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "Leverancier:"
 
-#: qml/config/ConfigWeatherStation.qml:130
+#: qml/config/ConfigWeatherStation.qml:131
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Nieuwe locatie invoeren"
 
-#: qml/config/ConfigWeatherStation.qml:130
+#: qml/config/ConfigWeatherStation.qml:131
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Locatie invoeren"
 
-#: qml/config/ConfigWeatherStation.qml:210
+#: qml/config/ConfigWeatherStation.qml:211
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/config/ConfigWeatherStation.qml:241
+#: qml/config/ConfigWeatherStation.qml:242
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Geen weerstations gevonden voor '%1'"
 
-#: qml/config/ConfigWeatherStation.qml:243
+#: qml/config/ConfigWeatherStation.qml:244
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Naar een weerstation zoeken om uw locatie te wijzigen"
 
-#: qml/config/ConfigWeatherStation.qml:245
+#: qml/config/ConfigWeatherStation.qml:246
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Naar een weerstation zoeken om uw locatie in te stellen"
 
-#: qml/config/ConfigWeatherStation.qml:248
+#: qml/config/ConfigWeatherStation.qml:249
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -638,25 +638,25 @@ msgstr ""
 "het buiten gebruik zijn van de server bij de leverancier van het weerstation "
 "het tijdelijk onbereikbaar heeft gemaakt. Probeer het later nog eens."
 
-#: qml/DayForecastGraph.qml:42 qml/HourlyForecastGraph.qml:46
+#: qml/DayForecastGraph.qml:42 qml/HourlyForecastGraph.qml:44
 #, kde-format
 msgctxt "@label"
 msgid "Temperature"
 msgstr "Temperatuur"
 
-#: qml/DayForecastGraph.qml:59 qml/HourlyForecastGraph.qml:63
+#: qml/DayForecastGraph.qml:59 qml/HourlyForecastGraph.qml:61
 #, kde-format
 msgctxt "@label"
 msgid "High Temperature"
 msgstr "Hoge temperatuur"
 
-#: qml/DayForecastGraph.qml:76 qml/HourlyForecastGraph.qml:80
+#: qml/DayForecastGraph.qml:76 qml/HourlyForecastGraph.qml:78
 #, kde-format
 msgctxt "@label"
 msgid "Low Temperature"
 msgstr "Lage temperatuur"
 
-#: qml/DayForecastGraph.qml:93 qml/HourlyForecastGraph.qml:97
+#: qml/DayForecastGraph.qml:93 qml/HourlyForecastGraph.qml:95
 #, kde-format
 msgctxt "@label"
 msgid "Chance of precipitation"
@@ -716,13 +716,13 @@ msgctxt "@action"
 msgid "Go to previous day"
 msgstr "Ga naar vorige dag"
 
-#: qml/ForecastNavigation.qml:134
+#: qml/ForecastNavigation.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "Go to next day"
 msgstr "Ga naar volgende dag"
 
-#: qml/ForecastNavigation.qml:153
+#: qml/ForecastNavigation.qml:154
 #, kde-format
 msgctxt "@action"
 msgid "Go to last day"
@@ -735,22 +735,30 @@ msgid "Return to Weather Forecast"
 msgstr "Keer terug naar de weersvoorspelling"
 
 #: qml/FullRepresentation.qml:78
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Please set your location"
+msgctxt "@info PlaceholderMessage text"
 msgid "Please set your location"
 msgstr "Stel uw locatie in"
 
 #: qml/FullRepresentation.qml:81
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Set location…"
+msgctxt "@action:button PlaceholderMessage helpfulAction"
 msgid "Set location…"
 msgstr "Locatie instellen…"
 
 #: qml/FullRepresentation.qml:95
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to retrieve weather information for %1"
+msgctxt "@info:status PlaceholderMessage text"
 msgid "Unable to retrieve weather information for %1"
 msgstr "Ophalen van weerinformatie voor %1 lukt niet"
 
 #: qml/FullRepresentation.qml:95
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to retrieve weather information"
+msgctxt "@info:status PlaceholderMessage text"
 msgid "Unable to retrieve weather information"
 msgstr "Ophalen van weerinformatie lukt niet"
 
@@ -765,7 +773,7 @@ msgstr ""
 "vanwege het niet beschikbaar zijn van de server bij de leverancier van het "
 "weerstation. Probeer het later nog eens."
 
-#: qml/FullRepresentation.qml:105 qml/main.qml:117
+#: qml/FullRepresentation.qml:105 qml/main.qml:118
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
@@ -794,13 +802,13 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 melding"
 msgstr[1] "%1 meldingen"
 
-#: qml/main.qml:82
+#: qml/main.qml:83
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "Rustig"
 
-#: qml/main.qml:104
+#: qml/main.qml:105
 #, kde-format
 msgctxt ""
 "@info:usagetip Minimize the length of this string so it is as short as "
@@ -809,38 +817,40 @@ msgctxt ""
 msgid "Set up Weather Report…"
 msgstr "Weerrapport opzetten…"
 
-#: qml/main.qml:113
+#: qml/main.qml:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr "Klik om een locatie te kiezen en het weer daar te monitoren"
 
-#: qml/main.qml:130
+#: qml/main.qml:131
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:143
+#: qml/main.qml:144
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: qml/main.qml:145
+#: qml/main.qml:146
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:156
+#: qml/main.qml:157
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/main.qml:165
-#, kde-format
+#: qml/main.qml:166
+#, fuzzy, kde-format
+#| msgid "Humidity: %1"
+msgctxt "@info:tooltip fragment, %1 is humidity in configured unit"
 msgid "Humidity: %1"
 msgstr "Luchtvochtigheid: %1"
 
@@ -885,25 +895,25 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "Voelt als %1"
 
-#: qml/WeatherPage.qml:95
+#: qml/WeatherPage.qml:96
 #, kde-format
 msgctxt "@label"
 msgid "Today"
 msgstr "Vandaag"
 
-#: qml/WeatherPage.qml:97
+#: qml/WeatherPage.qml:98
 #, kde-format
 msgctxt "@label"
 msgid "Tomorrow"
 msgstr "Morgen"
 
-#: qml/WeatherPage.qml:103
+#: qml/WeatherPage.qml:104
 #, kde-format
 msgctxt "@label"
 msgid "Today to Tomorrow"
 msgstr "Vandaag tot morgen"
 
-#: qml/WeatherPage.qml:105
+#: qml/WeatherPage.qml:106
 #, kde-format
 msgctxt "@label %1 is a day of the week"
 msgid "Today to %1"

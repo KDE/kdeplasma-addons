@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2026-07-15 23:04+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -110,7 +110,7 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Tenporizadoreak amaitu du'"
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
@@ -129,35 +129,28 @@ msgstr ""
 "Hemen aurrez definitutako tenporizadoreak gehitzen badituzu, trepetaren "
 "laster-menuan agertuko dira."
 
-#: configTimes.qml:134
-#, fuzzy, kde-format
-#| msgid "Scroll over digits to change time"
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr "Mugitu digituen gainean denbora aldatzeko"
-
-#: configTimes.qml:144
+#: configTimes.qml:191
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Ezarri"
 
-#: configTimes.qml:163
+#: configTimes.qml:210
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Utzi"
 
-#: configTimes.qml:183
+#: configTimes.qml:229
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Editatu"
 
-#: configTimes.qml:204
+#: configTimes.qml:251
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"
@@ -242,6 +235,12 @@ msgstr "Geldi&tu"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "Be&rrezarri"
+
+#, fuzzy
+#~| msgid "Scroll over digits to change time"
+#~ msgctxt "@info:usagetip"
+#~ msgid "Scroll over digits to change time"
+#~ msgstr "Mugitu digituen gainean denbora aldatzeko"
 
 #~ msgctxt "remaining time"
 #~ msgid "%1s"

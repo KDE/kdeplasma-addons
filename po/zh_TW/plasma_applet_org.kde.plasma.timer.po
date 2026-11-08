@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2026-05-12 02:59+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -111,7 +111,7 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox '時間到！'"
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
@@ -128,35 +128,28 @@ msgid ""
 "menu."
 msgstr "如果您在此新增預先設定的計時器，它們會出現在元件的內文選單裡。"
 
-#: configTimes.qml:134
-#, fuzzy, kde-format
-#| msgid "Scroll over digits to change time"
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr "在數字上捲動以修改時間"
-
-#: configTimes.qml:144
+#: configTimes.qml:191
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "套用"
 
-#: configTimes.qml:163
+#: configTimes.qml:210
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "取消"
 
-#: configTimes.qml:183
+#: configTimes.qml:229
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "編輯"
 
-#: configTimes.qml:204
+#: configTimes.qml:251
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"
@@ -238,6 +231,12 @@ msgstr "停止(&T)"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "重設(&R)"
+
+#, fuzzy
+#~| msgid "Scroll over digits to change time"
+#~ msgctxt "@info:usagetip"
+#~ msgid "Scroll over digits to change time"
+#~ msgstr "在數字上捲動以修改時間"
 
 #~ msgctxt "remaining time"
 #~ msgid "%1s"

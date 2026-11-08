@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2026-11-02 13:44+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
@@ -119,7 +119,7 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox « Décompte terminé »"
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
@@ -135,31 +135,25 @@ msgstr ""
 "Si vous ajoutez ici des compteurs prédéfinis, il devraient apparaitre dans "
 "le menu contextuel du composant graphique."
 
-#: configTimes.qml:134
-#, kde-format
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr "Faites défiler les nombres pour modifier l'heure"
-
-#: configTimes.qml:144
+#: configTimes.qml:191
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Appliquer"
 
-#: configTimes.qml:163
+#: configTimes.qml:210
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Annuler"
 
-#: configTimes.qml:183
+#: configTimes.qml:229
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Modifier"
 
-#: configTimes.qml:204
+#: configTimes.qml:251
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
@@ -232,6 +226,10 @@ msgstr "Arrê&ter"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Réinitialiser"
+
+#~ msgctxt "@info:usagetip"
+#~ msgid "Scroll over digits to change time"
+#~ msgstr "Faites défiler les nombres pour modifier l'heure"
 
 #~ msgctxt "remaining time"
 #~ msgid "%1s"

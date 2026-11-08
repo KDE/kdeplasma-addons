@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2025-11-08 21:10-0300\n"
 "Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -38,6 +38,28 @@ msgstr "Saltar para linha…"
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "Visitar o site da tirinha"
+
+#: qml/ComicCentralView.qml:125
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Go to Strip"
+msgctxt "@action:button in floating toolbar, icon-only"
+msgid "Go to previous strip"
+msgstr "Ir para a linha"
+
+#: qml/ComicCentralView.qml:130
+#, kde-format
+msgctxt "@action:button in floating toolbar, icon-only"
+msgid "Show full-size in popup"
+msgstr ""
+
+#: qml/ComicCentralView.qml:136
+#, fuzzy, kde-format
+#| msgctxt "@title:window"
+#| msgid "Go to Strip"
+msgctxt "@action:button in floating toolbar, icon-only"
+msgid "Go to next strip"
+msgstr "Ir para a linha"
 
 #: qml/config.qml:13
 #, kde-format

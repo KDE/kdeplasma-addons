@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2026-11-05 08:42+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -109,7 +109,7 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'انتهى المؤقت'"
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
@@ -123,31 +123,25 @@ msgid ""
 "menu."
 msgstr "إذا أضفت مؤقتات محددة مسبقًا هنا، فسوف تظهر في قائمة سياق الودجة."
 
-#: configTimes.qml:134
-#, kde-format
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr "مرر بالفأرة على الأرقام لتغيير الوقت"
-
-#: configTimes.qml:144
+#: configTimes.qml:191
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "طبّق"
 
-#: configTimes.qml:163
+#: configTimes.qml:210
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "ألغِ"
 
-#: configTimes.qml:183
+#: configTimes.qml:229
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "حرّر"
 
-#: configTimes.qml:204
+#: configTimes.qml:251
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
@@ -224,6 +218,10 @@ msgstr "أو&قِف"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&صفّر"
+
+#~ msgctxt "@info:usagetip"
+#~ msgid "Scroll over digits to change time"
+#~ msgstr "مرر بالفأرة على الأرقام لتغيير الوقت"
 
 #~ msgctxt "remaining time"
 #~ msgid "%1s"

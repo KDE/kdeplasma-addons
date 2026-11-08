@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2025-05-12 17:21+0400\n"
 "Last-Translator: linux <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -112,7 +112,7 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
@@ -131,35 +131,28 @@ msgstr ""
 "Əvvəlcədən təyin olunmuş vaxtölçənləri buraya əlavə etsəniz, onlar plasmoid "
 "kontekst menyusunda görünəcək."
 
-#: configTimes.qml:134
-#, fuzzy, kde-format
-#| msgid "Scroll over digits to change time"
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr "Vaxtı dəyişdirmək üçün rəqəmləri sürüşdürün"
-
-#: configTimes.qml:144
+#: configTimes.qml:191
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Tətbiq etmək"
 
-#: configTimes.qml:163
+#: configTimes.qml:210
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "İmtina"
 
-#: configTimes.qml:183
+#: configTimes.qml:229
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Düzəliş etmək"
 
-#: configTimes.qml:204
+#: configTimes.qml:251
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"
@@ -244,6 +237,12 @@ msgstr "&Dayandırmaq"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "Sıfı&rlamaq"
+
+#, fuzzy
+#~| msgid "Scroll over digits to change time"
+#~ msgctxt "@info:usagetip"
+#~ msgid "Scroll over digits to change time"
+#~ msgstr "Vaxtı dəyişdirmək üçün rəqəmləri sürüşdürün"
 
 #~ msgctxt "remaining time"
 #~ msgid "%1s"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2022-12-12 18:57+0000\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt@kde.org>\n"
@@ -112,7 +112,7 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, fuzzy, kde-format
 #| msgid "Add"
 msgctxt "@action:button Add timer"
@@ -132,35 +132,28 @@ msgstr ""
 "Se adicionar aqui temporizadores predefinidos, os mesmos irão aparecer no "
 "menu de contexto do plasmóide."
 
-#: configTimes.qml:134
-#, fuzzy, kde-format
-#| msgid "Scroll over digits to change time"
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr "Desloque os algarismos para mudar a hora"
-
-#: configTimes.qml:144
+#: configTimes.qml:191
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Aplicar"
 
-#: configTimes.qml:163
+#: configTimes.qml:210
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: configTimes.qml:183
+#: configTimes.qml:229
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Editar"
 
-#: configTimes.qml:204
+#: configTimes.qml:251
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"
@@ -245,6 +238,12 @@ msgstr "&Parar"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Reiniciar"
+
+#, fuzzy
+#~| msgid "Scroll over digits to change time"
+#~ msgctxt "@info:usagetip"
+#~ msgid "Scroll over digits to change time"
+#~ msgstr "Desloque os algarismos para mudar a hora"
 
 #~ msgctxt "remaining time"
 #~ msgid "%1s"

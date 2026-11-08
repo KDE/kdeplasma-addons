@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2023-01-08 18:15+0100\n"
 "Last-Translator: Phu Hung Nguyen <phu.nguyen@kdemail.net>\n"
 "Language-Team: Vietnamese <kde-l10n-vi@kde.org>\n"
@@ -112,7 +112,7 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, fuzzy, kde-format
 #| msgid "Add"
 msgctxt "@action:button Add timer"
@@ -132,35 +132,28 @@ msgstr ""
 "Nếu bạn thêm các bộ hẹn giờ định trước vào đây, chúng sẽ xuất hiện trong "
 "trình đơn ngữ cảnh của plasmoid."
 
-#: configTimes.qml:134
-#, fuzzy, kde-format
-#| msgid "Scroll over digits to change time"
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr "Cuộn trên các con số để thay đổi thời gian"
-
-#: configTimes.qml:144
+#: configTimes.qml:191
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Áp dụng"
 
-#: configTimes.qml:163
+#: configTimes.qml:210
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Huỷ"
 
-#: configTimes.qml:183
+#: configTimes.qml:229
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Sửa"
 
-#: configTimes.qml:204
+#: configTimes.qml:251
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"
@@ -244,6 +237,12 @@ msgstr "&Dừng"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "Đặt &lại"
+
+#, fuzzy
+#~| msgid "Scroll over digits to change time"
+#~ msgctxt "@info:usagetip"
+#~ msgid "Scroll over digits to change time"
+#~ msgstr "Cuộn trên các con số để thay đổi thời gian"
 
 #~ msgctxt "remaining time"
 #~ msgid "%1s"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-03 00:56+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2026-10-19 15:41+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -447,7 +447,7 @@ msgctxt "@title"
 msgid "Units"
 msgstr "Единици"
 
-#: qml/config/ConfigAppearance.qml:48 qml/config/ConfigWeatherStation.qml:119
+#: qml/config/ConfigAppearance.qml:48 qml/config/ConfigWeatherStation.qml:120
 #, kde-format
 msgctxt "@label:info. %1 is the name of a weather service"
 msgid ""
@@ -559,74 +559,74 @@ msgctxt "@label:listbox"
 msgid "Visibility:"
 msgstr "Видимост:"
 
-#: qml/config/ConfigWeatherStation.qml:58
+#: qml/config/ConfigWeatherStation.qml:59
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Update every:"
 msgstr "Актуализиране на всеки:"
 
-#: qml/config/ConfigWeatherStation.qml:61
+#: qml/config/ConfigWeatherStation.qml:62
 #, kde-format
 msgid "%1 minute"
 msgid_plural "%1 minutes"
 msgstr[0] "%1 минута"
 msgstr[1] "%1 минути"
 
-#: qml/config/ConfigWeatherStation.qml:73
+#: qml/config/ConfigWeatherStation.qml:74
 #, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Местоположение:"
 
-#: qml/config/ConfigWeatherStation.qml:86
+#: qml/config/ConfigWeatherStation.qml:87
 #, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
 msgstr "Няма избрано"
 
-#: qml/config/ConfigWeatherStation.qml:92
+#: qml/config/ConfigWeatherStation.qml:93
 #, kde-format
 msgctxt "@label"
 msgid "Provider:"
 msgstr "Доставчик:"
 
-#: qml/config/ConfigWeatherStation.qml:130
+#: qml/config/ConfigWeatherStation.qml:131
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter new location"
 msgstr "Въведете  ново местоположение"
 
-#: qml/config/ConfigWeatherStation.qml:130
+#: qml/config/ConfigWeatherStation.qml:131
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter location"
 msgstr "Въведете местоположение"
 
-#: qml/config/ConfigWeatherStation.qml:210
+#: qml/config/ConfigWeatherStation.qml:211
 #, kde-format
 msgctxt "A weather station location and the weather service it comes from"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/config/ConfigWeatherStation.qml:241
+#: qml/config/ConfigWeatherStation.qml:242
 #, kde-format
 msgctxt "@info"
 msgid "No weather stations found for '%1'"
 msgstr "Не са намерени метеорологични станции за „%1“"
 
-#: qml/config/ConfigWeatherStation.qml:243
+#: qml/config/ConfigWeatherStation.qml:244
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
 msgstr "Търсене на метеорологична станция за промяна на местоположението"
 
-#: qml/config/ConfigWeatherStation.qml:245
+#: qml/config/ConfigWeatherStation.qml:246
 #, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
 msgstr "Търсене на метеорологична станция за задаване на местоположението"
 
-#: qml/config/ConfigWeatherStation.qml:248
+#: qml/config/ConfigWeatherStation.qml:249
 #, kde-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -638,25 +638,25 @@ msgstr ""
 "сървърът на доставчика на метеорологичната станция да е временно недостъпен. "
 "Опитайте отново по-късно."
 
-#: qml/DayForecastGraph.qml:42 qml/HourlyForecastGraph.qml:46
+#: qml/DayForecastGraph.qml:42 qml/HourlyForecastGraph.qml:44
 #, kde-format
 msgctxt "@label"
 msgid "Temperature"
 msgstr "Температура"
 
-#: qml/DayForecastGraph.qml:59 qml/HourlyForecastGraph.qml:63
+#: qml/DayForecastGraph.qml:59 qml/HourlyForecastGraph.qml:61
 #, kde-format
 msgctxt "@label"
 msgid "High Temperature"
 msgstr "Максимална температура"
 
-#: qml/DayForecastGraph.qml:76 qml/HourlyForecastGraph.qml:80
+#: qml/DayForecastGraph.qml:76 qml/HourlyForecastGraph.qml:78
 #, kde-format
 msgctxt "@label"
 msgid "Low Temperature"
 msgstr "Най-ниска температура"
 
-#: qml/DayForecastGraph.qml:93 qml/HourlyForecastGraph.qml:97
+#: qml/DayForecastGraph.qml:93 qml/HourlyForecastGraph.qml:95
 #, kde-format
 msgctxt "@label"
 msgid "Chance of precipitation"
@@ -716,13 +716,13 @@ msgctxt "@action"
 msgid "Go to previous day"
 msgstr "Предишен ден"
 
-#: qml/ForecastNavigation.qml:134
+#: qml/ForecastNavigation.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "Go to next day"
 msgstr "Следващ ден"
 
-#: qml/ForecastNavigation.qml:153
+#: qml/ForecastNavigation.qml:154
 #, kde-format
 msgctxt "@action"
 msgid "Go to last day"
@@ -735,22 +735,30 @@ msgid "Return to Weather Forecast"
 msgstr "Връщане към прогнозата за времето"
 
 #: qml/FullRepresentation.qml:78
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Please set your location"
+msgctxt "@info PlaceholderMessage text"
 msgid "Please set your location"
 msgstr "Задаване на местоположението"
 
 #: qml/FullRepresentation.qml:81
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Set location…"
+msgctxt "@action:button PlaceholderMessage helpfulAction"
 msgid "Set location…"
 msgstr "Въведете местоположение…"
 
 #: qml/FullRepresentation.qml:95
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to retrieve weather information for %1"
+msgctxt "@info:status PlaceholderMessage text"
 msgid "Unable to retrieve weather information for %1"
 msgstr "Невъзможно извличане на информация за времето за %1"
 
 #: qml/FullRepresentation.qml:95
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Unable to retrieve weather information"
+msgctxt "@info:status PlaceholderMessage text"
 msgid "Unable to retrieve weather information"
 msgstr "Невъзможно извличане на информация за времето"
 
@@ -764,7 +772,7 @@ msgstr ""
 "Мрежовата заявка е прекъсната, вероятно поради прекъсване на работата на "
 "сървъра на доставчика на метеорологичната станция. Проверете отново по-късно."
 
-#: qml/FullRepresentation.qml:105 qml/main.qml:117
+#: qml/FullRepresentation.qml:105 qml/main.qml:118
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Unable to load weather forecast"
@@ -793,13 +801,13 @@ msgid_plural "%1 Notices"
 msgstr[0] "%1 Известие"
 msgstr[1] "%1 Известия"
 
-#: qml/main.qml:82
+#: qml/main.qml:83
 #, kde-format
 msgctxt "Wind condition"
 msgid "Calm"
 msgstr "Слаб"
 
-#: qml/main.qml:104
+#: qml/main.qml:105
 #, kde-format
 msgctxt ""
 "@info:usagetip Minimize the length of this string so it is as short as "
@@ -808,38 +816,40 @@ msgctxt ""
 msgid "Set up Weather Report…"
 msgstr "Настройване на Прогноза за времето…"
 
-#: qml/main.qml:113
+#: qml/main.qml:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr "Кликнете, за да изберете местоположение и да следите времето там"
 
-#: qml/main.qml:130
+#: qml/main.qml:131
 #, kde-format
 msgctxt "weather condition + temperature"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:143
+#: qml/main.qml:144
 #, kde-format
 msgctxt "winddirection windspeed (windgust)"
 msgid "%1 %2 (%3)"
 msgstr "%1 %2 (%3)"
 
-#: qml/main.qml:145
+#: qml/main.qml:146
 #, kde-format
 msgctxt "winddirection windspeed"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: qml/main.qml:156
+#: qml/main.qml:157
 #, kde-format
 msgctxt "pressure (tendency)"
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: qml/main.qml:165
-#, kde-format
+#: qml/main.qml:166
+#, fuzzy, kde-format
+#| msgid "Humidity: %1"
+msgctxt "@info:tooltip fragment, %1 is humidity in configured unit"
 msgid "Humidity: %1"
 msgstr "Влажност: %1"
 
@@ -884,25 +894,25 @@ msgctxt ""
 msgid "Feels like %1"
 msgstr "Усеща се като %1"
 
-#: qml/WeatherPage.qml:95
+#: qml/WeatherPage.qml:96
 #, kde-format
 msgctxt "@label"
 msgid "Today"
 msgstr "Днес"
 
-#: qml/WeatherPage.qml:97
+#: qml/WeatherPage.qml:98
 #, kde-format
 msgctxt "@label"
 msgid "Tomorrow"
 msgstr "Утре"
 
-#: qml/WeatherPage.qml:103
+#: qml/WeatherPage.qml:104
 #, kde-format
 msgctxt "@label"
 msgid "Today to Tomorrow"
 msgstr "Днес до утре"
 
-#: qml/WeatherPage.qml:105
+#: qml/WeatherPage.qml:106
 #, kde-format
 msgctxt "@label %1 is a day of the week"
 msgid "Today to %1"

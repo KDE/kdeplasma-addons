@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2011-06-29 23:33+0530\n"
 "Last-Translator: A S Alam <aalam@users.sf.net>\n"
 "Language-Team: Punjabi/Panjabi <punjabi-users@lists.sf.net>\n"
@@ -37,6 +37,26 @@ msgstr "ਪਹਿਲੀ ਪੱਟੀ ਉੱਤੇ ਜਾਓ..."
 msgctxt "@info:tooltip"
 msgid "Visit the comic website"
 msgstr "ਕੌਮਿਕ ਵੈੱਬਸਾਈਟ ਵੇਖੋ"
+
+#: qml/ComicCentralView.qml:125
+#, fuzzy, kde-format
+#| msgid "Go to Strip"
+msgctxt "@action:button in floating toolbar, icon-only"
+msgid "Go to previous strip"
+msgstr "ਪੱਟੀ ਉੱਤੇ ਜਾਓ"
+
+#: qml/ComicCentralView.qml:130
+#, kde-format
+msgctxt "@action:button in floating toolbar, icon-only"
+msgid "Show full-size in popup"
+msgstr ""
+
+#: qml/ComicCentralView.qml:136
+#, fuzzy, kde-format
+#| msgid "Go to Strip"
+msgctxt "@action:button in floating toolbar, icon-only"
+msgid "Go to next strip"
+msgstr "ਪੱਟੀ ਉੱਤੇ ਜਾਓ"
 
 #: qml/config.qml:13
 #, fuzzy, kde-format

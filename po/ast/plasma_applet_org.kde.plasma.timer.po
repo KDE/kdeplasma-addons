@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2023-05-03 21:21+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -107,7 +107,7 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
@@ -121,31 +121,25 @@ msgid ""
 "menu."
 msgstr ""
 
-#: configTimes.qml:134
-#, kde-format
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr ""
-
-#: configTimes.qml:144
+#: configTimes.qml:191
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr ""
 
-#: configTimes.qml:163
+#: configTimes.qml:210
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr ""
 
-#: configTimes.qml:183
+#: configTimes.qml:229
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr ""
 
-#: configTimes.qml:204
+#: configTimes.qml:251
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"

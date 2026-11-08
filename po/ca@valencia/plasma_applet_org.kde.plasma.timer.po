@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2026-10-31 16:07+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -112,7 +112,7 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'El temporitzador ha finalitzat'"
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
@@ -128,31 +128,25 @@ msgstr ""
 "Si afegiu ací temporitzadors predefinits, apareixeran en el menú contextual "
 "del giny."
 
-#: configTimes.qml:134
-#, kde-format
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr "Desplaceu els dígits per a canviar l'hora"
-
-#: configTimes.qml:144
+#: configTimes.qml:191
 #, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Aplica"
 
-#: configTimes.qml:163
+#: configTimes.qml:210
 #, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Cancel·la"
 
-#: configTimes.qml:183
+#: configTimes.qml:229
 #, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Edita"
 
-#: configTimes.qml:204
+#: configTimes.qml:251
 #, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
@@ -225,3 +219,7 @@ msgstr "&Para"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Restablix"
+
+#~ msgctxt "@info:usagetip"
+#~ msgid "Scroll over digits to change time"
+#~ msgstr "Desplaceu els dígits per a canviar l'hora"

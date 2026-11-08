@@ -1,21 +1,21 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# SPDX-FileCopyrightText: 2024, 2025 Mincho Kondarev <mkondarev@yahoo.de>
+# SPDX-FileCopyrightText: 2024-2026 Mincho Kondarev <mkondarev@yahoo.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
-"PO-Revision-Date: 2025-08-16 22:52+0200\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"PO-Revision-Date: 2026-11-07 22:22+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.07.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -30,29 +30,25 @@ msgid "Behavior"
 msgstr "Поведение"
 
 #: qml/ConfigBehavior.qml:36
-#, fuzzy, kde-format
-#| msgid "Change picture every:"
+#, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
-msgstr "Сменяне на снимката всеки:"
+msgstr "Смяна на изображението на всеки:"
 
 #: qml/ConfigBehavior.qml:53
-#, fuzzy, kde-format
-#| msgid "Hours"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
-msgstr "Часове"
+msgstr "Часа"
 
 #: qml/ConfigBehavior.qml:67
-#, fuzzy, kde-format
-#| msgid "Minutes"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "Минути"
 
 #: qml/ConfigBehavior.qml:81
-#, fuzzy, kde-format
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "Секунди"
@@ -220,13 +216,31 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Избиране на папка"
 
-#: qml/main.qml:366
+#: qml/main.qml:164
+#, kde-format
+msgctxt "@action:button icon-only"
+msgid "Show previous image"
+msgstr ""
+
+#: qml/main.qml:175
+#, kde-format
+msgctxt "@action:button icon-only"
+msgid "Show next image"
+msgstr ""
+
+#: qml/main.qml:185
+#, kde-format
+msgctxt "@action:button icon-only"
+msgid "Open in default image viewer"
+msgstr ""
+
+#: qml/main.qml:383
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Няма избрана медия"
 
-#: qml/main.qml:370 qml/main.qml:380
+#: qml/main.qml:387 qml/main.qml:397
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

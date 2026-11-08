@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
-"PO-Revision-Date: 2026-10-28 16:46+0200\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"PO-Revision-Date: 2026-11-07 22:17+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: CompactRepresentation.qml:154
 #, kde-format
@@ -107,78 +107,60 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Таймерът завърши'"
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Добавяне"
 
 #: configTimes.qml:85
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in the widget’s "
-#| "context menu."
+#, kde-format
 msgctxt "@info:usagetip PlaceHolderMessage empty ListView"
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
 "menu."
 msgstr ""
-"Ако добавите предварително зададени таймери тук, те ще се появят в "
-"контекстното меню."
+"Ако добавите предварително дефинирани таймери тук, те ще се появят в "
+"контекстното меню на уиджета."
 
-#: configTimes.qml:134
-#, fuzzy, kde-format
-#| msgid "Scroll over digits to change time"
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr "Превъртете над цифрите, за да промените времето"
-
-#: configTimes.qml:144
-#, fuzzy, kde-format
-#| msgid "Apply"
+#: configTimes.qml:191
+#, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Прилагане"
 
-#: configTimes.qml:163
-#, fuzzy, kde-format
-#| msgid "Cancel"
+#: configTimes.qml:210
+#, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Отказ"
 
-#: configTimes.qml:183
-#, fuzzy, kde-format
-#| msgid "Edit"
+#: configTimes.qml:229
+#, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Редактиране"
 
-#: configTimes.qml:204
-#, fuzzy, kde-format
-#| msgid "Delete"
+#: configTimes.qml:251
+#, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Изтриване"
 
 #: main.qml:40
-#, fuzzy, kde-format
-#| msgid "%1 is running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
-msgstr "%1 се изпълнява"
+msgstr "%1 е активен"
 
 #: main.qml:42
-#, fuzzy, kde-format
-#| msgid "%1 not running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
-msgstr "%1 не се изпълнява"
+msgstr "%1 не e активен"
 
 #: main.qml:46
-#, fuzzy, kde-format
-#| msgid "Remaining time left: %1 second"
-#| msgid_plural "Remaining time left: %1 seconds"
+#, kde-format
 msgctxt ""
 "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
 "running timer"
@@ -188,31 +170,26 @@ msgstr[0] "Оставащо време: %1 секунда"
 msgstr[1] "Оставащо време: %1 секунди"
 
 #: main.qml:47
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use mouse wheel to change digits or choose from predefined timers in the "
-#| "context menu"
+#, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
 msgstr ""
-"Използване на колелото на мишката, за да промените цифрите или да изберете "
-"от предварително зададени таймери в контекстното меню"
+"Използване на мишката (превъртане) за промяна на цифрите или избор от "
+"предварително зададени таймери от контекстното меню"
 
 #: main.qml:84
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Таймер"
 
 #: main.qml:85
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
-msgstr "Таймерът завърши"
+msgstr "Таймерът приключи"
 
 #: main.qml:115
 #, kde-format
@@ -238,8 +215,7 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "&Нулиране"
 
-#~ msgctxt "remaining time"
-#~ msgid "%1s"
-#~ msgid_plural "%1s"
-#~ msgstr[0] "%1s"
-#~ msgstr[1] "%1s"
+#~| msgid "Scroll over digits to change time"
+#~ msgctxt "@info:usagetip"
+#~ msgid "Scroll over digits to change time"
+#~ msgstr "Плъзгане върху цифрите за промяна на часа"

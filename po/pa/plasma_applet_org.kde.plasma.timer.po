@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-07 00:59+0000\n"
+"POT-Creation-Date: 2026-11-08 02:59+0000\n"
 "PO-Revision-Date: 2024-01-28 19:01-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -114,7 +114,7 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
-#: configTimes.qml:23
+#: configTimes.qml:26
 #, fuzzy, kde-format
 #| msgid "Add"
 msgctxt "@action:button Add timer"
@@ -129,35 +129,28 @@ msgid ""
 "menu."
 msgstr ""
 
-#: configTimes.qml:134
-#, fuzzy, kde-format
-#| msgid "Scroll over digits to change time"
-msgctxt "@info:usagetip"
-msgid "Scroll over digits to change time"
-msgstr "ਸਮਾਂ ਬਦਲਣ ਲਈ ਅੰਕਾਂ ਉੱਤੇ ਸਕਰੋਲ ਕਰੋ"
-
-#: configTimes.qml:144
+#: configTimes.qml:191
 #, fuzzy, kde-format
 #| msgid "Apply"
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "ਲਾਗੂ ਕਰੋ"
 
-#: configTimes.qml:163
+#: configTimes.qml:210
 #, fuzzy, kde-format
 #| msgid "Cancel"
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "ਰੱਦ ਕਰੋ"
 
-#: configTimes.qml:183
+#: configTimes.qml:229
 #, fuzzy, kde-format
 #| msgid "Edit"
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "ਸੋਧੋ"
 
-#: configTimes.qml:204
+#: configTimes.qml:251
 #, fuzzy, kde-format
 #| msgid "Delete"
 msgctxt "@action:button delete timer"
@@ -237,6 +230,12 @@ msgstr "ਰੋਕੋ(&t)"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "ਮੁੜ-ਸੈੱਟ(&R)"
+
+#, fuzzy
+#~| msgid "Scroll over digits to change time"
+#~ msgctxt "@info:usagetip"
+#~ msgid "Scroll over digits to change time"
+#~ msgstr "ਸਮਾਂ ਬਦਲਣ ਲਈ ਅੰਕਾਂ ਉੱਤੇ ਸਕਰੋਲ ਕਰੋ"
 
 #~ msgctxt "remaining time"
 #~ msgid "%1s"
