@@ -124,6 +124,7 @@ DropArea {
                 Layout.preferredHeight: dropArea.buttonSize
 
                 color: historyModel.count > index ? historyModel.get(index).color : "#00000000" // transparent as fallback
+                viewBackgroundColor: grid.Kirigami.Theme.backgroundColor
             }
         }
     }

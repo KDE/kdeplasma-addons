@@ -17,6 +17,7 @@ PlasmaComponents3.ToolButton {
     property alias color: colorCircle.color
     property alias colorCircle: colorCircle
     property Item loadingIndicator: null
+    property color viewBackgroundColor
 
     // indicate viable drag...
     checked: (dropArea.containsAcceptableDrag && index === 0) || colorButton.pressed || dragHandler.active
@@ -63,7 +64,8 @@ PlasmaComponents3.ToolButton {
         border {
             color: Kirigami.Theme.textColor
             width: {
-                const contrast = luminance(Kirigami.Theme.viewBackgroundColor) / luminance(colorCircle.color) + 0.05;
+                const luminances = [luminance(colorButton.viewBackgroundColor), luminance(colorCircle.color)]
+                const contrast =  (Math.max(...luminances) + 0.05) / (Math.min(...luminances)  + 0.05);
 
                 // show border only if there's too little contrast to the surrounding view or color is transparent
                 if (contrast > 3 && colorCircle.color.a > 0.5) {
