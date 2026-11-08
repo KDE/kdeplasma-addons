@@ -38,7 +38,7 @@ PlasmoidItem {
     property string activeSource: ""
     property string transitionSource: ""
 
-    readonly property bool pause: fullRepresentationItem?.overlayMouseArea?.containsMouse ?? false
+    readonly property bool pause: fullRepresentationItem?.hoverHandler?.hovered ?? false
 
     readonly property int itemCount: (items.count + items.futureLength)
     readonly property bool hasItems: ((itemCount > 0) || (items.futureLength > 0))
@@ -166,7 +166,7 @@ PlasmoidItem {
 
     fullRepresentation: Item {
         property alias faderAnimation: faderAnimation
-        property alias overlayMouseArea: overlayMouseArea
+        property alias hoverHandler: hoverHandler
 
         property Image frontImage: image1
         property Image bufferImage: image2
@@ -301,7 +301,7 @@ PlasmoidItem {
             anchors.fill: parent
 
             visible: hasItems
-            opacity: overlayMouseArea.containsMouse ? 1 : 0
+            opacity: hoverHandler.hovered ? 1 : 0
 
             Behavior on opacity {
                 NumberAnimation {}
@@ -342,19 +342,9 @@ PlasmoidItem {
                 }
             }
 
-            // BUG TODO Fix overlay so _all_ mouse events reach lower components
-            MouseArea {
-                id: overlayMouseArea
-
-                anchors.fill: parent
-                hoverEnabled: true
-
-                propagateComposedEvents: true
-
-                onPressed: mouse => mouse.accepted = false;
-                onDoubleClicked: mouse => mouse.accepted = false;
+            HoverHandler {
+                id: hoverHandler
             }
-
         }
 
         PlasmaExtras.PlaceholderMessage {
