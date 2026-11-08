@@ -9,6 +9,7 @@ import QtQuick
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
+import org.kde.coreaddons as KCoreAddons
 import plasma.applet.org.kde.plasma.timer as TimerPlasmoid
 import org.kde.notification
 
@@ -43,7 +44,7 @@ PlasmoidItem {
         }
     }
     toolTipSubText: running
-        ? i18ncp("@info:tooltip for widget, subtitle, %1 is remaining time in seconds for running timer", "Remaining time left: %1 second", "Remaining time left: %1 seconds", seconds)
+        ? i18nc("@info:tooltip for widget, %1 is remaining time, %2 is total duration, both in hh:mm:ss", "%1 of %2 left", TimerPlasmoid.Timer.secondsToString(seconds, "hh:mm:ss"), TimerPlasmoid.Timer.secondsToString(Plasmoid.configuration.seconds, "hh:mm:ss"))
         : i18nc("@info:tooltip for widget, subtitle, timer not running", "Use mouse wheel to change digits or choose from predefined timers in the context menu");
 
     compactRepresentation: CompactRepresentation {
@@ -56,7 +57,9 @@ PlasmoidItem {
         onToggleTimerRequested: root.toggleTimer()
         onAdjustTimerRequested: delta => root.adjustTimer(delta)
         Accessible.name: root.toolTipMainText
-        Accessible.description: root.toolTipSubText
+        Accessible.description: root.running
+            ? i18nc("@info:accessibility, %1 is remaining time, %2 is total duration, both as localized durations", "%1 left of %2", KCoreAddons.Format.formatSpelloutDuration(root.seconds * 1000), KCoreAddons.Format.formatSpelloutDuration(Plasmoid.configuration.seconds * 1000))
+            : root.toolTipSubText
     }
     fullRepresentation: TimerView {
         inPanel: root.inPanel
