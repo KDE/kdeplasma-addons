@@ -102,7 +102,7 @@ PlasmaComponents3.ToolButton {
             acceptedButtons: Qt.MiddleButton
             onTapped: (eventPoint, button) => {
                 // Don't bother copying an empty color to the clipboard.
-                if (!root.hasColor) {
+                if (!colorButton.hasColor) {
                     return;
                 }
 
