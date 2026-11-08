@@ -138,6 +138,7 @@ DropArea {
 
                 color: historyModel.count > index ? historyModel.get(index).color : "#00000000" // transparent as fallback
                 hasColor: historyModel.count > index
+                viewBackgroundColor: grid.Kirigami.Theme.backgroundColor
             }
         }
     }
