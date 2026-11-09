@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
-"PO-Revision-Date: 2026-11-02 07:52-0300\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
+"PO-Revision-Date: 2026-11-08 06:50-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -220,27 +220,27 @@ msgstr "Escolher uma pasta"
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "Mostrar imagem anterior"
 
 #: qml/main.qml:175
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "Mostrar próxima imagem"
 
 #: qml/main.qml:185
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "Abrir no visualizador de imagens padrão"
 
-#: qml/main.qml:383
+#: qml/main.qml:374
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Nenhuma mídia selecionada"
 
-#: qml/main.qml:387 qml/main.qml:397
+#: qml/main.qml:378 qml/main.qml:388
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

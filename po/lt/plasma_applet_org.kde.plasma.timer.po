@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
 "PO-Revision-Date: 2026-11-01 23:39+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
@@ -150,31 +150,27 @@ msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Ištrinti"
 
-#: main.qml:40
+#: main.qml:41
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 veikia"
 
-#: main.qml:42
+#: main.qml:43
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 neveikia"
 
-#: main.qml:46
+#: main.qml:47
 #, kde-format
 msgctxt ""
-"@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
-"running timer"
-msgid "Remaining time left: %1 second"
-msgid_plural "Remaining time left: %1 seconds"
-msgstr[0] "Likęs laikas: %1 sekundė"
-msgstr[1] "Likęs laikas: %1 sekundės"
-msgstr[2] "Likęs laikas: %1 sekundžių"
-msgstr[3] "Likęs laikas: %1 sekundė"
+"@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
+"in hh:mm:ss"
+msgid "%1 of %2 left"
+msgstr ""
 
-#: main.qml:47
+#: main.qml:48
 #, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
@@ -184,41 +180,59 @@ msgstr ""
 "Norėdami keisti skaitmenis, naudokite pelės ratuką arba kontekstiniame meniu "
 "pasirinkite iš anksto apibrėžtus laikmačius"
 
-#: main.qml:84
+#: main.qml:61
+#, kde-format
+msgctxt ""
+"@info:accessibility, %1 is remaining time, %2 is total duration, both as "
+"localized durations"
+msgid "%1 left of %2"
+msgstr ""
+
+#: main.qml:87
 #, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Laikmatis"
 
-#: main.qml:85
+#: main.qml:88
 #, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Pasibaigė laikmačio laikas"
 
-#: main.qml:115
+#: main.qml:118
 #, kde-format
 msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "&Paleisti (%1)"
 
-#: main.qml:116
+#: main.qml:119
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Paleisti"
 
-#: main.qml:122
+#: main.qml:125
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "S&tabdyti"
 
-#: main.qml:128
+#: main.qml:131
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Atstatyti"
+
+#~ msgctxt ""
+#~ "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
+#~ "running timer"
+#~ msgid "Remaining time left: %1 second"
+#~ msgid_plural "Remaining time left: %1 seconds"
+#~ msgstr[0] "Likęs laikas: %1 sekundė"
+#~ msgstr[1] "Likęs laikas: %1 sekundės"
+#~ msgstr[2] "Likęs laikas: %1 sekundžių"
+#~ msgstr[3] "Likęs laikas: %1 sekundė"
 
 #~ msgctxt "@info:usagetip"
 #~ msgid "Scroll over digits to change time"

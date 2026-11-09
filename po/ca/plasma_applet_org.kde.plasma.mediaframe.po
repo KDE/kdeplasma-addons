@@ -9,8 +9,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
-"PO-Revision-Date: 2026-11-03 10:22+0100\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
+"PO-Revision-Date: 2026-11-08 09:46+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -219,27 +219,27 @@ msgstr "Selecció de carpeta"
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "Mostra la imatge anterior"
 
 #: qml/main.qml:175
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "Mostra la imatge següent"
 
 #: qml/main.qml:185
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "Obre en el visualitzador d'imatges predeterminat"
 
-#: qml/main.qml:383
+#: qml/main.qml:374
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "No s'ha seleccionat cap element multimèdia"
 
-#: qml/main.qml:387 qml/main.qml:397
+#: qml/main.qml:378 qml/main.qml:388
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

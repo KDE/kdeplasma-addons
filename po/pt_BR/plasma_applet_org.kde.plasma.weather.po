@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 02:59+0000\n"
-"PO-Revision-Date: 2026-10-17 07:39-0300\n"
+"PO-Revision-Date: 2026-11-08 06:49-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -740,29 +740,25 @@ msgid "Return to Weather Forecast"
 msgstr "Voltar para a previsão meteorológica"
 
 #: qml/FullRepresentation.qml:78
-#, fuzzy, kde-format
-#| msgid "Please set your location"
+#, kde-format
 msgctxt "@info PlaceholderMessage text"
 msgid "Please set your location"
 msgstr "Defina sua localização"
 
 #: qml/FullRepresentation.qml:81
-#, fuzzy, kde-format
-#| msgid "Set location…"
+#, kde-format
 msgctxt "@action:button PlaceholderMessage helpfulAction"
 msgid "Set location…"
 msgstr "Definir localização…"
 
 #: qml/FullRepresentation.qml:95
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage text"
 msgid "Unable to retrieve weather information for %1"
 msgstr "Não foi possível recuperar informações meteorológicas para %1"
 
 #: qml/FullRepresentation.qml:95
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage text"
 msgid "Unable to retrieve weather information"
 msgstr "Não foi possível recuperar informações meteorológicas"
@@ -853,8 +849,7 @@ msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
 #: qml/main.qml:166
-#, fuzzy, kde-format
-#| msgid "Humidity: %1"
+#, kde-format
 msgctxt "@info:tooltip fragment, %1 is humidity in configured unit"
 msgid "Humidity: %1"
 msgstr "Umidade: %1"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
 "PO-Revision-Date: 2026-07-07 18:32+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -154,33 +154,29 @@ msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Ta bort"
 
-#: main.qml:40
+#: main.qml:41
 #, fuzzy, kde-format
 #| msgid "%1 is running"
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 är startad"
 
-#: main.qml:42
+#: main.qml:43
 #, fuzzy, kde-format
 #| msgid "%1 not running"
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 är inte startad"
 
-#: main.qml:46
-#, fuzzy, kde-format
-#| msgid "Remaining time left: %1 second"
-#| msgid_plural "Remaining time left: %1 seconds"
-msgctxt ""
-"@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
-"running timer"
-msgid "Remaining time left: %1 second"
-msgid_plural "Remaining time left: %1 seconds"
-msgstr[0] "Återstående tid: %1 sekund"
-msgstr[1] "Återstående tid: %1 sekunder"
-
 #: main.qml:47
+#, kde-format
+msgctxt ""
+"@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
+"in hh:mm:ss"
+msgid "%1 of %2 left"
+msgstr ""
+
+#: main.qml:48
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -193,21 +189,29 @@ msgstr ""
 "Använd mushjulet för att ändra siffror eller välja bland fördefinierade "
 "tider i den sammanhangsberoende menyn"
 
-#: main.qml:84
+#: main.qml:61
+#, kde-format
+msgctxt ""
+"@info:accessibility, %1 is remaining time, %2 is total duration, both as "
+"localized durations"
+msgid "%1 left of %2"
+msgstr ""
+
+#: main.qml:87
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Stoppur"
 
-#: main.qml:85
+#: main.qml:88
 #, fuzzy, kde-format
 #| msgid "Timer finished"
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Tidtagning stoppad"
 
-#: main.qml:115
+#: main.qml:118
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "&Start"
@@ -215,23 +219,34 @@ msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "&Starta"
 
-#: main.qml:116
+#: main.qml:119
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Starta"
 
-#: main.qml:122
+#: main.qml:125
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "S&toppa"
 
-#: main.qml:128
+#: main.qml:131
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Nollställ"
+
+#, fuzzy
+#~| msgid "Remaining time left: %1 second"
+#~| msgid_plural "Remaining time left: %1 seconds"
+#~ msgctxt ""
+#~ "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
+#~ "running timer"
+#~ msgid "Remaining time left: %1 second"
+#~ msgid_plural "Remaining time left: %1 seconds"
+#~ msgstr[0] "Återstående tid: %1 sekund"
+#~ msgstr[1] "Återstående tid: %1 sekunder"
 
 #, fuzzy
 #~| msgid "Scroll over digits to change time"

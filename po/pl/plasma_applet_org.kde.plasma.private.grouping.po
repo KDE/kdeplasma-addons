@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
 "PO-Revision-Date: 2016-12-24 12:04+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: Polish <kde-i18n-doc@kde.org>\n"
@@ -18,6 +18,8 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 
 #: qml/main.qml:111
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Drag applets here"
+msgctxt "@info:usagetip"
 msgid "Drag applets here"
 msgstr "Przeciągnij aplety tutaj"

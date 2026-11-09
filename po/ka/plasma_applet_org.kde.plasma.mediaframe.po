@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
-"PO-Revision-Date: 2026-11-02 05:47+0100\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
+"PO-Revision-Date: 2026-11-08 08:31+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -214,27 +214,27 @@ msgstr "აირჩიეთ საქაღალდე"
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "წინა გამოსახულების ჩვენება"
 
 #: qml/main.qml:175
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "შემდეგი გამოსახულების ჩვენება"
 
 #: qml/main.qml:185
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "გახსნა გამოსახულებების ნაგულისხმევ პროგრამაში"
 
-#: qml/main.qml:383
+#: qml/main.qml:374
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "მედია არჩეული არაა"
 
-#: qml/main.qml:387 qml/main.qml:397
+#: qml/main.qml:378 qml/main.qml:388
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

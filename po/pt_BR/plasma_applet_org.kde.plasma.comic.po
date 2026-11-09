@@ -6,20 +6,21 @@
 # Luiz Fernando Ranghetti <elchevive@opensuse.org>, 2017, 2018, 2021, 2022.
 # SPDX-FileCopyrightText: 2025 Guilherme Marçal Silva <guimarcalsilva@gmail.com>
 # SPDX-FileCopyrightText: 2025 Geraldo Simiao <geraldosimiao@fedoraproject.org>
+# SPDX-FileCopyrightText: 2026 Marcus Gama <marcus.gama@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 02:59+0000\n"
-"PO-Revision-Date: 2025-11-08 21:10-0300\n"
-"Last-Translator: Guilherme Marçal Silva <guimarcalsilva@gmail.com>\n"
-"Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
+"PO-Revision-Date: 2026-11-08 06:50-0300\n"
+"Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
+"Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: comicdata.cpp:76
 #, kde-format
@@ -40,26 +41,22 @@ msgid "Visit the comic website"
 msgstr "Visitar o site da tirinha"
 
 #: qml/ComicCentralView.qml:125
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Go to previous strip"
-msgstr "Ir para a linha"
+msgstr "Ir para a próxima linha"
 
 #: qml/ComicCentralView.qml:130
 #, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Show full-size in popup"
-msgstr ""
+msgstr "Exibir em tamanho real em uma janela pop-up"
 
 #: qml/ComicCentralView.qml:136
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Go to next strip"
-msgstr "Ir para a linha"
+msgstr "Ir para a linha anterior"
 
 #: qml/config.qml:13
 #, kde-format

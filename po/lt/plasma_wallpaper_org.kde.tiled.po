@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:45+0000\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
 "PO-Revision-Date: 2026-04-26 00:00+0300\n"
 "Last-Translator: Automatically generated\n"
 "Language-Team: none\n"
@@ -19,25 +19,25 @@ msgstr ""
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
 "X-Generator: Poedit 3.8\n"
 
-#: package/contents/ui/config.qml:20 package/contents/ui/config.qml:29
+#: package/contents/ui/config.qml:21 package/contents/ui/config.qml:30
 #, kde-format
 msgctxt "@label, noun"
 msgid "Tile:"
 msgstr "Plytelė:"
 
-#: package/contents/ui/config.qml:21
+#: package/contents/ui/config.qml:22
 #, kde-format
 msgctxt "@action:button Select a tile image"
 msgid "Select Image…"
 msgstr "Pasirinkti paveikslą…"
 
-#: package/contents/ui/config.qml:28
+#: package/contents/ui/config.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Select a tile image"
 msgstr "Pasirinkti plytelės paveikslą"
 
-#: package/contents/ui/config.qml:51
+#: package/contents/ui/config.qml:52
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Image"

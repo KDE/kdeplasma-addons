@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
 "PO-Revision-Date: 2016-12-13 10:15+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -18,6 +18,8 @@ msgstr ""
 "X-Generator: Lokalize 2.0\n"
 
 #: qml/main.qml:111
-#, kde-format
+#, fuzzy, kde-format
+#| msgid "Drag applets here"
+msgctxt "@info:usagetip"
 msgid "Drag applets here"
 msgstr "Applets hierheen slepen"

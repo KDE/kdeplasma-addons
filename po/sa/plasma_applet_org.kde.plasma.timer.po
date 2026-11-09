@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
 "PO-Revision-Date: 2024-12-20 21:52+0530\n"
 "Last-Translator: kali <skkalwar999@gmail.com>\n"
 "Language-Team: Sanskrit <kde-i18n-doc@kde.org>\n"
@@ -162,33 +162,29 @@ msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "लुप्"
 
-#: main.qml:40
+#: main.qml:41
 #, fuzzy, kde-format
 #| msgid "%1 is running"
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 चाल्यते"
 
-#: main.qml:42
+#: main.qml:43
 #, fuzzy, kde-format
 #| msgid "%1 not running"
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 न चाल्यते"
 
-#: main.qml:46
-#, fuzzy, kde-format
-#| msgid "Remaining time left: %1 second"
-#| msgid_plural "Remaining time left: %1 seconds"
-msgctxt ""
-"@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
-"running timer"
-msgid "Remaining time left: %1 second"
-msgid_plural "Remaining time left: %1 seconds"
-msgstr[0] "अवशिष्टः समयः : %1 सेकण्ड्"
-msgstr[1] "अवशिष्टः समयः : %1 सेकण्ड्"
-
 #: main.qml:47
+#, kde-format
+msgctxt ""
+"@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
+"in hh:mm:ss"
+msgid "%1 of %2 left"
+msgstr ""
+
+#: main.qml:48
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -201,21 +197,29 @@ msgstr ""
 "अङ्कान् परिवर्तयितुं अथवा सन्दर्भमेन्यू मध्ये पूर्वनिर्धारितसमयनिर्धारकाणां मध्ये चयनं कर्तुं "
 "मूषकचक्रस्य उपयोगं कुर्वन्तु"
 
-#: main.qml:84
+#: main.qml:61
+#, kde-format
+msgctxt ""
+"@info:accessibility, %1 is remaining time, %2 is total duration, both as "
+"localized durations"
+msgid "%1 left of %2"
+msgstr ""
+
+#: main.qml:87
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "समयनिर्धारक"
 
-#: main.qml:85
+#: main.qml:88
 #, fuzzy, kde-format
 #| msgid "Timer finished"
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "समयनिर्धारकः समाप्तः"
 
-#: main.qml:115
+#: main.qml:118
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "&Start"
@@ -223,23 +227,34 @@ msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "&प्रारंभः"
 
-#: main.qml:116
+#: main.qml:119
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&प्रारंभः"
 
-#: main.qml:122
+#: main.qml:125
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "विरमतु"
 
-#: main.qml:128
+#: main.qml:131
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&पुनः सेट् कुर्वन्तु"
+
+#, fuzzy
+#~| msgid "Remaining time left: %1 second"
+#~| msgid_plural "Remaining time left: %1 seconds"
+#~ msgctxt ""
+#~ "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
+#~ "running timer"
+#~ msgid "Remaining time left: %1 second"
+#~ msgid_plural "Remaining time left: %1 seconds"
+#~ msgstr[0] "अवशिष्टः समयः : %1 सेकण्ड्"
+#~ msgstr[1] "अवशिष्टः समयः : %1 सेकण्ड्"
 
 #, fuzzy
 #~| msgid "Scroll over digits to change time"

@@ -8,8 +8,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
-"PO-Revision-Date: 2026-11-02 08:54+0200\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
+"PO-Revision-Date: 2026-11-08 12:17+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -219,27 +219,27 @@ msgstr "Виберіть теку"
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "Показати попереднє зображення"
 
 #: qml/main.qml:175
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "Показати наступне зображення"
 
 #: qml/main.qml:185
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "Відкрити у типовій програмі для перегляду зображень"
 
-#: qml/main.qml:383
+#: qml/main.qml:374
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Не вибрано носія даних"
 
-#: qml/main.qml:387 qml/main.qml:397
+#: qml/main.qml:378 qml/main.qml:388
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

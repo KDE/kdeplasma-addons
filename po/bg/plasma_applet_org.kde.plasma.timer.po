@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
 "PO-Revision-Date: 2026-11-07 22:17+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -147,29 +147,27 @@ msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Изтриване"
 
-#: main.qml:40
+#: main.qml:41
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 е активен"
 
-#: main.qml:42
+#: main.qml:43
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 не e активен"
 
-#: main.qml:46
+#: main.qml:47
 #, kde-format
 msgctxt ""
-"@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
-"running timer"
-msgid "Remaining time left: %1 second"
-msgid_plural "Remaining time left: %1 seconds"
-msgstr[0] "Оставащо време: %1 секунда"
-msgstr[1] "Оставащо време: %1 секунди"
+"@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
+"in hh:mm:ss"
+msgid "%1 of %2 left"
+msgstr ""
 
-#: main.qml:47
+#: main.qml:48
 #, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
@@ -179,41 +177,57 @@ msgstr ""
 "Използване на мишката (превъртане) за промяна на цифрите или избор от "
 "предварително зададени таймери от контекстното меню"
 
-#: main.qml:84
+#: main.qml:61
+#, kde-format
+msgctxt ""
+"@info:accessibility, %1 is remaining time, %2 is total duration, both as "
+"localized durations"
+msgid "%1 left of %2"
+msgstr ""
+
+#: main.qml:87
 #, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Таймер"
 
-#: main.qml:85
+#: main.qml:88
 #, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Таймерът приключи"
 
-#: main.qml:115
+#: main.qml:118
 #, kde-format
 msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "&Стартиране (%1)"
 
-#: main.qml:116
+#: main.qml:119
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Старт"
 
-#: main.qml:122
+#: main.qml:125
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Ст&оп"
 
-#: main.qml:128
+#: main.qml:131
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Нулиране"
+
+#~ msgctxt ""
+#~ "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
+#~ "running timer"
+#~ msgid "Remaining time left: %1 second"
+#~ msgid_plural "Remaining time left: %1 seconds"
+#~ msgstr[0] "Оставащо време: %1 секунда"
+#~ msgstr[1] "Оставащо време: %1 секунди"
 
 #~| msgid "Scroll over digits to change time"
 #~ msgctxt "@info:usagetip"

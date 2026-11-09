@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-09 00:57+0000\n"
 "PO-Revision-Date: 2026-11-07 22:22+0200\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -234,13 +234,13 @@ msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
 msgstr ""
 
-#: qml/main.qml:383
+#: qml/main.qml:374
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Няма избрана медия"
 
-#: qml/main.qml:387 qml/main.qml:397
+#: qml/main.qml:378 qml/main.qml:388
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
