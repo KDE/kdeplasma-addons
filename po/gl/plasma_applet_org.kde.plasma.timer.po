@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-06 03:13+0000\n"
+"POT-Creation-Date: 2026-11-09 02:53+0000\n"
 "PO-Revision-Date: 2025-05-03 06:58+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -125,13 +125,13 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
-#: configTimes.qml:22
+#: configTimes.qml:21
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Engadir"
 
-#: configTimes.qml:87
+#: configTimes.qml:86
 #, fuzzy, kde-format
 #| msgid ""
 #| "If you add predefined timers here, they will appear in plasmoid context "
@@ -143,27 +143,27 @@ msgstr ""
 "Se engade temporizadores predefinidos aquí, aparecerán no menú contextual do "
 "trebello."
 
-#: configTimes.qml:131
+#: configTimes.qml:130
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Desprazar sobre os díxitos para cambiar o tempo."
 
-#: configTimes.qml:138
+#: configTimes.qml:137
 #, kde-format
 msgid "Apply"
 msgstr "Aplicar"
 
-#: configTimes.qml:146
+#: configTimes.qml:145
 #, kde-format
 msgid "Cancel"
 msgstr "Cancelar"
 
-#: configTimes.qml:155
+#: configTimes.qml:154
 #, kde-format
 msgid "Edit"
 msgstr "Editar"
 
-#: configTimes.qml:164
+#: configTimes.qml:163
 #, kde-format
 msgid "Delete"
 msgstr "Eliminar"

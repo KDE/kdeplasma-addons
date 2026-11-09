@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 02:44+0000\n"
+"POT-Creation-Date: 2026-11-09 02:53+0000\n"
 "PO-Revision-Date: 2026-07-20 00:01+0200\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -209,13 +209,13 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Vyberte složku"
 
-#: qml/main.qml:366
+#: qml/main.qml:356
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Nebylo vybráno žádné médium"
 
-#: qml/main.qml:370 qml/main.qml:380
+#: qml/main.qml:360 qml/main.qml:370
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

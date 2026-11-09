@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-10 00:48+0000\n"
+"POT-Creation-Date: 2026-11-08 20:11+0000\n"
 "PO-Revision-Date: 2010-05-29 07:48+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -17,14 +17,14 @@ msgstr ""
 "X-Generator: Lokalize 1.0\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
-#: qml/ColorCircle.qml:26
+#: qml/ColorCircle.qml:27
 #, fuzzy, kde-format
 #| msgid "Latex Color"
 msgctxt "@info"
 msgid "No Saved Colors"
 msgstr "Latex түсі"
 
-#: qml/ColorCircle.qml:40
+#: qml/ColorCircle.qml:41
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"

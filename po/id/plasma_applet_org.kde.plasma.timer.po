@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-06 03:13+0000\n"
+"POT-Creation-Date: 2026-11-09 02:53+0000\n"
 "PO-Revision-Date: 2022-06-07 14:58+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -125,14 +125,14 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
-#: configTimes.qml:22
+#: configTimes.qml:21
 #, fuzzy, kde-format
 #| msgid "Add"
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Tambahkan"
 
-#: configTimes.qml:87
+#: configTimes.qml:86
 #, fuzzy, kde-format
 #| msgid ""
 #| "If you add predefined timers here, they will appear in plasmoid context "
@@ -144,27 +144,27 @@ msgstr ""
 "Jika kamu menambahkan prasetel timer di sini, timer tersebut akan muncul di "
 "menu konteks plasmoid."
 
-#: configTimes.qml:131
+#: configTimes.qml:130
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Gulir ke atas digit untuk mengubah waktu"
 
-#: configTimes.qml:138
+#: configTimes.qml:137
 #, kde-format
 msgid "Apply"
 msgstr "Terapkan"
 
-#: configTimes.qml:146
+#: configTimes.qml:145
 #, kde-format
 msgid "Cancel"
 msgstr "Batal"
 
-#: configTimes.qml:155
+#: configTimes.qml:154
 #, kde-format
 msgid "Edit"
 msgstr "Edit"
 
-#: configTimes.qml:164
+#: configTimes.qml:163
 #, kde-format
 msgid "Delete"
 msgstr "Hapus"

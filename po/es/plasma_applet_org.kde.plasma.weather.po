@@ -1,15 +1,15 @@
 # Spanish translations for plasma_applet_org.kde.plasma.weather.po package.
-# Copyright (C) 2016-2025 This file is copyright:
+# Copyright (C) 2016-2026 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 # Automatically generated, 2016.
 #
-# SPDX-FileCopyrightText: 2016, 2018, 2019, 2020, 2021, 2022, 2024, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2016, 2018-2022, 2024-2026 Eloy Cuadra <ecuadra@eloihr.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-10-08 02:58+0000\n"
-"PO-Revision-Date: 2025-07-16 00:36+0100\n"
+"PO-Revision-Date: 2026-11-09 01:14+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -369,13 +369,13 @@ msgstr ""
 #, kde-format
 msgctxt "certain weather condition (probability percentage)"
 msgid "%1 (%2%)"
-msgstr "%1 (%2 %)"
+msgstr "%1 (%2 %)"
 
 #: qml/ForecastView.qml:163
 #, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
-msgstr "︎☂ %1 %"
+msgstr "︎☂ %1 %"
 
 #: qml/ForecastView.qml:171 qml/ForecastView.qml:180
 #, kde-format
@@ -626,193 +626,3 @@ msgstr "Muy alto"
 #, kde-format
 msgid "Extreme"
 msgstr "Extremadamente alto"
-
-#~ msgctxt "weather condition"
-#~ msgid "few clouds"
-#~ msgstr "poco nuboso"
-
-#~ msgctxt "weather condition"
-#~ msgid "cloudy"
-#~ msgstr "nuboso"
-
-#~ msgctxt "weather condition"
-#~ msgid "overcast"
-#~ msgstr "cubierto"
-
-#~ msgctxt "weather condition"
-#~ msgid "haze"
-#~ msgstr "neblina"
-
-#~ msgctxt "weather condition"
-#~ msgid "fog with icing"
-#~ msgstr "niebla con heladas"
-
-#~ msgctxt "weather condition"
-#~ msgid "drizzle"
-#~ msgstr "llovizna"
-
-#~ msgctxt "weather condition"
-#~ msgid "light drizzle"
-#~ msgstr "llovizna ligera"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy drizzle"
-#~ msgstr "llovizna intensa"
-
-#~ msgctxt "weather condition"
-#~ msgid "freezing drizzle"
-#~ msgstr "llovizna gélida"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy freezing drizzle"
-#~ msgstr "llovizna gélida intensa"
-
-#~ msgctxt "weather condition"
-#~ msgid "rain"
-#~ msgstr "lluvia"
-
-#~ msgctxt "weather condition"
-#~ msgid "light rain"
-#~ msgstr "lluvia ligera"
-
-#~ msgctxt "weather condition"
-#~ msgid "moderate rain"
-#~ msgstr "lluvia moderada"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy rain"
-#~ msgstr "lluvia intensa"
-
-#~ msgctxt "weather condition"
-#~ msgid "light freezing rain"
-#~ msgstr "lluvia gélida débil"
-
-#~ msgctxt "weather condition"
-#~ msgid "freezing rain"
-#~ msgstr "lluvia gélida"
-
-#~ msgctxt "weather condition"
-#~ msgid "light rain snow"
-#~ msgstr "lluvia y nieve débiles"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy rain snow"
-#~ msgstr "lluvia y nieve intensas"
-
-#~ msgctxt "weather condition"
-#~ msgid "snow"
-#~ msgstr "nieve"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow"
-#~ msgstr "nevada débil"
-
-#~ msgctxt "weather condition"
-#~ msgid "moderate snow"
-#~ msgstr "nevada moderada"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy snow"
-#~ msgstr "nevada intensa"
-
-#~ msgctxt "weather condition"
-#~ msgid "showers"
-#~ msgstr "chaparrones"
-
-#~ msgctxt "weather condition"
-#~ msgid "light showers"
-#~ msgstr "chaparrones débiles"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy showers"
-#~ msgstr "chaparrones intensos"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow rain showers"
-#~ msgstr "nevadas ligeras con chaparrones"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy snow rain showers"
-#~ msgstr "nevadas fuertes con chaparrones"
-
-#~ msgctxt "weather condition"
-#~ msgid "light snow showers"
-#~ msgstr "chubascos de nieve ligeros"
-
-#~ msgctxt "weather condition"
-#~ msgid "snow showers"
-#~ msgstr "chubascos de nieve"
-
-#~ msgctxt "weather condition"
-#~ msgid "thunderstorm"
-#~ msgstr "tormenta eléctrica"
-
-#~ msgctxt "weather condition"
-#~ msgid "light thunderstorm"
-#~ msgstr "tormenta eléctrica ligera"
-
-#~ msgctxt "weather condition"
-#~ msgid "heavy thunderstorm"
-#~ msgstr "tormenta eléctrica fuerte"
-
-#~ msgctxt "weather condition"
-#~ msgid "n/a"
-#~ msgstr "n/d"
-
-#~ msgctxt "weather condition"
-#~ msgid "sunny"
-#~ msgstr "soleado"
-
-#~ msgctxt "weather condition"
-#~ msgid "clear sky"
-#~ msgstr "cielo despejado"
-
-#~ msgctxt "Geographical location: city, state, ISO-country-code"
-#~ msgid "%1, %2, %3"
-#~ msgstr "%1, %2, %3"
-
-#~ msgctxt "Geographical location: quarter (city), state, ISO-country-code"
-#~ msgid "%1 (%2), %3, %4"
-#~ msgstr "%1 (%2), %3, %4"
-
-#~ msgid "Today"
-#~ msgstr "Hoy"
-
-#~ msgctxt "Short for Saturday"
-#~ msgid "Sat"
-#~ msgstr "Sáb"
-
-#~ msgctxt "Short for Sunday"
-#~ msgid "Sun"
-#~ msgstr "Dom"
-
-#~ msgctxt "Short for Monday"
-#~ msgid "Mon"
-#~ msgstr "Lun"
-
-#~ msgctxt "Short for Tuesday"
-#~ msgid "Tue"
-#~ msgstr "Mar"
-
-#~ msgctxt "Short for Wednesday"
-#~ msgid "Wed"
-#~ msgstr "Mié"
-
-#~ msgctxt "Short for Thursday"
-#~ msgid "Thu"
-#~ msgstr "Jue"
-
-#~ msgctxt "Short for Friday"
-#~ msgid "Fri"
-#~ msgstr "Vie"
-
-#~ msgctxt "Short for Today"
-#~ msgid "Today"
-#~ msgstr "Hoy"
-
-#~ msgctxt "Short for Tonight"
-#~ msgid "Tonight"
-#~ msgstr "Esta noche"
-
-#~ msgid "German Weather Service"
-#~ msgstr "Servicio meteorológico alemán"

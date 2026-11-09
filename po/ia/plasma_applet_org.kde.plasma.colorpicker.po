@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-10 00:48+0000\n"
+"POT-Creation-Date: 2026-11-08 20:11+0000\n"
 "PO-Revision-Date: 2026-09-01 17:07+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -17,13 +17,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 25.04.0\n"
 
-#: qml/ColorCircle.qml:26
+#: qml/ColorCircle.qml:27
 #, kde-format
 msgctxt "@info"
 msgid "No Saved Colors"
 msgstr "Nulle colores salveguardate"
 
-#: qml/ColorCircle.qml:40
+#: qml/ColorCircle.qml:41
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-06 03:13+0000\n"
+"POT-Creation-Date: 2026-11-09 02:53+0000\n"
 "PO-Revision-Date: 2026-11-03 21:55+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -118,13 +118,13 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Sayaç bitti'"
 
-#: configTimes.qml:22
+#: configTimes.qml:21
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Ekle"
 
-#: configTimes.qml:87
+#: configTimes.qml:86
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -133,27 +133,27 @@ msgstr ""
 "Buraya önceden tanımlanmış sayaçlar eklerseniz bunlar araç takımı bağlam "
 "menüsünde görünecektir."
 
-#: configTimes.qml:131
+#: configTimes.qml:130
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Zamanı değiştirmek için rakamları sarın"
 
-#: configTimes.qml:138
+#: configTimes.qml:137
 #, kde-format
 msgid "Apply"
 msgstr "Uygula"
 
-#: configTimes.qml:146
+#: configTimes.qml:145
 #, kde-format
 msgid "Cancel"
 msgstr "İptal"
 
-#: configTimes.qml:155
+#: configTimes.qml:154
 #, kde-format
 msgid "Edit"
 msgstr "Düzenle"
 
-#: configTimes.qml:164
+#: configTimes.qml:163
 #, kde-format
 msgid "Delete"
 msgstr "Sil"

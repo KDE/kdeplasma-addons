@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-06 03:13+0000\n"
+"POT-Creation-Date: 2026-11-09 02:53+0000\n"
 "PO-Revision-Date: 2026-08-25 19:55+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -118,13 +118,13 @@ msgctxt "@placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Ajastus valmis'"
 
-#: configTimes.qml:22
+#: configTimes.qml:21
 #, kde-format
 msgctxt "@action:button Add timer"
 msgid "Add"
 msgstr "Lisää"
 
-#: configTimes.qml:87
+#: configTimes.qml:86
 #, kde-format
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -133,27 +133,27 @@ msgstr ""
 "Jos tähän lisää esiasetettuja ajastimia, ne ilmestyvät sovelman "
 "kontekstivalikkoon."
 
-#: configTimes.qml:131
+#: configTimes.qml:130
 #, kde-format
 msgid "Scroll over digits to change time"
 msgstr "Muuta aikaa vierittämällä numeroita"
 
-#: configTimes.qml:138
+#: configTimes.qml:137
 #, kde-format
 msgid "Apply"
 msgstr "Käytä"
 
-#: configTimes.qml:146
+#: configTimes.qml:145
 #, kde-format
 msgid "Cancel"
 msgstr "Peru"
 
-#: configTimes.qml:155
+#: configTimes.qml:154
 #, kde-format
 msgid "Edit"
 msgstr "Muokkaa"
 
-#: configTimes.qml:164
+#: configTimes.qml:163
 #, kde-format
 msgid "Delete"
 msgstr "Poista"

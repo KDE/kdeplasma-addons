@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-10 00:48+0000\n"
+"POT-Creation-Date: 2026-11-08 20:11+0000\n"
 "PO-Revision-Date: 2024-01-28 12:45-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: qml/ColorCircle.qml:26
+#: qml/ColorCircle.qml:27
 #, fuzzy, kde-format
 #| msgctxt "@info:usagetip"
 #| msgid "No colors"
@@ -26,7 +26,7 @@ msgctxt "@info"
 msgid "No Saved Colors"
 msgstr "ਕੋਈ ਰੰਗ ਨਹੀਂ"
 
-#: qml/ColorCircle.qml:40
+#: qml/ColorCircle.qml:41
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-25 02:44+0000\n"
+"POT-Creation-Date: 2026-11-09 02:53+0000\n"
 "PO-Revision-Date: 2023-05-03 21:20+0200\n"
 "Last-Translator: Enol P. <enolp@softastur.org>\n"
 "Language-Team: \n"
@@ -205,13 +205,13 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr ""
 
-#: qml/main.qml:366
+#: qml/main.qml:356
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr ""
 
-#: qml/main.qml:370 qml/main.qml:380
+#: qml/main.qml:360 qml/main.qml:370
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

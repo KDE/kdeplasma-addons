@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-10 00:48+0000\n"
+"POT-Creation-Date: 2026-11-08 20:11+0000\n"
 "PO-Revision-Date: 2026-02-17 18:49+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -25,13 +25,13 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: qml/ColorCircle.qml:26
+#: qml/ColorCircle.qml:27
 #, kde-format
 msgctxt "@info"
 msgid "No Saved Colors"
 msgstr "Сохранённые цвета отсутствуют"
 
-#: qml/ColorCircle.qml:40
+#: qml/ColorCircle.qml:41
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
