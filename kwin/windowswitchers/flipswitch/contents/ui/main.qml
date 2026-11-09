@@ -3,6 +3,7 @@
 
  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import Qt5Compat.GraphicalEffects
@@ -45,20 +46,20 @@ KWin.TabBoxSwitcher {
 
             layer.enabled: true
             layer.effect: FastBlur {
-                radius: enableBlur ? 64 : 0
+                radius: tabBox.enableBlur ? 64 : 0
             }
         }
 
         Rectangle {
             anchors {
-                top: enableBlur ? parent.top : infoBar.top
-                topMargin: enableBlur ? 0 : -infoBar.anchors.bottomMargin
+                top: tabBox.enableBlur ? parent.top : infoBar.top
+                topMargin: tabBox.enableBlur ? 0 : -infoBar.anchors.bottomMargin
                 left: parent.left
                 right: parent.right
                 bottom: parent.bottom
             }
             color: Kirigami.Theme.backgroundColor
-            opacity: enableBlur ? 0.5 : 0.75
+            opacity: tabBox.enableBlur ? 0.5 : 0.75
         }
 
         PathView {
@@ -107,9 +108,15 @@ KWin.TabBoxSwitcher {
 
             model: tabBox.model
 
-            delegate: Item {
-                readonly property string caption: model.caption
-                readonly property var icon: model.icon
+            component FlipDelegate: Item {
+                required property string caption
+                required property var icon
+                required property var windowId
+                required property int index
+            }
+
+            delegate: FlipDelegate {
+                id: delegate
 
                 readonly property real scaleFactor: {
                     if (thumbnail.implicitWidth < thumbnailView.boxWidth && thumbnail.implicitHeight < thumbnailView.boxHeight) {
@@ -138,7 +145,7 @@ KWin.TabBoxSwitcher {
                     id: thumbnail
                     readonly property double ratio: implicitWidth / implicitHeight
 
-                    wId: windowId
+                    wId: delegate.windowId
                     anchors.fill: parent
                 }
 
@@ -157,12 +164,12 @@ KWin.TabBoxSwitcher {
                     grabPermissions: PointerHandler.TakeOverForbidden
                     gesturePolicy: TapHandler.WithinBounds
                     onSingleTapped: {
-                        if (index === thumbnailView.currentIndex) {
-                            thumbnailView.model.activate(index);
+                        if (delegate.index === thumbnailView.currentIndex) {
+                            thumbnailView.model.activate(delegate.index);
                             return;
                         }
                         thumbnailView.movementDirection = PathView.Positive
-                        thumbnailView.currentIndex = index
+                        thumbnailView.currentIndex = delegate.index
                     }
                 }
             }
@@ -212,7 +219,7 @@ KWin.TabBoxSwitcher {
             }
 
             Kirigami.Icon {
-                source: thumbnailView.currentItem?.icon ?? ""
+                source: (thumbnailView.currentItem as FlipDelegate)?.icon ?? ""
                 implicitWidth: Kirigami.Units.iconSizes.large
                 implicitHeight: Kirigami.Units.iconSizes.large
                 Layout.alignment: Qt.AlignCenter
@@ -221,7 +228,7 @@ KWin.TabBoxSwitcher {
             PC3.Label {
                 font.bold: true
                 font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.6)
-                text: thumbnailView.currentItem?.caption ?? ""
+                text: (thumbnailView.currentItem as FlipDelegate)?.caption ?? ""
                 textFormat: Text.PlainText
                 maximumLineCount: 1
                 elide: Text.ElideMiddle

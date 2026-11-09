@@ -6,6 +6,8 @@
 
  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.core as PlasmaCore
@@ -34,7 +36,7 @@ KWin.TabBoxSwitcher {
     TextMetrics {
         id: textMetrics
         property string longestCaption: tabBox.model?.longestCaption() || placeholderLabel.text
-        text: itemCaption(longestCaption, true)
+        text: tabBox.itemCaption(longestCaption, true)
         font.bold: true
     }
 
@@ -94,6 +96,12 @@ KWin.TabBoxSwitcher {
 
                 model: tabBox.model
                 delegate: RowLayout {
+                    id: delegate
+
+                    required property string caption
+                    required property var icon
+                    required property bool minimized
+                    required property int index
 
                     width: compactListView.width
                     height: compactListView.rowHeight
@@ -104,7 +112,7 @@ KWin.TabBoxSwitcher {
                     Accessible.name: captionItem.text//Accessible.name
                     Kirigami.Icon {
                         id: iconItem
-                        source: model.icon
+                        source: delegate.icon
                         Layout.preferredWidth: Kirigami.Units.iconSizes.small
                         Layout.preferredHeight: Kirigami.Units.iconSizes.small
                         Layout.leftMargin: hoverItem.margins.left
@@ -113,9 +121,9 @@ KWin.TabBoxSwitcher {
                         id: captionItem
                         horizontalAlignment: Text.AlignLeft
                         verticalAlignment: Text.AlignBottom
-                        text: itemCaption(caption, minimized)
+                        text: tabBox.itemCaption(delegate.caption, delegate.minimized)
                         textFormat: Text.PlainText
-                        font.weight: index === compactListView.currentIndex ? Font.Bold : Font.Normal
+                        font.weight: delegate.index === compactListView.currentIndex ? Font.Bold : Font.Normal
                         elide: Text.ElideMiddle
                         Layout.fillWidth: true
                         Layout.rightMargin: hoverItem.margins.right
@@ -124,7 +132,7 @@ KWin.TabBoxSwitcher {
                     }
                     TapHandler {
                         onTapped: {
-                            compactListView.currentIndex = index;
+                            compactListView.currentIndex = delegate.index;
                             activationTimer.start();
                         }
                     }

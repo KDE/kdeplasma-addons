@@ -3,6 +3,7 @@
 
  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import Qt5Compat.GraphicalEffects
@@ -24,6 +25,13 @@ KWin.TabBoxSwitcher {
     // TODO: Make it user configurable ?
     property bool enableBlur: true
 
+    component CoverDelegate: Item {
+        required property string caption
+        required property var icon
+        required property var windowId
+        required property int index
+    }
+
     Window {
         id: window
 
@@ -38,8 +46,6 @@ KWin.TabBoxSwitcher {
 
         color: "transparent"
 
-        Accessible.name: currentItem?.caption
-
         KWin.DesktopBackground {
             activity: KWin.Workspace.currentActivity
             desktop: KWin.Workspace.currentVirtualDesktop
@@ -47,20 +53,20 @@ KWin.TabBoxSwitcher {
 
             layer.enabled: true
             layer.effect: FastBlur {
-                radius: enableBlur ? 64 : 0
+                radius: tabBox.enableBlur ? 64 : 0
             }
         }
 
         Rectangle {
             anchors {
-                top: enableBlur ? parent.top : infoBar.top
-                topMargin: enableBlur ? 0 : -infoBar.anchors.bottomMargin
+                top: tabBox.enableBlur ? parent.top : infoBar.top
+                topMargin: tabBox.enableBlur ? 0 : -infoBar.anchors.bottomMargin
                 left: parent.left
                 right: parent.right
                 bottom: parent.bottom
             }
             color: Kirigami.Theme.backgroundColor
-            opacity: enableBlur ? 0.5 : 0.75
+            opacity: tabBox.enableBlur ? 0.5 : 0.75
         }
 
         Kirigami.PlaceholderMessage {
@@ -139,11 +145,8 @@ KWin.TabBoxSwitcher {
 
             model: tabBox.model
 
-            delegate: Item {
+            delegate: CoverDelegate {
                 id: delegateItem
-
-                readonly property string caption: model.caption
-                readonly property var icon: model.icon
 
                 readonly property real scaleFactor: {
                     if (thumbnail.implicitWidth < thumbnailView.boxWidth && thumbnail.implicitHeight < thumbnailView.boxHeight) {
@@ -168,7 +171,7 @@ KWin.TabBoxSwitcher {
                     id: thumbnail
                     readonly property double ratio: implicitWidth / implicitHeight
 
-                    wId: windowId
+                    wId: delegateItem.windowId
                     anchors.fill: parent
                 }
 
@@ -192,12 +195,12 @@ KWin.TabBoxSwitcher {
                     grabPermissions: PointerHandler.TakeOverForbidden
                     gesturePolicy: TapHandler.WithinBounds
                     onSingleTapped: {
-                        if (index === thumbnailView.currentIndex) {
-                            thumbnailView.model.activate(index);
+                        if (delegateItem.index === thumbnailView.currentIndex) {
+                            thumbnailView.model.activate(delegateItem.index);
                             return;
                         }
                         thumbnailView.movementDirection = (delegateItem.PathView.rotation < 0) ? PathView.Positive : PathView.Negative
-                        thumbnailView.currentIndex = index
+                        thumbnailView.currentIndex = delegateItem.index
                     }
                 }
             }
@@ -222,7 +225,7 @@ KWin.TabBoxSwitcher {
                 transform: Rotation {
                     origin { x: highlightItem.width/2; y: highlightItem.height/2 }
                     axis { x: 0; y: 1; z: 0 }
-                    angle: target ? target.PathView.rotation : 0
+                    angle: highlightItem.target ? highlightItem.target.PathView.rotation : 0
                 }
             }
 
@@ -251,7 +254,7 @@ KWin.TabBoxSwitcher {
             }
 
             Kirigami.Icon {
-                source: thumbnailView.currentItem?.icon ?? ""
+                source: (thumbnailView.currentItem as CoverDelegate)?.icon ?? ""
                 implicitWidth: Kirigami.Units.iconSizes.large
                 implicitHeight: Kirigami.Units.iconSizes.large
                 Layout.alignment: Qt.AlignCenter
@@ -260,7 +263,7 @@ KWin.TabBoxSwitcher {
             PC3.Label {
                 font.bold: true
                 font.pointSize: Math.round(Kirigami.Theme.defaultFont.pointSize * 1.6)
-                text: thumbnailView.currentItem?.caption ?? ""
+                text: (thumbnailView.currentItem as CoverDelegate)?.caption ?? ""
                 textFormat: Text.PlainText
                 maximumLineCount: 1
                 elide: Text.ElideMiddle

@@ -6,6 +6,8 @@
 
  SPDX-License-Identifier: GPL-2.0-or-later
  */
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.core as PlasmaCore
@@ -23,6 +25,12 @@ KWin.TabBoxSwitcher {
         id: instantiator
         active: tabBox.visible
         delegate: BigIconsDialog { }
+    }
+
+    component BigIconDelegate: Kirigami.Icon {
+        required property string caption
+        required property var icon
+        required property int index
     }
 
     component BigIconsDialog: PlasmaCore.Dialog {
@@ -49,8 +57,8 @@ KWin.TabBoxSwitcher {
                 id: icons
 
                 readonly property int iconSize: Kirigami.Units.iconSizes.enormous
-                readonly property int delegateWidth: iconSize + (highlightItem ? highlightItem.margins.left + highlightItem.margins.right : 0)
-                readonly property int delegateHeight: iconSize + (highlightItem ? highlightItem.margins.top + highlightItem.margins.bottom : 0)
+                readonly property int delegateWidth: iconSize + (highlightItem ? (highlightItem as KSvg.FrameSvgItem).margins.left + (highlightItem as KSvg.FrameSvgItem).margins.right : 0)
+                readonly property int delegateHeight: iconSize + (highlightItem ? (highlightItem as KSvg.FrameSvgItem).margins.top + (highlightItem as KSvg.FrameSvgItem).margins.bottom : 0)
 
                 implicitWidth: dialogMainItem.actualItemsPerRow * delegateWidth
                 implicitHeight: dialogMainItem.gridViewHeight
@@ -67,26 +75,26 @@ KWin.TabBoxSwitcher {
                 keyNavigationWraps: true
 
                 model: tabBox.model
-                delegate: Kirigami.Icon {
-                    property string caption: model.caption
+                delegate: BigIconDelegate {
+                    id: delegate
 
                     width: icons.delegateWidth
                     height: icons.delegateHeight
 
-                    source: model.icon
+                    source: icon
                     active: index == icons.currentIndex
 
                     Accessible.name: caption
 
                     TapHandler {
                         onSingleTapped: {
-                            if (index === icons.currentIndex) {
-                                icons.model.activate(index);
+                            if (delegate.index === icons.currentIndex) {
+                                icons.model.activate(delegate.index);
                                 return;
                             }
-                            icons.currentIndex = index;
+                            icons.currentIndex = delegate.index;
                         }
-                        onDoubleTapped: icons.model.activate(index)
+                        onDoubleTapped: icons.model.activate(delegate.index)
                     }
                 }
 
@@ -113,7 +121,7 @@ KWin.TabBoxSwitcher {
 
             PlasmaComponents3.Label {
                 id: captionLabel
-                text: icons.currentItem ? icons.currentItem.caption : ""
+                text: icons.currentItem ? (icons.currentItem as BigIconDelegate).caption : ""
                 textFormat: Text.PlainText
                 horizontalAlignment: Text.AlignHCenter
                 verticalAlignment: Text.AlignVCenter

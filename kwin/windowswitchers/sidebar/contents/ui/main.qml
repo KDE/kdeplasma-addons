@@ -5,6 +5,8 @@
 
     SPDX-License-Identifier: GPL-2.0-or-later
 */
+pragma ComponentBehavior: Bound
+
 import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.components as PlasmaComponents
@@ -56,18 +58,25 @@ KWin.TabBoxSwitcher {
                 }
 
                 delegate: MouseArea {
+                    id: delegate
+
+                    required property string caption
+                    required property var icon
+                    required property var windowId
+                    required property int index
+
                     width: thumbnailListView.width
                     height: delegateColumn.implicitHeight + 2 * delegateColumn.anchors.margins
                     focus: ListView.isCurrentItem
 
-                    Accessible.name: model.caption
+                    Accessible.name: delegate.caption
                     Accessible.role: Accessible.ListItem
 
                     onClicked: {
                         if (tabBox.noModifierGrab) {
-                            tabBox.model.activate(index);
+                            tabBox.model.activate(delegate.index);
                         } else {
-                            thumbnailListView.currentIndex = index;
+                            thumbnailListView.currentIndex = delegate.index;
                         }
                     }
 
@@ -88,7 +97,7 @@ KWin.TabBoxSwitcher {
 
                             KWin.WindowThumbnail {
                                 anchors.fill: parent
-                                wId: windowId
+                                wId: delegate.windowId
                             }
                         }
 
@@ -99,14 +108,13 @@ KWin.TabBoxSwitcher {
                             Kirigami.Icon {
                                 Layout.preferredHeight: Kirigami.Units.iconSizes.medium
                                 Layout.preferredWidth: Kirigami.Units.iconSizes.medium
-                                source: model.icon
+                                source: delegate.icon
                             }
 
                             Kirigami.Heading {
                                 Layout.fillWidth: true
-                                height: undefined
                                 level: 4
-                                text: model.caption
+                                text: delegate.caption
                                 elide: Text.ElideRight
                                 wrapMode: Text.WrapAtWordBoundaryOrAnywhere
                                 maximumLineCount: 2
