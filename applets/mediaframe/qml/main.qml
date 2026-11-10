@@ -7,8 +7,6 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 
-import org.kde.draganddrop as DragDrop
-
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
@@ -186,20 +184,19 @@ PlasmoidItem {
         onTriggered: Qt.openUrlExternally(main.activeSource)
     }
 
-    fullRepresentation: DragDrop.DropArea {
+    fullRepresentation: DropArea {
         id: fullRepresentation
 
         property Image frontImage: image1
         property Image bufferImage: image2
 
-        onDrop: event => {
-            var mimeData = event.mimeData
-            if (mimeData.hasUrls) {
-                var urls = mimeData.urls
+        onDropped: event => {
+            if (event.hasUrls) {
+                const urls = event.urls
                 for (var i = 0, j = urls.length; i < j; ++i) {
-                    var url = urls[i]
-                    var type = items.isDir(url) ? "folder" : "file"
-                    var item = { "path":url, "type":type }
+                    const url = urls[i]
+                    const type = items.isDir(url) ? "folder" : "file"
+                    const item = { "path": url, "type": type }
                     main.addItem(item)
                 }
             }
