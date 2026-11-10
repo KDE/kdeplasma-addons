@@ -323,47 +323,42 @@ PlasmoidItem {
             }
         }
 
-        Item {
-            id: overlay
-
-            anchors.fill: parent
-
-            visible: main.hasItems
+        ButtonBar {
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottomMargin: Kirigami.Units.largeSpacing
+            visible: main.itemCount > 1 && hoverHandler.hovered
             opacity: hoverHandler.hovered ? 1 : 0
+            actions: [previousAction, openViewerAction, nextAction]
 
             Behavior on opacity {
                 NumberAnimation {}
             }
-
-            ButtonBar {
-                anchors.bottom: parent.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottomMargin: Kirigami.Units.largeSpacing
-                visible: main.itemCount > 1
-
-                actions: [previousAction, openViewerAction, nextAction]
-            }
-
-            PlasmaComponents3.RoundButton {
-                anchors.bottom: parent.bottom
-                anchors.horizontalCenter: parent.horizontalCenter
-                anchors.bottomMargin: Kirigami.Units.smallSpacing
-                visible: main.itemCount === 1
-                display: PlasmaComponents3.RoundButton.IconOnly
-                action: openViewerAction
-                text: action.text
-                icon.name: action.icon.name
-                PlasmaComponents3.ToolTip.visible: hovered || visualFocus
-                PlasmaComponents3.ToolTip.text: text
-                PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
-            }
-
-            HoverHandler {
-                id: hoverHandler
-            }
-            Binding { main.pause: hoverHandler.hovered }
-
         }
+
+        PlasmaComponents3.RoundButton {
+            anchors.bottom: parent.bottom
+            anchors.horizontalCenter: parent.horizontalCenter
+            anchors.bottomMargin: Kirigami.Units.smallSpacing
+            visible: main.itemCount === 1 && hoverHandler.hovered
+            opacity: hoverHandler.hovered ? 1 : 0
+            display: PlasmaComponents3.RoundButton.IconOnly
+            action: openViewerAction
+            text: action.text
+            icon.name: action.icon.name
+            PlasmaComponents3.ToolTip.visible: hovered || visualFocus
+            PlasmaComponents3.ToolTip.text: text
+            PlasmaComponents3.ToolTip.delay: Kirigami.Units.toolTipDelay
+
+            Behavior on opacity {
+                NumberAnimation {}
+            }
+        }
+
+        HoverHandler {
+            id: hoverHandler
+        }
+        Binding { main.pause: hoverHandler.hovered }
 
         PlasmaExtras.PlaceholderMessage {
             id: configNeededPlaceholder
