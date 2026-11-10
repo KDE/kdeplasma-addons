@@ -1,6 +1,6 @@
 # translation of plasma_applet_org.kde.plasma.quicklaunch.po to Italian.
 # Copyright (C) YEAR This_file_is_part_of_KDE
-# Vincenzo Reale <smart2128vr@gmail.com>, 2015, 2018, 2019, 2021, 2022.
+# SPDX-FileCopyrightText: 2015, 2018-2019, 2021-2022, 2026 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.12.1\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: config.qml:12
 #, kde-format

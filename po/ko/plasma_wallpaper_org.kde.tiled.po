@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:45+0000\n"
+"POT-Creation-Date: 2026-11-10 03:05+0000\n"
 "PO-Revision-Date: 2026-09-21 23:49+0200\n"
 "Last-Translator: Shinjo Park <peremen@gmail.com>\n"
 "Language-Team: Korean\n"
@@ -17,25 +17,25 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 26.08.1\n"
 
-#: package/contents/ui/config.qml:20 package/contents/ui/config.qml:29
+#: package/contents/ui/config.qml:21 package/contents/ui/config.qml:30
 #, kde-format
 msgctxt "@label, noun"
 msgid "Tile:"
 msgstr "바둑판식 배열:"
 
-#: package/contents/ui/config.qml:21
+#: package/contents/ui/config.qml:22
 #, kde-format
 msgctxt "@action:button Select a tile image"
 msgid "Select Image…"
 msgstr "그림 선택…"
 
-#: package/contents/ui/config.qml:28
+#: package/contents/ui/config.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Select a tile image"
 msgstr "바둑판 칸에 사용할 그림 선택"
 
-#: package/contents/ui/config.qml:51
+#: package/contents/ui/config.qml:52
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Image"

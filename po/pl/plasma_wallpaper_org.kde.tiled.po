@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-24 00:45+0000\n"
+"POT-Creation-Date: 2026-11-10 03:05+0000\n"
 "PO-Revision-Date: 2026-05-16 12:18+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -18,25 +18,25 @@ msgstr ""
 "|| n%100>=20) ? 1 : 2);\n"
 "X-Generator: Lokalize 26.04.0\n"
 
-#: package/contents/ui/config.qml:20 package/contents/ui/config.qml:29
+#: package/contents/ui/config.qml:21 package/contents/ui/config.qml:30
 #, kde-format
 msgctxt "@label, noun"
 msgid "Tile:"
 msgstr "Kafelka:"
 
-#: package/contents/ui/config.qml:21
+#: package/contents/ui/config.qml:22
 #, kde-format
 msgctxt "@action:button Select a tile image"
 msgid "Select Image…"
 msgstr "Wybierz obraz…"
 
-#: package/contents/ui/config.qml:28
+#: package/contents/ui/config.qml:29
 #, kde-format
 msgctxt "@action:button"
 msgid "Select a tile image"
 msgstr "Wybierz obraz do kafelka"
 
-#: package/contents/ui/config.qml:51
+#: package/contents/ui/config.qml:52
 #, kde-format
 msgctxt "@title:window"
 msgid "Open Image"
