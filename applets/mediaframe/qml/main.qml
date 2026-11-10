@@ -192,77 +192,69 @@ PlasmoidItem {
         property Image frontImage: image1
         property Image bufferImage: image2
 
-        Item {
-            id: itemView
+        // This timer prevents reloading the image too often when resizing,
+        // to minimize excessively re-reading the file on disk
+        Timer {
+            id: imageReloadTimer
+            interval: 250
+            running: false
+            onTriggered: {
+                image1.sourceSize = Qt.size(image1.width, image1.height)
+                image2.sourceSize = Qt.size(image2.width, image2.height)
+            }
+        }
+
+        Image {
+            id: image2
+
             anchors.fill: parent
+            z: image2 === fullRepresentation.frontImage
+            fillMode: Plasmoid.configuration.fillMode
 
-            Item {
-                id: imageView
-                visible: main.hasItems
-                anchors.fill: parent
+            visible: main.hasItems
+            opacity: 0
 
-                // This timer prevents reloading the image too often when resizing,
-                // to minimize excessively re-reading the file on disk
-                Timer {
-                    id: imageReloadTimer
-                    interval: 250
-                    running: false
-                    onTriggered: {
-                        image1.sourceSize = Qt.size(image1.width, image1.height)
-                        image2.sourceSize = Qt.size(image2.width, image2.height)
-                    }
-                }
+            cache: false
 
-                Image {
-                    id: image2
+            asynchronous: true
+            autoTransform: true
 
-                    anchors.fill: parent
-                    z: image2 === fullRepresentation.frontImage
-                    fillMode: Plasmoid.configuration.fillMode
+            onWidthChanged: imageReloadTimer.restart()
+            onHeightChanged: imageReloadTimer.restart()
 
-                    opacity: 0
+            sourceSize.width: width
+            sourceSize.height: height
+        }
 
-                    cache: false
+        Image {
+            id: image1
 
-                    asynchronous: true
-                    autoTransform: true
+            anchors.fill: parent
+            z: image2 === fullRepresentation.frontImage
+            fillMode: Plasmoid.configuration.fillMode
 
-                    onWidthChanged: imageReloadTimer.restart()
-                    onHeightChanged: imageReloadTimer.restart()
+            visible: main.hasItems
 
-                    sourceSize.width: width
-                    sourceSize.height: height
-                }
+            cache: false
 
-                Image {
-                    id: image1
+            asynchronous: true
+            autoTransform: true
 
-                    anchors.fill: parent
-                    z: image2 === fullRepresentation.frontImage
-                    fillMode: Plasmoid.configuration.fillMode
+            onWidthChanged: imageReloadTimer.restart()
+            onHeightChanged: imageReloadTimer.restart()
 
-                    cache: false
+            sourceSize.width: width
+            sourceSize.height: height
 
-                    asynchronous: true
-                    autoTransform: true
+            HoverHandler {
+                enabled: Plasmoid.configuration.leftClickOpenImage
+                cursorShape: Qt.PointingHandCursor
+            }
 
-                    onWidthChanged: imageReloadTimer.restart()
-                    onHeightChanged: imageReloadTimer.restart()
-
-                    sourceSize.width: width
-                    sourceSize.height: height
-
-                    HoverHandler {
-                        enabled: Plasmoid.configuration.leftClickOpenImage
-                        cursorShape: Qt.PointingHandCursor
-                    }
-
-                    TapHandler {
-                        acceptedButtons: Qt.LeftButton
-                        enabled: Plasmoid.configuration.leftClickOpenImage && !main.isTransitioning
-                        onTapped: Qt.openUrlExternally(main.activeSource)
-                    }
-                }
+            TapHandler {
+                acceptedButtons: Qt.LeftButton
+                enabled: Plasmoid.configuration.leftClickOpenImage && !main.isTransitioning
+                onTapped: Qt.openUrlExternally(main.activeSource)
             }
         }
 
@@ -327,6 +319,7 @@ PlasmoidItem {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Kirigami.Units.largeSpacing
+            z: 3
             visible: main.itemCount > 1 && hoverHandler.hovered
             opacity: hoverHandler.hovered ? 1 : 0
             actions: [previousAction, openViewerAction, nextAction]
@@ -340,6 +333,7 @@ PlasmoidItem {
             anchors.bottom: parent.bottom
             anchors.horizontalCenter: parent.horizontalCenter
             anchors.bottomMargin: Kirigami.Units.smallSpacing
+            z: 3
             visible: main.itemCount === 1 && hoverHandler.hovered
             opacity: hoverHandler.hovered ? 1 : 0
             display: PlasmaComponents3.RoundButton.IconOnly
