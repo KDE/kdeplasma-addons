@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-02 00:45+0000\n"
+"POT-Creation-Date: 2026-11-10 00:59+0000\n"
 "PO-Revision-Date: 2026-09-02 08:46+0300\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: צוות התרגום של KDE ישראל\n"
@@ -96,13 +96,13 @@ msgctxt "@item:inlist"
 msgid "Bikram Sambat"
 msgstr "בירקאם סמבטא"
 
-#: config/qml/AlternateCalendarConfig.qml:48
+#: config/qml/AlternateCalendarConfig.qml:49
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "מערכת לוח שנה:"
 
-#: config/qml/AlternateCalendarConfig.qml:69
+#: config/qml/AlternateCalendarConfig.qml:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -111,13 +111,13 @@ msgid ""
 msgstr ""
 "לוח השנה הזה מבוסס על חישוב אסטרונומי לחלוטין. הוא לא מתייחס למצב הירח."
 
-#: config/qml/AlternateCalendarConfig.qml:77
+#: config/qml/AlternateCalendarConfig.qml:78
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "היסט תאריך:"
 
-#: config/qml/AlternateCalendarConfig.qml:88
+#: config/qml/AlternateCalendarConfig.qml:89
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
@@ -126,7 +126,7 @@ msgstr[1] "יומיים"
 msgstr[2] "%1 ימים"
 msgstr[3] "%1 ימים"
 
-#: config/qml/AlternateCalendarConfig.qml:91
+#: config/qml/AlternateCalendarConfig.qml:92
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

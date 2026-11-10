@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-09 00:46+0000\n"
+"POT-Creation-Date: 2026-11-10 00:59+0000\n"
 "PO-Revision-Date: 2024-09-07 12:22+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -17,61 +17,61 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 24.05.2\n"
 
-#: package/contents/ui/config.qml:58
+#: package/contents/ui/config.qml:59
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Positioning:"
 
-#: package/contents/ui/config.qml:61
+#: package/contents/ui/config.qml:62
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "Scaled and cropped"
 
-#: package/contents/ui/config.qml:65
+#: package/contents/ui/config.qml:66
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Scaled"
 
-#: package/contents/ui/config.qml:69
+#: package/contents/ui/config.qml:70
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
 msgstr "Scaled, keep proportions"
 
-#: package/contents/ui/config.qml:73
+#: package/contents/ui/config.qml:74
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Centred"
 
-#: package/contents/ui/config.qml:77
+#: package/contents/ui/config.qml:78
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Tiled"
 
-#: package/contents/ui/config.qml:98
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Background colour:"
 
-#: package/contents/ui/config.qml:99
+#: package/contents/ui/config.qml:100
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Select Background Colour"
 
-#: package/contents/ui/config.qml:103
+#: package/contents/ui/config.qml:104
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Provider:"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -81,115 +81,115 @@ msgstr ""
 "This wallpaper provider does not filter out images that may be sensitive or "
 "objectionable. Use caution if these images will be displayed in public."
 
-#: package/contents/ui/config.qml:131
+#: package/contents/ui/config.qml:132
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Update when using metered network connection"
 
-#: package/contents/ui/config.qml:146
+#: package/contents/ui/config.qml:147
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Today's picture:"
 
-#: package/contents/ui/config.qml:162
+#: package/contents/ui/config.qml:166
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Title:"
 
-#: package/contents/ui/config.qml:177
+#: package/contents/ui/config.qml:181
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Author:"
 
-#: package/contents/ui/config.qml:196
+#: package/contents/ui/config.qml:200
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Open Containing Folder"
 
-#: package/contents/ui/config.qml:200
+#: package/contents/ui/config.qml:204
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
 msgstr "Open the destination folder where the wallpaper image was saved."
 
-#: package/contents/ui/main.qml:22
+#: package/contents/ui/main.qml:23
 #, kde-format
 msgid "Open Wallpaper Image"
 msgstr "Open Wallpaper Image"
 
-#: package/contents/ui/main.qml:27
+#: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "@action:inmenu Placeholder is title of image"
 msgid "About “%1”"
 msgstr ""
 
-#: package/contents/ui/main.qml:28
+#: package/contents/ui/main.qml:29
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "About This Image"
 msgstr ""
 
-#: package/contents/ui/WallpaperDelegate.qml:137
+#: package/contents/ui/WallpaperDelegate.qml:139
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
 msgstr "Today's picture"
 
-#: package/contents/ui/WallpaperDelegate.qml:138
+#: package/contents/ui/WallpaperDelegate.qml:140
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
 msgstr "Loading"
 
-#: package/contents/ui/WallpaperDelegate.qml:139
+#: package/contents/ui/WallpaperDelegate.qml:141
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
 msgstr "Unavailable"
 
-#: package/contents/ui/WallpaperDelegate.qml:140
+#: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
 msgstr "%1 Author: %2. Right-click on the image to see more actions."
 
-#: package/contents/ui/WallpaperDelegate.qml:141
+#: package/contents/ui/WallpaperDelegate.qml:143
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
 msgstr "The wallpaper is being fetched from the Internet."
 
-#: package/contents/ui/WallpaperDelegate.qml:142
+#: package/contents/ui/WallpaperDelegate.qml:144
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
 msgstr "Failed to fetch the wallpaper from the Internet."
 
-#: package/contents/ui/WallpaperPreview.qml:48
+#: package/contents/ui/WallpaperPreview.qml:57
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
 msgstr "Save Image as…"
 
-#: package/contents/ui/WallpaperPreview.qml:51
+#: package/contents/ui/WallpaperPreview.qml:60
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
 msgstr "Save today's picture to local disk"
 
-#: package/contents/ui/WallpaperPreview.qml:57
+#: package/contents/ui/WallpaperPreview.qml:66
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
 msgstr "Open Link in Browser…"
 
-#: package/contents/ui/WallpaperPreview.qml:60
+#: package/contents/ui/WallpaperPreview.qml:69
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"

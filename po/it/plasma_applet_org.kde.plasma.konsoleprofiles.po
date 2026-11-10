@@ -1,6 +1,6 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Vincenzo Reale <smart2128vr@gmail.com>, 2012.
+# SPDX-FileCopyrightText: 2012, 2026 Vincenzo Reale <smart2128vr@gmail.com>
 # Paolo Zamponi <feus73@gmail.com>, 2018.
 #
 msgid ""
@@ -8,15 +8,15 @@ msgstr ""
 "Project-Id-Version: konsoleprofiles\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2018-05-13 11:01+0100\n"
-"Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
+"PO-Revision-Date: 2026-11-03 16:58+0100\n"
+"Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 2.0\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: main.qml:70
 #, kde-format
@@ -25,8 +25,7 @@ msgid "Konsole Profiles"
 msgstr "Profili di Konsole"
 
 #: main.qml:91
-#, fuzzy, kde-format
-#| msgid "Arbitrary String Which Says Something"
+#, kde-format
 msgctxt "@label unused string, just for sizing"
 msgid "Arbitrary String Which Says Something"
-msgstr "Stringa arbitraria che indica qualcosa"
+msgstr "Stringa arbitraria che dice qualcosa"

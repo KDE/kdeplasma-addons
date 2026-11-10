@@ -1,13 +1,13 @@
 # translation of plasma_applet_org.kde.plasma.quicklaunch.po to Italian.
 # Copyright (C) YEAR This_file_is_part_of_KDE
-# Vincenzo Reale <smart2128vr@gmail.com>, 2015, 2018, 2019, 2021, 2022.
+# SPDX-FileCopyrightText: 2015, 2018-2019, 2021-2022, 2026 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2022-02-04 00:34+0100\n"
+"PO-Revision-Date: 2026-11-03 15:50+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 21.12.1\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: config.qml:12
 #, kde-format
@@ -72,8 +72,7 @@ msgid "Custom title"
 msgstr "Titolo personalizzato"
 
 #: IconItem.qml:184
-#, fuzzy, kde-format
-#| msgid "Launch %1"
+#, kde-format
 msgctxt "@action:button accessible description"
 msgid "Launch %1"
 msgstr "Avvia %1"
@@ -97,16 +96,13 @@ msgid "Remove Launcher"
 msgstr "Rimuovi lanciatore"
 
 #: main.qml:112
-#, fuzzy, kde-format
-#| msgid "Quicklaunch"
+#, kde-format
 msgctxt "@info:tooltip widget title"
 msgid "Quicklaunch"
 msgstr "Avvio rapido"
 
 #: main.qml:113
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Add launchers by Drag and Drop or by using the context menu."
+#, kde-format
 msgctxt "@info:tooltip widget subtitle"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr ""
@@ -114,15 +110,13 @@ msgstr ""
 "contestuale."
 
 #: main.qml:145
-#, fuzzy, kde-format
-#| msgid "Hide icons"
+#, kde-format
 msgctxt "@info:tooltip for expander arrow"
 msgid "Hide icons"
 msgstr "Nascondi le icone"
 
 #: main.qml:145
-#, fuzzy, kde-format
-#| msgid "Show hidden icons"
+#, kde-format
 msgctxt "@info:tooltip for expander arrow"
 msgid "Show hidden icons"
 msgstr "Mostra le icone nascoste"

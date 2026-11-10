@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-09 00:46+0000\n"
+"POT-Creation-Date: 2026-11-10 00:59+0000\n"
 "PO-Revision-Date: 2026-04-12 17:28+0530\n"
 "Last-Translator: Kishore G <kishore96@gmail.com>\n"
 "Language-Team: Tamil <kde-l10n-ta@kde.org>\n"
@@ -17,61 +17,61 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 25.12.3\n"
 
-#: package/contents/ui/config.qml:58
+#: package/contents/ui/config.qml:59
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "காட்டப்படும் விதம்:"
 
-#: package/contents/ui/config.qml:61
+#: package/contents/ui/config.qml:62
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "வெட்டி அளவுமாற்றி"
 
-#: package/contents/ui/config.qml:65
+#: package/contents/ui/config.qml:66
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "அளவுமாற்றி"
 
-#: package/contents/ui/config.qml:69
+#: package/contents/ui/config.qml:70
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
 msgstr "அளவுமாற்றி, உருவத்தை மாற்றாமல்"
 
-#: package/contents/ui/config.qml:73
+#: package/contents/ui/config.qml:74
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "நடுப்படுத்தி"
 
-#: package/contents/ui/config.qml:77
+#: package/contents/ui/config.qml:78
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "பல நகல்களாக"
 
-#: package/contents/ui/config.qml:98
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "பின்புல நிறம்:"
 
-#: package/contents/ui/config.qml:99
+#: package/contents/ui/config.qml:100
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "பின்புல நிறத்தை தேர்ந்தெடுப்பது"
 
-#: package/contents/ui/config.qml:103
+#: package/contents/ui/config.qml:104
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "வழங்கி:"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -81,115 +81,115 @@ msgstr ""
 "மனதைப் புண்படுத்தும் படங்களை இந்த வழங்கி வழங்கலாம். பொது இடத்தில் இதைப் பயன்படுத்தம்போது "
 "எச்சரிக்கையாக இருக்கவும்."
 
-#: package/contents/ui/config.qml:131
+#: package/contents/ui/config.qml:132
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "வரம்புள்ள பிணையத்திலுள்ளபோதும் புதுப்பி"
 
-#: package/contents/ui/config.qml:146
+#: package/contents/ui/config.qml:147
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "இன்றைய படம்"
 
-#: package/contents/ui/config.qml:162
+#: package/contents/ui/config.qml:166
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "தலைப்பு:"
 
-#: package/contents/ui/config.qml:177
+#: package/contents/ui/config.qml:181
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "இயற்றியவர்:"
 
-#: package/contents/ui/config.qml:196
+#: package/contents/ui/config.qml:200
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "கொண்டுள்ள அடைவை திற"
 
-#: package/contents/ui/config.qml:200
+#: package/contents/ui/config.qml:204
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
 msgstr "படம் சேமிக்கப்பட்டுள்ள அடைவைத் திறக்கும்."
 
-#: package/contents/ui/main.qml:22
+#: package/contents/ui/main.qml:23
 #, kde-format
 msgid "Open Wallpaper Image"
 msgstr "பின்புல படத்தை திற"
 
-#: package/contents/ui/main.qml:27
+#: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "@action:inmenu Placeholder is title of image"
 msgid "About “%1”"
 msgstr "'%1' பற்றி"
 
-#: package/contents/ui/main.qml:28
+#: package/contents/ui/main.qml:29
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "About This Image"
 msgstr "இப்படத்தைப் பற்றி"
 
-#: package/contents/ui/WallpaperDelegate.qml:137
+#: package/contents/ui/WallpaperDelegate.qml:139
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
 msgstr "இன்றைய படம்"
 
-#: package/contents/ui/WallpaperDelegate.qml:138
+#: package/contents/ui/WallpaperDelegate.qml:140
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
 msgstr "ஏற்றப்படுகிறது…"
 
-#: package/contents/ui/WallpaperDelegate.qml:139
+#: package/contents/ui/WallpaperDelegate.qml:141
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
 msgstr "கிட்டவில்லை"
 
-#: package/contents/ui/WallpaperDelegate.qml:140
+#: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
 msgstr "%1 இயற்றியவர்: %2. மேலும் செயல்களுக்கு வலது-கிளிக் செய்யவும்."
 
-#: package/contents/ui/WallpaperDelegate.qml:141
+#: package/contents/ui/WallpaperDelegate.qml:143
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
 msgstr "பின்புலப்படம் பதிவிறக்கப்படுகிறது."
 
-#: package/contents/ui/WallpaperDelegate.qml:142
+#: package/contents/ui/WallpaperDelegate.qml:144
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
 msgstr "பின்புலப்படத்தை பதிவிறக்குவது தோல்வியடைந்தது"
 
-#: package/contents/ui/WallpaperPreview.qml:48
+#: package/contents/ui/WallpaperPreview.qml:57
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
 msgstr "படத்தை வேறு பெயரில் சேமி…"
 
-#: package/contents/ui/WallpaperPreview.qml:51
+#: package/contents/ui/WallpaperPreview.qml:60
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
 msgstr "இன்றைய படத்தை இக்கணினியில் சேமி"
 
-#: package/contents/ui/WallpaperPreview.qml:57
+#: package/contents/ui/WallpaperPreview.qml:66
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
 msgstr "இணைப்பை உலாவியில் திற…"
 
-#: package/contents/ui/WallpaperPreview.qml:60
+#: package/contents/ui/WallpaperPreview.qml:69
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"

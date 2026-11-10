@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-09 00:57+0000\n"
-"PO-Revision-Date: 2026-11-02 01:39+0100\n"
+"PO-Revision-Date: 2026-11-09 12:07+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: CompactRepresentation.qml:154
 #, kde-format
@@ -168,7 +168,7 @@ msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
 "in hh:mm:ss"
 msgid "%1 of %2 left"
-msgstr ""
+msgstr "%1 z %2 zbývá"
 
 #: main.qml:48
 #, kde-format
@@ -186,7 +186,7 @@ msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
 "localized durations"
 msgid "%1 left of %2"
-msgstr ""
+msgstr "%1 zbývá z %2."
 
 #: main.qml:87
 #, kde-format

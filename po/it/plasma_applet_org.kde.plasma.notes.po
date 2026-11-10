@@ -2,14 +2,14 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Dario Panico <Dareus_Persarumrex@fastwebnet.it>, 2008.
-# SPDX-FileCopyrightText: 2015, 2018, 2019, 2021, 2022, 2023, 2025 Vincenzo Reale <smart2128vr@gmail.com>
+# SPDX-FileCopyrightText: 2015, 2018-2019, 2021-2023, 2025-2026 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2025-04-05 18:03+0200\n"
+"PO-Revision-Date: 2026-11-03 15:46+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -26,127 +26,109 @@ msgid "Appearance"
 msgstr "Aspetto"
 
 #: qml/configAppearance.qml:32
-#, fuzzy, kde-format
-#| msgid "%1pt"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is font size in points"
 msgid "%1pt"
 msgstr "%1pt"
 
 #: qml/configAppearance.qml:38
-#, fuzzy, kde-format
-#| msgid "Text font size:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Text font size:"
 msgstr "Dimensione del carattere del testo:"
 
 #: qml/configAppearance.qml:72
-#, fuzzy, kde-format
-#| msgid "A white sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A white sticky note"
 msgstr "Una nota adesiva bianca"
 
 #: qml/configAppearance.qml:73
-#, fuzzy, kde-format
-#| msgid "A black sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A black sticky note"
 msgstr "Una nota adesiva nera"
 
 #: qml/configAppearance.qml:74
-#, fuzzy, kde-format
-#| msgid "A red sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A red sticky note"
 msgstr "Una nota adesiva rossa"
 
 #: qml/configAppearance.qml:75
-#, fuzzy, kde-format
-#| msgid "An orange sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "An orange sticky note"
 msgstr "Una nota adesiva arancione"
 
 #: qml/configAppearance.qml:76
-#, fuzzy, kde-format
-#| msgid "A yellow sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A yellow sticky note"
 msgstr "Una nota adesiva gialla"
 
 #: qml/configAppearance.qml:77
-#, fuzzy, kde-format
-#| msgid "A green sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A green sticky note"
 msgstr "Una nota adesiva verde"
 
 #: qml/configAppearance.qml:78
-#, fuzzy, kde-format
-#| msgid "A blue sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A blue sticky note"
 msgstr "Una nota adesiva blu"
 
 #: qml/configAppearance.qml:79
-#, fuzzy, kde-format
-#| msgid "A pink sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A pink sticky note"
 msgstr "Una nota adesiva rosa"
 
 #: qml/configAppearance.qml:80
-#, fuzzy, kde-format
-#| msgid "A transparent sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note"
 msgstr "Una nota adesiva trasparente"
 
 #: qml/configAppearance.qml:81
-#, fuzzy, kde-format
-#| msgid "A transparent sticky note with light text"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note with light text"
 msgstr "Una nota adesiva trasparente con testo chiaro"
 
 #: qml/main.qml:308
-#, fuzzy, kde-format
-#| msgid "Undo"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Undo"
 msgstr "Annulla"
 
 #: qml/main.qml:316
-#, fuzzy, kde-format
-#| msgid "Redo"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Redo"
 msgstr "Rifai"
 
 #: qml/main.qml:326
-#, fuzzy, kde-format
-#| msgid "Cut"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Cut"
 msgstr "Taglia"
 
 #: qml/main.qml:334
-#, fuzzy, kde-format
-#| msgid "Copy"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
 msgstr "Copia"
 
 #: qml/main.qml:342
-#, fuzzy, kde-format
-#| msgid "Paste"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Paste"
 msgstr "Incolla"
 
 #: qml/main.qml:348
-#, fuzzy, kde-format
-#| msgid "Paste with Full Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Paste with Full Formatting"
 msgstr "Incolla con formattazione completa"
@@ -158,22 +140,19 @@ msgid "Remove Formatting"
 msgstr "Rimuovi formattazione"
 
 #: qml/main.qml:370
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Elimina"
 
 #: qml/main.qml:377
-#, fuzzy, kde-format
-#| msgid "Clear"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Clear"
-msgstr "Cancella"
+msgstr "Pulisci"
 
 #: qml/main.qml:387
-#, fuzzy, kde-format
-#| msgid "Select All"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select All"
 msgstr "Seleziona tutto"
@@ -209,15 +188,13 @@ msgid "Keep Open"
 msgstr "Tieni aperto"
 
 #: qml/main.qml:662
-#, fuzzy, kde-format
-#| msgid "Discard this note?"
+#, kde-format
 msgctxt "@title;window dialog title"
 msgid "Discard this note?"
 msgstr "Vuoi scartare questa nota?"
 
 #: qml/main.qml:663
-#, fuzzy, kde-format
-#| msgid "Are you sure you want to discard this note?"
+#, kde-format
 msgctxt "@info"
 msgid "Are you sure you want to discard this note?"
 msgstr "Sei sicuro di voler scartare questa nota?"

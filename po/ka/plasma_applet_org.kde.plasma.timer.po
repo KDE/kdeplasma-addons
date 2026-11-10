@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-09 00:57+0000\n"
-"PO-Revision-Date: 2026-11-01 05:19+0100\n"
+"PO-Revision-Date: 2026-11-09 05:03+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -166,7 +166,7 @@ msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
 "in hh:mm:ss"
 msgid "%1 of %2 left"
-msgstr ""
+msgstr "დარჩენილია %1 %2-დან"
 
 #: main.qml:48
 #, kde-format
@@ -184,7 +184,7 @@ msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
 "localized durations"
 msgid "%1 left of %2"
-msgstr ""
+msgstr "დარჩენილია %1 %2-დან"
 
 #: main.qml:87
 #, kde-format

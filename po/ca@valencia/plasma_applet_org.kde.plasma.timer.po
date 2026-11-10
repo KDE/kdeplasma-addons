@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-09 00:57+0000\n"
-"PO-Revision-Date: 2026-10-31 16:07+0100\n"
+"PO-Revision-Date: 2026-11-09 09:49+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -170,7 +170,7 @@ msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
 "in hh:mm:ss"
 msgid "%1 of %2 left"
-msgstr ""
+msgstr "Queda %1 de %2"
 
 #: main.qml:48
 #, kde-format
@@ -188,7 +188,7 @@ msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
 "localized durations"
 msgid "%1 left of %2"
-msgstr ""
+msgstr "Queda %1 de %2"
 
 #: main.qml:87
 #, kde-format
@@ -225,15 +225,3 @@ msgstr "&Para"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Restablix"
-
-#~ msgctxt ""
-#~ "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
-#~ "running timer"
-#~ msgid "Remaining time left: %1 second"
-#~ msgid_plural "Remaining time left: %1 seconds"
-#~ msgstr[0] "Temps restant: %1 segon"
-#~ msgstr[1] "Temps restant: %1 segons"
-
-#~ msgctxt "@info:usagetip"
-#~ msgid "Scroll over digits to change time"
-#~ msgstr "Desplaceu els dígits per a canviar l'hora"

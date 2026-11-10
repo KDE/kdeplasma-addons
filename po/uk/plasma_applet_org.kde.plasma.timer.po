@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-09 00:57+0000\n"
-"PO-Revision-Date: 2026-10-31 16:18+0200\n"
+"PO-Revision-Date: 2026-11-09 08:46+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -168,7 +168,7 @@ msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
 "in hh:mm:ss"
 msgid "%1 of %2 left"
-msgstr ""
+msgstr "Лишилося %1 з %2"
 
 #: main.qml:48
 #, kde-format
@@ -186,7 +186,7 @@ msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
 "localized durations"
 msgid "%1 left of %2"
-msgstr ""
+msgstr "Лишилося %1 з %2"
 
 #: main.qml:87
 #, kde-format

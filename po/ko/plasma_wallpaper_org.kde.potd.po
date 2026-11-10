@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-09 00:46+0000\n"
+"POT-Creation-Date: 2026-11-10 00:59+0000\n"
 "PO-Revision-Date: 2026-04-26 21:40+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -17,61 +17,61 @@ msgstr ""
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: Lokalize 25.08.1\n"
 
-#: package/contents/ui/config.qml:58
+#: package/contents/ui/config.qml:59
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "위치:"
 
-#: package/contents/ui/config.qml:61
+#: package/contents/ui/config.qml:62
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "크기 조정 후 자르기"
 
-#: package/contents/ui/config.qml:65
+#: package/contents/ui/config.qml:66
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "크기 조정"
 
-#: package/contents/ui/config.qml:69
+#: package/contents/ui/config.qml:70
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
 msgstr "크기 조정, 비율 유지"
 
-#: package/contents/ui/config.qml:73
+#: package/contents/ui/config.qml:74
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "가운데"
 
-#: package/contents/ui/config.qml:77
+#: package/contents/ui/config.qml:78
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "바둑판식 배열"
 
-#: package/contents/ui/config.qml:98
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "배경색:"
 
-#: package/contents/ui/config.qml:99
+#: package/contents/ui/config.qml:100
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "배경색 선택"
 
-#: package/contents/ui/config.qml:103
+#: package/contents/ui/config.qml:104
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "공급자:"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -81,115 +81,115 @@ msgstr ""
 "이 공급자는 민감한 그림을 필터하지 않습니다. 공개 장소에서 사용해야 할 때 주"
 "의하십시오."
 
-#: package/contents/ui/config.qml:131
+#: package/contents/ui/config.qml:132
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "종량제 연결을 사용할 때 업데이트"
 
-#: package/contents/ui/config.qml:146
+#: package/contents/ui/config.qml:147
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "오늘의 그림:"
 
-#: package/contents/ui/config.qml:162
+#: package/contents/ui/config.qml:166
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "제목:"
 
-#: package/contents/ui/config.qml:177
+#: package/contents/ui/config.qml:181
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "제작자:"
 
-#: package/contents/ui/config.qml:196
+#: package/contents/ui/config.qml:200
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "포함하는 폴더 열기"
 
-#: package/contents/ui/config.qml:200
+#: package/contents/ui/config.qml:204
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
 msgstr "배경 그림이 저장된 대상 폴더를 엽니다."
 
-#: package/contents/ui/main.qml:22
+#: package/contents/ui/main.qml:23
 #, kde-format
 msgid "Open Wallpaper Image"
 msgstr "배경 그림 파일 열기"
 
-#: package/contents/ui/main.qml:27
+#: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "@action:inmenu Placeholder is title of image"
 msgid "About “%1”"
 msgstr "\"%1\" 정보"
 
-#: package/contents/ui/main.qml:28
+#: package/contents/ui/main.qml:29
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "About This Image"
 msgstr "이 그림 정보"
 
-#: package/contents/ui/WallpaperDelegate.qml:137
+#: package/contents/ui/WallpaperDelegate.qml:139
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
 msgstr "오늘의 그림"
 
-#: package/contents/ui/WallpaperDelegate.qml:138
+#: package/contents/ui/WallpaperDelegate.qml:140
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
 msgstr "불러오는 중"
 
-#: package/contents/ui/WallpaperDelegate.qml:139
+#: package/contents/ui/WallpaperDelegate.qml:141
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
 msgstr "사용할 수 없음"
 
-#: package/contents/ui/WallpaperDelegate.qml:140
+#: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
 msgstr "%1 제작자: %2. 오른쪽 클릭하면 더 많은 동작을 볼 수 있습니다."
 
-#: package/contents/ui/WallpaperDelegate.qml:141
+#: package/contents/ui/WallpaperDelegate.qml:143
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
 msgstr "배경 그림을 인터넷에서 가져오고 있습니다."
 
-#: package/contents/ui/WallpaperDelegate.qml:142
+#: package/contents/ui/WallpaperDelegate.qml:144
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
 msgstr "배경 그림을 인터넷에서 가져올 수 없습니다."
 
-#: package/contents/ui/WallpaperPreview.qml:48
+#: package/contents/ui/WallpaperPreview.qml:57
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
 msgstr "다른 이름으로 그림 저장..."
 
-#: package/contents/ui/WallpaperPreview.qml:51
+#: package/contents/ui/WallpaperPreview.qml:60
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
 msgstr "오늘의 그림을 로컬 디스크에 저장"
 
-#: package/contents/ui/WallpaperPreview.qml:57
+#: package/contents/ui/WallpaperPreview.qml:66
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
 msgstr "브라우저에서 링크 열기…"
 
-#: package/contents/ui/WallpaperPreview.qml:60
+#: package/contents/ui/WallpaperPreview.qml:69
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"

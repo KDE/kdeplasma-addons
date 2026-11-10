@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2017, 2018, 2019, 2021, 2025 Vincenzo Reale <smart2128vr@gmail.com>
+# SPDX-FileCopyrightText: 2017-2019, 2021, 2025-2026 Vincenzo Reale <smart2128vr@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-09 00:57+0000\n"
-"PO-Revision-Date: 2025-08-14 21:07+0200\n"
+"PO-Revision-Date: 2026-11-09 15:49+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 25.11.70\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -30,29 +30,25 @@ msgid "Behavior"
 msgstr "Comportamento"
 
 #: qml/ConfigBehavior.qml:36
-#, fuzzy, kde-format
-#| msgid "Change picture every:"
+#, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Cambia immagine ogni:"
 
 #: qml/ConfigBehavior.qml:53
-#, fuzzy, kde-format
-#| msgid "Hours"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "Ore"
 
 #: qml/ConfigBehavior.qml:67
-#, fuzzy, kde-format
-#| msgid "Minutes"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "Minuti"
 
 #: qml/ConfigBehavior.qml:81
-#, fuzzy, kde-format
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "Secondi"
@@ -219,19 +215,19 @@ msgstr "Scegli una cartella"
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "Mostra l'immagine precedente"
 
 #: qml/main.qml:175
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "Mostra l'immagine successiva"
 
 #: qml/main.qml:185
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "Apri nel visore di immagini predefinito"
 
 #: qml/main.qml:374
 #, kde-format

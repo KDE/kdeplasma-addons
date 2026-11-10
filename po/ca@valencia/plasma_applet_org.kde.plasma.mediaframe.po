@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-09 00:57+0000\n"
-"PO-Revision-Date: 2026-11-03 10:22+0100\n"
+"PO-Revision-Date: 2026-11-08 09:46+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -219,19 +219,19 @@ msgstr "Trieu una carpeta"
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "Mostra la imatge anterior"
 
 #: qml/main.qml:175
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "Mostra la imatge següent"
 
 #: qml/main.qml:185
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "Obri en el visor d'imatges predeterminat"
 
 #: qml/main.qml:374
 #, kde-format

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-02 00:45+0000\n"
+"POT-Creation-Date: 2026-11-10 00:59+0000\n"
 "PO-Revision-Date: 2026-09-15 14:02+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -98,13 +98,13 @@ msgctxt "@item:inlist"
 msgid "Bikram Sambat"
 msgstr "維克拉姆曆"
 
-#: config/qml/AlternateCalendarConfig.qml:48
+#: config/qml/AlternateCalendarConfig.qml:49
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "曆法："
 
-#: config/qml/AlternateCalendarConfig.qml:69
+#: config/qml/AlternateCalendarConfig.qml:70
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -112,19 +112,19 @@ msgid ""
 "any crescent visibility criteria."
 msgstr "這個曆法完全是使用天文計算所定義的。它不考慮任何弦月可見度的條件。"
 
-#: config/qml/AlternateCalendarConfig.qml:77
+#: config/qml/AlternateCalendarConfig.qml:78
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "日期位移："
 
-#: config/qml/AlternateCalendarConfig.qml:88
+#: config/qml/AlternateCalendarConfig.qml:89
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 天"
 
-#: config/qml/AlternateCalendarConfig.qml:91
+#: config/qml/AlternateCalendarConfig.qml:92
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

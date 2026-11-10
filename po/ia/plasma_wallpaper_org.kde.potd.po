@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-09 00:46+0000\n"
+"POT-Creation-Date: 2026-11-10 00:59+0000\n"
 "PO-Revision-Date: 2026-04-13 10:55+0200\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
@@ -18,61 +18,61 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 25.04.0\n"
 
-#: package/contents/ui/config.qml:58
+#: package/contents/ui/config.qml:59
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Positioning:"
 msgstr "Positionar:"
 
-#: package/contents/ui/config.qml:61
+#: package/contents/ui/config.qml:62
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled and cropped"
 msgstr "Scalate e Taliate"
 
-#: package/contents/ui/config.qml:65
+#: package/contents/ui/config.qml:66
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled"
 msgstr "Scalate"
 
-#: package/contents/ui/config.qml:69
+#: package/contents/ui/config.qml:70
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Scaled, keep proportions"
 msgstr "Scalate, mantene le proportiones"
 
-#: package/contents/ui/config.qml:73
+#: package/contents/ui/config.qml:74
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Centered"
 msgstr "Centrate"
 
-#: package/contents/ui/config.qml:77
+#: package/contents/ui/config.qml:78
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tiled"
 msgstr "Tegulate"
 
-#: package/contents/ui/config.qml:98
+#: package/contents/ui/config.qml:99
 #, kde-format
 msgctxt "@label:chooser"
 msgid "Background color:"
 msgstr "Color de fundo:"
 
-#: package/contents/ui/config.qml:99
+#: package/contents/ui/config.qml:100
 #, kde-format
 msgctxt "@title:window"
 msgid "Select Background Color"
 msgstr "Selige le color de fundo"
 
-#: package/contents/ui/config.qml:103
+#: package/contents/ui/config.qml:104
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Provider:"
 msgstr "Fornitor (Provider):"
 
-#: package/contents/ui/config.qml:122
+#: package/contents/ui/config.qml:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -83,116 +83,116 @@ msgstr ""
 "sensibile o detestabile. Usa prudentia si iste imagines essera monstrate in "
 "publico."
 
-#: package/contents/ui/config.qml:131
+#: package/contents/ui/config.qml:132
 #, kde-format
 msgctxt "@option:check"
 msgid "Update when using metered network connection"
 msgstr "Actualisa quando usa connexion de rete misurate (metered)"
 
-#: package/contents/ui/config.qml:146
+#: package/contents/ui/config.qml:147
 #, kde-format
 msgctxt "@label"
 msgid "Today's picture:"
 msgstr "Pictura de hodie:"
 
-#: package/contents/ui/config.qml:162
+#: package/contents/ui/config.qml:166
 #, kde-format
 msgctxt "@label"
 msgid "Title:"
 msgstr "Titulo:"
 
-#: package/contents/ui/config.qml:177
+#: package/contents/ui/config.qml:181
 #, kde-format
 msgctxt "@label"
 msgid "Author:"
 msgstr "Autor:"
 
-#: package/contents/ui/config.qml:196
+#: package/contents/ui/config.qml:200
 #, kde-format
 msgctxt "@action:button"
 msgid "Open Containing Folder"
 msgstr "Aperi dossier continente"
 
-#: package/contents/ui/config.qml:200
+#: package/contents/ui/config.qml:204
 #, kde-format
 msgctxt "@info:whatsthis for a button"
 msgid "Open the destination folder where the wallpaper image was saved."
 msgstr ""
 "Aperi le dossier de detination ubi le imagine de papiro es salveguardate."
 
-#: package/contents/ui/main.qml:22
+#: package/contents/ui/main.qml:23
 #, kde-format
 msgid "Open Wallpaper Image"
 msgstr "Aperi imagine de fundo de schermo"
 
-#: package/contents/ui/main.qml:27
+#: package/contents/ui/main.qml:28
 #, kde-format
 msgctxt "@action:inmenu Placeholder is title of image"
 msgid "About “%1”"
 msgstr "A proposito de “%1”"
 
-#: package/contents/ui/main.qml:28
+#: package/contents/ui/main.qml:29
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "About This Image"
 msgstr "Re iste imagine"
 
-#: package/contents/ui/WallpaperDelegate.qml:137
+#: package/contents/ui/WallpaperDelegate.qml:139
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Today's picture"
 msgstr "Pictura de hodie"
 
-#: package/contents/ui/WallpaperDelegate.qml:138
+#: package/contents/ui/WallpaperDelegate.qml:140
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Loading"
 msgstr "Cargante"
 
-#: package/contents/ui/WallpaperDelegate.qml:139
+#: package/contents/ui/WallpaperDelegate.qml:141
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Unavailable"
 msgstr "Non disponibile"
 
-#: package/contents/ui/WallpaperDelegate.qml:140
+#: package/contents/ui/WallpaperDelegate.qml:142
 #, kde-format
 msgctxt "@info:whatsthis for an image %1 title %2 author"
 msgid "%1 Author: %2. Right-click on the image to see more actions."
 msgstr "%1 Autor; %2, Pulsa a dextera sur le image pro vider plus actiones."
 
-#: package/contents/ui/WallpaperDelegate.qml:141
+#: package/contents/ui/WallpaperDelegate.qml:143
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "The wallpaper is being fetched from the Internet."
 msgstr "Le fundo de schermo reportate ab le internet."
 
-#: package/contents/ui/WallpaperDelegate.qml:142
+#: package/contents/ui/WallpaperDelegate.qml:144
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Failed to fetch the wallpaper from the Internet."
 msgstr "Falleva a reportar le fundo de schermo ab le Internet."
 
-#: package/contents/ui/WallpaperPreview.qml:48
+#: package/contents/ui/WallpaperPreview.qml:57
 #, kde-format
 msgctxt "@action:inmenu wallpaper preview menu"
 msgid "Save Image as…"
 msgstr "Salveguarda imagine como…"
 
-#: package/contents/ui/WallpaperPreview.qml:51
+#: package/contents/ui/WallpaperPreview.qml:60
 #, kde-format
 msgctxt "@info:whatsthis for a button and a menu item"
 msgid "Save today's picture to local disk"
 msgstr "Salveguarda le pictura del die al disco local"
 
-#: package/contents/ui/WallpaperPreview.qml:57
+#: package/contents/ui/WallpaperPreview.qml:66
 #, kde-format
 msgctxt ""
 "@action:inmenu wallpaper preview menu, will open the website of the wallpaper"
 msgid "Open Link in Browser…"
 msgstr "Aperi ligamine in Navigator..."
 
-#: package/contents/ui/WallpaperPreview.qml:60
+#: package/contents/ui/WallpaperPreview.qml:69
 #, kde-format
 msgctxt "@info:whatsthis for a menu item"
 msgid "Open the website of today's picture in the default browser"
