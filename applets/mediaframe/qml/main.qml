@@ -186,11 +186,25 @@ PlasmoidItem {
         onTriggered: Qt.openUrlExternally(main.activeSource)
     }
 
-    fullRepresentation: Item {
+    fullRepresentation: DragDrop.DropArea {
         id: fullRepresentation
 
         property Image frontImage: image1
         property Image bufferImage: image2
+
+        onDrop: event => {
+            var mimeData = event.mimeData
+            if (mimeData.hasUrls) {
+                var urls = mimeData.urls
+                for (var i = 0, j = urls.length; i < j; ++i) {
+                    var url = urls[i]
+                    var type = items.isDir(url) ? "folder" : "file"
+                    var item = { "path":url, "type":type }
+                    main.addItem(item)
+                }
+            }
+            event.accept(Qt.CopyAction)
+        }
 
         // This timer prevents reloading the image too often when resizing,
         // to minimize excessively re-reading the file on disk
@@ -293,25 +307,6 @@ PlasmoidItem {
             target: main
             function onRestartAnimationRequested() {
                 faderAnimation.restart()
-            }
-        }
-
-        DragDrop.DropArea {
-            id: dropArea
-            anchors.fill: parent
-
-            onDrop: event => {
-                var mimeData = event.mimeData
-                if (mimeData.hasUrls) {
-                    var urls = mimeData.urls
-                    for (var i = 0, j = urls.length; i < j; ++i) {
-                        var url = urls[i]
-                        var type = items.isDir(url) ? "folder" : "file"
-                        var item = { "path":url, "type":type }
-                        main.addItem(item)
-                    }
-                }
-                event.accept(Qt.CopyAction)
             }
         }
 
