@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 17:46+0000\n"
+"POT-Creation-Date: 2026-11-10 08:12+0000\n"
 "PO-Revision-Date: 2024-01-28 12:45-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -18,7 +18,7 @@ msgstr ""
 "X-Generator: Lokalize 23.08.4\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: qml/ColorCircle.qml:27
+#: qml/ColorCircle.qml:33
 #, fuzzy, kde-format
 #| msgctxt "@info:usagetip"
 #| msgid "No colors"
@@ -26,19 +26,19 @@ msgctxt "@info"
 msgid "No Saved Colors"
 msgstr "ਕੋਈ ਰੰਗ ਨਹੀਂ"
 
-#: qml/ColorCircle.qml:41
+#: qml/ColorCircle.qml:47
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr ""
 
-#: qml/CompactRepresentation.qml:84
+#: qml/CompactRepresentation.qml:107
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "ਰੰਗ ਚੁਣੋ"
 
-#: qml/CompactRepresentation.qml:91
+#: qml/CompactRepresentation.qml:114
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -52,85 +52,85 @@ msgctxt "@title"
 msgid "General"
 msgstr "ਆਮ"
 
-#: qml/configGeneral.qml:21
+#: qml/configGeneral.qml:24
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "ਡਿਫਾਲਟ ਰੰਗ ਫਾਰਮੈਟ:"
 
-#: qml/configGeneral.qml:31
+#: qml/configGeneral.qml:34
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "ਰੰਗ ਨੂੰ ਆਪਣੇ-ਆਪ ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ"
 
-#: qml/configGeneral.qml:39
+#: qml/configGeneral.qml:42
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr ""
 
-#: qml/configGeneral.qml:40
+#: qml/configGeneral.qml:43
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "ਰੰਗ ਚੁਣੋ"
 
-#: qml/configGeneral.qml:46
+#: qml/configGeneral.qml:49
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "ਅਤੀਤ ਵੇਖਾਓ"
 
-#: qml/configGeneral.qml:57
+#: qml/configGeneral.qml:60
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
 msgstr "ਝਲਕ ਗਿਣਤੀ:"
 
-#: qml/main.qml:121
+#: qml/main.qml:88
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "ਰੰਗ ਡਾਈਲਾਗ ਖੋਲ੍ਹੋ"
 
-#: qml/main.qml:126
+#: qml/main.qml:93
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "ਅਤੀਤ ਨੂੰ ਮਿਟਾਓ"
 
-#: qml/main.qml:134
+#: qml/main.qml:101
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "ਅਤੀਤ ਨੂੰ ਵੇਖੋ"
 
-#: qml/main.qml:142
+#: qml/main.qml:109
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "ਕਲਿੱਪਬੋਰਡ ਵਿੱਚ ਕਾਪੀ ਕਰੋ"
 
-#: qml/main.qml:180
+#: qml/main.qml:153
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "ਕੋਈ ਰੰਗ ਨਹੀਂ"
 
-#: qml/main.qml:187
+#: qml/main.qml:160
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "ਰੰਗ ਚੁਣੋ"
 
-#: qml/main.qml:373
+#: qml/main.qml:348
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "ਕਾਪੀ ਕੀਤਾ!"
 
-#: qml/main.qml:384
+#: qml/main.qml:360
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

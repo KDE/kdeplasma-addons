@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 17:46+0000\n"
+"POT-Creation-Date: 2026-11-10 08:12+0000\n"
 "PO-Revision-Date: 2026-02-18 15:48+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -21,25 +21,25 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 "X-Generator: Lokalize 25.12.2\n"
 
-#: qml/ColorCircle.qml:27
+#: qml/ColorCircle.qml:33
 #, kde-format
 msgctxt "@info"
 msgid "No Saved Colors"
 msgstr "Kaydedilmiş renk yok"
 
-#: qml/ColorCircle.qml:41
+#: qml/ColorCircle.qml:47
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Renk kodunu kopyalamak için orta tıklayın"
 
-#: qml/CompactRepresentation.qml:84
+#: qml/CompactRepresentation.qml:107
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Bir renk seç"
 
-#: qml/CompactRepresentation.qml:91
+#: qml/CompactRepresentation.qml:114
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -55,85 +55,85 @@ msgctxt "@title"
 msgid "General"
 msgstr "Genel"
 
-#: qml/configGeneral.qml:21
+#: qml/configGeneral.qml:24
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Öntanımlı renk biçimi:"
 
-#: qml/configGeneral.qml:31
+#: qml/configGeneral.qml:34
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Rengi kendiliğinden panoya kopyala"
 
-#: qml/configGeneral.qml:39
+#: qml/configGeneral.qml:42
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "Klavye kısayoluna basıldığında:"
 
-#: qml/configGeneral.qml:40
+#: qml/configGeneral.qml:43
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Bir renk seç"
 
-#: qml/configGeneral.qml:46
+#: qml/configGeneral.qml:49
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Geçmişi göster"
 
-#: qml/configGeneral.qml:57
+#: qml/configGeneral.qml:60
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
 msgstr "Önizleme sayısı:"
 
-#: qml/main.qml:121
+#: qml/main.qml:88
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Renk Penceresini Aç"
 
-#: qml/main.qml:126
+#: qml/main.qml:93
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Geçmişi Temizle"
 
-#: qml/main.qml:134
+#: qml/main.qml:101
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "Geçmişi Görüntüle"
 
-#: qml/main.qml:142
+#: qml/main.qml:109
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Panoya Kopyala"
 
-#: qml/main.qml:180
+#: qml/main.qml:153
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "Renk yok"
 
-#: qml/main.qml:187
+#: qml/main.qml:160
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Renk Seç"
 
-#: qml/main.qml:373
+#: qml/main.qml:348
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopyalandı!"
 
-#: qml/main.qml:384
+#: qml/main.qml:360
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

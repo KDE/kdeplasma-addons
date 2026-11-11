@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 17:46+0000\n"
+"POT-Creation-Date: 2026-11-10 08:12+0000\n"
 "PO-Revision-Date: 2023-05-21 14:50+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 23.03.70\n"
 
-#: qml/ColorCircle.qml:27
+#: qml/ColorCircle.qml:33
 #, fuzzy, kde-format
 #| msgctxt "@info:usagetip"
 #| msgid "No colors"
@@ -26,19 +26,19 @@ msgctxt "@info"
 msgid "No Saved Colors"
 msgstr "No colours"
 
-#: qml/ColorCircle.qml:41
+#: qml/ColorCircle.qml:47
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Middle-click to copy the colour code"
 
-#: qml/CompactRepresentation.qml:84
+#: qml/CompactRepresentation.qml:107
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Pick colour"
 
-#: qml/CompactRepresentation.qml:91
+#: qml/CompactRepresentation.qml:114
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -54,85 +54,85 @@ msgctxt "@title"
 msgid "General"
 msgstr "General"
 
-#: qml/configGeneral.qml:21
+#: qml/configGeneral.qml:24
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Default colour format:"
 
-#: qml/configGeneral.qml:31
+#: qml/configGeneral.qml:34
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Automatically copy colour to clipboard"
 
-#: qml/configGeneral.qml:39
+#: qml/configGeneral.qml:42
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "When pressing the keyboard shortcut:"
 
-#: qml/configGeneral.qml:40
+#: qml/configGeneral.qml:43
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Pick a colour"
 
-#: qml/configGeneral.qml:46
+#: qml/configGeneral.qml:49
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"
 msgstr "Show history"
 
-#: qml/configGeneral.qml:57
+#: qml/configGeneral.qml:60
 #, kde-format
 msgctxt "@label"
 msgid "Preview count:"
 msgstr "Preview count:"
 
-#: qml/main.qml:121
+#: qml/main.qml:88
 #, kde-format
 msgctxt "@action"
 msgid "Open Color Dialog"
 msgstr "Open Colour Dialogue"
 
-#: qml/main.qml:126
+#: qml/main.qml:93
 #, kde-format
 msgctxt "@action"
 msgid "Clear History"
 msgstr "Clear History"
 
-#: qml/main.qml:134
+#: qml/main.qml:101
 #, kde-format
 msgctxt "@action"
 msgid "View History"
 msgstr "View History"
 
-#: qml/main.qml:142
+#: qml/main.qml:109
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy to Clipboard"
 msgstr "Copy to Clipboard"
 
-#: qml/main.qml:180
+#: qml/main.qml:153
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "No colors"
 msgstr "No colours"
 
-#: qml/main.qml:187
+#: qml/main.qml:160
 #, kde-format
 msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Pick Colour"
 
-#: qml/main.qml:373
+#: qml/main.qml:348
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Copied!"
 
-#: qml/main.qml:384
+#: qml/main.qml:360
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"
