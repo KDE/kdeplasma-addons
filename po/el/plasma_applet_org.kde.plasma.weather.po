@@ -118,10 +118,10 @@ msgid "WSW"
 msgstr "ΔΝΔ"
 
 #: i18n.dat:17
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "wind direction"
 msgid "VR"
-msgstr ""
+msgstr "Μεταβλ."
 
 #: i18n.dat:18
 #, kde-format
@@ -130,10 +130,10 @@ msgid "Calm"
 msgstr "Ήρεμα"
 
 #: ions/bbcukmet/ion_bbcukmet.cpp:680
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from BBC Weather"
-msgstr ""
+msgstr "Δεδομένα από BBC Weather"
 
 #: ions/bbcukmet/ion_bbcukmet.cpp:719 ions/envcan/ion_envcan.cpp:1606
 #, fuzzy, kde-format
@@ -157,257 +157,257 @@ msgid "Steady"
 msgstr "Σταθερή"
 
 #: ions/dwd/ion_dwd.cpp:656
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "credit line, don't change name!"
 msgid "Source: Deutscher Wetterdienst"
-msgstr ""
+msgstr "Πηγή: Deutscher Wetterdienst"
 
 #: ions/envcan/ion_envcan.cpp:1537
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "credit line, keep string short"
 msgid "Data from Environment and Climate Change Canada"
-msgstr ""
+msgstr "Δεδομένα από Environment and Climate Change Canada"
 
 #: ions/noaa/ion_noaa.cpp:445
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "credit line, keep string short)"
 msgid "Data from NOAA National Weather Service"
-msgstr ""
+msgstr "Δεδομένα από NOAA National Weather Service"
 
 #. i18n: The forecast summary can include several single conditions that follow
 #. a temporary sequence, separated by " then ". Also include spaces if necessary.
 #. If there is no suitable separator, a sentence separator might do.
 #: ions/noaa/ion_noaa.cpp:763
-#, kde-format
+#, fuzzy, kde-format
 msgctxt ""
 "Separator between forecast conditions that follow a temporal sequence (ex. "
 "\"Rain then Sunny\")"
 msgid " then "
-msgstr ""
+msgstr " και μετά "
 
 #: ions/open-meteo/ion_open_meteo.cpp:228
 #: ions/open-meteo/ion_open_meteo.cpp:229
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "few clouds"
-msgstr ""
+msgstr "λίγα σύννεφα"
 
 #: ions/open-meteo/ion_open_meteo.cpp:230
 #: ions/open-meteo/ion_open_meteo.cpp:231
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "cloudy"
-msgstr ""
+msgstr "συννεφιά"
 
 #: ions/open-meteo/ion_open_meteo.cpp:232
 #: ions/open-meteo/ion_open_meteo.cpp:233
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "overcast"
-msgstr ""
+msgstr "πυκνή συννεφιά"
 
 #: ions/open-meteo/ion_open_meteo.cpp:234
 #: ions/open-meteo/ion_open_meteo.cpp:235
 #: ions/open-meteo/ion_open_meteo.cpp:236
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "haze"
-msgstr ""
+msgstr "αχλή"
 
 #: ions/open-meteo/ion_open_meteo.cpp:237
 #: ions/open-meteo/ion_open_meteo.cpp:238
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "fog with icing"
-msgstr ""
+msgstr "ομίχλη με παγετό"
 
 #: ions/open-meteo/ion_open_meteo.cpp:239
 #: ions/open-meteo/ion_open_meteo.cpp:240
 #: ions/open-meteo/ion_open_meteo.cpp:242
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "drizzle"
-msgstr ""
+msgstr "ψιχάλα"
 
 #: ions/open-meteo/ion_open_meteo.cpp:241
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "light drizzle"
-msgstr ""
+msgstr "ασθενής ψιχάλα"
 
 #: ions/open-meteo/ion_open_meteo.cpp:243
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "heavy drizzle"
-msgstr ""
+msgstr "έντονη ψιχάλα"
 
 #: ions/open-meteo/ion_open_meteo.cpp:244
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "freezing drizzle"
-msgstr ""
+msgstr "παγωμένη ψιχάλα"
 
 #: ions/open-meteo/ion_open_meteo.cpp:245
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "heavy freezing drizzle"
-msgstr ""
+msgstr "έντονη παγωμένη ψιχάλα"
 
 #: ions/open-meteo/ion_open_meteo.cpp:246
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "rain"
-msgstr ""
+msgstr "βροχή"
 
 #: ions/open-meteo/ion_open_meteo.cpp:247
 #: ions/open-meteo/ion_open_meteo.cpp:248
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "light rain"
-msgstr ""
+msgstr "ασθενής βροχή"
 
 #: ions/open-meteo/ion_open_meteo.cpp:249
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "moderate rain"
-msgstr ""
+msgstr "μέτρια βροχή"
 
 #: ions/open-meteo/ion_open_meteo.cpp:250
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "heavy rain"
-msgstr ""
+msgstr "έντονη βροχή"
 
 #: ions/open-meteo/ion_open_meteo.cpp:251
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "light freezing rain"
-msgstr ""
+msgstr "ασθενής παγωμένη βροχή"
 
 #: ions/open-meteo/ion_open_meteo.cpp:252
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "freezing rain"
-msgstr ""
+msgstr "παγωμένη βροχή"
 
 #: ions/open-meteo/ion_open_meteo.cpp:253
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "light rain snow"
-msgstr ""
+msgstr "ασθενές χιονόνερο"
 
 #: ions/open-meteo/ion_open_meteo.cpp:254
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "heavy rain snow"
-msgstr ""
+msgstr "έντονο χιονόνερο"
 
 #: ions/open-meteo/ion_open_meteo.cpp:255
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "snow"
-msgstr ""
+msgstr "χιόνι"
 
 #: ions/open-meteo/ion_open_meteo.cpp:256
 #: ions/open-meteo/ion_open_meteo.cpp:257
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "light snow"
-msgstr ""
+msgstr "ασθενής χιονόπτωση"
 
 #: ions/open-meteo/ion_open_meteo.cpp:258
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "moderate snow"
-msgstr ""
+msgstr "μέτρια χιονόπτωση"
 
 #: ions/open-meteo/ion_open_meteo.cpp:259
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "heavy snow"
-msgstr ""
+msgstr "έντονη χιονόπτωση"
 
 #: ions/open-meteo/ion_open_meteo.cpp:260
 #: ions/open-meteo/ion_open_meteo.cpp:262
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "showers"
-msgstr ""
+msgstr "μπόρες"
 
 #: ions/open-meteo/ion_open_meteo.cpp:261
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "light showers"
-msgstr ""
+msgstr "ασθενείς μπόρες"
 
 #: ions/open-meteo/ion_open_meteo.cpp:263
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "heavy showers"
-msgstr ""
+msgstr "έντονες μπόρες"
 
 #: ions/open-meteo/ion_open_meteo.cpp:264
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "light snow rain showers"
-msgstr ""
+msgstr "ασθενείς μπόρες χιονόνερου"
 
 #: ions/open-meteo/ion_open_meteo.cpp:265
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "heavy snow rain showers"
-msgstr ""
+msgstr "έντονες μπόρες χιονόνερου"
 
 #: ions/open-meteo/ion_open_meteo.cpp:266
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "light snow showers"
-msgstr ""
+msgstr "ασθενείς χιονοπτώσεις"
 
 #: ions/open-meteo/ion_open_meteo.cpp:267
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "snow showers"
-msgstr ""
+msgstr "χιονοπτώσεις"
 
 #: ions/open-meteo/ion_open_meteo.cpp:268
 #: ions/open-meteo/ion_open_meteo.cpp:269
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "thunderstorm"
-msgstr ""
+msgstr "καταιγίδα"
 
 #: ions/open-meteo/ion_open_meteo.cpp:270
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "light thunderstorm"
-msgstr ""
+msgstr "ασθενής καταιγίδα"
 
 #: ions/open-meteo/ion_open_meteo.cpp:271
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "heavy thunderstorm"
-msgstr ""
+msgstr "ισχυρή καταιγίδα"
 
 #: ions/open-meteo/ion_open_meteo.cpp:272
 #: ions/open-meteo/ion_open_meteo.cpp:290
 #: ions/open-meteo/ion_open_meteo.cpp:292
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "n/a"
-msgstr ""
+msgstr "μ/δ"
 
 #: ions/open-meteo/ion_open_meteo.cpp:275
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "sunny"
-msgstr ""
+msgstr "ηλιοφάνεια"
 
 #: ions/open-meteo/ion_open_meteo.cpp:278
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "weather condition"
 msgid "clear sky"
-msgstr ""
+msgstr "αίθριος"
 
 #: ions/open-meteo/ion_open_meteo.cpp:394
 #, kde-format
@@ -434,10 +434,10 @@ msgid "-"
 msgstr "-"
 
 #: qml/cards/ForecastDelegate.qml:136
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "Probability of precipitation in percentage"
 msgid "☂%1%"
-msgstr ""
+msgstr "☂%1%"
 
 #: qml/config/config.qml:13
 #, kde-format
@@ -446,10 +446,10 @@ msgid "Weather Station"
 msgstr "Μετεωρολογικός σταθμός"
 
 #: qml/config/config.qml:19
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title"
 msgid "Appearance"
-msgstr ""
+msgstr "Εμφάνιση"
 
 #: qml/config/config.qml:25
 #, kde-format
@@ -466,10 +466,10 @@ msgid ""
 msgstr ""
 
 #: qml/config/ConfigAppearance.qml:54
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@title:group"
 msgid "Compact Mode"
-msgstr ""
+msgstr "Συμπαγής λειτουργία"
 
 #: qml/config/ConfigAppearance.qml:62
 #, fuzzy, kde-format
@@ -479,28 +479,28 @@ msgid "Show temperature:"
 msgstr "Θερμοκρασία:"
 
 #: qml/config/ConfigAppearance.qml:66
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
-msgstr ""
+msgstr "Πάνω από το εικονίδιο"
 
 #: qml/config/ConfigAppearance.qml:74
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
-msgstr ""
+msgstr "Δίπλα στο εικονίδιο"
 
 #: qml/config/ConfigAppearance.qml:82
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
-msgstr ""
+msgstr "Να μην εμφανίζεται"
 
 #: qml/config/ConfigAppearance.qml:93
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
-msgstr ""
+msgstr "Εμφάνιση στην υπόδειξη:"
 
 #: qml/config/ConfigAppearance.qml:94
 #, kde-format
@@ -513,7 +513,7 @@ msgstr "Θερμοκρασία"
 #| msgid "Wind: %1"
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
-msgstr "Άνεμος: %1"
+msgstr "Άνεμος"
 
 #: qml/config/ConfigAppearance.qml:106
 #, kde-format
@@ -527,7 +527,7 @@ msgstr "Πίεση"
 #| msgid "Humidity: %1%2"
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
-msgstr "Υγρασία: %1%2"
+msgstr "Υγρασία"
 
 #: qml/config/ConfigAppearance.qml:122
 #, fuzzy, kde-format
@@ -583,8 +583,8 @@ msgstr "Ενημέρωση κάθε:"
 #| msgid " min"
 msgid "%1 minute"
 msgid_plural "%1 minutes"
-msgstr[0] " λεπτά"
-msgstr[1] " λεπτά"
+msgstr[0] "%1 λεπτό"
+msgstr[1] "%1 λεπτά"
 
 #: qml/config/ConfigWeatherStation.qml:74
 #, kde-format
@@ -593,16 +593,16 @@ msgid "Location:"
 msgstr "Τοποθεσία:"
 
 #: qml/config/ConfigWeatherStation.qml:87
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "No location is currently selected"
 msgid "None selected"
-msgstr ""
+msgstr "Καμία επιλογή"
 
 #: qml/config/ConfigWeatherStation.qml:93
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@label"
 msgid "Provider:"
-msgstr ""
+msgstr "Πάροχος:"
 
 #: qml/config/ConfigWeatherStation.qml:131
 #, fuzzy, kde-format
@@ -631,25 +631,28 @@ msgid "No weather stations found for '%1'"
 msgstr "Δε βρέθηκαν μετεωρολογικοί σταθμοί για '%1'"
 
 #: qml/config/ConfigWeatherStation.qml:244
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to change your location"
-msgstr ""
+msgstr "Αναζητήστε μετεωρολογικό σταθμό για να αλλάξετε την τοποθεσία σας"
 
 #: qml/config/ConfigWeatherStation.qml:246
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info"
 msgid "Search for a weather station to set your location"
-msgstr ""
+msgstr "Αναζητήστε μετεωρολογικό σταθμό για να ορίσετε την τοποθεσία σας"
 
 #: qml/config/ConfigWeatherStation.qml:249
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info:usagetip"
 msgid ""
 "If you've used this weather station in the past, it's possible that a server "
 "outage at the weather station provider has made it temporarily unavailable. "
 "Try again later."
 msgstr ""
+"Αν έχετε χρησιμοποιήσει αυτόν τον μετεωρολογικό σταθμό στο παρελθόν, ίσως "
+"μια διακοπή στον διακομιστή του παρόχου τον έχει κάνει προσωρινά μη "
+"διαθέσιμο. Δοκιμάστε ξανά αργότερα."
 
 #: qml/DayForecastGraph.qml:42 qml/HourlyForecastGraph.qml:44
 #, fuzzy, kde-format
@@ -687,7 +690,7 @@ msgstr ""
 #| msgid "Dewpoint: %1"
 msgctxt "@label ground temperature"
 msgid "Dewpoint"
-msgstr "Σημείο υγροποίησης: %1"
+msgstr "Σημείο υγροποίησης"
 
 #: qml/DetailsView.qml:40
 #, fuzzy, kde-format
@@ -703,7 +706,7 @@ msgstr "Πίεση"
 #| msgid "Pressure Tendency: %1"
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure tendency"
-msgstr "Τάση πίεσης: %1"
+msgstr "Τάση πίεσης"
 
 #: qml/DetailsView.qml:50
 #, fuzzy, kde-format
@@ -719,7 +722,7 @@ msgstr "Ορατότητα:"
 #| msgid "Humidity: %1%2"
 msgctxt "@label"
 msgid "Humidity"
-msgstr "Υγρασία: %1%2"
+msgstr "Υγρασία"
 
 #: qml/DetailsView.qml:68
 #, fuzzy, kde-format
@@ -727,7 +730,7 @@ msgstr "Υγρασία: %1%2"
 #| msgid "Wind Gust: %1 %2"
 msgctxt "@label"
 msgid "Wind gust"
-msgstr "Ριπή ανέμου: %1 %2"
+msgstr "Ριπή ανέμου"
 
 #: qml/DetailsView.qml:73
 #, fuzzy, kde-format
@@ -786,7 +789,7 @@ msgstr "Μετεωρολογικός σταθμός"
 #| msgid "Update weather information every"
 msgctxt "@info:status PlaceholderMessage text"
 msgid "Unable to retrieve weather information for %1"
-msgstr "Ενημέρωση πληροφοριών καιρού κάθε"
+msgstr "Δεν ήταν δυνατή η ανάκτηση πληροφοριών καιρού για %1"
 
 #: qml/FullRepresentation.qml:95
 #, fuzzy, kde-format
@@ -796,12 +799,14 @@ msgid "Unable to retrieve weather information"
 msgstr "Ενημέρωση πληροφοριών καιρού κάθε"
 
 #: qml/FullRepresentation.qml:96
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info:usagetip"
 msgid ""
 "The network request timed out, possibly due to a server outage at the "
 "weather station provider. Check again later."
 msgstr ""
+"Το αίτημα δικτύου έληξε, ίσως λόγω διακοπής στον διακομιστή του παρόχου. "
+"Δοκιμάστε ξανά αργότερα."
 
 #: qml/FullRepresentation.qml:105 qml/main.qml:118
 #, fuzzy, kde-format
@@ -827,8 +832,8 @@ msgctxt ""
 "watches, ...) issued"
 msgid "%1 Notice"
 msgid_plural "%1 Notices"
-msgstr[0] "Ειδοποιήσεις"
-msgstr[1] "Ειδοποιήσεις"
+msgstr[0] "%1 ειδοποίηση"
+msgstr[1] "%1 ειδοποιήσεις"
 
 #: qml/main.qml:83
 #, kde-format
@@ -837,19 +842,20 @@ msgid "Calm"
 msgstr "Ήρεμα"
 
 #: qml/main.qml:105
-#, kde-format
+#, fuzzy, kde-format
 msgctxt ""
 "@info:usagetip Minimize the length of this string so it is as short as "
 "possible! Omitting or changing words is fine as long as the original meaning "
 "is retained."
 msgid "Set up Weather Report…"
-msgstr ""
+msgstr "Ρύθμιση καιρού…"
 
 #: qml/main.qml:114
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@info:tooltip"
 msgid "Click to choose a location and monitor the weather there"
 msgstr ""
+"Κάντε κλικ για να επιλέξετε τοποθεσία και να παρακολουθείτε τον καιρό εκεί"
 
 #: qml/main.qml:131
 #, kde-format
@@ -881,13 +887,13 @@ msgstr "%1 (%2)"
 #| msgid "Humidity: %1%2"
 msgctxt "@info:tooltip fragment, %1 is humidity in configured unit"
 msgid "Humidity: %1"
-msgstr "Υγρασία: %1%2"
+msgstr "Υγρασία: %1"
 
 #: qml/NoticesView.qml:61 qml/WarningsPage.qml:65
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Show more information"
-msgstr ""
+msgstr "Περισσότερες πληροφορίες"
 
 #: qml/StackedView.qml:56
 #, kde-format
@@ -919,13 +925,13 @@ msgstr[0] "1 ημέρα"
 msgstr[1] "%1 ημέρες"
 
 #: qml/TopPanel.qml:129
-#, kde-format
+#, fuzzy, kde-format
 msgctxt ""
 "@label %1 is the perceived temperature due to conditions like wind or "
 "humidity. Use the common phrasing for this concept and keep it short, adding "
 "a colon if necessary"
 msgid "Feels like %1"
-msgstr ""
+msgstr "Αίσθηση %1"
 
 #: qml/WeatherPage.qml:96
 #, kde-format
@@ -979,7 +985,7 @@ msgstr "%1 %2"
 #| msgid "%1 %2"
 msgctxt "value percentsymbol"
 msgid "%1 %"
-msgstr "%1 %2"
+msgstr "%1 %"
 
 #: util.cpp:72
 #, kde-format
@@ -1002,31 +1008,31 @@ msgid "N"
 msgstr "Β"
 
 #: weatherdata/lastobservation.cpp:262
-#, kde-format
+#, fuzzy, kde-format
 msgid "Low"
-msgstr ""
+msgstr "Χαμηλός"
 
 #: weatherdata/lastobservation.cpp:264
-#, kde-format
+#, fuzzy, kde-format
 msgid "Moderate"
-msgstr ""
+msgstr "Μέτριος"
 
 #: weatherdata/lastobservation.cpp:266
 #, fuzzy, kde-format
 #| msgctxt "High temperature"
 #| msgid "High: %1"
 msgid "High"
-msgstr "Υψηλό: %1"
+msgstr "Υψηλός"
 
 #: weatherdata/lastobservation.cpp:268
-#, kde-format
+#, fuzzy, kde-format
 msgid "Very high"
-msgstr ""
+msgstr "Πολύ υψηλός"
 
 #: weatherdata/lastobservation.cpp:270
-#, kde-format
+#, fuzzy, kde-format
 msgid "Extreme"
-msgstr ""
+msgstr "Ακραίος"
 
 #~ msgid "N/A"
 #~ msgstr "Μη διαθέσιμη"
