@@ -23,6 +23,7 @@
         "Description[sl]": "Vreme od Open-Meteo",
         "Description[tr]": "Open-Meteo sağlayıcısından hava durumu bilgileri",
         "Description[uk]": "Прогноз погоди від Open-Meteo",
+        "Description[zh_TW]": "來自 Open-Meteo 的天氣資料",
         "Icon": "noneyet",
         "Name": "Open-Meteo",
         "Name[ar]": "أوبن ميتيو",
@@ -45,7 +46,8 @@
         "Name[sk]": "Open-Meteo",
         "Name[sl]": "Open-Meteo",
         "Name[tr]": "Open-Meteo",
-        "Name[uk]": "Open-Meteo"
+        "Name[uk]": "Open-Meteo",
+        "Name[zh_TW]": "Open-Meteo"
     },
     "Quality": 1
 }
