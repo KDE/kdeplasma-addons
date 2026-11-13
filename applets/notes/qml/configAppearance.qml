@@ -22,20 +22,23 @@ KCM.GridViewKCM {
 
     forceFooterSeparator: true
 
-    header: Kirigami.FormLayout {
-        QQC2.SpinBox {
-            id: fontSizeSpinBox
+    header: Kirigami.Form {
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@label:spinbox", "Text font size:")
+                contentItem: QQC2.SpinBox {
+                    id: fontSizeSpinBox
 
-            from: 4
-            to: 128
-            textFromValue: function (value) {
-                return i18nc("@item:valuesuffix %1 is font size in points", "%1pt", value)
+                    from: 4
+                    to: 128
+                    textFromValue: function (value) {
+                        return i18nc("@item:valuesuffix %1 is font size in points", "%1pt", value)
+                    }
+                    valueFromText: function (text) {
+                        return parseInt(text)
+                    }
+                }
             }
-            valueFromText: function (text) {
-                return parseInt(text)
-            }
-
-            Kirigami.FormData.label: i18nc("@label:spinbox", "Text font size:")
         }
     }
 
