@@ -19,6 +19,7 @@ PlasmaComponents3.BusyIndicator {
     property int jobRemaining: 0
 
     signal jobDone
+    signal aboutToDestroy
 
     onJobDone: {
         jobRemaining -= 1;
@@ -46,7 +47,7 @@ PlasmaComponents3.BusyIndicator {
         running: true
 
         onTriggered: {
-            loadingIndicator.parent.loadingIndicator = null;
+            loadingIndicator.aboutToDestroy();
             loadingIndicator.destroy();
         }
     }

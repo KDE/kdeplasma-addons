@@ -113,7 +113,7 @@ PlasmoidItem {
                 id: sessionsMenu
                 model: KItemModels.KSortFilterProxyModel {
                     sourceModel: ProfilesModel {
-                        id: model
+                        id: profilesModel
                         appName: "kate"
                     }
                     filterRoleName: "name"

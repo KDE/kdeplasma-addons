@@ -61,7 +61,7 @@ Item {
                 }
             }
 
-            ImageWidget {
+            Comic.ImageWidget {
                 id: comicImage
 
                 anchors.fill: parent
@@ -74,7 +74,7 @@ Item {
                 isTopToBottom: root.comicData.isTopToBottom ?? false
             }
 
-            ErrorPlaceholder {
+            Comic.ErrorPlaceholder {
                 id: errorPlaceholder
                 // intentionally not checking width, it will prevent attempts to fit with word wrap
                 property bool fitsInWidget: implicitHeight <= comicImageArea.height
@@ -96,7 +96,7 @@ Item {
             }
 
 
-            ButtonBar {
+            Comic.ButtonBar {
                 id: buttonBar
 
                 anchors {
@@ -157,7 +157,7 @@ Item {
         }
     }
 
-    FullViewWidget {
+    Comic.FullViewWidget {
         id: fullDialog
 
         image: root.comicData.image

@@ -22,7 +22,7 @@ Item {
     property bool dragging: false
     property int internalDragIndex: -1
     property int internalDragOriginalIndex: -1
-    property alias popupModel : popupModel
+    property alias popupModel : popupModelObject
     property alias listView: listView
     required property Logic logic
     required property UrlModel launcherModel
@@ -41,11 +41,11 @@ Item {
                 popup.internalDragIndex = -1;
                 popup.internalDragOriginalIndex = -1;
 
-                var urls = event.mimeData.urls;
+                const urls = event.mimeData.urls;
                 if (urls.length === 1) {
-                    var dragUrl = urls[0].toString();
-                    var modelUrls = popupModel.urls();
-                    for (var i = 0; i < modelUrls.length; ++i) {
+                    const dragUrl = urls[0].toString();
+                    const modelUrls = popupModelObject.urls();
+                    for (let i = 0; i < modelUrls.length; ++i) {
                         if (modelUrls[i].toString() === dragUrl) {
                             popup.internalDragIndex = i;
                             popup.internalDragOriginalIndex = i;
@@ -59,15 +59,15 @@ Item {
         }
 
         onDragMove: event => {
-            var index = listView.indexAt(event.x, event.y);
+            const index = listView.indexAt(event.x, event.y);
 
             if (popup.internalDragIndex >= 0) {
                 if (index >= 0 && index !== popup.internalDragIndex) {
-                    popupModel.move(popup.internalDragIndex, index, 1);
+                    popupModelObject.move(popup.internalDragIndex, index, 1);
                     popup.internalDragIndex = index;
                 }
             } else {
-                popupModel.showDropMarker(index);
+                popupModelObject.showDropMarker(index);
             }
         }
 
@@ -75,12 +75,12 @@ Item {
             popup.dragging = false;
             if (popup.internalDragIndex >= 0) {
                 if (popup.internalDragIndex !== popup.internalDragOriginalIndex) {
-                    popupModel.move(popup.internalDragIndex, popup.internalDragOriginalIndex, 1);
+                    popupModelObject.move(popup.internalDragIndex, popup.internalDragOriginalIndex, 1);
                 }
                 popup.internalDragIndex = -1;
                 popup.internalDragOriginalIndex = -1;
             } else {
-                popupModel.clearDropMarker();
+                popupModelObject.clearDropMarker();
             }
         }
 
@@ -93,12 +93,12 @@ Item {
                 event.accept(Qt.IgnoreAction);
                 popup.saveConfiguration();
             } else if (event.mimeData.hasUrls) {
-                var index = listView.indexAt(event.x, event.y);
-                popupModel.clearDropMarker();
-                var urls = event.mimeData.urls;
+                const index = listView.indexAt(event.x, event.y);
+                popupModelObject.clearDropMarker();
+                const urls = event.mimeData.urls;
                 event.accept(event.proposedAction);
                 Qt.callLater(function() {
-                    popupModel.insertUrls(index == -1 ? popupModel.count : index, urls);
+                    popupModelObject.insertUrls(index == -1 ? popupModelObject.count : index, urls);
                 });
             }
         }
@@ -113,12 +113,12 @@ Item {
         keyNavigationWraps: true
 
         model: UrlModel {
-            id: popupModel
+            id: popupModelObject
         }
 
         delegate: IconItem {
             isPopupItem: true
-            popupModel: popupModel
+            popupModel: popupModelObject
             launcherModel: popup.launcherModel
             grid: null
             logic: popup.logic
@@ -141,11 +141,11 @@ Item {
         target: Plasmoid.configuration
         function onPopupUrlsChanged() {
             if (popup.dragging) return;
-            var configUrls = Plasmoid.configuration.popupUrls;
-            var modelUrls = popupModel.urls();
+            const configUrls = Plasmoid.configuration.popupUrls;
+            const modelUrls = popupModelObject.urls();
             if (configUrls.length === modelUrls.length) {
-                var same = true;
-                for (var i = 0; i < configUrls.length; ++i) {
+                let same = true;
+                for (let i = 0; i < configUrls.length; ++i) {
                     if (configUrls[i].toString() !== modelUrls[i].toString()) {
                         same = false;
                         break;
@@ -153,21 +153,21 @@ Item {
                 }
                 if (same) return;
             }
-            popupModel.urlsChanged.disconnect(popup.saveConfiguration);
-            popupModel.setUrls(Plasmoid.configuration.popupUrls);
-            popupModel.urlsChanged.connect(popup.saveConfiguration);
+            popupModelObject.urlsChanged.disconnect(popup.saveConfiguration);
+            popupModelObject.setUrls(Plasmoid.configuration.popupUrls);
+            popupModelObject.urlsChanged.connect(popup.saveConfiguration);
         }
     }
 
     Component.onCompleted: {
-        popupModel.setUrls(Plasmoid.configuration.popupUrls);
-        popupModel.urlsChanged.connect(saveConfiguration);
+        popupModelObject.setUrls(Plasmoid.configuration.popupUrls);
+        popupModelObject.urlsChanged.connect(saveConfiguration);
     }
 
     function saveConfiguration()
     {
         if (!dragging) {
-            Plasmoid.configuration.popupUrls = popupModel.urls();
+            Plasmoid.configuration.popupUrls = popupModelObject.urls();
         }
     }
 }

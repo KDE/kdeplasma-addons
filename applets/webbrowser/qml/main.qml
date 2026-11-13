@@ -270,7 +270,7 @@ PlasmoidItem {
                 }
                 onIsFullScreenChanged: {
                     if (isFullScreen) {
-                        fullScreenWindow.screen = Qt.application.screens.find(screen => screen.name === webviewContainer.Screen.name) ?? null;
+                        fullScreenWindow.screen = Application.screens.find(screen => screen.name === webviewContainer.Screen.name) ?? null;
                         moveTo(fullScreenWindow.contentItem);
                         fullScreenWindow.showFullScreen();
                         forceActiveFocus();

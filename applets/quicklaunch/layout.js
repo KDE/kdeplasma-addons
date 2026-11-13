@@ -12,17 +12,17 @@ function itemPadding() { return Kirigami.Units.smallSpacing / 2; }
 function rows()
 {
     if (vertical) {
-        return Math.ceil(grid.count / maxSectionCount);
+        return Math.ceil(gridView.count / maxSectionCount);
     }
-    return Math.min(grid.count, maxSectionCount);
+    return Math.min(gridView.count, maxSectionCount);
 }
 
 function cols()
 {
     if (vertical) {
-        return Math.min(grid.count, maxSectionCount);
+        return Math.min(gridView.count, maxSectionCount);
     }
-    return Math.ceil(grid.count / maxSectionCount);
+    return Math.ceil(gridView.count / maxSectionCount);
 }
 
 function minimumWidth()
@@ -92,12 +92,12 @@ function minimumCellHeight()
 
 function preferredCellWidth()
 {
-    return Math.floor(grid.width / cols());
+    return Math.floor(gridView.width / cols());
 }
 
 function preferredCellHeight()
 {
-    return Math.floor(grid.height / rows());
+    return Math.floor(gridView.height / rows());
 }
 
 function popupItemWidth()

@@ -47,7 +47,7 @@ PlasmoidItem {
         ? i18nc("@info:tooltip for widget, %1 is remaining time, %2 is total duration, both in hh:mm:ss", "%1 of %2 left", TimerPlasmoid.Timer.secondsToString(seconds, "hh:mm:ss"), TimerPlasmoid.Timer.secondsToString(Plasmoid.configuration.seconds, "hh:mm:ss"))
         : i18nc("@info:tooltip for widget, subtitle, timer not running", "Use mouse wheel to change digits or choose from predefined timers in the context menu");
 
-    compactRepresentation: CompactRepresentation {
+    compactRepresentation: TimerPlasmoid.CompactRepresentation {
         inPanel: root.inPanel
         isVertical: root.isVertical
         running: root.running
@@ -206,7 +206,7 @@ PlasmoidItem {
             return cSuspendedAtSecond;
         }
         if (cRunning > 0) {
-            var elapsedSeconds = cRunning - ~~(~~(((new Date()).getTime() - cSavedAt.getTime()) / 1000));
+            const elapsedSeconds = cRunning - ~~(~~(((new Date()).getTime() - cSavedAt.getTime()) / 1000));
             if (elapsedSeconds >= 0) {
                 return elapsedSeconds;
             } else {

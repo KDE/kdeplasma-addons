@@ -64,7 +64,7 @@ PlasmoidItem {
     onExternalData: (mimetype, data) => {
         // if we dropped a text file, we want its contents,
         // otherwise we take the external data verbatim
-        var contents = NotesHelper.fileContents(data) || data
+        let contents = NotesHelper.fileContents(data) || data
         mainTextArea.text = String(contents).replace(/\n/g, "<br>") // what about richtext?
 
         // place cursor at the end of text
@@ -355,8 +355,8 @@ PlasmoidItem {
                             _text: i18nc("@action:inmenu", "Remove Formatting")
                             _iconName: "edit-clear-all"
                             onTriggered: {
-                                var richText = mainTextArea.getFormattedText(mainTextArea.selectionStart, mainTextArea.selectionEnd)
-                                var unformattedText = documentHandler.strip(richText)
+                                const richText = mainTextArea.getFormattedText(mainTextArea.selectionStart, mainTextArea.selectionEnd)
+                                let unformattedText = documentHandler.strip(richText)
                                 unformattedText = unformattedText.replace(/\n/g, "<br>")
                                 mainTextArea.remove(mainTextArea.selectionStart, mainTextArea.selectionEnd)
                                 contextMenu.retFocus(() => mainTextArea.insert(mainTextArea.selectionStart, unformattedText))
@@ -431,7 +431,7 @@ PlasmoidItem {
 
                 function restoreScroll() {
                     if (Plasmoid.configuration.cursorPosition > -1) {
-                        const flickable = scrollview.contentItem;
+                        const flickable = scrollview.contentItem as Flickable;
                         flickable.contentX = Plasmoid.configuration.scrollX;
                         flickable.contentY = Plasmoid.configuration.scrollY;
                         mainTextArea.cursorPosition = Plasmoid.configuration.cursorPosition;
@@ -453,12 +453,12 @@ PlasmoidItem {
                 }
 
                 onDrop: event => {
-                    var mimeData = event.mimeData
-                    var text = ""
+                    const mimeData = event.mimeData
+                    let text = ""
                     if (mimeData.hasUrls) {
-                        var urls = mimeData.urls
-                        for (var i = 0, j = urls.length; i < j; ++i) {
-                            var url = urls[i]
+                        const urls = mimeData.urls
+                        for (let i = 0, j = urls.length; i < j; ++i) {
+                            const url = urls[i]
                             text += "<a href=\"" + url + "\">" + url + "</a><br>"
                         }
                     } else {

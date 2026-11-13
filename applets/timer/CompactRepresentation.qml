@@ -43,15 +43,17 @@ Item {
         delayed: true
         value: {
             if (compactRepresentation.inPanel) {
-                return compactRepresentation.isVertical ? CompactRepresentation.LayoutType.VerticalPanel : CompactRepresentation.LayoutType.HorizontalPanel;
+                return compactRepresentation.isVertical
+                    ? TimerPlasmoid.CompactRepresentation.LayoutType.VerticalPanel
+                    : TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalPanel;
             }
             if (compactRepresentation.parent.width - iconItem.Layout.preferredWidth >= remainingTimeLabel.contentWidth) {
-                return CompactRepresentation.LayoutType.HorizontalDesktop;
+                return TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalDesktop;
             }
             if (compactRepresentation.parent.height - iconItem.Layout.preferredHeight >= remainingTimeLabel.contentHeight) {
-                return CompactRepresentation.LayoutType.VerticalDesktop;
+                return TimerPlasmoid.CompactRepresentation.LayoutType.VerticalDesktop;
             }
-            return CompactRepresentation.LayoutType.IconOnly;
+            return TimerPlasmoid.CompactRepresentation.LayoutType.IconOnly;
         }
     }
 
@@ -95,25 +97,25 @@ Item {
 
         width: {
             switch (compactRepresentation.layoutForm) {
-            case CompactRepresentation.LayoutType.HorizontalPanel:
-            case CompactRepresentation.LayoutType.HorizontalDesktop:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalPanel:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalDesktop:
                 return implicitWidth;
-            case CompactRepresentation.LayoutType.VerticalPanel:
-            case CompactRepresentation.LayoutType.VerticalDesktop:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.VerticalPanel:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.VerticalDesktop:
                 return compactRepresentation.parent.width;
-            case CompactRepresentation.LayoutType.IconOnly:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.IconOnly:
                 return iconItem.Layout.preferredWidth;
             }
         }
         height: {
             switch (compactRepresentation.layoutForm) {
-            case CompactRepresentation.LayoutType.HorizontalPanel:
-            case CompactRepresentation.LayoutType.HorizontalDesktop:
-            case CompactRepresentation.LayoutType.VerticalDesktop:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalPanel:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalDesktop:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.VerticalDesktop:
                 return compactRepresentation.parent.height;
-            case CompactRepresentation.LayoutType.VerticalPanel:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.VerticalPanel:
                 return implicitHeight;
-            case CompactRepresentation.LayoutType.IconOnly:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.IconOnly:
                 return iconItem.Layout.preferredHeight;
             }
         }
@@ -122,8 +124,8 @@ Item {
         columnSpacing: rowSpacing
         flow: {
             switch (compactRepresentation.layoutForm) {
-            case CompactRepresentation.LayoutType.VerticalPanel:
-            case CompactRepresentation.LayoutType.VerticalDesktop:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.VerticalPanel:
+            case TimerPlasmoid.CompactRepresentation.LayoutType.VerticalDesktop:
                 return GridLayout.TopToBottom;
             default:
                 return GridLayout.LeftToRight;
@@ -133,7 +135,7 @@ Item {
         Item {
             id: spacerItem
             Layout.fillHeight: true
-            visible: compactRepresentation.layoutForm === CompactRepresentation.LayoutType.VerticalDesktop
+            visible: compactRepresentation.layoutForm === TimerPlasmoid.CompactRepresentation.LayoutType.VerticalDesktop
         }
 
         PlasmaComponents3.ToolButton {
@@ -164,19 +166,19 @@ Item {
 
         ColumnLayout {
             Layout.alignment: Qt.AlignVCenter | Qt.AlignHCenter
-            Layout.fillWidth: compactRepresentation.layoutForm === CompactRepresentation.LayoutType.VerticalPanel || compactRepresentation.layoutForm === CompactRepresentation.LayoutType.VerticalDesktop
+            Layout.fillWidth: compactRepresentation.layoutForm === TimerPlasmoid.CompactRepresentation.LayoutType.VerticalPanel || compactRepresentation.layoutForm === TimerPlasmoid.CompactRepresentation.LayoutType.VerticalDesktop
             Layout.maximumWidth: {
                 switch (compactRepresentation.layoutForm) {
-                case CompactRepresentation.LayoutType.HorizontalPanel:
+                case TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalPanel:
                     return Kirigami.Units.gridUnit * 10;
-                case CompactRepresentation.LayoutType.HorizontalDesktop:
+                case TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalDesktop:
                     return compactRepresentation.parent.width - iconItem.Layout.preferredWidth;
                 default:
                     return -1;
                 }
             }
             Layout.maximumHeight: textMetrics.height * 2
-            visible: compactRepresentation.layoutForm !== CompactRepresentation.LayoutType.IconOnly ? 1 : 0
+            visible: compactRepresentation.layoutForm !== TimerPlasmoid.CompactRepresentation.LayoutType.IconOnly ? 1 : 0
 
             spacing: parent.columnSpacing
 
@@ -225,8 +227,8 @@ Item {
                 elide: compactRepresentation.inPanel ? Text.ElideRight : Text.ElideNone
                 font.bold: compactRepresentation.alertMode
                 font.features: { "tnum": 1 }
-                fontSizeMode: compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.VerticalFit : Text.HorizontalFit
-                horizontalAlignment: compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalPanel || compactRepresentation.layoutForm === CompactRepresentation.LayoutType.HorizontalDesktop ? Text.AlignJustify : Text.AlignHCenter
+                fontSizeMode: compactRepresentation.layoutForm === TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalPanel || compactRepresentation.layoutForm === TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalDesktop ? Text.VerticalFit : Text.HorizontalFit
+                horizontalAlignment: compactRepresentation.layoutForm === TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalPanel || compactRepresentation.layoutForm === TimerPlasmoid.CompactRepresentation.LayoutType.HorizontalDesktop ? Text.AlignJustify : Text.AlignHCenter
                 minimumPointSize: 1
                 verticalAlignment: Text.AlignVCenter
 

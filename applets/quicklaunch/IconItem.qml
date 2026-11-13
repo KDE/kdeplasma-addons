@@ -295,16 +295,16 @@ Item {
                 }
 
                 function refreshActions() {
-                    for (var i = 0; i < jumpListItems.length; ++i) {
-                        var item = jumpListItems[i];
+                    for (let i = 0; i < jumpListItems.length; ++i) {
+                        const item = jumpListItems[i];
                         removeMenuItem(item);
                         item.destroy();
                     }
                     jumpListItems = [];
 
-                    for (var i = 0; i < iconItem.launcher.jumpListActions.length; ++i) {
-                        var action = iconItem.launcher.jumpListActions[i];
-                        var item = menuItemComponent.createObject(iconItem, {
+                    for (let i = 0; i < iconItem.launcher.jumpListActions.length; ++i) {
+                        const action = iconItem.launcher.jumpListActions[i];
+                        const item = menuItemComponent.createObject(iconItem, {
                             "text": action.name,
                             "icon": action.icon
                         }) as PlasmaExtras.MenuItem;
@@ -402,7 +402,7 @@ Item {
 
     function removeLauncher()
     {
-        var m = isPopupItem ? popupModel : launcherModel;
+        const m = isPopupItem ? popupModel : launcherModel;
         m.removeUrl(itemIndex);
     }
 }

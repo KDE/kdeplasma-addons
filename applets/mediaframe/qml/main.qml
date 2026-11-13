@@ -59,8 +59,8 @@ PlasmoidItem {
     }
 
     onExternalData: (mimetype, data) => {
-        var type = items.isDir(data) ? "folder" : "file";
-        var item = {
+        const type = items.isDir(data) ? "folder" : "file";
+        const item = {
             "path": data,
             "type": type
         };
@@ -69,10 +69,10 @@ PlasmoidItem {
     }
 
     function loadPathList() {
-        var list = plasmoid.configuration.pathList
+        const list = plasmoid.configuration.pathList
         items.clear()
-        for(var i in list) {
-            var item = JSON.parse(list[i])
+        for (let i in list) {
+            const item = JSON.parse(list[i])
             items.add(item.path,true)
         }
     }
@@ -110,7 +110,7 @@ PlasmoidItem {
             return
         }
 
-        var active = activeSource
+        const active = activeSource
 
         // Only record history if we have more than one item
         if(itemCount > 1)
@@ -130,9 +130,9 @@ PlasmoidItem {
     }
 
     function previousItem() {
-        var active = activeSource
+        const active = activeSource
         items.pushFuture(active)
-        var filePath = items.popHistory()
+        const filePath = items.popHistory()
         setActiveSource(filePath)
     }
 
@@ -193,7 +193,7 @@ PlasmoidItem {
         onDropped: event => {
             if (event.hasUrls) {
                 const urls = event.urls
-                for (var i = 0, j = urls.length; i < j; ++i) {
+                for (let i = 0, j = urls.length; i < j; ++i) {
                     const url = urls[i]
                     const type = items.isDir(url) ? "folder" : "file"
                     const item = { "path": url, "type": type }
@@ -293,7 +293,7 @@ PlasmoidItem {
             ScriptAction {
                 script: {
                     // Copy the transitionSource
-                    var ts = transitionSource
+                    const ts = transitionSource
                     activeSource = ts
                     bufferImage.source = activeSource
                 }

@@ -36,7 +36,7 @@ KCM.ScrollViewKCM {
     forceFooterSeparator: true
 
     Component.onCompleted: {
-        for (var i of timesPage.cfg_predefinedTimers) {
+        for (let i of timesPage.cfg_predefinedTimers) {
             timeListModel.append({"time": i})
         }
     }
