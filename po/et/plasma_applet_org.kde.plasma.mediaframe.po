@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-09 00:57+0000\n"
+"POT-Creation-Date: 2026-11-13 01:01+0000\n"
 "PO-Revision-Date: 2019-11-01 22:48+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -218,31 +218,31 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Kataloogi valimine"
 
-#: qml/main.qml:164
+#: qml/main.qml:162
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
 msgstr ""
 
-#: qml/main.qml:175
+#: qml/main.qml:173
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
 msgstr ""
 
-#: qml/main.qml:185
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
 msgstr ""
 
-#: qml/main.qml:374
+#: qml/main.qml:355
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr ""
 
-#: qml/main.qml:378 qml/main.qml:388
+#: qml/main.qml:359 qml/main.qml:369
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"

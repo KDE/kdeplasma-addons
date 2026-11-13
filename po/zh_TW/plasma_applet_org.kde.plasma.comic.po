@@ -7,20 +7,20 @@
 # pan93412 <pan93412@gmail.com>, 2018, 2019.
 # Franklin Weng <franklin at goodhorse dot idv dot tw>, 2008.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
-# SPDX-FileCopyrightText: 2023, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2023, 2025-2026 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 02:59+0000\n"
-"PO-Revision-Date: 2025-05-16 16:13+0900\n"
+"PO-Revision-Date: 2026-11-12 19:12+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 26.11.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: comicdata.cpp:76
@@ -42,26 +42,22 @@ msgid "Visit the comic website"
 msgstr "造訪漫畫網站"
 
 #: qml/ComicCentralView.qml:125
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Go to previous strip"
-msgstr "跳到某一篇"
+msgstr "前往上一篇"
 
 #: qml/ComicCentralView.qml:130
 #, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Show full-size in popup"
-msgstr ""
+msgstr "在彈出視窗以完整大小顯示"
 
 #: qml/ComicCentralView.qml:136
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Go to next strip"
-msgstr "跳到某一篇"
+msgstr "前往下一篇"
 
 #: qml/config.qml:13
 #, kde-format

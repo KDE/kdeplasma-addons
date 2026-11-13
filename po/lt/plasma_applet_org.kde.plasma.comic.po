@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 02:59+0000\n"
-"PO-Revision-Date: 2025-09-08 14:58+0300\n"
+"PO-Revision-Date: 2026-11-12 17:41+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: Lithuanian <kde-i18n-lt@kde.org>\n"
 "Language: lt\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n==1 ? 0 : n%10>=2 && (n%100<10 || n"
 "%100>=20) ? 1 : n%10==0 || (n%100>10 && n%100<20) ? 2 : 3);\n"
-"X-Generator: Poedit 3.6\n"
+"X-Generator: Poedit 3.10\n"
 
 #: comicdata.cpp:76
 #, kde-format
@@ -39,26 +39,22 @@ msgid "Visit the comic website"
 msgstr "Apsilankyti komiksų interneto svetainėje"
 
 #: qml/ComicCentralView.qml:125
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Go to previous strip"
-msgstr "Pereiti į piešinių seriją"
+msgstr "Eiti į ankstesnę piešinių seriją"
 
 #: qml/ComicCentralView.qml:130
 #, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Show full-size in popup"
-msgstr ""
+msgstr "Rodyti visą dydį iškylančiajame lange"
 
 #: qml/ComicCentralView.qml:136
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Go to next strip"
-msgstr "Pereiti į piešinių seriją"
+msgstr "Eiti į kitą piešinių seriją"
 
 #: qml/config.qml:13
 #, kde-format

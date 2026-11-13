@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-09 00:57+0000\n"
-"PO-Revision-Date: 2026-11-05 00:50+0200\n"
+"POT-Creation-Date: 2026-11-13 01:01+0000\n"
+"PO-Revision-Date: 2026-11-12 17:42+0200\n"
 "Last-Translator: Moo\n"
 "Language-Team: lt\n"
 "Language: lt\n"
@@ -213,31 +213,31 @@ msgctxt "@title:window"
 msgid "Choose a Folder"
 msgstr "Pasirinkite aplanką"
 
-#: qml/main.qml:164
+#: qml/main.qml:162
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "Rodyti ankstesnį paveikslą"
 
-#: qml/main.qml:175
+#: qml/main.qml:173
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "Rodyti kitą paveikslą"
 
-#: qml/main.qml:185
+#: qml/main.qml:183
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "Atverti numatytojoje paveikslų žiūryklėje"
 
-#: qml/main.qml:374
+#: qml/main.qml:355
 #, kde-format
 msgctxt "@info placeholdermessage if no media loaded"
 msgid "No media selected"
 msgstr "Nepasirinkta jokia medija"
 
-#: qml/main.qml:378 qml/main.qml:388
+#: qml/main.qml:359 qml/main.qml:369
 #, kde-format
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
