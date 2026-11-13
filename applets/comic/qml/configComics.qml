@@ -77,34 +77,39 @@ KCM.ScrollViewKCM {
         }
     }
 
-    footer: Kirigami.FormLayout {
-        Layouts.RowLayout {
-            Kirigami.FormData.label: i18nc("@label:spinbox", "Check for new comics every:")
+    footer: Kirigami.Form {
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@label:spinbox", "Check for new comics every:")
+                contentItem: Layouts.RowLayout {
+                    Controls.SpinBox {
+                        id: checkNewComicStripsInterval
+                        Layouts.Layout.preferredWidth: Math.max(implicitWidth, maxComicLimit.implicitWidth)
+                        from: 0
+                        to: 999
+                        stepSize: 1
+                    }
 
-            Controls.SpinBox {
-                id: checkNewComicStripsInterval
-                from: 0
-                to: 999
-                stepSize: 1
+                    Controls.Label {
+                        text: i18ncp("@item:valuesuffix spacing to number + unit (minutes)", "minute", "minutes")
+                        textFormat: Text.PlainText
+                    }
+                }
             }
+            Kirigami.FormEntry {
+                title: i18nc("@label:spinbox", "Keep local archive:")
+                contentItem: Layouts.RowLayout {
+                    Controls.SpinBox {
+                        Layouts.Layout.preferredWidth: Math.max(implicitWidth, checkNewComicStripsInterval.implicitWidth)
+                        id: maxComicLimit
+                        stepSize: 1
+                    }
 
-            Controls.Label {
-                text: i18ncp("@item:valuesuffix spacing to number + unit (minutes)", "minute", "minutes")
-                textFormat: Text.PlainText
-            }
-        }
-
-        Layouts.RowLayout {
-            Kirigami.FormData.label: i18nc("@label:spinbox", "Keep local archive:")
-
-            Controls.SpinBox {
-                id: maxComicLimit
-                stepSize: 1
-            }
-
-            Controls.Label {
-                text: i18ncp("@item:valuesuffix spacing to number + unit", "images per comic", "images per comic")
-                textFormat: Text.PlainText
+                    Controls.Label {
+                        text: i18ncp("@item:valuesuffix spacing to number + unit", "images per comic", "images per comic")
+                        textFormat: Text.PlainText
+                    }
+                }
             }
         }
     }

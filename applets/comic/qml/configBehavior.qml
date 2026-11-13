@@ -6,10 +6,8 @@
 
 import QtQuick
 import QtQuick.Controls as Controls
-import QtQuick.Layouts as Layouts
 
 import org.kde.kirigami as Kirigami
-import org.kde.plasma.plasmoid
 import org.kde.kcmutils as KCM
 
 KCM.SimpleKCM {
@@ -22,53 +20,61 @@ KCM.SimpleKCM {
     property alias cfg_showComicUrl: showUrl.checked;
     property alias cfg_middleClick: middleClickCheckBox.checked;
 
-    Kirigami.FormLayout {
-        Controls.CheckBox {
-            id: showComicTitle
-            Kirigami.FormData.label: i18nc ("@title:group form label for checkboxes", "Show above image:")
-            text: i18nc("@option:check show above image: ", "Title")
+    Kirigami.Form {
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@title:group form label for checkboxes", "Show above image:")
+                contentItem: Controls.CheckBox {
+                    id: showComicTitle
+                    text: i18nc("@option:check show above image: ", "Title")
+                }
+            }
+            Kirigami.FormEntry {
+                contentItem: Controls.CheckBox {
+                    id: showAuthor
+                    text: i18nc("@option:check show above image: ", "Author")
+                }
+            }
+            Kirigami.FormEntry {
+                title: i18nc ("@title:group form label for checkboxes", "Show below image:")
+                contentItem: Controls.CheckBox {
+                    id: showIdentifier
+                    text: i18nc("@option:check show below image", "Identifier")
+                }
+            }
+            Kirigami.FormEntry {
+                contentItem: Controls.CheckBox {
+                    id: showUrl
+                    text: i18nc("@option:check show below image", "Website")
+                }
+            }
         }
 
-        Controls.CheckBox {
-            id: showAuthor
-            text: i18nc("@option:check show above image: ", "Author")
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@label:group form label for radiobuttons", "Navigation buttons:")
+                contentItem: Controls.RadioButton {
+                    id: alwaysShowArrows
+                    text: i18nc("@option:radio navigation buttons are…", "Always visible at the edges")
+                    checked: !showArrowsOnOver.checked
+                }
+            }
+            Kirigami.FormEntry {
+                contentItem: Controls.RadioButton {
+                    id: showArrowsOnOver
+                    text: i18nc("@option:radio navigation buttons…", "Appear centrally when hovering")
+                }
+            }
         }
 
-        Controls.CheckBox {
-            id: showIdentifier
-            Kirigami.FormData.label: i18nc ("@title:group form label for checkboxes", "Show below image:")
-            text: i18nc("@option:check show below image", "Identifier")
-        }
-
-        Controls.CheckBox {
-            id: showUrl
-            text: i18nc("@option:check show below image", "Website")
-        }
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        Controls.RadioButton {
-            id: alwaysShowArrows
-            Kirigami.FormData.label: i18nc("@label:group form label for radiobuttons", "Navigation buttons:")
-            text: i18nc("@option:radio navigation buttons are…", "Always visible at the edges")
-            checked: !showArrowsOnOver.checked
-        }
-
-        Controls.RadioButton {
-            id: showArrowsOnOver
-            text: i18nc("@option:radio navigation buttons…", "Appear centrally when hovering")
-        }
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        Controls.CheckBox {
-            id: middleClickCheckBox
-            Kirigami.FormData.label: i18nc("@label for checkbox, completes sentence … opens full-size view", "Middle-clicking image:")
-            text: i18nc("@option:check completes sentence Middle-clicking image…", "Opens full-size view")
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@label for checkbox, completes sentence … opens full-size view", "Middle-clicking image:")
+                contentItem: Controls.CheckBox {
+                    id: middleClickCheckBox
+                    text: i18nc("@option:check completes sentence Middle-clicking image…", "Opens full-size view")
+                }
+            }
         }
     }
 }
