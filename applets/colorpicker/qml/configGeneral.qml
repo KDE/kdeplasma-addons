@@ -18,48 +18,52 @@ KCM.SimpleKCM {
     property string cfg_defaultFormat
     property bool cfg_pickOnActivate
 
-    Kirigami.FormLayout {
-        QQC2.ComboBox {
-            id: defaultFormatCombo
-            Kirigami.FormData.label: i18nc("@label:listbox", "Default color format:")
-            model: Logic.formats
-            currentIndex: model.indexOf(root.cfg_defaultFormat)
-            onActivated: index => {
-                root.cfg_defaultFormat = model[index];
+    Kirigami.Form {
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@label:listbox", "Default color format:")
+                contentItem: QQC2.ComboBox {
+                    id: defaultFormatCombo
+                    model: Logic.formats
+                    currentIndex: model.indexOf(root.cfg_defaultFormat)
+                    onActivated: index => {
+                        root.cfg_defaultFormat = model[index];
+                    }
+                }
+            }
+            Kirigami.FormEntry {
+                contentItem: QQC2.CheckBox {
+                    id: autoClipboardCheckBox
+                    text: i18nc("@option:check", "Automatically copy color to clipboard")
+                }
             }
         }
-
-        QQC2.CheckBox {
-            id: autoClipboardCheckBox
-            text: i18nc("@option:check", "Automatically copy color to clipboard")
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@label", "When pressing the keyboard shortcut:")
+                contentItem: QQC2.RadioButton {
+                    text: i18nc("@option:radio", "Pick a color")
+                    checked: root.cfg_pickOnActivate
+                    onToggled: root.cfg_pickOnActivate = checked
+                }
+            }
+            Kirigami.FormEntry {
+                contentItem: QQC2.RadioButton {
+                    text: i18nc("@option:radio", "Show history")
+                    checked: !root.cfg_pickOnActivate
+                    onToggled: root.cfg_pickOnActivate = !checked
+                }
+            }
         }
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        QQC2.RadioButton {
-            Kirigami.FormData.label: i18nc("@label", "When pressing the keyboard shortcut:")
-            text: i18nc("@option:radio", "Pick a color")
-            checked: root.cfg_pickOnActivate
-            onToggled: root.cfg_pickOnActivate = checked
-        }
-
-        QQC2.RadioButton {
-            text: i18nc("@option:radio", "Show history")
-            checked: !root.cfg_pickOnActivate
-            onToggled: root.cfg_pickOnActivate = !checked
-        }
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        QQC2.SpinBox {
-            id: compactPreviewCountSpinBox
-            Kirigami.FormData.label: i18nc("@label", "Preview count:")
-            from: 0
-            to: 9 /* root.maxColorCount */
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@label", "Preview count:")
+                contentItem: QQC2.SpinBox {
+                    id: compactPreviewCountSpinBox
+                    from: 0
+                    to: 9 /* root.maxColorCount */
+                }
+            }
         }
     }
 }
