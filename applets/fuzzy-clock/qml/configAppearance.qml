@@ -18,45 +18,51 @@ KCM.SimpleKCM {
 
     property alias cfg_fuzzyness: fuzzyness.value
 
-    Kirigami.FormLayout {
-        QQC2.CheckBox {
-            id: boldCheckBox
-            Kirigami.FormData.label: i18nc("@title:group", "Font:")
-            text: i18nc("@option:check", "Bold text")
-        }
-
-        QQC2.CheckBox {
-            id: italicCheckBox
-            text: i18nc("@option:check", "Italic text")
-        }
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        QQC2.Slider {
-            id: fuzzyness
-            Kirigami.FormData.label: i18nc("@title:group", "Fuzzyness:")
-            from: 1
-            to: 5
-            stepSize: 1
-        }
-
-        RowLayout {
-        Layout.fillWidth: true
-
-            QQC2.Label {
-                text: i18nc("@item:inrange", "Accurate")
-                textFormat: Text.PlainText
+    Kirigami.Form {
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@title:group", "Font:")
+                contentItem: QQC2.CheckBox {
+                    id: boldCheckBox
+                    text: i18nc("@option:check", "Bold text")
+                }
             }
-
-            Item {
-                Layout.fillWidth: true
+            Kirigami.FormEntry {
+                contentItem: QQC2.CheckBox {
+                    text: i18nc("@option:check", "Italic text")
+                    id: italicCheckBox
+                }
             }
+        }
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@title:group", "Fuzzyness:")
+                contentItem: ColumnLayout {
+                    Kirigami.FormData.buddyFor: fuzzyness
+                    QQC2.Slider {
+                        Layout.fillWidth: true
+                        id: fuzzyness
+                        from: 1
+                        to: 5
+                        stepSize: 1
+                        Kirigami.StyleHints.tickMarkStepSize: 1
+                    }
+                    RowLayout {
+                        QQC2.Label {
+                            text: i18nc("@item:inrange", "Accurate")
+                            textFormat: Text.PlainText
+                        }
 
-            QQC2.Label {
-                text: i18nc("@item:inrange", "Fuzzy")
-                textFormat: Text.PlainText
+                        Item {
+                            Layout.fillWidth: true
+                        }
+
+                        QQC2.Label {
+                            text: i18nc("@item:inrange", "Fuzzy")
+                            textFormat: Text.PlainText
+                        }
+                    }
+                }
             }
         }
     }
