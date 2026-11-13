@@ -60,7 +60,7 @@ PlasmoidItem {
 
         if (commaPressed) {
             ++decimals;
-            var tenToTheDecimals = Math.pow(10, decimals);
+            const tenToTheDecimals = Math.pow(10, decimals);
             operand = (operand * tenToTheDecimals + digit) / tenToTheDecimals;
         } else {
             operand = operand * 10 + digit;
@@ -181,7 +181,7 @@ PlasmoidItem {
 
     function pasteFromClipboard() {
         dummyTextEditForPasting.paste()
-        var content = dummyTextEditForPasting.text
+        let content = dummyTextEditForPasting.text
         dummyTextEditForPasting.clear()
         if (content != "") {
             content = content.trim();
@@ -189,8 +189,8 @@ PlasmoidItem {
 
         // check if the clipboard content as a whole is a valid number (without sign, no operators, ...)
         if (isValidClipboardInput(content)) {
-            var digitRegex = new RegExp('^[0-9]$');
-            var decimalRegex = new RegExp('^[\.,]$');
+            const digitRegex = new RegExp('^[0-9]$');
+            const decimalRegex = new RegExp('^[\.,]$');
 
             for (let i = 0; i < content.length; i++) {
                 if (digitRegex.test(content[i])) {
@@ -207,7 +207,7 @@ PlasmoidItem {
     }
 
     function displayNumber(number) {
-        var text = number.toLocaleString(Qt.locale(), "g", 14);
+        let text = number.toLocaleString(Qt.locale(), "g", 14);
 
         // Show all decimals including zeroes and show decimalPoint
         if (showingInput && commaPressed) {
@@ -218,7 +218,7 @@ PlasmoidItem {
         }
         display.text = text;
 
-        var decimalsToShow = 9;
+        let decimalsToShow = 9;
         // Decrease precision until the text fits to the display.
         while (display.contentWidth > display.width && decimalsToShow > 0) {
             display.text = number.toLocaleString(Qt.locale(), "g", decimalsToShow--);

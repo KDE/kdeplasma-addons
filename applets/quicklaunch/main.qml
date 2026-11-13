@@ -68,7 +68,7 @@ PlasmoidItem {
             }
 
             GridView {
-                id: grid
+                id: gridView
                 anchors.fill: parent
                 interactive: false
                 flow: root.horizontal ? GridView.FlowTopToBottom : GridView.FlowLeftToRight
@@ -77,15 +77,15 @@ PlasmoidItem {
                 visible: count
 
                 model: UrlModel {
-                    id: launcherModel
+                    id: launcherModelInstance
                 }
 
                 delegate: IconItem {
-                    logic: logic
-                    grid: grid
+                    logic: logicInstance
+                    grid: gridView
                     popupModel: null
-                    launcherModel: launcherModel
-                    onMoveItemToPopup: (item, url) => grid.moveItemToPopup(item, url)
+                    launcherModel: launcherModelInstance
+                    onMoveItemToPopup: (item, url) => gridView.moveItemToPopup(item, url)
                 }
 
                 function moveItemToPopup(iconItem, url) {
@@ -105,7 +105,7 @@ PlasmoidItem {
                 id: defaultIcon
                 anchors.fill: parent
                 source: "fork"
-                visible: !grid.visible
+                visible: !gridView.visible
 
                 PlasmaCore.ToolTipArea {
                     anchors.fill: parent
@@ -126,8 +126,8 @@ PlasmoidItem {
 
             mainItem: Popup {
                 Keys.onEscapePressed: popup.visible = false
-                launcherModel: launcherModel
-                logic: logic
+                launcherModel: launcherModelInstance
+                logic: logicInstance
             }
         }
 
@@ -201,8 +201,8 @@ PlasmoidItem {
             enabled: !Plasmoid.immutable
 
             function gridIndexAt(eventX, eventY) {
-                var pos = grid.mapFromItem(dropArea, eventX, eventY);
-                return grid.indexAt(pos.x, pos.y);
+                const pos = gridView.mapFromItem(dropArea, eventX, eventY);
+                return gridView.indexAt(pos.x, pos.y);
             }
 
             onDragEnter: event => {
@@ -211,11 +211,11 @@ PlasmoidItem {
                     root.internalDragIndex = -1;
                     root.internalDragOriginalIndex = -1;
 
-                    var urls = event.mimeData.urls;
+                    const urls = event.mimeData.urls;
                     if (urls.length === 1) {
-                        var dragUrl = urls[0].toString();
-                        var modelUrls = launcherModel.urls();
-                        for (var i = 0; i < modelUrls.length; ++i) {
+                        const dragUrl = urls[0].toString();
+                        const modelUrls = launcherModelInstance.urls();
+                        for (let i = 0; i < modelUrls.length; ++i) {
                             if (modelUrls[i].toString() === dragUrl) {
                                 root.internalDragIndex = i;
                                 root.internalDragOriginalIndex = i;
@@ -229,15 +229,15 @@ PlasmoidItem {
             }
 
             onDragMove: event => {
-                var index = dropArea.gridIndexAt(event.x, event.y);
+                const index = dropArea.gridIndexAt(event.x, event.y);
 
                 if (root.internalDragIndex >= 0) {
                     if (index >= 0 && index !== root.internalDragIndex) {
-                        launcherModel.move(root.internalDragIndex, index, 1);
+                        launcherModelInstance.move(root.internalDragIndex, index, 1);
                         root.internalDragIndex = index;
                     }
                 } else {
-                    launcherModel.showDropMarker(index);
+                    launcherModelInstance.showDropMarker(index);
                 }
 
                 popup.visible = root.childAt(event.x, event.y) == popupArrow;
@@ -247,12 +247,12 @@ PlasmoidItem {
                 root.dragging = false;
                 if (root.internalDragIndex >= 0) {
                     if (root.internalDragIndex !== root.internalDragOriginalIndex) {
-                        launcherModel.move(root.internalDragIndex, root.internalDragOriginalIndex, 1);
+                        launcherModelInstance.move(root.internalDragIndex, root.internalDragOriginalIndex, 1);
                     }
                     root.internalDragIndex = -1;
                     root.internalDragOriginalIndex = -1;
                 } else {
-                    launcherModel.clearDropMarker();
+                    launcherModelInstance.clearDropMarker();
                 }
             }
 
@@ -265,12 +265,12 @@ PlasmoidItem {
                     event.accept(Qt.IgnoreAction);
                     root.saveConfiguration();
                 } else {
-                    var index = dropArea.gridIndexAt(event.x, event.y);
-                    launcherModel.clearDropMarker();
-                    var urls = event.mimeData.urls;
+                    const index = dropArea.gridIndexAt(event.x, event.y);
+                    launcherModelInstance.clearDropMarker();
+                    const urls = event.mimeData.urls;
                     event.accept(event.proposedAction);
                     Qt.callLater(function() {
-                        launcherModel.insertUrls(index == -1 ? launcherModel.count : index, urls);
+                        launcherModelInstance.insertUrls(index == -1 ? launcherModelInstance.count : index, urls);
                     });
                 }
             }
@@ -278,15 +278,15 @@ PlasmoidItem {
     }
 
     Logic {
-        id: logic
+        id: logicInstance
 
         onLauncherAdded: (url, isPopup) => {
-            var m = isPopup ? (popup.mainItem as Popup).popupModel : launcherModel;
+            const m = isPopup ? (popup.mainItem as Popup).popupModel : launcherModelInstance;
             m.appendUrl(url);
         }
 
         onLauncherEdited: (url, index, isPopup) => {
-            var m = isPopup ? (popup.mainItem as Popup).popupModel : launcherModel;
+            const m = isPopup ? (popup.mainItem as Popup).popupModel : launcherModelInstance;
             m.changeUrl(index, url);
         }
     }
@@ -316,13 +316,13 @@ PlasmoidItem {
 
     Connections {
         target: Plasmoid.configuration
-       function onLauncherUrlsChanged() {
+        function onLauncherUrlsChanged() {
             if (root.dragging) return;
-            var configUrls = Plasmoid.configuration.launcherUrls;
-            var modelUrls = launcherModel.urls();
+            const configUrls = Plasmoid.configuration.launcherUrls;
+            const modelUrls = launcherModelInstance.urls();
             if (configUrls.length === modelUrls.length) {
-                var same = true;
-                for (var i = 0; i < configUrls.length; ++i) {
+                let same = true;
+                for (let i = 0; i < configUrls.length; ++i) {
                     if (configUrls[i].toString() !== modelUrls[i].toString()) {
                         same = false;
                         break;
@@ -330,9 +330,9 @@ PlasmoidItem {
                 }
                 if (same) return;
             }
-            launcherModel.urlsChanged.disconnect(root.saveConfiguration);
-            launcherModel.setUrls(Plasmoid.configuration.launcherUrls);
-            launcherModel.urlsChanged.connect(root.saveConfiguration);
+            launcherModelInstance.urlsChanged.disconnect(root.saveConfiguration);
+            launcherModelInstance.setUrls(Plasmoid.configuration.launcherUrls);
+            launcherModelInstance.urlsChanged.connect(root.saveConfiguration);
         }
     }
 
@@ -340,19 +340,19 @@ PlasmoidItem {
         PlasmaCore.Action {
             text: i18nc("@action", "Add Launcher…")
             icon.name: "list-add"
-            onTriggered: logic.addLauncher()
+            onTriggered: logicInstance.addLauncher()
         }
     ]
 
     Component.onCompleted: {
-        launcherModel.setUrls(Plasmoid.configuration.launcherUrls);
-        launcherModel.urlsChanged.connect(saveConfiguration);
+        launcherModelInstance.setUrls(Plasmoid.configuration.launcherUrls);
+        launcherModelInstance.urlsChanged.connect(saveConfiguration);
     }
 
     function saveConfiguration()
     {
         if (!dragging) {
-            Plasmoid.configuration.launcherUrls = launcherModel.urls();
+            Plasmoid.configuration.launcherUrls = launcherModelInstance.urls();
         }
     }
 }

@@ -195,13 +195,13 @@ Item {
     ]
 
     function timeString() {
-        var d = new Date(main.dateTime)
-        var hours = d.getHours()
-        var minutes = d.getMinutes()
+        const d = new Date(main.dateTime)
+        const hours = d.getHours()
+        const minutes = d.getMinutes()
 
         if (main.fuzzyness == 1 || main.fuzzyness == 2) {
-            var sector = 0
-            var realHour = 0
+            let sector = 0
+            let realHour = 0
 
             if (main.fuzzyness == 1) {
                 if (minutes > 2) {
@@ -236,9 +236,9 @@ Item {
         } else if (main.fuzzyness == 4) {
             return dayTime[Math.floor(hours / 3)]
         } else {
-            var dow = d.getDay()
+            const dow = d.getDay()
 
-            var weekTimeId
+            let weekTimeId
             if (dow == 1) {
                 weekTimeId = 0
             } else if (dow >= 2 && dow <= 4) {

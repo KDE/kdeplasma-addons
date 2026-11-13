@@ -15,8 +15,8 @@ ListModel {
 
     function urls()
     {
-        var out = [];
-        for (var i = 0; i < listModel.count; ++i) {
+        let out = [];
+        for (let i = 0; i < listModel.count; ++i) {
             out.push(get(i).url);
         }
         return out;
@@ -46,7 +46,7 @@ ListModel {
 
     function insertUrls(index, urls)
     {
-        for (var i = 0; i < urls.length; ++i) {
+        for (let i = 0; i < urls.length; ++i) {
             insert(index + i, { url: urls[i] });
         }
 

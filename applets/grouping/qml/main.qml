@@ -31,7 +31,7 @@ ContainmentItem {
         tabbar.currentIndex = mainStack.count -1;
     }
     Containment.onAppletRemoved: applet => {
-        for (var i = 0; i < mainStack.count; i++) {
+        for (let i = 0; i < mainStack.count; i++) {
             if (mainStack.children[i].itemId === applet.id) {
                 mainStack.children[i].destroy();
                 break;
@@ -50,7 +50,7 @@ ContainmentItem {
             console.warn("Could not create PlasmoidItem", plasmoidItemComponent.errorString());
         }
 
-        var plasmoidContainer = plasmoidItemComponent.createObject(mainStack, { "applet": appletItem });
+        const plasmoidContainer = plasmoidItemComponent.createObject(mainStack, { "applet": appletItem });
 
         appletItem.anchors.fill = undefined;
         appletItem.parent = plasmoidContainer;
@@ -59,8 +59,8 @@ ContainmentItem {
     }
 
     Component.onCompleted: {
-        var applets = Containment.applets;
-        for (var i = 0 ; i < applets.length; i++) {
+        const applets = Containment.applets;
+        for (let i = 0 ; i < applets.length; i++) {
             addApplet(applets[i]);
         }
     }
@@ -128,7 +128,7 @@ ContainmentItem {
             if (event.mimeData.formats.indexOf("text/x-plasmoidservicename") < 0) {
                 return null;
             }
-            var plasmoidId = event.mimeData.getDataAsByteArray("text/x-plasmoidservicename");
+            const plasmoidId = event.mimeData.getDataAsByteArray("text/x-plasmoidservicename");
             return plasmoidId;
         }
 
@@ -139,7 +139,7 @@ ContainmentItem {
         }
 
         onDrop: event => {
-            var plasmoidId = appletName(event);
+            const plasmoidId = appletName(event);
             if (!plasmoidId) {
                 event.ignore();
                 return;

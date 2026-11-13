@@ -16,6 +16,9 @@ plasma_add_applet(org.kde.plasma.colorpicker
         main.xml
         qml/Logic.js
     GENERATE_APPLET_CLASS
+    QML_ARGS
+    DEPENDENCIES
+        QtQuick
 )
 
 target_link_libraries(org.kde.plasma.colorpicker PRIVATE

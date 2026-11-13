@@ -22,6 +22,9 @@ plasma_add_applet(org.kde.plasma_applet_dict GENERATE_APPLET_CLASS
         dictionariesmodel.cpp
     RESOURCES
         main.xml
+    QML_ARGS
+    DEPENDENCIES
+        QtWebEngine
 )
 # TODO: fix pluginid "org.kde.plasma_applet_dict" into properly namespaced id "org.kde.plasma.dict"
 

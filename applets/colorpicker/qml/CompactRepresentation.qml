@@ -41,7 +41,6 @@ DropArea {
     readonly property real buttonSize: isVertical ? parent.width : parent.height
     property bool containsAcceptableDrag: false
 
-
     onEntered: drag => {
         containsAcceptableDrag = (drag.hasColor || drag.hasUrls || utils.isValidColor(drag.text));
     }
@@ -101,12 +100,19 @@ DropArea {
             Layout.preferredHeight: dropArea.buttonSize
             Layout.alignment: Qt.AlignLeft
 
-            property Item loadingIndicator: null
+            property LoadingIndicator loadingIndicator: null
 
             display: PlasmaComponents3.AbstractButton.IconOnly
             text: i18nc("@info:tooltip", "Pick color")
 
             onClicked: dropArea.pickColorRequested()
+
+            Connections {
+                target: pickColorButton.loadingIndicator
+                function onAboutToDestroy() {
+                    pickColorButton.loadingIndicator = null
+                }
+            }
 
             PlasmaCore.ToolTipArea {
                 anchors.fill: parent

@@ -23,7 +23,7 @@ PlasmoidItem {
 
     readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
 
-    readonly property color recentColor: historyModel.hasAnyColors ? historyModel.get(0).color : "#00000000" // transparent as fallback
+    readonly property color recentColor: historyModelItem.hasAnyColors ? historyModelItem.get(0).color : "#00000000" // transparent as fallback
     readonly property string defaultFormat: Plasmoid.configuration.defaultFormat
 
     preferredRepresentation: compactRepresentation
@@ -33,7 +33,7 @@ PlasmoidItem {
 
     function colorPicked(color) {
         if (color != recentColor) {
-            historyModel.addColorToHistory(color)
+            historyModelItem.addColorToHistory(color)
         }
 
         if (Plasmoid.configuration.autoClipboard) {
@@ -58,7 +58,7 @@ PlasmoidItem {
             id: colorDialog
             modality: Qt.NonModal
             title: Plasmoid.title
-            selectedColor: historyModel.count > 0 ? root.recentColor : undefined /* Prevent transparent colors */
+            selectedColor: historyModelItem.count > 0 ? root.recentColor : undefined /* Prevent transparent colors */
             onAccepted: {
                 root.colorPicked(selectedColor);
                 colorDialogLoader.active = false;
@@ -75,7 +75,7 @@ PlasmoidItem {
         onTriggered: root.pickColor()
     }
 
-    HistoryModel { id: historyModel }
+    HistoryModel { id: historyModelItem }
 
     Plasmoid.onActivated: {
         if (Plasmoid.configuration.pickOnActivate) {
@@ -93,8 +93,8 @@ PlasmoidItem {
             text: i18nc("@action", "Clear History")
             icon.name: "edit-clear-history"
             onTriggered: {
-                historyModel.clear();
-                historyModel.save();
+                historyModelItem.clear();
+                historyModelItem.save();
             }
         },
         PlasmaCore.Action {
@@ -105,13 +105,13 @@ PlasmoidItem {
     ]
 
     Component.onCompleted: {
-        Plasmoid.configuration.history.forEach(item => historyModel.append({ color: item }));
+        Plasmoid.configuration.history.forEach(item => historyModelItem.append({ color: item }));
         Logic.copyToClipboardText = i18ndc("plasma_applet_org.kde.plasma.colorpicker", "@title:menu", "Copy to Clipboard"); // i18n is not supported in js library
     }
 
     compactRepresentation: CompactRepresentation {
         isVertical: root.isVertical
-        historyModel: historyModel
+        historyModel: historyModelItem
         onCopyToClipboardRequested: color=> picker.copyToClipboard(color)
         onPickColorRequested: root.pickColor()
         onToggleExpandedRequested: root.expanded = !root.expanded
@@ -131,7 +131,7 @@ PlasmoidItem {
         cellHeight: cellWidth
         boundsBehavior: Flickable.StopAtBounds
 
-        model: historyModel
+        model: historyModelItem
 
         highlight: PlasmaExtras.Highlight {}
         highlightMoveDuration: 0
@@ -274,13 +274,12 @@ PlasmoidItem {
 
             function openMenu() {
                 const menu = Logic.createContextMenu(this, delegateMouse.color, picker, colorLabel, copyIndicatorLabel, colorLabelRestoreTimer) as ColorContextMenu;
-                menu.
                 menu.openRelative();
             }
 
             function remove() {
-                historyModel.remove(index);
-                historyModel.save();
+                historyModelItem.remove(index);
+                historyModelItem.save();
             }
 
             PlasmaCore.ToolTipArea {

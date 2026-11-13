@@ -206,7 +206,7 @@ PlasmoidItem {
             return cSuspendedAtSecond;
         }
         if (cRunning > 0) {
-            var elapsedSeconds = cRunning - ~~(~~(((new Date()).getTime() - cSavedAt.getTime()) / 1000));
+            const elapsedSeconds = cRunning - ~~(~~(((new Date()).getTime() - cSavedAt.getTime()) / 1000));
             if (elapsedSeconds >= 0) {
                 return elapsedSeconds;
             } else {

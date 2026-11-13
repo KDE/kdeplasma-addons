@@ -152,10 +152,10 @@ PlasmoidItem {
         property alias configNeededPlaceholderVisible: configNeededPlaceholder.visible
 
         function showNextNewStrip() {
-            var firstHighlightedButtonIndex = undefined;
+            let firstHighlightedButtonIndex = undefined;
 
-            for (var i = 0; i < comicTabbar.count; ++i) {
-                var button = comicTabbar.itemAt(i) as ComicTab;
+            for (let i = 0; i < comicTabbar.count; ++i) {
+                const button = comicTabbar.itemAt(i) as ComicTab;
                 if (button.plugin !== undefined && button.highlight == true) {
                     //plugin is ordered
                     if (button.plugin > comicTabbar.currentComicTab.plugin) {
@@ -243,7 +243,7 @@ PlasmoidItem {
                 elide: Text.ElideRight
 
                 function getTopInfo() {
-                    var tempTop = "";
+                    let tempTop = "";
 
                     if ( mainWindow.showComicTitle ) {
                         tempTop = mainWindow.comicData.title ?? "";

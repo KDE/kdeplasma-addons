@@ -43,7 +43,9 @@ Item {
         delayed: true
         value: {
             if (compactRepresentation.inPanel) {
-                return compactRepresentation.isVertical ? CompactRepresentation.LayoutType.VerticalPanel : CompactRepresentation.LayoutType.HorizontalPanel;
+                return compactRepresentation.isVertical
+                    ? CompactRepresentation.LayoutType.VerticalPanel
+                    : CompactRepresentation.LayoutType.HorizontalPanel;
             }
             if (compactRepresentation.parent.width - iconItem.Layout.preferredWidth >= remainingTimeLabel.contentWidth) {
                 return CompactRepresentation.LayoutType.HorizontalDesktop;

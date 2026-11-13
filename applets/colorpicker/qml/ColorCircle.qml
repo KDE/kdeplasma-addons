@@ -16,9 +16,9 @@ import "Logic.js" as Logic
 PlasmaComponents3.ToolButton {
     id: colorButton
 
-    property alias color: colorCircle.color
-    property alias colorCircle: colorCircle
-    property Item loadingIndicator: null
+    property alias color: colorCircleItem.color
+    property alias colorCircle: colorCircleItem
+    property LoadingIndicator loadingIndicator: null
     property color viewBackgroundColor
     property bool forceChecked: false
     required property bool hasColor
@@ -41,6 +41,13 @@ PlasmaComponents3.ToolButton {
 
     onClicked: toggleExpandedRequested()
 
+    Connections {
+        target: colorButton.loadingIndicator
+        function onAboutToDestroy() {
+            colorButton.loadingIndicator = null
+        }
+    }
+
     PlasmaCore.ToolTipArea {
         anchors.fill: parent
         mainText: colorButton.text
@@ -48,7 +55,7 @@ PlasmaComponents3.ToolButton {
     }
 
     Rectangle {
-        id: colorCircle
+        id: colorCircleItem
         anchors.centerIn: parent
         // try to match the color-picker icon in size
         width: Kirigami.Units.iconSizes.roundedIconSize(colorButton.width) * 0.75
@@ -71,11 +78,11 @@ PlasmaComponents3.ToolButton {
         border {
             color: Kirigami.Theme.textColor
             width: {
-                const luminances = [luminance(colorButton.viewBackgroundColor), luminance(colorCircle.color)]
+                const luminances = [luminance(colorButton.viewBackgroundColor), luminance(colorCircleItem.color)]
                 const contrast =  (Math.max(...luminances) + 0.05) / (Math.min(...luminances)  + 0.05);
 
                 // show border only if there's too little contrast to the surrounding view or color is transparent
-                if (contrast > 3 && colorCircle.color.a > 0.5) {
+                if (contrast > 3 && colorCircleItem.color.a > 0.5) {
                     return 0;
                 } else {
                     return Math.round(Math.max(1, width / 20));
@@ -89,7 +96,7 @@ PlasmaComponents3.ToolButton {
             enabled: colorButton.hasColor
 
             onActiveChanged: if (active) {
-                colorCircle.grabToImage((result) => {
+                colorCircleItem.grabToImage((result) => {
                     colorButton.Drag.imageSource = result.url;
                     colorButton.Drag.active = dragHandler.active;
                 });
