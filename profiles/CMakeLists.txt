@@ -5,9 +5,10 @@ target_link_libraries(profiles_utility_static PRIVATE Qt::Core KF6::I18n KF6::Co
 target_include_directories(profiles_utility_static
     PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
+qt_extract_metatypes(profiles_utility_static)
 
-ecm_add_qml_module(profiles_qml_plugin URI org.kde.plasma.private.profiles)
-target_sources(profiles_qml_plugin PRIVATE profilesplugin.cpp)
+ecm_add_qml_module(profiles_qml_plugin URI org.kde.plasma.private.profiles DEPENDENCIES QtCore GENERATE_PLUGIN_SOURCE)
+target_sources(profiles_qml_plugin PRIVATE types.h)
 target_link_libraries(profiles_qml_plugin PRIVATE
     Qt::Qml
     profiles_utility_static
