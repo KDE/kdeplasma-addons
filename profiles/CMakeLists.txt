@@ -6,8 +6,8 @@ target_include_directories(profiles_utility_static
     PUBLIC "$<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}>"
 )
 
-ecm_add_qml_module(profiles_qml_plugin URI org.kde.plasma.private.profiles)
-target_sources(profiles_qml_plugin PRIVATE profilesplugin.cpp)
+ecm_add_qml_module(profiles_qml_plugin URI org.kde.plasma.private.profiles GENERATE_PLUGIN_SOURCE)
+target_sources(profiles_qml_plugin PRIVATE types.h)
 target_link_libraries(profiles_qml_plugin PRIVATE
     Qt::Qml
     profiles_utility_static
