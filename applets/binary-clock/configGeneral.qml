@@ -10,7 +10,6 @@
 
 import QtQuick
 import QtQuick.Controls as QtControls
-import QtQuick.Layouts
 import org.kde.kquickcontrols as KQuickControls
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
@@ -28,21 +27,22 @@ KCM.SimpleKCM {
     Kirigami.Form {
         Kirigami.FormGroup {
             Kirigami.FormEntry {
+                title: i18nc("@option:check prefix completes … seconds", "Show:")
                 contentItem: QtControls.CheckBox {
                     id: showSecondsCheckBox
-                    text: i18nc("@option:check", "Show Seconds")
+                    text: i18nc("@option:check completes Show …", "Seconds")
                 }
             }
         }
 
         Kirigami.FormGroup {
-            title: i18nc("@title:group form title for group of radiobuttons, default/custom, e.g. …Active lights", "Active Lights")
 
             QtControls.ButtonGroup {
                 id: activeButtonGroup
             }
 
             Kirigami.FormEntry {
+                title: i18nc("@title:group form title for group of radiobuttons, default/custom color", "Active Lights:")
                 contentItem: QtControls.RadioButton {
                     text: i18nc("@option:radio color for active lights", "Default color")
                     checked: !root.cfg_useCustomColorForActive
@@ -64,7 +64,6 @@ KCM.SimpleKCM {
             }
         }
         Kirigami.FormGroup {
-            title: i18nc("@title:group form title for group of radiobuttons, default/custom/off", "Inactive lights")
             QtControls.ButtonGroup {
                 id: inactiveButtonGroup
                 onClicked: button => {
@@ -73,6 +72,7 @@ KCM.SimpleKCM {
                 }
             }
             Kirigami.FormEntry {
+                title: i18nc("@title:group form title for group of radiobuttons, default/custom/off", "Inactive lights:")
                 contentItem: QtControls.RadioButton {
                     id: useDefaultColorForInactiveRadioButton
                     QtControls.ButtonGroup.group: inactiveButtonGroup
