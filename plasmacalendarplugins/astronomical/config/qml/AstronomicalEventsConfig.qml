@@ -34,28 +34,33 @@ KCM.SimpleKCM {
                            configStorage.isSeasonShown === showSeasonsCheckBox.checked)
     }
 
-    Kirigami.FormLayout {
-
+    Kirigami.Form {
         ConfigStorage {
             id: configStorage
         }
 
-        QQC2.CheckBox {
-            id: showLunarPhasesCheckBox
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nd("plasma_calendar_astronomicalevents", "Show:")
+                contentItem: QQC2.CheckBox {
+                    id: showLunarPhasesCheckBox
 
-            Kirigami.FormData.label: i18nd("plasma_calendar_astronomicalevents", "Show:")
 
-            checked: configStorage.isLunarPhaseShown
-            text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Lunar phases")
-            onCheckedChanged: configPage.checkUnsavedChanges();
-        }
+                    checked: configStorage.isLunarPhaseShown
+                    text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Lunar phases")
+                    onCheckedChanged: configPage.checkUnsavedChanges();
+                }
+            }
 
-        QQC2.CheckBox {
-            id: showSeasonsCheckBox
+            Kirigami.FormEntry {
+                contentItem: QQC2.CheckBox {
+                    id: showSeasonsCheckBox
 
-            checked: configStorage.isSeasonShown
-            text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Astronomical seasons (solstices and equinoxes)")
-            onCheckedChanged: configPage.checkUnsavedChanges();
+                    checked: configStorage.isSeasonShown
+                    text: i18ndc("plasma_calendar_astronomicalevents", "@option:check", "Astronomical seasons (solstices and equinoxes)")
+                    onCheckedChanged: configPage.checkUnsavedChanges();
+                }
+            }
         }
     }
 }
