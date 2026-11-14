@@ -48,84 +48,88 @@ KCM.SimpleKCM {
             text: i18nc("@label:info. %1 is the name of a weather service", "“%1” may not offer the current temperature or other weather conditions for this location.", locations.getProviderDisplayName(Plasmoid.configuration.provider))
         }
 
-        Kirigami.FormLayout {
-            Item {
-                Kirigami.FormData.isSection: true
-                Kirigami.FormData.label: i18nc("@title:group", "Compact Mode")
-
-                // TODO: conditionalize this once there are also settings for non-compact mode
-                visible: false
-            }
-
-            QQC2.RadioButton {
-                id: radioTempInBadge
-                Kirigami.FormData.label: i18nc("@label", "Show temperature:")
-                checked: cfg_showTemperatureInCompactMode && (cfg_showTemperatureInBadge || needsToBeSquare)
+        Kirigami.Form {
+            Layout.fillWidth: true
+            Kirigami.FormGroup {
+                // TODO: enable title once there are also settings for non-compact mode
+                // title: i18nc("@title:group", "Compact Mode")
                 visible: root.isInPanel
-                onToggled: setShowTemperature(true, true)
-                text: i18nc("@option:radio Show temperature:", "Over the widget icon")
+                QQC2.ButtonGroup { id: temperatureButtonGroup }
+                Kirigami.FormEntry {
+                    title: i18nc("@label", "Show temperature:")
+                    contentItem: QQC2.RadioButton {
+                        id: radioTempInBadge
+                        QQC2.ButtonGroup.group: temperatureButtonGroup
+                        checked: root.cfg_showTemperatureInCompactMode && (root.cfg_showTemperatureInBadge || root.needsToBeSquare)
+                        onToggled: root.setShowTemperature(true, true)
+                        text: i18nc("@option:radio Show temperature:", "Over the widget icon")
+                    }
+                }
+                Kirigami.FormEntry {
+                    contentItem: QQC2.RadioButton {
+                        id: radioTempBesideIcon
+                        visible: !root.needsToBeSquare
+                        QQC2.ButtonGroup.group: temperatureButtonGroup
+                        checked: root.cfg_showTemperatureInCompactMode && !root.cfg_showTemperatureInBadge && !root.needsToBeSquare
+                        onToggled: root.setShowTemperature(true, false)
+                        text: i18nc("@option:radio Show temperature:", "Beside the widget icon")
+                    }
+                }
+                Kirigami.FormEntry {
+                    contentItem: QQC2.RadioButton {
+                        id: radioTempHide
+                        QQC2.ButtonGroup.group: temperatureButtonGroup
+                        checked: !root.cfg_showTemperatureInCompactMode && root.isInPanel
+                        onToggled: root.setShowTemperature(false, false)
+                        text: i18nc("@option:radio Show temperature:", "Do not show")
+                    }
+                }
             }
 
-            QQC2.RadioButton {
-                id: radioTempBesideIcon
-                visible: !needsToBeSquare && root.isInPanel
-                checked: cfg_showTemperatureInCompactMode && !cfg_showTemperatureInBadge && !needsToBeSquare
-                onToggled: setShowTemperature(true, false)
-                text: i18nc("@option:radio Show temperature:", "Beside the widget icon")
-            }
-
-            QQC2.RadioButton {
-                id: radioTempHide
-                checked: !cfg_showTemperatureInCompactMode && root.isInPanel
+            Kirigami.FormGroup {
                 visible: root.isInPanel
-                onToggled: setShowTemperature(false, false)
-                text: i18nc("@option:radio Show temperature:", "Do not show")
+                Kirigami.FormEntry {
+                    title: i18nc("@label", "Show in tooltip:")
+                    contentItem: QQC2.CheckBox {
+                        id: showTemperatureInTooltipCheckBox
+                        text: i18nc("@option:check", "Temperature")
+                    }
+                }
+                Kirigami.FormEntry {
+                    contentItem: QQC2.CheckBox {
+                        id: showWindInTooltipCheckBox
+                        text: i18nc("@option:check Show in tooltip: wind", "Wind")
+                    }
+                }
+                Kirigami.FormEntry {
+                    contentItem: QQC2.CheckBox {
+                        id: showPressureInTooltipCheckBox
+                        text: i18nc("@option:check Show in tooltip: pressure", "Pressure")
+                    }
+                }
+                Kirigami.FormEntry {
+                    contentItem: QQC2.CheckBox {
+                        id: showHumidityInTooltipCheckBox
+                        text: i18nc("@option:check Show in tooltip: humidity", "Humidity")
+                    }
+                }
             }
 
-            Item {
-                Kirigami.FormData.isSection: true
-                visible: root.isInPanel
-            }
+            Kirigami.FormGroup {
+                Kirigami.FormEntry {
+                    title: i18nc("@label", "Show temperature graph:")
+                    contentItem: QQC2.CheckBox {
+                        id: showHourlyTemperatureGraph
+                        text: i18nc("@option:check", "Hourly Forecast")
+                    }
+                }
 
-            QQC2.CheckBox {
-                id: showTemperatureInTooltipCheckBox
-                visible: root.isInPanel
-                Kirigami.FormData.label: i18nc("@label", "Show in tooltip:")
-                text: i18nc("@option:check", "Temperature")
-            }
-
-            QQC2.CheckBox {
-                id: showWindInTooltipCheckBox
-                visible: root.isInPanel
-                text: i18nc("@option:check Show in tooltip: wind", "Wind")
-            }
-
-            QQC2.CheckBox {
-                id: showPressureInTooltipCheckBox
-                visible: root.isInPanel
-                text: i18nc("@option:check Show in tooltip: pressure", "Pressure")
-            }
-
-            QQC2.CheckBox {
-                id: showHumidityInTooltipCheckBox
-                visible: root.isInPanel
-                text: i18nc("@option:check Show in tooltip: humidity", "Humidity")
-            }
-
-            Item {
-                visible: root.isInPanel
-                Kirigami.FormData.isSection: true
-            }
-
-            QQC2.CheckBox {
-                id: showHourlyTemperatureGraph
-                Kirigami.FormData.label: i18nc("@label", "Show temperature graph:")
-                text: i18nc("@option:check", "Hourly Forecast")
-            }
-
-            QQC2.CheckBox {
-                id: showDayTemperatureGraph
-                text: i18nc("@option:check", "Day Forecast")
+                Kirigami.FormEntry {
+                    contentItem: QQC2.CheckBox {
+                        id: showDayTemperatureGraph
+                        text: i18nc("@option:check", "Day Forecast")
+                    }
+                }
             }
         }
     }
