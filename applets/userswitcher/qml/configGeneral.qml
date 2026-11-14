@@ -17,95 +17,91 @@ KCM.SimpleKCM {
     property bool cfg_showFullName
     property alias cfg_showTechnicalInfo: showTechnicalInfoCheck.checked
 
-    Kirigami.FormLayout {
-        QtControls.ButtonGroup {
-            id: nameGroup
-        }
+    Kirigami.Form {
+        Kirigami.FormGroup {
+            QtControls.ButtonGroup { id: nameGroup }
 
-        QtControls.RadioButton {
-            id: showFullNameRadio
+            Kirigami.FormEntry {
+                title: i18nc("@title:label", "Username style:")
+                contentItem: QtControls.RadioButton {
+                    id: showFullNameRadio
+                    QtControls.ButtonGroup.group: nameGroup
+                    text: i18nc("@option:radio", "Full name (if available)")
+                    checked: root.cfg_showFullName
+                    onClicked: if (checked) root.cfg_showFullName = true;
+                }
+            }
 
-            Kirigami.FormData.label: i18nc("@title:label", "Username style:")
-
-            QtControls.ButtonGroup.group: nameGroup
-            text: i18nc("@option:radio", "Full name (if available)")
-            checked: root.cfg_showFullName
-            onClicked: if (checked) root.cfg_showFullName = true;
-        }
-
-        QtControls.RadioButton {
-            QtControls.ButtonGroup.group: nameGroup
-            text: i18nc("@option:radio", "Login username")
-            checked: !root.cfg_showFullName
-            onClicked: if (checked) root.cfg_showFullName = false;
-        }
-
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-
-        QtControls.ButtonGroup {
-            id: layoutGroup
-        }
-
-        QtControls.RadioButton {
-            id: showOnlyNameRadio
-
-            Kirigami.FormData.label: i18nc("@title:label", "Show:")
-
-            QtControls.ButtonGroup.group: layoutGroup
-            text: i18nc("@option:radio", "Name")
-            checked: root.cfg_showName && !root.cfg_showFace
-            onClicked: {
-                if (checked) {
-                    root.cfg_showName = true;
-                    root.cfg_showFace = false;
+            Kirigami.FormEntry {
+                contentItem: QtControls.RadioButton {
+                    QtControls.ButtonGroup.group: nameGroup
+                    text: i18nc("@option:radio", "Login username")
+                    checked: !root.cfg_showFullName
+                    onClicked: if (checked) root.cfg_showFullName = false;
                 }
             }
         }
+        Kirigami.FormGroup {
+            QtControls.ButtonGroup { id: layoutGroup }
 
-        QtControls.RadioButton {
-            id: showOnlyFaceRadio
+            Kirigami.FormEntry {
+                title: i18nc("@title:label", "Show:")
+                contentItem: QtControls.RadioButton {
+                    id: showOnlyNameRadio
 
-            QtControls.ButtonGroup.group: layoutGroup
-            text: i18nc("@option:radio", "User picture")
-            checked: !root.cfg_showName && root.cfg_showFace
-            onClicked: {
-                if (checked) {
-                    root.cfg_showName = false;
-                    root.cfg_showFace = true;
+                    QtControls.ButtonGroup.group: layoutGroup
+                    text: i18nc("@option:radio", "Name")
+                    checked: root.cfg_showName && !root.cfg_showFace
+                    onClicked: {
+                        if (checked) {
+                            root.cfg_showName = true;
+                            root.cfg_showFace = false;
+                        }
+                    }
+                }
+            }
+
+            Kirigami.FormEntry {
+                contentItem: QtControls.RadioButton {
+                    id: showOnlyFaceRadio
+
+                    QtControls.ButtonGroup.group: layoutGroup
+                    text: i18nc("@option:radio", "User picture")
+                    checked: !root.cfg_showName && root.cfg_showFace
+                    onClicked: {
+                        if (checked) {
+                            root.cfg_showName = false;
+                            root.cfg_showFace = true;
+                        }
+                    }
+                }
+            }
+
+            Kirigami.FormEntry {
+                contentItem: QtControls.RadioButton {
+                    id: showBothRadio
+
+                    QtControls.ButtonGroup.group: layoutGroup
+                    text: i18nc("@option:radio", "Name and user picture")
+                    checked: root.cfg_showName && root.cfg_showFace
+                    onClicked: {
+                        if (checked) {
+                            root.cfg_showName = true;
+                            root.cfg_showFace = true;
+                        }
+                    }
                 }
             }
         }
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@title:label", "Advanced:")
+                contentItem: QtControls.CheckBox {
+                    id: showTechnicalInfoCheck
 
-        QtControls.RadioButton {
-            id: showBothRadio
-
-            QtControls.ButtonGroup.group: layoutGroup
-            text: i18nc("@option:radio", "Name and user picture")
-            checked: root.cfg_showName && root.cfg_showFace
-            onClicked: {
-                if (checked) {
-                    root.cfg_showName = true;
-                    root.cfg_showFace = true;
+                    text: i18nc("@option:check", "Show technical session information")
                 }
             }
-        }
-
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-
-        QtControls.CheckBox {
-            id: showTechnicalInfoCheck
-
-            Kirigami.FormData.label: i18nc("@title:label", "Advanced:")
-
-            text: i18nc("@option:check", "Show technical session information")
         }
     }
 }
