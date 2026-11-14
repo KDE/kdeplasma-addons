@@ -23,70 +23,67 @@ KCM.SimpleKCM {
     property alias cfg_enablePopup: enablePopup.checked
     property alias cfg_title: title.text
 
-    Kirigami.FormLayout {
-        QQC2.SpinBox {
-            id: maxSectionCount
-
-            Kirigami.FormData.label: root.vertical ? i18nc("@label:spinbox", "Maximum columns:") : i18nc("@label:spinbox", "Maximum rows:")
-
-            from: 1
+    Kirigami.Form {
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: root.vertical ? i18nc("@label:spinbox", "Maximum columns:") : i18nc("@label:spinbox", "Maximum rows:")
+                contentItem: QQC2.SpinBox {
+                    id: maxSectionCount
+                    from: 1
+                }
+            }
         }
 
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        QQC2.CheckBox {
-            id: showLauncherNames
-
-            Kirigami.FormData.label: i18nc("@title:group", "Appearance:")
-
-            text: i18nc("@option:check", "Show launcher names")
-        }
-
-        QQC2.CheckBox {
-            id: enablePopup
-            text: i18nc("@option:check", "Enable popup")
-        }
-
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-
-        RowLayout {
-            Kirigami.FormData.label: i18nc("@title:group", "Title:")
-            Layout.fillWidth: true
-
-            visible: Plasmoid.formFactor == PlasmaCore.Types.Planar
-
-            QQC2.CheckBox {
-                id: showTitle
-                checked: title.length
-                text: i18nc("@option:check", "Show:")
-
-                onClicked: {
-                    if (checked) {
-                        title.forceActiveFocus();
-                    } else {
-                        title.text = "";
-                    }
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                title: i18nc("@title:group", "Appearance:")
+                contentItem: QQC2.CheckBox {
+                    id: showLauncherNames
+                    text: i18nc("@option:check", "Show launcher names")
                 }
             }
 
-            Kirigami.ActionTextField {
-                id: title
-                enabled: showTitle.checked
+            Kirigami.FormEntry {
+                contentItem: QQC2.CheckBox {
+                    id: enablePopup
+                    text: i18nc("@option:check", "Enable popup")
+                }
+            }
+        }
 
-                Layout.fillWidth: true
-                placeholderText: i18nc("@info:placeholder", "Custom title")
+        Kirigami.FormGroup {
+            visible: Plasmoid.formFactor == PlasmaCore.Types.Planar
 
-                rightActions: [
-                    Kirigami.Action {
-                        icon.name: "edit-clear"
-                        visible: title.text.length !== 0
-                        onTriggered: title.text = "";
+            Kirigami.FormEntry {
+                title: i18nc("@title:group", "Title:")
+                contentItem: QQC2.CheckBox {
+                    id: showTitle
+                    checked: title.length
+                    text: i18nc("@option:check", "Show:")
+
+                    onClicked: {
+                        if (checked) {
+                            title.forceActiveFocus();
+                        } else {
+                            title.text = "";
+                        }
+                    }
+                }
+                trailingItems: [
+                    Kirigami.ActionTextField {
+                        id: title
+                        enabled: showTitle.checked
+
+                        Layout.fillWidth: true
+                        placeholderText: i18nc("@info:placeholder", "Custom title")
+
+                        rightActions: [
+                            Kirigami.Action {
+                                icon.name: "edit-clear"
+                                visible: title.text.length !== 0
+                                onTriggered: title.text = "";
+                            }
+                        ]
                     }
                 ]
             }
