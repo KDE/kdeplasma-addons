@@ -9,16 +9,16 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-13 01:01+0000\n"
-"PO-Revision-Date: 2026-11-05 13:19+0200\n"
+"PO-Revision-Date: 2026-11-13 14:21+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -216,19 +216,19 @@ msgstr "בחירת תיקייה"
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "הצגת התמונה הקודמת"
 
 #: qml/main.qml:173
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "הצגת תמונה הבאה"
 
 #: qml/main.qml:183
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "פתיחה במציג התמונות שמוגדר כברירת מחדל"
 
 #: qml/main.qml:355
 #, kde-format
