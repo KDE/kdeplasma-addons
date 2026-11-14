@@ -23,106 +23,99 @@ KCM.SimpleKCM {
     property alias cfg_useFavIcon: useFavIcon.checked
     property alias cfg_enableNavigationBar: enableNavigationBar.checked
 
+    Kirigami.Form {
+        Kirigami.FormGroup {
 
-    Kirigami.FormLayout {
+            QQC2.ButtonGroup { id: iconGroup }
 
-        QQC2.ButtonGroup {
-            id: iconGroup
-        }
+            Kirigami.FormEntry {
+                title: i18nc("@title:group", "Icon:")
+                contentItem: QQC2.RadioButton {
+                    id: useFavIcon
 
-        QQC2.RadioButton {
-            id: useFavIcon
+                    text: i18nc("@option:radio", "Website's favicon")
 
-            Kirigami.FormData.label: i18nc("@title:group", "Icon:")
-            text: i18nc("@option:radio", "Website's favicon")
-
-            QQC2.ButtonGroup.group: iconGroup
-        }
-
-        RowLayout {
-            spacing: Kirigami.Units.smallSpacing
-
-            QQC2.RadioButton {
-                id: useSystemIcon
-                checked: !root.cfg_useFavIcon
-
-                QQC2.ButtonGroup.group: iconGroup
-            }
-
-            QQC2.Button {
-                id: iconButton
-
-                implicitWidth: previewFrame.width + Kirigami.Units.smallSpacing * 2
-                implicitHeight: previewFrame.height + Kirigami.Units.smallSpacing * 2
-                enabled: useSystemIcon.checked
-                hoverEnabled: true
-
-                Accessible.name: i18nc("@action:button", "Change Web Browser's icon")
-                Accessible.description: i18nc("@info:whatsthis", "Current icon is %1. Click to open menu to change the current icon or reset to the default icon.", root.cfg_icon)
-                Accessible.role: Accessible.ButtonMenu
-
-                QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
-                QQC2.ToolTip.text: i18nc("@info:tooltip", "Icon name is \"%1\"", root.cfg_icon)
-                QQC2.ToolTip.visible: iconButton.hovered && root.cfg_icon.length > 0
-
-                onPressed: iconMenu.opened ? iconMenu.close() : iconMenu.open()
-
-                KIconThemes.IconDialog {
-                    id: iconDialog
-                    onIconNameChanged: {
-                        root.cfg_icon = iconName || "";
-                    }
+                    QQC2.ButtonGroup.group: iconGroup
                 }
+            }
+            Kirigami.FormEntry {
+                contentItem: QQC2.RadioButton {
+                        id: useSystemIcon
+                        checked: !root.cfg_useFavIcon
+                        QQC2.ButtonGroup.group: iconGroup
+                        text: i18nc("@option:radio", "Custom icon")
+                }
+                trailingItems: [
+                    QQC2.Button {
+                        id: iconButton
 
-                KSvg.FrameSvgItem {
-                    id: previewFrame
-                    anchors.centerIn: parent
-                    imagePath: Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal
+                        implicitWidth: previewFrame.width + Kirigami.Units.smallSpacing * 2
+                        implicitHeight: previewFrame.height + Kirigami.Units.smallSpacing * 2
+                        enabled: useSystemIcon.checked
+                        hoverEnabled: true
+
+                        Accessible.name: i18nc("@action:button", "Change Web Browser's icon")
+                        Accessible.description: i18nc("@info:whatsthis", "Current icon is %1. Click to open menu to change the current icon or reset to the default icon.", root.cfg_icon)
+                        Accessible.role: Accessible.ButtonMenu
+
+                        QQC2.ToolTip.delay: Kirigami.Units.toolTipDelay
+                        QQC2.ToolTip.text: i18nc("@info:tooltip", "Icon name is \"%1\"", root.cfg_icon)
+                        QQC2.ToolTip.visible: iconButton.hovered && root.cfg_icon.length > 0
+
+                        onPressed: iconMenu.opened ? iconMenu.close() : iconMenu.open()
+
+                        KIconThemes.IconDialog {
+                            id: iconDialog
+                            onIconNameChanged: {
+                                root.cfg_icon = iconName || "";
+                            }
+                        }
+
+                        KSvg.FrameSvgItem {
+                            id: previewFrame
+                            anchors.centerIn: parent
+                            imagePath: Plasmoid.formFactor === PlasmaCore.Types.Vertical || Plasmoid.formFactor === PlasmaCore.Types.Horizontal
                             ? "widgets/panel-background" : "widgets/background"
-                    width: Kirigami.Units.iconSizes.large + fixedMargins.left + fixedMargins.right
-                    height: Kirigami.Units.iconSizes.large + fixedMargins.top + fixedMargins.bottom
+                            width: Kirigami.Units.iconSizes.large + fixedMargins.left + fixedMargins.right
+                            height: Kirigami.Units.iconSizes.large + fixedMargins.top + fixedMargins.bottom
 
-                    Kirigami.Icon {
-                        anchors.centerIn: parent
-                        width: Kirigami.Units.iconSizes.large
-                        height: width
-                        source: root.cfg_icon || "internet-web-browser-symbolic"
+                            Kirigami.Icon {
+                                anchors.centerIn: parent
+                                width: Kirigami.Units.iconSizes.large
+                                height: width
+                                source: root.cfg_icon || "internet-web-browser-symbolic"
+                            }
+                        }
+
+                        QQC2.Menu {
+                            id: iconMenu
+
+                            // Appear below the button
+                            y: +parent.height
+
+                            QQC2.MenuItem {
+                                text: i18nc("@item:inmenu Open icon chooser dialog", "Choose…")
+                                icon.name: "document-open-folder"
+                                Accessible.description: i18nc("@info:whatsthis", "Choose an icon for Web Browser")
+                                onClicked: iconDialog.open()
+                            }
+                            QQC2.MenuItem {
+                                text: i18nc("@item:inmenu Reset icon to default", "Reset to default icon")
+                                icon.name: "edit-clear"
+                                enabled: root.cfg_icon !== ""
+                                onClicked: root.cfg_icon = ""
+                            }
+                        }
                     }
-                }
-
-                QQC2.Menu {
-                    id: iconMenu
-
-                    // Appear below the button
-                    y: +parent.height
-
-                    QQC2.MenuItem {
-                        text: i18nc("@item:inmenu Open icon chooser dialog", "Choose…")
-                        icon.name: "document-open-folder"
-                        Accessible.description: i18nc("@info:whatsthis", "Choose an icon for Web Browser")
-                        onClicked: iconDialog.open()
-                    }
-                    QQC2.MenuItem {
-                        text: i18nc("@item:inmenu Reset icon to default", "Reset to default icon")
-                        icon.name: "edit-clear"
-                        enabled: root.cfg_icon !== ""
-                        onClicked: root.cfg_icon = ""
-                    }
-                }
+                ]
             }
         }
-
-        Item {
-            Kirigami.FormData.isSection: true
-        }
-
-        QQC2.CheckBox {
-            id: enableNavigationBar
-            text: i18nc("@option:check", "Display Navigation Bar")
-            checked: enableNavigationBar.checked
-
-            onCheckedChanged: {
-                root.cfg_enableNavigationBar = enableNavigationBar.checked
+        Kirigami.FormGroup {
+            Kirigami.FormEntry {
+                contentItem: QQC2.CheckBox {
+                    id: enableNavigationBar
+                    text: i18nc("@option:check", "Display Navigation Bar")
+                }
             }
         }
     }
