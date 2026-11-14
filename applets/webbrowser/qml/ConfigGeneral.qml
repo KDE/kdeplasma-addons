@@ -1,7 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
 import QtQuick.Controls as QQC2
-import org.kde.plasma.components as PlasmaComponents3
 
 import org.kde.kirigami as Kirigami
 import org.kde.kcmutils as KCM
@@ -50,13 +49,14 @@ KCM.SimpleKCM {
             // due to which a simple Layout.leftMargin doesn't work
             Item { implicitWidth: Kirigami.Units.gridUnit }
 
-            PlasmaComponents3.TextField {
+            QQC2.TextField {
                 id: defaultUrl
-                onAccepted: {
-                    let url = text;
-                    if (url.indexOf(":/") < 0) {
+                onEditingFinished: {
+                    let url = text.trim();
+                    if (url && url.indexOf(":/") < 0) {
                         url = "http://" + url;
                     }
+                    text = url
                 }
 
                 Layout.fillWidth: true
