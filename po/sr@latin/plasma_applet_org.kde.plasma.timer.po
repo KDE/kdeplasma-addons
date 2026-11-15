@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-09 00:57+0000\n"
-"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"PO-Revision-Date: 2026-11-14 16:15+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@latin\n"
@@ -119,10 +119,7 @@ msgid "Add"
 msgstr "Dodaj"
 
 #: configTimes.qml:85
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in the widget’s "
-#| "context menu."
+#, kde-format
 msgctxt "@info:usagetip PlaceHolderMessage empty ListView"
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -132,43 +129,37 @@ msgstr ""
 "vidžeta."
 
 #: configTimes.qml:191
-#, fuzzy, kde-format
-#| msgid "Apply"
+#, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Primeni"
 
 #: configTimes.qml:210
-#, fuzzy, kde-format
-#| msgid "Cancel"
+#, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Odustani"
 
 #: configTimes.qml:229
-#, fuzzy, kde-format
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Uredi"
 
 #: configTimes.qml:251
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Obriši"
 
 #: main.qml:41
-#, fuzzy, kde-format
-#| msgid "%1 is running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 u pogonu"
 
 #: main.qml:43
-#, fuzzy, kde-format
-#| msgid "%1 not running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 nije u pogonu"
@@ -179,20 +170,17 @@ msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
 "in hh:mm:ss"
 msgid "%1 of %2 left"
-msgstr ""
+msgstr "Preostaje %1 od %2"
 
 #: main.qml:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use mouse wheel to change digits or choose from predefined timers in the "
-#| "context menu"
+#, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
 "context menu"
 msgstr ""
 "Menjajte cifre točkićem miša, ili izaberite neki od predefinisanih "
-"odbrojavača iz kontekstnog menija."
+"odbrojavača iz kontekstnog menija"
 
 #: main.qml:61
 #, kde-format
@@ -200,30 +188,26 @@ msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
 "localized durations"
 msgid "%1 left of %2"
-msgstr ""
+msgstr "Preostaje %1 od %2"
 
 #: main.qml:87
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Odbrojavač"
 
 # rewrite-msgid: /Timer/Countdown/
 #: main.qml:88
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Odbrojavanje završeno"
 
 #: main.qml:118
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "&Start"
+#, kde-format
 msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
-msgstr "&Pokreni"
+msgstr "&Pokreni (%1)"
 
 #: main.qml:119
 #, kde-format
@@ -242,30 +226,3 @@ msgstr "&Zaustavi"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Resetuj"
-
-#, fuzzy
-#~| msgid "Remaining time left: %1 second"
-#~| msgid_plural "Remaining time left: %1 seconds"
-#~ msgctxt ""
-#~ "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
-#~ "running timer"
-#~ msgid "Remaining time left: %1 second"
-#~ msgid_plural "Remaining time left: %1 seconds"
-#~ msgstr[0] "Preostalo vreme: %1 sekunda"
-#~ msgstr[1] "Preostalo vreme: %1 sekunde"
-#~ msgstr[2] "Preostalo vreme: %1 sekundi"
-#~ msgstr[3] "Preostalo vreme: %1 sekunda"
-
-#, fuzzy
-#~| msgid "Scroll over digits to change time"
-#~ msgctxt "@info:usagetip"
-#~ msgid "Scroll over digits to change time"
-#~ msgstr "Klizajte preko cifara da promenite vreme"
-
-#~ msgctxt "remaining time"
-#~ msgid "%1s"
-#~ msgid_plural "%1s"
-#~ msgstr[0] "%1 s"
-#~ msgstr[1] "%1 s"
-#~ msgstr[2] "%1 s"
-#~ msgstr[3] "%1 s"

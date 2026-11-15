@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-13 01:01+0000\n"
-"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"PO-Revision-Date: 2026-11-14 16:15+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
@@ -32,29 +32,25 @@ msgid "Behavior"
 msgstr "Понашање"
 
 #: qml/ConfigBehavior.qml:36
-#, fuzzy, kde-format
-#| msgid "Change picture every:"
+#, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Мијењај слику сваких:"
 
 #: qml/ConfigBehavior.qml:53
-#, fuzzy, kde-format
-#| msgid "Hours"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "сати"
 
 #: qml/ConfigBehavior.qml:67
-#, fuzzy, kde-format
-#| msgid "Minutes"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "минута"
 
 #: qml/ConfigBehavior.qml:81
-#, fuzzy, kde-format
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "секунди"
@@ -236,19 +232,19 @@ msgstr "Избор фасцикле"
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "Прикажи претходну слику"
 
 #: qml/main.qml:173
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "Прикажи сљедећу слику"
 
 #: qml/main.qml:183
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "Отвори у подразумијеваном приказивачу слика"
 
 #: qml/main.qml:355
 #, kde-format

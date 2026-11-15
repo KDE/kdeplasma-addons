@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-08 02:59+0000\n"
-"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"PO-Revision-Date: 2026-11-14 16:15+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
@@ -200,23 +200,21 @@ msgstr " па "
 #, kde-format
 msgctxt "weather condition"
 msgid "few clouds"
-msgstr ""
+msgstr "ријетки облаци"
 
 #: ions/open-meteo/ion_open_meteo.cpp:230
 #: ions/open-meteo/ion_open_meteo.cpp:231
 #, kde-format
 msgctxt "weather condition"
 msgid "cloudy"
-msgstr ""
+msgstr "облачно"
 
 #: ions/open-meteo/ion_open_meteo.cpp:232
 #: ions/open-meteo/ion_open_meteo.cpp:233
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "weather condition"
 msgid "overcast"
-msgstr "Прогноза"
+msgstr "тмурно"
 
 #: ions/open-meteo/ion_open_meteo.cpp:234
 #: ions/open-meteo/ion_open_meteo.cpp:235
@@ -224,14 +222,14 @@ msgstr "Прогноза"
 #, kde-format
 msgctxt "weather condition"
 msgid "haze"
-msgstr ""
+msgstr "измаглица"
 
 #: ions/open-meteo/ion_open_meteo.cpp:237
 #: ions/open-meteo/ion_open_meteo.cpp:238
 #, kde-format
 msgctxt "weather condition"
 msgid "fog with icing"
-msgstr ""
+msgstr "магла са поледицом"
 
 #: ions/open-meteo/ion_open_meteo.cpp:239
 #: ions/open-meteo/ion_open_meteo.cpp:240
@@ -239,171 +237,167 @@ msgstr ""
 #, kde-format
 msgctxt "weather condition"
 msgid "drizzle"
-msgstr ""
+msgstr "ромињање"
 
 #: ions/open-meteo/ion_open_meteo.cpp:241
 #, kde-format
 msgctxt "weather condition"
 msgid "light drizzle"
-msgstr ""
+msgstr "слабо ромињање"
 
 #: ions/open-meteo/ion_open_meteo.cpp:243
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy drizzle"
-msgstr ""
+msgstr "јако ромињање"
 
 #: ions/open-meteo/ion_open_meteo.cpp:244
 #, kde-format
 msgctxt "weather condition"
 msgid "freezing drizzle"
-msgstr ""
+msgstr "ледено ромињање"
 
 #: ions/open-meteo/ion_open_meteo.cpp:245
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy freezing drizzle"
-msgstr ""
+msgstr "јако ледено ромињање"
 
 #: ions/open-meteo/ion_open_meteo.cpp:246
 #, kde-format
 msgctxt "weather condition"
 msgid "rain"
-msgstr ""
+msgstr "киша"
 
 #: ions/open-meteo/ion_open_meteo.cpp:247
 #: ions/open-meteo/ion_open_meteo.cpp:248
 #, kde-format
 msgctxt "weather condition"
 msgid "light rain"
-msgstr ""
+msgstr "слаба киша"
 
 #: ions/open-meteo/ion_open_meteo.cpp:249
-#, fuzzy, kde-format
-#| msgid "Moderate"
+#, kde-format
 msgctxt "weather condition"
 msgid "moderate rain"
-msgstr "умјерен"
+msgstr "умјерена киша"
 
 #: ions/open-meteo/ion_open_meteo.cpp:250
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain"
-msgstr ""
+msgstr "јака киша"
 
 #: ions/open-meteo/ion_open_meteo.cpp:251
 #, kde-format
 msgctxt "weather condition"
 msgid "light freezing rain"
-msgstr ""
+msgstr "слаба ледена киша"
 
 #: ions/open-meteo/ion_open_meteo.cpp:252
 #, kde-format
 msgctxt "weather condition"
 msgid "freezing rain"
-msgstr ""
+msgstr "ледена киша"
 
 #: ions/open-meteo/ion_open_meteo.cpp:253
 #, kde-format
 msgctxt "weather condition"
 msgid "light rain snow"
-msgstr ""
+msgstr "слаба киша, снијег"
 
 #: ions/open-meteo/ion_open_meteo.cpp:254
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy rain snow"
-msgstr ""
+msgstr "јака киша, снијег"
 
 #: ions/open-meteo/ion_open_meteo.cpp:255
 #, kde-format
 msgctxt "weather condition"
 msgid "snow"
-msgstr ""
+msgstr "снијег"
 
 #: ions/open-meteo/ion_open_meteo.cpp:256
 #: ions/open-meteo/ion_open_meteo.cpp:257
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow"
-msgstr ""
+msgstr "слаб снијег"
 
 #: ions/open-meteo/ion_open_meteo.cpp:258
-#, fuzzy, kde-format
-#| msgid "Moderate"
+#, kde-format
 msgctxt "weather condition"
 msgid "moderate snow"
-msgstr "умјерен"
+msgstr "умјерен снијег"
 
 #: ions/open-meteo/ion_open_meteo.cpp:259
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow"
-msgstr ""
+msgstr "јак снијег"
 
 #: ions/open-meteo/ion_open_meteo.cpp:260
 #: ions/open-meteo/ion_open_meteo.cpp:262
 #, kde-format
 msgctxt "weather condition"
 msgid "showers"
-msgstr ""
+msgstr "пљускови"
 
 #: ions/open-meteo/ion_open_meteo.cpp:261
 #, kde-format
 msgctxt "weather condition"
 msgid "light showers"
-msgstr ""
+msgstr "лаки пљускови"
 
 #: ions/open-meteo/ion_open_meteo.cpp:263
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy showers"
-msgstr ""
+msgstr "јаки пљускови"
 
 #: ions/open-meteo/ion_open_meteo.cpp:264
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow rain showers"
-msgstr ""
+msgstr "слаб снијег, кишни пљускови"
 
 #: ions/open-meteo/ion_open_meteo.cpp:265
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy snow rain showers"
-msgstr ""
+msgstr "јак снијег, кишни пљускови"
 
 #: ions/open-meteo/ion_open_meteo.cpp:266
 #, kde-format
 msgctxt "weather condition"
 msgid "light snow showers"
-msgstr ""
+msgstr "слаби снијежни пљускови"
 
 #: ions/open-meteo/ion_open_meteo.cpp:267
-#, fuzzy, kde-format
-#| msgctxt "@option:radio Show temperature:"
-#| msgid "Do not show"
+#, kde-format
 msgctxt "weather condition"
 msgid "snow showers"
-msgstr "Не приказуј"
+msgstr "снијежни пљускови"
 
 #: ions/open-meteo/ion_open_meteo.cpp:268
 #: ions/open-meteo/ion_open_meteo.cpp:269
 #, kde-format
 msgctxt "weather condition"
 msgid "thunderstorm"
-msgstr ""
+msgstr "грмљавина"
 
 #: ions/open-meteo/ion_open_meteo.cpp:270
 #, kde-format
 msgctxt "weather condition"
 msgid "light thunderstorm"
-msgstr ""
+msgstr "слаба грмљавина"
 
 #: ions/open-meteo/ion_open_meteo.cpp:271
 #, kde-format
 msgctxt "weather condition"
 msgid "heavy thunderstorm"
-msgstr ""
+msgstr "јака грмљавина"
 
 #: ions/open-meteo/ion_open_meteo.cpp:272
 #: ions/open-meteo/ion_open_meteo.cpp:290
@@ -411,25 +405,25 @@ msgstr ""
 #, kde-format
 msgctxt "weather condition"
 msgid "n/a"
-msgstr ""
+msgstr "нд."
 
 #: ions/open-meteo/ion_open_meteo.cpp:275
 #, kde-format
 msgctxt "weather condition"
 msgid "sunny"
-msgstr ""
+msgstr "сунчано"
 
 #: ions/open-meteo/ion_open_meteo.cpp:278
 #, kde-format
 msgctxt "weather condition"
 msgid "clear sky"
-msgstr ""
+msgstr "ведро небо"
 
 #: ions/open-meteo/ion_open_meteo.cpp:394
 #, kde-format
 msgctxt "weather credit"
 msgid "Weather data by Open-Meteo"
-msgstr ""
+msgstr "Временски подаци са Open-Meteo"
 
 #: qml/cards/ForecastDelegate.qml:95
 #, kde-format
@@ -441,7 +435,7 @@ msgstr "%1 (%2%)"
 #, kde-format
 msgctxt "High and low temperature wrapper"
 msgid "%1/<font color='%2'>%3</font>"
-msgstr ""
+msgstr "%1/<font color='%2'>%3</font>"
 
 #: qml/cards/ForecastDelegate.qml:124
 #, kde-format
@@ -544,28 +538,22 @@ msgid "Humidity"
 msgstr "Влажност"
 
 #: qml/config/ConfigAppearance.qml:122
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show temperature:"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature graph:"
-msgstr "Прикажи температуру:"
+msgstr "Прикажи графикон температуре:"
 
 #: qml/config/ConfigAppearance.qml:123
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@option:check"
 msgid "Hourly Forecast"
-msgstr "Прогноза"
+msgstr "Прогноза по сатима"
 
 #: qml/config/ConfigAppearance.qml:128
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@option:check"
 msgid "Day Forecast"
-msgstr "Прогноза"
+msgstr "Прогноза по данима"
 
 #: qml/config/ConfigUnits.qml:31
 #, kde-format
@@ -673,147 +661,121 @@ msgstr ""
 "поново касније."
 
 #: qml/DayForecastGraph.qml:42 qml/HourlyForecastGraph.qml:44
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Temperature"
-msgstr "Температуру"
+msgstr "Температура"
 
 #: qml/DayForecastGraph.qml:59 qml/HourlyForecastGraph.qml:61
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "High Temperature"
-msgstr "Температуру"
+msgstr "Највиша температура"
 
 #: qml/DayForecastGraph.qml:76 qml/HourlyForecastGraph.qml:78
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Low Temperature"
-msgstr "Температуру"
+msgstr "Најнижа температура"
 
 #: qml/DayForecastGraph.qml:93 qml/HourlyForecastGraph.qml:95
 #, kde-format
 msgctxt "@label"
 msgid "Chance of precipitation"
-msgstr ""
+msgstr "Вјероватноћа падавина"
 
 #: qml/DetailsView.qml:35
-#, fuzzy, kde-format
-#| msgctxt "@label ground temperature"
-#| msgid "Dewpoint:"
+#, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint"
-msgstr "Тачка рошења:"
+msgstr "Тачка рошења"
 
 #: qml/DetailsView.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@option:check Show in tooltip: pressure"
-#| msgid "Pressure"
+#, kde-format
 msgctxt "@label"
 msgid "Pressure"
 msgstr "Притисак"
 
 #: qml/DetailsView.qml:45
-#, fuzzy, kde-format
-#| msgctxt "@label pressure tendency, rising/falling/steady"
-#| msgid "Pressure Tendency:"
+#, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure tendency"
-msgstr "Кретање притиска:"
+msgstr "Кретање притиска"
 
 #: qml/DetailsView.qml:50
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Visibility:"
+#, kde-format
 msgctxt "@label"
 msgid "Visibility"
-msgstr "Видљивост:"
+msgstr "Видљивост"
 
 #: qml/DetailsView.qml:63
-#, fuzzy, kde-format
-#| msgctxt "@option:check Show in tooltip: humidity"
-#| msgid "Humidity"
+#, kde-format
 msgctxt "@label"
 msgid "Humidity"
 msgstr "Влажност"
 
 #: qml/DetailsView.qml:68
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Wind Gust:"
+#, kde-format
 msgctxt "@label"
 msgid "Wind gust"
-msgstr "Налети вјетра:"
+msgstr "Налети вјетра"
 
 #: qml/DetailsView.qml:73
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Wind speed:"
+#, kde-format
 msgctxt "@label"
 msgid "Wind speed"
-msgstr "Брзина вјетра:"
+msgstr "Брзина вјетра"
 
 #: qml/ForecastNavigation.qml:35
 #, kde-format
 msgctxt "@action"
 msgid "Go to first day"
-msgstr ""
+msgstr "Иди на први дан"
 
 #: qml/ForecastNavigation.qml:54
 #, kde-format
 msgctxt "@action"
 msgid "Go to previous day"
-msgstr ""
+msgstr "Иди на претходни дан"
 
 #: qml/ForecastNavigation.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "Go to next day"
-msgstr ""
+msgstr "Иди на сљедећи дан"
 
 #: qml/ForecastNavigation.qml:154
 #, kde-format
 msgctxt "@action"
 msgid "Go to last day"
-msgstr ""
+msgstr "Иди на посљедњи дан"
 
 #: qml/FullRepresentation.qml:61
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Unable to load weather forecast"
+#, kde-format
 msgctxt "@action:button"
 msgid "Return to Weather Forecast"
-msgstr "Не могу да учитам временску прогнозу"
+msgstr "Назад на временску прогнозу"
 
 #: qml/FullRepresentation.qml:78
-#, fuzzy, kde-format
-#| msgid "Please set your location"
+#, kde-format
 msgctxt "@info PlaceholderMessage text"
 msgid "Please set your location"
 msgstr "Поставите своју локацију"
 
 #: qml/FullRepresentation.qml:81
-#, fuzzy, kde-format
-#| msgid "Set location…"
+#, kde-format
 msgctxt "@action:button PlaceholderMessage helpfulAction"
 msgid "Set location…"
 msgstr "Постави локацију…"
 
 #: qml/FullRepresentation.qml:95
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage text"
 msgid "Unable to retrieve weather information for %1"
 msgstr "Не могу да добавим временске податке за %1"
 
 #: qml/FullRepresentation.qml:95
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage text"
 msgid "Unable to retrieve weather information"
 msgstr "Не могу да добавим временске податке"
@@ -835,11 +797,6 @@ msgid "Unable to load weather forecast"
 msgstr "Не могу да учитам временску прогнозу"
 
 #: qml/FullRepresentation.qml:106
-#, fuzzy
-#| msgctxt "@info:usagetip"
-#| msgid ""
-#| "There may be a technical issue with the weather provider. If the issue "
-#| "persists for longer than a day, submit a bug report."
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
@@ -848,7 +805,8 @@ msgid ""
 "link>."
 msgstr ""
 "Можда постоји технички проблем код добављача временске прогнозе. Ако проблем "
-"потраје дуже од једног дана, пријавите грешку."
+"потраје дуже од једног дана, <link url='https://bugs.kde.org/enter_bug.cgi?"
+"product=plasmashell&component=Weather%20widget'>пријавите грешку</link>."
 
 #: qml/LocationHeader.qml:48
 #, kde-format
@@ -908,8 +866,7 @@ msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
 #: qml/main.qml:166
-#, fuzzy, kde-format
-#| msgid "Humidity: %1"
+#, kde-format
 msgctxt "@info:tooltip fragment, %1 is humidity in configured unit"
 msgid "Humidity: %1"
 msgstr "Влажност: %1"
@@ -921,32 +878,25 @@ msgid "Show more information"
 msgstr "Прикажи више података"
 
 #: qml/StackedView.qml:56
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@title"
 msgid "Hourly Forecast"
-msgstr "Прогноза"
+msgstr "Прогноза по сатима"
 
 #: qml/StackedView.qml:86
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@title %1 is a number of days"
 msgid "%1-Day Forecast"
-msgstr "Прогноза"
+msgstr "Прогноза за %1 дана"
 
 #: qml/TabbedView.qml:62
 #, kde-format
 msgctxt "@title:tab"
 msgid "Hourly"
-msgstr ""
+msgstr "По сатима"
 
 #: qml/TabbedView.qml:77
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "@title:tab"
 msgid "%1 Day"
 msgid_plural "%1 Days"
@@ -968,25 +918,25 @@ msgstr "Осјећај: %1"
 #, kde-format
 msgctxt "@label"
 msgid "Today"
-msgstr ""
+msgstr "Данас"
 
 #: qml/WeatherPage.qml:98
 #, kde-format
 msgctxt "@label"
 msgid "Tomorrow"
-msgstr ""
+msgstr "Сутра"
 
 #: qml/WeatherPage.qml:104
 #, kde-format
 msgctxt "@label"
 msgid "Today to Tomorrow"
-msgstr ""
+msgstr "Данас – сутра"
 
 #: qml/WeatherPage.qml:106
 #, kde-format
 msgctxt "@label %1 is a day of the week"
 msgid "Today to %1"
-msgstr ""
+msgstr "Данас – %1"
 
 #: util.cpp:42
 #, kde-format
@@ -998,7 +948,7 @@ msgstr "°"
 #, kde-format
 msgctxt "temperature unitsymbol"
 msgid "%1%2"
-msgstr ""
+msgstr "%1 %2"
 
 #: util.cpp:60
 #, kde-format
@@ -1022,16 +972,14 @@ msgstr "%1 (%2)"
 #, kde-format
 msgctxt "Short for Day"
 msgid "D"
-msgstr ""
+msgstr "Д"
 
 # |, no-check-spell
 #: weatherdata/futuredays.cpp:295
-#, fuzzy, kde-format
-#| msgctxt "wind direction"
-#| msgid "N"
+#, kde-format
 msgctxt "Short for Night"
 msgid "N"
-msgstr "С"
+msgstr "Н"
 
 #: weatherdata/lastobservation.cpp:262
 #, kde-format
@@ -1058,28 +1006,3 @@ msgstr "веома висок"
 #, kde-format
 msgid "Extreme"
 msgstr "екстреман"
-
-#~ msgid "N/A"
-#~ msgstr "нд."
-
-#~ msgctxt "@label"
-#~ msgid "Pressure:"
-#~ msgstr "Притисак:"
-
-#~ msgctxt "@label"
-#~ msgid "Humidity:"
-#~ msgstr "Влажност:"
-
-#~ msgctxt "@title:tab"
-#~ msgid "Details"
-#~ msgstr "Детаљи"
-
-#~ msgctxt "temperature unitsymbol"
-#~ msgid "%1 %2"
-#~ msgstr "%1 %2"
-
-#~ msgid "Day"
-#~ msgstr "дан"
-
-#~ msgid "Night"
-#~ msgstr "ноћ"

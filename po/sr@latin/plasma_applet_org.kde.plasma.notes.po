@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2026-10-04 17:03+0200\n"
+"PO-Revision-Date: 2026-11-14 16:15+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@latin\n"
@@ -27,137 +27,119 @@ msgid "Appearance"
 msgstr "Izgled"
 
 #: qml/configAppearance.qml:32
-#, fuzzy, kde-format
-#| msgid "%1pt"
+#, kde-format
 msgctxt "@item:valuesuffix %1 is font size in points"
 msgid "%1pt"
 msgstr "%1 pt"
 
 #: qml/configAppearance.qml:38
-#, fuzzy, kde-format
-#| msgid "Text font size:"
+#, kde-format
 msgctxt "@label:spinbox"
 msgid "Text font size:"
 msgstr "Veličina fonta teksta:"
 
 # >> @item
 #: qml/configAppearance.qml:72
-#, fuzzy, kde-format
-#| msgid "A white sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A white sticky note"
 msgstr "bela lepljiva beleška"
 
 # >> @item
 #: qml/configAppearance.qml:73
-#, fuzzy, kde-format
-#| msgid "A black sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A black sticky note"
 msgstr "crna lepljiva beleška"
 
 # >> @item
 #: qml/configAppearance.qml:74
-#, fuzzy, kde-format
-#| msgid "A red sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A red sticky note"
 msgstr "crvena lepljiva beleška"
 
 # >> @item
 #: qml/configAppearance.qml:75
-#, fuzzy, kde-format
-#| msgid "An orange sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "An orange sticky note"
 msgstr "narandžasta lepljiva beleška"
 
 # >> @item
 #: qml/configAppearance.qml:76
-#, fuzzy, kde-format
-#| msgid "A yellow sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A yellow sticky note"
 msgstr "žuta lepljiva beleška"
 
 # >> @item
 #: qml/configAppearance.qml:77
-#, fuzzy, kde-format
-#| msgid "A green sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A green sticky note"
 msgstr "zelena lepljiva beleška"
 
 # >> @item
 #: qml/configAppearance.qml:78
-#, fuzzy, kde-format
-#| msgid "A blue sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A blue sticky note"
 msgstr "plava lepljiva beleška"
 
 # >> @item
 #: qml/configAppearance.qml:79
-#, fuzzy, kde-format
-#| msgid "A pink sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A pink sticky note"
 msgstr "ružičasta lepljiva beleška"
 
 # >> @item
 #: qml/configAppearance.qml:80
-#, fuzzy, kde-format
-#| msgid "A transparent sticky note"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note"
 msgstr "prozirna lepljiva beleška"
 
 # >> @item
 #: qml/configAppearance.qml:81
-#, fuzzy, kde-format
-#| msgid "A transparent sticky note with light text"
+#, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note with light text"
 msgstr "prozirna lepljiva beleška sa svetlim tekstom"
 
 #: qml/main.qml:308
-#, fuzzy, kde-format
-#| msgid "Undo"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Undo"
 msgstr "Opozovi"
 
 #: qml/main.qml:316
-#, fuzzy, kde-format
-#| msgid "Redo"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Redo"
 msgstr "Ponovi"
 
 #: qml/main.qml:326
-#, fuzzy, kde-format
-#| msgid "Cut"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Cut"
 msgstr "Iseci"
 
 #: qml/main.qml:334
-#, fuzzy, kde-format
-#| msgid "Copy"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Copy"
 msgstr "Kopiraj"
 
 #: qml/main.qml:342
-#, fuzzy, kde-format
-#| msgid "Paste"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Paste"
 msgstr "Nalepi"
 
 #: qml/main.qml:348
-#, fuzzy, kde-format
-#| msgid "Paste with Full Formatting"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Paste with Full Formatting"
 msgstr "Nalepi sa punim formatiranjem"
@@ -170,22 +152,19 @@ msgid "Remove Formatting"
 msgstr "Ukloni formatiranje"
 
 #: qml/main.qml:370
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Delete"
 msgstr "Obriši"
 
 #: qml/main.qml:377
-#, fuzzy, kde-format
-#| msgid "Clear"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Clear"
 msgstr "Očisti"
 
 #: qml/main.qml:387
-#, fuzzy, kde-format
-#| msgid "Select All"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select All"
 msgstr "Izaberi sve"
@@ -221,15 +200,13 @@ msgid "Keep Open"
 msgstr "Drži otvoreno"
 
 #: qml/main.qml:662
-#, fuzzy, kde-format
-#| msgid "Discard this note?"
+#, kde-format
 msgctxt "@title;window dialog title"
 msgid "Discard this note?"
 msgstr "Odbaciti belešku?"
 
 #: qml/main.qml:663
-#, fuzzy, kde-format
-#| msgid "Are you sure you want to discard this note?"
+#, kde-format
 msgctxt "@info"
 msgid "Are you sure you want to discard this note?"
 msgstr "Želite li zaista da odbacite ovu belešku?"
