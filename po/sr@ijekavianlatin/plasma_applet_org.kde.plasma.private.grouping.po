@@ -1,12 +1,13 @@
 # Translation of plasma_applet_org.kde.plasma.private.grouping.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2016.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.private.grouping\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-12-02 00:43+0000\n"
-"PO-Revision-Date: 2016-12-18 21:56+0100\n"
-"Last-Translator: Chusslove Illich <caslav.ilic@gmx.net>\n"
+"PO-Revision-Date: 2026-11-14 16:15+0100\n"
+"Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
 "MIME-Version: 1.0\n"
@@ -21,4 +22,4 @@ msgstr ""
 #: qml/main.qml:111
 #, kde-format
 msgid "Drag applets here"
-msgstr "Prevucite ovde aplete"
+msgstr "Prevucite ovdje aplete"

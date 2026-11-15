@@ -1,5 +1,6 @@
 # Translation of plasma_applet_org.kde.plasma.private.grouping.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2016.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.private.grouping\n"
