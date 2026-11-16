@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.11.70\n"
+"X-Generator: Lokalize 27.03.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -28,8 +28,7 @@ msgstr "Tastar"
 
 #: contents/ui/configAppearance.qml:34
 #, kde-format
-msgctxt ""
-"@label show keyboard indicator when Caps Lock or Num Lock is activated"
+msgctxt "@label show keyboard indicator when Caps Lock or Num Lock is activated"
 msgid "Show when activated:"
 msgstr "Vis når tasten er slått på:"
 
