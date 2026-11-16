@@ -1,13 +1,13 @@
 # Translation of plasma_applet_org.kde.plasma.quicklaunch to Norwegian Nynorsk
 #
-# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2016, 2018, 2019, 2022.
+# Karl Ove Hufthammer <karl@huftis.org>, 2015, 2016, 2018, 2019, 2022, 2026.
 # Øystein Steffensen-Alværvik <oysteins.omsetting@protonmail.com>, 2018.
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-02 00:56+0000\n"
-"PO-Revision-Date: 2022-02-13 14:38+0100\n"
+"PO-Revision-Date: 2026-11-15 10:18+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.12.2\n"
+"X-Generator: Lokalize 27.03.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -75,8 +75,7 @@ msgid "Custom title"
 msgstr "Sjølvvald tittel"
 
 #: IconItem.qml:184
-#, fuzzy, kde-format
-#| msgid "Launch %1"
+#, kde-format
 msgctxt "@action:button accessible description"
 msgid "Launch %1"
 msgstr "Start %1"
@@ -100,30 +99,25 @@ msgid "Remove Launcher"
 msgstr "Fjern køyrar"
 
 #: main.qml:112
-#, fuzzy, kde-format
-#| msgid "Quicklaunch"
+#, kde-format
 msgctxt "@info:tooltip widget title"
 msgid "Quicklaunch"
 msgstr "Snøggstart"
 
 #: main.qml:113
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "Add launchers by Drag and Drop or by using the context menu."
+#, kde-format
 msgctxt "@info:tooltip widget subtitle"
 msgid "Add launchers by Drag and Drop or by using the context menu."
 msgstr "Legg til køyrar med dra-og-slepp, eller frå kontekstmenyen."
 
 #: main.qml:145
-#, fuzzy, kde-format
-#| msgid "Hide icons"
+#, kde-format
 msgctxt "@info:tooltip for expander arrow"
 msgid "Hide icons"
 msgstr "Gøym ikon"
 
 #: main.qml:145
-#, fuzzy, kde-format
-#| msgid "Show hidden icons"
+#, kde-format
 msgctxt "@info:tooltip for expander arrow"
 msgid "Show hidden icons"
 msgstr "Vis gøymde ikon"

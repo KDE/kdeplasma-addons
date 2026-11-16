@@ -8,14 +8,14 @@ msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-09 00:57+0000\n"
-"PO-Revision-Date: 2026-06-30 22:16+0200\n"
+"PO-Revision-Date: 2026-11-15 10:18+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.07.70\n"
+"X-Generator: Lokalize 27.03.70\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
@@ -118,10 +118,7 @@ msgid "Add"
 msgstr "Legg til"
 
 #: configTimes.qml:85
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in the widget’s "
-#| "context menu."
+#, kde-format
 msgctxt "@info:usagetip PlaceHolderMessage empty ListView"
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -131,43 +128,37 @@ msgstr ""
 "menyen til elementet."
 
 #: configTimes.qml:191
-#, fuzzy, kde-format
-#| msgid "Apply"
+#, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Bruk"
 
 #: configTimes.qml:210
-#, fuzzy, kde-format
-#| msgid "Cancel"
+#, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Avbryt"
 
 #: configTimes.qml:229
-#, fuzzy, kde-format
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Rediger"
 
 #: configTimes.qml:251
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Slett"
 
 #: main.qml:41
-#, fuzzy, kde-format
-#| msgid "%1 is running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 køyrer"
 
 #: main.qml:43
-#, fuzzy, kde-format
-#| msgid "%1 not running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 køyrer ikkje"
@@ -178,13 +169,10 @@ msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
 "in hh:mm:ss"
 msgid "%1 of %2 left"
-msgstr ""
+msgstr "%1 av %2 fullført"
 
 #: main.qml:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use mouse wheel to change digits or choose from predefined timers in the "
-#| "context menu"
+#, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -199,29 +187,25 @@ msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
 "localized durations"
 msgid "%1 left of %2"
-msgstr ""
+msgstr "%1 att for %2."
 
 #: main.qml:87
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Nedteljar"
 
 #: main.qml:88
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Nedteljinga er ferdig"
 
 #: main.qml:118
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "&Start"
+#, kde-format
 msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
-msgstr "&Start"
+msgstr "&Start %1"
 
 #: main.qml:119
 #, kde-format

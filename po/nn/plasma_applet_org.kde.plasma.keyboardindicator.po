@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-05 00:57+0000\n"
-"PO-Revision-Date: 2026-08-02 10:51+0200\n"
+"PO-Revision-Date: 2026-11-15 10:16+0100\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@nuug.no>\n"
 "Language: nn\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.11.70\n"
+"X-Generator: Lokalize 27.03.70\n"
 "X-Environment: kde\n"
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
@@ -47,92 +47,79 @@ msgstr "Num Lock"
 
 # Forstår det slik at det tyder at «Alt»-tasten vil vera aktiv for neste tastetrykk.
 #: main.qml:117
-#, fuzzy, kde-format
-#| msgid "Alt is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Alt applies to next press"
 msgid "Alt is latched"
 msgstr "«Alt»-tasten er verksam"
 
 #: main.qml:119
-#, fuzzy, kde-format
-#| msgid "Alt is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Alt applies until pressed again"
 msgid "Alt is locked"
 msgstr "«Alt»-tasten er låst"
 
 #: main.qml:123
-#, fuzzy, kde-format
-#| msgid "Shift is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Shift applies to next press"
 msgid "Shift is latched"
 msgstr "«Shift»-tasten er verksam"
 
 #: main.qml:125
-#, fuzzy, kde-format
-#| msgid "Shift is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Shift applies until pressed again"
 msgid "Shift is locked"
 msgstr "«Shift»-tasten er låst"
 
 #: main.qml:129
-#, fuzzy, kde-format
-#| msgid "Control is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Ctrl applies to next press"
 msgid "Control is latched"
 msgstr "«Ctrl»-tasten er verksam"
 
 #: main.qml:131
-#, fuzzy, kde-format
-#| msgid "Control is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Ctrl applies until pressed again"
 msgid "Control is locked"
 msgstr "«Ctrl»-tasten er låst"
 
 #: main.qml:135
-#, fuzzy, kde-format
-#| msgid "Meta is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Meta applies to next press"
 msgid "Meta is latched"
 msgstr "«Meta»-tasten er verksam"
 
 #: main.qml:137
-#, fuzzy, kde-format
-#| msgid "Meta is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Meta applies until pressed again"
 msgid "Meta is locked"
 msgstr "«Meta»-tasten er låst"
 
 #: main.qml:141
-#, fuzzy, kde-format
-#| msgid "Alt Gr is latched"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, AltGr applies to next press"
 msgid "Alt Gr is latched"
 msgstr "«Alt Gr»-tasten er verksam"
 
 #: main.qml:143
-#, fuzzy, kde-format
-#| msgid "Alt Gr is locked"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, AltGr applies until pressed again"
 msgid "Alt Gr is locked"
 msgstr "«Alt Gr»-tasten er låst"
 
 #: main.qml:147
-#, fuzzy, kde-format
-#| msgid "Caps Lock activated"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Caps Lock on"
 msgid "Caps Lock activated"
 msgstr "«Caps Lock»-tasten er slått på"
 
 #: main.qml:150
-#, fuzzy, kde-format
-#| msgid "Num Lock activated"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle, Num Lock on"
 msgid "Num Lock activated"
 msgstr "«Num Lock»-tasten er slått på"
 
 #: main.qml:158
-#, fuzzy, kde-format
-#| msgid "No lock keys activated"
+#, kde-format
 msgctxt ""
 "@info:tooltip widget subtitle, no Lock keys or sticky modifiers active"
 msgid "No lock keys activated"
