@@ -103,9 +103,9 @@ PlasmaExtras.Representation {
         width: Math.min(parent.width, Kirigami.Units.gridUnit * 20)
 
         text: i18nc("@info:placeholder", "Unable to load weather forecast")
-        explanation: xi18nc("@info:usagetip", "There may be a technical issue with the weather provider. If the issue persists for longer than a day, <link url='https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</link>.")
+        explanation: xi18nc("@info:usagetip", "There may be a technical issue with the weather provider. If the issue persists for longer than a day, <link url='https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Weather widget'>submit a bug report</link>.")
 
-        onLinkActivated: Qt.openUrlExternally(link)
+        onLinkActivated: link => Qt.openUrlExternally(link)
     }
 
     QQC2.BusyIndicator {
