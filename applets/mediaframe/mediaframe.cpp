@@ -372,7 +372,6 @@ void MediaFrame::slotFinished(KJob *job)
 
         if (m_successCallback.isCallable()) {
             args << QJSValue(QUrl::fromLocalFile(path).toString());
-            qDebug() << "returning " << QUrl::fromLocalFile(path).toString();
             m_successCallback.call(args);
         }
     } else {
