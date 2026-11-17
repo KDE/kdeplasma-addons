@@ -51,11 +51,12 @@ KCM.SimpleKCM {
 
             PlasmaComponents3.TextField {
                 id: defaultUrl
-                onAccepted: {
+                onEditingFinished: {
                     let url = text;
                     if (url.indexOf(":/") < 0) {
                         url = "http://" + url;
                     }
+                    text = url
                 }
 
                 Layout.fillWidth: true
