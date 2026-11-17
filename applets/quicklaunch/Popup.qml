@@ -53,6 +53,7 @@ Item {
                         }
                     }
                 }
+                dragMove(event)
             } else {
                 event.ignore();
             }
@@ -126,8 +127,7 @@ Item {
 
         highlight: PlasmaExtras.Highlight {}
 
-        highlightMoveDuration: Kirigami.Units.longDuration
-        highlightMoveVelocity: 1
+        highlightMoveDuration: 0
 
         function moveItemToGrid(iconItem, url) {
             popup.launcherModel.insertUrl(popup.launcherModel.count, url);
