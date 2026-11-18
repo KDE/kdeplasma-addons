@@ -8,6 +8,8 @@
 
 #include <KHolidays/SunEvents>
 
+#include <QIcon>
+
 using namespace Qt::StringLiterals;
 
 Ion::Ion(QObject *parent)
@@ -137,6 +139,9 @@ QString Ion::getWeatherIcon(ConditionIcons condition) const
         return QStringLiteral("weather-fog");
     case Haze:
         return QStringLiteral("weather-fog");
+    case Smoke:
+        // Icon themes without a smoke icon get the fog one
+        return QIcon::hasThemeIcon(QStringLiteral("weather-smoke")) ? QStringLiteral("weather-smoke") : QStringLiteral("weather-fog");
     case FreezingRain:
         return QStringLiteral("weather-freezing-rain");
     case FreezingDrizzle:

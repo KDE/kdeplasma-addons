@@ -70,6 +70,7 @@ public:
         ChanceSnowDay,
         ChanceSnowNight,
         NotAvailable,
+        Smoke,
     };
 
     enum WindDirections {

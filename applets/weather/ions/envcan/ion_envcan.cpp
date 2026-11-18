@@ -121,7 +121,11 @@ Ion::ConditionIcons EnvCanadaIon::conditionIconFromCode(int code) const
         return Thunderstorm;
 
     case 23: // Haze
+    case 45: // Dust Storm / Volcanic Ash
         return Haze;
+
+    case 44: // Smoke
+        return Smoke;
 
     case 24: // Fog / Mist / Ice Fog
         return Mist;
@@ -167,8 +171,6 @@ Ion::ConditionIcons EnvCanadaIon::conditionIconFromCode(int code) const
     case 41: // Funnel Cloud
     case 42: // Tornado
     case 43: // Windy
-    case 44: // Smoke
-    case 45: // Dust Storm / Volcanic Ash
     case 46: // Thunderstorm with Hail
     case 47: // Thunderstorm with Dust Storm
     case 48: // Waterspout
@@ -238,6 +240,9 @@ Ion::ConditionIcons EnvCanadaIon::forecastIconFromCode(int code) const
     case 23: // Haze
         return Haze;
 
+    case 44: // Smoke
+        return Smoke;
+
     case 24: // Fog
         return Mist;
 
@@ -277,7 +282,6 @@ Ion::ConditionIcons EnvCanadaIon::forecastIconFromCode(int code) const
 
     case 29: // Not Available
     case 43: // Windy
-    case 44: // Smoke
     default:
         return NotAvailable;
     }

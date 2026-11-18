@@ -717,7 +717,10 @@ Ion::ConditionIcons NOAAIon::getConditionIcon(const QString &weather, bool isDay
             result = Overcast;
         }
 
-    } else if (weather.contains("haze"_L1) || weather.contains("smoke"_L1) || weather.contains("dust"_L1) || weather.contains("sand"_L1)) {
+    } else if (weather.contains("smoke"_L1)) {
+        result = Smoke;
+
+    } else if (weather.contains("haze"_L1) || weather.contains("dust"_L1) || weather.contains("sand"_L1)) {
         result = Haze;
 
     } else if (weather.contains("fair"_L1) || weather.contains("clear"_L1) || weather.contains("sunny"_L1)) {

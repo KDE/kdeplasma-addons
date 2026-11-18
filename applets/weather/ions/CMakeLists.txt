@@ -16,6 +16,8 @@ target_link_libraries(plasmaweatherion PUBLIC
     KF6::Holidays
     KF6::I18n
     Qt::Qml
+PRIVATE
+    Qt::Gui
 )
 
 set_target_properties(plasmaweatherion PROPERTIES
