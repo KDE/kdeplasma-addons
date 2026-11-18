@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-24 02:54+0000\n"
+"POT-Creation-Date: 2026-11-17 08:51+0000\n"
 "PO-Revision-Date: 2026-07-12 14:51+0900\n"
 "Last-Translator: Mint <5602mint@gmail.com>\n"
 "Language-Team: Japanese <kde-i18n-doc@kde.org>\n"
@@ -86,19 +86,19 @@ msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "ナビゲーションバーを表示"
 
-#: qml/ConfigGeneral.qml:22
+#: qml/ConfigGeneral.qml:21
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "最後に表示したページを読み込む"
 
-#: qml/ConfigGeneral.qml:26
+#: qml/ConfigGeneral.qml:25
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "起動時:"
 
-#: qml/ConfigGeneral.qml:33
+#: qml/ConfigGeneral.qml:32
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"

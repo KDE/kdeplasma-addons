@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-24 02:54+0000\n"
+"POT-Creation-Date: 2026-11-17 08:51+0000\n"
 "PO-Revision-Date: 2026-10-04 17:03+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -87,19 +87,19 @@ msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "Prikaži traku za navigaciju"
 
-#: qml/ConfigGeneral.qml:22
+#: qml/ConfigGeneral.qml:21
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "Učitaj posljednju posjećenu stranicu"
 
-#: qml/ConfigGeneral.qml:26
+#: qml/ConfigGeneral.qml:25
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "Pri pokretanju:"
 
-#: qml/ConfigGeneral.qml:33
+#: qml/ConfigGeneral.qml:32
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"

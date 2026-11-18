@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-24 02:54+0000\n"
+"POT-Creation-Date: 2026-11-17 08:51+0000\n"
 "PO-Revision-Date: 2026-02-04 00:22+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -87,19 +87,19 @@ msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "탐색 표시줄 표시"
 
-#: qml/ConfigGeneral.qml:22
+#: qml/ConfigGeneral.qml:21
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr "마지막으로 방문한 페이지 불러 오기"
 
-#: qml/ConfigGeneral.qml:26
+#: qml/ConfigGeneral.qml:25
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr "시작할 때:"
 
-#: qml/ConfigGeneral.qml:33
+#: qml/ConfigGeneral.qml:32
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"

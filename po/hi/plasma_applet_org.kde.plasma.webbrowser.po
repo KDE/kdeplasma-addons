@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-10-24 02:54+0000\n"
+"POT-Creation-Date: 2026-11-17 08:51+0000\n"
 "PO-Revision-Date: 2024-12-15 15:57+0530\n"
 "Last-Translator: Kali <EMAIL@ADDRESS>\n"
 "Language-Team: Hindi <fedora-trans-hi@redhat.com>\n"
@@ -85,19 +85,19 @@ msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr ""
 
-#: qml/ConfigGeneral.qml:22
+#: qml/ConfigGeneral.qml:21
 #, kde-format
 msgctxt "@option:radio"
 msgid "Load last-visited page"
 msgstr ""
 
-#: qml/ConfigGeneral.qml:26
+#: qml/ConfigGeneral.qml:25
 #, kde-format
 msgctxt "@title:group"
 msgid "On startup:"
 msgstr ""
 
-#: qml/ConfigGeneral.qml:33
+#: qml/ConfigGeneral.qml:32
 #, kde-format
 msgctxt "@option:radio"
 msgid "Always load this page:"
