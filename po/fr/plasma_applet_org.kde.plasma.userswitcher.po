@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2025-02-06 10:03+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -28,13 +28,13 @@ msgctxt "@title"
 msgid "General"
 msgstr "Général"
 
-#: qml/configGeneral.qml:28
+#: qml/configGeneral.qml:25
 #, kde-format
 msgctxt "@title:label"
 msgid "Username style:"
 msgstr "Style de nom d'utilisateur :"
 
-#: qml/configGeneral.qml:31
+#: qml/configGeneral.qml:29
 #, kde-format
 msgctxt "@option:radio"
 msgid "Full name (if available)"
@@ -46,37 +46,37 @@ msgctxt "@option:radio"
 msgid "Login username"
 msgstr "Identifiant de connexion"
 
-#: qml/configGeneral.qml:56
+#: qml/configGeneral.qml:48
 #, kde-format
 msgctxt "@title:label"
 msgid "Show:"
 msgstr "Afficher :"
 
-#: qml/configGeneral.qml:59
+#: qml/configGeneral.qml:53
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name"
 msgstr "Nom"
 
-#: qml/configGeneral.qml:73
+#: qml/configGeneral.qml:69
 #, kde-format
 msgctxt "@option:radio"
 msgid "User picture"
 msgstr "Image de l'utilisateur"
 
-#: qml/configGeneral.qml:87
+#: qml/configGeneral.qml:85
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name and user picture"
 msgstr "Nom et image de l'utilisateur"
 
-#: qml/configGeneral.qml:106
+#: qml/configGeneral.qml:98
 #, kde-format
 msgctxt "@title:label"
 msgid "Advanced:"
 msgstr "Avancé :"
 
-#: qml/configGeneral.qml:108
+#: qml/configGeneral.qml:102
 #, kde-format
 msgctxt "@option:check"
 msgid "Show technical session information"

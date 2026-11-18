@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.quicklaunch\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-11-02 07:52-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@kde.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -27,25 +27,25 @@ msgctxt "@title"
 msgid "General"
 msgstr "Geral"
 
-#: ConfigGeneral.qml:30
+#: ConfigGeneral.qml:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Máximo de colunas:"
 
-#: ConfigGeneral.qml:30
+#: ConfigGeneral.qml:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Máximo de linhas:"
 
-#: ConfigGeneral.qml:42
+#: ConfigGeneral.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Aparência:"
 
-#: ConfigGeneral.qml:44
+#: ConfigGeneral.qml:42
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
@@ -57,19 +57,19 @@ msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Ativar mensagens"
 
-#: ConfigGeneral.qml:59
+#: ConfigGeneral.qml:58
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Título:"
 
-#: ConfigGeneral.qml:67
+#: ConfigGeneral.qml:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Mostrar:"
 
-#: ConfigGeneral.qml:83
+#: ConfigGeneral.qml:78
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"

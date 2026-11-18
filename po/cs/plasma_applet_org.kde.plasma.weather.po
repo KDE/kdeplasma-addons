@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2026-11-08 23:34+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -459,67 +459,61 @@ msgstr ""
 "“%1” nemusí poskytovat aktuální teplotu ani jiné informace o počasí pro tuto "
 "lokalitu."
 
-#: qml/config/ConfigAppearance.qml:54
-#, kde-format
-msgctxt "@title:group"
-msgid "Compact Mode"
-msgstr "Kompaktní režim"
-
-#: qml/config/ConfigAppearance.qml:62
+#: qml/config/ConfigAppearance.qml:59
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Zobrazit teplotu:"
 
-#: qml/config/ConfigAppearance.qml:66
+#: qml/config/ConfigAppearance.qml:65
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Přes ikonu widgetu"
 
-#: qml/config/ConfigAppearance.qml:74
+#: qml/config/ConfigAppearance.qml:75
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Vedle ikony widgetu"
 
-#: qml/config/ConfigAppearance.qml:82
+#: qml/config/ConfigAppearance.qml:84
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Nezobrazovat"
 
-#: qml/config/ConfigAppearance.qml:93
+#: qml/config/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "Zobrazovat nástrojové tipy:"
 
-#: qml/config/ConfigAppearance.qml:94
+#: qml/config/ConfigAppearance.qml:95
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Teplota"
 
-#: qml/config/ConfigAppearance.qml:100
+#: qml/config/ConfigAppearance.qml:101
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Vítr"
 
-#: qml/config/ConfigAppearance.qml:106
+#: qml/config/ConfigAppearance.qml:107
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Tlak"
 
-#: qml/config/ConfigAppearance.qml:112
+#: qml/config/ConfigAppearance.qml:113
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "Vlhkost"
 
-#: qml/config/ConfigAppearance.qml:122
+#: qml/config/ConfigAppearance.qml:120
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature graph:"
@@ -531,31 +525,31 @@ msgctxt "@option:check"
 msgid "Hourly Forecast"
 msgstr "Hodinová předpověď"
 
-#: qml/config/ConfigAppearance.qml:128
+#: qml/config/ConfigAppearance.qml:130
 #, kde-format
 msgctxt "@option:check"
 msgid "Day Forecast"
 msgstr "Denní předpověď"
 
-#: qml/config/ConfigUnits.qml:31
+#: qml/config/ConfigUnits.qml:36
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "Teplota:"
 
-#: qml/config/ConfigUnits.qml:37
+#: qml/config/ConfigUnits.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "Tlak:"
 
-#: qml/config/ConfigUnits.qml:43
+#: qml/config/ConfigUnits.qml:52
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "Rychlost větru:"
 
-#: qml/config/ConfigUnits.qml:49
+#: qml/config/ConfigUnits.qml:60
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
@@ -779,12 +773,18 @@ msgid "Unable to load weather forecast"
 msgstr "Nelze načíst předpověď počasí"
 
 #: qml/FullRepresentation.qml:106
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:usagetip"
+#| msgid ""
+#| "There may be a technical issue with the weather provider. If the issue "
+#| "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
+#| "cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
+#| "link>."
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-"cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-"link>."
+"cgi?product=plasmashell&component=Weather widget'>submit a bug report</link>."
 msgstr ""
 "Možná došlo k technickému problému u poskytovatele údajů o počasí. Pokud "
 "problém přetrvává déle než jeden den, <link url='https://bugs.kde.org/"
@@ -985,6 +985,10 @@ msgstr "Velmi vysoká"
 #, kde-format
 msgid "Extreme"
 msgstr "Extrémní"
+
+#~ msgctxt "@title:group"
+#~ msgid "Compact Mode"
+#~ msgstr "Kompaktní režim"
 
 #~ msgid "N/A"
 #~ msgstr "Nedostupné"

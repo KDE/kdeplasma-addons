@@ -3,7 +3,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_calendar_astronomicalevents\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-02 00:43+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2026-10-04 17:03+0200\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -17,18 +17,18 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: config/qml/AstronomicalEventsConfig.qml:46
+#: config/qml/AstronomicalEventsConfig.qml:44
 #, kde-format
 msgid "Show:"
 msgstr "Прикажи:"
 
-#: config/qml/AstronomicalEventsConfig.qml:49
+#: config/qml/AstronomicalEventsConfig.qml:50
 #, kde-format
 msgctxt "@option:check"
 msgid "Lunar phases"
 msgstr "Мјесечеве мијене"
 
-#: config/qml/AstronomicalEventsConfig.qml:57
+#: config/qml/AstronomicalEventsConfig.qml:60
 #, kde-format
 msgctxt "@option:check"
 msgid "Astronomical seasons (solstices and equinoxes)"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-13 01:01+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2026-11-11 18:28+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
@@ -29,68 +29,82 @@ msgctxt "@title"
 msgid "Behavior"
 msgstr "Поведение"
 
-#: qml/ConfigBehavior.qml:36
+#: qml/ConfigBehavior.qml:33
 #, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Смяна на изображението на всеки:"
 
-#: qml/ConfigBehavior.qml:53
+#: qml/ConfigBehavior.qml:52
 #, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "Часа"
 
-#: qml/ConfigBehavior.qml:67
+#: qml/ConfigBehavior.qml:66
 #, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "Минути"
 
-#: qml/ConfigBehavior.qml:81
+#: qml/ConfigBehavior.qml:80
 #, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "Секунди"
 
-#: qml/ConfigBehavior.qml:91
+#: qml/ConfigBehavior.qml:88
+#, kde-format
+msgctxt "@option:check"
+msgid "Randomize order"
+msgstr "Случаен ред"
+
+#: qml/ConfigBehavior.qml:95
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Pause slideshow when cursor is over image"
+msgctxt "@option:check"
+msgid "Pause slideshow when hovered"
+msgstr "Пауза на слайдшоуто, когато курсорът е над изображението"
+
+#: qml/ConfigBehavior.qml:101
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Режим на запълване на изображение:"
 
-#: qml/ConfigBehavior.qml:97
+#: qml/ConfigBehavior.qml:109
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Разтегнато"
 
-#: qml/ConfigBehavior.qml:98
+#: qml/ConfigBehavior.qml:110
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "Изображението се мащабира, за да се побере в рамката"
 
-#: qml/ConfigBehavior.qml:102
+#: qml/ConfigBehavior.qml:114
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Запазване на пропорциите"
 
-#: qml/ConfigBehavior.qml:103
+#: qml/ConfigBehavior.qml:115
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr ""
 "Изображението се мащабира равномерно, за да се побере, без да се изрязва"
 
-#: qml/ConfigBehavior.qml:107
+#: qml/ConfigBehavior.qml:119
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Запазване на пропорциите с изрязване"
 
-#: qml/ConfigBehavior.qml:108
+#: qml/ConfigBehavior.qml:120
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
@@ -98,78 +112,68 @@ msgstr ""
 "Изображението се мащабира равномерно, за да се побере, като се изрязва, ако "
 "е необходимо"
 
-#: qml/ConfigBehavior.qml:112
+#: qml/ConfigBehavior.qml:124
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Плочки"
 
-#: qml/ConfigBehavior.qml:113
+#: qml/ConfigBehavior.qml:125
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "Изображението се повтаря хоризонтално и вертикално"
 
-#: qml/ConfigBehavior.qml:117
+#: qml/ConfigBehavior.qml:129
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Плочки вертикално"
 
-#: qml/ConfigBehavior.qml:118
+#: qml/ConfigBehavior.qml:130
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr ""
 "Изображението се разгъва хоризонтално и се разпределя като плочки вертикално"
 
-#: qml/ConfigBehavior.qml:122
+#: qml/ConfigBehavior.qml:134
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Плочки хоризонтално"
 
-#: qml/ConfigBehavior.qml:123
+#: qml/ConfigBehavior.qml:135
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr ""
 "Изображението се разгъва вертикално и се разпределя като плочки хоризонтално"
 
-#: qml/ConfigBehavior.qml:127
+#: qml/ConfigBehavior.qml:139
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Подложка"
 
-#: qml/ConfigBehavior.qml:128
+#: qml/ConfigBehavior.qml:140
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "Изображението не се трансформира"
 
-#: qml/ConfigBehavior.qml:149
-#, kde-format
-msgctxt "@label:checkbox"
-msgid "General:"
-msgstr "Общи:"
-
 #: qml/ConfigBehavior.qml:150
 #, kde-format
-msgctxt "@option:check"
-msgid "Randomize order"
-msgstr "Случаен ред"
+msgctxt "@option:check prefix completes … Open in external application"
+msgid "When clicking image:"
+msgstr ""
 
-#: qml/ConfigBehavior.qml:155
-#, kde-format
+#: qml/ConfigBehavior.qml:153
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Click on image to open in external application"
 msgctxt "@option:check"
-msgid "Pause slideshow when cursor is over image"
-msgstr "Пауза на слайдшоуто, когато курсорът е над изображението"
-
-#: qml/ConfigBehavior.qml:160
-#, kde-format
-msgctxt "@option:check"
-msgid "Click on image to open in external application"
+msgid "Open in external application"
 msgstr ""
 "Отваряне на изображението във външно приложение при щракване върху "
 "изображение"
@@ -245,3 +249,7 @@ msgstr "Няма избрана медия"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "Избиране на медия…"
+
+#~ msgctxt "@label:checkbox"
+#~ msgid "General:"
+#~ msgstr "Общи:"

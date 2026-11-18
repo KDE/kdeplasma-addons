@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2024-04-03 08:01+0300\n"
 "Last-Translator: Toms Trasuns <toms.trasuns@posteo.net>\n"
 "Language-Team: Latvian <kde-i18n-doc@kde.org>\n"
@@ -24,25 +24,25 @@ msgctxt "@title"
 msgid "General"
 msgstr "Pamata"
 
-#: ConfigGeneral.qml:30
+#: ConfigGeneral.qml:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Maksimālais kolonnu skaits"
 
-#: ConfigGeneral.qml:30
+#: ConfigGeneral.qml:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Maksimālais rindu skaits:"
 
-#: ConfigGeneral.qml:42
+#: ConfigGeneral.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Izskats"
 
-#: ConfigGeneral.qml:44
+#: ConfigGeneral.qml:42
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
@@ -54,19 +54,19 @@ msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Ieslēgt uzlecošo logu"
 
-#: ConfigGeneral.qml:59
+#: ConfigGeneral.qml:58
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Virsraksts:"
 
-#: ConfigGeneral.qml:67
+#: ConfigGeneral.qml:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Rādīt:"
 
-#: ConfigGeneral.qml:83
+#: ConfigGeneral.qml:78
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"

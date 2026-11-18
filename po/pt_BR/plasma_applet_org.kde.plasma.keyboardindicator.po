@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-05 00:57+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-11-02 07:51-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@kde.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -32,13 +32,13 @@ msgctxt ""
 msgid "Show when activated:"
 msgstr "Mostrar quando ativado:"
 
-#: configAppearance.qml:40
+#: configAppearance.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
 msgstr "Caps Lock"
 
-#: configAppearance.qml:47
+#: configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"

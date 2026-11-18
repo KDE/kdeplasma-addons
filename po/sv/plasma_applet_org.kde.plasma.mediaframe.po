@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-13 01:01+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2025-08-14 07:48+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -29,146 +29,150 @@ msgctxt "@title"
 msgid "Behavior"
 msgstr "Beteende"
 
-#: qml/ConfigBehavior.qml:36
+#: qml/ConfigBehavior.qml:33
 #, fuzzy, kde-format
 #| msgid "Change picture every:"
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Ändra bild efter:"
 
-#: qml/ConfigBehavior.qml:53
+#: qml/ConfigBehavior.qml:52
 #, fuzzy, kde-format
 #| msgid "Hours"
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "Timmar"
 
-#: qml/ConfigBehavior.qml:67
+#: qml/ConfigBehavior.qml:66
 #, fuzzy, kde-format
 #| msgid "Minutes"
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "Minuter"
 
-#: qml/ConfigBehavior.qml:81
+#: qml/ConfigBehavior.qml:80
 #, fuzzy, kde-format
 #| msgid "Seconds"
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "Sekunder"
 
-#: qml/ConfigBehavior.qml:91
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Image fill mode:"
-msgstr "Bildanpassningsmetod:"
-
-#: qml/ConfigBehavior.qml:97
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Stretch"
-msgstr "Sträck"
-
-#: qml/ConfigBehavior.qml:98
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled to fit the frame"
-msgstr "Bilden skalas för att passa ramen"
-
-#: qml/ConfigBehavior.qml:102
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Preserve aspect fit"
-msgstr "Bevara proportion"
-
-#: qml/ConfigBehavior.qml:103
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled uniformly to fit without cropping"
-msgstr "Bilden skalas likformigt för att passa utan beskärning"
-
-#: qml/ConfigBehavior.qml:107
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Preserve aspect crop"
-msgstr "Bevara proportion och beskär"
-
-#: qml/ConfigBehavior.qml:108
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled uniformly to fill, cropping if necessary"
-msgstr "Bilden skalas likformigt för att passa, med beskärning om det behövs"
-
-#: qml/ConfigBehavior.qml:112
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile"
-msgstr "Sida vid sida"
-
-#: qml/ConfigBehavior.qml:113
-#, kde-format
-msgctxt "@info"
-msgid "The image is duplicated horizontally and vertically"
-msgstr "Bilden dupliceras horisontellt och vertikalt"
-
-#: qml/ConfigBehavior.qml:117
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile vertically"
-msgstr "Sida vid sida vertikalt"
-
-#: qml/ConfigBehavior.qml:118
-#, kde-format
-msgctxt "@info"
-msgid "The image is stretched horizontally and tiled vertically"
-msgstr "Bilden sträcks ut horisontellt och läggs sida vid sida vertikalt"
-
-#: qml/ConfigBehavior.qml:122
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile horizontally"
-msgstr "Sida vid sida horisontellt"
-
-#: qml/ConfigBehavior.qml:123
-#, kde-format
-msgctxt "@info"
-msgid "The image is stretched vertically and tiled horizontally"
-msgstr "Bilden sträcks ut vertikalt och läggs sida vid sida horisontellt"
-
-#: qml/ConfigBehavior.qml:127
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Pad"
-msgstr "Centrera"
-
-#: qml/ConfigBehavior.qml:128
-#, kde-format
-msgctxt "@info"
-msgid "The image is not transformed"
-msgstr "Bilden förändras inte"
-
-#: qml/ConfigBehavior.qml:149
-#, kde-format
-msgctxt "@label:checkbox"
-msgid "General:"
-msgstr "Allmänt:"
-
-#: qml/ConfigBehavior.qml:150
+#: qml/ConfigBehavior.qml:88
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Slumpmässig ordning"
 
-#: qml/ConfigBehavior.qml:155
-#, kde-format
+#: qml/ConfigBehavior.qml:95
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Pause slideshow when cursor is over image"
 msgctxt "@option:check"
-msgid "Pause slideshow when cursor is over image"
+msgid "Pause slideshow when hovered"
 msgstr "Pausa bildspel när markören hålls över bilden"
 
-#: qml/ConfigBehavior.qml:160
+#: qml/ConfigBehavior.qml:101
 #, kde-format
+msgctxt "@label:listbox"
+msgid "Image fill mode:"
+msgstr "Bildanpassningsmetod:"
+
+#: qml/ConfigBehavior.qml:109
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Stretch"
+msgstr "Sträck"
+
+#: qml/ConfigBehavior.qml:110
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled to fit the frame"
+msgstr "Bilden skalas för att passa ramen"
+
+#: qml/ConfigBehavior.qml:114
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Preserve aspect fit"
+msgstr "Bevara proportion"
+
+#: qml/ConfigBehavior.qml:115
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled uniformly to fit without cropping"
+msgstr "Bilden skalas likformigt för att passa utan beskärning"
+
+#: qml/ConfigBehavior.qml:119
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Preserve aspect crop"
+msgstr "Bevara proportion och beskär"
+
+#: qml/ConfigBehavior.qml:120
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled uniformly to fill, cropping if necessary"
+msgstr "Bilden skalas likformigt för att passa, med beskärning om det behövs"
+
+#: qml/ConfigBehavior.qml:124
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile"
+msgstr "Sida vid sida"
+
+#: qml/ConfigBehavior.qml:125
+#, kde-format
+msgctxt "@info"
+msgid "The image is duplicated horizontally and vertically"
+msgstr "Bilden dupliceras horisontellt och vertikalt"
+
+#: qml/ConfigBehavior.qml:129
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile vertically"
+msgstr "Sida vid sida vertikalt"
+
+#: qml/ConfigBehavior.qml:130
+#, kde-format
+msgctxt "@info"
+msgid "The image is stretched horizontally and tiled vertically"
+msgstr "Bilden sträcks ut horisontellt och läggs sida vid sida vertikalt"
+
+#: qml/ConfigBehavior.qml:134
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile horizontally"
+msgstr "Sida vid sida horisontellt"
+
+#: qml/ConfigBehavior.qml:135
+#, kde-format
+msgctxt "@info"
+msgid "The image is stretched vertically and tiled horizontally"
+msgstr "Bilden sträcks ut vertikalt och läggs sida vid sida horisontellt"
+
+#: qml/ConfigBehavior.qml:139
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Pad"
+msgstr "Centrera"
+
+#: qml/ConfigBehavior.qml:140
+#, kde-format
+msgctxt "@info"
+msgid "The image is not transformed"
+msgstr "Bilden förändras inte"
+
+#: qml/ConfigBehavior.qml:150
+#, kde-format
+msgctxt "@option:check prefix completes … Open in external application"
+msgid "When clicking image:"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:153
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Click on image to open in external application"
 msgctxt "@option:check"
-msgid "Click on image to open in external application"
+msgid "Open in external application"
 msgstr "Klicka på bilden för att öppna den i externt program"
 
 #: qml/ConfigMedia.qml:26
@@ -243,6 +247,10 @@ msgstr "Ingen media vald"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "Välj media…"
+
+#~ msgctxt "@label:checkbox"
+#~ msgid "General:"
+#~ msgstr "Allmänt:"
 
 #~ msgctxt "@title"
 #~ msgid "General"

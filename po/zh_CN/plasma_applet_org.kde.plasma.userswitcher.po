@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -24,13 +24,13 @@ msgctxt "@title"
 msgid "General"
 msgstr "常规"
 
-#: qml/configGeneral.qml:28
+#: qml/configGeneral.qml:25
 #, kde-format
 msgctxt "@title:label"
 msgid "Username style:"
 msgstr "用户名格式："
 
-#: qml/configGeneral.qml:31
+#: qml/configGeneral.qml:29
 #, kde-format
 msgctxt "@option:radio"
 msgid "Full name (if available)"
@@ -42,37 +42,37 @@ msgctxt "@option:radio"
 msgid "Login username"
 msgstr "登录用户名"
 
-#: qml/configGeneral.qml:56
+#: qml/configGeneral.qml:48
 #, kde-format
 msgctxt "@title:label"
 msgid "Show:"
 msgstr "显示："
 
-#: qml/configGeneral.qml:59
+#: qml/configGeneral.qml:53
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name"
 msgstr "姓名"
 
-#: qml/configGeneral.qml:73
+#: qml/configGeneral.qml:69
 #, kde-format
 msgctxt "@option:radio"
 msgid "User picture"
 msgstr "用户图片"
 
-#: qml/configGeneral.qml:87
+#: qml/configGeneral.qml:85
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name and user picture"
 msgstr "姓名和用户图片"
 
-#: qml/configGeneral.qml:106
+#: qml/configGeneral.qml:98
 #, kde-format
 msgctxt "@title:label"
 msgid "Advanced:"
 msgstr "高级："
 
-#: qml/configGeneral.qml:108
+#: qml/configGeneral.qml:102
 #, kde-format
 msgctxt "@option:check"
 msgid "Show technical session information"

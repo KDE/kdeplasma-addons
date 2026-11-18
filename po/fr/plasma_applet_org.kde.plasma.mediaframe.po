@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-13 01:01+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2025-08-15 10:00+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -31,147 +31,151 @@ msgctxt "@title"
 msgid "Behavior"
 msgstr "Comportement"
 
-#: qml/ConfigBehavior.qml:36
+#: qml/ConfigBehavior.qml:33
 #, fuzzy, kde-format
 #| msgid "Change picture every:"
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Changer d'image toutes les :"
 
-#: qml/ConfigBehavior.qml:53
+#: qml/ConfigBehavior.qml:52
 #, fuzzy, kde-format
 #| msgid "Hours"
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "Heures"
 
-#: qml/ConfigBehavior.qml:67
+#: qml/ConfigBehavior.qml:66
 #, fuzzy, kde-format
 #| msgid "Minutes"
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "Minutes"
 
-#: qml/ConfigBehavior.qml:81
+#: qml/ConfigBehavior.qml:80
 #, fuzzy, kde-format
 #| msgid "Seconds"
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "Secondes"
 
-#: qml/ConfigBehavior.qml:91
+#: qml/ConfigBehavior.qml:88
+#, kde-format
+msgctxt "@option:check"
+msgid "Randomize order"
+msgstr "Ordre aléatoire"
+
+#: qml/ConfigBehavior.qml:95
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Pause slideshow when cursor is over image"
+msgctxt "@option:check"
+msgid "Pause slideshow when hovered"
+msgstr "Mettre en pause le diaporama lorsque le curseur survole l'image"
+
+#: qml/ConfigBehavior.qml:101
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Image fill mode:"
 msgstr "Mode de remplissage de l'image :"
 
-#: qml/ConfigBehavior.qml:97
+#: qml/ConfigBehavior.qml:109
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Stretch"
 msgstr "Étirer"
 
-#: qml/ConfigBehavior.qml:98
+#: qml/ConfigBehavior.qml:110
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled to fit the frame"
 msgstr "L'image est étirée pour s'ajuster au cadre"
 
-#: qml/ConfigBehavior.qml:102
+#: qml/ConfigBehavior.qml:114
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect fit"
 msgstr "Ajustement conservant le ratio"
 
-#: qml/ConfigBehavior.qml:103
+#: qml/ConfigBehavior.qml:115
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fit without cropping"
 msgstr "L'image est étirée uniformément pour s'ajuster sans rognage"
 
-#: qml/ConfigBehavior.qml:107
+#: qml/ConfigBehavior.qml:119
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Preserve aspect crop"
 msgstr "Rognage conservant le ratio"
 
-#: qml/ConfigBehavior.qml:108
+#: qml/ConfigBehavior.qml:120
 #, kde-format
 msgctxt "@info"
 msgid "The image is scaled uniformly to fill, cropping if necessary"
 msgstr ""
 "L'image est étirée uniformément pour tout remplir, avec rognage si nécessaire"
 
-#: qml/ConfigBehavior.qml:112
+#: qml/ConfigBehavior.qml:124
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile"
 msgstr "Mosaïque"
 
-#: qml/ConfigBehavior.qml:113
+#: qml/ConfigBehavior.qml:125
 #, kde-format
 msgctxt "@info"
 msgid "The image is duplicated horizontally and vertically"
 msgstr "L'image est répétée horizontalement et verticalement"
 
-#: qml/ConfigBehavior.qml:117
+#: qml/ConfigBehavior.qml:129
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile vertically"
 msgstr "Mosaïque verticale"
 
-#: qml/ConfigBehavior.qml:118
+#: qml/ConfigBehavior.qml:130
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched horizontally and tiled vertically"
 msgstr "L'image est étirée horizontalement et répétée verticalement"
 
-#: qml/ConfigBehavior.qml:122
+#: qml/ConfigBehavior.qml:134
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Tile horizontally"
 msgstr "Mosaïque horizontale"
 
-#: qml/ConfigBehavior.qml:123
+#: qml/ConfigBehavior.qml:135
 #, kde-format
 msgctxt "@info"
 msgid "The image is stretched vertically and tiled horizontally"
 msgstr "L'image est étirée verticalement et répétée horizontalement"
 
-#: qml/ConfigBehavior.qml:127
+#: qml/ConfigBehavior.qml:139
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Pad"
 msgstr "Remplir"
 
-#: qml/ConfigBehavior.qml:128
+#: qml/ConfigBehavior.qml:140
 #, kde-format
 msgctxt "@info"
 msgid "The image is not transformed"
 msgstr "L'image n'est pas transformée"
 
-#: qml/ConfigBehavior.qml:149
-#, kde-format
-msgctxt "@label:checkbox"
-msgid "General:"
-msgstr "Général :"
-
 #: qml/ConfigBehavior.qml:150
 #, kde-format
-msgctxt "@option:check"
-msgid "Randomize order"
-msgstr "Ordre aléatoire"
+msgctxt "@option:check prefix completes … Open in external application"
+msgid "When clicking image:"
+msgstr ""
 
-#: qml/ConfigBehavior.qml:155
-#, kde-format
+#: qml/ConfigBehavior.qml:153
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Click on image to open in external application"
 msgctxt "@option:check"
-msgid "Pause slideshow when cursor is over image"
-msgstr "Mettre en pause le diaporama lorsque le curseur survole l'image"
-
-#: qml/ConfigBehavior.qml:160
-#, kde-format
-msgctxt "@option:check"
-msgid "Click on image to open in external application"
+msgid "Open in external application"
 msgstr "Cliquer sur l'image pour l'ouvrir dans une application externe"
 
 #: qml/ConfigMedia.qml:26
@@ -247,6 +251,10 @@ msgstr "Aucun média n'est sélectionné"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "Sélectionnez un média..."
+
+#~ msgctxt "@label:checkbox"
+#~ msgid "General:"
+#~ msgstr "Général :"
 
 #~ msgctxt "@title"
 #~ msgid "General"

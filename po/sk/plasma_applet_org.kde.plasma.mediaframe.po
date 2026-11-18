@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediacontroller\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-13 01:01+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2022-01-31 17:02+0100\n"
 "Last-Translator: Matej Mrenica <matejm98mthw@gmail.com>\n"
 "Language-Team: Slovak <kde-i18n-doc@kde.org>\n"
@@ -28,146 +28,150 @@ msgctxt "@title"
 msgid "Behavior"
 msgstr "Správanie"
 
-#: qml/ConfigBehavior.qml:36
+#: qml/ConfigBehavior.qml:33
 #, fuzzy, kde-format
 #| msgid "Change picture every:"
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Zmeniť obrázok každých:"
 
-#: qml/ConfigBehavior.qml:53
+#: qml/ConfigBehavior.qml:52
 #, fuzzy, kde-format
 #| msgid "Hours"
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "Hodiny"
 
-#: qml/ConfigBehavior.qml:67
+#: qml/ConfigBehavior.qml:66
 #, fuzzy, kde-format
 #| msgid "Minutes"
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "Minúty"
 
-#: qml/ConfigBehavior.qml:81
+#: qml/ConfigBehavior.qml:80
 #, fuzzy, kde-format
 #| msgid "Seconds"
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "Sekundy"
 
-#: qml/ConfigBehavior.qml:91
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Image fill mode:"
-msgstr "Režim výplne:"
-
-#: qml/ConfigBehavior.qml:97
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Stretch"
-msgstr "Natiahnuť"
-
-#: qml/ConfigBehavior.qml:98
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled to fit the frame"
-msgstr "Tento obrázok je prispôsobený"
-
-#: qml/ConfigBehavior.qml:102
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Preserve aspect fit"
-msgstr "Zachovať prispôsobenie pomeru"
-
-#: qml/ConfigBehavior.qml:103
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled uniformly to fit without cropping"
-msgstr "Tento obrázok je zmenený uniformne, aby sa zmestil bez orezania"
-
-#: qml/ConfigBehavior.qml:107
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Preserve aspect crop"
-msgstr "Zachovať orezanie pomeru"
-
-#: qml/ConfigBehavior.qml:108
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled uniformly to fill, cropping if necessary"
-msgstr "Tento obrázok je zmenený uniformne, oreže sa, ak treba"
-
-#: qml/ConfigBehavior.qml:112
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile"
-msgstr "Dlaždice"
-
-#: qml/ConfigBehavior.qml:113
-#, kde-format
-msgctxt "@info"
-msgid "The image is duplicated horizontally and vertically"
-msgstr "Obrázok je duplikovaný vodorovne a zvislo"
-
-#: qml/ConfigBehavior.qml:117
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile vertically"
-msgstr "Dlaždice zvislo"
-
-#: qml/ConfigBehavior.qml:118
-#, kde-format
-msgctxt "@info"
-msgid "The image is stretched horizontally and tiled vertically"
-msgstr "Obrázok je roztiahnutý vodorovne a dlaždicovaný zvislo"
-
-#: qml/ConfigBehavior.qml:122
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile horizontally"
-msgstr "Dlaždice vodorovne"
-
-#: qml/ConfigBehavior.qml:123
-#, kde-format
-msgctxt "@info"
-msgid "The image is stretched vertically and tiled horizontally"
-msgstr "Obrázok je roztiahnutý zvislo a dlaždicovaný vodorovne"
-
-#: qml/ConfigBehavior.qml:127
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Pad"
-msgstr "Podložka"
-
-#: qml/ConfigBehavior.qml:128
-#, kde-format
-msgctxt "@info"
-msgid "The image is not transformed"
-msgstr "Obrázok nie je trasnformovaný"
-
-#: qml/ConfigBehavior.qml:149
-#, kde-format
-msgctxt "@label:checkbox"
-msgid "General:"
-msgstr "Všeobecné:"
-
-#: qml/ConfigBehavior.qml:150
+#: qml/ConfigBehavior.qml:88
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "Zamiešať poradie"
 
-#: qml/ConfigBehavior.qml:155
-#, kde-format
+#: qml/ConfigBehavior.qml:95
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Pause slideshow when cursor is over image"
 msgctxt "@option:check"
-msgid "Pause slideshow when cursor is over image"
+msgid "Pause slideshow when hovered"
 msgstr "Pozastaviť prezentáciu keď je kurzor nad obrázkom"
 
-#: qml/ConfigBehavior.qml:160
+#: qml/ConfigBehavior.qml:101
 #, kde-format
+msgctxt "@label:listbox"
+msgid "Image fill mode:"
+msgstr "Režim výplne:"
+
+#: qml/ConfigBehavior.qml:109
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Stretch"
+msgstr "Natiahnuť"
+
+#: qml/ConfigBehavior.qml:110
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled to fit the frame"
+msgstr "Tento obrázok je prispôsobený"
+
+#: qml/ConfigBehavior.qml:114
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Preserve aspect fit"
+msgstr "Zachovať prispôsobenie pomeru"
+
+#: qml/ConfigBehavior.qml:115
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled uniformly to fit without cropping"
+msgstr "Tento obrázok je zmenený uniformne, aby sa zmestil bez orezania"
+
+#: qml/ConfigBehavior.qml:119
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Preserve aspect crop"
+msgstr "Zachovať orezanie pomeru"
+
+#: qml/ConfigBehavior.qml:120
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled uniformly to fill, cropping if necessary"
+msgstr "Tento obrázok je zmenený uniformne, oreže sa, ak treba"
+
+#: qml/ConfigBehavior.qml:124
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile"
+msgstr "Dlaždice"
+
+#: qml/ConfigBehavior.qml:125
+#, kde-format
+msgctxt "@info"
+msgid "The image is duplicated horizontally and vertically"
+msgstr "Obrázok je duplikovaný vodorovne a zvislo"
+
+#: qml/ConfigBehavior.qml:129
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile vertically"
+msgstr "Dlaždice zvislo"
+
+#: qml/ConfigBehavior.qml:130
+#, kde-format
+msgctxt "@info"
+msgid "The image is stretched horizontally and tiled vertically"
+msgstr "Obrázok je roztiahnutý vodorovne a dlaždicovaný zvislo"
+
+#: qml/ConfigBehavior.qml:134
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile horizontally"
+msgstr "Dlaždice vodorovne"
+
+#: qml/ConfigBehavior.qml:135
+#, kde-format
+msgctxt "@info"
+msgid "The image is stretched vertically and tiled horizontally"
+msgstr "Obrázok je roztiahnutý zvislo a dlaždicovaný vodorovne"
+
+#: qml/ConfigBehavior.qml:139
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Pad"
+msgstr "Podložka"
+
+#: qml/ConfigBehavior.qml:140
+#, kde-format
+msgctxt "@info"
+msgid "The image is not transformed"
+msgstr "Obrázok nie je trasnformovaný"
+
+#: qml/ConfigBehavior.qml:150
+#, kde-format
+msgctxt "@option:check prefix completes … Open in external application"
+msgid "When clicking image:"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:153
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Click on image to open in external application"
 msgctxt "@option:check"
-msgid "Click on image to open in external application"
+msgid "Open in external application"
 msgstr "Kliknutie ľavým tlačidlom na obrázok ho otvorí v externej aplikácií"
 
 #: qml/ConfigMedia.qml:26
@@ -241,6 +245,10 @@ msgstr "Žiadne médiá nie sú vybraté"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "Vybrať médiá…"
+
+#~ msgctxt "@label:checkbox"
+#~ msgid "General:"
+#~ msgstr "Všeobecné:"
 
 #~ msgctxt "@title"
 #~ msgid "General"

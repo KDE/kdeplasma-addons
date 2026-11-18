@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-04-23 19:56+0200\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -24,84 +24,84 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Erscheinungsbild"
 
-#: qml/configAppearance.qml:32
-#, fuzzy, kde-format
-#| msgid "%1pt"
-msgctxt "@item:valuesuffix %1 is font size in points"
-msgid "%1pt"
-msgstr "%1 pt"
-
-#: qml/configAppearance.qml:38
+#: qml/configAppearance.qml:28
 #, fuzzy, kde-format
 #| msgid "Text font size:"
 msgctxt "@label:spinbox"
 msgid "Text font size:"
 msgstr "Textschriftgröße:"
 
-#: qml/configAppearance.qml:72
+#: qml/configAppearance.qml:35
+#, fuzzy, kde-format
+#| msgid "%1pt"
+msgctxt "@item:valuesuffix %1 is font size in points"
+msgid "%1pt"
+msgstr "%1 pt"
+
+#: qml/configAppearance.qml:75
 #, fuzzy, kde-format
 #| msgid "A white sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A white sticky note"
 msgstr "Eine weiße Haftnotiz"
 
-#: qml/configAppearance.qml:73
+#: qml/configAppearance.qml:76
 #, fuzzy, kde-format
 #| msgid "A black sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A black sticky note"
 msgstr "Eine schwarze Haftnotiz"
 
-#: qml/configAppearance.qml:74
+#: qml/configAppearance.qml:77
 #, fuzzy, kde-format
 #| msgid "A red sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A red sticky note"
 msgstr "Eine rote Haftnotiz"
 
-#: qml/configAppearance.qml:75
+#: qml/configAppearance.qml:78
 #, fuzzy, kde-format
 #| msgid "An orange sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "An orange sticky note"
 msgstr "Eine orange Haftnotiz"
 
-#: qml/configAppearance.qml:76
+#: qml/configAppearance.qml:79
 #, fuzzy, kde-format
 #| msgid "A yellow sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A yellow sticky note"
 msgstr "Eine gelbe Haftnotiz"
 
-#: qml/configAppearance.qml:77
+#: qml/configAppearance.qml:80
 #, fuzzy, kde-format
 #| msgid "A green sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A green sticky note"
 msgstr "Eine grüne Haftnotiz"
 
-#: qml/configAppearance.qml:78
+#: qml/configAppearance.qml:81
 #, fuzzy, kde-format
 #| msgid "A blue sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A blue sticky note"
 msgstr "Eine blaue Haftnotiz"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:82
 #, fuzzy, kde-format
 #| msgid "A pink sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A pink sticky note"
 msgstr "Eine rosa Haftnotiz"
 
-#: qml/configAppearance.qml:80
+#: qml/configAppearance.qml:83
 #, fuzzy, kde-format
 #| msgid "A transparent sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note"
 msgstr "Eine transparente Haftnotiz"
 
-#: qml/configAppearance.qml:81
+#: qml/configAppearance.qml:84
 #, fuzzy, kde-format
 #| msgid "A transparent sticky note with light text"
 msgctxt "@item text on sticky note color option"

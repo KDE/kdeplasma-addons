@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 10:52+0000\n"
 "PO-Revision-Date: 2025-05-25 16:34+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -28,40 +28,80 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Ulkoasu"
 
-#: configGeneral.qml:29
-#, kde-format
-msgctxt ""
-"@title:group The things being potentially shown are lights and seconds"
+#: configGeneral.qml:30
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@title:group The things being potentially shown are lights and seconds"
+#| msgid "Show:"
+msgctxt "@option:check prefix completes … seconds"
 msgid "Show:"
 msgstr "Näytä:"
 
-#: configGeneral.qml:30 configGeneral.qml:60
-#, kde-format
-msgctxt "@option:check"
-msgid "Inactive lights"
-msgstr "Passiiviset valot"
-
-#: configGeneral.qml:35
-#, kde-format
-msgctxt "@option:check"
+#: configGeneral.qml:33
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Seconds"
+msgctxt "@option:check completes Show …"
 msgid "Seconds"
 msgstr "Sekunnit"
 
-# HUOM! Käännös muotoiltu sen perusteella, etten tiedä, missä muodossa vaihtoehdot tulevat (”Käytä mukautettua väriä” edellyttäisi tulosijaa, esim. siihen-ja-siihen tai sille-ja-sille)
-#: configGeneral.qml:43
+#: configGeneral.qml:45
 #, fuzzy, kde-format
-#| msgid "Use custom color for:"
+#| msgctxt "@option:check"
+#| msgid "Active lights"
 msgctxt ""
-"@title:group form label for group of checkboxes with color buttons, e.g. …"
-"Active lights"
-msgid "Use custom color for:"
-msgstr "Mukautetun värin käyttö:"
+"@title:group form title for group of radiobuttons, default/custom color"
+msgid "Active Lights:"
+msgstr "Aktiiviset valot"
 
 #: configGeneral.qml:47
 #, kde-format
-msgctxt "@option:check"
-msgid "Active lights"
-msgstr "Aktiiviset valot"
+msgctxt "@option:radio color for active lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:55
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for active lights"
+msgid "Custom color"
+msgstr "Käytä teeman väriä"
+
+#: configGeneral.qml:75
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Inactive lights"
+msgctxt "@title:group form title for group of radiobuttons, default/custom/off"
+msgid "Inactive lights:"
+msgstr "Passiiviset valot"
+
+#: configGeneral.qml:80
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:88
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for inactive lights"
+msgid "Custom color"
+msgstr "Käytä teeman väriä"
+
+#: configGeneral.qml:102
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Off"
+msgstr ""
+
+# HUOM! Käännös muotoiltu sen perusteella, etten tiedä, missä muodossa vaihtoehdot tulevat (”Käytä mukautettua väriä” edellyttäisi tulosijaa, esim. siihen-ja-siihen tai sille-ja-sille)
+#, fuzzy
+#~| msgid "Use custom color for:"
+#~ msgctxt ""
+#~ "@title:group form label for group of checkboxes with color buttons, e.g. …"
+#~ "Active lights"
+#~ msgid "Use custom color for:"
+#~ msgstr "Mukautetun värin käyttö:"
 
 #~ msgid "Display:"
 #~ msgstr "Näkymä:"
@@ -107,9 +147,6 @@ msgstr "Aktiiviset valot"
 #~ msgid "Check this if you want to see the inactive LEDs."
 #~ msgstr ""
 #~ "Valitse tämä, jos haluat nähdä myös valot, jotka ovat poissa päältä."
-
-#~ msgid "Use theme color"
-#~ msgstr "Käytä teeman väriä"
 
 #~ msgid "Show the grid"
 #~ msgstr "Näytä ruudukko"

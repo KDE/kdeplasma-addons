@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-10 08:12+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -56,25 +56,25 @@ msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "默认颜色格式："
 
-#: qml/configGeneral.qml:34
+#: qml/configGeneral.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "自动复制颜色到剪贴板"
 
-#: qml/configGeneral.qml:42
+#: qml/configGeneral.qml:43
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "按下键盘快捷键时："
 
-#: qml/configGeneral.qml:43
+#: qml/configGeneral.qml:45
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "拾取颜色"
 
-#: qml/configGeneral.qml:49
+#: qml/configGeneral.qml:52
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"

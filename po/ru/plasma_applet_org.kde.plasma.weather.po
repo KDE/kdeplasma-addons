@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2026-11-11 22:59+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -467,67 +467,61 @@ msgstr ""
 "Для этого местоположения текущая температура или другие погодные условия "
 "могут быть недоступны в «%1»."
 
-#: qml/config/ConfigAppearance.qml:54
-#, kde-format
-msgctxt "@title:group"
-msgid "Compact Mode"
-msgstr "Компактный режим"
-
-#: qml/config/ConfigAppearance.qml:62
+#: qml/config/ConfigAppearance.qml:59
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Показывать температуру:"
 
-#: qml/config/ConfigAppearance.qml:66
+#: qml/config/ConfigAppearance.qml:65
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Над значком виджета"
 
-#: qml/config/ConfigAppearance.qml:74
+#: qml/config/ConfigAppearance.qml:75
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Сбоку от значка виджета"
 
-#: qml/config/ConfigAppearance.qml:82
+#: qml/config/ConfigAppearance.qml:84
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Не показывать"
 
-#: qml/config/ConfigAppearance.qml:93
+#: qml/config/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "Показывать во всплывающей подсказке:"
 
-#: qml/config/ConfigAppearance.qml:94
+#: qml/config/ConfigAppearance.qml:95
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Температуру"
 
-#: qml/config/ConfigAppearance.qml:100
+#: qml/config/ConfigAppearance.qml:101
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Ветер"
 
-#: qml/config/ConfigAppearance.qml:106
+#: qml/config/ConfigAppearance.qml:107
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Давление"
 
-#: qml/config/ConfigAppearance.qml:112
+#: qml/config/ConfigAppearance.qml:113
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "Влажность"
 
-#: qml/config/ConfigAppearance.qml:122
+#: qml/config/ConfigAppearance.qml:120
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature graph:"
@@ -539,31 +533,31 @@ msgctxt "@option:check"
 msgid "Hourly Forecast"
 msgstr "Почасовой прогноз"
 
-#: qml/config/ConfigAppearance.qml:128
+#: qml/config/ConfigAppearance.qml:130
 #, kde-format
 msgctxt "@option:check"
 msgid "Day Forecast"
 msgstr "Прогноз по дням"
 
-#: qml/config/ConfigUnits.qml:31
+#: qml/config/ConfigUnits.qml:36
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "Температура:"
 
-#: qml/config/ConfigUnits.qml:37
+#: qml/config/ConfigUnits.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "Давление:"
 
-#: qml/config/ConfigUnits.qml:43
+#: qml/config/ConfigUnits.qml:52
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "Скорость ветра:"
 
-#: qml/config/ConfigUnits.qml:49
+#: qml/config/ConfigUnits.qml:60
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
@@ -787,12 +781,18 @@ msgid "Unable to load weather forecast"
 msgstr "Не удалось загрузить прогноз погоды"
 
 #: qml/FullRepresentation.qml:106
+#, fuzzy, kde-kuit-format
+#| msgctxt "@info:usagetip"
+#| msgid ""
+#| "There may be a technical issue with the weather provider. If the issue "
+#| "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
+#| "cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
+#| "link>."
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-"cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-"link>."
+"cgi?product=plasmashell&component=Weather widget'>submit a bug report</link>."
 msgstr ""
 "Возможно, у поставщика сведений о погоде временные технические неполадки. "
 "Если проблема не исчезнет в течение суток, <link url='https://bugs.kde.org/"
@@ -995,6 +995,10 @@ msgstr "Очень высокое"
 #, kde-format
 msgid "Extreme"
 msgstr "Экстремальное"
+
+#~ msgctxt "@title:group"
+#~ msgid "Compact Mode"
+#~ msgstr "Компактный режим"
 
 #~ msgid "N/A"
 #~ msgstr "н/д"

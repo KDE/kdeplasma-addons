@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2024-07-25 02:13-0400\n"
 "Last-Translator: Agron Selimaj <as9902613@gmail.com>\n"
 "Language-Team: sq\n"
@@ -468,13 +468,7 @@ msgid ""
 "this location."
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:54
-#, kde-format
-msgctxt "@title:group"
-msgid "Compact Mode"
-msgstr ""
-
-#: qml/config/ConfigAppearance.qml:62
+#: qml/config/ConfigAppearance.qml:59
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -482,31 +476,31 @@ msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Presioni: %1 %2"
 
-#: qml/config/ConfigAppearance.qml:66
+#: qml/config/ConfigAppearance.qml:65
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:74
+#: qml/config/ConfigAppearance.qml:75
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:82
+#: qml/config/ConfigAppearance.qml:84
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:93
+#: qml/config/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:94
+#: qml/config/ConfigAppearance.qml:95
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -514,13 +508,13 @@ msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Presioni: %1 %2"
 
-#: qml/config/ConfigAppearance.qml:100
+#: qml/config/ConfigAppearance.qml:101
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:106
+#: qml/config/ConfigAppearance.qml:107
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -528,7 +522,7 @@ msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Presioni: %1 %2"
 
-#: qml/config/ConfigAppearance.qml:112
+#: qml/config/ConfigAppearance.qml:113
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"
@@ -536,7 +530,7 @@ msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "Lagështia: %1%2"
 
-#: qml/config/ConfigAppearance.qml:122
+#: qml/config/ConfigAppearance.qml:120
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -552,7 +546,7 @@ msgctxt "@option:check"
 msgid "Hourly Forecast"
 msgstr "Parashikimi"
 
-#: qml/config/ConfigAppearance.qml:128
+#: qml/config/ConfigAppearance.qml:130
 #, fuzzy, kde-format
 #| msgctxt "@title:tab Weather forecast"
 #| msgid "Forecast"
@@ -560,13 +554,13 @@ msgctxt "@option:check"
 msgid "Day Forecast"
 msgstr "Parashikimi"
 
-#: qml/config/ConfigUnits.qml:31
+#: qml/config/ConfigUnits.qml:36
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr ""
 
-#: qml/config/ConfigUnits.qml:37
+#: qml/config/ConfigUnits.qml:44
 #, fuzzy, kde-format
 #| msgctxt "pressure, unit"
 #| msgid "Pressure: %1 %2"
@@ -574,13 +568,13 @@ msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "Presioni: %1 %2"
 
-#: qml/config/ConfigUnits.qml:43
+#: qml/config/ConfigUnits.qml:52
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr ""
 
-#: qml/config/ConfigUnits.qml:49
+#: qml/config/ConfigUnits.qml:60
 #, fuzzy, kde-format
 #| msgctxt "visibility from distance"
 #| msgid "Visibility: %1"
@@ -819,12 +813,12 @@ msgid "Unable to load weather forecast"
 msgstr ""
 
 #: qml/FullRepresentation.qml:106
+#, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-"cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-"link>."
+"cgi?product=plasmashell&component=Weather widget'>submit a bug report</link>."
 msgstr ""
 
 #: qml/LocationHeader.qml:48

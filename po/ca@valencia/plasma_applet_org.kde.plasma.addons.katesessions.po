@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-30 00:46+0000\n"
+"POT-Creation-Date: 2026-11-17 22:08+0000\n"
 "PO-Revision-Date: 2021-07-02 17:36+0200\n"
 "Last-Translator: Antoni Bella Pérez <antonibella5@yahoo.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -22,23 +22,31 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
 
-#: qml/KateSessionsItemDelegate.qml:91
-#, kde-format
+#: qml/KateSessionsItemDelegate.qml:58
+#, fuzzy, kde-format
+#| msgid "Session name"
+msgctxt "@info:placeholder for text field to create new Kate session with name"
 msgid "Session name"
 msgstr "Nom de la sessió"
 
-#: qml/KateSessionsItemDelegate.qml:103
-#, kde-format
+#: qml/KateSessionsItemDelegate.qml:69
+#, fuzzy, kde-format
+#| msgid "Create new session and start Kate"
+msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Create new session and start Kate"
 msgstr "Crea una sessió nova i inicia Kate"
 
-#: qml/KateSessionsItemDelegate.qml:115
-#, kde-format
+#: qml/KateSessionsItemDelegate.qml:84
+#, fuzzy, kde-format
+#| msgid "Cancel session creation"
+msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Cancel session creation"
 msgstr "Cancel·la la creació de la sessió"
 
-#: qml/main.qml:41
-#, kde-format
+#: qml/main.qml:39
+#, fuzzy, kde-format
+#| msgid "Kate Sessions"
+msgctxt "@info:tooltip title for widget tooltip"
 msgid "Kate Sessions"
 msgstr "Sessions de Kate"
 

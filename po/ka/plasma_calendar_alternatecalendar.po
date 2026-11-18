@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-10 00:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2026-09-02 05:56+0200\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
@@ -96,13 +96,13 @@ msgctxt "@item:inlist"
 msgid "Bikram Sambat"
 msgstr "Bikram Sambat"
 
-#: config/qml/AlternateCalendarConfig.qml:49
+#: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "კალენდრის სისტემა:"
 
-#: config/qml/AlternateCalendarConfig.qml:70
+#: config/qml/AlternateCalendarConfig.qml:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -112,20 +112,20 @@ msgstr ""
 "კალენდარი წმინდა ასტრონომიულ გამოთვლებს ეყრდნობა. არ ითვალისწინებს მთვარის "
 "ფაზებს."
 
-#: config/qml/AlternateCalendarConfig.qml:78
+#: config/qml/AlternateCalendarConfig.qml:72
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "დროის წანაცვლება:"
 
-#: config/qml/AlternateCalendarConfig.qml:89
+#: config/qml/AlternateCalendarConfig.qml:84
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 დღე"
 msgstr[1] "%1 დღე"
 
-#: config/qml/AlternateCalendarConfig.qml:92
+#: config/qml/AlternateCalendarConfig.qml:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

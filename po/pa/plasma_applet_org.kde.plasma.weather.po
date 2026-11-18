@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2024-01-28 18:58-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -480,67 +480,61 @@ msgid ""
 "this location."
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:54
-#, kde-format
-msgctxt "@title:group"
-msgid "Compact Mode"
-msgstr "ਸੰਖੇਪ ਢੰਗ"
-
-#: qml/config/ConfigAppearance.qml:62
+#: qml/config/ConfigAppearance.qml:59
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "ਤਾਪਮਾਨ ਵੇਖੋ:"
 
-#: qml/config/ConfigAppearance.qml:66
+#: qml/config/ConfigAppearance.qml:65
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "ਵਿਜੈੱਟ ਆਈਕਾਨ ਉੱਤੇ"
 
-#: qml/config/ConfigAppearance.qml:74
+#: qml/config/ConfigAppearance.qml:75
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "ਵਿਜੈਟ ਆਈਕਾਨ ਦੇ ਨਾਲ"
 
-#: qml/config/ConfigAppearance.qml:82
+#: qml/config/ConfigAppearance.qml:84
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "ਨਾ ਵੇਖਾਓ"
 
-#: qml/config/ConfigAppearance.qml:93
+#: qml/config/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "ਟੂਲ-ਟਿੱਪ ਵਿੱਚ ਵੇਖਾਓ:"
 
-#: qml/config/ConfigAppearance.qml:94
+#: qml/config/ConfigAppearance.qml:95
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "ਤਾਪਮਾਨ"
 
-#: qml/config/ConfigAppearance.qml:100
+#: qml/config/ConfigAppearance.qml:101
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "ਹਵਾ"
 
-#: qml/config/ConfigAppearance.qml:106
+#: qml/config/ConfigAppearance.qml:107
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "ਦਬਾਓ"
 
-#: qml/config/ConfigAppearance.qml:112
+#: qml/config/ConfigAppearance.qml:113
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "ਨਮੀ"
 
-#: qml/config/ConfigAppearance.qml:122
+#: qml/config/ConfigAppearance.qml:120
 #, fuzzy, kde-format
 #| msgctxt "@label"
 #| msgid "Show temperature:"
@@ -554,31 +548,31 @@ msgctxt "@option:check"
 msgid "Hourly Forecast"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:128
+#: qml/config/ConfigAppearance.qml:130
 #, kde-format
 msgctxt "@option:check"
 msgid "Day Forecast"
 msgstr ""
 
-#: qml/config/ConfigUnits.qml:31
+#: qml/config/ConfigUnits.qml:36
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "ਤਾਮਮਾਨ:"
 
-#: qml/config/ConfigUnits.qml:37
+#: qml/config/ConfigUnits.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "ਦਬਾਓ:"
 
-#: qml/config/ConfigUnits.qml:43
+#: qml/config/ConfigUnits.qml:52
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "ਹਵਾ ਦੀ ਗਤੀ:"
 
-#: qml/config/ConfigUnits.qml:49
+#: qml/config/ConfigUnits.qml:60
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
@@ -817,12 +811,12 @@ msgid "Unable to load weather forecast"
 msgstr ""
 
 #: qml/FullRepresentation.qml:106
+#, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-"cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-"link>."
+"cgi?product=plasmashell&component=Weather widget'>submit a bug report</link>."
 msgstr ""
 
 #: qml/LocationHeader.qml:48
@@ -1027,6 +1021,10 @@ msgstr ""
 #, kde-format
 msgid "Extreme"
 msgstr ""
+
+#~ msgctxt "@title:group"
+#~ msgid "Compact Mode"
+#~ msgstr "ਸੰਖੇਪ ਢੰਗ"
 
 #~ msgid "N/A"
 #~ msgstr "ਮੌਜੂਦ ਨਹੀਂ"

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2024-05-10 11:33+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -24,25 +24,25 @@ msgctxt "@title"
 msgid "General"
 msgstr "Ĝenerala"
 
-#: ConfigGeneral.qml:30
+#: ConfigGeneral.qml:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Maksimumaj kolumnoj:"
 
-#: ConfigGeneral.qml:30
+#: ConfigGeneral.qml:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Maksimumaj vicoj:"
 
-#: ConfigGeneral.qml:42
+#: ConfigGeneral.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Aspekto:"
 
-#: ConfigGeneral.qml:44
+#: ConfigGeneral.qml:42
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
@@ -54,19 +54,19 @@ msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Ebligi ŝprucfenestron"
 
-#: ConfigGeneral.qml:59
+#: ConfigGeneral.qml:58
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Titolo:"
 
-#: ConfigGeneral.qml:67
+#: ConfigGeneral.qml:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Montri:"
 
-#: ConfigGeneral.qml:83
+#: ConfigGeneral.qml:78
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"

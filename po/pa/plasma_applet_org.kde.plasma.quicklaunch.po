@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2024-01-28 19:01-0600\n"
 "Last-Translator: A S Alam <aalam@punlinux.org>\n"
 "Language-Team: Punjabi <kde-i18n-doc@kde.org>\n"
@@ -23,25 +23,25 @@ msgctxt "@title"
 msgid "General"
 msgstr "ਆਮ"
 
-#: ConfigGeneral.qml:30
+#: ConfigGeneral.qml:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "ਵੱਧ ਤੋਂ ਵੱਧ ਕਾਲਮ:"
 
-#: ConfigGeneral.qml:30
+#: ConfigGeneral.qml:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "ਵੱਧੋ-ਵੱਧ ਕਤਾਰਾਂ:"
 
-#: ConfigGeneral.qml:42
+#: ConfigGeneral.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "ਦਿੱਖ:"
 
-#: ConfigGeneral.qml:44
+#: ConfigGeneral.qml:42
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
@@ -53,19 +53,19 @@ msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "ਪੌਪਅੱਪ ਨੂੰ ਸਮਰੱਥ ਕਰੋ"
 
-#: ConfigGeneral.qml:59
+#: ConfigGeneral.qml:58
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "ਟਾਈਟਲ:"
 
-#: ConfigGeneral.qml:67
+#: ConfigGeneral.qml:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "ਵੇਖਾਓ:"
 
-#: ConfigGeneral.qml:83
+#: ConfigGeneral.qml:78
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"

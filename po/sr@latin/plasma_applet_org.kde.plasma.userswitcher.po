@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.userswitcher\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-11-14 16:15+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -25,13 +25,13 @@ msgctxt "@title"
 msgid "General"
 msgstr "Opšte"
 
-#: qml/configGeneral.qml:28
+#: qml/configGeneral.qml:25
 #, kde-format
 msgctxt "@title:label"
 msgid "Username style:"
 msgstr "Prikaz korisničkog imena:"
 
-#: qml/configGeneral.qml:31
+#: qml/configGeneral.qml:29
 #, kde-format
 msgctxt "@option:radio"
 msgid "Full name (if available)"
@@ -43,37 +43,37 @@ msgctxt "@option:radio"
 msgid "Login username"
 msgstr "Prijavno korisničko ime"
 
-#: qml/configGeneral.qml:56
+#: qml/configGeneral.qml:48
 #, kde-format
 msgctxt "@title:label"
 msgid "Show:"
 msgstr "Prikaži:"
 
-#: qml/configGeneral.qml:59
+#: qml/configGeneral.qml:53
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name"
 msgstr "Ime"
 
-#: qml/configGeneral.qml:73
+#: qml/configGeneral.qml:69
 #, kde-format
 msgctxt "@option:radio"
 msgid "User picture"
 msgstr "Sliku korisnika"
 
-#: qml/configGeneral.qml:87
+#: qml/configGeneral.qml:85
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name and user picture"
 msgstr "Ime i sliku korisnika"
 
-#: qml/configGeneral.qml:106
+#: qml/configGeneral.qml:98
 #, kde-format
 msgctxt "@title:label"
 msgid "Advanced:"
 msgstr "Napredno:"
 
-#: qml/configGeneral.qml:108
+#: qml/configGeneral.qml:102
 #, kde-format
 msgctxt "@option:check"
 msgid "Show technical session information"

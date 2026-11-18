@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 10:52+0000\n"
 "PO-Revision-Date: 2024-05-23 19:49+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -24,40 +24,77 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Appearance"
 
-#: configGeneral.qml:29
+#: configGeneral.qml:30
 #, fuzzy, kde-format
 #| msgid "Show"
-msgctxt ""
-"@title:group The things being potentially shown are lights and seconds"
+msgctxt "@option:check prefix completes … seconds"
 msgid "Show:"
 msgstr "Show"
 
-#: configGeneral.qml:30 configGeneral.qml:60
-#, kde-format
-msgctxt "@option:check"
-msgid "Inactive lights"
-msgstr "Inactive lights"
-
-#: configGeneral.qml:35
-#, kde-format
-msgctxt "@option:check"
+#: configGeneral.qml:33
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Seconds"
+msgctxt "@option:check completes Show …"
 msgid "Seconds"
 msgstr "Seconds"
 
-#: configGeneral.qml:43
+#: configGeneral.qml:45
 #, fuzzy, kde-format
-#| msgid "Use custom color for:"
+#| msgctxt "@option:check"
+#| msgid "Active lights"
 msgctxt ""
-"@title:group form label for group of checkboxes with color buttons, e.g. …"
-"Active lights"
-msgid "Use custom color for:"
-msgstr "Use custom colour for:"
+"@title:group form title for group of radiobuttons, default/custom color"
+msgid "Active Lights:"
+msgstr "Active lights"
 
 #: configGeneral.qml:47
 #, kde-format
-msgctxt "@option:check"
-msgid "Active lights"
-msgstr "Active lights"
+msgctxt "@option:radio color for active lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:55
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for active lights"
+msgid "Custom color"
+msgstr "Use theme colour"
+
+#: configGeneral.qml:75
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Inactive lights"
+msgctxt "@title:group form title for group of radiobuttons, default/custom/off"
+msgid "Inactive lights:"
+msgstr "Inactive lights"
+
+#: configGeneral.qml:80
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:88
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for inactive lights"
+msgid "Custom color"
+msgstr "Use theme colour"
+
+#: configGeneral.qml:102
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Off"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Use custom color for:"
+#~ msgctxt ""
+#~ "@title:group form label for group of checkboxes with color buttons, e.g. …"
+#~ "Active lights"
+#~ msgid "Use custom color for:"
+#~ msgstr "Use custom colour for:"
 
 #~ msgid "Display:"
 #~ msgstr "Display:"
@@ -100,9 +137,6 @@ msgstr "Active lights"
 
 #~ msgid "Check this if you want to see the inactive LEDs."
 #~ msgstr "Tick this if you want to see the inactive LEDs."
-
-#~ msgid "Use theme color"
-#~ msgstr "Use theme colour"
 
 #~ msgid "Show the grid"
 #~ msgstr "Show the grid"

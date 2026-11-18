@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2024-09-07 12:23+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -477,67 +477,61 @@ msgid ""
 "this location."
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:54
-#, kde-format
-msgctxt "@title:group"
-msgid "Compact Mode"
-msgstr "Compact Mode"
-
-#: qml/config/ConfigAppearance.qml:62
+#: qml/config/ConfigAppearance.qml:59
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Show temperature:"
 
-#: qml/config/ConfigAppearance.qml:66
+#: qml/config/ConfigAppearance.qml:65
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Over the widget icon"
 
-#: qml/config/ConfigAppearance.qml:74
+#: qml/config/ConfigAppearance.qml:75
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Beside the widget icon"
 
-#: qml/config/ConfigAppearance.qml:82
+#: qml/config/ConfigAppearance.qml:84
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Do not show"
 
-#: qml/config/ConfigAppearance.qml:93
+#: qml/config/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "Show in tooltip:"
 
-#: qml/config/ConfigAppearance.qml:94
+#: qml/config/ConfigAppearance.qml:95
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Temperature"
 
-#: qml/config/ConfigAppearance.qml:100
+#: qml/config/ConfigAppearance.qml:101
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Wind"
 
-#: qml/config/ConfigAppearance.qml:106
+#: qml/config/ConfigAppearance.qml:107
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Pressure"
 
-#: qml/config/ConfigAppearance.qml:112
+#: qml/config/ConfigAppearance.qml:113
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "Humidity"
 
-#: qml/config/ConfigAppearance.qml:122
+#: qml/config/ConfigAppearance.qml:120
 #, fuzzy, kde-format
 #| msgctxt "@label"
 #| msgid "Show temperature:"
@@ -553,7 +547,7 @@ msgctxt "@option:check"
 msgid "Hourly Forecast"
 msgstr "Forecast"
 
-#: qml/config/ConfigAppearance.qml:128
+#: qml/config/ConfigAppearance.qml:130
 #, fuzzy, kde-format
 #| msgctxt "@title:tab Weather forecast"
 #| msgid "Forecast"
@@ -561,25 +555,25 @@ msgctxt "@option:check"
 msgid "Day Forecast"
 msgstr "Forecast"
 
-#: qml/config/ConfigUnits.qml:31
+#: qml/config/ConfigUnits.qml:36
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "Temperature:"
 
-#: qml/config/ConfigUnits.qml:37
+#: qml/config/ConfigUnits.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "Pressure:"
 
-#: qml/config/ConfigUnits.qml:43
+#: qml/config/ConfigUnits.qml:52
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "Wind speed:"
 
-#: qml/config/ConfigUnits.qml:49
+#: qml/config/ConfigUnits.qml:60
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
@@ -827,7 +821,7 @@ msgid "Unable to load weather forecast"
 msgstr "Unable to load weather forecast"
 
 #: qml/FullRepresentation.qml:106
-#, fuzzy
+#, fuzzy, kde-kuit-format
 #| msgctxt "@info:usagetip"
 #| msgid ""
 #| "There may be a technical issue with the weather provider. If the issue "
@@ -836,8 +830,7 @@ msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-"cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-"link>."
+"cgi?product=plasmashell&component=Weather widget'>submit a bug report</link>."
 msgstr ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, submit a bug report."
@@ -1048,6 +1041,10 @@ msgstr ""
 #, kde-format
 msgid "Extreme"
 msgstr ""
+
+#~ msgctxt "@title:group"
+#~ msgid "Compact Mode"
+#~ msgstr "Compact Mode"
 
 #~ msgid "N/A"
 #~ msgstr "N/A"

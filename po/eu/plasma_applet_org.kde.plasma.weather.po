@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2026-09-27 21:28+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -460,67 +460,61 @@ msgstr ""
 "Baliteke «%1» zerbitzuak kokapen honetako uneko tenperatura edo beste "
 "eguraldi-baldintza batzuk ez eskaintzea."
 
-#: qml/config/ConfigAppearance.qml:54
-#, kde-format
-msgctxt "@title:group"
-msgid "Compact Mode"
-msgstr "Modu trinkoa"
-
-#: qml/config/ConfigAppearance.qml:62
+#: qml/config/ConfigAppearance.qml:59
 #, kde-format
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Erakutsi tenperatura:"
 
-#: qml/config/ConfigAppearance.qml:66
+#: qml/config/ConfigAppearance.qml:65
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Trepetaren ikonoaren gainean"
 
-#: qml/config/ConfigAppearance.qml:74
+#: qml/config/ConfigAppearance.qml:75
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Trepetaren ikonoaren ondoan"
 
-#: qml/config/ConfigAppearance.qml:82
+#: qml/config/ConfigAppearance.qml:84
 #, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Ez erakutsi"
 
-#: qml/config/ConfigAppearance.qml:93
+#: qml/config/ConfigAppearance.qml:92
 #, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "Erakutsi tresna-argibidean:"
 
-#: qml/config/ConfigAppearance.qml:94
+#: qml/config/ConfigAppearance.qml:95
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Tenperatura"
 
-#: qml/config/ConfigAppearance.qml:100
+#: qml/config/ConfigAppearance.qml:101
 #, kde-format
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Haizea"
 
-#: qml/config/ConfigAppearance.qml:106
+#: qml/config/ConfigAppearance.qml:107
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Presioa"
 
-#: qml/config/ConfigAppearance.qml:112
+#: qml/config/ConfigAppearance.qml:113
 #, kde-format
 msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "Hezetasuna"
 
-#: qml/config/ConfigAppearance.qml:122
+#: qml/config/ConfigAppearance.qml:120
 #, fuzzy, kde-format
 #| msgctxt "@label"
 #| msgid "Show temperature:"
@@ -536,7 +530,7 @@ msgctxt "@option:check"
 msgid "Hourly Forecast"
 msgstr "Iragarpena"
 
-#: qml/config/ConfigAppearance.qml:128
+#: qml/config/ConfigAppearance.qml:130
 #, fuzzy, kde-format
 #| msgctxt "@title:tab Weather forecast"
 #| msgid "Forecast"
@@ -544,25 +538,25 @@ msgctxt "@option:check"
 msgid "Day Forecast"
 msgstr "Iragarpena"
 
-#: qml/config/ConfigUnits.qml:31
+#: qml/config/ConfigUnits.qml:36
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "Tenperatura:"
 
-#: qml/config/ConfigUnits.qml:37
+#: qml/config/ConfigUnits.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "Presioa:"
 
-#: qml/config/ConfigUnits.qml:43
+#: qml/config/ConfigUnits.qml:52
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "Haizearen abiadura:"
 
-#: qml/config/ConfigUnits.qml:49
+#: qml/config/ConfigUnits.qml:60
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
@@ -811,7 +805,7 @@ msgid "Unable to load weather forecast"
 msgstr "Eguraldiaren iragarpena zamatu ezinik"
 
 #: qml/FullRepresentation.qml:106
-#, fuzzy
+#, fuzzy, kde-kuit-format
 #| msgctxt "@info:usagetip"
 #| msgid ""
 #| "There may be a technical issue with the weather provider. If the issue "
@@ -820,8 +814,7 @@ msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-"cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-"link>."
+"cgi?product=plasmashell&component=Weather widget'>submit a bug report</link>."
 msgstr ""
 "Baliteke eguraldi-hornitzailearekin arazo tekniko bat egotea. Arazoak egun "
 "bat baino gehiago irauten badu, bidali akats-txosten bat."
@@ -1032,6 +1025,10 @@ msgstr "Oso altua"
 #, kde-format
 msgid "Extreme"
 msgstr "Muturrekoa"
+
+#~ msgctxt "@title:group"
+#~ msgid "Compact Mode"
+#~ msgstr "Modu trinkoa"
 
 #~ msgid "N/A"
 #~ msgstr "E/E"

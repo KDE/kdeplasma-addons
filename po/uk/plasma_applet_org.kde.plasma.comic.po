@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2026-11-08 12:16+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -68,7 +68,7 @@ msgctxt "@title"
 msgid "Behavior"
 msgstr "Поведінка"
 
-#: qml/configBehavior.qml:28
+#: qml/configBehavior.qml:26
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show above image:"
@@ -80,7 +80,7 @@ msgctxt "@option:check show above image: "
 msgid "Title"
 msgstr "Заголовок"
 
-#: qml/configBehavior.qml:34
+#: qml/configBehavior.qml:35
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Author"
@@ -92,43 +92,43 @@ msgctxt "@title:group form label for checkboxes"
 msgid "Show below image:"
 msgstr "Показувати під зображенням:"
 
-#: qml/configBehavior.qml:40
+#: qml/configBehavior.qml:42
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Identifier"
 msgstr "Ідентифікатор"
 
-#: qml/configBehavior.qml:45
+#: qml/configBehavior.qml:48
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Website"
 msgstr "Сайт"
 
-#: qml/configBehavior.qml:54
+#: qml/configBehavior.qml:55
 #, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
 msgstr "Кнопки навігації:"
 
-#: qml/configBehavior.qml:55
+#: qml/configBehavior.qml:58
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
 msgstr "Завжди видимі на краях"
 
-#: qml/configBehavior.qml:61
+#: qml/configBehavior.qml:65
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
 msgstr "З'являться у центрі при наведенні"
 
-#: qml/configBehavior.qml:70
+#: qml/configBehavior.qml:72
 #, kde-format
 msgctxt "@label for checkbox, completes sentence … opens full-size view"
 msgid "Middle-clicking image:"
 msgstr "Клацання середньою на зображенні:"
 
-#: qml/configBehavior.qml:71
+#: qml/configBehavior.qml:75
 #, kde-format
 msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
@@ -152,13 +152,13 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Отримати комікси…"
 
-#: qml/configComics.qml:82
+#: qml/configComics.qml:83
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Шукати нові комікси кожні:"
 
-#: qml/configComics.qml:92
+#: qml/configComics.qml:94
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
 msgid "minute"
@@ -168,13 +168,13 @@ msgstr[1] "хвилини"
 msgstr[2] "хвилин"
 msgstr[3] "хвилину"
 
-#: qml/configComics.qml:98
+#: qml/configComics.qml:100
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr "Збереження локального архіву:"
 
-#: qml/configComics.qml:106
+#: qml/configComics.qml:109
 #, kde-format
 msgctxt "@item:valuesuffix spacing to number + unit"
 msgid "images per comic"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2025-05-17 20:03+0200\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -26,84 +26,84 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Itxura"
 
-#: qml/configAppearance.qml:32
-#, fuzzy, kde-format
-#| msgid "%1pt"
-msgctxt "@item:valuesuffix %1 is font size in points"
-msgid "%1pt"
-msgstr "%1pt"
-
-#: qml/configAppearance.qml:38
+#: qml/configAppearance.qml:28
 #, fuzzy, kde-format
 #| msgid "Text font size:"
 msgctxt "@label:spinbox"
 msgid "Text font size:"
 msgstr "Testuaren letra-tipo neurria:"
 
-#: qml/configAppearance.qml:72
+#: qml/configAppearance.qml:35
+#, fuzzy, kde-format
+#| msgid "%1pt"
+msgctxt "@item:valuesuffix %1 is font size in points"
+msgid "%1pt"
+msgstr "%1pt"
+
+#: qml/configAppearance.qml:75
 #, fuzzy, kde-format
 #| msgid "A white sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A white sticky note"
 msgstr "Ohar itsaskor zuri bat"
 
-#: qml/configAppearance.qml:73
+#: qml/configAppearance.qml:76
 #, fuzzy, kde-format
 #| msgid "A black sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A black sticky note"
 msgstr "Ohar itsaskor beltz bat"
 
-#: qml/configAppearance.qml:74
+#: qml/configAppearance.qml:77
 #, fuzzy, kde-format
 #| msgid "A red sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A red sticky note"
 msgstr "Ohar itsaskor gorri bat"
 
-#: qml/configAppearance.qml:75
+#: qml/configAppearance.qml:78
 #, fuzzy, kde-format
 #| msgid "An orange sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "An orange sticky note"
 msgstr "Ohar itsaskor laranja bat"
 
-#: qml/configAppearance.qml:76
+#: qml/configAppearance.qml:79
 #, fuzzy, kde-format
 #| msgid "A yellow sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A yellow sticky note"
 msgstr "Ohar itsaskor hori bat"
 
-#: qml/configAppearance.qml:77
+#: qml/configAppearance.qml:80
 #, fuzzy, kde-format
 #| msgid "A green sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A green sticky note"
 msgstr "Ohar itsaskor berde bat"
 
-#: qml/configAppearance.qml:78
+#: qml/configAppearance.qml:81
 #, fuzzy, kde-format
 #| msgid "A blue sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A blue sticky note"
 msgstr "Ohar itsaskor urdin bat"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:82
 #, fuzzy, kde-format
 #| msgid "A pink sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A pink sticky note"
 msgstr "Ohar itsaskor arrosa bat"
 
-#: qml/configAppearance.qml:80
+#: qml/configAppearance.qml:83
 #, fuzzy, kde-format
 #| msgid "A transparent sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note"
 msgstr "Ohar itsaskor garden bat"
 
-#: qml/configAppearance.qml:81
+#: qml/configAppearance.qml:84
 #, fuzzy, kde-format
 #| msgid "A transparent sticky note with light text"
 msgctxt "@item text on sticky note color option"

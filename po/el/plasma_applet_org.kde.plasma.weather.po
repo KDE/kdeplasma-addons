@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2016-08-31 20:04+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -465,63 +465,57 @@ msgid ""
 "this location."
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:54
-#, fuzzy, kde-format
-msgctxt "@title:group"
-msgid "Compact Mode"
-msgstr "Συμπαγής λειτουργία"
-
-#: qml/config/ConfigAppearance.qml:62
+#: qml/config/ConfigAppearance.qml:59
 #, fuzzy, kde-format
 #| msgid "Temperature:"
 msgctxt "@label"
 msgid "Show temperature:"
 msgstr "Θερμοκρασία:"
 
-#: qml/config/ConfigAppearance.qml:66
+#: qml/config/ConfigAppearance.qml:65
 #, fuzzy, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Over the widget icon"
 msgstr "Πάνω από το εικονίδιο"
 
-#: qml/config/ConfigAppearance.qml:74
+#: qml/config/ConfigAppearance.qml:75
 #, fuzzy, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Beside the widget icon"
 msgstr "Δίπλα στο εικονίδιο"
 
-#: qml/config/ConfigAppearance.qml:82
+#: qml/config/ConfigAppearance.qml:84
 #, fuzzy, kde-format
 msgctxt "@option:radio Show temperature:"
 msgid "Do not show"
 msgstr "Να μην εμφανίζεται"
 
-#: qml/config/ConfigAppearance.qml:93
+#: qml/config/ConfigAppearance.qml:92
 #, fuzzy, kde-format
 msgctxt "@label"
 msgid "Show in tooltip:"
 msgstr "Εμφάνιση στην υπόδειξη:"
 
-#: qml/config/ConfigAppearance.qml:94
+#: qml/config/ConfigAppearance.qml:95
 #, kde-format
 msgctxt "@option:check"
 msgid "Temperature"
 msgstr "Θερμοκρασία"
 
-#: qml/config/ConfigAppearance.qml:100
+#: qml/config/ConfigAppearance.qml:101
 #, fuzzy, kde-format
 #| msgid "Wind: %1"
 msgctxt "@option:check Show in tooltip: wind"
 msgid "Wind"
 msgstr "Άνεμος"
 
-#: qml/config/ConfigAppearance.qml:106
+#: qml/config/ConfigAppearance.qml:107
 #, kde-format
 msgctxt "@option:check Show in tooltip: pressure"
 msgid "Pressure"
 msgstr "Πίεση"
 
-#: qml/config/ConfigAppearance.qml:112
+#: qml/config/ConfigAppearance.qml:113
 #, fuzzy, kde-format
 #| msgctxt "content of water in air"
 #| msgid "Humidity: %1%2"
@@ -529,7 +523,7 @@ msgctxt "@option:check Show in tooltip: humidity"
 msgid "Humidity"
 msgstr "Υγρασία"
 
-#: qml/config/ConfigAppearance.qml:122
+#: qml/config/ConfigAppearance.qml:120
 #, fuzzy, kde-format
 #| msgid "Temperature:"
 msgctxt "@label"
@@ -542,31 +536,31 @@ msgctxt "@option:check"
 msgid "Hourly Forecast"
 msgstr ""
 
-#: qml/config/ConfigAppearance.qml:128
+#: qml/config/ConfigAppearance.qml:130
 #, kde-format
 msgctxt "@option:check"
 msgid "Day Forecast"
 msgstr ""
 
-#: qml/config/ConfigUnits.qml:31
+#: qml/config/ConfigUnits.qml:36
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Temperature:"
 msgstr "Θερμοκρασία:"
 
-#: qml/config/ConfigUnits.qml:37
+#: qml/config/ConfigUnits.qml:44
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Pressure:"
 msgstr "Πίεση:"
 
-#: qml/config/ConfigUnits.qml:43
+#: qml/config/ConfigUnits.qml:52
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Wind speed:"
 msgstr "Ταχύτητα ανέμου:"
 
-#: qml/config/ConfigUnits.qml:49
+#: qml/config/ConfigUnits.qml:60
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Visibility:"
@@ -816,12 +810,12 @@ msgid "Unable to load weather forecast"
 msgstr "Ενημέρωση πληροφοριών καιρού κάθε"
 
 #: qml/FullRepresentation.qml:106
+#, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
 "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-"cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-"link>."
+"cgi?product=plasmashell&component=Weather widget'>submit a bug report</link>."
 msgstr ""
 
 #: qml/LocationHeader.qml:48
@@ -1033,6 +1027,11 @@ msgstr "Πολύ υψηλός"
 #, fuzzy, kde-format
 msgid "Extreme"
 msgstr "Ακραίος"
+
+#, fuzzy
+#~ msgctxt "@title:group"
+#~ msgid "Compact Mode"
+#~ msgstr "Συμπαγής λειτουργία"
 
 #~ msgid "N/A"
 #~ msgstr "Μη διαθέσιμη"

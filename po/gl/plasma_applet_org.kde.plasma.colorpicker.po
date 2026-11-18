@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-10 08:12+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2023-06-28 07:51+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Galician <proxecto@trasno.gal>\n"
@@ -63,25 +63,25 @@ msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Formato de cor predeterminado:"
 
-#: qml/configGeneral.qml:34
+#: qml/configGeneral.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Copiar a cor automaticamente no portapapeis."
 
-#: qml/configGeneral.qml:42
+#: qml/configGeneral.qml:43
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "Ao premer o atallo de teclado:"
 
-#: qml/configGeneral.qml:43
+#: qml/configGeneral.qml:45
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Escoller unha cor."
 
-#: qml/configGeneral.qml:49
+#: qml/configGeneral.qml:52
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"

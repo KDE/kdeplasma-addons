@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-10 08:12+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2024-05-10 11:33+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: Esperanto <kde-i18n-eo@kde.org>\n"
@@ -61,25 +61,25 @@ msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Defaŭlta kolorformato:"
 
-#: qml/configGeneral.qml:34
+#: qml/configGeneral.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Aŭtomate kopii koloron al tondujo"
 
-#: qml/configGeneral.qml:42
+#: qml/configGeneral.qml:43
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "Kiam vi premas la klavaran ŝparvojon:"
 
-#: qml/configGeneral.qml:43
+#: qml/configGeneral.qml:45
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Elekti koloron"
 
-#: qml/configGeneral.qml:49
+#: qml/configGeneral.qml:52
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-09 00:57+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2026-05-16 20:17+0100\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -42,69 +42,171 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Temporizatoare predefinite"
 
-#: configGeneral.qml:33
+#: configGeneral.qml:35
 #, kde-format
-msgctxt "@title:label"
-msgid "Display:"
-msgstr "Afișare:"
+msgctxt "@label:textbox timer name"
+msgid "Title:"
+msgstr ""
 
-#: configGeneral.qml:38
+#: configGeneral.qml:39
 #, kde-format
-msgctxt "@option:check"
-msgid "Show title:"
-msgstr "Arată titlul:"
+msgctxt "@info:placeholder for empty timer title"
+msgid "Set a title for notification and/or widget"
+msgstr ""
 
-#: configGeneral.qml:55
-#, kde-format
-msgctxt "@option:check"
-msgid "Show remaining time"
-msgstr "Arată timpul rămas"
-
-#: configGeneral.qml:63
-#, kde-format
-msgctxt "@option:check"
-msgid "Show seconds"
+#: configGeneral.qml:43
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show seconds"
+msgctxt "@label:listbox completes e.g. … Only in tooltip"
+msgid "Show seconds:"
 msgstr "Arată secundele"
 
-#: configGeneral.qml:68
+#: configGeneral.qml:48
 #, kde-format
-msgctxt "@option:check"
-msgid "Show timer toggle"
-msgstr "Arată comutatorul temporizatorului"
+msgctxt "item:inlistbox completes Show seconds…"
+msgid "Always"
+msgstr ""
+
+#: configGeneral.qml:49
+#, kde-format
+msgctxt "item:inlistbox completes Show seconds…"
+msgid "Only in tooltip"
+msgstr ""
+
+#: configGeneral.qml:57
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Appearance"
+msgctxt "@title:label FormGroup title"
+msgid "Appearance"
+msgstr "Aspect"
+
+#: configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgid "Timer Timeout"
+msgctxt "@label:listbox completes e.g. … Always show"
+msgid "Timer title:"
+msgstr "Expirare cronometru"
+
+#: configGeneral.qml:65
+#, kde-format
+msgctxt "item:inlistbox completes Timer title…"
+msgid "Always show"
+msgstr ""
+
+#: configGeneral.qml:66
+#, kde-format
+msgctxt "item:inlistbox completes Timer title…"
+msgid "Never show"
+msgstr ""
 
 #: configGeneral.qml:73
-#, kde-format
-msgctxt "@option:check"
-msgid "Show progress bar"
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show progress bar"
+msgctxt "@label:listbox completes e.g. … Always show"
+msgid "Progress bar:"
 msgstr "Arată bara de progres"
 
-#: configGeneral.qml:83
+#: configGeneral.qml:78
 #, kde-format
-msgctxt "@title:label"
-msgid "On timeout:"
-msgstr "La expirare:"
+msgctxt "item:inlistbox completes Progress bar…"
+msgid "Always show"
+msgstr ""
 
-#: configGeneral.qml:87
+#: configGeneral.qml:79
 #, kde-format
-msgctxt "@option:check"
+msgctxt "item:inlistbox completes Progress bar…"
+msgid "Never show"
+msgstr ""
+
+#: configGeneral.qml:86
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show remaining time"
+msgctxt "@label:listbox completes e.g. … Always show"
+msgid "Remaining time:"
+msgstr "Arată timpul rămas"
+
+#: configGeneral.qml:91
+#, kde-format
+msgctxt "item:inlistbox completes Remaining Time…"
+msgid "Always show"
+msgstr ""
+
+#: configGeneral.qml:92
+#, kde-format
+msgctxt "item:inlistbox completes Remaining Time…"
+msgid "Show on large widgets and popups"
+msgstr ""
+
+#: configGeneral.qml:99
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show timer toggle"
+msgctxt "@label:listbox completes e.g. … Never show"
+msgid "Timer toggle:"
+msgstr "Arată comutatorul temporizatorului"
+
+#: configGeneral.qml:104
+#, kde-format
+msgctxt "item:inlistbox completes Timer toggle…"
+msgid "Show on small widgets"
+msgstr ""
+
+#: configGeneral.qml:105
+#, kde-format
+msgctxt "item:inlistbox completes Timer toggle…"
+msgid "Never show"
+msgstr ""
+
+#: configGeneral.qml:114
+#, fuzzy, kde-format
+#| msgctxt "@placeholder"
+#| msgid "Timer finished"
+msgctxt "@title:label FormGroup title"
+msgid "When timer finished"
+msgstr "Temporizatorul a expirat"
+
+#: configGeneral.qml:116
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification:"
+msgctxt ""
+"@option:check prefix for checkbox with text field for notification text"
 msgid "Show notification:"
 msgstr "Arată notificare:"
 
-#: configGeneral.qml:99
-#, kde-format
-msgctxt "@placeholder"
+#: configGeneral.qml:131
+#, fuzzy, kde-format
+#| msgctxt "@placeholder"
+#| msgid "Timer finished"
+msgctxt ""
+"@info:placeholder default notification text if no custom notification set, "
+"keep in sync with the one in main.qml"
 msgid "Timer finished"
 msgstr "Temporizatorul a expirat"
 
-#: configGeneral.qml:109
+#: configGeneral.qml:139
 #, kde-format
-msgctxt "@option:check"
+msgctxt "@action:button opens system settings on timer notification page"
+msgid "Open notification settings"
+msgstr ""
+
+#: configGeneral.qml:144
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Run command:"
+msgctxt "@option:check prefix for checkbox with text field for command"
 msgid "Run command:"
 msgstr "Rulează comandă:"
 
-#: configGeneral.qml:121
-#, kde-format
-msgctxt "@placeholder, only translate the message in single quotes"
+#: configGeneral.qml:162
+#, fuzzy, kde-format
+#| msgctxt "@placeholder, only translate the message in single quotes"
+#| msgid "kdialog --msgbox 'Timer finished'"
+msgctxt "@info:placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Temporizator expirat'"
 
@@ -238,6 +340,18 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "&Reinițializează"
 
+#~ msgctxt "@title:label"
+#~ msgid "Display:"
+#~ msgstr "Afișare:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show title:"
+#~ msgstr "Arată titlul:"
+
+#~ msgctxt "@title:label"
+#~ msgid "On timeout:"
+#~ msgstr "La expirare:"
+
 #, fuzzy
 #~| msgid "Remaining time left: %1 second"
 #~| msgid_plural "Remaining time left: %1 seconds"
@@ -262,10 +376,6 @@ msgstr "&Reinițializează"
 #~ msgstr[0] "%1s"
 #~ msgstr[1] "%1s"
 #~ msgstr[2] "%1s"
-
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Aspect"
 
 #~ msgctxt "@title"
 #~ msgid "Advanced"
@@ -301,9 +411,6 @@ msgstr "&Reinițializează"
 
 #~ msgid "Stop"
 #~ msgstr "Oprește"
-
-#~ msgid "Timer Timeout"
-#~ msgstr "Expirare cronometru"
 
 #~ msgid "Actions on Timeout"
 #~ msgstr "Acțiuni la expirare"

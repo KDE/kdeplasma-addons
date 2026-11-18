@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-10 00:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2022-06-14 10:41+0700\n"
 "Last-Translator: Aziz Adam Adrian <4.adam.adrian@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -101,13 +101,13 @@ msgctxt "@item:inlist"
 msgid "Bikram Sambat"
 msgstr ""
 
-#: config/qml/AlternateCalendarConfig.qml:49
+#: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "Sistem kalender:"
 
-#: config/qml/AlternateCalendarConfig.qml:70
+#: config/qml/AlternateCalendarConfig.qml:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -115,20 +115,20 @@ msgid ""
 "any crescent visibility criteria."
 msgstr ""
 
-#: config/qml/AlternateCalendarConfig.qml:78
+#: config/qml/AlternateCalendarConfig.qml:72
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "Offset tanggal:"
 
-#: config/qml/AlternateCalendarConfig.qml:89
+#: config/qml/AlternateCalendarConfig.qml:84
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 hari"
 msgstr[1] "%1 hari"
 
-#: config/qml/AlternateCalendarConfig.qml:92
+#: config/qml/AlternateCalendarConfig.qml:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fuzzy_clock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2015-02-08 12:02+0200\n"
 "Last-Translator: Dimitris Kardarakos <dimkard@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -33,13 +33,13 @@ msgctxt "@title:group"
 msgid "Font:"
 msgstr "Γραμματοσειρά:"
 
-#: qml/configAppearance.qml:25
+#: qml/configAppearance.qml:27
 #, kde-format
 msgctxt "@option:check"
 msgid "Bold text"
 msgstr "Έντονο κείμενο"
 
-#: qml/configAppearance.qml:30
+#: qml/configAppearance.qml:32
 #, kde-format
 msgctxt "@option:check"
 msgid "Italic text"
@@ -51,13 +51,13 @@ msgctxt "@title:group"
 msgid "Fuzzyness:"
 msgstr "Ασάφεια:"
 
-#: qml/configAppearance.qml:49
+#: qml/configAppearance.qml:52
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Accurate"
 msgstr "Ακριβείας"
 
-#: qml/configAppearance.qml:58
+#: qml/configAppearance.qml:61
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"

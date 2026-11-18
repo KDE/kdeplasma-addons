@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-10 08:12+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-02-21 23:11+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@ni.eus>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -60,25 +60,25 @@ msgctxt "@label:listbox"
 msgid "Default color format:"
 msgstr "Lehenetsitako kolore formatua:"
 
-#: qml/configGeneral.qml:34
+#: qml/configGeneral.qml:37
 #, kde-format
 msgctxt "@option:check"
 msgid "Automatically copy color to clipboard"
 msgstr "Automatikoki kopiatu kolorea arbelera"
 
-#: qml/configGeneral.qml:42
+#: qml/configGeneral.qml:43
 #, kde-format
 msgctxt "@label"
 msgid "When pressing the keyboard shortcut:"
 msgstr "Teklatuko lasterbidea sakatzean:"
 
-#: qml/configGeneral.qml:43
+#: qml/configGeneral.qml:45
 #, kde-format
 msgctxt "@option:radio"
 msgid "Pick a color"
 msgstr "Hautatu kolore bat"
 
-#: qml/configGeneral.qml:49
+#: qml/configGeneral.qml:52
 #, kde-format
 msgctxt "@option:radio"
 msgid "Show history"

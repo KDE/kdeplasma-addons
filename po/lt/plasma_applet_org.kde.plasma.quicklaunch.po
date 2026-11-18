@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-11-05 00:55+0200\n"
 "Last-Translator: Moo <<>>\n"
 "Language-Team: lt\n"
@@ -25,25 +25,25 @@ msgctxt "@title"
 msgid "General"
 msgstr "Bendra"
 
-#: ConfigGeneral.qml:30
+#: ConfigGeneral.qml:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum columns:"
 msgstr "Daugiausia stulpelių:"
 
-#: ConfigGeneral.qml:30
+#: ConfigGeneral.qml:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Maximum rows:"
 msgstr "Daugiausia eilučių:"
 
-#: ConfigGeneral.qml:42
+#: ConfigGeneral.qml:39
 #, kde-format
 msgctxt "@title:group"
 msgid "Appearance:"
 msgstr "Išvaizda:"
 
-#: ConfigGeneral.qml:44
+#: ConfigGeneral.qml:42
 #, kde-format
 msgctxt "@option:check"
 msgid "Show launcher names"
@@ -55,19 +55,19 @@ msgctxt "@option:check"
 msgid "Enable popup"
 msgstr "Įjungti iškylančiuosius langus"
 
-#: ConfigGeneral.qml:59
+#: ConfigGeneral.qml:58
 #, kde-format
 msgctxt "@title:group"
 msgid "Title:"
 msgstr "Antraštė:"
 
-#: ConfigGeneral.qml:67
+#: ConfigGeneral.qml:62
 #, kde-format
 msgctxt "@option:check"
 msgid "Show:"
 msgstr "Rodyti:"
 
-#: ConfigGeneral.qml:83
+#: ConfigGeneral.qml:78
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Custom title"

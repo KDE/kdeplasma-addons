@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2025-05-18 20:31+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -25,84 +25,84 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Megjelenés"
 
-#: qml/configAppearance.qml:32
-#, fuzzy, kde-format
-#| msgid "%1pt"
-msgctxt "@item:valuesuffix %1 is font size in points"
-msgid "%1pt"
-msgstr "%1 pt"
-
-#: qml/configAppearance.qml:38
+#: qml/configAppearance.qml:28
 #, fuzzy, kde-format
 #| msgid "Text font size:"
 msgctxt "@label:spinbox"
 msgid "Text font size:"
 msgstr "Szöveg betűmérete:"
 
-#: qml/configAppearance.qml:72
+#: qml/configAppearance.qml:35
+#, fuzzy, kde-format
+#| msgid "%1pt"
+msgctxt "@item:valuesuffix %1 is font size in points"
+msgid "%1pt"
+msgstr "%1 pt"
+
+#: qml/configAppearance.qml:75
 #, fuzzy, kde-format
 #| msgid "A white sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A white sticky note"
 msgstr "Fehér cetli"
 
-#: qml/configAppearance.qml:73
+#: qml/configAppearance.qml:76
 #, fuzzy, kde-format
 #| msgid "A black sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A black sticky note"
 msgstr "Fekete cetli"
 
-#: qml/configAppearance.qml:74
+#: qml/configAppearance.qml:77
 #, fuzzy, kde-format
 #| msgid "A red sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A red sticky note"
 msgstr "Piros cetli"
 
-#: qml/configAppearance.qml:75
+#: qml/configAppearance.qml:78
 #, fuzzy, kde-format
 #| msgid "An orange sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "An orange sticky note"
 msgstr "Narancssárga cetli"
 
-#: qml/configAppearance.qml:76
+#: qml/configAppearance.qml:79
 #, fuzzy, kde-format
 #| msgid "A yellow sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A yellow sticky note"
 msgstr "Sárga cetli"
 
-#: qml/configAppearance.qml:77
+#: qml/configAppearance.qml:80
 #, fuzzy, kde-format
 #| msgid "A green sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A green sticky note"
 msgstr "Zöld cetli"
 
-#: qml/configAppearance.qml:78
+#: qml/configAppearance.qml:81
 #, fuzzy, kde-format
 #| msgid "A blue sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A blue sticky note"
 msgstr "Kék cetli"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:82
 #, fuzzy, kde-format
 #| msgid "A pink sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A pink sticky note"
 msgstr "Rózsaszín cetli"
 
-#: qml/configAppearance.qml:80
+#: qml/configAppearance.qml:83
 #, fuzzy, kde-format
 #| msgid "A transparent sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note"
 msgstr "Átlátszó cetli"
 
-#: qml/configAppearance.qml:81
+#: qml/configAppearance.qml:84
 #, fuzzy, kde-format
 #| msgid "A transparent sticky note with light text"
 msgctxt "@item text on sticky note color option"

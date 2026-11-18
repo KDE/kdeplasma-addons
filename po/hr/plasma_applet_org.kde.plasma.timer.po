@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-09 00:57+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2010-08-22 17:07+0200\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -49,74 +49,156 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Predodređeni tajmeri"
 
-#: configGeneral.qml:33
+#: configGeneral.qml:35
 #, kde-format
-msgctxt "@title:label"
-msgid "Display:"
+msgctxt "@label:textbox timer name"
+msgid "Title:"
 msgstr ""
 
-#: configGeneral.qml:38
-#, fuzzy, kde-format
-#| msgid "Show title:"
-msgctxt "@option:check"
-msgid "Show title:"
-msgstr "Prikaži naslov:"
-
-#: configGeneral.qml:55
+#: configGeneral.qml:39
 #, kde-format
-msgctxt "@option:check"
-msgid "Show remaining time"
+msgctxt "@info:placeholder for empty timer title"
+msgid "Set a title for notification and/or widget"
 msgstr ""
 
-#: configGeneral.qml:63
+#: configGeneral.qml:43
 #, fuzzy, kde-format
 #| msgid "Hide seconds"
-msgctxt "@option:check"
-msgid "Show seconds"
+msgctxt "@label:listbox completes e.g. … Only in tooltip"
+msgid "Show seconds:"
 msgstr "Sakrij sekunde"
 
-#: configGeneral.qml:68
+#: configGeneral.qml:48
+#, kde-format
+msgctxt "item:inlistbox completes Show seconds…"
+msgid "Always"
+msgstr ""
+
+#: configGeneral.qml:49
+#, kde-format
+msgctxt "item:inlistbox completes Show seconds…"
+msgid "Only in tooltip"
+msgstr ""
+
+#: configGeneral.qml:57
 #, fuzzy, kde-format
-#| msgid "Show title:"
-msgctxt "@option:check"
-msgid "Show timer toggle"
-msgstr "Prikaži naslov:"
+#| msgid "Appearance"
+msgctxt "@title:label FormGroup title"
+msgid "Appearance"
+msgstr "Izgled"
+
+#: configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgid "Timer Timeout"
+msgctxt "@label:listbox completes e.g. … Always show"
+msgid "Timer title:"
+msgstr "Istek tajmera"
+
+#: configGeneral.qml:65
+#, kde-format
+msgctxt "item:inlistbox completes Timer title…"
+msgid "Always show"
+msgstr ""
+
+#: configGeneral.qml:66
+#, kde-format
+msgctxt "item:inlistbox completes Timer title…"
+msgid "Never show"
+msgstr ""
 
 #: configGeneral.qml:73
 #, kde-format
-msgctxt "@option:check"
-msgid "Show progress bar"
+msgctxt "@label:listbox completes e.g. … Always show"
+msgid "Progress bar:"
 msgstr ""
 
-#: configGeneral.qml:83
+#: configGeneral.qml:78
 #, kde-format
-msgctxt "@title:label"
-msgid "On timeout:"
+msgctxt "item:inlistbox completes Progress bar…"
+msgid "Always show"
 msgstr ""
 
-#: configGeneral.qml:87
+#: configGeneral.qml:79
+#, kde-format
+msgctxt "item:inlistbox completes Progress bar…"
+msgid "Never show"
+msgstr ""
+
+#: configGeneral.qml:86
+#, kde-format
+msgctxt "@label:listbox completes e.g. … Always show"
+msgid "Remaining time:"
+msgstr ""
+
+#: configGeneral.qml:91
+#, kde-format
+msgctxt "item:inlistbox completes Remaining Time…"
+msgid "Always show"
+msgstr ""
+
+#: configGeneral.qml:92
+#, kde-format
+msgctxt "item:inlistbox completes Remaining Time…"
+msgid "Show on large widgets and popups"
+msgstr ""
+
+#: configGeneral.qml:99
 #, fuzzy, kde-format
 #| msgid "Show title:"
-msgctxt "@option:check"
+msgctxt "@label:listbox completes e.g. … Never show"
+msgid "Timer toggle:"
+msgstr "Prikaži naslov:"
+
+#: configGeneral.qml:104
+#, kde-format
+msgctxt "item:inlistbox completes Timer toggle…"
+msgid "Show on small widgets"
+msgstr ""
+
+#: configGeneral.qml:105
+#, kde-format
+msgctxt "item:inlistbox completes Timer toggle…"
+msgid "Never show"
+msgstr ""
+
+#: configGeneral.qml:114
+#, kde-format
+msgctxt "@title:label FormGroup title"
+msgid "When timer finished"
+msgstr ""
+
+#: configGeneral.qml:116
+#, fuzzy, kde-format
+#| msgid "Show title:"
+msgctxt ""
+"@option:check prefix for checkbox with text field for notification text"
 msgid "Show notification:"
 msgstr "Prikaži naslov:"
 
-#: configGeneral.qml:99
+#: configGeneral.qml:131
 #, kde-format
-msgctxt "@placeholder"
+msgctxt ""
+"@info:placeholder default notification text if no custom notification set, "
+"keep in sync with the one in main.qml"
 msgid "Timer finished"
 msgstr ""
 
-#: configGeneral.qml:109
+#: configGeneral.qml:139
+#, kde-format
+msgctxt "@action:button opens system settings on timer notification page"
+msgid "Open notification settings"
+msgstr ""
+
+#: configGeneral.qml:144
 #, fuzzy, kde-format
 #| msgid "Run a command:"
-msgctxt "@option:check"
+msgctxt "@option:check prefix for checkbox with text field for command"
 msgid "Run command:"
 msgstr "Pokreni naredbu:"
 
-#: configGeneral.qml:121
+#: configGeneral.qml:162
 #, kde-format
-msgctxt "@placeholder, only translate the message in single quotes"
+msgctxt "@info:placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
@@ -235,10 +317,10 @@ msgid "&Reset"
 msgstr "Poništi"
 
 #, fuzzy
-#~| msgid "Appearance"
-#~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Izgled"
+#~| msgid "Show title:"
+#~ msgctxt "@option:check"
+#~ msgid "Show title:"
+#~ msgstr "Prikaži naslov:"
 
 #, fuzzy
 #~| msgid "Run a command:"
@@ -261,9 +343,6 @@ msgstr "Poništi"
 
 #~ msgid "Stop"
 #~ msgstr "Zaustavi"
-
-#~ msgid "Timer Timeout"
-#~ msgstr "Istek tajmera"
 
 #~ msgid "Actions on Timeout"
 #~ msgstr "Akcije po isteku"

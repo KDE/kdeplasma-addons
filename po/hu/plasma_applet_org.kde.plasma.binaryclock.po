@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.3\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 10:52+0000\n"
 "PO-Revision-Date: 2025-05-18 20:30+0200\n"
 "Last-Translator: Kristof Kiszel <ulysses@fsf.hu>\n"
 "Language-Team: Hungarian <kde-l10n-hu@kde.org>\n"
@@ -25,39 +25,79 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Megjelenés"
 
-#: configGeneral.qml:29
-#, kde-format
-msgctxt ""
-"@title:group The things being potentially shown are lights and seconds"
+#: configGeneral.qml:30
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@title:group The things being potentially shown are lights and seconds"
+#| msgid "Show:"
+msgctxt "@option:check prefix completes … seconds"
 msgid "Show:"
 msgstr "Megjelenítés:"
 
-#: configGeneral.qml:30 configGeneral.qml:60
-#, kde-format
-msgctxt "@option:check"
-msgid "Inactive lights"
-msgstr "Inaktív fények"
-
-#: configGeneral.qml:35
-#, kde-format
-msgctxt "@option:check"
+#: configGeneral.qml:33
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Seconds"
+msgctxt "@option:check completes Show …"
 msgid "Seconds"
 msgstr "Másodperc"
 
-#: configGeneral.qml:43
+#: configGeneral.qml:45
 #, fuzzy, kde-format
-#| msgid "Use custom color for:"
+#| msgctxt "@option:check"
+#| msgid "Active lights"
 msgctxt ""
-"@title:group form label for group of checkboxes with color buttons, e.g. …"
-"Active lights"
-msgid "Use custom color for:"
-msgstr "Egyedi szín:"
+"@title:group form title for group of radiobuttons, default/custom color"
+msgid "Active Lights:"
+msgstr "Aktív fények"
 
 #: configGeneral.qml:47
 #, kde-format
-msgctxt "@option:check"
-msgid "Active lights"
-msgstr "Aktív fények"
+msgctxt "@option:radio color for active lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:55
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for active lights"
+msgid "Custom color"
+msgstr "A téma színét használja"
+
+#: configGeneral.qml:75
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Inactive lights"
+msgctxt "@title:group form title for group of radiobuttons, default/custom/off"
+msgid "Inactive lights:"
+msgstr "Inaktív fények"
+
+#: configGeneral.qml:80
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:88
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for inactive lights"
+msgid "Custom color"
+msgstr "A téma színét használja"
+
+#: configGeneral.qml:102
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Off"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Use custom color for:"
+#~ msgctxt ""
+#~ "@title:group form label for group of checkboxes with color buttons, e.g. …"
+#~ "Active lights"
+#~ msgid "Use custom color for:"
+#~ msgstr "Egyedi szín:"
 
 #~ msgid "Display:"
 #~ msgstr "Megjelenítés:"
@@ -97,9 +137,6 @@ msgstr "Aktív fények"
 #~ msgid "Check this if you want to see the inactive LEDs."
 #~ msgstr ""
 #~ "Jelölje be, ha azt szeretné, hogy a nem világító LED-ek is látszódjanak."
-
-#~ msgid "Use theme color"
-#~ msgstr "A téma színét használja"
 
 #~ msgid "Show the grid"
 #~ msgstr "Rács megjelenítése"

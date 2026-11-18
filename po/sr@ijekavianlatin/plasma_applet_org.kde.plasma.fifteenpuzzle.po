@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2026-11-14 16:15+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -26,70 +26,76 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Izgled"
 
-#: qml/configAppearance.qml:50
+#: qml/configAppearance.qml:33
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr "Veličina mreže:"
 
-#: qml/configAppearance.qml:61
+#: qml/configAppearance.qml:46
 #, kde-format
 msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "Pozadina:"
 
-#: qml/configAppearance.qml:68
-#, kde-format
+#: qml/configAppearance.qml:52
+#, fuzzy, kde-format
+#| msgctxt "@label:chooser opens background color picker"
+#| msgid "Color:"
 msgctxt "@label:chooser opens background color picker"
-msgid "Color:"
+msgid "Color"
 msgstr "Boja:"
 
-#: qml/configAppearance.qml:84
-#, kde-format
+#: qml/configAppearance.qml:67
+#, fuzzy, kde-format
+#| msgctxt "@label:chooser opens background image file picker"
+#| msgid "Image:"
 msgctxt "@label:chooser opens background image file picker"
-msgid "Image:"
+msgid "Image"
 msgstr "Slika:"
 
-#: qml/configAppearance.qml:92
+#: qml/configAppearance.qml:77
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Putanja do posebne slike…"
 
 # >> @title:window
-#: qml/configAppearance.qml:108
+#: qml/configAppearance.qml:93
 #, kde-format
 msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "Izaberi sliku…"
 
 # >> @title:window
-#: qml/configAppearance.qml:119
+#: qml/configAppearance.qml:104
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Izbor slike"
 
 # >> @item
-#: qml/configAppearance.qml:124
+#: qml/configAppearance.qml:109
 #, kde-format
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "fajlovi slika (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: qml/configAppearance.qml:142
+#: qml/configAppearance.qml:126
 #, kde-format
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
 msgstr "Etikete pločica:"
 
-#: qml/configAppearance.qml:149
-#, kde-format
+#: qml/configAppearance.qml:132
+#, fuzzy, kde-format
+#| msgctxt "@label:chooser opens label color picker"
+#| msgid "Color:"
 msgctxt "@label:chooser opens label color picker"
-msgid "Color:"
+msgid "Color"
 msgstr "Boja:"
 
-#: qml/configAppearance.qml:163
+#: qml/configAppearance.qml:147
 #, kde-format
 msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"

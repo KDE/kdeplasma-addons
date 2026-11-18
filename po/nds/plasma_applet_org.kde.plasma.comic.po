@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_comic\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-08 02:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2011-08-18 06:54+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -72,7 +72,7 @@ msgctxt "@title"
 msgid "Behavior"
 msgstr ""
 
-#: qml/configBehavior.qml:28
+#: qml/configBehavior.qml:26
 #, kde-format
 msgctxt "@title:group form label for checkboxes"
 msgid "Show above image:"
@@ -84,7 +84,7 @@ msgctxt "@option:check show above image: "
 msgid "Title"
 msgstr ""
 
-#: qml/configBehavior.qml:34
+#: qml/configBehavior.qml:35
 #, kde-format
 msgctxt "@option:check show above image: "
 msgid "Author"
@@ -96,44 +96,44 @@ msgctxt "@title:group form label for checkboxes"
 msgid "Show below image:"
 msgstr ""
 
-#: qml/configBehavior.qml:40
+#: qml/configBehavior.qml:42
 #, fuzzy, kde-format
 #| msgid "Show comic &identifier:"
 msgctxt "@option:check show below image"
 msgid "Identifier"
 msgstr "Comic-&Beteker wiesen:"
 
-#: qml/configBehavior.qml:45
+#: qml/configBehavior.qml:48
 #, kde-format
 msgctxt "@option:check show below image"
 msgid "Website"
 msgstr ""
 
-#: qml/configBehavior.qml:54
+#: qml/configBehavior.qml:55
 #, kde-format
 msgctxt "@label:group form label for radiobuttons"
 msgid "Navigation buttons:"
 msgstr ""
 
-#: qml/configBehavior.qml:55
+#: qml/configBehavior.qml:58
 #, kde-format
 msgctxt "@option:radio navigation buttons are…"
 msgid "Always visible at the edges"
 msgstr ""
 
-#: qml/configBehavior.qml:61
+#: qml/configBehavior.qml:65
 #, kde-format
 msgctxt "@option:radio navigation buttons…"
 msgid "Appear centrally when hovering"
 msgstr ""
 
-#: qml/configBehavior.qml:70
+#: qml/configBehavior.qml:72
 #, kde-format
 msgctxt "@label for checkbox, completes sentence … opens full-size view"
 msgid "Middle-clicking image:"
 msgstr ""
 
-#: qml/configBehavior.qml:71
+#: qml/configBehavior.qml:75
 #, kde-format
 msgctxt "@option:check completes sentence Middle-clicking image…"
 msgid "Opens full-size view"
@@ -160,14 +160,14 @@ msgctxt "@action:button"
 msgid "Get Comics…"
 msgstr "Nieg Comics &halen..."
 
-#: qml/configComics.qml:82
+#: qml/configComics.qml:83
 #, fuzzy, kde-format
 #| msgid "Check for new comic strips:"
 msgctxt "@label:spinbox"
 msgid "Check for new comics every:"
 msgstr "Na niege Comics kieken:"
 
-#: qml/configComics.qml:92
+#: qml/configComics.qml:94
 #, fuzzy, kde-format
 #| msgid " minutes"
 msgctxt "@item:valuesuffix spacing to number + unit (minutes)"
@@ -176,13 +176,13 @@ msgid_plural "minutes"
 msgstr[0] " Minuten"
 msgstr[1] " Minuten"
 
-#: qml/configComics.qml:98
+#: qml/configComics.qml:100
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Keep local archive:"
 msgstr ""
 
-#: qml/configComics.qml:106
+#: qml/configComics.qml:109
 #, fuzzy, kde-format
 #| msgid " strips per comic"
 msgctxt "@item:valuesuffix spacing to number + unit"

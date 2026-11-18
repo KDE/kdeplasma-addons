@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-05 00:57+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-11-03 10:24+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -34,13 +34,13 @@ msgctxt ""
 msgid "Show when activated:"
 msgstr "Mostra quan es marca:"
 
-#: configAppearance.qml:40
+#: configAppearance.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
 msgstr "Bloq Majús"
 
-#: configAppearance.qml:47
+#: configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"

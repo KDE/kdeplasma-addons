@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2025-07-26 19:46+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -28,84 +28,84 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Wygląd"
 
-#: qml/configAppearance.qml:32
-#, fuzzy, kde-format
-#| msgid "%1pt"
-msgctxt "@item:valuesuffix %1 is font size in points"
-msgid "%1pt"
-msgstr "%1pt"
-
-#: qml/configAppearance.qml:38
+#: qml/configAppearance.qml:28
 #, fuzzy, kde-format
 #| msgid "Text font size:"
 msgctxt "@label:spinbox"
 msgid "Text font size:"
 msgstr "Rozmiar czcionki tekstu:"
 
-#: qml/configAppearance.qml:72
+#: qml/configAppearance.qml:35
+#, fuzzy, kde-format
+#| msgid "%1pt"
+msgctxt "@item:valuesuffix %1 is font size in points"
+msgid "%1pt"
+msgstr "%1pt"
+
+#: qml/configAppearance.qml:75
 #, fuzzy, kde-format
 #| msgid "A white sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A white sticky note"
 msgstr "Biała karteczka"
 
-#: qml/configAppearance.qml:73
+#: qml/configAppearance.qml:76
 #, fuzzy, kde-format
 #| msgid "A black sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A black sticky note"
 msgstr "Czarna karteczka"
 
-#: qml/configAppearance.qml:74
+#: qml/configAppearance.qml:77
 #, fuzzy, kde-format
 #| msgid "A red sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A red sticky note"
 msgstr "Czerwona karteczka"
 
-#: qml/configAppearance.qml:75
+#: qml/configAppearance.qml:78
 #, fuzzy, kde-format
 #| msgid "An orange sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "An orange sticky note"
 msgstr "Pomarańczowa karteczka"
 
-#: qml/configAppearance.qml:76
+#: qml/configAppearance.qml:79
 #, fuzzy, kde-format
 #| msgid "A yellow sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A yellow sticky note"
 msgstr "Żółta karteczka"
 
-#: qml/configAppearance.qml:77
+#: qml/configAppearance.qml:80
 #, fuzzy, kde-format
 #| msgid "A green sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A green sticky note"
 msgstr "Zielona karteczka"
 
-#: qml/configAppearance.qml:78
+#: qml/configAppearance.qml:81
 #, fuzzy, kde-format
 #| msgid "A blue sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A blue sticky note"
 msgstr "Niebieska karteczka"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:82
 #, fuzzy, kde-format
 #| msgid "A pink sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A pink sticky note"
 msgstr "Różowa karteczka"
 
-#: qml/configAppearance.qml:80
+#: qml/configAppearance.qml:83
 #, fuzzy, kde-format
 #| msgid "A transparent sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note"
 msgstr "Przezroczysta karteczka"
 
-#: qml/configAppearance.qml:81
+#: qml/configAppearance.qml:84
 #, fuzzy, kde-format
 #| msgid "A transparent sticky note with light text"
 msgctxt "@item text on sticky note color option"

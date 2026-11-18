@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2020-09-12 22:18+0530\n"
 "Last-Translator: Raghavendra Kamath <raghu@raghukamath.com>\n"
 "Language-Team: kde-hindi\n"
@@ -30,13 +30,13 @@ msgctxt "@title:group"
 msgid "Font:"
 msgstr ""
 
-#: qml/configAppearance.qml:25
+#: qml/configAppearance.qml:27
 #, kde-format
 msgctxt "@option:check"
 msgid "Bold text"
 msgstr ""
 
-#: qml/configAppearance.qml:30
+#: qml/configAppearance.qml:32
 #, kde-format
 msgctxt "@option:check"
 msgid "Italic text"
@@ -48,13 +48,13 @@ msgctxt "@title:group"
 msgid "Fuzzyness:"
 msgstr "अस्पष्टता"
 
-#: qml/configAppearance.qml:49
+#: qml/configAppearance.qml:52
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Accurate"
 msgstr "सटीक"
 
-#: qml/configAppearance.qml:58
+#: qml/configAppearance.qml:61
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"

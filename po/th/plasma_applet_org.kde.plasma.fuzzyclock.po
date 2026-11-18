@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_fuzzy_clock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2008-12-03 22:34+0700\n"
 "Last-Translator: Thanomsub Noppaburana <donga.nb@gmail.com>\n"
 "Language-Team: Thai <thai-l10n@googlegroups.com>\n"
@@ -31,14 +31,14 @@ msgctxt "@title:group"
 msgid "Font:"
 msgstr "ลักษณะแบบอักษร:"
 
-#: qml/configAppearance.qml:25
+#: qml/configAppearance.qml:27
 #, fuzzy, kde-format
 #| msgid "&Italic"
 msgctxt "@option:check"
 msgid "Bold text"
 msgstr "ตัวเอี&ยง"
 
-#: qml/configAppearance.qml:30
+#: qml/configAppearance.qml:32
 #, fuzzy, kde-format
 #| msgid "&Italic"
 msgctxt "@option:check"
@@ -52,13 +52,13 @@ msgctxt "@title:group"
 msgid "Fuzzyness:"
 msgstr "ระดับฟัซซี:"
 
-#: qml/configAppearance.qml:49
+#: qml/configAppearance.qml:52
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Accurate"
 msgstr ""
 
-#: qml/configAppearance.qml:58
+#: qml/configAppearance.qml:61
 #, kde-format
 msgctxt "@item:inrange"
 msgid "Fuzzy"

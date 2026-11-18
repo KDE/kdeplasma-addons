@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_calendar_alternatecalendar\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-10 00:59+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2026-09-12 23:13+0200\n"
 "Last-Translator: Alois Spitzbart <spitz234@hotmail.com>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -99,13 +99,13 @@ msgctxt "@item:inlist"
 msgid "Bikram Sambat"
 msgstr "Bikram Sambat"
 
-#: config/qml/AlternateCalendarConfig.qml:49
+#: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Calendar system:"
 msgstr "Kalendersystem:"
 
-#: config/qml/AlternateCalendarConfig.qml:70
+#: config/qml/AlternateCalendarConfig.qml:67
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -115,20 +115,20 @@ msgstr ""
 "Dieser Kalender basiert auf reiner astronomischer Berechnung. Die "
 "Sichtbarkeit der Mondsichel wird nicht berücksichtigt."
 
-#: config/qml/AlternateCalendarConfig.qml:78
+#: config/qml/AlternateCalendarConfig.qml:72
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Date offset:"
 msgstr "Datumsversatz:"
 
-#: config/qml/AlternateCalendarConfig.qml:89
+#: config/qml/AlternateCalendarConfig.qml:84
 #, kde-format
 msgid "%1 day"
 msgid_plural "%1 days"
 msgstr[0] "%1 Tag"
 msgstr[1] "%1 Tage"
 
-#: config/qml/AlternateCalendarConfig.qml:92
+#: config/qml/AlternateCalendarConfig.qml:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""

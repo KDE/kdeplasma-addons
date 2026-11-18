@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 10:52+0000\n"
 "PO-Revision-Date: 2024-07-25 01:27-0400\n"
 "Last-Translator: Agron Selimaj <as9902613@gmail.com>\n"
 "Language-Team: sq\n"
@@ -26,40 +26,77 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Pamja"
 
-#: configGeneral.qml:29
+#: configGeneral.qml:30
 #, fuzzy, kde-format
 #| msgid "Show"
-msgctxt ""
-"@title:group The things being potentially shown are lights and seconds"
+msgctxt "@option:check prefix completes … seconds"
 msgid "Show:"
 msgstr "Shfaq"
 
-#: configGeneral.qml:30 configGeneral.qml:60
-#, kde-format
-msgctxt "@option:check"
-msgid "Inactive lights"
-msgstr "LED Jo Aktivë"
-
-#: configGeneral.qml:35
-#, kde-format
-msgctxt "@option:check"
+#: configGeneral.qml:33
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Seconds"
+msgctxt "@option:check completes Show …"
 msgid "Seconds"
 msgstr "Sekondat"
 
-#: configGeneral.qml:43
+#: configGeneral.qml:45
 #, fuzzy, kde-format
-#| msgid "Use custom color for:"
+#| msgctxt "@option:check"
+#| msgid "Active lights"
 msgctxt ""
-"@title:group form label for group of checkboxes with color buttons, e.g. …"
-"Active lights"
-msgid "Use custom color for:"
-msgstr "Përdor ngjyra të përgjedhura për:"
+"@title:group form title for group of radiobuttons, default/custom color"
+msgid "Active Lights:"
+msgstr "LED Aktivë"
 
 #: configGeneral.qml:47
 #, kde-format
-msgctxt "@option:check"
-msgid "Active lights"
-msgstr "LED Aktivë"
+msgctxt "@option:radio color for active lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:55
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for active lights"
+msgid "Custom color"
+msgstr "Përdor ngjyrën e temës"
+
+#: configGeneral.qml:75
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Inactive lights"
+msgctxt "@title:group form title for group of radiobuttons, default/custom/off"
+msgid "Inactive lights:"
+msgstr "LED Jo Aktivë"
+
+#: configGeneral.qml:80
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:88
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for inactive lights"
+msgid "Custom color"
+msgstr "Përdor ngjyrën e temës"
+
+#: configGeneral.qml:102
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Off"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Use custom color for:"
+#~ msgctxt ""
+#~ "@title:group form label for group of checkboxes with color buttons, e.g. …"
+#~ "Active lights"
+#~ msgid "Use custom color for:"
+#~ msgstr "Përdor ngjyra të përgjedhura për:"
 
 #, fuzzy
 #~| msgid "Grid:"
@@ -93,9 +130,6 @@ msgstr "LED Aktivë"
 
 #~ msgid "Check this if you want to see the inactive LEDs."
 #~ msgstr "Check this if you want to see the inactive LEDs."
-
-#~ msgid "Use theme color"
-#~ msgstr "Përdor ngjyrën e temës"
 
 #~ msgid "Show the grid"
 #~ msgstr "Shfaq rrjetën"

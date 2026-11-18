@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-09 00:57+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2024-07-15 22:32+0200\n"
 "Last-Translator: rasmus rosendahl-kaa <rasmus@rosendahl-kaa.name>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -44,74 +44,170 @@ msgctxt "@title"
 msgid "Predefined Timers"
 msgstr "Predefinerede timere"
 
-#: configGeneral.qml:33
-#, kde-format
-msgctxt "@title:label"
-msgid "Display:"
-msgstr "Vis:"
+#: configGeneral.qml:35
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox"
+#| msgid "Title:"
+msgctxt "@label:textbox timer name"
+msgid "Title:"
+msgstr "Titel:"
 
-#: configGeneral.qml:38
+#: configGeneral.qml:39
 #, kde-format
-msgctxt "@option:check"
-msgid "Show title:"
-msgstr "Vis titel:"
-
-#: configGeneral.qml:55
-#, kde-format
-msgctxt "@option:check"
-msgid "Show remaining time"
-msgstr "Vis resterende tid"
-
-#: configGeneral.qml:63
-#, kde-format
-msgctxt "@option:check"
-msgid "Show seconds"
-msgstr "Vis sekunder"
-
-#: configGeneral.qml:68
-#, kde-format
-msgctxt "@option:check"
-msgid "Show timer toggle"
-msgstr "Vis timer-knap"
-
-#: configGeneral.qml:73
-#, kde-format
-msgctxt "@option:check"
-msgid "Show progress bar"
-msgstr "Hvis statuslinje"
-
-#: configGeneral.qml:83
-#, kde-format
-msgctxt "@title:label"
-msgid "On timeout:"
+msgctxt "@info:placeholder for empty timer title"
+msgid "Set a title for notification and/or widget"
 msgstr ""
 
-#: configGeneral.qml:87
+#: configGeneral.qml:43
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
-#| msgid "Show notification text:"
-msgctxt "@option:check"
-msgid "Show notification:"
-msgstr "Vis bekendtgørelsestekst:"
+#| msgid "Show seconds"
+msgctxt "@label:listbox completes e.g. … Only in tooltip"
+msgid "Show seconds:"
+msgstr "Vis sekunder"
+
+#: configGeneral.qml:48
+#, kde-format
+msgctxt "item:inlistbox completes Show seconds…"
+msgid "Always"
+msgstr ""
+
+#: configGeneral.qml:49
+#, kde-format
+msgctxt "item:inlistbox completes Show seconds…"
+msgid "Only in tooltip"
+msgstr ""
+
+#: configGeneral.qml:57
+#, fuzzy, kde-format
+#| msgctxt "@title"
+#| msgid "Appearance"
+msgctxt "@title:label FormGroup title"
+msgid "Appearance"
+msgstr "Udseende"
+
+#: configGeneral.qml:59
+#, fuzzy, kde-format
+#| msgctxt "@label:textbox"
+#| msgid "Title:"
+msgctxt "@label:listbox completes e.g. … Always show"
+msgid "Timer title:"
+msgstr "Titel:"
+
+#: configGeneral.qml:65
+#, kde-format
+msgctxt "item:inlistbox completes Timer title…"
+msgid "Always show"
+msgstr ""
+
+#: configGeneral.qml:66
+#, kde-format
+msgctxt "item:inlistbox completes Timer title…"
+msgid "Never show"
+msgstr ""
+
+#: configGeneral.qml:73
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show progress bar"
+msgctxt "@label:listbox completes e.g. … Always show"
+msgid "Progress bar:"
+msgstr "Hvis statuslinje"
+
+#: configGeneral.qml:78
+#, kde-format
+msgctxt "item:inlistbox completes Progress bar…"
+msgid "Always show"
+msgstr ""
+
+#: configGeneral.qml:79
+#, kde-format
+msgctxt "item:inlistbox completes Progress bar…"
+msgid "Never show"
+msgstr ""
+
+#: configGeneral.qml:86
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show remaining time"
+msgctxt "@label:listbox completes e.g. … Always show"
+msgid "Remaining time:"
+msgstr "Vis resterende tid"
+
+#: configGeneral.qml:91
+#, kde-format
+msgctxt "item:inlistbox completes Remaining Time…"
+msgid "Always show"
+msgstr ""
+
+#: configGeneral.qml:92
+#, kde-format
+msgctxt "item:inlistbox completes Remaining Time…"
+msgid "Show on large widgets and popups"
+msgstr ""
 
 #: configGeneral.qml:99
 #, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show timer toggle"
+msgctxt "@label:listbox completes e.g. … Never show"
+msgid "Timer toggle:"
+msgstr "Vis timer-knap"
+
+#: configGeneral.qml:104
+#, kde-format
+msgctxt "item:inlistbox completes Timer toggle…"
+msgid "Show on small widgets"
+msgstr ""
+
+#: configGeneral.qml:105
+#, kde-format
+msgctxt "item:inlistbox completes Timer toggle…"
+msgid "Never show"
+msgstr ""
+
+#: configGeneral.qml:114
+#, fuzzy, kde-format
 #| msgid "Timer finished"
-msgctxt "@placeholder"
+msgctxt "@title:label FormGroup title"
+msgid "When timer finished"
+msgstr "Timer udløbet"
+
+#: configGeneral.qml:116
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Show notification text:"
+msgctxt ""
+"@option:check prefix for checkbox with text field for notification text"
+msgid "Show notification:"
+msgstr "Vis bekendtgørelsestekst:"
+
+#: configGeneral.qml:131
+#, fuzzy, kde-format
+#| msgid "Timer finished"
+msgctxt ""
+"@info:placeholder default notification text if no custom notification set, "
+"keep in sync with the one in main.qml"
 msgid "Timer finished"
 msgstr "Timer udløbet"
 
-#: configGeneral.qml:109
+#: configGeneral.qml:139
+#, kde-format
+msgctxt "@action:button opens system settings on timer notification page"
+msgid "Open notification settings"
+msgstr ""
+
+#: configGeneral.qml:144
 #, fuzzy, kde-format
 #| msgctxt "@title:group"
 #| msgid "Run Command"
-msgctxt "@option:check"
+msgctxt "@option:check prefix for checkbox with text field for command"
 msgid "Run command:"
 msgstr "Kør kommando"
 
-#: configGeneral.qml:121
+#: configGeneral.qml:162
 #, kde-format
-msgctxt "@placeholder, only translate the message in single quotes"
+msgctxt "@info:placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr ""
 
@@ -246,6 +342,14 @@ msgctxt "@action"
 msgid "&Reset"
 msgstr "&Nulstil"
 
+#~ msgctxt "@title:label"
+#~ msgid "Display:"
+#~ msgstr "Vis:"
+
+#~ msgctxt "@option:check"
+#~ msgid "Show title:"
+#~ msgstr "Vis titel:"
+
 #, fuzzy
 #~| msgid "Remaining time left: %1 second"
 #~| msgid_plural "Remaining time left: %1 seconds"
@@ -270,10 +374,6 @@ msgstr "&Nulstil"
 #~ msgstr[1] "%1s"
 
 #~ msgctxt "@title"
-#~ msgid "Appearance"
-#~ msgstr "Udseende"
-
-#~ msgctxt "@title"
 #~ msgid "Advanced"
 #~ msgstr "Avanceret"
 
@@ -295,10 +395,6 @@ msgstr "&Nulstil"
 #~ msgctxt "@label:textbox"
 #~ msgid "Command:"
 #~ msgstr "Kommando:"
-
-#~ msgctxt "@label:textbox"
-#~ msgid "Title:"
-#~ msgstr "Titel:"
 
 #~ msgctxt "@label:textbox"
 #~ msgid "Text:"

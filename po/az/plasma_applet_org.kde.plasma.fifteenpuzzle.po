@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2021-12-21 22:23+0400\n"
 "Last-Translator: Kheyyam Gojayev <xxmn77@gmail.com>\n"
 "Language-Team: Azerbaijani <kde-i18n-doc@kde.org>\n"
@@ -23,40 +23,40 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Xarici görünüş"
 
-#: qml/configAppearance.qml:50
+#: qml/configAppearance.qml:33
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Grid size:"
 msgstr "Tor ölçüsü:"
 
-#: qml/configAppearance.qml:61
+#: qml/configAppearance.qml:46
 #, fuzzy, kde-format
 #| msgid "Background:"
 msgctxt "@label:group radio button group"
 msgid "Background:"
 msgstr "Arxa fon:"
 
-#: qml/configAppearance.qml:68
+#: qml/configAppearance.qml:52
 #, fuzzy, kde-format
 #| msgid "Color:"
 msgctxt "@label:chooser opens background color picker"
-msgid "Color:"
+msgid "Color"
 msgstr "Rəng:"
 
-#: qml/configAppearance.qml:84
+#: qml/configAppearance.qml:67
 #, fuzzy, kde-format
 #| msgid "Image:"
 msgctxt "@label:chooser opens background image file picker"
-msgid "Image:"
+msgid "Image"
 msgstr "Şəkil:"
 
-#: qml/configAppearance.qml:92
+#: qml/configAppearance.qml:77
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Path to custom image…"
 msgstr "Əlavə şəkilə yol..."
 
-#: qml/configAppearance.qml:108
+#: qml/configAppearance.qml:93
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Choose image…"
@@ -64,34 +64,34 @@ msgctxt "@action:button"
 msgid "Choose image…"
 msgstr "Şəkili seçin..."
 
-#: qml/configAppearance.qml:119
+#: qml/configAppearance.qml:104
 #, kde-format
 msgctxt "@title:window"
 msgid "Choose an Image"
 msgstr "Şəkil seçmək"
 
-#: qml/configAppearance.qml:124
+#: qml/configAppearance.qml:109
 #, fuzzy, kde-format
 #| msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgctxt "@item:inlistbox file type category for file picker"
 msgid "Image Files (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 msgstr "Şəkil faylları (*.png *.jpg *.jpeg *.bmp *.svg *.svgz)"
 
-#: qml/configAppearance.qml:142
+#: qml/configAppearance.qml:126
 #, fuzzy, kde-format
 #| msgid "Tiles:"
 msgctxt "@title:group formdata label"
 msgid "Tile labels:"
 msgstr "Yan-yana düzülənlər:"
 
-#: qml/configAppearance.qml:149
+#: qml/configAppearance.qml:132
 #, fuzzy, kde-format
 #| msgid "Color:"
 msgctxt "@label:chooser opens label color picker"
-msgid "Color:"
+msgid "Color"
 msgstr "Rəng:"
 
-#: qml/configAppearance.qml:163
+#: qml/configAppearance.qml:147
 #, kde-format
 msgctxt "@option:check Hide tile labels"
 msgid "Hide on image backgrounds"

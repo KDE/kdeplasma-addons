@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.keyboardindicator\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-05 00:57+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2025-01-06 11:54+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -32,13 +32,13 @@ msgctxt ""
 msgid "Show when activated:"
 msgstr "Afficher si activé :"
 
-#: configAppearance.qml:40
+#: configAppearance.qml:41
 #, kde-format
 msgctxt "@option:check"
 msgid "Caps Lock"
 msgstr "Verrouillage des majuscules"
 
-#: configAppearance.qml:47
+#: configAppearance.qml:49
 #, kde-format
 msgctxt "@option:check"
 msgid "Num Lock"

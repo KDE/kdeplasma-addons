@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-07-30 00:46+0000\n"
+"POT-Creation-Date: 2026-11-17 22:08+0000\n"
 "PO-Revision-Date: 2021-07-04 13:56+0100\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English <kde-l10n-en_gb@kde.org>\n"
@@ -17,23 +17,31 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 21.04.2\n"
 
-#: qml/KateSessionsItemDelegate.qml:91
-#, kde-format
+#: qml/KateSessionsItemDelegate.qml:58
+#, fuzzy, kde-format
+#| msgid "Session name"
+msgctxt "@info:placeholder for text field to create new Kate session with name"
 msgid "Session name"
 msgstr "Session name"
 
-#: qml/KateSessionsItemDelegate.qml:103
-#, kde-format
+#: qml/KateSessionsItemDelegate.qml:69
+#, fuzzy, kde-format
+#| msgid "Create new session and start Kate"
+msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Create new session and start Kate"
 msgstr "Create new session and start Kate"
 
-#: qml/KateSessionsItemDelegate.qml:115
-#, kde-format
+#: qml/KateSessionsItemDelegate.qml:84
+#, fuzzy, kde-format
+#| msgid "Cancel session creation"
+msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Cancel session creation"
 msgstr "Cancel session creation"
 
-#: qml/main.qml:41
-#, kde-format
+#: qml/main.qml:39
+#, fuzzy, kde-format
+#| msgid "Kate Sessions"
+msgctxt "@info:tooltip title for widget tooltip"
 msgid "Kate Sessions"
 msgstr "Kate Sessions"
 

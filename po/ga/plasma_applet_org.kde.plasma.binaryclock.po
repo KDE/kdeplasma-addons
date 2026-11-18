@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-base/plasma_applet_binaryclock.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 10:52+0000\n"
 "PO-Revision-Date: 2007-11-16 11:40-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -24,43 +24,74 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Cuma"
 
-#: configGeneral.qml:29
+#: configGeneral.qml:30
 #, fuzzy, kde-format
 #| msgid "Show"
-msgctxt ""
-"@title:group The things being potentially shown are lights and seconds"
+msgctxt "@option:check prefix completes … seconds"
 msgid "Show:"
 msgstr "Taispeáin"
 
-#: configGeneral.qml:30 configGeneral.qml:60
-#, fuzzy, kde-format
-#| msgid "Inactive LEDs:"
-msgctxt "@option:check"
-msgid "Inactive lights"
-msgstr "LEDanna neamhghníomhacha:"
-
-#: configGeneral.qml:35
+#: configGeneral.qml:33
 #, fuzzy, kde-format
 #| msgid "Seconds:"
-msgctxt "@option:check"
+msgctxt "@option:check completes Show …"
 msgid "Seconds"
 msgstr "Soicindí:"
 
-#: configGeneral.qml:43
-#, fuzzy, kde-format
-#| msgid "Use custom color for active LEDs:"
-msgctxt ""
-"@title:group form label for group of checkboxes with color buttons, e.g. …"
-"Active lights"
-msgid "Use custom color for:"
-msgstr "Úsáid dath saincheaptha do LEDanna gníomhacha:"
-
-#: configGeneral.qml:47
+#: configGeneral.qml:45
 #, fuzzy, kde-format
 #| msgid "Active LEDs:"
-msgctxt "@option:check"
-msgid "Active lights"
+msgctxt ""
+"@title:group form title for group of radiobuttons, default/custom color"
+msgid "Active Lights:"
 msgstr "LEDanna gníomhacha:"
+
+#: configGeneral.qml:47
+#, kde-format
+msgctxt "@option:radio color for active lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:55
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for active lights"
+msgid "Custom color"
+msgstr "Úsáid dath an téama"
+
+#: configGeneral.qml:75
+#, fuzzy, kde-format
+#| msgid "Inactive LEDs:"
+msgctxt "@title:group form title for group of radiobuttons, default/custom/off"
+msgid "Inactive lights:"
+msgstr "LEDanna neamhghníomhacha:"
+
+#: configGeneral.qml:80
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:88
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for inactive lights"
+msgid "Custom color"
+msgstr "Úsáid dath an téama"
+
+#: configGeneral.qml:102
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Off"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Use custom color for active LEDs:"
+#~ msgctxt ""
+#~ "@title:group form label for group of checkboxes with color buttons, e.g. …"
+#~ "Active lights"
+#~ msgid "Use custom color for:"
+#~ msgstr "Úsáid dath saincheaptha do LEDanna gníomhacha:"
 
 #, fuzzy
 #~| msgid "Display seconds"
@@ -112,9 +143,6 @@ msgstr "LEDanna gníomhacha:"
 #~ msgid "Check this if you want to see the inactive LEDs."
 #~ msgstr ""
 #~ "Cuir tic anseo más mian leat na LEDanna neamhghníomhacha a fheiceáil."
-
-#~ msgid "Use theme color"
-#~ msgstr "Úsáid dath an téama"
 
 #~ msgid "Show the grid"
 #~ msgstr "Taispeáin an ghreille"

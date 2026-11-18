@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-11-14 16:15+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
@@ -26,83 +26,83 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Izgled"
 
-#: qml/configAppearance.qml:32
-#, kde-format
-msgctxt "@item:valuesuffix %1 is font size in points"
-msgid "%1pt"
-msgstr "%1 pt"
-
-#: qml/configAppearance.qml:38
+#: qml/configAppearance.qml:28
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Text font size:"
 msgstr "Veličina fonta teksta:"
 
+#: qml/configAppearance.qml:35
+#, kde-format
+msgctxt "@item:valuesuffix %1 is font size in points"
+msgid "%1pt"
+msgstr "%1 pt"
+
 # >> @item
-#: qml/configAppearance.qml:72
+#: qml/configAppearance.qml:75
 #, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A white sticky note"
 msgstr "bijela ljepljiva bilješka"
 
 # >> @item
-#: qml/configAppearance.qml:73
+#: qml/configAppearance.qml:76
 #, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A black sticky note"
 msgstr "crna ljepljiva bilješka"
 
 # >> @item
-#: qml/configAppearance.qml:74
+#: qml/configAppearance.qml:77
 #, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A red sticky note"
 msgstr "crvena ljepljiva bilješka"
 
 # >> @item
-#: qml/configAppearance.qml:75
+#: qml/configAppearance.qml:78
 #, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "An orange sticky note"
 msgstr "narandžasta ljepljiva bilješka"
 
 # >> @item
-#: qml/configAppearance.qml:76
+#: qml/configAppearance.qml:79
 #, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A yellow sticky note"
 msgstr "žuta ljepljiva bilješka"
 
 # >> @item
-#: qml/configAppearance.qml:77
+#: qml/configAppearance.qml:80
 #, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A green sticky note"
 msgstr "zelena ljepljiva bilješka"
 
 # >> @item
-#: qml/configAppearance.qml:78
+#: qml/configAppearance.qml:81
 #, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A blue sticky note"
 msgstr "plava ljepljiva bilješka"
 
 # >> @item
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:82
 #, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A pink sticky note"
 msgstr "ružičasta ljepljiva bilješka"
 
 # >> @item
-#: qml/configAppearance.qml:80
+#: qml/configAppearance.qml:83
 #, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note"
 msgstr "prozirna ljepljiva bilješka"
 
 # >> @item
-#: qml/configAppearance.qml:81
+#: qml/configAppearance.qml:84
 #, kde-format
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note with light text"

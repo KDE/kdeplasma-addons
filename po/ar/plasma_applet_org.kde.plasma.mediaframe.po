@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-13 01:01+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2026-11-11 21:03+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -31,142 +31,146 @@ msgctxt "@title"
 msgid "Behavior"
 msgstr "السلوك"
 
-#: qml/ConfigBehavior.qml:36
+#: qml/ConfigBehavior.qml:33
 #, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "غيّر الصّورة كلّ:"
 
-#: qml/ConfigBehavior.qml:53
+#: qml/ConfigBehavior.qml:52
 #, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "ساعة"
 
-#: qml/ConfigBehavior.qml:67
+#: qml/ConfigBehavior.qml:66
 #, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "دقيقة"
 
-#: qml/ConfigBehavior.qml:81
+#: qml/ConfigBehavior.qml:80
 #, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "ثوان"
 
-#: qml/ConfigBehavior.qml:91
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Image fill mode:"
-msgstr "نمط ملء الصورة:"
-
-#: qml/ConfigBehavior.qml:97
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Stretch"
-msgstr "مدّد"
-
-#: qml/ConfigBehavior.qml:98
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled to fit the frame"
-msgstr "تُحجَّم الصّورة لتلائم الإطار"
-
-#: qml/ConfigBehavior.qml:102
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Preserve aspect fit"
-msgstr "أبقِ تناسب النّسبة الباعيّة"
-
-#: qml/ConfigBehavior.qml:103
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled uniformly to fit without cropping"
-msgstr "تُحجّم الصّورة بشكل موحّد دون اقتصاص"
-
-#: qml/ConfigBehavior.qml:107
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Preserve aspect crop"
-msgstr "أبقِ اقتصاص النّسبة الباعيّة"
-
-#: qml/ConfigBehavior.qml:108
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled uniformly to fill, cropping if necessary"
-msgstr "تُحجّم الصّورة بشكل موحّد لتتناسب، وتُقتصّ إن لزم الأمر"
-
-#: qml/ConfigBehavior.qml:112
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile"
-msgstr "تكرر"
-
-#: qml/ConfigBehavior.qml:113
-#, kde-format
-msgctxt "@info"
-msgid "The image is duplicated horizontally and vertically"
-msgstr "الصّورة تُكرّر أفقيًّا وعموديًّا"
-
-#: qml/ConfigBehavior.qml:117
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile vertically"
-msgstr "كرّر عموديًّا"
-
-#: qml/ConfigBehavior.qml:118
-#, kde-format
-msgctxt "@info"
-msgid "The image is stretched horizontally and tiled vertically"
-msgstr "الصّورة تُمدّد أفقيًّا وتُكرّر عموديًّا"
-
-#: qml/ConfigBehavior.qml:122
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile horizontally"
-msgstr "كرّر أفقيًّا"
-
-#: qml/ConfigBehavior.qml:123
-#, kde-format
-msgctxt "@info"
-msgid "The image is stretched vertically and tiled horizontally"
-msgstr "الصّورة تُمدّد عموديًّا وتُكرّر أفقيًّا"
-
-#: qml/ConfigBehavior.qml:127
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Pad"
-msgstr "كما هي"
-
-#: qml/ConfigBehavior.qml:128
-#, kde-format
-msgctxt "@info"
-msgid "The image is not transformed"
-msgstr "الصورة لا تتحول"
-
-#: qml/ConfigBehavior.qml:149
-#, kde-format
-msgctxt "@label:checkbox"
-msgid "General:"
-msgstr "عام:"
-
-#: qml/ConfigBehavior.qml:150
+#: qml/ConfigBehavior.qml:88
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "ترتيب عشوائي"
 
-#: qml/ConfigBehavior.qml:155
-#, kde-format
+#: qml/ConfigBehavior.qml:95
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Pause slideshow when cursor is over image"
 msgctxt "@option:check"
-msgid "Pause slideshow when cursor is over image"
+msgid "Pause slideshow when hovered"
 msgstr "ألبث عرض الشرائح عند الحوم حول الصورة"
 
-#: qml/ConfigBehavior.qml:160
+#: qml/ConfigBehavior.qml:101
 #, kde-format
+msgctxt "@label:listbox"
+msgid "Image fill mode:"
+msgstr "نمط ملء الصورة:"
+
+#: qml/ConfigBehavior.qml:109
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Stretch"
+msgstr "مدّد"
+
+#: qml/ConfigBehavior.qml:110
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled to fit the frame"
+msgstr "تُحجَّم الصّورة لتلائم الإطار"
+
+#: qml/ConfigBehavior.qml:114
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Preserve aspect fit"
+msgstr "أبقِ تناسب النّسبة الباعيّة"
+
+#: qml/ConfigBehavior.qml:115
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled uniformly to fit without cropping"
+msgstr "تُحجّم الصّورة بشكل موحّد دون اقتصاص"
+
+#: qml/ConfigBehavior.qml:119
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Preserve aspect crop"
+msgstr "أبقِ اقتصاص النّسبة الباعيّة"
+
+#: qml/ConfigBehavior.qml:120
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled uniformly to fill, cropping if necessary"
+msgstr "تُحجّم الصّورة بشكل موحّد لتتناسب، وتُقتصّ إن لزم الأمر"
+
+#: qml/ConfigBehavior.qml:124
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile"
+msgstr "تكرر"
+
+#: qml/ConfigBehavior.qml:125
+#, kde-format
+msgctxt "@info"
+msgid "The image is duplicated horizontally and vertically"
+msgstr "الصّورة تُكرّر أفقيًّا وعموديًّا"
+
+#: qml/ConfigBehavior.qml:129
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile vertically"
+msgstr "كرّر عموديًّا"
+
+#: qml/ConfigBehavior.qml:130
+#, kde-format
+msgctxt "@info"
+msgid "The image is stretched horizontally and tiled vertically"
+msgstr "الصّورة تُمدّد أفقيًّا وتُكرّر عموديًّا"
+
+#: qml/ConfigBehavior.qml:134
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile horizontally"
+msgstr "كرّر أفقيًّا"
+
+#: qml/ConfigBehavior.qml:135
+#, kde-format
+msgctxt "@info"
+msgid "The image is stretched vertically and tiled horizontally"
+msgstr "الصّورة تُمدّد عموديًّا وتُكرّر أفقيًّا"
+
+#: qml/ConfigBehavior.qml:139
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Pad"
+msgstr "كما هي"
+
+#: qml/ConfigBehavior.qml:140
+#, kde-format
+msgctxt "@info"
+msgid "The image is not transformed"
+msgstr "الصورة لا تتحول"
+
+#: qml/ConfigBehavior.qml:150
+#, kde-format
+msgctxt "@option:check prefix completes … Open in external application"
+msgid "When clicking image:"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:153
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Click on image to open in external application"
 msgctxt "@option:check"
-msgid "Click on image to open in external application"
+msgid "Open in external application"
 msgstr "النقر على الصورة يفتحها في عارض خارجي"
 
 #: qml/ConfigMedia.qml:26
@@ -240,6 +244,10 @@ msgstr "لا يوجد وسائط محددة"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "اختر الوسائط..."
+
+#~ msgctxt "@label:checkbox"
+#~ msgid "General:"
+#~ msgstr "عام:"
 
 #~ msgctxt "@title"
 #~ msgid "General"

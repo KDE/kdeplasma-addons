@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_binaryclock2\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 10:52+0000\n"
 "PO-Revision-Date: 2026-11-11 17:46+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -28,38 +28,77 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "Wygląd"
 
-#: configGeneral.qml:29
-#, kde-format
-msgctxt ""
-"@title:group The things being potentially shown are lights and seconds"
+#: configGeneral.qml:30
+#, fuzzy, kde-format
+#| msgctxt ""
+#| "@title:group The things being potentially shown are lights and seconds"
+#| msgid "Show:"
+msgctxt "@option:check prefix completes … seconds"
 msgid "Show:"
 msgstr "Pokaż:"
 
-#: configGeneral.qml:30 configGeneral.qml:60
-#, kde-format
-msgctxt "@option:check"
-msgid "Inactive lights"
-msgstr "Wygaszone lampki"
-
-#: configGeneral.qml:35
-#, kde-format
-msgctxt "@option:check"
+#: configGeneral.qml:33
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Seconds"
+msgctxt "@option:check completes Show …"
 msgid "Seconds"
 msgstr "Sekundy"
 
-#: configGeneral.qml:43
-#, kde-format
+#: configGeneral.qml:45
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Active lights"
 msgctxt ""
-"@title:group form label for group of checkboxes with color buttons, e.g. …"
-"Active lights"
-msgid "Use custom color for:"
-msgstr "Użyj własnej barwy dla:"
+"@title:group form title for group of radiobuttons, default/custom color"
+msgid "Active Lights:"
+msgstr "Zapalone lampki"
 
 #: configGeneral.qml:47
 #, kde-format
-msgctxt "@option:check"
-msgid "Active lights"
-msgstr "Zapalone lampki"
+msgctxt "@option:radio color for active lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:55
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for active lights"
+msgid "Custom color"
+msgstr "Użyj koloru z motywu"
+
+#: configGeneral.qml:75
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Inactive lights"
+msgctxt "@title:group form title for group of radiobuttons, default/custom/off"
+msgid "Inactive lights:"
+msgstr "Wygaszone lampki"
+
+#: configGeneral.qml:80
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:88
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for inactive lights"
+msgid "Custom color"
+msgstr "Użyj koloru z motywu"
+
+#: configGeneral.qml:102
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Off"
+msgstr ""
+
+#~ msgctxt ""
+#~ "@title:group form label for group of checkboxes with color buttons, e.g. …"
+#~ "Active lights"
+#~ msgid "Use custom color for:"
+#~ msgstr "Użyj własnej barwy dla:"
 
 #~ msgid "Display:"
 #~ msgstr "Wyświetlanie:"
@@ -105,9 +144,6 @@ msgstr "Zapalone lampki"
 #~ msgid "Check this if you want to see the inactive LEDs."
 #~ msgstr ""
 #~ "Zaznacz tą opcję, jeśli chcesz, aby zegar pokazywał nieaktywne diody."
-
-#~ msgid "Use theme color"
-#~ msgstr "Użyj koloru z motywu"
 
 #~ msgid "Show the grid"
 #~ msgstr "Pokaż siatkę"

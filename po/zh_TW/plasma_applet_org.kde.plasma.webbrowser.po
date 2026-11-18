@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-11-12 19:23+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -29,25 +29,31 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "外觀"
 
-#: qml/ConfigAppearance.qml:36
+#: qml/ConfigAppearance.qml:32
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "圖示："
 
-#: qml/ConfigAppearance.qml:37
+#: qml/ConfigAppearance.qml:36
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "網站的小圖示"
 
-#: qml/ConfigAppearance.qml:60
+#: qml/ConfigAppearance.qml:46
+#, kde-format
+msgctxt "@option:radio"
+msgid "Custom icon"
+msgstr ""
+
+#: qml/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "變更網路瀏覽器的圖示"
 
-#: qml/ConfigAppearance.qml:61
+#: qml/ConfigAppearance.qml:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -55,85 +61,85 @@ msgid ""
 "to the default icon."
 msgstr "目前圖示是 %1。點擊以開啟選單來變更目前圖示或重設至預設圖示。"
 
-#: qml/ConfigAppearance.qml:65
+#: qml/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "圖示名稱為「%1」"
 
-#: qml/ConfigAppearance.qml:100
+#: qml/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "選擇…"
 
-#: qml/ConfigAppearance.qml:102
+#: qml/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "選擇網路瀏覽器的圖示"
 
-#: qml/ConfigAppearance.qml:106
+#: qml/ConfigAppearance.qml:103
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "重設為預設圖示"
 
-#: qml/ConfigAppearance.qml:121
+#: qml/ConfigAppearance.qml:117
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "顯示導覽列"
 
-#: qml/ConfigGeneral.qml:23
-#, kde-format
-msgctxt "@option:radio"
-msgid "Load last-visited page"
-msgstr "載入上次造訪的頁面"
-
-#: qml/ConfigGeneral.qml:27
-#, kde-format
+#: qml/ConfigGeneral.qml:22
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "On startup:"
 msgctxt "@title:group"
-msgid "On startup:"
+msgid "On startup, load:"
 msgstr "啟動時："
 
-#: qml/ConfigGeneral.qml:34
-#, kde-format
+#: qml/ConfigGeneral.qml:25
+#, fuzzy, kde-format
+#| msgctxt "@option:radio"
+#| msgid "Load last-visited page"
 msgctxt "@option:radio"
-msgid "Always load this page:"
-msgstr "總是載入此頁面："
+msgid "Last-visited page"
+msgstr "載入上次造訪的頁面"
 
-#: qml/ConfigGeneral.qml:66 qml/main.qml:120
+#: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
-msgid "Type a URL"
-msgstr "輸入網址"
+msgid "Type URL or leave empty for blank page"
+msgstr ""
 
-#: qml/ConfigGeneral.qml:77
+#: qml/ConfigGeneral.qml:66
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "內容縮放："
 
-#: qml/ConfigGeneral.qml:81
-#, kde-format
+#: qml/ConfigGeneral.qml:69
+#, fuzzy, kde-format
+#| msgctxt "@option:radio"
+#| msgid "Fixed scale:"
 msgctxt "@option:radio"
-msgid "Fixed scale:"
+msgid "Fixed scale"
 msgstr "固定大小："
 
-#: qml/ConfigGeneral.qml:116
+#: qml/ConfigGeneral.qml:106
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "寬度低於此值時自動縮放"
 
-#: qml/ConfigGeneral.qml:152
+#: qml/ConfigGeneral.qml:142
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
 msgstr "瀏覽器設定："
 
-#: qml/ConfigGeneral.qml:156
+#: qml/ConfigGeneral.qml:145
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
@@ -162,6 +168,12 @@ msgstr "回到首頁"
 msgctxt "@action:button accessible description"
 msgid "Open Default URL"
 msgstr "開啟預設網址"
+
+#: qml/main.qml:120
+#, kde-format
+msgctxt "@info"
+msgid "Type a URL"
+msgstr "輸入網址"
 
 #: qml/main.qml:156
 #, kde-format
@@ -209,3 +221,7 @@ msgid ""
 msgstr ""
 "按這開啟以下被封鎖的彈出視窗：\n"
 "%1"
+
+#~ msgctxt "@option:radio"
+#~ msgid "Always load this page:"
+#~ msgstr "總是載入此頁面："

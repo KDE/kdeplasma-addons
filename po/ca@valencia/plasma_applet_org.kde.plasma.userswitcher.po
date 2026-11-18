@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-11-03 10:21+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -27,13 +27,13 @@ msgctxt "@title"
 msgid "General"
 msgstr "General"
 
-#: qml/configGeneral.qml:28
+#: qml/configGeneral.qml:25
 #, kde-format
 msgctxt "@title:label"
 msgid "Username style:"
 msgstr "Estil del nom d'usuari:"
 
-#: qml/configGeneral.qml:31
+#: qml/configGeneral.qml:29
 #, kde-format
 msgctxt "@option:radio"
 msgid "Full name (if available)"
@@ -45,37 +45,37 @@ msgctxt "@option:radio"
 msgid "Login username"
 msgstr "Nom d'usuari de connexió"
 
-#: qml/configGeneral.qml:56
+#: qml/configGeneral.qml:48
 #, kde-format
 msgctxt "@title:label"
 msgid "Show:"
 msgstr "Mostra:"
 
-#: qml/configGeneral.qml:59
+#: qml/configGeneral.qml:53
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name"
 msgstr "Nom"
 
-#: qml/configGeneral.qml:73
+#: qml/configGeneral.qml:69
 #, kde-format
 msgctxt "@option:radio"
 msgid "User picture"
 msgstr "Imatge de l'usuari"
 
-#: qml/configGeneral.qml:87
+#: qml/configGeneral.qml:85
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name and user picture"
 msgstr "Nom i imatge de l'usuari"
 
-#: qml/configGeneral.qml:106
+#: qml/configGeneral.qml:98
 #, kde-format
 msgctxt "@title:label"
 msgid "Advanced:"
 msgstr "Avançat:"
 
-#: qml/configGeneral.qml:108
+#: qml/configGeneral.qml:102
 #, kde-format
 msgctxt "@option:check"
 msgid "Show technical session information"

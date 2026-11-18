@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-02-04 00:22+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -29,25 +29,31 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "모양"
 
-#: qml/ConfigAppearance.qml:36
+#: qml/ConfigAppearance.qml:32
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "아이콘:"
 
-#: qml/ConfigAppearance.qml:37
+#: qml/ConfigAppearance.qml:36
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "웹사이트의 파비콘"
 
-#: qml/ConfigAppearance.qml:60
+#: qml/ConfigAppearance.qml:46
+#, kde-format
+msgctxt "@option:radio"
+msgid "Custom icon"
+msgstr ""
+
+#: qml/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "웹 브라우저 아이콘 변경"
 
-#: qml/ConfigAppearance.qml:61
+#: qml/ConfigAppearance.qml:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -57,85 +63,85 @@ msgstr ""
 "현재 아이콘은 %1입니다. 현재 아이콘을 변경하거나 기본 아이콘으로 초기화하려"
 "면 클릭하여 메뉴를 여십시오."
 
-#: qml/ConfigAppearance.qml:65
+#: qml/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "아이콘 이름: \"%1\""
 
-#: qml/ConfigAppearance.qml:100
+#: qml/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "선택…"
 
-#: qml/ConfigAppearance.qml:102
+#: qml/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "웹 브라우저 아이콘 선택"
 
-#: qml/ConfigAppearance.qml:106
+#: qml/ConfigAppearance.qml:103
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "기본 아이콘으로 초기화"
 
-#: qml/ConfigAppearance.qml:121
+#: qml/ConfigAppearance.qml:117
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "탐색 표시줄 표시"
 
-#: qml/ConfigGeneral.qml:23
-#, kde-format
-msgctxt "@option:radio"
-msgid "Load last-visited page"
-msgstr "마지막으로 방문한 페이지 불러 오기"
-
-#: qml/ConfigGeneral.qml:27
-#, kde-format
+#: qml/ConfigGeneral.qml:22
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "On startup:"
 msgctxt "@title:group"
-msgid "On startup:"
+msgid "On startup, load:"
 msgstr "시작할 때:"
 
-#: qml/ConfigGeneral.qml:34
-#, kde-format
+#: qml/ConfigGeneral.qml:25
+#, fuzzy, kde-format
+#| msgctxt "@option:radio"
+#| msgid "Load last-visited page"
 msgctxt "@option:radio"
-msgid "Always load this page:"
-msgstr "항상 이 페이지 불러 오기:"
+msgid "Last-visited page"
+msgstr "마지막으로 방문한 페이지 불러 오기"
 
-#: qml/ConfigGeneral.qml:66 qml/main.qml:120
+#: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
-msgid "Type a URL"
-msgstr "URL 입력"
+msgid "Type URL or leave empty for blank page"
+msgstr ""
 
-#: qml/ConfigGeneral.qml:77
+#: qml/ConfigGeneral.qml:66
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "내용 크기 조정:"
 
-#: qml/ConfigGeneral.qml:81
-#, kde-format
+#: qml/ConfigGeneral.qml:69
+#, fuzzy, kde-format
+#| msgctxt "@option:radio"
+#| msgid "Fixed scale:"
 msgctxt "@option:radio"
-msgid "Fixed scale:"
+msgid "Fixed scale"
 msgstr "고정 배율:"
 
-#: qml/ConfigGeneral.qml:116
+#: qml/ConfigGeneral.qml:106
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "너비가 다음보다 작을 때 자동 크기 조정"
 
-#: qml/ConfigGeneral.qml:152
+#: qml/ConfigGeneral.qml:142
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
 msgstr "브라우저 설정:"
 
-#: qml/ConfigGeneral.qml:156
+#: qml/ConfigGeneral.qml:145
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
@@ -165,6 +171,12 @@ msgstr "홈으로 이동"
 msgctxt "@action:button accessible description"
 msgid "Open Default URL"
 msgstr "기본 URL 열기"
+
+#: qml/main.qml:120
+#, kde-format
+msgctxt "@info"
+msgid "Type a URL"
+msgstr "URL 입력"
 
 #: qml/main.qml:156
 #, kde-format
@@ -217,3 +229,7 @@ msgid ""
 msgstr ""
 "다음 차단된 팝업을 열려면 여기를 클릭하십시오.\n"
 "%1"
+
+#~ msgctxt "@option:radio"
+#~ msgid "Always load this page:"
+#~ msgstr "항상 이 페이지 불러 오기:"

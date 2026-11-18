@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-13 01:01+0000\n"
+"POT-Creation-Date: 2026-11-18 01:12+0000\n"
 "PO-Revision-Date: 2025-10-09 00:40+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -29,146 +29,150 @@ msgctxt "@title"
 msgid "Behavior"
 msgstr "행동"
 
-#: qml/ConfigBehavior.qml:36
+#: qml/ConfigBehavior.qml:33
 #, fuzzy, kde-format
 #| msgid "Change picture every:"
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "그림 변경 주기:"
 
-#: qml/ConfigBehavior.qml:53
+#: qml/ConfigBehavior.qml:52
 #, fuzzy, kde-format
 #| msgid "Hours"
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "시간"
 
-#: qml/ConfigBehavior.qml:67
+#: qml/ConfigBehavior.qml:66
 #, fuzzy, kde-format
 #| msgid "Minutes"
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "분"
 
-#: qml/ConfigBehavior.qml:81
+#: qml/ConfigBehavior.qml:80
 #, fuzzy, kde-format
 #| msgid "Seconds"
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "초"
 
-#: qml/ConfigBehavior.qml:91
-#, kde-format
-msgctxt "@label:listbox"
-msgid "Image fill mode:"
-msgstr "채우기 모드:"
-
-#: qml/ConfigBehavior.qml:97
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Stretch"
-msgstr "늘이기"
-
-#: qml/ConfigBehavior.qml:98
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled to fit the frame"
-msgstr "그림 크기를 조정하여 늘입니다"
-
-#: qml/ConfigBehavior.qml:102
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Preserve aspect fit"
-msgstr "비율 유지하면서 늘이기"
-
-#: qml/ConfigBehavior.qml:103
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled uniformly to fit without cropping"
-msgstr "그림을 자르지 않고 맞도록 크기 조정"
-
-#: qml/ConfigBehavior.qml:107
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Preserve aspect crop"
-msgstr "비율 유지하면서 자르기"
-
-#: qml/ConfigBehavior.qml:108
-#, kde-format
-msgctxt "@info"
-msgid "The image is scaled uniformly to fill, cropping if necessary"
-msgstr "필요한 경우 그림을 잘라내는 형태로 크기 조정"
-
-#: qml/ConfigBehavior.qml:112
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile"
-msgstr "바둑판식 배열"
-
-#: qml/ConfigBehavior.qml:113
-#, kde-format
-msgctxt "@info"
-msgid "The image is duplicated horizontally and vertically"
-msgstr "그림을 수평 및 수직으로 반복 배열"
-
-#: qml/ConfigBehavior.qml:117
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile vertically"
-msgstr "수직 바둑판식 배열"
-
-#: qml/ConfigBehavior.qml:118
-#, kde-format
-msgctxt "@info"
-msgid "The image is stretched horizontally and tiled vertically"
-msgstr "그림을 수평으로 늘이고 수직으로 반복 배열"
-
-#: qml/ConfigBehavior.qml:122
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Tile horizontally"
-msgstr "수평 바둑판식 배열"
-
-#: qml/ConfigBehavior.qml:123
-#, kde-format
-msgctxt "@info"
-msgid "The image is stretched vertically and tiled horizontally"
-msgstr "그림을 수직으로 늘이고 수평으로 반복 배열"
-
-#: qml/ConfigBehavior.qml:127
-#, kde-format
-msgctxt "@item:inlistbox"
-msgid "Pad"
-msgstr "둘러싸기"
-
-#: qml/ConfigBehavior.qml:128
-#, kde-format
-msgctxt "@info"
-msgid "The image is not transformed"
-msgstr "그림 크기를 조정하지 않음"
-
-#: qml/ConfigBehavior.qml:149
-#, kde-format
-msgctxt "@label:checkbox"
-msgid "General:"
-msgstr "일반:"
-
-#: qml/ConfigBehavior.qml:150
+#: qml/ConfigBehavior.qml:88
 #, kde-format
 msgctxt "@option:check"
 msgid "Randomize order"
 msgstr "무작위 순서 사용"
 
-#: qml/ConfigBehavior.qml:155
-#, kde-format
+#: qml/ConfigBehavior.qml:95
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Pause slideshow when cursor is over image"
 msgctxt "@option:check"
-msgid "Pause slideshow when cursor is over image"
+msgid "Pause slideshow when hovered"
 msgstr "그림 위에 커서가 있을 때 슬라이드 쇼 일시 정지"
 
-#: qml/ConfigBehavior.qml:160
+#: qml/ConfigBehavior.qml:101
 #, kde-format
+msgctxt "@label:listbox"
+msgid "Image fill mode:"
+msgstr "채우기 모드:"
+
+#: qml/ConfigBehavior.qml:109
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Stretch"
+msgstr "늘이기"
+
+#: qml/ConfigBehavior.qml:110
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled to fit the frame"
+msgstr "그림 크기를 조정하여 늘입니다"
+
+#: qml/ConfigBehavior.qml:114
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Preserve aspect fit"
+msgstr "비율 유지하면서 늘이기"
+
+#: qml/ConfigBehavior.qml:115
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled uniformly to fit without cropping"
+msgstr "그림을 자르지 않고 맞도록 크기 조정"
+
+#: qml/ConfigBehavior.qml:119
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Preserve aspect crop"
+msgstr "비율 유지하면서 자르기"
+
+#: qml/ConfigBehavior.qml:120
+#, kde-format
+msgctxt "@info"
+msgid "The image is scaled uniformly to fill, cropping if necessary"
+msgstr "필요한 경우 그림을 잘라내는 형태로 크기 조정"
+
+#: qml/ConfigBehavior.qml:124
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile"
+msgstr "바둑판식 배열"
+
+#: qml/ConfigBehavior.qml:125
+#, kde-format
+msgctxt "@info"
+msgid "The image is duplicated horizontally and vertically"
+msgstr "그림을 수평 및 수직으로 반복 배열"
+
+#: qml/ConfigBehavior.qml:129
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile vertically"
+msgstr "수직 바둑판식 배열"
+
+#: qml/ConfigBehavior.qml:130
+#, kde-format
+msgctxt "@info"
+msgid "The image is stretched horizontally and tiled vertically"
+msgstr "그림을 수평으로 늘이고 수직으로 반복 배열"
+
+#: qml/ConfigBehavior.qml:134
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Tile horizontally"
+msgstr "수평 바둑판식 배열"
+
+#: qml/ConfigBehavior.qml:135
+#, kde-format
+msgctxt "@info"
+msgid "The image is stretched vertically and tiled horizontally"
+msgstr "그림을 수직으로 늘이고 수평으로 반복 배열"
+
+#: qml/ConfigBehavior.qml:139
+#, kde-format
+msgctxt "@item:inlistbox"
+msgid "Pad"
+msgstr "둘러싸기"
+
+#: qml/ConfigBehavior.qml:140
+#, kde-format
+msgctxt "@info"
+msgid "The image is not transformed"
+msgstr "그림 크기를 조정하지 않음"
+
+#: qml/ConfigBehavior.qml:150
+#, kde-format
+msgctxt "@option:check prefix completes … Open in external application"
+msgid "When clicking image:"
+msgstr ""
+
+#: qml/ConfigBehavior.qml:153
+#, fuzzy, kde-format
+#| msgctxt "@option:check"
+#| msgid "Click on image to open in external application"
 msgctxt "@option:check"
-msgid "Click on image to open in external application"
+msgid "Open in external application"
 msgstr "그림을 클릭해서 외부 앱으로 열기"
 
 #: qml/ConfigMedia.qml:26
@@ -242,6 +246,10 @@ msgstr "선택한 미디어 없음"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "미디어 선택…"
+
+#~ msgctxt "@label:checkbox"
+#~ msgid "General:"
+#~ msgstr "일반:"
 
 #~ msgctxt "@title"
 #~ msgid "General"

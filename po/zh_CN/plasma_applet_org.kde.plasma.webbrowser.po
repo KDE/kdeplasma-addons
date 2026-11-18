@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2024-04-22 15:58\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -30,25 +30,31 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "外观"
 
-#: qml/ConfigAppearance.qml:36
+#: qml/ConfigAppearance.qml:32
 #, kde-format
 msgctxt "@title:group"
 msgid "Icon:"
 msgstr "图标："
 
-#: qml/ConfigAppearance.qml:37
+#: qml/ConfigAppearance.qml:36
 #, kde-format
 msgctxt "@option:radio"
 msgid "Website's favicon"
 msgstr "网站图标"
 
-#: qml/ConfigAppearance.qml:60
+#: qml/ConfigAppearance.qml:46
+#, kde-format
+msgctxt "@option:radio"
+msgid "Custom icon"
+msgstr ""
+
+#: qml/ConfigAppearance.qml:57
 #, kde-format
 msgctxt "@action:button"
 msgid "Change Web Browser's icon"
 msgstr "更改网页浏览器图标"
 
-#: qml/ConfigAppearance.qml:61
+#: qml/ConfigAppearance.qml:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -56,85 +62,85 @@ msgid ""
 "to the default icon."
 msgstr "当前图标是 %1。点击打开菜单以更改当前图标或者重置为默认图标。"
 
-#: qml/ConfigAppearance.qml:65
+#: qml/ConfigAppearance.qml:62
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Icon name is \"%1\""
 msgstr "图标名称是“%1”"
 
-#: qml/ConfigAppearance.qml:100
+#: qml/ConfigAppearance.qml:97
 #, kde-format
 msgctxt "@item:inmenu Open icon chooser dialog"
 msgid "Choose…"
 msgstr "选择…"
 
-#: qml/ConfigAppearance.qml:102
+#: qml/ConfigAppearance.qml:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Choose an icon for Web Browser"
 msgstr "为网页浏览器选择一个图标"
 
-#: qml/ConfigAppearance.qml:106
+#: qml/ConfigAppearance.qml:103
 #, kde-format
 msgctxt "@item:inmenu Reset icon to default"
 msgid "Reset to default icon"
 msgstr "重置为默认图标"
 
-#: qml/ConfigAppearance.qml:121
+#: qml/ConfigAppearance.qml:117
 #, kde-format
 msgctxt "@option:check"
 msgid "Display Navigation Bar"
 msgstr "显示导航栏"
 
-#: qml/ConfigGeneral.qml:23
-#, kde-format
-msgctxt "@option:radio"
-msgid "Load last-visited page"
-msgstr "加载最后访问页面"
-
-#: qml/ConfigGeneral.qml:27
-#, kde-format
+#: qml/ConfigGeneral.qml:22
+#, fuzzy, kde-format
+#| msgctxt "@title:group"
+#| msgid "On startup:"
 msgctxt "@title:group"
-msgid "On startup:"
+msgid "On startup, load:"
 msgstr "启动时："
 
-#: qml/ConfigGeneral.qml:34
-#, kde-format
+#: qml/ConfigGeneral.qml:25
+#, fuzzy, kde-format
+#| msgctxt "@option:radio"
+#| msgid "Load last-visited page"
 msgctxt "@option:radio"
-msgid "Always load this page:"
-msgstr "总是加载此页面："
+msgid "Last-visited page"
+msgstr "加载最后访问页面"
 
-#: qml/ConfigGeneral.qml:66 qml/main.qml:120
+#: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
-msgid "Type a URL"
-msgstr "请输入 URL"
+msgid "Type URL or leave empty for blank page"
+msgstr ""
 
-#: qml/ConfigGeneral.qml:77
+#: qml/ConfigGeneral.qml:66
 #, kde-format
 msgctxt "@title:group"
 msgid "Content scaling:"
 msgstr "网页缩放："
 
-#: qml/ConfigGeneral.qml:81
-#, kde-format
+#: qml/ConfigGeneral.qml:69
+#, fuzzy, kde-format
+#| msgctxt "@option:radio"
+#| msgid "Fixed scale:"
 msgctxt "@option:radio"
-msgid "Fixed scale:"
+msgid "Fixed scale"
 msgstr "固定比例："
 
-#: qml/ConfigGeneral.qml:116
+#: qml/ConfigGeneral.qml:106
 #, kde-format
 msgctxt "@option:radio"
 msgid "Automatic scaling if width is below"
 msgstr "自动缩放，若宽度小于"
 
-#: qml/ConfigGeneral.qml:152
+#: qml/ConfigGeneral.qml:142
 #, kde-format
 msgctxt "@title:group"
 msgid "Browser Settings:"
 msgstr "浏览器设置："
 
-#: qml/ConfigGeneral.qml:156
+#: qml/ConfigGeneral.qml:145
 #, kde-format
 msgctxt "@option:radio"
 msgid "Private Browsing"
@@ -164,6 +170,12 @@ msgstr "转到主页"
 msgctxt "@action:button accessible description"
 msgid "Open Default URL"
 msgstr "打开默认 URL"
+
+#: qml/main.qml:120
+#, kde-format
+msgctxt "@info"
+msgid "Type a URL"
+msgstr "请输入 URL"
 
 #: qml/main.qml:156
 #, kde-format
@@ -216,3 +228,7 @@ msgid ""
 msgstr ""
 "点击此处以打开以下已屏蔽的弹窗：\n"
 "%1"
+
+#~ msgctxt "@option:radio"
+#~ msgid "Always load this page:"
+#~ msgstr "总是加载此页面："

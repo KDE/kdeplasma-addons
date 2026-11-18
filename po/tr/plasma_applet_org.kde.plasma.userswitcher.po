@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-11-10 21:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -24,13 +24,13 @@ msgctxt "@title"
 msgid "General"
 msgstr "Genel"
 
-#: qml/configGeneral.qml:28
+#: qml/configGeneral.qml:25
 #, kde-format
 msgctxt "@title:label"
 msgid "Username style:"
 msgstr "Kullanıcı adı stili:"
 
-#: qml/configGeneral.qml:31
+#: qml/configGeneral.qml:29
 #, kde-format
 msgctxt "@option:radio"
 msgid "Full name (if available)"
@@ -42,37 +42,37 @@ msgctxt "@option:radio"
 msgid "Login username"
 msgstr "Oturum kullanıcı adı"
 
-#: qml/configGeneral.qml:56
+#: qml/configGeneral.qml:48
 #, kde-format
 msgctxt "@title:label"
 msgid "Show:"
 msgstr "Göster:"
 
-#: qml/configGeneral.qml:59
+#: qml/configGeneral.qml:53
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name"
 msgstr "Ad"
 
-#: qml/configGeneral.qml:73
+#: qml/configGeneral.qml:69
 #, kde-format
 msgctxt "@option:radio"
 msgid "User picture"
 msgstr "Kullanıcı resmi"
 
-#: qml/configGeneral.qml:87
+#: qml/configGeneral.qml:85
 #, kde-format
 msgctxt "@option:radio"
 msgid "Name and user picture"
 msgstr "Ad ve kullanıcı resmi"
 
-#: qml/configGeneral.qml:106
+#: qml/configGeneral.qml:98
 #, kde-format
 msgctxt "@title:label"
 msgid "Advanced:"
 msgstr "Gelişmiş:"
 
-#: qml/configGeneral.qml:108
+#: qml/configGeneral.qml:102
 #, kde-format
 msgctxt "@option:check"
 msgid "Show technical session information"

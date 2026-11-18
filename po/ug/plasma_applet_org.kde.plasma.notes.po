@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_notes\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 13:06+0000\n"
 "PO-Revision-Date: 2026-09-23 06:56+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -24,83 +24,83 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "قىياپەت"
 
-#: qml/configAppearance.qml:32
-#, kde-format
-msgctxt "@item:valuesuffix %1 is font size in points"
-msgid "%1pt"
-msgstr ""
-
-#: qml/configAppearance.qml:38
+#: qml/configAppearance.qml:28
 #, fuzzy, kde-format
 #| msgid "Text font size:"
 msgctxt "@label:spinbox"
 msgid "Text font size:"
 msgstr "تېكىست خەت چوڭلۇقى:"
 
-#: qml/configAppearance.qml:72
+#: qml/configAppearance.qml:35
+#, kde-format
+msgctxt "@item:valuesuffix %1 is font size in points"
+msgid "%1pt"
+msgstr ""
+
+#: qml/configAppearance.qml:75
 #, fuzzy, kde-format
 #| msgid "A white sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A white sticky note"
 msgstr "ئاق چاپلاق"
 
-#: qml/configAppearance.qml:73
+#: qml/configAppearance.qml:76
 #, fuzzy, kde-format
 #| msgid "A black sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A black sticky note"
 msgstr "قارا چاپلاق"
 
-#: qml/configAppearance.qml:74
+#: qml/configAppearance.qml:77
 #, fuzzy, kde-format
 #| msgid "A red sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A red sticky note"
 msgstr "قىزىل چاپلاق"
 
-#: qml/configAppearance.qml:75
+#: qml/configAppearance.qml:78
 #, fuzzy, kde-format
 #| msgid "An orange sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "An orange sticky note"
 msgstr "قىزغۇچ سېرىق چاپلاق"
 
-#: qml/configAppearance.qml:76
+#: qml/configAppearance.qml:79
 #, fuzzy, kde-format
 #| msgid "A yellow sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A yellow sticky note"
 msgstr "سېرىق چاپلاق"
 
-#: qml/configAppearance.qml:77
+#: qml/configAppearance.qml:80
 #, fuzzy, kde-format
 #| msgid "A green sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A green sticky note"
 msgstr "يېشىل چاپلاق"
 
-#: qml/configAppearance.qml:78
+#: qml/configAppearance.qml:81
 #, fuzzy, kde-format
 #| msgid "A blue sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A blue sticky note"
 msgstr "كۆك چاپلاق"
 
-#: qml/configAppearance.qml:79
+#: qml/configAppearance.qml:82
 #, fuzzy, kde-format
 #| msgid "A pink sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A pink sticky note"
 msgstr "ھالرەڭ چاپلاق"
 
-#: qml/configAppearance.qml:80
+#: qml/configAppearance.qml:83
 #, fuzzy, kde-format
 #| msgid "A transparent sticky note"
 msgctxt "@item text on sticky note color option"
 msgid "A transparent sticky note"
 msgstr "سۈزۈك چاپلاق"
 
-#: qml/configAppearance.qml:81
+#: qml/configAppearance.qml:84
 #, fuzzy, kde-format
 #| msgid "A transparent sticky note with light text"
 msgctxt "@item text on sticky note color option"

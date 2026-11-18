@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-02 00:56+0000\n"
+"POT-Creation-Date: 2026-11-17 10:52+0000\n"
 "PO-Revision-Date: 2013-03-20 17:03+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -24,41 +24,72 @@ msgctxt "@title"
 msgid "Appearance"
 msgstr "दर्शनीयता"
 
-#: configGeneral.qml:29
+#: configGeneral.qml:30
 #, fuzzy, kde-format
 #| msgid "Show"
-msgctxt ""
-"@title:group The things being potentially shown are lights and seconds"
+msgctxt "@option:check prefix completes … seconds"
 msgid "Show:"
 msgstr "दर्शवा"
 
-#: configGeneral.qml:30 configGeneral.qml:60
-#, kde-format
-msgctxt "@option:check"
-msgid "Inactive lights"
-msgstr ""
-
-#: configGeneral.qml:35
+#: configGeneral.qml:33
 #, fuzzy, kde-format
 #| msgid "Seconds:"
-msgctxt "@option:check"
+msgctxt "@option:check completes Show …"
 msgid "Seconds"
 msgstr "सेकंद :"
 
-#: configGeneral.qml:43
-#, fuzzy, kde-format
-#| msgid "Use custom grid color:"
+#: configGeneral.qml:45
+#, kde-format
 msgctxt ""
-"@title:group form label for group of checkboxes with color buttons, e.g. …"
-"Active lights"
-msgid "Use custom color for:"
-msgstr "ऐच्छिक जाळे रंग वापरा :"
+"@title:group form title for group of radiobuttons, default/custom color"
+msgid "Active Lights:"
+msgstr ""
 
 #: configGeneral.qml:47
 #, kde-format
-msgctxt "@option:check"
-msgid "Active lights"
+msgctxt "@option:radio color for active lights"
+msgid "Default color"
 msgstr ""
+
+#: configGeneral.qml:55
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for active lights"
+msgid "Custom color"
+msgstr "शैली रंग वापरा"
+
+#: configGeneral.qml:75
+#, kde-format
+msgctxt "@title:group form title for group of radiobuttons, default/custom/off"
+msgid "Inactive lights:"
+msgstr ""
+
+#: configGeneral.qml:80
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Default color"
+msgstr ""
+
+#: configGeneral.qml:88
+#, fuzzy, kde-format
+#| msgid "Use theme color"
+msgctxt "@option:radio color for inactive lights"
+msgid "Custom color"
+msgstr "शैली रंग वापरा"
+
+#: configGeneral.qml:102
+#, kde-format
+msgctxt "@option:radio color for inactive lights"
+msgid "Off"
+msgstr ""
+
+#, fuzzy
+#~| msgid "Use custom grid color:"
+#~ msgctxt ""
+#~ "@title:group form label for group of checkboxes with color buttons, e.g. …"
+#~ "Active lights"
+#~ msgid "Use custom color for:"
+#~ msgstr "ऐच्छिक जाळे रंग वापरा :"
 
 #, fuzzy
 #~| msgid "Grid:"
@@ -83,9 +114,6 @@ msgstr ""
 #~ msgctxt "@title:group"
 #~ msgid "Appearance"
 #~ msgstr "दर्शनीयता"
-
-#~ msgid "Use theme color"
-#~ msgstr "शैली रंग वापरा"
 
 #~ msgid "Show the grid"
 #~ msgstr "जाळे दर्शवा"
