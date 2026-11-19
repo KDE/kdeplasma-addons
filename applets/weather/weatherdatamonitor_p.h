@@ -126,4 +126,6 @@ private:
     QHash<QString, KPluginMetaData> m_ions;
 
     QStringList m_providers;
+
+    bool m_isShuttingDown = false;
 };

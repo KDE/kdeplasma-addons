@@ -49,6 +49,7 @@ WeatherDataMonitor::WeatherDataMonitor(QObject *parent)
 
 WeatherDataMonitor::~WeatherDataMonitor()
 {
+    m_isShuttingDown = true;
     qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: destroyed";
 }
 
@@ -163,6 +164,12 @@ void WeatherDataMonitor::updateLocationData(const std::shared_ptr<LocationsData>
 void WeatherDataMonitor::onWeatherDataRemoved(const QString &provider, const QString &place)
 {
     qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: forecastData remove signal arrived for provider: " << provider << " place: " << place;
+
+    if (m_isShuttingDown) {
+        qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: ignoring forecastData remove signal during shutdown";
+        return;
+    }
+
     if (auto it = m_ionControls.find(provider); it != m_ionControls.end()) {
         for (auto listIt = it->forecastDataList.begin(); listIt != it->forecastDataList.end(); ++listIt) {
             if (listIt->second.expired() && listIt->first == place) {
@@ -178,6 +185,12 @@ void WeatherDataMonitor::onWeatherDataRemoved(const QString &provider, const QSt
 void WeatherDataMonitor::onLocationDataRemoved(const QString &provider)
 {
     qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: locationsData remove signal arrived for provider: " << provider;
+
+    if (m_isShuttingDown) {
+        qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: ignoring locationData remove signal during shutdown";
+        return;
+    }
+
     if (auto it = m_ionControls.find(provider); it != m_ionControls.end()) {
         --it->locationCount;
         qCDebug(WEATHER::CONTROLLER) << "WeatherDataMonitor: update locations counter: " << it->locationCount;
