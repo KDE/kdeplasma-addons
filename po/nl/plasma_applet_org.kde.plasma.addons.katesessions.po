@@ -1,46 +1,42 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# Freek de Kruijf <freek@opensuse.org>, 2014, 2015, 2021.
+# SPDX-FileCopyrightText: 2014-2015, 2021, 2026 Freek de Kruijf <freek@opensuse.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 22:08+0000\n"
-"PO-Revision-Date: 2021-07-02 15:27+0200\n"
-"Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
-"Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
+"PO-Revision-Date: 2026-11-18 14:13+0100\n"
+"Last-Translator: freek <freekdekruijf@kde.nl>\n"
+"Language-Team: \n"
 "Language: nl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 21.04.2\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #: qml/KateSessionsItemDelegate.qml:58
-#, fuzzy, kde-format
-#| msgid "Session name"
+#, kde-format
 msgctxt "@info:placeholder for text field to create new Kate session with name"
 msgid "Session name"
 msgstr "Sessienaam"
 
 #: qml/KateSessionsItemDelegate.qml:69
-#, fuzzy, kde-format
-#| msgid "Create new session and start Kate"
+#, kde-format
 msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Create new session and start Kate"
 msgstr "Nieuwe sessie aanmaken en Kate starten"
 
 #: qml/KateSessionsItemDelegate.qml:84
-#, fuzzy, kde-format
-#| msgid "Cancel session creation"
+#, kde-format
 msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Cancel session creation"
 msgstr "Sessie maken annuleren"
 
 #: qml/main.qml:39
-#, fuzzy, kde-format
-#| msgid "Kate Sessions"
+#, kde-format
 msgctxt "@info:tooltip title for widget tooltip"
 msgid "Kate Sessions"
 msgstr "Kate-sessies"

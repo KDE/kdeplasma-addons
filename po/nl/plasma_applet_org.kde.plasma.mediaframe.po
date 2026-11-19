@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-08 16:24+0100\n"
+"PO-Revision-Date: 2026-11-18 14:12+0100\n"
 "Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -60,12 +60,10 @@ msgid "Randomize order"
 msgstr "Volgorde willekeurig maken"
 
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "Diashow pauzeren wanneer cursor boven de afbeelding is"
+msgstr "Diashow pauzeren wanneer cursor er boven is"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -163,15 +161,13 @@ msgstr "De afbeelding is niet getransformeerd"
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "Bij klikken op de afbeelding:"
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr "Klik op afbeelding om te openen in externe toepassing"
+msgstr "In externe toepassing openen"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format

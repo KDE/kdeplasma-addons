@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-03 21:54+0300\n"
+"PO-Revision-Date: 2026-11-18 18:38+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.08.0\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: qml/config.qml:12
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "Web sitesinin simgesi"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "Özel simge"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -94,26 +94,22 @@ msgid "Display Navigation Bar"
 msgstr "Dolaşım Çubuğunu Görüntüle"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "Başlangıçta:"
+msgstr "Başlangıçta yükle:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "Son ziyaret edilen sayfayı aç"
+msgstr "Son ziyaret edilen sayfa"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "URL yazın veya boş sayfa için boş bırakın"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -122,12 +118,10 @@ msgid "Content scaling:"
 msgstr "İçerik ölçeklendirme:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "Sabit ölçek:"
+msgstr "Sabit ölçek"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format

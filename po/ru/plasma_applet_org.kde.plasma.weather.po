@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-11 22:59+0200\n"
+"PO-Revision-Date: 2026-11-18 08:55+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -781,13 +781,7 @@ msgid "Unable to load weather forecast"
 msgstr "Не удалось загрузить прогноз погоды"
 
 #: qml/FullRepresentation.qml:106
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:usagetip"
-#| msgid ""
-#| "There may be a technical issue with the weather provider. If the issue "
-#| "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-#| "cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-#| "link>."
+#, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
@@ -796,7 +790,7 @@ msgid ""
 msgstr ""
 "Возможно, у поставщика сведений о погоде временные технические неполадки. "
 "Если проблема не исчезнет в течение суток, <link url='https://bugs.kde.org/"
-"enter_bug.cgi?product=plasmashell&component=Weather%20widget'>сообщите об "
+"enter_bug.cgi?product=plasmashell&component=Weather widget'>сообщите об "
 "ошибке</link>."
 
 #: qml/LocationHeader.qml:48

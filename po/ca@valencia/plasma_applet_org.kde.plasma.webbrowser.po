@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-03 10:21+0100\n"
+"PO-Revision-Date: 2026-11-18 15:02+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca@valencia\n"
@@ -47,7 +47,7 @@ msgstr "Icona de web del lloc web"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "Icona personalitzada"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -96,26 +96,22 @@ msgid "Display Navigation Bar"
 msgstr "Mostra la barra de navegació"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "En arrancar:"
+msgstr "En arrancar, carrega:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "Carrega l'última pàgina visitada"
+msgstr "L'última pàgina visitada"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "Teclegeu un URL o deixeu-ho buit per a una pàgina en blanc"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -124,12 +120,10 @@ msgid "Content scaling:"
 msgstr "Canvieu l'escala del contingut:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "Escala fixa:"
+msgstr "Escala fixa"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format
@@ -225,7 +219,3 @@ msgid ""
 msgstr ""
 "Cliqueu ací per a obrir la finestra emergent bloquejada següent:\n"
 "%1"
-
-#~ msgctxt "@option:radio"
-#~ msgid "Always load this page:"
-#~ msgstr "Carrega sempre esta pàgina:"

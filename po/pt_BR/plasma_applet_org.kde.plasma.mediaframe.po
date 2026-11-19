@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-08 06:50-0300\n"
+"PO-Revision-Date: 2026-11-18 05:31-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@kde.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 26.08.3\n"
+"X-Generator: Lokalize 26.08.2\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -64,12 +64,10 @@ msgid "Randomize order"
 msgstr "Ordem aleatória"
 
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "Pausar apresentação de slides quando o cursor estiver sobre a imagem"
+msgstr "Pausar apresentação de slides ao passar o cursor"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -168,15 +166,13 @@ msgstr "A imagem não é transformada"
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "Ao clicar a imagem:"
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr "Clique na imagem para abrir no aplicativo externo"
+msgstr "Abrir no aplicativo externo"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format

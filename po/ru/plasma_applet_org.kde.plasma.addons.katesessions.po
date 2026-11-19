@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 22:08+0000\n"
-"PO-Revision-Date: 2021-07-31 23:12+0300\n"
+"PO-Revision-Date: 2026-11-18 08:55+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -21,30 +21,26 @@ msgstr ""
 
 # BUGME: use same translation "название" for "[session] name" everywhere in Kate. --aspotashev
 #: qml/KateSessionsItemDelegate.qml:58
-#, fuzzy, kde-format
-#| msgid "Session name"
+#, kde-format
 msgctxt "@info:placeholder for text field to create new Kate session with name"
 msgid "Session name"
 msgstr "Название сеанса"
 
 #: qml/KateSessionsItemDelegate.qml:69
-#, fuzzy, kde-format
-#| msgid "Create new session and start Kate"
+#, kde-format
 msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Create new session and start Kate"
 msgstr "Запустить Kate с новым сеансом"
 
 # BUGME: it would be very handy to parse the QML and add the path to the element to the automatic i18n comment. --aspotashev
 #: qml/KateSessionsItemDelegate.qml:84
-#, fuzzy, kde-format
-#| msgid "Cancel session creation"
+#, kde-format
 msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Cancel session creation"
 msgstr "Отменить создание сеанса"
 
 #: qml/main.qml:39
-#, fuzzy, kde-format
-#| msgid "Kate Sessions"
+#, kde-format
 msgctxt "@info:tooltip title for widget tooltip"
 msgid "Kate Sessions"
 msgstr "Сеансы Kate"

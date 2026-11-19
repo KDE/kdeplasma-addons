@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-09 22:30+0300\n"
+"PO-Revision-Date: 2026-11-18 18:41+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -48,143 +48,125 @@ msgstr "Önceden Tanımlanmış Sayaçlar"
 #, kde-format
 msgctxt "@label:textbox timer name"
 msgid "Title:"
-msgstr ""
+msgstr "Başlık:"
 
 #: configGeneral.qml:39
 #, kde-format
 msgctxt "@info:placeholder for empty timer title"
 msgid "Set a title for notification and/or widget"
-msgstr ""
+msgstr "Bildirim ve/veya araç takımı için bir başlık ayarlayın"
 
 #: configGeneral.qml:43
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show seconds"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Only in tooltip"
 msgid "Show seconds:"
-msgstr "Saniyeleri göster"
+msgstr "Saniyeleri:"
 
 #: configGeneral.qml:48
 #, kde-format
 msgctxt "item:inlistbox completes Show seconds…"
 msgid "Always"
-msgstr ""
+msgstr "Her zaman göster"
 
 #: configGeneral.qml:49
 #, kde-format
 msgctxt "item:inlistbox completes Show seconds…"
 msgid "Only in tooltip"
-msgstr ""
+msgstr "Yalnızca araç ipucunda göster"
 
 #: configGeneral.qml:57
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:label FormGroup title"
 msgid "Appearance"
 msgstr "Görünüş"
 
 #: configGeneral.qml:59
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Timer title:"
-msgstr "Sayaç bitti"
+msgstr "Sayaç başlığını:"
 
 #: configGeneral.qml:65
 #, kde-format
 msgctxt "item:inlistbox completes Timer title…"
 msgid "Always show"
-msgstr ""
+msgstr "Her zaman göster"
 
 #: configGeneral.qml:66
 #, kde-format
 msgctxt "item:inlistbox completes Timer title…"
 msgid "Never show"
-msgstr ""
+msgstr "Asla gösterme"
 
 #: configGeneral.qml:73
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show progress bar"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Progress bar:"
-msgstr "İlerleme çubuğunu göster"
+msgstr "İlerleme çubuğunu:"
 
 #: configGeneral.qml:78
 #, kde-format
 msgctxt "item:inlistbox completes Progress bar…"
 msgid "Always show"
-msgstr ""
+msgstr "Her zaman göster"
 
 #: configGeneral.qml:79
 #, kde-format
 msgctxt "item:inlistbox completes Progress bar…"
 msgid "Never show"
-msgstr ""
+msgstr "Asla gösterme"
 
 #: configGeneral.qml:86
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show remaining time"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Remaining time:"
-msgstr "Kalan süreyi göster"
+msgstr "Kalan süreyi:"
 
 #: configGeneral.qml:91
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Always show"
-msgstr ""
+msgstr "Her zaman göster"
 
 #: configGeneral.qml:92
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Show on large widgets and popups"
-msgstr ""
+msgstr "Büyük araç takımlarında ve açılır pencerelerde göster"
 
 #: configGeneral.qml:99
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show timer toggle"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Never show"
 msgid "Timer toggle:"
-msgstr "Sayaç anahtarını göster"
+msgstr "Sayaç anahtarını:"
 
 #: configGeneral.qml:104
 #, kde-format
 msgctxt "item:inlistbox completes Timer toggle…"
 msgid "Show on small widgets"
-msgstr ""
+msgstr "Küçük araç takımlarında göster"
 
 #: configGeneral.qml:105
 #, kde-format
 msgctxt "item:inlistbox completes Timer toggle…"
 msgid "Never show"
-msgstr ""
+msgstr "Asla gösterme"
 
 #: configGeneral.qml:114
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@title:label FormGroup title"
 msgid "When timer finished"
-msgstr "Sayaç bitti"
+msgstr "Sayaç bittiğinde"
 
 #: configGeneral.qml:116
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification:"
+#, kde-format
 msgctxt ""
 "@option:check prefix for checkbox with text field for notification text"
 msgid "Show notification:"
-msgstr "Bildirimi göster:"
+msgstr "Şu bildirimi göster:"
 
 #: configGeneral.qml:131
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt ""
 "@info:placeholder default notification text if no custom notification set, "
 "keep in sync with the one in main.qml"
@@ -195,20 +177,16 @@ msgstr "Sayaç bitti"
 #, kde-format
 msgctxt "@action:button opens system settings on timer notification page"
 msgid "Open notification settings"
-msgstr ""
+msgstr "Bildirim Ayarlarını Aç"
 
 #: configGeneral.qml:144
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Run command:"
+#, kde-format
 msgctxt "@option:check prefix for checkbox with text field for command"
 msgid "Run command:"
-msgstr "Komutu çalıştır:"
+msgstr "Şu komutu çalıştır:"
 
 #: configGeneral.qml:162
-#, fuzzy, kde-format
-#| msgctxt "@placeholder, only translate the message in single quotes"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@info:placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Sayaç bitti'"

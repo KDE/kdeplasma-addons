@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-08 07:47+0200\n"
+"PO-Revision-Date: 2026-11-18 08:55+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -62,12 +62,10 @@ msgid "Randomize order"
 msgstr "В случайном порядке"
 
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "Приостанавливать слайд-шоу, когда курсор мыши над изображением"
+msgstr "Приостанавливать слайд-шоу при наведении указателя"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -170,15 +168,13 @@ msgstr "Исходное изображение не изменяется."
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "При нажатии на изображение:"
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr "Открывать в программе просмотра по нажатию левой кнопкой мыши"
+msgstr "Открывать во внешнем приложении"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format

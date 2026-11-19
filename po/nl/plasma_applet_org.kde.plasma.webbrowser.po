@@ -1,13 +1,13 @@
 # Copyright (C) 2024 This file is copyright:
 # This file is distributed under the same license as the kdeplasma-addons package.
 #
-# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025, 2026 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2022-2026 Freek de Kruijf <freekdekruijf@kde.nl>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-02 12:45+0100\n"
+"PO-Revision-Date: 2026-11-18 14:07+0100\n"
 "Last-Translator: freek <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.04.3\n"
+"X-Generator: Lokalize 26.04.1\n"
 
 #: qml/config.qml:12
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "Favicon van website"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "Aangepast pictogram"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -94,26 +94,22 @@ msgid "Display Navigation Bar"
 msgstr "Navigatiebalk tonen"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "Bij opstarten:"
+msgstr "Bij opstarten, laden:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "Laatst bezochte pagina laden"
+msgstr "Laatst bezochte pagina"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "Voer een URL in of laat leeg voor een lege pagina"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -122,12 +118,10 @@ msgid "Content scaling:"
 msgstr "Verschalen van inhoud:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "Vaste schaal:"
+msgstr "Vaste schaal"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format

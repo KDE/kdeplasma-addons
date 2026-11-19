@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-02 07:52-0300\n"
+"PO-Revision-Date: 2026-11-18 05:30-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@kde.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -48,7 +48,7 @@ msgstr "Favicon do site"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "Ícone customizado"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -97,26 +97,22 @@ msgid "Display Navigation Bar"
 msgstr "Exibir barra de navegação"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "Ao ligar:"
+msgstr "Ao iniciar, carregar:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "Carregar última página visitada"
+msgstr "Última página visitada"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "Digite a URL ou deixe em branco para uma página vazia"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -125,12 +121,10 @@ msgid "Content scaling:"
 msgstr "Escala de conteúdo:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "Escala fixa:"
+msgstr "Escala fixa"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format

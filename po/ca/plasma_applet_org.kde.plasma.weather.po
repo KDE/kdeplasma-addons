@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-08 09:47+0100\n"
+"PO-Revision-Date: 2026-11-18 14:59+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -774,13 +774,7 @@ msgid "Unable to load weather forecast"
 msgstr "No s'ha pogut carregar la previsió meteorològica"
 
 #: qml/FullRepresentation.qml:106
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:usagetip"
-#| msgid ""
-#| "There may be a technical issue with the weather provider. If the issue "
-#| "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-#| "cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-#| "link>."
+#, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
@@ -789,8 +783,8 @@ msgid ""
 msgstr ""
 "Pot haver-hi un problema tècnic amb el proveïdor meteorològic. Si el "
 "problema persisteix més d'un dia, <link url='https://bugs.kde.org/enter_bug."
-"cgi?product=plasmashell&component=Weather%20widget'>envieu un informe "
-"d'error</link>."
+"cgi?product=plasmashell&component=Weather widget'>envieu un informe d'error</"
+"link>."
 
 #: qml/LocationHeader.qml:48
 #, kde-format
