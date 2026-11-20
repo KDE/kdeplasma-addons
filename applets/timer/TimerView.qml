@@ -13,10 +13,10 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.extras as PlasmaExtras
 
-MouseArea {
+ColumnLayout {
     id: fullRepresentation
 
-    required property bool inPanel
+    required property bool isPopup
     required property bool isVertical
     required property bool running
     required property bool suspended
@@ -26,16 +26,19 @@ MouseArea {
     signal toggleTimerRequested
     signal adjustTimerRequested(int delta)
 
-    Layout.preferredWidth: inPanel ? Math.max(root.compactRepresentationItem?.width ?? 0, Kirigami.Units.gridUnit * 20) : -1
-    Layout.preferredHeight: inPanel ? Math.round(Layout.preferredWidth * 2/5) : -1
-    Layout.minimumHeight: inPanel ? Layout.preferredHeight : 0
+    Layout.preferredWidth: isPopup ? Math.max(root.compactRepresentationItem?.width ?? 0, Kirigami.Units.gridUnit * 20) : -1
+    Layout.preferredHeight: isPopup ? Math.round(Layout.preferredWidth * 2/5) : -1
+    Layout.minimumHeight: isPopup ? Layout.preferredHeight : 0
 
-    onClicked: fullRepresentation.toggleTimerRequested()
+    TapHandler {
+        onTapped: fullRepresentation.toggleTimerRequested()
+    }
 
     Component {
         id: popupHeadingComponent
 
         PlasmaExtras.PlasmoidHeading {
+            anchors.fill: parent
             leftPadding: Kirigami.Units.smallSpacing * 2
             rightPadding: Kirigami.Units.smallSpacing * 2
 
@@ -53,43 +56,46 @@ MouseArea {
         id: desktopHeadingComponent
 
         PlasmaComponents3.Label {
+            anchors.fill: parent
             elide: Text.ElideRight
             fontSizeMode: Text.VerticalFit
             minimumPixelSize: 8
-            font.pixelSize: height * 0.7
+            font.pixelSize: Math.max(height * 0.7, 1)
             text: Plasmoid.configuration.title
             textFormat: Text.PlainText
+            horizontalAlignment: PlasmaComponents3.Label.AlignHCenter
         }
     }
 
-    ColumnLayout {
-        id: main
-
-        implicitHeight: (headerLoader.active ? (headerLoader.item as Item).implicitHeight : 0) + timerDigits.implicitHeight + (remainingTimeProgressBar.visible ? remainingTimeProgressBar.implicitHeight : 0)
-
-        width: parent.width
-        height: parent.height
+    Item {
+        id: headerWrapper
+        Layout.minimumHeight: fullRepresentation.isPopup ? (headerLoader.item as Item)?.implicitHeight ?? 0 : -1
+        Layout.maximumHeight: fullRepresentation.isPopup ? (headerLoader.item as Item)?.implicitHeight ?? 0 : Kirigami.Units.gridUnit * 4
+        Layout.fillHeight: fullRepresentation.isPopup ? false : true
+        Layout.fillWidth: true
+        implicitHeight: 1
+        visible: headerLoader.active
 
         Loader {
             id: headerLoader
-            Layout.minimumHeight: fullRepresentation.inPanel ? -1 : Kirigami.Units.gridUnit * 2
-            Layout.maximumHeight: fullRepresentation.inPanel ? -1 : Math.round(main.height / 3)
-            Layout.fillHeight: fullRepresentation.inPanel ? false : true
-            Layout.fillWidth: true
+            anchors.fill: parent
 
             active: Plasmoid.configuration.showTitle
-            visible: active
 
-            sourceComponent: fullRepresentation.inPanel ? popupHeadingComponent : desktopHeadingComponent
+            sourceComponent: fullRepresentation.isPopup ? popupHeadingComponent : desktopHeadingComponent
         }
+    }
+
+    Item {
+        id: timeWrapper
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        visible: Plasmoid.configuration.showRemainingTime || fullRepresentation.isPopup
+        implicitHeight: 3
 
         TimerEdit {
             id: timerDigits
-
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            Layout.verticalStretchFactor: 3
-            visible: Plasmoid.configuration.showRemainingTime
+            anchors.centerIn: parent
 
             value: fullRepresentation.seconds
             editable: !fullRepresentation.running
@@ -97,7 +103,8 @@ MouseArea {
             showSeconds: Plasmoid.configuration.showSeconds
             onDigitModified: valueDelta => fullRepresentation.adjustTimerRequested(valueDelta)
             onToggleTimerRequested: fullRepresentation.toggleTimerRequested()
-            maximumHeight: height
+            maximumHeight: timeWrapper.height
+            maximumWidth: timeWrapper.width
             SequentialAnimation on opacity {
                 running: fullRepresentation.suspended;
                 loops: Animation.Infinite;
@@ -122,13 +129,18 @@ MouseArea {
                 }
             }
         }
+    }
+
+    Item {
+        id: progressWrapper
+        Layout.fillWidth: true
+        Layout.fillHeight: true
+        visible: Plasmoid.configuration.showProgressBar
+        implicitHeight: 1
 
         PlasmaComponents3.ProgressBar {
             id: remainingTimeProgressBar
-
-            Layout.fillWidth: true
-            Layout.fillHeight: true
-            visible: Plasmoid.configuration.showProgressBar
+            anchors.fill: parent
 
             from: Plasmoid.configuration.seconds
             to: 0

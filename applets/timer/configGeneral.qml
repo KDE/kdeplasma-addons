@@ -89,7 +89,7 @@ KCM.SimpleKCM {
                     Layout.preferredWidth: root.maxComboBoxWidth
                     model: [
                         i18nc("item:inlistbox completes Remaining Time…", "Always show"),
-                        i18nc("item:inlistbox completes Remaining Time…", "Show on large widgets and popups")
+                        i18nc("item:inlistbox completes Remaining Time…", "Show only in popups")
                     ]
                     onActivated: index => root.cfg_showRemainingTime = index === 0
                     Component.onCompleted: currentIndex = root.cfg_showRemainingTime ? 0 : 1

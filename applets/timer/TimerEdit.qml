@@ -11,171 +11,149 @@ import plasma.applet.org.kde.plasma.timer as TimerPlasmoid
 
 Row {
     id: timerEdit
+
+    required property real maximumHeight
+    required property real maximumWidth
+
     property int value // time in seconds
     property bool showSeconds: true
     property bool editable: true
     // in alert mode 2nd set of digits from svg file will be drawn
     property bool alertMode: false
-    required property real maximumHeight
 
     signal digitModified(int valueDelta)
     signal toggleTimerRequested()
+
+    height: internal.digitH
+    width: internal.digitW * internal.digits
 
     QtObject {
         id: internal
         readonly property string digitSuffix: timerEdit.alertMode ? "_1" : ""
         // digits count include separators with 50% of digit width
         readonly property real digits: timerEdit.showSeconds ? 7 : 4.5;
-        readonly property int digitH: (timerEdit.maximumHeight / 2) * digits < timerEdit.width ? timerEdit.maximumHeight : timerEdit.width / digits * 2
+        readonly property int digitH: calculateDigitHeight(timerEdit.maximumHeight, timerEdit.maximumWidth)
         readonly property int digitW: digitH / 2;
-        property string valueString: "000000"
+        readonly property string valueString: TimerPlasmoid.Timer.secondsToString(timerEdit.value, "hhmmss") // "000000"
+
+        function calculateDigitHeight(maxHeight: int, maxWidth: int) : int {
+            return (maxHeight / 2) * digits < maxWidth ? maxHeight : maxWidth / digits * 2
+        }
     }
 
-    Component {
-        id: digit
-        KSvg.SvgItem {
-            id: digitSvg
-            property int meaning
-            property int num
-            readonly property int mouseWheelAngleThreshold: 5
-            width: internal.digitW
-            height: internal.digitH
+    component Digit: KSvg.SvgItem {
+        id: digitSvg
 
-            activeFocusOnTab: true
-            imagePath: "widgets/timer"
-            elementId: num + internal.digitSuffix
+        required property int meaning
+        required property int num
+        readonly property int mouseWheelAngleThreshold: 5
 
-            Keys.onPressed: event => {
-                switch (event.key) {
-                case Qt.Key_Return:
-                case Qt.Key_Enter:
-                case Qt.Key_Space:
-                case Qt.Key_Select:
-                    timerEdit.toggleTimerRequested();
-                    break;
-                case Qt.Key_Up:
-                    if (timerEdit.value + meaning < 24*60*60) {
-                        timerEdit.digitModified(meaning)
-                    }
-                    break;
-                case Qt.Key_Down:
-                    if (timerEdit.value - meaning >= 0) {
-                        timerEdit.digitModified(-meaning)
-                    }
-                    break;
-                case Qt.Key_Left:
-                    digitSvg.nextItemInFocusChain(false).forceActiveFocus(Qt.BacktabFocusReason);
-                    break;
-                case Qt.Key_Right:
-                    digitSvg.nextItemInFocusChain(true).forceActiveFocus(Qt.TabFocusReason);
-                    break;
-                default:
-                    return;
+        width: internal.digitW
+        height: internal.digitH
+
+        activeFocusOnTab: true
+        imagePath: "widgets/timer"
+        elementId: num + internal.digitSuffix
+
+        Keys.onPressed: event => {
+            switch (event.key) {
+            case Qt.Key_Return:
+            case Qt.Key_Enter:
+            case Qt.Key_Space:
+            case Qt.Key_Select:
+                timerEdit.toggleTimerRequested();
+                break;
+            case Qt.Key_Up:
+                if (timerEdit.value + meaning < 24*60*60) {
+                    timerEdit.digitModified(meaning)
                 }
-                event.accepted = true;
+                break;
+            case Qt.Key_Down:
+                if (timerEdit.value - meaning >= 0) {
+                    timerEdit.digitModified(-meaning)
+                }
+                break;
+            case Qt.Key_Left:
+                digitSvg.nextItemInFocusChain(false).forceActiveFocus(Qt.BacktabFocusReason);
+                break;
+            case Qt.Key_Right:
+                digitSvg.nextItemInFocusChain(true).forceActiveFocus(Qt.TabFocusReason);
+                break;
+            default:
+                return;
             }
+            event.accepted = true;
+        }
 
-            MouseArea {
-                anchors.fill: parent
-                enabled: timerEdit.editable
-                propagateComposedEvents: true
+        MouseArea {
+            anchors.fill: parent
+            enabled: timerEdit.editable
+            propagateComposedEvents: true
 
-                onWheel: wheel => {
-                    wheel.accepted = true
-                    if (wheel.angleDelta.y > digitSvg.mouseWheelAngleThreshold) {
-                        if (timerEdit.value + digitSvg.meaning < 24*60*60) {
-                            timerEdit.digitModified(digitSvg.meaning)
-                        }
-                    } else if (wheel.angleDelta.y < -digitSvg.mouseWheelAngleThreshold) {
-                        if (timerEdit.value - digitSvg.meaning >= 0) {
-                            timerEdit.digitModified(-digitSvg.meaning)
-                        }
+            onClicked: timerEdit.toggleTimerRequested()
+            onWheel: wheel => {
+                wheel.accepted = true
+                if (wheel.angleDelta.y > digitSvg.mouseWheelAngleThreshold) {
+                    if (timerEdit.value + digitSvg.meaning < 24*60*60) {
+                        timerEdit.digitModified(digitSvg.meaning)
+                    }
+                } else if (wheel.angleDelta.y < -digitSvg.mouseWheelAngleThreshold) {
+                    if (timerEdit.value - digitSvg.meaning >= 0) {
+                        timerEdit.digitModified(-digitSvg.meaning)
                     }
                 }
             }
         }
     }
 
-    Component {
-        id: separator
-        KSvg.SvgItem {
-            width: internal.digitW / 2;
-            height: internal.digitH;
-            imagePath: "widgets/timer"
-            elementId: "separator" + internal.digitSuffix
-        }
+    component DigitSeparator: KSvg.SvgItem {
+        width: internal.digitW / 2;
+        height: internal.digitH;
+        imagePath: "widgets/timer"
+        elementId: "separator" + internal.digitSuffix
     }
 
-    // Following 8 loaders will prepare all elements
+    // Following 8 Digit(Separators) will prepare all elements
     // to display time in format "hh:mm:ss"
 
-    Loader {
+    Digit {
         id: hour1
-        sourceComponent: digit
-        onLoaded: {
-            item.meaning = 60*60*10 //10h
-            item.num = internal.valueString[0]
-        }
+        meaning: 60*60*10 // 10h
+        num: internal.valueString[0]
     }
-    Loader {
+
+    Digit {
         id: hour2
-        sourceComponent: digit
-        onLoaded: {
-            item.meaning = 60*60 //1h
-            item.num = internal.valueString[1]
-        }
+        meaning: 60*60 // 1h
+        num: internal.valueString[1]
     }
 
-    Loader { sourceComponent: separator } // ":"
+    DigitSeparator { } // :
 
-    Loader {
+    Digit {
         id: minute1
-        sourceComponent: digit
-        onLoaded: {
-            item.meaning = 600 //10min
-            item.num = internal.valueString[2]
-        }
+        meaning: 600 // 10min
+        num: internal.valueString[2]
     }
-    Loader {
+    Digit {
         id: minute2
-        sourceComponent: digit
-        onLoaded: {
-            item.meaning = 60 //1min
-            item.num = internal.valueString[3]
-        }
+        meaning: 60 // 1min
+        num: internal.valueString[3]
     }
 
-    Loader { sourceComponent: timerEdit.showSeconds ? separator : undefined } // ":"
+    DigitSeparator { visible: timerEdit.showSeconds } // ":"
 
-    Loader {
+    Digit {
         id: second1
-        sourceComponent: timerEdit.showSeconds ? digit : undefined
-        onLoaded: {
-            item.meaning = 10 //10s
-            item.num = internal.valueString[4]
-        }
+        visible: timerEdit.showSeconds
+        meaning: 10 // 10s
+        num: internal.valueString[4]
     }
-    Loader {
+    Digit {
         id: second2
-        sourceComponent: timerEdit.showSeconds ? digit : undefined
-        onLoaded: {
-            item.meaning = 1 //1s
-            item.num = internal.valueString[5]
-        }
-    }
-
-    onValueChanged: {
-        // update all 6 digits in one signal handler
-        internal.valueString = TimerPlasmoid.Timer.secondsToString(value, "hhmmss")
-        if (hour1.item === null) return
-        hour1.item.num = internal.valueString[0]
-        hour2.item.num = internal.valueString[1]
-        minute1.item.num = internal.valueString[2]
-        minute2.item.num = internal.valueString[3]
-        if (timerEdit.showSeconds) {
-            second1.item.num = internal.valueString[4]
-            second2.item.num = internal.valueString[5]
-        }
+        visible: timerEdit.showSeconds
+        meaning: 1 // 1s
+        num: internal.valueString[5]
     }
 }
 

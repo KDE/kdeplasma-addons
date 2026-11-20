@@ -22,8 +22,6 @@ PlasmoidItem {
     switchWidth: Kirigami.Units.gridUnit * 10
     switchHeight: Kirigami.Units.gridUnit * 4
 
-    readonly property bool inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge, PlasmaCore.Types.BottomEdge, PlasmaCore.Types.LeftEdge]
-        .includes(Plasmoid.location)
     readonly property bool isVertical: Plasmoid.formFactor === PlasmaCore.Types.Vertical
 
     Plasmoid.backgroundHints: PlasmaCore.Types.ShadowBackground | PlasmaCore.Types.ConfigurableBackground
@@ -48,7 +46,8 @@ PlasmoidItem {
         : i18nc("@info:tooltip for widget, subtitle, timer not running", "Use mouse wheel to change digits or choose from predefined timers in the context menu");
 
     compactRepresentation: CompactRepresentation {
-        inPanel: root.inPanel
+        inPanel: [PlasmaCore.Types.TopEdge, PlasmaCore.Types.RightEdge,  PlasmaCore.Types.BottomEdge,
+                  PlasmaCore.Types.LeftEdge].includes(Plasmoid.location)
         isVertical: root.isVertical
         running: root.running
         alertMode: root.alertMode
@@ -62,7 +61,7 @@ PlasmoidItem {
             : root.toolTipSubText
     }
     fullRepresentation: TimerView {
-        inPanel: root.inPanel
+        isPopup: root.compactRepresentationItem?.visible ?? false
         isVertical: root.isVertical
         suspended: root.suspended
         running: root.running
