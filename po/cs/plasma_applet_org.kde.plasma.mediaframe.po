@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-09 02:53+0000\n"
-"PO-Revision-Date: 2026-07-20 00:01+0200\n"
+"PO-Revision-Date: 2026-11-19 03:32+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -159,7 +159,7 @@ msgstr "Náhodné pořadí"
 #, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when cursor is over image"
-msgstr "Pozastavit prezentaci při přejetí myší"
+msgstr "Pozastavit prezentaci, když se kurzor nachází nad obrázkem"
 
 #: qml/ConfigBehavior.qml:197
 #, kde-format

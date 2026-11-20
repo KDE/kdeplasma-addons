@@ -1,5 +1,6 @@
 # Translation of plasma_applet_katesession.po into Serbian.
 # Chusslove Illich <caslav.ilic@gmx.net>, 2008, 2010, 2014.
+# Nemanja Hiršl <nemhirsl@gmail.com>, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_katesession\n"
@@ -37,20 +38,3 @@ msgstr "Odustani od stvaranja sesije"
 #, kde-format
 msgid "Kate Sessions"
 msgstr "Kateine sesije"
-
-#, fuzzy
-#~| msgid "Search"
-#~ msgid "Search…"
-#~ msgstr "Traži"
-
-#~ msgid "Delete session"
-#~ msgstr "Obriši sesiju"
-
-#~ msgid "Start Kate (no arguments)"
-#~ msgstr "Pokreni Kate (bez argumenata)"
-
-#~ msgid "New Kate Session"
-#~ msgstr "Nova sesija Kate"
-
-#~ msgid "New Anonymous Session"
-#~ msgstr "Nova anonimna sesija"
