@@ -13,7 +13,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-18 01:12+0000\n"
+"POT-Creation-Date: 2026-11-20 01:13+0000\n"
 "PO-Revision-Date: 2026-11-18 08:55+0200\n"
 "Last-Translator: Alexander Yavorsky <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -28,13 +28,13 @@ msgstr ""
 "X-Accelerator-Marker: &\n"
 "X-Text-Markup: kde4\n"
 
-#: CompactRepresentation.qml:154
+#: CompactRepresentation.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Приостановить таймер"
 
-#: CompactRepresentation.qml:154
+#: CompactRepresentation.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"

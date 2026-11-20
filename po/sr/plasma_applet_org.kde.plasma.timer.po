@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-14 16:15+0100\n"
+"POT-Creation-Date: 2026-11-20 01:13+0000\n"
+"PO-Revision-Date: 2026-11-19 09:26+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
@@ -20,13 +20,13 @@ msgstr ""
 "X-Text-Markup: kde4\n"
 "X-Environment: kde\n"
 
-#: CompactRepresentation.qml:154
+#: CompactRepresentation.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Паузирај одбројавач"
 
-#: CompactRepresentation.qml:154
+#: CompactRepresentation.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
@@ -48,134 +48,119 @@ msgstr "Предефинисана одбројавања"
 #, kde-format
 msgctxt "@label:textbox timer name"
 msgid "Title:"
-msgstr ""
+msgstr "Наслов:"
 
 #: configGeneral.qml:39
 #, kde-format
 msgctxt "@info:placeholder for empty timer title"
 msgid "Set a title for notification and/or widget"
-msgstr ""
+msgstr "Задајте наслов за обавештење и/или виџет"
 
 #: configGeneral.qml:43
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show seconds"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Only in tooltip"
 msgid "Show seconds:"
-msgstr "Прикажи секунде"
+msgstr "Прикажи секунде:"
 
 #: configGeneral.qml:48
 #, kde-format
 msgctxt "item:inlistbox completes Show seconds…"
 msgid "Always"
-msgstr ""
+msgstr "увек"
 
 #: configGeneral.qml:49
 #, kde-format
 msgctxt "item:inlistbox completes Show seconds…"
 msgid "Only in tooltip"
-msgstr ""
+msgstr "само у облачићу"
 
 #: configGeneral.qml:57
 #, kde-format
 msgctxt "@title:label FormGroup title"
 msgid "Appearance"
-msgstr ""
+msgstr "Изглед"
 
-# rewrite-msgid: /Timer/Countdown/
 #: configGeneral.qml:59
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Timer title:"
-msgstr "Одбројавање завршено"
+msgstr "Наслов одбројавача:"
 
 #: configGeneral.qml:65
 #, kde-format
 msgctxt "item:inlistbox completes Timer title…"
 msgid "Always show"
-msgstr ""
+msgstr "увек прикажи"
 
 #: configGeneral.qml:66
 #, kde-format
 msgctxt "item:inlistbox completes Timer title…"
 msgid "Never show"
-msgstr ""
+msgstr "никад не приказуј"
 
 #: configGeneral.qml:73
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show progress bar"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Progress bar:"
-msgstr "Прикажи траку напретка"
+msgstr "Трака напретка:"
 
 #: configGeneral.qml:78
 #, kde-format
 msgctxt "item:inlistbox completes Progress bar…"
 msgid "Always show"
-msgstr ""
+msgstr "увек прикажи"
 
 #: configGeneral.qml:79
 #, kde-format
 msgctxt "item:inlistbox completes Progress bar…"
 msgid "Never show"
-msgstr ""
+msgstr "никад не приказуј"
 
 #: configGeneral.qml:86
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show remaining time"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Remaining time:"
-msgstr "Прикажи преостало време"
+msgstr "Преостало време:"
 
 #: configGeneral.qml:91
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Always show"
-msgstr ""
+msgstr "увек прикажи"
 
 #: configGeneral.qml:92
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Show on large widgets and popups"
-msgstr ""
+msgstr "прикажи на великим виџетима и искачућим прозорима"
 
 #: configGeneral.qml:99
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show timer toggle"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Never show"
 msgid "Timer toggle:"
-msgstr "Прикажи прекидач одбројавача"
+msgstr "Прекидач одбројавача:"
 
 #: configGeneral.qml:104
 #, kde-format
 msgctxt "item:inlistbox completes Timer toggle…"
 msgid "Show on small widgets"
-msgstr ""
+msgstr "прикажи на малим виџетима"
 
 #: configGeneral.qml:105
 #, kde-format
 msgctxt "item:inlistbox completes Timer toggle…"
 msgid "Never show"
-msgstr ""
+msgstr "никад не приказуј"
 
 # rewrite-msgid: /Timer/Countdown/
 #: configGeneral.qml:114
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@title:label FormGroup title"
 msgid "When timer finished"
-msgstr "Одбројавање завршено"
+msgstr "При завршетку одбројавања"
 
 #: configGeneral.qml:116
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification:"
+#, kde-format
 msgctxt ""
 "@option:check prefix for checkbox with text field for notification text"
 msgid "Show notification:"
@@ -183,9 +168,7 @@ msgstr "Прикажи обавештење:"
 
 # rewrite-msgid: /Timer/Countdown/
 #: configGeneral.qml:131
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt ""
 "@info:placeholder default notification text if no custom notification set, "
 "keep in sync with the one in main.qml"
@@ -196,21 +179,17 @@ msgstr "Одбројавање завршено"
 #, kde-format
 msgctxt "@action:button opens system settings on timer notification page"
 msgid "Open notification settings"
-msgstr ""
+msgstr "Отвори поставке обавештења"
 
 # >> @title:window
 #: configGeneral.qml:144
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Run command:"
+#, kde-format
 msgctxt "@option:check prefix for checkbox with text field for command"
 msgid "Run command:"
 msgstr "Изврши наредбу:"
 
 #: configGeneral.qml:162
-#, fuzzy, kde-format
-#| msgctxt "@placeholder, only translate the message in single quotes"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@info:placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Одбројавање завршено'"
@@ -329,15 +308,3 @@ msgstr "&Заустави"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Ресетуј"
-
-#~ msgctxt "@title:label"
-#~ msgid "Display:"
-#~ msgstr "Приказ:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Show title:"
-#~ msgstr "Наслов:"
-
-#~ msgctxt "@title:label"
-#~ msgid "On timeout:"
-#~ msgstr "При прековремену:"

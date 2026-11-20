@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-08 23:34+0100\n"
+"PO-Revision-Date: 2026-11-19 03:32+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -773,13 +773,7 @@ msgid "Unable to load weather forecast"
 msgstr "Nelze načíst předpověď počasí"
 
 #: qml/FullRepresentation.qml:106
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:usagetip"
-#| msgid ""
-#| "There may be a technical issue with the weather provider. If the issue "
-#| "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-#| "cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-#| "link>."
+#, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
@@ -788,8 +782,8 @@ msgid ""
 msgstr ""
 "Možná došlo k technickému problému u poskytovatele údajů o počasí. Pokud "
 "problém přetrvává déle než jeden den, <link url='https://bugs.kde.org/"
-"enter_bug.cgi?product=plasmashell&component=Weather%20widget'>nahlašte "
-"chybu</link>."
+"enter_bug.cgi?product=plasmashell&component=Weather widget'>nahlašte chybu</"
+"link>."
 
 #: qml/LocationHeader.qml:48
 #, kde-format

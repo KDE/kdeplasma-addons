@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.weather\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-14 16:15+0100\n"
+"PO-Revision-Date: 2026-11-19 09:26+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@latin\n"
@@ -791,13 +791,7 @@ msgid "Unable to load weather forecast"
 msgstr "Ne mogu da učitam vremensku prognozu"
 
 #: qml/FullRepresentation.qml:106
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:usagetip"
-#| msgid ""
-#| "There may be a technical issue with the weather provider. If the issue "
-#| "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-#| "cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-#| "link>."
+#, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
@@ -806,7 +800,7 @@ msgid ""
 msgstr ""
 "Možda postoji tehnički problem kod dobavljača vremenske prognoze. Ako "
 "problem potraje duže od jednog dana, <link url='https://bugs.kde.org/"
-"enter_bug.cgi?product=plasmashell&component=Weather%20widget'>prijavite "
+"enter_bug.cgi?product=plasmashell&component=Weather widget'>prijavite "
 "grešku</link>."
 
 #: qml/LocationHeader.qml:48
@@ -1007,7 +1001,3 @@ msgstr "veoma visok"
 #, kde-format
 msgid "Extreme"
 msgstr "ekstreman"
-
-#~ msgctxt "@title:group"
-#~ msgid "Compact Mode"
-#~ msgstr "Sažeti režim"

@@ -4,7 +4,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-14 16:15+0100\n"
+"PO-Revision-Date: 2026-11-19 09:26+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
@@ -45,7 +45,7 @@ msgstr "Фавиконица веб сајта"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "Посебна иконица"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -94,26 +94,22 @@ msgid "Display Navigation Bar"
 msgstr "Прикажи траку за навигацију"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "При покретању:"
+msgstr "При покретању учитај:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "Учитај последњу посећену страницу"
+msgstr "Последњу посећену страницу"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "Унесите УРЛ или оставите празно за празну страницу"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -122,12 +118,10 @@ msgid "Content scaling:"
 msgstr "Скалирање садржаја:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "Фиксна размера:"
+msgstr "Фиксна размера"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format
@@ -223,7 +217,3 @@ msgid ""
 msgstr ""
 "Кликните овде да отворите следећи блокирани искачући прозор:\n"
 "%1"
-
-#~ msgctxt "@option:radio"
-#~ msgid "Always load this page:"
-#~ msgstr "Увек учитај ову страницу:"

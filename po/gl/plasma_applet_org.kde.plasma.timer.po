@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-18 01:12+0000\n"
+"POT-Creation-Date: 2026-11-20 01:13+0000\n"
 "PO-Revision-Date: 2025-05-03 06:58+0200\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.gal>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -21,13 +21,13 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: Lokalize 25.04.0\n"
 
-#: CompactRepresentation.qml:154
+#: CompactRepresentation.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Pausar o temporizador"
 
-#: CompactRepresentation.qml:154
+#: CompactRepresentation.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"

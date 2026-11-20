@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-18 01:12+0000\n"
+"POT-Creation-Date: 2026-11-20 01:13+0000\n"
 "PO-Revision-Date: 2023-05-04 19:34+0200\n"
 "Last-Translator: Ferdinand Galko <galko.ferdinand@gmail.com>\n"
 "Language-Team: Slovak <opensuse-translation@opensuse.org>\n"
@@ -18,13 +18,13 @@ msgstr ""
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
 "X-Generator: Lokalize 21.12.3\n"
 
-#: CompactRepresentation.qml:154
+#: CompactRepresentation.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Pozastaviť časovač"
 
-#: CompactRepresentation.qml:154
+#: CompactRepresentation.qml:156
 #, kde-format
 msgctxt "@action:button"
 msgid "Start Timer"
@@ -43,9 +43,7 @@ msgid "Predefined Timers"
 msgstr "Preddefinované časovače"
 
 #: configGeneral.qml:35
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:textbox timer name"
 msgid "Title:"
 msgstr "Názov:"
@@ -54,137 +52,119 @@ msgstr "Názov:"
 #, kde-format
 msgctxt "@info:placeholder for empty timer title"
 msgid "Set a title for notification and/or widget"
-msgstr ""
+msgstr "Nastavte názov pre oznámenie a/alebo widget"
 
 #: configGeneral.qml:43
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show seconds"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Only in tooltip"
 msgid "Show seconds:"
-msgstr "Zobraziť sekundy"
+msgstr "Zobraziť sekundy:"
 
 #: configGeneral.qml:48
 #, kde-format
 msgctxt "item:inlistbox completes Show seconds…"
 msgid "Always"
-msgstr ""
+msgstr "Vždy"
 
 #: configGeneral.qml:49
 #, kde-format
 msgctxt "item:inlistbox completes Show seconds…"
 msgid "Only in tooltip"
-msgstr ""
+msgstr "Iba v tipe"
 
 #: configGeneral.qml:57
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:label FormGroup title"
 msgid "Appearance"
 msgstr "Vzhľad"
 
 #: configGeneral.qml:59
-#, fuzzy, kde-format
-#| msgctxt "@label:textbox"
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Timer title:"
-msgstr "Názov:"
+msgstr "Názov časovača:"
 
 #: configGeneral.qml:65
 #, kde-format
 msgctxt "item:inlistbox completes Timer title…"
 msgid "Always show"
-msgstr ""
+msgstr "Vždy zobraziť"
 
 #: configGeneral.qml:66
 #, kde-format
 msgctxt "item:inlistbox completes Timer title…"
 msgid "Never show"
-msgstr ""
+msgstr "Nikdy nezobraziť"
 
 #: configGeneral.qml:73
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show progress bar"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Progress bar:"
-msgstr "Zobraziť ukazovateľ priebehu"
+msgstr "Ukazovateľ priebehu:"
 
 #: configGeneral.qml:78
 #, kde-format
 msgctxt "item:inlistbox completes Progress bar…"
 msgid "Always show"
-msgstr ""
+msgstr "Vždy zobraziť"
 
 #: configGeneral.qml:79
 #, kde-format
 msgctxt "item:inlistbox completes Progress bar…"
 msgid "Never show"
-msgstr ""
+msgstr "Nikdy nezobraziť"
 
 #: configGeneral.qml:86
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show remaining time"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Remaining time:"
-msgstr "Zobraziť zostávajúci čas"
+msgstr "Zostávajúci čas:"
 
 #: configGeneral.qml:91
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Always show"
-msgstr ""
+msgstr "Vždy zobraziť"
 
 #: configGeneral.qml:92
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Show on large widgets and popups"
-msgstr ""
+msgstr "Zobraziť na veľkých widgetoch a vo vyskakovacích oknách"
 
 #: configGeneral.qml:99
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show timer toggle"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Never show"
 msgid "Timer toggle:"
-msgstr "Zobraziť prepínač časovača"
+msgstr "Prepínač časovača:"
 
 #: configGeneral.qml:104
 #, kde-format
 msgctxt "item:inlistbox completes Timer toggle…"
 msgid "Show on small widgets"
-msgstr ""
+msgstr "Zobraziť na malých widgetoch"
 
 #: configGeneral.qml:105
 #, kde-format
 msgctxt "item:inlistbox completes Timer toggle…"
 msgid "Never show"
-msgstr ""
+msgstr "Nikdy nezobraziť"
 
 #: configGeneral.qml:114
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@title:label FormGroup title"
 msgid "When timer finished"
-msgstr "Časovač ukončený"
+msgstr "Keď časovač skončí"
 
 #: configGeneral.qml:116
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification:"
+#, kde-format
 msgctxt ""
 "@option:check prefix for checkbox with text field for notification text"
 msgid "Show notification:"
 msgstr "Zobraziť text upozornenia:"
 
 #: configGeneral.qml:131
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt ""
 "@info:placeholder default notification text if no custom notification set, "
 "keep in sync with the one in main.qml"
@@ -195,20 +175,16 @@ msgstr "Časovač ukončený"
 #, kde-format
 msgctxt "@action:button opens system settings on timer notification page"
 msgid "Open notification settings"
-msgstr ""
+msgstr "Otvoriť nastavenia oznámení"
 
 #: configGeneral.qml:144
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Run command:"
+#, kde-format
 msgctxt "@option:check prefix for checkbox with text field for command"
 msgid "Run command:"
 msgstr "Spustiť príkaz"
 
 #: configGeneral.qml:162
-#, fuzzy, kde-format
-#| msgctxt "@placeholder, only translate the message in single quotes"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@info:placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'Časovač ukončený'"
@@ -220,10 +196,7 @@ msgid "Add"
 msgstr "Pridať"
 
 #: configTimes.qml:85
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in the widget’s "
-#| "context menu."
+#, kde-format
 msgctxt "@info:usagetip PlaceHolderMessage empty ListView"
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -233,43 +206,37 @@ msgstr ""
 "widgetu."
 
 #: configTimes.qml:191
-#, fuzzy, kde-format
-#| msgid "Apply"
+#, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "Použiť"
 
 #: configTimes.qml:210
-#, fuzzy, kde-format
-#| msgid "Cancel"
+#, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "Zrušiť"
 
 #: configTimes.qml:229
-#, fuzzy, kde-format
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "Upraviť"
 
 #: configTimes.qml:251
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Vymazať"
 
 #: main.qml:41
-#, fuzzy, kde-format
-#| msgid "%1 is running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 beží"
 
 #: main.qml:43
-#, fuzzy, kde-format
-#| msgid "%1 not running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 nebeží"
@@ -280,13 +247,10 @@ msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
 "in hh:mm:ss"
 msgid "%1 of %2 left"
-msgstr ""
+msgstr "Zostáva %1 z %2"
 
 #: main.qml:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use mouse wheel to change digits or choose from predefined timers in the "
-#| "context menu"
+#, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -301,29 +265,25 @@ msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
 "localized durations"
 msgid "%1 left of %2"
-msgstr ""
+msgstr "Zostáva %1 z %2"
 
 #: main.qml:87
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Časovač"
 
 #: main.qml:88
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Časovač ukončený"
 
 #: main.qml:118
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "&Start"
+#, kde-format
 msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
-msgstr "Spustiť"
+msgstr "&Spustiť (%1)"
 
 #: main.qml:119
 #, kde-format
@@ -356,8 +316,6 @@ msgstr "Vynulovať"
 #~ msgstr "Po vypršaní:"
 
 #, fuzzy
-#~| msgid "Remaining time left: %1 second"
-#~| msgid_plural "Remaining time left: %1 seconds"
 #~ msgctxt ""
 #~ "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
 #~ "running timer"
@@ -368,7 +326,6 @@ msgstr "Vynulovať"
 #~ msgstr[2] "Ostávajúci čas: %1 sekúnd"
 
 #, fuzzy
-#~| msgid "Scroll over digits to change time"
 #~ msgctxt "@info:usagetip"
 #~ msgid "Scroll over digits to change time"
 #~ msgstr "Rolovať nad číslami na zmenu času"

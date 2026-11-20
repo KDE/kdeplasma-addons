@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-07 23:06+0200\n"
+"PO-Revision-Date: 2026-11-19 22:12+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -36,20 +36,16 @@ msgid "Background:"
 msgstr "Фон:"
 
 #: qml/configAppearance.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color"
-msgstr "Цвят:"
+msgstr "Цвят"
 
 #: qml/configAppearance.qml:67
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background image file picker"
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image"
-msgstr "Изображение:"
+msgstr "Изображение"
 
 #: qml/configAppearance.qml:77
 #, kde-format
@@ -82,12 +78,10 @@ msgid "Tile labels:"
 msgstr "Етикети, представени с плочки:"
 
 #: qml/configAppearance.qml:132
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens label color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color"
-msgstr "Цвят:"
+msgstr "Цвят"
 
 #: qml/configAppearance.qml:147
 #, kde-format

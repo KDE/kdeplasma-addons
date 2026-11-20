@@ -38,26 +38,22 @@ msgid "Visit the comic website"
 msgstr "Navštíviť webovú stránku komiksu"
 
 #: qml/ComicCentralView.qml:125
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Go to previous strip"
-msgstr "Prejsť na prúžok"
+msgstr "Prejsť na predchádzajúci prúžok"
 
 #: qml/ComicCentralView.qml:130
 #, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Show full-size in popup"
-msgstr ""
+msgstr "Zobraziť v plnej veľkosti vo vyskakovacom okne"
 
 #: qml/ComicCentralView.qml:136
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Go to Strip"
+#, kde-format
 msgctxt "@action:button in floating toolbar, icon-only"
 msgid "Go to next strip"
-msgstr "Prejsť na prúžok"
+msgstr "Prejsť na nasledujúci prúžok"
 
 #: qml/config.qml:13
 #, kde-format

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-03 00:01+0100\n"
+"PO-Revision-Date: 2026-11-19 03:32+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/config.qml:12
 #, kde-format
@@ -46,7 +46,7 @@ msgstr "Ikona webových stránek"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "Vlastní ikona"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -95,26 +95,24 @@ msgid "Display Navigation Bar"
 msgstr "Zobrazit navigační lištu"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "Při spuštění:"
+msgstr "Při spuštění načíst:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "Načíst naposledy navštívenou stránku"
+msgstr "Naposledy navštívená stránka"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
 msgstr ""
+"Zadejte adresu URL nebo pole nechte prázdné, pokud chcete zobrazit prázdnou "
+"stránku"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -123,12 +121,10 @@ msgid "Content scaling:"
 msgstr "Měřítko obsahu:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "Pevné měřítko:"
+msgstr "Pevné měřítko"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format

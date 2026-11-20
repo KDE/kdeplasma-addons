@@ -6,7 +6,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-14 16:15+0100\n"
+"PO-Revision-Date: 2026-11-19 09:26+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr\n"
@@ -63,12 +63,10 @@ msgstr "Насумичан редослед"
 
 # skip-rule: t-cursor
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "Паузирај слајдшоу када је показивач над сликом"
+msgstr "Паузирај слајдшоу при лебдењу"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -178,15 +176,13 @@ msgstr "Слика се никако не мења."
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "При клику на слику:"
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr "Клик на слику отвара је у спољашњем програму"
+msgstr "Отвори у спољашњем програму"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format
@@ -261,7 +257,3 @@ msgstr "Нема изабраних медија"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "Изабери медије…"
-
-#~ msgctxt "@label:checkbox"
-#~ msgid "General:"
-#~ msgstr "Опште:"

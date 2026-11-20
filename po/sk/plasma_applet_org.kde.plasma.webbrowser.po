@@ -44,7 +44,7 @@ msgstr "Ikona webovej stránky"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "Vlastná ikona"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -93,26 +93,22 @@ msgid "Display Navigation Bar"
 msgstr "Zobraziť navigačný panel"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "Pri spustení:"
+msgstr "Pri spustení načítať:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "Načítať naposledy navštívenú stránku"
+msgstr "Naposledy navštívenú stránku"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "Zadajte URL alebo nechajte prázdne pre prázdnu stránku"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -121,12 +117,10 @@ msgid "Content scaling:"
 msgstr "Zmena mierky obsahu:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "Pevná mierka:"
+msgstr "Pevná mierka"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format
@@ -165,8 +159,7 @@ msgid "Go Home"
 msgstr "Prejsť domov"
 
 #: qml/main.qml:101
-#, fuzzy, kde-format
-#| msgid "Open Default URL"
+#, kde-format
 msgctxt "@action:button accessible description"
 msgid "Open Default URL"
 msgstr "Napísať URL"
@@ -209,18 +202,13 @@ msgid "Copy Link Address"
 msgstr "Kopírovať adresu odkazu"
 
 #: qml/main.qml:347
-#, fuzzy, kde-format
-#| msgctxt "An unwanted popup was blocked"
-#| msgid "Popup blocked"
+#, kde-format
 msgctxt "@info:status An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "Blokovanie vyskakovacieho okna"
 
 #: qml/main.qml:348
-#, fuzzy, kde-format
-#| msgid ""
-#| "Click here to open the following blocked popup:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info:tooltip, %1 is popup url"
 msgid ""
 "Click here to open the following blocked popup:\n"

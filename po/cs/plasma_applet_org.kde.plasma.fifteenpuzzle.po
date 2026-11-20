@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-02 23:59+0100\n"
+"PO-Revision-Date: 2026-11-19 03:32+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -38,20 +38,16 @@ msgid "Background:"
 msgstr "Pozadí:"
 
 #: qml/configAppearance.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color"
-msgstr "Barva:"
+msgstr "Barva"
 
 #: qml/configAppearance.qml:67
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background image file picker"
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image"
-msgstr "Obrázek:"
+msgstr "Obrázek"
 
 #: qml/configAppearance.qml:77
 #, kde-format
@@ -84,12 +80,10 @@ msgid "Tile labels:"
 msgstr "Popisky slaždic:"
 
 #: qml/configAppearance.qml:132
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens label color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color"
-msgstr "Barva:"
+msgstr "Barva"
 
 #: qml/configAppearance.qml:147
 #, kde-format

@@ -38,17 +38,13 @@ msgid "Background:"
 msgstr "Pozadie:"
 
 #: qml/configAppearance.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color"
-msgstr "Farba:"
+msgstr "Farba"
 
 #: qml/configAppearance.qml:67
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background image file picker"
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image"
 msgstr "Obrázok"
@@ -84,12 +80,10 @@ msgid "Tile labels:"
 msgstr "Názvy:"
 
 #: qml/configAppearance.qml:132
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens label color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color"
-msgstr "Farba:"
+msgstr "Farba"
 
 #: qml/configAppearance.qml:147
 #, kde-format
@@ -122,15 +116,13 @@ msgid "Solved! Try again."
 msgstr "Vyriešené! Skúste znova."
 
 #: qml/main.qml:39
-#, fuzzy, kde-format
-#| msgid "Fifteen Puzzle"
+#, kde-format
 msgctxt "@info:tooltip main title for widget"
 msgid "Fifteen Puzzle"
 msgstr "Hra pätnástka"
 
 #: qml/main.qml:40
-#, fuzzy, kde-format
-#| msgid "Solve by arranging in order"
+#, kde-format
 msgctxt "@info:tooltip subtitle for widget"
 msgid "Solve by arranging in order"
 msgstr "Vyriešiť usporiadaním do poradia"

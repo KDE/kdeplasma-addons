@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-17 13:06+0000\n"
+"POT-Creation-Date: 2026-11-19 11:22+0000\n"
 "PO-Revision-Date: 2026-09-23 06:56+0900\n"
 "Last-Translator: Abduqadir Abliz <sahranbay@gmail.com>\n"
 "Language-Team: Uyghur <kde-i18n-doc@kde.org>\n"
@@ -24,19 +24,19 @@ msgctxt "@info"
 msgid "No Saved Colors"
 msgstr "ساقلانغان رەڭ يوق"
 
-#: qml/ColorCircle.qml:47
+#: qml/ColorCircle.qml:54
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "ئوتتۇرا كۇنۇپكا چېكىلسە رەڭ كودىنى كۆچۈرىدۇ"
 
-#: qml/CompactRepresentation.qml:107
+#: qml/CompactRepresentation.qml:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "رەڭ ئال"
 
-#: qml/CompactRepresentation.qml:114
+#: qml/CompactRepresentation.qml:120
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -124,13 +124,13 @@ msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "رەڭ ئال"
 
-#: qml/main.qml:348
+#: qml/main.qml:347
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "كۆچۈرۈلدى!"
 
-#: qml/main.qml:360
+#: qml/main.qml:359
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

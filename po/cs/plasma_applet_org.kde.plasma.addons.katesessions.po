@@ -2,46 +2,43 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Vít Pelčák <vit@pelcak.org>, 2010, 2014.
 # Vit Pelcak <vit@pelcak.org>, 2021.
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_katesession\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 22:08+0000\n"
-"PO-Revision-Date: 2021-07-02 18:21+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-11-19 03:31+0100\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 21.04.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/KateSessionsItemDelegate.qml:58
-#, fuzzy, kde-format
-#| msgid "Session name"
+#, kde-format
 msgctxt "@info:placeholder for text field to create new Kate session with name"
 msgid "Session name"
 msgstr "Název sezení"
 
 #: qml/KateSessionsItemDelegate.qml:69
-#, fuzzy, kde-format
-#| msgid "Create new session and start Kate"
+#, kde-format
 msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Create new session and start Kate"
 msgstr "Vytvořit nové sezení a spustit Kate"
 
 #: qml/KateSessionsItemDelegate.qml:84
-#, fuzzy, kde-format
-#| msgid "Cancel session creation"
+#, kde-format
 msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Cancel session creation"
 msgstr "Zrušit vytváření sezení"
 
 #: qml/main.qml:39
-#, fuzzy, kde-format
-#| msgid "Kate Sessions"
+#, kde-format
 msgctxt "@info:tooltip title for widget tooltip"
 msgid "Kate Sessions"
 msgstr "Sezení Kate"

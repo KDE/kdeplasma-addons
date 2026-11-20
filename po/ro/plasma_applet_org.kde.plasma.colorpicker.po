@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_kolourpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-17 13:06+0000\n"
+"POT-Creation-Date: 2026-11-19 11:22+0000\n"
 "PO-Revision-Date: 2026-02-19 19:07+0000\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -27,19 +27,19 @@ msgctxt "@info"
 msgid "No Saved Colors"
 msgstr "Nu sunt culori salvate"
 
-#: qml/ColorCircle.qml:47
+#: qml/ColorCircle.qml:54
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Clic mijlociu pentru a copia codul culorii"
 
-#: qml/CompactRepresentation.qml:107
+#: qml/CompactRepresentation.qml:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Alege o culoare"
 
-#: qml/CompactRepresentation.qml:114
+#: qml/CompactRepresentation.qml:120
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -127,13 +127,13 @@ msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Alege o culoare"
 
-#: qml/main.qml:348
+#: qml/main.qml:347
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Copiat!"
 
-#: qml/main.qml:360
+#: qml/main.qml:359
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

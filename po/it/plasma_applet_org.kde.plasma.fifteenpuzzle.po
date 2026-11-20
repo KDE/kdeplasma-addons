@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_fifteenPuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-03 15:53+0100\n"
+"PO-Revision-Date: 2026-11-18 14:57+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -39,20 +39,16 @@ msgid "Background:"
 msgstr "Sfondo:"
 
 #: qml/configAppearance.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color"
-msgstr "Colore:"
+msgstr "Colore"
 
 #: qml/configAppearance.qml:67
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background image file picker"
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image"
-msgstr "Immagine:"
+msgstr "Immagine"
 
 #: qml/configAppearance.qml:77
 #, kde-format
@@ -85,12 +81,10 @@ msgid "Tile labels:"
 msgstr "Etichette delle tessere:"
 
 #: qml/configAppearance.qml:132
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens label color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color"
-msgstr "Colore:"
+msgstr "Colore"
 
 #: qml/configAppearance.qml:147
 #, kde-format

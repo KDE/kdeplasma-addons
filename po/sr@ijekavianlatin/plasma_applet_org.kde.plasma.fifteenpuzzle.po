@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.fifteenpuzzle\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-14 16:15+0100\n"
+"PO-Revision-Date: 2026-11-19 09:26+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavianlatin\n"
@@ -39,20 +39,16 @@ msgid "Background:"
 msgstr "Pozadina:"
 
 #: qml/configAppearance.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color"
-msgstr "Boja:"
+msgstr "Boja"
 
 #: qml/configAppearance.qml:67
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background image file picker"
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image"
-msgstr "Slika:"
+msgstr "Slika"
 
 #: qml/configAppearance.qml:77
 #, kde-format
@@ -88,12 +84,10 @@ msgid "Tile labels:"
 msgstr "Etikete pločica:"
 
 #: qml/configAppearance.qml:132
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens label color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color"
-msgstr "Boja:"
+msgstr "Boja"
 
 #: qml/configAppearance.qml:147
 #, kde-format

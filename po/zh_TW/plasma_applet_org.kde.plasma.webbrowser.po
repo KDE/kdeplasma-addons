@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-12 19:23+0900\n"
+"PO-Revision-Date: 2026-11-19 22:00+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 26.11.70\n"
+"X-Generator: Lokalize 27.03.70\n"
 
 #: qml/config.qml:12
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "網站的小圖示"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "自訂圖示"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -92,26 +92,22 @@ msgid "Display Navigation Bar"
 msgstr "顯示導覽列"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "啟動時："
+msgstr "啟動時載入："
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "載入上次造訪的頁面"
+msgstr "上次造訪的頁面"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "指定要載入的網址，或是留空以載入空白頁面"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -120,12 +116,10 @@ msgid "Content scaling:"
 msgstr "內容縮放："
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "固定大小："
+msgstr "固定大小"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format

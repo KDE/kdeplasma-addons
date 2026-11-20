@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 10:52+0000\n"
-"PO-Revision-Date: 2026-11-02 08:54+0200\n"
+"PO-Revision-Date: 2026-11-19 09:34+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -27,26 +27,19 @@ msgid "Appearance"
 msgstr "Вигляд"
 
 #: configGeneral.qml:30
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:group The things being potentially shown are lights and seconds"
-#| msgid "Show:"
+#, kde-format
 msgctxt "@option:check prefix completes … seconds"
 msgid "Show:"
 msgstr "Показати:"
 
 #: configGeneral.qml:33
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@option:check completes Show …"
 msgid "Seconds"
 msgstr "Секунди"
 
 #: configGeneral.qml:45
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Active lights"
+#, kde-format
 msgctxt ""
 "@title:group form title for group of radiobuttons, default/custom color"
 msgid "Active Lights:"
@@ -56,22 +49,16 @@ msgstr "Задіяні лампочки"
 #, kde-format
 msgctxt "@option:radio color for active lights"
 msgid "Default color"
-msgstr ""
+msgstr "Типовий колір"
 
 #: configGeneral.qml:55
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:group form label for group of checkboxes with color buttons, e.g. …"
-#| "Active lights"
-#| msgid "Use custom color for:"
+#, kde-format
 msgctxt "@option:radio color for active lights"
 msgid "Custom color"
-msgstr "Нетиповий колір для:"
+msgstr "Нетиповий колір"
 
 #: configGeneral.qml:75
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Inactive lights"
+#, kde-format
 msgctxt "@title:group form title for group of radiobuttons, default/custom/off"
 msgid "Inactive lights:"
 msgstr "Незадіяні лампочки"
@@ -80,23 +67,19 @@ msgstr "Незадіяні лампочки"
 #, kde-format
 msgctxt "@option:radio color for inactive lights"
 msgid "Default color"
-msgstr ""
+msgstr "Типовий колір"
 
 #: configGeneral.qml:88
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:group form label for group of checkboxes with color buttons, e.g. …"
-#| "Active lights"
-#| msgid "Use custom color for:"
+#, kde-format
 msgctxt "@option:radio color for inactive lights"
 msgid "Custom color"
-msgstr "Нетиповий колір для:"
+msgstr "Нетиповий колір"
 
 #: configGeneral.qml:102
 #, kde-format
 msgctxt "@option:radio color for inactive lights"
 msgid "Off"
-msgstr ""
+msgstr "○"
 
 #~ msgid "Display:"
 #~ msgstr "Показ:"

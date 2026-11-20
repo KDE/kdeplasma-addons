@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.binaryclock\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 10:52+0000\n"
-"PO-Revision-Date: 2026-11-14 16:15+0100\n"
+"PO-Revision-Date: 2026-11-19 09:26+0100\n"
 "Last-Translator: Nemanja Hiršl <nemhirsl@gmail.com>\n"
 "Language-Team: Serbian <kde-i18n-sr@kde.org>\n"
 "Language: sr@ijekavian\n"
@@ -27,74 +27,57 @@ msgid "Appearance"
 msgstr "Изглед"
 
 #: configGeneral.qml:30
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:group The things being potentially shown are lights and seconds"
-#| msgid "Show:"
+#, kde-format
 msgctxt "@option:check prefix completes … seconds"
 msgid "Show:"
 msgstr "Прикажи:"
 
 # >> @option:check
 #: configGeneral.qml:33
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@option:check completes Show …"
 msgid "Seconds"
 msgstr "Секунде"
 
 #: configGeneral.qml:45
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Active lights"
+#, kde-format
 msgctxt ""
 "@title:group form title for group of radiobuttons, default/custom color"
 msgid "Active Lights:"
-msgstr "Активне лампице"
+msgstr "Активне лампице:"
 
 #: configGeneral.qml:47
 #, kde-format
 msgctxt "@option:radio color for active lights"
 msgid "Default color"
-msgstr ""
+msgstr "Подразумијевана боја"
 
 #: configGeneral.qml:55
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:group form label for group of checkboxes with color buttons, e.g. …"
-#| "Active lights"
-#| msgid "Use custom color for:"
+#, kde-format
 msgctxt "@option:radio color for active lights"
 msgid "Custom color"
-msgstr "Посебна боја за:"
+msgstr "Посебна боја"
 
 #: configGeneral.qml:75
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Inactive lights"
+#, kde-format
 msgctxt "@title:group form title for group of radiobuttons, default/custom/off"
 msgid "Inactive lights:"
-msgstr "Неактивне лампице"
+msgstr "Неактивне лампице:"
 
 #: configGeneral.qml:80
 #, kde-format
 msgctxt "@option:radio color for inactive lights"
 msgid "Default color"
-msgstr ""
+msgstr "Подразумијевана боја"
 
 #: configGeneral.qml:88
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@title:group form label for group of checkboxes with color buttons, e.g. …"
-#| "Active lights"
-#| msgid "Use custom color for:"
+#, kde-format
 msgctxt "@option:radio color for inactive lights"
 msgid "Custom color"
-msgstr "Посебна боја за:"
+msgstr "Посебна боја"
 
 #: configGeneral.qml:102
 #, kde-format
 msgctxt "@option:radio color for inactive lights"
 msgid "Off"
-msgstr ""
+msgstr "Искључене"

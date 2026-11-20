@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-05 08:43+0400\n"
+"PO-Revision-Date: 2026-11-19 16:45+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -46,7 +46,7 @@ msgstr "رمز الموقع"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "أيقونة مخصصة"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -95,26 +95,22 @@ msgid "Display Navigation Bar"
 msgstr "اعرض شريط الملاحة"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "عند البدء:"
+msgstr "عند البدء حمّل:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "حمّل آخر صفحات زرتها"
+msgstr "آخر صفحة زرتها"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "أدخل عنوان الرابط أو اترك الحقل فارغًا لعرض صفحة فارغة"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -123,12 +119,10 @@ msgid "Content scaling:"
 msgstr "تكبير المحتويات:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "مقاس ثابت:"
+msgstr "مقاس ثابت"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format

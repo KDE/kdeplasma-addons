@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.colorpicker\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-17 13:06+0000\n"
+"POT-Creation-Date: 2026-11-19 11:22+0000\n"
 "PO-Revision-Date: 2026-03-05 21:10+0100\n"
 "Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -26,19 +26,19 @@ msgctxt "@info"
 msgid "No Saved Colors"
 msgstr "Keine gespeicherten Farben"
 
-#: qml/ColorCircle.qml:47
+#: qml/ColorCircle.qml:54
 #, kde-format
 msgctxt "@info:usagetip"
 msgid "Middle-click to copy the color code"
 msgstr "Mittelklick um den Farbcode zu kopieren"
 
-#: qml/CompactRepresentation.qml:107
+#: qml/CompactRepresentation.qml:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Pick color"
 msgstr "Wählen Sie eine Farbe"
 
-#: qml/CompactRepresentation.qml:114
+#: qml/CompactRepresentation.qml:120
 #, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
@@ -126,13 +126,13 @@ msgctxt "@action:button"
 msgid "Pick Color"
 msgstr "Farbe auswählen"
 
-#: qml/main.qml:348
+#: qml/main.qml:347
 #, kde-format
 msgctxt "@info:progress just copied a color to clipboard"
 msgid "Copied!"
 msgstr "Kopiert."
 
-#: qml/main.qml:360
+#: qml/main.qml:359
 #, kde-format
 msgctxt "@action:button"
 msgid "Delete"

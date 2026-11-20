@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-18 01:12+0000\n"
+"POT-Creation-Date: 2026-11-20 01:13+0000\n"
 "PO-Revision-Date: 2019-10-30 21:51+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -18,14 +18,14 @@ msgstr ""
 "X-Generator: Lokalize 19.08.1\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
-#: CompactRepresentation.qml:154
+#: CompactRepresentation.qml:156
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"
 msgid "Pause Timer"
 msgstr "Taimer"
 
-#: CompactRepresentation.qml:154
+#: CompactRepresentation.qml:156
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@action:button"

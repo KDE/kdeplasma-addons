@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-03 15:50+0100\n"
+"PO-Revision-Date: 2026-11-18 18:45+0100\n"
 "Last-Translator: Vincenzo Reale <smart2128vr@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
 "Language: it\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/config.qml:12
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "Favicon del sito web"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "Icona personalizzata"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -94,26 +94,22 @@ msgid "Display Navigation Bar"
 msgstr "Visualizza la barra di navigazione"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "All'avvio:"
+msgstr "All'avvio, carica:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "Carica l'ultima pagina visitata"
+msgstr "Ultima pagina visitata"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "Digita l'URL o lascia vuoto per una pagina bianca"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -122,12 +118,10 @@ msgid "Content scaling:"
 msgstr "Ridimensionamento dei contenuti:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "Scala fissa:"
+msgstr "Scala fissa"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-08 23:33+0100\n"
+"PO-Revision-Date: 2026-11-19 03:32+0100\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -62,12 +62,10 @@ msgid "Randomize order"
 msgstr "Náhodné pořadí"
 
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "Pozastavit prezentaci při přejetí myší"
+msgstr "Pozastavit prezentaci při najetí myší"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -165,15 +163,13 @@ msgstr "Obrázek není transformován"
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "Při kliknutí na obrázek:"
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr "Klikněte na obrázek v externí aplikaci"
+msgstr "Otevřít v externí aplikaci"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format

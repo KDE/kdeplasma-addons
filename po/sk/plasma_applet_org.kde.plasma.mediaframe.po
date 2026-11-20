@@ -29,29 +29,25 @@ msgid "Behavior"
 msgstr "Správanie"
 
 #: qml/ConfigBehavior.qml:33
-#, fuzzy, kde-format
-#| msgid "Change picture every:"
+#, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "Zmeniť obrázok každých:"
 
 #: qml/ConfigBehavior.qml:52
-#, fuzzy, kde-format
-#| msgid "Hours"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "Hodiny"
 
 #: qml/ConfigBehavior.qml:66
-#, fuzzy, kde-format
-#| msgid "Minutes"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "Minúty"
 
 #: qml/ConfigBehavior.qml:80
-#, fuzzy, kde-format
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "Sekundy"
@@ -63,12 +59,10 @@ msgid "Randomize order"
 msgstr "Zamiešať poradie"
 
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "Pozastaviť prezentáciu keď je kurzor nad obrázkom"
+msgstr "Pozastaviť prezentáciu pri prechode myšou"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -164,15 +158,13 @@ msgstr "Obrázok nie je trasnformovaný"
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "Pri kliknutí na obrázok:"
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr "Kliknutie ľavým tlačidlom na obrázok ho otvorí v externej aplikácií"
+msgstr "Otvoriť v externej aplikácii"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format
@@ -220,19 +212,19 @@ msgstr "Vybrať priečinok"
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "Zobraziť predchádzajúci obrázok"
 
 #: qml/main.qml:173
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "Zobraziť nasledujúci obrázok"
 
 #: qml/main.qml:183
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "Otvoriť v predvolenom prehliadači obrázkov"
 
 #: qml/main.qml:355
 #, kde-format

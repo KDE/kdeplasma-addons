@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-11 18:28+0100\n"
+"PO-Revision-Date: 2026-11-19 22:10+0100\n"
 "Last-Translator: Mincho Kondarev <mkondarev@yahoo.de>\n"
 "Language-Team: Bulgarian <kde-i18n-doc@kde.org>\n"
 "Language: bg\n"
@@ -60,12 +60,10 @@ msgid "Randomize order"
 msgstr "Случаен ред"
 
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "Пауза на слайдшоуто, когато курсорът е над изображението"
+msgstr "Пауза на прожекцията, когато курсорът е над изображението"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -166,17 +164,13 @@ msgstr "Изображението не се трансформира"
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "При кликване върху изображението:"
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr ""
-"Отваряне на изображението във външно приложение при щракване върху "
-"изображение"
+msgstr "Отваряне във външно приложение"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format
@@ -249,7 +243,3 @@ msgstr "Няма избрана медия"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "Избиране на медия…"
-
-#~ msgctxt "@label:checkbox"
-#~ msgid "General:"
-#~ msgstr "Общи:"
