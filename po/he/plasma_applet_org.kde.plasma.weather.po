@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-13 13:54+0200\n"
+"PO-Revision-Date: 2026-11-19 10:47+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
@@ -771,13 +771,7 @@ msgid "Unable to load weather forecast"
 msgstr "לא ניתן לטעון את תשקיף מזג האוויר"
 
 #: qml/FullRepresentation.qml:106
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:usagetip"
-#| msgid ""
-#| "There may be a technical issue with the weather provider. If the issue "
-#| "persists for longer than a day, <link url='https://bugs.kde.org/enter_bug."
-#| "cgi?product=plasmashell&component=Weather%20widget'>submit a bug report</"
-#| "link>."
+#, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
@@ -785,8 +779,8 @@ msgid ""
 "cgi?product=plasmashell&component=Weather widget'>submit a bug report</link>."
 msgstr ""
 "עלולה לצוץ תקלה טכנית מול ספק מזג האוויר. אם התקלה נמשכת מעבר ליום, <link "
-"url='https://bugs.kde.org/enter_bug.cgi?product=plasmashell&component=Weather"
-"%20widget'>רצוי לדווח על תקלה</link>."
+"url='https://bugs.kde.org/enter_bug.cgi?"
+"product=plasmashell&component=Weather widget'>רצוי לדווח על תקלה</link>."
 
 #: qml/LocationHeader.qml:48
 #, kde-format

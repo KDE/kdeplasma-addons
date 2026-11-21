@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-13 14:21+0200\n"
+"PO-Revision-Date: 2026-11-19 10:48+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
@@ -63,12 +63,10 @@ msgid "Randomize order"
 msgstr "סדר אקראי"
 
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "להשהות את המצגת כשהסמן עובר מעל לתמונה"
+msgstr "להשהות את המצגת כשעוברים מעליה"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -164,15 +162,13 @@ msgstr "התמונה לא תשתנה"
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "בלחיצה על תמונה:"
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr "יש ללחוץ על תמונה כדי לפתוח אותה ביישום חיצוני"
+msgstr "לפתוח ביישום חיצוני"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format

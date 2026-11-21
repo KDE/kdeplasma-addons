@@ -3,47 +3,43 @@
 #
 # elkana bardugo <ttv200@gmail.com>, 2016.
 # Elkana Bardugo <ttv200@gmail.com>, 2017. #zanata
-# SPDX-FileCopyrightText: 2023 Yaron Shahrabani <sh.yaron@gmail.com>
+# SPDX-FileCopyrightText: 2023, 2026 Yaron Shahrabani <sh.yaron@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.katesessions\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 22:08+0000\n"
-"PO-Revision-Date: 2023-11-07 11:24+0200\n"
+"PO-Revision-Date: 2026-11-19 11:04+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
-"X-Generator: Poedit 3.3.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/KateSessionsItemDelegate.qml:58
-#, fuzzy, kde-format
-#| msgid "Session name"
+#, kde-format
 msgctxt "@info:placeholder for text field to create new Kate session with name"
 msgid "Session name"
 msgstr "שם ההפעלה"
 
 #: qml/KateSessionsItemDelegate.qml:69
-#, fuzzy, kde-format
-#| msgid "Create new session and start Kate"
+#, kde-format
 msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Create new session and start Kate"
-msgstr "ליצור הפעלה חדשה עם פתיחת Kate"
+msgstr "ליצור הפעלה חדשה ולהפעיל את Kate"
 
 #: qml/KateSessionsItemDelegate.qml:84
-#, fuzzy, kde-format
-#| msgid "Cancel session creation"
+#, kde-format
 msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Cancel session creation"
 msgstr "ביטול יצירת הפעלה"
 
 #: qml/main.qml:39
-#, fuzzy, kde-format
-#| msgid "Kate Sessions"
+#, kde-format
 msgctxt "@info:tooltip title for widget tooltip"
 msgid "Kate Sessions"
 msgstr "הפעלות של Kate"

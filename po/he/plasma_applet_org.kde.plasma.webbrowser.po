@@ -7,14 +7,14 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-05 13:27+0200\n"
+"PO-Revision-Date: 2026-11-19 10:48+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
-"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 26.08.3\n"
 "Plural-Forms: nplurals=4; plural=(n == 1) ? 0 : ((n == 2) ? 1 : ((n > 10 && "
 "n % 10 == 0) ? 2 : 3));\n"
 
@@ -46,7 +46,7 @@ msgstr "סמל המועדפים של האתר"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "סמל מותאם אישית"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -95,26 +95,22 @@ msgid "Display Navigation Bar"
 msgstr "הצגת סרגל ניווט"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "עם הפתיחה:"
+msgstr "עם הפתיחה, לטעון את:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "לטעון העמוד האחרון בו ביקרת"
+msgstr "העמוד האחרון בו ביקרת"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "נא למלא כתובת או להשאיר ריק כדי לקבל עמוד ריק"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -123,12 +119,10 @@ msgid "Content scaling:"
 msgstr "קנה מידה של תוכן:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "קנה מידה קבוע:"
+msgstr "קנה מידה קבוע"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format

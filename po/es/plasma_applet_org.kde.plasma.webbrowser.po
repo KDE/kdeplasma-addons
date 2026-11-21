@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.webbrowser\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-03 00:30+0100\n"
+"PO-Revision-Date: 2026-11-19 13:36+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/config.qml:12
 #, kde-format
@@ -47,7 +47,7 @@ msgstr "Icono del sitio web"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "Icono personalizado"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -96,26 +96,22 @@ msgid "Display Navigation Bar"
 msgstr "Mostrar barra de navegación"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "Al iniciar:"
+msgstr "Al iniciar, cargar:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "Cargar la última página visitada"
+msgstr "Última página visitada"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "Estriba una URL o deje en blanco para mostrar una página en blanco"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -124,12 +120,10 @@ msgid "Content scaling:"
 msgstr "Escalado del contenido:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "Escalado fijo:"
+msgstr "Escalado fijo"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format
@@ -225,7 +219,3 @@ msgid ""
 msgstr ""
 "Pulse aquí para abrir las siguientes ventanas emergentes bloqueadas:\n"
 "%1"
-
-#~ msgctxt "@option:radio"
-#~ msgid "Always load this page:"
-#~ msgstr "Cargar siempre esta página:"

@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.mediaframe\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-09 01:13+0100\n"
+"PO-Revision-Date: 2026-11-19 13:30+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -17,7 +17,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 26.08.2\n"
+"X-Generator: Lokalize 26.08.3\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -62,12 +62,10 @@ msgid "Randomize order"
 msgstr "Orden aleatorio"
 
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "Pausar la presentación al situar el cursor sobre la imagen"
+msgstr "Pausar la presentación al situar el cursor encima"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -165,15 +163,13 @@ msgstr "La imagen no se transforma"
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "Al pulsar una imagen:"
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr "Clic sobre la imagen para abrirla en una aplicación externa"
+msgstr "Abrirla en una aplicación externa"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format
@@ -246,7 +242,3 @@ msgstr "No se ha seleccionado ningún medio"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "Escoger medio…"
-
-#~ msgctxt "@label:checkbox"
-#~ msgid "General:"
-#~ msgstr "General:"

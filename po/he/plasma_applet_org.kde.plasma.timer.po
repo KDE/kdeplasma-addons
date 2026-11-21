@@ -46,8 +46,7 @@ msgid "Predefined Timers"
 msgstr "קוצבי זמן שהוגדרו מראש"
 
 #: configGeneral.qml:35
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:textbox timer name"
 msgid "Title:"
 msgstr "כותרת:"
@@ -59,85 +58,76 @@ msgid "Set a title for notification and/or widget"
 msgstr ""
 
 #: configGeneral.qml:43
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show seconds"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Only in tooltip"
 msgid "Show seconds:"
-msgstr "הצגת שניות"
+msgstr "הצגת שניות:"
 
 #: configGeneral.qml:48
 #, kde-format
 msgctxt "item:inlistbox completes Show seconds…"
 msgid "Always"
-msgstr ""
+msgstr "תמיד"
 
 #: configGeneral.qml:49
 #, kde-format
 msgctxt "item:inlistbox completes Show seconds…"
 msgid "Only in tooltip"
-msgstr ""
+msgstr "רק בחלונית העצה"
 
 #: configGeneral.qml:57
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Appearance"
+#, kde-format
 msgctxt "@title:label FormGroup title"
 msgid "Appearance"
 msgstr "מראה"
 
 #: configGeneral.qml:59
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Timer title:"
-msgstr "כותרת:"
+msgstr "כותרת קוצב זמן:"
 
 #: configGeneral.qml:65
 #, kde-format
 msgctxt "item:inlistbox completes Timer title…"
 msgid "Always show"
-msgstr ""
+msgstr "להציג תמיד"
 
 #: configGeneral.qml:66
 #, kde-format
 msgctxt "item:inlistbox completes Timer title…"
 msgid "Never show"
-msgstr ""
+msgstr "לא להציג אף פעם"
 
 #: configGeneral.qml:73
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show progress bar"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Progress bar:"
-msgstr "להציג סרגל התקדמות"
+msgstr "סרגל התקדמות:"
 
 #: configGeneral.qml:78
 #, kde-format
 msgctxt "item:inlistbox completes Progress bar…"
 msgid "Always show"
-msgstr ""
+msgstr "להציג תמיד"
 
 #: configGeneral.qml:79
 #, kde-format
 msgctxt "item:inlistbox completes Progress bar…"
 msgid "Never show"
-msgstr ""
+msgstr "לא להציג אף פעם"
 
 #: configGeneral.qml:86
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show remaining time"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Remaining time:"
-msgstr "להציג את הזמן שנותר"
+msgstr "זמן שנותר:"
 
 #: configGeneral.qml:91
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Always show"
-msgstr ""
+msgstr "להציג תמיד"
 
 #: configGeneral.qml:92
 #, kde-format
@@ -163,7 +153,7 @@ msgstr ""
 #, kde-format
 msgctxt "item:inlistbox completes Timer toggle…"
 msgid "Never show"
-msgstr ""
+msgstr "לא להציג אף פעם"
 
 #: configGeneral.qml:114
 #, fuzzy, kde-format
@@ -196,7 +186,7 @@ msgstr "קוצב הזמן הסתיים"
 #, kde-format
 msgctxt "@action:button opens system settings on timer notification page"
 msgid "Open notification settings"
-msgstr ""
+msgstr "פתיחת הגדרות התראה"
 
 #: configGeneral.qml:144
 #, fuzzy, kde-format
@@ -207,9 +197,7 @@ msgid "Run command:"
 msgstr "הרצת פקודה:"
 
 #: configGeneral.qml:162
-#, fuzzy, kde-format
-#| msgctxt "@placeholder, only translate the message in single quotes"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@info:placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox 'קוצב הזמן הסתיים'"
