@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-02-04 00:22+0100\n"
+"PO-Revision-Date: 2026-11-22 00:10+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: qml/config.qml:12
 #, kde-format
@@ -45,7 +45,7 @@ msgstr "웹사이트의 파비콘"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "사용자 정의 아이콘"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -94,26 +94,22 @@ msgid "Display Navigation Bar"
 msgstr "탐색 표시줄 표시"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "시작할 때:"
+msgstr "시작할 때 불러오기:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "마지막으로 방문한 페이지 불러 오기"
+msgstr "마지막으로 방문한 페이지"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "URL을 입력하거나 비워 두면 빈 페이지 사용"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -122,12 +118,10 @@ msgid "Content scaling:"
 msgstr "내용 크기 조정:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "고정 배율:"
+msgstr "고정 배율"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format
@@ -166,8 +160,7 @@ msgid "Go Home"
 msgstr "홈으로 이동"
 
 #: qml/main.qml:101
-#, fuzzy, kde-format
-#| msgid "Open Default URL"
+#, kde-format
 msgctxt "@action:button accessible description"
 msgid "Open Default URL"
 msgstr "기본 URL 열기"
@@ -210,18 +203,13 @@ msgid "Copy Link Address"
 msgstr "링크 주소 복사"
 
 #: qml/main.qml:347
-#, fuzzy, kde-format
-#| msgctxt "An unwanted popup was blocked"
-#| msgid "Popup blocked"
+#, kde-format
 msgctxt "@info:status An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "팝업 차단됨"
 
 #: qml/main.qml:348
-#, fuzzy, kde-format
-#| msgid ""
-#| "Click here to open the following blocked popup:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info:tooltip, %1 is popup url"
 msgid ""
 "Click here to open the following blocked popup:\n"

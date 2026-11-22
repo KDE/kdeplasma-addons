@@ -1020,7 +1020,3 @@ msgstr ""
 #, kde-format
 msgid "Extreme"
 msgstr ""
-
-#~ msgctxt "@title:group"
-#~ msgid "Compact Mode"
-#~ msgstr "Kompakt visning"

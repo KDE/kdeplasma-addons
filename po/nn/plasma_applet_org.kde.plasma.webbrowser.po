@@ -225,7 +225,3 @@ msgid ""
 msgstr ""
 "Trykk her for å opna det blokkerte sprettoppvindauget:\n"
 "%1"
-
-#~ msgctxt "@option:radio"
-#~ msgid "Always load this page:"
-#~ msgstr "Last alltid denne sida:"

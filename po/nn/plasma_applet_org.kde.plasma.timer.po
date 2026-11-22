@@ -325,15 +325,3 @@ msgstr "S&topp"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "&Nullstill"
-
-#~ msgctxt "@title:label"
-#~ msgid "Display:"
-#~ msgstr "Vising:"
-
-#~ msgctxt "@option:check"
-#~ msgid "Show title:"
-#~ msgstr "Vis tittel:"
-
-#~ msgctxt "@title:label"
-#~ msgid "On timeout:"
-#~ msgstr "Ved nedtelt:"

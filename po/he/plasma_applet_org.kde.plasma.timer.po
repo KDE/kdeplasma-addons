@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-20 01:13+0000\n"
-"PO-Revision-Date: 2026-11-13 14:04+0200\n"
+"PO-Revision-Date: 2026-11-21 08:00+0200\n"
 "Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
 "Language-Team: Hebrew <kde-l10n-he@kde.org>\n"
 "Language: he\n"
@@ -55,7 +55,7 @@ msgstr "כותרת:"
 #, kde-format
 msgctxt "@info:placeholder for empty timer title"
 msgid "Set a title for notification and/or widget"
-msgstr ""
+msgstr "הגדרת כותרת להתראה ו/או לווידג׳ט"
 
 #: configGeneral.qml:43
 #, kde-format
@@ -133,21 +133,19 @@ msgstr "להציג תמיד"
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Show on large widgets and popups"
-msgstr ""
+msgstr "הצגה בווידג׳טים גדולים וחלוניות צצות"
 
 #: configGeneral.qml:99
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show timer toggle"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Never show"
 msgid "Timer toggle:"
-msgstr "הצגת מתג קוצב זמן"
+msgstr "מתג קוצב זמן:"
 
 #: configGeneral.qml:104
 #, kde-format
 msgctxt "item:inlistbox completes Timer toggle…"
 msgid "Show on small widgets"
-msgstr ""
+msgstr "הצגה בווידג׳טים קטנים"
 
 #: configGeneral.qml:105
 #, kde-format
@@ -156,31 +154,25 @@ msgid "Never show"
 msgstr "לא להציג אף פעם"
 
 #: configGeneral.qml:114
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@title:label FormGroup title"
 msgid "When timer finished"
-msgstr "קוצב הזמן הסתיים"
+msgstr "כאשר קוצב זמן מסתיים"
 
 #: configGeneral.qml:116
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification:"
+#, kde-format
 msgctxt ""
 "@option:check prefix for checkbox with text field for notification text"
 msgid "Show notification:"
 msgstr "הצגת התראה:"
 
 #: configGeneral.qml:131
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt ""
 "@info:placeholder default notification text if no custom notification set, "
 "keep in sync with the one in main.qml"
 msgid "Timer finished"
-msgstr "קוצב הזמן הסתיים"
+msgstr "קוצב זמן הסתיים"
 
 #: configGeneral.qml:139
 #, kde-format
@@ -189,9 +181,7 @@ msgid "Open notification settings"
 msgstr "פתיחת הגדרות התראה"
 
 #: configGeneral.qml:144
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Run command:"
+#, kde-format
 msgctxt "@option:check prefix for checkbox with text field for command"
 msgid "Run command:"
 msgstr "הרצת פקודה:"

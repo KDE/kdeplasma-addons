@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2015, 2016, 2018, 2019, 2022, 2023, 2024, 2025 Shinjo Park <peremen@gmail.com>
+# SPDX-FileCopyrightText: 2015, 2016, 2018, 2019, 2022, 2023, 2024, 2025, 2026 Shinjo Park <peremen@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2025-04-06 23:04+0200\n"
+"PO-Revision-Date: 2026-11-22 00:07+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: qml/config.qml:11
 #, kde-format
@@ -78,15 +78,13 @@ msgid "Show technical session information"
 msgstr "기술적인 세션 정보 표시"
 
 #: qml/main.qml:46
-#, fuzzy, kde-format
-#| msgid "You are logged in as <b>%1</b>"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle"
 msgid "You are logged in as <b>%1</b>"
 msgstr "<b>%1</b>(으)로 로그인되었습니다"
 
 #: qml/main.qml:147
-#, fuzzy, kde-format
-#| msgid "Current user"
+#, kde-format
 msgctxt "@item subtitle for current user entry"
 msgid "Current user"
 msgstr "현재 사용자"

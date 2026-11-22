@@ -245,7 +245,3 @@ msgstr "Inkje medium er valt"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "Vel medium …"
-
-#~ msgctxt "@label:checkbox"
-#~ msgid "General:"
-#~ msgstr "Generelt:"

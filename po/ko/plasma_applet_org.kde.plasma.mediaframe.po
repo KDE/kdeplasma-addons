@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2022, 2025 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2016, 2017, 2018, 2019, 2022, 2025, 2026 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2025-10-09 00:40+0200\n"
+"PO-Revision-Date: 2026-11-22 00:05+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 24.12.3\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -30,29 +30,25 @@ msgid "Behavior"
 msgstr "행동"
 
 #: qml/ConfigBehavior.qml:33
-#, fuzzy, kde-format
-#| msgid "Change picture every:"
+#, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "그림 변경 주기:"
 
 #: qml/ConfigBehavior.qml:52
-#, fuzzy, kde-format
-#| msgid "Hours"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "시간"
 
 #: qml/ConfigBehavior.qml:66
-#, fuzzy, kde-format
-#| msgid "Minutes"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
 msgstr "분"
 
 #: qml/ConfigBehavior.qml:80
-#, fuzzy, kde-format
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "초"
@@ -64,12 +60,10 @@ msgid "Randomize order"
 msgstr "무작위 순서 사용"
 
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "그림 위에 커서가 있을 때 슬라이드 쇼 일시 정지"
+msgstr "위에 커서가 있을 때 슬라이드 쇼 일시 정지"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -165,15 +159,13 @@ msgstr "그림 크기를 조정하지 않음"
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "그림을 클릭할 때:"
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr "그림을 클릭해서 외부 앱으로 열기"
+msgstr "외부 프로그램으로 열기"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format
@@ -221,19 +213,19 @@ msgstr "폴더 선택"
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "이전 그림 표시"
 
 #: qml/main.qml:173
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "다음 그림 표시"
 
 #: qml/main.qml:183
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "기본 그림 뷰어로 열기"
 
 #: qml/main.qml:355
 #, kde-format

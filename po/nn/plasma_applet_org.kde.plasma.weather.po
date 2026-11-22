@@ -982,7 +982,3 @@ msgstr "Svært høg"
 #, kde-format
 msgid "Extreme"
 msgstr "Ekstrem"
-
-#~ msgctxt "@title:group"
-#~ msgid "Compact Mode"
-#~ msgstr "Kompakt vising"

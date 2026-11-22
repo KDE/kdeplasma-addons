@@ -7,15 +7,15 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-09-21 23:47+0200\n"
-"Last-Translator: Shinjo Park <peremen@gmail.com>\n"
-"Language-Team: Korean\n"
+"PO-Revision-Date: 2026-11-22 00:09+0100\n"
+"Last-Translator: Shinjo Park <kde@peremen.name>\n"
+"Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 26.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: i18n.dat:1
 #, kde-format
@@ -403,7 +403,7 @@ msgstr "맑은 하늘"
 #, kde-format
 msgctxt "weather credit"
 msgid "Weather data by Open-Meteo"
-msgstr ""
+msgstr "Open-Meteo의 날씨 데이터"
 
 #: qml/cards/ForecastDelegate.qml:95
 #, kde-format
@@ -415,7 +415,7 @@ msgstr "%1 (%2%)"
 #, kde-format
 msgctxt "High and low temperature wrapper"
 msgid "%1/<font color='%2'>%3</font>"
-msgstr ""
+msgstr "%1/<font color='%2'>%3</font>"
 
 #: qml/cards/ForecastDelegate.qml:124
 #, kde-format
@@ -512,28 +512,22 @@ msgid "Humidity"
 msgstr "습도"
 
 #: qml/config/ConfigAppearance.qml:120
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Show temperature:"
+#, kde-format
 msgctxt "@label"
 msgid "Show temperature graph:"
-msgstr "온도 표시:"
+msgstr "온도 그래프 표시:"
 
 #: qml/config/ConfigAppearance.qml:123
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@option:check"
 msgid "Hourly Forecast"
-msgstr "예보"
+msgstr "시간별 예보"
 
 #: qml/config/ConfigAppearance.qml:130
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@option:check"
 msgid "Day Forecast"
-msgstr "예보"
+msgstr "날짜별 예보"
 
 #: qml/config/ConfigUnits.qml:36
 #, kde-format
@@ -637,147 +631,121 @@ msgstr ""
 "할 수도 있습니다. 나중에 다시 시도하십시오."
 
 #: qml/DayForecastGraph.qml:42 qml/HourlyForecastGraph.qml:44
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Temperature"
-msgstr "온도"
+msgstr "기온"
 
 #: qml/DayForecastGraph.qml:59 qml/HourlyForecastGraph.qml:61
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "High Temperature"
-msgstr "온도"
+msgstr "최고 기온"
 
 #: qml/DayForecastGraph.qml:76 qml/HourlyForecastGraph.qml:78
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Temperature"
+#, kde-format
 msgctxt "@label"
 msgid "Low Temperature"
-msgstr "온도"
+msgstr "최저 기온"
 
 #: qml/DayForecastGraph.qml:93 qml/HourlyForecastGraph.qml:95
 #, kde-format
 msgctxt "@label"
 msgid "Chance of precipitation"
-msgstr ""
+msgstr "비 올 확률"
 
 #: qml/DetailsView.qml:35
-#, fuzzy, kde-format
-#| msgctxt "@label ground temperature"
-#| msgid "Dewpoint:"
+#, kde-format
 msgctxt "@label ground temperature"
 msgid "Dewpoint"
-msgstr "이슬점:"
+msgstr "이슬점"
 
 #: qml/DetailsView.qml:40
-#, fuzzy, kde-format
-#| msgctxt "@option:check Show in tooltip: pressure"
-#| msgid "Pressure"
+#, kde-format
 msgctxt "@label"
 msgid "Pressure"
 msgstr "기압"
 
 #: qml/DetailsView.qml:45
-#, fuzzy, kde-format
-#| msgctxt "@label pressure tendency, rising/falling/steady"
-#| msgid "Pressure Tendency:"
+#, kde-format
 msgctxt "@label pressure tendency, rising/falling/steady"
 msgid "Pressure tendency"
-msgstr "기압 동향:"
+msgstr "기압 동향"
 
 #: qml/DetailsView.qml:50
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Visibility:"
+#, kde-format
 msgctxt "@label"
 msgid "Visibility"
-msgstr "가시 거리:"
+msgstr "가시 거리"
 
 #: qml/DetailsView.qml:63
-#, fuzzy, kde-format
-#| msgctxt "@option:check Show in tooltip: humidity"
-#| msgid "Humidity"
+#, kde-format
 msgctxt "@label"
 msgid "Humidity"
 msgstr "습도"
 
 #: qml/DetailsView.qml:68
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Wind Gust:"
+#, kde-format
 msgctxt "@label"
 msgid "Wind gust"
-msgstr "돌풍:"
+msgstr "돌풍"
 
 #: qml/DetailsView.qml:73
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox"
-#| msgid "Wind speed:"
+#, kde-format
 msgctxt "@label"
 msgid "Wind speed"
-msgstr "풍속:"
+msgstr "풍속"
 
 #: qml/ForecastNavigation.qml:35
 #, kde-format
 msgctxt "@action"
 msgid "Go to first day"
-msgstr ""
+msgstr "첫 날짜로 이동"
 
 #: qml/ForecastNavigation.qml:54
 #, kde-format
 msgctxt "@action"
 msgid "Go to previous day"
-msgstr ""
+msgstr "이전 날짜로 이동"
 
 #: qml/ForecastNavigation.qml:135
 #, kde-format
 msgctxt "@action"
 msgid "Go to next day"
-msgstr ""
+msgstr "다음 날짜로 이동"
 
 #: qml/ForecastNavigation.qml:154
 #, kde-format
 msgctxt "@action"
 msgid "Go to last day"
-msgstr ""
+msgstr "마지막 날짜로 이동"
 
 #: qml/FullRepresentation.qml:61
-#, fuzzy, kde-format
-#| msgctxt "@info:placeholder"
-#| msgid "Unable to load weather forecast"
+#, kde-format
 msgctxt "@action:button"
 msgid "Return to Weather Forecast"
-msgstr "일기 예보를 불러올 수 없음"
+msgstr "일기 예보로 돌아가기"
 
 #: qml/FullRepresentation.qml:78
-#, fuzzy, kde-format
-#| msgid "Please set your location"
+#, kde-format
 msgctxt "@info PlaceholderMessage text"
 msgid "Please set your location"
 msgstr "위치를 설정하십시오"
 
 #: qml/FullRepresentation.qml:81
-#, fuzzy, kde-format
-#| msgid "Set location…"
+#, kde-format
 msgctxt "@action:button PlaceholderMessage helpfulAction"
 msgid "Set location…"
 msgstr "위치 설정…"
 
 #: qml/FullRepresentation.qml:95
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information for %1"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage text"
 msgid "Unable to retrieve weather information for %1"
 msgstr "%1의 날씨 정보를 가져올 수 없음"
 
 #: qml/FullRepresentation.qml:95
-#, fuzzy, kde-format
-#| msgid "Unable to retrieve weather information"
+#, kde-format
 msgctxt "@info:status PlaceholderMessage text"
 msgid "Unable to retrieve weather information"
 msgstr "날씨 정보를 가져올 수 없음"
@@ -799,11 +767,7 @@ msgid "Unable to load weather forecast"
 msgstr "일기 예보를 불러올 수 없음"
 
 #: qml/FullRepresentation.qml:106
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:usagetip"
-#| msgid ""
-#| "There may be a technical issue with the weather provider. If the issue "
-#| "persists for longer than a day, submit a bug report."
+#, kde-kuit-format
 msgctxt "@info:usagetip"
 msgid ""
 "There may be a technical issue with the weather provider. If the issue "
@@ -811,7 +775,8 @@ msgid ""
 "cgi?product=plasmashell&component=Weather widget'>submit a bug report</link>."
 msgstr ""
 "일기 예보 공급자에 기술적인 문제가 발생했을 수도 있습니다. 하루 이상 문제가 "
-"지속된다면 버그를 보고해 주십시오."
+"지속된다면  <link url='https://bugs.kde.org/enter_bug.cgi?"
+"product=plasmashell&component=Weather widget'> 버그를 보고해 주십시오</link>."
 
 #: qml/LocationHeader.qml:48
 #, kde-format
@@ -868,8 +833,7 @@ msgid "%1 (%2)"
 msgstr "%1(%2)"
 
 #: qml/main.qml:166
-#, fuzzy, kde-format
-#| msgid "Humidity: %1"
+#, kde-format
 msgctxt "@info:tooltip fragment, %1 is humidity in configured unit"
 msgid "Humidity: %1"
 msgstr "습도: %1"
@@ -881,32 +845,25 @@ msgid "Show more information"
 msgstr "더 많은 정보 표시"
 
 #: qml/StackedView.qml:56
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@title"
 msgid "Hourly Forecast"
-msgstr "예보"
+msgstr "시간별 예보"
 
 #: qml/StackedView.qml:86
-#, fuzzy, kde-format
-#| msgctxt "@title:tab Weather forecast"
-#| msgid "Forecast"
+#, kde-format
 msgctxt "@title %1 is a number of days"
 msgid "%1-Day Forecast"
-msgstr "예보"
+msgstr "%1일 예보"
 
 #: qml/TabbedView.qml:62
 #, kde-format
 msgctxt "@title:tab"
 msgid "Hourly"
-msgstr ""
+msgstr "매 시간"
 
 #: qml/TabbedView.qml:77
-#, fuzzy, kde-format
-#| msgctxt "Forecast period timeframe"
-#| msgid "1 Day"
-#| msgid_plural "%1 Days"
+#, kde-format
 msgctxt "@title:tab"
 msgid "%1 Day"
 msgid_plural "%1 Days"
@@ -922,8 +879,7 @@ msgid "Feels like %1"
 msgstr "체감: %1"
 
 #: qml/WeatherPage.qml:96
-#, fuzzy, kde-format
-#| msgid "Today"
+#, kde-format
 msgctxt "@label"
 msgid "Today"
 msgstr "오늘"
@@ -932,20 +888,19 @@ msgstr "오늘"
 #, kde-format
 msgctxt "@label"
 msgid "Tomorrow"
-msgstr ""
+msgstr "내일"
 
 #: qml/WeatherPage.qml:104
 #, kde-format
 msgctxt "@label"
 msgid "Today to Tomorrow"
-msgstr ""
+msgstr "오늘부터 내일까지"
 
 #: qml/WeatherPage.qml:106
-#, fuzzy, kde-format
-#| msgid "Today"
+#, kde-format
 msgctxt "@label %1 is a day of the week"
 msgid "Today to %1"
-msgstr "오늘"
+msgstr "오늘부터 %1까지"
 
 #: util.cpp:42
 #, kde-format
@@ -954,9 +909,7 @@ msgid "°"
 msgstr "°"
 
 #: util.cpp:46 util.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "temperature, unit"
-#| msgid "%1%2"
+#, kde-format
 msgctxt "temperature unitsymbol"
 msgid "%1%2"
 msgstr "%1%2"
@@ -983,15 +936,13 @@ msgstr "%1(%2)"
 #, kde-format
 msgctxt "Short for Day"
 msgid "D"
-msgstr ""
+msgstr "낮"
 
 #: weatherdata/futuredays.cpp:295
-#, fuzzy, kde-format
-#| msgctxt "wind direction"
-#| msgid "N"
+#, kde-format
 msgctxt "Short for Night"
 msgid "N"
-msgstr "북"
+msgstr "밤"
 
 #: weatherdata/lastobservation.cpp:262
 #, kde-format
