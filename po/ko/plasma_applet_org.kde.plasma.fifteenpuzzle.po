@@ -7,7 +7,7 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-04-24 00:45+0000\n"
-"PO-Revision-Date: 2026-04-26 21:39+0200\n"
+"PO-Revision-Date: 2026-11-22 00:03+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 25.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -39,7 +39,7 @@ msgstr "배경:"
 #, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color:"
-msgstr "색:"
+msgstr "색상:"
 
 #: qml/configAppearance.qml:84
 #, kde-format
