@@ -1,13 +1,13 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
-# Shinjo Park <kde@peremen.name>, 2015, 2016, 2018, 2019, 2020, 2021, 2022.
+# SPDX-FileCopyrightText: 2015, 2016, 2018, 2019, 2020, 2021, 2022, 2026 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:18+0000\n"
-"PO-Revision-Date: 2022-02-20 22:17+0100\n"
+"PO-Revision-Date: 2026-11-22 00:06+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 21.08.1\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #: package/contents/config/config.qml:12
 #, kde-format
@@ -103,7 +103,7 @@ msgstr "빠른 실행"
 #, kde-format
 msgctxt "@info"
 msgid "Add launchers by Drag and Drop or by using the context menu."
-msgstr "상황에 맞는 메뉴나 끌어다 놓기로 실행 아이콘을 추가하십시오."
+msgstr "상황에 맞는 메뉴나 드래그 앤 드롭으로 실행 아이콘을 추가하십시오."
 
 #: package/contents/ui/main.qml:171
 #, kde-format
