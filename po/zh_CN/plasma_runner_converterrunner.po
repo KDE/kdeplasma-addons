@@ -33,13 +33,10 @@ msgstr ""
 "以使用单位转换器小程序查找所有可用的单位。"
 
 #: converterrunner.cpp:47
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
-#| msgid "in;to;as"
+#, kde-format
 msgctxt ""
 "list of words that can be used as amount of 'unit1' [in|to|as] 'unit2' (e.g. "
 "'km [in|to|as] miles'). Can be more (or less) than three words, if it makes "
 "sense. Do not put spaces before or after the `;`!"
 msgid "in;to;as"
-msgstr "in;to;as"
+msgstr "转;转为;转换到;转换为;in;to;as"

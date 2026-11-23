@@ -31,29 +31,25 @@ msgid "Behavior"
 msgstr "行为"
 
 #: qml/ConfigBehavior.qml:33
-#, fuzzy, kde-format
-#| msgid "Change picture every:"
+#, kde-format
 msgctxt "@label:group form label for spinboxes"
 msgid "Change picture every:"
 msgstr "图像更换间隔时间："
 
 #: qml/ConfigBehavior.qml:52
-#, fuzzy, kde-format
-#| msgid "Hours"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Hours"
 msgstr "小时"
 
 #: qml/ConfigBehavior.qml:66
-#, fuzzy, kde-format
-#| msgid "Minutes"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Minutes"
-msgstr "分"
+msgstr "分钟"
 
 #: qml/ConfigBehavior.qml:80
-#, fuzzy, kde-format
-#| msgid "Seconds"
+#, kde-format
 msgctxt "@item:valuesuffix"
 msgid "Seconds"
 msgstr "秒"
@@ -65,12 +61,10 @@ msgid "Randomize order"
 msgstr "随机顺序"
 
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "鼠标光标悬停在图像上时暂停幻灯片切换"
+msgstr "悬停时暂停幻灯片"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -166,15 +160,13 @@ msgstr "图片将不进行变形处理"
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "点击图像时："
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr "点击图像在外部程序中打开"
+msgstr "用外部程序打开"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format
@@ -222,19 +214,19 @@ msgstr "选择一个文件夹"
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show previous image"
-msgstr ""
+msgstr "显示上一张图像"
 
 #: qml/main.qml:173
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Show next image"
-msgstr ""
+msgstr "显示下一张图像"
 
 #: qml/main.qml:183
 #, kde-format
 msgctxt "@action:button icon-only"
 msgid "Open in default image viewer"
-msgstr ""
+msgstr "用默认图像查看器打开"
 
 #: qml/main.qml:355
 #, kde-format
@@ -247,7 +239,3 @@ msgstr "没有选择媒体"
 msgctxt "@action:button opens settings dialog"
 msgid "Choose media…"
 msgstr "选择媒体…"
-
-#~ msgctxt "@label:checkbox"
-#~ msgid "General:"
-#~ msgstr "常规："

@@ -37,20 +37,16 @@ msgid "Background:"
 msgstr "背景："
 
 #: qml/configAppearance.qml:52
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens background color picker"
 msgid "Color"
-msgstr "颜色："
+msgstr "颜色"
 
 #: qml/configAppearance.qml:67
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens background image file picker"
-#| msgid "Image:"
+#, kde-format
 msgctxt "@label:chooser opens background image file picker"
 msgid "Image"
-msgstr "图像："
+msgstr "图像"
 
 #: qml/configAppearance.qml:77
 #, kde-format
@@ -83,12 +79,10 @@ msgid "Tile labels:"
 msgstr "方砖标签："
 
 #: qml/configAppearance.qml:132
-#, fuzzy, kde-format
-#| msgctxt "@label:chooser opens label color picker"
-#| msgid "Color:"
+#, kde-format
 msgctxt "@label:chooser opens label color picker"
 msgid "Color"
-msgstr "颜色："
+msgstr "颜色"
 
 #: qml/configAppearance.qml:147
 #, kde-format
@@ -121,15 +115,13 @@ msgid "Solved! Try again."
 msgstr "解谜成功！再来一次。"
 
 #: qml/main.qml:39
-#, fuzzy, kde-format
-#| msgid "Fifteen Puzzle"
+#, kde-format
 msgctxt "@info:tooltip main title for widget"
 msgid "Fifteen Puzzle"
 msgstr "十五格拼图"
 
 #: qml/main.qml:40
-#, fuzzy, kde-format
-#| msgid "Solve by arranging in order"
+#, kde-format
 msgctxt "@info:tooltip subtitle for widget"
 msgid "Solve by arranging in order"
 msgstr "图块排序解谜游戏"

@@ -94,7 +94,7 @@ msgstr "埃塞俄比亚日历"
 #, kde-format
 msgctxt "@item:inlist"
 msgid "Bikram Sambat"
-msgstr "比克拉姆纪年"
+msgstr "比克拉姆·萨姆巴特历"
 
 #: config/qml/AlternateCalendarConfig.qml:48
 #, kde-format

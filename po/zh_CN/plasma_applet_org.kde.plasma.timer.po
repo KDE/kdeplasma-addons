@@ -46,141 +46,125 @@ msgstr " 计时器预设"
 #, kde-format
 msgctxt "@label:textbox timer name"
 msgid "Title:"
-msgstr ""
+msgstr "标题："
 
 #: configGeneral.qml:39
 #, kde-format
 msgctxt "@info:placeholder for empty timer title"
 msgid "Set a title for notification and/or widget"
-msgstr ""
+msgstr "设置通知或小部件的标题"
 
 #: configGeneral.qml:43
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show seconds"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Only in tooltip"
 msgid "Show seconds:"
-msgstr "显示秒"
+msgstr "显示秒数："
 
 #: configGeneral.qml:48
 #, kde-format
 msgctxt "item:inlistbox completes Show seconds…"
 msgid "Always"
-msgstr ""
+msgstr "始终显示"
 
 #: configGeneral.qml:49
 #, kde-format
 msgctxt "item:inlistbox completes Show seconds…"
 msgid "Only in tooltip"
-msgstr ""
+msgstr "仅悬停时显示"
 
 #: configGeneral.qml:57
 #, kde-format
 msgctxt "@title:label FormGroup title"
 msgid "Appearance"
-msgstr ""
+msgstr "外观"
 
 #: configGeneral.qml:59
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Timer title:"
-msgstr "计时结束"
+msgstr "计时器标题："
 
 #: configGeneral.qml:65
 #, kde-format
 msgctxt "item:inlistbox completes Timer title…"
 msgid "Always show"
-msgstr ""
+msgstr "始终显示"
 
 #: configGeneral.qml:66
 #, kde-format
 msgctxt "item:inlistbox completes Timer title…"
 msgid "Never show"
-msgstr ""
+msgstr "从不显示"
 
 #: configGeneral.qml:73
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show progress bar"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Progress bar:"
-msgstr "显示进度条"
+msgstr "进度条："
 
 #: configGeneral.qml:78
 #, kde-format
 msgctxt "item:inlistbox completes Progress bar…"
 msgid "Always show"
-msgstr ""
+msgstr "始终显示"
 
 #: configGeneral.qml:79
 #, kde-format
 msgctxt "item:inlistbox completes Progress bar…"
 msgid "Never show"
-msgstr ""
+msgstr "从不显示"
 
 #: configGeneral.qml:86
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show remaining time"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Always show"
 msgid "Remaining time:"
-msgstr "显示剩余时间"
+msgstr "剩余时间："
 
 #: configGeneral.qml:91
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Always show"
-msgstr ""
+msgstr "始终显示"
 
 #: configGeneral.qml:92
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Show on large widgets and popups"
-msgstr ""
+msgstr "仅在大尺寸小部件和弹窗中显示"
 
 #: configGeneral.qml:99
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show timer toggle"
+#, kde-format
 msgctxt "@label:listbox completes e.g. … Never show"
 msgid "Timer toggle:"
-msgstr "显示计时器开关"
+msgstr "计时器切换按钮："
 
 #: configGeneral.qml:104
 #, kde-format
 msgctxt "item:inlistbox completes Timer toggle…"
 msgid "Show on small widgets"
-msgstr ""
+msgstr "在小部件中显示"
 
 #: configGeneral.qml:105
 #, kde-format
 msgctxt "item:inlistbox completes Timer toggle…"
 msgid "Never show"
-msgstr ""
+msgstr "从不显示"
 
 #: configGeneral.qml:114
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@title:label FormGroup title"
 msgid "When timer finished"
-msgstr "计时结束"
+msgstr "计时器结束时显示"
 
 #: configGeneral.qml:116
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Show notification:"
+#, kde-format
 msgctxt ""
 "@option:check prefix for checkbox with text field for notification text"
 msgid "Show notification:"
 msgstr "显示通知："
 
 #: configGeneral.qml:131
-#, fuzzy, kde-format
-#| msgctxt "@placeholder"
-#| msgid "Timer finished"
+#, kde-format
 msgctxt ""
 "@info:placeholder default notification text if no custom notification set, "
 "keep in sync with the one in main.qml"
@@ -191,20 +175,16 @@ msgstr "计时结束"
 #, kde-format
 msgctxt "@action:button opens system settings on timer notification page"
 msgid "Open notification settings"
-msgstr ""
+msgstr "打开通知设置"
 
 #: configGeneral.qml:144
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Run command:"
+#, kde-format
 msgctxt "@option:check prefix for checkbox with text field for command"
 msgid "Run command:"
 msgstr "运行命令："
 
 #: configGeneral.qml:162
-#, fuzzy, kde-format
-#| msgctxt "@placeholder, only translate the message in single quotes"
-#| msgid "kdialog --msgbox 'Timer finished'"
+#, kde-format
 msgctxt "@info:placeholder, only translate the message in single quotes"
 msgid "kdialog --msgbox 'Timer finished'"
 msgstr "kdialog --msgbox '计时结束'"
@@ -216,10 +196,7 @@ msgid "Add"
 msgstr "添加"
 
 #: configTimes.qml:85
-#, fuzzy, kde-format
-#| msgid ""
-#| "If you add predefined timers here, they will appear in the widget’s "
-#| "context menu."
+#, kde-format
 msgctxt "@info:usagetip PlaceHolderMessage empty ListView"
 msgid ""
 "If you add predefined timers here, they will appear in the widget’s context "
@@ -227,43 +204,37 @@ msgid ""
 msgstr "在此处添加计时器预设后，它们将显示在计时器小部件的右键菜单中。"
 
 #: configTimes.qml:191
-#, fuzzy, kde-format
-#| msgid "Apply"
+#, kde-format
 msgctxt "@action:button accepts change timer"
 msgid "Apply"
 msgstr "应用"
 
 #: configTimes.qml:210
-#, fuzzy, kde-format
-#| msgid "Cancel"
+#, kde-format
 msgctxt "@action:button aborts editing timer"
 msgid "Cancel"
 msgstr "取消"
 
 #: configTimes.qml:229
-#, fuzzy, kde-format
-#| msgid "Edit"
+#, kde-format
 msgctxt "@action:button enter tmer edit mode"
 msgid "Edit"
 msgstr "编辑"
 
 #: configTimes.qml:251
-#, fuzzy, kde-format
-#| msgid "Delete"
+#, kde-format
 msgctxt "@action:button delete timer"
 msgid "Delete"
-msgstr "删除"
+msgstr "移除"
 
 #: main.qml:41
-#, fuzzy, kde-format
-#| msgid "%1 is running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 正在计时"
 
 #: main.qml:43
-#, fuzzy, kde-format
-#| msgid "%1 not running"
+#, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 不在计时"
@@ -274,13 +245,10 @@ msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
 "in hh:mm:ss"
 msgid "%1 of %2 left"
-msgstr ""
+msgstr "剩余 %2，总共 %1"
 
 #: main.qml:48
-#, fuzzy, kde-format
-#| msgid ""
-#| "Use mouse wheel to change digits or choose from predefined timers in the "
-#| "context menu"
+#, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
 "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -293,29 +261,25 @@ msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
 "localized durations"
 msgid "%1 left of %2"
-msgstr ""
+msgstr "剩余 %2，总共 %1"
 
 #: main.qml:87
-#, fuzzy, kde-format
-#| msgid "Timer"
+#, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "计时器"
 
 #: main.qml:88
-#, fuzzy, kde-format
-#| msgid "Timer finished"
+#, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "计时结束"
 
 #: main.qml:118
-#, fuzzy, kde-format
-#| msgctxt "@action"
-#| msgid "&Start"
+#, kde-format
 msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
-msgstr "开始(&S)"
+msgstr "开始 (%1) (&S)"
 
 #: main.qml:119
 #, kde-format
@@ -334,36 +298,3 @@ msgstr "停止(&T)"
 msgctxt "@action"
 msgid "&Reset"
 msgstr "重置(&R)"
-
-#~ msgctxt "@title:label"
-#~ msgid "Display:"
-#~ msgstr "显示："
-
-#~ msgctxt "@option:check"
-#~ msgid "Show title:"
-#~ msgstr "显示标题："
-
-#~ msgctxt "@title:label"
-#~ msgid "On timeout:"
-#~ msgstr "超时后："
-
-#, fuzzy
-#~| msgid "Remaining time left: %1 second"
-#~| msgid_plural "Remaining time left: %1 seconds"
-#~ msgctxt ""
-#~ "@info:tooltip for widget, subtitle, %1 is remaining time in seconds for "
-#~ "running timer"
-#~ msgid "Remaining time left: %1 second"
-#~ msgid_plural "Remaining time left: %1 seconds"
-#~ msgstr[0] "剩余时间：%1 秒"
-
-#, fuzzy
-#~| msgid "Scroll over digits to change time"
-#~ msgctxt "@info:usagetip"
-#~ msgid "Scroll over digits to change time"
-#~ msgstr "鼠标滚轮在数字上方滚动，即可更改时间"
-
-#~ msgctxt "remaining time"
-#~ msgid "%1s"
-#~ msgid_plural "%1s"
-#~ msgstr[0] "%1秒"

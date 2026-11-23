@@ -19,29 +19,25 @@ msgstr ""
 "X-Crowdin-File-ID: 43099\n"
 
 #: qml/KateSessionsItemDelegate.qml:58
-#, fuzzy, kde-format
-#| msgid "Session name"
+#, kde-format
 msgctxt "@info:placeholder for text field to create new Kate session with name"
 msgid "Session name"
 msgstr "会话名称"
 
 #: qml/KateSessionsItemDelegate.qml:69
-#, fuzzy, kde-format
-#| msgid "Create new session and start Kate"
+#, kde-format
 msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Create new session and start Kate"
 msgstr "创建新会话并启动 Kate"
 
 #: qml/KateSessionsItemDelegate.qml:84
-#, fuzzy, kde-format
-#| msgid "Cancel session creation"
+#, kde-format
 msgctxt "@action:button tooltip/accessible for icon only button"
 msgid "Cancel session creation"
 msgstr "取消创建会话"
 
 #: qml/main.qml:39
-#, fuzzy, kde-format
-#| msgid "Kate Sessions"
+#, kde-format
 msgctxt "@info:tooltip title for widget tooltip"
 msgid "Kate Sessions"
 msgstr "Kate 会话"

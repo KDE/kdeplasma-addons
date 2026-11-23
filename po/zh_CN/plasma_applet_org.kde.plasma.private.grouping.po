@@ -19,8 +19,7 @@ msgstr ""
 "X-Crowdin-File-ID: 42899\n"
 
 #: qml/main.qml:111
-#, fuzzy, kde-format
-#| msgid "Drag applets here"
+#, kde-format
 msgctxt "@info:usagetip"
 msgid "Drag applets here"
 msgstr "拖动小程序到此处"

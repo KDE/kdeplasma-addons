@@ -32,4 +32,4 @@ msgstr "新建 Kate 会话"
 #, kde-format
 msgctxt "Name of Konsole's built-in default profile"
 msgid "Built-in"
-msgstr ""
+msgstr "内建"

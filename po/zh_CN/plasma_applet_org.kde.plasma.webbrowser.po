@@ -46,7 +46,7 @@ msgstr "网站图标"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "自定义图标"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -93,26 +93,22 @@ msgid "Display Navigation Bar"
 msgstr "显示导航栏"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "启动时："
+msgstr "启动时加载："
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "加载最后访问页面"
+msgstr "上次访问的页面"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "输入 URL 或留空 (显示空白页面)"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -121,12 +117,10 @@ msgid "Content scaling:"
 msgstr "网页缩放："
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "固定比例："
+msgstr "固定比例"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format
@@ -165,8 +159,7 @@ msgid "Go Home"
 msgstr "转到主页"
 
 #: qml/main.qml:101
-#, fuzzy, kde-format
-#| msgid "Open Default URL"
+#, kde-format
 msgctxt "@action:button accessible description"
 msgid "Open Default URL"
 msgstr "打开默认 URL"
@@ -209,18 +202,13 @@ msgid "Copy Link Address"
 msgstr "复制链接地址"
 
 #: qml/main.qml:347
-#, fuzzy, kde-format
-#| msgctxt "An unwanted popup was blocked"
-#| msgid "Popup blocked"
+#, kde-format
 msgctxt "@info:status An unwanted popup was blocked"
 msgid "Popup blocked"
 msgstr "弹窗已被拦截"
 
 #: qml/main.qml:348
-#, fuzzy, kde-format
-#| msgid ""
-#| "Click here to open the following blocked popup:\n"
-#| "%1"
+#, kde-format
 msgctxt "@info:tooltip, %1 is popup url"
 msgid ""
 "Click here to open the following blocked popup:\n"
@@ -228,7 +216,3 @@ msgid ""
 msgstr ""
 "点击此处以打开以下已屏蔽的弹窗：\n"
 "%1"
-
-#~ msgctxt "@option:radio"
-#~ msgid "Always load this page:"
-#~ msgstr "总是加载此页面："

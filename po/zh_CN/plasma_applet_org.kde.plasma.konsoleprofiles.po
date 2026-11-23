@@ -25,8 +25,7 @@ msgid "Konsole Profiles"
 msgstr "Konsole 配置方案"
 
 #: main.qml:91
-#, fuzzy, kde-format
-#| msgid "Arbitrary String Which Says Something"
+#, kde-format
 msgctxt "@label unused string, just for sizing"
 msgid "Arbitrary String Which Says Something"
 msgstr "任何有意义的字符串"

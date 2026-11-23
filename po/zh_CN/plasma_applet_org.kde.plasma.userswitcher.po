@@ -79,15 +79,13 @@ msgid "Show technical session information"
 msgstr "显示技术性会话信息"
 
 #: qml/main.qml:46
-#, fuzzy, kde-format
-#| msgid "You are logged in as <b>%1</b>"
+#, kde-format
 msgctxt "@info:tooltip widget subtitle"
 msgid "You are logged in as <b>%1</b>"
 msgstr "您已登录为 <b>%1</b>"
 
 #: qml/main.qml:147
-#, fuzzy, kde-format
-#| msgid "Current user"
+#, kde-format
 msgctxt "@item subtitle for current user entry"
 msgid "Current user"
 msgstr "当前用户"
