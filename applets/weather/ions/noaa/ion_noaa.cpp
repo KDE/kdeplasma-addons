@@ -457,7 +457,7 @@ void NOAAIon::updateWeather()
         lastObservation.setObservationTimestamp(observation.timestamp);
     }
 
-    if (observation.weather.isEmpty()) {
+    if (!observation.weather.isEmpty()) {
         lastObservation.setCurrentConditions(i18nc("weather condition", observation.weather.toUtf8().data()));
     }
 
