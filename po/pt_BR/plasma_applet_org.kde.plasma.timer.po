@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-20 01:13+0000\n"
+"POT-Creation-Date: 2026-11-24 01:07+0000\n"
 "PO-Revision-Date: 2026-11-18 05:29-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@kde.org>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -131,9 +131,11 @@ msgid "Always show"
 msgstr "Mostrar sempre"
 
 #: configGeneral.qml:92
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "item:inlistbox completes Remaining Time…"
+#| msgid "Show on large widgets and popups"
 msgctxt "item:inlistbox completes Remaining Time…"
-msgid "Show on large widgets and popups"
+msgid "Show only in popups"
 msgstr "Mostrar em widgets grandes e pop-ups"
 
 #: configGeneral.qml:99
@@ -233,19 +235,19 @@ msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Excluir"
 
-#: main.qml:41
+#: main.qml:39
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 está em execução"
 
-#: main.qml:43
+#: main.qml:41
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 não está em execução"
 
-#: main.qml:47
+#: main.qml:45
 #, kde-format
 msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
@@ -253,7 +255,7 @@ msgctxt ""
 msgid "%1 of %2 left"
 msgstr "Restam %1 de %2"
 
-#: main.qml:48
+#: main.qml:46
 #, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
@@ -263,7 +265,7 @@ msgstr ""
 "Use a roda do mouse para mudar os dígitos ou escolher os temporizadores "
 "predefinidos no menu de contexto"
 
-#: main.qml:61
+#: main.qml:60
 #, kde-format
 msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
@@ -271,37 +273,37 @@ msgctxt ""
 msgid "%1 left of %2"
 msgstr "%1 restante de %2"
 
-#: main.qml:87
+#: main.qml:86
 #, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Temporizador"
 
-#: main.qml:88
+#: main.qml:87
 #, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "O temporizador terminou"
 
-#: main.qml:118
+#: main.qml:117
 #, kde-format
 msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "&Iniciar (%1)"
 
-#: main.qml:119
+#: main.qml:118
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Iniciar"
 
-#: main.qml:125
+#: main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "&Parar"
 
-#: main.qml:131
+#: main.qml:130
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

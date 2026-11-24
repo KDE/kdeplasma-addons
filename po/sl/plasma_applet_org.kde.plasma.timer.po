@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-20 01:13+0000\n"
+"POT-Creation-Date: 2026-11-24 01:07+0000\n"
 "PO-Revision-Date: 2026-11-09 07:03+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -143,7 +143,7 @@ msgstr ""
 #: configGeneral.qml:92
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
-msgid "Show on large widgets and popups"
+msgid "Show only in popups"
 msgstr ""
 
 #: configGeneral.qml:99
@@ -255,19 +255,19 @@ msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Zbriši"
 
-#: main.qml:41
+#: main.qml:39
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 teče"
 
-#: main.qml:43
+#: main.qml:41
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 ne teče"
 
-#: main.qml:47
+#: main.qml:45
 #, kde-format
 msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
@@ -275,7 +275,7 @@ msgctxt ""
 msgid "%1 of %2 left"
 msgstr "%1 od %2 preostalo"
 
-#: main.qml:48
+#: main.qml:46
 #, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
@@ -285,7 +285,7 @@ msgstr ""
 "Uporabite miškin kolešček za spremembo števk ali izberite vnaprej določene "
 "časomere v vsebinskem meniju"
 
-#: main.qml:61
+#: main.qml:60
 #, kde-format
 msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
@@ -293,37 +293,37 @@ msgctxt ""
 msgid "%1 left of %2"
 msgstr "%1 ostalo od %2"
 
-#: main.qml:87
+#: main.qml:86
 #, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Časomer"
 
-#: main.qml:88
+#: main.qml:87
 #, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Časomer je končal"
 
-#: main.qml:118
+#: main.qml:117
 #, kde-format
 msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "Začni (%1)"
 
-#: main.qml:119
+#: main.qml:118
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "Začni"
 
-#: main.qml:125
+#: main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Zaus&tavi"
 
-#: main.qml:131
+#: main.qml:130
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

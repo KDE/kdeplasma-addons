@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-20 01:13+0000\n"
+"POT-Creation-Date: 2026-11-24 01:07+0000\n"
 "PO-Revision-Date: 2026-11-19 22:15+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -130,9 +130,11 @@ msgid "Always show"
 msgstr "總是顯示"
 
 #: configGeneral.qml:92
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "item:inlistbox completes Remaining Time…"
+#| msgid "Show on large widgets and popups"
 msgctxt "item:inlistbox completes Remaining Time…"
-msgid "Show on large widgets and popups"
+msgid "Show only in popups"
 msgstr "於大元件與彈出視窗顯示"
 
 #: configGeneral.qml:99
@@ -230,19 +232,19 @@ msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "刪除"
 
-#: main.qml:41
+#: main.qml:39
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 執行中"
 
-#: main.qml:43
+#: main.qml:41
 #, kde-format
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 未在執行"
 
-#: main.qml:47
+#: main.qml:45
 #, kde-format
 msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
@@ -250,7 +252,7 @@ msgctxt ""
 msgid "%1 of %2 left"
 msgstr "剩餘 %1/%2"
 
-#: main.qml:48
+#: main.qml:46
 #, kde-format
 msgctxt "@info:tooltip for widget, subtitle, timer not running"
 msgid ""
@@ -258,7 +260,7 @@ msgid ""
 "context menu"
 msgstr "使用滑鼠滾輪變更數字，或從右鍵選單選擇預先設好的計時器"
 
-#: main.qml:61
+#: main.qml:60
 #, kde-format
 msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
@@ -266,37 +268,37 @@ msgctxt ""
 msgid "%1 left of %2"
 msgstr "剩下 %1，總共 %2"
 
-#: main.qml:87
+#: main.qml:86
 #, kde-format
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "計時器"
 
-#: main.qml:88
+#: main.qml:87
 #, kde-format
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "時間到！"
 
-#: main.qml:118
+#: main.qml:117
 #, kde-format
 msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "開始(&S) (%1)"
 
-#: main.qml:119
+#: main.qml:118
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "開始(&S)"
 
-#: main.qml:125
+#: main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "停止(&T)"
 
-#: main.qml:131
+#: main.qml:130
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"

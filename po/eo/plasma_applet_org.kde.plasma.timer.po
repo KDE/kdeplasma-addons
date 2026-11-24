@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: plasma_applet_timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-11-20 01:13+0000\n"
+"POT-Creation-Date: 2026-11-24 01:07+0000\n"
 "PO-Revision-Date: 2023-03-26 18:35+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -139,7 +139,7 @@ msgstr ""
 #: configGeneral.qml:92
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
-msgid "Show on large widgets and popups"
+msgid "Show only in popups"
 msgstr ""
 
 #: configGeneral.qml:99
@@ -255,21 +255,21 @@ msgctxt "@action:button delete timer"
 msgid "Delete"
 msgstr "Forigi"
 
-#: main.qml:41
+#: main.qml:39
 #, fuzzy, kde-format
 #| msgid "%1 is running"
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 is running"
 msgstr "%1 estas rulanta"
 
-#: main.qml:43
+#: main.qml:41
 #, fuzzy, kde-format
 #| msgid "%1 not running"
 msgctxt "@info:tooltip for widget, %1 is timer name"
 msgid "%1 not running"
 msgstr "%1 ne estas rulanta"
 
-#: main.qml:47
+#: main.qml:45
 #, kde-format
 msgctxt ""
 "@info:tooltip for widget, %1 is remaining time, %2 is total duration, both "
@@ -277,7 +277,7 @@ msgctxt ""
 msgid "%1 of %2 left"
 msgstr ""
 
-#: main.qml:48
+#: main.qml:46
 #, fuzzy, kde-format
 #| msgid ""
 #| "Use mouse wheel to change digits or choose from predefined timers in the "
@@ -290,7 +290,7 @@ msgstr ""
 "Uzu musradon por ŝanĝi ciferojn aŭ elektu el antaŭdifinitaj temporiziloj en "
 "la kunteksta menuo"
 
-#: main.qml:61
+#: main.qml:60
 #, kde-format
 msgctxt ""
 "@info:accessibility, %1 is remaining time, %2 is total duration, both as "
@@ -298,21 +298,21 @@ msgctxt ""
 msgid "%1 left of %2"
 msgstr ""
 
-#: main.qml:87
+#: main.qml:86
 #, fuzzy, kde-format
 #| msgid "Timer"
 msgctxt "@title:window notification title with no custom timer name set"
 msgid "Timer"
 msgstr "Tempigilo"
 
-#: main.qml:88
+#: main.qml:87
 #, fuzzy, kde-format
 #| msgid "Timer finished"
 msgctxt "@info:progress notification body when no custom message set"
 msgid "Timer finished"
 msgstr "Tempigilo finiĝis"
 
-#: main.qml:118
+#: main.qml:117
 #, fuzzy, kde-format
 #| msgctxt "@action"
 #| msgid "&Start"
@@ -320,19 +320,19 @@ msgctxt "@action %1 is the duration that will be started, e.g. 00:05:00"
 msgid "&Start (%1)"
 msgstr "&Startigi"
 
-#: main.qml:119
+#: main.qml:118
 #, kde-format
 msgctxt "@action"
 msgid "&Start"
 msgstr "&Startigi"
 
-#: main.qml:125
+#: main.qml:124
 #, kde-format
 msgctxt "@action"
 msgid "S&top"
 msgstr "Hal&ti"
 
-#: main.qml:131
+#: main.qml:130
 #, kde-format
 msgctxt "@action"
 msgid "&Reset"
