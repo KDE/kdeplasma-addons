@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-24 01:07+0000\n"
-"PO-Revision-Date: 2026-11-18 18:41+0300\n"
+"PO-Revision-Date: 2026-11-24 17:29+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -129,12 +129,10 @@ msgid "Always show"
 msgstr "Her zaman göster"
 
 #: configGeneral.qml:92
-#, fuzzy, kde-format
-#| msgctxt "item:inlistbox completes Remaining Time…"
-#| msgid "Show on large widgets and popups"
+#, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Show only in popups"
-msgstr "Büyük araç takımlarında ve açılır pencerelerde göster"
+msgstr "Yalnızca açılır pencerelerde göster"
 
 #: configGeneral.qml:99
 #, kde-format

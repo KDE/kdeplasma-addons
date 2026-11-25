@@ -127,12 +127,10 @@ msgid "Always show"
 msgstr "始终显示"
 
 #: configGeneral.qml:92
-#, fuzzy, kde-format
-#| msgctxt "item:inlistbox completes Remaining Time…"
-#| msgid "Show on large widgets and popups"
+#, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Show only in popups"
-msgstr "仅在大尺寸小部件和弹窗中显示"
+msgstr ""
 
 #: configGeneral.qml:99
 #, kde-format
