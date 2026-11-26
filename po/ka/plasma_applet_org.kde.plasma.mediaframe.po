@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-18 01:12+0000\n"
-"PO-Revision-Date: 2026-11-08 08:31+0100\n"
+"PO-Revision-Date: 2026-11-25 15:23+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -61,12 +61,10 @@ msgid "Randomize order"
 msgstr "შემთხვევითი ფერი"
 
 #: qml/ConfigBehavior.qml:95
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Pause slideshow when cursor is over image"
+#, kde-format
 msgctxt "@option:check"
 msgid "Pause slideshow when hovered"
-msgstr "სლაიდშოუს გაჩერება, როცა კურსორი გამოსახულებაზე მიუთითებს"
+msgstr "სლაიდშოუს შეჩერება ზედ თაგუნას გაჩერებისას"
 
 #: qml/ConfigBehavior.qml:101
 #, kde-format
@@ -162,15 +160,13 @@ msgstr "გამოსახულება არ გარდაიქმნ�
 #, kde-format
 msgctxt "@option:check prefix completes … Open in external application"
 msgid "When clicking image:"
-msgstr ""
+msgstr "გამოსახულებაზე დაწკაპუნებისას:"
 
 #: qml/ConfigBehavior.qml:153
-#, fuzzy, kde-format
-#| msgctxt "@option:check"
-#| msgid "Click on image to open in external application"
+#, kde-format
 msgctxt "@option:check"
 msgid "Open in external application"
-msgstr "დააწკაპუნეთ გამოსახულებაზე მის გარე პროგრამაში გასახსნელად"
+msgstr "გახსნა გარე აპლიკაციაში"
 
 #: qml/ConfigMedia.qml:26
 #, kde-format

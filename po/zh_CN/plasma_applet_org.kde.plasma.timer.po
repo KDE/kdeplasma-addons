@@ -130,7 +130,7 @@ msgstr "始终显示"
 #, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Show only in popups"
-msgstr ""
+msgstr "仅在弹窗中显示"
 
 #: configGeneral.qml:99
 #, kde-format

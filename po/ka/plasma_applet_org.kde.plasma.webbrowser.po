@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: kdeplasma-addons\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-17 13:06+0000\n"
-"PO-Revision-Date: 2026-11-02 05:50+0100\n"
+"PO-Revision-Date: 2026-11-25 15:24+0100\n"
 "Last-Translator: Temuri Doghonadze <temuri.doghonadze@gmail.com>\n"
 "Language-Team: Georgian <kde-i18n-doc@kde.org>\n"
 "Language: ka\n"
@@ -46,7 +46,7 @@ msgstr "საიტის ხატულა"
 #, kde-format
 msgctxt "@option:radio"
 msgid "Custom icon"
-msgstr ""
+msgstr "მორგებული ხატულა"
 
 #: qml/ConfigAppearance.qml:57
 #, kde-format
@@ -95,26 +95,22 @@ msgid "Display Navigation Bar"
 msgstr "ნავიგაციის პანელის ჩვენება"
 
 #: qml/ConfigGeneral.qml:22
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "On startup:"
+#, kde-format
 msgctxt "@title:group"
 msgid "On startup, load:"
-msgstr "გაშვებისას:"
+msgstr "გაშვებისას ჩაიტვირთოს:"
 
 #: qml/ConfigGeneral.qml:25
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Load last-visited page"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Last-visited page"
-msgstr "ბოლოს ნანახი გვერდის ჩატვირთვა"
+msgstr "ბოლოს ნანახი გვერდი"
 
 #: qml/ConfigGeneral.qml:56
 #, kde-format
 msgctxt "@info"
 msgid "Type URL or leave empty for blank page"
-msgstr ""
+msgstr "აკრიფეთ URL ან დატოვეთ ცარიელი სუფთა გვერდისთვის"
 
 #: qml/ConfigGeneral.qml:66
 #, kde-format
@@ -123,12 +119,10 @@ msgid "Content scaling:"
 msgstr "შემცველობის მასშტაბირება:"
 
 #: qml/ConfigGeneral.qml:69
-#, fuzzy, kde-format
-#| msgctxt "@option:radio"
-#| msgid "Fixed scale:"
+#, kde-format
 msgctxt "@option:radio"
 msgid "Fixed scale"
-msgstr "ფიქსირებული მასშტაბი:"
+msgstr "ფიქსირებული მასშტაბი"
 
 #: qml/ConfigGeneral.qml:106
 #, kde-format

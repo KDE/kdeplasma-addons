@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: plasma_applet_org.kde.plasma.timer\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-24 01:07+0000\n"
-"PO-Revision-Date: 2026-11-19 13:34+0100\n"
+"PO-Revision-Date: 2026-11-25 00:48+0100\n"
 "Last-Translator: Eloy Cuadra <ecuadra@eloihr.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -131,12 +131,10 @@ msgid "Always show"
 msgstr "Mostrar siempre"
 
 #: configGeneral.qml:92
-#, fuzzy, kde-format
-#| msgctxt "item:inlistbox completes Remaining Time…"
-#| msgid "Show on large widgets and popups"
+#, kde-format
 msgctxt "item:inlistbox completes Remaining Time…"
 msgid "Show only in popups"
-msgstr "Mostrar en widgets grandes y en ventanas emergentes"
+msgstr "Mostrar solo en ventanas emergentes"
 
 #: configGeneral.qml:99
 #, kde-format
