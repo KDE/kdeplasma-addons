@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kdeplasma-addons/"
+"X-Crowdin-File: /kf6-stable/messages/kdeplasma-addons/"
 "plasma_runner_CharacterRunner.pot\n"
-"X-Crowdin-File-ID: 42725\n"
+"X-Crowdin-File-ID: 49954\n"
 
 #: charrunner.cpp:40
 #, kde-format

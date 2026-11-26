@@ -14,8 +14,8 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kdeplasma-addons/kwin_effect_cube.pot\n"
-"X-Crowdin-File-ID: 46602\n"
+"X-Crowdin-File: /kf6-stable/messages/kdeplasma-addons/kwin_effect_cube.pot\n"
+"X-Crowdin-File-ID: 51440\n"
 
 #: kcm/cubeeffectkcm.cpp:36
 #, kde-format

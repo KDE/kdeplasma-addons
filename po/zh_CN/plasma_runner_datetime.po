@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kdeplasma-addons/plasma_runner_datetime."
+"X-Crowdin-File: /kf6-stable/messages/kdeplasma-addons/plasma_runner_datetime."
 "pot\n"
-"X-Crowdin-File-ID: 43229\n"
+"X-Crowdin-File-ID: 49622\n"
 
 #: datetimerunner.cpp:23
 #, kde-format

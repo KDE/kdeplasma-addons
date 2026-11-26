@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kdeplasma-addons/plasma_applet_org.kde."
+"X-Crowdin-File: /kf6-stable/messages/kdeplasma-addons/plasma_applet_org.kde."
 "plasma.fifteenpuzzle.pot\n"
-"X-Crowdin-File-ID: 42733\n"
+"X-Crowdin-File-ID: 49938\n"
 
 #: qml/config.qml:13
 #, kde-format

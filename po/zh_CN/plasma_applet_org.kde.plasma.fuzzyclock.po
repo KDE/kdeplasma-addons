@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kdeplasma-addons/plasma_applet_org.kde."
+"X-Crowdin-File: /kf6-stable/messages/kdeplasma-addons/plasma_applet_org.kde."
 "plasma.fuzzyclock.pot\n"
-"X-Crowdin-File-ID: 42713\n"
+"X-Crowdin-File-ID: 50316\n"
 
 #: qml/config.qml:13
 #, kde-format
@@ -813,12 +813,12 @@ msgstr "下午茶"
 #: qml/FuzzyClock.qml:183
 #, kde-format
 msgid "Dinner"
-msgstr "晚餐"
+msgstr "正餐"
 
 #: qml/FuzzyClock.qml:183
 #, kde-format
 msgid "Supper"
-msgstr "宵夜"
+msgstr "晚餐"
 
 #: qml/FuzzyClock.qml:187
 #, kde-format
@@ -828,17 +828,17 @@ msgstr "下半夜"
 #: qml/FuzzyClock.qml:187
 #, kde-format
 msgid "Early morning"
-msgstr "凌晨"
+msgstr "清晨"
 
 #: qml/FuzzyClock.qml:187
 #, kde-format
 msgid "Morning"
-msgstr "早晨"
+msgstr "上午"
 
 #: qml/FuzzyClock.qml:187
 #, kde-format
 msgid "Almost noon"
-msgstr "上午"
+msgstr "接近中午"
 
 #: qml/FuzzyClock.qml:188
 #, kde-format
@@ -873,9 +873,9 @@ msgstr "一周过半"
 #: qml/FuzzyClock.qml:192
 #, kde-format
 msgid "End of week"
-msgstr "一周结尾"
+msgstr "一周结束"
 
 #: qml/FuzzyClock.qml:192
 #, kde-format
 msgid "Weekend!"
-msgstr "周末！"
+msgstr "周末"

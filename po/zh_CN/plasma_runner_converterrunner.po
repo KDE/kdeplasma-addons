@@ -14,9 +14,9 @@ msgstr ""
 "X-Crowdin-Project: kdeorg\n"
 "X-Crowdin-Project-ID: 269464\n"
 "X-Crowdin-Language: zh-CN\n"
-"X-Crowdin-File: /kf6-trunk/messages/kdeplasma-addons/"
+"X-Crowdin-File: /kf6-stable/messages/kdeplasma-addons/"
 "plasma_runner_converterrunner.pot\n"
-"X-Crowdin-File-ID: 43523\n"
+"X-Crowdin-File-ID: 50410\n"
 
 #: converterrunner.cpp:30
 #, kde-format
@@ -36,4 +36,4 @@ msgstr ""
 #, kde-format
 msgctxt "list of words that can used as amount of 'unit1' [in|to|as] 'unit2'"
 msgid "in;to;as"
-msgstr "in;to;as"
+msgstr "转;转为;转换到;转换为;in;to;as"
