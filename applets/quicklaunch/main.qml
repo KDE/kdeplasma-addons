@@ -11,6 +11,7 @@ import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
+import org.kde.ksvg as KSvg
 import org.kde.draganddrop as DragAndDrop
 import plasma.applet.org.kde.plasma.quicklaunch
 
@@ -81,11 +82,49 @@ PlasmoidItem {
                 }
 
                 delegate: IconItem {
+                    id: crDelegate
                     logic: logicInstance
                     grid: gridView
                     popupModel: null
+                    leftPadding: Math.round(Kirigami.Units.smallSpacing / 2)
+                    topPadding: Math.round(Kirigami.Units.smallSpacing / 2)
+                    bottomPadding: Math.round(Kirigami.Units.smallSpacing / 2)
+                    rightPadding: Math.round(Kirigami.Units.smallSpacing / 2)
                     launcherModel: launcherModelInstance
                     onMoveItemToPopup: (item, url) => gridView.moveItemToPopup(item, url)
+                    display: Plasmoid.configuration.showLauncherNames
+                        ? PlasmaComponents3.ItemDelegate.TextUnderIcon
+                        : PlasmaComponents3.ItemDelegate.IconOnly
+                    width: gridView.cellWidth
+                    height: parent.height //gridView.cellHeight
+                    contentItem: ColumnLayout {
+                        spacing: 0
+                        Kirigami.Icon {
+                            Layout.alignment: Qt.AlignHCenter
+                            Layout.fillWidth: true
+                            Layout.fillHeight: true
+                            source: crDelegate.icon.name
+                            active: crDelegate.hovered
+                            implicitWidth: Kirigami.Units.iconSizes.medium
+                            implicitHeight: Kirigami.Units.iconSizes.medium
+                        }
+                        PlasmaComponents3.Label {
+                            Layout.fillWidth: true
+                            visible: Plasmoid.configuration.showLauncherNames
+                            text: crDelegate.text
+                            maximumLineCount: 1
+                            horizontalAlignment: Text.AlignHCenter
+                            verticalAlignment: Text.AlignVCenter
+                            wrapMode: Text.Wrap
+                            elide: Text.ElideNone
+                        }
+                    }
+                    background: KSvg.FrameSvgItem {
+                        anchors.fill: parent
+                        imagePath: "widgets/viewitem"
+                        prefix: "hover"
+                        visible: crDelegate.Drag.active || crDelegate.url === "quicklaunch:drop"
+                    }
                 }
 
                 function moveItemToPopup(iconItem, url) {
