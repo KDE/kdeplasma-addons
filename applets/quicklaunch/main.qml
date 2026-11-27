@@ -267,7 +267,7 @@ PlasmoidItem {
                 } else {
                     const index = dropArea.gridIndexAt(event.x, event.y);
                     launcherModelInstance.clearDropMarker();
-                    const urls = event.mimeData.urls;
+                    const urls = [...event.mimeData.urls];
                     event.accept(event.proposedAction);
                     Qt.callLater(function() {
                         launcherModelInstance.insertUrls(index == -1 ? launcherModelInstance.count : index, urls);
