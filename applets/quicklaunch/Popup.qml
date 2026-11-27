@@ -97,7 +97,7 @@ Item {
             } else if (event.mimeData.hasUrls) {
                 var index = listView.indexAt(event.x, event.y);
                 popupModel.clearDropMarker();
-                var urls = event.mimeData.urls;
+                const urls = [...event.mimeData.urls];
                 event.accept(event.proposedAction);
                 Qt.callLater(function() {
                     popupModel.insertUrls(index == -1 ? popupModel.count : index, urls);
