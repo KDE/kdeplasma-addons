@@ -7,11 +7,8 @@ pragma ComponentBehavior: Bound
 
 import QtQuick
 
-import org.kde.kirigami as Kirigami
 import org.kde.plasma.extras as PlasmaExtras
 import org.kde.plasma.plasmoid
-
-import org.kde.draganddrop as DragAndDrop
 
 import plasma.applet.org.kde.plasma.quicklaunch
 import "layout.js" as LayoutManager
@@ -30,18 +27,17 @@ Item {
     width: LayoutManager.popupItemWidth()
     height: Math.max(1, popupModel.count) * LayoutManager.popupItemHeight()
 
-    DragAndDrop.DropArea {
+    DropArea {
         anchors.fill: parent
-        preventStealing: true
         enabled: !Plasmoid.immutable
 
-        onDragEnter: event => {
-            if (event.mimeData.hasUrls) {
+        onEntered: event => {
+            if (event.hasUrls) {
                 popup.dragging = true;
                 popup.internalDragIndex = -1;
                 popup.internalDragOriginalIndex = -1;
 
-                const urls = event.mimeData.urls;
+                const urls = event.urls;
                 if (urls.length === 1) {
                     const dragUrl = urls[0].toString();
                     const modelUrls = popupModelObject.urls();
@@ -53,14 +49,12 @@ Item {
                         }
                     }
                 }
-                // FIXME this should not be necessary, but something breaks the DropArea in the Popup
-                dragMove(event)
             } else {
-                event.ignore();
+                event.accepted = false;
             }
         }
 
-        onDragMove: event => {
+        onPositionChanged: event => {
             const index = listView.indexAt(event.x, event.y);
 
             if (popup.internalDragIndex >= 0) {
@@ -73,7 +67,7 @@ Item {
             }
         }
 
-        onDragLeave: {
+        onExited: {
             popup.dragging = false;
             if (popup.internalDragIndex >= 0) {
                 if (popup.internalDragIndex !== popup.internalDragOriginalIndex) {
@@ -86,7 +80,7 @@ Item {
             }
         }
 
-        onDrop: event => {
+        onDropped: event => {
             popup.dragging = false;
 
             if (popup.internalDragIndex >= 0) {
@@ -94,10 +88,10 @@ Item {
                 popup.internalDragOriginalIndex = -1;
                 event.accept(Qt.IgnoreAction);
                 popup.saveConfiguration();
-            } else if (event.mimeData.hasUrls) {
+            } else if (event.hasUrls) {
                 const index = listView.indexAt(event.x, event.y);
                 popupModelObject.clearDropMarker();
-                const urls = event.mimeData.urls;
+                const urls = event.urls;
                 event.accept(event.proposedAction);
                 Qt.callLater(function() {
                     popupModelObject.insertUrls(index == -1 ? popupModelObject.count : index, urls);

@@ -12,7 +12,6 @@ import org.kde.plasma.core as PlasmaCore
 import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.ksvg as KSvg
-import org.kde.draganddrop as DragAndDrop
 import plasma.applet.org.kde.plasma.quicklaunch
 
 import "layout.js" as LayoutManager
@@ -92,11 +91,6 @@ PlasmoidItem {
                     rightPadding: Math.round(Kirigami.Units.smallSpacing / 2)
                     launcherModel: launcherModelInstance
                     onMoveItemToPopup: (item, url) => gridView.moveItemToPopup(item, url)
-                    display: Plasmoid.configuration.showLauncherNames
-                        ? PlasmaComponents3.ItemDelegate.TextUnderIcon
-                        : PlasmaComponents3.ItemDelegate.IconOnly
-                    width: gridView.cellWidth
-                    height: parent.height //gridView.cellHeight
                     contentItem: ColumnLayout {
                         spacing: 0
                         Kirigami.Icon {
@@ -233,10 +227,9 @@ PlasmoidItem {
             }
         }
 
-        DragAndDrop.DropArea {
+        DropArea {
             id: dropArea
             anchors.fill: parent
-            preventStealing: true
             enabled: !Plasmoid.immutable
 
             function gridIndexAt(eventX, eventY) {
@@ -244,13 +237,13 @@ PlasmoidItem {
                 return gridView.indexAt(pos.x, pos.y);
             }
 
-            onDragEnter: event => {
-                if (event.mimeData.hasUrls) {
+            onEntered: event => {
+                if (event.hasUrls) {
                     root.dragging = true;
                     root.internalDragIndex = -1;
                     root.internalDragOriginalIndex = -1;
 
-                    const urls = event.mimeData.urls;
+                    const urls = event.urls;
                     if (urls.length === 1) {
                         const dragUrl = urls[0].toString();
                         const modelUrls = launcherModelInstance.urls();
@@ -263,11 +256,11 @@ PlasmoidItem {
                         }
                     }
                 } else {
-                    event.ignore();
+                    event.accepted = false;
                 }
             }
 
-            onDragMove: event => {
+            onPositionChanged: event => {
                 const index = dropArea.gridIndexAt(event.x, event.y);
 
                 if (root.internalDragIndex >= 0) {
@@ -282,7 +275,7 @@ PlasmoidItem {
                 popup.visible = root.childAt(event.x, event.y) == popupArrow;
             }
 
-            onDragLeave: {
+            onExited: {
                 root.dragging = false;
                 if (root.internalDragIndex >= 0) {
                     if (root.internalDragIndex !== root.internalDragOriginalIndex) {
@@ -295,7 +288,7 @@ PlasmoidItem {
                 }
             }
 
-            onDrop: event => {
+            onDropped: event => {
                 root.dragging = false;
 
                 if (root.internalDragIndex >= 0) {
@@ -306,7 +299,7 @@ PlasmoidItem {
                 } else {
                     const index = dropArea.gridIndexAt(event.x, event.y);
                     launcherModelInstance.clearDropMarker();
-                    const urls = event.mimeData.urls;
+                    const urls = event.urls;
                     event.accept(event.proposedAction);
                     Qt.callLater(function() {
                         launcherModelInstance.insertUrls(index == -1 ? launcherModelInstance.count : index, urls);
