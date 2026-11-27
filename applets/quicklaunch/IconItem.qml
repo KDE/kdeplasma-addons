@@ -10,7 +10,6 @@ import org.kde.kirigami as Kirigami
 import org.kde.ksvg as KSvg
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.plasmoid
-import org.kde.draganddrop as DragAndDrop
 import org.kde.plasma.extras as PlasmaExtras
 import plasma.applet.org.kde.plasma.quicklaunch
 
@@ -27,7 +26,7 @@ Item {
     required property UrlModel launcherModel
 
     readonly property int itemIndex : index
-    property bool dragging : false
+    property bool dragging : Drag.active
     property bool isPopupItem : false
     readonly property var launcher : logic.launcherData(url)
     readonly property string iconName : launcher.iconName || "fork"
@@ -149,27 +148,29 @@ Item {
         }
     }
 
-    DragAndDrop.DragArea {
+    DragHandler {
+        id: dragHandler
+        enabled: !Plasmoid.immutable
+        target: null
+        onActiveChanged: if (active) {
+            icon.grabToImage(function(result) {
+                iconItem.Drag.imageSource = result.url
+                iconItem.Drag.active = true
+            })
+        } else {
+            iconItem.Drag.active = false
+        }
+    }
+
+    Drag.dragType: Drag.Automatic
+    Drag.mimeData: { "text/uri-list": [iconItem.url] }
+    Drag.proposedAction: Qt.MoveAction
+    Drag.supportedActions: Qt.IgnoreAction | Qt.MoveAction
+
+    Item {
         id: dragArea
         width: Math.min(iconItem.width, iconItem.height)
         height: width
-        enabled: !Plasmoid.immutable
-        defaultAction: Qt.MoveAction
-        supportedActions: Qt.IgnoreAction | Qt.MoveAction
-        delegate: icon
-
-        mimeData {
-            url: iconItem.url
-            source: iconItem
-        }
-
-        onDragStarted: {
-            iconItem.dragging = true;
-        }
-
-        onDrop: action => {
-            iconItem.dragging = false;
-        }
 
         MouseArea {
             id: mouseArea
