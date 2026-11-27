@@ -47,7 +47,6 @@ Item {
             logic.openUrl(url);
             break;
         case Qt.Key_Menu:
-            contextMenu.refreshActions();
             contextMenu.open(0,0);
             event.accepted = true;
             break;
@@ -198,7 +197,6 @@ Item {
 
             onPressed: mouse => {
                 if (mouse.button == Qt.RightButton) {
-                    contextMenu.refreshActions();
                     contextMenu.open(mouse.x, mouse.y);
                 }
             }
@@ -259,6 +257,25 @@ Item {
 
                 visualParent: mouseArea
 
+                property Instantiator _children: Instantiator {
+                    id: instantiator
+
+                    model: iconItem.launcher.jumpListActions
+                    delegate: PlasmaExtras.MenuItem {
+                        required icon
+                        required property string name
+                        required property string exec
+                        text: name
+
+                        onClicked: {
+                            iconItem.logic.openExec(exec)
+                        }
+                    }
+
+                    onObjectAdded: (index, object) => contextMenu.addMenuItem(object, jumpListSeparator)
+                    onObjectRemoved: (index, object) => contextMenu.removeMenuItem(object)
+                }
+
                 PlasmaExtras.MenuItem {
                     id: jumpListSeparator
                     separator: true
@@ -293,34 +310,6 @@ Item {
                 PlasmaExtras.MenuItem {
                     action: Plasmoid.internalAction("remove")
                 }
-
-                function refreshActions() {
-                    for (let i = 0; i < jumpListItems.length; ++i) {
-                        const item = jumpListItems[i];
-                        removeMenuItem(item);
-                        item.destroy();
-                    }
-                    jumpListItems = [];
-
-                    for (let i = 0; i < iconItem.launcher.jumpListActions.length; ++i) {
-                        const action = iconItem.launcher.jumpListActions[i];
-                        const item = menuItemComponent.createObject(iconItem, {
-                            "text": action.name,
-                            "icon": action.icon
-                        }) as PlasmaExtras.MenuItem;
-                        item.clicked.connect(function() {
-                            iconItem.logic.openExec(action.exec);
-                        });
-
-                        addMenuItem(item, jumpListSeparator);
-                        jumpListItems.push(item);
-                    }
-                }
-            }
-
-            Component {
-                id: menuItemComponent
-                PlasmaExtras.MenuItem { }
             }
         }
     }
