@@ -5,6 +5,7 @@ plasma_add_applet(org.kde.plasma.quicklaunch
         IconItem.qml
         main.qml
         Popup.qml
+        QuickLaunchDropArea.qml
         UrlModel.qml
         layout.js
     CPP_SOURCES

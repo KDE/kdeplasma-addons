@@ -25,9 +25,6 @@ PlasmoidItem {
     readonly property string title : Plasmoid.formFactor == PlasmaCore.Types.Planar ? Plasmoid.configuration.title : ""
     readonly property bool vertical : Plasmoid.formFactor == PlasmaCore.Types.Vertical || (Plasmoid.formFactor == PlasmaCore.Types.Planar && height > width)
     readonly property bool horizontal : Plasmoid.formFactor == PlasmaCore.Types.Horizontal
-    property bool dragging : false
-    property int internalDragIndex: -1
-    property int internalDragOriginalIndex: -1
 
     Layout.minimumWidth: LayoutManager.minimumWidth()
     Layout.minimumHeight: LayoutManager.minimumHeight()
@@ -227,84 +224,18 @@ PlasmoidItem {
             }
         }
 
-        DropArea {
+        QuickLaunchDropArea {
             id: dropArea
             anchors.fill: parent
             enabled: !Plasmoid.immutable
+            model: gridView.model
+            view: gridView
 
-            function gridIndexAt(eventX, eventY) {
-                const pos = gridView.mapFromItem(dropArea, eventX, eventY);
-                return gridView.indexAt(pos.x, pos.y);
-            }
-
-            onEntered: event => {
-                if (event.hasUrls) {
-                    root.dragging = true;
-                    root.internalDragIndex = -1;
-                    root.internalDragOriginalIndex = -1;
-
-                    const urls = event.urls;
-                    if (urls.length === 1) {
-                        const dragUrl = urls[0].toString();
-                        const modelUrls = launcherModelInstance.urls();
-                        for (let i = 0; i < modelUrls.length; ++i) {
-                            if (modelUrls[i].toString() === dragUrl) {
-                                root.internalDragIndex = i;
-                                root.internalDragOriginalIndex = i;
-                                break;
-                            }
-                        }
-                    }
-                } else {
-                    event.accepted = false;
-                }
-            }
+            onSaveConfigurationRequested: root.saveConfiguration();
 
             onPositionChanged: event => {
-                const index = dropArea.gridIndexAt(event.x, event.y);
-
-                if (root.internalDragIndex >= 0) {
-                    if (index >= 0 && index !== root.internalDragIndex) {
-                        launcherModelInstance.move(root.internalDragIndex, index, 1);
-                        root.internalDragIndex = index;
-                    }
-                } else {
-                    launcherModelInstance.showDropMarker(index);
-                }
-
-                popup.visible = root.childAt(event.x, event.y) == popupArrow;
-            }
-
-            onExited: {
-                root.dragging = false;
-                if (root.internalDragIndex >= 0) {
-                    if (root.internalDragIndex !== root.internalDragOriginalIndex) {
-                        launcherModelInstance.move(root.internalDragIndex, root.internalDragOriginalIndex, 1);
-                    }
-                    root.internalDragIndex = -1;
-                    root.internalDragOriginalIndex = -1;
-                } else {
-                    launcherModelInstance.clearDropMarker();
-                }
-            }
-
-            onDropped: event => {
-                root.dragging = false;
-
-                if (root.internalDragIndex >= 0) {
-                    root.internalDragIndex = -1;
-                    root.internalDragOriginalIndex = -1;
-                    event.accept(Qt.IgnoreAction);
-                    root.saveConfiguration();
-                } else {
-                    const index = dropArea.gridIndexAt(event.x, event.y);
-                    launcherModelInstance.clearDropMarker();
-                    const urls = event.urls;
-                    event.accept(event.proposedAction);
-                    Qt.callLater(function() {
-                        launcherModelInstance.insertUrls(index == -1 ? launcherModelInstance.count : index, urls);
-                    });
-                }
+                const point = root.mapToItem(popupArrow, event.x, event.y)
+                popup.visible = point.x >= 0 && point.x <= popupArrow.width && point.y >= 0 && point.y <= popupArrow.height;
             }
         }
     }
@@ -349,7 +280,7 @@ PlasmoidItem {
     Connections {
         target: Plasmoid.configuration
         function onLauncherUrlsChanged() {
-            if (root.dragging) return;
+            if (dropArea.containsDrag) return;
             const configUrls = Plasmoid.configuration.launcherUrls;
             const modelUrls = launcherModelInstance.urls();
             if (configUrls.length === modelUrls.length) {
@@ -381,9 +312,8 @@ PlasmoidItem {
         launcherModelInstance.urlsChanged.connect(saveConfiguration);
     }
 
-    function saveConfiguration()
-    {
-        if (!dragging) {
+    function saveConfiguration() {
+        if (!dropArea.containsDrag) {
             Plasmoid.configuration.launcherUrls = launcherModelInstance.urls();
         }
     }

@@ -16,9 +16,6 @@ import "layout.js" as LayoutManager
 Item {
     id: popup
 
-    property bool dragging: false
-    property int internalDragIndex: -1
-    property int internalDragOriginalIndex: -1
     property alias popupModel : popupModelObject
     property alias listView: listView
     required property Logic logic
@@ -27,77 +24,15 @@ Item {
     width: LayoutManager.popupItemWidth()
     height: Math.max(1, popupModel.count) * LayoutManager.popupItemHeight()
 
-    DropArea {
+    QuickLaunchDropArea {
+        id: dropArea
         anchors.fill: parent
         enabled: !Plasmoid.immutable
 
-        onEntered: event => {
-            if (event.hasUrls) {
-                popup.dragging = true;
-                popup.internalDragIndex = -1;
-                popup.internalDragOriginalIndex = -1;
+        model: listView.model
+        view: listView
 
-                const urls = event.urls;
-                if (urls.length === 1) {
-                    const dragUrl = urls[0].toString();
-                    const modelUrls = popupModelObject.urls();
-                    for (let i = 0; i < modelUrls.length; ++i) {
-                        if (modelUrls[i].toString() === dragUrl) {
-                            popup.internalDragIndex = i;
-                            popup.internalDragOriginalIndex = i;
-                            break;
-                        }
-                    }
-                }
-            } else {
-                event.accepted = false;
-            }
-        }
-
-        onPositionChanged: event => {
-            const index = listView.indexAt(event.x, event.y);
-
-            if (popup.internalDragIndex >= 0) {
-                if (index >= 0 && index !== popup.internalDragIndex) {
-                    popupModelObject.move(popup.internalDragIndex, index, 1);
-                    popup.internalDragIndex = index;
-                }
-            } else {
-                popupModelObject.showDropMarker(index);
-            }
-        }
-
-        onExited: {
-            popup.dragging = false;
-            if (popup.internalDragIndex >= 0) {
-                if (popup.internalDragIndex !== popup.internalDragOriginalIndex) {
-                    popupModelObject.move(popup.internalDragIndex, popup.internalDragOriginalIndex, 1);
-                }
-                popup.internalDragIndex = -1;
-                popup.internalDragOriginalIndex = -1;
-            } else {
-                popupModelObject.clearDropMarker();
-            }
-        }
-
-        onDropped: event => {
-            popup.dragging = false;
-
-            if (popup.internalDragIndex >= 0) {
-                popup.internalDragIndex = -1;
-                popup.internalDragOriginalIndex = -1;
-                event.accept(Qt.IgnoreAction);
-                popup.saveConfiguration();
-            } else if (event.hasUrls) {
-                const index = listView.indexAt(event.x, event.y);
-                popupModelObject.clearDropMarker();
-                const urls = event.urls;
-                event.accept(event.proposedAction);
-                Qt.callLater(function() {
-                    popupModelObject.insertUrls(index == -1 ? popupModelObject.count : index, urls);
-                });
-            }
-        }
+        onSaveConfigurationRequested: popup.saveConfiguration()
     }
 
     ListView {
@@ -135,7 +70,7 @@ Item {
     Connections {
         target: Plasmoid.configuration
         function onPopupUrlsChanged() {
-            if (popup.dragging) return;
+            if (dropArea.containsDrag) return;
             const configUrls = Plasmoid.configuration.popupUrls;
             const modelUrls = popupModelObject.urls();
             if (configUrls.length === modelUrls.length) {
@@ -161,7 +96,7 @@ Item {
 
     function saveConfiguration()
     {
-        if (!dragging) {
+        if (!dropArea.containsDrag) {
             Plasmoid.configuration.popupUrls = popupModelObject.urls();
         }
     }
