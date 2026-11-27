@@ -172,145 +172,141 @@ Item {
         width: Math.min(iconItem.width, iconItem.height)
         height: width
 
-        MouseArea {
-            id: mouseArea
-            anchors.fill: parent
-            anchors.margins: LayoutManager.itemPadding()
-            hoverEnabled: true
-            acceptedButtons: Qt.LeftButton | Qt.RightButton
+        activeFocusOnTab: true
+        Accessible.name: iconItem.launcher.applicationName
+        Accessible.description: i18nc("@action:button accessible description", "Launch %1", iconItem.launcher.genericName || iconItem.launcher.applicationName)
+        Accessible.role: Accessible.Button
 
-            activeFocusOnTab: true
-            Accessible.name: iconItem.launcher.applicationName
-            Accessible.description: i18nc("@action:button accessible description", "Launch %1", iconItem.launcher.genericName || iconItem.launcher.applicationName)
-            Accessible.role: Accessible.Button
-
-            onActiveFocusChanged: {
-                if (activeFocus) {
-                    entered();
-                }
+        onActiveFocusChanged: {
+            if (activeFocus && iconItem.ListView.view) {
+                iconItem.ListView.view.currentIndex = iconItem.itemIndex;
             }
+        }
 
-            onEntered: {
+        TapHandler {
+            acceptedButtons: Qt.LeftButton
+            onTapped: iconItem.logic.openUrl(iconItem.url)
+        }
+
+        TapHandler {
+            acceptedButtons: Qt.RightButton
+            onPressedChanged: if (pressed) {
+                // needs callLater or the menu closes immediately
+                Qt.callLater(() => contextMenu.open(point.pressPosition.x, point.pressPosition.y))
+            }
+        }
+
+        HoverHandler {
+            id: hoverHandler
+            onHoveredChanged: if (hovered) {
                 if (iconItem.ListView.view) {
                     iconItem.ListView.view.currentIndex = iconItem.itemIndex;
                 }
             }
+        }
 
-            onPressed: mouse => {
-                if (mouse.button == Qt.RightButton) {
-                    contextMenu.open(mouse.x, mouse.y);
-                }
+        Kirigami.Icon {
+            id: icon
+
+            anchors {
+                top: parent.top
+                left: parent.left
             }
 
-            onClicked: mouse => {
-                if (mouse.button == Qt.LeftButton) {
-                    iconItem.logic.openUrl(iconItem.url)
-                }
+            width: Kirigami.Units.iconSizes.medium
+            height: width
+            source: iconItem.url === "quicklaunch:drop" ? "" : iconItem.iconName
+            active: hoverHandler.hovered
+        }
+
+        PlasmaComponents3.Label {
+            id: label
+
+            anchors {
+                bottom : parent.bottom
+                right : parent.right
             }
 
-            Kirigami.Icon {
-                id: icon
+            text: iconItem.launcher.applicationName
+            textFormat: Text.PlainText
+            maximumLineCount: 1
+            wrapMode: Text.Wrap
+        }
 
-                anchors {
-                    top: parent.top
-                    left: parent.left
-                }
+        KSvg.FrameSvgItem {
+            anchors.fill: parent
+            imagePath: "widgets/viewitem"
+            prefix: "hover"
+            visible: iconItem.dragging || iconItem.url === "quicklaunch:drop"
+        }
 
-                width: Kirigami.Units.iconSizes.medium
-                height: width
-                source: iconItem.url === "quicklaunch:drop" ? "" : iconItem.iconName
-                active: mouseArea.containsMouse
-            }
+        PlasmaCore.ToolTipArea {
+            anchors.fill: parent
+            active: !iconItem.dragging
+            mainText: iconItem.launcher.applicationName
+            subText: iconItem.launcher.genericName
+            icon: iconItem.iconName
+        }
 
-            PlasmaComponents3.Label {
-                id: label
+        PlasmaExtras.Menu {
+            id: contextMenu
 
-                anchors {
-                    bottom : parent.bottom
-                    right : parent.right
-                }
+            property var jumpListItems : []
 
-                text: iconItem.launcher.applicationName
-                textFormat: Text.PlainText
-                maximumLineCount: 1
-                wrapMode: Text.Wrap
-            }
+            visualParent: dragArea
 
-            KSvg.FrameSvgItem {
-                anchors.fill: parent
-                imagePath: "widgets/viewitem"
-                prefix: "hover"
-                visible: iconItem.dragging || iconItem.url === "quicklaunch:drop"
-            }
+            property Instantiator _children: Instantiator {
+                id: instantiator
 
-            PlasmaCore.ToolTipArea {
-                anchors.fill: parent
-                active: !iconItem.dragging
-                mainText: iconItem.launcher.applicationName
-                subText: iconItem.launcher.genericName
-                icon: iconItem.iconName
-            }
+                model: iconItem.launcher.jumpListActions
+                delegate: PlasmaExtras.MenuItem {
+                    required icon
+                    required property string name
+                    required property string exec
+                    text: name
 
-            PlasmaExtras.Menu {
-                id: contextMenu
-
-                property var jumpListItems : []
-
-                visualParent: mouseArea
-
-                property Instantiator _children: Instantiator {
-                    id: instantiator
-
-                    model: iconItem.launcher.jumpListActions
-                    delegate: PlasmaExtras.MenuItem {
-                        required icon
-                        required property string name
-                        required property string exec
-                        text: name
-
-                        onClicked: {
-                            iconItem.logic.openExec(exec)
-                        }
+                    onClicked: {
+                        iconItem.logic.openExec(exec)
                     }
-
-                    onObjectAdded: (index, object) => contextMenu.addMenuItem(object, jumpListSeparator)
-                    onObjectRemoved: (index, object) => contextMenu.removeMenuItem(object)
                 }
 
-                PlasmaExtras.MenuItem {
-                    id: jumpListSeparator
-                    separator: true
-                }
+                onObjectAdded: (index, object) => contextMenu.addMenuItem(object, jumpListSeparator)
+                onObjectRemoved: (index, object) => contextMenu.removeMenuItem(object)
+            }
 
-                PlasmaExtras.MenuItem {
-                    text: i18nc("@action:inmenu", "Add Launcher…")
-                    icon: "list-add"
-                    onClicked: iconItem.addLauncher()
-                }
+            PlasmaExtras.MenuItem {
+                id: jumpListSeparator
+                separator: true
+            }
 
-                PlasmaExtras.MenuItem {
-                    text: i18nc("@action:inmenu", "Edit Launcher…")
-                    icon: "document-edit"
-                    onClicked: iconItem.editLauncher()
-                }
+            PlasmaExtras.MenuItem {
+                text: i18nc("@action:inmenu", "Add Launcher…")
+                icon: "list-add"
+                onClicked: iconItem.addLauncher()
+            }
 
-                PlasmaExtras.MenuItem {
-                    text: i18nc("@action:inmenu", "Remove Launcher")
-                    icon: "list-remove"
-                    onClicked: iconItem.removeLauncher()
-                }
+            PlasmaExtras.MenuItem {
+                text: i18nc("@action:inmenu", "Edit Launcher…")
+                icon: "document-edit"
+                onClicked: iconItem.editLauncher()
+            }
 
-                PlasmaExtras.MenuItem {
-                    separator: true
-                }
+            PlasmaExtras.MenuItem {
+                text: i18nc("@action:inmenu", "Remove Launcher")
+                icon: "list-remove"
+                onClicked: iconItem.removeLauncher()
+            }
 
-                PlasmaExtras.MenuItem {
-                    action: Plasmoid.internalAction("configure")
-                }
+            PlasmaExtras.MenuItem {
+                separator: true
+            }
 
-                PlasmaExtras.MenuItem {
-                    action: Plasmoid.internalAction("remove")
-                }
+            PlasmaExtras.MenuItem {
+                action: Plasmoid.internalAction("configure")
+            }
+
+            PlasmaExtras.MenuItem {
+                action: Plasmoid.internalAction("remove")
             }
         }
     }
@@ -330,6 +326,7 @@ Item {
 
             AnchorChanges {
                 target: icon
+                anchors.verticalCenter: icon.parent.verticalCenter
                 anchors.right: undefined
                 anchors.bottom: undefined
             }
@@ -341,6 +338,7 @@ Item {
             }
 
             PropertyChanges {
+                icon.anchors.margins: LayoutManager.itemPadding()
                 label.horizontalAlignment: Text.AlignLeft
                 label.verticalAlignment: Text.AlignVCenter
                 label.visible: true
