@@ -240,7 +240,8 @@ PlasmoidItem {
                     launcherModelInstance.showDropMarker(index);
                 }
 
-                popup.visible = root.childAt(event.x, event.y) == popupArrow;
+                const point = root.mapToItem(popupArrow, event.x, event.y)
+                popup.visible = point.x >= 0 && point.x <= popupArrow.width && point.y >= 0 && point.y <= popupArrow.height;
             }
 
             onDragLeave: {
