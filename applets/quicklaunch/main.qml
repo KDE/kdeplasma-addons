@@ -174,51 +174,42 @@ PlasmoidItem {
 
             subText: popup.visible ? i18nc("@info:tooltip for expander arrow", "Hide icons") : i18nc("@info:tooltip for expander arrow", "Show hidden icons")
 
-            MouseArea {
-                id: arrowMouseArea
+            activeFocusOnTab: parent.visible
+
+            Keys.onSpacePressed: popup.visible = !popup.visible
+            Keys.onEnterPressed: event => Keys.spacePressed(event)
+            Keys.onReturnPressed: event => Keys.spacePressed(event)
+            Keys.onSelectPressed: event => Keys.spacePressed(event)
+
+            Accessible.name: subText
+            Accessible.role: Accessible.Button
+
+            TapHandler {
+                id: tapHandler
+                onTapped: popup.visible = !popup.visible
+            }
+
+            Kirigami.Icon {
                 anchors.fill: parent
 
-                activeFocusOnTab: parent.visible
-
-                Keys.onPressed: event => {
-                    switch (event.key) {
-                    case Qt.Key_Space:
-                    case Qt.Key_Enter:
-                    case Qt.Key_Return:
-                    case Qt.Key_Select:
-                        arrowMouseArea.clicked(null);
-                        break;
+                rotation: popup.visible ? 180 : 0
+                Behavior on rotation {
+                    RotationAnimation {
+                        duration: Kirigami.Units.shortDuration
                     }
                 }
-                Accessible.name: parent.subText
-                Accessible.role: Accessible.Button
 
-                onClicked: {
-                    popup.visible = !popup.visible
-                }
-
-                Kirigami.Icon {
-                    anchors.fill: parent
-
-                    rotation: popup.visible ? 180 : 0
-                    Behavior on rotation {
-                        RotationAnimation {
-                            duration: Kirigami.Units.shortDuration * 3
-                        }
-                    }
-
-                    source: {
-                        if (Plasmoid.location == PlasmaCore.Types.TopEdge) {
-                            return "arrow-down";
-                        } else if (Plasmoid.location == PlasmaCore.Types.LeftEdge) {
-                            return "arrow-right";
-                        } else if (Plasmoid.location == PlasmaCore.Types.RightEdge) {
-                            return "arrow-left";
-                        } else if (root.vertical) {
-                            return "arrow-right";
-                        } else {
-                            return "arrow-up";
-                        }
+                source: {
+                    if (Plasmoid.location == PlasmaCore.Types.TopEdge) {
+                        return "arrow-down";
+                    } else if (Plasmoid.location == PlasmaCore.Types.LeftEdge) {
+                        return "arrow-right";
+                    } else if (Plasmoid.location == PlasmaCore.Types.RightEdge) {
+                        return "arrow-left";
+                    } else if (root.vertical) {
+                        return "arrow-right";
+                    } else {
+                        return "arrow-up";
                     }
                 }
             }
