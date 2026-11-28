@@ -3,6 +3,7 @@
  *
  *  SPDX-License-Identifier: GPL-2.0-only OR GPL-3.0-only OR LicenseRef-KDE-Accepted-GPL
  */
+pragma ComponentBehavior: Bound
 
 import QtQuick
 import org.kde.plasma.core as PlasmaCore
@@ -10,40 +11,47 @@ import org.kde.kirigami as Kirigami
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.plasma.plasmoid
 import org.kde.plasma.extras as PlasmaExtras
-import plasma.applet.org.kde.plasma.quicklaunch
-
-import "layout.js" as LayoutManager
+import org.kde.plasma.private.kicker as Kicker
 
 PlasmaComponents3.ItemDelegate {
     id: iconItem
 
-    required property url url
+    required property string favoriteId
     required property int index
-    required property Logic logic
-    required property GridView grid
-    required property UrlModel popupModel
-    required property UrlModel launcherModel
+    required property var model
+
+    required property Kicker.SimpleFavoritesModel favoritesModel
 
     readonly property int itemIndex : index
-    property bool dragging : Drag.active
     property bool isPopupItem : false
-    readonly property var launcher : logic.launcherData(url)
-    readonly property string iconName : launcher.iconName || "fork"
 
-    width: isPopupItem ? LayoutManager.popupItemWidth() : grid.cellWidth
-    height: isPopupItem ? LayoutManager.popupItemHeight() : grid.cellHeight
-
-    signal moveItemToGrid(IconItem item, url url)
-    signal moveItemToPopup(IconItem item, url url)
+    signal launcherDialogRequested()
+    signal moveToOtherModelRequested(string favoriteId)
 
     activeFocusOnTab: true
+
+    Drag.dragType: Drag.Automatic
+    Drag.mimeData: { "text/uri-list": [iconItem.model.url] }
+    Drag.proposedAction: Qt.MoveAction
+    Drag.supportedActions: Qt.IgnoreAction | Qt.MoveAction
+
+    Accessible.description: i18nc("@action:button accessible description", "Launch %1", iconItem.model.display || iconItem.model.description)
+
+    onActiveFocusChanged: {
+        if (activeFocus && iconItem.ListView.view) {
+            iconItem.ListView.view.currentIndex = iconItem.itemIndex;
+        }
+    }
+
+    onHoveredChanged: if (hovered && iconItem.isPopupItem) { iconItem.ListView.view.currentIndex = iconItem.itemIndex;}
+
 
     Keys.onPressed: event => {
         switch (event.key) {
         case Qt.Key_Enter:
         case Qt.Key_Return:
         case Qt.Key_Select:
-            logic.openUrl(url);
+            action.trigger();
             break;
         case Qt.Key_Menu:
             contextMenu.open(0,0);
@@ -64,10 +72,10 @@ PlasmaComponents3.ItemDelegate {
         switch (event.key) {
         case Qt.Key_Up: {
             if (iconItem.isPopupItem && iconItem.itemIndex === 0 && Plasmoid.location === PlasmaCore.Types.TopEdge) {
-                iconItem.moveItemToGrid(iconItem, url);
+                iconItem.moveToOtherModelRequested(iconItem.favoriteId);
                 break;
             } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.BottomEdge) {
-                iconItem.moveItemToPopup(iconItem, url);
+                iconItem.moveToOtherModelRequested(iconItem.favoriteId);
                 break;
             }
 
@@ -77,10 +85,10 @@ PlasmaComponents3.ItemDelegate {
 
         case Qt.Key_Down: {
             if (iconItem.isPopupItem && iconItem.itemIndex === iconItem.ListView.view.count - 1 && Plasmoid.location === PlasmaCore.Types.BottomEdge) {
-                iconItem.moveItemToGrid(iconItem, url);
+                iconItem.moveToOtherModelRequested(iconItem.favoriteId);
                 break;
             } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.TopEdge) {
-                iconItem.moveItemToPopup(iconItem, url);
+                iconItem.moveToOtherModelRequested(iconItem.favoriteId);
                 break;
             }
 
@@ -90,10 +98,10 @@ PlasmaComponents3.ItemDelegate {
 
         case Qt.Key_Left: {
             if (iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.LeftEdge) {
-                iconItem.moveItemToGrid(iconItem, url);
+                iconItem.moveToOtherModelRequested(iconItem.favoriteId);
                 break;
             } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.RightEdge) {
-                iconItem.moveItemToPopup(iconItem, url);
+                iconItem.moveToOtherModelRequested(iconItem.favoriteId);
                 break;
             }
 
@@ -102,10 +110,10 @@ PlasmaComponents3.ItemDelegate {
         }
         case Qt.Key_Right: {
             if (iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.RightEdge) {
-                iconItem.moveItemToGrid(iconItem, url);
+                iconItem.moveToOtherModelRequested(iconItem.favoriteId);
                 break;
             } else if (!iconItem.isPopupItem && Plasmoid.location === PlasmaCore.Types.LeftEdge) {
-                iconItem.moveItemToPopup(iconItem, url);
+                iconItem.moveToOtherModelRequested(iconItem.favoriteId);
                 break;
             }
 
@@ -125,25 +133,23 @@ PlasmaComponents3.ItemDelegate {
         if (newIndex < 0) {
             return;
         }
+        favoritesModel.moveRow(iconItem.itemIndex, newIndex)
         if (iconItem.isPopupItem) {
-            popupModel.moveUrl(iconItem.itemIndex, newIndex);
             iconItem.ListView.view.currentIndex = newIndex;
         } else {
-            launcherModel.moveUrl(iconItem.itemIndex, newIndex);
             iconItem.GridView.view.currentIndex = newIndex;
         }
     }
 
     function increaseIndex() {
         const newIndex = iconItem.itemIndex + 1;
-        if (newIndex === (iconItem.isPopupItem ? iconItem.ListView.view.count : iconItem.GridView.view.count)) {
+        if (newIndex === model.count) {
             return;
         }
+        favoritesModel.moveRow(iconItem.itemIndex, newIndex)
         if (iconItem.isPopupItem) {
-            popupModel.moveUrl(iconItem.itemIndex, newIndex);
             iconItem.ListView.view.currentIndex = newIndex;
         } else {
-            launcherModel.moveUrl(iconItem.itemIndex, newIndex);
             iconItem.GridView.view.currentIndex = newIndex;
         }
     }
@@ -162,25 +168,12 @@ PlasmaComponents3.ItemDelegate {
         }
     }
 
-    Drag.dragType: Drag.Automatic
-    Drag.mimeData: { "text/uri-list": [iconItem.url] }
-    Drag.proposedAction: Qt.MoveAction
-    Drag.supportedActions: Qt.IgnoreAction | Qt.MoveAction
 
-    Accessible.description: i18nc("@action:button accessible description", "Launch %1", iconItem.launcher.genericName || iconItem.launcher.applicationName)
-
-    onActiveFocusChanged: {
-        if (activeFocus && iconItem.ListView.view) {
-            iconItem.ListView.view.currentIndex = iconItem.itemIndex;
-        }
-    }
-
-    onHoveredChanged: if (hovered && iconItem.isPopupItem) { iconItem.ListView.view.currentIndex = iconItem.itemIndex;}
 
     action: Kirigami.Action {
         onTriggered: {
             if (!dragHandler.active) {
-                iconItem.logic.openUrl(iconItem.url)
+                iconItem.favoritesModel.trigger(iconItem.index, "", null)
             }
         }
     }
@@ -193,36 +186,39 @@ PlasmaComponents3.ItemDelegate {
         }
     }
 
-    icon.name: iconItem.url === "quicklaunch:drop" ? "" : iconItem.iconName
-    text: iconItem.launcher.applicationName
+    icon.name: model.decoration || "fork"
+    text: model.display
 
     PlasmaCore.ToolTipArea {
         anchors.fill: parent
-        active: !iconItem.dragging
-        mainText: iconItem.launcher.applicationName
-        subText: iconItem.launcher.genericName
-        icon: iconItem.iconName
+        active: !iconItem.Drag.active
+        mainText: iconItem.model.display ?? ""
+        subText: iconItem.model.description ?? ""
+        icon: iconItem.icon.name
     }
 
     PlasmaExtras.Menu {
         id: contextMenu
-
-        property var jumpListItems : []
 
         visualParent: iconItem
 
         property Instantiator _children: Instantiator {
             id: instantiator
 
-            model: iconItem.launcher.jumpListActions
+            model: iconItem.model.actionList
             delegate: PlasmaExtras.MenuItem {
-                required icon
-                required property string name
-                required property string exec
-                text: name
+                required property var model // can't be more specific, model may not provide them
+
+                text      : model.text ?? ""
+                enabled   : model.type !== "title" && (model.enabled ?? true)
+                separator : model.type === "separator"
+                section   : model.type === "title"
+                icon      : model.icon ?? null
+                checkable : model.checkable ?? false
+                checked   : model.checked ?? false
 
                 onClicked: {
-                    iconItem.logic.openExec(exec)
+                    iconItem.favoritesModel.trigger(iconItem.index, model.actionId, model.actionArgument);
                 }
             }
 
@@ -239,12 +235,6 @@ PlasmaComponents3.ItemDelegate {
             text: i18nc("@action:inmenu", "Add Launcher…")
             icon: "list-add"
             onClicked: iconItem.addLauncher()
-        }
-
-        PlasmaExtras.MenuItem {
-            text: i18nc("@action:inmenu", "Edit Launcher…")
-            icon: "document-edit"
-            onClicked: iconItem.editLauncher()
         }
 
         PlasmaExtras.MenuItem {
@@ -268,17 +258,11 @@ PlasmaComponents3.ItemDelegate {
 
     function addLauncher()
     {
-        logic.addLauncher(isPopupItem);
-    }
-
-    function editLauncher()
-    {
-        logic.editLauncher(url, itemIndex, isPopupItem);
+        launcherDialogRequested();
     }
 
     function removeLauncher()
     {
-        const m = isPopupItem ? popupModel : launcherModel;
-        m.removeUrl(itemIndex);
+        favoritesModel.removeFavorite(model.favoriteId);
     }
 }

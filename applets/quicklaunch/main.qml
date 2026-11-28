@@ -9,7 +9,9 @@ import QtQuick
 import QtQuick.Layouts
 import org.kde.plasma.plasmoid
 import org.kde.plasma.core as PlasmaCore
+import org.kde.plasma.private.kicker as Kicker
 import org.kde.kirigami as Kirigami
+
 import org.kde.plasma.components as PlasmaComponents3
 import org.kde.ksvg as KSvg
 import plasma.applet.org.kde.plasma.quicklaunch
@@ -33,6 +35,18 @@ PlasmoidItem {
 
     preferredRepresentation: fullRepresentation
     Plasmoid.backgroundHints: PlasmaCore.Types.DefaultBackground | PlasmaCore.Types.ConfigurableBackground
+
+    Kicker.SimpleFavoritesModel {
+        id: widgetModel
+        favorites: Plasmoid.configuration.launcherUrls
+        onFavoritesChanged: Plasmoid.configuration.launcherUrls = favorites
+    }
+
+    Kicker.SimpleFavoritesModel {
+        id: popupModel
+        favorites: Plasmoid.configuration.popupUrls
+        onFavoritesChanged: Plasmoid.configuration.popupUrls = favorites
+    }
 
     Item {
         anchors.fill: parent
@@ -73,21 +87,21 @@ PlasmoidItem {
                 cellHeight: LayoutManager.preferredCellHeight()
                 visible: count
 
-                model: UrlModel {
-                    id: launcherModelInstance
-                }
+                model: widgetModel
 
                 delegate: IconItem {
                     id: crDelegate
-                    logic: logicInstance
-                    grid: gridView
-                    popupModel: null
+
+                    width: gridView.cellWidth
+                    height: gridView.cellHeight
+
                     leftPadding: Math.round(Kirigami.Units.smallSpacing / 2)
                     topPadding: Math.round(Kirigami.Units.smallSpacing / 2)
                     bottomPadding: Math.round(Kirigami.Units.smallSpacing / 2)
                     rightPadding: Math.round(Kirigami.Units.smallSpacing / 2)
-                    launcherModel: launcherModelInstance
-                    onMoveItemToPopup: (item, url) => gridView.moveItemToPopup(item, url)
+                    favoritesModel: widgetModel
+                    onMoveToOtherModelRequested: id => gridView.moveToPopup(id)
+                    onLauncherDialogRequested: logicInstance.openLauncherDialog()
                     contentItem: ColumnLayout {
                         spacing: 0
                         Kirigami.Icon {
@@ -114,20 +128,19 @@ PlasmoidItem {
                         anchors.fill: parent
                         imagePath: "widgets/viewitem"
                         prefix: "hover"
-                        visible: crDelegate.Drag.active || crDelegate.url === "quicklaunch:drop"
+                        visible: crDelegate.Drag.active || crDelegate.index === widgetModel.dropPlaceholderIndex
                     }
                 }
 
-                function moveItemToPopup(iconItem, url) {
+                function moveToPopup(id) {
                     if (!popupArrow.visible) {
                         return;
                     }
 
                     popup.visible = true;
-                    const popupMain = popup.mainItem as Popup
-                    popupMain.popupModel.insertUrl(popupMain.popupModel.count, url.toString());
-                    popupMain.listView.currentIndex = popupMain.popupModel.count - 1;
-                    iconItem.removeLauncher();
+                    popupModel.addFavorite(id)
+                    widgetModel.removeFavorite(id)
+                    (popup.mainItem as Popup).listView.currentIndex = popupModel.count -1
                 }
             }
 
@@ -174,8 +187,10 @@ PlasmoidItem {
 
             mainItem: Popup {
                 Keys.onEscapePressed: popup.visible = false
-                launcherModel: launcherModelInstance
-                logic: logicInstance
+                model: popupModel
+                favoritesModel: popupModel
+                onLauncherDialogRequested: logicInstance.openLauncherDialog(true)
+                onAddToWidgetModelRequested: id => widgetModel.addFavorite(id)
             }
         }
 
@@ -190,7 +205,9 @@ PlasmoidItem {
                 bottom: parent.bottom
             }
 
-            subText: popup.visible ? i18nc("@info:tooltip for expander arrow", "Hide icons") : i18nc("@info:tooltip for expander arrow", "Show hidden icons")
+            subText: popup.visible
+                ? i18nc("@info:tooltip for expander arrow", "Hide icons")
+                : i18nc("@info:tooltip for expander arrow", "Show hidden icons")
 
             activeFocusOnTab: parent.visible
 
@@ -240,8 +257,6 @@ PlasmoidItem {
             model: gridView.model
             view: gridView
 
-            onSaveConfigurationRequested: root.saveConfiguration();
-
             onPositionChanged: event => {
                 const point = root.mapToItem(popupArrow, event.x, event.y)
                 popup.visible = point.x >= 0 && point.x <= popupArrow.width && point.y >= 0 && point.y <= popupArrow.height;
@@ -252,14 +267,9 @@ PlasmoidItem {
     Logic {
         id: logicInstance
 
-        onLauncherAdded: (url, isPopup) => {
-            const m = isPopup ? (popup.mainItem as Popup).popupModel : launcherModelInstance;
-            m.appendUrl(url);
-        }
-
-        onLauncherEdited: (url, index, isPopup) => {
-            const m = isPopup ? (popup.mainItem as Popup).popupModel : launcherModelInstance;
-            m.changeUrl(index, url);
+        onLauncherAccepted: (url, isPopup) => {
+            const m = isPopup ? popupModel : widgetModel;
+            m.addFavorite(url);
         }
     }
 
@@ -286,44 +296,11 @@ PlasmoidItem {
         }
     ]
 
-    Connections {
-        target: Plasmoid.configuration
-        function onLauncherUrlsChanged() {
-            if (dropArea.containsDrag) return;
-            const configUrls = Plasmoid.configuration.launcherUrls;
-            const modelUrls = launcherModelInstance.urls();
-            if (configUrls.length === modelUrls.length) {
-                let same = true;
-                for (let i = 0; i < configUrls.length; ++i) {
-                    if (configUrls[i].toString() !== modelUrls[i].toString()) {
-                        same = false;
-                        break;
-                    }
-                }
-                if (same) return;
-            }
-            launcherModelInstance.urlsChanged.disconnect(root.saveConfiguration);
-            launcherModelInstance.setUrls(Plasmoid.configuration.launcherUrls);
-            launcherModelInstance.urlsChanged.connect(root.saveConfiguration);
-        }
-    }
-
     Plasmoid.contextualActions: [
         PlasmaCore.Action {
             text: i18nc("@action", "Add Launcher…")
             icon.name: "list-add"
-            onTriggered: logicInstance.addLauncher()
+            onTriggered: logicInstance.openLauncherDialog()
         }
     ]
-
-    Component.onCompleted: {
-        launcherModelInstance.setUrls(Plasmoid.configuration.launcherUrls);
-        launcherModelInstance.urlsChanged.connect(saveConfiguration);
-    }
-
-    function saveConfiguration() {
-        if (!dropArea.containsDrag) {
-            Plasmoid.configuration.launcherUrls = launcherModelInstance.urls();
-        }
-    }
 }

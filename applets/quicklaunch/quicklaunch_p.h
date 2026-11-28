@@ -20,16 +20,10 @@ class QuicklaunchPrivate : public QObject
 public:
     explicit QuicklaunchPrivate(QObject *parent = nullptr);
 
-    Q_INVOKABLE QVariantMap launcherData(const QUrl &url);
-    Q_INVOKABLE void openUrl(const QUrl &url);
-    Q_INVOKABLE void openExec(const QString &exec);
-
-    Q_INVOKABLE void addLauncher(bool isPopup = false);
-    Q_INVOKABLE void editLauncher(QUrl url, int index, bool isPopup = false);
+    Q_INVOKABLE void openLauncherDialog(bool isPopup = false);
 
 Q_SIGNALS:
-    void launcherAdded(const QString &url, bool isPopup);
-    void launcherEdited(const QString &url, int index, bool isPopup);
+    void launcherAccepted(const QString &url, bool isPopup);
 };
 
 #endif // QUICKLAUNCH_P_H

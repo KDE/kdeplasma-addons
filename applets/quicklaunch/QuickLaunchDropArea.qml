@@ -6,84 +6,71 @@
 pragma ComponentBehavior: Bound
 
 import QtQuick
+import org.kde.plasma.private.kicker as Kicker
 
 DropArea {
     id: root
 
-    required property var model
+    required property Kicker.SimpleFavoritesModel model
     required property Item view
 
     property int internalDragIndex: -1
     property int internalDragOriginalIndex: -1
 
-    signal saveConfigurationRequested()
-
-    function indexAt(eventX, eventY) {
+    function itemAt(eventX, eventY) {
         const pos = view.mapFromItem(root, eventX, eventY);
-        return (view as GridView)?.indexAt(pos.x, pos.y) ?? (view as ListView)?.indexAt(pos.x, pos.y);
+        return (view as GridView)?.itemAt(pos.x, pos.y) ?? (view as ListView)?.itemAt(pos.x, pos.y);
     }
 
     onEntered: event => {
-        if (event.hasUrls) {
-            root.internalDragIndex = -1;
-            root.internalDragOriginalIndex = -1;
-
-            const urls = event.urls;
-            if (urls.length === 1) {
-                const dragUrl = urls[0].toString();
-                const modelUrls = root.model.urls();
-                for (let i = 0; i < modelUrls.length; ++i) {
-                    if (modelUrls[i].toString() === dragUrl) {
-                        root.internalDragIndex = i;
-                        root.internalDragOriginalIndex = i;
-                        break;
-                    }
-                }
-            }
+        const eventSource = event.source as IconItem
+        if (eventSource && model.isFavorite(eventSource.model.favoriteId)) {
+            root.internalDragIndex = eventSource.index;
+            root.internalDragOriginalIndex = eventSource.index;
         } else {
-            event.accepted = false;
+            event.accepted = event.hasUrls;
         }
     }
 
     onPositionChanged: event => {
-        const index = root.indexAt(event.x, event.y);
+        const above = root.itemAt(event.x, event.y) as IconItem
+        const eventSource = event.source as IconItem
 
-        if (root.internalDragIndex >= 0) {
-            if (index >= 0 && index !== root.internalDragIndex) {
-                root.model.move(root.internalDragIndex, index, 1);
-                root.internalDragIndex = index;
-            }
+        if (!above || above === eventSource) {
+            return
+        } else if (eventSource && model.isFavorite(eventSource.model.favoriteId)) {
+            model.moveRow(eventSource.itemIndex, above.itemIndex);
+            root.internalDragIndex = eventSource.index;
+            event.accept(Qt.MoveAction)
         } else {
-            root.model.showDropMarker(index);
+            model.dropPlaceholderIndex = above?.itemIndex ?? 0;
+            event.accept(Qt.CopyAction)
         }
     }
 
     onExited: {
-        if (root.internalDragIndex >= 0) {
-            if (root.internalDragIndex !== root.internalDragOriginalIndex) {
-                root.model.move(root.internalDragIndex, root.internalDragOriginalIndex, 1);
-            }
-            root.internalDragIndex = -1;
-            root.internalDragOriginalIndex = -1;
-        } else {
-            root.model.clearDropMarker();
+        model.dropPlaceholderIndex = -1
+        if (root.internalDragIndex > -1) {
+            model.moveRow(root.internalDragIndex, root.internalDragOriginalIndex)
         }
+        // TODO: restore internal drag item at original position?
     }
 
     onDropped: event => {
-        if (root.internalDragIndex >= 0) {
-            root.internalDragIndex = -1;
+        if (root.internalDragOriginalIndex >= 0) {
             root.internalDragOriginalIndex = -1;
-            event.accept(Qt.IgnoreAction);
-            root.saveConfigurationRequested();
+            root.internalDragIndex = -1;
+            event.accept(Qt.MoveAction);
         } else {
-            const index = root.indexAt(event.x, event.y);
-            root.model.clearDropMarker();
+            const index = model.dropPlaceholderIndex;
             const urls = [...event.urls];
             event.accept(event.proposedAction);
             Qt.callLater(function() {
-                root.model.insertUrls(index == -1 ? root.model.count : index, urls);
+                for (let i = 0; i < urls.length; i++) {
+                    model.addFavorite(urls[i], index + i)
+                }
             });
         }
+        model.dropPlaceholderIndex = -1;
     }
 }
