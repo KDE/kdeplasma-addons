@@ -146,13 +146,31 @@ PlasmoidItem {
             }
         }
 
-        PlasmaCore.Dialog {
+        PlasmaCore.AppletPopup {
             id: popup
-            type: PlasmaCore.Dialog.PopupMenu
-            flags: Qt.WindowStaysOnTopHint
             hideOnWindowDeactivate: true
-            location: Plasmoid.location
             visualParent: root.vertical ? popupArrow : root
+            popupDirection: switch (Plasmoid.location) {
+                case PlasmaCore.Types.TopEdge:
+                    return Qt.BottomEdge
+                case PlasmaCore.Types.LeftEdge:
+                    return Qt.RightEdge
+                case PlasmaCore.Types.RightEdge:
+                    return Qt.LeftEdge
+                default:
+                    return Qt.TopEdge
+            }
+            margin: (Plasmoid.containmentDisplayHints & PlasmaCore.Types.ContainmentPrefersFloatingApplets) ? Kirigami.Units.largeSpacing : 0
+
+            Behavior on margin {
+                NumberAnimation {
+                    // Since the panel animation won't be perfectly in sync,
+                    // using a duration larger than the panel animation results
+                    // in a better-looking animation.
+                    duration: Kirigami.Units.veryLongDuration
+                    easing.type: Easing.OutCubic
+                }
+            }
 
             mainItem: Popup {
                 Keys.onEscapePressed: popup.visible = false

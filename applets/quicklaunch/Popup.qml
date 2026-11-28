@@ -21,8 +21,8 @@ Item {
     required property Logic logic
     required property UrlModel launcherModel
 
-    width: LayoutManager.popupItemWidth()
-    height: Math.max(1, popupModel.count) * LayoutManager.popupItemHeight()
+    implicitWidth: LayoutManager.popupItemWidth()
+    implicitHeight: Math.max(1, popupModel.count) * LayoutManager.popupItemHeight()
 
     QuickLaunchDropArea {
         id: dropArea
